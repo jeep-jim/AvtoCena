@@ -1,0 +1,10 @@
+node_modules
+.next
+dist
+.env
+.env.local
+.DS_Store
+*.log
+data/leads/*.local.json
+data/deals/*.local.json
+data/partners/*.local.json

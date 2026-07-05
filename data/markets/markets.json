@@ -1,0 +1,29 @@
+[
+  {
+    "id": "japan",
+    "name": "Япония",
+    "commissionRub": 39000,
+    "depositRub": 31000,
+    "firstPaymentRub": 70000,
+    "deliveryDays": "25-45",
+    "auction": true
+  },
+  {
+    "id": "china",
+    "name": "Китай",
+    "commissionRub": 90000,
+    "depositRub": 160000,
+    "firstPaymentRub": 250000,
+    "deliveryDays": "14-30",
+    "auction": false
+  },
+  {
+    "id": "uae",
+    "name": "ОАЭ",
+    "commissionRub": 90000,
+    "depositRub": 110000,
+    "firstPaymentRub": 200000,
+    "deliveryDays": "30-45",
+    "auction": false
+  }
+]
