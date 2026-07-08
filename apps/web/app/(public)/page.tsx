@@ -240,13 +240,10 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-3 py-4 pb-14 md:px-8 md:py-6">
+      <input id="ac-drawer-toggle" className="ac-drawer-input" type="checkbox" aria-hidden="true" />
       <div className="mx-auto w-full max-w-[318px] overflow-x-hidden sm:max-w-[420px] md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
         <header className="relative z-10 flex items-center justify-between gap-4">
-          <Link href="/" className="flex min-w-0 items-center gap-3">
-            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-[20px] font-black text-black">
-              AC
-            </div>
-
+          <Link href="/" className="flex min-w-0 items-center">
             <div className="min-w-0">
               <div className="text-[18px] font-black leading-none md:text-[22px]">
                 <span className="text-red-500">Авто</span>
@@ -262,13 +259,16 @@ export default function HomePage() {
             <a href="/partner/landing" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
               Партнёрам
             </a>
-            <a href="/crm" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
-              CRM
-            </a>
-            <a href="/partner/api" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
-              CPA API
+            <a href="/login" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
+              Вход
             </a>
           </nav>
+
+          <label htmlFor="ac-drawer-toggle" className="ac-drawer-burger md:hidden" aria-label="Открыть меню">
+            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1H18M1 7H18M1 13H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </label>
         </header>
 
         <section className="grid w-full min-w-0 items-start justify-items-center gap-6 pt-5 xl:grid-cols-[minmax(0,1fr)_500px] xl:justify-items-stretch xl:gap-10 xl:pt-8">
@@ -279,7 +279,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:max-w-2xl md:text-[18px] md:leading-8 lg:text-[20px]">
-              Укажите бюджет, марку и год. Сервис покажет, что можно
+              Укажите бюджет, марку и год. Сервис покажет, что реально можно
               привезти под ключ.
             </p>
 
@@ -316,9 +316,8 @@ export default function HomePage() {
                 Бюджет
               </div>
 
-              <div className="max-w-[86px] truncate rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-xs font-black text-white/60 sm:max-w-[155px] xl:max-w-none">
-                <span className="sm:hidden">30 сек</span>
-                <span className="hidden sm:inline">результат за 30 секунд</span>
+              <div className="shrink-0 rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[11px] font-black text-white/60 sm:text-xs">
+                результат за 30 секунд
               </div>
             </div>
 
@@ -386,6 +385,54 @@ export default function HomePage() {
           <TopAvtoExecutorBlock />
         </section>
       </div>
+
+      <label htmlFor="ac-drawer-toggle" className="ac-drawer-backdrop md:hidden" aria-label="Закрыть меню" />
+
+      <aside className="ac-drawer-panel md:hidden" aria-label="Мобильное меню">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <div className="text-lg font-black leading-none">
+              <span className="text-red-500">Авто</span>
+              <span className="text-white">Цена</span>
+            </div>
+            <div className="mt-1 text-xs font-bold text-white/42">меню</div>
+          </div>
+
+          <label htmlFor="ac-drawer-toggle" className="ac-drawer-close" aria-label="Закрыть меню">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </label>
+        </div>
+
+        <nav className="mt-8 grid gap-3">
+          <Link href="/partner/landing" className="ac-drawer-link">
+            <span>Партнёрам</span>
+            <span className="ac-drawer-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 12.2L10.2 9.5C11 8.7 12.2 8.7 13 9.5L14.5 11C15.2 11.7 16.3 11.7 17 11L18.2 9.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M3.5 12.5L7.3 16.3C8.1 17.1 9.4 17.1 10.2 16.3L11 15.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M20.5 12.5L16.7 16.3C15.9 17.1 14.6 17.1 13.8 16.3L9.8 12.3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M3 9.5L6.5 6H9.5M21 9.5L17.5 6H14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </Link>
+
+          <Link href="/login" className="ac-drawer-link ac-drawer-link--red">
+            <span>Вход</span>
+            <span className="ac-drawer-icon ac-drawer-icon--red" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9H14M10 5L14 9L10 13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </Link>
+        </nav>
+
+        <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
+          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только после входа.
+        </div>
+      </aside>
+
     </main>
   );
 }

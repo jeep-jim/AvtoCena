@@ -13,7 +13,7 @@ export default function PartnerLandingPage() {
               <div key={item} className="rounded-2xl bg-white/7 p-4 font-bold text-white/68">{item}</div>
             ))}
           </div>
-          <a href="/partner?ref=demo" className="avto-button mt-6 inline-block rounded-2xl px-6 py-4 font-black">Открыть демо кабинет</a>
+          <a href="/login?next=/partner?ref=demo" className="avto-button mt-6 inline-block rounded-2xl px-6 py-4 font-black">Запросить доступ</a>
         </div>
 
         <div className="glass rounded-[2rem] p-6">

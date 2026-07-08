@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { appendDataJson, readDataJson } from "@/lib/data";
 
 function clean(value: unknown) {
@@ -20,6 +20,8 @@ export async function POST(request: Request) {
 
   const phone = clean(body.phone);
   const telegram = clean(body.telegram);
+  const name = clean(body.name);
+  const comment = clean(body.comment);
 
   if (!phone && !telegram) {
     return NextResponse.json(
@@ -28,18 +30,39 @@ export async function POST(request: Request) {
     );
   }
 
-  const lead = appendDataJson("leads/leads.json", {
-    id: `lead_${Date.now()}`,
-    createdAt: new Date().toISOString(),
-    status: "new",
+  const createdAt = new Date().toISOString();
+  const clientId = `client_${Date.now()}`;
 
-    name: clean(body.name),
+  const client = appendDataJson("clients/clients.json", {
+    id: clientId,
+    createdAt,
+    updatedAt: createdAt,
+    fio: name,
     phone,
     telegram,
-    comment: clean(body.comment),
+    comment,
+    source: clean(body.source) || "site",
+    partnerRef: clean(body.partnerRef),
+    createdByManagerId: null,
+    assignedManagerId: null
+  });
+
+  const lead = appendDataJson("leads/leads.json", {
+    id: `lead_${Date.now()}`,
+    createdAt,
+    updatedAt: createdAt,
+    status: "new",
+
+    clientId,
+    name,
+    phone,
+    telegram,
+    comment,
 
     carId: clean(body.carId),
     car: clean(body.car),
+    brand: clean(body.brand),
+    model: clean(body.model),
     market: clean(body.market),
     marketName: clean(body.marketName),
     year: numberOrNull(body.year),
@@ -48,7 +71,21 @@ export async function POST(request: Request) {
     totalRub: numberOrNull(body.totalRub),
 
     source: clean(body.source) || "site",
-    partnerRef: clean(body.partnerRef)
+    partnerRef: clean(body.partnerRef),
+    createdByManagerId: null,
+    assignedManagerId: null
+  });
+
+  appendDataJson("activity/feed.json", {
+    id: `event_${Date.now()}`,
+    createdAt,
+    type: "lead_created",
+    title: "Заявка с сайта",
+    clientId: client.id,
+    leadId: lead.id,
+    source: lead.source,
+    partnerRef: lead.partnerRef,
+    text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram
   });
 
   return NextResponse.json({ ok: true, lead });
