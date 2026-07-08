@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "partner_demo",
+    "createdAt": "2026-07-08T00:00:00.000Z",
+    "code": "demo",
+    "name": "Демо партнёр",
+    "telegram": "@demo",
+    "status": "active",
+    "payoutRub": 10000,
+    "clicks": 421,
+    "calculations": 173,
+    "leads": 29,
+    "contracts": 11,
+    "balanceRub": 110000,
+    "link": "https://avtocena.com/?ref=demo"
+  }
+]

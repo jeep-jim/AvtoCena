@@ -3,12 +3,162 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+  --bg: #07080d;
+  --card: rgba(255, 255, 255, 0.08);
+  --card-strong: rgba(255, 255, 255, 0.14);
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.66);
+  --red: #e31b23;
+  --red2: #ff3b43;
+  --yellow: #ffc62b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background: #ffffff;
-  color: #111111;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(227, 27, 35, 0.32), transparent 34rem),
+    radial-gradient(circle at 85% 18%, rgba(255, 198, 43, 0.18), transparent 28rem),
+    linear-gradient(135deg, #05060a 0%, #0e111d 46%, #05060a 100%);
+  color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.glass {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.06));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(20px);
+}
+
+.noise {
+  position: relative;
+  overflow: hidden;
+}
+
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, #000, transparent 76%);
+}
+
+.red-glow {
+  box-shadow: 0 0 0 1px rgba(227, 27, 35, 0.28), 0 26px 80px rgba(227, 27, 35, 0.25);
+}
+
+.money-input {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: 0.2s ease;
+}
+
+.money-input:focus {
+  border-color: rgba(255, 59, 67, 0.86);
+  box-shadow: 0 0 0 5px rgba(227, 27, 35, 0.17);
+}
+
+.soft-input {
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: 0.2s ease;
+}
+
+.soft-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.avto-button {
+  background: linear-gradient(135deg, #ff353d, #d90009 55%, #9c0007);
+  color: white;
+  transition: 0.18s ease;
+  box-shadow: 0 22px 55px rgba(227, 27, 35, 0.36);
+}
+
+.avto-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 28px 70px rgba(227, 27, 35, 0.46);
+}
+
+.avto-button:active {
+  transform: translateY(1px) scale(0.995);
+}
+
+.car-line {
+  position: relative;
+  height: 72px;
+}
+
+.car-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 35px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+}
+
+.car-line::after {
+  content: "";
+  position: absolute;
+  width: 270px;
+  height: 70px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 18% 78%, transparent 0 12px, rgba(255,255,255,.9) 13px 16px, transparent 17px),
+    radial-gradient(circle at 82% 78%, transparent 0 12px, rgba(255,255,255,.9) 13px 16px, transparent 17px),
+    linear-gradient(160deg, transparent 0 20%, rgba(255,255,255,.9) 21% 24%, transparent 25% 100%),
+    linear-gradient(12deg, transparent 0 44%, rgba(255,255,255,.92) 45% 50%, transparent 51% 100%);
+  opacity: .75;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,.18));
+}
+
+@media (max-width: 640px) {
+  body {
+    background:
+      radial-gradient(circle at 15% 0%, rgba(227, 27, 35, 0.33), transparent 24rem),
+      linear-gradient(135deg, #05060a 0%, #11131e 100%);
+  }
 }

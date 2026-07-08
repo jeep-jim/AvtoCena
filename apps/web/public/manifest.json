@@ -1,10 +1,12 @@
 {
   "name": "АвтоЦена",
   "short_name": "АвтоЦена",
-  "description": "Расчёт авто под ваш бюджет за 30 секунд",
+  "description": "Авто под ваш бюджет за 30 секунд",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#E53935",
+  "background_color": "#07080d",
+  "theme_color": "#e31b23",
+  "orientation": "portrait",
   "icons": []
 }

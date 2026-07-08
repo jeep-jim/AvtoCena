@@ -6,7 +6,8 @@
     "depositRub": 31000,
     "firstPaymentRub": 70000,
     "deliveryDays": "25-45",
-    "auction": true
+    "auction": true,
+    "processType": "auction"
   },
   {
     "id": "china",
@@ -15,7 +16,8 @@
     "depositRub": 160000,
     "firstPaymentRub": 250000,
     "deliveryDays": "14-30",
-    "auction": false
+    "auction": false,
+    "processType": "direct-buy"
   },
   {
     "id": "uae",
@@ -24,6 +26,27 @@
     "depositRub": 110000,
     "firstPaymentRub": 200000,
     "deliveryDays": "30-45",
-    "auction": false
+    "auction": false,
+    "processType": "direct-buy"
+  },
+  {
+    "id": "korea",
+    "name": "Корея",
+    "commissionRub": 90000,
+    "depositRub": 0,
+    "firstPaymentRub": 90000,
+    "deliveryDays": "25-40",
+    "auction": false,
+    "processType": "direct-buy"
+  },
+  {
+    "id": "europe",
+    "name": "Европа",
+    "commissionRub": 90000,
+    "depositRub": 0,
+    "firstPaymentRub": 90000,
+    "deliveryDays": "30-60",
+    "auction": false,
+    "processType": "direct-buy"
   }
 ]

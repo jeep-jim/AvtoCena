@@ -1,20 +1,15 @@
 {
   "name": "avtocena",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/web",
+    "apps/bot"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace apps/web",
-    "dev:bot": "npm run dev --workspace apps/bot",
-    "build": "npm run build --workspace apps/web",
-    "start": "npm run start --workspace apps/web",
-    "lint": "npm run lint --workspace apps/web",
-    "typecheck": "tsc -b"
-  },
-  "engines": {
-    "node": ">=20.0.0"
+    "dev": "npm --workspace=@avtocena/web run dev",
+    "dev:web": "npm --workspace=@avtocena/web run dev",
+    "dev:bot": "npm --workspace=@avtocena/bot run dev",
+    "build": "npm --workspace=@avtocena/web run build"
   }
 }
