@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/avtocena-web:${{ github.sha }}
+  IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-web:${{ github.sha }}
 
 jobs:
   deploy:
