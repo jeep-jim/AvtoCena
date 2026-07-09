@@ -32,7 +32,7 @@ jobs:
         uses: yc-actions/yc-sls-container-deploy@v4
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          folder-id: b1g9vq73onqb7dp5hgqg
           container-name: avtocena-web
           revision-service-account-id: ajekvv7ulcilmppf8qj3
           revision-image-url: ${{ env.IMAGE }}
