@@ -1,0 +1,48 @@
+name: Deploy to Yandex Cloud
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  IMAGE: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/avtocena-web:${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Yandex Container Registry
+        uses: yc-actions/yc-cr-login@v3
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Build Docker image
+        run: docker build -t "$IMAGE" .
+
+      - name: Push Docker image
+        run: docker push "$IMAGE"
+
+      - name: Deploy Serverless Container
+        uses: yc-actions/yc-sls-container-deploy@v4
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          container-name: avtocena-web
+          revision-service-account-id: ajekvv7ulcilmppf8qj3
+          revision-image-url: ${{ env.IMAGE }}
+          revision-cores: 1
+          revision-memory: 1Gb
+          revision-core-fraction: 100
+          revision-concurrency: 1
+          revision-execution-timeout: 30
+          revision-env: |
+            NODE_ENV=production
+            NEXT_PUBLIC_SITE_URL=https://avtocena.com
+            AUTH_SECRET=${{ secrets.AUTH_SECRET }}
+            AUTH_ACCESS_KEY=${{ secrets.AUTH_ACCESS_KEY }}
