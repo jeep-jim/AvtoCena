@@ -250,7 +250,7 @@ export default function HomePage() {
                 <span className="text-white">Цена</span>
               </div>
               <div className="text-[12px] font-bold leading-none text-white/45">
-                подбор · расчёт · привоз
+                подбор · расчёт
               </div>
             </div>
           </Link>
