@@ -124,7 +124,7 @@ export function PartnerMobileDrawer({
         </nav>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
-          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только после входа.
+          Для менеджеров и партнёров. CRM и API доступны только после входа.
         </div>
 
         <div className="mt-auto pt-8 text-xs font-bold leading-5 text-white/32">

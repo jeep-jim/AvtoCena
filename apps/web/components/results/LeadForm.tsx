@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import type { AvtocenaCase } from "@/lib/avtocena";
@@ -87,7 +87,7 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
 
       setSent(true);
     } catch {
-      setError("Не получилось отправить заявку. Проверьте dev-сервер и попробуйте ещё раз.");
+      setError("Не получилось отправить заявку. Попробуйте ещё раз.");
     } finally {
       setLoading(false);
     }
@@ -98,7 +98,7 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
       <div className="mt-5 rounded-2xl border border-green-400/30 bg-green-500/10 p-4">
         <div className="text-lg font-black text-green-200">Заявка отправлена</div>
         <p className="mt-1 text-sm font-bold text-white/58">
-          Лид сохранён в CRM. Проверьте раздел /crm/leads.
+          Менеджер TopAvto свяжется с вами в ближайшее время.
         </p>
       </div>
     );

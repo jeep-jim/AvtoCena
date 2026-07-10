@@ -92,7 +92,7 @@ export function HeroForm() {
           <option value="europe">Европа</option>
         </select>
         <select value={body} onChange={(e) => setBody(e.target.value)} className="soft-input rounded-2xl px-4 py-4 text-base font-bold">
-          <option value="any">Тип авто</option>
+          <option value="any">Тип кузова</option>
           <option value="sedan">Седан</option>
           <option value="crossover">Кроссовер</option>
           <option value="hatchback">Хэтчбек</option>

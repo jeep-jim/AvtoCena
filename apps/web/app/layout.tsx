@@ -9,27 +9,41 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon-light.svg",
+        url: "/favicon.svg?v=4",
         type: "image/svg+xml",
-        media: "(prefers-color-scheme: dark)"
+        sizes: "any",
       },
       {
-        url: "/favicon-dark.svg",
+        url: "/favicon-dark.svg?v=4",
         type: "image/svg+xml",
-        media: "(prefers-color-scheme: light)"
+        media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/favicon.ico",
-        sizes: "any"
-      }
+        url: "/favicon-light.svg?v=4",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/favicon.ico?v=4",
+        sizes: "any",
+      },
     ],
     apple: [
       {
-        url: "/apple-touch-icon.png",
+        url: "/apple-touch-icon-dark.png?v=4",
         sizes: "180x180",
-        type: "image/png"
-      }
-    ]
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/apple-touch-icon-light.png?v=4",
+        sizes: "180x180",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/apple-touch-icon.png?v=4",
+        sizes: "180x180",
+      },
+    ],
   },
   openGraph: {
     title: "АвтоЦена",

@@ -40,10 +40,9 @@ export function LoginForm({ nextPath }: { nextPath: string }) {
 
   return (
     <form onSubmit={submit} className="glass mx-auto w-full max-w-[440px] rounded-[2rem] p-5 md:p-6">
-      <div className="text-sm font-black uppercase tracking-[0.18em] text-red-300">Закрытая зона</div>
       <h1 className="mt-2 text-4xl font-black tracking-[-0.05em] md:text-5xl">Вход</h1>
       <p className="mt-3 text-sm font-bold leading-6 text-white/55">
-        Доступ только для сотрудников TopAvto и подключённых партнёров.
+        Только для сотрудников и партнёров.
       </p>
 
       <div className="mt-6 grid gap-3">

@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 
 const budgetChips = [1500000, 2000000, 2500000, 3000000, 4000000, 5000000];
 
@@ -49,12 +50,14 @@ const countryOptions = [
 ];
 
 const bodyOptions = [
-  { value: "", label: "Тип авто" },
+  { value: "", label: "Тип кузова" },
   { value: "suv", label: "Кроссовер" },
   { value: "sedan", label: "Седан" },
   { value: "wagon", label: "Универсал" },
   { value: "hatchback", label: "Хэтчбек" },
 ];
+
+type BenefitType = "fast" | "globe" | "delivery";
 
 type CatalogOffer = {
   id: string;
@@ -73,6 +76,41 @@ type CatalogOffer = {
   delivery: string;
   sourceLabel: string;
 };
+
+const landingBenefits: {
+  id: string;
+  icon: BenefitType;
+  title: string;
+  shortTitle: string;
+  text: string;
+}[] = [
+  {
+    id: "fast",
+    icon: "fast",
+    title: "Без регистрации",
+    shortTitle: "Без регистрации",
+    text: "Сразу получите первую выдачу по вашему бюджету.",
+  },
+  {
+    id: "markets",
+    icon: "globe",
+    title: "Япония · Китай · Корея · ОАЭ · Европа",
+    shortTitle: "5 рынков",
+    text: "Сравниваем основные рынки поставки и показываем варианты.",
+  },
+  {
+    id: "delivery",
+    icon: "delivery",
+    title: "Доставка, таможня и оформление",
+    shortTitle: "Под ключ",
+    text: "В расчёт включается ключевая структура цены и оформления.",
+  },
+];
+
+const buyerPhotos = Array.from({ length: 15 }, (_, index) => ({
+  src: `/buyers/${index + 1}.jpg`,
+  alt: `Автомобиль клиента TopAvto ${index + 1}`,
+}));
 
 const readyCatalog: CatalogOffer[] = [
   {
@@ -538,7 +576,7 @@ function BudgetField({
   );
 }
 
-function BenefitIcon({ type }: { type: "fast" | "globe" | "delivery" }) {
+function BenefitIcon({ type }: { type: BenefitType }) {
   if (type === "globe") {
     return (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
@@ -598,7 +636,7 @@ function BenefitCard({
   title,
   text,
 }: {
-  icon: "fast" | "globe" | "delivery";
+  icon: BenefitType;
   title: string;
   text: string;
 }) {
@@ -792,7 +830,7 @@ function ReadyCatalogGrid({
 
   return (
     <section className="w-full min-w-0">
-      <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {visibleOffers.map((offer) => (
           <ReadyCatalogCard key={offer.id} offer={offer} onOpen={onOpen} />
         ))}
@@ -932,34 +970,324 @@ function OfferBottomSheet({
   );
 }
 
-function LandingInfoBlocks({ className = "" }: { className?: string }) {
+function BenefitIconButton({
+  benefit,
+  active,
+  onClick,
+}: {
+  benefit: (typeof landingBenefits)[number];
+  active: boolean;
+  onClick: () => void;
+}) {
   return (
-    <section className={["w-full min-w-0", className].join(" ")}>
-      <div className="grid gap-4 md:grid-cols-3">
-        <BenefitCard
-          icon="fast"
-          title="Без регистрации"
-          text="Сразу получите первую выдачу по вашему бюджету."
-        />
+    <button
+      type="button"
+      onClick={onClick}
+      className={[
+        "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition",
+        active
+          ? "border-red-300/50 bg-red-500 text-white shadow-[0_0_34px_rgba(239,68,68,0.26)]"
+          : "border-red-400/25 bg-red-500/10 text-red-400 hover:border-red-300/40 hover:bg-red-500/18 hover:text-red-100",
+      ].join(" ")}
+      aria-label={benefit.title}
+    >
+      <BenefitIcon type={benefit.icon} />
+    </button>
+  );
+}
 
-        <BenefitCard
-          icon="globe"
-          title="Япония · Китай · Корея · ОАЭ · Европа"
-          text="Сравниваем основные рынки поставки и показываем варианты."
-        />
+function BuyerPhotoTile({
+  photo,
+  onOpen,
+}: {
+  photo: (typeof buyerPhotos)[number];
+  index: number;
+  onOpen: (photo: (typeof buyerPhotos)[number]) => void;
+}) {
+  const [failed, setFailed] = useState(false);
 
-        <BenefitCard
-          icon="delivery"
-          title="Доставка, таможня и оформление"
-          text="В расчёт включается ключевая структура цены и оформления."
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(photo)}
+      className="group relative h-[150px] w-[220px] shrink-0 overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.035] text-left shadow-[0_18px_60px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:border-red-300/35 sm:h-[180px] sm:w-[270px] lg:h-[205px] lg:w-[315px]"
+      aria-label="Открыть фото автомобиля клиента"
+    >
+      {!failed ? (
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          onError={() => setFailed(true)}
+          className="h-full w-full object-cover"
         />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_22%_18%,rgba(239,68,68,0.32),transparent_36%),linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.025))]">
+          <BrandMark className="h-20 w-20 opacity-30" />
+        </div>
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/28 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+    </button>
+  );
+}
+
+function BuyerGallery() {
+  const [selectedPhoto, setSelectedPhoto] = useState<
+    (typeof buyerPhotos)[number] | null
+  >(null);
+
+  const marqueePhotos = [...buyerPhotos, ...buyerPhotos];
+
+  useEffect(() => {
+    if (!selectedPhoto) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedPhoto(null);
+      }
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedPhoto]);
+
+  const photoModal =
+    selectedPhoto && typeof document !== "undefined"
+      ? createPortal(
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-[rgba(3,5,10,0.96)] p-3 sm:p-5"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Фотография автомобиля клиента"
+            onClick={() => setSelectedPhoto(null)}
+          >
+            <img
+              src={selectedPhoto.src}
+              alt={selectedPhoto.alt}
+              onClick={(event) => event.stopPropagation()}
+              className="h-auto max-h-[calc(100dvh-24px)] w-auto max-w-[calc(100vw-24px)] rounded-[1.15rem] object-contain shadow-[0_30px_120px_rgba(0,0,0,0.72)] sm:max-h-[calc(100dvh-40px)] sm:max-w-[calc(100vw-40px)] sm:rounded-[1.5rem]"
+            />
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedPhoto(null);
+              }}
+              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-white shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:bg-black/75 sm:right-6 sm:top-6"
+              aria-label="Закрыть фото"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 3L15 15M15 3L3 15"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>,
+          document.body,
+        )
+      : null;
+
+  return (
+    <section className="mt-7 overflow-hidden md:mt-8">
+      <h2 className="max-w-3xl text-[26px] font-black leading-none tracking-[-0.04em] text-white md:text-[38px]">
+        Те, кто узнали — уже ездят!
+      </h2>
+
+      <div className="buyer-gallery-mask mt-5 overflow-hidden">
+        <div className="buyer-gallery-track flex w-max gap-3 sm:gap-4">
+          {marqueePhotos.map((photo, index) => (
+            <BuyerPhotoTile
+              key={`${photo.src}-${index}`}
+              photo={photo}
+              index={index % buyerPhotos.length}
+              onOpen={setSelectedPhoto}
+            />
+          ))}
+        </div>
       </div>
 
-      <TopAvtoExecutorBlock />
+      {photoModal}
+
+      <style>{`
+        .buyer-gallery-mask {
+          -webkit-mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 7%,
+            #000 93%,
+            transparent
+          );
+          mask-image: linear-gradient(
+            90deg,
+            transparent,
+            #000 7%,
+            #000 93%,
+            transparent
+          );
+        }
+
+        .buyer-gallery-track {
+          animation: buyer-gallery-marquee 84s linear infinite;
+        }
+
+        .buyer-gallery-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes buyer-gallery-marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .buyer-gallery-track {
+            animation-duration: 68s;
+          }
+        }
+      `}</style>
     </section>
   );
 }
 
+function BenefitListRow({
+  benefit,
+}: {
+  benefit: (typeof landingBenefits)[number];
+}) {
+  return (
+    <div className="grid grid-cols-[44px_minmax(0,1fr)] items-start gap-3">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[rgba(255,75,67,0.34)] bg-[rgba(255,75,67,0.07)] text-[#ff4b43] shadow-[0_0_24px_rgba(239,68,68,0.10)]">
+        <BenefitIcon type={benefit.icon} />
+      </div>
+
+      <div className="min-w-0 pt-0.5">
+        <div className="text-[15px] font-black leading-5 text-white">
+          {benefit.title}
+        </div>
+        <p className="mt-1 max-w-[720px] text-[13px] font-medium leading-6 text-[rgba(255,255,255,0.58)]">
+          {benefit.text}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function LandingInfoBlocks({ className = "" }: { className?: string }) {
+  const [activeBenefitIndex, setActiveBenefitIndex] = useState(0);
+  const activeBenefit = landingBenefits[activeBenefitIndex];
+
+  function showPrevBenefit() {
+    setActiveBenefitIndex((current) =>
+      current === 0 ? landingBenefits.length - 1 : current - 1,
+    );
+  }
+
+  function showNextBenefit() {
+    setActiveBenefitIndex((current) => (current + 1) % landingBenefits.length);
+  }
+
+  return (
+    <section className={["w-full min-w-0", className].join(" ")}>
+      <div className="hidden gap-4 lg:grid">
+        {landingBenefits.map((benefit) => (
+          <BenefitListRow key={benefit.id} benefit={benefit} />
+        ))}
+      </div>
+
+      <div className="lg:hidden">
+        <div className="flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={showPrevBenefit}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/45 transition hover:bg-white/[0.08] hover:text-white/75"
+            aria-label="Предыдущее преимущество"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 3L5 8L10 13"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          <div className="flex items-center justify-center gap-3">
+            {landingBenefits.map((benefit, index) => (
+              <BenefitIconButton
+                key={benefit.id}
+                benefit={benefit}
+                active={index === activeBenefitIndex}
+                onClick={() => setActiveBenefitIndex(index)}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={showNextBenefit}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/45 transition hover:bg-white/[0.08] hover:text-white/75"
+            aria-label="Следующее преимущество"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 3L11 8L6 13"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div className="mt-4 text-center">
+          <h2 className="text-[24px] font-black leading-[1.05] tracking-[-0.04em] text-white">
+            {activeBenefit.title}
+          </h2>
+          <p className="mx-auto mt-3 max-w-[310px] text-[15px] font-medium leading-7 text-white/58">
+            {activeBenefit.text}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function HomePage() {
   const router = useRouter();
@@ -1183,16 +1511,18 @@ export default function HomePage() {
           <div className="lg:sticky lg:top-[64px] lg:z-40 lg:-mx-2 lg:px-2 lg:pb-6 xl:top-6 xl:-mx-0 xl:px-0">
             <div className="grid w-full min-w-0 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_430px] xl:gap-10 2xl:grid-cols-[minmax(0,1fr)_470px]">
               <div className="relative z-10 w-full min-w-0">
-                <h1 className="text-[28px] font-black leading-[0.98] tracking-[-0.035em] text-white sm:text-[40px] md:text-[56px] lg:text-[72px] xl:text-[86px] 2xl:text-[92px]">
-                  <span className="block">Узнать стоимость</span>
-                  <span className="block">авто за 30 секунд</span>
+                <h1 className="text-[24px] font-black leading-[0.98] tracking-[-0.035em] text-white sm:text-[40px] md:text-[56px] lg:text-[72px] xl:text-[86px] 2xl:text-[92px]">
+                  <span className="block">Цена на авто под заказ</span>
                 </h1>
 
-                <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:max-w-2xl md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
-                  Укажите бюджет, марку и год. Сервис покажет, что можно привезти под ключ.
+                <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
+                  Укажите бюджет. Сервис покажет, что можно привезти под ключ.
                 </p>
 
+                <LandingInfoBlocks className="mt-6 hidden lg:block" />
+
                 <div className="mt-5 lg:hidden">{calculator}</div>
+                <LandingInfoBlocks className="mt-7 lg:hidden" />
               </div>
 
               <aside className="hidden lg:block lg:self-start">
@@ -1200,11 +1530,12 @@ export default function HomePage() {
               </aside>
             </div>
 
-            <div className="mt-6 h-px w-full bg-gradient-to-r from-white/24 via-white/10 to-transparent lg:mt-8" />
+            <div className="mt-6 h-px w-full bg-white/10 lg:mt-8" />
           </div>
 
           <div className="relative z-10 mt-7 lg:mt-8">
-            <LandingInfoBlocks className="mt-0" />
+            <BuyerGallery />
+            <TopAvtoExecutorBlock />
 
             <div className="relative mt-4 md:mt-5">
               <div className="pointer-events-none sticky top-[64px] z-30 hidden h-6 lg:block xl:top-6">
@@ -1335,8 +1666,7 @@ export default function HomePage() {
         </nav>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
-          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только
-          после входа.
+          Для менеджеров и партнёров. CRM и API доступны только после входа.
         </div>
       </aside>
     </main>
