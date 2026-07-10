@@ -76,16 +76,16 @@ function ResultCostLines({
       {lines.slice(0, 6).map((line) => (
         <div
           key={line.id}
-          className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-x-2"
+          className="grid w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-x-2 overflow-hidden"
         >
           <span className="shrink-0 text-red-300/80">·</span>
 
           <span className="flex min-w-0 items-baseline gap-2">
-            <span className="min-w-0 text-white/76">{line.title}</span>
+            <span className="min-w-0 break-words text-white/76">{line.title}</span>
             <span className="mb-[4px] hidden min-w-4 flex-1 border-b border-dotted border-white/22 sm:block" />
           </span>
 
-          <span className="min-w-[102px] shrink-0 text-right font-black text-white sm:min-w-[118px] md:min-w-[132px]">
+          <span className="shrink-0 whitespace-nowrap text-right font-black text-white">
             {money(line.amountRub)} ₽
           </span>
         </div>
@@ -119,8 +119,8 @@ export default async function ResultsPage({
   const partnerRef = firstParam(params.ref);
 
   return (
-    <main className="min-h-screen px-4 py-5 pb-24 md:px-8 md:py-6">
-      <div className="mx-auto max-w-[1500px]">
+    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 pb-24 md:px-8 md:py-6">
+      <div className="mx-auto w-full max-w-[1500px]">
         <header className="flex items-center justify-between gap-4">
           <a href="/" className="flex items-center gap-2.5">
             <BrandMark className="h-10 w-10 shrink-0" />
@@ -187,9 +187,9 @@ export default async function ResultsPage({
               {results.map((car, index) => (
                 <article
                   key={car.id}
-                  className="min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] shadow-[0_20px_90px_rgba(0,0,0,0.18)] md:rounded-[2rem]"
+                  className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] shadow-[0_20px_90px_rgba(0,0,0,0.18)] md:rounded-[2rem]"
                 >
-                  <div className="grid min-w-0 lg:grid-cols-[minmax(340px,40%)_minmax(0,1fr)] xl:grid-cols-[460px_minmax(0,1fr)]">
+                  <div className="grid w-full min-w-0 lg:grid-cols-[minmax(300px,34%)_minmax(0,1fr)] xl:grid-cols-[420px_minmax(0,1fr)] 2xl:grid-cols-[460px_minmax(0,1fr)]">
                     <ResultPhoto
                       title={car.title}
                       marketName={car.marketName}
@@ -222,7 +222,7 @@ export default async function ResultsPage({
                         <ResultCostLines lines={car.lines} />
                       </div>
 
-                      <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_260px] xl:items-end">
+                      <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-end">
                         <div className="min-w-0">
                           <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42 md:text-sm">
                             Итого ориентир

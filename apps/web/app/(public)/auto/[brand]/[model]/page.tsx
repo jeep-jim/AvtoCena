@@ -27,7 +27,7 @@ export default async function ModelSeoPage({ params }: { params: Promise<{ brand
 
   return (
     <main className="min-h-screen px-5 py-8 md:px-8">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto w-full max-w-[1500px]">
         <a href="/" className="inline-flex items-center gap-2.5 text-sm font-black text-white/70 transition hover:text-white">
           <BrandMark className="h-9 w-9 shrink-0" />
           <span>

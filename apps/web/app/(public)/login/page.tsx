@@ -22,7 +22,7 @@ export default async function LoginPage({
 
   return (
     <main className="min-h-screen px-4 py-5 md:px-8 md:py-6">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-[1500px]">
         <header className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2.5">
             <BrandMark className="h-10 w-10 shrink-0 md:h-11 md:w-11" />

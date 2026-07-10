@@ -848,37 +848,56 @@ function OfferBottomSheet({
   onClose: () => void;
   onOpenResults: (offer: CatalogOffer) => void;
 }) {
-  if (!offer) return null;
+  useEffect(() => {
+    if (!offer) return;
 
-  return (
+    const previousOverflow = document.body.style.overflow;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [offer, onClose]);
+
+  if (!offer || typeof document === "undefined") return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[80] flex items-end justify-center p-0"
+      className="ac-viewport-modal fixed inset-0 z-[9998] flex items-end justify-center bg-[#03050a] md:items-center md:bg-black/80 md:p-5 md:backdrop-blur-[10px]"
       role="dialog"
       aria-modal="true"
+      aria-label={offer.title}
     >
       <button
         type="button"
         onClick={onClose}
-        className="absolute inset-0 bg-black/72 backdrop-blur-[10px]"
+        className="absolute inset-0 hidden md:block"
         aria-label="Закрыть карточку"
       />
 
-      <div className="relative z-10 max-h-[96vh] w-full overflow-hidden rounded-t-[1.7rem] rounded-b-none border-x border-t border-white/12 bg-[#10121a] shadow-[0_-30px_120px_rgba(0,0,0,0.55)] md:max-w-5xl md:rounded-t-[2rem]">
-        <div className="max-h-[96vh] overflow-y-auto">
-          <div className="relative h-[260px] overflow-hidden sm:h-[330px]">
+      <div className="relative z-10 flex h-full max-h-[100dvh] w-full flex-col overflow-hidden bg-[#0b0d14] md:h-auto md:max-h-[calc(100dvh-40px)] md:max-w-5xl md:rounded-[2rem] md:shadow-[0_30px_120px_rgba(0,0,0,0.72)]">
+        <div className="ac-safe-scroll min-h-0 flex-1 overflow-y-auto">
+          <div className="relative h-[270px] overflow-hidden sm:h-[340px]">
             <CarPhotoPlaceholder />
 
-            <div className="absolute left-4 top-4 flex flex-wrap gap-2 sm:left-6 sm:top-6">
+            <div className="absolute left-4 top-4 flex max-w-[calc(100%-76px)] flex-wrap gap-2 sm:left-6 sm:top-6">
               <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
                 {offer.countryLabel}
               </span>
-              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+              <span className="rounded-full bg-black/35 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
                 {offer.bodyLabel}
               </span>
-              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+              <span className="rounded-full bg-black/35 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
                 {offer.year}
               </span>
-              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+              <span className="rounded-full bg-black/35 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
                 {offer.mileage}
               </span>
             </div>
@@ -886,7 +905,7 @@ function OfferBottomSheet({
             <button
               type="button"
               onClick={onClose}
-              className="absolute right-4 top-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/14 bg-black/28 text-white/78 backdrop-blur transition hover:bg-white/[0.1] hover:text-white sm:right-6 sm:top-6"
+              className="absolute right-4 top-4 z-20 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black/55 text-white/86 shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur transition hover:bg-black/75 hover:text-white sm:right-6 sm:top-6"
               aria-label="Закрыть"
             >
               <svg
@@ -905,8 +924,8 @@ function OfferBottomSheet({
               </svg>
             </button>
 
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#10121a] via-[#10121a]/78 to-transparent px-4 pb-5 pt-20 sm:px-6 sm:pb-6">
-              <h2 className="max-w-3xl text-[32px] font-black leading-none tracking-[-0.045em] text-white sm:text-[48px]">
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0b0d14] via-[#0b0d14]/82 to-transparent px-4 pb-5 pt-20 sm:px-6 sm:pb-6">
+              <h2 className="max-w-3xl text-[30px] font-black leading-none tracking-[-0.045em] text-white sm:text-[48px]">
                 {offer.title}
               </h2>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold text-white/64">
@@ -917,7 +936,7 @@ function OfferBottomSheet({
             </div>
           </div>
 
-          <div className="grid gap-5 p-4 sm:p-6 md:grid-cols-[minmax(0,1fr)_310px] md:p-7">
+          <div className="grid gap-5 p-4 pb-6 sm:p-6 md:grid-cols-[minmax(0,1fr)_310px] md:p-7">
             <div className="min-w-0">
               <p className="max-w-3xl text-sm font-medium leading-7 text-white/58 sm:text-base">
                 Готовый пример варианта под ваш бюджет. Финальная цена зависит от
@@ -966,7 +985,8 @@ function OfferBottomSheet({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -1062,7 +1082,7 @@ function BuyerGallery() {
     selectedPhoto && typeof document !== "undefined"
       ? createPortal(
           <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-[rgba(3,5,10,0.96)] p-3 sm:p-5"
+            className="ac-viewport-modal fixed inset-0 z-[9999] flex items-center justify-center bg-[#03050a] p-0 sm:p-5"
             role="dialog"
             aria-modal="true"
             aria-label="Фотография автомобиля клиента"
@@ -1072,7 +1092,7 @@ function BuyerGallery() {
               src={selectedPhoto.src}
               alt={selectedPhoto.alt}
               onClick={(event) => event.stopPropagation()}
-              className="h-auto max-h-[calc(100dvh-24px)] w-auto max-w-[calc(100vw-24px)] rounded-[1.15rem] object-contain shadow-[0_30px_120px_rgba(0,0,0,0.72)] sm:max-h-[calc(100dvh-40px)] sm:max-w-[calc(100vw-40px)] sm:rounded-[1.5rem]"
+              className="block h-full max-h-[100dvh] w-full max-w-full object-contain sm:h-auto sm:max-h-[calc(100dvh-40px)] sm:w-auto sm:max-w-[calc(100vw-40px)] sm:rounded-[1.5rem] sm:shadow-[0_30px_120px_rgba(0,0,0,0.72)]"
             />
 
             <button
@@ -1081,7 +1101,7 @@ function BuyerGallery() {
                 event.stopPropagation();
                 setSelectedPhoto(null);
               }}
-              className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-white shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:bg-black/75 sm:right-6 sm:top-6"
+              className="ac-safe-close fixed right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-md transition hover:bg-black/80 sm:right-6"
               aria-label="Закрыть фото"
             >
               <svg
@@ -1454,7 +1474,7 @@ export default function HomePage() {
         type="checkbox"
         aria-hidden="true"
       />
-      <div className="mx-auto w-full max-w-[318px] overflow-x-hidden sm:max-w-[420px] md:max-w-3xl lg:max-w-5xl xl:max-w-[1500px] 2xl:max-w-[1640px]">
+      <div className="mx-auto w-full max-w-[1500px] overflow-x-hidden">
         <header className="sticky top-0 z-50 -mx-3 flex items-center justify-between gap-4 bg-[#070a12]/82 px-3 py-2 backdrop-blur-xl md:-mx-8 md:px-8 xl:-mx-0 xl:bg-transparent xl:px-0">
           <Link href="/" className="flex min-w-0 items-center gap-2.5">
             <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />

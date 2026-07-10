@@ -16,7 +16,7 @@ export function CrmShell({ title, subtitle, children }: { title: string; subtitl
 
   return (
     <main className="min-h-screen px-4 py-5 md:px-8 md:py-6">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-[1500px]">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <a href="/" className="flex items-center gap-2.5">
             <BrandMark className="h-10 w-10 shrink-0" />

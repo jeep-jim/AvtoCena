@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import type { AvtocenaCase } from "@/lib/avtocena";
 
 type ResultCar = AvtocenaCase & {
@@ -28,8 +29,26 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
     name: "",
     phone: "",
     telegram: "",
-    comment: ""
+    comment: "",
   });
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
 
   function update(key: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -62,7 +81,7 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: form.name,
@@ -77,14 +96,11 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
           budgetRub,
           totalRub: car.totalRub,
           partnerRef: getPartnerRef(),
-          source: "results"
-        })
+          source: "results",
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error("lead_error");
-      }
-
+      if (!response.ok) throw new Error("lead_error");
       setSent(true);
     } catch {
       setError("Не получилось отправить заявку. Попробуйте ещё раз.");
@@ -93,85 +109,124 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
     }
   }
 
-  if (sent) {
-    return (
-      <div className="mt-5 rounded-2xl border border-green-400/30 bg-green-500/10 p-4">
-        <div className="text-lg font-black text-green-200">Заявка отправлена</div>
-        <p className="mt-1 text-sm font-bold text-white/58">
-          Менеджер TopAvto свяжется с вами в ближайшее время.
-        </p>
-      </div>
-    );
-  }
+  const modal =
+    open && typeof document !== "undefined"
+      ? createPortal(
+          <div
+            className="ac-viewport-modal fixed inset-0 z-[9999] flex items-end justify-center bg-black/82 backdrop-blur-[8px] md:items-center md:p-5"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Заявка на ${car.title}`}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute inset-0"
+              aria-label="Закрыть форму"
+            />
 
-  if (!open) {
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="avto-button mt-5 w-full rounded-2xl px-5 py-4 text-center font-black"
-      >
-        Получить предложение
-      </button>
-    );
-  }
+            <div className="relative z-10 flex max-h-[100dvh] w-full flex-col overflow-hidden rounded-t-[1.6rem] bg-[#10121a] shadow-[0_-30px_100px_rgba(0,0,0,0.65)] md:max-h-[calc(100dvh-40px)] md:max-w-[520px] md:rounded-[1.8rem] md:shadow-[0_30px_120px_rgba(0,0,0,0.72)]">
+              <div className="ac-safe-bottom overflow-y-auto p-5 sm:p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">
+                      Запрос цены
+                    </div>
+                    <h2 className="mt-2 text-2xl font-black leading-tight tracking-[-0.035em] text-white">
+                      {car.title}
+                    </h2>
+                    <div className="mt-1 text-sm font-bold text-white/52">
+                      Ориентир: {money(car.totalRub)} ₽
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/8 text-white/72 transition hover:bg-white/12 hover:text-white"
+                    aria-label="Закрыть"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                      <path d="M3 3L15 15M15 3L3 15" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </div>
+
+                {sent ? (
+                  <div className="mt-6 rounded-[1.25rem] bg-green-500/10 p-5">
+                    <div className="text-xl font-black text-green-200">Заявка отправлена</div>
+                    <p className="mt-2 text-sm font-bold leading-6 text-white/58">
+                      Менеджер TopAvto свяжется с вами в ближайшее время.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      className="mt-5 w-full rounded-2xl bg-white/10 px-5 py-4 font-black text-white transition hover:bg-white/14"
+                    >
+                      Готово
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={submit} className="mt-6">
+                    <div className="grid gap-3">
+                      <input
+                        value={form.name}
+                        onChange={(event) => update("name", event.target.value)}
+                        placeholder="Ваше имя"
+                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
+                      />
+                      <input
+                        value={form.phone}
+                        onChange={(event) => update("phone", event.target.value)}
+                        placeholder="Телефон"
+                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
+                      />
+                      <input
+                        value={form.telegram}
+                        onChange={(event) => update("telegram", event.target.value)}
+                        placeholder="Telegram"
+                        className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
+                      />
+                      <textarea
+                        value={form.comment}
+                        onChange={(event) => update("comment", event.target.value)}
+                        placeholder="Комментарий"
+                        rows={3}
+                        className="soft-input w-full resize-none rounded-2xl px-4 py-3.5 text-sm font-bold"
+                      />
+                    </div>
+
+                    {error && (
+                      <div className="mt-3 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">
+                        {error}
+                      </div>
+                    )}
+
+                    <button
+                      disabled={loading}
+                      className="avto-button mt-4 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {loading ? "Отправляем..." : "Отправить заявку"}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )
+      : null;
 
   return (
-    <form onSubmit={submit} className="mt-5 rounded-[1.4rem] border border-white/12 bg-white/7 p-4">
-      <div className="text-sm font-black text-white/70">
-        Заявка на {car.title} · {money(car.totalRub)} ₽
-      </div>
-
-      <div className="mt-4 grid gap-3">
-        <input
-          value={form.name}
-          onChange={(event) => update("name", event.target.value)}
-          placeholder="Ваше имя"
-          className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"
-        />
-
-        <input
-          value={form.phone}
-          onChange={(event) => update("phone", event.target.value)}
-          placeholder="Телефон"
-          className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"
-        />
-
-        <input
-          value={form.telegram}
-          onChange={(event) => update("telegram", event.target.value)}
-          placeholder="Telegram"
-          className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"
-        />
-
-        <textarea
-          value={form.comment}
-          onChange={(event) => update("comment", event.target.value)}
-          placeholder="Комментарий"
-          rows={3}
-          className="soft-input resize-none rounded-2xl px-4 py-3 text-sm font-bold"
-        />
-      </div>
-
-      {error && (
-        <div className="mt-3 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold text-red-100">
-          {error}
-        </div>
-      )}
-
-      <button
-        disabled={loading}
-        className="avto-button mt-4 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {loading ? "Отправляем..." : "Отправить заявку"}
-      </button>
-
+    <>
       <button
         type="button"
-        onClick={() => setOpen(false)}
-        className="mt-3 w-full rounded-2xl bg-white/8 px-5 py-3 text-sm font-black text-white/60"
+        onClick={() => setOpen(true)}
+        className="avto-button w-full rounded-2xl px-5 py-4 text-center font-black"
       >
-        Закрыть
+        {sent ? "Заявка отправлена" : "Получить предложение"}
       </button>
-    </form>
+      {modal}
+    </>
   );
 }
