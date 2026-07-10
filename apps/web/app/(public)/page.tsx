@@ -1189,8 +1189,7 @@ export default function HomePage() {
                 </h1>
 
                 <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:max-w-2xl md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
-                  Укажите бюджет, марку и год. Сервис покажет, что можно привезти
-                  в ваш бюджет.
+                  Укажите бюджет, марку и год. Сервис покажет, что можно привезти в ваш бюджет.
                 </p>
 
                 <div className="mt-5 lg:hidden">{calculator}</div>
