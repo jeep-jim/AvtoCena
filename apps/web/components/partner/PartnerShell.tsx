@@ -1,5 +1,6 @@
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { PartnerMobileDrawer } from "@/components/partner/PartnerMobileDrawer";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 export function PartnerShell({
   title,
@@ -19,7 +20,8 @@ export function PartnerShell({
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 md:px-8 md:py-6">
       <div className="mx-auto w-full max-w-7xl overflow-x-hidden">
         <header className="flex items-center justify-between gap-4">
-          <a href="/" className="flex min-w-0 items-center gap-3">
+          <a href="/" className="flex min-w-0 items-center gap-2.5 md:gap-3">
+            <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
             <div className="min-w-0">
               <div className="text-[18px] font-black leading-none md:text-[22px]">
                 <span className="text-red-500">Авто</span>

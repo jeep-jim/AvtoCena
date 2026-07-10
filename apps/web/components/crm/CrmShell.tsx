@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/auth";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 export function CrmShell({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   const user = getCurrentUser();
@@ -17,8 +18,8 @@ export function CrmShell({ title, subtitle, children }: { title: string; subtitl
     <main className="min-h-screen px-4 py-5 md:px-8 md:py-6">
       <div className="mx-auto max-w-7xl">
         <header className="flex flex-wrap items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-base font-black text-black">AC</div>
+          <a href="/" className="flex items-center gap-2.5">
+            <BrandMark className="h-10 w-10 shrink-0" />
             <div>
               <div className="font-black">TopAvto CRM</div>
               <div className="text-xs font-bold text-white/45">внутренняя система</div>

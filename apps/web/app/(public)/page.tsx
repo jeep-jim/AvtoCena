@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
 
 const budgetChips = [1500000, 2000000, 2500000, 3000000, 4000000, 5000000];
@@ -14,7 +15,7 @@ const brandOptions = [
   { value: "Audi", label: "Audi" },
   { value: "Kia", label: "Kia" },
   { value: "Hyundai", label: "Hyundai" },
-  { value: "Lexus", label: "Lexus" }
+  { value: "Lexus", label: "Lexus" },
 ];
 
 const modelOptions = [
@@ -24,7 +25,7 @@ const modelOptions = [
   { value: "Camry", label: "Camry" },
   { value: "A3 Sportback", label: "A3 Sportback" },
   { value: "K5", label: "K5" },
-  { value: "320", label: "320" }
+  { value: "320", label: "320" },
 ];
 
 const yearOptions = [
@@ -35,7 +36,7 @@ const yearOptions = [
   { value: "2021", label: "2021" },
   { value: "2022", label: "2022" },
   { value: "2023", label: "2023" },
-  { value: "2024", label: "2024" }
+  { value: "2024", label: "2024" },
 ];
 
 const countryOptions = [
@@ -44,7 +45,7 @@ const countryOptions = [
   { value: "china", label: "Китай" },
   { value: "korea", label: "Корея" },
   { value: "uae", label: "ОАЭ" },
-  { value: "europe", label: "Европа" }
+  { value: "europe", label: "Европа" },
 ];
 
 const bodyOptions = [
@@ -52,17 +53,331 @@ const bodyOptions = [
   { value: "suv", label: "Кроссовер" },
   { value: "sedan", label: "Седан" },
   { value: "wagon", label: "Универсал" },
-  { value: "hatchback", label: "Хэтчбек" }
+  { value: "hatchback", label: "Хэтчбек" },
+];
+
+type CatalogOffer = {
+  id: string;
+  title: string;
+  brand: string;
+  model: string;
+  year: number;
+  price: number;
+  country: string;
+  countryLabel: string;
+  body: string;
+  bodyLabel: string;
+  mileage: string;
+  engine: string;
+  power: string;
+  delivery: string;
+  sourceLabel: string;
+};
+
+const readyCatalog: CatalogOffer[] = [
+  {
+    id: "harrier-2021-jp",
+    title: "Toyota Harrier Hybrid",
+    brand: "Toyota",
+    model: "Harrier",
+    year: 2021,
+    price: 2950000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "42 000 км",
+    engine: "2.5 Hybrid",
+    power: "178 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "vezel-2021-jp",
+    title: "Honda Vezel e:HEV",
+    brand: "Honda",
+    model: "Vezel",
+    year: 2021,
+    price: 2180000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "38 000 км",
+    engine: "1.5 Hybrid",
+    power: "131 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "camry-2020-uae",
+    title: "Toyota Camry 2.5",
+    brand: "Toyota",
+    model: "Camry",
+    year: 2020,
+    price: 2860000,
+    country: "uae",
+    countryLabel: "ОАЭ",
+    body: "sedan",
+    bodyLabel: "Седан",
+    mileage: "64 000 км",
+    engine: "2.5 бензин",
+    power: "181 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "a3-2021-eu",
+    title: "Audi A3 Sportback",
+    brand: "Audi",
+    model: "A3 Sportback",
+    year: 2021,
+    price: 2740000,
+    country: "europe",
+    countryLabel: "Европа",
+    body: "hatchback",
+    bodyLabel: "Хэтчбек",
+    mileage: "51 000 км",
+    engine: "1.4 TFSI",
+    power: "150 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "k5-2021-kr",
+    title: "Kia K5 Prestige",
+    brand: "Kia",
+    model: "K5",
+    year: 2021,
+    price: 2360000,
+    country: "korea",
+    countryLabel: "Корея",
+    body: "sedan",
+    bodyLabel: "Седан",
+    mileage: "49 000 км",
+    engine: "2.0 бензин",
+    power: "150 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "bmw-320-2020-eu",
+    title: "BMW 320i G20",
+    brand: "BMW",
+    model: "320",
+    year: 2020,
+    price: 2990000,
+    country: "europe",
+    countryLabel: "Европа",
+    body: "sedan",
+    bodyLabel: "Седан",
+    mileage: "72 000 км",
+    engine: "2.0 бензин",
+    power: "184 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "lexus-ux-2020-jp",
+    title: "Lexus UX 250h",
+    brand: "Lexus",
+    model: "UX",
+    year: 2020,
+    price: 2920000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "58 000 км",
+    engine: "2.0 Hybrid",
+    power: "184 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "tucson-2021-kr",
+    title: "Hyundai Tucson",
+    brand: "Hyundai",
+    model: "Tucson",
+    year: 2021,
+    price: 2480000,
+    country: "korea",
+    countryLabel: "Корея",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "46 000 км",
+    engine: "2.0 бензин",
+    power: "150 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "corolla-2022-jp",
+    title: "Toyota Corolla Touring",
+    brand: "Toyota",
+    model: "Corolla",
+    year: 2022,
+    price: 1920000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "wagon",
+    bodyLabel: "Универсал",
+    mileage: "35 000 км",
+    engine: "1.8 Hybrid",
+    power: "122 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "civic-2021-jp",
+    title: "Honda Civic Hatchback",
+    brand: "Honda",
+    model: "Civic",
+    year: 2021,
+    price: 2270000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "hatchback",
+    bodyLabel: "Хэтчбек",
+    mileage: "44 000 км",
+    engine: "1.5 Turbo",
+    power: "182 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "sportage-2020-kr",
+    title: "Kia Sportage",
+    brand: "Kia",
+    model: "Sportage",
+    year: 2020,
+    price: 2190000,
+    country: "korea",
+    countryLabel: "Корея",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "67 000 км",
+    engine: "2.0 бензин",
+    power: "150 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "elantra-2022-kr",
+    title: "Hyundai Elantra",
+    brand: "Hyundai",
+    model: "Elantra",
+    year: 2022,
+    price: 1980000,
+    country: "korea",
+    countryLabel: "Корея",
+    body: "sedan",
+    bodyLabel: "Седан",
+    mileage: "31 000 км",
+    engine: "1.6 бензин",
+    power: "123 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "x-trail-2021-jp",
+    title: "Nissan X-Trail e-Power",
+    brand: "Nissan",
+    model: "X-Trail",
+    year: 2021,
+    price: 2690000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "53 000 км",
+    engine: "e-Power",
+    power: "204 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "mazda3-2020-jp",
+    title: "Mazda 3 Fastback",
+    brand: "Mazda",
+    model: "Mazda 3",
+    year: 2020,
+    price: 2060000,
+    country: "japan",
+    countryLabel: "Япония",
+    body: "hatchback",
+    bodyLabel: "Хэтчбек",
+    mileage: "57 000 км",
+    engine: "2.0 бензин",
+    power: "156 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
+  {
+    id: "song-plus-2022-cn",
+    title: "BYD Song Plus DM-i",
+    brand: "BYD",
+    model: "Song Plus",
+    year: 2022,
+    price: 2470000,
+    country: "china",
+    countryLabel: "Китай",
+    body: "suv",
+    bodyLabel: "Кроссовер",
+    mileage: "29 000 км",
+    engine: "PHEV",
+    power: "197 л.с.",
+    delivery: "под ключ",
+    sourceLabel: "из Telegram-ленты",
+  },
 ];
 
 function formatMoney(value: number) {
   return new Intl.NumberFormat("ru-RU").format(value);
 }
 
+function pluralVariant(count: number) {
+  const mod10 = count % 10;
+  const mod100 = count % 100;
+
+  if (mod10 === 1 && mod100 !== 11) return "вариант";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14))
+    return "варианта";
+
+  return "вариантов";
+}
+
+function getFilteredCatalogOffers({
+  budgetNumber,
+  brand,
+  model,
+  yearFrom,
+  country,
+  bodyType,
+}: {
+  budgetNumber: number;
+  brand: string;
+  model: string;
+  yearFrom: string;
+  country: string;
+  bodyType: string;
+}) {
+  return readyCatalog.filter((offer) => {
+    if (budgetNumber > 0 && offer.price > budgetNumber) return false;
+    if (brand && offer.brand !== brand) return false;
+    if (model && offer.model !== model) return false;
+    if (yearFrom && offer.year < Number(yearFrom)) return false;
+    if (country && offer.country !== country) return false;
+    if (bodyType && offer.body !== bodyType) return false;
+
+    return true;
+  });
+}
+
 function SelectField({
   value,
   onChange,
-  options
+  options,
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -109,12 +424,135 @@ function SelectField({
   );
 }
 
+function BudgetField({
+  value,
+  budgetNumber,
+  manualMode,
+  pickerOpen,
+  onTogglePicker,
+  onSelectPreset,
+  onManualMode,
+  onManualChange,
+}: {
+  value: string;
+  budgetNumber: number;
+  manualMode: boolean;
+  pickerOpen: boolean;
+  onTogglePicker: () => void;
+  onSelectPreset: (value: number) => void;
+  onManualMode: () => void;
+  onManualChange: (value: string) => void;
+}) {
+  const budgetLabel =
+    budgetNumber > 0 ? `до ${formatMoney(budgetNumber)} ₽` : "Выберите бюджет";
+
+  return (
+    <div className="min-w-0">
+      <button
+        type="button"
+        onClick={onTogglePicker}
+        className="soft-input flex h-[56px] w-full min-w-0 items-center justify-between gap-3 rounded-[1.1rem] border border-white/12 bg-white/[0.05] px-4 text-left text-white outline-none transition hover:border-white/20 hover:bg-white/[0.07] focus:border-red-400/60 sm:h-[60px] sm:px-5"
+      >
+        <span className="min-w-0 truncate text-[17px] font-black sm:text-[18px]">
+          {budgetLabel}
+        </span>
+
+        <svg
+          width="14"
+          height="9"
+          viewBox="0 0 14 9"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={[
+            "shrink-0 opacity-70 transition",
+            pickerOpen ? "rotate-180" : "",
+          ].join(" ")}
+          aria-hidden="true"
+        >
+          <path
+            d="M1 1.5L7 7.5L13 1.5"
+            stroke="white"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {pickerOpen ? (
+        <div className="mt-2 rounded-[1.1rem] border border-white/10 bg-[#18191f]/95 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
+          <div className="grid gap-2 sm:grid-cols-2">
+            {budgetChips.map((chip) => {
+              const active = budgetNumber === chip && !manualMode;
+
+              return (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => onSelectPreset(chip)}
+                  className={[
+                    "h-11 rounded-[0.9rem] border px-3 text-sm font-black transition",
+                    active
+                      ? "border-red-400 bg-red-500 text-white shadow-[0_0_26px_rgba(239,68,68,0.22)]"
+                      : "border-white/12 bg-white/[0.04] text-white/78 hover:border-white/22 hover:bg-white/[0.07]",
+                  ].join(" ")}
+                >
+                  до {formatMoney(chip)} ₽
+                </button>
+              );
+            })}
+
+            <button
+              type="button"
+              onClick={onManualMode}
+              className="h-11 rounded-[0.9rem] border border-white/12 bg-white/[0.04] px-3 text-sm font-black text-white/78 transition hover:border-red-300/45 hover:bg-red-500/10 hover:text-white sm:col-span-2"
+            >
+              Ввести вручную
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      {manualMode ? (
+        <div className="mt-2 rounded-[1.1rem] border border-white/10 bg-white/[0.06] px-4 py-3">
+          <div className="mb-1 text-[11px] font-black uppercase tracking-[0.14em] text-white/38">
+            Ручной бюджет
+          </div>
+
+          <div className="flex min-w-0 items-center justify-between gap-3">
+            <input
+              value={value ? formatMoney(Number(value || 0)) : ""}
+              onChange={(event) => onManualChange(event.target.value)}
+              inputMode="numeric"
+              placeholder="Введите сумму"
+              className="min-w-0 flex-1 bg-transparent text-[25px] font-black tracking-[-0.04em] text-white outline-none placeholder:text-white/20 sm:text-[30px]"
+            />
+
+            <div className="shrink-0 text-[24px] font-black text-white/48">
+              ₽
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function BenefitIcon({ type }: { type: "fast" | "globe" | "delivery" }) {
   if (type === "globe") {
     return (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-        <path d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" stroke="currentColor" strokeWidth="2" />
-        <path d="M3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.35 3.3 5.35 3.3 9s-1.1 6.65-3.3 9M12 3C9.8 5.35 8.7 8.35 8.7 12s1.1 6.65 3.3 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <path
+          d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <path
+          d="M3.6 9h16.8M3.6 15h16.8M12 3c2.2 2.35 3.3 5.35 3.3 9s-1.1 6.65-3.3 9M12 3C9.8 5.35 8.7 8.35 8.7 12s1.1 6.65 3.3 9"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
       </svg>
     );
   }
@@ -122,16 +560,35 @@ function BenefitIcon({ type }: { type: "fast" | "globe" | "delivery" }) {
   if (type === "delivery") {
     return (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-        <path d="M3 7h11v10H3V7Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M14 10h4l3 3v4h-7v-7Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M7 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z" stroke="currentColor" strokeWidth="2" />
+        <path
+          d="M3 7h11v10H3V7Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M14 10h4l3 3v4h-7v-7Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
       </svg>
     );
   }
 
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-      <path d="M13 2L4 14h7l-1 8l10-13h-7l0-7Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path
+        d="M13 2L4 14h7l-1 8l10-13h-7l0-7Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -139,7 +596,7 @@ function BenefitIcon({ type }: { type: "fast" | "globe" | "delivery" }) {
 function BenefitCard({
   icon,
   title,
-  text
+  text,
 }: {
   icon: "fast" | "globe" | "delivery";
   title: string;
@@ -154,7 +611,9 @@ function BenefitCard({
         <div className="text-sm font-black leading-5 text-white">{title}</div>
       </div>
 
-      <div className="mt-3 text-sm font-medium leading-6 text-white/55">{text}</div>
+      <div className="mt-3 text-sm font-medium leading-6 text-white/55">
+        {text}
+      </div>
     </div>
   );
 }
@@ -170,8 +629,7 @@ function TopAvtoExecutorBlock() {
         </h2>
 
         <p className="mt-2 max-w-4xl text-sm font-medium leading-7 text-white/58 md:text-[15px]">
-          Сервис помогает быстро понять, какой автомобиль можно привезти под
-          ключ из Японии, Китая, Кореи, ОАЭ или Европы. На первом этапе вы
+          Сервис помогает быстро понять, какой автомобиль можно привезти из Японии, Китая, Кореи, ОАЭ или Европы. На первом этапе вы
           указываете только базовые параметры — бюджет, марку, модель, год и
           страну. Дальше система показывает предварительную АвтоЦену и реальные
           варианты для следующего шага с менеджером TopAvto.
@@ -201,49 +659,478 @@ function TopAvtoExecutorBlock() {
   );
 }
 
+
+function OfferEstimateDetails({ offer }: { offer: CatalogOffer }) {
+  const carCost = Math.round((offer.price * 0.58) / 10000) * 10000;
+  const logistics = Math.round((offer.price * 0.09) / 10000) * 10000;
+  const customs = Math.round((offer.price * 0.22) / 10000) * 10000;
+  const broker = Math.round((offer.price * 0.05) / 10000) * 10000;
+  const commission = Math.max(
+    90000,
+    Math.round((offer.price * 0.035) / 10000) * 10000,
+  );
+
+  const lines = [
+    ["Стоимость авто", carCost],
+    ["Логистика", logistics],
+    ["Таможня и утиль", customs],
+    ["Брокер и оформление", broker],
+    ["Комиссия TopAvto", commission],
+  ] as const;
+
+  return (
+    <div className="grid max-w-xl gap-2.5 text-[13px] font-bold leading-6 text-white/70 sm:text-sm">
+      {lines.map(([label, amount]) => (
+        <div
+          key={label}
+          className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-x-2 gap-y-1 md:flex md:gap-2"
+        >
+          <span className="shrink-0 text-red-300/80">·</span>
+          <span className="min-w-0 text-white/76 md:shrink-0">{label}</span>
+          <span className="mb-[4px] hidden min-w-[20px] flex-1 border-b border-dotted border-white/22 md:block" />
+          <span className="min-w-[104px] shrink-0 text-right font-black text-white sm:min-w-[118px] md:min-w-[132px]">
+            {formatMoney(amount)} ₽
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CarPhotoPlaceholder({ className = "h-full w-full" }: { className?: string }) {
+  return (
+    <div
+      className={[
+        "relative overflow-hidden bg-[radial-gradient(circle_at_25%_18%,rgba(239,68,68,0.42),transparent_36%),radial-gradient(circle_at_78%_8%,rgba(255,255,255,0.12),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.025))]",
+        className,
+      ].join(" ")}
+    >
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.13]">
+        <BrandMark className="h-32 w-32 sm:h-40 sm:w-40" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#10121a]/92 via-[#10121a]/18 to-transparent" />
+    </div>
+  );
+}
+
+function ReadyCatalogCard({
+  offer,
+  onOpen,
+}: {
+  offer: CatalogOffer;
+  onOpen: (offer: CatalogOffer) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(offer)}
+      className="group min-w-0 overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_70px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:border-red-300/30 hover:bg-white/[0.065] active:scale-[0.99]"
+    >
+      <div className="relative h-[190px] overflow-hidden sm:h-[205px] xl:h-[180px] 2xl:h-[205px]">
+        <CarPhotoPlaceholder />
+
+        <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/34 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-white/86 backdrop-blur">
+          {offer.countryLabel}
+        </div>
+
+        <div className="absolute right-3 top-3 rounded-full border border-red-300/25 bg-red-500/18 px-3 py-1 text-[11px] font-black text-red-100 backdrop-blur">
+          {offer.bodyLabel}
+        </div>
+
+        <div className="absolute bottom-3 left-3 rounded-full border border-white/12 bg-black/34 px-3 py-1 text-[11px] font-black text-white/82 backdrop-blur">
+          {offer.year}
+        </div>
+
+        <div className="absolute bottom-3 right-3 rounded-full border border-white/12 bg-black/34 px-3 py-1 text-[11px] font-black text-white/82 backdrop-blur">
+          {offer.mileage}
+        </div>
+
+        <div className="absolute bottom-11 left-3 right-3">
+          <div className="line-clamp-2 text-[18px] font-black leading-[1.15] tracking-[-0.035em] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]">
+            {offer.title}
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 pb-4 pt-3">
+        <div className="flex items-end justify-between gap-3">
+          <div className="min-w-0">
+            <div className="text-[10px] font-black uppercase tracking-[0.16em] text-white/34">
+              ориентир
+            </div>
+            <div className="mt-1 text-[20px] font-black tracking-[-0.045em] text-white">
+              {formatMoney(offer.price)} ₽
+            </div>
+          </div>
+
+          <div className="shrink-0 rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-xs font-black text-white/72 transition group-hover:border-red-300/35 group-hover:text-white">
+            Подробнее
+          </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-white/58">
+          <span className="rounded-full bg-white/[0.05] px-3 py-1.5">
+            {offer.engine}
+          </span>
+          <span className="rounded-full bg-white/[0.05] px-3 py-1.5">
+            {offer.power}
+          </span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function ReadyCatalogGrid({
+  offers,
+  onOpen,
+}: {
+  offers: CatalogOffer[];
+  onOpen: (offer: CatalogOffer) => void;
+}) {
+  const visibleOffers = offers.length > 0 ? offers : readyCatalog;
+
+  return (
+    <section className="w-full min-w-0">
+      <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {visibleOffers.map((offer) => (
+          <ReadyCatalogCard key={offer.id} offer={offer} onOpen={onOpen} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function OfferBottomSheet({
+  offer,
+  onClose,
+  onOpenResults,
+}: {
+  offer: CatalogOffer | null;
+  onClose: () => void;
+  onOpenResults: (offer: CatalogOffer) => void;
+}) {
+  if (!offer) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[80] flex items-end justify-center p-0"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute inset-0 bg-black/72 backdrop-blur-[10px]"
+        aria-label="Закрыть карточку"
+      />
+
+      <div className="relative z-10 max-h-[96vh] w-full overflow-hidden rounded-t-[1.7rem] rounded-b-none border-x border-t border-white/12 bg-[#10121a] shadow-[0_-30px_120px_rgba(0,0,0,0.55)] md:max-w-5xl md:rounded-t-[2rem]">
+        <div className="max-h-[96vh] overflow-y-auto">
+          <div className="relative h-[260px] overflow-hidden sm:h-[330px]">
+            <CarPhotoPlaceholder />
+
+            <div className="absolute left-4 top-4 flex flex-wrap gap-2 sm:left-6 sm:top-6">
+              <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
+                {offer.countryLabel}
+              </span>
+              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+                {offer.bodyLabel}
+              </span>
+              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+                {offer.year}
+              </span>
+              <span className="rounded-full bg-black/30 px-3 py-1 text-xs font-black text-white/78 backdrop-blur">
+                {offer.mileage}
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute right-4 top-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/14 bg-black/28 text-white/78 backdrop-blur transition hover:bg-white/[0.1] hover:text-white sm:right-6 sm:top-6"
+              aria-label="Закрыть"
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3L15 15M15 3L3 15"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#10121a] via-[#10121a]/78 to-transparent px-4 pb-5 pt-20 sm:px-6 sm:pb-6">
+              <h2 className="max-w-3xl text-[32px] font-black leading-none tracking-[-0.045em] text-white sm:text-[48px]">
+                {offer.title}
+              </h2>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold text-white/64">
+                <span>{offer.engine}</span>
+                <span>·</span>
+                <span>{offer.power}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-5 p-4 sm:p-6 md:grid-cols-[minmax(0,1fr)_310px] md:p-7">
+            <div className="min-w-0">
+              <p className="max-w-3xl text-sm font-medium leading-7 text-white/58 sm:text-base">
+                Готовый пример варианта под ваш бюджет. Финальная цена зависит от
+                курса, состояния автомобиля, даты покупки, логистики и города доставки.
+              </p>
+
+              <div className="mt-5">
+                <OfferEstimateDetails offer={offer} />
+              </div>
+            </div>
+
+            <div className="md:border-l md:border-white/10 md:pl-6">
+              <div className="text-[12px] font-black uppercase tracking-[0.18em] text-white/42">
+                ориентир цены
+              </div>
+              <div className="mt-3 text-[32px] font-black tracking-[-0.055em] text-white sm:text-[38px]">
+                {formatMoney(offer.price)} ₽
+              </div>
+              <div className="mt-1 text-sm font-black text-emerald-300">
+                по готовому варианту
+              </div>
+
+              <div className="mt-5 grid gap-2 text-sm font-bold text-white/72">
+                <div className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400" />
+                  Согласование бюджета
+                </div>
+                <div className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400" />
+                  Проверка и покупка автомобиля
+                </div>
+                <div className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400" />
+                  Доставка, таможня и оформление
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onOpenResults(offer)}
+                className="mt-6 flex h-14 w-full items-center justify-center rounded-[1.05rem] bg-red-600 px-4 text-base font-black text-white transition hover:bg-red-500 active:scale-[0.995]"
+              >
+                Получить предложение
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LandingInfoBlocks({ className = "" }: { className?: string }) {
+  return (
+    <section className={["w-full min-w-0", className].join(" ")}>
+      <div className="grid gap-4 md:grid-cols-3">
+        <BenefitCard
+          icon="fast"
+          title="Без регистрации"
+          text="Сразу получите первую выдачу по вашему бюджету."
+        />
+
+        <BenefitCard
+          icon="globe"
+          title="Япония · Китай · Корея · ОАЭ · Европа"
+          text="Сравниваем основные рынки поставки и показываем варианты."
+        />
+
+        <BenefitCard
+          icon="delivery"
+          title="Доставка, таможня и оформление"
+          text="В расчёт включается ключевая структура цены и оформления."
+        />
+      </div>
+
+      <TopAvtoExecutorBlock />
+    </section>
+  );
+}
+
+
 export default function HomePage() {
   const router = useRouter();
 
   const [budget, setBudget] = useState("3000000");
+  const [budgetPickerOpen, setBudgetPickerOpen] = useState(false);
+  const [manualBudgetMode, setManualBudgetMode] = useState(false);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [yearFrom, setYearFrom] = useState("2020");
   const [country, setCountry] = useState("");
   const [bodyType, setBodyType] = useState("");
+  const [selectedOffer, setSelectedOffer] = useState<CatalogOffer | null>(null);
 
   const budgetNumber = useMemo(() => {
     const digits = budget.replace(/\D/g, "");
     return digits ? Number(digits) : 0;
   }, [budget]);
 
+  const filteredCatalogOffers = useMemo(
+    () =>
+      getFilteredCatalogOffers({
+        budgetNumber,
+        brand,
+        model,
+        yearFrom,
+        country,
+        bodyType,
+      }),
+    [budgetNumber, brand, model, yearFrom, country, bodyType],
+  );
+
+  const foundLabel = `Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;
+
   function handleBudgetChange(value: string) {
     const digits = value.replace(/\D/g, "");
     setBudget(digits);
   }
 
-  function applyBudget(value: number) {
+  function selectBudgetPreset(value: number) {
     setBudget(String(value));
+    setManualBudgetMode(false);
+    setBudgetPickerOpen(false);
+  }
+
+  function openManualBudget() {
+    setManualBudgetMode(true);
+    setBudgetPickerOpen(false);
+  }
+
+  function buildResultsUrl(
+    extra?: Partial<{
+      budget: number;
+      brand: string;
+      model: string;
+      year: number | string;
+      country: string;
+      body: string;
+    }>,
+  ) {
+    const params = new URLSearchParams();
+
+    const finalBudget = extra?.budget ?? budgetNumber;
+    const finalBrand = extra?.brand ?? brand;
+    const finalModel = extra?.model ?? model;
+    const finalYear = extra?.year ?? yearFrom;
+    const finalCountry = extra?.country ?? country;
+    const finalBody = extra?.body ?? bodyType;
+
+    if (finalBudget > 0) params.set("budget", String(finalBudget));
+    if (finalBrand) params.set("brand", finalBrand);
+    if (finalModel) params.set("model", finalModel);
+    if (finalYear) params.set("yearFrom", String(finalYear));
+    if (finalCountry) params.set("market", finalCountry);
+    if (finalBody) params.set("body", finalBody);
+
+    return `/results?${params.toString()}`;
   }
 
   function submitForm() {
-    const params = new URLSearchParams();
-
-    if (budgetNumber > 0) params.set("budget", String(budgetNumber));
-    if (brand) params.set("brand", brand);
-    if (model) params.set("model", model);
-    if (yearFrom) params.set("year", yearFrom);
-    if (country) params.set("country", country);
-    if (bodyType) params.set("body", bodyType);
-
-    router.push(`/results?${params.toString()}`);
+    router.push(buildResultsUrl());
   }
+
+  function openOfferResults(offer: CatalogOffer) {
+    router.push(
+      buildResultsUrl({
+        budget: offer.price,
+        brand: offer.brand,
+        model: offer.model,
+        year: offer.year,
+        country: offer.country,
+        body: offer.body,
+      }),
+    );
+  }
+
+  const calculator = (
+    <div
+      id="form"
+      className="glass relative mx-auto box-border w-full max-w-[318px] overflow-hidden rounded-[1.35rem] border border-white/12 bg-white/[0.06] p-3 shadow-[0_20px_80px_rgba(255,0,76,0.12)] sm:max-w-[420px] sm:rounded-[1.7rem] sm:p-4 xl:max-w-none xl:rounded-[2rem] xl:p-6"
+    >
+      <div className="mb-3 flex items-center justify-between gap-3 xl:mb-4">
+        <div className="text-[13px] font-bold uppercase tracking-[0.14em] text-red-200/90">
+          Бюджет
+        </div>
+
+        <div className="shrink-0 rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[11px] font-black text-white/70 sm:text-xs">
+          {foundLabel}
+        </div>
+      </div>
+
+      <BudgetField
+        value={budget}
+        budgetNumber={budgetNumber}
+        manualMode={manualBudgetMode}
+        pickerOpen={budgetPickerOpen}
+        onTogglePicker={() => setBudgetPickerOpen((current) => !current)}
+        onSelectPreset={selectBudgetPreset}
+        onManualMode={openManualBudget}
+        onManualChange={handleBudgetChange}
+      />
+
+      <div className="mt-3 grid min-w-0 grid-cols-2 gap-2 sm:gap-3 xl:mt-4">
+        <SelectField value={brand} onChange={setBrand} options={brandOptions} />
+        <SelectField value={model} onChange={setModel} options={modelOptions} />
+        <SelectField
+          value={yearFrom}
+          onChange={setYearFrom}
+          options={yearOptions}
+        />
+        <SelectField
+          value={country}
+          onChange={setCountry}
+          options={countryOptions}
+        />
+
+        <div className="col-span-2 min-w-0">
+          <SelectField
+            value={bodyType}
+            onChange={setBodyType}
+            options={bodyOptions}
+          />
+        </div>
+      </div>
+
+      <button
+        onClick={submitForm}
+        className="mt-4 flex h-[58px] w-full items-center justify-center gap-3 rounded-[1.05rem] bg-red-600 px-3 text-[16px] font-black text-white transition hover:bg-red-500 active:scale-[0.995] sm:text-[17px] xl:mt-5 xl:h-[62px] xl:rounded-[1.15rem] xl:text-[18px]"
+      >
+        <span className="relative flex h-3 w-3 shrink-0">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-white" />
+        </span>
+        <span className="whitespace-nowrap">Узнать АвтоЦену</span>
+      </button>
+    </div>
+  );
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-3 py-4 pb-14 md:px-8 md:py-6">
-      <input id="ac-drawer-toggle" className="ac-drawer-input" type="checkbox" aria-hidden="true" />
-      <div className="mx-auto w-full max-w-[318px] overflow-x-hidden sm:max-w-[420px] md:max-w-3xl lg:max-w-5xl xl:max-w-7xl">
-        <header className="relative z-10 flex items-center justify-between gap-4">
-          <Link href="/" className="flex min-w-0 items-center">
+      <input
+        id="ac-drawer-toggle"
+        className="ac-drawer-input"
+        type="checkbox"
+        aria-hidden="true"
+      />
+      <div className="mx-auto w-full max-w-[318px] overflow-x-hidden sm:max-w-[420px] md:max-w-3xl lg:max-w-5xl xl:max-w-[1500px] 2xl:max-w-[1640px]">
+        <header className="sticky top-0 z-50 -mx-3 flex items-center justify-between gap-4 bg-[#070a12]/82 px-3 py-2 backdrop-blur-xl md:-mx-8 md:px-8 xl:-mx-0 xl:bg-transparent xl:px-0">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
+
             <div className="min-w-0">
               <div className="text-[18px] font-black leading-none md:text-[22px]">
                 <span className="text-red-500">Авто</span>
@@ -256,151 +1143,126 @@ export default function HomePage() {
           </Link>
 
           <nav className="hidden items-center gap-2 text-sm font-bold text-white/72 md:flex">
-            <a href="/partner/landing" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
+            <a
+              href="/partner/landing"
+              className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12"
+            >
               Партнёрам
             </a>
-            <a href="/login" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">
+            <a
+              href="/login"
+              className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12"
+            >
               Вход
             </a>
           </nav>
 
-          <label htmlFor="ac-drawer-toggle" className="ac-drawer-burger md:hidden" aria-label="Открыть меню">
-            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1H18M1 7H18M1 13H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <label
+            htmlFor="ac-drawer-toggle"
+            className="ac-drawer-burger md:hidden"
+            aria-label="Открыть меню"
+          >
+            <svg
+              width="19"
+              height="14"
+              viewBox="0 0 19 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1H18M1 7H18M1 13H18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             </svg>
           </label>
         </header>
 
-        <section className="grid w-full min-w-0 items-start justify-items-center gap-6 pt-5 xl:grid-cols-[minmax(0,1fr)_500px] xl:justify-items-stretch xl:gap-10 xl:pt-8">
-          <div className="relative z-10 order-1 w-full min-w-0">
-            <h1 className="text-[28px] font-black leading-[0.98] tracking-[-0.035em] text-white sm:text-[40px] md:text-[56px] lg:text-[72px] xl:text-[92px]">
-              <span className="block">Узнайте АвтоЦену</span>
-              <span className="block">за 30 секунд</span>
-            </h1>
+        <section className="relative w-full min-w-0 pt-5 lg:pt-8">
+          <div className="lg:sticky lg:top-[64px] lg:z-40 lg:-mx-2 lg:px-2 lg:pb-6 xl:top-6 xl:-mx-0 xl:px-0">
+            <div className="grid w-full min-w-0 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-8 xl:grid-cols-[minmax(0,1fr)_430px] xl:gap-10 2xl:grid-cols-[minmax(0,1fr)_470px]">
+              <div className="relative z-10 w-full min-w-0">
+                <h1 className="text-[28px] font-black leading-[0.98] tracking-[-0.035em] text-white sm:text-[40px] md:text-[56px] lg:text-[72px] xl:text-[86px] 2xl:text-[92px]">
+                  <span className="block">Узнать стоимость</span>
+                  <span className="block">авто за 30 секунд</span>
+                </h1>
 
-            <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:max-w-2xl md:text-[18px] md:leading-8 lg:text-[20px]">
-              Укажите бюджет, марку и год. Сервис покажет, что реально можно
-              привезти под ключ.
-            </p>
+                <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:max-w-2xl md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
+                  Укажите бюджет, марку и год. Сервис покажет, что можно привезти
+                  в ваш бюджет.
+                </p>
 
-            <div className="mt-4 w-full max-w-full overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mt-5 lg:overflow-visible">
-              <div className="flex w-max snap-x snap-mandatory gap-3 lg:w-auto lg:flex-wrap">
-                {budgetChips.map((chip) => {
-                  const active = budgetNumber === chip;
-
-                  return (
-                    <button
-                      key={chip}
-                      onClick={() => applyBudget(chip)}
-                      className={[
-                        "snap-start whitespace-nowrap rounded-full border px-5 py-3 text-sm font-black transition",
-                        active
-                          ? "border-red-400 bg-red-500 text-white shadow-[0_0_30px_rgba(239,68,68,0.24)]"
-                          : "border-white/28 bg-transparent text-white hover:border-white/50 hover:bg-white/6"
-                      ].join(" ")}
-                    >
-                      до {formatMoney(chip)} ₽
-                    </button>
-                  );
-                })}
+                <div className="mt-5 lg:hidden">{calculator}</div>
               </div>
+
+              <aside className="hidden lg:block lg:self-start">
+                {calculator}
+              </aside>
             </div>
+
+            <div className="mt-6 h-px w-full bg-gradient-to-r from-white/24 via-white/10 to-transparent lg:mt-8" />
           </div>
 
-          <div
-            id="form"
-            className="order-2 glass relative mx-auto box-border w-full max-w-[318px] overflow-hidden rounded-[1.35rem] border border-white/12 bg-white/[0.06] p-3 shadow-[0_20px_80px_rgba(255,0,76,0.12)] sm:max-w-[420px] sm:rounded-[1.7rem] sm:p-4 xl:max-w-none xl:rounded-[2rem] xl:p-6"
-          >
-            <div className="mb-3 flex items-center justify-between gap-3 xl:mb-4">
-              <div className="text-[13px] font-bold uppercase tracking-[0.14em] text-red-200/90">
-                Бюджет
-              </div>
+          <div className="relative z-10 mt-7 lg:mt-8">
+            <LandingInfoBlocks className="mt-0" />
 
-              <div className="shrink-0 rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-[11px] font-black text-white/60 sm:text-xs">
-                результат за 30 секунд
+            <div className="relative mt-4 md:mt-5">
+              <div className="pointer-events-none sticky top-[64px] z-30 hidden h-6 lg:block xl:top-6">
+                <div className="h-px w-full bg-gradient-to-r from-red-500 via-white/18 to-transparent" />
               </div>
+              <ReadyCatalogGrid
+                offers={filteredCatalogOffers}
+                onOpen={setSelectedOffer}
+              />
             </div>
-
-            <div className="rounded-[1.1rem] border border-white/10 bg-white/[0.06] p-4 sm:rounded-[1.2rem] xl:rounded-[1.4rem] xl:p-5">
-              <div className="flex min-w-0 items-center justify-between gap-3 xl:gap-4">
-                <input
-                  value={budget ? formatMoney(Number(budget || 0)) : ""}
-                  onChange={(event) => handleBudgetChange(event.target.value)}
-                  inputMode="numeric"
-                  placeholder="Введите бюджет"
-                  className="min-w-0 flex-1 bg-transparent text-[29px] font-black tracking-[-0.05em] text-white outline-none placeholder:text-white/20 sm:text-[36px] md:text-[46px] xl:text-[58px]"
-                />
-
-                <div className="shrink-0 text-[25px] font-black text-white/48 sm:text-[30px] md:text-[36px] xl:text-[44px]">
-                  ₽
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-3 grid min-w-0 grid-cols-2 gap-2 sm:gap-3 xl:mt-4">
-              <SelectField value={brand} onChange={setBrand} options={brandOptions} />
-              <SelectField value={model} onChange={setModel} options={modelOptions} />
-              <SelectField value={yearFrom} onChange={setYearFrom} options={yearOptions} />
-              <SelectField value={country} onChange={setCountry} options={countryOptions} />
-
-              <div className="col-span-2 min-w-0">
-                <SelectField value={bodyType} onChange={setBodyType} options={bodyOptions} />
-              </div>
-            </div>
-
-            <button
-              onClick={submitForm}
-              className="mt-4 flex h-[58px] w-full items-center justify-center gap-3 rounded-[1.05rem] bg-red-600 px-3 text-[16px] font-black text-white transition hover:bg-red-500 active:scale-[0.995] sm:text-[17px] xl:mt-5 xl:h-[62px] xl:rounded-[1.15rem] xl:text-[18px]"
-            >
-              <span className="relative flex h-3 w-3 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
-                <span className="relative inline-flex h-3 w-3 rounded-full bg-white" />
-              </span>
-              <span className="whitespace-nowrap">Узнать АвтоЦену</span>
-            </button>
           </div>
-        </section>
+        </section>      </div>
 
-        <section className="mx-auto mt-6 w-full min-w-0 border-t border-white/10 pt-5 xl:mt-8 xl:pt-6">
-          <div className="grid gap-3 md:grid-cols-3">
-            <BenefitCard
-              icon="fast"
-              title="Без регистрации"
-              text="Сразу получите первую выдачу по вашему бюджету."
-            />
+      <OfferBottomSheet
+        offer={selectedOffer}
+        onClose={() => setSelectedOffer(null)}
+        onOpenResults={openOfferResults}
+      />
 
-            <BenefitCard
-              icon="globe"
-              title="Япония · Китай · Корея · ОАЭ · Европа"
-              text="Сравниваем основные рынки поставки и показываем варианты."
-            />
-
-            <BenefitCard
-              icon="delivery"
-              title="Доставка, таможня и оформление"
-              text="В расчёт включается вся ключевая структура цены под ключ."
-            />
-          </div>
-
-          <TopAvtoExecutorBlock />
-        </section>
-      </div>
-
-      <label htmlFor="ac-drawer-toggle" className="ac-drawer-backdrop md:hidden" aria-label="Закрыть меню" />
+      <label
+        htmlFor="ac-drawer-toggle"
+        className="ac-drawer-backdrop md:hidden"
+        aria-label="Закрыть меню"
+      />
 
       <aside className="ac-drawer-panel md:hidden" aria-label="Мобильное меню">
         <div className="flex items-center justify-between gap-4">
-          <div>
-            <div className="text-lg font-black leading-none">
-              <span className="text-red-500">Авто</span>
-              <span className="text-white">Цена</span>
+          <div className="flex items-center gap-2.5">
+            <BrandMark className="h-9 w-9 shrink-0" />
+
+            <div>
+              <div className="text-lg font-black leading-none">
+                <span className="text-red-500">Авто</span>
+                <span className="text-white">Цена</span>
+              </div>
+              <div className="mt-1 text-xs font-bold text-white/42">меню</div>
             </div>
-            <div className="mt-1 text-xs font-bold text-white/42">меню</div>
           </div>
 
-          <label htmlFor="ac-drawer-toggle" className="ac-drawer-close" aria-label="Закрыть меню">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <label
+            htmlFor="ac-drawer-toggle"
+            className="ac-drawer-close"
+            aria-label="Закрыть меню"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2 2L14 14M14 2L2 14"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             </svg>
           </label>
         </div>
@@ -409,30 +1271,75 @@ export default function HomePage() {
           <Link href="/partner/landing" className="ac-drawer-link">
             <span>Партнёрам</span>
             <span className="ac-drawer-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.5 12.2L10.2 9.5C11 8.7 12.2 8.7 13 9.5L14.5 11C15.2 11.7 16.3 11.7 17 11L18.2 9.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M3.5 12.5L7.3 16.3C8.1 17.1 9.4 17.1 10.2 16.3L11 15.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M20.5 12.5L16.7 16.3C15.9 17.1 14.6 17.1 13.8 16.3L9.8 12.3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M3 9.5L6.5 6H9.5M21 9.5L17.5 6H14.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.5 12.2L10.2 9.5C11 8.7 12.2 8.7 13 9.5L14.5 11C15.2 11.7 16.3 11.7 17 11L18.2 9.8"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M3.5 12.5L7.3 16.3C8.1 17.1 9.4 17.1 10.2 16.3L11 15.5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M20.5 12.5L16.7 16.3C15.9 17.1 14.6 17.1 13.8 16.3L9.8 12.3"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M3 9.5L6.5 6H9.5M21 9.5L17.5 6H14.5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </span>
           </Link>
 
           <Link href="/login" className="ac-drawer-link ac-drawer-link--red">
             <span>Вход</span>
-            <span className="ac-drawer-icon ac-drawer-icon--red" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 9H14M10 5L14 9L10 13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            <span
+              className="ac-drawer-icon ac-drawer-icon--red"
+              aria-hidden="true"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 9H14M10 5L14 9L10 13"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </span>
           </Link>
         </nav>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
-          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только после входа.
+          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только
+          после входа.
         </div>
       </aside>
-
     </main>
   );
 }
