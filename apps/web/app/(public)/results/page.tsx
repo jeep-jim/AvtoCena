@@ -134,12 +134,6 @@ export default async function ResultsPage({
               </div>
             </div>
           </a>
-          <a
-            href="/"
-            className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/72 transition hover:bg-white/14"
-          >
-            Новый расчёт
-          </a>
         </header>
 
         <section className="mt-6">
