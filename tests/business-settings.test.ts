@@ -127,3 +127,20 @@ test("CPA network draft can be edited without inventing real network parameters"
   assert.equal(network.status, "draft");
   assert.equal(network.postbackConfig.urlTemplate, "");
 });
+
+
+test("effectiveFrom is consistent across market, site, direct payout and public CPA layer", async () => {
+  const { settings } = await loadModules();
+  const user = { id: "owner_test", displayName: "Owner", role: "owner" };
+  settings.createDirectPartnerPayoutVersion(16000, "2099-01-01T00:00:00.000Z", user, "future payout");
+  settings.createSiteBusinessVersion({ displayPartnerPayoutRub: 16000, effectiveFrom: "2099-01-01T00:00:00.000Z" }, user, "future site");
+  settings.createMarketVersion("uae", { active: true, currency: "AED", effectiveFrom: "2099-01-01T00:00:00.000Z", securityDepositRub: 110000, topAvtoCommissionRub: 95000 }, user, "future market");
+  const before = new Date("2098-01-01T00:00:00.000Z");
+  const after = new Date("2100-01-01T00:00:00.000Z");
+  assert.equal(settings.getActiveDirectPartnerPayout(before).defaultSignedContractPayoutRub, 10000);
+  assert.equal(settings.getActiveSiteBusinessVersion(before).displayPartnerPayoutRub, 10000);
+  assert.equal(settings.getActiveMarketVersion("uae", before).topAvtoCommissionRub, 90000);
+  assert.equal(settings.getActiveDirectPartnerPayout(after).defaultSignedContractPayoutRub, 16000);
+  assert.equal(settings.getActiveSiteBusinessVersion(after).displayPartnerPayoutRub, 16000);
+  assert.equal(settings.getActiveMarketVersion("uae", after).topAvtoCommissionRub, 95000);
+});

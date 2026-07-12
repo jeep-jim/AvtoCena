@@ -133,10 +133,16 @@ export function createSiteBusinessVersion(patch: any, user: SettingsUser, commen
     version,
     effectiveFrom: patch.effectiveFrom || nowIso(),
     status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), true),
-    displayPartnerPayoutRub: nullableNumber(patch.displayPartnerPayoutRub) ?? current.displayPartnerPayoutRub,
     minimumBudgetRub: nullableNumber(patch.minimumBudgetRub) ?? current.minimumBudgetRub,
     calculationReservePercent: nullableNumber(patch.calculationReservePercent) ?? current.calculationReservePercent,
     deliveryTermsText: cleanText(patch.deliveryTermsText, 1000) || current.deliveryTermsText,
+    displayPartnerPayoutRub: nullableNumber(patch.displayPartnerPayoutRub) ?? current.displayPartnerPayoutRub,
+    activeMarkets: Array.isArray(patch.activeMarkets) ? patch.activeMarkets : current.activeMarkets,
+    contacts: {
+      telegram: cleanText(patch.telegram, 160) || current.contacts?.telegram || "",
+      phone: cleanText(patch.phone, 80) || current.contacts?.phone || "",
+      email: cleanText(patch.email, 160) || current.contacts?.email || "",
+    },
     createdAt: nowIso(),
     createdByUserId: user.id,
   };
@@ -185,6 +191,17 @@ export function createPartnerPayoutVersion(partnerCode: string, amountRub: numbe
   return next;
 }
 
+export function getEffectivePartnerPayout(partnerCode: string, asOf = new Date()) {
+  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const partner = partners.find((item) => item.code === partnerCode);
+  const individual = chooseEffectiveVersion(partner?.individualPayouts || [], asOf);
+  if (individual) {
+    return { payoutAmountRub: Number(individual.payoutRub || 0), payoutVersionId: individual.id, payoutEffectiveFrom: individual.effectiveFrom, partnerCode, event: individual.event || "signed_contract", source: "individual" };
+  }
+  const base = getActiveDirectPartnerPayout(asOf);
+  return { payoutAmountRub: Number(base?.defaultSignedContractPayoutRub || 0), payoutVersionId: base?.id || "", payoutEffectiveFrom: base?.effectiveFrom || "", partnerCode, event: base?.event || "signed_contract", source: "default" };
+}
+
 export function getCpaNetworks() { return readDataJson<any[]>("cpa/networks.json", []); }
 
 export function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: string) {
@@ -194,6 +211,10 @@ export function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: s
   const index = networks.findIndex((network) => network.id === id);
   const current = index >= 0 ? networks[index] : {};
   const next = { ...current, id, networkId: cleanText(patch.networkId, 160), name: cleanText(patch.name, 200) || current.name || "Черновик CPA-сети", enabled: patch.enabled === true, status: patch.enabled === true ? "active" : "draft", partnerRef: cleanText(patch.partnerRef, 160), offerId: cleanText(patch.offerId, 160), goal: cleanText(patch.goal, 160) || "signed_contract", payoutType: cleanText(patch.payoutType, 40) || "custom/manual", payoutAmount: nullableNumber(patch.payoutAmount), currency: cleanText(patch.currency, 12) || "RUB", holdDays: nullableNumber(patch.holdDays), attributionWindowDays: nullableNumber(patch.attributionWindowDays), dailyCap: nullableNumber(patch.dailyCap), monthlyCap: nullableNumber(patch.monthlyCap), allowedTrafficSources: Array.isArray(patch.allowedTrafficSources) ? patch.allowedTrafficSources : [], forbiddenTrafficSources: Array.isArray(patch.forbiddenTrafficSources) ? patch.forbiddenTrafficSources : [], statusMapping: patch.statusMapping && typeof patch.statusMapping === "object" ? patch.statusMapping : {}, postbackConfig: patch.postbackConfig && typeof patch.postbackConfig === "object" ? patch.postbackConfig : { method: "GET", urlTemplate: "", headers: {} }, comment: cleanText(comment, 1000), effectiveFrom: cleanText(patch.effectiveFrom, 80) || nowIso() };
+  if (next.enabled) {
+    if (!next.name || !next.networkId || !next.offerId || !next.goal || !next.payoutType) throw new Error("cpa_required_fields_missing");
+    if (!/^https?:\/\//i.test(next.postbackConfig?.urlTemplate || "")) throw new Error("cpa_postback_url_invalid");
+  }
   if (index >= 0) networks[index] = next; else networks.push(next);
   writeDataJson("cpa/networks.json", networks);
   appendChangeLog({ entityType: "cpa-network", entityId: id, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });

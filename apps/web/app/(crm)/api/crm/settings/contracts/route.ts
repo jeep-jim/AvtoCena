@@ -19,10 +19,12 @@ function id(prefix: string) {
   try { return `${prefix}_${crypto.randomUUID()}`; } catch { return `${prefix}_${Date.now()}`; }
 }
 
-function parseJson(value: FormDataEntryValue | null, fallback: unknown) {
-  const raw = cleanText(value, 12000);
-  if (!raw) return fallback;
-  try { return JSON.parse(raw); } catch { return fallback; }
+function parseLines(value: FormDataEntryValue | null) {
+  return cleanText(value, 12000).split(/\r?\n|,/).map((item) => item.trim()).filter(Boolean);
+}
+
+function parseMappingText(value: FormDataEntryValue | null) {
+  return Object.fromEntries(cleanText(value, 12000).split(/\r?\n/).map((line) => line.split("=").map((part) => part.trim())).filter(([key, val]) => key && val));
 }
 
 async function storeFile(file: File | null, allowedTypes: Set<string>, maxBytes: number, folder: string) {
@@ -59,8 +61,8 @@ export async function POST(request: Request) {
       version: cleanText(form.get("version"), 40) || "1",
       status: booleanFromForm(form.get("active")) ? "active" : "archived",
       effectiveFrom: cleanText(form.get("effectiveFrom"), 80) || new Date().toISOString(),
-      placeholders: parseJson(form.get("placeholders"), []),
-      placeholderMapping: parseJson(form.get("placeholderMapping"), {}),
+      placeholders: parseLines(form.get("placeholdersText")),
+      placeholderMapping: parseMappingText(form.get("placeholderMappingText")),
       includeDirectorSignatureByDefault: booleanFromForm(form.get("includeDirectorSignatureByDefault")),
       file: templateFile,
       generationStatus: "pending_template_integration",
