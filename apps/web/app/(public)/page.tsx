@@ -1918,7 +1918,7 @@ export default function HomePage() {
       className="glass relative mx-auto box-border w-full max-w-[318px] overflow-visible rounded-[1.35rem] border border-white/12 bg-white/[0.06] p-3 shadow-[0_20px_80px_rgba(255,0,76,0.12)] sm:max-w-[420px] sm:rounded-[1.7rem] sm:p-4 xl:max-w-none xl:rounded-[2rem] xl:p-6"
     >
       <div className="mb-3 flex items-center justify-between gap-3 xl:mb-4">
-        <div className="text-[13px] font-bold uppercase tracking-[0.14em] text-red-200/90">
+        <div className="text-[13px] font-bold tracking-[0.14em] text-red-200/90">
           Бюджет
         </div>
 
@@ -2062,7 +2062,7 @@ export default function HomePage() {
                 </h1>
 
                 <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
-                  Укажите бюджет. Сервис покажет, что можно привезти под ключ.
+                  Укажите бюджет. Покажем, что можно привезти под ключ.
                 </p>
 
                 <LandingInfoBlocks className="mt-6 hidden lg:block" />

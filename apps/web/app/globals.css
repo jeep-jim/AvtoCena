@@ -454,3 +454,10 @@ textarea::placeholder {
     top: 1.5rem;
   }
 }
+
+/* CRM controls are intentionally flat: no glow or drop shadows on chips/buttons. */
+.crm-shell button,
+.crm-shell a {
+  box-shadow: none !important;
+  filter: none !important;
+}

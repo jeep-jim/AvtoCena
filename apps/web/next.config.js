@@ -4,15 +4,17 @@ const path = require("path");
 const nextConfig = {
   output: "standalone",
 
-  outputFileTracingRoot: path.join(__dirname, "../.."),
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, "../.."),
+  },
 
   eslint: {
-    ignoreDuringBuilds: true
+    ignoreDuringBuilds: true,
   },
 
   typescript: {
-    ignoreBuildErrors: false
-  }
+    ignoreBuildErrors: false,
+  },
 };
 
 module.exports = nextConfig;

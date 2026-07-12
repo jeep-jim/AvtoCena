@@ -124,7 +124,7 @@ export function PartnerMobileDrawer({
         </nav>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
-          Для менеджеров и партнёров. CRM и API доступны только после входа.
+          CRM доступна только сотрудникам компании. Партнёрам — отдельный кабинет, CPA API — по отдельному доступу.
         </div>
 
         <div className="mt-auto pt-8 text-xs font-bold leading-5 text-white/32">
