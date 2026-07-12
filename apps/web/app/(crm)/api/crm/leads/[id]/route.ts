@@ -7,6 +7,7 @@ import {
   updateChunkedDataJson
 } from "@/lib/data";
 import { isLeadStatus } from "@/lib/crm";
+import { deliverCpaEvent } from "@/lib/cpa-gateway";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -156,7 +157,7 @@ export async function PATCH(
   if (statusChanged) {
     const hasExternalAttribution = Boolean(updatedLead.externalClickId || updatedLead.partnerRef);
 
-    appendChunkedDataJson("cpa/events.json", {
+    const cpaEvent = appendChunkedDataJson("cpa/events.json", {
       id: makeId("cpa"),
       createdAt: now,
       direction: "outbound",
@@ -179,6 +180,10 @@ export async function PATCH(
       rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
       changedByUserId: user.id
     });
+
+    if (cpaEvent.deliveryStatus === "pending") {
+      await deliverCpaEvent(cpaEvent);
+    }
   }
 
   return NextResponse.json({ ok: true, lead: updatedLead });

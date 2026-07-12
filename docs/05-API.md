@@ -1,6 +1,6 @@
 # API
 
-## Public tracking
+## Публичный трекинг
 
 ```text
 POST /api/cpa
@@ -28,14 +28,14 @@ utmTerm
 POST /api/leads
 ```
 
-Создаёт клиента, заявку, событие CRM и CPA-событие. Сохраняет полную атрибуцию, параметры расчёта и источник заявки.
+Создаёт клиента, заявку, событие CRM и исходящее CPA-событие. Сохраняет полную атрибуцию, параметры расчёта и источник заявки.
 
 ```text
 GET /api/avtocena
 GET /api/health
 ```
 
-## Protected reads
+## Защищённые чтения
 
 ```text
 GET /api/leads
@@ -55,12 +55,56 @@ PATCH /api/crm/leads/:id
 
 `PATCH /api/crm/leads/:id` позволяет назначить менеджера, изменить статус и добавить внутренний комментарий. Для статусов `rejected` и `duplicate` причина обязательна.
 
-Изменение статуса формирует запись в `data/cpa/events*.json` со статусом доставки `pending` для трафика с внешней CPA/реферальной атрибуцией. Отправку в конкретную сеть выполняет будущий сетевой адаптер.
+Изменение статуса формирует запись в `data/cpa/events*.json`. Если для `partnerRef` настроен активный адаптер в `data/cpa/networks.json`, CPA Gateway сразу пробует отправить S2S-postback. При ошибке событие остаётся в очереди со статусом `failed` и временем следующей попытки.
 
-## CPA postback receiver
+## Исходящая доставка CPA
+
+```text
+POST /api/cpa/deliver
+```
+
+Служебный endpoint для повторной доставки событий `pending`, `failed` и `waiting_config`. Доступен администратору или по `CPA_DELIVERY_SECRET`.
+
+Конфигурация сетей хранится в:
+
+```text
+data/cpa/networks.json
+```
+
+Пример записи:
+
+```json
+{
+  "id": "network-example",
+  "name": "CPA Network",
+  "enabled": true,
+  "partnerRef": "network_code",
+  "method": "GET",
+  "postbackUrl": "https://network.example/postback?click_id={click_id}&status={status}&lead_id={lead_id}&payout={payout}",
+  "payoutRub": 10000,
+  "timeoutMs": 5000,
+  "statusMap": {
+    "new": "pending",
+    "in_progress": "pending",
+    "rejected": "rejected",
+    "duplicate": "rejected",
+    "contract_signed": "approved"
+  }
+}
+```
+
+## Входящий callback
 
 ```text
 GET /api/cpa/postback
 ```
 
-Закрытый технический endpoint для приёма тестовых или внешних postback-событий по секрету. Исходящие S2S-postback в CPA-сети будут вынесены в отдельные адаптеры сетей.
+Не является основным способом подтверждения договора. Используется только для редких входящих callback или тестов конкретной сети и работает лишь при заданном `CPA_POSTBACK_SECRET`.
+
+## Запрос выплаты прямого партнёра
+
+```text
+POST /api/partners/payout-request
+```
+
+Создаёт заявку на выплату в `data/partners/payout-requests*.json`, запрещает второй активный запрос и отправляет уведомление в служебный Telegram. Для CPA-сетей этот endpoint не используется: расчёты идут по реестру сети.

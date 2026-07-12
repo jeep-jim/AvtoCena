@@ -52,7 +52,7 @@ export async function GET() {
 
   return NextResponse.json({
     name: "AvtoCena CPA API",
-    version: "0.2",
+    version: "0.3",
     offer: {
       title: "АвтоЦена — заявка на авто под заказ",
       goal: "signed_contract",
@@ -63,7 +63,8 @@ export async function GET() {
       landing: "https://avtocena.com/?ref={partner_id}&click_id={click_id}&sub1={sub1}",
       browserEvents: "POST https://avtocena.com/api/cpa",
       statusSource: "CRM manager actions",
-      outboundPostback: "configured per CPA network adapter"
+      outboundPostback: "configured per CPA network adapter",
+      retryEndpoint: "POST https://avtocena.com/api/cpa/deliver"
     },
     events: [
       "visit",

@@ -13,9 +13,16 @@ function makeId(prefix: string) {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const secret = url.searchParams.get("secret");
-  const expected = process.env.CPA_POSTBACK_SECRET;
+  const expected = process.env.CPA_POSTBACK_SECRET?.trim();
 
-  if (expected && secret !== expected) {
+  if (!expected) {
+    return NextResponse.json(
+      { ok: false, error: "postback_not_configured" },
+      { status: 503 },
+    );
+  }
+
+  if (secret !== expected) {
     return NextResponse.json({ ok: false, error: "wrong_secret" }, { status: 401 });
   }
 

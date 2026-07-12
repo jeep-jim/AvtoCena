@@ -151,6 +151,11 @@ export async function middleware(request: NextRequest) {
 
   const session = await getSession(request);
 
+  if (pathname === "/api/partners/payout-request") {
+    if (isPartnerRole(session?.role)) return NextResponse.next();
+    return denyOrRedirect(request);
+  }
+
   if (pathname === "/partner/api" || pathname.startsWith("/partner/api/")) {
     if (isAdminRole(session?.role) || hasValidCpaDocsKey(request)) return allowWithDocsCookie(request);
     return denyOrRedirect(request);

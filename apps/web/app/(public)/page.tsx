@@ -5,7 +5,6 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
-import { startRoutePreloader } from "@/components/layout/RoutePreloader";
 import {
   appendAttributionToSearchParams,
   captureAttributionFromBrowser,
@@ -1897,12 +1896,10 @@ export default function HomePage() {
   }
 
   function submitForm() {
-    startRoutePreloader();
     router.push(buildResultsUrl());
   }
 
   function openOfferResults(offer: CatalogOffer) {
-    startRoutePreloader();
     router.push(
       buildResultsUrl({
         budget: offer.price,
@@ -2065,7 +2062,7 @@ export default function HomePage() {
                 </h1>
 
                 <p className="mt-3 text-[15px] font-medium leading-7 text-white/72 md:mt-5 md:text-[18px] md:leading-8 lg:text-[19px] xl:text-[20px]">
-                  Укажите бюджет. Покажем, что можно привезти под ключ.
+                  Укажите бюджет — покажем, что можно привезти под ключ.
                 </p>
 
                 <LandingInfoBlocks className="mt-6 hidden lg:block" />

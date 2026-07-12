@@ -4,6 +4,7 @@ import {
   appendChunkedDataJson,
   readChunkedDataJson
 } from "@/lib/data";
+import { deliverCpaEvent } from "@/lib/cpa-gateway";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -138,7 +139,7 @@ export async function POST(request: Request) {
     text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram
   });
 
-  appendChunkedDataJson("cpa/events.json", {
+  const cpaEvent = appendChunkedDataJson("cpa/events.json", {
     id: makeId("cpa"),
     createdAt,
     direction: "outbound",
@@ -151,6 +152,10 @@ export async function POST(request: Request) {
     clientId,
     ...attribution
   });
+
+  if (cpaEvent.deliveryStatus === "pending") {
+    await deliverCpaEvent(cpaEvent);
+  }
 
   return NextResponse.json({ ok: true, lead });
 }

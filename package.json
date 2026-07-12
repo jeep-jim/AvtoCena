@@ -10,6 +10,8 @@
     "dev": "npm --workspace=@avtocena/web run dev",
     "dev:web": "npm --workspace=@avtocena/web run dev",
     "dev:bot": "npm --workspace=@avtocena/bot run dev",
-    "build": "npm --workspace=@avtocena/web run build"
+    "build": "npm --workspace=@avtocena/web run build",
+    "clean:web": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\"",
+    "dev:fresh": "npm run clean:web && npm run dev"
   }
 }
