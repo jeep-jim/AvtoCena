@@ -1,6 +1,7 @@
 import { CrmShell } from "@/components/crm/CrmShell";
 import { BusinessSettingsPanel } from "@/components/crm/settings/BusinessSettingsPanel";
 import { getCurrentUser } from "@/lib/auth";
+import { readDataJson } from "@/lib/data";
 import {
   getActiveDirectPartnerPayout,
   getActiveSiteBusinessVersion,
@@ -53,6 +54,7 @@ export default function CrmSettingsPage() {
         cpaNetworks={getCpaNetworks()}
         contracts={getContractTemplatesSettings()}
         changeLog={getSettingsChangeLog()}
+        partners={readDataJson<any[]>("partners/partners.json", [])}
         canEdit={canEdit}
       />
     </CrmShell>
