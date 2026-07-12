@@ -198,6 +198,87 @@ export function createPartnerPayoutVersion(partnerCode: string, amountRub: numbe
   return next;
 }
 
+export function classifyPartnerSource(partnerRef?: string) {
+  const ref = cleanText(partnerRef, 160);
+  if (!ref) return { type: "none", partnerRef: ref } as const;
+
+  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const directPartner = partners.find((partner) => partner.code === ref && partner.partnerType !== "cpa-network" && partner.status === "active");
+  if (directPartner) return { type: "direct-partner", partnerRef: ref, partner: directPartner } as const;
+
+  const cpaNetwork = getCpaNetworks().find((network) => network.enabled && (network.partnerRef === ref || network.networkId === ref));
+  if (cpaNetwork) return { type: "cpa-network", partnerRef: ref, network: cpaNetwork } as const;
+
+  return { type: "unknown", partnerRef: ref } as const;
+}
+
+export function handleLeadPartnerStatusChange(input: {
+  leadId: string;
+  clientId?: string;
+  partnerRef?: string;
+  clickId?: string;
+  externalClickId?: string;
+  sub1?: string;
+  sub2?: string;
+  sub3?: string;
+  sub4?: string;
+  sub5?: string;
+  status: string;
+  eventType: string;
+  changedByUserId?: string;
+  createdAt?: string;
+}) {
+  const createdAt = input.createdAt || nowIso();
+  const source = classifyPartnerSource(input.partnerRef);
+  const result: any = { source, accrual: null, diagnostic: null, cpaEvent: null };
+
+  if (input.status === "contract_signed" && source.type === "direct-partner") {
+    result.accrual = createDirectPartnerAccrualForLead({ leadId: input.leadId, clientId: input.clientId, partnerRef: source.partnerRef, createdAt });
+    return result;
+  }
+
+  if (source.type === "unknown" && input.partnerRef) {
+    result.diagnostic = appendChunkedDataJson("activity/feed.json", {
+      id: makeId("event"),
+      createdAt,
+      type: "partner_source_unknown",
+      title: "Неизвестный партнёрский источник",
+      leadId: input.leadId,
+      clientId: input.clientId || "",
+      partnerRef: source.partnerRef,
+      status: "partner_ref_unknown",
+      text: "Начисление и CPA postback не созданы: partnerRef не найден среди активных прямых партнёров или CPA-сетей."
+    });
+    return result;
+  }
+
+  const hasConfirmedCpaAttribution = source.type === "cpa-network" && Boolean(input.externalClickId);
+  if (hasConfirmedCpaAttribution) {
+    result.cpaEvent = appendChunkedDataJson("cpa/events.json", {
+      id: makeId("cpa"),
+      createdAt,
+      direction: "outbound",
+      eventType: input.eventType,
+      deliveryStatus: "pending",
+      attempts: 0,
+      nextAttemptAt: null,
+      clickId: input.clickId || "",
+      externalClickId: input.externalClickId || "",
+      partnerRef: source.partnerRef,
+      sub1: input.sub1 || "",
+      sub2: input.sub2 || "",
+      sub3: input.sub3 || "",
+      sub4: input.sub4 || "",
+      sub5: input.sub5 || "",
+      leadId: input.leadId,
+      status: input.status,
+      changedByUserId: input.changedByUserId || ""
+    });
+  }
+
+  return result;
+}
+
 export function getEffectivePartnerPayout(partnerCode: string, asOf = new Date()) {
   const partners = readDataJson<any[]>("partners/partners.json", []);
   const partner = partners.find((item) => item.code === partnerCode);

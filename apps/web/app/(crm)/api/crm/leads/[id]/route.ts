@@ -8,7 +8,7 @@ import {
 } from "@/lib/data";
 import { isLeadStatus } from "@/lib/crm";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
-import { createDirectPartnerAccrualForLead } from "@/lib/business-settings";
+import { handleLeadPartnerStatusChange } from "@/lib/business-settings";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -156,56 +156,25 @@ export async function PATCH(
   });
 
   if (statusChanged) {
-    const hasExternalAttribution = Boolean(updatedLead.externalClickId || updatedLead.partnerRef);
-
-    if (nextStatus === "contract_signed") {
-      const accrualResult = createDirectPartnerAccrualForLead({
-        leadId,
-        clientId: updatedLead.clientId,
-        partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
-        createdAt: now,
-      });
-      if (!accrualResult.created && accrualResult.reason !== "partner_ref_missing" && accrualResult.reason !== "duplicate") {
-        appendChunkedDataJson("activity/feed.json", {
-          id: makeId("event"),
-          createdAt: now,
-          type: "partner_accrual_skipped",
-          title: "Партнёрское начисление не создано",
-          leadId,
-          clientId: updatedLead.clientId,
-          partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
-          status: accrualResult.reason,
-          text: accrualResult.reason
-        });
-      }
-    }
-
-    const cpaEvent = appendChunkedDataJson("cpa/events.json", {
-      id: makeId("cpa"),
-      createdAt: now,
-      direction: "outbound",
-      eventType: nextStatus === "contract_signed"
-        ? "contract_signed"
-        : "lead_status_changed",
-      deliveryStatus: hasExternalAttribution ? "pending" : "not_required",
-      attempts: 0,
-      nextAttemptAt: null,
+    const partnerEffects = handleLeadPartnerStatusChange({
+      leadId,
+      clientId: updatedLead.clientId,
+      partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
       clickId: updatedLead.clickId || updatedLead.attribution?.clickId || "",
       externalClickId: updatedLead.externalClickId || updatedLead.attribution?.externalClickId || "",
-      partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
       sub1: updatedLead.sub1 || updatedLead.attribution?.sub1 || "",
       sub2: updatedLead.sub2 || updatedLead.attribution?.sub2 || "",
       sub3: updatedLead.sub3 || updatedLead.attribution?.sub3 || "",
       sub4: updatedLead.sub4 || updatedLead.attribution?.sub4 || "",
       sub5: updatedLead.sub5 || updatedLead.attribution?.sub5 || "",
-      leadId,
       status: nextStatus,
-      rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
-      changedByUserId: user.id
+      eventType: nextStatus === "contract_signed" ? "contract_signed" : "lead_status_changed",
+      changedByUserId: user.id,
+      createdAt: now,
     });
 
-    if (cpaEvent.deliveryStatus === "pending") {
-      await deliverCpaEvent(cpaEvent);
+    if (partnerEffects.cpaEvent?.deliveryStatus === "pending") {
+      await deliverCpaEvent(partnerEffects.cpaEvent);
     }
   }
 

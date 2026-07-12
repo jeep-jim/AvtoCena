@@ -220,3 +220,28 @@ test("CRM effective market version uses the same effectiveFrom selection as calc
   assert.equal(afterCrm.topAvtoCommissionRub, 48000);
   assert.equal(calc.configVersion, afterCrm.id);
 });
+
+test("status side effects split direct partner, CPA network and unknown refs", async () => {
+  const { settings } = await loadModules();
+  const data = await import(`../apps/web/lib/data.ts?case=${Date.now()}${Math.random()}`);
+
+  const direct = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(direct.accrual.created, true);
+  assert.equal(direct.cpaEvent, null);
+  assert.equal(data.readChunkedDataJson("cpa/events.json", []).filter((event: any) => event.leadId === "lead_side_direct").length, 0);
+
+  settings.upsertCpaNetworkDraft({ id: "network_side", networkId: "network_side", name: "CPA Side", enabled: true, partnerRef: "cpa_side", offerId: "offer_side", goal: "signed_contract", payoutType: "fixed", payoutAmount: 9000, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "side");
+  const cpa = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_cpa", partnerRef: "cpa_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-cpa", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(cpa.accrual, null);
+  assert.equal(cpa.cpaEvent.eventType, "contract_signed");
+  assert.equal(data.readChunkedDataJson("partners/accruals.json", []).filter((item: any) => item.leadId === "lead_side_cpa").length, 0);
+
+  const unknown = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_unknown", partnerRef: "unknown_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-unknown", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(unknown.accrual, null);
+  assert.equal(unknown.cpaEvent, null);
+  assert.equal(unknown.diagnostic.type, "partner_source_unknown");
+
+  const duplicate = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(duplicate.accrual.created, false);
+  assert.equal(duplicate.accrual.reason, "duplicate");
+});
