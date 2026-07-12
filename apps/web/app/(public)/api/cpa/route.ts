@@ -46,9 +46,10 @@ function normalizeAttribution(value: unknown) {
 }
 
 export async function GET() {
-  const payouts = readDataJson("cpa/payouts.json", {
+  const payouts = readDataJson<any>("cpa/payouts.json", {
     defaultSignedContractPayoutRub: 10000
   });
+  const defaultPayout = payouts.directPartnerProgram?.versions?.find((version: any) => version.id === payouts.directPartnerProgram?.activeVersionId)?.defaultSignedContractPayoutRub || payouts.defaultSignedContractPayoutRub || payouts.legacy?.defaultSignedContractPayoutRub || 0;
 
   return NextResponse.json({
     name: "AvtoCena CPA API",
@@ -56,7 +57,7 @@ export async function GET() {
     offer: {
       title: "АвтоЦена — заявка на авто под заказ",
       goal: "signed_contract",
-      payoutRub: payouts.defaultSignedContractPayoutRub,
+      payoutRub: defaultPayout,
       holdDays: 0
     },
     tracking: {

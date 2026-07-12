@@ -6,11 +6,13 @@ type CpaNetworkConfig = {
   enabled: boolean;
   partnerRef: string;
   method?: "GET" | "POST";
-  postbackUrl: string;
+  postbackUrl?: string;
+  postbackConfig?: { urlTemplate?: string; method?: "GET" | "POST"; headers?: Record<string, string> };
   headers?: Record<string, string>;
   payoutRub?: number;
   timeoutMs?: number;
   statusMap?: Record<string, string>;
+  statusMapping?: Record<string, string>;
 };
 
 type CpaEvent = {
@@ -55,7 +57,8 @@ function findNetwork(event: CpaEvent) {
 
 function eventStatus(event: CpaEvent, config: CpaNetworkConfig) {
   const source = clean(event.status || event.eventType, 100);
-  return config.statusMap?.[source] || config.statusMap?.[clean(event.eventType, 100)] || source;
+  const mapping = config.statusMap || config.statusMapping || {};
+  return mapping[source] || mapping[clean(event.eventType, 100)] || source;
 }
 
 function templateValues(event: CpaEvent, config: CpaNetworkConfig) {
@@ -111,8 +114,17 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
   }
 
   const values = templateValues(event, config);
-  const url = renderTemplate(config.postbackUrl, values);
-  const method = config.method || "GET";
+  const urlTemplate = config.postbackUrl || config.postbackConfig?.urlTemplate || "";
+  if (!urlTemplate) {
+    updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
+      ...stored,
+      deliveryStatus: "waiting_config",
+      lastDeliveryError: "postback_url_not_configured",
+    }));
+    return { ok: false, eventId: event.id, skipped: true, reason: "postback_url_not_configured" };
+  }
+  const url = renderTemplate(urlTemplate, values);
+  const method = config.method || config.postbackConfig?.method || "GET";
   const controller = new AbortController();
   const timeout = setTimeout(
     () => controller.abort(),
@@ -126,7 +138,7 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
       method,
       headers: {
         accept: "application/json, text/plain, */*",
-        ...(config.headers || {}),
+        ...(config.headers || config.postbackConfig?.headers || {}),
         ...(method === "POST" ? { "content-type": "application/json" } : {}),
       },
       body: method === "POST" ? JSON.stringify(values) : undefined,

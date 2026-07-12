@@ -5,6 +5,7 @@ import {
   readChunkedDataJson
 } from "@/lib/data";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
+import { getBusinessSettingsSnapshot } from "@/lib/business-settings";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -74,6 +75,9 @@ export async function POST(request: Request) {
   const leadId = makeId("lead");
   const attribution = normalizeAttribution(body.attribution, body);
   const source = clean(body.source, 160) || "site";
+  const market = clean(body.market, 120);
+  const businessSettingsSnapshot = market ? getBusinessSettingsSnapshot(market) : null;
+  const calculationSnapshot = body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null;
 
   const client = appendChunkedDataJson("clients/clients.json", {
     id: clientId,
@@ -88,7 +92,12 @@ export async function POST(request: Request) {
     partnerRef: attribution.partnerRef,
     attribution,
     createdByManagerId: null,
-    assignedManagerId: null
+    assignedManagerId: null,
+    configVersion: businessSettingsSnapshot?.configVersion || "",
+    effectiveFrom: businessSettingsSnapshot?.effectiveFrom || "",
+    businessSettingsSnapshot,
+    calculationSnapshot,
+    breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
   });
 
   const lead = appendChunkedDataJson("leads/leads.json", {
@@ -115,7 +124,7 @@ export async function POST(request: Request) {
     car: clean(body.car, 500),
     brand: clean(body.brand, 200),
     model: clean(body.model, 200),
-    market: clean(body.market, 120),
+    market,
     marketName: clean(body.marketName, 200),
     year: numberOrNull(body.year),
     budgetRub: numberOrNull(body.budgetRub),
@@ -124,7 +133,12 @@ export async function POST(request: Request) {
     ...attribution,
     attribution,
     createdByManagerId: null,
-    assignedManagerId: null
+    assignedManagerId: null,
+    configVersion: businessSettingsSnapshot?.configVersion || "",
+    effectiveFrom: businessSettingsSnapshot?.effectiveFrom || "",
+    businessSettingsSnapshot,
+    calculationSnapshot,
+    breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
   });
 
   appendChunkedDataJson("activity/feed.json", {
