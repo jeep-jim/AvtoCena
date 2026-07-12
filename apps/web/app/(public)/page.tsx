@@ -5,6 +5,11 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import {
+  appendAttributionToSearchParams,
+  captureAttributionFromBrowser,
+  trackAttributionEvent,
+} from "@/lib/attribution";
 
 const budgetChips = [1500000, 2000000, 2500000, 3000000, 4000000, 5000000];
 
@@ -441,6 +446,60 @@ function BodyTypeIcon({ type }: { type: string }) {
     </>
   );
 
+  if (!type || type === "any") {
+    return (
+      <svg {...commonProps} viewBox="0 0 58 34">
+        <path
+          d="M13 11.5L17.5 6.5H40.5L45 11.5"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        <path
+          d="M9 14.5C9 12.8 10.3 11.5 12 11.5H46C47.7 11.5 49 12.8 49 14.5V19.5C49 21.2 47.7 22.5 46 22.5H12C10.3 22.5 9 21.2 9 19.5V14.5Z"
+          fill="currentColor"
+          fillOpacity="0.08"
+          stroke="currentColor"
+          strokeWidth="2.2"
+        />
+
+        <circle cx="18" cy="17.4" r="2.65" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="40" cy="17.4" r="2.65" stroke="currentColor" strokeWidth="2.2" />
+        <path
+          d="M24 20.6H34"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+
+        <rect
+          x="12.5"
+          y="23"
+          width="7"
+          height="3.5"
+          rx="0"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="miter"
+        />
+        <rect
+          x="38.5"
+          y="23"
+          width="7"
+          height="3.5"
+          rx="0"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinejoin="miter"
+        />
+      </svg>
+    );
+  }
+
   if (type === "suv") {
     return (
       <svg {...commonProps}>
@@ -723,38 +782,19 @@ function SelectField({
               className="max-h-[min(278px,42dvh)] overflow-y-auto overscroll-contain p-2 sm:max-h-[min(420px,58vh)] sm:p-2.5"
               role="listbox"
             >
-              <button
-                type="button"
-                role="option"
-                aria-selected={!value}
-                onClick={() => selectOption("")}
-                className={[
-                  "mb-1.5 flex min-h-9 w-full items-center justify-between rounded-[0.75rem] px-3 py-1.5 text-left text-[13px] font-black transition sm:mb-2 sm:min-h-10 sm:rounded-[0.8rem] sm:py-2 sm:text-[14px]",
-                  !value
-                    ? "bg-red-500 text-white shadow-[0_8px_24px_rgba(239,68,68,0.18)]"
-                    : "text-white/72 hover:bg-white/[0.06] hover:text-white",
-                ].join(" ")}
-              >
-                <span>{emptyLabel}</span>
-                {!value ? (
-                  <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true">
-                    <path d="M1.5 6.2L5.2 10L13.5 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                ) : null}
-              </button>
-
-              <div className="grid grid-cols-3 gap-x-1 gap-y-1 border-t border-white/8 pt-2 sm:gap-x-2 sm:gap-y-2 sm:pt-3 xl:grid-cols-4">
-                {options.filter((option) => option.value).map((option) => {
+              <div className="grid grid-cols-3 gap-x-1 gap-y-1 sm:gap-x-2 sm:gap-y-2 xl:grid-cols-4">
+                {options.map((option) => {
                   const active = option.value === value;
+                  const optionLabel = option.value ? option.label : emptyLabel;
 
                   return (
                     <button
-                      key={`${option.value}_${option.label}`}
+                      key={`${option.value || "any"}_${option.label}`}
                       type="button"
                       role="option"
                       aria-selected={active}
                       onClick={() => selectOption(option.value)}
-                      className="group flex min-h-[62px] flex-col items-center justify-center gap-1 px-0.5 py-1.5 text-center sm:min-h-[72px] sm:gap-1.5 sm:px-1 sm:py-2"
+                      className="group flex min-h-[62px] flex-col items-center justify-center gap-1 rounded-[0.8rem] px-0.5 py-1.5 text-center transition hover:bg-white/[0.045] sm:min-h-[72px] sm:gap-1.5 sm:px-1 sm:py-2"
                     >
                       <span
                         className={[
@@ -764,10 +804,10 @@ function SelectField({
                             : "text-white group-hover:text-white",
                         ].join(" ")}
                       >
-                        <BodyTypeIcon type={option.value} />
+                        <BodyTypeIcon type={option.value || "any"} />
                       </span>
                       <span className="max-w-full truncate text-[10px] font-black leading-tight text-white sm:text-[11px]">
-                        {option.label}
+                        {optionLabel}
                       </span>
                     </button>
                   );
@@ -1757,6 +1797,16 @@ export default function HomePage() {
   const [bodyType, setBodyType] = useState("");
   const [selectedOffer, setSelectedOffer] = useState<CatalogOffer | null>(null);
 
+  useEffect(() => {
+    const attribution = captureAttributionFromBrowser();
+
+    if (attribution.clickId) {
+      void trackAttributionEvent("visit", attribution, {
+        landingPath: window.location.pathname,
+      });
+    }
+  }, []);
+
   const availableModelOptions = useMemo(
     () =>
       modelOptions.filter(
@@ -1783,7 +1833,7 @@ export default function HomePage() {
     [budgetNumber, brand, model, yearFrom, country, bodyType],
   );
 
-  const foundLabel = `Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;
+  const foundLabel = `🚗 Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;
 
   function handleBudgetChange(value: string) {
     const digits = value.replace(/\D/g, "");
@@ -1839,6 +1889,8 @@ export default function HomePage() {
     if (finalYear) params.set("yearFrom", String(finalYear));
     if (finalCountry) params.set("market", finalCountry);
     if (finalBody) params.set("body", finalBody);
+
+    appendAttributionToSearchParams(params);
 
     return `/results?${params.toString()}`;
   }
@@ -1921,7 +1973,7 @@ export default function HomePage() {
             value={bodyType}
             onChange={setBodyType}
             options={bodyOptions}
-            emptyLabel="Любой кузов"
+            emptyLabel="Любое авто"
             bodyIcons
           />
         </div>

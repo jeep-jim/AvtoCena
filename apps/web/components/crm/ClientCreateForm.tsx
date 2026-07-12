@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function ClientCreateForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -43,6 +45,7 @@ export function ClientCreateForm() {
 
       setSent(true);
       setForm({ fio: "", phone: "", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
+      router.refresh();
     } catch {
       setError("Не получилось добавить клиента. Проверьте авторизацию и dev-сервер.");
     } finally {

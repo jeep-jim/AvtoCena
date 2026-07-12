@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { appendAttributionToSearchParams } from "@/lib/attribution";
 
 function onlyDigits(value: string) {
   return value.replace(/\D/g, "");
@@ -31,8 +32,7 @@ export function HeroForm() {
     if (market !== "any") params.set("market", market);
     if (body !== "any") params.set("body", body);
 
-    const ref = new URLSearchParams(window.location.search).get("ref");
-    if (ref) params.set("ref", ref);
+    appendAttributionToSearchParams(params);
 
     window.location.href = `/results?${params.toString()}`;
   }

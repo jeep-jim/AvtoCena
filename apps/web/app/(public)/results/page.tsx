@@ -116,7 +116,29 @@ export default async function ResultsPage({
   const input = getSearchInputFromParams(safeParams(params));
   const results = getAvtocenaResults(input);
   const budget = input.budgetRub;
-  const partnerRef = firstParam(params.ref);
+  const attribution = {
+    partnerRef: firstParam(params.ref) || "",
+    externalClickId: firstParam(params.click_id) || "",
+    sub1: firstParam(params.sub1) || firstParam(params.subid) || "",
+    sub2: firstParam(params.sub2) || "",
+    sub3: firstParam(params.sub3) || "",
+    sub4: firstParam(params.sub4) || "",
+    sub5: firstParam(params.sub5) || "",
+    utmSource: firstParam(params.utm_source) || "",
+    utmMedium: firstParam(params.utm_medium) || "",
+    utmCampaign: firstParam(params.utm_campaign) || "",
+    utmContent: firstParam(params.utm_content) || "",
+    utmTerm: firstParam(params.utm_term) || "",
+  };
+
+  const searchRequest = {
+    budgetRub: input.budgetRub,
+    brand: input.brand,
+    model: input.model,
+    yearFrom: input.yearFrom,
+    market: input.market,
+    body: input.body,
+  };
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 pb-24 md:px-8 md:py-6">
@@ -244,7 +266,8 @@ export default async function ResultsPage({
                           <LeadForm
                             car={car}
                             budgetRub={budget}
-                            partnerRef={partnerRef}
+                            attribution={attribution}
+                            searchRequest={searchRequest}
                           />
                         </div>
                       </div>

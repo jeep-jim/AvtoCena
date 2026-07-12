@@ -14,6 +14,10 @@ export function CrmShell({ title, subtitle, children }: { title: string; subtitl
     ["/crm/settings", "Настройки"]
   ];
 
+  const activeHref = title === "Панель управления"
+    ? "/crm"
+    : links.find(([, label]) => label === title)?.[0];
+
   return (
     <main className="min-h-screen px-4 py-5 md:px-8 md:py-6">
       <div className="mx-auto w-full max-w-[1500px]">
@@ -37,11 +41,24 @@ export function CrmShell({ title, subtitle, children }: { title: string; subtitl
         </header>
 
         <nav className="mt-5 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {links.map(([href, label]) => (
-            <a key={href} href={href} className="shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 hover:bg-white/15">
-              {label}
-            </a>
-          ))}
+          {links.map(([href, label]) => {
+            const isActive = href === activeHref;
+
+            return (
+              <a
+                key={href}
+                href={href}
+                aria-current={isActive ? "page" : undefined}
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                  isActive
+                    ? "bg-gradient-to-r from-red-500 to-red-700 text-white shadow-[0_8px_24px_rgba(239,68,68,0.28)]"
+                    : "bg-white/10 text-white/70 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                {label}
+              </a>
+            );
+          })}
         </nav>
 
         <section className="mt-7">

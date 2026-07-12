@@ -1,25 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import type { AvtocenaCase } from "@/lib/avtocena";
+import {
+  captureAttributionFromBrowser,
+  trackAttributionEvent,
+  type AttributionData,
+} from "@/lib/attribution";
 
 type ResultCar = AvtocenaCase & {
   budgetDeltaRub?: number;
   isInBudget?: boolean;
 };
 
+type SearchRequest = {
+  budgetRub?: number;
+  brand?: string;
+  model?: string;
+  yearFrom?: number;
+  market?: string;
+  body?: string;
+};
+
 type LeadFormProps = {
   car: ResultCar;
   budgetRub?: number;
-  partnerRef?: string;
+  attribution?: Partial<AttributionData>;
+  searchRequest?: SearchRequest;
 };
 
 function money(value: number) {
   return new Intl.NumberFormat("ru-RU").format(Math.round(value));
 }
 
-export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
+export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFormProps) {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,9 +43,33 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    telegram: "",
+    city: "",
     comment: "",
   });
+
+  const calculationKey = useMemo(
+    () =>
+      [
+        searchRequest?.budgetRub || budgetRub || "",
+        searchRequest?.brand || "",
+        searchRequest?.model || "",
+        searchRequest?.yearFrom || "",
+        searchRequest?.market || "",
+        searchRequest?.body || "",
+      ].join("|"),
+    [budgetRub, searchRequest],
+  );
+
+  useEffect(() => {
+    const currentAttribution = captureAttributionFromBrowser(attribution);
+
+    if (currentAttribution.clickId) {
+      void trackAttributionEvent("calculation_completed", currentAttribution, {
+        calculationKey,
+        search: searchRequest || { budgetRub },
+      });
+    }
+  }, [attribution, budgetRub, calculationKey, searchRequest]);
 
   useEffect(() => {
     if (!open) return;
@@ -54,30 +93,24 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function getPartnerRef() {
-    if (partnerRef) return partnerRef;
-
-    try {
-      const fromUrl = new URL(window.location.href).searchParams.get("ref");
-      const fromStorage = window.localStorage.getItem("avtocena_ref");
-      return fromUrl || fromStorage || "";
-    } catch {
-      return "";
-    }
-  }
-
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
 
-    if (!form.phone.trim() && !form.telegram.trim()) {
-      setError("Укажите телефон или Telegram, чтобы менеджер смог связаться.");
+    if (!form.phone.trim()) {
+      setError("Укажите телефон, чтобы менеджер смог связаться.");
+      return;
+    }
+
+    if (!form.city.trim()) {
+      setError("Укажите город, чтобы мы рассчитали доставку автомобиля.");
       return;
     }
 
     setLoading(true);
 
     try {
+      const currentAttribution = captureAttributionFromBrowser(attribution);
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
@@ -86,17 +119,20 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
         body: JSON.stringify({
           name: form.name,
           phone: form.phone,
-          telegram: form.telegram,
+          city: form.city,
           comment: form.comment,
           carId: car.id,
           car: car.title,
+          brand: car.brand,
+          model: car.model,
           market: car.market,
           marketName: car.marketName,
           year: car.year,
           budgetRub,
           totalRub: car.totalRub,
-          partnerRef: getPartnerRef(),
           source: "results",
+          attribution: currentAttribution,
+          searchRequest: searchRequest || { budgetRub },
         }),
       });
 
@@ -182,9 +218,10 @@ export function LeadForm({ car, budgetRub, partnerRef }: LeadFormProps) {
                         className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
                       <input
-                        value={form.telegram}
-                        onChange={(event) => update("telegram", event.target.value)}
-                        placeholder="Telegram"
+                        value={form.city}
+                        onChange={(event) => update("city", event.target.value)}
+                        placeholder="Город"
+                        autoComplete="address-level2"
                         className="soft-input w-full rounded-2xl px-4 py-3.5 text-sm font-bold"
                       />
                       <textarea

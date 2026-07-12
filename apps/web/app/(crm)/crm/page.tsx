@@ -1,5 +1,5 @@
 import { CrmShell } from "@/components/crm/CrmShell";
-import { readDataJson } from "@/lib/data";
+import { readChunkedDataJson, readDataJson } from "@/lib/data";
 import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
 import { money } from "@/lib/avtocena";
 
@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 
 export default function CrmPage() {
   const user = getCurrentUser();
-  const leads = readDataJson<any[]>("leads/leads.json", []);
-  const clients = readDataJson<any[]>("clients/clients.json", []);
+  const leads = readChunkedDataJson<any>("leads/leads.json", []);
+  const clients = readChunkedDataJson<any>("clients/clients.json", []);
   const partners = readDataJson<any[]>("partners/partners.json", []);
   const deals = readDataJson<any[]>("deals/deals.json", []);
   const managers = getAuthUsers().filter((item) => isCrmRole(item.role));

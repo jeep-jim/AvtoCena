@@ -26,7 +26,12 @@ http://localhost:3000
 - кабинет партнёра `/partner`;
 - лендос партнёрки `/partner/landing`;
 - страница CPA API `/partner/api` и JSON `/api/cpa`;
-- пример расчёта Audi A3 Sportback из Китая в `data/examples/avtocena-cases.json`.
+- пример расчёта Audi A3 Sportback из Китая в `data/examples/avtocena-cases.json`;
+- сквозная атрибуция `ref / click_id / sub1–sub5 / UTM`;
+- создание заявки из выдачи и появление её в CRM;
+- назначение менеджера, статусы и внутренние комментарии;
+- обезличенное отображение заявок в кабинете партнёра;
+- автоматические JSON-чанки по 500 записей.
 
 ## Основные папки
 

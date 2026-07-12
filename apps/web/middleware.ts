@@ -141,6 +141,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname === "/api/cpa" && request.method === "POST") {
+    return NextResponse.next();
+  }
+
   const session = await getSession(request);
 
   if (pathname === "/partner/api" || pathname.startsWith("/partner/api/")) {

@@ -1,13 +1,13 @@
 import { CrmShell } from "@/components/crm/CrmShell";
 import { getAuthUsers, isCrmRole } from "@/lib/auth";
-import { readDataJson } from "@/lib/data";
+import { readChunkedDataJson, readDataJson } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export default function CrmManagersPage() {
   const managers = getAuthUsers().filter((user) => isCrmRole(user.role));
-  const leads = readDataJson<any[]>("leads/leads.json", []);
-  const clients = readDataJson<any[]>("clients/clients.json", []);
+  const leads = readChunkedDataJson<any>("leads/leads.json", []);
+  const clients = readChunkedDataJson<any>("clients/clients.json", []);
 
   return (
     <CrmShell title="Менеджеры" subtitle="Список сотрудников, роли, заявки и клиенты по каждому менеджеру.">
