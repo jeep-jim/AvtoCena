@@ -144,3 +144,79 @@ test("effectiveFrom is consistent across market, site, direct payout and public 
   assert.equal(settings.getActiveSiteBusinessVersion(after).displayPartnerPayoutRub, 16000);
   assert.equal(settings.getActiveMarketVersion("uae", after).topAvtoCommissionRub, 95000);
 });
+
+test("partner accruals are created only for active direct partners and are deduped", async () => {
+  const { settings } = await loadModules();
+  const first = settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
+  const duplicate = settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(first.created, true);
+  assert.equal(first.accrual.partnerCode, "demo");
+  assert.equal(first.accrual.payoutAmountRub, 10000);
+  assert.equal(duplicate.created, false);
+  assert.equal(duplicate.reason, "duplicate");
+});
+
+test("CPA and unknown partner refs do not create direct partner accruals", async () => {
+  const { settings } = await loadModules();
+  settings.upsertCpaNetworkDraft({
+    id: "network_test",
+    networkId: "network_test",
+    name: "CPA Test",
+    enabled: true,
+    partnerRef: "cpa_ref",
+    offerId: "offer_1",
+    goal: "signed_contract",
+    payoutType: "fixed",
+    payoutAmount: 7000,
+    postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} },
+  }, { id: "owner", displayName: "Owner", role: "owner" }, "test network");
+  const cpa = settings.createDirectPartnerAccrualForLead({ leadId: "lead_cpa", partnerRef: "cpa_ref", createdAt: "2026-07-12T00:00:00.000Z" });
+  const unknown = settings.createDirectPartnerAccrualForLead({ leadId: "lead_unknown", partnerRef: "unknown_ref", createdAt: "2026-07-12T00:00:00.000Z" });
+  assert.equal(cpa.created, false);
+  assert.equal(cpa.reason, "cpa_network_ref");
+  assert.equal(unknown.created, false);
+  assert.equal(unknown.reason, "partner_ref_unknown_or_inactive");
+});
+
+test("CPA Gateway uses payoutAmount as primary postback payout", async () => {
+  const { settings } = await loadModules();
+  const data = await import(`../apps/web/lib/data.ts?case=${Date.now()}${Math.random()}`);
+  const gateway = await import(`../apps/web/lib/cpa-gateway.ts?case=${Date.now()}${Math.random()}`);
+  settings.upsertCpaNetworkDraft({
+    id: "network_postback",
+    networkId: "network_postback",
+    name: "CPA Postback",
+    enabled: true,
+    partnerRef: "cpa_postback",
+    offerId: "offer_1",
+    goal: "signed_contract",
+    payoutType: "fixed",
+    payoutAmount: 7777,
+    postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} },
+  }, { id: "owner", displayName: "Owner", role: "owner" }, "postback");
+  data.appendChunkedDataJson("cpa/events.json", { id: "cpa_test_event", direction: "outbound", partnerRef: "cpa_postback", externalClickId: "click-1", eventType: "contract_signed", status: "contract_signed", deliveryStatus: "pending" });
+  let calledUrl = "";
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (url: any) => {
+    calledUrl = String(url);
+    return new Response("ok", { status: 200 });
+  }) as typeof fetch;
+  try {
+    const result = await gateway.deliverCpaEventById("cpa_test_event");
+    assert.equal(result.ok, true);
+    assert.match(calledUrl, /payout=7777/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("CRM effective market version uses the same effectiveFrom selection as calculations", async () => {
+  const { settings, engine } = await loadModules();
+  settings.createMarketVersion("japan", { active: true, effectiveFrom: "2099-01-01T00:00:00.000Z", currency: "JPY", securityDepositRub: 31000, topAvtoCommissionRub: 48000 }, { id: "owner", displayName: "Owner", role: "owner" }, "scheduled");
+  const beforeCrm = settings.getMarketsWithEffectiveVersions(new Date("2098-01-01T00:00:00.000Z")).find((market: any) => market.id === "japan").effectiveVersion;
+  const afterCrm = settings.getMarketsWithEffectiveVersions(new Date("2100-01-01T00:00:00.000Z")).find((market: any) => market.id === "japan").effectiveVersion;
+  const calc = engine.calculateAvtocenaFromBusinessConfig({ marketId: "japan", marketConfig: afterCrm, carPriceRub: 1000000 });
+  assert.equal(beforeCrm.topAvtoCommissionRub, 39000);
+  assert.equal(afterCrm.topAvtoCommissionRub, 48000);
+  assert.equal(calc.configVersion, afterCrm.id);
+});

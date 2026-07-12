@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { appendChunkedDataJson, readDataJson, writeDataJson } from "./data";
+import { appendChunkedDataJson, readChunkedDataJson, readDataJson, writeDataJson } from "./data";
 import { canEditBusinessSettings, cleanText, isMarketId, nullableNumber, validateMarketVersion } from "./settings-validation";
 
 export type SettingsUser = { id: string; displayName: string; role: string };
@@ -40,6 +40,13 @@ export function getActiveMarketVersion(marketId: string, asOf = new Date()) {
   const market = getMarketSettings(marketId);
   if (!market) return null;
   return chooseEffectiveVersion(market.versions || [], asOf) || market.versions?.find((version: any) => version.id === market.activeVersionId) || null;
+}
+
+export function getMarketsWithEffectiveVersions(asOf = new Date()) {
+  return getMarketsSettings().map((market) => ({
+    ...market,
+    effectiveVersion: getActiveMarketVersion(market.id, asOf),
+  }));
 }
 
 export function getBusinessSettingsSnapshot(marketId: string) {
@@ -200,6 +207,37 @@ export function getEffectivePartnerPayout(partnerCode: string, asOf = new Date()
   }
   const base = getActiveDirectPartnerPayout(asOf);
   return { payoutAmountRub: Number(base?.defaultSignedContractPayoutRub || 0), payoutVersionId: base?.id || "", payoutEffectiveFrom: base?.effectiveFrom || "", partnerCode, event: base?.event || "signed_contract", source: "default" };
+}
+
+export function createDirectPartnerAccrualForLead(input: { leadId: string; clientId?: string; partnerRef?: string; createdAt?: string }) {
+  const partnerRef = cleanText(input.partnerRef, 160);
+  const createdAt = input.createdAt || nowIso();
+  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const directPartner = partners.find((partner) => partner.code === partnerRef && partner.partnerType !== "cpa-network" && partner.status === "active");
+  const cpaNetwork = getCpaNetworks().find((network) => network.partnerRef === partnerRef || network.networkId === partnerRef);
+
+  if (!partnerRef) return { created: false, reason: "partner_ref_missing" };
+  if (cpaNetwork) return { created: false, reason: "cpa_network_ref" };
+  if (!directPartner) return { created: false, reason: "partner_ref_unknown_or_inactive" };
+
+  const existingAccrual = readChunkedDataJson<any>("partners/accruals.json", []).find((item) => item.leadId === input.leadId && item.event === "signed_contract");
+  if (existingAccrual) return { created: false, reason: "duplicate", accrual: existingAccrual };
+
+  const payout = getEffectivePartnerPayout(partnerRef, new Date(createdAt));
+  const accrual = {
+    id: makeId("accrual"),
+    leadId: input.leadId,
+    clientId: input.clientId || "",
+    payoutAmountRub: payout.payoutAmountRub,
+    payoutVersionId: payout.payoutVersionId,
+    payoutEffectiveFrom: payout.payoutEffectiveFrom,
+    partnerCode: partnerRef,
+    event: payout.event,
+    createdAt,
+    status: "accrued"
+  };
+  appendChunkedDataJson("partners/accruals.json", accrual);
+  return { created: true, reason: "created", accrual };
 }
 
 export function getCpaNetworks() { return readDataJson<any[]>("cpa/networks.json", []); }

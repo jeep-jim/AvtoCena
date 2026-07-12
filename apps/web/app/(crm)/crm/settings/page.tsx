@@ -7,7 +7,7 @@ import {
   getActiveSiteBusinessVersion,
   getContractTemplatesSettings,
   getCpaNetworks,
-  getMarketsSettings,
+  getMarketsWithEffectiveVersions,
   getSettingsChangeLog,
 } from "@/lib/business-settings";
 import { canEditBusinessSettings } from "@/lib/settings-validation";
@@ -48,7 +48,7 @@ export default function CrmSettingsPage() {
       ) : null}
 
       <BusinessSettingsPanel
-        markets={getMarketsSettings()}
+        markets={getMarketsWithEffectiveVersions()}
         siteSettings={getActiveSiteBusinessVersion()}
         partnerProgram={getActiveDirectPartnerPayout()}
         cpaNetworks={getCpaNetworks()}

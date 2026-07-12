@@ -8,7 +8,7 @@ import {
 } from "@/lib/data";
 import { isLeadStatus } from "@/lib/crm";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
-import { getEffectivePartnerPayout } from "@/lib/business-settings";
+import { createDirectPartnerAccrualForLead } from "@/lib/business-settings";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -158,21 +158,24 @@ export async function PATCH(
   if (statusChanged) {
     const hasExternalAttribution = Boolean(updatedLead.externalClickId || updatedLead.partnerRef);
 
-    if (nextStatus === "contract_signed" && updatedLead.partnerRef) {
-      const existingAccrual = readChunkedDataJson<any>("partners/accruals.json", []).find((item) => item.leadId === leadId && item.event === "signed_contract");
-      if (!existingAccrual) {
-        const payout = getEffectivePartnerPayout(updatedLead.partnerRef);
-        appendChunkedDataJson("partners/accruals.json", {
-          id: makeId("accrual"),
+    if (nextStatus === "contract_signed") {
+      const accrualResult = createDirectPartnerAccrualForLead({
+        leadId,
+        clientId: updatedLead.clientId,
+        partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
+        createdAt: now,
+      });
+      if (!accrualResult.created && accrualResult.reason !== "partner_ref_missing" && accrualResult.reason !== "duplicate") {
+        appendChunkedDataJson("activity/feed.json", {
+          id: makeId("event"),
+          createdAt: now,
+          type: "partner_accrual_skipped",
+          title: "Партнёрское начисление не создано",
           leadId,
           clientId: updatedLead.clientId,
-          payoutAmountRub: payout.payoutAmountRub,
-          payoutVersionId: payout.payoutVersionId,
-          payoutEffectiveFrom: payout.payoutEffectiveFrom,
-          partnerCode: updatedLead.partnerRef,
-          event: payout.event,
-          createdAt: now,
-          status: "accrued"
+          partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
+          status: accrualResult.reason,
+          text: accrualResult.reason
         });
       }
     }

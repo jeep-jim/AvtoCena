@@ -35,7 +35,7 @@ export function BusinessSettingsPanel({ markets, siteSettings, partnerProgram, c
         </div>
         <div className="mt-5 grid gap-4">
           {markets.map((market: any) => {
-            const version = market.versions?.find((item: any) => item.id === market.activeVersionId) || market.versions?.[0] || {};
+            const version = market.effectiveVersion || market.versions?.find((item: any) => item.id === market.activeVersionId) || market.versions?.[0] || {};
             return (
               <details key={market.id} className="rounded-2xl border border-white/10 bg-black/20 p-4" open={market.id === "japan"}>
                 <summary className="cursor-pointer list-none font-black text-white">

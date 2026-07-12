@@ -9,6 +9,7 @@ type CpaNetworkConfig = {
   postbackUrl?: string;
   postbackConfig?: { urlTemplate?: string; method?: "GET" | "POST"; headers?: Record<string, string> };
   headers?: Record<string, string>;
+  payoutAmount?: number | null;
   payoutRub?: number;
   timeoutMs?: number;
   statusMap?: Record<string, string>;
@@ -69,7 +70,7 @@ function templateValues(event: CpaEvent, config: CpaNetworkConfig) {
     lead_id: clean(event.leadId, 300),
     event: clean(event.eventType, 100),
     status: eventStatus(event, config),
-    payout: String(Number(config.payoutRub || 0)),
+    payout: String(Number(config.payoutAmount ?? config.payoutRub ?? 0)),
     rejection_reason: clean(event.rejectionReason, 1000),
     sub1: clean(event.sub1, 500),
     sub2: clean(event.sub2, 500),
