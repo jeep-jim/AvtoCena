@@ -29,11 +29,18 @@ export function LeadActions({
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const requiresReason = status === "rejected" || status === "duplicate";
 
   async function save() {
-    setLoading(true);
     setSaved(false);
     setError("");
+
+    if (requiresReason && !note.trim()) {
+      setError(status === "rejected" ? "Укажите причину отказа." : "Укажите причину дубля.");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await fetch(`/api/crm/leads/${encodeURIComponent(leadId)}`, {
@@ -46,13 +53,23 @@ export function LeadActions({
         }),
       });
 
-      if (!response.ok) throw new Error("lead_update_error");
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        if (result?.error === "reason_required") {
+          throw new Error("reason_required");
+        }
+        throw new Error("lead_update_error");
+      }
 
       setSaved(true);
       setNote("");
       router.refresh();
-    } catch {
-      setError("Не получилось сохранить изменения.");
+    } catch (saveError) {
+      setError(
+        saveError instanceof Error && saveError.message === "reason_required"
+          ? "Для отказа или дубля причина обязательна."
+          : "Не получилось сохранить изменения."
+      );
     } finally {
       setLoading(false);
     }
@@ -90,7 +107,7 @@ export function LeadActions({
       <input
         value={note}
         onChange={(event) => setNote(event.target.value)}
-        placeholder="Внутренний комментарий"
+        placeholder={requiresReason ? "Причина обязательна" : "Внутренний комментарий"}
         className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
       />
 

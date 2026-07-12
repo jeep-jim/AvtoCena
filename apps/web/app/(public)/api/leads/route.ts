@@ -1,6 +1,9 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { appendChunkedDataJson, readChunkedDataJson } from "@/lib/data";
+import {
+  appendChunkedDataJson,
+  readChunkedDataJson
+} from "@/lib/data";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -19,41 +22,28 @@ function makeId(prefix: string) {
   }
 }
 
-function cleanAttribution(value: unknown) {
-  const source = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
+function normalizeAttribution(value: unknown, body: Record<string, unknown>) {
+  const source = value && typeof value === "object" ? value as Record<string, unknown> : {};
 
   return {
-    clickId: clean(source.clickId, 120),
-    externalClickId: clean(source.externalClickId, 255),
-    partnerRef: clean(source.partnerRef, 120),
-    sub1: clean(source.sub1, 255),
-    sub2: clean(source.sub2, 255),
-    sub3: clean(source.sub3, 255),
-    sub4: clean(source.sub4, 255),
-    sub5: clean(source.sub5, 255),
-    utmSource: clean(source.utmSource, 255),
-    utmMedium: clean(source.utmMedium, 255),
-    utmCampaign: clean(source.utmCampaign, 255),
-    utmContent: clean(source.utmContent, 255),
-    utmTerm: clean(source.utmTerm, 255),
-    firstSeenAt: clean(source.firstSeenAt, 64),
-    lastSeenAt: clean(source.lastSeenAt, 64),
-    firstLandingUrl: clean(source.firstLandingUrl, 1000),
-    lastLandingUrl: clean(source.lastLandingUrl, 1000),
-    referrer: clean(source.referrer, 1000)
-  };
-}
-
-function cleanSearchRequest(value: unknown) {
-  const source = value && typeof value === "object" ? (value as Record<string, unknown>) : {};
-
-  return {
-    budgetRub: numberOrNull(source.budgetRub),
-    brand: clean(source.brand, 120),
-    model: clean(source.model, 120),
-    yearFrom: numberOrNull(source.yearFrom),
-    market: clean(source.market, 80),
-    body: clean(source.body, 80)
+    clickId: clean(source.clickId || body.internalClickId, 160),
+    externalClickId: clean(source.externalClickId || body.clickId, 300),
+    partnerRef: clean(source.partnerRef || body.partnerRef, 160),
+    sub1: clean(source.sub1 || body.sub1),
+    sub2: clean(source.sub2 || body.sub2),
+    sub3: clean(source.sub3 || body.sub3),
+    sub4: clean(source.sub4 || body.sub4),
+    sub5: clean(source.sub5 || body.sub5),
+    utmSource: clean(source.utmSource || body.utmSource),
+    utmMedium: clean(source.utmMedium || body.utmMedium),
+    utmCampaign: clean(source.utmCampaign || body.utmCampaign),
+    utmContent: clean(source.utmContent || body.utmContent),
+    utmTerm: clean(source.utmTerm || body.utmTerm),
+    firstSeenAt: clean(source.firstSeenAt, 80),
+    lastSeenAt: clean(source.lastSeenAt, 80),
+    firstLandingUrl: clean(source.firstLandingUrl, 1500),
+    lastLandingUrl: clean(source.lastLandingUrl, 1500),
+    referrer: clean(source.referrer, 1500)
   };
 }
 
@@ -63,23 +53,17 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => ({}));
+  const body = await request.json().catch(() => ({})) as Record<string, unknown>;
 
   const phone = clean(body.phone, 80);
-  const city = clean(body.city, 160);
-  const name = clean(body.name, 255);
+  const telegram = clean(body.telegram, 160);
+  const name = clean(body.name, 300);
+  const city = clean(body.city, 300);
   const comment = clean(body.comment, 2000);
 
-  if (!phone) {
+  if (!phone && !telegram) {
     return NextResponse.json(
-      { ok: false, error: "phone_required" },
-      { status: 400 }
-    );
-  }
-
-  if (!city) {
-    return NextResponse.json(
-      { ok: false, error: "city_required" },
+      { ok: false, error: "phone_or_telegram_required" },
       { status: 400 }
     );
   }
@@ -87,9 +71,8 @@ export async function POST(request: Request) {
   const createdAt = new Date().toISOString();
   const clientId = makeId("client");
   const leadId = makeId("lead");
-  const attribution = cleanAttribution(body.attribution);
-  const searchRequest = cleanSearchRequest(body.searchRequest);
-  const source = clean(body.source, 120) || "site";
+  const attribution = normalizeAttribution(body.attribution, body);
+  const source = clean(body.source, 160) || "site";
 
   const client = appendChunkedDataJson("clients/clients.json", {
     id: clientId,
@@ -97,20 +80,8 @@ export async function POST(request: Request) {
     updatedAt: createdAt,
     fio: name,
     phone,
-    telegram: "",
-    email: "",
+    telegram,
     city,
-    birthDate: "",
-    passport: {
-      series: "",
-      number: "",
-      issuedBy: "",
-      issuedAt: "",
-      departmentCode: ""
-    },
-    registrationAddress: "",
-    residenceAddress: "",
-    inn: "",
     comment,
     source,
     partnerRef: attribution.partnerRef,
@@ -129,33 +100,27 @@ export async function POST(request: Request) {
         status: "new",
         changedAt: createdAt,
         changedByUserId: null,
-        changedByName: "Система"
+        changedByName: "Сайт",
+        note: "Заявка создана"
       }
     ],
-
     clientId,
     name,
     phone,
-    telegram: "",
+    telegram,
     city,
     comment,
-
-    carId: clean(body.carId, 255),
-    car: clean(body.car, 255),
-    brand: clean(body.brand, 120),
-    model: clean(body.model, 120),
-    market: clean(body.market, 80),
-    marketName: clean(body.marketName, 120),
+    carId: clean(body.carId, 200),
+    car: clean(body.car, 500),
+    brand: clean(body.brand, 200),
+    model: clean(body.model, 200),
+    market: clean(body.market, 120),
+    marketName: clean(body.marketName, 200),
     year: numberOrNull(body.year),
-
-    budgetRub: numberOrNull(body.budgetRub) || searchRequest.budgetRub,
+    budgetRub: numberOrNull(body.budgetRub),
     totalRub: numberOrNull(body.totalRub),
-    searchRequest,
-
     source,
-    partnerRef: attribution.partnerRef,
-    clickId: attribution.clickId,
-    externalClickId: attribution.externalClickId,
+    ...attribution,
     attribution,
     createdByManagerId: null,
     assignedManagerId: null
@@ -170,37 +135,22 @@ export async function POST(request: Request) {
     leadId: lead.id,
     source: lead.source,
     partnerRef: lead.partnerRef,
-    clickId: lead.clickId,
-    text: lead.car || lead.comment || lead.name || lead.phone || lead.city
+    text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram
   });
 
-  if (attribution.clickId || attribution.partnerRef) {
-    appendChunkedDataJson("cpa/events.json", {
-      id: makeId("cpa"),
-      createdAt,
-      eventType: "lead_created",
-      clickId: attribution.clickId,
-      externalClickId: attribution.externalClickId,
-      partnerRef: attribution.partnerRef,
-      leadId,
-      clientId,
-      sub1: attribution.sub1,
-      sub2: attribution.sub2,
-      sub3: attribution.sub3,
-      sub4: attribution.sub4,
-      sub5: attribution.sub5,
-      utmSource: attribution.utmSource,
-      utmMedium: attribution.utmMedium,
-      utmCampaign: attribution.utmCampaign
-    });
-  }
-
-  return NextResponse.json({
-    ok: true,
-    lead: {
-      id: lead.id,
-      status: lead.status,
-      createdAt: lead.createdAt
-    }
+  appendChunkedDataJson("cpa/events.json", {
+    id: makeId("cpa"),
+    createdAt,
+    direction: "outbound",
+    eventType: "lead_created",
+    status: "new",
+    deliveryStatus: attribution.externalClickId || attribution.partnerRef ? "pending" : "not_required",
+    attempts: 0,
+    nextAttemptAt: null,
+    leadId,
+    clientId,
+    ...attribution
   });
+
+  return NextResponse.json({ ok: true, lead });
 }

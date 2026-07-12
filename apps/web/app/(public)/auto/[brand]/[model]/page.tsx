@@ -1,6 +1,6 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { getAvtocenaCases, money } from "@/lib/avtocena";
-import { BrandMark } from "@/components/brand/BrandMark";
 
 export async function generateMetadata({ params }: { params: Promise<{ brand: string; model: string }> }): Promise<Metadata> {
   const { brand, model } = await params;
@@ -27,14 +27,8 @@ export default async function ModelSeoPage({ params }: { params: Promise<{ brand
 
   return (
     <main className="min-h-screen px-5 py-8 md:px-8">
-      <div className="mx-auto w-full max-w-[1500px]">
-        <a href="/" className="inline-flex items-center gap-2.5 text-sm font-black text-white/70 transition hover:text-white">
-          <BrandMark className="h-9 w-9 shrink-0" />
-          <span>
-            <span className="text-red-500">Авто</span><span className="text-white">Цена</span>
-            <span className="ml-2 text-white/45">← назад к подбору</span>
-          </span>
-        </a>
+      <div className="mx-auto max-w-5xl">
+        <Link href="/" className="text-sm font-black text-white/55">← АвтоЦена</Link>
         <section className="glass mt-6 rounded-[2rem] p-6 md:p-9">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-red-300">SEO страница</div>
           <h1 className="mt-3 text-4xl font-black tracking-[-0.04em] md:text-6xl">
@@ -50,7 +44,7 @@ export default async function ModelSeoPage({ params }: { params: Promise<{ brand
               <div className="rounded-3xl bg-white/7 p-5"><div className="text-sm font-bold text-white/45">АвтоЦена</div><div className="mt-2 text-2xl font-black">{money(item.totalRub)} ₽</div></div>
             </div>
           )}
-          <a href={`/results?brand=${brand}&model=${model}`} className="avto-button mt-8 inline-block rounded-2xl px-6 py-4 font-black">Узнать АвтоЦену</a>
+          <Link href={`/results?brand=${brand}&model=${model}`} className="avto-button mt-8 inline-block rounded-2xl px-6 py-4 font-black">Узнать АвтоЦену</Link>
         </section>
       </div>
     </main>

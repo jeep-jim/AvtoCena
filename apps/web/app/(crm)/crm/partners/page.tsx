@@ -6,7 +6,7 @@ export default function CrmPartnersPage() {
   const partners = readDataJson<any[]>("partners/partners.json", []);
 
   return (
-    <CrmShell title="Партнёры" subtitle="Арбитражники, вебмастера, представители и CPA-источники.">
+    <CrmShell activeHref="/crm/partners" title="Партнёры" subtitle="Арбитражники, вебмастера, представители и CPA-источники.">
       <div className="glass overflow-hidden rounded-[2rem]">
         <div className="grid grid-cols-5 gap-3 border-b border-white/10 p-4 text-xs font-black uppercase tracking-[0.14em] text-white/42">
           <div>Партнёр</div><div>Код</div><div>Переходы</div><div>Договоры</div><div>К выплате</div>

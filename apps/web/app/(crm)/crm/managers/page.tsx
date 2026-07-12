@@ -1,6 +1,6 @@
 import { CrmShell } from "@/components/crm/CrmShell";
 import { getAuthUsers, isCrmRole } from "@/lib/auth";
-import { readChunkedDataJson, readDataJson } from "@/lib/data";
+import { readChunkedDataJson } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export default function CrmManagersPage() {
   const clients = readChunkedDataJson<any>("clients/clients.json", []);
 
   return (
-    <CrmShell title="Менеджеры" subtitle="Список сотрудников, роли, заявки и клиенты по каждому менеджеру.">
+    <CrmShell activeHref="/crm/managers" title="Менеджеры" subtitle="Список сотрудников, роли, заявки и клиенты по каждому менеджеру.">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {managers.map((manager) => {
           const managerLeads = leads.filter((lead) => lead.assignedManagerId === manager.id || lead.createdByManagerId === manager.id);

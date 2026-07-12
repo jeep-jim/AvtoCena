@@ -122,6 +122,14 @@ function allowWithDocsCookie(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/api/cpa" && request.method === "POST") {
+    return NextResponse.next();
+  }
+
+  if (pathname === "/api/partners" && request.method === "POST") {
+    return NextResponse.next();
+  }
+
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/favicon") ||
@@ -138,10 +146,6 @@ export async function middleware(request: NextRequest) {
     pathname === "/results" ||
     pathname === "/partner/landing"
   ) {
-    return NextResponse.next();
-  }
-
-  if (pathname === "/api/cpa" && request.method === "POST") {
     return NextResponse.next();
   }
 

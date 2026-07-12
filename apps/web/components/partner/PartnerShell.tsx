@@ -1,6 +1,5 @@
-import { getCurrentUser, isAdminRole } from "@/lib/auth";
-import { PartnerMobileDrawer } from "@/components/partner/PartnerMobileDrawer";
-import { BrandMark } from "@/components/brand/BrandMark";
+import Link from "next/link";
+import { PartnerNavigation } from "@/components/partner/PartnerNavigation";
 
 export function PartnerShell({
   title,
@@ -11,17 +10,11 @@ export function PartnerShell({
   subtitle: string;
   children: React.ReactNode;
 }) {
-  const user = getCurrentUser();
-  const canSeeApi = isAdminRole(user?.role);
-
-  const cabinetHref = user ? "/partner" : "/login?next=/partner";
-
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 md:px-8 md:py-6">
-      <div className="mx-auto w-full max-w-[1500px] overflow-x-hidden">
+      <div className="mx-auto w-full max-w-7xl overflow-x-hidden">
         <header className="flex items-center justify-between gap-4">
-          <a href="/" className="flex min-w-0 items-center gap-2.5 md:gap-3">
-            <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
+          <Link href="/" className="flex min-w-0 items-center gap-3">
             <div className="min-w-0">
               <div className="text-[18px] font-black leading-none md:text-[22px]">
                 <span className="text-red-500">Авто</span>
@@ -32,32 +25,9 @@ export function PartnerShell({
                 реферальная система
               </div>
             </div>
-          </a>
+          </Link>
 
-          <nav className="hidden flex-wrap gap-2 md:flex">
-            <a className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/14" href="/partner/landing">
-              Партнёрам
-            </a>
-            <a className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/14" href={cabinetHref}>
-              Кабинет
-            </a>
-            {canSeeApi && (
-              <a className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/14" href="/partner/api">
-                CPA API
-              </a>
-            )}
-            {!user && (
-              <a className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/14" href="/login?next=/partner">
-                Вход
-              </a>
-            )}
-          </nav>
-
-          <PartnerMobileDrawer
-            cabinetHref={cabinetHref}
-            canSeeApi={canSeeApi}
-            showLogin={!user}
-          />
+          <PartnerNavigation />
         </header>
 
         <section className="mt-8">

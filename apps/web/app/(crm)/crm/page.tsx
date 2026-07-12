@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson, readDataJson } from "@/lib/data";
 import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
@@ -16,7 +17,7 @@ export default function CrmPage() {
   const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
 
   return (
-    <CrmShell title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
+    <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
       <div className="grid gap-4 md:grid-cols-4">
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Все лиды</div><div className="mt-2 text-4xl font-black">{leads.length}</div></div>
         <div className="glass rounded-3xl p-5"><div className="text-sm font-bold text-white/45">Мои заявки</div><div className="mt-2 text-4xl font-black">{myLeads.length}</div></div>
@@ -28,7 +29,7 @@ export default function CrmPage() {
         <div className="glass rounded-[2rem] p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl font-black">Общая лента</h2>
-            <a href="/crm/feed" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Открыть ленту</a>
+            <Link href="/crm/feed" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Открыть ленту</Link>
           </div>
 
           <div className="mt-5 space-y-3">
@@ -50,9 +51,9 @@ export default function CrmPage() {
           <div className="glass rounded-[2rem] p-6">
             <h2 className="text-2xl font-black">Быстрые действия</h2>
             <div className="mt-5 grid gap-3">
-              <a href="/crm/clients" className="avto-button rounded-2xl px-5 py-4 text-center font-black">Добавить клиента</a>
-              <a href="/crm/leads?view=my" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Мои заявки</a>
-              <a href="/crm/managers" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Менеджеры</a>
+              <Link href="/crm/clients" className="avto-button rounded-2xl px-5 py-4 text-center font-black">Добавить клиента</Link>
+              <Link href="/crm/leads?view=my" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Мои заявки</Link>
+              <Link href="/crm/managers" className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white/70">Менеджеры</Link>
             </div>
           </div>
 

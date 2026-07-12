@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BrandMark } from "@/components/brand/BrandMark";
 
 function DrawerArrowIcon() {
   return (
@@ -64,15 +63,12 @@ export function PartnerMobileDrawer({
 
       <aside className="ac-mobile-menu__panel" aria-label="Мобильное меню">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <BrandMark className="h-9 w-9 shrink-0" />
-            <div>
-              <div className="text-xl font-black leading-none">
-                <span className="text-red-500">Авто</span>
-                <span className="text-white">Цена</span>
-              </div>
-              <div className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/42">партнёрам</div>
+          <div>
+            <div className="text-xl font-black leading-none">
+              <span className="text-red-500">Авто</span>
+              <span className="text-white">Цена</span>
             </div>
+            <div className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/42">партнёрам</div>
           </div>
 
           <label htmlFor="partner-mobile-menu-toggle" className="ac-mobile-menu__close" aria-label="Закрыть меню">
@@ -124,7 +120,7 @@ export function PartnerMobileDrawer({
         </nav>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-medium leading-6 text-white/55">
-          CRM доступна только сотрудникам компании. Партнёрам — отдельный кабинет, CPA API — по отдельному доступу.
+          Для менеджеров TopAvto и партнёров. CRM и CPA API доступны только после входа.
         </div>
 
         <div className="mt-auto pt-8 text-xs font-bold leading-5 text-white/32">

@@ -1,6 +1,6 @@
 import { CrmShell } from "@/components/crm/CrmShell";
 import { ClientCreateForm } from "@/components/crm/ClientCreateForm";
-import { readChunkedDataJson, readDataJson } from "@/lib/data";
+import { readChunkedDataJson } from "@/lib/data";
 import { getAuthUsers } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -15,21 +15,21 @@ export default function CrmClientsPage() {
   const managers = getAuthUsers();
 
   return (
-    <CrmShell title="Клиенты" subtitle="Ручное добавление клиентов и карточки обращений.">
+    <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Ручное добавление клиентов и карточки обращений.">
       <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
         <ClientCreateForm />
 
         <div className="glass overflow-hidden rounded-[2rem]">
           <div className="border-b border-white/10 p-5">
             <h2 className="text-2xl font-black">Клиентская база</h2>
-            <p className="mt-1 text-sm font-bold text-white/45">ФИО, телефон, город, комментарий и назначенный менеджер.</p>
+            <p className="mt-1 text-sm font-bold text-white/45">ФИО, телефон, Telegram, комментарий и назначенный менеджер.</p>
           </div>
 
           {clients.map((client) => (
             <div key={client.id} className="grid gap-3 border-b border-white/7 p-5 last:border-0 md:grid-cols-[1fr_180px]">
               <div>
-                <div className="text-lg font-black">{client.fio || client.phone || client.city || client.telegram || "Клиент без имени"}</div>
-                <div className="mt-1 text-sm font-bold text-white/50">{[client.phone, client.city, client.telegram].filter(Boolean).join(" · ") || "Контакты не указаны"}</div>
+                <div className="text-lg font-black">{client.fio || client.phone || client.telegram || "Клиент без имени"}</div>
+                <div className="mt-1 text-sm font-bold text-white/50">{[client.phone, client.telegram, client.city].filter(Boolean).join(" · ") || "Контакты не указаны"}</div>
                 {client.comment && <div className="mt-3 rounded-2xl bg-white/7 px-4 py-3 text-sm font-medium leading-6 text-white/62">{client.comment}</div>}
               </div>
               <div className="text-sm font-bold text-white/50">

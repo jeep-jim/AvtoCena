@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export const JSON_CHUNK_LIMIT = 500;
+const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
 
 type ChunkDescriptor = {
   file: string;
@@ -32,27 +32,8 @@ export function getDataRoot() {
   return found ?? path.join(cwd, "data");
 }
 
-function absoluteDataPath(relativePath: string) {
-  return path.join(getDataRoot(), relativePath);
-}
-
-function writeJsonFile(filePath: string, value: unknown) {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
-
-  const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
-  fs.writeFileSync(temporaryPath, JSON.stringify(value, null, 2), "utf-8");
-
+function readJsonFile<T>(filePath: string, fallback: T): T {
   try {
-    fs.renameSync(temporaryPath, filePath);
-  } catch {
-    fs.rmSync(filePath, { force: true });
-    fs.renameSync(temporaryPath, filePath);
-  }
-}
-
-export function readDataJson<T>(relativePath: string, fallback: T): T {
-  try {
-    const filePath = absoluteDataPath(relativePath);
     if (!fs.existsSync(filePath)) return fallback;
     return JSON.parse(fs.readFileSync(filePath, "utf-8")) as T;
   } catch {
@@ -60,8 +41,102 @@ export function readDataJson<T>(relativePath: string, fallback: T): T {
   }
 }
 
+function writeJsonFileAtomic(filePath: string, value: unknown) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  const temporaryPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  fs.writeFileSync(temporaryPath, JSON.stringify(value, null, 2), "utf-8");
+  fs.renameSync(temporaryPath, filePath);
+}
+
+function collectionPaths(relativePath: string) {
+  const parsed = path.parse(relativePath);
+  const directory = path.join(getDataRoot(), parsed.dir);
+  const baseFile = parsed.base;
+  const basePath = path.join(directory, baseFile);
+  const indexFile = `${parsed.name}-index${parsed.ext || ".json"}`;
+  const indexPath = path.join(directory, indexFile);
+
+  function chunkFile(sequence: number) {
+    if (sequence <= 1) return baseFile;
+    return `${parsed.name}-${String(sequence).padStart(4, "0")}${parsed.ext || ".json"}`;
+  }
+
+  return {
+    parsed,
+    directory,
+    baseFile,
+    basePath,
+    indexFile,
+    indexPath,
+    chunkFile
+  };
+}
+
+function validIndex(value: unknown): value is ChunkIndex {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as Partial<ChunkIndex>;
+
+  return (
+    candidate.version === 1 &&
+    typeof candidate.collection === "string" &&
+    typeof candidate.maxRecordsPerChunk === "number" &&
+    Array.isArray(candidate.chunks)
+  );
+}
+
+function createIndexFromBase<T>(relativePath: string, maxRecordsPerChunk: number) {
+  const paths = collectionPaths(relativePath);
+  const existing = readJsonFile<T[]>(paths.basePath, []);
+  const now = new Date().toISOString();
+  const groupsNewestFirst: T[][] = [];
+
+  for (let offset = 0; offset < existing.length; offset += maxRecordsPerChunk) {
+    groupsNewestFirst.push(existing.slice(offset, offset + maxRecordsPerChunk));
+  }
+
+  if (!groupsNewestFirst.length) groupsNewestFirst.push([]);
+
+  const groupsOldestFirst = [...groupsNewestFirst].reverse();
+  const chunks: ChunkDescriptor[] = groupsOldestFirst.map((group, index) => {
+    const file = paths.chunkFile(index + 1);
+    writeJsonFileAtomic(path.join(paths.directory, file), group);
+
+    return {
+      file,
+      count: group.length,
+      createdAt: now,
+      updatedAt: now
+    };
+  });
+
+  const index: ChunkIndex = {
+    version: 1,
+    collection: paths.parsed.name,
+    maxRecordsPerChunk,
+    total: existing.length,
+    updatedAt: now,
+    chunks
+  };
+
+  writeJsonFileAtomic(paths.indexPath, index);
+  return index;
+}
+
+function ensureChunkIndex<T>(relativePath: string, maxRecordsPerChunk = DEFAULT_MAX_RECORDS_PER_CHUNK) {
+  const paths = collectionPaths(relativePath);
+  const stored = readJsonFile<unknown>(paths.indexPath, null);
+
+  if (validIndex(stored)) return stored;
+  return createIndexFromBase<T>(relativePath, maxRecordsPerChunk);
+}
+
+export function readDataJson<T>(relativePath: string, fallback: T): T {
+  return readJsonFile(path.join(getDataRoot(), relativePath), fallback);
+}
+
 export function writeDataJson(relativePath: string, value: unknown) {
-  writeJsonFile(absoluteDataPath(relativePath), value);
+  writeJsonFileAtomic(path.join(getDataRoot(), relativePath), value);
 }
 
 export function appendDataJson<T extends { id?: string }>(relativePath: string, item: T) {
@@ -71,187 +146,89 @@ export function appendDataJson<T extends { id?: string }>(relativePath: string, 
   return next[0];
 }
 
-function collectionPaths(relativePath: string) {
-  const directory = path.dirname(relativePath);
-  const extension = path.extname(relativePath) || ".json";
-  const basename = path.basename(relativePath, extension);
+export function readChunkedDataJson<T>(relativePath: string, fallback: T[]): T[] {
+  const paths = collectionPaths(relativePath);
+  const stored = readJsonFile<unknown>(paths.indexPath, null);
 
-  return {
-    directory,
-    extension,
-    basename,
-    indexRelativePath: path.join(directory, `${basename}-index.json`)
-  };
-}
-
-function createInitialChunkIndex<T>(relativePath: string, maxRecordsPerChunk: number) {
-  const { basename, extension, indexRelativePath } = collectionPaths(relativePath);
-  const now = new Date().toISOString();
-  const legacyItems = readDataJson<T[]>(relativePath, []);
-  const newestFirstGroups: T[][] = [];
-
-  for (let offset = 0; offset < legacyItems.length; offset += maxRecordsPerChunk) {
-    newestFirstGroups.push(legacyItems.slice(offset, offset + maxRecordsPerChunk));
+  if (!validIndex(stored)) {
+    return readJsonFile<T[]>(paths.basePath, fallback);
   }
-
-  if (!newestFirstGroups.length) newestFirstGroups.push([]);
-
-  const oldestFirstGroups = [...newestFirstGroups].reverse();
-  const chunks = oldestFirstGroups.map((items, indexPosition) => {
-    const file = indexPosition === 0
-      ? path.basename(relativePath)
-      : `${basename}-${String(indexPosition + 1).padStart(4, "0")}${extension}`;
-
-    writeDataJson(chunkRelativePath(relativePath, file), items);
-
-    return {
-      file,
-      count: items.length,
-      createdAt: now,
-      updatedAt: now
-    };
-  });
-
-  const index: ChunkIndex = {
-    version: 1,
-    collection: basename,
-    maxRecordsPerChunk,
-    total: legacyItems.length,
-    updatedAt: now,
-    chunks
-  };
-
-  writeDataJson(indexRelativePath, index);
-  return index;
-}
-
-function readChunkIndex(relativePath: string) {
-  const { indexRelativePath } = collectionPaths(relativePath);
-  return readDataJson<ChunkIndex | null>(indexRelativePath, null);
-}
-
-function writeChunkIndex(relativePath: string, index: ChunkIndex) {
-  const { indexRelativePath } = collectionPaths(relativePath);
-  writeDataJson(indexRelativePath, index);
-}
-
-function chunkRelativePath(relativePath: string, file: string) {
-  return path.join(path.dirname(relativePath), file);
-}
-
-export function readChunkedDataJson<T>(relativePath: string, fallback: T[] = []): T[] {
-  const index = readChunkIndex(relativePath);
-  if (!index?.chunks?.length) return readDataJson<T[]>(relativePath, fallback);
 
   const result: T[] = [];
 
-  for (const chunk of [...index.chunks].reverse()) {
-    const items = readDataJson<T[]>(chunkRelativePath(relativePath, chunk.file), []);
-    result.push(...items);
+  for (const chunk of [...stored.chunks].reverse()) {
+    const records = readJsonFile<T[]>(path.join(paths.directory, chunk.file), []);
+    result.push(...records);
   }
 
-  return result;
+  return result.length || stored.total === 0 ? result : fallback;
 }
 
 export function appendChunkedDataJson<T extends { id?: string }>(
   relativePath: string,
   item: T,
-  maxRecordsPerChunk = JSON_CHUNK_LIMIT
+  maxRecordsPerChunk = DEFAULT_MAX_RECORDS_PER_CHUNK
 ) {
-  const { basename, extension } = collectionPaths(relativePath);
+  const paths = collectionPaths(relativePath);
+  const index = ensureChunkIndex<T>(relativePath, maxRecordsPerChunk);
   const now = new Date().toISOString();
-  const index = readChunkIndex(relativePath) ?? createInitialChunkIndex<T>(relativePath, maxRecordsPerChunk);
-  const limit = index.maxRecordsPerChunk || maxRecordsPerChunk;
+  let activeChunk = index.chunks[index.chunks.length - 1];
 
-  let currentChunk = index.chunks[index.chunks.length - 1];
-
-  if (!currentChunk || currentChunk.count >= limit) {
-    const chunkNumber = index.chunks.length + 1;
-    const file = `${basename}-${String(chunkNumber).padStart(4, "0")}${extension}`;
-
-    currentChunk = {
-      file,
+  if (!activeChunk || activeChunk.count >= index.maxRecordsPerChunk) {
+    activeChunk = {
+      file: paths.chunkFile(index.chunks.length + 1),
       count: 0,
       createdAt: now,
       updatedAt: now
     };
-
-    index.chunks.push(currentChunk);
-    writeDataJson(chunkRelativePath(relativePath, file), []);
+    index.chunks.push(activeChunk);
   }
 
-  const currentRelativePath = chunkRelativePath(relativePath, currentChunk.file);
-  const currentItems = readDataJson<T[]>(currentRelativePath, []);
-  writeDataJson(currentRelativePath, [{ ...item }, ...currentItems]);
+  const chunkPath = path.join(paths.directory, activeChunk.file);
+  const records = readJsonFile<T[]>(chunkPath, []);
+  const storedItem = { ...item };
+  records.unshift(storedItem);
 
-  currentChunk.count += 1;
-  currentChunk.updatedAt = now;
-  index.total += 1;
+  writeJsonFileAtomic(chunkPath, records);
+
+  activeChunk.count = records.length;
+  activeChunk.updatedAt = now;
+  index.total = index.chunks.reduce((total, chunk) => total + chunk.count, 0);
   index.updatedAt = now;
-  index.maxRecordsPerChunk = limit;
-  writeChunkIndex(relativePath, index);
+  writeJsonFileAtomic(paths.indexPath, index);
 
-  return { ...item };
+  return storedItem;
 }
 
-export function updateChunkedDataJson<T extends { id: string }>(
+export function updateChunkedDataJson<T extends { id?: string }>(
   relativePath: string,
   id: string,
-  updater: (item: T) => T
-): T | null {
-  const now = new Date().toISOString();
-  const index = readChunkIndex(relativePath);
+  update: (item: T) => T
+) {
+  const paths = collectionPaths(relativePath);
+  const index = ensureChunkIndex<T>(relativePath);
 
-  if (!index?.chunks?.length) {
-    const items = readDataJson<T[]>(relativePath, []);
-    const itemIndex = items.findIndex((item) => item.id === id);
-    if (itemIndex === -1) return null;
+  for (let chunkIndex = index.chunks.length - 1; chunkIndex >= 0; chunkIndex -= 1) {
+    const chunk = index.chunks[chunkIndex];
+    const chunkPath = path.join(paths.directory, chunk.file);
+    const records = readJsonFile<T[]>(chunkPath, []);
+    const recordIndex = records.findIndex((record) => record.id === id);
 
-    const updated = updater(items[itemIndex]);
-    items[itemIndex] = updated;
-    writeDataJson(relativePath, items);
-    return updated;
-  }
+    if (recordIndex === -1) continue;
 
-  for (let indexPosition = index.chunks.length - 1; indexPosition >= 0; indexPosition -= 1) {
-    const chunk = index.chunks[indexPosition];
-    const relativeChunkPath = chunkRelativePath(relativePath, chunk.file);
-    const items = readDataJson<T[]>(relativeChunkPath, []);
-    const itemIndex = items.findIndex((item) => item.id === id);
+    const updated = update(records[recordIndex]);
+    records[recordIndex] = updated;
+    writeJsonFileAtomic(chunkPath, records);
 
-    if (itemIndex === -1) continue;
-
-    const updated = updater(items[itemIndex]);
-    items[itemIndex] = updated;
-    writeDataJson(relativeChunkPath, items);
-
+    const now = new Date().toISOString();
+    chunk.count = records.length;
     chunk.updatedAt = now;
+    index.total = index.chunks.reduce((total, descriptor) => total + descriptor.count, 0);
     index.updatedAt = now;
-    writeChunkIndex(relativePath, index);
+    writeJsonFileAtomic(paths.indexPath, index);
+
     return updated;
   }
 
   return null;
-}
-
-export function getChunkedCollectionInfo(relativePath: string) {
-  const index = readChunkIndex(relativePath);
-  if (index) return index;
-
-  const items = readDataJson<unknown[]>(relativePath, []);
-  return {
-    version: 1 as const,
-    collection: collectionPaths(relativePath).basename,
-    maxRecordsPerChunk: JSON_CHUNK_LIMIT,
-    total: items.length,
-    updatedAt: null,
-    chunks: [
-      {
-        file: path.basename(relativePath),
-        count: items.length,
-        createdAt: null,
-        updatedAt: null
-      }
-    ]
-  };
 }

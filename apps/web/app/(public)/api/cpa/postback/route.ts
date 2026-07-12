@@ -19,21 +19,16 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: "wrong_secret" }, { status: 401 });
   }
 
-  const status = url.searchParams.get("status") || "lead";
   const event = appendChunkedDataJson("cpa/events.json", {
     id: makeId("cpa"),
     createdAt: new Date().toISOString(),
-    eventType: "external_postback",
-    clickId: url.searchParams.get("internal_click_id") || "",
-    externalClickId: url.searchParams.get("click_id") || "",
-    partnerId: url.searchParams.get("partner_id") || "",
-    partnerRef: url.searchParams.get("partner_ref") || url.searchParams.get("partner_id") || "",
-    sub1: url.searchParams.get("sub1") || url.searchParams.get("subid") || "",
-    sub2: url.searchParams.get("sub2") || "",
-    sub3: url.searchParams.get("sub3") || "",
-    sub4: url.searchParams.get("sub4") || "",
-    sub5: url.searchParams.get("sub5") || "",
-    status,
+    direction: "inbound",
+    eventType: "network_postback_received",
+    deliveryStatus: "received",
+    clickId: url.searchParams.get("click_id"),
+    partnerId: url.searchParams.get("partner_id"),
+    subid: url.searchParams.get("subid"),
+    status: url.searchParams.get("status") || "lead",
     amountRub: Number(url.searchParams.get("amount_rub") || 0) || null
   });
 

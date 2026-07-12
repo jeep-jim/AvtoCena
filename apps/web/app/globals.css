@@ -20,10 +20,7 @@
 }
 
 html {
-  min-height: 100%;
-  overflow-x: hidden;
   scroll-behavior: smooth;
-  background: #07080d;
 }
 
 body {
@@ -35,10 +32,6 @@ body {
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 a {
@@ -418,46 +411,44 @@ textarea::placeholder {
   background: rgba(255, 255, 255, 0.14);
 }
 
-
-/* AvtoCena full-screen modal helpers */
-.ac-viewport-modal {
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  min-height: 100dvh;
-}
-
-.ac-safe-scroll {
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-.ac-safe-bottom {
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-.ac-safe-close {
-  top: calc(env(safe-area-inset-top, 0px) + 1rem);
-}
-
-@media (min-width: 768px) {
-  .ac-safe-scroll {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .ac-safe-close {
-    top: 1.5rem;
-  }
-}
-
-/* CRM controls are intentionally flat: no glow or drop shadows on chips/buttons. */
-.crm-shell button,
-.crm-shell a {
+/* CRM controls are intentionally flat: no glow or button shadows. */
+.crm-root button,
+.crm-root a {
   box-shadow: none !important;
   filter: none !important;
+}
+
+/* Immediate feedback for route changes. */
+.ac-route-loader__mark {
+  animation: ac-route-loader-float 1.8s ease-in-out infinite;
+}
+
+.ac-route-loader__key {
+  animation: ac-route-loader-key 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes ac-route-loader-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.025); }
+}
+
+@keyframes ac-route-loader-key {
+  0%, 30%, 100% {
+    transform: translateY(0) scale(1);
+    background: rgba(255, 255, 255, 0.075);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  12% {
+    transform: translateY(3px) scale(0.9);
+    background: rgba(239, 68, 68, 0.72);
+    border-color: rgba(255, 110, 118, 0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ac-route-loader__mark,
+  .ac-route-loader__key {
+    animation: none !important;
+  }
 }

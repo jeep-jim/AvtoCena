@@ -5,6 +5,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import { startRoutePreloader } from "@/components/layout/RoutePreloader";
 import {
   appendAttributionToSearchParams,
   captureAttributionFromBrowser,
@@ -1896,10 +1897,12 @@ export default function HomePage() {
   }
 
   function submitForm() {
+    startRoutePreloader();
     router.push(buildResultsUrl());
   }
 
   function openOfferResults(offer: CatalogOffer) {
+    startRoutePreloader();
     router.push(
       buildResultsUrl({
         budget: offer.price,

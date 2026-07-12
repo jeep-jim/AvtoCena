@@ -7,7 +7,7 @@ export default function CrmDealsPage() {
   const demo = deals.length ? deals : [{ id: "deal_demo", car: "Audi A3 Sportback", client: "Демо клиент", stage: "Расчёт", totalRub: 2560800 }];
 
   return (
-    <CrmShell title="Сделки" subtitle="Карточки договоров: от АвтоЦены до выдачи автомобиля клиенту.">
+    <CrmShell activeHref="/crm/deals" title="Сделки" subtitle="Карточки договоров: от АвтоЦены до выдачи автомобиля клиенту.">
       <div className="grid gap-4 md:grid-cols-3">
         {demo.map((deal) => (
           <article key={deal.id} className="glass rounded-[2rem] p-5">

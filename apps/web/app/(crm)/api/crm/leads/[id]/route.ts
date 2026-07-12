@@ -62,6 +62,11 @@ export async function PATCH(
   const nextManagerId = requestedManagerId || existingLead.assignedManagerId || null;
   const statusChanged = nextStatus !== (existingLead.status || "new");
   const managerChanged = nextManagerId !== (existingLead.assignedManagerId || null);
+  const reasonRequired = statusChanged && (nextStatus === "rejected" || nextStatus === "duplicate");
+
+  if (reasonRequired && !note) {
+    return NextResponse.json({ ok: false, error: "reason_required" }, { status: 400 });
+  }
 
   if (!statusChanged && !managerChanged && !note) {
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
@@ -72,6 +77,15 @@ export async function PATCH(
     updatedAt: now,
     status: nextStatus,
     assignedManagerId: nextManagerId,
+    rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate"
+      ? note || lead.rejectionReason || ""
+      : lead.rejectionReason,
+    rejectedAt: nextStatus === "rejected" || nextStatus === "duplicate"
+      ? now
+      : lead.rejectedAt,
+    rejectedByUserId: nextStatus === "rejected" || nextStatus === "duplicate"
+      ? user.id
+      : lead.rejectedByUserId,
     statusHistory: statusChanged
       ? [
           ...(Array.isArray(lead.statusHistory) ? lead.statusHistory : []),
@@ -139,16 +153,30 @@ export async function PATCH(
     text: note || manager?.displayName || nextStatus
   });
 
-  if (statusChanged && (updatedLead.clickId || updatedLead.partnerRef)) {
+  if (statusChanged) {
+    const hasExternalAttribution = Boolean(updatedLead.externalClickId || updatedLead.partnerRef);
+
     appendChunkedDataJson("cpa/events.json", {
       id: makeId("cpa"),
       createdAt: now,
-      eventType: "lead_status_changed",
-      clickId: updatedLead.clickId || "",
-      externalClickId: updatedLead.externalClickId || "",
-      partnerRef: updatedLead.partnerRef || "",
+      direction: "outbound",
+      eventType: nextStatus === "contract_signed"
+        ? "contract_signed"
+        : "lead_status_changed",
+      deliveryStatus: hasExternalAttribution ? "pending" : "not_required",
+      attempts: 0,
+      nextAttemptAt: null,
+      clickId: updatedLead.clickId || updatedLead.attribution?.clickId || "",
+      externalClickId: updatedLead.externalClickId || updatedLead.attribution?.externalClickId || "",
+      partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
+      sub1: updatedLead.sub1 || updatedLead.attribution?.sub1 || "",
+      sub2: updatedLead.sub2 || updatedLead.attribution?.sub2 || "",
+      sub3: updatedLead.sub3 || updatedLead.attribution?.sub3 || "",
+      sub4: updatedLead.sub4 || updatedLead.attribution?.sub4 || "",
+      sub5: updatedLead.sub5 || updatedLead.attribution?.sub5 || "",
       leadId,
       status: nextStatus,
+      rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
       changedByUserId: user.id
     });
   }

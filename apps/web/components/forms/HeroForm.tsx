@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { appendAttributionToSearchParams } from "@/lib/attribution";
 
 function onlyDigits(value: string) {
   return value.replace(/\D/g, "");
@@ -32,7 +31,8 @@ export function HeroForm() {
     if (market !== "any") params.set("market", market);
     if (body !== "any") params.set("body", body);
 
-    appendAttributionToSearchParams(params);
+    const ref = new URLSearchParams(window.location.search).get("ref");
+    if (ref) params.set("ref", ref);
 
     window.location.href = `/results?${params.toString()}`;
   }
@@ -92,7 +92,7 @@ export function HeroForm() {
           <option value="europe">Европа</option>
         </select>
         <select value={body} onChange={(e) => setBody(e.target.value)} className="soft-input rounded-2xl px-4 py-4 text-base font-bold">
-          <option value="any">Тип кузова</option>
+          <option value="any">Тип авто</option>
           <option value="sedan">Седан</option>
           <option value="crossover">Кроссовер</option>
           <option value="hatchback">Хэтчбек</option>

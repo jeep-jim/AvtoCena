@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LeadForm } from "@/components/results/LeadForm";
 import {
   getAvtocenaResults,
@@ -144,7 +145,7 @@ export default async function ResultsPage({
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 pb-24 md:px-8 md:py-6">
       <div className="mx-auto w-full max-w-[1500px]">
         <header className="flex items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-2.5">
+          <Link href="/" className="flex items-center gap-2.5">
             <BrandMark className="h-10 w-10 shrink-0" />
             <div>
               <div className="font-black leading-none">
@@ -155,7 +156,7 @@ export default async function ResultsPage({
                 назад к подбору
               </div>
             </div>
-          </a>
+          </Link>
         </header>
 
         <section className="mt-6">

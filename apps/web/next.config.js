@@ -5,16 +5,16 @@ const nextConfig = {
   output: "standalone",
 
   experimental: {
-    outputFileTracingRoot: path.join(__dirname, "../.."),
+    outputFileTracingRoot: path.join(__dirname, "../..")
   },
 
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
 
   typescript: {
-    ignoreBuildErrors: false,
-  },
+    ignoreBuildErrors: false
+  }
 };
 
 module.exports = nextConfig;
