@@ -90,3 +90,35 @@ test('mutateDataJson preserves parallel JSON mutations', async () => {
     assert.deepEqual(new Set(records.map((item) => item.id)), new Set(['a', 'b']));
   } finally { process.chdir(cwd); resetJsonStorageForTests(); }
 });
+
+test('ObjectJsonStorage preserves binary content-type and relative objectKey', async () => {
+  const { ObjectJsonStorage, LocalJsonStorage } = await import('../apps/web/lib/data.ts?binary=' + Date.now());
+  process.env.YC_OBJECT_STORAGE_BUCKET = 'bucket';
+  process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID = 'access';
+  process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY = 'secret';
+  process.env.YC_OBJECT_STORAGE_REGION = 'ru-central1';
+  process.env.YC_OBJECT_STORAGE_ENDPOINT = 'https://storage.test';
+  process.env.YC_OBJECT_STORAGE_PREFIX = 'crm-prefix';
+  const seen: string[] = [];
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (_url: any, init: any) => {
+    seen.push(init.headers['content-type']);
+    return new Response('', { status: 200 });
+  }) as typeof fetch;
+  try {
+    const object = new ObjectJsonStorage();
+    assert.equal((await object.putBinary('contracts/uploads/templates/file.png', Buffer.from('x'), 'image/png')).objectKey, 'contracts/uploads/templates/file.png');
+    assert.equal((await object.putBinary('contracts/uploads/templates/file.pdf', Buffer.from('x'), 'application/pdf')).objectKey, 'contracts/uploads/templates/file.pdf');
+    assert.equal((await object.putBinary('contracts/uploads/templates/file.docx', Buffer.from('x'), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')).objectKey, 'contracts/uploads/templates/file.docx');
+    await object.writeJson('contracts/templates.json', { ok: true });
+    assert.deepEqual(seen, ['image/png', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/json; charset=utf-8']);
+  } finally { globalThis.fetch = originalFetch; delete process.env.YC_OBJECT_STORAGE_PREFIX; }
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'avtocena-binary-'));
+  const cwd = process.cwd(); process.chdir(dir); fs.mkdirSync('data');
+  try {
+    const local = new LocalJsonStorage();
+    const localSaved = await local.putBinary('contracts/uploads/templates/file.docx', Buffer.from('x'), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    assert.equal(localSaved.objectKey, 'contracts/uploads/templates/file.docx');
+  } finally { process.chdir(cwd); }
+});

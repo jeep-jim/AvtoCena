@@ -22,6 +22,7 @@ export interface JsonStorage {
   deleteJson?(relativePath: string): Promise<void>;
   exists?(relativePath: string): Promise<boolean>;
   putBinary?(relativePath: string, data: Buffer, contentType: string): Promise<{ objectKey: string; mimeType: string; size: number; checksum: string }>;
+  getBinary?(relativePath: string): Promise<{ data: Buffer; mimeType?: string; size: number; checksum: string }>;
   deleteBinary?(relativePath: string): Promise<void>;
 }
 
@@ -53,6 +54,7 @@ export class LocalJsonStorage implements JsonStorage {
   }
   async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async putBinary(relativePath: string, data: Buffer, contentType: string) { const p = localPath(relativePath); await fs.promises.mkdir(path.dirname(p), { recursive: true }); await fs.promises.writeFile(p, data); return { objectKey: relativePath.replace(/^\/+/, ""), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
+  async getBinary(relativePath: string) { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; }
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
 }
@@ -79,7 +81,7 @@ export class ObjectJsonStorage implements JsonStorage {
     const cfg = objectConfig(); const key = this.key(relativePath); const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(key)}`);
     const payloadHash = sha256(body ?? ""); const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, ""); const date = amzDate.slice(0, 8);
     const headers: Record<string, string> = { host: url.host, "x-amz-content-sha256": payloadHash, "x-amz-date": amzDate, ...extraHeaders };
-    if (body !== undefined) headers["content-type"] = "application/json; charset=utf-8";
+    if (body !== undefined && !Object.keys(headers).some((key) => key.toLowerCase() === "content-type")) headers["content-type"] = "application/json; charset=utf-8";
     const signedHeaders = Object.keys(headers).map((h) => h.toLowerCase()).sort().join(";");
     const canonicalHeaders = Object.keys(headers).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())).map((k) => `${k.toLowerCase()}:${headers[k].trim()}\n`).join("");
     const canonicalRequest = [method, url.pathname, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
@@ -97,9 +99,10 @@ export class ObjectJsonStorage implements JsonStorage {
   }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: await res.json() as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = {}; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
-  async putBinary(relativePath: string, data: Buffer, contentType: string) { const res = await this.request("PUT", relativePath, data, { "content-type": contentType, "if-none-match": "*" }); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: this.key(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
+  async putBinary(relativePath: string, data: Buffer, contentType: string) { const res = await this.request("PUT", relativePath, data, { "content-type": contentType, "if-none-match": "*" }); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: relativePath.replace(/^\/+/, ""), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
+  async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = Buffer.from(await res.arrayBuffer()); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
   async deleteBinary(relativePath: string) { await this.request("DELETE", relativePath); }
   async exists(relativePath: string) { return (await this.readJsonWithMeta(relativePath, null)).found; }
 }
