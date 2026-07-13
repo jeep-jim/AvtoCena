@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       if (!changeLog.some((entry: any) => entry.id === `contract_change_${operationId}`)) {
         await appendChangeLog({ id: `contract_change_${operationId}`, entityType: "contract-template", entityId: duplicate.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: duplicate, comment: cleanText(form.get("comment"), 1000) });
       }
-      return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
+      return NextResponse.json({ ok: true, redirectTo: "/crm/settings#contracts" });
     }
     const templateFile = await storeFile(form.get("templateFile") as File | null, TEMPLATE_TYPES, MAX_TEMPLATE_BYTES, "templates", operationId);
     if (templateFile?.objectKey) uploadedKeys.push(templateFile.objectKey);
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
     });
     saved = true;
     await appendChangeLog({ id: `contract_change_${operationId}`, entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
-    return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
+    return NextResponse.json({ ok: true, redirectTo: "/crm/settings#contracts" });
   } catch (error) {
     if (!saved) {
       const storage = getJsonStorage();

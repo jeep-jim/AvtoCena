@@ -1,4 +1,5 @@
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import crypto from 'node:crypto';
 import { join, relative, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -17,6 +18,7 @@ function safeJson(filePath, fallback){ try { return JSON.parse(readFileSync(file
 function countRecords(value){ return Array.isArray(value) ? value.length : (value && typeof value === 'object' && Array.isArray(value.versions) ? value.versions.length : 1); }
 function filesFor(collection){ const dir=join(dataRoot, collection.split('/').slice(0,-1).join('/')); const base=collection.split('/').pop(); if (!existsSync(dir)) return { files: [], skipped: 'not_found' }; const name=base.replace(/\.json$/, ''); const files = readdirSync(dir).filter((file) => file===base || file===`${name}-index.json` || (file.startsWith(`${name}-`) && file.endsWith('.json'))).map((file)=>join(dir,file)); return { files, skipped: files.length ? null : 'not_found' }; }
 function walk(dir){ if (!existsSync(dir)) return []; return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => { const full = join(dir, entry.name); return entry.isDirectory() ? walk(full) : [full]; }); }
+function checksum(data){ return crypto.createHash('sha256').update(data).digest('hex'); }
 function mime(file){ const ext=extname(file).toLowerCase(); if(ext==='.png') return 'image/png'; if(ext==='.pdf') return 'application/pdf'; if(ext==='.docx') return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; return 'application/octet-stream'; }
 const report=[];
 for (const collection of collections) {
@@ -26,7 +28,7 @@ for (const collection of collections) {
 }
 const binaryFiles = walk(join(dataRoot, 'contracts', 'uploads'));
 const binary = { collection: 'contracts/uploads/**', files: binaryFiles.length, records: binaryFiles.length, skipped: binaryFiles.length ? null : 'not_found', skipped_existing: 0, errors: [] };
-for (const file of binaryFiles) { const rel = relative(dataRoot, file).replaceAll('\\','/'); if (!dryRun) { try { const data = readFileSync(file); if (!force && await storage.binaryExists(rel)) { binary.skipped_existing += 1; continue; } await storage.putBinary(rel, data, mime(file), force ? undefined : { ifNoneMatch: '*' }); const uploaded = await storage.getBinary(rel); if (uploaded.size !== statSync(file).size) binary.errors.push({ file: rel, error: 'verify_failed' }); } catch (error) { binary.errors.push({ file: rel, error: error instanceof Error ? error.message : 'upload_failed' }); } } }
+for (const file of binaryFiles) { const rel = relative(dataRoot, file).replaceAll('\\','/'); if (!dryRun) { try { const data = readFileSync(file); const localChecksum = checksum(data); if (!force && await storage.binaryExists(rel)) { binary.skipped_existing += 1; continue; } await storage.putBinary(rel, data, mime(file), force ? undefined : { ifNoneMatch: '*' }); const uploaded = await storage.getBinary(rel); if (uploaded.size !== data.length) binary.errors.push({ file: rel, error: 'verify_size_failed' }); if (uploaded.checksum !== localChecksum) binary.errors.push({ file: rel, error: 'verify_checksum_failed' }); } catch (error) { binary.errors.push({ file: rel, error: error instanceof Error ? error.message : 'upload_failed' }); } } }
 report.push(binary);
 const hasErrors = report.some((item) => item.errors.length || item.skipped_existing);
 console.log(JSON.stringify({ ok: !hasErrors, dryRun, force, driver:'object', bucketConfigured: Boolean(process.env.YC_OBJECT_STORAGE_BUCKET), prefix: process.env.YC_OBJECT_STORAGE_PREFIX || '', report }, null, 2));
