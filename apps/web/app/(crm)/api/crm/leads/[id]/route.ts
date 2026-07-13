@@ -169,6 +169,7 @@ export async function PATCH(
       sub5: updatedLead.sub5 || updatedLead.attribution?.sub5 || "",
       status: nextStatus,
       eventType: nextStatus === "contract_signed" ? "contract_signed" : "lead_status_changed",
+      rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
       changedByUserId: user.id,
       createdAt: now,
     });

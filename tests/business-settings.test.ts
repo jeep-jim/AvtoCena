@@ -245,3 +245,23 @@ test("status side effects split direct partner, CPA network and unknown refs", a
   assert.equal(duplicate.accrual.created, false);
   assert.equal(duplicate.accrual.reason, "duplicate");
 });
+
+test("CPA rejection event preserves rejectionReason", async () => {
+  const { settings } = await loadModules();
+  settings.upsertCpaNetworkDraft({ id: "network_reject", networkId: "network_reject", name: "CPA Reject", enabled: true, partnerRef: "cpa_reject", offerId: "offer_reject", goal: "lead_rejected", payoutType: "fixed", payoutAmount: 0, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&reason={rejection_reason}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "reject test");
+
+  const result = settings.handleLeadPartnerStatusChange({
+    leadId: "lead_reject_reason",
+    partnerRef: "cpa_reject",
+    status: "rejected",
+    eventType: "lead_status_changed",
+    externalClickId: "external-reject",
+    rejectionReason: "Не подходит бюджет",
+    createdAt: "2026-07-13T00:00:00.000Z",
+  });
+
+  assert.equal(result.accrual, null);
+  assert.equal(result.cpaEvent.eventType, "lead_status_changed");
+  assert.equal(result.cpaEvent.status, "rejected");
+  assert.equal(result.cpaEvent.rejectionReason, "Не подходит бюджет");
+});

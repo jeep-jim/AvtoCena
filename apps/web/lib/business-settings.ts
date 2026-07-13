@@ -225,6 +225,7 @@ export function handleLeadPartnerStatusChange(input: {
   sub5?: string;
   status: string;
   eventType: string;
+  rejectionReason?: string;
   changedByUserId?: string;
   createdAt?: string;
 }) {
@@ -272,6 +273,7 @@ export function handleLeadPartnerStatusChange(input: {
       sub5: input.sub5 || "",
       leadId: input.leadId,
       status: input.status,
+      rejectionReason: cleanText(input.rejectionReason, 1000),
       changedByUserId: input.changedByUserId || ""
     });
   }
