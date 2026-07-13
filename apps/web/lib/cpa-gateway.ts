@@ -49,8 +49,8 @@ function clean(value: unknown, maxLength = 2000) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
-function findNetwork(event: CpaEvent) {
-  const networks = readDataJson<CpaNetworkConfig[]>("cpa/networks.json", []);
+async function findNetwork(event: CpaEvent) {
+  const networks = await readDataJson<CpaNetworkConfig[]>("cpa/networks.json", []);
   return networks.find(
     (network) => network.enabled && network.partnerRef === clean(event.partnerRef, 160),
   );
@@ -98,9 +98,9 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
     return { ok: false, eventId: event.id || "", skipped: true, reason: "not_outbound" };
   }
 
-  const config = findNetwork(event);
+  const config = await findNetwork(event);
   if (!config) {
-    updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
+    await updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
       ...stored,
       deliveryStatus: stored.partnerRef ? "waiting_config" : "not_required",
       lastDeliveryError: stored.partnerRef ? "network_config_not_found" : null,
@@ -117,7 +117,7 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
   const values = templateValues(event, config);
   const urlTemplate = config.postbackUrl || config.postbackConfig?.urlTemplate || "";
   if (!urlTemplate) {
-    updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
+    await updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
       ...stored,
       deliveryStatus: "waiting_config",
       lastDeliveryError: "postback_url_not_configured",
@@ -152,7 +152,7 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
       ? null
       : new Date(Date.now() + retryDelayMinutes(attempts) * 60_000).toISOString();
 
-    updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
+    await updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
       ...stored,
       deliveryStatus: delivered ? "sent" : "failed",
       attempts,
@@ -178,7 +178,7 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
       Date.now() + retryDelayMinutes(attempts) * 60_000,
     ).toISOString();
 
-    updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
+    await updateChunkedDataJson<CpaEvent>("cpa/events.json", event.id, (stored) => ({
       ...stored,
       deliveryStatus: "failed",
       attempts,
@@ -203,7 +203,7 @@ export async function deliverCpaEvent(event: CpaEvent): Promise<CpaDeliveryResul
 }
 
 export async function deliverCpaEventById(eventId: string) {
-  const event = readChunkedDataJson<CpaEvent>("cpa/events.json", []).find(
+  const event = (await readChunkedDataJson<CpaEvent>("cpa/events.json", [])).find(
     (item) => item.id === eventId,
   );
 
@@ -216,7 +216,7 @@ export async function deliverCpaEventById(eventId: string) {
 
 export async function deliverPendingCpaEvents(limit = 25) {
   const now = Date.now();
-  const events = readChunkedDataJson<CpaEvent>("cpa/events.json", [])
+  const events = (await readChunkedDataJson<CpaEvent>("cpa/events.json", []))
     .filter((event) => {
       if (event.direction !== "outbound") return false;
       if (!["pending", "failed", "waiting_config"].includes(event.deliveryStatus || "")) {

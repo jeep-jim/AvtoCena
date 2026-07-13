@@ -256,7 +256,7 @@ export default async function PartnerLandingPage({
 }) {
   const params = (await searchParams) ?? {};
   const requestState = firstParam(params.request) as RequestState;
-  const siteBusiness = getActiveSiteBusinessVersion();
+  const siteBusiness = await getActiveSiteBusinessVersion();
   const partnerPayoutRub = Number(siteBusiness?.displayPartnerPayoutRub || 10000);
 
   return (

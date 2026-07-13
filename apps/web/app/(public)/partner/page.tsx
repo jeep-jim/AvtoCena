@@ -62,13 +62,13 @@ export default async function PartnerPage({
   const params = (await searchParams) ?? {};
   const payoutState = firstParam(params.payout);
   const user = getCurrentUser();
-  const partners = readDataJson<any[]>("partners/partners.json", []);
-  const leads = readChunkedDataJson<any>("leads/leads.json", []);
-  const payoutRequests = readChunkedDataJson<PayoutRequest>(
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const payoutRequests = await readChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     [],
   );
-  const accruals = readChunkedDataJson<any>("partners/accruals.json", []);
+  const accruals = await readChunkedDataJson<any>("partners/accruals.json", []);
   const requestedRef = firstParam(params.ref);
   const code = isAdminRole(user?.role)
     ? requestedRef || user?.partnerCode || "demo"

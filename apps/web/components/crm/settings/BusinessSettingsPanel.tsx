@@ -3,6 +3,7 @@ import {
   CpaStructuredFields,
 } from "@/components/crm/settings/StructuredSettingsFields";
 import { money } from "@/lib/avtocena";
+import { ContractTemplateForm } from "./ContractTemplateForm";
 
 function Field({
   label,
@@ -598,65 +599,7 @@ export function BusinessSettingsPanel({
           <div className="mt-4 text-sm font-bold text-white/60">
             Шаблонов: {contracts.templates?.length || 0}
           </div>
-          {canEdit && (
-            <form
-              action="/api/crm/settings/contracts"
-              method="post"
-              encType="multipart/form-data"
-              className="mt-4 grid gap-3 md:grid-cols-2"
-            >
-              <Field label="Название" name="title" />
-              <Field label="Рынок" name="market" />
-              <Field label="Версия" name="version" />
-              <Field
-                label="Effective from"
-                name="effectiveFrom"
-                type="datetime-local"
-              />
-              <label className="flex items-center gap-2 text-sm font-bold text-white/70">
-                <input type="checkbox" name="active" /> Активен
-              </label>
-              <label className="flex items-center gap-2 text-sm font-bold text-white/70">
-                <input
-                  type="checkbox"
-                  name="includeDirectorSignatureByDefault"
-                />{" "}
-                Накладывать PNG-подпись
-              </label>
-              <TextArea
-                label="Placeholders, по одному в строке"
-                name="placeholdersText"
-                defaultValue=""
-              />
-              <TextArea
-                label="Mapping: placeholder=client.phone"
-                name="placeholderMappingText"
-                defaultValue=""
-              />
-              <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42">
-                DOCX/PDF шаблон
-                <input
-                  type="file"
-                  name="templateFile"
-                  accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                  className="text-sm normal-case"
-                />
-              </label>
-              <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42">
-                PNG подпись
-                <input
-                  type="file"
-                  name="signatureFile"
-                  accept="image/png"
-                  className="text-sm normal-case"
-                />
-              </label>
-              <TextArea label="Комментарий" name="comment" />
-              <button className="rounded-xl bg-red-600 px-4 py-3 text-sm font-black text-white md:col-span-2">
-                Сохранить метаданные шаблона
-              </button>
-            </form>
-          )}
+          {canEdit && <ContractTemplateForm />}
         </section>
       </div>
 

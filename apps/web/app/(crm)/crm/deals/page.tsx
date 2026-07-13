@@ -2,8 +2,8 @@ import { CrmShell } from "@/components/crm/CrmShell";
 import { readDataJson } from "@/lib/data";
 import { money } from "@/lib/avtocena";
 
-export default function CrmDealsPage() {
-  const deals = readDataJson<any[]>("deals/deals.json", []);
+export default async function CrmDealsPage() {
+  const deals = await readDataJson<any[]>("deals/deals.json", []);
   const demo = deals.length ? deals : [{ id: "deal_demo", car: "Audi A3 Sportback", client: "Демо клиент", stage: "Расчёт", totalRub: 2560800 }];
 
   return (

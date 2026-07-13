@@ -46,7 +46,7 @@ function normalizeAttribution(value: unknown) {
 }
 
 export async function GET() {
-  const activePayout = getActiveDirectPartnerPayout();
+  const activePayout = await getActiveDirectPartnerPayout();
   const defaultPayout = activePayout?.defaultSignedContractPayoutRub || 0;
 
   return NextResponse.json({
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
 
   const calculationKey = clean(body.calculationKey, 300);
   const dedupeKey = [eventType, attribution.clickId, calculationKey].join(":");
-  const existing = readChunkedDataJson<any>("cpa/events.json", []).find(
+  const existing = (await readChunkedDataJson<any>("cpa/events.json", [])).find(
     (event) => event.dedupeKey === dedupeKey
   );
 
@@ -105,7 +105,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, event: existing, duplicate: true });
   }
 
-  const event = appendChunkedDataJson("cpa/events.json", {
+  const event = await appendChunkedDataJson("cpa/events.json", {
     id: makeId("cpa"),
     createdAt: new Date().toISOString(),
     direction: "inbound",

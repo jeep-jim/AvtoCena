@@ -21,13 +21,13 @@ function statusLabel(status: PayoutRequest["status"]) {
   return "На проверке";
 }
 
-export default function CrmPartnersPage() {
-  const partners = readDataJson<any[]>("partners/partners.json", []);
-  const payoutRequests = readChunkedDataJson<PayoutRequest>(
+export default async function CrmPartnersPage() {
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
+  const payoutRequests = await readChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     [],
   );
-  const accruals = readChunkedDataJson<any>("partners/accruals.json", []);
+  const accruals = await readChunkedDataJson<any>("partners/accruals.json", []);
 
   return (
     <CrmShell

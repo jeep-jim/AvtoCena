@@ -4,7 +4,7 @@ import { getActiveSiteBusinessVersion } from "@/lib/business-settings";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const settings = getActiveSiteBusinessVersion();
+  const settings = await getActiveSiteBusinessVersion();
   return NextResponse.json({
     ok: true,
     settings: {

@@ -25,7 +25,7 @@ export default async function CrmLeadsPage({
   const params = (await searchParams) ?? {};
   const view = firstParam(params.view) || "all";
   const user = getCurrentUser();
-  const leads = readChunkedDataJson<any>("leads/leads.json", []);
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const managers = getAuthUsers().filter((manager) => isCrmRole(manager.role));
   const visibleLeads = view === "my" ? leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id) : leads;
 

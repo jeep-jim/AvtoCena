@@ -7,16 +7,16 @@ import { getActiveDirectPartnerPayout } from "@/lib/business-settings";
 
 export const dynamic = "force-dynamic";
 
-export default function CrmPage() {
+export default async function CrmPage() {
   const user = getCurrentUser();
-  const leads = readChunkedDataJson<any>("leads/leads.json", []);
-  const clients = readChunkedDataJson<any>("clients/clients.json", []);
-  const partners = readDataJson<any[]>("partners/partners.json", []);
-  const deals = readDataJson<any[]>("deals/deals.json", []);
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const clients = await readChunkedDataJson<any>("clients/clients.json", []);
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
+  const deals = await readDataJson<any[]>("deals/deals.json", []);
   const managers = getAuthUsers().filter((item) => isCrmRole(item.role));
   const myLeads = leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
   const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
-  const directPayout = getActiveDirectPartnerPayout();
+  const directPayout = await getActiveDirectPartnerPayout();
 
   return (
     <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">

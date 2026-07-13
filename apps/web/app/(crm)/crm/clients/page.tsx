@@ -10,8 +10,8 @@ function managerName(managers: any[], id?: string) {
   return managers.find((manager) => manager.id === id)?.displayName || id;
 }
 
-export default function CrmClientsPage() {
-  const clients = readChunkedDataJson<any>("clients/clients.json", []);
+export default async function CrmClientsPage() {
+  const clients = await readChunkedDataJson<any>("clients/clients.json", []);
   const managers = getAuthUsers();
 
   return (

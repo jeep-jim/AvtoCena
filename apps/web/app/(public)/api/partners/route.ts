@@ -125,7 +125,7 @@ export async function POST(request: Request) {
   }
 
   const telegram = `@${telegramUsername}`;
-  const partners = readDataJson<PartnerRecord[]>("partners/partners.json", []);
+  const partners = await readDataJson<PartnerRecord[]>("partners/partners.json", []);
   const duplicate = partners.find(
     (partner) =>
       partner.status === "pending" &&
@@ -159,7 +159,7 @@ export async function POST(request: Request) {
 
   const notificationSent = await notifyTelegram(record);
   record.notificationSent = notificationSent;
-  appendDataJson("partners/partners.json", record);
+  await appendDataJson("partners/partners.json", record);
 
   return htmlRequest
     ? landingRedirect(request, "sent")

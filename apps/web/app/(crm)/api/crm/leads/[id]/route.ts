@@ -51,7 +51,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "manager_not_found" }, { status: 400 });
   }
 
-  const existingLead = readChunkedDataJson<any>("leads/leads.json", []).find(
+  const existingLead = (await readChunkedDataJson<any>("leads/leads.json", [])).find(
     (lead) => lead.id === leadId
   );
 
@@ -74,7 +74,7 @@ export async function PATCH(
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
   }
 
-  const updatedLead = updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => ({
+  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => ({
     ...lead,
     updatedAt: now,
     status: nextStatus,
@@ -130,14 +130,14 @@ export async function PATCH(
   }
 
   if (managerChanged && updatedLead.clientId) {
-    updateChunkedDataJson<any>("clients/clients.json", updatedLead.clientId, (client) => ({
+    await updateChunkedDataJson<any>("clients/clients.json", updatedLead.clientId, (client) => ({
       ...client,
       updatedAt: now,
       assignedManagerId: nextManagerId
     }));
   }
 
-  appendChunkedDataJson("activity/feed.json", {
+  await appendChunkedDataJson("activity/feed.json", {
     id: makeId("event"),
     createdAt: now,
     type: statusChanged ? "lead_status_changed" : managerChanged ? "lead_assigned" : "lead_note_added",
@@ -156,7 +156,7 @@ export async function PATCH(
   });
 
   if (statusChanged) {
-    const partnerEffects = handleLeadPartnerStatusChange({
+    const partnerEffects = await handleLeadPartnerStatusChange({
       leadId,
       clientId: updatedLead.clientId,
       partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",

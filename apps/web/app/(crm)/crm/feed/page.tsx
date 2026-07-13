@@ -9,9 +9,9 @@ function dateLabel(value?: string) {
   return new Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(new Date(value));
 }
 
-export default function CrmFeedPage() {
+export default async function CrmFeedPage() {
   const user = getCurrentUser();
-  const leads = readChunkedDataJson<any>("leads/leads.json", []).map((lead) => ({
+  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).map((lead) => ({
     id: lead.id,
     createdAt: lead.createdAt,
     type: "lead",
@@ -20,7 +20,7 @@ export default function CrmFeedPage() {
     source: lead.source || "site",
     managerId: lead.assignedManagerId || lead.createdByManagerId
   }));
-  const clients = readChunkedDataJson<any>("clients/clients.json", []).map((client) => ({
+  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).map((client) => ({
     id: client.id,
     createdAt: client.createdAt,
     type: "client",

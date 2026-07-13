@@ -50,7 +50,7 @@ function normalizeAttribution(value: unknown, body: Record<string, unknown>) {
 }
 
 export async function GET() {
-  const leads = readChunkedDataJson<any>("leads/leads.json", []);
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   return NextResponse.json({ ok: true, leads });
 }
 
@@ -76,10 +76,10 @@ export async function POST(request: Request) {
   const attribution = normalizeAttribution(body.attribution, body);
   const source = clean(body.source, 160) || "site";
   const market = clean(body.market, 120);
-  const businessSettingsSnapshot = market ? getBusinessSettingsSnapshot(market) : null;
+  const businessSettingsSnapshot = market ? await getBusinessSettingsSnapshot(market) : null;
   const calculationSnapshot = body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null;
 
-  const client = appendChunkedDataJson("clients/clients.json", {
+  const client = await appendChunkedDataJson("clients/clients.json", {
     id: clientId,
     createdAt,
     updatedAt: createdAt,
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
   });
 
-  const lead = appendChunkedDataJson("leads/leads.json", {
+  const lead = await appendChunkedDataJson("leads/leads.json", {
     id: leadId,
     createdAt,
     updatedAt: createdAt,
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
   });
 
-  appendChunkedDataJson("activity/feed.json", {
+  await appendChunkedDataJson("activity/feed.json", {
     id: makeId("event"),
     createdAt,
     type: "lead_created",
@@ -153,7 +153,7 @@ export async function POST(request: Request) {
     text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram
   });
 
-  const cpaEvent = appendChunkedDataJson("cpa/events.json", {
+  const cpaEvent = await appendChunkedDataJson("cpa/events.json", {
     id: makeId("cpa"),
     createdAt,
     direction: "outbound",

@@ -4,10 +4,10 @@ import { readChunkedDataJson } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export default function CrmManagersPage() {
+export default async function CrmManagersPage() {
   const managers = getAuthUsers().filter((user) => isCrmRole(user.role));
-  const leads = readChunkedDataJson<any>("leads/leads.json", []);
-  const clients = readChunkedDataJson<any>("clients/clients.json", []);
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const clients = await readChunkedDataJson<any>("clients/clients.json", []);
 
   return (
     <CrmShell activeHref="/crm/managers" title="Менеджеры" subtitle="Список сотрудников, роли, заявки и клиенты по каждому менеджеру.">

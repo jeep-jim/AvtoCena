@@ -24,8 +24,8 @@ beforeEach(() => {
 
 test("production functions load active market configuration and snapshot", async () => {
   const { settings } = await loadModules();
-  const japan = settings.getActiveMarketVersion("japan");
-  const snapshot = settings.getBusinessSettingsSnapshot("japan");
+  const japan = await settings.getActiveMarketVersion("japan");
+  const snapshot = await settings.getBusinessSettingsSnapshot("japan");
   assert.equal(japan.currency, "JPY");
   assert.equal(snapshot.configVersion, japan.id);
   assert.equal(snapshot.rules.topAvtoCommissionRub, 39000);
@@ -34,32 +34,32 @@ test("production functions load active market configuration and snapshot", async
 test("createMarketVersion uses scheduled for future effectiveFrom and keeps current active version", async () => {
   const { settings } = await loadModules();
   const user = { id: "owner_test", displayName: "Owner", role: "owner" };
-  const before = settings.getActiveMarketVersion("japan");
-  const future = settings.createMarketVersion("japan", {
+  const before = await settings.getActiveMarketVersion("japan");
+  const future = await settings.createMarketVersion("japan", {
     active: true,
     effectiveFrom: "2099-01-01T00:00:00.000Z",
     currency: "JPY",
     topAvtoCommissionRub: 45000,
     securityDepositRub: 31000,
   }, user, "future commission");
-  const after = settings.getActiveMarketVersion("japan");
+  const after = await settings.getActiveMarketVersion("japan");
   assert.equal(future.status, "scheduled");
   assert.equal(after.id, before.id);
   assert.equal(after.topAvtoCommissionRub, 39000);
-  assert.equal(settings.getActiveMarketVersion("japan", new Date("2100-01-01T00:00:00.000Z")).topAvtoCommissionRub, 45000);
+  assert.equal((await settings.getActiveMarketVersion("japan", new Date("2100-01-01T00:00:00.000Z"))).topAvtoCommissionRub, 45000);
 });
 
 test("snapshots stay immutable after immediate market version update", async () => {
   const { settings } = await loadModules();
-  const oldSnapshot = settings.getBusinessSettingsSnapshot("china");
-  settings.createMarketVersion("china", {
+  const oldSnapshot = await settings.getBusinessSettingsSnapshot("china");
+  await settings.createMarketVersion("china", {
     active: true,
     effectiveFrom: "2026-01-01T00:00:00.000Z",
     currency: "CNY",
     topAvtoCommissionRub: 91000,
     securityDepositRub: 160000,
   }, { id: "admin_test", displayName: "Admin", role: "admin" }, "new active commission");
-  const newSnapshot = settings.getBusinessSettingsSnapshot("china");
+  const newSnapshot = await settings.getBusinessSettingsSnapshot("china");
   assert.equal(oldSnapshot.rules.topAvtoCommissionRub, 90000);
   assert.equal(newSnapshot.rules.topAvtoCommissionRub, 91000);
   assert.notEqual(oldSnapshot.configVersion, newSnapshot.configVersion);
@@ -67,9 +67,9 @@ test("snapshots stay immutable after immediate market version update", async () 
 
 test("known initial market payments are preserved", async () => {
   const { settings } = await loadModules();
-  const japan = settings.getActiveMarketVersion("japan");
-  const china = settings.getActiveMarketVersion("china");
-  const uae = settings.getActiveMarketVersion("uae");
+  const japan = await settings.getActiveMarketVersion("japan");
+  const china = await settings.getActiveMarketVersion("china");
+  const uae = await settings.getActiveMarketVersion("uae");
   assert.equal(japan.securityDepositRub + japan.topAvtoCommissionRub, 70000);
   assert.equal(china.securityDepositRub + china.topAvtoCommissionRub, 250000);
   assert.equal(uae.securityDepositRub + uae.topAvtoCommissionRub, 200000);
@@ -77,18 +77,18 @@ test("known initial market payments are preserved", async () => {
 
 test("direct partner payout future version does not affect current active payout", async () => {
   const { settings } = await loadModules();
-  const before = settings.getActiveDirectPartnerPayout();
-  const future = settings.createDirectPartnerPayoutVersion(15000, "2099-01-01T00:00:00.000Z", { id: "owner_test", displayName: "Owner", role: "owner" }, "future payout");
+  const before = await settings.getActiveDirectPartnerPayout();
+  const future = await settings.createDirectPartnerPayoutVersion(15000, "2099-01-01T00:00:00.000Z", { id: "owner_test", displayName: "Owner", role: "owner" }, "future payout");
   assert.equal(future.status, "scheduled");
-  assert.equal(settings.getActiveDirectPartnerPayout().defaultSignedContractPayoutRub, before.defaultSignedContractPayoutRub);
-  assert.equal(settings.getActiveDirectPartnerPayout(new Date("2100-01-01T00:00:00.000Z")).defaultSignedContractPayoutRub, 15000);
+  assert.equal((await settings.getActiveDirectPartnerPayout()).defaultSignedContractPayoutRub, before.defaultSignedContractPayoutRub);
+  assert.equal((await settings.getActiveDirectPartnerPayout(new Date("2100-01-01T00:00:00.000Z"))).defaultSignedContractPayoutRub, 15000);
 });
 
 test("individual partner payout version is stored separately from base payout", async () => {
   const { settings } = await loadModules();
-  const partnerVersion = settings.createPartnerPayoutVersion("demo", 12000, "2026-01-01T00:00:00.000Z", { id: "admin_test", displayName: "Admin", role: "admin" }, "individual");
+  const partnerVersion = await settings.createPartnerPayoutVersion("demo", 12000, "2026-01-01T00:00:00.000Z", { id: "admin_test", displayName: "Admin", role: "admin" }, "individual");
   assert.equal(partnerVersion.payoutRub, 12000);
-  assert.equal(settings.getActiveDirectPartnerPayout().defaultSignedContractPayoutRub, 10000);
+  assert.equal((await settings.getActiveDirectPartnerPayout()).defaultSignedContractPayoutRub, 10000);
 });
 
 test("role separation and validators use production functions", async () => {
@@ -99,12 +99,12 @@ test("role separation and validators use production functions", async () => {
   assert.equal(validation.canEditBusinessSettings("partner"), false);
   const invalid = validation.validateMarketVersion({ status: "active", currency: "JPY", securityDepositRub: null, topAvtoCommissionRub: 1 });
   assert.equal(invalid.ok, false);
-  assert.throws(() => settings.createMarketVersion("japan", { active: true, currency: "JPY" }, { id: "manager", displayName: "Manager", role: "manager" }, "no"), /forbidden/);
+  await assert.rejects(() => settings.createMarketVersion("japan", { active: true, currency: "JPY" }, { id: "manager", displayName: "Manager", role: "manager" }, "no"), /forbidden/);
 });
 
 test("business calculation engine returns configVersion, breakdown and immutable snapshot", async () => {
   const { settings, engine } = await loadModules();
-  const config = settings.getActiveMarketVersion("japan");
+  const config = await settings.getActiveMarketVersion("japan");
   const result = engine.calculateAvtocenaFromBusinessConfig({
     marketId: "japan",
     marketConfig: config,
@@ -122,7 +122,7 @@ test("business calculation engine returns configVersion, breakdown and immutable
 
 test("CPA network draft can be edited without inventing real network parameters", async () => {
   const { settings } = await loadModules();
-  const network = settings.upsertCpaNetworkDraft({ id: "draft_test", name: "Draft", payoutType: "fixed", payoutAmount: null, postbackConfig: { method: "GET", urlTemplate: "", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "draft");
+  const network = await settings.upsertCpaNetworkDraft({ id: "draft_test", name: "Draft", payoutType: "fixed", payoutAmount: null, postbackConfig: { method: "GET", urlTemplate: "", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "draft");
   assert.equal(network.enabled, false);
   assert.equal(network.status, "draft");
   assert.equal(network.postbackConfig.urlTemplate, "");
@@ -132,23 +132,23 @@ test("CPA network draft can be edited without inventing real network parameters"
 test("effectiveFrom is consistent across market, site, direct payout and public CPA layer", async () => {
   const { settings } = await loadModules();
   const user = { id: "owner_test", displayName: "Owner", role: "owner" };
-  settings.createDirectPartnerPayoutVersion(16000, "2099-01-01T00:00:00.000Z", user, "future payout");
-  settings.createSiteBusinessVersion({ displayPartnerPayoutRub: 16000, effectiveFrom: "2099-01-01T00:00:00.000Z" }, user, "future site");
-  settings.createMarketVersion("uae", { active: true, currency: "AED", effectiveFrom: "2099-01-01T00:00:00.000Z", securityDepositRub: 110000, topAvtoCommissionRub: 95000 }, user, "future market");
+  await settings.createDirectPartnerPayoutVersion(16000, "2099-01-01T00:00:00.000Z", user, "future payout");
+  await settings.createSiteBusinessVersion({ displayPartnerPayoutRub: 16000, effectiveFrom: "2099-01-01T00:00:00.000Z" }, user, "future site");
+  await settings.createMarketVersion("uae", { active: true, currency: "AED", effectiveFrom: "2099-01-01T00:00:00.000Z", securityDepositRub: 110000, topAvtoCommissionRub: 95000 }, user, "future market");
   const before = new Date("2098-01-01T00:00:00.000Z");
   const after = new Date("2100-01-01T00:00:00.000Z");
-  assert.equal(settings.getActiveDirectPartnerPayout(before).defaultSignedContractPayoutRub, 10000);
-  assert.equal(settings.getActiveSiteBusinessVersion(before).displayPartnerPayoutRub, 10000);
-  assert.equal(settings.getActiveMarketVersion("uae", before).topAvtoCommissionRub, 90000);
-  assert.equal(settings.getActiveDirectPartnerPayout(after).defaultSignedContractPayoutRub, 16000);
-  assert.equal(settings.getActiveSiteBusinessVersion(after).displayPartnerPayoutRub, 16000);
-  assert.equal(settings.getActiveMarketVersion("uae", after).topAvtoCommissionRub, 95000);
+  assert.equal((await settings.getActiveDirectPartnerPayout(before)).defaultSignedContractPayoutRub, 10000);
+  assert.equal((await settings.getActiveSiteBusinessVersion(before)).displayPartnerPayoutRub, 10000);
+  assert.equal((await settings.getActiveMarketVersion("uae", before)).topAvtoCommissionRub, 90000);
+  assert.equal((await settings.getActiveDirectPartnerPayout(after)).defaultSignedContractPayoutRub, 16000);
+  assert.equal((await settings.getActiveSiteBusinessVersion(after)).displayPartnerPayoutRub, 16000);
+  assert.equal((await settings.getActiveMarketVersion("uae", after)).topAvtoCommissionRub, 95000);
 });
 
 test("partner accruals are created only for active direct partners and are deduped", async () => {
   const { settings } = await loadModules();
-  const first = settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
-  const duplicate = settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
+  const first = await settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
+  const duplicate = await settings.createDirectPartnerAccrualForLead({ leadId: "lead_direct", clientId: "client_1", partnerRef: "demo", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(first.created, true);
   assert.equal(first.accrual.partnerCode, "demo");
   assert.equal(first.accrual.payoutAmountRub, 10000);
@@ -158,7 +158,7 @@ test("partner accruals are created only for active direct partners and are dedup
 
 test("CPA and unknown partner refs do not create direct partner accruals", async () => {
   const { settings } = await loadModules();
-  settings.upsertCpaNetworkDraft({
+  await settings.upsertCpaNetworkDraft({
     id: "network_test",
     networkId: "network_test",
     name: "CPA Test",
@@ -170,8 +170,8 @@ test("CPA and unknown partner refs do not create direct partner accruals", async
     payoutAmount: 7000,
     postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} },
   }, { id: "owner", displayName: "Owner", role: "owner" }, "test network");
-  const cpa = settings.createDirectPartnerAccrualForLead({ leadId: "lead_cpa", partnerRef: "cpa_ref", createdAt: "2026-07-12T00:00:00.000Z" });
-  const unknown = settings.createDirectPartnerAccrualForLead({ leadId: "lead_unknown", partnerRef: "unknown_ref", createdAt: "2026-07-12T00:00:00.000Z" });
+  const cpa = await settings.createDirectPartnerAccrualForLead({ leadId: "lead_cpa", partnerRef: "cpa_ref", createdAt: "2026-07-12T00:00:00.000Z" });
+  const unknown = await settings.createDirectPartnerAccrualForLead({ leadId: "lead_unknown", partnerRef: "unknown_ref", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(cpa.created, false);
   assert.equal(cpa.reason, "cpa_network_ref");
   assert.equal(unknown.created, false);
@@ -182,7 +182,7 @@ test("CPA Gateway uses payoutAmount as primary postback payout", async () => {
   const { settings } = await loadModules();
   const data = await import(`../apps/web/lib/data.ts?case=${Date.now()}${Math.random()}`);
   const gateway = await import(`../apps/web/lib/cpa-gateway.ts?case=${Date.now()}${Math.random()}`);
-  settings.upsertCpaNetworkDraft({
+  await settings.upsertCpaNetworkDraft({
     id: "network_postback",
     networkId: "network_postback",
     name: "CPA Postback",
@@ -194,7 +194,7 @@ test("CPA Gateway uses payoutAmount as primary postback payout", async () => {
     payoutAmount: 7777,
     postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} },
   }, { id: "owner", displayName: "Owner", role: "owner" }, "postback");
-  data.appendChunkedDataJson("cpa/events.json", { id: "cpa_test_event", direction: "outbound", partnerRef: "cpa_postback", externalClickId: "click-1", eventType: "contract_signed", status: "contract_signed", deliveryStatus: "pending" });
+  await data.appendChunkedDataJson("cpa/events.json", { id: "cpa_test_event", direction: "outbound", partnerRef: "cpa_postback", externalClickId: "click-1", eventType: "contract_signed", status: "contract_signed", deliveryStatus: "pending" });
   let calledUrl = "";
   const originalFetch = globalThis.fetch;
   globalThis.fetch = (async (url: any) => {
@@ -212,9 +212,9 @@ test("CPA Gateway uses payoutAmount as primary postback payout", async () => {
 
 test("CRM effective market version uses the same effectiveFrom selection as calculations", async () => {
   const { settings, engine } = await loadModules();
-  settings.createMarketVersion("japan", { active: true, effectiveFrom: "2099-01-01T00:00:00.000Z", currency: "JPY", securityDepositRub: 31000, topAvtoCommissionRub: 48000 }, { id: "owner", displayName: "Owner", role: "owner" }, "scheduled");
-  const beforeCrm = settings.getMarketsWithEffectiveVersions(new Date("2098-01-01T00:00:00.000Z")).find((market: any) => market.id === "japan").effectiveVersion;
-  const afterCrm = settings.getMarketsWithEffectiveVersions(new Date("2100-01-01T00:00:00.000Z")).find((market: any) => market.id === "japan").effectiveVersion;
+  await settings.createMarketVersion("japan", { active: true, effectiveFrom: "2099-01-01T00:00:00.000Z", currency: "JPY", securityDepositRub: 31000, topAvtoCommissionRub: 48000 }, { id: "owner", displayName: "Owner", role: "owner" }, "scheduled");
+  const beforeCrm = (await settings.getMarketsWithEffectiveVersions(new Date("2098-01-01T00:00:00.000Z"))).find((market: any) => market.id === "japan").effectiveVersion;
+  const afterCrm = (await settings.getMarketsWithEffectiveVersions(new Date("2100-01-01T00:00:00.000Z"))).find((market: any) => market.id === "japan").effectiveVersion;
   const calc = engine.calculateAvtocenaFromBusinessConfig({ marketId: "japan", marketConfig: afterCrm, carPriceRub: 1000000 });
   assert.equal(beforeCrm.topAvtoCommissionRub, 39000);
   assert.equal(afterCrm.topAvtoCommissionRub, 48000);
@@ -225,32 +225,32 @@ test("status side effects split direct partner, CPA network and unknown refs", a
   const { settings } = await loadModules();
   const data = await import(`../apps/web/lib/data.ts?case=${Date.now()}${Math.random()}`);
 
-  const direct = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
+  const direct = await settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(direct.accrual.created, true);
   assert.equal(direct.cpaEvent, null);
-  assert.equal(data.readChunkedDataJson("cpa/events.json", []).filter((event: any) => event.leadId === "lead_side_direct").length, 0);
+  assert.equal((await data.readChunkedDataJson("cpa/events.json", [])).filter((event: any) => event.leadId === "lead_side_direct").length, 0);
 
-  settings.upsertCpaNetworkDraft({ id: "network_side", networkId: "network_side", name: "CPA Side", enabled: true, partnerRef: "cpa_side", offerId: "offer_side", goal: "signed_contract", payoutType: "fixed", payoutAmount: 9000, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "side");
-  const cpa = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_cpa", partnerRef: "cpa_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-cpa", createdAt: "2026-07-12T00:00:00.000Z" });
+  await settings.upsertCpaNetworkDraft({ id: "network_side", networkId: "network_side", name: "CPA Side", enabled: true, partnerRef: "cpa_side", offerId: "offer_side", goal: "signed_contract", payoutType: "fixed", payoutAmount: 9000, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&payout={payout}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "side");
+  const cpa = await settings.handleLeadPartnerStatusChange({ leadId: "lead_side_cpa", partnerRef: "cpa_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-cpa", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(cpa.accrual, null);
   assert.equal(cpa.cpaEvent.eventType, "contract_signed");
-  assert.equal(data.readChunkedDataJson("partners/accruals.json", []).filter((item: any) => item.leadId === "lead_side_cpa").length, 0);
+  assert.equal((await data.readChunkedDataJson("partners/accruals.json", [])).filter((item: any) => item.leadId === "lead_side_cpa").length, 0);
 
-  const unknown = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_unknown", partnerRef: "unknown_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-unknown", createdAt: "2026-07-12T00:00:00.000Z" });
+  const unknown = await settings.handleLeadPartnerStatusChange({ leadId: "lead_side_unknown", partnerRef: "unknown_side", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-unknown", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(unknown.accrual, null);
   assert.equal(unknown.cpaEvent, null);
   assert.equal(unknown.diagnostic.type, "partner_source_unknown");
 
-  const duplicate = settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
+  const duplicate = await settings.handleLeadPartnerStatusChange({ leadId: "lead_side_direct", partnerRef: "demo", status: "contract_signed", eventType: "contract_signed", externalClickId: "click-direct", createdAt: "2026-07-12T00:00:00.000Z" });
   assert.equal(duplicate.accrual.created, false);
   assert.equal(duplicate.accrual.reason, "duplicate");
 });
 
 test("CPA rejection event preserves rejectionReason", async () => {
   const { settings } = await loadModules();
-  settings.upsertCpaNetworkDraft({ id: "network_reject", networkId: "network_reject", name: "CPA Reject", enabled: true, partnerRef: "cpa_reject", offerId: "offer_reject", goal: "lead_rejected", payoutType: "fixed", payoutAmount: 0, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&reason={rejection_reason}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "reject test");
+  await settings.upsertCpaNetworkDraft({ id: "network_reject", networkId: "network_reject", name: "CPA Reject", enabled: true, partnerRef: "cpa_reject", offerId: "offer_reject", goal: "lead_rejected", payoutType: "fixed", payoutAmount: 0, postbackConfig: { method: "GET", urlTemplate: "https://network.test/postback?click_id={click_id}&reason={rejection_reason}", headers: {} } }, { id: "owner", displayName: "Owner", role: "owner" }, "reject test");
 
-  const result = settings.handleLeadPartnerStatusChange({
+  const result = await settings.handleLeadPartnerStatusChange({
     leadId: "lead_reject_reason",
     partnerRef: "cpa_reject",
     status: "rejected",

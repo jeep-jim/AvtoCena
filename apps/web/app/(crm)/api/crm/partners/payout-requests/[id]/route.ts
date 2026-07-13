@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import {
   readChunkedDataJson,
+  mutateDataJson,
   readDataJson,
   updateChunkedDataJson,
-  writeDataJson,
 } from "@/lib/data";
 
 type PayoutStatus = "pending" | "approved" | "paid" | "rejected";
@@ -42,10 +42,10 @@ export async function PATCH(
   }
 
   const requestId = clean(context.params.id, 200);
-  const existing = readChunkedDataJson<PayoutRequest>(
+  const existing = (await readChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     [],
-  ).find((item) => item.id === requestId);
+  )).find((item) => item.id === requestId);
 
   if (!existing) {
     return NextResponse.json({ ok: false, error: "request_not_found" }, { status: 404 });
@@ -70,8 +70,7 @@ export async function PATCH(
   }
 
   if (status === "paid" && existing.status !== "paid") {
-    const partners = readDataJson<any[]>("partners/partners.json", []);
-    const nextPartners = partners.map((partner) => {
+    await mutateDataJson<any[]>("partners/partners.json", [], (partners) => partners.map((partner) => {
       if (partner.code !== existing.partnerCode) return partner;
 
       const currentBalance = Math.max(0, Number(partner.balanceRub || 0));
@@ -83,9 +82,7 @@ export async function PATCH(
         paidOutRub: Number(partner.paidOutRub || 0) + amount,
         updatedAt: now,
       };
-    });
-
-    writeDataJson("partners/partners.json", nextPartners);
+    }));
   }
 
   return NextResponse.json({ ok: true, request: updated });
