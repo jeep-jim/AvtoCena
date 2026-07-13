@@ -84,6 +84,7 @@ type CatalogOffer = {
   totalRub?: number | null;
   calculationComplete: boolean;
   calculationStatus: string;
+  lines?: { id: string; title: string; amountRub: number }[];
   country: string;
   countryLabel: string;
   body: string;
@@ -142,6 +143,7 @@ const readyCatalog: CatalogOffer[] = staticPublicOffers.map((offer) => ({
   totalRub: offer.totalRub,
   calculationComplete: offer.calculationComplete === true,
   calculationStatus: offer.calculationStatus,
+  lines: offer.lines || [],
   country: offer.market,
   countryLabel: ({ japan: "Япония", china: "Китай", korea: "Корея", uae: "ОАЭ", europe: "Европа" } as Record<string, string>)[offer.market] || offer.market,
   body: offer.bodyType || "auto",
@@ -168,7 +170,28 @@ function pluralVariant(count: number) {
   return "вариантов";
 }
 
-function getFilteredCatalogOffers({
+function matchesCatalogFilters(offer: CatalogOffer, {
+  brand,
+  model,
+  yearFrom,
+  country,
+  bodyType,
+}: {
+  brand: string;
+  model: string;
+  yearFrom: string;
+  country: string;
+  bodyType: string;
+}) {
+  if (brand && offer.brand !== brand) return false;
+  if (model && offer.model !== model) return false;
+  if (yearFrom && offer.year < Number(yearFrom)) return false;
+  if (country && offer.country !== country) return false;
+  if (bodyType && offer.body !== bodyType) return false;
+  return true;
+}
+
+function getCompleteCatalogOffers({
   budgetNumber,
   brand,
   model,
@@ -184,15 +207,27 @@ function getFilteredCatalogOffers({
   bodyType: string;
 }) {
   return readyCatalog.filter((offer) => {
-    if (budgetNumber > 0 && (!offer.calculationComplete || !offer.totalRub || offer.totalRub > budgetNumber)) return false;
-    if (brand && offer.brand !== brand) return false;
-    if (model && offer.model !== model) return false;
-    if (yearFrom && offer.year < Number(yearFrom)) return false;
-    if (country && offer.country !== country) return false;
-    if (bodyType && offer.body !== bodyType) return false;
-
+    if (!matchesCatalogFilters(offer, { brand, model, yearFrom, country, bodyType })) return false;
+    if (!offer.calculationComplete || !offer.totalRub) return false;
+    if (budgetNumber > 0 && offer.totalRub > budgetNumber) return false;
     return true;
   });
+}
+
+function getIncompleteCatalogOffers({
+  brand,
+  model,
+  yearFrom,
+  country,
+  bodyType,
+}: {
+  brand: string;
+  model: string;
+  yearFrom: string;
+  country: string;
+  bodyType: string;
+}) {
+  return readyCatalog.filter((offer) => !offer.calculationComplete && matchesCatalogFilters(offer, { brand, model, yearFrom, country, bodyType }));
 }
 
 type SelectOption = {
@@ -479,7 +514,7 @@ function SelectField({
         aria-haspopup="listbox"
         aria-expanded={open}
         className={[
-          "soft-input flex h-[48px] w-full min-w-0 items-center justify-between gap-3 rounded-[1rem] border bg-white/[0.05] px-3 text-left text-[14px] font-black text-white outline-none transition sm:h-[50px] sm:px-4 sm:text-[15px] md:h-[56px] md:rounded-[1.1rem]",
+          "soft-input flex h-[48px] w-full min-w-0 items-center justify-between gap-3 rounded-[1rem] border bg-white/[5%] px-3 text-left text-[14px] font-black text-white outline-none transition sm:h-[50px] sm:px-4 sm:text-[15px] md:h-[56px] md:rounded-[1.1rem]",
           open
             ? "rounded-b-none border-red-400/55 bg-[#23252e] shadow-[0_0_0_3px_rgba(239,68,68,0.10)]"
             : "border-white/12 hover:border-white/22 hover:bg-white/[0.07]",
@@ -657,7 +692,7 @@ function BudgetField({
       <button
         type="button"
         onClick={onTogglePicker}
-        className="soft-input flex h-[56px] w-full min-w-0 items-center justify-between gap-3 rounded-[1.1rem] border border-white/12 bg-white/[0.05] px-4 text-left text-white outline-none transition hover:border-white/20 hover:bg-white/[0.07] focus:border-red-400/60 sm:h-[60px] sm:px-5"
+        className="soft-input flex h-[56px] w-full min-w-0 items-center justify-between gap-3 rounded-[1.1rem] border border-white/12 bg-white/[5%] px-4 text-left text-white outline-none transition hover:border-white/20 hover:bg-white/[0.07] focus:border-red-400/60 sm:h-[60px] sm:px-5"
       >
         <span className="min-w-0 truncate text-[17px] font-black sm:text-[18px]">
           {budgetLabel}
@@ -699,7 +734,7 @@ function BudgetField({
                   className={[
                     "h-11 rounded-[0.9rem] border px-3 text-sm font-black transition",
                     active
-                      ? "border-red-400 bg-red-500 text-white shadow-[0_0_26px_rgba(239,68,68,0.22)]"
+                      ? "border-red-400 bg-red-500 text-white shadow-[0_0_26px_rgba(239,68,68,0.21)]"
                       : "border-white/12 bg-white/[0.04] text-white/78 hover:border-white/22 hover:bg-white/[0.07]",
                   ].join(" ")}
                 >
@@ -852,7 +887,7 @@ function TopAvtoExecutorBlock() {
           />
         ) : (
           <div className="text-center">
-            <div className="text-3xl font-black tracking-[-0.05em] text-white">
+            <div className="text-3xl font-black tracking-[-0.06em] text-white">
               TopAvto
             </div>
             <div className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-white/42">
@@ -867,36 +902,28 @@ function TopAvtoExecutorBlock() {
 
 
 function OfferEstimateDetails({ offer }: { offer: CatalogOffer }) {
-  const basePrice = offer.totalRub || offer.sourcePriceRub || 0;
-  const carCost = Math.round((basePrice * 0.58) / 10000) * 10000;
-  const logistics = Math.round((basePrice * 0.09) / 10000) * 10000;
-  const customs = Math.round((basePrice * 0.22) / 10000) * 10000;
-  const broker = Math.round((basePrice * 0.05) / 10000) * 10000;
-  const commission = Math.max(
-    90000,
-    Math.round((basePrice * 0.035) / 10000) * 10000,
-  );
+  const lines = offer.lines || [];
 
-  const lines = [
-    ["Стоимость авто", carCost],
-    ["Логистика", logistics],
-    ["Таможня и утиль", customs],
-    ["Брокер и оформление", broker],
-    ["Комиссия TopAvto", commission],
-  ] as const;
+  if (!offer.calculationComplete || lines.length === 0) {
+    return (
+      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm font-bold text-white/58">
+        Детализация расчёта уточняется.
+      </div>
+    );
+  }
 
   return (
     <div className="grid max-w-xl gap-2.5 text-[13px] font-bold leading-6 text-white/70 sm:text-sm">
-      {lines.map(([label, amount]) => (
+      {lines.map((line) => (
         <div
-          key={label}
+          key={line.id}
           className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-x-2 gap-y-1 md:flex md:gap-2"
         >
           <span className="shrink-0 text-red-300/80">·</span>
-          <span className="min-w-0 text-white/76 md:shrink-0">{label}</span>
+          <span className="min-w-0 text-white/76 md:shrink-0">{line.title}</span>
           <span className="mb-[4px] hidden min-w-[20px] flex-1 border-b border-dotted border-white/22 md:block" />
           <span className="min-w-[104px] shrink-0 text-right font-black text-white sm:min-w-[118px] md:min-w-[132px]">
-            {formatMoney(amount)} ₽
+            {formatMoney(line.amountRub)} ₽
           </span>
         </div>
       ))}
@@ -971,16 +998,16 @@ function ReadyCatalogCard({
             {!offer.calculationComplete ? <div className="mt-1 text-[11px] font-black text-yellow-100/75">Расчёт под ключ уточняется</div> : null}
           </div>
 
-          <div className="shrink-0 rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-xs font-black text-white/72 transition group-hover:border-red-300/35 group-hover:text-white">
+          <div className="shrink-0 rounded-full border border-white/10 bg-white/[5.5%] px-3 py-1.5 text-xs font-black text-white/72 transition group-hover:border-red-300/35 group-hover:text-white">
             Подробнее
           </div>
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2 text-xs font-bold text-white/58">
-          <span className="rounded-full bg-white/[0.05] px-3 py-1.5">
+          <span className="rounded-full bg-white/[5%] px-3 py-1.5">
             {offer.engine}
           </span>
-          <span className="rounded-full bg-white/[0.05] px-3 py-1.5">
+          <span className="rounded-full bg-white/[5%] px-3 py-1.5">
             {offer.power}
           </span>
         </div>
@@ -996,15 +1023,21 @@ function ReadyCatalogGrid({
   offers: CatalogOffer[];
   onOpen: (offer: CatalogOffer) => void;
 }) {
-  const visibleOffers = offers.length > 0 ? offers : readyCatalog;
+  const visibleOffers = offers;
 
   return (
     <section className="w-full min-w-0">
-      <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {visibleOffers.map((offer) => (
-          <ReadyCatalogCard key={offer.id} offer={offer} onOpen={onOpen} />
-        ))}
-      </div>
+      {visibleOffers.length ? (
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleOffers.map((offer) => (
+            <ReadyCatalogCard key={offer.id} offer={offer} onOpen={onOpen} />
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.045] p-6 text-center text-sm font-bold text-white/58">
+          Подходящих предложений с готовым расчётом пока нет. Менеджер выполнит индивидуальный подбор или уточнит расчёт по актуальным объявлениям.
+        </div>
+      )}
     </section>
   );
 }
@@ -1122,7 +1155,7 @@ function OfferBottomSheet({
               <div className="text-[12px] font-black uppercase tracking-[0.18em] text-white/42">
                 {offer.calculationComplete ? "ориентир под ключ" : "цена площадки"}
               </div>
-              <div className="mt-3 text-[32px] font-black tracking-[-0.055em] text-white sm:text-[38px]">
+              <div className="mt-3 text-[32px] font-black tracking-[-0.06em] text-white sm:text-[38px]">
                 {offer.calculationComplete && offer.totalRub ? `${formatMoney(offer.totalRub)} ₽` : `${formatMoney(offer.sourcePriceLocal)} ${offer.sourceCurrency}`}
               </div>
               <div className="mt-1 text-sm font-black text-yellow-100">
@@ -1456,7 +1489,7 @@ function BenefitListRow({
         <div className="text-[15px] font-black leading-5 text-white">
           {benefit.title}
         </div>
-        <p className="mt-1 max-w-[720px] text-[13px] font-medium leading-6 text-[rgba(255,255,255,0.58)]">
+        <p className="mt-1 max-w-[720px] text-[13px] font-medium leading-6 text-[rgba(255,255,255,0.57)]">
           {benefit.text}
         </p>
       </div>
@@ -1612,9 +1645,9 @@ export default function HomePage() {
     return digits ? Number(digits) : 0;
   }, [budget]);
 
-  const filteredCatalogOffers = useMemo(
+  const completeCatalogOffers = useMemo(
     () =>
-      getFilteredCatalogOffers({
+      getCompleteCatalogOffers({
         budgetNumber,
         brand,
         model,
@@ -1625,7 +1658,19 @@ export default function HomePage() {
     [budgetNumber, brand, model, yearFrom, country, bodyType],
   );
 
-  const foundLabel = `🚗 Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;
+  const incompleteCatalogOffers = useMemo(
+    () =>
+      getIncompleteCatalogOffers({
+        brand,
+        model,
+        yearFrom,
+        country,
+        bodyType,
+      }),
+    [brand, model, yearFrom, country, bodyType],
+  );
+
+  const foundLabel = `🚗 Нашли ${completeCatalogOffers.length} ${pluralVariant(completeCatalogOffers.length)}`;
 
   function handleBudgetChange(value: string) {
     const digits = value.replace(/\D/g, "");
@@ -1658,7 +1703,7 @@ export default function HomePage() {
 
   function buildResultsUrl(
     extra?: Partial<{
-      budget: number;
+      budget: number | null;
       brand: string;
       model: string;
       year: number | string;
@@ -1668,14 +1713,14 @@ export default function HomePage() {
   ) {
     const params = new URLSearchParams();
 
-    const finalBudget = extra?.budget ?? budgetNumber;
+    const finalBudget = extra && "budget" in extra ? extra.budget : budgetNumber;
     const finalBrand = extra?.brand ?? brand;
     const finalModel = extra?.model ?? model;
     const finalYear = extra?.year ?? yearFrom;
     const finalCountry = extra?.country ?? country;
     const finalBody = extra?.body ?? bodyType;
 
-    if (finalBudget > 0) params.set("budget", String(finalBudget));
+    if (typeof finalBudget === "number" && finalBudget > 0) params.set("budget", String(finalBudget));
     if (finalBrand) params.set("brand", finalBrand);
     if (finalModel) params.set("model", finalModel);
     if (finalYear) params.set("yearFrom", String(finalYear));
@@ -1694,7 +1739,7 @@ export default function HomePage() {
   function openOfferResults(offer: CatalogOffer) {
     router.push(
       buildResultsUrl({
-        budget: offer.calculationComplete && offer.totalRub ? offer.totalRub : undefined,
+        budget: offer.calculationComplete && offer.totalRub ? offer.totalRub : null,
         brand: offer.brand,
         model: offer.model,
         year: offer.year,
@@ -1881,9 +1926,17 @@ export default function HomePage() {
                 <div className="h-px w-full bg-gradient-to-r from-red-500 via-white/18 to-transparent" />
               </div>
               <ReadyCatalogGrid
-                offers={filteredCatalogOffers}
+                offers={completeCatalogOffers}
                 onOpen={setSelectedOffer}
               />
+              {incompleteCatalogOffers.length ? (
+                <div className="mt-4">
+                  <h2 className="mb-3 text-sm font-black uppercase tracking-[0.16em] text-yellow-100/85">
+                    Актуальные предложения — расчёт под ключ проверяется
+                  </h2>
+                  <ReadyCatalogGrid offers={incompleteCatalogOffers} onOpen={setSelectedOffer} />
+                </div>
+              ) : null}
             </div>
           </div>
         </section>      </div>
