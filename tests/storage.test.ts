@@ -30,7 +30,7 @@ test('chunked JSON splits after 500 records and keeps index after chunk', async 
     const index = await readDataJson<any>('clients/clients-index.json', null);
     assert.equal(index.total, 501);
     assert.equal(index.chunks.length, 2);
-    assert.equal(fs.existsSync(path.join(dir, 'data/clients/clients-0002.json')), true);
+    assert.equal(fs.existsSync(path.join(dir, 'data/clients', index.chunks[1].file)), true);
   } finally { process.chdir(cwd); resetJsonStorageForTests(); }
 });
 
@@ -74,5 +74,19 @@ test('parallel chunk appends preserve both records', async () => {
     const records = await (await import('../apps/web/lib/data.ts?parallel=' + Date.now())).readChunkedDataJson<any>('clients/clients.json', []);
     assert.equal(records.length, 2);
     assert.deepEqual(new Set(records.map((item: any) => item.id)), new Set(['client_a', 'client_b']));
+  } finally { process.chdir(cwd); resetJsonStorageForTests(); }
+});
+
+test('mutateDataJson preserves parallel JSON mutations', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'avtocena-mutate-'));
+  const cwd = process.cwd(); process.chdir(dir); fs.mkdirSync('data'); process.env.JSON_STORAGE_DRIVER = 'local'; resetJsonStorageForTests();
+  const { mutateDataJson, readDataJson } = await import('../apps/web/lib/data.ts?mutate=' + Date.now());
+  try {
+    await Promise.all([
+      mutateDataJson<any[]>('markets/markets.json', [], (items) => [...items, { id: 'a' }]),
+      mutateDataJson<any[]>('markets/markets.json', [], (items) => [...items, { id: 'b' }])
+    ]);
+    const records = await readDataJson<any[]>('markets/markets.json', []);
+    assert.deepEqual(new Set(records.map((item) => item.id)), new Set(['a', 'b']));
   } finally { process.chdir(cwd); resetJsonStorageForTests(); }
 });

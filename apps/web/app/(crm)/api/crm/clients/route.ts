@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     let client = clients.find((item) => item.operationId === operationId);
     let lead = leads.find((item) => item.operationId === operationId);
     let event = events.find((item) => item.operationId === operationId);
-    const clientId = client?.id || generateId("client");
+    const clientId = `client_${operationId}`;
 
     if (!client) client = await appendChunkedDataJson("clients/clients.json", {
       id: clientId,
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     });
 
     if (!lead) lead = await appendChunkedDataJson("leads/leads.json", {
-      id: generateId("lead"),
+      id: `lead_${operationId}`,
       operationId,
       createdAt,
       updatedAt: createdAt,
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
     });
 
     if (!event) event = await appendChunkedDataJson("activity/feed.json", {
-      id: generateId("event"),
+      id: `event_${operationId}`,
       operationId,
       createdAt,
       type: "client_created",

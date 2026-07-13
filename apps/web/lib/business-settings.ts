@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { appendChunkedDataJson, readChunkedDataJson, readDataJson, writeDataJson } from "./data";
+import { appendChunkedDataJson, mutateDataJson, readChunkedDataJson, readDataJson } from "./data";
 import { canEditBusinessSettings, cleanText, isMarketId, nullableNumber, validateMarketVersion } from "./settings-validation";
 
 export type SettingsUser = { id: string; displayName: string; role: string };
@@ -75,49 +75,22 @@ export async function appendChangeLog(entry: any) {
 export async function createMarketVersion(marketId: string, patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
   if (!isMarketId(marketId)) throw new Error("unknown_market");
-
-  const markets = await getMarketsSettings();
-  const marketIndex = markets.findIndex((market) => market.id === marketId);
-  if (marketIndex === -1) throw new Error("market_not_found");
-
-  const market = markets[marketIndex];
-  const current = await getActiveMarketVersion(marketId) || market.versions?.[market.versions.length - 1] || {};
-  const nextVersionNumber = Math.max(0, ...(market.versions || []).map((version: any) => Number(version.version || 0))) + 1;
-  const candidate = {
-    ...current,
-    ...patch,
-    id: makeId(`market_${marketId}_v${nextVersionNumber}`),
-    version: nextVersionNumber,
-    effectiveFrom: patch.effectiveFrom || nowIso(),
-    status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), patch.active !== false),
-    createdAt: nowIso(),
-    createdByUserId: user.id,
-  };
-  const validation = validateMarketVersion(candidate);
-  if (!validation.ok) {
-    const error = new Error(validation.errors.join(","));
-    (error as any).validationErrors = validation.errors;
-    throw error;
-  }
-
-  const nextVersion = validation.value;
-  const nextMarket = {
-    ...market,
-    name: cleanText(patch.name, 120) || market.name,
-    activeVersionId: nextVersion.status === "active" ? nextVersion.id : market.activeVersionId,
-    versions: [...(market.versions || []).map((version: any) => nextVersion.status === "active" && version.status === "active" ? { ...version, status: "archived" } : version), nextVersion],
-  };
-  markets[marketIndex] = nextMarket;
-  await writeDataJson("markets/markets.json", markets);
-  await appendChangeLog({
-    entityType: "market",
-    entityId: marketId,
-    changedByUserId: user.id,
-    changedByName: user.displayName,
-    oldValue: current,
-    newValue: nextVersion,
-    comment: cleanText(comment, 1000),
+  let current: any = null;
+  let nextVersion: any = null;
+  await mutateDataJson<any[]>("markets/markets.json", [], (markets) => {
+    const marketIndex = markets.findIndex((market) => market.id === marketId);
+    if (marketIndex === -1) throw new Error("market_not_found");
+    const market = markets[marketIndex];
+    current = chooseEffectiveVersion(market.versions || []) || market.versions?.[market.versions.length - 1] || {};
+    const nextVersionNumber = Math.max(0, ...(market.versions || []).map((version: any) => Number(version.version || 0))) + 1;
+    const candidate = { ...current, ...patch, id: makeId(`market_${marketId}_v${nextVersionNumber}`), version: nextVersionNumber, effectiveFrom: patch.effectiveFrom || nowIso(), status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), patch.active !== false), createdAt: nowIso(), createdByUserId: user.id };
+    const validation = validateMarketVersion(candidate);
+    if (!validation.ok) { const error = new Error(validation.errors.join(",")); (error as any).validationErrors = validation.errors; throw error; }
+    nextVersion = validation.value;
+    const nextMarket = { ...market, name: cleanText(patch.name, 120) || market.name, activeVersionId: nextVersion.status === "active" ? nextVersion.id : market.activeVersionId, versions: [...(market.versions || []).map((version: any) => nextVersion.status === "active" && version.status === "active" ? { ...version, status: "archived" } : version), nextVersion] };
+    return markets.map((item, index) => index === marketIndex ? nextMarket : item);
   });
+  await appendChangeLog({ entityType: "market", entityId: marketId, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: nextVersion, comment: cleanText(comment, 1000) });
   return nextVersion;
 }
 
@@ -155,7 +128,7 @@ export async function createSiteBusinessVersion(patch: any, user: SettingsUser, 
     createdByUserId: user.id,
   };
   const updated = { activeVersionId: next.status === "active" ? next.id : settings.activeVersionId, versions: [...(settings.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await writeDataJson("settings/site-business.json", updated);
+  await mutateDataJson<any>("settings/site-business.json", { activeVersionId: "", versions: [] }, () => updated);
   await appendChangeLog({ entityType: "site-business", entityId: "site", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
@@ -173,12 +146,12 @@ export async function createDirectPartnerPayoutVersion(amountRub: number, effect
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
   const settings = await readDataJson<any>("cpa/payouts.json", {});
   const program = settings.directPartnerProgram || { versions: [] };
-  const current = await await getActiveDirectPartnerPayout() || {};
+  const current = await getActiveDirectPartnerPayout() || {};
   const version = Math.max(0, ...(program.versions || []).map((item: any) => Number(item.version || 0))) + 1;
   const nextEffectiveFrom = effectiveFrom || nowIso();
   const next = { ...current, id: makeId(`direct_partner_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, defaultSignedContractPayoutRub: Number(amountRub), currency: "RUB", createdAt: nowIso(), createdByUserId: user.id, comment: cleanText(comment, 1000) };
   const updatedProgram = { ...program, activeVersionId: next.status === "active" ? next.id : program.activeVersionId, versions: [...(program.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await writeDataJson("cpa/payouts.json", { ...settings, directPartnerProgram: updatedProgram });
+  await mutateDataJson<any>("cpa/payouts.json", {}, (currentSettings) => ({ ...currentSettings, directPartnerProgram: updatedProgram }));
   await appendChangeLog({ entityType: "direct-partner-payout", entityId: "default", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
@@ -193,8 +166,8 @@ export async function createPartnerPayoutVersion(partnerCode: string, amountRub:
   const version = Math.max(0, ...versions.map((item: any) => Number(item.version || 0))) + 1;
   const nextEffectiveFrom = effectiveFrom || nowIso();
   const next = { id: makeId(`${partnerCode}_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, event: "signed_contract", payoutRub: Number(amountRub), currency: "RUB", comment: cleanText(comment, 1000) };
-  partners[partnerIndex] = { ...partner, payoutRub: next.status === "active" ? Number(amountRub) : partner.payoutRub, individualPayouts: [...versions.map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await writeDataJson("partners/partners.json", partners);
+  const nextPartner = { ...partner, payoutRub: next.status === "active" ? Number(amountRub) : partner.payoutRub, individualPayouts: [...versions.map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
+  await mutateDataJson<any[]>("partners/partners.json", [], (currentPartners) => currentPartners.map((item) => item.code === partnerCode ? nextPartner : item));
   await appendChangeLog({ entityType: "partner-payout", entityId: partnerCode, changedByUserId: user.id, changedByName: user.displayName, oldValue: versions[versions.length - 1] || null, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
@@ -337,8 +310,7 @@ export async function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comm
     if (!next.name || !next.networkId || !next.offerId || !next.goal || !next.payoutType) throw new Error("cpa_required_fields_missing");
     if (!/^https?:\/\//i.test(next.postbackConfig?.urlTemplate || "")) throw new Error("cpa_postback_url_invalid");
   }
-  if (index >= 0) networks[index] = next; else networks.push(next);
-  await writeDataJson("cpa/networks.json", networks);
+  await mutateDataJson<any[]>("cpa/networks.json", [], (currentNetworks) => { const nextNetworks = [...currentNetworks]; const currentIndex = nextNetworks.findIndex((network) => network.id === id); if (currentIndex >= 0) nextNetworks[currentIndex] = next; else nextNetworks.push(next); return nextNetworks; });
   await appendChangeLog({ entityType: "cpa-network", entityId: id, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }

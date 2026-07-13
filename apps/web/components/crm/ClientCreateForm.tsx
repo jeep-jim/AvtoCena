@@ -1,10 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function ClientCreateForm() {
   const router = useRouter();
+  const operationIdRef = useRef<string>(crypto.randomUUID());
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -38,7 +39,7 @@ export function ClientCreateForm() {
       const response = await fetch("/api/crm/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, operationId: crypto.randomUUID() })
+        body: JSON.stringify({ ...form, operationId: operationIdRef.current })
       });
 
       if (!response.ok) {
@@ -48,6 +49,7 @@ export function ClientCreateForm() {
 
       setSent(true);
       setForm({ fio: "", phone: "", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
+      operationIdRef.current = crypto.randomUUID();
       router.refresh();
     } catch (error) {
       setError(error instanceof Error && error.message === "storage_write_failed" ? "Не получилось сохранить клиента в production-хранилище. Запись не подтверждена, попробуйте ещё раз или обратитесь к администратору." : "Не получилось добавить клиента. Проверьте авторизацию и доступность CRM.");

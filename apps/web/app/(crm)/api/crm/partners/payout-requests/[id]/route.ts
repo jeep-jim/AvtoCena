@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import {
   readChunkedDataJson,
+  mutateDataJson,
   readDataJson,
   updateChunkedDataJson,
-  writeDataJson,
 } from "@/lib/data";
 
 type PayoutStatus = "pending" | "approved" | "paid" | "rejected";
@@ -70,8 +70,7 @@ export async function PATCH(
   }
 
   if (status === "paid" && existing.status !== "paid") {
-    const partners = await readDataJson<any[]>("partners/partners.json", []);
-    const nextPartners = partners.map((partner) => {
+    await mutateDataJson<any[]>("partners/partners.json", [], (partners) => partners.map((partner) => {
       if (partner.code !== existing.partnerCode) return partner;
 
       const currentBalance = Math.max(0, Number(partner.balanceRub || 0));
@@ -83,9 +82,7 @@ export async function PATCH(
         paidOutRub: Number(partner.paidOutRub || 0) + amount,
         updatedAt: now,
       };
-    });
-
-    await writeDataJson("partners/partners.json", nextPartners);
+    }));
   }
 
   return NextResponse.json({ ok: true, request: updated });

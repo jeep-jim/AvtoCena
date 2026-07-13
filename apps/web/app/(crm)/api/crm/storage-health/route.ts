@@ -9,11 +9,16 @@ export async function GET() {
   }
 
   const storage = getJsonStorage();
-  const probePath = `.health/${generateId("probe")}.json`;
   const checks = { bucketAvailable: false, read: false, write: false, delete: false };
-  const bootstrap = await checkStorageBootstrap();
+  let bootstrap: Awaited<ReturnType<typeof checkStorageBootstrap>> | { driver: string; collections: any[]; bootstrapCompleted: false } = {
+    driver: storage.driver,
+    collections: [],
+    bootstrapCompleted: false
+  };
 
   try {
+    bootstrap = await checkStorageBootstrap();
+    const probePath = `.health/${generateId("probe")}.json`;
     await storage.readJson("clients/clients.json", []);
     checks.bucketAvailable = true;
     checks.read = true;

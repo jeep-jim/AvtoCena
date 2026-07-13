@@ -4,7 +4,7 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { appendChangeLog, getContractTemplatesSettings } from "@/lib/business-settings";
-import { getDataRoot, writeDataJson } from "@/lib/data";
+import { getDataRoot, mutateDataJson } from "@/lib/data";
 import { canEditBusinessSettings, cleanText, booleanFromForm } from "@/lib/settings-validation";
 
 const MAX_TEMPLATE_BYTES = 8 * 1024 * 1024;
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       templates: [...(settings.templates || []), template],
       directorSignature: signatureFile ? { ...signatureFile, uploadedAt: new Date().toISOString(), uploadedByUserId: user.id, note: "PNG-подпись является визуальным наложением на документ и не является электронной подписью." } : settings.directorSignature,
     };
-    await writeDataJson("contracts/templates.json", next);
+    await mutateDataJson<any>("contracts/templates.json", { templates: [], generatedDocuments: [] }, () => next);
     await appendChangeLog({ entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
     return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
   } catch (error) {
