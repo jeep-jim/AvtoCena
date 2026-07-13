@@ -107,7 +107,12 @@ export function getSearchInputFromParams(searchParams: Record<string, string | s
     model: one(searchParams.model),
     yearFrom: parseRub(searchParams.yearFrom),
     market: one(searchParams.market) || "any",
-    body: one(searchParams.body) || "any"
+    body: one(searchParams.body) || "any",
+    fuel: one(searchParams.fuel),
+    transmission: one(searchParams.transmission),
+    drive: one(searchParams.drive),
+    powerFrom: parseRub(searchParams.powerFrom),
+    mileageTo: parseRub(searchParams.mileageTo)
   } satisfies AvtocenaSearchInput;
 }
 

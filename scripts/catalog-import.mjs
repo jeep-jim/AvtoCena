@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-const input=process.argv[2]; if(!input){ console.log('Usage: node scripts/catalog-import.mjs file.json|file.csv'); process.exit(0); }
-const raw=fs.readFileSync(input,'utf8'); let rows=[];
-if(input.endsWith('.json')) rows=JSON.parse(raw); else { const [h,...lines]=raw.trim().split(/\r?\n/); const keys=h.split(','); rows=lines.map(l=>Object.fromEntries(l.split(',').map((v,i)=>[keys[i],v]))); }
-fs.mkdirSync('data/catalog/manual-imports',{recursive:true}); fs.writeFileSync(`data/catalog/manual-imports/import-${Date.now()}.json`, JSON.stringify(rows,null,2)); console.log(`Imported ${rows.length} rows`);
+import { parseInput, normalize, calculate, validate, dedupe, readOffers, buildChunks } from './catalog-lib.mjs';
+const input=process.argv[2]; if(!input){ console.error('Usage: node scripts/catalog-import.mjs file.json|file.csv'); process.exit(1); }
+const existing=readOffers(); const byId=new Map(existing.map(o=>[o.id,o])); const report={added:0,updated:0,rejected:0,needs_review:0,rejections:[]};
+for(const raw of parseInput(input)){ const calculated=calculate(normalize(raw)); const errors=validate(calculated); const next= errors.length ? {...calculated, availability:'needs_review', eligibilityReasons:[...(calculated.eligibilityReasons||[]),...errors]} : {...calculated, availability:'live'}; if(errors.some(e=>/demo|concrete|placeholder/.test(e))){ report.rejected++; report.rejections.push({id:next.id, errors}); continue; } if(next.availability==='needs_review') report.needs_review++; if(byId.has(next.id)) report.updated++; else report.added++; byId.set(next.id,next); }
+buildChunks(dedupe([...byId.values()])); console.log(JSON.stringify(report,null,2));

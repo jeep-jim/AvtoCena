@@ -1,15 +1,1 @@
-{
-  "version": 1,
-  "collection": "offers",
-  "maxRecordsPerChunk": 500,
-  "total": 50,
-  "updatedAt": "2026-07-13T00:00:00.000Z",
-  "chunks": [
-    {
-      "file": "offers.json",
-      "count": 50,
-      "createdAt": "2026-07-13T00:00:00.000Z",
-      "updatedAt": "2026-07-13T00:00:00.000Z"
-    }
-  ]
-}
+{"version":1,"collection":"offers","maxRecordsPerChunk":500,"total":2,"updatedAt":"2026-07-13T00:00:00.000Z","chunks":[{"file":"offers.json","count":2,"createdAt":"2026-07-13T00:00:00.000Z","updatedAt":"2026-07-13T00:00:00.000Z"}]}
