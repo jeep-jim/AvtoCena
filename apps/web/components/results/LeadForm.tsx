@@ -172,7 +172,7 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
                       {car.title}
                     </h2>
                     <div className="mt-1 text-sm font-bold text-white/52">
-                      Ориентир: {money(car.totalRub)} ₽
+                      {car.calculationComplete && car.totalRub ? `Ориентир: ${money(car.totalRub)} ₽` : `Цена площадки: ${money(car.sourcePriceLocal || 0)} ${car.sourceCurrency || car.currency || ""}`}
                     </div>
                   </div>
 

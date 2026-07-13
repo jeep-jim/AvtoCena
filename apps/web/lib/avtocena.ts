@@ -1,4 +1,5 @@
 import { readDataJson } from "./data";
+import { searchVehicleOffers, toAvtocenaCase } from "./catalog";
 
 export type MoneyLine = {
   id: string;
@@ -26,14 +27,19 @@ export type AvtocenaCase = {
   mileageKm?: number;
   city: string;
   deliveryDays: string;
-  totalRub: number;
+  totalRub?: number;
   currency?: string;
   exchangeRate?: number;
   sourcePrice?: number;
+  sourcePriceLocal?: number;
+  sourceCurrency?: string;
+  calculationComplete?: boolean;
+  calculationStatus?: string;
   tags: string[];
   lines: MoneyLine[];
   process: string[];
   recommendation: string;
+  offer?: import("./catalog/types").VehicleOffer;
 };
 
 export type AvtocenaSearchInput = {
@@ -43,6 +49,11 @@ export type AvtocenaSearchInput = {
   yearFrom?: number;
   market?: string;
   body?: string;
+  fuel?: string;
+  transmission?: string;
+  drive?: string;
+  powerFrom?: number;
+  mileageTo?: number;
 };
 
 export function parseRub(value?: string | string[] | null) {
@@ -65,7 +76,7 @@ export function getAvtocenaCases() {
 }
 
 export function getAvtocenaResults(input: AvtocenaSearchInput) {
-  const cases = getAvtocenaCases();
+  const cases = searchVehicleOffers(input).map(toAvtocenaCase);
   const brand = input.brand?.trim().toLowerCase();
   const model = input.model?.trim().toLowerCase();
   const budget = input.budgetRub;
@@ -77,14 +88,14 @@ export function getAvtocenaResults(input: AvtocenaSearchInput) {
       if (input.yearFrom && item.year < input.yearFrom) return false;
       if (input.market && input.market !== "any" && item.market !== input.market) return false;
       if (input.body && input.body !== "any" && item.body !== input.body) return false;
-      if (budget && item.totalRub > budget * 1.18) return false;
+      if (budget && (!item.calculationComplete || !item.totalRub || item.totalRub > budget * 1.18)) return false;
       return true;
     })
     .map((item) => ({
       ...item,
-      score: budget ? Math.abs(item.totalRub - budget) : 0,
-      budgetDeltaRub: budget ? budget - item.totalRub : undefined,
-      isInBudget: budget ? item.totalRub <= budget : true
+      score: budget && item.calculationComplete && item.totalRub ? Math.abs(item.totalRub - budget) : Number.MAX_SAFE_INTEGER,
+      budgetDeltaRub: budget && item.calculationComplete && item.totalRub ? budget - item.totalRub : undefined,
+      isInBudget: budget ? Boolean(item.calculationComplete && item.totalRub && item.totalRub <= budget) : Boolean(item.calculationComplete)
     }))
     .sort((a, b) => {
       if (a.isInBudget !== b.isInBudget) return a.isInBudget ? -1 : 1;
@@ -99,7 +110,12 @@ export function getSearchInputFromParams(searchParams: Record<string, string | s
     model: one(searchParams.model),
     yearFrom: parseRub(searchParams.yearFrom),
     market: one(searchParams.market) || "any",
-    body: one(searchParams.body) || "any"
+    body: one(searchParams.body) || "any",
+    fuel: one(searchParams.fuel),
+    transmission: one(searchParams.transmission),
+    drive: one(searchParams.drive),
+    powerFrom: parseRub(searchParams.powerFrom),
+    mileageTo: parseRub(searchParams.mileageTo)
   } satisfies AvtocenaSearchInput;
 }
 

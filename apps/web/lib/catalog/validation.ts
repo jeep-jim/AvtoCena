@@ -1,0 +1,10 @@
+import type { VehicleOffer } from "./types";
+const catalogUrlPatterns = [/\/usedcars\/?$/i, /\/used\/?$/i, /\/search(?:\.html)?(?:\?|$)/i, /\/list\//i, /\/car\/?$/i];
+const placeholderImageHosts = ["images.unsplash.com", "unsplash.com", "placehold.co", "placeholder.com", "picsum.photos"];
+const htmlImagePattern = /#image-|\.html?(#|$)|\/detail\//i;
+export function isDemoListingId(id = ""){ return /^demo-/i.test(id); }
+export function isSpecificListingUrl(url = ""){ try { const parsed = new URL(url); if (["/", ""].includes(parsed.pathname)) return false; return !catalogUrlPatterns.some((pattern)=>pattern.test(parsed.pathname + parsed.search)); } catch { return false; } }
+export function isPlaceholderImage(url = ""){ try { const host = new URL(url.split("#")[0]).hostname.replace(/^www\./, ""); return placeholderImageHosts.includes(host); } catch { return true; } }
+export function isDirectImageUrl(url = ""){ if (!url || htmlImagePattern.test(url)) return false; try { const parsed = new URL(url); return /\.(avif|webp|jpe?g|png)(\?.*)?$/i.test(parsed.pathname + parsed.search) && !isPlaceholderImage(url); } catch { return false; } }
+export function hasConfirmedProvenance(offer: VehicleOffer){ const p=offer.provenance || {}; return ["priceLocal","year","mileageKm"].every((key)=>Array.isArray(p[key]) && p[key].length>0); }
+export function validatePublishableOffer(offer: VehicleOffer){ const reasons:string[]=[]; if(isDemoListingId(offer.sourceListingId)) reasons.push("demo sourceListingId is not publishable"); if(!isSpecificListingUrl(offer.sourceUrl)) reasons.push("sourceUrl is not a concrete listing URL"); if((offer.images||[]).some((image)=>!isDirectImageUrl(image))) reasons.push("image URL is not a direct image"); if(offer.imageMode === "remote_direct" && (!offer.images?.length || !offer.coverImage || !isDirectImageUrl(offer.coverImage))) reasons.push("remote_direct image mode requires working direct images"); if(!hasConfirmedProvenance(offer)) reasons.push("required field provenance is missing"); return { ok: reasons.length===0, reasons }; }

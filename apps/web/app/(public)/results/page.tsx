@@ -6,6 +6,7 @@ import {
   money,
 } from "@/lib/avtocena";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 
 function firstParam(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value;
@@ -25,19 +26,19 @@ function ResultPhoto({
   bodyName,
   year,
   mileageKm,
+  images,
 }: {
   title: string;
   marketName: string;
   bodyName: string;
   year: number;
   mileageKm?: number;
+  images?: string[];
 }) {
   return (
     <div className="relative min-h-[260px] min-w-0 overflow-hidden bg-[radial-gradient(circle_at_22%_18%,rgba(239,68,68,0.42),transparent_38%),radial-gradient(circle_at_82%_14%,rgba(255,255,255,0.12),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.14),rgba(255,255,255,0.025))] sm:min-h-[320px] lg:min-h-full">
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.13]">
-        <BrandMark className="h-44 w-44 md:h-56 md:w-56" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#11131a] via-[#11131a]/18 to-transparent" />
+      {images?.length ? <VehicleGallery images={images} title={title} /> : <><div className="absolute inset-0 flex items-center justify-center opacity-[0.13]"><BrandMark className="h-44 w-44 md:h-56 md:w-56" /></div><div className="absolute inset-0 bg-gradient-to-t from-[#11131a] via-[#11131a]/18 to-transparent" /></>}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#11131a] via-[#11131a]/18 to-transparent pointer-events-none" />
 
       <div className="absolute left-4 top-4 flex flex-wrap gap-2">
         <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
@@ -213,6 +214,7 @@ export default async function ResultsPage({
                       bodyName={car.bodyName}
                       year={car.year}
                       mileageKm={car.mileageKm}
+                      images={car.offer?.images}
                     />
 
                     <div className="min-w-0 p-4 md:p-6 lg:p-7">
@@ -227,26 +229,26 @@ export default async function ResultsPage({
                           {car.fuel}
                         </span>
                         <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
-                          {car.powerHp} л.с.
+                          {car.offer?.advertisedPower || (car.powerHp ? `${car.powerHp} л.с.` : "мощность уточняется")}
                         </span>
                       </div>
 
                       <p className="mt-4 max-w-3xl text-sm font-medium leading-6 text-white/64 md:text-base md:leading-7">
                         {car.recommendation}
                       </p>
+                      {car.offer?.sourceUrl ? <a href={car.offer.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-black text-red-200 underline">Источник: {car.offer.sourceName} · {car.offer.images.length} фото · проверено {new Date(car.offer.lastCheckedAt).toLocaleDateString("ru-RU")}</a> : null}
 
-                      <div className="mt-5 min-w-0">
-                        <ResultCostLines lines={car.lines} />
-                      </div>
+                      {car.lines.length ? <div className="mt-5 min-w-0"><ResultCostLines lines={car.lines} /></div> : <div className="mt-5 rounded-2xl border border-yellow-200/20 bg-yellow-300/10 p-4 text-sm font-bold text-yellow-50/85">Расчёт под ключ уточняется менеджером.</div>}
 
                       <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-end">
                         <div className="min-w-0">
                           <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42 md:text-sm">
-                            Итого ориентир
+                            {car.calculationComplete ? "Итого ориентир" : "Цена площадки"}
                           </div>
                           <div className="mt-2 text-3xl font-black tracking-[-0.05em] md:text-4xl">
-                            {money(car.totalRub)} ₽
+                            {car.calculationComplete && car.totalRub ? `${money(car.totalRub)} ₽` : `${money(car.sourcePriceLocal || 0)} ${car.sourceCurrency || car.currency || ""}`}
                           </div>
+                          {!car.calculationComplete ? <div className="mt-2 text-sm font-black text-yellow-100">Расчёт под ключ уточняется менеджером</div> : null}
 
                           {typeof car.budgetDeltaRub === "number" && (
                             <div
@@ -283,7 +285,7 @@ export default async function ResultsPage({
                     Пока нет готового варианта
                   </h2>
                   <p className="mx-auto mt-3 max-w-xl text-white/58">
-                    Попробуйте изменить бюджет, год, марку или страну поставки.
+                    Подходящие предложения пока не найдены. Менеджер выполнит индивидуальный подбор.
                   </p>
                   <a
                     href="/"

@@ -1,0 +1,2 @@
+import { getVehicleOffers } from "@/lib/catalog";
+export default function sitemap(){ const base="https://avtocena.com"; const urls=new Set<string>(); for(const o of getVehicleOffers()){ urls.add(`${base}/cars/${o.market}`); urls.add(`${base}/cars/${o.market}/${encodeURIComponent(o.brand)}`); urls.add(`${base}/cars/${o.market}/${encodeURIComponent(o.brand)}/${encodeURIComponent(o.model)}`); urls.add(`${base}/cars/offer/${encodeURIComponent(o.id)}`); } return [...urls].map((url)=>({url})); }

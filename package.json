@@ -14,6 +14,14 @@
     "clean:web": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\"",
     "dev:fresh": "npm run clean:web && npm run dev",
     "test": "node --import tsx --test tests/*.test.ts",
-    "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && cd packages/engine && ./node_modules/.bin/tsc --noEmit"
+    "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && cd packages/engine && ./node_modules/.bin/tsc --noEmit",
+    "catalog:import": "node scripts/catalog-cli.mjs catalog:import",
+    "catalog:import:all": "node scripts/catalog-cli.mjs catalog:import:all",
+    "catalog:validate": "node scripts/catalog-cli.mjs catalog:validate",
+    "catalog:recalculate": "node scripts/catalog-cli.mjs catalog:recalculate",
+    "catalog:expire": "node scripts/catalog-cli.mjs catalog:expire",
+    "catalog:build-indexes": "node scripts/catalog-cli.mjs catalog:build-indexes",
+    "catalog:probe-sources": "node scripts/catalog-probe-sources.mjs",
+    "catalog:update-rates": "node scripts/catalog-update-rates.mjs"
   }
 }
