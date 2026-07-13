@@ -229,7 +229,7 @@ export default async function ResultsPage({
                           {car.fuel}
                         </span>
                         <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
-                          {car.powerHp} л.с.
+                          {car.offer?.advertisedPower || (car.powerHp ? `${car.powerHp} л.с.` : "мощность уточняется")}
                         </span>
                       </div>
 
@@ -238,18 +238,17 @@ export default async function ResultsPage({
                       </p>
                       {car.offer?.sourceUrl ? <a href={car.offer.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-black text-red-200 underline">Источник: {car.offer.sourceName} · {car.offer.images.length} фото · проверено {new Date(car.offer.lastCheckedAt).toLocaleDateString("ru-RU")}</a> : null}
 
-                      <div className="mt-5 min-w-0">
-                        <ResultCostLines lines={car.lines} />
-                      </div>
+                      {car.lines.length ? <div className="mt-5 min-w-0"><ResultCostLines lines={car.lines} /></div> : <div className="mt-5 rounded-2xl border border-yellow-200/20 bg-yellow-300/10 p-4 text-sm font-bold text-yellow-50/85">Расчёт под ключ уточняется менеджером.</div>}
 
                       <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-end">
                         <div className="min-w-0">
                           <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42 md:text-sm">
-                            Итого ориентир
+                            {car.calculationComplete ? "Итого ориентир" : "Цена площадки"}
                           </div>
                           <div className="mt-2 text-3xl font-black tracking-[-0.05em] md:text-4xl">
-                            {money(car.totalRub)} ₽
+                            {car.calculationComplete && car.totalRub ? `${money(car.totalRub)} ₽` : `${money(car.sourcePriceLocal || 0)} ${car.sourceCurrency || car.currency || ""}`}
                           </div>
+                          {!car.calculationComplete ? <div className="mt-2 text-sm font-black text-yellow-100">Расчёт под ключ уточняется менеджером</div> : null}
 
                           {typeof car.budgetDeltaRub === "number" && (
                             <div

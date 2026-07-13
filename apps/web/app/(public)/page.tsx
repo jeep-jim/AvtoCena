@@ -78,7 +78,12 @@ type CatalogOffer = {
   brand: string;
   model: string;
   year: number;
-  price: number;
+  sourcePriceLocal: number;
+  sourceCurrency: string;
+  sourcePriceRub?: number | null;
+  totalRub?: number | null;
+  calculationComplete: boolean;
+  calculationStatus: string;
   country: string;
   countryLabel: string;
   body: string;
@@ -131,7 +136,12 @@ const readyCatalog: CatalogOffer[] = staticPublicOffers.map((offer) => ({
   brand: offer.brand,
   model: offer.model,
   year: offer.year,
-  price: offer.knownCostRub || offer.sourcePriceLocal,
+  sourcePriceLocal: offer.sourcePriceLocal,
+  sourceCurrency: offer.sourceCurrency,
+  sourcePriceRub: offer.sourcePriceRub,
+  totalRub: offer.totalRub,
+  calculationComplete: offer.calculationComplete === true,
+  calculationStatus: offer.calculationStatus,
   country: offer.market,
   countryLabel: ({ japan: "Япония", china: "Китай", korea: "Корея", uae: "ОАЭ", europe: "Европа" } as Record<string, string>)[offer.market] || offer.market,
   body: offer.bodyType || "auto",
@@ -174,7 +184,7 @@ function getFilteredCatalogOffers({
   bodyType: string;
 }) {
   return readyCatalog.filter((offer) => {
-    if (budgetNumber > 0 && offer.price > budgetNumber) return false;
+    if (budgetNumber > 0 && (!offer.calculationComplete || !offer.totalRub || offer.totalRub > budgetNumber)) return false;
     if (brand && offer.brand !== brand) return false;
     if (model && offer.model !== model) return false;
     if (yearFrom && offer.year < Number(yearFrom)) return false;
@@ -857,13 +867,14 @@ function TopAvtoExecutorBlock() {
 
 
 function OfferEstimateDetails({ offer }: { offer: CatalogOffer }) {
-  const carCost = Math.round((offer.price * 0.58) / 10000) * 10000;
-  const logistics = Math.round((offer.price * 0.09) / 10000) * 10000;
-  const customs = Math.round((offer.price * 0.22) / 10000) * 10000;
-  const broker = Math.round((offer.price * 0.05) / 10000) * 10000;
+  const basePrice = offer.totalRub || offer.sourcePriceRub || 0;
+  const carCost = Math.round((basePrice * 0.58) / 10000) * 10000;
+  const logistics = Math.round((basePrice * 0.09) / 10000) * 10000;
+  const customs = Math.round((basePrice * 0.22) / 10000) * 10000;
+  const broker = Math.round((basePrice * 0.05) / 10000) * 10000;
   const commission = Math.max(
     90000,
-    Math.round((offer.price * 0.035) / 10000) * 10000,
+    Math.round((basePrice * 0.035) / 10000) * 10000,
   );
 
   const lines = [
@@ -952,11 +963,12 @@ function ReadyCatalogCard({
         <div className="flex items-end justify-between gap-3">
           <div className="min-w-0">
             <div className="text-[10px] font-black uppercase tracking-[0.16em] text-white/34">
-              ориентир
+              {offer.calculationComplete ? "ориентир под ключ" : "цена площадки"}
             </div>
             <div className="mt-1 text-[20px] font-black tracking-[-0.045em] text-white">
-              {formatMoney(offer.price)} ₽
+              {offer.calculationComplete && offer.totalRub ? `${formatMoney(offer.totalRub)} ₽` : `${formatMoney(offer.sourcePriceLocal)} ${offer.sourceCurrency}`}
             </div>
+            {!offer.calculationComplete ? <div className="mt-1 text-[11px] font-black text-yellow-100/75">Расчёт под ключ уточняется</div> : null}
           </div>
 
           <div className="shrink-0 rounded-full border border-white/10 bg-white/[0.055] px-3 py-1.5 text-xs font-black text-white/72 transition group-hover:border-red-300/35 group-hover:text-white">
@@ -1097,24 +1109,24 @@ function OfferBottomSheet({
           <div className="grid gap-5 p-4 pb-6 sm:p-6 md:grid-cols-[minmax(0,1fr)_310px] md:p-7">
             <div className="min-w-0">
               <p className="max-w-3xl text-sm font-medium leading-7 text-white/58 sm:text-base">
-                Готовый пример варианта под ваш бюджет. Финальная цена зависит от
-                курса, состояния автомобиля, даты покупки, логистики и города доставки.
+                Предложение найдено на внешней площадке. Оно может быть продано или изменено.
+                Актуальность, возможность покупки и итоговую стоимость подтверждает менеджер.
               </p>
 
               <div className="mt-5">
-                <OfferEstimateDetails offer={offer} />
+                {offer.calculationComplete ? <OfferEstimateDetails offer={offer} /> : <div className="rounded-2xl border border-yellow-200/20 bg-yellow-300/10 p-4 text-sm font-bold text-yellow-50/85">Расчёт под ключ уточняется менеджером.</div>}
               </div>
             </div>
 
             <div className="md:border-l md:border-white/10 md:pl-6">
               <div className="text-[12px] font-black uppercase tracking-[0.18em] text-white/42">
-                ориентир цены
+                {offer.calculationComplete ? "ориентир под ключ" : "цена площадки"}
               </div>
               <div className="mt-3 text-[32px] font-black tracking-[-0.055em] text-white sm:text-[38px]">
-                {formatMoney(offer.price)} ₽
+                {offer.calculationComplete && offer.totalRub ? `${formatMoney(offer.totalRub)} ₽` : `${formatMoney(offer.sourcePriceLocal)} ${offer.sourceCurrency}`}
               </div>
-              <div className="mt-1 text-sm font-black text-emerald-300">
-                по готовому варианту
+              <div className="mt-1 text-sm font-black text-yellow-100">
+                {offer.calculationComplete ? "расчёт готов" : "расчёт под ключ уточняется"}
               </div>
 
               <div className="mt-5 grid gap-2 text-sm font-bold text-white/72">
@@ -1682,7 +1694,7 @@ export default function HomePage() {
   function openOfferResults(offer: CatalogOffer) {
     router.push(
       buildResultsUrl({
-        budget: offer.price,
+        budget: offer.calculationComplete && offer.totalRub ? offer.totalRub : undefined,
         brand: offer.brand,
         model: offer.model,
         year: offer.year,
