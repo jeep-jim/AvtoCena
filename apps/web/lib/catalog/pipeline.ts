@@ -1,0 +1,6 @@
+import type { VehicleOffer } from "./types";
+import { isPublicOffer } from "./index";
+export function deduplicateOffers(offers: VehicleOffer[]){ const seen=new Set<string>(); const out:VehicleOffer[]=[]; for(const o of offers){ const keys=[`${o.source}:${o.sourceListingId}`, o.sourceUrl, `${o.brand}:${o.model}:${o.year}:${o.mileageKm}:${o.priceLocal}:${o.sellerType}`].filter(Boolean); if(keys.some(k=>seen.has(k))) continue; keys.forEach(k=>seen.add(k)); out.push(o); } return out; }
+export function validateOffer(offer: VehicleOffer): VehicleOffer { const reasons=[...offer.eligibilityReasons]; let availability=offer.availability; if(!offer.powerHp){ availability="needs_review"; reasons.push("Power is unknown and must not be guessed."); } if(offer.importEligibility==="blocked") availability="blocked"; if(!offer.coverImage) availability="needs_review"; return {...offer, availability, eligibilityReasons:reasons}; }
+export function publishableOffers(offers: VehicleOffer[]){ return deduplicateOffers(offers.map(validateOffer)).filter(isPublicOffer); }
+export function expireStaleOffers(offers:VehicleOffer[], now=new Date(), staleDays=14){ const ms=staleDays*864e5; return offers.map(o=> now.getTime()-new Date(o.lastCheckedAt).getTime()>ms ? {...o, availability:"stale" as const}:o); }

@@ -1,4 +1,5 @@
 import { readDataJson } from "./data";
+import { searchVehicleOffers, toAvtocenaCase } from "./catalog";
 
 export type MoneyLine = {
   id: string;
@@ -34,6 +35,7 @@ export type AvtocenaCase = {
   lines: MoneyLine[];
   process: string[];
   recommendation: string;
+  offer?: import("./catalog/types").VehicleOffer;
 };
 
 export type AvtocenaSearchInput = {
@@ -43,6 +45,11 @@ export type AvtocenaSearchInput = {
   yearFrom?: number;
   market?: string;
   body?: string;
+  fuel?: string;
+  transmission?: string;
+  drive?: string;
+  powerFrom?: number;
+  mileageTo?: number;
 };
 
 export function parseRub(value?: string | string[] | null) {
@@ -65,7 +72,8 @@ export function getAvtocenaCases() {
 }
 
 export function getAvtocenaResults(input: AvtocenaSearchInput) {
-  const cases = getAvtocenaCases();
+  const liveCases = searchVehicleOffers(input).map(toAvtocenaCase);
+  const cases = liveCases.length ? liveCases : getAvtocenaCases();
   const brand = input.brand?.trim().toLowerCase();
   const model = input.model?.trim().toLowerCase();
   const budget = input.budgetRub;

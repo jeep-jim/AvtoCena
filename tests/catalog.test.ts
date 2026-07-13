@@ -1,0 +1,17 @@
+import test from "node:test"; import assert from "node:assert/strict";
+import fs from "node:fs";
+import { normalizeBrand } from "../apps/web/lib/catalog/normalize";
+import { deduplicateOffers, publishableOffers, expireStaleOffers } from "../apps/web/lib/catalog/pipeline";
+import { searchVehicleOffers } from "../apps/web/lib/catalog";
+import { calculateOfferSnapshot } from "../apps/web/lib/catalog/calculation";
+const offers=JSON.parse(fs.readFileSync("data/catalog/offers/offers.json","utf8"));
+test("normalization maps aliases",()=> assert.equal(normalizeBrand("丰田"),"Toyota"));
+test("chunks are at most 500",()=>{ const idx=JSON.parse(fs.readFileSync("data/catalog/offers/offers-index.json","utf8")); assert.ok(idx.chunks.every((c:any)=>c.count<=500)); });
+test("deduplicates by source listing",()=> assert.equal(deduplicateOffers([offers[0], {...offers[0], id:"copy"}]).length,1));
+test("unknown power is not guessed and is hidden",()=>{ const bad={...offers[0],id:"bad",powerHp:null}; assert.equal(publishableOffers([bad]).length,0); });
+test("blocked removed stale do not publish",()=> assert.equal(publishableOffers([{...offers[0],availability:"removed"},{...offers[1],availability:"blocked",importEligibility:"blocked"},{...offers[2],availability:"stale"}]).length,0));
+test("stale expiration hides old offer",()=> assert.equal(expireStaleOffers([{...offers[0],lastCheckedAt:"2020-01-01T00:00:00.000Z"}])[0].availability,"stale"));
+test("external photos have fallback-capable gallery data",()=> assert.ok(offers.every((o:any)=>o.images.length>=1 && /^https?:\/\//.test(o.coverImage))));
+test("calculation uses business settings",()=> assert.ok(calculateOfferSnapshot(offers[0]).lines.some(l=>l.id==="car"))); 
+test("budget filter",()=> assert.ok(searchVehicleOffers({budgetRub:3000000}).every(o=>(o.calculationSnapshot?.totalRub||0)<=3540000)));
+test("SEO has no empty markets",()=>{ const markets=new Set(offers.map((o:any)=>o.market)); assert.ok(markets.size>=5); });
