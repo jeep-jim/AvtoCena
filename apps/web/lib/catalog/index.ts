@@ -1,10 +1,10 @@
-import { readChunkedDataJson } from "../data";
+import { readAllMarketOffers } from "./storage";
 import type { VehicleOffer, MarketId, CalculationConfidence } from "./types";
 import { validatePublishableOffer } from "./validation";
 const labels: Record<string,string> = { japan:"Япония", china:"Китай", korea:"Корея", uae:"ОАЭ", europe:"Европа" };
 export const marketLabel = (market:string)=> labels[market] || market;
-export function isPublicOffer(offer:VehicleOffer){ const valid=validatePublishableOffer(offer).ok; return valid && offer.availability === "live" && offer.importEligibility !== "blocked" && !!offer.priceLocal && !!offer.year && (!!offer.mileageKm || offer.condition === "new") && (!!offer.engineCc || !!offer.trim) && !!offer.powerHp && !!offer.coverImage && !!offer.sourceUrl && !!offer.calculationSnapshot && offer.calculationConfidence !== "needs_review"; }
-export function getAllVehicleOffers(){ return readChunkedDataJson<VehicleOffer>("catalog/offers/offers.json", []); }
+export function isPublicOffer(offer:VehicleOffer){ const valid=validatePublishableOffer(offer).ok; return valid && offer.availability === "live" && offer.importEligibility !== "blocked" && !!offer.priceLocal && !!offer.year && (!!offer.mileageKm || offer.condition === "new") && (!!offer.engineCc || !!offer.trim) && !!offer.powerHp && (offer.imageMode === "source_page_only" || !!offer.coverImage) && !!offer.sourceUrl && !!offer.calculationSnapshot && offer.calculationConfidence !== "needs_review"; }
+export function getAllVehicleOffers(){ return readAllMarketOffers(); }
 export function getVehicleOffers(){ return getAllVehicleOffers().filter(isPublicOffer); }
 export function getVehicleOffer(id:string){ return getVehicleOffers().find((offer)=>offer.id===id); }
 export function searchVehicleOffers(input:{budgetRub?:number; market?:string; brand?:string; model?:string; yearFrom?:number; body?:string; fuel?:string; transmission?:string; drive?:string; powerFrom?:number; powerTo?:number; mileageTo?:number}){

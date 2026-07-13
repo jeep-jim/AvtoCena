@@ -5,6 +5,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import { staticPublicOffers } from "@/lib/catalog/static-public-offers";
 import {
   appendAttributionToSearchParams,
   captureAttributionFromBrowser,
@@ -124,42 +125,23 @@ const buyerPhotos = Array.from({ length: 15 }, (_, index) => ({
   alt: `Автомобиль клиента TopAvto ${index + 1}`,
 }));
 
-const readyCatalog: CatalogOffer[] = [
-  {
-    id: "che168-58251020",
-    title: "Toyota Corolla Hybrid",
-    brand: "Toyota",
-    model: "Corolla",
-    year: 2021,
-    price: 1058035,
-    country: "china",
-    countryLabel: "Китай",
-    body: "sedan",
-    bodyLabel: "Седан",
-    mileage: "58 700 км",
-    engine: "1.8 Hybrid",
-    power: "98 л.с. / 90 кВт",
-    delivery: "требует проверки",
-    sourceLabel: "Che168 Global",
-  },
-  {
-    id: "che168-58996551",
-    title: "Toyota Corolla 1.2T",
-    brand: "Toyota",
-    model: "Corolla",
-    year: 2017,
-    price: 720700,
-    country: "china",
-    countryLabel: "Китай",
-    body: "sedan",
-    bodyLabel: "Седан",
-    mileage: "66 510 км",
-    engine: "1.2T бензин",
-    power: "116 л.с. / 85 кВт",
-    delivery: "требует проверки",
-    sourceLabel: "Che168 Global",
-  },
-];
+const readyCatalog: CatalogOffer[] = staticPublicOffers.map((offer) => ({
+  id: offer.id,
+  title: [offer.brand, offer.model, offer.trim].filter(Boolean).join(" "),
+  brand: offer.brand,
+  model: offer.model,
+  year: offer.advertisedModelYear || offer.manufactureYear || offer.year,
+  price: offer.calculationComplete ? (offer.calculationSnapshot?.totalRub || offer.priceLocal) : (offer.calculationSnapshot?.sourcePriceRub || offer.priceLocal),
+  country: offer.market,
+  countryLabel: ({ japan: "Япония", china: "Китай", korea: "Корея", uae: "ОАЭ", europe: "Европа" } as Record<string, string>)[offer.market] || offer.market,
+  body: offer.bodyType || "auto",
+  bodyLabel: offer.bodyType || "Авто",
+  mileage: offer.mileageKm ? `${formatMoney(offer.mileageKm)} км` : "пробег уточняется",
+  engine: offer.engineCc ? `${offer.engineCc} cc` : "двигатель уточняется",
+  power: offer.advertisedPower || (offer.powerHp ? `${offer.powerHp} л.с.` : "мощность уточняется"),
+  delivery: offer.calculationComplete ? "расчёт готов" : "расчёт уточняется",
+  sourceLabel: offer.sourceName,
+}));
 
 function formatMoney(value: number) {
   return new Intl.NumberFormat("ru-RU").format(value);

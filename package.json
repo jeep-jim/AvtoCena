@@ -20,6 +20,8 @@
     "catalog:validate": "node scripts/catalog-cli.mjs catalog:validate",
     "catalog:recalculate": "node scripts/catalog-cli.mjs catalog:recalculate",
     "catalog:expire": "node scripts/catalog-cli.mjs catalog:expire",
-    "catalog:build-indexes": "node scripts/catalog-cli.mjs catalog:build-indexes"
+    "catalog:build-indexes": "node scripts/catalog-cli.mjs catalog:build-indexes",
+    "catalog:probe-sources": "node scripts/catalog-probe-sources.mjs",
+    "catalog:update-rates": "node scripts/catalog-update-rates.mjs"
   }
 }
