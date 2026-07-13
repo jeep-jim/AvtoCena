@@ -105,30 +105,14 @@ export async function getActiveSiteBusinessVersion(asOf = new Date()) {
 
 export async function createSiteBusinessVersion(patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const settings = await getSiteBusinessSettings();
-  const current = await getActiveSiteBusinessVersion() || {};
-  const version = Math.max(0, ...(settings.versions || []).map((item: any) => Number(item.version || 0))) + 1;
-  const next = {
-    ...current,
-    id: makeId(`site_business_v${version}`),
-    version,
-    effectiveFrom: patch.effectiveFrom || nowIso(),
-    status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), true),
-    minimumBudgetRub: nullableNumber(patch.minimumBudgetRub) ?? current.minimumBudgetRub,
-    calculationReservePercent: nullableNumber(patch.calculationReservePercent) ?? current.calculationReservePercent,
-    deliveryTermsText: cleanText(patch.deliveryTermsText, 1000) || current.deliveryTermsText,
-    displayPartnerPayoutRub: nullableNumber(patch.displayPartnerPayoutRub) ?? current.displayPartnerPayoutRub,
-    activeMarkets: Array.isArray(patch.activeMarkets) ? patch.activeMarkets : current.activeMarkets,
-    contacts: {
-      telegram: cleanText(patch.telegram, 160) || current.contacts?.telegram || "",
-      phone: cleanText(patch.phone, 80) || current.contacts?.phone || "",
-      email: cleanText(patch.email, 160) || current.contacts?.email || "",
-    },
-    createdAt: nowIso(),
-    createdByUserId: user.id,
-  };
-  const updated = { activeVersionId: next.status === "active" ? next.id : settings.activeVersionId, versions: [...(settings.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await mutateDataJson<any>("settings/site-business.json", { activeVersionId: "", versions: [] }, () => updated);
+  let current: any = null;
+  let next: any = null;
+  await mutateDataJson<any>("settings/site-business.json", { activeVersionId: "", versions: [] }, (settings) => {
+    current = chooseEffectiveVersion(settings.versions || []) || settings.versions?.find((version: any) => version.id === settings.activeVersionId) || settings.versions?.[0] || {};
+    const version = Math.max(0, ...(settings.versions || []).map((item: any) => Number(item.version || 0))) + 1;
+    next = { ...current, id: makeId(`site_business_v${version}`), version, effectiveFrom: patch.effectiveFrom || nowIso(), status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), true), minimumBudgetRub: nullableNumber(patch.minimumBudgetRub) ?? current.minimumBudgetRub, calculationReservePercent: nullableNumber(patch.calculationReservePercent) ?? current.calculationReservePercent, deliveryTermsText: cleanText(patch.deliveryTermsText, 1000) || current.deliveryTermsText, displayPartnerPayoutRub: nullableNumber(patch.displayPartnerPayoutRub) ?? current.displayPartnerPayoutRub, activeMarkets: Array.isArray(patch.activeMarkets) ? patch.activeMarkets : current.activeMarkets, contacts: { telegram: cleanText(patch.telegram, 160) || current.contacts?.telegram || "", phone: cleanText(patch.phone, 80) || current.contacts?.phone || "", email: cleanText(patch.email, 160) || current.contacts?.email || "" }, createdAt: nowIso(), createdByUserId: user.id };
+    return { activeVersionId: next.status === "active" ? next.id : settings.activeVersionId, versions: [...(settings.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
+  });
   await appendChangeLog({ entityType: "site-business", entityId: "site", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
@@ -144,31 +128,38 @@ export async function getActiveDirectPartnerPayout(asOf = new Date()) {
 
 export async function createDirectPartnerPayoutVersion(amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const settings = await readDataJson<any>("cpa/payouts.json", {});
-  const program = settings.directPartnerProgram || { versions: [] };
-  const current = await getActiveDirectPartnerPayout() || {};
-  const version = Math.max(0, ...(program.versions || []).map((item: any) => Number(item.version || 0))) + 1;
-  const nextEffectiveFrom = effectiveFrom || nowIso();
-  const next = { ...current, id: makeId(`direct_partner_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, defaultSignedContractPayoutRub: Number(amountRub), currency: "RUB", createdAt: nowIso(), createdByUserId: user.id, comment: cleanText(comment, 1000) };
-  const updatedProgram = { ...program, activeVersionId: next.status === "active" ? next.id : program.activeVersionId, versions: [...(program.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await mutateDataJson<any>("cpa/payouts.json", {}, (currentSettings) => ({ ...currentSettings, directPartnerProgram: updatedProgram }));
+  let current: any = null;
+  let next: any = null;
+  await mutateDataJson<any>("cpa/payouts.json", {}, (settings) => {
+    const program = settings.directPartnerProgram || { versions: [] };
+    current = chooseEffectiveVersion(program?.versions || []) || program?.versions?.find((version: any) => version.id === program.activeVersionId) || {};
+    const version = Math.max(0, ...(program.versions || []).map((item: any) => Number(item.version || 0))) + 1;
+    const nextEffectiveFrom = effectiveFrom || nowIso();
+    next = { ...current, id: makeId(`direct_partner_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, defaultSignedContractPayoutRub: Number(amountRub), currency: "RUB", createdAt: nowIso(), createdByUserId: user.id, comment: cleanText(comment, 1000) };
+    const updatedProgram = { ...program, activeVersionId: next.status === "active" ? next.id : program.activeVersionId, versions: [...(program.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
+    return { ...settings, directPartnerProgram: updatedProgram };
+  });
   await appendChangeLog({ entityType: "direct-partner-payout", entityId: "default", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
 export async function createPartnerPayoutVersion(partnerCode: string, amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const partners = await readDataJson<any[]>("partners/partners.json", []);
-  const partnerIndex = partners.findIndex((partner) => partner.code === partnerCode);
-  if (partnerIndex === -1) throw new Error("partner_not_found");
-  const partner = partners[partnerIndex];
-  const versions = Array.isArray(partner.individualPayouts) ? partner.individualPayouts : [];
-  const version = Math.max(0, ...versions.map((item: any) => Number(item.version || 0))) + 1;
-  const nextEffectiveFrom = effectiveFrom || nowIso();
-  const next = { id: makeId(`${partnerCode}_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, event: "signed_contract", payoutRub: Number(amountRub), currency: "RUB", comment: cleanText(comment, 1000) };
-  const nextPartner = { ...partner, payoutRub: next.status === "active" ? Number(amountRub) : partner.payoutRub, individualPayouts: [...versions.map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  await mutateDataJson<any[]>("partners/partners.json", [], (currentPartners) => currentPartners.map((item) => item.code === partnerCode ? nextPartner : item));
-  await appendChangeLog({ entityType: "partner-payout", entityId: partnerCode, changedByUserId: user.id, changedByName: user.displayName, oldValue: versions[versions.length - 1] || null, newValue: next, comment: cleanText(comment, 1000) });
+  let previous: any = null;
+  let next: any = null;
+  await mutateDataJson<any[]>("partners/partners.json", [], (partners) => {
+    const partnerIndex = partners.findIndex((partner) => partner.code === partnerCode);
+    if (partnerIndex === -1) throw new Error("partner_not_found");
+    const partner = partners[partnerIndex];
+    const versions = Array.isArray(partner.individualPayouts) ? partner.individualPayouts : [];
+    previous = versions[versions.length - 1] || null;
+    const version = Math.max(0, ...versions.map((item: any) => Number(item.version || 0))) + 1;
+    const nextEffectiveFrom = effectiveFrom || nowIso();
+    next = { id: makeId(`${partnerCode}_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, event: "signed_contract", payoutRub: Number(amountRub), currency: "RUB", comment: cleanText(comment, 1000) };
+    const nextPartner = { ...partner, payoutRub: next.status === "active" ? Number(amountRub) : partner.payoutRub, individualPayouts: [...versions.map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
+    return partners.map((item, index) => index === partnerIndex ? nextPartner : item);
+  });
+  await appendChangeLog({ entityType: "partner-payout", entityId: partnerCode, changedByUserId: user.id, changedByName: user.displayName, oldValue: previous, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
@@ -301,16 +292,16 @@ export async function getCpaNetworks() { return await readDataJson<any[]>("cpa/n
 
 export async function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const networks = await getCpaNetworks();
   const id = cleanText(patch.id, 160) || makeId("cpa_network");
-  const index = networks.findIndex((network) => network.id === id);
-  const current = index >= 0 ? networks[index] : {};
-  const next = { ...current, id, networkId: cleanText(patch.networkId, 160), name: cleanText(patch.name, 200) || current.name || "Черновик CPA-сети", enabled: patch.enabled === true, status: patch.enabled === true ? "active" : "draft", partnerRef: cleanText(patch.partnerRef, 160), offerId: cleanText(patch.offerId, 160), goal: cleanText(patch.goal, 160) || "signed_contract", payoutType: cleanText(patch.payoutType, 40) || "custom/manual", payoutAmount: nullableNumber(patch.payoutAmount), currency: cleanText(patch.currency, 12) || "RUB", holdDays: nullableNumber(patch.holdDays), attributionWindowDays: nullableNumber(patch.attributionWindowDays), dailyCap: nullableNumber(patch.dailyCap), monthlyCap: nullableNumber(patch.monthlyCap), allowedTrafficSources: Array.isArray(patch.allowedTrafficSources) ? patch.allowedTrafficSources : [], forbiddenTrafficSources: Array.isArray(patch.forbiddenTrafficSources) ? patch.forbiddenTrafficSources : [], statusMapping: patch.statusMapping && typeof patch.statusMapping === "object" ? patch.statusMapping : {}, postbackConfig: patch.postbackConfig && typeof patch.postbackConfig === "object" ? patch.postbackConfig : { method: "GET", urlTemplate: "", headers: {} }, comment: cleanText(comment, 1000), effectiveFrom: cleanText(patch.effectiveFrom, 80) || nowIso() };
-  if (next.enabled) {
-    if (!next.name || !next.networkId || !next.offerId || !next.goal || !next.payoutType) throw new Error("cpa_required_fields_missing");
-    if (!/^https?:\/\//i.test(next.postbackConfig?.urlTemplate || "")) throw new Error("cpa_postback_url_invalid");
-  }
-  await mutateDataJson<any[]>("cpa/networks.json", [], (currentNetworks) => { const nextNetworks = [...currentNetworks]; const currentIndex = nextNetworks.findIndex((network) => network.id === id); if (currentIndex >= 0) nextNetworks[currentIndex] = next; else nextNetworks.push(next); return nextNetworks; });
+  let current: any = {};
+  let next: any = null;
+  await mutateDataJson<any[]>("cpa/networks.json", [], (networks) => {
+    const index = networks.findIndex((network) => network.id === id);
+    current = index >= 0 ? networks[index] : {};
+    next = { ...current, id, networkId: cleanText(patch.networkId, 160), name: cleanText(patch.name, 200) || current.name || "Черновик CPA-сети", enabled: patch.enabled === true, status: patch.enabled === true ? "active" : "draft", partnerRef: cleanText(patch.partnerRef, 160), offerId: cleanText(patch.offerId, 160), goal: cleanText(patch.goal, 160) || "signed_contract", payoutType: cleanText(patch.payoutType, 40) || "custom/manual", payoutAmount: nullableNumber(patch.payoutAmount), currency: cleanText(patch.currency, 12) || "RUB", holdDays: nullableNumber(patch.holdDays), attributionWindowDays: nullableNumber(patch.attributionWindowDays), dailyCap: nullableNumber(patch.dailyCap), monthlyCap: nullableNumber(patch.monthlyCap), allowedTrafficSources: Array.isArray(patch.allowedTrafficSources) ? patch.allowedTrafficSources : [], forbiddenTrafficSources: Array.isArray(patch.forbiddenTrafficSources) ? patch.forbiddenTrafficSources : [], statusMapping: patch.statusMapping && typeof patch.statusMapping === "object" ? patch.statusMapping : {}, postbackConfig: patch.postbackConfig && typeof patch.postbackConfig === "object" ? patch.postbackConfig : { method: "GET", urlTemplate: "", headers: {} }, comment: cleanText(comment, 1000), effectiveFrom: cleanText(patch.effectiveFrom, 80) || nowIso() };
+    if (next.enabled) { if (!next.name || !next.networkId || !next.offerId || !next.goal || !next.payoutType) throw new Error("cpa_required_fields_missing"); if (!/^https?:\/\//i.test(next.postbackConfig?.urlTemplate || "")) throw new Error("cpa_postback_url_invalid"); }
+    const nextNetworks = [...networks]; if (index >= 0) nextNetworks[index] = next; else nextNetworks.push(next); return nextNetworks;
+  });
   await appendChangeLog({ entityType: "cpa-network", entityId: id, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }

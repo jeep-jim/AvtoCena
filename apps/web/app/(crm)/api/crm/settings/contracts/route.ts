@@ -1,10 +1,8 @@
-import fs from "node:fs";
-import path from "node:path";
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { appendChangeLog, getContractTemplatesSettings } from "@/lib/business-settings";
-import { getDataRoot, mutateDataJson } from "@/lib/data";
+import { getJsonStorage, mutateDataJson } from "@/lib/data";
 import { canEditBusinessSettings, cleanText, booleanFromForm } from "@/lib/settings-validation";
 
 const MAX_TEMPLATE_BYTES = 8 * 1024 * 1024;
@@ -33,11 +31,12 @@ async function storeFile(file: File | null, allowedTypes: Set<string>, maxBytes:
   if (file.size > maxBytes) throw new Error("file_too_large");
   const extension = file.type === "image/png" ? ".png" : file.type === "application/pdf" ? ".pdf" : ".docx";
   const safeName = `${id("upload")}${extension}`;
-  const relativePath = path.join("contracts", "uploads", folder, safeName);
-  const targetPath = path.join(getDataRoot(), relativePath);
-  fs.mkdirSync(path.dirname(targetPath), { recursive: true });
-  fs.writeFileSync(targetPath, Buffer.from(await file.arrayBuffer()));
-  return { filePath: relativePath, originalName: file.name, mimeType: file.type, size: file.size };
+  const objectKey = ["contracts", "uploads", folder, safeName].join("/");
+  const data = Buffer.from(await file.arrayBuffer());
+  const storage = getJsonStorage();
+  if (!storage.putBinary) throw new Error("binary_storage_not_supported");
+  const stored = await storage.putBinary(objectKey, data, file.type);
+  return { objectKey: stored.objectKey, originalName: file.name, mimeType: stored.mimeType, size: stored.size, checksum: stored.checksum };
 }
 
 export async function GET() {
@@ -51,7 +50,6 @@ export async function POST(request: Request) {
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   try {
-    const settings = await getContractTemplatesSettings();
     const templateFile = await storeFile(form.get("templateFile") as File | null, TEMPLATE_TYPES, MAX_TEMPLATE_BYTES, "templates");
     const signatureFile = await storeFile(form.get("signatureFile") as File | null, SIGNATURE_TYPES, MAX_SIGNATURE_BYTES, "signatures");
     const template = {
@@ -69,12 +67,11 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
       createdByUserId: user.id,
     };
-    const next = {
+    await mutateDataJson<any>("contracts/templates.json", { templates: [], generatedDocuments: [] }, (settings) => ({
       ...settings,
       templates: [...(settings.templates || []), template],
       directorSignature: signatureFile ? { ...signatureFile, uploadedAt: new Date().toISOString(), uploadedByUserId: user.id, note: "PNG-подпись является визуальным наложением на документ и не является электронной подписью." } : settings.directorSignature,
-    };
-    await mutateDataJson<any>("contracts/templates.json", { templates: [], generatedDocuments: [] }, () => next);
+    }));
     await appendChangeLog({ entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
     return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
   } catch (error) {
