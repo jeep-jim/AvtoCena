@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser, isAdminRole } from "@/lib/auth";
-import { getJsonStorage, generateId } from "@/lib/data";
+import { checkStorageBootstrap, getJsonStorage, generateId } from "@/lib/data";
 
 export async function GET() {
   const user = getCurrentUser();
@@ -11,6 +11,7 @@ export async function GET() {
   const storage = getJsonStorage();
   const probePath = `.health/${generateId("probe")}.json`;
   const checks = { bucketAvailable: false, read: false, write: false, delete: false };
+  const bootstrap = await checkStorageBootstrap();
 
   try {
     await storage.readJson("clients/clients.json", []);
@@ -22,8 +23,8 @@ export async function GET() {
       await storage.deleteJson(probePath);
       checks.delete = true;
     }
-    return NextResponse.json({ ok: true, driver: storage.driver, checks });
+    return NextResponse.json({ ok: true, driver: storage.driver, checks, bootstrap });
   } catch {
-    return NextResponse.json({ ok: false, driver: storage.driver, checks, error: "storage_health_failed" }, { status: 500 });
+    return NextResponse.json({ ok: false, driver: storage.driver, checks, bootstrap, error: "storage_health_failed" }, { status: 500 });
   }
 }

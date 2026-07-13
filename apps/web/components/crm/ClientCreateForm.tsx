@@ -38,7 +38,7 @@ export function ClientCreateForm() {
       const response = await fetch("/api/crm/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
+        body: JSON.stringify({ ...form, operationId: crypto.randomUUID() })
       });
 
       if (!response.ok) {

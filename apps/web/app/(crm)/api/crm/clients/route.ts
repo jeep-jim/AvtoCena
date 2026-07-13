@@ -40,11 +40,20 @@ export async function POST(request: Request) {
   }
 
   const createdAt = new Date().toISOString();
-  const clientId = generateId("client");
+  const operationId = clean(body.operationId) || generateId("operation");
 
   try {
-    const client = await appendChunkedDataJson("clients/clients.json", {
+    const clients = await readChunkedDataJson<any>("clients/clients.json", []);
+    const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+    const events = await readChunkedDataJson<any>("activity/feed.json", []);
+    let client = clients.find((item) => item.operationId === operationId);
+    let lead = leads.find((item) => item.operationId === operationId);
+    let event = events.find((item) => item.operationId === operationId);
+    const clientId = client?.id || generateId("client");
+
+    if (!client) client = await appendChunkedDataJson("clients/clients.json", {
       id: clientId,
+      operationId,
       createdAt,
       updatedAt: createdAt,
       fio,
@@ -57,8 +66,9 @@ export async function POST(request: Request) {
       source: clean(body.source) || "manual"
     });
 
-    const lead = await appendChunkedDataJson("leads/leads.json", {
+    if (!lead) lead = await appendChunkedDataJson("leads/leads.json", {
       id: generateId("lead"),
+      operationId,
       createdAt,
       updatedAt: createdAt,
       clientId,
@@ -79,8 +89,9 @@ export async function POST(request: Request) {
       assignedManagerId: clean(body.assignedManagerId) || user.id
     });
 
-    await appendChunkedDataJson("activity/feed.json", {
+    if (!event) event = await appendChunkedDataJson("activity/feed.json", {
       id: generateId("event"),
+      operationId,
       createdAt,
       type: "client_created",
       title: "Добавлен клиент",
@@ -90,7 +101,7 @@ export async function POST(request: Request) {
       leadId: lead.id,
       text: fio || phone || telegram || "Новый клиент"
     });
-    return NextResponse.json({ ok: true, client, lead });
+    return NextResponse.json({ ok: true, client, lead, event, operationId });
   } catch {
     return NextResponse.json({ ok: false, error: "storage_write_failed" }, { status: 500 });
   }
