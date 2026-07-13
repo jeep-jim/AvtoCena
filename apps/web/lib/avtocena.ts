@@ -1,4 +1,6 @@
-import { readDataJson } from "./data";
+import fs from "node:fs";
+import path from "node:path";
+import { getDataRoot } from "./data";
 
 export type MoneyLine = {
   id: string;
@@ -61,7 +63,11 @@ export function money(value: number) {
 }
 
 export function getAvtocenaCases() {
-  return readDataJson<AvtocenaCase[]>("examples/avtocena-cases.json", []);
+  try {
+    const filePath = path.join(getDataRoot(), "examples/avtocena-cases.json");
+    if (!fs.existsSync(filePath)) return [];
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as AvtocenaCase[];
+  } catch { return []; }
 }
 
 export function getAvtocenaResults(input: AvtocenaSearchInput) {

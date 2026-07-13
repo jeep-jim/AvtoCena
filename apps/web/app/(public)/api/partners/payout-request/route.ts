@@ -94,7 +94,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
 
-  const partners = readDataJson<PartnerRecord[]>("partners/partners.json", []);
+  const partners = await readDataJson<PartnerRecord[]>("partners/partners.json", []);
   const partnerCode = user.partnerCode || "";
   const partner = partners.find((item) => item.code === partnerCode);
 
@@ -111,7 +111,7 @@ export async function POST(request: Request) {
     return redirectToCabinet(request, "empty");
   }
 
-  const existing = readChunkedDataJson<PayoutRequest>("partners/payout-requests.json", []);
+  const existing = await readChunkedDataJson<PayoutRequest>("partners/payout-requests.json", []);
   const pending = existing.find(
     (item) => item.partnerCode === partnerCode && item.status === "pending",
   );
@@ -139,7 +139,7 @@ export async function POST(request: Request) {
   };
 
   record.notificationSent = await notifyTelegram(record);
-  appendChunkedDataJson("partners/payout-requests.json", record);
+  await appendChunkedDataJson("partners/payout-requests.json", record);
 
   return redirectToCabinet(request, "sent");
 }

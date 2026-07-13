@@ -15,7 +15,7 @@ import { canEditBusinessSettings } from "@/lib/settings-validation";
 
 export const dynamic = "force-dynamic";
 
-export default function CrmSettingsPage() {
+export default async function CrmSettingsPage() {
   const user = getCurrentUser();
   const canEdit = canEditBusinessSettings(user?.role);
 
@@ -37,11 +37,11 @@ export default function CrmSettingsPage() {
       <BusinessSettingsPanel
         markets={getMarketsWithEffectiveVersions()}
         siteSettings={getActiveSiteBusinessVersion()}
-        partnerProgram={getActiveDirectPartnerPayout()}
+        partnerProgram={await getActiveDirectPartnerPayout()}
         cpaNetworks={getCpaNetworks()}
         contracts={getContractTemplatesSettings()}
         changeLog={getSettingsChangeLog()}
-        partners={readDataJson<any[]>("partners/partners.json", [])}
+        partners={await readDataJson<any[]>("partners/partners.json", [])}
         canEdit={canEdit}
       />
     </CrmShell>

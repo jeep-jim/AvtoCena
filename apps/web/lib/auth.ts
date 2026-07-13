@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
-import { readDataJson } from "./data";
+import fs from "node:fs";
+import path from "node:path";
+import { getDataRoot } from "./data";
 
 export const AUTH_COOKIE_NAME = "avtocena_session";
 export const AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 14;
@@ -49,7 +51,13 @@ export function normalizeTelegramUsername(value: string) {
 }
 
 export function getAuthUsers() {
-  return readDataJson<AuthUser[]>("auth/users.json", []);
+  try {
+    const filePath = path.join(getDataRoot(), "auth/users.json");
+    if (!fs.existsSync(filePath)) return [];
+    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as AuthUser[];
+  } catch {
+    return [];
+  }
 }
 
 export function findAuthUserByTelegram(username: string) {

@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: "wrong_secret" }, { status: 401 });
   }
 
-  const event = appendChunkedDataJson("cpa/events.json", {
+  const event = await appendChunkedDataJson("cpa/events.json", {
     id: makeId("cpa"),
     createdAt: new Date().toISOString(),
     direction: "inbound",

@@ -42,10 +42,10 @@ export async function PATCH(
   }
 
   const requestId = clean(context.params.id, 200);
-  const existing = readChunkedDataJson<PayoutRequest>(
+  const existing = (await readChunkedDataJson<PayoutRequest>(
     "partners/payout-requests.json",
     [],
-  ).find((item) => item.id === requestId);
+  )).find((item) => item.id === requestId);
 
   if (!existing) {
     return NextResponse.json({ ok: false, error: "request_not_found" }, { status: 404 });
@@ -70,7 +70,7 @@ export async function PATCH(
   }
 
   if (status === "paid" && existing.status !== "paid") {
-    const partners = readDataJson<any[]>("partners/partners.json", []);
+    const partners = await readDataJson<any[]>("partners/partners.json", []);
     const nextPartners = partners.map((partner) => {
       if (partner.code !== existing.partnerCode) return partner;
 
@@ -85,7 +85,7 @@ export async function PATCH(
       };
     });
 
-    writeDataJson("partners/partners.json", nextPartners);
+    await writeDataJson("partners/partners.json", nextPartners);
   }
 
   return NextResponse.json({ ok: true, request: updated });

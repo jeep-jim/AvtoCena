@@ -43,7 +43,7 @@ async function storeFile(file: File | null, allowedTypes: Set<string>, maxBytes:
 export async function GET() {
   const user = getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
-  return NextResponse.json({ ok: true, contracts: getContractTemplatesSettings(), pending: "Реальная генерация будет подключена после получения файла шаблона договора." });
+  return NextResponse.json({ ok: true, contracts: await getContractTemplatesSettings(), pending: "Реальная генерация будет подключена после получения файла шаблона договора." });
 }
 
 export async function POST(request: Request) {
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
   try {
-    const settings = getContractTemplatesSettings();
+    const settings = await getContractTemplatesSettings();
     const templateFile = await storeFile(form.get("templateFile") as File | null, TEMPLATE_TYPES, MAX_TEMPLATE_BYTES, "templates");
     const signatureFile = await storeFile(form.get("signatureFile") as File | null, SIGNATURE_TYPES, MAX_SIGNATURE_BYTES, "signatures");
     const template = {
@@ -74,8 +74,8 @@ export async function POST(request: Request) {
       templates: [...(settings.templates || []), template],
       directorSignature: signatureFile ? { ...signatureFile, uploadedAt: new Date().toISOString(), uploadedByUserId: user.id, note: "PNG-подпись является визуальным наложением на документ и не является электронной подписью." } : settings.directorSignature,
     };
-    writeDataJson("contracts/templates.json", next);
-    appendChangeLog({ entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
+    await writeDataJson("contracts/templates.json", next);
+    await appendChangeLog({ entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
     return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
   } catch (error) {
     return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "contract_template_error" }, { status: 400 });

@@ -28,30 +28,31 @@ function chooseEffectiveVersion(versions: any[] = [], asOf = new Date()) {
 }
 
 
-export function getMarketsSettings() {
-  return readDataJson<any[]>("markets/markets.json", []);
+export async function getMarketsSettings() {
+  return await readDataJson<any[]>("markets/markets.json", []);
 }
 
-export function getMarketSettings(marketId: string) {
-  return getMarketsSettings().find((market) => market.id === marketId) || null;
+export async function getMarketSettings(marketId: string) {
+  return (await getMarketsSettings()).find((market) => market.id === marketId) || null;
 }
 
-export function getActiveMarketVersion(marketId: string, asOf = new Date()) {
-  const market = getMarketSettings(marketId);
+export async function getActiveMarketVersion(marketId: string, asOf = new Date()) {
+  const market = await getMarketSettings(marketId);
   if (!market) return null;
   return chooseEffectiveVersion(market.versions || [], asOf) || market.versions?.find((version: any) => version.id === market.activeVersionId) || null;
 }
 
-export function getMarketsWithEffectiveVersions(asOf = new Date()) {
-  return getMarketsSettings().map((market) => ({
+export async function getMarketsWithEffectiveVersions(asOf = new Date()) {
+  const markets = await getMarketsSettings();
+  return Promise.all(markets.map(async (market) => ({
     ...market,
-    effectiveVersion: getActiveMarketVersion(market.id, asOf),
-  }));
+    effectiveVersion: await getActiveMarketVersion(market.id, asOf),
+  })));
 }
 
-export function getBusinessSettingsSnapshot(marketId: string) {
-  const market = getMarketSettings(marketId);
-  const version = getActiveMarketVersion(marketId);
+export async function getBusinessSettingsSnapshot(marketId: string) {
+  const market = await getMarketSettings(marketId);
+  const version = await getActiveMarketVersion(marketId);
   if (!market || !version) return null;
   return {
     snapshotAt: nowIso(),
@@ -63,7 +64,7 @@ export function getBusinessSettingsSnapshot(marketId: string) {
   };
 }
 
-export function appendChangeLog(entry: any) {
+export async function appendChangeLog(entry: any) {
   return appendChunkedDataJson("settings/change-log.json", {
     id: makeId("change"),
     createdAt: nowIso(),
@@ -71,16 +72,16 @@ export function appendChangeLog(entry: any) {
   });
 }
 
-export function createMarketVersion(marketId: string, patch: any, user: SettingsUser, comment: string) {
+export async function createMarketVersion(marketId: string, patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
   if (!isMarketId(marketId)) throw new Error("unknown_market");
 
-  const markets = getMarketsSettings();
+  const markets = await getMarketsSettings();
   const marketIndex = markets.findIndex((market) => market.id === marketId);
   if (marketIndex === -1) throw new Error("market_not_found");
 
   const market = markets[marketIndex];
-  const current = getActiveMarketVersion(marketId) || market.versions?.[market.versions.length - 1] || {};
+  const current = await getActiveMarketVersion(marketId) || market.versions?.[market.versions.length - 1] || {};
   const nextVersionNumber = Math.max(0, ...(market.versions || []).map((version: any) => Number(version.version || 0))) + 1;
   const candidate = {
     ...current,
@@ -107,8 +108,8 @@ export function createMarketVersion(marketId: string, patch: any, user: Settings
     versions: [...(market.versions || []).map((version: any) => nextVersion.status === "active" && version.status === "active" ? { ...version, status: "archived" } : version), nextVersion],
   };
   markets[marketIndex] = nextMarket;
-  writeDataJson("markets/markets.json", markets);
-  appendChangeLog({
+  await writeDataJson("markets/markets.json", markets);
+  await appendChangeLog({
     entityType: "market",
     entityId: marketId,
     changedByUserId: user.id,
@@ -120,19 +121,19 @@ export function createMarketVersion(marketId: string, patch: any, user: Settings
   return nextVersion;
 }
 
-export function getSiteBusinessSettings() {
-  return readDataJson<any>("settings/site-business.json", { activeVersionId: "", versions: [] });
+export async function getSiteBusinessSettings() {
+  return await readDataJson<any>("settings/site-business.json", { activeVersionId: "", versions: [] });
 }
 
-export function getActiveSiteBusinessVersion(asOf = new Date()) {
-  const settings = getSiteBusinessSettings();
+export async function getActiveSiteBusinessVersion(asOf = new Date()) {
+  const settings = await getSiteBusinessSettings();
   return chooseEffectiveVersion(settings.versions || [], asOf) || settings.versions?.find((version: any) => version.id === settings.activeVersionId) || settings.versions?.[0] || null;
 }
 
-export function createSiteBusinessVersion(patch: any, user: SettingsUser, comment: string) {
+export async function createSiteBusinessVersion(patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const settings = getSiteBusinessSettings();
-  const current = getActiveSiteBusinessVersion() || {};
+  const settings = await getSiteBusinessSettings();
+  const current = await getActiveSiteBusinessVersion() || {};
   const version = Math.max(0, ...(settings.versions || []).map((item: any) => Number(item.version || 0))) + 1;
   const next = {
     ...current,
@@ -154,37 +155,37 @@ export function createSiteBusinessVersion(patch: any, user: SettingsUser, commen
     createdByUserId: user.id,
   };
   const updated = { activeVersionId: next.status === "active" ? next.id : settings.activeVersionId, versions: [...(settings.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  writeDataJson("settings/site-business.json", updated);
-  appendChangeLog({ entityType: "site-business", entityId: "site", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
+  await writeDataJson("settings/site-business.json", updated);
+  await appendChangeLog({ entityType: "site-business", entityId: "site", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
-export function getDirectPartnerProgram() {
-  return readDataJson<any>("cpa/payouts.json", {}).directPartnerProgram;
+export async function getDirectPartnerProgram() {
+  return (await readDataJson<any>("cpa/payouts.json", {})).directPartnerProgram;
 }
 
-export function getActiveDirectPartnerPayout(asOf = new Date()) {
-  const program = getDirectPartnerProgram();
+export async function getActiveDirectPartnerPayout(asOf = new Date()) {
+  const program = await getDirectPartnerProgram();
   return chooseEffectiveVersion(program?.versions || [], asOf) || program?.versions?.find((version: any) => version.id === program.activeVersionId) || null;
 }
 
-export function createDirectPartnerPayoutVersion(amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
+export async function createDirectPartnerPayoutVersion(amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const settings = readDataJson<any>("cpa/payouts.json", {});
+  const settings = await readDataJson<any>("cpa/payouts.json", {});
   const program = settings.directPartnerProgram || { versions: [] };
-  const current = getActiveDirectPartnerPayout() || {};
+  const current = await await getActiveDirectPartnerPayout() || {};
   const version = Math.max(0, ...(program.versions || []).map((item: any) => Number(item.version || 0))) + 1;
   const nextEffectiveFrom = effectiveFrom || nowIso();
   const next = { ...current, id: makeId(`direct_partner_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, defaultSignedContractPayoutRub: Number(amountRub), currency: "RUB", createdAt: nowIso(), createdByUserId: user.id, comment: cleanText(comment, 1000) };
   const updatedProgram = { ...program, activeVersionId: next.status === "active" ? next.id : program.activeVersionId, versions: [...(program.versions || []).map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  writeDataJson("cpa/payouts.json", { ...settings, directPartnerProgram: updatedProgram });
-  appendChangeLog({ entityType: "direct-partner-payout", entityId: "default", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
+  await writeDataJson("cpa/payouts.json", { ...settings, directPartnerProgram: updatedProgram });
+  await appendChangeLog({ entityType: "direct-partner-payout", entityId: "default", changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
-export function createPartnerPayoutVersion(partnerCode: string, amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
+export async function createPartnerPayoutVersion(partnerCode: string, amountRub: number, effectiveFrom: string, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
   const partnerIndex = partners.findIndex((partner) => partner.code === partnerCode);
   if (partnerIndex === -1) throw new Error("partner_not_found");
   const partner = partners[partnerIndex];
@@ -193,26 +194,26 @@ export function createPartnerPayoutVersion(partnerCode: string, amountRub: numbe
   const nextEffectiveFrom = effectiveFrom || nowIso();
   const next = { id: makeId(`${partnerCode}_payout_v${version}`), version, status: statusForEffectiveFrom(nextEffectiveFrom, true), effectiveFrom: nextEffectiveFrom, event: "signed_contract", payoutRub: Number(amountRub), currency: "RUB", comment: cleanText(comment, 1000) };
   partners[partnerIndex] = { ...partner, payoutRub: next.status === "active" ? Number(amountRub) : partner.payoutRub, individualPayouts: [...versions.map((item: any) => next.status === "active" && item.status === "active" ? { ...item, status: "archived" } : item), next] };
-  writeDataJson("partners/partners.json", partners);
-  appendChangeLog({ entityType: "partner-payout", entityId: partnerCode, changedByUserId: user.id, changedByName: user.displayName, oldValue: versions[versions.length - 1] || null, newValue: next, comment: cleanText(comment, 1000) });
+  await writeDataJson("partners/partners.json", partners);
+  await appendChangeLog({ entityType: "partner-payout", entityId: partnerCode, changedByUserId: user.id, changedByName: user.displayName, oldValue: versions[versions.length - 1] || null, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
-export function classifyPartnerSource(partnerRef?: string) {
+export async function classifyPartnerSource(partnerRef?: string) {
   const ref = cleanText(partnerRef, 160);
   if (!ref) return { type: "none", partnerRef: ref } as const;
 
-  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
   const directPartner = partners.find((partner) => partner.code === ref && partner.partnerType !== "cpa-network" && partner.status === "active");
   if (directPartner) return { type: "direct-partner", partnerRef: ref, partner: directPartner } as const;
 
-  const cpaNetwork = getCpaNetworks().find((network) => network.enabled && (network.partnerRef === ref || network.networkId === ref));
+  const cpaNetwork = (await getCpaNetworks()).find((network) => network.enabled && (network.partnerRef === ref || network.networkId === ref));
   if (cpaNetwork) return { type: "cpa-network", partnerRef: ref, network: cpaNetwork } as const;
 
   return { type: "unknown", partnerRef: ref } as const;
 }
 
-export function handleLeadPartnerStatusChange(input: {
+export async function handleLeadPartnerStatusChange(input: {
   leadId: string;
   clientId?: string;
   partnerRef?: string;
@@ -230,16 +231,16 @@ export function handleLeadPartnerStatusChange(input: {
   createdAt?: string;
 }) {
   const createdAt = input.createdAt || nowIso();
-  const source = classifyPartnerSource(input.partnerRef);
+  const source = await classifyPartnerSource(input.partnerRef);
   const result: any = { source, accrual: null, diagnostic: null, cpaEvent: null };
 
   if (input.status === "contract_signed" && source.type === "direct-partner") {
-    result.accrual = createDirectPartnerAccrualForLead({ leadId: input.leadId, clientId: input.clientId, partnerRef: source.partnerRef, createdAt });
+    result.accrual = await createDirectPartnerAccrualForLead({ leadId: input.leadId, clientId: input.clientId, partnerRef: source.partnerRef, createdAt });
     return result;
   }
 
   if (source.type === "unknown" && input.partnerRef) {
-    result.diagnostic = appendChunkedDataJson("activity/feed.json", {
+    result.diagnostic = await appendChunkedDataJson("activity/feed.json", {
       id: makeId("event"),
       createdAt,
       type: "partner_source_unknown",
@@ -255,7 +256,7 @@ export function handleLeadPartnerStatusChange(input: {
 
   const hasConfirmedCpaAttribution = source.type === "cpa-network" && Boolean(input.externalClickId);
   if (hasConfirmedCpaAttribution) {
-    result.cpaEvent = appendChunkedDataJson("cpa/events.json", {
+    result.cpaEvent = await appendChunkedDataJson("cpa/events.json", {
       id: makeId("cpa"),
       createdAt,
       direction: "outbound",
@@ -281,32 +282,32 @@ export function handleLeadPartnerStatusChange(input: {
   return result;
 }
 
-export function getEffectivePartnerPayout(partnerCode: string, asOf = new Date()) {
-  const partners = readDataJson<any[]>("partners/partners.json", []);
+export async function getEffectivePartnerPayout(partnerCode: string, asOf = new Date()) {
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
   const partner = partners.find((item) => item.code === partnerCode);
   const individual = chooseEffectiveVersion(partner?.individualPayouts || [], asOf);
   if (individual) {
     return { payoutAmountRub: Number(individual.payoutRub || 0), payoutVersionId: individual.id, payoutEffectiveFrom: individual.effectiveFrom, partnerCode, event: individual.event || "signed_contract", source: "individual" };
   }
-  const base = getActiveDirectPartnerPayout(asOf);
+  const base = await getActiveDirectPartnerPayout(asOf);
   return { payoutAmountRub: Number(base?.defaultSignedContractPayoutRub || 0), payoutVersionId: base?.id || "", payoutEffectiveFrom: base?.effectiveFrom || "", partnerCode, event: base?.event || "signed_contract", source: "default" };
 }
 
-export function createDirectPartnerAccrualForLead(input: { leadId: string; clientId?: string; partnerRef?: string; createdAt?: string }) {
+export async function createDirectPartnerAccrualForLead(input: { leadId: string; clientId?: string; partnerRef?: string; createdAt?: string }) {
   const partnerRef = cleanText(input.partnerRef, 160);
   const createdAt = input.createdAt || nowIso();
-  const partners = readDataJson<any[]>("partners/partners.json", []);
+  const partners = await readDataJson<any[]>("partners/partners.json", []);
   const directPartner = partners.find((partner) => partner.code === partnerRef && partner.partnerType !== "cpa-network" && partner.status === "active");
-  const cpaNetwork = getCpaNetworks().find((network) => network.partnerRef === partnerRef || network.networkId === partnerRef);
+  const cpaNetwork = (await getCpaNetworks()).find((network) => network.partnerRef === partnerRef || network.networkId === partnerRef);
 
   if (!partnerRef) return { created: false, reason: "partner_ref_missing" };
   if (cpaNetwork) return { created: false, reason: "cpa_network_ref" };
   if (!directPartner) return { created: false, reason: "partner_ref_unknown_or_inactive" };
 
-  const existingAccrual = readChunkedDataJson<any>("partners/accruals.json", []).find((item) => item.leadId === input.leadId && item.event === "signed_contract");
+  const existingAccrual = (await readChunkedDataJson<any>("partners/accruals.json", [])).find((item) => item.leadId === input.leadId && item.event === "signed_contract");
   if (existingAccrual) return { created: false, reason: "duplicate", accrual: existingAccrual };
 
-  const payout = getEffectivePartnerPayout(partnerRef, new Date(createdAt));
+  const payout = await getEffectivePartnerPayout(partnerRef, new Date(createdAt));
   const accrual = {
     id: makeId("accrual"),
     leadId: input.leadId,
@@ -319,15 +320,15 @@ export function createDirectPartnerAccrualForLead(input: { leadId: string; clien
     createdAt,
     status: "accrued"
   };
-  appendChunkedDataJson("partners/accruals.json", accrual);
+  await appendChunkedDataJson("partners/accruals.json", accrual);
   return { created: true, reason: "created", accrual };
 }
 
-export function getCpaNetworks() { return readDataJson<any[]>("cpa/networks.json", []); }
+export async function getCpaNetworks() { return await readDataJson<any[]>("cpa/networks.json", []); }
 
-export function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: string) {
+export async function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: string) {
   if (!canEditBusinessSettings(user.role)) throw new Error("forbidden");
-  const networks = getCpaNetworks();
+  const networks = await getCpaNetworks();
   const id = cleanText(patch.id, 160) || makeId("cpa_network");
   const index = networks.findIndex((network) => network.id === id);
   const current = index >= 0 ? networks[index] : {};
@@ -337,10 +338,10 @@ export function upsertCpaNetworkDraft(patch: any, user: SettingsUser, comment: s
     if (!/^https?:\/\//i.test(next.postbackConfig?.urlTemplate || "")) throw new Error("cpa_postback_url_invalid");
   }
   if (index >= 0) networks[index] = next; else networks.push(next);
-  writeDataJson("cpa/networks.json", networks);
-  appendChangeLog({ entityType: "cpa-network", entityId: id, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
+  await writeDataJson("cpa/networks.json", networks);
+  await appendChangeLog({ entityType: "cpa-network", entityId: id, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: next, comment: cleanText(comment, 1000) });
   return next;
 }
 
-export function getContractTemplatesSettings() { return readDataJson<any>("contracts/templates.json", { templates: [], generatedDocuments: [] }); }
-export function getSettingsChangeLog() { return readDataJson<any[]>("settings/change-log.json", []); }
+export async function getContractTemplatesSettings() { return await readDataJson<any>("contracts/templates.json", { templates: [], generatedDocuments: [] }); }
+export async function getSettingsChangeLog() { return await readDataJson<any[]>("settings/change-log.json", []); }

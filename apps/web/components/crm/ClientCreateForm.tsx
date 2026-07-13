@@ -1,8 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function ClientCreateForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -39,12 +41,16 @@ export function ClientCreateForm() {
         body: JSON.stringify(form)
       });
 
-      if (!response.ok) throw new Error("client_create_error");
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload?.error === "storage_write_failed" ? "storage_write_failed" : "client_create_error");
+      }
 
       setSent(true);
       setForm({ fio: "", phone: "", telegram: "", city: "", car: "", budgetRub: "", comment: "" });
-    } catch {
-      setError("Не получилось добавить клиента. Проверьте авторизацию и dev-сервер.");
+      router.refresh();
+    } catch (error) {
+      setError(error instanceof Error && error.message === "storage_write_failed" ? "Не получилось сохранить клиента в production-хранилище. Запись не подтверждена, попробуйте ещё раз или обратитесь к администратору." : "Не получилось добавить клиента. Проверьте авторизацию и доступность CRM.");
     } finally {
       setLoading(false);
     }
