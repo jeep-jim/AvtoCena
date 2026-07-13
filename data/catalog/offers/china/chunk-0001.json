@@ -37,7 +37,7 @@
       "Public detail page opened by search/browser tool on 2026-07-13"
     ],
     "dataQualityScore": 0.86,
-    "calculationConfidence": "medium",
+    "calculationConfidence": "needs_review",
     "provenance": {
       "priceLocal": [
         "source: lines 35-39"
@@ -70,36 +70,57 @@
         "source page contains gallery, direct image hotlink not confirmed; show source link only"
       ]
     },
-    "calculationSnapshot": {
-      "settingsVersion": "market_china_v1",
-      "marketConfigVersion": "market_china_v1",
-      "calculatedAt": "2026-07-13T12:00:00.000Z",
-      "exchangeRate": 78.45,
-      "exchangeRateVersion": "usd-2026-07-13-cbr",
-      "exchangeRateSource": "manual CBR snapshot for verified catalog slice",
-      "sourcePriceLocal": 10300,
-      "sourcePriceRub": 808035,
-      "totalRub": 1058035,
-      "complete": false,
-      "lines": [
-        {
-          "id": "car",
-          "title": "Стоимость автомобиля",
-          "amountRub": 808035
-        },
-        {
-          "id": "security-deposit",
-          "title": "Обеспечительный платёж",
-          "amountRub": 160000
-        },
-        {
-          "id": "topavto-commission",
-          "title": "Комиссия TopAvto",
-          "amountRub": 90000
-        }
+    "calculationSnapshot": null,
+    "imageMode": "source_page_only",
+    "calculationStatus": "needs_review",
+    "calculationComplete": false,
+    "listingStatus": "live",
+    "listingConfidence": "medium",
+    "advertisedPower": "98 hp / 90 kW (source labels need review)",
+    "icePowerHp": null,
+    "icePowerKw": null,
+    "electricMotorPowerHp": null,
+    "electricMotorPowerKw": null,
+    "systemPowerHp": null,
+    "systemPowerKw": null,
+    "customsPowerKw": null,
+    "powerType": "advertised",
+    "powerProvenance": {
+      "priceLocal": [
+        "source: lines 35-39"
+      ],
+      "year": [
+        "source title/model year lines 33,107"
+      ],
+      "mileageKm": [
+        "source lines 49-51"
+      ],
+      "fuelType": [
+        "source lines 45-47"
+      ],
+      "engineCc": [
+        "source line 113"
+      ],
+      "powerHp": [
+        "source line 113"
+      ],
+      "powerKw": [
+        "source line 197"
+      ],
+      "transmission": [
+        "source line 115"
+      ],
+      "drive": [
+        "source line 121"
+      ],
+      "images": [
+        "source page contains gallery, direct image hotlink not confirmed; show source link only"
       ]
     },
-    "imageMode": "source_page_only"
+    "advertisedModelYear": 2021,
+    "manufactureYear": null,
+    "productionDate": null,
+    "firstRegistrationDate": null
   },
   {
     "id": "che168-58996551",
@@ -139,7 +160,7 @@
       "Public detail page opened by search/browser tool on 2026-07-13"
     ],
     "dataQualityScore": 0.86,
-    "calculationConfidence": "medium",
+    "calculationConfidence": "needs_review",
     "provenance": {
       "priceLocal": [
         "source lines 41-45"
@@ -172,35 +193,56 @@
         "source page contains gallery, direct image hotlink not confirmed; show source link only"
       ]
     },
-    "calculationSnapshot": {
-      "settingsVersion": "market_china_v1",
-      "marketConfigVersion": "market_china_v1",
-      "calculatedAt": "2026-07-13T12:00:00.000Z",
-      "exchangeRate": 78.45,
-      "exchangeRateVersion": "usd-2026-07-13-cbr",
-      "exchangeRateSource": "manual CBR snapshot for verified catalog slice",
-      "sourcePriceLocal": 6000,
-      "sourcePriceRub": 470700,
-      "totalRub": 720700,
-      "complete": false,
-      "lines": [
-        {
-          "id": "car",
-          "title": "Стоимость автомобиля",
-          "amountRub": 470700
-        },
-        {
-          "id": "security-deposit",
-          "title": "Обеспечительный платёж",
-          "amountRub": 160000
-        },
-        {
-          "id": "topavto-commission",
-          "title": "Комиссия TopAvto",
-          "amountRub": 90000
-        }
+    "calculationSnapshot": null,
+    "imageMode": "source_page_only",
+    "calculationStatus": "needs_review",
+    "calculationComplete": false,
+    "listingStatus": "live",
+    "listingConfidence": "medium",
+    "advertisedPower": "116 hp / 85 kW (source labels need review)",
+    "icePowerHp": null,
+    "icePowerKw": null,
+    "electricMotorPowerHp": null,
+    "electricMotorPowerKw": null,
+    "systemPowerHp": null,
+    "systemPowerKw": null,
+    "customsPowerKw": null,
+    "powerType": "advertised",
+    "powerProvenance": {
+      "priceLocal": [
+        "source lines 41-45"
+      ],
+      "year": [
+        "source title/model year lines 39,113"
+      ],
+      "mileageKm": [
+        "source lines 55-57"
+      ],
+      "fuelType": [
+        "source lines 51-53"
+      ],
+      "engineCc": [
+        "source line 119"
+      ],
+      "powerHp": [
+        "source line 119"
+      ],
+      "powerKw": [
+        "source line 199"
+      ],
+      "transmission": [
+        "source line 121"
+      ],
+      "drive": [
+        "source line 127"
+      ],
+      "images": [
+        "source page contains gallery, direct image hotlink not confirmed; show source link only"
       ]
     },
-    "imageMode": "source_page_only"
+    "advertisedModelYear": 2017,
+    "manufactureYear": null,
+    "productionDate": null,
+    "firstRegistrationDate": null
   }
 ]

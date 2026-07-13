@@ -1,5 +1,4 @@
-import { parseInput, normalize, calculate, validate, dedupe, readOffers, buildChunks } from './catalog-lib.mjs';
-const input=process.argv[2]; if(!input){ console.error('Usage: node scripts/catalog-import.mjs file.json|file.csv'); process.exit(1); }
-const existing=readOffers(); const byId=new Map(existing.map(o=>[o.id,o])); const report={added:0,updated:0,rejected:0,needs_review:0,rejections:[]};
-for(const raw of parseInput(input)){ const calculated=calculate(normalize(raw)); const errors=validate(calculated); const next= errors.length ? {...calculated, availability:'needs_review', eligibilityReasons:[...(calculated.eligibilityReasons||[]),...errors]} : {...calculated, availability:'live'}; if(errors.some(e=>/demo|concrete|placeholder/.test(e))){ report.rejected++; report.rejections.push({id:next.id, errors}); continue; } if(next.availability==='needs_review') report.needs_review++; if(byId.has(next.id)) report.updated++; else report.added++; byId.set(next.id,next); }
-buildChunks(dedupe([...byId.values()])); console.log(JSON.stringify(report,null,2));
+import { spawnSync } from 'node:child_process';
+const input = process.argv[2];
+const result = spawnSync(process.execPath, ['--import', 'tsx', 'scripts/catalog-cli.ts', 'catalog:import', input || ''], { stdio: 'inherit' });
+process.exit(result.status ?? 1);
