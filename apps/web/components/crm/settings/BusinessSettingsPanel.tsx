@@ -605,6 +605,7 @@ export function BusinessSettingsPanel({
               encType="multipart/form-data"
               className="mt-4 grid gap-3 md:grid-cols-2"
             >
+              <input type="hidden" name="operationId" defaultValue={crypto.randomUUID()} />
               <Field label="Название" name="title" />
               <Field label="Рынок" name="market" />
               <Field label="Версия" name="version" />

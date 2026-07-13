@@ -30,7 +30,17 @@ export async function GET(request: Request) {
   if (!asset || !ALLOWED_TYPES.has(asset.mimeType)) return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
   const storage = getJsonStorage();
   if (!storage.getBinary) return NextResponse.json({ ok: false, error: "binary_storage_not_supported" }, { status: 500 });
-  const binary = await storage.getBinary(key);
+  let binary;
+  try {
+    binary = await storage.getBinary(key);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("404") || (error as any)?.code === "ENOENT") return NextResponse.json({ ok: false, error: "binary_not_found" }, { status: 404 });
+    return NextResponse.json({ ok: false, error: "binary_read_failed" }, { status: 500 });
+  }
+  if (asset.checksum && binary.checksum !== asset.checksum) {
+    return NextResponse.json({ ok: false, error: "binary_checksum_mismatch" }, { status: 500 });
+  }
   return new NextResponse(binary.data as any, {
     headers: {
       "content-type": asset.mimeType,

@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
-import { appendChangeLog, getContractTemplatesSettings } from "@/lib/business-settings";
+import { appendChangeLog, getContractTemplatesSettings, getSettingsChangeLog } from "@/lib/business-settings";
 import { getJsonStorage, mutateDataJson } from "@/lib/data";
 import { canEditBusinessSettings, cleanText, booleanFromForm } from "@/lib/settings-validation";
 
@@ -35,7 +35,19 @@ async function storeFile(file: File | null, allowedTypes: Set<string>, maxBytes:
   const data = Buffer.from(await file.arrayBuffer());
   const storage = getJsonStorage();
   if (!storage.putBinary) throw new Error("binary_storage_not_supported");
-  const stored = await storage.putBinary(objectKey, data, file.type);
+  let stored;
+  try {
+    stored = await storage.putBinary(objectKey, data, file.type, { ifNoneMatch: "*" });
+  } catch (error) {
+    if (error instanceof Error && error.message === "storage_conflict" && storage.getBinary) {
+      const existing = await storage.getBinary(objectKey);
+      const checksum = crypto.createHash("sha256").update(data).digest("hex");
+      if (existing.checksum === checksum) stored = { objectKey, mimeType: file.type, size: data.length, checksum };
+      else throw error;
+    } else {
+      throw error;
+    }
+  }
   return { objectKey: stored.objectKey, originalName: file.name, mimeType: stored.mimeType, size: stored.size, checksum: stored.checksum };
 }
 
@@ -55,7 +67,13 @@ export async function POST(request: Request) {
   try {
     const existing = await getContractTemplatesSettings();
     const duplicate = (existing.templates || []).find((item: any) => item.operationId === operationId || item.id === `contract_template_${operationId}`);
-    if (duplicate) return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
+    if (duplicate) {
+      const changeLog = await getSettingsChangeLog();
+      if (!changeLog.some((entry: any) => entry.id === `contract_change_${operationId}`)) {
+        await appendChangeLog({ id: `contract_change_${operationId}`, entityType: "contract-template", entityId: duplicate.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: duplicate, comment: cleanText(form.get("comment"), 1000) });
+      }
+      return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
+    }
     const templateFile = await storeFile(form.get("templateFile") as File | null, TEMPLATE_TYPES, MAX_TEMPLATE_BYTES, "templates", operationId);
     if (templateFile?.objectKey) uploadedKeys.push(templateFile.objectKey);
     const signatureFile = await storeFile(form.get("signatureFile") as File | null, SIGNATURE_TYPES, MAX_SIGNATURE_BYTES, "signatures", operationId);
@@ -86,7 +104,7 @@ export async function POST(request: Request) {
     };
     });
     saved = true;
-    await appendChangeLog({ entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
+    await appendChangeLog({ id: `contract_change_${operationId}`, entityType: "contract-template", entityId: template.id, changedByUserId: user.id, changedByName: user.displayName, oldValue: null, newValue: template, comment: cleanText(form.get("comment"), 1000) });
     return NextResponse.redirect(new URL("/crm/settings#contracts", request.url));
   } catch (error) {
     if (!saved) {
