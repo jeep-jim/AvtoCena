@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 
 const sections = [
   ["markets", "Рынки"],
@@ -16,6 +16,23 @@ const sections = [
 export function SettingsSectionNav() {
   const [activeSection, setActiveSection] =
     useState<(typeof sections)[number][0]>("markets");
+
+  const openParentDetailsAndScroll = useCallback(
+    (id: (typeof sections)[number][0]) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      const parentDetails = element.closest("details");
+      if (parentDetails && !parentDetails.open) {
+        parentDetails.open = true;
+      }
+
+      window.requestAnimationFrame(() => {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,6 +56,31 @@ export function SettingsSectionNav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const scrollToHashTarget = () => {
+      const id = window.location.hash.slice(1) as (typeof sections)[number][0];
+      if (!sections.some(([sectionId]) => sectionId === id)) return;
+
+      setActiveSection(id);
+      openParentDetailsAndScroll(id);
+    };
+
+    scrollToHashTarget();
+    window.addEventListener("hashchange", scrollToHashTarget);
+
+    return () => window.removeEventListener("hashchange", scrollToHashTarget);
+  }, [openParentDetailsAndScroll]);
+
+  const handleNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    id: (typeof sections)[number][0],
+  ) => {
+    event.preventDefault();
+    window.history.pushState(null, "", `#${id}`);
+    setActiveSection(id);
+    openParentDetailsAndScroll(id);
+  };
+
   return (
     <nav
       aria-label="Разделы бизнес-настроек"
@@ -53,7 +95,7 @@ export function SettingsSectionNav() {
               key={id}
               href={`#${id}`}
               aria-current={active ? "true" : undefined}
-              onClick={() => setActiveSection(id)}
+              onClick={(event) => handleNavClick(event, id)}
               className={[
                 "shrink-0 rounded-full border px-4 py-2 text-sm font-black transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300/80",
                 active
