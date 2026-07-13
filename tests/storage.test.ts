@@ -145,3 +145,10 @@ test('ObjectJsonStorage binaryExists uses HEAD and putBinary conditions are idem
     assert.equal(methods[0], 'HEAD');
   } finally { globalThis.fetch = originalFetch; }
 });
+
+test('safeStoragePath rejects traversal storage keys', async () => {
+  const { normalizeStorageKey, safeStoragePath } = await import('../apps/web/lib/data.ts?safe=' + Date.now());
+  assert.throws(() => normalizeStorageKey('../secret.png'), /invalid_storage_key/);
+  assert.throws(() => normalizeStorageKey('contracts/uploads/../secret.png'), /invalid_storage_key/);
+  assert.throws(() => safeStoragePath('../../secret.png'), /invalid_storage_key/);
+});

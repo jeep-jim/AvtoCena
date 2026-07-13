@@ -12,6 +12,7 @@ const TEMPLATE_TYPES = new Set([
   "application/pdf",
 ]);
 const SIGNATURE_TYPES = new Set(["image/png"]);
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 function id(prefix: string) {
   try { return `${prefix}_${crypto.randomUUID()}`; } catch { return `${prefix}_${Date.now()}`; }
@@ -61,7 +62,8 @@ export async function POST(request: Request) {
   const user = getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const form = await request.formData();
-  const operationId = cleanText(form.get("operationId"), 120) || id("contract_operation");
+  const operationId = cleanText(form.get("operationId"), 120);
+  if (!UUID_RE.test(operationId)) return NextResponse.json({ ok: false, error: "invalid_operation_id" }, { status: 400 });
   const uploadedKeys: string[] = [];
   let saved = false;
   try {
