@@ -12,6 +12,8 @@
     "dev:bot": "npm --workspace=@avtocena/bot run dev",
     "build": "npm --workspace=@avtocena/web run build",
     "clean:web": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\"",
-    "dev:fresh": "npm run clean:web && npm run dev"
+    "dev:fresh": "npm run clean:web && npm run dev",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && cd packages/engine && ./node_modules/.bin/tsc --noEmit"
   }
 }

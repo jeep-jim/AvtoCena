@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "cpa_network_draft",
+    "networkId": "",
+    "name": "Черновик CPA-сети",
+    "enabled": false,
+    "status": "draft",
+    "partnerRef": "",
+    "offerId": "",
+    "goal": "signed_contract",
+    "payoutType": "custom/manual",
+    "payoutAmount": null,
+    "currency": "RUB",
+    "holdDays": null,
+    "attributionWindowDays": null,
+    "dailyCap": null,
+    "monthlyCap": null,
+    "allowedTrafficSources": [],
+    "forbiddenTrafficSources": [],
+    "statusMapping": {},
+    "postbackConfig": {
+      "method": "GET",
+      "urlTemplate": "",
+      "headers": {}
+    },
+    "comment": "CPA-сети неактивны до согласования реальных условий. Не использовать ставку прямых партнёров автоматически.",
+    "effectiveFrom": "2026-07-12T00:00:00.000Z"
+  }
+]

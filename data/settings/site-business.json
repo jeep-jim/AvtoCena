@@ -1,0 +1,21 @@
+{
+  "activeVersionId": "site_business_v1",
+  "versions": [
+    {
+      "id": "site_business_v1",
+      "version": 1,
+      "status": "active",
+      "effectiveFrom": "2026-07-12T00:00:00.000Z",
+      "displayPartnerPayoutRub": 10000,
+      "activeMarkets": ["japan", "china", "uae"],
+      "contacts": { "telegram": "", "phone": "", "email": "" },
+      "commercialNotes": { "partnerPayout": "Выплата прямому партнёру за подписанный договор.", "calculation": "Итоговый расчёт фиксируется snapshot на момент заявки." },
+      "deliveryTermsText": "Срок зависит от рынка, маршрута и даты оплаты инвойса.",
+      "minimumBudgetRub": 1500000,
+      "calculationReservePercent": 0,
+      "stageLabels": { "contract": "Договор", "search": "Поиск / осмотр", "invoice": "Покупка / инвойс", "delivery": "Доставка клиенту" },
+      "createdAt": "2026-07-12T00:00:00.000Z",
+      "createdByUserId": "system"
+    }
+  ]
+}

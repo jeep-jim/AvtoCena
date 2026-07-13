@@ -1,6 +1,7 @@
 import { PartnerShell } from "@/components/partner/PartnerShell";
 import { PartnerAccessModal } from "@/components/partner/PartnerAccessModal";
 import { money } from "@/lib/avtocena";
+import { getActiveSiteBusinessVersion } from "@/lib/business-settings";
 
 type RequestState = "sent" | "duplicate" | "error" | undefined;
 
@@ -17,7 +18,7 @@ const featureCards = [
   {
     emoji: "💰",
     title: "Высокий payout",
-    text: "Выплата за подписанный договор — 10 000 ₽. Работаете не за клик, а за реальный результат.",
+    text: "Выплата за подписанный договор — актуальная ставка из партнёрской программы. Работаете не за клик, а за реальный результат.",
   },
   {
     emoji: "🌍",
@@ -255,6 +256,8 @@ export default async function PartnerLandingPage({
 }) {
   const params = (await searchParams) ?? {};
   const requestState = firstParam(params.request) as RequestState;
+  const siteBusiness = getActiveSiteBusinessVersion();
+  const partnerPayoutRub = Number(siteBusiness?.displayPartnerPayoutRub || 10000);
 
   return (
     <PartnerShell
@@ -270,7 +273,7 @@ export default async function PartnerLandingPage({
           <div className="relative grid gap-8 xl:grid-cols-[minmax(0,1fr)_500px] xl:items-center">
             <div>
               <div className="flex flex-wrap gap-2">
-                <GlowPill>10 000 ₽ за подписанный договор</GlowPill>
+                <GlowPill>{money(partnerPayoutRub)} ₽ за подписанный договор</GlowPill>
                 <GlowPill>S2S / postback</GlowPill>
                 <GlowPill>CPA + прямые партнёры</GlowPill>
               </div>
@@ -306,7 +309,7 @@ export default async function PartnerLandingPage({
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <div className="text-xs font-black uppercase tracking-[0.18em] text-red-200/85">Модель заработка</div>
-                    <div className="mt-2 whitespace-nowrap text-[46px] font-black leading-none tracking-[-0.06em] text-white sm:text-5xl">{money(10000)} ₽</div>
+                    <div className="mt-2 whitespace-nowrap text-[46px] font-black leading-none tracking-[-0.06em] text-white sm:text-5xl">{money(partnerPayoutRub)} ₽</div>
                     <div className="mt-2 text-sm font-black text-white/68">за подписанный договор</div>
                   </div>
                   <div className="w-fit rounded-full border border-emerald-300/25 bg-emerald-400/10 px-3 py-2 text-xs font-black text-emerald-100">Прозрачная статистика</div>

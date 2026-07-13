@@ -2,9 +2,9 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
   appendChunkedDataJson,
-  readChunkedDataJson,
-  readDataJson
+  readChunkedDataJson
 } from "@/lib/data";
+import { getActiveDirectPartnerPayout } from "@/lib/business-settings";
 
 const PUBLIC_EVENT_TYPES = new Set(["visit", "calculation_completed"]);
 
@@ -46,9 +46,8 @@ function normalizeAttribution(value: unknown) {
 }
 
 export async function GET() {
-  const payouts = readDataJson("cpa/payouts.json", {
-    defaultSignedContractPayoutRub: 10000
-  });
+  const activePayout = getActiveDirectPartnerPayout();
+  const defaultPayout = activePayout?.defaultSignedContractPayoutRub || 0;
 
   return NextResponse.json({
     name: "AvtoCena CPA API",
@@ -56,7 +55,7 @@ export async function GET() {
     offer: {
       title: "АвтоЦена — заявка на авто под заказ",
       goal: "signed_contract",
-      payoutRub: payouts.defaultSignedContractPayoutRub,
+      payoutRub: defaultPayout,
       holdDays: 0
     },
     tracking: {

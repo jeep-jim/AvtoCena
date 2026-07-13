@@ -27,6 +27,7 @@ export default function CrmPartnersPage() {
     "partners/payout-requests.json",
     [],
   );
+  const accruals = readChunkedDataJson<any>("partners/accruals.json", []);
 
   return (
     <CrmShell
@@ -135,6 +136,6 @@ export default function CrmPartnersPage() {
           </div>
         ) : null}
       </div>
-    </CrmShell>
+    <div className="glass mt-5 overflow-hidden rounded-[2rem]"><div className="border-b border-white/10 p-5"><h2 className="text-2xl font-black">История начислений</h2><p className="mt-2 text-sm font-bold text-white/45">Зафиксированные версии ставок не пересчитываются задним числом.</p></div>{accruals.map((item) => <div key={item.id} className="grid gap-3 border-b border-white/7 p-5 text-sm font-bold text-white/60 last:border-0 md:grid-cols-5"><div>{item.partnerCode}</div><div>{money(Number(item.payoutAmountRub || 0))} ₽</div><div className="break-all">{item.payoutVersionId || "—"}</div><div>{item.event}</div><div>{item.createdAt ? new Date(item.createdAt).toLocaleDateString("ru-RU") : "—"}</div></div>)}{!accruals.length ? <div className="p-8 text-center text-sm font-bold text-white/48">Начислений пока нет.</div> : null}</div></CrmShell>
   );
 }

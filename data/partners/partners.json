@@ -7,6 +7,18 @@
     "telegram": "@demo",
     "status": "active",
     "payoutRub": 10000,
+    "individualPayouts": [
+      {
+        "id": "partner_demo_payout_v1",
+        "version": 1,
+        "status": "active",
+        "effectiveFrom": "2026-07-12T00:00:00.000Z",
+        "event": "signed_contract",
+        "payoutRub": 10000,
+        "currency": "RUB",
+        "comment": "Индивидуальная демо-ставка прямого партнёра. Старые начисления не пересчитываются."
+      }
+    ],
     "clicks": 421,
     "calculations": 173,
     "leads": 29,

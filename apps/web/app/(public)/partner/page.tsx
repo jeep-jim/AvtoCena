@@ -68,6 +68,7 @@ export default async function PartnerPage({
     "partners/payout-requests.json",
     [],
   );
+  const accruals = readChunkedDataJson<any>("partners/accruals.json", []);
   const requestedRef = firstParam(params.ref);
   const code = isAdminRole(user?.role)
     ? requestedRef || user?.partnerCode || "demo"
@@ -87,6 +88,7 @@ export default async function PartnerPage({
   const partnerPayouts = payoutRequests.filter(
     (request) => request.partnerCode === partner.code,
   );
+  const partnerAccruals = accruals.filter((item) => item.partnerCode === partner.code);
   const pendingPayout = partnerPayouts.find(
     (request) => request.status === "pending" || request.status === "approved",
   );
@@ -181,6 +183,12 @@ export default async function PartnerPage({
             Заявок по вашей ссылке пока нет.
           </div>
         ) : null}
+      </div>
+
+      <div className="glass mt-4 overflow-hidden rounded-[1.6rem] sm:mt-5 sm:rounded-[2rem]">
+        <div className="border-b border-white/10 p-5"><h2 className="text-xl font-black sm:text-2xl">История начислений</h2><p className="mt-1 text-sm font-bold leading-6 text-white/45">Сумма и версия ставки фиксируются в момент начисления.</p></div>
+        {partnerAccruals.map((item) => <div key={item.id} className="grid gap-2 border-b border-white/7 p-5 text-sm font-bold text-white/60 last:border-0 md:grid-cols-4"><div>{money(Number(item.payoutAmountRub || 0))} ₽</div><div className="break-all">{item.payoutVersionId || "—"}</div><div>{item.event}</div><div>{item.createdAt ? new Date(item.createdAt).toLocaleDateString("ru-RU") : "—"}</div></div>)}
+        {!partnerAccruals.length ? <div className="p-6 text-sm font-bold text-white/45">Начислений пока нет.</div> : null}
       </div>
 
       <section

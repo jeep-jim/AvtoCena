@@ -3,6 +3,7 @@ import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson, readDataJson } from "@/lib/data";
 import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
 import { money } from "@/lib/avtocena";
+import { getActiveDirectPartnerPayout } from "@/lib/business-settings";
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +16,7 @@ export default function CrmPage() {
   const managers = getAuthUsers().filter((item) => isCrmRole(item.role));
   const myLeads = leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
   const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
+  const directPayout = getActiveDirectPartnerPayout();
 
   return (
     <CrmShell activeHref="/crm" title="Панель управления" subtitle="Общая CRM TopAvto: заявки, менеджеры, клиенты, партнёры и сделки.">
@@ -63,7 +65,7 @@ export default function CrmPage() {
               <p>Новые заявки: {newLeads.length}</p>
               <p>Сделки: {deals.length}</p>
               <p>Партнёры: {partners.length}</p>
-              <p>Выплата за договор: {money(10000)} ₽</p>
+              <p>Выплата за договор: {money(Number(directPayout?.defaultSignedContractPayoutRub || 0))} ₽</p>
             </div>
           </div>
         </div>

@@ -1,4 +1,23 @@
 {
-  "defaultSignedContractPayoutRub": 10000,
-  "event": "signed_contract"
+  "directPartnerProgram": {
+    "activeVersionId": "direct_partner_payout_v1",
+    "versions": [
+      {
+        "id": "direct_partner_payout_v1",
+        "version": 1,
+        "status": "active",
+        "effectiveFrom": "2026-07-12T00:00:00.000Z",
+        "event": "signed_contract",
+        "defaultSignedContractPayoutRub": 10000,
+        "currency": "RUB",
+        "comment": "Ставка прямой партнёрской программы. Не используется автоматически для CPA-сетей.",
+        "createdAt": "2026-07-12T00:00:00.000Z",
+        "createdByUserId": "system"
+      }
+    ]
+  },
+  "legacy": {
+    "defaultSignedContractPayoutRub": 10000,
+    "event": "signed_contract"
+  }
 }

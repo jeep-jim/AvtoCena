@@ -8,6 +8,7 @@ import {
 } from "@/lib/data";
 import { isLeadStatus } from "@/lib/crm";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
+import { handleLeadPartnerStatusChange } from "@/lib/business-settings";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -155,34 +156,26 @@ export async function PATCH(
   });
 
   if (statusChanged) {
-    const hasExternalAttribution = Boolean(updatedLead.externalClickId || updatedLead.partnerRef);
-
-    const cpaEvent = appendChunkedDataJson("cpa/events.json", {
-      id: makeId("cpa"),
-      createdAt: now,
-      direction: "outbound",
-      eventType: nextStatus === "contract_signed"
-        ? "contract_signed"
-        : "lead_status_changed",
-      deliveryStatus: hasExternalAttribution ? "pending" : "not_required",
-      attempts: 0,
-      nextAttemptAt: null,
+    const partnerEffects = handleLeadPartnerStatusChange({
+      leadId,
+      clientId: updatedLead.clientId,
+      partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
       clickId: updatedLead.clickId || updatedLead.attribution?.clickId || "",
       externalClickId: updatedLead.externalClickId || updatedLead.attribution?.externalClickId || "",
-      partnerRef: updatedLead.partnerRef || updatedLead.attribution?.partnerRef || "",
       sub1: updatedLead.sub1 || updatedLead.attribution?.sub1 || "",
       sub2: updatedLead.sub2 || updatedLead.attribution?.sub2 || "",
       sub3: updatedLead.sub3 || updatedLead.attribution?.sub3 || "",
       sub4: updatedLead.sub4 || updatedLead.attribution?.sub4 || "",
       sub5: updatedLead.sub5 || updatedLead.attribution?.sub5 || "",
-      leadId,
       status: nextStatus,
+      eventType: nextStatus === "contract_signed" ? "contract_signed" : "lead_status_changed",
       rejectionReason: nextStatus === "rejected" || nextStatus === "duplicate" ? note : "",
-      changedByUserId: user.id
+      changedByUserId: user.id,
+      createdAt: now,
     });
 
-    if (cpaEvent.deliveryStatus === "pending") {
-      await deliverCpaEvent(cpaEvent);
+    if (partnerEffects.cpaEvent?.deliveryStatus === "pending") {
+      await deliverCpaEvent(partnerEffects.cpaEvent);
     }
   }
 

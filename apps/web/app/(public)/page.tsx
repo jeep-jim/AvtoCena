@@ -866,6 +866,7 @@ function BudgetField({
   onSelectPreset,
   onManualMode,
   onManualChange,
+  budgetOptions,
 }: {
   value: string;
   budgetNumber: number;
@@ -875,6 +876,7 @@ function BudgetField({
   onSelectPreset: (value: number) => void;
   onManualMode: () => void;
   onManualChange: (value: string) => void;
+  budgetOptions: number[];
 }) {
   const budgetLabel =
     budgetNumber > 0 ? `до ${formatMoney(budgetNumber)} ₽` : "Выберите бюджет";
@@ -915,7 +917,7 @@ function BudgetField({
       {pickerOpen ? (
         <div className="mt-2 rounded-[1.1rem] border border-white/10 bg-[#18191f]/95 p-2 shadow-[0_18px_50px_rgba(0,0,0,0.28)]">
           <div className="grid gap-2 sm:grid-cols-2">
-            {budgetChips.map((chip) => {
+            {budgetOptions.map((chip) => {
               const active = budgetNumber === chip && !manualMode;
 
               return (
@@ -1796,8 +1798,14 @@ export default function HomePage() {
   const [country, setCountry] = useState("");
   const [bodyType, setBodyType] = useState("");
   const [selectedOffer, setSelectedOffer] = useState<CatalogOffer | null>(null);
+  const [siteBusiness, setSiteBusiness] = useState<{ activeMarkets?: string[]; minimumBudgetRub?: number } | null>(null);
 
   useEffect(() => {
+    fetch("/api/site-settings", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((result) => setSiteBusiness(result.settings || null))
+      .catch(() => setSiteBusiness(null));
+
     const attribution = captureAttributionFromBrowser();
 
     if (attribution.clickId) {
@@ -1806,6 +1814,17 @@ export default function HomePage() {
       });
     }
   }, []);
+
+  const effectiveCountryOptions = useMemo(() => {
+    const active = siteBusiness?.activeMarkets;
+    if (!active?.length) return countryOptions;
+    return countryOptions.filter((option) => !option.value || active.includes(option.value));
+  }, [siteBusiness]);
+
+  const effectiveBudgetChips = useMemo(() => {
+    const minimum = siteBusiness?.minimumBudgetRub || 1500000;
+    return budgetChips.filter((chip) => chip >= minimum);
+  }, [siteBusiness]);
 
   const availableModelOptions = useMemo(
     () =>
@@ -1936,6 +1955,7 @@ export default function HomePage() {
         onSelectPreset={selectBudgetPreset}
         onManualMode={openManualBudget}
         onManualChange={handleBudgetChange}
+        budgetOptions={effectiveBudgetChips}
       />
 
       <div className="mt-3 grid min-w-0 grid-cols-2 gap-2 sm:gap-3 xl:mt-4">
@@ -1964,7 +1984,7 @@ export default function HomePage() {
         <SelectField
           value={country}
           onChange={setCountry}
-          options={countryOptions}
+          options={effectiveCountryOptions}
           emptyLabel="Любая страна"
         />
 
