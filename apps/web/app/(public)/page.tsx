@@ -400,6 +400,7 @@ function pluralVariant(count: number) {
 }
 
 function getFilteredCatalogOffers({
+  offers,
   budgetNumber,
   brand,
   model,
@@ -407,6 +408,7 @@ function getFilteredCatalogOffers({
   country,
   bodyType,
 }: {
+  offers: CatalogOffer[];
   budgetNumber: number;
   brand: string;
   model: string;
@@ -414,7 +416,7 @@ function getFilteredCatalogOffers({
   country: string;
   bodyType: string;
 }) {
-  return readyCatalog.filter((offer) => {
+  return offers.filter((offer) => {
     if (budgetNumber > 0 && offer.price > budgetNumber) return false;
     if (brand && offer.brand !== brand) return false;
     if (model && offer.model !== model) return false;
@@ -1876,6 +1878,7 @@ export default function HomePage() {
   const filteredCatalogOffers = useMemo(
     () =>
       getFilteredCatalogOffers({
+        offers: liveOffers,
         budgetNumber,
         brand,
         model,
@@ -1883,7 +1886,7 @@ export default function HomePage() {
         country,
         bodyType,
       }),
-    [budgetNumber, brand, model, yearFrom, country, bodyType],
+    [liveOffers, budgetNumber, brand, model, yearFrom, country, bodyType],
   );
 
   const foundLabel = `🚗 Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;

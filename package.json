@@ -19,6 +19,6 @@
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",
     "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
-    "catalog:import:sample": "CATALOG_MAX_IMAGES_PER_OFFER=3 tsx scripts/catalog-import-sample.mjs"
+    "catalog:import:sample": "CATALOG_ENCAR_DIRECT_PAGE_SIZE=20 CATALOG_MAX_IMAGES_PER_OFFER=3 tsx scripts/catalog-import-sample.mjs"
   }
 }

@@ -1,4 +1,7 @@
-import { importCatalog } from "../apps/web/lib/catalog/importer.ts";
+process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "20";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "3";
+
+const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
 importCatalog({
   sourceIds: ["encar_direct"],
