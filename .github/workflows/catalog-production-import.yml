@@ -17,7 +17,7 @@ jobs:
       - run: npm test
       - name: Remove test-generated local catalog data
         run: |
-          rm -rf data/catalog/internal data/catalog/generations
+          rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
           rm -f data/catalog/manifest.json data/catalog/import-lock.json
       - run: npm run catalog:import:sample
         env:
