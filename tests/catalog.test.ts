@@ -109,3 +109,15 @@ test("Che168 fetchPage reads result.carlist and uses brand endpoint", async () =
   try { const page = await new Che168GlobalPublicAdapter().fetchPage(null); assert.equal(page.items.length, 1); }
   finally { (global as any).fetch = original; }
 });
+
+test("public GET leads is closed without CRM session", async () => {
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/api/leads/route.ts", "utf-8"));
+  assert.match(source, /isCrmRole\(user\?\.role\)/);
+  assert.match(source, /status: 401/);
+});
+
+test("similar malicious image domains are rejected while autoimg.cn is allowed", () => {
+  assert.equal(assertSafeImageUrl("https://erscglobal2.autoimg.cn/a.jpg"), "https://erscglobal2.autoimg.cn/a.jpg");
+  assert.throws(() => assertSafeImageUrl("https://evilencar.com/a.jpg"));
+  assert.throws(() => assertSafeImageUrl("https://evilbeforward.jp/a.jpg"));
+});

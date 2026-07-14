@@ -8,6 +8,7 @@ import {
 import { getOffer, publicOffer } from "@/lib/catalog/storage";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
 import { getBusinessSettingsSnapshot } from "@/lib/business-settings";
+import { getCurrentUser, isCrmRole } from "@/lib/auth";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -52,6 +53,8 @@ function normalizeAttribution(value: unknown, body: Record<string, unknown>) {
 }
 
 export async function GET() {
+  const user = getCurrentUser();
+  if (!isCrmRole(user?.role)) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   return NextResponse.json({ ok: true, leads });
 }
@@ -197,7 +200,7 @@ export async function POST(request: Request) {
     ...attribution
   });
 
-  if (!duplicate && cpaEvent.deliveryStatus === "pending") {
+  if (cpaEvent.deliveryStatus === "pending") {
     await deliverCpaEvent(cpaEvent);
   }
 
