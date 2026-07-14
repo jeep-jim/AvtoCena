@@ -18,10 +18,10 @@ export function CatalogCard({ offer, compact = false }: { offer: any; compact?: 
             <div className="flex h-full items-center justify-center text-sm font-black text-white/35">Фото загружается</div>
           )}
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/42 to-transparent" />
-          <div className="absolute left-3 top-3 rounded-full bg-black/42 px-3 py-1 text-[11px] font-black uppercase tracking-[0.11em] text-white/90 backdrop-blur">
+          <div className="ac-on-image absolute left-3 top-3 rounded-full bg-black/42 px-3 py-1 text-[11px] font-black uppercase tracking-[0.11em] text-white/90 backdrop-blur">
             {o.marketLabel}
           </div>
-          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
+          <div className="ac-on-image absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3 text-white">
             <div className="min-w-0">
               <div className="line-clamp-2 text-[19px] font-black leading-[1.1] tracking-[-0.03em] text-white drop-shadow-[0_2px_15px_rgba(0,0,0,.7)]">
                 {o.title}

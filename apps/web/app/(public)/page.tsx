@@ -53,6 +53,8 @@ const benefits = [
   { icon: "delivery", title: "Под ключ", text: "Доставка, таможня и оформление входят в структуру расчёта." },
 ];
 
+type SelectOption = { value: string; label: string };
+
 type HomeOffer = {
   id: string;
   title: string;
@@ -80,6 +82,10 @@ function Chevron() {
   return <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
+function SearchIcon() {
+  return <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.7" /><path d="M12 12L16 16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" /></svg>;
+}
+
 function BenefitIcon({ type }: { type: string }) {
   if (type === "fast") return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2L5 13H11L10.5 22L19 10.5H13L13.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
   if (type === "markets") return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="2" /><path d="M3.8 12H20.2M12 3.5C14.2 5.8 15.4 8.6 15.4 12C15.4 15.4 14.2 18.2 12 20.5C9.8 18.2 8.6 15.4 8.6 12C8.6 8.6 9.8 5.8 12 3.5Z" stroke="currentColor" strokeWidth="1.7" /></svg>;
@@ -94,6 +100,74 @@ function SelectBox({ value, onChange, children, ariaLabel }: { value: string; on
         {children}
       </select>
     </label>
+  );
+}
+
+function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder }: { value: string; onChange: (value: string) => void; options: SelectOption[]; placeholder: string; searchPlaceholder: string }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const rootRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const selected = options.find((item) => item.value === value);
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase("ru-RU");
+    if (!normalized) return options;
+    return options.filter((item) => item.label.toLocaleLowerCase("ru-RU").includes(normalized));
+  }, [options, query]);
+
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", outside);
+    window.addEventListener("keydown", escape);
+    window.requestAnimationFrame(() => searchRef.current?.focus());
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      window.removeEventListener("keydown", escape);
+    };
+  }, [open]);
+
+  function select(next: string) {
+    onChange(next);
+    setOpen(false);
+    setQuery("");
+  }
+
+  return (
+    <div ref={rootRef} className={`relative min-w-0 ${open ? "z-[180]" : "z-0"}`}>
+      <button type="button" onClick={() => setOpen((current) => !current)} className={`ac-search-select soft-input flex h-14 w-full min-w-0 items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black transition ${open ? "rounded-b-none ring-2 ring-red-500/35" : ""}`} aria-expanded={open} aria-haspopup="listbox">
+        <span className={`min-w-0 truncate ${selected?.value ? "text-white" : "text-white/70"}`}>{selected?.label || placeholder}</span>
+        <span className={`shrink-0 text-white/46 transition ${open ? "rotate-180" : ""}`}><Chevron /></span>
+      </button>
+
+      {open ? (
+        <div className="ac-search-menu absolute left-0 right-0 top-[calc(100%-1px)] z-[180] overflow-hidden rounded-b-2xl bg-[#171922] shadow-[0_24px_80px_rgba(0,0,0,.72)]">
+          <div className="p-2.5">
+            <div className="ac-search-box flex h-10 items-center gap-2 rounded-xl bg-white/[0.065] px-3 text-white/45 ring-1 ring-white/10 focus-within:ring-red-400/55">
+              <SearchIcon />
+              <input ref={searchRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder={searchPlaceholder} className="min-w-0 flex-1 bg-transparent text-sm font-bold text-white outline-none placeholder:text-white/28" />
+              {query ? <button type="button" onClick={() => setQuery("")} className="flex h-6 w-6 items-center justify-center rounded-full text-white/45 hover:bg-white/10 hover:text-white" aria-label="Очистить поиск">×</button> : null}
+            </div>
+          </div>
+          <div className="ac-hide-scrollbar max-h-[270px] overflow-y-auto overscroll-contain p-1.5 pt-0" role="listbox">
+            {filtered.length ? filtered.map((item) => {
+              const active = item.value === value;
+              return (
+                <button key={item.value || "any"} type="button" role="option" aria-selected={active} onClick={() => select(item.value)} className={`flex min-h-10 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition ${active ? "bg-red-500 text-white shadow-[0_8px_24px_rgba(239,68,68,.18)]" : "text-white/78 hover:bg-white/[0.07] hover:text-white"}`}>
+                  <span className="min-w-0 truncate">{item.label}</span>
+                  {active ? <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1.5 6.2L5.2 10L13.5 1.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg> : null}
+                </button>
+              );
+            }) : <div className="px-3 py-6 text-center text-sm font-bold text-white/40">Ничего не найдено</div>}
+          </div>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -124,12 +198,12 @@ function BodyPicker({ value, onChange }: { value: string; onChange: (value: stri
   }, [open]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className={`relative ${open ? "z-[170]" : "z-0"}`}>
       <button type="button" onClick={() => setOpen((current) => !current)} className="soft-input flex h-14 w-full items-center justify-between rounded-2xl px-4 text-left text-sm font-black text-white">
         <span>{selected.label}</span><span className={`text-white/45 transition ${open ? "rotate-180" : ""}`}><Chevron /></span>
       </button>
       {open ? (
-        <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 grid grid-cols-3 gap-1.5 rounded-[1.35rem] bg-[#151820] p-2.5 shadow-[0_24px_80px_rgba(0,0,0,.62)]">
+        <div className="ac-search-menu absolute left-0 right-0 top-[calc(100%+8px)] z-[170] grid grid-cols-3 gap-1.5 rounded-[1.35rem] bg-[#151820] p-2.5 shadow-[0_24px_80px_rgba(0,0,0,.62)]">
           {bodyOptions.map((item) => (
             <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); setOpen(false); }} className={`flex min-h-[78px] flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center text-[10px] font-black transition ${item.value === value ? "bg-red-500/16 text-red-400" : "text-white/78 hover:bg-white/[0.055]"}`}>
               <BodyIcon type={item.value} /><span className="mt-1 leading-tight">{item.label}</span>
@@ -141,7 +215,9 @@ function BodyPicker({ value, onChange }: { value: string; onChange: (value: stri
   );
 }
 
-function Calculator({ budget, setBudget, brand, setBrand, model, setModel, year, setYear, market, setMarket, body, setBody, foundCount, submit }: any) {
+function Calculator({ budget, setBudget, brand, setBrand, model, setModel, modelOptions, year, setYear, market, setMarket, body, setBody, foundCount, submit }: any) {
+  const brandSelectOptions = brandOptions.map((item) => ({ value: item, label: item || "Любая марка" }));
+
   return (
     <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 shadow-[0_25px_90px_rgba(227,27,35,.14)] backdrop-blur-xl md:p-5">
       <div className="mb-3 flex items-center justify-between gap-3">
@@ -152,10 +228,8 @@ function Calculator({ budget, setBudget, brand, setBrand, model, setModel, year,
         {budgetOptions.map((item) => <option key={item} value={item}>до {money(item)} ₽</option>)}
       </SelectBox>
       <div className="mt-3 grid grid-cols-2 gap-3">
-        <SelectBox value={brand} onChange={(next) => { setBrand(next); setModel(""); }} ariaLabel="Марка">
-          {brandOptions.map((item) => <option key={item || "any"} value={item}>{item || "Любая марка"}</option>)}
-        </SelectBox>
-        <input value={model} onChange={(event) => setModel(event.target.value)} placeholder="Любая модель" className="ac-filter-input soft-input h-14 min-w-0 rounded-2xl bg-[#292b31] px-4 text-sm font-black text-white outline-none" />
+        <SearchSelect value={brand} onChange={(next) => { setBrand(next); setModel(""); }} options={brandSelectOptions} placeholder="Любая марка" searchPlaceholder="Найти марку" />
+        <SearchSelect value={model} onChange={setModel} options={modelOptions} placeholder="Любая модель" searchPlaceholder="Найти модель" />
         <SelectBox value={year} onChange={setYear} ariaLabel="Год">
           {yearOptions.map((item) => <option key={item.value || "any"} value={item.value}>{item.label}</option>)}
         </SelectBox>
@@ -165,22 +239,25 @@ function Calculator({ budget, setBudget, brand, setBrand, model, setModel, year,
         <div className="col-span-2"><BodyPicker value={body} onChange={setBody} /></div>
       </div>
       <button type="button" onClick={submit} className="avto-button mt-4 flex h-[58px] w-full items-center justify-center gap-3 rounded-2xl text-base font-black">
-        <span className="h-3 w-3 rounded-full bg-white" /> Узнать АвтоЦену
+        <span className="ac-pulse-dot" aria-hidden="true"><span /></span> Узнать АвтоЦену
       </button>
     </div>
   );
 }
 
 function BuyerGallery() {
+  const photos = [...buyerPhotos, ...buyerPhotos];
   return (
-    <section>
+    <section className="overflow-hidden">
       <h2 className="text-3xl font-black tracking-[-0.04em] md:text-5xl">Те, кто узнали — уже ездят!</h2>
-      <div className="ac-hide-scrollbar mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:gap-4">
-        {buyerPhotos.map((photo) => (
-          <div key={photo.src} className="h-48 w-[82vw] max-w-[360px] shrink-0 snap-start overflow-hidden rounded-[1.5rem] bg-white/[0.04] shadow-[0_15px_50px_rgba(0,0,0,.18)] md:h-56 md:w-[360px]">
-            <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
-          </div>
-        ))}
+      <div className="buyer-gallery-mask mt-5 overflow-hidden">
+        <div className="buyer-gallery-track flex w-max gap-3 md:gap-4">
+          {photos.map((photo, index) => (
+            <div key={`${photo.src}-${index}`} className="h-[150px] w-[220px] shrink-0 overflow-hidden rounded-[1.35rem] bg-white/[0.04] shadow-[0_15px_50px_rgba(0,0,0,.18)] sm:h-[180px] sm:w-[270px] lg:h-[205px] lg:w-[315px]">
+              <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -296,11 +373,17 @@ export default function HomePage() {
       }).catch(() => setOffers([]));
   }, []);
 
+  const modelOptions = useMemo<SelectOption[]>(() => {
+    const pool = brand ? offers.filter((offer) => offer.brand.toLowerCase() === brand.toLowerCase()) : offers;
+    const models = Array.from(new Set(pool.map((offer) => offer.model).filter(Boolean))).sort((a, b) => a.localeCompare(b, "ru"));
+    return [{ value: "", label: "Любая модель" }, ...models.map((item) => ({ value: item, label: item }))];
+  }, [offers, brand]);
+
   const budgetNumber = Number(budget) || 0;
   const calculatorOffers = useMemo(() => offers.filter((offer) => {
     if (budgetNumber && offer.price > budgetNumber) return false;
     if (brand && offer.brand.toLowerCase() !== brand.toLowerCase()) return false;
-    if (model && !offer.title.toLowerCase().includes(model.toLowerCase())) return false;
+    if (model && offer.model.toLowerCase() !== model.toLowerCase() && !offer.title.toLowerCase().includes(model.toLowerCase())) return false;
     if (year === "older" && offer.year >= 2018) return false;
     if (year && year !== "older" && offer.year < Number(year)) return false;
     if (market && offer.country !== market) return false;
@@ -333,7 +416,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
+    <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader />
       <Link href="/cars" className="sr-only">Каталог</Link>
       <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
@@ -343,7 +426,7 @@ export default function HomePage() {
             <p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p>
             <div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div>
           </div>
-          <Calculator budget={budget} setBudget={setBudget} brand={brand} setBrand={setBrand} model={model} setModel={setModel} year={year} setYear={setYear} market={market} setMarket={setMarket} body={body} setBody={setBody} foundCount={calculatorOffers.length} submit={() => router.push(buildResultsUrl())} />
+          <Calculator budget={budget} setBudget={setBudget} brand={brand} setBrand={setBrand} model={model} setModel={setModel} modelOptions={modelOptions} year={year} setYear={setYear} market={market} setMarket={setMarket} body={body} setBody={setBody} foundCount={calculatorOffers.length} submit={() => router.push(buildResultsUrl())} />
         </section>
 
         <div className="grid grid-cols-3 gap-3 rounded-[1.4rem] bg-white/[0.025] px-2 py-5 lg:hidden">{benefits.map((item) => <div key={item.title} className="text-center"><div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/12 text-red-400"><BenefitIcon type={item.icon} /></div><div className="mt-2 text-sm font-black">{item.title}</div></div>)}</div>
