@@ -1,0 +1,25 @@
+select {
+  color-scheme: dark;
+}
+
+select option {
+  background: #181a21;
+  color: #ffffff;
+}
+
+.ac-hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ac-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .ac-hide-scrollbar {
+    scroll-padding-inline: 1rem;
+  }
+}
