@@ -103,10 +103,12 @@ export async function POST(request: Request) {
     updatedAt: offer.updatedAt
   } : null;
   const calculationSnapshot = offerSnapshot?.calculationSnapshot || (body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null);
+  const existingClients = await readChunkedDataJson<any>("clients/clients.json", []);
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
   const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
+  const existingClient = operationId ? existingClients.find((client) => client.operationId === operationId || client.id === clientId || client.id === duplicate?.clientId) : null;
 
-  const client = duplicate ? { id: duplicate.clientId || clientId } : await appendChunkedDataJson("clients/clients.json", {
+  const clientPayload = {
     id: clientId,
     operationId,
     createdAt,
@@ -126,9 +128,10 @@ export async function POST(request: Request) {
     businessSettingsSnapshot,
     calculationSnapshot,
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
-  });
+  };
+  const client = existingClient || await appendChunkedDataJson("clients/clients.json", { ...clientPayload, id: duplicate?.clientId || clientId });
 
-  const lead = duplicate || await appendChunkedDataJson("leads/leads.json", {
+  const leadPayload = {
     id: leadId,
     operationId,
     createdAt,
@@ -143,7 +146,7 @@ export async function POST(request: Request) {
         note: "Заявка создана"
       }
     ],
-    clientId,
+    clientId: client.id,
     name,
     phone,
     telegram,
@@ -170,7 +173,8 @@ export async function POST(request: Request) {
     businessSettingsSnapshot,
     calculationSnapshot,
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
-  });
+  };
+  const lead = duplicate || await appendChunkedDataJson("leads/leads.json", leadPayload);
 
   await appendChunkedDataJson("activity/feed.json", {
     id: operationId ? `event_${operationId}` : makeId("event"),
@@ -196,11 +200,13 @@ export async function POST(request: Request) {
     attempts: 0,
     nextAttemptAt: null,
     leadId,
-    clientId,
+    clientId: client.id,
     ...attribution
   });
 
-  if (cpaEvent.deliveryStatus === "pending") {
+  const cpaRetryStatuses = new Set(["pending", "failed", "waiting_config"]);
+  const retryDue = !cpaEvent.nextAttemptAt || Date.parse(cpaEvent.nextAttemptAt) <= Date.now();
+  if (cpaRetryStatuses.has(cpaEvent.deliveryStatus) && retryDue) {
     await deliverCpaEvent(cpaEvent);
   }
 

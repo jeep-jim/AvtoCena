@@ -57,7 +57,7 @@ export type VehicleOffer = {
   firstSeenAt: string;
   updatedAt: string;
   expiresAt?: string;
-  operational: { sourceUrl?: string; sourceVenueName?: string; raw?: unknown; vin?: string; frameNumber?: string };
+  operational: { sourceUrl?: string; sourceVenueName?: string; raw?: unknown; vin?: string; frameNumber?: string; lastSeenScanCycleId?: string };
 };
 
 export type PublicVehicleOffer = Omit<VehicleOffer, "operational" | "vin" | "frameNumber">;

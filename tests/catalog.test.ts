@@ -121,3 +121,56 @@ test("similar malicious image domains are rejected while autoimg.cn is allowed",
   assert.throws(() => assertSafeImageUrl("https://evilencar.com/a.jpg"));
   assert.throws(() => assertSafeImageUrl("https://evilbeforward.jp/a.jpg"));
 });
+
+test("Encar list cover is preserved when detail gallery is absent", async () => {
+  resetJsonStorageForTests();
+  const original = global.fetch;
+  const seenUrls: string[] = [];
+  (global as any).fetch = async (url: string) => {
+    seenUrls.push(String(url));
+    if (String(url).includes("/v1/readside/vehicle/ENC1")) {
+      return new Response(JSON.stringify({ vehicle: { displacement: 1999, fuelType: "Gasoline" } }), { headers: { "content-type": "application/json" } });
+    }
+    return new Response(new Uint8Array([1, 2, 3, 4]), { headers: { "content-type": "image/jpeg", "content-length": "4" } });
+  };
+  try {
+    const adapter = new EncarDirectAdapter();
+    const offer = adapter.normalizeOffer({ Id: "ENC1", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Mileage: 1000, Price: 2000, ModifiedDate: "2026-07-14T00:00:00Z", Photo: "/carphoto/list-cover.jpg" });
+    assert.ok(offer);
+    const images = await adapter.fetchImages(offer!);
+    assert.equal(images.length, 1);
+    assert.ok(seenUrls.some((url) => url.includes("/carphoto/list-cover.jpg")));
+    assert.equal(offer!.engineCc, 1999);
+  } finally {
+    (global as any).fetch = original;
+  }
+});
+
+test("Che168 skips an empty brand and continues the next brand from page 1", async () => {
+  const original = global.fetch;
+  const searchUrls: string[] = [];
+  (global as any).fetch = async (url: string) => {
+    const href = String(url);
+    if (href.includes("/brand")) {
+      return new Response(JSON.stringify({ result: { brands: [{ letter: "A", brands: [{ bid: 1, name: "Empty" }, { bid: 2, name: "BYD" }] }] } }), { headers: { "content-type": "application/json" } });
+    }
+    searchUrls.push(href);
+    const brandid = new URL(href).searchParams.get("brandid");
+    const carlist = brandid === "2" ? [{ infoid: "C2", brandname: "BYD", seriesname: "Seal", regdate: "2024-01", mileage: "1" }] : [];
+    return new Response(JSON.stringify({ result: { carlist } }), { headers: { "content-type": "application/json" } });
+  };
+  try {
+    const page = await new Che168GlobalPublicAdapter().fetchPage(null);
+    assert.equal(page.items.length, 1);
+    assert.ok(searchUrls.some((url) => url.includes("brandid=1") && url.includes("pageindex=1")));
+    assert.ok(searchUrls.some((url) => url.includes("brandid=2") && url.includes("pageindex=1")));
+  } finally {
+    (global as any).fetch = original;
+  }
+});
+
+test("admin import endpoint accepts token only through x-admin-token header", async () => {
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/api/catalog/import/route.ts", "utf-8"));
+  assert.match(source, /headers\.get\("x-admin-token"\)/);
+  assert.doesNotMatch(source, /searchParams\.get\(["']token["']\)/);
+});
