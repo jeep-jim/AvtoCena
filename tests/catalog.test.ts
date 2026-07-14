@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
+import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarImageUrl, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
 import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl } from "../apps/web/lib/catalog/storage";
 import { convertToRub } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
@@ -9,6 +9,23 @@ process.env.JSON_STORAGE_DRIVER = "local";
 delete process.env.CATALOG_IMAGE_CDN_URL;
 const image = { id: "img1", url: "/api/catalog/images/img1", objectKey: "catalog/images/japan/a.jpg", size: 10, checksum: "abc", mimeType: "image/jpeg" };
 
+
+
+test("Encar image URL builder resolves base, absolute and ready carpicture paths", () => {
+  assert.equal(buildEncarImageUrl("/2024/01/01/123/", 1), "https://ci.encar.com/carpicture/2024/01/01/123/001.jpg");
+  assert.equal(buildEncarImageUrl("https://ci.encar.com/carpicture/ready/001.jpg"), "https://ci.encar.com/carpicture/ready/001.jpg");
+  assert.equal(buildEncarImageUrl("/carpicture/ready/001.jpg", 1), "https://ci.encar.com/carpicture/ready/001.jpg");
+  assert.equal(buildEncarImageUrl("//2024//01//01//123//", 2), "https://ci.encar.com/carpicture/2024/01/01/123/002.jpg");
+});
+
+test("Encar image extractor keeps list cover first and deduplicates gallery", async () => {
+  const adapter = new EncarDirectAdapter();
+  const offer = adapter.normalizeOffer({ Id: "ENC3", Manufacturer: "Kia", Model: "K5", FormYear: "2023", Price: 2100, Photo: "/2024/01/01/123/" });
+  assert.ok(offer);
+  const urls = (await import("../apps/web/lib/catalog/adapters")).extractEncarImageUrls(offer!, { photos: [{ path: "/2024/01/01/123/" }, { path: "/carpicture/2024/01/01/123/002.jpg" }] });
+  assert.equal(urls[0], "https://ci.encar.com/carpicture/2024/01/01/123/001.jpg");
+  assert.deepEqual(urls, ["https://ci.encar.com/carpicture/2024/01/01/123/001.jpg", "https://ci.encar.com/carpicture/2024/01/01/123/002.jpg"]);
+});
 
 test("Encar mobile list URL uses real query, sr, inav and paging cursor", () => {
   const first = buildEncarListUrl(null, 20).url;

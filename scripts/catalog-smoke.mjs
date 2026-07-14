@@ -21,8 +21,12 @@ async function fetchImageProbe(url) {
     }
     const contentType = res?.headers.get("content-type") || null;
     const okType = /^image\/(jpeg|png|webp)$/i.test(contentType || "");
-    const bytes = res?.ok && okType ? (await res.arrayBuffer()).byteLength : 0;
-    return { firstImageStatus: res?.status || null, firstImageContentType: contentType, firstImageBytes: bytes > IMAGE_MAX_BYTES ? 0 : bytes };
+    let xmlCode = null, xmlMessage = null;
+    const isXml = /xml/i.test(contentType || "");
+    let bytes = 0;
+    if (res?.ok && okType) bytes = (await res.arrayBuffer()).byteLength;
+    else if (isXml) { const xml = (await res.text()).slice(0, 300); xmlCode = xml.match(/<Code>([^<]+)<\/Code>/i)?.[1] || null; xmlMessage = xml.match(/<Message>([^<]+)<\/Message>/i)?.[1] || null; }
+    return { firstImageStatus: res?.status || null, firstImageContentType: contentType, firstImageBytes: bytes > IMAGE_MAX_BYTES ? 0 : bytes, firstImageXmlCode: xmlCode, firstImageXmlMessage: xmlMessage };
   });
 }
 async function fetchDetailJson(url) {
@@ -35,15 +39,17 @@ async function fetchDetailJson(url) {
 async function runEncar() {
   const adapter = new EncarDirectAdapter(); process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE = String(limit);
   const page = await adapter.fetchPage(null); const normalized = page.items.map((raw) => adapter.normalizeOffer(raw)).filter(Boolean); const first = normalized[0];
-  let detailStatus = null, detailOk = false, detail = null, imageUrls = 0, imageProbe = { firstImageStatus: null, firstImageContentType: null, firstImageBytes: 0 };
+  let detailStatus = null, detailOk = false, detail = null, imageUrls = 0, rawListPhoto = null, firstResolvedImageUrl = null, imageProbe = { firstImageStatus: null, firstImageContentType: null, firstImageBytes: 0, firstImageXmlCode: null, firstImageXmlMessage: null };
   if (first) {
     const detailResult = await fetchDetailJson(`https://api.encar.com/v1/readside/vehicle/${first.sourceOfferId}`);
     detailStatus = detailResult.res.status; detailOk = detailResult.detailOk; detail = detailResult.detail;
+    rawListPhoto = first.operational?.raw?.Photo || first.operational?.raw?.photo || null;
     const urls = extractEncarImageUrls(first, detail);
     imageUrls = urls.length;
+    firstResolvedImageUrl = urls[0] || null;
     if (urls[0]) imageProbe = await fetchImageProbe(urls[0]);
   }
-  return { source, records: page.items.length, normalized: normalized.length, count: page.count || null, firstOfferId: first?.sourceOfferId || null, make: first?.make || null, model: first?.model || null, year: first?.year || null, sourcePriceKrw: first?.sourcePrice || normalizeEncarPrice(page.items[0]?.Price) || null, detailStatus, detailOk, imageUrls, ...imageProbe, responseMs: Date.now() - started };
+  return { source, records: page.items.length, normalized: normalized.length, count: page.count || null, firstOfferId: first?.sourceOfferId || null, make: first?.make || null, model: first?.model || null, year: first?.year || null, sourcePriceKrw: first?.sourcePrice || normalizeEncarPrice(page.items[0]?.Price) || null, detailStatus, detailOk, imageUrls, rawListPhoto, firstResolvedImageUrl, ...imageProbe, responseMs: Date.now() - started };
 }
 async function runChe168() { const adapter = new Che168GlobalPublicAdapter(); process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE = String(limit); const page = await adapter.fetchPage(null); const normalized = page.items.map((raw) => adapter.normalizeOffer(raw)).filter(Boolean); return { source, dryRun: true, records: page.items.length, normalized: normalized.length, firstOfferId: normalized[0]?.sourceOfferId || null, responseMs: Date.now() - started }; }
 async function runBeForward() { const adapter = new BeForwardPublicAdapter(); const page = await adapter.fetchPage(null); const normalized = page.items.map((raw) => adapter.normalizeOffer(raw)).filter(Boolean); return { source, dryRun: true, records: page.items.length, normalized: normalized.length, priceFound: page.items.some((x) => x.price), locationFound: page.items.some((x) => x.location), images: page.items.reduce((n, x) => n + (x.images?.length || 0), 0), responseMs: Date.now() - started }; }
