@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
   appendChunkedDataJson,
+  mutateDataJson,
   readChunkedDataJson
 } from "@/lib/data";
 import { getOffer, publicOffer } from "@/lib/catalog/storage";
@@ -75,8 +76,10 @@ export async function POST(request: Request) {
   }
 
   const createdAt = new Date().toISOString();
-  const clientId = makeId("client");
-  const leadId = makeId("lead");
+  const rawOperationId = clean(body.operationId, 120) || crypto.createHash("sha256").update(`${clean(body.offerId, 200)}:${phone}:${telegram}`).digest("hex").slice(0, 32);
+  const operationId = rawOperationId.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80);
+  const clientId = operationId ? `client_${operationId}` : makeId("client");
+  const leadId = operationId ? `lead_${operationId}` : makeId("lead");
   const attribution = normalizeAttribution(body.attribution, body);
   const source = clean(body.source, 160) || "site";
   const market = clean(body.market, 120);
@@ -98,11 +101,12 @@ export async function POST(request: Request) {
   } : null;
   const calculationSnapshot = offerSnapshot?.calculationSnapshot || (body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null);
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
-  const duplicate = offerId && (phone || telegram) ? existingLeads.find((lead) => lead.offerId === offerId && ((phone && lead.phone === phone) || (telegram && lead.telegram === telegram))) : null;
-  if (duplicate) return NextResponse.json({ ok: true, lead: duplicate, duplicate: true });
+  const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
+  if (duplicate) return NextResponse.json({ ok: true, lead: duplicate, client: { id: duplicate.clientId }, duplicate: true });
 
   const client = await appendChunkedDataJson("clients/clients.json", {
     id: clientId,
+    operationId,
     createdAt,
     updatedAt: createdAt,
     fio: name,
@@ -124,6 +128,7 @@ export async function POST(request: Request) {
 
   const lead = await appendChunkedDataJson("leads/leads.json", {
     id: leadId,
+    operationId,
     createdAt,
     updatedAt: createdAt,
     status: "new",
@@ -166,7 +171,8 @@ export async function POST(request: Request) {
   });
 
   await appendChunkedDataJson("activity/feed.json", {
-    id: makeId("event"),
+    id: operationId ? `event_${operationId}` : makeId("event"),
+    operationId,
     createdAt,
     type: "lead_created",
     title: "Заявка с сайта",
@@ -178,7 +184,8 @@ export async function POST(request: Request) {
   });
 
   const cpaEvent = await appendChunkedDataJson("cpa/events.json", {
-    id: makeId("cpa"),
+    id: operationId ? `cpa_${operationId}` : makeId("cpa"),
+    operationId,
     createdAt,
     direction: "outbound",
     eventType: "lead_created",
