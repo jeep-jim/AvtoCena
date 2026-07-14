@@ -10,9 +10,9 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 function SpecItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl bg-white/[0.04] p-3.5">
+    <div className="min-w-0 rounded-2xl bg-white/[0.04] p-3.5">
       <div className="text-[10px] font-black uppercase tracking-[0.15em] text-red-300/70">{label}</div>
-      <div className="mt-1.5 text-[15px] font-black text-white">{value}</div>
+      <div className="mt-1.5 break-words text-[15px] font-black text-white">{value}</div>
     </div>
   );
 }
@@ -23,7 +23,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
   if (!offer) {
     return (
-      <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
+      <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
         <PublicHeader backHref="/cars" backLabel="В каталог" />
         <section className="mx-auto max-w-4xl px-4 py-20 text-center">
           <h1 className="text-4xl font-black">Предложение не найдено</h1>
@@ -46,18 +46,20 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const similar = similarResult.items.filter((item: any) => item.id !== raw.id).slice(0, 6);
 
   return (
-    <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
+    <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/cars" backLabel="В каталог" />
 
-      <section className="mx-auto w-full max-w-[1450px] px-4 py-7 md:px-8 md:py-10">
-        <div className="grid gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
-          <VehicleGallery images={o.images} title={o.title} />
+      <section className="mx-auto min-w-0 w-full max-w-[1450px] overflow-x-hidden px-4 py-7 md:px-8 md:py-10">
+        <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
+          <div className="min-w-0 max-w-full overflow-hidden">
+            <VehicleGallery images={o.images} title={o.title} />
+          </div>
 
-          <aside className="ac-offer-panel rounded-[1.8rem] bg-white/[0.05] p-5 shadow-[0_24px_90px_rgba(0,0,0,.3)] md:p-7 xl:sticky xl:top-24">
-            <div className="flex items-start justify-between gap-4">
+          <aside className="ac-offer-panel min-w-0 max-w-full rounded-[1.8rem] bg-white/[0.05] p-5 shadow-[0_24px_90px_rgba(0,0,0,.3)] md:p-7 xl:sticky xl:top-24">
+            <div className="flex min-w-0 items-start justify-between gap-4">
               <div className="min-w-0">
                 <div className="text-xs font-black uppercase tracking-[0.17em] text-red-300">{o.marketLabel}</div>
-                <h1 className="mt-2 text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-4xl">{o.title}</h1>
+                <h1 className="mt-2 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-4xl">{o.title}</h1>
               </div>
               <FavoriteToggle
                 offerId={o.id}
@@ -65,9 +67,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
               />
             </div>
 
-            <div className="mt-5 rounded-[1.35rem] bg-red-500/[0.075] p-4">
+            <div className="mt-5 min-w-0 rounded-[1.35rem] bg-red-500/[0.075] p-4">
               <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-300/75">Ориентир стоимости</div>
-              <div className="mt-1 text-3xl font-black tracking-[-0.04em] text-red-300 md:text-4xl">
+              <div className="mt-1 break-words text-3xl font-black tracking-[-0.04em] text-red-300 md:text-4xl">
                 {o.totalRub ? `${money(o.totalRub)} ₽` : "Запросить точный расчёт"}
               </div>
             </div>
@@ -76,7 +78,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
               <p className="mt-3 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
             ) : null}
 
-            <div className="mt-5 grid grid-cols-2 gap-3">
+            <div className="mt-5 grid min-w-0 grid-cols-2 gap-3">
               <SpecItem label="Год" value={String(o.year)} />
               <SpecItem label="Пробег" value={o.mileageKm ? `${money(o.mileageKm)} км` : "уточняется"} />
               <SpecItem label="Двигатель" value={o.engineCc ? `${o.engineCc} см³` : "уточняется"} />
@@ -96,7 +98,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </aside>
         </div>
 
-        <section className="mt-12 pt-5 md:mt-16 md:pt-8">
+        <section className="mt-12 min-w-0 pt-5 md:mt-16 md:pt-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">Ещё варианты</div>
