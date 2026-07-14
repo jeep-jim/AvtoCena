@@ -29,14 +29,14 @@ export function LeadActions({
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
-  const requiresReason = status === "rejected" || status === "duplicate";
+  const requiresReason = status === "rejected";
 
   async function save() {
     setSaved(false);
     setError("");
 
     if (requiresReason && !note.trim()) {
-      setError(status === "rejected" ? "Укажите причину отказа." : "Укажите причину дубля.");
+      setError(status === "rejected" ? "Укажите причину отказа." : "Укажите причину.");
       return;
     }
 
@@ -67,7 +67,7 @@ export function LeadActions({
     } catch (saveError) {
       setError(
         saveError instanceof Error && saveError.message === "reason_required"
-          ? "Для отказа или дубля причина обязательна."
+          ? "Для отказа причина обязательна."
           : "Не получилось сохранить изменения."
       );
     } finally {
@@ -80,7 +80,7 @@ export function LeadActions({
       <select
         value={status}
         onChange={(event) => setStatus(event.target.value)}
-        className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
+        className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white"
         aria-label="Статус заявки"
       >
         {LEAD_STATUSES.map((value) => (
@@ -93,7 +93,7 @@ export function LeadActions({
       <select
         value={assignedManagerId}
         onChange={(event) => setAssignedManagerId(event.target.value)}
-        className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
+        className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white"
         aria-label="Назначенный менеджер"
       >
         <option value="">Не назначен</option>
@@ -108,7 +108,7 @@ export function LeadActions({
         value={note}
         onChange={(event) => setNote(event.target.value)}
         placeholder={requiresReason ? "Причина обязательна" : "Внутренний комментарий"}
-        className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
+        className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white"
       />
 
       <button

@@ -1,45 +1,22 @@
-export const LEAD_STATUSES = [
-  "new",
-  "assigned",
-  "contacted",
-  "qualified",
-  "selection",
-  "offer_sent",
-  "negotiation",
-  "contract_sent",
-  "contract_signed",
-  "paid",
-  "in_progress",
-  "delivered",
-  "completed",
-  "rejected",
-  "duplicate"
-] as const;
-
+export const LEAD_STATUSES = ["new","assigned","negotiation","calculation","contract_preparation","contract_signed","payment","delivery","completed","rejected"] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
+export const LEAD_STATUS_LABELS: Record<LeadStatus,string> = {new:"Новая",assigned:"Назначена",negotiation:"Переговоры",calculation:"Расчёт",contract_preparation:"Подготовка договора",contract_signed:"Договор подписан",payment:"Оплата",delivery:"Доставка",completed:"Завершена",rejected:"Отказ"};
+export const LEAD_STATUS_COLORS: Record<LeadStatus,string> = {new:"bg-sky-500/18 text-sky-100 ring-sky-300/25",assigned:"bg-indigo-500/18 text-indigo-100 ring-indigo-300/25",negotiation:"bg-amber-500/18 text-amber-100 ring-amber-300/25",calculation:"bg-orange-500/18 text-orange-100 ring-orange-300/25",contract_preparation:"bg-purple-500/18 text-purple-100 ring-purple-300/25",contract_signed:"bg-fuchsia-500/18 text-fuchsia-100 ring-fuchsia-300/25",payment:"bg-emerald-500/18 text-emerald-100 ring-emerald-300/25",delivery:"bg-cyan-500/18 text-cyan-100 ring-cyan-300/25",completed:"bg-green-500/18 text-green-100 ring-green-300/25",rejected:"bg-red-500/18 text-red-100 ring-red-300/25"};
+export function isLeadStatus(value: unknown): value is LeadStatus { return typeof value === "string" && LEAD_STATUSES.includes(value as LeadStatus); }
+export function normalizeLeadStatus(value?: string | null): LeadStatus { if (isLeadStatus(value)) return value; if (value === "paid") return "payment"; if (value === "contract_sent") return "contract_preparation"; return "new"; }
+export function leadStatusLabel(value?: string | null) { return LEAD_STATUS_LABELS[normalizeLeadStatus(value)]; }
+export function leadStatusColor(value?: string | null) { return LEAD_STATUS_COLORS[normalizeLeadStatus(value)]; }
 
-export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
-  new: "Новая",
-  assigned: "Назначена",
-  contacted: "Первичный контакт",
-  qualified: "Клиент подтверждён",
-  selection: "Подбор автомобиля",
-  offer_sent: "Предложение отправлено",
-  negotiation: "Переговоры",
-  contract_sent: "Договор отправлен",
-  contract_signed: "Договор подписан",
-  paid: "Оплата получена",
-  in_progress: "В работе",
-  delivered: "Автомобиль доставлен",
-  completed: "Завершена",
-  rejected: "Отказ",
-  duplicate: "Дубль"
-};
+export const SETTINGS_LABELS: Record<string,string> = {includedInTotal:"Входит в итоговую стоимость",refundable:"Возвратный платёж",required:"Обязательный этап",active:"Активен",fixed:"Фиксированная сумма",percent:"Процент",calculated:"Рассчитывается автоматически",manual:"Вводится вручную",contract_signed:"Договор подписан",auction_bid:"Ставка на аукционе",invoice_received:"Получен инвойс",client:"Клиент",seller:"Продавец",TopAvto:"TopAvto"};
+export function uiLabel(code?: string | null) { return code ? SETTINGS_LABELS[code] || code : "—"; }
 
-export function isLeadStatus(value: unknown): value is LeadStatus {
-  return typeof value === "string" && LEAD_STATUSES.includes(value as LeadStatus);
-}
+export const DEAL_STAGES = ["Заявка подтверждена","Договор подписан","Оплата инвойса","Покупка автомобиля","Доставка до порта","Таможенное оформление","Выдача клиенту","Сделка завершена"];
+export function dealProgress(stageIndex = 0, completedAtByStage: Record<string,string> = {}) { const total = DEAL_STAGES.length; const current = Math.min(Math.max(Number(stageIndex) || 0, 0), total - 1); return { currentStage: DEAL_STAGES[current], stageNumber: current + 1, totalStages: total, percent: Math.round(((current + 1) / total) * 100), stages: DEAL_STAGES.map((title, index) => ({ title, index, done: index <= current, future: index > current, completedAt: completedAtByStage[title] || null })) }; }
 
-export function leadStatusLabel(value?: string | null) {
-  return isLeadStatus(value) ? LEAD_STATUS_LABELS[value] : value || LEAD_STATUS_LABELS.new;
-}
+export function searchClients(clients: any[], query: { name?: string; phone?: string; telegram?: string; car?: string; managerId?: string; date?: string }) { const match = (value: unknown, needle?: string) => !needle || String(value || "").toLowerCase().includes(needle.toLowerCase()); return clients.filter((client) => match(client.fio, query.name) && match(client.phone, query.phone) && match(client.telegram, query.telegram) && match(client.interestedCar || client.car, query.car) && (!query.managerId || client.assignedManagerId === query.managerId) && (!query.date || String(client.createdAt || "").startsWith(query.date))); }
+
+export function groupFeedByOperation(events: any[]) { const grouped = new Map<string, any[]>(); for (const event of events) { const key = event.operationId || event.id; grouped.set(key, [...(grouped.get(key) || []), event]); } return [...grouped.entries()].map(([operationId, items]) => { const client = items.find((e) => e.clientId) || items[0]; const lead = items.find((e) => e.leadId); return { ...client, operationId, groupedCount: items.length, leadId: lead?.leadId || client.leadId, dealId: items.find((e) => e.dealId)?.dealId, title: client.title || (lead ? `Добавлен клиент ${client.text || ""} и создана заявка` : "Событие CRM"), text: [client.text, lead?.text].filter(Boolean).join(" · ") }; }); }
+
+export function canAccessDocument(user: any, entity: any) { return Boolean(user && (user.role === "owner" || user.role === "admin" || entity?.assignedManagerId === user.id || entity?.createdByManagerId === user.id)); }
+export function isBlockedManager(user: any) { return user?.status === "blocked" || user?.blocked === true; }
+export function safeObjectKey(parts: string[]) { return parts.map((part) => String(part || "").replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 80)).filter(Boolean).join("/"); }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { appendChunkedDataJson, generateId, readChunkedDataJson } from "@/lib/data";
+import { appendChunkedDataJson, generateId, readChunkedDataJson, updateChunkedDataJson } from "@/lib/data";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 
 function clean(value: unknown) {
@@ -61,6 +61,18 @@ export async function POST(request: Request) {
       telegram,
       city: clean(body.city),
       comment,
+      comments: comment,
+      status: "active",
+      interestedCar: clean(body.car),
+      market: clean(body.market),
+      budgetRub: numberOrNull(body.budgetRub),
+      phones: phone ? [phone] : [],
+      passport: clean(body.passport),
+      address: clean(body.address),
+      birthDate: clean(body.birthDate),
+      documents: [],
+      contracts: [],
+      history: [{ at: createdAt, by: user.id, type: "created", operationId }],
       createdByManagerId: user.id,
       assignedManagerId: clean(body.assignedManagerId) || user.id,
       source: clean(body.source) || "manual"
@@ -105,4 +117,36 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json({ ok: false, error: "storage_write_failed" }, { status: 500 });
   }
+}
+
+
+export async function PUT(request: Request) {
+  const user = getCurrentUser();
+  if (!user || !isCrmRole(user.role)) return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
+  const body = await request.json().catch(() => ({}));
+  const id = clean(body.id);
+  if (!id) return NextResponse.json({ ok: false, error: "client_id_required" }, { status: 400 });
+  const operationId = clean(body.operationId) || generateId("operation");
+  const updatedAt = new Date().toISOString();
+  const updated = await updateChunkedDataJson<any>("clients/clients.json", id, (client) => ({
+    ...client,
+    fio: clean(body.fio) || client.fio,
+    phone: clean(body.phone) || client.phone,
+    telegram: clean(body.telegram) || client.telegram,
+    city: clean(body.city) || client.city,
+    birthDate: clean(body.birthDate) || client.birthDate,
+    passport: clean(body.passport) || client.passport,
+    address: clean(body.address) || client.address,
+    interestedCar: clean(body.interestedCar || body.car) || client.interestedCar,
+    market: clean(body.market) || client.market,
+    budgetRub: numberOrNull(body.budgetRub) ?? client.budgetRub,
+    comments: clean(body.comments || body.comment) || client.comments,
+    assignedManagerId: clean(body.assignedManagerId) || client.assignedManagerId,
+    source: clean(body.source) || client.source,
+    status: body.archive ? "archived" : body.restore ? "active" : (clean(body.status) || client.status || "active"),
+    updatedAt,
+    history: [...(client.history || []), { at: updatedAt, by: user.id, type: body.archive ? "archived" : body.restore ? "restored" : "updated", operationId }]
+  }));
+  if (!updated) return NextResponse.json({ ok: false, error: "client_not_found" }, { status: 404 });
+  return NextResponse.json({ ok: true, client: updated, operationId });
 }

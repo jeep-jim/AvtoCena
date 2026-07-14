@@ -4,7 +4,7 @@ import { LeadActions } from "@/components/crm/LeadActions";
 import { readChunkedDataJson } from "@/lib/data";
 import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
 import { money } from "@/lib/avtocena";
-import { leadStatusLabel } from "@/lib/crm";
+import { leadStatusColor, leadStatusLabel } from "@/lib/crm";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +39,7 @@ export default async function CrmLeadsPage({
 
       <div className="glass overflow-hidden rounded-[2rem]">
         <div className="hidden grid-cols-6 gap-3 border-b border-white/10 p-4 text-xs font-black uppercase tracking-[0.14em] text-white/42 md:grid">
-          <div>Клиент</div><div>Авто</div><div>Бюджет</div><div>Менеджер</div><div>Источник</div><div>Статус</div>
+          <div>Клиент / даты</div><div>Авто</div><div>Бюджет</div><div>Менеджер</div><div>Источник</div><div>Статус</div>
         </div>
 
         {visibleLeads.map((lead) => (
@@ -47,14 +47,14 @@ export default async function CrmLeadsPage({
             <div className="grid gap-3 text-sm font-bold text-white/70 md:grid-cols-6">
               <div>
                 <div className="font-black text-white">{lead.name || lead.phone || lead.telegram || "Без имени"}</div>
-                <div className="mt-1 text-xs text-white/42">{lead.phone || lead.telegram || lead.id}</div>
+                <div className="mt-1 text-xs text-white/42">{lead.phone || lead.telegram || lead.id}</div><div className="mt-1 text-xs text-white/35">Заявка: {lead.createdAt ? new Date(lead.createdAt).toLocaleString("ru-RU") : "—"}<br/>Изменена: {lead.updatedAt ? new Date(lead.updatedAt).toLocaleString("ru-RU") : "—"}</div>
               </div>
               <div>{lead.car || [lead.brand, lead.model].filter(Boolean).join(" ") || "Не выбрано"}</div>
               <div>{lead.budgetRub ? `${money(Number(lead.budgetRub))} ₽` : "—"}</div>
               <div>{managerName(managers, lead.assignedManagerId)}</div>
               <div>{lead.partnerRef ? `ref:${lead.partnerRef}` : lead.source || "site"}</div>
               <div>
-                <span className="inline-flex rounded-full bg-red-500/20 px-3 py-1 text-red-100">
+                <span className={`inline-flex rounded-full px-3 py-1 ring-1 ${leadStatusColor(lead.status)}`}>
                   {leadStatusLabel(lead.status)}
                 </span>
               </div>
