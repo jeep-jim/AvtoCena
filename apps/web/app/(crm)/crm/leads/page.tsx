@@ -27,11 +27,17 @@ export default async function CrmLeadsPage({
   const user = getCurrentUser();
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const managers = getAuthUsers().filter((manager) => isCrmRole(manager.role));
-  const visibleLeads = view === "my" ? leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id) : leads;
+  const q = firstParam(params.q)?.toLowerCase() || "";
+  const managerId = firstParam(params.managerId) || "";
+  const source = firstParam(params.source) || "";
+  const status = firstParam(params.status) || "";
+  const date = firstParam(params.date) || "";
+  const baseLeads = view === "my" ? leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id) : leads;
+  const visibleLeads = baseLeads.filter((lead) => (!q || [lead.name, lead.phone, lead.telegram, lead.car, lead.brand, lead.model].filter(Boolean).join(" ").toLowerCase().includes(q)) && (!managerId || lead.assignedManagerId === managerId) && (!source || (lead.source || "site") === source) && (!status || lead.status === status) && (!date || String(lead.createdAt || "").startsWith(date)));
 
   return (
     <CrmShell activeHref="/crm/leads" title="Лиды" subtitle="Общая лента заявок и личная очередь менеджера.">
-      <div className="mb-5 flex flex-wrap gap-2">
+      <form className="glass mb-5 grid gap-3 rounded-[2rem] p-5 md:grid-cols-5"><input name="q" placeholder="ФИО, телефон, автомобиль" defaultValue={q} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="managerId" placeholder="ID менеджера" defaultValue={managerId} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="source" placeholder="Источник" defaultValue={source} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="status" placeholder="Статус" defaultValue={status} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="date" type="date" defaultValue={date} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold [color-scheme:dark]"/><button className="avto-button rounded-2xl px-4 py-3 font-black md:col-span-5">Фильтровать</button></form><div className="mb-5 flex flex-wrap gap-2">
         <Link href="/crm/leads" className={`rounded-full px-4 py-2 text-sm font-black ${view === "all" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Все заявки</Link>
         <Link href="/crm/leads?view=my" className={`rounded-full px-4 py-2 text-sm font-black ${view === "my" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Мои заявки</Link>
         <Link href="/crm/clients" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Добавить клиента</Link>
@@ -43,7 +49,7 @@ export default async function CrmLeadsPage({
         </div>
 
         {visibleLeads.map((lead) => (
-          <div key={lead.id} className="border-b border-white/7 p-4 last:border-0">
+          <div key={lead.id} className={`border-b border-l-4 border-b-white/7 p-4 last:border-b-0 ${leadStatusColor(lead.status).replace("bg-", "border-").split(" ")[0]}`}>
             <div className="grid gap-3 text-sm font-bold text-white/70 md:grid-cols-6">
               <div>
                 <div className="font-black text-white">{lead.name || lead.phone || lead.telegram || "Без имени"}</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { uiLabel } from "@/lib/crm";
 
 function uid(prefix: string) {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -10,7 +11,7 @@ function SmallInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
+      className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
     />
   );
 }
@@ -19,7 +20,7 @@ function SmallSelect(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <select
       {...props}
-      className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
+      className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
     />
   );
 }
@@ -104,9 +105,9 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   )
                 }
               >
-                <option value="source">source</option>
-                <option value="subtotal">subtotal</option>
-                <option value="total">total</option>
+                <option value="source">{uiLabel("source")}</option>
+                <option value="subtotal">{uiLabel("subtotal")}</option>
+                <option value="total">{uiLabel("total")}</option>
               </SmallSelect>
               <button
                 type="button"
@@ -240,7 +241,7 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   }
                 />
                 <SmallInput
-                  placeholder="Trigger"
+                  placeholder={uiLabel("Trigger")}
                   value={stage.trigger || ""}
                   onChange={(event) =>
                     setDealStages((items) =>
@@ -264,10 +265,10 @@ export function MarketStructuredFields({ version }: { version: any }) {
                     )
                   }
                 >
-                  <option value="fixed">fixed</option>
-                  <option value="percent">percent</option>
-                  <option value="calculated">calculated</option>
-                  <option value="manual">manual</option>
+                  <option value="fixed">{uiLabel("fixed")}</option>
+                  <option value="percent">{uiLabel("percent")}</option>
+                  <option value="calculated">{uiLabel("calculated")}</option>
+                  <option value="manual">{uiLabel("manual")}</option>
                 </SmallSelect>
               </div>
               <textarea
@@ -282,7 +283,7 @@ export function MarketStructuredFields({ version }: { version: any }) {
                     ),
                   )
                 }
-                className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
+                className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
               />
               <div className="grid gap-2 md:grid-cols-4">
                 <SmallInput
@@ -306,7 +307,7 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   }
                 />
                 <SmallInput
-                  placeholder="Плательщик"
+                  placeholder={uiLabel("payer")}
                   value={stage.payer || ""}
                   onChange={(event) =>
                     setDealStages((items) =>
@@ -319,7 +320,7 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   }
                 />
                 <SmallInput
-                  placeholder="Получатель"
+                  placeholder={uiLabel("recipient")}
                   value={stage.recipient || ""}
                   onChange={(event) =>
                     setDealStages((items) =>
@@ -362,7 +363,7 @@ export function MarketStructuredFields({ version }: { version: any }) {
                           )
                         }
                       />
-                      {key}
+                      {uiLabel(key)}
                     </label>
                   ),
                 )}

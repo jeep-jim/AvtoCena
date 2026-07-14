@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LEAD_STATUSES, LEAD_STATUS_LABELS } from "@/lib/crm";
+import { LEAD_STATUSES, LEAD_STATUS_LABELS, leadStatusColor } from "@/lib/crm";
+import { DarkSelect } from "./DarkSelect";
 
 type ManagerOption = {
   id: string;
@@ -30,6 +31,8 @@ export function LeadActions({
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
   const requiresReason = status === "rejected";
+  const statusOptions = LEAD_STATUSES.map((value) => ({ value, label: LEAD_STATUS_LABELS[value] }));
+  const managerOptions = [{ value: "", label: "Не назначен" }, ...managers.map((manager) => ({ value: manager.id, label: manager.displayName }))];
 
   async function save() {
     setSaved(false);
@@ -77,32 +80,11 @@ export function LeadActions({
 
   return (
     <div className="grid gap-2 rounded-2xl border border-white/10 bg-black/20 p-3 md:grid-cols-[minmax(150px,0.8fr)_minmax(170px,1fr)_minmax(180px,1.3fr)_auto] md:items-center">
-      <select
-        value={status}
-        onChange={(event) => setStatus(event.target.value)}
-        className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white"
-        aria-label="Статус заявки"
-      >
-        {LEAD_STATUSES.map((value) => (
-          <option key={value} value={value}>
-            {LEAD_STATUS_LABELS[value]}
-          </option>
-        ))}
-      </select>
+      <div className={`rounded-xl ring-1 ${leadStatusColor(status)}`}>
+        <DarkSelect label="Статус" value={status} options={statusOptions} onChange={setStatus} />
+      </div>
 
-      <select
-        value={assignedManagerId}
-        onChange={(event) => setAssignedManagerId(event.target.value)}
-        className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white"
-        aria-label="Назначенный менеджер"
-      >
-        <option value="">Не назначен</option>
-        {managers.map((manager) => (
-          <option key={manager.id} value={manager.id}>
-            {manager.displayName}
-          </option>
-        ))}
-      </select>
+      <DarkSelect label="Менеджер" value={assignedManagerId} options={managerOptions} onChange={setAssignedManagerId} />
 
       <input
         value={note}

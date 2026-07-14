@@ -16,6 +16,13 @@ export type AuthUser = {
   role: UserRole;
   status?: "active" | "disabled";
   partnerCode?: string;
+  telegramId?: string;
+  avatarObjectKey?: string;
+  createdAt?: string;
+  invitedByUserId?: string;
+  lastLoginAt?: string;
+  sessionVersion?: number;
+  updatedAt?: string;
 };
 
 type SessionPayload = {
@@ -25,6 +32,7 @@ type SessionPayload = {
   role: UserRole;
   partnerCode?: string;
   exp: number;
+  sessionVersion?: number;
 };
 
 function authSecret() {
@@ -72,6 +80,7 @@ export function createSessionCookie(user: AuthUser) {
     displayName: user.displayName,
     role: user.role,
     partnerCode: user.partnerCode,
+    sessionVersion: Number(user.sessionVersion || 0),
     exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS
   };
 
@@ -100,6 +109,7 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
 
     const storedUser = getAuthUsers().find((user) => user.id === payload.id && user.status !== "disabled");
     if (!storedUser) return null;
+    if (Number(storedUser.sessionVersion || 0) !== Number(payload.sessionVersion || 0)) return null;
 
     return storedUser;
   } catch {
