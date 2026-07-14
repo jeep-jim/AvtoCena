@@ -4,11 +4,13 @@ import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOff
 
 const MARKETS: CatalogMarket[] = ["japan", "korea", "china", "uae", "europe"];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
+const INTERNAL_CATALOG_PATH = "catalog/internal/offers.json";
+const ALLOWED_IMAGE_HOSTS = [/encar\.com$/i, /che168\.com$/i, /autohome\.com\.cn$/i, /beforward\.jp$/i, /bf\.jp$/i, /cloudfront\.net$/i, /img\.avtocena\.com$/i];
 export const CATALOG_CHUNK_SIZE = 500;
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
 
-export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, ...dto } = offer; return dto; }
+export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
 function cleanShard(value?: string | number) { return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown"; }
@@ -20,30 +22,32 @@ async function readManifest(): Promise<CatalogManifest> { return readDataJson<Ca
 async function readIndex<T>(generationId: string, path: string, fallback: T) { return readDataJson<T>(generationPath(generationId, `indexes/${path}`), fallback); }
 async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true) { const storage = getJsonStorage(); try { await storage.writeJson(path, value, ifNoneMatch ? { ifNoneMatch: "*" } : undefined); } catch (e) { if (e instanceof StorageConflictError && ifNoneMatch) return; throw e; } }
 export async function readMarketOffers(market: string) { const manifest = await readManifest(); const chunks: string[] = manifest.markets?.[market]?.chunks || []; const lists = await Promise.all(chunks.map((c) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, market, c), []))); return lists.flat(); }
-export async function readAllOffersForMaintenance() { const lists = await Promise.all(MARKETS.map(readMarketOffers)); return lists.flat(); }
+export async function readAllOffersForMaintenance() { return readDataJson<VehicleOffer[]>(INTERNAL_CATALOG_PATH, []); }
 export const readAllOffers = readAllOffersForMaintenance;
 function isPublicOffer(o: VehicleOffer) { return o.status === "active" && o.images.length > 0 && Boolean(o.totalRub || o.calculationStatus === "needs_data" || o.calculationStatus === "auction_start"); }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
 export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   const storage = getJsonStorage();
+  await storage.writeJson(INTERNAL_CATALOG_PATH, nextOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of nextOffers.filter(isPublicOffer)) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
   const byId: Record<string, OfferLocation> = {};
+  const imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {};
   for (const [market, offers] of byMarket) {
     const chunks: string[] = [];
     for (let i = 0; i < offers.length; i += CATALOG_CHUNK_SIZE) {
       const name = chunkName(chunks.length + 1);
       chunks.push(name);
       const slice = offers.slice(i, i + CATALOG_CHUNK_SIZE);
-      slice.forEach((o) => { byId[o.id] = { market: o.market, chunk: name }; });
+      slice.forEach((o) => { byId[o.id] = { market: o.market, chunk: name }; o.images.forEach((img) => { imagesById[img.id] = { objectKey: img.objectKey, mimeType: img.mimeType, checksum: img.checksum, size: img.size }; }); });
       await writeJsonAtomic(offerPath(generationId, market, name), slice);
     }
     markets[market] = { count: offers.length, chunks, updatedAt: now };
   }
-  await rebuildIndexes(generationId, nextOffers.filter(isPublicOffer), byId);
+  await rebuildIndexes(generationId, nextOffers.filter(isPublicOffer), byId, imagesById);
   const manifest: CatalogManifest = { version: 2, generationId, updatedAt: now, markets };
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);
@@ -52,13 +56,14 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   }
   throw new StorageConflictError();
 }
-export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>) {
+export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
   const maps: Record<string, Map<string, string[]>> = { market: new Map(), make: new Map(), model: new Map(), year: new Map(), budget: new Map(), fuel: new Map(), body: new Map(), drive: new Map(), hasPrice: new Map() };
   for (const o of offers) {
     const pairs = { market: o.market, make: o.make, model: `${o.make}:${o.model}`, year: o.year, budget: budgetBucket(o.totalRub), fuel: o.fuel, body: o.bodyType, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no" };
     for (const [name, key] of Object.entries(pairs)) { const m = maps[name]; const k = cleanShard(key); m.set(k, [...(m.get(k) || []), o.id]); }
   }
   await writeJsonAtomic(generationPath(generationId, "indexes/offers-by-id.json"), { generationId, byId });
+  await writeJsonAtomic(generationPath(generationId, "indexes/images-by-id.json"), { generationId, imagesById });
   await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), { generationId, makes: [...maps.make.keys()].sort(), models: [...maps.model.keys()].sort() });
   await Promise.all(Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => writeIndexShard(generationId, name, key, ids))));
 }
@@ -79,12 +84,15 @@ export async function searchOffers(params: CatalogSearchParams) {
   const sort = params.sort || "updatedAt"; items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity) : sort === "year" ? b.year - a.year : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0) : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt)));
   return { generationId: manifest.generationId, total: items.length, page, pageSize, items: items.slice((page-1)*pageSize, page*pageSize).map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/offers-by-id.json`] };
 }
+function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
+export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
+  let safeUrl: string; try { safeUrl = assertSafeImageUrl(url); } catch { return null; }
   const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 12000));
   try {
-    const res = await fetch(url, { ...init, signal: controller.signal }); if (!res.ok) return null; const mimeType = res.headers.get("content-type") || ""; if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
+    const res = await fetch(safeUrl, { ...init, signal: controller.signal, redirect: "manual" }); if (!res.ok) return null; const mimeType = res.headers.get("content-type") || ""; if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
     const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null; const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
     const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage(); if (!(await storage.binaryExists?.(objectKey))) await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); return { id: imageId, objectKey, url: publicImageUrl(imageId, objectKey), size: buf.length, checksum, mimeType };
   } finally { clearTimeout(timeout); }
 }
-export async function readCatalogImage(imageId: string) { const manifest = await readManifest(); const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }); for (const loc of Object.values(byId.byId)) { const chunk = await readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []); const img = chunk.flatMap((o) => o.images).find((i) => i.id === imageId); if (img) return getJsonStorage().getBinary?.(img.objectKey); } return null; }
+export async function readCatalogImage(imageId: string) { const manifest = await readManifest(); const index = await readIndex<{ imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> }>(manifest.generationId, "images-by-id.json", { imagesById: {} }); const meta = index.imagesById[imageId]; if (!meta) return null; const binary = await getJsonStorage().getBinary?.(meta.objectKey); return binary ? { ...binary, mimeType: binary.mimeType || meta.mimeType, checksum: meta.checksum, size: meta.size } : null; }

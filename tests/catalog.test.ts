@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
-import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl } from "../apps/web/lib/catalog/storage";
+import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl } from "../apps/web/lib/catalog/storage";
+import { convertToRub } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
 
 process.env.JSON_STORAGE_DRIVER = "local";
@@ -74,5 +75,37 @@ test("image cache rejects HTML instead of image", async () => {
   const original = global.fetch;
   (global as any).fetch = async () => new Response("<html>challenge</html>", { status: 200, headers: { "content-type": "text/html" } });
   try { assert.equal(await cacheImageFromUrl("https://example.test/not-image", "japan"), null); }
+  finally { (global as any).fetch = original; }
+});
+
+
+test("legacy JPY rate is not divided by 100 and structured CBR nominal is supported", async () => {
+  const legacy = await convertToRub(1_000_000, "JPY");
+  assert.equal(legacy?.sourcePriceRub, 570_000);
+  assert.equal(legacy?.nominal, 1);
+  const usd = await convertToRub(1000, "USD");
+  assert.equal(usd?.sourcePriceRub, 92_000);
+});
+
+test("public DTO strips source and private image storage fields", () => {
+  const dto: any = publicOffer({ id: "o", sourceId: "private", sourceOfferId: "s", market: "japan", offerType: "fixed", status: "active", make: "Toyota", model: "Aqua", year: 2021, sourcePrice: 1, sourceCurrency: "JPY", priceMode: "fixed", images: [image], totalRub: 1, calculationStatus: "ready", firstSeenAt: "now", updatedAt: "now", operational: { sourceUrl: "https://source" } } as any);
+  assert.equal(dto.sourceId, undefined);
+  assert.equal(dto.images[0].objectKey, undefined);
+  assert.equal(dto.images[0].checksum, undefined);
+});
+
+test("SSRF guard rejects private hosts and allows known image hosts", () => {
+  assert.throws(() => assertSafeImageUrl("http://127.0.0.1/a.jpg"));
+  assert.throws(() => assertSafeImageUrl("http://169.254.169.254/latest/meta-data"));
+  assert.equal(assertSafeImageUrl("https://ci.encar.com/photo/a.jpg"), "https://ci.encar.com/photo/a.jpg");
+});
+
+test("Che168 fetchPage reads result.carlist and uses brand endpoint", async () => {
+  const original = global.fetch;
+  (global as any).fetch = async (url: string) => {
+    if (String(url).includes('/brand')) return new Response(JSON.stringify({ result: { brandlist: [{ brandid: 99 }] } }), { headers: { 'content-type': 'application/json' } });
+    return new Response(JSON.stringify({ result: { carlist: [{ infoid: 'I1', brandname: 'BYD', seriesname: 'Seal', regdate: '2024-01', mileage: '1' }] } }), { headers: { 'content-type': 'application/json' } });
+  };
+  try { const page = await new Che168GlobalPublicAdapter().fetchPage(null); assert.equal(page.items.length, 1); }
   finally { (global as any).fetch = original; }
 });

@@ -102,9 +102,8 @@ export async function POST(request: Request) {
   const calculationSnapshot = offerSnapshot?.calculationSnapshot || (body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null);
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
   const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
-  if (duplicate) return NextResponse.json({ ok: true, lead: duplicate, client: { id: duplicate.clientId }, duplicate: true });
 
-  const client = await appendChunkedDataJson("clients/clients.json", {
+  const client = duplicate ? { id: duplicate.clientId || clientId } : await appendChunkedDataJson("clients/clients.json", {
     id: clientId,
     operationId,
     createdAt,
@@ -126,7 +125,7 @@ export async function POST(request: Request) {
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
   });
 
-  const lead = await appendChunkedDataJson("leads/leads.json", {
+  const lead = duplicate || await appendChunkedDataJson("leads/leads.json", {
     id: leadId,
     operationId,
     createdAt,
@@ -198,9 +197,9 @@ export async function POST(request: Request) {
     ...attribution
   });
 
-  if (cpaEvent.deliveryStatus === "pending") {
+  if (!duplicate && cpaEvent.deliveryStatus === "pending") {
     await deliverCpaEvent(cpaEvent);
   }
 
-  return NextResponse.json({ ok: true, lead });
+  return NextResponse.json({ ok: true, lead, client, recovered: Boolean(duplicate), duplicate: Boolean(duplicate) });
 }
