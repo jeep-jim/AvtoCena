@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { LeadForm } from "@/components/results/LeadForm";
-import {
-  getAvtocenaResults,
-  getSearchInputFromParams,
-  money,
-} from "@/lib/avtocena";
+import { getSearchInputFromParams, money } from "@/lib/avtocena";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { searchOffers } from "@/lib/catalog/storage";
 
@@ -19,6 +15,14 @@ function safeParams(params: Record<string, string | string[] | undefined>) {
     market: params.market ?? params.country,
   };
 }
+
+const marketNames: Record<string, string> = {
+  japan: "Япония",
+  korea: "Корея",
+  china: "Китай",
+  uae: "ОАЭ",
+  europe: "Европа",
+};
 
 function ResultPhoto({
   title,
@@ -68,34 +72,6 @@ function ResultPhoto({
   );
 }
 
-function ResultCostLines({
-  lines,
-}: {
-  lines: { id: string; title: string; amountRub: number }[];
-}) {
-  return (
-    <div className="grid w-full min-w-0 gap-2.5 text-[13px] font-bold leading-6 text-white/68 md:text-sm">
-      {lines.slice(0, 6).map((line) => (
-        <div
-          key={line.id}
-          className="grid w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-x-2 overflow-hidden"
-        >
-          <span className="shrink-0 text-red-300/80">·</span>
-
-          <span className="flex min-w-0 items-baseline gap-2">
-            <span className="min-w-0 break-words text-white/76">{line.title}</span>
-            <span className="mb-[4px] hidden min-w-4 flex-1 border-b border-dotted border-white/22 sm:block" />
-          </span>
-
-          <span className="shrink-0 whitespace-nowrap text-right font-black text-white">
-            {money(line.amountRub)} ₽
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function SummaryItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0">
@@ -116,7 +92,6 @@ export default async function ResultsPage({
 }) {
   const params = (await searchParams) ?? {};
   const input = getSearchInputFromParams(safeParams(params));
-  const results = getAvtocenaResults(input);
   const live = await searchOffers({
     budgetTo: input.budgetRub,
     market: input.market,
@@ -189,7 +164,7 @@ export default async function ResultsPage({
                   label="Год от"
                   value={input.yearFrom ? String(input.yearFrom) : "не указан"}
                 />
-                <SummaryItem label="Найдено" value={String(live.items.length || results.length)} />
+                <SummaryItem label="Найдено" value={String(live.total)} />
               </div>
 
               <a
@@ -207,106 +182,94 @@ export default async function ResultsPage({
                 Актуальные автомобили
               </h2>
               <p className="mt-1 max-w-2xl text-sm font-bold text-white/52 md:text-base">
-                Сначала показываем реальные предложения из живого каталога. Если совпадений нет — ниже будет расчётный пример.
+                Здесь показываются только реальные предложения из загруженного каталога. Выдуманных автомобилей и расчётных карточек нет.
               </p>
             </div>
 
             <div className="grid min-w-0 gap-5">
-
               {live.items.map((offer: any, index: number) => {
+                const title = [offer.make, offer.model, offer.trim]
+                  .filter(Boolean)
+                  .join(" ");
+                const marketName = marketNames[offer.market] || offer.market || "Рынок уточняется";
+                const bodyName = offer.bodyType || "Автомобиль";
                 const car: any = {
-                  id: offer.id, title: [offer.make, offer.model, offer.trim].filter(Boolean).join(" "),
-                  brand: offer.make, model: offer.model, market: offer.market, marketName: offer.market === "korea" ? "Корея" : offer.market,
-                  bodyName: offer.bodyType || "Автомобиль", year: offer.year, mileageKm: offer.mileageKm,
-                  fuel: offer.fuel || "топливо уточняется", powerHp: offer.powerHp || 0, deliveryDays: 30,
-                  recommendation: "Актуальное предложение из каталога. Наличие и финальную стоимость подтвердит менеджер.",
-                  lines: [], totalRub: offer.totalRub || 0, offerId: offer.id, href: `/cars/offer/${offer.id}`,
+                  id: offer.id,
+                  title,
+                  brand: offer.make,
+                  model: offer.model,
+                  market: offer.market,
+                  marketName,
+                  bodyName,
+                  year: offer.year,
+                  mileageKm: offer.mileageKm,
+                  fuel: offer.fuel || "топливо уточняется",
+                  powerHp: offer.powerHp || 0,
+                  deliveryDays: 30,
+                  recommendation:
+                    "Актуальное предложение из каталога. Наличие и финальную стоимость подтвердит менеджер.",
+                  lines: [],
+                  totalRub: offer.totalRub || 0,
+                  offerId: offer.id,
+                  href: `/cars/offer/${offer.id}`,
                   offerSnapshot: offer,
                 };
+
                 return (
-                  <article key={offer.id} className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] md:rounded-[2rem]">
+                  <article
+                    key={offer.id}
+                    className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] md:rounded-[2rem]"
+                  >
                     <div className="grid w-full min-w-0 lg:grid-cols-[minmax(300px,34%)_minmax(0,1fr)] xl:grid-cols-[420px_minmax(0,1fr)]">
                       <div className="relative min-h-[260px] overflow-hidden bg-white/5">
-                        {offer.images?.[0]?.url ? <img src={offer.images[0].url} alt={car.title} className="h-full min-h-[260px] w-full object-cover" /> : <ResultPhoto title={car.title} marketName={car.marketName} bodyName={car.bodyName} year={car.year} mileageKm={car.mileageKm} />}
+                        {offer.images?.[0]?.url ? (
+                          <img
+                            src={offer.images[0].url}
+                            alt={title}
+                            className="h-full min-h-[260px] w-full object-cover"
+                          />
+                        ) : (
+                          <ResultPhoto
+                            title={title}
+                            marketName={marketName}
+                            bodyName={bodyName}
+                            year={offer.year}
+                            mileageKm={offer.mileageKm}
+                          />
+                        )}
                       </div>
+
                       <div className="p-4 md:p-6 lg:p-7">
-                        <div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">#{index + 1}</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">живой каталог</span></div>
-                        <h3 className="mt-4 text-2xl font-black text-white">{car.title}</h3>
-                        <p className="mt-3 text-sm font-bold text-white/60">{offer.year} · {offer.mileageKm?.toLocaleString("ru-RU") || "—"} км · {offer.bodyType || "кузов уточняется"}</p>
-                        <div className="mt-5 text-3xl font-black text-red-200">{offer.totalRub ? `${money(offer.totalRub)} ₽` : "Цена уточняется"}</div>
-                        <div className="mt-6 grid gap-3 sm:grid-cols-2"><Link href={`/cars/offer/${offer.id}`} className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white">Открыть автомобиль</Link><LeadForm car={car} budgetRub={budget} attribution={attribution} searchRequest={searchRequest} /></div>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-
-              {!live.items.length && <div className="glass rounded-[2rem] p-6"><h3 className="text-2xl font-black">Актуальные автомобили не найдены</h3><p className="mt-2 text-white/60">Откройте <Link href="/cars" className="text-red-200 underline">Каталог</Link> или оставьте заявку — менеджер подберёт автомобиль.</p></div>}
-
-              {!live.items.length && <div className="mt-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">Ориентировочные расчётные примеры</h2><p className="mt-1 text-sm font-bold text-white/52">Расчётный пример, не конкретный автомобиль.</p></div>}
-              {(!live.items.length ? results : []).map((car, index) => (
-                <article
-                  key={car.id}
-                  className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] shadow-[0_20px_90px_rgba(0,0,0,0.18)] md:rounded-[2rem]"
-                >
-                  <div className="grid w-full min-w-0 lg:grid-cols-[minmax(300px,34%)_minmax(0,1fr)] xl:grid-cols-[420px_minmax(0,1fr)] 2xl:grid-cols-[460px_minmax(0,1fr)]">
-                    <ResultPhoto
-                      title={car.title}
-                      marketName={car.marketName}
-                      bodyName={car.bodyName}
-                      year={car.year}
-                      mileageKm={car.mileageKm}
-                    />
-
-                    <div className="min-w-0 p-4 md:p-6 lg:p-7">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
-                          #{index + 1}
-                        </span>
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
-                          {car.deliveryDays} дней
-                        </span>
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
-                          {car.fuel}
-                        </span>
-                        <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
-                          {car.powerHp} л.с.
-                        </span>
-                      </div>
-
-                      <p className="mt-4 max-w-3xl text-sm font-medium leading-6 text-white/64 md:text-base md:leading-7">
-                        {car.recommendation}
-                      </p>
-
-                      <div className="mt-5 min-w-0">
-                        <ResultCostLines lines={car.lines} />
-                      </div>
-
-                      <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-end">
-                        <div className="min-w-0">
-                          <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42 md:text-sm">
-                            Расчётный пример, не конкретный автомобиль
-                          </div>
-                          <div className="mt-2 text-3xl font-black tracking-[-0.05em] md:text-4xl">
-                            {money(car.totalRub)} ₽
-                          </div>
-
-                          {typeof car.budgetDeltaRub === "number" && (
-                            <div
-                              className={`mt-2 text-sm font-black ${
-                                car.isInBudget ? "text-green-300" : "text-red-200"
-                              }`}
-                            >
-                              {car.isInBudget
-                                ? `Остаётся ${money(car.budgetDeltaRub)} ₽`
-                                : `Выше бюджета на ${money(
-                                    Math.abs(car.budgetDeltaRub),
-                                  )} ₽`}
-                            </div>
-                          )}
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
+                            #{index + 1}
+                          </span>
+                          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
+                            реальный каталог
+                          </span>
+                          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">
+                            {marketName}
+                          </span>
                         </div>
 
-                        <div className="min-w-0">
+                        <h3 className="mt-4 text-2xl font-black text-white">{title}</h3>
+                        <p className="mt-3 text-sm font-bold text-white/60">
+                          {offer.year} · {offer.mileageKm?.toLocaleString("ru-RU") || "—"} км · {bodyName}
+                        </p>
+                        <div className="mt-5 text-3xl font-black text-red-200">
+                          {offer.totalRub ? `${money(offer.totalRub)} ₽` : "Цена уточняется"}
+                        </div>
+                        <p className="mt-3 text-sm font-bold leading-6 text-white/52">
+                          Наличие и итоговую цену под ключ подтвердит менеджер перед оформлением заявки.
+                        </p>
+
+                        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                          <Link
+                            href={`/cars/offer/${offer.id}`}
+                            className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white"
+                          >
+                            Открыть автомобиль
+                          </Link>
                           <LeadForm
                             car={car}
                             budgetRub={budget}
@@ -316,24 +279,30 @@ export default async function ResultsPage({
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
 
-              {!results.length && (
+              {!live.items.length && (
                 <div className="glass rounded-[2rem] p-8 text-center">
-                  <h2 className="text-3xl font-black">
-                    Пока нет готового варианта
-                  </h2>
-                  <p className="mx-auto mt-3 max-w-xl text-white/58">
-                    Попробуйте изменить бюджет, год, марку или страну поставки.
+                  <h2 className="text-3xl font-black">По этим параметрам реальных автомобилей пока нет</h2>
+                  <p className="mx-auto mt-3 max-w-2xl text-white/58">
+                    Мы не подменяем пустую выдачу выдуманными карточками. Измените фильтры, откройте общий каталог или оставьте заявку менеджеру.
                   </p>
-                  <a
-                    href="/"
-                    className="avto-button mt-6 inline-block rounded-2xl px-6 py-4 font-black"
-                  >
-                    Вернуться на главную
-                  </a>
+                  <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+                    <Link
+                      href="/"
+                      className="rounded-2xl bg-white/10 px-6 py-4 font-black text-white"
+                    >
+                      Изменить параметры
+                    </Link>
+                    <Link
+                      href="/cars"
+                      className="avto-button rounded-2xl px-6 py-4 font-black"
+                    >
+                      Открыть весь каталог
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
