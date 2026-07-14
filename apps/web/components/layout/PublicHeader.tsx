@@ -24,6 +24,21 @@ function readCount() {
   }
 }
 
+function applyBrowserTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem(THEME_KEY, theme);
+
+  let icon = document.querySelector<HTMLLinkElement>('link[data-avtocena-theme-icon]');
+  if (!icon) {
+    icon = document.createElement("link");
+    icon.rel = "icon";
+    icon.dataset.avtocenaThemeIcon = "true";
+    document.head.appendChild(icon);
+  }
+  icon.href = theme === "light" ? "/favicon-dark.svg" : "/favicon-light.svg";
+  window.dispatchEvent(new CustomEvent("avtocena:theme-changed", { detail: { theme } }));
+}
+
 function HeartIcon({ filled = true }: { filled?: boolean }) {
   return (
     <svg width="25" height="23" viewBox="0 0 24 22" fill={filled ? "currentColor" : "none"} aria-hidden="true">
@@ -54,7 +69,7 @@ function ThemeIcon({ theme }: { theme: Theme }) {
   );
 }
 
-function MenuIcon({ type }: { type: "catalog" | "favorite" | "partner" | "login" | "theme" }) {
+function MenuIcon({ type }: { type: "catalog" | "favorite" | "partner" | "login" }) {
   const common = { width: 21, height: 21, viewBox: "0 0 24 24", fill: "none", "aria-hidden": true } as const;
 
   if (type === "catalog") {
@@ -64,10 +79,7 @@ function MenuIcon({ type }: { type: "catalog" | "favorite" | "partner" | "login"
   if (type === "partner") {
     return <svg {...common}><path d="M8.3 12.2L10.4 10.1C11.3 9.2 12.7 9.2 13.6 10.1L15 11.5C15.8 12.3 17.1 12.3 17.9 11.5L20 9.4M3.8 12.4L7.5 16.1C8.4 17 9.8 17 10.7 16.1L11.5 15.3M20.2 12.4L16.5 16.1C15.6 17 14.2 17 13.3 16.1L9.4 12.2M4 9.2L7.2 6H10M20 9.2L16.8 6H14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
   }
-  if (type === "login") {
-    return <svg {...common}><path d="M4 12H16M12 7L17 12L12 17M19 4H21V20H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-  }
-  return <ThemeIcon theme="dark" />;
+  return <svg {...common}><path d="M4 12H16M12 7L17 12L12 17M19 4H21V20H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
 export function PublicHeader({ backHref, backLabel = "Назад", className = "" }: Props) {
@@ -87,14 +99,17 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
   }, []);
 
   useEffect(() => {
+    const current = document.documentElement.dataset.theme;
     const stored = localStorage.getItem(THEME_KEY);
-    const initial: Theme = stored === "light" || stored === "dark"
-      ? stored
-      : window.matchMedia?.("(prefers-color-scheme: light)").matches
-        ? "light"
-        : "dark";
+    const initial: Theme = current === "light" || current === "dark"
+      ? current
+      : stored === "light" || stored === "dark"
+        ? stored
+        : window.matchMedia?.("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
     setTheme(initial);
-    document.documentElement.dataset.theme = initial;
+    applyBrowserTheme(initial);
   }, []);
 
   useEffect(() => {
@@ -109,8 +124,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
   function toggleTheme() {
     const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
-    localStorage.setItem(THEME_KEY, next);
-    document.documentElement.dataset.theme = next;
+    applyBrowserTheme(next);
   }
 
   return (
@@ -146,7 +160,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             <button
               type="button"
               onClick={toggleTheme}
-              className="ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] text-amber-300 transition hover:bg-white/[0.085]"
+              className="ac-icon-button hidden h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] text-amber-300 transition hover:bg-white/[0.085] md:flex"
               aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"}
               title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}
             >
@@ -194,7 +208,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
             onClick={() => setMenuOpen(false)}
             aria-label="Закрыть меню"
           />
-          <aside className="absolute right-0 top-0 h-full w-[min(330px,88vw)] bg-[#0d1018] p-5 shadow-[-30px_0_100px_rgba(0,0,0,.65)]">
+          <aside className="ac-mobile-drawer absolute right-0 top-0 h-full w-[min(330px,88vw)] bg-[#0d1018] p-5 shadow-[-30px_0_100px_rgba(0,0,0,.65)]">
             <div className="flex items-center justify-between gap-3">
               <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5">
                 <BrandMark className="h-9 w-9" />
