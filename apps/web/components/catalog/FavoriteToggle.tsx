@@ -75,7 +75,7 @@ export function FavoriteToggle({ offerId, snapshot, className = "", compact = fa
     <button
       type="button"
       onClick={toggle}
-      className={`${compact ? "h-11 w-12" : "h-12 w-13"} flex shrink-0 items-center justify-center rounded-xl bg-black/38 text-red-500 shadow-[0_8px_26px_rgba(0,0,0,.25)] backdrop-blur transition hover:bg-black/58 hover:text-red-400 active:scale-95 ${className}`}
+      className={`${compact ? "h-11 w-12" : "h-12 w-[52px]"} ac-favorite-button flex shrink-0 items-center justify-center rounded-xl bg-black/38 text-red-500 shadow-[0_8px_26px_rgba(0,0,0,.25)] backdrop-blur transition hover:bg-black/58 hover:text-red-400 active:scale-95 ${className}`}
       aria-label={active ? "Убрать из избранного" : "Добавить в избранное"}
       title={active ? "Убрать из избранного" : "Добавить в избранное"}
     >
