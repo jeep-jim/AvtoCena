@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./catalog-ui.css";
 import type { Metadata, Viewport } from "next";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
 
