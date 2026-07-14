@@ -362,11 +362,11 @@ export default function HomePage() {
   useEffect(() => {
     const attribution = captureAttributionFromBrowser();
     if (attribution.clickId) void trackAttributionEvent("visit", attribution, { landingPath: window.location.pathname });
-    fetch("/api/catalog/search?pageSize=30&sort=updatedAt", { cache: "no-store" })
+    fetch("/api/catalog/search?pageSize=12&sort=updatedAt", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : null)
       .then((data) => {
         const items = Array.isArray(data?.items) ? data.items : [];
-        setOffers(items.slice(0, 30).map((raw: any) => {
+        setOffers(items.slice(0, 12).map((raw: any) => {
           const o = presentCatalogOffer(raw);
           return { id: o.id, title: o.title, brand: o.makeLabel, model: o.modelLabel, year: o.year, price: o.totalRub || 0, country: o.market, countryLabel: o.marketLabel, body: o.bodyType || "", bodyLabel: o.bodyLabel, mileageKm: o.mileageKm, mileage: o.mileageKm ? `${money(o.mileageKm)} км` : "пробег уточняется", engine: o.engineCc ? `${o.engineCc} см³` : `${o.fuelLabel}`, power: o.powerHp ? `${o.powerHp} л.с.` : "мощность уточняется", images: o.images, calculationSnapshot: o.calculationSnapshot };
         }));
