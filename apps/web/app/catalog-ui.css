@@ -7,6 +7,10 @@ select option {
   color: #ffffff;
 }
 
+.h-13 {
+  height: 3.25rem;
+}
+
 .ac-hide-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -160,6 +164,12 @@ html[data-theme="light"] .ac-favorites-card,
 html[data-theme="light"] .ac-favorites-card [class~="text-white"],
 html[data-theme="light"] .ac-favorites-card [class*="text-white/"] {
   color: #191c23 !important;
+}
+
+html[data-theme="light"] .ac-on-image,
+html[data-theme="light"] .ac-on-image [class~="text-white"],
+html[data-theme="light"] .ac-on-image [class*="text-white/"] {
+  color: #ffffff !important;
 }
 
 html[data-theme="light"] .avto-button,
