@@ -57,6 +57,8 @@ export default async function ResultsPage({
 
   const shownItems = exact.items.length ? exact.items : alternatives.items;
   const isAlternativeMode = !exact.items.length && alternatives.items.length > 0;
+  // offerSnapshot remains part of the lead payload on the vehicle detail page.
+  // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
 
   return (
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
