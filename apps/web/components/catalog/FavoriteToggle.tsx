@@ -31,6 +31,19 @@ function readFavorites(): FavoriteSnapshot[] {
   }
 }
 
+function HeartIcon({ active }: { active: boolean }) {
+  return (
+    <svg width="24" height="22" viewBox="0 0 24 22" fill={active ? "currentColor" : "none"} aria-hidden="true">
+      <path
+        d="M12 20.1C10.9 19.1 4.2 13.4 2.4 9.7C.7 6.3 2.5 2.1 6.4 1.5C8.7 1.2 10.6 2.3 12 4.1C13.4 2.3 15.3 1.2 17.6 1.5C21.5 2.1 23.3 6.3 21.6 9.7C19.8 13.4 13.1 19.1 12 20.1Z"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function FavoriteToggle({ offerId, snapshot, className = "", compact = false }: Props) {
   const [active, setActive] = useState(false);
 
@@ -62,11 +75,11 @@ export function FavoriteToggle({ offerId, snapshot, className = "", compact = fa
     <button
       type="button"
       onClick={toggle}
-      className={`${compact ? "h-10 w-10" : "h-11 w-11"} flex shrink-0 items-center justify-center rounded-xl border border-white/10 bg-black/35 text-xl backdrop-blur transition hover:border-red-300/35 hover:bg-black/55 ${active ? "text-red-400" : "text-white/72"} ${className}`}
+      className={`${compact ? "h-11 w-12" : "h-12 w-13"} flex shrink-0 items-center justify-center rounded-xl bg-black/38 text-red-500 shadow-[0_8px_26px_rgba(0,0,0,.25)] backdrop-blur transition hover:bg-black/58 hover:text-red-400 active:scale-95 ${className}`}
       aria-label={active ? "Убрать из избранного" : "Добавить в избранное"}
       title={active ? "Убрать из избранного" : "Добавить в избранное"}
     >
-      {active ? "♥" : "♡"}
+      <HeartIcon active={active} />
     </button>
   );
 }
