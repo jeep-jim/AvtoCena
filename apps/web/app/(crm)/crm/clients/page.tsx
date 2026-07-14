@@ -5,6 +5,7 @@ import { readChunkedDataJson } from "@/lib/data";
 import { getAuthUsers } from "@/lib/auth";
 import { money } from "@/lib/avtocena";
 import { searchClients } from "@/lib/crm";
+import { FormDarkSelect } from "@/components/crm/FormDarkSelect";
 
 export const dynamic = "force-dynamic";
 function managerName(managers: any[], id?: string) { return managers.find((m) => m.id === id)?.displayName || "Не назначен"; }
@@ -24,7 +25,7 @@ export default async function CrmClientsPage({ searchParams }: { searchParams?: 
           <input name="phone" placeholder="Телефон" defaultValue={searchParams?.phone} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold" />
           <input name="telegram" placeholder="Telegram" defaultValue={searchParams?.telegram} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold" />
           <input name="car" placeholder="Автомобиль" defaultValue={searchParams?.car} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold" />
-          <select name="managerId" defaultValue={searchParams?.managerId || ""} className="soft-input rounded-2xl bg-zinc-950 px-4 py-3 text-sm font-bold text-white"><option value="">Все менеджеры</option>{managers.map((m) => <option key={m.id} value={m.id}>{m.displayName}</option>)}</select>
+          <FormDarkSelect name="managerId" label="Менеджер" value={searchParams?.managerId || ""} options={[{value:"",label:"Все менеджеры"},...managers.map((m)=>({value:m.id,label:m.displayName}))]}/>
           <input name="date" type="date" defaultValue={searchParams?.date} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold [color-scheme:dark]" />
           <button className="avto-button rounded-2xl px-5 py-3 font-black md:col-span-3">Найти клиента</button>
         </form>

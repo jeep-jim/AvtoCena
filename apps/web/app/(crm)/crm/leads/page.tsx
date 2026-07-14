@@ -4,7 +4,8 @@ import { LeadActions } from "@/components/crm/LeadActions";
 import { readChunkedDataJson } from "@/lib/data";
 import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
 import { money } from "@/lib/avtocena";
-import { leadStatusColor, leadStatusLabel } from "@/lib/crm";
+import { leadStatusBorderColor, leadStatusColor, leadStatusLabel } from "@/lib/crm";
+import { LeadFilters } from "@/components/crm/LeadFilters";
 
 export const dynamic = "force-dynamic";
 
@@ -37,9 +38,9 @@ export default async function CrmLeadsPage({
 
   return (
     <CrmShell activeHref="/crm/leads" title="Лиды" subtitle="Общая лента заявок и личная очередь менеджера.">
-      <form className="glass mb-5 grid gap-3 rounded-[2rem] p-5 md:grid-cols-5"><input name="q" placeholder="ФИО, телефон, автомобиль" defaultValue={q} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="managerId" placeholder="ID менеджера" defaultValue={managerId} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="source" placeholder="Источник" defaultValue={source} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="status" placeholder="Статус" defaultValue={status} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><input name="date" type="date" defaultValue={date} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold [color-scheme:dark]"/><button className="avto-button rounded-2xl px-4 py-3 font-black md:col-span-5">Фильтровать</button></form><div className="mb-5 flex flex-wrap gap-2">
-        <Link href="/crm/leads" className={`rounded-full px-4 py-2 text-sm font-black ${view === "all" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Все заявки</Link>
-        <Link href="/crm/leads?view=my" className={`rounded-full px-4 py-2 text-sm font-black ${view === "my" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Мои заявки</Link>
+      <LeadFilters managers={managers.map((m)=>({id:m.id,displayName:m.displayName}))} sources={[...new Set(leads.map((lead)=>lead.source||"site"))]}/><div className="mb-5 flex flex-wrap gap-2">
+        <Link href={`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k, firstParam(v as any)||""])), view:"all"} as any).toString()}`} className={`rounded-full px-4 py-2 text-sm font-black ${view === "all" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Все заявки</Link>
+        <Link href={`/crm/leads?${new URLSearchParams({...Object.fromEntries(Object.entries(params).map(([k,v])=>[k, firstParam(v as any)||""])), view:"my"} as any).toString()}`} className={`rounded-full px-4 py-2 text-sm font-black ${view === "my" ? "bg-red-500 text-white" : "bg-white/10 text-white/70"}`}>Мои заявки</Link>
         <Link href="/crm/clients" className="rounded-full bg-white/10 px-4 py-2 text-sm font-black text-white/70">Добавить клиента</Link>
       </div>
 
@@ -49,7 +50,7 @@ export default async function CrmLeadsPage({
         </div>
 
         {visibleLeads.map((lead) => (
-          <div key={lead.id} className={`border-b border-l-4 border-b-white/7 p-4 last:border-b-0 ${leadStatusColor(lead.status).replace("bg-", "border-").split(" ")[0]}`}>
+          <div key={lead.id} className={`border-b border-l-4 border-b-white/7 p-4 last:border-b-0 ${leadStatusBorderColor(lead.status)}`}>
             <div className="grid gap-3 text-sm font-bold text-white/70 md:grid-cols-6">
               <div>
                 <div className="font-black text-white">{lead.name || lead.phone || lead.telegram || "Без имени"}</div>

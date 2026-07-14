@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { generateId, getJsonStorage, readChunkedDataJson, updateChunkedDataJson } from "./data";
-import { getCurrentUser, isAdminRole, isCrmRole } from "./auth";
+import { getAuthUsers, getCurrentUser, isAdminRole, isCrmRole } from "./auth";
 import { safeObjectKey } from "./crm";
 
 export const DOCUMENT_TYPES = ["passport","driver_license","contract","power_of_attorney","payment","other"] as const;
@@ -24,6 +24,11 @@ export async function updateClientRecord(body: any) {
   const existing = clients.find((c) => c.id === id);
   if (!existing) throw Object.assign(new Error("client_not_found"), { status: 404 });
   if (!canAccessEntity(user, existing)) throw Object.assign(new Error("forbidden"), { status: 403 });
+  if (exactHas(body, "assignedManagerId")) {
+    const managers = await getAuthUsers();
+    const manager = managers.find((item) => item.id === body.assignedManagerId && isCrmRole(item.role) && item.status !== "disabled");
+    if (!manager) throw Object.assign(new Error("manager_not_found"), { status: 400 });
+  }
   const operationId = stableOperationId(body.operationId);
   if ((existing.history || []).some((h: any) => h.operationId === operationId)) return { client: existing, operationId, unchanged: true };
   const updatedAt = new Date().toISOString();
@@ -82,9 +87,15 @@ export async function uploadClientDocument(clientId: string, form: FormData) {
   const document = { id: documentId, operationId, objectKey, originalName, fileName: originalName, mimeType, size: file.size, checksum, documentType, uploadedAt, uploadedByUserId: user.id, description: String(form.get("description") || "").trim() };
   let updated;
   try {
-    updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: [...(c.documents || []), document], updatedAt: uploadedAt, history: [...(c.history || []), { at: uploadedAt, by: user.id, type: "document_uploaded", title: `Загружен документ: ${DOCUMENT_LABELS[documentType]}`, documentId, operationId }] }));
+    updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => {
+      if ((c.documents || []).some((d: any) => d.operationId === operationId)) return c;
+      const history = (c.history || []).some((h: any) => h.operationId === operationId) ? (c.history || []) : [...(c.history || []), { at: uploadedAt, by: user.id, type: "document_uploaded", title: `Загружен документ: ${DOCUMENT_LABELS[documentType]}`, documentId, operationId }];
+      return { ...c, documents: [...(c.documents || []), document], updatedAt: uploadedAt, history };
+    });
   } catch (error) {
-    if (!binaryExisted) await storage.deleteBinary?.(objectKey).catch(() => undefined);
+    const latest = (await readChunkedDataJson<any>("clients/clients.json", [])).find((c) => c.id === clientId);
+    const savedElsewhere = (latest?.documents || []).some((d: any) => d.operationId === operationId);
+    if (!binaryExisted && !savedElsewhere) await storage.deleteBinary?.(objectKey).catch(() => undefined);
     throw error;
   }
   return { document, client: updated, operationId, unchanged: false };
@@ -108,12 +119,14 @@ export async function deleteClientDocument(clientId: string, documentId: string,
   const client = (await readChunkedDataJson<any>("clients/clients.json", [])).find((c) => c.id === clientId);
   if (!client) throw Object.assign(new Error("client_not_found"), { status: 404 });
   if (!canAccessEntity(user, client)) throw Object.assign(new Error("forbidden"), { status: 403 });
+  const priorDelete = (client.deletedDocuments || []).find((d: any) => d.id === documentId && d.deleteOperationId === operationId);
+  if (priorDelete) return { client, document: priorDelete, operationId };
   const document = (client.documents || []).find((d: any) => d.id === documentId);
   if (!document) throw Object.assign(new Error("document_not_found"), { status: 404 });
   const now = new Date().toISOString();
   await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: (c.documents || []).map((d: any) => d.id === documentId ? { ...d, status: "deleting", deletingOperationId: operationId } : d), updatedAt: now }));
   await getJsonStorage().deleteBinary?.(document.objectKey);
-  const updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: (c.documents || []).filter((d: any) => d.id !== documentId), deletedDocuments: [...(c.deletedDocuments || []), { ...document, status: "archived", deletedAt: now, deletedByUserId: user.id }], updatedAt: now, history: [...(c.history || []), { at: now, by: user.id, type: "document_deleted", title: `Удалён документ: ${document.originalName}`, documentId, operationId }] }));
+  const updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: (c.documents || []).filter((d: any) => d.id !== documentId), deletedDocuments: [...(c.deletedDocuments || []), { ...document, status: "archived", deleteOperationId: operationId, deletedAt: now, deletedByUserId: user.id }], updatedAt: now, history: [...(c.history || []), { at: now, by: user.id, type: "document_deleted", title: `Удалён документ: ${document.originalName}`, documentId, operationId }] }));
   return { client: updated, document, operationId };
 }
 

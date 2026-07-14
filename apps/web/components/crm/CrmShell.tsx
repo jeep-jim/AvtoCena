@@ -58,8 +58,8 @@ export async function CrmShell({ title, subtitle, activeHref, children }: CrmShe
                 className={[
                   "shrink-0 rounded-full border px-4 py-2 text-sm font-bold transition",
                   active
-                    ? "order-first border-red-400/70 bg-red-500 text-white md:order-none"
-                    : "border-white/10 bg-white/10 text-white/70 hover:border-white/20 hover:bg-white/15 hover:text-white",
+                    ? "order-first border-red-500/30 bg-red-950/35 text-white/88 md:order-none"
+                    : "border-white/8 bg-white/[0.055] text-white/62 hover:border-white/10 hover:bg-white/[0.075] hover:text-white/82",
                 ].join(" ")}
               >
                 {label}

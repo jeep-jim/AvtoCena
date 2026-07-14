@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { uiLabel } from "@/lib/crm";
+import { DarkSelect } from "@/components/crm/DarkSelect";
 
 function uid(prefix: string) {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -16,14 +17,10 @@ function SmallInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
-function SmallSelect(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return (
-    <select
-      {...props}
-      className="soft-input min-w-0 rounded-xl bg-zinc-950 px-3 py-2.5 text-xs font-bold text-white placeholder:text-white/25"
-    />
-  );
+function SmallSelect({ value, onChange, options, name, label }: { value: string; onChange: (value: string) => void; options: { value: string; label: string }[]; name?: string; label: string }) {
+  return <DarkSelect name={name} label={label} value={value} onChange={onChange} options={options} />;
 }
+
 
 export function MarketStructuredFields({ version }: { version: any }) {
   const [percentExpenses, setPercentExpenses] = useState<any[]>(
@@ -96,19 +93,17 @@ export function MarketStructuredFields({ version }: { version: any }) {
                 }
               />
               <SmallSelect
+                label="База"
                 value={item.base || "subtotal"}
-                onChange={(event) =>
+                options={["source", "subtotal", "total"].map((value) => ({ value, label: uiLabel(value) }))}
+                onChange={(value) =>
                   setPercentExpenses((items) =>
                     items.map((row, i) =>
-                      i === index ? { ...row, base: event.target.value } : row,
+                      i === index ? { ...row, base: value } : row,
                     ),
                   )
                 }
-              >
-                <option value="source">{uiLabel("source")}</option>
-                <option value="subtotal">{uiLabel("subtotal")}</option>
-                <option value="total">{uiLabel("total")}</option>
-              </SmallSelect>
+              />
               <button
                 type="button"
                 className="rounded-xl bg-red-500/20 px-3 py-2 text-xs font-black text-red-100"
@@ -254,22 +249,19 @@ export function MarketStructuredFields({ version }: { version: any }) {
                   }
                 />
                 <SmallSelect
+                  label="Тип суммы"
                   value={stage.amountType || "manual"}
-                  onChange={(event) =>
+                  options={["fixed", "percent", "calculated", "manual"].map((value) => ({ value, label: uiLabel(value) }))}
+                  onChange={(value) =>
                     setDealStages((items) =>
                       items.map((row, i) =>
                         i === index
-                          ? { ...row, amountType: event.target.value }
+                          ? { ...row, amountType: value }
                           : row,
                       ),
                     )
                   }
-                >
-                  <option value="fixed">{uiLabel("fixed")}</option>
-                  <option value="percent">{uiLabel("percent")}</option>
-                  <option value="calculated">{uiLabel("calculated")}</option>
-                  <option value="manual">{uiLabel("manual")}</option>
-                </SmallSelect>
+                />
               </div>
               <textarea
                 placeholder="Описание"
@@ -431,21 +423,20 @@ export function CpaStructuredFields({ network }: { network: any }) {
       />
       <div className="grid gap-2 md:grid-cols-[120px_minmax(0,1fr)]">
         <SmallSelect
+          label="Метод"
           value={method}
-          onChange={(event) => setMethod(event.target.value)}
-        >
-          <option value="GET">GET</option>
-          <option value="POST">POST</option>
-        </SmallSelect>
+          options={["GET", "POST"].map((value) => ({ value, label: value }))}
+          onChange={setMethod}
+        />
         <SmallInput
-          placeholder="Postback URL"
+          placeholder="URL постбэка"
           value={urlTemplate}
           onChange={(event) => setUrlTemplate(event.target.value)}
         />
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
         <div className="flex justify-between">
-          <b>Status mapping</b>
+          <b>Сопоставление статусов</b>
           <button
             type="button"
             onClick={() =>
@@ -464,7 +455,7 @@ export function CpaStructuredFields({ network }: { network: any }) {
             className="mt-2 grid gap-2 md:grid-cols-[1fr_1fr_auto]"
           >
             <SmallInput
-              placeholder="internal"
+              placeholder="Внутренний статус"
               value={row.internalStatus}
               onChange={(event) =>
                 setStatusRows((rows: any[]) =>
@@ -477,7 +468,7 @@ export function CpaStructuredFields({ network }: { network: any }) {
               }
             />
             <SmallInput
-              placeholder="network"
+              placeholder="Статус сети"
               value={row.networkStatus}
               onChange={(event) =>
                 setStatusRows((rows: any[]) =>
@@ -502,7 +493,7 @@ export function CpaStructuredFields({ network }: { network: any }) {
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
         <div className="flex justify-between">
-          <b>Headers</b>
+          <b>Заголовки</b>
           <button
             type="button"
             onClick={() =>

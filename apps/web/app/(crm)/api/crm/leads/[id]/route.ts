@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
+import { getAuthUsers, getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
 import {
   appendChunkedDataJson,
   readChunkedDataJson,
@@ -42,7 +42,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
   }
 
-  const managers = (await getAuthUsers()).filter((candidate) => isCrmRole(candidate.role));
+  const managers = (await getAuthUsers()).filter((candidate) => isCrmRole(candidate.role) && candidate.status !== "disabled");
   const manager = requestedManagerId
     ? managers.find((candidate) => candidate.id === requestedManagerId)
     : null;
@@ -57,6 +57,10 @@ export async function PATCH(
 
   if (!existingLead) {
     return NextResponse.json({ ok: false, error: "lead_not_found" }, { status: 404 });
+  }
+
+  if (!isAdminRole(user.role) && existingLead.assignedManagerId && existingLead.assignedManagerId !== user.id) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   }
 
   const now = new Date().toISOString();
