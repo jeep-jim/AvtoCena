@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { LEAD_STATUSES, LEAD_STATUS_LABELS, leadStatusColor } from "@/lib/crm";
 import { DarkSelect } from "./DarkSelect";
 
@@ -24,6 +24,7 @@ export function LeadActions({
   managers,
 }: LeadActionsProps) {
   const router = useRouter();
+  const operationIdRef = useRef(crypto.randomUUID());
   const [status, setStatus] = useState(currentStatus);
   const [assignedManagerId, setAssignedManagerId] = useState(currentManagerId || "");
   const [note, setNote] = useState("");
@@ -53,6 +54,7 @@ export function LeadActions({
           status,
           assignedManagerId,
           note,
+          operationId: operationIdRef.current,
         }),
       });
 
@@ -65,6 +67,7 @@ export function LeadActions({
       }
 
       setSaved(true);
+      operationIdRef.current = crypto.randomUUID();
       setNote("");
       router.refresh();
     } catch (saveError) {

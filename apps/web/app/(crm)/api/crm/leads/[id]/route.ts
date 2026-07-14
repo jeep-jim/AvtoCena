@@ -37,6 +37,7 @@ export async function PATCH(
   const requestedStatus = clean(body.status, 80);
   const requestedManagerId = clean(body.assignedManagerId, 160);
   const note = clean(body.note, 2000);
+  const operationId = clean(body.operationId, 160) || makeId("operation");
 
   if (requestedStatus && !isLeadStatus(requestedStatus)) {
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
@@ -74,11 +75,17 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "reason_required" }, { status: 400 });
   }
 
+  if ((existingLead.operationHistory || []).includes(operationId)) {
+    return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
+  }
+
   if (!statusChanged && !managerChanged && !note) {
     return NextResponse.json({ ok: true, lead: existingLead, unchanged: true });
   }
 
-  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => ({
+  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", leadId, (lead) => {
+    if ((lead.operationHistory || []).includes(operationId)) return lead;
+    return ({
     ...lead,
     updatedAt: now,
     status: nextStatus,
@@ -115,6 +122,7 @@ export async function PATCH(
           }
         ]
       : lead.managerHistory,
+    operationHistory: [...(lead.operationHistory || []), operationId].slice(-80),
     internalNotes: note
       ? [
           ...(Array.isArray(lead.internalNotes) ? lead.internalNotes : []),
@@ -127,7 +135,8 @@ export async function PATCH(
           }
         ]
       : lead.internalNotes
-  }));
+    });
+  });
 
   if (!updatedLead) {
     return NextResponse.json({ ok: false, error: "lead_update_failed" }, { status: 500 });
@@ -142,7 +151,8 @@ export async function PATCH(
   }
 
   await appendChunkedDataJson("activity/feed.json", {
-    id: makeId("event"),
+    id: `event_${operationId}`,
+    operationId,
     createdAt: now,
     type: statusChanged ? "lead_status_changed" : managerChanged ? "lead_assigned" : "lead_note_added",
     title: statusChanged

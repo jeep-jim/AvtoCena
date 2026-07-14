@@ -30,12 +30,12 @@ export async function updateClientRecord(body: any) {
     if (!manager) throw Object.assign(new Error("manager_not_found"), { status: 400 });
   }
   const operationId = stableOperationId(body.operationId);
-  if ((existing.history || []).some((h: any) => h.operationId === operationId)) return { client: existing, operationId, unchanged: true };
   const updatedAt = new Date().toISOString();
   const setIfPresent = (target: any, sourceKey: string, targetKey = sourceKey) => {
     if (exactHas(body, sourceKey)) target[targetKey] = typeof body[sourceKey] === "string" ? body[sourceKey].trim() : body[sourceKey];
   };
   const updated = await updateChunkedDataJson<any>("clients/clients.json", id, (client) => {
+    if ((client.history || []).some((h: any) => h.operationId === operationId)) return client;
     const next = { ...client };
     for (const key of ["fio","phone","telegram","city","birthDate","passport","address","market","source"]) setIfPresent(next, key);
     setIfPresent(next, "interestedCar"); setIfPresent(next, "comments"); setIfPresent(next, "assignedManagerId");
@@ -98,7 +98,8 @@ export async function uploadClientDocument(clientId: string, form: FormData) {
     if (!binaryExisted && !savedElsewhere) await storage.deleteBinary?.(objectKey).catch(() => undefined);
     throw error;
   }
-  return { document, client: updated, operationId, unchanged: false };
+  const savedDocument = (updated?.documents || []).find((d: any) => d.operationId === operationId);
+  return { document: savedDocument || document, client: updated, operationId, unchanged: Boolean(savedDocument && savedDocument.id !== document.id) };
 }
 
 export async function downloadClientDocument(clientId: string, documentId: string) {
@@ -126,7 +127,12 @@ export async function deleteClientDocument(clientId: string, documentId: string,
   const now = new Date().toISOString();
   await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: (c.documents || []).map((d: any) => d.id === documentId ? { ...d, status: "deleting", deletingOperationId: operationId } : d), updatedAt: now }));
   await getJsonStorage().deleteBinary?.(document.objectKey);
-  const updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => ({ ...c, documents: (c.documents || []).filter((d: any) => d.id !== documentId), deletedDocuments: [...(c.deletedDocuments || []), { ...document, status: "archived", deleteOperationId: operationId, deletedAt: now, deletedByUserId: user.id }], updatedAt: now, history: [...(c.history || []), { at: now, by: user.id, type: "document_deleted", title: `Удалён документ: ${document.originalName}`, documentId, operationId }] }));
+  const updated = await updateChunkedDataJson<any>("clients/clients.json", clientId, (c) => {
+    const alreadyDeleted = (c.deletedDocuments || []).some((d: any) => d.id === documentId && d.deleteOperationId === operationId);
+    const deletedDocuments = alreadyDeleted ? (c.deletedDocuments || []) : [...(c.deletedDocuments || []), { ...document, status: "archived", deleteOperationId: operationId, deletedAt: now, deletedByUserId: user.id }];
+    const history = (c.history || []).some((h: any) => h.operationId === operationId) ? (c.history || []) : [...(c.history || []), { at: now, by: user.id, type: "document_deleted", title: `Удалён документ: ${document.originalName}`, documentId, operationId }];
+    return { ...c, documents: (c.documents || []).filter((d: any) => d.id !== documentId), deletedDocuments, updatedAt: now, history };
+  });
   return { client: updated, document, operationId };
 }
 

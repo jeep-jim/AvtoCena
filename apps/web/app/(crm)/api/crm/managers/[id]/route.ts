@@ -18,12 +18,12 @@ export async function PATCH(request:Request,{params}:{params:{id:string}}){
       const activeOwners=users.filter((manager)=>manager.role==="owner" && manager.status!=="disabled");
       lastOwner=before.role==="owner" && activeOwners.length<=1 && (body.disable || (body.role && body.role!=="owner"));
       if(lastOwner) return users;
-      return users.map((manager)=>{ if(manager.id!==params.id) return manager; updated={...manager}; if(body.role) updated.role=body.role; if(body.disable) updated.status="disabled"; if(body.enable) updated.status="active"; if(body.revokeSessions) updated.sessionVersion=Number(updated.sessionVersion||0)+1; updated.updatedAt=now; return updated; });
+      return users.map((manager)=>{ if(manager.id!==params.id) return manager; if((manager.appliedOperationIds||[]).includes(operationId)){ updated=manager; return manager; } updated={...manager}; if(body.role) updated.role=body.role; if(body.disable) updated.status="disabled"; if(body.enable) updated.status="active"; if(body.revokeSessions) updated.sessionVersion=Number(updated.sessionVersion||0)+1; updated.updatedAt=now; updated.appliedOperationIds=[...(manager.appliedOperationIds||[]), operationId].slice(-50); return updated; });
     });
     if(!before) return NextResponse.json({ok:false,error:"manager_not_found"},{status:404});
     if(lastOwner) return NextResponse.json({ok:false,error:"last_owner_protected"},{status:400});
     const auditId=`event_manager_${operationId}`;
-    await appendChunkedDataJson("activity/feed.json",{id:auditId,operationId,createdAt:now,type:"manager_updated",title:"Менеджер изменён",managerId:user.id,targetManagerId:params.id,text:Object.keys(body).filter((key)=>key!=="operationId").join(", ")});
+    if (updated !== before) await appendChunkedDataJson("activity/feed.json",{id:auditId,operationId,createdAt:now,type:"manager_updated",title:"Менеджер изменён",managerId:user.id,targetManagerId:params.id,text:Object.keys(body).filter((key)=>key!=="operationId").join(", ")});
     return NextResponse.json({ok:true,manager:updated});
   }catch{return NextResponse.json({ok:false,error:"storage_write_failed"},{status:500});}
 }
