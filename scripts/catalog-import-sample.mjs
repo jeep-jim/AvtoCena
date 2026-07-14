@@ -9,8 +9,8 @@ importCatalog({
   requireObjectStorage: true,
   failOnZeroSaved: true,
   reportPath: "catalog/imports/latest-sample.json",
-}).then((report) => {
-  console.log(JSON.stringify({
+}).then(async (report) => {
+  const summary = {
     imported: report.imported,
     updated: report.updated,
     skipped: report.skipped,
@@ -18,7 +18,12 @@ importCatalog({
     publicOffers: report.publicOffers,
     generationId: report.generationId,
     reportPath: "catalog/imports/latest-sample.json",
-  }, null, 2));
+  };
+  if (process.env.CATALOG_IMPORT_REPORT_FILE) {
+    const fs = await import("node:fs/promises");
+    await fs.writeFile(process.env.CATALOG_IMPORT_REPORT_FILE, JSON.stringify(summary, null, 2));
+  }
+  console.log(JSON.stringify(summary, null, 2));
 }).catch((error) => {
   console.error(error?.message || error);
   process.exit(1);

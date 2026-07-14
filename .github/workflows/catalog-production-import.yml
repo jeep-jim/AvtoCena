@@ -23,7 +23,9 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-      - run: npm run catalog:import:sample | tee catalog-import-sample-report.json
+      - run: npm run catalog:import:sample
+        env:
+          CATALOG_IMPORT_REPORT_FILE: catalog-import-sample-report.json
       - uses: actions/upload-artifact@v4
         with:
           name: catalog-import-sample-report

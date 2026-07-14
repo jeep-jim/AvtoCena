@@ -1225,7 +1225,7 @@ function ReadyCatalogGrid({
   offers: CatalogOffer[];
   onOpen: (offer: CatalogOffer) => void;
 }) {
-  const allowDemo = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_ENABLE_DEMO_CATALOG === "true";
+  const allowDemo = process.env.NODE_ENV !== "production" || process.env.ENABLE_DEMO_CATALOG === "true" || process.env.NEXT_PUBLIC_ENABLE_DEMO_CATALOG === "true";
   const visibleOffers = offers.length > 0 ? offers : allowDemo ? readyCatalog : [];
 
   if (!visibleOffers.length) return <div className="rounded-[1.5rem] bg-white/[0.05] p-6 text-sm font-bold leading-6 text-white/62">Каталог обновляется. Оставьте заявку — менеджер подберёт автомобиль.</div>;

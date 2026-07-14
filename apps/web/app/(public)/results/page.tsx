@@ -243,7 +243,7 @@ export default async function ResultsPage({
 
               {!live.items.length && <div className="glass rounded-[2rem] p-6"><h3 className="text-2xl font-black">Актуальные автомобили не найдены</h3><p className="mt-2 text-white/60">Откройте <Link href="/cars" className="text-red-200 underline">Каталог</Link> или оставьте заявку — менеджер подберёт автомобиль.</p></div>}
 
-              <div className="mt-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">Ориентировочные расчётные примеры</h2><p className="mt-1 text-sm font-bold text-white/52">Расчётный пример, не конкретный автомобиль.</p></div>
+              {!live.items.length && <div className="mt-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">Ориентировочные расчётные примеры</h2><p className="mt-1 text-sm font-bold text-white/52">Расчётный пример, не конкретный автомобиль.</p></div>}
               {(!live.items.length ? results : []).map((car, index) => (
                 <article
                   key={car.id}
