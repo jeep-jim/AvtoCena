@@ -16,26 +16,23 @@ function safeName(value: string) {
 function collectAssets(settings: any) {
   const assets: any[] = [];
   for (const template of settings.templates || []) if (template.file?.objectKey) assets.push(template.file);
-  for (const generated of settings.generatedDocuments || []) if (generated.objectKey) assets.push({ ...generated, mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", originalName: `${generated.contractNumber || generated.id}.docx` });
   if (settings.directorSignature?.objectKey) assets.push(settings.directorSignature);
   return assets;
 }
 
 export async function GET(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !isAdminRole(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
-  const url = new URL(request.url);
-  const key = url.searchParams.get("key") || "";
-  const id = url.searchParams.get("id") || "";
+  const key = new URL(request.url).searchParams.get("key") || "";
+  if (!key.startsWith("contracts/uploads/")) return NextResponse.json({ ok: false, error: "invalid_key" }, { status: 400 });
   const settings = await getContractTemplatesSettings();
-  const asset = collectAssets(settings).find((item) => (id && item.id === id) || (key && item.objectKey === key));
-  if (!asset) return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
-  if (!ALLOWED_TYPES.has(asset.mimeType)) return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
+  const asset = collectAssets(settings).find((item) => item.objectKey === key);
+  if (!asset || !ALLOWED_TYPES.has(asset.mimeType)) return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
   const storage = getJsonStorage();
   if (!storage.getBinary) return NextResponse.json({ ok: false, error: "binary_storage_not_supported" }, { status: 500 });
   let binary;
   try {
-    binary = await storage.getBinary(asset.objectKey);
+    binary = await storage.getBinary(key);
   } catch (error) {
     const message = error instanceof Error ? error.message : "";
     if (message.includes("404") || (error as any)?.code === "ENOENT") return NextResponse.json({ ok: false, error: "binary_not_found" }, { status: 404 });
@@ -48,7 +45,7 @@ export async function GET(request: Request) {
     headers: {
       "content-type": asset.mimeType,
       "content-length": String(binary.size),
-      "content-disposition": `attachment; filename="${safeName(asset.originalName || asset.objectKey.split('/').pop() || 'download.bin')}"`,
+      "content-disposition": `attachment; filename="${safeName(asset.originalName || key.split('/').pop() || 'download.bin')}"`,
       "x-content-type-options": "nosniff"
     }
   });

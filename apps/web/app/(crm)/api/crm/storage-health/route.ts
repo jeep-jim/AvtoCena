@@ -3,7 +3,7 @@ import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { checkStorageBootstrap, getJsonStorage, generateId } from "@/lib/data";
 
 export async function GET() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !isAdminRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }

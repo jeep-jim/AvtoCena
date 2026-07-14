@@ -24,9 +24,9 @@ export default async function CrmLeadsPage({
 }) {
   const params = (await searchParams) ?? {};
   const view = firstParam(params.view) || "all";
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
-  const managers = getAuthUsers().filter((manager) => isCrmRole(manager.role));
+  const managers = (await getAuthUsers()).filter((manager) => isCrmRole(manager.role));
   const q = firstParam(params.q)?.toLowerCase() || "";
   const managerId = firstParam(params.managerId) || "";
   const source = firstParam(params.source) || "";

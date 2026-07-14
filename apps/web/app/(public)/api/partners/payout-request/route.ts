@@ -88,7 +88,7 @@ async function notifyTelegram(record: PayoutRequest) {
 }
 
 export async function POST(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!user || !isPartnerRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });

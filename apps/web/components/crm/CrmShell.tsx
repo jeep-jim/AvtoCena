@@ -8,8 +8,8 @@ type CrmShellProps = {
   children: React.ReactNode;
 };
 
-export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProps) {
-  const user = getCurrentUser();
+export async function CrmShell({ title, subtitle, activeHref, children }: CrmShellProps) {
+  const user = await getCurrentUser();
   const links = [
     ["/crm", "Обзор"],
     ["/crm/feed", "Лента"],

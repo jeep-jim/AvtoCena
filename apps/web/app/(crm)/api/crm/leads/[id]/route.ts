@@ -26,7 +26,7 @@ export async function PATCH(
   request: Request,
   context: { params: { id: string } }
 ) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
 
   if (!user || !isCrmRole(user.role)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
@@ -42,7 +42,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
   }
 
-  const managers = getAuthUsers().filter((candidate) => isCrmRole(candidate.role));
+  const managers = (await getAuthUsers()).filter((candidate) => isCrmRole(candidate.role));
   const manager = requestedManagerId
     ? managers.find((candidate) => candidate.id === requestedManagerId)
     : null;

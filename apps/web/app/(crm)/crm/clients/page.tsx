@@ -14,7 +14,7 @@ export default async function CrmClientsPage({ searchParams }: { searchParams?: 
   const allClients = await readChunkedDataJson<any>("clients/clients.json", []);
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const deals = await readChunkedDataJson<any>("deals/deals.json", []);
-  const managers = getAuthUsers();
+  const managers = (await getAuthUsers());
   const clients = searchClients(allClients, { name: searchParams?.name, phone: searchParams?.phone, telegram: searchParams?.telegram, car: searchParams?.car, managerId: searchParams?.managerId, date: searchParams?.date });
   return <CrmShell activeHref="/crm/clients" title="Клиенты" subtitle="Поиск, редактирование, архив и полноценные карточки клиентов.">
     <div className="grid gap-5 lg:grid-cols-[420px_1fr]"><ClientCreateForm />

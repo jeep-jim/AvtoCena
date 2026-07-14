@@ -6,7 +6,7 @@ import { readChunkedDataJson } from "@/lib/data";
 export const dynamic = "force-dynamic";
 
 export default async function CrmManagersPage() {
-  const managers = getAuthUsers().filter((user) => isCrmRole(user.role));
+  const managers = (await getAuthUsers()).filter((user) => isCrmRole(user.role));
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const clients = await readChunkedDataJson<any>("clients/clients.json", []);
   const deals = await readChunkedDataJson<any>("deals/deals.json", []);
