@@ -18,8 +18,8 @@ function safeParams(params: Record<string, string | string[] | undefined>) {
 
 function SummaryItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="min-w-0 rounded-2xl bg-white/[0.04] p-4">
-      <div className="text-[10px] font-black uppercase tracking-[0.16em] text-white/36">{label}</div>
+    <div className="ac-summary-item min-w-0 rounded-2xl bg-white/[0.04] p-4">
+      <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-300/70">{label}</div>
       <div className="mt-1 break-words text-base font-black text-white/88">{value}</div>
     </div>
   );
@@ -57,15 +57,13 @@ export default async function ResultsPage({
 
   const shownItems = exact.items.length ? exact.items : alternatives.items;
   const isAlternativeMode = !exact.items.length && alternatives.items.length > 0;
-  // offerSnapshot remains part of the lead payload on the vehicle detail page.
-  // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
 
   return (
-    <main className="min-h-screen bg-[#07080d] text-white">
+    <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/" backLabel="К подбору" />
 
       <section className="mx-auto w-full max-w-[1450px] px-4 py-7 md:px-8 md:py-10">
-        <div className="rounded-[1.8rem] border border-white/10 bg-white/[0.055] p-5 shadow-[0_24px_90px_rgba(0,0,0,.28)] md:p-7">
+        <div className="ac-result-summary rounded-[1.8rem] bg-white/[0.055] p-5 shadow-[0_24px_90px_rgba(0,0,0,.28)] md:p-7">
           <div className="grid gap-6 xl:grid-cols-[minmax(260px,.72fr)_minmax(0,1.7fr)_250px] xl:items-center">
             <div>
               <div className="text-xs font-black uppercase tracking-[0.19em] text-red-300">Ваша АвтоЦена</div>
@@ -77,7 +75,7 @@ export default async function ResultsPage({
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
               <SummaryItem label="Марка" value={input.brand || "любая"} />
               <SummaryItem label="Модель" value={input.model || "любая"} />
-              <SummaryItem label="Год" value={yearTo ? `старше 2018` : input.yearFrom ? `от ${input.yearFrom}` : "любой"} />
+              <SummaryItem label="Год" value={yearTo ? "старше 2018" : input.yearFrom ? `от ${input.yearFrom}` : "любой"} />
               <SummaryItem label="Найдено" value={String(exact.total)} />
             </div>
 
@@ -99,7 +97,7 @@ export default async function ResultsPage({
           </div>
 
           {isAlternativeMode ? (
-            <div className="mt-5 rounded-2xl border border-amber-300/16 bg-amber-300/[0.07] p-4 text-sm font-bold leading-6 text-amber-100">
+            <div className="ac-alternative-note mt-5 rounded-2xl bg-amber-300/[0.07] p-4 text-sm font-bold leading-6 text-amber-100">
               Мы ослабили марку, модель и год, но сохранили бюджет{input.market ? " и выбранную страну" : ""}. Так пользователь сразу видит, что ещё можно купить.
             </div>
           ) : null}
@@ -109,7 +107,7 @@ export default async function ResultsPage({
               {shownItems.map((offer: any) => <CatalogCard key={offer.id} offer={offer} />)}
             </div>
           ) : (
-            <div className="mt-7 rounded-[2rem] border border-white/10 bg-white/[0.045] p-8 text-center md:p-12">
+            <div className="mt-7 rounded-[2rem] bg-white/[0.045] p-8 text-center md:p-12">
               <h3 className="text-3xl font-black">Сейчас подходящих вариантов нет</h3>
               <p className="mx-auto mt-3 max-w-2xl text-white/55">Каталог обновляется. Откройте все автомобили или оставьте более широкий запрос.</p>
               <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
