@@ -17,6 +17,6 @@
     "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && cd packages/engine && ./node_modules/.bin/tsc --noEmit",
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",
-    "catalog:smoke": "node scripts/catalog-smoke.mjs"
+    "catalog:smoke": "tsx scripts/catalog-smoke.mjs"
   }
 }

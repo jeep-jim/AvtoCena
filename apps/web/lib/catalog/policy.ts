@@ -8,7 +8,7 @@ export async function mutateSourcePolicy(source: CatalogSourceAdapter, updater: 
 export async function updatePolicyAfterRun(source: CatalogSourceAdapter, health: SourceRunHealth, cursor?: string | null) {
   const now = new Date().toISOString();
   await mutateSourcePolicy(source, (policy) => {
-    if (health.ok) return { ...policy, lastSuccessAt: now, lastError: undefined, lastSuccessfulCursor: cursor ?? policy.lastSuccessfulCursor, consecutiveFailures: 0, blockedUntil: undefined };
+    if (health.ok) return { ...policy, lastSuccessAt: now, lastError: undefined, lastSuccessfulCursor: cursor === undefined ? policy.lastSuccessfulCursor : cursor, consecutiveFailures: 0, blockedUntil: undefined };
     const failures = policy.consecutiveFailures + 1;
     return { ...policy, lastErrorAt: now, lastError: health.message, consecutiveFailures: failures, blockedUntil: health.blocked || failures >= 3 ? new Date(Date.now() + 60 * 60 * 1000).toISOString() : policy.blockedUntil };
   });
