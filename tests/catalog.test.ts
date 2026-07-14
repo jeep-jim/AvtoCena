@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
+import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
 import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl } from "../apps/web/lib/catalog/storage";
 import { convertToRub } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
@@ -8,6 +8,18 @@ import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/
 process.env.JSON_STORAGE_DRIVER = "local";
 delete process.env.CATALOG_IMAGE_CDN_URL;
 const image = { id: "img1", url: "/api/catalog/images/img1", objectKey: "catalog/images/japan/a.jpg", size: 10, checksum: "abc", mimeType: "image/jpeg" };
+
+
+test("Encar mobile list URL uses real query, sr, inav and paging cursor", () => {
+  const first = buildEncarListUrl(null, 20).url;
+  assert.equal(first.searchParams.get("count"), "true");
+  assert.equal(first.searchParams.get("q"), "(And.Hidden.N._.CarType.A.)");
+  assert.equal(first.searchParams.get("sr"), "|MobileModifiedDate|0|20");
+  assert.equal(first.searchParams.get("inav"), "|Metadata|Sort");
+  const next = buildEncarListUrl(JSON.stringify({ offset: 20, cursor: "next-page-token" }), 20).url;
+  assert.equal(next.searchParams.get("sr"), "|MobileModifiedDate|20|20");
+  assert.equal(next.searchParams.get("cursor"), "next-page-token");
+});
 
 test("Encar direct normalizes price from 만원 and full KRW without double multiplication", () => {
   assert.equal(normalizeEncarPrice(3190), 31_900_000);
