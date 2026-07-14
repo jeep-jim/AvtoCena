@@ -15,6 +15,10 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
+      - name: Remove test-generated local catalog data
+        run: |
+          rm -rf data/catalog/internal data/catalog/generations
+          rm -f data/catalog/manifest.json data/catalog/import-lock.json
       - run: npm run catalog:import:sample
         env:
           JSON_STORAGE_DRIVER: object
@@ -24,6 +28,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_IMPORT_RESET: "true"
           CATALOG_IMPORT_REPORT_FILE: catalog-import-sample-report.json
       - uses: actions/upload-artifact@v4
         with:
