@@ -2,10 +2,13 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
   appendChunkedDataJson,
+  mutateDataJson,
   readChunkedDataJson
 } from "@/lib/data";
+import { getOffer, publicOffer } from "@/lib/catalog/storage";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
 import { getBusinessSettingsSnapshot } from "@/lib/business-settings";
+import { getCurrentUser, isCrmRole } from "@/lib/auth";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -50,12 +53,17 @@ function normalizeAttribution(value: unknown, body: Record<string, unknown>) {
 }
 
 export async function GET() {
+  const user = getCurrentUser();
+  if (!isCrmRole(user?.role)) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   return NextResponse.json({ ok: true, leads });
 }
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => ({})) as Record<string, unknown>;
+  const contentType = request.headers.get("content-type") || "";
+  const body = contentType.includes("application/x-www-form-urlencoded")
+    ? Object.fromEntries((await request.formData()).entries()) as Record<string, unknown>
+    : await request.json().catch(() => ({})) as Record<string, unknown>;
 
   const phone = clean(body.phone, 80);
   const telegram = clean(body.telegram, 160);
@@ -71,16 +79,38 @@ export async function POST(request: Request) {
   }
 
   const createdAt = new Date().toISOString();
-  const clientId = makeId("client");
-  const leadId = makeId("lead");
+  const rawOperationId = clean(body.operationId, 120) || crypto.createHash("sha256").update(`${clean(body.offerId, 200)}:${phone}:${telegram}`).digest("hex").slice(0, 32);
+  const operationId = rawOperationId.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80);
+  const clientId = operationId ? `client_${operationId}` : makeId("client");
+  const leadId = operationId ? `lead_${operationId}` : makeId("lead");
   const attribution = normalizeAttribution(body.attribution, body);
   const source = clean(body.source, 160) || "site";
   const market = clean(body.market, 120);
   const businessSettingsSnapshot = market ? await getBusinessSettingsSnapshot(market) : null;
-  const calculationSnapshot = body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null;
+  const offerId = clean(body.offerId, 200);
+  const offer = offerId ? await getOffer(offerId) : null;
+  const offerSnapshot = offer ? {
+    offerId: offer.id,
+    market: offer.market,
+    make: offer.make,
+    model: offer.model,
+    year: offer.year,
+    mileage: offer.mileageKm,
+    image: offer.images[0]?.url,
+    totalRub: offer.totalRub,
+    sourcePrice: offer.sourcePrice,
+    calculationSnapshot: offer.calculationSnapshot,
+    updatedAt: offer.updatedAt
+  } : null;
+  const calculationSnapshot = offerSnapshot?.calculationSnapshot || (body.calculationSnapshot && typeof body.calculationSnapshot === "object" ? body.calculationSnapshot : null);
+  const existingClients = await readChunkedDataJson<any>("clients/clients.json", []);
+  const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
+  const existingClient = operationId ? existingClients.find((client) => client.operationId === operationId || client.id === clientId || client.id === duplicate?.clientId) : null;
 
-  const client = await appendChunkedDataJson("clients/clients.json", {
+  const clientPayload = {
     id: clientId,
+    operationId,
     createdAt,
     updatedAt: createdAt,
     fio: name,
@@ -98,10 +128,12 @@ export async function POST(request: Request) {
     businessSettingsSnapshot,
     calculationSnapshot,
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
-  });
+  };
+  const client = existingClient || await appendChunkedDataJson("clients/clients.json", { ...clientPayload, id: duplicate?.clientId || clientId });
 
-  const lead = await appendChunkedDataJson("leads/leads.json", {
+  const leadPayload = {
     id: leadId,
+    operationId,
     createdAt,
     updatedAt: createdAt,
     status: "new",
@@ -114,24 +146,26 @@ export async function POST(request: Request) {
         note: "Заявка создана"
       }
     ],
-    clientId,
+    clientId: client.id,
     name,
     phone,
     telegram,
     city,
     comment,
-    carId: clean(body.carId, 200),
-    car: clean(body.car, 500),
-    brand: clean(body.brand, 200),
-    model: clean(body.model, 200),
-    market,
+    carId: offerId || clean(body.carId, 200),
+    offerId,
+    offerSnapshot,
+    car: clean(body.car, 500) || (offer ? `${offer.make} ${offer.model}` : ""),
+    brand: clean(body.brand, 200) || offer?.make || "",
+    model: clean(body.model, 200) || offer?.model || "",
+    market: market || offer?.market || "",
     marketName: clean(body.marketName, 200),
-    year: numberOrNull(body.year),
+    year: numberOrNull(body.year) || offer?.year || null,
     budgetRub: numberOrNull(body.budgetRub),
-    totalRub: numberOrNull(body.totalRub),
+    totalRub: numberOrNull(body.totalRub) || offer?.totalRub || null,
     source,
     ...attribution,
-    attribution,
+    attribution: { ...attribution, landingPage: attribution.lastLandingUrl || attribution.firstLandingUrl, offerId },
     createdByManagerId: null,
     assignedManagerId: null,
     configVersion: businessSettingsSnapshot?.configVersion || "",
@@ -139,10 +173,12 @@ export async function POST(request: Request) {
     businessSettingsSnapshot,
     calculationSnapshot,
     breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
-  });
+  };
+  const lead = duplicate || await appendChunkedDataJson("leads/leads.json", leadPayload);
 
   await appendChunkedDataJson("activity/feed.json", {
-    id: makeId("event"),
+    id: operationId ? `event_${operationId}` : makeId("event"),
+    operationId,
     createdAt,
     type: "lead_created",
     title: "Заявка с сайта",
@@ -154,7 +190,8 @@ export async function POST(request: Request) {
   });
 
   const cpaEvent = await appendChunkedDataJson("cpa/events.json", {
-    id: makeId("cpa"),
+    id: operationId ? `cpa_${operationId}` : makeId("cpa"),
+    operationId,
     createdAt,
     direction: "outbound",
     eventType: "lead_created",
@@ -163,13 +200,15 @@ export async function POST(request: Request) {
     attempts: 0,
     nextAttemptAt: null,
     leadId,
-    clientId,
+    clientId: client.id,
     ...attribution
   });
 
-  if (cpaEvent.deliveryStatus === "pending") {
+  const cpaRetryStatuses = new Set(["pending", "failed", "waiting_config"]);
+  const retryDue = !cpaEvent.nextAttemptAt || Date.parse(cpaEvent.nextAttemptAt) <= Date.now();
+  if (cpaRetryStatuses.has(cpaEvent.deliveryStatus) && retryDue) {
     await deliverCpaEvent(cpaEvent);
   }
 
-  return NextResponse.json({ ok: true, lead });
+  return NextResponse.json({ ok: true, lead, client, recovered: Boolean(duplicate), duplicate: Boolean(duplicate) });
 }

@@ -34,7 +34,7 @@ export function HeroForm() {
     const ref = new URLSearchParams(window.location.search).get("ref");
     if (ref) params.set("ref", ref);
 
-    window.location.href = `/results?${params.toString()}`;
+    window.location.href = `/cars?${params.toString()}`;
   }
 
   return (
@@ -42,7 +42,7 @@ export function HeroForm() {
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>
           <div className="text-xs font-black uppercase tracking-[0.22em] text-red-300">главное поле</div>
-          <label className="mt-1 block text-lg font-black text-white">Ваш бюджет</label>
+          <label className="mt-1 block text-lg font-black text-white">Найдите автомобиль, который можно привезти под ваш бюджет</label>
         </div>
         <div className="hidden rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-white/75 md:block">
           результат за 30 секунд
@@ -102,7 +102,7 @@ export function HeroForm() {
       </div>
 
       <button onClick={submit} className="avto-button mt-4 w-full rounded-2xl px-6 py-5 text-xl font-black md:text-2xl">
-        Узнать АвтоЦену
+        Показать автомобили
       </button>
 
       <div className="mt-4 grid gap-2 text-xs font-bold text-white/55 md:grid-cols-3">
