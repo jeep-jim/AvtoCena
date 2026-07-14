@@ -201,3 +201,20 @@ test("lead route restores missing client and retries failed CPA without resendin
   assert.match(source, /cpaRetryStatuses\.has\(cpaEvent\.deliveryStatus\) && retryDue/);
   assert.doesNotMatch(source, /deliveryStatus === "sent"[\s\S]*deliverCpaEvent/);
 });
+
+test("temporary scan error preserves running scan cycle and cursor", async () => {
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/catalog/importer.ts", "utf-8"));
+  assert.match(source, /status === "completed"\) scan =/);
+  assert.doesNotMatch(source, /status === "completed" \|\| scan\.status === "failed"/);
+  assert.match(source, /status: "running", cursor, lastError: lastHealth\.message, retryAt/);
+  assert.match(source, /scan\.offersSeen \+= seen\.size/);
+});
+
+test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
+  const adapters = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/catalog/adapters.ts", "utf-8"));
+  const smoke = await import("node:fs/promises").then((fs) => fs.readFile("scripts/catalog-smoke.mjs", "utf-8"));
+  assert.match(adapters, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
+  assert.match(adapters, /AbortController/);
+  assert.match(smoke, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
+  assert.match(smoke, /fetchWithTimeout/);
+});

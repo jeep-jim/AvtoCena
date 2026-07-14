@@ -4,11 +4,12 @@ const args = Object.fromEntries(process.argv.slice(2).filter((a) => a.startsWith
 const source = args.source || "encar_direct"; const limit = Number(args.limit || 20); const started = Date.now();
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
 const HEADERS = { "user-agent": "AvtoCenaCatalog/1.0", referer: "https://m.encar.com/" };
+async function fetchWithTimeout(input, init = {}) { const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15000)); try { return await fetch(input, { ...init, signal: controller.signal }); } catch (error) { if (error?.name === "AbortError") throw new Error("source_timeout"); throw error; } finally { clearTimeout(timeout); } }
 async function fetchImageProbe(url) {
   let currentUrl = assertSafeImageUrl(url);
   let res = null;
   for (let redirects = 0; redirects <= 3; redirects++) {
-    res = await fetch(currentUrl, { headers: HEADERS, redirect: "manual" });
+    res = await fetchWithTimeout(currentUrl, { headers: HEADERS, redirect: "manual" });
     if ([301, 302, 303, 307, 308].includes(res.status)) {
       const location = res.headers.get("location");
       if (!location || redirects === 3) return { firstImageStatus: res.status, firstImageContentType: res.headers.get("content-type") || null, firstImageBytes: 0 };
@@ -27,7 +28,7 @@ async function runEncar() {
   const page = await adapter.fetchPage(null); const normalized = page.items.map((raw) => adapter.normalizeOffer(raw)).filter(Boolean); const first = normalized[0];
   let detailStatus = null, detailOk = false, detail = null, imageUrls = 0, imageProbe = { firstImageStatus: null, firstImageContentType: null, firstImageBytes: 0 };
   if (first) {
-    const res = await fetch(`https://api.encar.com/v1/readside/vehicle/${first.sourceOfferId}`, { headers: HEADERS });
+    const res = await fetchWithTimeout(`https://api.encar.com/v1/readside/vehicle/${first.sourceOfferId}`, { headers: HEADERS });
     detailStatus = res.status; detailOk = res.ok && /json/i.test(res.headers.get("content-type") || "");
     detail = detailOk ? await res.json() : null;
     const urls = extractEncarImageUrls(first, detail);
