@@ -15,6 +15,7 @@
     "dev:fresh": "npm run clean:web && npm run dev",
     "test": "node --import tsx --test tests/*.test.ts",
     "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && cd packages/engine && ./node_modules/.bin/tsc --noEmit",
-    "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs"
+    "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
+    "catalog:import": "tsx scripts/catalog-import.mjs"
   }
 }
