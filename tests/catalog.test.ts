@@ -216,5 +216,5 @@ test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
   assert.match(adapters, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
   assert.match(adapters, /AbortController/);
   assert.match(smoke, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
-  assert.match(smoke, /fetchWithTimeout/);
+  assert.match(smoke, /withSourceTimeout/);
 });
