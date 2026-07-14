@@ -87,6 +87,8 @@ type CatalogOffer = {
   power: string;
   delivery: string;
   sourceLabel: string;
+  imageUrl?: string;
+  href?: string;
 };
 
 const landingBenefits: {
@@ -398,6 +400,7 @@ function pluralVariant(count: number) {
 }
 
 function getFilteredCatalogOffers({
+  offers,
   budgetNumber,
   brand,
   model,
@@ -405,6 +408,7 @@ function getFilteredCatalogOffers({
   country,
   bodyType,
 }: {
+  offers: CatalogOffer[];
   budgetNumber: number;
   brand: string;
   model: string;
@@ -412,7 +416,7 @@ function getFilteredCatalogOffers({
   country: string;
   bodyType: string;
 }) {
-  return readyCatalog.filter((offer) => {
+  return offers.filter((offer) => {
     if (budgetNumber > 0 && offer.price > budgetNumber) return false;
     if (brand && offer.brand !== brand) return false;
     if (model && offer.model !== model) return false;
@@ -1162,7 +1166,7 @@ function ReadyCatalogCard({
       className="group min-w-0 overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.045] text-left shadow-[0_20px_70px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:border-red-300/30 hover:bg-white/[0.065] active:scale-[0.99]"
     >
       <div className="relative h-[190px] overflow-hidden sm:h-[205px] xl:h-[180px] 2xl:h-[205px]">
-        <CarPhotoPlaceholder />
+        {offer.imageUrl ? <img src={offer.imageUrl} alt={offer.title} className="h-full w-full object-cover" /> : <CarPhotoPlaceholder />}
 
         <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/34 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-white/86 backdrop-blur">
           {offer.countryLabel}
@@ -1223,7 +1227,10 @@ function ReadyCatalogGrid({
   offers: CatalogOffer[];
   onOpen: (offer: CatalogOffer) => void;
 }) {
-  const visibleOffers = offers.length > 0 ? offers : readyCatalog;
+  const allowDemo = process.env.NODE_ENV !== "production" || process.env.ENABLE_DEMO_CATALOG === "true" || process.env.NEXT_PUBLIC_ENABLE_DEMO_CATALOG === "true";
+  const visibleOffers = offers.length > 0 ? offers : allowDemo ? readyCatalog : [];
+
+  if (!visibleOffers.length) return <div className="rounded-[1.5rem] bg-white/[0.05] p-6 text-sm font-bold leading-6 text-white/62">Каталог обновляется. Оставьте заявку — менеджер подберёт автомобиль.</div>;
 
   return (
     <section className="w-full min-w-0">
@@ -1282,7 +1289,7 @@ function OfferBottomSheet({
       <div className="relative z-10 flex h-full max-h-[100dvh] w-full flex-col overflow-hidden bg-[#0b0d14] md:h-auto md:max-h-[calc(100dvh-40px)] md:max-w-5xl md:rounded-[2rem] md:shadow-[0_30px_120px_rgba(0,0,0,0.72)]">
         <div className="ac-safe-scroll min-h-0 flex-1 overflow-y-auto">
           <div className="relative h-[270px] overflow-hidden sm:h-[340px]">
-            <CarPhotoPlaceholder />
+            {offer.imageUrl ? <img src={offer.imageUrl} alt={offer.title} className="h-full w-full object-cover" /> : <CarPhotoPlaceholder />}
 
             <div className="absolute left-4 top-4 flex max-w-[calc(100%-76px)] flex-wrap gap-2 sm:left-6 sm:top-6">
               <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">
@@ -1798,6 +1805,7 @@ export default function HomePage() {
   const [country, setCountry] = useState("");
   const [bodyType, setBodyType] = useState("");
   const [selectedOffer, setSelectedOffer] = useState<CatalogOffer | null>(null);
+  const [liveOffers, setLiveOffers] = useState<CatalogOffer[]>([]);
   const [siteBusiness, setSiteBusiness] = useState<{ activeMarkets?: string[]; minimumBudgetRub?: number } | null>(null);
 
   useEffect(() => {
@@ -1813,6 +1821,34 @@ export default function HomePage() {
         landingPath: window.location.pathname,
       });
     }
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/catalog/search?pageSize=12&sort=updatedAt", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        const items = Array.isArray(data?.items) ? data.items : [];
+        setLiveOffers(items.slice(0, 12).map((o: any) => ({
+          id: o.id,
+          title: [o.make, o.model, o.trim].filter(Boolean).join(" "),
+          brand: o.make,
+          model: o.model,
+          year: o.year,
+          price: o.totalRub || 0,
+          country: o.market,
+          countryLabel: o.market === "korea" ? "Корея" : o.market,
+          body: o.bodyType || "",
+          bodyLabel: o.bodyType || "Автомобиль",
+          mileage: o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "пробег уточняется",
+          engine: o.engineCc ? `${o.engineCc} см³` : "двигатель уточняется",
+          power: o.powerHp ? `${o.powerHp} л.с.` : "мощность уточняется",
+          delivery: "под ключ",
+          sourceLabel: "живой каталог",
+          imageUrl: o.images?.[0]?.url,
+          href: `/cars/offer/${o.id}`,
+        })));
+      })
+      .catch(() => setLiveOffers([]));
   }, []);
 
   const effectiveCountryOptions = useMemo(() => {
@@ -1842,6 +1878,7 @@ export default function HomePage() {
   const filteredCatalogOffers = useMemo(
     () =>
       getFilteredCatalogOffers({
+        offers: liveOffers,
         budgetNumber,
         brand,
         model,
@@ -1849,7 +1886,7 @@ export default function HomePage() {
         country,
         bodyType,
       }),
-    [budgetNumber, brand, model, yearFrom, country, bodyType],
+    [liveOffers, budgetNumber, brand, model, yearFrom, country, bodyType],
   );
 
   const foundLabel = `🚗 Нашли ${filteredCatalogOffers.length} ${pluralVariant(filteredCatalogOffers.length)}`;
@@ -2037,6 +2074,7 @@ export default function HomePage() {
           </Link>
 
           <nav className="hidden items-center gap-2 text-sm font-bold text-white/72 md:flex">
+            <a href="/cars" className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12">Каталог</a>
             <a
               href="/partner/landing"
               className="rounded-full bg-white/8 px-4 py-2 transition hover:bg-white/12"

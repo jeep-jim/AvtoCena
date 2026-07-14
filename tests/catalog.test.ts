@@ -217,7 +217,8 @@ test("importer refreshes lock during page, vehicle, image and generation process
   assert.match(source, /const refreshLock = \(\) => mutateDataJson/);
   assert.match(source, /fetchPage\(cursor\);[\s\S]*await refreshLock\(\)/);
   assert.match(source, /let images: any\[\] = \[\]; await refreshLock\(\)/);
-  assert.match(source, /source\.fetchImages\(base\); await refreshLock\(\)/);
+  assert.match(source, /process\.env\.CATALOG_MAX_IMAGES_PER_OFFER = String\(maxImagesPerOffer\)/);
+  assert.match(source, /source\.fetchImages\(base\)/);
   assert.match(source, /await refreshLock\(\); await persistCatalogOffers/);
   assert.match(source, /lock\.operationId === operationId/);
 });
@@ -246,4 +247,65 @@ test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
   assert.match(adapters, /AbortController/);
   assert.match(smoke, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
   assert.match(smoke, /withSourceTimeout/);
+});
+
+
+test("Encar sample image limit stops downloading after configured maximum", async () => {
+  resetJsonStorageForTests();
+  const originalFetch = global.fetch;
+  const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
+  const imageUrls: string[] = [];
+  process.env.CATALOG_MAX_IMAGES_PER_OFFER = "1";
+  (global as any).fetch = async (url: string) => {
+    const href = String(url);
+    if (href.includes("/v1/readside/vehicle/ENC_LIMIT")) {
+      return new Response(JSON.stringify({ photos: [{ path: "/carphoto/one.jpg" }, { path: "/carphoto/two.jpg" }, { path: "/carphoto/three.jpg" }] }), { headers: { "content-type": "application/json" } });
+    }
+    imageUrls.push(href);
+    return new Response(new Uint8Array([1, 2, 3, 4]), { headers: { "content-type": "image/jpeg", "content-length": "4" } });
+  };
+  try {
+    const adapter = new EncarDirectAdapter();
+    const offer = adapter.normalizeOffer({ Id: "ENC_LIMIT", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Price: 2000, Photo: "/carphoto/cover.jpg" });
+    assert.ok(offer);
+    const images = await adapter.fetchImages(offer!);
+    assert.equal(images.length, 1);
+    assert.equal(imageUrls.length, 1);
+  } finally {
+    if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER; else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
+    (global as any).fetch = originalFetch;
+  }
+});
+
+test("production catalog activation source checks", async () => {
+  const importer = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/catalog/importer.ts", "utf-8"));
+  const sample = await import("node:fs/promises").then((fs) => fs.readFile("scripts/catalog-import-sample.mjs", "utf-8"));
+  const pkg = await import("node:fs/promises").then((fs) => fs.readFile("package.json", "utf-8"));
+  assert.match(pkg, /catalog:import:sample/);
+  assert.match(sample, /sourceIds: \["encar_direct"\]/);
+  assert.match(sample, /maxOffers: 20/);
+  assert.match(sample, /maxDetails: 20/);
+  assert.match(sample, /maxImagesPerOffer: 3/);
+  assert.match(sample, /maxPages: 1/);
+  assert.match(sample, /failOnZeroSaved: true/);
+  assert.match(sample, /CATALOG_IMPORT_REPORT_FILE/);
+  assert.match(importer, /production_import_requires_object_storage/);
+  assert.match(importer, /YC_OBJECT_STORAGE_BUCKET/);
+});
+
+test("public UI uses live catalog and labels estimates honestly", async () => {
+  const home = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/page.tsx", "utf-8"));
+  const results = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/results/page.tsx", "utf-8"));
+  const cars = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/cars/page.tsx", "utf-8"));
+  assert.match(home, /api\/catalog\/search\?pageSize=12/);
+  assert.match(home, /NODE_ENV !== "production"/);
+  assert.match(home, /ENABLE_DEMO_CATALOG/);
+  assert.match(home, /Каталог обновляется/);
+  assert.match(home, /href="\/cars"[^>]*>Каталог/);
+  assert.match(results, /await searchOffers/);
+  assert.match(results, /Актуальные автомобили/);
+  assert.match(results, /Расчётный пример, не конкретный автомобиль/);
+  assert.match(results, /offerSnapshot/);
+  assert.doesNotMatch(cars, /нужен подключенный feed/);
+  assert.match(cars, /Свежие автомобили пока загружаются/);
 });
