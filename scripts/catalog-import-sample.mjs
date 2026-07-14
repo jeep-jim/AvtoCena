@@ -1,6 +1,22 @@
 process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "20";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "3";
 
+if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
+  const { getJsonStorage } = await import("../apps/web/lib/data.ts");
+  const storage = getJsonStorage();
+  for (const path of [
+    "catalog/internal/manifest.json",
+    "catalog/manifest.json",
+    "catalog/scans/encar_direct.json",
+    "catalog/health/encar_direct.json",
+    "catalog/sources/encar_direct.json",
+    "catalog/import-lock.json",
+  ]) {
+    await storage.deleteJson?.(path);
+  }
+}
+
+await import("../apps/web/lib/catalog/encar-resilience.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
 importCatalog({
