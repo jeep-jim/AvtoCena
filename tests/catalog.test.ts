@@ -174,3 +174,30 @@ test("admin import endpoint accepts token only through x-admin-token header", as
   assert.match(source, /headers\.get\("x-admin-token"\)/);
   assert.doesNotMatch(source, /searchParams\.get\(["']token["']\)/);
 });
+
+test("Encar shared image extractor keeps list cover and gallery", async () => {
+  const adapter = new EncarDirectAdapter();
+  const offer = adapter.normalizeOffer({ Id: "ENC2", Manufacturer: "Kia", Model: "K5", FormYear: "2023", Price: 2100, Photo: "/carphoto/cover.jpg" });
+  assert.ok(offer);
+  const urls = (await import("../apps/web/lib/catalog/adapters")).extractEncarImageUrls(offer!, { photos: [{ path: "/carphoto/gallery.jpg" }] });
+  assert.deepEqual(urls, ["https://ci.encar.com/carphoto/cover.jpg", "https://ci.encar.com/carphoto/gallery.jpg"]);
+});
+
+test("importer refreshes lock during page, vehicle, image and generation processing", async () => {
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/catalog/importer.ts", "utf-8"));
+  assert.match(source, /const refreshLock = \(\) => mutateDataJson/);
+  assert.match(source, /fetchPage\(cursor\);[\s\S]*await refreshLock\(\)/);
+  assert.match(source, /let images: any\[\] = \[\]; await refreshLock\(\)/);
+  assert.match(source, /source\.fetchImages\(base\); await refreshLock\(\)/);
+  assert.match(source, /await refreshLock\(\); await persistCatalogOffers/);
+  assert.match(source, /lock\.operationId === operationId/);
+});
+
+test("lead route restores missing client and retries failed CPA without resending sent CPA", async () => {
+  const source = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/api/leads/route.ts", "utf-8"));
+  assert.match(source, /existingClients/);
+  assert.match(source, /existingClient \|\| await appendChunkedDataJson\("clients\/clients\.json"/);
+  assert.match(source, /new Set\(\["pending", "failed", "waiting_config"\]\)/);
+  assert.match(source, /cpaRetryStatuses\.has\(cpaEvent\.deliveryStatus\) && retryDue/);
+  assert.doesNotMatch(source, /deliveryStatus === "sent"[\s\S]*deliverCpaEvent/);
+});
