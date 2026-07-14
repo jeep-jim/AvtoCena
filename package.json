@@ -18,6 +18,7 @@
     "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && npm --workspace=@avtocena/engine exec tsc -- --noEmit",
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",
-    "catalog:smoke": "tsx scripts/catalog-smoke.mjs"
+    "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
+    "catalog:import:sample": "CATALOG_MAX_IMAGES_PER_OFFER=3 tsx scripts/catalog-import-sample.mjs"
   }
 }

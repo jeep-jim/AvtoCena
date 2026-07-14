@@ -247,3 +247,34 @@ test("source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS", async () => {
   assert.match(smoke, /CATALOG_SOURCE_TIMEOUT_MS \|\| 15000/);
   assert.match(smoke, /withSourceTimeout/);
 });
+
+test("production catalog activation source checks", async () => {
+  const importer = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/lib/catalog/importer.ts", "utf-8"));
+  const sample = await import("node:fs/promises").then((fs) => fs.readFile("scripts/catalog-import-sample.mjs", "utf-8"));
+  const pkg = await import("node:fs/promises").then((fs) => fs.readFile("package.json", "utf-8"));
+  assert.match(pkg, /catalog:import:sample/);
+  assert.match(sample, /sourceIds: \["encar_direct"\]/);
+  assert.match(sample, /maxOffers: 20/);
+  assert.match(sample, /maxDetails: 20/);
+  assert.match(sample, /maxImagesPerOffer: 3/);
+  assert.match(sample, /maxPages: 1/);
+  assert.match(sample, /failOnZeroSaved: true/);
+  assert.match(importer, /production_import_requires_object_storage/);
+  assert.match(importer, /YC_OBJECT_STORAGE_BUCKET/);
+});
+
+test("public UI uses live catalog and labels estimates honestly", async () => {
+  const home = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/page.tsx", "utf-8"));
+  const results = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/results/page.tsx", "utf-8"));
+  const cars = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/cars/page.tsx", "utf-8"));
+  assert.match(home, /api\/catalog\/search\?pageSize=12/);
+  assert.match(home, /NODE_ENV !== "production"/);
+  assert.match(home, /Каталог обновляется/);
+  assert.match(home, /href="\/cars"[^>]*>Каталог/);
+  assert.match(results, /await searchOffers/);
+  assert.match(results, /Актуальные автомобили/);
+  assert.match(results, /Расчётный пример, не конкретный автомобиль/);
+  assert.match(results, /offerSnapshot/);
+  assert.doesNotMatch(cars, /нужен подключенный feed/);
+  assert.match(cars, /Свежие автомобили пока загружаются/);
+});

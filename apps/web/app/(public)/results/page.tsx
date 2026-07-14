@@ -6,6 +6,7 @@ import {
   money,
 } from "@/lib/avtocena";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { searchOffers } from "@/lib/catalog/storage";
 
 function firstParam(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value;
@@ -116,6 +117,16 @@ export default async function ResultsPage({
   const params = (await searchParams) ?? {};
   const input = getSearchInputFromParams(safeParams(params));
   const results = getAvtocenaResults(input);
+  const live = await searchOffers({
+    budgetTo: input.budgetRub,
+    market: input.market,
+    make: input.brand,
+    model: input.model,
+    yearFrom: input.yearFrom,
+    bodyType: input.body,
+    pageSize: 12,
+    sort: "updatedAt",
+  });
   const budget = input.budgetRub;
   const attribution = {
     partnerRef: firstParam(params.ref) || "",
@@ -178,7 +189,7 @@ export default async function ResultsPage({
                   label="Год от"
                   value={input.yearFrom ? String(input.yearFrom) : "не указан"}
                 />
-                <SummaryItem label="Найдено" value={String(results.length)} />
+                <SummaryItem label="Найдено" value={String(live.items.length || results.length)} />
               </div>
 
               <a
@@ -193,15 +204,47 @@ export default async function ResultsPage({
           <section className="mt-7 min-w-0">
             <div className="mb-5">
               <h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">
-                Лучшие варианты
+                Актуальные автомобили
               </h2>
               <p className="mt-1 max-w-2xl text-sm font-bold text-white/52 md:text-base">
-                Сначала показываем варианты в бюджете и близко к бюджету.
+                Сначала показываем реальные предложения из живого каталога. Если совпадений нет — ниже будет расчётный пример.
               </p>
             </div>
 
             <div className="grid min-w-0 gap-5">
-              {results.map((car, index) => (
+
+              {live.items.map((offer: any, index: number) => {
+                const car: any = {
+                  id: offer.id, title: [offer.make, offer.model, offer.trim].filter(Boolean).join(" "),
+                  brand: offer.make, model: offer.model, market: offer.market, marketName: offer.market === "korea" ? "Корея" : offer.market,
+                  bodyName: offer.bodyType || "Автомобиль", year: offer.year, mileageKm: offer.mileageKm,
+                  fuel: offer.fuel || "топливо уточняется", powerHp: offer.powerHp || 0, deliveryDays: 30,
+                  recommendation: "Актуальное предложение из каталога. Наличие и финальную стоимость подтвердит менеджер.",
+                  lines: [], totalRub: offer.totalRub || 0, offerId: offer.id, href: `/cars/offer/${offer.id}`,
+                  offerSnapshot: offer,
+                };
+                return (
+                  <article key={offer.id} className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] md:rounded-[2rem]">
+                    <div className="grid w-full min-w-0 lg:grid-cols-[minmax(300px,34%)_minmax(0,1fr)] xl:grid-cols-[420px_minmax(0,1fr)]">
+                      <div className="relative min-h-[260px] overflow-hidden bg-white/5">
+                        {offer.images?.[0]?.url ? <img src={offer.images[0].url} alt={car.title} className="h-full min-h-[260px] w-full object-cover" /> : <ResultPhoto title={car.title} marketName={car.marketName} bodyName={car.bodyName} year={car.year} mileageKm={car.mileageKm} />}
+                      </div>
+                      <div className="p-4 md:p-6 lg:p-7">
+                        <div className="flex flex-wrap items-center gap-2"><span className="rounded-full bg-red-500 px-3 py-1 text-xs font-black text-white">#{index + 1}</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/70">живой каталог</span></div>
+                        <h3 className="mt-4 text-2xl font-black text-white">{car.title}</h3>
+                        <p className="mt-3 text-sm font-bold text-white/60">{offer.year} · {offer.mileageKm?.toLocaleString("ru-RU") || "—"} км · {offer.bodyType || "кузов уточняется"}</p>
+                        <div className="mt-5 text-3xl font-black text-red-200">{offer.totalRub ? `${money(offer.totalRub)} ₽` : "Цена уточняется"}</div>
+                        <div className="mt-6 grid gap-3 sm:grid-cols-2"><Link href={`/cars/offer/${offer.id}`} className="rounded-2xl bg-white/10 px-5 py-4 text-center font-black text-white">Открыть автомобиль</Link><LeadForm car={car} budgetRub={budget} attribution={attribution} searchRequest={searchRequest} /></div>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+
+              {!live.items.length && <div className="glass rounded-[2rem] p-6"><h3 className="text-2xl font-black">Актуальные автомобили не найдены</h3><p className="mt-2 text-white/60">Откройте <Link href="/cars" className="text-red-200 underline">Каталог</Link> или оставьте заявку — менеджер подберёт автомобиль.</p></div>}
+
+              <div className="mt-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">Ориентировочные расчётные примеры</h2><p className="mt-1 text-sm font-bold text-white/52">Расчётный пример, не конкретный автомобиль.</p></div>
+              {(!live.items.length ? results : []).map((car, index) => (
                 <article
                   key={car.id}
                   className="w-full min-w-0 overflow-hidden rounded-[1.7rem] border border-white/10 bg-white/[0.045] shadow-[0_20px_90px_rgba(0,0,0,0.18)] md:rounded-[2rem]"
@@ -242,7 +285,7 @@ export default async function ResultsPage({
                       <div className="mt-6 grid min-w-0 gap-4 border-t border-white/10 pt-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:items-end">
                         <div className="min-w-0">
                           <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42 md:text-sm">
-                            Итого ориентир
+                            Расчётный пример, не конкретный автомобиль
                           </div>
                           <div className="mt-2 text-3xl font-black tracking-[-0.05em] md:text-4xl">
                             {money(car.totalRub)} ₽

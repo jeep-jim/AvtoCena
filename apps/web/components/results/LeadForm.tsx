@@ -133,6 +133,8 @@ export function LeadForm({ car, budgetRub, attribution, searchRequest }: LeadFor
           source: "results",
           attribution: currentAttribution,
           searchRequest: searchRequest || { budgetRub },
+          offerId: (car as any).offerId || car.id,
+          offerSnapshot: (car as any).offerSnapshot,
         }),
       });
 
