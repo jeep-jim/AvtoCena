@@ -11,7 +11,7 @@ export function PartnerShell({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 md:px-8 md:py-6">
+    <main className="ac-partner-page min-h-screen w-full max-w-[100vw] overflow-x-hidden px-4 py-5 md:px-8 md:py-6">
       <div className="mx-auto w-full max-w-7xl overflow-x-hidden">
         <header className="flex items-center justify-between gap-4">
           <Link href="/" className="flex min-w-0 items-center gap-3">

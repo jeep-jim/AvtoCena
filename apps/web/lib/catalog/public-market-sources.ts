@@ -3,9 +3,12 @@ import type { CatalogFetchResult, CatalogImage, CatalogMarket, CatalogSourceAdap
 
 const BLOCK_RE = /captcha|challenge|access denied|forbidden|cloudflare/i;
 const SOURCE_HEADERS = {
-  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.8",
-  "user-agent": "AvtoCenaCatalog/1.0 (+https://avtocena.com)",
+  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  referer: "https://www.beforward.jp/stocklist",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
 };
 
 function text(value: unknown) {
@@ -45,9 +48,9 @@ async function fetchHtml(url: string) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 20_000));
   try {
-    const response = await fetch(url, { headers: SOURCE_HEADERS, signal: controller.signal });
+    const response = await fetch(url, { headers: SOURCE_HEADERS, signal: controller.signal, redirect: "follow" });
     const html = await response.text();
-    if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(html.slice(0, 800))) {
+    if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(html.slice(0, 1_200))) {
       throw blockedError(`beforward_blocked_${response.status}`, response.status);
     }
     if (!response.ok) throw new Error(`beforward_http_${response.status}`);
@@ -73,7 +76,7 @@ function valueAfterLabel(plain: string, label: string, stopLabels: string[]) {
 }
 
 function collectVehicleChunks(html: string) {
-  const refs = [...html.matchAll(/Ref\.?\s*No\.?[\s\S]{0,180}?([A-Z]{2}\d{5,})/gi)];
+  const refs = [...html.matchAll(/Ref\.?\s*No\.?[\s\S]{0,220}?([A-Z]{1,4}-?\d{4,})/gi)];
   const chunks: Array<{ refNo: string; html: string }> = [];
   const seen = new Set<string>();
 
@@ -85,16 +88,29 @@ function collectVehicleChunks(html: string) {
     const previous = index > 0 ? refs[index - 1].index || 0 : 0;
     const next = index + 1 < refs.length ? refs[index + 1].index || html.length : html.length;
     const start = Math.max(previous, current - 6_000);
-    const end = Math.min(next, current + 12_000);
+    const end = Math.min(next, current + 14_000);
     chunks.push({ refNo, html: html.slice(start, end) });
   });
 
   if (chunks.length) return chunks;
 
   return (html.match(/<article[\s\S]*?<\/article>/gi) || []).map((card) => ({
-    refNo: text(card.match(/([A-Z]{2}\d{5,})/i)?.[1]).toUpperCase(),
+    refNo: text(card.match(/([A-Z]{1,4}-?\d{4,})/i)?.[1]).toUpperCase(),
     html: card,
   }));
+}
+
+function collectImageUrls(card: string) {
+  const candidates: string[] = [];
+  for (const match of card.matchAll(/<img[^>]+(?:data-src|data-original|data-lazy|src)\s*=\s*["']([^"']+)["']/gi)) {
+    candidates.push(match[1]);
+  }
+  for (const match of card.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) {
+    for (const item of match[1].split(",")) candidates.push(item.trim().split(/\s+/)[0]);
+  }
+  return candidates
+    .map(absoluteUrl)
+    .filter((url) => /\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url) && !/cookie|icon|logo|flag|banner|sprite/i.test(url));
 }
 
 export type BeForwardRow = {
@@ -122,7 +138,7 @@ export function parseBeForwardMarketStocklist(html: string): BeForwardRow[] {
     const plain = stripHtml(card);
     const titleFromRef = plain.match(new RegExp(`Ref\\.?\\s*No\\.?\\s*${refNo}\\s+(?:\\d+\\s+pts\\s+)?((?:19|20)\\d{2}\\s+.{2,140}?)(?=\\s+(?:Mileage|Price|\\$|SOLD|UNDER OFFER)\\b)`, "i"))?.[1];
     const titleFromHeading = stripHtml(card.match(/<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/i)?.[1] || "");
-    const titleFromLink = stripHtml(card.match(/<a[^>]+href="[^"]*(?:stocklist|vehicle)[^"]*"[^>]*>([\s\S]{0,500}?(?:19|20)\d{2}[\s\S]{0,250}?)<\/a>/i)?.[1] || "");
+    const titleFromLink = stripHtml(card.match(/<a[^>]+href\s*=\s*["'][^"']*(?:stocklist|vehicle)[^"']*["'][^>]*>([\s\S]{0,700}?(?:19|20)\d{2}[\s\S]{0,350}?)<\/a>/i)?.[1] || "");
     const title = text(titleFromRef || titleFromHeading || titleFromLink).replace(/^(?:\d+\s+pts\s+)?/i, "");
     const titleWithoutYear = title.replace(/^(?:19|20)\d{2}(?:\/\d+)?\s+/, "").trim();
     const titleParts = titleWithoutYear.split(/\s+/).filter(Boolean);
@@ -139,10 +155,8 @@ export function parseBeForwardMarketStocklist(html: string): BeForwardRow[] {
     const auctionGrade = text(plain.match(/Auction grade\s+([^\s]+)/i)?.[1]);
     const price = text(plain.match(/\bPrice\s+\$\s*([0-9,]+)/i)?.[1] || plain.match(/\$\s*([0-9,]+)/)?.[1]);
     const status = /\bSOLD\b/i.test(plain) ? "sold" : /UNDER OFFER/i.test(plain) ? "stale" : "active";
-    const imageUrls = [...card.matchAll(/<img[^>]+(?:data-src|data-original|src)="([^"]+)"/gi)]
-      .map((match) => absoluteUrl(match[1]))
-      .filter((url) => /\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url) && !/cookie|icon|logo|flag|banner/i.test(url));
-    const hrefs = [...card.matchAll(/href="([^"]+)"/gi)].map((match) => match[1]);
+    const imageUrls = collectImageUrls(card);
+    const hrefs = [...card.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1]);
     const detailHref = hrefs.find((href) => href.toUpperCase().includes(refNo)) || hrefs.find((href) => /\/(?:stocklist|vehicle)\//i.test(href)) || "";
 
     return {
@@ -190,24 +204,48 @@ export class BeForwardMarketAdapter implements CatalogSourceAdapter {
     this.label = config.label;
   }
 
+  private stockUrls(page: number) {
+    const configured = process.env[`CATALOG_${this.sourceId.toUpperCase()}_LIST_URL`];
+    const pathUrl = new URL(configured || `https://www.beforward.jp/stocklist/stock_country=${this.stockCountryId}/sortkey=n`);
+    pathUrl.searchParams.set("page", String(page));
+
+    const queryUrl = new URL("https://www.beforward.jp/stocklist");
+    queryUrl.searchParams.set("stock_country", String(this.stockCountryId));
+    queryUrl.searchParams.set("sortkey", "n");
+    queryUrl.searchParams.set("page", String(page));
+
+    return configured ? [pathUrl] : [pathUrl, queryUrl];
+  }
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
-    const base = process.env[`CATALOG_${this.sourceId.toUpperCase()}_LIST_URL`] || `https://www.beforward.jp/stocklist/stock_country%3D${this.stockCountryId}/sortkey%3Dn`;
-    const url = new URL(base);
-    url.searchParams.set("page", String(page));
-    const { response, html } = await fetchHtml(url.toString());
-    const items = parseBeForwardMarketStocklist(html);
+    let finalResponse: Response | null = null;
+    let finalHtml = "";
+    let items: BeForwardRow[] = [];
+
+    for (const url of this.stockUrls(page)) {
+      const { response, html } = await fetchHtml(url.toString());
+      finalResponse = response;
+      finalHtml = html;
+      items = parseBeForwardMarketStocklist(html);
+      if (items.length) break;
+    }
+
+    if (!items.length) {
+      throw new Error(`beforward_parsed_zero_${this.sourceId}_status_${finalResponse?.status || 0}_bytes_${finalHtml.length}`);
+    }
+
     return {
       items,
-      nextCursor: items.length ? String(page + 1) : null,
-      finished: !items.length,
+      nextCursor: String(page + 1),
+      finished: false,
       count: items.length,
       health: {
-        ok: items.length > 0,
+        ok: true,
         message: `${this.label}: parsed ${items.length}`,
         checkedAt: nowIso(),
-        httpStatus: response.status,
-        contentType: response.headers.get("content-type") || "",
+        httpStatus: finalResponse?.status,
+        contentType: finalResponse?.headers.get("content-type") || "",
       },
     };
   }

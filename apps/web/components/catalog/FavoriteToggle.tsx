@@ -54,5 +54,8 @@ export function FavoriteToggle({ offerId, snapshot, className = "", compact = fa
     window.dispatchEvent(new CustomEvent("avtocena:favorites-changed"));
   }
 
-  return <button type="button" onClick={toggle} className={`${inline ? "inline-flex h-8 w-8 align-middle" : compact ? "h-10 w-10" : "h-11 w-11"} ac-favorite-button shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:text-red-400 active:scale-95 ${inline ? "bg-transparent" : "bg-black/30 backdrop-blur"} ${className}`} aria-label={active ? "Убрать из избранного" : "Добавить в избранное"} title={active ? "Убрать из избранного" : "Добавить в избранное"}><StarIcon active={active} /></button>;
+  const size = inline ? "h-8 w-8 align-middle" : compact ? "h-10 w-10" : "h-11 w-11";
+  const surface = inline || compact ? "bg-transparent" : "bg-black/20 backdrop-blur";
+
+  return <button type="button" onClick={toggle} className={`${size} ac-favorite-button inline-flex shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:text-red-400 active:scale-95 ${surface} ${className}`} aria-label={active ? "Убрать из избранного" : "Добавить в избранное"} title={active ? "Убрать из избранного" : "Добавить в избранное"}><StarIcon active={active} /></button>;
 }

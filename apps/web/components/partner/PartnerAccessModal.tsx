@@ -45,7 +45,7 @@ export function PartnerAccessModal({
             onClick={() => setOpen(false)}
           >
             <div
-              className="max-h-[100dvh] w-full overflow-y-auto rounded-t-[2rem] border border-white/12 bg-[#10121a] p-4 shadow-[0_30px_120px_rgba(0,0,0,0.72)] sm:max-w-2xl sm:rounded-[2rem] sm:p-6"
+              className="ac-partner-modal max-h-[100dvh] w-full overflow-y-auto rounded-t-[2rem] border border-white/12 bg-[#10121a] p-4 shadow-[0_30px_120px_rgba(0,0,0,0.72)] sm:max-w-2xl sm:rounded-[2rem] sm:p-6"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-4">
