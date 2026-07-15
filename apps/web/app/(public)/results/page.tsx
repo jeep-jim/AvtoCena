@@ -15,8 +15,6 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
   const yearTo = Number(firstParam(params.yearTo)) || undefined;
   const exact = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: input.market, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, pageSize: 12, sort: "updatedAt" });
-  // offerSnapshot remains part of the lead payload on the vehicle detail page.
-  // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
   const relaxed = !exact.items.length;
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
   const grouped = await Promise.all(marketList.map(async (market) => {
@@ -30,7 +28,12 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
     <PublicHeader backHref="/" backLabel="К подбору" />
     <section className="mx-auto w-full max-w-[1450px] px-4 py-7 md:px-8 md:py-10">
       <div className="ac-result-summary rounded-[1.8rem] bg-white/[0.055] p-5 shadow-[0_24px_90px_rgba(0,0,0,.28)] md:p-7"><div className="grid gap-6 xl:grid-cols-[minmax(260px,.72fr)_minmax(0,1.7fr)_250px] xl:items-center"><div><div className="text-xs font-black uppercase tracking-[0.19em] text-red-500">Ваша АвтоЦена</div><h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.045em] md:text-5xl">{budgetLabel}</h1></div><div className="grid gap-3 grid-cols-2 lg:grid-cols-4"><SummaryItem label="Марка" value={input.brand || "любая"} /><SummaryItem label="Модель" value={input.model || "любая"} /><SummaryItem label="Год" value={yearTo ? "старше 2018" : input.yearFrom ? `от ${input.yearFrom}` : "любой"} /><SummaryItem label="Найдено" value={String(foundCount)} /></div><Link href="/#form" className="avto-button rounded-2xl px-5 py-4 text-center font-black">Изменить параметры</Link></div></div>
-      <section className="mt-9"><div className="flex items-end justify-between gap-4"><div><h2 className="text-4xl font-black tracking-[-0.045em] md:text-6xl">Актуальные автомобили</h2><p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/55 md:text-base">{relaxed ? "Точного совпадения нет — показываем реальные варианты в бюджете по каждому рынку." : "Показываем реальные совпадения по выбранным параметрам."}</p></div><Link href="/cars" className="rounded-2xl bg-white/[0.06] px-5 py-3 text-center font-black">Весь каталог</Link></div>
+      <section className="mt-9">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 md:gap-x-6">
+          <h2 className="text-[36px] font-black leading-[.94] tracking-[-0.045em] md:text-6xl">Актуальные автомобили</h2>
+          <Link href="/cars" className="self-start rounded-2xl bg-white/[0.06] px-4 py-3 text-center text-sm font-black md:px-5 md:text-base">Весь каталог</Link>
+          <p className="col-span-2 max-w-3xl text-sm font-bold leading-6 text-white/55 md:text-base">{relaxed ? "Точного совпадения нет — показываем реальные варианты в бюджете по каждому рынку." : "Показываем реальные совпадения по выбранным параметрам."}</p>
+        </div>
         <div className="mt-8 grid gap-10">{grouped.map((group) => <section key={group.id}><div className="mb-4 flex items-end justify-between"><h3 className="text-3xl font-black">{group.label}</h3><Link href={`/cars?market=${group.id}`} className="font-black text-red-500">Все →</Link></div>{group.items.length ? <div className="ac-result-rail ac-hide-scrollbar">{group.items.map((offer:any) => <CatalogCard key={offer.id} offer={offer} compact />)}</div> : <div className="rounded-2xl bg-white/[0.035] p-5 text-sm font-bold text-white/45">Варианты этого рынка ещё загружаются.</div>}</section>)}</div>
       </section>
     </section>
