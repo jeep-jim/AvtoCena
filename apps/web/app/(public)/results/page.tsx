@@ -14,16 +14,20 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const input = getSearchInputFromParams(safeParams(params));
   const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
   const yearTo = Number(firstParam(params.yearTo)) || undefined;
-  const exact = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: input.market, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, pageSize: 12, sort: "updatedAt" });
   // offerSnapshot remains part of the lead payload on the vehicle detail page.
   // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
-  const relaxed = !exact.items.length;
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
-  const grouped = await Promise.all(marketList.map(async (market) => {
-    const items = exact.items.length ? exact.items.filter((offer:any) => offer.market === market.id) : (await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, pageSize: 8, sort: "updatedAt" })).items;
-    return { ...market, items };
+  const exactGroups = await Promise.all(marketList.map(async (market) => {
+    const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, pageSize: 8, sort: "updatedAt" });
+    return { ...market, items: result.items, total: result.total };
   }));
-  const foundCount = grouped.reduce((sum, group) => sum + group.items.length, 0);
+  const exactTotal = exactGroups.reduce((sum, group) => sum + group.total, 0);
+  const relaxed = exactTotal === 0;
+  const grouped = relaxed ? await Promise.all(marketList.map(async (market) => {
+    const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, pageSize: 8, sort: "updatedAt" });
+    return { ...market, items: result.items, total: result.total };
+  })) : exactGroups;
+  const foundCount = grouped.reduce((sum, group) => sum + group.total, 0);
   const budgetLabel = budgetFrom ? `от ${money(budgetFrom)} ₽` : input.budgetRub ? `до ${money(input.budgetRub)} ₽` : "под ваш запрос";
 
   return <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">

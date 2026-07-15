@@ -22,7 +22,8 @@ const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);
-const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : PUBLIC_CATALOG_SOURCE_IDS;
+const defaultSources = [...new Set([...PUBLIC_CATALOG_SOURCE_IDS, "beforward_public"])];
+const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : defaultSources;
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
