@@ -1,0 +1,288 @@
+/* Final public catalog polish: compact mobile cards, stars, light theme and hero key. */
+
+.ac-flat-button,
+.ac-offer-panel .avto-button {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.ac-market-empty {
+  border: 1px dashed rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.ac-market-all {
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.ac-results-grid > *,
+.ac-market-rail > * {
+  min-width: 0;
+}
+
+/* Header and drawer use the same star metaphor as vehicle cards. */
+.ac-favorite-header > svg,
+.ac-drawer-nav-link[href="/favorites"] span:last-child > svg {
+  display: none !important;
+}
+
+.ac-favorite-header::before,
+.ac-drawer-nav-link[href="/favorites"] span:last-child::before {
+  content: "★";
+  display: block;
+  color: currentColor;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.ac-drawer-nav-link[href="/favorites"] span:last-child::before {
+  font-size: 24px;
+}
+
+@media (min-width: 1024px) {
+  .ac-page-copy > .ac-public-header + div > section:first-child {
+    background-image: url("/KeyLogo.png");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 455px) 52%;
+    background-size: min(23vw, 315px) auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .ac-market-rail {
+    grid-auto-columns: calc((100vw - 46px) / 2) !important;
+    gap: 10px !important;
+    margin-right: -1rem;
+    padding-right: 1rem;
+  }
+
+  .ac-market-rail--similar {
+    grid-auto-columns: calc((100vw - 46px) / 2) !important;
+  }
+
+  .ac-catalog-card--compact {
+    border-radius: 18px !important;
+  }
+
+  .ac-results-grid {
+    gap: 10px !important;
+  }
+
+  .ac-results-grid .ac-catalog-card--compact {
+    width: 100%;
+  }
+}
+
+/* Light theme: neutral white surfaces, visible borders and readable text everywhere. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --text: #151820;
+  --muted: #626b79;
+  --line: #d5dae3;
+  --card: #ffffff;
+  --card-strong: #f3f5f8;
+}
+
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(216, 35, 48, 0.09), transparent 30rem),
+    radial-gradient(circle at 88% 10%, rgba(245, 181, 45, 0.08), transparent 27rem),
+    linear-gradient(180deg, #f7f8fa 0%, #edf0f4 100%) !important;
+  color: #151820;
+}
+
+html[data-theme="light"] .ac-page-copy {
+  background: transparent !important;
+  color: #151820 !important;
+}
+
+html[data-theme="light"] .ac-public-header {
+  border-bottom: 1px solid #dfe3ea !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 8px 30px rgba(35, 42, 55, 0.08) !important;
+}
+
+html[data-theme="light"] .ac-public-header [class~="text-white"],
+html[data-theme="light"] .ac-public-header [class*="text-white/"],
+html[data-theme="light"] .ac-public-header nav a {
+  color: #1c2028 !important;
+}
+
+html[data-theme="light"] .ac-public-header [class*="bg-white/"],
+html[data-theme="light"] .ac-icon-button,
+html[data-theme="light"] .ac-favorite-header {
+  background-color: #f1f3f6 !important;
+}
+
+html[data-theme="light"] .ac-page-copy [class~="text-white"] {
+  color: #151820 !important;
+}
+
+html[data-theme="light"] .ac-page-copy [class*="text-white/"] {
+  color: #5b6472 !important;
+}
+
+html[data-theme="light"] .ac-page-copy .ac-on-image,
+html[data-theme="light"] .ac-page-copy .ac-on-image *,
+html[data-theme="light"] .ac-page-copy .ac-on-image [class~="text-white"],
+html[data-theme="light"] .ac-page-copy .ac-on-image [class*="text-white/"] {
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] .ac-muted-label {
+  color: #6c7481 !important;
+}
+
+html[data-theme="light"] .ac-filter-panel,
+html[data-theme="light"] .ac-catalog-card,
+html[data-theme="light"] .ac-offer-panel,
+html[data-theme="light"] .ac-result-summary,
+html[data-theme="light"] .ac-favorites-card,
+html[data-theme="light"] .ac-market-empty {
+  border: 1px solid #d9dee7 !important;
+  background: #ffffff !important;
+  box-shadow: 0 14px 42px rgba(39, 47, 61, 0.09) !important;
+}
+
+html[data-theme="light"] .ac-market-empty {
+  border-style: dashed !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .ac-summary-item,
+html[data-theme="light"] .ac-spec-item,
+html[data-theme="light"] .ac-filter-more,
+html[data-theme="light"] .ac-offer-panel [class*="bg-white/"],
+html[data-theme="light"] .ac-catalog-card [class*="bg-white/"]:not(.ac-on-image) {
+  border-color: #dce1e9 !important;
+  background-color: #f4f6f8 !important;
+}
+
+html[data-theme="light"] main [class*="border-white/"] {
+  border-color: #d6dbe4 !important;
+}
+
+html[data-theme="light"] .soft-input,
+html[data-theme="light"] .ac-filter-input,
+html[data-theme="light"] .ac-native-select,
+html[data-theme="light"] .ac-search-select,
+html[data-theme="light"] .ac-filter-panel input,
+html[data-theme="light"] .ac-filter-panel select,
+html[data-theme="light"] .ac-offer-panel input,
+html[data-theme="light"] textarea {
+  border: 1px solid #cbd2dd !important;
+  background-color: #f8f9fb !important;
+  color: #171a21 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .soft-input:focus,
+html[data-theme="light"] .ac-filter-input:focus,
+html[data-theme="light"] .ac-native-select:focus,
+html[data-theme="light"] .ac-search-select:focus-visible,
+html[data-theme="light"] .ac-offer-panel input:focus {
+  border-color: rgba(207, 32, 45, 0.65) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(207, 32, 45, 0.09) !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder,
+html[data-theme="light"] .ac-filter-panel input::placeholder,
+html[data-theme="light"] .ac-offer-panel input::placeholder {
+  color: #7a8391 !important;
+  opacity: 1;
+}
+
+html[data-theme="light"] select,
+html[data-theme="light"] select option {
+  color-scheme: light;
+  background-color: #ffffff;
+  color: #171a21;
+}
+
+html[data-theme="light"] .ac-search-menu {
+  border: 1px solid #cfd5df !important;
+  background: #ffffff !important;
+  color: #171a21 !important;
+  box-shadow: 0 22px 60px rgba(35, 42, 55, 0.18) !important;
+}
+
+html[data-theme="light"] .ac-search-menu [class~="text-white"],
+html[data-theme="light"] .ac-search-menu [class*="text-white/"],
+html[data-theme="light"] .ac-search-menu button:not(.bg-red-500) {
+  color: #3d4653 !important;
+}
+
+html[data-theme="light"] .ac-search-menu .ac-search-box,
+html[data-theme="light"] .ac-search-menu input {
+  border-color: #d6dce5 !important;
+  background-color: #f2f4f7 !important;
+  color: #171a21 !important;
+}
+
+html[data-theme="light"] .ac-search-menu input::placeholder {
+  color: #8a929e !important;
+}
+
+html[data-theme="light"] .ac-market-all,
+html[data-theme="light"] .ac-page-copy a[class*="bg-white/"],
+html[data-theme="light"] .ac-page-copy button[class*="bg-white/"] {
+  border: 1px solid #d8dde5 !important;
+  background-color: #f4f6f8 !important;
+  color: #38414e !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .ac-favorite-button {
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  color: #d62331 !important;
+  box-shadow: 0 7px 22px rgba(24, 31, 42, 0.12) !important;
+}
+
+html[data-theme="light"] .ac-offer-panel .ac-favorite-button {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .ac-mobile-drawer {
+  border-left: 1px solid #d9dee7 !important;
+  background: #ffffff !important;
+  color: #171a21 !important;
+  box-shadow: -24px 0 70px rgba(29, 36, 49, 0.2) !important;
+}
+
+html[data-theme="light"] .ac-mobile-drawer [class~="text-white"],
+html[data-theme="light"] .ac-mobile-drawer [class*="text-white/"] {
+  color: #39424f !important;
+}
+
+html[data-theme="light"] .ac-mobile-drawer .ac-drawer-nav-link,
+html[data-theme="light"] .ac-mobile-drawer button[class*="bg-white/"] {
+  border: 1px solid #d9dee7 !important;
+  background: #f4f6f8 !important;
+  color: #1b2028 !important;
+}
+
+html[data-theme="light"] .ac-mobile-drawer .ac-brand-mark {
+  --ac-mark-panel: #202228;
+  --ac-mark-symbol: #ffffff;
+  --ac-mark-divider: #0e0f12;
+}
+
+html[data-theme="light"] .avto-button,
+html[data-theme="light"] .avto-button *,
+html[data-theme="light"] [class*="bg-red-600"],
+html[data-theme="light"] [class*="bg-red-600"] *,
+html[data-theme="light"] .bg-red-500,
+html[data-theme="light"] .bg-red-500 * {
+  color: #ffffff !important;
+}
+
+html[data-theme="light"] .ac-alternative-note {
+  border: 1px solid rgba(151, 105, 16, 0.2) !important;
+  background: #fff7df !important;
+  color: #62470f !important;
+}
