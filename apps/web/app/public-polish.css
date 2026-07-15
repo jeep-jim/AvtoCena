@@ -34,8 +34,8 @@
   .ac-page-copy > div > section:first-of-type::after {
     content: "";
     position: absolute;
-    left: 54%;
-    top: 34%;
+    left: 50%;
+    top: 70%;
     width: clamp(180px, 17vw, 300px);
     aspect-ratio: 1.35;
     background: url('/key-logo.png') center/contain no-repeat;
