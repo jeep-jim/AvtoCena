@@ -32,9 +32,11 @@ export default async function ResultsPage({
 }) {
   const params = (await searchParams) || {};
   const input = getSearchInputFromParams(safeParams(params));
+  const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
   const yearTo = Number(firstParam(params.yearTo)) || undefined;
 
   const exact = await searchOffers({
+    budgetFrom,
     budgetTo: input.budgetRub,
     market: input.market,
     make: input.brand,
@@ -49,6 +51,7 @@ export default async function ResultsPage({
   const alternatives = exact.items.length
     ? { items: [] as any[], total: 0 }
     : await searchOffers({
+        budgetFrom,
         budgetTo: input.budgetRub,
         market: input.market,
         pageSize: 12,
@@ -57,6 +60,11 @@ export default async function ResultsPage({
 
   const shownItems = exact.items.length ? exact.items : alternatives.items;
   const isAlternativeMode = !exact.items.length && alternatives.items.length > 0;
+  const budgetLabel = budgetFrom
+    ? `от ${money(budgetFrom)} ₽`
+    : input.budgetRub
+      ? `до ${money(input.budgetRub)} ₽`
+      : "под ваш запрос";
   // offerSnapshot remains part of the lead payload on the vehicle detail page.
   // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
 
@@ -69,9 +77,7 @@ export default async function ResultsPage({
           <div className="grid gap-6 xl:grid-cols-[minmax(260px,.72fr)_minmax(0,1.7fr)_250px] xl:items-center">
             <div>
               <div className="text-xs font-black uppercase tracking-[0.19em] text-red-300">Ваша АвтоЦена</div>
-              <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.045em] md:text-5xl">
-                {input.budgetRub ? `до ${money(input.budgetRub)} ₽` : "под ваш запрос"}
-              </h1>
+              <h1 className="mt-2 text-4xl font-black leading-[.95] tracking-[-0.045em] md:text-5xl">{budgetLabel}</h1>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4">
@@ -91,7 +97,7 @@ export default async function ResultsPage({
               <h2 className="text-4xl font-black tracking-[-0.045em] md:text-6xl">Актуальные автомобили</h2>
               <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/55 md:text-base">
                 {isAlternativeMode
-                  ? "Точного совпадения нет, поэтому сразу показываем другие реальные варианты в вашем бюджете."
+                  ? "Точного совпадения нет, поэтому сразу показываем другие реальные варианты в выбранном диапазоне."
                   : "Показываем только реальные предложения из загруженного каталога."}
               </p>
             </div>
@@ -100,7 +106,7 @@ export default async function ResultsPage({
 
           {isAlternativeMode ? (
             <div className="ac-alternative-note mt-5 rounded-2xl bg-amber-300/[0.07] p-4 text-sm font-bold leading-6 text-amber-100">
-              Мы ослабили марку, модель и год, но сохранили бюджет{input.market ? " и выбранную страну" : ""}. Так пользователь сразу видит, что ещё можно купить.
+              Мы ослабили марку, модель и год, но сохранили выбранный бюджетный диапазон{input.market && input.market !== "any" ? " и страну" : ""}.
             </div>
           ) : null}
 
