@@ -40,7 +40,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       <CatalogFilters initial={initial} />
       <div className="mt-9 grid gap-12">
         {groupedMarkets.map((market) => <section key={market.id} className="min-w-0">
-          <div className="mb-4 flex items-end justify-between gap-4"><div><div className="text-[11px] font-black uppercase tracking-[0.18em] text-red-500">Рынок поставки</div><h2 className="mt-1 text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2></div><Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link></div>
+          <div className="mb-4 flex items-end justify-between gap-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2><Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link></div>
           {market.items.length ? <div className="ac-market-rail ac-hide-scrollbar">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact />)}</div> : <div className="rounded-[1.5rem] bg-white/[0.035] p-6 text-sm font-bold text-white/48"><strong>Свежие автомобили пока загружаются.</strong> Блок появится автоматически после успешного импорта этого рынка.</div>}
         </section>)}
       </div>
