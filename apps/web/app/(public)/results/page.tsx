@@ -14,6 +14,8 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const input = getSearchInputFromParams(safeParams(params));
   const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
   const yearTo = Number(firstParam(params.yearTo)) || undefined;
+  // offerSnapshot remains part of the lead payload on the vehicle detail page.
+  // Расчётный пример, не конкретный автомобиль, в эту выдачу не подмешивается.
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
   const exactGroups = await Promise.all(marketList.map(async (market) => {
     const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, pageSize: 8, sort: "updatedAt" });
