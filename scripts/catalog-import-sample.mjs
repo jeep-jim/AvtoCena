@@ -8,10 +8,10 @@ const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/publ
 // Useful fallback for a focused Encar verification without changing the all-market production default.
 const encarSample = {
   sourceIds: ["encar_direct"],
-  maxOffers: 24,
-  maxDetails: 24,
+  maxOffers: 20,
+  maxDetails: 20,
   maxImagesPerOffer: 3,
-  maxPages: 2,
+  maxPages: 1,
 };
 const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
 const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
