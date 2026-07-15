@@ -113,6 +113,14 @@ a[class*="from-red-"],
   border: 0 !important;
   outline: 0 !important;
 }
+.ac-partner-page [class*="border-white/"],
+.ac-partner-page [class*="border-red-"],
+.ac-partner-page [class*="border-amber-"],
+.ac-partner-page [class*="border-emerald-"] {
+  border-width: 0 !important;
+  border-color: transparent !important;
+  outline: 0 !important;
+}
 
 .ac-offer-spec-tile,
 .ac-offer-breakdown,
