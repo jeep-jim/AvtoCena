@@ -31,7 +31,6 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     return { ...market, items: result.items, total: result.total };
   }));
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
-
   const initial = Object.fromEntries(["budget","market","make","model","yearFrom","hasPrice","bodyType","mileageTo","engineFrom","powerFrom"].map((key) => [key, first(params[key])])) as Record<string,string>;
 
   return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
@@ -39,11 +38,10 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="max-w-4xl"><h1 className="text-4xl font-black leading-[.98] tracking-[-0.04em] md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}. Каждый рынок показан отдельным блоком.</p></div>
       <CatalogFilters initial={initial} />
-
       <div className="mt-9 grid gap-12">
         {groupedMarkets.map((market) => <section key={market.id} className="min-w-0">
           <div className="mb-4 flex items-end justify-between gap-4"><div><div className="text-[11px] font-black uppercase tracking-[0.18em] text-red-500">Рынок поставки</div><h2 className="mt-1 text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2></div><Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link></div>
-          {market.items.length ? <div className="ac-market-rail ac-hide-scrollbar">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact />)}</div> : <div className="rounded-[1.5rem] bg-white/[0.035] p-6 text-sm font-bold text-white/48">Предложения этого рынка ещё загружаются. Блок появится автоматически после успешного импорта.</div>}
+          {market.items.length ? <div className="ac-market-rail ac-hide-scrollbar">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact />)}</div> : <div className="rounded-[1.5rem] bg-white/[0.035] p-6 text-sm font-bold text-white/48"><strong>Свежие автомобили пока загружаются.</strong> Блок появится автоматически после успешного импорта этого рынка.</div>}
         </section>)}
       </div>
     </section>
