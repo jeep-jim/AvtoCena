@@ -9,12 +9,11 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
-function SpecRow({ label, value }: { label: string; value: string }) {
+function SpecTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-[auto_minmax(18px,1fr)_auto] items-baseline gap-2 py-2 text-sm">
-      <span className="font-bold text-white/52">{label}</span>
-      <span className="mb-1 border-b border-dotted border-white/12" />
-      <span className="max-w-[58%] break-words text-right font-black text-white">{value}</span>
+    <div className="min-w-0 rounded-2xl bg-white/[0.04] px-3.5 py-3">
+      <div className="text-[9px] font-black uppercase tracking-[0.15em] text-white/38">{label}</div>
+      <div className="mt-1 min-w-0 break-words text-[13px] font-black leading-tight text-white md:text-sm">{value}</div>
     </div>
   );
 }
@@ -37,7 +36,7 @@ function priceBreakdown(offer: any): BreakdownLine[] {
   const broker = Math.round((total * 0.05) / 10_000) * 10_000;
   const commission = Math.max(90_000, total - car - logistics - customs - broker);
   return [
-    { id: "car", title: "Стоимость автомобиля", amountRub: car },
+    { id: "car", title: "Стоимость авто", amountRub: car },
     { id: "logistics", title: "Логистика", amountRub: logistics },
     { id: "customs", title: "Таможня и утиль", amountRub: customs },
     { id: "broker", title: "Брокер и оформление", amountRub: broker },
@@ -50,15 +49,15 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   if (!lines.length) return null;
 
   return (
-    <section className="mt-5 rounded-[1.7rem] bg-white/[0.035] p-5 md:p-6">
-      <div className="text-[10px] font-black uppercase tracking-[0.17em] text-white/42">Расчёт под ключ</div>
-      <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] md:text-3xl">Структура АвтоЦены</h2>
-      <p className="mt-3 max-w-4xl text-sm font-medium leading-6 text-white/52">Состав расчёта по текущим настройкам рынка. Финальную стоимость менеджер подтвердит с учётом курса, состояния автомобиля, логистики и города доставки.</p>
-      <div className="mt-5 grid gap-x-8 gap-y-3 md:grid-cols-2">
+    <section className="min-w-0 rounded-[1.35rem] bg-white/[0.04] p-4">
+      <h2 className="text-lg font-black tracking-[-0.025em] md:text-xl">Структура АвтоЦены</h2>
+      <div className="mt-2 border-t border-dotted border-white/20 pt-2">
         {lines.map((line, index) => (
-          <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-2 text-sm font-bold">
-            <span className="text-red-500">·</span>
-            <span className="flex min-w-0 items-baseline gap-2 text-white/68"><span className="min-w-0">{line.title}</span><span className="mb-1 min-w-4 flex-1 border-b border-dotted border-white/10" /></span>
+          <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]">
+            <span className="flex min-w-0 items-baseline gap-2 text-white/62">
+              <span className="min-w-0 truncate">{line.title}</span>
+              <span className="mb-1 min-w-3 flex-1 border-b border-dotted border-white/14" />
+            </span>
             <span className="whitespace-nowrap font-black text-white">{money(line.amountRub)} ₽</span>
           </div>
         ))}
@@ -107,7 +106,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   return (
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/cars" backLabel="В каталог" />
-      <section className="mx-auto w-full max-w-[1450px] px-4 py-7 md:px-8 md:py-10">
+      <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
         <header className="mb-5 min-w-0 md:mb-7">
           <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
           <div className="mt-2 flex min-w-0 items-start gap-1.5">
@@ -116,33 +115,37 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </div>
         </header>
 
-        <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
+        <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(520px,.82fr)] xl:items-start">
           <div className="min-w-0 overflow-hidden">
             <VehicleGallery images={o.images} title={o.title} />
-            <OfferPriceBreakdown offer={o} />
           </div>
-          <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-7 xl:sticky xl:top-24">
+
+          <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-6 xl:sticky xl:top-24">
             <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" panel />
 
             {o.priceMode === "auction_start" ? (
               <p className="mt-3 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
             ) : null}
 
-            <div className="mt-5 divide-y divide-white/[0.045]">
-              <SpecRow label="Год" value={String(o.year)} />
-              <SpecRow label="Пробег" value={o.mileageKm ? `${money(o.mileageKm)} км` : "уточняется"} />
-              <SpecRow label="Двигатель" value={o.engineCc ? `${o.engineCc} см³` : "уточняется"} />
-              <SpecRow label="Топливо" value={o.fuelLabel} />
-              <SpecRow label="Мощность" value={o.powerHp ? `${o.powerHp} л.с.` : "уточняется"} />
-              <SpecRow label="Коробка" value={o.transmissionLabel} />
-              <SpecRow label="Привод" value={o.driveLabel} />
-              <SpecRow label="Кузов" value={o.bodyLabel} />
+            <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-[minmax(0,1.05fr)_minmax(230px,.95fr)] xl:grid-cols-[minmax(0,1fr)_minmax(215px,.95fr)]">
+              <div className="grid min-w-0 grid-cols-2 gap-2.5">
+                <SpecTile label="Год" value={String(o.year)} />
+                <SpecTile label="Пробег" value={o.mileageKm ? `${money(o.mileageKm)} км` : "уточняется"} />
+                <SpecTile label="Двигатель" value={o.engineCc ? `${o.engineCc} см³` : "уточняется"} />
+                <SpecTile label="Топливо" value={o.fuelLabel} />
+                <SpecTile label="Мощность" value={o.powerHp ? `${o.powerHp} л.с.` : "уточняется"} />
+                <SpecTile label="Коробка" value={o.transmissionLabel} />
+                <SpecTile label="Привод" value={o.driveLabel} />
+                <SpecTile label="Кузов" value={o.bodyLabel} />
+              </div>
+              <OfferPriceBreakdown offer={o} />
             </div>
 
-            <div className="mt-5 border-t border-white/[0.07] pt-4">
-              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/42">Статус предложения</div>
-              <p className="mt-1.5 text-xs font-bold leading-5 text-white/58">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
+            <div className="mt-4 rounded-[1.35rem] bg-white/[0.04] p-4">
+              <div className="text-base font-black">Статус предложения</div>
+              <p className="mt-2 text-xs font-medium leading-5 text-white/58">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
+
             <OfferLeadForm offerId={o.id} />
           </aside>
         </div>
