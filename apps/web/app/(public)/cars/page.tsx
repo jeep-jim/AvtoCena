@@ -27,7 +27,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
 
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
   const groupedMarkets = await Promise.all(markets.map(async (market) => {
-    const result = await searchOffers({ ...common, market: market.id, page: 1, pageSize: 10 });
+    const result = await searchOffers({ ...common, market: market.id, page: 1, pageSize: selectedMarket ? 48 : 10 });
     return { ...market, items: result.items, total: result.total };
   }));
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
@@ -36,11 +36,11 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-      <div className="max-w-4xl"><h1 className="text-4xl font-black leading-[.98] tracking-[-0.04em] md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}. Каждый рынок показан отдельным блоком.</p></div>
+      <div className="max-w-4xl"><h1 className="text-4xl font-black leading-[.98] tracking-[-0.04em] md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}. {selectedMarket ? "Показаны все доступные автомобили выбранного рынка." : "Каждый рынок показан отдельным блоком."}</p></div>
       <CatalogFilters initial={initial} />
       <div className="mt-9 grid gap-12">
         {groupedMarkets.map((market) => <section key={market.id} className="min-w-0">
-          <div className="mb-4 flex items-end justify-between gap-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2><Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link></div>
+          <div className="mb-4 flex items-end justify-between gap-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2>{selectedMarket ? <Link href="/cars" className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все рынки →</Link> : <Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link>}</div>
           {market.items.length ? <div className="ac-market-rail ac-hide-scrollbar">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact />)}</div> : <div className="rounded-[1.5rem] bg-white/[0.035] p-6 text-sm font-bold text-white/48"><strong>Свежие автомобили пока загружаются.</strong> Блок появится автоматически после успешного импорта этого рынка.</div>}
         </section>)}
       </div>
