@@ -199,8 +199,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
     }
 
-    await refreshLock();
-    await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
+    await refreshLock(); await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
     report.publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0).length;
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     report.generationId = manifest.generationId;
