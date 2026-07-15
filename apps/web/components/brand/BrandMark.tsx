@@ -1,12 +1,21 @@
+import type { CSSProperties } from "react";
+
 type BrandMarkProps = {
   className?: string;
 };
 
 export function BrandMark({ className = "h-10 w-10" }: BrandMarkProps) {
+  const markStyle = {
+    "--ac-mark-panel": "#FFFFFF",
+    "--ac-mark-symbol": "#202020",
+    "--ac-mark-divider": "#111111",
+  } as CSSProperties;
+
   return (
     <svg
       viewBox="0 0 64 64"
       className={`ac-brand-mark ${className}`}
+      style={markStyle}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
