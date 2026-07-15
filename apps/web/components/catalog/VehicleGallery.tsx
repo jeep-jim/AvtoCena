@@ -103,13 +103,13 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
         </button>
 
         {cleanImages.length > 1 ? (
-          <div className="ac-hide-scrollbar mt-3 flex max-w-full gap-3 overflow-x-auto pb-2 pr-1">
+          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 flex max-w-full gap-3 overflow-x-auto pb-2 pr-1 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 md:pr-0">
             {cleanImages.map((thumbnail, index) => (
               <button
                 key={`${thumbnail}-${index}`}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`relative h-20 w-28 shrink-0 cursor-pointer overflow-hidden rounded-2xl transition duration-200 md:h-28 md:w-40 ${index === activeIndex ? "scale-[1.02] opacity-100" : "opacity-55 hover:opacity-90"}`}
+                className={`relative h-20 w-28 shrink-0 cursor-pointer overflow-hidden rounded-2xl transition duration-200 md:h-28 md:w-full ${index === activeIndex ? "scale-[1.02] opacity-100" : "opacity-55 hover:opacity-90"}`}
                 aria-label={`Открыть фото ${index + 1}`}
                 aria-pressed={index === activeIndex}
               >
