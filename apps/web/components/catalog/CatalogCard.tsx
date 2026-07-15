@@ -27,7 +27,7 @@ export function CatalogCard({ offer, compact = false }: { offer: any; compact?: 
             <FavoriteToggle offerId={o.id} inline snapshot={snapshot} />
             <div className="min-w-0 flex-1">
               <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-400/80">Ориентир</div>
-              <div className="mt-1 text-[22px] font-black leading-none tracking-[-0.045em] text-red-500">{o.totalRub ? `${money(o.totalRub)} ₽` : "Цена уточняется"}</div>
+              <div className="ac-price mt-1 text-[22px] font-black leading-none tracking-[-0.045em] text-red-500">{o.totalRub ? `${money(o.totalRub)} ₽` : "Цена уточняется"}</div>
             </div>
           </div>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-bold text-white/58">
