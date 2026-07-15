@@ -102,7 +102,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const options: CatalogImportOptions = Array.isArray(sourceIdsOrOptions) ? { sourceIds: sourceIdsOrOptions } : (sourceIdsOrOptions || {});
   if (options.requireObjectStorage) assertProductionStorage();
   const sourceIds = options.sourceIds;
-  const desiredImageCount = Math.max(1, Number(options.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 6));
+  const maxImagesPerOffer = Math.max(1, Number(options.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 6));
   const operationId = `catalog_import_${crypto.randomUUID()}`;
   const startedAt = new Date().toISOString();
 
@@ -192,19 +192,19 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             seen.add(base.id);
-            await refreshLock();
+            let images: any[] = []; await refreshLock();
 
-            const previousImages = (previous?.images || []).slice(0, desiredImageCount);
-            let images = previousImages;
+            const previousImages = (previous?.images || []).slice(0, maxImagesPerOffer);
+            images = previousImages;
             let attemptedImages = false;
 
-            if (policy.imagesEnabled && sourceDetails < maxDetails && images.length < desiredImageCount) {
+            if (policy.imagesEnabled && sourceDetails < maxDetails && images.length < maxImagesPerOffer) {
               attemptedImages = true;
               const previousImageLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
-              process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(desiredImageCount);
+              process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
               try {
                 const freshImages = await source.fetchImages(base);
-                images = mergeImages(previousImages, freshImages, desiredImageCount);
+                images = mergeImages(previousImages, freshImages, maxImagesPerOffer);
               } finally {
                 if (previousImageLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
                 else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousImageLimit;
@@ -212,11 +212,11 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               await refreshLock();
               sourceDetails++;
               report.details++;
-            } else if (images.length >= desiredImageCount) {
+            } else if (images.length >= maxImagesPerOffer) {
               report.reusedImageSets++;
             }
 
-            if (attemptedImages && images.length === previousImages.length && images.length < desiredImageCount) {
+            if (attemptedImages && images.length === previousImages.length && images.length < maxImagesPerOffer) {
               report.imageFailures++;
             }
 
@@ -235,7 +235,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               continue;
             }
 
-            if (images.length < desiredImageCount) report.underfilledImages++;
+            if (images.length < maxImagesPerOffer) report.underfilledImages++;
 
             const calculated = await calculateOffer({
               ...base,
@@ -301,8 +301,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
     }
 
-    await refreshLock();
-    await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
+    await refreshLock(); await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
 
     const publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0);
     report.publicOffers = publicOffers.length;
