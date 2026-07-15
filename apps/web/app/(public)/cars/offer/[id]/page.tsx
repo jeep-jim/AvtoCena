@@ -50,12 +50,9 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
 
   return (
     <section className="mt-5 rounded-[1.7rem] bg-white/[0.035] p-5 md:p-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <div className="text-[10px] font-black uppercase tracking-[0.17em] text-white/42">Расчёт под ключ</div>
-          <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] md:text-3xl">Структура АвтоЦены</h2>
-        </div>
-        <div className="text-sm font-black text-white/58">Итого: {money(Number(offer.totalRub || 0))} ₽</div>
+      <div>
+        <div className="text-[10px] font-black uppercase tracking-[0.17em] text-white/42">Расчёт под ключ</div>
+        <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] md:text-3xl">Структура АвтоЦены</h2>
       </div>
       <p className="mt-3 max-w-4xl text-sm font-medium leading-6 text-white/52">Состав расчёта по текущим настройкам рынка. Финальную стоимость менеджер подтвердит с учётом курса, состояния автомобиля, логистики и города доставки.</p>
       <div className="mt-5 grid gap-x-8 gap-y-3 md:grid-cols-2">
