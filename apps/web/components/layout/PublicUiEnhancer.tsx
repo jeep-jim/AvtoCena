@@ -9,6 +9,10 @@ type Preview = {
 
 type LiveCatalogOffer = {
   title?: string;
+  make?: string;
+  model?: string;
+  makeLabel?: string;
+  modelLabel?: string;
   totalRub?: number | null;
   previousTotalRub?: number | null;
   priceDeltaRub?: number | null;
@@ -68,7 +72,7 @@ function readHomeFilterParams() {
   const year = selects[1]?.value || "";
   const market = selects[2]?.value || "";
   const body = BODY_BY_LABEL[cleanText(bodyButton?.textContent)] || "";
-  const params = new URLSearchParams({ pageSize: "1", sort: "updatedAt" });
+  const params = new URLSearchParams({ pageSize: "500", sort: "updatedAt" });
   if (budget.min) params.set("budgetFrom", String(budget.min));
   if (budget.max) params.set("budgetTo", String(budget.max));
   if (brand) { params.set("make", brand); params.set("brand", brand); }
@@ -140,7 +144,8 @@ export function PublicUiEnhancer() {
         const response = await fetch(`/api/catalog/search?${state.params.toString()}`, { cache: "no-store", signal: countController.signal });
         if (!response.ok) return;
         const data = await response.json();
-        const count = Number(data?.total ?? data?.items?.length ?? 0);
+        const itemCount = Array.isArray(data?.items) ? data.items.length : 0;
+        const count = Math.max(Number(data?.total || 0), itemCount);
         const badge = [...state.form.querySelectorAll<HTMLElement>("div,span")].find((node) => /Нашли\s+\d+\s+вариант/i.test(cleanText(node.textContent)) && ![...node.children].some((child) => /Нашли\s+\d+/i.test(cleanText(child.textContent))));
         if (badge) badge.textContent = `🚗 Нашли ${new Intl.NumberFormat("ru-RU").format(count)} вариантов`;
       } catch (error) {
@@ -153,7 +158,7 @@ export function PublicUiEnhancer() {
       countTimer = window.setTimeout(() => {
         restoreCustomLabels();
         void updateCount();
-      }, 180);
+      }, 220);
     };
 
     const enhanceSearchInput = (input: HTMLInputElement) => {
@@ -172,6 +177,33 @@ export function PublicUiEnhancer() {
       button.dataset.value = query;
       button.textContent = `Искать «${query}»`;
       list.prepend(button);
+    };
+
+    const refreshCatalogDatalist = () => {
+      const input = document.querySelector<HTMLInputElement>("section[data-demo-enabled] input.ac-filter-input");
+      if (!input || !trendOffers.length) return;
+      const listId = "ac-home-catalog-suggestions";
+      let datalist = document.getElementById(listId) as HTMLDataListElement | null;
+      if (!datalist) {
+        datalist = document.createElement("datalist");
+        datalist.id = listId;
+        document.body.appendChild(datalist);
+      }
+      const values = new Set<string>();
+      for (const offer of trendOffers) {
+        for (const value of [offer.makeLabel, offer.make, offer.modelLabel, offer.model, offer.title]) {
+          const label = cleanText(value);
+          if (label) values.add(label);
+        }
+      }
+      datalist.replaceChildren(...[...values].sort((a, b) => a.localeCompare(b, "ru")).slice(0, 350).map((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        return option;
+      }));
+      input.setAttribute("list", listId);
+      input.setAttribute("autocomplete", "off");
+      input.setAttribute("aria-label", "Выберите или введите марку либо модель");
     };
 
     const applyTrends = () => {
@@ -204,11 +236,12 @@ export function PublicUiEnhancer() {
       trendController?.abort();
       trendController = new AbortController();
       try {
-        const response = await fetch("/api/catalog/search?pageSize=48&sort=updatedAt", { cache: "no-store", signal: trendController.signal });
+        const response = await fetch("/api/catalog/search?pageSize=120&sort=updatedAt", { cache: "no-store", signal: trendController.signal });
         if (!response.ok) return;
         const data = await response.json();
         trendOffers = Array.isArray(data?.items) ? data.items : [];
         applyTrends();
+        refreshCatalogDatalist();
       } catch (error) {
         if ((error as Error)?.name !== "AbortError") console.warn("home_price_trends_failed");
       }
@@ -265,6 +298,7 @@ export function PublicUiEnhancer() {
     const observer = new MutationObserver(() => {
       restoreCustomLabels();
       applyTrends();
+      refreshCatalogDatalist();
     });
     observer.observe(document.body, { childList: true, subtree: true });
     document.addEventListener("input", handleInput, true);
@@ -281,6 +315,7 @@ export function PublicUiEnhancer() {
       document.removeEventListener("input", handleInput, true);
       document.removeEventListener("change", scheduleCount, true);
       document.removeEventListener("click", handleClick, true);
+      document.getElementById("ac-home-catalog-suggestions")?.remove();
     };
   }, []);
 
