@@ -10,7 +10,7 @@ const encarSample = {
   sourceIds: ["encar_direct"],
   maxOffers: 20,
   maxDetails: 20,
-  maxImagesPerOffer: 8,
+  maxImagesPerOffer: 3,
   maxPages: 1,
 };
 const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
