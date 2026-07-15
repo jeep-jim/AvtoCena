@@ -82,17 +82,15 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
 
       let scan = await readDataJson<any>(`catalog/scans/${source.sourceId}.json`, null);
-      if (!scan || scan.status === "completed") {
-        scan = {
-          scanCycleId: `scan_${crypto.randomUUID()}`,
-          startedAt: new Date().toISOString(),
-          cursor: policy.lastSuccessfulCursor || null,
-          status: "running",
-          pagesProcessed: 0,
-          offersSeen: 0,
-          lastCompletedAt: scan?.lastCompletedAt,
-        };
-      }
+      if (!scan || scan.status === "completed") scan = {
+        scanCycleId: `scan_${crypto.randomUUID()}`,
+        startedAt: new Date().toISOString(),
+        cursor: policy.lastSuccessfulCursor || null,
+        status: "running",
+        pagesProcessed: 0,
+        offersSeen: 0,
+        lastCompletedAt: scan?.lastCompletedAt,
+      };
 
       let cursor: string | null | undefined = scan.cursor || null;
       let page = 0;
@@ -126,8 +124,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             }
 
             const previous = existing.get(base.id);
-            let images: any[] = [];
-            await refreshLock();
+            let images: any[] = []; await refreshLock();
             seen.add(base.id);
             base.operational = { ...base.operational, lastSeenScanCycleId: scan.scanCycleId } as any;
 
