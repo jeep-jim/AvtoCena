@@ -1,4 +1,4 @@
-import { money } from "@/lib/avtocena";
+import { money } from "../../lib/avtocena";
 
 type PriceLike = {
   totalRub?: number | null;
