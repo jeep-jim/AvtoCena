@@ -77,7 +77,46 @@ html[data-theme="light"] .ac-page-copy .ac-on-image,
 html[data-theme="light"] .ac-page-copy .ac-on-image *,
 html[data-theme="light"] .ac-page-copy .ac-on-image [class~="text-white"],
 html[data-theme="light"] .ac-page-copy .ac-on-image [class*="text-white/"] { color: #ffffff !important; }
-.ac-body-picker-panel { position: relative !important; inset: auto !important; }
+
+/* Native arrows are one icon only. Theme background shorthands must not tile the SVG. */
+.ac-native-select {
+  background-repeat: no-repeat !important;
+  background-position: right 15px center !important;
+  background-size: 18px 18px !important;
+}
+html[data-theme="light"] .ac-native-select {
+  background-color: var(--ac-surface-2) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M5 7L9 11L13 7' stroke='%232b303b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 15px center !important;
+  background-size: 18px 18px !important;
+}
+
+/* The body selector opens above the page and never stretches the hero section. */
+.ac-body-picker-panel {
+  position: absolute !important;
+  inset: calc(100% + 8px) 0 auto 0 !important;
+  z-index: 240 !important;
+  margin: 0 !important;
+  max-height: min(430px, 58vh) !important;
+  overflow-y: auto !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+.ac-body-picker-panel button[class*="bg-red-500"] {
+  background: #ff353d !important;
+  color: #ffffff !important;
+}
+.ac-body-picker-panel button[class*="bg-red-500"] svg,
+.ac-body-picker-panel button[class*="bg-red-500"] span {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+html[data-theme="light"] .ac-body-picker-panel {
+  background: #20242d !important;
+  color: #ffffff !important;
+  box-shadow: 0 24px 70px rgba(24,28,38,.28) !important;
+}
 
 /* Search fields stay readable and the caret/chevrons remain visible in both themes. */
 .ac-search-menu input { caret-color: #ff4650 !important; }
@@ -85,9 +124,6 @@ html[data-theme="light"] .ac-page-copy .ac-on-image [class*="text-white/"] { col
 html[data-theme="light"] .ac-search-select,
 html[data-theme="light"] .ac-search-select > span,
 html[data-theme="light"] .ac-search-select svg { color: #171a21 !important; }
-html[data-theme="light"] .ac-native-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M5 7L9 11L13 7' stroke='%232b303b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
-}
 
 /* Live price movement added to the homepage cards. */
 .ac-live-price-trend {
@@ -157,12 +193,40 @@ a[class*="from-red-"],
   box-shadow: 0 16px 38px rgba(0,0,0,.16) !important;
 }
 html[data-theme="light"] .ac-offer-spec-tile,
-html[data-theme="light"] .ac-offer-breakdown,
 html[data-theme="light"] .ac-offer-status {
+  background: #e7ebf2 !important;
   box-shadow: 0 10px 26px rgba(41,47,61,.09) !important;
 }
+html[data-theme="light"] .ac-offer-breakdown,
 html[data-theme="light"] .ac-offer-form {
+  background: #f7f8fb !important;
   box-shadow: 0 16px 34px rgba(41,47,61,.10) !important;
+}
+html[data-theme="light"] .ac-catalog-card > a > div:last-child span[class*="bg-white/"] {
+  background: #dfe4ec !important;
+  color: #465061 !important;
+}
+
+/* Keep the price summary readable on desktop instead of splitting the currency sign. */
+.ac-result-summary h1 {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  font-size: clamp(2.2rem,3.1vw,3.45rem) !important;
+}
+@media (min-width: 1280px) {
+  .ac-result-summary > div {
+    grid-template-columns: minmax(310px,.9fr) minmax(0,1.65fr) 250px !important;
+  }
+}
+@media (max-width: 639px) {
+  .ac-result-summary h1 {
+    white-space: normal !important;
+    font-size: 2.25rem !important;
+  }
+  .ac-body-picker-panel {
+    max-height: min(410px,62vh) !important;
+  }
 }
 `;
 
