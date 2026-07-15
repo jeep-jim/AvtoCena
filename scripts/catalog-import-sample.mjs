@@ -1,16 +1,38 @@
-process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "20";
-process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "3";
+process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "12";
+process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "12";
+process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "2";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "2";
+
+const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
+
+// Useful fallback for a focused Encar verification without changing the all-market production default.
+const encarSample = {
+  sourceIds: ["encar_direct"],
+  maxOffers: 20,
+  maxDetails: 20,
+  maxImagesPerOffer: 3,
+  maxPages: 1,
+};
+const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
+const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
+const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : PUBLIC_CATALOG_SOURCE_IDS;
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
   const storage = getJsonStorage();
+  const sourcePaths = sources.flatMap((sourceId) => [
+    `catalog/scans/${sourceId}.json`,
+    `catalog/health/${sourceId}.json`,
+    `catalog/sources/${sourceId}.json`,
+  ]);
   for (const path of [
     "catalog/internal/manifest.json",
     "catalog/manifest.json",
-    "catalog/scans/encar_direct.json",
-    "catalog/health/encar_direct.json",
-    "catalog/sources/encar_direct.json",
     "catalog/import-lock.json",
+    ...sourcePaths,
   ]) {
     await storage.deleteJson?.(path);
   }
@@ -19,15 +41,20 @@ if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "")
 await import("../apps/web/lib/catalog/encar-resilience.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
+const maxOffers = encarOnly ? encarSample.maxOffers : Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 6);
+const maxDetails = encarOnly ? encarSample.maxDetails : Number(process.env.CATALOG_IMPORT_MAX_DETAILS || maxOffers);
+const maxPages = encarOnly ? encarSample.maxPages : Number(process.env.CATALOG_IMPORT_MAX_PAGES || 1);
+const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 2);
+
 importCatalog({
-  sourceIds: ["encar_direct"],
-  maxOffers: 20,
-  maxDetails: 20,
-  maxImagesPerOffer: 3,
-  maxPages: 1,
+  sourceIds: sources,
+  maxOffers,
+  maxDetails,
+  maxImagesPerOffer,
+  maxPages,
   requireObjectStorage: true,
   failOnZeroSaved: true,
-  reportPath: "catalog/imports/latest-sample.json",
+  reportPath: "catalog/imports/latest-public-markets.json",
 }).then(async (report) => {
   const summary = {
     imported: report.imported,
@@ -36,7 +63,8 @@ importCatalog({
     imageFailures: report.imageFailures,
     publicOffers: report.publicOffers,
     generationId: report.generationId,
-    reportPath: "catalog/imports/latest-sample.json",
+    sources: report.sources,
+    reportPath: "catalog/imports/latest-public-markets.json",
   };
   if (process.env.CATALOG_IMPORT_REPORT_FILE) {
     const fs = await import("node:fs/promises");
