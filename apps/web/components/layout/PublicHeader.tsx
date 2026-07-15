@@ -122,6 +122,11 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
     applyBrowserTheme(next);
   }
 
+  const favoriteButtonClass = theme === "dark"
+    ? "bg-[#ff353d] text-white hover:bg-[#ff353d]"
+    : "bg-[#f1e4e6] text-[#d92534] hover:bg-[#ead7da]";
+  const favoriteBadgeClass = theme === "dark" ? "bg-[#10131b]" : "bg-[#ff353d]";
+
   return (
     <>
       <header className={`ac-public-header sticky top-0 z-50 bg-[#070a12]/90 backdrop-blur-xl ${className}`}>
@@ -148,10 +153,10 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
               <ThemeIcon theme={theme} />
             </button>
 
-            <Link href="/favorites" className="ac-favorite-header relative flex h-11 w-12 items-center justify-center rounded-xl bg-red-500/10 text-red-500 transition hover:bg-red-500/16" aria-label="Избранные автомобили">
+            <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
               <StarIcon />
               {favoritesCount > 0 ? (
-                <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black" style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
+                <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
                   {Math.min(favoritesCount, 99)}
                 </span>
               ) : null}
