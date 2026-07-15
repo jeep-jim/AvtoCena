@@ -11,7 +11,7 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 function SpecTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="ac-offer-spec-tile min-w-0 rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-3.5 py-3 shadow-[0_8px_24px_rgba(3,7,18,0.07)]">
+    <div className="ac-offer-spec-tile min-w-0 rounded-2xl bg-[var(--ac-surface-2)] px-3.5 py-3">
       <div className="ac-offer-spec-label text-[9px] font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]">{label}</div>
       <div className="ac-offer-spec-value mt-1 min-w-0 break-words text-[13px] font-black leading-tight text-[var(--ac-text)] md:text-sm">{value}</div>
     </div>
@@ -49,7 +49,7 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   if (!lines.length) return null;
 
   return (
-    <section className="ac-offer-breakdown min-w-0 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 shadow-[0_8px_24px_rgba(3,7,18,0.07)]">
+    <section className="ac-offer-breakdown min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
       <h2 className="ac-offer-block-title text-lg font-black tracking-[-0.025em] text-[var(--ac-text)] md:text-xl">Структура АвтоЦены</h2>
       <div className="ac-offer-breakdown-lines mt-2 border-t border-dotted border-[var(--ac-border)] pt-2">
         {lines.map((line, index) => (
@@ -126,7 +126,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </div>
 
           <aside className="ac-offer-detail-stack min-w-0 xl:sticky xl:top-24">
-            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel border border-red-500/10 shadow-[0_8px_24px_rgba(3,7,18,0.07)]" panel />
+            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
 
             {o.priceMode === "auction_start" ? (
               <p className="mt-4 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
@@ -146,12 +146,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
               <OfferPriceBreakdown offer={o} />
             </div>
 
-            <div className="ac-offer-status mt-4 rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4 shadow-[0_8px_24px_rgba(3,7,18,0.07)]">
+            <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <div className="ac-offer-block-title text-base font-black text-[var(--ac-text)]">Статус предложения</div>
               <p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
 
-            <div className="ac-offer-form mt-5 rounded-[1.8rem] border border-[var(--ac-border)] bg-[var(--ac-surface)] p-5 shadow-[0_12px_32px_rgba(3,7,18,0.08)] md:p-6 [&>form]:mt-0">
+            <div className="ac-offer-form mt-5 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-6 [&>form]:mt-0">
               <OfferLeadForm offerId={o.id} />
             </div>
           </aside>
@@ -159,11 +159,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
         <section className="mt-12 md:mt-16">
           <div className="flex items-end justify-between gap-3">
-            <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42">Ещё варианты</div>
-              <h2 className="mt-2 text-3xl font-black md:text-5xl">Похожие автомобили</h2>
-            </div>
-            <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="font-black">Смотреть все →</Link>
+            <h2 className="text-3xl font-black md:text-5xl">Ещё варианты</h2>
+            <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 font-black">Все →</Link>
           </div>
           {similar.length ? (
             <div className="ac-result-rail ac-hide-scrollbar mt-6">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div>
