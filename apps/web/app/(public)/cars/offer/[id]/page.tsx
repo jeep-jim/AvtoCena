@@ -109,8 +109,13 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
         <header className="mb-5 min-w-0 md:mb-7">
           <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
-          <div className="mt-2 flex min-w-0 items-start gap-1.5">
-            <FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="-ml-1 mt-0.5 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none" />
+          <div className="mt-2 flex min-w-0 items-start gap-2 md:gap-3">
+            <FavoriteToggle
+              offerId={o.id}
+              snapshot={snapshot}
+              inline
+              className="-ml-1 -mt-0.5 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-mt-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10"
+            />
             <h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1>
           </div>
         </header>
@@ -120,11 +125,11 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             <VehicleGallery images={o.images} title={o.title} />
           </div>
 
-          <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-6 xl:sticky xl:top-24">
+          <aside className="min-w-0 xl:sticky xl:top-24">
             <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" panel />
 
             {o.priceMode === "auction_start" ? (
-              <p className="mt-3 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
+              <p className="mt-4 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
             ) : null}
 
             <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-[minmax(0,1.05fr)_minmax(230px,.95fr)] xl:grid-cols-[minmax(0,1fr)_minmax(215px,.95fr)]">
@@ -146,7 +151,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
               <p className="mt-2 text-xs font-medium leading-5 text-white/58">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
 
-            <OfferLeadForm offerId={o.id} />
+            <div className="mt-5 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-6 [&>form]:mt-0">
+              <OfferLeadForm offerId={o.id} />
+            </div>
           </aside>
         </div>
 
