@@ -134,10 +134,38 @@ export function catalogMarketName(value: unknown) {
   return marketNames[key] || translateCatalogText(value) || "Рынок уточняется";
 }
 
-export function catalogBodyName(value: unknown) {
+function inferBodyFromOffer(offer: any) {
+  const text = translateCatalogText([
+    offer?.make,
+    offer?.model,
+    offer?.generation,
+    offer?.trim,
+    offer?.bodyType,
+  ]).toLowerCase();
+
+  if (!text) return "";
+  if (/\b(coupe|купе)\b|쿠페/.test(text)) return "Купе";
+  if (/\b(convertible|cabrio|roadster|кабриолет)\b/.test(text)) return "Кабриолет";
+  if (/\b(wagon|estate|touring|avant|универсал)\b/.test(text)) return "Универсал";
+  if (/\b(pickup|пикап|double cab)\b/.test(text)) return "Пикап";
+  if (/\b(cargo|panel van|фургон)\b/.test(text)) return "Фургон";
+  if (/\b(carnival|staria|starex|grand starex|h-1|mpv|minivan|минивэн|odyssey|sienna|alphard|vellfire|serena|noah|voxy)\b/.test(text)) return "Минивэн";
+  if (/\b(gv60|gv70|gv80|tucson|santa fe|santafe|sorento|sportage|palisade|kona|seltos|casper|venue|niro|glc|gle|gls|x1|x2|x3|x4|x5|x6|x7|q3|q5|q7|q8|rav4|harrier|cr-v|vezel|cx-3|cx-30|cx-4|cx-5|cx-8|cx-9|suv|crossover|кроссовер|внедорожник)\b/.test(text)) return "Кроссовер";
+  if (/\b(spark|morning|picanto|ray|i10|i20|i30|golf|hatchback|хэтчбек)\b/.test(text)) return "Хэтчбек";
+  if (/\b(g70|g80|g90|sonata|avante|elantra|grandeur|azera|k3|k5|k7|k8|camry|corolla|accord|civic|sedan|saloon|седан|e class|cls|s class|a6|a8|3 series|5 series|7 series)\b/.test(text)) return "Седан";
+  return "";
+}
+
+export function catalogBodyName(value: unknown, offer?: any) {
   const raw = safeCatalogText(value);
   const key = raw.toLowerCase().replace(/[^a-z]/g, "");
-  return bodyNames[key] || translateCatalogText(raw) || "Автомобиль";
+  if (bodyNames[key]) return bodyNames[key];
+
+  const translated = translateCatalogText(raw);
+  const translatedKey = translated.toLowerCase().replace(/[^a-z]/g, "");
+  if (bodyNames[translatedKey]) return bodyNames[translatedKey];
+
+  return inferBodyFromOffer(offer) || "уточняется";
 }
 
 export function catalogFuelName(value: unknown) {
@@ -194,7 +222,7 @@ export function presentCatalogOffer(offer: any) {
     modelLabel: translateCatalogText(offer?.model) || "Модель уточняется",
     trimLabel: translateCatalogText(offer?.trim),
     marketLabel: catalogMarketName(offer?.market),
-    bodyLabel: catalogBodyName(offer?.bodyType),
+    bodyLabel: catalogBodyName(offer?.bodyType, offer),
     fuelLabel: catalogFuelName(offer?.fuel),
     transmissionLabel: catalogTransmissionName(offer?.transmission),
     driveLabel: catalogDriveName(offer?.drive),
