@@ -107,21 +107,20 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/cars" backLabel="В каталог" />
       <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-        <header className="mb-5 min-w-0 md:mb-7">
-          <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
-          <div className="relative mt-2 min-w-0">
-            <FavoriteToggle
-              offerId={o.id}
-              snapshot={snapshot}
-              inline
-              className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10"
-            />
-            <h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1>
-          </div>
-        </header>
-
         <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(520px,.82fr)] xl:items-start">
           <div className="min-w-0 overflow-hidden">
+            <header className="mb-5 min-w-0 md:mb-7">
+              <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
+              <div className="relative mt-2 min-w-0">
+                <FavoriteToggle
+                  offerId={o.id}
+                  snapshot={snapshot}
+                  inline
+                  className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10"
+                />
+                <h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1>
+              </div>
+            </header>
             <VehicleGallery images={o.images} title={o.title} />
           </div>
 
@@ -157,15 +156,15 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </aside>
         </div>
 
-        <section className="mt-12 md:mt-16">
+        <section className="mt-10 md:mt-14">
           <div className="flex items-end justify-between gap-3">
-            <h2 className="text-3xl font-black md:text-5xl">Ещё варианты</h2>
-            <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 font-black">Все →</Link>
+            <h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2>
+            <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link>
           </div>
           {similar.length ? (
-            <div className="ac-result-rail ac-hide-scrollbar mt-6">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div>
+            <div className="ac-result-rail ac-hide-scrollbar mt-5">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div>
           ) : (
-            <div className="mt-6 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>
+            <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>
           )}
         </section>
       </section>

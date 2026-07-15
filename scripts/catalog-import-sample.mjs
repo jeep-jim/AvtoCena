@@ -1,7 +1,10 @@
-process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "12";
-process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "12";
-process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "2";
-process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "3";
+process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "24";
+process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "24";
+process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "12";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "6";
+process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= "224";
+process.env.CATALOG_OFFER_RETENTION_MS ||= String(2 * 24 * 60 * 60 * 1000);
+process.env.CATALOG_STALE_GRACE_MS ||= String(2 * 24 * 60 * 60 * 1000);
 
 const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
 
@@ -45,11 +48,13 @@ const requestedOffers = Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 0);
 const requestedDetails = Number(process.env.CATALOG_IMPORT_MAX_DETAILS || 0);
 const requestedPages = Number(process.env.CATALOG_IMPORT_MAX_PAGES || 0);
 const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 0);
+const targetPublicOffers = Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 224);
+const minimumPerSource = Math.max(1, Math.ceil(targetPublicOffers / Math.max(1, sources.length)));
 
-const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(24, requestedOffers || 24);
-const maxDetails = encarOnly ? encarSample.maxDetails : Math.max(24, requestedDetails || maxOffers);
-const maxPages = encarOnly ? encarSample.maxPages : Math.max(2, requestedPages || 2);
-const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Math.min(3, Math.max(1, requestedImages || 3));
+const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(minimumPerSource, requestedOffers || minimumPerSource);
+const maxDetails = encarOnly ? encarSample.maxDetails : Math.max(maxOffers, requestedDetails || maxOffers);
+const maxPages = encarOnly ? encarSample.maxPages : Math.max(4, requestedPages || 4);
+const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Math.max(6, requestedImages || 6);
 
 importCatalog({
   sourceIds: sources,
@@ -64,9 +69,15 @@ importCatalog({
   const summary = {
     imported: report.imported,
     updated: report.updated,
+    expired: report.expired,
     skipped: report.skipped,
     imageFailures: report.imageFailures,
+    underfilledImages: report.underfilledImages,
+    reusedImageSets: report.reusedImageSets,
     publicOffers: report.publicOffers,
+    publicByMarket: report.publicByMarket,
+    targetPublicOffers: report.targetPublicOffers,
+    targetReached: report.targetReached,
     generationId: report.generationId,
     sources: report.sources,
     reportPath: "catalog/imports/latest-public-markets.json",

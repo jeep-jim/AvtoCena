@@ -4,7 +4,7 @@ import { calculateOffer, catalogSources } from "./adapters";
 import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
 import { getSourcePolicy, policyAllowsRun, updatePolicyAfterRun } from "./policy";
-import type { VehicleOffer } from "./types";
+import type { CatalogImage, VehicleOffer } from "./types";
 
 export type CatalogImportOptions = {
   sourceIds?: string[];
@@ -27,6 +27,50 @@ function assertProductionStorage() {
   for (const name of ["YC_OBJECT_STORAGE_BUCKET", "YC_OBJECT_STORAGE_ACCESS_KEY_ID", "YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"]) {
     if (!process.env[name]) throw new Error(`production_import_missing_${name}`);
   }
+}
+
+function imageIdentity(image: CatalogImage | undefined) {
+  if (!image) return "";
+  return String(image.id || image.checksum || image.objectKey || image.url || "");
+}
+
+function mergeImages(previous: CatalogImage[], fresh: CatalogImage[], limit: number) {
+  const result: CatalogImage[] = [];
+  const seen = new Set<string>();
+  for (const image of [...previous, ...fresh]) {
+    const key = imageIdentity(image);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(image);
+    if (result.length >= limit) break;
+  }
+  return result;
+}
+
+function mergeOfferBase(previous: VehicleOffer | undefined, base: VehicleOffer, seenAt: string, scanCycleId: string) {
+  if (!previous) {
+    return {
+      ...base,
+      operational: {
+        ...base.operational,
+        lastSeenScanCycleId: scanCycleId,
+        lastSeenAt: seenAt,
+      },
+    } as VehicleOffer;
+  }
+
+  return {
+    ...previous,
+    ...base,
+    firstSeenAt: previous.firstSeenAt || base.firstSeenAt,
+    images: previous.images || [],
+    operational: {
+      ...previous.operational,
+      ...base.operational,
+      lastSeenScanCycleId: scanCycleId,
+      lastSeenAt: seenAt,
+    },
+  } as VehicleOffer;
 }
 
 export function applyPriceTrend(next: VehicleOffer, previous: VehicleOffer | undefined, changedAt: string): VehicleOffer {
@@ -58,7 +102,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const options: CatalogImportOptions = Array.isArray(sourceIdsOrOptions) ? { sourceIds: sourceIdsOrOptions } : (sourceIdsOrOptions || {});
   if (options.requireObjectStorage) assertProductionStorage();
   const sourceIds = options.sourceIds;
-  const maxImagesPerOffer = options.maxImagesPerOffer;
+  const maxImagesPerOffer = Math.max(1, Number(options.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 6));
   const operationId = `catalog_import_${crypto.randomUUID()}`;
   const startedAt = new Date().toISOString();
 
@@ -70,8 +114,30 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const refreshLock = () => mutateDataJson<any>("catalog/import-lock.json", { lockedUntil: "" }, (lock) => lock.operationId === operationId
     ? { ...lock, lockedUntil: new Date(Date.now() + 15 * 60 * 1000).toISOString(), heartbeatAt: new Date().toISOString() }
     : lock);
-  const existing = new Map((await readAllOffersForMaintenance()).map((offer) => [offer.id, offer]));
-  const report: any = { operationId, startedAt, imported: 0, updated: 0, expired: 0, skipped: 0, imageFailures: 0, details: 0, sources: [] };
+
+  const storedOffers = await readAllOffersForMaintenance();
+  const existing = new Map(storedOffers.map((offer) => {
+    const operational = offer.operational as any;
+    if (!operational?.lastSeenAt) {
+      offer.operational = { ...offer.operational, lastSeenAt: startedAt } as any;
+    }
+    return [offer.id, offer] as const;
+  }));
+
+  const report: any = {
+    operationId,
+    startedAt,
+    imported: 0,
+    updated: 0,
+    expired: 0,
+    skipped: 0,
+    imageFailures: 0,
+    underfilledImages: 0,
+    reusedImageSets: 0,
+    details: 0,
+    targetPublicOffers: Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 224),
+    sources: [],
+  };
 
   try {
     for (const source of catalogImportSources.filter((item) => !sourceIds?.length || sourceIds.includes(item.sourceId))) {
@@ -117,40 +183,65 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
           await refreshLock();
 
           for (const raw of fetched.items.slice(0, maxOffers - seen.size)) {
-            const base = source.normalizeOffer(raw);
-            if (!base) {
+            const normalized = source.normalizeOffer(raw);
+            if (!normalized) {
               report.skipped++;
               continue;
             }
 
-            const previous = existing.get(base.id);
-            let images: any[] = []; await refreshLock();
+            const previous = existing.get(normalized.id);
+            const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             seen.add(base.id);
-            base.operational = { ...base.operational, lastSeenScanCycleId: scan.scanCycleId } as any;
+            let images: any[] = []; await refreshLock();
 
-            if (policy.imagesEnabled && sourceDetails < maxDetails) {
+            const previousImages = (previous?.images || []).slice(0, maxImagesPerOffer);
+            images = previousImages;
+            let attemptedImages = false;
+
+            if (policy.imagesEnabled && sourceDetails < maxDetails && images.length < maxImagesPerOffer) {
+              attemptedImages = true;
               const previousImageLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
-              if (maxImagesPerOffer) process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
+              process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
               try {
-                images = await source.fetchImages(base);
+                const freshImages = await source.fetchImages(base);
+                images = mergeImages(previousImages, freshImages, maxImagesPerOffer);
               } finally {
                 if (previousImageLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
                 else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousImageLimit;
               }
               await refreshLock();
-              if (maxImagesPerOffer) images = images.slice(0, maxImagesPerOffer);
               sourceDetails++;
               report.details++;
+            } else if (images.length >= maxImagesPerOffer) {
+              report.reusedImageSets++;
+            }
+
+            if (attemptedImages && images.length === previousImages.length && images.length < maxImagesPerOffer) {
+              report.imageFailures++;
             }
 
             if (!images.length) {
-              report.imageFailures++;
               report.skipped++;
-              if (previous) existing.set(base.id, { ...previous, updatedAt: base.updatedAt, operational: { ...previous.operational, lastSeenScanCycleId: scan.scanCycleId } });
+              if (previous) {
+                existing.set(base.id, {
+                  ...previous,
+                  operational: {
+                    ...previous.operational,
+                    lastSeenScanCycleId: scan.scanCycleId,
+                    lastSeenAt: startedAt,
+                  },
+                } as VehicleOffer);
+              }
               continue;
             }
 
-            const calculated = await calculateOffer({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });
+            if (images.length < maxImagesPerOffer) report.underfilledImages++;
+
+            const calculated = await calculateOffer({
+              ...base,
+              images,
+              firstSeenAt: previous?.firstSeenAt || base.firstSeenAt,
+            });
             const offer = applyPriceTrend(calculated, previous, startedAt);
             previous ? report.updated++ : report.imported++;
             existing.set(offer.id, offer);
@@ -187,7 +278,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       if (sourceOk && sourceExhausted && !stoppedByLimit && scan.offersSeen > 0) {
         const previousSourceCount = [...existing.values()].filter((offer) => offer.sourceId === source.sourceId).length;
         if (!(previousSourceCount >= 10000 && scan.offersSeen <= 100)) {
-          const graceMs = Number(process.env.CATALOG_STALE_GRACE_MS || 86_400_000);
+          const graceMs = Number(process.env.CATALOG_STALE_GRACE_MS || 172_800_000);
           const now = Date.now();
           for (const offer of existing.values()) {
             if (offer.sourceId === source.sourceId && (offer.operational as any)?.lastSeenScanCycleId !== scan.scanCycleId && now - Date.parse(offer.updatedAt) > graceMs) {
@@ -199,8 +290,27 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
     }
 
+    const retentionMs = Number(process.env.CATALOG_OFFER_RETENTION_MS || 172_800_000);
+    const now = Date.now();
+    for (const offer of existing.values()) {
+      if (offer.status !== "active") continue;
+      const lastSeenAt = Date.parse(String((offer.operational as any)?.lastSeenAt || ""));
+      if (Number.isFinite(lastSeenAt) && now - lastSeenAt > retentionMs) {
+        offer.status = "stale";
+        report.expired++;
+      }
+    }
+
     await refreshLock(); await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
-    report.publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0).length;
+
+    const publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0);
+    report.publicOffers = publicOffers.length;
+    report.publicByMarket = publicOffers.reduce((totals: Record<string, number>, offer: any) => {
+      totals[offer.market] = (totals[offer.market] || 0) + 1;
+      return totals;
+    }, {});
+    report.targetReached = report.publicOffers >= report.targetPublicOffers;
+
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     report.generationId = manifest.generationId;
     const reportPath = options.reportPath || `catalog/imports/${startedAt.replace(/[:.]/g, "-")}.json`;
