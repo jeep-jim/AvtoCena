@@ -9,7 +9,24 @@ import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { appendAttributionToSearchParams, captureAttributionFromBrowser, trackAttributionEvent } from "@/lib/attribution";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
-const budgetOptions = [1500000, 2000000, 2500000, 3000000, 4000000, 5000000];
+type BudgetOption = {
+  value: string;
+  label: string;
+  min?: number;
+  max?: number;
+};
+
+const budgetOptions: BudgetOption[] = [
+  { value: "to-1500000", label: "до 1 500 000 ₽", max: 1_500_000 },
+  { value: "to-2000000", label: "до 2 000 000 ₽", max: 2_000_000 },
+  { value: "to-2500000", label: "до 2 500 000 ₽", max: 2_500_000 },
+  { value: "to-3000000", label: "до 3 000 000 ₽", max: 3_000_000 },
+  { value: "to-4000000", label: "до 4 000 000 ₽", max: 4_000_000 },
+  { value: "to-5000000", label: "до 5 000 000 ₽", max: 5_000_000 },
+  { value: "to-6000000", label: "до 6 000 000 ₽", max: 6_000_000 },
+  { value: "from-6000000", label: "от 6 000 000 ₽", min: 6_000_000 },
+];
+
 const yearOptions = [
   { value: "", label: "Любой год" },
   { value: "2026", label: "2026" },
@@ -23,6 +40,7 @@ const yearOptions = [
   { value: "2018", label: "2018" },
   { value: "older", label: "Старше 2018" },
 ];
+
 const marketOptions = [
   { value: "", label: "Любая страна" },
   { value: "japan", label: "Япония" },
@@ -31,6 +49,7 @@ const marketOptions = [
   { value: "uae", label: "ОАЭ" },
   { value: "europe", label: "Европа" },
 ];
+
 const bodyOptions = [
   { value: "", label: "Любой кузов" },
   { value: "suv", label: "Кроссовер" },
@@ -45,6 +64,7 @@ const bodyOptions = [
   { value: "pickup", label: "Пикап" },
   { value: "van", label: "Фургон" },
 ];
+
 const brandOptions = ["", "Toyota", "Honda", "Hyundai", "Kia", "Chevrolet", "Mercedes-Benz", "BMW", "Audi", "Lexus", "Genesis", "KGM"];
 const buyerPhotos = Array.from({ length: 15 }, (_, index) => ({ src: `/buyers/${index + 1}.jpg`, alt: `Клиент TopAvto ${index + 1}` }));
 const benefits = [
@@ -172,15 +192,37 @@ function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder
 }
 
 function BodyIcon({ type }: { type: string }) {
-  const roof = type === "sedan" ? "M9 14L15 8H34L42 14" : type === "pickup" ? "M8 14L14 9H29L34 14H48" : type === "minivan" || type === "van" ? "M8 14L12 7H42L48 14" : "M8 14L15 8H38L46 14";
-  return (
-    <svg width="48" height="27" viewBox="0 0 56 30" fill="none" aria-hidden="true">
-      <path d={roof} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6 15H49C51 15 52 16.5 52 18.5V21H4V18C4 16.3 4.8 15.3 6 15Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" strokeWidth="2" />
-      <circle cx="15" cy="22" r="4" fill="#12141b" stroke="currentColor" strokeWidth="2" />
-      <circle cx="43" cy="22" r="4" fill="#12141b" stroke="currentColor" strokeWidth="2" />
-    </svg>
+  const wheels = (
+    <>
+      <circle cx="16" cy="24" r="4" fill="#151820" stroke="currentColor" strokeWidth="2.1" />
+      <circle cx="43" cy="24" r="4" fill="#151820" stroke="currentColor" strokeWidth="2.1" />
+    </>
   );
+  const props = { width: 52, height: 31, viewBox: "0 0 58 34", fill: "none", "aria-hidden": true } as const;
+
+  if (!type) {
+    return (
+      <svg {...props}>
+        <path d="M13 11.5L17.5 6.5H40.5L45 11.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M9 14.5C9 12.8 10.3 11.5 12 11.5H46C47.7 11.5 49 12.8 49 14.5V19.5C49 21.2 47.7 22.5 46 22.5H12C10.3 22.5 9 21.2 9 19.5V14.5Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="18" cy="17.4" r="2.65" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="40" cy="17.4" r="2.65" stroke="currentColor" strokeWidth="2.2" />
+        <path d="M24 20.6H34" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === "suv") return <svg {...props}><path d="M5 21.5V17L11 10H39L49 16L53 21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M14 10L18 5.5H35L40 10M6 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />{wheels}</svg>;
+  if (type === "offroad") return <svg {...props}><path d="M5 21.5V13.5L10 9H18L21 5.5H42L48 10.5L52 13.5V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M21 5.5V13.5M42 5.5V13.5M6 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "sedan") return <svg {...props}><path d="M5 21.5L8 16.5L17 14L23 8.5H37L44 14L51 16L54 21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M8 21.5H53" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "wagon") return <svg {...props}><path d="M5 21.5V17L10 12H19L23 7.5H46.5L52 11.5V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M23 7.5V14M46.5 7.5V14M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "hatchback") return <svg {...props}><path d="M6 21.5V17L12 12H20L24 7.5H38L46 13L49 17V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M7 21.5H49" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "liftback") return <svg {...props}><path d="M5 21.5L8 16.5L17 14L23 8H35L49 15.5L53 21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M23 8L43 14.5M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "coupe") return <svg {...props}><path d="M5 21.5L9 16.5L18 14L25 8.5H36L47 15L52 17V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M25 8.5L42 14.5M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "convertible") return <svg {...props}><path d="M5 21.5L9 16.5L18 14H29L34 10.5H40L45 15L52 17V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M29 14H43M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "minivan") return <svg {...props}><path d="M5 21.5V13L10 7H41L50 12.5L53 17V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M18 7V14M40 7V14M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  if (type === "pickup") return <svg {...props}><path d="M5 21.5V16L10 14L15 7.5H29L35 14H52V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M35 14V18M37 14H52M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
+  return <svg {...props}><path d="M5 21.5V8H39L48 12L53 17V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /><path d="M39 8V15H49M7 21.5H52" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />{wheels}</svg>;
 }
 
 function BodyPicker({ value, onChange }: { value: string; onChange: (value: string) => void }) {
@@ -198,14 +240,14 @@ function BodyPicker({ value, onChange }: { value: string; onChange: (value: stri
   }, [open]);
 
   return (
-    <div ref={rootRef} className={`relative ${open ? "z-[170]" : "z-0"}`}>
-      <button type="button" onClick={() => setOpen((current) => !current)} className="soft-input flex h-14 w-full items-center justify-between rounded-2xl px-4 text-left text-sm font-black text-white">
+    <div ref={rootRef} className="relative min-w-0">
+      <button type="button" onClick={() => setOpen((current) => !current)} className="soft-input flex h-14 w-full items-center justify-between rounded-2xl px-4 text-left text-sm font-black text-white" aria-expanded={open}>
         <span>{selected.label}</span><span className={`text-white/45 transition ${open ? "rotate-180" : ""}`}><Chevron /></span>
       </button>
       {open ? (
-        <div className="ac-search-menu absolute left-0 right-0 top-[calc(100%+8px)] z-[170] grid grid-cols-3 gap-1.5 rounded-[1.35rem] bg-[#151820] p-2.5 shadow-[0_24px_80px_rgba(0,0,0,.62)]">
+        <div className="ac-search-menu ac-body-picker-panel mt-2 grid grid-cols-3 gap-1.5 rounded-[1.35rem] bg-[#151820] p-2.5 shadow-[0_24px_80px_rgba(0,0,0,.42)] sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-3">
           {bodyOptions.map((item) => (
-            <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); setOpen(false); }} className={`flex min-h-[78px] flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center text-[10px] font-black transition ${item.value === value ? "bg-red-500/16 text-red-400" : "text-white/78 hover:bg-white/[0.055]"}`}>
+            <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); setOpen(false); }} className={`flex min-h-[74px] flex-col items-center justify-center rounded-xl px-1 py-2 text-center text-[10px] font-black transition ${item.value === value ? "bg-red-500/15 text-[#ff4a54]" : "text-white/78 hover:bg-white/[0.055] hover:text-white"}`}>
               <BodyIcon type={item.value} /><span className="mt-1 leading-tight">{item.label}</span>
             </button>
           ))}
@@ -225,7 +267,7 @@ function Calculator({ budget, setBudget, brand, setBrand, model, setModel, model
         <div className="rounded-full bg-black/18 px-3 py-1.5 text-[11px] font-black text-white/72">🚗 Нашли {foundCount} вариантов</div>
       </div>
       <SelectBox value={budget} onChange={setBudget} ariaLabel="Бюджет">
-        {budgetOptions.map((item) => <option key={item} value={item}>до {money(item)} ₽</option>)}
+        {budgetOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
       </SelectBox>
       <div className="mt-3 grid grid-cols-2 gap-3">
         <SearchSelect value={brand} onChange={(next) => { setBrand(next); setModel(""); }} options={brandSelectOptions} placeholder="Любая марка" searchPlaceholder="Найти марку" />
@@ -246,19 +288,91 @@ function Calculator({ budget, setBudget, brand, setBrand, model, setModel, model
 }
 
 function BuyerGallery() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef(0);
   const photos = [...buyerPhotos, ...buyerPhotos];
+  const selectedPhoto = selectedIndex === null ? null : buyerPhotos[selectedIndex];
+
+  function previousPhoto() {
+    setSelectedIndex((current) => {
+      if (current === null) return 0;
+      return current === 0 ? buyerPhotos.length - 1 : current - 1;
+    });
+  }
+
+  function nextPhoto() {
+    setSelectedIndex((current) => {
+      if (current === null) return 0;
+      return (current + 1) % buyerPhotos.length;
+    });
+  }
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const previousOverflow = document.body.style.overflow;
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedIndex(null);
+      if (event.key === "ArrowLeft") previousPhoto();
+      if (event.key === "ArrowRight") nextPhoto();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", keydown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", keydown);
+    };
+  }, [selectedIndex]);
+
+  const modal = selectedPhoto && selectedIndex !== null && typeof document !== "undefined"
+    ? createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#03050a]"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Фотография ${selectedIndex + 1} из ${buyerPhotos.length}`}
+          onClick={() => setSelectedIndex(null)}
+          onTouchStart={(event) => {
+            touchStartX.current = event.touches[0]?.clientX ?? null;
+            touchDeltaX.current = 0;
+          }}
+          onTouchMove={(event) => {
+            if (touchStartX.current === null) return;
+            touchDeltaX.current = event.touches[0].clientX - touchStartX.current;
+          }}
+          onTouchEnd={() => {
+            if (Math.abs(touchDeltaX.current) > 48) {
+              if (touchDeltaX.current > 0) previousPhoto(); else nextPhoto();
+            }
+            touchStartX.current = null;
+            touchDeltaX.current = 0;
+          }}
+        >
+          <div className="absolute inset-0 flex items-center justify-center px-0 pb-[calc(66px+env(safe-area-inset-bottom,0px))] pt-[calc(60px+env(safe-area-inset-top,0px))] sm:px-20 sm:pb-20 sm:pt-16">
+            <img src={selectedPhoto.src} alt={selectedPhoto.alt} draggable={false} onClick={(event) => event.stopPropagation()} className="block max-h-full max-w-full select-none object-contain sm:rounded-[1.4rem] sm:shadow-[0_30px_120px_rgba(0,0,0,.72)]" />
+          </div>
+          <button type="button" onClick={(event) => { event.stopPropagation(); previousPhoto(); }} className="fixed left-2 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-md hover:bg-red-500 sm:left-5 sm:h-14 sm:w-14" aria-label="Предыдущее фото"><svg width="18" height="30" viewBox="0 0 18 30" fill="none" aria-hidden="true"><path d="M16 2L3 15L16 28" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+          <button type="button" onClick={(event) => { event.stopPropagation(); nextPhoto(); }} className="fixed right-2 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-md hover:bg-red-500 sm:right-5 sm:h-14 sm:w-14" aria-label="Следующее фото"><svg width="18" height="30" viewBox="0 0 18 30" fill="none" aria-hidden="true"><path d="M2 2L15 15L2 28" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
+          <button type="button" onClick={(event) => { event.stopPropagation(); setSelectedIndex(null); }} className="fixed right-3 top-[calc(12px+env(safe-area-inset-top,0px))] z-30 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-red-500 sm:right-6" aria-label="Закрыть фото"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 3L15 15M15 3L3 15" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg></button>
+          <div className="fixed bottom-[calc(14px+env(safe-area-inset-bottom,0px))] left-1/2 z-20 -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-[13px] font-black text-white/82 backdrop-blur-md" onClick={(event) => event.stopPropagation()}>{selectedIndex + 1} / {buyerPhotos.length}</div>
+        </div>,
+        document.body,
+      )
+    : null;
+
   return (
     <section className="overflow-hidden">
       <h2 className="text-3xl font-black tracking-[-0.04em] md:text-5xl">Те, кто узнали — уже ездят!</h2>
       <div className="buyer-gallery-mask mt-5 overflow-hidden">
         <div className="buyer-gallery-track flex w-max gap-3 md:gap-4">
           {photos.map((photo, index) => (
-            <div key={`${photo.src}-${index}`} className="h-[150px] w-[220px] shrink-0 overflow-hidden rounded-[1.35rem] bg-white/[0.04] shadow-[0_15px_50px_rgba(0,0,0,.18)] sm:h-[180px] sm:w-[270px] lg:h-[205px] lg:w-[315px]">
+            <button key={`${photo.src}-${index}`} type="button" onClick={() => setSelectedIndex(index % buyerPhotos.length)} className="h-[150px] w-[220px] shrink-0 overflow-hidden rounded-[1.35rem] bg-white/[0.04] shadow-[0_15px_50px_rgba(0,0,0,.18)] transition hover:-translate-y-0.5 sm:h-[180px] sm:w-[270px] lg:h-[205px] lg:w-[315px]" aria-label={`Открыть фото ${(index % buyerPhotos.length) + 1}`}>
               <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
-            </div>
+            </button>
           ))}
         </div>
       </div>
+      {modal}
     </section>
   );
 }
@@ -308,7 +422,7 @@ function CostLines({ offer }: { offer: HomeOffer }) {
   const broker = Math.round((offer.price * 0.05) / 10000) * 10000;
   const commission = Math.max(90000, Math.round((offer.price * 0.035) / 10000) * 10000);
   const lines = [["Стоимость авто", car], ["Логистика", logistics], ["Таможня и утиль", customs], ["Брокер и оформление", broker], ["Комиссия TopAvto", commission]] as const;
-  return <div className="grid gap-2.5 text-sm font-bold text-white/68">{lines.map(([label, amount]) => <div key={label} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-2"><span className="text-red-300/65">·</span><span className="flex min-w-0 items-baseline gap-2"><span className="shrink-0">{label}</span><span className="mb-1 min-w-5 flex-1 border-b border-dotted border-white/8" /></span><span className="min-w-[105px] text-right font-black text-white">{money(amount)} ₽</span></div>)}</div>;
+  return <div className="grid gap-2.5 text-sm font-bold text-white/68">{lines.map(([label, amount]) => <div key={label} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-2"><span className="text-[#ff4650]">·</span><span className="flex min-w-0 items-baseline gap-2"><span className="shrink-0">{label}</span><span className="mb-1 min-w-5 flex-1 border-b border-dotted border-white/8" /></span><span className="min-w-[105px] text-right font-black text-white">{money(amount)} ₽</span></div>)}</div>;
 }
 
 function OfferModal({ offer, onClose, onRequest }: { offer: HomeOffer | null; onClose: () => void; onRequest: (offer: HomeOffer) => void }) {
@@ -347,7 +461,7 @@ function OfferModal({ offer, onClose, onRequest }: { offer: HomeOffer | null; on
 
 export default function HomePage() {
   const router = useRouter();
-  const [budget, setBudget] = useState("3000000");
+  const [budget, setBudget] = useState("to-3000000");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
@@ -379,9 +493,11 @@ export default function HomePage() {
     return [{ value: "", label: "Любая модель" }, ...models.map((item) => ({ value: item, label: item }))];
   }, [offers, brand]);
 
-  const budgetNumber = Number(budget) || 0;
+  const selectedBudget = budgetOptions.find((item) => item.value === budget) || budgetOptions.find((item) => item.value === "to-3000000")!;
+
   const calculatorOffers = useMemo(() => offers.filter((offer) => {
-    if (budgetNumber && offer.price > budgetNumber) return false;
+    if (selectedBudget.max && offer.price > selectedBudget.max) return false;
+    if (selectedBudget.min && offer.price < selectedBudget.min) return false;
     if (brand && offer.brand.toLowerCase() !== brand.toLowerCase()) return false;
     if (model && offer.model.toLowerCase() !== model.toLowerCase() && !offer.title.toLowerCase().includes(model.toLowerCase())) return false;
     if (year === "older" && offer.year >= 2018) return false;
@@ -389,7 +505,7 @@ export default function HomePage() {
     if (market && offer.country !== market) return false;
     if (body && offer.body !== body) return false;
     return true;
-  }), [offers, budgetNumber, brand, model, year, market, body]);
+  }), [offers, selectedBudget.max, selectedBudget.min, brand, model, year, market, body]);
 
   const catalogOffers = useMemo(() => offers.filter((offer) => {
     if (catalogMarket && offer.country !== catalogMarket) return false;
@@ -399,13 +515,15 @@ export default function HomePage() {
 
   function buildResultsUrl(extra?: Partial<HomeOffer>) {
     const params = new URLSearchParams();
-    const finalBudget = extra?.price || budgetNumber;
     const finalBrand = extra?.brand || brand;
     const finalModel = extra?.model || model;
     const finalYear: string | number = extra?.year || year;
     const finalMarket = extra?.country || market;
     const finalBody = extra?.body || body;
-    if (finalBudget) params.set("budget", String(finalBudget));
+
+    if (extra?.price) params.set("budget", String(extra.price));
+    else if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min));
+    else if (selectedBudget.max) params.set("budget", String(selectedBudget.max));
     if (finalBrand) params.set("brand", finalBrand);
     if (finalModel) params.set("model", finalModel);
     if (finalYear === "older") params.set("yearTo", "2017"); else if (finalYear) params.set("yearFrom", String(finalYear));
