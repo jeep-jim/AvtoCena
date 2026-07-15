@@ -3,6 +3,7 @@ import "./catalog-ui.css";
 import "./public-polish.css";
 import type { Metadata, Viewport } from "next";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
+import { PublicUiEnhancer } from "@/components/layout/PublicUiEnhancer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://avtocena.com"),
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body suppressHydrationWarning>
         {children}
+        <PublicUiEnhancer />
         <RoutePreloader />
       </body>
     </html>
