@@ -6,12 +6,13 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 function SpecItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0 rounded-2xl bg-white/[0.04] p-3.5">
-      <div className="text-[10px] font-black uppercase tracking-[0.15em] text-red-500">{label}</div>
+      <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/42">{label}</div>
       <div className="mt-1.5 break-words text-[15px] font-black">{value}</div>
     </div>
   );
@@ -61,18 +62,13 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
           <div className="min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
           <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-7 xl:sticky xl:top-24">
-            <div className="text-xs font-black uppercase tracking-[0.17em] text-red-500">{o.marketLabel}</div>
+            <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
             <h1 className="mt-2 min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-4xl">
               <FavoriteToggle offerId={o.id} inline snapshot={snapshot} className="relative -top-[.04em] mr-1" />
               {o.title}
             </h1>
 
-            <div className="mt-5 rounded-[1.35rem] bg-red-500/[0.075] p-4">
-              <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-500">Ориентир стоимости</div>
-              <div className="ac-price mt-1 break-words text-3xl font-black tracking-[-0.04em] text-red-500 md:text-4xl">
-                {o.totalRub ? `${money(o.totalRub)} ₽` : "Запросить точный расчёт"}
-              </div>
-            </div>
+            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="mt-5" panel />
 
             {o.priceMode === "auction_start" ? (
               <p className="mt-3 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
@@ -90,7 +86,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             </div>
 
             <div className="mt-5 rounded-2xl bg-white/[0.025] p-3.5">
-              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/45">Статус предложения</div>
+              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/42">Статус предложения</div>
               <p className="mt-1.5 text-xs font-bold leading-5 text-white/58">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
             <OfferLeadForm offerId={o.id} />
@@ -100,7 +96,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <section className="mt-12 md:mt-16">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Ещё варианты</div>
+              <div className="text-xs font-black uppercase tracking-[0.18em] text-white/42">Ещё варианты</div>
               <h2 className="mt-2 text-3xl font-black md:text-5xl">Похожие автомобили</h2>
             </div>
             <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="font-black">Смотреть все →</Link>
