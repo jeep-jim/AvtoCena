@@ -100,17 +100,22 @@ function collectVehicleChunks(html: string) {
   }));
 }
 
-function collectImageUrls(card: string) {
+function collectImageUrls(markup: string) {
   const candidates: string[] = [];
-  for (const match of card.matchAll(/<img[^>]+(?:data-src|data-original|data-lazy|src)\s*=\s*["']([^"']+)["']/gi)) {
+  for (const match of markup.matchAll(/<img[^>]+(?:data-src|data-original|data-lazy|src)\s*=\s*["']([^"']+)["']/gi)) {
     candidates.push(match[1]);
   }
-  for (const match of card.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) {
+  for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const item of match[1].split(",")) candidates.push(item.trim().split(/\s+/)[0]);
   }
+  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp)(?:\?[^"'\\\s<>]*)?/gi)) {
+    candidates.push(match[0].replace(/\\\//g, "/"));
+  }
+
   return candidates
+    .map((value) => value.replace(/&amp;/gi, "&"))
     .map(absoluteUrl)
-    .filter((url) => /\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url) && !/cookie|icon|logo|flag|banner|sprite/i.test(url));
+    .filter((url) => /\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url) && !/cookie|icon|logo|flag|banner|sprite|placeholder/i.test(url));
 }
 
 export type BeForwardRow = {
@@ -174,13 +179,13 @@ export function parseBeForwardMarketStocklist(html: string): BeForwardRow[] {
       location,
       price,
       auctionGrade,
-      images: [...new Set(imageUrls)].slice(0, 12),
+      images: [...new Set(imageUrls)].slice(0, 16),
       detailUrl: absoluteUrl(detailHref),
       status,
     } satisfies BeForwardRow;
   });
 
-  return rows.filter((row) => row.refNo && row.title && row.year && row.images.length > 0);
+  return rows.filter((row) => row.refNo && row.title && row.year);
 }
 
 type BeForwardSourceConfig = {
@@ -299,8 +304,19 @@ export class BeForwardMarketAdapter implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational.raw || {}) as BeForwardRow;
     const limit = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10);
+    let urls = [...(raw.images || [])];
+
+    if (raw.detailUrl && urls.length < limit) {
+      try {
+        const { html } = await fetchHtml(raw.detailUrl);
+        urls = [...urls, ...collectImageUrls(html)];
+      } catch {
+        // The stock-list images are still usable when a detail page is temporarily unavailable.
+      }
+    }
+
     const saved: CatalogImage[] = [];
-    for (const url of (raw.images || []).slice(0, limit)) {
+    for (const url of [...new Set(urls)].slice(0, limit)) {
       const image = await cacheImageFromUrl(url, offer.market, { headers: SOURCE_HEADERS }).catch(() => null);
       if (image) saved.push(image);
     }
