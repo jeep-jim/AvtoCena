@@ -2,6 +2,7 @@ import Link from "next/link";
 import { money } from "@/lib/avtocena";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
+import { PriceTrend } from "@/components/catalog/PriceTrend";
 
 export function CatalogCard({ offer, compact = false }: { offer: any; compact?: boolean }) {
   const o = presentCatalogOffer(offer);
@@ -23,12 +24,9 @@ export function CatalogCard({ offer, compact = false }: { offer: any; compact?: 
         </div>
 
         <div className="p-3.5">
-          <div className="flex items-start gap-1.5">
+          <div className="grid grid-cols-[32px_minmax(0,1fr)] items-start gap-1.5">
             <FavoriteToggle offerId={o.id} inline snapshot={snapshot} />
-            <div className="min-w-0 flex-1">
-              <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-400/80">Ориентир</div>
-              <div className="ac-price mt-1 text-[22px] font-black leading-none tracking-[-0.045em] text-red-500">{o.totalRub ? `${money(o.totalRub)} ₽` : "Цена уточняется"}</div>
-            </div>
+            <PriceTrend offer={o} priceClassName="text-[20px] sm:text-[22px]" />
           </div>
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-bold text-white/58">
             <span className="rounded-full bg-white/[0.05] px-2.5 py-1.5">{o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется"}</span>
