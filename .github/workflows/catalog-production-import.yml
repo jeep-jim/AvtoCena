@@ -52,10 +52,10 @@ jobs:
           CATALOG_IMPORT_RESET: ${{ github.event_name == 'workflow_dispatch' && inputs.reset && 'true' || 'false' }}
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "12"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "12"
-          CATALOG_IMPORT_MAX_OFFERS: "24"
-          CATALOG_IMPORT_MAX_DETAILS: "24"
-          CATALOG_IMPORT_MAX_PAGES: "2"
-          CATALOG_MAX_IMAGES_PER_OFFER: "3"
+          CATALOG_IMPORT_MAX_OFFERS: "12"
+          CATALOG_IMPORT_MAX_DETAILS: "12"
+          CATALOG_IMPORT_MAX_PAGES: "1"
+          CATALOG_MAX_IMAGES_PER_OFFER: "8"
           CATALOG_IMPORT_REPORT_FILE: catalog-import-public-markets-report.json
       - uses: actions/upload-artifact@v4
         if: always()
@@ -70,7 +70,7 @@ jobs:
           const fs = require('fs');
           const path = 'catalog-import-public-markets-report.json';
           if (!fs.existsSync(path)) {
-            console.log('B{чёт импорта не создан. Смотрите журнал шага импорта.');
+            console.log('Отчёт импорта не создан. Смотрите журнал шага импорта.');
             process.exit(0);
           }
           const json = JSON.parse(fs.readFileSync(path, 'utf8'));
@@ -79,6 +79,6 @@ jobs:
           }
           console.log('\n### Источники');
           for (const source of json.sources || []) {
-            console.log(`- ${source.sourceId} (${source.market || 'multi'}): ${source.ok ? `OK, seen ${source.seen ?? 0}` : `ERROR ${source.error || ''}`});
+            console.log(`- ${source.sourceId} (${source.market || 'multi'}): ${source.ok ? `OK, seen ${source.seen ?? 0}` : `ERROR ${source.error || ''}`}`);
           }
           NODE
