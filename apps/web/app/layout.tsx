@@ -79,6 +79,30 @@ html[data-theme="light"] .ac-page-copy .ac-on-image [class~="text-white"],
 html[data-theme="light"] .ac-page-copy .ac-on-image [class*="text-white/"] { color: #ffffff !important; }
 .ac-body-picker-panel { position: relative !important; inset: auto !important; }
 
+/* Search fields stay readable and the caret/chevrons remain visible in both themes. */
+.ac-search-menu input { caret-color: #ff4650 !important; }
+.ac-custom-search-option { color: #ff6b73 !important; }
+html[data-theme="light"] .ac-search-select,
+html[data-theme="light"] .ac-search-select > span,
+html[data-theme="light"] .ac-search-select svg { color: #171a21 !important; }
+html[data-theme="light"] .ac-native-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M5 7L9 11L13 7' stroke='%232b303b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+}
+
+/* Live price movement added to the homepage cards. */
+.ac-live-price-trend {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  padding-bottom: 2px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+.ac-live-price-trend.is-down { color: #31b853 !important; }
+.ac-live-price-trend.is-up { color: #ef3340 !important; }
+
 /* Red actions use one solid brand red everywhere — no gradients and no red glow. */
 .avto-button,
 .avto-button:hover,
