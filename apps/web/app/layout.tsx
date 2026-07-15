@@ -1,5 +1,6 @@
 import "./globals.css";
 import "./catalog-ui.css";
+import "./catalog-polish.css";
 import type { Metadata, Viewport } from "next";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
 
@@ -25,15 +26,15 @@ export const metadata: Metadata = {
     url: "https://avtocena.com",
     siteName: "АвтоЦена",
     locale: "ru_RU",
-    type: "website"
-  }
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#e31b23",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1
+  maximumScale: 1,
 };
 
 const themeBootstrap = `

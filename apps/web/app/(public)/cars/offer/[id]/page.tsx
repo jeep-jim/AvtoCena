@@ -10,8 +10,8 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 function SpecItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="min-w-0 rounded-2xl bg-white/[0.04] p-3.5">
-      <div className="text-[10px] font-black uppercase tracking-[0.15em] text-red-300/70">{label}</div>
+    <div className="ac-spec-item min-w-0 rounded-2xl bg-white/[0.04] p-3.5">
+      <div className="ac-muted-label text-[10px] font-black uppercase tracking-[0.15em] text-white/38">{label}</div>
       <div className="mt-1.5 break-words text-[15px] font-black text-white">{value}</div>
     </div>
   );
@@ -36,39 +36,35 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
   const raw: any = publicOffer(offer);
   const o = presentCatalogOffer(raw);
-  const similarResult = await searchOffers({
-    market: raw.market,
-    make: raw.make,
-    budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined,
-    pageSize: 8,
-    sort: "updatedAt",
-  });
+  const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined, pageSize: 8, sort: "updatedAt" });
   const similar = similarResult.items.filter((item: any) => item.id !== raw.id).slice(0, 6);
 
   return (
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/cars" backLabel="В каталог" />
 
-      <section className="mx-auto min-w-0 w-full max-w-[1450px] overflow-x-hidden px-4 py-7 md:px-8 md:py-10">
+      <section className="mx-auto w-full max-w-[1450px] overflow-x-hidden px-4 py-7 md:px-8 md:py-10">
+        <header className="mb-5 max-w-6xl md:mb-7">
+          <div className="ac-muted-label text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
+          <div className="mt-2 flex min-w-0 items-start gap-1.5">
+            <FavoriteToggle
+              offerId={o.id}
+              plain
+              className="mt-0.5"
+              snapshot={{ id: o.id, title: o.title, price: o.totalRub, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` }}
+            />
+            <h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1>
+          </div>
+        </header>
+
         <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
           <div className="min-w-0 max-w-full overflow-hidden">
             <VehicleGallery images={o.images} title={o.title} />
           </div>
 
-          <aside className="ac-offer-panel min-w-0 max-w-full rounded-[1.8rem] bg-white/[0.05] p-5 shadow-[0_24px_90px_rgba(0,0,0,.3)] md:p-7 xl:sticky xl:top-24">
-            <div className="flex min-w-0 items-start justify-between gap-4">
-              <div className="min-w-0">
-                <div className="text-xs font-black uppercase tracking-[0.17em] text-red-300">{o.marketLabel}</div>
-                <h1 className="mt-2 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-4xl">{o.title}</h1>
-              </div>
-              <FavoriteToggle
-                offerId={o.id}
-                snapshot={{ id: o.id, title: o.title, price: o.totalRub, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` }}
-              />
-            </div>
-
-            <div className="mt-5 min-w-0 rounded-[1.35rem] bg-red-500/[0.075] p-4">
-              <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-300/75">Ориентир стоимости</div>
+          <aside className="ac-offer-panel min-w-0 max-w-full rounded-[1.8rem] bg-white/[0.05] p-5 md:p-7 xl:sticky xl:top-24">
+            <div className="min-w-0 rounded-[1.35rem] bg-red-500/[0.075] p-4">
+              <div className="ac-muted-label text-[10px] font-black uppercase tracking-[0.16em] text-white/42">Ориентир стоимости</div>
               <div className="mt-1 break-words text-3xl font-black tracking-[-0.04em] text-red-300 md:text-4xl">
                 {o.totalRub ? `${money(o.totalRub)} ₽` : "Запросить точный расчёт"}
               </div>
@@ -90,7 +86,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             </div>
 
             <div className="mt-5 rounded-2xl bg-white/[0.025] p-3.5">
-              <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/32">Статус предложения</div>
+              <div className="ac-muted-label text-[10px] font-black uppercase tracking-[0.15em] text-white/32">Статус предложения</div>
               <p className="mt-1.5 text-xs font-bold leading-5 text-white/52">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
 
@@ -101,7 +97,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <section className="mt-12 min-w-0 pt-5 md:mt-16 md:pt-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">Ещё варианты</div>
+              <div className="ac-muted-label text-xs font-black uppercase tracking-[0.18em] text-white/42">Ещё варианты</div>
               <h2 className="mt-2 text-3xl font-black tracking-[-0.04em] md:text-5xl">Похожие автомобили</h2>
               <p className="mt-2 text-white/52">Тот же рынок и близкий бюджет.</p>
             </div>
@@ -109,7 +105,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </div>
 
           {similar.length ? (
-            <div className="ac-market-rail ac-hide-scrollbar mt-6">
+            <div className="ac-market-rail ac-market-rail--similar ac-hide-scrollbar mt-6">
               {similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}
             </div>
           ) : (
