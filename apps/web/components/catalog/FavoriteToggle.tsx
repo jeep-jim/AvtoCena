@@ -20,6 +20,7 @@ type Props = {
   snapshot?: FavoriteSnapshot;
   className?: string;
   compact?: boolean;
+  inline?: boolean;
 };
 
 function readFavorites(): FavoriteSnapshot[] {
@@ -31,20 +32,11 @@ function readFavorites(): FavoriteSnapshot[] {
   }
 }
 
-function HeartIcon({ active }: { active: boolean }) {
-  return (
-    <svg width="24" height="22" viewBox="0 0 24 22" fill={active ? "currentColor" : "none"} aria-hidden="true">
-      <path
-        d="M12 20.1C10.9 19.1 4.2 13.4 2.4 9.7C.7 6.3 2.5 2.1 6.4 1.5C8.7 1.2 10.6 2.3 12 4.1C13.4 2.3 15.3 1.2 17.6 1.5C21.5 2.1 23.3 6.3 21.6 9.7C19.8 13.4 13.1 19.1 12 20.1Z"
-        stroke="currentColor"
-        strokeWidth="1.9"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+function StarIcon({ active }: { active: boolean }) {
+  return <svg width="22" height="22" viewBox="0 0 24 24" fill={active ? "currentColor" : "none"} aria-hidden="true"><path d="M12 2.7L14.85 8.5L21.25 9.43L16.62 13.94L17.71 20.31L12 17.31L6.29 20.31L7.38 13.94L2.75 9.43L9.15 8.5L12 2.7Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>;
 }
 
-export function FavoriteToggle({ offerId, snapshot, className = "", compact = false }: Props) {
+export function FavoriteToggle({ offerId, snapshot, className = "", compact = false, inline = false }: Props) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -56,30 +48,11 @@ export function FavoriteToggle({ offerId, snapshot, className = "", compact = fa
     event.stopPropagation();
     const current = readFavorites();
     const exists = current.some((item) => item.id === offerId);
-    const next = exists
-      ? current.filter((item) => item.id !== offerId)
-      : [
-          {
-            id: offerId,
-            href: `/cars/offer/${offerId}`,
-            ...snapshot,
-          },
-          ...current,
-        ];
+    const next = exists ? current.filter((item) => item.id !== offerId) : [{ id: offerId, href: `/cars/offer/${offerId}`, ...snapshot }, ...current];
     localStorage.setItem(FAVORITES_KEY, JSON.stringify(next.slice(0, 100)));
     setActive(!exists);
     window.dispatchEvent(new CustomEvent("avtocena:favorites-changed"));
   }
 
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      className={`${compact ? "h-11 w-12" : "h-12 w-[52px]"} ac-favorite-button flex shrink-0 items-center justify-center rounded-xl bg-black/38 text-red-500 shadow-[0_8px_26px_rgba(0,0,0,.25)] backdrop-blur transition hover:bg-black/58 hover:text-red-400 active:scale-95 ${className}`}
-      aria-label={active ? "Убрать из избранного" : "Добавить в избранное"}
-      title={active ? "Убрать из избранного" : "Добавить в избранное"}
-    >
-      <HeartIcon active={active} />
-    </button>
-  );
+  return <button type="button" onClick={toggle} className={`${inline ? "inline-flex h-8 w-8 align-middle" : compact ? "h-10 w-10" : "h-11 w-11"} ac-favorite-button shrink-0 items-center justify-center rounded-lg text-red-500 transition hover:text-red-400 active:scale-95 ${inline ? "bg-transparent" : "bg-black/30 backdrop-blur"} ${className}`} aria-label={active ? "Убрать из избранного" : "Добавить в избранное"} title={active ? "Убрать из избранного" : "Добавить в избранное"}><StarIcon active={active} /></button>;
 }

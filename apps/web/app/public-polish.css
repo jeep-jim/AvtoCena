@@ -1,0 +1,99 @@
+:root {
+  --ac-surface: #11141c;
+  --ac-surface-2: #181b24;
+  --ac-border: rgba(255,255,255,.08);
+  --ac-text: #fff;
+  --ac-muted: rgba(255,255,255,.56);
+  --ac-accent: #ff303d;
+}
+
+.ac-result-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 44vw);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 2px 2px 10px;
+}
+.ac-result-rail > * { scroll-snap-align: start; }
+
+.ac-search-select,
+.ac-filter-input,
+.ac-native-select,
+.soft-input { border: 1px solid var(--ac-border) !important; }
+
+.ac-favorite-header > svg { display:none; }
+.ac-favorite-header::before { content:"★"; font-size:25px; line-height:1; color:#ef3340; }
+.ac-drawer-nav-link[href="/favorites"] svg { display:none; }
+.ac-drawer-nav-link[href="/favorites"] span:last-child::before { content:"☆"; font-size:25px; color:#ef3340; }
+
+/* The asset is expected at apps/web/public/key-logo.png. */
+@media (min-width: 1100px) {
+  .ac-page-copy > div > section:first-of-type { position: relative; }
+  .ac-page-copy > div > section:first-of-type::after {
+    content: "";
+    position: absolute;
+    left: 54%;
+    top: 34%;
+    width: clamp(180px, 17vw, 300px);
+    aspect-ratio: 1.35;
+    background: url('/key-logo.png') center/contain no-repeat;
+    transform: translate(-50%, -50%) rotate(-4deg);
+    pointer-events: none;
+    filter: drop-shadow(0 24px 28px rgba(0,0,0,.35));
+    z-index: 2;
+  }
+}
+
+html[data-theme="light"] {
+  --ac-surface: #f7f8fb;
+  --ac-surface-2: #eceff5;
+  --ac-border: rgba(27,32,43,.16);
+  --ac-text: #171a22;
+  --ac-muted: #596171;
+  --ac-accent: #d61f2c;
+}
+html[data-theme="light"] body { background: linear-gradient(180deg,#eef1f6 0%,#e3e7ee 100%) !important; }
+html[data-theme="light"] .ac-page-copy { color: var(--ac-text) !important; }
+html[data-theme="light"] .ac-page-copy [class~="text-white"] { color: var(--ac-text) !important; }
+html[data-theme="light"] .ac-page-copy [class*="text-white/"] { color: var(--ac-muted) !important; }
+html[data-theme="light"] .ac-on-image,
+html[data-theme="light"] .ac-on-image * { color: #fff !important; }
+html[data-theme="light"] .ac-filter-panel,
+html[data-theme="light"] .ac-result-summary,
+html[data-theme="light"] .ac-offer-panel,
+html[data-theme="light"] .ac-catalog-card,
+html[data-theme="light"] .ac-favorites-card {
+  background: var(--ac-surface) !important;
+  border: 1px solid rgba(27,32,43,.08) !important;
+  box-shadow: 0 18px 44px rgba(38,43,57,.12) !important;
+}
+html[data-theme="light"] .ac-filter-input,
+html[data-theme="light"] .ac-native-select,
+html[data-theme="light"] .ac-search-select,
+html[data-theme="light"] .soft-input,
+html[data-theme="light"] .ac-summary-item,
+html[data-theme="light"] .ac-offer-panel [class*="bg-white/"] {
+  background: var(--ac-surface-2) !important;
+  border-color: var(--ac-border) !important;
+  color: var(--ac-text) !important;
+}
+html[data-theme="light"] input::placeholder { color: #7b8391 !important; opacity: 1; }
+html[data-theme="light"] .ac-search-menu { background: #1a1d25 !important; color: #fff !important; }
+html[data-theme="light"] .ac-search-menu * { color: #fff; }
+html[data-theme="light"] .ac-search-menu input { background: #242832 !important; border-color: rgba(255,255,255,.12) !important; }
+html[data-theme="light"] .ac-catalog-card .text-red-500,
+html[data-theme="light"] .ac-page-copy [class*="text-red-"] { color: var(--ac-accent) !important; }
+html[data-theme="light"] .ac-public-header { background: rgba(247,248,251,.94) !important; border-bottom: 1px solid rgba(27,32,43,.08) !important; }
+html[data-theme="light"] .ac-public-header .ac-brand-mark { --ac-mark-panel:#202228; --ac-mark-symbol:#fff; --ac-mark-divider:#0e0f12; }
+html[data-theme="light"] .avto-button { color:#fff !important; }
+html[data-theme="light"] .ac-alternative-note { background:#fff4d5 !important; color:#684d00 !important; border:1px solid #e2c66b !important; }
+
+@media (min-width: 768px) { .ac-result-rail { grid-auto-flow: initial; grid-auto-columns: initial; grid-template-columns: repeat(2,minmax(0,1fr)); overflow: visible; } }
+@media (min-width: 1200px) { .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+@media (max-width: 767px) {
+  .ac-market-rail { grid-auto-columns: minmax(232px, 72vw) !important; }
+  .ac-result-rail { margin-right:-1rem; padding-right:1rem; }
+  .ac-catalog-card { border-radius: 1.15rem !important; }
+}
