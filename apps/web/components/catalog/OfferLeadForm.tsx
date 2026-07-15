@@ -11,16 +11,14 @@ function newUuid() {
 
 async function copyCurrentUrl() {
   const value = window.location.href;
-
   if (navigator.clipboard?.writeText) {
     try {
       await navigator.clipboard.writeText(value);
       return true;
     } catch {
-      // Fallback below works in browsers where Clipboard API is blocked.
+      // Fallback below.
     }
   }
-
   const textarea = document.createElement("textarea");
   textarea.value = value;
   textarea.setAttribute("readonly", "");
@@ -33,13 +31,25 @@ async function copyCurrentUrl() {
   return copied;
 }
 
+async function shareCurrentUrl() {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: document.title, url: window.location.href });
+      return "shared" as const;
+    } catch (error: any) {
+      if (error?.name === "AbortError") return "idle" as const;
+    }
+  }
+  return await copyCurrentUrl() ? "copied" as const : "error" as const;
+}
+
 export function OfferLeadForm({ offerId }: Props) {
   const storageKey = useMemo(() => `avtocena_offer_operation_${offerId}`, [offerId]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
-  const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">("idle");
+  const [shareStatus, setShareStatus] = useState<"idle" | "shared" | "copied" | "error">("idle");
 
   function getOperationId() {
     let value = sessionStorage.getItem(storageKey);
@@ -55,19 +65,11 @@ export function OfferLeadForm({ offerId }: Props) {
     setStatus("sending");
     setMessage("");
     const operationId = getOperationId();
-
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          operationId,
-          offerId,
-          name,
-          phone,
-          source: "catalog_offer",
-          attribution: captureAttributionFromBrowser(),
-        }),
+        body: JSON.stringify({ operationId, offerId, name, phone, source: "catalog_offer", attribution: captureAttributionFromBrowser() }),
       });
       const json = await response.json();
       if (!response.ok || !json.ok) throw new Error(json.error || "Не удалось отправить заявку");
@@ -82,14 +84,9 @@ export function OfferLeadForm({ offerId }: Props) {
     }
   }
 
-  async function saveLink() {
-    setCopyStatus("idle");
-    try {
-      const copied = await copyCurrentUrl();
-      setCopyStatus(copied ? "success" : "error");
-    } catch {
-      setCopyStatus("error");
-    }
+  async function sendLink() {
+    setShareStatus("idle");
+    setShareStatus(await shareCurrentUrl());
   }
 
   if (status === "success") {
@@ -104,31 +101,31 @@ export function OfferLeadForm({ offerId }: Props) {
   return (
     <form onSubmit={submit} className="mt-6 grid gap-3">
       <div className="mb-1">
-        <div className="text-xs font-black uppercase tracking-[0.16em] text-red-300">Запросить точный расчёт</div>
+        <div className="ac-muted-label text-xs font-black uppercase tracking-[0.16em] text-white/42">Запросить точный расчёт</div>
         <p className="mt-1 text-sm font-medium leading-6 text-white/48">Оставьте контакты — менеджер подтвердит наличие и итоговую цену.</p>
       </div>
 
       <label>
-        <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/38">Имя</span>
+        <span className="ac-muted-label mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/38">Имя</span>
         <input value={name} onChange={(event) => setName(event.target.value)} name="name" placeholder="Как к вам обращаться" className="soft-input w-full rounded-2xl px-4 py-3.5" />
       </label>
 
       <label>
-        <span className="mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/38">Телефон</span>
+        <span className="ac-muted-label mb-1.5 block text-[11px] font-black uppercase tracking-[0.13em] text-white/38">Телефон</span>
         <input value={phone} onChange={(event) => setPhone(event.target.value)} name="phone" placeholder="Номер для связи" className="soft-input w-full rounded-2xl px-4 py-3.5" />
       </label>
 
-      <button disabled={status === "sending"} className="avto-button mt-1 rounded-2xl px-5 py-4 font-black disabled:opacity-60">
+      <button disabled={status === "sending"} className="avto-button ac-flat-button mt-1 rounded-2xl px-5 py-4 font-black disabled:opacity-60">
         {status === "sending" ? "Отправляем…" : "Оставить заявку"}
       </button>
 
       {message ? <div className="rounded-2xl bg-red-500/10 p-3 text-sm font-bold text-red-100">{message}</div> : null}
 
-      <button type="button" onClick={saveLink} className="flex items-center justify-center gap-2 rounded-2xl bg-white/[0.055] px-5 py-4 font-black text-white/78 transition hover:bg-white/[0.09] hover:text-white">
-        <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <path d="M8 12L12 8M6.5 13.5L4.8 15.2C3.5 16.5 1.5 16.5.3 15.2C-.9 14-.9 12 .3 10.8L3.4 7.7C4.6 6.5 6.6 6.5 7.8 7.7M13.5 6.5L15.2 4.8C16.5 3.5 18.5 3.5 19.7 4.8C20.9 6 20.9 8 19.7 9.2L16.6 12.3C15.4 13.5 13.4 13.5 12.2 12.3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <button type="button" onClick={sendLink} className="ac-flat-button flex items-center justify-center gap-2 rounded-2xl bg-white/[0.055] px-5 py-4 font-black text-white/78 transition hover:bg-white/[0.09] hover:text-white">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 13.5V2.8M6.2 6.6L10 2.8L13.8 6.6M4.2 9.2H3.5C2.7 9.2 2 9.9 2 10.7V16C2 17.1 2.9 18 4 18H16C17.1 18 18 17.1 18 16V10.7C18 9.9 17.3 9.2 16.5 9.2H15.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        {copyStatus === "success" ? "Ссылка скопирована" : copyStatus === "error" ? "Не удалось скопировать" : "Сохранить ссылку"}
+        {shareStatus === "shared" ? "Ссылка отправлена" : shareStatus === "copied" ? "Ссылка скопирована" : shareStatus === "error" ? "Не удалось отправить" : "Отправить ссылку"}
       </button>
     </form>
   );
