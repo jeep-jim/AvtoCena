@@ -67,6 +67,14 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     setFullscreen(true);
   }
 
+  function advanceFullscreen() {
+    if (didSwipe.current) {
+      didSwipe.current = false;
+      return;
+    }
+    if (cleanImages.length > 1) next();
+  }
+
   const image = (
     <img
       key={cleanImages[activeIndex]}
@@ -134,7 +142,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             type="button"
             onClick={(event) => {
               event.stopPropagation();
-              if (cleanImages.length > 1) next();
+              advanceFullscreen();
             }}
             onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
             onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
