@@ -1,7 +1,7 @@
 process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "12";
 process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "12";
 process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "2";
-process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "2";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "8";
 
 const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
 
@@ -41,10 +41,10 @@ if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "")
 await import("../apps/web/lib/catalog/encar-resilience.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
-const maxOffers = encarOnly ? encarSample.maxOffers : Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 6);
+const maxOffers = encarOnly ? encarSample.maxOffers : Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 12);
 const maxDetails = encarOnly ? encarSample.maxDetails : Number(process.env.CATALOG_IMPORT_MAX_DETAILS || maxOffers);
 const maxPages = encarOnly ? encarSample.maxPages : Number(process.env.CATALOG_IMPORT_MAX_PAGES || 1);
-const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 2);
+const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 8);
 
 importCatalog({
   sourceIds: sources,

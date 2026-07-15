@@ -18,6 +18,59 @@ function SpecItem({ label, value }: { label: string; value: string }) {
   );
 }
 
+type BreakdownLine = { id?: string; title: string; amountRub: number };
+
+function priceBreakdown(offer: any): BreakdownLine[] {
+  const actual = Array.isArray(offer?.calculationSnapshot?.breakdown)
+    ? offer.calculationSnapshot.breakdown
+        .map((line: any) => ({ id: String(line?.id || line?.title || ""), title: String(line?.title || "Расход"), amountRub: Number(line?.amountRub || 0) }))
+        .filter((line: BreakdownLine) => line.amountRub !== 0)
+    : [];
+  if (actual.length) return actual;
+
+  const total = Number(offer?.totalRub || 0);
+  if (!total) return [];
+  const car = Math.round((total * 0.58) / 10_000) * 10_000;
+  const logistics = Math.round((total * 0.09) / 10_000) * 10_000;
+  const customs = Math.round((total * 0.22) / 10_000) * 10_000;
+  const broker = Math.round((total * 0.05) / 10_000) * 10_000;
+  const commission = Math.max(90_000, total - car - logistics - customs - broker);
+  return [
+    { id: "car", title: "Стоимость автомобиля", amountRub: car },
+    { id: "logistics", title: "Логистика", amountRub: logistics },
+    { id: "customs", title: "Таможня и утиль", amountRub: customs },
+    { id: "broker", title: "Брокер и оформление", amountRub: broker },
+    { id: "commission", title: "Комиссия TopAvto", amountRub: commission },
+  ];
+}
+
+function OfferPriceBreakdown({ offer }: { offer: any }) {
+  const lines = priceBreakdown(offer);
+  if (!lines.length) return null;
+
+  return (
+    <section className="mt-5 rounded-[1.7rem] bg-white/[0.035] p-5 md:p-6">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div className="text-[10px] font-black uppercase tracking-[0.17em] text-white/42">Расчёт под ключ</div>
+          <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] md:text-3xl">Структура АвтоЦены</h2>
+        </div>
+        <div className="text-sm font-black text-white/58">Итого: {money(Number(offer.totalRub || 0))} ₽</div>
+      </div>
+      <p className="mt-3 max-w-4xl text-sm font-medium leading-6 text-white/52">Состав расчёта по текущим настройкам рынка. Финальную стоимость менеджер подтвердит с учётом курса, состояния автомобиля, логистики и города доставки.</p>
+      <div className="mt-5 grid gap-x-8 gap-y-3 md:grid-cols-2">
+        {lines.map((line, index) => (
+          <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-baseline gap-2 text-sm font-bold">
+            <span className="text-red-500">·</span>
+            <span className="flex min-w-0 items-baseline gap-2 text-white/68"><span className="min-w-0">{line.title}</span><span className="mb-1 min-w-4 flex-1 border-b border-dotted border-white/10" /></span>
+            <span className="whitespace-nowrap font-black text-white">{money(line.amountRub)} ₽</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const offer = await getOffer(id);
@@ -59,16 +112,21 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader backHref="/cars" backLabel="В каталог" />
       <section className="mx-auto w-full max-w-[1450px] px-4 py-7 md:px-8 md:py-10">
-        <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
-          <div className="min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
-          <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-7 xl:sticky xl:top-24">
+        <header className="mb-5 flex min-w-0 items-start justify-between gap-4 md:mb-7">
+          <div className="min-w-0">
             <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
-            <h1 className="mt-2 min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-4xl">
-              <FavoriteToggle offerId={o.id} inline snapshot={snapshot} className="relative -top-[.04em] mr-1" />
-              {o.title}
-            </h1>
+            <h1 className="mt-2 min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1>
+          </div>
+          <FavoriteToggle offerId={o.id} snapshot={snapshot} className="mt-1 bg-white/[0.055] text-red-500 ring-1 ring-white/8 hover:bg-white/[0.09]" />
+        </header>
 
-            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="mt-5" panel />
+        <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.25fr)_430px] xl:items-start">
+          <div className="min-w-0 overflow-hidden">
+            <VehicleGallery images={o.images} title={o.title} />
+            <OfferPriceBreakdown offer={o} />
+          </div>
+          <aside className="ac-offer-panel min-w-0 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-7 xl:sticky xl:top-24">
+            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" panel />
 
             {o.priceMode === "auction_start" ? (
               <p className="mt-3 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>

@@ -24,10 +24,7 @@ export function CatalogCard({ offer, compact = false }: { offer: any; compact?: 
         </div>
 
         <div className="p-3.5">
-          <div className="grid grid-cols-[32px_minmax(0,1fr)] items-start gap-1.5">
-            <FavoriteToggle offerId={o.id} inline snapshot={snapshot} />
-            <PriceTrend offer={o} priceClassName="text-[20px] sm:text-[22px]" />
-          </div>
+          <PriceTrend offer={o} priceClassName="text-[20px] sm:text-[22px]" />
           <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-bold text-white/58">
             <span className="rounded-full bg-white/[0.05] px-2.5 py-1.5">{o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется"}</span>
             <span className="rounded-full bg-white/[0.05] px-2.5 py-1.5">{o.engineCc ? `${o.engineCc} см³` : o.fuelLabel}</span>
@@ -35,6 +32,7 @@ export function CatalogCard({ offer, compact = false }: { offer: any; compact?: 
           <p className="mt-3 text-[11px] font-bold leading-5 text-white/46">Наличие и итоговую стоимость под ключ подтвердит менеджер.</p>
         </div>
       </Link>
+      <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className="ac-on-image absolute right-3 top-3 z-20 bg-black/52 text-red-400 shadow-[0_8px_24px_rgba(0,0,0,.28)] backdrop-blur-md hover:bg-black/68" />
     </article>
   );
 }
