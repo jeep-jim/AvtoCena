@@ -1,17 +1,17 @@
 process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "12";
 process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "12";
 process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "2";
-process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "8";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "3";
 
 const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
 
 // Useful fallback for a focused Encar verification without changing the all-market production default.
 const encarSample = {
   sourceIds: ["encar_direct"],
-  maxOffers: 20,
-  maxDetails: 20,
+  maxOffers: 24,
+  maxDetails: 24,
   maxImagesPerOffer: 3,
-  maxPages: 1,
+  maxPages: 2,
 };
 const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
 const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
@@ -41,10 +41,10 @@ if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "")
 await import("../apps/web/lib/catalog/encar-resilience.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
-const maxOffers = encarOnly ? encarSample.maxOffers : Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 12);
+const maxOffers = encarOnly ? encarSample.maxOffers : Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 24);
 const maxDetails = encarOnly ? encarSample.maxDetails : Number(process.env.CATALOG_IMPORT_MAX_DETAILS || maxOffers);
-const maxPages = encarOnly ? encarSample.maxPages : Number(process.env.CATALOG_IMPORT_MAX_PAGES || 1);
-const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 8);
+const maxPages = encarOnly ? encarSample.maxPages : Number(process.env.CATALOG_IMPORT_MAX_PAGES || 2);
+const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 3);
 
 importCatalog({
   sourceIds: sources,
