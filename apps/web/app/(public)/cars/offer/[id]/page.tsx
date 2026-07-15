@@ -125,7 +125,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             <VehicleGallery images={o.images} title={o.title} />
           </div>
 
-          <aside className="min-w-0 xl:sticky xl:top-24">
+          <aside className="ac-offer-detail-stack min-w-0 xl:sticky xl:top-24">
             <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" panel />
 
             {o.priceMode === "auction_start" ? (
