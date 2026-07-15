@@ -11,9 +11,9 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 function SpecTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="min-w-0 rounded-2xl bg-white/[0.04] px-3.5 py-3">
-      <div className="text-[9px] font-black uppercase tracking-[0.15em] text-white/38">{label}</div>
-      <div className="mt-1 min-w-0 break-words text-[13px] font-black leading-tight text-white md:text-sm">{value}</div>
+    <div className="ac-offer-spec-tile min-w-0 rounded-2xl px-3.5 py-3">
+      <div className="ac-offer-spec-label text-[9px] font-black uppercase tracking-[0.15em]">{label}</div>
+      <div className="ac-offer-spec-value mt-1 min-w-0 break-words text-[13px] font-black leading-tight md:text-sm">{value}</div>
     </div>
   );
 }
@@ -49,16 +49,16 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   if (!lines.length) return null;
 
   return (
-    <section className="min-w-0 rounded-[1.35rem] bg-white/[0.04] p-4">
-      <h2 className="text-lg font-black tracking-[-0.025em] md:text-xl">Структура АвтоЦены</h2>
-      <div className="mt-2 border-t border-dotted border-white/20 pt-2">
+    <section className="ac-offer-breakdown min-w-0 rounded-[1.35rem] p-4">
+      <h2 className="ac-offer-block-title text-lg font-black tracking-[-0.025em] md:text-xl">Структура АвтоЦены</h2>
+      <div className="ac-offer-breakdown-lines mt-2 border-t border-dotted pt-2">
         {lines.map((line, index) => (
           <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]">
-            <span className="flex min-w-0 items-baseline gap-2 text-white/62">
+            <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2">
               <span className="min-w-0 truncate">{line.title}</span>
-              <span className="mb-1 min-w-3 flex-1 border-b border-dotted border-white/14" />
+              <span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted" />
             </span>
-            <span className="whitespace-nowrap font-black text-white">{money(line.amountRub)} ₽</span>
+            <span className="ac-offer-breakdown-value whitespace-nowrap font-black">{money(line.amountRub)} ₽</span>
           </div>
         ))}
       </div>
@@ -109,14 +109,14 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
         <header className="mb-5 min-w-0 md:mb-7">
           <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
-          <div className="mt-2 flex min-w-0 items-start gap-2 md:gap-3">
+          <div className="relative mt-2 min-w-0">
             <FavoriteToggle
               offerId={o.id}
               snapshot={snapshot}
               inline
-              className="-ml-1 -mt-0.5 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-mt-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10"
+              className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10"
             />
-            <h1 className="min-w-0 break-words text-3xl font-black leading-[1.02] tracking-[-0.04em] md:text-5xl">{o.title}</h1>
+            <h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1>
           </div>
         </header>
 
@@ -126,7 +126,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           </div>
 
           <aside className="ac-offer-detail-stack min-w-0 xl:sticky xl:top-24">
-            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" panel />
+            <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
 
             {o.priceMode === "auction_start" ? (
               <p className="mt-4 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p>
@@ -146,12 +146,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
               <OfferPriceBreakdown offer={o} />
             </div>
 
-            <div className="mt-4 rounded-[1.35rem] bg-white/[0.04] p-4">
-              <div className="text-base font-black">Статус предложения</div>
-              <p className="mt-2 text-xs font-medium leading-5 text-white/58">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
+            <div className="ac-offer-status mt-4 rounded-[1.35rem] p-4">
+              <div className="ac-offer-block-title text-base font-black">Статус предложения</div>
+              <p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p>
             </div>
 
-            <div className="mt-5 rounded-[1.8rem] bg-white/[0.05] p-5 md:p-6 [&>form]:mt-0">
+            <div className="ac-offer-form mt-5 rounded-[1.8rem] p-5 md:p-6 [&>form]:mt-0">
               <OfferLeadForm offerId={o.id} />
             </div>
           </aside>
