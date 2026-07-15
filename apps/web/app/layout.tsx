@@ -56,11 +56,24 @@ const themeBootstrap = `
 })();
 `;
 
+const publicUiCorrections = `
+:root { --ac-public-accent: #ff4650; }
+html[data-theme="light"] { --ac-public-accent: #c91e2a; }
+.ac-page-copy [class*="text-red-300"],
+.ac-page-copy [class*="text-red-200"] { color: var(--ac-public-accent) !important; }
+html[data-theme="light"] .ac-page-copy .ac-on-image,
+html[data-theme="light"] .ac-page-copy .ac-on-image *,
+html[data-theme="light"] .ac-page-copy .ac-on-image [class~="text-white"],
+html[data-theme="light"] .ac-page-copy .ac-on-image [class*="text-white/"] { color: #ffffff !important; }
+.ac-body-picker-panel { position: relative !important; inset: auto !important; }
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+        <style dangerouslySetInnerHTML={{ __html: publicUiCorrections }} />
       </head>
       <body suppressHydrationWarning>
         {children}
