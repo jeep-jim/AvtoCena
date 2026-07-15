@@ -21,13 +21,12 @@
 .ac-search-select,
 .ac-filter-input,
 .ac-native-select,
-.soft-input {
-  border: 1px solid var(--ac-border) !important;
-}
+.soft-input { border: 1px solid var(--ac-border) !important; }
 
-.ac-hero-key {
-  display: none;
-}
+.ac-favorite-header > svg { display:none; }
+.ac-favorite-header::before { content:"★"; font-size:25px; line-height:1; color:#ef3340; }
+.ac-drawer-nav-link[href="/favorites"] svg { display:none; }
+.ac-drawer-nav-link[href="/favorites"] span:last-child::before { content:"☆"; font-size:25px; color:#ef3340; }
 
 /* The asset is expected at apps/web/public/key-logo.png. */
 @media (min-width: 1100px) {
@@ -55,10 +54,7 @@ html[data-theme="light"] {
   --ac-muted: #596171;
   --ac-accent: #d61f2c;
 }
-
-html[data-theme="light"] body {
-  background: linear-gradient(180deg,#eef1f6 0%,#e3e7ee 100%) !important;
-}
+html[data-theme="light"] body { background: linear-gradient(180deg,#eef1f6 0%,#e3e7ee 100%) !important; }
 html[data-theme="light"] .ac-page-copy { color: var(--ac-text) !important; }
 html[data-theme="light"] .ac-page-copy [class~="text-white"] { color: var(--ac-text) !important; }
 html[data-theme="light"] .ac-page-copy [class*="text-white/"] { color: var(--ac-muted) !important; }
@@ -94,12 +90,8 @@ html[data-theme="light"] .ac-public-header .ac-brand-mark { --ac-mark-panel:#202
 html[data-theme="light"] .avto-button { color:#fff !important; }
 html[data-theme="light"] .ac-alternative-note { background:#fff4d5 !important; color:#684d00 !important; border:1px solid #e2c66b !important; }
 
-@media (min-width: 768px) {
-  .ac-result-rail { grid-auto-flow: initial; grid-auto-columns: initial; grid-template-columns: repeat(2,minmax(0,1fr)); overflow: visible; }
-}
-@media (min-width: 1200px) {
-  .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); }
-}
+@media (min-width: 768px) { .ac-result-rail { grid-auto-flow: initial; grid-auto-columns: initial; grid-template-columns: repeat(2,minmax(0,1fr)); overflow: visible; } }
+@media (min-width: 1200px) { .ac-result-rail { grid-template-columns: repeat(4,minmax(0,1fr)); } }
 @media (max-width: 767px) {
   .ac-market-rail { grid-auto-columns: minmax(232px, 72vw) !important; }
   .ac-result-rail { margin-right:-1rem; padding-right:1rem; }
