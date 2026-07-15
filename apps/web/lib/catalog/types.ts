@@ -53,6 +53,9 @@ export type VehicleOffer = {
   images: CatalogImage[];
   calculationSnapshot?: any;
   totalRub?: number | null;
+  previousTotalRub?: number | null;
+  priceDeltaRub?: number | null;
+  priceChangedAt?: string;
   calculationStatus: CalculationStatus;
   firstSeenAt: string;
   updatedAt: string;
