@@ -8,6 +8,13 @@ on:
         required: false
         default: false
         type: boolean
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/web/lib/catalog/**"
+      - "scripts/catalog-import-sample.mjs"
+      - ".github/workflows/catalog-production-import.yml"
   schedule:
     - cron: "17 */6 * * *"
 
