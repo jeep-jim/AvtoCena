@@ -88,10 +88,10 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     market: raw.market,
     make: raw.make,
     budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined,
-    pageSize: 8,
+    pageSize: 13,
     sort: "updatedAt",
   });
-  const similar = similarResult.items.filter((item: any) => item.id !== raw.id).slice(0, 6);
+  const similar = similarResult.items.filter((item: any) => item.id !== raw.id).slice(0, 12);
   const snapshot = {
     id: o.id,
     title: o.title,
@@ -162,7 +162,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             <Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link>
           </div>
           {similar.length ? (
-            <div className="ac-result-rail ac-hide-scrollbar mt-5">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div>
+            <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div>
           ) : (
             <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>
           )}
