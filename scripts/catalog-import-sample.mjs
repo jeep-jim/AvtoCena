@@ -1,10 +1,11 @@
-process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "24";
-process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "24";
-process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "12";
+process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "48";
+process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "48";
+process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "24";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "6";
-process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= "224";
-process.env.CATALOG_OFFER_RETENTION_MS ||= String(2 * 24 * 60 * 60 * 1000);
-process.env.CATALOG_STALE_GRACE_MS ||= String(2 * 24 * 60 * 60 * 1000);
+process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= "2500";
+process.env.CATALOG_TARGET_PER_MARKET ||= "500";
+process.env.CATALOG_OFFER_RETENTION_MS ||= String(3 * 24 * 60 * 60 * 1000);
+process.env.CATALOG_STALE_GRACE_MS ||= String(3 * 24 * 60 * 60 * 1000);
 
 const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
 
@@ -48,12 +49,14 @@ const requestedOffers = Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 0);
 const requestedDetails = Number(process.env.CATALOG_IMPORT_MAX_DETAILS || 0);
 const requestedPages = Number(process.env.CATALOG_IMPORT_MAX_PAGES || 0);
 const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 0);
-const targetPublicOffers = Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 224);
-const minimumPerSource = Math.max(1, Math.ceil(targetPublicOffers / Math.max(1, sources.length)));
+const targetPublicOffers = Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 2500);
+const targetPerMarket = Number(process.env.CATALOG_TARGET_PER_MARKET || 500);
 
-const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(minimumPerSource, requestedOffers || minimumPerSource);
+// The target is accumulated over rolling scans. Keeping each run bounded lets every source
+// advance its saved cursor and refresh roughly one full 500-car market inside a day.
+const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(64, requestedOffers || 64);
 const maxDetails = encarOnly ? encarSample.maxDetails : Math.max(maxOffers, requestedDetails || maxOffers);
-const maxPages = encarOnly ? encarSample.maxPages : Math.max(4, requestedPages || 4);
+const maxPages = encarOnly ? encarSample.maxPages : Math.max(8, requestedPages || 8);
 const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Math.max(6, requestedImages || 6);
 
 importCatalog({
@@ -66,6 +69,10 @@ importCatalog({
   failOnZeroSaved: true,
   reportPath: "catalog/imports/latest-public-markets.json",
 }).then(async (report) => {
+  const marketIds = ["korea", "china", "japan", "uae", "europe"];
+  const publicByMarket = report.publicByMarket || {};
+  const missingByMarket = Object.fromEntries(marketIds.map((market) => [market, Math.max(0, targetPerMarket - Number(publicByMarket[market] || 0))]));
+  const targetReachedByMarket = marketIds.every((market) => Number(publicByMarket[market] || 0) >= targetPerMarket);
   const summary = {
     imported: report.imported,
     updated: report.updated,
@@ -75,9 +82,12 @@ importCatalog({
     underfilledImages: report.underfilledImages,
     reusedImageSets: report.reusedImageSets,
     publicOffers: report.publicOffers,
-    publicByMarket: report.publicByMarket,
-    targetPublicOffers: report.targetPublicOffers,
+    publicByMarket,
+    targetPublicOffers,
+    targetPerMarket,
     targetReached: report.targetReached,
+    targetReachedByMarket,
+    missingByMarket,
     generationId: report.generationId,
     sources: report.sources,
     reportPath: "catalog/imports/latest-public-markets.json",

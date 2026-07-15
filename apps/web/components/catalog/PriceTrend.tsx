@@ -62,12 +62,14 @@ export function PriceTrend({
   priceClassName = "text-[22px]",
   className = "",
   panel = false,
+  dense = false,
 }: {
   offer: PriceLike;
   label?: string;
   priceClassName?: string;
   className?: string;
   panel?: boolean;
+  dense?: boolean;
 }) {
   const trend = resolvePriceTrend(offer);
   const directionClass = trend?.direction === "down" ? "text-emerald-400" : "text-[#ff5c63]";
@@ -80,19 +82,19 @@ export function PriceTrend({
 
   return (
     <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
-      <div className="text-[10px] font-black uppercase tracking-[0.16em] text-white/42">{label}</div>
-      <div className="mt-1 flex min-w-0 items-end justify-between gap-3">
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black uppercase tracking-[0.16em] text-white/42`}>{label}</div>
+      <div className={`${dense ? "mt-0.5 gap-1 sm:mt-1 sm:gap-3" : "mt-1 gap-3"} flex min-w-0 items-end justify-between`}>
         <div className={`ac-price min-w-0 break-words font-black leading-none tracking-[-0.045em] ${priceClassName} ${trend ? directionClass : neutralClass}`}>
           {offer.totalRub ? `${money(offer.totalRub)} ₽` : "Цена уточняется"}
         </div>
         {trend ? (
           <div
-            className={`flex shrink-0 items-center gap-1.5 pb-0.5 font-black ${directionClass}`}
+            className={`flex shrink-0 items-center pb-0.5 font-black ${dense ? "gap-0.5 sm:gap-1.5" : "gap-1.5"} ${directionClass}`}
             title="Изменение относительно предыдущего сохранённого расчёта"
             aria-label={`Цена ${trend.direction === "down" ? "снизилась" : "выросла"} на ${trend.formattedDelta}`}
           >
-            <span className="text-xs md:text-sm">{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span>
-            <TrendArrow direction={trend.direction} className="h-5 w-7 md:h-6 md:w-8" />
+            <span className={`${dense ? "hidden text-[9px] sm:inline sm:text-xs md:text-sm" : "text-xs md:text-sm"}`}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span>
+            <TrendArrow direction={trend.direction} className={dense ? "h-4 w-5 sm:h-5 sm:w-7 md:h-6 md:w-8" : "h-5 w-7 md:h-6 md:w-8"} />
           </div>
         ) : null}
       </div>
