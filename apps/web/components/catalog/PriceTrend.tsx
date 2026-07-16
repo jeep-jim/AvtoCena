@@ -1,5 +1,3 @@
-import { money } from "../../lib/avtocena";
-
 type PriceLike = {
   totalRub?: number | null;
   previousTotalRub?: number | null;
@@ -24,6 +22,10 @@ export type PriceTrendValue = {
   deltaRub: number;
   formattedDelta: string;
 };
+
+function money(value: number) {
+  return new Intl.NumberFormat("ru-RU").format(Math.round(value));
+}
 
 function savedPriceDelta(offer: PriceLike) {
   const current = Number(offer.totalRub || 0);
