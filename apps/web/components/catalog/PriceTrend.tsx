@@ -100,10 +100,10 @@ export function PriceTrend({
   dense?: boolean;
 }) {
   const trend = resolvePriceTrend(offer);
-  const directionClass = trend?.direction === "down" ? "text-emerald-400" : "text-[#ff5c63]";
-  const neutralClass = "text-red-500";
+  const directionClass = trend?.direction === "down" ? "text-[#168a59]" : "text-[#ff5c63]";
+  const priceClass = trend?.direction === "down" ? "text-[#168a59]" : "text-red-500";
   const panelClass = trend?.direction === "down"
-    ? "bg-emerald-500/[0.09]"
+    ? "bg-[#168a59]/[0.09]"
     : trend?.direction === "up"
       ? "bg-red-500/[0.085]"
       : "bg-red-500/[0.075]";
@@ -115,9 +115,20 @@ export function PriceTrend({
 
   return (
     <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} font-black uppercase tracking-[0.19em] text-white/42`}>{label}</div>
-      <div className={`${dense ? "mt-0.5 gap-1 sm:mt-1 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-        <div className={`ac-price min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName} ${trend ? directionClass : neutralClass}`}>
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} min-w-0 font-black uppercase tracking-[0.19em] text-white/42`}>{label}</div>
+        {trend ? (
+          <span
+            className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} shrink-0 font-black leading-none ${directionClass}`}
+            title={trendTitle}
+            aria-label={`Цена ${trend.direction === "down" ? "снизилась" : "выросла"} на ${trend.formattedDelta}`}
+          >
+            {trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}
+          </span>
+        ) : null}
+      </div>
+      <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
+        <div className={`ac-price min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName} ${priceClass}`}>
           {hasPrice ? (
             <>
               <span>{money(Number(offer.totalRub))}</span>
@@ -128,12 +139,7 @@ export function PriceTrend({
           )}
         </div>
         {trend ? (
-          <div
-            className={`flex shrink-0 items-center pb-0.5 font-black ${dense ? "gap-0.5 sm:gap-1.5" : "gap-1.5"} ${directionClass}`}
-            title={trendTitle}
-            aria-label={`Цена ${trend.direction === "down" ? "снизилась" : "выросла"} на ${trend.formattedDelta}`}
-          >
-            <span className={`${dense ? "hidden text-[9px] sm:inline sm:text-xs md:text-sm" : "text-xs md:text-sm"}`}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span>
+          <div className={`flex shrink-0 items-center pb-0.5 ${directionClass}`} title={trendTitle} aria-hidden="true">
             <TrendArrow direction={trend.direction} className={dense ? "h-4 w-5 sm:h-5 sm:w-7 md:h-6 md:w-8" : "h-5 w-7 md:h-6 md:w-8"} />
           </div>
         ) : null}
