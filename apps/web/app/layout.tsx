@@ -4,6 +4,7 @@ import "./public-polish.css";
 import type { Metadata, Viewport } from "next";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
 import { PublicUiEnhancer } from "@/components/layout/PublicUiEnhancer";
+import { PublicLegalFooter } from "@/components/layout/PublicLegalFooter";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://avtocena.com"),
@@ -207,6 +208,46 @@ html[data-theme="light"] .ac-catalog-card > a > div:last-child span[class*="bg-w
   color: #465061 !important;
 }
 
+/* Public legal footer and cookie notice entry point. */
+.ac-public-legal-footer {
+  color: rgba(255,255,255,.58);
+}
+.ac-public-legal-footer-line {
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+.ac-public-legal-link {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent !important;
+  color: rgba(255,255,255,.7);
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: color .18s ease, opacity .18s ease;
+}
+.ac-public-legal-link:hover {
+  color: #ff4650;
+}
+.ac-public-legal-link-muted {
+  cursor: default;
+  opacity: .48;
+}
+.ac-public-legal-link-muted:hover {
+  color: inherit;
+}
+html[data-theme="light"] .ac-public-legal-footer {
+  color: #687286;
+}
+html[data-theme="light"] .ac-public-legal-footer-line {
+  border-top-color: rgba(42,49,63,.18);
+}
+html[data-theme="light"] .ac-public-legal-link {
+  color: #4d586d;
+}
+html[data-theme="light"] .ac-public-legal-link:hover {
+  color: #c91e2a;
+}
+
 /* Keep the price summary readable on desktop instead of splitting the currency sign. */
 .ac-result-summary h1 {
   white-space: nowrap !important;
@@ -239,6 +280,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body suppressHydrationWarning>
         {children}
+        <PublicLegalFooter />
         <PublicUiEnhancer />
         <RoutePreloader />
       </body>
