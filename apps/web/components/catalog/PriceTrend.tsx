@@ -79,13 +79,21 @@ export function PriceTrend({
     : trend?.direction === "up"
       ? "bg-red-500/[0.085]"
       : "bg-red-500/[0.075]";
+  const hasPrice = Boolean(offer.totalRub);
 
   return (
     <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black uppercase tracking-[0.16em] text-white/42`}>{label}</div>
-      <div className={`${dense ? "mt-0.5 gap-1 sm:mt-1 sm:gap-3" : "mt-1 gap-3"} flex min-w-0 items-end justify-between`}>
-        <div className={`ac-price min-w-0 break-words font-black leading-none tracking-[-0.045em] ${priceClassName} ${trend ? directionClass : neutralClass}`}>
-          {offer.totalRub ? `${money(offer.totalRub)} ₽` : "Цена уточняется"}
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} font-black uppercase tracking-[0.19em] text-white/42`}>{label}</div>
+      <div className={`${dense ? "mt-0.5 gap-1 sm:mt-1 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
+        <div className={`ac-price min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName} ${trend ? directionClass : neutralClass}`}>
+          {hasPrice ? (
+            <>
+              <span>{money(Number(offer.totalRub))}</span>
+              <span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span>
+            </>
+          ) : (
+            "Цена уточняется"
+          )}
         </div>
         {trend ? (
           <div
