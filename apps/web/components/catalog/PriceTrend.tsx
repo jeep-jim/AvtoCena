@@ -23,8 +23,14 @@ export type PriceTrendValue = {
   direction: PriceTrendDirection;
   deltaRub: number;
   formattedDelta: string;
-  reason: "saved_price" | "currency_rate";
 };
+
+function savedPriceDelta(offer: PriceLike) {
+  const current = Number(offer.totalRub || 0);
+  const explicitDelta = Number(offer.priceDeltaRub || 0);
+  const previous = Number(offer.previousTotalRub || 0);
+  return explicitDelta || (current && previous ? current - previous : 0);
+}
 
 function currencyDelta(offer: PriceLike) {
   const sourcePrice = Number(offer.sourcePrice || 0);
@@ -39,11 +45,7 @@ function currencyDelta(offer: PriceLike) {
 
 export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
   const current = Number(offer.totalRub || 0);
-  const explicitDelta = Number(offer.priceDeltaRub || 0);
-  const previous = Number(offer.previousTotalRub || 0);
-  const savedDelta = explicitDelta || (current && previous ? current - previous : 0);
-  const fxDelta = currencyDelta(offer);
-  const delta = savedDelta || fxDelta;
+  const delta = savedPriceDelta(offer) || currencyDelta(offer);
   if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1_000) return null;
 
   const absolute = Math.abs(delta);
@@ -55,7 +57,6 @@ export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
     direction: delta < 0 ? "down" : "up",
     deltaRub: delta,
     formattedDelta,
-    reason: savedDelta ? "saved_price" : "currency_rate",
   };
 }
 
@@ -105,7 +106,8 @@ export function PriceTrend({
       ? "bg-red-500/[0.085]"
       : "bg-red-500/[0.075]";
   const hasPrice = Boolean(offer.totalRub);
-  const trendTitle = trend?.reason === "currency_rate"
+  const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(offer) && Boolean(currencyDelta(offer));
+  const trendTitle = trendUsesCurrency
     ? "Изменение расчёта из-за обновления валютного курса"
     : "Изменение относительно предыдущего сохранённого расчёта";
 
