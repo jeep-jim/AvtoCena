@@ -7,7 +7,20 @@ process.env.CATALOG_TARGET_PER_MARKET ||= "500";
 process.env.CATALOG_OFFER_RETENTION_MS ||= String(3 * 24 * 60 * 60 * 1000);
 process.env.CATALOG_STALE_GRACE_MS ||= String(3 * 24 * 60 * 60 * 1000);
 
-const { PUBLIC_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-market-sources.ts");
+const {
+  alternateMarketSources,
+  PRODUCTION_CATALOG_SOURCE_IDS,
+} = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
+const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
+const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
+
+// Keep legacy adapters available in the codebase, but production uses the working
+// public JSON sources plus the SBT inventory fallbacks for the four empty markets.
+for (const source of alternateMarketSources) {
+  if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) {
+    catalogImportSources.push(source);
+  }
+}
 
 // Useful fallback for a focused Encar verification without changing the all-market production default.
 const encarSample = {
@@ -22,8 +35,11 @@ const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);
-const defaultSources = [...new Set([...PUBLIC_CATALOG_SOURCE_IDS, "beforward_public"])];
-const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : defaultSources;
+const sources = encarOnly
+  ? encarSample.sourceIds
+  : configuredSources.length
+    ? configuredSources
+    : [...new Set(PRODUCTION_CATALOG_SOURCE_IDS)];
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
@@ -44,7 +60,6 @@ if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "")
 }
 
 await import("../apps/web/lib/catalog/encar-resilience.ts");
-const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 
 const requestedOffers = Number(process.env.CATALOG_IMPORT_MAX_OFFERS || 0);
 const requestedDetails = Number(process.env.CATALOG_IMPORT_MAX_DETAILS || 0);
@@ -53,12 +68,25 @@ const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 0);
 const targetPublicOffers = Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 2500);
 const targetPerMarket = Number(process.env.CATALOG_TARGET_PER_MARKET || 500);
 
-// The target is accumulated over rolling scans. Keeping each run bounded lets every source
-// advance its saved cursor and refresh roughly one full 500-car market inside a day.
-const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(64, requestedOffers || 64);
+// One daily run may inspect up to 500 offers per source. Existing six-photo sets are
+// reused, so subsequent daily refreshes mostly read list pages instead of downloading
+// the same photos again. Records remain public for three days between successful scans.
+const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(64, requestedOffers || 500);
 const maxDetails = encarOnly ? encarSample.maxDetails : Math.max(maxOffers, requestedDetails || maxOffers);
-const maxPages = encarOnly ? encarSample.maxPages : Math.max(8, requestedPages || 8);
+const maxPages = encarOnly ? encarSample.maxPages : Math.max(8, requestedPages || 30);
 const maxImagesPerOffer = encarOnly ? encarSample.maxImagesPerOffer : Math.max(6, requestedImages || 6);
+
+// Source policies are persisted in Object Storage. Raise old five-page policies to the
+// new daily limits, otherwise the workflow environment alone cannot reach 500 offers.
+for (const source of catalogImportSources.filter((candidate) => sources.includes(candidate.sourceId))) {
+  await mutateSourcePolicy(source, (policy) => ({
+    ...policy,
+    enabled: true,
+    maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), maxPages),
+    maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), maxOffers),
+    maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), maxDetails),
+  }));
+}
 
 importCatalog({
   sourceIds: sources,
