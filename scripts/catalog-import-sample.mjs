@@ -19,6 +19,7 @@ const {
 } = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
 const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
+const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 
 for (const source of [...alternateMarketSources, ...publicFallbackSources]) {
   if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) {
@@ -40,7 +41,6 @@ const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
   .map((value) => value.trim())
   .filter(Boolean);
 
-// Try the market-specific public page first and keep SBT as the last fallback.
 const preferredProductionOrder = [
   "encar_direct",
   "japantransit_japan",
@@ -110,6 +110,13 @@ for (const source of catalogImportSources.filter((candidate) => sources.includes
 }
 
 const startedAt = Date.now();
+const exchangeRates = await refreshLiveExchangeRates().catch((error) => ({
+  updatedAt: new Date().toISOString(),
+  rates: [],
+  errors: [`refresh:${error?.message || "failed"}`],
+}));
+console.log(`[catalog] exchange rates refreshed: ${exchangeRates.rates?.length || 0}; errors=${exchangeRates.errors?.length || 0}`);
+
 const report = await importCatalog({
   sourceIds: sources,
   maxOffers,
@@ -146,6 +153,11 @@ const summary = {
   missingByMarket,
   generationId: report.generationId,
   sources: report.sources,
+  exchangeRates: {
+    updatedAt: exchangeRates.updatedAt,
+    rates: exchangeRates.rates,
+    errors: exchangeRates.errors,
+  },
   durationMs: Date.now() - startedAt,
   reportPath: "catalog/imports/latest-public-markets.json",
 };
