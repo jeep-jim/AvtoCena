@@ -5,6 +5,9 @@ export type CurrencyRateSnapshot = {
   cbrRate: number;
   nominal: number;
   effectiveRate: number;
+  previousEffectiveRate?: number;
+  previousRateDate?: string;
+  rateDelta?: number;
   rateDate: string;
   fetchedAt?: string;
   rateSource: "moex" | "cbr" | "legacy_json" | "fallback_env";
@@ -25,6 +28,11 @@ function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
     ? value.slice(0, 10)
     : new Date().toISOString().slice(0, 10);
+}
+
+function optionalNumber(value: unknown) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
 export async function convertToRub(sourcePrice: number | null, currency: string | null): Promise<CurrencyRateSnapshot | null> {
@@ -62,6 +70,9 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
         cbrRate,
         nominal,
         effectiveRate,
+        previousEffectiveRate: optionalNumber(structured.previousEffectiveRate),
+        previousRateDate: structured.previousRateDate ? validDate(structured.previousRateDate) : undefined,
+        rateDelta: Number.isFinite(Number(structured.rateDelta)) ? Number(structured.rateDelta) : undefined,
         rateDate: validDate(structured.rateDate || structured.date || rates.updatedAt),
         fetchedAt: structured.fetchedAt || rates.updatedAt,
         rateSource: source === "moex" ? "moex" : source === "legacy_json" ? "legacy_json" : "cbr",
