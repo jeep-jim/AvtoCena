@@ -180,12 +180,24 @@ export default function HomePage() {
   const [catalogMake, setCatalogMake] = useState("");
   const [items, setItems] = useState<CatalogItem[]>([]);
   const [foundCount, setFoundCount] = useState<number | null>(null);
+  const allowDemo = process.env.NODE_ENV !== "production" || process.env.ENABLE_DEMO_CATALOG === "true" || process.env.NEXT_PUBLIC_ENABLE_DEMO_CATALOG === "true";
 
   useEffect(() => {
     const attribution = captureAttributionFromBrowser();
     if (attribution.clickId) void trackAttributionEvent("visit", attribution, { landingPath: window.location.pathname });
-    Promise.all(["korea", "china", "japan", "uae", "europe"].map((marketId) => fetch(`/api/catalog/search?market=${marketId}&pageSize=18&sort=updatedAt`, { cache: "no-store" }).then((response) => response.ok ? response.json() : null)))
-      .then((responses) => setItems(responses.flatMap((data) => Array.isArray(data?.items) ? data.items : []).map(mapItem)))
+    const requests = [
+      fetch("/api/catalog/search?pageSize=12&sort=updatedAt", { cache: "no-store" }).then((response) => response.ok ? response.json() : null),
+      ...["korea", "china", "japan", "uae", "europe"].map((marketId) => fetch(`/api/catalog/search?market=${marketId}&pageSize=18&sort=updatedAt`, { cache: "no-store" }).then((response) => response.ok ? response.json() : null)),
+    ];
+    Promise.all(requests)
+      .then((responses) => {
+        const unique = new Map<string, CatalogItem>();
+        for (const raw of responses.flatMap((data) => Array.isArray(data?.items) ? data.items : [])) {
+          const item = mapItem(raw);
+          if (!unique.has(item.id)) unique.set(item.id, item);
+        }
+        setItems([...unique.values()]);
+      })
       .catch(() => setItems([]));
   }, []);
 
@@ -248,6 +260,7 @@ export default function HomePage() {
 
   return <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader />
+    <Link href="/cars" className="sr-only">Каталог</Link>
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
       <section className="grid items-start gap-7 py-7 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
         <div><h1 className="max-w-4xl text-[44px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[82px] xl:text-[96px]">Цена на авто под заказ</h1><p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
@@ -255,7 +268,7 @@ export default function HomePage() {
       </section>
       <div className="grid grid-cols-3 gap-3 rounded-[1.4rem] bg-white/[0.025] px-2 py-5 lg:hidden">{benefits.map((item) => <div key={item.title} className="text-center"><div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/12 text-red-400"><BenefitIcon type={item.icon} /></div><div className="mt-2 text-sm font-black">{item.title}</div></div>)}</div>
       <section className="mt-8"><BuyerGallery /><ExecutorBlock /></section>
-      <section className="mt-6 pt-6"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">Свежие предложения</div><h2 className="mt-2 text-3xl font-black tracking-[-0.04em] md:text-5xl">Автомобили в каталоге</h2></div><div className="grid gap-3 sm:grid-cols-[180px_220px_auto]"><SearchSelect value={catalogMarket} onChange={setCatalogMarket} options={marketOptions} placeholder="Любая страна" searchPlaceholder="Найти страну" /><SearchSelect value={catalogMake} onChange={setCatalogMake} options={makeOptions} placeholder="Марка или модель" searchPlaceholder="Найти марку" /><Link href={catalogHref} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>{catalogItems.length ? <div className="ac-hide-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3">{catalogItems.map((item) => <div key={item.id} className="w-[82vw] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none"><CatalogCard offer={item.raw} compact /></div>)}</div> : <div className="mt-6 rounded-[1.6rem] bg-white/[0.045] p-6 text-sm font-bold text-white/58">Каталог обновляется. Свежие варианты появятся после импорта рынка.</div>}</section>
+      <section className="mt-6 pt-6" data-demo-enabled={allowDemo ? "true" : "false"}><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-300">Свежие предложения</div><h2 className="mt-2 text-3xl font-black tracking-[-0.04em] md:text-5xl">Автомобили в каталоге</h2></div><div className="grid gap-3 sm:grid-cols-[180px_220px_auto]"><SearchSelect value={catalogMarket} onChange={setCatalogMarket} options={marketOptions} placeholder="Любая страна" searchPlaceholder="Найти страну" /><SearchSelect value={catalogMake} onChange={setCatalogMake} options={makeOptions} placeholder="Марка или модель" searchPlaceholder="Найти марку" /><Link href={catalogHref} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>{catalogItems.length ? <div className="ac-hide-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3">{catalogItems.map((item) => <div key={item.id} className="w-[82vw] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none"><CatalogCard offer={item.raw} compact /></div>)}</div> : <div className="mt-6 rounded-[1.6rem] bg-white/[0.045] p-6 text-sm font-bold text-white/58">Каталог обновляется. Свежие варианты появятся после импорта рынка.</div>}</section>
     </div>
   </main>;
 }
