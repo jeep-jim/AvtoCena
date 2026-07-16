@@ -109,7 +109,7 @@ const report = await importCatalog({
   maxImagesPerOffer,
   maxPages,
   requireObjectStorage: true,
-  failOnZeroSaved: false,
+  failOnZeroSaved: true,
   reportPath: "catalog/imports/latest-public-markets.json",
 });
 
