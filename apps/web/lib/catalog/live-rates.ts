@@ -65,8 +65,8 @@ function parseCbrXml(xml: string, fetchedAt: string): StoredRate[] {
   return result;
 }
 
-function tableRows(table: any) {
-  if (!table || !Array.isArray(table.columns) || !Array.isArray(table.data)) return [] as Record<string, unknown>[];
+function tableRows(table: any): Record<string, unknown>[] {
+  if (!table || !Array.isArray(table.columns) || !Array.isArray(table.data)) return [];
   return table.data.map((row: unknown[]) => Object.fromEntries(table.columns.map((column: string, index: number) => [column, row[index]])));
 }
 
@@ -79,7 +79,8 @@ async function fetchMoexRate(code: RateCode, fetchedAt: string): Promise<StoredR
   url.searchParams.set("marketdata.columns", "SECID,LAST,MARKETPRICE,WAPRICE,LCLOSEPRICE,UPDATETIME,SYSTIME");
   url.searchParams.set("securities.columns", "SECID,PREVPRICE,LOTSIZE");
   const json = JSON.parse(await fetchText(url.toString()));
-  const row = [...tableRows(json.marketdata), ...tableRows(json.securities)].find((item) => String(item.SECID || "") === security) || {};
+  const row: Record<string, unknown> = [...tableRows(json.marketdata), ...tableRows(json.securities)]
+    .find((item) => String(item.SECID || "") === security) || {};
   const value = validNumber(row.LAST) || validNumber(row.MARKETPRICE) || validNumber(row.WAPRICE) || validNumber(row.LCLOSEPRICE) || validNumber(row.PREVPRICE);
   if (!value) return null;
   return { currency: code, cbrRate: value, nominal: 1, effectiveRate: value, rateDate: fetchedAt.slice(0, 10), fetchedAt, rateSource: "moex" };
