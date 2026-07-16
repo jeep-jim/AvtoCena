@@ -1,19 +1,51 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
 const INTERNAL_ROUTE_PREFIXES = ["/crm", "/login", "/api"];
 
+const marketLinks = [
+  { href: "/cars?market=japan", label: "Автомобили из Японии" },
+  { href: "/cars?market=china", label: "Автомобили из Китая" },
+  { href: "/cars?market=korea", label: "Автомобили из Кореи" },
+  { href: "/cars?market=uae", label: "Автомобили из ОАЭ" },
+  { href: "/cars?market=europe", label: "Автомобили из Европы" },
+];
+
+const budgetLinks = [
+  { href: "/results?budget=1500000", label: "Авто до 1,5 млн ₽" },
+  { href: "/results?budget=2000000", label: "Авто до 2 млн ₽" },
+  { href: "/results?budget=3000000", label: "Авто до 3 млн ₽" },
+  { href: "/results?budget=5000000", label: "Авто до 5 млн ₽" },
+];
+
 function isPublicPath(pathname: string) {
   return !INTERNAL_ROUTE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
+function FooterLinkGroup({ title, links }: { title: string; links: Array<{ href: string; label: string }> }) {
+  return (
+    <nav aria-label={title}>
+      <h2 className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-text)]">{title}</h2>
+      <div className="mt-3 grid gap-2 text-sm font-semibold">
+        {links.map((link) => (
+          <Link key={link.href} href={link.href} className="ac-public-footer-nav-link w-fit">
+            {link.label}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  );
 }
 
 export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
+  const currentYear = new Date().getFullYear();
 
   const closeCookieNotice = useCallback(() => {
     setCookieOpen(false);
@@ -52,22 +84,44 @@ export function PublicLegalFooter() {
 
   return (
     <>
-      <footer className="ac-public-legal-footer mx-auto mt-16 w-full max-w-[1500px] px-4 pb-8 md:mt-20 md:px-8 md:pb-10">
-        <div className="ac-public-legal-footer-line pt-5 md:flex md:items-end md:justify-between md:gap-8">
-          <p className="max-w-4xl text-xs font-semibold leading-5 md:text-sm md:leading-6">
+      <footer className="ac-public-legal-footer mx-auto mt-14 w-full max-w-[1500px] px-4 pb-8 md:mt-20 md:px-8 md:pb-10">
+        <div className="ac-public-footer-navigation grid gap-8 py-7 sm:grid-cols-2 lg:grid-cols-[minmax(260px,1.25fr)_1fr_1fr_1fr] lg:gap-10 lg:py-9">
+          <div className="max-w-md">
+            <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]">
+              <span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span>
+            </Link>
+            <p className="mt-3 text-sm font-medium leading-6">
+              Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ и Европы.
+            </p>
+            <Link href="/#form" className="ac-public-footer-cta mt-4 inline-flex min-h-10 items-center rounded-xl px-4 text-sm font-black">
+              Рассчитать АвтоЦену
+            </Link>
+          </div>
+
+          <FooterLinkGroup title="По странам" links={marketLinks} />
+          <FooterLinkGroup title="По бюджету" links={budgetLinks} />
+          <FooterLinkGroup
+            title="Разделы"
+            links={[
+              { href: "/cars", label: "Каталог автомобилей" },
+              { href: "/favorites", label: "Избранные автомобили" },
+              { href: "/partner/landing", label: "Партнёрская программа" },
+              { href: "/#form", label: "Подбор автомобиля" },
+            ]}
+          />
+        </div>
+
+        <div className="ac-public-legal-footer-line grid gap-3 pt-5 text-xs font-semibold leading-5 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-6">
+          <p className="lg:whitespace-nowrap">
             Данный сайт носит исключительно информационный характер и ни при каких обстоятельствах не является публичной офертой.
           </p>
-
-          <nav className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold md:mt-0 md:justify-end md:text-sm" aria-label="Правовая информация">
+          <span className="whitespace-nowrap">© {currentYear} АвтоЦена</span>
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">
               Cookie
             </button>
-            <span className="ac-public-legal-link ac-public-legal-link-muted" title="Ссылка будет добавлена после подготовки документа">
-              Ссылка
-            </span>
-            <span className="ac-public-legal-link ac-public-legal-link-muted" title="Ссылка будет добавлена после подготовки документа">
-              Ссылка
-            </span>
+            <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
+            <Link href="/partner/landing" className="ac-public-legal-link">Партнёрам</Link>
           </nav>
         </div>
       </footer>

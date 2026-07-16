@@ -13,10 +13,14 @@ const {
   alternateMarketSources,
   PRODUCTION_CATALOG_SOURCE_IDS,
 } = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
+const {
+  publicFallbackSources,
+  PUBLIC_FALLBACK_SOURCE_IDS,
+} = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
 const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 
-for (const source of alternateMarketSources) {
+for (const source of [...alternateMarketSources, ...publicFallbackSources]) {
   if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) {
     catalogImportSources.push(source);
   }
@@ -36,20 +40,24 @@ const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
   .map((value) => value.trim())
   .filter(Boolean);
 
-// Main sources first, slower fallbacks last. The importer stops processing fallbacks
-// for a market after the daily target has already been filled by an earlier source.
+// Try the market-specific public page first and keep SBT as the last fallback.
 const preferredProductionOrder = [
   "encar_direct",
+  "japantransit_japan",
   "sbt_japan",
-  "sbt_china",
-  "sbt_uae",
-  "sbt_uk",
   "che168_global",
+  "che168_html",
+  "sbt_china",
+  "dubicars_uae",
+  "sbt_uae",
+  "autoscout_europe",
+  "sbt_uk",
 ];
-const knownProductionSources = new Set(PRODUCTION_CATALOG_SOURCE_IDS);
+const knownProductionSources = new Set([...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS]);
+const allProductionSourceIds = [...new Set([...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS])];
 const defaultSources = [
   ...preferredProductionOrder.filter((sourceId) => knownProductionSources.has(sourceId)),
-  ...PRODUCTION_CATALOG_SOURCE_IDS.filter((sourceId) => !preferredProductionOrder.includes(sourceId)),
+  ...allProductionSourceIds.filter((sourceId) => !preferredProductionOrder.includes(sourceId)),
 ];
 const sources = encarOnly
   ? encarSample.sourceIds

@@ -72,6 +72,16 @@ html[data-theme="light"] {
   --ac-surface-2: #e4e8ef;
   --ac-surface-3: #d9dfe8;
 }
+
+/* Public navigation remains visible on every page and the page keeps its 64px offset. */
+.ac-page-copy { padding-top: 4rem !important; }
+.ac-public-header {
+  position: fixed !important;
+  inset: 0 0 auto 0 !important;
+  z-index: 5000 !important;
+  width: 100% !important;
+}
+
 .ac-page-copy [class*="text-red-300"],
 .ac-page-copy [class*="text-red-200"] { color: var(--ac-public-accent) !important; }
 html[data-theme="light"] .ac-page-copy .ac-on-image,
@@ -93,11 +103,16 @@ html[data-theme="light"] .ac-native-select {
   background-size: 18px 18px !important;
 }
 
-/* The body selector opens above the page and never stretches the hero section. */
+/* Keep the whole calculator above the client gallery while the body menu is open. */
+.ac-filter-panel {
+  position: relative !important;
+  z-index: 620 !important;
+  overflow: visible !important;
+}
 .ac-body-picker-panel {
   position: absolute !important;
   inset: calc(100% + 8px) 0 auto 0 !important;
-  z-index: 240 !important;
+  z-index: 700 !important;
   margin: 0 !important;
   max-height: min(430px, 58vh) !important;
   overflow-y: auto !important;
@@ -208,12 +223,26 @@ html[data-theme="light"] .ac-catalog-card > a > div:last-child span[class*="bg-w
   color: #465061 !important;
 }
 
-/* Public legal footer and cookie notice entry point. */
-.ac-public-legal-footer {
-  color: rgba(255,255,255,.58);
+/* Footer navigation supports discovery while the compact legal row stays on one line on desktop. */
+.ac-public-legal-footer { color: rgba(255,255,255,.58); }
+.ac-public-footer-navigation { border-top: 1px solid rgba(255,255,255,.14); }
+.ac-public-legal-footer-line { border-top: 1px solid rgba(255,255,255,.14); }
+.ac-public-footer-nav-link {
+  color: rgba(255,255,255,.62);
+  transition: color .18s ease, transform .18s ease;
 }
-.ac-public-legal-footer-line {
-  border-top: 1px solid rgba(255,255,255,.14);
+.ac-public-footer-nav-link:hover {
+  color: #ff5962;
+  transform: translateX(2px);
+}
+.ac-public-footer-cta {
+  background: rgba(255,53,61,.13) !important;
+  color: #ff6870;
+  box-shadow: none !important;
+}
+.ac-public-footer-cta:hover {
+  background: #ff353d !important;
+  color: #ffffff;
 }
 .ac-public-legal-link {
   appearance: none;
@@ -225,28 +254,22 @@ html[data-theme="light"] .ac-catalog-card > a > div:last-child span[class*="bg-w
   cursor: pointer;
   transition: color .18s ease, opacity .18s ease;
 }
-.ac-public-legal-link:hover {
-  color: #ff4650;
-}
-.ac-public-legal-link-muted {
-  cursor: default;
-  opacity: .48;
-}
-.ac-public-legal-link-muted:hover {
-  color: inherit;
-}
-html[data-theme="light"] .ac-public-legal-footer {
-  color: #687286;
-}
-html[data-theme="light"] .ac-public-legal-footer-line {
-  border-top-color: rgba(42,49,63,.18);
-}
-html[data-theme="light"] .ac-public-legal-link {
-  color: #4d586d;
-}
-html[data-theme="light"] .ac-public-legal-link:hover {
+.ac-public-legal-link:hover { color: #ff4650; }
+html[data-theme="light"] .ac-public-legal-footer { color: #687286; }
+html[data-theme="light"] .ac-public-footer-navigation,
+html[data-theme="light"] .ac-public-legal-footer-line { border-top-color: rgba(42,49,63,.18); }
+html[data-theme="light"] .ac-public-footer-nav-link { color: #626d81; }
+html[data-theme="light"] .ac-public-footer-nav-link:hover { color: #c91e2a; }
+html[data-theme="light"] .ac-public-footer-cta {
+  background: #f3e1e3 !important;
   color: #c91e2a;
 }
+html[data-theme="light"] .ac-public-footer-cta:hover {
+  background: #ff353d !important;
+  color: #ffffff;
+}
+html[data-theme="light"] .ac-public-legal-link { color: #4d586d; }
+html[data-theme="light"] .ac-public-legal-link:hover { color: #c91e2a; }
 
 /* Keep the price summary readable on desktop instead of splitting the currency sign. */
 .ac-result-summary h1 {
