@@ -88,14 +88,16 @@ function RangeFields({ fromName, toName, fromValue, toValue, fromPlaceholder, to
   </div>;
 }
 
-function AdvancedFields({ initial, make, setMake }: { initial: Record<string, string>; make: string; setMake: (value: string) => void }) {
+function AdvancedFields({ initial, make, setMake, includePrimary = true }: { initial: Record<string, string>; make: string; setMake: (value: string) => void; includePrimary?: boolean }) {
   const makeOptions = makes.map((value) => ({ value, label: value || "Любая марка" }));
   const modelOptions = (modelsByMake[make] || [""]).map((value) => ({ value, label: value || "Любая модель" }));
   return <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-    <SearchSelect name="make" value={make} placeholder="Марка" options={makeOptions} onChange={setMake} />
-    <SearchSelect key={make} name="model" value={initial.model || ""} placeholder="Модель" options={modelOptions} />
+    {includePrimary ? <>
+      <SearchSelect name="make" value={make} placeholder="Марка" options={makeOptions} onChange={setMake} />
+      <SearchSelect key={make} name="model" value={initial.model || ""} placeholder="Модель" options={modelOptions} />
+      <SearchSelect name="market" value={initial.market || ""} placeholder="Рынок" options={markets} />
+    </> : null}
     <SearchSelect name="bodyType" value={initial.bodyType || ""} placeholder="Кузов" options={bodies} />
-    <SearchSelect name="market" value={initial.market || ""} placeholder="Рынок" options={markets} />
     <SearchSelect name="transmission" value={initial.transmission || ""} placeholder="Трансмиссия" options={transmissions} />
     <RangeFields fromName="yearFrom" toName="yearTo" fromValue={initial.yearFrom} toValue={initial.yearTo} fromPlaceholder="Год от" toPlaceholder="до" />
     <RangeFields fromName="budgetFrom" toName="budget" fromValue={initial.budgetFrom} toValue={initial.budget} fromPlaceholder="Цена от, ₽" toPlaceholder="до" />
@@ -131,7 +133,7 @@ export function CatalogFilters({ initial }: { initial: Record<string, string> })
         <button className="avto-button h-14 rounded-2xl px-12 text-base font-black">Найти</button>
       </div>
       <button type="button" onClick={() => setExpanded((current) => !current)} className="mx-auto mt-5 hidden items-center gap-2 text-sm font-bold text-white/42 transition hover:text-white lg:flex">Расширенный поиск <span className="text-base">→</span></button>
-      {expanded ? <div className="mt-5 hidden lg:block"><AdvancedFields initial={initial} make={make} setMake={setMake} /><button className="avto-button mt-4 h-14 w-full rounded-2xl text-base font-black">Найти</button></div> : null}
+      {expanded ? <div className="mt-5 hidden lg:block"><AdvancedFields initial={initial} make={make} setMake={setMake} includePrimary={false} /><button className="avto-button mt-4 h-14 w-full rounded-2xl text-base font-black">Найти</button></div> : null}
 
       <div className="grid gap-3 lg:hidden">
         <SearchSelect name="make" value={make} placeholder="Марка" options={makeOptions} onChange={setMake} />
