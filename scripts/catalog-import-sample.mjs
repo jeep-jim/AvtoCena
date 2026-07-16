@@ -15,6 +15,7 @@ const { reliableMarketSources, RELIABLE_MARKET_SOURCE_IDS } = await import("../a
 const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
+const { persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
 for (const source of [...reliableMarketSources, ...alternateMarketSources, ...publicFallbackSources]) {
   if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) catalogImportSources.push(source);
@@ -47,6 +48,44 @@ const defaultSources = [
   ...allProductionSourceIds.filter((sourceId) => !preferredProductionOrder.includes(sourceId)),
 ];
 const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : [...new Set(defaultSources)];
+
+function brokenCatalogText(value) {
+  const text = String(value || "").trim();
+  if (!text) return true;
+  const replacementCharacters = (text.match(/[\uFFFD�□]/g) || []).length;
+  const repeatedQuestions = (text.match(/\?{3,}/g) || []).length;
+  const mojibakeRuns = (text.match(/(?:Ã.|Â.|Ð.|Ñ.){2,}/g) || []).length;
+  return replacementCharacters > 0 || repeatedQuestions > 0 || mojibakeRuns > 0;
+}
+
+function invalidLegacyOffer(offer) {
+  const make = String(offer?.make || "").trim();
+  const model = String(offer?.model || "").trim();
+  const title = String(offer?.trim || "").trim();
+  if (!make || !model || brokenCatalogText(make) || brokenCatalogText(model) || (title && brokenCatalogText(title))) return true;
+
+  if (offer?.market !== "china") return false;
+  const raw = offer?.operational?.raw || {};
+  const rawImages = Array.isArray(raw?.images) ? raw.images.map(String) : [];
+  const suspiciousRawImage = rawImages.some((url) => /qrcode|qr-code|qr_|weixin|wechat|scan|download[-_]?app|appstore|googleplay|placeholder|logo|sprite/i.test(url));
+  const sourceId = String(offer?.sourceId || "");
+  const legacyChe168 = /^(?:che168_clean|che168_global|che168_html)$/.test(sourceId);
+  return legacyChe168 && suspiciousRawImage;
+}
+
+let purgedInvalidOffers = 0;
+if (!encarOnly) {
+  const storedOffers = await readAllOffersForMaintenance();
+  const cleanOffers = storedOffers.filter((offer) => {
+    const invalid = invalidLegacyOffer(offer);
+    if (invalid) purgedInvalidOffers++;
+    return !invalid;
+  });
+  if (purgedInvalidOffers > 0) {
+    await persistCatalogOffers(cleanOffers);
+    console.log(`[catalog] purged ${purgedInvalidOffers} invalid legacy offers before import`);
+  }
+}
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
@@ -105,6 +144,7 @@ const summary = {
   updated: report.updated,
   expired: report.expired,
   skipped: report.skipped,
+  purgedInvalidOffers,
   imageFailures: report.imageFailures,
   underfilledImages: report.underfilledImages,
   reusedImageSets: report.reusedImageSets,
