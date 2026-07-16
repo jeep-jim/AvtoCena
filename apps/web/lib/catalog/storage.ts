@@ -66,6 +66,18 @@ async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>
 }
 function isPublicOffer(o: VehicleOffer) { return o.status === "active" && o.images.length > 0 && Boolean(o.totalRub || o.calculationStatus === "needs_data" || o.calculationStatus === "auction_start"); }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
+async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency: number) {
+  if (!tasks.length) return;
+  let cursor = 0;
+  const workerCount = Math.min(Math.max(1, concurrency), tasks.length);
+  await Promise.all(Array.from({ length: workerCount }, async () => {
+    while (true) {
+      const current = cursor++;
+      if (current >= tasks.length) return;
+      await tasks[current]();
+    }
+  }));
+}
 export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   const storage = getJsonStorage();
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
@@ -106,7 +118,9 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await writeJsonAtomic(generationPath(generationId, "indexes/images-by-id.json"), { generationId, imagesById });
   await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), { generationId, makes: [...maps.make.keys()].sort(), models: [...maps.model.keys()].sort() });
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => b.updatedAt.localeCompare(a.updatedAt)).map((o) => o.id) });
-  await Promise.all(Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => writeIndexShard(generationId, name, key, ids))));
+  const tasks = Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => () => writeIndexShard(generationId, name, key, ids)));
+  const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
+  await runWithConcurrency(tasks, concurrency);
 }
 function intersect(a: Set<string> | null, ids: string[]) { const b = new Set(ids); if (!a) return b; return new Set([...a].filter((id) => b.has(id))); }
 async function candidateIds(manifest: CatalogManifest, params: CatalogSearchParams) {
