@@ -7,7 +7,22 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const o = presentCatalogOffer(offer);
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
-  const snapshot = { id: o.id, title: o.title, price: o.totalRub, imageUrl, year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href };
+  const snapshot = {
+    id: o.id,
+    title: o.title,
+    price: o.totalRub,
+    totalRub: o.totalRub,
+    previousTotalRub: o.previousTotalRub,
+    priceDeltaRub: o.priceDeltaRub,
+    priceChangedAt: o.priceChangedAt,
+    sourcePrice: o.sourcePrice,
+    calculationSnapshot: o.calculationSnapshot,
+    imageUrl,
+    year: o.year,
+    mileageKm: o.mileageKm,
+    marketLabel: o.marketLabel,
+    href,
+  };
   const mediaHeight = dense ? "h-28 sm:h-40 md:h-44" : compact ? "h-40 sm:h-44" : "h-52";
 
   return (
