@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { money } from "@/lib/avtocena";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
@@ -27,10 +26,9 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
           <PriceTrend offer={o} dense={dense} priceClassName={dense ? "text-[16px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
           <div className={`flex flex-wrap font-bold text-white/58 ${dense ? "mt-2 gap-1 text-[9px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
-            <span className={dense ? "rounded-full bg-white/[0.05] px-1.5 py-1 sm:px-2.5 sm:py-1.5" : "rounded-full bg-white/[0.05] px-2.5 py-1.5"}>{o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется"}</span>
+            <span className={dense ? "rounded-full bg-white/[0.05] px-1.5 py-1 sm:px-2.5 sm:py-1.5" : "rounded-full bg-white/[0.05] px-2.5 py-1.5"}>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span>
             <span className={dense ? "rounded-full bg-white/[0.05] px-1.5 py-1 sm:px-2.5 sm:py-1.5" : "rounded-full bg-white/[0.05] px-2.5 py-1.5"}>{o.engineCc ? `${o.engineCc} см³` : o.fuelLabel}</span>
           </div>
-          <p className={`${dense ? "mt-2 hidden text-[10px] sm:mt-3 sm:block sm:text-[11px]" : "mt-3 text-[11px]"} font-bold leading-5 text-white/46`}>Наличие и итоговую стоимость под ключ подтвердит менеджер.</p>
         </div>
       </Link>
       <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className={`ac-on-image absolute z-20 bg-black/52 text-red-400 shadow-[0_8px_24px_rgba(0,0,0,.28)] backdrop-blur-md hover:bg-black/68 ${dense ? "right-2 top-2 h-8 w-8 sm:right-3 sm:top-3 sm:h-10 sm:w-10 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]" : "right-3 top-3"}`} />
