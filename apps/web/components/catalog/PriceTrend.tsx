@@ -1,10 +1,18 @@
-import { money } from "../../lib/avtocena";
-
 type PriceLike = {
   totalRub?: number | null;
   previousTotalRub?: number | null;
   priceDeltaRub?: number | null;
   priceChangedAt?: string;
+  sourcePrice?: number | null;
+  calculationSnapshot?: {
+    currencyRate?: {
+      effectiveRate?: number;
+      previousEffectiveRate?: number;
+      rateDelta?: number;
+      rateDate?: string;
+      previousRateDate?: string;
+    };
+  } | null;
 };
 
 export type PriceTrendDirection = "up" | "down";
@@ -15,11 +23,31 @@ export type PriceTrendValue = {
   formattedDelta: string;
 };
 
-export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
+function money(value: number) {
+  return new Intl.NumberFormat("ru-RU").format(Math.round(value));
+}
+
+function savedPriceDelta(offer: PriceLike) {
   const current = Number(offer.totalRub || 0);
   const explicitDelta = Number(offer.priceDeltaRub || 0);
   const previous = Number(offer.previousTotalRub || 0);
-  const delta = explicitDelta || (current && previous ? current - previous : 0);
+  return explicitDelta || (current && previous ? current - previous : 0);
+}
+
+function currencyDelta(offer: PriceLike) {
+  const sourcePrice = Number(offer.sourcePrice || 0);
+  const rate = offer.calculationSnapshot?.currencyRate;
+  const effectiveRate = Number(rate?.effectiveRate || 0);
+  const previousEffectiveRate = Number(rate?.previousEffectiveRate || 0);
+  const explicitRateDelta = Number(rate?.rateDelta || 0);
+  const rateDelta = explicitRateDelta || (effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : 0);
+  if (!sourcePrice || !Number.isFinite(rateDelta)) return 0;
+  return Math.round(sourcePrice * rateDelta);
+}
+
+export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
+  const current = Number(offer.totalRub || 0);
+  const delta = savedPriceDelta(offer) || currencyDelta(offer);
   if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1_000) return null;
 
   const absolute = Math.abs(delta);
@@ -80,6 +108,10 @@ export function PriceTrend({
       ? "bg-red-500/[0.085]"
       : "bg-red-500/[0.075]";
   const hasPrice = Boolean(offer.totalRub);
+  const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(offer) && Boolean(currencyDelta(offer));
+  const trendTitle = trendUsesCurrency
+    ? "Изменение расчёта из-за обновления валютного курса"
+    : "Изменение относительно предыдущего сохранённого расчёта";
 
   return (
     <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
@@ -98,7 +130,7 @@ export function PriceTrend({
         {trend ? (
           <div
             className={`flex shrink-0 items-center pb-0.5 font-black ${dense ? "gap-0.5 sm:gap-1.5" : "gap-1.5"} ${directionClass}`}
-            title="Изменение относительно предыдущего сохранённого расчёта"
+            title={trendTitle}
             aria-label={`Цена ${trend.direction === "down" ? "снизилась" : "выросла"} на ${trend.formattedDelta}`}
           >
             <span className={`${dense ? "hidden text-[9px] sm:inline sm:text-xs md:text-sm" : "text-xs md:text-sm"}`}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span>

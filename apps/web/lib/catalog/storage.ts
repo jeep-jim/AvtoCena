@@ -5,7 +5,25 @@ import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOff
 const MARKETS: CatalogMarket[] = ["japan", "korea", "china", "uae", "europe"];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
-const ALLOWED_IMAGE_HOSTS = [/^(.+\.)?encar\.com$/i, /^(.+\.)?che168\.com$/i, /^(.+\.)?autohome\.com\.cn$/i, /^(.+\.)?autoimg\.cn$/i, /^(.+\.)?beforward\.jp$/i, /^(.+\.)?bf\.jp$/i, /^(.+\.)?cloudfront\.net$/i, /^img\.avtocena\.com$/i];
+const ALLOWED_IMAGE_HOSTS = [
+  /^(.+\.)?encar\.com$/i,
+  /^(.+\.)?che168\.com$/i,
+  /^(.+\.)?autohome\.com\.cn$/i,
+  /^(.+\.)?autoimg\.cn$/i,
+  /^(.+\.)?beforward\.jp$/i,
+  /^(.+\.)?bf\.jp$/i,
+  /^(.+\.)?goo-net\.com$/i,
+  /^(.+\.)?goo-net-exchange\.com$/i,
+  /^(.+\.)?japantransit\.ru$/i,
+  /^(.+\.)?dubicars\.com$/i,
+  /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
+  /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es)$/i,
+  /^(.+\.)?cloudfront\.net$/i,
+  /^(.+\.)?imgix\.net$/i,
+  /^(.+\.)?cloudinary\.com$/i,
+  /^(.+\.)?scene7\.com$/i,
+  /^img\.avtocena\.com$/i,
+];
 export const CATALOG_CHUNK_SIZE = 500;
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
