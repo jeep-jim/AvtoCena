@@ -81,6 +81,36 @@ const publicFixture = `
   </head>
 </html>`;
 
+const dubicarsHtmlFixture = `
+<!doctype html>
+<html>
+  <body>
+    <article class="listing-card">
+      <a href="/2025-mercedes-benz-cla250-premium-20l-965722.html">
+        <img data-src="https://cdn.example.com/965722/cover.webp" alt="Mercedes Benz CLA250 Premium + 2.0L" />
+        Mercedes Benz CLA250 Premium + 2.0L
+      </a>
+      <div>USD 26,600</div>
+      <div>Dubai GCC 2025 22,000 Km Petrol Automatic Sedan</div>
+    </article>
+  </body>
+</html>`;
+
+const autoscoutHtmlFixture = `
+<!doctype html>
+<html>
+  <body>
+    <section>
+      <a href="/offers/bmw-320-diesel-black-12345678-abcd">
+        <img src="https://cdn.example.com/autoscout/1.jpg" alt="BMW 320d xDrive" />
+        BMW 320d xDrive
+      </a>
+      <span>€ 29,900</span>
+      <span>2022 · 48,300 km · Diesel · Automatic · Sedan</span>
+    </section>
+  </body>
+</html>`;
+
 test("SBT JSON-LD fallback parser returns a usable vehicle", () => {
   const rows = parseSbtMarketStocklist(fixture);
   assert.equal(rows.length, 1);
@@ -117,6 +147,30 @@ test("embedded public catalog parser reads Next.js vehicle data", () => {
   assert.equal(rows[0].year, 2021);
   assert.equal(rows[0].price, 2_380_000);
   assert.equal(rows[0].images.length, 2);
+});
+
+test("server-rendered DubiCars listing cards are parsed", () => {
+  const rows = parsePublicFallbackPage(dubicarsHtmlFixture, "https://www.dubicars.com", "AED");
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].id, "965722");
+  assert.equal(rows[0].make, "Mercedes-Benz");
+  assert.match(rows[0].model, /^CLA250/);
+  assert.equal(rows[0].year, 2025);
+  assert.equal(rows[0].price, 26_600);
+  assert.equal(rows[0].currency, "USD");
+  assert.equal(rows[0].mileageKm, 22_000);
+  assert.equal(rows[0].images.length, 1);
+});
+
+test("server-rendered AutoScout listing cards are parsed", () => {
+  const rows = parsePublicFallbackPage(autoscoutHtmlFixture, "https://www.autoscout24.com", "EUR");
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].make, "BMW");
+  assert.match(rows[0].model, /^320d/);
+  assert.equal(rows[0].year, 2022);
+  assert.equal(rows[0].price, 29_900);
+  assert.equal(rows[0].currency, "EUR");
+  assert.equal(rows[0].mileageKm, 48_300);
 });
 
 test("public fallback adapter preserves configured market and currency", () => {
