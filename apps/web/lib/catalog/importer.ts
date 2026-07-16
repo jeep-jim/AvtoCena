@@ -4,7 +4,7 @@ import { calculateOffer, catalogSources } from "./adapters";
 import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
 import { getSourcePolicy, policyAllowsRun, updatePolicyAfterRun } from "./policy";
-import type { CatalogImage, VehicleOffer } from "./types";
+import type { CatalogImage, CatalogMarket, VehicleOffer } from "./types";
 
 export type CatalogImportOptions = {
   sourceIds?: string[];
@@ -21,6 +21,8 @@ export const catalogImportSources = [
   ...catalogSources.filter((source) => source.sourceId !== "beforward_public"),
   ...publicMarketSources,
 ];
+
+const PUBLIC_MARKETS: CatalogMarket[] = ["korea", "china", "japan", "uae", "europe"];
 
 function assertProductionStorage() {
   if (process.env.JSON_STORAGE_DRIVER !== "object") throw new Error("production_import_requires_object_storage");
@@ -98,13 +100,21 @@ export function applyPriceTrend(next: VehicleOffer, previous: VehicleOffer | und
   };
 }
 
+function isFixedPublicMarket(value: string): value is CatalogMarket {
+  return PUBLIC_MARKETS.includes(value as CatalogMarket);
+}
+
 export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImportOptions) {
   const options: CatalogImportOptions = Array.isArray(sourceIdsOrOptions) ? { sourceIds: sourceIdsOrOptions } : (sourceIdsOrOptions || {});
   if (options.requireObjectStorage) assertProductionStorage();
   const sourceIds = options.sourceIds;
-  const maxImagesPerOffer = Math.max(1, Number(options.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 6));
+  const maxImagesPerOffer = Math.max(1, Number(options.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10));
+  const targetPerMarket = Math.max(1, Number(process.env.CATALOG_TARGET_PER_MARKET || 250));
+  const importBudgetMs = Math.max(60_000, Number(process.env.CATALOG_IMPORT_BUDGET_MS || 42 * 60 * 1000));
+  const sourceBudgetMs = Math.max(30_000, Number(process.env.CATALOG_SOURCE_BUDGET_MS || 8 * 60 * 1000));
   const operationId = `catalog_import_${crypto.randomUUID()}`;
   const startedAt = new Date().toISOString();
+  const importDeadlineAt = Date.now() + importBudgetMs;
 
   await mutateDataJson<any>("catalog/import-lock.json", { lockedUntil: "" }, (current) => {
     if (current.lockedUntil && Date.parse(current.lockedUntil) > Date.now()) throw new Error("catalog_import_locked");
@@ -124,6 +134,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     return [offer.id, offer] as const;
   }));
 
+  const refreshedByMarket = Object.fromEntries(PUBLIC_MARKETS.map((market) => [market, 0])) as Record<CatalogMarket, number>;
   const report: any = {
     operationId,
     startedAt,
@@ -135,12 +146,29 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     underfilledImages: 0,
     reusedImageSets: 0,
     details: 0,
-    targetPublicOffers: Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 224),
+    targetPublicOffers: Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 1250),
+    targetPerMarket,
+    refreshedByMarket,
+    deadlineReached: false,
     sources: [],
   };
 
   try {
-    for (const source of catalogImportSources.filter((item) => !sourceIds?.length || sourceIds.includes(item.sourceId))) {
+    const selectedSources = catalogImportSources.filter((item) => !sourceIds?.length || sourceIds.includes(item.sourceId));
+    for (const source of selectedSources) {
+      if (Date.now() >= importDeadlineAt) {
+        report.deadlineReached = true;
+        report.sources.push({ sourceId: source.sourceId, market: source.market, ok: false, skipped: true, error: "global_import_budget_reached" });
+        break;
+      }
+
+      const fixedMarket = isFixedPublicMarket(String(source.market)) ? source.market as CatalogMarket : null;
+      if (fixedMarket && refreshedByMarket[fixedMarket] >= targetPerMarket) {
+        report.sources.push({ sourceId: source.sourceId, market: source.market, ok: true, skipped: true, seen: 0, saved: 0, reason: "daily_market_target_already_reached" });
+        console.log(`[catalog] skip ${source.sourceId}: ${fixedMarket} daily target already reached`);
+        continue;
+      }
+
       const policy = await getSourcePolicy(source);
       if (!policyAllowsRun(policy)) {
         report.sources.push({ sourceId: source.sourceId, market: source.market, ok: false, skipped: true, error: "source_disabled_or_blocked" });
@@ -161,32 +189,58 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       let cursor: string | null | undefined = scan.cursor || null;
       let page = 0;
       let sourceDetails = 0;
+      let savedThisSource = 0;
       const seen = new Set<string>();
       let sourceOk = false;
       let sourceExhausted = false;
       let stoppedByLimit = false;
+      let stoppedByBudget = false;
       let lastHealth: any = { ok: true, message: "ok", checkedAt: new Date().toISOString() };
+      const sourceDeadlineAt = Math.min(importDeadlineAt, Date.now() + sourceBudgetMs);
+      const configuredMaxPages = Math.min(policy.maxPagesPerRun, options.maxPages ?? policy.maxPagesPerRun);
+      const configuredMaxOffers = Math.min(policy.maxOffersPerRun, options.maxOffers ?? policy.maxOffersPerRun);
+      const configuredMaxDetails = Math.min(policy.maxDetailsPerRun, options.maxDetails ?? policy.maxDetailsPerRun);
+      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
+      const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);
+
+      console.log(`[catalog] source ${source.sourceId} (${source.market}) start; limit=${sourceMaxOffers}, photos=${maxImagesPerOffer}`);
 
       try {
         do {
-          page++;
-          const maxPages = Math.min(policy.maxPagesPerRun, options.maxPages ?? policy.maxPagesPerRun);
-          const maxOffers = Math.min(policy.maxOffersPerRun, options.maxOffers ?? policy.maxOffersPerRun);
-          const maxDetails = Math.min(policy.maxDetailsPerRun, options.maxDetails ?? policy.maxDetailsPerRun);
-          if (page > maxPages || seen.size >= maxOffers || sourceDetails >= maxDetails) {
+          if (Date.now() >= sourceDeadlineAt) {
+            stoppedByBudget = true;
             stoppedByLimit = true;
             break;
           }
 
+          page++;
+          if (page > configuredMaxPages || seen.size >= sourceMaxOffers || sourceDetails >= configuredMaxDetails) {
+            stoppedByLimit = true;
+            break;
+          }
+
+          console.log(`[catalog] ${source.sourceId}: page ${page}, seen ${seen.size}, saved ${savedThisSource}`);
           const fetched: any = await source.fetchPage(cursor);
           lastHealth = fetched.health || lastHealth;
           await refreshLock();
 
-          for (const raw of fetched.items.slice(0, maxOffers - seen.size)) {
+          for (const raw of fetched.items.slice(0, sourceMaxOffers - seen.size)) {
+            if (Date.now() >= sourceDeadlineAt) {
+              stoppedByBudget = true;
+              stoppedByLimit = true;
+              break;
+            }
+
             const normalized = source.normalizeOffer(raw);
             if (!normalized) {
               report.skipped++;
               continue;
+            }
+
+            const normalizedMarket = isFixedPublicMarket(String(normalized.market)) ? normalized.market as CatalogMarket : fixedMarket;
+            if (normalizedMarket && refreshedByMarket[normalizedMarket] >= targetPerMarket) {
+              stoppedByLimit = true;
+              break;
             }
 
             const previous = existing.get(normalized.id);
@@ -198,7 +252,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             images = previousImages;
             let attemptedImages = false;
 
-            if (policy.imagesEnabled && sourceDetails < maxDetails && images.length < maxImagesPerOffer) {
+            if (policy.imagesEnabled && sourceDetails < configuredMaxDetails && images.length < maxImagesPerOffer) {
               attemptedImages = true;
               const previousImageLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
               process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
@@ -245,11 +299,21 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             const offer = applyPriceTrend(calculated, previous, startedAt);
             previous ? report.updated++ : report.imported++;
             existing.set(offer.id, offer);
+            savedThisSource++;
+            if (normalizedMarket) refreshedByMarket[normalizedMarket]++;
+
+            if (savedThisSource % 10 === 0) {
+              console.log(`[catalog] ${source.sourceId}: saved ${savedThisSource}, market total today ${normalizedMarket ? refreshedByMarket[normalizedMarket] : "n/a"}`);
+            }
           }
 
           cursor = fetched.nextCursor;
           if (fetched.finished && !cursor) {
             sourceExhausted = true;
+            break;
+          }
+          if (stoppedByBudget || (fixedMarket && refreshedByMarket[fixedMarket] >= targetPerMarket)) {
+            stoppedByLimit = true;
             break;
           }
         } while (cursor);
@@ -265,15 +329,29 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
         scan.status = staleEligible ? "completed" : "running";
         if (staleEligible) scan.lastCompletedAt = new Date().toISOString();
         await writeDataJson(`catalog/scans/${source.sourceId}.json`, scan);
-        report.sources.push({ sourceId: source.sourceId, market: source.market, scanCycleId: scan.scanCycleId, ok: true, seen: seen.size, cursor, sourceExhausted, stoppedByLimit, partialScan, staleEligible });
+        report.sources.push({
+          sourceId: source.sourceId,
+          market: source.market,
+          scanCycleId: scan.scanCycleId,
+          ok: true,
+          seen: seen.size,
+          saved: savedThisSource,
+          cursor,
+          sourceExhausted,
+          stoppedByLimit,
+          stoppedByBudget,
+          partialScan,
+          staleEligible,
+        });
         await updatePolicyAfterRun(source, { ...lastHealth, ok: true }, staleEligible ? null : cursor);
       } catch (error: any) {
         lastHealth = { ok: false, message: error?.message || "import_failed", checkedAt: new Date().toISOString(), blocked: Boolean(error?.blocked), httpStatus: error?.status };
-        report.sources.push({ sourceId: source.sourceId, market: source.market, ok: false, error: lastHealth.message });
+        report.sources.push({ sourceId: source.sourceId, market: source.market, ok: false, seen: seen.size, saved: savedThisSource, error: lastHealth.message });
         await writeDataJson(`catalog/scans/${source.sourceId}.json`, { ...(scan || {}), status: "running", cursor, lastError: lastHealth.message, retryAt: new Date(Date.now() + Number(process.env.CATALOG_SOURCE_RETRY_MS || 300000)).toISOString() });
         await updatePolicyAfterRun(source, lastHealth, cursor || null);
       }
 
+      console.log(`[catalog] source ${source.sourceId} done; seen=${seen.size}, saved=${savedThisSource}, error=${lastHealth.ok ? "none" : lastHealth.message}`);
       await writeDataJson(`catalog/health/${source.sourceId}.json`, lastHealth);
       if (sourceOk && sourceExhausted && !stoppedByLimit && scan.offersSeen > 0) {
         const previousSourceCount = [...existing.values()].filter((offer) => offer.sourceId === source.sourceId).length;
@@ -309,13 +387,15 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       totals[offer.market] = (totals[offer.market] || 0) + 1;
       return totals;
     }, {});
-    report.targetReached = report.publicOffers >= report.targetPublicOffers;
+    report.targetReached = PUBLIC_MARKETS.every((market) => Number(report.publicByMarket[market] || 0) >= targetPerMarket);
+    report.finishedAt = new Date().toISOString();
+    report.durationMs = Date.parse(report.finishedAt) - Date.parse(startedAt);
 
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     report.generationId = manifest.generationId;
     const reportPath = options.reportPath || `catalog/imports/${startedAt.replace(/[:.]/g, "-")}.json`;
     await writeDataJson(reportPath, report);
-    if (options.failOnZeroSaved && report.imported + report.updated <= 0) throw new Error("catalog_import_saved_zero_offers");
+    if (options.failOnZeroSaved && report.imported + report.updated <= 0 && report.publicOffers <= 0) throw new Error("catalog_import_saved_zero_offers");
     return report;
   } finally {
     await mutateDataJson<any>("catalog/import-lock.json", { lockedUntil: "" }, (lock) => lock.operationId === operationId

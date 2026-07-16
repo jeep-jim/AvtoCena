@@ -19,7 +19,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,7 +31,7 @@ jobs:
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
           rm -f data/catalog/manifest.json data/catalog/import-lock.json
-      - name: Import up to 500 offers from every public market
+      - name: Import up to 250 offers and 10 photos from every public market
         run: npm run catalog:import:sample
         env:
           JSON_STORAGE_DRIVER: object
@@ -42,15 +42,21 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMPORT_RESET: ${{ github.event_name == 'workflow_dispatch' && inputs.reset && 'true' || 'false' }}
-          CATALOG_TARGET_PUBLIC_OFFERS: "2500"
-          CATALOG_TARGET_PER_MARKET: "500"
+          CATALOG_TARGET_PUBLIC_OFFERS: "1250"
+          CATALOG_TARGET_PER_MARKET: "250"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "48"
+          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
+          CATALOG_ENCAR_DIRECT_IMAGE_RPM: "300"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "48"
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "24"
-          CATALOG_IMPORT_MAX_OFFERS: "500"
-          CATALOG_IMPORT_MAX_DETAILS: "500"
-          CATALOG_IMPORT_MAX_PAGES: "30"
-          CATALOG_MAX_IMAGES_PER_OFFER: "6"
+          CATALOG_IMPORT_MAX_OFFERS: "250"
+          CATALOG_IMPORT_MAX_DETAILS: "250"
+          CATALOG_IMPORT_MAX_PAGES: "12"
+          CATALOG_MAX_IMAGES_PER_OFFER: "10"
+          CATALOG_SOURCE_TIMEOUT_MS: "12000"
+          CATALOG_IMAGE_TIMEOUT_MS: "10000"
+          CATALOG_IMPORT_BUDGET_MS: "2520000"
+          CATALOG_SOURCE_BUDGET_MS: "480000"
           CATALOG_OFFER_RETENTION_MS: "259200000"
           CATALOG_STALE_GRACE_MS: "259200000"
           CATALOG_IMPORT_REPORT_FILE: catalog-import-public-markets-report.json
@@ -72,17 +78,18 @@ jobs:
             process.exit(0);
           }
           const json = JSON.parse(fs.readFileSync(path, 'utf8'));
-          for (const key of ['imported','updated','expired','skipped','imageFailures','underfilledImages','reusedImageSets','publicOffers','targetPublicOffers','targetPerMarket','targetReached','targetReachedByMarket','generationId']) {
+          for (const key of ['imported','updated','expired','skipped','imageFailures','underfilledImages','reusedImageSets','publicOffers','targetPublicOffers','targetPerMarket','targetReached','targetReachedByMarket','generationId','durationMs']) {
             console.log(`- ${key}: ${json[key] ?? ''}`);
           }
           console.log('\n### Автомобили по рынкам');
           for (const market of ['korea','china','japan','uae','europe']) {
             const count = json.publicByMarket?.[market] || 0;
             const missing = json.missingByMarket?.[market] || 0;
-            console.log(`- ${market}: ${count} (до цели осталось ${missing})`);
+            const refreshed = json.refreshedByMarket?.[market] || 0;
+            console.log(`- ${market}: ${count} в каталоге; обработано сегодня ${refreshed}; до дневной цели осталось ${missing}`);
           }
           console.log('\n### Источники');
           for (const source of json.sources || []) {
-            console.log(`- ${source.sourceId} (${source.market || 'multi'}): ${source.ok ? `OK, seen ${source.seen ?? 0}` : `ERROR ${source.error || ''}`}`);
+            console.log(`- ${source.sourceId} (${source.market || 'multi'}): ${source.ok ? `OK, seen ${source.seen ?? 0}, saved ${source.saved ?? 0}` : `ERROR ${source.error || ''}`}`);
           }
           NODE
