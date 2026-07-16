@@ -9,6 +9,9 @@ type StoredRate = {
   cbrRate: number;
   nominal: number;
   effectiveRate: number;
+  previousEffectiveRate?: number;
+  previousRateDate?: string;
+  rateDelta?: number;
   rateDate: string;
   fetchedAt: string;
   rateSource: RateSource;
@@ -26,11 +29,7 @@ function validNumber(value: unknown) {
 }
 
 function xmlText(value: string) {
-  return value
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+  return value.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
 }
 
 async function fetchText(url: string, timeoutMs = 15_000) {
@@ -39,10 +38,7 @@ async function fetchText(url: string, timeoutMs = 15_000) {
   try {
     const response = await fetch(url, {
       signal: controller.signal,
-      headers: {
-        accept: "application/json, application/xml, text/xml, */*",
-        "user-agent": "AvtoCenaRates/1.0 (+https://avtocena.com)",
-      },
+      headers: { accept: "application/json, application/xml, text/xml, */*", "user-agent": "AvtoCenaRates/1.0 (+https://avtocena.com)" },
       cache: "no-store",
     });
     if (!response.ok) throw new Error(`rates_http_${response.status}`);
@@ -58,22 +54,13 @@ function parseCbrXml(xml: string, fetchedAt: string): StoredRate[] {
     ? `${rateDate.slice(6, 10)}-${rateDate.slice(3, 5)}-${rateDate.slice(0, 2)}`
     : rateDate.slice(0, 10);
   const result: StoredRate[] = [];
-
   for (const block of xml.match(/<Valute\b[\s\S]*?<\/Valute>/gi) || []) {
     const code = xmlText(block.match(/<CharCode>([\s\S]*?)<\/CharCode>/i)?.[1] || "").trim().toUpperCase() as RateCode;
     if (!RATE_CODES.includes(code)) continue;
     const nominal = validNumber(block.match(/<Nominal>([\s\S]*?)<\/Nominal>/i)?.[1]) || 1;
     const cbrRate = validNumber(block.match(/<Value>([\s\S]*?)<\/Value>/i)?.[1]);
     if (!cbrRate) continue;
-    result.push({
-      currency: code,
-      cbrRate,
-      nominal,
-      effectiveRate: cbrRate / nominal,
-      rateDate: normalizedDate,
-      fetchedAt,
-      rateSource: "cbr",
-    });
+    result.push({ currency: code, cbrRate, nominal, effectiveRate: cbrRate / nominal, rateDate: normalizedDate, fetchedAt, rateSource: "cbr" });
   }
   return result;
 }
@@ -92,32 +79,28 @@ async function fetchMoexRate(code: RateCode, fetchedAt: string): Promise<StoredR
   url.searchParams.set("marketdata.columns", "SECID,LAST,MARKETPRICE,WAPRICE,LCLOSEPRICE,UPDATETIME,SYSTIME");
   url.searchParams.set("securities.columns", "SECID,PREVPRICE,LOTSIZE");
   const json = JSON.parse(await fetchText(url.toString()));
-  const row = [...tableRows(json.marketdata), ...tableRows(json.securities)]
-    .find((item) => String(item.SECID || "") === security) || {};
+  const row = [...tableRows(json.marketdata), ...tableRows(json.securities)].find((item) => String(item.SECID || "") === security) || {};
   const value = validNumber(row.LAST) || validNumber(row.MARKETPRICE) || validNumber(row.WAPRICE) || validNumber(row.LCLOSEPRICE) || validNumber(row.PREVPRICE);
   if (!value) return null;
-  return {
-    currency: code,
-    cbrRate: value,
-    nominal: 1,
-    effectiveRate: value,
-    rateDate: fetchedAt.slice(0, 10),
-    fetchedAt,
-    rateSource: "moex",
-  };
+  return { currency: code, cbrRate: value, nominal: 1, effectiveRate: value, rateDate: fetchedAt.slice(0, 10), fetchedAt, rateSource: "moex" };
 }
 
 function legacyRate(code: RateCode, value: unknown, fetchedAt: string): StoredRate | null {
   const effectiveRate = validNumber(value);
   if (!effectiveRate) return null;
+  return { currency: code, cbrRate: effectiveRate, nominal: 1, effectiveRate, rateDate: fetchedAt.slice(0, 10), fetchedAt, rateSource: "legacy_json" };
+}
+
+function previousRate(previous: any, code: RateCode) {
+  const structured = Array.isArray(previous?.rates)
+    ? previous.rates.find((item: any) => String(item?.currency || "").toUpperCase() === code)
+    : null;
+  const effectiveRate = validNumber(structured?.effectiveRate)
+    || (validNumber(structured?.cbrRate) && validNumber(structured?.nominal) ? validNumber(structured.cbrRate) / validNumber(structured.nominal) : 0)
+    || validNumber(previous?.[`${code}_RUB`]);
   return {
-    currency: code,
-    cbrRate: effectiveRate,
-    nominal: 1,
     effectiveRate,
-    rateDate: fetchedAt.slice(0, 10),
-    fetchedAt,
-    rateSource: "legacy_json",
+    rateDate: String(structured?.rateDate || structured?.date || previous?.updatedAt || "").slice(0, 10),
   };
 }
 
@@ -144,14 +127,17 @@ export async function refreshLiveExchangeRates() {
   }));
 
   for (const code of RATE_CODES) {
-    if (rates.has(code)) continue;
-    const structured = Array.isArray(previous?.rates)
-      ? previous.rates.find((item: any) => String(item?.currency || "").toUpperCase() === code)
-      : null;
-    const fallback = structured
-      ? legacyRate(code, structured.effectiveRate || (Number(structured.cbrRate) / Number(structured.nominal || 1)), fetchedAt)
-      : legacyRate(code, previous?.[`${code}_RUB`], fetchedAt);
-    if (fallback) rates.set(code, fallback);
+    const prior = previousRate(previous, code);
+    if (!rates.has(code)) {
+      const fallback = legacyRate(code, prior.effectiveRate, fetchedAt);
+      if (fallback) rates.set(code, fallback);
+    }
+    const current = rates.get(code);
+    if (current && prior.effectiveRate > 0) {
+      current.previousEffectiveRate = prior.effectiveRate;
+      current.previousRateDate = prior.rateDate;
+      current.rateDelta = current.effectiveRate - prior.effectiveRate;
+    }
   }
 
   const list = RATE_CODES.map((code) => rates.get(code)).filter((rate): rate is StoredRate => Boolean(rate));
@@ -165,7 +151,6 @@ export async function refreshLiveExchangeRates() {
     errors,
   };
   for (const rate of list) snapshot[`${rate.currency}_RUB`] = rate.effectiveRate;
-
   await writeDataJson("fees/exchange-rates.json", snapshot);
   return snapshot;
 }
