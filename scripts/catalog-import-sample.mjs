@@ -9,78 +9,50 @@ process.env.CATALOG_STALE_GRACE_MS ||= String(3 * 24 * 60 * 60 * 1000);
 process.env.CATALOG_IMPORT_BUDGET_MS ||= String(42 * 60 * 1000);
 process.env.CATALOG_SOURCE_BUDGET_MS ||= String(8 * 60 * 1000);
 
-const {
-  alternateMarketSources,
-  PRODUCTION_CATALOG_SOURCE_IDS,
-} = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
-const {
-  publicFallbackSources,
-  PUBLIC_FALLBACK_SOURCE_IDS,
-} = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
+const { alternateMarketSources, PRODUCTION_CATALOG_SOURCE_IDS } = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
+const { publicFallbackSources, PUBLIC_FALLBACK_SOURCE_IDS } = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
+const { reliableMarketSources, RELIABLE_MARKET_SOURCE_IDS } = await import("../apps/web/lib/catalog/reliable-market-sources.ts");
 const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 
-for (const source of [...alternateMarketSources, ...publicFallbackSources]) {
-  if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) {
-    catalogImportSources.push(source);
-  }
+for (const source of [...reliableMarketSources, ...alternateMarketSources, ...publicFallbackSources]) {
+  if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) catalogImportSources.push(source);
 }
 
-const encarSample = {
-  sourceIds: ["encar_direct"],
-  maxOffers: 20,
-  maxDetails: 20,
-  maxImagesPerOffer: 3,
-  maxPages: 1,
-};
-
+const encarSample = { sourceIds: ["encar_direct"], maxOffers: 20, maxDetails: 20, maxImagesPerOffer: 3, maxPages: 1 };
 const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
-const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
-  .split(",")
-  .map((value) => value.trim())
-  .filter(Boolean);
+const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "").split(",").map((value) => value.trim()).filter(Boolean);
 
 const preferredProductionOrder = [
   "encar_direct",
+  "goonet_japan",
   "japantransit_japan",
   "sbt_japan",
+  "che168_clean",
   "che168_global",
   "che168_html",
   "sbt_china",
+  "dubicars_clean",
   "dubicars_uae",
   "sbt_uae",
+  "autouncle_europe",
   "autoscout_europe",
   "sbt_uk",
 ];
-const knownProductionSources = new Set([...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS]);
-const allProductionSourceIds = [...new Set([...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS])];
+const knownProductionSources = new Set([...RELIABLE_MARKET_SOURCE_IDS, ...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS]);
+const allProductionSourceIds = [...knownProductionSources];
 const defaultSources = [
   ...preferredProductionOrder.filter((sourceId) => knownProductionSources.has(sourceId)),
   ...allProductionSourceIds.filter((sourceId) => !preferredProductionOrder.includes(sourceId)),
 ];
-const sources = encarOnly
-  ? encarSample.sourceIds
-  : configuredSources.length
-    ? configuredSources
-    : [...new Set(defaultSources)];
+const sources = encarOnly ? encarSample.sourceIds : configuredSources.length ? configuredSources : [...new Set(defaultSources)];
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
   const storage = getJsonStorage();
-  const sourcePaths = sources.flatMap((sourceId) => [
-    `catalog/scans/${sourceId}.json`,
-    `catalog/health/${sourceId}.json`,
-    `catalog/sources/${sourceId}.json`,
-  ]);
-  for (const path of [
-    "catalog/internal/manifest.json",
-    "catalog/manifest.json",
-    "catalog/import-lock.json",
-    ...sourcePaths,
-  ]) {
-    await storage.deleteJson?.(path);
-  }
+  const sourcePaths = sources.flatMap((sourceId) => [`catalog/scans/${sourceId}.json`, `catalog/health/${sourceId}.json`, `catalog/sources/${sourceId}.json`]);
+  for (const path of ["catalog/internal/manifest.json", "catalog/manifest.json", "catalog/import-lock.json", ...sourcePaths]) await storage.deleteJson?.(path);
 }
 
 await import("../apps/web/lib/catalog/encar-resilience.ts");
@@ -91,7 +63,6 @@ const requestedPages = Number(process.env.CATALOG_IMPORT_MAX_PAGES || 0);
 const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 0);
 const targetPublicOffers = Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 1250);
 const targetPerMarket = Number(process.env.CATALOG_TARGET_PER_MARKET || 250);
-
 const maxOffers = encarOnly ? encarSample.maxOffers : Math.max(32, requestedOffers || 250);
 const maxDetails = encarOnly ? encarSample.maxDetails : Math.max(maxOffers, requestedDetails || maxOffers);
 const maxPages = encarOnly ? encarSample.maxPages : Math.max(4, requestedPages || 12);
@@ -110,11 +81,7 @@ for (const source of catalogImportSources.filter((candidate) => sources.includes
 }
 
 const startedAt = Date.now();
-const exchangeRates = await refreshLiveExchangeRates().catch((error) => ({
-  updatedAt: new Date().toISOString(),
-  rates: [],
-  errors: [`refresh:${error?.message || "failed"}`],
-}));
+const exchangeRates = await refreshLiveExchangeRates().catch((error) => ({ updatedAt: new Date().toISOString(), rates: [], errors: [`refresh:${error?.message || "failed"}`] }));
 console.log(`[catalog] exchange rates refreshed: ${exchangeRates.rates?.length || 0}; errors=${exchangeRates.errors?.length || 0}`);
 
 const report = await importCatalog({
@@ -131,9 +98,7 @@ const report = await importCatalog({
 const marketIds = ["korea", "china", "japan", "uae", "europe"];
 const publicByMarket = report.publicByMarket || {};
 const refreshedByMarket = report.refreshedByMarket || {};
-const missingByMarket = Object.fromEntries(
-  marketIds.map((market) => [market, Math.max(0, targetPerMarket - Number(refreshedByMarket[market] || 0))]),
-);
+const missingByMarket = Object.fromEntries(marketIds.map((market) => [market, Math.max(0, targetPerMarket - Number(refreshedByMarket[market] || 0))]));
 const targetReachedByMarket = marketIds.every((market) => Number(refreshedByMarket[market] || 0) >= targetPerMarket);
 const summary = {
   imported: report.imported,
@@ -153,11 +118,7 @@ const summary = {
   missingByMarket,
   generationId: report.generationId,
   sources: report.sources,
-  exchangeRates: {
-    updatedAt: exchangeRates.updatedAt,
-    rates: exchangeRates.rates,
-    errors: exchangeRates.errors,
-  },
+  exchangeRates: { updatedAt: exchangeRates.updatedAt, rates: exchangeRates.rates, errors: exchangeRates.errors },
   durationMs: Date.now() - startedAt,
   reportPath: "catalog/imports/latest-public-markets.json",
 };
