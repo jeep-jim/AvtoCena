@@ -256,13 +256,14 @@ function titleFromCard(anchorText: string, card: string) {
 }
 
 function detectPrice(plain: string, fallbackCurrency: string) {
+  const amount = "([0-9]{1,3}(?:[ ,.\u2019'][0-9]{3})+|[0-9]{4,9})";
   const patterns: Array<{ regex: RegExp; currency: string }> = [
-    { regex: /(?:USD|US\$|\$)\s*([0-9][0-9,.'\s]{2,})/i, currency: "USD" },
-    { regex: /(?:AED|د\.?إ\.?)\s*([0-9][0-9,.'\s]{2,})/i, currency: "AED" },
-    { regex: /(?:EUR|€)\s*([0-9][0-9,.'\s]{2,})/i, currency: "EUR" },
-    { regex: /(?:CNY|RMB|CN¥|￥)\s*([0-9][0-9,.'\s]{2,})/i, currency: "CNY" },
-    { regex: /(?:JPY|JP¥|円)\s*([0-9][0-9,.'\s]{2,})/i, currency: "JPY" },
-    { regex: /([0-9][0-9,.'\s]{2,})\s*(?:AED|USD|EUR|CNY|RMB|JPY|円|万元|万)/i, currency: fallbackCurrency },
+    { regex: new RegExp(`(?:USD|US\\$|\\$)\\s*${amount}`, "i"), currency: "USD" },
+    { regex: new RegExp(`(?:AED|د\\.?إ\\.?)\\s*${amount}`, "i"), currency: "AED" },
+    { regex: new RegExp(`(?:EUR|€)\\s*${amount}`, "i"), currency: "EUR" },
+    { regex: new RegExp(`(?:CNY|RMB|CN¥|￥)\\s*${amount}`, "i"), currency: "CNY" },
+    { regex: new RegExp(`(?:JPY|JP¥|円)\\s*${amount}`, "i"), currency: "JPY" },
+    { regex: new RegExp(`${amount}\\s*(?:AED|USD|EUR|CNY|RMB|JPY|円|万元|万)`, "i"), currency: fallbackCurrency },
   ];
   for (const pattern of patterns) {
     const match = plain.match(pattern.regex);
@@ -303,7 +304,7 @@ function parseHtmlRows(html: string, baseUrl: string, fallbackCurrency: string) 
     const derived = deriveMakeModel(title);
     if (!derived.make || !derived.model) return;
     const amount = detectPrice(plain, fallbackCurrency);
-    const mileageMatch = plain.match(/([0-9]+(?:[.,][0-9]+)?\s*万|[0-9][0-9,.'\s]{0,12})\s*(?:Km|公里)\b/i);
+    const mileageMatch = plain.match(/([0-9]+(?:[.,][0-9]+)?\s*万|[0-9]{1,3}(?:[ ,.\u2019'][0-9]{3})+|[0-9]{1,9}(?:[.,][0-9]+)?)\s*(?:Km|公里)\b/i);
     const liters = plain.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\b/i);
     const cc = plain.match(/\b([0-9][0-9,.'\s]{2,5})\s*(?:cc|cm3|см³)\b/i);
     const id = detailUrl.match(/(?:-|\/)(\d{5,})(?:\.html|[/?#]|$)/i)?.[1] || detailUrl.split(/[/?#]/).filter(Boolean).pop() || stableOfferId("html", detailUrl);
