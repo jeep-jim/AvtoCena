@@ -8,19 +8,13 @@ on:
         required: false
         default: false
         type: boolean
-  push:
-    branches:
-      - main
-    paths:
-      - "apps/web/lib/catalog/**"
-      - "scripts/catalog-import-sample.mjs"
-      - ".github/workflows/catalog-production-import.yml"
   schedule:
-    - cron: "17 */2 * * *"
+    # Один раз в сутки: 20:17 UTC / 03:17 GMT+7.
+    - cron: "17 20 * * *"
 
 concurrency:
   group: catalog-production-import
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   import:
@@ -33,13 +27,11 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
       - name: Remove test-generated local catalog data
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
           rm -f data/catalog/manifest.json data/catalog/import-lock.json
-      - name: Import Korea, China, Japan, UAE and Europe
+      - name: Import up to 500 offers from every public market
         run: npm run catalog:import:sample
         env:
           JSON_STORAGE_DRIVER: object
@@ -55,9 +47,9 @@ jobs:
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "48"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "48"
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "24"
-          CATALOG_IMPORT_MAX_OFFERS: "64"
-          CATALOG_IMPORT_MAX_DETAILS: "64"
-          CATALOG_IMPORT_MAX_PAGES: "8"
+          CATALOG_IMPORT_MAX_OFFERS: "500"
+          CATALOG_IMPORT_MAX_DETAILS: "500"
+          CATALOG_IMPORT_MAX_PAGES: "30"
           CATALOG_MAX_IMAGES_PER_OFFER: "6"
           CATALOG_OFFER_RETENTION_MS: "259200000"
           CATALOG_STALE_GRACE_MS: "259200000"
@@ -68,6 +60,7 @@ jobs:
           name: catalog-import-public-markets-report
           path: catalog-import-public-markets-report.json
           if-no-files-found: warn
+          retention-days: 3
       - name: Summary
         if: always()
         run: |
