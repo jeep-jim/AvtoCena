@@ -18,7 +18,7 @@ const modelsByMake: Record<string, string[]> = {
   BMW: ["", "3 Series", "5 Series", "X1", "X3", "X5", "X7"],
   Audi: ["", "A3", "A4", "A6", "Q3", "Q5", "Q7"],
   Lexus: ["", "ES", "IS", "NX", "RX", "LX", "LM"],
-  Mercedes-Benz: ["", "A-Class", "C-Class", "E-Class", "S-Class", "GLA", "GLC", "GLE", "GLS"],
+  "Mercedes-Benz": ["", "A-Class", "C-Class", "E-Class", "S-Class", "GLA", "GLC", "GLE", "GLS"],
 };
 
 type Option = { value: string; label: string };
