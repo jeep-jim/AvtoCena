@@ -256,7 +256,7 @@ function titleFromCard(anchorText: string, card: string) {
 }
 
 function detectPrice(plain: string, fallbackCurrency: string) {
-  const amount = "([0-9]{1,3}(?:[ ,.\u2019'][0-9]{3})+|[0-9]{4,9})";
+  const amount = "([0-9]{1,3}(?:[,.\u2019'][0-9]{3})+|[0-9]{1,3}(?: [0-9]{3})+|[0-9]{4,9})(?![0-9])";
   const patterns: Array<{ regex: RegExp; currency: string }> = [
     { regex: new RegExp(`(?:USD|US\\$|\\$)\\s*${amount}`, "i"), currency: "USD" },
     { regex: new RegExp(`(?:AED|د\\.?إ\\.?)\\s*${amount}`, "i"), currency: "AED" },
