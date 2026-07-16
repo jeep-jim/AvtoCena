@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
@@ -14,6 +14,15 @@ export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
   const [cookieOpen, setCookieOpen] = useState(false);
+
+  const closeCookieNotice = useCallback(() => {
+    setCookieOpen(false);
+    try {
+      window.localStorage.setItem(COOKIE_NOTICE_STORAGE_KEY, "1");
+    } catch {
+      // Closing the notice must still work without localStorage.
+    }
+  }, []);
 
   useEffect(() => {
     if (!publicPath) return;
@@ -37,16 +46,7 @@ export function PublicLegalFooter() {
 
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [cookieOpen]);
-
-  function closeCookieNotice() {
-    setCookieOpen(false);
-    try {
-      window.localStorage.setItem(COOKIE_NOTICE_STORAGE_KEY, "1");
-    } catch {
-      // Closing the notice must still work without localStorage.
-    }
-  }
+  }, [cookieOpen, closeCookieNotice]);
 
   if (!publicPath) return null;
 
@@ -74,7 +74,7 @@ export function PublicLegalFooter() {
 
       {cookieOpen ? (
         <div
-          className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/72 p-3 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-[10100] flex items-center justify-center bg-black/[0.72] p-3 backdrop-blur-sm sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="avtocena-cookie-title"
@@ -83,14 +83,14 @@ export function PublicLegalFooter() {
           }}
         >
           <section className="max-h-[90vh] w-full max-w-[780px] overflow-y-auto rounded-[1.35rem] bg-[#18191f] text-[#e8e9ed] shadow-[0_30px_100px_rgba(0,0,0,.52)]">
-            <header className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-white/10 bg-[#18191f]/96 px-5 py-5 backdrop-blur sm:px-7">
+            <header className="sticky top-0 z-10 flex items-start justify-between gap-5 border-b border-white/10 bg-[#18191f]/[0.96] px-5 py-5 backdrop-blur sm:px-7">
               <h2 id="avtocena-cookie-title" className="text-xl font-bold leading-tight text-white sm:text-2xl">
                 Условия использования файлов cookie
               </h2>
               <button
                 type="button"
                 onClick={closeCookieNotice}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/55 transition hover:bg-white/8 hover:text-white"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/55 transition hover:bg-white/[0.08] hover:text-white"
                 aria-label="Закрыть уведомление"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -99,7 +99,7 @@ export function PublicLegalFooter() {
               </button>
             </header>
 
-            <div className="space-y-5 px-5 py-6 text-sm leading-6 text-white/78 sm:px-7 sm:py-7 sm:text-[15px] sm:leading-7">
+            <div className="space-y-5 px-5 py-6 text-sm leading-6 text-white/[0.78] sm:px-7 sm:py-7 sm:text-[15px] sm:leading-7">
               <p>
                 На сайте https://avtocena.com и его поддоменах (далее — Сайт) используются файлы cookie. Файлы cookie — это небольшие текстовые файлы, которые после посещения Сайта сохраняются на устройстве пользователя.
               </p>
