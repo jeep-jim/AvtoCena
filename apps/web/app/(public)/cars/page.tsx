@@ -5,6 +5,7 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
+function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
 
 const marketOrder = [
   { id: "korea", label: "Корея" },
@@ -38,11 +39,22 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const selectedMarket = first(params.market);
   const requestedPage = Math.max(1, Number(first(params.page)) || 1);
   const common = {
-    make: first(params.make) || first(params.brand), model: first(params.model),
-    budgetTo: Number(first(params.budget) || first(params.budgetTo)) || undefined,
-    hasPrice: first(params.hasPrice), yearFrom: Number(first(params.yearFrom)) || undefined,
-    mileageTo: Number(first(params.mileageTo)) || undefined, engineFrom: Number(first(params.engineFrom)) || undefined,
-    powerFrom: Number(first(params.powerFrom)) || undefined, bodyType: first(params.bodyType), sort: "updatedAt" as const,
+    make: first(params.make) || first(params.brand),
+    model: first(params.model),
+    budgetFrom: numeric(params.budgetFrom),
+    budgetTo: numeric(params.budget) || numeric(params.budgetTo),
+    hasPrice: first(params.hasPrice),
+    yearFrom: numeric(params.yearFrom),
+    yearTo: numeric(params.yearTo),
+    mileageTo: numeric(params.mileageTo),
+    engineFrom: numeric(params.engineFrom),
+    engineTo: numeric(params.engineTo),
+    powerFrom: numeric(params.powerFrom),
+    fuel: first(params.fuel),
+    transmission: first(params.transmission),
+    drive: first(params.drive),
+    bodyType: first(params.bodyType),
+    sort: "updatedAt" as const,
   };
 
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
@@ -62,7 +74,8 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const visibleFrom = selectedResult?.total ? (currentPage - 1) * selectedResult.pageSize + 1 : 0;
   const visibleTo = selectedResult ? Math.min(currentPage * selectedResult.pageSize, selectedResult.total) : 0;
   const pages = paginationItems(currentPage, totalPages);
-  const initial = Object.fromEntries(["budget","market","make","model","yearFrom","hasPrice","bodyType","mileageTo","engineFrom","powerFrom"].map((key) => [key, first(params[key])])) as Record<string,string>;
+  const initialKeys = ["budget", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "fuel", "transmission", "drive"];
+  const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
 
   return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
