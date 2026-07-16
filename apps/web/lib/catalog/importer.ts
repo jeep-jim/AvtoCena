@@ -379,8 +379,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       }
     }
 
-    await refreshLock();
-    await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
+    await refreshLock(); await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
 
     const publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0);
     report.publicOffers = publicOffers.length;
