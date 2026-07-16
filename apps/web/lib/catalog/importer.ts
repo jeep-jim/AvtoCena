@@ -246,8 +246,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             seen.add(base.id);
-            let images: CatalogImage[] = [];
-            await refreshLock();
+            let images: any[] = []; await refreshLock();
 
             const previousImages = (previous?.images || []).slice(0, maxImagesPerOffer);
             images = previousImages;
@@ -397,7 +396,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     report.generationId = manifest.generationId;
     const reportPath = options.reportPath || `catalog/imports/${startedAt.replace(/[:.]/g, "-")}.json`;
     await writeDataJson(reportPath, report);
-    if (options.failOnZeroSaved && report.imported + report.updated <= 0) throw new Error("catalog_import_saved_zero_offers");
+    if (options.failOnZeroSaved && report.imported + report.updated <= 0 && report.publicOffers <= 0) throw new Error("catalog_import_saved_zero_offers");
     return report;
   } finally {
     await mutateDataJson<any>("catalog/import-lock.json", { lockedUntil: "" }, (lock) => lock.operationId === operationId
