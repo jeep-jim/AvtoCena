@@ -17,13 +17,21 @@ const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts")
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 const { persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
+// JapanTransit statistics pages mix the selected lot with dealer stock and related cars.
+// Keep the source quarantined until it has a lot-scoped image parser: no photo is safer than a wrong car.
+const QUARANTINED_SOURCE_IDS = new Set(["japantransit_japan"]);
+
 for (const source of [...reliableMarketSources, ...alternateMarketSources, ...publicFallbackSources]) {
+  if (QUARANTINED_SOURCE_IDS.has(source.sourceId)) continue;
   if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) catalogImportSources.push(source);
 }
 
 const encarSample = { sourceIds: ["encar_direct"], maxOffers: 20, maxDetails: 20, maxImagesPerOffer: 3, maxPages: 1 };
 const encarOnly = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_ENCAR_ONLY || "").toLowerCase());
-const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "").split(",").map((value) => value.trim()).filter(Boolean);
+const configuredSources = String(process.env.CATALOG_IMPORT_SOURCES || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter((value) => value && !QUARANTINED_SOURCE_IDS.has(value));
 
 // Give every market one reliable source before spending time on fallbacks for an already visited market.
 const preferredProductionOrder = [
@@ -32,8 +40,8 @@ const preferredProductionOrder = [
   "che168_clean",
   "dubicars_clean",
   "autouncle_europe",
-  "japantransit_japan",
   "sbt_japan",
+  "beforward_japan",
   "che168_global",
   "che168_html",
   "sbt_china",
@@ -42,7 +50,10 @@ const preferredProductionOrder = [
   "autoscout_europe",
   "sbt_uk",
 ];
-const knownProductionSources = new Set([...RELIABLE_MARKET_SOURCE_IDS, ...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS]);
+const knownProductionSources = new Set(
+  [...RELIABLE_MARKET_SOURCE_IDS, ...PRODUCTION_CATALOG_SOURCE_IDS, ...PUBLIC_FALLBACK_SOURCE_IDS]
+    .filter((sourceId) => !QUARANTINED_SOURCE_IDS.has(sourceId)),
+);
 const allProductionSourceIds = [...knownProductionSources];
 const defaultSources = [
   ...preferredProductionOrder.filter((sourceId) => knownProductionSources.has(sourceId)),
@@ -110,6 +121,7 @@ function normalizeOfferText(offer) {
 }
 
 function invalidLegacyOffer(offer) {
+  if (QUARANTINED_SOURCE_IDS.has(String(offer?.sourceId || ""))) return true;
   const make = String(offer?.make || "").trim();
   const model = String(offer?.model || "").trim();
   const title = String(offer?.trim || "").trim();
@@ -120,30 +132,41 @@ function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
 }
 
+function vehicleIdentity(offer) {
+  return [offer?.market, offer?.make, offer?.model, offer?.year]
+    .map((value) => String(value || "").toLocaleLowerCase("en-US").replace(/\s+/g, " ").trim())
+    .join(":");
+}
+
 function sanitizeCatalogOffers(offers) {
   const normalized = offers.filter((offer) => !invalidLegacyOffer(offer)).map(normalizeOfferText);
   const usage = new Map();
   for (const offer of normalized) {
     if (offer.market === "korea") continue;
+    const identity = vehicleIdentity(offer);
     for (const image of offer.images || []) {
       const key = `${offer.market}:${imageKey(image)}`;
       if (key.endsWith(":")) continue;
-      usage.set(key, (usage.get(key) || 0) + 1);
+      const owners = usage.get(key) || new Set();
+      owners.add(identity);
+      usage.set(key, owners);
     }
   }
 
   let removedOffers = offers.length - normalized.length;
   let removedImages = 0;
   let changedText = 0;
+  const originalById = new Map(offers.map((offer) => [offer.id, offer]));
   const result = normalized.map((offer) => {
-    const original = offers.find((candidate) => candidate.id === offer.id);
+    const original = originalById.get(offer.id);
     if (original && (original.make !== offer.make || original.model !== offer.model || original.trim !== offer.trim)) changedText++;
     const rawImages = Array.isArray(offer?.operational?.raw?.images) ? offer.operational.raw.images.map(String) : [];
     const images = (offer.images || []).filter((image, index) => {
-      const repeatedPlaceholder = offer.market !== "korea" && (usage.get(`${offer.market}:${imageKey(image)}`) || 0) >= 3;
+      const owners = usage.get(`${offer.market}:${imageKey(image)}`);
+      const sharedAcrossDifferentCars = offer.market !== "korea" && owners && owners.size >= 2;
       const suspiciousSourceUrl = suspiciousImagePattern.test(rawImages[index] || "");
       const suspiciousStoredUrl = suspiciousImagePattern.test(String(image?.url || image?.objectKey || ""));
-      const keep = !repeatedPlaceholder && !suspiciousSourceUrl && !suspiciousStoredUrl;
+      const keep = !sharedAcrossDifferentCars && !suspiciousSourceUrl && !suspiciousStoredUrl;
       if (!keep) removedImages++;
       return keep;
     });
@@ -163,7 +186,7 @@ if (!encarOnly) {
   normalizedOfferTexts += sanitized.changedText;
   if (sanitized.removedOffers || sanitized.removedImages || sanitized.changedText) {
     await persistCatalogOffers(sanitized.offers);
-    console.log(`[catalog] pre-import cleanup: offers=${sanitized.removedOffers}, placeholderImages=${sanitized.removedImages}, normalizedTexts=${sanitized.changedText}`);
+    console.log(`[catalog] pre-import cleanup: offers=${sanitized.removedOffers}, conflictingOrPlaceholderImages=${sanitized.removedImages}, normalizedTexts=${sanitized.changedText}`);
   }
 }
 
@@ -226,7 +249,7 @@ if (!encarOnly) {
   if (sanitized.removedOffers || sanitized.removedImages || sanitized.changedText) {
     const manifest = await persistCatalogOffers(sanitized.offers);
     finalGenerationId = manifest.generationId;
-    console.log(`[catalog] post-import cleanup: offers=${sanitized.removedOffers}, placeholderImages=${sanitized.removedImages}, normalizedTexts=${sanitized.changedText}`);
+    console.log(`[catalog] post-import cleanup: offers=${sanitized.removedOffers}, conflictingOrPlaceholderImages=${sanitized.removedImages}, normalizedTexts=${sanitized.changedText}`);
   }
   const publicOffers = sanitized.offers.filter((offer) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0);
   finalPublicOffers = publicOffers.length;
@@ -248,6 +271,7 @@ const summary = {
   purgedInvalidOffers,
   placeholderImagesRemoved,
   normalizedOfferTexts,
+  quarantinedSources: [...QUARANTINED_SOURCE_IDS],
   imageFailures: report.imageFailures,
   underfilledImages: report.underfilledImages,
   reusedImageSets: report.reusedImageSets,
