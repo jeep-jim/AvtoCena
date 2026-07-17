@@ -1,0 +1,93 @@
+@keyframes ac-price-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.ac-catalog-card {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+.ac-catalog-card:has(.ac-price-trend-popover) {
+  z-index: 11990 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 767px) {
+  .ac-page-copy .is-up:has(.ac-price-trend-arrow),
+  .ac-page-copy .is-down:has(.ac-price-trend-arrow) {
+    position: relative !important;
+  }
+  .ac-price-trend-arrow {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 30 !important;
+    display: flex !important;
+    width: 100% !important;
+    height: 100% !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    padding: 0 0 .15rem !important;
+  }
+  .ac-price-trend-arrow:has(.ac-price-trend-popover) {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 12000 !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    background: rgba(3,6,12,.72) !important;
+  }
+  .ac-price-trend-arrow:has(.ac-price-trend-popover) > svg {
+    display: none !important;
+  }
+  .ac-price-trend-popover {
+    position: absolute !important;
+    inset: auto 0 0 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: min(78dvh, 620px) !important;
+    overflow-y: auto !important;
+    transform: none !important;
+    border-radius: 1.75rem 1.75rem 0 0 !important;
+    padding: 1.25rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom)) !important;
+    box-shadow: 0 -20px 65px rgba(0,0,0,.48) !important;
+    animation: ac-price-sheet-in .22s ease-out both;
+    z-index: 12001 !important;
+  }
+  .ac-price-trend-popover > span:last-child {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ac-home-page:has(.ac-home-filter-drawer) #form {
+    position: fixed !important;
+    inset: 76px 0 0 auto !important;
+    z-index: 10042 !important;
+    width: min(92vw, 390px) !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    border-radius: 0 !important;
+    background: var(--ac-surface) !important;
+    padding: 0 1.25rem calc(1.25rem + env(safe-area-inset-bottom)) !important;
+  }
+  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(4) {
+    display: grid !important;
+  }
+  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(5) {
+    display: block !important;
+    overflow: visible !important;
+    border-radius: 0 !important;
+  }
+  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(5) > button:first-child {
+    border-radius: 1rem !important;
+  }
+  .ac-home-page:has(.ac-home-filter-drawer) #form button[aria-label="Открыть дополнительные фильтры"],
+  .ac-home-page:has(.ac-home-filter-drawer) .ac-home-filter-drawer > .grid,
+  .ac-home-page:has(.ac-home-filter-drawer) .ac-home-filter-drawer > .avto-button {
+    display: none !important;
+  }
+}
