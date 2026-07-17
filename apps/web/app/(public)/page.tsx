@@ -25,13 +25,13 @@ const budgetOptions: BudgetOption[] = [
   { value: "from-6000000", label: "от 6 000 000 ₽", min: 6_000_000 },
 ];
 
-const yearOptions = ["", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "older"].map((value) => ({
+const yearOptions: SelectOption[] = ["", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "older"].map((value) => ({
   value,
-  label: value === "" ? "Любой год" : value === "older" ? "Старше 2018" : value,
+  label: value === "" ? "Год" : value === "older" ? "Старше 2018" : value,
 }));
 
-const marketOptions = [
-  { value: "", label: "Любая страна" },
+const marketOptions: SelectOption[] = [
+  { value: "", label: "Страна" },
   { value: "japan", label: "Япония" },
   { value: "china", label: "Китай" },
   { value: "korea", label: "Корея" },
@@ -39,8 +39,8 @@ const marketOptions = [
   { value: "europe", label: "Европа" },
 ];
 
-const bodyOptions = [
-  { value: "", label: "Любой кузов" },
+const bodyOptions: SelectOption[] = [
+  { value: "", label: "Кузов" },
   { value: "suv", label: "Кроссовер" },
   { value: "offroad", label: "Внедорожник" },
   { value: "sedan", label: "Седан" },
@@ -83,27 +83,33 @@ function BenefitIcon({ type }: { type: string }) {
   return <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7H15V17H3V7ZM15 10H19L22 13V17H15V10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><circle cx="7" cy="18" r="2" stroke="currentColor" strokeWidth="2" /><circle cx="18" cy="18" r="2" stroke="currentColor" strokeWidth="2" /></svg>;
 }
 
-function SelectBox({ value, onChange, children, ariaLabel }: { value: string; onChange: (value: string) => void; children: React.ReactNode; ariaLabel: string }) {
-  return (
-    <label className="relative min-w-0">
-      <span className="sr-only">{ariaLabel}</span>
-      <select value={value} onChange={(event) => onChange(event.target.value)} className="ac-native-select soft-input h-14 w-full rounded-2xl px-4 text-sm font-black text-white outline-none">
-        {children}
-      </select>
-    </label>
-  );
-}
-
-function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder }: { value: string; onChange: (value: string) => void; options: SelectOption[]; placeholder: string; searchPlaceholder: string }) {
+function SearchSelect({
+  value,
+  onChange,
+  options,
+  placeholder,
+  searchPlaceholder = "Поиск",
+  searchable = true,
+  filterKey,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: SelectOption[];
+  placeholder: string;
+  searchPlaceholder?: string;
+  searchable?: boolean;
+  filterKey?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const selected = options.find((item) => item.value === value);
   const filtered = useMemo(() => {
+    if (!searchable) return options;
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
     return normalized ? options.filter((item) => item.label.toLocaleLowerCase("ru-RU").includes(normalized)) : options;
-  }, [options, query]);
+  }, [options, query, searchable]);
 
   useEffect(() => {
     if (!open) return;
@@ -111,12 +117,12 @@ function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
     document.addEventListener("pointerdown", outside);
     window.addEventListener("keydown", escape);
-    requestAnimationFrame(() => searchRef.current?.focus());
+    if (searchable) requestAnimationFrame(() => searchRef.current?.focus());
     return () => {
       document.removeEventListener("pointerdown", outside);
       window.removeEventListener("keydown", escape);
     };
-  }, [open]);
+  }, [open, searchable]);
 
   const choose = (next: string) => {
     onChange(next);
@@ -125,22 +131,24 @@ function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder
   };
 
   return (
-    <div ref={rootRef} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"}`}>
-      <button type="button" onClick={() => setOpen((current) => !current)} className={`ac-search-select soft-input flex h-14 w-full min-w-0 items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black transition ${open ? "rounded-b-none" : ""}`} aria-expanded={open}>
+    <div ref={rootRef} data-ac-filter-key={filterKey} data-ac-value={value} className={`relative min-w-0 ${open ? "z-[220]" : "z-0"}`}>
+      <button type="button" onClick={() => setOpen((current) => !current)} className="ac-search-select soft-input flex h-14 w-full min-w-0 items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black transition" aria-expanded={open}>
         <span className="min-w-0 truncate">{selected?.label || placeholder}</span>
         <span className={`shrink-0 text-white/46 transition ${open ? "rotate-180" : ""}`}><Chevron /></span>
       </button>
       {open ? (
-        <div className="ac-search-menu absolute left-0 right-0 top-[calc(100%-1px)] z-[220] overflow-hidden rounded-b-2xl bg-[#171922] shadow-[0_24px_80px_rgba(0,0,0,.72)]">
-          <div className="p-2.5">
-            <div className="ac-search-box flex h-10 items-center gap-2 rounded-xl bg-white/[0.065] px-3 text-white/45">
-              <SearchIcon />
-              <input ref={searchRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder={searchPlaceholder} className="min-w-0 flex-1 bg-transparent text-sm font-bold text-white outline-none placeholder:text-white/28" />
+        <div className="ac-search-menu absolute left-0 right-0 top-[calc(100%+7px)] z-[220] overflow-hidden rounded-2xl bg-[#171922] shadow-[0_24px_80px_rgba(0,0,0,.72)]">
+          {searchable ? (
+            <div className="p-2.5">
+              <div className="ac-search-box flex h-10 items-center gap-2 rounded-xl bg-white/[0.065] px-3 text-white/45">
+                <SearchIcon />
+                <input ref={searchRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder={searchPlaceholder} className="min-w-0 flex-1 bg-transparent text-sm font-bold text-white outline-none placeholder:text-white/28" />
+              </div>
             </div>
-          </div>
-          <div className="ac-hide-scrollbar max-h-[270px] overflow-y-auto p-1.5 pt-0">
+          ) : null}
+          <div role="listbox" className={`ac-hide-scrollbar max-h-[270px] overflow-y-auto p-1.5 ${searchable ? "pt-0" : "pt-1.5"}`}>
             {filtered.length ? filtered.map((item) => (
-              <button key={item.value || "any"} type="button" onClick={() => choose(item.value)} className={`flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${item.value === value ? "bg-red-500 text-white" : "text-white/78 hover:bg-white/[0.07]"}`}>
+              <button key={item.value || "any"} type="button" role="option" aria-selected={item.value === value} data-value={item.value} onClick={() => choose(item.value)} className={`flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${item.value === value ? "bg-red-500 text-white" : "text-white/78 hover:bg-white/[0.07]"}`}>
                 <span className="truncate">{item.label}</span>{item.value === value ? <span>✓</span> : null}
               </button>
             )) : <div className="px-3 py-6 text-center text-sm font-bold text-white/40">Ничего не найдено</div>}
@@ -151,49 +159,11 @@ function SearchSelect({ value, onChange, options, placeholder, searchPlaceholder
   );
 }
 
-function BodyIcon({ type }: { type: string }) {
-  const props = { width: 52, height: 31, viewBox: "0 0 58 34", fill: "none", "aria-hidden": true } as const;
-  const wheels = <><circle cx="16" cy="24" r="4" fill="#151820" stroke="currentColor" strokeWidth="2.1" /><circle cx="43" cy="24" r="4" fill="#151820" stroke="currentColor" strokeWidth="2.1" /></>;
-  if (!type) return <svg {...props}><path d="M9 14.5H49V22H9Z" stroke="currentColor" strokeWidth="2.2" /><path d="M14 14L19 8H39L45 14" stroke="currentColor" strokeWidth="2.2" />{wheels}</svg>;
-  if (type === "sedan" || type === "coupe" || type === "liftback") return <svg {...props}><path d="M5 21.5L9 16L18 14L24 8H37L47 15L53 21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />{wheels}</svg>;
-  if (type === "pickup") return <svg {...props}><path d="M5 21.5V16L15 8H30L35 14H52V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />{wheels}</svg>;
-  if (type === "minivan" || type === "van") return <svg {...props}><path d="M5 21.5V13L10 7H41L51 13V21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />{wheels}</svg>;
-  return <svg {...props}><path d="M5 21.5V17L11 10H40L50 16L53 21.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />{wheels}</svg>;
-}
-
-function BodyPicker({ value, onChange }: { value: string; onChange: (value: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const selected = bodyOptions.find((item) => item.value === value) || bodyOptions[0];
-
-  useEffect(() => {
-    if (!open) return;
-    const close = (event: PointerEvent) => { if (!rootRef.current?.contains(event.target as Node)) setOpen(false); };
-    document.addEventListener("pointerdown", close);
-    return () => document.removeEventListener("pointerdown", close);
-  }, [open]);
-
-  return (
-    <div ref={rootRef} className={`relative min-w-0 ${open ? "z-[210]" : "z-0"}`}>
-      <button type="button" onClick={() => setOpen((current) => !current)} className="soft-input flex h-14 w-full items-center justify-between rounded-2xl px-4 text-left text-sm font-black text-white">
-        <span>{selected.label}</span><span className={`text-white/45 transition ${open ? "rotate-180" : ""}`}><Chevron /></span>
-      </button>
-      {open ? (
-        <div className="ac-search-menu ac-body-picker-panel absolute left-0 right-0 top-[calc(100%+8px)] grid grid-cols-3 gap-1.5 rounded-[1.35rem] bg-[#151820] p-2.5 shadow-[0_24px_80px_rgba(0,0,0,.42)] sm:grid-cols-4 lg:grid-cols-3">
-          {bodyOptions.map((item) => (
-            <button key={item.value || "any"} type="button" onClick={() => { onChange(item.value); setOpen(false); }} className={`flex min-h-[74px] flex-col items-center justify-center rounded-xl px-1 py-2 text-center text-[10px] font-black transition ${item.value === value ? "bg-red-500 text-white" : "text-white/78 hover:bg-white/[0.055]"}`}>
-              <BodyIcon type={item.value} /><span className="mt-1 leading-tight">{item.label}</span>
-            </button>
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
 function BuyerGallery() {
   const [selected, setSelected] = useState<number | null>(null);
+  const swipeStart = useRef<number | null>(null);
   const photos = [...buyerPhotos, ...buyerPhotos];
+  const move = (offset: number) => setSelected((current) => current === null ? 0 : (current + offset + buyerPhotos.length) % buyerPhotos.length);
 
   useEffect(() => {
     if (selected === null) return;
@@ -201,8 +171,8 @@ function BuyerGallery() {
     document.body.style.overflow = "hidden";
     const key = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelected(null);
-      if (event.key === "ArrowRight") setSelected((current) => current === null ? 0 : (current + 1) % buyerPhotos.length);
-      if (event.key === "ArrowLeft") setSelected((current) => current === null ? 0 : (current + buyerPhotos.length - 1) % buyerPhotos.length);
+      if (event.key === "ArrowRight") move(1);
+      if (event.key === "ArrowLeft") move(-1);
     };
     window.addEventListener("keydown", key);
     return () => {
@@ -224,9 +194,25 @@ function BuyerGallery() {
         </div>
       </div>
       {selected !== null && typeof document !== "undefined" ? createPortal(
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#03050a] p-4" onClick={() => setSelected(null)}>
-          <img src={buyerPhotos[selected].src} alt={buyerPhotos[selected].alt} className="max-h-[92dvh] max-w-[96vw] rounded-2xl object-contain" onClick={(event) => event.stopPropagation()} />
-          <button type="button" className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-3xl text-white" onClick={() => setSelected(null)}>×</button>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#03050a]/95 p-4 backdrop-blur-md" onClick={() => setSelected(null)}>
+          <button type="button" className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/65 text-3xl text-white transition hover:bg-black/85 md:left-7" onClick={(event) => { event.stopPropagation(); move(-1); }} aria-label="Предыдущее фото">‹</button>
+          <img
+            src={buyerPhotos[selected].src}
+            alt={buyerPhotos[selected].alt}
+            className="max-h-[92dvh] max-w-[96vw] cursor-pointer rounded-2xl object-contain"
+            onClick={(event) => { event.stopPropagation(); move(1); }}
+            onPointerDown={(event) => { swipeStart.current = event.clientX; }}
+            onPointerUp={(event) => {
+              const start = swipeStart.current;
+              swipeStart.current = null;
+              if (start === null) return;
+              const delta = event.clientX - start;
+              if (Math.abs(delta) > 45) move(delta < 0 ? 1 : -1);
+            }}
+          />
+          <button type="button" className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/65 text-3xl text-white transition hover:bg-black/85 md:right-7" onClick={(event) => { event.stopPropagation(); move(1); }} aria-label="Следующее фото">›</button>
+          <button type="button" className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/65 text-3xl text-white" onClick={() => setSelected(null)} aria-label="Закрыть">×</button>
+          <div className="absolute bottom-4 rounded-full bg-black/65 px-4 py-2 text-sm font-black text-white">{selected + 1} / {buyerPhotos.length}</div>
         </div>,
         document.body,
       ) : null}
@@ -327,7 +313,7 @@ export default function HomePage() {
       const label = presentCatalogOffer(item.raw).makeLabel;
       if (item.make && label) map.set(item.make, label);
     }
-    return [{ value: "", label: "Любая марка" }, ...[...map.entries()].sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
+    return [{ value: "", label: "Марка" }, ...[...map.entries()].sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
   }, [items]);
 
   const modelOptions = useMemo<SelectOption[]>(() => {
@@ -336,7 +322,7 @@ export default function HomePage() {
       const label = presentCatalogOffer(item.raw).modelLabel;
       if (item.model && label) map.set(item.model, label);
     }
-    return [{ value: "", label: "Любая модель" }, ...[...map.entries()].sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
+    return [{ value: "", label: "Модель" }, ...[...map.entries()].sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
   }, [items, brand]);
 
   const selectedBudget = budgetOptions.find((item) => item.value === budget) || budgetOptions[3];
@@ -383,11 +369,11 @@ export default function HomePage() {
   }, [catalogMarket, catalogMake]);
 
   return (
-    <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
+    <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
       <PublicHeader />
       <Link href="/cars" className="sr-only">Каталог</Link>
       <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
-        <section className="grid items-start gap-7 py-7 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
+        <section className="ac-home-hero grid items-start gap-7 py-7 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
           <div>
             <h1 className="max-w-4xl text-[44px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[82px] xl:text-[96px]">Цена на авто под заказ</h1>
             <p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p>
@@ -409,15 +395,13 @@ export default function HomePage() {
                 <span>{foundCount === null ? "Считаем варианты" : `Нашли ${foundCount} вариантов`}</span>
               </div>
             </div>
-            <SelectBox value={budget} onChange={setBudget} ariaLabel="Бюджет">
-              {budgetOptions.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-            </SelectBox>
+            <SearchSelect filterKey="budget" value={budget} onChange={setBudget} options={budgetOptions.map(({ value, label }) => ({ value, label }))} placeholder="Бюджет" searchable={false} />
             <div className="mt-3 grid grid-cols-2 gap-3">
-              <SearchSelect value={brand} onChange={(next) => { setBrand(next); setModel(""); }} options={makeOptions} placeholder="Любая марка" searchPlaceholder="Найти марку" />
-              <SearchSelect value={model} onChange={setModel} options={modelOptions} placeholder="Любая модель" searchPlaceholder="Найти модель" />
-              <SelectBox value={year} onChange={setYear} ariaLabel="Год">{yearOptions.map((item) => <option key={item.value || "any"} value={item.value}>{item.label}</option>)}</SelectBox>
-              <SelectBox value={market} onChange={setMarket} ariaLabel="Страна">{marketOptions.map((item) => <option key={item.value || "any"} value={item.value}>{item.label}</option>)}</SelectBox>
-              <div className="col-span-2"><BodyPicker value={body} onChange={setBody} /></div>
+              <SearchSelect filterKey="make" value={brand} onChange={(next) => { setBrand(next); setModel(""); }} options={makeOptions} placeholder="Марка" searchPlaceholder="Найти марку" />
+              <SearchSelect filterKey="model" value={model} onChange={setModel} options={modelOptions} placeholder="Модель" searchPlaceholder="Найти модель" />
+              <SearchSelect filterKey="year" value={year} onChange={setYear} options={yearOptions} placeholder="Год" searchable={false} />
+              <SearchSelect filterKey="market" value={market} onChange={setMarket} options={marketOptions} placeholder="Страна" searchable={false} />
+              <div className="col-span-2"><SearchSelect filterKey="body" value={body} onChange={setBody} options={bodyOptions} placeholder="Кузов" searchable={false} /></div>
             </div>
             <button type="button" onClick={() => router.push(resultsUrl())} className="avto-button mt-4 flex h-[58px] w-full items-center justify-center rounded-2xl text-base font-black">Узнать Цену</button>
           </div>
@@ -437,8 +421,8 @@ export default function HomePage() {
               <h2 className="mt-2 text-3xl font-black tracking-[-0.04em] md:text-5xl">Автомобили в каталоге</h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-[180px_220px_auto]">
-              <SearchSelect value={catalogMarket} onChange={setCatalogMarket} options={marketOptions} placeholder="Любая страна" searchPlaceholder="Найти страну" />
-              <SearchSelect value={catalogMake} onChange={setCatalogMake} options={makeOptions} placeholder="Марка или модель" searchPlaceholder="Найти марку" />
+              <SearchSelect value={catalogMarket} onChange={setCatalogMarket} options={marketOptions} placeholder="Страна" searchable={false} />
+              <SearchSelect value={catalogMake} onChange={setCatalogMake} options={makeOptions} placeholder="Марка" searchPlaceholder="Найти марку" />
               <Link href={catalogHref} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link>
             </div>
           </div>
