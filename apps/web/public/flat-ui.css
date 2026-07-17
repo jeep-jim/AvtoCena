@@ -1,0 +1,102 @@
+/* Flat UI pass: surfaces are separated by color and spacing, never by shadows. */
+html *,
+html *::before,
+html *::after {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.glass,
+.ac-filter-panel,
+.ac-result-summary,
+.ac-catalog-card,
+.ac-offer-price-panel,
+.ac-offer-spec-tile,
+.ac-offer-breakdown,
+.ac-offer-status,
+.ac-offer-form,
+.ac-search-menu,
+.ac-filter-dropdown,
+.ac-catalog-filter-drawer,
+.ac-price-trend-popover,
+.ac-executor-block,
+.ac-executor-logo,
+.ac-mobile-rates {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Keep the public palette flat and consistent. */
+.ac-catalog-card,
+.ac-offer-spec-tile,
+.ac-offer-breakdown,
+.ac-offer-status,
+.ac-offer-form,
+.ac-filter-panel,
+.ac-result-summary {
+  filter: none !important;
+}
+
+html[data-theme="light"] .ac-page-copy {
+  --ac-surface: #f7f8fb;
+  --ac-surface-2: #e6eaf1;
+  --ac-surface-3: #dce2ea;
+}
+
+/* CRM used dark-only utility colours. Give it a real light theme. */
+html[data-theme="light"] .crm-root {
+  background: #edf1f6 !important;
+  color: #171b23 !important;
+}
+html[data-theme="light"] .crm-root .glass {
+  background: #f8f9fb !important;
+  color: #171b23 !important;
+}
+html[data-theme="light"] .crm-root [class*="text-white/"] {
+  color: #5d687a !important;
+}
+html[data-theme="light"] .crm-root h1,
+html[data-theme="light"] .crm-root h2,
+html[data-theme="light"] .crm-root h3,
+html[data-theme="light"] .crm-root .font-black {
+  color: #171b23;
+}
+html[data-theme="light"] .crm-root nav a:not([aria-current="page"]),
+html[data-theme="light"] .crm-root header form button,
+html[data-theme="light"] .crm-root header > div > div {
+  background: #e2e7ee !important;
+  border-color: transparent !important;
+  color: #374153 !important;
+}
+html[data-theme="light"] .crm-root .avto-button,
+html[data-theme="light"] .crm-root nav a[aria-current="page"] {
+  color: #ffffff !important;
+}
+html[data-theme="light"] .crm-root input,
+html[data-theme="light"] .crm-root select,
+html[data-theme="light"] .crm-root textarea {
+  background: #e6eaf1 !important;
+  color: #171b23 !important;
+}
+html[data-theme="light"] .crm-root input::placeholder,
+html[data-theme="light"] .crm-root textarea::placeholder {
+  color: #788397 !important;
+}
+
+/* Brand rail. */
+.ac-brand-rail {
+  background: var(--ac-surface, #12151d);
+}
+html[data-theme="light"] .ac-brand-rail {
+  background: #f7f8fb;
+}
+.ac-brand-logo-tile {
+  background: var(--ac-surface-2, #20242e);
+}
+html[data-theme="light"] .ac-brand-logo-tile {
+  background: #e6eaf1;
+}
+.ac-brand-logo-tile img {
+  max-width: 64px;
+  max-height: 38px;
+}
