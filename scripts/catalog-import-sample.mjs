@@ -28,6 +28,7 @@ for (const source of [jpaucJapanSource, ...exactMarketSources, ...reliableMarket
 
 const preferred = [
   "encar_direct",
+  "che168_dealer_exact",
   "che168_china_exact",
   "che168_global",
   "jpauc_japan",

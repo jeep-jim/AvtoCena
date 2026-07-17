@@ -2,6 +2,7 @@ const { getJsonStorage } = await import("../apps/web/lib/data.ts");
 
 const defaults = [
   "encar_direct",
+  "che168_dealer_exact",
   "che168_china_exact",
   "che168_global",
   "jpauc_japan",
