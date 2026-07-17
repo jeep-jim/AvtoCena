@@ -16,7 +16,7 @@ import { canEditBusinessSettings } from "@/lib/settings-validation";
 export const dynamic = "force-dynamic";
 
 export default async function CrmSettingsPage() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const canEdit = canEditBusinessSettings(user?.role);
   const [markets, siteSettings, partnerProgram, cpaNetworks, contracts, changeLog, partners] = await Promise.all([
     getMarketsWithEffectiveVersions(),

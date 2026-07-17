@@ -8,12 +8,12 @@ import { getActiveDirectPartnerPayout } from "@/lib/business-settings";
 export const dynamic = "force-dynamic";
 
 export default async function CrmPage() {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const clients = await readChunkedDataJson<any>("clients/clients.json", []);
   const partners = await readDataJson<any[]>("partners/partners.json", []);
   const deals = await readDataJson<any[]>("deals/deals.json", []);
-  const managers = getAuthUsers().filter((item) => isCrmRole(item.role));
+  const managers = (await getAuthUsers()).filter((item) => isCrmRole(item.role));
   const myLeads = leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
   const newLeads = leads.filter((lead) => (lead.status || "new") === "new");
   const directPayout = await getActiveDirectPartnerPayout();

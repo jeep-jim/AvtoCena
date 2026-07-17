@@ -21,7 +21,7 @@ function collectAssets(settings: any) {
 }
 
 export async function GET(request: Request) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   if (!user || !isAdminRole(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   const key = new URL(request.url).searchParams.get("key") || "";
   if (!key.startsWith("contracts/uploads/")) return NextResponse.json({ ok: false, error: "invalid_key" }, { status: 400 });

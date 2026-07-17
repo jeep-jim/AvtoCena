@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });
   }
 
-  const user = findAuthUserByTelegram(username);
+  const user = await findAuthUserByTelegram(username);
 
   if (!user) {
     return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });

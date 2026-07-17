@@ -1,8 +1,6 @@
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
-import fs from "node:fs";
-import path from "node:path";
-import { getDataRoot } from "./data";
+import { readDataJson } from "./data";
 
 export const AUTH_COOKIE_NAME = "avtocena_session";
 export const AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 14;
@@ -16,6 +14,13 @@ export type AuthUser = {
   role: UserRole;
   status?: "active" | "disabled";
   partnerCode?: string;
+  telegramId?: string;
+  avatarObjectKey?: string;
+  createdAt?: string;
+  invitedByUserId?: string;
+  lastLoginAt?: string;
+  sessionVersion?: number;
+  updatedAt?: string;
 };
 
 type SessionPayload = {
@@ -25,6 +30,7 @@ type SessionPayload = {
   role: UserRole;
   partnerCode?: string;
   exp: number;
+  sessionVersion?: number;
 };
 
 function authSecret() {
@@ -50,19 +56,13 @@ export function normalizeTelegramUsername(value: string) {
   return value.trim().replace(/^@+/, "").toLowerCase();
 }
 
-export function getAuthUsers() {
-  try {
-    const filePath = path.join(getDataRoot(), "auth/users.json");
-    if (!fs.existsSync(filePath)) return [];
-    return JSON.parse(fs.readFileSync(filePath, "utf-8")) as AuthUser[];
-  } catch {
-    return [];
-  }
+export async function getAuthUsers() {
+  return readDataJson<AuthUser[]>("auth/users.json", []);
 }
 
-export function findAuthUserByTelegram(username: string) {
+export async function findAuthUserByTelegram(username: string) {
   const normalized = normalizeTelegramUsername(username);
-  return getAuthUsers().find((user) => normalizeTelegramUsername(user.telegramUsername) === normalized && user.status !== "disabled") || null;
+  return (await getAuthUsers()).find((user) => normalizeTelegramUsername(user.telegramUsername) === normalized && user.status !== "disabled") || null;
 }
 
 export function createSessionCookie(user: AuthUser) {
@@ -72,6 +72,7 @@ export function createSessionCookie(user: AuthUser) {
     displayName: user.displayName,
     role: user.role,
     partnerCode: user.partnerCode,
+    sessionVersion: Number(user.sessionVersion || 0),
     exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS
   };
 
@@ -80,7 +81,7 @@ export function createSessionCookie(user: AuthUser) {
   return `${encodedPayload}.${signature}`;
 }
 
-export function verifySessionCookie(raw?: string | null): AuthUser | null {
+export async function verifySessionCookie(raw?: string | null): Promise<AuthUser | null> {
   if (!raw || !raw.includes(".")) return null;
 
   const [encodedPayload, signature] = raw.split(".");
@@ -98,8 +99,9 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
     const payload = JSON.parse(fromBase64url(encodedPayload)) as SessionPayload;
     if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;
 
-    const storedUser = getAuthUsers().find((user) => user.id === payload.id && user.status !== "disabled");
+    const storedUser = (await getAuthUsers()).find((user) => user.id === payload.id && user.status !== "disabled");
     if (!storedUser) return null;
+    if (Number(storedUser.sessionVersion || 0) !== Number(payload.sessionVersion || 0)) return null;
 
     return storedUser;
   } catch {
@@ -107,7 +109,7 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
   }
 }
 
-export function getCurrentUser() {
+export async function getCurrentUser() {
   const raw = cookies().get(AUTH_COOKIE_NAME)?.value;
   return verifySessionCookie(raw);
 }

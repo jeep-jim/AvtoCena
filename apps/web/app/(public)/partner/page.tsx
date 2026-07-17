@@ -61,7 +61,7 @@ export default async function PartnerPage({
 }) {
   const params = (await searchParams) ?? {};
   const payoutState = firstParam(params.payout);
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const partners = await readDataJson<any[]>("partners/partners.json", []);
   const leads = await readChunkedDataJson<any>("leads/leads.json", []);
   const payoutRequests = await readChunkedDataJson<PayoutRequest>(

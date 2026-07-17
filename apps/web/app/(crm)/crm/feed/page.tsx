@@ -1,73 +1,10 @@
+import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readChunkedDataJson } from "@/lib/data";
-import { getCurrentUser } from "@/lib/auth";
-
-export const dynamic = "force-dynamic";
-
-function dateLabel(value?: string) {
-  if (!value) return "—";
-  return new Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(new Date(value));
-}
-
-export default async function CrmFeedPage() {
-  const user = getCurrentUser();
-  const leads = (await readChunkedDataJson<any>("leads/leads.json", [])).map((lead) => ({
-    id: lead.id,
-    createdAt: lead.createdAt,
-    type: "lead",
-    title: lead.name || lead.phone || lead.telegram || "Новая заявка",
-    text: lead.car || lead.comment || "Заявка из сайта",
-    source: lead.source || "site",
-    managerId: lead.assignedManagerId || lead.createdByManagerId
-  }));
-  const clients = (await readChunkedDataJson<any>("clients/clients.json", [])).map((client) => ({
-    id: client.id,
-    createdAt: client.createdAt,
-    type: "client",
-    title: client.fio || client.phone || client.telegram || "Новый клиент",
-    text: client.comment || "Ручное добавление клиента",
-    source: client.source || "manual",
-    managerId: client.assignedManagerId || client.createdByManagerId
-  }));
-  const events = [...leads, ...clients].sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
-  const myEvents = events.filter((event) => event.managerId === user?.id);
-
-  return (
-    <CrmShell activeHref="/crm/feed" title="Лента" subtitle="Общая лента действий и личная лента менеджера.">
-      <div className="grid gap-5 lg:grid-cols-2">
-        <div className="glass rounded-[2rem] p-5 md:p-6">
-          <h2 className="text-2xl font-black">Общая лента</h2>
-          <div className="mt-5 space-y-3">
-            {events.map((event) => (
-              <div key={`${event.type}_${event.id}`} className="rounded-2xl bg-white/7 px-4 py-3">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="font-black">{event.title}</div>
-                  <div className="text-xs font-bold text-white/42">{dateLabel(event.createdAt)}</div>
-                </div>
-                <div className="mt-1 text-sm font-bold text-white/50">{event.type} · {event.source}</div>
-                <div className="mt-2 text-sm leading-6 text-white/62">{event.text}</div>
-              </div>
-            ))}
-            {!events.length && <div className="rounded-2xl bg-white/7 px-4 py-5 text-sm font-bold text-white/50">Пока нет событий.</div>}
-          </div>
-        </div>
-
-        <div className="glass rounded-[2rem] p-5 md:p-6">
-          <h2 className="text-2xl font-black">Моя лента</h2>
-          <div className="mt-5 space-y-3">
-            {myEvents.map((event) => (
-              <div key={`${event.type}_${event.id}`} className="rounded-2xl bg-white/7 px-4 py-3">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="font-black">{event.title}</div>
-                  <div className="text-xs font-bold text-white/42">{dateLabel(event.createdAt)}</div>
-                </div>
-                <div className="mt-2 text-sm leading-6 text-white/62">{event.text}</div>
-              </div>
-            ))}
-            {!myEvents.length && <div className="rounded-2xl bg-white/7 px-4 py-5 text-sm font-bold text-white/50">В вашей личной ленте пока нет событий.</div>}
-          </div>
-        </div>
-      </div>
-    </CrmShell>
-  );
-}
+import { getAuthUsers, getCurrentUser } from "@/lib/auth";
+import { groupFeedByOperation } from "@/lib/crm";
+import { FormDarkSelect } from "@/components/crm/FormDarkSelect";
+export const dynamic="force-dynamic"; const dt=(v?:string)=>v?new Intl.DateTimeFormat("ru-RU",{dateStyle:"short",timeStyle:"short"}).format(new Date(v)):"—";
+export default async function CrmFeedPage({searchParams}:{searchParams?:Record<string,string>}){const user=await getCurrentUser(); const managers=(await getAuthUsers()); const raw=await readChunkedDataJson<any>("activity/feed.json",[]); const events=groupFeedByOperation(raw).filter((e)=>!searchParams?.managerId||e.managerId===searchParams.managerId).filter((e)=>!searchParams?.type||e.type===searchParams.type).filter((e)=>!searchParams?.date||String(e.createdAt||"").startsWith(searchParams.date)).filter((e)=>!searchParams?.q||JSON.stringify(e).toLowerCase().includes(searchParams.q.toLowerCase())).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||""))); const my=events.filter((e)=>e.managerId===user?.id);
+return <CrmShell activeHref="/crm/feed" title="Лента" subtitle="Публичная лента сгруппирована по operationId без дублей client + lead."><form className="glass mb-5 grid gap-3 rounded-[2rem] p-5 md:grid-cols-4"><input name="q" defaultValue={searchParams?.q} placeholder="Поиск" className="soft-input rounded-2xl px-4 py-3 text-sm font-bold"/><FormDarkSelect name="managerId" label="Менеджер" value={searchParams?.managerId||""} options={[{value:"",label:"Все менеджеры"},...managers.map((m)=>({value:m.id,label:m.displayName}))]}/><FormDarkSelect name="type" label="Тип события" value={searchParams?.type||""} options={[{value:"",label:"Все события"},{value:"client_created",label:"Клиент и заявка"},{value:"deal_updated",label:"Сделка изменена"}]}/><input name="date" type="date" defaultValue={searchParams?.date} className="soft-input rounded-2xl px-4 py-3 text-sm font-bold [color-scheme:dark]"/><button className="avto-button rounded-2xl px-4 py-3 font-black md:col-span-4">Применить фильтры</button></form><div className="grid gap-5 lg:grid-cols-2"><Feed title="Общая лента" events={events}/><Feed title="Моя лента" events={my}/></div></CrmShell>}
+function Feed({title,events}:{title:string;events:any[]}){return <div className="glass rounded-[2rem] p-6"><h2 className="text-2xl font-black">{title}</h2><div className="mt-5 space-y-3">{events.map((e)=><div key={e.operationId} className="rounded-2xl bg-white/7 px-4 py-3"><div className="flex flex-wrap justify-between gap-3"><div className="font-black">{e.title}</div><div className="text-xs font-bold text-white/42">{dt(e.createdAt)}</div></div><div className="mt-1 text-sm font-bold text-white/50">{e.type==="client_created"?"Клиент и заявка":"Событие CRM"} · сгруппировано: {e.groupedCount}</div><div className="mt-2 flex flex-wrap gap-2 text-sm font-bold">{e.clientId&&<Link className="text-red-200 hover:text-white" href={`/crm/clients/${e.clientId}`}>Клиент</Link>}{e.leadId&&<Link className="text-red-200 hover:text-white" href="/crm/leads">Лид</Link>}{e.dealId&&<Link className="text-red-200 hover:text-white" href={`/crm/deals/${e.dealId}`}>Сделка</Link>}</div></div>)}{!events.length&&<div className="rounded-2xl bg-white/7 px-4 py-5 text-sm font-bold text-white/50">Пока нет событий.</div>}</div></div>}

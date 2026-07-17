@@ -1,3 +1,4 @@
+import { FormDarkSelect } from "@/components/crm/FormDarkSelect";
 import {
   MarketStructuredFields,
   CpaStructuredFields,
@@ -357,17 +358,7 @@ export function BusinessSettingsPanel({
             >
               <label className="grid gap-1 text-xs font-black uppercase tracking-[0.08em] text-white/42">
                 Партнёр для индивидуальной ставки
-                <select
-                  name="partnerCode"
-                  className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-sm font-bold text-white placeholder:text-white/25 normal-case tracking-normal"
-                >
-                  <option value="">Базовая ставка</option>
-                  {partners.map((item: any) => (
-                    <option key={item.id} value={item.code}>
-                      {item.name} · {item.code}
-                    </option>
-                  ))}
-                </select>
+                <FormDarkSelect name="partnerCode" label="Партнёр" value="" options={[{value:"",label:"Базовая ставка"},...partners.map((item:any)=>({value:item.code,label:`${item.name} · ${item.code}`}))]}/>
               </label>
               <Field
                 label="Новая ставка ₽"

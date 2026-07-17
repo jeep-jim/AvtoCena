@@ -1,24 +1,8 @@
+import Link from "next/link";
 import { CrmShell } from "@/components/crm/CrmShell";
-import { readDataJson } from "@/lib/data";
+import { readChunkedDataJson } from "@/lib/data";
 import { money } from "@/lib/avtocena";
-
-export default async function CrmDealsPage() {
-  const deals = await readDataJson<any[]>("deals/deals.json", []);
-  const demo = deals.length ? deals : [{ id: "deal_demo", car: "Audi A3 Sportback", client: "Демо клиент", stage: "Расчёт", totalRub: 2560800 }];
-
-  return (
-    <CrmShell activeHref="/crm/deals" title="Сделки" subtitle="Карточки договоров: от АвтоЦены до выдачи автомобиля клиенту.">
-      <div className="grid gap-4 md:grid-cols-3">
-        {demo.map((deal) => (
-          <article key={deal.id} className="glass rounded-[2rem] p-5">
-            <div className="text-sm font-black text-red-200">{deal.stage}</div>
-            <h2 className="mt-2 text-2xl font-black">{deal.car}</h2>
-            <p className="mt-1 text-sm font-bold text-white/50">{deal.client}</p>
-            <div className="mt-5 text-3xl font-black">{money(Number(deal.totalRub || 0))} ₽</div>
-            <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full w-1/4 bg-red-500" /></div>
-          </article>
-        ))}
-      </div>
-    </CrmShell>
-  );
-}
+import { dealProgress } from "@/lib/crm";
+export const dynamic = "force-dynamic";
+export default async function CrmDealsPage() { const deals=(await readChunkedDataJson<any>("deals/deals.json",[])).filter((d)=>!d.demo); const clients=await readChunkedDataJson<any>("clients/clients.json",[]);
+ return <CrmShell activeHref="/crm/deals" title="Сделки" subtitle="Кликабельные карточки сделок без демонстрационных production-данных."><div className="grid gap-4 md:grid-cols-3">{deals.map((deal)=>{const p=dealProgress(deal.stageIndex||0,deal.completedAtByStage,deal.stagesSnapshot||deal.marketStages||deal.stages); const client=clients.find((c)=>c.id===deal.clientId); return <Link href={`/crm/deals/${deal.id}`} key={deal.id} className="glass rounded-[2rem] p-5 transition hover:-translate-y-0.5 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-red-300/60"><div className="text-sm font-black text-red-200">{p.currentStage} — этап {p.stageNumber} из {p.totalStages} — {p.percent}%</div><h2 className="mt-2 text-2xl font-black">{deal.car || deal.vehicle || "Автомобиль не указан"}</h2><p className="mt-1 text-sm font-bold text-white/50">{client?.fio || deal.client || "Клиент не указан"}</p><div className="mt-5 text-3xl font-black">{money(Number(deal.totalRub || deal.amountRub || 0))} ₽</div><div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full bg-red-500" style={{width:`${p.percent}%`}} /></div></Link>})}</div>{!deals.length&&<div className="glass rounded-[2rem] p-8 text-center text-sm font-bold text-white/50">Сделок пока нет. Демо-сделки в production-данных скрыты.</div>}</CrmShell> }

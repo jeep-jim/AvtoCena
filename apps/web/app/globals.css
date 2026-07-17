@@ -191,7 +191,7 @@ textarea::placeholder {
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   -webkit-tap-highlight-color: transparent;
   backdrop-filter: blur(16px);
 }
@@ -258,7 +258,7 @@ textarea::placeholder {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.065);
   padding: 0 14px 0 16px;
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   font-size: 18px;
   font-weight: 900;
   line-height: 1;
@@ -282,7 +282,7 @@ textarea::placeholder {
 }
 
 .ac-mobile-menu__icon--red {
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   background: rgba(255, 255, 255, 0.14);
 }
 
@@ -315,7 +315,7 @@ textarea::placeholder {
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   -webkit-tap-highlight-color: transparent;
   backdrop-filter: blur(16px);
 }
@@ -383,7 +383,7 @@ textarea::placeholder {
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.065);
   padding: 0 14px 0 16px;
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   font-size: 18px;
   font-weight: 900;
   line-height: 1;
@@ -407,7 +407,7 @@ textarea::placeholder {
 }
 
 .ac-drawer-icon--red {
-  color: #ffffff;
+  color: rgba(245, 247, 250, 0.92);
   background: rgba(255, 255, 255, 0.14);
 }
 
@@ -452,3 +452,27 @@ textarea::placeholder {
     animation: none !important;
   }
 }
+
+
+/* CRM-only calm graphite theme */
+.crm-root { color: rgba(245, 247, 250, 0.92); }
+.crm-root .glass {
+  border-color: rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(37,41,50,0.88), rgba(24,27,34,0.86));
+  box-shadow: 0 24px 70px rgba(0,0,0,0.34);
+}
+.crm-root .soft-input {
+  background: rgba(255,255,255,0.055);
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(245,247,250,0.92);
+}
+.crm-root .soft-input:focus {
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.075);
+  box-shadow: 0 0 0 3px rgba(160,170,190,0.08);
+}
+.crm-root .avto-button {
+  background: linear-gradient(135deg, rgba(185,36,44,0.92), rgba(126,24,31,0.92));
+  box-shadow: 0 16px 36px rgba(110,18,24,0.26);
+}
+.crm-root .avto-button:hover { box-shadow: 0 18px 42px rgba(110,18,24,0.32); }
