@@ -1,0 +1,21 @@
+name: Trigger catalog production import once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/catalog-production-import-once.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch-production-import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Catalog production import
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run catalog-production-import.yml --ref main -f reset=false
