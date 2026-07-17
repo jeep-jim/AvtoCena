@@ -1,6 +1,6 @@
 import { readDataJson, writeDataJson } from "../data";
 
-const RATE_CODES = ["USD", "EUR", "CNY", "JPY", "KRW", "AED"] as const;
+const RATE_CODES = ["USD", "EUR", "CNY", "JPY", "KRW", "AED", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"] as const;
 type RateCode = (typeof RATE_CODES)[number];
 type RateSource = "moex" | "cbr" | "legacy_json";
 
