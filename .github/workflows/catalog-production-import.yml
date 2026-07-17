@@ -55,13 +55,13 @@ jobs:
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           <<: *storage
-          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,jpauc_japan,goonet_japan_exact,dubicars_uae_exact,dubicars_uae,otomoto_europe_exact,autoscout_europe,autouncle_europe"
+          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,dubicars_uae,autoscout_europe,autouncle_europe"
       - name: Import up to 250 offers and 10 photos from every public market
         run: npm run catalog:import:sample
         env:
           <<: *storage
           CATALOG_IMPORT_RESET: ${{ github.event_name == 'workflow_dispatch' && inputs.reset && 'true' || 'false' }}
-          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,jpauc_japan,goonet_japan_exact,dubicars_uae_exact,dubicars_uae,otomoto_europe_exact,autoscout_europe,autouncle_europe"
+          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,dubicars_uae,autoscout_europe,autouncle_europe"
           CATALOG_TARGET_PUBLIC_OFFERS: "1250"
           CATALOG_TARGET_PER_MARKET: "250"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
