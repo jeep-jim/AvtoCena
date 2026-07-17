@@ -39,10 +39,24 @@ jobs:
         id: production
         shell: bash
         run: |
-          set +e
-          npm run catalog:import:sample 2>&1 | tee catalog-import-production.log
-          code=${PIPESTATUS[0]}
-          set -e
+          code=1
+          : > catalog-import-production.log
+          for attempt in $(seq 1 9); do
+            echo "[catalog] production attempt $attempt" | tee -a catalog-import-production.log
+            set +e
+            npm run catalog:import:sample 2>&1 | tee -a catalog-import-production.log
+            code=${PIPESTATUS[0]}
+            set -e
+            if [ "$code" = "0" ]; then
+              break
+            fi
+            if grep -q "catalog_import_locked" catalog-import-production.log && [ "$attempt" -lt 9 ]; then
+              echo "[catalog] active lock found; retrying in 120 seconds" | tee -a catalog-import-production.log
+              sleep 120
+              continue
+            fi
+            break
+          done
           echo "conclusion_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
         env:
