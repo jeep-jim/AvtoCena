@@ -157,9 +157,46 @@ main [class*="border-white/"] {
   animation: ac-dot-pulse 1.55s ease-out infinite;
 }
 
+.ac-pulse-dot--status {
+  width: 9px;
+  height: 9px;
+  flex-basis: 9px;
+}
+
+.ac-pulse-dot--status::before,
+.ac-pulse-dot--status > span {
+  background: #ff353d;
+}
+
 @keyframes ac-dot-pulse {
   0% { transform: scale(.7); opacity: .85; }
   75%, 100% { transform: scale(2.15); opacity: 0; }
+}
+
+.ac-mobile-rates {
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
+}
+
+.ac-executor-block {
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.16);
+}
+
+.ac-executor-logo {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.ac-login-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.065));
+}
+
+.ac-login-input {
+  color: #ffffff;
+}
+
+.ac-login-home {
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 html[data-theme="light"] {
@@ -301,6 +338,57 @@ html[data-theme="light"] .avto-button *,
 html[data-theme="light"] [class*="bg-red-600"],
 html[data-theme="light"] [class*="bg-red-600"] * {
   color: #ffffff !important;
+}
+
+html[data-theme="light"] .ac-mobile-rates {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 16px 42px rgba(45, 50, 64, 0.11);
+}
+
+html[data-theme="light"] .ac-executor-block {
+  background: #ffffff !important;
+  color: #171a21 !important;
+  box-shadow: 0 18px 48px rgba(45, 50, 64, 0.13);
+}
+
+html[data-theme="light"] .ac-executor-logo {
+  background: #eef1f5 !important;
+}
+
+html[data-theme="light"] .ac-topavto-logo {
+  content: url("/brands/topavto-logo-black.png");
+}
+
+html[data-theme="light"] .ac-login-card {
+  border-color: rgba(34, 39, 52, 0.08) !important;
+  background: #f7f8fa !important;
+  box-shadow: 0 28px 80px rgba(35, 40, 54, 0.2);
+}
+
+html[data-theme="light"] .ac-login-card .ac-login-input {
+  border-color: rgba(38, 43, 57, 0.12) !important;
+  background: #e6e9ef !important;
+  color: #20232b !important;
+}
+
+html[data-theme="light"] .ac-login-card .ac-login-input::placeholder {
+  color: rgba(43, 49, 63, 0.55) !important;
+}
+
+html[data-theme="light"] .ac-login-note {
+  border-color: rgba(38, 43, 57, 0.08) !important;
+  background: #eceff4 !important;
+  color: #596170 !important;
+}
+
+html[data-theme="light"] .ac-login-error {
+  background: #f8e1e4 !important;
+  color: #a01d27 !important;
+}
+
+html[data-theme="light"] .ac-login-home {
+  background: rgba(31, 35, 46, 0.08) !important;
+  color: #20232b !important;
 }
 
 @media (min-width: 768px) {
