@@ -29,13 +29,13 @@ for (const source of [jpaucJapanSource, ...exactMarketSources, ...reliableMarket
 const preferred = [
   "encar_direct",
   "che168_dealer_exact",
+  "goonet_japan_exact",
+  "dubicars_uae_exact",
+  "otomoto_europe_exact",
   "che168_china_exact",
   "che168_global",
   "jpauc_japan",
-  "goonet_japan_exact",
-  "dubicars_uae_exact",
   "dubicars_uae",
-  "otomoto_europe_exact",
   "autoscout_europe",
   "autouncle_europe",
 ];
