@@ -73,6 +73,13 @@ function inferPowerHp(text: string) {
   return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2500) : undefined;
 }
 
+function normalizedCurrency(offer: Partial<VehicleOffer>) {
+  const currency = String(offer.sourceCurrency || "").toUpperCase();
+  const sourcePrice = Number(offer.sourcePrice || 0);
+  if (offer.market === "japan" && currency === "USD" && sourcePrice > 250_000) return "JPY";
+  return currency || offer.sourceCurrency;
+}
+
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
   const primary = primaryText(offer);
   const full = allText(offer);
@@ -83,6 +90,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   if (engineCc && fuel === "electric" && !/hybrid|hev|phev|plug[ -]?in|гибрид/.test(primary)) fuel = inferFuel(primary.replace(/electric|\bev\b|электро/g, " ")) || "petrol";
   return {
     ...offer,
+    sourceCurrency: normalizedCurrency(offer),
     fuel,
     transmission: inferTransmission(`${offer.transmission || ""} ${primary}`) || inferTransmission(full) || offer.transmission,
     drive: inferDrive(`${offer.drive || ""} ${primary}`) || inferDrive(full) || offer.drive,
