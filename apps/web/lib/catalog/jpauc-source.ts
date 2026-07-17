@@ -23,7 +23,7 @@ function integer(value: unknown) { const number = Number(text(value).replace(/[^
 function decodeHtml(value: string) { return text(value).replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">"); }
 function stripHtml(value: string) { return decodeHtml(value.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ")); }
 function absoluteUrl(value: string, baseUrl: string) { try { return new URL(decodeHtml(value).replace(/\\\//g, "/"), baseUrl).toString(); } catch { return ""; } }
-function unique<T>(values: T[]) { return [...new Set(values.filter(Boolean))]; }
+function unique(values: unknown[]): string[] { return [...new Set(values.map(text).filter(Boolean))]; }
 
 async function requestHtml(url: string, referer = url) {
   const controller = new AbortController();
@@ -120,7 +120,8 @@ export class JpaucJapanAdapter implements CatalogSourceAdapter {
     const raw = (offer.operational.raw || {}) as any;
     const saved: CatalogImage[] = [];
     const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10));
-    for (const url of unique(raw.images || []).slice(0, limit)) {
+    const urls = Array.isArray(raw.images) ? raw.images.map(String) : [];
+    for (const url of unique(urls).slice(0, limit)) {
       const image = await cacheImageFromUrl(url, "japan", { headers: { ...HEADERS, referer: raw.detailUrl } }).catch(() => null);
       if (!image || image.size < 8_000) continue;
       saved.push(image);
