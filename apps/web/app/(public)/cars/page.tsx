@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { searchOffers } from "@/lib/catalog/storage";
+import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
@@ -46,6 +46,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom),
     yearTo: numeric(params.yearTo),
+    mileageFrom: numeric(params.mileageFrom),
     mileageTo: numeric(params.mileageTo),
     engineFrom: numeric(params.engineFrom),
     engineTo: numeric(params.engineTo),
@@ -58,15 +59,18 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   };
 
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
-  const groupedMarkets = await Promise.all(markets.map(async (market) => {
-    const result = await searchOffers({
-      ...common,
-      market: market.id,
-      page: selectedMarket ? requestedPage : 1,
-      pageSize: selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS,
-    });
-    return { ...market, items: result.items, total: result.total, page: result.page, pageSize: result.pageSize };
-  }));
+  const [facets, groupedMarkets] = await Promise.all([
+    readCatalogFacets(),
+    Promise.all(markets.map(async (market) => {
+      const result = await searchOffers({
+        ...common,
+        market: market.id,
+        page: selectedMarket ? requestedPage : 1,
+        pageSize: selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS,
+      });
+      return { ...market, items: result.items, total: result.total, page: result.page, pageSize: result.pageSize };
+    })),
+  ]);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
   const selectedResult = selectedMarket ? groupedMarkets[0] : undefined;
   const totalPages = selectedResult ? Math.max(1, Math.ceil(selectedResult.total / selectedResult.pageSize)) : 1;
@@ -81,7 +85,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="max-w-4xl"><h1 className="text-4xl font-black leading-[.98] tracking-[-0.04em] md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}.{selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}</p></div>
-      <CatalogFilters initial={initial} />
+      <CatalogFilters initial={initial} facets={facets} />
       <div className="mt-9 grid gap-12">
         {groupedMarkets.map((market) => <section key={market.id} className="min-w-0">
           <div className="mb-4 flex items-end justify-between gap-4">
@@ -95,30 +99,19 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
               </div>
             ) : (
               <div className="ac-hide-scrollbar -mr-4 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 pr-4 sm:gap-3 md:mr-0 md:grid md:grid-cols-4 md:overflow-visible md:pr-0">
-                {market.items.map((offer: any) => (
-                  <div key={offer.id} className="w-[47%] shrink-0 snap-start md:w-auto md:shrink md:snap-none">
-                    <CatalogCard offer={offer} compact dense />
-                  </div>
-                ))}
+                {market.items.map((offer: any) => <div key={offer.id} className="w-[47%] shrink-0 snap-start md:w-auto md:shrink md:snap-none"><CatalogCard offer={offer} compact dense /></div>)}
               </div>
             )
-          ) : <div className="rounded-[1.5rem] bg-white/[0.035] p-6 text-sm font-bold text-white/48"><strong>Свежие автомобили пока загружаются.</strong> Блок появится автоматически после успешного импорта этого рынка.</div>}
+          ) : (
+            <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Свежие автомобили пока загружаются. Блок появится автоматически после успешного импорта этого рынка.</div>
+          )}
         </section>)}
       </div>
-
-      {selectedResult && totalPages > 1 ? (
-        <nav className="mt-10 flex flex-wrap items-center justify-center gap-2 rounded-[1.4rem] bg-white/[0.04] p-3" aria-label="Страницы каталога">
-          {currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="rounded-xl bg-white/[0.07] px-3 py-2 text-sm font-black">← Назад</Link> : null}
-          {pages.map((page, index) => {
-            const previous = pages[index - 1];
-            return <span key={page} className="contents">
-              {previous && page - previous > 1 ? <span className="px-1 text-sm font-black text-white/40">…</span> : null}
-              <Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`flex h-10 min-w-10 items-center justify-center rounded-xl px-3 text-sm font-black ${page === currentPage ? "bg-red-500 text-white" : "bg-white/[0.07]"}`}>{page}</Link>
-            </span>;
-          })}
-          {currentPage < totalPages ? <Link href={pageHref(params, currentPage + 1)} className="rounded-xl bg-white/[0.07] px-3 py-2 text-sm font-black">Дальше →</Link> : null}
-        </nav>
-      ) : null}
+      {selectedMarket && totalPages > 1 ? <nav className="mt-10 flex flex-wrap items-center justify-center gap-2" aria-label="Страницы каталога">
+        {currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="rounded-xl bg-white/[0.055] px-4 py-3 text-sm font-black">← Назад</Link> : null}
+        {pages.map((page, index) => <span key={page} className="contents">{index > 0 && page - pages[index - 1] > 1 ? <span className="px-1 text-white/35">…</span> : null}<Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`rounded-xl px-4 py-3 text-sm font-black ${page === currentPage ? "bg-red-500 text-white" : "bg-white/[0.055]"}`}>{page}</Link></span>)}
+        {currentPage < totalPages ? <Link href={pageHref(params, currentPage + 1)} className="rounded-xl bg-white/[0.055] px-4 py-3 text-sm font-black">Вперёд →</Link> : null}
+      </nav> : null}
     </section>
   </main>;
 }
