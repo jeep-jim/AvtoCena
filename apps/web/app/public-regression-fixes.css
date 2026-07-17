@@ -1,0 +1,51 @@
+/* Small, isolated corrections for public pages. Do not restyle established components. */
+
+/* The subtitle was removed from the compact public wordmark. */
+.ac-public-header a[href="/"] > div:last-child > div:last-child {
+  display: none !important;
+}
+.ac-public-header a[href="/"] > div:last-child > div:first-child {
+  white-space: nowrap;
+}
+
+/* Only narrow headers stack the name so navigation icons never overlap it. */
+@media (max-width: 420px) {
+  .ac-public-header > div {
+    gap: .4rem !important;
+    padding-left: .65rem !important;
+    padding-right: .65rem !important;
+  }
+  .ac-public-header a[href="/"] {
+    gap: .4rem !important;
+  }
+  .ac-public-header a[href="/"] > div:last-child > div:first-child {
+    display: grid;
+    line-height: .78 !important;
+    white-space: normal;
+    font-size: 15px !important;
+  }
+  .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
+    display: block;
+  }
+}
+
+/* Price explanations must float above adjacent cards, never beneath them. */
+.ac-catalog-card:has(.ac-price-trend-popover) {
+  z-index: 520 !important;
+}
+.ac-price-trend-popover {
+  z-index: 600 !important;
+}
+
+/* Brand tiles share one rail surface; individual gray containers are intentionally absent. */
+.ac-brand-rail a[href^="/cars/brand/"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Buyer rail remains swipeable and has stable momentum scrolling on phones. */
+.ac-home-page section .snap-x {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
