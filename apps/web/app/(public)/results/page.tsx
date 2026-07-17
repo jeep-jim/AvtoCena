@@ -30,7 +30,7 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const editParams = new URLSearchParams();
   editParams.set("advanced", "1");
   if (budgetFrom) editParams.set("budgetFrom", String(budgetFrom));
-  if (input.budgetRub) editParams.set("budgetTo", String(input.budgetRub));
+  if (input.budgetRub) editParams.set("budget", String(input.budgetRub));
   if (input.brand) editParams.set("make", input.brand);
   if (input.model) editParams.set("model", input.model);
   if (input.market && input.market !== "any") editParams.set("market", input.market);
