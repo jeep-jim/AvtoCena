@@ -60,20 +60,21 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   return <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
+      <header className="mb-5 min-w-0 md:mb-7">
+        <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs">
+          <Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}
+        </nav>
+        <div className="relative mt-2 min-w-0">
+          <FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" />
+          <h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1>
+        </div>
+      </header>
+
       <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(520px,.82fr)] xl:items-start">
         <div className="min-w-0 overflow-hidden">
-          <header className="mb-5 min-w-0 md:mb-7">
-            <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs">
-              <Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}
-            </nav>
-            <div className="relative mt-2 min-w-0">
-              <FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" />
-              <h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1>
-            </div>
-          </header>
           <VehicleGallery images={o.images} title={o.title} />
         </div>
-        <aside className="ac-offer-detail-stack min-w-0 xl:sticky xl:top-24">
+        <aside className="ac-offer-detail-stack min-w-0">
           <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
           {o.priceMode === "auction_start" ? <p className="mt-4 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-[minmax(0,1.05fr)_minmax(230px,.95fr)] xl:grid-cols-[minmax(0,1fr)_minmax(215px,.95fr)]">
