@@ -9,13 +9,82 @@ on:
 
 permissions:
   actions: write
-  contents: read
+  contents: write
 
 jobs:
   dispatch-production-import:
     runs-on: ubuntu-latest
+    timeout-minutes: 58
     steps:
-      - name: Dispatch Catalog production import
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Dispatch and wait for Catalog production import
+        id: production
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run catalog-production-import.yml --ref main -f reset=false
+        shell: bash
+        run: |
+          set -euo pipefail
+          before="$(gh run list --workflow catalog-production-import.yml --event workflow_dispatch --branch main --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+          gh workflow run catalog-production-import.yml --ref main -f reset=false
+
+          run_id=""
+          for attempt in $(seq 1 30); do
+            latest="$(gh run list --workflow catalog-production-import.yml --event workflow_dispatch --branch main --limit 1 --json databaseId --jq '.[0].databaseId // 0')"
+            if [ "$latest" != "0" ] && [ "$latest" != "$before" ]; then
+              run_id="$latest"
+              break
+            fi
+            sleep 5
+          done
+          if [ -z "$run_id" ]; then
+            echo "Production import run was not found" >&2
+            exit 1
+          fi
+
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          set +e
+          gh run watch "$run_id" --exit-status
+          conclusion_code=$?
+          set -e
+          echo "conclusion_code=$conclusion_code" >> "$GITHUB_OUTPUT"
+
+          mkdir -p /tmp/catalog-import-report data/catalog/imports
+          gh run download "$run_id" --name catalog-import-public-markets-report --dir /tmp/catalog-import-report || true
+          report="$(find /tmp/catalog-import-report -name 'catalog-import-public-markets-report.json' -type f | head -n 1)"
+          if [ -n "$report" ]; then
+            cp "$report" data/catalog/imports/last-manual-production-report.json
+          else
+            printf '{\n  "runId": %s,\n  "reportMissing": true,\n  "conclusionCode": %s\n}\n' "$run_id" "$conclusion_code" > data/catalog/imports/last-manual-production-report.json
+          fi
+
+      - name: Record production import report
+        if: always() && steps.production.outputs.run_id != ''
+        env:
+          RUN_ID: ${{ steps.production.outputs.run_id }}
+          CONCLUSION_CODE: ${{ steps.production.outputs.conclusion_code }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          path = Path('data/catalog/imports/last-manual-production-report.json')
+          try:
+              data = json.loads(path.read_text(encoding='utf-8'))
+          except Exception:
+              data = {'reportMissing': True}
+          data['workflowRunId'] = int(os.environ['RUN_ID'])
+          data['workflowConclusionCode'] = int(os.environ.get('CONCLUSION_CODE') or 0)
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/catalog/imports/last-manual-production-report.json
+          git commit -m "Record multi-market production import report" || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Fail when production import failed
+        if: steps.production.outputs.conclusion_code != '0'
+        run: exit 1
