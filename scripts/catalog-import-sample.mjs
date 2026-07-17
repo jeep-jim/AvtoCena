@@ -20,7 +20,7 @@ const { catalogImportSources, importCatalog } = await import("../apps/web/lib/ca
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 
-const QUARANTINED_SOURCE_IDS = new Set(["japantransit_japan"]);
+const QUARANTINED_SOURCE_IDS = new Set(["japantransit_japan", "dubicars_uae", "autouncle_europe"]);
 for (const source of [jpaucJapanSource, ...exactMarketSources, ...reliableMarketSources, ...alternateMarketSources, ...publicFallbackSources]) {
   if (QUARANTINED_SOURCE_IDS.has(source.sourceId)) continue;
   if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) catalogImportSources.push(source);
@@ -35,13 +35,13 @@ const preferred = [
   "che168_china_exact",
   "che168_global",
   "jpauc_japan",
-  "dubicars_uae",
   "autoscout_europe",
-  "autouncle_europe",
 ];
 const configured = String(process.env.CATALOG_IMPORT_SOURCES || "").split(",").map((value) => value.trim()).filter(Boolean);
 const available = new Set(catalogImportSources.map((source) => source.sourceId));
 const sources = [...new Set((configured.length ? configured : preferred).filter((sourceId) => available.has(sourceId) && !QUARANTINED_SOURCE_IDS.has(sourceId)))];
+const sourcePriority = new Map(sources.map((sourceId, index) => [sourceId, index]));
+catalogImportSources.sort((left, right) => (sourcePriority.get(left.sourceId) ?? Number.MAX_SAFE_INTEGER) - (sourcePriority.get(right.sourceId) ?? Number.MAX_SAFE_INTEGER));
 
 if (["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_RESET || "").toLowerCase())) {
   const { getJsonStorage } = await import("../apps/web/lib/data.ts");
@@ -56,13 +56,7 @@ const maxPages = Math.max(4, Number(process.env.CATALOG_IMPORT_MAX_PAGES || 30))
 const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10));
 const targetPerMarket = Math.max(1, Number(process.env.CATALOG_TARGET_PER_MARKET || 250));
 const targetPublicOffers = Math.max(targetPerMarket * 5, Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 1250));
-const smokeOptions = {
-  sourceIds: ["encar_direct"],
-  maxOffers: 20,
-  maxDetails: 20,
-  maxImagesPerOffer: 3,
-  maxPages: 1,
-};
+const smokeOptions = { sourceIds: ["encar_direct"], maxOffers: 20, maxDetails: 20, maxImagesPerOffer: 3, maxPages: 1 };
 const smokeMode = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_SMOKE || "").toLowerCase());
 
 for (const source of catalogImportSources.filter((candidate) => (smokeMode ? smokeOptions.sourceIds : sources).includes(candidate.sourceId))) {
