@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand/BrandMark";
 
@@ -24,9 +25,30 @@ function readCount() {
   }
 }
 
+function updateBrowserChrome(theme: Theme) {
+  const color = theme === "light" ? "#ffffff" : "#07080d";
+  let themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  if (!themeColor) {
+    themeColor = document.createElement("meta");
+    themeColor.name = "theme-color";
+    document.head.appendChild(themeColor);
+  }
+  themeColor.content = color;
+
+  let statusBar = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]');
+  if (!statusBar) {
+    statusBar = document.createElement("meta");
+    statusBar.name = "apple-mobile-web-app-status-bar-style";
+    document.head.appendChild(statusBar);
+  }
+  statusBar.content = theme === "light" ? "default" : "black-translucent";
+  document.documentElement.style.colorScheme = theme;
+}
+
 function applyBrowserTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme;
   localStorage.setItem(THEME_KEY, theme);
+  updateBrowserChrome(theme);
 
   let icon = document.querySelector<HTMLLinkElement>('link[data-avtocena-theme-icon]');
   if (!icon) {
@@ -76,8 +98,10 @@ function CarIcon() {
 }
 
 export function PublicHeader({ backHref, backLabel = "Назад", className = "" }: Props) {
+  const pathname = usePathname();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [theme, setTheme] = useState<Theme>("dark");
+  const catalogActive = pathname === "/cars" || pathname.startsWith("/cars/");
 
   useEffect(() => {
     const update = () => setFavoritesCount(readCount());
@@ -117,51 +141,130 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
   const themeIconClass = theme === "dark" ? "text-amber-300" : "text-slate-600";
 
   return (
-    <header className={`ac-public-header sticky top-0 z-50 bg-[#070a12]/90 backdrop-blur-xl ${className}`}>
-      <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
-        <div className="flex min-w-0 items-center gap-2.5">
-          {backHref ? (
-            <Link href={backHref} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
-              <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              <span className="hidden sm:inline">{backLabel}</span>
-            </Link>
-          ) : null}
-
-          <Link href="/" className="flex min-w-0 items-center gap-2.5">
-            <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
-            <div className="min-w-0">
-              <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-white">Цена</span></div>
-              <div className="text-[11px] font-bold leading-none text-white/42">подбор · расчёт</div>
-            </div>
-          </Link>
-        </div>
-
-        <div className="flex items-center gap-1.5 md:gap-2">
-          <button type="button" onClick={toggleTheme} className={`ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] transition hover:bg-white/[0.085] ${themeIconClass}`} aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"} title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}>
-            <ThemeIcon theme={theme} />
-          </button>
-
-          <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
-            <StarIcon />
-            {favoritesCount > 0 ? (
-              <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
-                {Math.min(favoritesCount, 99)}
-              </span>
+    <>
+      <header className={`ac-public-header sticky top-0 z-50 bg-[#070a12]/90 backdrop-blur-xl ${className}`}>
+        <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
+          <div className="flex min-w-0 items-center gap-2.5">
+            {backHref ? (
+              <Link href={backHref} className="flex h-10 items-center gap-2 rounded-xl bg-white/[0.055] px-3 text-sm font-black text-white/72 transition hover:bg-white/[0.09] hover:text-white">
+                <svg width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15 9H3M7 5L3 9L7 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <span className="hidden sm:inline">{backLabel}</span>
+              </Link>
             ) : null}
-          </Link>
 
-          <nav className="hidden items-center text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
-            <Link href="/cars" className="flex h-11 items-center gap-2 rounded-xl px-4 transition hover:bg-white/[0.06] hover:text-white">
-              <CarIcon />
-              <span>Каталог</span>
+            <Link href="/" className="flex min-w-0 items-center gap-2.5">
+              <BrandMark className="h-9 w-9 shrink-0 md:h-10 md:w-10" />
+              <div className="min-w-0">
+                <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-white">Цена</span></div>
+                <div className="text-[11px] font-bold leading-none text-white/42">подбор · расчёт</div>
+              </div>
             </Link>
-          </nav>
+          </div>
 
-          <Link href="/cars" className="ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] text-white/84 transition hover:bg-white/[0.085] md:hidden" aria-label="Открыть каталог" title="Каталог">
-            <CarIcon />
-          </Link>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <button type="button" onClick={toggleTheme} className={`ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.045] transition hover:bg-white/[0.085] ${themeIconClass}`} aria-label={theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему"} title={theme === "dark" ? "Светлая тема" : "Тёмная тема"}>
+              <ThemeIcon theme={theme} />
+            </button>
+
+            <Link href="/favorites" className={`ac-favorite-nav relative flex h-11 w-12 items-center justify-center rounded-xl transition ${favoriteButtonClass}`} aria-label="Избранные автомобили">
+              <StarIcon />
+              {favoritesCount > 0 ? (
+                <span className={`absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-black ${favoriteBadgeClass}`} style={{ color: "#fff", WebkitTextFillColor: "#fff" }}>
+                  {Math.min(favoritesCount, 99)}
+                </span>
+              ) : null}
+            </Link>
+
+            <nav className="hidden items-center text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
+              <Link href="/cars" className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
+                <CarIcon />
+                <span>Каталог</span>
+              </Link>
+            </nav>
+
+            <Link href="/cars" className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
+              <CarIcon />
+            </Link>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <style jsx global>{`
+        .ac-catalog-nav { background: rgba(255,255,255,.045); color: rgba(255,255,255,.84); }
+        .ac-catalog-nav:hover { background: rgba(255,255,255,.085); color: #fff; }
+        .ac-catalog-nav.is-active { background: #ff353d !important; color: #fff !important; }
+
+        .ac-filter-control,
+        .ac-filter-range,
+        .ac-filter-more-button {
+          border: 1px solid rgba(255,255,255,.085);
+          background: rgba(255,255,255,.065);
+          color: #fff;
+          transition: background .18s ease, border-color .18s ease, transform .18s ease;
+        }
+        .ac-filter-control:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); }
+        .ac-filter-control:focus-visible { outline: none; border-color: rgba(255,70,80,.58); box-shadow: 0 0 0 4px rgba(255,53,61,.11); }
+        .ac-filter-range > input + input { border-left: 1px solid rgba(255,255,255,.08); }
+        .ac-filter-dropdown { background: #171922; color: #fff; border: 1px solid rgba(255,70,80,.3); }
+        .ac-filter-search { background: rgba(255,255,255,.07); color: #fff; border: 1px solid rgba(255,255,255,.08); }
+        .ac-filter-search::placeholder { color: rgba(255,255,255,.35); }
+        .ac-filter-option { color: rgba(255,255,255,.8); }
+        .ac-filter-option:hover { background: rgba(255,255,255,.07); color: #fff; }
+        .ac-filter-option.is-active { background: #ff353d; color: #fff; }
+        .ac-catalog-filter-panel { background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.035)) !important; }
+        .ac-advanced-toggle { color: rgba(255,255,255,.55); background: rgba(255,255,255,.035); }
+        .ac-advanced-toggle:hover { color: #fff; background: rgba(255,255,255,.065); }
+        .ac-advanced-fields { background: rgba(0,0,0,.16); }
+        .ac-catalog-filter-drawer { background: #14151b; color: #fff; }
+        .ac-filter-close { background: rgba(255,255,255,.06); color: rgba(255,255,255,.62); }
+
+        #form .soft-input,
+        #form .ac-search-select {
+          border: 1px solid rgba(255,255,255,.085) !important;
+          background-color: rgba(255,255,255,.07) !important;
+        }
+        #form .ac-body-picker-panel {
+          grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+          gap: 6px !important;
+        }
+        #form .ac-body-picker-panel svg { display: none !important; }
+        #form .ac-body-picker-panel button {
+          min-height: 46px !important;
+          flex-direction: row !important;
+          justify-content: flex-start !important;
+          padding: 0 14px !important;
+          font-size: 13px !important;
+          text-align: left !important;
+        }
+        #form .ac-body-picker-panel button span { margin-top: 0 !important; }
+        section[data-demo-enabled] > div:first-child > div:last-child > div:first-child .ac-search-menu > div:first-child { display: none !important; }
+
+        html[data-theme="light"] .ac-catalog-nav { background: #e7eaf0; color: #4d5667; }
+        html[data-theme="light"] .ac-catalog-nav:hover { background: #dde2e9; color: #1e232d; }
+        html[data-theme="light"] .ac-catalog-nav.is-active { background: #ff353d !important; color: #fff !important; }
+        html[data-theme="light"] .ac-filter-control,
+        html[data-theme="light"] .ac-filter-range,
+        html[data-theme="light"] .ac-filter-more-button {
+          border-color: rgba(35,42,55,.12);
+          background: #e7eaf0;
+          color: #20252f;
+        }
+        html[data-theme="light"] .ac-filter-control:hover { background: #dde2e9; border-color: rgba(35,42,55,.2); }
+        html[data-theme="light"] .ac-filter-range > input + input { border-left-color: rgba(35,42,55,.12); }
+        html[data-theme="light"] .ac-filter-range input { color: #20252f !important; }
+        html[data-theme="light"] .ac-filter-range input::placeholder { color: #737c8c !important; }
+        html[data-theme="light"] .ac-catalog-filter-panel { background: rgba(255,255,255,.72) !important; }
+        html[data-theme="light"] .ac-advanced-toggle { color: #596274; background: #e8ebf1; }
+        html[data-theme="light"] .ac-advanced-toggle:hover { color: #20252f; background: #dfe4eb; }
+        html[data-theme="light"] .ac-advanced-fields { background: #eef1f5; }
+        html[data-theme="light"] .ac-catalog-filter-drawer { background: #f6f7fa; color: #20252f; }
+        html[data-theme="light"] .ac-filter-close { background: #e4e8ef; color: #596274; }
+
+        @media (max-width: 767px) {
+          #form .ac-body-picker-panel { grid-template-columns: 1fr !important; }
+          #form .ac-body-picker-panel button { min-height: 44px !important; }
+        }
+      `}</style>
+    </>
   );
 }
