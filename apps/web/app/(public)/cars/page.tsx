@@ -8,13 +8,7 @@ import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
 function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
 
-const marketOrder = [
-  { id: "korea", label: "Корея" },
-  { id: "china", label: "Китай" },
-  { id: "japan", label: "Япония" },
-  { id: "uae", label: "ОАЭ" },
-  { id: "europe", label: "Европа" },
-];
+const marketOrder = [{ id: "korea", label: "Корея" }, { id: "china", label: "Китай" }, { id: "japan", label: "Япония" }, { id: "uae", label: "ОАЭ" }, { id: "europe", label: "Европа" }];
 const OVERVIEW_CARDS = 4;
 const MARKET_PAGE_SIZE = 48;
 
@@ -42,7 +36,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     Promise.all(markets.map(async (market) => {
       const result = await searchOffers({ ...common, market: market.id, page: selectedMarket ? requestedPage : 1, pageSize: selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS });
       const items = result.items.filter((offer: any) => isCrediblePublicOffer(offer));
-      return { ...market, items, total: selectedMarket ? Math.min(result.total, items.length || result.total) : items.length, page: result.page, pageSize: result.pageSize };
+      return { ...market, items, total: selectedMarket ? result.total : items.length, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
@@ -52,7 +46,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const visibleFrom = selectedResult?.total ? (currentPage - 1) * selectedResult.pageSize + 1 : 0;
   const visibleTo = selectedResult ? Math.min(currentPage * selectedResult.pageSize, selectedResult.total) : 0;
   const pages = paginationItems(currentPage, totalPages);
-  const initialKeys = ["advanced", "budget", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "fuel", "transmission", "drive"];
+  const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "fuel", "transmission", "drive"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
 
   return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white">
@@ -60,9 +54,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <div className="max-w-4xl"><h1 className="text-4xl font-black leading-[.98] tracking-[-0.04em] md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}.{selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}</p></div>
       <CatalogFilters initial={initial} facets={facets} />
-      <div className="mt-9 grid gap-12">{groupedMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link> : null}</div>
-        {market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-hide-scrollbar -mr-4 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 pr-4 sm:gap-3 md:mr-0 md:grid md:grid-cols-4 md:overflow-visible md:pr-0">{market.items.map((offer: any) => <div key={offer.id} className="w-[47%] shrink-0 snap-start md:w-auto md:shrink md:snap-none"><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Свежие автомобили пока загружаются. Блок появится автоматически после успешного импорта этого рынка.</div>}
-      </section>)}</div>
+      <div className="mt-9 grid gap-12">{groupedMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="text-3xl font-black tracking-[-0.04em] md:text-4xl">{market.label}</h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="rounded-xl bg-white/[0.045] px-3 py-2 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-hide-scrollbar -mr-4 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 pr-4 sm:gap-3 md:mr-0 md:grid md:grid-cols-4 md:overflow-visible md:pr-0">{market.items.map((offer: any) => <div key={offer.id} className="w-[47%] shrink-0 snap-start md:w-auto md:shrink md:snap-none"><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Свежие автомобили пока загружаются. Блок появится автоматически после успешного импорта этого рынка.</div>}</section>)}</div>
       {selectedMarket && totalPages > 1 ? <nav className="mt-10 flex flex-wrap items-center justify-center gap-2" aria-label="Страницы каталога">{currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="rounded-xl bg-white/[0.055] px-4 py-3 text-sm font-black">← Назад</Link> : null}{pages.map((page, index) => <span key={page} className="contents">{index > 0 && page - pages[index - 1] > 1 ? <span className="px-1 text-white/35">…</span> : null}<Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`rounded-xl px-4 py-3 text-sm font-black ${page === currentPage ? "bg-red-500 text-white" : "bg-white/[0.055]"}`}>{page}</Link></span>)}{currentPage < totalPages ? <Link href={pageHref(params, currentPage + 1)} className="rounded-xl bg-white/[0.055] px-4 py-3 text-sm font-black">Вперёд →</Link> : null}</nav> : null}
     </section>
   </main>;
