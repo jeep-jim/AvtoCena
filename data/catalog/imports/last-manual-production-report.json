@@ -1,4 +1,5 @@
 {
   "reportMissing": true,
-  "workflowConclusionCode": 1
+  "workflowConclusionCode": 1,
+  "logTail": "\n> avtocena@0.1.0 catalog:import:sample\n> tsx scripts/catalog-import-production.mjs\n\n[catalog] production source pool: 61 enabled adapters\n[catalog] exchange rates refreshed: 14; errors=0\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/importer.ts:120\n    if (current.lockedUntil && Date.parse(current.lockedUntil) > Date.now()) throw new Error(\"catalog_import_locked\");\n                                                                                   ^\n\n\nError: catalog_import_locked\n    at <anonymous> (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/importer.ts:120:84)\n    at <anonymous> (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/data.ts:166:346)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async withCollectionLock (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/data.ts:151:319)\n    at async importCatalog (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/importer.ts:119:3)\n    at async <anonymous> (/home/runner/work/AvtoCena/AvtoCena/scripts/catalog-import-sample.mjs:229:16)\n\nNode.js v20.20.2\n"
 }
