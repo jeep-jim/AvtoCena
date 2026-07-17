@@ -9,6 +9,16 @@ function n(v: string | null) {
   return Number.isFinite(x) && x > 0 ? x : undefined;
 }
 
+function optionalPositive(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : undefined;
+}
+
+function optionalFinite(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : undefined;
+}
+
 function publicRates(raw: any) {
   return RATE_CODES.flatMap((currency) => {
     const structured = Array.isArray(raw?.rates)
@@ -24,7 +34,10 @@ function publicRates(raw: any) {
     return [{
       currency,
       effectiveRate,
+      previousEffectiveRate: optionalPositive(structured?.previousEffectiveRate),
+      rateDelta: optionalFinite(structured?.rateDelta),
       rateDate: String(structured?.rateDate || structured?.date || raw?.updatedAt || "").slice(0, 10),
+      previousRateDate: String(structured?.previousRateDate || "").slice(0, 10) || undefined,
     }];
   });
 }
