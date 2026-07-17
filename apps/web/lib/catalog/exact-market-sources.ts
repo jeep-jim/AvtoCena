@@ -1,6 +1,12 @@
-import { cacheImageFromUrl, stableOfferId } from "./storage";
-import { normalizeVehicleOfferSpecs } from "./spec-normalization";
-import type { CatalogFetchResult, CatalogImage, CatalogMarket, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
+import type { CatalogSourceAdapter } from "./types";
+import { goonetJapanExactSource } from "./goonet-exact-source";
+import { dubicarsUaeExactSource } from "./dubicars-exact-source";
+import { otomotoEuropeExactSource } from "./otomoto-exact-source";
 
-export const exactMarketSources: CatalogSourceAdapter[] = [];
+export const exactMarketSources: CatalogSourceAdapter[] = [
+  goonetJapanExactSource,
+  dubicarsUaeExactSource,
+  otomotoEuropeExactSource,
+];
+
 export const EXACT_MARKET_SOURCE_IDS = exactMarketSources.map((source) => source.sourceId);
