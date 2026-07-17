@@ -147,6 +147,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const [liveRate, setLiveRate] = useState<LiveRate | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const trendRoot = useRef<HTMLSpanElement>(null);
+  const touchToggle = useRef(false);
 
   useEffect(() => {
     if (!currency || currency === "RUB") return;
@@ -191,7 +192,20 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         className="ac-price-trend-arrow relative flex shrink-0 cursor-pointer items-center rounded-lg pb-0.5 outline-none transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-current/50"
         onMouseEnter={() => setPopoverOpen(true)}
         onMouseLeave={() => setPopoverOpen(false)}
-        onClick={(event) => { event.preventDefault(); event.stopPropagation(); setPopoverOpen((current) => !current); }}
+        onPointerDown={(event) => {
+          if (event.pointerType === "mouse") return;
+          event.preventDefault();
+          event.stopPropagation();
+          touchToggle.current = true;
+          setPopoverOpen((current) => !current);
+          window.setTimeout(() => { touchToggle.current = false; }, 450);
+        }}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (touchToggle.current) return;
+          setPopoverOpen((current) => !current);
+        }}
         onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); event.stopPropagation(); setPopoverOpen((current) => !current); } }}
       >
         <TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />
