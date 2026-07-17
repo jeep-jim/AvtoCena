@@ -23,7 +23,7 @@ function num(value: any) { const number = Number(String(value ?? "").replace(/[^
 function bool(value?: string, fallback = false) { return value == null ? fallback : ["1", "true", "yes", "on"].includes(String(value).toLowerCase()); }
 function nowIso() { return new Date().toISOString(); }
 function blockError(message: string, status?: number) { const error = new Error(message) as Error & { blocked?: boolean; status?: number }; error.blocked = true; error.status = status; return error; }
-function sourceTimeoutMs() { return Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000); }
+function sourceTimeoutMs() { return Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15000); }
 function sourceTimeoutError(error: any) { if (error?.name === "AbortError") { const next = new Error("source_timeout") as Error & { temporary?: boolean }; next.temporary = true; return next; } return error; }
 
 async function withSourceTimeout<T>(fn: (signal: AbortSignal) => Promise<T>) {
