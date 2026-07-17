@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { mutateDataJson, readDataJson, writeDataJson } from "../data";
 import { calculateOffer, catalogSources } from "./adapters";
+import { credibleCatalogImages, isCrediblePublicOffer } from "./offer-quality";
 import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
 import { getSourcePolicy, policyAllowsRun, updatePolicyAfterRun } from "./policy";
@@ -142,6 +143,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     updated: 0,
     expired: 0,
     skipped: 0,
+    rejectedByQuality: 0,
     imageFailures: 0,
     underfilledImages: 0,
     reusedImageSets: 0,
@@ -246,9 +248,10 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             seen.add(base.id);
-            let images: any[] = []; await refreshLock();
+            let images: CatalogImage[] = [];
+            await refreshLock();
 
-            const previousImages = (previous?.images || []).slice(0, maxImagesPerOffer);
+            const previousImages = credibleCatalogImages((previous?.images || []).slice(0, maxImagesPerOffer));
             images = previousImages;
             let attemptedImages = false;
 
@@ -258,7 +261,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
               try {
                 const freshImages = await source.fetchImages(base);
-                images = mergeImages(previousImages, freshImages, maxImagesPerOffer);
+                images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));
               } finally {
                 if (previousImageLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
                 else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousImageLimit;
@@ -270,41 +273,31 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               report.reusedImageSets++;
             }
 
-            if (attemptedImages && images.length === previousImages.length && images.length < maxImagesPerOffer) {
-              report.imageFailures++;
-            }
-
+            if (attemptedImages && images.length === previousImages.length && images.length < maxImagesPerOffer) report.imageFailures++;
             if (!images.length) {
               report.skipped++;
               if (previous) {
-                existing.set(base.id, {
-                  ...previous,
-                  operational: {
-                    ...previous.operational,
-                    lastSeenScanCycleId: scan.scanCycleId,
-                    lastSeenAt: startedAt,
-                  },
-                } as VehicleOffer);
+                existing.set(base.id, { ...previous, status: "stale", operational: { ...previous.operational, lastSeenScanCycleId: scan.scanCycleId, lastSeenAt: startedAt } } as VehicleOffer);
               }
               continue;
             }
-
             if (images.length < maxImagesPerOffer) report.underfilledImages++;
 
-            const calculated = await calculateOffer({
-              ...base,
-              images,
-              firstSeenAt: previous?.firstSeenAt || base.firstSeenAt,
-            });
+            const calculated = await calculateOffer({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });
             const offer = applyPriceTrend(calculated, previous, startedAt);
+            if (!isCrediblePublicOffer(offer)) {
+              report.rejectedByQuality++;
+              report.skipped++;
+              existing.set(offer.id, { ...offer, status: "stale" });
+              continue;
+            }
+
             previous ? report.updated++ : report.imported++;
             existing.set(offer.id, offer);
             savedThisSource++;
             if (normalizedMarket) refreshedByMarket[normalizedMarket]++;
 
-            if (savedThisSource % 10 === 0) {
-              console.log(`[catalog] ${source.sourceId}: saved ${savedThisSource}, market total today ${normalizedMarket ? refreshedByMarket[normalizedMarket] : "n/a"}`);
-            }
+            if (savedThisSource % 10 === 0) console.log(`[catalog] ${source.sourceId}: saved ${savedThisSource}, market total today ${normalizedMarket ? refreshedByMarket[normalizedMarket] : "n/a"}`);
           }
 
           cursor = fetched.nextCursor;
@@ -329,20 +322,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
         scan.status = staleEligible ? "completed" : "running";
         if (staleEligible) scan.lastCompletedAt = new Date().toISOString();
         await writeDataJson(`catalog/scans/${source.sourceId}.json`, scan);
-        report.sources.push({
-          sourceId: source.sourceId,
-          market: source.market,
-          scanCycleId: scan.scanCycleId,
-          ok: true,
-          seen: seen.size,
-          saved: savedThisSource,
-          cursor,
-          sourceExhausted,
-          stoppedByLimit,
-          stoppedByBudget,
-          partialScan,
-          staleEligible,
-        });
+        report.sources.push({ sourceId: source.sourceId, market: source.market, scanCycleId: scan.scanCycleId, ok: true, seen: seen.size, saved: savedThisSource, cursor, sourceExhausted, stoppedByLimit, stoppedByBudget, partialScan, staleEligible });
         await updatePolicyAfterRun(source, { ...lastHealth, ok: true }, staleEligible ? null : cursor);
       } catch (error: any) {
         lastHealth = { ok: false, message: error?.message || "import_failed", checkedAt: new Date().toISOString(), blocked: Boolean(error?.blocked), httpStatus: error?.status };
@@ -376,14 +356,22 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
       if (Number.isFinite(lastSeenAt) && now - lastSeenAt > retentionMs) {
         offer.status = "stale";
         report.expired++;
+        continue;
+      }
+      offer.images = credibleCatalogImages(offer.images || []);
+      if (!isCrediblePublicOffer(offer)) {
+        offer.status = "stale";
+        report.rejectedByQuality++;
+        report.expired++;
       }
     }
 
-    await refreshLock(); await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
+    await refreshLock();
+    await persistCatalogOffers([...existing.values()] as VehicleOffer[]);
 
-    const publicOffers = [...existing.values()].filter((offer: any) => offer.status === "active" && Array.isArray(offer.images) && offer.images.length > 0);
+    const publicOffers = [...existing.values()].filter((offer) => isCrediblePublicOffer(offer));
     report.publicOffers = publicOffers.length;
-    report.publicByMarket = publicOffers.reduce((totals: Record<string, number>, offer: any) => {
+    report.publicByMarket = publicOffers.reduce((totals: Record<string, number>, offer) => {
       totals[offer.market] = (totals[offer.market] || 0) + 1;
       return totals;
     }, {});
