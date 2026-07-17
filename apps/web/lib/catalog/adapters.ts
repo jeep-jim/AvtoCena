@@ -101,7 +101,7 @@ export function buildEncarImageUrl(rawPhoto: any, imageNumber = 1) {
   if (/\.(?:jpe?g|png|webp)(?:[?#].*)?$/i.test(path)) return `https://ci.encar.com${path}`;
   if (!path.startsWith("/carpicture/")) path = `/carpicture${path}`;
   path = path.replace(/\/{2,}/g, "/");
-  return `https://ci.encar.com${path.endsWith("/") ? path : `${path}/`}${padded}.jpg`;
+  return `https://ci.encar.com${path}${padded}.jpg`;
 }
 
 export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
