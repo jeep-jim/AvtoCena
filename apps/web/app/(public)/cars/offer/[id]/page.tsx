@@ -49,7 +49,7 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   if (!lines.length) return null;
 
   return (
-    <section className="ac-offer-breakdown min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
+    <section className="ac-offer-breakdown min-w-0 self-start rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
       <h2 className="ac-offer-block-title text-lg font-black tracking-[-0.025em] text-[var(--ac-text)] md:text-xl">Структура АвтоЦены</h2>
       <div className="ac-offer-breakdown-lines mt-2 border-t border-dotted border-[var(--ac-border)] pt-2">
         {lines.map((line, index) => (
@@ -102,6 +102,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     marketLabel: o.marketLabel,
     href: `/cars/offer/${o.id}`,
   };
+  const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
+  const makeHref = `${marketHref}&make=${encodeURIComponent(raw.make || "")}`;
 
   return (
     <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
@@ -110,7 +112,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <div className="grid min-w-0 gap-7 xl:grid-cols-[minmax(0,1.3fr)_minmax(520px,.82fr)] xl:items-start">
           <div className="min-w-0 overflow-hidden">
             <header className="mb-5 min-w-0 md:mb-7">
-              <div className="text-xs font-black uppercase tracking-[0.17em] text-white/42">{o.marketLabel}</div>
+              <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs">
+                <Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link>
+                <span aria-hidden="true">/</span>
+                <Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>
+                {o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}
+              </nav>
               <div className="relative mt-2 min-w-0">
                 <FavoriteToggle
                   offerId={o.id}
