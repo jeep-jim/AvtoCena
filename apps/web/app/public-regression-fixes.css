@@ -1,51 +1,96 @@
 /* Small, isolated corrections for public pages. Do not restyle established components. */
 
-/* The subtitle was removed from the compact public wordmark. */
-.ac-public-header a[href="/"] > div:last-child > div:last-child {
-  display: none !important;
+/* Homepage keeps the complete one-line wordmark and its subtitle. */
+.ac-home-page .ac-public-header a[href="/"] > div:last-child > div:first-child {
+  display: block !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
 }
-.ac-public-header a[href="/"] > div:last-child > div:first-child {
-  white-space: nowrap;
+.ac-home-page .ac-public-header a[href="/"] > div:last-child > div:last-child {
+  display: block !important;
 }
 
-/* Only narrow headers stack the name so navigation icons never overlap it. */
-@media (max-width: 420px) {
-  .ac-public-header > div {
+/* Inner public pages use a compact wordmark: no subtitle, two lines only on narrow screens. */
+.ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:last-child {
+  display: none !important;
+}
+.ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+  white-space: nowrap;
+}
+@media (max-width: 639px) {
+  .ac-page-copy:not(.ac-home-page) .ac-public-header > div {
     gap: .4rem !important;
     padding-left: .65rem !important;
     padding-right: .65rem !important;
   }
-  .ac-public-header a[href="/"] {
+  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] {
     gap: .4rem !important;
   }
-  .ac-public-header a[href="/"] > div:last-child > div:first-child {
-    display: grid;
+  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child {
+    display: grid !important;
     line-height: .78 !important;
-    white-space: normal;
+    white-space: normal !important;
     font-size: 15px !important;
   }
-  .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
+  .ac-page-copy:not(.ac-home-page) .ac-public-header a[href="/"] > div:last-child > div:first-child > span {
     display: block;
   }
 }
 
-/* Price explanations must float above adjacent cards, never beneath them. */
+/* Price explanations always sit above photos, favorites and adjacent cards. */
 .ac-catalog-card:has(.ac-price-trend-popover) {
-  z-index: 520 !important;
+  z-index: 11990 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+.ac-catalog-card:has(.ac-price-trend-popover) > a {
+  overflow: visible !important;
 }
 .ac-price-trend-popover {
-  z-index: 600 !important;
+  z-index: 12000 !important;
+}
+@media (max-width: 767px) {
+  .ac-price-trend-popover {
+    position: fixed !important;
+    inset: 50% 12px auto 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: translateY(-50%) !important;
+    z-index: 12000 !important;
+  }
+  .ac-price-trend-popover > span:last-child {
+    display: none !important;
+  }
 }
 
-/* Brand tiles share one rail surface; individual gray containers are intentionally absent. */
+/* Brand tiles share one rail surface; no gray tile and no generic-car box. */
 .ac-brand-rail a[href^="/cars/brand/"] {
   background: transparent !important;
   box-shadow: none !important;
   border: 0 !important;
 }
+.ac-brand-rail img {
+  max-width: 76px;
+  max-height: 40px;
+}
 
-/* Buyer rail remains swipeable and has stable momentum scrolling on phones. */
-.ac-home-page section .snap-x {
+/* Buyer gallery uses native momentum while the requestAnimationFrame loop moves it continuously. */
+.ac-buyers-rail {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+}
+.ac-buyers-rail::-webkit-scrollbar { display: none; }
+
+/* Slightly tighter small-copy rhythm on phones. */
+@media (max-width: 639px) {
+  .ac-page-copy p.text-sm,
+  .ac-page-copy li.text-sm {
+    line-height: 1.48 !important;
+  }
+  .ac-executor-block p + p {
+    margin-top: .45rem !important;
+  }
 }
