@@ -109,24 +109,36 @@ function rateDate(value: string | undefined) {
   return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleDateString("ru-RU");
 }
 
-function TrendPopover({ offer, trend, currency }: { offer: PriceLike; trend: PriceTrendValue; currency: string }) {
+function TrendPopover({ offer, trend, currency, panel }: { offer: PriceLike; trend: PriceTrendValue; currency: string; panel: boolean }) {
   const rate = offer.calculationSnapshot?.currencyRate;
   const currentRate = Number(rate?.effectiveRate || 0);
   const previousRate = Number(rate?.previousEffectiveRate || 0);
   const rateDelta = finiteNumber(rate?.rateDelta) || (currentRate && previousRate ? currentRate - previousRate : 0);
   const percent = previousRate ? rateDelta / previousRate * 100 : 0;
   const currencyDriven = Boolean(currentRate && previousRate && Math.abs(rateDelta) > 1e-9);
-  return <div className="ac-price-trend-popover absolute bottom-[calc(100%+10px)] right-0 z-[400] w-[min(290px,78vw)] rounded-2xl border border-white/10 bg-[#11141c] p-3.5 text-left text-white shadow-[0_20px_65px_rgba(0,0,0,.55)]" role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}>
-    <div className="text-[10px] font-black uppercase tracking-[0.15em] text-white/48">Почему изменилась цена</div>
+  const placementClass = panel
+    ? "bottom-[calc(100%+10px)] xl:bottom-auto xl:top-[calc(100%+12px)]"
+    : "bottom-[calc(100%+10px)]";
+  const tailClass = panel
+    ? "absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r border-white/10 bg-[#11141c] xl:-top-1.5 xl:bottom-auto xl:border-b-0 xl:border-r-0 xl:border-l xl:border-t"
+    : "absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r border-white/10 bg-[#11141c]";
+
+  return <div
+    className={`ac-price-trend-popover absolute right-0 z-[400] w-[min(290px,78vw)] rounded-2xl border border-white/10 bg-[#11141c] p-3.5 text-left shadow-[0_20px_65px_rgba(0,0,0,.55)] xl:w-[310px] ${placementClass}`}
+    style={{ color: "#ffffff" }}
+    role="tooltip"
+    onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
+  >
+    <div className="text-[10px] font-black uppercase tracking-[0.15em]" style={{ color: "rgba(255,255,255,.56)" }}>Почему изменилась цена</div>
     <div className="mt-1.5 text-sm font-black leading-5">{currencyDriven ? "Пересчитали по актуальному курсу валюты" : "Сравнили с предыдущим расчётом"}</div>
     {currencyDriven ? <div className="mt-3 grid gap-2 text-xs font-bold">
-      <div className="flex items-center justify-between gap-3"><span className="text-white/55">Курс {currency}</span><span className="whitespace-nowrap">{formatRate(previousRate, currency)} ₽ → {formatRate(currentRate, currency)} ₽</span></div>
-      <div className="flex items-center justify-between gap-3"><span className="text-white/55">Изменение курса</span><span className={rateDelta < 0 ? "text-[#31b765]" : "text-[#ff5c63]"}>{rateDelta < 0 ? "−" : "+"}{formatRate(Math.abs(rateDelta), currency)} ₽ ({percent < 0 ? "−" : "+"}{Math.abs(percent).toFixed(2)}%)</span></div>
-      {(rate?.previousRateDate || rate?.rateDate) ? <div className="flex items-center justify-between gap-3"><span className="text-white/55">Период</span><span className="whitespace-nowrap">{rateDate(rate.previousRateDate)} → {rateDate(rate.rateDate)}</span></div> : null}
+      <div className="flex items-center justify-between gap-3"><span style={{ color: "rgba(255,255,255,.66)" }}>Курс {currency}</span><span className="whitespace-nowrap">{formatRate(previousRate, currency)} ₽ → {formatRate(currentRate, currency)} ₽</span></div>
+      <div className="flex items-center justify-between gap-3"><span style={{ color: "rgba(255,255,255,.66)" }}>Изменение курса</span><span className={rateDelta < 0 ? "text-[#31b765]" : "text-[#ff5c63]"}>{rateDelta < 0 ? "−" : "+"}{formatRate(Math.abs(rateDelta), currency)} ₽ ({percent < 0 ? "−" : "+"}{Math.abs(percent).toFixed(2)}%)</span></div>
+      {(rate?.previousRateDate || rate?.rateDate) ? <div className="flex items-center justify-between gap-3"><span style={{ color: "rgba(255,255,255,.66)" }}>Период</span><span className="whitespace-nowrap">{rateDate(rate.previousRateDate)} → {rateDate(rate.rateDate)}</span></div> : null}
     </div> : null}
-    <div className="mt-3 border-t border-white/10 pt-2.5 text-xs font-bold"><span className="text-white/55">Влияние на ориентир: </span><span className={trend.direction === "down" ? "text-[#31b765]" : "text-[#ff5c63]"}>{trend.direction === "down" ? "−" : "+"}{money(Math.abs(trend.deltaRub))} ₽</span></div>
-    <div className="mt-2 text-[10px] leading-4 text-white/38">Итоговая цена подтверждается менеджером на момент оплаты.</div>
-    <span className="absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r border-white/10 bg-[#11141c]" />
+    <div className="mt-3 border-t border-white/10 pt-2.5 text-xs font-bold"><span style={{ color: "rgba(255,255,255,.66)" }}>Влияние на ориентир: </span><span className={trend.direction === "down" ? "text-[#31b765]" : "text-[#ff5c63]"}>{trend.direction === "down" ? "−" : "+"}{money(Math.abs(trend.deltaRub))} ₽</span></div>
+    <div className="mt-2 text-[10px] leading-4" style={{ color: "rgba(255,255,255,.48)" }}>Итоговая цена подтверждается менеджером на момент оплаты.</div>
+    <span className={tailClass} />
   </div>;
 }
 
@@ -183,7 +195,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); event.stopPropagation(); setPopoverOpen((current) => !current); } }}
       >
         <TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />
-        {popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} /> : null}
+        {popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} /> : null}
       </span> : null}
     </div>
   </div>;
