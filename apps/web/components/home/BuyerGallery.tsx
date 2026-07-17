@@ -10,20 +10,31 @@ export function BuyerGallery({ images }: { images: string[] }) {
   useEffect(() => {
     let frame = 0;
     let previous = performance.now();
+    let carriedDistance = 0;
+
     const animate = (now: number) => {
       const node = rail.current;
-      const delta = Math.min(40, now - previous);
+      const delta = Math.min(50, Math.max(0, now - previous));
       previous = now;
-      if (node) {
-        node.scrollLeft += delta * 0.026;
-        const loopWidth = node.scrollWidth / 2;
-        if (loopWidth > 0 && node.scrollLeft >= loopWidth) node.scrollLeft -= loopWidth;
+
+      if (node && node.scrollWidth > node.clientWidth && images.length > 0) {
+        carriedDistance += delta * 0.04;
+        const step = Math.floor(carriedDistance);
+        if (step > 0) {
+          carriedDistance -= step;
+          node.scrollLeft += step;
+          const duplicateStart = node.children.item(images.length) as HTMLElement | null;
+          const loopWidth = duplicateStart?.offsetLeft || node.scrollWidth / 2;
+          if (loopWidth > 0 && node.scrollLeft >= loopWidth) node.scrollLeft -= loopWidth;
+        }
       }
+
       frame = requestAnimationFrame(animate);
     };
+
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [images.length]);
 
   useEffect(() => {
     if (active === null) return;
