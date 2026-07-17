@@ -55,16 +55,24 @@ const maxPages = Math.max(4, Number(process.env.CATALOG_IMPORT_MAX_PAGES || 30))
 const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10));
 const targetPerMarket = Math.max(1, Number(process.env.CATALOG_TARGET_PER_MARKET || 250));
 const targetPublicOffers = Math.max(targetPerMarket * 5, Number(process.env.CATALOG_TARGET_PUBLIC_OFFERS || 1250));
+const smokeOptions = {
+  sourceIds: ["encar_direct"],
+  maxOffers: 20,
+  maxDetails: 20,
+  maxImagesPerOffer: 3,
+  maxPages: 1,
+};
+const smokeMode = ["1", "true", "yes"].includes(String(process.env.CATALOG_IMPORT_SMOKE || "").toLowerCase());
 
-for (const source of catalogImportSources.filter((candidate) => sources.includes(candidate.sourceId))) {
+for (const source of catalogImportSources.filter((candidate) => (smokeMode ? smokeOptions.sourceIds : sources).includes(candidate.sourceId))) {
   await mutateSourcePolicy(source, (policy) => ({
     ...policy,
     enabled: true,
     blockedUntil: undefined,
     consecutiveFailures: 0,
-    maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), maxPages),
-    maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), maxOffers),
-    maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), maxDetails),
+    maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), smokeMode ? smokeOptions.maxPages : maxPages),
+    maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), smokeMode ? smokeOptions.maxOffers : maxOffers),
+    maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), smokeMode ? smokeOptions.maxDetails : maxDetails),
     imagesEnabled: true,
   }));
 }
@@ -76,11 +84,7 @@ console.log(`[catalog] exact adapters: ${EXACT_MARKET_SOURCE_IDS.join(", ")}`);
 console.log(`[catalog] exchange rates refreshed: ${exchangeRates.rates?.length || 0}; errors=${exchangeRates.errors?.length || 0}`);
 
 const report = await importCatalog({
-  sourceIds: sources,
-  maxOffers,
-  maxDetails,
-  maxImagesPerOffer,
-  maxPages,
+  ...(smokeMode ? smokeOptions : { sourceIds: sources, maxOffers, maxDetails, maxImagesPerOffer, maxPages }),
   requireObjectStorage: true,
   failOnZeroSaved: true,
   reportPath: "catalog/imports/latest-public-markets.json",
