@@ -50,12 +50,23 @@
   filter: none !important;
 }
 
-.ac-price { color: #ef3340 !important; }
+/* Price state is explicit: red up, green down, neutral when unchanged. */
+.ac-price--up,
+.is-up .ac-price-trend-delta,
+.is-up .ac-price-trend-arrow { color: #ef3340 !important; }
+.ac-price--down,
+.is-down .ac-price-trend-delta,
+.is-down .ac-price-trend-arrow { color: #31b765 !important; }
+.ac-price--flat { color: var(--ac-text) !important; }
+.is-flat .ac-price-trend-arrow { color: var(--ac-muted) !important; }
+.ac-price-trend-panel.is-up { background: #30181f !important; }
+.ac-price-trend-panel.is-down { background: #102d21 !important; }
+.ac-price-trend-panel.is-flat { background: var(--ac-surface-2) !important; }
 
-/* The asset is expected at apps/web/public/key-logo.png. */
+/* The key asset belongs only to the homepage hero. */
 @media (min-width: 1100px) {
-  .ac-page-copy > div > section:first-of-type { position: relative; }
-  .ac-page-copy > div > section:first-of-type::after {
+  .ac-home-page .ac-home-hero { position: relative; }
+  .ac-home-page .ac-home-hero::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -110,6 +121,15 @@ section[data-demo-enabled] .ac-catalog-card .p-4 > div:first-child {
 .ac-offer-panel > div:first-child > img { cursor: zoom-in; }
 .ac-image-lightbox img { cursor: zoom-out; }
 
+/* Keep the lead form one column; no phantom second field on wide screens. */
+.ac-offer-lead-form {
+  grid-template-columns: minmax(0,1fr) !important;
+}
+.ac-offer-lead-form > * {
+  grid-column: 1 / -1 !important;
+  min-width: 0;
+}
+
 html[data-theme="light"] {
   --ac-surface: #f8f9fb;
   --ac-surface-2: #edf0f5;
@@ -149,22 +169,38 @@ html[data-theme="light"] .ac-offer-panel [class*="bg-white/"] {
   border-color: var(--ac-border) !important;
   color: var(--ac-text) !important;
 }
+html[data-theme="light"] #form .soft-input,
+html[data-theme="light"] #form .ac-search-select {
+  background: var(--ac-surface-2) !important;
+  border-color: var(--ac-border) !important;
+  color: var(--ac-text) !important;
+}
 html[data-theme="light"] input::placeholder { color: #737d8e !important; opacity: 1; }
 
 html[data-theme="light"] .ac-search-menu {
-  background: #20242d !important;
-  border-color: rgba(201,31,45,.32) !important;
-  color: #fff !important;
-  box-shadow: 0 18px 48px rgba(20,24,32,.28) !important;
+  background: #f8f9fb !important;
+  border-color: rgba(30,36,48,.14) !important;
+  color: #171b24 !important;
+  box-shadow: 0 18px 48px rgba(38,43,57,.18) !important;
 }
-html[data-theme="light"] .ac-search-menu * { color: #fff; }
+html[data-theme="light"] .ac-search-menu * { color: inherit; }
+html[data-theme="light"] .ac-search-menu .ac-search-box,
 html[data-theme="light"] .ac-search-menu input {
-  background: #2a2f3a !important;
-  border-color: rgba(255,255,255,.13) !important;
+  background: #e7ebf1 !important;
+  border-color: rgba(30,36,48,.12) !important;
+  color: #171b24 !important;
 }
+html[data-theme="light"] .ac-search-menu input::placeholder { color: #747e8e !important; }
+html[data-theme="light"] .ac-search-menu button:not([class*="bg-red-500"]) { color: #303744 !important; }
+html[data-theme="light"] .ac-search-menu button:not([class*="bg-red-500"]):hover { background: #e8ecf2 !important; }
+html[data-theme="light"] .ac-search-menu button[class*="bg-red-500"] { color: #fff !important; }
 
-html[data-theme="light"] .ac-catalog-card .ac-price,
-html[data-theme="light"] .ac-offer-panel .ac-price { color: #c91f2d !important; }
+html[data-theme="light"] .ac-price--up { color: #c91f2d !important; }
+html[data-theme="light"] .ac-price--down { color: #168a59 !important; }
+html[data-theme="light"] .ac-price--flat { color: #171b24 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-up { background: #f4e3e6 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-down { background: #e1f1e8 !important; }
+html[data-theme="light"] .ac-price-trend-panel.is-flat { background: #edf0f5 !important; }
 html[data-theme="light"] .ac-catalog-card [class*="text-red-"]:not(.ac-price):not(.ac-favorite-button),
 html[data-theme="light"] .ac-offer-panel [class*="text-red-"]:not(.ac-price):not(.ac-favorite-button) { color: #626c7b !important; }
 html[data-theme="light"] .ac-favorite-button { color: #d92534 !important; }

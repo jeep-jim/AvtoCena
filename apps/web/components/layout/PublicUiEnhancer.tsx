@@ -14,20 +14,6 @@ type LiveCatalogOffer = {
   priceDeltaRub?: number | null;
 };
 
-const BODY_BY_LABEL: Record<string, string> = {
-  "Кроссовер": "suv",
-  "Внедорожник": "offroad",
-  "Седан": "sedan",
-  "Универсал": "wagon",
-  "Хэтчбек": "hatchback",
-  "Лифтбек": "liftback",
-  "Купе": "coupe",
-  "Кабриолет": "convertible",
-  "Минивэн": "minivan",
-  "Пикап": "pickup",
-  "Фургон": "van",
-};
-
 const BUDGETS: Record<string, { min?: number; max?: number }> = {
   "to-1500000": { max: 1_500_000 },
   "to-2000000": { max: 2_000_000 },
@@ -47,27 +33,33 @@ function normalizeTitle(value: string | null | undefined) {
   return cleanText(value).toLocaleLowerCase("ru-RU").replace(/[^a-zа-яё0-9]+/gi, " ").trim();
 }
 
-function optionValue(root: HTMLElement | undefined, emptyLabel: string) {
+function filterRoot(form: HTMLElement, key: string) {
+  return form.querySelector<HTMLElement>(`[data-ac-filter-key="${key}"]`) || undefined;
+}
+
+function optionValue(root: HTMLElement | undefined) {
   if (!root) return "";
   const custom = cleanText(root.dataset.acCustomValue);
   if (custom) return custom;
-  const visible = cleanText(root.querySelector<HTMLButtonElement>("button.ac-search-select")?.textContent);
-  return visible && visible !== emptyLabel ? visible : "";
+  return cleanText(root.dataset.acValue);
 }
 
 function readHomeFilterParams() {
   const form = document.querySelector<HTMLElement>("#form");
   if (!form) return null;
-  const selects = [...form.querySelectorAll<HTMLSelectElement>("select")];
-  const searchButtons = [...form.querySelectorAll<HTMLButtonElement>("button.ac-search-select")];
-  const searchRoots = searchButtons.map((button) => button.parentElement as HTMLElement | null).filter(Boolean) as HTMLElement[];
-  const bodyButton = [...form.querySelectorAll<HTMLButtonElement>("button.soft-input")].find((button) => !button.classList.contains("ac-search-select"));
-  const budget = BUDGETS[selects[0]?.value || ""] || {};
-  const brand = optionValue(searchRoots[0], "Любая марка");
-  const model = optionValue(searchRoots[1], "Любая модель");
-  const year = selects[1]?.value || "";
-  const market = selects[2]?.value || "";
-  const body = BODY_BY_LABEL[cleanText(bodyButton?.textContent)] || "";
+  const budgetRoot = filterRoot(form, "budget");
+  const makeRoot = filterRoot(form, "make");
+  const modelRoot = filterRoot(form, "model");
+  const yearRoot = filterRoot(form, "year");
+  const marketRoot = filterRoot(form, "market");
+  const bodyRoot = filterRoot(form, "body");
+  const searchRoots = [makeRoot, modelRoot].filter(Boolean) as HTMLElement[];
+  const budget = BUDGETS[optionValue(budgetRoot)] || {};
+  const brand = optionValue(makeRoot);
+  const model = optionValue(modelRoot);
+  const year = optionValue(yearRoot);
+  const market = optionValue(marketRoot);
+  const body = optionValue(bodyRoot);
   const params = new URLSearchParams({ pageSize: "1", sort: "updatedAt" });
   if (budget.min) params.set("budgetFrom", String(budget.min));
   if (budget.max) params.set("budgetTo", String(budget.max));
@@ -142,7 +134,7 @@ export function PublicUiEnhancer() {
         const data = await response.json();
         const count = Number(data?.total ?? data?.items?.length ?? 0);
         const badge = [...state.form.querySelectorAll<HTMLElement>("div,span")].find((node) => /Нашли\s+\d+\s+вариант/i.test(cleanText(node.textContent)) && ![...node.children].some((child) => /Нашли\s+\d+/i.test(cleanText(child.textContent))));
-        if (badge) badge.textContent = `🚗 Нашли ${new Intl.NumberFormat("ru-RU").format(count)} вариантов`;
+        if (badge) badge.textContent = `Нашли ${new Intl.NumberFormat("ru-RU").format(count)} вариантов`;
       } catch (error) {
         if ((error as Error)?.name !== "AbortError") console.warn("home_filter_count_failed");
       }
