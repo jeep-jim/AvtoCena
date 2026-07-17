@@ -44,23 +44,12 @@
   overflow: visible !important;
 }
 .ac-catalog-card:has(.ac-price-trend-popover) > a {
+  position: relative !important;
+  z-index: 12010 !important;
   overflow: visible !important;
 }
 .ac-price-trend-popover {
-  z-index: 12000 !important;
-}
-@media (max-width: 767px) {
-  .ac-price-trend-popover {
-    position: fixed !important;
-    inset: 50% 12px auto 12px !important;
-    width: auto !important;
-    max-width: none !important;
-    transform: translateY(-50%) !important;
-    z-index: 12000 !important;
-  }
-  .ac-price-trend-popover > span:last-child {
-    display: none !important;
-  }
+  z-index: 12020 !important;
 }
 
 /* Brand tiles share one rail surface; no gray tile and no generic-car box. */
@@ -81,6 +70,7 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-inline: contain;
   scrollbar-width: none;
+  will-change: scroll-position;
 }
 .ac-buyers-rail::-webkit-scrollbar { display: none; }
 
