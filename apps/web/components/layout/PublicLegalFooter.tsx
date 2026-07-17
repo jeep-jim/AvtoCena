@@ -103,9 +103,11 @@ export function PublicLegalFooter() {
           <FooterLinkGroup
             title="Разделы"
             links={[
+              { href: "/", label: "Главная" },
               { href: "/cars", label: "Каталог автомобилей" },
               { href: "/favorites", label: "Избранные автомобили" },
               { href: "/partner/landing", label: "Партнёрская программа" },
+              { href: "/login", label: "Вход для сотрудников" },
               { href: "/#form", label: "Подбор автомобиля" },
             ]}
           />
@@ -122,6 +124,7 @@ export function PublicLegalFooter() {
             </button>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
             <Link href="/partner/landing" className="ac-public-legal-link">Партнёрам</Link>
+            <Link href="/login" className="ac-public-legal-link">Вход</Link>
           </nav>
         </div>
       </footer>
