@@ -5,7 +5,7 @@ export type CatalogAccessMode = "public_json" | "public_html" | "partner_feed";
 export type OfferType = "auction" | "fixed";
 export type OfferStatus = "active" | "sold" | "removed" | "stale";
 export type PriceMode = "fixed" | "auction_start" | "estimated";
-export type CalculationStatus = "ready" | "needs_data" | "auction_start";
+export type CalculationStatus = "ready" | "needs_data" | "auction_start" | (string & {});
 
 export type CatalogImage = {
   id: string;
