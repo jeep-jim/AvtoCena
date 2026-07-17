@@ -10,28 +10,89 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?che168\.com$/i,
   /^(.+\.)?autohome\.com\.cn$/i,
   /^(.+\.)?autoimg\.cn$/i,
+  /^(.+\.)?dongchedi\.com$/i,
+  /^(.+\.)?byteimg\.com$/i,
+  /^(.+\.)?guazi\.com$/i,
+  /^(.+\.)?xin\.com$/i,
+  /^(.+\.)?taoche\.com$/i,
+  /^(.+\.)?58che\.com$/i,
+  /^(.+\.)?58cdn\.com\.cn$/i,
+  /^(.+\.)?ganji\.com$/i,
+  /^(.+\.)?yiche\.com$/i,
+  /^(.+\.)?bitauto\.com$/i,
+  /^(.+\.)?xcar\.com\.cn$/i,
+  /^(.+\.)?cn2che\.com$/i,
+  /^(.+\.)?273\.cn$/i,
+  /^(.+\.)?autocango\.com$/i,
   /^(.+\.)?beforward\.jp$/i,
   /^(.+\.)?bf\.jp$/i,
   /^(.+\.)?goo-net\.com$/i,
   /^(.+\.)?goo-net-exchange\.com$/i,
+  /^(.+\.)?jpauc\.com$/i,
+  /^(.+\.)?sbtjapan\.com$/i,
+  /^(.+\.)?tc-v\.com$/i,
+  /^(.+\.)?carfromjapan\.com$/i,
+  /^(.+\.)?japan-partner\.com$/i,
+  /^(.+\.)?carused\.jp$/i,
+  /^(.+\.)?cardealpage\.com$/i,
+  /^(.+\.)?picknbuy24\.com$/i,
+  /^(.+\.)?autocomjapan\.com$/i,
+  /^(.+\.)?everycar\.jp$/i,
+  /^(.+\.)?autorec\.co\.jp$/i,
+  /^(.+\.)?nikkyo\.com$/i,
+  /^(.+\.)?providecars\.com$/i,
+  /^(.+\.)?dvmjapan\.com$/i,
+  /^(.+\.)?jvsglobal\.net$/i,
+  /^(.+\.)?buymycar\.co\.jp$/i,
+  /^(.+\.)?japanesecartrade\.com$/i,
+  /^(.+\.)?royal-trading\.jp$/i,
   /^(.+\.)?japantransit\.ru$/i,
   /^(.+\.)?dubicars\.com$/i,
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
-  /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es)$/i,
+  /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
+  /^(.+\.)?mobile\.de$/i,
+  /^(.+\.)?otomoto\.pl$/i,
+  /^(.+\.)?olxcdn\.com$/i,
+  /^(.+\.)?lacentrale\.fr$/i,
+  /^(.+\.)?leboncoin\.fr$/i,
+  /^(.+\.)?subito\.it$/i,
+  /^(.+\.)?coches\.net$/i,
+  /^(.+\.)?standvirtual\.com$/i,
+  /^(.+\.)?marktplaats\.nl$/i,
+  /^(.+\.)?gaspedaal\.nl$/i,
+  /^(.+\.)?bilbasen\.dk$/i,
+  /^(.+\.)?finn\.no$/i,
+  /^(.+\.)?blocket\.se$/i,
+  /^(.+\.)?bytbil\.com$/i,
+  /^(.+\.)?willhaben\.at$/i,
+  /^(.+\.)?car\.gr$/i,
+  /^(.+\.)?autotrader\.co\.uk$/i,
+  /^(.+\.)?motors\.co\.uk$/i,
+  /^(.+\.)?hasznaltauto\.hu$/i,
+  /^(.+\.)?tipcars\.com$/i,
+  /^(.+\.)?bazos\.(?:cz|sk)$/i,
   /^(.+\.)?cloudfront\.net$/i,
+  /^(.+\.)?amazonaws\.com$/i,
   /^(.+\.)?imgix\.net$/i,
   /^(.+\.)?cloudinary\.com$/i,
   /^(.+\.)?scene7\.com$/i,
+  /^(.+\.)?akamaihd\.net$/i,
+  /^(.+\.)?akamaized\.net$/i,
+  /^(.+\.)?alicdn\.com$/i,
+  /^(.+\.)?qiniucdn\.com$/i,
+  /^(.+\.)?imagekit\.io$/i,
   /^img\.avtocena\.com$/i,
 ];
 export const CATALOG_CHUNK_SIZE = 500;
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
+export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string }> };
 
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
 function cleanShard(value?: string | number) { return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown"; }
+function cleanFacet(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function budgetBucket(v?: number | null) { if (!v) return "unknown"; return String(Math.ceil(v / 500_000) * 500_000); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
@@ -42,6 +103,7 @@ async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true)
 export async function readMarketOffers(market: string) { const manifest = await readManifest(); const chunks: string[] = manifest.markets?.[market]?.chunks || []; const lists = await Promise.all(chunks.map((c) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, market, c), []))); return lists.flat(); }
 export async function readAllOffersForMaintenance() { const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} }); const chunks: string[] = Object.values<any>(manifest.sources || {}).flatMap((source) => source.chunks || []); const lists = await Promise.all(chunks.map((path) => readDataJson<VehicleOffer[]>(path, []))); return lists.flat(); }
 export const readAllOffers = readAllOffersForMaintenance;
+export async function readCatalogFacets(): Promise<CatalogFacets> { const manifest = await readManifest(); return readIndex<CatalogFacets>(manifest.generationId, "facets.json", { generationId: manifest.generationId, makes: [], models: [] }); }
 
 async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[]) {
   const now = new Date().toISOString();
@@ -110,13 +172,19 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
 }
 export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
   const maps: Record<string, Map<string, string[]>> = { market: new Map(), make: new Map(), model: new Map(), year: new Map(), budget: new Map(), fuel: new Map(), body: new Map(), drive: new Map(), hasPrice: new Map() };
+  const makes = new Map<string, string>();
+  const models = new Map<string, { make: string; model: string }>();
   for (const o of offers) {
-    const pairs = { market: o.market, make: o.make, model: `${o.make}:${o.model}`, year: o.year, budget: budgetBucket(o.totalRub), fuel: o.fuel, body: o.bodyType, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no" };
+    const make = cleanFacet(o.make);
+    const model = cleanFacet(o.model);
+    if (make) makes.set(cleanShard(make), make);
+    if (make && model) models.set(`${cleanShard(make)}:${cleanShard(model)}`, { make, model });
+    const pairs = { market: o.market, make, model: `${make}:${model}`, year: o.year, budget: budgetBucket(o.totalRub), fuel: o.fuel, body: o.bodyType, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no" };
     for (const [name, key] of Object.entries(pairs)) { const m = maps[name]; const k = cleanShard(key); m.set(k, [...(m.get(k) || []), o.id]); }
   }
   await writeJsonAtomic(generationPath(generationId, "indexes/offers-by-id.json"), { generationId, byId });
   await writeJsonAtomic(generationPath(generationId, "indexes/images-by-id.json"), { generationId, imagesById });
-  await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), { generationId, makes: [...maps.make.keys()].sort(), models: [...maps.model.keys()].sort() });
+  await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), { generationId, makes: [...makes.values()].sort((a,b) => a.localeCompare(b, "ru")), models: [...models.values()].sort((a,b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru")) });
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => b.updatedAt.localeCompare(a.updatedAt)).map((o) => o.id) });
   const tasks = Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => () => writeIndexShard(generationId, name, key, ids)));
   const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
@@ -133,13 +201,13 @@ export async function getOffer(id: string) { const manifest = await readManifest
 export async function searchOffers(params: CatalogSearchParams) {
   const manifest = await readManifest(); const page = Math.max(1, Number(params.page || 1)); const pageSize = Math.min(48, Math.max(1, Number(params.pageSize || 24))); const { ids, used } = await candidateIds(manifest, params); const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} });
   const order = await readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: Object.keys(byId.byId) }); let idList = ids ? order.ids.filter((id) => ids.has(id)) : order.ids;
-  const hasRangeFilters = Boolean(params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageTo || params.engineFrom || params.engineTo || params.powerFrom || params.transmission || params.auctionGrade || (params.sort && params.sort !== "updatedAt"));
+  const hasRangeFilters = Boolean(params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo || params.powerFrom || params.transmission || params.auctionGrade || (params.sort && params.sort !== "updatedAt"));
   let total = idList.length; let pageIds = idList.slice((page - 1) * pageSize, page * pageSize);
   if (hasRangeFilters) pageIds = idList;
   const pageSet = new Set(pageIds); const chunkKeys = new Map<string, OfferLocation>(); for (const id of pageIds) { const loc = byId.byId[id]; if (loc) chunkKeys.set(`${loc.market}/${loc.chunk}`, loc); }
   const loaded = (await Promise.all([...chunkKeys.values()].map((loc) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), [])))).flat();
   let items = loaded.filter((o) => pageSet.has(o.id) && isPublicOffer(o));
-  if (hasRangeFilters) { items = items.filter((o) => (!params.budgetFrom || (o.totalRub || 0) >= params.budgetFrom) && (!params.budgetTo || (o.totalRub || Infinity) <= params.budgetTo) && (!params.yearFrom || o.year >= params.yearFrom) && (!params.yearTo || o.year <= params.yearTo) && (!params.mileageTo || (o.mileageKm || 0) <= params.mileageTo) && (!params.engineFrom || (o.engineCc || 0) >= params.engineFrom) && (!params.engineTo || (o.engineCc || Infinity) <= params.engineTo) && (!params.powerFrom || (o.powerHp || 0) >= params.powerFrom) && (!params.transmission || o.transmission === params.transmission) && (!params.auctionGrade || o.auctionGrade === params.auctionGrade)); const sort = params.sort || "updatedAt"; items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity) : sort === "year" ? b.year - a.year : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0) : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt))); total = items.length; items = items.slice((page-1)*pageSize, page*pageSize); } else { const rank = new Map(pageIds.map((id, index) => [id, index])); items.sort((a,b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)); }
+  if (hasRangeFilters) { items = items.filter((o) => (!params.budgetFrom || (o.totalRub || 0) >= params.budgetFrom) && (!params.budgetTo || (o.totalRub || Infinity) <= params.budgetTo) && (!params.yearFrom || o.year >= params.yearFrom) && (!params.yearTo || o.year <= params.yearTo) && (!params.mileageFrom || (o.mileageKm || 0) >= params.mileageFrom) && (!params.mileageTo || (o.mileageKm || 0) <= params.mileageTo) && (!params.engineFrom || (o.engineCc || 0) >= params.engineFrom) && (!params.engineTo || (o.engineCc || Infinity) <= params.engineTo) && (!params.powerFrom || (o.powerHp || 0) >= params.powerFrom) && (!params.transmission || o.transmission === params.transmission) && (!params.auctionGrade || o.auctionGrade === params.auctionGrade)); const sort = params.sort || "updatedAt"; items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity) : sort === "year" ? b.year - a.year : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0) : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt))); total = items.length; items = items.slice((page-1)*pageSize, page*pageSize); } else { const rank = new Map(pageIds.map((id, index) => [id, index])); items.sort((a,b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)); }
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }

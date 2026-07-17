@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { readDataJson } from "@/lib/data";
-import { searchOffers } from "@/lib/catalog/storage";
+import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
-const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "EUR"];
+const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "USD", "EUR", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
 
 function n(v: string | null) {
   const x = Number(v);
@@ -53,7 +53,11 @@ export async function GET(request: Request) {
     budgetTo: n(p.get("budgetTo") || p.get("budget")),
     yearFrom: n(p.get("yearFrom")),
     yearTo: n(p.get("yearTo")),
+    mileageFrom: n(p.get("mileageFrom")),
     mileageTo: n(p.get("mileageTo")),
+    engineFrom: n(p.get("engineFrom")),
+    engineTo: n(p.get("engineTo")),
+    powerFrom: n(p.get("powerFrom")),
     fuel: p.get("fuel") || undefined,
     transmission: p.get("transmission") || undefined,
     drive: p.get("drive") || undefined,
@@ -64,10 +68,13 @@ export async function GET(request: Request) {
     pageSize: n(p.get("pageSize")),
   });
 
+  const extras: Record<string, unknown> = {};
   if (p.get("includeRates") === "1") {
     const rawRates = await readDataJson<any>("fees/exchange-rates.json", {});
-    return NextResponse.json({ ok: true, ...result, rates: publicRates(rawRates), ratesUpdatedAt: rawRates?.updatedAt || null });
+    extras.rates = publicRates(rawRates);
+    extras.ratesUpdatedAt = rawRates?.updatedAt || null;
   }
+  if (p.get("includeFacets") === "1") extras.facets = await readCatalogFacets();
 
-  return NextResponse.json({ ok: true, ...result });
+  return NextResponse.json({ ok: true, ...result, ...extras });
 }

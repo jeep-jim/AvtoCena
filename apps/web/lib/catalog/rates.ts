@@ -22,6 +22,14 @@ const FALLBACK_ENV: Record<string, string> = {
   EUR: "CATALOG_FALLBACK_RATE_EUR_RUB",
   CNY: "CATALOG_FALLBACK_RATE_CNY_RUB",
   AED: "CATALOG_FALLBACK_RATE_AED_RUB",
+  GBP: "CATALOG_FALLBACK_RATE_GBP_RUB",
+  PLN: "CATALOG_FALLBACK_RATE_PLN_RUB",
+  CHF: "CATALOG_FALLBACK_RATE_CHF_RUB",
+  SEK: "CATALOG_FALLBACK_RATE_SEK_RUB",
+  NOK: "CATALOG_FALLBACK_RATE_NOK_RUB",
+  DKK: "CATALOG_FALLBACK_RATE_DKK_RUB",
+  HUF: "CATALOG_FALLBACK_RATE_HUF_RUB",
+  CZK: "CATALOG_FALLBACK_RATE_CZK_RUB",
 };
 
 function validDate(value: unknown) {
@@ -39,17 +47,7 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
   if (!sourcePrice || !currency) return null;
   const code = currency.toUpperCase();
   if (code === "RUB") {
-    return {
-      currency: code,
-      cbrRate: 1,
-      nominal: 1,
-      effectiveRate: 1,
-      rateDate: new Date().toISOString().slice(0, 10),
-      fetchedAt: new Date().toISOString(),
-      rateSource: "cbr",
-      sourcePrice,
-      sourcePriceRub: Math.round(sourcePrice),
-    };
+    return { currency: code, cbrRate: 1, nominal: 1, effectiveRate: 1, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "cbr", sourcePrice, sourcePriceRub: Math.round(sourcePrice) };
   }
 
   const rates = await readDataJson<any>("fees/exchange-rates.json", {});
@@ -84,32 +82,12 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
 
   const legacy = Number(rates[`${code}_RUB`]);
   if (legacy > 0) {
-    return {
-      currency: code,
-      cbrRate: legacy,
-      nominal: 1,
-      effectiveRate: legacy,
-      rateDate: validDate(rates.updatedAt),
-      fetchedAt: rates.updatedAt,
-      rateSource: "legacy_json",
-      sourcePrice,
-      sourcePriceRub: Math.round(sourcePrice * legacy),
-    };
+    return { currency: code, cbrRate: legacy, nominal: 1, effectiveRate: legacy, rateDate: validDate(rates.updatedAt), fetchedAt: rates.updatedAt, rateSource: "legacy_json", sourcePrice, sourcePriceRub: Math.round(sourcePrice * legacy) };
   }
 
   const envRate = Number(process.env[FALLBACK_ENV[code] || ""] || 0);
   if (envRate > 0) {
-    return {
-      currency: code,
-      cbrRate: envRate,
-      nominal: 1,
-      effectiveRate: envRate,
-      rateDate: new Date().toISOString().slice(0, 10),
-      fetchedAt: new Date().toISOString(),
-      rateSource: "fallback_env",
-      sourcePrice,
-      sourcePriceRub: Math.round(sourcePrice * envRate),
-    };
+    return { currency: code, cbrRate: envRate, nominal: 1, effectiveRate: envRate, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "fallback_env", sourcePrice, sourcePriceRub: Math.round(sourcePrice * envRate) };
   }
   return null;
 }

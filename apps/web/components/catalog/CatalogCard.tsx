@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
+import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
-  const o = presentCatalogOffer(offer);
+  const o = presentCatalogOffer(normalizeVehicleOfferSpecs(offer));
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const snapshot = {
@@ -16,6 +17,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
     priceDeltaRub: o.priceDeltaRub,
     priceChangedAt: o.priceChangedAt,
     sourcePrice: o.sourcePrice,
+    sourceCurrency: o.sourceCurrency,
     calculationSnapshot: o.calculationSnapshot,
     imageUrl,
     year: o.year,
@@ -37,7 +39,6 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
             <span className={`shrink-0 rounded-full bg-black/48 font-black text-white/88 backdrop-blur ${dense ? "px-1.5 py-0.5 text-[8px] sm:px-2.5 sm:py-1 sm:text-[11px]" : "px-2.5 py-1 text-[11px]"}`}>{o.year}</span>
           </div>
         </div>
-
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
           <PriceTrend offer={o} dense={dense} priceClassName={dense ? "text-[16px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
           <div className={`flex flex-wrap font-bold text-white/58 ${dense ? "mt-2 gap-1 text-[9px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>

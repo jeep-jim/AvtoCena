@@ -5,7 +5,7 @@ export type CatalogAccessMode = "public_json" | "public_html" | "partner_feed";
 export type OfferType = "auction" | "fixed";
 export type OfferStatus = "active" | "sold" | "removed" | "stale";
 export type PriceMode = "fixed" | "auction_start" | "estimated";
-export type CalculationStatus = "ready" | "needs_data" | "auction_start";
+export type CalculationStatus = "ready" | "needs_data" | "auction_start" | (string & {});
 
 export type CatalogImage = {
   id: string;
@@ -97,4 +97,4 @@ export interface CatalogSourceAdapter {
   mapStatus(raw: unknown): OfferStatus;
   healthCheck(): Promise<SourceRunHealth>;
 }
-export type CatalogSearchParams = { market?: string; make?: string; model?: string; hasPrice?: string; budgetFrom?: number; budgetTo?: number; yearFrom?: number; yearTo?: number; mileageTo?: number; engineFrom?: number; engineTo?: number; powerFrom?: number; fuel?: string; transmission?: string; drive?: string; bodyType?: string; auctionGrade?: string; auctionDateFrom?: string; auctionDateTo?: string; sort?: string; page?: number; pageSize?: number };
+export type CatalogSearchParams = { market?: string; make?: string; model?: string; hasPrice?: string; budgetFrom?: number; budgetTo?: number; yearFrom?: number; yearTo?: number; mileageFrom?: number; mileageTo?: number; engineFrom?: number; engineTo?: number; powerFrom?: number; fuel?: string; transmission?: string; drive?: string; bodyType?: string; auctionGrade?: string; auctionDateFrom?: string; auctionDateTo?: string; sort?: string; page?: number; pageSize?: number };
