@@ -1,4 +1,4 @@
-name: Catalog recovery once v3
+name: Catalog recovery once v4
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_china_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact,che168_global,goonet_japan_exact,dubicars_uae,autoscout_europe,autouncle_europe
+          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_china_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact,che168_global,goonet_japan_exact,dubicars_uae,autoscout_europe,autouncle_europe
       - name: Import verified five-market catalog
         run: npm run catalog:import:sample
         env:
@@ -75,7 +75,7 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMPORT_RESET: "false"
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_china_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact,che168_global,goonet_japan_exact,dubicars_uae,autoscout_europe,autouncle_europe
+          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_china_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact,che168_global,goonet_japan_exact,dubicars_uae,autoscout_europe,autouncle_europe
           CATALOG_TARGET_PUBLIC_OFFERS: "1250"
           CATALOG_TARGET_PER_MARKET: "250"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
@@ -98,7 +98,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-recovery-once-v3-report
+          name: catalog-recovery-once-v4-report
           path: catalog-import-public-markets-report.json
           if-no-files-found: warn
           retention-days: 7
@@ -107,11 +107,11 @@ jobs:
         run: |
           if [ ! -f catalog-import-public-markets-report.json ]; then exit 0; fi
           mkdir -p data/catalog/imports
-          cp catalog-import-public-markets-report.json data/catalog/imports/last-recovery-v3-report.json
+          cp catalog-import-public-markets-report.json data/catalog/imports/last-recovery-v4-report.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/catalog/imports/last-recovery-v3-report.json
-          git commit -m "Record catalog recovery v3 report [skip ci]" || exit 0
+          git add data/catalog/imports/last-recovery-v4-report.json
+          git commit -m "Record catalog recovery v4 report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
