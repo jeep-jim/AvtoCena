@@ -83,12 +83,19 @@ jobs:
           import json, os
           from pathlib import Path
           source = Path('catalog-import-public-markets-report.json')
+          log = Path('catalog-import-production.log')
           target = Path('data/catalog/imports/last-manual-production-report.json')
           try:
               data = json.loads(source.read_text(encoding='utf-8'))
           except Exception:
               data = {'reportMissing': True}
           data['workflowConclusionCode'] = int(os.environ.get('CONCLUSION_CODE') or 1)
+          if data.get('reportMissing'):
+              try:
+                  text = log.read_text(encoding='utf-8', errors='replace')
+                  data['logTail'] = text[-24000:]
+              except Exception as error:
+                  data['logReadError'] = str(error)
           target.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
           git config user.name github-actions[bot]
