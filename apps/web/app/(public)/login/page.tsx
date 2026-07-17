@@ -38,6 +38,7 @@ export default async function LoginPage({
           <LoginForm nextPath={nextPath} />
         </section>
       </div>
+      <style>{`.ac-login-page.ac-page-copy{padding-top:1.25rem!important}.ac-login-page::after{display:none!important}`}</style>
     </main>
   );
 }
