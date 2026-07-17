@@ -15,10 +15,10 @@ type PriceLike = {
   } | null;
 };
 
-export type PriceTrendDirection = "up" | "down";
+export type PriceTrendDirection = "up" | "down" | "flat";
 
 export type PriceTrendValue = {
-  direction: PriceTrendDirection;
+  direction: Exclude<PriceTrendDirection, "flat">;
   deltaRub: number;
   formattedDelta: string;
 };
@@ -35,34 +35,53 @@ function savedPriceDelta(offer: PriceLike) {
 }
 
 function currencyDelta(offer: PriceLike) {
+  const current = Number(offer.totalRub || 0);
   const sourcePrice = Number(offer.sourcePrice || 0);
   const rate = offer.calculationSnapshot?.currencyRate;
   const effectiveRate = Number(rate?.effectiveRate || 0);
   const previousEffectiveRate = Number(rate?.previousEffectiveRate || 0);
   const explicitRateDelta = Number(rate?.rateDelta || 0);
   const rateDelta = explicitRateDelta || (effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : 0);
-  if (!sourcePrice || !Number.isFinite(rateDelta)) return 0;
-  return Math.round(sourcePrice * rateDelta);
+  if (!Number.isFinite(rateDelta) || rateDelta === 0) return 0;
+
+  // Public cards do not always contain the source price after a clean import.
+  // In that case the current RUB total and current rate still give an honest
+  // estimate of the part of the movement caused by the exchange rate.
+  const estimatedSourcePrice = sourcePrice || (current && effectiveRate ? current / effectiveRate : 0);
+  return estimatedSourcePrice ? Math.round(estimatedSourcePrice * rateDelta) : 0;
+}
+
+function formatDelta(value: number) {
+  const absolute = Math.abs(value);
+  if (absolute >= 1_000_000) {
+    return `${new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(absolute / 1_000_000)}M`;
+  }
+  if (absolute >= 1_000) return `${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(absolute / 1_000)}K`;
+  return `${money(absolute)} ₽`;
 }
 
 export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
   const current = Number(offer.totalRub || 0);
   const delta = savedPriceDelta(offer) || currencyDelta(offer);
-  if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1_000) return null;
-
-  const absolute = Math.abs(delta);
-  const formattedDelta = absolute >= 1_000_000
-    ? `${new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(absolute / 1_000_000)}M`
-    : `${Math.round(absolute / 1_000)}K`;
+  if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1) return null;
 
   return {
     direction: delta < 0 ? "down" : "up",
     deltaRub: delta,
-    formattedDelta,
+    formattedDelta: formatDelta(delta),
   };
 }
 
 function TrendArrow({ direction, className = "" }: { direction: PriceTrendDirection; className?: string }) {
+  if (direction === "flat") {
+    return (
+      <svg className={className} width="34" height="25" viewBox="0 0 34 25" fill="none" aria-hidden="true">
+        <path d="M2.5 16.5L10 11L16 14L23 8.5L31 11" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M25 11H31V5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
   const down = direction === "down";
   return (
     <svg className={className} width="34" height="25" viewBox="0 0 34 25" fill="none" aria-hidden="true">
@@ -100,18 +119,21 @@ export function PriceTrend({
   dense?: boolean;
 }) {
   const trend = resolvePriceTrend(offer);
-  const directionClass = trend?.direction === "down" ? "text-[#168a59]" : "text-[#ff5c63]";
-  const priceClass = trend?.direction === "down" ? "text-[#168a59]" : "text-red-500";
-  const panelClass = trend?.direction === "down"
+  const direction: PriceTrendDirection = trend?.direction || "flat";
+  const directionClass = direction === "down" ? "text-[#168a59]" : direction === "up" ? "text-[#ff5c63]" : "text-white/28";
+  const priceClass = direction === "down" ? "text-[#168a59]" : "text-red-500";
+  const panelClass = direction === "down"
     ? "bg-[#168a59]/[0.09]"
-    : trend?.direction === "up"
+    : direction === "up"
       ? "bg-red-500/[0.085]"
-      : "bg-red-500/[0.075]";
+      : "bg-white/[0.035]";
   const hasPrice = Boolean(offer.totalRub);
   const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(offer) && Boolean(currencyDelta(offer));
-  const trendTitle = trendUsesCurrency
-    ? "Изменение расчёта из-за обновления валютного курса"
-    : "Изменение относительно предыдущего сохранённого расчёта";
+  const trendTitle = trend
+    ? trendUsesCurrency
+      ? "Изменение расчёта из-за обновления валютного курса"
+      : "Изменение относительно предыдущего сохранённого расчёта"
+    : "Первый снимок цены сохранён. Направление станет цветным после следующего изменения";
 
   return (
     <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
@@ -138,9 +160,9 @@ export function PriceTrend({
             "Цена уточняется"
           )}
         </div>
-        {trend ? (
+        {hasPrice ? (
           <div className={`flex shrink-0 items-center pb-0.5 ${directionClass}`} title={trendTitle} aria-hidden="true">
-            <TrendArrow direction={trend.direction} className={dense ? "h-4 w-5 sm:h-5 sm:w-7 md:h-6 md:w-8" : "h-5 w-7 md:h-6 md:w-8"} />
+            <TrendArrow direction={direction} className={dense ? "h-4 w-5 sm:h-5 sm:w-7 md:h-6 md:w-8" : "h-5 w-7 md:h-6 md:w-8"} />
           </div>
         ) : null}
       </div>
