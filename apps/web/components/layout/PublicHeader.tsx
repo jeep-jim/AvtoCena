@@ -224,7 +224,6 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           border: 1px solid rgba(255,255,255,.085) !important;
           background-color: rgba(255,255,255,.07) !important;
         }
-        section[data-demo-enabled] > div:first-child > div:last-child > div:first-child .ac-search-menu > div:first-child { display: none !important; }
 
         html[data-theme="light"] .ac-catalog-nav { background: #e7eaf0; color: #4d5667; }
         html[data-theme="light"] .ac-catalog-nav:hover { background: #dde2e9; color: #1e232d; }
