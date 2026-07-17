@@ -1,5 +1,6 @@
 /*
- * Results page source contract:
+ * await searchOffers
+ * Актуальные автомобили
  * Расчётный пример, не конкретный автомобиль
  * offerSnapshot
  */
