@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 export const metadata: Metadata = {
   title: "Вход — АвтоЦена",
@@ -20,17 +21,17 @@ export default async function LoginPage({
   const nextPath = firstParam(params.next) || "/crm";
 
   return (
-    <main className="min-h-screen px-4 py-5 md:px-8 md:py-6">
+    <main className="ac-login-page ac-page-copy min-h-screen px-4 py-5 text-white md:px-8 md:py-6">
       <div className="mx-auto max-w-7xl">
         <header className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-full bg-white text-[20px] font-black text-black">AC</div>
+            <BrandMark className="h-11 w-11 shrink-0" />
             <div>
-              <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span>Цена</div>
-              <div className="text-[12px] font-bold leading-none text-white/45">avtocena.com</div>
+              <div className="text-[18px] font-black leading-none md:text-[22px]"><span className="text-red-500">Авто</span><span className="text-white">Цена</span></div>
+              <div className="text-[12px] font-bold leading-none text-white/45">подбор · расчёт</div>
             </div>
           </Link>
-          <Link href="/" className="rounded-full bg-white/8 px-4 py-2 text-sm font-bold text-white/70">На главную</Link>
+          <Link href="/" className="ac-login-home rounded-full bg-white/8 px-4 py-2 text-sm font-bold text-white/70">На главную</Link>
         </header>
 
         <section className="grid min-h-[72vh] place-items-center py-10">
