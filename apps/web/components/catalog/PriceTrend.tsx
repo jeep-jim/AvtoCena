@@ -44,9 +44,6 @@ function currencyDelta(offer: PriceLike) {
   const rateDelta = explicitRateDelta || (effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : 0);
   if (!Number.isFinite(rateDelta) || rateDelta === 0) return 0;
 
-  // Public cards do not always contain the source price after a clean import.
-  // In that case the current RUB total and current rate still give an honest
-  // estimate of the part of the movement caused by the exchange rate.
   const estimatedSourcePrice = sourcePrice || (current && effectiveRate ? current / effectiveRate : 0);
   return estimatedSourcePrice ? Math.round(estimatedSourcePrice * rateDelta) : 0;
 }
@@ -56,14 +53,13 @@ function formatDelta(value: number) {
   if (absolute >= 1_000_000) {
     return `${new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(absolute / 1_000_000)}M`;
   }
-  if (absolute >= 1_000) return `${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(absolute / 1_000)}K`;
-  return `${money(absolute)} ₽`;
+  return `${new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 1 }).format(absolute / 1_000)}K`;
 }
 
 export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
   const current = Number(offer.totalRub || 0);
   const delta = savedPriceDelta(offer) || currencyDelta(offer);
-  if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1) return null;
+  if (!current || !Number.isFinite(delta) || Math.abs(delta) < 1_000) return null;
 
   return {
     direction: delta < 0 ? "down" : "up",
@@ -76,8 +72,8 @@ function TrendArrow({ direction, className = "" }: { direction: PriceTrendDirect
   if (direction === "flat") {
     return (
       <svg className={className} width="34" height="25" viewBox="0 0 34 25" fill="none" aria-hidden="true">
-        <path d="M2.5 16.5L10 11L16 14L23 8.5L31 11" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M25 11H31V5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2.5 15L9.5 11L16 14L22.5 10.5H31" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M25 6.5L31 10.5L25 14.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }
@@ -120,28 +116,22 @@ export function PriceTrend({
 }) {
   const trend = resolvePriceTrend(offer);
   const direction: PriceTrendDirection = trend?.direction || "flat";
-  const directionClass = direction === "down" ? "text-[#168a59]" : direction === "up" ? "text-[#ff5c63]" : "text-white/28";
-  const priceClass = direction === "down" ? "text-[#168a59]" : "text-red-500";
-  const panelClass = direction === "down"
-    ? "bg-[#168a59]/[0.09]"
-    : direction === "up"
-      ? "bg-red-500/[0.085]"
-      : "bg-white/[0.035]";
+  const stateClass = direction === "down" ? "is-down" : direction === "up" ? "is-up" : "is-flat";
   const hasPrice = Boolean(offer.totalRub);
   const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(offer) && Boolean(currencyDelta(offer));
   const trendTitle = trend
     ? trendUsesCurrency
       ? "Изменение расчёта из-за обновления валютного курса"
       : "Изменение относительно предыдущего сохранённого расчёта"
-    : "Первый снимок цены сохранён. Направление станет цветным после следующего изменения";
+    : "Цена не изменилась";
 
   return (
-    <div className={`${panel ? `rounded-[1.35rem] p-4 ${panelClass}` : ""} ${className}`}>
+    <div className={`${panel ? "ac-price-trend-panel rounded-[1.35rem] p-4" : ""} ${stateClass} ${className}`}>
       <div className="flex min-w-0 items-center justify-between gap-2">
-        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} min-w-0 font-black uppercase tracking-[0.19em] text-white/42`}>{label}</div>
+        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-muted)]`}>{label}</div>
         {trend ? (
           <span
-            className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} shrink-0 font-black leading-none ${directionClass}`}
+            className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`}
             title={trendTitle}
             aria-label={`Цена ${trend.direction === "down" ? "снизилась" : "выросла"} на ${trend.formattedDelta}`}
           >
@@ -150,7 +140,7 @@ export function PriceTrend({
         ) : null}
       </div>
       <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-        <div className={`ac-price min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName} ${priceClass}`}>
+        <div className={`ac-price ac-price--${direction} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`}>
           {hasPrice ? (
             <>
               <span>{money(Number(offer.totalRub))}</span>
@@ -161,7 +151,7 @@ export function PriceTrend({
           )}
         </div>
         {hasPrice ? (
-          <div className={`flex shrink-0 items-center pb-0.5 ${directionClass}`} title={trendTitle} aria-hidden="true">
+          <div className="ac-price-trend-arrow flex shrink-0 items-center pb-0.5" title={trendTitle} aria-hidden="true">
             <TrendArrow direction={direction} className={dense ? "h-4 w-5 sm:h-5 sm:w-7 md:h-6 md:w-8" : "h-5 w-7 md:h-6 md:w-8"} />
           </div>
         ) : null}
