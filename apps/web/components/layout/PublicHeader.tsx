@@ -177,13 +177,13 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
 
             <nav className="hidden items-center text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
               <Link href="/cars" className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
-                <CarIcon />
+                <span className="ac-catalog-nav-icon"><CarIcon /></span>
                 <span>Каталог</span>
               </Link>
             </nav>
 
             <Link href="/cars" className={`ac-catalog-nav ac-icon-button flex h-11 w-11 items-center justify-center rounded-xl transition md:hidden ${catalogActive ? "is-active" : ""}`} aria-label="Открыть каталог" aria-current={catalogActive ? "page" : undefined} title="Каталог">
-              <CarIcon />
+              <span className="ac-catalog-nav-icon"><CarIcon /></span>
             </Link>
           </div>
         </div>
@@ -192,7 +192,8 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       <style jsx global>{`
         .ac-catalog-nav { background: rgba(255,255,255,.045); color: rgba(255,255,255,.84); }
         .ac-catalog-nav:hover { background: rgba(255,255,255,.085); color: #fff; }
-        .ac-catalog-nav.is-active { background: #ff353d !important; color: #fff !important; }
+        .ac-catalog-nav.is-active { background: rgba(255,255,255,.075) !important; color: rgba(255,255,255,.92) !important; }
+        .ac-catalog-nav.is-active .ac-catalog-nav-icon { color: #ff353d !important; }
 
         .ac-filter-control,
         .ac-filter-range,
@@ -223,25 +224,12 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           border: 1px solid rgba(255,255,255,.085) !important;
           background-color: rgba(255,255,255,.07) !important;
         }
-        #form .ac-body-picker-panel {
-          grid-template-columns: repeat(2,minmax(0,1fr)) !important;
-          gap: 6px !important;
-        }
-        #form .ac-body-picker-panel svg { display: none !important; }
-        #form .ac-body-picker-panel button {
-          min-height: 46px !important;
-          flex-direction: row !important;
-          justify-content: flex-start !important;
-          padding: 0 14px !important;
-          font-size: 13px !important;
-          text-align: left !important;
-        }
-        #form .ac-body-picker-panel button span { margin-top: 0 !important; }
         section[data-demo-enabled] > div:first-child > div:last-child > div:first-child .ac-search-menu > div:first-child { display: none !important; }
 
         html[data-theme="light"] .ac-catalog-nav { background: #e7eaf0; color: #4d5667; }
         html[data-theme="light"] .ac-catalog-nav:hover { background: #dde2e9; color: #1e232d; }
-        html[data-theme="light"] .ac-catalog-nav.is-active { background: #ff353d !important; color: #fff !important; }
+        html[data-theme="light"] .ac-catalog-nav.is-active { background: #e7eaf0 !important; color: #303744 !important; }
+        html[data-theme="light"] .ac-catalog-nav.is-active .ac-catalog-nav-icon { color: #d92534 !important; }
         html[data-theme="light"] .ac-filter-control,
         html[data-theme="light"] .ac-filter-range,
         html[data-theme="light"] .ac-filter-more-button {
@@ -253,16 +241,23 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         html[data-theme="light"] .ac-filter-range > input + input { border-left-color: rgba(35,42,55,.12); }
         html[data-theme="light"] .ac-filter-range input { color: #20252f !important; }
         html[data-theme="light"] .ac-filter-range input::placeholder { color: #737c8c !important; }
+        html[data-theme="light"] .ac-filter-dropdown { background: #f8f9fb; color: #20252f; border-color: rgba(35,42,55,.14); box-shadow: 0 22px 58px rgba(36,42,55,.18); }
+        html[data-theme="light"] .ac-filter-search { background: #e7ebf1; color: #20252f; border-color: rgba(35,42,55,.12); }
+        html[data-theme="light"] .ac-filter-search::placeholder { color: #737c8c; }
+        html[data-theme="light"] .ac-filter-option { color: #303744; }
+        html[data-theme="light"] .ac-filter-option:hover { background: #e8ecf2; color: #20252f; }
+        html[data-theme="light"] .ac-filter-option.is-active { background: #ff353d; color: #fff; }
         html[data-theme="light"] .ac-catalog-filter-panel { background: rgba(255,255,255,.72) !important; }
         html[data-theme="light"] .ac-advanced-toggle { color: #596274; background: #e8ebf1; }
         html[data-theme="light"] .ac-advanced-toggle:hover { color: #20252f; background: #dfe4eb; }
         html[data-theme="light"] .ac-advanced-fields { background: #eef1f5; }
         html[data-theme="light"] .ac-catalog-filter-drawer { background: #f6f7fa; color: #20252f; }
         html[data-theme="light"] .ac-filter-close { background: #e4e8ef; color: #596274; }
-
-        @media (max-width: 767px) {
-          #form .ac-body-picker-panel { grid-template-columns: 1fr !important; }
-          #form .ac-body-picker-panel button { min-height: 44px !important; }
+        html[data-theme="light"] #form .soft-input,
+        html[data-theme="light"] #form .ac-search-select {
+          background: #edf0f5 !important;
+          border-color: rgba(30,36,48,.17) !important;
+          color: #171b24 !important;
         }
       `}</style>
     </>
