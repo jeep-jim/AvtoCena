@@ -1,4 +1,4 @@
-name: Catalog recovery once v6
+name: Catalog underfilled markets recovery v7
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
           rm -f data/catalog/manifest.json data/catalog/import-lock.json
       - name: Recover latest confirmed production generation
         run: npx tsx scripts/catalog-recover-generations.mjs
-        env:
+        env: &storage
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
           YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
@@ -44,85 +44,71 @@ jobs:
       - name: Reactivate recent valid offers
         run: npx tsx scripts/catalog-recover-active.mjs
         env:
-          JSON_STORAGE_DRIVER: object
-          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
-          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
-          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          <<: *storage
           CATALOG_RECOVERY_WINDOW_MS: "3888000000"
           CATALOG_RECOVERY_MIN_PUBLIC: "2"
-      - name: Restart verified source cursors
+      - name: Restart underfilled market cursors
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
-          JSON_STORAGE_DRIVER: object
-          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
-          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
-          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,autoscout_europe
-      - name: Import clean five-market catalog
-        run: npm run catalog:import:sample
+          <<: *storage
+          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,dubicars_uae_exact,dubicars_clean,otomoto_europe_exact,autoscout_europe
+      - name: Fill China Europe UAE and Korea to 250 public offers
+        run: npx tsx scripts/catalog-fill-underfilled-markets.mjs
         env:
-          JSON_STORAGE_DRIVER: object
-          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
-          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
-          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
-          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
-          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
-          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_IMPORT_RESET: "false"
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,autoscout_europe
-          CATALOG_TARGET_PUBLIC_OFFERS: "1250"
-          CATALOG_TARGET_PER_MARKET: "250"
+          <<: *storage
+          CATALOG_FILL_MARKETS: uae,europe,china,korea
+          CATALOG_DESIRED_PER_MARKET: "250"
+          CATALOG_CANDIDATE_MULTIPLIER: "4"
+          CATALOG_MIN_CANDIDATES: "100"
+          CATALOG_MAX_CANDIDATES: "1000"
+          CATALOG_IMPORT_MAX_PAGES: "80"
+          CATALOG_MAX_IMAGES_PER_OFFER: "3"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
           CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
-          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "240"
-          CATALOG_ENCAR_DIRECT_IMAGE_RPM: "600"
+          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "300"
+          CATALOG_ENCAR_DIRECT_IMAGE_RPM: "900"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
-          CATALOG_CHE168_GLOBAL_MAX_BRANDS: "48"
-          CATALOG_IMPORT_MAX_OFFERS: "250"
-          CATALOG_IMPORT_MAX_DETAILS: "250"
-          CATALOG_IMPORT_MAX_PAGES: "30"
-          CATALOG_MAX_IMAGES_PER_OFFER: "10"
+          CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
-          CATALOG_IMAGE_TIMEOUT_MS: "20000"
-          CATALOG_IMPORT_BUDGET_MS: "10800000"
-          CATALOG_SOURCE_BUDGET_MS: "1800000"
+          CATALOG_IMAGE_TIMEOUT_MS: "12000"
+          CATALOG_IMPORT_BUDGET_MS: "2880000"
+          CATALOG_SOURCE_BUDGET_MS: "2640000"
           CATALOG_OFFER_RETENTION_MS: "3888000000"
           CATALOG_STALE_GRACE_MS: "3888000000"
-          CATALOG_IMPORT_REPORT_FILE: catalog-import-public-markets-report.json
+          CATALOG_IMPORT_REPORT_FILE: catalog-underfilled-markets-report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-recovery-once-v6-report
-          path: catalog-import-public-markets-report.json
+          name: catalog-underfilled-markets-v7-report
+          path: catalog-underfilled-markets-report.json
           if-no-files-found: warn
           retention-days: 7
       - name: Record report in repository
         if: always()
         run: |
-          if [ ! -f catalog-import-public-markets-report.json ]; then exit 0; fi
+          if [ ! -f catalog-underfilled-markets-report.json ]; then exit 0; fi
           mkdir -p data/catalog/imports
-          cp catalog-import-public-markets-report.json data/catalog/imports/last-recovery-v6-report.json
+          cp catalog-underfilled-markets-report.json data/catalog/imports/last-underfilled-markets-report.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/catalog/imports/last-recovery-v6-report.json
-          git commit -m "Record catalog recovery v6 report [skip ci]" || exit 0
+          git add data/catalog/imports/last-underfilled-markets-report.json
+          git commit -m "Record underfilled market recovery report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
         run: |
           node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
-          const path = 'catalog-import-public-markets-report.json';
+          const path = 'catalog-underfilled-markets-report.json';
           if (!fs.existsSync(path)) { console.log('Отчёт не создан.'); process.exit(0); }
           const r = JSON.parse(fs.readFileSync(path, 'utf8'));
-          console.log(`Всего: ${r.publicOffers || 0}`);
-          for (const market of ['korea','china','japan','uae','europe']) console.log(`- ${market}: ${r.publicByMarket?.[market] || 0}`);
-          console.log('\n### Источники');
-          for (const s of r.sources || []) console.log(`- ${s.sourceId}: ${s.ok ? `OK seen=${s.seen || 0} saved=${s.saved || 0}` : `ERROR ${s.error || ''}`}`);
+          console.log(`Цель каждого рынка: ${r.desiredPerMarket || 250}`);
+          for (const market of ['korea','china','japan','uae','europe']) {
+            console.log(`- ${market}: ${r.publicByMarket?.[market] || 0}; осталось ${r.missingByMarket?.[market] || 0}`);
+          }
+          console.log('\n### Проходы по рынкам');
+          for (const market of r.markets || []) {
+            console.log(`- ${market.market}: ${market.before || 0} → ${market.after || 0}; gained=${market.gained || 0}; reached=${Boolean(market.reached)}`);
+            for (const source of market.sources || []) console.log(`  - ${source.sourceId}: ${source.ok ? `OK seen=${source.seen || 0} saved=${source.saved || 0}` : `ERROR ${source.error || ''}`}`);
+          }
           NODE
