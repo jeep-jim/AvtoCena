@@ -1,0 +1,89 @@
+name: DubiCars image diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-dubicars-image-diagnostic.yml
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Test DubiCars image URLs
+        run: |
+          cat > scripts/dubicars-image-diagnostic.mjs <<'NODE'
+          const fs = await import('node:fs/promises');
+          const { dubicarsUaeCurrentSource } = await import('../apps/web/lib/catalog/dubicars-current-source.ts');
+          const page = await dubicarsUaeCurrentSource.fetchPage('1');
+          const rows = page.items.slice(0, 4);
+          const profiles = {
+            plain: {},
+            browser: {
+              accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+              'accept-language': 'en-US,en;q=0.9',
+              'cache-control': 'no-cache',
+              pragma: 'no-cache',
+              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36',
+              'sec-fetch-dest': 'image',
+              'sec-fetch-mode': 'no-cors',
+              'sec-fetch-site': 'cross-site'
+            }
+          };
+          const report = { startedAt: new Date().toISOString(), pageCount: page.items.length, rows: [] };
+          for (const row of rows) {
+            const item = { title: row.title, url: row.url, images: [] };
+            for (const imageUrl of row.images.slice(0, 6)) {
+              const checks = {};
+              for (const [name, baseHeaders] of Object.entries(profiles)) {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 15000);
+                try {
+                  const headers = name === 'browser' ? { ...baseHeaders, referer: row.url } : baseHeaders;
+                  const response = await fetch(imageUrl, { headers, redirect: 'follow', signal: controller.signal });
+                  const body = await response.arrayBuffer();
+                  checks[name] = { ok: response.ok, status: response.status, finalUrl: response.url, contentType: response.headers.get('content-type'), contentLength: body.byteLength };
+                } catch (error) {
+                  checks[name] = { ok: false, error: error?.message || String(error) };
+                } finally {
+                  clearTimeout(timer);
+                }
+              }
+              item.images.push({ imageUrl, checks });
+            }
+            report.rows.push(item);
+          }
+          report.finishedAt = new Date().toISOString();
+          await fs.writeFile('dubicars-image-diagnostic.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+          npx tsx scripts/dubicars-image-diagnostic.mjs
+      - name: Record diagnostic
+        if: always()
+        run: |
+          if [ ! -f dubicars-image-diagnostic.json ]; then echo '{"fatal":true,"error":"diagnostic_file_missing"}' > dubicars-image-diagnostic.json; fi
+          git pull --rebase origin main || true
+          mkdir -p data/catalog/imports
+          cp dubicars-image-diagnostic.json data/catalog/imports/last-dubicars-image-diagnostic.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/imports/last-dubicars-image-diagnostic.json
+          git commit -m "Record DubiCars image diagnostic [skip ci]" || true
+          git push origin HEAD:main || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dubicars-image-diagnostic
+          path: dubicars-image-diagnostic.json
+          if-no-files-found: warn
