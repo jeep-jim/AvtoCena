@@ -38,6 +38,9 @@ export function decodeOtomoto(value: string) {
   return String(value || "")
     .replace(/\\u002F/gi, "/")
     .replace(/\\u0026/gi, "&")
+    .replace(/\\u003A/gi, ":")
+    .replace(/\\u003D/gi, "=")
+    .replace(/\\u0022/gi, '"')
     .replace(/\\\//g, "/")
     .replace(/&nbsp;|&#160;/gi, " ")
     .replace(/&amp;/gi, "&")
@@ -72,8 +75,42 @@ function normalizeImageUrl(value: string, base: string) {
   return url;
 }
 
+function imageCanonicalKey(url: string) {
+  try {
+    const parsed = new URL(url);
+    const file = parsed.pathname.match(/\/v1\/files\/([^/]+)\/image/i)?.[1];
+    if (file) return `${parsed.hostname.toLowerCase()}:${file.toLowerCase()}`;
+    const path = parsed.pathname.replace(/\/image(?:;[^/?#]*)?$/i, "/image");
+    return `${parsed.hostname.toLowerCase()}${path}`;
+  } catch {
+    return url.replace(/[?#].*$/, "").replace(/;s=\d+x\d+/i, "");
+  }
+}
+
+function imageResolutionScore(url: string) {
+  const size = url.match(/(?:[;?&](?:s|size)=|\/)(\d{2,5})x(\d{2,5})(?:[;&/?#]|$)/i);
+  if (size) return Number(size[1]) * Number(size[2]);
+  const width = Number(url.match(/[?&](?:w|width)=(\d{2,5})/i)?.[1] || 0);
+  const height = Number(url.match(/[?&](?:h|height)=(\d{2,5})/i)?.[1] || 0);
+  return width * Math.max(height, 1);
+}
+
+function uniqueImageUrls(values: string[], base: string, limit = 80) {
+  const selected = new Map<string, { url: string; score: number; order: number }>();
+  let order = 0;
+  for (const value of values) {
+    const url = normalizeImageUrl(value, base);
+    if (!url) continue;
+    const key = imageCanonicalKey(url);
+    const score = imageResolutionScore(url);
+    const previous = selected.get(key);
+    if (!previous || score > previous.score) selected.set(key, { url, score, order: previous?.order ?? order++ });
+  }
+  return [...selected.values()].sort((a, b) => a.order - b.order).map((item) => item.url).slice(0, limit);
+}
+
 function collectJsonImageValues(value: unknown, output: string[], depth = 0) {
-  if (value == null || depth > 10) return;
+  if (value == null || depth > 12) return;
   if (typeof value === "string") {
     const decoded = decodeOtomoto(value);
     if (/^https?:/i.test(decoded) && /olxcdn|otomoto|\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(decoded)) output.push(decoded);
@@ -86,30 +123,24 @@ function collectJsonImageValues(value: unknown, output: string[], depth = 0) {
   if (typeof value !== "object") return;
   const object = value as Record<string, unknown>;
   for (const [key, child] of Object.entries(object)) {
-    if (/image|photo|gallery|media/i.test(key)) collectJsonImageValues(child, output, depth + 1);
-    else if (depth < 4 && typeof child === "object") collectJsonImageValues(child, output, depth + 1);
+    if (/image|photo|gallery|media|url/i.test(key)) collectJsonImageValues(child, output, depth + 1);
+    else if (depth < 6 && typeof child === "object") collectJsonImageValues(child, output, depth + 1);
   }
 }
 
 export function extractOtomotoImages(markup: string, base: string) {
   const values: string[] = [];
-  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
-  for (const match of markup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
+  const decodedMarkup = decodeOtomoto(markup);
+  for (const match of decodedMarkup.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of decodedMarkup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const part of match[1].split(",")) values.push(part.trim().split(/\s+/)[0]);
   }
-  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'<>\s]+?(?:\.(?:jpe?g|png|webp|avif)|apollo\.olxcdn\.com)[^"'<>\s]*/gi)) values.push(match[0]);
-  for (const match of markup.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
-    try { collectJsonImageValues(JSON.parse(match[1]), values); } catch { /* ignore malformed JSON-LD */ }
+  for (const match of decodedMarkup.matchAll(/https?:\/\/[^"'<>\s\\]+(?:\.(?:jpe?g|png|webp|avif)|apollo\.olxcdn\.com|\/image(?:[;/?#]|$))[^"'<>\s\\]*/gi)) values.push(match[0]);
+  for (const match of markup.matchAll(/<script[^>]+type=["'](?:application\/ld\+json|application\/json)["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const payload = decodeOtomoto(match[1]);
+    try { collectJsonImageValues(JSON.parse(payload), values); } catch { /* ignore malformed JSON payloads */ }
   }
-  const result: string[] = [];
-  const seen = new Set<string>();
-  for (const value of values) {
-    const url = normalizeImageUrl(value, base);
-    if (!url || seen.has(url)) continue;
-    seen.add(url);
-    result.push(url);
-  }
-  return result.slice(0, 80);
+  return uniqueImageUrls(values, base, 80);
 }
 
 const CURRENCY_PATTERNS: Array<{ code: string; token: string }> = [
@@ -138,10 +169,20 @@ export function parseOtomotoPrice(value: string) {
 }
 
 export function parseOtomotoMileage(value: string) {
-  const text = cleanOtomoto(value);
-  const match = text.match(/(?:mileage|przebieg)\s*[:：]?\s*([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i)
-    || text.match(/\b([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i);
-  return otomotoInteger(match?.[1]);
+  const decoded = decodeOtomoto(value);
+  const plain = cleanOtomoto(value);
+  const candidates = [
+    plain.match(/(?:mileage|przebieg)\s*[:：]?\s*([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i)?.[1],
+    decoded.match(/["'](?:mileageKm|mileage|mileageFromOdometer|odometer)["']\s*:\s*(?:\{[\s\S]{0,180}?["'](?:value|amount)["']\s*:\s*)?["']?([0-9][0-9 .\u00a0\u202f]{0,14})/i)?.[1],
+    decoded.match(/["'](?:key|code|name)["']\s*:\s*["'](?:mileageKm|mileage|mileageFromOdometer|przebieg)["'][\s\S]{0,220}?["'](?:value|amount)["']\s*:\s*["']?([0-9][0-9 .\u00a0\u202f]{0,14})/i)?.[1],
+    decoded.match(/(?:Przebieg|mileage)[\s\S]{0,160}?([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i)?.[1],
+    plain.match(/\b([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i)?.[1],
+  ];
+  for (const candidate of candidates) {
+    const mileage = otomotoInteger(candidate);
+    if (mileage !== undefined && mileage <= 5_000_000) return mileage;
+  }
+  return undefined;
 }
 
 function makeModel(raw: string) {
@@ -232,7 +273,7 @@ function parseBlock(block: string, listUrl: string): OtomotoRow | null {
     publishedAt: extractPublishedAt(block),
     price: parsedPrice.price,
     currency: parsedPrice.currency,
-    mileageKm: parseOtomotoMileage(plain),
+    mileageKm: parseOtomotoMileage(block),
     engineCc,
     powerHp: otomotoInteger(plain.match(/([0-9]{2,4})\s*KM\b/)?.[1]),
     fuel: normalizeOtomotoFuel(plain),
@@ -302,14 +343,28 @@ export class OtomotoCurrentAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const row = offer.operational.raw as OtomotoRow;
-    const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 60));
+    const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80));
     let urls = [...(row.images || [])];
     if (urls.length < limit) {
       const detail = await request(row.url, row.url).catch(() => null);
       if (detail?.response.ok) urls = [...extractOtomotoImages(detail.markup, row.url), ...urls];
     }
-    const cached = await Promise.all([...new Set(urls)].slice(0, limit).map((url) => cacheImageFromUrl(url, "europe", { headers: { ...OTOMOTO_HEADERS, referer: row.url } }).catch(() => null)));
-    return cached.filter((image): image is CatalogImage => Boolean(image && image.size > 8_000));
+    urls = uniqueImageUrls(urls, row.url, limit * 2);
+    const saved: CatalogImage[] = [];
+    const seen = new Set<string>();
+    const concurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 6)));
+    for (let index = 0; index < urls.length && saved.length < limit; index += concurrency) {
+      const batch = await Promise.all(urls.slice(index, index + concurrency).map((url) => cacheImageFromUrl(url, "europe", { headers: { ...OTOMOTO_HEADERS, referer: row.url } }).catch(() => null)));
+      for (const image of batch) {
+        if (!image || image.size <= 8_000) continue;
+        const key = String(image.checksum || image.id || image.objectKey || image.url || "");
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        saved.push(image);
+        if (saved.length >= limit) break;
+      }
+    }
+    return saved;
   }
 
   async healthCheck() { return { ok: true, message: "OTOMOTO clean brand catalogs", checkedAt: new Date().toISOString() }; }
