@@ -29,6 +29,13 @@ jobs:
           set +e
           mkdir -p data/catalog/imports
           : > data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-catalog-market-integrity-patch.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace("'''  /^(.*\\\\.)?guazi\\\\.com$/i,''',", "'''  /^(.+\\\\.)?guazi\\\\.com$/i,''',")
+          path.write_text(text, encoding='utf-8')
+          PY
           python scripts/apply-catalog-market-integrity-patch.py >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
           patch_status=$?
           echo "patch_status=$patch_status" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
