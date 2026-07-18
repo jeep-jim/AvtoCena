@@ -1,10 +1,10 @@
 {
-  "status": "completed",
+  "status": "running",
   "version": 14,
-  "finishedAt": "2026-07-18T04:35:33.728Z",
-  "publicByMarket": {
-    "uae": 0,
-    "europe": 0,
-    "china": 0
-  }
+  "startedAt": "2026-07-18T04:37:12.283Z",
+  "order": [
+    "uae",
+    "europe",
+    "china"
+  ]
 }
