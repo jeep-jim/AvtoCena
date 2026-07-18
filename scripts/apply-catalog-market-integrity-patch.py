@@ -85,7 +85,7 @@ text = once(text,
 import { hasCredibleOfferContent } from "./offer-quality";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";''', "storage imports")
 text = once(text,
-'''  /^(.*\\.)?guazi\\.com$/i,''',
+'''  /^(.+\\.)?guazi\\.com$/i,''',
 '''  /^(.+\\.)?guazi\\.com$/i,
   /^(.+\\.)?guazistatic-global\\.com$/i,''', "Guazi image CDN")
 text = once(text,

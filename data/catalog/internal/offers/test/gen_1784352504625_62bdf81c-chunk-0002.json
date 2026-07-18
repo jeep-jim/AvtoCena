@@ -1,0 +1,60 @@
+[
+  {
+    "id": "o500",
+    "sourceId": "test",
+    "sourceOfferId": "500",
+    "market": "japan",
+    "offerType": "fixed",
+    "status": "active",
+    "make": "Toyota",
+    "model": "Aqua",
+    "year": 2020,
+    "sourcePrice": 1000000,
+    "sourceCurrency": "JPY",
+    "priceMode": "fixed",
+    "images": [
+      {
+        "id": "img1",
+        "url": "/api/catalog/images/img1",
+        "objectKey": "catalog/images/japan/a.jpg",
+        "size": 10,
+        "checksum": "abc",
+        "mimeType": "image/jpeg"
+      }
+    ],
+    "totalRub": 1500500,
+    "calculationStatus": "ready",
+    "firstSeenAt": "2026-07-18T05:28:24.601Z",
+    "updatedAt": "2026-07-18T05:28:24.601Z",
+    "operational": {}
+  },
+  {
+    "id": "needs-data",
+    "sourceId": "test",
+    "sourceOfferId": "ND",
+    "market": "japan",
+    "offerType": "fixed",
+    "status": "active",
+    "make": "Toyota",
+    "model": "Aqua",
+    "year": 2020,
+    "sourcePrice": null,
+    "sourceCurrency": null,
+    "priceMode": "fixed",
+    "images": [
+      {
+        "id": "img1",
+        "url": "/api/catalog/images/img1",
+        "objectKey": "catalog/images/japan/a.jpg",
+        "size": 10,
+        "checksum": "abc",
+        "mimeType": "image/jpeg"
+      }
+    ],
+    "totalRub": null,
+    "calculationStatus": "needs_data",
+    "firstSeenAt": "2026-07-18T05:28:24.601Z",
+    "updatedAt": "2026-07-18T05:28:24.601Z",
+    "operational": {}
+  }
+]

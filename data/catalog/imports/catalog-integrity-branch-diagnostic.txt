@@ -1,0 +1,481 @@
+catalog market integrity patch applied
+patch_status=0
+
+> avtocena@0.1.0 typecheck
+> npm --workspace=@avtocena/web exec tsc -- --noEmit && npm --workspace=@avtocena/engine exec tsc -- --noEmit
+
+typecheck_status=0
+
+> avtocena@0.1.0 test
+> node --import tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: production functions load active market configuration and snapshot
+ok 1 - production functions load active market configuration and snapshot
+  ---
+  duration_ms: 103.229584
+  ...
+# Subtest: createMarketVersion uses scheduled for future effectiveFrom and keeps current active version
+ok 2 - createMarketVersion uses scheduled for future effectiveFrom and keeps current active version
+  ---
+  duration_ms: 32.286524
+  ...
+# Subtest: snapshots stay immutable after immediate market version update
+ok 3 - snapshots stay immutable after immediate market version update
+  ---
+  duration_ms: 26.228379
+  ...
+# Subtest: known initial market payments are preserved
+ok 4 - known initial market payments are preserved
+  ---
+  duration_ms: 21.69875
+  ...
+# Subtest: direct partner payout future version does not affect current active payout
+ok 5 - direct partner payout future version does not affect current active payout
+  ---
+  duration_ms: 24.019649
+  ...
+# Subtest: individual partner payout version is stored separately from base payout
+ok 6 - individual partner payout version is stored separately from base payout
+  ---
+  duration_ms: 27.040211
+  ...
+# Subtest: role separation and validators use production functions
+ok 7 - role separation and validators use production functions
+  ---
+  duration_ms: 17.303964
+  ...
+# Subtest: business calculation engine returns configVersion, breakdown and immutable snapshot
+ok 8 - business calculation engine returns configVersion, breakdown and immutable snapshot
+  ---
+  duration_ms: 17.750488
+  ...
+# Subtest: CPA network draft can be edited without inventing real network parameters
+ok 9 - CPA network draft can be edited without inventing real network parameters
+  ---
+  duration_ms: 25.13328
+  ...
+# Subtest: effectiveFrom is consistent across market, site, direct payout and public CPA layer
+ok 10 - effectiveFrom is consistent across market, site, direct payout and public CPA layer
+  ---
+  duration_ms: 25.686176
+  ...
+# Subtest: partner accruals are created only for active direct partners and are deduped
+ok 11 - partner accruals are created only for active direct partners and are deduped
+  ---
+  duration_ms: 21.546463
+  ...
+# Subtest: CPA and unknown partner refs do not create direct partner accruals
+ok 12 - CPA and unknown partner refs do not create direct partner accruals
+  ---
+  duration_ms: 19.455598
+  ...
+# Subtest: CPA Gateway uses payoutAmount as primary postback payout
+ok 13 - CPA Gateway uses payoutAmount as primary postback payout
+  ---
+  duration_ms: 52.580986
+  ...
+# Subtest: CRM effective market version uses the same effectiveFrom selection as calculations
+ok 14 - CRM effective market version uses the same effectiveFrom selection as calculations
+  ---
+  duration_ms: 38.197331
+  ...
+# Subtest: status side effects split direct partner, CPA network and unknown refs
+ok 15 - status side effects split direct partner, CPA network and unknown refs
+  ---
+  duration_ms: 33.193423
+  ...
+# Subtest: CPA rejection event preserves rejectionReason
+ok 16 - CPA rejection event preserves rejectionReason
+  ---
+  duration_ms: 23.343172
+  ...
+# Subtest: SBT JSON-LD fallback parser returns a usable vehicle
+ok 17 - SBT JSON-LD fallback parser returns a usable vehicle
+  ---
+  duration_ms: 4.39264
+  ...
+# Subtest: SBT adapter keeps its configured market and USD price
+ok 18 - SBT adapter keeps its configured market and USD price
+  ---
+  duration_ms: 1.34804
+  ...
+# Subtest: embedded public catalog parser reads Next.js vehicle data
+ok 19 - embedded public catalog parser reads Next.js vehicle data
+  ---
+  duration_ms: 2.830722
+  ...
+# Subtest: server-rendered DubiCars listing cards are parsed
+ok 20 - server-rendered DubiCars listing cards are parsed
+  ---
+  duration_ms: 4.622599
+  ...
+# Subtest: server-rendered AutoScout listing cards are parsed
+ok 21 - server-rendered AutoScout listing cards are parsed
+  ---
+  duration_ms: 3.304724
+  ...
+# Subtest: public fallback adapter preserves configured market and currency
+ok 22 - public fallback adapter preserves configured market and currency
+  ---
+  duration_ms: 4.74037
+  ...
+# Subtest: daily production fallbacks cover all previously empty markets
+ok 23 - daily production fallbacks cover all previously empty markets
+  ---
+  duration_ms: 0.346665
+  ...
+# Subtest: catalog import stores a decrease against the previous calculation
+ok 24 - catalog import stores a decrease against the previous calculation
+  ---
+  duration_ms: 15.197921
+  ...
+# Subtest: catalog import stores an increase and formats large changes
+ok 25 - catalog import stores an increase and formats large changes
+  ---
+  duration_ms: 0.310739
+  ...
+# Subtest: unchanged recalculation keeps the latest meaningful movement
+ok 26 - unchanged recalculation keeps the latest meaningful movement
+  ---
+  duration_ms: 0.189934
+  ...
+# Subtest: BE FORWARD public parser accepts current letter-prefixed references and card fields
+ok 27 - BE FORWARD public parser accepts current letter-prefixed references and card fields
+  ---
+  duration_ms: 5.714882
+  ...
+# Subtest: market-specific BE FORWARD adapter keeps the configured source market
+ok 28 - market-specific BE FORWARD adapter keeps the configured source market
+  ---
+  duration_ms: 3.713415
+  ...
+# Subtest: public source set covers every AvtoCena market without credentials
+ok 29 - public source set covers every AvtoCena market without credentials
+  ---
+  duration_ms: 0.425422
+  ...
+# Subtest: Encar image URL builder resolves base, absolute and ready carpicture paths
+ok 30 - Encar image URL builder resolves base, absolute and ready carpicture paths
+  ---
+  duration_ms: 1.43389
+  ...
+# Subtest: Encar image extractor keeps list cover first and deduplicates gallery
+ok 31 - Encar image extractor keeps list cover first and deduplicates gallery
+  ---
+  duration_ms: 20.516599
+  ...
+# Subtest: Encar mobile list URL uses real query, sr, inav and paging cursor
+ok 32 - Encar mobile list URL uses real query, sr, inav and paging cursor
+  ---
+  duration_ms: 0.778219
+  ...
+# Subtest: Encar direct normalizes price from 만원 and full KRW without double multiplication
+ok 33 - Encar direct normalizes price from 만원 and full KRW without double multiplication
+  ---
+  duration_ms: 0.251939
+  ...
+# Subtest: Encar direct normalizes list fixture and hides source URLs from public DTO
+ok 34 - Encar direct normalizes list fixture and hides source URLs from public DTO
+  ---
+  duration_ms: 0.746711
+  ...
+# Subtest: BE FORWARD stocklist fixture parses Ref No, price, location and market
+ok 35 - BE FORWARD stocklist fixture parses Ref No, price, location and market
+  ---
+  duration_ms: 2.777533
+  ...
+# Subtest: BE FORWARD parser gracefully returns empty list when HTML structure changes
+ok 36 - BE FORWARD parser gracefully returns empty list when HTML structure changes
+  ---
+  duration_ms: 0.276495
+  ...
+# Subtest: Che168 Global fixture publishes needs_data and never uses MSRP as used-car price
+ok 37 - Che168 Global fixture publishes needs_data and never uses MSRP as used-car price
+  ---
+  duration_ms: 0.514378
+  ...
+# Subtest: CSV parser detects delimiter, quoted fields and BOM
+ok 38 - CSV parser detects delimiter, quoted fields and BOM
+  ---
+  duration_ms: 0.608513
+  ...
+# Subtest: catalog generation chunks stay under 500 and search loads indexed chunks only
+not ok 39 - catalog generation chunks stay under 500 and search loads indexed chunks only
+  ---
+  duration_ms: 73.468502
+  location: '/home/runner/work/AvtoCena/AvtoCena/tests/catalog.test.ts:2:6880'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'chunks')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (/home/runner/work/AvtoCena/AvtoCena/tests/catalog.test.ts:90:132)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: lead generation cards without price are public when they have local photo and real source id
+not ok 40 - lead generation cards without price are public when they have local photo and real source id
+  ---
+  duration_ms: 152.811955
+  location: '/home/runner/work/AvtoCena/AvtoCena/tests/catalog.test.ts:2:8357'
+  failureType: 'testCodeFailure'
+  error: 'false == true'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/runner/work/AvtoCena/AvtoCena/tests/catalog.test.ts:100:10)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: image cache rejects HTML instead of image
+ok 41 - image cache rejects HTML instead of image
+  ---
+  duration_ms: 1.985327
+  ...
+# Subtest: legacy JPY rate is not divided by 100 and structured CBR nominal is supported
+ok 42 - legacy JPY rate is not divided by 100 and structured CBR nominal is supported
+  ---
+  duration_ms: 3.380284
+  ...
+# Subtest: public DTO strips source and private image storage fields
+ok 43 - public DTO strips source and private image storage fields
+  ---
+  duration_ms: 0.293186
+  ...
+# Subtest: SSRF guard rejects private hosts and allows known image hosts
+ok 44 - SSRF guard rejects private hosts and allows known image hosts
+  ---
+  duration_ms: 0.454687
+  ...
+# Subtest: Che168 fetchPage reads result.carlist and uses brand endpoint
+ok 45 - Che168 fetchPage reads result.carlist and uses brand endpoint
+  ---
+  duration_ms: 20.428451
+  ...
+# Subtest: public GET leads is closed without CRM session
+ok 46 - public GET leads is closed without CRM session
+  ---
+  duration_ms: 6.360805
+  ...
+# Subtest: similar malicious image domains are rejected while autoimg.cn is allowed
+ok 47 - similar malicious image domains are rejected while autoimg.cn is allowed
+  ---
+  duration_ms: 1.451413
+  ...
+# Subtest: Encar list cover is preserved when detail gallery is absent
+ok 48 - Encar list cover is preserved when detail gallery is absent
+  ---
+  duration_ms: 8.205216
+  ...
+# Subtest: Che168 skips an empty brand and continues the next brand from page 1
+ok 49 - Che168 skips an empty brand and continues the next brand from page 1
+  ---
+  duration_ms: 11989.237136
+  ...
+# Subtest: admin import endpoint accepts token only through x-admin-token header
+ok 50 - admin import endpoint accepts token only through x-admin-token header
+  ---
+  duration_ms: 3.613336
+  ...
+# Subtest: Encar shared image extractor keeps list cover and gallery
+ok 51 - Encar shared image extractor keeps list cover and gallery
+  ---
+  duration_ms: 6.607319
+  ...
+# Subtest: importer refreshes lock during page, vehicle, image and generation processing
+ok 52 - importer refreshes lock during page, vehicle, image and generation processing
+  ---
+  duration_ms: 1.542434
+  ...
+# Subtest: lead route restores missing client and retries failed CPA without resending sent CPA
+ok 53 - lead route restores missing client and retries failed CPA without resending sent CPA
+  ---
+  duration_ms: 4.085221
+  ...
+# Subtest: temporary scan error preserves running scan cycle and cursor
+ok 54 - temporary scan error preserves running scan cycle and cursor
+  ---
+  duration_ms: 1.295411
+  ...
+# Subtest: source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS
+ok 55 - source and smoke requests use CATALOG_SOURCE_TIMEOUT_MS
+  ---
+  duration_ms: 5.457518
+  ...
+# Subtest: Encar sample image limit stops downloading after configured maximum
+ok 56 - Encar sample image limit stops downloading after configured maximum
+  ---
+  duration_ms: 3.478425
+  ...
+# Subtest: production catalog activation source checks
+ok 57 - production catalog activation source checks
+  ---
+  duration_ms: 2.451523
+  ...
+# Subtest: public UI uses live catalog and labels estimates honestly
+ok 58 - public UI uses live catalog and labels estimates honestly
+  ---
+  duration_ms: 3.637304
+  ...
+# Subtest: LocalJsonStorage reads and writes JSON
+ok 59 - LocalJsonStorage reads and writes JSON
+  ---
+  duration_ms: 14.819404
+  ...
+# Subtest: generated ids are unique and not timestamp-only
+ok 60 - generated ids are unique and not timestamp-only
+  ---
+  duration_ms: 0.892611
+  ...
+# Subtest: chunked JSON splits after 500 records and keeps index after chunk
+ok 61 - chunked JSON splits after 500 records and keeps index after chunk
+  ---
+  duration_ms: 1158.370341
+  ...
+# Subtest: ObjectJsonStorage GET/PUT/retry/fallback and sanitized errors
+ok 62 - ObjectJsonStorage GET/PUT/retry/fallback and sanitized errors
+  ---
+  duration_ms: 8044.580746
+  ...
+# Subtest: parallel chunk appends preserve both records
+ok 63 - parallel chunk appends preserve both records
+  ---
+  duration_ms: 23.077187
+  ...
+# Subtest: mutateDataJson preserves parallel JSON mutations
+ok 64 - mutateDataJson preserves parallel JSON mutations
+  ---
+  duration_ms: 4.404623
+  ...
+# Subtest: ObjectJsonStorage preserves binary content-type and relative objectKey
+ok 65 - ObjectJsonStorage preserves binary content-type and relative objectKey
+  ---
+  duration_ms: 4.814652
+  ...
+# Subtest: ObjectJsonStorage binaryExists uses HEAD and putBinary conditions are idempotent-conflict aware
+ok 66 - ObjectJsonStorage binaryExists uses HEAD and putBinary conditions are idempotent-conflict aware
+  ---
+  duration_ms: 3.247707
+  ...
+# Subtest: safeStoragePath rejects traversal storage keys
+ok 67 - safeStoragePath rejects traversal storage keys
+  ---
+  duration_ms: 2.477456
+  ...
+1..67
+# tests 67
+# suites 0
+# pass 65
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 24692.187837
+test_status=1
+
+> avtocena@0.1.0 build
+> npm --workspace=@avtocena/web run build
+
+
+> @avtocena/web@0.1.0 build
+> next build
+
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+  ▲ Next.js 14.2.5
+  - Experiments (use with caution):
+    · outputFileTracingRoot
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/131) ...
+   Generating static pages (32/131) 
+   Generating static pages (65/131) 
+   Generating static pages (98/131) 
+ ✓ Generating static pages (131/131)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size     First Load JS
+┌ ○ /                                       19 kB           124 kB
+├ ○ /_not-found                             873 B            88 kB
+├ ƒ /api/auth/login                         0 B                0 B
+├ ƒ /api/auth/logout                        0 B                0 B
+├ ƒ /api/auth/me                            0 B                0 B
+├ ƒ /api/avtocena                           0 B                0 B
+├ ƒ /api/catalog/images/[imageId]           0 B                0 B
+├ ƒ /api/catalog/import                     0 B                0 B
+├ ƒ /api/catalog/search                     0 B                0 B
+├ ƒ /api/cpa                                0 B                0 B
+├ ƒ /api/cpa/deliver                        0 B                0 B
+├ ƒ /api/cpa/postback                       0 B                0 B
+├ ƒ /api/crm/clients                        0 B                0 B
+├ ƒ /api/crm/leads/[id]                     0 B                0 B
+├ ƒ /api/crm/partners/payout-requests/[id]  0 B                0 B
+├ ƒ /api/crm/settings/contracts             0 B                0 B
+├ ƒ /api/crm/settings/contracts/download    0 B                0 B
+├ ƒ /api/crm/settings/cpa                   0 B                0 B
+├ ƒ /api/crm/settings/markets               0 B                0 B
+├ ƒ /api/crm/settings/partners              0 B                0 B
+├ ƒ /api/crm/settings/site                  0 B                0 B
+├ ƒ /api/crm/storage-health                 0 B                0 B
+├ ○ /api/health                             0 B                0 B
+├ ƒ /api/leads                              0 B                0 B
+├ ƒ /api/partners                           0 B                0 B
+├ ƒ /api/partners/payout-request            0 B                0 B
+├ ƒ /api/site-settings                      0 B                0 B
+├ ● /auto/[brand]/[model]                   186 B          94.1 kB
+├   ├ /auto/audi/a3-sportback
+├   ├ /auto/toyota/harrier
+├   ├ /auto/kia/k5
+├   └ /auto/bmw/320
+├ ƒ /cars                                   144 B           109 kB
+├ ƒ /cars/[market]                          144 B           109 kB
+├ ƒ /cars/[market]/[make]                   143 B           109 kB
+├ ƒ /cars/[market]/[make]/[model]           144 B           109 kB
+├ ● /cars/brand/[slug]                      3.79 kB         109 kB
+├   ├ /cars/brand/acura
+├   ├ /cars/brand/alfa-romeo
+├   ├ /cars/brand/aston-martin
+├   └ [+82 more paths]
+├ ƒ /cars/offer/[id]                        4.62 kB         110 kB
+├ ƒ /crm                                    186 B          94.1 kB
+├ ƒ /crm/clients                            1.74 kB        95.7 kB
+├ ƒ /crm/deals                              186 B          94.1 kB
+├ ƒ /crm/feed                               186 B          94.1 kB
+├ ƒ /crm/leads                              1.87 kB        95.8 kB
+├ ƒ /crm/managers                           186 B          94.1 kB
+├ ƒ /crm/partners                           1.05 kB          95 kB
+├ ƒ /crm/settings                           4.63 kB        98.6 kB
+├ ○ /favorites                              1.83 kB         107 kB
+├ ƒ /login                                  3.23 kB        97.2 kB
+├ ƒ /partner                                1.98 kB        95.9 kB
+├ ƒ /partner/api                            2.38 kB        96.3 kB
+├ ƒ /partner/landing                        4.45 kB        98.4 kB
+├ ƒ /results                                200 B           105 kB
+├ ○ /robots.txt                             0 B                0 B
+└ ○ /sitemap.xml                            0 B                0 B
++ First Load JS shared by all               87.1 kB
+  ├ chunks/1dd3208c-b92d1ee1c83712f1.js     53.6 kB
+  ├ chunks/286-40ff30ad0d4e02bf.js          31.5 kB
+  └ other shared chunks (total)             1.98 kB
+
+
+ƒ Middleware                                28.8 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses getStaticProps)
+ƒ  (Dynamic)  server-rendered on demand
+
+build_status=0

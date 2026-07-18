@@ -55,7 +55,8 @@ function inferBody(text: string) {
   if (/wagon|estate|touring|avant|универсал|旅行车/.test(text)) return "wagon";
   if (/hatchback|hatch|fastback|хэтчбек|两厢/.test(text)) return "hatchback";
   if (/sedan|saloon|limousine|седан|轿车|三厢/.test(text)) return "sedan";
-  if (/suv|crossover|offroad|4x4|land cruiser|rav4|harrier|cr-v|vezel|cx-5|glc|gle|gls|x[1-7]|q[23578]|кроссовер|внедорожник|越野车/.test(text)) return "suv";
+  if (/\boff[ -]?road\b|внедорожник|越野车|land cruiser|\bprado\b|\bpatrol\b|\bdefender\b|\bwrangler\b|\bbronco\b|\bfortuner\b|\bpajero\b|\bmontero\b|\bjimny\b|\b4runner\b|g[- ]?class|\bg\s?(?:350|400|500|550|580|63)\b|\bhummer\b/.test(text)) return "offroad";
+  if (/suv|crossover|rav4|harrier|cr-v|vezel|cx-5|glc|gle|gls|\bx[1-7]\b|\bq[23578]\b|кроссовер/.test(text)) return "suv";
   return undefined;
 }
 
@@ -86,8 +87,10 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const engineCc = reasonable(offer.engineCc, 300, 10_000) || inferEngineCc(primary) || inferEngineCc(full);
   const powerHp = reasonable(offer.powerHp, 20, 2500) || inferPowerHp(primary) || inferPowerHp(full);
   const powerKw = reasonable(offer.powerKw, 10, 2000) || (powerHp ? Math.round(powerHp / 1.35962) : undefined);
-  let fuel = inferFuel(primary) || inferFuel(full) || offer.fuel;
-  if (engineCc && fuel === "electric" && !/hybrid|hev|phev|plug[ -]?in|гибрид/.test(primary)) fuel = inferFuel(primary.replace(/electric|\bev\b|электро/g, " ")) || "petrol";
+  let fuel = inferFuel(primary) || offer.fuel || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
+  const strongElectric = /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
+  if (engineCc && fuel === "electric" && !strongElectric) fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
+  if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
   return {
     ...offer,
     sourceCurrency: normalizedCurrency(offer),
