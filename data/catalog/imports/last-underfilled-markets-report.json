@@ -1,38 +1,107 @@
 {
   "version": 14,
-  "finishedAt": "2026-07-18T04:35:33.728Z",
+  "finishedAt": "2026-07-18T05:03:28.712Z",
   "desiredPerMarket": 250,
   "publicByMarket": {
-    "uae": 0,
-    "europe": 0,
-    "china": 0
+    "uae": 53,
+    "europe": 141,
+    "china": 2
   },
   "missingByMarket": {
-    "uae": 250,
-    "europe": 250,
-    "china": 250
+    "uae": 197,
+    "europe": 109,
+    "china": 248
   },
   "markets": [
     {
       "market": "uae",
       "sourceId": "dubicars_uae_exact",
-      "fatal": true,
-      "finishedAt": "2026-07-18T04:35:25.591Z",
-      "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+      "startedAt": "2026-07-18T04:37:35.607Z",
+      "finishedAt": "2026-07-18T04:43:26.640Z",
+      "before": 8,
+      "after": 53,
+      "deficit": 242,
+      "gained": 45,
+      "reached": false,
+      "imported": 45,
+      "updated": 5,
+      "rejectedByQuality": 33,
+      "imageFailures": 10,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "dubicars_uae_exact",
+          "market": "uae",
+          "scanCycleId": "scan_e0528c72-7b3b-4f14-b6fe-fb82bb1fede5",
+          "ok": true,
+          "seen": 89,
+          "saved": 50,
+          "cursor": "5",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
     },
     {
       "market": "europe",
       "sourceId": "otomoto_europe_exact",
-      "fatal": true,
-      "finishedAt": "2026-07-18T04:35:30.018Z",
-      "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+      "startedAt": "2026-07-18T04:43:31.294Z",
+      "finishedAt": "2026-07-18T04:57:46.516Z",
+      "before": 7,
+      "after": 141,
+      "deficit": 243,
+      "gained": 134,
+      "reached": false,
+      "imported": 134,
+      "updated": 1,
+      "rejectedByQuality": 19,
+      "imageFailures": 0,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "otomoto_europe_exact",
+          "market": "europe",
+          "ok": false,
+          "seen": 153,
+          "saved": 135,
+          "error": "otomoto_current_zero_1079406"
+        }
+      ]
     },
     {
       "market": "china",
       "sourceId": "guazi_china_export",
-      "fatal": true,
-      "finishedAt": "2026-07-18T04:35:33.655Z",
-      "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+      "startedAt": "2026-07-18T04:57:51.217Z",
+      "finishedAt": "2026-07-18T05:03:28.226Z",
+      "before": 2,
+      "after": 2,
+      "deficit": 248,
+      "gained": 0,
+      "reached": false,
+      "imported": 0,
+      "updated": 0,
+      "rejectedByQuality": 0,
+      "imageFailures": 248,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "guazi_china_export",
+          "market": "china",
+          "scanCycleId": "scan_47ea2412-0a76-4295-92d0-71f220fc86c2",
+          "ok": true,
+          "seen": 248,
+          "saved": 0,
+          "cursor": "14",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
     }
   ]
 }
