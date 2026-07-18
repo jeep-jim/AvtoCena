@@ -1,0 +1,112 @@
+name: Catalog source parser fix v18
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-source-parser-fix-v18.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Patch source isolation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path_value, old, new, marker):
+              path = Path(path_value)
+              text = path.read_text(encoding='utf-8')
+              if old in text:
+                  text = text.replace(old, new, 1)
+              elif marker not in text:
+                  raise SystemExit(f'{path_value}: target missing')
+              path.write_text(text, encoding='utf-8')
+
+          replace(
+              'apps/web/lib/catalog/guazi-export-source.ts',
+              '    const card = markup.slice(Math.max(0, anchor.first - 2_500), Math.min(markup.length, nextIndex + 1_200));',
+              '    const card = markup.slice(anchor.first, Math.max(anchor.first, nextIndex));',
+              'markup.slice(anchor.first, Math.max(anchor.first, nextIndex))',
+          )
+          replace(
+              'apps/web/lib/catalog/guazi-export-source.ts',
+              '''    let urls = [...(row.images || [])];
+    if (urls.length < limit && row.url) {
+      const detail = await fetchHtml(row.url, row.url).catch(() => null);
+      if (detail?.response.ok) urls = [...urls, ...collectImages(detail.markup, row.url)];
+    }
+    const cached = await Promise.all([...new Set(urls)].slice(0, limit).map((url) =>
+      cacheImageFromUrl(url, "china", { headers: { ...HEADERS, referer: row.url } }).catch(() => null),
+    ));''',
+              '''    // Only images scoped to this listing card are allowed. Guazi detail
+    // pages contain recommendations for other cars in the same HTML document.
+    const urls = [...new Set(row.images || [])];
+    const cached = await Promise.all(urls.slice(0, limit).map((url) =>
+      cacheImageFromUrl(url, "china", { headers: { ...HEADERS, referer: row.url } }).catch(() => null),
+    ));''',
+              'Only images scoped to this listing card are allowed',
+          )
+          replace(
+              'apps/web/lib/catalog/importer-impl.ts',
+              '''                const freshImages = await source.fetchImages(base);
+                images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));''',
+              '''                const freshImages = credibleCatalogImages(await source.fetchImages(base));
+                images = freshImages.length
+                  ? source.sourceId === "guazi_china_export"
+                    ? freshImages.slice(0, maxImagesPerOffer)
+                    : credibleCatalogImages(mergeImages(freshImages, previousImages, maxImagesPerOffer))
+                  : previousImages;''',
+              'source.sourceId === "guazi_china_export"',
+          )
+          replace(
+              'apps/web/lib/catalog/otomoto-detail-source.ts',
+              '''        const markup = await fetchMarkup(url).catch(() => "");
+        if (!markup) return raw;
+        const parsed = embeddedPrice(markup) || visiblePrice(markup);
+        return parsed ? { ...row, price: parsed.price, currency: parsed.currency } : raw;''',
+              '''        const currentPrice = Number(row.price || 0);
+        const currentCurrency = String(row.currency || "").toUpperCase();
+        // The listing card is scoped to one offer. Do not overwrite it with
+        // finance widgets or recommended-car prices from the detail page.
+        if (currentPrice > 0 && ["PLN", "EUR"].includes(currentCurrency)) return raw;
+        const markup = await fetchMarkup(url).catch(() => "");
+        if (!markup) return raw;
+        const parsed = embeddedPrice(markup);
+        return parsed ? { ...row, price: parsed.price, currency: parsed.currency } : raw;''',
+              'The listing card is scoped to one offer',
+          )
+          path = Path('apps/web/lib/catalog/otomoto-current-source.ts')
+          text = path.read_text(encoding='utf-8')
+          old = 'const year=Number(plain.match(/(?:\\byear\\b\\s*)?\\b((?:19|20)\\d{2})\\b/i)?.[1]);'
+          new = '''const labeledYear=plain.match(/\\byear\\s+((?:19|20)\\d{2})\\b/i)?.[1];const htmlYear=block.match(/(?:data-testid|aria-label)=["'][^"']*year[^"']*["'][^>]*>[\\s\\S]{0,240}?\\b((?:19|20)\\d{2})\\b/i)?.[1];const titleYear=parsed.title.match(/\\b((?:19|20)\\d{2})\\b/)?.[1];const year=Number(labeledYear||htmlYear||titleYear);'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'const labeledYear=' not in text:
+              raise SystemExit('OTOMOTO year target missing')
+          path.write_text(text, encoding='utf-8')
+          PY
+      - run: npm run typecheck
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/guazi-export-source.ts apps/web/lib/catalog/importer-impl.ts apps/web/lib/catalog/otomoto-detail-source.ts apps/web/lib/catalog/otomoto-current-source.ts
+          git commit -m "Isolate China lot photos and OTOMOTO listing data [skip ci]" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
