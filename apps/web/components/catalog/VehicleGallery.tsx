@@ -125,13 +125,13 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
 
       <div className="mt-3 text-center text-sm font-black text-white/70">{activeIndex + 1} / {cleanImages.length}</div>
       {cleanImages.length > 1 ? (
-        <div className="ac-hide-scrollbar mx-auto mt-3 flex max-w-full gap-2 overflow-x-auto pb-1" onClick={(event) => event.stopPropagation()}>
+        <div className="ac-hide-scrollbar mx-auto mt-3 grid w-full max-w-[1100px] grid-flow-col auto-cols-[5rem] gap-2 overflow-x-auto pb-1 sm:auto-cols-[6rem] lg:auto-cols-[calc((100%-4.5rem)/10)]" onClick={(event) => event.stopPropagation()}>
           {cleanImages.map((thumbnail, index) => (
             <button
               key={`fullscreen-thumb-${thumbnail}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-xl transition ${index === activeIndex ? "opacity-100" : "opacity-45 hover:opacity-85"}`}
+              className={`relative h-14 w-full shrink-0 overflow-hidden rounded-xl transition-opacity sm:h-16 ${index === activeIndex ? "opacity-100" : "opacity-45 hover:opacity-85"}`}
               aria-label={`Открыть фото ${index + 1}`}
             >
               <img src={thumbnail} alt="" className="h-full w-full object-cover" draggable={false} />
@@ -161,13 +161,13 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
         </button>
 
         {cleanImages.length > 1 ? (
-          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 grid max-w-full grid-flow-col auto-cols-[7rem] gap-2.5 overflow-x-auto pb-2 pr-1 md:auto-cols-[minmax(68px,1fr)] md:gap-3 md:pb-0 md:pr-0">
+          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 grid max-w-full grid-flow-col auto-cols-[7rem] gap-2.5 overflow-x-auto pb-2 pr-1 sm:auto-cols-[8rem] lg:auto-cols-[calc((100%-5.625rem)/10)] lg:pb-0 lg:pr-0">
             {cleanImages.map((thumbnail, index) => (
               <button
                 key={`${thumbnail}-${index}`}
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`relative h-20 w-full shrink-0 cursor-pointer overflow-hidden rounded-2xl transition duration-200 md:h-24 ${index === activeIndex ? "scale-[1.02] opacity-100" : "opacity-55 hover:opacity-90"}`}
+                className={`relative h-20 w-full shrink-0 cursor-pointer overflow-hidden rounded-2xl transition-opacity duration-200 md:h-24 ${index === activeIndex ? "opacity-100" : "opacity-55 hover:opacity-90"}`}
                 aria-label={`Открыть фото ${index + 1}`}
                 aria-pressed={index === activeIndex}
               >
