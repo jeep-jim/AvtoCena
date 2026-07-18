@@ -1,4 +1,4 @@
-name: Catalog underfilled markets recovery v9
+name: Catalog China Europe UAE recovery v10
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
     paths:
       - .github/workflows/catalog-production-recovery-once-v2.yml
       - scripts/catalog-fill-underfilled-markets.mjs
+      - apps/web/lib/catalog/guazi-export-source.ts
+      - apps/web/lib/catalog/otomoto-current-source.ts
+      - apps/web/lib/catalog/dubicars-exact-source.ts
+      - apps/web/lib/catalog/exact-market-sources.ts
 
 permissions:
   contents: write
@@ -18,7 +22,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,8 +30,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Validate recovery script
-        run: node --check scripts/catalog-fill-underfilled-markets.mjs
+      - name: Validate catalog adapters
+        run: |
+          npm run typecheck
+          node --check scripts/catalog-fill-underfilled-markets.mjs
       - name: Remove local test catalog
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
@@ -50,12 +56,12 @@ jobs:
           <<: *storage
           CATALOG_RECOVERY_WINDOW_MS: "3888000000"
           CATALOG_RECOVERY_MIN_PUBLIC: "1"
-      - name: Restart all underfilled market cursors
+      - name: Restart China Europe UAE cursors
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           <<: *storage
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,sbt_china,otomoto_europe_exact,autoscout_europe,sbt_uk,dubicars_uae_exact,dubicars_clean,sbt_uae
-      - name: Fill China Europe UAE and Korea to 250 public offers
+          CATALOG_IMPORT_SOURCES: guazi_china_export,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,sbt_china,otomoto_europe_exact,autoscout_europe,sbt_uk,dubicars_uae_exact,dubicars_clean,sbt_uae
+      - name: Fill China Europe and UAE to 250 public offers
         shell: bash
         run: |
           set +e
@@ -74,7 +80,7 @@ jobs:
           exit 0
         env:
           <<: *storage
-          CATALOG_FILL_MARKETS: china,europe,uae,korea
+          CATALOG_FILL_MARKETS: china,europe,uae
           CATALOG_DESIRED_PER_MARKET: "250"
           CATALOG_CANDIDATE_MULTIPLIER: "4"
           CATALOG_MIN_CANDIDATES: "100"
@@ -82,10 +88,6 @@ jobs:
           CATALOG_IMPORT_MAX_PAGES: "100"
           CATALOG_MAX_IMAGES_PER_OFFER: "3"
           CATALOG_LOCK_WAIT_MS: "2700000"
-          CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
-          CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
-          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "300"
-          CATALOG_ENCAR_DIRECT_IMAGE_RPM: "900"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
@@ -96,7 +98,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-underfilled-markets-v9
+          name: catalog-china-europe-uae-v10
           path: |
             catalog-underfilled-markets-report.json
             catalog-underfilled-markets.log
@@ -111,24 +113,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/catalog/imports/last-underfilled-markets-report.json
-          git commit -m "Record underfilled market recovery v9 report [skip ci]" || exit 0
+          git commit -m "Record China Europe UAE recovery v10 report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
         run: |
           node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
-          const path = 'catalog-underfilled-markets-report.json';
-          if (!fs.existsSync(path)) { console.log('Отчёт не создан.'); process.exit(0); }
-          const r = JSON.parse(fs.readFileSync(path, 'utf8'));
-          if (r.fatal) console.log(`FATAL: ${r.message}; exitCode=${r.exitCode}`);
-          console.log(`Цель каждого рынка: ${r.desiredPerMarket || 250}`);
-          for (const market of ['korea','china','japan','uae','europe']) {
-            console.log(`- ${market}: ${r.publicByMarket?.[market] || 0}; осталось ${r.missingByMarket?.[market] || 0}`);
+          const report = JSON.parse(fs.readFileSync('catalog-underfilled-markets-report.json', 'utf8'));
+          console.log(`Fatal: ${Boolean(report.fatal)}`);
+          for (const market of ['china','europe','uae']) {
+            console.log(`- ${market}: ${report.publicByMarket?.[market] || 0}; missing ${report.missingByMarket?.[market] || 0}`);
           }
-          console.log('\n### Проходы по рынкам');
-          for (const market of r.markets || []) {
-            console.log(`- ${market.market}: ${market.before || 0} → ${market.after || 0}; gained=${market.gained || 0}; reached=${Boolean(market.reached)}; error=${market.error || 'none'}`);
-            for (const source of market.sources || []) console.log(`  - ${source.sourceId}: ${source.ok ? `OK seen=${source.seen || 0} saved=${source.saved || 0}` : `ERROR ${source.error || ''}`}`);
+          for (const market of report.markets || []) {
+            console.log(`\n### ${market.market}: ${market.before || 0} -> ${market.after || 0}`);
+            for (const source of market.sources || []) console.log(`- ${source.sourceId}: ${source.ok ? `OK seen=${source.seen || 0} saved=${source.saved || 0}` : `ERROR ${source.error || ''}`}`);
           }
           NODE
