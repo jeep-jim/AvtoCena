@@ -1,4 +1,4 @@
-name: Catalog China Europe UAE recovery v10
+name: Catalog China Europe UAE recovery v11
 
 on:
   workflow_dispatch:
@@ -9,7 +9,8 @@ on:
       - scripts/catalog-fill-underfilled-markets.mjs
       - apps/web/lib/catalog/guazi-export-source.ts
       - apps/web/lib/catalog/otomoto-current-source.ts
-      - apps/web/lib/catalog/dubicars-exact-source.ts
+      - apps/web/lib/catalog/otomoto-detail-source.ts
+      - apps/web/lib/catalog/dubicars-current-source.ts
       - apps/web/lib/catalog/exact-market-sources.ts
 
 permissions:
@@ -30,10 +31,18 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Validate catalog adapters
+      - name: Prepare deficit-capped recovery script
         run: |
-          npm run typecheck
-          node --check scripts/catalog-fill-underfilled-markets.mjs
+          node - <<'NODE'
+          const fs = require('fs');
+          const sourcePath = 'scripts/catalog-fill-underfilled-markets.mjs';
+          const runtimePath = 'scripts/catalog-fill-underfilled-runtime.mjs';
+          const needle = 'process.env.CATALOG_TARGET_PER_MARKET = String(candidateTarget);';
+          const source = fs.readFileSync(sourcePath, 'utf8');
+          if (!source.includes(needle)) throw new Error('target line not found');
+          fs.writeFileSync(runtimePath, source.replace(needle, 'process.env.CATALOG_TARGET_PER_MARKET = String(deficit);'));
+          NODE
+          node --check scripts/catalog-fill-underfilled-runtime.mjs
       - name: Remove local test catalog
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
@@ -65,7 +74,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          npx tsx scripts/catalog-fill-underfilled-markets.mjs 2>&1 | tee catalog-underfilled-markets.log
+          npx tsx scripts/catalog-fill-underfilled-runtime.mjs 2>&1 | tee catalog-underfilled-markets.log
           status=${PIPESTATUS[0]}
           if [ ! -f catalog-underfilled-markets-report.json ]; then
             STATUS="$status" node - <<'NODE'
@@ -98,7 +107,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-china-europe-uae-v10
+          name: catalog-china-europe-uae-v11
           path: |
             catalog-underfilled-markets-report.json
             catalog-underfilled-markets.log
@@ -113,7 +122,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/catalog/imports/last-underfilled-markets-report.json
-          git commit -m "Record China Europe UAE recovery v10 report [skip ci]" || exit 0
+          git commit -m "Record China Europe UAE recovery v11 report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
