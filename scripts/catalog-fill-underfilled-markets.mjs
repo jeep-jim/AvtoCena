@@ -36,9 +36,9 @@ const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_
 const lockWaitMs = Math.max(60_000, Number(process.env.CATALOG_LOCK_WAIT_MS || 45 * 60 * 1000));
 
 const marketPlans = [
-  { market: "china", globalBudgetMs: 75 * 60 * 1000, sourceBudgetMs: 14 * 60 * 1000, sources: ["che168_dealer_exact", "che168_clean", "che168_html", "che168_china_exact", "che168_global", "sbt_china"] },
-  { market: "europe", globalBudgetMs: 55 * 60 * 1000, sourceBudgetMs: 17 * 60 * 1000, sources: ["otomoto_europe_exact", "autoscout_europe", "sbt_uk"] },
-  { market: "uae", globalBudgetMs: 35 * 60 * 1000, sourceBudgetMs: 14 * 60 * 1000, sources: ["dubicars_uae_exact", "dubicars_clean", "sbt_uae"] },
+  { market: "china", globalBudgetMs: 80 * 60 * 1000, sourceBudgetMs: 24 * 60 * 1000, sources: ["guazi_china_export", "che168_dealer_exact", "che168_clean", "che168_html", "che168_china_exact", "che168_global", "sbt_china"] },
+  { market: "europe", globalBudgetMs: 60 * 60 * 1000, sourceBudgetMs: 20 * 60 * 1000, sources: ["otomoto_europe_exact", "autoscout_europe", "sbt_uk"] },
+  { market: "uae", globalBudgetMs: 40 * 60 * 1000, sourceBudgetMs: 16 * 60 * 1000, sources: ["dubicars_uae_exact", "dubicars_clean", "sbt_uae"] },
   { market: "korea", globalBudgetMs: 75 * 60 * 1000, sourceBudgetMs: 72 * 60 * 1000, sources: ["encar_direct"] },
 ];
 
