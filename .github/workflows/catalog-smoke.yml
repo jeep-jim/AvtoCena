@@ -3,10 +3,22 @@ name: Catalog smoke
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-smoke.yml
+      - scripts/catalog-source-diagnostic.mjs
+      - apps/web/lib/catalog/guazi-export-source.ts
+      - apps/web/lib/catalog/otomoto-current-source.ts
+      - apps/web/lib/catalog/dubicars-exact-source.ts
+      - apps/web/lib/catalog/exact-market-sources.ts
+
+permissions:
+  contents: write
 
 jobs:
   encar-smoke:
-    name: Encar catalog smoke
+    name: Catalog source smoke
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +33,45 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Live China Europe UAE diagnostic
+        shell: bash
+        run: |
+          set +e
+          npx tsx scripts/catalog-source-diagnostic.mjs 2>&1 | tee catalog-source-diagnostic.log
+          status=${PIPESTATUS[0]}
+          if [ ! -f catalog-source-diagnostic-report.json ]; then
+            STATUS="$status" node - <<'NODE'
+          const fs = require('fs');
+          fs.writeFileSync('catalog-source-diagnostic-report.json', JSON.stringify({ fatal: true, exitCode: Number(process.env.STATUS || 1), message: 'Diagnostic failed before report creation.' }, null, 2));
+          NODE
+          fi
+          exit 0
+        env:
+          CATALOG_DIAGNOSTIC_SOURCES: guazi_china_export,otomoto_europe_exact,dubicars_uae_exact
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_DIAGNOSTIC_REPORT_FILE: catalog-source-diagnostic-report.json
+
+      - name: Record diagnostic report
+        if: github.event_name == 'push'
+        run: |
+          mkdir -p data/catalog/imports
+          cp catalog-source-diagnostic-report.json data/catalog/imports/last-source-diagnostic-report.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/imports/last-source-diagnostic-report.json
+          git commit -m "Record live catalog source diagnostic [skip ci]" || exit 0
+          git push origin HEAD:main
+
+      - name: Upload source diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-source-diagnostic
+          path: |
+            catalog-source-diagnostic-report.json
+            catalog-source-diagnostic.log
+          if-no-files-found: ignore
 
       - name: Validate strict importer syntax
         run: node --check scripts/catalog-import-strict.mjs
