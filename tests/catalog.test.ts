@@ -7,7 +7,7 @@ import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/
 
 process.env.JSON_STORAGE_DRIVER = "local";
 delete process.env.CATALOG_IMAGE_CDN_URL;
-const image = { id: "img1", url: "/api/catalog/images/img1", objectKey: "catalog/images/japan/a.jpg", size: 10, checksum: "abc", mimeType: "image/jpeg" };
+const image = { id: "img1", url: "/api/catalog/images/img1", objectKey: "catalog/images/japan/a.jpg", size: 10_000, checksum: "abc", mimeType: "image/jpeg" };
 
 
 

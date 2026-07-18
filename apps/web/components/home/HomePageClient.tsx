@@ -13,7 +13,7 @@ import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 type Option = { value: string; label: string; min?: number; max?: number };
-type Item = { raw: any; id: string; make: string; model: string; market: string };
+type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string };
 type Rate = { currency: string; effectiveRate: number };
 
 const budgets: Option[] = [
@@ -125,20 +125,33 @@ export default function HomePageClient() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/catalog/search?pageSize=30&sort=updatedAt&includeRates=1", { cache: "no-store" }).then((response) => response.json()),
-      ...marketIds.map((id) => fetch(`/api/catalog/search?market=${id}&pageSize=30&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json())),
-    ]).then((responses) => {
-      const unique = new Map<string, Item>();
-      for (const raw of responses.flatMap((response) => Array.isArray(response?.items) ? response.items : [])) {
-        if (!isCrediblePublicOffer(raw as any)) continue;
-        const offer = presentCatalogOffer(raw);
-        unique.set(offer.id, { raw, id: offer.id, make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || ""), market: offer.market });
-      }
-      setItems([...unique.values()]);
-      setRates(Array.isArray(responses[0]?.rates) ? responses[0].rates : []);
-      setMarketCounts(Object.fromEntries(marketIds.map((id, index) => [id, Number(responses[index + 1]?.total || 0)])));
-    }).catch(() => setItems([]));
+    let cancelled = false;
+    const loadCatalog = async () => {
+      const stamp = Date.now();
+      try {
+        const responses = await Promise.all([
+          fetch(`/api/catalog/search?pageSize=48&sort=updatedAt&includeRates=1&_=${stamp}`, { cache: "no-store", headers: { "cache-control": "no-cache" } }).then((response) => response.json()),
+          ...marketIds.map((id) => fetch(`/api/catalog/search?market=${id}&pageSize=48&sort=updatedAt&_=${stamp}`, { cache: "no-store", headers: { "cache-control": "no-cache" } }).then((response) => response.json())),
+        ]);
+        if (cancelled) return;
+        const unique = new Map<string, Item>();
+        for (const raw of responses.flatMap((response) => Array.isArray(response?.items) ? response.items : [])) {
+          if (!isCrediblePublicOffer(raw as any)) continue;
+          const offer = presentCatalogOffer(raw);
+          unique.set(offer.id, { raw, id: offer.id, make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined });
+        }
+        setItems([...unique.values()]);
+        setRates(Array.isArray(responses[0]?.rates) ? responses[0].rates : []);
+        setMarketCounts(Object.fromEntries(marketIds.map((id, index) => [id, Number(responses[index + 1]?.total || 0)])));
+      } catch { if (!cancelled) setItems([]); }
+    };
+    loadCatalog();
+    const interval = window.setInterval(loadCatalog, 60_000);
+    const focus = () => loadCatalog();
+    const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
+    window.addEventListener("focus", focus);
+    document.addEventListener("visibilitychange", visibility);
+    return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
   }, []);
 
   useEffect(() => {
@@ -160,6 +173,10 @@ export default function HomePageClient() {
     items.filter((item) => !make || item.make === make).forEach((item) => values.set(item.model, presentCatalogOffer(item.raw).modelLabel));
     return [{ value: "", label: "Модель" }, ...[...values].filter(([value]) => value).sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
   }, [items, make]);
+  const bodyOptions = useMemo<Option[]>(() => {
+    const available = new Set(items.map((item) => item.bodyType).filter(Boolean));
+    return [bodies[0], ...bodies.slice(1).filter((option) => available.has(option.value))];
+  }, [items]);
   const selectedBudget = budgets.find((option) => option.value === budget) || budgets[0];
 
   useEffect(() => {
@@ -202,7 +219,7 @@ export default function HomePageClient() {
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
       <section className="ac-home-hero grid items-start gap-7 py-7 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
         <div><h1 className="max-w-4xl text-[44px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[82px] xl:text-[96px]">Цена на авто под заказ</h1><p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
-        <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5"><div className="mb-3 flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div><HomeSelect value={budget} options={budgets} onChange={setBudget} /><div className="mt-3 grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div><div className="mt-3 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><div className="col-span-2"><HomeSelect value={body} options={bodies} onChange={setBody} /></div></div><div className="mt-4 grid grid-cols-[minmax(0,1fr)_58px] overflow-hidden rounded-2xl lg:block"><button type="button" onClick={submit} className="avto-button h-[58px] w-full rounded-none text-base font-black lg:rounded-2xl">Узнать Цену</button><button type="button" onClick={() => setMobileFiltersOpen(true)} className="ac-filter-more-button flex h-[58px] items-center justify-center border-l border-white/10 lg:hidden" aria-label="Открыть дополнительные фильтры"><SlidersIcon /></button></div></div>
+        <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5"><div className="mb-3 flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div><HomeSelect value={budget} options={budgets} onChange={setBudget} /><div className="mt-3 grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div><div className="mt-3 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><div className="col-span-2"><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div></div><div className="mt-4 grid grid-cols-[minmax(0,1fr)_58px] overflow-hidden rounded-2xl lg:block"><button type="button" onClick={submit} className="avto-button h-[58px] w-full rounded-none text-base font-black lg:rounded-2xl">Узнать Цену</button><button type="button" onClick={() => setMobileFiltersOpen(true)} className="ac-filter-more-button flex h-[58px] items-center justify-center border-l border-white/10 lg:hidden" aria-label="Открыть дополнительные фильтры"><SlidersIcon /></button></div></div>
       </section>
 
       <section className="ac-mobile-rates grid grid-cols-5 rounded-[1.4rem] px-2 py-4 lg:hidden">{[["🇯🇵", "JPY", 100], ["🇨🇳", "CNY", 1], ["🇰🇷", "KRW", 1000], ["🇦🇪", "AED", 1], ["🇪🇺", "EUR", 1]].map(([flag, currency, amount]) => <div key={String(currency)} className="text-center"><div className="text-2xl">{flag}</div><div className="text-[9px] font-black">{currency}</div><div className="text-[10px] font-bold text-white/60">{rateMap.has(String(currency)) ? `${(Number(rateMap.get(String(currency))) * Number(amount)).toFixed(2)} ₽` : "—"}</div></div>)}</section>
@@ -217,6 +234,6 @@ export default function HomePageClient() {
       </section>
     </div>
 
-    {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)] p-5" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><HomeSelect value={body} options={bodies} onChange={setBody} /></div><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button mt-6 h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div></div> : null}
+    {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)] p-5" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button mt-6 h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div></div> : null}
   </main>;
 }
