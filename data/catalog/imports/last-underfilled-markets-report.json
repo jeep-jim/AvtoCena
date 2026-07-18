@@ -1,124 +1,54 @@
 {
   "version": 15,
-  "finishedAt": "2026-07-18T10:45:55.854Z",
+  "finishedAt": "2026-07-18T15:36:45.815Z",
   "desiredPerMarket": 250,
   "publicByMarket": {
     "korea": 500,
     "uae": 250,
-    "europe": 237,
-    "china": 248
+    "europe": 523,
+    "china": 0
   },
   "missingByMarket": {
     "korea": 0,
     "uae": 0,
-    "europe": 13,
-    "china": 2
+    "europe": 0,
+    "china": 250
   },
   "markets": [
     {
       "market": "korea",
       "protectedGrowOnly": true,
       "count": 500,
-      "checkedAt": "2026-07-18T10:38:06.285Z"
+      "checkedAt": "2026-07-18T15:35:04.209Z"
     },
     {
       "market": "uae",
       "sourceId": "dubicars_uae_exact",
-      "startedAt": "2026-07-18T10:38:12.522Z",
-      "finishedAt": "2026-07-18T10:42:19.055Z",
-      "before": 212,
+      "startedAt": "2026-07-18T15:35:10.866Z",
+      "finishedAt": "2026-07-18T15:35:14.543Z",
+      "before": 250,
       "after": 250,
-      "deficit": 38,
-      "candidateLimit": 114,
-      "gained": 38,
+      "deficit": 0,
+      "gained": 0,
       "reached": true,
-      "imported": 15,
-      "updated": 23,
-      "rejectedByQuality": 0,
-      "imageFailures": 0,
-      "deadlineReached": false,
-      "sources": [
-        {
-          "sourceId": "dubicars_uae_exact",
-          "market": "uae",
-          "scanCycleId": "scan_1c51dc96-52a4-4dbc-beb3-4fea54ef8fa6",
-          "ok": true,
-          "seen": 38,
-          "saved": 38,
-          "cursor": "3",
-          "sourceExhausted": false,
-          "stoppedByLimit": true,
-          "stoppedByBudget": false,
-          "partialScan": true,
-          "staleEligible": false
-        }
-      ]
+      "skipped": true
     },
     {
       "market": "europe",
       "sourceId": "otomoto_europe_exact",
-      "startedAt": "2026-07-18T10:42:21.466Z",
-      "finishedAt": "2026-07-18T10:44:19.980Z",
-      "before": 232,
-      "after": 237,
-      "deficit": 18,
-      "candidateLimit": 80,
-      "gained": 5,
-      "reached": false,
-      "imported": 5,
-      "updated": 13,
-      "rejectedByQuality": 0,
-      "imageFailures": 1,
-      "deadlineReached": false,
-      "sources": [
-        {
-          "sourceId": "otomoto_europe_exact",
-          "market": "europe",
-          "scanCycleId": "scan_c947c0e7-3a50-4fd9-a9dd-a86f02fa1e4a",
-          "ok": true,
-          "seen": 18,
-          "saved": 18,
-          "cursor": "1",
-          "sourceExhausted": false,
-          "stoppedByLimit": true,
-          "stoppedByBudget": false,
-          "partialScan": true,
-          "staleEligible": false
-        }
-      ]
+      "startedAt": "2026-07-18T15:35:16.630Z",
+      "finishedAt": "2026-07-18T15:35:20.084Z",
+      "before": 523,
+      "after": 523,
+      "deficit": 0,
+      "gained": 0,
+      "reached": true,
+      "skipped": true
     },
     {
       "market": "china",
-      "sourceId": "guazi_china_export",
-      "startedAt": "2026-07-18T10:44:22.223Z",
-      "finishedAt": "2026-07-18T10:45:55.355Z",
-      "before": 248,
-      "after": 248,
-      "deficit": 2,
-      "candidateLimit": 80,
-      "gained": 0,
-      "reached": false,
-      "imported": 0,
-      "updated": 2,
-      "rejectedByQuality": 0,
-      "imageFailures": 0,
-      "deadlineReached": false,
-      "sources": [
-        {
-          "sourceId": "guazi_china_export",
-          "market": "china",
-          "scanCycleId": "scan_c69b1227-47cc-4e39-b699-03889d1a374d",
-          "ok": true,
-          "seen": 2,
-          "saved": 2,
-          "cursor": "2",
-          "sourceExhausted": false,
-          "stoppedByLimit": true,
-          "stoppedByBudget": false,
-          "partialScan": true,
-          "staleEligible": false
-        }
-      ]
+      "fatal": true,
+      "error": "progress_file_missing"
     }
   ]
 }
