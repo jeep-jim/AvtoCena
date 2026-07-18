@@ -16,6 +16,15 @@ function SpecTile({ label, value }: { label: string; value: string }) {
   return <div className="ac-offer-spec-tile min-w-0 rounded-2xl bg-[var(--ac-surface-2)] px-3.5 py-3"><div className="ac-offer-spec-label text-[9px] font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]">{label}</div><div className="ac-offer-spec-value mt-1 min-w-0 break-words text-[13px] font-black leading-tight text-[var(--ac-text)] md:text-sm">{value}</div></div>;
 }
 
+function safeExternalUrl(value: unknown) {
+  try {
+    const url = new URL(String(value || ""));
+    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
 type BreakdownLine = { id?: string; title: string; amountRub: number };
 function priceBreakdown(offer: any): BreakdownLine[] {
   const actual = Array.isArray(offer?.calculationSnapshot?.breakdown)
@@ -41,8 +50,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const offer = await getOffer(id);
   if (!offer || !isCrediblePublicOffer(offer)) return <MissingOffer />;
 
+  const sourceUrl = safeExternalUrl((offer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(offer));
   const o = presentCatalogOffer(raw);
+  const updatedAt = new Date(o.updatedAt);
+  const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
+  const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
   const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined, pageSize: 16, sort: "updatedAt" });
   const similar = similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)).slice(0, 12);
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
@@ -61,7 +74,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <div className="order-2 min-w-0 overflow-hidden xl:col-start-1 xl:row-start-2"><VehicleGallery images={o.images} title={o.title} /></div>
         <aside className="ac-offer-detail-stack order-4 min-w-0 xl:col-start-2 xl:row-start-2">
           <div className="grid min-w-0 gap-4 md:grid-cols-[minmax(0,1.05fr)_minmax(230px,.95fr)] xl:grid-cols-[minmax(0,1fr)_minmax(215px,.95fr)]"><div className="grid min-w-0 grid-cols-2 gap-2.5"><SpecTile label="Год" value={String(o.year)} /><SpecTile label="Пробег" value={o.mileageKm ? `${money(o.mileageKm)} км` : "не указан продавцом"} /><SpecTile label="Двигатель" value={o.engineCc ? `${o.engineCc} см³` : o.fuelLabel === "электро" ? "электромотор" : "не указан продавцом"} /><SpecTile label="Топливо" value={o.fuelLabel} /><SpecTile label="Мощность" value={o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "не указана продавцом"} /><SpecTile label="Коробка" value={o.transmissionLabel} /><SpecTile label="Привод" value={o.driveLabel} /><SpecTile label="Кузов" value={o.bodyLabel} /></div><OfferPriceBreakdown offer={o} /></div>
-          <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><div className="ac-offer-block-title text-base font-black text-[var(--ac-text)]">Статус предложения</div><p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {new Date(o.updatedAt).toLocaleString("ru-RU")}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p></div>
+          <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><div className="ac-offer-block-title text-base font-black text-[var(--ac-text)]">Статус предложения</div><p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p></div>
           <div className="ac-offer-form mt-5 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-6 [&>form]:mt-0"><OfferLeadForm offerId={o.id} /></div>
         </aside>
       </div>
