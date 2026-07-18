@@ -1,4 +1,4 @@
-name: Catalog exact markets fill v13
+name: Catalog exact markets fill v14
 
 on:
   workflow_dispatch:
@@ -25,6 +25,20 @@ jobs:
     timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
+
+      - name: Record launch marker
+        run: |
+          mkdir -p data/catalog/imports
+          node - <<'NODE'
+          const fs = require('fs');
+          fs.writeFileSync('data/catalog/imports/exact-fill-status.json', JSON.stringify({ status: 'running', version: 14, startedAt: new Date().toISOString(), order: ['uae','europe','china'] }, null, 2));
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/imports/exact-fill-status.json
+          git commit -m "Start exact market fill v14 [skip ci]" || true
+          git push origin HEAD:main || true
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -76,7 +90,6 @@ jobs:
             const source = catalogImportSources.find((item) => item.sourceId === sourceId);
             if (!source) throw new Error(`source_not_registered_${sourceId}`);
 
-            const candidateLimit = deficit;
             process.env.CATALOG_TARGET_PER_MARKET = String(deficit);
             process.env.CATALOG_TARGET_PUBLIC_OFFERS = String(desired * 5);
             process.env.CATALOG_IMPORT_BUDGET_MS = String(55 * 60 * 1000);
@@ -92,15 +105,15 @@ jobs:
               blockedUntil: undefined,
               consecutiveFailures: 0,
               maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), maxPages),
-              maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), candidateLimit),
-              maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), candidateLimit),
+              maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), deficit),
+              maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), deficit),
               imagesEnabled: true,
             }));
 
             const result = await importCatalog({
               sourceIds: [sourceId],
-              maxOffers: candidateLimit,
-              maxDetails: candidateLimit,
+              maxOffers: deficit,
+              maxDetails: deficit,
               maxImagesPerOffer: 3,
               maxPages,
               requireObjectStorage: true,
@@ -118,7 +131,6 @@ jobs:
               before,
               after,
               deficit,
-              candidateLimit,
               gained: Math.max(0, after - before),
               reached: after >= desired,
               imported: Number(result.imported || 0),
@@ -138,19 +150,6 @@ jobs:
           NODE
           node --check scripts/catalog-exact-one-market.mjs
 
-      - name: Record launch marker
-        run: |
-          mkdir -p data/catalog/imports
-          node - <<'NODE'
-          const fs = require('fs');
-          fs.writeFileSync('data/catalog/imports/exact-fill-status.json', JSON.stringify({ status: 'running', version: 13, startedAt: new Date().toISOString(), order: ['uae','europe','china'] }, null, 2));
-          NODE
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/catalog/imports/exact-fill-status.json
-          git commit -m "Start exact market fill v13 [skip ci]" || true
-          git push origin HEAD:main || true
-
       - name: Fill UAE
         shell: bash
         continue-on-error: true
@@ -159,7 +158,7 @@ jobs:
           npx tsx scripts/catalog-reset-underfilled-scans.mjs
           npx tsx scripts/catalog-exact-one-market.mjs 2>&1 | tee catalog-uae.log
           exit 0
-        env: &storage
+        env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
           YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
@@ -194,11 +193,19 @@ jobs:
           npx tsx scripts/catalog-exact-one-market.mjs 2>&1 | tee catalog-europe.log
           exit 0
         env:
-          <<: *storage
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMPORT_SOURCES: otomoto_europe_exact
           CATALOG_EXACT_MARKET: europe
           CATALOG_EXACT_SOURCE: otomoto_europe_exact
           CATALOG_EXACT_MAX_PAGES: "12"
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_IMAGE_TIMEOUT_MS: "12000"
 
       - name: Record Europe result
         if: always()
@@ -220,13 +227,21 @@ jobs:
           npx tsx scripts/catalog-exact-one-market.mjs 2>&1 | tee catalog-china.log
           exit 0
         env:
-          <<: *storage
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMPORT_SOURCES: guazi_china_export
           CATALOG_EXACT_MARKET: china
           CATALOG_EXACT_SOURCE: guazi_china_export
           CATALOG_EXACT_MAX_PAGES: "16"
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_IMAGE_TIMEOUT_MS: "12000"
 
-      - name: Record China result
+      - name: Record China and final result
         if: always()
         run: |
           git pull --rebase origin main || true
@@ -235,11 +250,11 @@ jobs:
           cp catalog-china-progress.json data/catalog/imports/last-china-exact-fill.json
           node - <<'NODE'
           const fs = require('fs');
-          const read = (name) => { try { return JSON.parse(fs.readFileSync(name, 'utf8')); } catch { return { market: name, fatal: true, error: 'missing' }; } };
-          const markets = [read('catalog-uae-progress.json'), read('catalog-europe-progress.json'), read('catalog-china-progress.json')];
+          const read = (name, market) => { try { return JSON.parse(fs.readFileSync(name, 'utf8')); } catch { return { market, fatal: true, error: 'missing' }; } };
+          const markets = [read('catalog-uae-progress.json','uae'), read('catalog-europe-progress.json','europe'), read('catalog-china-progress.json','china')];
           const publicByMarket = Object.fromEntries(markets.map((item) => [item.market, Number(item.after || item.before || 0)]));
-          fs.writeFileSync('data/catalog/imports/last-underfilled-markets-report.json', JSON.stringify({ version: 13, finishedAt: new Date().toISOString(), desiredPerMarket: 250, publicByMarket, missingByMarket: Object.fromEntries(markets.map((item) => [item.market, Math.max(0, 250 - Number(item.after || item.before || 0))])), markets }, null, 2));
-          fs.writeFileSync('data/catalog/imports/exact-fill-status.json', JSON.stringify({ status: 'completed', version: 13, finishedAt: new Date().toISOString(), publicByMarket }, null, 2));
+          fs.writeFileSync('data/catalog/imports/last-underfilled-markets-report.json', JSON.stringify({ version: 14, finishedAt: new Date().toISOString(), desiredPerMarket: 250, publicByMarket, missingByMarket: Object.fromEntries(markets.map((item) => [item.market, Math.max(0, 250 - Number(item.after || item.before || 0))])), markets }, null, 2));
+          fs.writeFileSync('data/catalog/imports/exact-fill-status.json', JSON.stringify({ status: 'completed', version: 14, finishedAt: new Date().toISOString(), publicByMarket }, null, 2));
           NODE
           git add data/catalog/imports/last-china-exact-fill.json data/catalog/imports/last-underfilled-markets-report.json data/catalog/imports/exact-fill-status.json
           git commit -m "Record China and final exact fill results [skip ci]" || true
@@ -248,7 +263,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-exact-markets-v13
+          name: catalog-exact-markets-v14
           path: |
             catalog-*-progress.json
             catalog-*.log
