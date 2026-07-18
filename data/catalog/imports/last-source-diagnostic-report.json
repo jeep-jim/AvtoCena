@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-07-18T03:40:09.242Z",
+  "startedAt": "2026-07-18T11:40:23.254Z",
   "requested": [
     "guazi_china_export",
     "otomoto_europe_exact",
@@ -10,27 +10,27 @@
       "sourceId": "guazi_china_export",
       "market": "china",
       "ok": true,
-      "durationMs": 1136,
+      "durationMs": 1083,
       "raw": 20,
       "normalized": 20,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "Guazi export volkswagen page 1: parsed 20",
-        "checkedAt": "2026-07-18T03:40:10.371Z",
+        "checkedAt": "2026-07-18T11:40:24.329Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
       "samples": [
         {
           "make": "Volkswagen",
-          "model": "Tayron GTE Plug-in Hybrid 2024 280TSI Luxury Plus",
-          "year": 2024,
-          "price": 18398,
+          "model": "Passat 2013 1.8TSI DSG Prestige Edition",
+          "year": 2013,
+          "price": 2892,
           "currency": "USD",
-          "mileageKm": 39900,
-          "fuel": "hybrid",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-tayron-gte-plug-in-hybrid-2024-14l-black-39900km-at-2wd-5-seats-l2ncve5293.html",
+          "mileageKm": 302400,
+          "fuel": "petrol",
+          "sourceUrl": "https://en.guazi.com/products/volkswagen-passat-2013-18l-black-302400km-at-2wd-5-seats-9q9s56yf7h.html",
           "rawImages": 6
         },
         {
@@ -46,13 +46,13 @@
         },
         {
           "make": "Volkswagen",
-          "model": "Jetta 2015 Value Edition 1.6L Manual Fashionable Style",
-          "year": 2015,
-          "price": 2398,
+          "model": "Tiguan L 2019 330TSI Automatic Two-Wheel Drive Panoramic",
+          "year": 2019,
+          "price": 10790,
           "currency": "USD",
-          "mileageKm": 275000,
+          "mileageKm": 145100,
           "fuel": "petrol",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-jetta-2015-16l-champagne-275000km-mt-2wd-5-seats-alxkbk2j3s.html",
+          "sourceUrl": "https://en.guazi.com/products/volkswagen-tiguan-l-2019-20l-silver-145100km-at-2wd-5-seats-6kl3g4hun3.html",
           "rawImages": 6
         }
       ]
@@ -61,50 +61,50 @@
       "sourceId": "otomoto_europe_exact",
       "market": "europe",
       "ok": true,
-      "durationMs": 5658,
-      "raw": 32,
-      "normalized": 31,
-      "nextCursor": "2",
+      "durationMs": 18138,
+      "raw": 28,
+      "normalized": 28,
+      "nextCursor": "1",
       "health": {
         "ok": true,
-        "message": "OTOMOTO page 1: 32; detail prices checked",
-        "checkedAt": "2026-07-18T03:40:11.715Z",
+        "message": "OTOMOTO audi: 28; detail prices and years checked",
+        "checkedAt": "2026-07-18T11:40:28.477Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
       "samples": [
         {
-          "make": "Mercedes-Benz",
-          "model": "Klasa G AMG 63",
-          "year": 2023,
-          "price": 850000,
-          "currency": "PLN",
-          "mileageKm": 34000,
-          "fuel": "petrol",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/mercedes-benz-klasa-g-ID6Ia6KO.html",
+          "make": "Audi",
+          "model": "A6 Avant",
+          "year": 2012,
+          "price": null,
+          "currency": null,
+          "mileageKm": 263000,
+          "fuel": "diesel",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a6-avant-ID6Ia8hJ.html",
           "rawImages": 1
         },
         {
-          "make": "RAM",
-          "model": "1500 5.7 Crew Cab Longbed Laramie Black",
-          "year": 2020,
-          "price": 200000,
-          "currency": "PLN",
-          "mileageKm": 90000,
-          "fuel": "petrol",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ram-1500-ID6Ia7ar.html",
-          "rawImages": 1
+          "make": "Audi",
+          "model": "A4 Avant",
+          "year": 2008,
+          "price": null,
+          "currency": null,
+          "mileageKm": 300000,
+          "fuel": "diesel",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a4-avant-ID6Ia8hc.html",
+          "rawImages": 6
         },
         {
-          "make": "DS Automobiles",
-          "model": "DS 7 Crossback 1.6 E-Tense Performance Line +",
-          "year": 2021,
-          "price": 200000,
-          "currency": "PLN",
-          "mileageKm": 112000,
+          "make": "Audi",
+          "model": "A6 Avant TDI mHEV Quattro S tronic",
+          "year": 2026,
+          "price": null,
+          "currency": null,
+          "mileageKm": 5,
           "fuel": "hybrid",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ds-automobiles-ds-7-crossback-ID6Ia7aH.html",
-          "rawImages": 1
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a6-avant-ID6Ia8gN.html",
+          "rawImages": 6
         }
       ]
     },
@@ -112,53 +112,53 @@
       "sourceId": "dubicars_uae_exact",
       "market": "uae",
       "ok": true,
-      "durationMs": 1498,
-      "raw": 30,
-      "normalized": 30,
+      "durationMs": 6666,
+      "raw": 22,
+      "normalized": 22,
       "nextCursor": "2",
       "health": {
         "ok": true,
-        "message": "DubiCars page 1: 30",
-        "checkedAt": "2026-07-18T03:40:17.529Z",
+        "message": "DubiCars page 1: 22",
+        "checkedAt": "2026-07-18T11:40:49.138Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=UTF-8"
       },
       "samples": [
         {
-          "make": "RAM",
-          "model": "1500",
-          "year": 2021,
-          "price": 35422,
-          "currency": "USD",
-          "mileageKm": 144000,
-          "fuel": "",
-          "sourceUrl": "https://www.dubicars.com/2021-ram-1500-907930.html",
-          "rawImages": 15
-        },
-        {
           "make": "Toyota",
-          "model": "Prado TX-L 2020 Model VXL RHD Diesel",
-          "year": 2020,
-          "price": 91280,
-          "currency": "USD",
-          "mileageKm": 43592,
-          "fuel": "diesel",
-          "sourceUrl": "https://www.dubicars.com/2020-toyota-prado-tx-l-2020-model-vxl-rhd-diesel-engine-full-option-934627.html",
-          "rawImages": 15
-        },
-        {
-          "make": "Toyota",
-          "model": "Land Cruiser GXR 2019 Model Facelift To",
+          "model": "Land Cruiser Toyota landcruise 2019Model 4.0 v6",
           "year": 2019,
-          "price": 41100,
+          "price": 130790,
           "currency": "USD",
-          "mileageKm": 33245,
-          "fuel": "",
-          "sourceUrl": "https://www.dubicars.com/2019-toyota-land-cruiser-gxr-2019-model-facelift-to-2025-shape-exterior-and-also-interior-change-to-mercedes-g63-yellow-editi-952415.html",
+          "mileageKm": 55026,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.dubicars.com/2019-toyota-land-cruiser-toyota-landcruise-2019model-40-v6-petrol-engine-colour-black-push-start-transmission-automatic-inte-952629.html",
+          "rawImages": 15
+        },
+        {
+          "make": "Ford",
+          "model": "Ranger RAPTOR Double Cabin Pickup 3.0L V6",
+          "year": 2024,
+          "price": 35500,
+          "currency": "USD",
+          "mileageKm": 20129,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.dubicars.com/2024-ford-ranger-raptor-double-cabin-pickup-30l-v6-twin-turbo-petrol-engine-4wd-360-camera-automatic-gear-5-seats-4-953687.html",
+          "rawImages": 15
+        },
+        {
+          "make": "Toyota",
+          "model": "Land Cruiser Toyota landcruise 2016model Modified 2024",
+          "year": 2024,
+          "price": 28800,
+          "currency": "USD",
+          "mileageKm": 45100,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.dubicars.com/2016-toyota-land-cruiser-toyota-landcruise-2016model-modified-2024-v8-petrol-engine-colour-black-push-start-sunroof-transmiss-953932.html",
           "rawImages": 15
         }
       ]
     }
   ],
-  "finishedAt": "2026-07-18T03:40:17.534Z"
+  "finishedAt": "2026-07-18T11:40:49.141Z"
 }
