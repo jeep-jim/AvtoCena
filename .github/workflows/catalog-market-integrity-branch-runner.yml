@@ -1,10 +1,12 @@
 name: Finalize catalog market safeguards
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - .github/workflows/catalog-market-integrity-branch-runner.yml
+      - .github/catalog-market-integrity-trigger
 
 permissions:
   contents: write
@@ -39,27 +41,26 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Add off-road facet and protected Korea recovery
+      - name: Patch verified market safeguards
         run: |
           python - <<'PY'
           from pathlib import Path
 
           filters = Path('apps/web/components/catalog/CatalogFilters.tsx')
-          text = filters.read_text(encoding='utf-8')
+          value = filters.read_text(encoding='utf-8')
           old = '{ value: "suv", label: "Кроссовер" }, { value: "sedan", label: "Седан" }'
           new = '{ value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }'
-          if old not in text:
-              raise SystemExit('CatalogFilters offroad insertion target not found')
-          filters.write_text(text.replace(old, new, 1), encoding='utf-8')
+          if old not in value:
+              raise SystemExit('offroad target not found')
+          filters.write_text(value.replace(old, new, 1), encoding='utf-8')
 
           workflow = Path('.github/workflows/catalog-production-recovery-once-v2.yml')
-          text = workflow.read_text(encoding='utf-8')
-          if 'name: Catalog exact markets fill v14' not in text:
-              raise SystemExit('v14 workflow name not found')
-          text = text.replace('name: Catalog exact markets fill v14', 'name: Catalog exact markets fill v15', 1)
-
-          trigger = '      - apps/web/lib/catalog/exact-market-sources.ts\n'
-          expanded_trigger = '''      - apps/web/lib/catalog/exact-market-sources.ts
+          value = workflow.read_text(encoding='utf-8')
+          if 'name: Catalog exact markets fill v14' not in value:
+              raise SystemExit('v14 target not found')
+          value = value.replace('name: Catalog exact markets fill v14', 'name: Catalog exact markets fill v15', 1)
+          source_path = '      - apps/web/lib/catalog/exact-market-sources.ts\n'
+          source_paths = '''      - apps/web/lib/catalog/exact-market-sources.ts
       - apps/web/lib/catalog/storage.ts
       - apps/web/lib/catalog/offer-quality.ts
       - apps/web/lib/catalog/spec-normalization.ts
@@ -68,12 +69,11 @@ jobs:
       - apps/web/app/(public)/cars/page.tsx
       - scripts/catalog-recover-generations.mjs
 '''
-          if trigger not in text:
-              raise SystemExit('v15 trigger insertion target not found')
-          text = text.replace(trigger, expanded_trigger, 1)
-
+          if source_path not in value:
+              raise SystemExit('source paths target not found')
+          value = value.replace(source_path, source_paths, 1)
           npm_step = '      - run: npm ci\n\n      - name: Create one-market exact filler\n'
-          restore_step = '''      - run: npm ci
+          recovery = '''      - run: npm ci
 
       - name: Restore protected Korea from confirmed catalog history
         run: npx tsx scripts/catalog-recover-generations.mjs
@@ -92,35 +92,33 @@ jobs:
 
       - name: Create one-market exact filler
 '''
-          if npm_step not in text:
-              raise SystemExit('Korea restore insertion target not found')
-          text = text.replace(npm_step, restore_step, 1)
-
-          text = text.replace('version: 14', 'version: 15')
-          text = text.replace('Start exact market fill v14', 'Start exact market fill v15')
-          text = text.replace('catalog-exact-markets-v14', 'catalog-exact-markets-v15')
-          text = text.replace('CATALOG_EXACT_MAX_PAGES: "4"', 'CATALOG_EXACT_MAX_PAGES: "20"')
-          text = text.replace('CATALOG_EXACT_MAX_PAGES: "12"', 'CATALOG_EXACT_MAX_PAGES: "24"')
-          text = text.replace('CATALOG_EXACT_MAX_PAGES: "16"', 'CATALOG_EXACT_MAX_PAGES: "24"')
-          workflow.write_text(text, encoding='utf-8')
+          if npm_step not in value:
+              raise SystemExit('recovery insertion target not found')
+          value = value.replace(npm_step, recovery, 1)
+          value = value.replace('version: 14', 'version: 15')
+          value = value.replace('Start exact market fill v14', 'Start exact market fill v15')
+          value = value.replace('catalog-exact-markets-v14', 'catalog-exact-markets-v15')
+          value = value.replace('CATALOG_EXACT_MAX_PAGES: "4"', 'CATALOG_EXACT_MAX_PAGES: "20"')
+          value = value.replace('CATALOG_EXACT_MAX_PAGES: "12"', 'CATALOG_EXACT_MAX_PAGES: "24"')
+          value = value.replace('CATALOG_EXACT_MAX_PAGES: "16"', 'CATALOG_EXACT_MAX_PAGES: "24"')
+          workflow.write_text(value, encoding='utf-8')
           PY
 
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Tests
-        run: npm test
-      - name: Production build
-        run: npm run build
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
 
-      - name: Commit only verified source changes
+      - name: Commit verified changes and remove temporary files
         run: |
           rm -f .github/workflows/catalog-market-integrity-branch-runner.yml
+          rm -f .github/catalog-market-integrity-trigger
           rm -f data/catalog/imports/catalog-safeguard-status.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/web/components/catalog/CatalogFilters.tsx
           git add .github/workflows/catalog-production-recovery-once-v2.yml
           git add -u .github/workflows/catalog-market-integrity-branch-runner.yml
+          git add -u .github/catalog-market-integrity-trigger
           git add -u data/catalog/imports/catalog-safeguard-status.json
           git commit -m "Restore protected Korea and launch exact market fill v15"
           git push origin HEAD:main
