@@ -1,6 +1,7 @@
-name: Catalog underfilled markets recovery v8
+name: Catalog underfilled markets recovery v9
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -11,13 +12,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: catalog-production-import
+  group: catalog-underfilled-recovery-v9
   cancel-in-progress: true
 
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 220
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,11 +26,13 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Validate recovery script
+        run: node --check scripts/catalog-fill-underfilled-markets.mjs
       - name: Remove local test catalog
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
           rm -f data/catalog/manifest.json data/catalog/import-lock.json
-      - name: Recover latest confirmed production generation
+      - name: Recover best available production generations
         run: npx tsx scripts/catalog-recover-generations.mjs
         env: &storage
           JSON_STORAGE_DRIVER: object
@@ -39,31 +42,46 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_RECOVERY_GENERATIONS: gen_1784299128055_41536c54
-          CATALOG_RECOVERY_MAX_CHUNKS: "20"
-          CATALOG_RECOVERY_MIN_GAIN: "5"
+          CATALOG_RECOVERY_MAX_CHUNKS: "30"
+          CATALOG_RECOVERY_MIN_GAIN: "1"
       - name: Reactivate recent valid offers
         run: npx tsx scripts/catalog-recover-active.mjs
         env:
           <<: *storage
           CATALOG_RECOVERY_WINDOW_MS: "3888000000"
-          CATALOG_RECOVERY_MIN_PUBLIC: "2"
-      - name: Restart underfilled market cursors
+          CATALOG_RECOVERY_MIN_PUBLIC: "1"
+      - name: Restart all underfilled market cursors
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           <<: *storage
-          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,dubicars_uae_exact,dubicars_clean,otomoto_europe_exact,autoscout_europe
+          CATALOG_IMPORT_SOURCES: encar_direct,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,sbt_china,otomoto_europe_exact,autoscout_europe,sbt_uk,dubicars_uae_exact,dubicars_clean,sbt_uae
       - name: Fill China Europe UAE and Korea to 250 public offers
-        run: npx tsx scripts/catalog-fill-underfilled-markets.mjs
+        shell: bash
+        run: |
+          set +e
+          npx tsx scripts/catalog-fill-underfilled-markets.mjs 2>&1 | tee catalog-underfilled-markets.log
+          status=${PIPESTATUS[0]}
+          if [ ! -f catalog-underfilled-markets-report.json ]; then
+            STATUS="$status" node - <<'NODE'
+          const fs = require('fs');
+          fs.writeFileSync('catalog-underfilled-markets-report.json', JSON.stringify({
+            fatal: true,
+            exitCode: Number(process.env.STATUS || 1),
+            message: 'Recovery script exited before writing its report. See catalog-underfilled-markets.log.'
+          }, null, 2));
+          NODE
+          fi
+          exit 0
         env:
           <<: *storage
-          CATALOG_FILL_MARKETS: uae,europe,china,korea
+          CATALOG_FILL_MARKETS: china,europe,uae,korea
           CATALOG_DESIRED_PER_MARKET: "250"
           CATALOG_CANDIDATE_MULTIPLIER: "4"
           CATALOG_MIN_CANDIDATES: "100"
           CATALOG_MAX_CANDIDATES: "1000"
-          CATALOG_IMPORT_MAX_PAGES: "80"
+          CATALOG_IMPORT_MAX_PAGES: "100"
           CATALOG_MAX_IMAGES_PER_OFFER: "3"
+          CATALOG_LOCK_WAIT_MS: "2700000"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
           CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
           CATALOG_ENCAR_DIRECT_DETAIL_RPM: "300"
@@ -72,16 +90,16 @@ jobs:
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
           CATALOG_IMAGE_TIMEOUT_MS: "12000"
-          CATALOG_IMPORT_BUDGET_MS: "2880000"
-          CATALOG_SOURCE_BUDGET_MS: "2640000"
           CATALOG_OFFER_RETENTION_MS: "3888000000"
           CATALOG_STALE_GRACE_MS: "3888000000"
           CATALOG_IMPORT_REPORT_FILE: catalog-underfilled-markets-report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-underfilled-markets-v8-report
-          path: catalog-underfilled-markets-report.json
+          name: catalog-underfilled-markets-v9
+          path: |
+            catalog-underfilled-markets-report.json
+            catalog-underfilled-markets.log
           if-no-files-found: warn
           retention-days: 7
       - name: Record report in repository
@@ -93,7 +111,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/catalog/imports/last-underfilled-markets-report.json
-          git commit -m "Record underfilled market recovery report [skip ci]" || exit 0
+          git commit -m "Record underfilled market recovery v9 report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
@@ -103,13 +121,14 @@ jobs:
           const path = 'catalog-underfilled-markets-report.json';
           if (!fs.existsSync(path)) { console.log('Отчёт не создан.'); process.exit(0); }
           const r = JSON.parse(fs.readFileSync(path, 'utf8'));
+          if (r.fatal) console.log(`FATAL: ${r.message}; exitCode=${r.exitCode}`);
           console.log(`Цель каждого рынка: ${r.desiredPerMarket || 250}`);
           for (const market of ['korea','china','japan','uae','europe']) {
             console.log(`- ${market}: ${r.publicByMarket?.[market] || 0}; осталось ${r.missingByMarket?.[market] || 0}`);
           }
           console.log('\n### Проходы по рынкам');
           for (const market of r.markets || []) {
-            console.log(`- ${market.market}: ${market.before || 0} → ${market.after || 0}; gained=${market.gained || 0}; reached=${Boolean(market.reached)}`);
+            console.log(`- ${market.market}: ${market.before || 0} → ${market.after || 0}; gained=${market.gained || 0}; reached=${Boolean(market.reached)}; error=${market.error || 'none'}`);
             for (const source of market.sources || []) console.log(`  - ${source.sourceId}: ${source.ok ? `OK seen=${source.seen || 0} saved=${source.saved || 0}` : `ERROR ${source.error || ''}`}`);
           }
           NODE
