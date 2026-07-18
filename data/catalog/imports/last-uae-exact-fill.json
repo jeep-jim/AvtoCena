@@ -1,7 +1,32 @@
 {
   "market": "uae",
   "sourceId": "dubicars_uae_exact",
-  "fatal": true,
-  "finishedAt": "2026-07-18T04:35:25.591Z",
-  "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+  "startedAt": "2026-07-18T04:37:35.607Z",
+  "finishedAt": "2026-07-18T04:43:26.640Z",
+  "before": 8,
+  "after": 53,
+  "deficit": 242,
+  "gained": 45,
+  "reached": false,
+  "imported": 45,
+  "updated": 5,
+  "rejectedByQuality": 33,
+  "imageFailures": 10,
+  "deadlineReached": false,
+  "sources": [
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "scanCycleId": "scan_e0528c72-7b3b-4f14-b6fe-fb82bb1fede5",
+      "ok": true,
+      "seen": 89,
+      "saved": 50,
+      "cursor": "5",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": false,
+      "partialScan": true,
+      "staleEligible": false
+    }
+  ]
 }
