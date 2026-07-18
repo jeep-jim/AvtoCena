@@ -1,33 +1,12 @@
 {
   "market": "europe",
   "sourceId": "otomoto_europe_exact",
-  "startedAt": "2026-07-18T10:42:21.466Z",
-  "finishedAt": "2026-07-18T10:44:19.980Z",
-  "before": 232,
-  "after": 237,
-  "deficit": 18,
-  "candidateLimit": 80,
-  "gained": 5,
-  "reached": false,
-  "imported": 5,
-  "updated": 13,
-  "rejectedByQuality": 0,
-  "imageFailures": 1,
-  "deadlineReached": false,
-  "sources": [
-    {
-      "sourceId": "otomoto_europe_exact",
-      "market": "europe",
-      "scanCycleId": "scan_c947c0e7-3a50-4fd9-a9dd-a86f02fa1e4a",
-      "ok": true,
-      "seen": 18,
-      "saved": 18,
-      "cursor": "1",
-      "sourceExhausted": false,
-      "stoppedByLimit": true,
-      "stoppedByBudget": false,
-      "partialScan": true,
-      "staleEligible": false
-    }
-  ]
+  "startedAt": "2026-07-18T15:35:16.630Z",
+  "finishedAt": "2026-07-18T15:35:20.084Z",
+  "before": 523,
+  "after": 523,
+  "deficit": 0,
+  "gained": 0,
+  "reached": true,
+  "skipped": true
 }
