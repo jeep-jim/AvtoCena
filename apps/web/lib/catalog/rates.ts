@@ -10,7 +10,7 @@ export type CurrencyRateSnapshot = {
   rateDelta?: number;
   rateDate: string;
   fetchedAt?: string;
-  rateSource: "moex" | "cbr" | "legacy_json" | "fallback_env";
+  rateSource: "moex" | "cbr" | "cbr_live" | "legacy_json" | "fallback_env";
   sourcePrice: number;
   sourcePriceRub: number;
 };
@@ -30,7 +30,24 @@ const FALLBACK_ENV: Record<string, string> = {
   DKK: "CATALOG_FALLBACK_RATE_DKK_RUB",
   HUF: "CATALOG_FALLBACK_RATE_HUF_RUB",
   CZK: "CATALOG_FALLBACK_RATE_CZK_RUB",
+  RON: "CATALOG_FALLBACK_RATE_RON_RUB",
+  BGN: "CATALOG_FALLBACK_RATE_BGN_RUB",
+  TRY: "CATALOG_FALLBACK_RATE_TRY_RUB",
+  GEL: "CATALOG_FALLBACK_RATE_GEL_RUB",
+  KZT: "CATALOG_FALLBACK_RATE_KZT_RUB",
+  BYN: "CATALOG_FALLBACK_RATE_BYN_RUB",
+  UAH: "CATALOG_FALLBACK_RATE_UAH_RUB",
+  RSD: "CATALOG_FALLBACK_RATE_RSD_RUB",
+  ISK: "CATALOG_FALLBACK_RATE_ISK_RUB",
+  CAD: "CATALOG_FALLBACK_RATE_CAD_RUB",
+  AUD: "CATALOG_FALLBACK_RATE_AUD_RUB",
+  NZD: "CATALOG_FALLBACK_RATE_NZD_RUB",
+  HKD: "CATALOG_FALLBACK_RATE_HKD_RUB",
+  SGD: "CATALOG_FALLBACK_RATE_SGD_RUB",
 };
+
+type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string };
+let liveCbrRatesPromise: Promise<Map<string, LiveRate>> | null = null;
 
 function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
@@ -43,9 +60,54 @@ function optionalNumber(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
+function xmlValue(block: string, tag: string) {
+  return block.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i"))?.[1]?.trim() || "";
+}
+
+function cbrXmlDate(xml: string) {
+  const raw = xml.match(/<ValCurs[^>]+Date=["'](\d{2})\.(\d{2})\.(\d{4})["']/i);
+  return raw ? `${raw[3]}-${raw[2]}-${raw[1]}` : new Date().toISOString().slice(0, 10);
+}
+
+async function fetchLiveCbrRates() {
+  if (liveCbrRatesPromise) return liveCbrRatesPromise;
+  liveCbrRatesPromise = (async () => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_RATE_TIMEOUT_MS || 12_000));
+    try {
+      const response = await fetch("https://www.cbr.ru/scripts/XML_daily.asp", {
+        headers: { accept: "application/xml,text/xml,*/*", "user-agent": "AvtoCenaCatalog/1.0" },
+        redirect: "follow",
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`cbr_rates_http_${response.status}`);
+      const xml = await response.text();
+      const rateDate = cbrXmlDate(xml);
+      const fetchedAt = new Date().toISOString();
+      const result = new Map<string, LiveRate>();
+      for (const match of xml.matchAll(/<Valute\b[^>]*>([\s\S]*?)<\/Valute>/gi)) {
+        const block = match[1];
+        const currency = xmlValue(block, "CharCode").toUpperCase();
+        const nominal = Number(xmlValue(block, "Nominal").replace(/[^0-9.]/g, ""));
+        const cbrRate = Number(xmlValue(block, "Value").replace(/\s/g, "").replace(",", "."));
+        if (!currency || !Number.isFinite(nominal) || nominal <= 0 || !Number.isFinite(cbrRate) || cbrRate <= 0) continue;
+        result.set(currency, { cbrRate, nominal, effectiveRate: cbrRate / nominal, rateDate, fetchedAt });
+      }
+      if (!result.size) throw new Error("cbr_rates_empty");
+      return result;
+    } catch (error) {
+      liveCbrRatesPromise = null;
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
+  })();
+  return liveCbrRatesPromise;
+}
+
 export async function convertToRub(sourcePrice: number | null, currency: string | null): Promise<CurrencyRateSnapshot | null> {
   if (!sourcePrice || !currency) return null;
-  const code = currency.toUpperCase();
+  const code = currency.toUpperCase().trim();
   if (code === "RUB") {
     return { currency: code, cbrRate: 1, nominal: 1, effectiveRate: 1, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "cbr", sourcePrice, sourcePriceRub: Math.round(sourcePrice) };
   }
@@ -82,6 +144,21 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
         sourcePriceRub: Math.round(sourcePrice * effectiveRate),
       };
     }
+  }
+
+  const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
+  if (live) {
+    return {
+      currency: code,
+      cbrRate: live.cbrRate,
+      nominal: live.nominal,
+      effectiveRate: live.effectiveRate,
+      rateDate: live.rateDate,
+      fetchedAt: live.fetchedAt,
+      rateSource: "cbr_live",
+      sourcePrice,
+      sourcePriceRub: Math.round(sourcePrice * live.effectiveRate),
+    };
   }
 
   const legacy = Number(rates[`${code}_RUB`]);
