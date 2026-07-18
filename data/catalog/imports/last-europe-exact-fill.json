@@ -1,7 +1,26 @@
 {
   "market": "europe",
   "sourceId": "otomoto_europe_exact",
-  "fatal": true,
-  "finishedAt": "2026-07-18T04:35:30.018Z",
-  "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+  "startedAt": "2026-07-18T04:43:31.294Z",
+  "finishedAt": "2026-07-18T04:57:46.516Z",
+  "before": 7,
+  "after": 141,
+  "deficit": 243,
+  "gained": 134,
+  "reached": false,
+  "imported": 134,
+  "updated": 1,
+  "rejectedByQuality": 19,
+  "imageFailures": 0,
+  "deadlineReached": false,
+  "sources": [
+    {
+      "sourceId": "otomoto_europe_exact",
+      "market": "europe",
+      "ok": false,
+      "seen": 153,
+      "saved": 135,
+      "error": "otomoto_current_zero_1079406"
+    }
+  ]
 }
