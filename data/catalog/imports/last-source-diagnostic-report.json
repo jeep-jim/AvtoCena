@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-07-18T03:26:48.935Z",
+  "startedAt": "2026-07-18T03:31:47.095Z",
   "requested": [
     "guazi_china_export",
     "otomoto_europe_exact",
@@ -10,27 +10,27 @@
       "sourceId": "guazi_china_export",
       "market": "china",
       "ok": true,
-      "durationMs": 1221,
+      "durationMs": 937,
       "raw": 20,
       "normalized": 20,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "Guazi export volkswagen page 1: parsed 20",
-        "checkedAt": "2026-07-18T03:26:50.149Z",
+        "checkedAt": "2026-07-18T03:31:48.026Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
       "samples": [
         {
           "make": "Volkswagen",
-          "model": "Tayron GTE Plug-in Hybrid 2024 280TSI Luxury Plus",
-          "year": 2024,
-          "price": 18398,
+          "model": "Lavida 2023 1.5L Automatic Starry Sky 5 Million",
+          "year": 2023,
+          "price": 10631,
           "currency": "USD",
-          "mileageKm": 39900,
-          "fuel": "hybrid",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-tayron-gte-plug-in-hybrid-2024-14l-black-39900km-at-2wd-5-seats-l2ncve5293.html",
+          "mileageKm": 29700,
+          "fuel": "petrol",
+          "sourceUrl": "https://en.guazi.com/products/volkswagen-lavida-2023-15l-white-29700km-at-2wd-5-seats-uvqavncdaz.html",
           "rawImages": 6
         },
         {
@@ -61,14 +61,14 @@
       "sourceId": "otomoto_europe_exact",
       "market": "europe",
       "ok": true,
-      "durationMs": 1085,
+      "durationMs": 1322,
       "raw": 32,
       "normalized": 31,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "OTOMOTO page 1: 32",
-        "checkedAt": "2026-07-18T03:26:51.238Z",
+        "checkedAt": "2026-07-18T03:31:49.353Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
@@ -112,46 +112,53 @@
       "sourceId": "dubicars_uae_exact",
       "market": "uae",
       "ok": true,
-      "durationMs": 2155,
-      "raw": 28,
-      "normalized": 28,
+      "durationMs": 2616,
+      "raw": 30,
+      "normalized": 30,
       "nextCursor": "2",
+      "health": {
+        "ok": true,
+        "message": "DubiCars page 1: 30",
+        "checkedAt": "2026-07-18T03:31:51.968Z",
+        "httpStatus": 200,
+        "contentType": "text/html; charset=UTF-8"
+      },
       "samples": [
         {
+          "make": "RAM",
+          "model": "1500",
+          "year": 2021,
+          "price": 35422,
+          "currency": "USD",
+          "mileageKm": 144000,
+          "fuel": "",
+          "sourceUrl": "https://www.dubicars.com/2021-ram-1500-907930.html",
+          "rawImages": 15
+        },
+        {
           "make": "Toyota",
-          "model": " Prado TX-L 2020 Model VXL RHD Diesel",
+          "model": "Prado TX-L 2020 Model VXL RHD Diesel",
           "year": 2020,
           "price": 91280,
           "currency": "USD",
           "mileageKm": 43592,
           "fuel": "diesel",
           "sourceUrl": "https://www.dubicars.com/2020-toyota-prado-tx-l-2020-model-vxl-rhd-diesel-engine-full-option-934627.html",
-          "rawImages": 6
+          "rawImages": 15
         },
         {
           "make": "Toyota",
-          "model": " Land Cruiser GXR 2019 Model Facelift To",
+          "model": "Land Cruiser GXR 2019 Model Facelift To",
           "year": 2019,
-          "price": 411002019,
+          "price": 41100,
           "currency": "USD",
           "mileageKm": 33245,
           "fuel": "",
           "sourceUrl": "https://www.dubicars.com/2019-toyota-land-cruiser-gxr-2019-model-facelift-to-2025-shape-exterior-and-also-interior-change-to-mercedes-g63-yellow-editi-952415.html",
-          "rawImages": 6
-        },
-        {
-          "make": "Toyota",
-          "model": " Land Cruiser 2023 Model VXR 3.5L Engine",
-          "year": 2023,
-          "price": 658002023,
-          "currency": "USD",
-          "mileageKm": 35334,
-          "fuel": "",
-          "sourceUrl": "https://www.dubicars.com/2023-toyota-land-cruiser-2023-model-vxr-35l-engine-twin-turbo-full-option-very-clean-and-perfect-condition-970339.html",
-          "rawImages": 6
+          "rawImages": 15
         }
       ]
     }
   ],
-  "finishedAt": "2026-07-18T03:26:53.396Z"
+  "finishedAt": "2026-07-18T03:31:51.971Z"
 }
