@@ -1,0 +1,90 @@
+name: Catalog core integrity fix v18
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-core-integrity-fix-v18.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Apply fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/web/lib/catalog/offer-quality.ts')
+          text = path.read_text(encoding='utf-8')
+          old = '  if (/^[\\d\\W_]+$/u.test(text)) return false;'
+          new = '  if (!/[\\p{L}\\p{N}]/u.test(text)) return false;'
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('quality target missing')
+          path.write_text(text, encoding='utf-8')
+
+          path = Path('apps/web/lib/catalog/rates.ts')
+          text = path.read_text(encoding='utf-8')
+          old = '      const effectiveRate = Number(structured.effectiveRate || cbrRate / nominal);'
+          new = '''      const canonicalRate = cbrRate / nominal;
+      const storedEffectiveRate = Number(structured.effectiveRate || 0);
+      const storedRateIsConsistent = storedEffectiveRate > 0
+        && Math.abs(storedEffectiveRate - canonicalRate) / canonicalRate <= 0.05;
+      const effectiveRate = storedRateIsConsistent ? storedEffectiveRate : canonicalRate;'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'storedRateIsConsistent' not in text:
+              raise SystemExit('rate target missing')
+          path.write_text(text, encoding='utf-8')
+
+          path = Path('apps/web/lib/catalog/importer-impl.ts')
+          text = path.read_text(encoding='utf-8')
+          old = '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
+      const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);'''
+          new = '''      // Scan candidates independently from the successful-offer target.
+      const sourceMaxOffers = configuredMaxOffers;'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'const sourceMaxOffers = configuredMaxOffers;' not in text:
+              raise SystemExit('candidate target missing')
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          npm run typecheck
+          npm test
+          cat > scripts/verify-core-v18.mjs <<'NODE'
+          const { hasCredibleOfferContent } = await import('../apps/web/lib/catalog/offer-quality.ts');
+          const { convertToRub } = await import('../apps/web/lib/catalog/rates.ts');
+          const offer = { id:'t',sourceId:'encar_direct',sourceOfferId:'t',market:'korea',offerType:'fixed',status:'active',make:'기아',model:'쏘렌토',year:2022,sourcePrice:30000000,sourceCurrency:'KRW',priceMode:'fixed',images:[{id:'i',url:'https://cdn.example.com/car.jpg',objectKey:'car.jpg',checksum:'x',size:10000,width:800,height:600}],totalRub:1600000,calculationStatus:'ready',firstSeenAt:new Date().toISOString(),updatedAt:new Date().toISOString(),operational:{sourceUrl:'https://fem.encar.com/cars/detail/t',raw:{}} };
+          if (!hasCredibleOfferContent(offer)) throw new Error('korean_name_rejected');
+          const jpy = await convertToRub(100, 'JPY');
+          if (!jpy || jpy.sourcePriceRub < 20 || jpy.sourcePriceRub > 200) throw new Error(`jpy_nominal_${jpy?.sourcePriceRub}`);
+          console.log({ koreanName: true, jpy100Rub: jpy.sourcePriceRub });
+          NODE
+          npx tsx scripts/verify-core-v18.mjs
+      - name: Commit fixes
+        run: |
+          rm -f scripts/verify-core-v18.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/offer-quality.ts apps/web/lib/catalog/rates.ts apps/web/lib/catalog/importer-impl.ts
+          git commit -m "Fix Unicode vehicle names and nominal exchange rates" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
