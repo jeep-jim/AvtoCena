@@ -1,0 +1,41 @@
+name: Run catalog integrity patch branch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-market-integrity-branch-runner.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-market-integrity-62
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Apply targeted patch
+        run: python scripts/apply-catalog-market-integrity-patch.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Commit verified branch
+        run: |
+          rm -f scripts/apply-catalog-market-integrity-patch.py .github/workflows/catalog-market-integrity-patch-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Protect market data and expose live catalog facets [skip ci]"
+          git push origin HEAD:fix/catalog-market-integrity-62
