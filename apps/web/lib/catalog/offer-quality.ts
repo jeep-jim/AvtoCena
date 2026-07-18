@@ -14,7 +14,7 @@ function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ")
 function meaningfulName(value: unknown) {
   const text = clean(value);
   if (text.length < 1 || text.length > 140) return false;
-  if (/^[\d\W_]+$/u.test(text)) return false;
+  if (!/[\p{L}\p{N}]/u.test(text)) return false;
   if (GENERIC_LISTING_RE.test(text) || NON_VEHICLE_RE.test(text)) return false;
   return true;
 }
