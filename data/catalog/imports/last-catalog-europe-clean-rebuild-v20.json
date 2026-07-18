@@ -1,1 +1,930 @@
-{"version":20,"fatal":true,"error":"report_missing","finishedAt":"2026-07-18T11:42:29Z"}
+{
+  "version": 20,
+  "startedAt": "2026-07-18T11:43:01.234Z",
+  "finishedAt": "2026-07-18T12:30:08.273Z",
+  "cleanImported": 741,
+  "quarantined": 32,
+  "publicEurope": 523,
+  "repeatedPrices": [
+    {
+      "key": "PLN:32900:679645",
+      "count": 5,
+      "rows": [
+        {
+          "id": "5d344b66bc03846b65433786",
+          "make": "Peugeot",
+          "model": "208 1.2 PureTech Style",
+          "year": 2017
+        },
+        {
+          "id": "277f858464c5a302ca3f46b7",
+          "make": "Volvo",
+          "model": "XC 70 D5 AWD Summum",
+          "year": 2006
+        },
+        {
+          "id": "38d7e92d0cf35b82da7133ba",
+          "make": "Mazda",
+          "model": "CX-5 SKYACTIV-D 150 AWD Exclusive-Line",
+          "year": 2013
+        },
+        {
+          "id": "15871823b8a2f2c081a0f9c0",
+          "make": "MINI",
+          "model": "Cooper Highgate",
+          "year": 2012
+        },
+        {
+          "id": "57b74d80e5ab01a0c6a3bc8e",
+          "make": "MINI",
+          "model": "Countryman Cooper S",
+          "year": 2010
+        }
+      ]
+    },
+    {
+      "key": "PLN:89900:1857145",
+      "count": 11,
+      "rows": [
+        {
+          "id": "9108a5fdd06b6929f5e5aeef",
+          "make": "Peugeot",
+          "model": "Rifter 1.5 BlueHDI Allure Pack S&S N1",
+          "year": 2023
+        },
+        {
+          "id": "5f93e601022c04c0c01fe008",
+          "make": "Audi",
+          "model": "Q3 35 TFSI S tronic advanced",
+          "year": 2022
+        },
+        {
+          "id": "fcc64b8de2b2a37cbeaa08ec",
+          "make": "Audi",
+          "model": "A6 Limousine 2.0 TDI ultra S tronic",
+          "year": 2018
+        },
+        {
+          "id": "3b6f87e47af773bc6c3d112d",
+          "make": "BMW",
+          "model": "Seria 5",
+          "year": 2019
+        },
+        {
+          "id": "f2ecafef72737c885ab23e22",
+          "make": "Volvo",
+          "model": "XC 90 D5 AWD Geartronic RDesign",
+          "year": 2016
+        },
+        {
+          "id": "de83a33140e7d55dd0f94501",
+          "make": "Skoda",
+          "model": "Kodiaq 1.5 TSI ACT 4x2 Business DSG",
+          "year": 2022
+        },
+        {
+          "id": "c4e06b016426a9028809f18c",
+          "make": "SEAT",
+          "model": "Ateca 2.0 TDI Style S&S DSG",
+          "year": 2023
+        },
+        {
+          "id": "583e9113a33d8c9eb96cd460",
+          "make": "Honda",
+          "model": "CR-V 2.0i-VTEC 4WD Executive",
+          "year": 2018
+        },
+        {
+          "id": "ebbd9792da60cf48b21c40c5",
+          "make": "Lexus",
+          "model": "RX",
+          "year": 2017
+        },
+        {
+          "id": "d6f63e41021a2f3399a6ebe3",
+          "make": "Porsche",
+          "model": "Macan PDK",
+          "year": 2019
+        },
+        {
+          "id": "053ffdc21e01f876671e4693",
+          "make": "Jeep",
+          "model": "Compass",
+          "year": 2023
+        }
+      ]
+    },
+    {
+      "key": "PLN:37900:782934",
+      "count": 5,
+      "rows": [
+        {
+          "id": "64b41a84138474cc11ca946a",
+          "make": "SEAT",
+          "model": "Leon 1.4 TSI Start&Stop FR",
+          "year": 2016
+        },
+        {
+          "id": "b23948d85cc66c3fa3d5ae1f",
+          "make": "Skoda",
+          "model": "Superb",
+          "year": 2016
+        },
+        {
+          "id": "51326609850deff759cb4423",
+          "make": "Mazda",
+          "model": "CX-5 2.2 D Skyenergy 2WD",
+          "year": 2012
+        },
+        {
+          "id": "ec12d3fff739822ba3becc51",
+          "make": "Land Rover",
+          "model": "Discovery Sport TD4 HSE Luxury",
+          "year": 2017
+        },
+        {
+          "id": "4d4a49b8906121439d4e405c",
+          "make": "Fiat",
+          "model": "Tipo 1.4 T-Jet Lounge",
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "key": "PLN:26900:555698",
+      "count": 7,
+      "rows": [
+        {
+          "id": "1e98a55fc2e2d4beb62f3b9d",
+          "make": "Hyundai",
+          "model": "i30 blue Kombi 1.6 GDi Passion",
+          "year": 2013
+        },
+        {
+          "id": "9a13fd327c31e98e0a757899",
+          "make": "Audi",
+          "model": "A6 Limousine",
+          "year": 2012
+        },
+        {
+          "id": "a2f1d8095aef863924f1d1c0",
+          "make": "Volvo",
+          "model": "V60 D2 R-Design Momentum",
+          "year": 2014
+        },
+        {
+          "id": "4b7337d13527e9c9b8638f31",
+          "make": "Nissan",
+          "model": "Qashqai",
+          "year": 2011
+        },
+        {
+          "id": "478c00e839bd20a9990c422e",
+          "make": "Nissan",
+          "model": "Leaf",
+          "year": 2016
+        },
+        {
+          "id": "eb2a07b6aee65dd79312082a",
+          "make": "Nissan",
+          "model": "Qashqai 1.6 DCi Tekna",
+          "year": 2011
+        },
+        {
+          "id": "61451a5cb2d7e4d58affe807",
+          "make": "Jaguar",
+          "model": "XF 3.0 V6 S Premium Luxury",
+          "year": 2009
+        }
+      ]
+    },
+    {
+      "key": "PLN:34900:720961",
+      "count": 5,
+      "rows": [
+        {
+          "id": "bb22a4d5d1b92e4d8433a79e",
+          "make": "Hyundai",
+          "model": "i40 2.0 Premium",
+          "year": 2012
+        },
+        {
+          "id": "f19c98cdef37a8a8cfcd0858",
+          "make": "Mercedes-Benz",
+          "model": "ML 280 CDI 4-Matic",
+          "year": 2006
+        },
+        {
+          "id": "a141d4dc547cc5709e85ab46",
+          "make": "Nissan",
+          "model": "Qashqai+2 2.0 4x4 CVT 360",
+          "year": 2012
+        },
+        {
+          "id": "86a24b0b6816d31e1c1bdbb3",
+          "make": "Dacia",
+          "model": "Duster 1.0 TCe Prestige",
+          "year": 2020
+        },
+        {
+          "id": "c59dd81cf40901141bbaccc0",
+          "make": "Tesla",
+          "model": "Model 3 Langstreckenbatterie Allradantrieb Dual Motor",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "key": "PLN:51900:1072145",
+      "count": 5,
+      "rows": [
+        {
+          "id": "fe11ff915527394dba43b47b",
+          "make": "Jeep",
+          "model": "Wrangler",
+          "year": 2005
+        },
+        {
+          "id": "386151db4dc58e0b83a0a99d",
+          "make": "Kia",
+          "model": "Sportage 2.0 GDI XL AWD",
+          "year": 2014
+        },
+        {
+          "id": "3fc165dee143b6da16cd2941",
+          "make": "Honda",
+          "model": "CR-V",
+          "year": 2014
+        },
+        {
+          "id": "8e39834221f8504a5ed700c2",
+          "make": "Porsche",
+          "model": "Cayenne",
+          "year": 2010
+        },
+        {
+          "id": "21cd9686e65169ac5f55f851",
+          "make": "Jaguar",
+          "model": "XF 2.2 D Luxury",
+          "year": 2014
+        }
+      ]
+    },
+    {
+      "key": "PLN:109900:2270303",
+      "count": 7,
+      "rows": [
+        {
+          "id": "5fc33522ee174386b55d18e1",
+          "make": "Land Rover",
+          "model": "Range Rover Evoque D150 R-Dynamic S",
+          "year": 2021
+        },
+        {
+          "id": "8cf43a96708bd4d8bce7b460",
+          "make": "Mercedes-Benz",
+          "model": "Klasa G",
+          "year": 2003
+        },
+        {
+          "id": "ca85247b367f41884d260025",
+          "make": "Volkswagen",
+          "model": "Arteon Shooting Brake",
+          "year": 2022
+        },
+        {
+          "id": "0a6b2b9c7154b6b9dd293a4e",
+          "make": "Cupra",
+          "model": "Formentor 1.5 TSI DSG",
+          "year": 2023
+        },
+        {
+          "id": "86b3c2d98f5a985b8604a26f",
+          "make": "Cupra",
+          "model": "Formentor 1.4 e-Hybrid DSG",
+          "year": 2022
+        },
+        {
+          "id": "aab8a2f3251edb9c495b7e6a",
+          "make": "Hyundai",
+          "model": "Tucson",
+          "year": 2022
+        },
+        {
+          "id": "54fc536fab4454e26cb44126",
+          "make": "Land Rover",
+          "model": "Range Rover Velar 2.0d R-Dynamic",
+          "year": 2017
+        }
+      ]
+    },
+    {
+      "key": "PLN:52900:1092803",
+      "count": 4,
+      "rows": [
+        {
+          "id": "6fc9afa3f05143e948094688",
+          "make": "Audi",
+          "model": "Q5 2.0 TDI Quattro (clean diesel) S tronic",
+          "year": 2016
+        },
+        {
+          "id": "527ec57507fabd300fccde16",
+          "make": "Volvo",
+          "model": "XC 60 D3 RDesign",
+          "year": 2013
+        },
+        {
+          "id": "e50557fe7c0027435f38e522",
+          "make": "Peugeot",
+          "model": "3008 BlueHDi 120 EAT6 Stop & Start Business",
+          "year": 2017
+        },
+        {
+          "id": "01dc5a09172c5a7d58eb2980",
+          "make": "Dacia",
+          "model": "Duster 1.6 SCe Prestige",
+          "year": 2019
+        }
+      ]
+    },
+    {
+      "key": "PLN:25900:535040",
+      "count": 4,
+      "rows": [
+        {
+          "id": "ded1bd3f2512339234334085",
+          "make": "BMW",
+          "model": "X3",
+          "year": 2006
+        },
+        {
+          "id": "91e0f5a39d93ad450d8f528f",
+          "make": "Fiat",
+          "model": "500L",
+          "year": 2014
+        },
+        {
+          "id": "a5e5d35472e4c3c85a64c3d7",
+          "make": "Dacia",
+          "model": "Dokker 1.6 SCe Laureate",
+          "year": 2016
+        },
+        {
+          "id": "12a4bb4b5e139d27020309df",
+          "make": "Mitsubishi",
+          "model": "ASX 1.6 DI-D 2WD Top",
+          "year": 2018
+        }
+      ]
+    },
+    {
+      "key": "PLN:31900:658987",
+      "count": 4,
+      "rows": [
+        {
+          "id": "854b710e3aaf4f47c0961b3e",
+          "make": "BMW",
+          "model": "Seria 5",
+          "year": 2012
+        },
+        {
+          "id": "4cd32fb7f005b792cbb48447",
+          "make": "Ford",
+          "model": "EcoSport",
+          "year": 2015
+        },
+        {
+          "id": "c7f679d161db7261e34dcae5",
+          "make": "Hyundai",
+          "model": "i30 i30cw 1.4 Trend",
+          "year": 2013
+        },
+        {
+          "id": "7b40563ab613227efaa01f86",
+          "make": "Fiat",
+          "model": "500 1.2 Lounge EU6d",
+          "year": 2017
+        }
+      ]
+    },
+    {
+      "key": "PLN:16900:349119",
+      "count": 4,
+      "rows": [
+        {
+          "id": "adfc7fbd55c8969af81f8198",
+          "make": "Volkswagen",
+          "model": "Passat 1.4 TSI Trendline",
+          "year": 2011
+        },
+        {
+          "id": "ddf51dfe1e86787cfd3e4ba6",
+          "make": "Ford",
+          "model": "S-Max 2.0 TDCi Trend",
+          "year": 2007
+        },
+        {
+          "id": "47f8d478956bf49a17baa28f",
+          "make": "Hyundai",
+          "model": "Tucson 2.0 Elegance / Premium",
+          "year": 2009
+        },
+        {
+          "id": "2ae04fa34f4d9c5150c4a0a8",
+          "make": "Nissan",
+          "model": "Qashqai",
+          "year": 2009
+        }
+      ]
+    },
+    {
+      "key": "PLN:69900:1443987",
+      "count": 5,
+      "rows": [
+        {
+          "id": "b1d3e823f816cbc2ec6a2920",
+          "make": "Toyota",
+          "model": "Corolla",
+          "year": 2020
+        },
+        {
+          "id": "a7429b5991d521dc2d7f3960",
+          "make": "Peugeot",
+          "model": "3008",
+          "year": 2018
+        },
+        {
+          "id": "f622eba308deeff1ea642cbc",
+          "make": "Jeep",
+          "model": "Renegade 1.0 GSE T3 Turbo Longitude FWD S&S",
+          "year": 2023
+        },
+        {
+          "id": "72606aef9123c00c5efeb0f0",
+          "make": "Jeep",
+          "model": "Grand Cherokee 3.0I Multijet Summit",
+          "year": 2014
+        },
+        {
+          "id": "1da0d6d514c52e63f0092b10",
+          "make": "Land Rover",
+          "model": "Discovery Sport 2.0 TD4 HSE Luxury 129g",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "key": "PLN:59900:1237408",
+      "count": 5,
+      "rows": [
+        {
+          "id": "595e3a1f046be0392669b5e3",
+          "make": "Volvo",
+          "model": "XC 60 D4 AWD Geartronic Summum",
+          "year": 2013
+        },
+        {
+          "id": "40a1a800bdf98ff450f7e29b",
+          "make": "Peugeot",
+          "model": "3008 BlueHDi 120 EAT6 Stop & Start Allure",
+          "year": 2017
+        },
+        {
+          "id": "423e36fc31d7506b55a0349f",
+          "make": "Honda",
+          "model": "HR-V 1.5 Executive (ADAS) CVT",
+          "year": 2017
+        },
+        {
+          "id": "a7a2f8ad3f75b183f0ceff34",
+          "make": "Jaguar",
+          "model": "F-Pace 2.0 i4D AWD Prestige",
+          "year": 2019
+        },
+        {
+          "id": "78ef2d453c11cddf77dcbf03",
+          "make": "Tesla",
+          "model": "Model X Long Range Plus",
+          "year": 2018
+        }
+      ]
+    },
+    {
+      "key": "PLN:64900:1340698",
+      "count": 5,
+      "rows": [
+        {
+          "id": "b25ff24f1118589144fc158c",
+          "make": "Volvo",
+          "model": "XC 90 D5 AWD Geartonic Executive",
+          "year": 2014
+        },
+        {
+          "id": "ff5b017636ccba1e023a2392",
+          "make": "Peugeot",
+          "model": "5008 1.5 BlueHDi Active S&S",
+          "year": 2020
+        },
+        {
+          "id": "4334bb8b98b42106e880b56e",
+          "make": "Jeep",
+          "model": "Renegade 1.0 GSE T3 Turbo Sport FWD S&S",
+          "year": 2022
+        },
+        {
+          "id": "28343b3bf896ec3de7b3fb1f",
+          "make": "Jeep",
+          "model": "Grand Cherokee 3.6 V6 Overland",
+          "year": 2018
+        },
+        {
+          "id": "be08d441934a28ed5a59ba36",
+          "make": "MINI",
+          "model": "Cooper Standard",
+          "year": 2019
+        }
+      ]
+    },
+    {
+      "key": "PLN:39900:824250",
+      "count": 6,
+      "rows": [
+        {
+          "id": "23444558115c0e3ee2d4a5d7",
+          "make": "Volvo",
+          "model": "V60 D3 Momentum Core",
+          "year": 2017
+        },
+        {
+          "id": "be83df2e21742040c6729ac8",
+          "make": "Kia",
+          "model": "Carens 1.7 CRDi 115 Dream Team Edition",
+          "year": 2017
+        },
+        {
+          "id": "e58b84eb77f02f0720e62f79",
+          "make": "Honda",
+          "model": "Civic 1.8 Lifestyle",
+          "year": 2014
+        },
+        {
+          "id": "4982089e6f887c997606dc49",
+          "make": "Jaguar",
+          "model": "F-Pace 2.0 i4D AWD Prestige",
+          "year": 2017
+        },
+        {
+          "id": "3c69227480b9d7fde9239e12",
+          "make": "Jaguar",
+          "model": "XE",
+          "year": 2016
+        },
+        {
+          "id": "1a33854db5b2b962eae2a6e3",
+          "make": "Mitsubishi",
+          "model": "ASX 1.6 2WD Klassik Kollektion+",
+          "year": 2015
+        }
+      ]
+    },
+    {
+      "key": "PLN:44900:927540",
+      "count": 5,
+      "rows": [
+        {
+          "id": "b78af7b067f6a87dbc9576cb",
+          "make": "Skoda",
+          "model": "Octavia 1.4 TSI Drive",
+          "year": 2017
+        },
+        {
+          "id": "1919edb7fe1d915bbbbb3a9f",
+          "make": "Skoda",
+          "model": "Octavia 1.4 TSI Ambition",
+          "year": 2018
+        },
+        {
+          "id": "e7891059728136d06ef0930a",
+          "make": "Kia",
+          "model": "Sportage 1.6 GDI XL 2WD",
+          "year": 2013
+        },
+        {
+          "id": "983765dc42131ca66430efe7",
+          "make": "Hyundai",
+          "model": "ix35 2.0 4WD Automatik Premium",
+          "year": 2013
+        },
+        {
+          "id": "ea7f93d5f3f77fe9fe4a8adf",
+          "make": "Mazda",
+          "model": "6 SKYACTIV-G 165 ADVANTAGE",
+          "year": 2014
+        }
+      ]
+    },
+    {
+      "key": "PLN:49900:1030829",
+      "count": 4,
+      "rows": [
+        {
+          "id": "e3de12c653cf9738414fe9aa",
+          "make": "Skoda",
+          "model": "Superb 2.0 TDI DSG Premium Edition",
+          "year": 2015
+        },
+        {
+          "id": "50ea95ea0186e3e433badc8b",
+          "make": "Opel",
+          "model": "Mokka X",
+          "year": 2019
+        },
+        {
+          "id": "89933cdb30189acbc5cd8935",
+          "make": "Jeep",
+          "model": "Compass 1.4 TMair Longitude FWD S&S",
+          "year": 2019
+        },
+        {
+          "id": "ae953ddfc2c5689d2bcaacc6",
+          "make": "Dacia",
+          "model": "Duster 1.0 TCe Prestige",
+          "year": 2021
+        }
+      ]
+    },
+    {
+      "key": "PLN:53900:1113461",
+      "count": 4,
+      "rows": [
+        {
+          "id": "5e4a375015157349d8adb1ae",
+          "make": "Ford",
+          "model": "Kuga 2.0 TDCi 4x4 Vignale",
+          "year": 2019
+        },
+        {
+          "id": "18675e93b3c06b5f7ca0c61a",
+          "make": "Hyundai",
+          "model": "i30 1.5 T-GDI 48V Smart",
+          "year": 2023
+        },
+        {
+          "id": "d1f5ec000fb8776607ce9de3",
+          "make": "Nissan",
+          "model": "Qashqai 1.6 DIG-T 360",
+          "year": 2018
+        },
+        {
+          "id": "99e972e01b5bd88f3fcbc163",
+          "make": "Land Rover",
+          "model": "Range Rover Evoque D150 R-Dynamic HSE",
+          "year": 2017
+        }
+      ]
+    },
+    {
+      "key": "PLN:35900:741619",
+      "count": 4,
+      "rows": [
+        {
+          "id": "897cc41349e37f47ca9c55a8",
+          "make": "Ford",
+          "model": "Kuga 2.0 TDCi 2x4 Titanium",
+          "year": 2013
+        },
+        {
+          "id": "f4af44e2d7be0100f87ae29e",
+          "make": "Opel",
+          "model": "Mokka 1.6 ecoFLEX Start/Stop Edition",
+          "year": 2015
+        },
+        {
+          "id": "c6713797b0d4285854e5b64a",
+          "make": "Nissan",
+          "model": "Navara KC Visia",
+          "year": 2018
+        },
+        {
+          "id": "4275fb808f2e803476d4511d",
+          "make": "Lexus",
+          "model": "IS 300h Comfort",
+          "year": 2017
+        }
+      ]
+    },
+    {
+      "key": "PLN:33900:700303",
+      "count": 5,
+      "rows": [
+        {
+          "id": "d473834fdd8fd6b89a786548",
+          "make": "Opel",
+          "model": "Mokka 1.4 Turbo ecoFLEX Start/Stop 4x4 Edition",
+          "year": 2016
+        },
+        {
+          "id": "c76671eaaef418e86ff62439",
+          "make": "Jaguar",
+          "model": "XE",
+          "year": 2017
+        },
+        {
+          "id": "280962a9da533b4d51b17115",
+          "make": "MINI",
+          "model": "ONE GPF",
+          "year": 2021
+        },
+        {
+          "id": "a7f834141e23eb02477d4c9d",
+          "make": "MINI",
+          "model": "Countryman Cooper Essential Trim",
+          "year": 2021
+        },
+        {
+          "id": "cb27b14fd9dbf7563ebc6f8f",
+          "make": "Fiat",
+          "model": "500X",
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "key": "PLN:24900:514382",
+      "count": 4,
+      "rows": [
+        {
+          "id": "b40065e5b4f08b6ef7bacee9",
+          "make": "Opel",
+          "model": "Zafira",
+          "year": 2012
+        },
+        {
+          "id": "54ce80f135b83372aa2c640a",
+          "make": "Mazda",
+          "model": "CX-7",
+          "year": 2009
+        },
+        {
+          "id": "703853bbeaad2bc8737e4791",
+          "make": "Fiat",
+          "model": "500L",
+          "year": 2014
+        },
+        {
+          "id": "65426303a394ba7d978ce2b8",
+          "make": "Dacia",
+          "model": "Sandero Stepway 0.9 TCe Laureate S&S EU6",
+          "year": 2016
+        }
+      ]
+    },
+    {
+      "key": "PLN:119900:2476882",
+      "count": 8,
+      "rows": [
+        {
+          "id": "2f8913ab4373b4facf482c49",
+          "make": "Cupra",
+          "model": "Ateca 1.5 TSI DSG",
+          "year": 2024
+        },
+        {
+          "id": "7855d5ab9b02955d0c2bafa1",
+          "make": "Cupra",
+          "model": "Ateca 1.5 TSI DSG",
+          "year": 2024
+        },
+        {
+          "id": "b467eae017e515ef3a782b9d",
+          "make": "Cupra",
+          "model": "Ateca 1.5 TSI DSG",
+          "year": 2024
+        },
+        {
+          "id": "b90452ca215f77e9c38c0350",
+          "make": "Cupra",
+          "model": "Leon 2.0 TSI DSG",
+          "year": 2023
+        },
+        {
+          "id": "741134f0ed1151540a56e949",
+          "make": "Mazda",
+          "model": "CX-30",
+          "year": 2024
+        },
+        {
+          "id": "898af83509012dff012ab8a5",
+          "make": "Jeep",
+          "model": "Wrangler 2.0 T-GDI Softtop AWD Automatik Rubicon",
+          "year": 2019
+        },
+        {
+          "id": "a9b2d85ea990cd08004f65f4",
+          "make": "Land Rover",
+          "model": "Range Rover Velar 2.0 Si4 GPF R-Dynamic SE",
+          "year": 2018
+        },
+        {
+          "id": "fa5abc7cfb92ed74d749d93f",
+          "make": "MINI",
+          "model": "John Cooper Works sport",
+          "year": 2021
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "pass": 1,
+      "imported": 147,
+      "updated": 4,
+      "rejectedByQuality": 933,
+      "imageFailures": 3,
+      "publicByMarket": {
+        "korea": 500,
+        "china": 248,
+        "japan": 245,
+        "uae": 250,
+        "europe": 186
+      },
+      "sources": [
+        {
+          "sourceId": "otomoto_europe_exact",
+          "market": "europe",
+          "scanCycleId": "scan_d952cefa-034e-4587-b89e-a69b719fd6fb",
+          "ok": true,
+          "seen": 250,
+          "saved": 151,
+          "cursor": "10",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
+    },
+    {
+      "pass": 2,
+      "imported": 166,
+      "updated": 12,
+      "rejectedByQuality": 71,
+      "imageFailures": 1,
+      "publicByMarket": {
+        "korea": 500,
+        "china": 248,
+        "japan": 245,
+        "uae": 250,
+        "europe": 363
+      },
+      "sources": [
+        {
+          "sourceId": "otomoto_europe_exact",
+          "market": "europe",
+          "scanCycleId": "scan_d952cefa-034e-4587-b89e-a69b719fd6fb",
+          "ok": true,
+          "seen": 250,
+          "saved": 178,
+          "cursor": "20",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
+    },
+    {
+      "pass": 3,
+      "imported": 179,
+      "updated": 15,
+      "rejectedByQuality": 56,
+      "imageFailures": 0,
+      "publicByMarket": {
+        "korea": 500,
+        "china": 248,
+        "japan": 245,
+        "uae": 250,
+        "europe": 555
+      },
+      "sources": [
+        {
+          "sourceId": "otomoto_europe_exact",
+          "market": "europe",
+          "scanCycleId": "scan_d952cefa-034e-4587-b89e-a69b719fd6fb",
+          "ok": true,
+          "seen": 250,
+          "saved": 194,
+          "cursor": "29",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
+    }
+  ]
+}
