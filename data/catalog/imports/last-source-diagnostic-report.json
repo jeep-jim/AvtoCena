@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-07-18T03:37:39.607Z",
+  "startedAt": "2026-07-18T03:40:09.242Z",
   "requested": [
     "guazi_china_export",
     "otomoto_europe_exact",
@@ -10,29 +10,18 @@
       "sourceId": "guazi_china_export",
       "market": "china",
       "ok": true,
-      "durationMs": 941,
+      "durationMs": 1136,
       "raw": 20,
       "normalized": 20,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "Guazi export volkswagen page 1: parsed 20",
-        "checkedAt": "2026-07-18T03:37:40.545Z",
+        "checkedAt": "2026-07-18T03:40:10.371Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
       "samples": [
-        {
-          "make": "Volkswagen",
-          "model": "Lavida 2023 1.5L Automatic Starry Sky 5 Million",
-          "year": 2023,
-          "price": 10631,
-          "currency": "USD",
-          "mileageKm": 29700,
-          "fuel": "hybrid",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-lavida-2023-15l-white-29700km-at-2wd-5-seats-uvqavncdaz.html",
-          "rawImages": 6
-        },
         {
           "make": "Volkswagen",
           "model": "Tayron GTE Plug-in Hybrid 2024 280TSI Luxury Plus",
@@ -54,6 +43,17 @@
           "fuel": "petrol",
           "sourceUrl": "https://en.guazi.com/products/volkswagen-faw-volkswagen-cc-2012-30l-white-144800km-at-2wd-4-seats-yfs3wrl8fa.html",
           "rawImages": 6
+        },
+        {
+          "make": "Volkswagen",
+          "model": "Jetta 2015 Value Edition 1.6L Manual Fashionable Style",
+          "year": 2015,
+          "price": 2398,
+          "currency": "USD",
+          "mileageKm": 275000,
+          "fuel": "petrol",
+          "sourceUrl": "https://en.guazi.com/products/volkswagen-jetta-2015-16l-champagne-275000km-mt-2wd-5-seats-alxkbk2j3s.html",
+          "rawImages": 6
         }
       ]
     },
@@ -61,14 +61,14 @@
       "sourceId": "otomoto_europe_exact",
       "market": "europe",
       "ok": true,
-      "durationMs": 2733,
+      "durationMs": 5658,
       "raw": 32,
       "normalized": 31,
       "nextCursor": "2",
       "health": {
         "ok": true,
-        "message": "OTOMOTO page 1: 32",
-        "checkedAt": "2026-07-18T03:37:43.279Z",
+        "message": "OTOMOTO page 1: 32; detail prices checked",
+        "checkedAt": "2026-07-18T03:40:11.715Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
@@ -77,8 +77,8 @@
           "make": "Mercedes-Benz",
           "model": "Klasa G AMG 63",
           "year": 2023,
-          "price": null,
-          "currency": null,
+          "price": 850000,
+          "currency": "PLN",
           "mileageKm": 34000,
           "fuel": "petrol",
           "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/mercedes-benz-klasa-g-ID6Ia6KO.html",
@@ -88,8 +88,8 @@
           "make": "RAM",
           "model": "1500 5.7 Crew Cab Longbed Laramie Black",
           "year": 2020,
-          "price": null,
-          "currency": null,
+          "price": 200000,
+          "currency": "PLN",
           "mileageKm": 90000,
           "fuel": "petrol",
           "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ram-1500-ID6Ia7ar.html",
@@ -99,8 +99,8 @@
           "make": "DS Automobiles",
           "model": "DS 7 Crossback 1.6 E-Tense Performance Line +",
           "year": 2021,
-          "price": null,
-          "currency": null,
+          "price": 200000,
+          "currency": "PLN",
           "mileageKm": 112000,
           "fuel": "hybrid",
           "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ds-automobiles-ds-7-crossback-ID6Ia7aH.html",
@@ -112,14 +112,14 @@
       "sourceId": "dubicars_uae_exact",
       "market": "uae",
       "ok": true,
-      "durationMs": 3974,
+      "durationMs": 1498,
       "raw": 30,
       "normalized": 30,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "DubiCars page 1: 30",
-        "checkedAt": "2026-07-18T03:37:47.253Z",
+        "checkedAt": "2026-07-18T03:40:17.529Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=UTF-8"
       },
@@ -160,5 +160,5 @@
       ]
     }
   ],
-  "finishedAt": "2026-07-18T03:37:47.255Z"
+  "finishedAt": "2026-07-18T03:40:17.534Z"
 }
