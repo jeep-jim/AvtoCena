@@ -61,7 +61,11 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
     const cbrRate = Number(structured.cbrRate ?? structured.value);
     const nominal = Number(structured.nominal || 1);
     if (cbrRate > 0 && nominal > 0) {
-      const effectiveRate = Number(structured.effectiveRate || cbrRate / nominal);
+      const canonicalRate = cbrRate / nominal;
+      const storedEffectiveRate = Number(structured.effectiveRate || 0);
+      const storedRateIsConsistent = storedEffectiveRate > 0
+        && Math.abs(storedEffectiveRate - canonicalRate) / canonicalRate <= 0.05;
+      const effectiveRate = storedRateIsConsistent ? storedEffectiveRate : canonicalRate;
       const source = String(structured.rateSource || "cbr");
       return {
         currency: code,
