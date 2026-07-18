@@ -1,4 +1,4 @@
-name: Catalog final five-market ensure v19
+name: Catalog Europe clean rebuild v20
 
 on:
   workflow_dispatch:
@@ -15,9 +15,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  ensure:
+  rebuild-europe:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,68 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Ensure parser and importer fixes exist locally
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          def patch(path_value, old, new, marker):
-              path = Path(path_value)
-              text = path.read_text(encoding='utf-8')
-              if old in text:
-                  text = text.replace(old, new, 1)
-              elif marker not in text:
-                  raise SystemExit(f'{path_value}: required fix target missing')
-              path.write_text(text, encoding='utf-8')
-
-          patch('apps/web/lib/catalog/importer-impl.ts',
-            '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
-      const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);''',
-            '''      // Rejected candidates do not consume the valid-offer target.
-      const sourceMaxOffers = configuredMaxOffers;''',
-            'const sourceMaxOffers = configuredMaxOffers;')
-          patch('apps/web/lib/catalog/importer-impl.ts',
-            '''                const freshImages = await source.fetchImages(base);
-                images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));''',
-            '''                const freshImages = credibleCatalogImages(await source.fetchImages(base));
-                images = freshImages.length
-                  ? source.sourceId === "guazi_china_export"
-                    ? freshImages.slice(0, maxImagesPerOffer)
-                    : credibleCatalogImages(mergeImages(freshImages, previousImages, maxImagesPerOffer))
-                  : previousImages;''',
-            'source.sourceId === "guazi_china_export"')
-          patch('apps/web/lib/catalog/guazi-export-source.ts',
-            '    const card = markup.slice(Math.max(0, anchor.first - 2_500), Math.min(markup.length, nextIndex + 1_200));',
-            '    const card = markup.slice(anchor.first, Math.max(anchor.first, nextIndex));',
-            'markup.slice(anchor.first, Math.max(anchor.first, nextIndex))')
-          patch('apps/web/lib/catalog/guazi-export-source.ts',
-            '''    let urls = [...(row.images || [])];
-    if (urls.length < limit && row.url) {
-      const detail = await fetchHtml(row.url, row.url).catch(() => null);
-      if (detail?.response.ok) urls = [...urls, ...collectImages(detail.markup, row.url)];
-    }
-    const cached = await Promise.all([...new Set(urls)].slice(0, limit).map((url) =>''',
-            '''    // Never read recommendation images from the whole detail page.
-    const urls = [...new Set(row.images || [])];
-    const cached = await Promise.all(urls.slice(0, limit).map((url) =>''',
-            'Never read recommendation images')
-          patch('apps/web/lib/catalog/otomoto-detail-source.ts',
-            '''        const markup = await fetchMarkup(url).catch(() => "");
-        if (!markup) return raw;
-        const parsed = embeddedPrice(markup) || visiblePrice(markup);
-        return parsed ? { ...row, price: parsed.price, currency: parsed.currency } : raw;''',
-            '''        const currentPrice = Number(row.price || 0);
-        const currentCurrency = String(row.currency || "").toUpperCase();
-        if (currentPrice > 0 && ["PLN", "EUR"].includes(currentCurrency)) return raw;
-        const markup = await fetchMarkup(url).catch(() => "");
-        if (!markup) return raw;
-        const parsed = embeddedPrice(markup);
-        return parsed ? { ...row, price: parsed.price, currency: parsed.currency } : raw;''',
-            'currentCurrency = String(row.currency')
-          PY
-          npm run typecheck
-
-      - name: Reset exact-market scans
+      - name: Reset Europe source cursor
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -100,92 +39,129 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_IMPORT_SOURCES: goonet_japan_exact,encar_direct,guazi_china_export,dubicars_uae_exact,otomoto_europe_exact
+          CATALOG_IMPORT_SOURCES: otomoto_europe_exact
 
-      - name: Ensure and audit all five markets
+      - name: Import clean Europe prices and quarantine legacy rows
         run: |
-          cat > scripts/catalog-final-five-market-ensure-v19.mjs <<'NODE'
+          cat > scripts/catalog-europe-clean-rebuild-v20.mjs <<'NODE'
           const fs = await import('node:fs/promises');
           const { catalogImportSources, importCatalog } = await import('../apps/web/lib/catalog/importer.ts');
           const { exactMarketSources } = await import('../apps/web/lib/catalog/exact-market-sources.ts');
           const { mutateSourcePolicy } = await import('../apps/web/lib/catalog/policy.ts');
-          const { credibleCatalogImages, isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
+          const { isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
           const { persistCatalogOffers, readAllOffersForMaintenance } = await import('../apps/web/lib/catalog/storage.ts');
 
-          for (const source of exactMarketSources) {
-            const index = catalogImportSources.findIndex((item) => item.sourceId === source.sourceId);
-            if (index >= 0) catalogImportSources[index] = source;
-            else catalogImportSources.push(source);
-          }
-          const markets = ['japan','korea','china','uae','europe'];
-          const counts = (offers) => Object.fromEntries(markets.map((market)=>[market,offers.filter((offer)=>offer.market===market&&isCrediblePublicOffer(offer)).length]));
-          const sleep = (ms) => new Promise((resolve)=>setTimeout(resolve,ms));
-          const originalOffers = await readAllOffersForMaintenance();
-          const before = counts(originalOffers);
+          const sourceId = 'otomoto_europe_exact';
+          const exactSource = exactMarketSources.find((source) => source.sourceId === sourceId);
+          if (!exactSource) throw new Error('missing_otomoto_exact_source');
+          const existingSourceIndex = catalogImportSources.findIndex((source) => source.sourceId === sourceId);
+          if (existingSourceIndex >= 0) catalogImportSources[existingSourceIndex] = exactSource;
+          else catalogImportSources.push(exactSource);
+
+          await mutateSourcePolicy(exactSource, (policy) => ({
+            ...policy,
+            enabled: true,
+            blockedUntil: undefined,
+            consecutiveFailures: 0,
+            maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), 45),
+            maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), 500),
+            maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), 500),
+            imagesEnabled: true,
+          }));
+
+          process.env.CATALOG_TARGET_PER_MARKET = '250';
+          process.env.CATALOG_TARGET_PUBLIC_OFFERS = '1250';
+          process.env.CATALOG_IMPORT_BUDGET_MS = String(70 * 60 * 1000);
+          process.env.CATALOG_SOURCE_BUDGET_MS = String(65 * 60 * 1000);
+          process.env.CATALOG_MAX_IMAGES_PER_OFFER = '3';
+          process.env.CATALOG_PRESERVE_PREVIOUS_ON_FAILURE = 'true';
+          process.env.CATALOG_GROW_ONLY_MARKETS = 'korea';
+
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          const startedAt = new Date().toISOString();
           const runs = [];
 
-          // Every active OTOMOTO row created by the old parser is unsafe: it may contain
-          // the page-wide 200,000 PLN value instead of the vehicle-card price. Remove the
-          // legacy set from public output first, then rebuild Europe only from clean cards.
-          let europePurged = 0;
-          const withoutLegacyEurope = originalOffers.map((offer) => {
-            if (offer.market === 'europe' && offer.sourceId === 'otomoto_europe_exact' && offer.status === 'active') {
-              europePurged++;
-              return { ...offer, status: 'stale' };
-            }
-            return offer;
-          });
-          if (europePurged) await persistCatalogOffers(withoutLegacyEurope);
-          console.log(`[v19] quarantined ${europePurged} legacy Europe offers before clean refill`);
-
-          async function runTask(task) {
-            const source = catalogImportSources.find((item)=>item.sourceId===task.sourceId);
-            if (!source) throw new Error(`missing_${task.sourceId}`);
-            await mutateSourcePolicy(source,(policy)=>({...policy,enabled:true,blockedUntil:undefined,consecutiveFailures:0,maxPagesPerRun:Math.max(Number(policy.maxPagesPerRun||0),task.pages),maxOffersPerRun:Math.max(Number(policy.maxOffersPerRun||0),task.candidates),maxDetailsPerRun:Math.max(Number(policy.maxDetailsPerRun||0),task.candidates),imagesEnabled:true}));
-            process.env.CATALOG_TARGET_PER_MARKET=String(task.target);
-            process.env.CATALOG_IMPORT_BUDGET_MS=String(task.minutes*60000);
-            process.env.CATALOG_SOURCE_BUDGET_MS=String((task.minutes-5)*60000);
-            process.env.CATALOG_MAX_IMAGES_PER_OFFER='3';
-            process.env.CATALOG_PRESERVE_PREVIOUS_ON_FAILURE='true';
-            process.env.CATALOG_GROW_ONLY_MARKETS='korea';
-            let result;
-            for (let attempt=1;attempt<=20;attempt++) {
+          async function importPass(pass) {
+            for (let attempt = 1; attempt <= 30; attempt++) {
               try {
-                result=await importCatalog({sourceIds:[task.sourceId],maxOffers:task.candidates,maxDetails:task.candidates,maxImagesPerOffer:3,maxPages:task.pages,requireObjectStorage:true,failOnZeroSaved:false,reportPath:`catalog/imports/latest-${task.market}-ensure-v19.json`});
-                break;
+                const result = await importCatalog({
+                  sourceIds: [sourceId],
+                  maxOffers: 500,
+                  maxDetails: 500,
+                  maxImagesPerOffer: 3,
+                  maxPages: 45,
+                  requireObjectStorage: true,
+                  failOnZeroSaved: false,
+                  reportPath: `catalog/imports/latest-europe-clean-v20-pass-${pass}.json`,
+                });
+                runs.push({
+                  pass,
+                  imported: result.imported,
+                  updated: result.updated,
+                  rejectedByQuality: result.rejectedByQuality,
+                  imageFailures: result.imageFailures,
+                  publicByMarket: result.publicByMarket,
+                  sources: result.sources,
+                });
+                return;
               } catch (error) {
-                const message=String(error?.message||error);
-                if (!message.includes('catalog_import_locked')||attempt===20) throw error;
-                console.log(`[v19] ${task.market}: lock busy, retry ${attempt}/20`);
-                await sleep(60000);
+                const message = String(error?.message || error);
+                if (!message.includes('catalog_import_locked') || attempt === 30) throw error;
+                console.log(`[europe-v20] catalog locked, retry ${attempt}/30`);
+                await sleep(60_000);
               }
             }
-            runs.push({market:task.market,sourceId:task.sourceId,target:task.target,imported:result.imported,updated:result.updated,rejectedByQuality:result.rejectedByQuality,imageFailures:result.imageFailures,publicByMarket:result.publicByMarket,sources:result.sources});
           }
 
-          const tasks = [
-            // Europe goes first so the catalog is repopulated immediately after quarantine.
-            {market:'europe',sourceId:'otomoto_europe_exact',target:250,candidates:800,pages:45,minutes:85},
-            {market:'japan',sourceId:'goonet_japan_exact',target:250,candidates:500,pages:35,minutes:65},
-            {market:'china',sourceId:'guazi_china_export',target:250,candidates:650,pages:50,minutes:75},
-            {market:'uae',sourceId:'dubicars_uae_exact',target:Math.max(1,250-Number(before.uae||0)),candidates:750,pages:50,minutes:75},
-          ];
-          if (Number(before.korea||0)<250) tasks.unshift({market:'korea',sourceId:'encar_direct',target:250-Number(before.korea||0),candidates:500,pages:15,minutes:50});
-          for (const task of tasks) await runTask(task);
+          for (let pass = 1; pass <= 3; pass++) await importPass(pass);
 
-          const offers=await readAllOffersForMaintenance();
-          const after=counts(offers);
-          const imageOwners=new Map();
-          for(const offer of offers.filter(isCrediblePublicOffer)){const image=credibleCatalogImages(offer.images||[])[0];const key=String(image?.checksum||image?.id||'');if(!key)continue;const rows=imageOwners.get(key)||[];rows.push({id:offer.id,market:offer.market,sourceId:offer.sourceId,make:offer.make,model:offer.model,year:offer.year});imageOwners.set(key,rows);}
-          const duplicateFirstImages=[...imageOwners.entries()].filter(([,rows])=>rows.length>1).map(([checksum,rows])=>({checksum,rows})).slice(0,200);
-          const priceOwners=new Map();
-          for(const offer of offers.filter(isCrediblePublicOffer)){const total=Number(offer.totalRub||0);if(!total)continue;const key=`${offer.market}:${offer.sourceId}:${total}`;const rows=priceOwners.get(key)||[];rows.push({id:offer.id,make:offer.make,model:offer.model,year:offer.year});priceOwners.set(key,rows);}
-          const repeatedPrices=[...priceOwners.entries()].filter(([,rows])=>rows.length>=4).map(([key,rows])=>({key,count:rows.length,rows:rows.slice(0,20)})).slice(0,200);
-          const report={version:19,before,europePurged,after,reached250:Object.fromEntries(markets.map((market)=>[market,Number(after[market]||0)>=250])),runs,duplicateFirstImages,repeatedPrices,finishedAt:new Date().toISOString()};
-          await fs.writeFile('catalog-final-five-market-ensure-v19.json',JSON.stringify(report,null,2));
-          console.log(JSON.stringify({before,europePurged,after,reached250:report.reached250,runs},null,2));
+          const afterImport = await readAllOffersForMaintenance();
+          const cleanCutoff = Date.parse(startedAt);
+          const cleanIds = new Set(afterImport
+            .filter((offer) => offer.market === 'europe'
+              && offer.sourceId === sourceId
+              && Date.parse(String(offer.updatedAt || '')) >= cleanCutoff
+              && Number(offer.sourcePrice || 0) > 0
+              && ['PLN', 'EUR'].includes(String(offer.sourceCurrency || '').toUpperCase()))
+            .map((offer) => offer.id));
+
+          if (cleanIds.size < 80) throw new Error(`too_few_clean_europe_offers_${cleanIds.size}`);
+
+          let quarantined = 0;
+          const cleanedCatalog = afterImport.map((offer) => {
+            if (offer.market !== 'europe' || offer.sourceId !== sourceId || cleanIds.has(offer.id) || offer.status !== 'active') return offer;
+            quarantined++;
+            return { ...offer, status: 'stale' };
+          });
+          await persistCatalogOffers(cleanedCatalog);
+
+          const finalOffers = await readAllOffersForMaintenance();
+          const publicEurope = finalOffers.filter((offer) => offer.market === 'europe' && isCrediblePublicOffer(offer));
+          const repeated = new Map();
+          for (const offer of publicEurope) {
+            const key = `${offer.sourceCurrency}:${offer.sourcePrice}:${offer.totalRub}`;
+            const rows = repeated.get(key) || [];
+            rows.push({ id: offer.id, make: offer.make, model: offer.model, year: offer.year });
+            repeated.set(key, rows);
+          }
+          const repeatedPrices = [...repeated.entries()]
+            .filter(([, rows]) => rows.length >= 4)
+            .map(([key, rows]) => ({ key, count: rows.length, rows: rows.slice(0, 20) }));
+
+          const report = {
+            version: 20,
+            startedAt,
+            finishedAt: new Date().toISOString(),
+            cleanImported: cleanIds.size,
+            quarantined,
+            publicEurope: publicEurope.length,
+            repeatedPrices,
+            runs,
+          };
+          await fs.writeFile('catalog-europe-clean-rebuild-v20.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
           NODE
-          npx tsx scripts/catalog-final-five-market-ensure-v19.mjs 2>&1 | tee catalog-final-five-market-ensure-v19.log
+          npx tsx scripts/catalog-europe-clean-rebuild-v20.mjs 2>&1 | tee catalog-europe-clean-rebuild-v20.log
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -196,18 +172,31 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
           CATALOG_IMAGE_TIMEOUT_MS: "12000"
-          CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
 
-      - name: Commit code and final report
+      - name: Record Europe rebuild report
         if: always()
         run: |
-          if [ ! -f catalog-final-five-market-ensure-v19.json ]; then echo '{"version":19,"fatal":true,"error":"report_missing"}' > catalog-final-five-market-ensure-v19.json; fi
-          rm -f scripts/catalog-final-five-market-ensure-v19.mjs
-          git pull --rebase origin main || true
-          mkdir -p data/catalog/imports
-          cp catalog-final-five-market-ensure-v19.json data/catalog/imports/last-catalog-final-five-market-ensure-v19.json
+          if [ ! -f catalog-europe-clean-rebuild-v20.json ]; then
+            printf '{"version":20,"fatal":true,"error":"report_missing","finishedAt":"%s"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > catalog-europe-clean-rebuild-v20.json
+          fi
+          rm -f scripts/catalog-europe-clean-rebuild-v20.mjs
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/lib/catalog/importer-impl.ts apps/web/lib/catalog/guazi-export-source.ts apps/web/lib/catalog/otomoto-detail-source.ts data/catalog/imports/last-catalog-final-five-market-ensure-v19.json
-          git commit -m "Finalize five-market catalog integrity v19 [skip ci]" || true
-          git push origin HEAD:main || true
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main || true
+            mkdir -p data/catalog/imports
+            cp catalog-europe-clean-rebuild-v20.json data/catalog/imports/last-catalog-europe-clean-rebuild-v20.json
+            git add data/catalog/imports/last-catalog-europe-clean-rebuild-v20.json
+            git commit -m "Record clean Europe rebuild v20 [skip ci]" || true
+            git push origin HEAD:main && break
+            sleep 10
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-europe-clean-rebuild-v20
+          path: |
+            catalog-europe-clean-rebuild-v20.json
+            catalog-europe-clean-rebuild-v20.log
+          retention-days: 7
