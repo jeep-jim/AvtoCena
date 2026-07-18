@@ -1,1 +1,7 @@
-{"market":"china","fatal":true,"error":"progress_file_missing"}
+{
+  "market": "china",
+  "sourceId": "guazi_china_export",
+  "fatal": true,
+  "finishedAt": "2026-07-18T04:35:33.655Z",
+  "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+}

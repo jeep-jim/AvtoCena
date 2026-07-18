@@ -1,1 +1,7 @@
-{"market":"europe","fatal":true,"error":"progress_file_missing"}
+{
+  "market": "europe",
+  "sourceId": "otomoto_europe_exact",
+  "fatal": true,
+  "finishedAt": "2026-07-18T04:35:30.018Z",
+  "error": "Transform failed with 1 error:\n/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/dubicars-current-source.ts:17:733: ERROR: Syntax error \"/\""
+}
