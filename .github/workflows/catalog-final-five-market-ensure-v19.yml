@@ -110,7 +110,7 @@ jobs:
           const { exactMarketSources } = await import('../apps/web/lib/catalog/exact-market-sources.ts');
           const { mutateSourcePolicy } = await import('../apps/web/lib/catalog/policy.ts');
           const { credibleCatalogImages, isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
-          const { readAllOffersForMaintenance } = await import('../apps/web/lib/catalog/storage.ts');
+          const { persistCatalogOffers, readAllOffersForMaintenance } = await import('../apps/web/lib/catalog/storage.ts');
 
           for (const source of exactMarketSources) {
             const index = catalogImportSources.findIndex((item) => item.sourceId === source.sourceId);
@@ -120,8 +120,23 @@ jobs:
           const markets = ['japan','korea','china','uae','europe'];
           const counts = (offers) => Object.fromEntries(markets.map((market)=>[market,offers.filter((offer)=>offer.market===market&&isCrediblePublicOffer(offer)).length]));
           const sleep = (ms) => new Promise((resolve)=>setTimeout(resolve,ms));
-          const before = counts(await readAllOffersForMaintenance());
+          const originalOffers = await readAllOffersForMaintenance();
+          const before = counts(originalOffers);
           const runs = [];
+
+          // Every active OTOMOTO row created by the old parser is unsafe: it may contain
+          // the page-wide 200,000 PLN value instead of the vehicle-card price. Remove the
+          // legacy set from public output first, then rebuild Europe only from clean cards.
+          let europePurged = 0;
+          const withoutLegacyEurope = originalOffers.map((offer) => {
+            if (offer.market === 'europe' && offer.sourceId === 'otomoto_europe_exact' && offer.status === 'active') {
+              europePurged++;
+              return { ...offer, status: 'stale' };
+            }
+            return offer;
+          });
+          if (europePurged) await persistCatalogOffers(withoutLegacyEurope);
+          console.log(`[v19] quarantined ${europePurged} legacy Europe offers before clean refill`);
 
           async function runTask(task) {
             const source = catalogImportSources.find((item)=>item.sourceId===task.sourceId);
@@ -149,10 +164,11 @@ jobs:
           }
 
           const tasks = [
+            // Europe goes first so the catalog is repopulated immediately after quarantine.
+            {market:'europe',sourceId:'otomoto_europe_exact',target:250,candidates:800,pages:45,minutes:85},
             {market:'japan',sourceId:'goonet_japan_exact',target:250,candidates:500,pages:35,minutes:65},
             {market:'china',sourceId:'guazi_china_export',target:250,candidates:650,pages:50,minutes:75},
             {market:'uae',sourceId:'dubicars_uae_exact',target:Math.max(1,250-Number(before.uae||0)),candidates:750,pages:50,minutes:75},
-            {market:'europe',sourceId:'otomoto_europe_exact',target:250,candidates:650,pages:45,minutes:75},
           ];
           if (Number(before.korea||0)<250) tasks.unshift({market:'korea',sourceId:'encar_direct',target:250-Number(before.korea||0),candidates:500,pages:15,minutes:50});
           for (const task of tasks) await runTask(task);
@@ -165,9 +181,9 @@ jobs:
           const priceOwners=new Map();
           for(const offer of offers.filter(isCrediblePublicOffer)){const total=Number(offer.totalRub||0);if(!total)continue;const key=`${offer.market}:${offer.sourceId}:${total}`;const rows=priceOwners.get(key)||[];rows.push({id:offer.id,make:offer.make,model:offer.model,year:offer.year});priceOwners.set(key,rows);}
           const repeatedPrices=[...priceOwners.entries()].filter(([,rows])=>rows.length>=4).map(([key,rows])=>({key,count:rows.length,rows:rows.slice(0,20)})).slice(0,200);
-          const report={version:19,before,after,reached250:Object.fromEntries(markets.map((market)=>[market,Number(after[market]||0)>=250])),runs,duplicateFirstImages,repeatedPrices,finishedAt:new Date().toISOString()};
+          const report={version:19,before,europePurged,after,reached250:Object.fromEntries(markets.map((market)=>[market,Number(after[market]||0)>=250])),runs,duplicateFirstImages,repeatedPrices,finishedAt:new Date().toISOString()};
           await fs.writeFile('catalog-final-five-market-ensure-v19.json',JSON.stringify(report,null,2));
-          console.log(JSON.stringify({before,after,reached250:report.reached250,runs},null,2));
+          console.log(JSON.stringify({before,europePurged,after,reached250:report.reached250,runs},null,2));
           NODE
           npx tsx scripts/catalog-final-five-market-ensure-v19.mjs 2>&1 | tee catalog-final-five-market-ensure-v19.log
         env:
