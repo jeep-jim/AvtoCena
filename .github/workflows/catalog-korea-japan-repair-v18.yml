@@ -7,7 +7,6 @@ on:
     paths:
       - apps/web/lib/catalog/offer-quality.ts
       - apps/web/lib/catalog/rates.ts
-      - apps/web/lib/catalog/importer-impl.ts
 
 permissions:
   contents: write
