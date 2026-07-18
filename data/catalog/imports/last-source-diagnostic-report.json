@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-07-18T03:23:23.289Z",
+  "startedAt": "2026-07-18T03:26:48.935Z",
   "requested": [
     "guazi_china_export",
     "otomoto_europe_exact",
@@ -10,14 +10,14 @@
       "sourceId": "guazi_china_export",
       "market": "china",
       "ok": true,
-      "durationMs": 1163,
+      "durationMs": 1221,
       "raw": 20,
       "normalized": 20,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "Guazi export volkswagen page 1: parsed 20",
-        "checkedAt": "2026-07-18T03:23:24.446Z",
+        "checkedAt": "2026-07-18T03:26:50.149Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
@@ -61,26 +61,60 @@
       "sourceId": "otomoto_europe_exact",
       "market": "europe",
       "ok": true,
-      "durationMs": 1236,
+      "durationMs": 1085,
       "raw": 32,
-      "normalized": 0,
+      "normalized": 31,
       "nextCursor": "2",
       "health": {
         "ok": true,
         "message": "OTOMOTO page 1: 32",
-        "checkedAt": "2026-07-18T03:23:25.688Z",
+        "checkedAt": "2026-07-18T03:26:51.238Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
-      "samples": []
+      "samples": [
+        {
+          "make": "Mercedes-Benz",
+          "model": "Klasa G AMG 63",
+          "year": 2023,
+          "price": null,
+          "currency": null,
+          "mileageKm": 585,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/mercedes-benz-klasa-g-ID6Ia6KO.html",
+          "rawImages": 1
+        },
+        {
+          "make": "RAM",
+          "model": "1500 5.7 Crew Cab Longbed Laramie Black",
+          "year": 2020,
+          "price": null,
+          "currency": null,
+          "mileageKm": 399,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ram-1500-ID6Ia7ar.html",
+          "rawImages": 1
+        },
+        {
+          "make": "DS Automobiles",
+          "model": "DS 7 Crossback 1.6 E-Tense Performance Line +",
+          "year": 2021,
+          "price": null,
+          "currency": null,
+          "mileageKm": 225,
+          "fuel": "hybrid",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/ds-automobiles-ds-7-crossback-ID6Ia7aH.html",
+          "rawImages": 1
+        }
+      ]
     },
     {
       "sourceId": "dubicars_uae_exact",
       "market": "uae",
       "ok": true,
-      "durationMs": 5231,
-      "raw": 27,
-      "normalized": 27,
+      "durationMs": 2155,
+      "raw": 28,
+      "normalized": 28,
       "nextCursor": "2",
       "samples": [
         {
@@ -119,5 +153,5 @@
       ]
     }
   ],
-  "finishedAt": "2026-07-18T03:23:30.919Z"
+  "finishedAt": "2026-07-18T03:26:53.396Z"
 }
