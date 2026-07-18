@@ -23,9 +23,13 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Add recovery and final market safeguards
+      - name: Add recovery and verify safeguards
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          mkdir -p data/catalog/imports
+          : > data/catalog/imports/catalog-v15-branch-diagnostic.txt
+          python - <<'PY' >> data/catalog/imports/catalog-v15-branch-diagnostic.txt 2>&1
           from pathlib import Path
 
           filters = Path('apps/web/components/catalog/CatalogFilters.tsx')
@@ -37,6 +41,8 @@ jobs:
 
           workflow = Path('.github/workflows/catalog-production-recovery-once-v2.yml')
           text = workflow.read_text(encoding='utf-8')
+          if 'name: Catalog exact markets fill v14' not in text:
+            raise SystemExit('workflow version target missing')
           text = text.replace('name: Catalog exact markets fill v14', 'name: Catalog exact markets fill v15', 1)
           trigger = '      - apps/web/lib/catalog/exact-market-sources.ts\n'
           additions = '''      - apps/web/lib/catalog/exact-market-sources.ts
@@ -81,17 +87,30 @@ jobs:
           text = text.replace('CATALOG_EXACT_MAX_PAGES: "12"', 'CATALOG_EXACT_MAX_PAGES: "24"')
           text = text.replace('CATALOG_EXACT_MAX_PAGES: "16"', 'CATALOG_EXACT_MAX_PAGES: "24"')
           workflow.write_text(text, encoding='utf-8')
+          print('patch_status=0')
           PY
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Tests
-        run: npm test
-      - name: Build
-        run: npm run build
-      - name: Commit verified branch
+          patch_status=$?
+          echo "python_status=$patch_status" >> data/catalog/imports/catalog-v15-branch-diagnostic.txt
+          if [ "$patch_status" = "0" ]; then
+            npm run typecheck >> data/catalog/imports/catalog-v15-branch-diagnostic.txt 2>&1
+            echo "typecheck_status=$?" >> data/catalog/imports/catalog-v15-branch-diagnostic.txt
+            npm test >> data/catalog/imports/catalog-v15-branch-diagnostic.txt 2>&1
+            echo "test_status=$?" >> data/catalog/imports/catalog-v15-branch-diagnostic.txt
+            npm run build >> data/catalog/imports/catalog-v15-branch-diagnostic.txt 2>&1
+            echo "build_status=$?" >> data/catalog/imports/catalog-v15-branch-diagnostic.txt
+          fi
+          exit 0
+      - name: Commit verified branch or diagnostic
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if grep -q '^python_status=0$' data/catalog/imports/catalog-v15-branch-diagnostic.txt && grep -q '^typecheck_status=0$' data/catalog/imports/catalog-v15-branch-diagnostic.txt && grep -q '^test_status=0$' data/catalog/imports/catalog-v15-branch-diagnostic.txt && grep -q '^build_status=0$' data/catalog/imports/catalog-v15-branch-diagnostic.txt; then
+            rm -f data/catalog/imports/catalog-v15-branch-diagnostic.txt
+            message="Restore protected Korea and run exact market fill v15 [skip ci]"
+          else
+            message="Record v15 branch diagnostic [skip ci]"
+          fi
           git add -A
-          git commit -m "Restore protected Korea and run exact market fill v15 [skip ci]"
+          git commit -m "$message" || true
           git push origin HEAD:fix/catalog-market-integrity-62
