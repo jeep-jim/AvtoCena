@@ -35,9 +35,9 @@ const maxPages = Math.max(20, Number(process.env.CATALOG_IMPORT_MAX_PAGES || 80)
 const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 3));
 
 const marketPlans = [
-  { market: "uae", sources: ["dubicars_uae_exact"] },
+  { market: "uae", sources: ["dubicars_uae_exact", "dubicars_clean"] },
   { market: "europe", sources: ["otomoto_europe_exact", "autoscout_europe"] },
-  { market: "china", sources: ["che168_dealer_exact", "che168_china_exact", "che168_global"] },
+  { market: "china", sources: ["che168_dealer_exact", "che168_clean", "che168_html", "che168_china_exact", "che168_global"] },
   { market: "korea", sources: ["encar_direct"] },
 ];
 
