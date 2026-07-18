@@ -3,7 +3,11 @@ import type { CatalogImage, VehicleOffer } from "./types";
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|twitter|x\.com|social|share[-_ ]?icon)/i;
-const DISALLOWED_GENERIC_SOURCES = new Set(["dubicars_uae", "autouncle_europe"]);
+const DISALLOWED_GENERIC_SOURCES = new Set(["dubicars_uae", "dubicars_clean", "autouncle_europe", "autoscout_europe"]);
+const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
+  europe: new Set(["otomoto_europe_exact"]),
+  uae: new Set(["dubicars_uae_exact"]),
+};
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
@@ -57,7 +61,13 @@ function rawImagesAreCredible(offer: VehicleOffer) {
 }
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {
-  if (DISALLOWED_GENERIC_SOURCES.has(String(offer.sourceId || ""))) return false;
+  const sourceId = String(offer.sourceId || "");
+  if (DISALLOWED_GENERIC_SOURCES.has(sourceId)) return false;
+  const trusted = TRUSTED_MARKET_SOURCES[String(offer.market || "")];
+  if (trusted && sourceId && !trusted.has(sourceId)) return false;
+  const raw = offer.operational?.raw as any;
+  const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
+  if (sourceId === "dubicars_uae_exact" && rawImages.length && !rawImages.some((url: string) => /\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+)\/[^/?#]+\/[a-f0-9-]+\.(?:jpe?g|webp)/i.test(url))) return false;
   if (!meaningfulName(offer.make) || !meaningfulName(offer.model)) return false;
   const combinedText = [offer.make, offer.model, offer.trim, offer.operational?.sourceVenueName].map(clean).filter(Boolean).join(" ");
   if (GENERIC_LISTING_RE.test(combinedText) || NON_VEHICLE_RE.test(combinedText)) return false;

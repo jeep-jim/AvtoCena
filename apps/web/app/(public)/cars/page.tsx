@@ -38,7 +38,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   };
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
   const [facets, groupedMarkets] = await Promise.all([
-    readCatalogFacets(),
+    readCatalogFacets({ market: selectedMarket || undefined, make: common.make || undefined }),
     Promise.all(markets.map(async (market) => {
       const result = await searchOffers({ ...common, market: market.id, page: selectedMarket ? requestedPage : 1, pageSize: selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS });
       const items = result.items.filter((offer: any) => isCrediblePublicOffer(offer));

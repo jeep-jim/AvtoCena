@@ -2,7 +2,7 @@ const { readDataJson } = await import("../apps/web/lib/data.ts");
 const { chunkName, offerPath, persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 const { hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
 
-const MARKETS = ["korea", "china", "japan", "uae", "europe"];
+const MARKETS = String(process.env.CATALOG_RECOVERY_MARKETS || "korea,china,japan,uae,europe").split(",").map((value) => value.trim()).filter(Boolean);
 const EMERGENCY_GENERATIONS = [
   // Last confirmed production generation before the destructive underfill.
   "gen_1784276049832_9868cbbe",

@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
+import { hasCredibleOfferContent } from "./offer-quality";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 
 const MARKETS: CatalogMarket[] = ["japan", "korea", "china", "uae", "europe"];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -13,6 +15,7 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?dongchedi\.com$/i,
   /^(.+\.)?byteimg\.com$/i,
   /^(.+\.)?guazi\.com$/i,
+  /^(.+\.)?guazistatic-global\.com$/i,
   /^(.+\.)?xin\.com$/i,
   /^(.+\.)?taoche\.com$/i,
   /^(.+\.)?58che\.com$/i,
@@ -86,7 +89,7 @@ const ALLOWED_IMAGE_HOSTS = [
 export const CATALOG_CHUNK_SIZE = 500;
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
-export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string }> };
+export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
@@ -103,7 +106,18 @@ async function writeJsonAtomic(path: string, value: unknown, ifNoneMatch = true)
 export async function readMarketOffers(market: string) { const manifest = await readManifest(); const chunks: string[] = manifest.markets?.[market]?.chunks || []; const lists = await Promise.all(chunks.map((c) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, market, c), []))); return lists.flat(); }
 export async function readAllOffersForMaintenance() { const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} }); const chunks: string[] = Object.values<any>(manifest.sources || {}).flatMap((source) => source.chunks || []); const lists = await Promise.all(chunks.map((path) => readDataJson<VehicleOffer[]>(path, []))); return lists.flat(); }
 export const readAllOffers = readAllOffersForMaintenance;
-export async function readCatalogFacets(): Promise<CatalogFacets> { const manifest = await readManifest(); return readIndex<CatalogFacets>(manifest.generationId, "facets.json", { generationId: manifest.generationId, makes: [], models: [] }); }
+export async function readCatalogFacets(params: Pick<CatalogSearchParams, "market" | "make"> = {}): Promise<CatalogFacets> {
+  const manifest = await readManifest();
+  const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
+  if (!params.market && !params.make) return readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
+  const marketIds = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+  const rows = (await Promise.all(marketIds.map((market) => readMarketOffers(market)))).flat().filter(isPublicOffer);
+  const offers = params.make ? rows.filter((offer) => cleanFacet(offer.make) === cleanFacet(params.make)) : rows;
+  const values = (selector: (offer: VehicleOffer) => unknown) => [...new Set(offers.map(selector).map(cleanFacet).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ru"));
+  const makes = values((offer) => offer.make);
+  const models = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()].filter((item) => item.make && item.model).sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
+  return { generationId: manifest.generationId, makes, models, markets: values((offer) => offer.market), bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive) };
+}
 
 async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[]) {
   const now = new Date().toISOString();
@@ -126,7 +140,7 @@ async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>
   }
   throw new StorageConflictError();
 }
-function isPublicOffer(o: VehicleOffer) { return o.status === "active" && o.images.length > 0 && Boolean(o.totalRub || o.calculationStatus === "needs_data" || o.calculationStatus === "auction_start"); }
+function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o) && Boolean(o.totalRub || o.calculationStatus === "needs_data" || o.calculationStatus === "auction_start"); }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
 async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency: number) {
   if (!tasks.length) return;
@@ -142,6 +156,20 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
 }
 export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   const storage = getJsonStorage();
+  const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
+  const normalized = nextOffers.map((offer) => normalizeVehicleOfferSpecs(offer));
+  if (growOnlyMarkets.size) {
+    const current = await readAllOffersForMaintenance();
+    const merged = new Map(normalized.map((offer) => [offer.id, offer]));
+    for (const offer of current) {
+      if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
+      const incoming = merged.get(offer.id);
+      if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) merged.set(offer.id, normalizeVehicleOfferSpecs({ ...offer, status: "active" }));
+    }
+    nextOffers = [...merged.values()];
+  } else {
+    nextOffers = normalized;
+  }
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   await persistInternalCatalog(storage, generationId, nextOffers);
@@ -171,7 +199,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   throw new StorageConflictError();
 }
 export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
-  const maps: Record<string, Map<string, string[]>> = { market: new Map(), make: new Map(), model: new Map(), year: new Map(), budget: new Map(), fuel: new Map(), body: new Map(), drive: new Map(), hasPrice: new Map() };
+  const maps: Record<string, Map<string, string[]>> = { market: new Map(), make: new Map(), model: new Map(), year: new Map(), budget: new Map(), fuel: new Map(), body: new Map(), transmission: new Map(), drive: new Map(), hasPrice: new Map() };
   const makes = new Map<string, string>();
   const models = new Map<string, { make: string; model: string }>();
   for (const o of offers) {
@@ -179,12 +207,21 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     const model = cleanFacet(o.model);
     if (make) makes.set(cleanShard(make), make);
     if (make && model) models.set(`${cleanShard(make)}:${cleanShard(model)}`, { make, model });
-    const pairs = { market: o.market, make, model: `${make}:${model}`, year: o.year, budget: budgetBucket(o.totalRub), fuel: o.fuel, body: o.bodyType, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no" };
+    const pairs = { market: o.market, make, model: `${make}:${model}`, year: o.year, budget: budgetBucket(o.totalRub), fuel: o.fuel, body: o.bodyType, transmission: o.transmission, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no" };
     for (const [name, key] of Object.entries(pairs)) { const m = maps[name]; const k = cleanShard(key); m.set(k, [...(m.get(k) || []), o.id]); }
   }
   await writeJsonAtomic(generationPath(generationId, "indexes/offers-by-id.json"), { generationId, byId });
   await writeJsonAtomic(generationPath(generationId, "indexes/images-by-id.json"), { generationId, imagesById });
-  await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), { generationId, makes: [...makes.values()].sort((a,b) => a.localeCompare(b, "ru")), models: [...models.values()].sort((a,b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru")) });
+  await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), {
+    generationId,
+    makes: [...makes.values()].sort((a,b) => a.localeCompare(b, "ru")),
+    models: [...models.values()].sort((a,b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru")),
+    markets: [...new Set(offers.map((offer) => cleanFacet(offer.market)).filter(Boolean))].sort(),
+    bodyTypes: [...new Set(offers.map((offer) => cleanFacet(offer.bodyType)).filter(Boolean))].sort(),
+    fuels: [...new Set(offers.map((offer) => cleanFacet(offer.fuel)).filter(Boolean))].sort(),
+    transmissions: [...new Set(offers.map((offer) => cleanFacet(offer.transmission)).filter(Boolean))].sort(),
+    drives: [...new Set(offers.map((offer) => cleanFacet(offer.drive)).filter(Boolean))].sort(),
+  });
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => b.updatedAt.localeCompare(a.updatedAt)).map((o) => o.id) });
   const tasks = Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => () => writeIndexShard(generationId, name, key, ids)));
   const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
