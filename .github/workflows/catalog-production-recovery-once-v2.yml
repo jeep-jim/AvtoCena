@@ -1,4 +1,4 @@
-name: Catalog China Europe UAE recovery v11
+name: Catalog exact markets fill v12
 
 on:
   workflow_dispatch:
@@ -6,7 +6,6 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-once-v2.yml
-      - scripts/catalog-fill-underfilled-markets.mjs
       - apps/web/lib/catalog/guazi-export-source.ts
       - apps/web/lib/catalog/otomoto-current-source.ts
       - apps/web/lib/catalog/otomoto-detail-source.ts
@@ -23,7 +22,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,24 +30,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Prepare deficit-capped recovery script
-        run: |
-          node - <<'NODE'
-          const fs = require('fs');
-          const sourcePath = 'scripts/catalog-fill-underfilled-markets.mjs';
-          const runtimePath = 'scripts/catalog-fill-underfilled-runtime.mjs';
-          const needle = 'process.env.CATALOG_TARGET_PER_MARKET = String(candidateTarget);';
-          const source = fs.readFileSync(sourcePath, 'utf8');
-          if (!source.includes(needle)) throw new Error('target line not found');
-          fs.writeFileSync(runtimePath, source.replace(needle, 'process.env.CATALOG_TARGET_PER_MARKET = String(deficit);'));
-          NODE
-          node --check scripts/catalog-fill-underfilled-runtime.mjs
-      - name: Remove local test catalog
-        run: |
-          rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
-          rm -f data/catalog/manifest.json data/catalog/import-lock.json
-      - name: Recover best available production generations
-        run: npx tsx scripts/catalog-recover-generations.mjs
+      - name: Restart exact source cursors and clear stale import lock
+        run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env: &storage
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -57,24 +40,123 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-          CATALOG_RECOVERY_MAX_CHUNKS: "30"
-          CATALOG_RECOVERY_MIN_GAIN: "1"
-      - name: Reactivate recent valid offers
-        run: npx tsx scripts/catalog-recover-active.mjs
-        env:
-          <<: *storage
-          CATALOG_RECOVERY_WINDOW_MS: "3888000000"
-          CATALOG_RECOVERY_MIN_PUBLIC: "1"
-      - name: Restart China Europe UAE cursors
-        run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
-        env:
-          <<: *storage
-          CATALOG_IMPORT_SOURCES: guazi_china_export,che168_dealer_exact,che168_clean,che168_html,che168_china_exact,che168_global,sbt_china,otomoto_europe_exact,autoscout_europe,sbt_uk,dubicars_uae_exact,dubicars_clean,sbt_uae
-      - name: Fill China Europe and UAE to 250 public offers
+          CATALOG_IMPORT_SOURCES: dubicars_uae_exact,otomoto_europe_exact,guazi_china_export
+      - name: Create direct exact-source filler
+        run: |
+          cat > scripts/catalog-exact-fill-runtime.mjs <<'NODE'
+          const fs = await import('node:fs/promises');
+          const { exactMarketSources } = await import('../apps/web/lib/catalog/exact-market-sources.ts');
+          const { catalogImportSources, importCatalog } = await import('../apps/web/lib/catalog/importer.ts');
+          const { mutateSourcePolicy } = await import('../apps/web/lib/catalog/policy.ts');
+          const { isCrediblePublicOffer } = await import('../apps/web/lib/catalog/offer-quality.ts');
+          const { readAllOffersForMaintenance } = await import('../apps/web/lib/catalog/storage.ts');
+
+          for (const source of exactMarketSources) {
+            const index = catalogImportSources.findIndex((item) => item.sourceId === source.sourceId);
+            if (index >= 0) catalogImportSources[index] = source;
+            else catalogImportSources.push(source);
+          }
+
+          const plans = [
+            { market: 'uae', sourceId: 'dubicars_uae_exact', maxPages: 20 },
+            { market: 'europe', sourceId: 'otomoto_europe_exact', maxPages: 30 },
+            { market: 'china', sourceId: 'guazi_china_export', maxPages: 50 },
+          ];
+          const desired = 250;
+          const countAll = (offers) => offers.filter(isCrediblePublicOffer).reduce((totals, offer) => {
+            totals[offer.market] = (totals[offer.market] || 0) + 1;
+            return totals;
+          }, {});
+          const reports = [];
+          const startedAt = new Date().toISOString();
+
+          for (const plan of plans) {
+            const beforeCounts = countAll(await readAllOffersForMaintenance());
+            const before = Number(beforeCounts[plan.market] || 0);
+            const deficit = Math.max(0, desired - before);
+            if (!deficit) {
+              reports.push({ ...plan, before, after: before, deficit: 0, reached: true, skipped: true });
+              continue;
+            }
+
+            const source = catalogImportSources.find((item) => item.sourceId === plan.sourceId);
+            if (!source) {
+              reports.push({ ...plan, before, after: before, deficit, reached: false, error: 'source_not_registered' });
+              continue;
+            }
+
+            const candidateLimit = Math.min(600, Math.max(50, deficit * 2));
+            process.env.CATALOG_TARGET_PER_MARKET = String(deficit);
+            process.env.CATALOG_TARGET_PUBLIC_OFFERS = String(desired * 5);
+            process.env.CATALOG_IMPORT_BUDGET_MS = String(65 * 60 * 1000);
+            process.env.CATALOG_SOURCE_BUDGET_MS = String(60 * 60 * 1000);
+            process.env.CATALOG_MAX_IMAGES_PER_OFFER = '3';
+            process.env.CATALOG_PRESERVE_PREVIOUS_ON_FAILURE = 'true';
+            process.env.CATALOG_OFFER_RETENTION_MS = String(45 * 24 * 60 * 60 * 1000);
+            process.env.CATALOG_STALE_GRACE_MS = String(45 * 24 * 60 * 60 * 1000);
+
+            await mutateSourcePolicy(source, (policy) => ({
+              ...policy,
+              enabled: true,
+              blockedUntil: undefined,
+              consecutiveFailures: 0,
+              maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), plan.maxPages),
+              maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), candidateLimit),
+              maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), candidateLimit),
+              imagesEnabled: true,
+            }));
+
+            const result = await importCatalog({
+              sourceIds: [plan.sourceId],
+              maxOffers: candidateLimit,
+              maxDetails: candidateLimit,
+              maxImagesPerOffer: 3,
+              maxPages: plan.maxPages,
+              requireObjectStorage: true,
+              failOnZeroSaved: false,
+              reportPath: `catalog/imports/latest-${plan.market}-exact-fill.json`,
+            }).catch((error) => ({ imported: 0, updated: 0, sources: [], error: error?.message || String(error) }));
+
+            const afterCounts = countAll(await readAllOffersForMaintenance());
+            const after = Number(afterCounts[plan.market] || 0);
+            const marketReport = {
+              ...plan,
+              before,
+              after,
+              deficit,
+              candidateLimit,
+              gained: Math.max(0, after - before),
+              reached: after >= desired,
+              imported: Number(result.imported || 0),
+              updated: Number(result.updated || 0),
+              rejectedByQuality: Number(result.rejectedByQuality || 0),
+              imageFailures: Number(result.imageFailures || 0),
+              deadlineReached: Boolean(result.deadlineReached),
+              error: result.error,
+              sources: result.sources || [],
+            };
+            reports.push(marketReport);
+            await fs.writeFile(`catalog-${plan.market}-progress.json`, JSON.stringify(marketReport, null, 2));
+          }
+
+          const publicByMarket = countAll(await readAllOffersForMaintenance());
+          const report = {
+            startedAt,
+            finishedAt: new Date().toISOString(),
+            desiredPerMarket: desired,
+            publicByMarket,
+            missingByMarket: Object.fromEntries(['korea','china','japan','uae','europe'].map((market) => [market, Math.max(0, desired - Number(publicByMarket[market] || 0))])),
+            markets: reports,
+          };
+          await fs.writeFile('catalog-underfilled-markets-report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+          node --check scripts/catalog-exact-fill-runtime.mjs
+      - name: Fill UAE Europe and China from exact sources
         shell: bash
         run: |
           set +e
-          npx tsx scripts/catalog-fill-underfilled-runtime.mjs 2>&1 | tee catalog-underfilled-markets.log
+          npx tsx scripts/catalog-exact-fill-runtime.mjs 2>&1 | tee catalog-underfilled-markets.log
           status=${PIPESTATUS[0]}
           if [ ! -f catalog-underfilled-markets-report.json ]; then
             STATUS="$status" node - <<'NODE'
@@ -82,38 +164,26 @@ jobs:
           fs.writeFileSync('catalog-underfilled-markets-report.json', JSON.stringify({
             fatal: true,
             exitCode: Number(process.env.STATUS || 1),
-            message: 'Recovery script exited before writing its report. See catalog-underfilled-markets.log.'
+            message: 'Exact market fill stopped before the final report. See log artifact.'
           }, null, 2));
           NODE
           fi
           exit 0
         env:
           <<: *storage
-          CATALOG_FILL_MARKETS: china,europe,uae
-          CATALOG_DESIRED_PER_MARKET: "250"
-          CATALOG_CANDIDATE_MULTIPLIER: "4"
-          CATALOG_MIN_CANDIDATES: "100"
-          CATALOG_MAX_CANDIDATES: "1000"
-          CATALOG_IMPORT_MAX_PAGES: "100"
-          CATALOG_MAX_IMAGES_PER_OFFER: "3"
-          CATALOG_LOCK_WAIT_MS: "2700000"
-          CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
-          CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
           CATALOG_IMAGE_TIMEOUT_MS: "12000"
-          CATALOG_OFFER_RETENTION_MS: "3888000000"
-          CATALOG_STALE_GRACE_MS: "3888000000"
-          CATALOG_IMPORT_REPORT_FILE: catalog-underfilled-markets-report.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-china-europe-uae-v11
+          name: catalog-exact-markets-v12
           path: |
             catalog-underfilled-markets-report.json
             catalog-underfilled-markets.log
+            catalog-*-progress.json
           if-no-files-found: warn
           retention-days: 7
-      - name: Record report in repository
+      - name: Record final report in repository
         if: always()
         run: |
           if [ ! -f catalog-underfilled-markets-report.json ]; then exit 0; fi
@@ -122,7 +192,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/catalog/imports/last-underfilled-markets-report.json
-          git commit -m "Record China Europe UAE recovery v11 report [skip ci]" || exit 0
+          git commit -m "Record exact market fill v12 report [skip ci]" || exit 0
           git push origin HEAD:main
       - name: Summary
         if: always()
@@ -131,7 +201,7 @@ jobs:
           const fs = require('fs');
           const report = JSON.parse(fs.readFileSync('catalog-underfilled-markets-report.json', 'utf8'));
           console.log(`Fatal: ${Boolean(report.fatal)}`);
-          for (const market of ['china','europe','uae']) {
+          for (const market of ['uae','europe','china']) {
             console.log(`- ${market}: ${report.publicByMarket?.[market] || 0}; missing ${report.missingByMarket?.[market] || 0}`);
           }
           for (const market of report.markets || []) {
