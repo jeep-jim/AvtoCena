@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 export function VehicleGallery({ images, title }: { images: string[]; title: string }) {
   const cleanImages = [...new Set(images.filter(Boolean))];
@@ -85,6 +86,63 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     />
   );
 
+  const fullscreenGallery = fullscreen ? (
+    <div
+      className="fixed inset-0 z-[2147483647] flex flex-col bg-black/[0.94] p-3 backdrop-blur-md sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Фотографии ${title}`}
+      onClick={() => setFullscreen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setFullscreen(false)}
+        className="absolute right-3 top-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur sm:right-6 sm:top-6"
+        aria-label="Закрыть галерею"
+      >
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true"><path d="M3 3L16 16M16 3L3 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          advanceFullscreen();
+        }}
+        onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
+        onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
+        className="flex min-h-0 flex-1 touch-pan-y items-center justify-center overflow-hidden"
+        aria-label={cleanImages.length > 1 ? "Следующее фото" : "Фотография автомобиля"}
+      >
+        <img
+          key={`fullscreen-${cleanImages[activeIndex]}`}
+          src={cleanImages[activeIndex]}
+          alt={`${title}, фото ${activeIndex + 1}`}
+          className="max-h-full max-w-full select-none object-contain"
+          draggable={false}
+        />
+      </button>
+
+      <div className="mt-3 text-center text-sm font-black text-white/70">{activeIndex + 1} / {cleanImages.length}</div>
+      {cleanImages.length > 1 ? (
+        <div className="ac-hide-scrollbar mx-auto mt-3 flex max-w-full gap-2 overflow-x-auto pb-1" onClick={(event) => event.stopPropagation()}>
+          {cleanImages.map((thumbnail, index) => (
+            <button
+              key={`fullscreen-thumb-${thumbnail}-${index}`}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-xl transition ${index === activeIndex ? "opacity-100" : "opacity-45 hover:opacity-85"}`}
+              aria-label={`Открыть фото ${index + 1}`}
+            >
+              <img src={thumbnail} alt="" className="h-full w-full object-cover" draggable={false} />
+              {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  ) : null;
+
   return (
     <>
       <div className="min-w-0 max-w-full overflow-hidden">
@@ -121,62 +179,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
         ) : null}
       </div>
 
-      {fullscreen ? (
-        <div
-          className="fixed inset-0 z-[10060] flex flex-col bg-black/94 p-3 backdrop-blur-md sm:p-6"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Фотографии ${title}`}
-          onClick={() => setFullscreen(false)}
-        >
-          <button
-            type="button"
-            onClick={() => setFullscreen(false)}
-            className="absolute right-3 top-3 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur sm:right-6 sm:top-6"
-            aria-label="Закрыть галерею"
-          >
-            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" aria-hidden="true"><path d="M3 3L16 16M16 3L3 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-          </button>
-
-          <button
-            type="button"
-            onClick={(event) => {
-              event.stopPropagation();
-              advanceFullscreen();
-            }}
-            onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
-            onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
-            className="flex min-h-0 flex-1 touch-pan-y items-center justify-center overflow-hidden"
-            aria-label={cleanImages.length > 1 ? "Следующее фото" : "Фотография автомобиля"}
-          >
-            <img
-              key={`fullscreen-${cleanImages[activeIndex]}`}
-              src={cleanImages[activeIndex]}
-              alt={`${title}, фото ${activeIndex + 1}`}
-              className="max-h-full max-w-full select-none object-contain"
-              draggable={false}
-            />
-          </button>
-
-          <div className="mt-3 text-center text-sm font-black text-white/70">{activeIndex + 1} / {cleanImages.length}</div>
-          {cleanImages.length > 1 ? (
-            <div className="ac-hide-scrollbar mx-auto mt-3 flex max-w-full gap-2 overflow-x-auto pb-1" onClick={(event) => event.stopPropagation()}>
-              {cleanImages.map((thumbnail, index) => (
-                <button
-                  key={`fullscreen-thumb-${thumbnail}-${index}`}
-                  type="button"
-                  onClick={() => setActiveIndex(index)}
-                  className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-xl transition ${index === activeIndex ? "opacity-100" : "opacity-45 hover:opacity-85"}`}
-                  aria-label={`Открыть фото ${index + 1}`}
-                >
-                  <img src={thumbnail} alt="" className="h-full w-full object-cover" draggable={false} />
-                  {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
-                </button>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ) : null}
+      {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
     </>
   );
 }
