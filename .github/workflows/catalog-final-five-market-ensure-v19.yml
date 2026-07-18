@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-final-five-market-ensure-v19.yml
+      - apps/web/lib/catalog/otomoto-current-source.ts
+      - apps/web/lib/catalog/otomoto-detail-source.ts
 
 permissions:
   contents: write
