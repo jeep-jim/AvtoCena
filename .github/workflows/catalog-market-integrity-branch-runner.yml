@@ -23,19 +23,35 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Apply targeted patch
-        run: python scripts/apply-catalog-market-integrity-patch.py
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Tests
-        run: npm test
-      - name: Build
-        run: npm run build
-      - name: Commit verified branch
+      - name: Apply and verify targeted patch
+        shell: bash
         run: |
-          rm -f scripts/apply-catalog-market-integrity-patch.py .github/workflows/catalog-market-integrity-patch-once.yml
+          set +e
+          mkdir -p data/catalog/imports
+          : > data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+          python scripts/apply-catalog-market-integrity-patch.py >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
+          patch_status=$?
+          echo "patch_status=$patch_status" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+          if [ "$patch_status" = "0" ]; then
+            npm run typecheck >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
+            echo "typecheck_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+            npm test >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
+            echo "test_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+            npm run build >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
+            echo "build_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+          fi
+          exit 0
+      - name: Commit branch or diagnostic
+        if: always()
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if grep -q '^patch_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^typecheck_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^test_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^build_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt; then
+            rm -f scripts/apply-catalog-market-integrity-patch.py .github/workflows/catalog-market-integrity-patch-once.yml data/catalog/imports/catalog-integrity-branch-diagnostic.txt
+            message="Protect market data and expose live catalog facets [skip ci]"
+          else
+            message="Record catalog integrity patch diagnostic [skip ci]"
+          fi
           git add -A
-          git commit -m "Protect market data and expose live catalog facets [skip ci]"
+          git commit -m "$message" || true
           git push origin HEAD:fix/catalog-market-integrity-62
