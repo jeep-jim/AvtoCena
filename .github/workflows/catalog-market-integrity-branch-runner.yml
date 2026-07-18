@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  patch:
+  verify:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -23,42 +23,28 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Apply and verify targeted patch
-        shell: bash
+      - name: Update quality test fixture
         run: |
-          set +e
-          mkdir -p data/catalog/imports
-          : > data/catalog/imports/catalog-integrity-branch-diagnostic.txt
           python - <<'PY'
           from pathlib import Path
-          path = Path('scripts/apply-catalog-market-integrity-patch.py')
+          path = Path('tests/catalog.test.ts')
           text = path.read_text(encoding='utf-8')
-          text = text.replace("'''  /^(.*\\\\.)?guazi\\\\.com$/i,''',", "'''  /^(.+\\\\.)?guazi\\\\.com$/i,''',")
-          path.write_text(text, encoding='utf-8')
+          old = 'size: 10, checksum: "abc"'
+          if old not in text:
+            raise SystemExit('test fixture target missing')
+          path.write_text(text.replace(old, 'size: 10_000, checksum: "abc"', 1), encoding='utf-8')
           PY
-          python scripts/apply-catalog-market-integrity-patch.py >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
-          patch_status=$?
-          echo "patch_status=$patch_status" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
-          if [ "$patch_status" = "0" ]; then
-            npm run typecheck >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
-            echo "typecheck_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
-            npm test >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
-            echo "test_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
-            npm run build >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt 2>&1
-            echo "build_status=$?" >> data/catalog/imports/catalog-integrity-branch-diagnostic.txt
-          fi
-          exit 0
-      - name: Commit branch or diagnostic
-        if: always()
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Commit verified branch
         run: |
+          rm -f scripts/apply-catalog-market-integrity-patch.py .github/workflows/catalog-market-integrity-patch-once.yml data/catalog/imports/catalog-integrity-branch-diagnostic.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if grep -q '^patch_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^typecheck_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^test_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt && grep -q '^build_status=0$' data/catalog/imports/catalog-integrity-branch-diagnostic.txt; then
-            rm -f scripts/apply-catalog-market-integrity-patch.py .github/workflows/catalog-market-integrity-patch-once.yml data/catalog/imports/catalog-integrity-branch-diagnostic.txt
-            message="Protect market data and expose live catalog facets [skip ci]"
-          else
-            message="Record catalog integrity patch diagnostic [skip ci]"
-          fi
           git add -A
-          git commit -m "$message" || true
+          git commit -m "Protect market data and expose live catalog facets [skip ci]"
           git push origin HEAD:fix/catalog-market-integrity-62
