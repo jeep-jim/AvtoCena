@@ -1,487 +1,571 @@
 {
-  "startedAt": "2026-07-18T04:29:58.222Z",
-  "pageCount": 24,
-  "rows": [
+  "startedAt": "2026-07-18T04:32:32.640Z",
+  "detailUrl": "https://www.dubicars.com/2022-chevrolet-camaro-ss-988696.html",
+  "detailStatus": 200,
+  "markupLength": 257878,
+  "uniqueUrlCount": 369,
+  "candidateCount": 69,
+  "hostCounts": {
+    "www.dubicars.com": 61,
+    "tags.creativecdn.com": 1,
+    "mcusercontent.com": 3,
+    "browser.sentry-cdn.com": 1,
+    "cdn.mxpnl.com": 1,
+    "d2r1yp2w7bby2u.cloudfront.net": 1,
+    "appleid.cdn-apple.com": 1
+  },
+  "candidates": [
+    "https://www.dubicars.com/images/007d60/w_960x540/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+    "https://tags.creativecdn.com/1iHYplkH2V7077YCVZ7k.js",
+    "https://www.dubicars.com/vehicle-inspection",
+    "https://www.dubicars.com/account/saved-listings",
+    "https://www.dubicars.com/images/f3d61c/w_1300x760/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+    "https://www.dubicars.com/images/966e8d/w_1300x760/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+    "https://www.dubicars.com/images/d185ca/w_1300x760/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+    "https://www.dubicars.com/images/a6252a/w_1300x760/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+    "https://www.dubicars.com/images/e1dfa9/w_1300x760/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+    "https://www.dubicars.com/images/2e39f2/w_1300x760/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+    "https://www.dubicars.com/images/fbb906/w_1300x760/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+    "https://www.dubicars.com/images/5b880f/w_1300x760/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+    "https://www.dubicars.com/images/976357/w_1300x760/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+    "https://www.dubicars.com/images/7acfe1/w_1300x760/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+    "https://www.dubicars.com/images/74c104/w_1300x760/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+    "https://www.dubicars.com/images/686fff/w_1300x760/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+    "https://www.dubicars.com/images/7532dd/w_1300x760/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+    "https://www.dubicars.com/images/29fdc0/w_1300x760/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+    "https://www.dubicars.com/images/6a03da/w_1300x760/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+    "https://www.dubicars.com/images/99ecce/w_1300x760/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+    "https://www.dubicars.com/images/eec72e/w_1300x760/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+    "https://www.dubicars.com/images/f3b647/w_1300x760/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+    "https://www.dubicars.com/images/a520da/w_1300x760/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+    "https://www.dubicars.com/images/7638c3/130x76/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+    "https://www.dubicars.com/images/ec0969/130x76/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+    "https://www.dubicars.com/images/91e3eb/130x76/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+    "https://www.dubicars.com/images/bf3575/130x76/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+    "https://www.dubicars.com/images/943dec/130x76/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+    "https://www.dubicars.com/images/bb5e9d/130x76/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+    "https://www.dubicars.com/images/1ec2ed/130x76/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+    "https://www.dubicars.com/images/98850f/130x76/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+    "https://www.dubicars.com/images/f0d97f/130x76/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+    "https://www.dubicars.com/images/590d52/130x76/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+    "https://www.dubicars.com/images/612e34/130x76/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+    "https://www.dubicars.com/images/a4f82c/130x76/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+    "https://www.dubicars.com/images/53bcce/130x76/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+    "https://www.dubicars.com/images/1f25ea/130x76/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+    "https://www.dubicars.com/images/cd6e51/130x76/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+    "https://www.dubicars.com/images/879fb5/130x76/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+    "https://www.dubicars.com/images/1a2e3d/130x76/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+    "https://www.dubicars.com/images/d1a54d/130x76/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+    "https://www.dubicars.com/images/370a3a/130x76/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+    "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/461fa939-3f3d-5978-9f5e-cf6617e4fa51.png",
+    "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/5f1be76f-48b5-0c65-7488-6ac232091013.png",
+    "https://www.dubicars.com/images/d0c7b9/f_500x282/gta-used-cars-trading-5/a3578616-7cf5-4a16-ab36-2cf42b41d9a8.jpeg",
+    "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/bc4f9e5d-d8ca-eb38-de4c-db4ea6ef64c8.png",
+    "https://www.dubicars.com/images/3013cb/f_500x282/cariva/16f6c577-b109-4b68-9660-f32272926d4e.jpeg",
+    "https://www.dubicars.com/images/da4842/f_500x282/carzoo-used-cars/e71bb1b9-3499-4e57-8846-58ee301c8127.jpeg",
+    "https://www.dubicars.com/images/a792d8/f_500x282/noor-al-seyoh-used-car/80c0365f-7401-479f-9711-e1c029f765a1.jpeg",
+    "https://www.dubicars.com/images/aefba3/f_500x282/wadishee-used-cars/ea6a2e57-2fba-4f39-bed0-6ecd8606f3a5.jpeg",
+    "https://www.dubicars.com/images/585e4f/f_500x282/wadishee-used-cars/8a26b526-f736-46de-9a62-a856cc89b846.jpeg",
+    "https://www.dubicars.com/images/c9e8f6/f_500x282/barakat-al-rahmen-motors/fc7bb4af-127b-4a77-a516-f36e8e7dd6a6.jpg",
+    "https://www.dubicars.com/images/5ab70d/f_500x282/noor-al-seyoh-used-car/9b95e618-df7a-4fb4-90f1-e6adba43c0b3.jpeg",
+    "https://www.dubicars.com/images/133cc3/f_500x282/alba-cars/a610f467-9f6f-480f-9786-4cc27b51f356.jpeg",
+    "https://www.dubicars.com/images/homepage/mobile-mockup-latest.webp?123",
+    "https://www.dubicars.com/images/QR-code/app-link-FPA.png?abc",
+    "https://www.dubicars.com/img/feature_groups/interior.png",
+    "https://www.dubicars.com/img/feature_groups/exterior.png",
+    "https://www.dubicars.com/img/feature_groups/safety.png",
+    "https://www.dubicars.com/img/feature_groups/comfort_convenience.png",
+    "https://www.dubicars.com/img/feature_groups/infotainment.png",
+    "https://www.dubicars.com/images/social/linkedin.webp?321_k",
+    "https://www.dubicars.com/images/social/tiktok.webp?321_k",
+    "https://browser.sentry-cdn.com/8.34.0/bundle.min.js",
+    "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js",
+    "https://d2r1yp2w7bby2u.cloudfront.net/",
+    "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js",
+    "https://www.dubicars.com/2022-chevrolet-camaro-ss-988696.html#webpage",
+    "https://www.dubicars.com/images/8a906a/960x540/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg"
+  ],
+  "checks": [
     {
-      "title": "Chevrolet Camaro SS",
-      "url": "https://www.dubicars.com/2022-chevrolet-camaro-ss-988696.html",
-      "images": [
-        {
-          "imageUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/email-new.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/settings.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            }
-          }
-        }
-      ]
+      "imageUrl": "https://www.dubicars.com/images/007d60/w_960x540/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/007d60/w_960x540/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 116107
     },
     {
-      "title": "Bentley Continental 2023 Bentley Continental GT Azure V8 | 16,000 KM | Warranty, Service & Full PPF",
-      "url": "https://www.dubicars.com/2023-bentley-continental-2023-bentley-continental-gt-azure-v8-16000-km-warranty-service-full-ppf-820531.html",
-      "images": [
-        {
-          "imageUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/email-new.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/settings.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            }
-          }
-        }
-      ]
+      "imageUrl": "https://tags.creativecdn.com/1iHYplkH2V7077YCVZ7k.js",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://tags.creativecdn.com/1iHYplkH2V7077YCVZ7k.js",
+      "contentType": "application/javascript",
+      "contentLength": 4910
     },
     {
-      "title": "Lamborghini Huracan 2024 Lamborghini Huracán Sterrato | 1 of 1,499 | 5.2L V10 | Service and dealer Warranty | GCC Specs",
-      "url": "https://www.dubicars.com/2024-lamborghini-huracan-2024-lamborghini-huracn-sterrato-1-of-1499-52l-v10-service-and-dealer-warranty-gcc-specs-861166.html",
-      "images": [
-        {
-          "imageUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/email-new.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/settings.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            }
-          }
-        }
-      ]
+      "imageUrl": "https://www.dubicars.com/vehicle-inspection",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/vehicle-inspection",
+      "contentType": "text/html; charset=UTF-8",
+      "contentLength": 123454
     },
     {
-      "title": "Bentley Bentayga SPEED UAE&#039;s Very Best Example | AED 10,322 Per Month",
-      "url": "https://www.dubicars.com/2022-bentley-bentayga-speed-uaes-very-best-example-aed-10322-per-month-841361.html",
-      "images": [
-        {
-          "imageUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/calender-highlight.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 1000
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/kilometers.svg?213",
-              "contentType": "image/svg+xml",
-              "contentLength": 704
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/share-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 1924
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/email-new.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/email-new.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1036
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/heart-blue.svg?123",
-              "contentType": "image/svg+xml",
-              "contentLength": 683
-            }
-          }
-        },
-        {
-          "imageUrl": "https://www.dubicars.com/images/settings.svg",
-          "checks": {
-            "plain": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            },
-            "browser": {
-              "ok": true,
-              "status": 200,
-              "finalUrl": "https://www.dubicars.com/images/settings.svg",
-              "contentType": "image/svg+xml",
-              "contentLength": 1360
-            }
-          }
-        }
-      ]
+      "imageUrl": "https://www.dubicars.com/account/saved-listings",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/?login=1&next=%2Faccount%2Fsaved-listings",
+      "contentType": "text/html; charset=UTF-8",
+      "contentLength": 355948
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/f3d61c/w_1300x760/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/f3d61c/w_1300x760/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 187165
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/966e8d/w_1300x760/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/966e8d/w_1300x760/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 180500
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/d185ca/w_1300x760/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/d185ca/w_1300x760/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 179314
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/a6252a/w_1300x760/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/a6252a/w_1300x760/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 193824
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/e1dfa9/w_1300x760/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/e1dfa9/w_1300x760/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 157340
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/2e39f2/w_1300x760/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/2e39f2/w_1300x760/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 148490
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/fbb906/w_1300x760/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/fbb906/w_1300x760/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 191823
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/5b880f/w_1300x760/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/5b880f/w_1300x760/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 131760
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/976357/w_1300x760/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/976357/w_1300x760/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 148771
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/7acfe1/w_1300x760/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/7acfe1/w_1300x760/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 104470
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/74c104/w_1300x760/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/74c104/w_1300x760/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 103891
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/686fff/w_1300x760/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/686fff/w_1300x760/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 64442
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/7532dd/w_1300x760/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/7532dd/w_1300x760/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 92308
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/29fdc0/w_1300x760/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/29fdc0/w_1300x760/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 153634
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/6a03da/w_1300x760/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/6a03da/w_1300x760/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 139512
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/99ecce/w_1300x760/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/99ecce/w_1300x760/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 213213
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/eec72e/w_1300x760/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/eec72e/w_1300x760/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 137114
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/f3b647/w_1300x760/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/f3b647/w_1300x760/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 140386
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/a520da/w_1300x760/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/a520da/w_1300x760/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 152058
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/7638c3/130x76/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/7638c3/130x76/wadishee-used-cars/35032c42-06fe-4a32-94b6-1d6d258a718a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4543
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/ec0969/130x76/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/ec0969/130x76/wadishee-used-cars/a49fa27d-3114-473f-8774-9c7787e6c078.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4730
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/91e3eb/130x76/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/91e3eb/130x76/wadishee-used-cars/7a9e093a-8375-4e74-a174-3490aff27457.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4132
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/bf3575/130x76/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/bf3575/130x76/wadishee-used-cars/2e452848-6f8b-48c5-b6c2-042df798f939.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4529
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/943dec/130x76/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/943dec/130x76/wadishee-used-cars/01595a4b-d2b3-4421-98d7-0762fa4267b2.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4547
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/bb5e9d/130x76/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/bb5e9d/130x76/wadishee-used-cars/2a7b5cea-0f16-46d3-bae7-9ab867256382.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4040
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/1ec2ed/130x76/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/1ec2ed/130x76/wadishee-used-cars/ef227215-e026-4df1-94d6-02b8e7575381.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4653
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/98850f/130x76/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/98850f/130x76/wadishee-used-cars/21daca45-57a8-4132-b216-51ce7324487a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3858
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/f0d97f/130x76/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/f0d97f/130x76/wadishee-used-cars/893b41dc-d556-4867-9b4b-1d7422e91e9c.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3568
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/590d52/130x76/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/590d52/130x76/wadishee-used-cars/8d3330a7-97ca-48bb-9fa6-37489560ec48.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4239
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/612e34/130x76/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/612e34/130x76/wadishee-used-cars/0af1d42d-8a6f-49d0-8c99-c97b92243f53.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3351
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/a4f82c/130x76/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/a4f82c/130x76/wadishee-used-cars/96b930ca-8a96-4f6b-af57-fa2974c9a9af.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3109
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/53bcce/130x76/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/53bcce/130x76/wadishee-used-cars/2f262998-3694-4927-833d-c190801f696b.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3944
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/1f25ea/130x76/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/1f25ea/130x76/wadishee-used-cars/ee1bdd28-62b1-48fc-99a2-9d6e91205b65.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3947
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/cd6e51/130x76/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/cd6e51/130x76/wadishee-used-cars/13f21142-0535-4f76-82c3-36b5addb3b65.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4579
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/879fb5/130x76/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/879fb5/130x76/wadishee-used-cars/90b6decf-9fa5-4590-8459-aed72e66543a.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4133
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/1a2e3d/130x76/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/1a2e3d/130x76/wadishee-used-cars/05d44ec4-10c5-4bcf-ba34-13e3baf15383.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3360
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/d1a54d/130x76/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/d1a54d/130x76/wadishee-used-cars/e17fbe53-3c75-4c81-966b-d44bbbc21885.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 3523
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/370a3a/130x76/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/370a3a/130x76/wadishee-used-cars/edb59ea9-104f-47de-a547-8ff4b46e3a11.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 4580
+    },
+    {
+      "imageUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/461fa939-3f3d-5978-9f5e-cf6617e4fa51.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/461fa939-3f3d-5978-9f5e-cf6617e4fa51.png",
+      "contentType": "image/png",
+      "contentLength": 3014
+    },
+    {
+      "imageUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/5f1be76f-48b5-0c65-7488-6ac232091013.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/5f1be76f-48b5-0c65-7488-6ac232091013.png",
+      "contentType": "image/png",
+      "contentLength": 10126
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/d0c7b9/f_500x282/gta-used-cars-trading-5/a3578616-7cf5-4a16-ab36-2cf42b41d9a8.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/d0c7b9/f_500x282/gta-used-cars-trading-5/a3578616-7cf5-4a16-ab36-2cf42b41d9a8.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 20228
+    },
+    {
+      "imageUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/bc4f9e5d-d8ca-eb38-de4c-db4ea6ef64c8.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://mcusercontent.com/e611290bd709b3ad5069261c2/images/bc4f9e5d-d8ca-eb38-de4c-db4ea6ef64c8.png",
+      "contentType": "image/png",
+      "contentLength": 3118
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/3013cb/f_500x282/cariva/16f6c577-b109-4b68-9660-f32272926d4e.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/3013cb/f_500x282/cariva/16f6c577-b109-4b68-9660-f32272926d4e.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 24110
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/da4842/f_500x282/carzoo-used-cars/e71bb1b9-3499-4e57-8846-58ee301c8127.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/da4842/f_500x282/carzoo-used-cars/e71bb1b9-3499-4e57-8846-58ee301c8127.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 25198
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/a792d8/f_500x282/noor-al-seyoh-used-car/80c0365f-7401-479f-9711-e1c029f765a1.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/a792d8/f_500x282/noor-al-seyoh-used-car/80c0365f-7401-479f-9711-e1c029f765a1.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 33968
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/aefba3/f_500x282/wadishee-used-cars/ea6a2e57-2fba-4f39-bed0-6ecd8606f3a5.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/aefba3/f_500x282/wadishee-used-cars/ea6a2e57-2fba-4f39-bed0-6ecd8606f3a5.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 43042
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/585e4f/f_500x282/wadishee-used-cars/8a26b526-f736-46de-9a62-a856cc89b846.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/585e4f/f_500x282/wadishee-used-cars/8a26b526-f736-46de-9a62-a856cc89b846.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 45469
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/c9e8f6/f_500x282/barakat-al-rahmen-motors/fc7bb4af-127b-4a77-a516-f36e8e7dd6a6.jpg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/c9e8f6/f_500x282/barakat-al-rahmen-motors/fc7bb4af-127b-4a77-a516-f36e8e7dd6a6.jpg",
+      "contentType": "image/webp",
+      "contentLength": 26072
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/5ab70d/f_500x282/noor-al-seyoh-used-car/9b95e618-df7a-4fb4-90f1-e6adba43c0b3.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/5ab70d/f_500x282/noor-al-seyoh-used-car/9b95e618-df7a-4fb4-90f1-e6adba43c0b3.jpeg",
+      "contentType": "image/webp",
+      "contentLength": 42120
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/133cc3/f_500x282/alba-cars/a610f467-9f6f-480f-9786-4cc27b51f356.jpeg",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/133cc3/f_500x282/alba-cars/a610f467-9f6f-480f-9786-4cc27b51f356.jpeg",
+      "contentType": "image/jpeg",
+      "contentLength": 47501
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/homepage/mobile-mockup-latest.webp?123",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/homepage/mobile-mockup-latest.webp?123",
+      "contentType": "image/webp",
+      "contentLength": 45638
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/images/QR-code/app-link-FPA.png?abc",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/images/QR-code/app-link-FPA.png?abc",
+      "contentType": "image/png",
+      "contentLength": 920
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/img/feature_groups/interior.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/img/feature_groups/interior.png",
+      "contentType": "image/webp",
+      "contentLength": 570
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/img/feature_groups/exterior.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/img/feature_groups/exterior.png",
+      "contentType": "image/webp",
+      "contentLength": 452
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/img/feature_groups/safety.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/img/feature_groups/safety.png",
+      "contentType": "image/webp",
+      "contentLength": 640
+    },
+    {
+      "imageUrl": "https://www.dubicars.com/img/feature_groups/comfort_convenience.png",
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://www.dubicars.com/img/feature_groups/comfort_convenience.png",
+      "contentType": "image/webp",
+      "contentLength": 704
     }
   ],
-  "finishedAt": "2026-07-18T04:29:58.844Z"
+  "finishedAt": "2026-07-18T04:32:32.640Z"
 }
