@@ -1,4 +1,4 @@
-name: Catalog production import
+name: Catalog daily verified all markets
 
 on:
   workflow_dispatch:
@@ -8,6 +8,10 @@ on:
         required: false
         default: false
         type: boolean
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-production-import.yml
   schedule:
     - cron: "17 20 * * *"
 
@@ -18,9 +22,12 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 220
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -42,8 +49,9 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_RECOVERY_GENERATIONS: "gen_1784276049832_9868cbbe"
-          CATALOG_RECOVERY_MAX_CHUNKS: "20"
+          CATALOG_RECOVERY_MAX_CHUNKS: "30"
           CATALOG_RECOVERY_MIN_GAIN: "5"
+          CATALOG_GROW_ONLY_MARKETS: "korea"
       - name: Recover previously valid catalog before scanning sources
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.reset) }}
         run: npx tsx scripts/catalog-recover-active.mjs
@@ -51,34 +59,39 @@ jobs:
           <<: *storage
           CATALOG_RECOVERY_WINDOW_MS: "3888000000"
           CATALOG_RECOVERY_MIN_PUBLIC: "2"
+          CATALOG_GROW_ONLY_MARKETS: "korea"
       - name: Restart verified source cursors
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           <<: *storage
-          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,dubicars_uae,autoscout_europe,autouncle_europe"
-      - name: Import up to 250 offers and 10 photos from every public market
+          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,goonet_japan_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact"
+      - name: Import 250 verified offers with complete data and galleries from all five markets
         run: npm run catalog:import:sample
         env:
           <<: *storage
           CATALOG_IMPORT_RESET: ${{ github.event_name == 'workflow_dispatch' && inputs.reset && 'true' || 'false' }}
-          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,goonet_japan_exact,dubicars_uae_exact,otomoto_europe_exact,che168_china_exact,che168_global,jpauc_japan,dubicars_uae,autoscout_europe,autouncle_europe"
+          CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,goonet_japan_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact"
           CATALOG_TARGET_PUBLIC_OFFERS: "1250"
           CATALOG_TARGET_PER_MARKET: "250"
+          CATALOG_GROW_ONLY_MARKETS: "korea"
+          CATALOG_PRESERVE_PREVIOUS_ON_FAILURE: "true"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
           CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
           CATALOG_ENCAR_DIRECT_DETAIL_RPM: "240"
           CATALOG_ENCAR_DIRECT_IMAGE_RPM: "600"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "48"
-          CATALOG_IMPORT_MAX_OFFERS: "250"
-          CATALOG_IMPORT_MAX_DETAILS: "250"
-          CATALOG_IMPORT_MAX_PAGES: "30"
-          CATALOG_MAX_IMAGES_PER_OFFER: "10"
-          CATALOG_EXACT_DETAILS_PER_PAGE: "40"
-          CATALOG_SOURCE_TIMEOUT_MS: "35000"
-          CATALOG_IMAGE_TIMEOUT_MS: "20000"
-          CATALOG_IMPORT_BUDGET_MS: "10800000"
-          CATALOG_SOURCE_BUDGET_MS: "1800000"
+          CATALOG_IMPORT_MAX_OFFERS: "700"
+          CATALOG_IMPORT_MAX_DETAILS: "700"
+          CATALOG_IMPORT_MAX_PAGES: "60"
+          CATALOG_MAX_IMAGES_PER_OFFER: "80"
+          CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
+          CATALOG_EXACT_DETAILS_PER_PAGE: "80"
+          CATALOG_SOURCE_TIMEOUT_MS: "45000"
+          CATALOG_IMAGE_TIMEOUT_MS: "30000"
+          CATALOG_RATE_TIMEOUT_MS: "15000"
+          CATALOG_IMPORT_BUDGET_MS: "18000000"
+          CATALOG_SOURCE_BUDGET_MS: "3000000"
           CATALOG_OFFER_RETENTION_MS: "3888000000"
           CATALOG_STALE_GRACE_MS: "3888000000"
           CATALOG_IMPORT_REPORT_FILE: catalog-import-public-markets-report.json
