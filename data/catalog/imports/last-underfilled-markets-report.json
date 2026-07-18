@@ -1,0 +1,59 @@
+{
+  "version": 14,
+  "finishedAt": "2026-07-18T04:34:50.425Z",
+  "desiredPerMarket": 250,
+  "publicByMarket": {
+    "uae": 8,
+    "europe": 0,
+    "china": 0
+  },
+  "missingByMarket": {
+    "uae": 242,
+    "europe": 250,
+    "china": 250
+  },
+  "markets": [
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "startedAt": "2026-07-18T04:24:36.251Z",
+      "finishedAt": "2026-07-18T04:27:20.763Z",
+      "before": 3,
+      "after": 8,
+      "deficit": 247,
+      "gained": 5,
+      "reached": false,
+      "imported": 0,
+      "updated": 5,
+      "rejectedByQuality": 353,
+      "imageFailures": 88,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "dubicars_uae_exact",
+          "market": "uae",
+          "scanCycleId": "scan_b664babd-c0a4-47cb-a82b-faeb28bd0064",
+          "ok": true,
+          "seen": 88,
+          "saved": 5,
+          "cursor": "5",
+          "sourceExhausted": false,
+          "stoppedByLimit": true,
+          "stoppedByBudget": false,
+          "partialScan": true,
+          "staleEligible": false
+        }
+      ]
+    },
+    {
+      "market": "europe",
+      "fatal": true,
+      "error": "progress_file_missing"
+    },
+    {
+      "market": "china",
+      "fatal": true,
+      "error": "progress_file_missing"
+    }
+  ]
+}
