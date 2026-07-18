@@ -1,0 +1,33 @@
+{
+  "version": 16,
+  "market": "korea",
+  "sourceId": "encar_direct",
+  "protectedGrowOnly": true,
+  "before": 32,
+  "after": 41,
+  "deficit": 218,
+  "gained": 9,
+  "reached": false,
+  "imported": 9,
+  "updated": 0,
+  "rejectedByQuality": 209,
+  "imageFailures": 0,
+  "skipped": true,
+  "sources": [
+    {
+      "sourceId": "encar_direct",
+      "market": "korea",
+      "scanCycleId": "scan_c27cc797-104d-4f61-95d2-0a549792d58c",
+      "ok": true,
+      "seen": 218,
+      "saved": 9,
+      "cursor": "{\"offset\":250,\"cursor\":\"\"}",
+      "sourceExhausted": false,
+      "stoppedByLimit": true,
+      "stoppedByBudget": false,
+      "partialScan": true,
+      "staleEligible": false
+    }
+  ],
+  "finishedAt": "2026-07-18T07:30:26.886Z"
+}
