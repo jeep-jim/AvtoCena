@@ -41,7 +41,7 @@ export function credibleCatalogImages(images: CatalogImage[]) {
 
 function hasPlausiblePrice(offer: VehicleOffer) {
   const totalRub = Number(offer.totalRub || 0);
-  if (!totalRub) return offer.calculationStatus === "needs_data" || offer.calculationStatus === "auction_start";
+  if (!totalRub) return false;
   const year = Number(offer.year || 0);
   const make = clean(offer.make);
   if (totalRub < 120_000 || totalRub > 180_000_000) return false;
@@ -52,6 +52,21 @@ function hasPlausiblePrice(offer: VehicleOffer) {
   const currency = clean(offer.sourceCurrency).toUpperCase();
   if (offer.market === "japan" && currency === "USD" && sourcePrice > 250_000) return false;
   return true;
+}
+
+function hasCompleteOtomotoDetails(offer: VehicleOffer) {
+  if (offer.sourceId !== "otomoto_europe_exact") return true;
+  const fuel = clean(offer.fuel).toLowerCase();
+  const electric = /electric|ev|электро/.test(fuel);
+  return Number(offer.sourcePrice || 0) > 0
+    && Boolean(clean(offer.sourceCurrency))
+    && Number(offer.mileageKm) >= 0
+    && Boolean(clean(offer.fuel))
+    && Boolean(clean(offer.transmission))
+    && Boolean(clean(offer.bodyType))
+    && Boolean(clean(offer.drive))
+    && (electric || Number(offer.engineCc || 0) > 0)
+    && Number(offer.powerHp || offer.powerKw || 0) > 0;
 }
 
 function rawImagesAreCredible(offer: VehicleOffer) {
@@ -74,7 +89,7 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
-  if (!hasPlausiblePrice(offer) || !rawImagesAreCredible(offer)) return false;
+  if (!hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
   return credibleCatalogImages(offer.images || []).length > 0;
 }
 
