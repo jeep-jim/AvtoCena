@@ -1,4 +1,4 @@
-name: Catalog Europe clean rebuild v20
+name: Catalog Europe complete rebuild v21
 
 on:
   workflow_dispatch:
@@ -8,6 +8,8 @@ on:
       - .github/workflows/catalog-final-five-market-ensure-v19.yml
       - apps/web/lib/catalog/otomoto-current-source.ts
       - apps/web/lib/catalog/otomoto-detail-source.ts
+      - apps/web/lib/catalog/rates.ts
+      - apps/web/lib/catalog/offer-quality.ts
 
 permissions:
   contents: write
@@ -19,7 +21,7 @@ concurrency:
 jobs:
   rebuild-europe:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,6 +32,54 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+
+      - name: Make catalog ordering and image refresh permanent
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path_value, old, new, marker):
+              path = Path(path_value)
+              text = path.read_text(encoding='utf-8')
+              if old in text:
+                  text = text.replace(old, new, 1)
+              elif marker not in text:
+                  raise SystemExit(f'{path_value}: patch target missing: {marker}')
+              path.write_text(text, encoding='utf-8')
+
+          replace_once(
+              'apps/web/lib/catalog/storage.ts',
+              'function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o) && Boolean(o.totalRub || o.calculationStatus === "needs_data" || o.calculationStatus === "auction_start"); }',
+              'function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o) && Boolean(o.totalRub); }',
+              'Boolean(o.totalRub);',
+          )
+          replace_once(
+              'apps/web/lib/catalog/storage.ts',
+              '  await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => b.updatedAt.localeCompare(a.updatedAt)).map((o) => o.id) });',
+              '''  const freshness = (offer: VehicleOffer) => Date.parse(String((offer.operational as any)?.sourcePublishedAt || offer.firstSeenAt || offer.updatedAt || "")) || 0;
+  await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).map((o) => o.id) });''',
+              'const freshness = (offer: VehicleOffer)',
+          )
+          replace_once(
+              'apps/web/lib/catalog/importer-impl.ts',
+              '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
+      const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);''',
+              '''      // Rejected or incomplete source rows must not consume the valid-offer target.
+      const sourceMaxOffers = configuredMaxOffers;''',
+              'const sourceMaxOffers = configuredMaxOffers;',
+          )
+          replace_once(
+              'apps/web/lib/catalog/importer-impl.ts',
+              '''                const freshImages = await source.fetchImages(base);
+                images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));''',
+              '''                const freshImages = credibleCatalogImages(await source.fetchImages(base));
+                images = freshImages.length
+                  ? credibleCatalogImages(mergeImages(freshImages, previousImages, maxImagesPerOffer))
+                  : previousImages;''',
+              'mergeImages(freshImages, previousImages, maxImagesPerOffer)',
+          )
+          PY
+          npm run typecheck
 
       - name: Reset Europe source cursor
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
@@ -43,9 +93,9 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMPORT_SOURCES: otomoto_europe_exact
 
-      - name: Import clean Europe prices and quarantine legacy rows
+      - name: Import complete Europe offers and quarantine legacy rows
         run: |
-          cat > scripts/catalog-europe-clean-rebuild-v20.mjs <<'NODE'
+          cat > scripts/catalog-europe-complete-rebuild-v21.mjs <<'NODE'
           const fs = await import('node:fs/promises');
           const { catalogImportSources, importCatalog } = await import('../apps/web/lib/catalog/importer.ts');
           const { exactMarketSources } = await import('../apps/web/lib/catalog/exact-market-sources.ts');
@@ -65,22 +115,23 @@ jobs:
             enabled: true,
             blockedUntil: undefined,
             consecutiveFailures: 0,
-            maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), 45),
-            maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), 500),
-            maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), 500),
+            maxPagesPerRun: Math.max(Number(policy.maxPagesPerRun || 0), 60),
+            maxOffersPerRun: Math.max(Number(policy.maxOffersPerRun || 0), 700),
+            maxDetailsPerRun: Math.max(Number(policy.maxDetailsPerRun || 0), 700),
             imagesEnabled: true,
           }));
 
           process.env.CATALOG_TARGET_PER_MARKET = '250';
           process.env.CATALOG_TARGET_PUBLIC_OFFERS = '1250';
-          process.env.CATALOG_IMPORT_BUDGET_MS = String(70 * 60 * 1000);
-          process.env.CATALOG_SOURCE_BUDGET_MS = String(65 * 60 * 1000);
-          process.env.CATALOG_MAX_IMAGES_PER_OFFER = '3';
+          process.env.CATALOG_IMPORT_BUDGET_MS = String(165 * 60 * 1000);
+          process.env.CATALOG_SOURCE_BUDGET_MS = String(155 * 60 * 1000);
+          process.env.CATALOG_MAX_IMAGES_PER_OFFER = '60';
           process.env.CATALOG_PRESERVE_PREVIOUS_ON_FAILURE = 'true';
           process.env.CATALOG_GROW_ONLY_MARKETS = 'korea';
 
           const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
           const startedAt = new Date().toISOString();
+          const cleanCutoff = Date.parse(startedAt);
           const runs = [];
 
           async function importPass(pass) {
@@ -88,13 +139,13 @@ jobs:
               try {
                 const result = await importCatalog({
                   sourceIds: [sourceId],
-                  maxOffers: 500,
-                  maxDetails: 500,
-                  maxImagesPerOffer: 3,
-                  maxPages: 45,
+                  maxOffers: 700,
+                  maxDetails: 700,
+                  maxImagesPerOffer: 60,
+                  maxPages: 60,
                   requireObjectStorage: true,
                   failOnZeroSaved: false,
-                  reportPath: `catalog/imports/latest-europe-clean-v20-pass-${pass}.json`,
+                  reportPath: `catalog/imports/latest-europe-complete-v21-pass-${pass}.json`,
                 });
                 runs.push({
                   pass,
@@ -102,6 +153,7 @@ jobs:
                   updated: result.updated,
                   rejectedByQuality: result.rejectedByQuality,
                   imageFailures: result.imageFailures,
+                  underfilledImages: result.underfilledImages,
                   publicByMarket: result.publicByMarket,
                   sources: result.sources,
                 });
@@ -109,25 +161,23 @@ jobs:
               } catch (error) {
                 const message = String(error?.message || error);
                 if (!message.includes('catalog_import_locked') || attempt === 30) throw error;
-                console.log(`[europe-v20] catalog locked, retry ${attempt}/30`);
+                console.log(`[europe-v21] catalog locked, retry ${attempt}/30`);
                 await sleep(60_000);
               }
             }
           }
 
-          for (let pass = 1; pass <= 3; pass++) await importPass(pass);
+          for (let pass = 1; pass <= 2; pass++) await importPass(pass);
 
           const afterImport = await readAllOffersForMaintenance();
-          const cleanCutoff = Date.parse(startedAt);
           const cleanIds = new Set(afterImport
             .filter((offer) => offer.market === 'europe'
               && offer.sourceId === sourceId
-              && Date.parse(String(offer.updatedAt || '')) >= cleanCutoff
-              && Number(offer.sourcePrice || 0) > 0
-              && ['PLN', 'EUR'].includes(String(offer.sourceCurrency || '').toUpperCase()))
+              && Date.parse(String(offer.operational?.lastSeenAt || offer.updatedAt || '')) >= cleanCutoff
+              && isCrediblePublicOffer({ ...offer, status: 'active' }))
             .map((offer) => offer.id));
 
-          if (cleanIds.size < 80) throw new Error(`too_few_clean_europe_offers_${cleanIds.size}`);
+          if (cleanIds.size < 80) throw new Error(`too_few_complete_europe_offers_${cleanIds.size}`);
 
           let quarantined = 0;
           const cleanedCatalog = afterImport.map((offer) => {
@@ -149,21 +199,30 @@ jobs:
           const repeatedPrices = [...repeated.entries()]
             .filter(([, rows]) => rows.length >= 4)
             .map(([key, rows]) => ({ key, count: rows.length, rows: rows.slice(0, 20) }));
+          const imageCounts = publicEurope.map((offer) => Array.isArray(offer.images) ? offer.images.length : 0);
+          const incomplete = publicEurope.filter((offer) => !offer.totalRub || !offer.fuel || !offer.transmission || !offer.bodyType || !offer.drive || (!offer.engineCc && offer.fuel !== 'electric') || (!offer.powerHp && !offer.powerKw));
 
           const report = {
-            version: 20,
+            version: 21,
             startedAt,
             finishedAt: new Date().toISOString(),
-            cleanImported: cleanIds.size,
+            completeImported: cleanIds.size,
             quarantined,
             publicEurope: publicEurope.length,
+            images: {
+              min: imageCounts.length ? Math.min(...imageCounts) : 0,
+              max: imageCounts.length ? Math.max(...imageCounts) : 0,
+              average: imageCounts.length ? Math.round(imageCounts.reduce((sum, value) => sum + value, 0) / imageCounts.length * 10) / 10 : 0,
+            },
+            incompleteCount: incomplete.length,
+            incomplete: incomplete.slice(0, 30).map((offer) => ({ id: offer.id, make: offer.make, model: offer.model, year: offer.year })),
             repeatedPrices,
             runs,
           };
-          await fs.writeFile('catalog-europe-clean-rebuild-v20.json', JSON.stringify(report, null, 2));
+          await fs.writeFile('catalog-europe-complete-rebuild-v21.json', JSON.stringify(report, null, 2));
           console.log(JSON.stringify(report, null, 2));
           NODE
-          npx tsx scripts/catalog-europe-clean-rebuild-v20.mjs 2>&1 | tee catalog-europe-clean-rebuild-v20.log
+          npx tsx scripts/catalog-europe-complete-rebuild-v21.mjs 2>&1 | tee catalog-europe-complete-rebuild-v21.log
         env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -173,23 +232,24 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
-          CATALOG_IMAGE_TIMEOUT_MS: "12000"
+          CATALOG_IMAGE_TIMEOUT_MS: "15000"
+          CATALOG_RATE_TIMEOUT_MS: "12000"
 
-      - name: Record Europe rebuild report
+      - name: Record Europe rebuild report and permanent code fixes
         if: always()
         run: |
-          if [ ! -f catalog-europe-clean-rebuild-v20.json ]; then
-            printf '{"version":20,"fatal":true,"error":"report_missing","finishedAt":"%s"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > catalog-europe-clean-rebuild-v20.json
+          if [ ! -f catalog-europe-complete-rebuild-v21.json ]; then
+            printf '{"version":21,"fatal":true,"error":"report_missing","finishedAt":"%s"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > catalog-europe-complete-rebuild-v21.json
           fi
-          rm -f scripts/catalog-europe-clean-rebuild-v20.mjs
+          rm -f scripts/catalog-europe-complete-rebuild-v21.mjs
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3 4 5; do
             git pull --rebase origin main || true
             mkdir -p data/catalog/imports
-            cp catalog-europe-clean-rebuild-v20.json data/catalog/imports/last-catalog-europe-clean-rebuild-v20.json
-            git add data/catalog/imports/last-catalog-europe-clean-rebuild-v20.json
-            git commit -m "Record clean Europe rebuild v20 [skip ci]" || true
+            cp catalog-europe-complete-rebuild-v21.json data/catalog/imports/last-catalog-europe-complete-rebuild-v21.json
+            git add apps/web/lib/catalog/storage.ts apps/web/lib/catalog/importer-impl.ts data/catalog/imports/last-catalog-europe-complete-rebuild-v21.json
+            git commit -m "Finalize complete Europe catalog v21 [skip ci]" || true
             git push origin HEAD:main && break
             sleep 10
           done
@@ -197,8 +257,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-europe-clean-rebuild-v20
+          name: catalog-europe-complete-rebuild-v21
           path: |
-            catalog-europe-clean-rebuild-v20.json
-            catalog-europe-clean-rebuild-v20.log
+            catalog-europe-complete-rebuild-v21.json
+            catalog-europe-complete-rebuild-v21.log
           retention-days: 7
