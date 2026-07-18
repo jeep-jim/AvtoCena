@@ -2,6 +2,7 @@ import {
   OTOMOTO_HEADERS,
   OtomotoCurrentAdapter,
   cleanOtomoto,
+  decodeOtomoto,
   extractOtomotoImages,
   normalizeOtomotoBody,
   normalizeOtomotoDrive,
@@ -35,7 +36,7 @@ function scalar(value: unknown): unknown {
 }
 
 function deepFind(value: unknown, keys: string[], depth = 0): unknown {
-  if (value == null || depth > 10) return undefined;
+  if (value == null || depth > 12) return undefined;
   if (Array.isArray(value)) {
     for (const item of value) {
       const found = deepFind(item, keys, depth + 1);
@@ -59,16 +60,17 @@ function deepFind(value: unknown, keys: string[], depth = 0): unknown {
   return undefined;
 }
 
-function jsonLdValues(markup: string) {
+function jsonValues(markup: string) {
   const values: unknown[] = [];
-  for (const match of markup.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
-    try { values.push(JSON.parse(match[1])); } catch { /* continue */ }
+  for (const match of markup.matchAll(/<script[^>]+type=["'](?:application\/ld\+json|application\/json)["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+    const payload = decodeOtomoto(match[1]);
+    try { values.push(JSON.parse(payload)); } catch { /* continue */ }
   }
   return values;
 }
 
 function embeddedPrice(markup: string) {
-  for (const value of jsonLdValues(markup)) {
+  for (const value of jsonValues(markup)) {
     const price = otomotoInteger(deepFind(value, ["price", "lowPrice"]));
     const currency = String(deepFind(value, ["priceCurrency", "currency"]) || "").toUpperCase();
     if (price && /^[A-Z]{3}$/.test(currency)) return { price, currency };
@@ -89,7 +91,6 @@ function visibleLabelValue(plain: string, label: string, pattern: string) {
 function visibleDetails(markup: string) {
   const plain = cleanOtomoto(markup);
   const year = plausibleYear(visibleLabelValue(plain, "(?:Rok produkcji|Production year|Model year|Year)", "(?:19|20)\\d{2}"));
-  const mileageKm = parseOtomotoMileage(plain);
   const engineCc = otomotoInteger(visibleLabelValue(plain, "(?:Pojemność skokowa|Engine displacement)", "[0-9 .\\u00a0\\u202f]{2,12}(?=\\s*cm(?:3|³))"));
   const powerHp = otomotoInteger(visibleLabelValue(plain, "(?:Moc|Power)", "[0-9]{2,4}(?=\\s*(?:KM|HP|PS))"));
   const fuelText = visibleLabelValue(plain, "(?:Rodzaj paliwa|Fuel type)", "[^|•]{2,40}?(?=\\s+(?:Skrzynia biegów|Gearbox|Typ nadwozia|Body type|Pojemność|Moc|Napęd|$))") || "";
@@ -98,7 +99,7 @@ function visibleDetails(markup: string) {
   const driveText = visibleLabelValue(plain, "(?:Napęd|Drive)", "[^|•]{2,50}?(?=\\s+(?:Typ nadwozia|Pojemność|Moc|Rodzaj paliwa|Skrzynia|$))") || "";
   return {
     year,
-    mileageKm,
+    mileageKm: parseOtomotoMileage(markup),
     engineCc,
     powerHp,
     fuel: normalizeOtomotoFuel(fuelText || plain),
@@ -109,7 +110,7 @@ function visibleDetails(markup: string) {
 }
 
 function embeddedDetails(markup: string) {
-  const values = jsonLdValues(markup);
+  const values = jsonValues(markup);
   const root: unknown = values.length === 1 ? values[0] : values;
   const fuelText = String(deepFind(root, ["fuelType", "fuel"]) || "");
   const transmissionText = String(deepFind(root, ["vehicleTransmission", "transmission", "gearbox"]) || "");
@@ -117,9 +118,10 @@ function embeddedDetails(markup: string) {
   const driveText = String(deepFind(root, ["driveWheelConfiguration", "driveType", "drivetrain", "drive"]) || "");
   const publishedRaw = deepFind(root, ["datePublished", "dateCreated", "publicationDate", "createdAt"]);
   const publishedTimestamp = Date.parse(String(publishedRaw || ""));
+  const mileage = otomotoInteger(deepFind(root, ["mileageFromOdometer", "mileage", "mileageKm", "odometer", "przebieg"]));
   return {
     year: plausibleYear(deepFind(root, ["productionYear", "modelYear", "vehicleModelDate", "productionDate", "dateVehicleFirstRegistered", "dateFirstRegistered"])),
-    mileageKm: otomotoInteger(deepFind(root, ["mileageFromOdometer", "mileage", "mileageKm"])),
+    mileageKm: mileage !== undefined && mileage <= 5_000_000 ? mileage : undefined,
     engineCc: otomotoInteger(deepFind(root, ["engineDisplacement", "displacement", "engineCc", "capacity"])),
     powerHp: otomotoInteger(deepFind(root, ["enginePower", "horsePower", "horsepower", "powerHp", "power"])),
     fuel: normalizeOtomotoFuel(fuelText),
@@ -144,7 +146,7 @@ async function fetchMarkup(url: string) {
 function enrichRow(row: OtomotoRow, markup: string): OtomotoRow {
   const embedded = embeddedDetails(markup);
   const visible = visibleDetails(markup);
-  const parsedPrice = row.price && row.currency ? null : embeddedPrice(markup) || parseOtomotoPrice(markup.slice(0, 180_000));
+  const parsedPrice = row.price && row.currency ? null : embeddedPrice(markup) || parseOtomotoPrice(markup.slice(0, 220_000));
   const detailImages = extractOtomotoImages(markup, row.url);
   return {
     ...row,
@@ -182,7 +184,7 @@ export class OtomotoDetailAdapter extends OtomotoCurrentAdapter {
       count: rows.length,
       health: {
         ...(result.health || { ok: true, checkedAt: new Date().toISOString() }),
-        message: `${result.health?.message || "OTOMOTO"}; detail price, specs and complete galleries checked`,
+        message: `${result.health?.message || "OTOMOTO"}; detail price, mileage, specs and full galleries checked`,
       },
     };
   }
