@@ -1,33 +1,12 @@
 {
   "market": "uae",
   "sourceId": "dubicars_uae_exact",
-  "startedAt": "2026-07-18T10:38:12.522Z",
-  "finishedAt": "2026-07-18T10:42:19.055Z",
-  "before": 212,
+  "startedAt": "2026-07-18T15:35:10.866Z",
+  "finishedAt": "2026-07-18T15:35:14.543Z",
+  "before": 250,
   "after": 250,
-  "deficit": 38,
-  "candidateLimit": 114,
-  "gained": 38,
+  "deficit": 0,
+  "gained": 0,
   "reached": true,
-  "imported": 15,
-  "updated": 23,
-  "rejectedByQuality": 0,
-  "imageFailures": 0,
-  "deadlineReached": false,
-  "sources": [
-    {
-      "sourceId": "dubicars_uae_exact",
-      "market": "uae",
-      "scanCycleId": "scan_1c51dc96-52a4-4dbc-beb3-4fea54ef8fa6",
-      "ok": true,
-      "seen": 38,
-      "saved": 38,
-      "cursor": "3",
-      "sourceExhausted": false,
-      "stoppedByLimit": true,
-      "stoppedByBudget": false,
-      "partialScan": true,
-      "staleEligible": false
-    }
-  ]
+  "skipped": true
 }
