@@ -4,7 +4,8 @@ const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { chunkName, offerPath, persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
-const MARKETS = String(process.env.CATALOG_RECOVERY_MARKETS || "korea,china,japan,uae,europe").split(",").map((value) => value.trim()).filter(Boolean);
+const requestedMarkets = String(process.env.CATALOG_RECOVERY_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
+const MARKETS = [...new Set([...requestedMarkets, "korea", "china", "japan", "uae", "europe"])];
 const EMERGENCY_GENERATIONS = [
   // Last confirmed production generation before the destructive underfill.
   "gen_1784276049832_9868cbbe",
