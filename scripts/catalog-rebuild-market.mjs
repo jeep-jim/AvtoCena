@@ -301,7 +301,7 @@ async function discoverDetailUrls(offer) {
   let values = collectHtmlImages(markup, sourceUrl);
   if (market === "uae") {
     values = values.filter((value) => /\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+|f_?\d+x\d+)\/[^/?#]+\/[a-f0-9-]+\.(?:jpe?g|webp)/i.test(value)
-      && !\/(?:130x76|f_500x282)\//i.test(value));
+      && !/\/(?:130x76|f_500x282)\//i.test(value));
   }
 
   const rawValues = rawImageValues(offer)
