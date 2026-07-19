@@ -36,7 +36,7 @@ for (const replacement of completeSources) {
 }
 
 export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImportOptions) {
-  const requested = Array.isArray(sourceIdsOrOptions)
+  const requested: CatalogImportOptions = Array.isArray(sourceIdsOrOptions)
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
   return importCatalogBase({
