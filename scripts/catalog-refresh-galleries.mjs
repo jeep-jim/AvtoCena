@@ -9,6 +9,10 @@ const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean));
+const offerIds = new Set(String(process.env.CATALOG_GALLERY_OFFER_IDS || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean));
 const maxOffers = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_OFFERS || 250));
 const maxPerMarket = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_PER_MARKET || maxOffers));
 const minImages = Math.max(1, Number(process.env.CATALOG_GALLERY_MIN_IMAGES || 10));
@@ -41,21 +45,24 @@ const candidates = allOffers
   .filter((offer) => markets.has(String(offer.market)))
   .filter((offer) => !sourceIds.size || sourceIds.has(String(offer.sourceId)))
   .filter((offer) => adapters.has(offer.sourceId))
-  .filter((offer) => force || (offer.images?.length || 0) < minImages)
-  .sort((a, b) => (a.images?.length || 0) - (b.images?.length || 0)
+  .filter((offer) => offerIds.has(offer.id) || force || (offer.images?.length || 0) < minImages)
+  .sort((a, b) => Number(offerIds.has(b.id)) - Number(offerIds.has(a.id))
+    || (a.images?.length || 0) - (b.images?.length || 0)
     || Date.parse(String(b.operational?.sourcePublishedAt || b.updatedAt || "")) - Date.parse(String(a.operational?.sourcePublishedAt || a.updatedAt || "")))
   .filter((offer) => {
+    if (offerIds.has(offer.id)) return true;
     const count = perMarket.get(offer.market) || 0;
     if (count >= maxPerMarket) return false;
     perMarket.set(offer.market, count + 1);
     return true;
   })
-  .slice(0, maxOffers);
+  .slice(0, Math.max(maxOffers, offerIds.size));
 
 const byId = new Map(allOffers.map((offer) => [offer.id, offer]));
 const report = {
   startedAt: new Date().toISOString(),
   markets: [...markets],
+  priorityOfferIds: [...offerIds],
   selected: candidates.length,
   refreshed: 0,
   expanded: 0,
