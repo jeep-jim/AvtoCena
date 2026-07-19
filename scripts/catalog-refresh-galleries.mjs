@@ -9,14 +9,21 @@ const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean));
-const offerIds = new Set(String(process.env.CATALOG_GALLERY_OFFER_IDS || "")
-  .split(",")
-  .map((value) => value.trim())
-  .filter(Boolean));
+const reportedOfferIds = [
+  "d4353979acb720365324de54",
+  "20595006e08ad6c243948e3b",
+];
+const offerIds = new Set([
+  ...reportedOfferIds,
+  ...String(process.env.CATALOG_GALLERY_OFFER_IDS || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean),
+]);
 const maxOffers = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_OFFERS || 250));
 const maxPerMarket = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_PER_MARKET || maxOffers));
 const minImages = Math.max(1, Number(process.env.CATALOG_GALLERY_MIN_IMAGES || 10));
-const maxImages = Math.max(minImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80));
+const maxImages = Math.max(minImages, 120, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
 const force = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_FORCE || "false").toLowerCase());
 const persistEvery = Math.max(1, Number(process.env.CATALOG_GALLERY_PERSIST_EVERY || 25));
 
@@ -42,8 +49,8 @@ const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, 
 const perMarket = new Map();
 const candidates = allOffers
   .filter((offer) => offer.status === "active")
-  .filter((offer) => markets.has(String(offer.market)))
-  .filter((offer) => !sourceIds.size || sourceIds.has(String(offer.sourceId)))
+  .filter((offer) => offerIds.has(offer.id) || markets.has(String(offer.market)))
+  .filter((offer) => offerIds.has(offer.id) || !sourceIds.size || sourceIds.has(String(offer.sourceId)))
   .filter((offer) => adapters.has(offer.sourceId))
   .filter((offer) => offerIds.has(offer.id) || force || (offer.images?.length || 0) < minImages)
   .sort((a, b) => Number(offerIds.has(b.id)) - Number(offerIds.has(a.id))
@@ -75,6 +82,8 @@ for (let index = 0; index < candidates.length; index++) {
   const offer = candidates[index];
   const source = adapters.get(offer.sourceId);
   const before = Array.isArray(offer.images) ? offer.images.length : 0;
+  const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
+  process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
   try {
     const fresh = await source.fetchImages(offer);
     const merged = mergeImages(Array.isArray(fresh) ? fresh : [], Array.isArray(offer.images) ? offer.images : []);
@@ -94,6 +103,9 @@ for (let index = 0; index < candidates.length; index++) {
     report.failed++;
     report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: String(error?.message || error) });
     console.error(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${String(error?.message || error)}`);
+  } finally {
+    if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
+    else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
   }
 
   if ((index + 1) % persistEvery === 0) {
