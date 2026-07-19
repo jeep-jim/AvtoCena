@@ -52,7 +52,17 @@ jobs:
       fail-fast: false
       max-parallel: 5
       matrix:
-        market: [korea, china, japan, uae, europe]
+        include:
+          - market: korea
+            sourceIds: encar_direct
+          - market: china
+            sourceIds: che168_china_exact,guazi_china_export
+          - market: japan
+            sourceIds: goonet_japan_exact,beforward_public
+          - market: uae
+            sourceIds: dubicars_uae_exact
+          - market: europe
+            sourceIds: otomoto_europe_exact
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
@@ -77,9 +87,11 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_MARKET: ${{ matrix.market }}
+          CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.sourceIds }}
           CATALOG_REBUILD_TARGET: "260"
-          CATALOG_REBUILD_MAX_PAGES: "300"
+          CATALOG_REBUILD_MAX_PAGES: "400"
           CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "6"
           CATALOG_MAX_IMAGES_PER_OFFER: "120"
           CATALOG_IMAGE_MAX_BYTES: "12000000"
           CATALOG_SOURCE_TIMEOUT_MS: "60000"
@@ -89,14 +101,17 @@ jobs:
           CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
           CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
           CATALOG_ENCAR_DIRECT_IMAGE_RPM: "120"
+          CATALOG_BEFORWARD_PUBLIC_LIST_RPM: "20"
+          CATALOG_BEFORWARD_PUBLIC_IMAGE_RPM: "60"
           CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
           CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_GROW_ONLY_MARKETS: ""
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: catalog-rebuild-${{ matrix.market }}
           path: catalog-rebuild-${{ matrix.market }}.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 3
 
   publish:
@@ -131,16 +146,18 @@ jobs:
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
           CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "6"
           CATALOG_REBUILD_MIN_AVG_IMAGES: "8"
-          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "6"
+          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "10"
           CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.60"
           CATALOG_REBUILD_MIN_SPEC_SCORE: "5"
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: catalog-fresh-publish-report
           path: catalog-fresh-publish-report.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
