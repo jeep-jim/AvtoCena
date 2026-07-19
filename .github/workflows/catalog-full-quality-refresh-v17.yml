@@ -1,15 +1,21 @@
-name: Catalog full quality refresh v17 (paused)
+name: Cancel obsolete catalog rebuild queue
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-full-quality-refresh-v17.yml
 
 permissions:
   contents: read
 
+concurrency:
+  group: catalog-production-import
+  cancel-in-progress: true
+
 jobs:
-  paused:
+  cancel-old-runs:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "The old destructive quality refresh is paused."
-          echo "Production data must be rebuilt off-line and published only after validation."
+      - run: echo "Obsolete destructive catalog runs have been superseded."
