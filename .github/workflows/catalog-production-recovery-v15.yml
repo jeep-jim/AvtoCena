@@ -66,7 +66,7 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Collect 250 clean ${{ matrix.market }} offers with complete galleries
+      - name: Collect 260 clean ${{ matrix.market }} offers with complete galleries
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -78,7 +78,7 @@ jobs:
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_MARKET: ${{ matrix.market }}
-          CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_TARGET: "260"
           CATALOG_REBUILD_MAX_PAGES: "300"
           CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
           CATALOG_MAX_IMAGES_PER_OFFER: "120"
@@ -134,6 +134,10 @@ jobs:
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
           CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_MIN_AVG_IMAGES: "8"
+          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "6"
+          CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.60"
+          CATALOG_REBUILD_MIN_SPEC_SCORE: "4"
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
