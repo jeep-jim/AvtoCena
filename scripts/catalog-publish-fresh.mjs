@@ -6,10 +6,10 @@ const { persistCatalogOffers } = await import("../apps/web/lib/catalog/storage.t
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || 250));
-const minimumImagesPerOffer = Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 6));
-const minimumAverageImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_MIN_AVG_IMAGES || 8));
-const richGalleryImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_IMAGES || 10));
-const richGalleryRatio = Math.min(1, Math.max(0, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_RATIO || 0.6)));
+const minimumImagesPerOffer = Math.max(4, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
+const minimumAverageImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_MIN_AVG_IMAGES || 7));
+const richGalleryImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_IMAGES || 8));
+const richGalleryRatio = Math.min(1, Math.max(0, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_RATIO || 0.5)));
 const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 5));
 const markets = ["korea", "china", "japan", "uae", "europe"];
 const all = [];
@@ -19,8 +19,14 @@ const reports = {};
 const marketQuality = {};
 const globalImageOwners = new Map();
 
-function clean(value) { return String(value || "").replace(/\s+/g, " ").trim(); }
-function imageKey(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
+function clean(value) {
+  return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function imageKey(image) {
+  return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
+}
+
 function specScore(offer) {
   const fuel = clean(offer?.fuel);
   const electric = /electric|bev|электро|纯电|전기/i.test(fuel);
@@ -45,7 +51,10 @@ for (const market of markets) {
 
   for (const sourceOffer of rows) {
     if (selected.length >= target) break;
-    if (sourceOffer?.market !== market || !isCrediblePublicOffer(sourceOffer)) { rejectedQuality++; continue; }
+    if (sourceOffer?.market !== market || !isCrediblePublicOffer(sourceOffer)) {
+      rejectedQuality++;
+      continue;
+    }
 
     const localSeen = new Set();
     const images = [];
@@ -54,23 +63,39 @@ for (const market of markets) {
       if (!key || localSeen.has(key)) continue;
       localSeen.add(key);
       const owner = globalImageOwners.get(key);
-      if (owner && owner !== sourceOffer.id) { removedSharedImages++; continue; }
+      if (owner && owner !== sourceOffer.id) {
+        removedSharedImages++;
+        continue;
+      }
       images.push(image);
     }
 
     const offer = { ...sourceOffer, images };
-    if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) { rejectedQuality++; continue; }
+    if (images.length < minimumImagesPerOffer
+      || specScore(offer) < minimumSpecScore
+      || !isCrediblePublicOffer(offer)) {
+      rejectedQuality++;
+      continue;
+    }
+
     selected.push(offer);
     for (const image of images) globalImageOwners.set(imageKey(image), offer.id);
   }
 
-  if (selected.length < target) throw new Error(`fresh_publish_under_target_after_audit_${market}_${selected.length}_of_${target}`);
+  if (selected.length < target) {
+    throw new Error(`fresh_publish_under_target_after_audit_${market}_${selected.length}_of_${target}`);
+  }
+
   const imageCounts = selected.map((offer) => offer.images.length);
   const averageImages = imageCounts.reduce((sum, count) => sum + count, 0) / selected.length;
   const richGalleries = imageCounts.filter((count) => count >= richGalleryImages).length;
   const requiredRichGalleries = Math.ceil(target * richGalleryRatio);
-  if (averageImages < minimumAverageImages) throw new Error(`fresh_publish_low_average_gallery_${market}_${averageImages.toFixed(2)}_required_${minimumAverageImages}`);
-  if (richGalleries < requiredRichGalleries) throw new Error(`fresh_publish_too_many_short_galleries_${market}_${richGalleries}_required_${requiredRichGalleries}`);
+  if (averageImages < minimumAverageImages) {
+    throw new Error(`fresh_publish_low_average_gallery_${market}_${averageImages.toFixed(2)}_required_${minimumAverageImages}`);
+  }
+  if (richGalleries < requiredRichGalleries) {
+    throw new Error(`fresh_publish_too_many_short_galleries_${market}_${richGalleries}_required_${requiredRichGalleries}`);
+  }
 
   all.push(...selected);
   files.push(filename);
@@ -96,6 +121,7 @@ for (const offer of all) {
   if (unique.has(offer.id)) throw new Error(`fresh_publish_duplicate_offer_id_${offer.id}`);
   unique.set(offer.id, offer);
 }
+
 for (const market of markets) {
   const count = [...unique.values()].filter((offer) => offer.market === market).length;
   if (count !== target) throw new Error(`fresh_publish_market_count_${market}_${count}_expected_${target}`);
@@ -122,6 +148,12 @@ const report = {
   marketReports: reports,
 };
 if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
-report.imageStats.average = offers.length ? Number((report.imageStats.total / offers.length).toFixed(2)) : 0;
-await fs.writeFile(process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-fresh-publish-report.json", JSON.stringify(report, null, 2));
+report.imageStats.average = offers.length
+  ? Number((report.imageStats.total / offers.length).toFixed(2))
+  : 0;
+
+await fs.writeFile(
+  process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-fresh-publish-report.json",
+  JSON.stringify(report, null, 2),
+);
 console.log(JSON.stringify(report, null, 2));
