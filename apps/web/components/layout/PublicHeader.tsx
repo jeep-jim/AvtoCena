@@ -190,6 +190,15 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       </header>
 
       <style jsx global>{`
+        html body *,
+        html body *::before,
+        html body *::after {
+          box-shadow: none !important;
+          -webkit-box-shadow: none !important;
+          text-shadow: none !important;
+        }
+        html body [class*="drop-shadow"] { filter: none !important; }
+
         .ac-catalog-nav { background: rgba(255,255,255,.045); color: rgba(255,255,255,.84); }
         .ac-catalog-nav:hover { background: rgba(255,255,255,.085); color: #fff; }
         .ac-catalog-nav.is-active { background: rgba(255,255,255,.075) !important; color: rgba(255,255,255,.92) !important; }
@@ -204,7 +213,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           transition: background .18s ease, border-color .18s ease, transform .18s ease;
         }
         .ac-filter-control:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.14); }
-        .ac-filter-control:focus-visible { outline: none; border-color: rgba(255,70,80,.58); box-shadow: 0 0 0 4px rgba(255,53,61,.11); }
+        .ac-filter-control:focus-visible { outline: none; border-color: rgba(255,70,80,.58); box-shadow: none !important; }
         .ac-filter-range > input + input { border-left: 1px solid rgba(255,255,255,.08); }
         .ac-filter-dropdown { background: #171922; color: #fff; border: 1px solid rgba(255,70,80,.3); }
         .ac-filter-search { background: rgba(255,255,255,.07); color: #fff; border: 1px solid rgba(255,255,255,.08); }
@@ -240,7 +249,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
         html[data-theme="light"] .ac-filter-range > input + input { border-left-color: rgba(35,42,55,.12); }
         html[data-theme="light"] .ac-filter-range input { color: #20252f !important; }
         html[data-theme="light"] .ac-filter-range input::placeholder { color: #737c8c !important; }
-        html[data-theme="light"] .ac-filter-dropdown { background: #f8f9fb; color: #20252f; border-color: rgba(35,42,55,.14); box-shadow: 0 22px 58px rgba(36,42,55,.18); }
+        html[data-theme="light"] .ac-filter-dropdown { background: #f8f9fb; color: #20252f; border-color: rgba(35,42,55,.14); box-shadow: none !important; }
         html[data-theme="light"] .ac-filter-search { background: #e7ebf1; color: #20252f; border-color: rgba(35,42,55,.12); }
         html[data-theme="light"] .ac-filter-search::placeholder { color: #737c8c; }
         html[data-theme="light"] .ac-filter-option { color: #303744; }
