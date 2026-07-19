@@ -1,37 +1,24 @@
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
+const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
 const markets = new Set(String(process.env.CATALOG_GALLERY_MARKETS || "korea,china,japan,uae,europe")
-  .split(",")
-  .map((value) => value.trim())
-  .filter(Boolean));
+  .split(",").map((value) => value.trim()).filter(Boolean));
 const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
-  .split(",")
-  .map((value) => value.trim())
-  .filter(Boolean));
-const reportedOfferIds = [
-  "d4353979acb720365324de54",
-  "81937e0dbd5b509f183597a4",
-  "6915dc63976acf885d99f13b",
-];
+  .split(",").map((value) => value.trim()).filter(Boolean));
+const reportedOfferIds = ["d4353979acb720365324de54", "81937e0dbd5b509f183597a4", "6915dc63976acf885d99f13b"];
 const offerIds = new Set([
   ...reportedOfferIds,
-  ...String(process.env.CATALOG_GALLERY_OFFER_IDS || "")
-    .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean),
+  ...String(process.env.CATALOG_GALLERY_OFFER_IDS || "").split(",").map((value) => value.trim()).filter(Boolean),
 ]);
 const maxOffers = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_OFFERS || 250));
 const maxPerMarket = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_PER_MARKET || maxOffers));
 const minImages = Math.max(1, Number(process.env.CATALOG_GALLERY_MIN_IMAGES || 10));
-const maxImages = Math.max(minImages, 120, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
+const maxImages = Math.min(120, Math.max(minImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120)));
 const force = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_FORCE || "false").toLowerCase());
 const persistEvery = Math.max(1, Number(process.env.CATALOG_GALLERY_PERSIST_EVERY || 25));
 
-function identity(image) {
-  return String(image?.id || image?.checksum || image?.objectKey || image?.url || "");
-}
-
+function identity(image) { return String(image?.id || image?.checksum || image?.objectKey || image?.url || ""); }
 function mergeImages(fresh, previous) {
   const result = [];
   const seen = new Set();
@@ -42,7 +29,7 @@ function mergeImages(fresh, previous) {
     result.push(image);
     if (result.length >= maxImages) break;
   }
-  return result;
+  return credibleCatalogImages(result);
 }
 
 const allOffers = await readAllOffersForMaintenance();
@@ -67,47 +54,38 @@ const candidates = allOffers
   .slice(0, Math.max(maxOffers, offerIds.size));
 
 const byId = new Map(allOffers.map((offer) => [offer.id, offer]));
-const report = {
-  startedAt: new Date().toISOString(),
-  markets: [...markets],
-  priorityOfferIds: [...offerIds],
-  selected: candidates.length,
-  refreshed: 0,
-  expanded: 0,
-  replaced: 0,
-  unchanged: 0,
-  failed: 0,
-  rows: [],
-};
+const report = { startedAt: new Date().toISOString(), markets: [...markets], priorityOfferIds: [...offerIds], selected: candidates.length, refreshed: 0, expanded: 0, replaced: 0, unchanged: 0, failed: 0, rows: [] };
 
 for (let index = 0; index < candidates.length; index++) {
   const offer = candidates[index];
   const source = adapters.get(offer.sourceId);
-  const before = Array.isArray(offer.images) ? offer.images.length : 0;
+  const previous = credibleCatalogImages(Array.isArray(offer.images) ? offer.images : []);
+  const before = previous.length;
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
   process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
   try {
     const fetched = await source.fetchImages(offer);
-    const fresh = Array.isArray(fetched) ? fetched : [];
-    // Two or more source-native images are enough to replace a polluted cached set.
-    const replaced = fresh.length >= 2;
-    const merged = replaced
-      ? mergeImages(fresh, [])
-      : mergeImages(fresh, Array.isArray(offer.images) ? offer.images : []);
-    offer.images = merged;
+    const fresh = credibleCatalogImages(Array.isArray(fetched) ? fetched : []);
+    // Never shrink or clear a working gallery. A complete fresh gallery replaces the
+    // old one; a partial response is only merged into the existing correct photos.
+    const replaced = fresh.length >= Math.max(4, before);
+    const merged = replaced ? mergeImages(fresh, []) : mergeImages(fresh, previous);
+    offer.images = merged.length >= before ? merged : previous;
     offer.operational = {
       ...offer.operational,
+      galleryVerified: fresh.length >= 2 || Boolean(offer.operational?.galleryVerified),
       galleryRefreshedAt: new Date().toISOString(),
-      galleryImageCount: merged.length,
+      gallerySourceImageCount: fresh.length,
+      galleryImageCount: offer.images.length,
       galleryReplaced: replaced,
     };
     byId.set(offer.id, offer);
     report.refreshed++;
     if (replaced) report.replaced++;
-    if (merged.length > before) report.expanded++;
+    if (offer.images.length > before) report.expanded++;
     else report.unchanged++;
-    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: merged.length, replaced, ok: true });
-    console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${merged.length}${replaced ? " replaced" : " merged"}`);
+    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, fetched: fresh.length, after: offer.images.length, replaced, ok: true });
+    console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${offer.images.length} (fetched ${fresh.length})`);
   } catch (error) {
     report.failed++;
     report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: String(error?.message || error) });
@@ -125,8 +103,5 @@ for (let index = 0; index < candidates.length; index++) {
 
 if (candidates.length) await persistCatalogOffers([...byId.values()]);
 report.finishedAt = new Date().toISOString();
-await (await import("node:fs/promises")).writeFile(
-  process.env.CATALOG_GALLERY_REPORT_FILE || "catalog-gallery-refresh-report.json",
-  JSON.stringify(report, null, 2),
-);
+await (await import("node:fs/promises")).writeFile(process.env.CATALOG_GALLERY_REPORT_FILE || "catalog-gallery-refresh-report.json", JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
