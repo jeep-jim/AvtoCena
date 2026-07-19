@@ -131,6 +131,19 @@ function sequenceUrl(rawValue: unknown, imageNumber: number) {
   return buildEncarImageUrl(raw, imageNumber);
 }
 
+function galleryKey(value: string) {
+  try {
+    const url = new URL(value);
+    const normalizedPath = decodeURIComponent(url.pathname)
+      .replace(/\/(?:w|f)?_?\d+x\d+\//i, "/size/")
+      .replace(/(\d{3})(\.(?:jpe?g|png|webp))$/i, "{seq}$2")
+      .toLowerCase();
+    return `${url.hostname.toLowerCase()}${normalizedPath}`;
+  } catch {
+    return "";
+  }
+}
+
 function uniqueUrls(values: string[], limit: number) {
   const result: string[] = [];
   const seen = new Set<string>();
@@ -146,13 +159,39 @@ function uniqueUrls(values: string[], limit: number) {
   return result;
 }
 
+function coherentUrls(values: string[], preferredKey: string, limit: number) {
+  const groups = new Map<string, string[]>();
+  for (const value of uniqueUrls(values, Math.max(limit * 8, 80))) {
+    const group = galleryKey(value);
+    if (!group) continue;
+    groups.set(group, [...(groups.get(group) || []), value]);
+  }
+  if (preferredKey) return uniqueUrls(groups.get(preferredKey) || [], limit);
+  const best = [...groups.entries()].sort((left, right) => right[1].length - left[1].length)[0];
+  return best && best[1].length >= 2 ? uniqueUrls(best[1], limit) : [];
+}
+
 function imageIdentity(image: CatalogImage) {
   return String(image.id || image.checksum || image.objectKey || image.url || "");
 }
 
+function uniqueImages(images: CatalogImage[], limit: number) {
+  const result: CatalogImage[] = [];
+  const seen = new Set<string>();
+  for (const image of images) {
+    const key = imageIdentity(image);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(image);
+    if (result.length >= limit) break;
+  }
+  return result;
+}
+
 export class EncarCompleteAdapter extends EncarDirectAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
+    const limit = Math.min(24, Math.max(1, Number.isFinite(requested) ? requested : 12));
     const originalRaw: any = offer.operational?.raw || {};
     const initial = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
 
@@ -171,52 +210,52 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       ?? originalRaw.photoPath
       ?? deepString(detail, ["Photo", "photo", "PhotoPath", "photoPath", "Image", "image", "imagePath", "path"]),
     );
+    const coverUrl = cover ? sequenceUrl(cover, 1) : "";
+    const preferredKey = galleryKey(coverUrl);
     const reportedCount = Math.min(limit, Math.max(0, Number(
       deepNumber(detail, ["photoCount", "PhotoCount", "photosCount", "imageCount", "ImageCount", "totalPhotoCount", "pictureCount", "PictureCount"])
       ?? positiveNumber(originalRaw.PhotoCount ?? originalRaw.photoCount ?? originalRaw.ImageCount ?? originalRaw.imageCount)
       ?? 0,
     )));
 
+    const explicitUrls = explicit
+      .map((item) => sequenceUrl(item.value, item.index || 1) || buildEncarImageUrl(item.value, item.index || 1))
+      .filter(Boolean);
+    const selectedExplicit = coherentUrls(explicitUrls, preferredKey, limit);
     const candidates: string[] = [];
-    for (const item of explicit) {
-      candidates.push(sequenceUrl(item.value, item.index || 1) || buildEncarImageUrl(item.value, item.index || 1));
-    }
 
     if (cover) {
-      const sequenceCount = reportedCount || limit;
+      const sequenceCount = reportedCount || Math.max(4, Math.min(limit, selectedExplicit.length || 12));
       for (let index = 1; index <= sequenceCount; index++) candidates.push(sequenceUrl(cover, index));
     }
+    candidates.push(...selectedExplicit);
 
-    const urls = uniqueUrls(candidates, limit);
-    const saved: CatalogImage[] = [];
-    const seenImages = new Set<string>();
-    for (const image of initial) {
-      const key = imageIdentity(image);
-      if (!key || seenImages.has(key)) continue;
-      seenImages.add(key);
-      saved.push(image);
-    }
-
+    const urls = coherentUrls(candidates, preferredKey, limit);
+    const fresh: CatalogImage[] = [];
     let consecutiveFailures = 0;
     for (const url of urls) {
-      if (saved.length >= limit) break;
+      if (fresh.length >= limit) break;
       const image = await cacheImageFromUrl(url, "korea", { headers: ENCAR_HEADERS }).catch(() => null);
       if (!image || image.size <= 8_000) {
         consecutiveFailures++;
-        if (!reportedCount && saved.length >= 3 && consecutiveFailures >= 7) break;
+        if (!reportedCount && fresh.length >= 4 && consecutiveFailures >= 5) break;
         continue;
       }
       consecutiveFailures = 0;
-      const key = imageIdentity(image);
-      if (!key || seenImages.has(key)) continue;
-      seenImages.add(key);
-      saved.push(image);
+      fresh.push(image);
     }
 
+    const verified = fresh.length >= 2;
+    const saved = verified ? uniqueImages(fresh, limit) : uniqueImages(initial, limit);
+    (offer.operational as any).galleryVerified = verified;
+    (offer.operational as any).gallerySourceKey = preferredKey || (urls[0] ? galleryKey(urls[0]) : "");
+    (offer.operational as any).galleryImageCount = saved.length;
+    (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
     (offer.operational as any).raw = {
       ...(offer.operational as any).raw,
       completeGallery: {
         checkedAt: new Date().toISOString(),
+        verified,
         reportedCount,
         discoveredUrls: urls.length,
         savedImages: saved.length,
