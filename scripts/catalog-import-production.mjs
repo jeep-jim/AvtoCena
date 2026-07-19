@@ -1,7 +1,7 @@
 process.env.CATALOG_ENCAR_DIRECT_PAGE_SIZE ||= "64";
 process.env.CATALOG_CHE168_GLOBAL_PAGE_SIZE ||= "64";
 process.env.CATALOG_CHE168_GLOBAL_MAX_BRANDS ||= "48";
-process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "80";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "120";
 process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= "1250";
 process.env.CATALOG_TARGET_PER_MARKET ||= "250";
 process.env.CATALOG_OFFER_RETENTION_MS ||= String(45 * 24 * 60 * 60 * 1000);
