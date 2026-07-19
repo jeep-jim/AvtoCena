@@ -9,9 +9,9 @@ const CONFIRMED_GENERATIONS = ["gen_1784276049832_9868cbbe"];
 const configured = String(process.env.CATALOG_RECOVERY_GENERATIONS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const history = await readDataJson("catalog/history/public-manifests.json", []);
 const historyGenerations = Array.isArray(history) ? history.map((item) => String(item?.generationId || "")).filter(Boolean).reverse() : [];
-const generations = [...new Set([...configured, ...historyGenerations, ...CONFIRMED_GENERATIONS])];
+const generations = [...new Set([...configured, ...CONFIRMED_GENERATIONS, ...historyGenerations])];
 const maxChunks = Math.max(1, Number(process.env.CATALOG_RECOVERY_MAX_CHUNKS || 50));
-const minimumGain = Math.max(1, Number(process.env.CATALOG_RECOVERY_MIN_GAIN || 1));
+const forceRestore = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_RECOVERY_FORCE || "true").toLowerCase());
 const recoveredAt = new Date().toISOString();
 
 function completeness(offer) {
@@ -68,6 +68,12 @@ async function readGeneration(generationId) {
 }
 
 const current = await readAllOffersForMaintenance();
+const beforeByMarket = current.reduce((totals, offer) => {
+  const candidate = prepare(offer);
+  if (candidate) totals[candidate.market] = (totals[candidate.market] || 0) + 1;
+  return totals;
+}, {});
+
 const merged = new Map();
 for (const offer of current) {
   const candidate = prepare(offer);
@@ -89,17 +95,19 @@ for (const generationId of generations) {
   if (accepted) recoveredByGeneration[generationId] = accepted;
 }
 
-const beforePublic = current.map((offer) => prepare(offer)).filter(Boolean).length;
 const next = [...merged.values()];
-const afterPublic = next.length;
-const byMarket = next.reduce((totals, offer) => {
+const afterByMarket = next.reduce((totals, offer) => {
   totals[offer.market] = (totals[offer.market] || 0) + 1;
   return totals;
 }, {});
+const restoredMissingMarket = MARKETS.some((market) => Number(beforeByMarket[market] || 0) === 0 && Number(afterByMarket[market] || 0) > 0);
+const richerMarket = MARKETS.some((market) => Number(afterByMarket[market] || 0) > Number(beforeByMarket[market] || 0));
+const shouldPublish = next.length > 0 && (forceRestore || restoredMissingMarket || richerMarket);
 
-if (afterPublic >= beforePublic + minimumGain || (beforePublic === 0 && afterPublic > 0)) {
-  const manifest = await persistCatalogOffers(next);
-  console.log(JSON.stringify({ restored: true, generationId: manifest.generationId, beforePublic, afterPublic, byMarket, recoveredByGeneration }, null, 2));
-} else {
-  console.log(JSON.stringify({ restored: false, beforePublic, afterPublic, byMarket, recoveredByGeneration, reason: "no_richer_historical_generation" }, null, 2));
+if (!shouldPublish) {
+  console.log(JSON.stringify({ restored: false, beforeByMarket, afterByMarket, recoveredByGeneration, reason: "no_recoverable_market_data" }, null, 2));
+  process.exit(1);
 }
+
+const manifest = await persistCatalogOffers(next);
+console.log(JSON.stringify({ restored: true, generationId: manifest.generationId, beforeTotal: current.length, afterTotal: next.length, beforeByMarket, afterByMarket, recoveredByGeneration }, null, 2));
