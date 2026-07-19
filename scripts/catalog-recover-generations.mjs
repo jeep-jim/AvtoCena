@@ -1,3 +1,4 @@
+// Emergency trigger v24: restore a non-empty public catalog before any staged rebuild.
 const { readDataJson } = await import("../apps/web/lib/data.ts");
 const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
