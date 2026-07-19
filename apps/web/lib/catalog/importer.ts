@@ -13,7 +13,11 @@
  * production_import_requires_object_storage
  * YC_OBJECT_STORAGE_BUCKET
  */
-import { catalogImportSources } from "./importer-impl";
+import {
+  catalogImportSources,
+  importCatalog as importCatalogBase,
+  type CatalogImportOptions,
+} from "./importer-impl";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
@@ -29,6 +33,16 @@ for (const replacement of completeSources) {
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
+}
+
+export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImportOptions) {
+  const requested = Array.isArray(sourceIdsOrOptions)
+    ? { sourceIds: sourceIdsOrOptions }
+    : { ...(sourceIdsOrOptions || {}) };
+  return importCatalogBase({
+    ...requested,
+    maxImagesPerOffer: Math.max(120, Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120)),
+  });
 }
 
 export * from "./importer-impl";
