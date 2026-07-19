@@ -11,6 +11,8 @@ const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
 const MIN_PUBLIC_IMAGES = 4;
 const MIN_SPEC_SCORE = 5;
+const EMERGENCY_MIN_PUBLIC_IMAGES = 3;
+const EMERGENCY_MIN_SPEC_SCORE = 4;
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function meaningfulName(value: unknown) {
@@ -107,8 +109,12 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   if (year < 1985 || year > currentYear + 1) return false;
   if (!hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
   if ((offer.operational as any)?.galleryVerified !== true) return false;
-  if (coreSpecScore(offer) < MIN_SPEC_SCORE) return false;
-  return credibleCatalogImages(offer.images || []).length >= MIN_PUBLIC_IMAGES;
+
+  const emergencyRecovered = Boolean((offer.operational as any)?.emergencyRecoveredAt);
+  const minimumSpecScore = emergencyRecovered ? EMERGENCY_MIN_SPEC_SCORE : MIN_SPEC_SCORE;
+  const minimumImages = emergencyRecovered ? EMERGENCY_MIN_PUBLIC_IMAGES : MIN_PUBLIC_IMAGES;
+  if (coreSpecScore(offer) < minimumSpecScore) return false;
+  return credibleCatalogImages(offer.images || []).length >= minimumImages;
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) { return offer.status === "active" && hasCredibleOfferContent(offer); }
