@@ -11,7 +11,7 @@ const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
   .filter(Boolean));
 const reportedOfferIds = [
   "d4353979acb720365324de54",
-  "20595006e08ad6c243948e3b",
+  "81937e0dbd5b509f183597a4",
 ];
 const offerIds = new Set([
   ...reportedOfferIds,
