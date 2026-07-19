@@ -24,8 +24,20 @@ function key(url: string) {
   try {
     const parsed = new URL(url);
     const file = parsed.pathname.match(/\/v1\/files\/([^/]+)\/image/i)?.[1];
-    return file ? `${parsed.hostname}:${file}` : `${parsed.hostname}${parsed.pathname}`.toLowerCase().replace(/\/\d+x\d+\//, "/size/").replace(/;s=\d+x\d+/i, "");
+    return file ? `${parsed.hostname}:${file}` : `${parsed.hostname}${parsed.pathname}`.toLowerCase().replace(/\/(?:w|f)?_?\d+x\d+\//i, "/size/").replace(/;s=\d+x\d+/i, "");
   } catch { return url.replace(/[?#].*$/, "").toLowerCase(); }
+}
+
+function groupKey(url: string) {
+  try {
+    const parsed = new URL(url);
+    const path = parsed.pathname
+      .replace(/\/(?:w|f)?_?\d+x\d+\//i, "/size/")
+      .replace(/\/v1\/files\/[^/]+\/image.*$/i, "/v1/files/gallery")
+      .split("/")
+      .filter(Boolean);
+    return `${parsed.hostname.toLowerCase()}/${path.slice(0, Math.max(1, path.length - 1)).join("/")}`;
+  } catch { return ""; }
 }
 
 function urls(markup: string, base: string) {
@@ -43,11 +55,32 @@ function urls(markup: string, base: string) {
     seen.add(id);
     result.push(url);
   }
-  return result;
+
+  const groups = new Map<string, string[]>();
+  for (const url of result) {
+    const group = groupKey(url);
+    if (!group) continue;
+    groups.set(group, [...(groups.get(group) || []), url]);
+  }
+  const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
+  return best.length >= 3 ? best : result;
 }
 
 function imageKey(image: CatalogImage) {
   return String(image.id || image.checksum || image.objectKey || image.url || "");
+}
+
+function uniqueImages(images: CatalogImage[], limit: number) {
+  const result: CatalogImage[] = [];
+  const seen = new Set<string>();
+  for (const image of images) {
+    const id = imageKey(image);
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    result.push(image);
+    if (result.length >= limit) break;
+  }
+  return result;
 }
 
 export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
@@ -56,32 +89,23 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
     const limit = Math.max(120, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
     const initial = await original(offer).catch(() => [] as CatalogImage[]);
     const pageUrl = String(offer.operational?.sourceUrl || "");
-    if (!pageUrl) return initial.slice(0, limit);
+    if (!pageUrl) return uniqueImages(initial, limit);
     let markup = "";
     try {
       const response = await fetch(pageUrl, { headers: { ...headers, referer: pageUrl }, redirect: "follow" });
       if (response.ok) markup = await response.text();
-    } catch { return initial.slice(0, limit); }
-    const result: CatalogImage[] = [];
-    const seen = new Set<string>();
-    for (const image of initial) {
-      const id = imageKey(image);
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      result.push(image);
-    }
-    for (const url of urls(markup, pageUrl)) {
-      if (result.length >= limit) break;
+    } catch { return uniqueImages(initial, limit); }
+
+    const fresh: CatalogImage[] = [];
+    for (const url of urls(markup, pageUrl).slice(0, limit)) {
       const image = await cacheImageFromUrl(url, String(offer.market), { headers: { ...headers, referer: pageUrl } }).catch(() => null);
-      if (!image || image.size <= 8000) continue;
-      const id = imageKey(image);
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      result.push(image);
+      if (image && image.size > 8000) fresh.push(image);
     }
+
+    const result = fresh.length >= 3 ? uniqueImages(fresh, limit) : uniqueImages([...initial, ...fresh], limit);
     (offer.operational as any).galleryImageCount = result.length;
     (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-    return result.slice(0, limit);
+    return result;
   };
   return source;
 }
