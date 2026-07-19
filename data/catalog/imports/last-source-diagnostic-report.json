@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-07-18T11:40:23.254Z",
+  "startedAt": "2026-07-19T07:03:09.892Z",
   "requested": [
     "guazi_china_export",
     "otomoto_europe_exact",
@@ -9,102 +9,58 @@
     {
       "sourceId": "guazi_china_export",
       "market": "china",
-      "ok": true,
-      "durationMs": 1083,
-      "raw": 20,
-      "normalized": 20,
-      "nextCursor": "2",
-      "health": {
-        "ok": true,
-        "message": "Guazi export volkswagen page 1: parsed 20",
-        "checkedAt": "2026-07-18T11:40:24.329Z",
-        "httpStatus": 200,
-        "contentType": "text/html; charset=utf-8"
-      },
-      "samples": [
-        {
-          "make": "Volkswagen",
-          "model": "Passat 2013 1.8TSI DSG Prestige Edition",
-          "year": 2013,
-          "price": 2892,
-          "currency": "USD",
-          "mileageKm": 302400,
-          "fuel": "petrol",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-passat-2013-18l-black-302400km-at-2wd-5-seats-9q9s56yf7h.html",
-          "rawImages": 6
-        },
-        {
-          "make": "Volkswagen",
-          "model": "FAW-Volkswagen CC 2012 3.0 FSI V6",
-          "year": 2012,
-          "price": 4056,
-          "currency": "USD",
-          "mileageKm": 144800,
-          "fuel": "petrol",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-faw-volkswagen-cc-2012-30l-white-144800km-at-2wd-4-seats-yfs3wrl8fa.html",
-          "rawImages": 6
-        },
-        {
-          "make": "Volkswagen",
-          "model": "Tiguan L 2019 330TSI Automatic Two-Wheel Drive Panoramic",
-          "year": 2019,
-          "price": 10790,
-          "currency": "USD",
-          "mileageKm": 145100,
-          "fuel": "petrol",
-          "sourceUrl": "https://en.guazi.com/products/volkswagen-tiguan-l-2019-20l-silver-145100km-at-2wd-5-seats-6kl3g4hun3.html",
-          "rawImages": 6
-        }
-      ]
+      "ok": false,
+      "durationMs": 983,
+      "error": "Error: guazi_export_zero_volkswagen_1_936825\n    at GuaziExportAdapter.fetchPage (/home/runner/work/AvtoCena/AvtoCena/apps/web/lib/catalog/guazi-export-source.ts:232:29)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async <anonymous> (/home/runner/work/AvtoCena/AvtoCena/scripts/catalog-source-diagnostic.mjs:18:18)"
     },
     {
       "sourceId": "otomoto_europe_exact",
       "market": "europe",
       "ok": true,
-      "durationMs": 18138,
-      "raw": 28,
-      "normalized": 28,
+      "durationMs": 18897,
+      "raw": 26,
+      "normalized": 26,
       "nextCursor": "1",
       "health": {
         "ok": true,
-        "message": "OTOMOTO audi: 28; detail prices and years checked",
-        "checkedAt": "2026-07-18T11:40:28.477Z",
+        "message": "OTOMOTO audi: 26; detail price, mileage, specs and full galleries checked",
+        "checkedAt": "2026-07-19T07:03:14.968Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=utf-8"
       },
       "samples": [
         {
           "make": "Audi",
-          "model": "A6 Avant",
-          "year": 2012,
-          "price": null,
-          "currency": null,
-          "mileageKm": 263000,
-          "fuel": "diesel",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a6-avant-ID6Ia8hJ.html",
-          "rawImages": 1
-        },
-        {
-          "make": "Audi",
-          "model": "A4 Avant",
-          "year": 2008,
-          "price": null,
-          "currency": null,
-          "mileageKm": 300000,
-          "fuel": "diesel",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a4-avant-ID6Ia8hc.html",
-          "rawImages": 6
-        },
-        {
-          "make": "Audi",
-          "model": "A6 Avant TDI mHEV Quattro S tronic",
-          "year": 2026,
-          "price": null,
-          "currency": null,
-          "mileageKm": 5,
+          "model": "A3 Sportback",
+          "year": 2015,
+          "price": 28900,
+          "currency": "PLN",
+          "mileageKm": 0,
           "fuel": "hybrid",
-          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a6-avant-ID6Ia8gN.html",
-          "rawImages": 6
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a3-sportback-ID6Ia9ox.html",
+          "rawImages": 15
+        },
+        {
+          "make": "Audi",
+          "model": "A4 Avant 2.0 TDI DPF multitronic",
+          "year": 2007,
+          "price": 17000,
+          "currency": "PLN",
+          "mileageKm": 0,
+          "fuel": "diesel",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a4-avant-ID6Ia9om.html",
+          "rawImages": 19
+        },
+        {
+          "make": "Audi",
+          "model": "A3 Sportback 2.0 TDI (clean diesel) S line",
+          "year": 2018,
+          "price": 55999,
+          "currency": "PLN",
+          "mileageKm": 0,
+          "fuel": "diesel",
+          "sourceUrl": "https://www.otomoto.pl/osobowe/oferta/audi-a3-sportback-ID6Ia9ol.html",
+          "rawImages": 13
         }
       ]
     },
@@ -112,53 +68,53 @@
       "sourceId": "dubicars_uae_exact",
       "market": "uae",
       "ok": true,
-      "durationMs": 6666,
-      "raw": 22,
-      "normalized": 22,
+      "durationMs": 5131,
+      "raw": 27,
+      "normalized": 27,
       "nextCursor": "2",
       "health": {
         "ok": true,
-        "message": "DubiCars page 1: 22",
-        "checkedAt": "2026-07-18T11:40:49.138Z",
+        "message": "DubiCars page 1: 27",
+        "checkedAt": "2026-07-19T07:03:34.905Z",
         "httpStatus": 200,
         "contentType": "text/html; charset=UTF-8"
       },
       "samples": [
         {
           "make": "Toyota",
-          "model": "Land Cruiser Toyota landcruise 2019Model 4.0 v6",
-          "year": 2019,
-          "price": 130790,
+          "model": "Prado TX-L",
+          "year": 2018,
+          "price": 27500,
           "currency": "USD",
-          "mileageKm": 55026,
-          "fuel": "petrol",
-          "sourceUrl": "https://www.dubicars.com/2019-toyota-land-cruiser-toyota-landcruise-2019model-40-v6-petrol-engine-colour-black-push-start-transmission-automatic-inte-952629.html",
-          "rawImages": 15
-        },
-        {
-          "make": "Ford",
-          "model": "Ranger RAPTOR Double Cabin Pickup 3.0L V6",
-          "year": 2024,
-          "price": 35500,
-          "currency": "USD",
-          "mileageKm": 20129,
-          "fuel": "petrol",
-          "sourceUrl": "https://www.dubicars.com/2024-ford-ranger-raptor-double-cabin-pickup-30l-v6-twin-turbo-petrol-engine-4wd-360-camera-automatic-gear-5-seats-4-953687.html",
+          "mileageKm": 54500,
+          "fuel": "diesel",
+          "sourceUrl": "https://www.dubicars.com/2018-toyota-prado-tx-l-983412.html",
           "rawImages": 15
         },
         {
           "make": "Toyota",
-          "model": "Land Cruiser Toyota landcruise 2016model Modified 2024",
-          "year": 2024,
-          "price": 28800,
+          "model": "Land Cruiser GXR",
+          "year": 2018,
+          "price": 31000,
           "currency": "USD",
-          "mileageKm": 45100,
+          "mileageKm": 42000,
           "fuel": "petrol",
-          "sourceUrl": "https://www.dubicars.com/2016-toyota-land-cruiser-toyota-landcruise-2016model-modified-2024-v8-petrol-engine-colour-black-push-start-sunroof-transmiss-953932.html",
+          "sourceUrl": "https://www.dubicars.com/2018-toyota-land-cruiser-gxr-982620.html",
+          "rawImages": 15
+        },
+        {
+          "make": "Nissan",
+          "model": "Altima S",
+          "year": 2020,
+          "price": 11900,
+          "currency": "USD",
+          "mileageKm": 16000,
+          "fuel": "petrol",
+          "sourceUrl": "https://www.dubicars.com/2020-nissan-altima-s-999934.html",
           "rawImages": 15
         }
       ]
     }
   ],
-  "finishedAt": "2026-07-18T11:40:49.141Z"
+  "finishedAt": "2026-07-19T07:03:34.908Z"
 }
