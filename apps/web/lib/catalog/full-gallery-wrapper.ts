@@ -63,11 +63,8 @@ function uniqueImages(images: CatalogImage[], limit: number) {
 export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
   const original = source.fetchImages.bind(source);
   source.fetchImages = async (offer: VehicleOffer) => {
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120);
-    const limit = Math.min(120, Math.max(1, Number.isFinite(requested) ? requested : 120));
-
-    // The adapter reads only this vehicle's own detail page. Related listings are
-    // never scanned into the gallery, and every valid source-native photo is kept.
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
+    const limit = Math.min(1000, Math.max(1, Number.isFinite(requested) ? requested : 1000));
     const result = uniqueImages(await original(offer).catch(() => [] as CatalogImage[]), limit);
     const sourceNativeUrls = rawGalleryUrls(offer);
     const verified = result.length >= 2 && sourceNativeUrls.length >= 2;
