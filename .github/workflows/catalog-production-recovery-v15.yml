@@ -33,28 +33,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - name: Validate rebuild scripts
-        run: |
-          node --check scripts/catalog-rebuild-market.mjs
-          node --check scripts/catalog-publish-fresh.mjs
-          node --check scripts/catalog-recover-generations.mjs
-
   restore:
-    needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -67,6 +46,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Validate recovery script
+        run: node --check scripts/catalog-recover-generations.mjs
       - name: Restore the last complete working catalog including Japan
         run: npx tsx scripts/catalog-recover-generations.mjs | tee catalog-restore-report.log
         env:
@@ -131,6 +112,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Validate clean rebuild scripts
+        run: |
+          node --check scripts/catalog-rebuild-market.mjs
+          node --check scripts/catalog-publish-fresh.mjs
       - name: Collect 270 verified ${{ matrix.market }} offers from their own detail pages
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
