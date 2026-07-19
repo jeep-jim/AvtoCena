@@ -1,1 +1,27 @@
-{"market":"china","fatal":true,"error":"progress_file_missing"}
+{
+  "market": "china",
+  "sourceId": "guazi_china_export",
+  "startedAt": "2026-07-19T07:44:23.947Z",
+  "finishedAt": "2026-07-19T07:45:16.115Z",
+  "before": 98,
+  "after": 98,
+  "deficit": 152,
+  "candidateLimit": 456,
+  "gained": 0,
+  "reached": false,
+  "imported": 0,
+  "updated": 0,
+  "rejectedByQuality": 0,
+  "imageFailures": 0,
+  "deadlineReached": false,
+  "sources": [
+    {
+      "sourceId": "guazi_china_export",
+      "market": "china",
+      "ok": false,
+      "seen": 0,
+      "saved": 0,
+      "error": "guazi_export_zero_volkswagen_1_937203"
+    }
+  ]
+}

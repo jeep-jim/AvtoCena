@@ -1,40 +1,91 @@
 {
   "version": 15,
-  "finishedAt": "2026-07-19T07:42:26.375Z",
+  "finishedAt": "2026-07-19T07:45:16.402Z",
   "desiredPerMarket": 250,
   "publicByMarket": {
     "korea": 50,
-    "uae": 0,
-    "europe": 0,
-    "china": 0
+    "uae": 247,
+    "europe": 545,
+    "china": 98
   },
   "missingByMarket": {
     "korea": 200,
-    "uae": 250,
-    "europe": 250,
-    "china": 250
+    "uae": 3,
+    "europe": 0,
+    "china": 152
   },
   "markets": [
     {
       "market": "korea",
       "protectedGrowOnly": true,
       "count": 50,
-      "checkedAt": "2026-07-19T07:40:55.730Z"
+      "checkedAt": "2026-07-19T07:43:22.484Z"
     },
     {
       "market": "uae",
-      "fatal": true,
-      "error": "progress_file_missing"
+      "sourceId": "dubicars_uae_exact",
+      "startedAt": "2026-07-19T07:43:27.381Z",
+      "finishedAt": "2026-07-19T07:44:18.033Z",
+      "before": 247,
+      "after": 247,
+      "deficit": 3,
+      "candidateLimit": 80,
+      "gained": 0,
+      "reached": false,
+      "imported": 0,
+      "updated": 0,
+      "rejectedByQuality": 0,
+      "imageFailures": 0,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "dubicars_uae_exact",
+          "market": "uae",
+          "ok": false,
+          "seen": 0,
+          "saved": 0,
+          "error": "dubicars_current_http_403"
+        }
+      ]
     },
     {
       "market": "europe",
-      "fatal": true,
-      "error": "progress_file_missing"
+      "sourceId": "otomoto_europe_exact",
+      "startedAt": "2026-07-19T07:44:19.876Z",
+      "finishedAt": "2026-07-19T07:44:22.160Z",
+      "before": 545,
+      "after": 545,
+      "deficit": 0,
+      "gained": 0,
+      "reached": true,
+      "skipped": true
     },
     {
       "market": "china",
-      "fatal": true,
-      "error": "progress_file_missing"
+      "sourceId": "guazi_china_export",
+      "startedAt": "2026-07-19T07:44:23.947Z",
+      "finishedAt": "2026-07-19T07:45:16.115Z",
+      "before": 98,
+      "after": 98,
+      "deficit": 152,
+      "candidateLimit": 456,
+      "gained": 0,
+      "reached": false,
+      "imported": 0,
+      "updated": 0,
+      "rejectedByQuality": 0,
+      "imageFailures": 0,
+      "deadlineReached": false,
+      "sources": [
+        {
+          "sourceId": "guazi_china_export",
+          "market": "china",
+          "ok": false,
+          "seen": 0,
+          "saved": 0,
+          "error": "guazi_export_zero_volkswagen_1_937203"
+        }
+      ]
     }
   ]
 }
