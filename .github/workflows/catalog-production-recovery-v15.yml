@@ -1,4 +1,4 @@
-name: Catalog clean rebuild all five markets
+name: Catalog restore and verified five-market rebuild
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-v15.yml
+      - scripts/catalog-recover-generations.mjs
       - scripts/catalog-rebuild-market.mjs
       - scripts/catalog-publish-fresh.mjs
       - apps/web/lib/catalog/importer.ts
@@ -14,6 +15,7 @@ on:
       - apps/web/lib/catalog/spec-normalization.ts
       - apps/web/lib/catalog/adapters.ts
       - apps/web/lib/catalog/encar-complete-source.ts
+      - apps/web/lib/catalog/public-market-sources.ts
       - apps/web/lib/catalog/guazi-export-source.ts
       - apps/web/lib/catalog/goonet-exact-source.ts
       - apps/web/lib/catalog/dubicars-current-source.ts
@@ -24,7 +26,7 @@ on:
     - cron: "17 20 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: catalog-production-import
@@ -45,9 +47,53 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Validate rebuild scripts
+        run: |
+          node --check scripts/catalog-rebuild-market.mjs
+          node --check scripts/catalog-publish-fresh.mjs
+          node --check scripts/catalog-recover-generations.mjs
+
+  restore:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Restore the last complete working catalog including Japan
+        run: npx tsx scripts/catalog-recover-generations.mjs | tee catalog-restore-report.log
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+          CATALOG_RECOVERY_MARKETS: korea,china,japan,uae,europe
+          CATALOG_RECOVERY_GENERATIONS: gen_1784276049832_9868cbbe
+          CATALOG_RECOVERY_MAX_CHUNKS: "50"
+          CATALOG_RECOVERY_MIN_GAIN: "1"
+          CATALOG_GROW_ONLY_MARKETS: ""
+          CATALOG_INDEX_WRITE_CONCURRENCY: "10"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-restore-report
+          path: catalog-restore-report.log
+          if-no-files-found: warn
+          retention-days: 7
 
   collect:
-    needs: validate
+    needs: restore
     strategy:
       fail-fast: false
       max-parallel: 5
@@ -58,7 +104,7 @@ jobs:
           - market: china
             sourceIds: che168_china_exact,guazi_china_export
           - market: japan
-            sourceIds: goonet_japan_exact,beforward_public
+            sourceIds: goonet_japan_exact,beforward_japan,beforward_public
           - market: uae
             sourceIds: dubicars_uae_exact
           - market: europe
@@ -75,7 +121,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Collect 260 clean ${{ matrix.market }} offers with complete galleries
+      - name: Collect 270 verified ${{ matrix.market }} offers from their own detail pages
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -88,10 +134,11 @@ jobs:
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_MARKET: ${{ matrix.market }}
           CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.sourceIds }}
-          CATALOG_REBUILD_TARGET: "260"
+          CATALOG_REBUILD_TARGET: "270"
           CATALOG_REBUILD_MAX_PAGES: "400"
+          CATALOG_REBUILD_SEED_SCAN_LIMIT: "800"
           CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
-          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "6"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
           CATALOG_MAX_IMAGES_PER_OFFER: "120"
           CATALOG_IMAGE_MAX_BYTES: "12000000"
           CATALOG_SOURCE_TIMEOUT_MS: "60000"
@@ -111,18 +158,18 @@ jobs:
         with:
           name: catalog-rebuild-${{ matrix.market }}
           path: catalog-rebuild-${{ matrix.market }}.json
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 3
 
   publish:
     needs: collect
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 1
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -133,7 +180,7 @@ jobs:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
-      - name: Atomically replace the public catalog with five fresh markets
+      - name: Atomically replace the public catalog with five verified markets
         run: npx tsx scripts/catalog-publish-fresh.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -146,18 +193,28 @@ jobs:
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
           CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
           CATALOG_REBUILD_TARGET: "250"
-          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "6"
-          CATALOG_REBUILD_MIN_AVG_IMAGES: "8"
-          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "10"
-          CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.60"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
+          CATALOG_REBUILD_MIN_AVG_IMAGES: "7"
+          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "8"
+          CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.50"
           CATALOG_REBUILD_MIN_SPEC_SCORE: "5"
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
+      - name: Record completed catalog generation
+        run: |
+          mkdir -p data/catalog/imports
+          cp catalog-fresh-publish-report.json data/catalog/imports/last-complete-five-market-rebuild.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add data/catalog/imports/last-complete-five-market-rebuild.json
+          git commit -m "Record completed five-market rebuild [skip ci]" || exit 0
+          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-fresh-publish-report
           path: catalog-fresh-publish-report.json
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 14
