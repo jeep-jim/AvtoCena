@@ -21,6 +21,7 @@ import {
 import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
+import { publicMarketSources } from "./public-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 
@@ -28,6 +29,7 @@ const beforwardPublicSource = catalogSources.find((source) => source.sourceId ==
 const completeSources = [
   ...scopedMarketSources.map((source) => fullGallery(source)),
   ...exactMarketSources.map((source) => fullGallery(source)),
+  ...publicMarketSources.map((source) => fullGallery(source)),
   ...(beforwardPublicSource ? [fullGallery(beforwardPublicSource)] : []),
   encarCompleteSource,
 ];
@@ -42,10 +44,10 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const requested: CatalogImportOptions = Array.isArray(sourceIdsOrOptions)
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
-  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120);
+  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.min(120, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 120)),
+    maxImagesPerOffer: Math.min(1000, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 1000)),
   });
 }
 
