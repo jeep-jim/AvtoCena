@@ -1,1 +1,27 @@
-{"market":"uae","fatal":true,"error":"progress_file_missing"}
+{
+  "market": "uae",
+  "sourceId": "dubicars_uae_exact",
+  "startedAt": "2026-07-19T07:43:27.381Z",
+  "finishedAt": "2026-07-19T07:44:18.033Z",
+  "before": 247,
+  "after": 247,
+  "deficit": 3,
+  "candidateLimit": 80,
+  "gained": 0,
+  "reached": false,
+  "imported": 0,
+  "updated": 0,
+  "rejectedByQuality": 0,
+  "imageFailures": 0,
+  "deadlineReached": false,
+  "sources": [
+    {
+      "sourceId": "dubicars_uae_exact",
+      "market": "uae",
+      "ok": false,
+      "seen": 0,
+      "saved": 0,
+      "error": "dubicars_current_http_403"
+    }
+  ]
+}
