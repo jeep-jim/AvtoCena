@@ -98,6 +98,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
+  const mobileTitle = o.modelLabel.toLocaleLowerCase("en-US").startsWith(o.makeLabel.toLocaleLowerCase("en-US"))
+    ? o.modelLabel
+    : `${o.makeLabel} ${o.modelLabel}`.trim();
 
   const specs = [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
@@ -117,7 +120,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         <div className="min-w-0">
           <header className="min-w-0">
             <nav aria-label="Хлебные крошки" className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] md:text-xs"><Link href={marketHref} className="transition hover:text-red-500">{o.marketLabel}</Link><span aria-hidden="true">/</span><Link href={makeHref} className="transition hover:text-red-500">{o.makeLabel}</Link>{o.modelLabel && o.modelLabel !== o.makeLabel ? <><span aria-hidden="true">/</span><span className="min-w-0 truncate">{o.modelLabel}</span></> : null}</nav>
-            <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
+            <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="ac-offer-title min-w-0 overflow-hidden text-ellipsis whitespace-nowrap indent-[2.7rem] text-[clamp(17px,5.3vw,26px)] font-black leading-none tracking-[-0.045em] sm:whitespace-normal sm:break-words sm:text-3xl sm:leading-[1.02] md:indent-[3.35rem] md:text-5xl"><span className="sm:hidden">{mobileTitle}</span><span className="hidden sm:inline">{o.title}</span></h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
         </div>
