@@ -18,4 +18,4 @@ jobs:
   cancel-old-runs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Obsolete destructive catalog runs have been superseded."
+      - run: echo "Obsolete catalog fillers have been superseded by the all-market recovery."
