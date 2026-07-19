@@ -79,6 +79,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       src={cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
       className="block h-full w-full max-w-full select-none object-cover"
+      loading="eager"
+      decoding="async"
+      fetchPriority="high"
       draggable={false}
     />
   );
@@ -95,7 +98,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       aria-label={`Открыть фото ${index + 1}`}
       aria-pressed={index === activeIndex}
     >
-      <img src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" draggable={false} />
+      <img src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
       {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
     </button>
   );
@@ -131,6 +134,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             src={cleanImages[activeIndex]}
             alt={`${title}, фото ${activeIndex + 1}`}
             className="max-h-[68dvh] max-w-full select-none rounded-2xl object-contain"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             draggable={false}
           />
         </div>
@@ -146,7 +152,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
                 aria-label={`Открыть фото ${index + 1}`}
                 aria-pressed={index === activeIndex}
               >
-                <img src={thumbnail} alt="" className="h-full w-full object-cover" draggable={false} />
+                <img src={thumbnail} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
               </button>
             ))}
           </div>
