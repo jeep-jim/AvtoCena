@@ -262,14 +262,42 @@ function removeLeadingPhrase(value: string, phrase: string) {
       : value;
 }
 
+function normalizedTitleToken(value: string) {
+  return value.toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
+function collapseAdjacentRepeatedPhrases(value: string) {
+  const tokens = value.split(/\s+/).filter(Boolean);
+  let changed = true;
+
+  while (changed) {
+    changed = false;
+    const maxPhraseLength = Math.min(8, Math.floor(tokens.length / 2));
+
+    outer: for (let phraseLength = maxPhraseLength; phraseLength >= 1; phraseLength--) {
+      for (let start = 0; start + phraseLength * 2 <= tokens.length; start++) {
+        const left = tokens.slice(start, start + phraseLength).map(normalizedTitleToken).join(" ");
+        const right = tokens.slice(start + phraseLength, start + phraseLength * 2).map(normalizedTitleToken).join(" ");
+        if (!left || left !== right) continue;
+        tokens.splice(start + phraseLength, phraseLength);
+        changed = true;
+        break outer;
+      }
+    }
+  }
+
+  return tokens.join(" ").replace(/\s+/g, " ").trim();
+}
+
 export function catalogOfferTitle(offer: any) {
   const make = compactListingText(offer?.make);
   const model = compactListingText(offer?.model);
-  const base = model && make && model.toLocaleLowerCase("en-US").startsWith(make.toLocaleLowerCase("en-US"))
+  const rawBase = model && make && model.toLocaleLowerCase("en-US").startsWith(make.toLocaleLowerCase("en-US"))
     ? model
     : [make, model].filter(Boolean).join(" ").trim();
+  const base = collapseAdjacentRepeatedPhrases(rawBase);
 
-  let trim = compactListingText(offer?.trim);
+  let trim = collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim));
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
   trim = removeLeadingPhrase(trim, model);
@@ -277,11 +305,9 @@ export function catalogOfferTitle(offer: any) {
     trim = trim.slice(0, trim.toLocaleLowerCase("en-US").indexOf(base.toLocaleLowerCase("en-US"))).trim();
   }
 
-  const combined = [base, trim]
+  const combined = collapseAdjacentRepeatedPhrases([base, trim]
     .filter(Boolean)
-    .join(" ")
-    .replace(/\s+/g, " ")
-    .trim()
+    .join(" "))
     .split(/\s+/)
     .slice(0, 16)
     .join(" ")
@@ -300,8 +326,8 @@ export function presentCatalogOffer(offer: any) {
     ...offer,
     title: catalogOfferTitle(offer),
     makeLabel: compactListingText(offer?.make) || "Марка уточняется",
-    modelLabel: compactListingText(offer?.model) || "Модель уточняется",
-    trimLabel: compactListingText(offer?.trim),
+    modelLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",
+    trimLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),
     fuelLabel: catalogFuelName(offer?.fuel),
