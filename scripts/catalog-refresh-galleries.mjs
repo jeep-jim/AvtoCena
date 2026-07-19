@@ -12,6 +12,7 @@ const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
 const reportedOfferIds = [
   "d4353979acb720365324de54",
   "81937e0dbd5b509f183597a4",
+  "6915dc63976acf885d99f13b",
 ];
 const offerIds = new Set([
   ...reportedOfferIds,
@@ -73,6 +74,7 @@ const report = {
   selected: candidates.length,
   refreshed: 0,
   expanded: 0,
+  replaced: 0,
   unchanged: 0,
   failed: 0,
   rows: [],
@@ -85,20 +87,26 @@ for (let index = 0; index < candidates.length; index++) {
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
   process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
   try {
-    const fresh = await source.fetchImages(offer);
-    const merged = mergeImages(Array.isArray(fresh) ? fresh : [], Array.isArray(offer.images) ? offer.images : []);
+    const fresh = Array.isArray(await source.fetchImages(offer)) ? await source.fetchImages(offer) : [];
+    // Two or more source-native images are enough to replace a polluted cached set.
+    const replaced = fresh.length >= 2;
+    const merged = replaced
+      ? mergeImages(fresh, [])
+      : mergeImages(fresh, Array.isArray(offer.images) ? offer.images : []);
     offer.images = merged;
     offer.operational = {
       ...offer.operational,
       galleryRefreshedAt: new Date().toISOString(),
       galleryImageCount: merged.length,
+      galleryReplaced: replaced,
     };
     byId.set(offer.id, offer);
     report.refreshed++;
+    if (replaced) report.replaced++;
     if (merged.length > before) report.expanded++;
     else report.unchanged++;
-    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: merged.length, ok: true });
-    console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${merged.length}`);
+    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: merged.length, replaced, ok: true });
+    console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${merged.length}${replaced ? " replaced" : " merged"}`);
   } catch (error) {
     report.failed++;
     report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: String(error?.message || error) });
