@@ -12,8 +12,20 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-import.yml
+      - apps/web/lib/catalog/importer.ts
+      - apps/web/lib/catalog/encar-complete-source.ts
+      - apps/web/lib/catalog/otomoto-current-source.ts
+      - apps/web/lib/catalog/otomoto-detail-source.ts
+      - apps/web/lib/catalog/che168-exact-source.ts
+      - apps/web/lib/catalog/che168-dealer-source.ts
+      - apps/web/lib/catalog/goonet-exact-source.ts
+      - apps/web/lib/catalog/dubicars-current-source.ts
+      - scripts/catalog-refresh-galleries.mjs
   schedule:
     - cron: "17 20 * * *"
+
+permissions:
+  contents: read
 
 concurrency:
   group: catalog-production-import
@@ -28,179 +40,18 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
+      - name: Verify catalog source code
+        run: npm run typecheck
 
-      - name: Enable complete galleries for all five markets
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          def replace_once(path_value, old, new, marker):
-              path = Path(path_value)
-              text = path.read_text(encoding='utf-8')
-              if marker in text:
-                  return
-              if old not in text:
-                  raise SystemExit(f'{path_value}: gallery patch target missing')
-              path.write_text(text.replace(old, new, 1), encoding='utf-8')
-
-          adapters = Path('apps/web/lib/catalog/adapters.ts')
-          text = adapters.read_text(encoding='utf-8')
-          old = '''export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
-            const raw: any = offer.operational.raw || {};
-            const listRaw = raw.offer || raw;
-            const photos = detail?.photos || detail?.PhotoList || detail?.vehicle?.photos || detail?.vehicle?.PhotoList || [];
-            const listCover = listRaw?.Photo || listRaw?.photo || raw?.offer?.Photo || raw?.offer?.photo;
-            return [...new Set([buildEncarImageUrl(listCover, 1), ...photos.map((photo: any, index: number) => buildEncarImageUrl(photo.path || photo.url || photo.Photo || photo.location || photo, num(photo.imageNumber || photo.no || photo.seq) || index + 1))].filter(Boolean))].slice(0, 10);
-          }'''
-          new = '''function collectEncarPhotoValues(value: any, key = "", depth = 0, output: string[] = []) {
-            if (value == null || depth > 12) return output;
-            if (typeof value === "string") {
-              const raw = text(value).replace(/\\\\\//g, "/");
-              const photoKey = /photo|image|picture|gallery|media|location|path|url/i.test(key);
-              const photoValue = /ci\\.encar\\.com|carpicture|\\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(raw);
-              if (raw && (photoKey || photoValue) && (photoValue || /^\\/?carpicture/i.test(raw))) output.push(raw);
-              return output;
-            }
-            if (Array.isArray(value)) {
-              for (const item of value) collectEncarPhotoValues(item, key, depth + 1, output);
-              return output;
-            }
-            if (typeof value !== "object") return output;
-            for (const [childKey, child] of Object.entries(value)) {
-              if (/photo|image|picture|gallery|media|location|path|url/i.test(childKey) || depth < 5) {
-                collectEncarPhotoValues(child, childKey, depth + 1, output);
-              }
-            }
-            return output;
-          }
-
-          function encarSequenceUrl(value: any, imageNumber: number) {
-            const raw = text(value).replace(/\\\\\//g, "/");
-            if (!raw) return "";
-            const padded = String(Math.max(1, imageNumber)).padStart(3, "0");
-            if (/^https?:\\/\\//i.test(raw)) {
-              const replaced = raw.replace(/(\\d{3})(\\.(?:jpe?g|png|webp)(?:[?#].*)?)$/i, `${padded}$2`);
-              return replaced || raw;
-            }
-            return buildEncarImageUrl(raw, imageNumber);
-          }
-
-          export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
-            const raw: any = offer.operational.raw || {};
-            const listRaw = raw.offer || raw;
-            const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80));
-            const listCover = listRaw?.Photo || listRaw?.photo || listRaw?.Image || listRaw?.image || raw?.offer?.Photo || raw?.offer?.photo;
-            const explicitLists = [
-              detail?.photos,
-              detail?.PhotoList,
-              detail?.images,
-              detail?.ImageList,
-              detail?.vehicle?.photos,
-              detail?.vehicle?.PhotoList,
-              detail?.advertisement?.photos,
-              detail?.advertisement?.images,
-              detail?.car?.photos,
-              detail?.car?.images,
-            ].filter(Array.isArray);
-            const candidates: string[] = [buildEncarImageUrl(listCover, 1)];
-            for (const photos of explicitLists) {
-              photos.forEach((photo: any, index: number) => {
-                const value = photo?.path || photo?.url || photo?.Photo || photo?.photo || photo?.image || photo?.location || photo;
-                candidates.push(encarSequenceUrl(value, num(photo?.imageNumber || photo?.no || photo?.seq || photo?.order) || index + 1));
-              });
-            }
-            collectEncarPhotoValues(detail).forEach((value, index) => candidates.push(encarSequenceUrl(value, index + 1)));
-            const photoCount = Math.min(limit, Math.max(0, Number(
-              num(deepFind(detail, ["photoCount", "PhotoCount", "photosCount", "imageCount", "ImageCount", "totalPhotoCount", "pictureCount"]))
-              || num(listRaw?.PhotoCount || listRaw?.photoCount || listRaw?.ImageCount || listRaw?.imageCount)
-              || 0
-            )));
-            if (listCover && photoCount > 1) {
-              for (let index = 1; index <= photoCount; index++) candidates.push(encarSequenceUrl(listCover, index));
-            }
-            const result: string[] = [];
-            const seen = new Set<string>();
-            for (const candidate of candidates) {
-              const url = text(candidate);
-              if (!/^https?:\\/\\//i.test(url) || !/ci\\.encar\\.com|carpicture|\\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url)) continue;
-              const canonical = url.replace(/[?#].*$/, "").toLowerCase();
-              if (seen.has(canonical)) continue;
-              seen.add(canonical);
-              result.push(url);
-              if (result.length >= limit) break;
-            }
-            return result;
-          }'''
-          if 'function collectEncarPhotoValues' not in text:
-              if old not in text:
-                  raise SystemExit('adapters.ts: Encar gallery target missing')
-              text = text.replace(old, new, 1)
-          adapters.write_text(text, encoding='utf-8')
-
-          replace_once(
-              'apps/web/lib/catalog/goonet-exact-source.ts',
-              'return (best && best.length >= 3 ? best : urls).slice(0, 15);',
-              'return (best && best.length >= 3 ? best : urls).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)));',
-              'best : urls).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)))',
-          )
-          replace_once(
-              'apps/web/lib/catalog/che168-dealer-source.ts',
-              'return (best && best.length >= 3 ? best : [...new Set(candidates)]).slice(0, 20);',
-              'return (best && best.length >= 3 ? best : [...new Set(candidates)]).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)));',
-              'best : [...new Set(candidates)]).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)))',
-          )
-
-          dubicars = Path('apps/web/lib/catalog/dubicars-current-source.ts')
-          dubi = dubicars.read_text(encoding='utf-8')
-          if 'best:valid).slice(0,Math.max(1,Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER||80)))' not in dubi:
-              updated, count = re.subn(
-                  r'\(best&&best\.length>=2\?best:valid\)\.slice\(0,15\)',
-                  '(best&&best.length>=2?best:valid).slice(0,Math.max(1,Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER||80)))',
-                  dubi,
-                  count=1,
-              )
-              if count != 1:
-                  raise SystemExit('dubicars-current-source.ts: gallery target missing')
-              dubicars.write_text(updated, encoding='utf-8')
-
-          public_sources = Path('apps/web/lib/catalog/public-market-sources.ts')
-          public_text = public_sources.read_text(encoding='utf-8')
-          public_text = public_text.replace('images: [...new Set(imageUrls)].slice(0, 16),', 'images: [...new Set(imageUrls)].slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80))),')
-          public_sources.write_text(public_text, encoding='utf-8')
-
-          importer = Path('apps/web/lib/catalog/importer-impl.ts')
-          importer_text = importer.read_text(encoding='utf-8')
-          importer_text = importer_text.replace(
-              '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
-                const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);''',
-              '''      // Invalid rows must not consume the target of 250 complete offers.
-                const sourceMaxOffers = configuredMaxOffers;''',
-          )
-          importer_text = importer_text.replace(
-              '''                const freshImages = await source.fetchImages(base);
-                      images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));''',
-              '''                const freshImages = credibleCatalogImages(await source.fetchImages(base));
-                      images = freshImages.length
-                        ? credibleCatalogImages(mergeImages(freshImages, previousImages, maxImagesPerOffer))
-                        : previousImages;''',
-          )
-          importer.write_text(importer_text, encoding='utf-8')
-          PY
-          npm run typecheck
-
-      - name: Remove test-generated local catalog data
-        run: |
-          rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
-          rm -f data/catalog/manifest.json data/catalog/import-lock.json
-      - name: Recover historical catalog generations
-        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.reset) }}
-        run: npx tsx scripts/catalog-recover-generations.mjs
+      - name: Repair the reported Encar gallery first
+        run: npx tsx scripts/catalog-refresh-galleries.mjs
         env: &storage
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -209,10 +60,36 @@ jobs:
           YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+          CATALOG_GROW_ONLY_MARKETS: korea
+          CATALOG_GALLERY_MARKETS: korea
+          CATALOG_GALLERY_SOURCE_IDS: encar_direct
+          CATALOG_GALLERY_OFFER_IDS: d4353979acb720365324de54
+          CATALOG_GALLERY_FORCE: "true"
+          CATALOG_GALLERY_MAX_OFFERS: "1"
+          CATALOG_GALLERY_MAX_PER_MARKET: "1"
+          CATALOG_GALLERY_MIN_IMAGES: "80"
+          CATALOG_MAX_IMAGES_PER_OFFER: "80"
+          CATALOG_GALLERY_PERSIST_EVERY: "1"
+          CATALOG_SOURCE_TIMEOUT_MS: "45000"
+          CATALOG_IMAGE_TIMEOUT_MS: "30000"
+          CATALOG_GALLERY_REPORT_FILE: catalog-gallery-priority-report.json
+
+      - name: Remove test-generated local catalog data
+        run: |
+          rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
+          rm -f data/catalog/manifest.json data/catalog/import-lock.json
+
+      - name: Recover historical catalog generations
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.reset) }}
+        run: npx tsx scripts/catalog-recover-generations.mjs
+        env:
+          <<: *storage
           CATALOG_RECOVERY_GENERATIONS: "gen_1784276049832_9868cbbe"
           CATALOG_RECOVERY_MAX_CHUNKS: "30"
           CATALOG_RECOVERY_MIN_GAIN: "5"
-          CATALOG_GROW_ONLY_MARKETS: "korea"
+          CATALOG_GROW_ONLY_MARKETS: korea
+
       - name: Recover previously valid catalog before scanning sources
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.reset) }}
         run: npx tsx scripts/catalog-recover-active.mjs
@@ -220,13 +97,15 @@ jobs:
           <<: *storage
           CATALOG_RECOVERY_WINDOW_MS: "3888000000"
           CATALOG_RECOVERY_MIN_PUBLIC: "2"
-          CATALOG_GROW_ONLY_MARKETS: "korea"
+          CATALOG_GROW_ONLY_MARKETS: korea
+
       - name: Restart verified source cursors
         run: npx tsx scripts/catalog-reset-underfilled-scans.mjs
         env:
           <<: *storage
           CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,goonet_japan_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact"
-      - name: Import 250 verified offers with every available source photo
+
+      - name: Import 250 verified offers with full galleries from all five markets
         run: npm run catalog:import:sample
         env:
           <<: *storage
@@ -234,7 +113,7 @@ jobs:
           CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,goonet_japan_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact"
           CATALOG_TARGET_PUBLIC_OFFERS: "1250"
           CATALOG_TARGET_PER_MARKET: "250"
-          CATALOG_GROW_ONLY_MARKETS: "korea"
+          CATALOG_GROW_ONLY_MARKETS: korea
           CATALOG_PRESERVE_PREVIOUS_ON_FAILURE: "true"
           CATALOG_ENCAR_DIRECT_PAGE_SIZE: "64"
           CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
@@ -256,32 +135,55 @@ jobs:
           CATALOG_OFFER_RETENTION_MS: "3888000000"
           CATALOG_STALE_GRACE_MS: "3888000000"
           CATALOG_IMPORT_REPORT_FILE: catalog-import-public-markets-report.json
+
+      - name: Repair the most underfilled galleries across all markets
+        run: npx tsx scripts/catalog-refresh-galleries.mjs
+        env:
+          <<: *storage
+          CATALOG_GALLERY_MARKETS: "korea,china,japan,uae,europe"
+          CATALOG_GALLERY_MAX_OFFERS: "150"
+          CATALOG_GALLERY_MAX_PER_MARKET: "30"
+          CATALOG_GALLERY_MIN_IMAGES: "10"
+          CATALOG_MAX_IMAGES_PER_OFFER: "80"
+          CATALOG_GALLERY_PERSIST_EVERY: "15"
+          CATALOG_SOURCE_TIMEOUT_MS: "45000"
+          CATALOG_IMAGE_TIMEOUT_MS: "30000"
+          CATALOG_GALLERY_REPORT_FILE: catalog-gallery-refresh-report.json
+          CATALOG_GROW_ONLY_MARKETS: korea
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-import-public-markets-report
-          path: catalog-import-public-markets-report.json
+          name: catalog-production-reports
+          path: |
+            catalog-gallery-priority-report.json
+            catalog-import-public-markets-report.json
+            catalog-gallery-refresh-report.json
           if-no-files-found: warn
           retention-days: 7
+
       - name: Summary
         if: always()
         run: |
           node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
-          const path = 'catalog-import-public-markets-report.json';
-          if (!fs.existsSync(path)) {
-            console.log('Отчёт импорта не создан. Смотрите журнал шага импорта.');
-            process.exit(0);
+          for (const path of ['catalog-gallery-priority-report.json', 'catalog-import-public-markets-report.json', 'catalog-gallery-refresh-report.json']) {
+            console.log(`\n## ${path}`);
+            if (!fs.existsSync(path)) {
+              console.log('Отчёт не создан — проверьте шаг выше.');
+              continue;
+            }
+            const json = JSON.parse(fs.readFileSync(path, 'utf8'));
+            if (path.includes('gallery')) {
+              console.log(`- selected: ${json.selected ?? 0}`);
+              console.log(`- refreshed: ${json.refreshed ?? 0}`);
+              console.log(`- expanded: ${json.expanded ?? 0}`);
+              console.log(`- unchanged: ${json.unchanged ?? 0}`);
+              console.log(`- failed: ${json.failed ?? 0}`);
+              for (const row of json.rows || []) console.log(`- ${row.market}/${row.sourceId}/${row.id}: ${row.before} → ${row.after}${row.ok ? '' : ` ERROR ${row.error || ''}`}`);
+              continue;
+            }
+            for (const key of ['imported','updated','expired','skipped','rejectedByQuality','preservedPrevious','imageFailures','underfilledImages','reusedImageSets','publicOffers','targetPublicOffers','targetPerMarket','targetReached','generationId','durationMs']) console.log(`- ${key}: ${json[key] ?? ''}`);
+            for (const market of ['korea','china','japan','uae','europe']) console.log(`- ${market}: ${json.publicByMarket?.[market] || 0}; refreshed ${json.refreshedByMarket?.[market] || 0}`);
           }
-          const json = JSON.parse(fs.readFileSync(path, 'utf8'));
-          for (const key of ['imported','updated','expired','skipped','rejectedByQuality','preservedPrevious','imageFailures','underfilledImages','reusedImageSets','publicOffers','targetPublicOffers','targetPerMarket','targetReached','targetReachedByMarket','generationId','durationMs']) console.log(`- ${key}: ${json[key] ?? ''}`);
-          console.log('\n### Автомобили по рынкам');
-          for (const market of ['korea','china','japan','uae','europe']) {
-            const count = json.publicByMarket?.[market] || 0;
-            const missing = json.missingByMarket?.[market] || 0;
-            const refreshed = json.refreshedByMarket?.[market] || 0;
-            console.log(`- ${market}: ${count} в каталоге; обработано сегодня ${refreshed}; до цели осталось ${missing}`);
-          }
-          console.log('\n### Источники');
-          for (const source of json.sources || []) console.log(`- ${source.sourceId} (${source.market || 'multi'}): ${source.ok ? `OK, seen ${source.seen ?? 0}, saved ${source.saved ?? 0}` : `ERROR ${source.error || ''}`}`);
           NODE
