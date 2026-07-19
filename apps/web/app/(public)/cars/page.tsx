@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
@@ -44,8 +43,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     readCatalogFacets({ market: selectedMarket || undefined, make: common.make || undefined }),
     Promise.all(markets.map(async (market) => {
       const result = await searchOffers({ ...common, market: market.id, page: selectedMarket ? requestedPage : 1, pageSize: selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS });
-      const items = result.items.filter((offer: any) => isCrediblePublicOffer(offer));
-      return { ...market, items, total: result.total, page: result.page, pageSize: result.pageSize };
+      return { ...market, items: result.items, total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
