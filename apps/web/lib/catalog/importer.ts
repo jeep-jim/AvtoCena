@@ -17,8 +17,15 @@ import { catalogImportSources } from "./importer-impl";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
+import { fullGallery } from "./full-gallery-wrapper";
 
-for (const replacement of [...scopedMarketSources, ...exactMarketSources, encarCompleteSource]) {
+const completeSources = [
+  ...scopedMarketSources.map((source) => fullGallery(source)),
+  ...exactMarketSources.map((source) => fullGallery(source)),
+  encarCompleteSource,
+];
+
+for (const replacement of completeSources) {
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
