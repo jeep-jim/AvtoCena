@@ -9,10 +9,6 @@ const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
   uae: new Set(["dubicars_uae_exact"]),
 };
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
-const MIN_PUBLIC_IMAGES = 4;
-const MIN_SPEC_SCORE = 5;
-const EMERGENCY_MIN_PUBLIC_IMAGES = 3;
-const EMERGENCY_MIN_SPEC_SCORE = 4;
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function meaningfulName(value: unknown) {
@@ -73,20 +69,6 @@ function hasCompleteOtomotoDetails(offer: VehicleOffer) {
     && Number(offer.powerHp || offer.powerKw || 0) > 0;
 }
 
-function coreSpecScore(offer: VehicleOffer) {
-  const fuel = clean(offer.fuel);
-  const electric = /electric|bev|электро|纯电|전기/i.test(fuel);
-  return [
-    Number(offer.mileageKm) >= 0,
-    Boolean(fuel),
-    Boolean(clean(offer.transmission)),
-    Boolean(clean(offer.drive)),
-    Boolean(clean(offer.bodyType)),
-    electric || Number(offer.engineCc || 0) > 0,
-    Number(offer.powerHp || offer.powerKw || 0) > 0,
-  ].filter(Boolean).length;
-}
-
 function rawImagesAreCredible(offer: VehicleOffer) {
   const raw = offer.operational?.raw as any;
   const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
@@ -108,13 +90,7 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
   if (!hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
-  if ((offer.operational as any)?.galleryVerified !== true) return false;
-
-  const emergencyRecovered = Boolean((offer.operational as any)?.emergencyRecoveredAt);
-  const minimumSpecScore = emergencyRecovered ? EMERGENCY_MIN_SPEC_SCORE : MIN_SPEC_SCORE;
-  const minimumImages = emergencyRecovered ? EMERGENCY_MIN_PUBLIC_IMAGES : MIN_PUBLIC_IMAGES;
-  if (coreSpecScore(offer) < minimumSpecScore) return false;
-  return credibleCatalogImages(offer.images || []).length >= minimumImages;
+  return credibleCatalogImages(offer.images || []).length > 0;
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) { return offer.status === "active" && hasCredibleOfferContent(offer); }
