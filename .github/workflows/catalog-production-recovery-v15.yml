@@ -1,5 +1,6 @@
 name: Catalog canonical five-market rebuild
 
+# One workflow only: restore Japan, rebuild all five markets, then publish atomically.
 on:
   workflow_dispatch:
   push:
