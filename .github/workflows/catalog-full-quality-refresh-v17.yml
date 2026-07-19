@@ -1,4 +1,5 @@
 name: Catalog full quality refresh v17
+# Final checkpoint: source-native galleries, four-plus photos, usable specifications.
 
 on:
   workflow_dispatch:
@@ -120,7 +121,6 @@ jobs:
             const source = catalogImportSources.find((item) => item.sourceId === sourceId);
             if (!source) throw new Error(`source_not_registered_${sourceId}`);
 
-            // Never clear an existing market until its exact source has returned real rows.
             const preflight = await source.fetchPage(null);
             if (!Array.isArray(preflight?.items) || preflight.items.length < 1) throw new Error(`preflight_zero_${sourceId}`);
 
@@ -194,7 +194,6 @@ jobs:
             if (cleanTarget.length) {
               await persistCatalogOffers([...afterOtherMarkets, ...cleanTarget]);
             } else {
-              // A temporary source failure must not leave a whole market empty.
               restoredPrevious = true;
               await persistCatalogOffers([...afterOtherMarkets, ...previousTarget]);
             }
