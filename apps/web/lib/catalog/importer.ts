@@ -18,14 +18,17 @@ import {
   importCatalog as importCatalogBase,
   type CatalogImportOptions,
 } from "./importer-impl";
+import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 
+const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const completeSources = [
   ...scopedMarketSources.map((source) => fullGallery(source)),
   ...exactMarketSources.map((source) => fullGallery(source)),
+  ...(beforwardPublicSource ? [fullGallery(beforwardPublicSource)] : []),
   encarCompleteSource,
 ];
 
