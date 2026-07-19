@@ -1,15 +1,12 @@
-name: Catalog canonical five-market rebuild
+name: Catalog rebuild — 5 markets (manual)
 
-# One workflow only: restore Japan, rebuild all five markets, then publish atomically.
+# Единственный workflow каталога: запускается только вручную,
+# последовательно восстанавливает Японию, собирает пять рынков и публикует их атомарно.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-production-recovery-v15.yml
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-canonical-rebuild
@@ -59,7 +56,7 @@ jobs:
     needs: restore
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 1
       matrix:
         include:
           - market: korea
@@ -88,7 +85,7 @@ jobs:
         run: |
           node --check scripts/catalog-rebuild-market.mjs
           node --check scripts/catalog-publish-fresh.mjs
-      - name: Collect 270 verified ${{ matrix.market }} offers from their own detail pages
+      - name: Collect 270 verified ${{ matrix.market }} offers from exact listing pages
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -168,16 +165,6 @@ jobs:
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
-      - name: Record completed catalog generation
-        run: |
-          mkdir -p data/catalog/imports
-          cp catalog-fresh-publish-report.json data/catalog/imports/last-complete-five-market-rebuild.json
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          git add data/catalog/imports/last-complete-five-market-rebuild.json
-          git commit -m "Record completed five-market rebuild [skip ci]" || exit 0
-          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
