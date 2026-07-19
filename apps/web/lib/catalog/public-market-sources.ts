@@ -179,7 +179,7 @@ export function parseBeForwardMarketStocklist(html: string): BeForwardRow[] {
       location,
       price,
       auctionGrade,
-      images: [...new Set(imageUrls)].slice(0, 16),
+      images: [...new Set(imageUrls)],
       detailUrl: absoluteUrl(detailHref),
       status,
     } satisfies BeForwardRow;
@@ -303,15 +303,16 @@ export class BeForwardMarketAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational.raw || {}) as BeForwardRow;
-    const limit = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 10);
+    const configuredLimit = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
+    const limit = Math.min(1000, Math.max(1, Number.isFinite(configuredLimit) ? configuredLimit : 1000));
     let urls = [...(raw.images || [])];
 
-    if (raw.detailUrl && urls.length < limit) {
+    if (raw.detailUrl) {
       try {
         const { html } = await fetchHtml(raw.detailUrl);
         urls = [...urls, ...collectImageUrls(html)];
       } catch {
-        // The stock-list images are still usable when a detail page is temporarily unavailable.
+        // Preserve listing photos when a detail page is temporarily unavailable.
       }
     }
 
