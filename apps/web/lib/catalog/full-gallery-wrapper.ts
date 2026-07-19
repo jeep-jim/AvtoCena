@@ -85,10 +85,11 @@ function rawGalleryUrls(offer: VehicleOffer) {
 }
 
 function pageUrls(markup: string, base: string, preferredGroups: Set<string>) {
+  if (!preferredGroups.size) return [];
   const body = decode(markup);
   const found: string[] = [];
 
-  // Do not read generic href attributes: navigation and social links are not gallery photos.
+  // Do not read generic href attributes: navigation and related listings are not gallery photos.
   for (const match of body.matchAll(/(?:src|poster|data-src|data-original|data-lazy-src|data-image|data-large|data-full|data-zoom)\s*=\s*["']([^"']+)["']/gi)) found.push(match[1]);
   for (const match of body.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const part of match[1].split(",")) found.push(part.trim().split(/\s+/)[0]);
@@ -97,34 +98,18 @@ function pageUrls(markup: string, base: string, preferredGroups: Set<string>) {
   for (const match of body.matchAll(/<meta[^>]+content=["']([^"']+)["'][^>]+(?:property|name)=["'](?:og:image(?::secure_url)?|twitter:image)["']/gi)) found.push(match[1]);
   for (const match of body.matchAll(/https?:\/\/[^\s"'<>]+?(?:\.(?:jpe?g|png|webp|avif)|\/image(?:[;/?#]|$))[^\s"'<>]*/gi)) found.push(match[0]);
 
-  const result: string[] = [];
+  const groups = new Map<string, string[]>();
   const seen = new Set<string>();
   for (const value of found) {
     const url = absolute(value, base);
     const id = key(url);
-    if (!valid(url) || seen.has(id)) continue;
-    seen.add(id);
-    result.push(url);
-  }
-
-  const groups = new Map<string, string[]>();
-  for (const url of result) {
     const group = groupKey(url);
-    if (!group) continue;
+    if (!valid(url) || !group || seen.has(id) || !preferredGroups.has(group)) continue;
+    seen.add(id);
     groups.set(group, [...(groups.get(group) || []), url]);
   }
 
-  if (preferredGroups.size) {
-    const preferred = [...groups.entries()]
-      .filter(([group]) => preferredGroups.has(group))
-      .flatMap(([, values]) => values);
-    // A source-native group is safer than a larger unrelated asset group.
-    if (preferred.length) return preferred;
-    return [];
-  }
-
-  const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
-  return best.length >= 2 ? best : result;
+  return [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
 }
 
 function imageKey(image: CatalogImage) {
@@ -147,7 +132,8 @@ function uniqueImages(images: CatalogImage[], limit: number) {
 export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
   const original = source.fetchImages.bind(source);
   source.fetchImages = async (offer: VehicleOffer) => {
-    const limit = Math.max(120, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
+    const limit = Math.min(24, Math.max(1, Number.isFinite(requested) ? requested : 12));
     const initial = await original(offer).catch(() => [] as CatalogImage[]);
     const pageUrl = String(offer.operational?.sourceUrl || "");
     if (!pageUrl) return uniqueImages(initial, limit);
@@ -159,6 +145,10 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
         .map(groupKey)
         .filter(Boolean),
     );
+    if (!preferredGroups.size) {
+      (offer.operational as any).galleryVerified = false;
+      return uniqueImages(initial, limit);
+    }
 
     let markup = "";
     try {
@@ -181,10 +171,10 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
       fresh.push(image);
     }
 
-    // A verified source-native gallery replaces previously polluted images.
-    const result = fresh.length >= 2
-      ? uniqueImages(fresh, limit)
-      : uniqueImages([...initial, ...fresh], limit);
+    // Only a coherent, source-native group may replace a listing's previous gallery.
+    const verified = fresh.length >= 2;
+    const result = verified ? uniqueImages(fresh, limit) : uniqueImages(initial, limit);
+    (offer.operational as any).galleryVerified = verified;
     (offer.operational as any).galleryImageCount = result.length;
     (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
     return result;
