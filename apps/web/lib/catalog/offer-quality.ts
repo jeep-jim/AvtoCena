@@ -90,7 +90,8 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
   if (!hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
-  return credibleCatalogImages(offer.images || []).length > 0;
+  const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+  return credibleCatalogImages(offer.images || []).length >= requiredImages;
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) { return offer.status === "active" && hasCredibleOfferContent(offer); }
