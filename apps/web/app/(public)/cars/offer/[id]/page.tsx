@@ -137,8 +137,13 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>}</section>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
-      html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#20242e!important}
+      html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-spec-tile{background:#e3e7ed!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-breakdown,
+      html[data-theme="light"] .ac-offer-page .ac-offer-status,
+      html[data-theme="light"] .ac-offer-page .ac-offer-form{background:#f8f9fb!important;border:1px solid rgba(30,36,48,.10)!important;box-shadow:0 14px 34px rgba(38,43,57,.10)!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input{background:#e3e7ed!important;border:1px solid #c7ced9!important;color:#171b24!important;box-shadow:none!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input::placeholder{color:#737d8e!important;opacity:1!important}
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-price-panel.is-down{background:#cfe5d8!important}
       @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}
