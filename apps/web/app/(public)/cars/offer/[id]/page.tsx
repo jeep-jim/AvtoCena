@@ -30,10 +30,10 @@ function SpecIcon({ name }: { name: SpecIconName }) {
     fuel: <><path d="M6 20V5.5A1.5 1.5 0 0 1 7.5 4h6A1.5 1.5 0 0 1 15 5.5V20" /><path d="M4 20h13M8 7h5v4H8zM15 8h2l2 2v6.5a1.5 1.5 0 0 0 3 0V9l-2-2" /></>,
     power: <path d="M13.5 2.8 5.8 13h5.1l-.7 8.2L18.3 11h-5.1z" />,
     transmission: <><circle cx="7" cy="5" r="2" /><circle cx="17" cy="5" r="2" /><circle cx="7" cy="19" r="2" /><circle cx="17" cy="19" r="2" /><path d="M7 7v10M17 7v10M7 12h10" /></>,
-    drive: <><circle cx="7" cy="17" r="2.5" /><circle cx="17" cy="17" r="2.5" /><path d="M4.5 17H3v-4l2-1 2.5-5h8.5l3 5 2 1v4h-1.5M9.5 17h5" /><path d="M8 9h7" /></>,
-    body: <><path d="M3 14.5 5.5 9h12l3.5 5.5V19H3z" /><path d="M7 9 9 5h6l2 4M3 14.5h18M7 19v1.5M17 19v1.5" /></>,
+    drive: <><path d="M8.2 6.5h7.6M12 6.5v11M8.2 17.5h7.6" /><rect x="4.2" y="2.5" width="4" height="7" rx="1.2" transform="rotate(27 6.2 6)" /><rect x="15.8" y="2.5" width="4" height="7" rx="1.2" transform="rotate(-27 17.8 6)" /><rect x="4.2" y="14" width="4" height="7" rx="1.2" /><rect x="15.8" y="14" width="4" height="7" rx="1.2" /></>,
+    body: <><circle cx="7" cy="17" r="2.5" /><circle cx="17" cy="17" r="2.5" /><path d="M4.5 17H3v-4l2-1 2.5-5h8.5l3 5 2 1v4h-1.5M9.5 17h5" /><path d="M8 9h7" /></>,
   };
-  return <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-45" aria-hidden="true" {...common}>{paths[name]}</svg>;
+  return <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-50" aria-hidden="true" {...common}>{paths[name]}</svg>;
 }
 
 function sentence(value: unknown) {
@@ -48,7 +48,7 @@ function driveValue(value: unknown) {
 }
 
 function SpecTile({ label, value, icon }: { label: string; value: string; icon: SpecIconName }) {
-  return <div aria-label={`${label}: ${value}`} title={label} className="ac-offer-spec-tile flex min-w-0 items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-3.5 py-3.5"><SpecIcon name={icon} /><span className="min-w-0 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span></div>;
+  return <div aria-label={`${label}: ${value}`} title={label} className="ac-offer-spec-tile flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5"><SpecIcon name={icon} /><span className="min-w-0 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span></div>;
 }
 
 function safeExternalUrl(value: unknown) {
@@ -136,6 +136,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
       <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>}</section>
     </section>
-    <style dangerouslySetInnerHTML={{ __html: `@media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}` }} />
+    <style dangerouslySetInnerHTML={{ __html: `
+      html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#222630!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-spec-tile{background:#e3e7ed!important}
+      html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-price-panel.is-down{background:#cfe5d8!important}
+      @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}
+    ` }} />
   </main>;
 }
