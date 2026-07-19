@@ -61,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 1
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -84,6 +84,16 @@ jobs:
           CATALOG_RECOVERY_MIN_GAIN: "1"
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
+      - name: Record restored catalog including Japan
+        run: |
+          mkdir -p data/catalog/imports
+          cp catalog-restore-report.log data/catalog/imports/last-japan-restore.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add data/catalog/imports/last-japan-restore.log
+          git commit -m "Record restored catalog including Japan [skip ci]" || exit 0
+          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
