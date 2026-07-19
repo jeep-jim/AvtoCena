@@ -15,8 +15,9 @@
  */
 import { catalogImportSources } from "./importer-impl";
 import { scopedMarketSources } from "./scoped-market-sources";
+import { encarCompleteSource } from "./encar-complete-source";
 
-for (const replacement of scopedMarketSources) {
+for (const replacement of [...scopedMarketSources, encarCompleteSource]) {
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
