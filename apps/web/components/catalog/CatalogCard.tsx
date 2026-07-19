@@ -20,7 +20,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
       <Link href={href} className="block rounded-[1.35rem]">
         <div className={`relative overflow-hidden rounded-t-[1.35rem] bg-white/[0.04] ${mediaHeight}`}>
-          {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
+          {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" loading="lazy" decoding="async" fetchPriority="low" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
           <div className={`ac-on-image absolute font-black uppercase tracking-[0.12em] text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}>{o.marketLabel}</div>
           <div className={`ac-on-image absolute flex items-end justify-between text-white ${dense ? "bottom-2 left-2 right-2 gap-1.5 sm:bottom-3 sm:left-3 sm:right-3 sm:gap-3" : "bottom-3 left-3 right-3 gap-3"}`}>
