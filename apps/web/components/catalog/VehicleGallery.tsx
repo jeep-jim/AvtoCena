@@ -9,11 +9,16 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   const [fullscreen, setFullscreen] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const didSwipe = useRef(false);
+  const activeSideThumb = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     setActiveIndex(0);
     setFullscreen(false);
   }, [images.join("|")]);
+
+  useEffect(() => {
+    activeSideThumb.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [activeIndex]);
 
   useEffect(() => {
     if (!fullscreen) return;
@@ -81,9 +86,26 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       key={cleanImages[activeIndex]}
       src={cleanImages[activeIndex]}
       alt={`${title}, фото ${activeIndex + 1}`}
-      className="block h-full max-w-full w-full select-none object-cover"
+      className="block h-full w-full max-w-full select-none object-cover"
       draggable={false}
     />
+  );
+
+  const thumbButton = (thumbnail: string, index: number, mode: "side" | "mobile" | "fullscreen") => (
+    <button
+      key={`${mode}-${thumbnail}-${index}`}
+      ref={mode === "side" && index === activeIndex ? activeSideThumb : undefined}
+      type="button"
+      onClick={() => setActiveIndex(index)}
+      className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
+        mode === "side" ? "h-[82px]" : mode === "fullscreen" ? "h-14 sm:h-16" : "h-20 md:h-24"
+      } ${index === activeIndex ? "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent" : "opacity-55 hover:opacity-90"}`}
+      aria-label={`Открыть фото ${index + 1}`}
+      aria-pressed={index === activeIndex}
+    >
+      <img src={thumbnail} alt={mode === "fullscreen" ? "" : `${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" draggable={false} />
+      {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
+    </button>
   );
 
   const fullscreenGallery = fullscreen ? (
@@ -125,19 +147,8 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
 
       <div className="mt-3 text-center text-sm font-black text-white/70">{activeIndex + 1} / {cleanImages.length}</div>
       {cleanImages.length > 1 ? (
-        <div className="ac-hide-scrollbar mx-auto mt-3 grid w-full max-w-[1100px] grid-flow-col auto-cols-[5rem] gap-2 overflow-x-auto pb-1 sm:auto-cols-[6rem] lg:auto-cols-[calc((100%-4.5rem)/10)]" onClick={(event) => event.stopPropagation()}>
-          {cleanImages.map((thumbnail, index) => (
-            <button
-              key={`fullscreen-thumb-${thumbnail}-${index}`}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              className={`relative h-14 w-full shrink-0 overflow-hidden rounded-xl transition-opacity sm:h-16 ${index === activeIndex ? "opacity-100" : "opacity-45 hover:opacity-85"}`}
-              aria-label={`Открыть фото ${index + 1}`}
-            >
-              <img src={thumbnail} alt="" className="h-full w-full object-cover" draggable={false} />
-              {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
-            </button>
-          ))}
+        <div className="ac-hide-scrollbar mx-auto mt-3 grid w-full max-w-[1100px] grid-flow-col auto-cols-[5rem] gap-2 overflow-x-auto p-1 sm:auto-cols-[6rem] lg:auto-cols-[calc((100%-4.5rem)/10)]" onClick={(event) => event.stopPropagation()}>
+          {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "fullscreen"))}
         </div>
       ) : null}
     </div>
@@ -146,35 +157,31 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   return (
     <>
       <div className="min-w-0 max-w-full overflow-hidden">
-        <button
-          type="button"
-          onClick={openFullscreen}
-          onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
-          onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
-          className="relative block h-[360px] w-full cursor-zoom-in overflow-hidden rounded-[1.6rem] bg-white/[0.04] touch-pan-y md:h-[520px] md:rounded-[2rem]"
-          aria-label="Открыть фотографии автомобиля"
-        >
-          {image}
-          <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur">
-            {activeIndex + 1} / {cleanImages.length}
-          </div>
-        </button>
+        <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3" : ""}`}>
+          <button
+            type="button"
+            onClick={openFullscreen}
+            onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
+            onTouchEnd={(event) => finishSwipe(event.changedTouches[0]?.clientX || 0)}
+            className="relative block h-[360px] w-full cursor-zoom-in touch-pan-y overflow-hidden rounded-[1.6rem] bg-white/[0.04] md:h-[520px] md:rounded-[2rem]"
+            aria-label="Открыть фотографии автомобиля"
+          >
+            {image}
+            <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur">
+              {activeIndex + 1} / {cleanImages.length}
+            </div>
+          </button>
+
+          {cleanImages.length > 1 ? (
+            <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex">
+              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "side"))}
+            </div>
+          ) : null}
+        </div>
 
         {cleanImages.length > 1 ? (
-          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 grid max-w-full grid-flow-col auto-cols-[7rem] gap-2.5 overflow-x-auto pb-2 pr-1 sm:auto-cols-[8rem] lg:auto-cols-[calc((100%-5.625rem)/10)] lg:pb-0 lg:pr-0">
-            {cleanImages.map((thumbnail, index) => (
-              <button
-                key={`${thumbnail}-${index}`}
-                type="button"
-                onClick={() => setActiveIndex(index)}
-                className={`relative h-20 w-full shrink-0 cursor-pointer overflow-hidden rounded-2xl transition-opacity duration-200 md:h-24 ${index === activeIndex ? "opacity-100" : "opacity-55 hover:opacity-90"}`}
-                aria-label={`Открыть фото ${index + 1}`}
-                aria-pressed={index === activeIndex}
-              >
-                <img src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" draggable={false} />
-                {index === activeIndex ? <span className="absolute inset-x-4 bottom-0 h-1 rounded-full bg-red-500" /> : null}
-              </button>
-            ))}
+          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 grid max-w-full grid-flow-col auto-cols-[7rem] gap-2.5 overflow-x-auto p-1 pb-2 pr-1 sm:auto-cols-[8rem] md:hidden">
+            {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
         ) : null}
       </div>
