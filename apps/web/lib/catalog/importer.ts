@@ -39,10 +39,10 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const requested: CatalogImportOptions = Array.isArray(sourceIdsOrOptions)
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
-  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
+  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120);
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.min(24, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 12)),
+    maxImagesPerOffer: Math.min(120, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 120)),
   });
 }
 
