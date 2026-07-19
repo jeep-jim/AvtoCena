@@ -1,4 +1,4 @@
-name: Catalog restore and verified five-market rebuild
+name: Catalog canonical five-market rebuild
 
 on:
   workflow_dispatch:
@@ -6,36 +6,18 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-v15.yml
-      - scripts/catalog-recover-generations.mjs
-      - scripts/catalog-rebuild-market.mjs
-      - scripts/catalog-publish-fresh.mjs
-      - apps/web/lib/catalog/importer.ts
-      - apps/web/lib/catalog/full-gallery-wrapper.ts
-      - apps/web/lib/catalog/offer-quality.ts
-      - apps/web/lib/catalog/spec-normalization.ts
-      - apps/web/lib/catalog/adapters.ts
-      - apps/web/lib/catalog/encar-complete-source.ts
-      - apps/web/lib/catalog/public-market-sources.ts
-      - apps/web/lib/catalog/guazi-export-source.ts
-      - apps/web/lib/catalog/goonet-exact-source.ts
-      - apps/web/lib/catalog/dubicars-current-source.ts
-      - apps/web/lib/catalog/otomoto-current-source.ts
-      - apps/web/lib/catalog/otomoto-detail-source.ts
-      - apps/web/lib/catalog/che168-exact-source.ts
-  schedule:
-    - cron: "17 20 * * *"
 
 permissions:
   contents: write
 
 concurrency:
-  group: catalog-production-import
-  cancel-in-progress: true
+  group: catalog-canonical-rebuild
+  cancel-in-progress: false
 
 jobs:
   restore:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,9 +28,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - name: Validate recovery script
-        run: node --check scripts/catalog-recover-generations.mjs
-      - name: Restore the last complete working catalog including Japan
+      - run: node --check scripts/catalog-recover-generations.mjs
+      - name: Restore confirmed working catalog including Japan
         run: npx tsx scripts/catalog-recover-generations.mjs | tee catalog-restore-report.log
         env:
           JSON_STORAGE_DRIVER: object
@@ -62,19 +43,9 @@ jobs:
           CATALOG_RECOVERY_MARKETS: korea,china,japan,uae,europe
           CATALOG_RECOVERY_GENERATIONS: gen_1784276049832_9868cbbe
           CATALOG_RECOVERY_MAX_CHUNKS: "50"
-          CATALOG_RECOVERY_MIN_GAIN: "1"
+          CATALOG_RECOVERY_FORCE: "true"
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
-      - name: Record restored catalog including Japan
-        run: |
-          mkdir -p data/catalog/imports
-          cp catalog-restore-report.log data/catalog/imports/last-japan-restore.log
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          git add data/catalog/imports/last-japan-restore.log
-          git commit -m "Record restored catalog including Japan [skip ci]" || exit 0
-          git push origin HEAD:main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -97,11 +68,11 @@ jobs:
           - market: japan
             sourceIds: goonet_japan_exact,beforward_japan,beforward_public
           - market: uae
-            sourceIds: dubicars_uae_exact
+            sourceIds: dubicars_uae_exact,beforward_uae
           - market: europe
-            sourceIds: otomoto_europe_exact
+            sourceIds: otomoto_europe_exact,beforward_uk,beforward_belgium
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
         with:
@@ -130,11 +101,11 @@ jobs:
           CATALOG_REBUILD_MARKET: ${{ matrix.market }}
           CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.sourceIds }}
           CATALOG_REBUILD_TARGET: "270"
-          CATALOG_REBUILD_MAX_PAGES: "400"
-          CATALOG_REBUILD_SEED_SCAN_LIMIT: "800"
+          CATALOG_REBUILD_MAX_PAGES: "500"
+          CATALOG_REBUILD_SEED_SCAN_LIMIT: "1500"
           CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
-          CATALOG_MAX_IMAGES_PER_OFFER: "120"
+          CATALOG_MAX_IMAGES_PER_OFFER: "1000"
           CATALOG_IMAGE_MAX_BYTES: "12000000"
           CATALOG_SOURCE_TIMEOUT_MS: "60000"
           CATALOG_IMAGE_TIMEOUT_MS: "45000"
@@ -159,7 +130,7 @@ jobs:
   publish:
     needs: collect
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -189,9 +160,9 @@ jobs:
           CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
           CATALOG_REBUILD_TARGET: "250"
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
-          CATALOG_REBUILD_MIN_AVG_IMAGES: "7"
-          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "8"
-          CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.50"
+          CATALOG_REBUILD_MIN_AVG_IMAGES: "4"
+          CATALOG_REBUILD_RICH_GALLERY_IMAGES: "4"
+          CATALOG_REBUILD_RICH_GALLERY_RATIO: "0"
           CATALOG_REBUILD_MIN_SPEC_SCORE: "5"
           CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
           CATALOG_GROW_ONLY_MARKETS: ""
