@@ -40,9 +40,9 @@ function inferTransmission(text: string) {
 }
 
 function inferDrive(text: string) {
-  if (/awd|4wd|4x4|quattro|xdrive|4matic|allroad|полный привод|四驱|사륜/.test(text)) return "awd";
-  if (/rwd|rear wheel|задний привод|后驱|후륜/.test(text)) return "rwd";
-  if (/fwd|front wheel|2wd|передний привод|前驱|两驱|전륜/.test(text)) return "fwd";
+  if (/\b(?:awd|4wd|4x4)\b|all[ -]?wheel(?: drive)?|four[ -]?wheel(?: drive)?|quattro|xdrive|4matic|allroad|полный привод|四驱|사륜/.test(text)) return "awd";
+  if (/\brwd\b|rear[ -]?wheel(?: drive)?|задний привод|后驱|후륜/.test(text)) return "rwd";
+  if (/\bfwd\b|front[ -]?wheel(?: drive)?|\b2wd\b|передний привод|前驱|两驱|전륜/.test(text)) return "fwd";
   return undefined;
 }
 
