@@ -1,6 +1,7 @@
 const { readDataJson } = await import("../apps/web/lib/data.ts");
+const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { chunkName, offerPath, persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
-const { hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
 
 const MARKETS = String(process.env.CATALOG_RECOVERY_MARKETS || "korea,china,japan,uae,europe").split(",").map((value) => value.trim()).filter(Boolean);
 const EMERGENCY_GENERATIONS = [
@@ -18,10 +19,40 @@ const historyGenerations = Array.isArray(history)
 const generations = [...new Set([...configured, ...historyGenerations, ...EMERGENCY_GENERATIONS])];
 const maxChunks = Math.max(1, Number(process.env.CATALOG_RECOVERY_MAX_CHUNKS || 20));
 const minimumGain = Math.max(1, Number(process.env.CATALOG_RECOVERY_MIN_GAIN || 5));
+const recoveredAt = new Date().toISOString();
 
-function usable(offer) {
-  return offer && ["active", "stale"].includes(String(offer.status || ""))
-    && hasCredibleOfferContent({ ...offer, status: "active" });
+function specScore(offer) {
+  const fuel = String(offer?.fuel || "").trim();
+  const electric = /electric|bev|электро|纯电|전기/i.test(fuel);
+  return [
+    Number(offer?.mileageKm) >= 0,
+    Boolean(fuel),
+    Boolean(String(offer?.transmission || "").trim()),
+    Boolean(String(offer?.drive || "").trim()),
+    Boolean(String(offer?.bodyType || "").trim()),
+    electric || Number(offer?.engineCc || 0) > 0,
+    Number(offer?.powerHp || offer?.powerKw || 0) > 0,
+  ].filter(Boolean).length;
+}
+
+function prepare(offer, generationId = "") {
+  if (!offer || !["active", "stale"].includes(String(offer.status || ""))) return null;
+  const images = credibleCatalogImages(Array.isArray(offer.images) ? offer.images : []).slice(0, 3);
+  if (images.length < 3) return null;
+  const candidate = normalizeVehicleOfferSpecs({
+    ...offer,
+    status: "active",
+    images,
+    operational: {
+      ...(offer.operational || {}),
+      galleryVerified: true,
+      galleryImageCount: images.length,
+      emergencyRecoveredAt: recoveredAt,
+      emergencySourceGeneration: generationId || offer?.operational?.emergencySourceGeneration || "active-storage",
+    },
+  });
+  if (specScore(candidate) < 4) return null;
+  return hasCredibleOfferContent(candidate) ? candidate : null;
 }
 
 async function readGeneration(generationId) {
@@ -43,7 +74,11 @@ async function readGeneration(generationId) {
 }
 
 const current = await readAllOffersForMaintenance();
-const merged = new Map(current.map((offer) => [offer.id, offer]));
+const merged = new Map();
+for (const offer of current) {
+  const prepared = prepare(offer);
+  if (prepared) merged.set(prepared.id, prepared);
+}
 const recoveredByGeneration = {};
 let recovered = 0;
 
@@ -51,13 +86,13 @@ for (const generationId of generations) {
   const rows = await readGeneration(generationId);
   let accepted = 0;
   for (const offer of rows) {
-    if (!usable(offer)) continue;
-    const existing = merged.get(offer.id);
-    const existingUsable = existing && usable(existing);
+    const prepared = prepare(offer, generationId);
+    if (!prepared) continue;
+    const existing = merged.get(prepared.id);
     const existingTime = Date.parse(String(existing?.updatedAt || existing?.firstSeenAt || "")) || 0;
-    const recoveredTime = Date.parse(String(offer.updatedAt || offer.firstSeenAt || "")) || 0;
-    if (!existingUsable || recoveredTime > existingTime) {
-      merged.set(offer.id, { ...offer, status: "active" });
+    const recoveredTime = Date.parse(String(prepared.updatedAt || prepared.firstSeenAt || "")) || 0;
+    if (!existing || recoveredTime > existingTime) {
+      merged.set(prepared.id, prepared);
       accepted++;
     }
   }
@@ -67,15 +102,15 @@ for (const generationId of generations) {
   }
 }
 
-const beforePublic = current.filter((offer) => offer.status === "active" && usable(offer)).length;
+const beforePublic = current.map((offer) => prepare(offer)).filter(Boolean).length;
 const next = [...merged.values()];
-const afterPublic = next.filter((offer) => offer.status === "active" && usable(offer)).length;
-const byMarket = next.filter((offer) => offer.status === "active" && usable(offer)).reduce((totals, offer) => {
+const afterPublic = next.length;
+const byMarket = next.reduce((totals, offer) => {
   totals[offer.market] = (totals[offer.market] || 0) + 1;
   return totals;
 }, {});
 
-if (afterPublic >= beforePublic + minimumGain) {
+if (afterPublic >= beforePublic + minimumGain || (beforePublic === 0 && afterPublic > 0)) {
   const manifest = await persistCatalogOffers(next);
   console.log(JSON.stringify({ restored: true, generationId: manifest.generationId, beforePublic, afterPublic, byMarket, recovered, recoveredByGeneration }, null, 2));
 } else {
