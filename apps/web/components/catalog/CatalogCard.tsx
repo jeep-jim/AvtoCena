@@ -17,7 +17,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
 
   return (
-    <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] shadow-[0_18px_70px_rgba(0,0,0,.22)] transition-colors hover:bg-white/[0.06]">
+    <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
       <Link href={href} className="block rounded-[1.35rem]">
         <div className={`relative overflow-hidden rounded-t-[1.35rem] bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
@@ -36,7 +36,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
           </div>
         </div>
       </Link>
-      <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className={`ac-on-image absolute z-20 bg-black/52 text-red-400 shadow-[0_8px_24px_rgba(0,0,0,.28)] backdrop-blur-md hover:bg-black/68 ${dense ? "right-2 top-2 h-8 w-8 sm:right-3 sm:top-3 sm:h-10 sm:w-10 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]" : "right-3 top-3"}`} />
+      <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className={`ac-on-image absolute z-20 bg-black/52 text-red-400 backdrop-blur-md hover:bg-black/68 ${dense ? "right-2 top-2 h-8 w-8 sm:right-3 sm:top-3 sm:h-10 sm:w-10 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]" : "right-3 top-3"}`} />
     </article>
   );
 }
