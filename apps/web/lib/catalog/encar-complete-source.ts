@@ -161,7 +161,7 @@ function uniqueUrls(values: string[], limit: number) {
 
 function coherentUrls(values: string[], preferredKey: string, limit: number) {
   const groups = new Map<string, string[]>();
-  for (const value of uniqueUrls(values, Math.max(limit * 8, 80))) {
+  for (const value of uniqueUrls(values, Math.max(limit * 8, 160))) {
     const group = galleryKey(value);
     if (!group) continue;
     groups.set(group, [...(groups.get(group) || []), value]);
@@ -190,8 +190,8 @@ function uniqueImages(images: CatalogImage[], limit: number) {
 
 export class EncarCompleteAdapter extends EncarDirectAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
-    const limit = Math.min(24, Math.max(1, Number.isFinite(requested) ? requested : 12));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120);
+    const limit = Math.min(120, Math.max(1, Number.isFinite(requested) ? requested : 120));
     const originalRaw: any = offer.operational?.raw || {};
     const initial = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
 
@@ -225,7 +225,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const candidates: string[] = [];
 
     if (cover) {
-      const sequenceCount = reportedCount || Math.max(4, Math.min(limit, selectedExplicit.length || 12));
+      const sequenceCount = reportedCount || Math.max(8, Math.min(limit, selectedExplicit.length || 30));
       for (let index = 1; index <= sequenceCount; index++) candidates.push(sequenceUrl(cover, index));
     }
     candidates.push(...selectedExplicit);
@@ -238,7 +238,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       const image = await cacheImageFromUrl(url, "korea", { headers: ENCAR_HEADERS }).catch(() => null);
       if (!image || image.size <= 8_000) {
         consecutiveFailures++;
-        if (!reportedCount && fresh.length >= 4 && consecutiveFailures >= 5) break;
+        if (!reportedCount && fresh.length >= 6 && consecutiveFailures >= 8) break;
         continue;
       }
       consecutiveFailures = 0;
