@@ -190,14 +190,22 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       </header>
 
       <style jsx global>{`
-        html body *,
-        html body *::before,
-        html body *::after {
+        html[data-theme][data-theme][data-theme] body .ac-public-header,
+        html[data-theme][data-theme][data-theme] body .ac-public-header *,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy *,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy *::before,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy *::after {
           box-shadow: none !important;
           -webkit-box-shadow: none !important;
           text-shadow: none !important;
         }
-        html body [class*="drop-shadow"] { filter: none !important; }
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy [class*="drop-shadow"],
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy .ac-catalog-card,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy .ac-home-market-rail,
+        html[data-theme][data-theme][data-theme] body main.ac-page-copy .ac-result-rail {
+          filter: none !important;
+        }
 
         .ac-catalog-nav { background: rgba(255,255,255,.045); color: rgba(255,255,255,.84); }
         .ac-catalog-nav:hover { background: rgba(255,255,255,.085); color: #fff; }
@@ -266,6 +274,38 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
           background: #edf0f5 !important;
           border-color: rgba(30,36,48,.17) !important;
           color: #171b24 !important;
+        }
+
+        @media (max-width: 639px) {
+          .ac-home-page .ac-home-hero h1 {
+            max-width: none !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            text-overflow: clip !important;
+            font-size: clamp(23px, 7vw, 32px) !important;
+            line-height: 1 !important;
+            letter-spacing: -0.045em !important;
+          }
+          .ac-home-page .ac-home-market-rail,
+          .ac-offer-page .ac-result-rail {
+            padding-bottom: 0 !important;
+            background: transparent !important;
+            scrollbar-width: none !important;
+            scrollbar-color: transparent transparent !important;
+          }
+          .ac-home-page .ac-home-market-rail::-webkit-scrollbar,
+          .ac-offer-page .ac-result-rail::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+          }
+          .ac-home-page .ac-home-market-rail::before,
+          .ac-home-page .ac-home-market-rail::after,
+          .ac-offer-page .ac-result-rail::before,
+          .ac-offer-page .ac-result-rail::after {
+            content: none !important;
+            display: none !important;
+          }
         }
       `}</style>
     </>
