@@ -33,6 +33,167 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+
+      - name: Enable complete galleries for all five markets
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          def replace_once(path_value, old, new, marker):
+              path = Path(path_value)
+              text = path.read_text(encoding='utf-8')
+              if marker in text:
+                  return
+              if old not in text:
+                  raise SystemExit(f'{path_value}: gallery patch target missing')
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          adapters = Path('apps/web/lib/catalog/adapters.ts')
+          text = adapters.read_text(encoding='utf-8')
+          old = '''export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
+            const raw: any = offer.operational.raw || {};
+            const listRaw = raw.offer || raw;
+            const photos = detail?.photos || detail?.PhotoList || detail?.vehicle?.photos || detail?.vehicle?.PhotoList || [];
+            const listCover = listRaw?.Photo || listRaw?.photo || raw?.offer?.Photo || raw?.offer?.photo;
+            return [...new Set([buildEncarImageUrl(listCover, 1), ...photos.map((photo: any, index: number) => buildEncarImageUrl(photo.path || photo.url || photo.Photo || photo.location || photo, num(photo.imageNumber || photo.no || photo.seq) || index + 1))].filter(Boolean))].slice(0, 10);
+          }'''
+          new = '''function collectEncarPhotoValues(value: any, key = "", depth = 0, output: string[] = []) {
+            if (value == null || depth > 12) return output;
+            if (typeof value === "string") {
+              const raw = text(value).replace(/\\\\\//g, "/");
+              const photoKey = /photo|image|picture|gallery|media|location|path|url/i.test(key);
+              const photoValue = /ci\\.encar\\.com|carpicture|\\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(raw);
+              if (raw && (photoKey || photoValue) && (photoValue || /^\\/?carpicture/i.test(raw))) output.push(raw);
+              return output;
+            }
+            if (Array.isArray(value)) {
+              for (const item of value) collectEncarPhotoValues(item, key, depth + 1, output);
+              return output;
+            }
+            if (typeof value !== "object") return output;
+            for (const [childKey, child] of Object.entries(value)) {
+              if (/photo|image|picture|gallery|media|location|path|url/i.test(childKey) || depth < 5) {
+                collectEncarPhotoValues(child, childKey, depth + 1, output);
+              }
+            }
+            return output;
+          }
+
+          function encarSequenceUrl(value: any, imageNumber: number) {
+            const raw = text(value).replace(/\\\\\//g, "/");
+            if (!raw) return "";
+            const padded = String(Math.max(1, imageNumber)).padStart(3, "0");
+            if (/^https?:\\/\\//i.test(raw)) {
+              const replaced = raw.replace(/(\\d{3})(\\.(?:jpe?g|png|webp)(?:[?#].*)?)$/i, `${padded}$2`);
+              return replaced || raw;
+            }
+            return buildEncarImageUrl(raw, imageNumber);
+          }
+
+          export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
+            const raw: any = offer.operational.raw || {};
+            const listRaw = raw.offer || raw;
+            const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80));
+            const listCover = listRaw?.Photo || listRaw?.photo || listRaw?.Image || listRaw?.image || raw?.offer?.Photo || raw?.offer?.photo;
+            const explicitLists = [
+              detail?.photos,
+              detail?.PhotoList,
+              detail?.images,
+              detail?.ImageList,
+              detail?.vehicle?.photos,
+              detail?.vehicle?.PhotoList,
+              detail?.advertisement?.photos,
+              detail?.advertisement?.images,
+              detail?.car?.photos,
+              detail?.car?.images,
+            ].filter(Array.isArray);
+            const candidates: string[] = [buildEncarImageUrl(listCover, 1)];
+            for (const photos of explicitLists) {
+              photos.forEach((photo: any, index: number) => {
+                const value = photo?.path || photo?.url || photo?.Photo || photo?.photo || photo?.image || photo?.location || photo;
+                candidates.push(encarSequenceUrl(value, num(photo?.imageNumber || photo?.no || photo?.seq || photo?.order) || index + 1));
+              });
+            }
+            collectEncarPhotoValues(detail).forEach((value, index) => candidates.push(encarSequenceUrl(value, index + 1)));
+            const photoCount = Math.min(limit, Math.max(0, Number(
+              num(deepFind(detail, ["photoCount", "PhotoCount", "photosCount", "imageCount", "ImageCount", "totalPhotoCount", "pictureCount"]))
+              || num(listRaw?.PhotoCount || listRaw?.photoCount || listRaw?.ImageCount || listRaw?.imageCount)
+              || 0
+            )));
+            if (listCover && photoCount > 1) {
+              for (let index = 1; index <= photoCount; index++) candidates.push(encarSequenceUrl(listCover, index));
+            }
+            const result: string[] = [];
+            const seen = new Set<string>();
+            for (const candidate of candidates) {
+              const url = text(candidate);
+              if (!/^https?:\\/\\//i.test(url) || !/ci\\.encar\\.com|carpicture|\\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(url)) continue;
+              const canonical = url.replace(/[?#].*$/, "").toLowerCase();
+              if (seen.has(canonical)) continue;
+              seen.add(canonical);
+              result.push(url);
+              if (result.length >= limit) break;
+            }
+            return result;
+          }'''
+          if 'function collectEncarPhotoValues' not in text:
+              if old not in text:
+                  raise SystemExit('adapters.ts: Encar gallery target missing')
+              text = text.replace(old, new, 1)
+          adapters.write_text(text, encoding='utf-8')
+
+          replace_once(
+              'apps/web/lib/catalog/goonet-exact-source.ts',
+              'return (best && best.length >= 3 ? best : urls).slice(0, 15);',
+              'return (best && best.length >= 3 ? best : urls).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)));',
+              'best : urls).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)))',
+          )
+          replace_once(
+              'apps/web/lib/catalog/che168-dealer-source.ts',
+              'return (best && best.length >= 3 ? best : [...new Set(candidates)]).slice(0, 20);',
+              'return (best && best.length >= 3 ? best : [...new Set(candidates)]).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)));',
+              'best : [...new Set(candidates)]).slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80)))',
+          )
+
+          dubicars = Path('apps/web/lib/catalog/dubicars-current-source.ts')
+          dubi = dubicars.read_text(encoding='utf-8')
+          if 'best:valid).slice(0,Math.max(1,Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER||80)))' not in dubi:
+              updated, count = re.subn(
+                  r'\(best&&best\.length>=2\?best:valid\)\.slice\(0,15\)',
+                  '(best&&best.length>=2?best:valid).slice(0,Math.max(1,Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER||80)))',
+                  dubi,
+                  count=1,
+              )
+              if count != 1:
+                  raise SystemExit('dubicars-current-source.ts: gallery target missing')
+              dubicars.write_text(updated, encoding='utf-8')
+
+          public_sources = Path('apps/web/lib/catalog/public-market-sources.ts')
+          public_text = public_sources.read_text(encoding='utf-8')
+          public_text = public_text.replace('images: [...new Set(imageUrls)].slice(0, 16),', 'images: [...new Set(imageUrls)].slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 80))),')
+          public_sources.write_text(public_text, encoding='utf-8')
+
+          importer = Path('apps/web/lib/catalog/importer-impl.ts')
+          importer_text = importer.read_text(encoding='utf-8')
+          importer_text = importer_text.replace(
+              '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
+                const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);''',
+              '''      // Invalid rows must not consume the target of 250 complete offers.
+                const sourceMaxOffers = configuredMaxOffers;''',
+          )
+          importer_text = importer_text.replace(
+              '''                const freshImages = await source.fetchImages(base);
+                      images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));''',
+              '''                const freshImages = credibleCatalogImages(await source.fetchImages(base));
+                      images = freshImages.length
+                        ? credibleCatalogImages(mergeImages(freshImages, previousImages, maxImagesPerOffer))
+                        : previousImages;''',
+          )
+          importer.write_text(importer_text, encoding='utf-8')
+          PY
+          npm run typecheck
+
       - name: Remove test-generated local catalog data
         run: |
           rm -rf data/catalog/internal data/catalog/generations data/catalog/scans data/catalog/health data/catalog/imports data/catalog/sources
@@ -65,7 +226,7 @@ jobs:
         env:
           <<: *storage
           CATALOG_IMPORT_SOURCES: "encar_direct,che168_dealer_exact,che168_china_exact,che168_global,goonet_japan_exact,jpauc_japan,dubicars_uae_exact,otomoto_europe_exact"
-      - name: Import 250 verified offers with complete data and galleries from all five markets
+      - name: Import 250 verified offers with every available source photo
         run: npm run catalog:import:sample
         env:
           <<: *storage
