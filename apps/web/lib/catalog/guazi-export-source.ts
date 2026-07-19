@@ -46,7 +46,7 @@ const MAKES = [
   "Polestar", "MG", "NETA", "Venucia", "DS",
 ].sort((left, right) => right.length - left.length);
 
-const BAD_IMAGE = /logo|icon|avatar|collect|notification|banner|qrcode|qr-code|placeholder|tracking|pixel|section-image|back-to-top|whatsapp/i;
+const BAD_IMAGE = /logo|icon|avatar|collect|notification|banner|qrcode|qr-code|placeholder|tracking|pixel|section-image|back-to-top|whatsapp|recommend|related|similar/i;
 
 function decode(value: string) {
   return value
@@ -83,18 +83,48 @@ function integer(value: unknown) {
 
 function collectImages(markup: string, base: string) {
   const candidates: string[] = [];
-  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) {
-    candidates.push(match[1]);
-  }
+  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) candidates.push(match[1]);
   for (const match of markup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const part of match[1].split(",")) candidates.push(part.trim().split(/\s+/)[0]);
   }
-  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) {
-    candidates.push(match[0].replace(/\\\//g, "/"));
-  }
+  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) candidates.push(match[0].replace(/\\\//g, "/"));
   return [...new Set(candidates
     .map((item) => absoluteUrl(item, base))
     .filter((url) => url && /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(url) && !BAD_IMAGE.test(url)))];
+}
+
+function imageGroup(url: string) {
+  try {
+    const parsed = new URL(url);
+    const path = decodeURIComponent(parsed.pathname)
+      .replace(/\/(?:w|f)?_?\d+x\d+\//i, "/size/")
+      .split("/")
+      .filter(Boolean);
+    return `${parsed.hostname.toLowerCase()}/${path.slice(0, Math.max(1, path.length - 1)).join("/")}`;
+  } catch {
+    return "";
+  }
+}
+
+function detailGallery(markup: string, pageUrl: string, cover: string, limit: number) {
+  const candidates = collectImages(markup, pageUrl).slice(0, 80);
+  const coverGroup = imageGroup(cover);
+  if (coverGroup) {
+    const preferred = candidates.filter((url) => imageGroup(url) === coverGroup);
+    if (preferred.length >= 4) return preferred.slice(0, limit);
+  }
+
+  // Main product media is rendered before recommendations. Only inspect the
+  // first image region, then keep one coherent path group from that region.
+  const early = candidates.slice(0, Math.max(limit * 4, 24));
+  const groups = new Map<string, string[]>();
+  for (const url of early) {
+    const group = imageGroup(url);
+    if (!group) continue;
+    groups.set(group, [...(groups.get(group) || []), url]);
+  }
+  const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
+  return (best.length >= 4 ? best : early).slice(0, limit);
 }
 
 function makeModel(rawTitle: string) {
@@ -106,11 +136,7 @@ function makeModel(rawTitle: string) {
   const lower = title.toLocaleLowerCase("en-US");
   const make = MAKES.find((candidate) => lower === candidate.toLocaleLowerCase("en-US") || lower.startsWith(`${candidate.toLocaleLowerCase("en-US")} `)) || "";
   const rest = make ? title.slice(make.length).trim() : "";
-  return {
-    title,
-    make,
-    model: rest.replace(/^(?:19|20)\d{2}\s+/, "").split(/\s+/).slice(0, 8).join(" "),
-  };
+  return { title, make, model: rest.replace(/^(?:19|20)\d{2}\s+/, "").split(/\s+/).slice(0, 8).join(" ") };
 }
 
 function fuel(value: string) {
@@ -148,10 +174,10 @@ export function parseGuaziExportPage(markup: string, pageUrl: string): GuaziRow[
   for (let index = 0; index < entries.length; index++) {
     const [url, anchor] = entries[index];
     const nextIndex = index + 1 < entries.length ? entries[index + 1][1].first : markup.length;
-    const card = markup.slice(Math.max(0, anchor.first - 2_500), Math.min(markup.length, nextIndex + 1_200));
+    const card = markup.slice(anchor.first, nextIndex);
     const titleCandidates = [
       clean(anchor.inner),
-      clean(card.match(/<img[^>]+alt\s*=\s*["']([^"']+)["']/i)?.[1]),
+      clean(anchor.inner.match(/<img[^>]+alt\s*=\s*["']([^"']+)["']/i)?.[1]),
       clean(card.match(/<h[1-5][^>]*>([\s\S]*?)<\/h[1-5]>/i)?.[1]),
     ].filter((candidate) => /\bUsed\b/i.test(candidate) && candidate.length >= 8 && candidate.length <= 260);
     const parsed = makeModel(titleCandidates.sort((left, right) => right.length - left.length)[0] || "");
@@ -161,24 +187,18 @@ export function parseGuaziExportPage(markup: string, pageUrl: string): GuaziRow[
     const mileageKm = integer(plain.match(/(?:19|20)\d{2}(?:\.\d{1,2})?\s+([0-9,]+)\s*km\b/i)?.[1] || plain.match(/([0-9,]+)\s*km\b/i)?.[1]);
     const liters = Number(parsed.title.match(/\b([0-9](?:\.[0-9])?)L\b/i)?.[1] || 0);
     const powerHp = integer(parsed.title.match(/\b([0-9]{2,4})\s*(?:PS|HP)\b/i)?.[1]);
-    if (!parsed.make || !parsed.model || !year || !price || !mileageKm) continue;
+    const coverImages = collectImages(anchor.inner, pageUrl).slice(0, 2);
+    if (!parsed.make || !parsed.model || !year || !price || !mileageKm || !coverImages.length) continue;
     const id = url.match(/\/products\/[^/]*-([a-z0-9]{6,})\.html/i)?.[1] || stableOfferId("guazi", url);
     rows.push({
-      id,
-      url,
-      title: parsed.title,
-      make: parsed.make,
-      model: parsed.model,
-      year,
-      price,
-      mileageKm,
+      id, url, title: parsed.title, make: parsed.make, model: parsed.model, year, price, mileageKm,
       engineCc: liters ? Math.round(liters * 1_000) : undefined,
       powerHp,
       fuel: fuel(`${parsed.title} ${plain}`),
       transmission: /\b(?:AT|Automatic|DCT|CVT)\b/i.test(parsed.title) ? "automatic" : /\b(?:MT|Manual)\b/i.test(parsed.title) ? "manual" : "",
       drive: /All[- ]Wheel|Four[- ]Wheel|4WD|AWD|4MATIC|xDrive/i.test(parsed.title) ? "awd" : /Rear[- ]Wheel|RWD/i.test(parsed.title) ? "rwd" : /Front[- ]Wheel|FWD/i.test(parsed.title) ? "fwd" : "",
       bodyType: bodyType(`${parsed.title} ${plain}`),
-      images: collectImages(card, pageUrl).slice(0, 8),
+      images: coverImages,
     });
   }
   return rows;
@@ -263,20 +283,20 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const row = offer.operational.raw as GuaziRow;
-    const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 3));
-    let urls = [...(row.images || [])];
-    if (urls.length < limit && row.url) {
-      const detail = await fetchHtml(row.url, row.url).catch(() => null);
-      if (detail?.response.ok) urls = [...urls, ...collectImages(detail.markup, row.url)];
-    }
-    const cached = await Promise.all([...new Set(urls)].slice(0, limit).map((url) =>
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 8);
+    const limit = Math.min(24, Math.max(4, Number.isFinite(requested) ? requested : 8));
+    const detail = row.url ? await fetchHtml(row.url, row.url).catch(() => null) : null;
+    const urls = detail?.response.ok ? detailGallery(detail.markup, row.url, row.images[0] || "", limit) : row.images.slice(0, limit);
+    row.images = [...new Set(urls)];
+    (offer.operational as any).raw = row;
+    const cached = await Promise.all(row.images.map((url) =>
       cacheImageFromUrl(url, "china", { headers: { ...HEADERS, referer: row.url } }).catch(() => null),
     ));
-    return cached.filter((image): image is CatalogImage => Boolean(image && image.size > 8_000));
+    return cached.filter((image): image is CatalogImage => Boolean(image && image.size > 8_000)).slice(0, limit);
   }
 
   async healthCheck() {
-    return { ok: true, message: "Guazi public export inventory", checkedAt: new Date().toISOString() };
+    return { ok: true, message: "Guazi exact detail galleries", checkedAt: new Date().toISOString() };
   }
 }
 
