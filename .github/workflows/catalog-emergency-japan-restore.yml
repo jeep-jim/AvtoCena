@@ -1,5 +1,6 @@
 name: Emergency restore Japan catalog
 
+# This isolated workflow is intentionally separate from the long five-market rebuild.
 on:
   workflow_dispatch:
   push:
