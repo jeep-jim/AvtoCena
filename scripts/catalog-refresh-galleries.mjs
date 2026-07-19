@@ -87,7 +87,8 @@ for (let index = 0; index < candidates.length; index++) {
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
   process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
   try {
-    const fresh = Array.isArray(await source.fetchImages(offer)) ? await source.fetchImages(offer) : [];
+    const fetched = await source.fetchImages(offer);
+    const fresh = Array.isArray(fetched) ? fetched : [];
     // Two or more source-native images are enough to replace a polluted cached set.
     const replaced = fresh.length >= 2;
     const merged = replaced
