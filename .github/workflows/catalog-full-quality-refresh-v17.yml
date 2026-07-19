@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: catalog-production-import
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   refresh-market:
@@ -96,7 +96,7 @@ jobs:
             const fuel = String(offer?.fuel || '').trim();
             const electric = /electric|bev|электро|纯电|전기/i.test(fuel);
             return [
-              Number(offer?.mileageKm || 0) > 0,
+              Number(offer?.mileageKm || 0) >= 0,
               Boolean(fuel),
               Boolean(String(offer?.transmission || '').trim()),
               Boolean(String(offer?.drive || '').trim()),
