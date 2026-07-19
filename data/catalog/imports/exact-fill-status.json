@@ -1,11 +1,11 @@
 {
-  "status": "completed",
+  "status": "running",
   "version": 15,
-  "finishedAt": "2026-07-19T05:34:06.615Z",
-  "publicByMarket": {
-    "korea": 500,
-    "uae": 250,
-    "europe": 523,
-    "china": 250
-  }
+  "startedAt": "2026-07-19T07:39:20.479Z",
+  "order": [
+    "korea-recovery",
+    "uae",
+    "europe",
+    "china"
+  ]
 }
