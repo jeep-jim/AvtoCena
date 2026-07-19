@@ -1,52 +1,14 @@
-name: Catalog importer candidate fix v18
+name: Deprecated catalog importer patch (disabled)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-importer-candidate-fix-v18.yml
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  fix:
+  disabled:
+    if: ${{ false }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - name: Patch candidate scan limit
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('apps/web/lib/catalog/importer-impl.ts')
-          text = path.read_text(encoding='utf-8')
-          old = '''      const marketRemaining = fixedMarket ? Math.max(0, targetPerMarket - refreshedByMarket[fixedMarket]) : configuredMaxOffers;
-      const sourceMaxOffers = Math.min(configuredMaxOffers, marketRemaining || configuredMaxOffers);'''
-          new = '''      // Candidate scan capacity is independent from the valid-offer target.
-      // Rejected rows must not consume the requested market count.
-      const sourceMaxOffers = configuredMaxOffers;'''
-          if old in text:
-              text = text.replace(old, new, 1)
-          elif 'const sourceMaxOffers = configuredMaxOffers;' not in text:
-              raise SystemExit('candidate scan target missing')
-          path.write_text(text, encoding='utf-8')
-          PY
-      - run: npm run typecheck
-      - name: Commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/lib/catalog/importer-impl.ts
-          git commit -m "Scan candidates until valid market target is reached [skip ci]" || true
-          git pull --rebase origin main
-          git push origin HEAD:main
+      - run: echo "Replaced by Catalog clean rebuild all five markets."
