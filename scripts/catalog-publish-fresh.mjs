@@ -6,10 +6,11 @@ const { persistCatalogOffers } = await import("../apps/web/lib/catalog/storage.t
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || 250));
-const minimumAverageImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_AVG_IMAGES || 8));
-const richGalleryImages = Math.max(2, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_IMAGES || 6));
+const minimumImagesPerOffer = Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 6));
+const minimumAverageImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_MIN_AVG_IMAGES || 8));
+const richGalleryImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_IMAGES || 10));
 const richGalleryRatio = Math.min(1, Math.max(0, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_RATIO || 0.6)));
-const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 4));
+const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 5));
 const markets = ["korea", "china", "japan", "uae", "europe"];
 const all = [];
 const files = [];
@@ -58,7 +59,7 @@ for (const market of markets) {
     }
 
     const offer = { ...sourceOffer, images };
-    if (images.length < 2 || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) { rejectedQuality++; continue; }
+    if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) { rejectedQuality++; continue; }
     selected.push(offer);
     for (const image of images) globalImageOwners.set(imageKey(image), offer.id);
   }
@@ -85,6 +86,7 @@ for (const market of markets) {
     averageImages: Number(averageImages.toFixed(2)),
     richGalleries,
     requiredRichGalleries,
+    minimumImagesPerOffer,
     minimumSpecScore,
   };
 }
