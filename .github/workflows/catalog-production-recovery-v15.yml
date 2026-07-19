@@ -1,4 +1,4 @@
-name: Catalog safe restore and full galleries
+name: Catalog clean rebuild all five markets
 
 on:
   workflow_dispatch:
@@ -6,42 +6,69 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-v15.yml
-      - apps/web/lib/catalog/offer-quality.ts
+      - scripts/catalog-rebuild-market.mjs
+      - scripts/catalog-publish-fresh.mjs
       - apps/web/lib/catalog/importer.ts
       - apps/web/lib/catalog/full-gallery-wrapper.ts
-      - scripts/catalog-recover-generations.mjs
-      - scripts/catalog-refresh-galleries.mjs
+      - apps/web/lib/catalog/offer-quality.ts
+      - apps/web/lib/catalog/spec-normalization.ts
+      - apps/web/lib/catalog/adapters.ts
+      - apps/web/lib/catalog/encar-complete-source.ts
+      - apps/web/lib/catalog/guazi-export-source.ts
+      - apps/web/lib/catalog/goonet-exact-source.ts
+      - apps/web/lib/catalog/dubicars-current-source.ts
+      - apps/web/lib/catalog/otomoto-current-source.ts
+      - apps/web/lib/catalog/otomoto-detail-source.ts
+      - apps/web/lib/catalog/che168-exact-source.ts
   schedule:
     - cron: "17 20 * * *"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-production-import
   cancel-in-progress: true
 
 jobs:
-  restore-and-enrich:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-          fetch-depth: 0
-
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-
       - run: npm ci
       - run: npm run typecheck
 
-      - name: Restore the complete last working catalog first
-        run: npx tsx scripts/catalog-recover-generations.mjs
-        env: &storage
+  collect:
+    needs: validate
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        market: [korea, china, japan, uae, europe]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Collect 250 clean ${{ matrix.market }} offers with complete galleries
+        run: npx tsx scripts/catalog-rebuild-market.mjs
+        env:
           JSON_STORAGE_DRIVER: object
           YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
           YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
@@ -50,46 +77,70 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-          CATALOG_RECOVERY_MARKETS: korea,china,japan,uae,europe
-          CATALOG_RECOVERY_GENERATIONS: gen_1784276049832_9868cbbe
-          CATALOG_RECOVERY_MAX_CHUNKS: "50"
-          CATALOG_RECOVERY_MIN_GAIN: "1"
-          CATALOG_GROW_ONLY_MARKETS: ""
-
-      - name: Expand a safe batch of galleries without removing working photos
-        run: npx tsx scripts/catalog-refresh-galleries.mjs
-        env:
-          <<: *storage
-          CATALOG_GALLERY_MARKETS: korea,china,japan,uae,europe
-          CATALOG_GALLERY_MAX_OFFERS: "250"
-          CATALOG_GALLERY_MAX_PER_MARKET: "60"
-          CATALOG_GALLERY_MIN_IMAGES: "120"
+          CATALOG_REBUILD_MARKET: ${{ matrix.market }}
+          CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_MAX_PAGES: "300"
+          CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
           CATALOG_MAX_IMAGES_PER_OFFER: "120"
-          CATALOG_GALLERY_PERSIST_EVERY: "10"
-          CATALOG_SOURCE_TIMEOUT_MS: "45000"
-          CATALOG_IMAGE_TIMEOUT_MS: "30000"
-          CATALOG_GALLERY_REPORT_FILE: catalog-safe-gallery-refresh.json
+          CATALOG_IMAGE_MAX_BYTES: "12000000"
+          CATALOG_SOURCE_TIMEOUT_MS: "60000"
+          CATALOG_IMAGE_TIMEOUT_MS: "45000"
+          CATALOG_IMAGE_FETCH_CONCURRENCY: "8"
+          CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
+          CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
+          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
+          CATALOG_ENCAR_DIRECT_IMAGE_RPM: "120"
+          CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
+          CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
           CATALOG_GROW_ONLY_MARKETS: ""
-
-      - name: Record safe refresh report
-        if: always()
-        run: |
-          mkdir -p data/catalog/imports
-          if [ ! -f catalog-safe-gallery-refresh.json ]; then
-            printf '{"finishedAt":"%s","error":"gallery_report_missing"}\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > catalog-safe-gallery-refresh.json
-          fi
-          cp catalog-safe-gallery-refresh.json data/catalog/imports/last-safe-gallery-refresh.json
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
-          git add data/catalog/imports/last-safe-gallery-refresh.json
-          git commit -m "Record safe catalog gallery refresh [skip ci]" || true
-          git push origin HEAD:main || true
 
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: catalog-safe-gallery-refresh
-          path: catalog-safe-gallery-refresh.json
-          if-no-files-found: warn
-          retention-days: 7
+          name: catalog-rebuild-${{ matrix.market }}
+          path: catalog-rebuild-${{ matrix.market }}.json
+          if-no-files-found: error
+          retention-days: 3
+
+  publish:
+    needs: collect
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: catalog-rebuild-*
+          path: catalog-rebuild
+          merge-multiple: true
+
+      - name: Delete the old public catalog and atomically publish only the five fresh markets
+        run: npx tsx scripts/catalog-publish-fresh.mjs
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+          CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
+          CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
+          CATALOG_GROW_ONLY_MARKETS: ""
+          CATALOG_INDEX_WRITE_CONCURRENCY: "10"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-fresh-publish-report
+          path: catalog-fresh-publish-report.json
+          if-no-files-found: error
+          retention-days: 14
