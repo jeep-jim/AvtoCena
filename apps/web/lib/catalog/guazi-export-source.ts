@@ -107,24 +107,21 @@ function imageGroup(url: string) {
 }
 
 function detailGallery(markup: string, pageUrl: string, cover: string, limit: number) {
-  const candidates = collectImages(markup, pageUrl).slice(0, 80);
+  const candidates = collectImages(markup, pageUrl);
   const coverGroup = imageGroup(cover);
   if (coverGroup) {
     const preferred = candidates.filter((url) => imageGroup(url) === coverGroup);
-    if (preferred.length >= 4) return preferred.slice(0, limit);
+    if (preferred.length) return preferred.slice(0, limit);
   }
 
-  // Main product media is rendered before recommendations. Only inspect the
-  // first image region, then keep one coherent path group from that region.
-  const early = candidates.slice(0, Math.max(limit * 4, 24));
   const groups = new Map<string, string[]>();
-  for (const url of early) {
+  for (const url of candidates) {
     const group = imageGroup(url);
     if (!group) continue;
     groups.set(group, [...(groups.get(group) || []), url]);
   }
   const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
-  return (best.length >= 4 ? best : early).slice(0, limit);
+  return best.slice(0, limit);
 }
 
 function makeModel(rawTitle: string) {
@@ -283,8 +280,8 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const row = offer.operational.raw as GuaziRow;
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 8);
-    const limit = Math.min(24, Math.max(4, Number.isFinite(requested) ? requested : 8));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
+    const limit = Math.min(1000, Math.max(4, Number.isFinite(requested) ? requested : 1000));
     const detail = row.url ? await fetchHtml(row.url, row.url).catch(() => null) : null;
     const urls = detail?.response.ok ? detailGallery(detail.markup, row.url, row.images[0] || "", limit) : row.images.slice(0, limit);
     row.images = [...new Set(urls)];
