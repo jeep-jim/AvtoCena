@@ -39,9 +39,10 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const requested: CatalogImportOptions = Array.isArray(sourceIdsOrOptions)
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
+  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.max(120, Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120)),
+    maxImagesPerOffer: Math.min(24, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 12)),
   });
 }
 
