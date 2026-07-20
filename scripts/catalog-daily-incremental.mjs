@@ -7,7 +7,7 @@ const { offerPath } = await import("../apps/web/lib/catalog/storage.ts");
 const HISTORY_PATH = "catalog/history/daily-generations.json";
 const RETENTION_MS = Math.max(86_400_000, Number(process.env.CATALOG_GENERATION_RETENTION_MS || 3 * 86_400_000));
 const REPORT_FILE = process.env.CATALOG_DAILY_LOCAL_REPORT || "catalog-daily-report.json";
-const SOURCE_IDS = [
+const DEFAULT_SOURCE_IDS = [
   "encar_direct",
   "guazi_china_export",
   "che168_china_exact",
@@ -19,6 +19,11 @@ const SOURCE_IDS = [
   "beforward_uk",
   "beforward_belgium",
 ];
+const requestedSourceIds = String(process.env.CATALOG_DAILY_SOURCE_IDS || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter(Boolean);
+const SOURCE_IDS = requestedSourceIds.length ? requestedSourceIds : DEFAULT_SOURCE_IDS;
 
 function cleanShard(value) {
   return String(value || "unknown")
@@ -120,6 +125,7 @@ const historyBefore = await readDataJson(HISTORY_PATH, []);
 const beforeSnapshot = snapshot(beforePublic, beforeInternal);
 if (beforeSnapshot) await writeDataJson(HISTORY_PATH, mergeHistory(historyBefore, [beforeSnapshot]));
 
+console.log(`[daily] sources: ${SOURCE_IDS.join(", ")}`);
 const importReport = await importCatalog({
   sourceIds: SOURCE_IDS,
   maxOffers: 250,
@@ -153,6 +159,7 @@ const finalReport = {
   startedAt: importReport.startedAt,
   finishedAt: new Date().toISOString(),
   generationId: currentGeneration,
+  requestedSourceIds: SOURCE_IDS,
   publicOffers: importReport.publicOffers,
   publicByMarket: importReport.publicByMarket,
   imported: importReport.imported,
