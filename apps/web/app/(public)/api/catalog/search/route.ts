@@ -58,6 +58,7 @@ export async function GET(request: Request) {
     engineFrom: n(p.get("engineFrom")),
     engineTo: n(p.get("engineTo")),
     powerFrom: n(p.get("powerFrom")),
+    powerTo: n(p.get("powerTo")),
     fuel: p.get("fuel") || undefined,
     transmission: p.get("transmission") || undefined,
     drive: p.get("drive") || undefined,
