@@ -149,11 +149,63 @@ function embeddedPrice(markup: string) {
   return null;
 }
 
+function validMileage(value: unknown) {
+  const mileage = otomotoInteger(value);
+  return mileage !== undefined && mileage >= 0 && mileage <= 5_000_000 ? mileage : undefined;
+}
+
+function mileageFromParameterObject(value: unknown, depth = 0): number | undefined {
+  if (value == null || depth > 16) return undefined;
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const mileage = mileageFromParameterObject(item, depth + 1);
+      if (mileage !== undefined) return mileage;
+    }
+    return undefined;
+  }
+  if (typeof value !== "object") return undefined;
+  const object = value as Record<string, unknown>;
+  const identity = [object.key, object.code, object.name, object.label, object.displayName, object.parameter, object.slug]
+    .map((item) => String(item || "").toLocaleLowerCase("pl-PL"))
+    .join(" ");
+  if (/\b(?:przebieg|mileage|mileagefromodometer|odometer)\b/i.test(identity)) {
+    for (const key of ["value", "displayValue", "formattedValue", "amount", "text", "values"]) {
+      const mileage = validMileage(object[key]);
+      if (mileage !== undefined) return mileage;
+    }
+  }
+  for (const child of Object.values(object)) {
+    const mileage = mileageFromParameterObject(child, depth + 1);
+    if (mileage !== undefined) return mileage;
+  }
+  return undefined;
+}
+
+function exactMileage(markup: string, values = jsonValues(markup)) {
+  const expanded = expandEncodedUrls(markup);
+  const directCandidates = [
+    expanded.match(/itemprop=["']mileageFromOdometer["'][^>]*(?:content|value)=["']([0-9 .\u00a0\u202f]+)["']/i)?.[1],
+    expanded.match(/(?:content|value)=["']([0-9 .\u00a0\u202f]+)["'][^>]*itemprop=["']mileageFromOdometer["']/i)?.[1],
+    expanded.match(/["']mileageFromOdometer["']\s*:\s*\{[\s\S]{0,260}?["']value["']\s*:\s*["']?([0-9 .\u00a0\u202f]+)/i)?.[1],
+    expanded.match(/["'](?:mileage|mileageKm|odometer|przebieg)["']\s*:\s*["']?([0-9 .\u00a0\u202f]+)/i)?.[1],
+    cleanOtomoto(markup).match(/\bPrzebieg\s*[:：]?\s*([0-9][0-9 .\u00a0\u202f]{0,14})\s*km\b/i)?.[1],
+  ];
+  for (const candidate of directCandidates) {
+    const mileage = validMileage(candidate);
+    if (mileage !== undefined) return mileage;
+  }
+  for (const value of values) {
+    const mileage = mileageFromParameterObject(value);
+    if (mileage !== undefined) return mileage;
+  }
+  return validMileage(parseOtomotoMileage(markup));
+}
+
 function visibleLabelValue(plain: string, label: string, pattern: string) {
   return plain.match(new RegExp(`${label}\\s*[:：]?\\s*(${pattern})`, "i"))?.[1]?.trim();
 }
 
-function visibleDetails(markup: string) {
+function visibleDetails(markup: string, values = jsonValues(markup)) {
   const plain = cleanOtomoto(markup);
   const year = plausibleYear(visibleLabelValue(plain, "(?:Rok produkcji|Production year|Model year|Year)", "(?:19|20)\\d{2}"));
   const engineCc = otomotoInteger(visibleLabelValue(plain, "(?:Pojemność skokowa|Engine displacement)", "[0-9 .\\u00a0\\u202f]{2,12}(?=\\s*cm(?:3|³))"));
@@ -164,7 +216,7 @@ function visibleDetails(markup: string) {
   const driveText = visibleLabelValue(plain, "(?:Napęd|Drive)", "[^|•]{2,50}?(?=\\s+(?:Typ nadwozia|Pojemność|Moc|Rodzaj paliwa|Skrzynia|$))") || "";
   return {
     year,
-    mileageKm: parseOtomotoMileage(markup),
+    mileageKm: exactMileage(markup, values),
     engineCc,
     powerHp,
     fuel: normalizeOtomotoFuel(fuelText || plain),
@@ -174,8 +226,7 @@ function visibleDetails(markup: string) {
   };
 }
 
-function embeddedDetails(markup: string) {
-  const values = jsonValues(markup);
+function embeddedDetails(markup: string, values = jsonValues(markup)) {
   const root: unknown = values.length === 1 ? values[0] : values;
   const fuelText = String(deepFind(root, ["fuelType", "fuel"]) || "");
   const transmissionText = String(deepFind(root, ["vehicleTransmission", "transmission", "gearbox"]) || "");
@@ -183,10 +234,9 @@ function embeddedDetails(markup: string) {
   const driveText = String(deepFind(root, ["driveWheelConfiguration", "driveType", "drivetrain", "drive"]) || "");
   const publishedRaw = deepFind(root, ["datePublished", "dateCreated", "publicationDate", "createdAt"]);
   const publishedTimestamp = Date.parse(String(publishedRaw || ""));
-  const mileage = otomotoInteger(deepFind(root, ["mileageFromOdometer", "mileage", "mileageKm", "odometer", "przebieg"]));
   return {
     year: plausibleYear(deepFind(root, ["productionYear", "modelYear", "vehicleModelDate", "productionDate", "dateVehicleFirstRegistered", "dateFirstRegistered"])),
-    mileageKm: mileage !== undefined && mileage <= 5_000_000 ? mileage : undefined,
+    mileageKm: exactMileage(markup, values),
     engineCc: otomotoInteger(deepFind(root, ["engineDisplacement", "displacement", "engineCc", "capacity"])),
     powerHp: otomotoInteger(deepFind(root, ["enginePower", "horsePower", "horsepower", "powerHp", "power"])),
     fuel: normalizeOtomotoFuel(fuelText),
@@ -207,8 +257,9 @@ async function fetchMarkup(url: string) {
 }
 
 function enrichRow(row: OtomotoRow, markup: string): OtomotoRow {
-  const embedded = embeddedDetails(markup);
-  const visible = visibleDetails(markup);
+  const values = jsonValues(markup);
+  const embedded = embeddedDetails(markup, values);
+  const visible = visibleDetails(markup, values);
   const parsedPrice = row.price && row.currency ? null : embeddedPrice(markup) || parseOtomotoPrice(markup.slice(0, 300_000));
   const detailImages = exactGallery(markup, row.url, row.images);
   return {
@@ -248,7 +299,7 @@ export class OtomotoDetailAdapter extends OtomotoCurrentAdapter {
       count: rows.length,
       health: {
         ...(result.health || { ok: true, checkedAt: new Date().toISOString() }),
-        message: `${result.health?.message || "OTOMOTO"}; exact details and galleries checked`,
+        message: `${result.health?.message || "OTOMOTO"}; exact details, mileage and galleries checked`,
       },
     };
   }
