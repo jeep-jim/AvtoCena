@@ -1,6 +1,7 @@
-name: Catalog finish enriched China and publish
+name: Catalog finish enriched UAE and publish
 
-# Europe already passed in run 29711370310. Korea, Japan and UAE passed in run 29695322406.
+# China passed in run 29718757370. Europe passed in run 29711370310.
+# Korea and Japan passed in run 29695322406.
 on:
   workflow_dispatch:
   push:
@@ -17,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  collect-china:
+  collect-uae:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -34,7 +35,7 @@ jobs:
         run: |
           node --check scripts/catalog-rebuild-market.mjs
           node --check scripts/catalog-publish-fresh.mjs
-      - name: Collect 320 China candidates with exact detail specifications and galleries
+      - name: Collect 320 UAE candidates with exact details and galleries
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -45,12 +46,12 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-          CATALOG_REBUILD_MARKET: china
-          CATALOG_REBUILD_SOURCE_IDS: guazi_china_export
+          CATALOG_REBUILD_MARKET: uae
+          CATALOG_REBUILD_SOURCE_IDS: dubicars_uae_exact,beforward_uae
           CATALOG_REBUILD_TARGET: "320"
           CATALOG_REBUILD_MAX_PAGES: "500"
           CATALOG_REBUILD_SEED_SCAN_LIMIT: "1500"
-          CATALOG_REBUILD_OUTPUT: catalog-rebuild-china.json
+          CATALOG_REBUILD_OUTPUT: catalog-rebuild-uae.json
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
           CATALOG_IMAGE_MAX_BYTES: "12000000"
@@ -61,13 +62,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-rebuild-china
-          path: catalog-rebuild-china.json
+          name: catalog-rebuild-uae
+          path: catalog-rebuild-uae.json
           if-no-files-found: error
           retention-days: 3
 
   publish:
-    needs: collect-china
+    needs: collect-uae
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -81,11 +82,20 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Download rebuilt China
+      - name: Download rebuilt UAE
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-rebuild-uae
+          path: catalog-rebuild
+
+      - name: Reuse successful China artifact
         uses: actions/download-artifact@v4
         with:
           name: catalog-rebuild-china
           path: catalog-rebuild
+          repository: jeep-jim/AvtoCena
+          run-id: 29718757370
+          github-token: ${{ github.token }}
 
       - name: Reuse successful Europe artifact
         uses: actions/download-artifact@v4
@@ -109,15 +119,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: catalog-rebuild-japan
-          path: catalog-rebuild
-          repository: jeep-jim/AvtoCena
-          run-id: 29695322406
-          github-token: ${{ github.token }}
-
-      - name: Reuse successful UAE artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: catalog-rebuild-uae
           path: catalog-rebuild
           repository: jeep-jim/AvtoCena
           run-id: 29695322406
