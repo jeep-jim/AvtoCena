@@ -65,17 +65,36 @@ html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current) {
   }
 
   .ac-home-filter-drawer {
-    padding-top: 30px !important;
+    padding: 30px 20px 24px !important;
+    background: var(--ac-surface) !important;
+    color: var(--ac-text) !important;
   }
   .ac-home-filter-drawer > div:first-child {
-    margin-bottom: 24px !important;
+    margin-bottom: 28px !important;
+  }
+  .ac-home-filter-drawer .ac-filter-panel {
+    margin-top: 8px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+  .ac-home-filter-drawer .ac-filter-panel > div:first-child {
+    margin-top: 8px !important;
+    margin-bottom: 18px !important;
   }
   .ac-home-filter-drawer > div.grid,
-  .ac-home-filter-drawer form > div.grid {
+  .ac-home-filter-drawer form > div.grid,
+  .ac-home-filter-drawer .ac-filter-panel > div.grid {
     display: flex !important;
     flex-direction: column !important;
     gap: 14px !important;
     row-gap: 14px !important;
+  }
+  .ac-home-filter-drawer .grid > div + div,
+  .ac-home-filter-drawer .ac-filter-panel > div + div {
+    margin-top: 14px !important;
   }
   .ac-home-filter-drawer .ac-filter-control,
   .ac-home-filter-drawer .ac-power-limit {
@@ -83,16 +102,14 @@ html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current) {
     outline: 0 !important;
     box-shadow: none !important;
     background: var(--ac-surface-2) !important;
+    color: var(--ac-text) !important;
   }
-  html:not([data-theme="light"]) .ac-home-filter-drawer,
-  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-filter-dropdown {
+  .ac-home-filter-drawer .ac-filter-dropdown {
     background: var(--ac-surface) !important;
     color: var(--ac-text) !important;
-  }
-  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-filter-control,
-  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-power-limit {
-    background: var(--ac-surface-2) !important;
-    color: var(--ac-text) !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
   }
   .ac-home-filter-drawer button[aria-label^="Почему есть фильтр"] {
     border: 0 !important;
@@ -109,13 +126,14 @@ html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current) {
     outline: 0 !important;
   }
   .ac-home-filter-drawer div:has(> button[aria-label="Открыть дополнительные фильтры"]) > .avto-button,
-  .ac-home-filter-drawer > .avto-button {
+  .ac-home-filter-drawer > .avto-button,
+  .ac-home-filter-drawer .ac-filter-panel .avto-button {
     display: flex !important;
     width: 100% !important;
     min-width: 100% !important;
     align-items: center !important;
     justify-content: center !important;
-    margin-top: 20px !important;
+    margin-top: 22px !important;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
     text-align: center !important;
