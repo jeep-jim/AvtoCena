@@ -81,6 +81,11 @@ function integer(value: unknown) {
   return Number.isFinite(number) && number > 0 ? number : undefined;
 }
 
+function decimal(value: unknown) {
+  const number = Number(String(value || "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(number) && number > 0 ? number : undefined;
+}
+
 function collectImages(markup: string, base: string) {
   const candidates: string[] = [];
   const decoded = decode(markup);
@@ -161,6 +166,21 @@ function fuel(value: string) {
   return "";
 }
 
+function transmission(value: string) {
+  if (/DCT|DSG/i.test(value)) return "dct";
+  if (/CVT/i.test(value)) return "cvt";
+  if (/AT|Automatic/i.test(value)) return "automatic";
+  if (/MT|Manual/i.test(value)) return "manual";
+  return "";
+}
+
+function driveType(value: string) {
+  if (/AWD|4WD|4x4|Four[- ]Wheel/i.test(value)) return "awd";
+  if (/RWD|Rear[- ]engine|Rear[- ]Wheel/i.test(value)) return "rwd";
+  if (/FWD|Front[- ]engine|Front[- ]Wheel|2WD|Two[- ]Wheel/i.test(value)) return "fwd";
+  return "";
+}
+
 function bodyType(value: string) {
   if (/SUV|Crossover/i.test(value)) return "suv";
   if (/Hatchback/i.test(value)) return "hatchback";
@@ -171,6 +191,32 @@ function bodyType(value: string) {
   if (/Van|MPV|Mini Van/i.test(value)) return "minivan";
   if (/Sedan|Saloon/i.test(value)) return "sedan";
   return "";
+}
+
+function detailSpecs(markup: string) {
+  const plain = clean(markup);
+  const mileageKm = integer(plain.match(/Mileage\s*\(km\)\s*([0-9,]+)/i)?.[1] || plain.match(/Mileage\s*\(km\)\s*([0-9,]+)/i)?.[1]);
+  const engineLiters = decimal(
+    plain.match(/Displacement\s*\(L\)\s*([0-9]+(?:\.[0-9]+)?)/i)?.[1]
+    || plain.match(/\bEngine\s+([0-9]+(?:\.[0-9]+)?)\s*[TL]\b/i)?.[1],
+  );
+  const powerHp = decimal(
+    plain.match(/(?:Maximum\s+Horsepower|Horsepower)\s*\((?:ps|hp)\)\s*([0-9]+(?:\.[0-9]+)?)/i)?.[1]
+    || plain.match(/(?:Maximum\s+Horsepower|Horsepower)\s+([0-9]+(?:\.[0-9]+)?)/i)?.[1],
+  );
+  const fuelText = plain.match(/Fuel Type\s+(.+?)(?=\s+(?:Mileage|Transmission|Engine|Horsepower|Drive Train|Body Style|Seats|Doors|Exterior Color|Location|$))/i)?.[1] || "";
+  const transmissionText = plain.match(/Transmission\s+(.+?)(?=\s+(?:Engine|Horsepower|Drive Train|Body Style|Seats|Doors|Exterior Color|Location|$))/i)?.[1] || "";
+  const driveText = plain.match(/Drive Train\s+(.+?)(?=\s+(?:Body Style|Seats|Doors|Exterior Color|Dimension|Curb Weight|Steering|Location|$))/i)?.[1] || "";
+  const bodyText = plain.match(/Body Style\s+(.+?)(?=\s+(?:Seats|Doors|Exterior Color|Dimension|Curb Weight|Steering|Location|$))/i)?.[1] || "";
+  return {
+    mileageKm,
+    engineCc: engineLiters ? Math.round(engineLiters * 1_000) : undefined,
+    powerHp,
+    fuel: fuel(fuelText || plain),
+    transmission: transmission(transmissionText),
+    drive: driveType(driveText),
+    bodyType: bodyType(bodyText),
+  };
 }
 
 export function parseGuaziExportPage(markup: string, pageUrl: string): GuaziRow[] {
@@ -220,8 +266,8 @@ export function parseGuaziExportPage(markup: string, pageUrl: string): GuaziRow[
       engineCc: liters ? Math.round(liters * 1_000) : undefined,
       powerHp,
       fuel: fuel(`${parsed.title} ${plain}`),
-      transmission: /\b(?:AT|Automatic|DCT|CVT|DSG)\b/i.test(parsed.title) ? "automatic" : /\b(?:MT|Manual)\b/i.test(parsed.title) ? "manual" : "",
-      drive: /All[- ]Wheel|Four[- ]Wheel|4WD|AWD|4MATIC|xDrive|4x4/i.test(parsed.title) ? "awd" : /Rear[- ]Wheel|RWD/i.test(parsed.title) ? "rwd" : /Front[- ]Wheel|FWD|Two[- ]Wheel/i.test(parsed.title) ? "fwd" : "",
+      transmission: transmission(parsed.title),
+      drive: driveType(parsed.title),
       bodyType: bodyType(`${parsed.title} ${plain}`),
       images: [cover],
     });
@@ -291,9 +337,30 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(4, Number.isFinite(requested) ? requested : 30));
     const detail = row.url ? await fetchHtml(row.url, row.url).catch(() => null) : null;
+    const specs = detail?.response.ok ? detailSpecs(detail.markup) : {};
     const urls = detail?.response.ok ? detailGallery(detail.markup, row.url, row.images[0] || "", limit) : row.images.slice(0, limit);
-    row.images = [...new Set(urls)];
+
+    Object.assign(row, {
+      mileageKm: specs.mileageKm ?? row.mileageKm,
+      engineCc: specs.engineCc || row.engineCc,
+      powerHp: specs.powerHp || row.powerHp,
+      fuel: specs.fuel || row.fuel,
+      transmission: specs.transmission || row.transmission,
+      drive: specs.drive || row.drive,
+      bodyType: specs.bodyType || row.bodyType,
+      images: [...new Set(urls)],
+    });
+    Object.assign(offer, {
+      mileageKm: row.mileageKm,
+      engineCc: row.engineCc,
+      powerHp: row.powerHp,
+      fuel: row.fuel,
+      transmission: row.transmission,
+      drive: row.drive,
+      bodyType: row.bodyType,
+    });
     (offer.operational as any).raw = row;
+
     const cached: CatalogImage[] = [];
     for (let index = 0; index < row.images.length; index += 4) {
       const batch = await Promise.all(row.images.slice(index, index + 4).map((url) =>
@@ -305,7 +372,7 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
     return cached.slice(0, limit);
   }
 
-  async healthCheck() { return { ok: true, message: "Guazi exact detail galleries", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "Guazi exact detail galleries and specifications", checkedAt: new Date().toISOString() }; }
 }
 
 export const guaziChinaExportSource = new GuaziExportAdapter();
