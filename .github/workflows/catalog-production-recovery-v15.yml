@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "30 1 * * *"
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - apps/web/lib/catalog/otomoto-detail-source.ts
+      - scripts/catalog-daily-incremental.mjs
+      - .github/workflows/catalog-production-recovery-v15.yml
 
 permissions:
   contents: read
@@ -28,7 +34,7 @@ jobs:
       - run: npm ci
       - name: Validate incremental update script
         run: node --check scripts/catalog-daily-incremental.mjs
-      - name: Update all five markets without redownloading complete galleries
+      - name: Update catalog without redownloading unchanged galleries
         run: npx tsx scripts/catalog-daily-incremental.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -39,6 +45,7 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+          CATALOG_DAILY_SOURCE_IDS: ${{ github.event_name == 'push' && 'otomoto_europe_exact' || '' }}
           CATALOG_TARGET_PER_MARKET: "250"
           CATALOG_TARGET_PUBLIC_OFFERS: "1250"
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
