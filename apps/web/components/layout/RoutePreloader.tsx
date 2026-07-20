@@ -15,8 +15,8 @@ button[aria-label^="Почему есть фильтр"]{border:0!important;outl
 html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-results-market-link,html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current){background:#fff!important;color:#171b24!important;-webkit-text-fill-color:#171b24!important}
 .ac-catalog-nav-icon{position:relative!important;display:inline-flex!important;width:24px!important;height:24px!important;align-items:center!important;justify-content:center!important}
 .ac-catalog-nav-icon svg{display:none!important}
-.ac-catalog-nav-icon:before{content:"";display:block;width:15px;height:15px;border:2px solid currentColor;border-radius:999px;box-sizing:border-box}
-.ac-catalog-nav-icon:after{content:"";position:absolute;width:8px;height:2px;border-radius:999px;background:currentColor;transform:translate(6px,6px) rotate(45deg);transform-origin:center}
+.ac-catalog-nav-icon:before{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border:2px solid currentColor;border-radius:999px;box-sizing:border-box}
+.ac-catalog-nav-icon:after{content:"";position:absolute;left:15px;top:15px;width:7px;height:2px;border-radius:999px;background:currentColor;transform:rotate(45deg);transform-origin:left center}
 @media(max-width:1023px){
 .ac-home-page #form>div.relative.mt-4{position:relative!important;display:flex!important;align-items:stretch!important;gap:8px!important;overflow:visible!important}
 .ac-home-page #form>div.relative.mt-4>.avto-button{display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;align-items:center!important;justify-content:center!important;padding-right:1rem!important;text-align:center!important}
