@@ -1,3 +1,4 @@
+import { cacheImageFromUrl } from "./storage";
 import {
   OTOMOTO_HEADERS,
   OtomotoCurrentAdapter,
@@ -13,7 +14,7 @@ import {
   parseOtomotoPrice,
   type OtomotoRow,
 } from "./otomoto-current-source";
-import type { CatalogFetchResult } from "./types";
+import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 function plausibleYear(value: unknown) {
   const match = String(value || "").match(/\b((?:19|20)\d{2})\b/);
@@ -36,7 +37,7 @@ function scalar(value: unknown): unknown {
 }
 
 function deepFind(value: unknown, keys: string[], depth = 0): unknown {
-  if (value == null || depth > 12) return undefined;
+  if (value == null || depth > 14) return undefined;
   if (Array.isArray(value)) {
     for (const item of value) {
       const found = deepFind(item, keys, depth + 1);
@@ -60,13 +61,77 @@ function deepFind(value: unknown, keys: string[], depth = 0): unknown {
   return undefined;
 }
 
+function expandEncodedUrls(markup: string) {
+  const decoded = decodeOtomoto(markup)
+    .replace(/\\x2f/gi, "/")
+    .replace(/\\x3a/gi, ":")
+    .replace(/\\x26/gi, "&");
+  return decoded.replace(/https?%3A%2F%2F[^"'<>\s\\]+/gi, (value) => {
+    try { return decodeURIComponent(value); } catch { return value; }
+  });
+}
+
 function jsonValues(markup: string) {
   const values: unknown[] = [];
-  for (const match of markup.matchAll(/<script[^>]+type=["'](?:application\/ld\+json|application\/json)["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+  const expanded = expandEncodedUrls(markup);
+  for (const match of expanded.matchAll(/<script[^>]+type=["'](?:application\/ld\+json|application\/json)["'][^>]*>([\s\S]*?)<\/script>/gi)) {
     const payload = decodeOtomoto(match[1]);
     try { values.push(JSON.parse(payload)); } catch { /* continue */ }
   }
   return values;
+}
+
+function collectStrings(value: unknown, output: string[], depth = 0) {
+  if (value == null || depth > 15) return;
+  if (typeof value === "string") {
+    const expanded = expandEncodedUrls(value);
+    if (/https?:\/\//i.test(expanded) && /apollo\.olxcdn\.com|otomoto|\/image(?:[;/?#]|$)/i.test(expanded)) output.push(expanded);
+    return;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) collectStrings(item, output, depth + 1);
+    return;
+  }
+  if (typeof value !== "object") return;
+  for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+    if (/image|photo|gallery|media|url|src|original|large|full/i.test(key) || depth < 7) collectStrings(child, output, depth + 1);
+  }
+}
+
+function normalizeGalleryUrl(value: string, base: string) {
+  try {
+    const url = new URL(value, base);
+    if (/apollo\.olxcdn\.com$/i.test(url.hostname) || /\.apollo\.olxcdn\.com$/i.test(url.hostname)) {
+      url.pathname = url.pathname.replace(/\/image(?:;[^/?#]*)?$/i, "/image;s=1200x800");
+    }
+    return url.toString();
+  } catch { return ""; }
+}
+
+function galleryKey(value: string) {
+  try {
+    const url = new URL(value);
+    const file = url.pathname.match(/\/v1\/files\/([^/]+)\/image/i)?.[1];
+    return file ? `${url.hostname.toLowerCase()}:${file.toLowerCase()}` : `${url.hostname.toLowerCase()}${url.pathname.replace(/;s=\d+x\d+/i, "")}`;
+  } catch { return value.replace(/[?#].*$/, ""); }
+}
+
+function exactGallery(markup: string, base: string, fallback: string[] = []) {
+  const expanded = expandEncodedUrls(markup);
+  const values = [...extractOtomotoImages(expanded, base), ...fallback];
+  for (const payload of jsonValues(expanded)) collectStrings(payload, values);
+  for (const match of expanded.matchAll(/https?:\/\/[^"'<>\s\\]+(?:apollo\.olxcdn\.com|\/v1\/files\/)[^"'<>\s\\]*/gi)) values.push(match[0]);
+  const result: string[] = [];
+  const seen = new Set<string>();
+  for (const value of values) {
+    const url = normalizeGalleryUrl(value, base);
+    if (!url || !/apollo\.olxcdn\.com|otomoto|\/image(?:[;/?#]|$)/i.test(url)) continue;
+    const key = galleryKey(url);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(url);
+  }
+  return result;
 }
 
 function embeddedPrice(markup: string) {
@@ -138,16 +203,14 @@ async function fetchMarkup(url: string) {
   try {
     const response = await fetch(url, { headers: { ...OTOMOTO_HEADERS, referer: "https://www.otomoto.pl/osobowe" }, redirect: "follow", signal: controller.signal });
     return response.ok ? await response.text() : "";
-  } finally {
-    clearTimeout(timeout);
-  }
+  } finally { clearTimeout(timeout); }
 }
 
 function enrichRow(row: OtomotoRow, markup: string): OtomotoRow {
   const embedded = embeddedDetails(markup);
   const visible = visibleDetails(markup);
-  const parsedPrice = row.price && row.currency ? null : embeddedPrice(markup) || parseOtomotoPrice(markup.slice(0, 220_000));
-  const detailImages = extractOtomotoImages(markup, row.url);
+  const parsedPrice = row.price && row.currency ? null : embeddedPrice(markup) || parseOtomotoPrice(markup.slice(0, 300_000));
+  const detailImages = exactGallery(markup, row.url, row.images);
   return {
     ...row,
     year: embedded.year || visible.year || row.year,
@@ -169,14 +232,15 @@ export class OtomotoDetailAdapter extends OtomotoCurrentAdapter {
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const result = await super.fetchPage(cursor);
     const rows: OtomotoRow[] = [];
-    for (let index = 0; index < result.items.length; index += 6) {
-      const batch = await Promise.all(result.items.slice(index, index + 6).map(async (raw) => {
+    for (let index = 0; index < result.items.length; index += 3) {
+      const batch = await Promise.all(result.items.slice(index, index + 3).map(async (raw) => {
         const row = raw as OtomotoRow;
         if (!row.url) return row;
         const markup = await fetchMarkup(row.url).catch(() => "");
         return markup ? enrichRow(row, markup) : row;
       }));
       rows.push(...batch);
+      if (index + 3 < result.items.length) await new Promise((resolve) => setTimeout(resolve, 180));
     }
     return {
       ...result,
@@ -184,9 +248,36 @@ export class OtomotoDetailAdapter extends OtomotoCurrentAdapter {
       count: rows.length,
       health: {
         ...(result.health || { ok: true, checkedAt: new Date().toISOString() }),
-        message: `${result.health?.message || "OTOMOTO"}; detail price, mileage, specs and full galleries checked`,
+        message: `${result.health?.message || "OTOMOTO"}; exact details and galleries checked`,
       },
     };
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const row = offer.operational.raw as OtomotoRow;
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+    const limit = Math.min(30, Math.max(4, Number.isFinite(requested) ? requested : 30));
+    const markup = row.url ? await fetchMarkup(row.url).catch(() => "") : "";
+    const urls = exactGallery(markup, row.url, row.images).slice(0, limit);
+    row.images = urls;
+    (offer.operational as any).raw = row;
+
+    const saved: CatalogImage[] = [];
+    const seen = new Set<string>();
+    for (let index = 0; index < urls.length && saved.length < limit; index += 2) {
+      const batch = await Promise.all(urls.slice(index, index + 2).map((url) =>
+        cacheImageFromUrl(url, "europe", { headers: { ...OTOMOTO_HEADERS, accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8", referer: row.url } }).catch(() => null),
+      ));
+      for (const image of batch) {
+        if (!image || image.size <= 8_000) continue;
+        const key = String(image.checksum || image.id || image.objectKey || image.url || "");
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        saved.push(image);
+      }
+      if (index + 2 < urls.length) await new Promise((resolve) => setTimeout(resolve, 300));
+    }
+    return saved.slice(0, limit);
   }
 }
 
