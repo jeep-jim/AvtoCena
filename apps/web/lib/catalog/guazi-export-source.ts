@@ -50,6 +50,10 @@ const BAD_IMAGE = /logo|icon|avatar|collect|notification|banner|qrcode|qr-code|p
 
 function decode(value: string) {
   return value
+    .replace(/\\u002f/gi, "/")
+    .replace(/\\u003a/gi, ":")
+    .replace(/\\u0026/gi, "&")
+    .replace(/\\\//g, "/")
     .replace(/&nbsp;|&#160;/gi, " ")
     .replace(/&amp;/gi, "&")
     .replace(/&quot;/gi, '"')
@@ -69,11 +73,7 @@ function clean(value: unknown) {
 }
 
 function absoluteUrl(value: string, base = BASE_URL) {
-  try {
-    return new URL(decode(value).replace(/\\\//g, "/"), base).toString();
-  } catch {
-    return "";
-  }
+  try { return new URL(decode(value), base).toString(); } catch { return ""; }
 }
 
 function integer(value: unknown) {
@@ -83,11 +83,12 @@ function integer(value: unknown) {
 
 function collectImages(markup: string, base: string) {
   const candidates: string[] = [];
-  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) candidates.push(match[1]);
-  for (const match of markup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
+  const decoded = decode(markup);
+  for (const match of decoded.matchAll(/<(?:img|source)[^>]+(?:data-src|data-original|data-lazy-src|src)\s*=\s*["']([^"']+)["']/gi)) candidates.push(match[1]);
+  for (const match of decoded.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const part of match[1].split(",")) candidates.push(part.trim().split(/\s+/)[0]);
   }
-  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) candidates.push(match[0].replace(/\\\//g, "/"));
+  for (const match of decoded.matchAll(/https?:\/\/[^"'\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\s<>]*)?/gi)) candidates.push(match[0]);
   return [...new Set(candidates
     .map((item) => absoluteUrl(item, base))
     .filter((url) => url && /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(url) && !BAD_IMAGE.test(url)))];
@@ -101,9 +102,7 @@ function imageGroup(url: string) {
       .split("/")
       .filter(Boolean);
     return `${parsed.hostname.toLowerCase()}/${path.slice(0, Math.max(1, path.length - 1)).join("/")}`;
-  } catch {
-    return "";
-  }
+  } catch { return ""; }
 }
 
 function detailGallery(markup: string, pageUrl: string, cover: string, limit: number) {
@@ -111,17 +110,15 @@ function detailGallery(markup: string, pageUrl: string, cover: string, limit: nu
   const coverGroup = imageGroup(cover);
   if (coverGroup) {
     const preferred = candidates.filter((url) => imageGroup(url) === coverGroup);
-    if (preferred.length) return preferred.slice(0, limit);
+    if (preferred.length >= 2) return preferred.slice(0, limit);
   }
-
   const groups = new Map<string, string[]>();
   for (const url of candidates) {
     const group = imageGroup(url);
     if (!group) continue;
     groups.set(group, [...(groups.get(group) || []), url]);
   }
-  const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
-  return best.slice(0, limit);
+  return ([...groups.values()].sort((left, right) => right.length - left.length)[0] || []).slice(0, limit);
 }
 
 function makeModel(rawTitle: string) {
@@ -134,6 +131,24 @@ function makeModel(rawTitle: string) {
   const make = MAKES.find((candidate) => lower === candidate.toLocaleLowerCase("en-US") || lower.startsWith(`${candidate.toLocaleLowerCase("en-US")} `)) || "";
   const rest = make ? title.slice(make.length).trim() : "";
   return { title, make, model: rest.replace(/^(?:19|20)\d{2}\s+/, "").split(/\s+/).slice(0, 8).join(" ") };
+}
+
+function titleFromSlug(url: string) {
+  try {
+    const slug = new URL(url).pathname.split("/").pop()?.replace(/-[a-z0-9]{6,}\.html$/i, "").replace(/\.html$/i, "") || "";
+    return slug.split("-").map((part) => part ? `${part[0].toUpperCase()}${part.slice(1)}` : "").join(" ");
+  } catch { return ""; }
+}
+
+function imageTagValue(tag: string, attribute: string) {
+  return tag.match(new RegExp(`${attribute}\\s*=\\s*["']([^"']+)["']`, "i"))?.[1] || "";
+}
+
+function listingCover(card: string, pageUrl: string) {
+  const tags = [...card.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  const preferred = tags.find((tag) => /\bUsed\b/i.test(decode(imageTagValue(tag, "alt")))) || tags[0] || "";
+  const raw = imageTagValue(preferred, "data-src") || imageTagValue(preferred, "data-original") || imageTagValue(preferred, "src");
+  return absoluteUrl(raw, pageUrl);
 }
 
 function fuel(value: string) {
@@ -159,43 +174,56 @@ function bodyType(value: string) {
 }
 
 export function parseGuaziExportPage(markup: string, pageUrl: string): GuaziRow[] {
-  const matches = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']*\/products\/[^"']+\.html[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)];
-  const grouped = new Map<string, { first: number; inner: string }>();
-  for (const match of matches) {
+  const links = [...markup.matchAll(/href\s*=\s*["']([^"']*\/products\/[^"']+\.html[^"']*)["']/gi)];
+  const entries: Array<{ url: string; index: number }> = [];
+  const seen = new Set<string>();
+  for (const match of links) {
     const url = absoluteUrl(match[1], pageUrl);
-    if (!url || grouped.has(url)) continue;
-    grouped.set(url, { first: match.index || 0, inner: match[2] });
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    entries.push({ url, index: match.index || 0 });
   }
-  const entries = [...grouped.entries()].sort((left, right) => left[1].first - right[1].first);
+
   const rows: GuaziRow[] = [];
   for (let index = 0; index < entries.length; index++) {
-    const [url, anchor] = entries[index];
-    const nextIndex = index + 1 < entries.length ? entries[index + 1][1].first : markup.length;
-    const card = markup.slice(anchor.first, nextIndex);
-    const titleCandidates = [
-      clean(anchor.inner),
-      clean(anchor.inner.match(/<img[^>]+alt\s*=\s*["']([^"']+)["']/i)?.[1]),
-      clean(card.match(/<h[1-5][^>]*>([\s\S]*?)<\/h[1-5]>/i)?.[1]),
-    ].filter((candidate) => /\bUsed\b/i.test(candidate) && candidate.length >= 8 && candidate.length <= 260);
-    const parsed = makeModel(titleCandidates.sort((left, right) => right.length - left.length)[0] || "");
+    const current = entries[index];
+    const previousIndex = index > 0 ? entries[index - 1].index : 0;
+    const nextIndex = index + 1 < entries.length ? entries[index + 1].index : markup.length;
+    const start = Math.max(0, Math.floor((previousIndex + current.index) / 2), current.index - 5_000);
+    const end = Math.min(markup.length, Math.floor((current.index + nextIndex) / 2) + 5_000);
+    const card = markup.slice(start, end);
+    const imageAlts = [...card.matchAll(/<img[^>]+alt\s*=\s*["']([^"']+)["']/gi)].map((match) => clean(match[1]));
+    const headings = [...card.matchAll(/<h[1-5][^>]*>([\s\S]*?)<\/h[1-5]>/gi)].map((match) => clean(match[1]));
+    const linkedText = [...card.matchAll(/<a\b[^>]*href\s*=\s*["'][^"']*\/products\/[^"']+["'][^>]*>([\s\S]*?)<\/a>/gi)].map((match) => clean(match[1]));
+    const candidates = [...imageAlts, ...headings, ...linkedText, titleFromSlug(current.url)]
+      .filter((candidate) => candidate.length >= 8 && candidate.length <= 280)
+      .sort((left, right) => Number(/\bUsed\b/i.test(right)) - Number(/\bUsed\b/i.test(left)) || right.length - left.length);
+    const parsed = makeModel(candidates.find((candidate) => makeModel(candidate).make) || "");
     const plain = clean(card);
     const year = Number(parsed.title.match(/\b(?:19|20)\d{2}\b/)?.[0] || plain.match(/\b(?:19|20)\d{2}\b/)?.[0]);
-    const price = integer(plain.match(/FOB\s*Price\s*:\s*\$\s*([0-9,]+)/i)?.[1]);
+    const price = integer(plain.match(/FOB\s*Price\s*:\s*\$\s*([0-9,]+)/i)?.[1] || plain.match(/\$\s*([0-9,]+)/)?.[1]);
     const mileageKm = integer(plain.match(/(?:19|20)\d{2}(?:\.\d{1,2})?\s+([0-9,]+)\s*km\b/i)?.[1] || plain.match(/([0-9,]+)\s*km\b/i)?.[1]);
     const liters = Number(parsed.title.match(/\b([0-9](?:\.[0-9])?)L\b/i)?.[1] || 0);
     const powerHp = integer(parsed.title.match(/\b([0-9]{2,4})\s*(?:PS|HP)\b/i)?.[1]);
-    const coverImages = collectImages(anchor.inner, pageUrl).slice(0, 2);
-    if (!parsed.make || !parsed.model || !year || !price || !mileageKm || !coverImages.length) continue;
-    const id = url.match(/\/products\/[^/]*-([a-z0-9]{6,})\.html/i)?.[1] || stableOfferId("guazi", url);
+    const cover = listingCover(card, pageUrl);
+    if (!parsed.make || !parsed.model || !year || !price || mileageKm === undefined || !cover) continue;
+    const id = current.url.match(/\/products\/[^/]*-([a-z0-9]{6,})\.html/i)?.[1] || stableOfferId("guazi", current.url);
     rows.push({
-      id, url, title: parsed.title, make: parsed.make, model: parsed.model, year, price, mileageKm,
+      id,
+      url: current.url,
+      title: parsed.title,
+      make: parsed.make,
+      model: parsed.model,
+      year,
+      price,
+      mileageKm,
       engineCc: liters ? Math.round(liters * 1_000) : undefined,
       powerHp,
       fuel: fuel(`${parsed.title} ${plain}`),
-      transmission: /\b(?:AT|Automatic|DCT|CVT)\b/i.test(parsed.title) ? "automatic" : /\b(?:MT|Manual)\b/i.test(parsed.title) ? "manual" : "",
-      drive: /All[- ]Wheel|Four[- ]Wheel|4WD|AWD|4MATIC|xDrive/i.test(parsed.title) ? "awd" : /Rear[- ]Wheel|RWD/i.test(parsed.title) ? "rwd" : /Front[- ]Wheel|FWD/i.test(parsed.title) ? "fwd" : "",
+      transmission: /\b(?:AT|Automatic|DCT|CVT|DSG)\b/i.test(parsed.title) ? "automatic" : /\b(?:MT|Manual)\b/i.test(parsed.title) ? "manual" : "",
+      drive: /All[- ]Wheel|Four[- ]Wheel|4WD|AWD|4MATIC|xDrive|4x4/i.test(parsed.title) ? "awd" : /Rear[- ]Wheel|RWD/i.test(parsed.title) ? "rwd" : /Front[- ]Wheel|FWD|Two[- ]Wheel/i.test(parsed.title) ? "fwd" : "",
       bodyType: bodyType(`${parsed.title} ${plain}`),
-      images: coverImages,
+      images: [cover],
     });
   }
   return rows;
@@ -207,9 +235,7 @@ async function fetchHtml(url: string, referer = `${BASE_URL}/used-cars/`) {
   try {
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     return { response, markup: await response.text() };
-  } finally {
-    clearTimeout(timeout);
-  }
+  } finally { clearTimeout(timeout); }
 }
 
 export class GuaziExportAdapter implements CatalogSourceAdapter {
@@ -218,28 +244,31 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
   accessMode = "public_html" as const;
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
-    const position = Math.max(1, Number(cursor || 1));
-    const brandIndex = (position - 1) % BRAND_SLUGS.length;
-    const page = Math.floor((position - 1) / BRAND_SLUGS.length) + 1;
-    const slug = BRAND_SLUGS[brandIndex];
-    const pageUrl = `${BASE_URL}/used-cars/${slug}/${page > 1 ? `page${page}/` : ""}`;
-    const result = await fetchHtml(pageUrl);
-    if (!result.response.ok) throw new Error(`guazi_export_http_${result.response.status}_${slug}_${page}`);
-    const rows = parseGuaziExportPage(result.markup, pageUrl);
-    if (!rows.length) throw new Error(`guazi_export_zero_${slug}_${page}_${result.markup.length}`);
-    return {
-      items: rows,
-      nextCursor: String(position + 1),
-      finished: false,
-      count: rows.length,
-      health: {
-        ok: true,
-        message: `Guazi export ${slug} page ${page}: parsed ${rows.length}`,
-        checkedAt: new Date().toISOString(),
-        httpStatus: result.response.status,
-        contentType: result.response.headers.get("content-type") || "",
-      },
-    };
+    let position = Math.max(1, Number(cursor || 1));
+    for (let attempts = 0; attempts < BRAND_SLUGS.length; attempts++, position++) {
+      const brandIndex = (position - 1) % BRAND_SLUGS.length;
+      const page = Math.floor((position - 1) / BRAND_SLUGS.length) + 1;
+      const slug = BRAND_SLUGS[brandIndex];
+      const pageUrl = `${BASE_URL}/used-cars/${slug}/${page > 1 ? `page${page}/` : ""}`;
+      const result = await fetchHtml(pageUrl);
+      if (!result.response.ok) continue;
+      const rows = parseGuaziExportPage(result.markup, pageUrl);
+      if (!rows.length) continue;
+      return {
+        items: rows,
+        nextCursor: String(position + 1),
+        finished: false,
+        count: rows.length,
+        health: {
+          ok: true,
+          message: `Guazi export ${slug} page ${page}: parsed ${rows.length}`,
+          checkedAt: new Date().toISOString(),
+          httpStatus: result.response.status,
+          contentType: result.response.headers.get("content-type") || "",
+        },
+      };
+    }
+    throw new Error(`guazi_export_exhausted_from_${position}`);
   }
 
   mapStatus(): OfferStatus { return "active"; }
@@ -249,52 +278,34 @@ export class GuaziExportAdapter implements CatalogSourceAdapter {
     if (!row.id || !row.make || !row.model || !row.year || !row.price || !row.images.length) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
-      id: stableOfferId(this.sourceId, row.id),
-      sourceId: this.sourceId,
-      sourceOfferId: row.id,
-      market: "china",
-      offerType: "fixed",
-      status: "active",
-      make: row.make,
-      model: row.model,
-      trim: row.title,
-      year: row.year,
-      mileageKm: row.mileageKm,
-      engineCc: row.engineCc,
-      powerHp: row.powerHp,
-      fuel: row.fuel,
-      transmission: row.transmission,
-      drive: row.drive,
-      bodyType: row.bodyType,
-      sourcePrice: row.price,
-      sourceCurrency: "USD",
-      priceMode: "fixed",
-      images: [],
-      totalRub: null,
-      calculationStatus: "ready",
-      firstSeenAt: now,
-      updatedAt: now,
-      operational: { sourceUrl: row.url, sourceVenueName: "Guazi China Export", raw: row },
+      id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "china", offerType: "fixed", status: "active",
+      make: row.make, model: row.model, trim: row.title, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp,
+      fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType,
+      sourcePrice: row.price, sourceCurrency: "USD", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "ready",
+      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.url, sourceVenueName: "Guazi China Export", raw: row },
     } as VehicleOffer);
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const row = offer.operational.raw as GuaziRow;
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
-    const limit = Math.min(1000, Math.max(4, Number.isFinite(requested) ? requested : 1000));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+    const limit = Math.min(30, Math.max(4, Number.isFinite(requested) ? requested : 30));
     const detail = row.url ? await fetchHtml(row.url, row.url).catch(() => null) : null;
     const urls = detail?.response.ok ? detailGallery(detail.markup, row.url, row.images[0] || "", limit) : row.images.slice(0, limit);
     row.images = [...new Set(urls)];
     (offer.operational as any).raw = row;
-    const cached = await Promise.all(row.images.map((url) =>
-      cacheImageFromUrl(url, "china", { headers: { ...HEADERS, referer: row.url } }).catch(() => null),
-    ));
-    return cached.filter((image): image is CatalogImage => Boolean(image && image.size > 8_000)).slice(0, limit);
+    const cached: CatalogImage[] = [];
+    for (let index = 0; index < row.images.length; index += 4) {
+      const batch = await Promise.all(row.images.slice(index, index + 4).map((url) =>
+        cacheImageFromUrl(url, "china", { headers: { ...HEADERS, accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8", referer: row.url } }).catch(() => null),
+      ));
+      for (const image of batch) if (image && image.size > 8_000) cached.push(image);
+      if (index + 4 < row.images.length) await new Promise((resolve) => setTimeout(resolve, 120));
+    }
+    return cached.slice(0, limit);
   }
 
-  async healthCheck() {
-    return { ok: true, message: "Guazi exact detail galleries", checkedAt: new Date().toISOString() };
-  }
+  async healthCheck() { return { ok: true, message: "Guazi exact detail galleries", checkedAt: new Date().toISOString() }; }
 }
 
 export const guaziChinaExportSource = new GuaziExportAdapter();
