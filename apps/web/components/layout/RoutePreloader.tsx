@@ -8,6 +8,75 @@ const START_EVENT = "avtocena:navigation-start";
 const MIN_VISIBLE_MS = 260;
 const MAX_VISIBLE_MS = 8000;
 
+const publicLayoutFixes = `
+button[aria-label^="Почему есть фильтр"] {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.ac-results-edit summary {
+  list-style: none !important;
+}
+.ac-results-edit summary::-webkit-details-marker {
+  display: none !important;
+}
+.ac-results-catalog-link,
+.ac-results-market-link {
+  background: var(--ac-surface) !important;
+  color: var(--ac-text) !important;
+  -webkit-text-fill-color: var(--ac-text) !important;
+}
+html[data-theme="light"] .ac-results-catalog-link,
+html[data-theme="light"] .ac-results-market-link,
+html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current) {
+  background: #ffffff !important;
+  color: #171b24 !important;
+  -webkit-text-fill-color: #171b24 !important;
+}
+@media (max-width: 1023px) {
+  .ac-home-page #form > div.relative.mt-4 {
+    position: relative !important;
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+  .ac-home-page #form > div.relative.mt-4 > .avto-button {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-right: 1rem !important;
+    text-align: center !important;
+  }
+  .ac-home-page #form > div.relative.mt-4 > button[aria-label="Открыть дополнительные фильтры"] {
+    position: static !important;
+    inset: auto !important;
+    display: flex !important;
+    flex: 0 0 58px !important;
+    width: 58px !important;
+    height: 58px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 1rem !important;
+    background: var(--ac-surface-2) !important;
+    color: var(--ac-text) !important;
+  }
+  .ac-home-filter-drawer > div.grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .ac-home-filter-drawer > .avto-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+`;
+
 export function startRoutePreloader() {
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event(START_EVENT));
@@ -156,8 +225,11 @@ function RoutePreloaderInner() {
 
 export function RoutePreloader() {
   return (
-    <Suspense fallback={null}>
-      <RoutePreloaderInner />
-    </Suspense>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: publicLayoutFixes }} />
+      <Suspense fallback={null}>
+        <RoutePreloaderInner />
+      </Suspense>
+    </>
   );
 }
