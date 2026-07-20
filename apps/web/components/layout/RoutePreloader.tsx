@@ -63,16 +63,64 @@ html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current) {
     background: var(--ac-surface-2) !important;
     color: var(--ac-text) !important;
   }
-  .ac-home-filter-drawer > div.grid {
+
+  .ac-home-filter-drawer {
+    padding-top: 30px !important;
+  }
+  .ac-home-filter-drawer > div:first-child {
+    margin-bottom: 24px !important;
+  }
+  .ac-home-filter-drawer > div.grid,
+  .ac-home-filter-drawer form > div.grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 14px !important;
+    row-gap: 14px !important;
   }
+  .ac-home-filter-drawer .ac-filter-control,
+  .ac-home-filter-drawer .ac-power-limit {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: var(--ac-surface-2) !important;
+  }
+  html:not([data-theme="light"]) .ac-home-filter-drawer,
+  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-filter-dropdown {
+    background: var(--ac-surface) !important;
+    color: var(--ac-text) !important;
+  }
+  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-filter-control,
+  html:not([data-theme="light"]) .ac-home-filter-drawer .ac-power-limit {
+    background: var(--ac-surface-2) !important;
+    color: var(--ac-text) !important;
+  }
+  .ac-home-filter-drawer button[aria-label^="Почему есть фильтр"] {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+  .ac-home-filter-drawer button[aria-label="Открыть дополнительные фильтры"] {
+    display: none !important;
+  }
+  .ac-home-filter-drawer div:has(> button[aria-label="Открыть дополнительные фильтры"]) {
+    display: block !important;
+    width: 100% !important;
+    border: 0 !important;
+    outline: 0 !important;
+  }
+  .ac-home-filter-drawer div:has(> button[aria-label="Открыть дополнительные фильтры"]) > .avto-button,
   .ac-home-filter-drawer > .avto-button {
     display: flex !important;
+    width: 100% !important;
+    min-width: 100% !important;
     align-items: center !important;
     justify-content: center !important;
+    margin-top: 20px !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
     text-align: center !important;
+    border: 0 !important;
+    outline: 0 !important;
   }
 }
 `;
