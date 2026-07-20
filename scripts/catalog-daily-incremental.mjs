@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
-const { offerPath } = await import("../apps/web/lib/catalog/storage.ts");
+const { offerPath, persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
 const HISTORY_PATH = "catalog/history/daily-generations.json";
 const RETENTION_MS = Math.max(86_400_000, Number(process.env.CATALOG_GENERATION_RETENTION_MS || 3 * 86_400_000));
@@ -58,6 +58,159 @@ function mergeHistory(rows, entries) {
     }
   }
   return [...byGeneration.values()].sort((left, right) => Date.parse(String(left.updatedAt || "")) - Date.parse(String(right.updatedAt || "")));
+}
+
+function decodeMarkup(value) {
+  return String(value || "")
+    .replace(/\\u002f/gi, "/")
+    .replace(/\\u003a/gi, ":")
+    .replace(/\\u0026/gi, "&")
+    .replace(/\\u003d/gi, "=")
+    .replace(/\\u0022/gi, '"')
+    .replace(/\\\//g, "/")
+    .replace(/&nbsp;|&#160;|&#x0*a0;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">");
+}
+
+function mileageNumber(value) {
+  const text = String(value ?? "").trim();
+  if (!/[0-9]/.test(text)) return undefined;
+  const number = Number(text.replace(/[^0-9]/g, ""));
+  return Number.isFinite(number) && number > 0 && number <= 5_000_000 ? number : undefined;
+}
+
+function parseEuropeMileage(markup) {
+  const decoded = decodeMarkup(markup);
+  const plain = decoded
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[\s\u00a0\u202f]+/g, " ")
+    .trim();
+
+  const structured = [
+    decoded.match(/["']mileageFromOdometer["']\s*:\s*\{[\s\S]{0,500}?["'](?:value|amount)["']\s*:\s*["']?([0-9][0-9 .\u00a0\u202f]{0,14})/i)?.[1],
+    decoded.match(/["'](?:mileageKm|mileage|odometer|kilometers|kilometres|przebieg)["']\s*:\s*["']?([0-9][0-9 .\u00a0\u202f]{0,14})/i)?.[1],
+    decoded.match(/["'](?:key|code|name|label)["']\s*:\s*["'](?:mileageKm|mileage|mileageFromOdometer|odometer|kilometers|kilometres|przebieg|quilometragem)["'][\s\S]{0,360}?["'](?:value|amount|text)["']\s*:\s*["']?([0-9][0-9 .\u00a0\u202f]{0,14})/i)?.[1],
+  ];
+  for (const candidate of structured) {
+    const mileage = mileageNumber(candidate);
+    if (mileage !== undefined) return mileage;
+  }
+
+  const labels = [
+    "Przebieg",
+    "Mileage",
+    "Quilómetros",
+    "Quilometros",
+    "Quilometragem",
+    "Kilometerstand",
+    "Laufleistung",
+    "Kilométrage",
+    "Chilometraggio",
+    "Kilometers",
+    "Kilometres",
+  ].join("|");
+  const labeled = plain.match(new RegExp(`(?:${labels})\\s*[:：]?\\s*([0-9][0-9 .\\u00a0\\u202f]{0,14})\\s*(?:km|км)\\b`, "i"))?.[1];
+  const labeledMileage = mileageNumber(labeled);
+  if (labeledMileage !== undefined) return labeledMileage;
+
+  const values = [];
+  for (const match of plain.matchAll(/\b([0-9][0-9 .\u00a0\u202f]{0,14})\s*(?:km|км)\b/gi)) {
+    const context = plain.slice(Math.max(0, (match.index || 0) - 22), match.index || 0);
+    if (/(?:l|kwh|g|mi)\s*\/\s*100\s*$/i.test(context) || /(?:km\/h|км\/ч)\s*$/i.test(context)) continue;
+    const mileage = mileageNumber(match[1]);
+    if (mileage !== undefined) values.push(mileage);
+  }
+  return values.length ? Math.max(...values) : undefined;
+}
+
+async function fetchMarkup(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 60_000));
+  try {
+    const response = await fetch(url, {
+      headers: {
+        accept: "text/html,application/xhtml+xml,*/*;q=0.8",
+        "accept-language": "pl-PL,pt-PT,de-DE,en;q=0.8",
+        "cache-control": "no-cache",
+        pragma: "no-cache",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
+      },
+      redirect: "follow",
+      signal: controller.signal,
+    });
+    if (!response.ok) return { ok: false, status: response.status, markup: "" };
+    return { ok: true, status: response.status, markup: await response.text() };
+  } catch (error) {
+    return { ok: false, status: 0, markup: "", error: String(error?.message || error) };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function repairEuropeMileage() {
+  const offers = await readAllOffersForMaintenance();
+  const targets = offers.filter((offer) => offer?.market === "europe"
+    && offer?.status === "active"
+    && Number(offer?.mileageKm || 0) <= 0
+    && String(offer?.operational?.sourceUrl || "").startsWith("http"));
+  const concurrency = Math.max(1, Math.min(10, Number(process.env.CATALOG_EUROPE_MILEAGE_CONCURRENCY || 5)));
+  let cursor = 0;
+  let updated = 0;
+  let failed = 0;
+  const unresolved = [];
+  const repairedAt = new Date().toISOString();
+
+  await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, targets.length)) }, async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= targets.length) return;
+      const offer = targets[index];
+      const sourceUrl = String(offer.operational.sourceUrl || "");
+      const result = await fetchMarkup(sourceUrl);
+      const mileage = result.ok ? parseEuropeMileage(result.markup) : undefined;
+      if (mileage !== undefined) {
+        offer.mileageKm = mileage;
+        offer.updatedAt = repairedAt;
+        offer.operational = {
+          ...offer.operational,
+          mileageRepairedAt: repairedAt,
+          raw: typeof offer.operational?.raw === "object" && offer.operational.raw
+            ? { ...offer.operational.raw, mileageKm: mileage }
+            : offer.operational?.raw,
+        };
+        updated++;
+      } else {
+        failed++;
+        if (unresolved.length < 20) unresolved.push({ id: offer.id, sourceUrl, status: result.status, error: result.error });
+      }
+      if ((index + 1) % 10 === 0 || index + 1 === targets.length) {
+        console.log(`[europe-mileage] ${Math.min(index + 1, targets.length)}/${targets.length}; updated=${updated}; unresolved=${failed}`);
+      }
+      await new Promise((resolve) => setTimeout(resolve, 120));
+    }
+  }));
+
+  if (updated > 0) {
+    const previousGrowOnly = process.env.CATALOG_GROW_ONLY_MARKETS;
+    process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    try { await persistCatalogOffers(offers); }
+    finally {
+      if (previousGrowOnly === undefined) delete process.env.CATALOG_GROW_ONLY_MARKETS;
+      else process.env.CATALOG_GROW_ONLY_MARKETS = previousGrowOnly;
+    }
+  }
+
+  const remaining = offers.filter((offer) => offer?.market === "europe" && offer?.status === "active" && Number(offer?.mileageKm || 0) <= 0).length;
+  const report = { attempted: targets.length, updated, unresolved: failed, remaining, samples: unresolved };
+  console.log(JSON.stringify({ europeMileageRepair: report }, null, 2));
+  if (targets.length > 0 && updated === 0) throw new Error(`europe_mileage_repair_saved_zero_of_${targets.length}`);
+  return report;
 }
 
 async function deleteJson(storage, path) {
@@ -136,6 +289,7 @@ const importReport = await importCatalog({
   failOnZeroSaved: false,
   reportPath: "catalog/imports/daily-latest.json",
 });
+const europeMileageRepair = await repairEuropeMileage();
 
 const afterPublic = await readDataJson("catalog/manifest.json", null);
 const afterInternal = await readDataJson("catalog/internal/manifest.json", null);
@@ -166,6 +320,7 @@ const finalReport = {
   updated: importReport.updated,
   reusedImageSets: importReport.reusedImageSets,
   imageFailures: importReport.imageFailures,
+  europeMileageRepair,
   retentionDays: RETENTION_MS / 86_400_000,
   retainedGenerations: retained.map((entry) => entry.generationId),
   pruned,
