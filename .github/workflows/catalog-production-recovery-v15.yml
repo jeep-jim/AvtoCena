@@ -62,6 +62,7 @@ jobs:
           CATALOG_INDEX_WRITE_CONCURRENCY: "10"
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_DAILY_LOCAL_REPORT: catalog-daily-report.json
+          CATALOG_FORCE_REFRESH_SPECS: "mileageKm"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
