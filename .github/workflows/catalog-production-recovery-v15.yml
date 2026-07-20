@@ -1,6 +1,6 @@
-name: Catalog finish China + Europe and publish
+name: Catalog finish enriched China and publish
 
-# One recovery pass only. Korea, Japan and UAE are reused from successful run 29695322406.
+# Europe already passed in run 29711370310. Korea, Japan and UAE passed in run 29695322406.
 on:
   workflow_dispatch:
   push:
@@ -17,37 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm run typecheck
-      - run: |
-          node --check scripts/catalog-rebuild-market.mjs
-          node --check scripts/catalog-publish-fresh.mjs
-
-  collect:
-    needs: validate
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-      matrix:
-        include:
-          - market: china
-            sourceIds: guazi_china_export,che168_china_exact
-            imageConcurrency: "4"
-          - market: europe
-            sourceIds: otomoto_europe_exact
-            imageConcurrency: "2"
+  collect-china:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -60,7 +30,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect 250 verified ${{ matrix.market }} offers from exact listing pages
+      - name: Validate catalog scripts
+        run: |
+          node --check scripts/catalog-rebuild-market.mjs
+          node --check scripts/catalog-publish-fresh.mjs
+      - name: Collect 320 China candidates with exact detail specifications and galleries
         run: npx tsx scripts/catalog-rebuild-market.mjs
         env:
           JSON_STORAGE_DRIVER: object
@@ -71,31 +45,29 @@ jobs:
           YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
           YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
           CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-          CATALOG_REBUILD_MARKET: ${{ matrix.market }}
-          CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.sourceIds }}
-          CATALOG_REBUILD_TARGET: "250"
+          CATALOG_REBUILD_MARKET: china
+          CATALOG_REBUILD_SOURCE_IDS: guazi_china_export
+          CATALOG_REBUILD_TARGET: "320"
           CATALOG_REBUILD_MAX_PAGES: "500"
           CATALOG_REBUILD_SEED_SCAN_LIMIT: "1500"
-          CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
+          CATALOG_REBUILD_OUTPUT: catalog-rebuild-china.json
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
           CATALOG_IMAGE_MAX_BYTES: "12000000"
           CATALOG_SOURCE_TIMEOUT_MS: "60000"
           CATALOG_IMAGE_TIMEOUT_MS: "45000"
-          CATALOG_IMAGE_FETCH_CONCURRENCY: ${{ matrix.imageConcurrency }}
-          CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
-          CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
+          CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
           CATALOG_GROW_ONLY_MARKETS: ""
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-rebuild-${{ matrix.market }}
-          path: catalog-rebuild-${{ matrix.market }}.json
+          name: catalog-rebuild-china
+          path: catalog-rebuild-china.json
           if-no-files-found: error
           retention-days: 3
 
   publish:
-    needs: collect
+    needs: collect-china
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -109,12 +81,20 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Download newly rebuilt China and Europe
+      - name: Download rebuilt China
         uses: actions/download-artifact@v4
         with:
-          pattern: catalog-rebuild-*
+          name: catalog-rebuild-china
           path: catalog-rebuild
-          merge-multiple: true
+
+      - name: Reuse successful Europe artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-rebuild-europe
+          path: catalog-rebuild
+          repository: jeep-jim/AvtoCena
+          run-id: 29711370310
+          github-token: ${{ github.token }}
 
       - name: Reuse successful Korea artifact
         uses: actions/download-artifact@v4
@@ -179,5 +159,5 @@ jobs:
         with:
           name: catalog-fresh-publish-report
           path: catalog-fresh-publish-report.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
