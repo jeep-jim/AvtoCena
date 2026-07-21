@@ -2,6 +2,19 @@
   position: relative;
   z-index: 1;
   isolation: isolate;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html[data-theme="light"] .ac-catalog-card,
+.ac-catalog-card > a,
+.ac-catalog-card > a > div:first-child {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 /* The active price card and its link must sit above both its own favorite button
