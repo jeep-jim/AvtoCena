@@ -133,23 +133,37 @@ async function fetchCbrSnapshot(requestedDate: string) {
   }
 }
 
-async function loadFiveCalendarCbrDays(endDate: string) {
+function snapshotChanged(previous: CbrSnapshot | undefined, current: CbrSnapshot) {
+  if (!previous) return true;
+  return RATE_CODES.some((currency) => {
+    const before = previous.rates.get(currency);
+    const after = current.rates.get(currency);
+    return before && after ? Math.abs(after - before) > 1e-12 : Boolean(before || after);
+  });
+}
+
+async function loadFivePublishedCbrDays(endDate: string) {
   const now = Date.now();
   if (cbrHistoryCache?.key === endDate && cbrHistoryCache.expiresAt > now) return cbrHistoryCache.history;
   if (cbrHistoryPromise) return cbrHistoryPromise;
 
   cbrHistoryPromise = (async () => {
-    const requestedDates = Array.from({ length: 5 }, (_, index) => shiftDate(endDate, index - 4));
+    const requestedDates = Array.from({ length: 14 }, (_, index) => shiftDate(endDate, index - 13));
     const snapshots = await Promise.all(requestedDates.map((date) => fetchCbrSnapshot(date).catch(() => null)));
-    const available = snapshots.filter((snapshot): snapshot is CbrSnapshot => Boolean(snapshot?.rates.size));
+    const byPublishedDate = new Map<string, CbrSnapshot>();
+    for (const snapshot of snapshots) {
+      if (snapshot?.rates.size && validIsoDate(snapshot.publishedDate)) byPublishedDate.set(snapshot.publishedDate, snapshot);
+    }
+
+    const published = [...byPublishedDate.values()].sort((left, right) => left.publishedDate.localeCompare(right.publishedDate));
+    const changed = published.filter((snapshot, index) => snapshotChanged(published[index - 1], snapshot));
+    const selected = (changed.length >= 5 ? changed : published).slice(-5);
     const history = new Map<string, RatePoint[]>();
 
     for (const currency of RATE_CODES) {
-      const points = requestedDates.flatMap((date) => {
-        const exact = available.find((snapshot) => snapshot.requestedDate === date);
-        const fallback = [...available].reverse().find((snapshot) => snapshot.requestedDate <= date);
-        const effectiveRate = exact?.rates.get(currency) || fallback?.rates.get(currency);
-        return effectiveRate ? [{ date, effectiveRate }] : [];
+      const points = selected.flatMap((snapshot) => {
+        const effectiveRate = snapshot.rates.get(currency);
+        return effectiveRate ? [{ date: snapshot.publishedDate, effectiveRate }] : [];
       });
       if (points.length) history.set(currency, points);
     }
@@ -163,15 +177,15 @@ async function loadFiveCalendarCbrDays(endDate: string) {
 
 async function enrichRateHistory(rates: PublicRate[]): Promise<PublicRate[]> {
   const endDate = todayInMoscow();
-  const historyByCurrency = await loadFiveCalendarCbrDays(endDate).catch(() => new Map<string, RatePoint[]>());
+  const historyByCurrency = await loadFivePublishedCbrDays(endDate).catch(() => new Map<string, RatePoint[]>());
 
   return rates.map((rate) => {
     const currency = String(rate.currency || "").toUpperCase();
-    const calendarHistory = historyByCurrency.get(currency) || [];
-    if (!calendarHistory.length) return rate;
+    const publishedHistory = historyByCurrency.get(currency) || [];
+    if (!publishedHistory.length) return rate;
 
-    const latest = calendarHistory.at(-1);
-    const previous = calendarHistory.at(-2);
+    const latest = publishedHistory.at(-1);
+    const previous = publishedHistory.at(-2);
     const effectiveRate = latest?.effectiveRate || rate.effectiveRate;
     const previousEffectiveRate = previous?.effectiveRate || rate.previousEffectiveRate;
     const rateDelta = effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : rate.rateDelta;
@@ -183,7 +197,7 @@ async function enrichRateHistory(rates: PublicRate[]): Promise<PublicRate[]> {
       rateDelta,
       rateDate: latest?.date || rate.rateDate,
       previousRateDate: previous?.date || rate.previousRateDate,
-      history: calendarHistory.slice(-5),
+      history: publishedHistory.slice(-5),
     };
   });
 }
