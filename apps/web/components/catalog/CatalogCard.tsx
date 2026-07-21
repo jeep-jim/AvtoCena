@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
+import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
@@ -14,7 +15,9 @@ function EngineIcon({ dense = false, fuel = false }: { dense?: boolean; fuel?: b
 }
 
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
-  const o = presentCatalogOffer(normalizeVehicleOfferSpecs(offer));
+  const normalizedOffer = normalizeVehicleOfferSpecs(offer);
+  const rankedImages = rankedCatalogImageUrls(normalizedOffer);
+  const o = { ...presentCatalogOffer(normalizedOffer), images: rankedImages };
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const snapshot = {
