@@ -11,17 +11,21 @@
   transform: none !important;
   overflow: visible !important;
 }
+
 .ac-catalog-card:has(.ac-price-trend-popover) > a {
   position: relative !important;
   z-index: 12010 !important;
   overflow: visible !important;
 }
+
 .ac-catalog-card:has(.ac-price-trend-popover) > button {
   z-index: 1 !important;
 }
+
 .ac-price-trend-arrow {
   z-index: 12015 !important;
 }
+
 .ac-price-trend-popover {
   z-index: 12020 !important;
 }
@@ -34,34 +38,31 @@
   }
 }
 
-/* Opening the homepage filters reveals the existing complete calculator instead
-   of maintaining a second shortened set of controls. */
-@media (max-width: 1023px) {
-  .ac-home-page:has(.ac-home-filter-drawer) #form {
-    position: fixed !important;
-    inset: 76px 0 0 auto !important;
-    z-index: 10042 !important;
-    width: min(92vw, 390px) !important;
-    margin: 0 !important;
-    overflow-y: auto !important;
-    border-radius: 0 !important;
-    background: var(--ac-surface) !important;
-    padding: 0 1.25rem calc(1.25rem + env(safe-area-inset-bottom)) !important;
-  }
-  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(4) {
-    display: grid !important;
-  }
-  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(5) {
-    display: block !important;
-    overflow: visible !important;
-    border-radius: 0 !important;
-  }
-  .ac-home-page:has(.ac-home-filter-drawer) #form > div:nth-child(5) > button:first-child {
-    border-radius: 1rem !important;
-  }
-  .ac-home-page:has(.ac-home-filter-drawer) #form button[aria-label="Открыть дополнительные фильтры"],
-  .ac-home-page:has(.ac-home-filter-drawer) .ac-home-filter-drawer > .grid,
-  .ac-home-page:has(.ac-home-filter-drawer) .ac-home-filter-drawer > .avto-button {
-    display: none !important;
-  }
+/* Catalog range fields: uniform 1px outer border and 1px central divider. */
+.ac-catalog-filter-drawer .ac-filter-range,
+.ac-catalog-filter-panel .ac-filter-range {
+  box-sizing: border-box !important;
+  border: 1px solid rgba(255, 255, 255, 0.085) !important;
+}
+
+.ac-catalog-filter-drawer .ac-filter-range > input,
+.ac-catalog-filter-panel .ac-filter-range > input {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.ac-catalog-filter-drawer .ac-filter-range > input + input,
+.ac-catalog-filter-panel .ac-filter-range > input + input {
+  border-left: 1px solid rgba(255, 255, 255, 0.085) !important;
+}
+
+html[data-theme="light"] .ac-catalog-filter-drawer .ac-filter-range,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-range {
+  border-color: rgba(35, 42, 55, 0.12) !important;
+}
+
+html[data-theme="light"] .ac-catalog-filter-drawer .ac-filter-range > input + input,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-range > input + input {
+  border-left-color: rgba(35, 42, 55, 0.12) !important;
 }
