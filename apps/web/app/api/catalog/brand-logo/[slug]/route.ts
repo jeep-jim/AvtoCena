@@ -13,7 +13,9 @@ type ManifestCache = { expiresAt: number; logos: Map<string, LogoSet> };
 let manifestCache: ManifestCache | null = null;
 
 function normalizedKey(value: string) {
-  return decodeURIComponent(String(value || ""))
+  let decoded = String(value || "");
+  try { decoded = decodeURIComponent(decoded); } catch {}
+  return decoded
     .toLowerCase()
     .replace(/\.(?:png|svg|webp)(?:\?.*)?$/i, "")
     .replace(/\.[a-f0-9]{6,}$/i, "")
@@ -105,17 +107,21 @@ function logoFor(logos: Map<string, LogoSet>, candidates: string[], theme: "ligh
 }
 
 async function loadBrandPageLogo(dromSlug: string, name: string, theme: "light" | "dark") {
-  try {
-    const logos = collectLogos(await fetchPage(`${DROM_ORIGIN}/${encodeURIComponent(dromSlug)}/`));
-    return logoFor(logos, [dromSlug, name], theme);
-  } catch {
-    return "";
-  }
+  const logos = new Map<string, LogoSet>();
+  const pages = [
+    `${DROM_ORIGIN}/${encodeURIComponent(dromSlug)}/`,
+    `https://www.drom.ru/catalog/${encodeURIComponent(dromSlug)}/`,
+  ];
+
+  await Promise.all(pages.map(async (page) => {
+    try { collectLogos(await fetchPage(page), logos); } catch {}
+  }));
+
+  return logoFor(logos, [dromSlug, name], theme);
 }
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const brand = catalogBrandBySlug(slug);
+export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+  const brand = catalogBrandBySlug(params.slug);
   if (!brand) return new NextResponse(null, { status: 404 });
 
   const theme = request.nextUrl.searchParams.get("theme") === "dark" ? "dark" : "light";
