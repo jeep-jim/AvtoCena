@@ -73,10 +73,6 @@ function parseCbrXml(xml: string, fetchedAt: string): StoredRate[] {
   return result;
 }
 
-function isoDate(date: Date) {
-  return date.toISOString().slice(0, 10);
-}
-
 function cbrRequestDate(date: Date) {
   const day = String(date.getUTCDate()).padStart(2, "0");
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
@@ -85,29 +81,33 @@ function cbrRequestDate(date: Date) {
 
 async function fetchCbrSnapshots(currentRows: StoredRate[], fetchedAt: string, points = 5): Promise<DatedSnapshot[]> {
   const end = new Date(`${fetchedAt.slice(0, 10)}T12:00:00Z`);
-  const snapshots: DatedSnapshot[] = [];
-  let fallbackRows = currentRows;
+  const byPublishedDate = new Map<string, StoredRate[]>();
 
-  for (let offset = points - 1; offset >= 0; offset--) {
+  const addRows = (rows: StoredRate[]) => {
+    const publishedDate = String(rows[0]?.rateDate || "").slice(0, 10);
+    if (publishedDate && rows.length && !byPublishedDate.has(publishedDate)) byPublishedDate.set(publishedDate, rows);
+  };
+
+  addRows(currentRows);
+
+  // CBR returns the same publication for weekends and holidays. Walk farther back
+  // and keep only actual publication dates instead of inventing flat calendar days.
+  for (let offset = 1; byPublishedDate.size < points && offset <= 24; offset++) {
     const requested = new Date(end);
     requested.setUTCDate(end.getUTCDate() - offset);
-    const date = isoDate(requested);
-    let rows = offset === 0 ? currentRows : [];
-    if (offset !== 0) {
-      try {
-        const url = new URL("https://www.cbr.ru/scripts/XML_daily.asp");
-        url.searchParams.set("date_req", cbrRequestDate(requested));
-        rows = parseCbrXml(await fetchText(url.toString()), fetchedAt);
-      } catch {
-        rows = [];
-      }
+    try {
+      const url = new URL("https://www.cbr.ru/scripts/XML_daily.asp");
+      url.searchParams.set("date_req", cbrRequestDate(requested));
+      addRows(parseCbrXml(await fetchText(url.toString()), fetchedAt));
+    } catch {
+      // A missing historical response must not create a fake zero/flat point.
     }
-    if (!rows.length) rows = fallbackRows;
-    if (rows.length) fallbackRows = rows;
-    snapshots.push({ date, rows });
   }
 
-  return snapshots;
+  return [...byPublishedDate]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .slice(-points)
+    .map(([date, rows]) => ({ date, rows }));
 }
 
 function attachPrevious(current: StoredRate, previous: StoredRate | undefined) {
@@ -182,7 +182,14 @@ function previousRate(previous: any, code: RateCode) {
 
 function mergeHistory(rate: StoredRate, fetched: RateHistoryPoint[], stored: RateHistoryPoint[]) {
   const merged = new Map<string, number>();
-  for (const point of [...stored, ...fetched]) {
+  const firstFetchedDate = fetched.map((point) => point.date).filter(Boolean).sort()[0] || "";
+
+  // Keep old history only before the newly fetched publication window. This removes
+  // synthetic weekend points written by older builds without losing older real dates.
+  for (const point of stored) {
+    if (point.date && point.effectiveRate > 0 && (!firstFetchedDate || point.date < firstFetchedDate)) merged.set(point.date, point.effectiveRate);
+  }
+  for (const point of fetched) {
     if (point.date && point.effectiveRate > 0) merged.set(point.date, point.effectiveRate);
   }
   if (rate.rateDate && rate.effectiveRate > 0) merged.set(rate.rateDate, rate.effectiveRate);
