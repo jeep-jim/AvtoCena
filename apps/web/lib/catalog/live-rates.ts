@@ -1,9 +1,10 @@
 import { readDataJson, writeDataJson } from "../data";
 
-const RATE_CODES = ["USD", "EUR", "CNY", "JPY", "KRW", "AED", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"] as const;
+const RATE_CODES = ["USD", "EUR", "CNY", "JPY", "KRW", "AED", "GEL", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"] as const;
 type RateCode = (typeof RATE_CODES)[number];
 type RateSource = "moex" | "cbr" | "legacy_json";
 type RateHistoryPoint = { date: string; effectiveRate: number };
+type DatedSnapshot = { date: string; rows: StoredRate[] };
 
 type StoredRate = {
   currency: RateCode;
@@ -72,35 +73,41 @@ function parseCbrXml(xml: string, fetchedAt: string): StoredRate[] {
   return result;
 }
 
+function isoDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
 function cbrRequestDate(date: Date) {
   const day = String(date.getUTCDate()).padStart(2, "0");
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   return `${day}/${month}/${date.getUTCFullYear()}`;
 }
 
-async function fetchCbrSnapshots(currentRows: StoredRate[], fetchedAt: string, points = 5) {
-  const snapshots = new Map<string, StoredRate[]>();
-  const add = (rows: StoredRate[]) => {
-    const date = rows[0]?.rateDate;
-    if (date && !snapshots.has(date)) snapshots.set(date, rows);
-  };
-  add(currentRows);
+async function fetchCbrSnapshots(currentRows: StoredRate[], fetchedAt: string, points = 5): Promise<DatedSnapshot[]> {
+  const end = new Date(`${fetchedAt.slice(0, 10)}T12:00:00Z`);
+  const snapshots: DatedSnapshot[] = [];
+  let fallbackRows = currentRows;
 
-  const cursor = new Date(`${currentRows[0]?.rateDate || fetchedAt.slice(0, 10)}T12:00:00Z`);
-  for (let daysBack = 1; snapshots.size < points && daysBack <= 12; daysBack++) {
-    cursor.setUTCDate(cursor.getUTCDate() - 1);
-    try {
-      const url = new URL("https://www.cbr.ru/scripts/XML_daily.asp");
-      url.searchParams.set("date_req", cbrRequestDate(cursor));
-      add(parseCbrXml(await fetchText(url.toString()), fetchedAt));
-    } catch {
-      // Skip unavailable calendar days and keep walking backwards.
+  for (let offset = points - 1; offset >= 0; offset--) {
+    const requested = new Date(end);
+    requested.setUTCDate(end.getUTCDate() - offset);
+    const date = isoDate(requested);
+    let rows = offset === 0 ? currentRows : [];
+    if (offset !== 0) {
+      try {
+        const url = new URL("https://www.cbr.ru/scripts/XML_daily.asp");
+        url.searchParams.set("date_req", cbrRequestDate(requested));
+        rows = parseCbrXml(await fetchText(url.toString()), fetchedAt);
+      } catch {
+        rows = [];
+      }
     }
+    if (!rows.length) rows = fallbackRows;
+    if (rows.length) fallbackRows = rows;
+    snapshots.push({ date, rows });
   }
 
-  return [...snapshots.values()]
-    .sort((left, right) => String(left[0]?.rateDate || "").localeCompare(String(right[0]?.rateDate || "")))
-    .slice(-points);
+  return snapshots;
 }
 
 function attachPrevious(current: StoredRate, previous: StoredRate | undefined) {
@@ -196,14 +203,14 @@ export async function refreshLiveExchangeRates() {
     const currentCbr = parseCbrXml(await fetchText("https://www.cbr.ru/scripts/XML_daily.asp"), fetchedAt);
     const snapshots = await fetchCbrSnapshots(currentCbr, fetchedAt, 5);
     for (const code of RATE_CODES) {
-      const history = snapshots.flatMap((rows) => {
-        const row = rows.find((item) => item.currency === code);
-        return row ? [{ date: row.rateDate, effectiveRate: row.effectiveRate }] : [];
+      const history = snapshots.flatMap((snapshot) => {
+        const row = snapshot.rows.find((item) => item.currency === code);
+        return row ? [{ date: snapshot.date, effectiveRate: row.effectiveRate }] : [];
       });
       if (history.length) historyByCode.set(code, history);
     }
-    const previousCbr = snapshots.length > 1 ? snapshots[snapshots.length - 2] : [];
-    const previousByCode = new Map(previousCbr.map((rate) => [rate.currency, rate]));
+    const previousSnapshot = snapshots.length > 1 ? snapshots[snapshots.length - 2] : undefined;
+    const previousByCode = new Map((previousSnapshot?.rows || []).map((rate) => [rate.currency, { ...rate, rateDate: previousSnapshot?.date || rate.rateDate }]));
     for (const rate of currentCbr) rates.set(rate.currency, attachPrevious(rate, previousByCode.get(rate.currency)));
   } catch (error) {
     errors.push(`cbr:${(error as Error).message}`);
