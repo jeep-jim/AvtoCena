@@ -16,7 +16,7 @@ type PublicRate = {
   previousRateDate?: string;
   history: RatePoint[];
 };
-type CbrSnapshot = { date: string; rates: Map<string, number> };
+type CbrSnapshot = { requestedDate: string; publishedDate: string; rates: Map<string, number> };
 
 let cbrHistoryCache: { key: string; expiresAt: number; history: Map<string, RatePoint[]> } | null = null;
 let cbrHistoryPromise: Promise<Map<string, RatePoint[]>> | null = null;
@@ -91,6 +91,17 @@ function shiftDate(value: string, days: number) {
   return date.toISOString().slice(0, 10);
 }
 
+function todayInMoscow() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Moscow",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
 function parseCbrSnapshot(xml: string, requestedDate: string): CbrSnapshot {
   const publishedDate = parseCbrDate(xml.match(/<ValCurs[^>]+Date="([^"]+)"/i)?.[1] || "") || requestedDate;
   const rates = new Map<string, number>();
@@ -101,7 +112,7 @@ function parseCbrSnapshot(xml: string, requestedDate: string): CbrSnapshot {
     const value = Number(String(block.match(/<Value>([\s\S]*?)<\/Value>/i)?.[1] || "0").replace(",", "."));
     if (Number.isFinite(value) && value > 0 && nominal > 0) rates.set(currency, value / nominal);
   }
-  return { date: publishedDate, rates };
+  return { requestedDate, publishedDate, rates };
 }
 
 async function fetchCbrSnapshot(requestedDate: string) {
@@ -122,47 +133,58 @@ async function fetchCbrSnapshot(requestedDate: string) {
   }
 }
 
-async function loadFivePublishedCbrDays(endDate: string) {
+async function loadFiveCalendarCbrDays(endDate: string) {
   const now = Date.now();
   if (cbrHistoryCache?.key === endDate && cbrHistoryCache.expiresAt > now) return cbrHistoryCache.history;
   if (cbrHistoryPromise) return cbrHistoryPromise;
+
   cbrHistoryPromise = (async () => {
-    const requestedDates = Array.from({ length: 12 }, (_, index) => shiftDate(endDate, index - 11));
-    const snapshots = (await Promise.all(requestedDates.map((date) => fetchCbrSnapshot(date).catch(() => null))))
-      .filter((snapshot): snapshot is CbrSnapshot => Boolean(snapshot?.rates.size));
-    const uniqueSnapshots = new Map<string, CbrSnapshot>();
-    for (const snapshot of snapshots) uniqueSnapshots.set(snapshot.date, snapshot);
-    const published = [...uniqueSnapshots.values()].sort((left, right) => left.date.localeCompare(right.date)).slice(-5);
+    const requestedDates = Array.from({ length: 5 }, (_, index) => shiftDate(endDate, index - 4));
+    const snapshots = await Promise.all(requestedDates.map((date) => fetchCbrSnapshot(date).catch(() => null)));
+    const available = snapshots.filter((snapshot): snapshot is CbrSnapshot => Boolean(snapshot?.rates.size));
     const history = new Map<string, RatePoint[]>();
+
     for (const currency of RATE_CODES) {
-      const points = published.flatMap((snapshot) => {
-        const effectiveRate = snapshot.rates.get(currency);
-        return effectiveRate ? [{ date: snapshot.date, effectiveRate }] : [];
+      const points = requestedDates.flatMap((date) => {
+        const exact = available.find((snapshot) => snapshot.requestedDate === date);
+        const fallback = [...available].reverse().find((snapshot) => snapshot.requestedDate <= date);
+        const effectiveRate = exact?.rates.get(currency) || fallback?.rates.get(currency);
+        return effectiveRate ? [{ date, effectiveRate }] : [];
       });
       if (points.length) history.set(currency, points);
     }
+
     cbrHistoryCache = { key: endDate, expiresAt: Date.now() + CBR_HISTORY_TTL_MS, history };
     return history;
   })().finally(() => { cbrHistoryPromise = null; });
+
   return cbrHistoryPromise;
 }
 
 async function enrichRateHistory(rates: PublicRate[]): Promise<PublicRate[]> {
-  const latestRateDate = rates.map((rate) => validIsoDate(rate.rateDate)).filter(Boolean).sort().at(-1) || new Date().toISOString().slice(0, 10);
-  const historyByCurrency = await loadFivePublishedCbrDays(latestRateDate).catch(() => new Map<string, RatePoint[]>());
+  const endDate = todayInMoscow();
+  const historyByCurrency = await loadFiveCalendarCbrDays(endDate).catch(() => new Map<string, RatePoint[]>());
+
   return rates.map((rate) => {
     const currency = String(rate.currency || "").toUpperCase();
-    const published = historyByCurrency.get(currency) || [];
-    if (!published.length) return rate;
-    const merged = new Map(published.map((point) => [point.date, point.effectiveRate]));
-    const currentDate = validIsoDate(rate.rateDate);
-    const currentRate = optionalPositive(rate.effectiveRate);
-    if (currentDate && currentRate) merged.set(currentDate, currentRate);
-    const history = [...merged]
-      .map(([date, effectiveRate]) => ({ date, effectiveRate }))
-      .sort((left, right) => left.date.localeCompare(right.date))
-      .slice(-5);
-    return { ...rate, history };
+    const calendarHistory = historyByCurrency.get(currency) || [];
+    if (!calendarHistory.length) return rate;
+
+    const latest = calendarHistory.at(-1);
+    const previous = calendarHistory.at(-2);
+    const effectiveRate = latest?.effectiveRate || rate.effectiveRate;
+    const previousEffectiveRate = previous?.effectiveRate || rate.previousEffectiveRate;
+    const rateDelta = effectiveRate && previousEffectiveRate ? effectiveRate - previousEffectiveRate : rate.rateDelta;
+
+    return {
+      ...rate,
+      effectiveRate,
+      previousEffectiveRate,
+      rateDelta,
+      rateDate: latest?.date || rate.rateDate,
+      previousRateDate: previous?.date || rate.previousRateDate,
+      history: calendarHistory.slice(-5),
+    };
   });
 }
 
