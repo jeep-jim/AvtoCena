@@ -66,15 +66,27 @@ export function CurrencyChartEnhancer() {
     const style = document.createElement("style");
     style.id = "ac-currency-chart-polish";
     style.textContent = `
+      .ac-home-page .ac-executor-block,
       .ac-currency-rates-strip{
-        background:rgba(255,255,255,.045)!important;
-        border:1px solid rgba(255,255,255,.07)!important;
-        box-shadow:0 16px 44px rgba(0,0,0,.14)!important;
+        background:var(--ac-surface)!important;
+        border:0!important;
+        outline:0!important;
+        box-shadow:0 12px 34px rgba(0,0,0,.12)!important;
       }
+      .ac-home-page .ac-executor-logo{
+        background:var(--ac-surface-2)!important;
+        border:0!important;
+        outline:0!important;
+      }
+      html[data-theme="light"] .ac-home-page .ac-executor-block,
       html[data-theme="light"] .ac-currency-rates-strip{
-        background:#fff!important;
-        border-color:rgba(30,36,48,.10)!important;
-        box-shadow:0 16px 42px rgba(45,50,64,.11)!important;
+        background:var(--ac-surface)!important;
+        border:0!important;
+        outline:0!important;
+        box-shadow:0 12px 34px rgba(38,43,57,.09)!important;
+      }
+      html[data-theme="light"] .ac-home-page .ac-executor-logo{
+        background:var(--ac-surface-2)!important;
       }
       @media(min-width:1024px){
         html body .ac-home-page>div.mx-auto{
