@@ -52,8 +52,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
   })));
   const uniqueOffers = new Map<string, any>();
   for (const entry of makeResults) {
-    for (const offer of entry.result.items || []) {
-      if (isCrediblePublicOffer(offer)) uniqueOffers.set(String(offer.id), offer);
+    for (const offer of (entry.result.items || []) as any[]) {
+      if (isCrediblePublicOffer(offer as any)) uniqueOffers.set(String(offer.id), offer);
     }
   }
   const offers = [...uniqueOffers.values()];
