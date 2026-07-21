@@ -93,13 +93,13 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
       type="button"
       onClick={() => setActiveIndex(index)}
       className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
-        mode === "side" ? "h-[82px]" : "h-20 md:h-24"
+        mode === "side" ? "h-[82px]" : "h-14 sm:h-16 md:h-24"
       } ${index === activeIndex ? "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent" : "opacity-55 hover:opacity-90"}`}
       aria-label={`Открыть фото ${index + 1}`}
       aria-pressed={index === activeIndex}
     >
       <img src={thumbnail} alt={`${title}, миниатюра ${index + 1}`} className="pointer-events-none h-full w-full object-cover" loading="lazy" decoding="async" fetchPriority="low" draggable={false} />
-      {index === activeIndex ? <span className="absolute inset-x-3 bottom-0 h-1 rounded-full bg-red-500" /> : null}
+      {index === activeIndex ? <span className="absolute inset-x-2 bottom-0 h-1 rounded-full bg-red-500" /> : null}
     </button>
   );
 
@@ -209,7 +209,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
         </div>
 
         {cleanImages.length > 1 ? (
-          <div className="ac-vehicle-thumbnails ac-hide-scrollbar mt-3 grid max-w-full grid-flow-col auto-cols-[7rem] gap-2.5 overflow-x-auto p-1 pb-2 pr-1 sm:auto-cols-[8rem] md:hidden">
+          <div className="ac-vehicle-thumbnails ac-hide-scrollbar -mr-4 mt-3 grid max-w-[calc(100%+1rem)] grid-flow-col auto-cols-[3.75rem] gap-2 overflow-x-auto p-1 pb-2 pr-4 sm:auto-cols-[4.5rem] md:hidden">
             {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
         ) : null}
