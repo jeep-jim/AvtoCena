@@ -4,9 +4,12 @@ import { notFound } from "next/navigation";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandBySlug } from "@/lib/catalog/brands";
+import { canonicalCatalogBrand, catalogBrandBySlug } from "@/lib/catalog/brands";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const MARKET_META: Record<string, { label: string; flag: string }> = {
   japan: { label: "Япония", flag: "🇯🇵" },
@@ -18,10 +21,6 @@ const MARKET_META: Record<string, { label: string; flag: string }> = {
 const MARKET_ORDER = ["japan", "china", "korea", "uae", "europe"];
 
 type PageProps = { params: Promise<{ slug: string }> };
-
-export function generateStaticParams() {
-  return CATALOG_BRANDS.map((brand) => ({ slug: brand.slug }));
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
