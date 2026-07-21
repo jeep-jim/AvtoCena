@@ -87,12 +87,15 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
   const shell = variant === "desktop"
     ? "rounded-[1.6rem] bg-white/[0.045] p-4"
     : "rounded-[1.35rem] bg-white/[0.045] px-2 py-3";
+  const rail = variant === "desktop"
+    ? "grid grid-cols-5 gap-2"
+    : "ac-hide-scrollbar flex touch-pan-x gap-2 overflow-x-auto overscroll-x-contain";
 
   return <>
     <section className={`${shell} ${className}`} aria-label="Курсы валют">
       {variant === "desktop" ? <h3 className="mb-3 text-lg font-black">Курс валют</h3> : null}
       <div
-        className={`ac-hide-scrollbar flex touch-pan-x gap-2 overflow-x-auto overscroll-x-contain ${variant === "desktop" ? "grid grid-cols-5 overflow-visible" : ""}`}
+        className={rail}
         style={{ WebkitOverflowScrolling: "touch" }}
         onWheel={wheel}
         onPointerDown={(event) => { pointer.current = { x: event.clientX, moved: false }; }}
@@ -107,7 +110,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
             key={currency}
             type="button"
             onClick={() => openCurrency(currency)}
-            className={`relative z-[1] flex min-w-[62px] touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "flex-1"}`}
+            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "min-w-[62px] flex-1"}`}
             aria-label={`Открыть курс ${currency}`}
           >
             <CurrencyFlag currency={currency} className="h-4 w-6" />
