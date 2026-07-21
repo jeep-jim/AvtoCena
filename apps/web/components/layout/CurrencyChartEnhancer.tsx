@@ -19,11 +19,12 @@ function polishChart(svg: SVGSVGElement) {
     y: numberAttribute(circle, "cy"),
   }));
   const signature = points.map((point) => `${point.x}:${point.y}`).join("|");
-  if (svg.dataset.acSegmentSignature === signature) return;
-
-  svg.querySelectorAll("[data-ac-rate-segment]").forEach((node) => node.remove());
   const baseLine = svg.querySelector<SVGPathElement>('path[fill="none"][stroke-width="2.6"]');
   if (baseLine) baseLine.style.opacity = "0";
+  const existingSegments = svg.querySelectorAll("[data-ac-rate-segment]");
+  if (svg.dataset.acSegmentSignature === signature && existingSegments.length === points.length - 1) return;
+
+  existingSegments.forEach((node) => node.remove());
 
   const fragment = document.createDocumentFragment();
   points.slice(1).forEach((point, index) => {
