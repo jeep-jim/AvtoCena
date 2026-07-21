@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { readDataJson } from "@/lib/data";
+import { convertToRub } from "@/lib/catalog/rates";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
 const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
@@ -92,7 +93,22 @@ export async function GET(request: Request) {
   const extras: Record<string, unknown> = {};
   if (p.get("includeRates") === "1") {
     const rawRates = await readDataJson<any>("fees/exchange-rates.json", {});
-    extras.rates = publicRates(rawRates);
+    const rates = publicRates(rawRates);
+    if (!rates.some((rate) => rate.currency === "GEL")) {
+      const liveGel = await convertToRub(1, "GEL").catch(() => null);
+      if (liveGel) {
+        rates.push({
+          currency: "GEL",
+          effectiveRate: liveGel.effectiveRate,
+          previousEffectiveRate: liveGel.previousEffectiveRate,
+          rateDelta: liveGel.rateDelta,
+          rateDate: liveGel.rateDate,
+          previousRateDate: liveGel.previousRateDate,
+          history: [],
+        });
+      }
+    }
+    extras.rates = rates;
     extras.ratesUpdatedAt = rawRates?.updatedAt || null;
   }
   if (p.get("includeFacets") === "1") extras.facets = await readCatalogFacets();
