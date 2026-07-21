@@ -29,15 +29,23 @@ type LiveRate = Required<Pick<PublicCurrencyRate, "currency" | "effectiveRate">>
 export type PriceTrendDirection = "up" | "down";
 export type PriceTrendValue = { direction: PriceTrendDirection; deltaRub: number; formattedDelta: string };
 
-const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD"];
-const RATE_META: Record<string, { flag: string; label: string; nominal: number }> = {
-  JPY: { flag: "🇯🇵", label: "Японская иена", nominal: 100 },
-  CNY: { flag: "🇨🇳", label: "Китайский юань", nominal: 1 },
-  KRW: { flag: "🇰🇷", label: "Корейская вона", nominal: 1000 },
-  AED: { flag: "🇦🇪", label: "Дирхам ОАЭ", nominal: 1 },
-  EUR: { flag: "🇪🇺", label: "Евро", nominal: 1 },
-  GEL: { flag: "🇬🇪", label: "Грузинский лари", nominal: 1 },
-  USD: { flag: "🇺🇸", label: "Доллар США", nominal: 1 },
+const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
+const RATE_META: Record<string, { flag: string; label: string; nominal: number; country: string }> = {
+  JPY: { flag: "🇯🇵", label: "Японская иена", nominal: 100, country: "Япония" },
+  CNY: { flag: "🇨🇳", label: "Китайский юань", nominal: 1, country: "Китай" },
+  KRW: { flag: "🇰🇷", label: "Корейская вона", nominal: 1000, country: "Южная Корея" },
+  AED: { flag: "🇦🇪", label: "Дирхам ОАЭ", nominal: 1, country: "ОАЭ" },
+  EUR: { flag: "🇪🇺", label: "Евро", nominal: 1, country: "Европа" },
+  GEL: { flag: "🇬🇪", label: "Грузинский лари", nominal: 1, country: "Грузия" },
+  USD: { flag: "🇺🇸", label: "Доллар США", nominal: 1, country: "США" },
+  GBP: { flag: "🇬🇧", label: "Фунт стерлингов", nominal: 1, country: "Великобритания" },
+  PLN: { flag: "🇵🇱", label: "Польский злотый", nominal: 1, country: "Польша" },
+  CHF: { flag: "🇨🇭", label: "Швейцарский франк", nominal: 1, country: "Швейцария" },
+  SEK: { flag: "🇸🇪", label: "Шведская крона", nominal: 1, country: "Швеция" },
+  NOK: { flag: "🇳🇴", label: "Норвежская крона", nominal: 1, country: "Норвегия" },
+  DKK: { flag: "🇩🇰", label: "Датская крона", nominal: 1, country: "Дания" },
+  HUF: { flag: "🇭🇺", label: "Венгерский форинт", nominal: 1, country: "Венгрия" },
+  CZK: { flag: "🇨🇿", label: "Чешская крона", nominal: 1, country: "Чехия" },
 };
 
 let ratesPromise: Promise<Record<string, LiveRate>> | null = null;
@@ -155,7 +163,15 @@ export function CurrencyFlag({ currency, className = "h-4 w-6" }: { currency: st
   if (code === "EUR") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Европейского союза"><rect width="28" height="20" fill="#003399" />{Array.from({ length: 12 }, (_, index) => { const angle = index * Math.PI / 6 - Math.PI / 2; return <circle key={index} cx={14 + Math.cos(angle) * 5.2} cy={10 + Math.sin(angle) * 5.2} r=".7" fill="#ffcc00" />; })}</svg>;
   if (code === "GEL") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Грузии"><rect width="28" height="20" fill="#fff" /><rect x="12" width="4" height="20" fill="#ff0000" /><rect y="8" width="28" height="4" fill="#ff0000" /><g fill="#ff0000"><path d="M5 3h1v2h2v1H6v2H5V6H3V5h2Z" /><path d="M22 3h1v2h2v1h-2v2h-1V6h-2V5h2Z" /><path d="M5 12h1v2h2v1H6v2H5v-2H3v-1h2Z" /><path d="M22 12h1v2h2v1h-2v2h-1v-2h-2v-1h2Z" /></g></svg>;
   if (code === "USD") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг США"><rect width="28" height="20" fill="#fff" />{Array.from({ length: 7 }, (_, index) => <rect key={index} y={index * 3} width="28" height="1.55" fill="#b22234" />)}<rect width="12" height="9" fill="#3c3b6e" /><g fill="#fff">{Array.from({ length: 12 }, (_, index) => <circle key={index} cx={1.5 + (index % 4) * 3} cy={1.5 + Math.floor(index / 4) * 2.7} r=".45" />)}</g></svg>;
-  return <span className={`flex shrink-0 items-center justify-center rounded-[4px] bg-white/10 text-[8px] font-black ${className}`}>{code.slice(0, 2)}</span>;
+  if (code === "GBP") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Великобритании"><rect width="28" height="20" fill="#012169" /><path d="M0 0L28 20M28 0L0 20" stroke="#fff" strokeWidth="5" /><path d="M0 0L28 20M28 0L0 20" stroke="#c8102e" strokeWidth="2" /><path d="M14 0V20M0 10H28" stroke="#fff" strokeWidth="6" /><path d="M14 0V20M0 10H28" stroke="#c8102e" strokeWidth="3" /></svg>;
+  if (code === "PLN") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Польши"><rect width="28" height="10" fill="#fff" /><rect y="10" width="28" height="10" fill="#dc143c" /></svg>;
+  if (code === "CHF") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Швейцарии"><rect width="28" height="20" fill="#d52b1e" /><path d="M11.5 4H16.5V7.5H20V12.5H16.5V16H11.5V12.5H8V7.5H11.5Z" fill="#fff" /></svg>;
+  if (code === "SEK") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Швеции"><rect width="28" height="20" fill="#006aa7" /><rect x="8" width="3" height="20" fill="#fecc00" /><rect y="8.5" width="28" height="3" fill="#fecc00" /></svg>;
+  if (code === "NOK") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Норвегии"><rect width="28" height="20" fill="#ba0c2f" /><rect x="8" width="5" height="20" fill="#fff" /><rect y="7.5" width="28" height="5" fill="#fff" /><rect x="9.5" width="2" height="20" fill="#00205b" /><rect y="9" width="28" height="2" fill="#00205b" /></svg>;
+  if (code === "DKK") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Дании"><rect width="28" height="20" fill="#c60c30" /><rect x="8" width="3" height="20" fill="#fff" /><rect y="8.5" width="28" height="3" fill="#fff" /></svg>;
+  if (code === "HUF") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Венгрии"><rect width="28" height="6.67" fill="#ce2939" /><rect y="6.67" width="28" height="6.66" fill="#fff" /><rect y="13.33" width="28" height="6.67" fill="#477050" /></svg>;
+  if (code === "CZK") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Чехии"><rect width="28" height="10" fill="#fff" /><rect y="10" width="28" height="10" fill="#d7141a" /><path d="M0 0L12 10L0 20Z" fill="#11457e" /></svg>;
+  return <span className={`flex shrink-0 items-center justify-center rounded-[4px] bg-white/10 text-[8px] font-black ${className}`}>🌐</span>;
 }
 
 function formatRate(value: number, currency: string, nominal = 1) {
@@ -243,7 +259,7 @@ function pointMovementColor(delta: number, fallback: string, light: boolean) {
 
 function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?: boolean }) {
   const currency = String(rate.currency || "").toUpperCase();
-  const meta = RATE_META[currency] || { flag: "💱", label: currency || "Валюта", nominal: 1 };
+  const meta = RATE_META[currency] || { flag: "💱", label: currency || "Валюта", nominal: 1, country: currency || "Валюта" };
   const points = normalizedHistory(rate);
   const historyKey = points.map((point) => `${point.date}:${point.effectiveRate}`).join("|");
   const [selectedIndex, setSelectedIndex] = useState(Math.max(0, points.length - 1));
@@ -291,11 +307,11 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
       : light ? "rgba(124,133,148,.10)" : "rgba(255,255,255,.06)";
 
   return <div className={`ac-rate-chart-native relative overflow-hidden rounded-2xl border p-3 ${light ? "border-[#dfe3ea] bg-[#f1f3f7]" : "border-white/10 bg-white/[0.035]"}`}>
-    <style>{`.ac-rate-chart-native>.ac-rate-point-deltas{display:none!important}`}</style>
+    <style>{`.ac-rate-chart-native>.ac-rate-point-deltas{display:none!important}.ac-rate-chart-native .ac-rate-native-delta{display:block!important}`}</style>
     <div className="flex items-start justify-between gap-3">
       <div>
         <div className={`text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#7a8291]" : "text-white/45"}`}>{selectedPoint ? `Курс на ${fullRateDate(selectedPoint.date)}` : "Курс за 5 дней"}</div>
-        <div className="mt-1 text-sm font-black" style={{ color: selectedColor }}>{meta.nominal > 1 ? `${meta.nominal} ${currency}` : currency} = {new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 5 }).format(selectedValue)} ₽</div>
+        <div className="mt-1 text-sm font-black" style={{ color: selectedColor }}><span style={{ color: selectedColor }}>{meta.nominal > 1 ? `${meta.nominal} ${currency}` : currency} = </span><span style={{ color: selectedColor }}>{new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 5 }).format(selectedValue)} ₽</span></div>
       </div>
       <CurrencyFlag currency={currency} className="h-5 w-7" />
     </div>
@@ -326,7 +342,7 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
         const delta = values[index] - values[index - 1];
         if (Math.abs(delta) < 1e-12) return null;
         const labelY = Math.min(plotBottom + 20, Math.max(point.y + 16, plotTop + 16));
-        return <text key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={delta < 0 ? "#20a85e" : "#ef3340"} fontSize="8.5" fontWeight="900">{formatPointDelta(delta)}</text>;
+        return <text className="ac-rate-native-delta" key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={delta < 0 ? "#20a85e" : "#ef3340"} fontSize="8.5" fontWeight="900">{formatPointDelta(delta)}</text>;
       })}
     </svg>
 
@@ -470,6 +486,10 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     event.preventDefault();
   };
   const startRateTabsGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") {
+      rateTabsGesture.current = null;
+      return;
+    }
     rateTabsGesture.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
@@ -477,29 +497,31 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
       dragged: false,
       pointerType: event.pointerType,
     };
-    if (event.pointerType === "mouse") event.currentTarget.setPointerCapture(event.pointerId);
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
   const moveRateTabsGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
     const gesture = rateTabsGesture.current;
-    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    if (!gesture || gesture.pointerId !== event.pointerId || gesture.pointerType !== "mouse") return;
     const distance = event.clientX - gesture.startX;
     if (Math.abs(distance) > 6) gesture.dragged = true;
-    if (gesture.pointerType === "mouse" && gesture.dragged) {
+    if (gesture.dragged) {
       event.currentTarget.scrollLeft = gesture.startScrollLeft - distance;
       event.preventDefault();
     }
   };
   const finishRateTabsGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
     const gesture = rateTabsGesture.current;
-    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    if (!gesture || gesture.pointerId !== event.pointerId || gesture.pointerType !== "mouse") return;
     if (gesture.dragged) suppressRateTabClick.current = true;
-    if (gesture.pointerType === "mouse" && event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     rateTabsGesture.current = null;
   };
 
   if (!open || typeof document === "undefined") return null;
   const activeRate = orderedRates.find((rate) => String(rate.currency).toUpperCase() === activeCurrency) || orderedRates[0];
   if (!activeRate) return null;
+  const activeCurrencyCode = String(activeRate.currency).toUpperCase();
+  const activeCountry = RATE_META[activeCurrencyCode]?.country || activeCurrencyCode;
   const sheetClass = dark ? "bg-[#0f1219] text-white" : "bg-[#f8f9fb] text-[#151922]";
   const headerClass = dark ? "border-white/10 bg-[#0f1219]/95" : "border-[#dfe3e9] bg-[#f8f9fb]/95";
   const handleClass = dark ? "bg-white/60" : "bg-white/85";
@@ -514,7 +536,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
         <section className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`} role="dialog" aria-modal="true" aria-label="Курсы валют">
           <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-5 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
             <div className="flex items-center justify-between gap-3">
-              <div><div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">АвтоЦена</div><h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${String(activeRate.currency).toUpperCase()}`}</h2></div>
+              <div><div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">{activeCountry}</div><h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${activeCurrencyCode}`}</h2></div>
               <button type="button" onClick={() => closeRef.current()} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button>
             </div>
             {orderedRates.length > 1 ? <div
@@ -528,7 +550,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
             >
               {orderedRates.map((rate) => {
                 const currency = String(rate.currency).toUpperCase();
-                const active = currency === String(activeRate.currency).toUpperCase();
+                const active = currency === activeCurrencyCode;
                 const delta = finiteNumber(rate.rateDelta) || (Number(rate.effectiveRate || 0) - Number(rate.previousEffectiveRate || 0));
                 const inactiveClass = dark ? "border-white/10 bg-white/[0.05]" : "border-[#dde2e9] bg-[#f0f2f6]";
                 const activeClass = dark ? "border-[#ef3340] bg-[#ef3340]/12" : "border-[#ef3340] bg-[#fff0f1]";
