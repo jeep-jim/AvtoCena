@@ -62,6 +62,7 @@ export function CurrencyChartEnhancer() {
         box-shadow:0 7px 20px rgba(38,43,57,.08)!important;
       }
       .ac-rate-chart-native>.ac-rate-point-deltas,
+      .ac-rate-chart-native .ac-rate-native-delta,
       .ac-rate-chart-native .ac-rate-legacy-labels,
       .ac-rate-chart-native [data-ac-rate-enhancer-label]{
         display:none!important;
