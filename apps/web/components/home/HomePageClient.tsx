@@ -299,7 +299,7 @@ export default function HomePageClient() {
           const rate = rateMap.get(currency);
           const delta = Number(rate?.rateDelta || 0);
           const rateClass = delta < 0 ? "text-[#31b765]" : delta > 0 ? "text-[#ef3340]" : "text-white/55";
-          return <span key={currency} className="min-w-[62px] flex-1 text-center">
+          return <span key={currency} className={`min-w-[62px] flex-1 text-center ${currency === "GEL" || currency === "USD" ? "lg:hidden" : ""}`}>
             <CurrencyFlag currency={currency} className="mx-auto h-4 w-6" />
             <span className="mt-1.5 block text-[9px] font-black">{currency}</span>
             <span className={`block text-[10px] font-black ${rateClass}`}>{rate ? `${(Number(rate.effectiveRate) * amount).toFixed(2)} ₽` : "—"}</span>
