@@ -8,6 +8,7 @@ import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { CurrencyFlag, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
+import { CitySelector } from "@/components/home/CitySelector";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
@@ -16,6 +17,7 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string };
+type Props = { initialCity?: string };
 
 const budgets: Option[] = [
   { value: "", label: "Любой бюджет" },
@@ -139,16 +141,17 @@ function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checke
       <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5"><span>До 160 л.с.</span><span className="text-[11px] font-black text-red-500">свыше — полная пошлина</span></span>
     </label>
     <button type="button" onClick={() => setInfoOpen((current) => !current)} className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-black" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Почему есть фильтр до 160 лошадиных сил" aria-expanded={infoOpen}>?</button>
-    {infoOpen ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+8px)] rounded-2xl p-4 text-sm font-bold leading-6">
-      <div className="font-black">Почему до 160 л.с.?</div>
-      <p className="mt-2 text-[var(--ac-muted)]">Для автомобилей мощностью свыше 160 л.с. льготный расчёт утилизационного сбора при личном ввозе не применяется. Используется полная ставка, поэтому итоговые платежи могут быть значительно выше.</p>
-      <p className="mt-2 font-black text-red-500">Свыше 160 л.с. — полная пошлина.</p>
-    </div> : null}
+    {infoOpen ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+8px)] rounded-2xl p-4 text-sm font-bold leading-6"><div className="font-black">Почему до 160 л.с.?</div><p className="mt-2 text-[var(--ac-muted)]">Для автомобилей мощностью свыше 160 л.с. льготный расчёт утилизационного сбора при личном ввозе не применяется. Используется полная ставка, поэтому итоговые платежи могут быть значительно выше.</p><p className="mt-2 font-black text-red-500">Свыше 160 л.с. — полная пошлина.</p></div> : null}
   </div>;
 }
 
-export default function HomePageClient() {
+function BudgetLabel({ onInfo }: { onInfo: () => void }) {
+  return <span className="inline-flex shrink-0 items-center gap-1 text-xs font-black uppercase tracking-[0.16em] text-red-400"><span>Бюджет</span><button type="button" onClick={onInfo} className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500/12 text-[11px] font-black normal-case tracking-normal lg:hidden" aria-label="Как работает подбор по бюджету">?</button></span>;
+}
+
+export default function HomePageClient({ initialCity = "" }: Props) {
   const router = useRouter();
+  const [city, setCity] = useState(initialCity);
   const [budget, setBudget] = useState("");
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -163,6 +166,7 @@ export default function HomePageClient() {
   const [marketCounts, setMarketCounts] = useState<Record<string, number>>({});
   const [count, setCount] = useState<number | null>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -213,9 +217,7 @@ export default function HomePageClient() {
     };
   }, [mobileFiltersOpen]);
 
-  useEffect(() => {
-    if (model && body) setBody("");
-  }, [model, body]);
+  useEffect(() => { if (model && body) setBody(""); }, [model, body]);
 
   const makeOptions = useMemo<Option[]>(() => {
     const values = new Map<string, string>();
@@ -265,6 +267,7 @@ export default function HomePageClient() {
     if (body && !model) params.set("body", body);
     if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year);
     if (powerLimited) params.set("powerTo", "160");
+    if (city) params.set("city", city);
     appendAttributionToSearchParams(params);
     router.push(`/results${params.toString() ? `?${params}` : ""}`);
   };
@@ -272,10 +275,10 @@ export default function HomePageClient() {
   return <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader />
     <div className="mx-auto w-full max-w-[1500px] px-4 pb-16 md:px-8">
-      <section className="ac-home-hero grid items-start gap-7 py-7 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
-        <div><h1 className="max-w-4xl text-[44px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[82px] xl:text-[96px]">Цена на авто под заказ</h1><p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
+      <section className="ac-home-hero grid items-start gap-7 pb-3 pt-4 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-10 lg:py-12">
+        <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5">
-          <div className="mb-4 flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
+          <div className="mb-4 flex items-center justify-between gap-3"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
           <HomeSelect value={budget} options={budgets} onChange={setBudget} />
           <div className="mt-4 grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
           <div className="mt-4"><PowerLimit checked={powerLimited} onChange={setPowerLimited} /></div>
@@ -293,7 +296,7 @@ export default function HomePageClient() {
 
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div><div className="hidden gap-3 sm:grid-cols-[180px_220px_auto] lg:grid"><HomeSelect value={catalogMarket} options={markets} onChange={setCatalogMarket} /><HomeSelect value={catalogMake} options={makeOptions} onChange={setCatalogMake} searchable searchPlaceholder="Найти марку" /><Link href={`/cars${catalogMarket || catalogMake ? `?${new URLSearchParams({ ...(catalogMarket ? { market: catalogMarket } : {}), ...(catalogMake ? { make: catalogMake } : {}) }).toString()}` : ""}`} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>
         <CurrencyRatesStrip rates={rates} variant="mobile" className="mt-4 lg:hidden" />
-        {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const meta = marketMeta[group.id]; const href = `/cars?market=${group.id}${catalogMake ? `&make=${encodeURIComponent(catalogMake)}` : ""}`; return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CurrencyFlag currency={meta.currency} className="h-5 w-7 md:h-7 md:w-10" /><span>{meta.label}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {marketCounts[group.id] || group.items.length}</span></h3><Link href={href} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Каталог обновляется.</div>}
+        {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const meta = marketMeta[group.id]; const href = `/cars?market=${group.id}${catalogMake ? `&make=${encodeURIComponent(catalogMake)}` : ""}`; return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CurrencyFlag currency={meta.currency} className="h-5 w-7 md:h-7 md:w-10" /><span>{meta.label}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {marketCounts[group.id] || group.items.length}</span></h3><Link href={href} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Каталог обновляется.</div>}
         <BrandLogoRail brands={items.map((item) => item.make)} />
       </section>
     </div>
@@ -301,7 +304,7 @@ export default function HomePageClient() {
     {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-home-filter-drawer__header flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
       <div className="ac-home-filter-drawer__fields">
-        <div className="ac-home-filter-drawer__budget flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
+        <div className="ac-home-filter-drawer__budget flex items-center justify-between gap-3"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
         <HomeSelect value={budget} options={budgets} onChange={setBudget} />
         <div className="grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
         <PowerLimit checked={powerLimited} onChange={setPowerLimited} />
@@ -311,6 +314,8 @@ export default function HomePageClient() {
       </div>
       <div className="ac-home-filter-drawer__actions"><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div>
     </div></div> : null}
+
+    {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">Укажите бюджет — покажем, что можно привезти под ключ.</p></section></div> : null}
 
     <style dangerouslySetInnerHTML={{ __html: `
       @media(max-width:1023px){
