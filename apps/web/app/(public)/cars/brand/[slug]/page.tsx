@@ -53,7 +53,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const similar = (fallbackResult?.items || []).filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const availableMarkets = grouped.map((group) => MARKET_META[group.market]);
 
-  return <main className="ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
+  return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
@@ -89,10 +89,10 @@ export default async function BrandLandingPage({ params }: PageProps) {
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
               <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{meta.flag}</span><span>{brand.name} из {meta.label === "ОАЭ" ? "ОАЭ" : meta.label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
-              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(brand.name)}`} className="shrink-0 text-sm font-black">Все →</Link>
+              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(brand.name)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">
-              {group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} dense />)}
+            <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
+              {group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}
             </div>
           </section>;
         })}
@@ -103,8 +103,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
       </section>}
 
       {!offers.length && similar.length ? <section className="mt-12">
-        <div className="flex items-end justify-between gap-3"><h2 className="text-3xl font-black md:text-4xl">Похожие варианты</h2><Link href="/cars" className="text-sm font-black">Весь каталог →</Link></div>
-        <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 xl:grid-cols-4">{similar.map((offer: any) => <CatalogCard key={offer.id} offer={offer} dense />)}</div>
+        <div className="flex items-end justify-between gap-3"><h2 className="text-3xl font-black md:text-4xl">Похожие варианты</h2><Link href="/cars" className="ac-market-all-link text-sm font-black">Весь каталог →</Link></div>
+        <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{similar.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div>
       </section> : null}
 
       <section className="mt-12 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:p-8">
