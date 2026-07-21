@@ -23,6 +23,7 @@ const CAR_LOGO_FILES: Record<string, string> = {
   "Tesla": "tesla-logo.svg", "Toyota": "toyota-logo.svg", "Volkswagen": "volkswagen-logo.svg", "Volvo": "volvo-logo.svg", "XPeng": "xpeng-logo.png",
   "Zeekr": "zeekr-logo.png",
 };
+const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 
 function logoSources(brand: string, theme: "light" | "dark") {
   const sources = [`/api/catalog/brand-logo/${catalogBrandSlug(brand)}?theme=${theme}`];
@@ -76,7 +77,8 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
-      if (canonical) map.set(canonical.toLocaleLowerCase("en-US"), canonical);
+      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
+      if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
   }, [brands]);
