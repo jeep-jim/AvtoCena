@@ -204,20 +204,6 @@ function validIsoDate(value: unknown) {
   return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
 }
 
-function dateShift(value: string, offset: number) {
-  const date = new Date(`${value}T12:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + offset);
-  return date.toISOString().slice(0, 10);
-}
-
-function localCalendarDate() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
 function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   const unique = new Map<string, number>();
   for (const point of Array.isArray(rate?.history) ? rate.history : []) {
@@ -233,22 +219,10 @@ function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   if (previousDate && previous > 0) unique.set(previousDate, previous);
   if (currentDate && current > 0) unique.set(currentDate, current);
 
-  const actual = [...unique]
+  return [...unique]
     .map(([date, effectiveRate]) => ({ date, effectiveRate, actual: true }))
-    .sort((left, right) => left.date.localeCompare(right.date));
-  if (!actual.length) return [];
-
-  const endDate = localCalendarDate();
-  const dates = Array.from({ length: 5 }, (_, index) => dateShift(endDate, index - 4));
-  const fallback = current || previous || actual.at(-1)?.effectiveRate || 0;
-
-  return dates.map((date) => {
-    const exact = unique.get(date);
-    if (exact) return { date, effectiveRate: exact, actual: true };
-    const earlier = [...actual].reverse().find((point) => point.date <= date);
-    const later = actual.find((point) => point.date >= date);
-    return { date, effectiveRate: earlier?.effectiveRate || later?.effectiveRate || fallback, actual: false };
-  }).filter((point) => point.effectiveRate > 0);
+    .sort((left, right) => left.date.localeCompare(right.date))
+    .slice(-5);
 }
 
 function pointMovementColor(delta: number, fallback: string, light: boolean) {
