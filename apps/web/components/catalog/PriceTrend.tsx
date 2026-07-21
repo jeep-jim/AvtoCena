@@ -181,6 +181,14 @@ function dateShift(value: string, offset: number) {
   return date.toISOString().slice(0, 10);
 }
 
+function localCalendarDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   const unique = new Map<string, number>();
   for (const point of Array.isArray(rate?.history) ? rate.history : []) {
@@ -188,20 +196,23 @@ function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
     const effectiveRate = Number(point?.effectiveRate || 0);
     if (date && effectiveRate > 0) unique.set(date, effectiveRate);
   }
+
   const currentDate = validIsoDate(rate?.rateDate);
   const previousDate = validIsoDate(rate?.previousRateDate);
   const current = Number(rate?.effectiveRate || 0);
   const previous = Number(rate?.previousEffectiveRate || 0);
   if (previousDate && previous > 0) unique.set(previousDate, previous);
   if (currentDate && current > 0) unique.set(currentDate, current);
+
   const actual = [...unique]
     .map(([date, effectiveRate]) => ({ date, effectiveRate, actual: true }))
     .sort((left, right) => left.date.localeCompare(right.date));
-  if (actual.length >= 5) return actual.slice(-5);
   if (!actual.length) return [];
-  const endDate = [currentDate, actual.at(-1)?.date].filter(Boolean).sort().at(-1) || new Date().toISOString().slice(0, 10);
+
+  const endDate = localCalendarDate();
   const dates = Array.from({ length: 5 }, (_, index) => dateShift(endDate, index - 4));
   const fallback = current || previous || actual.at(-1)?.effectiveRate || 0;
+
   return dates.map((date) => {
     const exact = unique.get(date);
     if (exact) return { date, effectiveRate: exact, actual: true };
@@ -211,10 +222,23 @@ function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   }).filter((point) => point.effectiveRate > 0);
 }
 
+function pointMovementColor(delta: number, fallback: string, light: boolean) {
+  if (delta < -1e-12) return "#20a85e";
+  if (delta > 1e-12) return "#ef3340";
+  return fallback || (light ? "#7c8594" : "rgba(255,255,255,.58)");
+}
+
 function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?: boolean }) {
   const currency = String(rate.currency || "").toUpperCase();
   const meta = RATE_META[currency] || { flag: "💱", label: currency || "Валюта", nominal: 1 };
   const points = normalizedHistory(rate);
+  const historyKey = points.map((point) => `${point.date}:${point.effectiveRate}`).join("|");
+  const [selectedIndex, setSelectedIndex] = useState(Math.max(0, points.length - 1));
+
+  useEffect(() => {
+    setSelectedIndex(Math.max(0, points.length - 1));
+  }, [currency, historyKey, points.length]);
+
   const values = points.map((point) => point.effectiveRate * meta.nominal);
   const width = 360;
   const height = 150;
@@ -243,40 +267,78 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
   const directionDelta = Math.abs(totalDelta) > 1e-12 ? totalDelta : recentNonZeroDelta;
   const color = directionDelta > 0 ? "#ff4b55" : directionDelta < 0 ? "#31b765" : light ? "#7c8594" : "rgba(255,255,255,.58)";
   const pointStroke = light ? "#f1f3f7" : "#151821";
+  const selectedPoint = points[selectedIndex] || points.at(-1);
+  const selectedValue = values[selectedIndex] ?? values.at(-1) ?? Number(rate.effectiveRate || 0) * meta.nominal;
 
   return <div className={`ac-rate-chart-native relative overflow-hidden rounded-2xl border p-3 ${light ? "border-[#dfe3ea] bg-[#f1f3f7]" : "border-white/10 bg-white/[0.035]"}`}>
     <style>{`.ac-rate-chart-native>.ac-rate-point-deltas{display:none!important}`}</style>
     <div className="flex items-start justify-between gap-3">
       <div>
-        <div className={`text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#7a8291]" : "text-white/45"}`}>Курс за 5 дней</div>
-        <div className={`mt-1 text-sm font-black ${light ? "text-[#151922]" : "text-white"}`}>{meta.nominal > 1 ? `${meta.nominal} ${currency}` : currency} = {formatRate(Number(rate.effectiveRate || 0), currency, meta.nominal)} ₽</div>
+        <div className={`text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#7a8291]" : "text-white/45"}`}>{selectedPoint ? `Курс на ${fullRateDate(selectedPoint.date)}` : "Курс за 5 дней"}</div>
+        <div className={`mt-1 text-sm font-black ${light ? "text-[#151922]" : "text-white"}`}>{meta.nominal > 1 ? `${meta.nominal} ${currency}` : currency} = {new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: 5 }).format(selectedValue)} ₽</div>
       </div>
       <div className="text-xl" aria-hidden="true">{meta.flag}</div>
     </div>
+
     <svg className="mt-2 block w-full overflow-visible" style={{ aspectRatio: `${width} / ${height}` }} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" aria-label={`Изменение курса ${currency} за пять дней`}>
       {[0.25, 0.5, 0.75].map((part) => <line key={part} x1={paddingX} x2={width - paddingX} y1={plotTop + (plotBottom - plotTop) * part} y2={plotTop + (plotBottom - plotTop) * part} stroke={light ? "rgba(28,34,45,.09)" : "rgba(255,255,255,.08)"} strokeWidth="1" strokeDasharray="4 5" />)}
-      {coords.map((point, index) => <line key={`guide-${index}`} x1={point.x} x2={point.x} y1={point.y + 7} y2={plotBottom + 12} stroke={light ? "rgba(28,34,45,.07)" : "rgba(255,255,255,.07)"} strokeWidth="1" strokeDasharray="3 5" />)}
+      {coords.map((point, index) => <line key={`guide-${index}`} x1={point.x} x2={point.x} y1={point.y + 7} y2={plotBottom + 12} stroke={light ? "rgba(28,34,45,.09)" : "rgba(255,255,255,.09)"} strokeWidth="1" strokeDasharray="2 5" />)}
       {area ? <path d={area} fill={color} opacity={light ? 0.09 : 0.14} /> : null}
       {line ? <path d={line} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /> : null}
-      {coords.map((point, index) => <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={index === coords.length - 1 ? 4.8 : 4.2} fill={color} stroke={pointStroke} strokeWidth="2.1" />)}
       {coords.map((point, index) => {
-        if (index === 0 || !points[index]?.actual || !points[index - 1]?.actual) return null;
+        const delta = index > 0 ? values[index] - values[index - 1] : 0;
+        const fill = pointMovementColor(delta, color, light);
+        const selected = index === selectedIndex;
+        return <circle
+          key={`${point.x}-${point.y}`}
+          cx={point.x}
+          cy={point.y}
+          r={selected ? 5.6 : 4.4}
+          fill={fill}
+          stroke={selected ? (light ? "#ffffff" : "#0f1219") : pointStroke}
+          strokeWidth={selected ? 3.2 : 2.1}
+          className="cursor-pointer"
+          onClick={() => setSelectedIndex(index)}
+        />;
+      })}
+      {coords.map((point, index) => {
+        if (index === 0) return null;
         const delta = values[index] - values[index - 1];
         if (Math.abs(delta) < 1e-12) return null;
         const labelY = Math.min(plotBottom + 20, Math.max(point.y + 16, plotTop + 16));
         return <text key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={delta < 0 ? "#20a85e" : "#ef3340"} fontSize="8.5" fontWeight="900">{formatPointDelta(delta)}</text>;
       })}
     </svg>
-    <div className={`-mt-1 grid grid-cols-5 text-center text-[9px] font-bold ${light ? "text-[#7b8493]" : "text-white/42"}`}>
-      {points.map((point, index) => <span key={point.date}>{index > 0 && index < points.length - 1 ? shortRateDate(point.date) : ""}</span>)}
+
+    <div className="-mt-1 grid grid-cols-5 gap-1.5">
+      {points.map((point, index) => {
+        const active = index === selectedIndex;
+        const activeClass = light ? "border-[#ef3340] bg-white text-[#151922] shadow-[0_3px_10px_rgba(41,48,61,.10)]" : "border-[#ef3340] bg-[#ef3340]/12 text-white";
+        const idleClass = light ? "border-[#dfe3ea] bg-[#e9edf3] text-[#687282]" : "border-white/10 bg-white/[0.045] text-white/48";
+        return <button
+          key={point.date}
+          type="button"
+          onClick={() => setSelectedIndex(index)}
+          aria-pressed={active}
+          className={`min-w-0 rounded-full border px-1 py-1.5 text-center text-[9px] font-black transition ${active ? activeClass : idleClass}`}
+        >{shortRateDate(point.date)}</button>;
+      })}
     </div>
+  </div>;
+}
+
+function DetailRow({ label, value, muted, valueClassName = "" }: { label: string; value: string; muted: string; valueClassName?: string }) {
+  return <div className="flex min-w-0 items-end gap-2">
+    <span className={`shrink-0 ${muted}`}>{label}</span>
+    <span className="mb-[3px] min-w-3 flex-1 border-b border-dotted border-current opacity-35" aria-hidden="true" />
+    <span className={`shrink-0 whitespace-nowrap ${valueClassName}`}>{value}</span>
   </div>;
 }
 
 function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }: { rate: CurrencyRateLike; impactRub?: number; light?: boolean; compact?: boolean }) {
   const currency = String(rate.currency || "").toUpperCase();
   const history = normalizedHistory(rate);
-  const currentRate = Number(rate.effectiveRate || 0);
+  const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
   const fallbackPrevious = history.length > 1 ? history[history.length - 2].effectiveRate : 0;
   const previousRate = Number(rate.previousEffectiveRate || fallbackPrevious || 0);
   const rateDelta = finiteNumber(rate.rateDelta) || (currentRate && previousRate ? currentRate - previousRate : 0);
@@ -284,6 +346,7 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
   const deltaClass = rateDelta < 0 ? "text-[#20a85e]" : rateDelta > 0 ? "text-[#ef3340]" : light ? "text-[#4f5868]" : "text-white/60";
   const muted = light ? "text-[#6b7483]" : "text-white/58";
   const strong = light ? "text-[#141821]" : "text-white";
+
   return <div>
     <RateSparkline rate={rate} light={light} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}>
@@ -291,11 +354,11 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
       <div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>Пересчитали по актуальному курсу</div>
     </div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
-      <div className="flex items-center justify-between gap-4"><span className={muted}>Курс {currency}</span><span className={`whitespace-nowrap ${strong}`}>{previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}{formatRate(currentRate, currency)} ₽</span></div>
-      <div className="flex items-center justify-between gap-4"><span className={muted}>Изменение курса</span><span className={`whitespace-nowrap ${deltaClass}`}>{rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}{formatRate(Math.abs(rateDelta), currency)} ₽ ({percent < 0 ? "−" : percent > 0 ? "+" : ""}{Math.abs(percent).toFixed(2)}%)</span></div>
-      {(rate.previousRateDate || rate.rateDate || history.length) ? <div className="flex items-center justify-between gap-4"><span className={muted}>Период</span><span className={`whitespace-nowrap ${strong}`}>{fullRateDate(history[0]?.date || rate.previousRateDate)} → {fullRateDate(history.at(-1)?.date || rate.rateDate)}</span></div> : null}
+      <DetailRow label={`Курс ${currency}`} muted={muted} value={`${previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}${formatRate(currentRate, currency)} ₽`} valueClassName={strong} />
+      <DetailRow label="Изменение курса" muted={muted} value={`${rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}${formatRate(Math.abs(rateDelta), currency)} ₽ (${percent < 0 ? "−" : percent > 0 ? "+" : ""}${Math.abs(percent).toFixed(2)}%)`} valueClassName={deltaClass} />
+      {(rate.previousRateDate || rate.rateDate || history.length) ? <DetailRow label="Период" muted={muted} value={`${fullRateDate(history[0]?.date || rate.previousRateDate)} → ${fullRateDate(history.at(-1)?.date || rate.rateDate)}`} valueClassName={strong} /> : null}
     </div>
-    {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><span className={muted}>Влияние на ориентир: </span><span className={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"}>{impactRub < 0 ? "−" : "+"}{money(Math.abs(impactRub))} ₽</span></div> : null}
+    {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><DetailRow label="Влияние на ориентир" muted={muted} value={`${impactRub < 0 ? "−" : "+"}${money(Math.abs(impactRub))} ₽`} valueClassName={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"} /></div> : null}
     <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Итоговая цена подтверждается менеджером на момент оплаты.</div>
   </div>;
 }
