@@ -34,7 +34,7 @@ function logoSources(brand: string, theme: "light" | "dark") {
 }
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
-  const [theme, setTheme] = useState<"light" | "dark">(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const sources = useMemo(() => logoSources(brand, theme), [brand, theme]);
   const [sourceIndex, setSourceIndex] = useState(0);
 
