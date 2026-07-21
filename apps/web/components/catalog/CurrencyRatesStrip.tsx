@@ -85,14 +85,14 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
   };
 
   const shell = variant === "desktop"
-    ? "rounded-[1.6rem] bg-white/[0.045] p-4"
-    : "rounded-[1.35rem] bg-white/[0.045] px-2 py-3";
+    ? "rounded-[1.6rem] p-4"
+    : "rounded-[1.35rem] px-2 py-3";
   const rail = variant === "desktop"
     ? "grid grid-cols-5 gap-2"
     : "ac-hide-scrollbar flex touch-pan-x gap-2 overflow-x-auto overscroll-x-contain";
 
   return <>
-    <section className={`${shell} ${className}`} aria-label="Курсы валют">
+    <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
       {variant === "desktop" ? <h3 className="mb-3 text-lg font-black">Курс валют</h3> : null}
       <div
         className={rail}
