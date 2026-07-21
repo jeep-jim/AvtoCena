@@ -6,7 +6,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
-import { CurrencyFlag, CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
+import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
+import { CurrencyFlag, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
@@ -62,15 +63,6 @@ const marketMeta: Record<string, { label: string; currency: string }> = {
   uae: { label: "ОАЭ", currency: "AED" },
   europe: { label: "Европа", currency: "EUR" },
 };
-const rateTiles: Array<[string, number]> = [
-  ["JPY", 100],
-  ["CNY", 1],
-  ["KRW", 1000],
-  ["AED", 1],
-  ["EUR", 1],
-  ["GEL", 1],
-  ["USD", 1],
-];
 const buyers = Array.from({ length: 15 }, (_, index) => `/buyers/${index + 1}.jpg`);
 const benefits = [
   { icon: "fast", title: "Без регистрации", text: "Сразу получите первую выдачу по вашему бюджету." },
@@ -171,7 +163,6 @@ export default function HomePageClient() {
   const [marketCounts, setMarketCounts] = useState<Record<string, number>>({});
   const [count, setCount] = useState<number | null>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [ratesOpen, setRatesOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -277,7 +268,6 @@ export default function HomePageClient() {
     appendAttributionToSearchParams(params);
     router.push(`/results${params.toString() ? `?${params}` : ""}`);
   };
-  const rateMap = new Map<string, PublicCurrencyRate>(rates.map((rate) => [String(rate.currency).toUpperCase(), rate]));
 
   return <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader />
@@ -294,30 +284,19 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <button type="button" onClick={() => setRatesOpen(true)} className="ac-mobile-rates ac-hide-scrollbar flex w-full touch-pan-x gap-2 overflow-x-auto rounded-[1.4rem] px-2 py-4 text-left transition active:scale-[.99] lg:hidden" style={{ WebkitOverflowScrolling: "touch" }} aria-label="Показать изменение курсов валют за пять дней">
-        {rateTiles.map(([currency, amount]) => {
-          const rate = rateMap.get(currency);
-          const delta = Number(rate?.rateDelta || 0);
-          const rateClass = delta < 0 ? "text-[#31b765]" : delta > 0 ? "text-[#ef3340]" : "text-white/55";
-          return <span key={currency} className={`min-w-[62px] flex-1 text-center ${currency === "GEL" || currency === "USD" ? "lg:hidden" : ""}`}>
-            <CurrencyFlag currency={currency} className="mx-auto h-4 w-6" />
-            <span className="mt-1.5 block text-[9px] font-black">{currency}</span>
-            <span className={`block text-[10px] font-black ${rateClass}`}>{rate ? `${(Number(rate.effectiveRate) * amount).toFixed(2)} ₽` : "—"}</span>
-          </span>;
-        })}
-      </button>
-
       <BuyerGallery images={buyers} />
 
-      <section className="ac-executor-block mt-4 grid gap-5 rounded-[1.6rem] p-4 md:grid-cols-[minmax(0,1fr)_290px] md:items-center md:p-5"><div><h3 className="text-xl font-black">АвтоЦена — подбор автомобиля под ваш бюджет</h3><p className="mt-3 text-sm font-medium leading-7 text-white/60">Сервис помогает быстро понять, какой автомобиль можно привезти из Японии, Китая, Кореи, ОАЭ или Европы. Вы задаёте параметры, а система показывает реальные варианты и актуальный расчёт.</p><p className="mt-2 text-sm font-bold leading-6 text-white/75">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><div className="ac-executor-logo flex min-h-32 items-center justify-center rounded-2xl p-5"><img src="/brands/topavto-logo.png" alt="TopAvto" className="max-h-24 w-full object-contain" /></div></section>
+      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+        <section className="ac-executor-block grid gap-5 rounded-[1.6rem] p-4 md:grid-cols-[minmax(0,1fr)_290px] md:items-center md:p-5"><div><h3 className="text-xl font-black">АвтоЦена — подбор автомобиля под ваш бюджет</h3><p className="mt-3 text-sm font-medium leading-7 text-white/60">Сервис помогает быстро понять, какой автомобиль можно привезти из Японии, Китая, Кореи, ОАЭ или Европы. Вы задаёте параметры, а система показывает реальные варианты и актуальный расчёт.</p><p className="mt-2 text-sm font-bold leading-6 text-white/75">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><div className="ac-executor-logo flex min-h-32 items-center justify-center rounded-2xl p-5"><img src="/brands/topavto-logo.png" alt="TopAvto" className="max-h-24 w-full object-contain" /></div></section>
+        <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
+      </div>
 
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div><div className="hidden gap-3 sm:grid-cols-[180px_220px_auto] lg:grid"><HomeSelect value={catalogMarket} options={markets} onChange={setCatalogMarket} /><HomeSelect value={catalogMake} options={makeOptions} onChange={setCatalogMake} searchable searchPlaceholder="Найти марку" /><Link href={`/cars${catalogMarket || catalogMake ? `?${new URLSearchParams({ ...(catalogMarket ? { market: catalogMarket } : {}), ...(catalogMake ? { make: catalogMake } : {}) }).toString()}` : ""}`} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>
+        <CurrencyRatesStrip rates={rates} variant="mobile" className="mt-4 lg:hidden" />
         {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const meta = marketMeta[group.id]; const href = `/cars?market=${group.id}${catalogMake ? `&make=${encodeURIComponent(catalogMake)}` : ""}`; return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CurrencyFlag currency={meta.currency} className="h-5 w-7 md:h-7 md:w-10" /><span>{meta.label}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {marketCounts[group.id] || group.items.length}</span></h3><Link href={href} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Каталог обновляется.</div>}
         <BrandLogoRail brands={items.map((item) => item.make)} />
       </section>
     </div>
-
-    <CurrencyRatesSheet open={ratesOpen} onClose={() => setRatesOpen(false)} rates={rates} initialCurrency="JPY" />
 
     {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-home-filter-drawer__header flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
