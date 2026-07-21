@@ -23,7 +23,9 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   const description = city
     ? `Автомобили под заказ с расчётом стоимости и доставкой в ${city}. Предложения из Японии, Китая, Кореи, ОАЭ и Европы.`
     : "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.";
-  return { title, description, alternates: { canonical: "/" }, openGraph: { title, description, url: "https://avtocena.com", type: "website" } };
+  const canonical = city ? `/?city=${encodeURIComponent(city)}` : "/";
+  const openGraphUrl = city ? `https://avtocena.com/?city=${encodeURIComponent(city)}` : "https://avtocena.com";
+  return { title, description, alternates: { canonical }, openGraph: { title, description, url: openGraphUrl, type: "website" } };
 }
 
 export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
