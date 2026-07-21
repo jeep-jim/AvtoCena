@@ -19,6 +19,15 @@ function optionalFinite(value: unknown) {
   return Number.isFinite(number) ? number : undefined;
 }
 
+function publicHistory(value: unknown) {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((point: any) => {
+    const date = String(point?.date || point?.rateDate || "").slice(0, 10);
+    const effectiveRate = optionalPositive(point?.effectiveRate ?? point?.value);
+    return date && effectiveRate ? [{ date, effectiveRate }] : [];
+  }).sort((left, right) => left.date.localeCompare(right.date)).slice(-5);
+}
+
 function publicRates(raw: any) {
   return RATE_CODES.flatMap((currency) => {
     const structured = Array.isArray(raw?.rates)
@@ -31,13 +40,24 @@ function publicRates(raw: any) {
     const legacy = Number(raw?.[`${currency}_RUB`] || 0);
     const effectiveRate = Number(structured?.effectiveRate || (cbrRate > 0 && nominal > 0 ? cbrRate / nominal : legacy));
     if (!Number.isFinite(effectiveRate) || effectiveRate <= 0) return [];
+    const previousEffectiveRate = optionalPositive(structured?.previousEffectiveRate);
+    const rateDate = String(structured?.rateDate || structured?.date || raw?.updatedAt || "").slice(0, 10);
+    const previousRateDate = String(structured?.previousRateDate || "").slice(0, 10) || undefined;
+    const history = publicHistory(structured?.history);
+    if (history.length < 2 && previousEffectiveRate && previousRateDate && rateDate) {
+      history.splice(0, history.length,
+        { date: previousRateDate, effectiveRate: previousEffectiveRate },
+        { date: rateDate, effectiveRate },
+      );
+    }
     return [{
       currency,
       effectiveRate,
-      previousEffectiveRate: optionalPositive(structured?.previousEffectiveRate),
+      previousEffectiveRate,
       rateDelta: optionalFinite(structured?.rateDelta),
-      rateDate: String(structured?.rateDate || structured?.date || raw?.updatedAt || "").slice(0, 10),
-      previousRateDate: String(structured?.previousRateDate || "").slice(0, 10) || undefined,
+      rateDate,
+      previousRateDate,
+      history,
     }];
   });
 }
