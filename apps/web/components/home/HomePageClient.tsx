@@ -27,6 +27,7 @@ const budgets: Option[] = [
   { value: "6000000", label: "до 6 000 000 ₽", max: 6_000_000 },
   { value: "from6000000", label: "от 6 000 000 ₽", min: 6_000_000 },
 ];
+
 const markets: Option[] = [
   { value: "", label: "Страна" },
   { value: "japan", label: "Япония" },
@@ -35,11 +36,13 @@ const markets: Option[] = [
   { value: "uae", label: "ОАЭ" },
   { value: "europe", label: "Европа" },
 ];
+
 const years: Option[] = [
   { value: "", label: "Год" },
   ...[2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018].map((year) => ({ value: String(year), label: String(year) })),
   { value: "older", label: "Старше 2018" },
 ];
+
 const bodies: Option[] = [
   { value: "", label: "Кузов" },
   { value: "suv", label: "Кроссовер" },
@@ -50,6 +53,7 @@ const bodies: Option[] = [
   { value: "minivan", label: "Минивэн" },
   { value: "pickup", label: "Пикап" },
 ];
+
 const marketIds = ["korea", "china", "japan", "uae", "europe"];
 const marketMeta: Record<string, { label: string; flag: string }> = {
   korea: { label: "Корея", flag: "🇰🇷" },
@@ -68,9 +72,11 @@ const benefits = [
 function Chevron({ open = false }: { open?: boolean }) {
   return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
+
 function SlidersIcon() {
   return <svg width="23" height="23" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>;
 }
+
 function BenefitIcon({ type }: { type: string }) {
   if (type === "fast") return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2L5 13H11L10.5 22L19 10.5H13L13.5 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>;
   if (type === "markets") return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="2" /><path d="M3.8 12H20.2M12 3.5C14.2 5.8 15.4 8.6 15.4 12C15.4 15.4 14.2 18.2 12 20.5C9.8 18.2 8.6 15.4 8.6 12C8.6 8.6 9.8 5.8 12 3.5Z" stroke="currentColor" strokeWidth="1.7" /></svg>;
@@ -188,6 +194,10 @@ export default function HomePageClient() {
     return () => { document.body.style.overflow = old; window.removeEventListener("keydown", keydown); };
   }, [mobileFiltersOpen]);
 
+  useEffect(() => {
+    if (model && body) setBody("");
+  }, [model, body]);
+
   const makeOptions = useMemo<Option[]>(() => {
     const values = new Map<string, string>();
     items.forEach((item) => values.set(item.make.toLocaleLowerCase("en-US"), item.make));
@@ -212,7 +222,7 @@ export default function HomePageClient() {
       if (make) params.set("make", make);
       if (model) params.set("model", model);
       if (market) params.set("market", market);
-      if (body) params.set("bodyType", body);
+      if (body && !model) params.set("bodyType", body);
       if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year);
       if (powerLimited) params.set("powerTo", "160");
       setCount(null);
@@ -233,7 +243,7 @@ export default function HomePageClient() {
     if (make) params.set("brand", make);
     if (model) params.set("model", model);
     if (market) params.set("market", market);
-    if (body) params.set("body", body);
+    if (body && !model) params.set("body", body);
     if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year);
     if (powerLimited) params.set("powerTo", "160");
     appendAttributionToSearchParams(params);
@@ -248,10 +258,10 @@ export default function HomePageClient() {
         <div><h1 className="max-w-4xl text-[44px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[82px] xl:text-[96px]">Цена на авто под заказ</h1><p className="mt-5 text-lg font-medium text-white/75 md:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5">
           <div className="mb-4 flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
-          <div><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
+          <HomeSelect value={budget} options={budgets} onChange={setBudget} />
           <div className="mt-4 grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
           <div className="mt-4"><PowerLimit checked={powerLimited} onChange={setPowerLimited} /></div>
-          <div className="mt-4 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><div className="col-span-2"><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div></div>
+          <div className="mt-4 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} />{!model ? <div className="col-span-2"><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div> : null}</div>
           <div className="relative mt-4"><button type="button" onClick={submit} className="avto-button h-[58px] w-full rounded-2xl pr-16 text-base font-black">Узнать Цену</button><button type="button" onClick={() => setMobileFiltersOpen(true)} className="absolute right-0 top-0 flex h-[58px] w-14 items-center justify-center rounded-r-2xl text-white lg:hidden" aria-label="Открыть дополнительные фильтры"><SlidersIcon /></button></div>
         </div>
       </section>
@@ -268,7 +278,32 @@ export default function HomePageClient() {
       </section>
     </div>
 
-    {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)] p-5" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-4"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} /><HomeSelect value={body} options={bodyOptions} onChange={setBody} /><PowerLimit checked={powerLimited} onChange={setPowerLimited} /></div><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button mt-6 h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div></div> : null}
-    <style dangerouslySetInnerHTML={{ __html: `@media(max-width:767px){.ac-home-page .ac-catalog-card,.ac-home-page .ac-catalog-card *,.ac-home-page .ac-home-market-rail,.ac-home-page .ac-home-market-rail>*{box-shadow:none!important}.ac-home-page .ac-catalog-card,.ac-home-page .ac-home-market-rail{filter:none!important}}` }} />
+    {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)]" onClick={(event) => event.stopPropagation()}>
+      <div className="ac-home-filter-drawer__header flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
+      <div className="ac-home-filter-drawer__fields">
+        <div className="ac-home-filter-drawer__budget flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[0.16em] text-red-400">Бюджет</span><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
+        <HomeSelect value={budget} options={budgets} onChange={setBudget} />
+        <div className="grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
+        <PowerLimit checked={powerLimited} onChange={setPowerLimited} />
+        <HomeSelect value={year} options={years} onChange={setYear} />
+        <HomeSelect value={market} options={markets} onChange={setMarket} />
+        {!model ? <HomeSelect value={body} options={bodyOptions} onChange={setBody} /> : null}
+      </div>
+      <div className="ac-home-filter-drawer__actions"><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div>
+    </div></div> : null}
+
+    <style dangerouslySetInnerHTML={{ __html: `
+      @media(max-width:1023px){
+        .ac-home-filter-drawer{padding:20px!important;background:var(--ac-surface)!important;color:var(--ac-text)!important}
+        .ac-home-filter-drawer__header{margin:0 0 26px!important;padding:0!important}
+        .ac-home-filter-drawer__fields{display:flex!important;flex-direction:column!important;gap:14px!important;margin:0!important;padding:0!important}
+        .ac-home-filter-drawer__fields>*{margin:0!important}
+        .ac-home-filter-drawer__budget{min-height:20px!important;margin-bottom:2px!important}
+        .ac-home-filter-drawer__actions{margin-top:20px!important;padding:0!important}
+        .ac-home-filter-drawer__actions>.avto-button{display:flex!important;width:100%!important;min-width:100%!important;margin:0!important;padding:0 1rem!important;align-items:center!important;justify-content:center!important;border-radius:1rem!important}
+        .ac-home-filter-drawer__actions button+button{display:none!important}
+      }
+      @media(max-width:767px){.ac-home-page .ac-catalog-card,.ac-home-page .ac-catalog-card *,.ac-home-page .ac-home-market-rail,.ac-home-page .ac-home-market-rail>*{box-shadow:none!important}.ac-home-page .ac-catalog-card,.ac-home-page .ac-home-market-rail{filter:none!important}}
+    ` }} />
   </main>;
 }
