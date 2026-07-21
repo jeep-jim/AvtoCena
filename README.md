@@ -63,3 +63,4 @@ npm run build                  # production build
 npm run catalog:smoke          # проверка Encar
 npm run catalog:import:sample  # небольшой импорт всех публичных рынков
 ```
+
