@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
 
-export type RateHistoryPoint = {
-  date: string;
-  effectiveRate: number;
-};
-
+export type RateHistoryPoint = { date: string; effectiveRate: number };
 export type PublicCurrencyRate = {
   currency: string;
   effectiveRate: number;
@@ -19,7 +15,7 @@ export type PublicCurrencyRate = {
 };
 
 type CurrencyRateLike = Partial<PublicCurrencyRate>;
-
+type ChartPoint = RateHistoryPoint & { actual: boolean };
 type PriceLike = {
   totalRub?: number | null;
   previousTotalRub?: number | null;
@@ -29,7 +25,6 @@ type PriceLike = {
   sourceCurrency?: string | null;
   calculationSnapshot?: { currencyRate?: CurrencyRateLike } | null;
 };
-
 type LiveRate = Required<Pick<PublicCurrencyRate, "currency" | "effectiveRate">> & PublicCurrencyRate;
 export type PriceTrendDirection = "up" | "down";
 export type PriceTrendValue = { direction: PriceTrendDirection; deltaRub: number; formattedDelta: string };
@@ -152,8 +147,15 @@ export function RateDirectionIcon({ direction, className = "" }: { direction: Pr
 
 function formatRate(value: number, currency: string, nominal = 1) {
   const displayed = value * nominal;
-  const maximumFractionDigits = nominal > 1 ? 2 : ["JPY", "KRW"].includes(currency) ? 5 : displayed < 1 ? 5 : 4;
+  const maximumFractionDigits = nominal > 1 ? 3 : ["JPY", "KRW"].includes(currency) ? 5 : displayed < 1 ? 5 : 4;
   return new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits }).format(displayed);
+}
+
+function formatPointDelta(value: number) {
+  const absolute = Math.abs(value);
+  const maximumFractionDigits = absolute >= 10 ? 2 : absolute >= 1 ? 2 : absolute >= 0.01 ? 3 : 5;
+  const formatted = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits }).format(absolute);
+  return `${value > 0 ? "+" : value < 0 ? "−" : ""}${formatted}`;
 }
 
 function fullRateDate(value: string | undefined) {
@@ -179,34 +181,33 @@ function dateShift(value: string, offset: number) {
   return date.toISOString().slice(0, 10);
 }
 
-function normalizedHistory(rate: CurrencyRateLike | undefined) {
-  const raw = Array.isArray(rate?.history)
-    ? rate.history
-      .map((point) => ({ date: validIsoDate(point?.date), effectiveRate: Number(point?.effectiveRate || 0) }))
-      .filter((point) => point.date && point.effectiveRate > 0)
-    : [];
-  const unique = new Map(raw.map((point) => [point.date, point.effectiveRate]));
+function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
+  const unique = new Map<string, number>();
+  for (const point of Array.isArray(rate?.history) ? rate.history : []) {
+    const date = validIsoDate(point?.date);
+    const effectiveRate = Number(point?.effectiveRate || 0);
+    if (date && effectiveRate > 0) unique.set(date, effectiveRate);
+  }
   const currentDate = validIsoDate(rate?.rateDate);
   const previousDate = validIsoDate(rate?.previousRateDate);
   const current = Number(rate?.effectiveRate || 0);
   const previous = Number(rate?.previousEffectiveRate || 0);
   if (previousDate && previous > 0) unique.set(previousDate, previous);
   if (currentDate && current > 0) unique.set(currentDate, current);
-
   const actual = [...unique]
-    .map(([date, effectiveRate]) => ({ date, effectiveRate }))
+    .map(([date, effectiveRate]) => ({ date, effectiveRate, actual: true }))
     .sort((left, right) => left.date.localeCompare(right.date));
-  const lastActualDate = actual[actual.length - 1]?.date;
-  const endDate = [currentDate, lastActualDate].filter(Boolean).sort().at(-1) || new Date().toISOString().slice(0, 10);
+  if (actual.length >= 5) return actual.slice(-5);
+  if (!actual.length) return [];
+  const endDate = [currentDate, actual.at(-1)?.date].filter(Boolean).sort().at(-1) || new Date().toISOString().slice(0, 10);
   const dates = Array.from({ length: 5 }, (_, index) => dateShift(endDate, index - 4));
-  const fallbackValue = current || previous || actual.at(-1)?.effectiveRate || 0;
-
+  const fallback = current || previous || actual.at(-1)?.effectiveRate || 0;
   return dates.map((date) => {
     const exact = unique.get(date);
-    if (exact) return { date, effectiveRate: exact };
+    if (exact) return { date, effectiveRate: exact, actual: true };
     const earlier = [...actual].reverse().find((point) => point.date <= date);
     const later = actual.find((point) => point.date >= date);
-    return { date, effectiveRate: earlier?.effectiveRate || later?.effectiveRate || fallbackValue };
+    return { date, effectiveRate: earlier?.effectiveRate || later?.effectiveRate || fallback, actual: false };
   }).filter((point) => point.effectiveRate > 0);
 }
 
@@ -216,26 +217,35 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
   const points = normalizedHistory(rate);
   const values = points.map((point) => point.effectiveRate * meta.nominal);
   const width = 360;
-  const height = 132;
-  const paddingX = 14;
-  const paddingY = 17;
+  const height = 150;
+  const paddingX = 16;
+  const plotTop = 15;
+  const plotBottom = 100;
   const minimum = values.length ? Math.min(...values) : 0;
   const maximum = values.length ? Math.max(...values) : 1;
-  const spread = Math.max(maximum - minimum, Math.abs(maximum) * 0.003, 0.00001);
+  const rawSpread = Math.max(0, maximum - minimum);
+  const fallbackSpread = Math.max(Math.abs(maximum) * 0.00002, 0.000001);
+  const visualSpread = rawSpread > 0 ? rawSpread : fallbackSpread;
+  const chartMinimum = minimum - visualSpread * 0.18;
+  const chartMaximum = maximum + visualSpread * 0.18;
+  const chartSpread = Math.max(chartMaximum - chartMinimum, fallbackSpread);
   const coords = values.map((value, index) => {
     const x = paddingX + (index / Math.max(1, values.length - 1)) * (width - paddingX * 2);
-    const y = paddingY + ((maximum - value) / spread) * (height - paddingY * 2);
+    const y = plotTop + ((chartMaximum - value) / chartSpread) * (plotBottom - plotTop);
     return { x, y };
   });
   const line = coords.map((point, index) => `${index ? "L" : "M"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
-  const area = coords.length ? `${line} L${coords[coords.length - 1].x.toFixed(1)} ${height - paddingY} L${coords[0].x.toFixed(1)} ${height - paddingY} Z` : "";
+  const area = coords.length ? `${line} L${coords.at(-1)!.x.toFixed(1)} ${plotBottom + 12} L${coords[0].x.toFixed(1)} ${plotBottom + 12} Z` : "";
   const first = values[0] || 0;
-  const last = values[values.length - 1] || Number(rate.effectiveRate || 0) * meta.nominal;
-  const rising = last > first;
-  const color = rising ? "#ff4b55" : "#31b765";
+  const last = values.at(-1) || Number(rate.effectiveRate || 0) * meta.nominal;
+  const recentNonZeroDelta = values.slice(1).map((value, index) => value - values[index]).reverse().find((value) => Math.abs(value) > 1e-12) || 0;
+  const totalDelta = last - first;
+  const directionDelta = Math.abs(totalDelta) > 1e-12 ? totalDelta : recentNonZeroDelta;
+  const color = directionDelta > 0 ? "#ff4b55" : directionDelta < 0 ? "#31b765" : light ? "#7c8594" : "rgba(255,255,255,.58)";
   const pointStroke = light ? "#f1f3f7" : "#151821";
 
-  return <div className={`overflow-hidden rounded-2xl border p-3 ${light ? "border-[#dfe3ea] bg-[#f1f3f7]" : "border-white/10 bg-white/[0.035]"}`}>
+  return <div className={`ac-rate-chart-native relative overflow-hidden rounded-2xl border p-3 ${light ? "border-[#dfe3ea] bg-[#f1f3f7]" : "border-white/10 bg-white/[0.035]"}`}>
+    <style>{`.ac-rate-chart-native>.ac-rate-point-deltas{display:none!important}`}</style>
     <div className="flex items-start justify-between gap-3">
       <div>
         <div className={`text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#7a8291]" : "text-white/45"}`}>Курс за 5 дней</div>
@@ -243,15 +253,22 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
       </div>
       <div className="text-xl" aria-hidden="true">{meta.flag}</div>
     </div>
-    <svg className="mt-2 block h-[112px] w-full overflow-visible" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" aria-label={`Изменение курса ${currency} за пять дней`}>
-      {[0.25, 0.5, 0.75].map((part) => <line key={part} x1={paddingX} x2={width - paddingX} y1={height * part} y2={height * part} stroke={light ? "rgba(28,34,45,.09)" : "rgba(255,255,255,.08)"} strokeWidth="1" strokeDasharray="4 5" />)}
-      {coords.map((point, index) => <line key={`guide-${index}`} x1={point.x} x2={point.x} y1={point.y + 7} y2={height - paddingY} stroke={light ? "rgba(28,34,45,.07)" : "rgba(255,255,255,.07)"} strokeWidth="1" strokeDasharray="3 5" />)}
+    <svg className="mt-2 block w-full overflow-visible" style={{ aspectRatio: `${width} / ${height}` }} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" aria-label={`Изменение курса ${currency} за пять дней`}>
+      {[0.25, 0.5, 0.75].map((part) => <line key={part} x1={paddingX} x2={width - paddingX} y1={plotTop + (plotBottom - plotTop) * part} y2={plotTop + (plotBottom - plotTop) * part} stroke={light ? "rgba(28,34,45,.09)" : "rgba(255,255,255,.08)"} strokeWidth="1" strokeDasharray="4 5" />)}
+      {coords.map((point, index) => <line key={`guide-${index}`} x1={point.x} x2={point.x} y1={point.y + 7} y2={plotBottom + 12} stroke={light ? "rgba(28,34,45,.07)" : "rgba(255,255,255,.07)"} strokeWidth="1" strokeDasharray="3 5" />)}
       {area ? <path d={area} fill={color} opacity={light ? 0.09 : 0.14} /> : null}
-      {line ? <path d={line} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" /> : null}
-      {coords.map((point, index) => <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={index === coords.length - 1 ? 5.5 : 4.8} fill={color} stroke={pointStroke} strokeWidth="2.4" vectorEffect="non-scaling-stroke" />)}
+      {line ? <path d={line} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /> : null}
+      {coords.map((point, index) => <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={index === coords.length - 1 ? 4.8 : 4.2} fill={color} stroke={pointStroke} strokeWidth="2.1" />)}
+      {coords.map((point, index) => {
+        if (index === 0 || !points[index]?.actual || !points[index - 1]?.actual) return null;
+        const delta = values[index] - values[index - 1];
+        if (Math.abs(delta) < 1e-12) return null;
+        const labelY = Math.min(plotBottom + 20, Math.max(point.y + 16, plotTop + 16));
+        return <text key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={delta < 0 ? "#20a85e" : "#ef3340"} fontSize="8.5" fontWeight="900">{formatPointDelta(delta)}</text>;
+      })}
     </svg>
-    <div className={`mt-1 grid grid-cols-5 text-center text-[9px] font-bold ${light ? "text-[#7b8493]" : "text-white/42"}`}>
-      {points.map((point) => <span key={point.date}>{shortRateDate(point.date)}</span>)}
+    <div className={`-mt-1 grid grid-cols-5 text-center text-[9px] font-bold ${light ? "text-[#7b8493]" : "text-white/42"}`}>
+      {points.map((point, index) => <span key={point.date}>{index > 0 && index < points.length - 1 ? shortRateDate(point.date) : ""}</span>)}
     </div>
   </div>;
 }
@@ -267,7 +284,6 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
   const deltaClass = rateDelta < 0 ? "text-[#20a85e]" : rateDelta > 0 ? "text-[#ef3340]" : light ? "text-[#4f5868]" : "text-white/60";
   const muted = light ? "text-[#6b7483]" : "text-white/58";
   const strong = light ? "text-[#141821]" : "text-white";
-
   return <div>
     <RateSparkline rate={rate} light={light} />
     <div className={`mt-4 flex items-center gap-2.5 ${strong}`}>
@@ -277,7 +293,7 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
       <div className="flex items-center justify-between gap-4"><span className={muted}>Курс {currency}</span><span className={`whitespace-nowrap ${strong}`}>{previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}{formatRate(currentRate, currency)} ₽</span></div>
       <div className="flex items-center justify-between gap-4"><span className={muted}>Изменение курса</span><span className={`whitespace-nowrap ${deltaClass}`}>{rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}{formatRate(Math.abs(rateDelta), currency)} ₽ ({percent < 0 ? "−" : percent > 0 ? "+" : ""}{Math.abs(percent).toFixed(2)}%)</span></div>
-      {(rate.previousRateDate || rate.rateDate || history.length) ? <div className="flex items-center justify-between gap-4"><span className={muted}>Период</span><span className={`whitespace-nowrap ${strong}`}>{fullRateDate(history[0]?.date || rate.previousRateDate)} → {fullRateDate(history[history.length - 1]?.date || rate.rateDate)}</span></div> : null}
+      {(rate.previousRateDate || rate.rateDate || history.length) ? <div className="flex items-center justify-between gap-4"><span className={muted}>Период</span><span className={`whitespace-nowrap ${strong}`}>{fullRateDate(history[0]?.date || rate.previousRateDate)} → {fullRateDate(history.at(-1)?.date || rate.rateDate)}</span></div> : null}
     </div>
     {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><span className={muted}>Влияние на ориентир: </span><span className={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"}>{impactRub < 0 ? "−" : "+"}{money(Math.abs(impactRub))} ₽</span></div> : null}
     <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Итоговая цена подтверждается менеджером на момент оплаты.</div>
@@ -300,7 +316,6 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   const rateKey = orderedRates.map((rate) => String(rate.currency).toUpperCase()).join("|");
 
   useEffect(() => { closeRef.current = onClose; }, [onClose]);
-
   useEffect(() => {
     const root = document.documentElement;
     const sync = () => setDark(root.dataset.theme === "dark");
@@ -309,39 +324,24 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
     return () => observer.disconnect();
   }, []);
-
   useEffect(() => {
     if (!open) return;
     const requested = String(initialCurrency || "").toUpperCase();
     setActiveCurrency(orderedRates.some((rate) => String(rate.currency).toUpperCase() === requested) ? requested : String(orderedRates[0]?.currency || "").toUpperCase());
     setDragY(0);
     dragState.current = null;
-
     const root = document.documentElement;
     const body = document.body;
-    const scrollY = window.scrollY;
     const previous = {
       rootOverflow: root.style.overflow,
       rootOverscroll: root.style.overscrollBehavior,
       bodyOverflow: body.style.overflow,
       bodyOverscroll: body.style.overscrollBehavior,
-      bodyPosition: body.style.position,
-      bodyTop: body.style.top,
-      bodyLeft: body.style.left,
-      bodyRight: body.style.right,
-      bodyWidth: body.style.width,
     };
-
     root.style.overflow = "hidden";
     root.style.overscrollBehavior = "none";
     body.style.overflow = "hidden";
     body.style.overscrollBehavior = "none";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollY}px`;
-    body.style.left = "0";
-    body.style.right = "0";
-    body.style.width = "100%";
-
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") closeRef.current(); };
     window.addEventListener("keydown", escape);
     return () => {
@@ -349,30 +349,22 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
       root.style.overscrollBehavior = previous.rootOverscroll;
       body.style.overflow = previous.bodyOverflow;
       body.style.overscrollBehavior = previous.bodyOverscroll;
-      body.style.position = previous.bodyPosition;
-      body.style.top = previous.bodyTop;
-      body.style.left = previous.bodyLeft;
-      body.style.right = previous.bodyRight;
-      body.style.width = previous.bodyWidth;
       window.removeEventListener("keydown", escape);
-      window.scrollTo(0, scrollY);
     };
   }, [open, initialCurrency, rateKey]);
 
-  const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+  const startDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (window.matchMedia("(min-width: 768px)").matches) return;
     dragState.current = { pointerId: event.pointerId, startY: event.clientY, currentY: event.clientY, startedAt: performance.now() };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
-
-  const moveDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+  const moveDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     const state = dragState.current;
     if (!state || state.pointerId !== event.pointerId) return;
     state.currentY = event.clientY;
     setDragY(Math.max(0, event.clientY - state.startY));
   };
-
-  const finishDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+  const finishDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     const state = dragState.current;
     if (!state || state.pointerId !== event.pointerId) return;
     const distance = Math.max(0, state.currentY - state.startY);
@@ -382,11 +374,18 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     if (distance > 95 || velocity > 0.65) closeRef.current();
     else setDragY(0);
   };
+  const scrollRateTabs = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const node = event.currentTarget;
+    if (node.scrollWidth <= node.clientWidth) return;
+    const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+    if (!delta) return;
+    node.scrollLeft += delta;
+    event.preventDefault();
+  };
 
   if (!open || typeof document === "undefined") return null;
   const activeRate = orderedRates.find((rate) => String(rate.currency).toUpperCase() === activeCurrency) || orderedRates[0];
   if (!activeRate) return null;
-
   const sheetClass = dark ? "bg-[#0f1219] text-white" : "bg-[#f8f9fb] text-[#151922]";
   const headerClass = dark ? "border-white/10 bg-[#0f1219]/95" : "border-[#dfe3e9] bg-[#f8f9fb]/95";
   const handleClass = dark ? "bg-white/60" : "bg-white/85";
@@ -394,36 +393,17 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
 
   return createPortal(
     <div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/75 md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); closeRef.current(); }}>
-      <div
-        className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`}
-        style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }}
-        onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
-      >
-        <div
-          className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden"
-          onPointerDown={startDrag}
-          onPointerMove={moveDrag}
-          onPointerUp={finishDrag}
-          onPointerCancel={finishDrag}
-          aria-label="Потяните вниз, чтобы закрыть"
-        >
+      <div className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`} style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }} onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}>
+        <div className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag} aria-label="Потяните вниз, чтобы закрыть">
           <span className={`block h-1.5 w-12 rounded-full shadow-[0_1px_5px_rgba(0,0,0,.28)] ${handleClass}`} />
         </div>
-        <section
-          className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Курсы валют"
-        >
+        <section className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`} role="dialog" aria-modal="true" aria-label="Курсы валют">
           <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-5 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
             <div className="flex items-center justify-between gap-3">
-              <div>
-                <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">АвтоЦена</div>
-                <h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${String(activeRate.currency).toUpperCase()}`}</h2>
-              </div>
+              <div><div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">АвтоЦена</div><h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${String(activeRate.currency).toUpperCase()}`}</h2></div>
               <button type="button" onClick={() => closeRef.current()} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button>
             </div>
-            {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
+            {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1" onWheel={scrollRateTabs}>
               {orderedRates.map((rate) => {
                 const currency = String(rate.currency).toUpperCase();
                 const active = currency === String(activeRate.currency).toUpperCase();
@@ -437,9 +417,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
               })}
             </div> : null}
           </div>
-          <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5">
-            <CurrencyRateDetails rate={activeRate} impactRub={impactRub} light={!dark} />
-          </div>
+          <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5"><CurrencyRateDetails rate={activeRate} impactRub={impactRub} light={!dark} /></div>
         </section>
       </div>
     </div>,
@@ -447,22 +425,17 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   );
 }
 
-function TrendPopover({ offer, trend, currency, panel }: { offer: PriceLike; trend: PriceTrendValue; currency: string; panel: boolean }) {
+function TrendPopover({ offer, trend, currency, panel, light }: { offer: PriceLike; trend: PriceTrendValue; currency: string; panel: boolean; light: boolean }) {
   const rate = { currency, ...(offer.calculationSnapshot?.currencyRate || {}) };
   const placementClass = panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]";
   const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
+  const panelClass = light ? "border-[#dfe3ea] bg-[#f8f9fb] text-[#151922] shadow-[0_20px_65px_rgba(34,40,52,.22)]" : "border-white/10 bg-[#11141c] text-white shadow-[0_20px_65px_rgba(0,0,0,.55)]";
   const tailClass = panel
-    ? "absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-l border-t border-white/10 bg-[#11141c]"
-    : "absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r border-white/10 bg-[#11141c]";
-
-  return <div
-    className={`ac-price-trend-popover absolute right-0 z-[400] hidden ${widthClass} rounded-2xl border border-white/10 bg-[#11141c] p-3.5 text-left shadow-[0_20px_65px_rgba(0,0,0,.55)] md:block ${placementClass}`}
-    style={{ color: "#ffffff" }}
-    role="tooltip"
-    onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
-  >
-    <div className="mb-3 text-[10px] font-black uppercase tracking-[0.15em] text-white/48">Почему изменилась цена</div>
-    <CurrencyRateDetails rate={rate} impactRub={trend.deltaRub} compact />
+    ? `absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-l border-t ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}`
+    : `absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}`;
+  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}>
+    <div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>Почему изменилась цена</div>
+    <CurrencyRateDetails rate={rate} impactRub={trend.deltaRub} compact light={light} />
     <span className={tailClass} />
   </div>;
 }
@@ -472,6 +445,8 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const [liveRate, setLiveRate] = useState<LiveRate | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [desktopHover, setDesktopHover] = useState(false);
+  const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
   const trendRoot = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
@@ -480,17 +455,28 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
     void loadLiveRates().then((rates) => { if (active) setLiveRate(rates[currency] || null); });
     return () => { active = false; };
   }, [currency]);
-
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
+    const sync = () => { setDesktopHover(media.matches); if (!media.matches) setPopoverOpen(false); };
+    sync();
+    media.addEventListener?.("change", sync);
+    return () => media.removeEventListener?.("change", sync);
+  }, []);
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => setLightTheme(root.dataset.theme === "light");
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (!popoverOpen) return;
     const close = (event: PointerEvent) => { if (!trendRoot.current?.contains(event.target as Node)) setPopoverOpen(false); };
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setPopoverOpen(false); };
     document.addEventListener("pointerdown", close);
     window.addEventListener("keydown", escape);
-    return () => {
-      document.removeEventListener("pointerdown", close);
-      window.removeEventListener("keydown", escape);
-    };
+    return () => { document.removeEventListener("pointerdown", close); window.removeEventListener("keydown", escape); };
   }, [popoverOpen]);
 
   const pricedOffer = useMemo(() => withLiveRate(offer, liveRate), [offer, liveRate]);
@@ -501,9 +487,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const hasPrice = Boolean(pricedOffer.totalRub);
   const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(pricedOffer) && Boolean(currencyDelta(pricedOffer));
   const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение относительно предыдущего сохранённого расчёта" : "Ожидается следующий снимок валютного курса";
-  const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate
-    ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) }
-    : liveRate;
+  const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
 
   return <div className={`relative ${panel ? "ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${stateClass} ${className}`}>
     <div className="flex min-w-0 items-center justify-between gap-2">
@@ -521,10 +505,10 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. Показать влияние курса валюты`}
         aria-expanded={popoverOpen || sheetOpen}
         className="ac-price-trend-arrow relative flex shrink-0 cursor-pointer items-center rounded-lg pb-0.5 outline-none transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-current/50"
-        onMouseEnter={() => setPopoverOpen(true)}
-        onMouseLeave={() => setPopoverOpen(false)}
+        onMouseEnter={() => { if (desktopHover) setPopoverOpen(true); }}
+        onMouseLeave={() => { if (desktopHover) setPopoverOpen(false); }}
         onPointerDown={(event) => {
-          if (event.pointerType === "mouse") return;
+          if (event.pointerType === "mouse" && desktopHover) return;
           event.preventDefault();
           event.stopPropagation();
           setPopoverOpen(false);
@@ -533,24 +517,20 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          if (window.matchMedia("(max-width: 767px)").matches) {
-            setSheetOpen(true);
-            setPopoverOpen(false);
-          } else {
-            setPopoverOpen(true);
-          }
+          if (desktopHover) setPopoverOpen(true);
+          else { setPopoverOpen(false); setSheetOpen(true); }
         }}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             event.stopPropagation();
-            if (window.matchMedia("(max-width: 767px)").matches) setSheetOpen(true);
-            else setPopoverOpen((current) => !current);
+            if (desktopHover) setPopoverOpen((current) => !current);
+            else setSheetOpen(true);
           }
         }}
       >
         <TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />
-        {popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} /> : null}
+        {desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} light={lightTheme} /> : null}
       </span> : null}
     </div>
     {sheetRate && trend ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={trend.deltaRub} /> : null}
