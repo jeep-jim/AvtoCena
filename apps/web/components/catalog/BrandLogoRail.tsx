@@ -14,18 +14,19 @@ const CAR_LOGO_FILES: Record<string, string> = {
   "Geely": "geely-logo.svg", "Genesis": "genesis-logo.svg", "GMC": "gmc-logo.png", "Great Wall": "great-wall-logo.png", "Haval": "haval-logo.png",
   "Honda": "honda-logo.png", "Hongqi": "hongqi-logo.png", "Hyundai": "hyundai-logo.svg", "Infiniti": "infiniti-logo.svg", "Isuzu": "isuzu-logo.svg",
   "JAC": "jac-logo.png", "Jaguar": "jaguar-logo.svg", "Jeep": "jeep-logo.svg", "Jetour": "jetour-logo.svg", "KGM": "kgm-logo.svg",
-  "Kia": "kia-logo.svg", "Lada": "lada-logo.svg", "Lamborghini": "lamborghini-logo.png", "Land Rover": "land-rover-logo.svg", "Leapmotor": "leapmotor-logo.png",
+  "Kia": "kia-logo.svg", "Lamborghini": "lamborghini-logo.png", "Land Rover": "land-rover-logo.svg", "Leapmotor": "leapmotor-logo.png",
   "Lexus": "lexus-logo.png", "Lincoln": "lincoln-logo.svg", "Lotus": "lotus-logo.svg", "Maserati": "maserati-logo.png", "Mazda": "mazda-logo.svg",
   "McLaren": "mclaren-logo.svg", "Mercedes-Benz": "mercedes-benz-logo.svg", "MG": "mg-logo.png", "MINI": "mini-logo.svg", "Mitsubishi": "mitsubishi-logo.svg",
-  "Nio": "nio-logo.png", "Nissan": "nissan-logo.svg", "Omoda": "omoda-logo.png", "Opel": "opel-logo.svg", "Peugeot": "peugeot-logo.svg",
+  "Nio": "nio-logo.png", "Nissan": "nissan-logo.svg", "OMODA": "omoda-logo.png", "Opel": "opel-logo.svg", "Peugeot": "peugeot-logo.svg",
   "Polestar": "polestar-logo.png", "Porsche": "porsche-logo.svg", "RAM": "ram-logo.svg", "Renault": "renault-logo.svg", "Rolls-Royce": "rolls-royce-logo.svg",
   "SEAT": "seat-logo.svg", "Skoda": "skoda-logo.svg", "Smart": "smart-logo.png", "Subaru": "subaru-logo.png", "Suzuki": "suzuki-logo.svg",
   "Tesla": "tesla-logo.svg", "Toyota": "toyota-logo.svg", "Volkswagen": "volkswagen-logo.svg", "Volvo": "volvo-logo.svg", "XPeng": "xpeng-logo.png",
   "Zeekr": "zeekr-logo.png",
 };
+const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 
-function logoSources(brand: string) {
-  const sources: string[] = [];
+function logoSources(brand: string, theme: "light" | "dark") {
+  const sources = [`/api/catalog/brand-logo/${catalogBrandSlug(brand)}?theme=${theme}`];
   const file = CAR_LOGO_FILES[brand];
   if (file) sources.push(`${CAR_LOGO_BASE}/${file}`);
   const simpleSlug = catalogBrandLogoSlug(brand);
@@ -34,14 +35,32 @@ function logoSources(brand: string) {
 }
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
-  const sources = useMemo(() => logoSources(brand), [brand]);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const sources = useMemo(() => logoSources(brand, theme), [brand, theme]);
   const [sourceIndex, setSourceIndex] = useState(0);
-  useEffect(() => setSourceIndex(0), [brand]);
+
+  useEffect(() => setSourceIndex(0), [brand, theme]);
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
 
   if (sourceIndex >= sources.length) {
     return <span className={`flex h-10 w-[76px] items-center justify-center text-center text-[12px] font-black leading-[1.05] tracking-[-0.035em] text-[var(--ac-text)] ${className}`}>{brand}</span>;
   }
-  return <img src={sources[sourceIndex]} alt={`Логотип ${brand}`} loading="lazy" onError={() => setSourceIndex((current) => current + 1)} className={`h-10 w-[76px] object-contain ${className}`} />;
+
+  return <img
+    src={sources[sourceIndex]}
+    alt={`Логотип ${brand}`}
+    loading="lazy"
+    decoding="async"
+    onError={() => setSourceIndex((current) => current + 1)}
+    className={`h-10 w-[76px] object-contain ${className}`}
+  />;
 }
 
 function BrandTile({ brand, onNavigate }: { brand: string; onNavigate?: () => void }) {
@@ -58,12 +77,16 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
-      if (canonical) map.set(canonical.toLocaleLowerCase("en-US"), canonical);
+      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
+      if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
   }, [brands]);
   const allBrands = useMemo(() => CATALOG_BRANDS.map((brand) => brand.name), []);
-  const visible = activeBrands.slice(0, 16);
+  const orderedBrands = useMemo(() => {
+    const active = new Set(activeBrands.map((brand) => brand.toLocaleLowerCase("en-US")));
+    return [...activeBrands, ...allBrands.filter((brand) => !active.has(brand.toLocaleLowerCase("en-US")))];
+  }, [activeBrands, allBrands]);
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
     return normalized ? allBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : allBrands;
@@ -80,12 +103,13 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
 
   return <>
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
-      <div className="ac-hide-scrollbar flex min-w-0 items-center gap-1 overflow-x-auto scroll-smooth pb-1">
-        {visible.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} />)}
+      <div className="ac-hide-scrollbar flex min-w-0 touch-pan-x items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1" style={{ WebkitOverflowScrolling: "touch" }}>
+        {orderedBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} />)}
       </div>
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>
-    {open ? <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/80 p-2.5 md:p-5" onClick={() => setOpen(false)} role="dialog" aria-modal="true" aria-label="Все марки автомобилей">
+
+    {open ? <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/80 p-2.5 backdrop-blur-sm md:p-5" onClick={() => setOpen(false)} role="dialog" aria-modal="true" aria-label="Все марки автомобилей">
       <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()}>
         <div className="sticky -top-4 z-10 bg-[var(--ac-surface)] pb-4 pt-1 md:-top-7 md:pt-2">
           <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><button type="button" onClick={() => setOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div>
