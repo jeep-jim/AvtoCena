@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CurrencyRatesSheet, type PublicCurrencyRate } from "@/components/catalog/PriceTrend";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
@@ -14,7 +15,6 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string };
-type Rate = { currency: string; effectiveRate: number };
 
 const budgets: Option[] = [
   { value: "", label: "Любой бюджет" },
@@ -62,6 +62,13 @@ const marketMeta: Record<string, { label: string; flag: string }> = {
   uae: { label: "ОАЭ", flag: "🇦🇪" },
   europe: { label: "Европа", flag: "🇪🇺" },
 };
+const rateTiles: Array<[string, string, number]> = [
+  ["🇯🇵", "JPY", 100],
+  ["🇨🇳", "CNY", 1],
+  ["🇰🇷", "KRW", 1000],
+  ["🇦🇪", "AED", 1],
+  ["🇪🇺", "EUR", 1],
+];
 const buyers = Array.from({ length: 15 }, (_, index) => `/buyers/${index + 1}.jpg`);
 const benefits = [
   { icon: "fast", title: "Без регистрации", text: "Сразу получите первую выдачу по вашему бюджету." },
@@ -99,10 +106,18 @@ function HomeSelect({ value, options, onChange, searchable = false, searchPlaceh
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
     document.addEventListener("pointerdown", outside);
     window.addEventListener("keydown", escape);
-    return () => { document.removeEventListener("pointerdown", outside); window.removeEventListener("keydown", escape); };
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      window.removeEventListener("keydown", escape);
+    };
   }, [open]);
 
-  const choose = (next: string) => { onChange(next); setOpen(false); setQuery(""); };
+  const choose = (next: string) => {
+    onChange(next);
+    setOpen(false);
+    setQuery("");
+  };
+
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[230]" : "z-0"}`}>
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}><span className="min-w-0 truncate">{active?.label}</span><Chevron open={open} /></button>
     {open ? <div className="ac-filter-dropdown absolute left-0 right-0 top-[calc(100%+7px)] overflow-hidden rounded-2xl p-2">
@@ -150,10 +165,11 @@ export default function HomePageClient() {
   const [catalogMarket, setCatalogMarket] = useState("");
   const [catalogMake, setCatalogMake] = useState("");
   const [items, setItems] = useState<Item[]>([]);
-  const [rates, setRates] = useState<Rate[]>([]);
+  const [rates, setRates] = useState<PublicCurrencyRate[]>([]);
   const [marketCounts, setMarketCounts] = useState<Record<string, number>>({});
   const [count, setCount] = useState<number | null>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [ratesOpen, setRatesOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -174,7 +190,9 @@ export default function HomePageClient() {
         setItems([...unique.values()]);
         setRates(Array.isArray(responses[0]?.rates) ? responses[0].rates : []);
         setMarketCounts(Object.fromEntries(marketIds.map((id, index) => [id, Number(responses[index + 1]?.total || 0)])));
-      } catch { if (!cancelled) setItems([]); }
+      } catch {
+        if (!cancelled) setItems([]);
+      }
     };
     loadCatalog();
     const interval = window.setInterval(loadCatalog, 60_000);
@@ -182,7 +200,12 @@ export default function HomePageClient() {
     const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus);
     document.addEventListener("visibilitychange", visibility);
-    return () => { cancelled = true; window.clearInterval(interval); window.removeEventListener("focus", focus); document.removeEventListener("visibilitychange", visibility); };
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+      window.removeEventListener("focus", focus);
+      document.removeEventListener("visibilitychange", visibility);
+    };
   }, []);
 
   useEffect(() => {
@@ -191,7 +214,10 @@ export default function HomePageClient() {
     document.body.style.overflow = "hidden";
     const keydown = (event: KeyboardEvent) => { if (event.key === "Escape") setMobileFiltersOpen(false); };
     window.addEventListener("keydown", keydown);
-    return () => { document.body.style.overflow = old; window.removeEventListener("keydown", keydown); };
+    return () => {
+      document.body.style.overflow = old;
+      window.removeEventListener("keydown", keydown);
+    };
   }, [mobileFiltersOpen]);
 
   useEffect(() => {
@@ -249,7 +275,7 @@ export default function HomePageClient() {
     appendAttributionToSearchParams(params);
     router.push(`/results${params.toString() ? `?${params}` : ""}`);
   };
-  const rateMap = new Map(rates.map((rate) => [rate.currency, rate.effectiveRate]));
+  const rateMap = new Map<string, PublicCurrencyRate>(rates.map((rate) => [String(rate.currency).toUpperCase(), rate]));
 
   return <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader />
@@ -266,7 +292,18 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <section className="ac-mobile-rates grid grid-cols-5 rounded-[1.4rem] px-2 py-4 lg:hidden">{[["🇯🇵", "JPY", 100], ["🇨🇳", "CNY", 1], ["🇰🇷", "KRW", 1000], ["🇦🇪", "AED", 1], ["🇪🇺", "EUR", 1]].map(([flag, currency, amount]) => <div key={String(currency)} className="text-center"><div className="text-2xl">{flag}</div><div className="text-[9px] font-black">{currency}</div><div className="text-[10px] font-bold text-white/60">{rateMap.has(String(currency)) ? `${(Number(rateMap.get(String(currency))) * Number(amount)).toFixed(2)} ₽` : "—"}</div></div>)}</section>
+      <button type="button" onClick={() => setRatesOpen(true)} className="ac-mobile-rates grid w-full grid-cols-5 rounded-[1.4rem] px-2 py-4 text-left transition active:scale-[.99] lg:hidden" aria-label="Показать изменение курсов валют за пять дней">
+        {rateTiles.map(([flag, currency, amount]) => {
+          const rate = rateMap.get(currency);
+          const delta = Number(rate?.rateDelta || 0);
+          return <span key={currency} className="text-center">
+            <span className="block text-2xl">{flag}</span>
+            <span className="block text-[9px] font-black">{currency}</span>
+            <span className="block text-[10px] font-bold text-white/60">{rate ? `${(Number(rate.effectiveRate) * amount).toFixed(2)} ₽` : "—"}</span>
+            <span className={`mt-0.5 block text-[8px] font-black ${delta < 0 ? "text-[#31b765]" : delta > 0 ? "text-[#ef3340]" : "text-white/35"}`}>{delta < 0 ? "↓" : delta > 0 ? "↑" : "—"}</span>
+          </span>;
+        })}
+      </button>
 
       <BuyerGallery images={buyers} />
 
@@ -277,6 +314,8 @@ export default function HomePageClient() {
         <BrandLogoRail brands={items.map((item) => item.make)} />
       </section>
     </div>
+
+    <CurrencyRatesSheet open={ratesOpen} onClose={() => setRatesOpen(false)} rates={rates} initialCurrency="JPY" />
 
     {mobileFiltersOpen ? <div className="fixed inset-0 z-[10040] bg-black/75 lg:hidden" onClick={() => setMobileFiltersOpen(false)}><div className="ac-home-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto bg-[var(--ac-surface)]" onClick={(event) => event.stopPropagation()}>
       <div className="ac-home-filter-drawer__header flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
