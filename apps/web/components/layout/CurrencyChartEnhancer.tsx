@@ -95,6 +95,23 @@ export function CurrencyChartEnhancer() {
           column-gap:0!important;
         }
       }
+      @media(max-width:767px){
+        .ac-catalog-pagination{
+          display:flex!important;
+          flex-flow:row nowrap!important;
+          justify-content:flex-start!important;
+          width:100%!important;
+          max-width:100%!important;
+          overflow-x:auto!important;
+          overflow-y:hidden!important;
+          scroll-snap-type:x proximity;
+          -webkit-overflow-scrolling:touch;
+        }
+        .ac-catalog-pagination>*{
+          flex:0 0 auto!important;
+          scroll-snap-align:start;
+        }
+      }
     `;
     document.getElementById(style.id)?.remove();
     document.head.appendChild(style);
