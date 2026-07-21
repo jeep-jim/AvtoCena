@@ -105,9 +105,14 @@ export function CitySelector({ value, onChange }: Props) {
   const label = value || "Ваш город";
 
   return <>
-    <span className="mt-2 flex w-fit max-w-full items-center gap-[.12em] text-[.74em] leading-none lg:mt-0 lg:inline-flex">
+    <span className="ac-city-selector mt-2 flex w-fit max-w-full items-center gap-[.12em] text-[.74em] leading-none lg:mt-0 lg:inline-flex">
       <span className="text-[var(--ac-text)]">в</span>
-      <button type="button" onClick={() => { setQuery(value || ""); setOpen(true); }} className="inline-flex min-w-0 max-w-full items-center gap-[.13em] rounded-[.22em] px-[.08em] py-[.04em] text-left font-black text-[#ffd324] underline decoration-dotted decoration-[.055em] underline-offset-[.12em] transition hover:text-[#ffdf5d]" aria-label={`Выбрать город. Сейчас: ${label}`}>
+      <button
+        type="button"
+        onClick={() => { setQuery(value || ""); setOpen(true); }}
+        className="inline-flex min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]"
+        aria-label={`Выбрать город. Сейчас: ${label}`}
+      >
         <LocationIcon className="h-[.78em] w-[.78em] shrink-0" /><span className="truncate">{label}</span>
       </button>
     </span>
