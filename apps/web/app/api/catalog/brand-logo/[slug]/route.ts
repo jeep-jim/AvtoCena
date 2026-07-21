@@ -120,6 +120,14 @@ async function loadBrandPageLogo(dromSlug: string, name: string, theme: "light" 
   return logoFor(logos, [dromSlug, name], theme);
 }
 
+function resolvedImageContentType(source: string, received: string | null) {
+  if (received?.toLowerCase().startsWith("image/")) return received;
+  const pathname = new URL(source).pathname.toLowerCase();
+  if (pathname.endsWith(".svg")) return "image/svg+xml";
+  if (pathname.endsWith(".webp")) return "image/webp";
+  return "image/png";
+}
+
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
   const brand = catalogBrandBySlug(params.slug);
   if (!brand) return new NextResponse(null, { status: 404 });
@@ -138,15 +146,14 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
       next: { revalidate: 86400 },
       headers: {
         accept: "image/avif,image/webp,image/svg+xml,image/png,image/*,*/*;q=0.8",
+        referer: "https://www.drom.ru/",
         "user-agent": "Mozilla/5.0 (compatible; AvtoCenaBrandLogos/1.0; +https://avtocena.com)",
       },
     });
     if (!response.ok) return new NextResponse(null, { status: 404 });
-    const contentType = response.headers.get("content-type") || "image/png";
-    if (!contentType.startsWith("image/")) return new NextResponse(null, { status: 404 });
     return new NextResponse(await response.arrayBuffer(), {
       headers: {
-        "content-type": contentType,
+        "content-type": resolvedImageContentType(source, response.headers.get("content-type")),
         "cache-control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000",
       },
     });
