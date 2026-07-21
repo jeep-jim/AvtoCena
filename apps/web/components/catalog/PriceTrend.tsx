@@ -34,13 +34,14 @@ type LiveRate = Required<Pick<PublicCurrencyRate, "currency" | "effectiveRate">>
 export type PriceTrendDirection = "up" | "down";
 export type PriceTrendValue = { direction: PriceTrendDirection; deltaRub: number; formattedDelta: string };
 
-const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "USD"];
+const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD"];
 const RATE_META: Record<string, { flag: string; label: string; nominal: number }> = {
   JPY: { flag: "🇯🇵", label: "Японская иена", nominal: 100 },
   CNY: { flag: "🇨🇳", label: "Китайский юань", nominal: 1 },
   KRW: { flag: "🇰🇷", label: "Корейская вона", nominal: 1000 },
   AED: { flag: "🇦🇪", label: "Дирхам ОАЭ", nominal: 1 },
   EUR: { flag: "🇪🇺", label: "Евро", nominal: 1 },
+  GEL: { flag: "🇬🇪", label: "Грузинский лари", nominal: 1 },
   USD: { flag: "🇺🇸", label: "Доллар США", nominal: 1 },
 };
 
@@ -133,7 +134,7 @@ export function resolvePriceTrend(offer: PriceLike): PriceTrendValue | null {
   return { direction: delta < 0 ? "down" : "up", deltaRub: delta, formattedDelta: formatDelta(delta) };
 }
 
-function TrendArrow({ direction, className = "" }: { direction: PriceTrendDirection; className?: string }) {
+function DirectionArrowSvg({ direction, className = "" }: { direction: PriceTrendDirection; className?: string }) {
   const down = direction === "down";
   return <svg className={className} width="38" height="29" viewBox="0 0 38 29" fill="none" aria-hidden="true">
     <path d={down ? "M3 5L11.5 13.5L18 9L34 25" : "M3 25L11.5 16.5L18 21L34 5"} stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
@@ -141,12 +142,12 @@ function TrendArrow({ direction, className = "" }: { direction: PriceTrendDirect
   </svg>;
 }
 
+function TrendArrow({ direction, className = "" }: { direction: PriceTrendDirection; className?: string }) {
+  return <DirectionArrowSvg direction={direction} className={className} />;
+}
+
 export function RateDirectionIcon({ direction, className = "" }: { direction: PriceTrendDirection; className?: string }) {
-  const down = direction === "down";
-  return <svg className={className} width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-    <path d={down ? "M3 4H11V13" : "M3 14H11V5"} stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d={down ? "M7.5 9.5L11 13L14.5 9.5" : "M7.5 8.5L11 5L14.5 8.5"} stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>;
+  return <DirectionArrowSvg direction={direction} className={className} />;
 }
 
 function formatRate(value: number, currency: string, nominal = 1) {
@@ -167,25 +168,46 @@ function shortRateDate(value: string | undefined) {
   return Number.isNaN(parsed.getTime()) ? value.slice(5) : parsed.toLocaleDateString("ru-RU", { day: "2-digit", month: "2-digit" });
 }
 
+function validIsoDate(value: unknown) {
+  const text = String(value || "").slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
+}
+
+function dateShift(value: string, offset: number) {
+  const date = new Date(`${value}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + offset);
+  return date.toISOString().slice(0, 10);
+}
+
 function normalizedHistory(rate: CurrencyRateLike | undefined) {
-  const history = Array.isArray(rate?.history)
+  const raw = Array.isArray(rate?.history)
     ? rate.history
-      .map((point) => ({ date: String(point?.date || "").slice(0, 10), effectiveRate: Number(point?.effectiveRate || 0) }))
+      .map((point) => ({ date: validIsoDate(point?.date), effectiveRate: Number(point?.effectiveRate || 0) }))
       .filter((point) => point.date && point.effectiveRate > 0)
     : [];
-  const unique = new Map(history.map((point) => [point.date, point.effectiveRate]));
-  const currentDate = String(rate?.rateDate || "").slice(0, 10);
-  const previousDate = String(rate?.previousRateDate || "").slice(0, 10);
+  const unique = new Map(raw.map((point) => [point.date, point.effectiveRate]));
+  const currentDate = validIsoDate(rate?.rateDate);
+  const previousDate = validIsoDate(rate?.previousRateDate);
   const current = Number(rate?.effectiveRate || 0);
   const previous = Number(rate?.previousEffectiveRate || 0);
   if (previousDate && previous > 0) unique.set(previousDate, previous);
   if (currentDate && current > 0) unique.set(currentDate, current);
-  const points = [...unique].map(([date, effectiveRate]) => ({ date, effectiveRate })).sort((left, right) => left.date.localeCompare(right.date)).slice(-5);
-  if (points.length === 1) {
-    const fallbackDate = previousDate || points[0].date;
-    points.unshift({ date: fallbackDate, effectiveRate: previous || points[0].effectiveRate });
-  }
-  return points;
+
+  const actual = [...unique]
+    .map(([date, effectiveRate]) => ({ date, effectiveRate }))
+    .sort((left, right) => left.date.localeCompare(right.date));
+  const lastActualDate = actual[actual.length - 1]?.date;
+  const endDate = [currentDate, lastActualDate].filter(Boolean).sort().at(-1) || new Date().toISOString().slice(0, 10);
+  const dates = Array.from({ length: 5 }, (_, index) => dateShift(endDate, index - 4));
+  const fallbackValue = current || previous || actual.at(-1)?.effectiveRate || 0;
+
+  return dates.map((date) => {
+    const exact = unique.get(date);
+    if (exact) return { date, effectiveRate: exact };
+    const earlier = [...actual].reverse().find((point) => point.date <= date);
+    const later = actual.find((point) => point.date >= date);
+    return { date, effectiveRate: earlier?.effectiveRate || later?.effectiveRate || fallbackValue };
+  }).filter((point) => point.effectiveRate > 0);
 }
 
 function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?: boolean }) {
@@ -228,7 +250,7 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
       {line ? <path d={line} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" /> : null}
       {coords.map((point, index) => <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={index === coords.length - 1 ? 5.5 : 4.8} fill={color} stroke={pointStroke} strokeWidth="2.4" vectorEffect="non-scaling-stroke" />)}
     </svg>
-    <div className={`mt-1 grid text-center text-[9px] font-bold ${light ? "text-[#7b8493]" : "text-white/42"}`} style={{ gridTemplateColumns: `repeat(${Math.max(points.length, 1)}, minmax(0, 1fr))` }}>
+    <div className={`mt-1 grid grid-cols-5 text-center text-[9px] font-bold ${light ? "text-[#7b8493]" : "text-white/42"}`}>
       {points.map((point) => <span key={point.date}>{shortRateDate(point.date)}</span>)}
     </div>
   </div>;
@@ -274,7 +296,10 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   const [dark, setDark] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "dark");
   const [dragY, setDragY] = useState(0);
   const dragState = useRef<{ pointerId: number; startY: number; currentY: number; startedAt: number } | null>(null);
+  const closeRef = useRef(onClose);
   const rateKey = orderedRates.map((rate) => String(rate.currency).toUpperCase()).join("|");
+
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -291,27 +316,62 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     setActiveCurrency(orderedRates.some((rate) => String(rate.currency).toUpperCase() === requested) ? requested : String(orderedRates[0]?.currency || "").toUpperCase());
     setDragY(0);
     dragState.current = null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
+
+    const root = document.documentElement;
+    const body = document.body;
+    const scrollY = window.scrollY;
+    const previous = {
+      rootOverflow: root.style.overflow,
+      rootOverscroll: root.style.overscrollBehavior,
+      bodyOverflow: body.style.overflow,
+      bodyOverscroll: body.style.overscrollBehavior,
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+    };
+
+    root.style.overflow = "hidden";
+    root.style.overscrollBehavior = "none";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
+    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") closeRef.current(); };
     window.addEventListener("keydown", escape);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      root.style.overflow = previous.rootOverflow;
+      root.style.overscrollBehavior = previous.rootOverscroll;
+      body.style.overflow = previous.bodyOverflow;
+      body.style.overscrollBehavior = previous.bodyOverscroll;
+      body.style.position = previous.bodyPosition;
+      body.style.top = previous.bodyTop;
+      body.style.left = previous.bodyLeft;
+      body.style.right = previous.bodyRight;
+      body.style.width = previous.bodyWidth;
       window.removeEventListener("keydown", escape);
+      window.scrollTo(0, scrollY);
     };
-  }, [open, initialCurrency, rateKey, onClose]);
+  }, [open, initialCurrency, rateKey]);
 
   const startDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     if (window.matchMedia("(min-width: 768px)").matches) return;
     dragState.current = { pointerId: event.pointerId, startY: event.clientY, currentY: event.clientY, startedAt: performance.now() };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
+
   const moveDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     const state = dragState.current;
     if (!state || state.pointerId !== event.pointerId) return;
     state.currentY = event.clientY;
     setDragY(Math.max(0, event.clientY - state.startY));
   };
+
   const finishDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     const state = dragState.current;
     if (!state || state.pointerId !== event.pointerId) return;
@@ -319,7 +379,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     const elapsed = Math.max(1, performance.now() - state.startedAt);
     const velocity = distance / elapsed;
     dragState.current = null;
-    if (distance > 95 || velocity > 0.65) onClose();
+    if (distance > 95 || velocity > 0.65) closeRef.current();
     else setDragY(0);
   };
 
@@ -329,55 +389,59 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
 
   const sheetClass = dark ? "bg-[#0f1219] text-white" : "bg-[#f8f9fb] text-[#151922]";
   const headerClass = dark ? "border-white/10 bg-[#0f1219]/95" : "border-[#dfe3e9] bg-[#f8f9fb]/95";
-  const handleClass = dark ? "bg-white/25" : "bg-[#cfd4dc]";
+  const handleClass = dark ? "bg-white/60" : "bg-white/85";
   const closeClass = dark ? "bg-white/[0.07] text-white" : "bg-[#edf0f4] text-[#202630]";
 
   return createPortal(
-    <div className="fixed inset-0 z-[14000] flex items-end justify-center bg-black/75 md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); onClose(); }}>
-      <section
-        className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:max-w-[570px] md:rounded-[30px] ${sheetClass} ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`}
+    <div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/75 md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); closeRef.current(); }}>
+      <div
+        className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`}
         style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Курсы валют"
         onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
       >
-        <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-3 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
-          <div
-            className="mx-auto mb-3 flex h-5 w-20 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden"
-            onPointerDown={startDrag}
-            onPointerMove={moveDrag}
-            onPointerUp={finishDrag}
-            onPointerCancel={finishDrag}
-            aria-label="Потяните вниз, чтобы закрыть"
-          >
-            <span className={`block h-1.5 w-12 rounded-full ${handleClass}`} />
-          </div>
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">АвтоЦена</div>
-              <h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${String(activeRate.currency).toUpperCase()}`}</h2>
+        <div
+          className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden"
+          onPointerDown={startDrag}
+          onPointerMove={moveDrag}
+          onPointerUp={finishDrag}
+          onPointerCancel={finishDrag}
+          aria-label="Потяните вниз, чтобы закрыть"
+        >
+          <span className={`block h-1.5 w-12 rounded-full shadow-[0_1px_5px_rgba(0,0,0,.28)] ${handleClass}`} />
+        </div>
+        <section
+          className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Курсы валют"
+        >
+          <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-5 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ef3340]">АвтоЦена</div>
+                <h2 className="mt-1 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${String(activeRate.currency).toUpperCase()}`}</h2>
+              </div>
+              <button type="button" onClick={() => closeRef.current()} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button>
             </div>
-            <button type="button" onClick={onClose} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button>
+            {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
+              {orderedRates.map((rate) => {
+                const currency = String(rate.currency).toUpperCase();
+                const active = currency === String(activeRate.currency).toUpperCase();
+                const delta = finiteNumber(rate.rateDelta) || (Number(rate.effectiveRate || 0) - Number(rate.previousEffectiveRate || 0));
+                const inactiveClass = dark ? "border-white/10 bg-white/[0.05]" : "border-[#dde2e9] bg-[#f0f2f6]";
+                const activeClass = dark ? "border-[#ef3340] bg-[#ef3340]/12" : "border-[#ef3340] bg-[#fff0f1]";
+                return <button key={currency} type="button" onClick={() => setActiveCurrency(currency)} className={`min-w-[88px] rounded-2xl border px-3 py-2.5 text-left transition ${active ? activeClass : inactiveClass}`}>
+                  <div className="flex items-center justify-between gap-2"><span className="text-lg">{RATE_META[currency]?.flag || "💱"}</span><span className={delta < 0 ? "text-[#20a85e]" : delta > 0 ? "text-[#ef3340]" : dark ? "text-white/45" : "text-[#788190]"}>{delta ? <RateDirectionIcon direction={delta < 0 ? "down" : "up"} className="h-4 w-5" /> : "—"}</span></div>
+                  <div className="mt-1 text-xs font-black">{currency}</div>
+                </button>;
+              })}
+            </div> : null}
           </div>
-          {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
-            {orderedRates.map((rate) => {
-              const currency = String(rate.currency).toUpperCase();
-              const active = currency === String(activeRate.currency).toUpperCase();
-              const delta = finiteNumber(rate.rateDelta) || (Number(rate.effectiveRate || 0) - Number(rate.previousEffectiveRate || 0));
-              const inactiveClass = dark ? "border-white/10 bg-white/[0.05]" : "border-[#dde2e9] bg-[#f0f2f6]";
-              const activeClass = dark ? "border-[#ef3340] bg-[#ef3340]/12" : "border-[#ef3340] bg-[#fff0f1]";
-              return <button key={currency} type="button" onClick={() => setActiveCurrency(currency)} className={`min-w-[88px] rounded-2xl border px-3 py-2.5 text-left transition ${active ? activeClass : inactiveClass}`}>
-                <div className="flex items-center justify-between gap-2"><span className="text-lg">{RATE_META[currency]?.flag || "💱"}</span><span className={delta < 0 ? "text-[#20a85e]" : delta > 0 ? "text-[#ef3340]" : dark ? "text-white/45" : "text-[#788190]"}>{delta ? <RateDirectionIcon direction={delta < 0 ? "down" : "up"} className="h-4 w-4" /> : "—"}</span></div>
-                <div className="mt-1 text-xs font-black">{currency}</div>
-              </button>;
-            })}
-          </div> : null}
-        </div>
-        <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5">
-          <CurrencyRateDetails rate={activeRate} impactRub={impactRub} light={!dark} />
-        </div>
-      </section>
+          <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5">
+            <CurrencyRateDetails rate={activeRate} impactRub={impactRub} light={!dark} />
+          </div>
+        </section>
+      </div>
     </div>,
     document.body,
   );
