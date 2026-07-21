@@ -21,21 +21,7 @@ html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-r
 .ac-home-page #form>div.relative.mt-4{position:relative!important;display:flex!important;align-items:stretch!important;gap:8px!important;overflow:visible!important}
 .ac-home-page #form>div.relative.mt-4>.avto-button{display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;align-items:center!important;justify-content:center!important;padding-right:1rem!important;text-align:center!important}
 .ac-home-page #form>div.relative.mt-4>button[aria-label="Открыть дополнительные фильтры"]{position:static!important;inset:auto!important;display:flex!important;flex:0 0 58px!important;width:58px!important;height:58px!important;align-items:center!important;justify-content:center!important;border-radius:1rem!important;background:var(--ac-surface-2)!important;color:var(--ac-text)!important}
-.ac-home-filter-drawer{padding:22px 20px 24px!important;background:var(--ac-surface)!important;color:var(--ac-text)!important}
-.ac-home-filter-drawer>div:first-child{display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 30px!important;padding:0!important}
-.ac-home-filter-drawer>.grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important;row-gap:16px!important;margin:0!important;padding:0!important}
-.ac-home-filter-drawer>.grid>*{margin:0!important}
-.ac-home-filter-drawer .ac-filter-panel{margin:0!important;padding:0!important;background:transparent!important;border:0!important;outline:0!important;box-shadow:none!important}
-.ac-home-filter-drawer .ac-filter-panel>div:first-child{margin:0 0 16px!important}
-.ac-home-filter-drawer .ac-filter-panel>div+div{margin-top:16px!important}
-.ac-home-filter-drawer .ac-filter-panel .grid{gap:12px!important;row-gap:12px!important}
-.ac-home-filter-drawer .ac-filter-panel .grid>*{margin-top:0!important}
-.ac-home-filter-drawer .ac-filter-control,.ac-home-filter-drawer .ac-power-limit{border:0!important;outline:0!important;box-shadow:none!important;background:var(--ac-surface-2)!important;color:var(--ac-text)!important}
-.ac-home-filter-drawer .ac-filter-dropdown{background:var(--ac-surface)!important;color:var(--ac-text)!important;border:0!important;outline:0!important;box-shadow:none!important}
-.ac-home-filter-drawer button[aria-label^="Почему есть фильтр"]{border:0!important;outline:0!important;box-shadow:none!important}
-.ac-home-filter-drawer button[aria-label="Открыть дополнительные фильтры"],.ac-home-filter-drawer .ac-filter-more-button,.ac-home-filter-drawer .avto-button+button,.ac-home-filter-drawer .avto-button~button{display:none!important}
-.ac-home-filter-drawer div:has(>.avto-button){display:block!important;width:100%!important;grid-template-columns:1fr!important;overflow:visible!important}
-.ac-home-filter-drawer div:has(>.avto-button)>.avto-button,.ac-home-filter-drawer>.avto-button,.ac-home-filter-drawer .ac-filter-panel .avto-button{display:flex!important;width:100%!important;min-width:100%!important;align-items:center!important;justify-content:center!important;margin-top:18px!important;padding:0 1rem!important;text-align:center!important;border:0!important;outline:0!important;border-radius:1rem!important}
+.ac-home-filter-drawer button[aria-label="Открыть дополнительные фильтры"],.ac-home-filter-drawer .ac-filter-more-button,.ac-home-filter-drawer div:has(>.avto-button)>button:not(.avto-button){display:none!important}
 }
 `;
 
