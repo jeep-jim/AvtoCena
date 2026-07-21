@@ -8,6 +8,7 @@ import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
+import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
@@ -89,7 +90,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
   const sourceUrl = safeExternalUrl((offer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(offer));
-  const o = presentCatalogOffer(raw);
+  const o = { ...presentCatalogOffer(raw), images: rankedCatalogImageUrls(raw) };
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
