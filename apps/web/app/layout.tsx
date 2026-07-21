@@ -4,6 +4,7 @@ import "./public-polish.css";
 import type { Metadata, Viewport } from "next";
 import { RoutePreloader } from "@/components/layout/RoutePreloader";
 import { PublicUiEnhancer } from "@/components/layout/PublicUiEnhancer";
+import { CurrencyChartEnhancer } from "@/components/layout/CurrencyChartEnhancer";
 import { PublicLegalFooter } from "@/components/layout/PublicLegalFooter";
 
 export const metadata: Metadata = {
@@ -305,6 +306,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <PublicLegalFooter />
         <PublicUiEnhancer />
+        <CurrencyChartEnhancer />
         <RoutePreloader />
       </body>
     </html>
