@@ -204,6 +204,10 @@ function validIsoDate(value: unknown) {
   return /^\d{4}-\d{2}-\d{2}$/.test(text) ? text : "";
 }
 
+function isoDate(value: Date) {
+  return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, "0")}-${String(value.getDate()).padStart(2, "0")}`;
+}
+
 function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   const unique = new Map<string, number>();
   for (const point of Array.isArray(rate?.history) ? rate.history : []) {
@@ -219,10 +223,27 @@ function normalizedHistory(rate: CurrencyRateLike | undefined): ChartPoint[] {
   if (previousDate && previous > 0) unique.set(previousDate, previous);
   if (currentDate && current > 0) unique.set(currentDate, current);
 
-  return [...unique]
-    .map(([date, effectiveRate]) => ({ date, effectiveRate, actual: true }))
-    .sort((left, right) => left.date.localeCompare(right.date))
-    .slice(-5);
+  const known = [...unique]
+    .map(([date, effectiveRate]) => ({ date, effectiveRate }))
+    .sort((left, right) => left.date.localeCompare(right.date));
+  if (!known.length) return [];
+
+  const finalDateText = currentDate || known.at(-1)!.date;
+  const finalDate = new Date(`${finalDateText}T12:00:00`);
+  if (Number.isNaN(finalDate.getTime())) return known.slice(-5).map((point) => ({ ...point, actual: true }));
+
+  const result: ChartPoint[] = [];
+  for (let offset = 4; offset >= 0; offset--) {
+    const day = new Date(finalDate);
+    day.setDate(finalDate.getDate() - offset);
+    const date = isoDate(day);
+    const exact = unique.get(date);
+    const previousKnown = [...known].reverse().find((point) => point.date <= date);
+    const nextKnown = known.find((point) => point.date > date);
+    const effectiveRate = exact || previousKnown?.effectiveRate || nextKnown?.effectiveRate || current;
+    if (effectiveRate > 0) result.push({ date, effectiveRate, actual: exact != null });
+  }
+  return result;
 }
 
 function pointMovementColor(delta: number, fallback: string, light: boolean) {
@@ -235,7 +256,7 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
   const currency = String(rate.currency || "").toUpperCase();
   const meta = RATE_META[currency] || { flag: "💱", label: currency || "Валюта", nominal: 1, country: currency || "Валюта" };
   const points = normalizedHistory(rate);
-  const historyKey = points.map((point) => `${point.date}:${point.effectiveRate}`).join("|");
+  const historyKey = points.map((point) => `${point.date}:${point.effectiveRate}:${point.actual ? 1 : 0}`).join("|");
   const [selectedIndex, setSelectedIndex] = useState(Math.max(0, points.length - 1));
 
   useEffect(() => {
@@ -273,7 +294,7 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
   const selectedPoint = points[selectedIndex] || points.at(-1);
   const selectedValue = values[selectedIndex] ?? values.at(-1) ?? Number(rate.effectiveRate || 0) * meta.nominal;
   const selectedDelta = selectedIndex > 0 ? selectedValue - values[selectedIndex - 1] : directionDelta;
-  const selectedColor = pointMovementColor(selectedDelta, color, light);
+  const selectedColor = selectedPoint?.actual === false ? (light ? "#7c8594" : "rgba(255,255,255,.64)") : pointMovementColor(selectedDelta, color, light);
   const selectedBackground = selectedDelta < -1e-12
     ? light ? "rgba(32,168,94,.10)" : "rgba(32,168,94,.16)"
     : selectedDelta > 1e-12
@@ -298,7 +319,7 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
       {line ? <path d={line} fill="none" stroke={color} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /> : null}
       {coords.map((point, index) => {
         const delta = index > 0 ? values[index] - values[index - 1] : 0;
-        const fill = pointMovementColor(delta, color, light);
+        const fill = points[index]?.actual === false ? (light ? "#8a93a3" : "#70798a") : pointMovementColor(delta, color, light);
         const selected = index === selectedIndex;
         return <circle
           key={`${point.x}-${point.y}`}
@@ -315,10 +336,11 @@ function RateSparkline({ rate, light = false }: { rate: CurrencyRateLike; light?
       {coords.map((point, index) => {
         if (index === 0) return null;
         const delta = values[index] - values[index - 1];
+        const synthetic = points[index]?.actual === false;
         const isFlat = Math.abs(delta) < 1e-12;
         const labelY = Math.min(plotBottom + 20, Math.max(point.y + 16, plotTop + 16));
-        const labelColor = isFlat ? (light ? "#7c8594" : "rgba(255,255,255,.55)") : delta < 0 ? "#20a85e" : "#ef3340";
-        return <text className="ac-rate-native-delta" key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={labelColor} fontSize="8.5" fontWeight="900">{isFlat ? "0" : formatPointDelta(delta)}</text>;
+        const labelColor = synthetic || isFlat ? (light ? "#7c8594" : "rgba(255,255,255,.55)") : delta < 0 ? "#20a85e" : "#ef3340";
+        return <text className="ac-rate-native-delta" key={`delta-${index}`} x={point.x} y={labelY} textAnchor="middle" fill={labelColor} fontSize="8.5" fontWeight="900">{synthetic ? "—" : isFlat ? "0" : formatPointDelta(delta)}</text>;
       })}
     </svg>
 
@@ -351,7 +373,8 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
   const currency = String(rate.currency || "").toUpperCase();
   const history = normalizedHistory(rate);
   const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
-  const fallbackPrevious = history.length > 1 ? history[history.length - 2].effectiveRate : 0;
+  const actualHistory = history.filter((point) => point.actual);
+  const fallbackPrevious = actualHistory.length > 1 ? actualHistory[actualHistory.length - 2].effectiveRate : history.length > 1 ? history[history.length - 2].effectiveRate : 0;
   const previousRate = Number(rate.previousEffectiveRate || fallbackPrevious || 0);
   const rateDelta = finiteNumber(rate.rateDelta) || (currentRate && previousRate ? currentRate - previousRate : 0);
   const percent = previousRate ? rateDelta / previousRate * 100 : 0;
@@ -371,7 +394,7 @@ function CurrencyRateDetails({ rate, impactRub, light = false, compact = false }
       {(rate.previousRateDate || rate.rateDate || history.length) ? <DetailRow label="Период" muted={muted} value={`${fullRateDate(history[0]?.date || rate.previousRateDate)} → ${fullRateDate(history.at(-1)?.date || rate.rateDate)}`} valueClassName={strong} /> : null}
     </div>
     {impactRub ? <div className={`mt-4 border-t pt-3 text-sm font-bold ${light ? "border-[#dde1e8]" : "border-white/10"}`}><DetailRow label="Влияние на ориентир" muted={muted} value={`${impactRub < 0 ? "−" : "+"}${money(Math.abs(impactRub))} ₽`} valueClassName={impactRub < 0 ? "text-[#20a85e]" : "text-[#ef3340]"} /></div> : null}
-    <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Итоговую цену подтверждает менеджер на момент оплаты.</div>
+    <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>* Итоговую цену подтверждает менеджер на момент оплаты.</div>
   </div>;
 }
 
@@ -469,7 +492,7 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   const closeClass = dark ? "bg-white/[0.07] text-white" : "bg-[#edf0f4] text-[#202630]";
 
   return createPortal(
-    <div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/75 md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); closeRef.current(); }}>
+    <div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/65 backdrop-blur-md md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); closeRef.current(); }}>
       <div className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`} style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }} onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}>
         <div className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag} aria-label="Потяните вниз, чтобы закрыть">
           <span className={`block h-1.5 w-12 rounded-full shadow-[0_1px_5px_rgba(0,0,0,.28)] ${handleClass}`} />
