@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { readDataJson } from "@/lib/data";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
-const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "USD", "EUR", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
+const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
 
 function n(v: string | null) {
   const x = Number(v);
