@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { CATALOG_BRANDS, catalogBrandBySlug } from "@/lib/catalog/brands";
+import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandBySlug } from "@/lib/catalog/brands";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
-import { searchOffers } from "@/lib/catalog/storage";
+import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
 const MARKET_META: Record<string, { label: string; flag: string }> = {
   japan: { label: "Япония", flag: "🇯🇵" },
@@ -42,8 +42,23 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const brand = catalogBrandBySlug(slug);
   if (!brand) notFound();
 
-  const result = await searchOffers({ make: brand.name, pageSize: 96, sort: "updatedAt" });
-  const offers = result.items.filter((offer: any) => isCrediblePublicOffer(offer));
+  const facets = await readCatalogFacets();
+  const rawMakes = [...new Set([
+    brand.name,
+    ...(facets.makes || []).filter((make) => canonicalCatalogBrand(String(make)) === brand.name),
+  ])];
+  const makeResults = await Promise.all(rawMakes.map(async (make) => ({
+    make,
+    result: await searchOffers({ make, pageSize: 48, sort: "updatedAt" }),
+  })));
+  const uniqueOffers = new Map<string, any>();
+  for (const entry of makeResults) {
+    for (const offer of entry.result.items || []) {
+      if (isCrediblePublicOffer(offer)) uniqueOffers.set(String(offer.id), offer);
+    }
+  }
+  const offers = [...uniqueOffers.values()];
+  const catalogMake = makeResults.find((entry) => entry.result.total > 0)?.make || brand.name;
   const grouped = MARKET_ORDER.map((market) => ({
     market,
     offers: offers.filter((offer: any) => offer.market === market),
@@ -89,7 +104,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
               <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{meta.flag}</span><span>{brand.name} из {meta.label === "ОАЭ" ? "ОАЭ" : meta.label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
-              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(brand.name)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
+              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMake)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
               {group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}
