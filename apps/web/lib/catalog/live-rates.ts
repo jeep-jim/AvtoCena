@@ -3,6 +3,7 @@ import { readDataJson, writeDataJson } from "../data";
 const RATE_CODES = ["USD", "EUR", "CNY", "JPY", "KRW", "AED", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"] as const;
 type RateCode = (typeof RATE_CODES)[number];
 type RateSource = "moex" | "cbr" | "legacy_json";
+type RateHistoryPoint = { date: string; effectiveRate: number };
 
 type StoredRate = {
   currency: RateCode;
@@ -15,6 +16,7 @@ type StoredRate = {
   rateDate: string;
   fetchedAt: string;
   rateSource: RateSource;
+  history?: RateHistoryPoint[];
 };
 
 const MOEX_SECURITIES: Partial<Record<RateCode, string>> = {
@@ -76,20 +78,29 @@ function cbrRequestDate(date: Date) {
   return `${day}/${month}/${date.getUTCFullYear()}`;
 }
 
-async function fetchPreviousCbrRates(currentRateDate: string, fetchedAt: string) {
-  const cursor = new Date(`${currentRateDate || fetchedAt.slice(0, 10)}T12:00:00Z`);
-  for (let daysBack = 1; daysBack <= 7; daysBack++) {
+async function fetchCbrSnapshots(currentRows: StoredRate[], fetchedAt: string, points = 5) {
+  const snapshots = new Map<string, StoredRate[]>();
+  const add = (rows: StoredRate[]) => {
+    const date = rows[0]?.rateDate;
+    if (date && !snapshots.has(date)) snapshots.set(date, rows);
+  };
+  add(currentRows);
+
+  const cursor = new Date(`${currentRows[0]?.rateDate || fetchedAt.slice(0, 10)}T12:00:00Z`);
+  for (let daysBack = 1; snapshots.size < points && daysBack <= 12; daysBack++) {
     cursor.setUTCDate(cursor.getUTCDate() - 1);
     try {
       const url = new URL("https://www.cbr.ru/scripts/XML_daily.asp");
       url.searchParams.set("date_req", cbrRequestDate(cursor));
-      const rows = parseCbrXml(await fetchText(url.toString()), fetchedAt);
-      if (rows.length && rows[0].rateDate && rows[0].rateDate !== currentRateDate) return rows;
+      add(parseCbrXml(await fetchText(url.toString()), fetchedAt));
     } catch {
-      // Try the preceding day: weekends and holidays may not have a separate table.
+      // Skip unavailable calendar days and keep walking backwards.
     }
   }
-  return [] as StoredRate[];
+
+  return [...snapshots.values()]
+    .sort((left, right) => String(left[0]?.rateDate || "").localeCompare(String(right[0]?.rateDate || "")))
+    .slice(-points);
 }
 
 function attachPrevious(current: StoredRate, previous: StoredRate | undefined) {
@@ -134,6 +145,17 @@ function legacyRate(code: RateCode, value: unknown, fetchedAt: string): StoredRa
   return { currency: code, cbrRate: effectiveRate, nominal: 1, effectiveRate, rateDate: fetchedAt.slice(0, 10), fetchedAt, rateSource: "legacy_json" };
 }
 
+function normalizeHistory(value: unknown) {
+  if (!Array.isArray(value)) return [] as RateHistoryPoint[];
+  const result = new Map<string, number>();
+  for (const item of value) {
+    const date = String(item?.date || item?.rateDate || "").slice(0, 10);
+    const effectiveRate = validNumber(item?.effectiveRate ?? item?.value);
+    if (date && effectiveRate) result.set(date, effectiveRate);
+  }
+  return [...result].map(([date, effectiveRate]) => ({ date, effectiveRate })).sort((a, b) => a.date.localeCompare(b.date)).slice(-5);
+}
+
 function previousRate(previous: any, code: RateCode) {
   const structured = Array.isArray(previous?.rates)
     ? previous.rates.find((item: any) => String(item?.currency || "").toUpperCase() === code)
@@ -147,18 +169,40 @@ function previousRate(previous: any, code: RateCode) {
     rateDelta: finiteNumber(structured?.rateDelta),
     rateDate: String(structured?.rateDate || structured?.date || previous?.updatedAt || "").slice(0, 10),
     previousRateDate: String(structured?.previousRateDate || "").slice(0, 10),
+    history: normalizeHistory(structured?.history),
   };
+}
+
+function mergeHistory(rate: StoredRate, fetched: RateHistoryPoint[], stored: RateHistoryPoint[]) {
+  const merged = new Map<string, number>();
+  for (const point of [...stored, ...fetched]) {
+    if (point.date && point.effectiveRate > 0) merged.set(point.date, point.effectiveRate);
+  }
+  if (rate.rateDate && rate.effectiveRate > 0) merged.set(rate.rateDate, rate.effectiveRate);
+  return [...merged]
+    .map(([date, effectiveRate]) => ({ date, effectiveRate }))
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .slice(-5);
 }
 
 export async function refreshLiveExchangeRates() {
   const fetchedAt = new Date().toISOString();
   const previous = await readDataJson<any>("fees/exchange-rates.json", {});
   const rates = new Map<RateCode, StoredRate>();
+  const historyByCode = new Map<RateCode, RateHistoryPoint[]>();
   const errors: string[] = [];
 
   try {
     const currentCbr = parseCbrXml(await fetchText("https://www.cbr.ru/scripts/XML_daily.asp"), fetchedAt);
-    const previousCbr = await fetchPreviousCbrRates(currentCbr[0]?.rateDate || fetchedAt.slice(0, 10), fetchedAt);
+    const snapshots = await fetchCbrSnapshots(currentCbr, fetchedAt, 5);
+    for (const code of RATE_CODES) {
+      const history = snapshots.flatMap((rows) => {
+        const row = rows.find((item) => item.currency === code);
+        return row ? [{ date: row.rateDate, effectiveRate: row.effectiveRate }] : [];
+      });
+      if (history.length) historyByCode.set(code, history);
+    }
+    const previousCbr = snapshots.length > 1 ? snapshots[snapshots.length - 2] : [];
     const previousByCode = new Map(previousCbr.map((rate) => [rate.currency, rate]));
     for (const rate of currentCbr) rates.set(rate.currency, attachPrevious(rate, previousByCode.get(rate.currency)));
   } catch (error) {
@@ -197,6 +241,8 @@ export async function refreshLiveExchangeRates() {
     } else if (current.previousEffectiveRate && current.rateDelta === undefined) {
       current.rateDelta = current.effectiveRate - current.previousEffectiveRate;
     }
+
+    current.history = mergeHistory(current, historyByCode.get(code) || [], prior.history);
   }
 
   const list = RATE_CODES.map((code) => rates.get(code)).filter((rate): rate is StoredRate => Boolean(rate));
