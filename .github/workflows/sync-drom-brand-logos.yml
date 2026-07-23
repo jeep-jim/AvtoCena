@@ -18,10 +18,6 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: sync-drom-brand-logos
-  cancel-in-progress: false
-
 jobs:
   sync:
     if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip logo sync]') }}
@@ -47,7 +43,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: drom-brand-logo-report
+          name: drom-brand-logo-report-${{ github.run_id }}
           path: apps/web/public/brand-logos/drom/sync-report.json
           if-no-files-found: warn
           retention-days: 3
@@ -63,4 +59,5 @@ jobs:
             exit 0
           fi
           git commit -m "Sync normalized Drom brand logos [skip logo sync]"
+          git pull --rebase origin feat/local-drom-brand-logos-20260723
           git push origin HEAD:feat/local-drom-brand-logos-20260723
