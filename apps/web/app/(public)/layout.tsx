@@ -21,8 +21,8 @@ const publicPageFixes = `
   display: none !important;
 }
 
-/* Desktop TopAvto block: no card surface, logo only in the header row,
-   and both paragraphs use the full width below it. */
+/* Desktop TopAvto card: keep the outer card, remove only the logo backing.
+   The heading and logo share the first row; both paragraphs span the full card below. */
 @media (min-width: 768px) {
   html .ac-page-copy.ac-home-page .ac-executor-block {
     display: grid !important;
@@ -30,14 +30,19 @@ const publicPageFixes = `
     grid-template-rows: auto auto auto !important;
     align-items: start !important;
     gap: .55rem 1.5rem !important;
-    padding: 0 !important;
-    background: transparent !important;
-    background-color: transparent !important;
+    padding: 1.25rem !important;
+    background: var(--ac-surface, #12151d) !important;
+    background-color: var(--ac-surface, #12151d) !important;
     background-image: none !important;
     border: 0 !important;
-    border-radius: 0 !important;
+    border-radius: 1.6rem !important;
     box-shadow: none !important;
     overflow: visible !important;
+  }
+
+  html[data-theme="light"] .ac-page-copy.ac-home-page .ac-executor-block {
+    background: #f7f8fb !important;
+    background-color: #f7f8fb !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block::before,
