@@ -1,0 +1,61 @@
+name: Sync Drom brand logos
+
+on:
+  push:
+    branches:
+      - feat/local-drom-brand-logos-20260723
+    paths:
+      - scripts/sync_drom_brand_logos.py
+      - .github/workflows/sync-drom-brand-logos.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-drom-brand-logos
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: ${{ !contains(github.event.head_commit.message || '', '[skip logo sync]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/local-drom-brand-logos-20260723
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install image tooling
+        run: python -m pip install --disable-pip-version-check requests pillow cairosvg
+
+      - name: Download and normalize Drom logos
+        run: python scripts/sync_drom_brand_logos.py
+
+      - name: Upload synchronization report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drom-brand-logo-report
+          path: apps/web/public/brand-logos/drom/sync-report.json
+          if-no-files-found: warn
+          retention-days: 3
+
+      - name: Commit local logo library
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/public/brand-logos/drom
+          if git diff --cached --quiet; then
+            echo "Drom logo library is already current."
+            exit 0
+          fi
+          git commit -m "Sync normalized Drom brand logos [skip logo sync]"
+          git push origin HEAD:feat/local-drom-brand-logos-20260723
