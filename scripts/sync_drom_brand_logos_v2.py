@@ -3,7 +3,8 @@
 
 Drom keeps most logo URLs inside compiled JS/CSS bundles rather than directly
 in the initial HTML. This wrapper recursively scans those same-origin bundles,
-then delegates normalization and manifest generation to the base synchronizer.
+resolves both absolute media URLs and webpack's bare hashed filenames, then
+delegates normalization and manifest generation to the base synchronizer.
 """
 
 from __future__ import annotations
@@ -11,12 +12,13 @@ from __future__ import annotations
 import re
 import sys
 from collections import deque
-from urllib.parse import urljoin, urlparse
+from pathlib import Path
+from urllib.parse import quote, unquote, urljoin, urlparse
 
 import sync_drom_brand_logos as base
 
 
-MAX_BUNDLES = 180
+MAX_BUNDLES = 220
 
 
 def bundle_urls(text: str, base_url: str) -> list[str]:
@@ -42,10 +44,45 @@ def bundle_urls(text: str, base_url: str) -> list[str]:
     return found
 
 
+def collect_bare_media(text: str, bundle_url: str, logos: dict[str, dict[str, list[str]]]) -> int:
+    """Resolve webpack media filenames such as audi-dark.<hash>.png.
+
+    In production bundles Drom often stores only the hashed filename and joins
+    it with the public media path at runtime. The browser therefore sees the
+    correct transparent file while a simple HTML URL scraper misses it.
+    """
+
+    parsed = urlparse(bundle_url)
+    if not parsed.scheme or not parsed.netloc:
+        return 0
+    media_root = f"{parsed.scheme}://{parsed.netloc}/js/bundles/media/"
+    cleaned = base.clean_html(text)
+    matches = re.findall(
+        r'(?<![A-Za-z0-9])([A-Za-z0-9][A-Za-z0-9_%+&().~-]*?\.[a-f0-9]{6,}\.(?:png|svg|webp|jpe?g))(?![A-Za-z0-9])',
+        cleaned,
+        flags=re.I,
+    )
+    added = 0
+    seen: set[str] = set()
+    for raw in matches:
+        filename = Path(unquote(raw)).name
+        if filename in seen:
+            continue
+        seen.add(filename)
+        url = media_root + quote(filename, safe="-._~%")
+        before = sum(len(theme_urls) for item in logos.values() for theme_urls in item.values())
+        base.collect_logos(url, logos)
+        after = sum(len(theme_urls) for item in logos.values() for theme_urls in item.values())
+        if after > before:
+            added += 1
+    return added
+
+
 def enhanced_manifest() -> dict[str, dict[str, list[str]]]:
     logos: dict[str, dict[str, list[str]]] = {}
     queue: deque[str] = deque()
     visited: set[str] = set()
+    bare_assets = 0
 
     for page in base.SOURCE_PAGES:
         try:
@@ -64,15 +101,22 @@ def enhanced_manifest() -> dict[str, dict[str, list[str]]]:
         try:
             payload = base.fetch_text(url)
             base.collect_logos(payload, logos)
+            bare_assets += collect_bare_media(payload, url, logos)
             for linked in bundle_urls(payload, url):
                 if linked not in visited:
                     queue.append(linked)
             if len(visited) % 10 == 0:
-                print(f"Scanned {len(visited)} Drom bundles; {len(logos)} logo keys found")
+                print(
+                    f"Scanned {len(visited)} Drom bundles; "
+                    f"{len(logos)} logo keys and {bare_assets} bare media assets found"
+                )
         except Exception as error:
             print(f"Warning: failed to scan bundle {url}: {error}", file=sys.stderr)
 
-    print(f"Bundle scan complete: {len(visited)} bundles, {len(logos)} logo keys")
+    print(
+        f"Bundle scan complete: {len(visited)} bundles, "
+        f"{len(logos)} logo keys, {bare_assets} bare media assets"
+    )
     return logos
 
 
