@@ -124,18 +124,33 @@
 
 @media (min-width: 768px) {
   .ac-executor-block {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(180px, 240px) !important;
-    align-items: start !important;
-    gap: 1.5rem !important;
+    display: block !important;
+    align-self: start !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
   .ac-executor-block > div:first-child {
-    padding-right: .35rem !important;
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+  .ac-executor-block > div:first-child > h3 {
+    max-width: calc(100% - 270px) !important;
+    padding-right: 1rem !important;
+  }
+  .ac-executor-block > div:first-child > p:first-of-type {
+    padding-right: min(260px, 34%) !important;
+  }
+  .ac-executor-block > div:first-child > p:last-of-type {
+    width: 100% !important;
+    max-width: none !important;
+    padding-right: 0 !important;
   }
   .ac-executor-logo {
-    position: static !important;
-    align-self: start !important;
-    width: 100% !important;
+    position: absolute !important;
+    top: 1.25rem !important;
+    right: 1.25rem !important;
+    width: min(240px, 32%) !important;
     min-height: 0 !important;
     padding: 0 !important;
   }
