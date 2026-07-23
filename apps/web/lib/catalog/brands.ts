@@ -6,26 +6,26 @@ export type CatalogBrand = {
   aliases?: string[];
 };
 
-// Список иностранных марок синхронизирован с полным селектором марок Drom.
+// Список иностранных марок синхронизирован с загруженной библиотекой Drom.
 // Российские марки и локальные российские ребрендинги намеренно не включены.
 const DROM_BRAND_NAMES = [
-  "212", "Abarth", "AC", "Acura", "AITO", "Aiways", "Alfa Romeo", "Alpina", "Alpine", "AMC", "Aro", "Asia",
-  "Aston Martin", "Audi", "Avatr", "BAIC", "Baojun", "Barkas", "BAW", "Belgee", "Bentley", "Bestune", "BMW",
+  "212", "Abarth", "AC", "Acura", "AITO", "Alfa Romeo", "Alpina", "AMC", "Aro", "Asia",
+  "Aston Martin", "Audi", "Avatr", "BAIC", "Baojun", "BAW", "Belgee", "Bentley", "Bestune", "BMW",
   "Borgward", "Brilliance", "Buick", "BYD", "Cadillac", "Changfeng", "Changhe", "Changan", "Chery", "Chevrolet",
-  "Chrysler", "Ciimo", "Citroen", "Coda", "Cupra", "Dacia", "Dadi", "Daewoo", "Daihatsu", "Datsun", "Dayun",
-  "Deepal", "DeLorean", "Denza", "Dodge", "Dongfeng", "ESTEO", "EXEED", "FAW", "Ferrari", "Fiat", "Fisker",
+  "Chrysler", "Citroen", "Coda", "Cupra", "Dacia", "Dadi", "Daewoo", "Daihatsu", "Datsun", "Dayun",
+  "Deepal", "Denza", "Dodge", "Dongfeng", "Eagle", "ESTEO", "EXEED", "FAW", "Ferrari", "Fiat", "Fisker",
   "Ford", "Forthing", "Foton", "GAC", "Geely", "Genesis", "Geo", "GMC", "Great Wall", "Hafei", "Haima",
   "Haval", "Hawtai", "HiPhi", "Honda", "Hongqi", "Hozon", "Huanghai", "Hummer", "Hyundai", "iCAR", "IM Motors",
   "Infiniti", "Iran Khodro", "Isuzu", "IVECO", "JAC", "Jaecoo", "Jaguar", "Jeep", "Jeland", "Jetour", "Jetta",
-  "Jinbei", "JMC", "JMEV", "Kaiyi", "KGM", "Kia", "Knewstar", "Kuayue", "Lamborghini", "Lancia", "Land Rover",
+  "Jinbei", "JMC", "Kaiyi", "KGM", "Kia", "Knewstar", "Lamborghini", "Lancia", "Land Rover",
   "Landwind", "Leapmotor", "Lexus", "Li Auto", "Lifan", "Lincoln", "Livan", "Lotus", "Lucid", "Luxgen",
   "Lynk & Co", "M-Hero", "Maextro", "Maserati", "Maxus", "Maybach", "Mazda", "McLaren", "Mercedes-Benz",
-  "Mercury", "MG", "Micro", "MINI", "Mitsubishi", "Mitsuoka", "Morgan", "Neta", "Nio", "Nissan", "Oldsmobile",
+  "Mercury", "MG", "MINI", "Mitsubishi", "Mitsuoka", "Morgan", "Neta", "Nio", "Nissan", "Oldsmobile",
   "OMODA", "Opel", "ORA", "Oshan", "Oting", "Peugeot", "Plymouth", "Polar Stone", "Polestar", "Pontiac",
   "Porsche", "Proton", "RAM", "Ravon", "Renault", "Renault Samsung", "Rising Auto", "Rivian", "Roewe",
   "Rolls-Royce", "Rover", "Rox", "Saab", "SAIPA", "Saturn", "Scion", "SEAT", "Seres", "Shuanghuan", "Skoda",
-  "Skywell", "Smart", "Soueast", "SRM Shineray", "SsangYong", "Subaru", "Suzuki", "SWM", "Tank", "TATA",
-  "Tatra", "Tesla", "Tianma", "Tianye", "Toyota", "Trabant", "Umo", "Vauxhall", "Venucia", "VGV", "Volkswagen",
+  "Skywell", "Smart", "Soueast", "SsangYong", "Subaru", "Suzuki", "SWM", "Tank", "TATA",
+  "Tesla", "Tianma", "Tianye", "Toyota", "Trabant", "Umo", "Vauxhall", "Venucia", "VGV", "Volkswagen",
   "Volvo", "Voyah", "Wartburg", "Weltmeister", "WEY", "Willys", "Wuling", "Xiaomi", "Xin Kai", "XPeng", "Yema",
   "Zeekr", "Zotye", "ZX",
 ] as const;
