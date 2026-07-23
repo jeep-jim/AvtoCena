@@ -31,8 +31,8 @@ const publicPageFixes = `
     align-items: start !important;
     gap: .55rem 1.5rem !important;
     padding: 1.25rem !important;
-    background: #ffffff !important;
-    background-color: #ffffff !important;
+    background: var(--ac-surface, #f7f8fb) !important;
+    background-color: var(--ac-surface, #f7f8fb) !important;
     background-image: none !important;
     border: 0 !important;
     border-radius: 1.6rem !important;
