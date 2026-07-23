@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Enhanced Drom logo synchronization.
 
-Drom keeps most logo URLs inside compiled JS/CSS bundles rather than directly
-in the initial HTML. This wrapper recursively scans those same-origin bundles,
-resolves both absolute media URLs and webpack's bare hashed filenames, maps a
-small number of Drom rebadge aliases, then delegates normalization and manifest
-generation to the base synchronizer.
+The checked-in files under ``apps/web/public/brand-logos/drom-source`` are the
+primary source of truth. They are the original transparent Drom assets uploaded
+for AvtoCena, including separate light/dark variants where Drom provides them.
+If that directory is empty, the script falls back to scanning Drom bundles.
 """
 
 from __future__ import annotations
 
+import mimetypes
 import re
 import sys
 from collections import deque
@@ -20,13 +20,36 @@ import sync_drom_brand_logos as base
 
 
 MAX_BUNDLES = 220
+LOCAL_SOURCE_ROOT = base.ROOT / "apps/web/public/brand-logos/drom-source"
+LOCAL_PREFIX = "local://"
 LOGO_ALIASES: dict[str, tuple[str, ...]] = {
-    # Neta is the export-facing name used by Hozon; Drom's media bundle keeps
-    # the transparent mark under the manufacturer name.
+    # Neta is the export-facing name used by Hozon; Drom keeps the mark under
+    # the manufacturer name.
     "Neta": ("Hozon",),
     "SRM Shineray": ("SRM", "Shineray"),
     "Micro": ("Microcar", "Microlino"),
 }
+
+
+_remote_download = base.download
+
+
+def download_local_or_remote(source: str) -> tuple[bytes, str]:
+    if not source.startswith(LOCAL_PREFIX):
+        return _remote_download(source)
+
+    filename = unquote(source[len(LOCAL_PREFIX):])
+    root = LOCAL_SOURCE_ROOT.resolve()
+    path = (LOCAL_SOURCE_ROOT / filename).resolve()
+    if path.parent != root or not path.is_file():
+        raise RuntimeError(f"local Drom asset is unavailable: {filename}")
+    data = path.read_bytes()
+    if len(data) < 100:
+        raise RuntimeError(f"local Drom asset is unexpectedly small: {filename}")
+    return data, mimetypes.guess_type(path.name)[0] or ""
+
+
+base.download = download_local_or_remote
 
 
 def bundle_urls(text: str, base_url: str) -> list[str]:
@@ -50,6 +73,33 @@ def bundle_urls(text: str, base_url: str) -> list[str]:
             if absolute not in found:
                 found.append(absolute)
     return found
+
+
+def collect_local_media(logos: dict[str, dict[str, list[str]]]) -> int:
+    """Index the manually uploaded original Drom files without altering them."""
+
+    if not LOCAL_SOURCE_ROOT.is_dir():
+        return 0
+
+    added = 0
+    supported = {".png", ".svg", ".webp", ".jpg", ".jpeg"}
+    for path in sorted(LOCAL_SOURCE_ROOT.iterdir(), key=lambda item: item.name.lower()):
+        if not path.is_file() or path.suffix.lower() not in supported:
+            continue
+        stem = re.sub(r"\.(?:png|svg|webp|jpe?g)$", "", path.name, flags=re.I)
+        stem = re.sub(r"\.[a-f0-9]{6,}$", "", stem, flags=re.I)
+        theme_match = re.match(r"^(.*?)-(dark|light)$", stem, flags=re.I)
+        base_name = theme_match.group(1) if theme_match else stem
+        key = base.normalized_key(base_name)
+        if not key:
+            continue
+        theme = theme_match.group(2).lower() if theme_match else "any"
+        source = LOCAL_PREFIX + quote(path.name, safe="-._~")
+        bucket = logos.setdefault(key, {"light": [], "dark": [], "any": []})
+        if source not in bucket[theme]:
+            bucket[theme].append(source)
+            added += 1
+    return added
 
 
 def collect_bare_media(text: str, bundle_url: str, logos: dict[str, dict[str, list[str]]]) -> int:
@@ -100,6 +150,12 @@ def apply_logo_aliases(logos: dict[str, dict[str, list[str]]]) -> None:
 
 def enhanced_manifest() -> dict[str, dict[str, list[str]]]:
     logos: dict[str, dict[str, list[str]]] = {}
+    local_assets = collect_local_media(logos)
+    if local_assets:
+        apply_logo_aliases(logos)
+        print(f"Using {local_assets} uploaded Drom assets from {LOCAL_SOURCE_ROOT}")
+        return logos
+
     queue: deque[str] = deque()
     visited: set[str] = set()
     bare_assets = 0
