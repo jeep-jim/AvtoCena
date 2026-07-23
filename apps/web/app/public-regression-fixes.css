@@ -91,7 +91,7 @@
   order: 3;
 }
 
-/* TopAvto copy keeps its normal width; the transparent logo occupies its own space. */
+/* TopAvto copy keeps a readable width; the logo has no coloured backing. */
 .ac-executor-block {
   position: relative !important;
   min-width: 0 !important;
@@ -126,11 +126,15 @@
   .ac-executor-block {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(180px, 240px) !important;
-    align-items: center !important;
-    gap: 1.25rem !important;
+    align-items: start !important;
+    gap: 1.5rem !important;
+  }
+  .ac-executor-block > div:first-child {
+    padding-right: .35rem !important;
   }
   .ac-executor-logo {
     position: static !important;
+    align-self: start !important;
     width: 100% !important;
     min-height: 0 !important;
     padding: 0 !important;
@@ -138,9 +142,12 @@
   .ac-executor-logo img {
     max-height: 82px !important;
   }
+  html[data-theme="light"] .ac-executor-logo img {
+    mix-blend-mode: multiply;
+  }
 }
 
-/* Three compact logo columns and copy that expands beneath the TopAvto logo. */
+/* Three compact logo columns and a full-width TopAvto copy on phones. */
 @media (max-width: 767px) {
   .ac-page-copy p.text-sm,
   .ac-page-copy li.text-sm {
@@ -159,35 +166,45 @@
   }
 
   .ac-executor-block {
-    display: block !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     padding: 1rem !important;
   }
   .ac-executor-block > div:first-child {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 90px !important;
-    column-gap: .75rem !important;
-    align-items: start !important;
+    display: contents !important;
+  }
+  .ac-executor-logo {
+    position: static !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    width: 90px !important;
+    min-height: 0 !important;
+    margin: 0 0 .35rem !important;
+    padding: 0 !important;
   }
   .ac-executor-block > div:first-child > h3 {
     grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
     max-width: none !important;
-    min-height: 44px;
-    padding-right: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .ac-executor-block > div:first-child > p {
-    grid-column: 1 / -1 !important;
+    grid-column: 1 !important;
     width: 100% !important;
+    max-width: none !important;
+  }
+  .ac-executor-block > div:first-child > p:first-of-type {
+    grid-row: 3 !important;
+  }
+  .ac-executor-block > div:first-child > p:last-of-type {
+    grid-row: 4 !important;
   }
   .ac-executor-block p + p {
     margin-top: .45rem !important;
-  }
-  .ac-executor-logo {
-    position: absolute !important;
-    top: 1rem !important;
-    right: 1rem !important;
-    width: 90px !important;
-    min-height: 0 !important;
-    padding: 0 !important;
   }
   .ac-executor-logo img {
     max-height: 44px !important;
