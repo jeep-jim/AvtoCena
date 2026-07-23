@@ -8,6 +8,7 @@ on:
       - scripts/sync_drom_brand_logos.py
       - scripts/sync_drom_brand_logos_v2.py
       - apps/web/components/catalog/BrandLogoRail.tsx
+      - apps/web/public/brand-logos/drom-source/**
       - .github/workflows/sync-drom-brand-logos.yml
   pull_request:
     branches:
@@ -16,6 +17,7 @@ on:
       - scripts/sync_drom_brand_logos.py
       - scripts/sync_drom_brand_logos_v2.py
       - apps/web/components/catalog/BrandLogoRail.tsx
+      - apps/web/public/brand-logos/drom-source/**
       - .github/workflows/sync-drom-brand-logos.yml
   workflow_dispatch:
 
@@ -40,7 +42,7 @@ jobs:
       - name: Install image tooling
         run: python -m pip install --disable-pip-version-check requests pillow cairosvg
 
-      - name: Download and normalize Drom logos
+      - name: Normalize uploaded Drom logos
         run: python scripts/sync_drom_brand_logos_v2.py
 
       - uses: actions/setup-node@v4
