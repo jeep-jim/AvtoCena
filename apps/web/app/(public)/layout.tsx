@@ -31,8 +31,8 @@ const publicPageFixes = `
     align-items: start !important;
     gap: .55rem 1.5rem !important;
     padding: 1.25rem !important;
-    background: var(--ac-surface, #12151d) !important;
-    background-color: var(--ac-surface, #12151d) !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
     background-image: none !important;
     border: 0 !important;
     border-radius: 1.6rem !important;
@@ -40,9 +40,9 @@ const publicPageFixes = `
     overflow: visible !important;
   }
 
-  html[data-theme="light"] .ac-page-copy.ac-home-page .ac-executor-block {
-    background: #f7f8fb !important;
-    background-color: #f7f8fb !important;
+  html[data-theme="dark"] .ac-page-copy.ac-home-page .ac-executor-block {
+    background: var(--ac-surface, #12151d) !important;
+    background-color: var(--ac-surface, #12151d) !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block::before,
