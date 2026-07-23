@@ -2,44 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandLogoSlug, catalogBrandSlug } from "@/lib/catalog/brands";
+import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
-const CAR_LOGO_BASE = "https://cdn.jsdelivr.net/npm/car-brand-logos@1.0.0";
-const CAR_LOGO_FILES: Record<string, string> = {
-  "Acura": "acura-logo.svg", "Alfa Romeo": "alfa-romeo-logo.svg", "Aston Martin": "aston-martin-logo.svg", "Audi": "audi-logo.svg",
-  "Avatr": "avatr-logo.svg", "BAIC": "baic-logo.svg", "Bentley": "bentley-logo.svg", "BMW": "bmw-logo.svg", "Buick": "buick-logo.png",
-  "BYD": "byd-logo.svg", "Cadillac": "cadillac-logo.png", "Changan": "changan-logo.png", "Chery": "chery-logo.png", "Chevrolet": "chevrolet-logo.png",
-  "Chrysler": "chrysler-logo.svg", "Citroen": "citroen-logo.svg", "Cupra": "cupra-logo.svg", "Daihatsu": "daihatsu-logo.svg", "Denza": "denza-logo.svg",
-  "Dodge": "dodge-logo.png", "Dongfeng": "dongfeng-logo.png", "Ferrari": "ferrari-logo.svg", "Fiat": "fiat-logo.svg", "Ford": "ford-logo.png",
-  "Geely": "geely-logo.svg", "Genesis": "genesis-logo.svg", "GMC": "gmc-logo.png", "Great Wall": "great-wall-logo.png", "Haval": "haval-logo.png",
-  "Honda": "honda-logo.png", "Hongqi": "hongqi-logo.png", "Hyundai": "hyundai-logo.svg", "Infiniti": "infiniti-logo.svg", "Isuzu": "isuzu-logo.svg",
-  "JAC": "jac-logo.png", "Jaguar": "jaguar-logo.svg", "Jeep": "jeep-logo.svg", "Jetour": "jetour-logo.svg", "KGM": "kgm-logo.svg",
-  "Kia": "kia-logo.svg", "Lamborghini": "lamborghini-logo.png", "Land Rover": "land-rover-logo.svg", "Leapmotor": "leapmotor-logo.png",
-  "Lexus": "lexus-logo.png", "Lincoln": "lincoln-logo.svg", "Lotus": "lotus-logo.svg", "Maserati": "maserati-logo.png", "Mazda": "mazda-logo.svg",
-  "McLaren": "mclaren-logo.svg", "Mercedes-Benz": "mercedes-benz-logo.svg", "MG": "mg-logo.png", "MINI": "mini-logo.svg", "Mitsubishi": "mitsubishi-logo.svg",
-  "Nio": "nio-logo.png", "Nissan": "nissan-logo.svg", "OMODA": "omoda-logo.png", "Opel": "opel-logo.svg", "Peugeot": "peugeot-logo.svg",
-  "Polestar": "polestar-logo.png", "Porsche": "porsche-logo.svg", "RAM": "ram-logo.svg", "Renault": "renault-logo.svg", "Rolls-Royce": "rolls-royce-logo.svg",
-  "SEAT": "seat-logo.svg", "Skoda": "skoda-logo.svg", "Smart": "smart-logo.png", "Subaru": "subaru-logo.png", "Suzuki": "suzuki-logo.svg",
-  "Tesla": "tesla-logo.svg", "Toyota": "toyota-logo.svg", "Volkswagen": "volkswagen-logo.svg", "Volvo": "volvo-logo.svg", "XPeng": "xpeng-logo.png",
-  "Zeekr": "zeekr-logo.png",
-};
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
-
-function logoSources(brand: string, theme: "light" | "dark") {
-  const sources = [`/api/catalog/brand-logo/${catalogBrandSlug(brand)}?theme=${theme}`];
-  const file = CAR_LOGO_FILES[brand];
-  if (file) sources.push(`${CAR_LOGO_BASE}/${file}`);
-  const simpleSlug = catalogBrandLogoSlug(brand);
-  if (simpleSlug) sources.push(`https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${simpleSlug}.svg`);
-  return [...new Set(sources)];
-}
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const sources = useMemo(() => logoSources(brand, theme), [brand, theme]);
-  const [sourceIndex, setSourceIndex] = useState(0);
+  const [failed, setFailed] = useState(false);
+  const slug = catalogBrandSlug(brand);
 
-  useEffect(() => setSourceIndex(0), [brand, theme]);
+  useEffect(() => setFailed(false), [brand, theme]);
   useEffect(() => {
     const root = document.documentElement;
     const sync = () => setTheme(root.dataset.theme === "dark" ? "dark" : "light");
@@ -49,17 +21,17 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
     return () => observer.disconnect();
   }, []);
 
-  if (sourceIndex >= sources.length) {
+  if (failed) {
     return <span className={`flex h-10 w-[76px] items-center justify-center text-center text-[12px] font-black leading-[1.05] tracking-[-0.035em] text-[var(--ac-text)] ${className}`}>{brand}</span>;
   }
 
   return <img
-    src={sources[sourceIndex]}
+    src={`/brand-logos/drom/${theme}/${slug}.png`}
     alt={`Логотип ${brand}`}
     loading="lazy"
     decoding="async"
-    onError={() => setSourceIndex((current) => current + 1)}
-    className={`h-10 w-[76px] object-contain ${className}`}
+    onError={() => setFailed(true)}
+    className={`h-10 w-[76px] bg-transparent object-contain ${className}`}
   />;
 }
 
