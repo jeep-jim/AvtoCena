@@ -21,6 +21,91 @@ const publicPageFixes = `
   display: none !important;
 }
 
+/* Desktop TopAvto block: no card surface, logo only in the header row,
+   and both paragraphs use the full width below it. */
+@media (min-width: 768px) {
+  html .ac-page-copy.ac-home-page .ac-executor-block {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 240px) !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    gap: .55rem 1.5rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block::before,
+  html .ac-page-copy.ac-home-page .ac-executor-block::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child {
+    display: contents !important;
+    background: transparent !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: center !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:first-of-type {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: .15rem 0 0 !important;
+    padding: 0 !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: .2rem 0 0 !important;
+    padding: 0 !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-logo {
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    justify-self: end !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-logo img {
+    display: block !important;
+    width: 100% !important;
+    max-height: 82px !important;
+    object-fit: contain !important;
+    background: transparent !important;
+  }
+}
+
 @media (max-width: 767px) {
   .ac-price-trend-popover {
     position: fixed !important;
