@@ -7,6 +7,7 @@ on:
     paths:
       - scripts/sync_drom_brand_logos.py
       - scripts/sync_drom_brand_logos_v2.py
+      - apps/web/lib/catalog/brands.ts
       - apps/web/components/catalog/BrandLogoRail.tsx
       - apps/web/public/brand-logos/drom-source/**
       - .github/workflows/sync-drom-brand-logos.yml
@@ -16,6 +17,7 @@ on:
     paths:
       - scripts/sync_drom_brand_logos.py
       - scripts/sync_drom_brand_logos_v2.py
+      - apps/web/lib/catalog/brands.ts
       - apps/web/components/catalog/BrandLogoRail.tsx
       - apps/web/public/brand-logos/drom-source/**
       - .github/workflows/sync-drom-brand-logos.yml
