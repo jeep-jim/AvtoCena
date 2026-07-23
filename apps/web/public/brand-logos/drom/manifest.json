@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-23T06:29:06Z",
+  "generatedAt": "2026-07-23T06:32:49Z",
   "source": "https://www.drom.ru/",
   "canvas": {
     "width": 180,
     "height": 90
   },
   "count": 194,
-  "dromThemeAssets": 46,
-  "fallbackThemeAssets": 342,
+  "dromThemeAssets": 380,
+  "fallbackThemeAssets": 8,
   "brands": {
     "212": {
       "name": "212",
@@ -16,14 +16,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/212.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/212-light.04c2db1078e6adeb.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/212.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/212-dark.b55ef4cc21314657.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -35,14 +35,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/abarth.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/abarth.1a06959f609c20da.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/abarth.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/abarth.1a06959f609c20da.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -54,14 +54,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ac-light.e1234fab98218564.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ac-dark.a88ad2f5f3acbf53.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -73,14 +73,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/acura.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/acura.0b21bedfb745ac83.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/acura.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/acura.0b21bedfb745ac83.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -92,14 +92,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/aito.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aito-light.0caab072c01632f2.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/aito.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aito-dark.13568ae6f96490a0.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -111,14 +111,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/aiways.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aiways-light.9c05758a964ac33e.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/aiways.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aiways-dark.c674eb4cc497329d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -130,14 +130,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/alfa-romeo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alfa-romeo.d97a0bcf6b939b36.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/alfa-romeo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alfa-romeo.d97a0bcf6b939b36.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -149,14 +149,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/alpina.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alpina.5afa675ef97c15c9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/alpina.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alpina.5afa675ef97c15c9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -168,14 +168,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/alpine.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alpine.9aaa988a0805f16a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/alpine.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/alpine.9aaa988a0805f16a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -187,14 +187,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/amc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/amc-light.f29b77b3210fa4a0.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/amc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/amc-dark.805bd039d3d21c73.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -206,14 +206,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/aro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aro-light.173525d8141b198d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/aro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/aro-dark.7b5bc5f1c581de0b.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -225,14 +225,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/asia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/asia.ba52a050adb4c270.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/asia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/asia.ba52a050adb4c270.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -244,14 +244,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/aston-martin.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/astonmartin-light.608b7565714b3f3b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/aston-martin.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/astonmartin-dark.74960a77cc673f45.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -282,14 +282,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/avatr.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/avatr-light.25161304cadf0054.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/avatr.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/avatr-dark.f4818d1e08239336.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -301,14 +301,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/baic.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baic.5a16aef42282808c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/baic.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baic.5a16aef42282808c.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -320,14 +320,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/baojun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baojun.b93b1abe960e9e42.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/baojun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baojun.b93b1abe960e9e42.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -339,14 +339,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/barkas.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/barkas-light.fa28d131e6b6bf41.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/barkas.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/barkas-dark.b0edf3b61d844ec3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -358,14 +358,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/baw.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baw.49c9df95fb44c388.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/baw.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/baw.49c9df95fb44c388.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -377,14 +377,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/belgee.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/belgee.c9dc0cf1a4333132.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/belgee.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/belgee.c9dc0cf1a4333132.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -396,14 +396,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/bentley.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/bentley.e1f3f64241fa76ce.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/bentley.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/bentley.e1f3f64241fa76ce.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -415,14 +415,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/bestune.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/bestune-light.cadaff88d6d1a811.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/bestune.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/bestune-dark.4df4953dffcd6be4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -453,14 +453,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/borgward.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/borgward.687cfc092bbb11dc.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/borgward.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/borgward.687cfc092bbb11dc.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -472,14 +472,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/brilliance.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/brilliance.656c7efae0ce5cfd.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/brilliance.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/brilliance.656c7efae0ce5cfd.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -491,14 +491,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/buick.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/buick.bab3c9c314c207d7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/buick.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/buick.bab3c9c314c207d7.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -510,14 +510,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/byd.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/byd.1bd550e1c1a00ea7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/byd.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/byd.1bd550e1c1a00ea7.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -529,14 +529,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/cadillac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/cadillac.40b154f6ecb131e4.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/cadillac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/cadillac.40b154f6ecb131e4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -548,14 +548,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/changfeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/changfeng.1ee3fab3ef4acb34.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/changfeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/changfeng.1ee3fab3ef4acb34.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -567,14 +567,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/changhe.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/changhe.150a1b2acce1c570.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/changhe.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/changhe.150a1b2acce1c570.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -586,13 +586,13 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/changan.png",
-          "source": "https://r2.drom.ru/js/bundles/media/changan.9c8ae4ae573e17d1.png",
+          "source": "https://r.drom.ru/js/bundles/media/changan.9c8ae4ae573e17d1.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/changan.png",
-          "source": "https://r2.drom.ru/js/bundles/media/changan.9c8ae4ae573e17d1.png",
+          "source": "https://r.drom.ru/js/bundles/media/changan.9c8ae4ae573e17d1.png",
           "fallback": false,
           "errors": []
         }
@@ -605,14 +605,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/chery.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/chery.30aa17044cd7e7d0.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/chery.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/chery.30aa17044cd7e7d0.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -643,14 +643,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/chrysler.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/chrysler.6edfaa709316b8b6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/chrysler.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/chrysler.6edfaa709316b8b6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -662,14 +662,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ciimo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ciimo.8b2e16d2acf00eed.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ciimo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ciimo.8b2e16d2acf00eed.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -681,14 +681,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/citroen.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/citroen-light.9fd789d52766f63e.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/citroen.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/citroen-dark.d33d9dd4bb42e5bd.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -700,14 +700,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/coda.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/coda-light.9a09baea04a9603a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/coda.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/coda-dark.029b52c6435f42b1.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -719,14 +719,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/cupra.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/cupra-light.24c74d424dfb7b05.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/cupra.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/cupra-dark.d5c0e2b1b7444f6f.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -738,14 +738,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/dacia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dacia-light.29a436168ad51dfe.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/dacia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dacia-dark.f03b9c19efcc4135.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -757,14 +757,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/dadi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dadi.7fb326808772370d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/dadi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dadi.7fb326808772370d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -776,14 +776,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/daewoo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/daewoo.7ad59af93738d23d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/daewoo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/daewoo.7ad59af93738d23d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -795,14 +795,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/daihatsu.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/daihatsu.54d26e973467e698.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/daihatsu.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/daihatsu.54d26e973467e698.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -814,14 +814,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/datsun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/datsun.359d60fec87ee9a5.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/datsun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/datsun.359d60fec87ee9a5.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -833,14 +833,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/dayun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dayun.2467f94cd8aa23d1.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/dayun.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dayun.2467f94cd8aa23d1.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -852,14 +852,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/deepal.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/deepal-light.5a4e11c352a1e51c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/deepal.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/deepal-dark.bb1c028a75638b16.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -871,14 +871,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/delorean.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/delorean-light.099cc602d6fd3b7c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/delorean.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/delorean-dark.d1e1f6c242235b30.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -890,14 +890,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/denza.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/denza.6e3d1cc852289140.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/denza.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/denza.6e3d1cc852289140.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -909,14 +909,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/dodge.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dodge-light.882899a167d01bd6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/dodge.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dodge-dark.c6d3e97ab68eca37.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -928,14 +928,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/dongfeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dongfeng.e30e835d6679387c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/dongfeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/dongfeng.e30e835d6679387c.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -947,14 +947,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/esteo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/esteo-light.b7bdc4b45a7a0c78.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/esteo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/esteo-dark.8c433c8662409753.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -966,14 +966,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/exeed.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/exeed.009e5d5f3aad4544.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/exeed.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/exeed.009e5d5f3aad4544.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -985,14 +985,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/faw.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/faw.b4468374afb0a2a4.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/faw.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/faw.b4468374afb0a2a4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1004,14 +1004,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ferrari.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ferrari.001935e984440d5a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ferrari.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ferrari.001935e984440d5a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1023,14 +1023,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/fiat.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/fiat.9fdc990b85574af3.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/fiat.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/fiat.9fdc990b85574af3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1042,14 +1042,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/fisker.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/fisker.f6b7093186396e88.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/fisker.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/fisker.f6b7093186396e88.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1080,14 +1080,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/forthing.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/forthing.7ffa4c7cd38a0731.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/forthing.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/forthing.7ffa4c7cd38a0731.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1099,14 +1099,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/foton.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/foton.d75a2f6484c3baa8.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/foton.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/foton.d75a2f6484c3baa8.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1118,14 +1118,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/gac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/gac.0b11f1136707f5ba.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/gac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/gac.0b11f1136707f5ba.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1156,14 +1156,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/genesis.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/genesis.14c04e15e9463788.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/genesis.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/genesis.14c04e15e9463788.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1175,14 +1175,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/geo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/geo.beac4dc41bd7edb3.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/geo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/geo.beac4dc41bd7edb3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1194,14 +1194,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/gmc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/gmc.58b165d107609dc9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/gmc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/gmc.58b165d107609dc9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1213,14 +1213,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/great-wall.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/great-wall.6f986b8b16eb0a8b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/great-wall.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/great-wall.6f986b8b16eb0a8b.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1232,14 +1232,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hafei.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hafei.3b251fd2904025bd.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hafei.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hafei.3b251fd2904025bd.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1251,14 +1251,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/haima.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/haima.0f094e36040b771b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/haima.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/haima.0f094e36040b771b.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1289,14 +1289,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hawtai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hawtai.2a163104e150eb3e.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hawtai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hawtai.2a163104e150eb3e.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1308,14 +1308,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hiphi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hiphi-light.3c9e6bc5396dc75f.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hiphi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hiphi-dark.faf679c7e61250da.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1346,14 +1346,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hongqi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hongqi.1edd49b8a32c1c32.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hongqi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hongqi.1edd49b8a32c1c32.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1365,14 +1365,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hozon.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hozon-light.d5466d73b2843622.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hozon.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hozon-dark.18e78e9162dcd5ec.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1384,14 +1384,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/huanghai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/huanghai.27071c99648ba5ae.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/huanghai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/huanghai.27071c99648ba5ae.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1403,14 +1403,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/hummer.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hummer-light.b45a85ffccb77aa8.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/hummer.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/hummer-dark.12811ae2cd6a2bcf.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1441,14 +1441,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/icar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/i-car-light.1634edb70953cfb9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/icar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/i-car-dark.bc6a572eaf540631.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1460,14 +1460,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/im-motors.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/im-motors-light.bb6b3a729b5f9dca.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/im-motors.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/im-motors-dark.566b32f4c137e2f4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1479,14 +1479,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/infiniti.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/infiniti.f8b05e076dacf1d7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/infiniti.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/infiniti.f8b05e076dacf1d7.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1498,14 +1498,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/iran-khodro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/iran-khodro.d7cf0534b53aa5bf.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/iran-khodro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/iran-khodro.d7cf0534b53aa5bf.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1517,14 +1517,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/isuzu.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/isuzu.a51fb8c0f0a84288.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/isuzu.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/isuzu.a51fb8c0f0a84288.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1536,14 +1536,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/iveco.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/iveco.a9de3d18013e068d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/iveco.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/iveco.a9de3d18013e068d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1555,14 +1555,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jac.24a134c9733304a6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jac.24a134c9733304a6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1574,14 +1574,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jaecoo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jaecoo-light.d54ce8a3f5ee7555.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jaecoo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jaecoo-dark.bdecb7bb6e79a114.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1593,14 +1593,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jaguar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jaguar.72a6ec162da24e31.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jaguar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jaguar.72a6ec162da24e31.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1612,14 +1612,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jeep.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jeep.5c7df33f88deae56.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jeep.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jeep.5c7df33f88deae56.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1631,14 +1631,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jeland.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jeland-light.83ccf04a21883dc2.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jeland.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jeland-dark.3ffcc783a6e002ea.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1650,14 +1650,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jetour.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jetour-light.4e06072a4639a2f6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jetour.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jetour-dark.8f4d3236fdeff419.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1669,14 +1669,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jetta.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jetta-light.c8882a2be0ef4e53.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jetta.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jetta-dark.a972bc7384015e27.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1688,14 +1688,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jinbei.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jinbei.960c0f5a774baf8c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jinbei.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jinbei.960c0f5a774baf8c.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1707,14 +1707,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jmc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jmc.e75e0112d8af4a06.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jmc.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jmc.e75e0112d8af4a06.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1726,14 +1726,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/jmev.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jmev-light.a0d2fc864ff7352f.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/jmev.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/jmev-dark.fd661962b8b8b5b9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1745,14 +1745,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/kaiyi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kaiyi-light.8ede9033c2c5570b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/kaiyi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kaiyi-dark.f3560c87e8b7fdea.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1764,14 +1764,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/kgm.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kgm-light.b2556808ac993adc.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/kgm.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kgm-dark.cab1ec7a3f476e88.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1802,14 +1802,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/knewstar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/knewstar-light.59ecc1f453839bd5.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/knewstar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/knewstar-dark.60fc18236185adac.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1821,14 +1821,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/kuayue.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kuayue.c4953b44b3d82165.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/kuayue.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/kuayue.c4953b44b3d82165.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1840,14 +1840,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lamborghini.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lamborghini.2cbae21496a47722.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lamborghini.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lamborghini.2cbae21496a47722.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1859,14 +1859,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lancia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lancia.518845082c977282.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lancia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lancia.518845082c977282.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1878,13 +1878,13 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/land-rover.png",
-          "source": "https://r2.drom.ru/js/bundles/media/land-rover.f575feddafb47225.png",
+          "source": "https://r.drom.ru/js/bundles/media/land-rover.f575feddafb47225.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/land-rover.png",
-          "source": "https://r2.drom.ru/js/bundles/media/land-rover.f575feddafb47225.png",
+          "source": "https://r.drom.ru/js/bundles/media/land-rover.f575feddafb47225.png",
           "fallback": false,
           "errors": []
         }
@@ -1897,14 +1897,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/landwind.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/landwind-light.20f69184ddf5964c.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/landwind.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/landwind-dark.6b762e11c7c9ad06.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1916,14 +1916,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/leapmotor.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/leapmotor-light.e8b090f1397922ea.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/leapmotor.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/leapmotor-dark.3f6e024fdcadef5b.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1954,14 +1954,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/li-auto.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/li-light.04d421b84d3ed3bd.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/li-auto.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/li-dark.1000bc686652ce93.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1973,14 +1973,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lifan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lifan-light.cfef1c10e61e2ddf.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lifan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lifan-dark.2eb96c68286bcd19.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -1992,14 +1992,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lincoln.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lincoln-light.5c8aa4d190c835d5.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lincoln.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lincoln-dark.2370f7b473f16eaf.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2011,14 +2011,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/livan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/livan-light.4e9514f04b5537d5.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/livan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/livan-dark.8568eef4a2148143.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2030,14 +2030,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lotus.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lotus.17dcca679c64acf6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lotus.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lotus.17dcca679c64acf6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2049,14 +2049,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lucid.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lucid-light.a32f3e3c2c9906ad.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lucid.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lucid-dark.10651aa9ca4cfe74.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2068,14 +2068,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/luxgen.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/luxgen.e4a0f7b8f8cd5efc.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/luxgen.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/luxgen.e4a0f7b8f8cd5efc.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2087,14 +2087,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/lynk-and-co.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lynk_and_co-light.edd98d302fcf2c07.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/lynk-and-co.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/lynk_and_co-dark.d13e830605a8ced3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2106,14 +2106,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/m-hero.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/m-hero-light.c700acace6ca80b1.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/m-hero.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/m-hero-dark.cc4e0787a55382e6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2125,14 +2125,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/maextro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maextro-light.dfe1138b3f401b9b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/maextro.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maextro-dark.760b564925d46ee6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2144,14 +2144,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/maserati.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maserati-light.67f2ad1698d39cee.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/maserati.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maserati-dark.6cc2bba0c5eafceb.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2163,14 +2163,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/maxus.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maxus.d17ca984c1af0cc1.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/maxus.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maxus.d17ca984c1af0cc1.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2182,14 +2182,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/maybach.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maybach.10af7fb0484daf90.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/maybach.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/maybach.10af7fb0484daf90.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2220,14 +2220,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/mclaren.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mclaren-light.96cf075c117aff9b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/mclaren.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mclaren-dark.f3e689c11e8b42c6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2258,14 +2258,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/mercury.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mercury.2ef2b6a4cf25a790.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/mercury.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mercury.2ef2b6a4cf25a790.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2277,14 +2277,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/mg.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mg-light.d2995e7988cc92bf.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/mg.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mg-dark.a0260906849565ec.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2315,14 +2315,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/mini.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mini-light.c7199b9ad628542d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/mini.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mini-dark.b6d43fa947ca1df0.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2353,14 +2353,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/mitsuoka.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mitsuoka-light.eef457da6cd6c14d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/mitsuoka.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/mitsuoka-dark.93d56b101514c725.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2372,14 +2372,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/morgan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/morgan-light.efbb3ae0cdee57b6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/morgan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/morgan-dark.1de84beb046bf1a3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2410,14 +2410,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/nio.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/nio-light.60e6813a98fc54b9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/nio.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/nio-dark.353980e376dd5ab9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2448,14 +2448,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/oldsmobile.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oldsmobile.7faca984da6b9cf9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/oldsmobile.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oldsmobile.7faca984da6b9cf9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2467,14 +2467,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/omoda.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/omoda-light.a217529c894563b1.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/omoda.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/omoda-dark.d463e4455e66e4e3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2505,14 +2505,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ora.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ora-light.0d65c6afd877b5d7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ora.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ora-dark.2ff0e94f5ef10008.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2524,14 +2524,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/oshan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oshan.37822d5cb18d03f7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/oshan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oshan.37822d5cb18d03f7.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2543,14 +2543,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/oting.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oting.73241a5a2292731a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/oting.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/oting.73241a5a2292731a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2562,14 +2562,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/peugeot.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/peugeot.c549476845fb11e6.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/peugeot.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/peugeot.c549476845fb11e6.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2581,14 +2581,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/plymouth.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/plymouth.fdbc63558e2348b8.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/plymouth.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/plymouth.fdbc63558e2348b8.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2600,14 +2600,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/polar-stone.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/polar-stone-light.2423a9d7186ee566.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/polar-stone.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/polar-stone-dark.cce159dfd2365121.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2619,14 +2619,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/polestar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/polestar.6c61cfec4148991f.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/polestar.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/polestar.6c61cfec4148991f.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2638,14 +2638,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/pontiac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/pontiac-light.07cdfd45a50b4e14.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/pontiac.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/pontiac-dark.21c094b830b3386e.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2657,14 +2657,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/porsche.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/porsche.280baae7a622d533.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/porsche.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/porsche.280baae7a622d533.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2676,14 +2676,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/proton.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/proton.70cf1d42b60f5a1b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/proton.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/proton.70cf1d42b60f5a1b.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2695,14 +2695,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ram.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ram.7ae68d9ec8555ff3.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ram.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ram.7ae68d9ec8555ff3.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2714,14 +2714,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ravon.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ravon.710cc8262ab1e8ad.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ravon.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ravon.710cc8262ab1e8ad.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2752,14 +2752,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/renault-samsung.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/renault-samsung.c54694da4a4cd132.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/renault-samsung.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/renault-samsung.c54694da4a4cd132.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2771,14 +2771,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/rising-auto.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rising-auto-light.3a5d976a523fdbce.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/rising-auto.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rising-auto-dark.3824ac82d429309f.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2790,14 +2790,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/rivian.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rivian-light.9b45d7b48e698638.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/rivian.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rivian-dark.09407b4cbd191d21.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2809,14 +2809,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/roewe.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/roewe-light.3a12c65f321ceac1.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/roewe.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/roewe-dark.ba6a17d67bbfc12d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2828,14 +2828,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/rolls-royce.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rolls-royce.e4d833e5f2585593.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/rolls-royce.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rolls-royce.e4d833e5f2585593.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2847,14 +2847,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/rover.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rover.ec9b82d069dd43f2.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/rover.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rover.ec9b82d069dd43f2.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2866,14 +2866,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/rox.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rox-light.ed285bbe38a8e087.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/rox.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/rox-dark.6cde52c2216a4e6f.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2885,14 +2885,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/saab.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saab.b8fc67238fb7ef67.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/saab.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saab.b8fc67238fb7ef67.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2904,14 +2904,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/saipa.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saipa.072ee18628aac9ae.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/saipa.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saipa.072ee18628aac9ae.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2923,14 +2923,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/saturn.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saturn.0c099693577d8e4e.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/saturn.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/saturn.0c099693577d8e4e.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2942,14 +2942,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/scion.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/scion.858e24de736f096a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/scion.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/scion.858e24de736f096a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2961,14 +2961,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/seat.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/seat.f419a28f3238524a.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/seat.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/seat.f419a28f3238524a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2980,14 +2980,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/seres.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/seres-light.e2645459e5c8c0b7.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/seres.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/seres-dark.15072d5e8c3eda8a.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -2999,14 +2999,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/shuanghuan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/shuanghuan.9f3d01bb1e95b553.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/shuanghuan.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/shuanghuan.9f3d01bb1e95b553.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3018,13 +3018,13 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/skoda.png",
-          "source": "https://r2.drom.ru/js/bundles/media/skoda.a9a03e95f464db4d.png",
+          "source": "https://r.drom.ru/js/bundles/media/skoda.a9a03e95f464db4d.png",
           "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/skoda.png",
-          "source": "https://r2.drom.ru/js/bundles/media/skoda.a9a03e95f464db4d.png",
+          "source": "https://r.drom.ru/js/bundles/media/skoda.a9a03e95f464db4d.png",
           "fallback": false,
           "errors": []
         }
@@ -3037,14 +3037,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/skywell.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/skywell.dcb34fb6ee9d477d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/skywell.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/skywell.dcb34fb6ee9d477d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3056,14 +3056,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/smart.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/smart.d0d5727a57f2c381.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/smart.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/smart.d0d5727a57f2c381.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3075,14 +3075,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/soueast.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/soueast.f7f8e402eb086e96.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/soueast.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/soueast.f7f8e402eb086e96.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3113,14 +3113,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/ssangyong.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ssangyong-light.7e35d323157fd74b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/ssangyong.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/ssangyong-dark.1b946bf530edbf9d.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3170,14 +3170,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/swm.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/swm.bfc9795bc03c336e.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/swm.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/swm.bfc9795bc03c336e.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3189,14 +3189,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/tank.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tank-light.d03be2507b43a74d.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/tank.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tank-dark.4fdc3561167a7932.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3208,14 +3208,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/tata.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tata.2df99ec6c3c0e5f4.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/tata.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tata.2df99ec6c3c0e5f4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3246,14 +3246,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/tesla.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tesla.4a459c85e060f5a4.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/tesla.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tesla.4a459c85e060f5a4.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3265,14 +3265,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/tianma.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tianma.a71697fe7727ecc0.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/tianma.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tianma.a71697fe7727ecc0.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3284,14 +3284,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/tianye.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tianye.a339e0fc46d62aa9.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/tianye.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/tianye.a339e0fc46d62aa9.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3322,14 +3322,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/trabant.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/trabant-light.9f9b31bb8c154c71.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/trabant.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/trabant-dark.782f982dde69353f.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3341,14 +3341,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/umo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/umo-light.6c07c88b70399a61.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/umo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/umo-dark.4f43da193a7424d7.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3360,14 +3360,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/vauxhall.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/vauxhall-light.1fa600ab99308890.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/vauxhall.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/vauxhall-dark.809a5431fc3fa268.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3379,14 +3379,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/venucia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/venucia.563959917d588ebc.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/venucia.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/venucia.563959917d588ebc.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3398,14 +3398,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/vgv.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/vgv-light.4dfb3808eef401a0.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/vgv.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/vgv-dark.f80031471ae49657.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3436,14 +3436,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/volvo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/volvo-light.3f24925350499f99.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/volvo.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/volvo-dark.0807f2fe10f88f75.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3455,14 +3455,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/voyah.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/voyah-light.98abde8353379c89.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/voyah.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/voyah-dark.30cba6aa7a6da8bc.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3474,14 +3474,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/wartburg.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wartburg.4aab66c3ebaad081.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/wartburg.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wartburg.4aab66c3ebaad081.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3493,14 +3493,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/weltmeister.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/weltmeister-light.727f3a758519c598.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/weltmeister.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/weltmeister-dark.cc77911ad673c68e.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3512,14 +3512,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/wey.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wey.b938a90453cc3580.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/wey.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wey.b938a90453cc3580.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3531,14 +3531,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/willys.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/willys-light.9c2378903aa513b8.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/willys.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/willys-dark.4c4fb9b10c3b7507.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3550,14 +3550,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/wuling.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wuling.d5ee57354aa692aa.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/wuling.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/wuling.d5ee57354aa692aa.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3569,14 +3569,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/xiaomi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xiaomi.d43d23685b38cfe2.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/xiaomi.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xiaomi.d43d23685b38cfe2.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3588,14 +3588,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/xin-kai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xin-kai-light.c86545ad9a011f68.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/xin-kai.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xin-kai-dark.d2b5b4a0e4313e48.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3607,14 +3607,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/xpeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xpeng-light.2e8cbc7e1a89e65b.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/xpeng.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/xpeng-dark.4a55be9328eb7d26.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3626,14 +3626,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/yema.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/yema.38bcc7ca4d200190.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/yema.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/yema.38bcc7ca4d200190.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3645,14 +3645,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/zeekr.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zeekr-light.dce1bcd0f93decf5.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/zeekr.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zeekr-dark.dd72dd8280a77754.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3664,14 +3664,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/zotye.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zotye.9d9df23fa60c5cde.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/zotye.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zotye.9d9df23fa60c5cde.png",
+          "fallback": false,
           "errors": []
         }
       }
@@ -3683,14 +3683,14 @@
       "themes": {
         "light": {
           "path": "/brand-logos/drom/light/zx.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zx.8b3abfab6ea276cf.png",
+          "fallback": false,
           "errors": []
         },
         "dark": {
           "path": "/brand-logos/drom/dark/zx.png",
-          "source": null,
-          "fallback": true,
+          "source": "https://r2.drom.ru/js/bundles/media/zx.8b3abfab6ea276cf.png",
+          "fallback": false,
           "errors": []
         }
       }
