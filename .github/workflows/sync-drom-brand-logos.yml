@@ -6,12 +6,14 @@ on:
       - feat/local-drom-brand-logos-20260723
     paths:
       - scripts/sync_drom_brand_logos.py
+      - scripts/sync_drom_brand_logos_v2.py
       - .github/workflows/sync-drom-brand-logos.yml
   pull_request:
     branches:
       - main
     paths:
       - scripts/sync_drom_brand_logos.py
+      - scripts/sync_drom_brand_logos_v2.py
       - .github/workflows/sync-drom-brand-logos.yml
   workflow_dispatch:
 
@@ -22,7 +24,7 @@ jobs:
   sync:
     if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip logo sync]') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,18 +39,19 @@ jobs:
         run: python -m pip install --disable-pip-version-check requests pillow cairosvg
 
       - name: Download and normalize Drom logos
-        run: python scripts/sync_drom_brand_logos.py
+        run: python scripts/sync_drom_brand_logos_v2.py
 
-      - name: Upload synchronization report
+      - name: Upload complete logo library
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: drom-brand-logo-report-${{ github.run_id }}
-          path: apps/web/public/brand-logos/drom/sync-report.json
-          if-no-files-found: warn
+          name: drom-brand-logo-library-${{ github.run_id }}
+          path: apps/web/public/brand-logos/drom
+          if-no-files-found: error
           retention-days: 3
 
       - name: Commit local logo library
+        if: github.event_name == 'push'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -59,5 +62,6 @@ jobs:
             exit 0
           fi
           git commit -m "Sync normalized Drom brand logos [skip logo sync]"
-          git pull --rebase origin feat/local-drom-brand-logos-20260723
+          git fetch origin feat/local-drom-brand-logos-20260723
+          git rebase origin/feat/local-drom-brand-logos-20260723
           git push origin HEAD:feat/local-drom-brand-logos-20260723
