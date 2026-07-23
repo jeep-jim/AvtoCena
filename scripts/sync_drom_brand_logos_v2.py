@@ -3,8 +3,9 @@
 
 Drom keeps most logo URLs inside compiled JS/CSS bundles rather than directly
 in the initial HTML. This wrapper recursively scans those same-origin bundles,
-resolves both absolute media URLs and webpack's bare hashed filenames, then
-delegates normalization and manifest generation to the base synchronizer.
+resolves both absolute media URLs and webpack's bare hashed filenames, maps a
+small number of Drom rebadge aliases, then delegates normalization and manifest
+generation to the base synchronizer.
 """
 
 from __future__ import annotations
@@ -19,6 +20,13 @@ import sync_drom_brand_logos as base
 
 
 MAX_BUNDLES = 220
+LOGO_ALIASES: dict[str, tuple[str, ...]] = {
+    # Neta is the export-facing name used by Hozon; Drom's media bundle keeps
+    # the transparent mark under the manufacturer name.
+    "Neta": ("Hozon",),
+    "SRM Shineray": ("SRM", "Shineray"),
+    "Micro": ("Microcar", "Microlino"),
+}
 
 
 def bundle_urls(text: str, base_url: str) -> list[str]:
@@ -45,12 +53,7 @@ def bundle_urls(text: str, base_url: str) -> list[str]:
 
 
 def collect_bare_media(text: str, bundle_url: str, logos: dict[str, dict[str, list[str]]]) -> int:
-    """Resolve webpack media filenames such as audi-dark.<hash>.png.
-
-    In production bundles Drom often stores only the hashed filename and joins
-    it with the public media path at runtime. The browser therefore sees the
-    correct transparent file while a simple HTML URL scraper misses it.
-    """
+    """Resolve webpack media filenames such as audi-dark.<hash>.png."""
 
     parsed = urlparse(bundle_url)
     if not parsed.scheme or not parsed.netloc:
@@ -76,6 +79,23 @@ def collect_bare_media(text: str, bundle_url: str, logos: dict[str, dict[str, li
         if after > before:
             added += 1
     return added
+
+
+def apply_logo_aliases(logos: dict[str, dict[str, list[str]]]) -> None:
+    for brand, aliases in LOGO_ALIASES.items():
+        target = base.normalized_key(brand)
+        if target in logos:
+            continue
+        for alias in aliases:
+            source = logos.get(base.normalized_key(alias))
+            if source:
+                logos[target] = {
+                    "light": list(source.get("light", [])),
+                    "dark": list(source.get("dark", [])),
+                    "any": list(source.get("any", [])),
+                }
+                print(f"Mapped Drom logo alias {brand} -> {alias}")
+                break
 
 
 def enhanced_manifest() -> dict[str, dict[str, list[str]]]:
@@ -113,6 +133,7 @@ def enhanced_manifest() -> dict[str, dict[str, list[str]]]:
         except Exception as error:
             print(f"Warning: failed to scan bundle {url}: {error}", file=sys.stderr)
 
+    apply_logo_aliases(logos)
     print(
         f"Bundle scan complete: {len(visited)} bundles, "
         f"{len(logos)} logo keys, {bare_assets} bare media assets"
