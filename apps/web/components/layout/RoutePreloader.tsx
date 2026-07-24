@@ -9,7 +9,21 @@ const MIN_VISIBLE_MS = 260;
 const MAX_VISIBLE_MS = 8000;
 
 const publicLayoutFixes = `
-button[aria-label^="Почему есть фильтр"],.ac-budget-help{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;background-color:transparent!important;border-radius:0!important}
+button[aria-label^="Почему есть фильтр"],.ac-budget-help{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.072)!important;
+  background-color:rgba(255,255,255,.072)!important;
+  color:var(--ac-text)!important;
+}
+html[data-theme="light"] button[aria-label^="Почему есть фильтр"],
+html[data-theme="light"] .ac-budget-help{
+  background:var(--ac-surface-2)!important;
+  background-color:var(--ac-surface-2)!important;
+  color:var(--ac-text)!important;
+}
 .ac-results-edit summary{list-style:none!important}.ac-results-edit summary::-webkit-details-marker{display:none!important}
 .ac-results-catalog-link,.ac-results-market-link{background:var(--ac-surface)!important;color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
 html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-results-market-link,html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current){background:#fff!important;color:#171b24!important;-webkit-text-fill-color:#171b24!important}
@@ -79,23 +93,17 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   color:transparent!important;
 }
 .ac-electric-filter:has(input:checked)>span:first-of-type::before{
-  content:"⚡"!important;
+  content:""!important;
   display:block!important;
-  color:#171a21!important;
-  font-size:15px!important;
-  line-height:1!important;
+  width:9px!important;
+  height:15px!important;
+  background:#171a21!important;
+  clip-path:polygon(58% 0,8% 56%,43% 56%,28% 100%,92% 39%,57% 39%)!important;
 }
 .ac-power-limit:has(input:checked)>span:first-of-type{
   border-color:#ff353d!important;
   background:#ff353d!important;
   color:#fff!important;
-}
-.ac-budget-help{
-  border:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  background:transparent!important;
-  background-color:transparent!important;
 }
 body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2)>div:first-child>div:first-child{display:none!important}
 body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-top:0!important}
