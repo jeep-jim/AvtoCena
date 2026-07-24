@@ -48,11 +48,12 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
     const query = withoutCity(params);
     redirect(`/results${query ? `?${query}` : ""}`);
   }
+  const bodyType = input.body && input.body !== "any" ? input.body : undefined;
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
   const [facets, exactGroups] = await Promise.all([
     readCatalogFacets({ market: input.market && input.market !== "any" ? input.market : undefined }),
     Promise.all(marketList.map(async (market) => {
-      const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
+      const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
       return { ...market, items: result.items, total: result.total };
     })),
   ]);
@@ -77,7 +78,7 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
           <select name="brand" defaultValue={input.brand || ""} className={controlClass}><option value="">Любая марка</option>{makeOptions.map((value) => <option key={value} value={value}>{value}</option>)}</select>
           <select name="model" defaultValue={input.model || ""} className={controlClass}><option value="">Любая модель</option>{modelOptions.map((value) => <option key={value} value={value}>{value}</option>)}</select>
           <select name="market" defaultValue={input.market && input.market !== "any" ? input.market : ""} className={controlClass}><option value="">Все рынки</option>{markets.map((market) => <option key={market.id} value={market.id}>{market.label}</option>)}</select>
-          <select name="body" defaultValue={input.body || ""} className={controlClass}>{bodyOptions.map((option) => <option key={option.value || "any"} value={option.value}>{option.label}</option>)}</select>
+          <select name="body" defaultValue={bodyType || ""} className={controlClass}>{bodyOptions.map((option) => <option key={option.value || "any"} value={option.value}>{option.label}</option>)}</select>
           <input name="yearFrom" defaultValue={input.yearFrom || ""} inputMode="numeric" placeholder="Год от" className={inputClass} />
           <input name="yearTo" defaultValue={yearTo || ""} inputMode="numeric" placeholder="Год до" className={inputClass} />
           {city && !electricOnly ? <input type="hidden" name="city" value={city} /> : null}
