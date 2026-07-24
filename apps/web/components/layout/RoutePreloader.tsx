@@ -9,7 +9,7 @@ const MIN_VISIBLE_MS = 260;
 const MAX_VISIBLE_MS = 8000;
 
 const publicLayoutFixes = `
-button[aria-label^="Почему есть фильтр"]{border:0!important;outline:0!important;box-shadow:none!important}
+button[aria-label^="Почему есть фильтр"],.ac-budget-help{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;background-color:transparent!important;border-radius:0!important}
 .ac-results-edit summary{list-style:none!important}.ac-results-edit summary::-webkit-details-marker{display:none!important}
 .ac-results-catalog-link,.ac-results-market-link{background:var(--ac-surface)!important;color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
 html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-results-market-link,html[data-theme="light"] .ac-catalog-pagination a:not(.ac-pagination-current){background:#fff!important;color:#171b24!important;-webkit-text-fill-color:#171b24!important}
@@ -71,10 +71,19 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   border-color:rgba(35,42,55,.18)!important;
   background:transparent!important;
 }
+.ac-electric-filter>span:first-of-type{font-size:0!important}
+.ac-electric-filter>span:nth-of-type(2){display:none!important}
 .ac-electric-filter:has(input:checked)>span:first-of-type{
   border-color:#ffd21f!important;
   background:#ffd21f!important;
+  color:transparent!important;
+}
+.ac-electric-filter:has(input:checked)>span:first-of-type::before{
+  content:"⚡"!important;
+  display:block!important;
   color:#171a21!important;
+  font-size:15px!important;
+  line-height:1!important;
 }
 .ac-power-limit:has(input:checked)>span:first-of-type{
   border-color:#ff353d!important;
@@ -88,6 +97,8 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   background:transparent!important;
   background-color:transparent!important;
 }
+body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2)>div:first-child>div:first-child{display:none!important}
+body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-top:0!important}
 @media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
 }
@@ -101,11 +112,21 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
 @media(max-width:767px){
   html body main.ac-home-page #form>div:nth-child(2),
   html body .ac-home-filter-drawer__fields>div:nth-child(2){
-    grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    align-items:stretch!important;
+    gap:10px!important;
+  }
+  html body main.ac-home-page #form>div:nth-child(2)>*,
+  html body .ac-home-filter-drawer__fields>div:nth-child(2)>*{
+    min-width:0!important;
+    width:100%!important;
+    height:56px!important;
+    min-height:56px!important;
   }
   html body .ac-electric-filter{
-    gap:5px!important;
-    padding:0 8px!important;
+    gap:8px!important;
+    padding:0 12px!important;
     font-size:13px!important;
   }
   html body .ac-electric-filter>span:first-of-type{
@@ -113,9 +134,8 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
     height:22px!important;
     flex-basis:22px!important;
   }
-  html body .ac-electric-filter>span:nth-of-type(2){font-size:15px!important}
   html body .ac-electric-filter>span:last-child{
-    min-width:max-content!important;
+    min-width:0!important;
     overflow:visible!important;
     text-overflow:clip!important;
     white-space:nowrap!important;
