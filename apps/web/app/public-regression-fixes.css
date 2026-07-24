@@ -261,3 +261,79 @@
     max-height: 44px !important;
   }
 }
+
+/* Final mobile TopAvto composition.
+   The visible logo is the floated pseudo-element inside the last paragraph,
+   so only the final lines wrap around it exactly as in the approved Figma. */
+@media (max-width: 767px) {
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block {
+    display: block !important;
+    position: relative !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 0 !important;
+    padding: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > h3,
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p {
+    display: block !important;
+    float: none !important;
+    clear: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:first-of-type {
+    margin-top: .55rem !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:last-of-type {
+    display: flow-root !important;
+    margin-top: .45rem !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > div:first-child > p:last-of-type::before {
+    content: "" !important;
+    display: block !important;
+    float: right !important;
+    clear: none !important;
+    width: 100px !important;
+    height: 26px !important;
+    margin: 3.75rem 0 0 .75rem !important;
+    background: transparent url("/brands/topavto-logo.png") center / contain no-repeat !important;
+    shape-outside: inset(0) !important;
+  }
+
+  html body main.ac-page-copy.ac-home-page section.ac-executor-block > .ac-executor-logo {
+    display: none !important;
+    position: static !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+}
