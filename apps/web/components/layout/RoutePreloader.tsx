@@ -9,7 +9,9 @@ const MIN_VISIBLE_MS = 260;
 const MAX_VISIBLE_MS = 8000;
 
 const publicLayoutFixes = `
-button[aria-label^="Почему есть фильтр"],.ac-budget-help{
+button[aria-label^="Почему есть фильтр"],
+.ac-budget-help,
+main.ac-home-page #form>div:first-child button:first-of-type{
   display:inline-grid!important;
   width:32px!important;
   height:32px!important;
@@ -28,7 +30,8 @@ button[aria-label^="Почему есть фильтр"],.ac-budget-help{
   -webkit-backdrop-filter:blur(14px)!important;
 }
 html[data-theme="light"] button[aria-label^="Почему есть фильтр"],
-html[data-theme="light"] .ac-budget-help{
+html[data-theme="light"] .ac-budget-help,
+html[data-theme="light"] main.ac-home-page #form>div:first-child button:first-of-type{
   background:rgba(196,204,218,.72)!important;
   background-color:rgba(196,204,218,.72)!important;
   color:#5f697a!important;
