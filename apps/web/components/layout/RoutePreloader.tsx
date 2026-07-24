@@ -10,18 +10,27 @@ const MAX_VISIBLE_MS = 8000;
 
 const publicLayoutFixes = `
 button[aria-label^="Почему есть фильтр"],.ac-budget-help{
+  display:inline-grid!important;
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  place-items:center!important;
+  padding:0!important;
   border:0!important;
   outline:0!important;
   box-shadow:none!important;
   border-radius:999px!important;
-  background:rgba(255,255,255,.072)!important;
-  background-color:rgba(255,255,255,.072)!important;
+  background:rgba(255,255,255,.09)!important;
+  background-color:rgba(255,255,255,.09)!important;
   color:var(--ac-text)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
 }
 html[data-theme="light"] button[aria-label^="Почему есть фильтр"],
 html[data-theme="light"] .ac-budget-help{
-  background:var(--ac-surface-2)!important;
-  background-color:var(--ac-surface-2)!important;
+  background:rgba(220,226,236,.82)!important;
+  background-color:rgba(220,226,236,.82)!important;
   color:var(--ac-text)!important;
 }
 .ac-results-edit summary{list-style:none!important}.ac-results-edit summary::-webkit-details-marker{display:none!important}
@@ -73,6 +82,7 @@ html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
   align-items:center!important;
   justify-content:center!important;
   box-sizing:border-box!important;
+  margin:0!important;
   border:1px solid rgba(255,255,255,.22)!important;
   border-radius:8px!important;
   background:transparent!important;
@@ -97,7 +107,7 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   display:block!important;
   width:9px!important;
   height:15px!important;
-  background:#171a21!important;
+  background:#111318!important;
   clip-path:polygon(58% 0,8% 56%,43% 56%,28% 100%,92% 39%,57% 39%)!important;
 }
 .ac-power-limit:has(input:checked)>span:first-of-type{
@@ -132,21 +142,39 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
     height:56px!important;
     min-height:56px!important;
   }
-  html body .ac-electric-filter{
-    gap:8px!important;
-    padding:0 12px!important;
-    font-size:13px!important;
+  html body .ac-electric-filter,
+  html body .ac-power-limit{
+    gap:12px!important;
+    padding-left:16px!important;
   }
-  html body .ac-electric-filter>span:first-of-type{
-    width:22px!important;
-    height:22px!important;
-    flex-basis:22px!important;
+  html body .ac-electric-filter>span:first-of-type,
+  html body .ac-power-limit>span:first-of-type{
+    width:24px!important;
+    height:24px!important;
+    flex-basis:24px!important;
   }
   html body .ac-electric-filter>span:last-child{
     min-width:0!important;
     overflow:visible!important;
     text-overflow:clip!important;
     white-space:nowrap!important;
+  }
+  /* Compact the long mobile drawer: pair compatible categories in two columns. */
+  html body .ac-home-filter-drawer__fields{
+    row-gap:10px!important;
+  }
+  html body .ac-home-filter-drawer__fields>div:not(:first-child):not(:nth-child(2)){
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    align-items:stretch!important;
+  }
+  html body .ac-home-filter-drawer__fields>div:not(:first-child):not(:nth-child(2))>*{
+    min-width:0!important;
+    width:100%!important;
+  }
+  html body .ac-home-filter-drawer__fields .ac-filter-control{
+    min-height:56px!important;
   }
 }
 `;
