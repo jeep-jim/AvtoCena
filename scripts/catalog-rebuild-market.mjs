@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
-const { calculateOffer } = await import("../apps/web/lib/catalog/adapters.ts");
+const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
@@ -153,7 +153,7 @@ async function prepareCandidate(input, source, origin) {
   });
 
   try {
-    offer = cleanOffer(await calculateOffer(offer));
+    offer = cleanOffer(await calculateOfferWithRussiaCustoms(offer));
   } catch (error) {
     recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "calculation", error: String(error?.message || error) });
     if (!Number(offer.totalRub || 0)) return null;
