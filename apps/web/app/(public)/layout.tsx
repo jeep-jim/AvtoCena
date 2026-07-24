@@ -112,6 +112,64 @@ const publicPageFixes = `
 }
 
 @media (max-width: 767px) {
+  /* Put the TopAvto mark inside the heading flow. Only the first line yields to
+     the logo; the next line and both paragraphs use the full card width. */
+  html .ac-page-copy.ac-home-page .ac-executor-block {
+    display: block !important;
+    padding: 1rem !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child {
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
+    display: flow-root !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.25 !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
+    content: "" !important;
+    float: right !important;
+    width: 90px !important;
+    height: 24px !important;
+    margin: 0 0 .25rem .65rem !important;
+    background-image: url("/brands/topavto-logo.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+  }
+
+  html[data-theme="light"] .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
+    background-image: url("/brands/topavto-logo-black.png") !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:first-of-type {
+    margin-top: .7rem !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type {
+    margin-top: .45rem !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-logo {
+    display: none !important;
+  }
+
   .ac-price-trend-popover {
     position: fixed !important;
     top: auto !important;
