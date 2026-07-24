@@ -18,6 +18,8 @@ export type RussiaCustomsResult = {
   ruleVersion: "rf_personal_m1_2026-01-01";
   ageMonths?: number;
   ageBand?: RussiaCustomsAgeBand;
+  ageEstimated?: boolean;
+  possibleAgeBands?: RussiaCustomsAgeBand[];
   customsValueRub: number;
   customsValueEur: number;
   customsClearanceFeeRub: number;
@@ -53,6 +55,15 @@ function ageBand(ageMonths: number): RussiaCustomsAgeBand {
   if (ageMonths <= 36) return "up_to_3_years";
   if (ageMonths <= 60) return "from_3_to_5_years";
   return "over_5_years";
+}
+
+function possibleProductionMonths(production: { year: number; month?: number }, importedAt: Date) {
+  if (production.month) return [{ year: production.year, month: production.month }];
+  const importedYear = importedAt.getUTCFullYear();
+  const importedMonth = importedAt.getUTCMonth() + 1;
+  const lastMonth = production.year === importedYear ? importedMonth : 12;
+  const months = Array.from({ length: Math.max(1, lastMonth) }, (_, index) => ({ year: production.year, month: index + 1 }));
+  return months.length ? months : [{ year: production.year, month: importedMonth }];
 }
 
 export function customsClearanceFeeRub(customsValueRub: number) {
@@ -101,6 +112,18 @@ function usedCarRateEurPerCc(engineCc: number, band: Exclude<RussiaCustomsAgeBan
   return 5.7;
 }
 
+function dutyRubForBand(customsValueEur: number, eurRateRub: number, engineCc: number, band: RussiaCustomsAgeBand) {
+  const dutyEur = band === "up_to_3_years"
+    ? newCarDutyEur(customsValueEur, engineCc)
+    : engineCc * usedCarRateEurPerCc(engineCc, band);
+  return Math.round(dutyEur * eurRateRub);
+}
+
+function utilizationFeeForPreferentialIndividual(powerHp: number | undefined, band: RussiaCustomsAgeBand) {
+  if (!powerHp || powerHp > 160) return undefined;
+  return band === "up_to_3_years" ? 3_400 : 5_200;
+}
+
 function normalizedFuel(value?: string) {
   return String(value || "").trim().toLowerCase();
 }
@@ -123,32 +146,50 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
   if (!eurRateRub) missing.push("eur_rate");
   if (!engineCc) missing.push("engine_cc");
   if (!production) missing.push("production_date");
-  else if (!production.month) missing.push("production_month");
 
-  const ageMonths = production?.month ? completedMonths({ year: production.year, month: production.month }, importedAt) : undefined;
-  const band = ageMonths === undefined ? undefined : ageBand(ageMonths);
+  const productionMonths = production ? possibleProductionMonths(production, importedAt) : [];
+  const ageCandidates = productionMonths.map((candidate) => {
+    const months = completedMonths(candidate, importedAt);
+    return { months, band: ageBand(months) };
+  });
+  const possibleAgeBands = [...new Set(ageCandidates.map((candidate) => candidate.band))];
+  const ageEstimated = Boolean(production && !production.month);
+  const exactAgeMonths = production?.month ? ageCandidates[0]?.months : undefined;
   const customsValueEur = eurRateRub ? customsValueRub / eurRateRub : 0;
   const customsClearance = customsValueRub ? customsClearanceFeeRub(customsValueRub) : 0;
-  let importDutyRub = 0;
+  const fuel = normalizedFuel(input.fuel);
+  const specialPowertrain = isSpecialPowertrain(fuel);
 
-  if (customsValueEur && engineCc && band) {
-    const dutyEur = band === "up_to_3_years"
-      ? newCarDutyEur(customsValueEur, engineCc)
-      : engineCc * usedCarRateEurPerCc(engineCc, band);
-    importDutyRub = Math.round(dutyEur * eurRateRub);
+  const bandCalculations = customsValueEur && eurRateRub && engineCc
+    ? possibleAgeBands.map((band) => {
+      const importDutyRub = dutyRubForBand(customsValueEur, eurRateRub, engineCc, band);
+      const utilizationFeeRub = specialPowertrain ? undefined : utilizationFeeForPreferentialIndividual(powerHp, band);
+      return {
+        band,
+        importDutyRub,
+        utilizationFeeRub,
+        comparisonTotalRub: importDutyRub + (utilizationFeeRub || 0),
+      };
+    })
+    : [];
+  const selected = [...bandCalculations].sort((left, right) => right.comparisonTotalRub - left.comparisonTotalRub)[0];
+  const band = selected?.band || possibleAgeBands[0];
+  const importDutyRub = selected?.importDutyRub || 0;
+
+  if (ageEstimated && possibleAgeBands.length) {
+    warnings.push(`Месяц производства не указан: выбран консервативный максимальный платёж из категорий ${possibleAgeBands.join(", ")}.`);
   }
 
-  const fuel = normalizedFuel(input.fuel);
   let utilizationFeeRub: number | undefined;
   let unsupported = false;
-  if (isSpecialPowertrain(fuel)) {
+  if (specialPowertrain) {
     unsupported = true;
     missing.push("powertrain_power_breakdown");
     warnings.push("Для электромобиля или гибрида нужны применяемая для утильсбора мощность и тип силовой установки.");
   } else if (!powerHp) {
     missing.push("power_hp");
   } else if (powerHp <= 160 && band) {
-    utilizationFeeRub = band === "up_to_3_years" ? 3_400 : 5_200;
+    utilizationFeeRub = utilizationFeeForPreferentialIndividual(powerHp, band);
   } else if (powerHp > 160) {
     unsupported = true;
     missing.push("full_utilization_coefficient");
@@ -163,8 +204,10 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
   return {
     status: complete ? "ready" : unsupported ? "unsupported" : "needs_data",
     ruleVersion: "rf_personal_m1_2026-01-01",
-    ageMonths,
+    ageMonths: exactAgeMonths,
     ageBand: band,
+    ageEstimated,
+    possibleAgeBands,
     customsValueRub,
     customsValueEur: Math.round(customsValueEur * 100) / 100,
     customsClearanceFeeRub: customsClearance,
@@ -176,7 +219,7 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
     warnings,
     breakdown: [
       { id: "customs-clearance", title: "Таможенный сбор за оформление", amountRub: customsClearance },
-      { id: "import-duty", title: "Единая ставка таможенных платежей", amountRub: importDutyRub, note: band },
+      { id: "import-duty", title: "Единая ставка таможенных платежей", amountRub: importDutyRub, note: ageEstimated ? `${band}; месяц оценён консервативно` : band },
       { id: "utilization-fee", title: "Утилизационный сбор", amountRub: utilizationFeeRub, note: utilizationFeeRub === undefined ? "Требуются мощность и применимый коэффициент" : "Льготная ставка для физлица" },
     ],
   };
