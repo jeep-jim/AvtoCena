@@ -105,8 +105,7 @@ export function CitySelector({ value, onChange }: Props) {
   const label = value || "Ваш город";
 
   return <>
-    <span className="ac-city-selector mt-2 flex w-fit max-w-full items-center gap-[.12em] text-[.74em] leading-none lg:mt-0 lg:inline-flex">
-      <span className="text-[var(--ac-text)]">в</span>
+    <span className="ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex">
       <button
         type="button"
         onClick={() => { setQuery(value || ""); setOpen(true); }}
