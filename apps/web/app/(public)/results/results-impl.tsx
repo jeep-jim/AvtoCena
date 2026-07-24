@@ -67,16 +67,16 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
           <select name="body" defaultValue={input.body || ""} className={controlClass}>{bodyOptions.map((option) => <option key={option.value || "any"} value={option.value}>{option.label}</option>)}</select>
           <input name="yearFrom" defaultValue={input.yearFrom || ""} inputMode="numeric" placeholder="Год от" className={inputClass} />
           <input name="yearTo" defaultValue={yearTo || ""} inputMode="numeric" placeholder="Год до" className={inputClass} />
-          {city ? <input type="hidden" name="city" value={city} /> : null}
-          <label className={choiceClass}><input type="checkbox" name="powerTo" value="160" defaultChecked={powerTo === 160} className="h-5 w-5 accent-[#ff353d]" /><span>До 160 л.с.</span></label>
-          <label className={choiceClass}><input type="checkbox" name="fuel" value="electric" defaultChecked={electricOnly} className="h-5 w-5 accent-[#ffd21f]" /><span className="text-[#ffd21f]" aria-hidden="true">⚡</span><span>Электро</span></label>
+          {city && !electricOnly ? <input type="hidden" name="city" value={city} /> : null}
+          <label className={`${choiceClass} ac-power-limit`}><input type="checkbox" name="powerTo" value="160" defaultChecked={powerTo === 160} className="sr-only" /><span className="ac-filter-checkbox-mark">✓</span><span>До 160 л.с.</span></label>
+          <label className={`${choiceClass} ac-electric-filter`}><input type="checkbox" name="fuel" value="electric" defaultChecked={electricOnly} className="sr-only" /><span className="ac-filter-checkbox-mark">✓</span><span className="text-[17px] leading-none text-[#ffd21f]" aria-hidden="true">⚡</span><span>Электро</span></label>
           <button className="avto-button flex min-h-14 items-center justify-center rounded-2xl px-5 text-center text-base font-black sm:col-span-2 lg:col-span-2">Показать автомобили</button>
         </form>
       </details>
 
       <section className="mt-9 min-w-0">
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_82px] items-start gap-x-3 gap-y-2 md:grid-cols-[minmax(0,1fr)_112px] md:gap-x-6">
-          <h1 className="min-w-0 text-[36px] font-black leading-[.94] tracking-[-0.045em] md:text-6xl">Актуальные автомобили{electricOnly ? " — электро" : ""}{city ? ` в ${city}` : ""}</h1>
+          <h1 className="min-w-0 text-[36px] font-black leading-[.94] tracking-[-0.045em] md:text-6xl">{electricOnly ? "Электромобили" : "Актуальные автомобили"}</h1>
           <Link href={`/cars${electricOnly ? "?fuel=electric" : ""}`} className="ac-results-catalog-link flex min-h-16 w-[82px] items-center justify-center self-start rounded-2xl px-2 py-2 text-center text-sm font-black leading-[1.05] md:w-[112px] md:px-4 md:text-base"><span>Весь<br />каталог</span></Link>
           <p className="col-span-2 max-w-3xl text-sm font-bold leading-6 text-white/55 md:text-base">{relaxed ? "Точного совпадения нет — показываем реальные варианты в бюджете по каждому рынку." : "Показываем реальные совпадения по выбранным параметрам."} Найдено: {foundCount}.</p>
         </div>
