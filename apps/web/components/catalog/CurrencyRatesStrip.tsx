@@ -16,16 +16,17 @@ const DISPLAY_RATES: Record<Variant, Array<[string, number]>> = {
     ["JPY", 100],
     ["CNY", 1],
     ["KRW", 1000],
-    ["AED", 1],
+    ["USD", 1],
     ["EUR", 1],
   ],
   mobile: [
     ["JPY", 100],
     ["CNY", 1],
     ["KRW", 1000],
-    ["AED", 1],
+    ["USD", 1],
     ["EUR", 1],
     ["GEL", 1],
+    ["AED", 1],
   ],
 };
 
