@@ -112,42 +112,36 @@ const publicPageFixes = `
 }
 
 @media (max-width: 767px) {
-  /* Put the TopAvto mark inside the heading flow. Only the first line yields to
-     the logo; the next line and both paragraphs use the full card width. */
+  /* Mobile TopAvto card: heading and first paragraph use the full width.
+     The final paragraph and logo share the bottom row, with the logo aligned right. */
   html .ac-page-copy.ac-home-page .ac-executor-block {
-    display: block !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 92px !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    gap: .45rem .7rem !important;
     padding: 1rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child {
-    display: block !important;
+    display: contents !important;
     min-width: 0 !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
-    display: flow-root !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
     width: 100% !important;
     max-width: none !important;
-    min-height: 0 !important;
+    min-width: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.25 !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
-    content: "" !important;
-    float: right !important;
-    width: 90px !important;
-    height: 24px !important;
-    margin: 0 0 .25rem .65rem !important;
-    background-image: url("/brands/topavto-logo.png") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-  }
-
-  html[data-theme="light"] .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
-    background-image: url("/brands/topavto-logo-black.png") !important;
+    display: none !important;
+    content: none !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p {
@@ -159,15 +153,44 @@ const publicPageFixes = `
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:first-of-type {
-    margin-top: .7rem !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    margin-top: .1rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type {
-    margin-top: .45rem !important;
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    align-self: start !important;
+    margin-top: .35rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-logo {
-    display: none !important;
+    display: block !important;
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    align-self: end !important;
+    justify-self: end !important;
+    width: 92px !important;
+    min-height: 0 !important;
+    margin: 0 0 .1rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-logo img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 34px !important;
+    object-fit: contain !important;
+    background: transparent !important;
   }
 
   .ac-price-trend-popover {
