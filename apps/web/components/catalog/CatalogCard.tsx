@@ -27,7 +27,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
     mileageKm: o.mileageKm, marketLabel: o.marketLabel, href,
   };
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
-  const tagClass = dense ? "flex items-center gap-1 rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex items-center gap-1.5 rounded-full bg-white/[0.05] px-2.5 py-1.5";
+  const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";
   const yearLabel = o.year ? `${o.year} г.` : "Год уточняется";
 
   return (
@@ -43,7 +43,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
           <PriceTrend offer={o} label={yearLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
-          <div className={`flex flex-wrap font-bold text-white/58 ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
+          <div className={`flex flex-nowrap overflow-hidden whitespace-nowrap font-bold text-white/58 ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc} /><span>{o.engineCc ? `${o.engineCc} см³` : o.fuelLabel}</span></span>
           </div>
