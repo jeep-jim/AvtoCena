@@ -40,6 +40,7 @@ html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-r
   border-radius:16px!important;
 }
 .ac-power-limit{padding-right:56px!important}
+.ac-results-edit-form .ac-power-limit{padding-right:16px!important}
 .ac-electric-filter>span:first-of-type,
 .ac-power-limit>span:first-of-type,
 .ac-filter-checkbox-mark{
@@ -77,7 +78,7 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   outline:0!important;
   box-shadow:none!important;
 }
-@media(min-width:1024px){
+@media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
 }
 @media(max-width:1023px){
