@@ -112,8 +112,8 @@ const publicPageFixes = `
 }
 
 @media (max-width: 767px) {
-  /* Mobile TopAvto card: all copy keeps the full card width. The logo is floated
-     only beside the final lines, so the words above it are never squeezed. */
+  /* Mobile TopAvto card: all copy uses the full card width. The logo sits on its
+     own compact row below the copy, so it never narrows or clips any words. */
   html .ac-page-copy.ac-home-page .ac-executor-block {
     display: block !important;
     padding: 1rem !important;
@@ -153,29 +153,37 @@ const publicPageFixes = `
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type {
-    display: flow-root !important;
+    display: block !important;
     margin-top: .45rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type::before {
-    content: "" !important;
-    float: right !important;
-    display: block !important;
-    width: 88px !important;
-    height: 28px !important;
-    margin: 3.15em 0 .05rem .65rem !important;
-    background-image: url("/brands/topavto-logo.png") !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-  }
-
-  html[data-theme="light"] .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type::before {
-    background-image: url("/brands/topavto-logo-black.png") !important;
+    display: none !important;
+    content: none !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-logo {
-    display: none !important;
+    display: block !important;
+    position: static !important;
+    width: 88px !important;
+    min-height: 0 !important;
+    margin: .4rem 0 0 auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-logo img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 34px !important;
+    object-fit: contain !important;
+    background: transparent !important;
   }
 
   .ac-price-trend-popover {
