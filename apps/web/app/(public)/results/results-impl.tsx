@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { getSearchInputFromParams } from "@/lib/avtocena";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -7,6 +8,14 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 function firstParam(value?: string | string[]) { return Array.isArray(value) ? value[0] : value; }
 function safeParams(params: Record<string, string | string[] | undefined>) { return { ...params, yearFrom: params.yearFrom ?? params.year, market: params.market ?? params.country }; }
 function unique(values: Array<string | undefined>) { return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))]; }
+function withoutCity(params: Record<string, string | string[] | undefined>) {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (key === "city" || value === undefined) continue;
+    if (Array.isArray(value)) value.forEach((item) => query.append(key, item)); else query.set(key, value);
+  }
+  return query.toString();
+}
 
 const markets = [{id:"korea",label:"Корея",flag:"🇰🇷"},{id:"china",label:"Китай",flag:"🇨🇳"},{id:"japan",label:"Япония",flag:"🇯🇵"},{id:"uae",label:"ОАЭ",flag:"🇦🇪"},{id:"europe",label:"Европа",flag:"🇪🇺"}];
 const bodyOptions = [
@@ -35,6 +44,10 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const fuel = String(firstParam(params.fuel) || "").trim();
   const electricOnly = fuel === "electric";
   const city = String(firstParam(params.city) || "").trim();
+  if (electricOnly && city) {
+    const query = withoutCity(params);
+    redirect(`/results${query ? `?${query}` : ""}`);
+  }
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
   const [facets, exactGroups] = await Promise.all([
     readCatalogFacets({ market: input.market && input.market !== "any" ? input.market : undefined }),
