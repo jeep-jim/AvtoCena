@@ -11,27 +11,27 @@ const MAX_VISIBLE_MS = 8000;
 const publicLayoutFixes = `
 button[aria-label^="Почему есть фильтр"],.ac-budget-help{
   display:inline-grid!important;
-  width:30px!important;
-  height:30px!important;
-  min-width:30px!important;
-  min-height:30px!important;
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  min-height:32px!important;
   place-items:center!important;
   padding:0!important;
   border:0!important;
   outline:0!important;
   box-shadow:none!important;
   border-radius:999px!important;
-  background:rgba(255,255,255,.09)!important;
-  background-color:rgba(255,255,255,.09)!important;
+  background:rgba(255,255,255,.14)!important;
+  background-color:rgba(255,255,255,.14)!important;
   color:var(--ac-text)!important;
   backdrop-filter:blur(14px)!important;
   -webkit-backdrop-filter:blur(14px)!important;
 }
 html[data-theme="light"] button[aria-label^="Почему есть фильтр"],
 html[data-theme="light"] .ac-budget-help{
-  background:rgba(220,226,236,.82)!important;
-  background-color:rgba(220,226,236,.82)!important;
-  color:var(--ac-text)!important;
+  background:rgba(196,204,218,.72)!important;
+  background-color:rgba(196,204,218,.72)!important;
+  color:#5f697a!important;
 }
 .ac-results-edit summary{list-style:none!important}.ac-results-edit summary::-webkit-details-marker{display:none!important}
 .ac-results-catalog-link,.ac-results-market-link{background:var(--ac-surface)!important;color:var(--ac-text)!important;-webkit-text-fill-color:var(--ac-text)!important}
@@ -67,9 +67,13 @@ html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
   height:56px!important;
   min-height:56px!important;
   gap:12px!important;
-  padding:0 16px!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  padding-left:16px!important;
   border-radius:16px!important;
+  align-items:center!important;
 }
+.ac-electric-filter{padding-right:16px!important}
 .ac-power-limit{padding-right:56px!important}
 .ac-results-edit-form .ac-power-limit{padding-right:16px!important}
 .ac-electric-filter>span:first-of-type,
@@ -78,6 +82,8 @@ html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
   display:flex!important;
   width:24px!important;
   height:24px!important;
+  min-width:24px!important;
+  min-height:24px!important;
   flex:0 0 24px!important;
   align-items:center!important;
   justify-content:center!important;
@@ -107,7 +113,7 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   display:block!important;
   width:9px!important;
   height:15px!important;
-  background:#111318!important;
+  background:#05070b!important;
   clip-path:polygon(58% 0,8% 56%,43% 56%,28% 100%,92% 39%,57% 39%)!important;
 }
 .ac-power-limit:has(input:checked)>span:first-of-type{
@@ -151,6 +157,8 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
   html body .ac-power-limit>span:first-of-type{
     width:24px!important;
     height:24px!important;
+    min-width:24px!important;
+    min-height:24px!important;
     flex-basis:24px!important;
   }
   html body .ac-electric-filter>span:last-child{
@@ -159,22 +167,39 @@ html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[a
     text-overflow:clip!important;
     white-space:nowrap!important;
   }
-  /* Compact the long mobile drawer: pair compatible categories in two columns. */
-  html body .ac-home-filter-drawer__fields{
-    row-gap:10px!important;
-  }
-  html body .ac-home-filter-drawer__fields>div:not(:first-child):not(:nth-child(2)){
+
+  /* Compact homepage drawer: pair year and market, keep the main groups full width. */
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields{
     display:grid!important;
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
     gap:10px!important;
-    align-items:stretch!important;
   }
-  html body .ac-home-filter-drawer__fields>div:not(:first-child):not(:nth-child(2))>*{
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>*{
+    min-width:0!important;
+    width:100%!important;
+    margin:0!important;
+  }
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>:nth-child(1),
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>:nth-child(2),
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>:nth-child(3),
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>:nth-child(4),
+  html body .ac-home-filter-drawer .ac-home-filter-drawer__fields>:nth-child(n+7){
+    grid-column:1/-1!important;
+  }
+
+  /* Compact catalog drawer: pair selects and keep numeric ranges readable. */
+  html body .ac-catalog-filter-drawer>div.grid.gap-3>div:nth-child(3){
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  html body .ac-catalog-filter-drawer>div.grid.gap-3>div:nth-child(3)>*{
     min-width:0!important;
     width:100%!important;
   }
-  html body .ac-home-filter-drawer__fields .ac-filter-control{
-    min-height:56px!important;
+  html body .ac-catalog-filter-drawer>div.grid.gap-3>div:nth-child(3)>.ac-filter-range,
+  html body .ac-catalog-filter-drawer>div.grid.gap-3>div:nth-child(3)>div:has(input[name="transmission"]){
+    grid-column:1/-1!important;
   }
 }
 `;
