@@ -16,7 +16,7 @@ import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 
 type Option = { value: string; label: string; min?: number; max?: number };
-type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string };
+type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
 type Props = { initialCity?: string };
 
 const budgets: Option[] = [
@@ -65,12 +65,49 @@ const marketMeta: Record<string, { label: string; currency: string }> = {
   uae: { label: "ОАЭ", currency: "AED" },
   europe: { label: "Европа", currency: "EUR" },
 };
+
 const buyers = Array.from({ length: 15 }, (_, index) => `/buyers/${index + 1}.jpg`);
 const benefits = [
   { icon: "fast", title: "Без регистрации", text: "Сразу получите первую выдачу по вашему бюджету." },
   { icon: "markets", title: "5 рынков", text: "Япония, Китай, Корея, ОАЭ и Европа в одном подборе." },
   { icon: "delivery", title: "Под ключ", text: "Доставка, таможня и оформление входят в структуру расчёта." },
 ];
+
+function cleanFuel(value: unknown) {
+  return String(value || "").trim().toLocaleLowerCase("ru-RU");
+}
+
+function isElectricOffer(value: { fuel?: string; raw?: any }) {
+  const fuel = cleanFuel(value.fuel || value.raw?.fuel || value.raw?.engineType);
+  return fuel === "electric" || fuel === "электро" || fuel === "электромобиль" || fuel === "bev";
+}
+
+function toItem(raw: any): Item | null {
+  if (!isCrediblePublicOffer(raw as any)) return null;
+  const offer = presentCatalogOffer(raw);
+  return {
+    raw,
+    id: offer.id,
+    make: canonicalCatalogBrand(String(raw.make || "")),
+    model: String(raw.model || ""),
+    market: offer.market,
+    bodyType: String(raw.bodyType || "") || undefined,
+    fuel: String(raw.fuel || "") || undefined,
+  };
+}
+
+async function loadFuelOffers(fuel: string) {
+  const loadMarket = async (market: string) => {
+    const first = await fetch(`/api/catalog/search?market=${market}&fuel=${encodeURIComponent(fuel)}&pageSize=48&page=1&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json());
+    const total = Math.max(0, Number(first?.total || 0));
+    const pageCount = Math.max(1, Math.ceil(total / 48));
+    const rest = pageCount > 1
+      ? await Promise.all(Array.from({ length: pageCount - 1 }, (_, index) => fetch(`/api/catalog/search?market=${market}&fuel=${encodeURIComponent(fuel)}&pageSize=48&page=${index + 2}&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json())))
+      : [];
+    return [first, ...rest].flatMap((response) => Array.isArray(response?.items) ? response.items : []);
+  };
+  return (await Promise.all(marketIds.map(loadMarket))).flat();
+}
 
 function Chevron({ open = false }: { open?: boolean }) {
   return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
@@ -123,6 +160,15 @@ function HomeSelect({ value, options, onChange, searchable = false, searchPlaceh
   </div>;
 }
 
+function ElectricFilter({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
+  return <label className="ac-filter-control ac-electric-filter flex h-14 cursor-pointer items-center gap-2 rounded-2xl px-3 text-sm font-black">
+    <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" />
+    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-sm transition" style={{ background: checked ? "#ffd21f" : "var(--ac-surface-3)", border: checked ? "1px solid #ffd21f" : "1px solid rgba(103,113,130,.55)", color: checked ? "#171a21" : "transparent" }}>✓</span>
+    <span className="text-[17px] leading-none text-[#ffd21f]" aria-hidden="true">⚡</span>
+    <span className="truncate">Электро</span>
+  </label>;
+}
+
 function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
   const [infoOpen, setInfoOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -135,7 +181,7 @@ function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checke
   }, [infoOpen]);
 
   return <div ref={root} className={`relative ${infoOpen ? "z-[250]" : "z-0"}`}>
-    <label className="ac-power-limit flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl px-4 pr-14 text-sm font-black" style={{ background: "var(--ac-surface-2)" }}>
+    <label className="ac-filter-control ac-power-limit flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl px-4 pr-14 text-sm font-black">
       <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} className="sr-only" />
       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-sm transition" style={{ background: checked ? "#ff353d" : "var(--ac-surface-3)", border: checked ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: checked ? "#ffffff" : "transparent" }}>✓</span>
       <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5"><span>До 160 л.с.</span><span className="text-[11px] font-black text-red-500">свыше — полная пошлина</span></span>
@@ -146,7 +192,7 @@ function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checke
 }
 
 function BudgetLabel({ onInfo }: { onInfo: () => void }) {
-  return <span className="inline-flex shrink-0 items-center gap-1 text-xs font-black uppercase tracking-[0.16em] text-red-400"><span>Бюджет</span><button type="button" onClick={onInfo} className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500/12 text-[11px] font-black normal-case tracking-normal lg:hidden" aria-label="Как работает подбор по бюджету">?</button></span>;
+  return <span className="inline-flex shrink-0 items-center gap-1 text-xs font-black uppercase tracking-[0.16em] text-red-400"><span>Бюджет</span><button type="button" onClick={onInfo} className="ac-budget-help flex h-5 w-5 items-center justify-center rounded-full bg-red-500/12 text-[11px] font-black normal-case tracking-normal" aria-label="Как работает подбор по бюджету">?</button></span>;
 }
 
 export default function HomePageClient({ initialCity = "" }: Props) {
@@ -159,6 +205,8 @@ export default function HomePageClient({ initialCity = "" }: Props) {
   const [market, setMarket] = useState("");
   const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false);
+  const [electricOnly, setElectricOnly] = useState(false);
+  const [fuelItems, setFuelItems] = useState<Item[] | null>(null);
   const [catalogMarket, setCatalogMarket] = useState("");
   const [catalogMake, setCatalogMake] = useState("");
   const [items, setItems] = useState<Item[]>([]);
@@ -180,9 +228,8 @@ export default function HomePageClient({ initialCity = "" }: Props) {
         if (cancelled) return;
         const unique = new Map<string, Item>();
         for (const raw of responses.flatMap((response) => Array.isArray(response?.items) ? response.items : [])) {
-          if (!isCrediblePublicOffer(raw as any)) continue;
-          const offer = presentCatalogOffer(raw);
-          unique.set(offer.id, { raw, id: offer.id, make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined });
+          const item = toItem(raw);
+          if (item) unique.set(item.id, item);
         }
         setItems([...unique.values()]);
         setRates(Array.isArray(responses[0]?.rates) ? responses[0].rates : []);
@@ -206,6 +253,26 @@ export default function HomePageClient({ initialCity = "" }: Props) {
   }, []);
 
   useEffect(() => {
+    if (!electricOnly) {
+      setFuelItems(null);
+      return;
+    }
+    let cancelled = false;
+    loadFuelOffers("electric").then((rawItems) => {
+      if (cancelled) return;
+      const unique = new Map<string, Item>();
+      rawItems.forEach((raw) => {
+        const item = toItem(raw);
+        if (item) unique.set(item.id, item);
+      });
+      setFuelItems([...unique.values()]);
+    }).catch(() => {
+      if (!cancelled) setFuelItems([]);
+    });
+    return () => { cancelled = true; };
+  }, [electricOnly]);
+
+  useEffect(() => {
     if (!mobileFiltersOpen) return;
     const old = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -219,20 +286,43 @@ export default function HomePageClient({ initialCity = "" }: Props) {
 
   useEffect(() => { if (model && body) setBody(""); }, [model, body]);
 
+  const availableItems = useMemo(() => {
+    if (!electricOnly) return items;
+    return fuelItems || items.filter(isElectricOffer);
+  }, [electricOnly, fuelItems, items]);
+
   const makeOptions = useMemo<Option[]>(() => {
     const values = new Map<string, string>();
-    items.forEach((item) => values.set(item.make.toLocaleLowerCase("en-US"), item.make));
+    availableItems.forEach((item) => values.set(item.make.toLocaleLowerCase("en-US"), item.make));
     return [{ value: "", label: "Марка" }, ...[...values.values()].filter(Boolean).sort((a, b) => a.localeCompare(b, "ru")).map((label) => ({ value: label, label }))];
-  }, [items]);
+  }, [availableItems]);
+
   const modelOptions = useMemo<Option[]>(() => {
     const values = new Map<string, string>();
-    items.filter((item) => !make || item.make === make).forEach((item) => values.set(item.model, presentCatalogOffer(item.raw).modelLabel));
+    availableItems.filter((item) => !make || item.make === make).forEach((item) => values.set(item.model, presentCatalogOffer(item.raw).modelLabel));
     return [{ value: "", label: "Модель" }, ...[...values].filter(([value]) => value).sort((a, b) => a[1].localeCompare(b[1], "ru")).map(([value, label]) => ({ value, label }))];
-  }, [items, make]);
+  }, [availableItems, make]);
+
   const bodyOptions = useMemo<Option[]>(() => {
-    const available = new Set(items.map((item) => item.bodyType).filter(Boolean));
+    const available = new Set(availableItems.map((item) => item.bodyType).filter(Boolean));
     return [bodies[0], ...bodies.slice(1).filter((option) => available.has(option.value))];
-  }, [items]);
+  }, [availableItems]);
+
+  const marketOptions = useMemo<Option[]>(() => {
+    if (!electricOnly) return markets;
+    const available = new Set(availableItems.map((item) => item.market));
+    return [markets[0], ...markets.slice(1).filter((option) => available.has(option.value))];
+  }, [availableItems, electricOnly]);
+
+  useEffect(() => {
+    if (make && !makeOptions.some((option) => option.value === make)) {
+      setMake("");
+      setModel("");
+    }
+    if (market && !marketOptions.some((option) => option.value === market)) setMarket("");
+    if (body && !bodyOptions.some((option) => option.value === body)) setBody("");
+  }, [body, bodyOptions, make, makeOptions, market, marketOptions]);
+
   const selectedBudget = budgets.find((option) => option.value === budget) || budgets[0];
 
   useEffect(() => {
@@ -246,16 +336,31 @@ export default function HomePageClient({ initialCity = "" }: Props) {
       if (body && !model) params.set("bodyType", body);
       if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year);
       if (powerLimited) params.set("powerTo", "160");
+      if (electricOnly) params.set("fuel", "electric");
       setCount(null);
       fetch(`/api/catalog/search?${params}`, { cache: "no-store" }).then((response) => response.json()).then((data) => setCount(Number(data?.total || 0))).catch(() => setCount(0));
     }, 180);
     return () => window.clearTimeout(timer);
-  }, [selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited]);
+  }, [selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
 
   const marketGroups = useMemo(() => marketIds
     .filter((id) => !catalogMarket || id === catalogMarket)
-    .map((id) => ({ id, items: items.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)).slice(0, 6) }))
-    .filter((group) => group.items.length), [items, catalogMarket, catalogMake]);
+    .map((id) => {
+      const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake));
+      return { id, total: matches.length, items: matches.slice(0, 6) };
+    })
+    .filter((group) => group.items.length), [availableItems, catalogMarket, catalogMake]);
+
+  const setElectric = (checked: boolean) => {
+    setElectricOnly(checked);
+    setFuelItems(null);
+    setMake("");
+    setModel("");
+    setBody("");
+    setMarket("");
+    setCatalogMake("");
+    setCatalogMarket("");
+  };
 
   const submit = () => {
     const params = new URLSearchParams();
@@ -267,10 +372,17 @@ export default function HomePageClient({ initialCity = "" }: Props) {
     if (body && !model) params.set("body", body);
     if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year);
     if (powerLimited) params.set("powerTo", "160");
+    if (electricOnly) params.set("fuel", "electric");
     if (city) params.set("city", city);
     appendAttributionToSearchParams(params);
     router.push(`/results${params.toString() ? `?${params}` : ""}`);
   };
+
+  const catalogQuery = new URLSearchParams();
+  if (catalogMarket) catalogQuery.set("market", catalogMarket);
+  if (catalogMake) catalogQuery.set("make", catalogMake);
+  if (electricOnly) catalogQuery.set("fuel", "electric");
+  const catalogHref = `/cars${catalogQuery.toString() ? `?${catalogQuery}` : ""}`;
 
   return <main className="ac-home-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader />
@@ -279,10 +391,10 @@ export default function HomePageClient({ initialCity = "" }: Props) {
         <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5">
           <div className="mb-4 flex items-center justify-between gap-3"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
-          <HomeSelect value={budget} options={budgets} onChange={setBudget} />
+          <div className="grid grid-cols-2 gap-3"><HomeSelect value={budget} options={budgets} onChange={setBudget} /><ElectricFilter checked={electricOnly} onChange={setElectric} /></div>
           <div className="mt-4 grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
           <div className="mt-4"><PowerLimit checked={powerLimited} onChange={setPowerLimited} /></div>
-          <div className="mt-4 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={markets} onChange={setMarket} />{!model ? <div className="col-span-2"><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div> : null}</div>
+          <div className="mt-4 hidden grid-cols-2 gap-3 lg:grid"><HomeSelect value={year} options={years} onChange={setYear} /><HomeSelect value={market} options={marketOptions} onChange={setMarket} />{!model ? <div className="col-span-2"><HomeSelect value={body} options={bodyOptions} onChange={setBody} /></div> : null}</div>
           <div className="relative mt-4"><button type="button" onClick={submit} className="avto-button h-[58px] w-full rounded-2xl pr-16 text-base font-black">Узнать Цену</button><button type="button" onClick={() => setMobileFiltersOpen(true)} className="absolute right-0 top-0 flex h-[58px] w-14 items-center justify-center rounded-r-2xl text-white lg:hidden" aria-label="Открыть дополнительные фильтры"><SlidersIcon /></button></div>
         </div>
       </section>
@@ -294,10 +406,20 @@ export default function HomePageClient({ initialCity = "" }: Props) {
         <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
       </div>
 
-      <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div><div className="hidden gap-3 sm:grid-cols-[180px_220px_auto] lg:grid"><HomeSelect value={catalogMarket} options={markets} onChange={setCatalogMarket} /><HomeSelect value={catalogMake} options={makeOptions} onChange={setCatalogMake} searchable searchPlaceholder="Найти марку" /><Link href={`/cars${catalogMarket || catalogMake ? `?${new URLSearchParams({ ...(catalogMarket ? { market: catalogMarket } : {}), ...(catalogMake ? { make: catalogMake } : {}) }).toString()}` : ""}`} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>
+      <section className="mt-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div>
+          <div className="hidden gap-3 sm:grid-cols-[180px_220px_auto] lg:grid"><HomeSelect value={catalogMarket} options={marketOptions} onChange={setCatalogMarket} /><HomeSelect value={catalogMake} options={makeOptions} onChange={setCatalogMake} searchable searchPlaceholder="Найти марку" /><Link href={catalogHref} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div>
+        </div>
         <CurrencyRatesStrip rates={rates} variant="mobile" className="mt-4 lg:hidden" />
-        {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const meta = marketMeta[group.id]; const href = `/cars?market=${group.id}${catalogMake ? `&make=${encodeURIComponent(catalogMake)}` : ""}`; return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CurrencyFlag currency={meta.currency} className="h-5 w-7 md:h-7 md:w-10" /><span>{meta.label}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {marketCounts[group.id] || group.items.length}</span></h3><Link href={href} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Каталог обновляется.</div>}
-        <BrandLogoRail brands={items.map((item) => item.make)} />
+        {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => {
+          const meta = marketMeta[group.id];
+          const params = new URLSearchParams({ market: group.id });
+          if (catalogMake) params.set("make", catalogMake);
+          if (electricOnly) params.set("fuel", "electric");
+          return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CurrencyFlag currency={meta.currency} className="h-5 w-7 md:h-7 md:w-10" /><span>{meta.label}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {electricOnly ? group.total : marketCounts[group.id] || group.total}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>;
+        })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        <BrandLogoRail brands={availableItems.map((item) => item.make)} />
       </section>
     </div>
 
@@ -305,19 +427,20 @@ export default function HomePageClient({ initialCity = "" }: Props) {
       <div className="ac-home-filter-drawer__header flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileFiltersOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div>
       <div className="ac-home-filter-drawer__fields">
         <div className="ac-home-filter-drawer__budget flex items-center justify-between gap-3"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status" aria-hidden="true"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
-        <HomeSelect value={budget} options={budgets} onChange={setBudget} />
+        <div className="grid grid-cols-2 gap-3"><HomeSelect value={budget} options={budgets} onChange={setBudget} /><ElectricFilter checked={electricOnly} onChange={setElectric} /></div>
         <div className="grid grid-cols-2 gap-3"><HomeSelect value={make} options={makeOptions} onChange={(value) => { setMake(value); setModel(""); }} searchable searchPlaceholder="Найти марку" /><HomeSelect value={model} options={modelOptions} onChange={setModel} searchable searchPlaceholder="Найти модель" /></div>
         <PowerLimit checked={powerLimited} onChange={setPowerLimited} />
         <HomeSelect value={year} options={years} onChange={setYear} />
-        <HomeSelect value={market} options={markets} onChange={setMarket} />
+        <HomeSelect value={market} options={marketOptions} onChange={setMarket} />
         {!model ? <HomeSelect value={body} options={bodyOptions} onChange={setBody} /> : null}
       </div>
       <div className="ac-home-filter-drawer__actions"><button type="button" onClick={() => { setMobileFiltersOpen(false); submit(); }} className="avto-button h-14 w-full rounded-2xl text-base font-black">Узнать Цену</button></div>
     </div></div> : null}
 
-    {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">Укажите бюджет — покажем, что можно привезти под ключ.</p></section></div> : null}
+    {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div><p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">Укажите бюджет — покажем, что можно привезти под ключ.</p><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" /></section></div> : null}
 
     <style dangerouslySetInnerHTML={{ __html: `
+      @media(min-width:1024px){.ac-budget-help{display:none!important}}
       @media(max-width:1023px){
         .ac-home-filter-drawer{padding:20px!important;background:var(--ac-surface)!important;color:var(--ac-text)!important}
         .ac-home-filter-drawer__header{margin:0 0 26px!important;padding:0!important}

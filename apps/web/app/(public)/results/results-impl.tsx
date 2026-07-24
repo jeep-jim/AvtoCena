@@ -24,6 +24,7 @@ const bodyOptions = [
 ];
 const controlClass = "ac-native-select h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)] outline-none";
 const inputClass = "h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)] outline-none placeholder:text-[var(--ac-muted)]";
+const choiceClass = "ac-filter-control flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl px-4 text-sm font-black";
 
 export default async function ResultsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
@@ -31,24 +32,26 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
   const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
   const yearTo = Number(firstParam(params.yearTo)) || undefined;
   const powerTo = Number(firstParam(params.powerTo)) || undefined;
+  const fuel = String(firstParam(params.fuel) || "").trim();
+  const electricOnly = fuel === "electric";
   const city = String(firstParam(params.city) || "").trim();
   const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
   const [facets, exactGroups] = await Promise.all([
     readCatalogFacets({ market: input.market && input.market !== "any" ? input.market : undefined }),
     Promise.all(marketList.map(async (market) => {
-      const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, powerTo, pageSize: 12, sort: "updatedAt" });
+      const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType: input.body, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
       return { ...market, items: result.items, total: result.total };
     })),
   ]);
   const exactTotal = exactGroups.reduce((sum, group) => sum + group.total, 0);
   const relaxed = exactTotal === 0;
   const grouped = relaxed ? await Promise.all(marketList.map(async (market) => {
-    const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, powerTo, pageSize: 12, sort: "updatedAt" });
+    const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
     return { ...market, items: result.items, total: result.total };
   })) : exactGroups;
   const foundCount = grouped.reduce((sum, group) => sum + group.total, 0);
-  const makeOptions = unique([input.brand, ...(facets.makes || [])]).sort((a, b) => a.localeCompare(b, "ru"));
-  const modelOptions = unique([input.model, ...(facets.models || []).filter((item) => !input.brand || String(item.make) === input.brand).map((item) => String(item.model || ""))]).sort((a, b) => a.localeCompare(b, "ru"));
+  const makeOptions = unique([input.brand, ...(electricOnly ? grouped.flatMap((group) => group.items.map((item: any) => String(item.make || ""))) : facets.makes || [])]).sort((a, b) => a.localeCompare(b, "ru"));
+  const modelOptions = unique([input.model, ...(electricOnly ? grouped.flatMap((group) => group.items.filter((item: any) => !input.brand || String(item.make || "") === input.brand).map((item: any) => String(item.model || ""))) : (facets.models || []).filter((item) => !input.brand || String(item.make) === input.brand).map((item) => String(item.model || "")))]).sort((a, b) => a.localeCompare(b, "ru"));
 
   return <main className="ac-results-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="К подбору" />
@@ -65,18 +68,24 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
           <input name="yearFrom" defaultValue={input.yearFrom || ""} inputMode="numeric" placeholder="Год от" className={inputClass} />
           <input name="yearTo" defaultValue={yearTo || ""} inputMode="numeric" placeholder="Год до" className={inputClass} />
           {city ? <input type="hidden" name="city" value={city} /> : null}
-          <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black"><input type="checkbox" name="powerTo" value="160" defaultChecked={powerTo === 160} className="h-5 w-5 accent-[#ff353d]" /><span>До 160 л.с.</span></label>
-          <button className="avto-button flex min-h-14 items-center justify-center rounded-2xl px-5 text-center text-base font-black sm:col-span-2 lg:col-span-3">Показать автомобили</button>
+          <label className={choiceClass}><input type="checkbox" name="powerTo" value="160" defaultChecked={powerTo === 160} className="h-5 w-5 accent-[#ff353d]" /><span>До 160 л.с.</span></label>
+          <label className={choiceClass}><input type="checkbox" name="fuel" value="electric" defaultChecked={electricOnly} className="h-5 w-5 accent-[#ffd21f]" /><span className="text-[#ffd21f]" aria-hidden="true">⚡</span><span>Электро</span></label>
+          <button className="avto-button flex min-h-14 items-center justify-center rounded-2xl px-5 text-center text-base font-black sm:col-span-2 lg:col-span-2">Показать автомобили</button>
         </form>
       </details>
 
       <section className="mt-9 min-w-0">
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_82px] items-start gap-x-3 gap-y-2 md:grid-cols-[minmax(0,1fr)_112px] md:gap-x-6">
-          <h1 className="min-w-0 text-[36px] font-black leading-[.94] tracking-[-0.045em] md:text-6xl">Актуальные автомобили{city ? ` в ${city}` : ""}</h1>
-          <Link href="/cars" className="ac-results-catalog-link flex min-h-16 w-[82px] items-center justify-center self-start rounded-2xl px-2 py-2 text-center text-sm font-black leading-[1.05] md:w-[112px] md:px-4 md:text-base"><span>Весь<br />каталог</span></Link>
+          <h1 className="min-w-0 text-[36px] font-black leading-[.94] tracking-[-0.045em] md:text-6xl">Актуальные автомобили{electricOnly ? " — электро" : ""}{city ? ` в ${city}` : ""}</h1>
+          <Link href={`/cars${electricOnly ? "?fuel=electric" : ""}`} className="ac-results-catalog-link flex min-h-16 w-[82px] items-center justify-center self-start rounded-2xl px-2 py-2 text-center text-sm font-black leading-[1.05] md:w-[112px] md:px-4 md:text-base"><span>Весь<br />каталог</span></Link>
           <p className="col-span-2 max-w-3xl text-sm font-bold leading-6 text-white/55 md:text-base">{relaxed ? "Точного совпадения нет — показываем реальные варианты в бюджете по каждому рынку." : "Показываем реальные совпадения по выбранным параметрам."} Найдено: {foundCount}.</p>
         </div>
-        <div className="mt-8 grid min-w-0 gap-10 md:gap-12">{grouped.map((group) => <section key={group.id} className="min-w-0"><div className="mb-4 flex min-w-0 items-end justify-between gap-3"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{group.flag}</span><span>{group.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {group.total}</span></h2><Link href={`/cars?market=${group.id}${powerTo ? `&powerTo=${powerTo}` : ""}`} className="ac-market-all-link shrink-0 whitespace-nowrap text-sm font-black">Все →</Link></div>{group.items.length ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{group.items.map((offer:any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="rounded-2xl bg-white/[0.035] p-5 text-sm font-bold text-white/45">Варианты этого рынка ещё загружаются.</div>}</section>)}</div>
+        <div className="mt-8 grid min-w-0 gap-10 md:gap-12">{grouped.map((group) => {
+          const query = new URLSearchParams({ market: group.id });
+          if (powerTo) query.set("powerTo", String(powerTo));
+          if (electricOnly) query.set("fuel", "electric");
+          return <section key={group.id} className="min-w-0"><div className="mb-4 flex min-w-0 items-end justify-between gap-3"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{group.flag}</span><span>{group.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {group.total}</span></h2><Link href={`/cars?${query}`} className="ac-market-all-link shrink-0 whitespace-nowrap text-sm font-black">Все →</Link></div>{group.items.length ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{group.items.map((offer:any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="rounded-2xl bg-white/[0.035] p-5 text-sm font-bold text-white/45">Варианты этого рынка ещё загружаются.</div>}</section>;
+        })}</div>
       </section>
     </section>
   </main>;
