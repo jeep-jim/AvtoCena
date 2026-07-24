@@ -18,18 +18,26 @@ html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-r
 .ac-catalog-nav-icon:before{content:"";position:absolute;left:3px;top:3px;width:14px;height:14px;border:2px solid currentColor;border-radius:999px;box-sizing:border-box}
 .ac-catalog-nav-icon:after{content:"";position:absolute;left:15px;top:15px;width:7px;height:2px;border-radius:999px;background:currentColor;transform:rotate(45deg);transform-origin:left center}
 
-/* All public filter rows use one surface, radius and left alignment. */
+/* Dark controls keep the original translucent surface instead of a solid black tile. */
 .ac-home-page #form .ac-filter-control,
 .ac-home-filter-drawer .ac-filter-control,
 .ac-catalog-filter-panel .ac-filter-control,
 .ac-catalog-filter-drawer .ac-filter-control,
 .ac-results-edit-form .ac-filter-control{
-  background:var(--ac-surface-2)!important;
-  background-color:var(--ac-surface-2)!important;
+  background:rgba(255,255,255,.072)!important;
+  background-color:rgba(255,255,255,.072)!important;
   background-image:none!important;
   border:0!important;
   outline:0!important;
   box-shadow:none!important;
+}
+html[data-theme="light"] .ac-home-page #form .ac-filter-control,
+html[data-theme="light"] .ac-home-filter-drawer .ac-filter-control,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-filter-control,
+html[data-theme="light"] .ac-catalog-filter-drawer .ac-filter-control,
+html[data-theme="light"] .ac-results-edit-form .ac-filter-control{
+  background:var(--ac-surface-2)!important;
+  background-color:var(--ac-surface-2)!important;
 }
 .ac-electric-filter,.ac-power-limit{
   box-sizing:border-box!important;
@@ -53,7 +61,7 @@ html[data-theme="light"] .ac-results-catalog-link,html[data-theme="light"] .ac-r
   box-sizing:border-box!important;
   border:1px solid rgba(255,255,255,.22)!important;
   border-radius:8px!important;
-  background:var(--ac-surface-2)!important;
+  background:transparent!important;
   color:transparent!important;
   line-height:1!important;
 }
@@ -61,7 +69,7 @@ html[data-theme="light"] .ac-electric-filter>span:first-of-type,
 html[data-theme="light"] .ac-power-limit>span:first-of-type,
 html[data-theme="light"] .ac-filter-checkbox-mark{
   border-color:rgba(35,42,55,.18)!important;
-  background:var(--ac-surface-2)!important;
+  background:transparent!important;
 }
 .ac-electric-filter:has(input:checked)>span:first-of-type{
   border-color:#ffd21f!important;
@@ -77,6 +85,8 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
   border:0!important;
   outline:0!important;
   box-shadow:none!important;
+  background:transparent!important;
+  background-color:transparent!important;
 }
 @media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
@@ -84,8 +94,32 @@ html[data-theme="light"] .ac-filter-checkbox-mark{
 @media(max-width:1023px){
 .ac-home-page #form>div.relative.mt-4{position:relative!important;display:flex!important;align-items:stretch!important;gap:8px!important;overflow:visible!important}
 .ac-home-page #form>div.relative.mt-4>.avto-button{display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;align-items:center!important;justify-content:center!important;padding-right:1rem!important;text-align:center!important}
-html body main.ac-home-page #form>div.relative.mt-4>button[aria-label="Открыть дополнительные фильтры"]{position:static!important;inset:auto!important;display:flex!important;flex:0 0 58px!important;width:58px!important;height:58px!important;align-items:center!important;justify-content:center!important;border:0!important;outline:0!important;border-radius:1rem!important;background:var(--ac-surface-2)!important;background-color:var(--ac-surface-2)!important;color:var(--ac-text)!important}
+html body main.ac-home-page #form>div.relative.mt-4>button[aria-label="Открыть дополнительные фильтры"]{position:static!important;inset:auto!important;display:flex!important;flex:0 0 58px!important;width:58px!important;height:58px!important;align-items:center!important;justify-content:center!important;border:0!important;outline:0!important;border-radius:1rem!important;background:rgba(255,255,255,.072)!important;background-color:rgba(255,255,255,.072)!important;color:var(--ac-text)!important}
+html[data-theme="light"] body main.ac-home-page #form>div.relative.mt-4>button[aria-label="Открыть дополнительные фильтры"]{background:var(--ac-surface-2)!important;background-color:var(--ac-surface-2)!important}
 .ac-home-filter-drawer button[aria-label="Открыть дополнительные фильтры"],.ac-home-filter-drawer .ac-filter-more-button,.ac-home-filter-drawer div:has(>.avto-button)>button:not(.avto-button){display:none!important}
+}
+@media(max-width:767px){
+  html body main.ac-home-page #form>div:nth-child(2),
+  html body .ac-home-filter-drawer__fields>div:nth-child(2){
+    grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr)!important;
+  }
+  html body .ac-electric-filter{
+    gap:5px!important;
+    padding:0 8px!important;
+    font-size:13px!important;
+  }
+  html body .ac-electric-filter>span:first-of-type{
+    width:22px!important;
+    height:22px!important;
+    flex-basis:22px!important;
+  }
+  html body .ac-electric-filter>span:nth-of-type(2){font-size:15px!important}
+  html body .ac-electric-filter>span:last-child{
+    min-width:max-content!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    white-space:nowrap!important;
+  }
 }
 `;
 
