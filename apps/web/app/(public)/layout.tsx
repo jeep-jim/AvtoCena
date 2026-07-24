@@ -112,29 +112,24 @@ const publicPageFixes = `
 }
 
 @media (max-width: 767px) {
-  /* Mobile TopAvto card: reset the old two-column/flex sizing on both the card
-     and its copy wrapper. Text always owns the full width; the logo gets a
-     separate compact row below it. */
+  /* Mobile TopAvto card: the copy uses the full width. The real logo is fixed
+     in the lower-right corner, while a same-sized floated placeholder inside
+     the final paragraph makes only its lower lines wrap around the mark. */
   html .ac-page-copy.ac-home-page .ac-executor-block {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    grid-template-columns: none !important;
+    display: block !important;
+    position: relative !important;
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
-    gap: 0 !important;
     padding: 1rem !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child {
     display: block !important;
     position: static !important;
     float: none !important;
-    clear: both !important;
-    flex: 0 0 100% !important;
-    grid-column: 1 / -1 !important;
     width: 100% !important;
     inline-size: 100% !important;
     max-width: none !important;
@@ -144,18 +139,24 @@ const publicPageFixes = `
     box-sizing: border-box !important;
   }
 
-  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3,
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p {
     display: block !important;
-    float: none !important;
-    clear: both !important;
     width: 100% !important;
     inline-size: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.25 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     box-sizing: border-box !important;
+  }
+
+  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.25 !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
@@ -163,44 +164,34 @@ const publicPageFixes = `
     content: none !important;
   }
 
-  html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p {
-    display: block !important;
-    float: none !important;
-    clear: both !important;
-    width: 100% !important;
-    inline-size: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    box-sizing: border-box !important;
-  }
-
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:first-of-type {
     margin-top: .55rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type {
-    display: block !important;
+    display: flow-root !important;
     margin-top: .45rem !important;
+    min-height: 3.2rem !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type::before {
-    display: none !important;
-    content: none !important;
-    float: none !important;
+    display: block !important;
+    content: "" !important;
+    float: right !important;
+    width: 96px !important;
+    height: 32px !important;
+    margin: 2.45rem 0 0 .7rem !important;
+    shape-outside: inset(0) !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-logo {
     display: block !important;
-    position: static !important;
-    float: none !important;
-    clear: both !important;
-    flex: 0 0 auto !important;
-    align-self: flex-end !important;
+    position: absolute !important;
+    right: 1rem !important;
+    bottom: 1rem !important;
     width: 88px !important;
     min-height: 0 !important;
-    margin: .4rem 0 0 auto !important;
+    margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
     background-color: transparent !important;
@@ -208,13 +199,14 @@ const publicPageFixes = `
     border: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    pointer-events: none !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-logo img {
     display: block !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 34px !important;
+    max-height: 32px !important;
     object-fit: contain !important;
     background: transparent !important;
   }
