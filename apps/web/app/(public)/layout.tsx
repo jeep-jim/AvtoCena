@@ -112,26 +112,50 @@ const publicPageFixes = `
 }
 
 @media (max-width: 767px) {
-  /* Mobile TopAvto card: all copy uses the full card width. The logo sits on its
-     own compact row below the copy, so it never narrows or clips any words. */
+  /* Mobile TopAvto card: reset the old two-column/flex sizing on both the card
+     and its copy wrapper. Text always owns the full width; the logo gets a
+     separate compact row below it. */
   html .ac-page-copy.ac-home-page .ac-executor-block {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    gap: 0 !important;
     padding: 1rem !important;
+    box-sizing: border-box !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child {
     display: block !important;
+    position: static !important;
+    float: none !important;
+    clear: both !important;
+    flex: 0 0 100% !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    inline-size: 100% !important;
+    max-width: none !important;
     min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3 {
     display: block !important;
+    float: none !important;
+    clear: both !important;
     width: 100% !important;
+    inline-size: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.25 !important;
+    box-sizing: border-box !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > h3::before {
@@ -141,11 +165,15 @@ const publicPageFixes = `
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p {
     display: block !important;
+    float: none !important;
+    clear: both !important;
     width: 100% !important;
+    inline-size: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    box-sizing: border-box !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:first-of-type {
@@ -160,11 +188,16 @@ const publicPageFixes = `
   html .ac-page-copy.ac-home-page .ac-executor-block > div:first-child > p:last-of-type::before {
     display: none !important;
     content: none !important;
+    float: none !important;
   }
 
   html .ac-page-copy.ac-home-page .ac-executor-logo {
     display: block !important;
     position: static !important;
+    float: none !important;
+    clear: both !important;
+    flex: 0 0 auto !important;
+    align-self: flex-end !important;
     width: 88px !important;
     min-height: 0 !important;
     margin: .4rem 0 0 auto !important;
