@@ -189,7 +189,7 @@
   }
 }
 
-/* Three compact logo columns and a full-width TopAvto copy on phones. */
+/* Three compact logo columns and a stepped TopAvto heading on phones. */
 @media (max-width: 767px) {
   .ac-page-copy p.text-sm,
   .ac-page-copy li.text-sm {
@@ -209,7 +209,10 @@
 
   .ac-executor-block {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) 90px !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: start !important;
+    gap: .45rem .65rem !important;
     padding: 1rem !important;
   }
   .ac-executor-block > div:first-child {
@@ -217,35 +220,41 @@
   }
   .ac-executor-logo {
     position: static !important;
-    grid-column: 1 !important;
+    grid-column: 2 !important;
     grid-row: 1 !important;
+    align-self: start !important;
     justify-self: end !important;
     width: 90px !important;
-    min-height: 0 !important;
-    margin: 0 0 .35rem !important;
-    padding: 0 !important;
-  }
-  .ac-executor-block > div:first-child > h3 {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    width: 100% !important;
-    max-width: none !important;
     min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  .ac-executor-block > div:first-child > p {
+  .ac-executor-block > div:first-child > h3 {
     grid-column: 1 !important;
+    grid-row: 1 !important;
     width: 100% !important;
     max-width: none !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: start !important;
+    line-height: 1.25 !important;
+  }
+  .ac-executor-block > div:first-child > p {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   .ac-executor-block > div:first-child > p:first-of-type {
-    grid-row: 3 !important;
+    grid-row: 2 !important;
+    margin-top: .1rem !important;
   }
   .ac-executor-block > div:first-child > p:last-of-type {
-    grid-row: 4 !important;
-  }
-  .ac-executor-block p + p {
+    grid-row: 3 !important;
     margin-top: .45rem !important;
   }
   .ac-executor-logo img {
