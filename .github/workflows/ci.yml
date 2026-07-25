@@ -18,6 +18,11 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run typecheck
-      - run: npm run build
+      - name: Customs tests
+        run: node --import tsx --test tests/russia-customs.test.ts
+      - name: Power normalization tests
+        run: node --import tsx --test tests/catalog-power-normalization.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
