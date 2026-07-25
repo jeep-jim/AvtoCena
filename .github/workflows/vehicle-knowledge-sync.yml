@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   validate-source:
@@ -72,6 +73,46 @@ jobs:
         with:
           name: vehicle-knowledge-validation
           path: vehicle-knowledge-validation.json
+      - name: Publish validation summary to pull request
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- vehicle-knowledge-validation -->';
+            const report = fs.existsSync('vehicle-knowledge-validation.json')
+              ? JSON.parse(fs.readFileSync('vehicle-knowledge-validation.json', 'utf8'))
+              : { errors: ['validation_report_missing'] };
+            const status = Array.isArray(report.errors) && report.errors.length ? '❌ ошибка' : '✅ готово';
+            const body = `${marker}\n## База знаний автомобилей: ${status}\n\n` +
+              `- моделей: **${report.models ?? 0}**\n` +
+              `- чанков: **${report.chunks ?? 0}**\n` +
+              `- размер чанка: **${report.chunkSize ?? '—'}**\n` +
+              `- самый большой чанк: **${report.largestChunk ?? '—'}**\n` +
+              `- поиск \`hrv\`: \`${JSON.stringify(report.hrv || [])}\`\n` +
+              `- ошибки: \`${JSON.stringify(report.errors || [])}\``;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const previous = comments.find((comment) => comment.body?.includes(marker));
+            if (previous) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: previous.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
       - name: Fail on vehicle knowledge validation errors
         if: steps.validate_models.outcome != 'success'
         run: exit 1
