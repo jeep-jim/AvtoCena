@@ -8,10 +8,17 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = String(url.searchParams.get("q") || "").trim();
   const make = String(url.searchParams.get("make") || "").trim();
-  const limit = Math.min(50, Math.max(1, Number(url.searchParams.get("limit") || 30)));
+  const scope = String(url.searchParams.get("scope") || "").trim();
+  const limit = Math.min(500, Math.max(1, Number(url.searchParams.get("limit") || 30)));
 
   if (!query) {
-    if (!make) return NextResponse.json({ items: [] });
+    if (!make) {
+      if (scope !== "makes") return NextResponse.json({ items: [] });
+      const facets = await vehicleKnowledgeFacets();
+      return NextResponse.json({
+        items: facets.makes.slice(0, limit).map((item) => ({ value: item, label: item })),
+      });
+    }
     const facets = await vehicleKnowledgeFacets(make);
     return NextResponse.json({
       items: facets.models.slice(0, limit).map((item) => ({
