@@ -1,4 +1,4 @@
-export const MARKET_IDS = ["japan", "china", "korea", "uae", "europe"] as const;
+export const MARKET_IDS = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"] as const;
 export const AMOUNT_TYPES = ["fixed", "percent", "calculated", "manual"] as const;
 export const PAYOUT_TYPES = ["fixed", "percent", "tiered", "custom/manual"] as const;
 

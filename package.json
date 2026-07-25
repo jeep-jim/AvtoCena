@@ -19,6 +19,12 @@
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",
     "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
-    "catalog:import:sample": "tsx scripts/catalog-import-production.mjs"
+    "catalog:import:sample": "tsx scripts/catalog-import-production.mjs",
+    "catalog:power-review": "tsx scripts/catalog-power-review.mjs",
+    "catalog:power-knowledge": "tsx scripts/catalog-build-power-knowledge.mjs",
+    "catalog:sync-vehicle-models": "tsx scripts/catalog-sync-vehicle-models.mjs",
+    "catalog:enrich-drom-variants": "tsx scripts/catalog-enrich-drom-vehicle-variants.mjs",
+    "catalog:build-vehicle-variants": "tsx scripts/catalog-build-vehicle-variants.mjs",
+    "catalog:reindex-vehicle-knowledge": "tsx scripts/catalog-reindex-vehicle-knowledge.mjs"
   }
 }

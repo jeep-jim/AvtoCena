@@ -6,6 +6,8 @@ export type OfferType = "auction" | "fixed";
 export type OfferStatus = "active" | "sold" | "removed" | "stale";
 export type PriceMode = "fixed" | "auction_start" | "estimated";
 export type CalculationStatus = "ready" | "needs_data" | "auction_start" | (string & {});
+export type PowertrainKind = "combustion" | "electric" | "series_hybrid" | "other_hybrid" | "unknown";
+export type PowerDataConfidence = "documented" | "source_exact" | "reference" | "estimated";
 
 export type CatalogImage = {
   id: string;
@@ -35,11 +37,18 @@ export type VehicleOffer = {
   engineCc?: number;
   engineType?: string;
   fuel?: string;
+  powertrainKind?: PowertrainKind;
   transmission?: string;
   drive?: string;
   bodyType?: string;
   powerHp?: number;
   powerKw?: number;
+  icePowerKw?: number;
+  power30MinKw?: number;
+  power30MinKwByMotor?: number[];
+  utilizationPowerKw?: number;
+  powerDataConfidence?: PowerDataConfidence;
+  powerDataSource?: string;
   color?: string;
   vin?: string;
   frameNumber?: string;

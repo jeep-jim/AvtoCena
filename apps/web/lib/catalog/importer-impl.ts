@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { mutateDataJson, readDataJson, writeDataJson } from "../data";
-import { calculateOffer, catalogSources } from "./adapters";
+import { catalogSources } from "./adapters";
+import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
 import { credibleCatalogImages, isCrediblePublicOffer } from "./offer-quality";
 import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
@@ -23,7 +24,7 @@ export const catalogImportSources = [
   ...publicMarketSources,
 ];
 
-const PUBLIC_MARKETS: CatalogMarket[] = ["korea", "china", "japan", "uae", "europe"];
+const PUBLIC_MARKETS: CatalogMarket[] = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"];
 
 function assertProductionStorage() {
   if (process.env.JSON_STORAGE_DRIVER !== "object") throw new Error("production_import_requires_object_storage");
@@ -283,7 +284,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             }
             if (images.length < maxImagesPerOffer) report.underfilledImages++;
 
-            const calculated = await calculateOffer({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });
+            const calculated = await calculateOfferWithRussiaCustoms({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });
             const offer = applyPriceTrend(calculated, previous, startedAt);
             if (!isCrediblePublicOffer(offer)) {
               report.rejectedByQuality++;

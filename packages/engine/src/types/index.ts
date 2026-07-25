@@ -1,4 +1,4 @@
-export type Market = "japan" | "china" | "korea" | "uae" | "europe";
+export type Market = "japan" | "china" | "korea" | "uae" | "europe" | "georgia" | "kyrgyzstan";
 
 export type RecommendationInput = {
   budgetRub?: number;

@@ -5,6 +5,7 @@ import { goonetJapanExactSource } from "./goonet-exact-source";
 import { dubicarsUaeCurrentSource } from "./dubicars-current-source";
 import { otomotoEuropeDetailSource } from "./otomoto-detail-source";
 import { guaziChinaExportSource } from "./guazi-export-source";
+import { regionalMarketSources } from "./regional-market-sources";
 
 export const exactMarketSources: CatalogSourceAdapter[] = [
   guaziChinaExportSource,
@@ -13,6 +14,7 @@ export const exactMarketSources: CatalogSourceAdapter[] = [
   goonetJapanExactSource,
   dubicarsUaeCurrentSource,
   otomotoEuropeDetailSource,
+  ...regionalMarketSources,
 ];
 
 export const EXACT_MARKET_SOURCE_IDS = exactMarketSources.map((source) => source.sourceId);

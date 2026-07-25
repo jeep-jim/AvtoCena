@@ -24,6 +24,12 @@ import { exactMarketSources } from "./exact-market-sources";
 import { publicMarketSources } from "./public-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
+import {
+  CATALOG_DAILY_TARGET_PER_MARKET,
+  CATALOG_DAILY_TARGET_TOTAL,
+  CATALOG_RETENTION_MS,
+  PUBLIC_CATALOG_MARKETS,
+} from "./runtime-config";
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const completeSources = [
@@ -45,6 +51,11 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
   const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
+  process.env.CATALOG_TARGET_PER_MARKET ||= String(CATALOG_DAILY_TARGET_PER_MARKET);
+  process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= String(CATALOG_DAILY_TARGET_TOTAL);
+  process.env.CATALOG_OFFER_RETENTION_MS ||= String(CATALOG_RETENTION_MS);
+  process.env.CATALOG_STALE_GRACE_MS ||= String(CATALOG_RETENTION_MS);
+  process.env.CATALOG_GROW_ONLY_MARKETS ||= PUBLIC_CATALOG_MARKETS.join(",");
   return importCatalogBase({
     ...requested,
     maxImagesPerOffer: Math.min(1000, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 1000)),

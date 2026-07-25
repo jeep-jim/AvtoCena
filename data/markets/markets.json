@@ -419,5 +419,75 @@
       "processType": "direct-buy",
       "note": "Значения из предыдущего справочника сохранены для миграции и не являются подтверждённой активной конфигурацией."
     }
+  },
+  {
+    "id": "georgia",
+    "name": "Грузия",
+    "activeVersionId": "",
+    "versions": [
+      {
+        "id": "market_georgia_v1",
+        "version": 1,
+        "status": "draft",
+        "effectiveFrom": "2026-07-25T00:00:00.000Z",
+        "currency": "GEL",
+        "active": false,
+        "topAvtoCommissionRub": null,
+        "securityDepositRub": null,
+        "contractInitialPaymentRub": null,
+        "exchangeRateReservePercent": 0,
+        "exportExpensesRub": null,
+        "logisticsRub": null,
+        "brokerRub": null,
+        "svhRub": null,
+        "laboratoryRub": null,
+        "sbktsRub": null,
+        "eptsRub": null,
+        "rfDeliveryRub": null,
+        "otherFixedExpensesRub": null,
+        "percentExpenses": [],
+        "minMax": {},
+        "deliveryDays": "",
+        "conditionsDescription": "Черновая конфигурация. Комиссия, первоначальный платёж и логистика не публикуются до подтверждения коммерческих условий.",
+        "dealStages": [],
+        "createdAt": "2026-07-25T00:00:00.000Z",
+        "createdByUserId": "system"
+      }
+    ]
+  },
+  {
+    "id": "kyrgyzstan",
+    "name": "Кыргызстан",
+    "activeVersionId": "",
+    "versions": [
+      {
+        "id": "market_kyrgyzstan_v1",
+        "version": 1,
+        "status": "draft",
+        "effectiveFrom": "2026-07-25T00:00:00.000Z",
+        "currency": "KGS",
+        "active": false,
+        "topAvtoCommissionRub": null,
+        "securityDepositRub": null,
+        "contractInitialPaymentRub": null,
+        "exchangeRateReservePercent": 0,
+        "exportExpensesRub": null,
+        "logisticsRub": null,
+        "brokerRub": null,
+        "svhRub": null,
+        "laboratoryRub": null,
+        "sbktsRub": null,
+        "eptsRub": null,
+        "rfDeliveryRub": null,
+        "otherFixedExpensesRub": null,
+        "percentExpenses": [],
+        "minMax": {},
+        "deliveryDays": "",
+        "conditionsDescription": "Черновая конфигурация. Комиссия, первоначальный платёж и логистика не публикуются до подтверждения коммерческих условий.",
+        "dealStages": [],
+        "createdAt": "2026-07-25T00:00:00.000Z",
+        "createdByUserId": "system"
+      }
+    ]
   }
 ]
