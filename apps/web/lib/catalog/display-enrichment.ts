@@ -79,7 +79,7 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
     || positive(consensus(variants.map((variant) => variant.engineCc)));
   const fuel = meaningful(enriched.fuel)
     || meaningful(consensus(variants.map((variant) => variant.fuel)))
-    || (electric ? "electric" : powertrainKind && powertrainKind !== "ice" ? "hybrid" : undefined);
+    || (electric ? "electric" : powertrainKind && powertrainKind !== "combustion" ? "hybrid" : undefined);
   const transmission = meaningful(enriched.transmission)
     || meaningful(consensus(variants.map((variant) => variant.transmission)))
     || inferTransmission(text, electric);
