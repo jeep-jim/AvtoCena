@@ -3,7 +3,20 @@ import test from "node:test";
 import { isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
+const completeBreakdown = [
+  { id: "car", title: "Стоимость автомобиля", amountRub: 1_800_000 },
+  { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: 90_000 },
+  { id: "broker", title: "Брокер", amountRub: 35_000 },
+  { id: "svh", title: "СВХ", amountRub: 35_000 },
+  { id: "laboratory", title: "Лаборатория", amountRub: 15_000 },
+  { id: "sbkts", title: "СБКТС", amountRub: 35_000 },
+  { id: "epts", title: "ЭПТС", amountRub: 35_000 },
+  { id: "rf-delivery", title: "Доставка по РФ", amountRub: 120_000 },
+  { id: "customs", title: "Таможенные платежи", amountRub: 1_035_000 },
+];
+
 function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
+  const { calculationSnapshot, ...rest } = overrides;
   return {
     id: "offer_estimated_ev",
     sourceId: "che168_china_exact",
@@ -31,19 +44,21 @@ function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
     calculationSnapshot: {
       pricingConfidence: "estimated",
       certified30MinutePowerMissing: true,
-      customs: { status: "ready", totalCustomsRub: 1_100_000 },
+      customs: { status: "ready", totalCustomsRub: 1_035_000 },
+      breakdown: completeBreakdown,
+      ...(calculationSnapshot || {}),
     },
     firstSeenAt: "2026-07-25T00:00:00.000Z",
     updatedAt: "2026-07-25T00:00:00.000Z",
     operational: { sourceUrl: "https://che168.com/123", raw: {} },
-    ...overrides,
+    ...rest,
   } as VehicleOffer;
 }
 
 test("publishes an EV only when the missing certified power is explicitly marked as an estimate", () => {
   assert.equal(isCrediblePublicOffer(electricOffer()), true);
   assert.equal(isCrediblePublicOffer(electricOffer({
-    calculationSnapshot: { pricingConfidence: "estimated", customs: { status: "ready" } },
+    calculationSnapshot: { pricingConfidence: "estimated", certified30MinutePowerMissing: false, customs: { status: "ready" } },
   })), false);
 });
 
@@ -56,6 +71,6 @@ test("publishes an EV with exact documented 30-minute power", () => {
     powerDataSource: "OTTS:example",
     priceMode: "fixed",
     calculationStatus: "ready",
-    calculationSnapshot: { pricingConfidence: "exact", customs: { status: "ready" } },
+    calculationSnapshot: { pricingConfidence: "exact", certified30MinutePowerMissing: false, customs: { status: "ready" } },
   })), true);
 });
