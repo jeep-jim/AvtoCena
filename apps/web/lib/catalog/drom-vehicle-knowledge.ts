@@ -124,7 +124,7 @@ function parseModification(line: string) {
     transmission: transmission(line),
     drive: drive(line),
     engineCode: engineCode(line),
-    powertrainKind: /электро/i.test(line) ? "electric" as const : /гибрид/i.test(line) ? "other_hybrid" as const : "ice" as const,
+    powertrainKind: /электро/i.test(line) ? "electric" as const : /гибрид/i.test(line) ? "other_hybrid" as const : "combustion" as const,
   };
 }
 
@@ -152,13 +152,11 @@ export function parseDromVehicleVariants(
     }
     const modification = parseModification(line);
     if (!modification) continue;
-    const engineAlias = modification.engineCode ? [modification.engineCode] : undefined;
     variants.push({
       modelId: model.id,
       make: model.make,
       model: model.model,
       generation: generation(section),
-      generationAliases: engineAlias,
       yearFrom: period?.yearFrom,
       yearTo: period?.yearTo,
       productionFrom: period?.productionFrom,
