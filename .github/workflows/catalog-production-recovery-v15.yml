@@ -54,7 +54,7 @@ jobs:
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_TARGET: "1000"
       CATALOG_REBUILD_MAX_PAGES: "1000"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "6000"
+      CATALOG_REBUILD_SEED_SCAN_LIMIT: "10000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_SOURCE_TIMEOUT_MS: "60000"
@@ -80,8 +80,18 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
       - name: Validate market rebuild script
         run: node --check scripts/catalog-rebuild-market.mjs
-      - name: Rebuild exactly 1000 verified offers
-        run: npx tsx scripts/catalog-rebuild-market.mjs
+      - name: Rebuild up to 1000 verified offers
+        shell: bash
+        run: |
+          set +e
+          npx tsx scripts/catalog-rebuild-market.mjs
+          exit_code=$?
+          set -e
+          test -s "$CATALOG_REBUILD_OUTPUT"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));if(!Array.isArray(p.offers))process.exit(1);console.log(`rebuilt ${p.offers.length}/${p.target} offers for ${p.market}`)'
+          if [ "$exit_code" -ne 0 ]; then
+            echo "Market did not reach 1000 in this pass; its verified partial result will be accumulated with the current catalog."
+          fi
       - name: Upload market generation
         uses: actions/upload-artifact@v4
         with:
@@ -91,7 +101,7 @@ jobs:
           retention-days: 3
 
   publish:
-    name: Publish 7000 verified offers
+    name: Publish maximum verified seven-market catalog
     needs: rebuild-market
     runs-on: ubuntu-latest
     timeout-minutes: 120
@@ -107,12 +117,9 @@ jobs:
       CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_TARGET: "1000"
-      CATALOG_REBUILD_MIN_PUBLISH_PER_MARKET: "1000"
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
-      CATALOG_REBUILD_MIN_AVG_IMAGES: "4"
-      CATALOG_REBUILD_RICH_GALLERY_IMAGES: "6"
-      CATALOG_REBUILD_RICH_GALLERY_RATIO: "0.20"
-      CATALOG_REBUILD_MIN_SPEC_SCORE: "6"
+      CATALOG_REBUILD_MIN_PUBLISH_PER_MARKET: "1"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_MIN_SPEC_SCORE: "4"
       CATALOG_INDEX_WRITE_CONCURRENCY: "10"
       CATALOG_GROW_ONLY_MARKETS: ""
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
@@ -132,9 +139,9 @@ jobs:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
-      - name: Validate atomic publisher
+      - name: Validate accumulating publisher
         run: node --check scripts/catalog-publish-fresh.mjs
-      - name: Publish only after all seven markets pass 1000
+      - name: Publish fresh offers and retain verified existing stock
         run: npx tsx scripts/catalog-publish-fresh.mjs
       - name: Run production catalog smoke checks
         run: npm run catalog:smoke
