@@ -82,6 +82,19 @@ function hasMileage(offer: VehicleOffer) {
   return Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000;
 }
 
+function hasRequiredPower(offer: VehicleOffer) {
+  if (!(Number(offer.powerHp || 0) > 0)) return false;
+  const kind = String(offer.powertrainKind || "");
+  if (["electric", "series_hybrid", "other_hybrid"].includes(kind)) {
+    const exact = Number(offer.power30MinKw || 0) > 0 && Number(offer.utilizationPowerKw || 0) > 0;
+    const explicitPreview = offer.calculationStatus === "estimated"
+      && offer.calculationSnapshot?.certified30MinutePowerMissing === true
+      && Number(offer.utilizationPowerKw || 0) > 0;
+    return exact || explicitPreview;
+  }
+  return true;
+}
+
 function rawImagesAreCredible(offer: VehicleOffer) {
   const raw = offer.operational?.raw as any;
   const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
@@ -101,6 +114,7 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
   if (!hasMileage(offer)
+    || !hasRequiredPower(offer)
     || !hasReadyCalculation(offer)
     || !hasCompletePriceBreakdown(offer)
     || !hasPlausiblePrice(offer)
