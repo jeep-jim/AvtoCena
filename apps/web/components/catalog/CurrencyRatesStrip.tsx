@@ -18,6 +18,11 @@ const DISPLAY_RATES: Record<Variant, Array<[string, number]>> = {
     ["KRW", 1000],
     ["USD", 1],
     ["EUR", 1],
+    ["GEL", 1],
+    ["AED", 1],
+    ["GBP", 1],
+    ["PLN", 1],
+    ["CHF", 1],
   ],
   mobile: [
     ["JPY", 100],
@@ -120,7 +125,6 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
           </button>;
         })}
       </div>
-      {variant === "desktop" ? <div className="mt-2 text-[9px] font-bold text-[var(--ac-muted)]">Графики и изменение курса за 5 дней</div> : null}
     </section>
     <CurrencyRatesSheet open={open} onClose={() => setOpen(false)} rates={loadedRates} initialCurrency={initialCurrency} />
   </>;
