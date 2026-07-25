@@ -22,8 +22,26 @@ jobs:
         run: node --import tsx --test tests/russia-customs.test.ts
       - name: Power normalization tests
         run: node --import tsx --test tests/catalog-power-normalization.test.ts
-      - name: Web typecheck
-        run: npm --workspace=@avtocena/web exec tsc -- --noEmit
+      - name: Web typecheck diagnostics
+        id: web_typecheck
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false > web-typecheck.log 2>&1
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          cat web-typecheck.log
+          exit $code
+      - name: Upload web typecheck log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-typecheck-log
+          path: web-typecheck.log
+      - name: Fail on web typecheck errors
+        if: steps.web_typecheck.outputs.exit_code != '0'
+        run: exit 1
       - name: Engine typecheck
         run: npm --workspace=@avtocena/engine exec tsc -- --noEmit
       - name: Production build
