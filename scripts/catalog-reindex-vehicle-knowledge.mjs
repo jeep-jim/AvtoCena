@@ -1,12 +1,19 @@
 const { writeDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
+const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 
 const CONCURRENCY = Math.max(1, Math.min(24, Number(process.env.CATALOG_KNOWLEDGE_REINDEX_CONCURRENCY || 8)));
+const MIN_PUBLIC_RATIO = Math.min(1, Math.max(0.1, Number(process.env.CATALOG_REINDEX_MIN_PUBLIC_RATIO || 0.65)));
+const MIN_PUBLIC_GUARD_COUNT = Math.max(1, Number(process.env.CATALOG_REINDEX_MIN_PUBLIC_GUARD_COUNT || 50));
 const REPORT_PATH = "catalog/vehicle-knowledge/catalog-reindex-report.json";
 const startedAt = new Date().toISOString();
-const offers = await readAllOffersForMaintenance();
+const [offers, currentPublicLists] = await Promise.all([
+  readAllOffersForMaintenance(),
+  Promise.all(PUBLIC_CATALOG_MARKETS.map((market) => readMarketOffers(market))),
+]);
+const currentPublicOffers = currentPublicLists.flat().filter((offer) => isCrediblePublicOffer(offer));
 
 async function mapWithConcurrency(items, worker, concurrency) {
   const result = new Array(items.length);
@@ -61,16 +68,20 @@ const recalculated = await mapWithConcurrency(offers, async (source, index) => {
   }
 }, CONCURRENCY);
 
-process.env.CATALOG_GROW_ONLY_MARKETS = "";
-const manifest = await persistCatalogOffers(recalculated);
 const publicOffers = recalculated.filter((offer) => isCrediblePublicOffer(offer));
-const report = {
+const guardedMinimum = currentPublicOffers.length >= MIN_PUBLIC_GUARD_COUNT
+  ? Math.floor(currentPublicOffers.length * MIN_PUBLIC_RATIO)
+  : 0;
+const guardTriggered = guardedMinimum > 0 && publicOffers.length < guardedMinimum;
+const baseReport = {
   startedAt,
   finishedAt: new Date().toISOString(),
-  generationId: manifest.generationId,
   concurrency: CONCURRENCY,
   totalOffers: offers.length,
+  previousPublicOffers: currentPublicOffers.length,
   publicOffers: publicOffers.length,
+  guardedMinimum,
+  guardTriggered,
   canonicalized,
   powerFilled,
   priceChanged,
@@ -80,6 +91,24 @@ const report = {
   missingCustoms,
   errors: errors.length,
   errorSamples: errors,
+};
+
+if (guardTriggered) {
+  await writeDataJson(REPORT_PATH, {
+    ...baseReport,
+    published: false,
+    reason: `public_catalog_collapse_guard_${publicOffers.length}_below_${guardedMinimum}`,
+  });
+  throw new Error(`public_catalog_collapse_guard_${publicOffers.length}_below_${guardedMinimum}`);
+}
+
+process.env.CATALOG_GROW_ONLY_MARKETS = "";
+const manifest = await persistCatalogOffers(recalculated);
+const report = {
+  ...baseReport,
+  finishedAt: new Date().toISOString(),
+  generationId: manifest.generationId,
+  published: true,
 };
 await writeDataJson(REPORT_PATH, report);
 console.log(JSON.stringify(report, null, 2));
