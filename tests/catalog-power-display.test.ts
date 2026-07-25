@@ -13,6 +13,7 @@ test("shows certified 30-minute power for a pure electric vehicle", () => {
   assert.equal(result.thirtyMinutePowerKw, 65);
   assert.equal(result.thirtyMinuteLabel, "30 мин: 65 кВт");
   assert.equal(result.utilizationLabel, undefined);
+  assert.equal(result.estimated, false);
 });
 
 test("shows each traction motor and their 30-minute sum", () => {
@@ -47,4 +48,21 @@ test("uses calculated customs power as fallback for electric vehicles", () => {
 
   assert.ok(result);
   assert.equal(result.thirtyMinutePowerKw, 58.84);
+  assert.equal(result.thirtyMinuteLabel, "30 мин: 58,84 кВт");
+});
+
+test("labels preliminary power as an estimate instead of certified 30-minute power", () => {
+  const result = catalogPowerDisplay({
+    powertrainKind: "electric",
+    calculationSnapshot: {
+      certified30MinutePowerMissing: true,
+      customs: { utilizationPowerKw: 110 },
+    },
+  });
+
+  assert.ok(result);
+  assert.equal(result.thirtyMinutePowerKw, 110);
+  assert.equal(result.thirtyMinuteLabel, "Расчёт: 110 кВт");
+  assert.equal(result.estimated, true);
+  assert.match(result.sourceLabel, /предварительной цены/i);
 });
