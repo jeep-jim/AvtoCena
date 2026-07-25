@@ -10,11 +10,18 @@ const { CATALOG_DAILY_TARGET_PER_MARKET } = await import("../apps/web/lib/catalo
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
-const maxImages = Math.min(30, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 30));
-const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 1000));
+const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
+const maxImages = Math.min(30, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 12));
+const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 120));
+const maxTotalPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 180));
+const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 8));
 const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || target * 4));
+const prepareConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 4)));
+const checkpointEvery = Math.max(10, Number(process.env.CATALOG_REBUILD_CHECKPOINT_EVERY || 50));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 45 * 60 * 1000));
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}.json`;
+const startedAtMs = Date.now();
+const deadlineAtMs = startedAtMs + timeLimitMs;
 
 const sourcePlan = {
   korea: ["encar_direct"],
@@ -105,15 +112,40 @@ function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
 
+function deadlineReached() {
+  return Date.now() >= deadlineAtMs;
+}
+
+async function runWithConcurrency(items, concurrency, worker) {
+  if (!items.length) return [];
+  const results = new Array(items.length);
+  let cursor = 0;
+  const workerCount = Math.min(Math.max(1, concurrency), items.length);
+  await Promise.all(Array.from({ length: workerCount }, async () => {
+    while (true) {
+      const current = cursor++;
+      if (current >= items.length) return;
+      results[current] = await worker(items[current], current);
+    }
+  }));
+  return results;
+}
+
 const offers = new Map();
 const report = {
   market,
   target,
   minimumImages,
   maxImages,
+  maxPages,
+  maxTotalPages,
+  maxEmptyPages,
+  prepareConcurrency,
+  timeLimitMs,
+  deadlineAt: new Date(deadlineAtMs).toISOString(),
   sourceIds,
   connectedMarketSources,
-  startedAt: new Date().toISOString(),
+  startedAt: new Date(startedAtMs).toISOString(),
   pages: 0,
   seen: 0,
   seedSeen: 0,
@@ -123,18 +155,65 @@ const report = {
   imageFailures: 0,
   sourceErrors: [],
   sources: [],
+  checkpoints: 0,
+  stopReason: "running",
+  partial: true,
 };
 
 function recordError(row) {
   if (report.sourceErrors.length < 500) report.sourceErrors.push(row);
 }
 
+function payload(stopReason = report.stopReason, partial = true) {
+  const generatedAt = new Date().toISOString();
+  const rows = [...offers.values()].slice(0, target);
+  return {
+    version: 7,
+    market,
+    generatedAt,
+    target,
+    count: rows.length,
+    sourceIds,
+    partial,
+    stopReason,
+    report: {
+      ...report,
+      saved: rows.length,
+      partial,
+      stopReason,
+      lastCheckpointAt: generatedAt,
+      targetReached: rows.length >= target,
+    },
+    offers: rows,
+  };
+}
+
+let writeChain = Promise.resolve();
+function writeProgress(stopReason = report.stopReason, partial = true) {
+  const snapshot = payload(stopReason, partial);
+  const temporary = `${outputFile}.tmp`;
+  writeChain = writeChain.catch(() => undefined).then(async () => {
+    await fs.writeFile(temporary, JSON.stringify(snapshot, null, 2));
+    await fs.rename(temporary, outputFile);
+    report.checkpoints++;
+  });
+  return writeChain;
+}
+
+let lastCheckpointSize = 0;
+async function checkpointIfNeeded(force = false) {
+  if (!force && offers.size - lastCheckpointSize < checkpointEvery) return;
+  lastCheckpointSize = offers.size;
+  await writeProgress(deadlineReached() ? "deadline" : "running", true);
+}
+
 async function prepareCandidate(input, source, origin) {
+  if (deadlineReached()) return null;
   let offer = cleanOffer({ ...input });
   if (!offer || offer.market !== market || !offer.id) return null;
 
   let images = uniqueImages(offer.images || []);
-  if (images.length < minimumImages && source?.fetchImages) {
+  if (images.length < minimumImages && source?.fetchImages && !deadlineReached()) {
     try {
       const fetchedImages = await source.fetchImages(offer);
       images = uniqueImages([...images, ...(Array.isArray(fetchedImages) ? fetchedImages : [])]);
@@ -170,6 +249,16 @@ async function prepareCandidate(input, source, origin) {
   return isCrediblePublicOffer(offer) ? offer : null;
 }
 
+let shuttingDown = false;
+for (const signal of ["SIGTERM", "SIGINT"]) {
+  process.once(signal, () => {
+    if (shuttingDown) return;
+    shuttingDown = true;
+    report.stopReason = `signal_${signal.toLowerCase()}`;
+    writeProgress(report.stopReason, true).finally(() => process.exit(0));
+  });
+}
+
 const [internalRows, publicRows] = await Promise.all([
   readAllOffersForMaintenance(),
   readMarketOffers(market),
@@ -182,20 +271,23 @@ for (const offer of [...publicRows, ...internalRows]
   if (restoredMap.size >= seedScanLimit) break;
 }
 
-for (const seed of restoredMap.values()) {
-  if (offers.size >= target) break;
-  report.seedSeen++;
-  const source = adapters.get(seed.sourceId);
-  const prepared = await prepareCandidate(seed, source, "restored_listing");
-  if (!prepared || offers.has(prepared.id)) continue;
-  offers.set(prepared.id, prepared);
-  report.seedSaved++;
-  report.saved = offers.size;
-  if (offers.size % 25 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
+const restoredSeeds = [...restoredMap.values()];
+for (let index = 0; index < restoredSeeds.length && offers.size < target && !deadlineReached(); index += prepareConcurrency) {
+  const batch = restoredSeeds.slice(index, index + prepareConcurrency);
+  report.seedSeen += batch.length;
+  const preparedRows = await runWithConcurrency(batch, prepareConcurrency, (seed) => prepareCandidate(seed, adapters.get(seed.sourceId), "restored_listing"));
+  for (const prepared of preparedRows) {
+    if (!prepared || offers.has(prepared.id) || offers.size >= target) continue;
+    offers.set(prepared.id, prepared);
+    report.seedSaved++;
+    report.saved = offers.size;
+    if (offers.size % 25 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
+  }
+  await checkpointIfNeeded();
 }
 
 for (const sourceId of sourceIds) {
-  if (offers.size >= target) break;
+  if (offers.size >= target || deadlineReached() || report.pages >= maxTotalPages) break;
   const source = adapters.get(sourceId);
   if (!source) {
     recordError({ sourceId, stage: "registry", error: `catalog_source_not_found_${sourceId}` });
@@ -204,9 +296,19 @@ for (const sourceId of sourceIds) {
   let cursor = null;
   let pages = 0;
   let errors = 0;
+  let emptyPages = 0;
+  const seenCursors = new Set();
   const sourceStart = offers.size;
+  let sourceStopReason = "finished";
 
-  while (offers.size < target && pages < maxPages) {
+  while (offers.size < target && pages < maxPages && report.pages < maxTotalPages && !deadlineReached()) {
+    const cursorKey = String(cursor ?? "first");
+    if (seenCursors.has(cursorKey)) {
+      sourceStopReason = "cursor_loop";
+      break;
+    }
+    seenCursors.add(cursorKey);
+
     let fetched;
     try {
       fetched = await source.fetchPage(cursor);
@@ -214,25 +316,38 @@ for (const sourceId of sourceIds) {
     } catch (error) {
       errors++;
       recordError({ sourceId, cursor, stage: "list", error: String(error?.message || error) });
-      if (errors >= 10) break;
+      if (errors >= 3 || deadlineReached()) {
+        sourceStopReason = errors >= 3 ? "source_errors" : "deadline";
+        break;
+      }
       const numeric = Number(cursor || 1);
       cursor = Number.isFinite(numeric) ? String(numeric + 1) : null;
-      if (!cursor) break;
+      if (!cursor) {
+        sourceStopReason = "source_error_without_cursor";
+        break;
+      }
       continue;
     }
 
     pages++;
     report.pages++;
     const rows = Array.isArray(fetched?.items) ? fetched.items : [];
+    report.seen += rows.length;
+    const batchIds = new Set();
+    const normalizedRows = [];
     for (const raw of rows) {
-      if (offers.size >= target) break;
-      report.seen++;
       let base = null;
       try { base = source.normalizeOffer(raw); } catch { base = null; }
-      if (!base || base.market !== market || !base.id || offers.has(base.id)) continue;
-      const prepared = await prepareCandidate(base, source, "fresh_listing");
-      if (!prepared) {
-        report.rejected++;
+      if (!base || base.market !== market || !base.id || offers.has(base.id) || batchIds.has(base.id)) continue;
+      batchIds.add(base.id);
+      normalizedRows.push(base);
+    }
+
+    const beforePage = offers.size;
+    const preparedRows = await runWithConcurrency(normalizedRows, prepareConcurrency, (base) => prepareCandidate(base, source, "fresh_listing"));
+    for (const prepared of preparedRows) {
+      if (!prepared || offers.has(prepared.id) || offers.size >= target) {
+        if (!prepared) report.rejected++;
         continue;
       }
       offers.set(prepared.id, prepared);
@@ -240,15 +355,38 @@ for (const sourceId of sourceIds) {
       if (offers.size % 25 === 0) console.log(`[fresh:${market}] ${offers.size}/${target}; ${sourceId}; photos=${prepared.images.length}`);
     }
 
+    emptyPages = offers.size === beforePage ? emptyPages + 1 : 0;
+    await checkpointIfNeeded();
+    if (emptyPages >= maxEmptyPages) {
+      sourceStopReason = "no_progress";
+      break;
+    }
+
     cursor = fetched?.nextCursor || null;
-    if ((fetched?.finished && !cursor) || !cursor) break;
+    if ((fetched?.finished && !cursor) || !cursor) {
+      sourceStopReason = "source_finished";
+      break;
+    }
   }
-  report.sources.push({ sourceId, pages, saved: offers.size - sourceStart });
+
+  if (deadlineReached()) sourceStopReason = "deadline";
+  else if (report.pages >= maxTotalPages) sourceStopReason = "total_page_limit";
+  else if (pages >= maxPages) sourceStopReason = "source_page_limit";
+  report.sources.push({ sourceId, pages, saved: offers.size - sourceStart, emptyPages, stopReason: sourceStopReason });
+  await checkpointIfNeeded(true);
 }
 
 report.finishedAt = new Date().toISOString();
 report.saved = offers.size;
 report.targetReached = offers.size >= target;
+report.stopReason = report.targetReached
+  ? "target_reached"
+  : deadlineReached()
+    ? "deadline"
+    : report.pages >= maxTotalPages
+      ? "total_page_limit"
+      : "sources_exhausted";
+report.partial = !report.targetReached;
 report.publicBySource = [...offers.values()].reduce((totals, offer) => {
   totals[offer.sourceId] = (totals[offer.sourceId] || 0) + 1;
   return totals;
@@ -262,15 +400,7 @@ report.imageStats = [...offers.values()].reduce((stats, offer) => {
 }, { min: Number.POSITIVE_INFINITY, max: 0, total: 0 });
 if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
 report.imageStats.average = offers.size ? Number((report.imageStats.total / offers.size).toFixed(2)) : 0;
+report.durationMs = Date.now() - startedAtMs;
 
-await fs.writeFile(outputFile, JSON.stringify({
-  version: 6,
-  market,
-  generatedAt: report.finishedAt,
-  target,
-  count: offers.size,
-  sourceIds,
-  report,
-  offers: [...offers.values()].slice(0, target),
-}, null, 2));
-console.log(JSON.stringify(report, null, 2));
+await writeProgress(report.stopReason, report.partial);
+console.log(JSON.stringify(payload(report.stopReason, report.partial).report, null, 2));
