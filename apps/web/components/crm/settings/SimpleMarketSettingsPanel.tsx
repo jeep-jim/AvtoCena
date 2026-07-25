@@ -33,6 +33,14 @@ function hiddenJson(name: string, value: unknown) {
   return <input type="hidden" name={name} value={JSON.stringify(value ?? (name === "dealStages" || name === "percentExpenses" ? [] : {}))} />;
 }
 
+function ChevronDown() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M5.5 7.75L10 12.25L14.5 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]; canEdit: boolean }) {
   return (
     <div className="space-y-4">
@@ -67,7 +75,9 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                   Валюта {version.currency || "—"} · фиксированные расходы {money(fixedTotal)} ₽ · резерв курса {numberValue(version.exchangeRateReservePercent) || 0}%
                 </div>
               </div>
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/[.07] text-xl transition group-open:rotate-180">⌄</span>
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/[.07] text-white/65 transition group-open:rotate-180">
+                <ChevronDown />
+              </span>
             </summary>
 
             <div className="border-t border-white/8 p-5 pt-4">
