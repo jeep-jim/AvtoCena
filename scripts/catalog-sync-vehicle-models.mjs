@@ -1,4 +1,5 @@
-const { readChunkedDataJson, rebuildChunkedIndex, writeDataJson } = await import("../apps/web/lib/data.ts");
+const { readChunkedDataJson } = await import("../apps/web/lib/data.ts");
+const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked-data.ts");
 const { resetVehicleKnowledgeCache } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
 const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
@@ -7,6 +8,7 @@ const VEHICLES_CSV_URL = process.env.VEHICLE_KNOWLEDGE_MODELS_URL
 const MANIFEST_URL = process.env.VEHICLE_KNOWLEDGE_MANIFEST_URL
   || "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/manifest.json";
 const CHUNK_SIZE = Math.max(50, Math.min(250, Number(process.env.VEHICLE_KNOWLEDGE_CHUNK_SIZE || 250)));
+const MIN_MODEL_YEAR = Math.max(1900, Number(process.env.VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR || 1990));
 
 function clean(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -68,6 +70,14 @@ function mergeUnique(...lists) {
   return [...new Set(lists.flat().map(clean).filter(Boolean))];
 }
 
+function optionalYear(...values) {
+  for (const value of values) {
+    const parsed = Number(value || 0);
+    if (Number.isInteger(parsed) && parsed >= 1886 && parsed <= new Date().getFullYear() + 2) return parsed;
+  }
+  return undefined;
+}
+
 async function fetchText(url) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.VEHICLE_KNOWLEDGE_FETCH_TIMEOUT_MS || 120_000));
@@ -96,6 +106,7 @@ const rows = parseCsv(csvText);
 const manual = new Map(current.filter((row) => row?.source !== "vehiclesdb").map((row) => [row.id, row]));
 const upstream = new Map();
 const updatedAt = new Date().toISOString();
+let skippedHistoric = 0;
 
 for (const row of rows) {
   if (clean(row.kind).toLowerCase() !== "car") continue;
@@ -103,6 +114,12 @@ for (const row of rows) {
   const model = clean(row.model_name);
   const makeSlug = clean(row.make_slug).toLowerCase();
   const modelSlug = clean(row.model_slug).toLowerCase();
+  const yearFrom = optionalYear(row.year_start, row.year_from, row.first_year);
+  const yearTo = optionalYear(row.year_end, row.year_to, row.last_year);
+  if (yearTo && yearTo < MIN_MODEL_YEAR) {
+    skippedHistoric++;
+    continue;
+  }
   if (!validName(make, 2) || !validName(model, 1) || !makeSlug || !modelSlug) continue;
   const id = `${makeSlug}/${modelSlug}`;
   const popularity = Number(row.global_popularity_decile || 0);
@@ -114,6 +131,8 @@ for (const row of rows) {
     bodyTypes: split(row.body_types),
     countries: split(row.countries),
     regions: split(row.regions),
+    ...(yearFrom ? { yearFrom } : {}),
+    ...(yearTo ? { yearTo } : {}),
     ...(Number.isFinite(popularity) && popularity >= 1 && popularity <= 10 ? { popularityDecile: popularity } : {}),
     source: "vehiclesdb",
     sourceVersion: clean(manifest.version),
@@ -142,8 +161,7 @@ const models = [...upstream.values()].sort((left, right) =>
   || left.make.localeCompare(right.make, "en")
   || left.model.localeCompare(right.model, "en"));
 
-await writeDataJson(MODELS_PATH, models);
-await rebuildChunkedIndex(MODELS_PATH, CHUNK_SIZE);
+await replaceChunkedDataJson(MODELS_PATH, models, CHUNK_SIZE);
 resetVehicleKnowledgeCache();
 
 console.log(JSON.stringify({
@@ -152,6 +170,8 @@ console.log(JSON.stringify({
   fetchedRows: rows.length,
   carModels: models.length,
   preservedManualRecords: manual.size,
+  skippedHistoric,
+  minimumModelYear: MIN_MODEL_YEAR,
   chunkSize: CHUNK_SIZE,
   updatedAt,
 }, null, 2));
