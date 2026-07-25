@@ -64,5 +64,19 @@ test("labels preliminary power as an estimate instead of certified 30-minute pow
   assert.equal(result.thirtyMinutePowerKw, 110);
   assert.equal(result.thirtyMinuteLabel, "Расчёт: 110 кВт");
   assert.equal(result.estimated, true);
-  assert.match(result.sourceLabel, /предварительной цены/i);
+  assert.match(result.sourceLabel, /предварительного расчёта/i);
+});
+
+test("shows a conservative calculated value for a legacy EV without a customs snapshot", () => {
+  const result = catalogPowerDisplay({
+    powertrainKind: "electric",
+    fuel: "electric",
+    powerHp: 340,
+  });
+
+  assert.ok(result);
+  assert.equal(result.thirtyMinutePowerKw, 250.07);
+  assert.equal(result.thirtyMinuteLabel, "Расчёт: 250,07 кВт");
+  assert.equal(result.utilizationPowerKw, 250.07);
+  assert.equal(result.estimated, true);
 });
