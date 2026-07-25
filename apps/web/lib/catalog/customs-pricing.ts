@@ -7,6 +7,7 @@ import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
+import { enrichOfferWithVehicleKnowledge } from "./vehicle-knowledge";
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -30,7 +31,8 @@ function customsValueSnapshot(rate: any, borderTransportRub: number, customsValu
 }
 
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
-  const certified = await enrichOfferWithCertifiedPower(input);
+  const canonical = await enrichOfferWithVehicleKnowledge(input);
+  const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const offer = normalizeVehicleOfferSpecs(known) as VehicleOffer;
 
@@ -134,6 +136,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       estimatedMarketFields: market.estimatedFields,
       powerConfidence: offer.powerDataConfidence,
       powerSource: offer.powerDataSource,
+      vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
       warnings,
     },
     calculationStatus: offer.priceMode === "auction_start"
