@@ -5,6 +5,8 @@ import { readDataJson } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
+type SearchParams = Record<string, string | string[] | undefined>;
+
 const pilotDealer = {
   id: "dealer_topavto",
   name: "TopAvto",
@@ -24,8 +26,9 @@ function first(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value || "";
 }
 
-export default async function CrmDealerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
-  const [{ id }, query] = await Promise.all([params, searchParams || Promise.resolve({})]);
+export default async function CrmDealerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<SearchParams> }) {
+  const { id } = await params;
+  const query: SearchParams = (await searchParams) || {};
   const stored = await readDataJson<any[]>("dealers/dealers.json", []);
   const dealers = stored.length ? stored : [pilotDealer];
   const dealer = dealers.find((item) => item.id === id);
