@@ -7,7 +7,6 @@ const { CATALOG_DAILY_TARGET_PER_MARKET, PUBLIC_CATALOG_MARKETS } = await import
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
-const minimumPerMarket = Math.max(1, Math.min(target, Number(process.env.CATALOG_REBUILD_MIN_PUBLISH_PER_MARKET || 1)));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 4));
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
@@ -92,16 +91,28 @@ for (const market of markets) {
     if (selected.length >= target) break;
   }
 
-  if (selected.length < minimumPerMarket) {
-    throw new Error(`fresh_publish_no_verified_offers_${market}_${selected.length}`);
+  files.push(filename);
+  reports[market] = payload.report || {};
+  byMarket[market] = selected.length;
+
+  if (!selected.length) {
+    marketQuality[market] = {
+      freshCandidates: freshRows.length,
+      retainedCandidates: retainedRows.length,
+      desiredTarget: target,
+      published: 0,
+      freshPublished: 0,
+      retainedPublished: 0,
+      rejectedQuality,
+      targetReached: false,
+      temporarilyUnavailable: true,
+    };
+    continue;
   }
 
   const imageCounts = selected.map((offer) => offer.images.length);
   const averageImages = imageCounts.reduce((sum, count) => sum + count, 0) / selected.length;
   all.push(...selected);
-  files.push(filename);
-  byMarket[market] = selected.length;
-  reports[market] = payload.report || {};
   marketQuality[market] = {
     freshCandidates: freshRows.length,
     retainedCandidates: retainedRows.length,
@@ -116,6 +127,7 @@ for (const market of markets) {
     minimumImagesPerOffer,
     minimumSpecScore,
     targetReached: selected.length >= target,
+    temporarilyUnavailable: false,
   };
 }
 
@@ -125,8 +137,9 @@ for (const offer of all) {
   unique.set(offer.id, offer);
 }
 
-process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const offers = [...unique.values()];
+if (!offers.length) throw new Error("fresh_publish_no_verified_offers_any_market");
+process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers(offers);
 const publishedAt = new Date().toISOString();
 const report = {
