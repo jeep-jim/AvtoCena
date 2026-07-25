@@ -102,6 +102,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [theme, setTheme] = useState<Theme>("dark");
   const catalogActive = pathname === "/cars" || pathname.startsWith("/cars/");
+  const dealersActive = pathname === "/dealers" || pathname.startsWith("/dealers/");
 
   useEffect(() => {
     const update = () => setFavoritesCount(readCount());
@@ -175,7 +176,10 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
               ) : null}
             </Link>
 
-            <nav className="hidden items-center text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
+            <nav className="hidden items-center gap-1 text-sm font-black text-white/72 md:flex" aria-label="Основная навигация">
+              <Link href="/dealers" className={`ac-catalog-nav flex h-11 items-center rounded-xl px-4 transition ${dealersActive ? "is-active" : ""}`} aria-current={dealersActive ? "page" : undefined}>
+                <span>Дилерам</span>
+              </Link>
               <Link href="/cars" className={`ac-catalog-nav flex h-11 items-center gap-2 rounded-xl px-4 transition ${catalogActive ? "is-active" : ""}`} aria-current={catalogActive ? "page" : undefined}>
                 <span className="ac-catalog-nav-icon"><CarIcon /></span>
                 <span>Каталог</span>
