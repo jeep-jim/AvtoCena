@@ -4,7 +4,7 @@ import { readChunkedDataJson, readDataJson } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export const pilotDealer = {
+const pilotDealer = {
   id: "dealer_topavto",
   name: "TopAvto",
   city: "Новокузнецк",
