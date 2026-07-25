@@ -8,17 +8,22 @@ type CrmShellProps = {
   children: React.ReactNode;
 };
 
+const roleLabels: Record<string, string> = {
+  owner: "Владелец",
+  admin: "Администратор",
+  manager: "Менеджер",
+  partner: "Дилер",
+};
+
 export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProps) {
   const user = getCurrentUser();
   const links = [
     ["/crm", "Обзор"],
-    ["/crm/feed", "Лента"],
-    ["/crm/leads", "Лиды"],
+    ["/crm/leads", "Заявки"],
     ["/crm/clients", "Клиенты"],
-    ["/crm/deals", "Сделки"],
-    ["/crm/managers", "Менеджеры"],
-    ["/crm/partners", "Партнёры"],
-    ["/crm/settings", "Настройки"]
+    ["/crm/managers", "Команда и права"],
+    ["/crm/settings", "Рынки и расчёт"],
+    ["/crm/dealers", "Дилеры"],
   ] as const;
 
   return (
@@ -28,14 +33,14 @@ export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProp
           <Link href="/" className="flex items-center gap-3">
             <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-base font-black text-black">AC</div>
             <div>
-              <div className="font-black">TopAvto CRM</div>
-              <div className="text-xs font-bold text-white/45">внутренняя система</div>
+              <div className="font-black">АвтоЦена CRM</div>
+              <div className="text-xs font-bold text-white/45">платформа дилеров</div>
             </div>
           </Link>
 
           <div className="flex flex-wrap items-center justify-end gap-2">
             <div className="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm font-black text-white/70">
-              {user?.displayName || "Менеджер"} · {user?.role || "guest"}
+              {user?.displayName || "Пользователь"} · {roleLabels[user?.role || ""] || user?.role || "гость"}
             </div>
             <form action="/api/auth/logout?redirect=/login" method="post">
               <button className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white/70 hover:bg-white/15">Выйти</button>
