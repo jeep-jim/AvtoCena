@@ -11,9 +11,12 @@ on:
       - main
     paths:
       - apps/web/lib/catalog/customs-pricing.ts
+      - apps/web/lib/catalog/estimated-market-config.ts
       - apps/web/lib/catalog/offer-quality.ts
+      - apps/web/lib/catalog/power-display.ts
       - apps/web/lib/catalog/vehicle-knowledge.ts
       - apps/web/lib/catalog/power-reference.ts
+      - packages/engine/src/calculation/calculateAvtocena.ts
       - scripts/catalog-reindex-vehicle-knowledge.mjs
       - .github/workflows/catalog-reindex-vehicle-knowledge.yml
   workflow_dispatch:
