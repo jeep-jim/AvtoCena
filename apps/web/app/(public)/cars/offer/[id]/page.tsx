@@ -80,10 +80,19 @@ function safeExternalUrl(value: unknown) {
 }
 
 type BreakdownLine = { id?: string; title: string; amountRub: number };
+function customerBreakdownTitle(id: string, title: string) {
+  if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
+  return title;
+}
+
 function priceBreakdown(offer: any): BreakdownLine[] {
   const actual = Array.isArray(offer?.calculationSnapshot?.breakdown)
     ? offer.calculationSnapshot.breakdown
-      .map((line: any) => ({ id: String(line?.id || line?.title || ""), title: String(line?.title || "Расход"), amountRub: Number(line?.amountRub || 0) }))
+      .map((line: any) => {
+        const id = String(line?.id || line?.title || "");
+        const title = customerBreakdownTitle(id, String(line?.title || "Расход"));
+        return { id, title, amountRub: Number(line?.amountRub || 0) };
+      })
       .filter((line: BreakdownLine) => line.amountRub !== 0)
     : [];
   if (actual.length) return actual;
@@ -122,6 +131,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const powertrainKind = String(raw.powertrainKind || "").toLowerCase();
   const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
+  const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
   const transmissionValue = knownValue(o.transmissionLabel);
   const fuelValue = knownValue(o.fuelLabel);
@@ -130,6 +140,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const thirtyMinuteInfo = powerDisplay?.estimated
     ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
     : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
+  const powerTile = powerDisplay && (isElectric || isHybrid)
+    ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
+    : null;
 
   const specs = (isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
@@ -137,7 +150,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     { label: "Силовая установка", value: "Электромотор", icon: "electricMotor" as const },
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
     powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
-    powerDisplay ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo } : null,
+    powerTile,
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
   ] : [
@@ -146,6 +159,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     o.engineCc ? { label: "Двигатель", value: `${money(o.engineCc)} см³`, icon: "engine" as const } : null,
     fuelValue ? { label: "Топливо", value: fuelValue, icon: "fuel" as const } : null,
     powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
+    powerTile,
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
