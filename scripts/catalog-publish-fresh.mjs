@@ -48,10 +48,32 @@ function auditCandidate(sourceOffer, market, selectedIds, imageOwners) {
   return offer;
 }
 
+async function readGenerationFile(filename, market) {
+  try {
+    const raw = await fs.readFile(filename, "utf8");
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed?.offers)) throw new Error("generation_offers_missing");
+    if (parsed.market && parsed.market !== market) throw new Error(`generation_market_mismatch_${parsed.market}`);
+    return {
+      available: true,
+      payload: parsed,
+      offers: parsed.offers,
+      error: "",
+    };
+  } catch (error) {
+    return {
+      available: false,
+      payload: null,
+      offers: [],
+      error: String(error?.message || error),
+    };
+  }
+}
+
 for (const market of markets) {
   const filename = path.join(inputDir, `catalog-rebuild-${market}.json`);
-  const payload = JSON.parse(await fs.readFile(filename, "utf8"));
-  const freshRows = Array.isArray(payload?.offers) ? payload.offers : [];
+  const generation = await readGenerationFile(filename, market);
+  const freshRows = generation.offers;
   const retainedRows = (await readMarketOffers(market))
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .sort((left, right) => freshness(right) - freshness(left));
@@ -78,12 +100,21 @@ for (const market of markets) {
     if (selected.length >= target) break;
   }
 
-  files.push(filename);
-  reports[market] = payload.report || {};
+  if (generation.available) files.push(filename);
+  reports[market] = generation.payload?.report || {
+    market,
+    partial: true,
+    stopReason: generation.error ? "generation_unavailable" : "generation_empty",
+    inputError: generation.error,
+  };
   byMarket[market] = selected.length;
 
   if (!selected.length) {
     marketQuality[market] = {
+      generationAvailable: generation.available,
+      generationError: generation.error,
+      generationPartial: Boolean(generation.payload?.partial || generation.payload?.report?.partial),
+      generationStopReason: generation.payload?.stopReason || generation.payload?.report?.stopReason || "generation_unavailable",
       freshCandidates: freshRows.length,
       retainedCandidates: retainedRows.length,
       desiredTarget: target,
@@ -93,6 +124,7 @@ for (const market of markets) {
       rejectedQuality,
       targetReached: false,
       temporarilyUnavailable: true,
+      retainedPreviousMarket: retainedRows.length > 0,
     };
     continue;
   }
@@ -101,6 +133,10 @@ for (const market of markets) {
   const averageImages = imageCounts.reduce((sum, count) => sum + count, 0) / selected.length;
   all.push(...selected);
   marketQuality[market] = {
+    generationAvailable: generation.available,
+    generationError: generation.error,
+    generationPartial: Boolean(generation.payload?.partial || generation.payload?.report?.partial),
+    generationStopReason: generation.payload?.stopReason || generation.payload?.report?.stopReason || "completed",
     freshCandidates: freshRows.length,
     retainedCandidates: retainedRows.length,
     desiredTarget: target,
@@ -115,6 +151,7 @@ for (const market of markets) {
     minimumSpecScore,
     targetReached: selected.length >= target,
     temporarilyUnavailable: false,
+    retainedPreviousMarket: !generation.available || retainedPublished > 0,
   };
 }
 
@@ -137,6 +174,8 @@ const report = {
   total: offers.length,
   byMarket,
   files,
+  missingGenerationMarkets: markets.filter((market) => !marketQuality[market]?.generationAvailable),
+  partialGenerationMarkets: markets.filter((market) => marketQuality[market]?.generationPartial),
   marketQuality,
   imageStats: offers.reduce((stats, offer) => {
     const count = Array.isArray(offer.images) ? offer.images.length : 0;
