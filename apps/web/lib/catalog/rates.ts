@@ -49,6 +49,7 @@ const FALLBACK_ENV: Record<string, string> = {
 
 type LiveRate = { cbrRate: number; nominal: number; effectiveRate: number; rateDate: string; fetchedAt: string };
 let liveCbrRatesPromise: Promise<Map<string, LiveRate>> | null = null;
+let storedRatesPromise: Promise<any> | null = null;
 
 function validDate(value: unknown) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)
@@ -68,6 +69,21 @@ function xmlValue(block: string, tag: string) {
 function cbrXmlDate(xml: string) {
   const raw = xml.match(/<ValCurs[^>]+Date=["'](\d{2})\.(\d{2})\.(\d{4})["']/i);
   return raw ? `${raw[3]}-${raw[2]}-${raw[1]}` : new Date().toISOString().slice(0, 10);
+}
+
+async function readStoredRates() {
+  if (!storedRatesPromise) {
+    storedRatesPromise = readDataJson<any>("fees/exchange-rates.json", {}).catch((error) => {
+      storedRatesPromise = null;
+      throw error;
+    });
+  }
+  return storedRatesPromise;
+}
+
+export function resetCatalogRateCache() {
+  storedRatesPromise = null;
+  liveCbrRatesPromise = null;
 }
 
 async function fetchLiveCbrRates() {
@@ -113,7 +129,7 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
     return { currency: code, cbrRate: 1, nominal: 1, effectiveRate: 1, rateDate: new Date().toISOString().slice(0, 10), fetchedAt: new Date().toISOString(), rateSource: "cbr", sourcePrice, sourcePriceRub: Math.round(sourcePrice) };
   }
 
-  const rates = await readDataJson<any>("fees/exchange-rates.json", {});
+  const rates = await readStoredRates();
   const structured = Array.isArray(rates.rates)
     ? rates.rates.find((rate: any) => String(rate.currency).toUpperCase() === code)
     : rates[code] && typeof rates[code] === "object"
