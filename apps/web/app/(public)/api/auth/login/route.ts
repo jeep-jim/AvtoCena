@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { AUTH_COOKIE_NAME, AUTH_MAX_AGE_SECONDS, createSessionCookie, findAuthUserByTelegram, normalizeTelegramUsername } from "@/lib/auth";
+import { AUTH_COOKIE_NAME, AUTH_MAX_AGE_SECONDS, createSessionCookie, normalizeTelegramUsername } from "@/lib/auth";
+import { findCrmUserByTelegram } from "@/lib/crm-users";
 
 function clean(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -11,19 +12,12 @@ export async function POST(request: Request) {
   const accessKey = clean(body.accessKey);
   const expectedAccessKey = process.env.AUTH_ACCESS_KEY || "";
 
-  if (!username) {
+  if (!username || !expectedAccessKey || accessKey !== expectedAccessKey) {
     return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });
   }
 
-  if (expectedAccessKey && accessKey !== expectedAccessKey) {
-    return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });
-  }
-
-  const user = findAuthUserByTelegram(username);
-
-  if (!user) {
-    return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });
-  }
+  const user = await findCrmUserByTelegram({ username });
+  if (!user) return NextResponse.json({ ok: false, error: "access_denied" }, { status: 401 });
 
   const response = NextResponse.json({
     ok: true,
@@ -31,9 +25,11 @@ export async function POST(request: Request) {
       id: user.id,
       telegramUsername: user.telegramUsername,
       displayName: user.displayName,
+      avatarUrl: user.avatarUrl || null,
+      companyId: user.companyId || null,
       role: user.role,
-      partnerCode: user.partnerCode || null
-    }
+      partnerCode: user.partnerCode || null,
+    },
   });
 
   response.cookies.set(AUTH_COOKIE_NAME, createSessionCookie(user), {
@@ -41,7 +37,7 @@ export async function POST(request: Request) {
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge: AUTH_MAX_AGE_SECONDS
+    maxAge: AUTH_MAX_AGE_SECONDS,
   });
 
   return response;
