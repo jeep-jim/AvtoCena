@@ -24,6 +24,8 @@ jobs:
         run: node --import tsx --test tests/catalog-full-market-pricing.test.ts
       - name: Price trend direction tests
         run: node --import tsx --test tests/price-trend-direction.test.ts
+      - name: Catalog image quality tests
+        run: node --import tsx --test tests/catalog-image-quality.test.ts
       - name: Power normalization tests
         run: node --import tsx --test tests/catalog-power-normalization.test.ts
       - name: Public 30-minute power display tests
