@@ -86,7 +86,7 @@ export async function POST(request: Request) {
         status,
         markets,
         telegramChannel: clean(form.get("telegramChannel"), 200),
-        telegramConnected: checked(form.get("telegramConnected")),
+        telegramConnected: Boolean(dealer.telegramConnected),
         telegramChatId: clean(form.get("telegramChatId"), 160) || dealer.telegramChatId || "",
         logoUrl: clean(form.get("logoUrl"), 1000) || dealer.logoUrl || "",
         headerImageObjectKey: verified ? uploadedHeader?.objectKey || dealer.headerImageObjectKey || "" : "",
