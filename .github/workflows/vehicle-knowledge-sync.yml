@@ -44,28 +44,34 @@ jobs:
         run: |
           node --import tsx --input-type=module <<'NODE'
           import fs from 'node:fs/promises';
-          const { readChunkedDataJson, readDataJson } = await import('./apps/web/lib/data.ts');
-          const { resolveVehicleModelQuery } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
-          const models = await readChunkedDataJson('catalog/vehicle-knowledge/models.json', []);
-          const index = await readDataJson('catalog/vehicle-knowledge/models-index.json', null);
-          const hrv = await resolveVehicleModelQuery('hrv', undefined, 10);
-          const errors = [];
-          if (models.length < 5000) errors.push(`vehicle_knowledge_too_small_${models.length}`);
-          if (!index || index.maxRecordsPerChunk !== 250) errors.push('vehicle_knowledge_chunk_size_invalid');
-          if (Array.isArray(index?.chunks) && index.chunks.some((chunk) => Number(chunk.count || 0) > 250)) errors.push('vehicle_knowledge_chunk_overflow');
-          if (!hrv.some((row) => row.make === 'Honda' && row.model === 'HR-V')) errors.push('vehicle_knowledge_hrv_alias_missing');
-          const report = {
-            models: models.length,
-            indexTotal: index?.total,
-            chunkSize: index?.maxRecordsPerChunk,
-            chunks: index?.chunks?.length,
-            largestChunk: Math.max(0, ...(index?.chunks || []).map((chunk) => Number(chunk.count || 0))),
-            hrv: hrv.slice(0, 10),
-            errors,
-          };
+          let report = { models: 0, indexTotal: 0, chunkSize: null, chunks: 0, largestChunk: 0, hrv: [], errors: [] };
+          try {
+            const { readChunkedDataJson, readDataJson } = await import('./apps/web/lib/data.ts');
+            const { resolveVehicleModelQuery } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+            const models = await readChunkedDataJson('catalog/vehicle-knowledge/models.json', []);
+            const index = await readDataJson('catalog/vehicle-knowledge/models-index.json', null);
+            const hrv = await resolveVehicleModelQuery('hrv', undefined, 10);
+            const errors = [];
+            if (models.length < 5000) errors.push(`vehicle_knowledge_too_small_${models.length}`);
+            if (!index || index.maxRecordsPerChunk !== 250) errors.push('vehicle_knowledge_chunk_size_invalid');
+            if (Array.isArray(index?.chunks) && index.chunks.some((chunk) => Number(chunk.count || 0) > 250)) errors.push('vehicle_knowledge_chunk_overflow');
+            if (!hrv.some((row) => row.make === 'Honda' && row.model === 'HR-V')) errors.push('vehicle_knowledge_hrv_alias_missing');
+            report = {
+              models: models.length,
+              indexTotal: index?.total,
+              chunkSize: index?.maxRecordsPerChunk,
+              chunks: index?.chunks?.length,
+              largestChunk: Math.max(0, ...(index?.chunks || []).map((chunk) => Number(chunk.count || 0))),
+              hrv: hrv.slice(0, 10),
+              errors,
+            };
+          } catch (error) {
+            report.errors = [`validation_exception:${error?.message || String(error)}`];
+            report.stack = String(error?.stack || '');
+          }
           await fs.writeFile('vehicle-knowledge-validation.json', JSON.stringify(report, null, 2));
           console.log(JSON.stringify(report, null, 2));
-          if (errors.length) process.exitCode = 1;
+          if (report.errors.length) process.exitCode = 1;
           NODE
       - name: Upload vehicle knowledge validation report
         if: always()
@@ -90,7 +96,8 @@ jobs:
               `- размер чанка: **${report.chunkSize ?? '—'}**\n` +
               `- самый большой чанк: **${report.largestChunk ?? '—'}**\n` +
               `- поиск \`hrv\`: \`${JSON.stringify(report.hrv || [])}\`\n` +
-              `- ошибки: \`${JSON.stringify(report.errors || [])}\``;
+              `- ошибки: \`${JSON.stringify(report.errors || [])}\`\n` +
+              (report.stack ? `\n<details><summary>Стек</summary>\n\n\`\`\`\n${report.stack}\n\`\`\`\n</details>` : '');
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
