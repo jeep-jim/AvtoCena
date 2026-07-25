@@ -1,74 +1,132 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const DATA_ROOT = process.env.DATA_ROOT || path.resolve(__dirname, "../../../data");
-const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
+export const DEFAULT_MAX_RECORDS_PER_CHUNK = 500;
+const TRANSIENT_STATUS = new Set([408, 425, 429, 500, 502, 503, 504]);
+const REQUIRED_BOOTSTRAP_COLLECTIONS = ["clients/clients.json", "leads/leads.json", "activity/feed.json", "deals/deals.json", "partners/partners.json", "partners/accruals.json", "cpa/networks.json", "cpa/payouts.json", "markets/markets.json", "settings/site-business.json", "settings/change-log.json", "contracts/templates.json"];
 
-export class StorageConflictError extends Error { constructor(message = "storage_conflict") { super(message); this.name = "StorageConflictError"; } }
-type JsonWriteCondition = { ifMatch?: string; ifNoneMatch?: "*" };
-type JsonReadResult<T> = { value: T; etag?: string; found: boolean };
 type ChunkDescriptor = { file: string; count: number; createdAt: string; updatedAt: string };
 type ChunkIndex = { version: 1; collection: string; maxRecordsPerChunk: number; total: number; updatedAt: string; chunks: ChunkDescriptor[] };
-type BinaryResult = { data: Buffer; mimeType?: string; size: number; checksum: string };
+export type JsonStorageDriver = "local" | "object";
+export type JsonReadResult<T> = { value: T; etag?: string; found: boolean };
+export type JsonWriteCondition = { ifMatch?: string; ifNoneMatch?: "*" };
+
+export class StorageConflictError extends Error { constructor() { super("storage_conflict"); this.name = "StorageConflictError"; } }
+
 export interface JsonStorage {
-  driver: "local" | "object";
-  readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>>;
+  driver: JsonStorageDriver;
   readJson<T>(relativePath: string, fallback: T): Promise<T>;
+  readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>>;
   writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition): Promise<void>;
   deleteJson?(relativePath: string): Promise<void>;
+  exists?(relativePath: string): Promise<boolean>;
   putBinary?(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition): Promise<{ objectKey: string; mimeType: string; size: number; checksum: string }>;
-  getBinary?(relativePath: string): Promise<BinaryResult | null>;
+  getBinary?(relativePath: string): Promise<{ data: Buffer; mimeType?: string; size: number; checksum: string }>;
   binaryExists?(relativePath: string): Promise<boolean>;
   deleteBinary?(relativePath: string): Promise<void>;
-  exists?(relativePath: string): Promise<boolean>;
 }
-const REQUIRED_BOOTSTRAP_COLLECTIONS = ["users/users.json", "crm/leads.json", "markets/markets.json", "fees/exchange-rates.json", "catalog/manifest.json"];
-function sleep(ms: number) { return new Promise((resolve) => setTimeout(resolve, ms)); }
-function localPath(relativePath: string) { return path.join(DATA_ROOT, relativePath); }
-function ensureDir(filePath: string) { fs.mkdirSync(path.dirname(filePath), { recursive: true }); }
-function safeParse<T>(raw: string, fallback: T): T { try { return JSON.parse(raw) as T; } catch { return fallback; } }
-function sha256(data: Buffer | string) { return crypto.createHash("sha256").update(data).digest("hex"); }
-function etagForBuffer(data: Buffer) { return `"${sha256(data)}"`; }
-function cleanEtag(value?: string | null) { return value?.trim() || undefined; }
-function normalizeStorageKey(relativePath: string) { return relativePath.replace(/\\/g, "/").replace(/^\/+/, ""); }
 
-class LocalJsonStorage implements JsonStorage {
-  driver = "local" as const;
-  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const p = localPath(relativePath); try { const data = await fs.promises.readFile(p); return { value: safeParse(data.toString("utf-8"), fallback), etag: etagForBuffer(data), found: true }; } catch { return { value: fallback, found: false }; } }
+export function getDataRoot() {
+  const cwd = process.cwd();
+  const candidates = [path.join(cwd, "data"), path.join(cwd, "..", "..", "data"), path.join(cwd, "..", "data"), path.join(process.cwd(), "apps", "web", "..", "..", "data")];
+  return candidates.find((candidate) => fs.existsSync(candidate)) ?? path.join(cwd, "data");
+}
+export function normalizeStorageKey(relativePath: string) { const key = relativePath.replace(/\\/g, "/").replace(/^\/+/, ""); if (!key || key.split("/").some((part) => !part || part === "." || part === "..")) throw new Error("invalid_storage_key"); return key; }
+export function safeStoragePath(relativePath: string) { const root = path.resolve(getDataRoot()); const target = path.resolve(root, normalizeStorageKey(relativePath)); if (target !== root && !target.startsWith(root + path.sep)) throw new Error("invalid_storage_key"); return target; }
+function localPath(relativePath: string) { return safeStoragePath(relativePath); }
+function sleep(ms: number) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+function safeParse<T>(text: string, fallback: T): T { try { return JSON.parse(text) as T; } catch { return fallback; } }
+function localEtag(filePath: string) { try { const s = fs.statSync(filePath); return `"${s.size}-${Math.floor(s.mtimeMs)}"`; } catch { return undefined; } }
+
+export class LocalJsonStorage implements JsonStorage {
+  driver: JsonStorageDriver = "local";
+  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> {
+    const p = localPath(relativePath);
+    try { if (!fs.existsSync(p)) return { value: fallback, found: false }; return { value: safeParse(await fs.promises.readFile(p, "utf-8"), fallback), etag: localEtag(p), found: true }; } catch { return { value: fallback, found: false }; }
+  }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
-  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const p = localPath(relativePath); ensureDir(p); let current: Buffer | null = null; try { current = await fs.promises.readFile(p); } catch { current = null; } if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && (!current || etagForBuffer(current) !== condition.ifMatch)) throw new StorageConflictError(); const payload = JSON.stringify(value, null, 2); const tmp = `${p}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, payload, "utf-8"); await fs.promises.rename(tmp, p); }
+  async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) {
+    const p = localPath(relativePath); const current = localEtag(p);
+    if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError();
+    if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError();
+    await fs.promises.mkdir(path.dirname(p), { recursive: true });
+    const tmp = `${p}.${process.pid}.${crypto.randomUUID()}.tmp`;
+    await fs.promises.writeFile(tmp, JSON.stringify(value, null, 2), "utf-8");
+    await fs.promises.rename(tmp, p);
+  }
   async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
-  async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const p = localPath(relativePath); ensureDir(p); let current: Buffer | null = null; try { current = await fs.promises.readFile(p); } catch { current = null; } if (condition?.ifNoneMatch === "*" && current) return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: current.length, checksum: sha256(current) }; if (condition?.ifMatch && (!current || etagForBuffer(current) !== condition.ifMatch)) throw new StorageConflictError(); const tmp = `${p}.${crypto.randomUUID()}.tmp`; await fs.promises.writeFile(tmp, data); await fs.promises.rename(tmp, p); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
-  async getBinary(relativePath: string) { try { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; } catch { return null; } }
+  async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); await fs.promises.writeFile(p, data); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
+  async getBinary(relativePath: string) { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; }
   async binaryExists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
-  async exists(relativePath: string) { return this.binaryExists(relativePath); }
+  async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
 }
 
-function encodeRfc3986(value: string) { return encodeURIComponent(value).replace(/[!'()*]/g, (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`); }
-function hmac(key: Buffer | string, value: string) { return crypto.createHmac("sha256", key).update(value).digest(); }
-function awsSha256(value: Buffer | string) { return crypto.createHash("sha256").update(value).digest("hex"); }
-function objectStorageConfig() {
-  const endpoint = (process.env.YC_OBJECT_STORAGE_ENDPOINT || "https://storage.yandexcloud.net").replace(/\/+$/g, "");
-  const bucket = process.env.YC_OBJECT_STORAGE_BUCKET || "";
+function objectConfig() {
+  const endpoint = process.env.YC_OBJECT_STORAGE_ENDPOINT || "https://storage.yandexcloud.net";
   const region = process.env.YC_OBJECT_STORAGE_REGION || "ru-central1";
+  const bucket = process.env.YC_OBJECT_STORAGE_BUCKET || "";
   const accessKeyId = process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID || "";
   const secretAccessKey = process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY || "";
-  const prefix = normalizeStorageKey(process.env.YC_OBJECT_STORAGE_PREFIX || "avtocena").replace(/\/+$/g, "");
-  if (!bucket || !accessKeyId || !secretAccessKey) throw new Error("object_storage_config_missing");
-  return { endpoint, bucket, region, accessKeyId, secretAccessKey, prefix };
+  const prefix = (process.env.YC_OBJECT_STORAGE_PREFIX || "").replace(/^\/+|\/+$/g, "");
+  if (!bucket || !accessKeyId || !secretAccessKey) throw new Error("object_storage_not_configured");
+  return { endpoint: endpoint.replace(/\/+$/g, ""), region, bucket, accessKeyId, secretAccessKey, prefix };
 }
-function storageObjectKey(relativePath: string) { const { prefix } = objectStorageConfig(); return normalizeStorageKey([prefix, relativePath].filter(Boolean).join("/")); }
-function signAwsRequest(method: string, url: URL, body: Buffer | string, extraHeaders: Record<string,string> = {}) {
-  const cfg = objectStorageConfig(); const now = new Date(); const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, ""); const dateStamp = amzDate.slice(0,8); const payloadHash = awsSha256(body); const headers: Record<string,string> = { host: url.host, "x-amz-content-sha256": payloadHash, "x-amz-date": amzDate, ...extraHeaders }; const sortedHeaderEntries = Object.entries(headers).map(([key,value]) => [key.toLowerCase(), value.trim()] as const).sort(([a],[b]) => a.localeCompare(b)); const canonicalHeaders = sortedHeaderEntries.map(([key,value]) => `${key}:${value}\n`).join(""); const signedHeaders = sortedHeaderEntries.map(([key]) => key).join(";"); const canonicalQuery = [...url.searchParams.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([key,value]) => `${encodeRfc3986(key)}=${encodeRfc3986(value)}`).join("&"); const canonicalRequest = [method, url.pathname.split("/").map(encodeRfc3986).join("/"), canonicalQuery, canonicalHeaders, signedHeaders, payloadHash].join("\n"); const scope = `${dateStamp}/${cfg.region}/s3/aws4_request`; const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, awsSha256(canonicalRequest)].join("\n"); const kDate = hmac(`AWS4${cfg.secretAccessKey}`, dateStamp); const kRegion = hmac(kDate, cfg.region); const kService = hmac(kRegion, "s3"); const kSigning = hmac(kService, "aws4_request"); const signature = crypto.createHmac("sha256", kSigning).update(stringToSign).digest("hex"); return { ...headers, authorization: `AWS4-HMAC-SHA256 Credential=${cfg.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}` };
-}
-class ObjectJsonStorage implements JsonStorage {
-  driver = "object" as const;
-  private async request(method: string, relativePath: string, body: Buffer | string = "", extraHeaders: Record<string,string> = {}) { const cfg = objectStorageConfig(); const key = storageObjectKey(relativePath); const url = new URL(`${cfg.endpoint}/${encodeRfc3986(cfg.bucket)}/${key.split("/").map(encodeRfc3986).join("/")}`); const headers = signAwsRequest(method, url, body, extraHeaders); return fetch(url, { method, headers, body: method === "GET" || method === "HEAD" ? undefined : body }); }
+function hmac(key: crypto.BinaryLike, value: string) { return crypto.createHmac("sha256", key).update(value).digest(); }
+function sha256(value: string | Buffer) { return crypto.createHash("sha256").update(value).digest("hex"); }
+function encodeKey(key: string) { return key.split("/").map(encodeURIComponent).join("/"); }
+function cleanEtag(value: string | null) { return value?.replace(/^W\//, "") || undefined; }
+
+export class ObjectJsonStorage implements JsonStorage {
+  driver: JsonStorageDriver = "object";
+  private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
+  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) {
+    const cfg = objectConfig();
+    const key = this.key(relativePath);
+    const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(key)}`);
+    const payloadHash = sha256(body ?? "");
+    const attempts = Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
+    const timeoutMs = Math.max(5_000, Number(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS || 30_000));
+    let lastError: unknown;
+
+    for (let attempt = 0; attempt < attempts; attempt++) {
+      const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
+      const date = amzDate.slice(0, 8);
+      const headers: Record<string, string> = { host: url.host, "x-amz-content-sha256": payloadHash, "x-amz-date": amzDate, ...extraHeaders };
+      if (body !== undefined && !Object.keys(headers).some((header) => header.toLowerCase() === "content-type")) headers["content-type"] = "application/json; charset=utf-8";
+      const signedHeaders = Object.keys(headers).map((header) => header.toLowerCase()).sort().join(";");
+      const canonicalHeaders = Object.keys(headers).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())).map((header) => `${header.toLowerCase()}:${headers[header].trim()}\n`).join("");
+      const canonicalRequest = [method, url.pathname, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
+      const scope = `${date}/${cfg.region}/s3/aws4_request`;
+      const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonicalRequest)].join("\n");
+      const signingKey = hmac(hmac(hmac(hmac(`AWS4${cfg.secretAccessKey}`, date), cfg.region), "s3"), "aws4_request");
+      headers.authorization = `AWS4-HMAC-SHA256 Credential=${cfg.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex")}`;
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      let response: Response;
+      try {
+        response = await fetch(url, { method, headers, body: body as any, signal: controller.signal });
+      } catch (error) {
+        lastError = error;
+        if (attempt + 1 >= attempts) break;
+        await sleep(Math.min(5_000, 250 * 2 ** attempt));
+        continue;
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      if (response.ok || response.status === 404 || response.status === 412 || response.status === 409) return response;
+      if (!TRANSIENT_STATUS.has(response.status)) throw new Error(`object_storage_${method}_${response.status}`);
+      lastError = new Error(`object_storage_${method}_${response.status}`);
+      if (response.body) await response.body.cancel().catch(() => undefined);
+      if (attempt + 1 < attempts) await sleep(Math.min(5_000, 250 * 2 ** attempt));
+    }
+
+    const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
+    throw new Error(`object_storage_${method}_unreachable:${detail}`);
+  }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: await res.json() as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
   async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
