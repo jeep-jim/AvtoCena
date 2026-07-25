@@ -5,8 +5,23 @@ on:
     paths:
       - ".github/workflows/vehicle-knowledge-sync.yml"
       - "apps/web/lib/catalog/vehicle-knowledge.ts"
+      - "apps/web/lib/catalog/drom-vehicle-knowledge.ts"
       - "apps/web/lib/replace-chunked-data.ts"
       - "scripts/catalog-sync-vehicle-models.mjs"
+      - "scripts/catalog-enrich-drom-vehicle-variants.mjs"
+      - "scripts/catalog-build-vehicle-variants.mjs"
+      - "data/catalog/vehicle-knowledge/**"
+      - "package.json"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/vehicle-knowledge-sync.yml"
+      - "apps/web/lib/catalog/vehicle-knowledge.ts"
+      - "apps/web/lib/catalog/drom-vehicle-knowledge.ts"
+      - "apps/web/lib/replace-chunked-data.ts"
+      - "scripts/catalog-sync-vehicle-models.mjs"
+      - "scripts/catalog-enrich-drom-vehicle-variants.mjs"
       - "scripts/catalog-build-vehicle-variants.mjs"
       - "data/catalog/vehicle-knowledge/**"
       - "package.json"
@@ -129,7 +144,7 @@ jobs:
   sync-production-json:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     concurrency:
       group: vehicle-knowledge-production-json
       cancel-in-progress: false
@@ -143,6 +158,8 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 1990
       VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
+      DROM_KNOWLEDGE_LIMIT: 75
+      DROM_KNOWLEDGE_DELAY_MS: 1300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -158,7 +175,10 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
       - name: Synchronize canonical makes and models
         run: npm run catalog:sync-vehicle-models
-      - name: Build generations, variants and representative horsepower
+      - name: Enrich a controlled batch from Drom catalog
+        continue-on-error: true
+        run: npm run catalog:enrich-drom-variants
+      - name: Build variants from verified live offers
         run: npm run catalog:build-vehicle-variants
-      - name: Validate canonical model search
-        run: node --import tsx --test tests/vehicle-knowledge.test.ts
+      - name: Validate canonical model and Drom parsing
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/drom-vehicle-knowledge.test.ts
