@@ -7,6 +7,8 @@ const DISALLOWED_GENERIC_SOURCES = new Set(["dubicars_uae", "dubicars_clean", "a
 const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
   europe: new Set(["otomoto_europe_exact"]),
   uae: new Set(["dubicars_uae_exact"]),
+  georgia: new Set(["myauto_georgia_exact"]),
+  kyrgyzstan: new Set(["mashina_kyrgyzstan_exact"]),
 };
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
 
@@ -54,6 +56,12 @@ function hasPlausiblePrice(offer: VehicleOffer) {
   return true;
 }
 
+function hasReadyCalculation(offer: VehicleOffer) {
+  if (!["ready", "auction_start"].includes(String(offer.calculationStatus || ""))) return false;
+  const customs = offer.calculationSnapshot?.customs;
+  return !customs || customs.status === "ready";
+}
+
 function hasCompleteOtomotoDetails(offer: VehicleOffer) {
   if (offer.sourceId !== "otomoto_europe_exact") return true;
   const fuel = clean(offer.fuel).toLowerCase();
@@ -89,7 +97,7 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
-  if (!hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
+  if (!hasReadyCalculation(offer) || !hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
 }
