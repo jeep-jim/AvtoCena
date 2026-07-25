@@ -10,7 +10,7 @@ test("extracts structured peak kW without treating it as 30-minute power", () =>
   });
 
   assert.equal(normalized.powerKw, 150);
-  assert.equal(normalized.powerHp, 204);
+  assert.equal(normalized.powerHp, 203.94);
   assert.equal(normalized.power30MinKw, undefined);
   assert.equal(normalized.utilizationPowerKw, undefined);
 });
@@ -70,7 +70,7 @@ test("extracts exact 30-minute power from source text", () => {
 
 test("extracts Russian, Chinese and Georgian power units", () => {
   assert.equal(normalizeVehicleOfferSpecs({ trim: "Мощность 190 л.с." }).powerHp, 190);
-  assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "最大功率 150 kW" } } }).powerHp, 204);
+  assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "最大功率 150 kW" } } }).powerHp, 203.94);
   assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "სიმძლავრე 190 ცხ.ძ." } } }).powerHp, 190);
 });
 
