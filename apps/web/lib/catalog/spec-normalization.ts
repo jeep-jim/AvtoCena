@@ -15,7 +15,10 @@ function rawText(value: unknown, depth = 0): string {
 
 function primaryText(offer: Partial<VehicleOffer>) {
   return [offer.make, offer.model, offer.generation, offer.trim, offer.engineType, offer.fuel, offer.transmission, offer.drive, offer.bodyType]
-    .filter(Boolean).join(" ").replace(/\s+/g, " ").toLowerCase();
+    .filter(Boolean)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
 }
 
 function allText(offer: Partial<VehicleOffer>) {
@@ -24,7 +27,9 @@ function allText(offer: Partial<VehicleOffer>) {
 
 function reasonable(value: unknown, min: number, max: number) {
   const number = Number(value);
-  return Number.isFinite(number) && number >= min && number <= max ? Math.round(number * 100) / 100 : undefined;
+  return Number.isFinite(number) && number >= min && number <= max
+    ? Math.round(number * 100) / 100
+    : undefined;
 }
 
 function normalizedKey(value: string) {
@@ -58,6 +63,7 @@ function findStructuredNumber(value: unknown, keys: string[], depth = 0): number
     }
     return undefined;
   }
+
   const wanted = new Set(keys.map(normalizedKey));
   for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
     if (!wanted.has(normalizedKey(key))) continue;
@@ -80,6 +86,7 @@ function findStructuredNumbers(value: unknown, keys: string[], depth = 0): numbe
     }
     return [];
   }
+
   const wanted = new Set(keys.map(normalizedKey));
   for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
     if (!wanted.has(normalizedKey(key))) continue;
@@ -143,16 +150,16 @@ function inferEngineCc(text: string) {
   const cc = text.match(/\b([3-9]\d{2}|[1-9]\d{3}|10\s?000)\s*(?:cc|cm3|cm³|см3|см³|куб\.?\s*см)\b/i);
   if (cc) return reasonable(cc[1].replace(/\s/g, ""), 300, 10_000);
   const liters = text.match(/(?:^|\s)([0-9](?:[.,][0-9]){1,2})\s*(?:l|л|литр)/i);
-  return liters ? reasonable(Number(liters[1].replace(",", ".")) * 1000, 300, 10_000) : undefined;
+  return liters ? reasonable(Number(liters[1].replace(",", ".")) * 1_000, 300, 10_000) : undefined;
 }
 
 function inferPowerHp(text: string) {
   const hp = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*(?:hp|ps|bhp|cv|ch|л\.?\s*с\.?|лс|马力|匹|마력|ცხ\.?\s*ძ\.?)\b/i);
-  if (hp) return reasonable(hp[1], 20, 2500);
+  if (hp) return reasonable(hp[1], 20, 2_500);
   const georgian = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*ცხენის\s+ძალა/i);
-  if (georgian) return reasonable(georgian[1], 20, 2500);
+  if (georgian) return reasonable(georgian[1], 20, 2_500);
   const kw = text.match(/\b([1-9]\d{1,3})\s*(?:kw|квт|კვტ|千瓦|킬로와트)\b/i);
-  return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2500) : undefined;
+  return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2_500) : undefined;
 }
 
 function structuredPowerHp(offer: Partial<VehicleOffer>) {
@@ -160,13 +167,13 @@ function structuredPowerHp(offer: Partial<VehicleOffer>) {
   const hp = findStructuredNumber(raw, [
     "powerHp", "power_hp", "horsePower", "horse_power", "horsepower", "enginePowerHp", "maxPowerHp", "hp", "ps", "cv",
   ]);
-  if (reasonable(hp, 20, 2500)) return reasonable(hp, 20, 2500);
+  if (reasonable(hp, 20, 2_500)) return reasonable(hp, 20, 2_500);
   const kw = findStructuredNumber(raw, [
     "powerKw", "power_kw", "enginePowerKw", "engine_power_kw", "motorPowerKw", "maxPowerKw", "kw",
   ]);
-  if (reasonable(kw, 10, 2000)) return reasonable(Number(kw) * 1.35962, 20, 2500);
+  if (reasonable(kw, 10, 2_000)) return reasonable(Number(kw) * 1.35962, 20, 2_500);
   const generic = findStructuredNumber(raw, ["power", "enginePower", "maxPower"]);
-  return reasonable(generic, 20, 2500);
+  return reasonable(generic, 20, 2_500);
 }
 
 function structuredEngineCc(offer: Partial<VehicleOffer>) {
@@ -176,7 +183,7 @@ function structuredEngineCc(offer: Partial<VehicleOffer>) {
   ]);
   if (reasonable(cc, 300, 10_000)) return reasonable(cc, 300, 10_000);
   const liters = findStructuredNumber(raw, ["engineLiters", "engine_liters", "engineVolume", "engine_volume", "volumeLiters"]);
-  return liters && liters <= 10 ? reasonable(liters * 1000, 300, 10_000) : undefined;
+  return liters && liters <= 10 ? reasonable(liters * 1_000, 300, 10_000) : undefined;
 }
 
 const POWER_30_MIN_TOTAL_KEYS = [
@@ -190,13 +197,16 @@ const POWER_30_MIN_MOTOR_KEYS = [
 
 function inferThirtyMinutePowers(text: string) {
   const values: number[] = [];
+  const label = String.raw`(?:(?:maximum\s+)?30[\s-]?(?:minute|min)(?:\s+power)?|30\s*мин(?:ут\w*)?(?:\s+мощност\w*)?|最大\s*30\s*分钟(?:功率)?|30\s*分钟(?:最大)?功率|30\s*분(?:\s*최대)?(?:\s*출력)?)`;
+  const unit = String.raw`(?:kw|квт|კვტ|千瓦|킬로와트)`;
   const patterns = [
-    /(?:maximum\s+)?30[\s-]?(?:minute|min)|30\s*мин(?:ут\w*)?|最大\s*30\s*分钟|30\s*分钟(?:最大)?|30\s*분(?:\s*최대)?[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|კვტ|千瓦|킬로와트)/gi,
-    /([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|კვტ|千瓦|킬로와트)[^.;|]{0,45}(?:30[\s-]?(?:minute|min)|30\s*мин(?:ут\w*)?|30\s*分钟|30\s*분)/gi,
+    new RegExp(`${label}[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\\s*${unit}`, "gi"),
+    new RegExp(`([0-9]+(?:[.,][0-9]+)?)\\s*${unit}[^.;|]{0,45}${label}`, "gi"),
   ];
+
   for (const pattern of patterns) {
     for (const match of text.matchAll(pattern)) {
-      const parsed = reasonable(Number(match[1].replace(",", ".")), 1, 2_000);
+      const parsed = reasonable(Number(String(match[1]).replace(",", ".")), 1, 2_000);
       if (parsed !== undefined) values.push(parsed);
     }
     if (values.length) break;
@@ -205,30 +215,71 @@ function inferThirtyMinutePowers(text: string) {
 }
 
 function exactThirtyMinutePowers(offer: Partial<VehicleOffer>, fullText: string) {
-  const explicitMotors = (offer.power30MinKwByMotor || []).map((value) => reasonable(value, 1, 2_000)).filter((value): value is number => value !== undefined);
-  if (explicitMotors.length) return { values: explicitMotors, confidence: "documented" as PowerDataConfidence, source: offer.powerDataSource || "offer.power30MinKwByMotor" };
+  const explicitMotors = (offer.power30MinKwByMotor || [])
+    .map((value) => reasonable(value, 1, 2_000))
+    .filter((value): value is number => value !== undefined);
+  if (explicitMotors.length) {
+    return {
+      values: explicitMotors,
+      confidence: "documented" as PowerDataConfidence,
+      source: offer.powerDataSource || "offer.power30MinKwByMotor",
+    };
+  }
+
   const explicitTotal = reasonable(offer.power30MinKw, 1, 2_000);
-  if (explicitTotal !== undefined) return { values: [explicitTotal], confidence: "documented" as PowerDataConfidence, source: offer.powerDataSource || "offer.power30MinKw" };
+  if (explicitTotal !== undefined) {
+    return {
+      values: [explicitTotal],
+      confidence: "documented" as PowerDataConfidence,
+      source: offer.powerDataSource || "offer.power30MinKw",
+    };
+  }
 
   const structuredMotors = findStructuredNumbers(offer.operational?.raw, POWER_30_MIN_MOTOR_KEYS);
-  if (structuredMotors.length) return { values: structuredMotors, confidence: "source_exact" as PowerDataConfidence, source: "source:30-minute-power-by-motor" };
-  const structuredTotal = findStructuredNumber(offer.operational?.raw, POWER_30_MIN_TOTAL_KEYS);
-  const normalizedTotal = reasonable(structuredTotal, 1, 2_000);
-  if (normalizedTotal !== undefined) return { values: [normalizedTotal], confidence: "source_exact" as PowerDataConfidence, source: "source:30-minute-power" };
+  if (structuredMotors.length) {
+    return {
+      values: structuredMotors,
+      confidence: "source_exact" as PowerDataConfidence,
+      source: "source:30-minute-power-by-motor",
+    };
+  }
+
+  const structuredTotal = reasonable(
+    findStructuredNumber(offer.operational?.raw, POWER_30_MIN_TOTAL_KEYS),
+    1,
+    2_000,
+  );
+  if (structuredTotal !== undefined) {
+    return {
+      values: [structuredTotal],
+      confidence: "source_exact" as PowerDataConfidence,
+      source: "source:30-minute-power",
+    };
+  }
 
   const fromText = inferThirtyMinutePowers(fullText);
-  if (fromText.length) return { values: fromText, confidence: "source_exact" as PowerDataConfidence, source: "source-text:30-minute-power" };
-  return { values: [] as number[], confidence: offer.powerDataConfidence, source: offer.powerDataSource };
+  if (fromText.length) {
+    return {
+      values: fromText,
+      confidence: "source_exact" as PowerDataConfidence,
+      source: "source-text:30-minute-power",
+    };
+  }
+
+  return {
+    values: [] as number[],
+    confidence: offer.powerDataConfidence,
+    source: offer.powerDataSource,
+  };
 }
 
 function exactIcePowerKw(offer: Partial<VehicleOffer>, fullText: string, kind: PowertrainKind, genericPowerKw?: number) {
   const explicit = reasonable(offer.icePowerKw, 5, 2_000);
   if (explicit !== undefined) return explicit;
-  const structured = findStructuredNumber(offer.operational?.raw, [
+  const structured = reasonable(findStructuredNumber(offer.operational?.raw, [
     "icePowerKw", "ice_power_kw", "combustionEnginePowerKw", "engineOnlyPowerKw", "internalCombustionPowerKw", "发动机功率kw",
-  ]);
-  const normalized = reasonable(structured, 5, 2_000);
-  if (normalized !== undefined) return normalized;
+  ]), 5, 2_000);
+  if (structured !== undefined) return structured;
   const match = fullText.match(/(?:ice|combustion engine|internal combustion|двс|двигател[ья]\s+внутреннего\s+сгорания|发动机)[^0-9]{0,45}([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|千瓦)/i);
   const fromText = match ? reasonable(Number(match[1].replace(",", ".")), 5, 2_000) : undefined;
   if (fromText !== undefined) return fromText;
@@ -245,13 +296,24 @@ function normalizedCurrency(offer: Partial<VehicleOffer>) {
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
   const primary = primaryText(offer);
   const full = allText(offer);
-  const engineCc = reasonable(offer.engineCc, 300, 10_000) || structuredEngineCc(offer) || inferEngineCc(primary) || inferEngineCc(full);
-  const powerHp = reasonable(offer.powerHp, 20, 2500) || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
-  const explicitPowerKw = reasonable(offer.powerKw, 10, 2000);
+  const engineCc = reasonable(offer.engineCc, 300, 10_000)
+    || structuredEngineCc(offer)
+    || inferEngineCc(primary)
+    || inferEngineCc(full);
+  const powerHp = reasonable(offer.powerHp, 20, 2_500)
+    || structuredPowerHp(offer)
+    || inferPowerHp(primary)
+    || inferPowerHp(full);
+  const explicitPowerKw = reasonable(offer.powerKw, 10, 2_000);
   const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
-  let fuel = inferFuel(primary) || offer.fuel || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
+
+  let fuel = inferFuel(primary)
+    || offer.fuel
+    || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
   const strongElectric = /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
-  if (engineCc && fuel === "electric" && !strongElectric) fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
+  if (engineCc && fuel === "electric" && !strongElectric) {
+    fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
+  }
   if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
 
   const powertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown"
