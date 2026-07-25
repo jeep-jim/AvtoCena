@@ -63,6 +63,7 @@ function envAmount(market: CatalogMarket, field: string, fallback: number) {
 }
 
 function present(value: unknown) {
+  if (value === null || value === undefined || value === "") return false;
   const number = Number(value);
   return Number.isFinite(number) && number >= 0;
 }
