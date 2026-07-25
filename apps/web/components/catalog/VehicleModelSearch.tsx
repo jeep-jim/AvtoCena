@@ -23,12 +23,16 @@ export function VehicleModelSearch({
   make,
   placeholder = "Любая модель",
   onMakeChange,
+  onValueChange,
+  onSubmit,
   className = "",
 }: {
   value: string;
   make: string;
   placeholder?: string;
   onMakeChange?: (make: string) => void;
+  onValueChange?: (model: string) => void;
+  onSubmit?: () => void;
   className?: string;
 }) {
   const [query, setQuery] = useState(value || "");
@@ -67,7 +71,7 @@ export function VehicleModelSearch({
     const timer = window.setTimeout(async () => {
       setLoading(true);
       try {
-        const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "30" });
+        const params = new URLSearchParams({ q: clean(query), make: clean(make), limit: "50" });
         const response = await fetch(`/api/catalog/models?${params.toString()}`, { cache: "no-store", signal: controller.signal });
         const payload = response.ok ? await response.json() : { items: [] };
         setItems(Array.isArray(payload?.items) ? payload.items : []);
@@ -91,13 +95,17 @@ export function VehicleModelSearch({
   const choose = (item: ModelSuggestion, submit = false) => {
     setQuery(item.model);
     setOpen(false);
+    onValueChange?.(item.model);
     onMakeChange?.(item.make);
     const form = root.current?.closest("form");
     const modelInput = input.current;
     const makeInput = form?.querySelector<HTMLInputElement>('input[name="make"]');
     if (modelInput) modelInput.value = item.model;
     if (makeInput) makeInput.value = item.make;
-    if (submit && form) window.requestAnimationFrame(() => form.requestSubmit());
+    if (submit) {
+      if (onSubmit) window.requestAnimationFrame(onSubmit);
+      else if (form) window.requestAnimationFrame(() => form.requestSubmit());
+    }
   };
 
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
@@ -112,6 +120,7 @@ export function VehicleModelSearch({
       onFocus={() => setOpen(true)}
       onChange={(event) => {
         setQuery(event.target.value);
+        onValueChange?.(event.target.value);
         setOpen(true);
       }}
       onKeyDown={(event) => {

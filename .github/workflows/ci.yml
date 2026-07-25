@@ -10,7 +10,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,10 +24,14 @@ jobs:
         run: node --import tsx --test tests/catalog-power-normalization.test.ts
       - name: Public 30-minute power display tests
         run: node --import tsx --test tests/catalog-power-display.test.ts
+      - name: Estimated EV publication tests
+        run: node --import tsx --test tests/catalog-estimated-power-publication.test.ts
       - name: Vehicle knowledge and model search tests
         run: node --import tsx --test tests/vehicle-knowledge.test.ts
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
+      - name: Validate catalog automation scripts
+        run: node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs
       - name: Web typecheck diagnostics
         id: web_typecheck
         continue-on-error: true

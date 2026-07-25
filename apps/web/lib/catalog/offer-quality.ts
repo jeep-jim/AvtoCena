@@ -66,7 +66,11 @@ function hasRequiredPower(offer: VehicleOffer) {
   if (!(Number(offer.powerHp || 0) > 0)) return false;
   const kind = String(offer.powertrainKind || "");
   if (["electric", "series_hybrid", "other_hybrid"].includes(kind)) {
-    return Number(offer.power30MinKw || 0) > 0 && Number(offer.utilizationPowerKw || 0) > 0;
+    const exact = Number(offer.power30MinKw || 0) > 0 && Number(offer.utilizationPowerKw || 0) > 0;
+    const explicitPreview = offer.calculationStatus === "estimated"
+      && offer.calculationSnapshot?.certified30MinutePowerMissing === true
+      && Number(offer.utilizationPowerKw || 0) > 0;
+    return exact || explicitPreview;
   }
   return true;
 }
