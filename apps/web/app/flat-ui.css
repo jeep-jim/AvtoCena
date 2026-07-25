@@ -5,6 +5,9 @@ html[data-theme="light"] .ac-page-copy{--ac-surface:#f7f8fb;--ac-surface-2:#e6ea
 /* Дилерский лендинг доступен из подвала, но не показывается покупателю в верхнем меню. */
 .ac-public-header nav[aria-label="Основная навигация"] a[href="/dealers"]{display:none!important}
 
+/* Красные действия всегда сохраняют белый текст в обеих темах. */
+.dealer-primary-button,.dealer-primary-button *{color:#fff!important;-webkit-text-fill-color:#fff!important}
+
 /* CRM: полноценные две темы. */
 .crm-root{background:#07080d;color:#fff}
 html[data-theme="light"] .crm-root{background:#edf1f6!important;color:#171b23!important}
@@ -12,7 +15,7 @@ html[data-theme="light"] .crm-root .glass{background:#f8f9fb!important;color:#17
 html[data-theme="light"] .crm-root [class*="text-white/"]{color:#5d687a!important}
 html[data-theme="light"] .crm-root h1,html[data-theme="light"] .crm-root h2,html[data-theme="light"] .crm-root h3,html[data-theme="light"] .crm-root .font-black{color:#171b23}
 html[data-theme="light"] .crm-root nav a:not([aria-current="page"]),html[data-theme="light"] .crm-root header form button,html[data-theme="light"] .crm-root .crm-theme-toggle,html[data-theme="light"] .crm-root .crm-user-chip{background:#e2e7ee!important;border-color:transparent!important;color:#374153!important}
-html[data-theme="light"] .crm-root .avto-button,html[data-theme="light"] .crm-root nav a[aria-current="page"],html[data-theme="light"] .crm-root button[class*="bg-red-"]{color:#fff!important}
+html[data-theme="light"] .crm-root .avto-button,html[data-theme="light"] .crm-root nav a[aria-current="page"],html[data-theme="light"] .crm-root button[class*="bg-red-"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
 html[data-theme="light"] .crm-root input,html[data-theme="light"] .crm-root select,html[data-theme="light"] .crm-root textarea{background:#e6eaf1!important;color:#171b23!important;border-color:rgba(35,42,55,.12)!important}
 html[data-theme="light"] .crm-root input::placeholder,html[data-theme="light"] .crm-root textarea::placeholder{color:#788397!important}
 html[data-theme="light"] .crm-root details>summary{color:#171b23!important}
@@ -24,6 +27,14 @@ html[data-theme="light"] .crm-root [class*="text-amber-"]{color:#8a5a00!importan
 html[data-theme="light"] .crm-root [class*="bg-amber-"]{background:#fff4d8!important}
 html[data-theme="light"] .crm-root [class*="bg-red-500/15"],html[data-theme="light"] .crm-root [class*="bg-red-500/20"]{background:#f8dfe2!important}
 html[data-theme="light"] .crm-root [class*="text-red-300"],html[data-theme="light"] .crm-root [class*="text-red-400"]{color:#c91e2a!important}
+
+/* Статусы заявок — насыщенные и читаемые. */
+.dealer-status-chip,.demo-status{border:1px solid transparent;letter-spacing:.01em}
+.dealer-status-chip--new,.demo-status--new{background:rgba(34,197,94,.2)!important;color:#69f0a0!important;border-color:rgba(74,222,128,.3)!important}
+.dealer-status-chip--work,.demo-status--work{background:rgba(234,179,8,.22)!important;color:#fde047!important;border-color:rgba(250,204,21,.32)!important}
+.dealer-status-chip--ready,.demo-status--ready{background:rgba(14,165,233,.22)!important;color:#7dd3fc!important;border-color:rgba(56,189,248,.32)!important}
+.dealer-status-chip--deal,.demo-status--deal{background:rgba(239,68,68,.22)!important;color:#fca5a5!important;border-color:rgba(248,113,113,.32)!important}
+.dealer-status-chip--late,.demo-status--late{background:rgba(249,115,22,.22)!important;color:#fdba74!important;border-color:rgba(251,146,60,.32)!important}
 
 /* Лендинг дилеров: все тёмные демонстрационные блоки получают читаемую светлую версию. */
 html[data-theme="light"] .ac-dealers-page{background:#eef2f7!important;color:#171b23!important}
@@ -38,8 +49,25 @@ html[data-theme="light"] .ac-dealers-page input::placeholder,html[data-theme="li
 html[data-theme="light"] .ac-dealers-page [class*="bg-white/["]{background:#e9edf3!important}
 html[data-theme="light"] .ac-dealers-page [class*="bg-black/25"]{background:#eef1f5!important}
 html[data-theme="light"] .ac-dealers-page [class*="text-emerald-"]{color:#137b4b!important}
-html[data-theme="light"] .ac-dealers-page .dealer-hero-preview{background:#fff!important;color:#171b23!important}
-html[data-theme="light"] .ac-dealers-page .dealer-hero-preview a[href="/dealers/demo"]{background:#171b23!important;color:#fff!important}
+html[data-theme="light"] .ac-dealers-page .dealer-hero-preview{background:#fff!important;color:#171b23!important;border-color:#dce3ec!important}
+html[data-theme="light"] .ac-dealers-page .dealer-metric-card{background:#e5eaf1!important;color:#171b23!important}
+html[data-theme="light"] .ac-dealers-page .dealer-application-card{background:#e1e7ef!important;color:#171b23!important;border:1px solid #d3dbe6!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card{background:linear-gradient(145deg,#fff1f2 0%,#ffffff 52%,#f3f6fa 100%)!important;color:#171b23!important;border-color:#f3a4aa!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card [class*="text-white/"]{color:#536176!important}
+html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-note{background:#e6ebf2!important;color:#253044!important}
+
+/* Красивый знак проверенного профиля. */
+.dealer-verified-icon{background:#ff353d!important;color:#ff353d!important;border:4px solid rgba(255,255,255,.92)!important}
+html[data-theme="light"] .dealer-verified-icon{border-color:#fff!important}
+
+/* Светлая демо-CRM: карточки, статусы и уведомления не бледнеют. */
+html[data-theme="light"] .dealer-demo-shell .demo-metric-card{border:1px solid #dbe2eb!important}
+html[data-theme="light"] .dealer-status-chip--new,html[data-theme="light"] .demo-status--new{background:#c9f2da!important;color:#08683a!important;border-color:#8bd8ad!important}
+html[data-theme="light"] .dealer-status-chip--work,html[data-theme="light"] .demo-status--work{background:#fff0b8!important;color:#795500!important;border-color:#e8cc65!important}
+html[data-theme="light"] .dealer-status-chip--ready,html[data-theme="light"] .demo-status--ready{background:#cfeeff!important;color:#075f8c!important;border-color:#86cbea!important}
+html[data-theme="light"] .dealer-status-chip--deal,html[data-theme="light"] .demo-status--deal{background:#ffd6d9!important;color:#a41621!important;border-color:#efa1a8!important}
+html[data-theme="light"] .dealer-status-chip--late,html[data-theme="light"] .demo-status--late{background:#ffe0c5!important;color:#91420b!important;border-color:#efae78!important}
+html[data-theme="light"] .dealer-demo-toast{background:#fff!important;color:#171b23!important;border:1px solid #d9e0e9!important}
 
 .ac-brand-rail{background:var(--ac-surface,#12151d)}
 html[data-theme="light"] .ac-brand-rail{background:#f7f8fb}
