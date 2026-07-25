@@ -11,6 +11,8 @@ type BrandModelLink = {
   aliases?: string[];
 };
 
+const PREVIEW_LIMIT = 12;
+
 function searchable(value: unknown) {
   return String(value || "")
     .toLocaleLowerCase("ru-RU")
@@ -38,16 +40,23 @@ export function BrandModelDirectory({
   const [expanded, setExpanded] = useState(false);
   const normalizedQuery = searchable(query);
 
-  const liveModels = useMemo(() => models.filter((model) => model.count > 0), [models]);
+  const liveModels = useMemo(
+    () => models.filter((model) => model.count > 0),
+    [models],
+  );
+
   const filtered = useMemo(() => {
-    if (!normalizedQuery) return expanded ? models : liveModels;
+    if (!normalizedQuery) {
+      const priority = liveModels.length ? liveModels : models;
+      return expanded ? models : priority.slice(0, PREVIEW_LIMIT);
+    }
     return models.filter((model) => {
       const values = [model.model, ...(model.aliases || [])];
       return values.some((value) => searchable(value).includes(normalizedQuery));
     });
   }, [expanded, liveModels, models, normalizedQuery]);
 
-  const hiddenCount = Math.max(0, models.length - liveModels.length);
+  const canExpand = !normalizedQuery && models.length > filtered.length;
 
   return <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
     <div className="flex flex-wrap items-end justify-between gap-3">
@@ -55,7 +64,13 @@ export function BrandModelDirectory({
         <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Модельный ряд</div>
         <h2 className="mt-1 text-2xl font-black md:text-4xl">Модели {brand}</h2>
       </div>
-      <span className="text-sm font-bold text-[var(--ac-muted)]">{models.length} моделей</span>
+      {!normalizedQuery && (canExpand || expanded) ? <button
+        type="button"
+        onClick={() => setExpanded((value) => !value)}
+        className="ac-market-all-link shrink-0 text-sm font-black"
+      >
+        {expanded ? "Свернуть ↑" : "Все →"}
+      </button> : null}
     </div>
 
     <label className="mt-5 flex h-12 w-full max-w-xl items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35">
@@ -78,17 +93,8 @@ export function BrandModelDirectory({
         className="group flex min-h-11 items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-3 py-2.5 text-sm font-black transition hover:bg-[var(--ac-surface-3)] hover:text-red-500"
       >
         <span className="min-w-0 truncate">{model.model}</span>
-        <span className="shrink-0 text-[10px] font-black text-[var(--ac-muted)]">{model.count || "—"}</span>
+        {model.count > 0 ? <span className="shrink-0 text-[10px] font-black text-[var(--ac-muted)]">{model.count}</span> : null}
       </Link>)}
-    </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-5 text-sm font-bold text-[var(--ac-muted)]">По вашему запросу моделей не найдено.</p>}
-
-    {!normalizedQuery && hiddenCount > 0 ? <button
-      type="button"
-      onClick={() => setExpanded((value) => !value)}
-      className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)] transition hover:bg-[var(--ac-surface-3)]"
-    >
-      <span>{expanded ? "Показать только модели в наличии" : `Показать все модели (${models.length})`}</span>
-      <span aria-hidden="true" className={`transition ${expanded ? "rotate-180" : ""}`}>⌄</span>
-    </button> : null}
+    </div> : normalizedQuery ? <p className="mt-5 text-sm font-bold text-[var(--ac-muted)]">Такой модели в списке нет.</p> : null}
   </section>;
 }
