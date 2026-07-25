@@ -1,0 +1,9 @@
+.scope {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .scope :global(.ac-budget-help) {
+    display: none !important;
+  }
+}

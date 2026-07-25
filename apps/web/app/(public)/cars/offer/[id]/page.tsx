@@ -10,11 +10,12 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { getOffer, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
-type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body";
+type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
 
 function SpecIcon({ name }: { name: SpecIconName }) {
   const common = {
@@ -33,6 +34,8 @@ function SpecIcon({ name }: { name: SpecIconName }) {
     transmission: <><circle cx="7" cy="5" r="2" /><circle cx="17" cy="5" r="2" /><circle cx="7" cy="19" r="2" /><circle cx="17" cy="19" r="2" /><path d="M7 7v10M17 7v10M7 12h10" /></>,
     drive: <><path d="M8.2 6.5h7.6M12 6.5v11M8.2 17.5h7.6" /><rect x="4.2" y="2.5" width="4" height="7" rx="1.2" transform="rotate(27 6.2 6)" /><rect x="15.8" y="2.5" width="4" height="7" rx="1.2" transform="rotate(27 17.8 6)" /><rect x="4.2" y="14" width="4" height="7" rx="1.2" /><rect x="15.8" y="14" width="4" height="7" rx="1.2" /></>,
     body: <><circle cx="7" cy="17" r="2.5" /><circle cx="17" cy="17" r="2.5" /><path d="M4.5 17H3v-4l2-1 2.5-5h8.5l3 5 2 1v4h-1.5M9.5 17h5" /><path d="M8 9h7" /></>,
+    electricMotor: <><rect x="3.5" y="6" width="15" height="12" rx="3" /><path d="M18.5 10h2v4h-2M7.5 10h6M7.5 14h4" /><path d="m13 8.6-3.3 4.2h2.2l-.6 3 3.8-4.8h-2.2z" fill="currentColor" stroke="none" /></>,
+    thirtyMinute: <><rect x="3.5" y="6" width="12" height="12" rx="2.5" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" /><path d="M18 15.8V18l1.4 1" /></>,
   };
   return <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-[var(--ac-text)] opacity-50" aria-hidden="true" {...common}>{paths[name]}</svg>;
 }
@@ -48,8 +51,15 @@ function driveValue(value: unknown) {
   return /привод/i.test(normalized) ? normalized : `${normalized} привод`;
 }
 
-function SpecTile({ label, value, icon }: { label: string; value: string; icon: SpecIconName }) {
-  return <div aria-label={`${label}: ${value}`} title={label} className="ac-offer-spec-tile flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5"><SpecIcon name={icon} /><span className="min-w-0 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span></div>;
+function SpecTile({ label, value, icon, info }: { label: string; value: string; icon: SpecIconName; info?: string }) {
+  return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5">
+    <SpecIcon name={icon} />
+    <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
+    {info ? <details className="group relative z-30 ml-auto shrink-0">
+      <summary className="flex h-7 w-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/12 bg-white/10 text-xs font-black text-[var(--ac-text)] shadow-[inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-md transition hover:bg-white/15 [&::-webkit-details-marker]:hidden" aria-label={`Что означает ${label}`}>?</summary>
+      <div className="absolute right-0 top-9 z-50 w-[min(280px,75vw)] rounded-2xl border border-white/10 bg-[var(--ac-surface)] p-4 text-left text-xs font-semibold leading-5 text-[var(--ac-muted)] shadow-2xl">{info}</div>
+    </details> : null}
+  </div>;
 }
 
 function safeExternalUrl(value: unknown) {
@@ -99,13 +109,30 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
+  const powerDisplay = catalogPowerDisplay(raw);
+  const powertrainKind = String(raw.powertrainKind || "").toLowerCase();
+  const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
+  const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
+  const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "Мощность уточняется";
+  const thirtyMinuteInfo = powerDisplay?.estimated
+    ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
+    : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
 
-  const specs = [
+  const specs = isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
     { label: "Пробег", value: o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется", icon: "mileage" as const },
-    { label: "Двигатель", value: o.engineCc ? `${money(o.engineCc)} см³` : o.fuelLabel === "электро" ? "Электромотор" : "Двигатель уточняется", icon: "engine" as const },
+    { label: "Силовая установка", value: "Электромотор", icon: "electricMotor" as const },
+    { label: "Коробка", value: sentence(o.transmissionLabel) || "Коробка уточняется", icon: "transmission" as const },
+    { label: "Мощность", value: powerValue, icon: "power" as const },
+    { label: "30-минутная мощность", value: powerDisplay?.thirtyMinuteLabel || "30 мин: уточняется", icon: "thirtyMinute" as const, info: thirtyMinuteInfo },
+    { label: "Привод", value: driveValue(o.driveLabel), icon: "drive" as const },
+    { label: "Кузов", value: sentence(o.bodyLabel) || "Кузов уточняется", icon: "body" as const },
+  ] : [
+    { label: "Год", value: `${o.year} г.`, icon: "year" as const },
+    { label: "Пробег", value: o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется", icon: "mileage" as const },
+    { label: "Двигатель", value: o.engineCc ? `${money(o.engineCc)} см³` : "Двигатель уточняется", icon: "engine" as const },
     { label: "Топливо", value: sentence(o.fuelLabel) || "Топливо уточняется", icon: "fuel" as const },
-    { label: "Мощность", value: o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "Мощность уточняется", icon: "power" as const },
+    { label: "Мощность", value: powerValue, icon: "power" as const },
     { label: "Коробка", value: sentence(o.transmissionLabel) || "Коробка уточняется", icon: "transmission" as const },
     { label: "Привод", value: driveValue(o.driveLabel), icon: "drive" as const },
     { label: "Кузов", value: sentence(o.bodyLabel) || "Кузов уточняется", icon: "body" as const },
@@ -129,7 +156,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="grid min-w-0 grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
-            <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><div className="ac-offer-block-title text-base font-bold text-[var(--ac-text)]">Статус предложения</div><p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}. Наличие и финальную стоимость под ключ подтвердит менеджер.</p></div>
+            <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><div className="ac-offer-block-title text-base font-bold text-[var(--ac-text)]">Статус предложения</div><p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}. Возможность покупки и финальную стоимость под ключ подтвердит менеджер.</p></div>
             <div className="ac-offer-form mt-4 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-6 [&>form]:!grid-cols-1 [&>form]:!gap-3 [&>form]:!mt-0"><OfferLeadForm offerId={o.id} /></div>
           </aside>
         </div>
