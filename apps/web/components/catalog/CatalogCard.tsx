@@ -2,6 +2,7 @@ import Link from "next/link";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
+import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 
@@ -14,10 +15,15 @@ function EngineIcon({ dense = false, fuel = false }: { dense?: boolean; fuel?: b
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>;
 }
 
+function PowerIcon({ dense = false }: { dense?: boolean }) {
+  return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2.8 5.8 13h5.1l-.7 8.2L18.3 11h-5.1z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>;
+}
+
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
   const rankedImages = rankedCatalogImageUrls(normalizedOffer);
-  const o = { ...presentCatalogOffer(normalizedOffer), images: rankedImages };
+  const presented = presentCatalogOffer(normalizedOffer);
+  const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const snapshot = {
@@ -29,6 +35,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";
   const yearLabel = o.year ? `${o.year} г.` : "Год уточняется";
+  const estimated = o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated";
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
@@ -42,10 +49,11 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
           </div>
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
-          <PriceTrend offer={o} label={yearLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
-          <div className={`flex flex-nowrap overflow-hidden whitespace-nowrap font-bold text-white/58 ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
+          <PriceTrend offer={o} label={estimated ? `${yearLabel} · ориентир` : yearLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
+          <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc} /><span>{o.engineCc ? `${o.engineCc} см³` : o.fuelLabel}</span></span>
+            <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
           </div>
         </div>
       </Link>
