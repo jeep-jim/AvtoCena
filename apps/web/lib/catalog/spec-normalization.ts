@@ -1,4 +1,4 @@
-import type { VehicleOffer } from "./types";
+import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 
 function rawText(value: unknown, depth = 0): string {
   if (value == null || depth > 10) return "";
@@ -24,7 +24,7 @@ function allText(offer: Partial<VehicleOffer>) {
 
 function reasonable(value: unknown, min: number, max: number) {
   const number = Number(value);
-  return Number.isFinite(number) && number >= min && number <= max ? Math.round(number) : undefined;
+  return Number.isFinite(number) && number >= min && number <= max ? Math.round(number * 100) / 100 : undefined;
 }
 
 function normalizedKey(value: string) {
@@ -38,6 +38,15 @@ function scalarNumber(value: unknown) {
   if (!match) return undefined;
   const parsed = Number(match[0]);
   return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function scalarNumbers(value: unknown) {
+  if (Array.isArray(value)) return value.map(scalarNumber).filter((item): item is number => item !== undefined);
+  if (typeof value === "number") return Number.isFinite(value) ? [value] : [];
+  if (typeof value !== "string") return [];
+  return [...value.replace(/,/g, ".").matchAll(/-?\d+(?:\.\d+)?/g)]
+    .map((match) => Number(match[0]))
+    .filter(Number.isFinite);
 }
 
 function findStructuredNumber(value: unknown, keys: string[], depth = 0): number | undefined {
@@ -62,13 +71,43 @@ function findStructuredNumber(value: unknown, keys: string[], depth = 0): number
   return undefined;
 }
 
+function findStructuredNumbers(value: unknown, keys: string[], depth = 0): number[] {
+  if (value == null || depth > 10 || typeof value !== "object") return [];
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = findStructuredNumbers(item, keys, depth + 1);
+      if (found.length) return found;
+    }
+    return [];
+  }
+  const wanted = new Set(keys.map(normalizedKey));
+  for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+    if (!wanted.has(normalizedKey(key))) continue;
+    const parsed = scalarNumbers(item).filter((number) => number >= 1 && number <= 2_000);
+    if (parsed.length) return parsed;
+  }
+  for (const item of Object.values(value as Record<string, unknown>)) {
+    const found = findStructuredNumbers(item, keys, depth + 1);
+    if (found.length) return found;
+  }
+  return [];
+}
+
 function inferFuel(text: string) {
-  if (/phev|plug[ -]?in|hybrid|hev|mhev|reev|range extender|гибрид|混合动力|增程|하이브리드/.test(text)) return "hybrid";
+  if (/phev|plug[ -]?in|hybrid|hev|mhev|reev|erev|range extender|гибрид|混合动力|增程|하이브리드/.test(text)) return "hybrid";
   if (/diesel|tdi|crdi|d-4d|d4d|bluehdi|dci|hdi|дизел|柴油|디젤/.test(text)) return "diesel";
   if (/lpg|cng|gpl|газ/.test(text)) return "lpg";
   if (/petrol|gasoline|benzin|essence|gdi|mpi|tgdi|tsi|tfsi|бензин|汽油|가솔린/.test(text)) return "petrol";
   if (/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(text)) return "electric";
   return undefined;
+}
+
+function inferPowertrainKind(text: string, engineCc?: number): PowertrainKind {
+  if (/series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev)\b|последовательн\w*\s+гибрид|增程/.test(text)) return "series_hybrid";
+  if (/plug[ -]?in|\bphev\b|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|hybrid|混合动力|하이브리드/.test(text)) return "other_hybrid";
+  if (/battery[ -]?electric|pure[ -]?electric|\bbev\b|\bev\b|электромоб|纯电|전기차/.test(text) && !engineCc) return "electric";
+  if (engineCc || /petrol|gasoline|diesel|бензин|дизел|汽油|柴油|가솔린|디젤/.test(text)) return "combustion";
+  return "unknown";
 }
 
 function inferTransmission(text: string) {
@@ -112,7 +151,7 @@ function inferPowerHp(text: string) {
   if (hp) return reasonable(hp[1], 20, 2500);
   const georgian = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*ცხენის\s+ძალა/i);
   if (georgian) return reasonable(georgian[1], 20, 2500);
-  const kw = text.match(/\b([1-9]\d{1,3})\s*(?:kw|квт|квт\.|კვტ)\b/i);
+  const kw = text.match(/\b([1-9]\d{1,3})\s*(?:kw|квт|კვტ|千瓦|킬로와트)\b/i);
   return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2500) : undefined;
 }
 
@@ -140,6 +179,62 @@ function structuredEngineCc(offer: Partial<VehicleOffer>) {
   return liters && liters <= 10 ? reasonable(liters * 1000, 300, 10_000) : undefined;
 }
 
+const POWER_30_MIN_TOTAL_KEYS = [
+  "power30MinKw", "power_30_min_kw", "maximum30MinutePowerKw", "max30MinutePowerKw", "thirtyMinutePowerKw",
+  "electricMotor30MinPowerKw", "motor30MinPowerKw", "max30MinPower", "最大30分钟功率", "30分钟最大功率",
+];
+const POWER_30_MIN_MOTOR_KEYS = [
+  "power30MinKwByMotor", "power_30_min_kw_by_motor", "motor30MinPowersKw", "motors30MinutePowerKw",
+  "electricMotors30MinPowerKw", "tractionMotor30MinPowersKw", "驱动电机30分钟功率",
+];
+
+function inferThirtyMinutePowers(text: string) {
+  const values: number[] = [];
+  const patterns = [
+    /(?:maximum\s+)?30[\s-]?(?:minute|min)|30\s*мин(?:ут\w*)?|最大\s*30\s*分钟|30\s*分钟(?:最大)?|30\s*분(?:\s*최대)?[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|კვტ|千瓦|킬로와트)/gi,
+    /([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|კვტ|千瓦|킬로와트)[^.;|]{0,45}(?:30[\s-]?(?:minute|min)|30\s*мин(?:ут\w*)?|30\s*分钟|30\s*분)/gi,
+  ];
+  for (const pattern of patterns) {
+    for (const match of text.matchAll(pattern)) {
+      const parsed = reasonable(Number(match[1].replace(",", ".")), 1, 2_000);
+      if (parsed !== undefined) values.push(parsed);
+    }
+    if (values.length) break;
+  }
+  return values;
+}
+
+function exactThirtyMinutePowers(offer: Partial<VehicleOffer>, fullText: string) {
+  const explicitMotors = (offer.power30MinKwByMotor || []).map((value) => reasonable(value, 1, 2_000)).filter((value): value is number => value !== undefined);
+  if (explicitMotors.length) return { values: explicitMotors, confidence: "documented" as PowerDataConfidence, source: offer.powerDataSource || "offer.power30MinKwByMotor" };
+  const explicitTotal = reasonable(offer.power30MinKw, 1, 2_000);
+  if (explicitTotal !== undefined) return { values: [explicitTotal], confidence: "documented" as PowerDataConfidence, source: offer.powerDataSource || "offer.power30MinKw" };
+
+  const structuredMotors = findStructuredNumbers(offer.operational?.raw, POWER_30_MIN_MOTOR_KEYS);
+  if (structuredMotors.length) return { values: structuredMotors, confidence: "source_exact" as PowerDataConfidence, source: "source:30-minute-power-by-motor" };
+  const structuredTotal = findStructuredNumber(offer.operational?.raw, POWER_30_MIN_TOTAL_KEYS);
+  const normalizedTotal = reasonable(structuredTotal, 1, 2_000);
+  if (normalizedTotal !== undefined) return { values: [normalizedTotal], confidence: "source_exact" as PowerDataConfidence, source: "source:30-minute-power" };
+
+  const fromText = inferThirtyMinutePowers(fullText);
+  if (fromText.length) return { values: fromText, confidence: "source_exact" as PowerDataConfidence, source: "source-text:30-minute-power" };
+  return { values: [] as number[], confidence: offer.powerDataConfidence, source: offer.powerDataSource };
+}
+
+function exactIcePowerKw(offer: Partial<VehicleOffer>, fullText: string, kind: PowertrainKind, genericPowerKw?: number) {
+  const explicit = reasonable(offer.icePowerKw, 5, 2_000);
+  if (explicit !== undefined) return explicit;
+  const structured = findStructuredNumber(offer.operational?.raw, [
+    "icePowerKw", "ice_power_kw", "combustionEnginePowerKw", "engineOnlyPowerKw", "internalCombustionPowerKw", "发动机功率kw",
+  ]);
+  const normalized = reasonable(structured, 5, 2_000);
+  if (normalized !== undefined) return normalized;
+  const match = fullText.match(/(?:ice|combustion engine|internal combustion|двс|двигател[ья]\s+внутреннего\s+сгорания|发动机)[^0-9]{0,45}([0-9]+(?:[.,][0-9]+)?)\s*(?:kw|квт|千瓦)/i);
+  const fromText = match ? reasonable(Number(match[1].replace(",", ".")), 5, 2_000) : undefined;
+  if (fromText !== undefined) return fromText;
+  return kind === "combustion" ? genericPowerKw : undefined;
+}
+
 function normalizedCurrency(offer: Partial<VehicleOffer>) {
   const currency = String(offer.sourceCurrency || "").toUpperCase();
   const sourcePrice = Number(offer.sourcePrice || 0);
@@ -153,20 +248,46 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const engineCc = reasonable(offer.engineCc, 300, 10_000) || structuredEngineCc(offer) || inferEngineCc(primary) || inferEngineCc(full);
   const powerHp = reasonable(offer.powerHp, 20, 2500) || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
   const explicitPowerKw = reasonable(offer.powerKw, 10, 2000);
-  const powerKw = explicitPowerKw || (powerHp ? Math.round(powerHp / 1.35962) : undefined);
+  const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
   let fuel = inferFuel(primary) || offer.fuel || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
   const strongElectric = /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
   if (engineCc && fuel === "electric" && !strongElectric) fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
   if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
+
+  const powertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown"
+    ? offer.powertrainKind
+    : inferPowertrainKind(`${primary} ${full}`, engineCc);
+  const thirtyMinute = exactThirtyMinutePowers(offer, full);
+  const power30MinKwByMotor = thirtyMinute.values.length ? thirtyMinute.values : undefined;
+  const power30MinKw = power30MinKwByMotor?.length
+    ? Math.round(power30MinKwByMotor.reduce((sum, value) => sum + value, 0) * 100) / 100
+    : undefined;
+  const icePowerKw = exactIcePowerKw(offer, full, powertrainKind, powerKw);
+  const utilizationPowerKw = reasonable(offer.utilizationPowerKw, 1, 4_000)
+    || (powertrainKind === "electric" || powertrainKind === "series_hybrid"
+      ? power30MinKw
+      : powertrainKind === "other_hybrid" && icePowerKw && power30MinKw
+        ? Math.round((icePowerKw + power30MinKw) * 100) / 100
+        : powertrainKind === "combustion"
+          ? icePowerKw || powerKw
+          : undefined);
+
   return {
     ...offer,
     sourceCurrency: normalizedCurrency(offer),
     fuel,
+    powertrainKind,
     transmission: inferTransmission(`${offer.transmission || ""} ${primary}`) || inferTransmission(full) || offer.transmission,
     drive: inferDrive(`${offer.drive || ""} ${primary}`) || inferDrive(full) || offer.drive,
     bodyType: inferBody(`${offer.bodyType || ""} ${primary}`) || inferBody(full) || offer.bodyType,
     engineCc,
     powerHp,
     powerKw,
-  };
+    icePowerKw,
+    power30MinKw,
+    power30MinKwByMotor,
+    utilizationPowerKw,
+    powerDataConfidence: thirtyMinute.confidence || offer.powerDataConfidence || (powerKw ? "estimated" : undefined),
+    powerDataSource: thirtyMinute.source || offer.powerDataSource,
+  } as T;
 }
