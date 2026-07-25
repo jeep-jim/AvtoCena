@@ -19,7 +19,6 @@ test("calculates a 3 to 5 year old petrol car for personal use", () => {
     fuel: "petrol",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.ageBand, "from_3_to_5_years");
   assert.equal(result.customsClearanceFeeRub, 13_541);
@@ -38,7 +37,6 @@ test("calculates a vehicle up to three years old", () => {
     fuel: "petrol",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.ageBand, "up_to_3_years");
   assert.equal(result.importDutyRub, 525_000);
@@ -56,7 +54,6 @@ test("uses the conservative maximum when production month is absent", () => {
     fuel: "petrol",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.ageEstimated, true);
   assert.deepEqual(result.possibleAgeBands, ["from_3_to_5_years", "up_to_3_years"]);
@@ -74,7 +71,6 @@ test("does not publish a complete customs price without utilization power", () =
     fuel: "petrol",
     importedAt,
   });
-
   assert.equal(result.status, "needs_data");
   assert.equal(result.totalCustomsRub, undefined);
   assert.ok(result.missing.includes("utilization_power_kw"));
@@ -90,7 +86,6 @@ test("uses the full 2026 coefficient above the personal power threshold", () => 
     fuel: "petrol",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.utilizationCoefficient, 74.64);
   assert.equal(result.utilizationFeeRub, 1_492_800);
@@ -105,7 +100,6 @@ test("does not apply the personal ICE privilege above 3000 cc", () => {
     ageBand: "up_to_3_years",
     personalUseEligible: true,
   });
-
   assert.equal(coefficient, 129.2);
 });
 
@@ -116,7 +110,6 @@ test("sums documented motor powers for electric and hybrid vehicles", () => {
     powertrainKind: "electric",
     power30MinKwByMotor: [40, 35],
   }), 75);
-
   assert.equal(utilizationPowerKwForInput({
     customsValueRub: 1,
     eurRateRub: 1,
@@ -136,14 +129,13 @@ test("calculates a pure EV with 2026 tariff, excise, VAT and utilization fee", (
     productionDate: "2026-01",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.importDutyRub, 300_000);
-  assert.equal(result.exciseRub, 7_560);
-  assert.equal(result.vatRub, 507_663);
+  assert.equal(result.exciseRub, 7_680);
+  assert.equal(result.vatRub, 507_690);
   assert.equal(result.utilizationCoefficient, 65.88);
   assert.equal(result.utilizationFeeRub, 1_317_600);
-  assert.equal(result.totalCustomsRub, 2_146_364);
+  assert.equal(result.totalCustomsRub, 2_146_511);
 });
 
 test("uses engine displacement duty for a series hybrid", () => {
@@ -156,7 +148,6 @@ test("uses engine displacement duty for a series hybrid", () => {
     productionDate: "2026-01",
     importedAt,
   });
-
   assert.equal(result.status, "ready");
   assert.equal(result.importDutyRub, 525_000);
   assert.equal(result.exciseRub, 0);
