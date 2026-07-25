@@ -1,6 +1,8 @@
 import { getActiveMarketVersion } from "../business-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustoms";
+import { resolveCatalogMarketConfig } from "./estimated-market-config";
+import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -19,13 +21,33 @@ function transportToBorderRub(offer: VehicleOffer) {
     || positive(raw.customsTransportRub);
 }
 
-function isActiveMarketConfig(version: any) {
-  return Boolean(version && version.status === "active" && version.active !== false);
+function customsValueSnapshot(rate: any, borderTransportRub: number, customsValueRub: number) {
+  return {
+    vehiclePriceRub: rate.sourcePriceRub,
+    transportToBorderRub: borderTransportRub,
+    totalRub: customsValueRub,
+  };
 }
 
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
-  const referenced = await enrichOfferWithCertifiedPower(input);
-  const offer = normalizeVehicleOfferSpecs(referenced) as VehicleOffer;
+  const certified = await enrichOfferWithCertifiedPower(input);
+  const known = await enrichOfferWithPowerKnowledge(certified);
+  const offer = normalizeVehicleOfferSpecs(known) as VehicleOffer;
+
+  if (!positive(offer.powerHp)) {
+    return {
+      ...offer,
+      totalRub: null,
+      calculationStatus: "needs_power_data",
+      calculationSnapshot: {
+        ...(offer.calculationSnapshot || {}),
+        pricingConfidence: "unavailable",
+        missing: ["power_hp"],
+        warnings: ["Автомобиль не публикуется, пока мощность не найдена в объявлении или базе модели/модификации."],
+      },
+    };
+  }
+
   const [rate, eurRate] = await Promise.all([
     convertToRub(offer.sourcePrice, offer.sourceCurrency),
     convertToRub(1, "EUR"),
@@ -39,6 +61,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         ...(offer.calculationSnapshot || {}),
         currencyRate: rate,
         customs: { status: "needs_data", missing: rate ? ["eur_rate"] : ["source_currency_rate"] },
+        pricingConfidence: "unavailable",
       },
     };
   }
@@ -61,25 +84,8 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     fuel: offer.fuel,
   });
 
-  const version: any = await getActiveMarketVersion(offer.market);
-  if (!isActiveMarketConfig(version)) {
-    return {
-      ...offer,
-      totalRub: null,
-      calculationSnapshot: {
-        currencyRate: rate,
-        customs,
-        customsValue: {
-          vehiclePriceRub: rate.sourcePriceRub,
-          transportToBorderRub: borderTransportRub,
-          totalRub: customsValueRub,
-        },
-        customsCompleteness: customs.status,
-        marketConfigStatus: version?.status || "missing",
-      },
-      calculationStatus: "needs_market_config",
-    };
-  }
+  const configured: any = await getActiveMarketVersion(offer.market);
+  const market = resolveCatalogMarketConfig(offer.market, configured);
 
   if (customs.status !== "ready" || customs.totalCustomsRub === undefined) {
     return {
@@ -88,12 +94,12 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       calculationSnapshot: {
         currencyRate: rate,
         customs,
-        customsValue: {
-          vehiclePriceRub: rate.sourcePriceRub,
-          transportToBorderRub: borderTransportRub,
-          totalRub: customsValueRub,
-        },
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
         customsCompleteness: customs.status,
+        marketConfigStatus: configured?.status || "missing",
+        pricingConfidence: "unavailable",
+        estimatedMarketFields: market.estimatedFields,
+        warnings: [...market.warnings, ...customs.warnings],
       },
       calculationStatus: "needs_customs_data",
     };
@@ -101,25 +107,39 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
 
   const calculation = calculateAvtocenaFromBusinessConfig({
     marketId: offer.market,
-    marketConfig: version,
+    marketConfig: market.config,
     sourcePriceRub: rate.sourcePriceRub,
     customsRub: customs.totalCustomsRub,
   });
 
+  const powerEstimated = ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
+  const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || offer.priceMode === "estimated";
+  const warnings = [
+    ...market.warnings,
+    ...customs.warnings,
+    ...(powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
+  ];
+
   return {
     ...offer,
+    priceMode: priceEstimated && offer.priceMode !== "auction_start" ? "estimated" : offer.priceMode,
     totalRub: calculation.totalRub,
     calculationSnapshot: {
       ...calculation.snapshot,
       currencyRate: rate,
       customs,
-      customsValue: {
-        vehiclePriceRub: rate.sourcePriceRub,
-        transportToBorderRub: borderTransportRub,
-        totalRub: customsValueRub,
-      },
+      customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
       customsCompleteness: customs.status,
+      pricingConfidence: priceEstimated ? "estimated" : "exact",
+      estimatedMarketFields: market.estimatedFields,
+      powerConfidence: offer.powerDataConfidence,
+      powerSource: offer.powerDataSource,
+      warnings,
     },
-    calculationStatus: offer.priceMode === "auction_start" ? "auction_start" : "ready",
+    calculationStatus: offer.priceMode === "auction_start"
+      ? "auction_start"
+      : priceEstimated
+        ? "estimated"
+        : "ready",
   };
 }
