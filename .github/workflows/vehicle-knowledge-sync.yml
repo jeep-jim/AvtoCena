@@ -35,19 +35,46 @@ jobs:
           VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 1990
           VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
         run: npm run catalog:sync-vehicle-models
-      - name: Validate model volume, chunk size and aliases
+      - name: Validate model volume, chunks and aliases
+        id: validate_models
+        continue-on-error: true
         env:
           JSON_STORAGE_DRIVER: local
         run: |
           node --import tsx --input-type=module <<'NODE'
-          const { readChunkedDataJson } = await import('./apps/web/lib/data.ts');
+          import fs from 'node:fs/promises';
+          const { readChunkedDataJson, readDataJson } = await import('./apps/web/lib/data.ts');
           const { resolveVehicleModelQuery } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
           const models = await readChunkedDataJson('catalog/vehicle-knowledge/models.json', []);
-          if (models.length < 5000) throw new Error(`vehicle_knowledge_too_small_${models.length}`);
+          const index = await readDataJson('catalog/vehicle-knowledge/models-index.json', null);
           const hrv = await resolveVehicleModelQuery('hrv', undefined, 10);
-          if (!hrv.some((row) => row.make === 'Honda' && row.model === 'HR-V')) throw new Error('vehicle_knowledge_hrv_alias_missing');
-          console.log(JSON.stringify({ models: models.length, hrv: hrv.slice(0, 3) }, null, 2));
+          const errors = [];
+          if (models.length < 5000) errors.push(`vehicle_knowledge_too_small_${models.length}`);
+          if (!index || index.maxRecordsPerChunk !== 250) errors.push('vehicle_knowledge_chunk_size_invalid');
+          if (Array.isArray(index?.chunks) && index.chunks.some((chunk) => Number(chunk.count || 0) > 250)) errors.push('vehicle_knowledge_chunk_overflow');
+          if (!hrv.some((row) => row.make === 'Honda' && row.model === 'HR-V')) errors.push('vehicle_knowledge_hrv_alias_missing');
+          const report = {
+            models: models.length,
+            indexTotal: index?.total,
+            chunkSize: index?.maxRecordsPerChunk,
+            chunks: index?.chunks?.length,
+            largestChunk: Math.max(0, ...(index?.chunks || []).map((chunk) => Number(chunk.count || 0))),
+            hrv: hrv.slice(0, 10),
+            errors,
+          };
+          await fs.writeFile('vehicle-knowledge-validation.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (errors.length) process.exitCode = 1;
           NODE
+      - name: Upload vehicle knowledge validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vehicle-knowledge-validation
+          path: vehicle-knowledge-validation.json
+      - name: Fail on vehicle knowledge validation errors
+        if: steps.validate_models.outcome != 'success'
+        run: exit 1
 
   sync-production-json:
     if: github.event_name != 'pull_request'
