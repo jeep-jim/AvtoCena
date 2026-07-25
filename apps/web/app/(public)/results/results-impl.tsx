@@ -2,12 +2,14 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSearchInputFromParams } from "@/lib/avtocena";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 
 function firstParam(value?: string | string[]) { return Array.isArray(value) ? value[0] : value; }
+function numberParam(value?: string | string[]) { const parsed = Number(firstParam(value)); return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined; }
 function safeParams(params: Record<string, string | string[] | undefined>) { return { ...params, yearFrom: params.yearFrom ?? params.year, market: params.market ?? params.country }; }
-function unique(values: Array<string | undefined>) { return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))]; }
 function withoutCity(params: Record<string, string | string[] | undefined>) {
   const query = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) {
@@ -17,76 +19,97 @@ function withoutCity(params: Record<string, string | string[] | undefined>) {
   return query.toString();
 }
 
-const markets = [{id:"korea",label:"Корея",flag:"🇰🇷"},{id:"china",label:"Китай",flag:"🇨🇳"},{id:"japan",label:"Япония",flag:"🇯🇵"},{id:"uae",label:"ОАЭ",flag:"🇦🇪"},{id:"europe",label:"Европа",flag:"🇪🇺"}];
-const bodyOptions = [
-  { value: "", label: "Любой кузов" },
-  { value: "suv", label: "Кроссовер" },
-  { value: "offroad", label: "Внедорожник" },
-  { value: "sedan", label: "Седан" },
-  { value: "hatchback", label: "Хэтчбек" },
-  { value: "wagon", label: "Универсал" },
-  { value: "minivan", label: "Минивэн" },
-  { value: "coupe", label: "Купе" },
-  { value: "convertible", label: "Кабриолет" },
-  { value: "pickup", label: "Пикап" },
-  { value: "van", label: "Фургон" },
-];
-const controlClass = "ac-native-select h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)] outline-none";
-const inputClass = "h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 text-sm font-black text-[var(--ac-text)] outline-none placeholder:text-[var(--ac-muted)]";
-const choiceClass = "ac-filter-control flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl px-4 text-sm font-black";
+const markets = PUBLIC_CATALOG_MARKETS.map((id) => ({
+  id,
+  label: CATALOG_MARKET_LABELS[id],
+  flag: CATALOG_MARKET_FLAGS[id],
+}));
 
 export default async function ResultsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const input = getSearchInputFromParams(safeParams(params));
-  const budgetFrom = Number(firstParam(params.budgetFrom)) || undefined;
-  const yearTo = Number(firstParam(params.yearTo)) || undefined;
-  const powerTo = Number(firstParam(params.powerTo)) || undefined;
+  const make = String(firstParam(params.make) || input.brand || "").trim();
+  const model = String(firstParam(params.model) || input.model || "").trim();
+  const market = String(firstParam(params.market) || (input.market !== "any" ? input.market : "") || "").trim();
+  const bodyType = String(firstParam(params.bodyType) || (input.body && input.body !== "any" ? input.body : "") || "").trim();
+  const budgetFrom = numberParam(params.budgetFrom);
+  const budgetTo = numberParam(params.budget) || numberParam(params.budgetTo) || input.budgetRub || undefined;
+  const yearFrom = numberParam(params.yearFrom) || input.yearFrom || undefined;
+  const yearTo = numberParam(params.yearTo);
+  const mileageFrom = numberParam(params.mileageFrom);
+  const mileageTo = numberParam(params.mileageTo);
+  const engineFrom = numberParam(params.engineFrom);
+  const engineTo = numberParam(params.engineTo);
+  const powerFrom = numberParam(params.powerFrom);
+  const powerTo = numberParam(params.powerTo);
   const fuel = String(firstParam(params.fuel) || "").trim();
+  const transmission = String(firstParam(params.transmission) || "").trim();
+  const drive = String(firstParam(params.drive) || "").trim();
   const electricOnly = fuel === "electric";
   const city = String(firstParam(params.city) || "").trim();
   if (electricOnly && city) {
     const query = withoutCity(params);
     redirect(`/results${query ? `?${query}` : ""}`);
   }
-  const bodyType = input.body && input.body !== "any" ? input.body : undefined;
-  const marketList = input.market && input.market !== "any" ? markets.filter((market) => market.id === input.market) : markets;
+
+  const marketList = market ? markets.filter((item) => item.id === market) : markets;
+  const searchInput = {
+    budgetFrom,
+    budgetTo,
+    make: make || undefined,
+    model: model || undefined,
+    yearFrom,
+    yearTo,
+    mileageFrom,
+    mileageTo,
+    engineFrom,
+    engineTo,
+    powerFrom,
+    powerTo,
+    fuel: fuel || undefined,
+    transmission: transmission || undefined,
+    drive: drive || undefined,
+    bodyType: bodyType || undefined,
+    sort: "updatedAt" as const,
+  };
   const [facets, exactGroups] = await Promise.all([
-    readCatalogFacets({ market: input.market && input.market !== "any" ? input.market : undefined }),
-    Promise.all(marketList.map(async (market) => {
-      const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, make: input.brand, model: input.model, yearFrom: input.yearFrom, yearTo, bodyType, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
-      return { ...market, items: result.items, total: result.total };
+    readCatalogFacets({ market: market || undefined, make: make || undefined }),
+    Promise.all(marketList.map(async (item) => {
+      const result = await searchOffers({ ...searchInput, market: item.id, pageSize: 12 });
+      return { ...item, items: result.items, total: result.total };
     })),
   ]);
   const exactTotal = exactGroups.reduce((sum, group) => sum + group.total, 0);
   const relaxed = exactTotal === 0;
-  const grouped = relaxed ? await Promise.all(marketList.map(async (market) => {
-    const result = await searchOffers({ budgetFrom, budgetTo: input.budgetRub, market: market.id, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
-    return { ...market, items: result.items, total: result.total };
+  const grouped = relaxed ? await Promise.all(marketList.map(async (item) => {
+    const result = await searchOffers({ budgetFrom, budgetTo, market: item.id, powerTo, fuel: fuel || undefined, pageSize: 12, sort: "updatedAt" });
+    return { ...item, items: result.items, total: result.total };
   })) : exactGroups;
   const foundCount = grouped.reduce((sum, group) => sum + group.total, 0);
-  const makeOptions = unique([input.brand, ...(electricOnly ? grouped.flatMap((group) => group.items.map((item: any) => String(item.make || ""))) : facets.makes || [])]).sort((a, b) => a.localeCompare(b, "ru"));
-  const modelOptions = unique([input.model, ...(electricOnly ? grouped.flatMap((group) => group.items.filter((item: any) => !input.brand || String(item.make || "") === input.brand).map((item: any) => String(item.model || ""))) : (facets.models || []).filter((item) => !input.brand || String(item.make) === input.brand).map((item) => String(item.model || "")))]).sort((a, b) => a.localeCompare(b, "ru"));
+  const filterInitial: Record<string, string> = {
+    make,
+    model,
+    market,
+    bodyType,
+    budgetFrom: budgetFrom ? String(budgetFrom) : "",
+    budget: budgetTo ? String(budgetTo) : "",
+    yearFrom: yearFrom ? String(yearFrom) : "",
+    yearTo: yearTo ? String(yearTo) : "",
+    mileageFrom: mileageFrom ? String(mileageFrom) : "",
+    mileageTo: mileageTo ? String(mileageTo) : "",
+    engineFrom: engineFrom ? String(engineFrom) : "",
+    engineTo: engineTo ? String(engineTo) : "",
+    powerFrom: powerFrom ? String(powerFrom) : "",
+    powerTo: powerTo ? String(powerTo) : "",
+    fuel,
+    transmission,
+    drive,
+  };
 
   return <main className="ac-results-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="К подбору" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
-      <details className="ac-results-edit group">
-        <summary className="avto-button flex min-h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-2xl px-5 text-center text-base font-black md:max-w-[360px]"><span>Изменить параметры</span><span className="text-xl leading-none transition group-open:rotate-45">+</span></summary>
-        <form method="get" action="/results" className="ac-results-edit-form mt-3 grid gap-3 rounded-[1.5rem] bg-[var(--ac-surface)] p-4 sm:grid-cols-2 lg:grid-cols-4">
-          <input name="budgetFrom" defaultValue={budgetFrom || ""} inputMode="numeric" placeholder="Цена от, ₽" className={inputClass} />
-          <input name="budget" defaultValue={input.budgetRub || ""} inputMode="numeric" placeholder="Цена до, ₽" className={inputClass} />
-          <select name="brand" defaultValue={input.brand || ""} className={controlClass}><option value="">Любая марка</option>{makeOptions.map((value) => <option key={value} value={value}>{value}</option>)}</select>
-          <select name="model" defaultValue={input.model || ""} className={controlClass}><option value="">Любая модель</option>{modelOptions.map((value) => <option key={value} value={value}>{value}</option>)}</select>
-          <select name="market" defaultValue={input.market && input.market !== "any" ? input.market : ""} className={controlClass}><option value="">Все рынки</option>{markets.map((market) => <option key={market.id} value={market.id}>{market.label}</option>)}</select>
-          <select name="body" defaultValue={bodyType || ""} className={controlClass}>{bodyOptions.map((option) => <option key={option.value || "any"} value={option.value}>{option.label}</option>)}</select>
-          <input name="yearFrom" defaultValue={input.yearFrom || ""} inputMode="numeric" placeholder="Год от" className={inputClass} />
-          <input name="yearTo" defaultValue={yearTo || ""} inputMode="numeric" placeholder="Год до" className={inputClass} />
-          {city && !electricOnly ? <input type="hidden" name="city" value={city} /> : null}
-          <label className={`${choiceClass} ac-power-limit`}><input type="checkbox" name="powerTo" value="160" defaultChecked={powerTo === 160} className="sr-only" /><span className="ac-filter-checkbox-mark">✓</span><span>До 160 л.с.</span></label>
-          <label className={`${choiceClass} ac-electric-filter`}><input type="checkbox" name="fuel" value="electric" defaultChecked={electricOnly} className="sr-only" /><span className="ac-filter-checkbox-mark">✓</span><span className="text-[17px] leading-none text-[#ffd21f]" aria-hidden="true">⚡</span><span>Электро</span></label>
-          <button className="avto-button flex min-h-14 items-center justify-center rounded-2xl px-5 text-center text-base font-black sm:col-span-2 lg:col-span-2">Показать автомобили</button>
-        </form>
-      </details>
+      <CatalogFilters initial={filterInitial} facets={facets} />
 
       <section className="mt-9 min-w-0">
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)_82px] items-start gap-x-3 gap-y-2 md:grid-cols-[minmax(0,1fr)_112px] md:gap-x-6">
