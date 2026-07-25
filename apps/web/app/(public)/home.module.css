@@ -16,4 +16,20 @@
     padding-right: 1rem !important;
     text-align: center !important;
   }
+
+  .scope :global(.ac-home-page > div > section.mt-8 > div:first-child > div:first-child > div:first-child) {
+    display: none !important;
+  }
+
+  .scope :global(.ac-home-page > div > section.mt-8 > div:first-child > div:first-child > h2) {
+    margin-top: 0 !important;
+  }
+
+  .scope :global(.ac-home-page > div > section.mt-8 > div:first-child > div:first-child > h2 > span) {
+    display: none !important;
+  }
+
+  .scope :global(.ac-home-page > div > section.mt-8 > div:first-child > div:first-child > h2::after) {
+    content: "АвтоКаталог";
+  }
 }
