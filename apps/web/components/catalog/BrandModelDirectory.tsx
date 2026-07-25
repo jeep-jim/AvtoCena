@@ -11,7 +11,7 @@ type BrandModelLink = {
   aliases?: string[];
 };
 
-const PREVIEW_LIMIT = 12;
+const PREVIEW_LIMIT = 6;
 
 function searchable(value: unknown) {
   return String(value || "")
@@ -24,6 +24,12 @@ function SearchIcon() {
   return <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" strokeWidth="1.9" />
     <path d="m16 16 4.3 4.3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+  </svg>;
+}
+
+function Chevron({ open = false }: { open?: boolean }) {
+  return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>;
 }
 
@@ -40,40 +46,37 @@ export function BrandModelDirectory({
   const [expanded, setExpanded] = useState(false);
   const normalizedQuery = searchable(query);
 
-  const liveModels = useMemo(
-    () => models.filter((model) => model.count > 0),
-    [models],
-  );
+  const prioritizedModels = useMemo(() => {
+    const live = models.filter((model) => model.count > 0);
+    const remaining = models.filter((model) => model.count <= 0);
+    return [...live, ...remaining];
+  }, [models]);
 
   const filtered = useMemo(() => {
-    if (!normalizedQuery) {
-      const priority = liveModels.length ? liveModels : models;
-      return expanded ? models : priority.slice(0, PREVIEW_LIMIT);
-    }
+    if (!normalizedQuery) return expanded ? prioritizedModels : prioritizedModels.slice(0, PREVIEW_LIMIT);
     return models.filter((model) => {
       const values = [model.model, ...(model.aliases || [])];
       return values.some((value) => searchable(value).includes(normalizedQuery));
     });
-  }, [expanded, liveModels, models, normalizedQuery]);
+  }, [expanded, models, normalizedQuery, prioritizedModels]);
 
-  const canExpand = !normalizedQuery && models.length > filtered.length;
+  const canExpand = !normalizedQuery && models.length > PREVIEW_LIMIT;
 
   return <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
-    <div className="flex flex-wrap items-end justify-between gap-3">
-      <div>
-        <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Модельный ряд</div>
-        <h2 className="mt-1 text-2xl font-black md:text-4xl">Модели {brand}</h2>
-      </div>
-      {!normalizedQuery && (canExpand || expanded) ? <button
+    <div className="flex items-center justify-between gap-3">
+      <h2 className="text-2xl font-black md:text-4xl">Модели {brand}</h2>
+      {canExpand ? <button
         type="button"
         onClick={() => setExpanded((value) => !value)}
-        className="ac-market-all-link shrink-0 text-sm font-black"
+        className="ac-market-all-link inline-flex shrink-0 items-center gap-1.5 text-sm font-black"
+        aria-expanded={expanded}
       >
-        {expanded ? "Свернуть ↑" : "Все →"}
-      </button> : null}
+        <span>{expanded ? "Свернуть" : `Все · ${models.length}`}</span>
+        <Chevron open={expanded} />
+      </button> : <span className="text-sm font-black text-[var(--ac-muted)]">{models.length}</span>}
     </div>
 
-    <label className="mt-5 flex h-12 w-full max-w-xl items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35">
+    <label className="mt-5 flex h-12 w-full items-center gap-3 rounded-2xl bg-[var(--ac-surface-2)] px-4 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35">
       <SearchIcon />
       <input
         type="search"
