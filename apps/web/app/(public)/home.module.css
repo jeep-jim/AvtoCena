@@ -6,4 +6,14 @@
   .scope :global(.ac-budget-help) {
     display: none !important;
   }
+
+  .scope :global(#form > div:first-child > span:first-child) {
+    transform: translateX(-2.25rem);
+  }
+
+  .scope :global(#form > div:last-child > button:first-child) {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    text-align: center !important;
+  }
 }
