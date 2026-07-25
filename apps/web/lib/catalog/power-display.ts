@@ -1,5 +1,8 @@
 type PowerDisplayInput = {
   powertrainKind?: string;
+  fuel?: string;
+  powerHp?: number;
+  powerKw?: number;
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
   utilizationPowerKw?: number;
@@ -13,6 +16,13 @@ function positive(value: unknown) {
 
 function formatKw(value: number) {
   return new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 2 }).format(value);
+}
+
+function isElectricOrHybrid(offer: PowerDisplayInput) {
+  const kind = String(offer.powertrainKind || "").toLowerCase();
+  const fuel = String(offer.fuel || "").toLowerCase();
+  return ["electric", "series_hybrid", "other_hybrid"].includes(kind)
+    || /electric|электро|hybrid|гибрид|bev|phev|hev/.test(fuel);
 }
 
 export type CatalogPowerDisplay = {
@@ -35,14 +45,23 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
   const explicitThirtyMinute = positive(offer.power30MinKw);
   const kind = String(offer.powertrainKind || "").toLowerCase();
   const customsPower = positive(offer.calculationSnapshot?.customs?.utilizationPowerKw);
-  const estimated = Boolean(offer.calculationSnapshot?.certified30MinutePowerMissing);
+  const storedUtilizationPower = positive(offer.utilizationPowerKw);
+  const peakPowerKw = positive(offer.powerKw)
+    || (positive(offer.powerHp) ? Math.round((Number(offer.powerHp) / 1.35962) * 100) / 100 : undefined);
+  const legacyEstimate = isElectricOrHybrid(offer)
+    ? storedUtilizationPower || peakPowerKw
+    : undefined;
+  const certifiedMissing = Boolean(offer.calculationSnapshot?.certified30MinutePowerMissing);
   const thirtyMinutePowerKw = summedMotors
     || explicitThirtyMinute
-    || (["electric", "series_hybrid"].includes(kind) ? customsPower : undefined);
+    || (["electric", "series_hybrid"].includes(kind) ? customsPower : undefined)
+    || legacyEstimate;
 
   if (!thirtyMinutePowerKw) return null;
 
-  const utilizationPowerKw = positive(offer.utilizationPowerKw) || customsPower;
+  const exactAvailable = Boolean(summedMotors || explicitThirtyMinute);
+  const estimated = !exactAvailable && (certifiedMissing || Boolean(legacyEstimate));
+  const utilizationPowerKw = storedUtilizationPower || customsPower || (estimated ? thirtyMinutePowerKw : undefined);
   const motorEquation = motorPowersKw.length > 1
     ? `${motorPowersKw.map(formatKw).join(" + ")} = ${formatKw(thirtyMinutePowerKw)} кВт`
     : `${formatKw(thirtyMinutePowerKw)} кВт`;
@@ -60,7 +79,7 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
       : undefined,
     motorPowersKw,
     sourceLabel: estimated
-      ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность подтвердит менеджер по документам."
+      ? "Для предварительного расчёта использована доступная мощность электромотора. Точная 30-минутная мощность будет подтверждена по документам автомобиля."
       : motorPowersKw.length > 1
         ? "Сумма максимальной 30-минутной мощности тяговых электромоторов"
         : "Максимальная 30-минутная мощность тягового электромотора",
