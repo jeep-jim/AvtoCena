@@ -11,6 +11,17 @@ const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
   kyrgyzstan: new Set(["mashina_kyrgyzstan_exact"]),
 };
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
+const REQUIRED_PRICE_LINES = [
+  "car",
+  "topavto-commission",
+  "broker",
+  "svh",
+  "laboratory",
+  "sbkts",
+  "epts",
+  "rf-delivery",
+  "customs",
+];
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function meaningfulName(value: unknown) {
@@ -62,6 +73,16 @@ function hasReadyCalculation(offer: VehicleOffer) {
   return !customs || customs.status === "ready";
 }
 
+function hasCompletePriceBreakdown(offer: VehicleOffer) {
+  const rows = Array.isArray(offer.calculationSnapshot?.breakdown)
+    ? offer.calculationSnapshot.breakdown
+    : [];
+  const positiveIds = new Set(rows
+    .filter((line: any) => Number(line?.amountRub || 0) > 0)
+    .map((line: any) => String(line?.id || "")));
+  return REQUIRED_PRICE_LINES.every((id) => positiveIds.has(id));
+}
+
 function hasRequiredPower(offer: VehicleOffer) {
   if (!(Number(offer.powerHp || 0) > 0)) return false;
   const kind = String(offer.powertrainKind || "");
@@ -110,7 +131,12 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
-  if (!hasRequiredPower(offer) || !hasReadyCalculation(offer) || !hasPlausiblePrice(offer) || !hasCompleteOtomotoDetails(offer) || !rawImagesAreCredible(offer)) return false;
+  if (!hasRequiredPower(offer)
+    || !hasReadyCalculation(offer)
+    || !hasCompletePriceBreakdown(offer)
+    || !hasPlausiblePrice(offer)
+    || !hasCompleteOtomotoDetails(offer)
+    || !rawImagesAreCredible(offer)) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
 }
