@@ -8,6 +8,7 @@ import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
+import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
@@ -16,6 +17,8 @@ import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { getOffer, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
+
+type SpecItem = { label: string; value: string; icon: SpecIconName; info?: string };
 
 function SpecIcon({ name }: { name: SpecIconName }) {
   const common = {
@@ -45,13 +48,18 @@ function sentence(value: unknown) {
   return text ? text.charAt(0).toLocaleUpperCase("ru-RU") + text.slice(1) : "";
 }
 
-function driveValue(value: unknown) {
+function knownValue(value: unknown) {
   const normalized = sentence(value);
-  if (!normalized || /уточняется|не указан/i.test(normalized)) return "Привод уточняется";
+  return normalized && !/уточняется|не указан|unknown|неизвест/i.test(normalized) ? normalized : "";
+}
+
+function driveValue(value: unknown) {
+  const normalized = knownValue(value);
+  if (!normalized) return "";
   return /привод/i.test(normalized) ? normalized : `${normalized} привод`;
 }
 
-function SpecTile({ label, value, icon, info }: { label: string; value: string; icon: SpecIconName; info?: string }) {
+function SpecTile({ label, value, icon, info }: SpecItem) {
   return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5">
     <SpecIcon name={icon} />
     <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
@@ -90,7 +98,7 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
 }
 
 function MissingOffer() {
-  return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white"><PublicHeader backHref="/cars" backLabel="В каталог" /><section className="mx-auto max-w-4xl px-4 py-20 text-center"><h1 className="text-4xl font-black">Предложение не найдено</h1><p className="mt-3 font-bold text-[var(--ac-muted)]">Карточка скрыта, если источник передал неверную цену, фотографию или описание.</p><Link href="/cars" className="avto-button mt-7 inline-block rounded-2xl px-6 py-4 font-black">Открыть каталог</Link></section></main>;
+  return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white"><PublicHeader backHref="/cars" backLabel="В каталог" /><section className="mx-auto max-w-4xl px-4 py-20 text-center"><h1 className="text-4xl font-black">Предложение не найдено</h1><p className="mt-3 font-bold text-[var(--ac-muted)]">Карточка временно недоступна.</p><Link href="/cars" className="avto-button mt-7 inline-block rounded-2xl px-6 py-4 font-black">Открыть каталог</Link></section></main>;
 }
 
 export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
@@ -98,8 +106,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const offer = await getOffer(id);
   if (!offer || !isCrediblePublicOffer(offer)) return <MissingOffer />;
 
-  const sourceUrl = safeExternalUrl((offer as any)?.operational?.sourceUrl);
-  const raw: any = normalizeVehicleOfferSpecs(publicOffer(offer));
+  const enrichedOffer = await enrichOfferForDisplay(offer);
+  const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
+  const raw: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
   const o = { ...presentCatalogOffer(raw), images: rankedCatalogImageUrls(raw) };
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
@@ -113,30 +122,34 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const powertrainKind = String(raw.powertrainKind || "").toLowerCase();
   const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
-  const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "Мощность уточняется";
+  const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
+  const transmissionValue = knownValue(o.transmissionLabel);
+  const fuelValue = knownValue(o.fuelLabel);
+  const driveLabel = driveValue(o.driveLabel);
+  const bodyValue = knownValue(o.bodyLabel);
   const thirtyMinuteInfo = powerDisplay?.estimated
     ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
     : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
 
-  const specs = isElectric ? [
+  const specs = (isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
-    { label: "Пробег", value: o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется", icon: "mileage" as const },
+    o.mileageKm ? { label: "Пробег", value: `${money(o.mileageKm)} км`, icon: "mileage" as const } : null,
     { label: "Силовая установка", value: "Электромотор", icon: "electricMotor" as const },
-    { label: "Коробка", value: sentence(o.transmissionLabel) || "Коробка уточняется", icon: "transmission" as const },
-    { label: "Мощность", value: powerValue, icon: "power" as const },
-    { label: "30-минутная мощность", value: powerDisplay?.thirtyMinuteLabel || "30 мин: уточняется", icon: "thirtyMinute" as const, info: thirtyMinuteInfo },
-    { label: "Привод", value: driveValue(o.driveLabel), icon: "drive" as const },
-    { label: "Кузов", value: sentence(o.bodyLabel) || "Кузов уточняется", icon: "body" as const },
+    transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
+    powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
+    powerDisplay ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo } : null,
+    driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
+    bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
   ] : [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
-    { label: "Пробег", value: o.mileageKm ? `${money(o.mileageKm)} км` : "Пробег уточняется", icon: "mileage" as const },
-    { label: "Двигатель", value: o.engineCc ? `${money(o.engineCc)} см³` : "Двигатель уточняется", icon: "engine" as const },
-    { label: "Топливо", value: sentence(o.fuelLabel) || "Топливо уточняется", icon: "fuel" as const },
-    { label: "Мощность", value: powerValue, icon: "power" as const },
-    { label: "Коробка", value: sentence(o.transmissionLabel) || "Коробка уточняется", icon: "transmission" as const },
-    { label: "Привод", value: driveValue(o.driveLabel), icon: "drive" as const },
-    { label: "Кузов", value: sentence(o.bodyLabel) || "Кузов уточняется", icon: "body" as const },
-  ];
+    o.mileageKm ? { label: "Пробег", value: `${money(o.mileageKm)} км`, icon: "mileage" as const } : null,
+    o.engineCc ? { label: "Двигатель", value: `${money(o.engineCc)} см³`, icon: "engine" as const } : null,
+    fuelValue ? { label: "Топливо", value: fuelValue, icon: "fuel" as const } : null,
+    powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
+    transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
+    driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
+    bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
+  ]).filter(Boolean) as SpecItem[];
 
   return <main className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -162,7 +175,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие варианты сейчас обновляются.</div>}</section>
+      <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}

@@ -4,6 +4,7 @@ import { isCrediblePublicOffer } from "./offer-quality";
 import { PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { readMarketOffers } from "./storage";
 import {
+  findVehicleModel,
   readVehicleKnowledgeModels,
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
@@ -52,20 +53,28 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
 
   const models = knowledge.filter((model) => model.active !== false
     && canonicalCatalogBrand(model.make) === make);
+  const modelByKey = new Map(models.map((model) => [modelKey(make, model.model), model]));
   const counters = new Map<string, { count: number; marketCounts: Record<string, number> }>();
+  const brandOffers = offers.filter((offer) => canonicalCatalogBrand(offer.make) === make);
+  const matches = await Promise.all(brandOffers.map(async (offer) => ({
+    offer,
+    match: await findVehicleModel(offer),
+  })));
 
-  for (const offer of offers) {
-    if (canonicalCatalogBrand(offer.make) !== make) continue;
-    const key = modelKey(make, offer.model);
-    const current = counters.get(key) || { count: 0, marketCounts: {} };
+  for (const { offer, match } of matches) {
+    const recognized = match && canonicalCatalogBrand(match.model.make) === make
+      ? match.model
+      : modelByKey.get(modelKey(make, offer.model));
+    if (!recognized) continue;
+    const current = counters.get(recognized.id) || { count: 0, marketCounts: {} };
     current.count += 1;
     current.marketCounts[offer.market] = (current.marketCounts[offer.market] || 0) + 1;
-    counters.set(key, current);
+    counters.set(recognized.id, current);
   }
 
   return models
     .map((model) => {
-      const count = counters.get(modelKey(make, model.model)) || { count: 0, marketCounts: {} };
+      const count = counters.get(model.id) || { count: 0, marketCounts: {} };
       return {
         ...model,
         make,
@@ -74,8 +83,9 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
         marketCounts: count.marketCounts,
       };
     })
-    .sort((left, right) => Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+    .sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
       || right.count - left.count
+      || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
       || left.model.localeCompare(right.model, "ru"));
 });
 
