@@ -71,7 +71,7 @@ test("extracts exact 30-minute power from source text", () => {
 test("extracts Russian, Chinese and Georgian power units", () => {
   assert.equal(normalizeVehicleOfferSpecs({ trim: "Мощность 190 л.с." }).powerHp, 190);
   assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "最大功率 150 kW" } } }).powerHp, 203.94);
-  assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "სიმძლავრე 190 ცხ.ძ." } } }).powerHp, 190);
+  assert.equal(normalizeVehicleOfferSpecs({ operational: { raw: { specs: "სიმძლავრე 190 ცხენის ძალა" } } }).powerHp, 190);
 });
 
 test("extracts engine volume from nested raw details", () => {
