@@ -14,7 +14,9 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   if (!storage.getBinary) return new Response("Not found", { status: 404 });
   try {
     const file = await storage.getBinary(objectKey);
-    return new Response(file.data, {
+    const body = new Uint8Array(file.data.byteLength);
+    body.set(file.data);
+    return new Response(body, {
       headers: {
         "content-type": file.mimeType || "image/jpeg",
         "cache-control": "public, max-age=300, stale-while-revalidate=3600",
