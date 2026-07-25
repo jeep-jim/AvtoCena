@@ -1,0 +1,109 @@
+import type { VehicleOffer } from "./types";
+import {
+  enrichOfferWithVehicleKnowledge,
+  findVehicleModel,
+  readVehicleKnowledgeVariants,
+  vehicleKnowledgeToken,
+} from "./vehicle-knowledge";
+
+function meaningful(value: unknown) {
+  const text = String(value || "").trim();
+  return text && !/^(unknown|неизвестно|не указан[ао]?|уточняется)$/i.test(text) ? text : undefined;
+}
+
+function positive(value: unknown, max = 10_000) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 && parsed <= max ? parsed : undefined;
+}
+
+function consensus<T>(values: T[]) {
+  const unique = [...new Set(values.filter((value) => value !== undefined && value !== null && value !== ""))];
+  return unique.length === 1 ? unique[0] : undefined;
+}
+
+function activeForYear(variant: any, year: number) {
+  if (variant.active === false) return false;
+  if (variant.yearFrom && year && year < variant.yearFrom) return false;
+  if (variant.yearTo && year && year > variant.yearTo) return false;
+  return true;
+}
+
+function inferPowertrain(text: string) {
+  if (/\b(?:phev|plug[ -]?in|подзаряжаем)/i.test(text)) return "other_hybrid" as const;
+  if (/\b(?:hybrid|hev|гибрид)/i.test(text)) return "other_hybrid" as const;
+  if (/\b(?:bev|electric|электро|электромоб|e[- ]?drive|edrive|leaf|ariya|model\s*[3syx])\b/i.test(text)) return "electric" as const;
+  return undefined;
+}
+
+function inferTransmission(text: string, electric: boolean) {
+  if (electric) return "automatic";
+  if (/\b(?:8at|9at|10at|automatic|автомат|steptronic|tiptronic)\b/i.test(text)) return "automatic";
+  if (/\b(?:cvt|вариатор|e-cvt)\b/i.test(text)) return "cvt";
+  if (/\b(?:dct|dsg|робот)\b/i.test(text)) return "robot";
+  if (/\b(?:manual|механика|мкпп|\dmt)\b/i.test(text)) return "manual";
+  return undefined;
+}
+
+function inferDrive(text: string) {
+  if (/\b(?:awd|4wd|xdrive|quattro|4matic|e-4orce|полный привод)\b/i.test(text)) return "awd";
+  if (/\b(?:fwd|передний привод)\b/i.test(text)) return "fwd";
+  if (/\b(?:rwd|задний привод)\b/i.test(text)) return "rwd";
+  if (/\bbmw\s+i3\s+edrive\s*40l\b/i.test(text)) return "rwd";
+  return undefined;
+}
+
+export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): Promise<T> {
+  const enriched = await enrichOfferWithVehicleKnowledge(input);
+  const match = await findVehicleModel(enriched);
+  const year = Number(enriched.year || 0);
+  const variants = match
+    ? (await readVehicleKnowledgeVariants()).filter((variant) => variant.modelId === match.model.id && activeForYear(variant, year))
+    : [];
+  const text = vehicleKnowledgeToken([
+    enriched.make,
+    enriched.model,
+    enriched.generation,
+    enriched.trim,
+    enriched.engineType,
+    (enriched.operational as any)?.raw?.title,
+    (enriched.operational as any)?.raw?.name,
+  ].filter(Boolean).join(" "));
+
+  const consensusPowertrain = consensus(variants.map((variant) => variant.powertrainKind));
+  const powertrainKind = enriched.powertrainKind && enriched.powertrainKind !== "unknown"
+    ? enriched.powertrainKind
+    : consensusPowertrain || inferPowertrain(text) || enriched.powertrainKind;
+  const electric = powertrainKind === "electric";
+
+  const engineCc = positive(enriched.engineCc)
+    || positive(consensus(variants.map((variant) => variant.engineCc)));
+  const fuel = meaningful(enriched.fuel)
+    || meaningful(consensus(variants.map((variant) => variant.fuel)))
+    || (electric ? "electric" : powertrainKind && powertrainKind !== "ice" ? "hybrid" : undefined);
+  const transmission = meaningful(enriched.transmission)
+    || meaningful(consensus(variants.map((variant) => variant.transmission)))
+    || inferTransmission(text, electric);
+  const drive = meaningful(enriched.drive)
+    || meaningful(consensus(variants.map((variant) => variant.drive)))
+    || inferDrive(text);
+  const bodyType = meaningful(enriched.bodyType)
+    || meaningful(consensus(variants.map((variant) => variant.bodyType)))
+    || match?.model.bodyTypes?.[0];
+
+  return {
+    ...enriched,
+    engineCc: electric ? undefined : engineCc || enriched.engineCc,
+    fuel: fuel || enriched.fuel,
+    transmission: transmission || enriched.transmission,
+    drive: drive || enriched.drive,
+    bodyType: bodyType || enriched.bodyType,
+    powertrainKind,
+    operational: {
+      ...enriched.operational,
+      raw: {
+        ...(typeof enriched.operational?.raw === "object" && enriched.operational.raw ? enriched.operational.raw as object : {}),
+        displayKnowledgeEnriched: true,
+      },
+    },
+  } as T;
+}
