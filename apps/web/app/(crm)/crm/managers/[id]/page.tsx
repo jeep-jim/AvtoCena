@@ -5,16 +5,25 @@ import { readCrmUsers } from "@/lib/crm-users";
 
 export const dynamic = "force-dynamic";
 
-export default async function CrmManagerEditPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+function first(value?: string | string[]) {
+  return Array.isArray(value) ? value[0] : value || "";
+}
+
+export default async function CrmManagerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
+  const [{ id }, query] = await Promise.all([params, searchParams || Promise.resolve({})]);
   const isNew = id === "new";
   const users = await readCrmUsers();
   const user = isNew ? null : users.find((item) => item.id === id);
   if (!isNew && !user) notFound();
+  const state = first(query.state);
+  const message = first(query.message);
 
   return (
     <CrmShell activeHref="/crm/managers" title={isNew ? "Новый сотрудник" : user!.displayName} subtitle="Telegram username является пропуском в CRM. Роль и доступ можно изменить в любой момент.">
       <div className="mb-4"><Link href="/crm/managers" className="text-sm font-black text-red-300">← Назад к команде</Link></div>
+      {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Сотрудник сохранён. Войти сможет после подтверждения через Telegram.</div> : null}
+      {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить сотрудника."}</div> : null}
+
       <form action="/api/crm/users" method="post" className="glass grid gap-5 rounded-[1.8rem] p-5 md:grid-cols-[180px_minmax(0,1fr)] md:p-6">
         <input type="hidden" name="userId" value={user?.id || ""} />
         <div>
