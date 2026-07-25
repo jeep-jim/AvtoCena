@@ -9,6 +9,8 @@ on:
     paths:
       - apps/web/lib/catalog/customs-pricing.ts
       - apps/web/lib/catalog/offer-quality.ts
+      - apps/web/lib/catalog/image-quality.ts
+      - apps/web/lib/catalog/full-gallery-wrapper.ts
       - apps/web/lib/catalog/regional-market-sources.ts
       - apps/web/lib/catalog/runtime-config.ts
       - apps/web/lib/catalog/spec-normalization.ts
@@ -29,7 +31,7 @@ jobs:
   rebuild-market:
     name: Rebuild ${{ matrix.market }}
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     strategy:
       fail-fast: false
       max-parallel: 7
@@ -53,19 +55,20 @@ jobs:
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_TARGET: "1000"
-      CATALOG_REBUILD_MAX_PAGES: "80"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "120"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "6"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "5000"
+      CATALOG_REBUILD_MAX_PAGES: "300"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1800"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "12"
+      CATALOG_REBUILD_SEED_SCAN_LIMIT: "15000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_MAX_IMAGES_PER_OFFER: "10"
-      CATALOG_SOURCE_TIMEOUT_MS: "20000"
-      CATALOG_IMAGE_TIMEOUT_MS: "15000"
+      CATALOG_SOURCE_TIMEOUT_MS: "18000"
+      CATALOG_IMAGE_TIMEOUT_MS: "12000"
       CATALOG_IMAGE_MAX_BYTES: "10000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "4"
-      CATALOG_REBUILD_CHECKPOINT_EVERY: "40"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "2400000"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "8"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "3"
+      CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "3300000"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
     steps:
       - uses: actions/checkout@v4
@@ -99,7 +102,7 @@ jobs:
           const market = process.env.CATALOG_REBUILD_MARKET;
           const now = new Date().toISOString();
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 7,
+            version: 8,
             market,
             generatedAt: now,
             target: Number(process.env.CATALOG_REBUILD_TARGET || 1000),
@@ -135,10 +138,10 @@ jobs:
         shell: bash
         run: |
           echo "### $CATALOG_REBUILD_MARKET" >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${p.offers.length}/${p.target}\n- Частичная сборка: ${Boolean(p.partial)}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${p.offers.length}/${p.target}\n- Страниц: ${p.report?.pages||0}\n- Раундов по всем источникам: ${p.report?.rounds||0}\n- Частичная сборка: ${Boolean(p.partial)}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
 
   publish:
-    name: Publish available catalog and retain every market
+    name: Publish verified catalog and retain unavailable markets
     if: always()
     needs: rebuild-market
     runs-on: ubuntu-latest
@@ -158,7 +161,7 @@ jobs:
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_REBUILD_MIN_SPEC_SCORE: "1"
       CATALOG_INDEX_WRITE_CONCURRENCY: "10"
-      CATALOG_GROW_ONLY_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+      CATALOG_GROW_ONLY_MARKETS: ""
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
     steps:
       - uses: actions/checkout@v4
@@ -178,7 +181,7 @@ jobs:
           merge-multiple: true
       - name: Validate resilient publisher
         run: node --check scripts/catalog-publish-fresh.mjs
-      - name: Publish fresh offers and retain unavailable markets
+      - name: Publish verified offers and retain unavailable markets
         run: npx tsx scripts/catalog-publish-fresh.mjs
       - name: Run production catalog smoke checks
         continue-on-error: true
