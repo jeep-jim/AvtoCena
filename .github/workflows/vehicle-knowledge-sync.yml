@@ -46,11 +46,13 @@ jobs:
           import fs from 'node:fs/promises';
           let report = { models: 0, indexTotal: 0, chunkSize: null, chunks: 0, largestChunk: 0, hrv: [], errors: [] };
           try {
-            const { readChunkedDataJson, readDataJson } = await import('./apps/web/lib/data.ts');
-            const { resolveVehicleModelQuery } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
-            const models = await readChunkedDataJson('catalog/vehicle-knowledge/models.json', []);
-            const index = await readDataJson('catalog/vehicle-knowledge/models-index.json', null);
-            const hrv = await resolveVehicleModelQuery('hrv', undefined, 10);
+            const dataModule = await import('./apps/web/lib/data.ts');
+            const dataApi = dataModule.default || dataModule;
+            const vehicleModule = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+            const vehicleApi = vehicleModule.default || vehicleModule;
+            const models = await dataApi.readChunkedDataJson('catalog/vehicle-knowledge/models.json', []);
+            const index = await dataApi.readDataJson('catalog/vehicle-knowledge/models-index.json', null);
+            const hrv = await vehicleApi.resolveVehicleModelQuery('hrv', undefined, 10);
             const errors = [];
             if (models.length < 5000) errors.push(`vehicle_knowledge_too_small_${models.length}`);
             if (!index || index.maxRecordsPerChunk !== 250) errors.push('vehicle_knowledge_chunk_size_invalid');
