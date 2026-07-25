@@ -4,12 +4,6 @@ const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breakin
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|twitter|x\.com|social|share[-_ ]?icon)/i;
 const DISALLOWED_GENERIC_SOURCES = new Set(["dubicars_uae", "dubicars_clean", "autouncle_europe", "autoscout_europe"]);
-const TRUSTED_MARKET_SOURCES: Partial<Record<string, Set<string>>> = {
-  europe: new Set(["otomoto_europe_exact"]),
-  uae: new Set(["dubicars_uae_exact"]),
-  georgia: new Set(["myauto_georgia_exact"]),
-  kyrgyzstan: new Set(["mashina_kyrgyzstan_exact"]),
-};
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
 const REQUIRED_PRICE_LINES = [
   "car",
@@ -83,32 +77,9 @@ function hasCompletePriceBreakdown(offer: VehicleOffer) {
   return REQUIRED_PRICE_LINES.every((id) => positiveIds.has(id));
 }
 
-function hasRequiredPower(offer: VehicleOffer) {
-  if (!(Number(offer.powerHp || 0) > 0)) return false;
-  const kind = String(offer.powertrainKind || "");
-  if (["electric", "series_hybrid", "other_hybrid"].includes(kind)) {
-    const exact = Number(offer.power30MinKw || 0) > 0 && Number(offer.utilizationPowerKw || 0) > 0;
-    const explicitPreview = offer.calculationStatus === "estimated"
-      && offer.calculationSnapshot?.certified30MinutePowerMissing === true
-      && Number(offer.utilizationPowerKw || 0) > 0;
-    return exact || explicitPreview;
-  }
-  return true;
-}
-
-function hasCompleteOtomotoDetails(offer: VehicleOffer) {
-  if (offer.sourceId !== "otomoto_europe_exact") return true;
-  const fuel = clean(offer.fuel).toLowerCase();
-  const electric = /electric|ev|электро/.test(fuel);
-  return Number(offer.sourcePrice || 0) > 0
-    && Boolean(clean(offer.sourceCurrency))
-    && Number(offer.mileageKm) >= 0
-    && Boolean(clean(offer.fuel))
-    && Boolean(clean(offer.transmission))
-    && Boolean(clean(offer.bodyType))
-    && Boolean(clean(offer.drive))
-    && (electric || Number(offer.engineCc || 0) > 0)
-    && Number(offer.powerHp || 0) > 0;
+function hasMileage(offer: VehicleOffer) {
+  const mileage = Number(offer.mileageKm);
+  return Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000;
 }
 
 function rawImagesAreCredible(offer: VehicleOffer) {
@@ -120,8 +91,6 @@ function rawImagesAreCredible(offer: VehicleOffer) {
 export function hasCredibleOfferContent(offer: VehicleOffer) {
   const sourceId = String(offer.sourceId || "");
   if (DISALLOWED_GENERIC_SOURCES.has(sourceId)) return false;
-  const trusted = TRUSTED_MARKET_SOURCES[String(offer.market || "")];
-  if (trusted && sourceId && !trusted.has(sourceId)) return false;
   const raw = offer.operational?.raw as any;
   const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
   if (sourceId === "dubicars_uae_exact" && rawImages.length && !rawImages.some((url: string) => /\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+)\/[^/?#]+\/[a-f0-9-]+\.(?:jpe?g|webp)/i.test(url))) return false;
@@ -131,11 +100,10 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
-  if (!hasRequiredPower(offer)
+  if (!hasMileage(offer)
     || !hasReadyCalculation(offer)
     || !hasCompletePriceBreakdown(offer)
     || !hasPlausiblePrice(offer)
-    || !hasCompleteOtomotoDetails(offer)
     || !rawImagesAreCredible(offer)) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
