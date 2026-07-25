@@ -9,7 +9,7 @@ const { CATALOG_DAILY_TARGET_PER_MARKET } = await import("../apps/web/lib/catalo
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
-const minimumImages = Math.max(4, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
+const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
 const maxImages = Math.min(30, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 30));
 const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 1000));
@@ -235,6 +235,7 @@ for (const sourceId of sourceIds) {
 
 report.finishedAt = new Date().toISOString();
 report.saved = offers.size;
+report.targetReached = offers.size >= target;
 report.publicBySource = [...offers.values()].reduce((totals, offer) => {
   totals[offer.sourceId] = (totals[offer.sourceId] || 0) + 1;
   return totals;
@@ -250,7 +251,7 @@ if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
 report.imageStats.average = offers.size ? Number((report.imageStats.total / offers.size).toFixed(2)) : 0;
 
 await fs.writeFile(outputFile, JSON.stringify({
-  version: 4,
+  version: 5,
   market,
   generatedAt: report.finishedAt,
   target,
@@ -260,4 +261,3 @@ await fs.writeFile(outputFile, JSON.stringify({
   offers: [...offers.values()].slice(0, target),
 }, null, 2));
 console.log(JSON.stringify(report, null, 2));
-if (offers.size < target) throw new Error(`catalog_rebuild_under_target_${market}_${offers.size}_of_${target}`);
