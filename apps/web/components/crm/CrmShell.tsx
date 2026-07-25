@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { CrmThemeToggle } from "@/components/crm/CrmThemeToggle";
+import { defaultManagerAvatar } from "@/lib/default-avatars";
 
 type CrmShellProps = {
   title: string;
@@ -26,6 +27,7 @@ export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProp
     ["/crm/settings", "Рынки и расчёт"],
     ["/crm/dealers", "Дилеры"],
   ] as const;
+  const avatar = user?.avatarUrl || defaultManagerAvatar(user?.id || user?.telegramUsername);
 
   return (
     <main className="crm-root min-h-screen px-4 py-5 md:px-8 md:py-6">
@@ -42,13 +44,7 @@ export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProp
           <div className="flex flex-wrap items-center justify-end gap-2">
             <CrmThemeToggle />
             <Link href={user?.id ? `/crm/managers/${encodeURIComponent(user.id)}` : "/crm/managers"} className="crm-user-chip flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/8 py-1.5 pl-1.5 pr-4 text-sm font-black text-white/70">
-              {user?.avatarUrl ? (
-                <img src={user.avatarUrl} alt="" className="h-8 w-8 rounded-full object-cover" referrerPolicy="no-referrer" />
-              ) : (
-                <span className="grid h-8 w-8 place-items-center rounded-full bg-white text-xs font-black text-black">
-                  {(user?.displayName || "П").slice(0, 1).toUpperCase()}
-                </span>
-              )}
+              <img src={avatar} alt="" className="h-8 w-8 rounded-full object-cover" referrerPolicy="no-referrer" />
               <span>{user?.displayName || "Пользователь"} · {roleLabels[user?.role || ""] || user?.role || "гость"}</span>
             </Link>
             <form action="/api/auth/logout?redirect=/login" method="post">
