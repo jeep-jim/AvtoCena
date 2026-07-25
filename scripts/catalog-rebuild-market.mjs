@@ -5,14 +5,15 @@ const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalo
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
+const { CATALOG_DAILY_TARGET_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
-const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || 250));
+const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
 const minimumImages = Math.max(4, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
-const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
-const maxImages = Math.min(1000, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 1000));
-const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 500));
-const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || 1500));
+const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+const maxImages = Math.min(30, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 30));
+const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 1000));
+const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || target * 4));
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}.json`;
 
 const sourcePlan = {
@@ -177,7 +178,7 @@ for (const seed of restored) {
   offers.set(prepared.id, prepared);
   report.seedSaved++;
   report.saved = offers.size;
-  if (offers.size % 10 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
+  if (offers.size % 25 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
 }
 
 for (const sourceId of sourceIds) {
@@ -223,7 +224,7 @@ for (const sourceId of sourceIds) {
       }
       offers.set(prepared.id, prepared);
       report.saved = offers.size;
-      if (offers.size % 10 === 0) console.log(`[fresh:${market}] ${offers.size}/${target}; ${sourceId}; photos=${prepared.images.length}`);
+      if (offers.size % 25 === 0) console.log(`[fresh:${market}] ${offers.size}/${target}; ${sourceId}; photos=${prepared.images.length}`);
     }
 
     cursor = fetched?.nextCursor || null;
@@ -249,7 +250,7 @@ if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
 report.imageStats.average = offers.size ? Number((report.imageStats.total / offers.size).toFixed(2)) : 0;
 
 await fs.writeFile(outputFile, JSON.stringify({
-  version: 3,
+  version: 4,
   market,
   generatedAt: report.finishedAt,
   target,
