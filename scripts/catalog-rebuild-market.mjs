@@ -21,6 +21,8 @@ const sourcePlan = {
   japan: ["goonet_japan_exact", "beforward_japan", "beforward_public"],
   uae: ["dubicars_uae_exact", "beforward_uae"],
   europe: ["otomoto_europe_exact", "beforward_uk", "beforward_belgium"],
+  georgia: ["myauto_georgia_exact"],
+  kyrgyzstan: ["mashina_kyrgyzstan_exact"],
 };
 
 if (!Object.prototype.hasOwnProperty.call(sourcePlan, market)) throw new Error(`unsupported_rebuild_market_${market || "missing"}`);
