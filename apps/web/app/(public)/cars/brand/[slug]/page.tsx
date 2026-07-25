@@ -101,7 +101,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           const label = CATALOG_MARKET_LABELS[group.market];
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
-              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{CATALOG_MARKET_FLAGS[group.market]}</span><span>{brand.name} из {label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
+              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{CATALOG_MARKET_FLAGS[group.market]}</span><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
               <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMake)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
