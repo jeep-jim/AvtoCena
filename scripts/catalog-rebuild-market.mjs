@@ -4,7 +4,7 @@ const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
+const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_DAILY_TARGET_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
@@ -28,8 +28,13 @@ const sourcePlan = {
 
 if (!Object.prototype.hasOwnProperty.call(sourcePlan, market)) throw new Error(`unsupported_rebuild_market_${market || "missing"}`);
 const configuredSources = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
-const sourceIds = configuredSources.length ? configuredSources : sourcePlan[market];
 const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
+const connectedMarketSources = catalogImportSources
+  .filter((source) => source.market === market || source.market === "multi")
+  .map((source) => source.sourceId);
+const sourceIds = configuredSources.length
+  ? configuredSources
+  : [...new Set([...sourcePlan[market], ...connectedMarketSources])];
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
 
 function text(value) {
@@ -107,6 +112,7 @@ const report = {
   minimumImages,
   maxImages,
   sourceIds,
+  connectedMarketSources,
   startedAt: new Date().toISOString(),
   pages: 0,
   seen: 0,
@@ -124,17 +130,17 @@ function recordError(row) {
 }
 
 async function prepareCandidate(input, source, origin) {
-  if (!source?.fetchImages) return null;
   let offer = cleanOffer({ ...input });
   if (!offer || offer.market !== market || !offer.id) return null;
 
-  let images = [];
-  try {
-    images = uniqueImages(await source.fetchImages(offer));
-  } catch (error) {
-    report.imageFailures++;
-    recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "exact_listing_gallery", error: String(error?.message || error) });
-    return null;
+  let images = uniqueImages(offer.images || []);
+  if (images.length < minimumImages && source?.fetchImages) {
+    try {
+      const fetchedImages = await source.fetchImages(offer);
+      images = uniqueImages([...images, ...(Array.isArray(fetchedImages) ? fetchedImages : [])]);
+    } catch (error) {
+      recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "exact_listing_gallery", error: String(error?.message || error) });
+    }
   }
   if (images.length < minimumImages) {
     report.imageFailures++;
@@ -164,12 +170,19 @@ async function prepareCandidate(input, source, origin) {
   return isCrediblePublicOffer(offer) ? offer : null;
 }
 
-const restored = (await readAllOffersForMaintenance())
+const [internalRows, publicRows] = await Promise.all([
+  readAllOffersForMaintenance(),
+  readMarketOffers(market),
+]);
+const restoredMap = new Map();
+for (const offer of [...publicRows, ...internalRows]
   .filter((offer) => offer && offer.market === market && ["active", "stale"].includes(String(offer.status || "")))
-  .sort((left, right) => freshness(right) - freshness(left) || Number(right.images?.length || 0) - Number(left.images?.length || 0))
-  .slice(0, seedScanLimit);
+  .sort((left, right) => freshness(right) - freshness(left) || Number(right.images?.length || 0) - Number(left.images?.length || 0))) {
+  if (!restoredMap.has(offer.id)) restoredMap.set(offer.id, offer);
+  if (restoredMap.size >= seedScanLimit) break;
+}
 
-for (const seed of restored) {
+for (const seed of restoredMap.values()) {
   if (offers.size >= target) break;
   report.seedSeen++;
   const source = adapters.get(seed.sourceId);
@@ -251,7 +264,7 @@ if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
 report.imageStats.average = offers.size ? Number((report.imageStats.total / offers.size).toFixed(2)) : 0;
 
 await fs.writeFile(outputFile, JSON.stringify({
-  version: 5,
+  version: 6,
   market,
   generatedAt: report.finishedAt,
   target,
