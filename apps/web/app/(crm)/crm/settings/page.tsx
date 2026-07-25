@@ -6,12 +6,15 @@ import { canEditBusinessSettings } from "@/lib/settings-validation";
 
 export const dynamic = "force-dynamic";
 
+type SearchParams = Record<string, string | string[] | undefined>;
+
 function first(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value || "";
 }
 
-export default async function CrmSettingsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
-  const [query, markets] = await Promise.all([searchParams || Promise.resolve({}), getMarketsWithEffectiveVersions()]);
+export default async function CrmSettingsPage({ searchParams }: { searchParams?: Promise<SearchParams> }) {
+  const query: SearchParams = (await searchParams) || {};
+  const markets = await getMarketsWithEffectiveVersions();
   const user = getCurrentUser();
   const canEdit = canEditBusinessSettings(user?.role);
   const state = first(query.state);
