@@ -76,10 +76,6 @@ function absoluteUrl(value: string, baseUrl: string) {
   if (!value || /^(?:data:|javascript:|mailto:|tel:)/i.test(value)) return "";
   try { return new URL(value.replace(/\\\//g, "/").replace(/&amp;/gi, "&"), baseUrl).toString(); } catch { return ""; }
 }
-function numberValue(value: unknown) {
-  const parsed = Number(String(value ?? "").replace(/\s/g, "").replace(/,/g, ".").replace(/[^0-9.]/g, ""));
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
-}
 function integer(value: unknown) {
   const parsed = Number(String(value ?? "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
@@ -129,7 +125,7 @@ function productionDateFrom(value: string) {
   const monthYear = value.match(/\b(0?[1-9]|1[0-2])[-/.]((?:19|20)\d{2})\b/);
   return monthYear ? `${monthYear[2]}-${String(Number(monthYear[1])).padStart(2, "0")}` : undefined;
 }
-function money(value: string, preferred: "USD" | "GEL" | "KGS") {
+function money(value: string, preferred: "GEL" | "KGS") {
   const patterns: Array<[RegExp, string]> = preferred === "GEL"
     ? [
       [/(?:USD|US\$|\$)\s*([0-9][0-9\s,.']{2,})|([0-9][0-9\s,.']{2,})\s*(?:USD|US\$|\$)/i, "USD"],
@@ -186,22 +182,13 @@ function parseMyAuto(markup: string, detailUrl: string, id: string): RegionalRow
   const plain = plainText(markup);
   const stops = ["Year", "Engine Volume", "Mileage", "Manufacturer", "Model", "Color", "Fuel type", "Gear box type", "Drive wheels", "Price", "Before customs", "Customs cleared", "Tel"];
   const title = pageTitle(markup) || `MyAuto ${id}`;
-  const makeModel = deriveMakeModel(
-    title,
-    labelValue(plain, ["Manufacturer"], stops),
-    labelValue(plain, ["Model"], stops),
-  );
+  const makeModel = deriveMakeModel(title, labelValue(plain, ["Manufacturer"], stops), labelValue(plain, ["Model"], stops));
   const year = Number(labelValue(plain, ["Year"], stops).match(/(?:19|20)\d{2}/)?.[0] || title.match(/(?:19|20)\d{2}/)?.[0]);
   const engineRaw = labelValue(plain, ["Engine Volume"], stops) || plain;
   const parsedMoney = money(plain, "GEL");
   if (!makeModel.make || !makeModel.model || !year) return null;
-  return normalizeVehicleOfferSpecs({
-    id,
-    detailUrl,
-    title,
-    make: makeModel.make,
-    model: makeModel.model,
-    year,
+  return {
+    id, detailUrl, title, make: makeModel.make, model: makeModel.model, year,
     productionDate: productionDateFrom(plain),
     mileageKm: integer(labelValue(plain, ["Mileage"], stops)),
     engineCc: engineCcFrom(engineRaw) || integer(engineRaw),
@@ -209,11 +196,9 @@ function parseMyAuto(markup: string, detailUrl: string, id: string): RegionalRow
     transmission: labelValue(plain, ["Gear box type", "Transmission"], stops),
     drive: labelValue(plain, ["Drive wheels", "Drive"], stops),
     color: labelValue(plain, ["Color"], stops),
-    price: parsedMoney.price,
-    currency: parsedMoney.currency,
-    images: collectImages(markup, detailUrl),
-    rawText: safeRawText(plain),
-  }) as RegionalRow;
+    price: parsedMoney.price, currency: parsedMoney.currency,
+    images: collectImages(markup, detailUrl), rawText: safeRawText(plain),
+  };
 }
 
 function parseMashina(markup: string, detailUrl: string, id: string): RegionalRow | null {
@@ -223,30 +208,22 @@ function parseMashina(markup: string, detailUrl: string, id: string): RegionalRo
   const makeModel = deriveMakeModel(title);
   const year = Number(labelValue(plain, ["Год выпуска", "Year of manufacture", "Year"], stops).match(/(?:19|20)\d{2}/)?.[0] || title.match(/(?:19|20)\d{2}/)?.[0]);
   const engineRaw = labelValue(plain, ["Двигатель", "Engine"], stops);
-  const fuel = engineRaw.split("/").slice(1).join("/").trim();
   const parsedMoney = money(plain, "KGS");
   if (!makeModel.make || !makeModel.model || !year) return null;
-  return normalizeVehicleOfferSpecs({
-    id,
-    detailUrl,
-    title,
-    make: makeModel.make,
-    model: makeModel.model,
-    year,
+  return {
+    id, detailUrl, title, make: makeModel.make, model: makeModel.model, year,
     productionDate: productionDateFrom(plain),
     mileageKm: integer(labelValue(plain, ["Пробег", "Mileage"], stops)),
     engineCc: engineCcFrom(engineRaw),
-    fuel,
+    fuel: engineRaw.split("/").slice(1).join("/").trim(),
     transmission: labelValue(plain, ["Коробка", "Transmission", "Gearbox"], stops),
     drive: labelValue(plain, ["Привод", "Drive"], stops),
     bodyType: labelValue(plain, ["Кузов", "Body"], stops),
     color: labelValue(plain, ["Цвет", "Color"], stops),
     location: labelValue(plain, ["Регион, город", "Region, city"], stops),
-    price: parsedMoney.price,
-    currency: parsedMoney.currency,
-    images: collectImages(markup, detailUrl),
-    rawText: safeRawText(plain),
-  }) as RegionalRow;
+    price: parsedMoney.price, currency: parsedMoney.currency,
+    images: collectImages(markup, detailUrl), rawText: safeRawText(plain),
+  };
 }
 
 abstract class RegionalHtmlAdapter implements CatalogSourceAdapter {
@@ -278,7 +255,7 @@ abstract class RegionalHtmlAdapter implements CatalogSourceAdapter {
         const row = this.parse(markup, detailUrl, id);
         if (row) rows.push(row);
       } catch {
-        // Continue with the next public listing when a single ad is removed or temporarily unavailable.
+        // A removed or temporarily unavailable listing must not stop the market scan.
       }
     }
     return {
@@ -296,33 +273,14 @@ abstract class RegionalHtmlAdapter implements CatalogSourceAdapter {
     if (!raw?.id || !raw.make || !raw.model || !raw.year) return null;
     const timestamp = nowIso();
     return normalizeVehicleOfferSpecs({
-      id: stableOfferId(this.sourceId, raw.id),
-      sourceId: this.sourceId,
-      sourceOfferId: raw.id,
-      market: this.market,
-      offerType: "fixed",
-      status: "active",
-      make: raw.make,
-      model: raw.model,
-      trim: raw.title,
-      year: raw.year,
-      productionDate: raw.productionDate,
-      mileageKm: raw.mileageKm,
-      engineCc: raw.engineCc,
-      powerHp: raw.powerHp,
-      fuel: raw.fuel,
-      transmission: raw.transmission,
-      drive: raw.drive,
-      bodyType: raw.bodyType,
-      color: raw.color,
-      sourcePrice: raw.price || null,
-      sourceCurrency: raw.price ? raw.currency || null : null,
-      priceMode: raw.price ? "fixed" : "estimated",
-      images: [],
-      totalRub: null,
-      calculationStatus: raw.price ? "ready" : "needs_data",
-      firstSeenAt: timestamp,
-      updatedAt: timestamp,
+      id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id,
+      market: this.market, offerType: "fixed", status: "active", make: raw.make, model: raw.model,
+      trim: raw.title, year: raw.year, productionDate: raw.productionDate, mileageKm: raw.mileageKm,
+      engineCc: raw.engineCc, powerHp: raw.powerHp, fuel: raw.fuel, transmission: raw.transmission,
+      drive: raw.drive, bodyType: raw.bodyType, color: raw.color,
+      sourcePrice: raw.price || null, sourceCurrency: raw.price ? raw.currency || null : null,
+      priceMode: raw.price ? "fixed" : "estimated", images: [], totalRub: null,
+      calculationStatus: raw.price ? "ready" : "needs_data", firstSeenAt: timestamp, updatedAt: timestamp,
       operational: {
         sourceUrl: raw.detailUrl,
         sourceVenueName: raw.location || (this.market === "georgia" ? "Georgia" : "Kyrgyzstan"),
@@ -340,10 +298,10 @@ abstract class RegionalHtmlAdapter implements CatalogSourceAdapter {
         const { markup } = await fetchHtml(detailUrl, new URL(detailUrl).origin);
         urls = [...urls, ...collectImages(markup, detailUrl)];
       } catch {
-        // Keep images already extracted from the list/detail response.
+        // Keep URLs already extracted from the listing response.
       }
     }
-    const limit = Math.min(1000, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000)));
+    const limit = Math.min(1_000, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1_000)));
     const saved: CatalogImage[] = [];
     for (const url of [...new Set(urls)].slice(0, limit)) {
       const image = await cacheImageFromUrl(url, this.market, { headers: { ...HEADERS, referer: detailUrl } }).catch(() => null);
@@ -360,12 +318,7 @@ export class MyAutoGeorgiaAdapter extends RegionalHtmlAdapter {
   sourceId = "myauto_georgia_exact";
   market: CatalogMarket = "georgia";
   detailPattern = /myauto\.ge\/en\/(?:pr\/\d+|prints\/2\/\d+)/i;
-  listUrls(page: number) {
-    return [
-      `https://www.myauto.ge/en/s/?page=${page}`,
-      `https://www.myauto.ge/en/main?page=${page}`,
-    ];
-  }
+  listUrls(page: number) { return [`https://www.myauto.ge/en/s/?page=${page}`, `https://www.myauto.ge/en/main?page=${page}`]; }
   idFromUrl(url: string) { return url.match(/\/(?:pr|prints\/2)\/(\d+)/i)?.[1] || ""; }
   parse(markup: string, detailUrl: string, id: string) { return parseMyAuto(markup, detailUrl, id); }
 }
@@ -374,12 +327,7 @@ export class MashinaKyrgyzstanAdapter extends RegionalHtmlAdapter {
   sourceId = "mashina_kyrgyzstan_exact";
   market: CatalogMarket = "kyrgyzstan";
   detailPattern = /mashina\.kg\/(?:en\/)?details\/[^?#]+/i;
-  listUrls(page: number) {
-    return [
-      `https://www.mashina.kg/en/search/all/?page=${page}`,
-      `https://m.mashina.kg/en/search/?page=${page}`,
-    ];
-  }
+  listUrls(page: number) { return [`https://www.mashina.kg/en/search/all/?page=${page}`, `https://m.mashina.kg/en/search/?page=${page}`]; }
   idFromUrl(url: string) { return url.match(/-([a-f0-9]{18,})\/?(?:[?#]|$)/i)?.[1] || url.match(/\/details\/([^/?#]+)/i)?.[1] || ""; }
   parse(markup: string, detailUrl: string, id: string) { return parseMashina(markup, detailUrl, id); }
 }
