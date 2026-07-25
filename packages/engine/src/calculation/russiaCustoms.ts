@@ -43,11 +43,7 @@ export type RussiaCustomsResult = {
   breakdown: Array<{ id: string; title: string; amountRub?: number; note?: string }>;
 };
 
-type CoefficientRow = {
-  maxKw: number;
-  newVehicle: number;
-  usedVehicle: number;
-};
+type CoefficientRow = { maxKw: number; newVehicle: number; usedVehicle: number };
 
 const UTILIZATION_BASE_RUB = 20_000;
 const VAT_RATE_2026 = 0.22;
@@ -56,93 +52,52 @@ const PERSONAL_COMBUSTION_LIMIT_KW = 117.68;
 const PERSONAL_COMBUSTION_LIMIT_CC = 3_000;
 const PERSONAL_ELECTRIC_LIMIT_KW = 58.84;
 
-const EV_2026: CoefficientRow[] = [
-  { maxKw: 58.84, newVehicle: 40.04, usedVehicle: 70.44 },
-  { maxKw: 73.55, newVehicle: 49.56, usedVehicle: 82.08 },
-  { maxKw: 95.61, newVehicle: 65.88, usedVehicle: 95.64 },
-  { maxKw: 117.68, newVehicle: 78, usedVehicle: 111.36 },
-  { maxKw: 139.75, newVehicle: 92.4, usedVehicle: 129.72 },
-  { maxKw: 161.81, newVehicle: 109.68, usedVehicle: 151.2 },
-  { maxKw: 183.88, newVehicle: 129.96, usedVehicle: 176.16 },
-  { maxKw: 205.94, newVehicle: 153.96, usedVehicle: 205.2 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 182.4, usedVehicle: 239.04 },
-];
+function rows(values: Array<[number, number, number]>): CoefficientRow[] {
+  return values.map(([maxKw, newVehicle, usedVehicle]) => ({ maxKw, newVehicle, usedVehicle }));
+}
 
-const ICE_UP_TO_1000_2026: CoefficientRow[] = [
-  { maxKw: 117.68, newVehicle: 14.88, usedVehicle: 27.6 },
-  { maxKw: 139.75, newVehicle: 15.36, usedVehicle: 28.44 },
-  { maxKw: 161.81, newVehicle: 15.84, usedVehicle: 29.28 },
-  { maxKw: 183.88, newVehicle: 16.2, usedVehicle: 30.12 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 17.28, usedVehicle: 30.12 },
-];
+const EV_2026 = rows([
+  [58.84, 40.04, 70.44], [73.55, 49.56, 82.08], [95.61, 65.88, 95.64],
+  [117.68, 78, 111.36], [139.75, 92.4, 129.72], [161.81, 109.68, 151.2],
+  [183.88, 129.96, 176.16], [205.94, 153.96, 205.2], [Infinity, 182.4, 239.04],
+]);
 
-const ICE_1000_TO_2000_2026: CoefficientRow[] = [
-  { maxKw: 117.68, newVehicle: 40.04, usedVehicle: 70.44 },
-  { maxKw: 139.75, newVehicle: 45, usedVehicle: 74.64 },
-  { maxKw: 161.81, newVehicle: 47.64, usedVehicle: 79.2 },
-  { maxKw: 183.88, newVehicle: 50.52, usedVehicle: 83.88 },
-  { maxKw: 205.94, newVehicle: 57.12, usedVehicle: 91.92 },
-  { maxKw: 228, newVehicle: 64.56, usedVehicle: 100.56 },
-  { maxKw: 250.07, newVehicle: 72.96, usedVehicle: 110.16 },
-  { maxKw: 272.13, newVehicle: 83.16, usedVehicle: 120.6 },
-  { maxKw: 294.2, newVehicle: 94.8, usedVehicle: 132 },
-  { maxKw: 316.26, newVehicle: 108, usedVehicle: 144.6 },
-  { maxKw: 338.33, newVehicle: 123.24, usedVehicle: 158.4 },
-  { maxKw: 367.75, newVehicle: 140.4, usedVehicle: 173.4 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 160.08, usedVehicle: 189.84 },
-];
+const ICE_UP_TO_1000_2026 = rows([
+  [117.68, 14.88, 27.6], [139.75, 15.36, 28.44], [161.81, 15.84, 29.28],
+  [183.88, 16.2, 30.12], [Infinity, 17.28, 30.12],
+]);
 
-const ICE_2000_TO_3000_2026: CoefficientRow[] = [
-  { maxKw: 117.68, newVehicle: 112.52, usedVehicle: 170.36 },
-  { maxKw: 139.75, newVehicle: 115.34, usedVehicle: 172.8 },
-  { maxKw: 161.81, newVehicle: 118.2, usedVehicle: 175.08 },
-  { maxKw: 183.88, newVehicle: 120.12, usedVehicle: 177.6 },
-  { maxKw: 205.94, newVehicle: 126, usedVehicle: 183 },
-  { maxKw: 228, newVehicle: 131.04, usedVehicle: 188.52 },
-  { maxKw: 250.07, newVehicle: 136.32, usedVehicle: 193.68 },
-  { maxKw: 272.13, newVehicle: 141.72, usedVehicle: 199.08 },
-  { maxKw: 294.2, newVehicle: 147.48, usedVehicle: 204.72 },
-  { maxKw: 316.26, newVehicle: 153.36, usedVehicle: 210.48 },
-  { maxKw: 338.33, newVehicle: 159.48, usedVehicle: 216.36 },
-  { maxKw: 367.75, newVehicle: 165.84, usedVehicle: 222.36 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 172.44, usedVehicle: 228.6 },
-];
+const ICE_1000_TO_2000_2026 = rows([
+  [117.68, 40.04, 70.44], [139.75, 45, 74.64], [161.81, 47.64, 79.2],
+  [183.88, 50.52, 83.88], [205.94, 57.12, 91.92], [228, 64.56, 100.56],
+  [250.07, 72.96, 110.16], [272.13, 83.16, 120.6], [294.2, 94.8, 132],
+  [316.26, 108, 144.6], [338.33, 123.24, 158.4], [367.75, 140.4, 173.4],
+  [Infinity, 160.08, 189.84],
+]);
 
-const ICE_3000_TO_3500_2026: CoefficientRow[] = [
-  { maxKw: 73.55, newVehicle: 129.2, usedVehicle: 197.81 },
-  { maxKw: 95.61, newVehicle: 129.2, usedVehicle: 197.81 },
-  { maxKw: 117.68, newVehicle: 129.2, usedVehicle: 197.81 },
-  { maxKw: 139.75, newVehicle: 131.76, usedVehicle: 200.04 },
-  { maxKw: 161.81, newVehicle: 134.4, usedVehicle: 202.2 },
-  { maxKw: 183.88, newVehicle: 137.16, usedVehicle: 204.36 },
-  { maxKw: 205.94, newVehicle: 140.52, usedVehicle: 207.24 },
-  { maxKw: 228, newVehicle: 144, usedVehicle: 212.4 },
-  { maxKw: 250.07, newVehicle: 151.92, usedVehicle: 217.8 },
-  { maxKw: 272.13, newVehicle: 160.32, usedVehicle: 224.28 },
-  { maxKw: 294.2, newVehicle: 169.2, usedVehicle: 231 },
-  { maxKw: 316.26, newVehicle: 178.44, usedVehicle: 237.96 },
-  { maxKw: 338.33, newVehicle: 188.28, usedVehicle: 245.04 },
-  { maxKw: 367.75, newVehicle: 198.6, usedVehicle: 252.48 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 209.52, usedVehicle: 260.04 },
-];
+const ICE_2000_TO_3000_2026 = rows([
+  [117.68, 112.52, 170.36], [139.75, 115.34, 172.8], [161.81, 118.2, 175.08],
+  [183.88, 120.12, 177.6], [205.94, 126, 183], [228, 131.04, 188.52],
+  [250.07, 136.32, 193.68], [272.13, 141.72, 199.08], [294.2, 147.48, 204.72],
+  [316.26, 153.36, 210.48], [338.33, 159.48, 216.36], [367.75, 165.84, 222.36],
+  [Infinity, 172.44, 228.6],
+]);
 
-const ICE_OVER_3500_2026: CoefficientRow[] = [
-  { maxKw: 73.55, newVehicle: 164.53, usedVehicle: 216.29 },
-  { maxKw: 95.61, newVehicle: 164.53, usedVehicle: 216.29 },
-  { maxKw: 117.68, newVehicle: 164.53, usedVehicle: 216.29 },
-  { maxKw: 139.75, newVehicle: 167.28, usedVehicle: 219.48 },
-  { maxKw: 161.81, newVehicle: 170.16, usedVehicle: 222.84 },
-  { maxKw: 183.88, newVehicle: 173.04, usedVehicle: 226.2 },
-  { maxKw: 205.94, newVehicle: 176.52, usedVehicle: 231.36 },
-  { maxKw: 228, newVehicle: 180, usedVehicle: 236.64 },
-  { maxKw: 250.07, newVehicle: 186.36, usedVehicle: 249.6 },
-  { maxKw: 272.13, newVehicle: 192.88, usedVehicle: 263.4 },
-  { maxKw: 294.2, newVehicle: 199.68, usedVehicle: 277.92 },
-  { maxKw: 316.26, newVehicle: 206.64, usedVehicle: 293.16 },
-  { maxKw: 338.33, newVehicle: 213.84, usedVehicle: 309.36 },
-  { maxKw: 367.75, newVehicle: 221.28, usedVehicle: 326.4 },
-  { maxKw: Number.POSITIVE_INFINITY, newVehicle: 229.08, usedVehicle: 344.28 },
-];
+const ICE_3000_TO_3500_2026 = rows([
+  [73.55, 129.2, 197.81], [95.61, 129.2, 197.81], [117.68, 129.2, 197.81],
+  [139.75, 131.76, 200.04], [161.81, 134.4, 202.2], [183.88, 137.16, 204.36],
+  [205.94, 140.52, 207.24], [228, 144, 212.4], [250.07, 151.92, 217.8],
+  [272.13, 160.32, 224.28], [294.2, 169.2, 231], [316.26, 178.44, 237.96],
+  [338.33, 188.28, 245.04], [367.75, 198.6, 252.48], [Infinity, 209.52, 260.04],
+]);
+
+const ICE_OVER_3500_2026 = rows([
+  [73.55, 164.53, 216.29], [95.61, 164.53, 216.29], [117.68, 164.53, 216.29],
+  [139.75, 167.28, 219.48], [161.81, 170.16, 222.84], [183.88, 173.04, 226.2],
+  [205.94, 176.52, 231.36], [228, 180, 236.64], [250.07, 186.36, 249.6],
+  [272.13, 192.88, 263.4], [294.2, 199.68, 277.92], [316.26, 206.64, 293.16],
+  [338.33, 213.84, 309.36], [367.75, 221.28, 326.4], [Infinity, 229.08, 344.28],
+]);
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -160,11 +115,8 @@ function parseProductionMonth(value?: string, fallbackYear?: number) {
 }
 
 function completedMonths(production: { year: number; month: number }, importedAt: Date) {
-  return Math.max(
-    0,
-    (importedAt.getUTCFullYear() - production.year) * 12
-      + (importedAt.getUTCMonth() + 1 - production.month),
-  );
+  return Math.max(0, (importedAt.getUTCFullYear() - production.year) * 12
+    + (importedAt.getUTCMonth() + 1 - production.month));
 }
 
 function ageBand(ageMonths: number): RussiaCustomsAgeBand {
@@ -175,13 +127,8 @@ function ageBand(ageMonths: number): RussiaCustomsAgeBand {
 
 function possibleProductionMonths(production: { year: number; month?: number }, importedAt: Date) {
   if (production.month) return [{ year: production.year, month: production.month }];
-  const lastMonth = production.year === importedAt.getUTCFullYear()
-    ? importedAt.getUTCMonth() + 1
-    : 12;
-  return Array.from(
-    { length: Math.max(1, lastMonth) },
-    (_, index) => ({ year: production.year, month: index + 1 }),
-  );
+  const lastMonth = production.year === importedAt.getUTCFullYear() ? importedAt.getUTCMonth() + 1 : 12;
+  return Array.from({ length: Math.max(1, lastMonth) }, (_, index) => ({ year: production.year, month: index + 1 }));
 }
 
 export function customsClearanceFeeRub(customsValueRub: number) {
@@ -207,16 +154,10 @@ function newCarDutyEur(customsValueEur: number, engineCc: number) {
           : customsValueEur <= 169_000
             ? { percent: 0.48, minimumPerCc: 15 }
             : { percent: 0.48, minimumPerCc: 20 };
-  return Math.max(
-    customsValueEur * tier.percent,
-    engineCc * tier.minimumPerCc,
-  );
+  return Math.max(customsValueEur * tier.percent, engineCc * tier.minimumPerCc);
 }
 
-function usedCarRateEurPerCc(
-  engineCc: number,
-  band: Exclude<RussiaCustomsAgeBand, "up_to_3_years">,
-) {
+function usedCarRateEurPerCc(engineCc: number, band: Exclude<RussiaCustomsAgeBand, "up_to_3_years">) {
   if (band === "from_3_to_5_years") {
     if (engineCc <= 1_000) return 1.5;
     if (engineCc <= 1_500) return 1.7;
@@ -233,12 +174,7 @@ function usedCarRateEurPerCc(
   return 5.7;
 }
 
-function unifiedDutyRub(
-  customsValueEur: number,
-  eurRateRub: number,
-  engineCc: number,
-  band: RussiaCustomsAgeBand,
-) {
+function unifiedDutyRub(customsValueEur: number, eurRateRub: number, engineCc: number, band: RussiaCustomsAgeBand) {
   const dutyEur = band === "up_to_3_years"
     ? newCarDutyEur(customsValueEur, engineCc)
     : engineCc * usedCarRateEurPerCc(engineCc, band);
@@ -256,49 +192,26 @@ function normalizePowertrain(input: RussiaCustomsInput): RussiaPowertrainKind {
 }
 
 function sumPower(values?: number[]) {
-  const powers = (values || [])
-    .map(positive)
-    .filter((value): value is number => value !== undefined);
-  return powers.length
-    ? Math.round(powers.reduce((sum, value) => sum + value, 0) * 100) / 100
-    : undefined;
+  const powers = (values || []).map(positive).filter((value): value is number => value !== undefined);
+  return powers.length ? Math.round(powers.reduce((sum, value) => sum + value, 0) * 100) / 100 : undefined;
 }
 
-export function utilizationPowerKwForInput(
-  input: RussiaCustomsInput,
-  kind = normalizePowertrain(input),
-) {
+export function utilizationPowerKwForInput(input: RussiaCustomsInput, kind = normalizePowertrain(input)) {
   const explicit = positive(input.utilizationPowerKw);
   if (explicit) return explicit;
-
-  const thirtyMinute = sumPower(input.power30MinKwByMotor)
-    || positive(input.power30MinKw);
+  const thirtyMinute = sumPower(input.power30MinKwByMotor) || positive(input.power30MinKw);
   const ice = positive(input.icePowerKw)
-    || (kind === "combustion"
-      ? positive(input.powerKw)
-        || (positive(input.powerHp) ? Number(input.powerHp) * 0.73549875 : undefined)
-      : undefined);
-
+    || (kind === "combustion" ? positive(input.powerKw)
+      || (positive(input.powerHp) ? Number(input.powerHp) * 0.73549875 : undefined) : undefined);
   if (kind === "electric" || kind === "series_hybrid") return thirtyMinute;
-  if (kind === "other_hybrid") {
-    return ice && thirtyMinute
-      ? Math.round((ice + thirtyMinute) * 100) / 100
-      : undefined;
-  }
+  if (kind === "other_hybrid") return ice && thirtyMinute ? Math.round((ice + thirtyMinute) * 100) / 100 : undefined;
   if (kind === "combustion") return ice;
   return undefined;
 }
 
-function coefficientFrom(
-  rows: CoefficientRow[],
-  powerKw: number,
-  band: RussiaCustomsAgeBand,
-) {
-  const row = rows.find((candidate) => powerKw <= candidate.maxKw)
-    || rows[rows.length - 1];
-  return band === "up_to_3_years"
-    ? row.newVehicle
-    : row.usedVehicle;
+function coefficientFrom(coefficientRows: CoefficientRow[], powerKw: number, band: RussiaCustomsAgeBand) {
+  const row = coefficientRows.find((candidate) => powerKw <= candidate.maxKw) || coefficientRows[coefficientRows.length - 1];
+  return band === "up_to_3_years" ? row.newVehicle : row.usedVehicle;
 }
 
 function combustionRows(engineCc: number) {
@@ -317,66 +230,46 @@ export function utilizationCoefficient2026(params: {
   personalUseEligible?: boolean;
 }) {
   const personalUse = params.personalUseEligible !== false;
-
   if (params.powertrainKind === "electric" || params.powertrainKind === "series_hybrid") {
     if (personalUse && params.utilizationPowerKw <= PERSONAL_ELECTRIC_LIMIT_KW) {
       return params.ageBand === "up_to_3_years" ? 0.17 : 0.26;
     }
     return coefficientFrom(EV_2026, params.utilizationPowerKw, params.ageBand);
   }
-
   if (params.powertrainKind === "combustion" || params.powertrainKind === "other_hybrid") {
     const engineCc = positive(params.engineCc);
     if (!engineCc) return undefined;
-    if (
-      personalUse
-      && engineCc <= PERSONAL_COMBUSTION_LIMIT_CC
-      && params.utilizationPowerKw <= PERSONAL_COMBUSTION_LIMIT_KW
-    ) {
+    if (personalUse && engineCc <= PERSONAL_COMBUSTION_LIMIT_CC
+      && params.utilizationPowerKw <= PERSONAL_COMBUSTION_LIMIT_KW) {
       return params.ageBand === "up_to_3_years" ? 0.17 : 0.26;
     }
-    return coefficientFrom(
-      combustionRows(engineCc),
-      params.utilizationPowerKw,
-      params.ageBand,
-    );
+    return coefficientFrom(combustionRows(engineCc), params.utilizationPowerKw, params.ageBand);
   }
-
   return undefined;
 }
 
 function exciseRateRubPerHp2026(powerKw: number) {
   if (powerKw <= 67.5) return 0;
-  if (powerKw <= 112.5) return 63;
-  if (powerKw <= 150) return 606;
-  if (powerKw <= 225) return 993;
-  if (powerKw <= 300) return 1_693;
-  if (powerKw <= 375) return 1_752;
-  return 1_810;
+  if (powerKw <= 112.5) return 64;
+  if (powerKw <= 150) return 613;
+  if (powerKw <= 225) return 1_004;
+  if (powerKw <= 300) return 1_711;
+  if (powerKw <= 375) return 1_771;
+  return 1_829;
 }
 
-function pureElectricCustomsPayment(
-  input: RussiaCustomsInput,
-  customsValueRub: number,
-  utilizationPowerKw: number,
-) {
+function pureElectricCustomsPayment(input: RussiaCustomsInput, customsValueRub: number, utilizationPowerKw: number) {
   const excisePowerKw = positive(input.powerKw)
     || (positive(input.powerHp) ? Number(input.powerHp) * 0.75 : undefined)
     || utilizationPowerKw;
   const excisePowerHp = positive(input.powerHp) || excisePowerKw / 0.75;
   const importDutyRub = Math.round(customsValueRub * EV_IMPORT_DUTY_RATE);
-  const exciseRub = Math.round(
-    excisePowerHp * exciseRateRubPerHp2026(excisePowerKw),
-  );
-  const vatRub = Math.round(
-    (customsValueRub + importDutyRub + exciseRub) * VAT_RATE_2026,
-  );
+  const exciseRub = Math.round(excisePowerHp * exciseRateRubPerHp2026(excisePowerKw));
+  const vatRub = Math.round((customsValueRub + importDutyRub + exciseRub) * VAT_RATE_2026);
   return { importDutyRub, exciseRub, vatRub };
 }
 
-export function calculateRussiaCustomsForIndividual(
-  input: RussiaCustomsInput,
-): RussiaCustomsResult {
+export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): RussiaCustomsResult {
   const missing: string[] = [];
   const warnings: string[] = [];
   const customsValueRub = positive(input.customsValueRub) || 0;
@@ -388,20 +281,16 @@ export function calculateRussiaCustomsForIndividual(
   const utilizationPowerKw = utilizationPowerKwForInput(input, powertrainKind);
   const pureElectric = powertrainKind === "electric";
   const needsCombustionDisplacement = powertrainKind === "combustion"
-    || powertrainKind === "series_hybrid"
-    || powertrainKind === "other_hybrid";
+    || powertrainKind === "series_hybrid" || powertrainKind === "other_hybrid";
 
   if (!customsValueRub) missing.push("customs_value");
   if (!eurRateRub) missing.push("eur_rate");
   if (!production) missing.push("production_date");
   if (powertrainKind === "unknown") missing.push("powertrain_kind");
-  if (!utilizationPowerKw) {
-    missing.push(
-      powertrainKind === "electric" || powertrainKind === "series_hybrid"
-        ? "certified_30_minute_power_kw"
-        : "utilization_power_kw",
-    );
-  }
+  if (!utilizationPowerKw) missing.push(
+    powertrainKind === "electric" || powertrainKind === "series_hybrid"
+      ? "certified_30_minute_power_kw" : "utilization_power_kw",
+  );
   if (needsCombustionDisplacement && !engineCc) missing.push("engine_cc");
 
   const ageCandidates = production
@@ -414,59 +303,32 @@ export function calculateRussiaCustomsForIndividual(
   const ageEstimated = Boolean(production && !production.month);
   const exactAgeMonths = production?.month ? ageCandidates[0]?.months : undefined;
   const customsValueEur = eurRateRub ? customsValueRub / eurRateRub : 0;
-  const customsClearance = customsValueRub
-    ? customsClearanceFeeRub(customsValueRub)
-    : 0;
+  const customsClearance = customsValueRub ? customsClearanceFeeRub(customsValueRub) : 0;
 
   const calculations = possibleAgeBands.map((band) => {
-    const coefficient = utilizationPowerKw
-      ? utilizationCoefficient2026({
-        powertrainKind,
-        utilizationPowerKw,
-        engineCc,
-        ageBand: band,
-        personalUseEligible: input.personalUseEligible,
-      })
-      : undefined;
-    const utilizationFeeRub = coefficient === undefined
-      ? undefined
-      : Math.round(UTILIZATION_BASE_RUB * coefficient);
-
+    const coefficient = utilizationPowerKw ? utilizationCoefficient2026({
+      powertrainKind,
+      utilizationPowerKw,
+      engineCc,
+      ageBand: band,
+      personalUseEligible: input.personalUseEligible,
+    }) : undefined;
+    const utilizationFeeRub = coefficient === undefined ? undefined : Math.round(UTILIZATION_BASE_RUB * coefficient);
     let importDutyRub = 0;
     let exciseRub = 0;
     let vatRub = 0;
     if (customsValueRub && pureElectric && utilizationPowerKw) {
-      ({ importDutyRub, exciseRub, vatRub } = pureElectricCustomsPayment(
-        input,
-        customsValueRub,
-        utilizationPowerKw,
-      ));
+      ({ importDutyRub, exciseRub, vatRub } = pureElectricCustomsPayment(input, customsValueRub, utilizationPowerKw));
     } else if (customsValueEur && eurRateRub && engineCc && !pureElectric) {
-      importDutyRub = unifiedDutyRub(
-        customsValueEur,
-        eurRateRub,
-        engineCc,
-        band,
-      );
+      importDutyRub = unifiedDutyRub(customsValueEur, eurRateRub, engineCc, band);
     }
-
     return {
-      band,
-      importDutyRub,
-      exciseRub,
-      vatRub,
-      coefficient,
-      utilizationFeeRub,
-      total: customsClearance
-        + importDutyRub
-        + exciseRub
-        + vatRub
-        + (utilizationFeeRub || 0),
+      band, importDutyRub, exciseRub, vatRub, coefficient, utilizationFeeRub,
+      total: customsClearance + importDutyRub + exciseRub + vatRub + (utilizationFeeRub || 0),
     };
   });
 
-  const selected = [...calculations]
-    .sort((left, right) => right.total - left.total)[0];
+  const selected = [...calculations].sort((left, right) => right.total - left.total)[0];
   const band = selected?.band || possibleAgeBands[0];
   const importDutyRub = selected?.importDutyRub || 0;
   const exciseRub = selected?.exciseRub || 0;
@@ -474,51 +336,29 @@ export function calculateRussiaCustomsForIndividual(
   const utilizationCoefficient = selected?.coefficient;
   const utilizationFeeRub = selected?.utilizationFeeRub;
 
-  if (ageEstimated && possibleAgeBands.length) {
-    warnings.push(
-      `Месяц производства не указан: выбран максимальный платёж из категорий ${possibleAgeBands.join(", ")}.`,
-    );
-  }
-  if (
-    (powertrainKind === "electric" || powertrainKind === "series_hybrid")
-    && !utilizationPowerKw
-  ) {
-    warnings.push(
-      "Нужна максимальная 30-минутная мощность из ОТТС, СБКТС, ЗОЕТС или ЭПТС; пиковая мощность для утильсбора не используется.",
-    );
-  }
-  if (powertrainKind === "other_hybrid" && !utilizationPowerKw) {
-    warnings.push(
-      "Нужна сумма мощности ДВС и максимальной 30-минутной мощности всех тяговых электромоторов.",
-    );
-  }
-  if (powertrainKind === "series_hybrid") {
-    warnings.push(
-      "Последовательный гибрид использует 30-минутную мощность для утильсбора, но таможенный платёж рассчитывается по объёму его ДВС, а не как для чистого электромобиля.",
-    );
-  }
-  if (input.personalUseEligible !== false) {
-    warnings.push(
-      "Льготный коэффициент физического лица применяется только при соблюдении условий личного пользования; для ДВС и иных гибридов дополнительно требуется объём не более 3000 см³ и мощность не более 117,68 кВт, для электромобилей и последовательных гибридов — не более 58,84 кВт.",
-    );
-  }
+  if (ageEstimated && possibleAgeBands.length) warnings.push(
+    `Месяц производства не указан: выбран максимальный платёж из категорий ${possibleAgeBands.join(", ")}.`,
+  );
+  if ((powertrainKind === "electric" || powertrainKind === "series_hybrid") && !utilizationPowerKw) warnings.push(
+    "Нужна максимальная 30-минутная мощность из ОТТС, СБКТС, ЗОЕТС или ЭПТС; пиковая мощность для утильсбора не используется.",
+  );
+  if (powertrainKind === "other_hybrid" && !utilizationPowerKw) warnings.push(
+    "Нужна сумма мощности ДВС и максимальной 30-минутной мощности всех тяговых электромоторов.",
+  );
+  if (powertrainKind === "series_hybrid") warnings.push(
+    "Последовательный гибрид использует 30-минутную мощность для утильсбора, но таможенный платёж рассчитывается по объёму его ДВС, а не как для чистого электромобиля.",
+  );
+  if (input.personalUseEligible !== false) warnings.push(
+    "Льготный коэффициент физического лица применяется только при соблюдении условий личного пользования; для ДВС и иных гибридов дополнительно требуется объём не более 3000 см³ и мощность не более 117,68 кВт, для электромобилей и последовательных гибридов — не более 58,84 кВт.",
+  );
   warnings.push(
     "Таможенная стоимость должна включать цену автомобиля и подтверждённые расходы по доставке до границы ЕАЭС; логистика не подставляется автоматически.",
   );
 
-  if (utilizationPowerKw && utilizationCoefficient === undefined) {
-    missing.push("utilization_coefficient");
-  }
-  const knownCustomsRub = customsClearance
-    + importDutyRub
-    + exciseRub
-    + vatRub;
-  const complete = missing.length === 0
-    && utilizationFeeRub !== undefined
-    && Boolean(band);
-  const totalCustomsRub = complete
-    ? knownCustomsRub + utilizationFeeRub
-    : undefined;
+  if (utilizationPowerKw && utilizationCoefficient === undefined) missing.push("utilization_coefficient");
+  const knownCustomsRub = customsClearance + importDutyRub + exciseRub + vatRub;
+  const complete = missing.length === 0 && utilizationFeeRub !== undefined && Boolean(band);
+  const totalCustomsRub = complete ? knownCustomsRub + utilizationFeeRub : undefined;
 
   return {
     status: complete ? "ready" : "needs_data",
@@ -541,44 +381,22 @@ export function calculateRussiaCustomsForIndividual(
     missing: [...new Set(missing)],
     warnings,
     breakdown: [
-      {
-        id: "customs-clearance",
-        title: "Таможенный сбор за оформление",
-        amountRub: customsClearance,
-      },
+      { id: "customs-clearance", title: "Таможенный сбор за оформление", amountRub: customsClearance },
       {
         id: "import-duty",
-        title: pureElectric
-          ? "Ввозная пошлина 15%"
-          : "Единая ставка таможенных платежей",
+        title: pureElectric ? "Ввозная пошлина 15%" : "Единая ставка таможенных платежей",
         amountRub: importDutyRub,
-        note: ageEstimated
-          ? `${band}; месяц оценён консервативно`
-          : band,
+        note: ageEstimated ? `${band}; месяц оценён консервативно` : band,
       },
-      ...(pureElectric
-        ? [
-          {
-            id: "excise",
-            title: "Акциз",
-            amountRub: exciseRub,
-            note: "Ставка 2026 года по мощности электродвигателя",
-          },
-          {
-            id: "vat",
-            title: "НДС 22%",
-            amountRub: vatRub,
-            note: "Таможенная стоимость + пошлина + акциз",
-          },
-        ]
-        : []),
+      ...(pureElectric ? [
+        { id: "excise", title: "Акциз", amountRub: exciseRub, note: "Ставка 2026 года по мощности электродвигателя" },
+        { id: "vat", title: "НДС 22%", amountRub: vatRub, note: "Таможенная стоимость + пошлина + акциз" },
+      ] : []),
       {
         id: "utilization-fee",
         title: "Утилизационный сбор",
         amountRub: utilizationFeeRub,
-        note: utilizationCoefficient === undefined
-          ? "Требуются точные данные"
-          : `20 000 ₽ × ${utilizationCoefficient}`,
+        note: utilizationCoefficient === undefined ? "Требуются точные данные" : `20 000 ₽ × ${utilizationCoefficient}`,
       },
     ],
   };
