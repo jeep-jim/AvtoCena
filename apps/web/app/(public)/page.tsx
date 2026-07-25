@@ -34,5 +34,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  return <div className={styles.scope}><HomePageClient initialCity={fromQuery || fromCookie} /></div>;
+  return <>
+    <div className={styles.scope}><HomePageClient initialCity={fromQuery || fromCookie} /></div>
+    <style dangerouslySetInnerHTML={{ __html: "@media (min-width:1024px){.ac-budget-help{display:none!important}}" }} />
+  </>;
 }
