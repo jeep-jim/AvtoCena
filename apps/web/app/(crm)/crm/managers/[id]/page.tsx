@@ -5,12 +5,15 @@ import { readCrmUsers } from "@/lib/crm-users";
 
 export const dynamic = "force-dynamic";
 
+type SearchParams = Record<string, string | string[] | undefined>;
+
 function first(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value || "";
 }
 
-export default async function CrmManagerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
-  const [{ id }, query] = await Promise.all([params, searchParams || Promise.resolve({})]);
+export default async function CrmManagerEditPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<SearchParams> }) {
+  const { id } = await params;
+  const query: SearchParams = (await searchParams) || {};
   const isNew = id === "new";
   const users = await readCrmUsers();
   const user = isNew ? null : users.find((item) => item.id === id);
