@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 
 type ModelSuggestion = {
   id?: string;
@@ -43,7 +44,9 @@ export function VehicleModelSearch({
   const [loading, setLoading] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const submitRef = useRef(onSubmit);
 
+  useLayoutEffect(() => { submitRef.current = onSubmit; }, [onSubmit]);
   useEffect(() => setQuery(value || ""), [value]);
 
   useEffect(() => {
@@ -94,7 +97,7 @@ export function VehicleModelSearch({
     return items.find((item) => compact(item.model) === requested || (item.aliases || []).some((alias) => compact(alias) === requested));
   }, [items, query]);
 
-  const choose = (item: ModelSuggestion, submit = false) => {
+  const applySelection = (item: ModelSuggestion) => {
     setQuery(item.model);
     setOpen(false);
     onValueChange?.(item.model);
@@ -104,10 +107,22 @@ export function VehicleModelSearch({
     const makeInput = form?.querySelector<HTMLInputElement>('input[name="make"]');
     if (modelInput) modelInput.value = item.model;
     if (makeInput) makeInput.value = item.make;
-    if (submit) {
-      if (onSubmit) window.requestAnimationFrame(() => onSubmit({ make: item.make, model: item.model }));
-      else if (form) window.requestAnimationFrame(() => form.requestSubmit());
+    return form;
+  };
+
+  const choose = (item: ModelSuggestion, submit = false) => {
+    if (!submit) {
+      applySelection(item);
+      return;
     }
+
+    let form: HTMLFormElement | null = null;
+    flushSync(() => { form = applySelection(item); });
+    const selection = { make: item.make, model: item.model };
+    window.requestAnimationFrame(() => {
+      if (submitRef.current) submitRef.current(selection);
+      else form?.requestSubmit();
+    });
   };
 
   return <div ref={root} className={`relative min-w-0 ${open ? "z-[235]" : "z-0"} ${className}`}>
