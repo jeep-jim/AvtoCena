@@ -3,8 +3,9 @@ import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasCredibleOfferContent } from "./offer-quality";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 
-const MARKETS: CatalogMarket[] = ["japan", "korea", "china", "uae", "europe"];
+const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
 const ALLOWED_IMAGE_HOSTS = [
@@ -51,6 +52,11 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?royal-trading\.jp$/i,
   /^(.+\.)?japantransit\.ru$/i,
   /^(.+\.)?dubicars\.com$/i,
+  /^(.+\.)?myauto\.ge$/i,
+  /^(.+\.)?my\.ge$/i,
+  /^(.+\.)?mashina\.kg$/i,
+  /^(.+\.)?elcat\.kg$/i,
+  /^(.+\.)?lalafo\.kg$/i,
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
   /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
   /^(.+\.)?mobile\.de$/i,
@@ -86,7 +92,7 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?imagekit\.io$/i,
   /^img\.avtocena\.com$/i,
 ];
-export const CATALOG_CHUNK_SIZE = 500;
+export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
