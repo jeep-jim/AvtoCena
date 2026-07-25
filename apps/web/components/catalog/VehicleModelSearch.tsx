@@ -10,6 +10,8 @@ type ModelSuggestion = {
   label: string;
 };
 
+type ModelSelection = { make: string; model: string };
+
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
@@ -32,7 +34,7 @@ export function VehicleModelSearch({
   placeholder?: string;
   onMakeChange?: (make: string) => void;
   onValueChange?: (model: string) => void;
-  onSubmit?: () => void;
+  onSubmit?: (selection: ModelSelection) => void;
   className?: string;
 }) {
   const [query, setQuery] = useState(value || "");
@@ -103,7 +105,7 @@ export function VehicleModelSearch({
     if (modelInput) modelInput.value = item.model;
     if (makeInput) makeInput.value = item.make;
     if (submit) {
-      if (onSubmit) window.requestAnimationFrame(onSubmit);
+      if (onSubmit) window.requestAnimationFrame(() => onSubmit({ make: item.make, model: item.model }));
       else if (form) window.requestAnimationFrame(() => form.requestSubmit());
     }
   };
