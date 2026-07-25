@@ -4,6 +4,7 @@ import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOff
 import { hasCredibleOfferContent } from "./offer-quality";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
+import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery, vehicleKnowledgeFacets } from "./vehicle-knowledge";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -95,7 +96,7 @@ const ALLOWED_IMAGE_HOSTS = [
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
-export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
+export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
@@ -104,6 +105,7 @@ function cleanShard(value?: string | number) { return String(value || "unknown")
 function cleanFacet(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function budgetBucket(v?: number | null) { if (!v) return "unknown"; return String(Math.ceil(v / 500_000) * 500_000); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
+function uniqueText(values: unknown[]) { return [...new Set(values.map(cleanFacet).filter(Boolean))]; }
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
 export function chunkName(index: number) { return `chunk-${String(index).padStart(4, "0")}`; }
 async function readManifest(): Promise<CatalogManifest> { return readDataJson<CatalogManifest>("catalog/manifest.json", { version: 2, generationId: "empty", updatedAt: "", markets: {} }); }
@@ -114,15 +116,35 @@ export async function readAllOffersForMaintenance() { const manifest = await rea
 export const readAllOffers = readAllOffersForMaintenance;
 export async function readCatalogFacets(params: Pick<CatalogSearchParams, "market" | "make"> = {}): Promise<CatalogFacets> {
   const manifest = await readManifest();
-  const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
-  if (!params.market && !params.make) return readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
+  const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
+  const [indexed, knowledge] = await Promise.all([
+    readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback),
+    vehicleKnowledgeFacets(params.make),
+  ]);
+  if (!params.market && !params.make) {
+    return {
+      ...indexed,
+      generationId: manifest.generationId,
+      makes: uniqueText([...knowledge.makes, ...(indexed.makes || [])]).sort((a, b) => a.localeCompare(b, "ru")),
+      models: [],
+      markets: [...PUBLIC_CATALOG_MARKETS],
+    };
+  }
   const marketIds = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
   const rows = (await Promise.all(marketIds.map((market) => readMarketOffers(market)))).flat().filter(isPublicOffer);
   const offers = params.make ? rows.filter((offer) => cleanFacet(offer.make) === cleanFacet(params.make)) : rows;
-  const values = (selector: (offer: VehicleOffer) => unknown) => [...new Set(offers.map(selector).map(cleanFacet).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ru"));
-  const makes = values((offer) => offer.make);
-  const models = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()].filter((item) => item.make && item.model).sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
-  return { generationId: manifest.generationId, makes, models, markets: values((offer) => offer.market), bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive) };
+  const values = (selector: (offer: VehicleOffer) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
+  const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()].filter((item) => item.make && item.model);
+  return {
+    generationId: manifest.generationId,
+    makes: uniqueText([...knowledge.makes, ...values((offer) => offer.make)]).sort((a, b) => a.localeCompare(b, "ru")),
+    models: params.make ? knowledge.models : offerModels.sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru")),
+    markets: [...PUBLIC_CATALOG_MARKETS],
+    bodyTypes: values((offer) => offer.bodyType),
+    fuels: values((offer) => offer.fuel),
+    transmissions: values((offer) => offer.transmission),
+    drives: values((offer) => offer.drive),
+  };
 }
 
 async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>, generationId: string, offers: VehicleOffer[]) {
@@ -163,14 +185,17 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
 export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   const storage = getJsonStorage();
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
-  const normalized = nextOffers.map((offer) => normalizeVehicleOfferSpecs(offer));
+  const normalized = await Promise.all(nextOffers.map(async (offer) => normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
   if (growOnlyMarkets.size) {
     const current = await readAllOffersForMaintenance();
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
     for (const offer of current) {
       if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
       const incoming = merged.get(offer.id);
-      if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) merged.set(offer.id, normalizeVehicleOfferSpecs({ ...offer, status: "active" }));
+      if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
+        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge({ ...offer, status: "active" }));
+        merged.set(offer.id, restored);
+      }
     }
     nextOffers = [...merged.values()];
   } else {
@@ -237,8 +262,22 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
 function intersect(a: Set<string> | null, ids: string[]) { const b = new Set(ids); if (!a) return b; return new Set([...a].filter((id) => b.has(id))); }
 async function candidateIds(manifest: CatalogManifest, params: CatalogSearchParams) {
   const used: string[] = []; let ids: Set<string> | null = null;
-  const specs: [string, string | number | undefined][] = [["market", params.market && params.market !== "any" ? params.market : undefined], ["make", params.make], ["model", params.make && params.model ? `${params.make}:${params.model}` : undefined], ["year", params.yearFrom && params.yearFrom === params.yearTo ? params.yearFrom : undefined], ["fuel", params.fuel], ["body", params.bodyType], ["drive", params.drive], ["hasPrice", params.hasPrice]];
+  const specs: [string, string | number | undefined][] = [["market", params.market && params.market !== "any" ? params.market : undefined], ["make", params.make], ["year", params.yearFrom && params.yearFrom === params.yearTo ? params.yearFrom : undefined], ["fuel", params.fuel], ["body", params.bodyType], ["drive", params.drive], ["hasPrice", params.hasPrice]];
   for (const [name, key] of specs) if (key) { const path = `${name}/${cleanShard(key)}.json`; const shard = await readIndex<{ ids: string[] }>(manifest.generationId, path, { ids: [] }); used.push(`catalog/generations/${manifest.generationId}/indexes/${path}`); ids = intersect(ids, shard.ids || []); }
+  if (params.model) {
+    const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
+    const candidates = matches.length
+      ? matches.map((match) => `${match.make}:${match.model}`)
+      : params.make
+        ? [`${params.make}:${params.model}`]
+        : [];
+    const shards = await Promise.all(candidates.map(async (candidate) => {
+      const path = `model/${cleanShard(candidate)}.json`;
+      used.push(`catalog/generations/${manifest.generationId}/indexes/${path}`);
+      return readIndex<{ ids: string[] }>(manifest.generationId, path, { ids: [] });
+    }));
+    ids = intersect(ids, [...new Set(shards.flatMap((shard) => shard.ids || []))]);
+  }
   return { ids, used };
 }
 export async function getOffer(id: string) { const manifest = await readManifest(); const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }); const loc = byId.byId[id]; if (!loc) return null; const chunk = await readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []); return chunk.find((o) => o.id === id && isPublicOffer(o)) || null; }
