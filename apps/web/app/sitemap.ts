@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { CATALOG_BRANDS } from "@/lib/catalog/brands";
+import { readAllModelSeoLinks } from "@/lib/catalog/model-directory";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://avtocena.com";
   const lastModified = new Date();
   const staticPages: MetadataRoute.Sitemap = [
@@ -14,5 +15,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "daily",
     priority: 0.8,
   }));
-  return [...staticPages, ...brandPages];
+  const modelPages: MetadataRoute.Sitemap = (await readAllModelSeoLinks()).map((model) => ({
+    url: `${baseUrl}/cars/brand/${model.brandSlug}/model/${model.modelSlug}`,
+    lastModified: model.updatedAt ? new Date(model.updatedAt) : lastModified,
+    changeFrequency: "daily",
+    priority: 0.72,
+  }));
+  return [...staticPages, ...brandPages, ...modelPages];
 }
