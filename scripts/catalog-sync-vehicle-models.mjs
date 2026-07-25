@@ -1,0 +1,157 @@
+const { readChunkedDataJson, rebuildChunkedIndex, writeDataJson } = await import("../apps/web/lib/data.ts");
+const { resetVehicleKnowledgeCache } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+
+const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
+const VEHICLES_CSV_URL = process.env.VEHICLE_KNOWLEDGE_MODELS_URL
+  || "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/dist/vehicles.csv";
+const MANIFEST_URL = process.env.VEHICLE_KNOWLEDGE_MANIFEST_URL
+  || "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/manifest.json";
+const CHUNK_SIZE = Math.max(50, Math.min(250, Number(process.env.VEHICLE_KNOWLEDGE_CHUNK_SIZE || 250)));
+
+function clean(value) {
+  return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function split(value) {
+  return [...new Set(clean(value).split(/[|;,]/).map(clean).filter(Boolean))];
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
+  for (let index = 0; index < text.length; index++) {
+    const char = text[index];
+    if (quoted) {
+      if (char === '"' && text[index + 1] === '"') {
+        field += '"';
+        index++;
+      } else if (char === '"') {
+        quoted = false;
+      } else {
+        field += char;
+      }
+      continue;
+    }
+    if (char === '"') {
+      quoted = true;
+    } else if (char === ",") {
+      row.push(field);
+      field = "";
+    } else if (char === "\n") {
+      row.push(field.replace(/\r$/, ""));
+      if (row.some((value) => value !== "")) rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += char;
+    }
+  }
+  if (field || row.length) {
+    row.push(field.replace(/\r$/, ""));
+    rows.push(row);
+  }
+  const headers = rows.shift()?.map(clean) || [];
+  return rows.map((values) => Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""])));
+}
+
+function validName(value, minimum = 1) {
+  const name = clean(value);
+  return name.length >= minimum
+    && name.length <= 48
+    && /[\p{L}\p{N}]/u.test(name)
+    && !/^\[?object object\]?$/i.test(name);
+}
+
+function mergeUnique(...lists) {
+  return [...new Set(lists.flat().map(clean).filter(Boolean))];
+}
+
+async function fetchText(url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.VEHICLE_KNOWLEDGE_FETCH_TIMEOUT_MS || 120_000));
+  try {
+    const response = await fetch(url, {
+      headers: {
+        accept: "text/csv,application/json,text/plain,*/*",
+        "user-agent": "AvtoCena vehicle knowledge sync/1.0",
+      },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`vehicle_knowledge_fetch_${response.status}_${url}`);
+    return response.text();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+const [manifestText, csvText, current] = await Promise.all([
+  fetchText(MANIFEST_URL),
+  fetchText(VEHICLES_CSV_URL),
+  readChunkedDataJson(MODELS_PATH, []),
+]);
+const manifest = JSON.parse(manifestText);
+const rows = parseCsv(csvText);
+const manual = new Map(current.filter((row) => row?.source !== "vehiclesdb").map((row) => [row.id, row]));
+const upstream = new Map();
+const updatedAt = new Date().toISOString();
+
+for (const row of rows) {
+  if (clean(row.kind).toLowerCase() !== "car") continue;
+  const make = clean(row.make_name);
+  const model = clean(row.model_name);
+  const makeSlug = clean(row.make_slug).toLowerCase();
+  const modelSlug = clean(row.model_slug).toLowerCase();
+  if (!validName(make, 2) || !validName(model, 1) || !makeSlug || !modelSlug) continue;
+  const id = `${makeSlug}/${modelSlug}`;
+  const popularity = Number(row.global_popularity_decile || 0);
+  upstream.set(id, {
+    id,
+    make,
+    model,
+    aliases: split(row.aliases),
+    bodyTypes: split(row.body_types),
+    countries: split(row.countries),
+    regions: split(row.regions),
+    ...(Number.isFinite(popularity) && popularity >= 1 && popularity <= 10 ? { popularityDecile: popularity } : {}),
+    source: "vehiclesdb",
+    sourceVersion: clean(manifest.version),
+    sourceUrl: "https://github.com/vehiclesdb/vehiclesdb",
+    updatedAt,
+    active: true,
+  });
+}
+
+for (const [id, override] of manual) {
+  const base = upstream.get(id);
+  upstream.set(id, base ? {
+    ...base,
+    ...override,
+    aliases: mergeUnique(base.aliases || [], override.aliases || []),
+    makeAliases: mergeUnique(base.makeAliases || [], override.makeAliases || []),
+    bodyTypes: mergeUnique(base.bodyTypes || [], override.bodyTypes || []),
+    countries: mergeUnique(base.countries || [], override.countries || []),
+    regions: mergeUnique(base.regions || [], override.regions || []),
+    updatedAt,
+  } : { ...override, updatedAt });
+}
+
+const models = [...upstream.values()].sort((left, right) =>
+  Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+  || left.make.localeCompare(right.make, "en")
+  || left.model.localeCompare(right.model, "en"));
+
+await writeDataJson(MODELS_PATH, models);
+await rebuildChunkedIndex(MODELS_PATH, CHUNK_SIZE);
+resetVehicleKnowledgeCache();
+
+console.log(JSON.stringify({
+  source: "VehiclesDB",
+  sourceVersion: manifest.version,
+  fetchedRows: rows.length,
+  carModels: models.length,
+  preservedManualRecords: manual.size,
+  chunkSize: CHUNK_SIZE,
+  updatedAt,
+}, null, 2));
