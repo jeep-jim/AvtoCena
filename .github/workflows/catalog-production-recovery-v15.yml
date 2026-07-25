@@ -23,7 +23,7 @@ permissions:
 
 concurrency:
   group: catalog-seven-market-recovery
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   rebuild-market:
