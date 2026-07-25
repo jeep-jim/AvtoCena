@@ -149,7 +149,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
-  ]).filter((spec): spec is SpecItem => Boolean(spec));
+  ]).filter(Boolean) as SpecItem[];
 
   return <main className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
