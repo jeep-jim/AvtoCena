@@ -75,6 +75,43 @@ html[data-theme="light"] .ac-catalog-card,
   z-index: 12020 !important;
 }
 
+/* Falling customer price is always green; rising price is always red. */
+.is-down .ac-price,
+.is-down .ac-price-trend-delta,
+.is-down .ac-price-trend-arrow,
+.ac-price--down {
+  color: #20a85e !important;
+}
+
+.is-up .ac-price,
+.is-up .ac-price-trend-delta,
+.is-up .ac-price-trend-arrow,
+.ac-price--up {
+  color: #ef3340 !important;
+}
+
+html[data-theme="light"] .ac-price-trend-panel.is-down {
+  background: #cfe5d8 !important;
+}
+html[data-theme="dark"] .ac-price-trend-panel.is-down {
+  background: #0b3021 !important;
+}
+html[data-theme="light"] .ac-price-trend-panel.is-up {
+  background: #f2d1d5 !important;
+}
+html[data-theme="dark"] .ac-price-trend-panel.is-up {
+  background: #3b161c !important;
+}
+
+/* The budget help icon is mobile-only regardless of Tailwind output or cache. */
+@media (min-width: 1024px) {
+  html body main.ac-home-page .ac-budget-help {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
 /* On phones keep the original small tap tooltip, only reduce the visual arrow. */
 @media (max-width: 767px) {
   .ac-price-trend-arrow > svg {

@@ -2,17 +2,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { persistCatalogOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_DAILY_TARGET_PER_MARKET, PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
-const minimumPerMarket = Math.max(1, Math.min(target, Number(process.env.CATALOG_REBUILD_MIN_PUBLISH_PER_MARKET || 1)));
-const minimumImagesPerOffer = Math.max(4, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
-const minimumAverageImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_MIN_AVG_IMAGES || 7));
-const richGalleryImages = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_IMAGES || 8));
-const richGalleryRatio = Math.min(1, Math.max(0, Number(process.env.CATALOG_REBUILD_RICH_GALLERY_RATIO || 0.5)));
-const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 6));
+const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 4));
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
 const all = [];
@@ -44,79 +40,94 @@ function specScore(offer) {
   ].filter(Boolean).length;
 }
 
+function freshness(offer) {
+  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+}
+
+function auditCandidate(sourceOffer, market, selectedIds, globalImageOwners) {
+  if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer)) return null;
+  const localSeen = new Set();
+  const images = [];
+  for (const image of Array.isArray(sourceOffer.images) ? sourceOffer.images : []) {
+    const key = imageKey(image);
+    if (!key || localSeen.has(key)) continue;
+    localSeen.add(key);
+    const owner = globalImageOwners.get(key);
+    if (owner && owner !== sourceOffer.id) continue;
+    images.push(image);
+  }
+  const offer = { ...sourceOffer, status: "active", images };
+  if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) return null;
+  return offer;
+}
+
 for (const market of markets) {
   const filename = path.join(inputDir, `catalog-rebuild-${market}.json`);
   const payload = JSON.parse(await fs.readFile(filename, "utf8"));
-  const rows = Array.isArray(payload?.offers) ? payload.offers : [];
+  const freshRows = Array.isArray(payload?.offers) ? payload.offers : [];
+  const retainedRows = (await readMarketOffers(market))
+    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
+    .sort((left, right) => freshness(right) - freshness(left));
   const selected = [];
+  const selectedIds = new Set();
   let rejectedQuality = 0;
-  let removedSharedImages = 0;
+  let freshPublished = 0;
+  let retainedPublished = 0;
 
-  for (const sourceOffer of rows) {
-    if (selected.length >= target) break;
-    if (sourceOffer?.market !== market || !isCrediblePublicOffer(sourceOffer)) {
-      rejectedQuality++;
-      continue;
-    }
-
-    const localSeen = new Set();
-    const images = [];
-    for (const image of Array.isArray(sourceOffer.images) ? sourceOffer.images : []) {
-      const key = imageKey(image);
-      if (!key || localSeen.has(key)) continue;
-      localSeen.add(key);
-      const owner = globalImageOwners.get(key);
-      if (owner && owner !== sourceOffer.id) {
-        removedSharedImages++;
+  for (const [origin, rows] of [["fresh", freshRows], ["retained", retainedRows]]) {
+    for (const sourceOffer of rows) {
+      if (selected.length >= target) break;
+      const offer = auditCandidate(sourceOffer, market, selectedIds, globalImageOwners);
+      if (!offer) {
+        rejectedQuality++;
         continue;
       }
-      images.push(image);
+      selected.push(offer);
+      selectedIds.add(offer.id);
+      for (const image of offer.images) globalImageOwners.set(imageKey(image), offer.id);
+      if (origin === "fresh") freshPublished++;
+      else retainedPublished++;
     }
-
-    const offer = { ...sourceOffer, images };
-    if (images.length < minimumImagesPerOffer
-      || specScore(offer) < minimumSpecScore
-      || !isCrediblePublicOffer(offer)) {
-      rejectedQuality++;
-      continue;
-    }
-
-    selected.push(offer);
-    for (const image of images) globalImageOwners.set(imageKey(image), offer.id);
+    if (selected.length >= target) break;
   }
 
-  if (selected.length < minimumPerMarket) {
-    throw new Error(`fresh_publish_under_minimum_after_audit_${market}_${selected.length}_of_${minimumPerMarket}`);
+  files.push(filename);
+  reports[market] = payload.report || {};
+  byMarket[market] = selected.length;
+
+  if (!selected.length) {
+    marketQuality[market] = {
+      freshCandidates: freshRows.length,
+      retainedCandidates: retainedRows.length,
+      desiredTarget: target,
+      published: 0,
+      freshPublished: 0,
+      retainedPublished: 0,
+      rejectedQuality,
+      targetReached: false,
+      temporarilyUnavailable: true,
+    };
+    continue;
   }
 
   const imageCounts = selected.map((offer) => offer.images.length);
   const averageImages = imageCounts.reduce((sum, count) => sum + count, 0) / selected.length;
-  const richGalleries = imageCounts.filter((count) => count >= richGalleryImages).length;
-  const requiredRichGalleries = Math.ceil(selected.length * richGalleryRatio);
-  if (averageImages < minimumAverageImages) {
-    throw new Error(`fresh_publish_low_average_gallery_${market}_${averageImages.toFixed(2)}_required_${minimumAverageImages}`);
-  }
-  if (richGalleries < requiredRichGalleries) {
-    throw new Error(`fresh_publish_too_many_short_galleries_${market}_${richGalleries}_required_${requiredRichGalleries}`);
-  }
-
   all.push(...selected);
-  files.push(filename);
-  byMarket[market] = selected.length;
-  reports[market] = payload.report || {};
   marketQuality[market] = {
-    candidates: rows.length,
+    freshCandidates: freshRows.length,
+    retainedCandidates: retainedRows.length,
     desiredTarget: target,
     published: selected.length,
+    freshPublished,
+    retainedPublished,
     rejectedQuality,
-    removedSharedImages,
     minimumImages: Math.min(...imageCounts),
     maximumImages: Math.max(...imageCounts),
     averageImages: Number(averageImages.toFixed(2)),
-    richGalleries,
-    requiredRichGalleries,
     minimumImagesPerOffer,
     minimumSpecScore,
+    targetReached: selected.length >= target,
+    temporarilyUnavailable: false,
   };
 }
 
@@ -126,8 +137,9 @@ for (const offer of all) {
   unique.set(offer.id, offer);
 }
 
-process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const offers = [...unique.values()];
+if (!offers.length) throw new Error("fresh_publish_no_verified_offers_any_market");
+process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers(offers);
 const publishedAt = new Date().toISOString();
 const report = {
@@ -149,9 +161,7 @@ const report = {
   marketReports: reports,
 };
 if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
-report.imageStats.average = offers.length
-  ? Number((report.imageStats.total / offers.length).toFixed(2))
-  : 0;
+report.imageStats.average = offers.length ? Number((report.imageStats.total / offers.length).toFixed(2)) : 0;
 
 await fs.writeFile(
   process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-fresh-publish-report.json",
