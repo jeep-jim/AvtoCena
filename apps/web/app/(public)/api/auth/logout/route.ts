@@ -13,9 +13,8 @@ function publicOrigin(request: Request) {
 
 export async function POST(request: Request) {
   const url = new URL(request.url);
-  const requested = url.searchParams.get("redirect") || "/";
-  const safeRequested = requested.startsWith("/") && !requested.startsWith("//") ? requested : "/";
-  const redirectPath = safeRequested === "/login" ? "/" : safeRequested;
+  const requested = url.searchParams.get("redirect") || "/login";
+  const redirectPath = requested.startsWith("/") && !requested.startsWith("//") ? requested : "/login";
   const response = NextResponse.redirect(new URL(redirectPath, publicOrigin(request)), { status: 303 });
 
   response.cookies.set(AUTH_COOKIE_NAME, "", {
