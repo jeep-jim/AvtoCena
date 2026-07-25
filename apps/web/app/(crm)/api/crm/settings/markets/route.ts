@@ -6,19 +6,29 @@ import { booleanFromForm, canEditBusinessSettings, cleanText, nullableNumber } f
 function parseJsonField(value: FormDataEntryValue | null, fallback: unknown) {
   const raw = cleanText(value, 10000);
   if (!raw) return fallback;
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return fallback;
-  }
+  try { return JSON.parse(raw); } catch { return fallback; }
+}
+
+function redirectToSettings(request: Request, state: "saved" | "error", message = "") {
+  const url = new URL("/crm/settings", request.url);
+  url.hash = "markets";
+  url.searchParams.set("state", state);
+  if (message) url.searchParams.set("message", message.slice(0, 180));
+  return NextResponse.redirect(url, { status: 303 });
 }
 
 export async function POST(request: Request) {
   const user = getCurrentUser();
-  if (!user || !canEditBusinessSettings(user.role)) return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
-  const form = await request.formData();
+  if (!user || !canEditBusinessSettings(user.role)) {
+    const login = new URL("/login", request.url);
+    login.searchParams.set("next", "/crm/settings#markets");
+    login.searchParams.set("error", "auth_required");
+    return NextResponse.redirect(login, { status: 303 });
+  }
+
   try {
-    createMarketVersion(cleanText(form.get("marketId"), 40), {
+    const form = await request.formData();
+    await createMarketVersion(cleanText(form.get("marketId"), 40), {
       name: cleanText(form.get("name"), 120),
       currency: cleanText(form.get("currency"), 12),
       active: booleanFromForm(form.get("active")),
@@ -42,8 +52,9 @@ export async function POST(request: Request) {
       deliveryDays: cleanText(form.get("deliveryDays"), 80),
       conditionsDescription: cleanText(form.get("conditionsDescription"), 3000),
     }, user, cleanText(form.get("comment"), 1000));
-    return NextResponse.redirect(new URL("/crm/settings#markets", request.url));
+    return redirectToSettings(request, "saved");
   } catch (error) {
-    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "settings_error" }, { status: 400 });
+    console.error("crm_market_settings_save_failed", error);
+    return redirectToSettings(request, "error", error instanceof Error ? error.message : "settings_error");
   }
 }

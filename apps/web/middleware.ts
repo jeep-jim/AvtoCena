@@ -17,9 +17,7 @@ function authSecret() {
 function base64url(bytes: ArrayBuffer | Uint8Array) {
   const array = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
   let binary = "";
-  array.forEach((byte) => {
-    binary += String.fromCharCode(byte);
-  });
+  array.forEach((byte) => { binary += String.fromCharCode(byte); });
   return btoa(binary).replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
@@ -31,13 +29,7 @@ function decodeBase64url(value: string) {
 
 async function signPayload(encodedPayload: string) {
   const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(authSecret()),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
+  const key = await crypto.subtle.importKey("raw", encoder.encode(authSecret()), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(encodedPayload));
   return base64url(signature);
 }
@@ -45,13 +37,10 @@ async function signPayload(encodedPayload: string) {
 async function getSession(request: NextRequest): Promise<SessionPayload | null> {
   const raw = request.cookies.get(COOKIE_NAME)?.value;
   if (!raw || !raw.includes(".")) return null;
-
   const [encodedPayload, signature] = raw.split(".");
   if (!encodedPayload || !signature) return null;
-
   const expected = await signPayload(encodedPayload);
   if (expected !== signature) return null;
-
   try {
     const payload = JSON.parse(decodeBase64url(encodedPayload)) as SessionPayload;
     if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;
@@ -61,43 +50,36 @@ async function getSession(request: NextRequest): Promise<SessionPayload | null> 
   }
 }
 
-function isCrmRole(role?: string | null) {
-  return role === "owner" || role === "admin" || role === "manager";
-}
+function isCrmRole(role?: string | null) { return role === "owner" || role === "admin" || role === "manager"; }
+function isAdminRole(role?: string | null) { return role === "owner" || role === "admin"; }
+function isPartnerRole(role?: string | null) { return role === "owner" || role === "admin" || role === "partner"; }
+function wantsJson(pathname: string) { return pathname.startsWith("/api/"); }
 
-function isAdminRole(role?: string | null) {
-  return role === "owner" || role === "admin";
-}
-
-function isPartnerRole(role?: string | null) {
-  return role === "owner" || role === "admin" || role === "partner";
-}
-
-function wantsJson(pathname: string) {
-  return pathname.startsWith("/api/");
+function isBrowserFormNavigation(request: NextRequest) {
+  const accept = request.headers.get("accept") || "";
+  const mode = request.headers.get("sec-fetch-mode") || "";
+  return request.method !== "GET" && (mode === "navigate" || accept.includes("text/html"));
 }
 
 function denyOrRedirect(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-
-  if (wantsJson(pathname)) {
+  if (wantsJson(pathname) && !isBrowserFormNavigation(request)) {
     return NextResponse.json({ ok: false, error: "auth_required" }, { status: 401 });
   }
-
   const url = request.nextUrl.clone();
   url.pathname = "/login";
+  url.search = "";
   url.searchParams.set("next", `${request.nextUrl.pathname}${request.nextUrl.search}`);
-  return NextResponse.redirect(url);
+  url.searchParams.set("error", "auth_required");
+  return NextResponse.redirect(url, { status: request.method === "GET" ? 307 : 303 });
 }
 
 function hasValidCpaDocsKey(request: NextRequest) {
   const expected = process.env.CPA_DOCS_KEY || process.env.CPA_API_SECRET || "";
   if (!expected) return false;
-
   const queryKey = request.nextUrl.searchParams.get("key") || request.nextUrl.searchParams.get("secret");
   const bearer = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
   const saved = request.cookies.get(DOCS_COOKIE_NAME)?.value;
-
   return queryKey === expected || bearer === expected || saved === expected;
 }
 
@@ -105,30 +87,23 @@ function allowWithDocsCookie(request: NextRequest) {
   const response = NextResponse.next();
   const expected = process.env.CPA_DOCS_KEY || process.env.CPA_API_SECRET || "";
   const queryKey = request.nextUrl.searchParams.get("key") || request.nextUrl.searchParams.get("secret");
-
   if (expected && queryKey === expected) {
     response.cookies.set(DOCS_COOKIE_NAME, expected, {
       httpOnly: true,
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
       path: "/",
-      maxAge: 60 * 60 * 24 * 14
+      maxAge: 60 * 60 * 24 * 14,
     });
   }
-
   return response;
 }
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/api/cpa" && request.method === "POST") {
-    return NextResponse.next();
-  }
-
-  if (pathname === "/api/partners" && request.method === "POST") {
-    return NextResponse.next();
-  }
+  if (pathname === "/api/cpa" && request.method === "POST") return NextResponse.next();
+  if (pathname === "/api/partners" && request.method === "POST") return NextResponse.next();
 
   if (
     pathname.startsWith("/_next") ||
@@ -145,9 +120,7 @@ export async function middleware(request: NextRequest) {
     pathname === "/" ||
     pathname === "/results" ||
     pathname === "/partner/landing"
-  ) {
-    return NextResponse.next();
-  }
+  ) return NextResponse.next();
 
   const session = await getSession(request);
 
@@ -189,6 +162,4 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = {
-  matcher: ["/((?!.*\\..*).*)"]
-};
+export const config = { matcher: ["/((?!.*\\..*).*)"] };

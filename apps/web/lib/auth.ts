@@ -12,20 +12,18 @@ export type UserRole = "owner" | "admin" | "manager" | "partner";
 export type AuthUser = {
   id: string;
   telegramUsername: string;
+  telegramId?: string;
   displayName: string;
+  avatarUrl?: string;
+  companyId?: string;
   role: UserRole;
   status?: "active" | "disabled";
   partnerCode?: string;
+  updatedAt?: string;
+  lastLoginAt?: string;
 };
 
-type SessionPayload = {
-  id: string;
-  telegramUsername: string;
-  displayName: string;
-  role: UserRole;
-  partnerCode?: string;
-  exp: number;
-};
+type SessionPayload = AuthUser & { exp: number };
 
 function authSecret() {
   return process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "avtocena-dev-secret-change-me";
@@ -69,10 +67,16 @@ export function createSessionCookie(user: AuthUser) {
   const payload: SessionPayload = {
     id: user.id,
     telegramUsername: normalizeTelegramUsername(user.telegramUsername),
+    telegramId: user.telegramId,
     displayName: user.displayName,
+    avatarUrl: user.avatarUrl,
+    companyId: user.companyId,
     role: user.role,
+    status: user.status,
     partnerCode: user.partnerCode,
-    exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS
+    updatedAt: user.updatedAt,
+    lastLoginAt: user.lastLoginAt,
+    exp: Math.floor(Date.now() / 1000) + AUTH_MAX_AGE_SECONDS,
   };
 
   const encodedPayload = base64url(JSON.stringify(payload));
@@ -90,18 +94,17 @@ export function verifySessionCookie(raw?: string | null): AuthUser | null {
   const expectedBuffer = Buffer.from(expected);
   const actualBuffer = Buffer.from(signature);
 
-  if (expectedBuffer.length !== actualBuffer.length || !crypto.timingSafeEqual(expectedBuffer, actualBuffer)) {
-    return null;
-  }
+  if (expectedBuffer.length !== actualBuffer.length || !crypto.timingSafeEqual(expectedBuffer, actualBuffer)) return null;
 
   try {
     const payload = JSON.parse(fromBase64url(encodedPayload)) as SessionPayload;
-    if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000)) return null;
+    if (!payload.exp || payload.exp < Math.floor(Date.now() / 1000) || payload.status === "disabled") return null;
 
     const storedUser = getAuthUsers().find((user) => user.id === payload.id && user.status !== "disabled");
-    if (!storedUser) return null;
+    if (storedUser) return { ...payload, ...storedUser };
 
-    return storedUser;
+    const { exp: _exp, ...signedUser } = payload;
+    return signedUser;
   } catch {
     return null;
   }

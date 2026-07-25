@@ -5,20 +5,17 @@ import { BrandMark } from "@/components/brand/BrandMark";
 
 export const metadata: Metadata = {
   title: "Вход — АвтоЦена",
-  robots: { index: false, follow: false }
+  robots: { index: false, follow: false },
 };
 
 function firstParam(value?: string | string[]) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-export default async function LoginPage({
-  searchParams
-}: {
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-}) {
+export default async function LoginPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/crm";
+  const errorCode = firstParam(params.error) || "";
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen px-4 py-5 text-white md:px-8 md:py-6">
@@ -35,7 +32,7 @@ export default async function LoginPage({
         </header>
 
         <section className="grid min-h-[72vh] place-items-center py-10">
-          <LoginForm nextPath={nextPath} />
+          <LoginForm nextPath={nextPath} errorCode={errorCode} />
         </section>
       </div>
       <style>{`.ac-login-page.ac-page-copy{padding-top:1.25rem!important}.ac-login-page::after{display:none!important}`}</style>
