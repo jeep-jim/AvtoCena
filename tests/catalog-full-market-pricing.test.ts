@@ -63,7 +63,7 @@ test("keeps the Japan contract payment at 70,000 rubles", () => {
   assert.equal(contractPayment, 70_000);
 });
 
-test("shows a calculated 30-minute power chip for a hybrid preview", () => {
+test("shows a calculated power chip for a hybrid preview without redundant wording", () => {
   const display = catalogPowerDisplay({
     powertrainKind: "other_hybrid",
     fuel: "hybrid",
@@ -76,5 +76,5 @@ test("shows a calculated 30-minute power chip for a hybrid preview", () => {
   });
   assert.ok(display);
   assert.equal(display?.estimated, true);
-  assert.equal(display?.thirtyMinuteLabel, "Расчёт: 180,2 кВт");
+  assert.equal(display?.thirtyMinuteLabel, "180,2 кВт");
 });

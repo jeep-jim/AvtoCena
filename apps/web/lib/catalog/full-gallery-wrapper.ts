@@ -1,6 +1,6 @@
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
-const bad = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads/i;
+const bad = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
 
 function decode(value: unknown) {
   return String(value || "")
@@ -67,7 +67,7 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
     const limit = Math.min(1000, Math.max(1, Number.isFinite(requested) ? requested : 1000));
     const result = uniqueImages(await original(offer).catch(() => [] as CatalogImage[]), limit);
     const sourceNativeUrls = rawGalleryUrls(offer);
-    const verified = result.length >= 2 && sourceNativeUrls.length >= 2;
+    const verified = result.length >= 1 && sourceNativeUrls.length >= 1;
 
     (offer.operational as any).galleryVerified = verified;
     (offer.operational as any).gallerySourceImageCount = sourceNativeUrls.length;

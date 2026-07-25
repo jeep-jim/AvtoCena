@@ -12,13 +12,15 @@ const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const requestedImages = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 12);
 const maxImages = Math.min(30, Math.max(minimumImages, Number.isFinite(requestedImages) ? requestedImages : 12));
-const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 120));
-const maxTotalPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 180));
-const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 8));
-const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || target * 4));
-const prepareConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 4)));
-const checkpointEvery = Math.max(10, Number(process.env.CATALOG_REBUILD_CHECKPOINT_EVERY || 50));
-const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 45 * 60 * 1000));
+const maxPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES || 300));
+const maxTotalPages = Math.max(maxPages, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 1800));
+const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 12));
+const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || target * 15));
+const prepareConcurrency = Math.max(1, Math.min(16, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 8)));
+const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 3)));
+const pagePrepareConcurrency = Math.max(1, Math.floor(prepareConcurrency / Math.max(1, sourceConcurrency)));
+const checkpointEvery = Math.max(10, Number(process.env.CATALOG_REBUILD_CHECKPOINT_EVERY || 25));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 55 * 60 * 1000));
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}.json`;
 const startedAtMs = Date.now();
 const deadlineAtMs = startedAtMs + timeLimitMs;
@@ -141,12 +143,15 @@ const report = {
   maxTotalPages,
   maxEmptyPages,
   prepareConcurrency,
+  pagePrepareConcurrency,
+  sourceConcurrency,
   timeLimitMs,
   deadlineAt: new Date(deadlineAtMs).toISOString(),
   sourceIds,
   connectedMarketSources,
   startedAt: new Date(startedAtMs).toISOString(),
   pages: 0,
+  rounds: 0,
   seen: 0,
   seedSeen: 0,
   seedSaved: 0,
@@ -166,9 +171,11 @@ function recordError(row) {
 
 function payload(stopReason = report.stopReason, partial = true) {
   const generatedAt = new Date().toISOString();
-  const rows = [...offers.values()].slice(0, target);
+  const rows = [...offers.values()]
+    .sort((left, right) => freshness(right) - freshness(left) || Number(right.images?.length || 0) - Number(left.images?.length || 0))
+    .slice(0, target);
   return {
-    version: 7,
+    version: 8,
     market,
     generatedAt,
     target,
@@ -259,6 +266,8 @@ for (const signal of ["SIGTERM", "SIGINT"]) {
   });
 }
 
+// First restore every still-valid offer already present in public or internal storage.
+// This is fast for genuine cached photos and prevents a temporary source outage from emptying a market.
 const [internalRows, publicRows] = await Promise.all([
   readAllOffersForMaintenance(),
   readMarketOffers(market),
@@ -281,99 +290,130 @@ for (let index = 0; index < restoredSeeds.length && offers.size < target && !dea
     offers.set(prepared.id, prepared);
     report.seedSaved++;
     report.saved = offers.size;
-    if (offers.size % 25 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
+    if (offers.size % 50 === 0) console.log(`[seed:${market}] ${offers.size}/${target}; photos=${prepared.images.length}`);
   }
   await checkpointIfNeeded();
 }
 
-for (const sourceId of sourceIds) {
-  if (offers.size >= target || deadlineReached() || report.pages >= maxTotalPages) break;
+// Each source receives one page per round. Previously the first source could consume the
+// entire global page budget, so Japan and other markets never reached their productive adapters.
+const sourceStates = sourceIds.map((sourceId) => {
   const source = adapters.get(sourceId);
-  if (!source) {
-    recordError({ sourceId, stage: "registry", error: `catalog_source_not_found_${sourceId}` });
-    continue;
+  if (!source) recordError({ sourceId, stage: "registry", error: `catalog_source_not_found_${sourceId}` });
+  return {
+    sourceId,
+    source,
+    cursor: null,
+    pages: 0,
+    errors: 0,
+    emptyPages: 0,
+    saved: 0,
+    done: !source,
+    stopReason: source ? "running" : "source_not_found",
+    seenCursors: new Set(),
+  };
+});
+
+async function processSourcePage(state) {
+  if (state.done || !state.source || offers.size >= target || deadlineReached() || report.pages >= maxTotalPages) return;
+  if (state.pages >= maxPages) {
+    state.done = true;
+    state.stopReason = "source_page_limit";
+    return;
   }
-  let cursor = null;
-  let pages = 0;
-  let errors = 0;
-  let emptyPages = 0;
-  const seenCursors = new Set();
-  const sourceStart = offers.size;
-  let sourceStopReason = "finished";
 
-  while (offers.size < target && pages < maxPages && report.pages < maxTotalPages && !deadlineReached()) {
-    const cursorKey = String(cursor ?? "first");
-    if (seenCursors.has(cursorKey)) {
-      sourceStopReason = "cursor_loop";
-      break;
+  const cursorKey = String(state.cursor ?? "first");
+  if (state.seenCursors.has(cursorKey)) {
+    state.done = true;
+    state.stopReason = "cursor_loop";
+    return;
+  }
+  state.seenCursors.add(cursorKey);
+
+  let fetched;
+  try {
+    fetched = await state.source.fetchPage(state.cursor);
+    state.errors = 0;
+  } catch (error) {
+    state.errors++;
+    // Allow the same page to retry: remove it from the loop guard until the source is abandoned.
+    state.seenCursors.delete(cursorKey);
+    recordError({ sourceId: state.sourceId, cursor: state.cursor, stage: "list", error: String(error?.message || error) });
+    if (state.errors >= 3 || deadlineReached()) {
+      state.done = true;
+      state.stopReason = state.errors >= 3 ? "source_errors" : "deadline";
     }
-    seenCursors.add(cursorKey);
+    return;
+  }
 
-    let fetched;
-    try {
-      fetched = await source.fetchPage(cursor);
-      errors = 0;
-    } catch (error) {
-      errors++;
-      recordError({ sourceId, cursor, stage: "list", error: String(error?.message || error) });
-      if (errors >= 3 || deadlineReached()) {
-        sourceStopReason = errors >= 3 ? "source_errors" : "deadline";
-        break;
-      }
-      const numeric = Number(cursor || 1);
-      cursor = Number.isFinite(numeric) ? String(numeric + 1) : null;
-      if (!cursor) {
-        sourceStopReason = "source_error_without_cursor";
-        break;
-      }
+  state.pages++;
+  report.pages++;
+  const rows = Array.isArray(fetched?.items) ? fetched.items : [];
+  report.seen += rows.length;
+  const batchIds = new Set();
+  const normalizedRows = [];
+  for (const raw of rows) {
+    let base = null;
+    try { base = state.source.normalizeOffer(raw); } catch { base = null; }
+    if (!base || base.market !== market || !base.id || offers.has(base.id) || batchIds.has(base.id)) continue;
+    batchIds.add(base.id);
+    normalizedRows.push(base);
+  }
+
+  const beforePage = offers.size;
+  const preparedRows = await runWithConcurrency(normalizedRows, pagePrepareConcurrency, (base) => prepareCandidate(base, state.source, "fresh_listing"));
+  for (const prepared of preparedRows) {
+    if (!prepared || offers.has(prepared.id) || offers.size >= target) {
+      if (!prepared) report.rejected++;
       continue;
     }
-
-    pages++;
-    report.pages++;
-    const rows = Array.isArray(fetched?.items) ? fetched.items : [];
-    report.seen += rows.length;
-    const batchIds = new Set();
-    const normalizedRows = [];
-    for (const raw of rows) {
-      let base = null;
-      try { base = source.normalizeOffer(raw); } catch { base = null; }
-      if (!base || base.market !== market || !base.id || offers.has(base.id) || batchIds.has(base.id)) continue;
-      batchIds.add(base.id);
-      normalizedRows.push(base);
-    }
-
-    const beforePage = offers.size;
-    const preparedRows = await runWithConcurrency(normalizedRows, prepareConcurrency, (base) => prepareCandidate(base, source, "fresh_listing"));
-    for (const prepared of preparedRows) {
-      if (!prepared || offers.has(prepared.id) || offers.size >= target) {
-        if (!prepared) report.rejected++;
-        continue;
-      }
-      offers.set(prepared.id, prepared);
-      report.saved = offers.size;
-      if (offers.size % 25 === 0) console.log(`[fresh:${market}] ${offers.size}/${target}; ${sourceId}; photos=${prepared.images.length}`);
-    }
-
-    emptyPages = offers.size === beforePage ? emptyPages + 1 : 0;
-    await checkpointIfNeeded();
-    if (emptyPages >= maxEmptyPages) {
-      sourceStopReason = "no_progress";
-      break;
-    }
-
-    cursor = fetched?.nextCursor || null;
-    if ((fetched?.finished && !cursor) || !cursor) {
-      sourceStopReason = "source_finished";
-      break;
-    }
+    offers.set(prepared.id, prepared);
+    state.saved++;
+    report.saved = offers.size;
+    if (offers.size % 50 === 0) console.log(`[fresh:${market}] ${offers.size}/${target}; ${state.sourceId}; photos=${prepared.images.length}`);
   }
 
-  if (deadlineReached()) sourceStopReason = "deadline";
-  else if (report.pages >= maxTotalPages) sourceStopReason = "total_page_limit";
-  else if (pages >= maxPages) sourceStopReason = "source_page_limit";
-  report.sources.push({ sourceId, pages, saved: offers.size - sourceStart, emptyPages, stopReason: sourceStopReason });
-  await checkpointIfNeeded(true);
+  state.emptyPages = offers.size === beforePage ? state.emptyPages + 1 : 0;
+  if (state.emptyPages >= maxEmptyPages) {
+    state.done = true;
+    state.stopReason = "no_progress";
+    return;
+  }
+
+  state.cursor = fetched?.nextCursor || null;
+  if ((fetched?.finished && !state.cursor) || !state.cursor) {
+    state.done = true;
+    state.stopReason = "source_finished";
+  }
+}
+
+while (offers.size < target && !deadlineReached() && report.pages < maxTotalPages) {
+  const active = sourceStates.filter((state) => !state.done && state.pages < maxPages);
+  if (!active.length) break;
+  report.rounds++;
+  await runWithConcurrency(active, sourceConcurrency, processSourcePage);
+  await checkpointIfNeeded();
+  if (report.rounds % 5 === 0) {
+    console.log(`[round:${market}] ${report.rounds}; pages=${report.pages}; offers=${offers.size}/${target}; active=${sourceStates.filter((state) => !state.done).length}`);
+    await checkpointIfNeeded(true);
+  }
+}
+
+for (const state of sourceStates) {
+  if (!state.done) {
+    if (deadlineReached()) state.stopReason = "deadline";
+    else if (report.pages >= maxTotalPages) state.stopReason = "total_page_limit";
+    else if (state.pages >= maxPages) state.stopReason = "source_page_limit";
+    else state.stopReason = "stopped";
+  }
+  report.sources.push({
+    sourceId: state.sourceId,
+    pages: state.pages,
+    saved: state.saved,
+    emptyPages: state.emptyPages,
+    errors: state.errors,
+    stopReason: state.stopReason,
+  });
 }
 
 report.finishedAt = new Date().toISOString();

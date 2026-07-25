@@ -16,7 +16,6 @@ const files = [];
 const byMarket = {};
 const reports = {};
 const marketQuality = {};
-const globalImageOwners = new Map();
 
 function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
@@ -29,6 +28,12 @@ function specScore(offer) {
 
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+}
+
+function qualityOrder(left, right) {
+  return freshness(right) - freshness(left)
+    || Number(right?.images?.length || 0) - Number(left?.images?.length || 0)
+    || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
 
 function auditCandidate(sourceOffer, market, selectedIds, imageOwners) {
@@ -73,12 +78,15 @@ async function readGenerationFile(filename, market) {
 for (const market of markets) {
   const filename = path.join(inputDir, `catalog-rebuild-${market}.json`);
   const generation = await readGenerationFile(filename, market);
-  const freshRows = generation.offers;
+  const freshRows = [...generation.offers].sort(qualityOrder);
   const retainedRows = (await readMarketOffers(market))
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
-    .sort((left, right) => freshness(right) - freshness(left));
+    .sort(qualityOrder);
   const selected = [];
   const selectedIds = new Set();
+  // Images must be unique inside a market. The same source can legitimately expose a car
+  // in two regional feeds, so cross-market image ownership must not reduce other markets.
+  const imageOwners = new Map();
   let rejectedQuality = 0;
   let freshPublished = 0;
   let retainedPublished = 0;
@@ -86,14 +94,14 @@ for (const market of markets) {
   for (const [origin, rows] of [["fresh", freshRows], ["retained", retainedRows]]) {
     for (const sourceOffer of rows) {
       if (selected.length >= target) break;
-      const offer = auditCandidate(sourceOffer, market, selectedIds, globalImageOwners);
+      const offer = auditCandidate(sourceOffer, market, selectedIds, imageOwners);
       if (!offer) {
         rejectedQuality++;
         continue;
       }
       selected.push(offer);
       selectedIds.add(offer.id);
-      for (const image of offer.images) globalImageOwners.set(imageKey(image), offer.id);
+      for (const image of offer.images) imageOwners.set(imageKey(image), offer.id);
       if (origin === "fresh") freshPublished++;
       else retainedPublished++;
     }
@@ -163,7 +171,9 @@ for (const offer of all) {
 
 const offers = [...unique.values()];
 if (!offers.length) throw new Error("fresh_publish_no_verified_offers_any_market");
-process.env.CATALOG_GROW_ONLY_MARKETS = markets.join(",");
+// Retention has already been applied and audited above. Storage-level grow-only merging would
+// reinsert unverified placeholders and allow markets to exceed their 1000-offer capacity.
+process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers(offers);
 const publishedAt = new Date().toISOString();
 const report = {

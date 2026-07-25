@@ -72,7 +72,7 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
   return {
     thirtyMinutePowerKw,
     thirtyMinuteLabel: estimated
-      ? `Расчёт: ${formatKw(thirtyMinutePowerKw)} кВт`
+      ? `${formatKw(thirtyMinutePowerKw)} кВт`
       : `30 мин: ${motorEquation}`,
     utilizationPowerKw,
     utilizationLabel: utilizationDiffers

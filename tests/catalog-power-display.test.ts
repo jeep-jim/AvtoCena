@@ -51,7 +51,7 @@ test("uses calculated customs power as fallback for electric vehicles", () => {
   assert.equal(result.thirtyMinuteLabel, "30 мин: 58,84 кВт");
 });
 
-test("labels preliminary power as an estimate instead of certified 30-minute power", () => {
+test("shows preliminary power as a clean kW value without a redundant calculation prefix", () => {
   const result = catalogPowerDisplay({
     powertrainKind: "electric",
     calculationSnapshot: {
@@ -62,12 +62,12 @@ test("labels preliminary power as an estimate instead of certified 30-minute pow
 
   assert.ok(result);
   assert.equal(result.thirtyMinutePowerKw, 110);
-  assert.equal(result.thirtyMinuteLabel, "Расчёт: 110 кВт");
+  assert.equal(result.thirtyMinuteLabel, "110 кВт");
   assert.equal(result.estimated, true);
   assert.match(result.sourceLabel, /предварительного расчёта/i);
 });
 
-test("shows a conservative calculated value for a legacy EV without a customs snapshot", () => {
+test("shows a conservative value for a legacy EV without a customs snapshot", () => {
   const result = catalogPowerDisplay({
     powertrainKind: "electric",
     fuel: "electric",
@@ -76,7 +76,7 @@ test("shows a conservative calculated value for a legacy EV without a customs sn
 
   assert.ok(result);
   assert.equal(result.thirtyMinutePowerKw, 250.07);
-  assert.equal(result.thirtyMinuteLabel, "Расчёт: 250,07 кВт");
+  assert.equal(result.thirtyMinuteLabel, "250,07 кВт");
   assert.equal(result.utilizationPowerKw, 250.07);
   assert.equal(result.estimated, true);
 });

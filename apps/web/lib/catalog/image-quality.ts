@@ -7,7 +7,7 @@ type CatalogImageLike = {
   mimeType?: unknown;
 };
 
-const promoUrlPattern = /(?:^|[\/_-])(banner|bnr|campaign|promo|promotion|advert|ad_|loan|credit|warranty|guarantee|inspection|diagnosis|service|support|campaign|feature|header|footer|sprite|icon|logo|obd|low[-_]?rate)(?:[\/_\-.]|$)/i;
+const promoUrlPattern = /(?:^|[\/_-])(banner|bnr|campaign|promo|promotion|advert|ad_|loan|credit|warranty|guarantee|inspection|diagnosis|service|support|feature|header|footer|sprite|icon|logo|obd|low[-_]?rate|placeholder|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|tools?|camera[-_ ]?off|car[-_ ]?silhouette|dummy)(?:[\/_\-.]|$)/i;
 
 function text(value: unknown) {
   return String(value || "").trim();
@@ -18,7 +18,7 @@ function finite(value: unknown) {
   return Number.isFinite(result) && result > 0 ? result : 0;
 }
 
-function imageScore(image: CatalogImageLike) {
+export function catalogImageScore(image: CatalogImageLike) {
   const url = text(image.url || image.objectKey);
   const mime = text(image.mimeType).toLowerCase();
   const width = finite(image.width);
@@ -29,39 +29,42 @@ function imageScore(image: CatalogImageLike) {
   const ratio = width && height ? width / height : 0;
   let score = 0;
 
-  if (promoUrlPattern.test(url)) score -= 12;
-  if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 12;
-  if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 3;
-  if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 2;
+  if (promoUrlPattern.test(url)) score -= 20;
+  if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 20;
+  // PNG frequently contains source placeholders and interface icons. A real large landscape PNG
+  // can still pass through the photo geometry and byte-density bonuses below.
+  if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
+  if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
 
   if (width && height) {
-    if (width >= 640 && height >= 400) score += 2;
-    if (width < 420 || height < 260) score -= 5;
-    if (ratio >= 1.15 && ratio <= 1.85) score += 1;
-    else if (ratio < 0.8 || ratio > 2.15) score -= 4;
+    if (width >= 640 && height >= 400) score += 3;
+    if (width < 420 || height < 260) score -= 10;
+    // Catalog photos must be landscape. Square service pictograms are not vehicle photos.
+    if (ratio >= 1.08 && ratio <= 2.2) score += 3;
+    else score -= 12;
   }
 
-  // Flat banners usually compress much harder than photographs at the same dimensions.
+  // Flat pictograms and banners compress much harder than real photographs.
   if (density) {
-    if (density < 0.035) score -= 6;
-    else if (density < 0.06) score -= 2;
+    if (density < 0.035) score -= 8;
+    else if (density < 0.06) score -= 3;
     else if (density > 0.11) score += 2;
   }
-  if (size && size < 28_000) score -= 5;
-  else if (size >= 90_000) score += 1;
+  if (size && size < 28_000) score -= 8;
+  else if (size >= 90_000) score += 2;
 
   return score;
 }
 
+export function isLikelyVehicleImage(image: CatalogImageLike) {
+  return Boolean(text(image?.url || image?.objectKey)) && catalogImageScore(image) >= 0;
+}
+
 export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
-  const candidates = images
-    .map((image, index) => ({ image, index, url: text(image?.url), score: imageScore(image) }))
-    .filter((candidate) => candidate.url);
-
-  if (String(offer?.market || "").toLowerCase() !== "japan") return candidates.map((candidate) => candidate.url);
-
-  const ranked = [...candidates].sort((left, right) => right.score - left.score || left.index - right.index);
-  const usable = ranked.filter((candidate) => candidate.score > -6);
-  return (usable.length >= 2 ? usable : ranked).map((candidate) => candidate.url);
+  return images
+    .map((image, index) => ({ image, index, url: text(image?.url), score: catalogImageScore(image) }))
+    .filter((candidate) => candidate.url && candidate.score >= 0)
+    .sort((left, right) => right.score - left.score || left.index - right.index)
+    .map((candidate) => candidate.url);
 }

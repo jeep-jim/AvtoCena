@@ -1,8 +1,9 @@
 import type { CatalogImage, VehicleOffer } from "./types";
+import { isLikelyVehicleImage } from "./image-quality";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
-const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|twitter|x\.com|social|share[-_ ]?icon)/i;
+const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|twitter|x\.com|social|share[-_ ]?icon|repair|maintenance|wrench|spanner|tool[-_ ]?icon|service[-_ ]?icon|camera[-_ ]?off|car[-_ ]?silhouette|dummy[-_ ]?(?:car|image))/i;
 const DISALLOWED_GENERIC_SOURCES = new Set(["dubicars_uae", "dubicars_clean", "autouncle_europe", "autoscout_europe"]);
 const EXOTIC_MAKES = /(?:ferrari|lamborghini|rolls[- ]?royce|bentley|mclaren|aston martin|bugatti|pagani|koenigsegg)/i;
 const REQUIRED_PRICE_LINES = [
@@ -31,14 +32,14 @@ export function credibleCatalogImages(images: CatalogImage[]) {
   const unique = new Map<string, CatalogImage>();
   for (const image of images || []) {
     const url = String(image?.url || image?.objectKey || "");
-    if (!image || !url || BAD_IMAGE_RE.test(url)) continue;
+    if (!image || !url || BAD_IMAGE_RE.test(url) || !isLikelyVehicleImage(image)) continue;
     const size = Number(image.size || 0);
     if (size > 0 && size < 4_000) continue;
     const width = Number(image.width || 0);
     const height = Number(image.height || 0);
     if (width > 0 && height > 0) {
       const ratio = width / height;
-      if (width < 280 || height < 170 || ratio < 0.72 || ratio > 3.2) continue;
+      if (width < 420 || height < 260 || ratio < 1.08 || ratio > 2.2) continue;
     }
     const key = imageIdentity(image);
     if (key && !unique.has(key)) unique.set(key, image);
@@ -97,7 +98,11 @@ function hasRequiredPower(offer: VehicleOffer) {
 
 function rawImagesAreCredible(offer: VehicleOffer) {
   const raw = offer.operational?.raw as any;
-  const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
+  const candidateFields = [raw?.images, raw?.photos, raw?.gallery, raw?.imageUrls, raw?.photoUrls];
+  const rawImages = candidateFields.flatMap((field) => Array.isArray(field) ? field : [])
+    .map((value: any) => typeof value === "string" ? value : value?.url || value?.src || value?.large || value?.original || "")
+    .map(String)
+    .filter(Boolean);
   return !rawImages.length || rawImages.some((url: string) => !BAD_IMAGE_RE.test(url));
 }
 
