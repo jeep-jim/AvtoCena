@@ -8,7 +8,7 @@ const { CATALOG_DAILY_TARGET_PER_MARKET, PUBLIC_CATALOG_MARKETS } = await import
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 4));
+const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 1));
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
 const all = [];
@@ -18,33 +18,20 @@ const reports = {};
 const marketQuality = {};
 const globalImageOwners = new Map();
 
-function clean(value) {
-  return String(value || "").replace(/\s+/g, " ").trim();
-}
-
 function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
 }
 
 function specScore(offer) {
-  const fuel = clean(offer?.fuel);
-  const electric = /electric|bev|электро|纯电|전기/i.test(fuel);
-  return [
-    Number(offer?.mileageKm) >= 0,
-    Boolean(fuel),
-    Boolean(clean(offer?.transmission)),
-    Boolean(clean(offer?.drive)),
-    Boolean(clean(offer?.bodyType)),
-    electric || Number(offer?.engineCc || 0) > 0,
-    Number(offer?.powerHp || 0) > 0,
-  ].filter(Boolean).length;
+  const mileage = Number(offer?.mileageKm);
+  return Number.isFinite(mileage) && mileage >= 0 ? 1 : 0;
 }
 
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
 
-function auditCandidate(sourceOffer, market, selectedIds, globalImageOwners) {
+function auditCandidate(sourceOffer, market, selectedIds, imageOwners) {
   if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer)) return null;
   const localSeen = new Set();
   const images = [];
@@ -52,7 +39,7 @@ function auditCandidate(sourceOffer, market, selectedIds, globalImageOwners) {
     const key = imageKey(image);
     if (!key || localSeen.has(key)) continue;
     localSeen.add(key);
-    const owner = globalImageOwners.get(key);
+    const owner = imageOwners.get(key);
     if (owner && owner !== sourceOffer.id) continue;
     images.push(image);
   }
@@ -139,7 +126,7 @@ for (const offer of all) {
 
 const offers = [...unique.values()];
 if (!offers.length) throw new Error("fresh_publish_no_verified_offers_any_market");
-process.env.CATALOG_GROW_ONLY_MARKETS = "";
+process.env.CATALOG_GROW_ONLY_MARKETS = markets.join(",");
 const manifest = await persistCatalogOffers(offers);
 const publishedAt = new Date().toISOString();
 const report = {
