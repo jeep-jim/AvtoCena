@@ -4,6 +4,7 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
+import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -11,13 +12,11 @@ export const revalidate = 0;
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
 function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
 
-const marketOrder = [
-  { id: "korea", label: "Корея", flag: "🇰🇷" },
-  { id: "china", label: "Китай", flag: "🇨🇳" },
-  { id: "japan", label: "Япония", flag: "🇯🇵" },
-  { id: "uae", label: "ОАЭ", flag: "🇦🇪" },
-  { id: "europe", label: "Европа", flag: "🇪🇺" },
-];
+const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({
+  id,
+  label: CATALOG_MARKET_LABELS[id],
+  flag: CATALOG_MARKET_FLAGS[id],
+}));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
 
@@ -60,7 +59,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   return <main className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
-      <div className="max-w-4xl"><h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">Найдено предложений: {total}.{selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}</p></div>
+      <div className="max-w-4xl"><h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Каталог автомобилей</h1><p className="mt-3 text-sm font-bold leading-6 text-white/52 md:text-base">7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: {total}.{selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}</p></div>
       <CatalogFilters initial={initial} facets={facets} />
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
       <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{groupedMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{market.flag}</span><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Свежие автомобили пока загружаются. Блок появится автоматически после успешного импорта этого рынка.</div>}</section>)}</div>
