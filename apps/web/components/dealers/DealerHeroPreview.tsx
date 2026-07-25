@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 const applications = [
@@ -32,26 +31,39 @@ const applications = [
     tone: "deal",
     meta: "внесён депозит",
   },
+  {
+    city: "Новосибирск",
+    request: "BMW 3 из Китая до 3,2 млн ₽, тёмный салон и небольшой пробег.",
+    status: "Без ответа",
+    tone: "late",
+    meta: "ожидает менеджера · 11 мин",
+  },
 ] as const;
 
 const toneClasses: Record<string, string> = {
-  new: "bg-emerald-400/15 text-emerald-300",
-  work: "bg-amber-400/15 text-amber-200",
-  ready: "bg-sky-400/15 text-sky-300",
-  deal: "bg-red-500/15 text-red-300",
+  new: "dealer-status-chip--new",
+  work: "dealer-status-chip--work",
+  ready: "dealer-status-chip--ready",
+  deal: "dealer-status-chip--deal",
+  late: "dealer-status-chip--late",
 };
 
 export function DealerHeroPreview() {
   const [active, setActive] = useState(0);
-  const visible = useMemo(() => [applications[active], applications[(active + 1) % applications.length]], [active]);
+  const visible = useMemo(
+    () => [applications[active], applications[(active + 1) % applications.length], applications[(active + 2) % applications.length]],
+    [active],
+  );
 
   useEffect(() => {
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % applications.length), 7200);
+    const timer = window.setInterval(() => {
+      setActive((current) => (current - 1 + applications.length) % applications.length);
+    }, 8200);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
-    <div className="dealer-hero-preview rounded-[2rem] border border-white/8 bg-[#12151d] p-5 md:p-7 lg:-translate-y-7">
+    <div className="dealer-hero-preview rounded-[2rem] border border-white/8 bg-[#12151d] p-5 md:p-7 lg:-translate-y-8">
       <div className="flex items-center justify-between gap-4">
         <div>
           <div className="text-xs font-black uppercase tracking-[.16em] text-red-400">Рабочее место дилера</div>
@@ -62,45 +74,38 @@ export function DealerHeroPreview() {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {[["Новые заявки", "18"], ["Без ответа", "3"], ["Клиенты в работе", "47"], ["Автомобили в пути", "12"]].map(([label, value]) => (
-          <div key={label} className="rounded-2xl bg-white/[.055] p-4">
-            <div className="text-xs font-bold text-white/42">{label}</div>
+          <div key={label} className="dealer-metric-card rounded-2xl bg-white/[.055] p-4">
+            <div className="text-xs font-bold text-white/52">{label}</div>
             <div className="mt-2 text-4xl font-black">{value}</div>
           </div>
         ))}
       </div>
 
-      <div className="relative mt-3 min-h-[196px] overflow-hidden rounded-2xl bg-white/[.035] p-3">
-        <div className="mb-2 flex items-center justify-between px-1 text-[11px] font-black uppercase tracking-[.12em] text-white/34">
+      <div className="relative mt-3 min-h-[290px] overflow-hidden rounded-2xl bg-white/[.035] p-3">
+        <div className="mb-2 flex items-center justify-between px-1 text-[11px] font-black uppercase tracking-[.12em] text-white/48">
           <span>Последние обращения</span>
           <span className="inline-flex items-center gap-1.5"><i className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />обновляется</span>
         </div>
         <div key={active} className="grid gap-2 dealer-preview-slide">
           {visible.map((item, index) => (
-            <article key={`${item.city}-${index}`} className="rounded-2xl bg-white/[.055] p-3.5">
+            <article key={`${item.city}-${active}-${index}`} className="dealer-application-card rounded-2xl bg-white/[.065] p-3.5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="truncate text-sm font-black">Заявка из {item.city}</div>
-                  <div className="mt-1 text-xs font-bold text-white/38">{item.meta}</div>
+                  <div className="mt-1 text-xs font-bold text-white/48">{item.meta}</div>
                 </div>
-                <span className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-black ${toneClasses[item.tone]}`}>{item.status}</span>
+                <span className={`dealer-status-chip shrink-0 rounded-full px-2.5 py-1 text-[10px] font-black ${toneClasses[item.tone]}`}>{item.status}</span>
               </div>
-              <p className="mt-2 text-xs font-bold leading-5 text-white/52">{item.request}</p>
+              <p className="mt-2 text-xs font-bold leading-5 text-white/62">{item.request}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex gap-1.5" aria-hidden="true">
-          {applications.map((_, index) => <span key={index} className={`h-1.5 rounded-full transition-all duration-500 ${index === active ? "w-7 bg-red-500" : "w-2 bg-white/15"}`} />)}
-        </div>
-        <Link href="/dealers/demo" className="rounded-xl bg-white px-4 py-2.5 text-sm font-black text-black transition hover:scale-[1.02]">Открыть демо-кабинет →</Link>
-      </div>
-
       <style jsx>{`
-        .dealer-preview-slide { animation: dealerPreviewIn .55s ease both; }
-        @keyframes dealerPreviewIn {
-          from { opacity: 0; transform: translateY(9px); }
+        .dealer-preview-slide { animation: dealerPreviewDown .7s cubic-bezier(.22,.78,.24,1) both; }
+        @keyframes dealerPreviewDown {
+          from { opacity: .15; transform: translateY(-88px); }
           to { opacity: 1; transform: translateY(0); }
         }
         @media (prefers-reduced-motion: reduce) {
