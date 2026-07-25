@@ -3,6 +3,7 @@ import { CrmShell } from "@/components/crm/CrmShell";
 import { isCrmRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
 import { readChunkedDataJson } from "@/lib/data";
+import { defaultManagerAvatar } from "@/lib/default-avatars";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +27,7 @@ export default async function CrmManagersPage() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h2 className="text-2xl font-black">Роли в системе</h2>
-            <p className="mt-2 text-sm font-bold leading-6 text-white/48">Добавьте Telegram username сотрудника, назначьте роль — после этого он сможет войти через свой Telegram и получит аватар профиля.</p>
+            <p className="mt-2 text-sm font-bold leading-6 text-white/48">До первого входа сотрудник получает фирменную аватарку. После подтверждения Telegram она автоматически заменяется фотографией профиля.</p>
           </div>
           <Link href="/crm/managers/new" className="rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white">Добавить сотрудника</Link>
         </div>
@@ -45,11 +46,12 @@ export default async function CrmManagersPage() {
           const managerLeads = leads.filter((lead) => lead.assignedManagerId === manager.id || lead.createdByManagerId === manager.id);
           const managerClients = clients.filter((client) => client.assignedManagerId === manager.id || client.createdByManagerId === manager.id);
           const info = roleInfo[manager.role] || { label: manager.role, access: "Индивидуальные права" };
+          const avatar = manager.avatarUrl || defaultManagerAvatar(manager.id || manager.telegramUsername);
           return (
             <Link key={manager.id} href={`/crm/managers/${encodeURIComponent(manager.id)}`} className="glass rounded-[1.6rem] p-5 transition hover:-translate-y-0.5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
-                  {manager.avatarUrl ? <img src={manager.avatarUrl} alt="" className="h-12 w-12 shrink-0 rounded-full object-cover" referrerPolicy="no-referrer" /> : <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-lg font-black text-black">{manager.displayName.slice(0, 1).toUpperCase()}</div>}
+                  <img src={avatar} alt="" className="h-12 w-12 shrink-0 rounded-full object-cover" referrerPolicy="no-referrer" />
                   <div className="min-w-0">
                     <h2 className="truncate text-xl font-black">{manager.displayName}</h2>
                     <div className="mt-1 truncate text-sm font-bold text-white/45">@{manager.telegramUsername}</div>
