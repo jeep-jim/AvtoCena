@@ -20,8 +20,20 @@ jobs:
       - run: npm ci
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
-      - name: Power normalization tests
-        run: node --import tsx --test tests/catalog-power-normalization.test.ts
+      - name: Power peak separation
+        run: node --import tsx --test --test-name-pattern="structured peak" tests/catalog-power-normalization.test.ts
+      - name: Power multi-motor sum
+        run: node --import tsx --test --test-name-pattern="multiple traction motors" tests/catalog-power-normalization.test.ts
+      - name: Power hybrid sum
+        run: node --import tsx --test --test-name-pattern="non-series hybrid" tests/catalog-power-normalization.test.ts
+      - name: Power structured 30-minute
+        run: node --import tsx --test --test-name-pattern="structured source fields" tests/catalog-power-normalization.test.ts
+      - name: Power text 30-minute
+        run: node --import tsx --test --test-name-pattern="source text" tests/catalog-power-normalization.test.ts
+      - name: Power multilingual units
+        run: node --import tsx --test --test-name-pattern="Russian, Chinese and Georgian" tests/catalog-power-normalization.test.ts
+      - name: Power engine displacement
+        run: node --import tsx --test --test-name-pattern="engine volume" tests/catalog-power-normalization.test.ts
       - name: Typecheck
         run: npm run typecheck
       - name: Production build
