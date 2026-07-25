@@ -1,6 +1,7 @@
 import { getActiveMarketVersion } from "../business-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustoms";
+import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
@@ -18,8 +19,13 @@ function transportToBorderRub(offer: VehicleOffer) {
     || positive(raw.customsTransportRub);
 }
 
+function isActiveMarketConfig(version: any) {
+  return Boolean(version && version.status === "active" && version.active !== false);
+}
+
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
-  const offer = normalizeVehicleOfferSpecs(input) as VehicleOffer;
+  const referenced = await enrichOfferWithCertifiedPower(input);
+  const offer = normalizeVehicleOfferSpecs(referenced) as VehicleOffer;
   const [rate, eurRate] = await Promise.all([
     convertToRub(offer.sourcePrice, offer.sourceCurrency),
     convertToRub(1, "EUR"),
@@ -56,7 +62,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
   });
 
   const version: any = await getActiveMarketVersion(offer.market);
-  if (!version) {
+  if (!isActiveMarketConfig(version)) {
     return {
       ...offer,
       totalRub: null,
@@ -69,6 +75,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
           totalRub: customsValueRub,
         },
         customsCompleteness: customs.status,
+        marketConfigStatus: version?.status || "missing",
       },
       calculationStatus: "needs_market_config",
     };
