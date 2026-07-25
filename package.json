@@ -21,6 +21,7 @@
     "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
     "catalog:import:sample": "tsx scripts/catalog-import-production.mjs",
     "catalog:power-review": "tsx scripts/catalog-power-review.mjs",
-    "catalog:power-knowledge": "tsx scripts/catalog-build-power-knowledge.mjs"
+    "catalog:power-knowledge": "tsx scripts/catalog-build-power-knowledge.mjs",
+    "catalog:sync-vehicle-models": "tsx scripts/catalog-sync-vehicle-models.mjs"
   }
 }
