@@ -22,6 +22,7 @@ export type CatalogPowerDisplay = {
   utilizationLabel?: string;
   motorPowersKw: number[];
   sourceLabel: string;
+  estimated: boolean;
 };
 
 export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDisplay | null {
@@ -34,6 +35,7 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
   const explicitThirtyMinute = positive(offer.power30MinKw);
   const kind = String(offer.powertrainKind || "").toLowerCase();
   const customsPower = positive(offer.calculationSnapshot?.customs?.utilizationPowerKw);
+  const estimated = Boolean(offer.calculationSnapshot?.certified30MinutePowerMissing);
   const thirtyMinutePowerKw = summedMotors
     || explicitThirtyMinute
     || (["electric", "series_hybrid"].includes(kind) ? customsPower : undefined);
@@ -49,14 +51,19 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
 
   return {
     thirtyMinutePowerKw,
-    thirtyMinuteLabel: `30 мин: ${motorEquation}`,
+    thirtyMinuteLabel: estimated
+      ? `Расчёт: ${formatKw(thirtyMinutePowerKw)} кВт`
+      : `30 мин: ${motorEquation}`,
     utilizationPowerKw,
     utilizationLabel: utilizationDiffers
       ? `Для утиля: ${formatKw(utilizationPowerKw)} кВт`
       : undefined,
     motorPowersKw,
-    sourceLabel: motorPowersKw.length > 1
-      ? "Сумма максимальной 30-минутной мощности тяговых электромоторов"
-      : "Максимальная 30-минутная мощность тягового электромотора",
+    sourceLabel: estimated
+      ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность подтвердит менеджер по документам."
+      : motorPowersKw.length > 1
+        ? "Сумма максимальной 30-минутной мощности тяговых электромоторов"
+        : "Максимальная 30-минутная мощность тягового электромотора",
+    estimated,
   };
 }
