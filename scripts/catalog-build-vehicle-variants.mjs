@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 
-const { readChunkedDataJson, rebuildChunkedIndex, writeDataJson } = await import("../apps/web/lib/data.ts");
+const { writeDataJson } = await import("../apps/web/lib/data.ts");
+const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked-data.ts");
 const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 const {
   findVehicleModel,
@@ -42,14 +43,14 @@ function median(values) {
   return sorted.length % 2 ? sorted[middle] : Math.round(((sorted[middle - 1] + sorted[middle]) / 2) * 10) / 10;
 }
 
-function exactPower(offer) {
+function candidatePower(offer) {
   const confidence = String(offer.powerDataConfidence || "");
   if (["estimated", "reference"].includes(confidence)) return 0;
   return validPower(offer.powerHp);
 }
 
 for (const offer of offers) {
-  const powerHp = exactPower(offer);
+  const powerHp = candidatePower(offer);
   if (!powerHp) continue;
   const match = await findVehicleModel(offer);
   if (!match) continue;
@@ -73,6 +74,7 @@ for (const offer of offers) {
 
 const generated = [];
 const conflicts = [];
+const insufficientEvidence = [];
 const generatedAt = new Date().toISOString();
 for (const [signature, rows] of groups) {
   const powers = [...new Set(rows.map((row) => Math.round(row.powerHp * 10) / 10))];
@@ -82,7 +84,13 @@ for (const [signature, rows] of groups) {
   }
   const sample = rows[0];
   const sourceIds = [...new Set(rows.map((row) => clean(row.offer.sourceId)).filter(Boolean))];
-  const confidence = rows.some((row) => row.offer.powerDataConfidence === "documented") ? "official_registry" : "source_consensus";
+  const hasDocumented = rows.some((row) => row.offer.powerDataConfidence === "documented");
+  const hasSourceExact = rows.some((row) => row.offer.powerDataConfidence === "source_exact");
+  if (!hasDocumented && !hasSourceExact && sourceIds.length < 2) {
+    insufficientEvidence.push({ signature, powerHp: powers[0], sourceIds, offerIds: rows.slice(0, 20).map((row) => row.offer.id) });
+    continue;
+  }
+  const confidence = hasDocumented ? "official_registry" : "source_consensus";
   const hash = crypto.createHash("sha256").update(`${signature}|${powers[0]}`).digest("hex").slice(0, 24);
   generated.push({
     id: `variant_${hash}`,
@@ -129,10 +137,8 @@ const nextModels = models.map((model) => {
   return { ...model, representativePowerHp: median(powers), updatedAt: generatedAt };
 });
 
-await writeDataJson(VARIANTS_PATH, variants);
-await rebuildChunkedIndex(VARIANTS_PATH, CHUNK_SIZE);
-await writeDataJson(MODELS_PATH, nextModels);
-await rebuildChunkedIndex(MODELS_PATH, CHUNK_SIZE);
+await replaceChunkedDataJson(VARIANTS_PATH, variants, CHUNK_SIZE);
+await replaceChunkedDataJson(MODELS_PATH, nextModels, CHUNK_SIZE);
 resetVehicleKnowledgeCache();
 
 await writeDataJson("catalog/vehicle-knowledge/variant-build-report.json", {
@@ -144,7 +150,9 @@ await writeDataJson("catalog/vehicle-knowledge/variant-build-report.json", {
   protectedVariants: protectedVariants.length,
   totalVariants: variants.length,
   conflictCount: conflicts.length,
+  insufficientEvidenceCount: insufficientEvidence.length,
   conflicts: conflicts.slice(0, 500),
+  insufficientEvidence: insufficientEvidence.slice(0, 500),
 });
 
 console.log(JSON.stringify({
@@ -153,5 +161,6 @@ console.log(JSON.stringify({
   generatedVariants: generated.length,
   totalVariants: variants.length,
   conflictCount: conflicts.length,
+  insufficientEvidenceCount: insufficientEvidence.length,
   modelsWithRepresentativePower: nextModels.filter((model) => Number(model.representativePowerHp || 0) > 0).length,
 }, null, 2));
