@@ -45,11 +45,12 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
   const explicitThirtyMinute = positive(offer.power30MinKw);
   const kind = String(offer.powertrainKind || "").toLowerCase();
   const customsPower = positive(offer.calculationSnapshot?.customs?.utilizationPowerKw);
+  const snapshotPreviewPower = positive(offer.calculationSnapshot?.utilizationPowerPreviewKw);
   const storedUtilizationPower = positive(offer.utilizationPowerKw);
   const peakPowerKw = positive(offer.powerKw)
     || (positive(offer.powerHp) ? Math.round((Number(offer.powerHp) / 1.35962) * 100) / 100 : undefined);
   const legacyEstimate = isElectricOrHybrid(offer)
-    ? storedUtilizationPower || peakPowerKw
+    ? storedUtilizationPower || snapshotPreviewPower || peakPowerKw
     : undefined;
   const certifiedMissing = Boolean(offer.calculationSnapshot?.certified30MinutePowerMissing);
   const thirtyMinutePowerKw = summedMotors
@@ -61,7 +62,7 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
 
   const exactAvailable = Boolean(summedMotors || explicitThirtyMinute);
   const estimated = !exactAvailable && (certifiedMissing || Boolean(legacyEstimate));
-  const utilizationPowerKw = storedUtilizationPower || customsPower || (estimated ? thirtyMinutePowerKw : undefined);
+  const utilizationPowerKw = storedUtilizationPower || customsPower || snapshotPreviewPower || (estimated ? thirtyMinutePowerKw : undefined);
   const motorEquation = motorPowersKw.length > 1
     ? `${motorPowersKw.map(formatKw).join(" + ")} = ${formatKw(thirtyMinutePowerKw)} кВт`
     : `${formatKw(thirtyMinutePowerKw)} кВт`;
