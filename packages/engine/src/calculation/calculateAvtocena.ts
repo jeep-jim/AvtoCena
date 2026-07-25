@@ -39,7 +39,7 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
 
   addLine(lines, { id: "car", title: "Стоимость автомобиля", amountRub: carPriceRub, kind: "car", amountType: "manual", source: "vehicle" });
   addLine(lines, { id: "security-deposit", title: "Обеспечительный платёж", amountRub: numberOrZero(config.securityDepositRub), kind: "deposit", amountType: "fixed", source: "market_config" });
-  addLine(lines, { id: "topavto-commission", title: "Комиссия TopAvto", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
+  addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "broker", title: "Брокер", amountRub: numberOrZero(config.brokerRub), kind: "service", amountType: "fixed", source: "market_config" });

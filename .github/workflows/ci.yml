@@ -20,6 +20,8 @@ jobs:
       - run: npm ci
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
+      - name: Full seven-market pricing tests
+        run: node --import tsx --test tests/catalog-full-market-pricing.test.ts
       - name: Power normalization tests
         run: node --import tsx --test tests/catalog-power-normalization.test.ts
       - name: Public 30-minute power display tests
