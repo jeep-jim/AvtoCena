@@ -19,6 +19,7 @@
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",
     "catalog:smoke": "tsx scripts/catalog-smoke.mjs",
-    "catalog:import:sample": "tsx scripts/catalog-import-production.mjs"
+    "catalog:import:sample": "tsx scripts/catalog-import-production.mjs",
+    "catalog:power-review": "tsx scripts/catalog-power-review.mjs"
   }
 }
