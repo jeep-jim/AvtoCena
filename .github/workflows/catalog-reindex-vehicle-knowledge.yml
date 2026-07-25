@@ -44,6 +44,8 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_BUCKET"
           test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
+      - name: Build missing certified 30-minute power queue
+        run: npm run catalog:power-reference-queue
       - name: Recanonicalize and reprice current catalog
         run: npm run catalog:reindex-vehicle-knowledge
       - name: Run catalog smoke checks

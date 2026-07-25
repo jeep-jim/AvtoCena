@@ -3,6 +3,7 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
+import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 
@@ -24,6 +25,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const rankedImages = rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
+  const powerDisplay = catalogPowerDisplay(normalizedOffer);
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const snapshot = {
@@ -54,6 +56,8 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc} /><span>{o.engineCc ? `${o.engineCc} см³` : o.fuelLabel}</span></span>
             <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
+            {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><PowerIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
+            {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Расчётная мощность, по которой определяется коэффициент утилизационного сбора"><PowerIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}
           </div>
         </div>
       </Link>
