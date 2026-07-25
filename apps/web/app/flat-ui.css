@@ -22,7 +22,7 @@ html[data-theme="light"] .crm-root details>summary{color:#171b23!important}
 html[data-theme="light"] .crm-root details>summary svg{color:#4b5565!important}
 html[data-theme="light"] .crm-root [class*="bg-white/["]{background:#e9edf3!important}
 html[data-theme="light"] .crm-root [class*="bg-black/"]{background:#e8ecf2!important}
-html[data-theme="light"] .crm-root [class*="text-emerald-"]{color:#137b4b!important}
+html[data-theme="light"] .crm-root [class*="text-emerald-"]{color:#20a85e!important}
 html[data-theme="light"] .crm-root [class*="text-amber-"]{color:#8a5a00!important}
 html[data-theme="light"] .crm-root [class*="bg-amber-"]{background:#fff4d8!important}
 html[data-theme="light"] .crm-root [class*="bg-red-500/15"],html[data-theme="light"] .crm-root [class*="bg-red-500/20"]{background:#f8dfe2!important}
@@ -30,7 +30,7 @@ html[data-theme="light"] .crm-root [class*="text-red-300"],html[data-theme="ligh
 
 /* Статусы заявок — насыщенные и читаемые. */
 .dealer-status-chip,.demo-status{border:1px solid transparent;letter-spacing:.01em}
-.dealer-status-chip--new,.demo-status--new{background:rgba(34,197,94,.2)!important;color:#69f0a0!important;border-color:rgba(74,222,128,.3)!important}
+.dealer-status-chip--new,.demo-status--new{background:rgba(32,168,94,.2)!important;color:#20a85e!important;border-color:rgba(32,168,94,.48)!important}
 .dealer-status-chip--work,.demo-status--work{background:rgba(234,179,8,.22)!important;color:#fde047!important;border-color:rgba(250,204,21,.32)!important}
 .dealer-status-chip--ready,.demo-status--ready{background:rgba(14,165,233,.22)!important;color:#7dd3fc!important;border-color:rgba(56,189,248,.32)!important}
 .dealer-status-chip--deal,.demo-status--deal{background:rgba(239,68,68,.22)!important;color:#fca5a5!important;border-color:rgba(248,113,113,.32)!important}
@@ -48,7 +48,7 @@ html[data-theme="light"] .ac-dealers-page input,html[data-theme="light"] .ac-dea
 html[data-theme="light"] .ac-dealers-page input::placeholder,html[data-theme="light"] .ac-dealers-page textarea::placeholder{color:#748096!important}
 html[data-theme="light"] .ac-dealers-page [class*="bg-white/["]{background:#e9edf3!important}
 html[data-theme="light"] .ac-dealers-page [class*="bg-black/25"]{background:#eef1f5!important}
-html[data-theme="light"] .ac-dealers-page [class*="text-emerald-"]{color:#137b4b!important}
+html[data-theme="light"] .ac-dealers-page [class*="text-emerald-"]{color:#20a85e!important}
 html[data-theme="light"] .ac-dealers-page .dealer-hero-preview{background:#fff!important;color:#171b23!important;border-color:#dce3ec!important}
 html[data-theme="light"] .ac-dealers-page .dealer-metric-card{background:#e5eaf1!important;color:#171b23!important}
 html[data-theme="light"] .ac-dealers-page .dealer-application-card{background:#e1e7ef!important;color:#171b23!important;border:1px solid #d3dbe6!important}
@@ -56,13 +56,14 @@ html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card{background:
 html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card [class*="text-white/"]{color:#536176!important}
 html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-note{background:#e6ebf2!important;color:#253044!important}
 
-/* Красивый знак проверенного профиля. */
-.dealer-verified-icon{background:#ff353d!important;color:#ff353d!important;border:4px solid rgba(255,255,255,.92)!important}
-html[data-theme="light"] .dealer-verified-icon{border-color:#fff!important}
+/* Волнистый знак проверки как в соцсетях, без внешнего круглого контейнера. */
+.dealer-verified-icon{background:transparent!important;color:#ff353d!important;border:0!important;border-radius:0!important}
+.dealer-verified-icon--positive{color:#20a85e!important}
+html[data-theme="light"] .dealer-verified-icon{background:transparent!important;border:0!important}
 
 /* Светлая демо-CRM: карточки, статусы и уведомления не бледнеют. */
 html[data-theme="light"] .dealer-demo-shell .demo-metric-card{border:1px solid #dbe2eb!important}
-html[data-theme="light"] .dealer-status-chip--new,html[data-theme="light"] .demo-status--new{background:#c9f2da!important;color:#08683a!important;border-color:#8bd8ad!important}
+html[data-theme="light"] .dealer-status-chip--new,html[data-theme="light"] .demo-status--new{background:rgba(32,168,94,.14)!important;color:#20a85e!important;border-color:rgba(32,168,94,.45)!important}
 html[data-theme="light"] .dealer-status-chip--work,html[data-theme="light"] .demo-status--work{background:#fff0b8!important;color:#795500!important;border-color:#e8cc65!important}
 html[data-theme="light"] .dealer-status-chip--ready,html[data-theme="light"] .demo-status--ready{background:#cfeeff!important;color:#075f8c!important;border-color:#86cbea!important}
 html[data-theme="light"] .dealer-status-chip--deal,html[data-theme="light"] .demo-status--deal{background:#ffd6d9!important;color:#a41621!important;border-color:#efa1a8!important}
