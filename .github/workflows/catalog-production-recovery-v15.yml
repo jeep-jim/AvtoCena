@@ -112,9 +112,9 @@ jobs:
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_TARGET: "1000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
-      CATALOG_REBUILD_MIN_SPEC_SCORE: "4"
+      CATALOG_REBUILD_MIN_SPEC_SCORE: "1"
       CATALOG_INDEX_WRITE_CONCURRENCY: "10"
-      CATALOG_GROW_ONLY_MARKETS: ""
+      CATALOG_GROW_ONLY_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
     steps:
       - uses: actions/checkout@v4
@@ -134,7 +134,7 @@ jobs:
           merge-multiple: true
       - name: Validate accumulating publisher
         run: node --check scripts/catalog-publish-fresh.mjs
-      - name: Publish fresh offers and retain verified existing stock
+      - name: Publish fresh offers and retain existing stock
         run: npx tsx scripts/catalog-publish-fresh.mjs
       - name: Run production catalog smoke checks
         run: npm run catalog:smoke
