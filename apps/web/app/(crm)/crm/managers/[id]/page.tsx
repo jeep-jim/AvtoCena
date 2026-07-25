@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CrmShell } from "@/components/crm/CrmShell";
 import { readCrmUsers } from "@/lib/crm-users";
+import { defaultManagerAvatar } from "@/lib/default-avatars";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
   if (!isNew && !user) notFound();
   const state = first(query.state);
   const message = first(query.message);
+  const avatar = user?.avatarUrl || defaultManagerAvatar(user?.id || user?.telegramUsername || id);
 
   return (
     <CrmShell activeHref="/crm/managers" title={isNew ? "Новый сотрудник" : user!.displayName} subtitle="Telegram username является пропуском в CRM. Роль и доступ можно изменить в любой момент.">
@@ -30,8 +32,8 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
       <form action="/api/crm/users" method="post" className="glass grid gap-5 rounded-[1.8rem] p-5 md:grid-cols-[180px_minmax(0,1fr)] md:p-6">
         <input type="hidden" name="userId" value={user?.id || ""} />
         <div>
-          {user?.avatarUrl ? <img src={user.avatarUrl} alt="" className="h-32 w-32 rounded-[2rem] object-cover" referrerPolicy="no-referrer" /> : <div className="grid h-32 w-32 place-items-center rounded-[2rem] bg-white text-4xl font-black text-black">{(user?.displayName || "Н").slice(0, 1).toUpperCase()}</div>}
-          <div className="mt-3 text-xs font-bold leading-5 text-white/45">Фото появится автоматически после первого подтверждённого входа через Telegram.</div>
+          <img src={avatar} alt="" className="h-32 w-32 rounded-[2rem] object-cover" referrerPolicy="no-referrer" />
+          <div className="mt-3 text-xs font-bold leading-5 text-white/45">До первого входа показывается фирменная аватарка. После подтверждения Telegram она автоматически заменится фотографией профиля.</div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -41,7 +43,7 @@ export default async function CrmManagerEditPage({ params, searchParams }: { par
           <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42">Статус<select name="status" defaultValue={user?.status || "active"} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal"><option value="active">Доступ разрешён</option><option value="disabled">Доступ отключён</option></select></label>
           <label className="grid gap-2 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2">Компания<input name="companyId" defaultValue={user?.companyId || "dealer_topavto"} className="soft-input rounded-xl px-4 py-3 text-sm font-black normal-case tracking-normal" /></label>
           {user?.telegramId ? <div className="rounded-xl bg-emerald-400/10 px-4 py-3 text-sm font-bold text-emerald-300 md:col-span-2">Telegram подтверждён · ID {user.telegramId}</div> : <div className="rounded-xl bg-amber-400/10 px-4 py-3 text-sm font-bold text-amber-100 md:col-span-2">Ожидается первый вход через Telegram. После него сохранятся Telegram ID и аватар.</div>}
-          <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2">{isNew ? "Добавить сотрудника" : "Сохранить сотрудника"}</button>
+          <button className="dealer-primary-button rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2">{isNew ? "Добавить сотрудника" : "Сохранить сотрудника"}</button>
         </div>
       </form>
     </CrmShell>
