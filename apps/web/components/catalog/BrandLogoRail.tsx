@@ -38,7 +38,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
 
 function BrandTile({ brand, onNavigate }: { brand: string; onNavigate?: () => void }) {
   return <Link
-    href={`/cars/brand/${catalogBrandSlug(brand)}`}
+    href={`/cars?make=${encodeURIComponent(brand)}`}
     onClick={onNavigate}
     className="flex h-[78px] min-w-[94px] shrink-0 touch-manipulation select-none flex-col items-center justify-center gap-1.5 px-1.5 transition md:hover:-translate-y-0.5"
     title={`Автомобили ${brand} под заказ`}
