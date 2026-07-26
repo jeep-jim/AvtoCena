@@ -130,8 +130,9 @@ function Panel({ title, subtitle, children, action }: { title: string; subtitle:
 
 function catalogImageFromOffer(offer: any) {
   const images = Array.isArray(offer?.images) ? offer.images : [];
-  const first = images.find((image: any) => typeof image === "string" ? image : typeof image?.url === "string" && image.url)?.url ?? images.find((image: any) => typeof image === "string");
-  return String(first || offer?.imageUrl || offer?.image?.url || offer?.image || offer?.media?.[0]?.url || "").trim();
+  const objectImage = images.find((image: any) => image && typeof image === "object" && typeof image.url === "string");
+  const stringImage = images.find((image: any) => typeof image === "string");
+  return String(objectImage?.url || stringImage || offer?.imageUrl || offer?.image?.url || offer?.image || offer?.media?.[0]?.url || "").trim();
 }
 
 export function DealerDemoDashboard() {
@@ -149,8 +150,11 @@ export function DealerDemoDashboard() {
       .then((response) => response.ok ? response.json() : null)
       .then((data) => {
         if (cancelled) return;
-        const rows = Array.isArray(data?.items) ? data.items : Array.isArray(data?.offers) ? data.offers : [];
-        const images = [...new Set(rows.map(catalogImageFromOffer).filter((url: string) => /^https?:\/\//.test(url) || url.startsWith("/api/catalog/images/")))].slice(0, 12);
+        const rows: any[] = Array.isArray(data?.items) ? data.items : Array.isArray(data?.offers) ? data.offers : [];
+        const candidates: string[] = rows
+          .map((offer) => catalogImageFromOffer(offer))
+          .filter((url): url is string => Boolean(url) && (/^https?:\/\//.test(url) || url.startsWith("/api/catalog/images/")));
+        const images: string[] = Array.from(new Set<string>(candidates)).slice(0, 12);
         setCatalogImages(images);
       })
       .catch(() => undefined);
