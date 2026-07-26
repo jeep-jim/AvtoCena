@@ -25,8 +25,10 @@ function imageKey(image) {
 }
 
 function specScore(offer) {
-  const mileage = Number(offer?.mileageKm);
-  return Number.isFinite(mileage) && mileage >= 0 ? 1 : 0;
+  // Пробег может отсутствовать у аукционных и новых автомобилей. Для базовой пригодности
+  // достаточно нормализованных марки, модели и года; остальные обязательные поля отдельно
+  // проверяются quality-gate, таможней и структурой цены.
+  return offer?.make && offer?.model && Number.isFinite(Number(offer?.year)) ? 1 : 0;
 }
 
 function freshness(offer) {
