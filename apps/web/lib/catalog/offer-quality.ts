@@ -129,10 +129,9 @@ function hasCompletePriceBreakdown(offer: VehicleOffer) {
 }
 
 function hasMileage(offer: VehicleOffer) {
+  if (offer.mileageKm === undefined || offer.mileageKm === null) return true;
   const mileage = Number(offer.mileageKm);
-  if (Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000) return true;
-  const currentYear = new Date().getFullYear();
-  return /(?:^|_)new(?:_|$)/i.test(String(offer.sourceId || "")) && Number(offer.year || 0) >= currentYear - 1;
+  return Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000;
 }
 
 function hasRequiredPower(offer: VehicleOffer) {
