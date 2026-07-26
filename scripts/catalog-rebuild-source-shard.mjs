@@ -11,19 +11,20 @@ const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PE
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
 const maxImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 250));
-const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 12));
-const prepareConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 10)));
+const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 160));
+const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 3));
+const prepareConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 12)));
 const sourceConcurrency = Math.max(1, Math.min(10, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 4)));
 const pagePrepareConcurrency = Math.max(1, Math.floor(prepareConcurrency / Math.max(1, sourceConcurrency)));
 const checkpointEvery = Math.max(10, Number(process.env.CATALOG_REBUILD_CHECKPOINT_EVERY || 25));
-const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 70 * 60 * 1_000));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 40 * 60 * 1_000));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
 const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0));
 const shardCount = Math.max(1, Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 1));
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;
 const startedAtMs = Date.now();
 const deadlineAtMs = startedAtMs + timeLimitMs;
+const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 
 const sourcePlan = {
   korea: ["encar_direct", "kcar_korea_open"],
@@ -44,12 +45,17 @@ function stableShard(value) {
 }
 
 const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
-const connectedMarketSources = catalogImportSources.filter((source) => source.market === market || source.market === "multi").map((source) => source.sourceId);
+const plannedSourceIds = [...new Set(sourcePlan[market])].filter((sourceId) => stableShard(sourceId) === shardIndex);
 const configuredSources = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
-const allSourceIds = configuredSources.length ? [...new Set(configuredSources)] : [...new Set([...sourcePlan[market], ...connectedMarketSources])];
-const sourceIds = allSourceIds.filter((sourceId) => stableShard(sourceId) === shardIndex);
+const explicitNoLiveSources = configuredSources.includes("__no_live_sources__");
+const liveSourceIds = explicitNoLiveSources
+  ? []
+  : (configuredSources.length ? configuredSources : plannedSourceIds)
+    .filter((sourceId) => plannedSourceIds.includes(sourceId) && adapters.has(sourceId));
+const retentionSourceIds = plannedSourceIds.filter((sourceId) => adapters.has(sourceId));
+const sourceIds = [...new Set([...retentionSourceIds, ...liveSourceIds])];
 const target = targetPerSource * sourceIds.length;
-const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || maxPagesPerSource * Math.max(1, sourceIds.length)));
+const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || maxPagesPerSource * Math.max(1, liveSourceIds.length)));
 const seedScanLimit = Math.max(target, Number(process.env.CATALOG_REBUILD_SEED_SCAN_LIMIT || Math.max(5_000, target * 3)));
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
 
@@ -89,6 +95,10 @@ function cleanOffer(offer) {
   trim = removeLeading(removeLeading(removeLeading(trim, base), make), model);
   return normalizeVehicleOfferSpecs({ ...offer, make, model, trim: trim || undefined });
 }
+function isCommercial(offer) {
+  return COMMERCIAL_RE.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)
+    || /^(?:Hino|Mitsubishi Fuso)$/i.test(String(offer?.make || ""));
+}
 function imageKey(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
 function uniqueImages(images) {
   const result = []; const seen = new Set();
@@ -119,11 +129,11 @@ const sourceCounts = new Map(sourceIds.map((sourceId) => [sourceId, 0]));
 const freshCounts = new Map(sourceIds.map((sourceId) => [sourceId, 0]));
 const restoredCounts = new Map(sourceIds.map((sourceId) => [sourceId, 0]));
 const report = {
-  version: 19, market, shardIndex, shardCount, targetPerSource, target, minimumImages, preferredImages, maxImages,
+  version: 21, market, shardIndex, shardCount, targetPerSource, target, minimumImages, preferredImages, maxImages,
   maxPagesPerSource, maxTotalPages, maxEmptyPages, prepareConcurrency, pagePrepareConcurrency, sourceConcurrency,
-  timeLimitMs, retentionMs, deadlineAt: new Date(deadlineAtMs).toISOString(), allSourceIds, sourceIds, connectedMarketSources,
+  timeLimitMs, retentionMs, deadlineAt: new Date(deadlineAtMs).toISOString(), plannedSourceIds, liveSourceIds, retentionSourceIds, sourceIds,
   startedAt: new Date(startedAtMs).toISOString(), pages: 0, rounds: 0, seen: 0, seedSeen: 0, seedSaved: 0,
-  saved: 0, rejected: 0, imageFailures: 0, sourceErrors: [], sources: [], checkpoints: 0, stopReason: "running", partial: true,
+  saved: 0, rejected: 0, commercialRejected: 0, imageFailures: 0, sourceErrors: [], sources: [], checkpoints: 0, stopReason: "running", partial: true,
 };
 function sourceCount(sourceId) { return Number(sourceCounts.get(sourceId) || 0); }
 function sourceHasCapacity(sourceId) { return sourceCount(sourceId) < targetPerSource; }
@@ -137,7 +147,7 @@ function addOffer(offer, origin) {
 function recordError(row) { if (report.sourceErrors.length < 1_000) report.sourceErrors.push(row); }
 function payload(stopReason = report.stopReason, partial = true) {
   const generatedAt = new Date().toISOString(); const rows = [...offers.values()].sort(qualityOrder);
-  return { version: 19, market, shardIndex, shardCount, generatedAt, targetPerSource, target, count: rows.length, sourceIds, partial, stopReason,
+  return { version: 21, market, shardIndex, shardCount, generatedAt, targetPerSource, target, count: rows.length, sourceIds, liveSourceIds, retentionSourceIds, partial, stopReason,
     report: { ...report, saved: rows.length, publicBySource: Object.fromEntries(sourceCounts), freshBySource: Object.fromEntries(freshCounts), restoredBySource: Object.fromEntries(restoredCounts), partial, stopReason, lastCheckpointAt: generatedAt, targetReached: sourceIds.every((id) => sourceCount(id) >= targetPerSource) }, offers: rows };
 }
 let writeChain = Promise.resolve();
@@ -153,32 +163,30 @@ async function prepareCandidate(input, source, origin) {
   if (deadlineReached()) return null;
   let offer = cleanOffer({ ...input });
   if (!offer || offer.market !== market || !offer.id || !sourceCounts.has(offer.sourceId) || !sourceHasCapacity(offer.sourceId)) return null;
+  if (isCommercial(offer)) { report.commercialRejected++; return null; }
   let images = uniqueImages(offer.images || []);
-  if (images.length < preferredImages && source?.fetchImages && !deadlineReached()) {
+  const requiredBeforeNetwork = origin === "fresh_listing" ? preferredImages : minimumImages;
+  if (images.length < requiredBeforeNetwork && source?.fetchImages && !deadlineReached()) {
     try { const fetched = await source.fetchImages(offer); images = uniqueImages([...images, ...(Array.isArray(fetched) ? fetched : [])]); }
-    catch (error) { recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "listing_gallery", error: String(error?.message || error) }); }
+    catch (error) { recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "gallery", error: String(error?.message || error) }); }
   }
   if (images.length < minimumImages) { report.imageFailures++; return null; }
   const now = new Date().toISOString();
   offer = cleanOffer({ ...offer, status: "active", images, updatedAt: now, operational: { ...offer.operational, fullRebuildAt: now, galleryVerified: true, galleryImageCount: images.length, gallerySourceImageCount: images.length, galleryPreferredCount: preferredImages, galleryPreferredReached: images.length >= preferredImages, galleryRebuiltFrom: origin, seoEligible: Boolean(offer.operational?.sourceUrl && images.length >= minimumImages) } });
   try { offer = cleanOffer(await calculateOfferWithRussiaCustoms(offer)); }
-  catch (error) { recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "calculation", error: String(error?.message || error) }); if (!Number(offer.totalRub || 0)) return null; }
+  catch (error) { recordError({ sourceId: offer.sourceId, offerId: offer.id, origin, stage: "calculation", error: String(error?.message || error) }); return null; }
   return isCrediblePublicOffer(offer) ? offer : null;
 }
 
 let shuttingDown = false;
 for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => { if (shuttingDown) return; shuttingDown = true; report.stopReason = `signal_${signal.toLowerCase()}`; writeProgress(report.stopReason, true).finally(() => process.exit(0)); });
 
-if (!sourceIds.length) { report.stopReason = "empty_shard"; report.partial = false; report.finishedAt = new Date().toISOString(); await writeProgress(report.stopReason, false); console.log(JSON.stringify(payload(report.stopReason, false).report, null, 2)); process.exit(0); }
+if (!sourceIds.length) {
+  report.stopReason = "empty_shard"; report.partial = false; report.finishedAt = new Date().toISOString();
+  await writeProgress(report.stopReason, false); console.log(JSON.stringify(payload(report.stopReason, false).report, null, 2)); process.exit(0);
+}
 
-// Сначала обязательно обходим живые страницы. Старый трёхдневный остаток не может заранее
-// заполнить квоту источника и помешать проверке новых/актуальных объявлений.
-const sourceStates = sourceIds.map((sourceId) => {
-  const source = adapters.get(sourceId);
-  if (!source) recordError({ sourceId, stage: "registry", error: `catalog_source_not_found_${sourceId}` });
-  return { sourceId, source, cursor: null, pages: 0, errors: 0, emptyPages: 0, savedFresh: 0, done: !source, stopReason: !source ? "source_not_found" : "running", seenCursors: new Set() };
-});
-
+const sourceStates = liveSourceIds.map((sourceId) => ({ sourceId, source: adapters.get(sourceId), cursor: null, pages: 0, errors: 0, emptyPages: 0, savedFresh: 0, done: false, stopReason: "running", seenCursors: new Set() }));
 async function processSourcePage(state) {
   if (state.done || !state.source || !sourceHasCapacity(state.sourceId) || deadlineReached() || report.pages >= maxTotalPages) return;
   if (state.pages >= maxPagesPerSource) { state.done = true; state.stopReason = "source_page_limit"; return; }
@@ -189,7 +197,7 @@ async function processSourcePage(state) {
   try { fetched = await state.source.fetchPage(state.cursor); state.errors = 0; }
   catch (error) {
     state.errors++; state.seenCursors.delete(cursorKey); recordError({ sourceId: state.sourceId, cursor: state.cursor, stage: "list", error: String(error?.message || error) });
-    if (state.errors >= 4 || deadlineReached()) { state.done = true; state.stopReason = state.errors >= 4 ? "source_errors" : "deadline"; }
+    if (state.errors >= 3 || deadlineReached()) { state.done = true; state.stopReason = state.errors >= 3 ? "source_errors" : "deadline"; }
     return;
   }
   state.pages++; report.pages++;
@@ -214,11 +222,13 @@ while (!deadlineReached() && report.pages < maxTotalPages) {
   const active = sourceStates.filter((state) => !state.done && sourceHasCapacity(state.sourceId) && state.pages < maxPagesPerSource);
   if (!active.length) break;
   report.rounds++; await runWithConcurrency(active, sourceConcurrency, processSourcePage); await checkpointIfNeeded();
-  if (report.rounds % 4 === 0) { console.log(`[round:${market}:${shardIndex}] rounds=${report.rounds}; pages=${report.pages}; offers=${offers.size}/${target}; active=${active.length}; fresh=${JSON.stringify(Object.fromEntries(freshCounts))}`); await checkpointIfNeeded(true); }
+  if (report.rounds % 4 === 0) await checkpointIfNeeded(true);
 }
 
-// Только после живого обхода дополняем незаполненную квоту карточками не старше трёх дней.
-const [internalRows, publicRows] = await Promise.all([readAllOffersForMaintenance(), readMarketOffers(market)]);
+let internalRows = [];
+let publicRows = [];
+try { internalRows = await readAllOffersForMaintenance(); } catch (error) { recordError({ stage: "retention_internal", error: String(error?.message || error) }); }
+try { publicRows = await readMarketOffers(market); } catch (error) { recordError({ stage: "retention_public", error: String(error?.message || error) }); }
 const cutoff = Date.now() - retentionMs; const restoredMap = new Map();
 for (const offer of [...publicRows, ...internalRows].filter((offer) => offer && offer.market === market && sourceCounts.has(offer.sourceId) && ["active", "stale"].includes(String(offer.status || "")) && freshness(offer) >= cutoff).sort(qualityOrder)) {
   if (!restoredMap.has(offer.id) && !offers.has(offer.id)) restoredMap.set(offer.id, offer);
@@ -236,12 +246,14 @@ for (let index = 0; index < restoredSeeds.length && !deadlineReached(); index +=
 
 for (const state of sourceStates) {
   if (!state.done) state.stopReason = deadlineReached() ? "deadline" : report.pages >= maxTotalPages ? "total_page_limit" : state.pages >= maxPagesPerSource ? "source_page_limit" : "stopped";
-  report.sources.push({ sourceId: state.sourceId, target: targetPerSource, totalSaved: sourceCount(state.sourceId), freshSaved: Number(freshCounts.get(state.sourceId) || 0), restoredSaved: Number(restoredCounts.get(state.sourceId) || 0), pages: state.pages, emptyPages: state.emptyPages, errors: state.errors, stopReason: state.stopReason });
+  report.sources.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, totalSaved: sourceCount(state.sourceId), freshSaved: Number(freshCounts.get(state.sourceId) || 0), restoredSaved: Number(restoredCounts.get(state.sourceId) || 0), pages: state.pages, emptyPages: state.emptyPages, errors: state.errors, stopReason: state.stopReason });
+}
+for (const sourceId of retentionSourceIds.filter((sourceId) => !liveSourceIds.includes(sourceId))) {
+  report.sources.push({ sourceId, mode: "retention_only", target: targetPerSource, totalSaved: sourceCount(sourceId), freshSaved: 0, restoredSaved: Number(restoredCounts.get(sourceId) || 0), pages: 0, emptyPages: 0, errors: 0, stopReason: "probe_inactive_retention_used" });
 }
 report.finishedAt = new Date().toISOString(); report.saved = offers.size; report.targetReached = sourceIds.every((id) => sourceCount(id) >= targetPerSource);
 report.stopReason = report.targetReached ? "all_source_targets_reached" : deadlineReached() ? "deadline" : report.pages >= maxTotalPages ? "total_page_limit" : "sources_exhausted";
 report.partial = !report.targetReached; report.publicBySource = Object.fromEntries(sourceCounts); report.freshBySource = Object.fromEntries(freshCounts); report.restoredBySource = Object.fromEntries(restoredCounts);
-report.imageStats = [...offers.values()].reduce((stats, offer) => { const count = Array.isArray(offer.images) ? offer.images.length : 0; stats.min = Math.min(stats.min, count); stats.max = Math.max(stats.max, count); stats.total += count; stats.preferred += count >= preferredImages ? 1 : 0; return stats; }, { min: Number.POSITIVE_INFINITY, max: 0, total: 0, preferred: 0 });
-if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
-report.imageStats.average = offers.size ? Number((report.imageStats.total / offers.size).toFixed(2)) : 0; report.imageStats.preferredShare = offers.size ? Number((report.imageStats.preferred / offers.size).toFixed(4)) : 0; report.durationMs = Date.now() - startedAtMs;
-await writeProgress(report.stopReason, report.partial); console.log(JSON.stringify(payload(report.stopReason, report.partial).report, null, 2));
+report.durationMs = Date.now() - startedAtMs;
+await writeProgress(report.stopReason, report.partial);
+console.log(JSON.stringify(payload(report.stopReason, report.partial).report, null, 2));
