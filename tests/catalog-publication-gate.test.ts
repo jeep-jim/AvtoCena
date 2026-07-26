@@ -13,17 +13,20 @@ test("workflow audits market output before writing the catalog", () => {
   assert.ok(gate >= 0, "publication audit must be executed");
   assert.ok(publish > gate, "publication audit must run before publisher");
   assert.match(workflow, /CATALOG_PUBLISH_MIN_FRESH_BY_MARKET/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
   const thresholdLine = workflow.match(/CATALOG_PUBLISH_MIN_FRESH_BY_MARKET:\s*'([^']+)'/)?.[1];
   assert.ok(thresholdLine, "fresh-market thresholds must be configured");
   const thresholds = JSON.parse(thresholdLine || "{}");
   assert.ok(Number(thresholds.japan) > 0, "Japan must have a positive fresh-offer target");
   assert.match(workflow, /Run production catalog smoke checks\n\s+if:[^\n]+\n\s+continue-on-error: true/);
+  assert.match(workflow, /Confirm safe publication outcome/);
 });
 
 test("publication audit distinguishes fresh listings and validates exact calculations", () => {
   assert.match(validator, /galleryRebuiltFrom/);
   assert.match(validator, /fresh_listing/);
-  assert.match(validator, /per_market_advisory_gate/);
+  assert.match(validator, /per_market_volume_and_integrity_audit/);
+  assert.match(validator, /marketTargetReached/);
   assert.match(validator, /certified_utilization_power/);
   assert.match(validator, /price_breakdown/);
   assert.doesNotMatch(validator, /catalog_publication_gate_failed/);
@@ -35,7 +38,9 @@ test("publisher may retain current offers only after recalculation and full audi
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
   assert.match(publisher, /hasExactCalculation/);
   assert.match(publisher, /isCrediblePublicOffer/);
-  assert.match(publisher, /version: 21/);
+  assert.match(publisher, /version: 22/);
+  assert.match(publisher, /targetPerMarket/);
+  assert.match(publisher, /marketsBelowTarget/);
   assert.match(publisher, /previousManifestPreserved/);
 });
 
