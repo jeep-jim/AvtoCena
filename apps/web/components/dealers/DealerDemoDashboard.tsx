@@ -83,7 +83,11 @@ function VerifiedIcon({ className = "", positive = false }: { className?: string
 function TopAvtoLogo({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`topavto-logo ${compact ? "topavto-logo--compact" : ""}`} aria-label="TopAvto">
-      <img src="/brands/topavto-logo.png" alt="TopAvto" />
+      <svg viewBox="0 0 190 58" role="img" aria-hidden="true">
+        <path d="M18 28c20-18 44-22 74-20 26 2 48 10 72 27" fill="none" stroke="#ef3340" strokeWidth="5" strokeLinecap="round" />
+        <path d="M28 31h126" fill="none" stroke="#ef3340" strokeWidth="3" strokeLinecap="round" opacity=".75" />
+        <text x="18" y="52" fontSize="23" fontWeight="900" fontFamily="Arial, sans-serif"><tspan fill="#ef3340">TOP</tspan><tspan fill="currentColor">AVTO</tspan></text>
+      </svg>
     </div>
   );
 }
@@ -105,7 +109,7 @@ function DemoAvatar() {
 
 function LeadRow({ lead }: { lead: (typeof leadPool)[number] }) {
   return (
-    <article className="demo-lead-row grid gap-3 rounded-2xl border p-3.5 sm:grid-cols-[1fr_auto] sm:items-center">
+    <article className="grid gap-3 rounded-2xl bg-[var(--demo-soft)] p-3.5 sm:grid-cols-[1fr_auto] sm:items-center">
       <div className="flex min-w-0 items-center gap-3">
         <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--demo-avatar)] text-sm font-black">{lead.client.slice(0, 1)}</div>
         <div className="min-w-0"><div className="truncate text-sm font-black">{lead.client} · {lead.city}</div><div className="mt-1 truncate text-xs font-bold text-[var(--demo-muted)]">{lead.car} · {lead.source} · {lead.time}</div></div>
@@ -187,7 +191,7 @@ export function DealerDemoDashboard() {
               return (
                 <section key={title} className={`demo-funnel-column ${meta.className} rounded-2xl p-3.5`}>
                   <div className="mb-3 flex items-center justify-between"><span className="text-sm font-black">{title}</span><span className={`demo-status rounded-full px-2.5 py-1 text-[10px] font-black ${statusClasses[meta.tone]}`}>{rows.length}</span></div>
-                  <div className="grid gap-3">{rows.map((lead) => <article key={lead.id} className="demo-funnel-card rounded-xl p-3.5"><div className="flex items-start justify-between gap-2"><div className="text-sm font-black">{lead.client}</div><span className="text-[13px] font-black text-[var(--demo-muted)]">⋮</span></div><div className="mt-2 text-xs font-bold leading-5 text-[var(--demo-muted)]">{lead.car}</div><div className="mt-3 text-[11px] font-black text-[var(--demo-muted)]">{lead.city} · {lead.time}</div></article>)}</div>
+                  <div className="grid gap-2.5">{rows.map((lead) => <article key={lead.id} className="demo-funnel-card rounded-xl p-3.5"><div className="flex items-start justify-between gap-2"><div className="text-sm font-black">{lead.client}</div><span className="text-[13px] font-black text-[var(--demo-muted)]">⋮</span></div><div className="mt-2 text-xs font-bold leading-5 text-[var(--demo-muted)]">{lead.car}</div><div className="mt-3 text-[11px] font-black text-[var(--demo-muted)]">{lead.city} · {lead.time}</div></article>)}</div>
                 </section>
               );
             })}
@@ -217,7 +221,7 @@ export function DealerDemoDashboard() {
       );
     }
 
-    return <Panel title="Последние заявки" subtitle="Живая очередь компании" action={<button type="button" onClick={() => setLeadOffset((value) => (value + 1) % leadPool.length)} className="rounded-xl bg-[var(--demo-soft)] px-3 py-2 text-xs font-black">Обновить</button>}><div key={leadOffset} className="grid gap-3 dealer-demo-fade">{visibleLeads.map((lead) => <LeadRow key={`${lead.id}-${leadOffset}`} lead={lead} />)}</div></Panel>;
+    return <Panel title="Последние заявки" subtitle="Живая очередь компании" action={<button type="button" onClick={() => setLeadOffset((value) => (value + 1) % leadPool.length)} className="rounded-xl bg-[var(--demo-soft)] px-3 py-2 text-xs font-black">Обновить</button>}><div key={leadOffset} className="grid gap-2 dealer-demo-fade">{visibleLeads.map((lead) => <LeadRow key={`${lead.id}-${leadOffset}`} lead={lead} />)}</div></Panel>;
   }
 
   return (
@@ -246,29 +250,19 @@ export function DealerDemoDashboard() {
 
       <style jsx>{`
         .dealer-demo-shell{--demo-panel:#10131b;--demo-card:#181c25;--demo-soft:rgba(255,255,255,.065);--demo-avatar:rgba(255,255,255,.12);--demo-text:#fff;--demo-muted:rgba(255,255,255,.58);--demo-positive:#20a85e;color:var(--demo-text)}
-        .topavto-logo{display:grid;width:112px;height:64px;place-items:center;overflow:hidden;border:1px solid rgba(23,27,35,.14);border-radius:16px;background:#fff;padding:8px}.topavto-logo img{display:block;width:100%;height:100%;object-fit:contain}.topavto-logo--compact{width:86px;height:46px;border-radius:13px;padding:6px}
+        .topavto-logo{display:grid;width:112px;height:64px;place-items:center;border:1px solid rgba(23,27,35,.12);border-radius:16px;background:#fff;color:#141821;padding:8px}.topavto-logo svg{width:100%;height:100%}.topavto-logo--compact{width:86px;height:46px;border-radius:13px;padding:6px}
         .demo-user-avatar{display:block;width:40px;height:40px;overflow:hidden;border:2px solid rgba(23,121,223,.22);border-radius:999px;background:#d9eaff}.demo-user-avatar svg{display:block;width:100%;height:100%}
         .dealer-verified-icon{color:#ef3340}.dealer-verified-icon--positive{color:var(--demo-positive)}
         .demo-online-chip{background:rgba(32,168,94,.18);color:var(--demo-positive)}
         .dealer-demo-fade{animation:dealerDemoFade .5s ease both}
-        .demo-lead-row{border-color:rgba(255,255,255,.11);background:rgba(255,255,255,.045)}
-        .demo-funnel-column{min-height:250px;border:1px solid rgba(255,255,255,.13);border-top-width:4px;background:rgba(255,255,255,.035)}
-        .demo-funnel-card{border:1px solid rgba(255,255,255,.14);border-left-width:4px;background:var(--demo-panel)}
-        .demo-funnel--new{border-top-color:#20a85e;background-color:rgba(32,168,94,.10)}.demo-funnel--new .demo-funnel-card{border-left-color:#20a85e}
-        .demo-funnel--work{border-top-color:#d9a700;background-color:rgba(217,167,0,.10)}.demo-funnel--work .demo-funnel-card{border-left-color:#d9a700}
-        .demo-funnel--ready{border-top-color:#169ed1;background-color:rgba(22,158,209,.10)}.demo-funnel--ready .demo-funnel-card{border-left-color:#169ed1}
-        .demo-funnel--deal{border-top-color:#ef3340;background-color:rgba(239,51,64,.10)}.demo-funnel--deal .demo-funnel-card{border-left-color:#ef3340}
+        .demo-funnel-column{min-height:250px;border:1px solid transparent;border-top-width:4px}.demo-funnel-card{border:1px solid rgba(255,255,255,.08);background:var(--demo-panel);box-shadow:0 8px 18px rgba(0,0,0,.08)}
+        .demo-funnel--new{border-color:#20a85e;background-color:rgba(32,168,94,.10)}.demo-funnel--work{border-color:#d9a700;background-color:rgba(217,167,0,.10)}.demo-funnel--ready{border-color:#169ed1;background-color:rgba(22,158,209,.10)}.demo-funnel--deal{border-color:#ef3340;background-color:rgba(239,51,64,.10)}
         .demo-status--new{background:rgba(32,168,94,.16);color:#20a85e}.demo-status--work{background:rgba(217,167,0,.18);color:#d9a700}.demo-status--ready{background:rgba(22,158,209,.18);color:#169ed1}.demo-status--deal{background:rgba(239,51,64,.18);color:#ef3340}.demo-status--late{background:rgba(239,132,51,.18);color:#ef8433}
         @keyframes dealerDemoFade{from{opacity:.25;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
         :global(html[data-theme="light"]) .dealer-demo-shell{--demo-panel:#fff;--demo-card:#eef2f7;--demo-soft:#dde4ed;--demo-avatar:#cfd8e5;--demo-text:#171b23;--demo-muted:#536176;--demo-positive:#20a85e}
-        :global(html[data-theme="light"]) .dealer-demo-window{border:1px solid #d5dde8}
-        :global(html[data-theme="light"]) .demo-lead-row{border-color:#cbd5e1;background:#fff}
-        :global(html[data-theme="light"]) .demo-funnel-column{border-color:#cbd5e1;border-top-width:4px}
-        :global(html[data-theme="light"]) .demo-funnel-card{border-color:#c8d1dc;background:#fff}
-        :global(html[data-theme="light"]) .demo-funnel--new{border-top-color:#20a85e;background-color:#e9f7ef}:global(html[data-theme="light"]) .demo-funnel--new .demo-funnel-card{border-left-color:#20a85e}
-        :global(html[data-theme="light"]) .demo-funnel--work{border-top-color:#d9a700;background-color:#fff6d8}:global(html[data-theme="light"]) .demo-funnel--work .demo-funnel-card{border-left-color:#d9a700}
-        :global(html[data-theme="light"]) .demo-funnel--ready{border-top-color:#169ed1;background-color:#e6f5fb}:global(html[data-theme="light"]) .demo-funnel--ready .demo-funnel-card{border-left-color:#169ed1}
-        :global(html[data-theme="light"]) .demo-funnel--deal{border-top-color:#ef3340;background-color:#fff0f1}:global(html[data-theme="light"]) .demo-funnel--deal .demo-funnel-card{border-left-color:#ef3340}
+        :global(html[data-theme="light"]) .dealer-demo-window{border:1px solid rgba(31,38,51,.08)}
+        :global(html[data-theme="light"]) .demo-funnel-card{border-color:rgba(31,38,51,.09);background:#fff;box-shadow:0 8px 20px rgba(44,55,75,.06)}
+        :global(html[data-theme="light"]) .demo-funnel--new{background-color:rgba(32,168,94,.10)}:global(html[data-theme="light"]) .demo-funnel--work{background-color:rgba(217,167,0,.10)}:global(html[data-theme="light"]) .demo-funnel--ready{background-color:rgba(22,158,209,.10)}:global(html[data-theme="light"]) .demo-funnel--deal{background-color:rgba(239,51,64,.09)}
         @media(prefers-reduced-motion:reduce){.dealer-demo-fade{animation:none}}
       `}</style>
     </div>

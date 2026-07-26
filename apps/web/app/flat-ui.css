@@ -6,8 +6,7 @@ html[data-theme="light"] .ac-page-copy{--ac-surface:#f7f8fb;--ac-surface-2:#e6ea
 .ac-public-header nav[aria-label="Основная навигация"] a[href="/dealers"]{display:none!important}
 
 /* Красные действия всегда сохраняют белый текст в обеих темах. */
-.dealer-primary-button,.dealer-primary-button *,.crm-red-action,.crm-red-action *{color:#fff!important;-webkit-text-fill-color:#fff!important}
-.crm-root a[class~="bg-red-500"],.crm-root button[class~="bg-red-500"],.ac-dealers-page a[class~="bg-red-500"],.ac-dealers-page button[class~="bg-red-500"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
+.dealer-primary-button,.dealer-primary-button *{color:#fff!important;-webkit-text-fill-color:#fff!important}
 
 /* CRM: полноценные две темы. */
 .crm-root{background:#07080d;color:#fff}
@@ -16,7 +15,7 @@ html[data-theme="light"] .crm-root .glass{background:#f8f9fb!important;color:#17
 html[data-theme="light"] .crm-root [class*="text-white/"]{color:#5d687a!important}
 html[data-theme="light"] .crm-root h1,html[data-theme="light"] .crm-root h2,html[data-theme="light"] .crm-root h3,html[data-theme="light"] .crm-root .font-black{color:#171b23}
 html[data-theme="light"] .crm-root nav a:not([aria-current="page"]),html[data-theme="light"] .crm-root header form button,html[data-theme="light"] .crm-root .crm-theme-toggle,html[data-theme="light"] .crm-root .crm-user-chip{background:#e2e7ee!important;border-color:transparent!important;color:#374153!important}
-html[data-theme="light"] .crm-root .avto-button,html[data-theme="light"] .crm-root nav a[aria-current="page"],html[data-theme="light"] .crm-root .crm-red-action,html[data-theme="light"] .crm-root button[class~="bg-red-500"],html[data-theme="light"] .crm-root a[class~="bg-red-500"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-theme="light"] .crm-root .avto-button,html[data-theme="light"] .crm-root nav a[aria-current="page"],html[data-theme="light"] .crm-root button[class*="bg-red-"]{color:#fff!important;-webkit-text-fill-color:#fff!important}
 html[data-theme="light"] .crm-root input,html[data-theme="light"] .crm-root select,html[data-theme="light"] .crm-root textarea{background:#e6eaf1!important;color:#171b23!important;border-color:rgba(35,42,55,.12)!important}
 html[data-theme="light"] .crm-root input::placeholder,html[data-theme="light"] .crm-root textarea::placeholder{color:#788397!important}
 html[data-theme="light"] .crm-root details>summary{color:#171b23!important}
@@ -29,17 +28,6 @@ html[data-theme="light"] .crm-root [class*="bg-amber-"]{background:#fff4d8!impor
 html[data-theme="light"] .crm-root [class*="bg-red-500/15"],html[data-theme="light"] .crm-root [class*="bg-red-500/20"]{background:#f8dfe2!important}
 html[data-theme="light"] .crm-root [class*="text-red-300"],html[data-theme="light"] .crm-root [class*="text-red-400"]{color:#c91e2a!important}
 
-/* Реальные заявки CRM отделены друг от друга самостоятельными карточками. */
-.crm-leads-header{background:rgba(255,255,255,.045)}
-.crm-lead-row{border-color:rgba(255,255,255,.12);background:#12151d}
-.crm-leads-empty{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
-html[data-theme="light"] .crm-leads-table{background:#e6ebf2!important}
-html[data-theme="light"] .crm-leads-header{background:#d8e0ea!important;color:#4f5d72!important}
-html[data-theme="light"] .crm-lead-row{border-color:#c8d2df!important;background:#fff!important;color:#171b23!important}
-html[data-theme="light"] .crm-lead-row [class*="text-white/"]{color:#536176!important}
-html[data-theme="light"] .crm-lead-row [class~="text-white"]{color:#171b23!important}
-html[data-theme="light"] .crm-leads-empty{border-color:#c8d2df!important;background:#fff!important;color:#536176!important}
-
 /* Статусы заявок — насыщенные и читаемые. */
 .dealer-status-chip,.demo-status{border:1px solid transparent;letter-spacing:.01em}
 .dealer-status-chip--new,.demo-status--new{background:rgba(32,168,94,.2)!important;color:#20a85e!important;border-color:rgba(32,168,94,.48)!important}
@@ -47,21 +35,6 @@ html[data-theme="light"] .crm-leads-empty{border-color:#c8d2df!important;backgro
 .dealer-status-chip--ready,.demo-status--ready{background:rgba(14,165,233,.22)!important;color:#7dd3fc!important;border-color:rgba(56,189,248,.32)!important}
 .dealer-status-chip--deal,.demo-status--deal{background:rgba(239,68,68,.22)!important;color:#fca5a5!important;border-color:rgba(248,113,113,.32)!important}
 .dealer-status-chip--late,.demo-status--late{background:rgba(249,115,22,.22)!important;color:#fdba74!important;border-color:rgba(251,146,60,.32)!important}
-
-/* Страница входа: контрастная карточка и уведомление в обеих темах. */
-.ac-login-page{background:#07080d;color:#fff}
-.ac-login-card{background:#12151d!important;color:#fff!important}
-.telegram-login-notice{border-color:rgba(251,191,36,.35)!important;background:#302408!important;color:#ffe49a!important}
-html[data-theme="light"] .ac-login-page{background:#edf1f6!important;color:#171b23!important}
-html[data-theme="light"] .ac-login-card{background:#fff!important;color:#171b23!important;border:1px solid #d8e0ea!important}
-html[data-theme="light"] .ac-login-card h1{color:#171b23!important}
-html[data-theme="light"] .ac-login-card [class*="text-white/"]{color:#536176!important}
-html[data-theme="light"] .ac-login-card details,html[data-theme="light"] .ac-login-card .ac-login-note{border-color:#cfd8e4!important;background:#eef2f7!important;color:#46546a!important}
-html[data-theme="light"] .ac-login-card .ac-login-input{background:#e8edf3!important;color:#171b23!important;border-color:#cbd5e1!important}
-html[data-theme="light"] .ac-login-card .ac-login-input::placeholder{color:#748096!important}
-html[data-theme="light"] .telegram-login-notice{border-color:#e4c55d!important;background:#fff1b8!important;color:#5f4300!important}
-html[data-theme="light"] .ac-login-error{background:#ffe0e3!important;color:#9f1520!important}
-html[data-theme="light"] .ac-login-home{background:#dde4ed!important;color:#46546a!important}
 
 /* Лендинг дилеров: все тёмные демонстрационные блоки получают читаемую светлую версию. */
 html[data-theme="light"] .ac-dealers-page{background:#eef2f7!important;color:#171b23!important}
@@ -83,18 +56,16 @@ html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card{background:
 html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-card [class*="text-white/"]{color:#536176!important}
 html[data-theme="light"] .ac-dealers-page .dealer-verified-plan-note{background:#e6ebf2!important;color:#253044!important}
 
-/* Фирменный логотип TopAvto: показываем готовый PNG без перерисованного SVG. */
-.topavto-logo{overflow:hidden!important;background:#fff!important;color:#141821!important}
-.topavto-logo img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
-.topavto-logo svg{display:none!important}
-html[data-theme="light"] .topavto-logo{background:#fff!important;border-color:#d7dee8!important}
+/* Фирменный логотип TopAvto: используем готовый файл, а не перерисованный SVG. */
+.topavto-logo{overflow:hidden!important;background:#0c0e14 url('/brands/topavto-logo.png') center/contain no-repeat!important;color:transparent!important}
+.topavto-logo svg{visibility:hidden!important}
+html[data-theme="light"] .topavto-logo{background-color:#0c0e14!important;border-color:#d7dee8!important}
 
-/* Единый знак верификации; позиционирование карточек не ломается global-стилем. */
-.dealer-verified-icon{display:inline-grid!important;place-items:center!important;flex:none!important;overflow:visible!important;background:currentColor!important;color:#ff353d!important;border:0!important;border-radius:0!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important}
+/* Единый аккуратный знак верификации для карточки компании, возможностей и тарифа. */
+.dealer-verified-icon{position:relative!important;display:inline-grid!important;place-items:center!important;flex:none!important;overflow:visible!important;background:currentColor!important;color:#ff353d!important;border:0!important;border-radius:0!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M23 12l-2.44-2.79.34-3.69-3.61-.82L15.4 1.5 12 2.96 8.6 1.5 6.71 4.69 3.1 5.5 3.44 9.2 1 12l2.44 2.79-.34 3.7 3.61.81L8.6 22.5 12 21.03l3.4 1.47 1.89-3.19 3.61-.81-.34-3.7L23 12z'/%3E%3C/svg%3E") center/contain no-repeat!important}
 .dealer-verified-icon svg{display:none!important}
 .dealer-verified-icon::after{content:"";display:block;width:38%;height:21%;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-8%) rotate(-45deg);transform-origin:center}
 .dealer-verified-icon--positive{color:#20a85e!important}
-.ac-dealers-page .relative>.dealer-verified-icon,.dealer-verified-plan-card>.dealer-verified-icon{position:absolute!important;right:1.25rem!important;top:1.25rem!important;left:auto!important}
 html[data-theme="light"] .dealer-verified-icon{background:currentColor!important;border:0!important}
 
 /* Светлая демо-CRM: карточки, статусы и уведомления не бледнеют. */
