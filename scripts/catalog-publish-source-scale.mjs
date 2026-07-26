@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
@@ -42,8 +42,23 @@ function qualityOrder(left, right) {
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
 
+function hasExactCalculation(offer) {
+  const customs = offer?.calculationSnapshot?.customs;
+  const breakdown = offer?.calculationSnapshot?.breakdown;
+  if (customs?.status !== "ready" || !Number.isFinite(Number(customs?.totalCustomsRub))) return false;
+  if (!Array.isArray(breakdown) || !breakdown.some((line) => line?.id === "car") || !breakdown.some((line) => line?.id === "customs")) return false;
+  const kind = String(offer?.powertrainKind || "");
+  if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return true;
+  if (Number(offer?.utilizationPowerKw || 0) > 0) return true;
+  const motor30Min = Number(offer?.power30MinKw || 0)
+    || (Array.isArray(offer?.power30MinKwByMotor)
+      ? offer.power30MinKwByMotor.reduce((sum, value) => sum + Math.max(0, Number(value || 0)), 0)
+      : 0);
+  return kind === "other_hybrid" ? motor30Min > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30Min > 0;
+}
+
 function auditCandidate(sourceOffer, market, selectedIds) {
-  if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer)) return null;
+  if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer) || !hasExactCalculation(sourceOffer)) return null;
   const localSeen = new Set();
   const images = [];
   for (const image of Array.isArray(sourceOffer.images) ? sourceOffer.images : []) {
@@ -62,7 +77,7 @@ function auditCandidate(sourceOffer, market, selectedIds) {
       seoEligible: Boolean(sourceOffer.operational?.sourceUrl && images.length >= minimumImagesPerOffer),
     },
   };
-  if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer)) return null;
+  if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer) || !hasExactCalculation(offer)) return null;
   return offer;
 }
 
@@ -97,9 +112,13 @@ async function readGenerationFiles(market) {
 
 for (const market of markets) {
   const generation = await readGenerationFiles(market);
-  const freshRows = [...generation.offers].sort(qualityOrder);
-  const retainedRows = (await readMarketOffers(market))
-    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
+  // В публикацию попадают только результаты текущего запуска. Даже сохранённые предложения
+  // должны были пройти prepareCandidate заново: получить галерею, базу знаний, таможню и утиль.
+  const freshRows = generation.offers
+    .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") === "fresh_listing")
+    .sort(qualityOrder);
+  const revalidatedRows = generation.offers
+    .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") !== "fresh_listing")
     .sort(qualityOrder);
   const selected = [];
   const selectedIds = new Set();
@@ -107,9 +126,9 @@ for (const market of markets) {
   let rejectedQuality = 0;
   let rejectedSourceQuota = 0;
   let freshPublished = 0;
-  let retainedPublished = 0;
+  let revalidatedPublished = 0;
 
-  for (const [origin, rows] of [["fresh", freshRows], ["retained", retainedRows]]) {
+  for (const [origin, rows] of [["fresh", freshRows], ["revalidated", revalidatedRows]]) {
     for (const sourceOffer of rows) {
       if (selected.length >= maximumPerMarket) break;
       const sourceId = String(sourceOffer?.sourceId || "unknown");
@@ -126,7 +145,7 @@ for (const market of markets) {
       selectedIds.add(offer.id);
       sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
       if (origin === "fresh") freshPublished++;
-      else retainedPublished++;
+      else revalidatedPublished++;
     }
     if (selected.length >= maximumPerMarket) break;
   }
@@ -141,16 +160,15 @@ for (const market of markets) {
       generationFiles: generation.filenames,
       generationErrors: generation.errors,
       freshCandidates: freshRows.length,
-      retainedCandidates: retainedRows.length,
+      revalidatedCandidates: revalidatedRows.length,
       targetPerSource,
       maximumPerMarket,
       published: 0,
       freshPublished: 0,
-      retainedPublished: 0,
+      revalidatedPublished: 0,
       rejectedQuality,
       rejectedSourceQuota,
       temporarilyUnavailable: true,
-      retainedPreviousMarket: retainedRows.length > 0,
     };
     continue;
   }
@@ -166,14 +184,14 @@ for (const market of markets) {
     generationPartial: generation.payloads.some((payload) => Boolean(payload.partial || payload.report?.partial)),
     generationStopReasons: generation.payloads.map((payload) => payload.stopReason || payload.report?.stopReason || "completed"),
     freshCandidates: freshRows.length,
-    retainedCandidates: retainedRows.length,
+    revalidatedCandidates: revalidatedRows.length,
     targetPerSource,
     maximumPerMarket,
     published: selected.length,
     publishedSources: sourceCounts.size,
     bySource: byMarketAndSource[market],
     freshPublished,
-    retainedPublished,
+    revalidatedPublished,
     rejectedQuality,
     rejectedSourceQuota,
     minimumImages: Math.min(...imageCounts),
@@ -184,7 +202,6 @@ for (const market of markets) {
     minimumImagesPerOffer,
     minimumSpecScore,
     temporarilyUnavailable: false,
-    retainedPreviousMarket: !generation.available || retainedPublished > 0,
   };
 }
 
@@ -200,7 +217,7 @@ process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers(offers);
 const publishedAt = new Date().toISOString();
 const report = {
-  version: 17,
+  version: 18,
   publishedAt,
   generationId: manifest.generationId,
   targetPerSource,
