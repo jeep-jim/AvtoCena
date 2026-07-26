@@ -24,6 +24,7 @@ import { exactMarketSources } from "./exact-market-sources";
 import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
+import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
@@ -41,7 +42,7 @@ const completeSources = [
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
   ...scaleMarketSources.map(prepareSource),
-  ...priorityMarketSources.map(prepareSource),
+  ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   encarCompleteSource,
 ];
