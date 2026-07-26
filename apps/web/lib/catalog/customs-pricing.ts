@@ -14,10 +14,6 @@ function positive(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 }
 
-function roundedPower(value: number) {
-  return Math.round(value * 100) / 100;
-}
-
 function transportToBorderRub(offer: VehicleOffer) {
   const raw: any = offer.operational?.raw || {};
   return positive(raw.transportToBorderRub)
@@ -34,37 +30,55 @@ function customsValueSnapshot(rate: any, borderTransportRub: number, customsValu
   };
 }
 
-function withConservativeUtilizationPreview(input: VehicleOffer) {
-  const kind = String(input.powertrainKind || "");
-  const electricOrHybrid = ["electric", "series_hybrid", "other_hybrid"].includes(kind);
-  if (!electricOrHybrid || positive(input.utilizationPowerKw)) {
-    return { offer: input, estimated: false, warning: "" };
+function hasTrustedPowerProvenance(offer: VehicleOffer) {
+  const confidence = String(offer.powerDataConfidence || "");
+  const source = String(offer.powerDataSource || "").toLocaleLowerCase("en-US");
+  const raw: any = offer.operational?.raw || {};
+  const variantSourceType = String(raw.vehicleKnowledgeVariant?.sourceType || "");
+  return (["documented", "source_exact"].includes(confidence) && !source.includes("estimated"))
+    || Boolean(raw.certifiedPowerReference)
+    || ["manufacturer", "official_registry"].includes(variantSourceType);
+}
+
+function documentedMotorPower(offer: VehicleOffer) {
+  if (!hasTrustedPowerProvenance(offer)) return 0;
+  const byMotor = Array.isArray(offer.power30MinKwByMotor)
+    ? offer.power30MinKwByMotor.map(positive).filter(Boolean)
+    : [];
+  return positive(offer.power30MinKw) || (byMotor.length ? byMotor.reduce((sum, value) => sum + value, 0) : 0);
+}
+
+function hasTrustedUtilizationPower(offer: VehicleOffer) {
+  return positive(offer.utilizationPowerKw) > 0 && hasTrustedPowerProvenance(offer);
+}
+
+function exactUtilizationPowerProblem(offer: VehicleOffer) {
+  const kind = String(offer.powertrainKind || "");
+  if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return null;
+
+  // Готовое utilizationPowerKw допускается только из точного источника или сертифицированной
+  // базы модели/модификации. Старые оценочные значения и пиковая мощность удаляются.
+  if (hasTrustedUtilizationPower(offer)) return null;
+
+  const motor30MinKw = documentedMotorPower(offer);
+  if ((kind === "electric" || kind === "series_hybrid") && !motor30MinKw) {
+    return {
+      missing: ["certified_30_minute_power_kw"],
+      warning: "Для точного утильсбора нужна максимальная 30-минутная мощность тяговых электромоторов из ОТТС, СБКТС, ЗОЕТС, ЭПТС, CoC или официального документа производителя. Пиковая мощность не подставляется.",
+    };
   }
 
-  const peakKw = positive(input.powerKw)
-    || (positive(input.powerHp) ? roundedPower(positive(input.powerHp) * 0.73549875) : 0);
-  const iceKw = positive(input.icePowerKw);
-  const conservativeKw = kind === "other_hybrid"
-    ? Math.max(peakKw, iceKw)
-    : peakKw;
-  if (!conservativeKw) return { offer: input, estimated: false, warning: "" };
+  if (kind === "other_hybrid" && (!positive(offer.icePowerKw) || !motor30MinKw)) {
+    return {
+      missing: [
+        ...(!positive(offer.icePowerKw) ? ["ice_power_kw"] : []),
+        ...(!motor30MinKw ? ["certified_30_minute_power_kw"] : []),
+      ],
+      warning: "Для точного утильсбора гибрида нужны мощность ДВС и максимальная 30-минутная мощность всех тяговых электромоторов. Пиковая или системная мощность вместо них не используется.",
+    };
+  }
 
-  const warning = kind === "other_hybrid"
-    ? "Для предварительной цены использована известная пиковая/системная мощность гибрида. Точный утильсбор будет пересчитан по мощности ДВС и максимальной 30-минутной мощности тяговых электромоторов из документов."
-    : "Для предварительной цены консервативно использована пиковая мощность электромотора. Точный утильсбор будет пересчитан по максимальной 30-минутной мощности из ОТТС, СБКТС, ЗОЕТС, ЭПТС, CoC или документа производителя.";
-
-  return {
-    estimated: true,
-    warning,
-    offer: {
-      ...input,
-      utilizationPowerKw: roundedPower(conservativeKw),
-      powerDataConfidence: "estimated" as const,
-      powerDataSource: input.powerDataSource
-        ? `${input.powerDataSource};estimated-utilization-preview`
-        : "estimated-utilization-preview",
-    },
-  };
+  return null;
 }
 
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
@@ -72,8 +86,26 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const normalized = normalizeVehicleOfferSpecs(known) as VehicleOffer;
-  const preview = withConservativeUtilizationPreview(normalized);
-  const offer = preview.offer;
+  const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
+  const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
+    ? { ...normalized, utilizationPowerKw: undefined }
+    : normalized;
+
+  const utilizationProblem = exactUtilizationPowerProblem(offer);
+  if (utilizationProblem) {
+    return {
+      ...offer,
+      totalRub: null,
+      calculationStatus: "needs_utilization_power",
+      calculationSnapshot: {
+        ...(offer.calculationSnapshot || {}),
+        pricingConfidence: "unavailable",
+        certified30MinutePowerMissing: true,
+        missing: utilizationProblem.missing,
+        warnings: [utilizationProblem.warning],
+      },
+    };
+  }
 
   if (!positive(offer.powerHp)) {
     return {
@@ -116,9 +148,9 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     powerHp: offer.powerHp,
     powerKw: offer.powerKw,
     icePowerKw: offer.icePowerKw,
-    power30MinKw: offer.power30MinKw,
-    power30MinKwByMotor: offer.power30MinKwByMotor,
-    utilizationPowerKw: offer.utilizationPowerKw,
+    power30MinKw: documentedMotorPower(offer) ? offer.power30MinKw : undefined,
+    power30MinKwByMotor: documentedMotorPower(offer) && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
+    utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,
@@ -140,7 +172,8 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         marketConfigStatus: configured?.status || "missing",
         pricingConfidence: "unavailable",
         estimatedMarketFields: market.estimatedFields,
-        warnings: [...market.warnings, ...customs.warnings, ...(preview.warning ? [preview.warning] : [])],
+        certified30MinutePowerMissing: customs.missing.includes("certified_30_minute_power_kw"),
+        warnings: [...market.warnings, ...customs.warnings],
       },
       calculationStatus: "needs_customs_data",
     };
@@ -153,13 +186,12 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     customsRub: customs.totalCustomsRub,
   });
 
-  const powerEstimated = preview.estimated || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
+  const powerEstimated = ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || offer.priceMode === "estimated";
   const warnings = [
     ...market.warnings,
     ...customs.warnings,
-    ...(preview.warning ? [preview.warning] : []),
-    ...(!preview.estimated && powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
+    ...(powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
   ];
 
   return {
@@ -176,8 +208,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       estimatedMarketFields: market.estimatedFields,
       powerConfidence: offer.powerDataConfidence,
       powerSource: offer.powerDataSource,
-      certified30MinutePowerMissing: preview.estimated,
-      utilizationPowerPreviewKw: preview.estimated ? offer.utilizationPowerKw : undefined,
+      certified30MinutePowerMissing: false,
       vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
       warnings,
     },

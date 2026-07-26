@@ -37,8 +37,31 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   const lines: BusinessCalculationLine[] = [];
   const carPriceRub = numberOrZero(input.carPriceRub ?? input.sourcePriceRub);
 
-  addLine(lines, { id: "car", title: "Стоимость автомобиля", amountRub: carPriceRub, kind: "car", amountType: "manual", source: "vehicle" });
-  addLine(lines, { id: "security-deposit", title: "Обеспечительный платёж", amountRub: numberOrZero(config.securityDepositRub), kind: "deposit", amountType: "fixed", source: "market_config" });
+  // Обеспечительный платёж — часть оплаты автомобиля, а не дополнительная услуга.
+  // Показываем его отдельной строкой для прозрачности первого платежа, но вычитаем
+  // из остатка стоимости машины, чтобы не посчитать одну и ту же сумму дважды.
+  const configuredDepositRub = numberOrZero(config.securityDepositRub);
+  const appliedDepositRub = Math.min(carPriceRub, configuredDepositRub);
+  const remainingCarPriceRub = Math.max(0, carPriceRub - appliedDepositRub);
+
+  addLine(lines, {
+    id: "car",
+    title: appliedDepositRub ? "Остаток стоимости автомобиля" : "Стоимость автомобиля",
+    amountRub: remainingCarPriceRub,
+    kind: "car",
+    amountType: "manual",
+    source: "vehicle",
+    note: appliedDepositRub ? `Полная стоимость автомобиля: ${carPriceRub} ₽` : undefined,
+  });
+  addLine(lines, {
+    id: "security-deposit",
+    title: "Обеспечительный платёж",
+    amountRub: appliedDepositRub,
+    kind: "deposit",
+    amountType: "fixed",
+    source: "market_config",
+    note: "Засчитывается в стоимость автомобиля",
+  });
   addLine(lines, { id: "topavto-commission", title: "Комиссия Автодилера", amountRub: numberOrZero(config.topAvtoCommissionRub), kind: "commission", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "export", title: "Экспортные расходы", amountRub: numberOrZero(config.exportExpensesRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "logistics", title: "Логистика", amountRub: numberOrZero(config.logisticsRub), kind: "logistics", amountType: "fixed", source: "market_config" });
