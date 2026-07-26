@@ -25,6 +25,7 @@ import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
+import { normalizeOpenSource } from "./open-source-normalizer";
 import {
   CATALOG_DAILY_TARGET_PER_MARKET,
   CATALOG_DAILY_TARGET_TOTAL,
@@ -33,12 +34,13 @@ import {
 } from "./runtime-config";
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
+const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 const completeSources = [
-  ...scopedMarketSources.map((source) => fullGallery(source)),
-  ...exactMarketSources.map((source) => fullGallery(source)),
-  ...publicMarketSources.map((source) => fullGallery(source)),
-  ...scaleMarketSources.map((source) => fullGallery(source)),
-  ...(beforwardPublicSource ? [fullGallery(beforwardPublicSource)] : []),
+  ...scopedMarketSources.map(prepareSource),
+  ...exactMarketSources.map(prepareSource),
+  ...publicMarketSources.map(prepareSource),
+  ...scaleMarketSources.map(prepareSource),
+  ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   encarCompleteSource,
 ];
 
