@@ -37,13 +37,21 @@ function documentedMotorPower(offer: VehicleOffer) {
   return positive(offer.power30MinKw) || (byMotor.length ? byMotor.reduce((sum, value) => sum + value, 0) : 0);
 }
 
+function hasTrustedUtilizationPower(offer: VehicleOffer) {
+  const confidence = String(offer.powerDataConfidence || "");
+  const source = String(offer.powerDataSource || "").toLocaleLowerCase("en-US");
+  return positive(offer.utilizationPowerKw) > 0
+    && ["documented", "source_exact"].includes(confidence)
+    && !source.includes("estimated");
+}
+
 function exactUtilizationPowerProblem(offer: VehicleOffer) {
   const kind = String(offer.powertrainKind || "");
   if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return null;
 
-  // Готовое utilizationPowerKw допускается только после обогащения из сертифицированной
-  // базы модели/модификации. Пиковая или системная мощность автоматически не подставляется.
-  if (positive(offer.utilizationPowerKw)) return null;
+  // Готовое utilizationPowerKw допускается только из точного источника или сертифицированной
+  // базы модели/модификации. Старые оценочные значения и пиковая мощность удаляются.
+  if (hasTrustedUtilizationPower(offer)) return null;
 
   const motor30MinKw = documentedMotorPower(offer);
   if ((kind === "electric" || kind === "series_hybrid") && !motor30MinKw) {
@@ -70,7 +78,11 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
   const canonical = await enrichOfferWithVehicleKnowledge(input);
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
-  const offer = normalizeVehicleOfferSpecs(known) as VehicleOffer;
+  const normalized = normalizeVehicleOfferSpecs(known) as VehicleOffer;
+  const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
+  const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
+    ? { ...normalized, utilizationPowerKw: undefined }
+    : normalized;
 
   const utilizationProblem = exactUtilizationPowerProblem(offer);
   if (utilizationProblem) {
@@ -131,7 +143,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     icePowerKw: offer.icePowerKw,
     power30MinKw: offer.power30MinKw,
     power30MinKwByMotor: offer.power30MinKwByMotor,
-    utilizationPowerKw: offer.utilizationPowerKw,
+    utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,
