@@ -1,5 +1,5 @@
-name: Catalog seven-market recovery
-# Manual production run: 2026-07-26 catalog v16 verification
+name: Catalog source-scale recovery
+run-name: Catalog source-scale v17 · ${{ github.sha }}
 
 on:
   schedule:
@@ -12,29 +12,36 @@ on:
       - apps/web/lib/catalog/offer-quality.ts
       - apps/web/lib/catalog/image-quality.ts
       - apps/web/lib/catalog/full-gallery-wrapper.ts
+      - apps/web/lib/catalog/importer.ts
+      - apps/web/lib/catalog/open-market-sources.ts
       - apps/web/lib/catalog/regional-market-sources.ts
+      - apps/web/lib/catalog/scale-market-sources.ts
       - apps/web/lib/catalog/runtime-config.ts
       - apps/web/lib/catalog/spec-normalization.ts
       - apps/web/lib/catalog/power-display.ts
       - apps/web/lib/catalog/otomoto-detail-source.ts
-      - scripts/catalog-rebuild-market.mjs
-      - scripts/catalog-publish-fresh.mjs
+      - scripts/catalog-rebuild-source-shard.mjs
+      - scripts/catalog-publish-source-scale.mjs
       - .github/workflows/catalog-production-recovery-v15.yml
 
 permissions:
   contents: read
 
+# Один общий production-lock для старой и новой версий каталога.
+# Любой новый push или ручной запуск сразу отменяет предыдущий Pending/In progress проход.
 concurrency:
   group: catalog-seven-market-recovery
   cancel-in-progress: true
 
 jobs:
-  rebuild-market:
-    name: Rebuild ${{ matrix.market }}
+  rebuild-source-shard:
+    name: Rebuild ${{ matrix.market }} shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 90
     strategy:
       fail-fast: false
+      # Не создаём 14 одновременных запросов на runner: GitHub запускает семь,
+      # остальные шарды подхватываются сразу после освобождения слота.
       max-parallel: 7
       matrix:
         market:
@@ -45,6 +52,9 @@ jobs:
           - europe
           - georgia
           - kyrgyzstan
+        shard:
+          - 0
+          - 1
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -55,22 +65,25 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
-      CATALOG_REBUILD_TARGET: "1000"
-      CATALOG_REBUILD_MAX_PAGES: "300"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1800"
+      CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
+      CATALOG_REBUILD_SHARD_COUNT: "2"
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "5000"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "12"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "15000"
+      CATALOG_REBUILD_SEED_SCAN_LIMIT: "60000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
-      CATALOG_MAX_IMAGES_PER_OFFER: "10"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_SOURCE_TIMEOUT_MS: "18000"
       CATALOG_IMAGE_TIMEOUT_MS: "12000"
       CATALOG_IMAGE_MAX_BYTES: "10000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "8"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "3"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "8"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "12"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "5"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "3300000"
-      CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
+      CATALOG_REBUILD_TIME_LIMIT_MS: "4200000"
+      CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,32 +99,39 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_BUCKET"
           test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
-      - name: Validate market rebuild script
-        run: node --check scripts/catalog-rebuild-market.mjs
-      - name: Rebuild market with checkpoints
+      - name: Validate source-scale rebuild script
+        run: node --check scripts/catalog-rebuild-source-shard.mjs
+      - name: Rebuild source shard with checkpoints
         id: rebuild
         continue-on-error: true
         shell: bash
         run: |
           set +e
-          npx tsx scripts/catalog-rebuild-market.mjs
+          npx tsx scripts/catalog-rebuild-source-shard.mjs
           code=$?
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
-            node <<'NODE'
+            REBUILD_EXIT_CODE="$code" node <<'NODE'
           const fs = require("fs");
           const market = process.env.CATALOG_REBUILD_MARKET;
+          const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
+          const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 2);
           const now = new Date().toISOString();
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 8,
+            version: 17,
             market,
+            shardIndex,
+            shardCount,
             generatedAt: now,
-            target: Number(process.env.CATALOG_REBUILD_TARGET || 1000),
+            targetPerSource: Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000),
             count: 0,
             partial: true,
             stopReason: "rebuild_process_failed",
             report: {
+              version: 17,
               market,
+              shardIndex,
+              shardCount,
               startedAt: now,
               finishedAt: now,
               partial: true,
@@ -124,29 +144,29 @@ jobs:
           }, null, 2));
           NODE
           fi
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));if(!Array.isArray(p.offers))process.exit(1);console.log(`prepared ${p.offers.length}/${p.target} offers for ${p.market}; partial=${Boolean(p.partial)}; stop=${p.stopReason||p.report?.stopReason||"unknown"}`)'
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));if(!Array.isArray(p.offers))process.exit(1);console.log(`prepared ${p.offers.length} offers for ${p.market} shard ${p.shardIndex}; target/source=${p.targetPerSource}; partial=${Boolean(p.partial)}; stop=${p.stopReason||p.report?.stopReason||"unknown"}`)'
           exit 0
-      - name: Upload market generation
+      - name: Upload source shard generation
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: catalog-rebuild-${{ matrix.market }}
-          path: catalog-rebuild-${{ matrix.market }}.json
+          name: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}
+          path: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
           if-no-files-found: error
           retention-days: 3
       - name: Add rebuild summary
         if: always()
         shell: bash
         run: |
-          echo "### $CATALOG_REBUILD_MARKET" >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${p.offers.length}/${p.target}\n- Страниц: ${p.report?.pages||0}\n- Раундов по всем источникам: ${p.report?.rounds||0}\n- Частичная сборка: ${Boolean(p.partial)}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
+          echo "### $CATALOG_REBUILD_MARKET · shard $CATALOG_REBUILD_SHARD_INDEX" >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${p.offers.length}\n- Цель на источник: ${p.targetPerSource||1000}\n- Источников шарда: ${p.sourceIds?.length||0}\n- По источникам: ${JSON.stringify(p.report?.publicBySource||{})}\n- Страниц: ${p.report?.pages||0}\n- Частичная сборка: ${Boolean(p.partial)}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
 
   publish:
-    name: Publish verified catalog and retain unavailable markets
+    name: Publish source-scale catalog and retain unavailable sources
     if: always()
-    needs: rebuild-market
+    needs: rebuild-source-shard
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -158,12 +178,15 @@ jobs:
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
-      CATALOG_REBUILD_TARGET: "1000"
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
+      CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_REBUILD_MIN_SPEC_SCORE: "1"
-      CATALOG_INDEX_WRITE_CONCURRENCY: "10"
+      CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_GROW_ONLY_MARKETS: ""
-      CATALOG_REBUILD_PUBLISH_REPORT: catalog-fresh-publish-report.json
+      CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -173,25 +196,25 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Download every available market generation
+      - name: Download every available source shard
         continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
-      - name: Validate resilient publisher
-        run: node --check scripts/catalog-publish-fresh.mjs
-      - name: Publish verified offers and retain unavailable markets
-        run: npx tsx scripts/catalog-publish-fresh.mjs
+      - name: Validate source-scale publisher
+        run: node --check scripts/catalog-publish-source-scale.mjs
+      - name: Publish verified offers and retain unavailable sources
+        run: npx tsx scripts/catalog-publish-source-scale.mjs
       - name: Run production catalog smoke checks
         continue-on-error: true
         run: npm run catalog:smoke
-      - name: Upload recovery report
+      - name: Upload source-scale report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: catalog-seven-market-publish-report
-          path: catalog-fresh-publish-report.json
+          name: catalog-source-scale-publish-report
+          path: catalog-source-scale-publish-report.json
           if-no-files-found: warn
           retention-days: 7

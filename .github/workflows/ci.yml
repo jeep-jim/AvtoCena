@@ -26,6 +26,8 @@ jobs:
         run: node --import tsx --test tests/price-trend-direction.test.ts
       - name: Catalog image quality tests
         run: node --import tsx --test tests/catalog-image-quality.test.ts
+      - name: Catalog source-scale tests
+        run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Power normalization tests
         run: node --import tsx --test tests/catalog-power-normalization.test.ts
       - name: Public 30-minute power display tests
@@ -39,7 +41,7 @@ jobs:
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Validate catalog automation scripts
-        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs
+        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs && node --check scripts/catalog-rebuild-source-shard.mjs && node --check scripts/catalog-publish-source-scale.mjs
       - name: Web typecheck diagnostics
         id: web_typecheck
         continue-on-error: true
