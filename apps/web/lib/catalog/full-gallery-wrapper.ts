@@ -65,15 +65,25 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
   source.fetchImages = async (offer: VehicleOffer) => {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
     const limit = Math.min(1000, Math.max(1, Number.isFinite(requested) ? requested : 1000));
-    const result = uniqueImages(await original(offer).catch(() => [] as CatalogImage[]), limit);
     const sourceNativeUrls = rawGalleryUrls(offer);
-    const verified = result.length >= 1 && sourceNativeUrls.length >= 1;
+    const genericOpenSource = source.sourceId.endsWith("_open");
+
+    // Универсальные HTML-адаптеры не имеют надёжного селектора галереи. Если на странице
+    // есть блоки похожих машин, общий сбор img способен примешать чужие фотографии.
+    // Для таких источников публикуем не больше числа фото, уже привязанных к карточке списка.
+    // Специализированные exact/direct-адаптеры по-прежнему могут забрать полную галерею до лимита.
+    const safeLimit = genericOpenSource
+      ? Math.min(limit, Math.max(1, sourceNativeUrls.length))
+      : limit;
+    const result = uniqueImages(await original(offer).catch(() => [] as CatalogImage[]), safeLimit);
+    const verified = result.length >= 1 && (!genericOpenSource || sourceNativeUrls.length >= result.length);
 
     (offer.operational as any).galleryVerified = verified;
     (offer.operational as any).gallerySourceImageCount = sourceNativeUrls.length;
     (offer.operational as any).galleryImageCount = result.length;
     (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-    return result;
+    (offer.operational as any).gallerySafetyMode = genericOpenSource ? "listing_bound" : "source_exact";
+    return verified ? result : [];
   };
   return source;
 }
