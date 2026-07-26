@@ -21,6 +21,13 @@ test("source-scale catalog keeps 1000-offer quota per source and three-day reten
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
+test("source-scale workflow cancels stale production runs instead of leaving a new run Pending", () => {
+  assert.match(workflow, /group: catalog-seven-market-recovery/);
+  assert.match(workflow, /cancel-in-progress: true/);
+  assert.match(workflow, /max-parallel: 7/);
+  assert.doesNotMatch(workflow, /group: catalog-source-scale-recovery/);
+});
+
 test("source-scale workflow uses two shards per market and attempts up to 30 photos", () => {
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "2"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
