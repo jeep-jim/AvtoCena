@@ -1,5 +1,5 @@
 name: Catalog source-scale recovery
-run-name: Catalog source-scale v19 · ${{ github.sha }}
+run-name: Catalog source-scale v20 · ${{ github.sha }}
 
 on:
   schedule:
@@ -15,6 +15,7 @@ on:
       - apps/web/lib/catalog/importer.ts
       - apps/web/lib/catalog/open-market-sources.ts
       - apps/web/lib/catalog/priority-market-sources.ts
+      - apps/web/lib/catalog/priority-fast-gallery-wrapper.ts
       - apps/web/lib/catalog/regional-market-sources.ts
       - apps/web/lib/catalog/scale-market-sources.ts
       - apps/web/lib/catalog/runtime-config.ts
@@ -23,6 +24,7 @@ on:
       - apps/web/lib/catalog/otomoto-detail-source.ts
       - packages/engine/src/calculation/calculateAvtocena.ts
       - packages/engine/src/calculation/russiaCustoms.ts
+      - scripts/catalog-probe-source-shard.mjs
       - scripts/catalog-rebuild-source-shard.mjs
       - scripts/catalog-validate-source-scale.mjs
       - scripts/catalog-publish-source-scale.mjs
@@ -37,9 +39,9 @@ concurrency:
 
 jobs:
   rebuild-source-shard:
-    name: Rebuild ${{ matrix.market }} shard ${{ matrix.shard }}
+    name: Probe and rebuild ${{ matrix.market }} shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 55
     strategy:
       fail-fast: false
       max-parallel: 7
@@ -67,23 +69,26 @@ jobs:
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
       CATALOG_REBUILD_SHARD_COUNT: "2"
+      CATALOG_PROBE_TIMEOUT_MS: "12000"
+      CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
       CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "5000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "5"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "60000"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "160"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1500"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SEED_SCAN_LIMIT: "30000"
       CATALOG_OFFER_RETENTION_MS: "259200000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_SOURCE_TIMEOUT_MS: "18000"
-      CATALOG_IMAGE_TIMEOUT_MS: "12000"
+      CATALOG_GALLERY_FAST_PATH: "true"
+      CATALOG_SOURCE_TIMEOUT_MS: "12000"
+      CATALOG_IMAGE_TIMEOUT_MS: "10000"
       CATALOG_IMAGE_MAX_BYTES: "10000000"
       CATALOG_IMAGE_FETCH_CONCURRENCY: "8"
       CATALOG_REBUILD_PREPARE_CONCURRENCY: "12"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "4"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "4200000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "2400000"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
     steps:
       - uses: actions/checkout@v4
@@ -100,12 +105,17 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_BUCKET"
           test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
-      - name: Validate source-scale rebuild script
-        run: node --check scripts/catalog-rebuild-source-shard.mjs
-      - name: Rebuild source shard with checkpoints
+      - name: Validate probe and rebuild scripts
+        run: node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs
+      - name: Probe curated live sources
+        id: probe
+        run: npx tsx scripts/catalog-probe-source-shard.mjs
+      - name: Rebuild only sources that passed probe
         id: rebuild
         continue-on-error: true
         shell: bash
+        env:
+          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
         run: |
           set +e
           npx tsx scripts/catalog-rebuild-source-shard.mjs
@@ -119,7 +129,7 @@ jobs:
           const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 2);
           const now = new Date().toISOString();
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 19,
+            version: 20,
             market,
             shardIndex,
             shardCount,
@@ -129,7 +139,7 @@ jobs:
             partial: true,
             stopReason: "rebuild_process_failed",
             report: {
-              version: 19,
+              version: 20,
               market,
               shardIndex,
               shardCount,
@@ -147,19 +157,22 @@ jobs:
           fi
           node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));if(!Array.isArray(p.offers))process.exit(1);console.log(`prepared ${p.offers.length} offers for ${p.market} shard ${p.shardIndex}; fresh=${Object.values(p.report?.freshBySource||{}).reduce((a,b)=>a+Number(b||0),0)}; restored=${Object.values(p.report?.restoredBySource||{}).reduce((a,b)=>a+Number(b||0),0)}; partial=${Boolean(p.partial)}; stop=${p.stopReason||p.report?.stopReason||"unknown"}`)'
           exit 0
-      - name: Upload source shard generation
+      - name: Upload probe and source shard generation
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}
-          path: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
+          path: |
+            catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
+            catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
           if-no-files-found: error
           retention-days: 3
-      - name: Add rebuild summary
+      - name: Add probe and rebuild summary
         if: always()
         shell: bash
         run: |
           echo "### $CATALOG_REBUILD_MARKET · shard $CATALOG_REBUILD_SHARD_INDEX" >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(`- Probe: ${p.activeSourceIds.length}/${p.plannedSourceIds.length} живых\n- Живые источники: ${JSON.stringify(p.activeSourceIds)}\n- Probe-результаты: ${JSON.stringify(p.results.map(x=>({sourceId:x.sourceId,active:x.active,reason:x.reason,usable:x.usable,error:x.error||null})))}`)' >> "$GITHUB_STEP_SUMMARY"
           node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${p.offers.length}\n- Свежие по источникам: ${JSON.stringify(p.report?.freshBySource||{})}\n- Остаток до 3 дней: ${JSON.stringify(p.report?.restoredBySource||{})}\n- Всего по источникам: ${JSON.stringify(p.report?.publicBySource||{})}\n- Страниц: ${p.report?.pages||0}\n- Частичная сборка: ${Boolean(p.partial)}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
       - name: Mark failed rebuild process
         if: always() && steps.rebuild.outputs.exit_code != '0'
@@ -170,7 +183,7 @@ jobs:
     if: always()
     needs: rebuild-source-shard
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 60
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
