@@ -9,12 +9,14 @@ const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-sca
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 
-test("probe passes only verified curated sources to live collection", () => {
-  assert.match(probe, /const sourcePlan/);
+test("probe checks every registered source and uses activity only for ordering", () => {
+  assert.match(probe, /priorityPlan/);
+  assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /isUsableOffer/);
   assert.match(probe, /Number\(offer\.sourcePrice \|\| 0\) > 0/);
-  assert.match(probe, /source\.fetchPage\(null\)/);
   assert.match(probe, /activeSourceIds/);
+  assert.match(probe, /inactiveSourceIds/);
+  assert.match(probe, /sourceIdsForRebuild = \[\.\.\.activeSourceIds, \.\.\.inactiveSourceIds\]/);
   assert.doesNotMatch(probe, /connectedMarketSources/);
 });
 
@@ -27,34 +29,37 @@ test("listing photos are cached before optional detail enrichment", () => {
   assert.match(gallery, /Math\.min\(30/);
 });
 
-test("inactive live sources still allow three-day verified retention", () => {
-  assert.match(rebuild, /explicitNoLiveSources/);
+test("temporary source failures still allow accumulated verified retention", () => {
   assert.match(rebuild, /retentionSourceIds/);
-  assert.match(rebuild, /probe_inactive_retention_used/);
-  assert.match(rebuild, /requiredBeforeNetwork = origin === "fresh_listing" \? preferredImages : minimumImages/);
+  assert.match(rebuild, /readCursorState/);
+  assert.match(rebuild, /saveCursorState/);
+  assert.match(rebuild, /requiredBeforeNetwork = minimumImages/);
+  assert.match(rebuild, /revalidated_listing/);
   assert.doesNotMatch(rebuild, /connectedMarketSources/);
 });
 
 test("volume shortages are diagnostics and not a global publication crash", () => {
-  assert.match(validator, /per_market_advisory_gate/);
+  assert.match(validator, /per_market_volume_and_integrity_audit/);
+  assert.match(validator, /targetPerMarket/);
   assert.match(validator, /warnings/);
   assert.match(validator, /publishableMarkets/);
   assert.doesNotMatch(validator, /throw new Error\(`catalog_publication_gate_failed/);
 });
 
-test("publisher retains verified current markets and keeps previous manifest on fatal storage failure", () => {
+test("publisher accumulates verified current markets and keeps previous manifest on fatal storage failure", () => {
   assert.match(publisher, /readMarketOffers/);
   assert.match(publisher, /readAllOffersForMaintenance/);
-  assert.match(publisher, /atomic_all_markets_with_verified_retention/);
+  assert.match(publisher, /atomic_all_markets_with_verified_accumulation/);
   assert.match(publisher, /previousManifestPreserved/);
   assert.match(publisher, /no_verified_offers_keep_previous_manifest/);
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
+  assert.match(publisher, /marketsBelowTarget/);
 });
 
 test("workflow records degradation instead of failing every market", () => {
-  assert.match(workflow, /Catalog source-scale v21/);
-  assert.match(workflow, /timeout-minutes: 40/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "1500000"/);
+  assert.match(workflow, /Catalog source-scale v22/);
+  assert.match(workflow, /timeout-minutes: 45/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "1920000"/);
   assert.match(workflow, /Ensure diagnostic envelopes exist/);
   assert.match(workflow, /Publish verified markets and retain the previous healthy base/);
   assert.doesNotMatch(workflow, /Mark failed rebuild process/);
