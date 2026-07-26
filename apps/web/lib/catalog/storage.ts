@@ -11,6 +11,9 @@ const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000)
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
 const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?encar\.com$/i,
+  /^(.+\.)?kcar\.com$/i,
+  /^(.+\.)?kcarcdn\.com$/i,
+  /^(.+\.)?kcarglobal\.com$/i,
   /^(.+\.)?che168\.com$/i,
   /^(.+\.)?autohome\.com\.cn$/i,
   /^(.+\.)?autoimg\.cn$/i,
@@ -34,6 +37,9 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?goo-net\.com$/i,
   /^(.+\.)?goo-net-exchange\.com$/i,
   /^(.+\.)?jpauc\.com$/i,
+  /^(.+\.)?carvector\.com$/i,
+  /^(.+\.)?jp\.center$/i,
+  /^(.+\.)?prestigemotorsport\.com\.au$/i,
   /^(.+\.)?sbtjapan\.com$/i,
   /^(.+\.)?tc-v\.com$/i,
   /^(.+\.)?carfromjapan\.com$/i,
@@ -53,8 +59,12 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?royal-trading\.jp$/i,
   /^(.+\.)?japantransit\.ru$/i,
   /^(.+\.)?dubicars\.com$/i,
+  /^(.+\.)?dubizzle\.com$/i,
+  /^(.+\.)?dubizzlecdn\.com$/i,
+  /^(.+\.)?dubicdn\.com$/i,
   /^(.+\.)?myauto\.ge$/i,
   /^(.+\.)?my\.ge$/i,
+  /^(.+\.)?autopapa\.ge$/i,
   /^(.+\.)?mashina\.kg$/i,
   /^(.+\.)?elcat\.kg$/i,
   /^(.+\.)?lalafo\.kg$/i,
@@ -290,7 +300,7 @@ export async function searchOffers(params: CatalogSearchParams) {
   const pageSet = new Set(pageIds); const chunkKeys = new Map<string, OfferLocation>(); for (const id of pageIds) { const loc = byId.byId[id]; if (loc) chunkKeys.set(`${loc.market}/${loc.chunk}`, loc); }
   const loaded = (await Promise.all([...chunkKeys.values()].map((loc) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), [])))).flat();
   let items = loaded.filter((o) => pageSet.has(o.id) && isPublicOffer(o));
-  if (hasRangeFilters) { items = items.filter((o) => (!params.budgetFrom || (o.totalRub || 0) >= params.budgetFrom) && (!params.budgetTo || (o.totalRub || Infinity) <= params.budgetTo) && (!params.yearFrom || o.year >= params.yearFrom) && (!params.yearTo || o.year <= params.yearTo) && (!params.mileageFrom || (o.mileageKm || 0) >= params.mileageFrom) && (!params.mileageTo || (o.mileageKm || 0) <= params.mileageTo) && (!params.engineFrom || (o.engineCc || 0) >= params.engineFrom) && (!params.engineTo || (o.engineCc || Infinity) <= params.engineTo) && (!params.powerFrom || (o.powerHp || 0) >= params.powerFrom) && (!params.powerTo || (o.powerHp || Infinity) <= params.powerTo) && (!params.transmission || o.transmission === params.transmission) && (!params.auctionGrade || o.auctionGrade === params.auctionGrade)); const sort = params.sort || "updatedAt"; items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity) : sort === "year" ? b.year - a.year : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0) : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt))); total = items.length; items = items.slice((page-1)*pageSize, page*pageSize); } else { const rank = new Map(pageIds.map((id, index) => [id, index])); items.sort((a,b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)); }
+  if (hasRangeFilters) { items = items.filter((o) => (!params.budgetFrom || (o.totalRub || 0) >= params.budgetFrom) && (!params.budgetTo || (o.totalRub || Infinity) <= params.budgetTo) && (!params.yearFrom || o.year >= params.yearFrom) && (!params.yearTo || o.year <= params.yearTo) && (!params.mileageFrom || (o.mileageKm || 0) >= params.mileageFrom) && (!params.mileageTo || (o.mileageKm || Infinity) <= params.mileageTo) && (!params.engineFrom || (o.engineCc || 0) >= params.engineFrom) && (!params.engineTo || (o.engineCc || Infinity) <= params.engineTo) && (!params.powerFrom || (o.powerHp || 0) >= params.powerFrom) && (!params.powerTo || (o.powerHp || Infinity) <= params.powerTo) && (!params.transmission || o.transmission === params.transmission) && (!params.auctionGrade || o.auctionGrade === params.auctionGrade)); const sort = params.sort || "updatedAt"; items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity) : sort === "year" ? b.year - a.year : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0) : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt))); total = items.length; items = items.slice((page-1)*pageSize, page*pageSize); } else { const rank = new Map(pageIds.map((id, index) => [id, index])); items.sort((a,b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0)); }
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
@@ -301,7 +311,6 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
   try {
     let currentUrl = safeUrl; let res: Response | null = null; for (let redirects = 0; redirects <= 3; redirects++) { res = await fetch(currentUrl, { ...init, signal: controller.signal, redirect: "manual" }); if ([301,302,303,307,308].includes(res.status)) { const location = res.headers.get("location"); if (!location || redirects === 3) return null; currentUrl = assertSafeImageUrl(new URL(location, currentUrl).toString()); continue; } break; } if (!res || !res.ok) return null; const mimeType = res.headers.get("content-type") || ""; if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
     const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null; const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
-    const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage(); if (!(await storage.binaryExists?.(objectKey))) await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); return { id: imageId, objectKey, url: publicImageUrl(imageId, objectKey), size: buf.length, checksum, mimeType };
-  } finally { clearTimeout(timeout); }
+    const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage(); if (!(await storage.binaryExists?.(objectKey))) await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); return { id: imageId, url: publicImageUrl(imageId, objectKey), objectKey, checksum, mimeType, size: buf.length };
+  } catch { return null; } finally { clearTimeout(timeout); }
 }
-export async function readCatalogImage(imageId: string) { const manifest = await readManifest(); const index = await readIndex<{ imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> }>(manifest.generationId, "images-by-id.json", { imagesById: {} }); const meta = index.imagesById[imageId]; if (!meta) return null; const binary = await getJsonStorage().getBinary?.(meta.objectKey); return binary ? { ...binary, mimeType: binary.mimeType || meta.mimeType, checksum: meta.checksum, size: meta.size } : null; }
