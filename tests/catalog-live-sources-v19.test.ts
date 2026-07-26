@@ -7,12 +7,14 @@ const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 
 test("live high-volume sources use current listing and detail routes", () => {
-  assert.match(priority, /guazi\.com\/car-detail/);
-  assert.match(priority, /\/car-detail\\\/c\\d\+/);
-  assert.match(priority, /carused\.jp\/car-list\?page=/);
-  assert.match(priority, /car-list\\\/detail/);
-  assert.match(priority, /tc-v\.com\/used_car\/all\/all/);
-  assert.match(priority, /\?pn=\$\{page - 1\}/);
+  assert.ok(priority.includes('sourceId: "guazi_china_open"'));
+  assert.ok(priority.includes("car-detail"));
+  assert.ok(priority.includes('sourceId: "carused_japan_open"'));
+  assert.ok(priority.includes("https://carused.jp/car-list?page=${page}"));
+  assert.ok(priority.includes("car-list\\/detail"));
+  assert.ok(priority.includes('sourceId: "tcv_japan_open"'));
+  assert.ok(priority.includes("https://www.tc-v.com/used_car/all/all/"));
+  assert.ok(priority.includes("?pn=${page - 1}"));
 });
 
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
