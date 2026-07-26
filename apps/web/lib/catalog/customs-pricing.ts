@@ -30,7 +30,18 @@ function customsValueSnapshot(rate: any, borderTransportRub: number, customsValu
   };
 }
 
+function hasTrustedPowerProvenance(offer: VehicleOffer) {
+  const confidence = String(offer.powerDataConfidence || "");
+  const source = String(offer.powerDataSource || "").toLocaleLowerCase("en-US");
+  const raw: any = offer.operational?.raw || {};
+  const variantSourceType = String(raw.vehicleKnowledgeVariant?.sourceType || "");
+  return (["documented", "source_exact"].includes(confidence) && !source.includes("estimated"))
+    || Boolean(raw.certifiedPowerReference)
+    || ["manufacturer", "official_registry"].includes(variantSourceType);
+}
+
 function documentedMotorPower(offer: VehicleOffer) {
+  if (!hasTrustedPowerProvenance(offer)) return 0;
   const byMotor = Array.isArray(offer.power30MinKwByMotor)
     ? offer.power30MinKwByMotor.map(positive).filter(Boolean)
     : [];
@@ -38,11 +49,7 @@ function documentedMotorPower(offer: VehicleOffer) {
 }
 
 function hasTrustedUtilizationPower(offer: VehicleOffer) {
-  const confidence = String(offer.powerDataConfidence || "");
-  const source = String(offer.powerDataSource || "").toLocaleLowerCase("en-US");
-  return positive(offer.utilizationPowerKw) > 0
-    && ["documented", "source_exact"].includes(confidence)
-    && !source.includes("estimated");
+  return positive(offer.utilizationPowerKw) > 0 && hasTrustedPowerProvenance(offer);
 }
 
 function exactUtilizationPowerProblem(offer: VehicleOffer) {
@@ -141,8 +148,8 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     powerHp: offer.powerHp,
     powerKw: offer.powerKw,
     icePowerKw: offer.icePowerKw,
-    power30MinKw: offer.power30MinKw,
-    power30MinKwByMotor: offer.power30MinKwByMotor,
+    power30MinKw: documentedMotorPower(offer) ? offer.power30MinKw : undefined,
+    power30MinKwByMotor: documentedMotorPower(offer) && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
     utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
