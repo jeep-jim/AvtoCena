@@ -22,6 +22,7 @@ import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
 import { publicMarketSources } from "./public-market-sources";
+import { scaleMarketSources } from "./scale-market-sources";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import {
@@ -36,6 +37,7 @@ const completeSources = [
   ...scopedMarketSources.map((source) => fullGallery(source)),
   ...exactMarketSources.map((source) => fullGallery(source)),
   ...publicMarketSources.map((source) => fullGallery(source)),
+  ...scaleMarketSources.map((source) => fullGallery(source)),
   ...(beforwardPublicSource ? [fullGallery(beforwardPublicSource)] : []),
   encarCompleteSource,
 ];
@@ -50,7 +52,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   const requested: CatalogImportOptions = Array.isArray(sourceIdsOrOptions)
     ? { sourceIds: sourceIdsOrOptions }
     : { ...(sourceIdsOrOptions || {}) };
-  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
+  const requestedImages = Number(requested.maxImagesPerOffer || process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
   process.env.CATALOG_TARGET_PER_MARKET ||= String(CATALOG_DAILY_TARGET_PER_MARKET);
   process.env.CATALOG_TARGET_PUBLIC_OFFERS ||= String(CATALOG_DAILY_TARGET_TOTAL);
   process.env.CATALOG_OFFER_RETENTION_MS ||= String(CATALOG_RETENTION_MS);
@@ -58,7 +60,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   process.env.CATALOG_GROW_ONLY_MARKETS ||= PUBLIC_CATALOG_MARKETS.join(",");
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.min(1000, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 1000)),
+    maxImagesPerOffer: Math.min(30, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 30)),
   });
 }
 
