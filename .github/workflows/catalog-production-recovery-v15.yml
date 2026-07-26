@@ -1,9 +1,9 @@
 name: Catalog source-scale recovery
-run-name: Catalog source-scale v21 · ${{ github.sha }}
+run-name: Catalog source-scale v22 · ${{ github.sha }}
 
 on:
   schedule:
-    - cron: "30 1 * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
   push:
     branches: [main]
@@ -13,6 +13,7 @@ on:
       - apps/web/lib/catalog/image-quality.ts
       - apps/web/lib/catalog/full-gallery-wrapper.ts
       - apps/web/lib/catalog/importer.ts
+      - apps/web/lib/catalog/encar-complete-source.ts
       - apps/web/lib/catalog/open-market-sources.ts
       - apps/web/lib/catalog/priority-market-sources.ts
       - apps/web/lib/catalog/priority-fast-gallery-wrapper.ts
@@ -41,13 +42,13 @@ jobs:
   rebuild-source-shard:
     name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     strategy:
       fail-fast: false
-      max-parallel: 7
+      max-parallel: 14
       matrix:
         market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
-        shard: [0, 1]
+        shard: [0, 1, 2, 3]
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -59,27 +60,30 @@ jobs:
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
-      CATALOG_REBUILD_SHARD_COUNT: "2"
-      CATALOG_PROBE_TIMEOUT_MS: "12000"
+      CATALOG_REBUILD_SHARD_COUNT: "4"
+      CATALOG_PROBE_TIMEOUT_MS: "10000"
+      CATALOG_PROBE_ATTEMPTS: "2"
+      CATALOG_PROBE_CONCURRENCY: "6"
       CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
       CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "120"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "2"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "30000"
-      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_REBUILD_TARGET_PER_MARKET: "1000"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "180"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "2500"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "5"
+      CATALOG_REBUILD_SEED_SCAN_LIMIT: "60000"
+      CATALOG_OFFER_RETENTION_MS: "1209600000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_GALLERY_FAST_PATH: "true"
-      CATALOG_SOURCE_TIMEOUT_MS: "12000"
-      CATALOG_IMAGE_TIMEOUT_MS: "10000"
+      CATALOG_SOURCE_TIMEOUT_MS: "10000"
+      CATALOG_IMAGE_TIMEOUT_MS: "8000"
       CATALOG_IMAGE_MAX_BYTES: "10000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "8"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "12"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "4"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "6"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "1500000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "1920000"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
     steps:
       - uses: actions/checkout@v4
@@ -107,6 +111,7 @@ jobs:
           exit "$code"
       - name: Record storage configuration
         if: always()
+        id: storage
         shell: bash
         run: |
           missing=""
@@ -119,18 +124,18 @@ jobs:
         if: steps.install.outputs.exit_code == '0'
         continue-on-error: true
         run: node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs
-      - name: Probe curated live sources
+      - name: Probe every registered source in this shard
         if: steps.install.outputs.exit_code == '0'
         id: probe
         continue-on-error: true
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Rebuild live and retained verified offers
+      - name: Rebuild fresh and accumulated verified offers
         if: steps.install.outputs.exit_code == '0'
         id: rebuild
         continue-on-error: true
         shell: bash
         env:
-          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids || '__no_live_sources__' }}
+          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids || '__no_registered_sources__' }}
         run: |
           set +e
           npx tsx scripts/catalog-rebuild-source-shard.mjs
@@ -145,20 +150,20 @@ jobs:
           const fs = require("fs");
           const market = process.env.CATALOG_REBUILD_MARKET;
           const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
-          const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 2);
+          const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 4);
           const now = new Date().toISOString();
           if (!fs.existsSync(process.env.CATALOG_PROBE_OUTPUT)) {
             fs.writeFileSync(process.env.CATALOG_PROBE_OUTPUT, JSON.stringify({
-              version: 21, market, shardIndex, shardCount, checkedAt: now,
-              plannedSourceIds: [], activeSourceIds: [], sourceIdsForRebuild: "__no_live_sources__",
+              version: 22, market, shardIndex, shardCount, checkedAt: now,
+              plannedSourceIds: [], activeSourceIds: [], inactiveSourceIds: [], sourceIdsForRebuild: "__no_registered_sources__",
               results: [{ sourceId: "workflow", active: false, reason: "probe_not_completed" }]
             }, null, 2));
           }
           if (!fs.existsSync(process.env.CATALOG_REBUILD_OUTPUT)) {
             fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-              version: 21, market, shardIndex, shardCount, generatedAt: now, count: 0,
+              version: 22, market, shardIndex, shardCount, generatedAt: now, count: 0,
               partial: true, stopReason: "collection_not_completed",
-              report: { version: 21, market, shardIndex, shardCount, startedAt: now, finishedAt: now,
+              report: { version: 22, market, shardIndex, shardCount, startedAt: now, finishedAt: now,
                 partial: true, stopReason: "collection_not_completed", saved: 0,
                 sourceErrors: [{ stage: "workflow", error: "probe_or_rebuild_not_completed" }] },
               offers: []
@@ -175,22 +180,22 @@ jobs:
             catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
             catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
           if-no-files-found: warn
-          retention-days: 3
+          retention-days: 7
       - name: Add market summary
         if: always()
         continue-on-error: true
         shell: bash
         run: |
           echo "### $CATALOG_REBUILD_MARKET · shard $CATALOG_REBUILD_SHARD_INDEX" >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(`- Probe: ${(p.activeSourceIds||[]).length}/${(p.plannedSourceIds||[]).length} живых\n- Живые источники: ${JSON.stringify(p.activeSourceIds||[])}\n- Результаты: ${JSON.stringify(p.results||[])}`)' >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${(p.offers||[]).length}\n- Свежие: ${JSON.stringify(p.report?.freshBySource||{})}\n- Восстановленные до 3 дней: ${JSON.stringify(p.report?.restoredBySource||{})}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(`- Probe: ${(p.activeSourceIds||[]).length}/${(p.plannedSourceIds||[]).length} живых\n- Проверено зарегистрированных: ${p.registeredSourceCount||0}\n- Живые источники: ${JSON.stringify(p.activeSourceIds||[])}\n- Неактивные сейчас: ${JSON.stringify(p.inactiveSourceIds||[])}`)' >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${(p.offers||[]).length}\n- Свежие: ${JSON.stringify(p.report?.freshBySource||{})}\n- Накопленные до 14 дней: ${JSON.stringify(p.report?.restoredBySource||{})}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
 
   publish:
-    name: Audit and publish resilient catalog
+    name: Audit and publish accumulated seven-market catalog
     if: always()
     needs: rebuild-source-shard
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -203,15 +208,16 @@ jobs:
       CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
+      CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"
       CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
-      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_OFFER_RETENTION_MS: "1209600000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_INDEX_WRITE_CONCURRENCY: "12"
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "12"
+      CATALOG_INDEX_WRITE_CONCURRENCY: "16"
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "16"
       CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
-      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":50,"china":50,"japan":50,"uae":50,"europe":300,"georgia":10,"kyrgyzstan":10}'
+      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":50,"china":50,"japan":50,"uae":50,"europe":100,"georgia":20,"kyrgyzstan":20}'
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-source-scale-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
@@ -238,14 +244,14 @@ jobs:
           done
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit "$code"
-      - name: Download every available market artifact
+      - name: Download every available shard artifact
         continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
-      - name: Validate resilient publisher scripts
+      - name: Validate publisher scripts
         if: steps.install.outputs.exit_code == '0'
         continue-on-error: true
         run: node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs
@@ -264,19 +270,24 @@ jobs:
           node <<'NODE'
           const fs = require("fs");
           const now = new Date().toISOString();
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT, JSON.stringify({ version: 21, checkedAt: now, ok: true, warnings: ["validation_not_completed"] }, null, 2));
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({ version: 21, publishedAt: now, published: false, previousManifestPreserved: true, publicationError: "publisher_not_completed" }, null, 2));
+          if (!fs.existsSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT, JSON.stringify({ version: 22, checkedAt: now, ok: true, warnings: ["validation_not_completed"] }, null, 2));
+          if (!fs.existsSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({ version: 22, publishedAt: now, published: false, previousManifestPreserved: true, publicationError: "publisher_not_completed", byMarket: {}, marketsBelowTarget: ["korea","china","japan","uae","europe","georgia","kyrgyzstan"] }, null, 2));
           NODE
       - name: Run production catalog smoke checks
         if: steps.install.outputs.exit_code == '0'
         continue-on-error: true
         run: npm run catalog:smoke
+      - name: Confirm safe publication outcome
+        if: always()
+        shell: bash
+        run: |
+          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));if(!p.published&&!p.previousManifestPreserved)process.exit(1);console.log(p.published?"new manifest published":"previous manifest safely preserved")'
       - name: Add publication summary
         if: always()
         continue-on-error: true
         shell: bash
         run: |
-          node -e 'const fs=require("fs");const v=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT,"utf8"));const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));console.log(`### Публикация каталога v21\n- Опубликовано: ${Boolean(p.published)}\n- Generation: ${p.generationId||"предыдущий сохранён"}\n- По рынкам: ${JSON.stringify(p.byMarket||{})}\n- Предупреждения: ${JSON.stringify(v.warnings||[])}\n- Ошибка публикации: ${p.publicationError||"нет"}`)' >> "$GITHUB_STEP_SUMMARY"
+          node -e 'const fs=require("fs");const v=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT,"utf8"));const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));console.log(`### Публикация каталога v22\n- Опубликовано: ${Boolean(p.published)}\n- Generation: ${p.generationId||"предыдущий сохранён"}\n- Цель 1000 на рынок достигнута: ${Boolean(p.volumeTargetReached)}\n- По рынкам: ${JSON.stringify(p.byMarket||{})}\n- Ниже 1000: ${JSON.stringify(p.marketsBelowTarget||[])}\n- Предупреждения: ${JSON.stringify(v.warnings||[])}\n- Ошибка публикации: ${p.publicationError||"нет"}`)' >> "$GITHUB_STEP_SUMMARY"
       - name: Upload resilient catalog reports
         if: always()
         continue-on-error: true
@@ -287,4 +298,4 @@ jobs:
             catalog-source-scale-validation-report.json
             catalog-source-scale-publish-report.json
           if-no-files-found: warn
-          retention-days: 7
+          retention-days: 14
