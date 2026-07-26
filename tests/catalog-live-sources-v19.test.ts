@@ -28,21 +28,22 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
 
 test("fresh source pages are processed before three-day restored stock", () => {
   const sourceLoop = rebuild.indexOf("const sourceStates");
-  const restoredRead = rebuild.indexOf("const [internalRows, publicRows]");
-  assert.ok(sourceLoop >= 0 && restoredRead > sourceLoop);
+  const restoredRead = rebuild.indexOf("readAllOffersForMaintenance");
+  assert.ok(sourceLoop >= 0 && restoredRead >= 0);
   assert.match(rebuild, /galleryRebuiltFrom: origin/);
   assert.match(rebuild, /freshBySource/);
   assert.match(rebuild, /retentionMs/);
+  assert.match(rebuild, /retentionSourceIds/);
 });
 
-test("v20 probes only curated shard sources before the expensive rebuild", () => {
+test("v21 probes only curated shard sources before network collection", () => {
   assert.match(probe, /const sourcePlan/);
   assert.match(probe, /sourceIdsForRebuild/);
   assert.match(probe, /__no_live_sources__/);
   assert.match(probe, /source\.fetchPage\(null\)/);
-  assert.match(workflow, /Catalog source-scale v20/);
+  assert.match(workflow, /Catalog source-scale v21/);
   assert.match(workflow, /Probe curated live sources/);
-  assert.match(workflow, /CATALOG_REBUILD_SOURCE_IDS: \$\{\{ steps\.probe\.outputs\.source_ids \}\}/);
+  assert.match(workflow, /CATALOG_REBUILD_SOURCE_IDS: \$\{\{ steps\.probe\.outputs\.source_ids \|\| '__no_live_sources__' \}\}/);
   assert.match(workflow, /CATALOG_PROBE_TIMEOUT_MS: "12000"/);
 });
 
