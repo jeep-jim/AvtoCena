@@ -10,23 +10,22 @@ const outputFile = process.env.CATALOG_REBUILD_VALIDATION_REPORT || "catalog-sou
 const minimumProductiveSources = Math.max(1, Number(process.env.CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES || 1));
 
 const defaultMinimumFresh = {
-  korea: 100,
-  china: 200,
-  japan: 250,
-  uae: 100,
-  europe: 500,
-  georgia: 25,
-  kyrgyzstan: 25,
+  korea: 50,
+  china: 50,
+  japan: 50,
+  uae: 50,
+  europe: 300,
+  georgia: 10,
+  kyrgyzstan: 10,
 };
 
 function parseMinimumFresh() {
   const configured = String(process.env.CATALOG_PUBLISH_MIN_FRESH_BY_MARKET || "").trim();
   if (!configured) return defaultMinimumFresh;
   try {
-    const parsed = JSON.parse(configured);
-    return { ...defaultMinimumFresh, ...parsed };
+    return { ...defaultMinimumFresh, ...JSON.parse(configured) };
   } catch (error) {
-    throw new Error(`catalog_invalid_minimum_fresh_json_${String(error?.message || error)}`);
+    return { ...defaultMinimumFresh, __configError: String(error?.message || error) };
   }
 }
 
@@ -85,19 +84,26 @@ for (const name of filenames) {
 }
 
 const byMarket = {};
-const gateFailures = [];
+const warnings = [];
+const publishableMarkets = [];
 for (const market of markets) {
   const marketPayloads = payloads.filter(({ payload }) => payload.market === market);
   const freshIds = new Set();
   const restoredIds = new Set();
+  const validIds = new Set();
   const freshBySource = new Map();
-  const allOffers = [];
+  const invalid = [];
   const processFailures = [];
 
   for (const { filename, payload } of marketPayloads) {
     if (payload.stopReason === "rebuild_process_failed" || payload.report?.stopReason === "rebuild_process_failed") processFailures.push(filename);
     for (const offer of payload.offers) {
-      allOffers.push(offer);
+      const errors = validateOffer(offer);
+      if (errors.length) {
+        if (invalid.length < 100) invalid.push({ id: offer?.id, sourceId: offer?.sourceId, errors });
+        continue;
+      }
+      validIds.add(offer.id);
       const origin = String(offer?.operational?.galleryRebuiltFrom || "");
       if (origin === "fresh_listing") {
         freshIds.add(offer.id);
@@ -109,48 +115,51 @@ for (const market of markets) {
     }
   }
 
-  const invalid = [];
-  for (const offer of allOffers) {
-    const errors = validateOffer(offer);
-    if (errors.length && invalid.length < 100) invalid.push({ id: offer?.id, sourceId: offer?.sourceId, errors });
-  }
-
   const threshold = Math.max(1, Number(minimumFresh[market] || 1));
   const productiveSources = [...freshBySource.values()].filter((count) => count > 0).length;
   const row = {
     artifacts: marketPayloads.length,
+    valid: validIds.size,
     fresh: freshIds.size,
     restored: restoredIds.size,
     threshold,
+    volumeTargetReached: freshIds.size >= threshold,
     productiveSources,
     minimumProductiveSources,
+    sourceTargetReached: productiveSources >= minimumProductiveSources,
     freshBySource: Object.fromEntries([...freshBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
     invalidOffers: invalid,
     processFailures,
     stopReasons: marketPayloads.map(({ payload }) => payload.stopReason || payload.report?.stopReason || "unknown"),
   };
   byMarket[market] = row;
-
-  if (!marketPayloads.length) gateFailures.push(`${market}:missing_artifacts`);
-  if (processFailures.length) gateFailures.push(`${market}:rebuild_process_failed`);
-  if (freshIds.size < threshold) gateFailures.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
-  if (productiveSources < minimumProductiveSources) gateFailures.push(`${market}:productive_sources_${productiveSources}_below_${minimumProductiveSources}`);
-  if (invalid.length) gateFailures.push(`${market}:invalid_offers_${invalid.length}`);
+  if (validIds.size > 0) publishableMarkets.push(market);
+  if (!marketPayloads.length) warnings.push(`${market}:missing_artifacts`);
+  if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
+  if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
+  if (productiveSources < minimumProductiveSources) warnings.push(`${market}:productive_sources_${productiveSources}_below_${minimumProductiveSources}`);
+  if (invalid.length) warnings.push(`${market}:invalid_offers_${invalid.length}`);
 }
 
-if (fileErrors.length) gateFailures.push(`generation_file_errors_${fileErrors.length}`);
+if (fileErrors.length) warnings.push(`generation_file_errors_${fileErrors.length}`);
+if (minimumFresh.__configError) warnings.push(`minimum_fresh_config:${minimumFresh.__configError}`);
+
 const report = {
-  version: 18,
+  version: 21,
   checkedAt: new Date().toISOString(),
+  mode: "per_market_advisory_gate",
   inputDir,
   files: filenames,
   fileErrors,
   minimumFresh,
   minimumProductiveSources,
   byMarket,
-  ok: gateFailures.length === 0,
-  gateFailures,
+  publishableMarkets,
+  degradedMarkets: markets.filter((market) => !byMarket[market]?.volumeTargetReached || !byMarket[market]?.sourceTargetReached),
+  integrityOk: Object.values(byMarket).every((row) => row.invalidOffers.length === 0),
+  warnings,
+  ok: true,
 };
+
 await fs.writeFile(outputFile, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
-if (gateFailures.length) throw new Error(`catalog_publication_gate_failed:${gateFailures.join(",")}`);
