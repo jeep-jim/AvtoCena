@@ -1,3 +1,4 @@
+import { cacheImageFromUrl } from "./storage";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
 const bad = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
@@ -27,7 +28,7 @@ function validSourceImage(value: unknown) {
 function rawGalleryUrls(offer: VehicleOffer) {
   const raw = (offer.operational as any)?.raw;
   const values: unknown[] = [];
-  for (const field of [raw?.images, raw?.photos, raw?.gallery, raw?.imageUrls, raw?.photoUrls]) {
+  for (const field of [raw?.images, raw?.photos, raw?.gallery, raw?.imageUrls, raw?.photoUrls, raw?.parsed?.images]) {
     if (Array.isArray(field)) values.push(...field);
   }
   const result: string[] = [];
@@ -63,20 +64,42 @@ function uniqueImages(images: CatalogImage[], limit: number) {
 export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
   const original = source.fetchImages.bind(source);
   source.fetchImages = async (offer: VehicleOffer) => {
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
-    const limit = Math.min(1000, Math.max(1, Number.isFinite(requested) ? requested : 1000));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+    const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
+    const minimum = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+    const fastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
     const sourceNativeUrls = rawGalleryUrls(offer);
     const genericOpenSource = source.sourceId.endsWith("_open");
+    const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
+
+    // Сначала сохраняем только фотографии, уже находящиеся внутри конкретной карточки
+    // выдачи. Это даёт объём и не требует открывать detail-страницу для каждой машины.
+    const listingImages: CatalogImage[] = [];
+    for (const url of sourceNativeUrls.slice(0, limit * 2)) {
+      const image = await cacheImageFromUrl(url, offer.market, {
+        headers: sourceUrl ? { referer: sourceUrl } : undefined,
+      }).catch(() => null);
+      if (image && Number(image.size || 0) > 8_000) listingImages.push(image);
+      if (listingImages.length >= limit) break;
+    }
+    const listingResult = uniqueImages(listingImages, limit);
+    if (fastPath && listingResult.length >= minimum) {
+      (offer.operational as any).galleryVerified = true;
+      (offer.operational as any).gallerySourceImageCount = sourceNativeUrls.length;
+      (offer.operational as any).galleryImageCount = listingResult.length;
+      (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
+      (offer.operational as any).gallerySafetyMode = genericOpenSource ? "listing_bound" : "source_exact";
+      return listingResult;
+    }
 
     // Универсальные HTML-адаптеры не имеют надёжного селектора галереи. Если на странице
     // есть блоки похожих машин, общий сбор img способен примешать чужие фотографии.
-    // Для таких источников публикуем не больше числа фото, уже привязанных к карточке списка.
-    // Специализированные exact/direct-адаптеры по-прежнему могут забрать полную галерею до лимита.
     const safeLimit = genericOpenSource
       ? Math.min(limit, Math.max(1, sourceNativeUrls.length))
       : limit;
-    const result = uniqueImages(await original(offer).catch(() => [] as CatalogImage[]), safeLimit);
-    const verified = result.length >= 1 && (!genericOpenSource || sourceNativeUrls.length >= result.length);
+    const detailed = await original(offer).catch(() => [] as CatalogImage[]);
+    const result = uniqueImages([...listingResult, ...detailed], safeLimit);
+    const verified = result.length >= minimum && (!genericOpenSource || sourceNativeUrls.length >= result.length);
 
     (offer.operational as any).galleryVerified = verified;
     (offer.operational as any).gallerySourceImageCount = sourceNativeUrls.length;

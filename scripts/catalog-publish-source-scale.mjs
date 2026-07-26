@@ -10,11 +10,12 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const reportFile = process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-source-scale-publish-report.json";
 const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1_000));
-const maximumPerMarket = Math.max(targetPerSource, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000));
+const targetPerMarket = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 1_000));
+const maximumPerMarket = Math.max(targetPerMarket, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const preferredImagesPerOffer = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
-const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
-const prepareConcurrency = Math.max(1, Math.min(24, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 12)));
+const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 14 * 24 * 60 * 60 * 1_000));
+const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -210,6 +211,9 @@ for (const market of markets) {
   marketReports[market] = generation.payloads.map((payload) => payload.report || payload);
   const imageCounts = selected.map((offer) => offer.images.length);
   marketQuality[market] = {
+    target: targetPerMarket,
+    targetReached: selected.length >= targetPerMarket,
+    shortage: Math.max(0, targetPerMarket - selected.length),
     generationAvailable: generation.available,
     generationFiles: generation.filenames,
     generationErrors: generation.errors,
@@ -236,12 +240,15 @@ const unique = new Map();
 for (const offer of allSelected) if (!unique.has(offer.id)) unique.set(offer.id, offer);
 const offers = [...unique.values()];
 const publishedAt = new Date().toISOString();
+const emptyMarkets = markets.filter((market) => Number(byMarket[market] || 0) === 0);
 let manifest = null;
 let publicationError = "";
 
 if (offers.length) {
   try {
-    process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    // Если один рынок полностью недоступен, его предыдущая проверенная версия не должна
+    // исчезнуть из общего manifest из-за сбоя остальных источников.
+    process.env.CATALOG_GROW_ONLY_MARKETS = emptyMarkets.join(",");
     manifest = await persistCatalogOffers(offers);
   } catch (error) {
     publicationError = String(error?.message || error);
@@ -250,9 +257,10 @@ if (offers.length) {
   publicationError = "no_verified_offers_keep_previous_manifest";
 }
 
+const marketsBelowTarget = markets.filter((market) => Number(byMarket[market] || 0) < targetPerMarket);
 const report = {
-  version: 21,
-  mode: "atomic_all_markets_with_verified_retention",
+  version: 22,
+  mode: "atomic_all_markets_with_verified_accumulation",
   publishedAt,
   published: Boolean(manifest),
   publicationError,
@@ -260,10 +268,14 @@ const report = {
   previousManifestPreserved: !manifest,
   retentionMs,
   targetPerSource,
+  targetPerMarket,
   maximumPerMarket,
   total: offers.length,
   byMarket,
   byMarketAndSource,
+  volumeTargetReached: marketsBelowTarget.length === 0,
+  marketsBelowTarget,
+  emptyMarketsPreserved: emptyMarkets,
   files,
   missingGenerationMarkets: markets.filter((market) => !marketQuality[market]?.generationAvailable),
   partialGenerationMarkets: markets.filter((market) => marketQuality[market]?.generationPartial),
