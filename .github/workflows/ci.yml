@@ -32,6 +32,8 @@ jobs:
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Catalog live sources v20 tests
         run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
+      - name: Catalog probe v20 tests
+        run: node --import tsx --test tests/catalog-probe-source-shard.test.ts
       - name: Catalog publication gate tests
         run: node --import tsx --test tests/catalog-publication-gate.test.ts
       - name: Open source model normalization tests
