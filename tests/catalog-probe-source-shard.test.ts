@@ -31,7 +31,7 @@ test("inactive live sources still allow three-day verified retention", () => {
   assert.match(rebuild, /explicitNoLiveSources/);
   assert.match(rebuild, /retentionSourceIds/);
   assert.match(rebuild, /probe_inactive_retention_used/);
-  assert.match(rebuild, /origin === "fresh_listing" \? preferredImages : minimumImages/);
+  assert.match(rebuild, /requiredBeforeNetwork = origin === "fresh_listing" \? preferredImages : minimumImages/);
   assert.doesNotMatch(rebuild, /connectedMarketSources/);
 });
 
