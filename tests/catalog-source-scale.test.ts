@@ -11,6 +11,10 @@ import {
 const rebuildScript = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
 const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
+const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
+const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
+const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
 
 test("source-scale catalog keeps 1000-offer quota per source and three-day retention", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
@@ -50,4 +54,28 @@ test("requested high-volume public sources are registered", () => {
   ]) {
     assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
   }
+});
+
+test("brand rail uses the existing catalog query instead of a missing route", () => {
+  assert.match(brandRail, /href=\{`\/cars\?make=\$\{encodeURIComponent\(brand\)\}`\}/);
+  assert.doesNotMatch(brandRail, /\/cars\/brand\//);
+});
+
+test("generic open sources cannot attach an unbounded page-wide gallery", () => {
+  assert.match(galleryWrapper, /source\.sourceId\.endsWith\("_open"\)/);
+  assert.match(galleryWrapper, /gallerySafetyMode/);
+  assert.match(galleryWrapper, /listing_bound/);
+  assert.match(galleryWrapper, /sourceNativeUrls\.length >= result\.length/);
+});
+
+test("catalog rejects implausible ordinary-car prices and power", () => {
+  assert.match(offerQuality, /totalRub > 50_000_000/);
+  assert.match(offerQuality, /performance \|\| commercial \? 1_500 : 650/);
+  assert.match(offerQuality, /powerHp \/ engineCc > 0\.21/);
+  assert.match(offerQuality, /hasPlausibleSourcePrice/);
+});
+
+test("dealer verification badge keeps absolute placement and company rows align at the top", () => {
+  assert.doesNotMatch(flatUi, /\.dealer-verified-icon\{position:relative!important/);
+  assert.match(flatUi, /align-items:flex-start!important/);
 });
