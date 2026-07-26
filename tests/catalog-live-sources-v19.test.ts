@@ -3,6 +3,9 @@ import fs from "node:fs";
 import test from "node:test";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
+const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
+const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
+const probe = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 
@@ -32,8 +35,24 @@ test("fresh source pages are processed before three-day restored stock", () => {
   assert.match(rebuild, /retentionMs/);
 });
 
-test("v19 workflow is triggered by priority parser changes", () => {
-  assert.match(workflow, /Catalog source-scale v19/);
-  assert.match(workflow, /priority-market-sources\.ts/);
+test("v20 probes only curated shard sources before the expensive rebuild", () => {
+  assert.match(probe, /const sourcePlan/);
+  assert.match(probe, /sourceIdsForRebuild/);
+  assert.match(probe, /__no_live_sources__/);
+  assert.match(probe, /source\.fetchPage\(null\)/);
+  assert.match(workflow, /Catalog source-scale v20/);
+  assert.match(workflow, /Probe curated live sources/);
+  assert.match(workflow, /CATALOG_REBUILD_SOURCE_IDS: \$\{\{ steps\.probe\.outputs\.source_ids \}\}/);
+  assert.match(workflow, /CATALOG_PROBE_TIMEOUT_MS: "12000"/);
+});
+
+test("priority galleries cache listing photos before requesting detail pages", () => {
+  const listingCache = fastGallery.indexOf("cacheImageFromUrl");
+  const detailedFetch = fastGallery.indexOf("source.fetchImages(offer)");
+  assert.ok(listingCache >= 0 && detailedFetch > listingCache);
+  assert.match(fastGallery, /CATALOG_GALLERY_FAST_PATH/);
+  assert.match(fastGallery, /listingImages\.length >= minimum/);
+  assert.match(importer, /priorityFastGallery/);
+  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
 });
