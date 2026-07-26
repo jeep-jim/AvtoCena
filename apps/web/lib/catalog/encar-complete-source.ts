@@ -14,122 +14,47 @@ function text(value: unknown) {
   return value == null ? "" : String(value).trim().replace(/\\\//g, "/");
 }
 
-function positiveNumber(value: unknown) {
-  const number = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
-  return Number.isFinite(number) && number > 0 ? number : undefined;
-}
-
 function imageLike(value: string) {
   return /ci\.encar\.com|\/carpicture\/|\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(value);
 }
 
-function collectImageValues(value: unknown, key = "", depth = 0, output: Array<{ value: string; index?: number }> = []) {
+function collectImageValues(value: unknown, key = "", depth = 0, output: string[] = []) {
   if (value == null || depth > 14) return output;
   if (typeof value === "string") {
     const candidate = text(value);
-    if (candidate && imageLike(candidate) && /photo|image|picture|gallery|media|location|path|url|^$/i.test(key)) output.push({ value: candidate });
+    if (candidate && imageLike(candidate) && /photo|image|picture|gallery|media|location|path|url|^$/i.test(key)) output.push(candidate);
     return output;
   }
   if (Array.isArray(value)) {
-    value.forEach((item, index) => {
-      if (item && typeof item === "object") {
-        const object = item as Record<string, unknown>;
-        const candidate = text(object.path ?? object.url ?? object.photo ?? object.Photo ?? object.image ?? object.Image ?? object.location ?? object.Location);
-        const imageIndex = positiveNumber(object.imageNumber ?? object.ImageNumber ?? object.no ?? object.No ?? object.seq ?? object.order ?? object.index) ?? index + 1;
-        if (candidate && imageLike(candidate)) output.push({ value: candidate, index: imageIndex });
-      }
-      collectImageValues(item, key, depth + 1, output);
-    });
+    value.forEach((item) => collectImageValues(item, key, depth + 1, output));
     return output;
   }
   if (typeof value !== "object") return output;
-  const object = value as Record<string, unknown>;
-  for (const [childKey, child] of Object.entries(object)) {
+  for (const [childKey, child] of Object.entries(value as Record<string, unknown>)) {
     if (/photo|image|picture|gallery|media|location|path|url/i.test(childKey) || depth < 7) collectImageValues(child, childKey, depth + 1, output);
   }
   return output;
 }
 
-function deepNumber(value: unknown, keys: string[], depth = 0): number | undefined {
-  if (value == null || depth > 14 || typeof value !== "object") return undefined;
-  if (Array.isArray(value)) {
-    for (const item of value) {
-      const found = deepNumber(item, keys, depth + 1);
-      if (found) return found;
-    }
-    return undefined;
-  }
-  const object = value as Record<string, unknown>;
-  for (const key of keys) {
-    const found = positiveNumber(object[key]);
-    if (found) return found;
-  }
-  for (const child of Object.values(object)) {
-    const found = deepNumber(child, keys, depth + 1);
-    if (found) return found;
-  }
-  return undefined;
-}
-
-function sequenceUrl(rawValue: unknown, imageNumber: number) {
-  const raw = text(rawValue);
+function absoluteImageUrl(value: unknown) {
+  const raw = text(value);
   if (!raw) return "";
-  const padded = String(Math.max(1, imageNumber)).padStart(3, "0");
-  if (/^https?:\/\//i.test(raw)) {
-    try {
-      const url = new URL(raw);
-      if (/(\d{3})(\.(?:jpe?g|png|webp))$/i.test(url.pathname)) {
-        url.pathname = url.pathname.replace(/(\d{3})(\.(?:jpe?g|png|webp))$/i, `${padded}$2`);
-        return url.toString();
-      }
-      return imageNumber === 1 ? url.toString() : "";
-    } catch {
-      return imageNumber === 1 ? raw : "";
-    }
-  }
-  if (/(\d{3})(\.(?:jpe?g|png|webp))$/i.test(raw)) {
-    return buildEncarImageUrl(raw.replace(/(\d{3})(\.(?:jpe?g|png|webp))$/i, `${padded}$2`), imageNumber);
-  }
-  return buildEncarImageUrl(raw, imageNumber);
-}
-
-function galleryKey(value: string) {
-  try {
-    const url = new URL(value);
-    const normalizedPath = decodeURIComponent(url.pathname)
-      .replace(/\/(?:w|f)?_?\d+x\d+\//i, "/size/")
-      .replace(/(\d{3})(\.(?:jpe?g|png|webp))$/i, "{seq}$2")
-      .toLowerCase();
-    return `${url.hostname.toLowerCase()}${normalizedPath}`;
-  } catch {
-    return "";
-  }
+  if (/^https?:\/\//i.test(raw)) return raw;
+  return buildEncarImageUrl(raw, 1);
 }
 
 function uniqueUrls(values: string[], limit: number) {
   const result: string[] = [];
   const seen = new Set<string>();
   for (const value of values) {
-    const url = text(value);
-    const canonical = url.replace(/[?#].*$/, "").toLowerCase();
-    if (!/^https?:\/\//i.test(url) || !imageLike(url) || seen.has(canonical)) continue;
-    seen.add(canonical);
+    const url = absoluteImageUrl(value);
+    const key = url.replace(/[?#].*$/, "").toLowerCase();
+    if (!url || !imageLike(url) || seen.has(key)) continue;
+    seen.add(key);
     result.push(url);
     if (result.length >= limit) break;
   }
   return result;
-}
-
-function coherentUrls(values: string[], preferredKey: string, limit: number) {
-  const groups = new Map<string, string[]>();
-  for (const value of uniqueUrls(values, limit)) {
-    const group = galleryKey(value);
-    if (!group) continue;
-    groups.set(group, [...(groups.get(group) || []), value]);
-  }
-  if (preferredKey && groups.has(preferredKey)) return uniqueUrls(groups.get(preferredKey) || [], limit);
-  const best = [...groups.values()].sort((left, right) => right.length - left.length)[0] || [];
-  return uniqueUrls(best, limit);
 }
 
 function uniqueImages(images: CatalogImage[], limit: number) {
@@ -145,43 +70,48 @@ function uniqueImages(images: CatalogImage[], limit: number) {
   return result;
 }
 
+async function cacheUrls(urls: string[], limit: number) {
+  const saved: CatalogImage[] = [];
+  for (const url of urls) {
+    const image = await cacheImageFromUrl(url, "korea", { headers: ENCAR_HEADERS }).catch(() => null);
+    if (image && Number(image.size || 0) > 8_000) saved.push(image);
+    if (saved.length >= limit) break;
+  }
+  return uniqueImages(saved, limit);
+}
+
 export class EncarCompleteAdapter extends EncarDirectAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 1000);
-    const limit = Math.min(1000, Math.max(1, Number.isFinite(requested) ? requested : 1000));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+    const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
+    const minimum = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+    const fastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
     const raw: any = offer.operational?.raw || {};
-    const initial = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
-    const detailUrl = `https://api.encar.com/v1/readside/vehicle/${offer.sourceOfferId}`;
-    const response = await fetch(detailUrl, { headers: ENCAR_HEADERS, redirect: "follow" });
-    if (!response.ok) return uniqueImages(initial, limit);
-    const detail = await response.json() as any;
+    const cover = text(raw.Photo ?? raw.photo ?? raw.Image ?? raw.image ?? raw.PhotoPath ?? raw.photoPath);
+    const listing = cover ? await cacheUrls(uniqueUrls([cover], 1), 1) : [];
 
-    const explicit = collectImageValues(detail);
-    const cover = text(raw.Photo ?? raw.photo ?? raw.Image ?? raw.image ?? raw.PhotoPath ?? raw.photoPath ?? explicit[0]?.value);
-    const coverUrl = cover ? sequenceUrl(cover, 1) : "";
-    const preferredKey = galleryKey(coverUrl);
-    const reportedCount = Math.min(limit, Math.max(0, Number(
-      deepNumber(detail, ["photoCount", "PhotoCount", "photosCount", "imageCount", "ImageCount", "totalPhotoCount", "pictureCount", "PictureCount"])
-      ?? positiveNumber(raw.PhotoCount ?? raw.photoCount ?? raw.ImageCount ?? raw.imageCount)
-      ?? 0,
-    )));
-
-    const candidates = explicit.map((item) => sequenceUrl(item.value, item.index || 1)).filter(Boolean);
-    if (cover && reportedCount) {
-      for (let index = 1; index <= reportedCount; index++) candidates.push(sequenceUrl(cover, index));
-    }
-    const urls = coherentUrls(candidates, preferredKey, limit);
-    const fresh: CatalogImage[] = [];
-    for (const url of urls) {
-      const image = await cacheImageFromUrl(url, "korea", { headers: ENCAR_HEADERS }).catch(() => null);
-      if (image && image.size > 8_000) fresh.push(image);
+    // Если выдача уже содержит реальное фото и достаточные характеристики для расчёта,
+    // не открываем detail для каждой из тысяч карточек.
+    if (fastPath && listing.length >= minimum && Number(offer.engineCc || 0) > 0) {
+      (offer.operational as any).galleryVerified = true;
+      (offer.operational as any).galleryImageCount = listing.length;
+      (offer.operational as any).gallerySafetyMode = "encar_listing_cover";
+      return listing;
     }
 
-    const saved = fresh.length >= 2 ? uniqueImages(fresh, limit) : uniqueImages(initial, limit);
-    (offer.operational as any).galleryVerified = fresh.length >= 2;
-    (offer.operational as any).gallerySourceKey = preferredKey;
+    // Базовый адаптер один раз получает detail, одновременно обогащает характеристики
+    // и сохраняет основные фотографии. Раньше после этого выполнялся второй такой же запрос.
+    const detailed = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
+    const enrichedRaw: any = offer.operational?.raw || {};
+    const extraUrls = uniqueUrls(collectImageValues(enrichedRaw?.detail || enrichedRaw), limit * 2);
+    const existingKeys = new Set([...listing, ...detailed].map((image) => String(image.url || image.objectKey || image.id || "")));
+    const extras = await cacheUrls(extraUrls.filter((url) => !existingKeys.has(url)), Math.max(0, limit - listing.length - detailed.length));
+    const saved = uniqueImages([...listing, ...detailed, ...extras], limit);
+
+    (offer.operational as any).galleryVerified = saved.length >= minimum;
     (offer.operational as any).galleryImageCount = saved.length;
     (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
+    (offer.operational as any).gallerySafetyMode = "encar_single_detail";
     return saved;
   }
 }
