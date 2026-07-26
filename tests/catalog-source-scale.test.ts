@@ -25,9 +25,9 @@ test("source-scale catalog keeps 1000-offer quota per source and three-day reten
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("source-scale workflow cancels stale production runs instead of leaving a new run Pending", () => {
+test("source-scale workflow does not cancel an in-flight atomic publication", () => {
   assert.match(workflow, /group: catalog-seven-market-recovery/);
-  assert.match(workflow, /cancel-in-progress: true/);
+  assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /max-parallel: 7/);
   assert.doesNotMatch(workflow, /group: catalog-source-scale-recovery/);
 });
@@ -37,7 +37,7 @@ test("source-scale workflow uses two shards per market and attempts up to 30 pho
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(rebuildScript, /images\.length < preferredImages/);
+  assert.match(rebuildScript, /requiredBeforeNetwork/);
   assert.match(rebuildScript, /Math\.min\(30/);
 });
 
