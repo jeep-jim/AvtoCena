@@ -1,34 +1,26 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { persistCatalogOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
+const reportFile = process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-source-scale-publish-report.json";
 const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1_000));
 const maximumPerMarket = Math.max(targetPerSource, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const preferredImagesPerOffer = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
-const minimumSpecScore = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_SPEC_SCORE || 1));
+const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
+const prepareConcurrency = Math.max(1, Math.min(24, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 12)));
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
-const all = [];
-const files = [];
-const byMarket = {};
-const byMarketAndSource = {};
-const marketQuality = {};
-const marketReports = {};
+const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 
 function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
-}
-
-function specScore(offer) {
-  // Пробег может отсутствовать у аукционных и новых автомобилей. Для базовой пригодности
-  // достаточно нормализованных марки, модели и года; остальные обязательные поля отдельно
-  // проверяются quality-gate, таможней и структурой цены.
-  return offer?.make && offer?.model && Number.isFinite(Number(offer?.year)) ? 1 : 0;
 }
 
 function freshness(offer) {
@@ -42,6 +34,19 @@ function qualityOrder(left, right) {
     || Number(right?.images?.length || 0) - Number(left?.images?.length || 0)
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
+}
+
+function uniqueImages(images) {
+  const seen = new Set();
+  const result = [];
+  for (const image of Array.isArray(images) ? images : []) {
+    const key = imageKey(image);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    result.push(image);
+    if (result.length >= 30) break;
+  }
+  return result;
 }
 
 function hasExactCalculation(offer) {
@@ -59,28 +64,9 @@ function hasExactCalculation(offer) {
   return kind === "other_hybrid" ? motor30Min > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30Min > 0;
 }
 
-function auditCandidate(sourceOffer, market, selectedIds) {
-  if (sourceOffer?.market !== market || selectedIds.has(sourceOffer?.id) || !isCrediblePublicOffer(sourceOffer) || !hasExactCalculation(sourceOffer)) return null;
-  const localSeen = new Set();
-  const images = [];
-  for (const image of Array.isArray(sourceOffer.images) ? sourceOffer.images : []) {
-    const key = imageKey(image);
-    if (!key || localSeen.has(key)) continue;
-    localSeen.add(key);
-    images.push(image);
-    if (images.length >= 30) break;
-  }
-  const offer = {
-    ...sourceOffer,
-    status: "active",
-    images,
-    operational: {
-      ...sourceOffer.operational,
-      seoEligible: Boolean(sourceOffer.operational?.sourceUrl && images.length >= minimumImagesPerOffer),
-    },
-  };
-  if (images.length < minimumImagesPerOffer || specScore(offer) < minimumSpecScore || !isCrediblePublicOffer(offer) || !hasExactCalculation(offer)) return null;
-  return offer;
+function isCommercial(offer) {
+  return COMMERCIAL_RE.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)
+    || /^(?:Hino|Mitsubishi Fuso)$/i.test(String(offer?.make || ""));
 }
 
 async function generationFilesForMarket(market) {
@@ -104,7 +90,6 @@ async function readGenerationFiles(market) {
       if (parsed.market && parsed.market !== market) throw new Error(`generation_market_mismatch_${parsed.market}`);
       payloads.push(parsed);
       offers.push(...parsed.offers);
-      files.push(filename);
     } catch (error) {
       errors.push({ filename, error: String(error?.message || error) });
     }
@@ -112,116 +97,168 @@ async function readGenerationFiles(market) {
   return { available: payloads.length > 0, filenames, payloads, offers, errors };
 }
 
+async function runWithConcurrency(items, concurrency, worker) {
+  if (!items.length) return [];
+  const results = new Array(items.length);
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= items.length) return;
+      results[index] = await worker(items[index]);
+    }
+  }));
+  return results;
+}
+
+async function auditCandidate(sourceOffer, market) {
+  try {
+    if (!sourceOffer?.id || sourceOffer?.market !== market || isCommercial(sourceOffer)) return { offer: null, reason: "commercial_or_identity" };
+    let offer = normalizeVehicleOfferSpecs({ ...sourceOffer, status: "active", images: uniqueImages(sourceOffer.images) });
+    if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
+    if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
+    if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
+    offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
+    if (!hasExactCalculation(offer)) return { offer: null, reason: "calculation" };
+    if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
+    return { offer, reason: "ok" };
+  } catch (error) {
+    return { offer: null, reason: `exception:${String(error?.message || error)}` };
+  }
+}
+
+let internalRows = [];
+try { internalRows = await readAllOffersForMaintenance(); } catch { internalRows = []; }
+const cutoff = Date.now() - retentionMs;
+const allSelected = [];
+const files = [];
+const byMarket = {};
+const byMarketAndSource = {};
+const marketQuality = {};
+const marketReports = {};
+
 for (const market of markets) {
   const generation = await readGenerationFiles(market);
-  // В публикацию попадают только результаты текущего запуска. Даже сохранённые предложения
-  // должны были пройти prepareCandidate заново: получить галерею, базу знаний, таможню и утиль.
+  let publicRows = [];
+  try { publicRows = await readMarketOffers(market); } catch { publicRows = []; }
+  const retainedRows = [...publicRows, ...internalRows]
+    .filter((offer) => offer?.market === market && ["active", "stale"].includes(String(offer?.status || "")) && freshness(offer) >= cutoff)
+    .sort(qualityOrder);
   const freshRows = generation.offers
     .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") === "fresh_listing")
     .sort(qualityOrder);
-  const revalidatedRows = generation.offers
+  const rebuiltRows = generation.offers
     .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") !== "fresh_listing")
     .sort(qualityOrder);
+
+  const origins = [["fresh", freshRows], ["rebuilt", rebuiltRows], ["retained", retainedRows]];
   const selected = [];
   const selectedIds = new Set();
+  const imageOwners = new Map();
   const sourceCounts = new Map();
-  let rejectedQuality = 0;
-  let rejectedSourceQuota = 0;
-  let freshPublished = 0;
-  let revalidatedPublished = 0;
+  const rejectionReasons = {};
+  const originCounts = { fresh: 0, rebuilt: 0, retained: 0 };
 
-  for (const [origin, rows] of [["fresh", freshRows], ["revalidated", revalidatedRows]]) {
-    for (const sourceOffer of rows) {
-      if (selected.length >= maximumPerMarket) break;
-      const sourceId = String(sourceOffer?.sourceId || "unknown");
-      if (Number(sourceCounts.get(sourceId) || 0) >= targetPerSource) {
-        rejectedSourceQuota++;
-        continue;
-      }
-      const offer = auditCandidate(sourceOffer, market, selectedIds);
-      if (!offer) {
-        rejectedQuality++;
-        continue;
-      }
-      selected.push(offer);
-      selectedIds.add(offer.id);
-      sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
-      if (origin === "fresh") freshPublished++;
-      else revalidatedPublished++;
+  for (const [origin, rows] of origins) {
+    const uniqueRows = [];
+    const queued = new Set();
+    for (const row of rows) {
+      if (!row?.id || selectedIds.has(row.id) || queued.has(row.id)) continue;
+      queued.add(row.id);
+      uniqueRows.push(row);
     }
-    if (selected.length >= maximumPerMarket) break;
+    for (let start = 0; start < uniqueRows.length && selected.length < maximumPerMarket; start += prepareConcurrency) {
+      const batch = uniqueRows.slice(start, start + prepareConcurrency);
+      const audited = await runWithConcurrency(batch, prepareConcurrency, (row) => auditCandidate(row, market));
+      for (const result of audited) {
+        if (!result?.offer) {
+          const reason = result?.reason || "unknown";
+          rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
+          continue;
+        }
+        const offer = result.offer;
+        if (selectedIds.has(offer.id)) continue;
+        const sourceId = String(offer.sourceId || "unknown");
+        if (Number(sourceCounts.get(sourceId) || 0) >= targetPerSource) {
+          rejectionReasons.source_quota = Number(rejectionReasons.source_quota || 0) + 1;
+          continue;
+        }
+        const ownedImages = offer.images.filter((image) => {
+          const key = imageKey(image);
+          const owner = imageOwners.get(key);
+          return !owner || owner === offer.id;
+        });
+        if (ownedImages.length < minimumImagesPerOffer) {
+          rejectionReasons.duplicate_images = Number(rejectionReasons.duplicate_images || 0) + 1;
+          continue;
+        }
+        offer.images = ownedImages;
+        selected.push(offer);
+        selectedIds.add(offer.id);
+        sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
+        for (const image of ownedImages) imageOwners.set(imageKey(image), offer.id);
+        originCounts[origin]++;
+        if (selected.length >= maximumPerMarket) break;
+      }
+    }
   }
 
+  files.push(...generation.filenames);
+  allSelected.push(...selected);
   byMarket[market] = selected.length;
   byMarketAndSource[market] = Object.fromEntries([...sourceCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
   marketReports[market] = generation.payloads.map((payload) => payload.report || payload);
-
-  if (!selected.length) {
-    marketQuality[market] = {
-      generationAvailable: generation.available,
-      generationFiles: generation.filenames,
-      generationErrors: generation.errors,
-      freshCandidates: freshRows.length,
-      revalidatedCandidates: revalidatedRows.length,
-      targetPerSource,
-      maximumPerMarket,
-      published: 0,
-      freshPublished: 0,
-      revalidatedPublished: 0,
-      rejectedQuality,
-      rejectedSourceQuota,
-      temporarilyUnavailable: true,
-    };
-    continue;
-  }
-
   const imageCounts = selected.map((offer) => offer.images.length);
-  const averageImages = imageCounts.reduce((sum, count) => sum + count, 0) / selected.length;
-  const preferredCount = imageCounts.filter((count) => count >= preferredImagesPerOffer).length;
-  all.push(...selected);
   marketQuality[market] = {
     generationAvailable: generation.available,
     generationFiles: generation.filenames,
     generationErrors: generation.errors,
     generationPartial: generation.payloads.some((payload) => Boolean(payload.partial || payload.report?.partial)),
-    generationStopReasons: generation.payloads.map((payload) => payload.stopReason || payload.report?.stopReason || "completed"),
+    generationStopReasons: generation.payloads.map((payload) => payload.stopReason || payload.report?.stopReason || "unknown"),
     freshCandidates: freshRows.length,
-    revalidatedCandidates: revalidatedRows.length,
-    targetPerSource,
-    maximumPerMarket,
+    rebuiltCandidates: rebuiltRows.length,
+    retainedCandidates: retainedRows.length,
     published: selected.length,
+    byOrigin: originCounts,
     publishedSources: sourceCounts.size,
     bySource: byMarketAndSource[market],
-    freshPublished,
-    revalidatedPublished,
-    rejectedQuality,
-    rejectedSourceQuota,
-    minimumImages: Math.min(...imageCounts),
-    maximumImages: Math.max(...imageCounts),
-    averageImages: Number(averageImages.toFixed(2)),
-    preferredImagesPerOffer,
-    preferredImagesShare: Number((preferredCount / selected.length).toFixed(4)),
-    minimumImagesPerOffer,
-    minimumSpecScore,
-    temporarilyUnavailable: false,
+    rejectionReasons,
+    minimumImages: imageCounts.length ? Math.min(...imageCounts) : 0,
+    maximumImages: imageCounts.length ? Math.max(...imageCounts) : 0,
+    averageImages: imageCounts.length ? Number((imageCounts.reduce((sum, count) => sum + count, 0) / imageCounts.length).toFixed(2)) : 0,
+    preferredImagesShare: imageCounts.length ? Number((imageCounts.filter((count) => count >= preferredImagesPerOffer).length / imageCounts.length).toFixed(4)) : 0,
+    retainedPreviousMarket: originCounts.retained > 0,
+    temporarilyUnavailable: selected.length === 0,
   };
 }
 
 const unique = new Map();
-for (const offer of all) {
-  if (unique.has(offer.id)) continue;
-  unique.set(offer.id, offer);
+for (const offer of allSelected) if (!unique.has(offer.id)) unique.set(offer.id, offer);
+const offers = [...unique.values()];
+const publishedAt = new Date().toISOString();
+let manifest = null;
+let publicationError = "";
+
+if (offers.length) {
+  try {
+    process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    manifest = await persistCatalogOffers(offers);
+  } catch (error) {
+    publicationError = String(error?.message || error);
+  }
+} else {
+  publicationError = "no_verified_offers_keep_previous_manifest";
 }
 
-const offers = [...unique.values()];
-if (!offers.length) throw new Error("source_scale_publish_no_verified_offers_any_market");
-process.env.CATALOG_GROW_ONLY_MARKETS = "";
-const manifest = await persistCatalogOffers(offers);
-const publishedAt = new Date().toISOString();
 const report = {
-  version: 18,
+  version: 21,
+  mode: "atomic_all_markets_with_verified_retention",
   publishedAt,
-  generationId: manifest.generationId,
+  published: Boolean(manifest),
+  publicationError,
+  generationId: manifest?.generationId || null,
+  previousManifestPreserved: !manifest,
+  retentionMs,
   targetPerSource,
   maximumPerMarket,
   total: offers.length,
@@ -231,22 +268,8 @@ const report = {
   missingGenerationMarkets: markets.filter((market) => !marketQuality[market]?.generationAvailable),
   partialGenerationMarkets: markets.filter((market) => marketQuality[market]?.generationPartial),
   marketQuality,
-  imageStats: offers.reduce((stats, offer) => {
-    const count = Array.isArray(offer.images) ? offer.images.length : 0;
-    stats.min = Math.min(stats.min, count);
-    stats.max = Math.max(stats.max, count);
-    stats.total += count;
-    stats.preferred += count >= preferredImagesPerOffer ? 1 : 0;
-    return stats;
-  }, { min: Number.POSITIVE_INFINITY, max: 0, total: 0, preferred: 0 }),
   marketReports,
 };
-if (!Number.isFinite(report.imageStats.min)) report.imageStats.min = 0;
-report.imageStats.average = offers.length ? Number((report.imageStats.total / offers.length).toFixed(2)) : 0;
-report.imageStats.preferredShare = offers.length ? Number((report.imageStats.preferred / offers.length).toFixed(4)) : 0;
 
-await fs.writeFile(
-  process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-source-scale-publish-report.json",
-  JSON.stringify(report, null, 2),
-);
+await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
