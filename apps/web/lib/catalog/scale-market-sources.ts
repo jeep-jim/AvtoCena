@@ -158,7 +158,7 @@ const configs: OpenMarketSourceConfig[] = [
     label: "Bazar.kg Cars",
     baseUrl: "https://www.bazar.kg",
     currency: "KGS",
-    detailPattern: /\/kyrgyzstan\/transport\/legkovye-avtomobili\/(?!?$)[^?#]{4,}/i,
+    detailPattern: /\/kyrgyzstan\/transport\/legkovye-avtomobili\/(?!$)[^?#]{4,}/i,
     listUrls: (page) => [
       pageQuery("https://www.bazar.kg/en/kyrgyzstan/transport/legkovye-avtomobili", page),
       pageQuery("https://www.bazar.kg/kyrgyzstan/transport/legkovye-avtomobili", page),
@@ -186,7 +186,7 @@ const configs: OpenMarketSourceConfig[] = [
     ],
   },
 
-  // Additional Japan sources used for deep daily accumulation.
+  // Additional Korea and Japan sources used for deep daily accumulation.
   {
     sourceId: "kcar_korea_open",
     market: "korea",
