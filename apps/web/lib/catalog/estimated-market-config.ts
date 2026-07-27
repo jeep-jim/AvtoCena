@@ -90,8 +90,10 @@ export function resolveCatalogMarketConfig(market: CatalogMarket, configured: an
     provisional: source.provisional !== false,
   };
 
-  const estimated = !activeConfig(configured) || estimatedFields.length > 0;
+  const provisional = Boolean(config.provisional);
+  const estimated = provisional || !activeConfig(configured) || estimatedFields.length > 0;
   if (!activeConfig(configured)) warnings.push("Коммерческая конфигурация рынка не была активна: применён предварительный средний профиль.");
+  if (provisional) warnings.push("Используются предварительные средние расходы рынка; владелец может уточнить их в CRM.");
   if (estimatedFields.length) warnings.push(`Оценочно заполнены расходы: ${estimatedFields.join(", ")}.`);
   return { config, estimated, estimatedFields, warnings };
 }
