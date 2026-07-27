@@ -78,13 +78,15 @@ jobs:
       CATALOG_REBUILD_TARGET_PER_MARKET: "1000"
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "5000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "12"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "4"
       CATALOG_OFFER_RETENTION_MS: "259200000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
       CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_SOURCE_TIMEOUT_MS: "25000"
-      CATALOG_IMAGE_TIMEOUT_MS: "20000"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "6"
+      CATALOG_GALLERY_FAST_PATH: "true"
+      CATALOG_SOURCE_TIMEOUT_MS: "18000"
+      CATALOG_IMAGE_TIMEOUT_MS: "12000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
       CATALOG_IMAGE_FETCH_CONCURRENCY: "10"
       CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"
@@ -117,7 +119,7 @@ jobs:
       - name: Probe every registered source in this shard
         id: probe
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect and retain verified offers
+      - name: Collect live sources and retain every registered source
         env:
           CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
         run: npx tsx scripts/catalog-rebuild-source-shard.mjs
@@ -130,7 +132,7 @@ jobs:
           const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
           if (payload.market !== process.env.CATALOG_REBUILD_MARKET) throw new Error('shard_market_mismatch');
           if (!Array.isArray(payload.offers)) throw new Error('shard_offers_missing');
-          console.log(JSON.stringify({market: payload.market, shard: payload.shardIndex, count: payload.offers.length, bySource: payload.report?.publicBySource, stop: payload.stopReason}, null, 2));
+          console.log(JSON.stringify({market: payload.market, shard: payload.shardIndex, count: payload.offers.length, live: payload.liveSourceIds, bySource: payload.report?.publicBySource, stop: payload.stopReason}, null, 2));
           NODE
       - name: Upload source diagnostics and verified offers
         if: always()
