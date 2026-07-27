@@ -1,7 +1,8 @@
 name: Catalog stable 7 markets
 run-name: Catalog stable 7 × 250 · ${{ github.sha }}
 
-# Every market gets one automatic retry before the workflow is marked failed.
+# Retry is controlled by catalog-rebuild-market-retry.mjs. It validates the actual
+# number of verified offers after every pass and accumulates unique cars between passes.
 on:
   schedule:
     - cron: "17 20 * * *"
@@ -29,6 +30,7 @@ on:
       - packages/engine/src/calculation/calculateAvtocena.ts
       - packages/engine/src/calculation/russiaCustoms.ts
       - scripts/catalog-rebuild-market.mjs
+      - scripts/catalog-rebuild-market-retry.mjs
       - scripts/catalog-publish-fresh.mjs
       - scripts/catalog-business-audit.mjs
 
@@ -56,6 +58,7 @@ jobs:
       - name: Validate scripts and types
         run: |
           node --check scripts/catalog-rebuild-market.mjs
+          node --check scripts/catalog-rebuild-market-retry.mjs
           node --check scripts/catalog-publish-fresh.mjs
           node --check scripts/catalog-business-audit.mjs
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
@@ -104,6 +107,8 @@ jobs:
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.sourceIds }}
       CATALOG_REBUILD_TARGET: "250"
+      CATALOG_REBUILD_ATTEMPTS: "3"
+      CATALOG_REBUILD_RETRY_BUDGET_MS: "5040000"
       CATALOG_REBUILD_MAX_PAGES: "500"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "1200"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "12"
@@ -118,7 +123,7 @@ jobs:
       CATALOG_REBUILD_PREPARE_CONCURRENCY: "10"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "2"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "10"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "2700000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "1680000"
       CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
       CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
       CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
@@ -135,22 +140,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect 250 verified cars with automatic retry
-        shell: bash
-        run: |
-          set +e
-          code=1
-          for attempt in 1 2; do
-            echo "Starting $CATALOG_REBUILD_MARKET collection attempt $attempt of 2"
-            npx tsx scripts/catalog-rebuild-market.mjs
-            code=$?
-            if [ "$code" -eq 0 ]; then
-              exit 0
-            fi
-            echo "::warning::$CATALOG_REBUILD_MARKET attempt $attempt failed with exit code $code; retrying automatically"
-            sleep $((attempt * 20))
-          done
-          exit "$code"
+      - name: Collect and accumulate 250 verified cars
+        run: npx tsx scripts/catalog-rebuild-market-retry.mjs
       - name: Require 250 verified offers
         run: |
           node <<'NODE'
@@ -175,7 +166,7 @@ jobs:
         if: always()
         run: |
           if [ -s "$CATALOG_REBUILD_OUTPUT" ]; then
-            node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`### ${p.market}\n- Проверено: ${(p.offers||[]).length}/250\n- Источники: ${JSON.stringify(p.report?.publicBySource||{})}\n- Фото: ${JSON.stringify(p.report?.imageStats||{})}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
+            node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`### ${p.market}\n- Проверено: ${(p.offers||[]).length}/250\n- Источники: ${JSON.stringify(p.report?.publicBySource||{})}\n- Попытки: ${JSON.stringify((p.report?.attempts||[]).map(x=>({attempt:x.attempt,added:x.added,accumulated:x.accumulated,stop:x.childStopReason})))}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
           fi
 
   publish:
