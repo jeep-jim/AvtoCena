@@ -85,6 +85,13 @@ function meaningfulTitle(inner: string) {
 function isDetailHref(value: string) {
   try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }
 }
+function mileageFromCard(value: string) {
+  return integer(
+    value.match(/(?:19|20)\d{2}[./-](?:0?[1-9]|1[0-2])\s+([0-9][0-9,]*)\s*km\b/i)?.[1]
+      || value.match(/\b([0-9]{1,3}(?:,[0-9]{3})+)\s*km\b/i)?.[1]
+      || value.match(/\b([0-9]{1,7})\s*km\b/i)?.[1],
+  );
+}
 
 export function parseGuaziRuMarkup(markup: string, pageUrl: string): GuaziRuRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
@@ -121,7 +128,7 @@ export function parseGuaziRuMarkup(markup: string, pageUrl: string): GuaziRuRow[
     if (!make || !model || !titleYear || !price || COMMERCIAL_RE.test(`${title} ${cardText.slice(0, 500)}`)) continue;
     rows.push({ id, detailUrl: entry.href, title, make, model, year: titleYear,
       productionDate: production ? `${production[1]}-${String(Number(production[2])).padStart(2, "0")}` : undefined,
-      mileageKm: integer(cardText.match(/([0-9][0-9, ]+)\s*km/i)?.[1]),
+      mileageKm: mileageFromCard(cardText),
       engineCc: Number.isFinite(liters) && liters > 0 && liters <= 10 ? Math.round(liters * 1_000) : undefined,
       fuel, transmission, drive, price, currency: "USD", images: imageUrls(card, pageUrl).slice(0, 8) });
   }
