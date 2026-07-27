@@ -12,7 +12,7 @@ const outputFile = process.env.CATALOG_PROBE_OUTPUT || `catalog-probe-${market}-
 
 const priorityPlan = {
   korea: ["encar_direct", "kcar_korea_open"],
-  china: ["guazi_china_open", "che168_china_exact", "guazi_china_export", "autohome_used_china_open", "dongchedi_china_open", "autohome_new_china_open"],
+  china: ["guazi_china_ru", "guazi_china_open", "che168_china_exact", "guazi_china_export", "autohome_used_china_open", "dongchedi_china_open", "autohome_new_china_open"],
   japan: ["carused_japan_open", "tcv_japan_open", "goonet_japan_exact", "goonet_japan", "beforward_japan", "jpcenter_japan_catalog_open", "jpauc_japan_past_open", "carvector_japan_stat_open"],
   uae: ["dubicars_uae_exact", "dubizzle_uae_open", "dubicars_clean", "beforward_uae"],
   europe: ["mobile_de_open", "autoscout_europe_open", "otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
