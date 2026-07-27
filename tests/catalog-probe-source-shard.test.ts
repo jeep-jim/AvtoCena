@@ -17,6 +17,8 @@ test("probe checks every registered source and uses activity only for ordering",
   assert.match(probe, /activeSourceIds/);
   assert.match(probe, /inactiveSourceIds/);
   assert.match(probe, /sourceIdsForRebuild = \[\.\.\.activeSourceIds, \.\.\.inactiveSourceIds\]/);
+  assert.match(probe, /guazi_china_ru/);
+  assert.match(probe, /myauto_georgia_list/);
   assert.doesNotMatch(probe, /connectedMarketSources/);
 });
 
@@ -57,11 +59,12 @@ test("publisher accumulates verified current markets and keeps previous manifest
 });
 
 test("workflow records degradation instead of failing every market", () => {
-  assert.match(workflow, /Catalog source-scale v22/);
+  assert.match(workflow, /Catalog source-scale v23/);
   assert.match(workflow, /timeout-minutes: 45/);
   assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "1920000"/);
   assert.match(workflow, /Ensure diagnostic envelopes exist/);
   assert.match(workflow, /Publish verified markets and retain the previous healthy base/);
+  assert.match(workflow, /Audit seven market profiles, knowledge, customs and utilization fee/);
   assert.doesNotMatch(workflow, /Mark failed rebuild process/);
   assert.match(workflow, /cancel-in-progress: false/);
 });
