@@ -34,6 +34,8 @@ jobs:
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Catalog live sources v23 tests
         run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
+      - name: Guazi China RU listing tests
+        run: node --import tsx --test tests/guazi-ru-source.test.ts
       - name: MyAuto Georgia listing tests
         run: node --import tsx --test tests/myauto-list-source.test.ts
       - name: Catalog probe v23 tests
