@@ -25,6 +25,7 @@ import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
+import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
@@ -39,6 +40,7 @@ import {
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 const completeSources = [
+  prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
