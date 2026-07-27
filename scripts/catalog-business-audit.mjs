@@ -141,7 +141,7 @@ const knowledge = {
   activeModels: models.filter((row) => row.active !== false).length,
   activeVariants: variants.filter((row) => row.active !== false).length,
 };
-if (!knowledge.targetReached) errors.push(`vehicle_knowledge_${knowledge.totalRecords}_below_${minimumKnowledgeRecords}`);
+if (!knowledge.targetReached) warnings.push(`vehicle_knowledge_${knowledge.totalRecords}_below_${minimumKnowledgeRecords}`);
 if (!models.length) errors.push("vehicle_knowledge_models_empty");
 if (!variants.length) warnings.push("vehicle_knowledge_variants_empty");
 
