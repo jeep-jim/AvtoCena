@@ -1,6 +1,7 @@
 name: Catalog stable 7 markets
 run-name: Catalog stable 7 × 250 · ${{ github.sha }}
 
+# Every market gets one automatic retry before the workflow is marked failed.
 on:
   schedule:
     - cron: "17 20 * * *"
@@ -64,7 +65,7 @@ jobs:
     name: Collect ${{ matrix.market }} 250
     needs: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 65
+    timeout-minutes: 110
     strategy:
       fail-fast: false
       max-parallel: 7
@@ -117,7 +118,7 @@ jobs:
       CATALOG_REBUILD_PREPARE_CONCURRENCY: "10"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "2"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "10"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "3000000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "2700000"
       CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
       CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
       CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
@@ -134,8 +135,22 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect 250 verified cars with real galleries
-        run: npx tsx scripts/catalog-rebuild-market.mjs
+      - name: Collect 250 verified cars with automatic retry
+        shell: bash
+        run: |
+          set +e
+          code=1
+          for attempt in 1 2; do
+            echo "Starting $CATALOG_REBUILD_MARKET collection attempt $attempt of 2"
+            npx tsx scripts/catalog-rebuild-market.mjs
+            code=$?
+            if [ "$code" -eq 0 ]; then
+              exit 0
+            fi
+            echo "::warning::$CATALOG_REBUILD_MARKET attempt $attempt failed with exit code $code; retrying automatically"
+            sleep $((attempt * 20))
+          done
+          exit "$code"
       - name: Require 250 verified offers
         run: |
           node <<'NODE'
