@@ -1,4 +1,4 @@
-import { getActiveMarketVersion, getMarketsWithEffectiveVersions } from "../business-settings";
+import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../effective-market-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import type { CatalogMarket, VehicleOffer } from "./types";
@@ -74,13 +74,13 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
-  const configured = await getActiveMarketVersion(String(offer.market));
+  const configured = await getEffectiveMarketVersion(String(offer.market));
   return repriceOfferWithBusinessConfig(offer, configured);
 }
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
-  const markets = await getMarketsWithEffectiveVersions();
+  const markets = await getEffectiveMarketsWithDefaults();
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
   return offers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
 }
