@@ -61,7 +61,9 @@ export async function POST(request: Request) {
       dealStages: parseJsonField(form.get("dealStages"), []),
       deliveryDays: cleanText(form.get("deliveryDays"), 80),
       conditionsDescription: cleanText(form.get("conditionsDescription"), 3000),
-      provisional: booleanFromForm(form.get("provisional")),
+      // Средний системный профиль provisional=true. После ручного сохранения владельцем
+      // эта конкретная версия становится подтверждённой и используется как точная бизнес-конфигурация.
+      provisional: false,
     }, user, cleanText(form.get("comment"), 1000));
 
     // Карточки применяют новую версию при следующем открытии. Этот маркер нужен
