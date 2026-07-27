@@ -7,53 +7,31 @@ export type EstimatedMarketResolution = {
   warnings: string[];
 };
 
-const DIRECT_COMMISSION_RUB: Record<CatalogMarket, number> = {
-  japan: 39_000,
-  china: 90_000,
-  korea: 90_000,
-  uae: 90_000,
-  europe: 90_000,
-  georgia: 90_000,
-  kyrgyzstan: 90_000,
+type MarketDefaults = {
+  currency: string;
+  securityDepositRub: number;
+  topAvtoCommissionRub: number;
+  exportExpensesRub: number;
+  logisticsRub: number;
+  brokerRub: number;
+  svhRub: number;
+  laboratoryRub: number;
+  sbktsRub: number;
+  eptsRub: number;
+  rfDeliveryRub: number;
+  otherFixedExpensesRub: number;
+  exchangeRateReservePercent: number;
+  deliveryDays: string;
 };
 
-const SECURITY_DEPOSIT_RUB: Record<CatalogMarket, number> = {
-  japan: 31_000,
-  china: 160_000,
-  korea: 0,
-  uae: 110_000,
-  europe: 0,
-  georgia: 0,
-  kyrgyzstan: 0,
-};
-
-const DELIVERY_DAYS: Record<CatalogMarket, string> = {
-  japan: "25-45",
-  china: "14-30",
-  korea: "25-40",
-  uae: "30-45",
-  europe: "30-60",
-  georgia: "20-40",
-  kyrgyzstan: "20-40",
-};
-
-const CURRENCY: Record<CatalogMarket, string> = {
-  japan: "JPY",
-  china: "CNY",
-  korea: "KRW",
-  uae: "AED",
-  europe: "EUR",
-  georgia: "GEL",
-  kyrgyzstan: "KGS",
-};
-
-const COMMON_ESTIMATE = {
-  brokerRub: 35_000,
-  svhRub: 35_000,
-  laboratoryRub: 15_000,
-  sbktsRub: 35_000,
-  eptsRub: 35_000,
-  rfDeliveryRub: 120_000,
+export const CATALOG_MARKET_DEFAULTS: Record<CatalogMarket, MarketDefaults> = {
+  japan: { currency: "JPY", securityDepositRub: 31_000, topAvtoCommissionRub: 39_000, exportExpensesRub: 100_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-45" },
+  china: { currency: "CNY", securityDepositRub: 160_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 80_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "14-30" },
+  korea: { currency: "KRW", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 70_000, logisticsRub: 250_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "25-40" },
+  uae: { currency: "AED", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 120_000, logisticsRub: 450_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-45" },
+  europe: { currency: "EUR", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 100_000, logisticsRub: 350_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-60" },
+  georgia: { currency: "GEL", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 50_000, logisticsRub: 180_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "20-40" },
+  kyrgyzstan: { currency: "KGS", securityDepositRub: 60_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 30_000, logisticsRub: 100_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "15-30" },
 };
 
 function envAmount(market: CatalogMarket, field: string, fallback: number) {
@@ -74,44 +52,46 @@ function activeConfig(config: any) {
 
 export function resolveCatalogMarketConfig(market: CatalogMarket, configured: any): EstimatedMarketResolution {
   const source = configured && typeof configured === "object" ? configured : {};
+  const defaults = CATALOG_MARKET_DEFAULTS[market];
   const estimatedFields: string[] = [];
   const warnings: string[] = [];
-  const value = (field: string, fallback: number) => {
+  const value = (field: keyof MarketDefaults) => {
     if (present(source[field])) return Number(source[field]);
-    estimatedFields.push(field);
-    return envAmount(market, field.replace(/Rub$/, ""), fallback);
+    estimatedFields.push(String(field));
+    return envAmount(market, String(field).replace(/Rub$/, ""), Number(defaults[field]));
   };
 
   const config = {
     ...source,
-    id: source.id || `catalog_estimate_${market}_v1`,
-    version: Number(source.version || 1),
+    id: source.id || `catalog_estimate_${market}_v2`,
+    version: Number(source.version || 2),
     status: "active",
     active: true,
-    effectiveFrom: source.effectiveFrom || "2026-07-25T00:00:00.000Z",
-    currency: source.currency || CURRENCY[market],
-    securityDepositRub: value("securityDepositRub", SECURITY_DEPOSIT_RUB[market]),
-    topAvtoCommissionRub: value("topAvtoCommissionRub", DIRECT_COMMISSION_RUB[market]),
-    exportExpensesRub: value("exportExpensesRub", 0),
-    logisticsRub: value("logisticsRub", market === "japan" ? 15_000 : 0),
-    brokerRub: value("brokerRub", COMMON_ESTIMATE.brokerRub),
-    svhRub: value("svhRub", COMMON_ESTIMATE.svhRub),
-    laboratoryRub: value("laboratoryRub", COMMON_ESTIMATE.laboratoryRub),
-    sbktsRub: value("sbktsRub", COMMON_ESTIMATE.sbktsRub),
-    eptsRub: value("eptsRub", COMMON_ESTIMATE.eptsRub),
-    rfDeliveryRub: value("rfDeliveryRub", COMMON_ESTIMATE.rfDeliveryRub),
-    otherFixedExpensesRub: value("otherFixedExpensesRub", 0),
+    effectiveFrom: source.effectiveFrom || "2026-07-27T00:00:00.000Z",
+    currency: source.currency || defaults.currency,
+    securityDepositRub: value("securityDepositRub"),
+    topAvtoCommissionRub: value("topAvtoCommissionRub"),
+    exportExpensesRub: value("exportExpensesRub"),
+    logisticsRub: value("logisticsRub"),
+    brokerRub: value("brokerRub"),
+    svhRub: value("svhRub"),
+    laboratoryRub: value("laboratoryRub"),
+    sbktsRub: value("sbktsRub"),
+    eptsRub: value("eptsRub"),
+    rfDeliveryRub: value("rfDeliveryRub"),
+    otherFixedExpensesRub: value("otherFixedExpensesRub"),
     exchangeRateReservePercent: present(source.exchangeRateReservePercent)
       ? Math.max(0, Number(source.exchangeRateReservePercent))
-      : 0,
+      : defaults.exchangeRateReservePercent,
     percentExpenses: Array.isArray(source.percentExpenses) ? source.percentExpenses : [],
-    deliveryDays: source.deliveryDays || DELIVERY_DAYS[market],
-    conditionsDescription: source.conditionsDescription || "Предварительный расчёт каталога. Финальные расходы и наличие подтверждает менеджер.",
+    deliveryDays: source.deliveryDays || defaults.deliveryDays,
+    conditionsDescription: source.conditionsDescription || "Предварительные средние расходы. Финальные коммерческие условия подтверждает менеджер.",
     dealStages: Array.isArray(source.dealStages) ? source.dealStages : [],
+    provisional: source.provisional !== false,
   };
 
   const estimated = !activeConfig(configured) || estimatedFields.length > 0;
-  if (!activeConfig(configured)) warnings.push("Коммерческая конфигурация рынка не была активна: применён предварительный профиль каталога.");
+  if (!activeConfig(configured)) warnings.push("Коммерческая конфигурация рынка не была активна: применён предварительный средний профиль.");
   if (estimatedFields.length) warnings.push(`Оценочно заполнены расходы: ${estimatedFields.join(", ")}.`);
   return { config, estimated, estimatedFields, warnings };
 }
