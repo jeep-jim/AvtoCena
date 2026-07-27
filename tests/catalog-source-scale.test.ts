@@ -32,24 +32,26 @@ test("source-scale catalog keeps 1000-offer quota per source and supports at lea
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("source-scale workflow does not cancel an in-flight atomic publication", () => {
-  assert.match(workflow, /group: catalog-seven-market-recovery/);
-  assert.match(workflow, /cancel-in-progress: false/);
-  assert.match(workflow, /max-parallel: 14/);
-  assert.doesNotMatch(workflow, /group: catalog-source-scale-recovery/);
+test("stable workflow cancels obsolete runs before atomic publication", () => {
+  assert.match(workflow, /group: catalog-stable-seven-market/);
+  assert.match(workflow, /cancel-in-progress: true/);
+  assert.match(workflow, /max-parallel: 7/);
+  assert.doesNotMatch(workflow, /group: catalog-seven-market-recovery/);
 });
 
-test("source-scale workflow uses four shards, retries probes and attempts up to 30 photos", () => {
-  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "4"/);
-  assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
-  assert.match(workflow, /CATALOG_PROBE_ATTEMPTS: "2"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"/);
+test("stable workflow directly rebuilds 250 cars for seven markets with up to 30 photos", () => {
+  assert.match(workflow, /market: korea/);
+  assert.match(workflow, /market: china/);
+  assert.match(workflow, /market: japan/);
+  assert.match(workflow, /market: uae/);
+  assert.match(workflow, /market: europe/);
+  assert.match(workflow, /market: georgia/);
+  assert.match(workflow, /market: kyrgyzstan/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET: "250"/);
+  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(rebuildScript, /requiredBeforeNetwork = minimumImages/);
-  assert.match(rebuildScript, /Math\.min\(30/);
+  assert.match(workflow, /Require published 7 × 250 manifest/);
+  assert.doesNotMatch(workflow, /CATALOG_REBUILD_SHARD_COUNT/);
 });
 
 test("all seven markets are backed by registered production adapters", () => {
