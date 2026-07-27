@@ -5,6 +5,7 @@ import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
+import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
@@ -62,16 +63,18 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
           .filter((offer) => offer.status === "active" && Boolean(offer.totalRub) && isCrediblePublicOffer(offer))
           .sort((left, right) => offerFreshness(right) - offerFreshness(left));
         const start = (page - 1) * pageSize;
+        const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));
         return {
           ...market,
-          items: rows.slice(start, start + pageSize).map(publicOffer),
+          items: visible.map(publicOffer),
           total: rows.length,
           page,
           pageSize,
         };
       }
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
-      return { ...market, items: result.items, total: result.total, page: result.page, pageSize: result.pageSize };
+      const repriced = await applyActiveBusinessPricingBatch(result.items as any[]);
+      return { ...market, items: repriced, total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);

@@ -1,0 +1,205 @@
+import { cacheImageFromUrl, stableOfferId } from "./storage";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
+
+const HEADERS = {
+  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+};
+const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
+const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
+const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper)\b/i;
+const KNOWN_MAKES = [
+  "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
+  "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
+  "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
+  "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
+  "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
+].sort((left, right) => right.length - left.length);
+
+export type MyAutoListRow = {
+  id: string;
+  detailUrl: string;
+  title: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  currency: "GEL";
+  fuel?: string;
+  bodyType?: string;
+  location?: string;
+  images: string[];
+};
+
+function decodeHtml(value: string) {
+  return String(value || "")
+    .replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#x2F;/gi, "/")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+function plainText(value: string) {
+  return decodeHtml(value).replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ").replace(/[\u0000-\u001f]+/g, " ").replace(/\s+/g, " ").trim();
+}
+function absoluteUrl(value: string, base: string) {
+  if (!value || /^(?:data:|javascript:|mailto:|tel:)/i.test(value)) return "";
+  try { return new URL(value.replace(/\\\//g, "/").replace(/&amp;/gi, "&"), base).toString(); } catch { return ""; }
+}
+function imageUrls(markup: string, base: string) {
+  const values: string[] = [];
+  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
+  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
+  return [...new Set(values.map((value) => absoluteUrl(value, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
+}
+function deriveMakeModel(title: string) {
+  const cleaned = plainText(title).replace(/\b(?:19|20)\d{2}\b.*$/, "").trim();
+  const lower = cleaned.toLocaleLowerCase("en-US");
+  const make = KNOWN_MAKES.find((candidate) => lower === candidate.toLocaleLowerCase("en-US") || lower.startsWith(`${candidate.toLocaleLowerCase("en-US")} `));
+  if (!make) return { make: "", model: "" };
+  return { make, model: cleaned.slice(make.length).replace(/^[\s\-–—|]+/, "").trim() };
+}
+function integer(value: string | undefined) {
+  const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+function meaningfulAnchorTitle(inner: string) {
+  const value = plainText(inner);
+  return value.length >= 3 && value.length <= 100 && !/^(?:Super VIP|VIP|Image|Add)$/i.test(value) ? value : "";
+}
+function isDetailHref(value: string) {
+  try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }
+}
+
+export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAutoListRow[] {
+  const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => ({ href: absoluteUrl(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
+    .filter((row) => isDetailHref(row.href));
+  const grouped = new Map<string, { href: string; index: number; titles: string[] }>();
+  for (const anchor of anchors) {
+    const id = anchor.href.match(DETAIL_RE)?.[1];
+    if (!id) continue;
+    const current = grouped.get(id) || { href: anchor.href, index: anchor.index, titles: [] };
+    current.index = Math.min(current.index, anchor.index);
+    const title = meaningfulAnchorTitle(anchor.inner);
+    if (title) current.titles.push(title);
+    grouped.set(id, current);
+  }
+  const entries = [...grouped.entries()].sort((left, right) => left[1].index - right[1].index);
+  const rows: MyAutoListRow[] = [];
+  for (let index = 0; index < entries.length; index++) {
+    const [id, entry] = entries[index];
+    const nextIndex = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 12_000);
+    const card = markup.slice(entry.index, Math.max(entry.index + 1, nextIndex));
+    const text = plainText(card);
+    const title = [...entry.titles].sort((left, right) => right.length - left.length)[0] || "";
+    const { make, model } = deriveMakeModel(title);
+    const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:წ|year)?\b/i)?.[1]);
+    const numberTokens = [...text.matchAll(/(?:^|\s)([0-9]{1,3}(?:[ ,][0-9]{3})+|[0-9]{4,6})(?=\s|$)/g)]
+      .map((match) => integer(match[1]))
+      .filter((value): value is number => Boolean(value && value !== year && value > 2_999 && value < 2_000_000));
+    const price = numberTokens.at(-1);
+    const bodyType = text.match(/\b(Sedan|Hatchback|Jeep|Coupe|Cabriolet|Minivan|Universal|Wagon)\b/i)?.[1];
+    const fuel = text.match(/\b(Petrol|Diesel|Electric|Hybrid|Plug-in Hybrid|LPG|CNG|Hydrogen)\b/i)?.[1];
+    if (!make || !model || !year || !price || COMMERCIAL_RE.test(`${title} ${text.slice(0, 400)}`)) continue;
+    rows.push({
+      id,
+      detailUrl: entry.href,
+      title,
+      make,
+      model,
+      year,
+      price,
+      currency: "GEL",
+      fuel,
+      bodyType,
+      location: text.match(/\b(Tbilisi|Batumi|Rustavi(?: Car Market)?|Kutaisi|Poti|Gori|Kobuleti|Telavi|Georgia)\b/i)?.[1],
+      images: imageUrls(card, pageUrl).slice(0, 8),
+    });
+  }
+  return rows;
+}
+
+export class MyAutoListAdapter implements CatalogSourceAdapter {
+  sourceId = "myauto_georgia_list";
+  market = "georgia" as const;
+  accessMode = "public_html" as const;
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const page = Math.max(1, Number(cursor || 1));
+    const url = `https://www.myauto.ge/en/main?page=${page}`;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
+    try {
+      const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+      const markup = await response.text();
+      if (!response.ok) throw new Error(`myauto_list_http_${response.status}`);
+      const items = parseMyAutoListingMarkup(markup, response.url || url);
+      return {
+        items,
+        nextCursor: items.length ? String(page + 1) : null,
+        finished: !items.length,
+        count: items.length,
+        health: { ok: items.length > 0, message: `MyAuto list parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
+      };
+    } finally { clearTimeout(timeout); }
+  }
+
+  mapStatus(): OfferStatus { return "active"; }
+
+  normalizeOffer(raw: MyAutoListRow): VehicleOffer | null {
+    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl) return null;
+    const now = new Date().toISOString();
+    return normalizeVehicleOfferSpecs({
+      id: stableOfferId(this.sourceId, raw.id),
+      sourceId: this.sourceId,
+      sourceOfferId: raw.id,
+      market: "georgia",
+      offerType: "fixed",
+      status: "active",
+      make: raw.make,
+      model: raw.model,
+      trim: raw.title,
+      year: raw.year,
+      fuel: raw.fuel,
+      bodyType: raw.bodyType,
+      sourcePrice: raw.price,
+      sourceCurrency: raw.currency,
+      priceMode: "fixed",
+      images: [],
+      totalRub: null,
+      calculationStatus: "needs_data",
+      firstSeenAt: now,
+      updatedAt: now,
+      operational: {
+        sourceUrl: raw.detailUrl,
+        sourceVenueName: raw.location || "Georgia",
+        sourcePublishedAt: now,
+        raw: { images: raw.images, parsed: raw, listingBoundImages: true },
+      },
+    } as VehicleOffer) as VehicleOffer;
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const raw = offer.operational.raw as { images?: string[]; parsed?: MyAutoListRow } | undefined;
+    const urls = [...new Set(raw?.images || raw?.parsed?.images || [])];
+    const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    const saved: CatalogImage[] = [];
+    for (const url of urls.slice(0, limit)) {
+      const image = await cacheImageFromUrl(url, "georgia", { headers: { ...HEADERS, referer: offer.operational.sourceUrl || "https://www.myauto.ge/en/main" } }).catch(() => null);
+      if (image && image.size > 8_000) saved.push(image);
+      if (saved.length >= limit) break;
+    }
+    return saved;
+  }
+
+  async healthCheck() {
+    return { ok: true, message: "MyAuto public listing parser", checkedAt: new Date().toISOString() };
+  }
+}
+
+export const myAutoListSource = new MyAutoListAdapter();
