@@ -4,6 +4,7 @@ import test from "node:test";
 
 const probe = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
+const retry = fs.readFileSync(new URL("../scripts/catalog-rebuild-market-retry.mjs", import.meta.url), "utf8");
 const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -58,12 +59,17 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("production uses the proven bounded direct-market pattern with automatic retry", () => {
+test("production retries based on the actual accumulated count", () => {
   assert.match(workflow, /Catalog stable 7 × 250/);
   assert.match(workflow, /timeout-minutes: 110/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "2700000"/);
-  assert.match(workflow, /for attempt in 1 2/);
-  assert.match(workflow, /retrying automatically/);
+  assert.match(workflow, /CATALOG_REBUILD_ATTEMPTS: "3"/);
+  assert.match(workflow, /CATALOG_REBUILD_RETRY_BUDGET_MS: "5040000"/);
+  assert.match(workflow, /npx tsx scripts\/catalog-rebuild-market-retry\.mjs/);
+  assert.match(retry, /for \(let attempt = 1; attempt <= attemptCount/);
+  assert.match(retry, /const existing = await readPayload\(outputFile\)/);
+  assert.match(retry, /accumulated\.set/);
+  assert.match(retry, /all_registered/);
+  assert.match(retry, /process\.exitCode = 2/);
   assert.match(workflow, /Require 250 verified offers/);
   assert.match(workflow, /Require seven complete 250-offer artifacts/);
   assert.match(workflow, /Atomically publish exactly 250 per market/);
