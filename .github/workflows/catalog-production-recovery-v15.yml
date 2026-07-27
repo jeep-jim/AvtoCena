@@ -1,6 +1,7 @@
 name: Catalog stable 7 markets
 run-name: Catalog stable 7 × 250 · ${{ github.sha }}
 
+# Production trigger 2026-07-27: force a fresh seven-market run after the accumulating retry fix.
 # Retry is controlled by catalog-rebuild-market-retry.mjs. It validates the actual
 # number of verified offers after every pass and accumulates unique cars between passes.
 on:
