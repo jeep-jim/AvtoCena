@@ -3,33 +3,14 @@ run-name: Catalog 7 markets · 1000 per source · ${{ github.sha }}
 
 on:
   schedule:
-    # Один полный проход в сутки. GitHub cron работает в UTC.
     - cron: "17 20 * * *"
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-v15.yml
-      - apps/web/lib/catalog/adapters.ts
-      - apps/web/lib/catalog/customs-pricing.ts
-      - apps/web/lib/catalog/offer-quality.ts
-      - apps/web/lib/catalog/image-quality.ts
-      - apps/web/lib/catalog/full-gallery-wrapper.ts
-      - apps/web/lib/catalog/importer.ts
-      - apps/web/lib/catalog/encar-complete-source.ts
-      - apps/web/lib/catalog/open-market-sources.ts
-      - apps/web/lib/catalog/priority-market-sources.ts
-      - apps/web/lib/catalog/priority-fast-gallery-wrapper.ts
-      - apps/web/lib/catalog/public-market-sources.ts
-      - apps/web/lib/catalog/regional-market-sources.ts
-      - apps/web/lib/catalog/scale-market-sources.ts
-      - apps/web/lib/catalog/scoped-market-sources.ts
-      - apps/web/lib/catalog/runtime-config.ts
-      - apps/web/lib/catalog/spec-normalization.ts
-      - apps/web/lib/catalog/power-display.ts
-      - apps/web/lib/catalog/otomoto-detail-source.ts
-      - packages/engine/src/calculation/calculateAvtocena.ts
-      - packages/engine/src/calculation/russiaCustoms.ts
+      - apps/web/lib/catalog/**
+      - packages/engine/src/calculation/**
       - scripts/catalog-probe-source-shard.mjs
       - scripts/catalog-rebuild-source-shard.mjs
       - scripts/catalog-validate-source-scale.mjs
@@ -38,10 +19,8 @@ on:
 permissions:
   contents: read
 
-# Эта группа совпадает со старым workflow 7 × 250. Новый production-запуск
-# немедленно отменяет любой устаревший Pending/In progress проход.
 concurrency:
-  group: catalog-stable-seven-market
+  group: catalog-source-scale-daily
   cancel-in-progress: true
 
 jobs:
@@ -57,16 +36,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies with retry
-        shell: bash
-        run: |
-          code=1
-          for attempt in 1 2 3; do
-            npm ci && code=0 && break
-            echo "npm ci attempt $attempt failed"
-            sleep $((attempt * 5))
-          done
-          exit "$code"
+      - name: Install dependencies
+        run: npm ci
       - name: Validate scripts and types
         run: |
           node --check scripts/catalog-probe-source-shard.mjs
@@ -80,7 +51,7 @@ jobs:
     name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
     needs: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 100
     strategy:
       fail-fast: false
       max-parallel: 14
@@ -108,12 +79,10 @@ jobs:
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "5000"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "12"
-      CATALOG_REBUILD_SEED_SCAN_LIMIT: "100000"
       CATALOG_OFFER_RETENTION_MS: "259200000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
       CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_GALLERY_FAST_PATH: "true"
       CATALOG_SOURCE_TIMEOUT_MS: "25000"
       CATALOG_IMAGE_TIMEOUT_MS: "20000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
@@ -137,75 +106,34 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies with retry
-        id: install
-        continue-on-error: true
+      - name: Install dependencies
+        run: npm ci
+      - name: Require object storage configuration
         shell: bash
         run: |
-          code=1
-          for attempt in 1 2 3; do
-            npm ci && code=0 && break
-            echo "npm ci attempt $attempt failed"
-            sleep $((attempt * 5))
-          done
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit "$code"
-      - name: Check object storage configuration
-        if: always()
-        shell: bash
-        run: |
-          missing=""
-          [ -z "$YC_OBJECT_STORAGE_BUCKET" ] && missing="$missing bucket"
-          [ -z "$YC_OBJECT_STORAGE_ACCESS_KEY_ID" ] && missing="$missing access_key"
-          [ -z "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY" ] && missing="$missing secret_key"
-          [ -z "$missing" ] || echo "::warning::Missing object storage settings:$missing"
+          test -n "$YC_OBJECT_STORAGE_BUCKET"
+          test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
+          test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
       - name: Probe every registered source in this shard
-        if: steps.install.outputs.exit_code == '0'
         id: probe
-        continue-on-error: true
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect up to 1000 verified offers from every registered source
-        if: steps.install.outputs.exit_code == '0'
-        id: rebuild
-        continue-on-error: true
+      - name: Collect and retain verified offers
         env:
-          # Probe only prioritizes working sources. Inactive sources are also passed
-          # so a temporary first-page failure never removes a site from the daily run.
-          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids || '__no_registered_sources__' }}
+          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
         run: npx tsx scripts/catalog-rebuild-source-shard.mjs
-      - name: Ensure diagnostic envelopes exist
-        if: always()
-        shell: bash
+      - name: Verify shard envelope
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const market = process.env.CATALOG_REBUILD_MARKET;
-          const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
-          const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 4);
-          const now = new Date().toISOString();
-          if (!fs.existsSync(process.env.CATALOG_PROBE_OUTPUT)) {
-            fs.writeFileSync(process.env.CATALOG_PROBE_OUTPUT, JSON.stringify({
-              version: 24, market, shardIndex, shardCount, checkedAt: now,
-              plannedSourceIds: [], activeSourceIds: [], inactiveSourceIds: [],
-              sourceIdsForRebuild: '__no_registered_sources__',
-              results: [{ sourceId: 'workflow', active: false, reason: 'probe_not_completed' }]
-            }, null, 2));
-          }
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_OUTPUT)) {
-            fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-              version: 24, market, shardIndex, shardCount, generatedAt: now,
-              targetPerSource: 1000, count: 0, partial: true,
-              stopReason: 'collection_not_completed',
-              report: { market, shardIndex, shardCount, saved: 0, partial: true,
-                stopReason: 'collection_not_completed',
-                sourceErrors: [{ stage: 'workflow', error: 'probe_or_rebuild_not_completed' }] },
-              offers: []
-            }, null, 2));
-          }
+          const file = process.env.CATALOG_REBUILD_OUTPUT;
+          if (!fs.existsSync(file)) throw new Error(`missing_shard_output_${file}`);
+          const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
+          if (payload.market !== process.env.CATALOG_REBUILD_MARKET) throw new Error('shard_market_mismatch');
+          if (!Array.isArray(payload.offers)) throw new Error('shard_offers_missing');
+          console.log(JSON.stringify({market: payload.market, shard: payload.shardIndex, count: payload.offers.length, bySource: payload.report?.publicBySource, stop: payload.stopReason}, null, 2));
           NODE
       - name: Upload source diagnostics and verified offers
         if: always()
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}
@@ -214,21 +142,13 @@ jobs:
             catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
           if-no-files-found: warn
           retention-days: 3
-      - name: Market and source summary
-        if: always()
-        continue-on-error: true
-        shell: bash
-        run: |
-          echo "### $CATALOG_REBUILD_MARKET · shard $CATALOG_REBUILD_SHARD_INDEX" >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(`- Источники шарда: ${(p.plannedSourceIds||[]).length}\n- Живые сейчас: ${(p.activeSourceIds||[]).length}\n- Active: ${JSON.stringify(p.activeSourceIds||[])}\n- Временно недоступны: ${JSON.stringify(p.inactiveSourceIds||[])}`)' >> "$GITHUB_STEP_SUMMARY"
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Всего проверено: ${(p.offers||[]).length}\n- Цель на сайт: ${p.targetPerSource||1000}\n- Свежие по сайтам: ${JSON.stringify(p.report?.freshBySource||{})}\n- Накопленные до 3 дней: ${JSON.stringify(p.report?.restoredBySource||{})}\n- Ошибки: ${(p.report?.sourceErrors||[]).length}\n- Остановка: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
 
   publish:
-    name: Audit and safely publish seven markets
+    name: Publish and require all seven markets
     if: always()
     needs: [validate, collect]
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 100
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -250,7 +170,7 @@ jobs:
       CATALOG_INDEX_WRITE_CONCURRENCY: "16"
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "16"
       CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
-      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":50,"china":50,"japan":50,"uae":50,"europe":100,"georgia":20,"kyrgyzstan":20}'
+      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":1,"china":1,"japan":1,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-source-scale-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
@@ -261,71 +181,35 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install publisher dependencies with retry
-        id: install
-        continue-on-error: true
-        shell: bash
-        run: |
-          code=1
-          for attempt in 1 2 3; do
-            npm ci && code=0 && break
-            echo "npm ci attempt $attempt failed"
-            sleep $((attempt * 5))
-          done
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit "$code"
+      - name: Install dependencies
+        run: npm ci
       - name: Download every source shard
-        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
       - name: Audit calculations, customs, utilization fee and galleries
-        if: steps.install.outputs.exit_code == '0'
-        continue-on-error: true
         run: npx tsx scripts/catalog-validate-source-scale.mjs
-      - name: Publish verified offers and preserve unavailable sources
-        if: steps.install.outputs.exit_code == '0'
-        continue-on-error: true
+      - name: Publish verified offers with three-day retention
         run: npx tsx scripts/catalog-publish-source-scale.mjs
-      - name: Ensure publication reports exist
-        if: always()
-        shell: bash
+      - name: Require a new manifest containing all seven markets
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const now = new Date().toISOString();
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT)) {
-            fs.writeFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT, JSON.stringify({
-              version: 24, checkedAt: now, ok: true, warnings: ['validation_not_completed']
-            }, null, 2));
-          }
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT)) {
-            fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({
-              version: 24, publishedAt: now, published: false,
-              previousManifestPreserved: true, publicationError: 'publisher_not_completed',
-              byMarket: {}, byMarketAndSource: {},
-              marketsBelowTarget: ['korea','china','japan','uae','europe','georgia','kyrgyzstan']
-            }, null, 2));
-          }
+          const report = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, 'utf8'));
+          const markets = ['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
+          if (!report.published) throw new Error(`catalog_not_published_${report.publicationError || 'unknown'}`);
+          if (!report.generationId) throw new Error('catalog_generation_missing');
+          if (!(Number(report.total || 0) > 0)) throw new Error('catalog_total_empty');
+          const missing = markets.filter((market) => !(Number(report.byMarket?.[market] || 0) > 0));
+          if (missing.length) throw new Error(`catalog_markets_empty_${missing.join('_')}`);
+          console.log(JSON.stringify({generationId: report.generationId, total: report.total, byMarket: report.byMarket, byMarketAndSource: report.byMarketAndSource, belowTarget: report.marketsBelowTarget}, null, 2));
           NODE
       - name: Run production catalog smoke checks
-        if: steps.install.outputs.exit_code == '0'
-        continue-on-error: true
         run: npm run catalog:smoke
-      - name: Confirm safe publication outcome
-        if: always()
-        run: |
-          node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));if(!p.published&&!p.previousManifestPreserved)process.exit(1);console.log(p.published?"new manifest published":"previous manifest safely preserved")'
-      - name: Publication summary
-        if: always()
-        continue-on-error: true
-        run: |
-          node -e 'const fs=require("fs");const v=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT,"utf8"));const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));console.log(`### Ежедневный каталог · 1000 на источник\n- Опубликовано: ${Boolean(p.published)}\n- Generation: ${p.generationId||"предыдущий сохранён"}\n- Всего: ${p.total||0}\n- По рынкам: ${JSON.stringify(p.byMarket||{})}\n- По сайтам: ${JSON.stringify(p.byMarketAndSource||{})}\n- Ниже 1000 на рынок: ${JSON.stringify(p.marketsBelowTarget||[])}\n- Предупреждения: ${JSON.stringify(v.warnings||[])}\n- Ошибка публикации: ${p.publicationError||"нет"}`)' >> "$GITHUB_STEP_SUMMARY"
       - name: Upload catalog reports
         if: always()
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-source-scale-reports

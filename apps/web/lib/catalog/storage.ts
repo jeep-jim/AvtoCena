@@ -14,6 +14,9 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?kcar\.com$/i,
   /^(.+\.)?kcarcdn\.com$/i,
   /^(.+\.)?kcarglobal\.com$/i,
+  /^(.+\.)?autowini\.com$/i,
+  /^(.+\.)?kbchachacha\.com$/i,
+  /^(.+\.)?bobaedream\.co\.kr$/i,
   /^(.+\.)?che168\.com$/i,
   /^(.+\.)?autohome\.com\.cn$/i,
   /^(.+\.)?autoimg\.cn$/i,
@@ -62,12 +65,20 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?dubizzle\.com$/i,
   /^(.+\.)?dubizzlecdn\.com$/i,
   /^(.+\.)?dubicdn\.com$/i,
+  /^(.+\.)?yallamotor\.com$/i,
+  /^(.+\.)?carswitch\.com$/i,
   /^(.+\.)?myauto\.ge$/i,
   /^(.+\.)?my\.ge$/i,
   /^(.+\.)?autopapa\.ge$/i,
+  /^(.+\.)?auto\.ge$/i,
+  /^(.+\.)?ss\.ge$/i,
+  /^(.+\.)?mymarket\.ge$/i,
   /^(.+\.)?mashina\.kg$/i,
   /^(.+\.)?elcat\.kg$/i,
   /^(.+\.)?lalafo\.kg$/i,
+  /^(.+\.)?bazar\.kg$/i,
+  /^(.+\.)?turbo\.kg$/i,
+  /^(.+\.)?o\.kg$/i,
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
   /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
   /^(.+\.)?mobile\.de$/i,
@@ -107,7 +118,6 @@ export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
-
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }

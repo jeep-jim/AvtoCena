@@ -20,7 +20,7 @@ const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-qual
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
 
-test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
+ test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
@@ -33,11 +33,10 @@ test("source-scale catalog keeps 1000-offer quota per source and supports at lea
 });
 
 test("daily workflow cancels obsolete runs before safe publication", () => {
-  assert.match(workflow, /group: catalog-stable-seven-market/);
+  assert.match(workflow, /group: catalog-source-scale-daily/);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /max-parallel: 14/);
   assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
-  assert.doesNotMatch(workflow, /group: catalog-seven-market-recovery/);
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
@@ -73,16 +72,21 @@ test("probe and rebuild use the complete registered registry instead of a curate
   assert.match(probeScript, /registeredSourceCount/);
   assert.match(probeScript, /Probe — диагностика и приоритизация, а не фильтр/);
   assert.match(rebuildScript, /catalogImportSources\s*\.filter/);
-  assert.match(rebuildScript, /plannedAll/);
-  assert.match(rebuildScript, /orderedConfigured/);
+  assert.match(rebuildScript, /registered/);
+  assert.match(rebuildScript, /allSources/);
+  assert.match(rebuildScript, /configured/);
 });
 
-test("rebuild persists a cursor for every source and advances across repeated runs", () => {
+test("rebuild restores retained offers before crawling and persists a cursor for every source", () => {
+  assert.match(rebuildScript, /retention_loaded/);
+  assert.match(rebuildScript, /readMarketOffers/);
+  assert.match(rebuildScript, /readAllOffersForMaintenance/);
   assert.match(rebuildScript, /catalog\/source-cursors/);
-  assert.match(rebuildScript, /readCursorState/);
-  assert.match(rebuildScript, /saveCursorState/);
+  assert.match(rebuildScript, /storage\.readJson/);
+  assert.match(rebuildScript, /storage\.writeJson/);
   assert.match(rebuildScript, /initialCursor/);
   assert.match(rebuildScript, /pagesVisited/);
+  assert.match(rebuildScript, /enrichOfferWithVehicleKnowledge/);
 });
 
 test("requested high-volume public sources are registered", () => {

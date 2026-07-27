@@ -31,12 +31,14 @@ test("listing photos are cached before optional detail enrichment", () => {
   assert.match(gallery, /Math\.min\(30/);
 });
 
-test("temporary source failures still allow accumulated verified retention", () => {
-  assert.match(rebuild, /retentionSourceIds/);
-  assert.match(rebuild, /readCursorState/);
-  assert.match(rebuild, /saveCursorState/);
-  assert.match(rebuild, /requiredBeforeNetwork = minimumImages/);
-  assert.match(rebuild, /revalidated_listing/);
+test("temporary source failures retain verified offers before any network crawl", () => {
+  assert.match(rebuild, /retention_loaded/);
+  assert.match(rebuild, /readMarketOffers/);
+  assert.match(rebuild, /readAllOffersForMaintenance/);
+  assert.match(rebuild, /firstSeen/);
+  assert.match(rebuild, /storage\.readJson/);
+  assert.match(rebuild, /storage\.writeJson/);
+  assert.match(rebuild, /enrichOfferWithVehicleKnowledge/);
   assert.doesNotMatch(rebuild, /connectedMarketSources/);
 });
 
@@ -60,17 +62,17 @@ test("publisher accumulates verified current markets and keeps previous manifest
 
 test("production retries every registered source through persistent source shards", () => {
   assert.match(workflow, /Catalog source-scale daily/);
-  assert.match(workflow, /timeout-minutes: 90/);
+  assert.match(workflow, /timeout-minutes: 100/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
-  assert.match(rebuild, /readCursorState/);
-  assert.match(rebuild, /saveCursorState/);
   assert.match(rebuild, /targetPerSource/);
-  assert.match(rebuild, /retentionSourceIds/);
-  assert.match(workflow, /Publish verified offers and preserve unavailable sources/);
+  assert.match(rebuild, /catalog\/source-cursors/);
+  assert.match(rebuild, /retained/);
+  assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
+  assert.match(workflow, /Require a new manifest containing all seven markets/);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /Probe every registered source in this shard/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
