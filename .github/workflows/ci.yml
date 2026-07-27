@@ -100,3 +100,38 @@ jobs:
       - name: Fail on production build errors
         if: steps.production_build.outputs.exit_code != '0'
         run: exit 1
+
+  catalog_live_probe:
+    name: Live probe ${{ matrix.market }} shard ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        market: [china, japan, georgia]
+        shard: [0, 1, 2, 3]
+    env:
+      CATALOG_REBUILD_MARKET: ${{ matrix.market }}
+      CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
+      CATALOG_REBUILD_SHARD_COUNT: "4"
+      CATALOG_PROBE_TIMEOUT_MS: "12000"
+      CATALOG_PROBE_ATTEMPTS: "1"
+      CATALOG_PROBE_CONCURRENCY: "6"
+      CATALOG_SOURCE_TIMEOUT_MS: "12000"
+      CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe live source registry
+        run: npx tsx scripts/catalog-probe-source-shard.mjs
+      - name: Print compact probe result
+        if: always()
+        run: |
+          if [ -s "$CATALOG_PROBE_OUTPUT" ]; then
+            node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(JSON.stringify({market:p.market,shard:p.shardIndex,planned:p.plannedSourceIds,active:p.activeSourceIds,inactive:p.inactiveSourceIds,results:p.results},null,2))'
+          fi
