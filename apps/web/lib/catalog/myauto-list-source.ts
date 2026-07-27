@@ -20,7 +20,7 @@ const KNOWN_MAKES = [
   "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
 ].sort((left, right) => right.length - left.length);
 
-type MyAutoListRow = {
+export type MyAutoListRow = {
   id: string;
   detailUrl: string;
   title: string;
@@ -71,13 +71,14 @@ function meaningfulAnchorTitle(inner: string) {
   const value = plainText(inner);
   return value.length >= 3 && value.length <= 100 && !/^(?:Super VIP|VIP|Image|Add)$/i.test(value) ? value : "";
 }
-function nearestCard(markup: string, index: number, nextIndex: number) {
-  return markup.slice(Math.max(0, index - 1_500), Math.min(markup.length, Math.max(index + 4_500, nextIndex)));
+function isDetailHref(value: string) {
+  try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }
 }
-function parseRows(markup: string, pageUrl: string) {
+
+export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAutoListRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absoluteUrl(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
-    .filter((row) => DETAIL_RE.test(new URL(row.href).pathname));
+    .filter((row) => isDetailHref(row.href));
   const grouped = new Map<string, { href: string; index: number; titles: string[] }>();
   for (const anchor of anchors) {
     const id = anchor.href.match(DETAIL_RE)?.[1];
@@ -92,7 +93,8 @@ function parseRows(markup: string, pageUrl: string) {
   const rows: MyAutoListRow[] = [];
   for (let index = 0; index < entries.length; index++) {
     const [id, entry] = entries[index];
-    const card = nearestCard(markup, entry.index, entries[index + 1]?.[1].index || entry.index + 8_000);
+    const nextIndex = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 12_000);
+    const card = markup.slice(entry.index, Math.max(entry.index + 1, nextIndex));
     const text = plainText(card);
     const title = [...entry.titles].sort((left, right) => right.length - left.length)[0] || "";
     const { make, model } = deriveMakeModel(title);
@@ -136,7 +138,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
       const markup = await response.text();
       if (!response.ok) throw new Error(`myauto_list_http_${response.status}`);
-      const items = parseRows(markup, response.url || url);
+      const items = parseMyAutoListingMarkup(markup, response.url || url);
       return {
         items,
         nextCursor: items.length ? String(page + 1) : null,
