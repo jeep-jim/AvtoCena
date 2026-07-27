@@ -7,6 +7,7 @@ const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fa
 const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const retry = fs.readFileSync(new URL("../scripts/catalog-rebuild-market-retry.mjs", import.meta.url), "utf8");
 
  test("live high-volume sources use current listing and detail routes", () => {
   assert.ok(priority.includes('sourceId: "guazi_china_open"'));
@@ -25,15 +26,19 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
   assert.match(priority, /truck\|dump\|tipper\|bus/);
 });
 
-test("stable production returns to one direct collector per market", () => {
+test("stable production uses one accumulating collector per market", () => {
   assert.match(workflow, /Catalog stable 7 × 250/);
   assert.match(workflow, /max-parallel: 7/);
-  assert.match(workflow, /npx tsx scripts\/catalog-rebuild-market\.mjs/);
+  assert.match(workflow, /npx tsx scripts\/catalog-rebuild-market-retry\.mjs/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET: "250"/);
+  assert.match(workflow, /CATALOG_REBUILD_ATTEMPTS: "3"/);
   assert.match(workflow, /sourceIds: encar_direct/);
   assert.match(workflow, /sourceIds: guazi_china_ru,guazi_china_export,che168_china_exact/);
   assert.match(workflow, /sourceIds: myauto_georgia_list,myauto_georgia_exact,autopapa_georgia_open/);
   assert.match(workflow, /sourceIds: mashina_kyrgyzstan_exact/);
+  assert.match(retry, /accumulate_unique_offers_across_attempts/);
+  assert.match(retry, /all_registered/);
+  assert.match(retry, /finalCount < target/);
   assert.doesNotMatch(workflow, /shard: \[0, 1, 2, 3\]/);
   assert.doesNotMatch(workflow, /catalog-probe-source-shard/);
 });
