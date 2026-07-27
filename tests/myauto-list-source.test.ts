@@ -1,0 +1,40 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { MyAutoListAdapter, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
+
+const markup = `
+<section>
+  <a href="/en/pr/122724917/bmw-x5"><img src="https://static.myauto.ge/photos/x5-main.webp" alt="BMW X5"></a>
+  <a href="/en/pr/122724917/bmw-x5">BMW X5</a>
+  <div>2019 year · Jeep · Petrol · Tbilisi · 88 000 km · 65 000</div>
+  <a href="/en/pr/122433509/toyota-camry"><img data-src="https://static.myauto.ge/photos/camry-main.jpg" alt="Toyota Camry"></a>
+  <a href="/en/pr/122433509/toyota-camry">Toyota Camry</a>
+  <div>2021 year · Sedan · Hybrid · Rustavi Car Market · 42 000 km · 72 500</div>
+  <a href="/en/pr/122000001/ford-transit"><img src="https://static.myauto.ge/photos/transit.jpg"></a>
+  <a href="/en/pr/122000001/ford-transit">Ford Transit Commercial Minibus</a>
+  <div>2020 year · Diesel · 110 000</div>
+</section>`;
+
+test("MyAuto listing parser extracts passenger cars without opening every detail page", () => {
+  const rows = parseMyAutoListingMarkup(markup, "https://www.myauto.ge/en/main?page=1");
+  assert.equal(rows.length, 2);
+  assert.deepEqual(rows.map((row) => `${row.make} ${row.model}`), ["BMW X5", "Toyota Camry"]);
+  assert.equal(rows[0].price, 65_000);
+  assert.equal(rows[1].price, 72_500);
+  assert.equal(rows[0].images[0], "https://static.myauto.ge/photos/x5-main.webp");
+  assert.equal(rows[1].location, "Rustavi Car Market");
+});
+
+test("MyAuto normalized offer is ready for knowledge enrichment and exact calculation", () => {
+  const adapter = new MyAutoListAdapter();
+  const row = parseMyAutoListingMarkup(markup, "https://www.myauto.ge/en/main?page=1")[0];
+  const offer = adapter.normalizeOffer(row);
+  assert.ok(offer);
+  assert.equal(offer?.sourceId, "myauto_georgia_list");
+  assert.equal(offer?.market, "georgia");
+  assert.equal(offer?.sourceCurrency, "GEL");
+  assert.equal(offer?.sourcePrice, 65_000);
+  assert.equal(offer?.make, "BMW");
+  assert.equal(offer?.model, "X5");
+  assert.equal(offer?.operational?.sourceUrl, "https://www.myauto.ge/en/pr/122724917/bmw-x5");
+});
