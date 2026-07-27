@@ -135,3 +135,10 @@ jobs:
           if [ -s "$CATALOG_PROBE_OUTPUT" ]; then
             node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(JSON.stringify({market:p.market,shard:p.shardIndex,planned:p.plannedSourceIds,active:p.activeSourceIds,inactive:p.inactiveSourceIds,results:p.results},null,2))'
           fi
+      - name: Upload probe result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-probe-${{ matrix.market }}-${{ matrix.shard }}
+          path: ${{ env.CATALOG_PROBE_OUTPUT }}
+          if-no-files-found: warn
