@@ -13,7 +13,7 @@ test("workflow audits every available source shard before safe atomic publicatio
   const download = workflow.indexOf("Download every source shard");
   const audit = workflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
   const publish = workflow.indexOf("npx tsx scripts/catalog-publish-source-scale.mjs");
-  const finalGate = workflow.indexOf("Confirm safe publication outcome");
+  const finalGate = workflow.indexOf("Require a new manifest containing all seven markets");
   assert.ok(download >= 0, "all available source shards must be downloaded");
   assert.ok(audit > download, "calculation and gallery audit must follow artifact download");
   assert.ok(publish > audit, "publisher must run after the source-scale audit");
@@ -22,7 +22,10 @@ test("workflow audits every available source shard before safe atomic publicatio
   assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
-  assert.match(workflow, /if\(!p\.published&&!p\.previousManifestPreserved\)process\.exit\(1\)/);
+  assert.match(workflow, /if \(!report\.published\) throw new Error/);
+  assert.match(workflow, /catalog_markets_empty_/);
+  assert.match(workflow, /markets\.filter\(\(market\) => !\(Number\(report\.byMarket\?\.\[market\] \|\| 0\) > 0\)\)/);
+  assert.doesNotMatch(workflow, /previousManifestPreserved\)process\.exit\(1\)/);
   assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
 });
 
