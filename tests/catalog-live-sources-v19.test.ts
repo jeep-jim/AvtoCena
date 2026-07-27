@@ -39,13 +39,13 @@ test("fresh source pages are processed before accumulated restored stock", () =>
   assert.match(rebuild, /saveCursorState/);
 });
 
-test("v22 probes the complete registered shard and does not disable temporarily blocked sources", () => {
+test("v23 probes the complete registered shard and does not disable temporarily blocked sources", () => {
   assert.match(probe, /priorityPlan/);
   assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /registeredSourceCount/);
   assert.match(probe, /sourceIdsForRebuild/);
   assert.match(probe, /Probe — диагностика и приоритизация, а не фильтр/);
-  assert.match(workflow, /Catalog source-scale v22/);
+  assert.match(workflow, /Catalog source-scale v23/);
   assert.match(workflow, /Probe every registered source in this shard/);
   assert.match(workflow, /CATALOG_REBUILD_SOURCE_IDS: \$\{\{ steps\.probe\.outputs\.source_ids \|\| '__no_registered_sources__' \}\}/);
   assert.match(workflow, /CATALOG_PROBE_TIMEOUT_MS: "10000"/);
@@ -61,6 +61,7 @@ test("priority galleries cache listing photos before requesting detail pages", (
   assert.match(fullGallery, /listingImages/);
   assert.match(fullGallery, /fastPath/);
   assert.match(importer, /priorityFastGallery/);
+  assert.match(importer, /myAutoListSource/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "1209600000"/);
 });
