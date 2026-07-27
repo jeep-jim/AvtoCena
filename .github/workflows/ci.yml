@@ -32,9 +32,11 @@ jobs:
         run: node --import tsx --test tests/catalog-image-quality.test.ts
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
-      - name: Catalog live sources v20 tests
+      - name: Catalog live sources v23 tests
         run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
-      - name: Catalog probe v20 tests
+      - name: MyAuto Georgia listing tests
+        run: node --import tsx --test tests/myauto-list-source.test.ts
+      - name: Catalog probe v23 tests
         run: node --import tsx --test tests/catalog-probe-source-shard.test.ts
       - name: Catalog publication gate tests
         run: node --import tsx --test tests/catalog-publication-gate.test.ts
