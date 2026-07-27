@@ -73,7 +73,8 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         };
       }
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
-      return { ...market, items: result.items, total: result.total, page: result.page, pageSize: result.pageSize };
+      const repriced = await applyActiveBusinessPricingBatch(result.items as any[]);
+      return { ...market, items: repriced, total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
