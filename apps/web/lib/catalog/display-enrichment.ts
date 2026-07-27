@@ -1,3 +1,4 @@
+import { applyActiveBusinessPricing } from "./live-business-pricing";
 import type { VehicleOffer } from "./types";
 import {
   enrichOfferWithVehicleKnowledge,
@@ -90,7 +91,7 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
     || meaningful(consensus(variants.map((variant) => variant.bodyType)))
     || match?.model.bodyTypes?.[0];
 
-  return {
+  const displayEnriched = {
     ...enriched,
     engineCc: electric ? undefined : engineCc || enriched.engineCc,
     fuel: fuel || enriched.fuel,
@@ -106,4 +107,8 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
       },
     },
   } as T;
+
+  // Сохранённая в CRM версия рынка применяется при каждом открытии карточки.
+  // Поэтому изменение комиссии или логистики видно сразу, даже до фонового reindex.
+  return applyActiveBusinessPricing(displayEnriched);
 }
