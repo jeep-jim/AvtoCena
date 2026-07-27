@@ -4,7 +4,6 @@ import test from "node:test";
 
 const probe = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
-const retry = fs.readFileSync(new URL("../scripts/catalog-rebuild-market-retry.mjs", import.meta.url), "utf8");
 const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -59,21 +58,21 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("production retries based on the actual accumulated count", () => {
-  assert.match(workflow, /Catalog stable 7 × 250/);
-  assert.match(workflow, /timeout-minutes: 110/);
-  assert.match(workflow, /CATALOG_REBUILD_ATTEMPTS: "3"/);
-  assert.match(workflow, /CATALOG_REBUILD_RETRY_BUDGET_MS: "5040000"/);
-  assert.match(workflow, /npx tsx scripts\/catalog-rebuild-market-retry\.mjs/);
-  assert.match(retry, /for \(let attempt = 1; attempt <= attemptCount/);
-  assert.match(retry, /const existing = await readPayload\(outputFile\)/);
-  assert.match(retry, /accumulated\.set/);
-  assert.match(retry, /all_registered/);
-  assert.match(retry, /process\.exitCode = 2/);
-  assert.match(workflow, /Require 250 verified offers/);
-  assert.match(workflow, /Require seven complete 250-offer artifacts/);
-  assert.match(workflow, /Atomically publish exactly 250 per market/);
-  assert.match(workflow, /Audit CRM profiles, knowledge, customs and utilization fee/);
+test("production retries every registered source through persistent source shards", () => {
+  assert.match(workflow, /Catalog source-scale daily/);
+  assert.match(workflow, /timeout-minutes: 90/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
+  assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
+  assert.match(rebuild, /readCursorState/);
+  assert.match(rebuild, /saveCursorState/);
+  assert.match(rebuild, /targetPerSource/);
+  assert.match(rebuild, /retentionSourceIds/);
+  assert.match(workflow, /Publish verified offers and preserve unavailable sources/);
+  assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
   assert.match(workflow, /cancel-in-progress: true/);
-  assert.doesNotMatch(workflow, /Probe every registered source in this shard/);
+  assert.match(workflow, /Probe every registered source in this shard/);
+  assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
+  assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
 });

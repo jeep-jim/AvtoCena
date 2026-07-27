@@ -32,36 +32,36 @@ test("source-scale catalog keeps 1000-offer quota per source and supports at lea
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("stable workflow cancels obsolete runs before atomic publication", () => {
+test("daily workflow cancels obsolete runs before safe publication", () => {
   assert.match(workflow, /group: catalog-stable-seven-market/);
   assert.match(workflow, /cancel-in-progress: true/);
-  assert.match(workflow, /max-parallel: 7/);
+  assert.match(workflow, /max-parallel: 14/);
+  assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
   assert.doesNotMatch(workflow, /group: catalog-seven-market-recovery/);
+  assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("stable workflow directly rebuilds 250 cars for seven markets with up to 30 photos", () => {
-  assert.match(workflow, /market: korea/);
-  assert.match(workflow, /market: china/);
-  assert.match(workflow, /market: japan/);
-  assert.match(workflow, /market: uae/);
-  assert.match(workflow, /market: europe/);
-  assert.match(workflow, /market: georgia/);
-  assert.match(workflow, /market: kyrgyzstan/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET: "250"/);
+test("daily workflow targets 1000 verified cars per source for all seven markets", () => {
+  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /Require published 7 × 250 manifest/);
-  assert.doesNotMatch(workflow, /CATALOG_REBUILD_SHARD_COUNT/);
+  assert.match(workflow, /retention-days: 3/);
+  assert.match(workflow, /cron: "17 20 \* \* \*"/);
+  assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
+  assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
 });
 
-test("all seven markets are backed by registered production adapters", () => {
+test("all seven markets have at least three independent registered adapters", () => {
   const byMarket = new Map(PUBLIC_CATALOG_MARKETS.map((market) => [market, new Set<string>()]));
   for (const source of catalogImportSources) {
     if (source.market === "multi") continue;
     byMarket.get(source.market)?.add(source.sourceId);
   }
   for (const market of PUBLIC_CATALOG_MARKETS) {
-    assert.ok((byMarket.get(market)?.size || 0) > 0, `${market} must have at least one registered source`);
+    assert.ok((byMarket.get(market)?.size || 0) >= 3, `${market} must have at least three registered sources`);
   }
   assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
   assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
@@ -88,9 +88,21 @@ test("rebuild persists a cursor for every source and advances across repeated ru
 test("requested high-volume public sources are registered", () => {
   const ids = new Set(scaleMarketSources.map((source) => source.sourceId));
   for (const sourceId of [
-    "dubizzle_uae_open",
+    "autowini_korea_open",
+    "kbchachacha_korea_open",
+    "bobaedream_korea_open",
     "kcar_korea_open",
+    "dubizzle_uae_open",
+    "yallamotor_uae_open",
+    "carswitch_uae_open",
+    "auto_georgia_open",
     "autopapa_georgia_open",
+    "ss_georgia_open",
+    "mymarket_georgia_open",
+    "lalafo_kyrgyzstan_open",
+    "bazar_kyrgyzstan_open",
+    "turbo_kyrgyzstan_open",
+    "omarket_kyrgyzstan_open",
     "jpauc_japan_past_open",
     "carvector_japan_stat_open",
     "jpcenter_japan_catalog_open",

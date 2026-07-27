@@ -11,8 +11,69 @@ function pageQuery(base: string, page: number, key = "page") {
  * Дополнительные публичные витрины для масштабного каталога.
  * Источники, требующие логин/платную подписку, сюда намеренно не включаются:
  * для них используется partner-feed после официального подключения.
+ *
+ * Каждый источник изолирован: временный 403, CAPTCHA или изменение верстки
+ * фиксируется probe-отчётом и не останавливает остальные сайты и рынки.
  */
 const configs: OpenMarketSourceConfig[] = [
+  // Korea: Encar and K Car have dedicated adapters. These public inventories
+  // bring the market to five independent sites and remain optional when blocked.
+  {
+    sourceId: "autowini_korea_open",
+    market: "korea",
+    label: "Autowini Korea",
+    baseUrl: "https://www.autowini.com",
+    currency: "USD",
+    detailPattern: /\/Cars\/[A-Z0-9_-]+\/cars-detail|\/cars\/[A-Z0-9_-]+\/cars-detail/i,
+    listUrls: (page) => [
+      pageQuery("https://www.autowini.com/en/cars", page),
+      pageQuery("https://www.autowini.com/Cars/list", page),
+      pageQuery("https://m.autowini.com/en", page),
+    ],
+  },
+  {
+    sourceId: "kbchachacha_korea_open",
+    market: "korea",
+    label: "KB ChaChaCha Korea",
+    baseUrl: "https://www.kbchachacha.com",
+    currency: "KRW",
+    detailPattern: /\/public\/(?:car|search)\/.*(?:detail|view).*\.kbc|(?:carSeq|vehicleId)=\d+/i,
+    listUrls: (page) => [
+      pageQuery("https://www.kbchachacha.com/public/search/main.kbc", page),
+    ],
+  },
+  {
+    sourceId: "bobaedream_korea_open",
+    market: "korea",
+    label: "Bobaedream Korea",
+    baseUrl: "https://www.bobaedream.co.kr",
+    currency: "KRW",
+    detailPattern: /\/mycar\/.*(?:view|detail).*\.php|(?:no|carNo|carSeq)=\d+/i,
+    listUrls: (page) => [
+      pageQuery("https://www.bobaedream.co.kr/mycar/mycar_list.php", page),
+      pageQuery("https://m.bobaedream.co.kr/mycar/mlist", page),
+    ],
+  },
+
+  // UAE: DubiCars, Dubizzle and BE FORWARD are already registered elsewhere.
+  {
+    sourceId: "yallamotor_uae_open",
+    market: "uae",
+    label: "YallaMotor UAE",
+    baseUrl: "https://uae.yallamotor.com",
+    currency: "AED",
+    detailPattern: /\/used-cars\/(?!search(?:[/?#]|$)|(?:dubai|abu-dhabi|sharjah|ajman)(?:[/?#]|$))[^?#]{8,}/i,
+    listUrls: (page) => [pageQuery("https://uae.yallamotor.com/used-cars", page)],
+  },
+  {
+    sourceId: "carswitch_uae_open",
+    market: "uae",
+    label: "CarSwitch UAE",
+    baseUrl: "https://carswitch.com",
+    currency: "AED",
+    detailPattern: /\/uae\/(?:used-car|used-cars)\/(?!search(?:[/?#]|$))[^?#]{8,}/i,
+    listUrls: (page) => [pageQuery("https://carswitch.com/uae/used-cars/search", page)],
+  },
   {
     sourceId: "dubizzle_uae_open",
     market: "uae",
@@ -25,17 +86,42 @@ const configs: OpenMarketSourceConfig[] = [
       pageQuery("https://uae.dubizzle.com/en/motors/used-cars/", page),
     ],
   },
+
+  // Georgia: MyAuto and AutoPapa have dedicated adapters.
   {
-    sourceId: "kcar_korea_open",
-    market: "korea",
-    label: "K Car Korea",
-    baseUrl: "https://www.kcar.com",
-    currency: "KRW",
-    detailPattern: /\/bc\/detail\/CarInfoDtl|\/car\/detail|carCd=|carSeq=/i,
+    sourceId: "auto_georgia_open",
+    market: "georgia",
+    label: "AUTO.GE Georgia",
+    baseUrl: "https://www.auto.ge",
+    currency: "USD",
+    detailPattern: /\/(?:en|ru|ka)\/auto\/[^?#]+-\d+\.html$/i,
     listUrls: (page) => [
-      pageQuery("https://www.kcar.com/bc/search", page),
-      pageQuery("https://www.kcar.com/bc/search/carSearchList", page),
-      pageQuery("https://m.kcar.com/bc/search", page),
+      page <= 1 ? "https://www.auto.ge/en/auto/index.html" : `https://www.auto.ge/en/auto/index${page}.html`,
+      pageQuery("https://www.auto.ge/en/auto/index.html", page),
+    ],
+  },
+  {
+    sourceId: "ss_georgia_open",
+    market: "georgia",
+    label: "SS.GE Auto",
+    baseUrl: "https://ss.ge",
+    currency: "GEL",
+    detailPattern: /\/(?:en|ru|ka)\/auto\/(?:details?|view)\/[^?#]+|\/auto\/[^?#]*\d{5,}/i,
+    listUrls: (page) => [
+      pageQuery("https://ss.ge/en/auto/list", page, "Page"),
+      pageQuery("https://ss.ge/ka/auto/list", page, "Page"),
+    ],
+  },
+  {
+    sourceId: "mymarket_georgia_open",
+    market: "georgia",
+    label: "MyMarket Georgia Auto",
+    baseUrl: "https://www.mymarket.ge",
+    currency: "GEL",
+    detailPattern: /\/(?:en|ru|ka)\/(?:pr|product|auto)\/[^?#]*\d{5,}|\/(?:pr|product)\/\d+/i,
+    listUrls: (page) => [
+      pageQuery("https://www.mymarket.ge/en/search/1/auto", page),
+      pageQuery("https://www.mymarket.ge/ru/search/1/auto", page),
     ],
   },
   {
@@ -49,6 +135,69 @@ const configs: OpenMarketSourceConfig[] = [
       pageQuery("https://autopapa.ge/en/search", page),
       pageQuery("https://autopapa.ge/en/cars", page),
       pageQuery("https://autopapa.ge/search", page),
+    ],
+  },
+
+  // Kyrgyzstan: Mashina has a dedicated adapter; the public alternatives below
+  // are probed independently and accumulated for three days.
+  {
+    sourceId: "lalafo_kyrgyzstan_open",
+    market: "kyrgyzstan",
+    label: "Lalafo Kyrgyzstan Cars",
+    baseUrl: "https://lalafo.kg",
+    currency: "KGS",
+    detailPattern: /\/(?:[^/]+\/)?ads\/[^?#]+(?:-id-)?\d{5,}/i,
+    listUrls: (page) => [
+      pageQuery("https://lalafo.kg/kyrgyzstan/avtomobili-s-probegom", page),
+      pageQuery("https://lalafo.kg/bishkek/avtomobili-s-probegom", page),
+    ],
+  },
+  {
+    sourceId: "bazar_kyrgyzstan_open",
+    market: "kyrgyzstan",
+    label: "Bazar.kg Cars",
+    baseUrl: "https://www.bazar.kg",
+    currency: "KGS",
+    detailPattern: /\/kyrgyzstan\/transport\/legkovye-avtomobili\/(?!$)[^?#]{4,}/i,
+    listUrls: (page) => [
+      pageQuery("https://www.bazar.kg/en/kyrgyzstan/transport/legkovye-avtomobili", page),
+      pageQuery("https://www.bazar.kg/kyrgyzstan/transport/legkovye-avtomobili", page),
+    ],
+  },
+  {
+    sourceId: "turbo_kyrgyzstan_open",
+    market: "kyrgyzstan",
+    label: "Turbo.kg Cars",
+    baseUrl: "https://turbo.kg",
+    currency: "KGS",
+    detailPattern: /\/(?:car|auto|offer|listing)\/[^?#]+|\/[a-z0-9-]+\/\d{4,}/i,
+    listUrls: (page) => [pageQuery("https://turbo.kg/", page)],
+  },
+  {
+    sourceId: "omarket_kyrgyzstan_open",
+    market: "kyrgyzstan",
+    label: "O!Market Kyrgyzstan Cars",
+    baseUrl: "https://market.o.kg",
+    currency: "KGS",
+    detailPattern: /\/(?:en|ru|ky)\/avtomobili\/[^?#]{5,}/i,
+    listUrls: (page) => [
+      pageQuery("https://market.o.kg/en/avtomobili", page),
+      pageQuery("https://market.o.kg/ru/avtomobili", page),
+    ],
+  },
+
+  // Additional Korea and Japan sources used for deep daily accumulation.
+  {
+    sourceId: "kcar_korea_open",
+    market: "korea",
+    label: "K Car Korea",
+    baseUrl: "https://www.kcar.com",
+    currency: "KRW",
+    detailPattern: /\/bc\/detail\/CarInfoDtl|\/car\/detail|carCd=|carSeq=/i,
+    listUrls: (page) => [
+      pageQuery("https://www.kcar.com/bc/search", page),
+      pageQuery("https://www.kcar.com/bc/search/carSearchList", page),
+      pageQuery("https://m.kcar.com/bc/search", page),
     ],
   },
   {
