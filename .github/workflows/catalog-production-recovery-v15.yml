@@ -1,13 +1,17 @@
 name: Catalog source-scale recovery
-run-name: Catalog source-scale v22 · ${{ github.sha }}
+run-name: Catalog source-scale v23 · ${{ github.sha }}
 
 on:
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "17 */2 * * *"
   workflow_dispatch:
   push:
     branches: [main]
     paths:
+      - data/markets/markets.json
+      - apps/web/lib/effective-market-settings.ts
+      - apps/web/lib/catalog/live-business-pricing.ts
+      - apps/web/lib/catalog/estimated-market-config.ts
       - apps/web/lib/catalog/customs-pricing.ts
       - apps/web/lib/catalog/offer-quality.ts
       - apps/web/lib/catalog/image-quality.ts
@@ -25,6 +29,7 @@ on:
       - apps/web/lib/catalog/otomoto-detail-source.ts
       - packages/engine/src/calculation/calculateAvtocena.ts
       - packages/engine/src/calculation/russiaCustoms.ts
+      - scripts/catalog-business-audit.mjs
       - scripts/catalog-probe-source-shard.mjs
       - scripts/catalog-rebuild-source-shard.mjs
       - scripts/catalog-validate-source-scale.mjs
@@ -154,16 +159,16 @@ jobs:
           const now = new Date().toISOString();
           if (!fs.existsSync(process.env.CATALOG_PROBE_OUTPUT)) {
             fs.writeFileSync(process.env.CATALOG_PROBE_OUTPUT, JSON.stringify({
-              version: 22, market, shardIndex, shardCount, checkedAt: now,
+              version: 23, market, shardIndex, shardCount, checkedAt: now,
               plannedSourceIds: [], activeSourceIds: [], inactiveSourceIds: [], sourceIdsForRebuild: "__no_registered_sources__",
               results: [{ sourceId: "workflow", active: false, reason: "probe_not_completed" }]
             }, null, 2));
           }
           if (!fs.existsSync(process.env.CATALOG_REBUILD_OUTPUT)) {
             fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-              version: 22, market, shardIndex, shardCount, generatedAt: now, count: 0,
+              version: 23, market, shardIndex, shardCount, generatedAt: now, count: 0,
               partial: true, stopReason: "collection_not_completed",
-              report: { version: 22, market, shardIndex, shardCount, startedAt: now, finishedAt: now,
+              report: { version: 23, market, shardIndex, shardCount, startedAt: now, finishedAt: now,
                 partial: true, stopReason: "collection_not_completed", saved: 0,
                 sourceErrors: [{ stage: "workflow", error: "probe_or_rebuild_not_completed" }] },
               offers: []
@@ -191,7 +196,7 @@ jobs:
           node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));console.log(`- Собрано: ${(p.offers||[]).length}\n- Свежие: ${JSON.stringify(p.report?.freshBySource||{})}\n- Накопленные до 14 дней: ${JSON.stringify(p.report?.restoredBySource||{})}\n- Причина остановки: ${p.stopReason||p.report?.stopReason||"unknown"}`)' >> "$GITHUB_STEP_SUMMARY"
 
   publish:
-    name: Audit and publish accumulated seven-market catalog
+    name: Audit calculations and publish accumulated catalog
     if: always()
     needs: rebuild-source-shard
     runs-on: ubuntu-latest
@@ -218,6 +223,8 @@ jobs:
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "16"
       CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
       CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":50,"china":50,"japan":50,"uae":50,"europe":100,"georgia":20,"kyrgyzstan":20}'
+      CATALOG_MIN_KNOWLEDGE_RECORDS: "6800"
+      CATALOG_BUSINESS_AUDIT_REPORT: catalog-business-audit-report.json
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-source-scale-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
@@ -251,16 +258,21 @@ jobs:
           pattern: catalog-rebuild-*
           path: catalog-rebuild
           merge-multiple: true
-      - name: Validate publisher scripts
+      - name: Validate audit and publisher scripts
         if: steps.install.outputs.exit_code == '0'
         continue-on-error: true
-        run: node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs
+        run: node --check scripts/catalog-business-audit.mjs && node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs
+      - name: Audit seven market profiles, knowledge, customs and utilization fee
+        if: steps.install.outputs.exit_code == '0'
+        id: business_audit
+        continue-on-error: true
+        run: npx tsx scripts/catalog-business-audit.mjs
       - name: Audit exact customs, utilization fee and galleries by market
         if: steps.install.outputs.exit_code == '0'
         continue-on-error: true
         run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Publish verified markets and retain the previous healthy base
-        if: steps.install.outputs.exit_code == '0'
+        if: steps.install.outputs.exit_code == '0' && steps.business_audit.outputs.publication_safe == 'true'
         continue-on-error: true
         run: npx tsx scripts/catalog-publish-source-scale.mjs
       - name: Ensure publication reports exist
@@ -270,8 +282,9 @@ jobs:
           node <<'NODE'
           const fs = require("fs");
           const now = new Date().toISOString();
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT, JSON.stringify({ version: 22, checkedAt: now, ok: true, warnings: ["validation_not_completed"] }, null, 2));
-          if (!fs.existsSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({ version: 22, publishedAt: now, published: false, previousManifestPreserved: true, publicationError: "publisher_not_completed", byMarket: {}, marketsBelowTarget: ["korea","china","japan","uae","europe","georgia","kyrgyzstan"] }, null, 2));
+          if (!fs.existsSync(process.env.CATALOG_BUSINESS_AUDIT_REPORT)) fs.writeFileSync(process.env.CATALOG_BUSINESS_AUDIT_REPORT, JSON.stringify({ version: 23, checkedAt: now, publicationSafe: false, errors: ["business_audit_not_completed"] }, null, 2));
+          if (!fs.existsSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT, JSON.stringify({ version: 23, checkedAt: now, ok: true, warnings: ["validation_not_completed"] }, null, 2));
+          if (!fs.existsSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT)) fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({ version: 23, publishedAt: now, published: false, previousManifestPreserved: true, publicationError: "publisher_not_completed_or_business_audit_blocked", byMarket: {}, marketsBelowTarget: ["korea","china","japan","uae","europe","georgia","kyrgyzstan"] }, null, 2));
           NODE
       - name: Run production catalog smoke checks
         if: steps.install.outputs.exit_code == '0'
@@ -287,14 +300,15 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          node -e 'const fs=require("fs");const v=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT,"utf8"));const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));console.log(`### Публикация каталога v22\n- Опубликовано: ${Boolean(p.published)}\n- Generation: ${p.generationId||"предыдущий сохранён"}\n- Цель 1000 на рынок достигнута: ${Boolean(p.volumeTargetReached)}\n- По рынкам: ${JSON.stringify(p.byMarket||{})}\n- Ниже 1000: ${JSON.stringify(p.marketsBelowTarget||[])}\n- Предупреждения: ${JSON.stringify(v.warnings||[])}\n- Ошибка публикации: ${p.publicationError||"нет"}`)' >> "$GITHUB_STEP_SUMMARY"
-      - name: Upload resilient catalog reports
+          node -e 'const fs=require("fs");const b=JSON.parse(fs.readFileSync(process.env.CATALOG_BUSINESS_AUDIT_REPORT,"utf8"));const v=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_VALIDATION_REPORT,"utf8"));const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,"utf8"));console.log(`### Публикация каталога v23\n- Расчётный аудит: ${Boolean(b.publicationSafe)}\n- База знаний: ${JSON.stringify(b.knowledge||{})}\n- Ошибки расчётов: ${JSON.stringify(b.errors||[])}\n- Опубликовано: ${Boolean(p.published)}\n- Generation: ${p.generationId||"предыдущий сохранён"}\n- Цель 1000 на рынок достигнута: ${Boolean(p.volumeTargetReached)}\n- По рынкам: ${JSON.stringify(p.byMarket||{})}\n- Ниже 1000: ${JSON.stringify(p.marketsBelowTarget||[])}\n- Предупреждения: ${JSON.stringify([...(b.warnings||[]),...(v.warnings||[])])}\n- Ошибка публикации: ${p.publicationError||"нет"}`)' >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload catalog and calculation reports
         if: always()
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-source-scale-reports
           path: |
+            catalog-business-audit-report.json
             catalog-source-scale-validation-report.json
             catalog-source-scale-publish-report.json
           if-no-files-found: warn
