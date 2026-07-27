@@ -58,10 +58,12 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("production uses the proven bounded direct-market pattern", () => {
+test("production uses the proven bounded direct-market pattern with automatic retry", () => {
   assert.match(workflow, /Catalog stable 7 × 250/);
-  assert.match(workflow, /timeout-minutes: 65/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "3000000"/);
+  assert.match(workflow, /timeout-minutes: 110/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "2700000"/);
+  assert.match(workflow, /for attempt in 1 2/);
+  assert.match(workflow, /retrying automatically/);
   assert.match(workflow, /Require 250 verified offers/);
   assert.match(workflow, /Require seven complete 250-offer artifacts/);
   assert.match(workflow, /Atomically publish exactly 250 per market/);
