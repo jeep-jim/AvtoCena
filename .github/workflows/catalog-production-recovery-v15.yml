@@ -1,17 +1,22 @@
 name: Catalog stable 7 markets
 run-name: Catalog stable 7 × 250 · ${{ github.sha }}
 
-# Production trigger 2026-07-27: force a fresh seven-market run after the accumulating retry fix.
-# Retry is controlled by catalog-rebuild-market-retry.mjs. It validates the actual
-# number of verified offers after every pass and accumulates unique cars between passes.
+# Production commits made through the GitHub App may not emit a new push workflow run.
+# A same-repository pull request to the dedicated trigger file reliably starts this workflow
+# and retains access to repository secrets.
 on:
   schedule:
     - cron: "17 20 * * *"
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - data/catalog-production-trigger.txt
   push:
     branches: [main]
     paths:
       - .github/workflows/catalog-production-recovery-v15.yml
+      - data/catalog-production-trigger.txt
       - data/markets/markets.json
       - apps/web/lib/effective-market-settings.ts
       - apps/web/lib/catalog/importer.ts
