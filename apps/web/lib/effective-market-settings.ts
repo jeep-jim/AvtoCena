@@ -2,6 +2,7 @@ import { getActiveMarketVersion, getMarketsSettings } from "./business-settings"
 import { CATALOG_MARKET_DEFAULTS } from "./catalog/estimated-market-config";
 import { MARKET_IDS, type MarketId } from "./settings-validation";
 
+// Production trigger 2026-07-27 17:23 +07 for Catalog stable 7 × 250.
 const MARKET_NAMES: Record<MarketId, string> = {
   japan: "Япония",
   china: "Китай",
