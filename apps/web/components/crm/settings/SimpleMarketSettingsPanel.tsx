@@ -10,6 +10,11 @@ const MARKET_FLAGS: Record<string, string> = {
   kyrgyzstan: "🇰🇬",
 };
 
+const paymentFields = [
+  ["securityDepositRub", "Обеспечительный платёж, ₽"],
+  ["contractInitialPaymentRub", "Первоначальный платёж по договору, ₽"],
+] as const;
+
 const calculationFields = [
   ["exchangeRateReservePercent", "Резерв курса, %"],
   ["topAvtoCommissionRub", "Комиссия компании, ₽"],
@@ -49,7 +54,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
           <div>
             <h2 className="text-2xl font-black">Все рынки</h2>
             <p className="mt-2 max-w-3xl text-sm font-bold leading-6 text-white/48">
-              Здесь только цифры, которые используются в цене автомобиля. После сохранения новая версия применяется ко всем новым расчётам, а уже отправленные клиентам расчёты не меняются.
+              Здесь находятся цифры, которые используются в цене автомобиля. Сохранённая версия сразу применяется к карточкам и каталогу; полный поисковый индекс обновляется фоновым пересчётом.
             </p>
           </div>
           <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/60">{markets.length} рынков</span>
@@ -61,6 +66,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
         const fixedTotal = calculationFields
           .filter(([name]) => name !== "exchangeRateReservePercent")
           .reduce((sum, [name]) => sum + (Number(version[name]) || 0), 0);
+        const provisional = Boolean(version.provisional);
 
         return (
           <details key={market.id} className="group glass rounded-[1.8rem]" open={market.id === "japan"}>
@@ -69,10 +75,11 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-2xl" aria-hidden="true">{MARKET_FLAGS[market.id] || "🌐"}</span>
                   <h2 className="text-2xl font-black">{market.name}</h2>
-                  <span className="rounded-full bg-emerald-400/12 px-2.5 py-1 text-[11px] font-black text-emerald-300">версия {version.version || 1}</span>
+                  <span className="rounded-full bg-emerald-400/12 px-2.5 py-1 text-[11px] font-black text-emerald-300">активна · версия {version.version || 1}</span>
+                  {provisional ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">средние значения</span> : null}
                 </div>
                 <div className="mt-2 text-sm font-bold text-white/45">
-                  Валюта {version.currency || "—"} · фиксированные расходы {money(fixedTotal)} ₽ · резерв курса {numberValue(version.exchangeRateReservePercent) || 0}%
+                  Валюта {version.currency || "—"} · расходы {money(fixedTotal)} ₽ · первый платёж {money(Number(version.contractInitialPaymentRub) || 0)} ₽ · резерв курса {numberValue(version.exchangeRateReservePercent) || 0}%
                 </div>
               </div>
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/[.07] text-white/65 transition group-open:rotate-180">
@@ -81,16 +88,16 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
             </summary>
 
             <div className="border-t border-white/8 p-5 pt-4">
+              {provisional ? <div className="mb-4 rounded-2xl bg-amber-400/10 px-4 py-3 text-sm font-bold leading-6 text-amber-100">Сейчас используются безопасные средние значения. Уточните любой расход и сохраните — новая версия сразу станет активной на сайте.</div> : null}
               {!canEdit ? (
                 <div className="rounded-2xl bg-amber-400/10 px-4 py-3 text-sm font-bold text-amber-100">Просмотр без права изменения.</div>
               ) : (
                 <form action="/api/crm/settings/markets" method="post" className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                   <input type="hidden" name="marketId" value={market.id} />
                   <input type="hidden" name="name" value={market.name} />
-                  <input type="hidden" name="securityDepositRub" value={numberValue(version.securityDepositRub)} />
-                  <input type="hidden" name="contractInitialPaymentRub" value={numberValue(version.contractInitialPaymentRub)} />
                   <input type="hidden" name="deliveryDays" value={version.deliveryDays || ""} />
                   <input type="hidden" name="conditionsDescription" value={version.conditionsDescription || ""} />
+                  <input type="hidden" name="provisional" value={provisional ? "true" : "false"} />
                   {hiddenJson("percentExpenses", version.percentExpenses)}
                   {hiddenJson("minMax", version.minMax)}
                   {hiddenJson("dealStages", version.dealStages)}
@@ -99,6 +106,13 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                     Валюта
                     <input name="currency" defaultValue={version.currency || ""} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                   </label>
+
+                  {paymentFields.map(([name, label]) => (
+                    <label key={name} className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42">
+                      {label}
+                      <input name={name} type="number" step="1" min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
+                    </label>
+                  ))}
 
                   {calculationFields.map(([name, label]) => (
                     <label key={name} className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42">
@@ -114,7 +128,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
 
                   <label className="flex items-center gap-3 rounded-xl bg-white/[.045] px-4 py-3 text-sm font-bold text-white/68">
                     <input type="checkbox" name="active" defaultChecked={version.active !== false} />
-                    Сразу применить к новым расчётам
+                    Сразу применить к расчётам сайта
                   </label>
 
                   <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2 xl:col-span-2">
