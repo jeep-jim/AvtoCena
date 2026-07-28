@@ -1,0 +1,264 @@
+name: Apply catalog listing-first v29
+
+on:
+  push:
+    branches: [automation/catalog-listing-first-v29]
+    paths:
+      - .github/workflows/apply-catalog-listing-first-v29.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/catalog-listing-first-v29
+          fetch-depth: 0
+      - name: Apply listing-first catalog architecture
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding="utf-8")
+              if old not in text:
+                  raise SystemExit(f"missing replacement marker in {path}: {old[:120]!r}")
+              p.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+          # 1. Реальное объявление публикуется даже до готового расчёта, но без выдуманного totalRub.
+          p = Path("apps/web/lib/catalog/offer-quality.ts")
+          text = p.read_text(encoding="utf-8")
+          start = text.index("export function hasCredibleOfferContent")
+          end = text.index("export function isCrediblePublicOffer", start)
+          block = '''function hasCredibleListingCore(offer: VehicleOffer) {
+            const sourceId = String(offer.sourceId || "");
+            if (DISALLOWED_GENERIC_SOURCES.has(sourceId)) return false;
+            const raw = offer.operational?.raw as any;
+            const rawImages = Array.isArray(raw?.images) ? raw.images.map(String).filter(Boolean) : [];
+            if (sourceId === "dubicars_uae_exact" && rawImages.length && !rawImages.some((url: string) => /\\/images\\/[a-f0-9]{6}\\/(?:w_?\\d+x\\d+|\\d+x\\d+)\\/[^/?#]+\\/[a-f0-9-]+\\.(?:jpe?g|webp)/i.test(url))) return false;
+            if (!meaningfulName(offer.make) || !meaningfulName(offer.model)) return false;
+            const combinedText = vehicleText(offer);
+            if (GENERIC_LISTING_RE.test(combinedText) || NON_VEHICLE_RE.test(combinedText)) return false;
+            const year = Number(offer.year || 0);
+            const currentYear = new Date().getFullYear();
+            if (year < 1985 || year > currentYear + 1) return false;
+            if (!hasMileage(offer)
+              || !offer.operational?.sourceUrl
+              || !hasPlausibleSourcePrice(offer)
+              || !rawImagesAreCredible(offer)) return false;
+            const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+            return credibleCatalogImages(offer.images || []).length >= requiredImages;
+          }
+
+          function hasPendingCalculation(offer: VehicleOffer) {
+            const status = String(offer.calculationStatus || "");
+            return !Number(offer.totalRub || 0) && (status === "needs_data" || status.startsWith("needs_"));
+          }
+
+          export function hasCredibleOfferContent(offer: VehicleOffer) {
+            if (!hasCredibleListingCore(offer)) return false;
+            if (hasPendingCalculation(offer)) return true;
+            return hasRequiredPower(offer)
+              && hasPlausibleSpecs(offer)
+              && hasReadyCalculation(offer)
+              && hasCompletePriceBreakdown(offer)
+              && hasPlausiblePrice(offer);
+          }
+
+          '''
+          p.write_text(text[:start] + block + text[end:], encoding="utf-8")
+
+          replace_once(
+              "scripts/catalog-publish-source-scale.mjs",
+              '    if (!hasExactCalculation(offer)) return { offer: null, reason: "calculation" };',
+              '''    const calculationStatus = String(offer.calculationStatus || "");
+              const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
+              if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };''',
+          )
+
+          replace_once(
+              "apps/web/lib/catalog/storage.ts",
+              'function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o) && Boolean(o.totalRub); }',
+              'function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o); }',
+          )
+
+          replace_once(
+              "apps/web/app/(public)/cars/page.tsx",
+              '.filter((offer) => offer.status === "active" && Boolean(offer.totalRub) && isCrediblePublicOffer(offer))',
+              '.filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))',
+          )
+
+          replace_once(
+              "apps/web/components/catalog/CatalogCard.tsx",
+              '  const estimated = o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated";\n',
+              '  const estimated = o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated";\n  const priceLabel = !o.totalRub ? `${yearLabel} · расчёт уточняется` : estimated ? `${yearLabel} · ориентир` : yearLabel;\n',
+          )
+          replace_once(
+              "apps/web/components/catalog/CatalogCard.tsx",
+              '          <PriceTrend offer={o} label={estimated ? `${yearLabel} · ориентир` : yearLabel}',
+              '          <PriceTrend offer={o} label={priceLabel}',
+          )
+
+          # 2. Флаги рынков в CRM — те же SVG, что в курсах валют, а не regional-letter emoji.
+          replace_once(
+              "apps/web/components/dealers/DealerDemoDashboard.tsx",
+              'import Link from "next/link";\n',
+              'import Link from "next/link";\nimport { CurrencyFlag } from "@/components/catalog/PriceTrend";\n',
+          )
+          p = Path("apps/web/components/dealers/DealerDemoDashboard.tsx")
+          text = p.read_text(encoding="utf-8")
+          start = text.index("const markets = [")
+          end = text.index("\n\nconst clients", start)
+          markets = '''const markets = [
+            { id: "japan", currency: "JPY", name: "Япония", leads: "31 заявка" },
+            { id: "china", currency: "CNY", name: "Китай", leads: "24 заявки" },
+            { id: "korea", currency: "KRW", name: "Корея", leads: "19 заявок" },
+            { id: "uae", currency: "AED", name: "ОАЭ", leads: "11 заявок" },
+            { id: "europe", currency: "EUR", name: "Европа", leads: "17 заявок" },
+            { id: "georgia", currency: "GEL", name: "Грузия", leads: "5 заявок" },
+            { id: "kyrgyzstan", currency: "KGS", name: "Кыргызстан", leads: "3 заявки" },
+          ] as const satisfies ReadonlyArray<{ id: DemoMarketId; currency: string; name: string; leads: string }>;'''
+          p.write_text(text[:start] + markets + text[end:], encoding="utf-8")
+          replace_once(
+              "apps/web/components/dealers/DealerDemoDashboard.tsx",
+              '<span className="text-2xl">{market.flag}</span>',
+              '<CurrencyFlag currency={market.currency} className="h-5 w-7" />',
+          )
+
+          replace_once(
+              "apps/web/components/catalog/PriceTrend.tsx",
+              'const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD",',
+              'const RATE_ORDER = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "KGS", "USD",',
+          )
+          replace_once(
+              "apps/web/components/catalog/PriceTrend.tsx",
+              '  GEL: { label: "Грузинский лари", nominal: 1, country: "Грузия" },\n',
+              '  GEL: { label: "Грузинский лари", nominal: 1, country: "Грузия" },\n  KGS: { label: "Кыргызский сом", nominal: 1, country: "Кыргызстан" },\n',
+          )
+          gel_flag = '  if (code === "GEL") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Грузии"><rect width="28" height="20" fill="#fff" /><rect x="12" width="4" height="20" fill="#ff0000" /><rect y="8" width="28" height="4" fill="#ff0000" /><g fill="#ff0000"><path d="M5 3h1v2h2v1H6v2H5V6H3V5h2Z" /><path d="M22 3h1v2h2v1h-2v2h-1V6h-2V5h2Z" /><path d="M5 12h1v2h2v1H6v2H5v-2H3v-1h2Z" /><path d="M22 12h1v2h2v1h-2v2h-1v-2h-2v-1h2Z" /></g></svg>;\n'
+          kgs_flag = '  if (code === "KGS") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Кыргызстана"><rect width="28" height="20" fill="#e8112d" /><circle cx="14" cy="10" r="5.2" fill="#ffef00" /><circle cx="14" cy="10" r="2.6" fill="#e8112d" /><g stroke="#ffef00" strokeWidth=".8">{Array.from({ length: 20 }, (_, index) => { const angle = index * Math.PI / 10; return <path key={index} d={`M14 10L${14 + Math.cos(angle) * 8} ${10 + Math.sin(angle) * 8}`} />; })}</g></svg>;\n'
+          replace_once("apps/web/components/catalog/PriceTrend.tsx", gel_flag, gel_flag + kgs_flag)
+
+          # 3. 10 000 карточек — бизнес-цель и явная диагностика, но полезный manifest не откатывается.
+          replace_once(
+              ".github/workflows/catalog-production-recovery-v15.yml",
+              '      CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"\n',
+              '      CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"\n      CATALOG_BOOTSTRAP_MIN_TOTAL: "10000"\n',
+          )
+          replace_once(
+              ".github/workflows/catalog-production-recovery-v15.yml",
+              "          if (!(Number(report.total || 0) > 0)) throw new Error('catalog_total_empty');\n",
+              "          if (!(Number(report.total || 0) > 0)) throw new Error('catalog_total_empty');\n          const minimumTotal = Number(process.env.CATALOG_BOOTSTRAP_MIN_TOTAL || 10000);\n          if (Number(report.total || 0) < minimumTotal) console.warn(`catalog_bootstrap_below_${minimumTotal}: ${report.total}; manifest is kept and the next pass continues accumulation`);\n",
+          )
+
+          # 4. Регрессионные тесты.
+          p = Path("tests/catalog-source-scale.test.ts")
+          text = p.read_text(encoding="utf-8")
+          marker = 'const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");\n'
+          addition = '''const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+          const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+          const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
+          const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
+          '''
+          if marker not in text: raise SystemExit("catalog source scale test marker missing")
+          text = text.replace(marker, marker + addition, 1)
+          text = text.replace('  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);\n', '  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);\n  assert.match(workflow, /CATALOG_BOOTSTRAP_MIN_TOTAL: "10000"/);\n', 1)
+          insertion = '''
+          test("real listings stay public while exact customs calculation is still waiting for verified power", () => {
+            assert.match(offerQuality, /hasPendingCalculation/);
+            assert.match(offerQuality, /status\.startsWith\("needs_"\)/);
+            assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
+            assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
+            assert.match(publishScript, /calculationPending/);
+          });
+
+          test("dealer CRM uses deterministic SVG market flags including Kyrgyzstan", () => {
+            assert.match(dealerDemo, /CurrencyFlag/);
+            assert.match(dealerDemo, /currency: "KGS"/);
+            assert.doesNotMatch(dealerDemo, /market\.flag/);
+            assert.match(priceTrend, /code === "KGS"/);
+          });
+
+          '''
+          target = 'test("requested high-volume public sources are registered", () => {'
+          if target not in text: raise SystemExit("test insertion marker missing")
+          text = text.replace(target, insertion + target, 1)
+          p.write_text(text, encoding="utf-8")
+
+          p = Path("tests/estimated-ev-publication.test.ts")
+          text = p.read_text(encoding="utf-8")
+          text += '''
+
+          test("publishes a real combustion listing while power and exact total are still pending", () => {
+            const pending = electricOffer({
+              id: "offer_pending_combustion",
+              powertrainKind: "combustion",
+              fuel: "petrol",
+              engineCc: 1998,
+              powerHp: undefined,
+              powerKw: undefined,
+              utilizationPowerKw: undefined,
+              powerDataConfidence: undefined,
+              powerDataSource: undefined,
+              totalRub: null,
+              priceMode: "fixed",
+              calculationStatus: "needs_power_data",
+              calculationSnapshot: { pricingConfidence: "unavailable", missing: ["power_hp"] },
+            });
+            assert.equal(isCrediblePublicOffer(pending), true);
+            assert.equal(isCrediblePublicOffer({ ...pending, calculationStatus: "unknown" }), false);
+          });
+          '''
+          p.write_text(text, encoding="utf-8")
+
+          # 5. Постоянное ТЗ / журнал инцидентов.
+          p = Path("roadmap.md")
+          text = p.read_text(encoding="utf-8")
+          incident = '''### 2026-07-28 — run #92, опубликовано только 1 158 машин
+
+          Симптом:
+
+          - фактические счётчики после прохода: Япония 2, Китай 0, Корея 68, ОАЭ 84, Европа 1 002, Грузия 0, Кыргызстан 2;
+          - общий объём 1 158 вместо бизнес-цели минимум 10 000;
+          - Европа проходила массово, остальные рынки почти полностью отбрасывались после парсинга.
+
+          Root cause:
+
+          - публичный quality gate требовал `powerHp`, готовый расчёт таможни и утильсбора, полный breakdown и `totalRub` ещё до публикации карточки;
+          - тысячи реальных объявлений без найденной мощности или сертифицированной 30-минутной мощности удалялись, хотя источник, цена, ссылка и фото были реальными;
+          - собственная база знаний пока покрывает только небольшую долю моделей, поэтому фильтр особенно сильно обнулял Японию, Китай, Грузию и Кыргызстан;
+          - emoji-флаги рынков в Windows отображались буквами JP/CN/KR/AE/EU/GE/KG.
+
+          Решение v29:
+
+          - разделить достоверность объявления и готовность расчёта;
+          - реальная карточка с валидной ценой источника, валютой, ссылкой и связанной фотографией публикуется со статусом `needs_*` и без выдуманного `totalRub`;
+          - точная цена появляется только после успешного расчёта действующим движком таможни и утильсбора;
+          - карточки с готовой ценой сохраняют строгую проверку мощности, таможни, breakdown и правдоподобия;
+          - CRM использует SVG-флаги из валютного компонента, включая отдельный флаг Кыргызстана;
+          - бизнес-цель bootstrap зафиксирована как минимум 10 000 реальных карточек суммарно; недобор не откатывает полезный manifest, а остаётся диагностикой для следующего накопительного прохода.
+
+          Статус:
+
+          - исправление в работе в ветке `automation/catalog-listing-first-v29`;
+          - production-результат, generationId и новые market counts добавить после merge и завершения прохода.
+
+          '''
+          target = '### Шаблон новой записи\n'
+          if target not in text: raise SystemExit("roadmap incident marker missing")
+          text = text.replace(target, incident + target, 1)
+          text = text.replace('- 2026-07-28: CRM-демо и публичный каталог должны использовать реальные счётчики одной generation.\n', '- 2026-07-28: CRM-демо и публичный каталог должны использовать реальные счётчики одной generation.\n- 2026-07-28: каталог переведён на listing-first: реальное объявление публикуется до готового расчёта, но без выдуманной цены; готовые расчёты остаются строгими.\n- 2026-07-28: бизнес-цель bootstrap — минимум 10 000 реальных карточек суммарно.\n', 1)
+          p.write_text(text, encoding="utf-8")
+          PY
+
+          rm -f .github/workflows/apply-catalog-listing-first-v29.yml
+          git config user.name "jeep-jim"
+          git config user.email "173029176+jeep-jim@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: публиковать реальные объявления до готового расчёта"
+          git push origin HEAD:automation/catalog-listing-first-v29
