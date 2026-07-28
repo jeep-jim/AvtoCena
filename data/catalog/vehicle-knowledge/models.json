@@ -210,6 +210,32 @@
     "active": true
   },
   {
+    "id": "volkswagen/lavida",
+    "make": "Volkswagen",
+    "model": "Lavida",
+    "makeAliases": ["VW", "Фольксваген", "大众"],
+    "aliases": ["朗逸"],
+    "bodyTypes": ["sedan"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceUrl": "https://www.svw-volkswagen.com/lavida2017/",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "volkswagen/t-cross",
+    "make": "Volkswagen",
+    "model": "T-Cross",
+    "makeAliases": ["VW", "Фольксваген", "大众"],
+    "aliases": ["T Cross", "TCross", "途铠"],
+    "bodyTypes": ["suv"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceUrl": "https://www.svw-volkswagen.com/tcross/",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
     "id": "audi/a4",
     "make": "Audi",
     "model": "A4",
