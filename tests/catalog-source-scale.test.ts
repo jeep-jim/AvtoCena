@@ -18,6 +18,10 @@ const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-so
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const reliableSources = fs.readFileSync(new URL("../apps/web/lib/catalog/reliable-bootstrap-sources.ts", import.meta.url), "utf8");
 const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
+const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/page.tsx", import.meta.url), "utf8");
+const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
+const sitemap = fs.readFileSync(new URL("../apps/web/app/sitemap.ts", import.meta.url), "utf8");
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
@@ -25,7 +29,7 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
 
- test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
+test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
@@ -46,7 +50,7 @@ test("daily workflow runs all 21 market shards in one wave", () => {
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("daily workflow targets three productive sources and 3000 cars per market", () => {
+test("daily workflow targets three productive sources, rich galleries and 3000 cars per market", () => {
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
@@ -54,10 +58,13 @@ test("daily workflow targets three productive sources and 3000 cars per market",
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "8"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
-  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
+  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
+  assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
+  assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
+  assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
   assert.match(workflow, /retention-days: 1/);
   assert.match(workflow, /compression-level: 9/);
   assert.match(workflow, /continue-on-error: true/);
@@ -101,18 +108,19 @@ test("probe limits network work to active sources while rebuild retains the comp
   assert.doesNotMatch(rebuildScript, /const allSources/);
 });
 
-test("rebuild uses the vehicle knowledge base before network gallery work", () => {
+test("rebuild enriches knowledge and then opens detail for specs and galleries", () => {
   assert.match(rebuildScript, /retention_loaded/);
   assert.match(rebuildScript, /readMarketOffers/);
   assert.match(rebuildScript, /readAllOffersForMaintenance/);
   assert.match(rebuildScript, /catalog\/source-cursors/);
   assert.match(rebuildScript, /storage\.readJson/);
   assert.match(rebuildScript, /storage\.writeJson/);
-  assert.match(rebuildScript, /initialCursor/);
-  assert.match(rebuildScript, /pagesVisited/);
   assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithVehicleKnowledge\(offer\)\)/);
-  assert.match(rebuildScript, /if \(gallery\.length < minimumImages && source\?\.fetchImages/);
-  assert.doesNotMatch(rebuildScript, /gallery\.length < minimumImages \|\|[^\n]*powerHp/);
+  assert.match(rebuildScript, /const detailNeeded = gallery\.length < preferredImages/);
+  assert.match(rebuildScript, /!Number\(offer\.powerHp \|\| 0\)/);
+  assert.match(rebuildScript, /source\.fetchImages\(offer\)/);
+  assert.match(rebuildScript, /gallery_detail/);
+  assert.match(rebuildScript, /detailEnriched/);
   assert.match(rebuildScript, /networkImageLimit/);
 });
 
@@ -122,6 +130,13 @@ test("real listings stay public while exact customs calculation is pending", () 
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
   assert.match(publishScript, /calculationPending/);
+});
+
+test("cards show the real source price while customs calculation is pending", () => {
+  assert.match(catalogCard, /hasSourcePrice/);
+  assert.match(catalogCard, /цена автомобиля/);
+  assert.match(catalogCard, /Расчёт под ключ уточняется/);
+  assert.doesNotMatch(catalogCard, /Цена по запросу/);
 });
 
 test("dealer CRM renders SVG market flags rather than emoji letter codes", () => {
@@ -164,9 +179,14 @@ test("bootstrap replacements follow current Guazi and Turbo public routes", () =
   assert.match(reliableSources, /\\\/cars\\\/[A-Za-z0-9_\-\[\]\+]+/);
 });
 
-test("brand rail uses the existing catalog query instead of a missing route", () => {
-  assert.match(brandRail, /href=\{`\/cars\?make=\$\{encodeURIComponent\(brand\)\}`\}/);
-  assert.doesNotMatch(brandRail, /\/cars\/brand\//);
+test("brand rail opens existing brand and model SEO pages", () => {
+  assert.match(brandRail, /href=\{`\/cars\/brand\/\$\{catalogBrandSlug\(brand\)\}`\}/);
+  assert.match(brandPage, /BrandModelDirectory/);
+  assert.match(brandPage, /readBrandModelDirectory/);
+  assert.match(modelPage, /generateMetadata/);
+  assert.match(modelPage, /BreadcrumbList/);
+  assert.match(sitemap, /readAllModelSeoLinks/);
+  assert.match(sitemap, /\/cars\/brand\/\$\{model\.brandSlug\}\/model\/\$\{model\.modelSlug\}/);
 });
 
 test("generic open sources only attach images bound to the listing card", () => {
@@ -176,6 +196,16 @@ test("generic open sources only attach images bound to the listing card", () => 
   assert.match(galleryWrapper, /sourceNativeUrls\.length >= result\.length/);
   assert.match(galleryWrapper, /listingImages/);
   assert.match(galleryWrapper, /fastPath/);
+});
+
+test("publisher prioritizes affordable recent cars up to 160 hp", () => {
+  assert.match(rebuildScript, /businessPriority/);
+  assert.match(rebuildScript, /priorityMaxTotalRub/);
+  assert.match(rebuildScript, /priorityMaxPowerHp/);
+  assert.match(rebuildScript, /priorityMinYear/);
+  assert.match(publishScript, /businessPriority/);
+  assert.match(publishScript, /calculatedShare/);
+  assert.match(publishScript, /priorityCount/);
 });
 
 test("catalog rejects implausible ordinary-car prices and power", () => {

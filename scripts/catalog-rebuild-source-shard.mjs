@@ -14,9 +14,9 @@ const shardCount = Math.max(1, Number(process.env.CATALOG_REBUILD_SHARD_COUNT ||
 const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000));
 const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000));
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 4));
+const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 8));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || minimumImages)));
+const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 300));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 5000));
@@ -24,6 +24,10 @@ const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_P
 const sourceConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 6)));
 const prepareConcurrency = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 16)));
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 3_600_000));
+const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
+const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
+const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
+const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;
 const startedAt = Date.now();
 const deadline = startedAt + timeLimitMs;
@@ -31,8 +35,8 @@ const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tr
 
 if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
-// На первичном проходе сохраняем минимальную реальную фотографию из карточки. Полные
-// галереи до 30 изображений накапливаются последующими проходами и не обрезаются.
+// Источник detail должен иметь возможность сохранить всю доступную галерею до 30 фото.
+// Публикация остаётся безопасной: quality gate всё равно проверяет реальные изображения.
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(networkImageLimit);
 
 function shardOf(value) {
@@ -54,8 +58,25 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
+function businessPriority(offer) {
+  const totalRub = Number(offer?.totalRub || 0);
+  const powerHp = Number(offer?.powerHp || 0);
+  const year = Number(offer?.year || 0);
+  const affordable = totalRub > 0 && totalRub <= priorityMaxTotalRub;
+  const lowPower = powerHp > 0 && powerHp <= priorityMaxPowerHp;
+  const recent = year >= priorityMinYear;
+  let score = 0;
+  if (affordable) score += 1200;
+  if (lowPower) score += 600;
+  if (recent) score += 600;
+  if (affordable && lowPower && recent) score += 2400;
+  if (totalRub > 0) score += 250;
+  if (Number(offer?.images?.length || 0) >= preferredImages) score += 120;
+  return score;
+}
 function quality(a, b) {
-  return (Number(b?.images?.length || 0) >= preferredImages ? 1 : 0) - (Number(a?.images?.length || 0) >= preferredImages ? 1 : 0)
+  return businessPriority(b) - businessPriority(a)
+    || (Number(b?.images?.length || 0) >= preferredImages ? 1 : 0) - (Number(a?.images?.length || 0) >= preferredImages ? 1 : 0)
     || Number(b?.images?.length || 0) - Number(a?.images?.length || 0)
     || currentTime(b) - currentTime(a);
 }
@@ -91,6 +112,7 @@ let pages = 0;
 let seen = 0;
 let normalized = 0;
 let knowledgeEnriched = 0;
+let detailEnriched = 0;
 
 function reject(reason) { rejections[reason] = Number(rejections[reason] || 0) + 1; }
 function addError(row) { if (errors.length < 2000) errors.push(row); }
@@ -99,20 +121,26 @@ function mergedRows() {
   for (const sourceId of sourceIds) {
     const live = [...fresh.get(sourceId).values()].sort(quality);
     const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id)).sort(quality);
-    output.push(...[...live, ...old].slice(0, targetPerSource));
+    output.push(...[...live, ...old].sort(quality).slice(0, targetPerSource));
   }
   return output.sort(quality);
 }
 function counts(map) { return Object.fromEntries(sourceIds.map((id) => [id, map.get(id).size])); }
 function report(stopReason = "running") {
   const offers = mergedRows();
+  const priorityOffers = offers.filter((offer) => Number(offer.totalRub || 0) > 0
+    && Number(offer.totalRub) <= priorityMaxTotalRub
+    && Number(offer.powerHp || 0) > 0
+    && Number(offer.powerHp) <= priorityMaxPowerHp
+    && Number(offer.year || 0) >= priorityMinYear).length;
   return {
-    version: 28, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 32, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 28, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
-      retentionMs, pages, seen, normalized, knowledgeEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
+      version: 32, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      priorityMaxTotalRub, priorityMaxPowerHp, priorityMinYear, priorityOffers,
+      retentionMs, pages, seen, normalized, knowledgeEnriched, detailEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
       publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
       rejectionReasons: rejections, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, stopReason,
@@ -163,20 +191,34 @@ async function prepare(base, source) {
     addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "knowledge", error: String(error?.message || error) });
   }
 
-  // Цена и адрес объявления должны приходить из листинга. Не открываем тяжёлую detail-страницу
-  // ради данных, которые она не исправит, и не загружаем фото только из-за отсутствующих л.с.
   if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   let gallery = images(offer.images);
-  if (gallery.length < minimumImages && source?.fetchImages && !expired()) {
-    try { gallery = images([...gallery, ...((await source.fetchImages(offer)) || [])]); }
-    catch (error) { addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery", error: String(error?.message || error) }); }
+  const powertrainKind = String(offer.powertrainKind || "");
+  const combustionSpecsMissing = !["electric", "series_hybrid"].includes(powertrainKind) && !Number(offer.engineCc || 0);
+  const detailNeeded = gallery.length < preferredImages
+    || !Number(offer.powerHp || 0)
+    || combustionSpecsMissing
+    || !String(offer.fuel || "").trim();
+
+  // fetchImages у точных адаптеров одновременно открывает detail API: получает полную галерею,
+  // мощность, объём, топливо и другие характеристики. Нельзя обходить этот вызов только потому,
+  // что в листинге уже была одна обложка — именно это ранее оставило карточки без цены и фото.
+  if (detailNeeded && source?.fetchImages && !expired()) {
+    try {
+      const detailedImages = (await source.fetchImages(offer)) || [];
+      offer = normalizeVehicleOfferSpecs(offer);
+      gallery = images([...gallery, ...detailedImages]);
+      detailEnriched++;
+    } catch (error) {
+      addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery_detail", error: String(error?.message || error) });
+    }
   }
   if (gallery.length < minimumImages) { reject("images"); return null; }
   const now = new Date().toISOString();
   offer = normalizeVehicleOfferSpecs({
     ...offer, status: "active", images: gallery, updatedAt: now,
     operational: { ...offer.operational, fullRebuildAt: now, galleryVerified: true, galleryImageCount: gallery.length,
-      gallerySourceImageCount: gallery.length, galleryPreferredCount: preferredImages,
+      gallerySourceImageCount: Math.max(gallery.length, Number(offer.operational?.gallerySourceImageCount || 0)), galleryPreferredCount: preferredImages,
       galleryPreferredReached: gallery.length >= preferredImages, galleryRebuiltFrom: "fresh_listing", seoEligible: true },
   });
   try {
@@ -225,6 +267,7 @@ async function fetchOne(state) {
     batch.add(base.id); bases.push(base); normalized++;
     if (bases.length >= targetPerSource - bucket.size) break;
   }
+  bases.sort((left, right) => businessPriority(right) - businessPriority(left) || currentTime(right) - currentTime(left));
   const before = bucket.size;
   for (const offer of await pool(bases, pagePrepareConcurrency, (base) => prepare(base, state.source))) {
     if (offer && bucket.size < targetPerSource) bucket.set(offer.id, offer);
