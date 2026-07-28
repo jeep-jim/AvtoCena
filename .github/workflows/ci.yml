@@ -152,7 +152,7 @@ jobs:
             let fetched;
             try { fetched = await source.fetchPage(null); }
             catch (error) { attempts.push({sourceId,stage:"list",error:String(error?.message||error)}); continue; }
-            const rows = Array.isArray(fetched?.items) ? fetched.items.slice(0, 6) : [];
+            const rows = Array.isArray(fetched?.items) ? fetched.items.slice(0, 16) : [];
             for (const raw of rows) {
               let offer;
               try { offer = source.normalizeOffer(raw); } catch (error) { attempts.push({sourceId,stage:"normalize",error:String(error?.message||error)}); continue; }
