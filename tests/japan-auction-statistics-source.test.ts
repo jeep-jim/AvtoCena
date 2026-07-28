@@ -28,6 +28,14 @@ test("Japan Transit parser creates a real sold-auction statistics record", () =>
   assert.deepEqual(row.images, ["https://japantransit.ru/storage/auction/note-e11.webp"]);
 });
 
+test("Japan Transit keeps JPY when the sold price is published in yen", () => {
+  const yenMarkup = markup.replace("~ 665 000 ₽", "665 000 ¥");
+  const row = parseJapanTransitAuctionStatistics(yenMarkup)[0];
+  assert.ok(row);
+  assert.equal(row.price, 665_000);
+  assert.equal(row.currency, "JPY");
+});
+
 test("Japan Transit adapter maps statistics to an auction-result catalogue card", () => {
   const row = parseJapanTransitAuctionStatistics(markup)[0];
   const offer = japanTransitAuctionStatisticsSource.normalizeOffer(row);
