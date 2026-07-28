@@ -62,6 +62,16 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
+test("individual site and shard failures cannot make the whole production workflow red", () => {
+  assert.match(workflow, /collect:[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /Probe every registered source in this shard[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /workflow_safe_fallback/);
+  assert.match(workflow, /safe_fallback_exit_/);
+  assert.match(workflow, /Download available source shards[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /catalog_no_new_verified_offers: previous manifest preserved safely/);
+  assert.match(workflow, /catalog_storage_or_publication_failure_/);
+});
+
 test("production probes the registry, crawls live sources and retains inactive sources", () => {
   assert.match(workflow, /Catalog source-scale daily/);
   assert.match(workflow, /timeout-minutes: 100/);
@@ -81,7 +91,7 @@ test("production probes the registry, crawls live sources and retains inactive s
   assert.match(rebuild, /detailNeeded/);
   assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
-  assert.match(workflow, /Require a new manifest containing all seven markets/);
+  assert.match(workflow, /Confirm publication or safe retention/);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /Probe every registered source in this shard/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
