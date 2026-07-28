@@ -55,7 +55,7 @@ test("daily production probes every registered site, crawls live sites and retai
   assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
 });
 
-test("priority galleries cache listing photos before requesting detail pages", () => {
+test("priority galleries cache listing photos and may enrich from detail pages", () => {
   const listingCache = fastGallery.indexOf("cacheImageFromUrl");
   const detailedFetch = fastGallery.indexOf("source.fetchImages(offer)");
   assert.ok(listingCache >= 0 && detailedFetch > listingCache);
@@ -68,7 +68,10 @@ test("priority galleries cache listing photos before requesting detail pages", (
   assert.match(importer, /autoGeorgiaEnrichedSource/);
   assert.match(importer, /reliableBootstrapSources/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"/);
-  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "8"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
+  assert.match(rebuild, /const detailNeeded = gallery\.length < preferredImages/);
+  assert.match(rebuild, /source\.fetchImages\(offer\)/);
 });
