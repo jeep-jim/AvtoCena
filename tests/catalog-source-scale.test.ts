@@ -54,7 +54,10 @@ test("daily workflow targets three productive sources and 3000 cars per market",
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
-  assert.match(workflow, /retention-days: 3/);
+  assert.match(workflow, /retention-days: 1/);
+  assert.match(workflow, /compression-level: 9/);
+  assert.match(workflow, /continue-on-error: true/);
+  assert.match(workflow, /catalog_markets_empty_/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
   assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
