@@ -56,7 +56,7 @@ test("priority galleries cache listing photos before requesting detail pages", (
   assert.match(fullGallery, /fastPath/);
   assert.match(importer, /priorityFastGallery/);
   assert.match(importer, /myAutoListSource/);
-  assert.match(importer, /autoGeorgiaExactSource/);
+  assert.match(importer, /autoGeorgiaEnrichedSource/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
 });
