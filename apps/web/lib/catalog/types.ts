@@ -8,6 +8,9 @@ export type PriceMode = "fixed" | "auction_start" | "estimated";
 export type CalculationStatus = "ready" | "needs_data" | "auction_start" | (string & {});
 export type PowertrainKind = "combustion" | "electric" | "series_hybrid" | "other_hybrid" | "unknown";
 export type PowerDataConfidence = "documented" | "source_exact" | "reference" | "estimated";
+export type CatalogKind = "listing" | "auction_result";
+export type AuctionResult = "sold" | "unsold";
+export type AuctionPriceKind = "hammer" | "published_result";
 
 export type CatalogImage = {
   id: string;
@@ -27,6 +30,9 @@ export type VehicleOffer = {
   market: CatalogMarket;
   offerType: OfferType;
   status: OfferStatus;
+  catalogKind?: CatalogKind;
+  auctionResult?: AuctionResult;
+  auctionPriceKind?: AuctionPriceKind;
   make: string;
   model: string;
   generation?: string;
@@ -69,7 +75,16 @@ export type VehicleOffer = {
   firstSeenAt: string;
   updatedAt: string;
   expiresAt?: string;
-  operational: { sourceUrl?: string; sourceVenueName?: string; raw?: unknown; vin?: string; frameNumber?: string; lastSeenScanCycleId?: string };
+  operational: {
+    sourceUrl?: string;
+    sourceVenueName?: string;
+    sourcePublishedAt?: string;
+    raw?: unknown;
+    vin?: string;
+    frameNumber?: string;
+    lastSeenScanCycleId?: string;
+    [key: string]: unknown;
+  };
 };
 
 export type PublicVehicleOffer = Omit<VehicleOffer, "operational" | "vin" | "frameNumber">;
