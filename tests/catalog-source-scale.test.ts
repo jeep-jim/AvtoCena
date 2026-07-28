@@ -15,12 +15,13 @@ const rebuildScript = fs.readFileSync(new URL("../scripts/catalog-rebuild-source
 const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const reliableSources = fs.readFileSync(new URL("../apps/web/lib/catalog/reliable-bootstrap-sources.ts", import.meta.url), "utf8");
 const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
 
-test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
+test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
@@ -32,22 +33,26 @@ test("source-scale catalog keeps 1000-offer quota per source and supports at lea
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("daily workflow cancels obsolete runs before safe publication", () => {
+test("daily workflow runs all 21 market shards in one wave", () => {
   assert.match(workflow, /group: catalog-source-scale-daily/);
   assert.match(workflow, /cancel-in-progress: true/);
-  assert.match(workflow, /max-parallel: 14/);
-  assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
+  assert.match(workflow, /max-parallel: 21/);
+  assert.match(workflow, /shard: \[0, 1, 2\]/);
+  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "3"/);
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("daily workflow targets 1000 verified cars per source for all seven markets", () => {
+test("daily workflow targets three productive sources and 3000 cars per market", () => {
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
+  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "6"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
   assert.match(workflow, /retention-days: 3/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
@@ -80,7 +85,7 @@ test("probe limits network work to active sources while rebuild retains the comp
   assert.doesNotMatch(rebuildScript, /const allSources/);
 });
 
-test("rebuild restores retained offers before crawling and persists a cursor for every live source", () => {
+test("rebuild uses the vehicle knowledge base before network gallery work", () => {
   assert.match(rebuildScript, /retention_loaded/);
   assert.match(rebuildScript, /readMarketOffers/);
   assert.match(rebuildScript, /readAllOffersForMaintenance/);
@@ -89,7 +94,9 @@ test("rebuild restores retained offers before crawling and persists a cursor for
   assert.match(rebuildScript, /storage\.writeJson/);
   assert.match(rebuildScript, /initialCursor/);
   assert.match(rebuildScript, /pagesVisited/);
-  assert.match(rebuildScript, /enrichOfferWithVehicleKnowledge/);
+  assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithVehicleKnowledge\(offer\)\)/);
+  assert.match(rebuildScript, /if \(gallery\.length < minimumImages && source\?\.fetchImages/);
+  assert.doesNotMatch(rebuildScript, /gallery\.length < minimumImages \|\|[^\n]*powerHp/);
   assert.match(rebuildScript, /networkImageLimit/);
 });
 
@@ -118,6 +125,13 @@ test("requested high-volume public sources are registered", () => {
   ]) {
     assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
   }
+});
+
+test("bootstrap replacements follow current Guazi and Turbo public routes", () => {
+  assert.match(reliableSources, /https:\/\/en\.guazi\.com\/\$\{path\}/);
+  assert.match(reliableSources, /https:\/\/ru\.guazi\.com\/\$\{path\}/);
+  assert.match(reliableSources, /sourceId: "turbo_kyrgyzstan_open"/);
+  assert.match(reliableSources, /\\\/cars\\\/[A-Za-z0-9_\-\[\]\+]+/);
 });
 
 test("brand rail uses the existing catalog query instead of a missing route", () => {
