@@ -10,10 +10,10 @@ const businessAudit = fs.readFileSync(new URL("../scripts/catalog-business-audit
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 
 test("workflow audits every available source shard before safe atomic publication", () => {
-  const download = workflow.indexOf("Download every source shard");
+  const download = workflow.indexOf("Download available source shards");
   const audit = workflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
   const publish = workflow.indexOf("npx tsx scripts/catalog-publish-source-scale.mjs");
-  const finalGate = workflow.indexOf("Require a new manifest containing all seven markets");
+  const finalGate = workflow.indexOf("Confirm publication or safe retention");
   assert.ok(download >= 0, "all available source shards must be downloaded");
   assert.ok(audit > download, "calculation and gallery audit must follow artifact download");
   assert.ok(publish > audit, "publisher must run after the source-scale audit");
@@ -23,7 +23,9 @@ test("workflow audits every available source shard before safe atomic publicatio
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /if \(!report\.published\) throw new Error/);
+  assert.match(workflow, /const safeRetention = !report\.published/);
+  assert.match(workflow, /catalog_storage_or_publication_failure_/);
+  assert.match(workflow, /catalog_no_new_verified_offers: previous manifest preserved safely/);
   assert.match(workflow, /catalog_markets_empty_/);
   assert.match(workflow, /markets\.filter\(\(market\) => !\(Number\(report\.byMarket\?\.\[market\] \|\| 0\) > 0\)\)/);
   assert.doesNotMatch(workflow, /previousManifestPreserved\)process\.exit\(1\)/);
