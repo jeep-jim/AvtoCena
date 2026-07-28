@@ -66,8 +66,10 @@ test("production probes the registry, crawls live sources and retains inactive s
   assert.match(workflow, /Catalog source-scale daily/);
   assert.match(workflow, /timeout-minutes: 100/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "6"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(rebuild, /targetPerSource/);

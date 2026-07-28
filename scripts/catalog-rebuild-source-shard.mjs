@@ -12,11 +12,11 @@ const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0));
 const shardCount = Math.max(1, Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 1));
 const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000));
-const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 1000));
-const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
-const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
+const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000));
+const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 4));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || preferredImages)));
+const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || minimumImages)));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 300));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 5000));
@@ -31,8 +31,8 @@ const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tr
 
 if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
-// Источнику достаточно быстро сохранить предпочтительные 6 фото. Уже накопленные галереи
-// до 30 изображений не обрезаются и остаются доступными при публикации.
+// На первичном проходе сохраняем минимальную реальную фотографию из карточки. Полные
+// галереи до 30 изображений накапливаются последующими проходами и не обрезаются.
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(networkImageLimit);
 
 function shardOf(value) {
@@ -107,11 +107,11 @@ function counts(map) { return Object.fromEntries(sourceIds.map((id) => [id, map.
 function report(stopReason = "running") {
   const offers = mergedRows();
   return {
-    version: 27, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 28, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 27, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      version: 28, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
       retentionMs, pages, seen, normalized, knowledgeEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
       publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
@@ -154,12 +154,23 @@ async function prepare(base, source) {
   let offer = normalizeVehicleOfferSpecs({ ...base });
   if (!offer?.id || offer.market !== market || !sourceIds.includes(String(offer.sourceId || ""))) { reject("identity"); return null; }
   if (commercial.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject("commercial"); return null; }
+
+  const powerBeforeKnowledge = Number(offer.powerHp || 0);
+  try {
+    offer = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
+    if (!powerBeforeKnowledge && Number(offer.powerHp || 0)) knowledgeEnriched++;
+  } catch (error) {
+    addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "knowledge", error: String(error?.message || error) });
+  }
+
+  // Цена и адрес объявления должны приходить из листинга. Не открываем тяжёлую detail-страницу
+  // ради данных, которые она не исправит, и не загружаем фото только из-за отсутствующих л.с.
+  if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   let gallery = images(offer.images);
-  if ((gallery.length < minimumImages || !Number(offer.sourcePrice || 0) || !Number(offer.powerHp || 0)) && source?.fetchImages && !expired()) {
+  if (gallery.length < minimumImages && source?.fetchImages && !expired()) {
     try { gallery = images([...gallery, ...((await source.fetchImages(offer)) || [])]); }
     catch (error) { addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery", error: String(error?.message || error) }); }
   }
-  if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   if (gallery.length < minimumImages) { reject("images"); return null; }
   const now = new Date().toISOString();
   offer = normalizeVehicleOfferSpecs({
@@ -169,9 +180,7 @@ async function prepare(base, source) {
       galleryPreferredReached: gallery.length >= preferredImages, galleryRebuiltFrom: "fresh_listing", seoEligible: true },
   });
   try {
-    const enriched = await enrichOfferWithVehicleKnowledge(offer);
-    if (!Number(offer.powerHp || 0) && Number(enriched?.powerHp || 0)) knowledgeEnriched++;
-    offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(enriched));
+    offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
   } catch (error) {
     addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "calculation", error: String(error?.message || error) });
     reject("calculation"); return null;
