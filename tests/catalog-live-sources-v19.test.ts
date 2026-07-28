@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import { parseAutoGeorgiaMoney } from "../apps/web/lib/catalog/auto-georgia-enriched-source";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -19,6 +20,13 @@ test("live high-volume sources use current listing and detail routes", () => {
   assert.ok(priority.includes('sourceId: "tcv_japan_open"'));
   assert.ok(priority.includes("https://www.tc-v.com/used_car/all/all/"));
   assert.ok(priority.includes("?pn=${page - 1}"));
+});
+
+test("AUTO.GE prices keep decimal cents separate from thousands", () => {
+  assert.equal(parseAutoGeorgiaMoney("6,400.00"), 6_400);
+  assert.equal(parseAutoGeorgiaMoney("17,500.00"), 17_500);
+  assert.equal(parseAutoGeorgiaMoney("28 700"), 28_700);
+  assert.equal(parseAutoGeorgiaMoney("9.200,00"), 9_200);
 });
 
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
