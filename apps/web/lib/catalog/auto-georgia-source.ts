@@ -84,7 +84,7 @@ function priceNumber(value: string) {
 }
 
 function money(value: string) {
-  const match = value.match(/([0-9][0-9\s,.']{1,})\s*(\$|₾|USD|GEL)\b?/i)
+  const match = value.match(/([0-9][0-9\s,.']{1,})\s*(\$|₾|USD|GEL)/i)
     || value.match(/(\$|₾|USD|GEL)\s*([0-9][0-9\s,.']{1,})/i);
   if (!match) return null;
   const amountText = /[0-9]/.test(match[1]) ? match[1] : match[2];
