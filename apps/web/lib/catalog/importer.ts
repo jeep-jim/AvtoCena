@@ -25,7 +25,7 @@ import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
-import { autoGeorgiaExactSource } from "./auto-georgia-source";
+import { autoGeorgiaEnrichedSource } from "./auto-georgia-enriched-source";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
@@ -47,7 +47,7 @@ const completeSources = [
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
   ...scaleMarketSources.map(prepareSource),
-  prepareSource(autoGeorgiaExactSource),
+  prepareSource(autoGeorgiaEnrichedSource),
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   encarCompleteSource,
