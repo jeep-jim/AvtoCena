@@ -60,7 +60,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       const page = selectedMarket ? requestedPage : 1;
       if (!hasFilters) {
         const rows = (await readMarketOffers(market.id))
-          .filter((offer) => offer.status === "active" && Boolean(offer.totalRub) && isCrediblePublicOffer(offer))
+          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))
           .sort((left, right) => offerFreshness(right) - offerFreshness(left));
         const start = (page - 1) * pageSize;
         const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));

@@ -188,7 +188,7 @@ async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>
   }
   throw new StorageConflictError();
 }
-function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o) && Boolean(o.totalRub); }
+function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o); }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
 async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency: number) {
   if (!tasks.length) return;

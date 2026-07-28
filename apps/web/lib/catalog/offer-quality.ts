@@ -74,6 +74,7 @@ function hasPlausibleSourcePrice(offer: VehicleOffer) {
     CHF: [500, 2_000_000, 350_000],
     PLN: [2_000, 8_000_000, 1_500_000],
     GEL: [1_000, 5_000_000, 1_000_000],
+    KGS: [20_000, 200_000_000, 50_000_000],
   };
   const [minimum, exceptionalMaximum, regularMaximum] = limits[currency] || [1, 1_000_000_000, 100_000_000];
   return sourcePrice >= minimum && sourcePrice <= (exceptional ? exceptionalMaximum : regularMaximum);
@@ -167,7 +168,7 @@ function rawImagesAreCredible(offer: VehicleOffer) {
   return true;
 }
 
-export function hasCredibleOfferContent(offer: VehicleOffer) {
+function hasCredibleListingCore(offer: VehicleOffer) {
   const sourceId = String(offer.sourceId || "");
   if (DISALLOWED_GENERIC_SOURCES.has(sourceId)) return false;
   const raw = offer.operational?.raw as any;
@@ -180,14 +181,26 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
   if (!hasMileage(offer)
-    || !hasRequiredPower(offer)
-    || !hasPlausibleSpecs(offer)
-    || !hasReadyCalculation(offer)
-    || !hasCompletePriceBreakdown(offer)
-    || !hasPlausiblePrice(offer)
+    || !offer.operational?.sourceUrl
+    || !hasPlausibleSourcePrice(offer)
     || !rawImagesAreCredible(offer)) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
+}
+
+function hasPendingCalculation(offer: VehicleOffer) {
+  const status = String(offer.calculationStatus || "");
+  return !Number(offer.totalRub || 0) && (status === "needs_data" || status.startsWith("needs_"));
+}
+
+export function hasCredibleOfferContent(offer: VehicleOffer) {
+  if (!hasCredibleListingCore(offer)) return false;
+  if (hasPendingCalculation(offer)) return true;
+  return hasRequiredPower(offer)
+    && hasPlausibleSpecs(offer)
+    && hasReadyCalculation(offer)
+    && hasCompletePriceBreakdown(offer)
+    && hasPlausiblePrice(offer);
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) { return offer.status === "active" && hasCredibleOfferContent(offer); }
