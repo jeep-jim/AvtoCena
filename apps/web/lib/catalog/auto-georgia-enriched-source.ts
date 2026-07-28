@@ -1,5 +1,7 @@
+import crypto from "node:crypto";
+import { getJsonStorage } from "../data";
 import { autoGeorgiaExactSource } from "./auto-georgia-source";
-import { cacheImageFromUrl } from "./storage";
+import { publicImageUrl } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
 const HEADERS = {
@@ -10,6 +12,7 @@ const HEADERS = {
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
+const AUTO_GE_IMAGE_HOST_RE = /(?:^|\.)(?:auto\.ge|digitaloceanspaces\.com)$/i;
 
 function plain(markup: string) {
   return String(markup || "")
@@ -27,6 +30,16 @@ function absoluteUrl(value: string, baseUrl: string) {
   try { return new URL(value.replace(/\\\//g, "/").replace(/&amp;/gi, "&"), baseUrl).toString(); } catch { return ""; }
 }
 
+function safeAutoGeImageUrl(value: string) {
+  try {
+    const url = new URL(value);
+    if (!["http:", "https:"].includes(url.protocol) || !AUTO_GE_IMAGE_HOST_RE.test(url.hostname) || BAD_IMAGE_RE.test(url.toString())) return "";
+    return url.toString();
+  } catch {
+    return "";
+  }
+}
+
 function collectImages(markup: string, baseUrl: string) {
   const candidates: string[] = [];
   for (const match of markup.matchAll(/<(?:img|source|meta)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["']/gi)) candidates.push(match[1]);
@@ -34,9 +47,7 @@ function collectImages(markup: string, baseUrl: string) {
     match[1].split(",").forEach((item) => candidates.push(item.trim().split(/\s+/)[0]));
   }
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+/gi)) candidates.push(match[0].replace(/\\\//g, "/"));
-  return [...new Set(candidates
-    .map((item) => absoluteUrl(item, baseUrl))
-    .filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url) && /auto\.ge|cloudfront|amazonaws|imgix|imagekit/i.test(url)))];
+  return [...new Set(candidates.map((item) => safeAutoGeImageUrl(absoluteUrl(item, baseUrl))).filter(Boolean))];
 }
 
 function listingPriority(raw: unknown) {
@@ -77,6 +88,39 @@ async function detailData(offer: VehicleOffer) {
   }
 }
 
+async function cacheAutoGeImage(rawUrl: string, offer: VehicleOffer): Promise<CatalogImage | null> {
+  const safeUrl = safeAutoGeImageUrl(rawUrl);
+  if (!safeUrl) return null;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 12_000));
+  try {
+    const response = await fetch(safeUrl, {
+      headers: { ...HEADERS, accept: "image/avif,image/webp,image/png,image/jpeg,*/*;q=0.8", referer: String(offer.operational?.sourceUrl || "https://www.auto.ge/") },
+      redirect: "follow",
+      signal: controller.signal,
+    });
+    if (!response.ok || !safeAutoGeImageUrl(response.url || safeUrl)) return null;
+    const mimeType = String(response.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
+    if (!/^image\/(?:jpeg|png|webp)$/.test(mimeType)) return null;
+    const maximumBytes = Math.max(100_000, Number(process.env.CATALOG_IMAGE_MAX_BYTES || 12_000_000));
+    const declaredBytes = Number(response.headers.get("content-length") || 0);
+    if (declaredBytes > maximumBytes) return null;
+    const buffer = Buffer.from(await response.arrayBuffer());
+    if (buffer.length < 8_000 || buffer.length > maximumBytes) return null;
+    const checksum = crypto.createHash("sha256").update(buffer).digest("hex");
+    const extension = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg";
+    const id = checksum.slice(0, 32);
+    const objectKey = `catalog/images/${offer.market}/${checksum}.${extension}`;
+    const storage = getJsonStorage();
+    if (!(await storage.binaryExists?.(objectKey))) await storage.putBinary?.(objectKey, buffer, mimeType, { ifNoneMatch: "*" });
+    return { id, url: publicImageUrl(id, objectKey), objectKey, checksum, mimeType, size: buffer.length };
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function cachePool(urls: string[], offer: VehicleOffer, limit: number) {
   const result: CatalogImage[] = [];
   let cursor = 0;
@@ -85,10 +129,8 @@ async function cachePool(urls: string[], offer: VehicleOffer, limit: number) {
     while (result.length < limit) {
       const index = cursor++;
       if (index >= urls.length) return;
-      const image = await cacheImageFromUrl(urls[index], offer.market, {
-        headers: { ...HEADERS, referer: String(offer.operational?.sourceUrl || "https://www.auto.ge/") },
-      }).catch(() => null);
-      if (image && image.size > 8_000 && !result.some((row) => row.id === image.id)) result.push(image);
+      const image = await cacheAutoGeImage(urls[index], offer);
+      if (image && !result.some((row) => row.id === image.id)) result.push(image);
     }
   }));
   return result.slice(0, limit);
@@ -111,7 +153,7 @@ export const autoGeorgiaEnrichedSource: CatalogSourceAdapter = {
     const row = (offer.operational?.raw || {}) as any;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 6)));
     const detailImages = await detailData(offer);
-    const urls = [...new Set([...(Array.isArray(row.images) ? row.images : []), ...detailImages].map(String).filter(Boolean))];
+    const urls = [...new Set([...(Array.isArray(row.images) ? row.images : []), ...detailImages].map(String).map(safeAutoGeImageUrl).filter(Boolean))];
     return cachePool(urls.slice(0, limit * 5), offer, limit);
   },
   healthCheck: () => autoGeorgiaExactSource.healthCheck(),
