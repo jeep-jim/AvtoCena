@@ -1,0 +1,99 @@
+name: Apply Japan auction currency v31
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/japan-auction-currency-v31
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Preserve published auction currency
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/web/lib/catalog/japan-auction-statistics-source.ts')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('  currency: "RUB";\n', '  currency: "RUB" | "JPY";\n', 1)
+
+          marker = '''function positiveInteger(value: string | undefined) {
+  const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+'''
+          helper = marker + '''
+function publishedAuctionPrice(value: string) {
+  const match = value.match(/~?\\s*([0-9][0-9\\s\\u00a0]{3,})\\s*(₽|руб(?:\\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/i);
+  const price = positiveInteger(match?.[1]);
+  if (!price) return null;
+  const token = String(match?.[2] || "").toUpperCase();
+  const currency: "RUB" | "JPY" = /¥|￥|JPY|ИЕН/.test(token) ? "JPY" : "RUB";
+  return { price, currency };
+}
+'''
+          if 'function publishedAuctionPrice' not in text:
+              if marker not in text:
+                  raise SystemExit('positive_integer_marker_missing')
+              text = text.replace(marker, helper, 1)
+
+          old_price = '''    const price = positiveInteger(plain.match(/~?\\s*([0-9][0-9\\s\\u00a0]{3,})\\s*₽/i)?.[1]);
+'''
+          new_price = '''    const publishedPrice = publishedAuctionPrice(plain);
+    const price = publishedPrice?.price;
+    const currency = publishedPrice?.currency;
+'''
+          if old_price in text:
+              text = text.replace(old_price, new_price, 1)
+          elif new_price not in text:
+              raise SystemExit('price_parser_marker_missing')
+
+          text = text.replace('.replace(/~?\\s*[0-9][0-9\\s\\u00a0]{3,}\\s*₽/gi, " ")', '.replace(/~?\\s*[0-9][0-9\\s\\u00a0]{3,}\\s*(?:₽|руб(?:\\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/gi, " ")', 1)
+          text = text.replace('${grade || ""}|${price}|${images[0]}`;', '${grade || ""}|${price}|${currency}|${images[0]}`;', 1)
+          text = text.replace('      currency: "RUB",\n', '      currency: currency!,\n', 1)
+          path.write_text(text, encoding='utf-8')
+
+          test_path = Path('tests/japan-auction-statistics-source.test.ts')
+          tests = test_path.read_text(encoding='utf-8')
+          addition = '''
+
+test("Japan Transit keeps JPY when the sold price is published in yen", () => {
+  const yenMarkup = markup.replace("~ 665 000 ₽", "665 000 ¥");
+  const row = parseJapanTransitAuctionStatistics(yenMarkup)[0];
+  assert.ok(row);
+  assert.equal(row.price, 665_000);
+  assert.equal(row.currency, "JPY");
+});
+'''
+          if 'keeps JPY when the sold price is published in yen' not in tests:
+              tests += addition
+          test_path.write_text(tests, encoding='utf-8')
+          PY
+      - name: Verify parser and production types
+        run: |
+          npm ci
+          node --import tsx --test tests/japan-auction-statistics-source.test.ts
+          node --import tsx --test tests/catalog-source-scale.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit verified fix
+        shell: bash
+        run: |
+          rm -f .github/workflows/apply-japan-auction-currency-v31.yml
+          git config user.name "jeep-jim"
+          git config user.email "173029176+jeep-jim@users.noreply.github.com"
+          git add apps/web/lib/catalog/japan-auction-statistics-source.ts tests/japan-auction-statistics-source.test.ts .github/workflows/apply-japan-auction-currency-v31.yml
+          git commit -m "Япония: сохранять реальную валюту цены аукционного результата"
+          git push origin HEAD:automation/japan-auction-currency-v31
