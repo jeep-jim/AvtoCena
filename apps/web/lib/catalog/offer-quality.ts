@@ -180,8 +180,9 @@ function hasCredibleListingCore(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const currentYear = new Date().getFullYear();
   if (year < 1985 || year > currentYear + 1) return false;
+  const publicDto = !offer.operational && !sourceId;
   if (!hasMileage(offer)
-    || !offer.operational?.sourceUrl
+    || (!publicDto && !offer.operational?.sourceUrl)
     || !hasPlausibleSourcePrice(offer)
     || !rawImagesAreCredible(offer)) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
