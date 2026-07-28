@@ -37,12 +37,13 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
 
 test("daily production probes every registered site, crawls live sites and retains inactive sites", () => {
   assert.match(workflow, /Catalog source-scale daily/);
-  assert.match(workflow, /max-parallel: 14/);
+  assert.match(workflow, /max-parallel: 21/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "4"/);
-  assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "3"/);
+  assert.match(workflow, /shard: \[0, 1, 2\]/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(probe, /sourceIdsForRebuild = activeSourceIds\.join/);
   assert.match(probe, /sourceIdsForRebuild/);
@@ -65,6 +66,9 @@ test("priority galleries cache listing photos before requesting detail pages", (
   assert.match(importer, /priorityFastGallery/);
   assert.match(importer, /myAutoListSource/);
   assert.match(importer, /autoGeorgiaEnrichedSource/);
-  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
+  assert.match(importer, /reliableBootstrapSources/);
+  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
 });
