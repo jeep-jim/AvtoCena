@@ -1,5 +1,5 @@
 name: Catalog source-scale daily
-run-name: Catalog 7 markets · 1000 per source · ${{ github.sha }}
+run-name: Catalog 7 markets · 3 sources × 1000 cars · ${{ github.sha }}
 
 on:
   schedule:
@@ -88,10 +88,10 @@ jobs:
     timeout-minutes: 100
     strategy:
       fail-fast: false
-      max-parallel: 14
+      max-parallel: 21
       matrix:
         market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
-        shard: [0, 1, 2, 3]
+        shard: [0, 1, 2]
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -103,27 +103,27 @@ jobs:
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
-      CATALOG_REBUILD_SHARD_COUNT: "4"
+      CATALOG_REBUILD_SHARD_COUNT: "3"
       CATALOG_PROBE_TIMEOUT_MS: "15000"
       CATALOG_PROBE_ATTEMPTS: "2"
-      CATALOG_PROBE_CONCURRENCY: "6"
+      CATALOG_PROBE_CONCURRENCY: "8"
       CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
       CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
-      CATALOG_REBUILD_TARGET_PER_MARKET: "1000"
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3000"
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "5000"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "9000"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "4"
       CATALOG_OFFER_RETENTION_MS: "259200000"
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
-      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_COLLECTION_IMAGE_LIMIT: "6"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "1"
       CATALOG_GALLERY_FAST_PATH: "true"
       CATALOG_SOURCE_TIMEOUT_MS: "18000"
       CATALOG_IMAGE_TIMEOUT_MS: "12000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "10"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "24"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "6"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
       CATALOG_REBUILD_TIME_LIMIT_MS: "3600000"
@@ -197,16 +197,16 @@ jobs:
       CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
-      CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"
+      CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"
       CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
       CATALOG_OFFER_RETENTION_MS: "259200000"
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
-      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "6"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_INDEX_WRITE_CONCURRENCY: "16"
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "16"
-      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
-      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":1,"china":1,"japan":1,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
+      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"
+      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":3,"china":3,"japan":3,"uae":3,"europe":3,"georgia":3,"kyrgyzstan":3}'
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-source-scale-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
@@ -240,7 +240,8 @@ jobs:
           if (!(Number(report.total || 0) > 0)) throw new Error('catalog_total_empty');
           const missing = markets.filter((market) => !(Number(report.byMarket?.[market] || 0) > 0));
           if (missing.length) throw new Error(`catalog_markets_empty_${missing.join('_')}`);
-          console.log(JSON.stringify({generationId: report.generationId, total: report.total, byMarket: report.byMarket, byMarketAndSource: report.byMarketAndSource, belowTarget: report.marketsBelowTarget}, null, 2));
+          const belowThreeSources = markets.filter((market) => Object.keys(report.byMarketAndSource?.[market] || {}).length < 3);
+          console.log(JSON.stringify({generationId: report.generationId, total: report.total, byMarket: report.byMarket, byMarketAndSource: report.byMarketAndSource, belowTarget: report.marketsBelowTarget, belowThreeSources}, null, 2));
           NODE
       - name: Run production catalog smoke checks
         run: npm run catalog:smoke
