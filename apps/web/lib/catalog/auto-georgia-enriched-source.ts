@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { getJsonStorage } from "../data";
 import { autoGeorgiaExactSource } from "./auto-georgia-source";
+import { parseOpenMarketPage, type OpenMarketSourceConfig } from "./open-market-sources";
 import { publicImageUrl } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
@@ -13,6 +14,15 @@ const HEADERS = {
 };
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
 const AUTO_GE_IMAGE_HOST_RE = /(?:^|\.)(?:auto\.ge|digitaloceanspaces\.com)$/i;
+const RAV4_CONFIG: OpenMarketSourceConfig = {
+  sourceId: "auto_georgia_open",
+  market: "georgia",
+  label: "AUTO.GE Toyota RAV4",
+  baseUrl: "https://www.auto.ge",
+  currency: "USD",
+  detailPattern: /\/en\/auto\/toyota\/rav4\/[^?#]+-\d+\.html$/i,
+  listUrls: () => [],
+};
 
 function plain(markup: string) {
   return String(markup || "")
@@ -53,11 +63,31 @@ function collectImages(markup: string, baseUrl: string) {
 function listingPriority(raw: unknown) {
   const row = raw as any;
   const text = `${row?.make || ""} ${row?.model || ""} ${row?.title || ""}`;
-  if (/Toyota\s+RAV\s*4/i.test(text)) return 100;
-  if (/Toyota\s+(?:Camry|Corolla|Alphard)/i.test(text)) return 80;
-  if (/Nissan\s+(?:Rogue|X-?Trail|Qashqai)/i.test(text)) return 60;
-  if (/Honda\s+(?:CR-?V|HR-?V|Fit|Vezel)/i.test(text)) return 50;
-  return 0;
+  const imageCount = Array.isArray(row?.images) ? row.images.length : 0;
+  if (/Toyota\s+RAV\s*4/i.test(text)) return 100 + Math.min(20, imageCount);
+  if (/Toyota\s+(?:Camry|Corolla|Alphard)/i.test(text)) return 80 + Math.min(20, imageCount);
+  if (/Nissan\s+(?:Rogue|X-?Trail|Qashqai)/i.test(text)) return 60 + Math.min(20, imageCount);
+  if (/Honda\s+(?:CR-?V|HR-?V|Fit|Vezel)/i.test(text)) return 50 + Math.min(20, imageCount);
+  return imageCount;
+}
+
+async function fetchRav4Rows(cursor?: string | null) {
+  const page = Math.max(1, Number(cursor || 1));
+  const url = page <= 1
+    ? "https://www.auto.ge/en/auto/toyota/rav4/"
+    : `https://www.auto.ge/en/auto/toyota/rav4/index${page}.html`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 18_000));
+  try {
+    const response = await fetch(url, { headers: { ...HEADERS, referer: "https://www.auto.ge/en/auto/toyota/rav4/" }, redirect: "follow", signal: controller.signal });
+    if (!response.ok) return [];
+    const markup = await response.text();
+    return parseOpenMarketPage(markup, RAV4_CONFIG);
+  } catch {
+    return [];
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function detailData(offer: VehicleOffer) {
@@ -141,11 +171,19 @@ export const autoGeorgiaEnrichedSource: CatalogSourceAdapter = {
   market: autoGeorgiaExactSource.market,
   accessMode: autoGeorgiaExactSource.accessMode,
   async fetchPage(cursor): Promise<CatalogFetchResult> {
-    const result = await autoGeorgiaExactSource.fetchPage(cursor);
-    return {
-      ...result,
-      items: [...(result.items || [])].sort((left, right) => listingPriority(right) - listingPriority(left)),
-    };
+    const [result, rav4Rows] = await Promise.all([
+      autoGeorgiaExactSource.fetchPage(cursor),
+      fetchRav4Rows(cursor),
+    ]);
+    const merged = new Map<string, any>();
+    for (const row of [...rav4Rows, ...(result.items || [])]) {
+      const id = String((row as any)?.detailUrl || (row as any)?.id || "");
+      if (!id) continue;
+      const previous = merged.get(id);
+      if (!previous || listingPriority(row) > listingPriority(previous)) merged.set(id, row);
+    }
+    const items = [...merged.values()].sort((left, right) => listingPriority(right) - listingPriority(left));
+    return { ...result, items, count: items.length };
   },
   normalizeOffer: (raw) => autoGeorgiaExactSource.normalizeOffer(raw),
   mapStatus: (raw) => autoGeorgiaExactSource.mapStatus(raw),
