@@ -1,5 +1,5 @@
 import { autoGeorgiaExactSource } from "./auto-georgia-source";
-import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -18,6 +18,16 @@ function plain(markup: string) {
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function listingPriority(raw: unknown) {
+  const row = raw as any;
+  const text = `${row?.make || ""} ${row?.model || ""} ${row?.title || ""}`;
+  if (/Toyota\s+RAV\s*4/i.test(text)) return 100;
+  if (/Toyota\s+(?:Camry|Corolla|Alphard)/i.test(text)) return 80;
+  if (/Nissan\s+(?:Rogue|X-?Trail|Qashqai)/i.test(text)) return 60;
+  if (/Honda\s+(?:CR-?V|HR-?V|Fit|Vezel)/i.test(text)) return 50;
+  return 0;
 }
 
 async function enrichFromDetail(offer: VehicleOffer) {
@@ -50,7 +60,13 @@ export const autoGeorgiaEnrichedSource: CatalogSourceAdapter = {
   sourceId: autoGeorgiaExactSource.sourceId,
   market: autoGeorgiaExactSource.market,
   accessMode: autoGeorgiaExactSource.accessMode,
-  fetchPage: (cursor) => autoGeorgiaExactSource.fetchPage(cursor),
+  async fetchPage(cursor): Promise<CatalogFetchResult> {
+    const result = await autoGeorgiaExactSource.fetchPage(cursor);
+    return {
+      ...result,
+      items: [...(result.items || [])].sort((left, right) => listingPriority(right) - listingPriority(left)),
+    };
+  },
   normalizeOffer: (raw) => autoGeorgiaExactSource.normalizeOffer(raw),
   mapStatus: (raw) => autoGeorgiaExactSource.mapStatus(raw),
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
