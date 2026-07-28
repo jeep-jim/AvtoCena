@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 const navItems = ["Обзор", "Заявки", "Клиенты", "Команда", "Рынки", "Компания"] as const;
 type NavItem = (typeof navItems)[number];
 type LeadTone = "new" | "work" | "ready" | "deal" | "late";
+type DemoMarketId = "japan" | "china" | "korea" | "uae" | "europe" | "georgia" | "kyrgyzstan";
 
 const leadPool = [
   { id: 1, city: "Новокузнецк", client: "Алексей", car: "Кроссовер до 2 млн ₽", source: "Сайт", status: "Новая", tone: "new", time: "1 мин" },
@@ -25,14 +26,14 @@ const managers = [
 ] as const;
 
 const markets = [
-  ["🇯🇵", "Япония", "5 240", "31 заявка"],
-  ["🇨🇳", "Китай", "4 680", "24 заявки"],
-  ["🇰🇷", "Корея", "2 175", "19 заявок"],
-  ["🇦🇪", "ОАЭ", "1 486", "11 заявок"],
-  ["🇪🇺", "Европа", "6 663", "17 заявок"],
-  ["🇬🇪", "Грузия", "1 142", "5 заявок"],
-  ["🇰🇬", "Кыргызстан", "1 019", "3 заявки"],
-] as const;
+  { id: "japan", flag: "🇯🇵", name: "Япония", leads: "31 заявка" },
+  { id: "china", flag: "🇨🇳", name: "Китай", leads: "24 заявки" },
+  { id: "korea", flag: "🇰🇷", name: "Корея", leads: "19 заявок" },
+  { id: "uae", flag: "🇦🇪", name: "ОАЭ", leads: "11 заявок" },
+  { id: "europe", flag: "🇪🇺", name: "Европа", leads: "17 заявок" },
+  { id: "georgia", flag: "🇬🇪", name: "Грузия", leads: "5 заявок" },
+  { id: "kyrgyzstan", flag: "🇰🇬", name: "Кыргызстан", leads: "3 заявки" },
+] as const satisfies ReadonlyArray<{ id: DemoMarketId; flag: string; name: string; leads: string }>;
 
 const clients = [
   ["Алексей Петров", "Новокузнецк", "до 2 млн ₽", "Связаться сегодня", "Кроссовер"],
@@ -68,6 +69,8 @@ const funnelMeta: Record<"Новые" | "В работе" | "Расчёт" | "С
   "Расчёт": { tone: "ready", className: "demo-funnel--ready" },
   "Сделка": { tone: "deal", className: "demo-funnel--deal" },
 };
+
+const countFormatter = new Intl.NumberFormat("ru-RU");
 
 function VerifiedIcon({ className = "", positive = false }: { className?: string; positive?: boolean }) {
   return (
@@ -141,21 +144,29 @@ export function DealerDemoDashboard() {
   const [activityIndex, setActivityIndex] = useState(0);
   const [toastVisible, setToastVisible] = useState(true);
   const [catalogImages, setCatalogImages] = useState<string[]>([]);
+  const [marketCounts, setMarketCounts] = useState<Partial<Record<DemoMarketId, number>>>({});
+  const [catalogUpdatedAt, setCatalogUpdatedAt] = useState("");
 
   const visibleLeads = useMemo(() => leadPool.map((_, index) => leadPool[(index + leadOffset) % leadPool.length]).slice(0, 4), [leadOffset]);
+  const publishedMarketTotal = useMemo(() => markets.reduce((sum, market) => sum + Number(marketCounts[market.id] || 0), 0), [marketCounts]);
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`/api/catalog/search?pageSize=24&_=${Date.now()}`, { cache: "no-store" })
-      .then((response) => response.ok ? response.json() : null)
-      .then((data) => {
+    Promise.all([
+      fetch(`/api/catalog/search?pageSize=24&_=${Date.now()}`, { cache: "no-store" }).then((response) => response.ok ? response.json() : null),
+      fetch(`/api/catalog/market-counts?_=${Date.now()}`, { cache: "no-store" }).then((response) => response.ok ? response.json() : null),
+    ])
+      .then(([catalogData, countsData]) => {
         if (cancelled) return;
-        const rows: any[] = Array.isArray(data?.items) ? data.items : Array.isArray(data?.offers) ? data.offers : [];
+        const rows: any[] = Array.isArray(catalogData?.items) ? catalogData.items : Array.isArray(catalogData?.offers) ? catalogData.offers : [];
         const candidates: string[] = rows
           .map((offer) => catalogImageFromOffer(offer))
           .filter((url): url is string => Boolean(url) && (/^https?:\/\//.test(url) || url.startsWith("/api/catalog/images/")));
-        const images: string[] = Array.from(new Set<string>(candidates)).slice(0, 12);
-        setCatalogImages(images);
+        setCatalogImages(Array.from(new Set<string>(candidates)).slice(0, 12));
+
+        const counts = countsData?.markets && typeof countsData.markets === "object" ? countsData.markets : {};
+        setMarketCounts(Object.fromEntries(markets.map((market) => [market.id, Math.max(0, Number(counts[market.id] || 0))])) as Record<DemoMarketId, number>);
+        setCatalogUpdatedAt(String(countsData?.updatedAt || ""));
       })
       .catch(() => undefined);
     return () => { cancelled = true; };
@@ -204,7 +215,7 @@ export function DealerDemoDashboard() {
 
     if (activeNav === "Команда") return <Panel title="Команда и показатели" subtitle="В демо фирменные аватарки показываются всегда"><div className="grid gap-3 md:grid-cols-3">{managers.map((manager) => <article key={manager.name} className="rounded-2xl bg-[var(--demo-soft)] p-4 text-center"><img src={manager.avatar} alt="" className="mx-auto h-20 w-20 rounded-full object-cover" /><div className="mt-3 font-black">{manager.name}</div><div className="mt-1 text-xs font-bold text-[var(--demo-muted)]">{manager.role}</div><div className="mt-4 grid grid-cols-2 gap-2"><div className="rounded-xl bg-[var(--demo-panel)] p-2"><div className="text-lg font-black">{manager.conversion}</div><div className="text-[10px] font-bold text-[var(--demo-muted)]">конверсия</div></div><div className="rounded-xl bg-[var(--demo-panel)] p-2"><div className="text-lg font-black">{manager.response}</div><div className="text-[10px] font-bold text-[var(--demo-muted)]">ответ</div></div></div></article>)}</div></Panel>;
 
-    if (activeNav === "Рынки") return <Panel title="Рынки и расчёт" subtitle="Единые правила расчёта и настройки компании"><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{markets.map(([flag, name, cars, leads]) => <article key={name} className="rounded-2xl bg-[var(--demo-soft)] p-4"><div className="flex items-center justify-between"><span className="text-2xl">{flag}</span><span className="h-2 w-2 rounded-full bg-[var(--demo-positive)]" /></div><div className="mt-3 text-lg font-black">{name}</div><div className="mt-3 text-3xl font-black">{cars}</div><div className="mt-1 text-xs font-bold text-[var(--demo-muted)]">автомобилей · {leads}</div></article>)}</div></Panel>;
+    if (activeNav === "Рынки") return <Panel title="Рынки и расчёт" subtitle={`Фактическое количество автомобилей в опубликованном каталоге${catalogUpdatedAt ? ` · обновлено ${new Date(catalogUpdatedAt).toLocaleString("ru-RU")}` : ""}`}><div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{markets.map((market) => { const count = marketCounts[market.id]; return <article key={market.id} className="rounded-2xl bg-[var(--demo-soft)] p-4"><div className="flex items-center justify-between"><span className="text-2xl">{market.flag}</span><span className={`h-2 w-2 rounded-full ${Number(count || 0) > 0 ? "bg-[var(--demo-positive)]" : "bg-[var(--demo-muted)]"}`} /></div><div className="mt-3 text-lg font-black">{market.name}</div><div className="mt-3 text-3xl font-black">{count === undefined ? "—" : countFormatter.format(count)}</div><div className="mt-1 text-xs font-bold text-[var(--demo-muted)]">автомобилей в каталоге · {market.leads}</div></article>; })}</div></Panel>;
 
     if (activeNav === "Компания") {
       return (
@@ -226,11 +237,11 @@ export function DealerDemoDashboard() {
 
   return (
     <div className="dealer-demo-shell mx-auto w-full max-w-[1500px] px-4 pb-14 pt-7 md:px-8 md:pb-20 md:pt-10">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4"><div><div className="text-sm font-black uppercase tracking-[.18em] text-red-400">Демо без регистрации</div><h1 className="mt-2 text-4xl font-black tracking-[-.05em] md:text-6xl">Посмотрите CRM изнутри</h1><p className="mt-3 max-w-3xl text-sm font-bold leading-6 text-[var(--demo-muted)] md:text-base">Все данные демонстрационные. Откройте каждый раздел и оцените полноценный рабочий кабинет компании.</p></div><Link href="/dealers#connect" className="dealer-primary-button rounded-2xl bg-red-500 px-6 py-4 text-sm font-black text-white">Подключить компанию</Link></div>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4"><div><div className="text-sm font-black uppercase tracking-[.18em] text-red-400">Демо без регистрации</div><h1 className="mt-2 text-4xl font-black tracking-[-.05em] md:text-6xl">Посмотрите CRM изнутри</h1><p className="mt-3 max-w-3xl text-sm font-bold leading-6 text-[var(--demo-muted)] md:text-base">Заявки, сотрудники и показатели демонстрационные. Количество автомобилей по рынкам берётся из действующего опубликованного каталога.</p></div><Link href="/dealers#connect" className="dealer-primary-button rounded-2xl bg-red-500 px-6 py-4 text-sm font-black text-white">Подключить компанию</Link></div>
 
       <section className="dealer-demo-window overflow-hidden rounded-[2rem] bg-[var(--demo-panel)]">
         <header className="flex flex-wrap items-center justify-between gap-3 border-b border-white/7 px-4 py-4 md:px-6">
-          <div className="flex items-center gap-3"><TopAvtoLogo compact /><div><div className="font-black">TopAvto · демо</div><div className="text-xs font-bold text-[var(--demo-muted)]">Новокузнецк · 7 рынков</div></div></div>
+          <div className="flex items-center gap-3"><TopAvtoLogo compact /><div><div className="font-black">TopAvto · демо</div><div className="text-xs font-bold text-[var(--demo-muted)]">Новокузнецк · 7 рынков{publishedMarketTotal > 0 ? ` · ${countFormatter.format(publishedMarketTotal)} авто` : ""}</div></div></div>
           <div className="flex items-center gap-3"><span className="demo-online-chip hidden rounded-full px-3 py-2 text-xs font-black sm:inline-flex">● Система работает</span><div className="flex items-center gap-2"><DemoAvatar /><span className="hidden text-sm font-black sm:inline">Демо</span></div></div>
         </header>
 
