@@ -50,7 +50,7 @@ test("daily workflow runs all 21 market shards in one wave", () => {
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("daily workflow targets three productive sources, rich galleries and 3000 cars per market", () => {
+test("daily workflow targets three productive sources, progressive galleries and 3000 cars per market", () => {
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
@@ -62,6 +62,10 @@ test("daily workflow targets three productive sources, rich galleries and 3000 c
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
+  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"/);
+  assert.match(workflow, /CATALOG_IMAGE_FETCH_CONCURRENCY: "6"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "3300000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
@@ -108,7 +112,7 @@ test("probe limits network work to active sources while rebuild retains the comp
   assert.doesNotMatch(rebuildScript, /const allSources/);
 });
 
-test("rebuild enriches knowledge and then opens detail for specs and galleries", () => {
+test("rebuild calculates first and progressively opens detail without exhausting the run", () => {
   assert.match(rebuildScript, /retention_loaded/);
   assert.match(rebuildScript, /readMarketOffers/);
   assert.match(rebuildScript, /readAllOffersForMaintenance/);
@@ -116,12 +120,16 @@ test("rebuild enriches knowledge and then opens detail for specs and galleries",
   assert.match(rebuildScript, /storage\.readJson/);
   assert.match(rebuildScript, /storage\.writeJson/);
   assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithVehicleKnowledge\(offer\)\)/);
-  assert.match(rebuildScript, /const detailNeeded = gallery\.length < preferredImages/);
-  assert.match(rebuildScript, /!Number\(offer\.powerHp \|\| 0\)/);
+  assert.match(rebuildScript, /calculateSafely\(offer, "calculation_before_detail"\)/);
+  assert.match(rebuildScript, /detailLimitPerSource/);
+  assert.match(rebuildScript, /reserveDetail/);
+  assert.match(rebuildScript, /detailDeferredBySource/);
+  assert.match(rebuildScript, /priorityGalleryMissing/);
   assert.match(rebuildScript, /source\.fetchImages\(offer\)/);
-  assert.match(rebuildScript, /gallery_detail/);
-  assert.match(rebuildScript, /detailEnriched/);
+  assert.match(rebuildScript, /galleryEnrichmentStatus/);
+  assert.match(rebuildScript, /imageStats/);
   assert.match(rebuildScript, /networkImageLimit/);
+  assert.doesNotMatch(rebuildScript, /reject\("calculation"\); return null/);
 });
 
 test("real listings stay public while exact customs calculation is pending", () => {
@@ -130,6 +138,7 @@ test("real listings stay public while exact customs calculation is pending", () 
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
   assert.match(publishScript, /calculationPending/);
+  assert.match(rebuildScript, /calculationStatus: "needs_data"/);
 });
 
 test("cards show the real source price while customs calculation is pending", () => {
