@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { credibleCatalogImages } from "../apps/web/lib/catalog/offer-quality";
+import { credibleCatalogImages, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import { isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
 
 const jpegPhoto = {
@@ -41,4 +41,24 @@ test("keeps only real photographs when a listing mixes photos and placeholders",
     rankedCatalogImageUrls({ images: [squareWrenchIcon, jpegPhoto] }),
     [jpegPhoto.url],
   );
+});
+
+test("accepts a server-validated public DTO after private source fields are removed", () => {
+  const publicOffer = {
+    id: "public-card",
+    market: "korea",
+    offerType: "fixed",
+    status: "active",
+    make: "Kia",
+    model: "Sportage",
+    year: 2022,
+    mileageKm: 48_000,
+    sourcePrice: 24_000_000,
+    sourceCurrency: "KRW",
+    calculationStatus: "needs_data",
+    images: [jpegPhoto],
+  };
+
+  assert.equal(isCrediblePublicOffer(publicOffer as any), true);
+  assert.equal(isCrediblePublicOffer({ ...publicOffer, images: [] } as any), false);
 });
