@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { preferExplicitCombustionPowertrain } from "../apps/web/lib/catalog/powertrain-safety";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 
 test("extracts structured peak kW without treating it as 30-minute power", () => {
@@ -52,4 +53,32 @@ test("extracts Georgian horsepower unit", () => {
 test("extracts engine volume from nested raw details", () => {
   const normalized = normalizeVehicleOfferSpecs({ operational: { raw: { technical: { engine_capacity: "1.5 L" } } } });
   assert.equal(normalized.engineCc, 1500);
+});
+
+test("explicit petrol engine overrides unrelated hybrid text in raw listing payload", () => {
+  const normalized = normalizeVehicleOfferSpecs({
+    make: "Toyota",
+    model: "RAV4",
+    fuel: "petrol",
+    engineCc: 2500,
+    powerHp: 203,
+    operational: { raw: { imageUrl: "https://cdn.example/hybrid/recommendation/photo.jpg" } },
+  });
+  assert.equal(normalized.powertrainKind, "other_hybrid");
+  const safe = preferExplicitCombustionPowertrain(normalized);
+  assert.equal(safe.powertrainKind, "combustion");
+  assert.equal(safe.power30MinKw, undefined);
+  assert.equal(safe.utilizationPowerKw, safe.powerKw);
+});
+
+test("explicit hybrid title is never downgraded to combustion", () => {
+  const safe = preferExplicitCombustionPowertrain({
+    make: "Toyota",
+    model: "RAV4",
+    trim: "2.5 Plug-in Hybrid",
+    fuel: "petrol",
+    engineCc: 2500,
+    powertrainKind: "other_hybrid" as const,
+  });
+  assert.equal(safe.powertrainKind, "other_hybrid");
 });
