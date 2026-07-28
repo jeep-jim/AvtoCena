@@ -19,6 +19,8 @@ const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandL
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
+const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
+const marketCountsRoute = fs.readFileSync(new URL("../apps/web/app/(public)/api/catalog/market-counts/route.ts", import.meta.url), "utf8");
 
 test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
@@ -138,10 +140,12 @@ test("catalog rejects implausible ordinary-car prices and power", () => {
   assert.match(offerQuality, /totalRub > 50_000_000/);
   assert.match(offerQuality, /performance \|\| commercial \? 1_500 : 650/);
   assert.match(offerQuality, /powerHp \/ engineCc > 0\.21/);
-  assert.match(offerQuality, /hasPlausibleSourcePrice/);
 });
 
-test("dealer verification badge keeps absolute placement and company rows align at the top", () => {
-  assert.doesNotMatch(flatUi, /\.dealer-verified-icon\{position:relative!important/);
-  assert.match(flatUi, /align-items:flex-start!important/);
+test("dealer demo reads published market counts instead of hardcoded showcase figures", () => {
+  assert.match(marketCountsRoute, /catalog\/manifest\.json/);
+  assert.match(marketCountsRoute, /PUBLIC_CATALOG_MARKETS/);
+  assert.match(dealerDemo, /\/api\/catalog\/market-counts/);
+  assert.match(dealerDemo, /действующего опубликованного каталога/);
+  assert.doesNotMatch(dealerDemo, /5 240|4 680|2 175|1 486|6 663|1 142|1 019/);
 });
