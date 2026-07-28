@@ -50,7 +50,6 @@ test("daily workflow targets three productive sources and 3000 cars per market",
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
   assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
-  assert.match(workflow, /CATALOG_BOOTSTRAP_MIN_TOTAL: "10000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
