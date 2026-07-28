@@ -1,10 +1,8 @@
 name: Update roadmap Japan auction statistics v30
 
 on:
-  push:
-    branches: [automation/japan-auction-statistics-v30]
-    paths:
-      - .github/workflows/update-roadmap-japan-v30.yml
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
