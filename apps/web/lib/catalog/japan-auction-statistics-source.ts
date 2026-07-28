@@ -53,7 +53,7 @@ export type JapanAuctionStatisticsRow = {
   lotNumber?: string;
   auctionName?: string;
   price: number;
-  currency: "RUB";
+  currency: "RUB" | "JPY";
   images: string[];
   detailUrl: string;
 };
@@ -82,6 +82,15 @@ function stripHtml(value: string) {
 function positiveInteger(value: string | undefined) {
   const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+function publishedAuctionPrice(value: string) {
+  const match = value.match(/~?\s*([0-9][0-9\s\u00a0]{3,})\s*(₽|руб(?:\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/i);
+  const price = positiveInteger(match?.[1]);
+  if (!price) return null;
+  const token = String(match?.[2] || "").toUpperCase();
+  const currency: "RUB" | "JPY" = /¥|￥|JPY|ИЕН/.test(token) ? "JPY" : "RUB";
+  return { price, currency };
 }
 
 function absoluteUrl(value: string, baseUrl: string) {
@@ -134,20 +143,22 @@ export function parseJapanTransitAuctionStatistics(markup: string, pageUrl = "ht
     const make = heading[1].toUpperCase();
     const model = heading[2].replace(/\s+/g, " ").trim();
     const year = Number(heading[3]);
-    const price = positiveInteger(plain.match(/~?\s*([0-9][0-9\s\u00a0]{3,})\s*₽/i)?.[1]);
+    const publishedPrice = publishedAuctionPrice(plain);
+    const price = publishedPrice?.price;
+    const currency = publishedPrice?.currency;
     const specs = plain.match(/\b([A-Z0-9-]{2,})\s*\/\s*([0-9][0-9\s\u00a0]{0,8})\s*км\.?\s*\/\s*([0-9][0-9\s\u00a0]{2,6})\s*(?:см\s*\^?\s*\{?3\}?|см³|cc)\s*\/\s*(AT|MT|CVT|DCT)/i);
     const grade = plain.match(/Оценка\s+([A-ZА-Я0-9.+-]{1,8})/i)?.[1];
     const auctionDate = isoDate(plain.match(/\b\d{2}[./-]\d{2}[./-](?:19|20)\d{2}\b/)?.[0]);
     const lotNumber = plain.match(/(?:Номер\s+лота|Лот)\s*[:№#]?\s*([A-Z0-9-]{2,20})/i)?.[1];
     const auctionName = plain.match(/(?:Аукцион)\s*[:]?\s*([A-Z][A-Z0-9 -]{1,30})/i)?.[1]?.trim();
     const images = imageUrlsFromTag(item.tag, pageUrl);
-    if (!price || !images.length || COMMERCIAL_RE.test(`${make} ${model} ${item.alt} ${plain.slice(0, 500)}`)) continue;
+    if (!price || !currency || !images.length || COMMERCIAL_RE.test(`${make} ${model} ${item.alt} ${plain.slice(0, 500)}`)) continue;
 
     const afterHeading = plain.slice((heading.index || 0) + heading[0].length);
     const beforeSpecs = specs?.index !== undefined ? afterHeading.slice(0, Math.max(0, specs.index - ((heading.index || 0) + heading[0].length))) : afterHeading.slice(0, 100);
     const trim = beforeSpecs
       .replace(/Оценка\s+[A-ZА-Я0-9.+-]+/gi, " ")
-      .replace(/~?\s*[0-9][0-9\s\u00a0]{3,}\s*₽/gi, " ")
+      .replace(/~?\s*[0-9][0-9\s\u00a0]{3,}\s*(?:₽|руб(?:\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/gi, " ")
       .replace(/\s+/g, " ")
       .trim()
       .slice(0, 100) || undefined;
@@ -155,7 +166,7 @@ export function parseJapanTransitAuctionStatistics(markup: string, pageUrl = "ht
     const engineCc = positiveInteger(specs?.[3]);
     const frameNumber = specs?.[1];
     const detailUrl = filteredStatisticsUrl(make, model);
-    const identity = `${make}|${model}|${year}|${frameNumber || ""}|${mileageKm || ""}|${engineCc || ""}|${grade || ""}|${price}|${images[0]}`;
+    const identity = `${make}|${model}|${year}|${frameNumber || ""}|${mileageKm || ""}|${engineCc || ""}|${grade || ""}|${price}|${currency}|${images[0]}`;
     const id = stableOfferId("japantransit_japan_stat_open", identity);
     if (seen.has(id)) continue;
     seen.add(id);
@@ -174,7 +185,7 @@ export function parseJapanTransitAuctionStatistics(markup: string, pageUrl = "ht
       lotNumber,
       auctionName,
       price,
-      currency: "RUB",
+      currency,
       images,
       detailUrl,
     });
