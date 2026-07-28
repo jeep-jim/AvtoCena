@@ -85,7 +85,7 @@ jobs:
     name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
     needs: [validate, knowledge]
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       max-parallel: 21
@@ -119,17 +119,18 @@ jobs:
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_COLLECTION_IMAGE_LIMIT: "30"
       CATALOG_GALLERY_FAST_PATH: "false"
+      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"
       CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"
       CATALOG_PRIORITY_MAX_POWER_HP: "160"
       CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
       CATALOG_SOURCE_TIMEOUT_MS: "18000"
       CATALOG_IMAGE_TIMEOUT_MS: "12000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "24"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "6"
       CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "3600000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "3300000"
       CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
       CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
       CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
@@ -156,7 +157,7 @@ jobs:
       - name: Probe every registered source in this shard
         id: probe
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect live sources and retain every registered source
+      - name: Collect listings, calculations and progressive galleries
         env:
           CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
         run: npx tsx scripts/catalog-rebuild-source-shard.mjs
@@ -169,7 +170,18 @@ jobs:
           const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
           if (payload.market !== process.env.CATALOG_REBUILD_MARKET) throw new Error('shard_market_mismatch');
           if (!Array.isArray(payload.offers)) throw new Error('shard_offers_missing');
-          console.log(JSON.stringify({market: payload.market, shard: payload.shardIndex, count: payload.offers.length, live: payload.liveSourceIds, bySource: payload.report?.publicBySource, stop: payload.stopReason}, null, 2));
+          console.log(JSON.stringify({
+            market: payload.market,
+            shard: payload.shardIndex,
+            count: payload.offers.length,
+            live: payload.liveSourceIds,
+            bySource: payload.report?.publicBySource,
+            detailLimitPerSource: payload.report?.detailLimitPerSource,
+            detailSuccessBySource: payload.report?.detailSuccessBySource,
+            detailDeferredBySource: payload.report?.detailDeferredBySource,
+            imageStats: payload.report?.imageStats,
+            stop: payload.stopReason,
+          }, null, 2));
           NODE
       - name: Upload source diagnostics and verified offers
         if: always()
