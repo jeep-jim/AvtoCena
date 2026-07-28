@@ -17,6 +17,7 @@ const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_
 const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 8));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
 const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
+const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 300));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 5000));
@@ -35,8 +36,6 @@ const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tr
 
 if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
-// Источник detail должен иметь возможность сохранить всю доступную галерею до 30 фото.
-// Публикация остаётся безопасной: quality gate всё равно проверяет реальные изображения.
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(networkImageLimit);
 
 function shardOf(value) {
@@ -58,6 +57,14 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
+function isMassMarketPriority(offer) {
+  const totalRub = Number(offer?.totalRub || 0);
+  const powerHp = Number(offer?.powerHp || 0);
+  const year = Number(offer?.year || 0);
+  return totalRub > 0 && totalRub <= priorityMaxTotalRub
+    && powerHp > 0 && powerHp <= priorityMaxPowerHp
+    && year >= priorityMinYear;
+}
 function businessPriority(offer) {
   const totalRub = Number(offer?.totalRub || 0);
   const powerHp = Number(offer?.powerHp || 0);
@@ -105,6 +112,9 @@ const liveSourceIds = [...new Set(configured)].filter((id) => retentionSourceIds
 const sourceIds = retentionSourceIds;
 const retained = new Map(sourceIds.map((id) => [id, new Map()]));
 const fresh = new Map(sourceIds.map((id) => [id, new Map()]));
+const detailReservations = new Map(sourceIds.map((id) => [id, 0]));
+const detailSuccessBySource = new Map(sourceIds.map((id) => [id, 0]));
+const detailDeferredBySource = new Map(sourceIds.map((id) => [id, 0]));
 const errors = [];
 const sourceReports = [];
 const rejections = {};
@@ -113,9 +123,17 @@ let seen = 0;
 let normalized = 0;
 let knowledgeEnriched = 0;
 let detailEnriched = 0;
+let detailDeferred = 0;
+let calculationPending = 0;
 
 function reject(reason) { rejections[reason] = Number(rejections[reason] || 0) + 1; }
 function addError(row) { if (errors.length < 2000) errors.push(row); }
+function reserveDetail(sourceId) {
+  const used = Number(detailReservations.get(sourceId) || 0);
+  if (used >= detailLimitPerSource) return false;
+  detailReservations.set(sourceId, used + 1);
+  return true;
+}
 function mergedRows() {
   const output = [];
   for (const sourceId of sourceIds) {
@@ -126,21 +144,27 @@ function mergedRows() {
   return output.sort(quality);
 }
 function counts(map) { return Object.fromEntries(sourceIds.map((id) => [id, map.get(id).size])); }
+function numericCounts(map) { return Object.fromEntries(sourceIds.map((id) => [id, Number(map.get(id) || 0)])); }
 function report(stopReason = "running") {
   const offers = mergedRows();
-  const priorityOffers = offers.filter((offer) => Number(offer.totalRub || 0) > 0
-    && Number(offer.totalRub) <= priorityMaxTotalRub
-    && Number(offer.powerHp || 0) > 0
-    && Number(offer.powerHp) <= priorityMaxPowerHp
-    && Number(offer.year || 0) >= priorityMinYear).length;
+  const priorityOffers = offers.filter(isMassMarketPriority).length;
+  const imageCounts = offers.map((offer) => Number(offer?.images?.length || 0));
   return {
-    version: 32, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 33, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 32, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      version: 33, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      detailLimitPerSource, detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
+      detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending,
       priorityMaxTotalRub, priorityMaxPowerHp, priorityMinYear, priorityOffers,
       retentionMs, pages, seen, normalized, knowledgeEnriched, detailEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
+      imageStats: {
+        minimum: imageCounts.length ? Math.min(...imageCounts) : 0,
+        maximum: imageCounts.length ? Math.max(...imageCounts) : 0,
+        average: imageCounts.length ? Number((imageCounts.reduce((sum, count) => sum + count, 0) / imageCounts.length).toFixed(2)) : 0,
+        preferredShare: imageCounts.length ? Number((imageCounts.filter((count) => count >= preferredImages).length / imageCounts.length).toFixed(4)) : 0,
+      },
       publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
       rejectionReasons: rejections, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, stopReason,
@@ -161,8 +185,6 @@ for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => {
   checkpoint(`signal_${signal.toLowerCase()}`).finally(() => process.exit(0));
 });
 
-// Load the verified three-day catalogue before touching the network. Slow sites can no longer
-// consume the deadline and prevent retention from being included in the publication artifact.
 let publicRows = [];
 let internalRows = [];
 try { publicRows = await readMarketOffers(market); } catch (error) { addError({ stage: "retention_public", error: String(error?.message || error) }); }
@@ -176,6 +198,16 @@ for (const row of [...publicRows, ...internalRows].sort(quality)) {
   if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);
 }
 await checkpoint("retention_loaded");
+
+async function calculateSafely(offer, stage) {
+  try {
+    return normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
+  } catch (error) {
+    addError({ sourceId: offer.sourceId, offerId: offer.id, stage, error: String(error?.message || error) });
+    calculationPending++;
+    return normalizeVehicleOfferSpecs({ ...offer, totalRub: null, calculationStatus: "needs_data" });
+  }
+}
 
 async function prepare(base, source) {
   if (expired()) return null;
@@ -193,40 +225,46 @@ async function prepare(base, source) {
 
   if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   let gallery = images(offer.images);
+
+  // Сначала считаем по данным листинга и собственной базе знаний. Detail нужен не для каждой
+  // из 21 000 карточек, а только для недостающих характеристик и приоритетного расширения галереи.
+  offer = await calculateSafely(offer, "calculation_before_detail");
   const powertrainKind = String(offer.powertrainKind || "");
   const combustionSpecsMissing = !["electric", "series_hybrid"].includes(powertrainKind) && !Number(offer.engineCc || 0);
-  const detailNeeded = gallery.length < preferredImages
-    || !Number(offer.powerHp || 0)
-    || combustionSpecsMissing
-    || !String(offer.fuel || "").trim();
+  const criticalSpecsMissing = !Number(offer.powerHp || 0) || combustionSpecsMissing || !String(offer.fuel || "").trim();
+  const mandatoryPhotoMissing = gallery.length < minimumImages;
+  const priorityGalleryMissing = gallery.length < preferredImages && isMassMarketPriority(offer);
+  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing;
+  let detailDeferredForOffer = false;
 
-  // fetchImages у точных адаптеров одновременно открывает detail API: получает полную галерею,
-  // мощность, объём, топливо и другие характеристики. Нельзя обходить этот вызов только потому,
-  // что в листинге уже была одна обложка — именно это ранее оставило карточки без цены и фото.
   if (detailNeeded && source?.fetchImages && !expired()) {
-    try {
-      const detailedImages = (await source.fetchImages(offer)) || [];
-      offer = normalizeVehicleOfferSpecs(offer);
-      gallery = images([...gallery, ...detailedImages]);
-      detailEnriched++;
-    } catch (error) {
-      addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery_detail", error: String(error?.message || error) });
+    if (reserveDetail(String(offer.sourceId))) {
+      try {
+        const detailedImages = (await source.fetchImages(offer)) || [];
+        offer = normalizeVehicleOfferSpecs(offer);
+        gallery = images([...gallery, ...detailedImages]);
+        detailEnriched++;
+        detailSuccessBySource.set(String(offer.sourceId), Number(detailSuccessBySource.get(String(offer.sourceId)) || 0) + 1);
+      } catch (error) {
+        addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "gallery_detail", error: String(error?.message || error) });
+      }
+    } else {
+      detailDeferred++;
+      detailDeferredForOffer = true;
+      detailDeferredBySource.set(String(offer.sourceId), Number(detailDeferredBySource.get(String(offer.sourceId)) || 0) + 1);
     }
   }
-  if (gallery.length < minimumImages) { reject("images"); return null; }
+
+  if (gallery.length < minimumImages) { reject(detailDeferredForOffer ? "images_detail_budget" : "images"); return null; }
   const now = new Date().toISOString();
   offer = normalizeVehicleOfferSpecs({
     ...offer, status: "active", images: gallery, updatedAt: now,
     operational: { ...offer.operational, fullRebuildAt: now, galleryVerified: true, galleryImageCount: gallery.length,
       gallerySourceImageCount: Math.max(gallery.length, Number(offer.operational?.gallerySourceImageCount || 0)), galleryPreferredCount: preferredImages,
-      galleryPreferredReached: gallery.length >= preferredImages, galleryRebuiltFrom: "fresh_listing", seoEligible: true },
+      galleryPreferredReached: gallery.length >= preferredImages, galleryEnrichmentStatus: gallery.length >= preferredImages ? "preferred" : detailDeferredForOffer ? "deferred" : "partial",
+      galleryRebuiltFrom: "fresh_listing", seoEligible: true },
   });
-  try {
-    offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
-  } catch (error) {
-    addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "calculation", error: String(error?.message || error) });
-    reject("calculation"); return null;
-  }
+  offer = await calculateSafely(offer, "calculation_after_detail");
   if (!isCrediblePublicOffer(offer)) { reject("quality"); return null; }
   return offer;
 }
@@ -302,11 +340,14 @@ for (const state of states) {
   if (!state.done) state.stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : "stopped";
   sourceReports.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, freshSaved: fresh.get(state.sourceId).size,
     restoredSaved: retained.get(state.sourceId).size, pages: state.pages, errors: state.errors, emptyPages: state.empty,
-    initialCursor: state.initialCursor, nextCursor: state.cursor, cycle: state.cycle, pagesVisited: state.pagesVisited, stopReason: state.stopReason });
+    detailReserved: Number(detailReservations.get(state.sourceId) || 0), detailSucceeded: Number(detailSuccessBySource.get(state.sourceId) || 0),
+    detailDeferred: Number(detailDeferredBySource.get(state.sourceId) || 0), initialCursor: state.initialCursor, nextCursor: state.cursor,
+    cycle: state.cycle, pagesVisited: state.pagesVisited, stopReason: state.stopReason });
 }
 for (const sourceId of retentionSourceIds.filter((id) => !liveSourceIds.includes(id))) {
   sourceReports.push({ sourceId, mode: "retention_only", target: targetPerSource, freshSaved: 0,
-    restoredSaved: retained.get(sourceId).size, pages: 0, errors: 0, emptyPages: 0, stopReason: "probe_inactive" });
+    restoredSaved: retained.get(sourceId).size, pages: 0, errors: 0, emptyPages: 0, detailReserved: 0, detailSucceeded: 0, detailDeferred: 0,
+    stopReason: "probe_inactive" });
 }
 const stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : liveSourceIds.length ? "sources_exhausted" : "no_active_sources";
 await checkpoint(stopReason);
