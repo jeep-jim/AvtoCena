@@ -19,9 +19,10 @@ test("workflow audits every available source shard before safe atomic publicatio
   assert.ok(publish > audit, "publisher must run after the source-scale audit");
   assert.ok(finalGate > publish, "safe publication result must be checked after writing");
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
+  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /if \(!report\.published\) throw new Error/);
   assert.match(workflow, /catalog_markets_empty_/);
   assert.match(workflow, /markets\.filter\(\(market\) => !\(Number\(report\.byMarket\?\.\[market\] \|\| 0\) > 0\)\)/);
