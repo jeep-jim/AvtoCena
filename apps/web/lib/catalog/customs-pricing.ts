@@ -5,6 +5,7 @@ import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { enrichOfferWithExplicitEngineDisplacement } from "./explicit-engine-displacement";
 import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
+import { preferExplicitCombustionPowertrain } from "./powertrain-safety";
 import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
@@ -86,7 +87,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
   const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
-  const normalized = normalizeVehicleOfferSpecs(known) as VehicleOffer;
+  const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
   const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
   const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
     ? { ...normalized, utilizationPowerKw: undefined }
