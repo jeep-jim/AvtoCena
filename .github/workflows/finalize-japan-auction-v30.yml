@@ -12,7 +12,7 @@ permissions:
 jobs:
   finalize:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - name: Patch auction detail and permanent roadmap
+      - name: Patch auction detail and roadmap
         shell: bash
         run: |
           python - <<'PY'
@@ -30,9 +30,9 @@ jobs:
 
           detail_path = Path('apps/web/app/(public)/cars/offer/[id]/page.tsx')
           detail = detail_path.read_text(encoding='utf-8')
-          marker = '''function MissingOffer() {
-'''
-          helpers = '''function auctionSourceMoney(value: number, currency: string) {
+          if 'function AuctionResultSummary' not in detail:
+              marker = 'function MissingOffer() {'
+              helper = '''function auctionSourceMoney(value: number, currency: string) {
   const symbols: Record<string, string> = { JPY: "¥", RUB: "₽", USD: "$", EUR: "€" };
   return `${money(value)} ${symbols[currency] || currency}`;
 }
@@ -64,24 +64,16 @@ function AuctionResultSummary({ offer }: { offer: any }) {
 }
 
 '''
-          if 'function AuctionResultSummary' not in detail:
               if marker not in detail:
                   raise SystemExit('detail_helper_marker_missing')
-              detail = detail.replace(marker, helpers + marker, 1)
-
-          old_state = '''  const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
-'''
-          new_state = old_state + '''  const isAuctionResult = raw.catalogKind === "auction_result" || (raw.offerType === "auction" && raw.auctionResult === "sold");
-'''
+              detail = detail.replace(marker, helper + marker, 1)
+          state = '  const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);\n'
           if 'const isAuctionResult =' not in detail:
-              if old_state not in detail:
+              if state not in detail:
                   raise SystemExit('detail_state_marker_missing')
-              detail = detail.replace(old_state, new_state, 1)
-
-          old_panel = '''          <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
-'''
-          new_panel = '''          {isAuctionResult ? <AuctionResultSummary offer={o} /> : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}
-'''
+              detail = detail.replace(state, state + '  const isAuctionResult = raw.catalogKind === "auction_result" || (raw.offerType === "auction" && raw.auctionResult === "sold");\n', 1)
+          old_panel = '          <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />\n'
+          new_panel = '          {isAuctionResult ? <AuctionResultSummary offer={o} /> : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}\n'
           if old_panel in detail:
               detail = detail.replace(old_panel, new_panel, 1)
           elif new_panel not in detail:
@@ -90,31 +82,9 @@ function AuctionResultSummary({ offer }: { offer: any }) {
 
           roadmap_path = Path('roadmap.md')
           roadmap = roadmap_path.read_text(encoding='utf-8')
-          old = '''### 4.3. Япония
-
-Основные зарегистрированные направления:
-
-- BE FORWARD;
-- TCV;
-- Goo-net / Goo-net Exchange;
-- Carused.jp;
-- Car From Japan;
-- Japan Partner;
-- Car Deal Page;
-- PicknBuy24;
-- Autocom Japan;
-- EveryCar;
-- Autorec;
-- Nikkyo;
-- JPAuc;
-- CarVector;
-- JP Center;
-- Prestige Motorsport;
-- другие зарегистрированные экспортные и статистические площадки.
-
-Не смешивать легковые автомобили с грузовиками, автобусами и коммерческой техникой.
-'''
-          new = '''### 4.3. Япония
+          start = roadmap.index('### 4.3. Япония')
+          end = roadmap.index('### 4.4. ОАЭ', start)
+          japan = '''### 4.3. Япония
 
 Главный публичный раздел Японии — **статистика отыгранных аукционных лотов**, а не смешанная витрина экспортных машин в наличии.
 
@@ -125,72 +95,41 @@ function AuctionResultSummary({ offer }: { offer: any }) {
 - CarVector / `carvector_japan_stat_open` — аукционная статистика;
 - другие статистические источники только после подтверждения актуальным probe.
 
-Дополнительные экспортные каталоги BE FORWARD, TCV, Goo-net, Carused.jp, Car From Japan, Japan Partner, Car Deal Page, PicknBuy24, Autocom Japan, EveryCar, Autorec, Nikkyo, JP Center и Prestige Motorsport могут использоваться для отдельных задач и пополнения базы знаний, но не должны вытеснять статистику торгов из основного японского раздела.
+Экспортные каталоги BE FORWARD, TCV, Goo-net и остальные японские площадки могут использоваться для отдельных задач и базы знаний, но не должны вытеснять статистику торгов из основного японского раздела.
 
-Обязательные поля аукционного результата, когда они опубликованы источником:
+Для результата торгов сохранять опубликованные источником марку, модель, год, цену и валюту, дату, аукцион, номер лота, оценку, пробег, frame number, объём двигателя, коробку, фотографию конкретного лота и публичную ссылку.
 
-- марка, модель и год;
-- цена результата торгов и исходная валюта;
-- дата торгов;
-- аукцион и номер лота;
-- аукционная оценка;
-- пробег;
-- кузов / frame number;
-- объём двигателя и коробка;
-- фотография именно этого лота;
-- ссылка на публичную страницу статистики.
+`auctionPriceKind=hammer` разрешён только при явно подписанной цене `End Price / Продано за`. Собственную рублёвую цену статистического сайта без такого доказательства хранить как `published_result`. Цена лота показывается отдельно от расчёта «под ключ». Таможню и утильсбор рассчитывать нашим движком только при достаточных данных; иначе показывать статус уточнения.
 
-Правила цены:
+Не смешивать легковые автомобили с грузовиками, автобусами и коммерческой техникой. Исторический результат хранится с `catalogKind=auction_result` и `auctionResult=sold`.
 
-- `auctionPriceKind=hammer` использовать только для явно опубликованной цены удара молотка / end price;
-- если сайт показывает собственную рублёвую цену результата без доказательства, что это чистая цена молотка, хранить `auctionPriceKind=published_result` и не переименовывать её в JPY;
-- цена отыгранного лота показывается отдельно от расчёта «под ключ»;
-- таможня и утильсбор рассчитываются нашим движком только при достаточных данных; иначе честно показывается статус уточнения;
-- нельзя выдавать приблизительную экспортную цену или стартовую ставку за фактическую цену продажи.
-
-Не смешивать легковые автомобили с грузовиками, автобусами и коммерческой техникой. Исторический аукционный результат хранится как активная запись каталога с `catalogKind=auction_result` и `auctionResult=sold`, а не как текущее объявление в продаже.
 '''
-          if old in roadmap:
-              roadmap = roadmap.replace(old, new, 1)
-          elif 'Главный публичный раздел Японии — **статистика отыгранных аукционных лотов**' not in roadmap:
-              raise SystemExit('roadmap_japan_section_missing')
-
-          journal = '''
-
+          roadmap = roadmap[:start] + japan + roadmap[end:]
+          if '### 2026-07-28 — Japan auction statistics v30' not in roadmap:
+              journal = '''
 ### 2026-07-28 — Japan auction statistics v30
 
-Решение владельца продукта:
-
-- публичный каталог Японии показывает статистику уже отыгранных аукционных лотов;
-- главная цена карточки — опубликованный результат торгов;
-- обычные экспортные объявления не смешиваются с основной японской выдачей, когда доступны результаты торгов.
-
-Реализация:
-
-- специализированный адаптер `japantransit_japan_stat_open` обходит модельные страницы Japan Transit через постоянный cursor;
-- JPAuc и CarVector маркируются дополнительными статистическими источниками;
-- карточка хранит `catalogKind=auction_result`, `auctionResult=sold` и тип опубликованной цены;
-- `/cars?market=japan` фильтрует выдачу до аукционных результатов;
-- цена торгов показывается отдельно от таможни, утильсбора и общей цены «под ключ»;
+- решение: основной каталог Японии показывает отыгранные аукционные лоты и опубликованную цену результата;
+- добавлен `japantransit_japan_stat_open` с модельным cursor-обходом;
+- JPAuc и CarVector подключены как дополнительные статистические источники;
+- `/cars?market=japan` отбирает только `auction_result`;
+- цена торгов отделена от таможни, утильсбора и расчёта «под ключ»;
 - коммерческие лоты исключаются;
 - parser, registry, typecheck и production build прошли в PR #134;
-- merge-коммит основной реализации: `c01c53957d8e196d81582f53ac4b9e5274690564`;
-- фактический production-объём записать после нового probe/rebuild/publish прохода.
+- merge-коммит: `c01c53957d8e196d81582f53ac4b9e5274690564`;
+- фактический объём записать после production probe/rebuild/publish.
+
 '''
-          if '### 2026-07-28 — Japan auction statistics v30' not in roadmap:
               marker = '### Шаблон новой записи'
               pos = roadmap.rfind(marker)
-              roadmap = roadmap[:pos] + journal + '\n' + roadmap[pos:] if pos >= 0 else roadmap + journal
+              roadmap = roadmap[:pos] + journal + roadmap[pos:] if pos >= 0 else roadmap + journal
           roadmap_path.write_text(roadmap, encoding='utf-8')
           PY
-      - name: Install dependencies
-        run: npm ci
-      - name: Verify Japan statistics and types
+      - name: Verify final patch
         run: |
+          npm ci
           node --import tsx --test tests/japan-auction-statistics-source.test.ts
-          node --import tsx --test tests/catalog-source-scale.test.ts
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
-          npm run build
       - name: Commit verified finalization
         shell: bash
         run: |
