@@ -26,6 +26,18 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="12" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" stroke="currentColor" strokeWidth="1.7" /><path d="M18 15.8V18l1.4 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
+function sourceMoney(value: number, currency: string) {
+  const amount = new Intl.NumberFormat("ru-RU").format(Math.round(value));
+  const symbols: Record<string, string> = { JPY: "¥", RUB: "₽", USD: "$", EUR: "€" };
+  return `${amount} ${symbols[currency] || currency}`;
+}
+
+function shortDate(value: string | undefined) {
+  if (!value) return "";
+  const parsed = new Date(`${value.slice(0, 10)}T12:00:00`);
+  return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleDateString("ru-RU");
+}
+
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
   const rankedImages = rankedCatalogImageUrls(normalizedOffer);
@@ -35,6 +47,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
+  const isAuctionResult = o.catalogKind === "auction_result" || (o.offerType === "auction" && o.auctionResult === "sold");
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const snapshot = {
@@ -49,6 +62,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const estimated = o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated";
   const priceLabel = !o.totalRub ? `${yearLabel} · расчёт уточняется` : estimated ? `${yearLabel} · ориентир` : yearLabel;
   const engineLabel = o.engineCc ? `${o.engineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
+  const auctionLabel = [o.auctionDate ? `Продан ${shortDate(o.auctionDate)}` : o.auctionPriceKind === "hammer" ? "Продан на аукционе" : "Цена в статистике", o.auctionGrade ? `оценка ${o.auctionGrade}` : ""].filter(Boolean).join(" · ");
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
@@ -56,13 +70,17 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" loading="lazy" decoding="async" fetchPriority="low" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
-          <div className={`ac-on-image absolute font-black uppercase tracking-[0.12em] text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}>{o.marketLabel}</div>
-          <div className={`ac-on-image absolute bottom-2 left-2 right-2 text-white sm:bottom-3 sm:left-3 sm:right-3`}>
+          <div className={`ac-on-image absolute font-black uppercase tracking-[0.12em] text-white/90 ${dense ? "left-2 top-2 text-[8px] sm:left-3 sm:top-3 sm:text-[10px]" : "left-3 top-3 text-[10px]"}`}>{isAuctionResult ? "Япония · результат торгов" : o.marketLabel}</div>
+          <div className="ac-on-image absolute bottom-2 left-2 right-2 text-white sm:bottom-3 sm:left-3 sm:right-3">
             <div className={`line-clamp-2 min-w-0 font-black leading-[1.04] tracking-[-0.03em] text-white drop-shadow-[0_2px_15px_rgba(0,0,0,.7)] ${dense ? "text-[12px] sm:text-[17px] sm:leading-[1.08]" : "text-[16px] leading-[1.08]"}`}>{o.title}</div>
           </div>
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
-          <PriceTrend offer={o} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
+          {isAuctionResult && Number(o.sourcePrice || 0) > 0 ? <div>
+            <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black uppercase tracking-[0.16em] text-white/58`}>{auctionLabel}</div>
+            <div className={`${dense ? "mt-1 text-[15px] sm:text-[20px] md:text-[22px]" : "mt-1.5 text-[20px] sm:text-[22px]"} whitespace-nowrap font-black leading-none tracking-[-0.05em] text-[var(--ac-text)]`}>{sourceMoney(Number(o.sourcePrice), String(o.sourceCurrency || "JPY").toUpperCase())}</div>
+            {Number(o.totalRub || 0) > 0 ? <div className={`${dense ? "mt-1 text-[9px] sm:text-[11px]" : "mt-1.5 text-[11px]"} font-bold text-white/52`}>Расчёт под ключ: {new Intl.NumberFormat("ru-RU").format(Math.round(Number(o.totalRub)))} ₽</div> : <div className={`${dense ? "mt-1 text-[9px] sm:text-[11px]" : "mt-1.5 text-[11px]"} font-bold text-white/52`}>Расчёт таможни и утиля уточняется</div>}
+          </div> : <PriceTrend offer={o} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />}
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>

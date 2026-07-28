@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { catalogImportSources } from "../apps/web/lib/catalog/importer";
 import { scaleMarketSources } from "../apps/web/lib/catalog/scale-market-sources";
+import { japanTransitAuctionStatisticsSource } from "../apps/web/lib/catalog/japan-auction-statistics-source";
 import {
   CATALOG_DAILY_TARGET_PER_SOURCE,
   CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET,
@@ -24,7 +25,7 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
 
-test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
+ test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
@@ -78,6 +79,15 @@ test("all seven markets have at least three independent registered adapters", ()
   assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
   assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
   assert.ok((byMarket.get("europe")?.size || 0) >= 8, "Europe must use the expanded source registry");
+});
+
+test("Japan Transit sold-auction statistics participates in the production registry", () => {
+  const ids = new Set(catalogImportSources.map((source) => source.sourceId));
+  assert.equal(japanTransitAuctionStatisticsSource.sourceId, "japantransit_japan_stat_open");
+  assert.equal(japanTransitAuctionStatisticsSource.market, "japan");
+  assert.equal(ids.has("japantransit_japan_stat_open"), true);
+  assert.match(carsPage, /Аукционная статистика Японии/);
+  assert.match(carsPage, /isJapanAuctionResult/);
 });
 
 test("probe limits network work to active sources while rebuild retains the complete registry", () => {

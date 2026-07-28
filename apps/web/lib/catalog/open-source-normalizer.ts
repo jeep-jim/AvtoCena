@@ -60,6 +60,12 @@ export function normalizeOpenSource<T extends CatalogSourceAdapter>(source: T): 
   source.normalizeOffer = (raw: unknown) => {
     const offer = originalNormalize(raw);
     if (!offer) return null;
+
+    // Dedicated auction-statistics adapters already parsed make/model from a sold lot.
+    // Their trim can begin with a grade/trim token, so generic title inference would
+    // incorrectly replace NOTE with e.g. "15G+".
+    if (offer.catalogKind === "auction_result") return normalizeVehicleOfferSpecs(offer) as VehicleOffer;
+
     const title = rawTitle(raw as any, offer);
     const model = canonicalOpenModel(title, offer.make, offer.model);
     if (!model) return null;

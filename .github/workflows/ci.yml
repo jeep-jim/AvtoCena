@@ -32,6 +32,8 @@ jobs:
         run: node --import tsx --test tests/catalog-image-quality.test.ts
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
+      - name: Japan auction statistics tests
+        run: node --import tsx --test tests/japan-auction-statistics-source.test.ts
       - name: Catalog live sources v23 tests
         run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
       - name: Guazi China RU listing tests

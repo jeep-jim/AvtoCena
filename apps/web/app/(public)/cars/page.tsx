@@ -37,7 +37,39 @@ function paginationItems(currentPage: number, totalPages: number) {
 }
 
 function offerFreshness(offer: any) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0;
+  return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0;
+}
+
+function isJapanAuctionResult(offer: any) {
+  return offer?.market === "japan" && (offer?.catalogKind === "auction_result" || (offer?.offerType === "auction" && offer?.auctionResult === "sold"));
+}
+
+function matchesFilters(offer: any, common: any) {
+  const make = String(offer.make || "").toLocaleLowerCase("ru-RU");
+  const model = String(offer.model || "").toLocaleLowerCase("ru-RU");
+  const totalRub = Number(offer.totalRub || 0);
+  const mileage = Number(offer.mileageKm || 0);
+  const engine = Number(offer.engineCc || 0);
+  const power = Number(offer.powerHp || 0);
+  if (common.make && make !== String(common.make).toLocaleLowerCase("ru-RU")) return false;
+  if (common.model && !model.includes(String(common.model).toLocaleLowerCase("ru-RU"))) return false;
+  if (common.hasPrice === "yes" && !Number(offer.sourcePrice || totalRub || 0)) return false;
+  if (common.hasPrice === "no" && Number(offer.sourcePrice || totalRub || 0)) return false;
+  if (common.budgetFrom && (!totalRub || totalRub < common.budgetFrom)) return false;
+  if (common.budgetTo && (!totalRub || totalRub > common.budgetTo)) return false;
+  if (common.yearFrom && Number(offer.year || 0) < common.yearFrom) return false;
+  if (common.yearTo && Number(offer.year || 0) > common.yearTo) return false;
+  if (common.mileageFrom && mileage < common.mileageFrom) return false;
+  if (common.mileageTo && (!mileage || mileage > common.mileageTo)) return false;
+  if (common.engineFrom && engine < common.engineFrom) return false;
+  if (common.engineTo && (!engine || engine > common.engineTo)) return false;
+  if (common.powerFrom && power < common.powerFrom) return false;
+  if (common.powerTo && (!power || power > common.powerTo)) return false;
+  if (common.fuel && String(offer.fuel || "") !== common.fuel) return false;
+  if (common.transmission && String(offer.transmission || "") !== common.transmission) return false;
+  if (common.drive && String(offer.drive || "") !== common.drive) return false;
+  if (common.bodyType && String(offer.bodyType || "") !== common.bodyType) return false;
+  return true;
 }
 
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
@@ -58,6 +90,19 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     Promise.all(markets.map(async (market) => {
       const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
       const page = selectedMarket ? requestedPage : 1;
+
+      // Japan is a historical auction-statistics catalogue. It must not be diluted by
+      // exporter stock listings when sold auction results are available.
+      if (market.id === "japan") {
+        const auctionRows = (await readMarketOffers("japan"))
+          .filter((offer) => offer.status === "active" && isJapanAuctionResult(offer) && isCrediblePublicOffer(offer))
+          .filter((offer) => !hasFilters || matchesFilters(offer, common))
+          .sort((left, right) => offerFreshness(right) - offerFreshness(left));
+        const start = (page - 1) * pageSize;
+        const visible = await applyActiveBusinessPricingBatch(auctionRows.slice(start, start + pageSize));
+        return { ...market, items: visible.map(publicOffer), total: auctionRows.length, page, pageSize, auctionStatistics: true };
+      }
+
       if (!hasFilters) {
         const rows = (await readMarketOffers(market.id))
           .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))
@@ -88,19 +133,22 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   const brandNames = facets.makes || [];
+  const japanStatisticsSelected = selectedMarket === "japan";
 
   return <main className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
-        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">Каталог автомобилей</h1>
-        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: {total}.{selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}</p>
+        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика Японии" : "Каталог автомобилей"}</h1>
+        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{japanStatisticsSelected
+          ? `Отыгранные лоты японских аукционов с опубликованной ценой продажи. Найдено результатов: ${total}.${selectedMarket ? ` Показаны лоты ${visibleFrom}–${visibleTo}.` : ""}`
+          : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.${selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}`}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} /></div>
       </div>
       <CatalogFilters initial={initial} facets={facets} />
       <div className="hidden lg:block"><BrandLogoRail brands={brandNames} /></div>
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{market.flag}</span><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">Подходящих предложений сейчас нет.</div>}</section>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{market.flag}</span><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
       {selectedMarket && totalPages > 1 ? <nav className="ac-catalog-pagination ac-hide-scrollbar mt-10 flex flex-nowrap items-center justify-center gap-1 overflow-x-auto whitespace-nowrap px-1" aria-label="Страницы каталога">
         {currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.055] px-2 text-base font-black" aria-label="Предыдущая страница">←</Link> : null}
         {pages.map((page, index) => <span key={page} className="contents">{index > 0 && page - pages[index - 1] > 1 ? <span className="shrink-0 px-1 text-white/35">…</span> : null}<Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl px-2 text-sm font-black ${page === currentPage ? "ac-pagination-current bg-red-500 text-white" : "bg-white/[0.055]"}`} style={page === currentPage ? { color: "#ffffff", WebkitTextFillColor: "#ffffff" } : undefined}>{page}</Link></span>)}
