@@ -69,13 +69,16 @@ test("production probes the registry, crawls live sources and retains inactive s
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "1"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "8"/);
+  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(rebuild, /targetPerSource/);
   assert.match(rebuild, /catalog\/source-cursors/);
   assert.match(rebuild, /retained/);
   assert.match(rebuild, /probe_inactive/);
+  assert.match(rebuild, /detailNeeded/);
   assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
   assert.match(workflow, /Require a new manifest containing all seven markets/);
