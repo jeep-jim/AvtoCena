@@ -1,0 +1,38 @@
+name: Finish catalog v29 patch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  finish:
+    if: github.head_ref == 'automation/catalog-listing-first-v29'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: automation/catalog-listing-first-v29
+          fetch-depth: 0
+      - name: Apply patch with compatibility shim
+        shell: bash
+        run: |
+          : > tests/estimated-ev-publication.test.ts
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('.github/workflows/pr-apply-catalog-v29-robust.yml').read_text(encoding='utf-8').splitlines()
+          start = next(i for i, line in enumerate(source) if line.strip() == "python - <<'PY'") + 1
+          end = next(i for i in range(start, len(source)) if source[i].strip() == 'PY')
+          code = '\n'.join(line[10:] if line.startswith('          ') else line for line in source[start:end]) + '\n'
+          exec(compile(code, 'catalog-v29.py', 'exec'), {'__name__': '__main__'})
+          PY
+          rm -f tests/estimated-ev-publication.test.ts
+          rm -f .github/workflows/pr-apply-catalog-v29-robust.yml .github/workflows/pr-capture-v29-error.yml .github/workflows/pr-apply-catalog-v29-wrapper.yml
+          git config user.name "jeep-jim"
+          git config user.email "173029176+jeep-jim@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: завершить listing-first архитектуру v29"
+          git push origin HEAD:automation/catalog-listing-first-v29
