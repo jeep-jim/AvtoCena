@@ -1,0 +1,88 @@
+name: Finalize Japan roadmap push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .japan-roadmap-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Update permanent roadmap and clean temporary files
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('roadmap.md')
+          text = path.read_text(encoding='utf-8')
+          start = text.index('### 4.3. Япония')
+          end = text.index('### 4.4. ОАЭ', start)
+          section = '''### 4.3. Япония
+
+Главный публичный раздел Японии — **статистика отыгранных аукционных лотов**, а не смешанная витрина экспортных машин в наличии.
+
+Приоритетные источники статистики:
+
+- Japan Transit / `japantransit_japan_stat_open` — публичные результаты по маркам и моделям;
+- JPAuc / `jpauc_japan_past_open` — прошедшие аукционы;
+- CarVector / `carvector_japan_stat_open` — аукционная статистика;
+- другие статистические источники только после подтверждения актуальным probe.
+
+Экспортные каталоги BE FORWARD, TCV, Goo-net и остальные японские площадки могут использоваться для отдельных задач и базы знаний, но не должны вытеснять статистику торгов из основного японского раздела.
+
+Для результата торгов сохранять опубликованные источником марку, модель, год, цену и валюту, дату, аукцион, номер лота, оценку, пробег, frame number, объём двигателя, коробку, фотографию конкретного лота и публичную ссылку.
+
+Правила цены:
+
+- `auctionPriceKind=hammer` разрешён только при явно подписанной цене `End Price / Продано за`;
+- цена, опубликованная статистическим сайтом без подтверждения чистой цены молотка, хранится как `published_result`;
+- ₽/руб. сохраняются как RUB, а ¥/￥/JPY/иены — как JPY без подмены валюты;
+- цена лота показывается отдельно от расчёта «под ключ»;
+- таможню и утильсбор рассчитывать нашим движком только при достаточных данных; иначе показывать статус уточнения;
+- нельзя выдавать стартовую цену или среднюю цену за фактический результат продажи.
+
+Не смешивать легковые автомобили с грузовиками, автобусами и коммерческой техникой. Исторический результат хранится с `catalogKind=auction_result` и `auctionResult=sold`.
+
+'''
+          text = text[:start] + section + text[end:]
+          if '### 2026-07-28 — Japan auction statistics v30' not in text:
+              journal = '''
+### 2026-07-28 — Japan auction statistics v30
+
+- основной каталог Японии переведён на отыгранные аукционные лоты и опубликованную цену результата;
+- добавлен `japantransit_japan_stat_open` с модельным cursor-обходом;
+- JPAuc и CarVector подключены как дополнительные статистические источники;
+- `/cars?market=japan` отбирает только `auction_result`;
+- цена торгов отделена от таможни, утильсбора и расчёта «под ключ»;
+- валюта результата определяется по обозначению источника и не подменяется;
+- коммерческие лоты исключаются;
+- parser, registry, TypeScript и production build прошли в PR #134 и PR #135;
+- merge-коммиты: `c01c53957d8e196d81582f53ac4b9e5274690564`, `ce72aab880163a99ea43c017af19872679e39b86`;
+- фактический объём записать после production probe/rebuild/publish.
+
+'''
+              marker = '### Шаблон новой записи'
+              pos = text.rfind(marker)
+              text = text[:pos] + journal + text[pos:] if pos >= 0 else text + journal
+          path.write_text(text, encoding='utf-8')
+          PY
+          rm -f .japan-roadmap-trigger
+          rm -f .github/workflows/finalize-japan-roadmap-push.yml
+          rm -f .github/workflows/finalize-japan-roadmap-command.yml
+          rm -f .github/workflows/finalize-japan-auction-v30.yml
+          git config user.name "jeep-jim"
+          git config user.email "173029176+jeep-jim@users.noreply.github.com"
+          git add -A
+          git commit -m "Roadmap: закрепить аукционную статистику Японии"
+          git push origin HEAD:main
