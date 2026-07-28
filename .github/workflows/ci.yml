@@ -101,52 +101,10 @@ jobs:
         if: steps.production_build.outputs.exit_code != '0'
         run: exit 1
 
-  catalog_live_probe:
-    name: Live probe ${{ matrix.market }} shard ${{ matrix.shard }}
+  catalog_candidate_smoke:
+    name: Candidate smoke ${{ matrix.market }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      max-parallel: 12
-      matrix:
-        market: [china, japan, georgia]
-        shard: [0, 1, 2, 3]
-    env:
-      CATALOG_REBUILD_MARKET: ${{ matrix.market }}
-      CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
-      CATALOG_REBUILD_SHARD_COUNT: "4"
-      CATALOG_PROBE_TIMEOUT_MS: "12000"
-      CATALOG_PROBE_ATTEMPTS: "1"
-      CATALOG_PROBE_CONCURRENCY: "6"
-      CATALOG_SOURCE_TIMEOUT_MS: "12000"
-      CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Probe live source registry
-        run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Print compact probe result
-        if: always()
-        run: |
-          if [ -s "$CATALOG_PROBE_OUTPUT" ]; then
-            node -e 'const fs=require("fs");const p=JSON.parse(fs.readFileSync(process.env.CATALOG_PROBE_OUTPUT,"utf8"));console.log(JSON.stringify({market:p.market,shard:p.shardIndex,planned:p.plannedSourceIds,active:p.activeSourceIds,inactive:p.inactiveSourceIds,results:p.results},null,2))'
-          fi
-      - name: Upload probe result
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: live-probe-${{ matrix.market }}-${{ matrix.shard }}
-          path: ${{ env.CATALOG_PROBE_OUTPUT }}
-          if-no-files-found: warn
-
-  catalog_collection_smoke:
-    name: Collection smoke ${{ matrix.market }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -169,12 +127,12 @@ jobs:
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"
       CATALOG_MAX_IMAGES_PER_OFFER: "6"
       CATALOG_GALLERY_FAST_PATH: "true"
-      CATALOG_SOURCE_TIMEOUT_MS: "18000"
-      CATALOG_IMAGE_TIMEOUT_MS: "12000"
+      CATALOG_SOURCE_TIMEOUT_MS: "15000"
+      CATALOG_IMAGE_TIMEOUT_MS: "10000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
       SMOKE_MARKET: ${{ matrix.market }}
       SMOKE_SOURCE_IDS: ${{ matrix.sources }}
-      SMOKE_OUTPUT: collection-smoke-${{ matrix.market }}.json
+      SMOKE_OUTPUT: candidate-smoke-${{ matrix.market }}.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -182,15 +140,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Require object storage configuration
-        run: |
-          test -n "$YC_OBJECT_STORAGE_BUCKET"
-          test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
-          test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
-      - name: Build at least one fully publishable live card
+      - name: Inspect live models and build one publishable card
         shell: bash
         run: |
-          cat > /tmp/catalog-collection-smoke.mjs <<'NODE'
+          cat > /tmp/catalog-candidate-smoke.mjs <<'NODE'
           import fs from "node:fs/promises";
           const { catalogImportSources } = await import(`${process.cwd()}/apps/web/lib/catalog/importer.ts`);
           const { credibleCatalogImages, isCrediblePublicOffer } = await import(`${process.cwd()}/apps/web/lib/catalog/offer-quality.ts`);
@@ -207,22 +160,26 @@ jobs:
             let fetched;
             try { fetched = await source.fetchPage(null); }
             catch (error) { attempts.push({sourceId,stage:"list",error:String(error?.message||error)}); continue; }
-            const rows = Array.isArray(fetched?.items) ? fetched.items.slice(0, 8) : [];
+            const rows = Array.isArray(fetched?.items) ? fetched.items.slice(0, 12) : [];
             for (const raw of rows) {
               let offer;
               try { offer = source.normalizeOffer(raw); } catch (error) { attempts.push({sourceId,stage:"normalize",error:String(error?.message||error)}); continue; }
               if (!offer || offer.market !== market) continue;
               const before = {make:offer.make,model:offer.model,trim:offer.trim,powerHp:offer.powerHp,engineCc:offer.engineCc,fuel:offer.fuel};
               try {
-                let images = credibleCatalogImages(offer.images || []);
-                if (images.length < 4 && source.fetchImages) images = credibleCatalogImages([...(offer.images || []), ...((await source.fetchImages(offer)) || [])]);
+                let calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(await enrichOfferWithVehicleKnowledge(offer)));
+                const powerSnapshot = {make:calculated.make,model:calculated.model,powerHp:calculated.powerHp,engineCc:calculated.engineCc,fuel:calculated.fuel,powerSource:calculated.powerDataSource,totalRub:calculated.totalRub,calculationStatus:calculated.calculationStatus};
+                if (!(Number(calculated.powerHp || 0) > 0) || !(Number(calculated.totalRub || 0) > 0)) {
+                  attempts.push({sourceId,id:calculated.id,before,powerSnapshot,imagesSkipped:true,ok:false});
+                  continue;
+                }
+                let images = credibleCatalogImages(calculated.images || []);
+                if (images.length < 4 && source.fetchImages) images = credibleCatalogImages([...(calculated.images || []), ...((await source.fetchImages(calculated)) || [])]);
                 const now = new Date().toISOString();
-                offer = normalizeVehicleOfferSpecs({...offer,status:"active",images,updatedAt:now,operational:{...offer.operational,fullRebuildAt:now,galleryVerified:true,galleryImageCount:images.length,gallerySourceImageCount:images.length,galleryPreferredCount:6,galleryPreferredReached:images.length>=6,galleryRebuiltFrom:"fresh_listing",seoEligible:images.length>=4}});
-                const enriched = await enrichOfferWithVehicleKnowledge(offer);
-                offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(enriched));
-                const ok = isCrediblePublicOffer(offer);
-                attempts.push({sourceId,id:offer.id,before,after:{make:offer.make,model:offer.model,powerHp:offer.powerHp,engineCc:offer.engineCc,fuel:offer.fuel,powerSource:offer.powerDataSource},images:images.length,totalRub:offer.totalRub,calculationStatus:offer.calculationStatus,ok});
-                if (ok) { valid = offer; break; }
+                calculated = normalizeVehicleOfferSpecs({...calculated,status:"active",images,updatedAt:now,operational:{...calculated.operational,fullRebuildAt:now,galleryVerified:true,galleryImageCount:images.length,gallerySourceImageCount:images.length,galleryPreferredCount:6,galleryPreferredReached:images.length>=6,galleryRebuiltFrom:"fresh_listing",seoEligible:images.length>=4}});
+                const ok = isCrediblePublicOffer(calculated);
+                attempts.push({sourceId,id:calculated.id,before,powerSnapshot,images:images.length,ok});
+                if (ok) { valid = calculated; break; }
               } catch (error) { attempts.push({sourceId,id:offer?.id,before,stage:"prepare",error:String(error?.message||error)}); }
             }
             if (valid) break;
@@ -230,13 +187,13 @@ jobs:
           const report = {market,sourceIds,valid:Boolean(valid),validId:valid?.id || null,validSourceId:valid?.sourceId || null,validImages:valid?.images?.length || 0,validTotalRub:valid?.totalRub || null,attempts};
           await fs.writeFile(process.env.SMOKE_OUTPUT, JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
-          if (!valid) throw new Error(`no_publishable_smoke_offer_${market}`);
+          if (!valid) throw new Error(`no_publishable_candidate_${market}`);
           NODE
-          npx tsx /tmp/catalog-collection-smoke.mjs
-      - name: Upload collection smoke report
+          npx tsx /tmp/catalog-candidate-smoke.mjs
+      - name: Upload candidate report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: collection-smoke-${{ matrix.market }}
+          name: candidate-smoke-${{ matrix.market }}
           path: ${{ env.SMOKE_OUTPUT }}
           if-no-files-found: warn
