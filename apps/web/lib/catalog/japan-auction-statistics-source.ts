@@ -85,7 +85,7 @@ function positiveInteger(value: string | undefined) {
 }
 
 function publishedAuctionPrice(value: string) {
-  const match = value.match(/~?\s*([0-9][0-9\s\u00a0]{3,})\s*(₽|руб(?:\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/i);
+  const match = value.match(/~?\s*([0-9]{2,3}(?:[\s\u00a0][0-9]{3})+|[0-9]{4,})\s*(₽|руб(?:\.|лей)?|¥|￥|JPY|иен(?:а|ы)?)/i);
   const price = positiveInteger(match?.[1]);
   if (!price) return null;
   const token = String(match?.[2] || "").toUpperCase();
