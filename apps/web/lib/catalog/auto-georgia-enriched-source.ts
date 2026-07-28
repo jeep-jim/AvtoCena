@@ -77,6 +77,28 @@ function positiveInteger(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
+export function parseAutoGeorgiaMoney(value: string) {
+  let clean = String(value || "").trim().replace(/[\s'’]/g, "");
+  if (!clean) return undefined;
+  const lastComma = clean.lastIndexOf(",");
+  const lastDot = clean.lastIndexOf(".");
+  if (lastComma >= 0 && lastDot >= 0) {
+    const decimal = lastComma > lastDot ? "," : ".";
+    const thousands = decimal === "," ? "." : ",";
+    clean = clean.split(thousands).join("");
+    if (decimal === ",") clean = clean.replace(",", ".");
+  } else {
+    const separator = lastComma >= 0 ? "," : lastDot >= 0 ? "." : "";
+    if (separator) {
+      const parts = clean.split(separator);
+      const tail = parts.at(-1) || "";
+      clean = tail.length === 2 ? `${parts.slice(0, -1).join("")}.${tail}` : parts.join("");
+    }
+  }
+  const amount = Number(clean);
+  return Number.isFinite(amount) && amount >= 500 ? Math.round(amount) : undefined;
+}
+
 function parsePrice(text: string) {
   const patterns: Array<[RegExp, "USD" | "GEL"]> = [
     [/\$\s*([0-9][0-9\s,.']{2,})/i, "USD"],
@@ -87,8 +109,8 @@ function parsePrice(text: string) {
   for (const [pattern, currency] of patterns) {
     const raw = text.match(pattern)?.[1];
     if (!raw) continue;
-    const amount = Number(raw.replace(/[\s,.']/g, ""));
-    if (Number.isFinite(amount) && amount >= 500) return { price: amount, currency };
+    const amount = parseAutoGeorgiaMoney(raw);
+    if (amount) return { price: amount, currency };
   }
   return null;
 }
