@@ -13,9 +13,13 @@ const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PE
 const targetPerMarket = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 1_000));
 const maximumPerMarket = Math.max(targetPerMarket, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const preferredImagesPerOffer = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
+const preferredImagesPerOffer = Math.max(minimumImagesPerOffer, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 8));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 14 * 24 * 60 * 60 * 1_000));
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
+const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
+const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
+const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
+const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -28,10 +32,27 @@ function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
 
+function businessPriority(offer) {
+  const totalRub = Number(offer?.totalRub || 0);
+  const powerHp = Number(offer?.powerHp || 0);
+  const year = Number(offer?.year || 0);
+  const affordable = totalRub > 0 && totalRub <= priorityMaxTotalRub;
+  const lowPower = powerHp > 0 && powerHp <= priorityMaxPowerHp;
+  const recent = year >= priorityMinYear;
+  let score = 0;
+  if (affordable) score += 1200;
+  if (lowPower) score += 600;
+  if (recent) score += 600;
+  if (affordable && lowPower && recent) score += 2400;
+  if (totalRub > 0) score += 250;
+  return score;
+}
+
 function qualityOrder(left, right) {
   const leftPreferred = Number(left?.images?.length || 0) >= preferredImagesPerOffer ? 1 : 0;
   const rightPreferred = Number(right?.images?.length || 0) >= preferredImagesPerOffer ? 1 : 0;
-  return rightPreferred - leftPreferred
+  return businessPriority(right) - businessPriority(left)
+    || rightPreferred - leftPreferred
     || Number(right?.images?.length || 0) - Number(left?.images?.length || 0)
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
@@ -206,12 +227,19 @@ for (const market of markets) {
     }
   }
 
+  selected.sort(qualityOrder);
   files.push(...generation.filenames);
   allSelected.push(...selected);
   byMarket[market] = selected.length;
   byMarketAndSource[market] = Object.fromEntries([...sourceCounts.entries()].sort(([left], [right]) => left.localeCompare(right)));
   marketReports[market] = generation.payloads.map((payload) => payload.report || payload);
   const imageCounts = selected.map((offer) => offer.images.length);
+  const calculatedCount = selected.filter((offer) => Number(offer.totalRub || 0) > 0).length;
+  const priorityCount = selected.filter((offer) => Number(offer.totalRub || 0) > 0
+    && Number(offer.totalRub) <= priorityMaxTotalRub
+    && Number(offer.powerHp || 0) > 0
+    && Number(offer.powerHp) <= priorityMaxPowerHp
+    && Number(offer.year || 0) >= priorityMinYear).length;
   marketQuality[market] = {
     target: targetPerMarket,
     targetReached: selected.length >= targetPerMarket,
@@ -225,6 +253,12 @@ for (const market of markets) {
     rebuiltCandidates: rebuiltRows.length,
     retainedCandidates: retainedRows.length,
     published: selected.length,
+    calculatedCount,
+    calculatedShare: selected.length ? Number((calculatedCount / selected.length).toFixed(4)) : 0,
+    priorityCount,
+    priorityMaxTotalRub,
+    priorityMaxPowerHp,
+    priorityMinYear,
     byOrigin: originCounts,
     publishedSources: sourceCounts.size,
     bySource: byMarketAndSource[market],
@@ -261,7 +295,7 @@ if (offers.length) {
 
 const marketsBelowTarget = markets.filter((market) => Number(byMarket[market] || 0) < targetPerMarket);
 const report = {
-  version: 22,
+  version: 32,
   mode: "atomic_all_markets_with_verified_accumulation",
   publishedAt,
   published: Boolean(manifest),
@@ -272,6 +306,9 @@ const report = {
   targetPerSource,
   targetPerMarket,
   maximumPerMarket,
+  priorityMaxTotalRub,
+  priorityMaxPowerHp,
+  priorityMinYear,
   total: offers.length,
   byMarket,
   byMarketAndSource,
