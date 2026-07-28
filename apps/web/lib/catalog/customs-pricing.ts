@@ -2,6 +2,7 @@ import { getActiveMarketVersion } from "../business-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustoms";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
+import { enrichOfferWithExplicitEngineDisplacement } from "./explicit-engine-displacement";
 import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { convertToRub } from "./rates";
@@ -82,7 +83,7 @@ function exactUtilizationPowerProblem(offer: VehicleOffer) {
 }
 
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
-  const canonical = await enrichOfferWithVehicleKnowledge(input);
+  const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const normalized = normalizeVehicleOfferSpecs(known) as VehicleOffer;
