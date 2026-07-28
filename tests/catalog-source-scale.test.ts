@@ -20,6 +20,9 @@ const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandL
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
+const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
 
 test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
@@ -47,6 +50,7 @@ test("daily workflow targets three productive sources and 3000 cars per market",
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
   assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
+  assert.match(workflow, /CATALOG_BOOTSTRAP_MIN_TOTAL: "10000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
@@ -101,6 +105,20 @@ test("rebuild uses the vehicle knowledge base before network gallery work", () =
   assert.match(rebuildScript, /if \(gallery\.length < minimumImages && source\?\.fetchImages/);
   assert.doesNotMatch(rebuildScript, /gallery\.length < minimumImages \|\|[^\n]*powerHp/);
   assert.match(rebuildScript, /networkImageLimit/);
+});
+
+test("real listings stay public while exact customs calculation is pending", () => {
+  assert.match(offerQuality, /hasPendingCalculation/);
+  assert.match(offerQuality, /status\.startsWith\("needs_"\)/);
+  assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
+  assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
+  assert.match(publishScript, /calculationPending/);
+});
+
+test("dealer CRM renders SVG market flags rather than emoji letter codes", () => {
+  assert.match(dealerDemo, /function MarketFlag/);
+  assert.match(dealerDemo, /Флаг Кыргызстана/);
+  assert.doesNotMatch(dealerDemo, /<span className="text-2xl">\{market\.flag\}<\/span>/);
 });
 
 test("requested high-volume public sources are registered", () => {

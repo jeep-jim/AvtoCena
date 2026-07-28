@@ -47,6 +47,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";
   const yearLabel = o.year ? `${o.year} г.` : "Год уточняется";
   const estimated = o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated";
+  const priceLabel = !o.totalRub ? `${yearLabel} · расчёт уточняется` : estimated ? `${yearLabel} · ориентир` : yearLabel;
   const engineLabel = o.engineCc ? `${o.engineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;
 
   return (
@@ -61,7 +62,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
           </div>
         </div>
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
-          <PriceTrend offer={o} label={estimated ? `${yearLabel} · ориентир` : yearLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
+          <PriceTrend offer={o} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>

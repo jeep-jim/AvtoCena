@@ -120,7 +120,9 @@ async function auditCandidate(sourceOffer, market) {
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
     offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
-    if (!hasExactCalculation(offer)) return { offer: null, reason: "calculation" };
+    const calculationStatus = String(offer.calculationStatus || "");
+    const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
+    if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };
     if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
     return { offer, reason: "ok" };
   } catch (error) {
