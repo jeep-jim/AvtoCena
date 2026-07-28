@@ -20,7 +20,7 @@ const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-qual
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
 
- test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
+test("source-scale catalog keeps 1000-offer quota per source and supports at least 1000 per market", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
   assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
@@ -47,6 +47,8 @@ test("daily workflow targets 1000 verified cars per source for all seven markets
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "6"/);
+  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "true"/);
   assert.match(workflow, /retention-days: 3/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
@@ -67,17 +69,18 @@ test("all seven markets have at least three independent registered adapters", ()
   assert.ok((byMarket.get("europe")?.size || 0) >= 8, "Europe must use the expanded source registry");
 });
 
-test("probe and rebuild use the complete registered registry instead of a curated-only list", () => {
+test("probe limits network work to active sources while rebuild retains the complete registry", () => {
   assert.match(probeScript, /catalogImportSources\s*\.filter/);
   assert.match(probeScript, /registeredSourceCount/);
-  assert.match(probeScript, /Probe — диагностика и приоритизация, а не фильтр/);
+  assert.match(probeScript, /sourceIdsForRebuild = activeSourceIds\.join/);
   assert.match(rebuildScript, /catalogImportSources\s*\.filter/);
-  assert.match(rebuildScript, /registered/);
-  assert.match(rebuildScript, /allSources/);
-  assert.match(rebuildScript, /configured/);
+  assert.match(rebuildScript, /retentionSourceIds/);
+  assert.match(rebuildScript, /liveSourceIds/);
+  assert.match(rebuildScript, /probe_inactive/);
+  assert.doesNotMatch(rebuildScript, /const allSources/);
 });
 
-test("rebuild restores retained offers before crawling and persists a cursor for every source", () => {
+test("rebuild restores retained offers before crawling and persists a cursor for every live source", () => {
   assert.match(rebuildScript, /retention_loaded/);
   assert.match(rebuildScript, /readMarketOffers/);
   assert.match(rebuildScript, /readAllOffersForMaintenance/);
@@ -87,6 +90,7 @@ test("rebuild restores retained offers before crawling and persists a cursor for
   assert.match(rebuildScript, /initialCursor/);
   assert.match(rebuildScript, /pagesVisited/);
   assert.match(rebuildScript, /enrichOfferWithVehicleKnowledge/);
+  assert.match(rebuildScript, /networkImageLimit/);
 });
 
 test("requested high-volume public sources are registered", () => {

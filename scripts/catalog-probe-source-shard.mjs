@@ -12,11 +12,11 @@ const outputFile = process.env.CATALOG_PROBE_OUTPUT || `catalog-probe-${market}-
 
 const priorityPlan = {
   korea: ["encar_direct", "kcar_korea_open"],
-  china: ["guazi_china_ru", "guazi_china_open", "che168_china_exact", "guazi_china_export", "autohome_used_china_open", "dongchedi_china_open", "autohome_new_china_open"],
-  japan: ["carused_japan_open", "tcv_japan_open", "goonet_japan_exact", "goonet_japan", "beforward_japan", "jpcenter_japan_catalog_open", "jpauc_japan_past_open", "carvector_japan_stat_open"],
+  china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "guazi_china_open", "che168_china_exact"],
+  japan: ["goonet_japan_exact", "goonet_japan", "tcv_japan_open", "carvector_japan_stat_open", "japan_partner_open", "carused_japan_open"],
   uae: ["dubicars_uae_exact", "dubizzle_uae_open", "dubicars_clean", "beforward_uae"],
   europe: ["mobile_de_open", "autoscout_europe_open", "otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
-  georgia: ["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"],
+  georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"],
   kyrgyzstan: ["mashina_kyrgyzstan_exact"],
 };
 
@@ -135,12 +135,12 @@ const sourceIds = planned.filter((sourceId) => stableShard(sourceId) === shardIn
 const results = await runWithConcurrency(sourceIds, concurrency, (sourceId) => probe(sourceId, adapters));
 const activeSourceIds = results.filter((row) => row.active).map((row) => row.sourceId);
 const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.sourceId);
-// Probe — диагностика и приоритизация, а не фильтр. Каждый зарегистрированный источник
-// всё равно получает короткую попытку сборки, чтобы временный блок первой страницы не
-// лишал рынок тысяч объявлений.
-const sourceIdsForRebuild = [...activeSourceIds, ...inactiveSourceIds].join(",") || "__no_registered_sources__";
+// В сетевой обход передаются только источники, которые прямо сейчас вернули пригодные карточки.
+// Все зарегистрированные источники всё равно остаются в трёхдневном retention-пуле сборщика,
+// поэтому временный 403 не удаляет уже проверенные автомобили, но больше не съедает час запуска.
+const sourceIdsForRebuild = activeSourceIds.join(",") || "__no_active_sources__";
 const payload = {
-  version: 23,
+  version: 27,
   market,
   shardIndex,
   shardCount,

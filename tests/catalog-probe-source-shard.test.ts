@@ -9,16 +9,16 @@ const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-sca
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 
-test("probe checks every registered source and uses activity only for ordering", () => {
+test("probe checks every registered source and passes only live sources to network collection", () => {
   assert.match(probe, /priorityPlan/);
   assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /isUsableOffer/);
   assert.match(probe, /Number\(offer\.sourcePrice \|\| 0\) > 0/);
   assert.match(probe, /activeSourceIds/);
   assert.match(probe, /inactiveSourceIds/);
-  assert.match(probe, /sourceIdsForRebuild = \[\.\.\.activeSourceIds, \.\.\.inactiveSourceIds\]/);
+  assert.match(probe, /sourceIdsForRebuild = activeSourceIds\.join/);
   assert.match(probe, /guazi_china_ru/);
-  assert.match(probe, /myauto_georgia_list/);
+  assert.match(probe, /auto_georgia_open/);
   assert.doesNotMatch(probe, /connectedMarketSources/);
 });
 
@@ -36,6 +36,8 @@ test("temporary source failures retain verified offers before any network crawl"
   assert.match(rebuild, /readMarketOffers/);
   assert.match(rebuild, /readAllOffersForMaintenance/);
   assert.match(rebuild, /firstSeen/);
+  assert.match(rebuild, /retentionSourceIds/);
+  assert.match(rebuild, /liveSourceIds/);
   assert.match(rebuild, /storage\.readJson/);
   assert.match(rebuild, /storage\.writeJson/);
   assert.match(rebuild, /enrichOfferWithVehicleKnowledge/);
@@ -60,16 +62,18 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("production retries every registered source through persistent source shards", () => {
+test("production probes the registry, crawls live sources and retains inactive sources", () => {
   assert.match(workflow, /Catalog source-scale daily/);
   assert.match(workflow, /timeout-minutes: 100/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "6"/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(rebuild, /targetPerSource/);
   assert.match(rebuild, /catalog\/source-cursors/);
   assert.match(rebuild, /retained/);
+  assert.match(rebuild, /probe_inactive/);
   assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
   assert.match(workflow, /Require a new manifest containing all seven markets/);

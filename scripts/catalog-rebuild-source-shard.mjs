@@ -16,6 +16,7 @@ const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGE
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 4));
 const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 6));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || preferredImages)));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 300));
 const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 5000));
@@ -30,7 +31,9 @@ const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tr
 
 if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
-process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maximumImages);
+// Источнику достаточно быстро сохранить предпочтительные 6 фото. Уже накопленные галереи
+// до 30 изображений не обрезаются и остаются доступными при публикации.
+process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(networkImageLimit);
 
 function shardOf(value) {
   let hash = 2166136261;
@@ -72,9 +75,13 @@ const registered = catalogImportSources
   .filter((source) => source.market === market || source.market === "multi")
   .map((source) => source.sourceId)
   .filter((sourceId) => adapters.has(sourceId));
-const configured = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((v) => v.trim()).filter((v) => v && !v.startsWith("__"));
-const allSources = [...new Set([...configured, ...registered])].filter((id) => adapters.has(id));
-const sourceIds = allSources.filter((id) => shardOf(id) === shardIndex).sort();
+const configured = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "")
+  .split(",")
+  .map((value) => value.trim())
+  .filter((value) => value && !value.startsWith("__") && adapters.has(value));
+const retentionSourceIds = [...new Set(registered)].filter((id) => shardOf(id) === shardIndex).sort();
+const liveSourceIds = [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));
+const sourceIds = retentionSourceIds;
 const retained = new Map(sourceIds.map((id) => [id, new Map()]));
 const fresh = new Map(sourceIds.map((id) => [id, new Map()]));
 const errors = [];
@@ -100,11 +107,12 @@ function counts(map) { return Object.fromEntries(sourceIds.map((id) => [id, map.
 function report(stopReason = "running") {
   const offers = mergedRows();
   return {
-    version: 26, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
-    minimumMarketTarget, count: offers.length, sourceIds, partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
+    version: 27, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
+    partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 26, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages,
-      retentionMs, pages, seen, normalized, knowledgeEnriched, saved: offers.length,
+      version: 27, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      retentionMs, pages, seen, normalized, knowledgeEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
       publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
       rejectionReasons: rejections, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, stopReason,
@@ -117,6 +125,13 @@ async function checkpoint(stopReason = "running") {
   await fs.writeFile(temporary, JSON.stringify(report(stopReason), null, 2));
   await fs.rename(temporary, outputFile);
 }
+
+let shuttingDown = false;
+for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  checkpoint(`signal_${signal.toLowerCase()}`).finally(() => process.exit(0));
+});
 
 // Load the verified three-day catalogue before touching the network. Slow sites can no longer
 // consume the deadline and prevent retention from being included in the publication artifact.
@@ -166,12 +181,13 @@ async function prepare(base, source) {
 }
 
 const storage = getJsonStorage();
-const states = await pool(sourceIds, sourceConcurrency, async (sourceId) => {
+const states = await pool(liveSourceIds, sourceConcurrency, async (sourceId) => {
   let saved = { cursor: null, cycle: 0, pagesVisited: 0 };
   try { saved = await storage.readJson(cursorPath(sourceId), saved); } catch (error) { addError({ sourceId, stage: "cursor_read", error: String(error?.message || error) }); }
   return { sourceId, source: adapters.get(sourceId), cursor: saved.cursor || null, initialCursor: saved.cursor || null,
     cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };
 });
+const pagePrepareConcurrency = Math.max(1, Math.floor(prepareConcurrency / Math.max(1, Math.min(sourceConcurrency, liveSourceIds.length || 1))));
 
 async function fetchOne(state) {
   const bucket = fresh.get(state.sourceId);
@@ -185,7 +201,7 @@ async function fetchOne(state) {
   catch (error) {
     state.seenCursors.delete(cursorKey); state.errors++;
     addError({ sourceId: state.sourceId, cursor: state.cursor, stage: "list", error: String(error?.message || error) });
-    if (state.errors >= 3) { state.done = true; state.stopReason = "source_errors"; }
+    if (state.errors >= 2) { state.done = true; state.stopReason = "source_errors"; }
     return;
   }
   state.pages++; pages++;
@@ -201,7 +217,7 @@ async function fetchOne(state) {
     if (bases.length >= targetPerSource - bucket.size) break;
   }
   const before = bucket.size;
-  for (const offer of await pool(bases, Math.max(1, Math.floor(prepareConcurrency / sourceConcurrency)), (base) => prepare(base, state.source))) {
+  for (const offer of await pool(bases, pagePrepareConcurrency, (base) => prepare(base, state.source))) {
     if (offer && bucket.size < targetPerSource) bucket.set(offer.id, offer);
   }
   state.empty = bucket.size === before ? state.empty + 1 : 0;
@@ -218,19 +234,28 @@ async function fetchOne(state) {
 }
 
 let rounds = 0;
+let lastSaved = mergedRows().length;
 while (!expired() && pages < maxTotalPages) {
   const active = states.filter((state) => !state.done && fresh.get(state.sourceId).size < targetPerSource);
   if (!active.length) break;
   rounds++;
   await pool(active, sourceConcurrency, fetchOne);
-  if (rounds % 4 === 0) await checkpoint("collecting");
+  const savedNow = mergedRows().length;
+  if (savedNow !== lastSaved || rounds % 2 === 0) {
+    lastSaved = savedNow;
+    await checkpoint("collecting");
+  }
 }
 for (const state of states) {
   if (!state.done) state.stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : "stopped";
-  sourceReports.push({ sourceId: state.sourceId, target: targetPerSource, freshSaved: fresh.get(state.sourceId).size,
+  sourceReports.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, freshSaved: fresh.get(state.sourceId).size,
     restoredSaved: retained.get(state.sourceId).size, pages: state.pages, errors: state.errors, emptyPages: state.empty,
     initialCursor: state.initialCursor, nextCursor: state.cursor, cycle: state.cycle, pagesVisited: state.pagesVisited, stopReason: state.stopReason });
 }
-const stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : "sources_exhausted";
+for (const sourceId of retentionSourceIds.filter((id) => !liveSourceIds.includes(id))) {
+  sourceReports.push({ sourceId, mode: "retention_only", target: targetPerSource, freshSaved: 0,
+    restoredSaved: retained.get(sourceId).size, pages: 0, errors: 0, emptyPages: 0, stopReason: "probe_inactive" });
+}
+const stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : liveSourceIds.length ? "sources_exhausted" : "no_active_sources";
 await checkpoint(stopReason);
 console.log(JSON.stringify(report(stopReason).report, null, 2));

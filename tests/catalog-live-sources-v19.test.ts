@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import { parseAutoGeorgiaMoney } from "../apps/web/lib/catalog/auto-georgia-enriched-source";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -10,7 +11,7 @@ const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-productio
 const probe = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
 
- test("live high-volume sources use current listing and detail routes", () => {
+test("live high-volume sources use current listing and detail routes", () => {
   assert.ok(priority.includes('sourceId: "guazi_china_open"'));
   assert.ok(priority.includes("car-detail"));
   assert.ok(priority.includes('sourceId: "carused_japan_open"'));
@@ -21,13 +22,20 @@ const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard
   assert.ok(priority.includes("?pn=${page - 1}"));
 });
 
+test("AUTO.GE prices keep decimal cents separate from thousands", () => {
+  assert.equal(parseAutoGeorgiaMoney("6,400.00"), 6_400);
+  assert.equal(parseAutoGeorgiaMoney("17,500.00"), 17_500);
+  assert.equal(parseAutoGeorgiaMoney("28 700"), 28_700);
+  assert.equal(parseAutoGeorgiaMoney("9.200,00"), 9_200);
+});
+
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
   assert.match(priority, /COMMERCIAL_RE/);
   assert.match(priority, /Hino\|Mitsubishi Fuso/);
   assert.match(priority, /truck\|dump\|tipper\|bus/);
 });
 
-test("daily production probes every registered site and collects by source shards", () => {
+test("daily production probes every registered site, crawls live sites and retains inactive sites", () => {
   assert.match(workflow, /Catalog source-scale daily/);
   assert.match(workflow, /max-parallel: 14/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
@@ -36,9 +44,11 @@ test("daily production probes every registered site and collects by source shard
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "4"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3\]/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(probe, /Probe — диагностика и приоритизация, а не фильтр/);
+  assert.match(probe, /sourceIdsForRebuild = activeSourceIds\.join/);
   assert.match(probe, /sourceIdsForRebuild/);
   assert.match(rebuild, /targetPerSource/);
+  assert.match(rebuild, /retentionSourceIds/);
+  assert.match(rebuild, /liveSourceIds/);
   assert.match(rebuild, /catalog\/source-cursors/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
   assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
@@ -54,6 +64,7 @@ test("priority galleries cache listing photos before requesting detail pages", (
   assert.match(fullGallery, /fastPath/);
   assert.match(importer, /priorityFastGallery/);
   assert.match(importer, /myAutoListSource/);
+  assert.match(importer, /autoGeorgiaEnrichedSource/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "4"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
 });

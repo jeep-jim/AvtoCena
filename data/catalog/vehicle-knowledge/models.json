@@ -86,6 +86,20 @@
     "active": true
   },
   {
+    "id": "toyota/alphard",
+    "make": "Toyota",
+    "model": "Alphard",
+    "makeAliases": ["Тойота"],
+    "aliases": ["アルファード", "Альфард", "Алфард"],
+    "bodyTypes": ["minivan"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceVersion": "Toyota 2019 specification",
+    "sourceUrl": "https://toyota.jp/pages/contents/carlineup/archive/alphard/2019-12/pdf/alphard_main_s_201912.pdf",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
     "id": "nissan/qashqai",
     "make": "Nissan",
     "model": "Qashqai",
@@ -179,6 +193,46 @@
     "popularityDecile": 1,
     "source": "manual",
     "updatedAt": "2026-07-25T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "volkswagen/touareg",
+    "make": "Volkswagen",
+    "model": "Touareg",
+    "makeAliases": ["VW", "Фольксваген"],
+    "aliases": ["Туарег"],
+    "bodyTypes": ["suv"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceVersion": "Volkswagen Touareg 2023",
+    "sourceUrl": "https://www.volkswagen-newsroom.com/en/the-new-touareg-world-premiere-16049/overview-of-important-facts-16050",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "volkswagen/lavida",
+    "make": "Volkswagen",
+    "model": "Lavida",
+    "makeAliases": ["VW", "Фольксваген", "大众"],
+    "aliases": ["朗逸"],
+    "bodyTypes": ["sedan"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceUrl": "https://www.svw-volkswagen.com/lavida2017/",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "volkswagen/t-cross",
+    "make": "Volkswagen",
+    "model": "T-Cross",
+    "makeAliases": ["VW", "Фольксваген", "大众"],
+    "aliases": ["T Cross", "TCross", "途铠"],
+    "bodyTypes": ["suv"],
+    "popularityDecile": 1,
+    "source": "manufacturer",
+    "sourceUrl": "https://www.svw-volkswagen.com/tcross/",
+    "updatedAt": "2026-07-28T00:00:00.000Z",
     "active": true
   },
   {
