@@ -1,7 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
+
+const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
+const brandDirectoryUi = fs.readFileSync(new URL("../apps/web/components/catalog/BrandModelDirectory.tsx", import.meta.url), "utf8");
+const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
 
 function offer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
   return {
@@ -45,4 +50,24 @@ test("does not confuse Honda Vezel with HR-V", async () => {
   const result = await enrichOfferWithVehicleKnowledge(offer({ model: "VEZEL e:HEV Z", year: 2023 }));
   assert.equal(result.make, "Honda");
   assert.equal(result.model, "Vezel");
+});
+
+test("model directory aggregates variants and power references into public characteristics", () => {
+  assert.match(modelDirectory, /readVehicleKnowledgeVariants/);
+  assert.match(modelDirectory, /readVehiclePowerKnowledge/);
+  assert.match(modelDirectory, /power30MinKw/);
+  assert.match(modelDirectory, /utilizationPowerKw/);
+  assert.match(modelDirectory, /engineCc/);
+  assert.match(modelDirectory, /knowledge: summarizeModel/);
+});
+
+test("public brand and model pages render knowledge power, kW and 30-minute fields", () => {
+  assert.match(brandDirectoryUi, /Мощность и другие характеристики берутся из базы знаний АвтоЦена/);
+  assert.match(brandDirectoryUi, /power30MinKw/);
+  assert.match(modelPage, /База знаний АвтоЦена/);
+  assert.match(modelPage, /Автосопоставление включено/);
+  assert.match(modelPage, /30-минутную мощность/);
+  assert.match(modelPage, /utilizationPowerKw/);
+  assert.match(modelPage, /readVehicleKnowledgeVariants/);
+  assert.match(modelPage, /readVehiclePowerKnowledge/);
 });
