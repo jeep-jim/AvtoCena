@@ -13,23 +13,33 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
-test("production workflow performs a full vehicle-knowledge sync and blocks catalogue publication on collapse", () => {
-  const syncModels = workflow.indexOf("scripts/catalog-sync-vehicle-models.mjs");
-  const syncSeed = workflow.indexOf("scripts/catalog-sync-vehicle-knowledge-seed.mjs");
-  const buildVariants = workflow.indexOf("scripts/catalog-build-vehicle-variants.mjs");
-  const buildPower = workflow.indexOf("scripts/catalog-build-power-knowledge.mjs");
-  const auditKnowledge = workflow.indexOf("scripts/catalog-audit-vehicle-knowledge.mjs");
+test("production workflow repairs vehicle knowledge only when the retained base is unhealthy", () => {
+  const retainedAudit = workflow.indexOf("Audit retained production knowledge first");
+  const syncModels = workflow.indexOf("scripts/catalog-sync-vehicle-models.mjs", retainedAudit);
+  const syncSeed = workflow.indexOf("scripts/catalog-sync-vehicle-knowledge-seed.mjs", syncModels);
+  const buildVariants = workflow.indexOf("scripts/catalog-build-vehicle-variants.mjs", syncSeed);
+  const buildPower = workflow.indexOf("scripts/catalog-build-power-knowledge.mjs", buildVariants);
+  const finalAudit = workflow.indexOf("scripts/catalog-audit-vehicle-knowledge.mjs", buildPower);
   const collect = workflow.indexOf("Collect listings, calculations and progressive galleries");
 
-  assert.ok(syncModels >= 0, "full model sync must run in production");
-  assert.ok(syncSeed > syncModels, "manual seed records must be applied after the full model sync");
-  assert.ok(buildVariants > syncSeed, "variant knowledge must be rebuilt after model sync");
+  assert.ok(retainedAudit >= 0, "the current production base must be audited before any external sync");
+  assert.ok(syncModels > retainedAudit, "full model sync must be a repair path, not an unconditional blocker");
+  assert.ok(syncSeed > syncModels, "manual seed records must be applied after the repair sync");
+  assert.ok(buildVariants > syncSeed, "variant knowledge must be rebuilt after model repair");
   assert.ok(buildPower > buildVariants, "power knowledge must be rebuilt after variants");
-  assert.ok(auditKnowledge > buildPower, "knowledge health gate must run after all knowledge builders");
-  assert.ok(collect > auditKnowledge, "catalog collection must start only after a healthy knowledge audit");
+  assert.ok(finalAudit > buildPower, "a final blocking audit must run after any repair");
+  assert.ok(collect > finalAudit, "catalog collection must start only after a healthy final audit");
+  assert.match(workflow, /if: steps\.retained_knowledge\.outcome != 'success'/);
   assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "5000"/);
   assert.match(workflow, /knowledge: \$\{\{ needs\.knowledge\.result \}\}/);
   assert.match(workflow, /needs\.knowledge\.result[^\n]*!= "success"/);
+});
+
+test("production workflow serializes knowledge writes and never cancels a running catalog build", () => {
+  assert.match(workflow, /group: catalog-source-scale-daily\n  cancel-in-progress: false/);
+  assert.match(workflow, /group: vehicle-knowledge-production-json\n      cancel-in-progress: false/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+  assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
 });
 
 test("vehicle model sync uses current VehiclesDB paths and retained knowledge on upstream failure", () => {

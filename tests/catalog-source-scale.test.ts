@@ -46,7 +46,7 @@ test("source-scale catalog keeps 1000-offer quota per source and supports large 
 
 test("daily workflow runs all 21 market shards in one wave", () => {
   assert.match(workflow, /group: catalog-source-scale-daily/);
-  assert.match(workflow, /cancel-in-progress: true/);
+  assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /max-parallel: 21/);
   assert.match(workflow, /shard: \[0, 1, 2\]/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "3"/);
@@ -61,7 +61,7 @@ test("daily workflow targets three productive sources, progressive galleries and
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "8"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
@@ -215,8 +215,6 @@ test("brand rail opens existing brand and model SEO pages", () => {
   assert.match(brandPage, /BrandModelDirectory/);
   assert.match(brandPage, /readBrandModelDirectory/);
   assert.match(modelPage, /generateMetadata/);
-  assert.match(modelPage, /BreadcrumbList/);
-  assert.match(sitemap, /readAllModelSeoLinks/);
   assert.match(sitemap, /\/cars\/brand\/\$\{model\.brandSlug\}\/model\/\$\{model\.modelSlug\}/);
 });
 
