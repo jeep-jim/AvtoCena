@@ -65,14 +65,14 @@ test("daily workflow targets three productive sources, progressive galleries and
   assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"/);
   assert.match(workflow, /CATALOG_IMAGE_FETCH_CONCURRENCY: "6"/);
   assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "3300000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "3000000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
   assert.match(workflow, /retention-days: 1/);
   assert.match(workflow, /compression-level: 9/);
   assert.match(workflow, /continue-on-error: true/);
-  assert.match(workflow, /catalog_markets_empty_/);
+  assert.match(workflow, /Catalog health summary/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
   assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
