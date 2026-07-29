@@ -4,6 +4,7 @@ import test from "node:test";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
+const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
 test("production workflow performs a full vehicle-knowledge sync and blocks catalogue publication on collapse", () => {
@@ -35,6 +36,19 @@ test("vehicle knowledge audit protects count, retention ratio and unique ids", (
   assert.match(audit, /variantsWithThirtyMinutePower/);
   assert.match(audit, /certifiedPowerReferencesWithThirtyMinutePower/);
   assert.match(audit, /writeDataJson\(HEALTH_PATH, report\)/);
+});
+
+test("publisher accumulates galleries before deduplication and cleans only inventoried old generations", () => {
+  assert.match(publisher, /function mergeOfferVersions/);
+  assert.match(publisher, /images: uniqueImages\(\[\.\.\.\(primary\?\.images/);
+  assert.match(publisher, /retainedById/);
+  assert.match(publisher, /generatedById/);
+  assert.match(publisher, /galleriesAccumulated/);
+  assert.match(publisher, /generationInventory/);
+  assert.match(publisher, /generationKeepCount/);
+  assert.match(publisher, /generationCleanupGraceMs/);
+  assert.match(publisher, /entry\.objectKeys\.length > 0/);
+  assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
 test("production control document fixes the CRM readiness gate", () => {
