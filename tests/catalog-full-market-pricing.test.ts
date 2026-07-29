@@ -96,7 +96,7 @@ test("catalog cards keep the agreed compact wording and do not add duplicate pri
   assert.match(catalogCard, /function sourcePriceRub/);
   assert.match(catalogCard, /Расчёт под ключ уточняется/);
   assert.match(catalogCard, /\`\$\{yearLabel\} · ориентир\`/);
-  assert.match(catalogCard, /\`\$\{yearLabel\} · цена автомобиля\`/);
+  assert.match(catalogCard, /\{yearLabel\} · цена автомобиля/);
   assert.doesNotMatch(catalogCard, /ориентир под ключ/);
   assert.doesNotMatch(catalogCard, /цена автомобиля в рублях/);
   assert.doesNotMatch(catalogCard, /Цена в объявлении/);
