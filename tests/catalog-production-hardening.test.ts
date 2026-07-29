@@ -5,6 +5,8 @@ import test from "node:test";
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
 test("production workflow performs a full vehicle-knowledge sync and blocks catalogue publication on collapse", () => {
@@ -49,6 +51,27 @@ test("publisher accumulates galleries before deduplication and cleans only inven
   assert.match(publisher, /generationCleanupGraceMs/);
   assert.match(publisher, /entry\.objectKeys\.length > 0/);
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
+});
+
+test("large catalog search uses range shards and bounded chunk reads", () => {
+  assert.match(storage, /power: new Map\(\)/);
+  assert.match(storage, /mileage: new Map\(\)/);
+  assert.match(storage, /engine: new Map\(\)/);
+  assert.match(storage, /unionIndexIds\(manifest, "budget"/);
+  assert.match(storage, /unionIndexIds\(manifest, "year"/);
+  assert.match(storage, /unionIndexIds\(manifest, "mileage"/);
+  assert.match(storage, /unionIndexIds\(manifest, "engine"/);
+  assert.match(storage, /unionIndexIds\(manifest, "power"/);
+  assert.match(storage, /CATALOG_SEARCH_CHUNK_CONCURRENCY/);
+  assert.match(storage, /mapWithConcurrency\(chunkLocations/);
+  assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]/);
+});
+
+test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {
+  assert.match(customs, /\[58\.84, 44\.05, 77\.48\]/);
+  assert.match(customs, /\[139\.75, 49\.5, 82\.1\]/);
+  assert.match(customs, /\[117\.68, 123\.78, 187\.4\]/);
+  assert.doesNotMatch(customs, /\[58\.84, 40\.04, 70\.44\]/);
 });
 
 test("production control document fixes the CRM readiness gate", () => {
