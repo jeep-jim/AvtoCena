@@ -26,6 +26,8 @@
     "catalog:sync-vehicle-models": "tsx scripts/catalog-sync-vehicle-models.mjs",
     "catalog:enrich-drom-variants": "tsx scripts/catalog-enrich-drom-vehicle-variants.mjs",
     "catalog:build-vehicle-variants": "tsx scripts/catalog-build-vehicle-variants.mjs",
+    "catalog:audit-vehicle-knowledge": "tsx scripts/catalog-audit-vehicle-knowledge.mjs",
+    "catalog:cleanup-storage": "tsx scripts/catalog-clean-object-storage.mjs",
     "catalog:reindex-vehicle-knowledge": "tsx scripts/catalog-reindex-vehicle-knowledge.mjs"
   }
 }

@@ -1,10 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const {
+  CATALOG_CHUNK_SIZE,
+  offerPath,
+  persistCatalogOffers,
+  readAllOffersForMaintenance,
+  readMarketOffers,
+} = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
@@ -20,6 +27,9 @@ const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORIT
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
+const generationKeepCount = Math.max(2, Number(process.env.CATALOG_GENERATION_KEEP_COUNT || 2));
+const generationCleanupGraceMs = Math.max(retentionMs, Number(process.env.CATALOG_GENERATION_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
+const generationHistoryPath = "catalog/generation-history.json";
 const configuredMarkets = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const markets = configuredMarkets.length ? configuredMarkets : [...PUBLIC_CATALOG_MARKETS];
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -71,6 +81,43 @@ function uniqueImages(images) {
   return result;
 }
 
+function overlayDefined(base, overlay) {
+  const result = { ...(base || {}) };
+  for (const [key, value] of Object.entries(overlay || {})) {
+    if (value === undefined || value === null || value === "") continue;
+    result[key] = value;
+  }
+  return result;
+}
+
+function earliestIso(...values) {
+  const valid = values.map((value) => ({ value, time: Date.parse(String(value || "")) })).filter((entry) => Number.isFinite(entry.time));
+  return valid.sort((left, right) => left.time - right.time)[0]?.value;
+}
+
+function latestIso(...values) {
+  const valid = values.map((value) => ({ value, time: Date.parse(String(value || "")) })).filter((entry) => Number.isFinite(entry.time));
+  return valid.sort((left, right) => right.time - left.time)[0]?.value;
+}
+
+function mergeOfferVersions(primary, retained) {
+  if (!retained) return { ...primary, images: uniqueImages(primary?.images) };
+  const merged = overlayDefined(retained, primary);
+  const primaryRaw = typeof primary?.operational?.raw === "object" && primary.operational.raw ? primary.operational.raw : {};
+  const retainedRaw = typeof retained?.operational?.raw === "object" && retained.operational.raw ? retained.operational.raw : {};
+  return {
+    ...merged,
+    firstSeenAt: earliestIso(primary?.firstSeenAt, retained?.firstSeenAt) || primary?.firstSeenAt || retained?.firstSeenAt,
+    updatedAt: latestIso(primary?.updatedAt, retained?.updatedAt) || primary?.updatedAt || retained?.updatedAt,
+    images: uniqueImages([...(primary?.images || []), ...(retained?.images || [])]),
+    calculationSnapshot: overlayDefined(retained?.calculationSnapshot, primary?.calculationSnapshot),
+    operational: {
+      ...overlayDefined(retained?.operational, primary?.operational),
+      raw: overlayDefined(retainedRaw, primaryRaw),
+    },
+  };
+}
+
 function hasExactCalculation(offer) {
   const customs = offer?.calculationSnapshot?.customs;
   const breakdown = offer?.calculationSnapshot?.breakdown;
@@ -89,6 +136,118 @@ function hasExactCalculation(offer) {
 function isCommercial(offer) {
   return COMMERCIAL_RE.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)
     || /^(?:Hino|Mitsubishi Fuso)$/i.test(String(offer?.make || ""));
+}
+
+function cleanShard(value) {
+  return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown";
+}
+
+function budgetBucket(value) {
+  const number = Number(value || 0);
+  return number > 0 ? String(Math.ceil(number / 500_000) * 500_000) : "unknown";
+}
+
+function generationInventory(manifest, offers) {
+  if (!manifest?.generationId) return [];
+  const generationId = manifest.generationId;
+  const keys = new Set([
+    `catalog/generations/${generationId}/indexes/offers-by-id.json`,
+    `catalog/generations/${generationId}/indexes/images-by-id.json`,
+    `catalog/generations/${generationId}/indexes/facets.json`,
+    `catalog/generations/${generationId}/indexes/order-updatedAt.json`,
+    `catalog/generations/${generationId}/inventory.json`,
+  ]);
+  for (const [market, descriptor] of Object.entries(manifest.markets || {})) {
+    for (const chunk of descriptor?.chunks || []) keys.add(offerPath(generationId, market, chunk));
+  }
+  const maps = {
+    market: new Set(), make: new Set(), model: new Set(), year: new Set(), budget: new Set(),
+    fuel: new Set(), body: new Set(), transmission: new Set(), drive: new Set(), hasPrice: new Set(),
+  };
+  const sourceCounts = new Map();
+  for (const offer of offers) {
+    const make = String(offer?.make || "").trim();
+    const model = String(offer?.model || "").trim();
+    const pairs = {
+      market: offer?.market,
+      make,
+      model: `${make}:${model}`,
+      year: offer?.year,
+      budget: budgetBucket(offer?.totalRub),
+      fuel: offer?.fuel,
+      body: offer?.bodyType,
+      transmission: offer?.transmission,
+      drive: offer?.drive,
+      hasPrice: offer?.totalRub ? "yes" : "no",
+    };
+    for (const [name, value] of Object.entries(pairs)) maps[name].add(cleanShard(value));
+    const sourceId = String(offer?.sourceId || "unknown");
+    sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
+  }
+  for (const [name, values] of Object.entries(maps)) {
+    for (const value of values) keys.add(`catalog/generations/${generationId}/indexes/${name}/${value}.json`);
+  }
+  for (const [sourceId, count] of sourceCounts) {
+    const chunkCount = Math.ceil(count / CATALOG_CHUNK_SIZE);
+    for (let index = 1; index <= chunkCount; index++) {
+      keys.add(`catalog/internal/offers/${sourceId}/${generationId}-chunk-${String(index).padStart(4, "0")}.json`);
+    }
+  }
+  return [...keys].sort();
+}
+
+async function recordAndCleanupGenerations(manifest, offers, publishedAt) {
+  if (!manifest?.generationId) return { recorded: false, deletedGenerations: [], deletedObjects: 0, errors: [] };
+  const storage = getJsonStorage();
+  const objectKeys = generationInventory(manifest, offers);
+  const inventoryPath = `catalog/generations/${manifest.generationId}/inventory.json`;
+  await writeDataJson(inventoryPath, { version: 1, generationId: manifest.generationId, publishedAt, objectKeys });
+  const current = await readDataJson(generationHistoryPath, { version: 1, generations: [] });
+  const previousEntries = Array.isArray(current?.generations) ? current.generations : [];
+  const nextEntry = { generationId: manifest.generationId, publishedAt, inventoryPath, objectKeys };
+  const generations = [nextEntry, ...previousEntries.filter((entry) => entry?.generationId && entry.generationId !== manifest.generationId)]
+    .slice(0, 60);
+  const protectedIds = new Set(generations.slice(0, generationKeepCount).map((entry) => entry.generationId));
+  const cutoff = Date.now() - generationCleanupGraceMs;
+  const deletedGenerations = [];
+  const errors = [];
+  let deletedObjects = 0;
+  const retained = [];
+
+  for (const entry of generations) {
+    const published = Date.parse(String(entry?.publishedAt || ""));
+    const eligible = entry?.generationId !== manifest.generationId
+      && !protectedIds.has(entry?.generationId)
+      && Number.isFinite(published)
+      && published < cutoff
+      && Array.isArray(entry?.objectKeys)
+      && entry.objectKeys.length > 0;
+    if (!eligible) {
+      retained.push(entry);
+      continue;
+    }
+    let failed = false;
+    for (const key of entry.objectKeys) {
+      try {
+        await storage.deleteJson?.(String(key));
+        deletedObjects++;
+      } catch (error) {
+        failed = true;
+        if (errors.length < 200) errors.push({ generationId: entry.generationId, key, error: String(error?.message || error) });
+      }
+    }
+    if (failed) retained.push(entry);
+    else deletedGenerations.push(entry.generationId);
+  }
+
+  await writeDataJson(generationHistoryPath, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    keepCount: generationKeepCount,
+    cleanupGraceMs: generationCleanupGraceMs,
+    generations: retained,
+  });
+  return { recorded: true, inventoryObjects: objectKeys.length, deletedGenerations, deletedObjects, errors };
 }
 
 async function generationFilesForMarket(market) {
@@ -165,16 +324,36 @@ for (const market of markets) {
   const generation = await readGenerationFiles(market);
   let publicRows = [];
   try { publicRows = await readMarketOffers(market); } catch { publicRows = []; }
-  const retainedRows = [...publicRows, ...internalRows]
-    .filter((offer) => offer?.market === market && ["active", "stale"].includes(String(offer?.status || "")) && freshness(offer) >= cutoff)
-    .sort(qualityOrder);
-  const freshRows = generation.offers
-    .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") === "fresh_listing")
-    .sort(qualityOrder);
-  const rebuiltRows = generation.offers
-    .filter((offer) => String(offer?.operational?.galleryRebuiltFrom || "") !== "fresh_listing")
-    .sort(qualityOrder);
 
+  const retainedById = new Map();
+  for (const offer of [...publicRows, ...internalRows]
+    .filter((row) => row?.market === market && ["active", "stale"].includes(String(row?.status || "")) && freshness(row) >= cutoff)
+    .sort((left, right) => freshness(left) - freshness(right))) {
+    retainedById.set(offer.id, mergeOfferVersions(offer, retainedById.get(offer.id)));
+  }
+
+  const generatedById = new Map();
+  const generatedOrigins = new Map();
+  let galleriesAccumulated = 0;
+  const generationRows = [...generation.offers].sort((left, right) => {
+    const leftFresh = String(left?.operational?.galleryRebuiltFrom || "") === "fresh_listing" ? 1 : 0;
+    const rightFresh = String(right?.operational?.galleryRebuiltFrom || "") === "fresh_listing" ? 1 : 0;
+    return leftFresh - rightFresh || freshness(left) - freshness(right);
+  });
+  for (const offer of generationRows) {
+    if (!offer?.id) continue;
+    const existing = generatedById.get(offer.id) || retainedById.get(offer.id);
+    const before = Number(offer?.images?.length || 0);
+    const merged = mergeOfferVersions(offer, existing);
+    if (merged.images.length > before) galleriesAccumulated++;
+    generatedById.set(offer.id, merged);
+    if (String(offer?.operational?.galleryRebuiltFrom || "") === "fresh_listing") generatedOrigins.set(offer.id, "fresh");
+    else if (!generatedOrigins.has(offer.id)) generatedOrigins.set(offer.id, "rebuilt");
+  }
+
+  const freshRows = [...generatedById.values()].filter((offer) => generatedOrigins.get(offer.id) === "fresh").sort(qualityOrder);
+  const rebuiltRows = [...generatedById.values()].filter((offer) => generatedOrigins.get(offer.id) !== "fresh").sort(qualityOrder);
+  const retainedRows = [...retainedById.values()].filter((offer) => !generatedById.has(offer.id)).sort(qualityOrder);
   const origins = [["fresh", freshRows], ["rebuilt", rebuiltRows], ["retained", retainedRows]];
   const selected = [];
   const selectedIds = new Set();
@@ -252,6 +431,7 @@ for (const market of markets) {
     freshCandidates: freshRows.length,
     rebuiltCandidates: rebuiltRows.length,
     retainedCandidates: retainedRows.length,
+    galleriesAccumulated,
     published: selected.length,
     calculatedCount,
     calculatedShare: selected.length ? Number((calculatedCount / selected.length).toFixed(4)) : 0,
@@ -279,13 +459,13 @@ const publishedAt = new Date().toISOString();
 const emptyMarkets = markets.filter((market) => Number(byMarket[market] || 0) === 0);
 let manifest = null;
 let publicationError = "";
+let generationCleanup = { recorded: false, deletedGenerations: [], deletedObjects: 0, errors: [] };
 
 if (offers.length) {
   try {
-    // Если один рынок полностью недоступен, его предыдущая проверенная версия не должна
-    // исчезнуть из общего manifest из-за сбоя остальных источников.
     process.env.CATALOG_GROW_ONLY_MARKETS = emptyMarkets.join(",");
     manifest = await persistCatalogOffers(offers);
+    generationCleanup = await recordAndCleanupGenerations(manifest, offers, publishedAt);
   } catch (error) {
     publicationError = String(error?.message || error);
   }
@@ -295,7 +475,7 @@ if (offers.length) {
 
 const marketsBelowTarget = markets.filter((market) => Number(byMarket[market] || 0) < targetPerMarket);
 const report = {
-  version: 32,
+  version: 37,
   mode: "atomic_all_markets_with_verified_accumulation",
   publishedAt,
   published: Boolean(manifest),
@@ -320,6 +500,7 @@ const report = {
   partialGenerationMarkets: markets.filter((market) => marketQuality[market]?.generationPartial),
   marketQuality,
   marketReports,
+  generationCleanup,
 };
 
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
