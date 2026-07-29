@@ -3,8 +3,8 @@ import fs from "node:fs/promises";
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 
 const REPORT_FILE = process.env.CATALOG_STORAGE_CLEANUP_REPORT || "catalog-storage-cleanup-report.json";
-const KEEP_GENERATIONS = Math.max(2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || 2));
 const EMERGENCY = String(process.env.CATALOG_STORAGE_EMERGENCY || "false").toLowerCase() === "true";
+const KEEP_GENERATIONS = Math.max(EMERGENCY ? 0 : 2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || 2));
 const MIN_GRACE_MS = EMERGENCY ? 0 : 3 * 24 * 60 * 60 * 1_000;
 const GRACE_MS = Math.max(MIN_GRACE_MS, Number(process.env.CATALOG_STORAGE_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
 const MAX_DELETES = Math.max(1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_MAX_DELETES || 100_000));
@@ -81,15 +81,16 @@ const [publicManifest, internalManifest, generationObjects, internalObjects, ima
 
 const generationIds = [...new Set(generationObjects.map((object) => generationIdFromKey(object.key)).filter(Boolean))]
   .sort((left, right) => generationTimestamp(right) - generationTimestamp(left));
+const retainedHistoryGenerations = EMERGENCY ? [] : generationIds.slice(0, KEEP_GENERATIONS);
 const protectedGenerations = new Set([
   String(publicManifest?.generationId || ""),
   String(internalManifest?.generationId || ""),
-  ...generationIds.slice(0, KEEP_GENERATIONS),
+  ...retainedHistoryGenerations,
 ].filter(Boolean));
 
 if (!publicManifest?.generationId || !generationIds.length) {
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -148,7 +149,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
   }
 
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -157,6 +158,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
     blockReason: blocked ? `planned_deletes_${plannedDeletes}_exceed_${MAX_DELETES}` : "",
     graceMs: GRACE_MS,
     keepGenerations: KEEP_GENERATIONS,
+    retainedHistoryGenerations,
     maximumDeletes: MAX_DELETES,
     currentPublicGeneration: publicManifest.generationId,
     currentInternalGeneration: internalManifest?.generationId || null,
