@@ -52,7 +52,7 @@ test("volume shortages are diagnostics and not a global publication crash", () =
   assert.doesNotMatch(validator, /throw new Error\(`catalog_publication_gate_failed/);
 });
 
-test("publisher accumulates verified current markets and keeps previous manifest on fatal storage failure", () => {
+test("publisher accumulates verified current markets and keeps previous manifest on failure", () => {
   assert.match(publisher, /readMarketOffers/);
   assert.match(publisher, /readAllOffersForMaintenance/);
   assert.match(publisher, /atomic_all_markets_with_verified_accumulation/);
@@ -62,14 +62,16 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("individual site and shard failures cannot make the whole production workflow red", () => {
+test("network, knowledge, shard and publish failures finish with diagnostics instead of a red workflow", () => {
+  assert.match(workflow, /validate:[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /knowledge:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /collect:[\s\S]*continue-on-error: true/);
-  assert.match(workflow, /Probe every registered source in this shard[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /publish:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
-  assert.match(workflow, /Download available source shards[\s\S]*continue-on-error: true/);
-  assert.match(workflow, /catalog_no_new_verified_offers: previous manifest preserved safely/);
-  assert.match(workflow, /catalog_storage_or_publication_failure_/);
+  assert.match(workflow, /health_report_previous_manifest_preserved/);
+  assert.match(workflow, /Catalog health summary/);
+  assert.match(workflow, /previous verified manifest remains active/);
 });
 
 test("production probes the registry, crawls live sources and retains inactive sources", () => {
@@ -89,11 +91,11 @@ test("production probes the registry, crawls live sources and retains inactive s
   assert.match(rebuild, /retained/);
   assert.match(rebuild, /probe_inactive/);
   assert.match(rebuild, /detailNeeded/);
-  assert.match(workflow, /Publish verified offers with three-day retention/);
+  assert.match(workflow, /Publish verified offers with three-day retention safely/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
-  assert.match(workflow, /Confirm publication or safe retention/);
+  assert.match(workflow, /Write catalog health summary/);
   assert.match(workflow, /cancel-in-progress: true/);
-  assert.match(workflow, /Probe every registered source in this shard/);
+  assert.match(workflow, /Probe sources safely/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
   assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
 });
