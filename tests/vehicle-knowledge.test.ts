@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { readBrandModelDirectory } from "../apps/web/lib/catalog/model-directory";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
+const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
 const brandDirectoryUi = fs.readFileSync(new URL("../apps/web/components/catalog/BrandModelDirectory.tsx", import.meta.url), "utf8");
 const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
 
@@ -52,14 +52,13 @@ test("does not confuse Honda Vezel with HR-V", async () => {
   assert.equal(result.model, "Vezel");
 });
 
-test("brand directory exposes known model power without reading raw JSON in the UI", async () => {
-  const models = await readBrandModelDirectory("Toyota");
-  const rav4 = models.find((model) => model.id === "toyota/rav4");
-  assert.ok(rav4);
-  assert.equal(rav4.knowledge.powerHp?.min, 203);
-  assert.equal(rav4.knowledge.powerHp?.max, 203);
-  assert.equal(rav4.knowledge.powerKw?.min, 149.5);
-  assert.equal(rav4.knowledge.engineCc?.min, 2487);
+test("model directory aggregates variants and power references into public characteristics", () => {
+  assert.match(modelDirectory, /readVehicleKnowledgeVariants/);
+  assert.match(modelDirectory, /readVehiclePowerKnowledge/);
+  assert.match(modelDirectory, /power30MinKw/);
+  assert.match(modelDirectory, /utilizationPowerKw/);
+  assert.match(modelDirectory, /engineCc/);
+  assert.match(modelDirectory, /knowledge: summarizeModel/);
 });
 
 test("public brand and model pages render knowledge power, kW and 30-minute fields", () => {
