@@ -1,5 +1,6 @@
 import type { CatalogMarket } from "./types";
 
+// Production rebuild trigger after the vehicle-knowledge sync fix on 2026-07-29.
 export const PUBLIC_CATALOG_MARKETS: CatalogMarket[] = [
   "korea",
   "china",
