@@ -1,6 +1,7 @@
 import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../effective-market-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
+import { convertToRub } from "./rates";
 import type { CatalogMarket, VehicleOffer } from "./types";
 
 function positive(value: unknown) {
@@ -10,6 +11,7 @@ function positive(value: unknown) {
 
 function snapshotSourcePriceRub(offer: Partial<VehicleOffer>) {
   return positive(offer.calculationSnapshot?.currencyRate?.sourcePriceRub)
+    || positive(offer.calculationSnapshot?.sourcePriceRub)
     || positive(offer.calculationSnapshot?.customsValue?.vehiclePriceRub);
 }
 
@@ -19,6 +21,27 @@ function snapshotCustomsRub(offer: Partial<VehicleOffer>) {
 
 function uniqueText(values: unknown[]) {
   return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+}
+
+async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
+  const sourcePrice = positive(offer.sourcePrice);
+  const sourceCurrency = String(offer.sourceCurrency || "").trim().toUpperCase();
+  if (!sourcePrice || !sourceCurrency) return offer;
+
+  const storedRate = offer.calculationSnapshot?.currencyRate;
+  if (snapshotSourcePriceRub(offer) > 0 && positive(storedRate?.effectiveRate) > 0) return offer;
+
+  const rate = await convertToRub(sourcePrice, sourceCurrency).catch(() => null);
+  if (!rate) return offer;
+
+  return {
+    ...offer,
+    calculationSnapshot: {
+      ...(offer.calculationSnapshot || {}),
+      currencyRate: rate,
+      sourcePriceRub: rate.sourcePriceRub,
+    },
+  } as T;
 }
 
 export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(offer: T, configured: any): T {
@@ -56,6 +79,7 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
       ...oldSnapshot,
       ...calculation.snapshot,
       currencyRate: oldSnapshot.currencyRate,
+      sourcePriceRub: oldSnapshot.sourcePriceRub || oldSnapshot.currencyRate?.sourcePriceRub,
       customs: oldSnapshot.customs,
       customsValue: oldSnapshot.customsValue,
       customsCompleteness: oldSnapshot.customsCompleteness,
@@ -74,13 +98,17 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
 
 export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   if (!offer.market) return offer;
-  const configured = await getEffectiveMarketVersion(String(offer.market));
-  return repriceOfferWithBusinessConfig(offer, configured);
+  const rated = await attachCurrentCurrencyRate(offer);
+  const configured = await getEffectiveMarketVersion(String(rated.market));
+  return repriceOfferWithBusinessConfig(rated, configured);
 }
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
-  const markets = await getEffectiveMarketsWithDefaults();
+  const [markets, ratedOffers] = await Promise.all([
+    getEffectiveMarketsWithDefaults(),
+    Promise.all(offers.map((offer) => attachCurrentCurrencyRate(offer))),
+  ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
-  return offers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
+  return ratedOffers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
 }
