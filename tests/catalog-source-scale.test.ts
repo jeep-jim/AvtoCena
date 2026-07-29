@@ -148,13 +148,15 @@ test("real listings stay public while exact customs calculation is pending", () 
   assert.match(rebuildScript, /calculationStatus: "needs_data"/);
 });
 
-test("cards show a ruble price while customs calculation is pending", () => {
+test("cards keep source-price conversion while pending copy stays compact", () => {
   assert.match(livePricing, /convertToRub/);
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
   assert.match(catalogCard, /sourcePriceRub/);
-  assert.match(catalogCard, /цена автомобиля в рублях/);
-  assert.match(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
+  assert.match(catalogCard, /\{yearLabel\} · цена автомобиля/);
+  assert.match(catalogCard, /Расчёт под ключ уточняется/);
+  assert.doesNotMatch(catalogCard, /цена автомобиля в рублях/);
+  assert.doesNotMatch(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
   assert.doesNotMatch(catalogCard, /Цена по запросу/);
 });
 
