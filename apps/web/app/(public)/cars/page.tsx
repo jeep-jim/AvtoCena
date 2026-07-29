@@ -22,6 +22,9 @@ const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({
 }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
+const PRIORITY_MAX_RUB = 6_000_000;
+const PRIORITY_MAX_POWER_HP = 160;
+const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
 
 function pageHref(params: Record<string, string | string[] | undefined>, page: number) {
   const query = new URLSearchParams();
@@ -44,10 +47,46 @@ function isJapanAuctionResult(offer: any) {
   return offer?.market === "japan" && (offer?.catalogKind === "auction_result" || (offer?.offerType === "auction" && offer?.auctionResult === "sold"));
 }
 
+function offerRubValue(offer: any) {
+  const totalRub = Number(offer?.totalRub || 0);
+  if (totalRub > 0) return totalRub;
+  const sourcePrice = Number(offer?.sourcePrice || 0);
+  if (!sourcePrice) return 0;
+  const currency = String(offer?.sourceCurrency || "").toUpperCase();
+  if (currency === "RUB") return sourcePrice;
+  const rate = offer?.calculationSnapshot?.currencyRate || {};
+  const explicit = Number(rate.sourcePriceRub || offer?.calculationSnapshot?.sourcePriceRub || 0);
+  if (explicit > 0) return explicit;
+  const effectiveRate = Number(rate.effectiveRate || 0);
+  return effectiveRate > 0 ? Math.round(sourcePrice * effectiveRate) : 0;
+}
+
+function businessPriority(offer: any) {
+  const rub = offerRubValue(offer);
+  const power = Number(offer?.powerHp || 0);
+  const year = Number(offer?.year || 0);
+  const affordable = rub > 0 && rub <= PRIORITY_MAX_RUB;
+  const lowPower = power > 0 && power <= PRIORITY_MAX_POWER_HP;
+  const recent = year >= PRIORITY_MIN_YEAR;
+  let score = isJapanAuctionResult(offer) ? 5_000 : 0;
+  if (affordable) score += 1_600;
+  if (lowPower) score += 800;
+  if (recent) score += 800;
+  if (affordable && lowPower && recent) score += 3_200;
+  if (rub > 0) score += 200;
+  return score;
+}
+
+function businessOrder(left: any, right: any) {
+  return businessPriority(right) - businessPriority(left)
+    || offerFreshness(right) - offerFreshness(left)
+    || String(left?.id || "").localeCompare(String(right?.id || ""));
+}
+
 function matchesFilters(offer: any, common: any) {
   const make = String(offer.make || "").toLocaleLowerCase("ru-RU");
   const model = String(offer.model || "").toLocaleLowerCase("ru-RU");
-  const totalRub = Number(offer.totalRub || 0);
+  const totalRub = offerRubValue(offer);
   const mileage = Number(offer.mileageKm || 0);
   const engine = Number(offer.engineCc || 0);
   const power = Number(offer.powerHp || 0);
@@ -91,27 +130,27 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
       const page = selectedMarket ? requestedPage : 1;
 
-      // Japan is a historical auction-statistics catalogue. It must not be diluted by
-      // exporter stock listings when sold auction results are available.
+      // Япония — прежде всего каталог отыгранных лотов. Внутри него сначала идут
+      // доступные свежие автомобили до 6 млн ₽ и до 160 л.с., затем остальные.
       if (market.id === "japan") {
         const auctionRows = (await readMarketOffers("japan"))
           .filter((offer) => offer.status === "active" && isJapanAuctionResult(offer) && isCrediblePublicOffer(offer))
           .filter((offer) => !hasFilters || matchesFilters(offer, common))
-          .sort((left, right) => offerFreshness(right) - offerFreshness(left));
+          .sort(businessOrder);
         const start = (page - 1) * pageSize;
         const visible = await applyActiveBusinessPricingBatch(auctionRows.slice(start, start + pageSize));
-        return { ...market, items: visible.map(publicOffer), total: auctionRows.length, page, pageSize, auctionStatistics: true };
+        return { ...market, items: visible.sort(businessOrder).map(publicOffer), total: auctionRows.length, page, pageSize, auctionStatistics: true };
       }
 
       if (!hasFilters) {
         const rows = (await readMarketOffers(market.id))
           .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))
-          .sort((left, right) => offerFreshness(right) - offerFreshness(left));
+          .sort(businessOrder);
         const start = (page - 1) * pageSize;
         const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));
         return {
           ...market,
-          items: visible.map(publicOffer),
+          items: visible.sort(businessOrder).map(publicOffer),
           total: rows.length,
           page,
           pageSize,
@@ -119,7 +158,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       }
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
       const repriced = await applyActiveBusinessPricingBatch(result.items as any[]);
-      return { ...market, items: repriced, total: result.total, page: result.page, pageSize: result.pageSize };
+      return { ...market, items: repriced.sort(businessOrder), total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
