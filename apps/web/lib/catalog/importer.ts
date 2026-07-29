@@ -43,11 +43,20 @@ import {
   PUBLIC_CATALOG_MARKETS,
 } from "./runtime-config";
 
+// The production shard script imports this module before it reads gallery limits.
+// Force the agreed policy there: gather and retain as many listing-bound photos as
+// the source provides, up to 30. Web/runtime imports are not affected.
+if (process.env.CATALOG_REBUILD_MARKET) {
+  process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER = "30";
+  process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
+  process.env.CATALOG_COLLECTION_IMAGE_LIMIT = "30";
+}
+
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 
 // Generic regional adapters are registered first. Exact/detail adapters below must
-// replace them when sourceId совпадает; otherwise a broad HTML parser can silently
+// replace them when sourceId matches; otherwise a broad HTML parser can silently
 // displace the working AUTO.GE or Mashina parser and collapse the public market.
 const completeSources = [
   prepareSource(guaziRuSource),
