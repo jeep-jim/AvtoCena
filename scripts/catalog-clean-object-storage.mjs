@@ -37,7 +37,16 @@ async function mapWithConcurrency(items, concurrency, worker) {
   return results;
 }
 
-async function readLiveImageKeys(generationIds) {
+function collectOfferImageKeys(keys, offers) {
+  for (const offer of Array.isArray(offers) ? offers : []) {
+    for (const image of Array.isArray(offer?.images) ? offer.images : []) {
+      const objectKey = String(image?.objectKey || "").trim();
+      if (objectKey) keys.add(objectKey);
+    }
+  }
+}
+
+async function readLiveImageKeys(generationIds, internalManifest) {
   const keys = new Set();
   for (const generationId of generationIds) {
     if (!generationId) continue;
@@ -47,6 +56,9 @@ async function readLiveImageKeys(generationIds) {
       if (objectKey) keys.add(objectKey);
     }
   }
+  const internalChunks = [...new Set(Object.values(internalManifest?.sources || {}).flatMap((source) => Array.isArray(source?.chunks) ? source.chunks : []))];
+  const internalLists = await mapWithConcurrency(internalChunks, Math.min(DELETE_CONCURRENCY, 16), (chunk) => readDataJson(String(chunk), []).catch(() => []));
+  for (const offers of internalLists) collectOfferImageKeys(keys, offers);
   return keys;
 }
 
@@ -100,7 +112,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
     const key = String(object.key || "");
     return candidateGenerations.some((generationId) => key.includes(`/${generationId}-chunk-`));
   });
-  const liveImageKeys = await readLiveImageKeys(protectedGenerations);
+  const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest);
   const imageDeleteObjects = imageObjects.filter((object) => {
     const modifiedAt = objectAge(object.lastModified);
     return object.key && !liveImageKeys.has(object.key) && modifiedAt > 0 && modifiedAt < cutoff;
