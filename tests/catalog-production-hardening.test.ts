@@ -3,8 +3,11 @@ import fs from "node:fs";
 import test from "node:test";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
+const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
@@ -40,7 +43,7 @@ test("vehicle knowledge audit protects count, retention ratio and unique ids", (
   assert.match(audit, /writeDataJson\(HEALTH_PATH, report\)/);
 });
 
-test("publisher accumulates galleries before deduplication and cleans only inventoried old generations", () => {
+test("publisher accumulates galleries before deduplication and protects the newest generations", () => {
   assert.match(publisher, /function mergeOfferVersions/);
   assert.match(publisher, /images: uniqueImages\(\[\.\.\.\(primary\?\.images/);
   assert.match(publisher, /retainedById/);
@@ -51,6 +54,23 @@ test("publisher accumulates galleries before deduplication and cleans only inven
   assert.match(publisher, /generationCleanupGraceMs/);
   assert.match(publisher, /entry\.objectKeys\.length > 0/);
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
+});
+
+test("daily Object Storage cleanup removes complete old prefixes and only orphaned aged images", () => {
+  assert.match(dataStorage, /listObjects\?/);
+  assert.match(dataStorage, /deletePrefix\?/);
+  assert.match(dataStorage, /list-type/);
+  assert.match(dataStorage, /NextContinuationToken/);
+  assert.match(cleanup, /protectedGenerations/);
+  assert.match(cleanup, /candidateGenerations/);
+  assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
+  assert.match(cleanup, /liveImageKeys/);
+  assert.match(cleanup, /modifiedAt < cutoff/);
+  assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
+  assert.match(cleanupWorkflow, /cron: "17 2 \* \* \*"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "345600000"/);
 });
 
 test("large catalog search uses range shards and bounded chunk reads", () => {
