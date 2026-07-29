@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { resolveEffectiveMarketVersion } from "../apps/web/lib/effective-market-settings";
-import { repriceOfferWithBusinessConfig } from "../apps/web/lib/catalog/live-business-pricing";
+import { applyActiveBusinessPricing, repriceOfferWithBusinessConfig } from "../apps/web/lib/catalog/live-business-pricing";
 
 const markets = JSON.parse(fs.readFileSync(new URL("../data/markets/markets.json", import.meta.url), "utf8"));
 const expectedMarkets = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
@@ -102,4 +102,21 @@ test("visible offer is repriced from current CRM values without changing customs
   const deposit = result.calculationSnapshot.breakdown.find((line: any) => line.id === "security-deposit");
   const car = result.calculationSnapshot.breakdown.find((line: any) => line.id === "car");
   assert.equal(Number(deposit.amountRub) + Number(car.amountRub), 1_000_000);
+});
+
+test("pending public offer gets a ruble source-price snapshot even before customs is ready", async () => {
+  const result = await applyActiveBusinessPricing({
+    id: "pending-rub",
+    market: "georgia",
+    sourcePrice: 1_750_000,
+    sourceCurrency: "RUB",
+    calculationStatus: "needs_power_data",
+    totalRub: null,
+    calculationSnapshot: {},
+  } as any);
+
+  assert.equal(result.totalRub, null);
+  assert.equal(result.calculationStatus, "needs_power_data");
+  assert.equal(result.calculationSnapshot?.currencyRate?.sourcePriceRub, 1_750_000);
+  assert.equal(result.calculationSnapshot?.sourcePriceRub, 1_750_000);
 });

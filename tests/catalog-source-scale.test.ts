@@ -17,6 +17,9 @@ const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source
 const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const reliableSources = fs.readFileSync(new URL("../apps/web/lib/catalog/reliable-bootstrap-sources.ts", import.meta.url), "utf8");
+const regionalOverrides = fs.readFileSync(new URL("../apps/web/lib/catalog/regional-live-overrides.ts", import.meta.url), "utf8");
+const livePricing = fs.readFileSync(new URL("../apps/web/lib/catalog/live-business-pricing.ts", import.meta.url), "utf8");
+const imageQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/image-quality.ts", import.meta.url), "utf8");
 const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/page.tsx", import.meta.url), "utf8");
@@ -129,6 +132,10 @@ test("rebuild calculates first and progressively opens detail without exhausting
   assert.match(rebuildScript, /galleryEnrichmentStatus/);
   assert.match(rebuildScript, /imageStats/);
   assert.match(rebuildScript, /networkImageLimit/);
+  assert.match(rebuildScript, /retention_plus_fresh_listing/);
+  assert.match(rebuildScript, /galleriesAccumulated/);
+  assert.match(rebuildScript, /function rubValue/);
+  assert.match(rebuildScript, /previous\?\.images/);
   assert.doesNotMatch(rebuildScript, /reject\("calculation"\); return null/);
 });
 
@@ -141,11 +148,20 @@ test("real listings stay public while exact customs calculation is pending", () 
   assert.match(rebuildScript, /calculationStatus: "needs_data"/);
 });
 
-test("cards show the real source price while customs calculation is pending", () => {
-  assert.match(catalogCard, /hasSourcePrice/);
-  assert.match(catalogCard, /цена автомобиля/);
-  assert.match(catalogCard, /Расчёт под ключ уточняется/);
+test("cards show a ruble price while customs calculation is pending", () => {
+  assert.match(livePricing, /convertToRub/);
+  assert.match(livePricing, /attachCurrentCurrencyRate/);
+  assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
+  assert.match(catalogCard, /sourcePriceRub/);
+  assert.match(catalogCard, /цена автомобиля в рублях/);
+  assert.match(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
   assert.doesNotMatch(catalogCard, /Цена по запросу/);
+});
+
+test("public cards use the stable same-origin image proxy", () => {
+  assert.match(imageQuality, /\/api\/catalog\/images\//);
+  assert.match(imageQuality, /encodeURIComponent\(id\)/);
+  assert.match(imageQuality, /stablePublicImageUrl/);
 });
 
 test("dealer CRM renders SVG market flags rather than emoji letter codes", () => {
@@ -181,11 +197,14 @@ test("requested high-volume public sources are registered", () => {
   }
 });
 
-test("bootstrap replacements follow current Guazi and Turbo public routes", () => {
+test("bootstrap replacements follow current regional public routes", () => {
   assert.match(reliableSources, /https:\/\/en\.guazi\.com\/\$\{path\}/);
   assert.match(reliableSources, /https:\/\/ru\.guazi\.com\/\$\{path\}/);
-  assert.match(reliableSources, /sourceId: "turbo_kyrgyzstan_open"/);
-  assert.match(reliableSources, /\\\/cars\\\/[A-Za-z0-9_\-\[\]\+]+/);
+  assert.match(regionalOverrides, /https:\/\/www\.auto\.ge\/en\/index\.html/);
+  assert.match(regionalOverrides, /https:\/\/www\.mashina\.kg\/search\/all\//);
+  assert.match(regionalOverrides, /sourceId: "mashina_kyrgyzstan_exact"/);
+  assert.match(regionalOverrides, /sourceId: "turbo_kyrgyzstan_open"/);
+  assert.match(regionalOverrides, /\\\/cars\\\/[A-Za-z0-9_\-\[\]\+]+/);
 });
 
 test("brand rail opens existing brand and model SEO pages", () => {

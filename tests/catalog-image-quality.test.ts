@@ -36,11 +36,16 @@ test("rejects a square service pictogram even when it is large", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [squareWrenchIcon] }), []);
 });
 
-test("keeps only real photographs when a listing mixes photos and placeholders", () => {
+test("keeps only real photographs and serves them through the stable catalog API", () => {
   assert.deepEqual(
     rankedCatalogImageUrls({ images: [squareWrenchIcon, jpegPhoto] }),
-    [jpegPhoto.url],
+    ["/api/catalog/images/photo"],
   );
+});
+
+test("falls back to the stored URL only for legacy images without an id", () => {
+  const legacy = { ...jpegPhoto, id: undefined, url: "https://legacy.example/photo.jpg" };
+  assert.deepEqual(rankedCatalogImageUrls({ images: [legacy] }), [legacy.url]);
 });
 
 test("accepts a server-validated public DTO after private source fields are removed", () => {

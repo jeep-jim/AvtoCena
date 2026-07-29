@@ -30,6 +30,8 @@ jobs:
         run: node --import tsx --test tests/price-trend-direction.test.ts
       - name: Catalog image quality tests
         run: node --import tsx --test tests/catalog-image-quality.test.ts
+      - name: Public image proxy tests
+        run: node --import tsx --test tests/catalog-public-image-proxy.test.ts
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Japan auction statistics tests
@@ -40,6 +42,8 @@ jobs:
         run: node --import tsx --test tests/guazi-ru-source.test.ts
       - name: MyAuto Georgia listing tests
         run: node --import tsx --test tests/myauto-list-source.test.ts
+      - name: Regional live route tests
+        run: node --import tsx --test tests/catalog-regional-live-overrides.test.ts
       - name: Catalog probe v23 tests
         run: node --import tsx --test tests/catalog-probe-source-shard.test.ts
       - name: Catalog publication gate tests

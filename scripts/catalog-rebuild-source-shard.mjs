@@ -57,8 +57,14 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
+function rubValue(offer) {
+  return Number(offer?.totalRub || 0)
+    || Number(offer?.calculationSnapshot?.currencyRate?.sourcePriceRub || 0)
+    || Number(offer?.calculationSnapshot?.sourcePriceRub || 0)
+    || Number(offer?.calculationSnapshot?.customsValue?.vehiclePriceRub || 0);
+}
 function isMassMarketPriority(offer) {
-  const totalRub = Number(offer?.totalRub || 0);
+  const totalRub = rubValue(offer);
   const powerHp = Number(offer?.powerHp || 0);
   const year = Number(offer?.year || 0);
   return totalRub > 0 && totalRub <= priorityMaxTotalRub
@@ -66,7 +72,7 @@ function isMassMarketPriority(offer) {
     && year >= priorityMinYear;
 }
 function businessPriority(offer) {
-  const totalRub = Number(offer?.totalRub || 0);
+  const totalRub = rubValue(offer);
   const powerHp = Number(offer?.powerHp || 0);
   const year = Number(offer?.year || 0);
   const affordable = totalRub > 0 && totalRub <= priorityMaxTotalRub;
@@ -125,6 +131,7 @@ let knowledgeEnriched = 0;
 let detailEnriched = 0;
 let detailDeferred = 0;
 let calculationPending = 0;
+let galleriesAccumulated = 0;
 
 function reject(reason) { rejections[reason] = Number(rejections[reason] || 0) + 1; }
 function addError(row) { if (errors.length < 2000) errors.push(row); }
@@ -150,13 +157,13 @@ function report(stopReason = "running") {
   const priorityOffers = offers.filter(isMassMarketPriority).length;
   const imageCounts = offers.map((offer) => Number(offer?.images?.length || 0));
   return {
-    version: 33, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 35, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 33, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      version: 35, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
       detailLimitPerSource, detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
-      detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending,
+      detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending, galleriesAccumulated,
       priorityMaxTotalRub, priorityMaxPowerHp, priorityMinYear, priorityOffers,
       retentionMs, pages, seen, normalized, knowledgeEnriched, detailEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
       imageStats: {
@@ -211,7 +218,21 @@ async function calculateSafely(offer, stage) {
 
 async function prepare(base, source) {
   if (expired()) return null;
-  let offer = normalizeVehicleOfferSpecs({ ...base });
+  const sourceId = String(base?.sourceId || "");
+  const previous = retained.get(sourceId)?.get(base?.id);
+  const accumulatedImages = images([...(previous?.images || []), ...(base?.images || [])]);
+  if (previous && accumulatedImages.length > Number(base?.images?.length || 0)) galleriesAccumulated++;
+  let offer = normalizeVehicleOfferSpecs({
+    ...(previous || {}),
+    ...base,
+    firstSeenAt: previous?.firstSeenAt || base?.firstSeenAt,
+    images: accumulatedImages,
+    operational: {
+      ...(previous?.operational || {}),
+      ...(base?.operational || {}),
+      raw: { ...(previous?.operational?.raw || {}), ...(base?.operational?.raw || {}) },
+    },
+  });
   if (!offer?.id || offer.market !== market || !sourceIds.includes(String(offer.sourceId || ""))) { reject("identity"); return null; }
   if (commercial.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject("commercial"); return null; }
 
@@ -226,8 +247,6 @@ async function prepare(base, source) {
   if (!Number(offer.sourcePrice || 0) || !offer.sourceCurrency || !offer.operational?.sourceUrl) { reject("source_data"); return null; }
   let gallery = images(offer.images);
 
-  // Сначала считаем по данным листинга и собственной базе знаний. Detail нужен не для каждой
-  // из 21 000 карточек, а только для недостающих характеристик и приоритетного расширения галереи.
   offer = await calculateSafely(offer, "calculation_before_detail");
   const powertrainKind = String(offer.powertrainKind || "");
   const combustionSpecsMissing = !["electric", "series_hybrid"].includes(powertrainKind) && !Number(offer.engineCc || 0);
@@ -262,7 +281,7 @@ async function prepare(base, source) {
     operational: { ...offer.operational, fullRebuildAt: now, galleryVerified: true, galleryImageCount: gallery.length,
       gallerySourceImageCount: Math.max(gallery.length, Number(offer.operational?.gallerySourceImageCount || 0)), galleryPreferredCount: preferredImages,
       galleryPreferredReached: gallery.length >= preferredImages, galleryEnrichmentStatus: gallery.length >= preferredImages ? "preferred" : detailDeferredForOffer ? "deferred" : "partial",
-      galleryRebuiltFrom: "fresh_listing", seoEligible: true },
+      galleryRebuiltFrom: previous ? "retention_plus_fresh_listing" : "fresh_listing", seoEligible: true },
   });
   offer = await calculateSafely(offer, "calculation_after_detail");
   if (!isCrediblePublicOffer(offer)) { reject("quality"); return null; }
