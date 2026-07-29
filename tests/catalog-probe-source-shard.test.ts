@@ -8,6 +8,9 @@ const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-sc
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workflow.indexOf("\n  collect:"));
+const collectBlock = workflow.slice(workflow.indexOf("\n  collect:"), workflow.indexOf("\n  publish:"));
+const publishBlock = workflow.slice(workflow.indexOf("\n  publish:"), workflow.indexOf("\n  health:"));
 
 test("probe checks every registered source and passes only live sources to network collection", () => {
   assert.match(probe, /priorityPlan/);
@@ -63,8 +66,9 @@ test("publisher accumulates verified current markets and keeps previous manifest
 });
 
 test("source failures remain diagnostic, but knowledge collapse or missing generation makes production red", () => {
-  assert.doesNotMatch(workflow, /knowledge:[\s\S]*?continue-on-error: true[\s\S]*?collect:/);
-  assert.match(workflow, /collect:[\s\S]*continue-on-error: true/);
+  assert.ok(knowledgeBlock.length > 0);
+  assert.doesNotMatch(knowledgeBlock, /continue-on-error: true/);
+  assert.match(collectBlock, /continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
   assert.match(workflow, /previous_manifest_preserved/);
@@ -72,7 +76,7 @@ test("source failures remain diagnostic, but knowledge collapse or missing gener
   assert.match(workflow, /if \(!state\.published \|\| !state\.generationId \|\| state\.total <= 0 \|\| missing\.length\)/);
   assert.match(workflow, /process\.exit\(1\)/);
   assert.match(workflow, /Require successful knowledge and publication jobs/);
-  assert.doesNotMatch(workflow, /publish:[\s\S]{0,160}continue-on-error: true/);
+  assert.doesNotMatch(publishBlock.slice(0, 200), /continue-on-error: true/);
 });
 
 test("production probes registry, crawls live sources and requires all seven published markets", () => {
