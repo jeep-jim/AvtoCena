@@ -3,8 +3,8 @@ import fs from "node:fs/promises";
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 
 const REPORT_FILE = process.env.CATALOG_STORAGE_CLEANUP_REPORT || "catalog-storage-cleanup-report.json";
-const KEEP_GENERATIONS = Math.max(2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || 2));
 const EMERGENCY = String(process.env.CATALOG_STORAGE_EMERGENCY || "false").toLowerCase() === "true";
+const KEEP_GENERATIONS = Math.max(EMERGENCY ? 0 : 2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || (EMERGENCY ? 0 : 2)));
 const MIN_GRACE_MS = EMERGENCY ? 0 : 3 * 24 * 60 * 60 * 1_000;
 const GRACE_MS = Math.max(MIN_GRACE_MS, Number(process.env.CATALOG_STORAGE_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
 const MAX_DELETES = Math.max(1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_MAX_DELETES || 100_000));
@@ -23,6 +23,10 @@ function generationTimestamp(generationId) {
 function objectAge(value) {
   const parsed = Date.parse(String(value || ""));
   return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function objectBytes(objects) {
+  return objects.reduce((sum, object) => sum + Math.max(0, Number(object?.size || 0)), 0);
 }
 
 async function mapWithConcurrency(items, concurrency, worker) {
@@ -48,7 +52,7 @@ function collectOfferImageKeys(keys, offers) {
   }
 }
 
-async function readLiveImageKeys(generationIds, internalManifest) {
+async function readLiveImageKeys(generationIds, internalManifest, includeInternal) {
   const keys = new Set();
   for (const generationId of generationIds) {
     if (!generationId) continue;
@@ -58,6 +62,7 @@ async function readLiveImageKeys(generationIds, internalManifest) {
       if (objectKey) keys.add(objectKey);
     }
   }
+  if (!includeInternal) return keys;
   const internalChunks = [...new Set(Object.values(internalManifest?.sources || {}).flatMap((source) => Array.isArray(source?.chunks) ? source.chunks : []))];
   const internalLists = await mapWithConcurrency(internalChunks, Math.min(DELETE_CONCURRENCY, 16), (chunk) => readDataJson(String(chunk), []).catch(() => []));
   for (const offers of internalLists) collectOfferImageKeys(keys, offers);
@@ -81,23 +86,25 @@ const [publicManifest, internalManifest, generationObjects, internalObjects, ima
 
 const generationIds = [...new Set(generationObjects.map((object) => generationIdFromKey(object.key)).filter(Boolean))]
   .sort((left, right) => generationTimestamp(right) - generationTimestamp(left));
+const publicGeneration = String(publicManifest?.generationId || "");
+const internalGeneration = String(internalManifest?.generationId || "");
 const protectedGenerations = new Set([
-  String(publicManifest?.generationId || ""),
-  String(internalManifest?.generationId || ""),
-  ...generationIds.slice(0, KEEP_GENERATIONS),
+  publicGeneration,
+  ...(!EMERGENCY && internalGeneration ? [internalGeneration] : []),
+  ...(!EMERGENCY ? generationIds.slice(0, KEEP_GENERATIONS) : []),
 ].filter(Boolean));
 
-if (!publicManifest?.generationId || !generationIds.length) {
+if (!publicGeneration || !generationIds.length) {
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
     emergency: EMERGENCY,
     blocked: true,
     reason: "healthy_current_generation_not_confirmed",
-    currentPublicGeneration: publicManifest?.generationId || null,
-    currentInternalGeneration: internalManifest?.generationId || null,
+    currentPublicGeneration: publicGeneration || null,
+    currentInternalGeneration: internalGeneration || null,
     discoveredGenerations: generationIds.length,
   };
   await fs.writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
@@ -107,20 +114,23 @@ if (!publicManifest?.generationId || !generationIds.length) {
 } else {
   const candidateGenerations = generationIds.filter((generationId) => {
     const timestamp = generationTimestamp(generationId);
-    return timestamp > 0 && timestamp < cutoff && !protectedGenerations.has(generationId);
+    const oldEnough = EMERGENCY || (timestamp > 0 && timestamp < cutoff);
+    return oldEnough && !protectedGenerations.has(generationId);
   });
   const candidateSet = new Set(candidateGenerations);
   const generationDeleteObjects = generationObjects.filter((object) => candidateSet.has(generationIdFromKey(object.key)));
-  const internalDeleteObjects = internalObjects.filter((object) => {
-    const key = String(object.key || "");
-    return candidateGenerations.some((generationId) => key.includes(`/${generationId}-chunk-`));
-  });
-  const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest);
+  const internalDeleteObjects = EMERGENCY
+    ? internalObjects
+    : internalObjects.filter((object) => candidateGenerations.some((generationId) => String(object.key || "").includes(`/${generationId}-chunk-`)));
+  const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest, !EMERGENCY);
   const imageDeleteObjects = imageObjects.filter((object) => {
     const modifiedAt = objectAge(object.lastModified);
-    return object.key && !liveImageKeys.has(object.key) && modifiedAt > 0 && modifiedAt < cutoff;
+    const oldEnough = EMERGENCY || (modifiedAt > 0 && modifiedAt < cutoff);
+    return object.key && !liveImageKeys.has(object.key) && oldEnough;
   });
-  const plannedDeletes = generationDeleteObjects.length + internalDeleteObjects.length + imageDeleteObjects.length;
+  const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects];
+  const plannedDeletes = allDeleteObjects.length;
+  const plannedBytes = objectBytes(allDeleteObjects);
   const blocked = plannedDeletes > MAX_DELETES;
   const errors = [];
   let deletedGenerationObjects = 0;
@@ -148,7 +158,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
   }
 
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -158,8 +168,8 @@ if (!publicManifest?.generationId || !generationIds.length) {
     graceMs: GRACE_MS,
     keepGenerations: KEEP_GENERATIONS,
     maximumDeletes: MAX_DELETES,
-    currentPublicGeneration: publicManifest.generationId,
-    currentInternalGeneration: internalManifest?.generationId || null,
+    currentPublicGeneration: publicGeneration,
+    currentInternalGeneration: internalGeneration || null,
     protectedGenerations: [...protectedGenerations],
     candidateGenerations,
     discovered: {
@@ -174,6 +184,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
       internalObjects: internalDeleteObjects.length,
       images: imageDeleteObjects.length,
       total: plannedDeletes,
+      bytes: plannedBytes,
     },
     deleted: {
       generationObjects: deletedGenerationObjects,
