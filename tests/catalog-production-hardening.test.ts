@@ -65,6 +65,7 @@ test("daily Object Storage cleanup removes complete old prefixes and only orphan
   assert.match(cleanup, /candidateGenerations/);
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
   assert.match(cleanup, /liveImageKeys/);
+  assert.match(cleanup, /internalChunks/);
   assert.match(cleanup, /modifiedAt < cutoff/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
   assert.match(cleanupWorkflow, /cron: "17 2 \* \* \*"/);
@@ -99,5 +100,5 @@ test("production control document fixes the CRM readiness gate", () => {
   assert.match(controls, /не менее 5 000 активных моделей/);
   assert.match(controls, /Пиковая мощность электромотора не подставляется/);
   assert.match(controls, /Новая версия объявления не должна уменьшать уже накопленную галерею/);
-  assert.match(controls, /не запускать destructive cleanup после неудачной публикации/);
+  assert.match(controls, /destructive cleanup не запускается внутри неудачной публикации/);
 });
