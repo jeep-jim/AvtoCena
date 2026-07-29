@@ -1,0 +1,143 @@
+name: Apply catalog Object Storage fix
+
+on:
+  push:
+    branches: [fix/catalog-object-storage-put-400]
+    paths:
+      - .github/workflows/apply-catalog-put-400-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-object-storage-put-400
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Bound index keys and expose exact Object Storage error
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              file = Path(path)
+              text = file.read_text()
+              if old not in text:
+                  raise SystemExit(f"snippet_not_found:{path}:{old[:80]}")
+              file.write_text(text.replace(old, new, 1))
+
+          replace(
+              "apps/web/lib/catalog/storage.ts",
+              'function cleanShard(value?: string | number) { return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown"; }',
+              '''const MAX_INDEX_SHARD_BYTES = 180;
+          export function catalogIndexShardKey(value?: string | number) {
+            const normalized = String(value || "unknown")
+              .toLowerCase()
+              .replace(/[^a-z0-9а-яё-]+/gi, "-")
+              .replace(/-+/g, "-")
+              .replace(/^-|-$/g, "") || "unknown";
+            if (Buffer.byteLength(normalized, "utf8") <= MAX_INDEX_SHARD_BYTES) return normalized;
+            const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+            let prefix = "";
+            for (const character of normalized) {
+              if (Buffer.byteLength(`${prefix}${character}`, "utf8") > 150) break;
+              prefix += character;
+            }
+            prefix = prefix.replace(/-+$/g, "");
+            return `${prefix || "value"}-${digest}`;
+          }
+          const cleanShard = catalogIndexShardKey;'''
+          )
+
+          publisher = Path("scripts/catalog-publish-source-scale.mjs")
+          text = publisher.read_text()
+          if 'import crypto from "node:crypto";' not in text:
+              text = text.replace('import fs from "node:fs/promises";\n', 'import crypto from "node:crypto";\nimport fs from "node:fs/promises";\n', 1)
+          old = '''function cleanShard(value) {
+            return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown";
+          }'''
+          new = '''function cleanShard(value) {
+            const normalized = String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown";
+            if (Buffer.byteLength(normalized, "utf8") <= 180) return normalized;
+            const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+            let prefix = "";
+            for (const character of normalized) {
+              if (Buffer.byteLength(`${prefix}${character}`, "utf8") > 150) break;
+              prefix += character;
+            }
+            return `${prefix.replace(/-+$/g, "") || "value"}-${digest}`;
+          }'''
+          if old not in text:
+              raise SystemExit("snippet_not_found:publisher_cleanShard")
+          publisher.write_text(text.replace(old, new, 1))
+
+          replace(
+              "apps/web/lib/data.ts",
+              '      if (!TRANSIENT_STATUS.has(response.status)) throw new Error(`object_storage_${method}_${response.status}`);',
+              '''      if (!TRANSIENT_STATUS.has(response.status)) {
+                const responseText = await response.text().catch(() => "");
+                const code = responseText.match(/<Code>([^<]+)<\\/Code>/)?.[1] || "unknown";
+                const message = responseText.match(/<Message>([^<]+)<\\/Message>/)?.[1] || "";
+                throw new Error(`object_storage_${method}_${response.status}:${code}:${message}`.replace(/[\\r\\n]+/g, " ").slice(0, 500));
+              }'''
+          )
+          replace(
+              "apps/web/lib/data.ts",
+              '  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(relativePath))}`); return this.signedRequest(method, url, body, extraHeaders); }',
+              '''  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) {
+            const cfg = objectConfig();
+            const normalizedPath = normalizeStorageKey(relativePath);
+            const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(normalizedPath))}`);
+            try {
+              return await this.signedRequest(method, url, body, extraHeaders);
+            } catch (error) {
+              const detail = error instanceof Error ? error.message : String(error);
+              throw new Error(`${detail}:path=${normalizedPath.slice(0, 240)}:bytes=${Buffer.byteLength(body ?? "")}`);
+            }
+          }'''
+          )
+
+          test_file = Path("tests/catalog-production-hardening.test.ts")
+          test_text = test_file.read_text()
+          anchor = '''test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {'''
+          addition = '''test("Object Storage publication bounds dynamic index keys and reports the failing path", () => {
+            assert.match(storage, /MAX_INDEX_SHARD_BYTES = 180/);
+            assert.match(storage, /catalogIndexShardKey/);
+            assert.match(storage, /Buffer\\.byteLength\\(normalized, "utf8"\\)/);
+            assert.match(storage, /createHash\\("sha256"\\)/);
+            assert.match(dataStorage, /object_storage_\\$\\{method\\}_\\$\\{response\\.status\\}/);
+            assert.match(dataStorage, /path=\\$\\{normalizedPath\\.slice/);
+            assert.match(publisher, /Buffer\\.byteLength\\(normalized, "utf8"\\) <= 180/);
+          });
+
+          '''
+          if addition not in test_text:
+              if anchor not in test_text:
+                  raise SystemExit("snippet_not_found:hardening_test_anchor")
+              test_file.write_text(test_text.replace(anchor, addition + anchor, 1))
+
+          Path(".github/workflows/apply-catalog-put-400-fix.yml").unlink()
+          PY
+      - name: Validate focused fixes
+        run: |
+          node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-publication-gate.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit patch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: исправить Object Storage PUT 400 при публикации"
+          git push origin HEAD:fix/catalog-object-storage-put-400
