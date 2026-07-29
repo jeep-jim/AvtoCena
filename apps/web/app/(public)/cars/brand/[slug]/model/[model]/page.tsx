@@ -5,11 +5,13 @@ import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandBySlug } from "@/lib/catalog/brands";
-import { findBrandModelBySlug, readBrandModelDirectory } from "@/lib/catalog/model-directory";
+import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { readVehiclePowerKnowledge } from "@/lib/catalog/power-knowledge";
 import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
+import { readVehicleKnowledgeVariants, vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -17,11 +19,64 @@ export const revalidate = 0;
 const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
 type PageProps = { params: Promise<{ slug: string; model: string }> };
 
+type PublicKnowledgeRow = {
+  id: string;
+  source: string;
+  generation?: string;
+  yearFrom?: number;
+  yearTo?: number;
+  engineCc?: number;
+  fuel?: string;
+  transmission?: string;
+  drive?: string;
+  powertrainKind?: string;
+  powerHp: number;
+  powerKw?: number;
+  icePowerKw?: number;
+  power30MinKw?: number;
+  utilizationPowerKw?: number;
+};
+
 function yearRange(from?: number, to?: number) {
   if (from && to) return `${from}–${to}`;
   if (from) return `с ${from}`;
   if (to) return `до ${to}`;
   return "поколения уточняются";
+}
+
+function compactNumber(value: number) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(1).replace(".0", "");
+}
+
+function rangeText(range?: CatalogNumericRange, unit = "") {
+  if (!range) return "";
+  const value = range.min === range.max ? compactNumber(range.min) : `${compactNumber(range.min)}–${compactNumber(range.max)}`;
+  return `${value}${unit ? ` ${unit}` : ""}`;
+}
+
+function positive(value: unknown, max = 10_000) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 && number <= max ? number : undefined;
+}
+
+function totalThirtyMinute(row: { power30MinKw?: number; power30MinKwByMotor?: number[] }) {
+  const direct = positive(row.power30MinKw, 4_000);
+  if (direct) return direct;
+  const motors = (row.power30MinKwByMotor || []).map((value) => positive(value, 2_000)).filter((value): value is number => Boolean(value));
+  return motors.length ? Math.round(motors.reduce((sum, value) => sum + value, 0) * 100) / 100 : undefined;
+}
+
+function knowledgeSignature(row: PublicKnowledgeRow) {
+  return [row.yearFrom || 0, row.yearTo || 0, row.engineCc || 0, vehicleKnowledgeCompact(row.fuel), vehicleKnowledgeCompact(row.generation), Math.round(row.powerHp * 10) / 10, Math.round(Number(row.power30MinKw || 0) * 100) / 100].join("|");
+}
+
+function sourceLabel(source: string) {
+  if (source.includes("manufacturer")) return "Производитель";
+  if (source.includes("official_registry") || source === "power_registry") return "Официальный реестр";
+  if (source.includes("drom")) return "Каталог модификаций";
+  if (source.includes("consensus")) return "Подтверждено источниками";
+  if (source.includes("manual")) return "Проверено АвтоЦена";
+  return "База АвтоЦена";
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -44,39 +99,89 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const { slug, model: modelSlug } = await params;
   const brand = catalogBrandBySlug(slug);
   if (!brand) notFound();
-  const [model, directory] = await Promise.all([
+  const [model, directory, allVariants, allPowerReferences] = await Promise.all([
     findBrandModelBySlug(brand.name, modelSlug),
     readBrandModelDirectory(brand.name),
+    readVehicleKnowledgeVariants(),
+    readVehiclePowerKnowledge(),
   ]);
   if (!model) notFound();
 
+  const modelKey = vehicleKnowledgeCompact(model.model);
+  const makeKey = vehicleKnowledgeCompact(brand.name);
+  const rows = new Map<string, PublicKnowledgeRow>();
+  for (const variant of allVariants.filter((item) => item.active !== false && item.modelId === model.id)) {
+    const powerHp = Number(variant.powerHp || 0);
+    if (!powerHp) continue;
+    const row: PublicKnowledgeRow = {
+      id: variant.id,
+      source: variant.sourceType,
+      generation: variant.generation,
+      yearFrom: variant.yearFrom,
+      yearTo: variant.yearTo,
+      engineCc: positive(variant.engineCc, 20_000),
+      fuel: variant.fuel,
+      transmission: variant.transmission,
+      drive: variant.drive,
+      powertrainKind: variant.powertrainKind,
+      powerHp,
+      powerKw: positive(variant.powerKw, 4_000) || Math.round((powerHp / 1.35962) * 100) / 100,
+      icePowerKw: positive(variant.icePowerKw, 4_000),
+      power30MinKw: totalThirtyMinute(variant),
+      utilizationPowerKw: positive(variant.utilizationPowerKw, 4_000),
+    };
+    rows.set(knowledgeSignature(row), row);
+  }
+  for (const reference of allPowerReferences.filter((item) => item.active !== false && vehicleKnowledgeCompact(item.make) === makeKey && vehicleKnowledgeCompact(item.model) === modelKey)) {
+    const powerHp = Number(reference.powerHp || 0);
+    if (!powerHp) continue;
+    const row: PublicKnowledgeRow = {
+      id: reference.id,
+      source: `power_${reference.confidence}`,
+      yearFrom: reference.yearFrom,
+      yearTo: reference.yearTo,
+      engineCc: positive(reference.engineCc, 20_000),
+      fuel: reference.fuel,
+      powertrainKind: reference.powertrainKind,
+      powerHp,
+      powerKw: positive(reference.powerKw, 4_000) || Math.round((powerHp / 1.35962) * 100) / 100,
+      icePowerKw: positive(reference.icePowerKw, 4_000),
+      power30MinKw: totalThirtyMinute(reference),
+      utilizationPowerKw: positive(reference.utilizationPowerKw, 4_000),
+    };
+    if (!rows.has(knowledgeSignature(row))) rows.set(knowledgeSignature(row), row);
+  }
+  const knowledgeRows = [...rows.values()].sort((left, right) => Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0) || left.powerHp - right.powerHp);
+
   const result = await searchOffers({ make: brand.name, model: model.model, pageSize: 48, sort: "updatedAt" });
   const offers = (result.items || []).filter((offer: any) => isCrediblePublicOffer(offer));
-  const grouped = MARKET_ORDER.map((market) => ({
-    market,
-    offers: offers.filter((offer: any) => offer.market === market),
-  })).filter((group) => group.offers.length);
-  const brandFallback = offers.length ? [] : (await searchOffers({ make: brand.name, pageSize: 16, sort: "updatedAt" })).items
-    .filter((offer: any) => isCrediblePublicOffer(offer))
-    .slice(0, 12);
+  const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
+  const brandFallback = offers.length ? [] : (await searchOffers({ make: brand.name, pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const otherModels = directory.filter((item) => item.id !== model.id).slice(0, 18);
   const requestHref = `/results?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`;
   const canonicalUrl = `https://avtocena.com/cars/brand/${brand.slug}/model/${model.slug}`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: `${brand.name} ${model.model} под заказ`,
-    description: `Расчёт стоимости ${brand.name} ${model.model} с доставкой, таможней и утилизационным сбором.`,
+    "@type": "Product",
+    name: `${brand.name} ${model.model}`,
+    description: `Характеристики и расчёт стоимости ${brand.name} ${model.model} с доставкой, таможней и утилизационным сбором.`,
     url: canonicalUrl,
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Каталог", item: "https://avtocena.com/cars" },
-        { "@type": "ListItem", position: 2, name: brand.name, item: `https://avtocena.com/cars/brand/${brand.slug}` },
-        { "@type": "ListItem", position: 3, name: model.model, item: canonicalUrl },
-      ],
-    },
+    brand: { "@type": "Brand", name: brand.name },
+    additionalProperty: [
+      model.knowledge.powerHp ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerHp, "л.с.") } : null,
+      model.knowledge.powerKw ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerKw, "кВт") } : null,
+      model.knowledge.power30MinKw ? { "@type": "PropertyValue", name: "30-минутная мощность", value: rangeText(model.knowledge.power30MinKw, "кВт") } : null,
+    ].filter(Boolean),
   };
+
+  const summaryCards = [
+    model.knowledge.powerHp ? ["Мощность", rangeText(model.knowledge.powerHp, "л.с.")] : null,
+    model.knowledge.powerKw ? ["Мощность", rangeText(model.knowledge.powerKw, "кВт")] : null,
+    model.knowledge.power30MinKw ? ["30-минутная", rangeText(model.knowledge.power30MinKw, "кВт")] : null,
+    model.knowledge.utilizationPowerKw ? ["Для утильсбора", rangeText(model.knowledge.utilizationPowerKw, "кВт")] : null,
+    model.knowledge.engineCc ? ["Объём двигателя", rangeText(model.knowledge.engineCc, "см³")] : null,
+    ["Записей в базе", String(model.knowledge.records || (model.representativePowerHp ? 1 : 0))],
+  ].filter((item): item is string[] => Boolean(item));
 
   return <main className="ac-model-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref={`/cars/brand/${brand.slug}`} backLabel={brand.name} />
@@ -91,15 +196,43 @@ export default async function ModelLandingPage({ params }: PageProps) {
         <div className="min-w-0">
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Расчёт автомобиля под ключ</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model} под заказ</h1>
-          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">АвтоЦена ищет {brand.name} {model.model} на семи рынках и рассчитывает ориентировочную стоимость с доставкой, таможенными платежами и утилизационным сбором. Финальную модификацию, месяц выпуска и мощность подтвердит менеджер перед покупкой.</p>
+          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">АвтоЦена ищет {brand.name} {model.model} на семи рынках. Характеристики из базы знаний автоматически сопоставляются с объявлениями и используются для расчёта мощности, таможни и утилизационного сбора.</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{model.count ? `${model.count} предложений` : "Под заказ"}</span>
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">Выпуск: {yearRange(model.yearFrom, model.yearTo)}</span>
-            {model.representativePowerHp ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">Ориентир: {model.representativePowerHp} л.с.</span> : null}
+            {model.knowledge.powerHp ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{rangeText(model.knowledge.powerHp, "л.с.")}</span> : null}
+            {model.knowledge.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">30 мин: {rangeText(model.knowledge.power30MinKw, "кВт")}</span> : null}
           </div>
           <Link href={requestHref} className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</Link>
         </div>
       </header>
+
+      <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">База знаний АвтоЦена</div>
+            <h2 className="mt-1 text-2xl font-black md:text-4xl">Характеристики {brand.name} {model.model}</h2>
+          </div>
+          <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black">Автосопоставление включено</span>
+        </div>
+        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Здесь отображается всё, что уже известно системе по модели и её модификациям. Когда площадка не передаёт лошадиные силы, кВт или 30-минутную мощность, расчётный движок ищет точное совпадение в этой базе по модели, году, двигателю, топливу и поколению.</p>
+        <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">
+          {summaryCards.map(([label, value]) => <div key={`${label}-${value}`} className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">{label}</div><div className="mt-1 text-lg font-black">{value}</div></div>)}
+        </div>
+        {knowledgeRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {knowledgeRows.map((row) => <article key={row.id} className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
+            <div className="flex items-start justify-between gap-3"><div className="font-black">{row.generation || `${brand.name} ${model.model}`}</div><span className="text-[10px] font-black text-[var(--ac-muted)]">{sourceLabel(row.source)}</span></div>
+            <div className="mt-2 text-xs font-bold text-[var(--ac-muted)]">{yearRange(row.yearFrom, row.yearTo)}{row.engineCc ? ` · ${compactNumber(row.engineCc)} см³` : ""}{row.fuel ? ` · ${row.fuel}` : ""}</div>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
+              <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerHp)} л.с.</span>
+              {row.powerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerKw)} кВт</span> : null}
+              {row.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">30 мин: {compactNumber(row.power30MinKw)} кВт</span> : null}
+              {row.utilizationPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">утиль: {compactNumber(row.utilizationPowerKw)} кВт</span> : null}
+            </div>
+            {(row.transmission || row.drive || row.powertrainKind) ? <div className="mt-3 text-[11px] font-bold text-[var(--ac-muted)]">{[row.powertrainKind, row.transmission, row.drive].filter(Boolean).join(" · ")}</div> : null}
+          </article>)}
+        </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-sm font-bold text-[var(--ac-muted)]">Для этой модели пока сохранён только базовый каталог модели. Точная мощность появится автоматически после подтверждения модификации из объявления или официального источника.</p>}
+      </section>
 
       {grouped.length ? <div className="mt-10 space-y-12">
         {grouped.map((group) => <section key={group.market}>
