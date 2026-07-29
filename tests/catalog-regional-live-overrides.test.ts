@@ -71,3 +71,10 @@ test("exact regional adapters replace generic adapters with the same source id",
   const autoGeAt = importer.indexOf("prepareSource(autoGeorgiaEnrichedSource)");
   assert.ok(genericAt >= 0 && exactAt > genericAt && currentAt > exactAt && autoGeAt > currentAt);
 });
+
+test("production collection prefers and caps listing galleries at 30 photos", () => {
+  assert.match(importer, /if \(process\.env\.CATALOG_REBUILD_MARKET\)/);
+  assert.match(importer, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER = "30"/);
+  assert.match(importer, /CATALOG_MAX_IMAGES_PER_OFFER = "30"/);
+  assert.match(importer, /CATALOG_COLLECTION_IMAGE_LIMIT = "30"/);
+});
