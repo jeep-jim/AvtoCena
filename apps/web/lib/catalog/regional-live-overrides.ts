@@ -18,7 +18,7 @@ const KNOWN_MAKES = [
   "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
   "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
   "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
-].sort((left, right) => right.length - left.length);
+].sort((a, b) => b.length - a.length);
 
 type Config = {
   sourceId: string;
@@ -31,29 +31,16 @@ type Config = {
 };
 
 export type RegionalMassRow = {
-  id: string;
-  title: string;
-  make: string;
-  model: string;
-  year: number;
-  mileageKm?: number;
-  engineCc?: number;
-  powerHp?: number;
-  fuel?: string;
-  transmission?: string;
-  drive?: string;
-  bodyType?: string;
-  price: number;
-  currency: string;
-  images: string[];
-  detailUrl: string;
-  location?: string;
+  id: string; title: string; make: string; model: string; year: number;
+  mileageKm?: number; engineCc?: number; powerHp?: number; fuel?: string;
+  transmission?: string; drive?: string; bodyType?: string;
+  price: number; currency: string; images: string[]; detailUrl: string; location?: string;
 };
 
 function decode(value: string) {
   return String(value || "")
-    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
-    .replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'")
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ").replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'")
     .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
 }
 function plain(value: string) {
@@ -78,16 +65,13 @@ function parseAmount(raw: string) {
   const dot = value.lastIndexOf(".");
   if (comma >= 0 && dot >= 0) {
     const decimal = comma > dot ? "," : ".";
-    const thousands = decimal === "," ? "." : ",";
-    value = value.split(thousands).join("");
+    value = value.split(decimal === "," ? "." : ",").join("");
     if (decimal === ",") value = value.replace(",", ".");
   } else if (comma >= 0 || dot >= 0) {
     const separator = comma >= 0 ? "," : ".";
     const parts = value.split(separator);
     const tail = parts.at(-1) || "";
-    if (tail.length === 3) value = parts.join("");
-    else if (tail.length <= 2) value = `${parts.slice(0, -1).join("")}.${tail}`;
-    else value = parts.join("");
+    value = tail.length === 3 ? parts.join("") : tail.length <= 2 ? `${parts.slice(0, -1).join("")}.${tail}` : parts.join("");
   }
   const amount = Number(value);
   return Number.isFinite(amount) && amount >= 300 && amount <= 2_000_000_000 ? Math.round(amount) : undefined;
@@ -95,17 +79,14 @@ function parseAmount(raw: string) {
 
 const MONEY_TOKEN = "(?:[0-9]{1,3}(?:[\\s\\u00a0'’.,][0-9]{3})+(?:[.,][0-9]{1,2})?|[0-9]{3,9}(?:[.,][0-9]{1,2})?)";
 function strictMoney(value: string, fallback: string) {
-  const patterns: Array<[RegExp, string]> = [
-    [new RegExp(`(?:USD|US\\$|\\$)\\s*(${MONEY_TOKEN})`, "i"), "USD"],
-    [new RegExp(`(${MONEY_TOKEN})\\s*(?:USD|US\\$|\\$)`, "i"), "USD"],
-    [new RegExp(`(?:GEL|₾)\\s*(${MONEY_TOKEN})`, "i"), "GEL"],
-    [new RegExp(`(${MONEY_TOKEN})\\s*(?:GEL|₾)`, "i"), "GEL"],
-    [new RegExp(`(?:KGS|сом|Som)\\s*(${MONEY_TOKEN})`, "i"), "KGS"],
-    [new RegExp(`(${MONEY_TOKEN})\\s*(?:KGS|сом|Som)`, "i"), "KGS"],
+  const specs: Array<[string, string]> = [
+    ["(?:USD|US\\$|\\$)", "USD"], ["(?:GEL|₾)", "GEL"], ["(?:KGS|сом|Som)", "KGS"],
   ];
-  for (const [pattern, currency] of patterns) {
-    const amount = parseAmount(value.match(pattern)?.[1] || "");
-    if (amount) return { price: amount, currency };
+  for (const [marker, currency] of specs) {
+    for (const pattern of [new RegExp(`${marker}\\s*(${MONEY_TOKEN})`, "i"), new RegExp(`(${MONEY_TOKEN})\\s*${marker}`, "i")]) {
+      const amount = parseAmount(value.match(pattern)?.[1] || "");
+      if (amount) return { price: amount, currency };
+    }
   }
   return { price: undefined, currency: fallback };
 }
@@ -113,17 +94,17 @@ function imageUrls(markup: string, base: string) {
   const values: string[] = [];
   for (const match of markup.matchAll(/<(?:img|source|meta)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
-  for (const match of markup.matchAll(/https?:\\?\/\\?/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
+  const nakedImage = new RegExp("https?:\\\\?/\\\\?/[^\\\"'\\\\\\s<>]+?\\.(?:jpe?g|png|webp|avif)(?:\\?[^\\\"'\\\\\\s<>]*)?", "gi");
+  for (const match of markup.matchAll(nakedImage)) values.push(match[0].replace(/\\\//g, "/"));
   return [...new Set(values.map((item) => absolute(item, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
 }
 function titleFromCard(inner: string, card: string) {
-  const values = [
-    plain(inner),
-    decode(card.match(/<img[^>]+alt\s*=\s*["']([^"']+)["']/i)?.[1] || ""),
+  const candidates = [
+    plain(inner), decode(card.match(/<img[^>]+alt\s*=\s*["']([^"']+)["']/i)?.[1] || ""),
     plain(card.match(/<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/i)?.[1] || ""),
     decode(card.match(/(?:aria-label|title)\s*=\s*["']([^"']+)["']/i)?.[1] || ""),
-  ].map((value) => value.replace(/\s+/g, " ").trim());
-  return values.find((value) => value.length >= 4 && value.length <= 180 && !/^(?:details?|view|image|save|compare)$/i.test(value)) || "";
+  ].map((item) => item.replace(/\s+/g, " ").trim());
+  return candidates.find((item) => item.length >= 4 && item.length <= 180 && !/^(?:details?|view|image|save|compare)$/i.test(item)) || "";
 }
 function makeModel(title: string) {
   const cleaned = title.replace(/^(?:19|20)\d{2}\s+/, "").replace(/\b(?:19|20)\d{2}\b.*$/, "").trim();
@@ -137,9 +118,7 @@ function makeModel(title: string) {
 export function parseRegionalMassPage(markup: string, pageUrl: string, config: Pick<Config, "baseUrl" | "fallbackCurrency" | "detailPattern" | "sourceId">): RegionalMassRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
-    .filter((item) => {
-      try { const url = new URL(item.href); return config.detailPattern.test(`${url.pathname}${url.search}`); } catch { return false; }
-    });
+    .filter((item) => { try { const url = new URL(item.href); return config.detailPattern.test(`${url.pathname}${url.search}`); } catch { return false; } });
   const rows: RegionalMassRow[] = [];
   const seen = new Set<string>();
   anchors.forEach((anchor, index) => {
@@ -160,22 +139,14 @@ export function parseRegionalMassPage(markup: string, pageUrl: string, config: P
     const id = anchor.href.match(/(?:-|\/)([a-z0-9]{8,})(?:\.[a-z]+|[/?#]|$)/i)?.[1] || stableOfferId(config.sourceId, anchor.href);
     seen.add(anchor.href);
     rows.push({
-      id,
-      title,
-      make: identity.make,
-      model: identity.model,
-      year,
-      mileageKm: integer(mileage?.[1]),
-      engineCc: cc ? integer(cc[1]) : liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined,
+      id, title, make: identity.make, model: identity.model, year,
+      mileageKm: integer(mileage?.[1]), engineCc: cc ? integer(cc[1]) : liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined,
       powerHp: integer(hp?.[1]),
       fuel: cardText.match(/\b(Petrol|Gasoline|Diesel|Hybrid|Plug[- ]?in Hybrid|PHEV|Electric|EV|бензин|дизель|гибрид|электро)\b/i)?.[1],
       transmission: cardText.match(/\b(Automatic|Manual|CVT|DCT|AT|MT|автомат|механика|вариатор|робот)\b/i)?.[1],
       drive: cardText.match(/\b(AWD|4WD|4x4|FWD|RWD|полный|передний|задний)\b/i)?.[1],
       bodyType: cardText.match(/\b(SUV|Crossover|Sedan|Hatchback|Coupe|Wagon|Minivan|MPV|седан|кроссовер|универсал|хэтчбек|минивэн)\b/i)?.[1],
-      price: money.price,
-      currency: money.currency,
-      images: imageUrls(card, pageUrl),
-      detailUrl: anchor.href,
+      price: money.price, currency: money.currency, images: imageUrls(card, pageUrl), detailUrl: anchor.href,
       location: cardText.match(/\b(Tbilisi|Batumi|Rustavi|Kutaisi|Bishkek|Osh|Georgia|Кыргызстан|Бишкек|Ош)\b/i)?.[1],
     });
   });
@@ -201,17 +172,16 @@ class RegionalMassAdapter implements CatalogSourceAdapter {
   constructor(private config: Config) { this.sourceId = config.sourceId; this.market = config.market; }
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
-    let last = { status: 0, bytes: 0 };
+    let status = 0; let bytes = 0;
     for (const url of this.config.listUrls(page)) {
       const result = await request(url, `${this.config.baseUrl}/`).catch(() => null);
       if (!result) continue;
-      last = { status: result.response.status, bytes: result.markup.length };
+      status = result.response.status; bytes = result.markup.length;
       const items = parseRegionalMassPage(result.markup, result.response.url || url, this.config);
-      if (!items.length) continue;
-      return { items, nextCursor: String(page + 1), finished: false, count: items.length,
-        health: { ok: true, message: `${this.config.label}: parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: result.response.status } };
+      if (items.length) return { items, nextCursor: String(page + 1), finished: false, count: items.length,
+        health: { ok: true, message: `${this.config.label}: parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: status } };
     }
-    throw new Error(`${this.sourceId}_parsed_zero_status_${last.status}_bytes_${last.bytes}`);
+    throw new Error(`${this.sourceId}_parsed_zero_status_${status}_bytes_${bytes}`);
   }
   mapStatus(): OfferStatus { return "active"; }
   normalizeOffer(raw: unknown): VehicleOffer | null {
@@ -219,12 +189,11 @@ class RegionalMassAdapter implements CatalogSourceAdapter {
     if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.detailUrl) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
-      id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id,
-      market: this.market, offerType: "fixed", status: "active", make: row.make, model: row.model, trim: row.title,
-      year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel,
-      transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, sourcePrice: row.price,
-      sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
-      firstSeenAt: now, updatedAt: now,
+      id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: this.market,
+      offerType: "fixed", status: "active", make: row.make, model: row.model, trim: row.title, year: row.year,
+      mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel, transmission: row.transmission,
+      drive: row.drive, bodyType: row.bodyType, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
+      images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.detailUrl, sourceVenueName: row.location || this.config.label,
         raw: { images: row.images, parsed: row, listingBoundImages: true } },
     } as VehicleOffer) as VehicleOffer;
