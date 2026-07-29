@@ -44,7 +44,7 @@ test("temporary source failures retain verified offers before any network crawl"
   assert.doesNotMatch(rebuild, /connectedMarketSources/);
 });
 
-test("volume shortages are diagnostics and not a global publication crash", () => {
+test("volume shortages remain diagnostics inside validation", () => {
   assert.match(validator, /per_market_volume_and_integrity_audit/);
   assert.match(validator, /targetPerMarket/);
   assert.match(validator, /warnings/);
@@ -62,19 +62,20 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("network, knowledge, shard and publish failures finish with diagnostics instead of a red workflow", () => {
-  assert.match(workflow, /validate:[\s\S]*continue-on-error: true/);
+test("source failures keep diagnostics but missing new generation makes production red", () => {
   assert.match(workflow, /knowledge:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /collect:[\s\S]*continue-on-error: true/);
-  assert.match(workflow, /publish:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
-  assert.match(workflow, /health_report_previous_manifest_preserved/);
-  assert.match(workflow, /Catalog health summary/);
-  assert.match(workflow, /previous verified manifest remains active/);
+  assert.match(workflow, /previous_manifest_preserved/);
+  assert.match(workflow, /Require newly published generation/);
+  assert.match(workflow, /if \(!state\.published \|\| !state\.generationId \|\| state\.total <= 0 \|\| missing\.length\)/);
+  assert.match(workflow, /process\.exit\(1\)/);
+  assert.match(workflow, /Require successful publication job/);
+  assert.doesNotMatch(workflow, /publish:[\s\S]{0,160}continue-on-error: true/);
 });
 
-test("production probes the registry, crawls live sources and retains inactive sources", () => {
+test("production probes registry, crawls live sources and requires all seven published markets", () => {
   assert.match(workflow, /Catalog source-scale daily/);
   assert.match(workflow, /timeout-minutes: 100/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
@@ -91,11 +92,12 @@ test("production probes the registry, crawls live sources and retains inactive s
   assert.match(rebuild, /retained/);
   assert.match(rebuild, /probe_inactive/);
   assert.match(rebuild, /detailNeeded/);
-  assert.match(workflow, /Publish verified offers with three-day retention safely/);
+  assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
-  assert.match(workflow, /Write catalog health summary/);
+  assert.match(workflow, /Catalog publication/);
   assert.match(workflow, /cancel-in-progress: true/);
-  assert.match(workflow, /Probe sources safely/);
+  assert.match(workflow, /Probe every registered source in this shard/);
+  assert.match(workflow, /missing = markets\.filter/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
   assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
 });
