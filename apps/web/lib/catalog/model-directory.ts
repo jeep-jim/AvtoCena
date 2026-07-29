@@ -176,3 +176,5 @@ export const readAllModelSeoLinks = cache(async () => {
     updatedAt: model.updatedAt,
   }));
 });
+
+// Production catalog restart marker: 2026-07-29T13:27:00Z
