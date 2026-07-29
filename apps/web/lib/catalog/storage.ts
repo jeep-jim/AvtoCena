@@ -121,7 +121,24 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
-function cleanShard(value?: string | number) { return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown"; }
+const MAX_INDEX_SHARD_BYTES = 180;
+export function catalogIndexShardKey(value?: string | number) {
+  const normalized = String(value || "unknown")
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё-]+/gi, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "") || "unknown";
+  if (Buffer.byteLength(normalized, "utf8") <= MAX_INDEX_SHARD_BYTES) return normalized;
+  const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+  let prefix = "";
+  for (const character of normalized) {
+    if (Buffer.byteLength(`${prefix}${character}`, "utf8") > 150) break;
+    prefix += character;
+  }
+  prefix = prefix.replace(/-+$/g, "");
+  return `${prefix || "value"}-${digest}`;
+}
+const cleanShard = catalogIndexShardKey;
 function cleanFacet(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function numericBucket(value: number | null | undefined, size: number) { const number = Number(value || 0); return number > 0 ? String(Math.ceil(number / size) * size) : "unknown"; }
 function budgetBucket(value?: number | null) { return numericBucket(value, 500_000); }

@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -139,7 +140,15 @@ function isCommercial(offer) {
 }
 
 function cleanShard(value) {
-  return String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown";
+  const normalized = String(value || "unknown").toLowerCase().replace(/[^a-z0-9а-яё-]+/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || "unknown";
+  if (Buffer.byteLength(normalized, "utf8") <= 180) return normalized;
+  const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+  let prefix = "";
+  for (const character of normalized) {
+    if (Buffer.byteLength(`${prefix}${character}`, "utf8") > 150) break;
+    prefix += character;
+  }
+  return `${prefix.replace(/-+$/g, "") || "value"}-${digest}`;
 }
 
 function budgetBucket(value) {
