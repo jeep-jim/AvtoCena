@@ -93,6 +93,29 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     ? { ...normalized, utilizationPowerKw: undefined }
     : normalized;
 
+  // Конвертацию цены источника выполняем до проверки мощности. Даже когда точная
+  // таможня или утильсбор ещё ждут данных, публичная карточка должна иметь честный
+  // рублёвый эквивалент реальной цены объявления или результата торгов.
+  const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency);
+  if (!rate) {
+    return {
+      ...offer,
+      totalRub: null,
+      calculationStatus: "needs_currency_rate",
+      calculationSnapshot: {
+        ...(offer.calculationSnapshot || {}),
+        pricingConfidence: "unavailable",
+        customs: { status: "needs_data", missing: ["source_currency_rate"] },
+      },
+    };
+  }
+
+  const pendingSnapshot = {
+    ...(offer.calculationSnapshot || {}),
+    currencyRate: rate,
+    sourcePriceRub: rate.sourcePriceRub,
+  };
+
   const utilizationProblem = exactUtilizationPowerProblem(offer);
   if (utilizationProblem) {
     return {
@@ -100,7 +123,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       totalRub: null,
       calculationStatus: "needs_utilization_power",
       calculationSnapshot: {
-        ...(offer.calculationSnapshot || {}),
+        ...pendingSnapshot,
         pricingConfidence: "unavailable",
         certified30MinutePowerMissing: true,
         missing: utilizationProblem.missing,
@@ -115,27 +138,23 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       totalRub: null,
       calculationStatus: "needs_power_data",
       calculationSnapshot: {
-        ...(offer.calculationSnapshot || {}),
+        ...pendingSnapshot,
         pricingConfidence: "unavailable",
         missing: ["power_hp"],
-        warnings: ["Автомобиль не публикуется, пока мощность не найдена в объявлении или базе модели/модификации."],
+        warnings: ["Автомобиль не публикуется как рассчитанный, пока мощность не найдена в объявлении или базе модели/модификации. Рублёвый эквивалент цены источника при этом сохраняется."],
       },
     };
   }
 
-  const [rate, eurRate] = await Promise.all([
-    convertToRub(offer.sourcePrice, offer.sourceCurrency),
-    convertToRub(1, "EUR"),
-  ]);
-  if (!rate || !eurRate) {
+  const eurRate = await convertToRub(1, "EUR");
+  if (!eurRate) {
     return {
       ...offer,
       totalRub: null,
       calculationStatus: "needs_currency_rate",
       calculationSnapshot: {
-        ...(offer.calculationSnapshot || {}),
-        currencyRate: rate,
-        customs: { status: "needs_data", missing: rate ? ["eur_rate"] : ["source_currency_rate"] },
+        ...pendingSnapshot,
+        customs: { status: "needs_data", missing: ["eur_rate"] },
         pricingConfidence: "unavailable",
       },
     };
@@ -167,7 +186,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       ...offer,
       totalRub: null,
       calculationSnapshot: {
-        currencyRate: rate,
+        ...pendingSnapshot,
         customs,
         customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
         customsCompleteness: customs.status,
@@ -203,6 +222,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     calculationSnapshot: {
       ...calculation.snapshot,
       currencyRate: rate,
+      sourcePriceRub: rate.sourcePriceRub,
       customs,
       customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
       customsCompleteness: customs.status,
