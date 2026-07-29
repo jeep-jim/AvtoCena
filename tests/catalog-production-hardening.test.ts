@@ -77,20 +77,23 @@ test("publisher accumulates galleries before deduplication and protects the newe
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
-test("daily cleanup keeps four-day grace while emergency cleanup protects live generations", () => {
+test("daily cleanup keeps four-day grace while emergency cleanup preserves only the live public generation", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
   assert.match(dataStorage, /NextContinuationToken/);
-  assert.match(cleanup, /protectedGenerations/);
-  assert.match(cleanup, /candidateGenerations/);
+  assert.match(cleanup, /EMERGENCY \? 0 : 2/);
+  assert.match(cleanup, /\.\.\.\(!EMERGENCY && internalGeneration/);
+  assert.match(cleanup, /\.\.\.\(!EMERGENCY \? generationIds\.slice/);
+  assert.match(cleanup, /includeInternal/);
+  assert.match(cleanup, /EMERGENCY\n    \? internalObjects/);
+  assert.match(cleanup, /const oldEnough = EMERGENCY \|\|/);
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
-  assert.match(cleanup, /liveImageKeys/);
-  assert.match(cleanup, /internalChunks/);
+  assert.match(cleanup, /plannedBytes/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
   assert.match(cleanupWorkflow, /cron: "17 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
-  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: \$\{\{ github\.event_name == 'push' && '0' \|\| '2' \}\}/);
   assert.match(cleanupWorkflow, /github\.event_name == 'push' && '0' \|\| '345600000'/);
   assert.match(cleanupWorkflow, /Start catalog production after emergency cleanup/);
   assert.match(cleanupWorkflow, /createWorkflowDispatch/);
@@ -107,7 +110,7 @@ test("large catalog search uses range shards and bounded chunk reads", () => {
   assert.match(storage, /unionIndexIds\(manifest, "power"/);
   assert.match(storage, /CATALOG_SEARCH_CHUNK_CONCURRENCY/);
   assert.match(storage, /mapWithConcurrency\(chunkLocations/);
-  assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]/);
+  assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]\)/);
 });
 
 test("Object Storage publication bounds dynamic index keys and reports the failing path", () => {
