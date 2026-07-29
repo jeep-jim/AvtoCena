@@ -67,7 +67,9 @@ test("publisher accumulates verified current markets and keeps previous manifest
 
 test("source failures remain diagnostic, but knowledge collapse or missing generation makes production red", () => {
   assert.ok(knowledgeBlock.length > 0);
-  assert.doesNotMatch(knowledgeBlock, /continue-on-error: true/);
+  assert.match(knowledgeBlock, /Audit retained production knowledge first[\s\S]*continue-on-error: true/);
+  assert.match(knowledgeBlock, /Require healthy vehicle knowledge/);
+  assert.match(knowledgeBlock, /if: steps\.retained_knowledge\.outcome != 'success'/);
   assert.match(collectBlock, /continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
@@ -87,7 +89,7 @@ test("production probes registry, crawls live sources and requires all seven pub
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "8"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
@@ -99,7 +101,7 @@ test("production probes registry, crawls live sources and requires all seven pub
   assert.match(workflow, /Publish verified offers with three-day retention/);
   assert.match(workflow, /Audit calculations, customs, utilization fee and galleries/);
   assert.match(workflow, /Catalog publication/);
-  assert.match(workflow, /cancel-in-progress: true/);
+  assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /Probe every registered source in this shard/);
   assert.match(workflow, /missing = markets\.filter/);
   assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
