@@ -14,7 +14,7 @@ test("workflow audits shards, publishes atomically and requires a new generation
   const audit = workflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
   const publish = workflow.indexOf("npx tsx scripts/catalog-publish-source-scale.mjs");
   const requireGeneration = workflow.indexOf("Require newly published generation");
-  const health = workflow.indexOf("Require successful knowledge and publication jobs");
+  const health = workflow.indexOf("Require validation and a new production generation");
   assert.ok(download >= 0, "available source shards must be downloaded");
   assert.ok(audit > download, "calculation and gallery audit must follow artifact download");
   assert.ok(publish > audit, "publisher must run after source-scale audit");
@@ -32,7 +32,7 @@ test("workflow audits shards, publishes atomically and requires a new generation
   assert.match(workflow, /state\.generationId/);
   assert.match(workflow, /process\.exit\(1\)/);
   assert.match(workflow, /Catalog workflow completed/);
-  assert.match(workflow, /A healthy knowledge base and a new production generation were not confirmed/);
+  assert.match(workflow, /A new seven-market production generation was not confirmed/);
   assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
 });
 

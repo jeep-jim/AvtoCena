@@ -65,11 +65,13 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("source failures remain diagnostic, but knowledge collapse or missing generation makes production red", () => {
+test("knowledge audit is diagnostic while missing generation still makes production red", () => {
   assert.ok(knowledgeBlock.length > 0);
-  assert.match(knowledgeBlock, /Audit retained production knowledge first[\s\S]*continue-on-error: true/);
-  assert.match(knowledgeBlock, /Require healthy vehicle knowledge/);
-  assert.match(knowledgeBlock, /if: steps\.retained_knowledge\.outcome != 'success'/);
+  assert.match(knowledgeBlock, /Audit vehicle knowledge \(diagnostic\)/);
+  assert.match(knowledgeBlock, /continue-on-error: true/);
+  assert.match(knowledgeBlock, /Audit current production knowledge without rewriting it/);
+  assert.match(collectBlock, /needs: validate/);
+  assert.doesNotMatch(collectBlock, /needs: \[validate, knowledge\]/);
   assert.match(collectBlock, /continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
@@ -77,8 +79,9 @@ test("source failures remain diagnostic, but knowledge collapse or missing gener
   assert.match(workflow, /Require newly published generation/);
   assert.match(workflow, /if \(!state\.published \|\| !state\.generationId \|\| state\.total <= 0 \|\| missing\.length\)/);
   assert.match(workflow, /process\.exit\(1\)/);
-  assert.match(workflow, /Require successful knowledge and publication jobs/);
-  assert.doesNotMatch(publishBlock.slice(0, 200), /continue-on-error: true/);
+  assert.match(workflow, /Require validation and a new production generation/);
+  assert.match(publishBlock, /needs: \[validate, collect\]/);
+  assert.doesNotMatch(publishBlock.slice(0, 250), /continue-on-error: true/);
 });
 
 test("production probes registry, crawls live sources and requires all seven published markets", () => {

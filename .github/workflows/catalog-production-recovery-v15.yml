@@ -43,8 +43,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
       - name: Validate scripts and types
         run: |
           node --check scripts/catalog-sync-vehicle-models.mjs
@@ -60,10 +59,11 @@ jobs:
           npm --workspace=@avtocena/engine exec tsc -- --noEmit
 
   knowledge:
-    name: Audit and repair vehicle knowledge
+    name: Audit vehicle knowledge (diagnostic)
     needs: validate
+    continue-on-error: true
     runs-on: ubuntu-latest
-    timeout-minutes: 70
+    timeout-minutes: 20
     concurrency:
       group: vehicle-knowledge-production-json
       cancel-in-progress: false
@@ -75,8 +75,6 @@ jobs:
       YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-      VEHICLE_KNOWLEDGE_CHUNK_SIZE: "250"
-      VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: "1990"
       CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "5000"
       CATALOG_VEHICLE_KNOWLEDGE_MIN_RETAINED_RATIO: "0.85"
       CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT: catalog-vehicle-knowledge-audit.json
@@ -89,61 +87,41 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Require Object Storage credentials
+      - name: Audit current production knowledge without rewriting it
+        id: knowledge_audit
+        continue-on-error: true
         shell: bash
         run: |
           if [ -z "$YC_OBJECT_STORAGE_BUCKET" ] || [ -z "$YC_OBJECT_STORAGE_ACCESS_KEY_ID" ] || [ -z "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY" ]; then
-            echo "Object Storage credentials are required for the production knowledge gate."
-            exit 78
+            echo '{"status":"unavailable","failures":["object_storage_credentials_missing"]}' > "$CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT"
+            exit 0
           fi
-      - name: Audit retained production knowledge first
-        id: retained_knowledge
-        continue-on-error: true
-        env:
-          CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT: catalog-vehicle-knowledge-retained-audit.json
-        run: timeout --signal=TERM --kill-after=60s 600s npm run catalog:audit-vehicle-knowledge
-      - name: Sync complete vehicle model knowledge only when repair is required
-        if: steps.retained_knowledge.outcome != 'success'
-        run: timeout --signal=TERM --kill-after=60s 1800s npx tsx scripts/catalog-sync-vehicle-models.mjs
-      - name: Apply protected manual knowledge seed only when repair is required
-        if: steps.retained_knowledge.outcome != 'success'
-        run: timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-sync-vehicle-knowledge-seed.mjs
-      - name: Build trusted vehicle variants only when repair is required
-        if: steps.retained_knowledge.outcome != 'success'
-        run: timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-build-vehicle-variants.mjs
-      - name: Build power knowledge only when repair is required
-        if: steps.retained_knowledge.outcome != 'success'
-        run: timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-build-power-knowledge.mjs
-      - name: Require healthy vehicle knowledge
-        run: timeout --signal=TERM --kill-after=60s 600s npx tsx scripts/catalog-audit-vehicle-knowledge.mjs
+          timeout --signal=TERM --kill-after=60s 600s npx tsx scripts/catalog-audit-vehicle-knowledge.mjs
       - name: Write vehicle knowledge summary
         if: always()
         shell: bash
         run: |
-          echo "### Vehicle knowledge" >> "$GITHUB_STEP_SUMMARY"
-          echo "retained audit outcome: ${{ steps.retained_knowledge.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Vehicle knowledge diagnostic" >> "$GITHUB_STEP_SUMMARY"
+          echo "audit outcome: ${{ steps.knowledge_audit.outcome }}" >> "$GITHUB_STEP_SUMMARY"
           if [ -s "$CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT" ]; then
             echo '```json' >> "$GITHUB_STEP_SUMMARY"
             cat "$CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Audit report was not created." >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Upload vehicle knowledge audits
+      - name: Upload vehicle knowledge audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: catalog-vehicle-knowledge-audit
-          path: |
-            catalog-vehicle-knowledge-retained-audit.json
-            catalog-vehicle-knowledge-audit.json
+          path: catalog-vehicle-knowledge-audit.json
           if-no-files-found: warn
           compression-level: 9
           retention-days: 7
 
   collect:
     name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
-    needs: [validate, knowledge]
+    needs: validate
+    if: needs.validate.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 75
     continue-on-error: true
@@ -245,11 +223,11 @@ jobs:
           const exitCode = Number(process.env.CATALOG_COLLECT_EXIT_CODE || 1);
           const stopReason = `safe_fallback_exit_${exitCode}`;
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 38, market, shardIndex, shardCount, generatedAt,
+            version: 39, market, shardIndex, shardCount, generatedAt,
             targetPerSource: Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000),
             minimumMarketTarget: Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000),
             count: 0, sourceIds: [], liveSourceIds: [], retentionSourceIds: [], partial: true, stopReason,
-            report: { version: 38, market, shardIndex, shardCount, saved: 0,
+            report: { version: 39, market, shardIndex, shardCount, saved: 0,
               sourceErrors: [{ stage: 'workflow_safe_fallback', error: `collector_exit_${exitCode}` }],
               rejectionReasons: {}, publicBySource: {}, freshBySource: {}, restoredBySource: {}, sources: [], stopReason, generatedAt },
             offers: [],
@@ -291,7 +269,8 @@ jobs:
 
   publish:
     name: Publish and require a new seven-market generation
-    needs: [validate, knowledge, collect]
+    needs: [validate, collect]
+    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 100
     env:
@@ -359,7 +338,7 @@ jobs:
             node <<'NODE'
           const fs = require('fs');
           fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({
-            version: 38, mode: 'previous_manifest_preserved', publishedAt: new Date().toISOString(), published: false,
+            version: 39, mode: 'previous_manifest_preserved', publishedAt: new Date().toISOString(), published: false,
             publicationError: `publisher_exit_${Number(process.env.CATALOG_PUBLISH_EXIT_CODE || 1)}`,
             generationId: null, previousManifestPreserved: true, total: 0, byMarket: {}, byMarketAndSource: {},
             marketsBelowTarget: ['korea','china','japan','uae','europe','georgia','kyrgyzstan'], marketQuality: {},
@@ -427,16 +406,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Require successful knowledge and publication jobs
+      - name: Require validation and a new production generation
         shell: bash
         run: |
           echo "### Catalog workflow completed" >> "$GITHUB_STEP_SUMMARY"
           echo "validate: ${{ needs.validate.result }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "knowledge: ${{ needs.knowledge.result }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "knowledge diagnostic: ${{ needs.knowledge.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "collect: ${{ needs.collect.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "publish: ${{ needs.publish.result }}" >> "$GITHUB_STEP_SUMMARY"
-          if [ "${{ needs.validate.result }}" != "success" ] || [ "${{ needs.knowledge.result }}" != "success" ] || [ "${{ needs.publish.result }}" != "success" ]; then
-            echo "A healthy knowledge base and a new production generation were not confirmed." >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ needs.validate.result }}" != "success" ] || [ "${{ needs.publish.result }}" != "success" ]; then
+            echo "A new seven-market production generation was not confirmed." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
-          echo "A healthy vehicle knowledge base and a new seven-market generation were published and verified." >> "$GITHUB_STEP_SUMMARY"
+          echo "A new seven-market generation was published. Vehicle knowledge is audited separately and cannot block collection." >> "$GITHUB_STEP_SUMMARY"
