@@ -148,16 +148,17 @@ test("real listings stay public while exact customs calculation is pending", () 
   assert.match(rebuildScript, /calculationStatus: "needs_data"/);
 });
 
-test("cards keep source-price conversion while pending copy stays compact", () => {
+test("cards convert source prices to rubles while customs calculation is pending", () => {
   assert.match(livePricing, /convertToRub/);
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
   assert.match(catalogCard, /sourcePriceRub/);
-  assert.match(catalogCard, /\{yearLabel\} · цена автомобиля/);
-  assert.match(catalogCard, /Расчёт под ключ уточняется/);
-  assert.doesNotMatch(catalogCard, /цена автомобиля в рублях/);
-  assert.doesNotMatch(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
-  assert.doesNotMatch(catalogCard, /Цена по запросу/);
+  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
+  assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
+  assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
+  assert.doesNotMatch(catalogCard, /function sourceMoney/);
+  assert.doesNotMatch(catalogCard, /Цена в объявлении/);
+  assert.doesNotMatch(catalogCard, /Цена торгов/);
 });
 
 test("public cards use the stable same-origin image proxy", () => {
