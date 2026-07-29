@@ -1,4 +1,5 @@
 type CatalogImageLike = {
+  id?: unknown;
   url?: unknown;
   objectKey?: unknown;
   width?: unknown;
@@ -18,6 +19,11 @@ function finite(value: unknown) {
   return Number.isFinite(result) && result > 0 ? result : 0;
 }
 
+function stablePublicImageUrl(image: CatalogImageLike) {
+  const id = text(image.id);
+  return id ? `/api/catalog/images/${encodeURIComponent(id)}` : text(image.url);
+}
+
 export function catalogImageScore(image: CatalogImageLike) {
   const url = text(image.url || image.objectKey);
   const mime = text(image.mimeType).toLowerCase();
@@ -31,20 +37,16 @@ export function catalogImageScore(image: CatalogImageLike) {
 
   if (promoUrlPattern.test(url)) score -= 20;
   if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 20;
-  // PNG frequently contains source placeholders and interface icons. A real large landscape PNG
-  // can still pass through the photo geometry and byte-density bonuses below.
   if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
   if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
 
   if (width && height) {
     if (width >= 640 && height >= 400) score += 3;
     if (width < 420 || height < 260) score -= 10;
-    // Catalog photos must be landscape. Square service pictograms are not vehicle photos.
     if (ratio >= 1.08 && ratio <= 2.2) score += 3;
     else score -= 12;
   }
 
-  // Flat pictograms and banners compress much harder than real photographs.
   if (density) {
     if (density < 0.035) score -= 8;
     else if (density < 0.06) score -= 3;
@@ -63,7 +65,7 @@ export function isLikelyVehicleImage(image: CatalogImageLike) {
 export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
   return images
-    .map((image, index) => ({ image, index, url: text(image?.url), score: catalogImageScore(image) }))
+    .map((image, index) => ({ image, index, url: stablePublicImageUrl(image), score: catalogImageScore(image) }))
     .filter((candidate) => candidate.url && candidate.score >= 0)
     .sort((left, right) => right.score - left.score || left.index - right.index)
     .map((candidate) => candidate.url);
