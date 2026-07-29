@@ -30,6 +30,8 @@ jobs:
         run: node --import tsx --test tests/price-trend-direction.test.ts
       - name: Catalog image quality tests
         run: node --import tsx --test tests/catalog-image-quality.test.ts
+      - name: Public image proxy tests
+        run: node --import tsx --test tests/catalog-public-image-proxy.test.ts
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Japan auction statistics tests
