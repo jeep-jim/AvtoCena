@@ -77,13 +77,21 @@ function parseAmount(raw: string) {
   return Number.isFinite(amount) && amount >= 300 && amount <= 2_000_000_000 ? Math.round(amount) : undefined;
 }
 
-const MONEY_TOKEN = "(?:[0-9]{1,3}(?:[\\s\\u00a0'’.,][0-9]{3})+(?:[.,][0-9]{1,2})?|[0-9]{3,9}(?:[.,][0-9]{1,2})?)";
+const SPACE_GROUPED = "[0-9]{1,3}(?:[\\s\\u00a0'’][0-9]{3}(?![0-9])){1,3}";
+const COMMA_GROUPED = "[0-9]{1,3}(?:,[0-9]{3})+(?:\\.[0-9]{1,2})?";
+const DOT_GROUPED = "[0-9]{1,3}(?:\\.[0-9]{3})+(?:,[0-9]{1,2})?";
+const PLAIN_NUMBER = "[0-9]{3,9}(?:[.,][0-9]{1,2})?";
+const MONEY_TOKEN = `(?:${COMMA_GROUPED}|${DOT_GROUPED}|${SPACE_GROUPED}|${PLAIN_NUMBER})`;
 function strictMoney(value: string, fallback: string) {
   const specs: Array<[string, string]> = [
     ["(?:USD|US\\$|\\$)", "USD"], ["(?:GEL|₾)", "GEL"], ["(?:KGS|сом|Som)", "KGS"],
   ];
   for (const [marker, currency] of specs) {
-    for (const pattern of [new RegExp(`${marker}\\s*(${MONEY_TOKEN})`, "i"), new RegExp(`(${MONEY_TOKEN})\\s*${marker}`, "i")]) {
+    const patterns = [
+      new RegExp(`(${MONEY_TOKEN})\\s*${marker}`, "i"),
+      new RegExp(`${marker}\\s*(${MONEY_TOKEN})`, "i"),
+    ];
+    for (const pattern of patterns) {
       const amount = parseAmount(value.match(pattern)?.[1] || "");
       if (amount) return { price: amount, currency };
     }
