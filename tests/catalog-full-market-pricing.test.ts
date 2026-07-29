@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import { calculateAvtocenaFromBusinessConfig } from "../packages/engine/src/calculation/calculateAvtocena";
 import { resolveCatalogMarketConfig } from "../apps/web/lib/catalog/estimated-market-config";
@@ -8,8 +9,11 @@ import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 const markets: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
 const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub", "sbktsRub", "eptsRub", "rfDeliveryRub"];
 const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"];
+const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
+const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 
-test("fills the full customer cost structure for every market when saved fields are null", () => {
+ test("fills the full customer cost structure for every market when saved fields are null", () => {
   for (const market of markets) {
     const configured = {
       id: `market_${market}_v1`,
@@ -77,4 +81,29 @@ test("shows a calculated power chip for a hybrid preview without redundant wordi
   assert.ok(display);
   assert.equal(display?.estimated, true);
   assert.equal(display?.thirtyMinuteLabel, "180,2 кВт");
+});
+
+test("converts source prices to rubles before power and utilization checks", () => {
+  const rateAt = customsPricing.indexOf("const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency)");
+  const utilizationAt = customsPricing.indexOf("const utilizationProblem = exactUtilizationPowerProblem(offer)");
+  const powerAt = customsPricing.indexOf("if (!positive(offer.powerHp))");
+  assert.ok(rateAt >= 0 && utilizationAt > rateAt && powerAt > rateAt);
+  assert.match(customsPricing, /currencyRate: rate/);
+  assert.match(customsPricing, /sourcePriceRub: rate\.sourcePriceRub/);
+});
+
+test("catalog cards use rubles as the main public price and keep source currency secondary", () => {
+  assert.match(catalogCard, /function sourcePriceRub/);
+  assert.match(catalogCard, /цена автомобиля в рублях/);
+  assert.match(catalogCard, /Цена в объявлении/);
+  assert.match(catalogCard, /Цена торгов/);
+  assert.match(catalogCard, /moneyRub\(visibleRub\)/);
+});
+
+test("catalog prioritizes Japan sold lots and cars up to 6 million rubles and 160 hp", () => {
+  assert.match(carsPage, /PRIORITY_MAX_RUB = 6_000_000/);
+  assert.match(carsPage, /PRIORITY_MAX_POWER_HP = 160/);
+  assert.match(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
+  assert.match(carsPage, /\.sort\(businessOrder\)/);
+  assert.match(carsPage, /const totalRub = offerRubValue\(offer\)/);
 });
