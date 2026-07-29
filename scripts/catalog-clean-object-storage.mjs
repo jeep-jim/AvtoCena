@@ -4,7 +4,9 @@ const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/we
 
 const REPORT_FILE = process.env.CATALOG_STORAGE_CLEANUP_REPORT || "catalog-storage-cleanup-report.json";
 const KEEP_GENERATIONS = Math.max(2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || 2));
-const GRACE_MS = Math.max(3 * 24 * 60 * 60 * 1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
+const EMERGENCY = String(process.env.CATALOG_STORAGE_EMERGENCY || "false").toLowerCase() === "true";
+const MIN_GRACE_MS = EMERGENCY ? 0 : 3 * 24 * 60 * 60 * 1_000;
+const GRACE_MS = Math.max(MIN_GRACE_MS, Number(process.env.CATALOG_STORAGE_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
 const MAX_DELETES = Math.max(1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_MAX_DELETES || 100_000));
 const DELETE_CONCURRENCY = Math.max(1, Math.min(32, Number(process.env.CATALOG_STORAGE_DELETE_CONCURRENCY || 12)));
 const DRY_RUN = String(process.env.CATALOG_STORAGE_CLEANUP_DRY_RUN || "true").toLowerCase() !== "false";
@@ -87,10 +89,11 @@ const protectedGenerations = new Set([
 
 if (!publicManifest?.generationId || !generationIds.length) {
   const report = {
-    version: 1,
+    version: 2,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
+    emergency: EMERGENCY,
     blocked: true,
     reason: "healthy_current_generation_not_confirmed",
     currentPublicGeneration: publicManifest?.generationId || null,
@@ -145,10 +148,11 @@ if (!publicManifest?.generationId || !generationIds.length) {
   }
 
   const report = {
-    version: 1,
+    version: 2,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
+    emergency: EMERGENCY,
     blocked,
     blockReason: blocked ? `planned_deletes_${plannedDeletes}_exceed_${MAX_DELETES}` : "",
     graceMs: GRACE_MS,
@@ -180,7 +184,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
     errors: errors.slice(0, 500),
   };
   await fs.writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
-  await writeDataJson("catalog/storage-cleanup-report.json", report);
+  await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);
   console.log(JSON.stringify(report, null, 2));
   if (blocked || errors.length) process.exitCode = 1;
 }
