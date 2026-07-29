@@ -111,7 +111,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
             <div className={`${dense ? "text-[8px] sm:text-[10px]" : "text-[10px]"} font-black uppercase tracking-[0.16em] text-white/58`}>{priceLabel}</div>
             <div className={`${dense ? "mt-1 text-[15px] sm:text-[20px] md:text-[22px]" : "mt-1.5 text-[20px] sm:text-[22px]"} whitespace-nowrap font-black leading-none tracking-[-0.05em] text-[var(--ac-text)]`}>{visibleRub ? moneyRub(visibleRub) : "Цена в рублях уточняется"}</div>
             {sourcePriceLine ? <div className={`${dense ? "mt-1 text-[8px] sm:text-[10px]" : "mt-1.5 text-[10px]"} truncate font-bold text-white/48`} title={sourcePriceLine}>{sourcePriceLine}</div> : null}
-            <div className={`${dense ? "mt-1 text-[9px] sm:text-[11px]" : "mt-1.5 text-[11px]"} font-bold text-white/52`}>Расчёт таможни, утильсбора и цены под ключ уточняется</div>
+            <div className={`${dense ? "mt-1 text-[9px] sm:text-[11px]" : "mt-1.5 text-[11px]"} font-bold text-white/52`}>Расчёт под ключ уточняется</div>
           </div>}
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
