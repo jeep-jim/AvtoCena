@@ -111,6 +111,16 @@ test("large catalog search uses range shards and bounded chunk reads", () => {
   assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]/);
 });
 
+test("Object Storage publication bounds dynamic index keys and reports the failing path", () => {
+  assert.match(storage, /MAX_INDEX_SHARD_BYTES = 180/);
+  assert.match(storage, /catalogIndexShardKey/);
+  assert.match(storage, /Buffer\.byteLength\(normalized, "utf8"\)/);
+  assert.match(storage, /createHash\("sha256"\)/);
+  assert.match(dataStorage, /object_storage_\$\{method\}_\$\{response\.status\}/);
+  assert.match(dataStorage, /path=\$\{normalizedPath\.slice/);
+  assert.match(publisher, /Buffer\.byteLength\(normalized, "utf8"\) <= 180/);
+});
+
 test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {
   assert.match(customs, /\[58\.84, 44\.05, 77\.48\]/);
   assert.match(customs, /\[139\.75, 49\.5, 82\.1\]/);

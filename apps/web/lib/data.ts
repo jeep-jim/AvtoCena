@@ -113,7 +113,12 @@ export class ObjectJsonStorage implements JsonStorage {
       catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.min(5_000, 250 * 2 ** attempt)); continue; }
       finally { clearTimeout(timeout); }
       if (response.ok || response.status === 404 || response.status === 412 || response.status === 409) return response;
-      if (!TRANSIENT_STATUS.has(response.status)) throw new Error(`object_storage_${method}_${response.status}`);
+      if (!TRANSIENT_STATUS.has(response.status)) {
+      const responseText = await response.text().catch(() => "");
+      const code = responseText.match(/<Code>([^<]+)<\/Code>/)?.[1] || "unknown";
+      const message = responseText.match(/<Message>([^<]+)<\/Message>/)?.[1] || "";
+      throw new Error(`object_storage_${method}_${response.status}:${code}:${message}`.replace(/[\r\n]+/g, " ").slice(0, 500));
+    }
       lastError = new Error(`object_storage_${method}_${response.status}`);
       if (response.body) await response.body.cancel().catch(() => undefined);
       if (attempt + 1 < attempts) await sleep(Math.min(5_000, 250 * 2 ** attempt));
@@ -121,7 +126,17 @@ export class ObjectJsonStorage implements JsonStorage {
     const detail = lastError instanceof Error ? lastError.message : String(lastError || "unknown");
     throw new Error(`object_storage_${method}_unreachable:${detail}`);
   }
-  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(relativePath))}`); return this.signedRequest(method, url, body, extraHeaders); }
+  private async request(method: string, relativePath: string, body?: string | Buffer, extraHeaders: Record<string, string> = {}) {
+  const cfg = objectConfig();
+  const normalizedPath = normalizeStorageKey(relativePath);
+  const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(normalizedPath))}`);
+  try {
+    return await this.signedRequest(method, url, body, extraHeaders);
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`${detail}:path=${normalizedPath.slice(0, 240)}:bytes=${Buffer.byteLength(body ?? "")}`);
+  }
+}
   private async bucketRequest(params: Record<string, string>) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest("GET", url, undefined, {}, query); }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: await res.json() as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
