@@ -34,6 +34,7 @@ import { myAutoListSource } from "./myauto-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
+import { regionalLiveOverrides } from "./regional-live-overrides";
 import {
   CATALOG_DAILY_TARGET_PER_MARKET,
   CATALOG_DAILY_TARGET_TOTAL,
@@ -56,6 +57,7 @@ const completeSources = [
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
+  ...regionalLiveOverrides.map(prepareSource),
   encarCompleteSource,
 ];
 
