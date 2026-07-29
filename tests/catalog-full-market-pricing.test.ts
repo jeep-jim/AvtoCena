@@ -92,15 +92,17 @@ test("converts source prices to rubles before power and utilization checks", () 
   assert.match(customsPricing, /sourcePriceRub: rate\.sourcePriceRub/);
 });
 
-test("catalog cards keep the agreed compact wording and do not add duplicate price explanations", () => {
+test("catalog cards preserve the compact layout and never render source currency", () => {
   assert.match(catalogCard, /function sourcePriceRub/);
-  assert.match(catalogCard, /Расчёт под ключ уточняется/);
+  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
+  assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
+  assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
   assert.match(catalogCard, /\`\$\{yearLabel\} · ориентир\`/);
-  assert.match(catalogCard, /\{yearLabel\} · цена автомобиля/);
-  assert.doesNotMatch(catalogCard, /ориентир под ключ/);
-  assert.doesNotMatch(catalogCard, /цена автомобиля в рублях/);
+  assert.doesNotMatch(catalogCard, /function sourceMoney/);
   assert.doesNotMatch(catalogCard, /Цена в объявлении/);
-  assert.doesNotMatch(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
+  assert.doesNotMatch(catalogCard, /Цена торгов/);
+  assert.doesNotMatch(catalogCard, /Расчёт под ключ уточняется/);
+  assert.doesNotMatch(catalogCard, /ориентир под ключ/);
 });
 
 test("catalog prioritizes Japan sold lots and cars up to 6 million rubles and 160 hp", () => {

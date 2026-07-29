@@ -21,6 +21,7 @@ import {
 import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
+import { currentRegionalMarketSources } from "./current-regional-market-sources";
 import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
@@ -44,20 +45,25 @@ import {
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
+
+// Generic regional adapters are registered first. Exact/detail adapters below must
+// replace them when sourceId совпадает; otherwise a broad HTML parser can silently
+// displace the working AUTO.GE or Mashina parser and collapse the public market.
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
+  ...regionalLiveOverrides.map(prepareSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
   ...scaleMarketSources.map(prepareSource),
+  ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
   prepareSource(autoGeorgiaEnrichedSource),
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
-  ...regionalLiveOverrides.map(prepareSource),
   encarCompleteSource,
 ];
 

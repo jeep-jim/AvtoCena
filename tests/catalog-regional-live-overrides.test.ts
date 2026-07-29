@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
+import { currentRegionalMarketSources } from "../apps/web/lib/catalog/current-regional-market-sources";
 import { parseRegionalMassPage } from "../apps/web/lib/catalog/regional-live-overrides";
+
+const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
 
 const autoConfig = {
   sourceId: "auto_georgia_open",
@@ -16,7 +20,7 @@ const mashinaConfig = {
   detailPattern: /\/(?:en\/)?details\/[^?#]+(?:[?#]|$)/i,
 };
 
-test("AUTO.GE homepage card keeps price, vehicle identity and listing image", () => {
+test("AUTO.GE listing card keeps price, vehicle identity and listing image", () => {
   const rows = parseRegionalMassPage(`
     <article>
       <a href="/en/auto/toyota/rav4/toyota-rav4-1240551.html">
@@ -24,7 +28,7 @@ test("AUTO.GE homepage card keeps price, vehicle identity and listing image", ()
         <h3>Toyota RAV4 2021</h3>
       </a>
       <span>2021</span><strong>24,500.00 $</strong><span>62 000 km</span><span>2.5 L Hybrid</span>
-    </article>`, "https://www.auto.ge/en/index.html", autoConfig);
+    </article>`, "https://www.auto.ge/en/auto/index.html", autoConfig);
   assert.equal(rows.length, 1);
   assert.equal(rows[0].make, "Toyota");
   assert.equal(rows[0].year, 2021);
@@ -33,7 +37,7 @@ test("AUTO.GE homepage card keeps price, vehicle identity and listing image", ()
   assert.ok(rows[0].images.length > 0);
 });
 
-test("Mashina current card keeps dollar price and /details route", () => {
+test("Mashina current card keeps price and /details route", () => {
   const rows = parseRegionalMassPage(`
     <article>
       <a href="/details/toyota-rav4-69c3564a5c6a8272426281">
@@ -41,7 +45,7 @@ test("Mashina current card keeps dollar price and /details route", () => {
         <h3>Toyota RAV4</h3>
       </a>
       <span>$ 24 500</span><span>2019 г.</span><span>2.5 л.</span><span>170 000 км</span><span>гибрид</span>
-    </article>`, "https://www.mashina.kg/search/all/", mashinaConfig);
+    </article>`, "https://www.mashina.kg/en/search/", mashinaConfig);
   assert.equal(rows.length, 1);
   assert.equal(rows[0].make, "Toyota");
   assert.equal(rows[0].model, "RAV4");
@@ -49,4 +53,21 @@ test("Mashina current card keeps dollar price and /details route", () => {
   assert.equal(rows[0].price, 24_500);
   assert.equal(rows[0].currency, "USD");
   assert.match(rows[0].detailUrl, /\/details\/toyota-rav4-/);
+});
+
+test("production Mashina adapter probes the current search routes", () => {
+  const mashina = currentRegionalMarketSources.find((source) => source.sourceId === "mashina_kyrgyzstan_exact") as any;
+  assert.ok(mashina);
+  const urls = mashina.listUrls(3);
+  assert.ok(urls.some((url: string) => url.includes("www.mashina.kg/en/search/?page=3")));
+  assert.ok(urls.some((url: string) => url.includes("www.mashina.kg/search/?page=3")));
+  assert.ok(urls.every((url: string) => !url.includes("/search/all/")));
+});
+
+test("exact regional adapters replace generic adapters with the same source id", () => {
+  const genericAt = importer.indexOf("...regionalLiveOverrides.map(prepareSource)");
+  const exactAt = importer.indexOf("...exactMarketSources.map(prepareSource)");
+  const currentAt = importer.indexOf("...currentRegionalMarketSources.map(prepareSource)");
+  const autoGeAt = importer.indexOf("prepareSource(autoGeorgiaEnrichedSource)");
+  assert.ok(genericAt >= 0 && exactAt > genericAt && currentAt > exactAt && autoGeAt > currentAt);
 });

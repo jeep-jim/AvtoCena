@@ -5,16 +5,21 @@ import test from "node:test";
 const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const contract = fs.readFileSync(new URL("../docs/catalog-card-contract.md", import.meta.url), "utf8");
 
-test("catalog backend work does not expand the agreed public card copy", () => {
-  assert.match(card, /Расчёт под ключ уточняется/);
+test("catalog backend work keeps the agreed compact public card", () => {
+  assert.match(card, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
+  assert.match(card, /<PriceTrend offer=\{displayOffer\}/);
   assert.match(card, /· ориентир/);
-  assert.doesNotMatch(card, /ориентир под ключ/);
-  assert.doesNotMatch(card, /цена автомобиля в рублях/);
+  assert.doesNotMatch(card, /function sourceMoney/);
   assert.doesNotMatch(card, /Цена в объявлении/);
-  assert.doesNotMatch(card, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
+  assert.doesNotMatch(card, /Цена торгов/);
+  assert.doesNotMatch(card, /Расчёт под ключ уточняется/);
+  assert.doesNotMatch(card, /Расчёт таможни/);
+  assert.doesNotMatch(card, /ориентир под ключ/);
 });
 
-test("card UI contract explicitly requires a separate UI task", () => {
+test("card UI contract requires rubles and a separate UI task", () => {
   assert.match(contract, /не должна изменяться.*без отдельной UI-задачи/s);
-  assert.match(contract, /не добавлять длинные поясняющие строки/);
+  assert.match(contract, /публичную цену только в рублях/);
+  assert.match(contract, /иностранную валюту источника не выводить/);
+  assert.match(contract, /после цены сразу идут компактные характеристики/);
 });
