@@ -3,12 +3,25 @@ const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked
 const { resetVehicleKnowledgeCache } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
 const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
-const VEHICLES_CSV_URL = process.env.VEHICLE_KNOWLEDGE_MODELS_URL
-  || "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/dist/vehicles.csv";
-const MANIFEST_URL = process.env.VEHICLE_KNOWLEDGE_MANIFEST_URL
-  || "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/manifest.json";
 const CHUNK_SIZE = Math.max(50, Math.min(250, Number(process.env.VEHICLE_KNOWLEDGE_CHUNK_SIZE || 250)));
 const MIN_MODEL_YEAR = Math.max(1900, Number(process.env.VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR || 1990));
+const MIN_RETAINED_MODELS = Math.max(1, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS || 5_000));
+const FETCH_ATTEMPTS = Math.max(1, Math.min(4, Number(process.env.VEHICLE_KNOWLEDGE_FETCH_ATTEMPTS || 2)));
+
+function uniqueUrls(...values) {
+  return [...new Set(values.flat().map((value) => String(value || "").trim()).filter(Boolean))];
+}
+
+const VEHICLES_CSV_URLS = uniqueUrls(
+  process.env.VEHICLE_KNOWLEDGE_MODELS_URL,
+  "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/vehicles.csv",
+  "https://huggingface.co/datasets/vehiclesdb/vehiclesdb/resolve/main/vehicles.csv",
+);
+const MANIFEST_URLS = uniqueUrls(
+  process.env.VEHICLE_KNOWLEDGE_MANIFEST_URL,
+  "https://cdn.jsdelivr.net/gh/vehiclesdb/vehiclesdb@latest/manifest.json",
+  "https://huggingface.co/datasets/vehiclesdb/vehiclesdb/resolve/main/manifest.json",
+);
 
 function clean(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -87,22 +100,79 @@ async function fetchText(url) {
         accept: "text/csv,application/json,text/plain,*/*",
         "user-agent": "AvtoCena vehicle knowledge sync/1.0",
       },
+      redirect: "follow",
       signal: controller.signal,
     });
     if (!response.ok) throw new Error(`vehicle_knowledge_fetch_${response.status}_${url}`);
-    return response.text();
+    const body = await response.text();
+    if (!body.trim()) throw new Error(`vehicle_knowledge_empty_${url}`);
+    return body;
   } finally {
     clearTimeout(timeout);
   }
 }
 
-const [manifestText, csvText, current] = await Promise.all([
-  fetchText(MANIFEST_URL),
-  fetchText(VEHICLES_CSV_URL),
-  readChunkedDataJson(MODELS_PATH, []),
-]);
-const manifest = JSON.parse(manifestText);
-const rows = parseCsv(csvText);
+async function fetchFirstAvailable(urls, label) {
+  const failures = [];
+  for (const url of urls) {
+    for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+      try {
+        return { url, text: await fetchText(url) };
+      } catch (error) {
+        failures.push({ url, attempt, error: String(error?.message || error) });
+        if (attempt < FETCH_ATTEMPTS) await new Promise((resolve) => setTimeout(resolve, attempt * 1_000));
+      }
+    }
+  }
+  const problem = new Error(`vehicle_knowledge_${label}_unavailable`);
+  problem.failures = failures;
+  throw problem;
+}
+
+const current = await readChunkedDataJson(MODELS_PATH, []);
+const activeCurrent = current.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
+
+let manifestResult;
+let csvResult;
+try {
+  [manifestResult, csvResult] = await Promise.all([
+    fetchFirstAvailable(MANIFEST_URLS, "manifest"),
+    fetchFirstAvailable(VEHICLES_CSV_URLS, "csv"),
+  ]);
+} catch (error) {
+  if (activeCurrent.length >= MIN_RETAINED_MODELS) {
+    console.warn(String(error?.message || error));
+    console.log(JSON.stringify({
+      status: "retained_knowledge_used",
+      reason: "upstream_unavailable",
+      retainedModels: activeCurrent.length,
+      minimumRequired: MIN_RETAINED_MODELS,
+      modelsPath: MODELS_PATH,
+      failures: Array.isArray(error?.failures) ? error.failures : [],
+      checkedAt: new Date().toISOString(),
+    }, null, 2));
+    process.exit(0);
+  }
+  throw error;
+}
+
+const manifest = JSON.parse(manifestResult.text);
+const rows = parseCsv(csvResult.text);
+if (!rows.length) {
+  if (activeCurrent.length >= MIN_RETAINED_MODELS) {
+    console.log(JSON.stringify({
+      status: "retained_knowledge_used",
+      reason: "upstream_csv_empty",
+      retainedModels: activeCurrent.length,
+      minimumRequired: MIN_RETAINED_MODELS,
+      csvUrl: csvResult.url,
+      checkedAt: new Date().toISOString(),
+    }, null, 2));
+    process.exit(0);
+  }
+  throw new Error("vehicle_knowledge_csv_parsed_zero");
+}
+
 const manual = new Map(current.filter((row) => row?.source !== "vehiclesdb").map((row) => [row.id, row]));
 const upstream = new Map();
 const updatedAt = new Date().toISOString();
@@ -161,12 +231,27 @@ const models = [...upstream.values()].sort((left, right) =>
   || left.make.localeCompare(right.make, "en")
   || left.model.localeCompare(right.model, "en"));
 
+if (models.length < MIN_RETAINED_MODELS && activeCurrent.length >= MIN_RETAINED_MODELS) {
+  console.log(JSON.stringify({
+    status: "retained_knowledge_used",
+    reason: "upstream_model_count_below_minimum",
+    upstreamModels: models.length,
+    retainedModels: activeCurrent.length,
+    minimumRequired: MIN_RETAINED_MODELS,
+    checkedAt: new Date().toISOString(),
+  }, null, 2));
+  process.exit(0);
+}
+
 await replaceChunkedDataJson(MODELS_PATH, models, CHUNK_SIZE);
 resetVehicleKnowledgeCache();
 
 console.log(JSON.stringify({
+  status: "updated",
   source: "VehiclesDB",
   sourceVersion: manifest.version,
+  manifestUrl: manifestResult.url,
+  csvUrl: csvResult.url,
   fetchedRows: rows.length,
   carModels: models.length,
   preservedManualRecords: manual.size,
