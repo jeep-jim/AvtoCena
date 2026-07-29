@@ -9,26 +9,26 @@ const freshPublisher = fs.readFileSync(new URL("../scripts/catalog-publish-fresh
 const businessAudit = fs.readFileSync(new URL("../scripts/catalog-business-audit.mjs", import.meta.url), "utf8");
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 
-test("workflow audits every available source shard before safe atomic publication", () => {
+test("workflow audits available shards, attempts atomic publication and always writes health", () => {
   const download = workflow.indexOf("Download available source shards");
   const audit = workflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
   const publish = workflow.indexOf("npx tsx scripts/catalog-publish-source-scale.mjs");
-  const finalGate = workflow.indexOf("Confirm publication or safe retention");
-  assert.ok(download >= 0, "all available source shards must be downloaded");
+  const health = workflow.indexOf("Write catalog health summary");
+  assert.ok(download >= 0, "available source shards must be downloaded");
   assert.ok(audit > download, "calculation and gallery audit must follow artifact download");
   assert.ok(publish > audit, "publisher must run after the source-scale audit");
-  assert.ok(finalGate > publish, "safe publication result must be checked after writing");
+  assert.ok(health > publish, "health report must follow the publication attempt");
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
   assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /const safeRetention = !report\.published/);
-  assert.match(workflow, /catalog_storage_or_publication_failure_/);
-  assert.match(workflow, /catalog_no_new_verified_offers: previous manifest preserved safely/);
-  assert.match(workflow, /catalog_markets_empty_/);
-  assert.match(workflow, /markets\.filter\(\(market\) => !\(Number\(report\.byMarket\?\.\[market\] \|\| 0\) > 0\)\)/);
-  assert.doesNotMatch(workflow, /previousManifestPreserved\)process\.exit\(1\)/);
+  assert.match(workflow, /health_report_previous_manifest_preserved/);
+  assert.match(workflow, /previousManifestPreserved: true/);
+  assert.match(workflow, /state = report\.published \? 'published_new_generation' : 'previous_manifest_preserved'/);
+  assert.match(workflow, /missing = markets\.filter/);
+  assert.match(workflow, /Catalog workflow completed/);
+  assert.doesNotMatch(workflow, /throw new Error\(`catalog_storage_or_publication_failure_/);
   assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
 });
 
