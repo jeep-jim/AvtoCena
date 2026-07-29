@@ -44,9 +44,14 @@ import {
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
+
+// Generic regional adapters are registered first. Exact/detail adapters below must
+// replace them when sourceId совпадает; otherwise a broad HTML parser can silently
+// displace the working AUTO.GE or Mashina parser and collapse the public market.
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
+  ...regionalLiveOverrides.map(prepareSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
@@ -57,7 +62,6 @@ const completeSources = [
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
-  ...regionalLiveOverrides.map(prepareSource),
   encarCompleteSource,
 ];
 
