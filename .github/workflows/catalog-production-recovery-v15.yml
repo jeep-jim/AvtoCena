@@ -30,55 +30,28 @@ jobs:
     name: Validate source-scale pipeline
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-        continue-on-error: true
         with:
           fetch-depth: 1
       - uses: actions/setup-node@v4
-        continue-on-error: true
         with:
           node-version: 24
           cache: npm
       - name: Install dependencies
-        continue-on-error: true
         run: npm ci
       - name: Validate scripts and types
-        id: validate_pipeline
-        continue-on-error: true
-        shell: bash
         run: |
-          set +e
           node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs
-          a=$?
           node --check scripts/catalog-probe-source-shard.mjs
-          b=$?
           node --check scripts/catalog-rebuild-source-shard.mjs
-          c=$?
           node --check scripts/catalog-validate-source-scale.mjs
-          d=$?
           node --check scripts/catalog-publish-source-scale.mjs
-          e=$?
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
-          f=$?
           npm --workspace=@avtocena/engine exec tsc -- --noEmit
-          g=$?
-          code=$((a|b|c|d|e|f|g))
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          if [ "$code" -ne 0 ]; then
-            echo "::warning::catalog validation failed with exit code $code; health job will record it"
-          fi
-          exit 0
-      - name: Validation summary
-        if: always()
-        run: |
-          echo "### Pipeline validation" >> "$GITHUB_STEP_SUMMARY"
-          echo "exit_code: ${{ steps.validate_pipeline.outputs.exit_code || 'unknown' }}" >> "$GITHUB_STEP_SUMMARY"
 
   knowledge:
     name: Sync vehicle knowledge to JSON storage
-    if: always()
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -93,36 +66,21 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
     steps:
       - uses: actions/checkout@v4
-        continue-on-error: true
         with:
           fetch-depth: 1
       - uses: actions/setup-node@v4
-        continue-on-error: true
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies
-        continue-on-error: true
-        run: npm ci
-      - name: Sync knowledge safely
-        id: knowledge_sync
-        if: always()
-        continue-on-error: true
+      - run: npm ci
+      - name: Sync knowledge diagnostically
         shell: bash
         run: |
-          set +e
-          status=0
           if [ -z "$YC_OBJECT_STORAGE_BUCKET" ] || [ -z "$YC_OBJECT_STORAGE_ACCESS_KEY_ID" ] || [ -z "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY" ]; then
-            status=78
-            echo "::warning::object storage secrets are missing; current production knowledge remains unchanged"
-          else
-            timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-sync-vehicle-knowledge-seed.mjs
-            status=$?
+            echo "::warning::object storage secrets are missing; current knowledge remains unchanged"
+            exit 78
           fi
-          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
-          echo "### Vehicle knowledge" >> "$GITHUB_STEP_SUMMARY"
-          echo "exit_code: $status" >> "$GITHUB_STEP_SUMMARY"
-          exit 0
+          timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-sync-vehicle-knowledge-seed.mjs
 
   collect:
     name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
@@ -185,20 +143,15 @@ jobs:
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
     steps:
       - uses: actions/checkout@v4
-        continue-on-error: true
         with:
           fetch-depth: 1
       - uses: actions/setup-node@v4
-        continue-on-error: true
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies
-        continue-on-error: true
-        run: npm ci
-      - name: Probe sources safely
+      - run: npm ci
+      - name: Probe every registered source in this shard
         id: probe
-        if: always()
         continue-on-error: true
         shell: bash
         run: |
@@ -207,9 +160,8 @@ jobs:
           status=$?
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           exit 0
-      - name: Collect listings, calculations and progressive galleries safely
+      - name: Collect listings, calculations and progressive galleries
         id: collect_step
-        if: always()
         continue-on-error: true
         env:
           CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
@@ -223,87 +175,52 @@ jobs:
             timeout --signal=TERM --kill-after=120s 3300s npx tsx scripts/catalog-rebuild-source-shard.mjs
             status=$?
           fi
-          export CATALOG_COLLECT_EXIT_CODE="$status"
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
-
           if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
+            export CATALOG_COLLECT_EXIT_CODE="$status"
             node <<'NODE'
           const fs = require('fs');
           const market = String(process.env.CATALOG_REBUILD_MARKET || 'unknown');
           const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
           const shardCount = Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 3);
-          const targetPerSource = Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000);
-          const minimumMarketTarget = Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000);
-          const exitCode = Number(process.env.CATALOG_COLLECT_EXIT_CODE || 1);
           const generatedAt = new Date().toISOString();
+          const exitCode = Number(process.env.CATALOG_COLLECT_EXIT_CODE || 1);
           const stopReason = `safe_fallback_exit_${exitCode}`;
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 34,
-            market,
-            shardIndex,
-            shardCount,
-            generatedAt,
-            targetPerSource,
-            minimumMarketTarget,
-            count: 0,
-            sourceIds: [],
-            liveSourceIds: [],
-            retentionSourceIds: [],
-            partial: true,
-            stopReason,
-            report: {
-              version: 34,
-              market,
-              shardIndex,
-              shardCount,
-              targetPerSource,
-              saved: 0,
+            version: 36, market, shardIndex, shardCount, generatedAt,
+            targetPerSource: Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000),
+            minimumMarketTarget: Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000),
+            count: 0, sourceIds: [], liveSourceIds: [], retentionSourceIds: [], partial: true, stopReason,
+            report: { version: 36, market, shardIndex, shardCount, saved: 0,
               sourceErrors: [{ stage: 'workflow_safe_fallback', error: `collector_exit_${exitCode}` }],
-              rejectionReasons: {},
-              publicBySource: {},
-              freshBySource: {},
-              restoredBySource: {},
-              sources: [],
-              stopReason,
-              generatedAt,
-            },
+              rejectionReasons: {}, publicBySource: {}, freshBySource: {}, restoredBySource: {}, sources: [], stopReason, generatedAt },
             offers: [],
           }, null, 2));
           NODE
           fi
-
-          echo "### $CATALOG_REBUILD_MARKET shard $CATALOG_REBUILD_SHARD_INDEX" >> "$GITHUB_STEP_SUMMARY"
-          echo "probe_exit: ${{ steps.probe.outputs.exit_code || 'unknown' }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "collect_exit: $status" >> "$GITHUB_STEP_SUMMARY"
           exit 0
-      - name: Verify shard envelope diagnostically
+      - name: Shard summary
         if: always()
-        continue-on-error: true
         run: |
           node <<'NODE'
           const fs = require('fs');
           const file = process.env.CATALOG_REBUILD_OUTPUT;
-          if (!fs.existsSync(file)) {
-            console.warn(`missing_shard_output_${file}`);
-            process.exit(0);
-          }
+          if (!fs.existsSync(file)) process.exit(0);
           const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
-          console.log(JSON.stringify({
-            market: payload.market,
-            shard: payload.shardIndex,
+          const summary = {
+            market: payload.market, shard: payload.shardIndex,
             count: Array.isArray(payload.offers) ? payload.offers.length : 0,
-            live: payload.liveSourceIds,
-            bySource: payload.report?.publicBySource,
-            detailLimitPerSource: payload.report?.detailLimitPerSource,
+            live: payload.liveSourceIds, bySource: payload.report?.publicBySource,
+            imageStats: payload.report?.imageStats, galleriesAccumulated: payload.report?.galleriesAccumulated,
             detailSuccessBySource: payload.report?.detailSuccessBySource,
             detailDeferredBySource: payload.report?.detailDeferredBySource,
-            imageStats: payload.report?.imageStats,
             stop: payload.stopReason,
-          }, null, 2));
+          };
+          console.log(JSON.stringify(summary, null, 2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### ${summary.market} shard ${summary.shard}\n\n\`\`\`json\n${JSON.stringify(summary, null, 2)}\n\`\`\`\n`);
           NODE
       - name: Upload source diagnostics and verified offers
         if: always()
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}
@@ -315,12 +232,11 @@ jobs:
           retention-days: 1
 
   publish:
-    name: Publish catalog or preserve previous manifest
+    name: Publish and require a new seven-market generation
     if: always()
     needs: [validate, knowledge, collect]
     runs-on: ubuntu-latest
     timeout-minutes: 100
-    continue-on-error: true
     env:
       JSON_STORAGE_DRIVER: object
       YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
@@ -350,19 +266,14 @@ jobs:
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
     steps:
       - uses: actions/checkout@v4
-        continue-on-error: true
         with:
           fetch-depth: 1
       - uses: actions/setup-node@v4
-        continue-on-error: true
         with:
           node-version: 24
           cache: npm
-      - name: Install dependencies
-        continue-on-error: true
-        run: npm ci
+      - run: npm ci
       - name: Download available source shards
-        if: always()
         continue-on-error: true
         uses: actions/download-artifact@v4
         with:
@@ -370,12 +281,10 @@ jobs:
           path: catalog-rebuild
           merge-multiple: true
       - name: Audit calculations, customs, utilization fee and galleries
-        if: always()
         continue-on-error: true
         run: npx tsx scripts/catalog-validate-source-scale.mjs
-      - name: Publish verified offers with three-day retention safely
+      - name: Publish verified offers with three-day retention
         id: publish_step
-        if: always()
         continue-on-error: true
         shell: bash
         run: |
@@ -388,74 +297,54 @@ jobs:
             status=$?
           fi
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
-
           if [ ! -s "$CATALOG_REBUILD_PUBLISH_REPORT" ]; then
             export CATALOG_PUBLISH_EXIT_CODE="$status"
             node <<'NODE'
           const fs = require('fs');
-          const report = {
-            version: 34,
-            mode: 'health_report_previous_manifest_preserved',
-            publishedAt: new Date().toISOString(),
-            published: false,
+          fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify({
+            version: 36, mode: 'previous_manifest_preserved', publishedAt: new Date().toISOString(), published: false,
             publicationError: `publisher_exit_${Number(process.env.CATALOG_PUBLISH_EXIT_CODE || 1)}`,
-            generationId: null,
-            previousManifestPreserved: true,
-            total: 0,
-            byMarket: {},
-            byMarketAndSource: {},
-            marketsBelowTarget: ['korea','china','japan','uae','europe','georgia','kyrgyzstan'],
-            marketQuality: {},
-          };
-          fs.writeFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, JSON.stringify(report, null, 2));
+            generationId: null, previousManifestPreserved: true, total: 0, byMarket: {}, byMarketAndSource: {},
+            marketsBelowTarget: ['korea','china','japan','uae','europe','georgia','kyrgyzstan'], marketQuality: {},
+          }, null, 2));
           NODE
           fi
           exit 0
-      - name: Write catalog health summary
-        if: always()
-        continue-on-error: true
+      - name: Require newly published generation
+        shell: bash
         run: |
           node <<'NODE'
           const fs = require('fs');
           const file = process.env.CATALOG_REBUILD_PUBLISH_REPORT;
-          let report = {};
-          try { report = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (error) {
-            report = { published: false, previousManifestPreserved: true, publicationError: String(error?.message || error), byMarket: {}, total: 0 };
-          }
+          const report = JSON.parse(fs.readFileSync(file, 'utf8'));
           const markets = ['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
           const missing = markets.filter((market) => !(Number(report.byMarket?.[market] || 0) > 0));
-          const belowThreeSources = markets.filter((market) => Object.keys(report.byMarketAndSource?.[market] || {}).length < 3);
-          const state = report.published ? 'published_new_generation' : 'previous_manifest_preserved';
-          console.log(JSON.stringify({
-            state,
-            publicationError: report.publicationError || '',
+          const imageStats = Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.imageStats || null]));
+          const state = {
+            published: report.published === true,
             generationId: report.generationId || null,
             total: Number(report.total || 0),
             byMarket: report.byMarket || {},
             byMarketAndSource: report.byMarketAndSource || {},
-            belowTarget: report.marketsBelowTarget || [],
+            calculatedShare: Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.calculatedShare ?? null])),
+            imageStats,
             missing,
-            belowThreeSources,
+            marketsBelowTarget: report.marketsBelowTarget || [],
+            publicationError: report.publicationError || '',
             publisherExitCode: '${{ steps.publish_step.outputs.exit_code || 'unknown' }}',
-          }, null, 2));
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
-            '### Catalog health',
-            `state: ${state}`,
-            `generationId: ${report.generationId || 'previous'}`,
-            `total: ${Number(report.total || 0)}`,
-            `publicationError: ${report.publicationError || 'none'}`,
-            `publisherExitCode: ${{ steps.publish_step.outputs.exit_code || 'unknown' }}`,
-            `missingMarkets: ${missing.join(',') || 'none'}`,
-            '',
-          ].join('\n'));
+          };
+          console.log(JSON.stringify(state, null, 2));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Catalog publication\n\n\`\`\`json\n${JSON.stringify(state, null, 2)}\n\`\`\`\n`);
+          if (!state.published || !state.generationId || state.total <= 0 || missing.length) {
+            console.error(`catalog_new_generation_required:${JSON.stringify(state)}`);
+            process.exit(1);
+          }
           NODE
       - name: Run production catalog smoke checks
-        if: always()
         continue-on-error: true
         run: npm run catalog:smoke
       - name: Upload catalog reports
         if: always()
-        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: catalog-source-scale-reports
@@ -473,12 +362,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Finish workflow without losing diagnostics
+      - name: Require successful publication job
+        shell: bash
         run: |
           echo "### Catalog workflow completed" >> "$GITHUB_STEP_SUMMARY"
           echo "validate: ${{ needs.validate.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "knowledge: ${{ needs.knowledge.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "collect: ${{ needs.collect.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "publish: ${{ needs.publish.result }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "Network/source failures are diagnostics; the previous verified manifest remains active until a new generation is published." >> "$GITHUB_STEP_SUMMARY"
-          exit 0
+          if [ "${{ needs.validate.result }}" != "success" ] || [ "${{ needs.publish.result }}" != "success" ]; then
+            echo "New production generation was not confirmed." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "A new seven-market generation was published and verified." >> "$GITHUB_STEP_SUMMARY"
