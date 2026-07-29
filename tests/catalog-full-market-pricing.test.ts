@@ -13,7 +13,7 @@ const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 
- test("fills the full customer cost structure for every market when saved fields are null", () => {
+test("fills the full customer cost structure for every market when saved fields are null", () => {
   for (const market of markets) {
     const configured = {
       id: `market_${market}_v1`,
@@ -92,12 +92,15 @@ test("converts source prices to rubles before power and utilization checks", () 
   assert.match(customsPricing, /sourcePriceRub: rate\.sourcePriceRub/);
 });
 
-test("catalog cards use rubles as the main public price and keep source currency secondary", () => {
+test("catalog cards keep the agreed compact wording and do not add duplicate price explanations", () => {
   assert.match(catalogCard, /function sourcePriceRub/);
-  assert.match(catalogCard, /цена автомобиля в рублях/);
-  assert.match(catalogCard, /Цена в объявлении/);
-  assert.match(catalogCard, /Цена торгов/);
-  assert.match(catalogCard, /moneyRub\(visibleRub\)/);
+  assert.match(catalogCard, /Расчёт под ключ уточняется/);
+  assert.match(catalogCard, /\`\$\{yearLabel\} · ориентир\`/);
+  assert.match(catalogCard, /\{yearLabel\} · цена автомобиля/);
+  assert.doesNotMatch(catalogCard, /ориентир под ключ/);
+  assert.doesNotMatch(catalogCard, /цена автомобиля в рублях/);
+  assert.doesNotMatch(catalogCard, /Цена в объявлении/);
+  assert.doesNotMatch(catalogCard, /Расчёт таможни, утильсбора и цены под ключ уточняется/);
 });
 
 test("catalog prioritizes Japan sold lots and cars up to 6 million rubles and 160 hp", () => {
