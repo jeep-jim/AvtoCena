@@ -62,8 +62,8 @@ test("publisher accumulates verified current markets and keeps previous manifest
   assert.match(publisher, /marketsBelowTarget/);
 });
 
-test("source failures keep diagnostics but missing new generation makes production red", () => {
-  assert.match(workflow, /knowledge:[\s\S]*continue-on-error: true/);
+test("source failures remain diagnostic, but knowledge collapse or missing generation makes production red", () => {
+  assert.doesNotMatch(workflow, /knowledge:[\s\S]*?continue-on-error: true[\s\S]*?collect:/);
   assert.match(workflow, /collect:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /workflow_safe_fallback/);
   assert.match(workflow, /safe_fallback_exit_/);
@@ -71,7 +71,7 @@ test("source failures keep diagnostics but missing new generation makes producti
   assert.match(workflow, /Require newly published generation/);
   assert.match(workflow, /if \(!state\.published \|\| !state\.generationId \|\| state\.total <= 0 \|\| missing\.length\)/);
   assert.match(workflow, /process\.exit\(1\)/);
-  assert.match(workflow, /Require successful publication job/);
+  assert.match(workflow, /Require successful knowledge and publication jobs/);
   assert.doesNotMatch(workflow, /publish:[\s\S]{0,160}continue-on-error: true/);
 });
 
