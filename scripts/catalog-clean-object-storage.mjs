@@ -81,15 +81,20 @@ const [publicManifest, internalManifest, generationObjects, internalObjects, ima
 
 const generationIds = [...new Set(generationObjects.map((object) => generationIdFromKey(object.key)).filter(Boolean))]
   .sort((left, right) => generationTimestamp(right) - generationTimestamp(left));
+// В обычном режиме дополнительно сохраняются две последние generation.
+// В аварийном режиме защищаем только реально используемые public/internal generation,
+// иначе несколько не опубликованных попыток занимают весь лимит бакета и не оставляют
+// места для атомарной записи следующей production-generation.
+const extraProtectedGenerations = EMERGENCY ? [] : generationIds.slice(0, KEEP_GENERATIONS);
 const protectedGenerations = new Set([
   String(publicManifest?.generationId || ""),
   String(internalManifest?.generationId || ""),
-  ...generationIds.slice(0, KEEP_GENERATIONS),
+  ...extraProtectedGenerations,
 ].filter(Boolean));
 
 if (!publicManifest?.generationId || !generationIds.length) {
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -148,7 +153,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
   }
 
   const report = {
-    version: 2,
+    version: 3,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -157,6 +162,7 @@ if (!publicManifest?.generationId || !generationIds.length) {
     blockReason: blocked ? `planned_deletes_${plannedDeletes}_exceed_${MAX_DELETES}` : "",
     graceMs: GRACE_MS,
     keepGenerations: KEEP_GENERATIONS,
+    emergencyExtraGenerationsProtected: extraProtectedGenerations.length,
     maximumDeletes: MAX_DELETES,
     currentPublicGeneration: publicManifest.generationId,
     currentInternalGeneration: internalManifest?.generationId || null,
