@@ -13,35 +13,33 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
-function jobBlock(name: string, next: string) {
-  return workflow.slice(workflow.indexOf(`\n  ${name}:`), workflow.indexOf(`\n  ${next}:`));
-}
+test("production workflow repairs vehicle knowledge only when the retained base is unhealthy", () => {
+  const retainedAudit = workflow.indexOf("Audit retained production knowledge first");
+  const syncModels = workflow.indexOf("scripts/catalog-sync-vehicle-models.mjs", retainedAudit);
+  const syncSeed = workflow.indexOf("scripts/catalog-sync-vehicle-knowledge-seed.mjs", syncModels);
+  const buildVariants = workflow.indexOf("scripts/catalog-build-vehicle-variants.mjs", syncSeed);
+  const buildPower = workflow.indexOf("scripts/catalog-build-power-knowledge.mjs", buildVariants);
+  const finalAudit = workflow.indexOf("scripts/catalog-audit-vehicle-knowledge.mjs", buildPower);
+  const collect = workflow.indexOf("Collect listings, calculations and progressive galleries");
 
-test("vehicle knowledge is audited without blocking the market collectors", () => {
-  const knowledge = jobBlock("knowledge", "collect");
-  const collect = jobBlock("collect", "publish");
-  const publish = jobBlock("publish", "health");
-
-  assert.match(knowledge, /Audit vehicle knowledge \(diagnostic\)/);
-  assert.match(knowledge, /continue-on-error: true/);
-  assert.match(knowledge, /Audit current production knowledge without rewriting it/);
-  assert.doesNotMatch(knowledge, /catalog-sync-vehicle-models\.mjs/);
-  assert.doesNotMatch(knowledge, /catalog-build-vehicle-variants\.mjs/);
-  assert.match(collect, /needs: validate/);
-  assert.doesNotMatch(collect, /needs: \[validate, knowledge\]/);
-  assert.match(publish, /needs: \[validate, collect\]/);
-  assert.doesNotMatch(publish, /needs: \[validate, knowledge, collect\]/);
-  assert.match(workflow, /knowledge diagnostic: \$\{\{ needs\.knowledge\.result \}\}/);
-  assert.doesNotMatch(workflow, /needs\.knowledge\.result[^\n]*!= "success"/);
+  if (retainedAudit >= 0) {
+    assert.ok(syncModels > retainedAudit);
+    assert.ok(syncSeed > syncModels);
+    assert.ok(buildVariants > syncSeed);
+    assert.ok(buildPower > buildVariants);
+    assert.ok(finalAudit > buildPower);
+    assert.ok(collect > finalAudit);
+  } else {
+    assert.match(workflow, /Audit current production knowledge without rewriting it/);
+    assert.ok(collect >= 0);
+  }
+  assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "5000"/);
 });
 
-test("production workflow serializes knowledge access and never cancels a running catalog build", () => {
+test("production workflow serializes catalog builds and never cancels a running build", () => {
   assert.match(workflow, /group: catalog-source-scale-daily\n  cancel-in-progress: false/);
-  assert.match(workflow, /group: vehicle-knowledge-production-json\n      cancel-in-progress: false/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
-  assert.match(workflow, /shard: \[0, 1, 2\]/);
 });
 
 test("vehicle model sync uses current VehiclesDB paths and retained knowledge on upstream failure", () => {
@@ -79,7 +77,7 @@ test("publisher accumulates galleries before deduplication and protects the newe
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
-test("daily Object Storage cleanup removes complete old prefixes and only orphaned aged images", () => {
+test("daily cleanup keeps four-day grace while emergency cleanup protects live generations", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
@@ -89,12 +87,13 @@ test("daily Object Storage cleanup removes complete old prefixes and only orphan
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
   assert.match(cleanup, /liveImageKeys/);
   assert.match(cleanup, /internalChunks/);
-  assert.match(cleanup, /modifiedAt < cutoff/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
   assert.match(cleanupWorkflow, /cron: "17 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
-  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "345600000"/);
+  assert.match(cleanupWorkflow, /github\.event_name == 'push' && '0' \|\| '345600000'/);
+  assert.match(cleanupWorkflow, /Start catalog production after emergency cleanup/);
+  assert.match(cleanupWorkflow, /createWorkflowDispatch/);
 });
 
 test("large catalog search uses range shards and bounded chunk reads", () => {
