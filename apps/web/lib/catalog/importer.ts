@@ -21,6 +21,7 @@ import {
 import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
+import { currentRegionalMarketSources } from "./current-regional-market-sources";
 import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
@@ -56,6 +57,7 @@ const completeSources = [
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
   ...scaleMarketSources.map(prepareSource),
+  ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
   prepareSource(autoGeorgiaEnrichedSource),
