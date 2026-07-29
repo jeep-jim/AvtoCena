@@ -5,6 +5,7 @@ import test from "node:test";
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
+const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
@@ -29,6 +30,16 @@ test("production workflow performs a full vehicle-knowledge sync and blocks cata
   assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "5000"/);
   assert.match(workflow, /knowledge: \$\{\{ needs\.knowledge\.result \}\}/);
   assert.match(workflow, /needs\.knowledge\.result[^\n]*!= "success"/);
+});
+
+test("vehicle model sync uses current VehiclesDB paths and retained knowledge on upstream failure", () => {
+  assert.match(knowledgeSync, /vehiclesdb\/vehiclesdb@latest\/vehicles\.csv/);
+  assert.doesNotMatch(knowledgeSync, /vehiclesdb\/vehiclesdb@latest\/dist\/vehicles\.csv/);
+  assert.match(knowledgeSync, /huggingface\.co\/datasets\/vehiclesdb\/vehiclesdb\/resolve\/main\/vehicles\.csv/);
+  assert.match(knowledgeSync, /fetchFirstAvailable/);
+  assert.match(knowledgeSync, /retained_knowledge_used/);
+  assert.match(knowledgeSync, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS/);
+  assert.match(knowledgeSync, /upstream_model_count_below_minimum/);
 });
 
 test("vehicle knowledge audit protects count, retention ratio and unique ids", () => {
