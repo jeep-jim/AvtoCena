@@ -40,6 +40,8 @@ jobs:
         run: node --import tsx --test tests/guazi-ru-source.test.ts
       - name: MyAuto Georgia listing tests
         run: node --import tsx --test tests/myauto-list-source.test.ts
+      - name: Regional live route tests
+        run: node --import tsx --test tests/catalog-regional-live-overrides.test.ts
       - name: Catalog probe v23 tests
         run: node --import tsx --test tests/catalog-probe-source-shard.test.ts
       - name: Catalog publication gate tests
