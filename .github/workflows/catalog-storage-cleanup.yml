@@ -33,7 +33,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"
-      CATALOG_STORAGE_KEEP_GENERATIONS: "2"
+      CATALOG_STORAGE_KEEP_GENERATIONS: ${{ github.event_name == 'push' && '0' || '2' }}
       CATALOG_STORAGE_EMERGENCY: ${{ github.event_name == 'push' && 'true' || 'false' }}
       CATALOG_STORAGE_CLEANUP_GRACE_MS: ${{ github.event_name == 'push' && '0' || '345600000' }}
       CATALOG_STORAGE_CLEANUP_MAX_DELETES: "250000"
