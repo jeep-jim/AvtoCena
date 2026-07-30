@@ -1,0 +1,219 @@
+name: Apply catalog bulk storage cleanup
+
+on:
+  push:
+    branches: [fix/catalog-bulk-storage-cleanup]
+    paths:
+      - .github/workflows/apply-catalog-bulk-cleanup.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-bulk-storage-cleanup
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Add S3 bulk deletion and unblock emergency cleanup
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              file = Path(path)
+              text = file.read_text()
+              if old not in text:
+                  raise SystemExit(f"snippet_not_found:{path}:{old[:120]}")
+              file.write_text(text.replace(old, new, 1))
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  deleteJson?(relativePath: string): Promise<void>;
+          exists?(relativePath: string): Promise<boolean>;''',
+              '''  deleteJson?(relativePath: string): Promise<void>;
+          deleteObjects?(relativePaths: string[]): Promise<number>;
+          exists?(relativePath: string): Promise<boolean>;'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
+          async putBinary''',
+              '''  async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
+          async deleteObjects(relativePaths: string[]) { await Promise.all(relativePaths.map((relativePath) => fs.promises.rm(localPath(relativePath), { force: true }))); return relativePaths.length; }
+          async putBinary'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); await Promise.all(objects.map((object) => fs.promises.rm(localPath(object.key), { force: true }))); return objects.length; }''',
+              '''  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); return this.deleteObjects(objects.map((object) => object.key)); }'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''function decodeXml(value: string) { return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\\\"").replace(/&apos;/g, "'").replace(/&amp;/g, "&"); }''',
+              '''function decodeXml(value: string) { return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\\\"").replace(/&apos;/g, "'").replace(/&amp;/g, "&"); }
+          function encodeXml(value: string) { return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\\\"/g, "&quot;").replace(/'/g, "&apos;"); }'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  private async bucketRequest(params: Record<string, string>) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest("GET", url, undefined, {}, query); }''',
+              '''  private async bucketSignedRequest(method: string, params: Record<string, string>, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest(method, url, body, extraHeaders, query); }
+          private async bucketRequest(params: Record<string, string>) { return this.bucketSignedRequest("GET", params); }'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
+          async putBinary''',
+              '''  async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
+          async deleteObjects(relativePaths: string[]) {
+            const unique = [...new Set(relativePaths.map((relativePath) => normalizeStorageKey(relativePath)).filter(Boolean))];
+            if (!unique.length) return 0;
+            const batches: string[][] = [];
+            for (let index = 0; index < unique.length; index += 1_000) batches.push(unique.slice(index, index + 1_000));
+            const concurrency = Math.max(1, Math.min(12, Number(process.env.YC_OBJECT_STORAGE_DELETE_BATCH_CONCURRENCY || 4)));
+            let cursor = 0;
+            let deleted = 0;
+            await Promise.all(Array.from({ length: Math.min(concurrency, batches.length) }, async () => {
+              while (true) {
+                const index = cursor++;
+                if (index >= batches.length) return;
+                const batch = batches[index];
+                const objectsXml = batch.map((relativePath) => `<Object><Key>${encodeXml(this.key(relativePath))}</Key></Object>`).join("");
+                const body = `<?xml version="1.0" encoding="UTF-8"?><Delete xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Quiet>true</Quiet>${objectsXml}</Delete>`;
+                const response = await this.bucketSignedRequest("POST", { delete: "" }, body, {
+                  "content-type": "application/xml",
+                  "content-md5": crypto.createHash("md5").update(body).digest("base64"),
+                });
+                if (!response.ok) throw new Error(`object_storage_bulk_delete_${response.status}`);
+                const xml = await response.text();
+                const errors = [...xml.matchAll(/<Error>[\\s\\S]*?<Key>([\\s\\S]*?)<\\/Key>[\\s\\S]*?<Code>([\\s\\S]*?)<\\/Code>[\\s\\S]*?<Message>([\\s\\S]*?)<\\/Message>[\\s\\S]*?<\\/Error>/g)];
+                if (errors.length) {
+                  const [first] = errors;
+                  throw new Error(`object_storage_bulk_delete_error:${decodeXml(first[2])}:${decodeXml(first[1])}:${decodeXml(first[3])}`.slice(0, 600));
+                }
+                deleted += batch.length;
+              }
+            }));
+            return deleted;
+          }
+          async putBinary'''
+          )
+
+          replace(
+              "apps/web/lib/data.ts",
+              '''  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); const concurrency = Math.max(1, Math.min(16, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 8))); let cursor = 0; let deleted = 0; await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, objects.length)) }, async () => { while (true) { const index = cursor++; if (index >= objects.length) return; await this.deleteJson(objects[index].key); deleted++; } })); return deleted; }''',
+              '''  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); return this.deleteObjects(objects.map((object) => object.key)); }'''
+          )
+
+          replace(
+              "scripts/catalog-clean-object-storage.mjs",
+              '''if (!storage.listObjects || !storage.deletePrefix || !storage.deleteJson) {
+            throw new Error(`storage_cleanup_not_supported_${storage.driver}`);
+          }''',
+              '''if (!storage.listObjects || !storage.deleteObjects) {
+            throw new Error(`storage_cleanup_not_supported_${storage.driver}`);
+          }'''
+          )
+
+          replace(
+              "scripts/catalog-clean-object-storage.mjs",
+              '''  if (!DRY_RUN && !blocked) {
+            for (const generationId of candidateGenerations) {
+              try {
+                deletedGenerationObjects += await storage.deletePrefix(`catalog/generations/${generationId}`);
+              } catch (error) {
+                errors.push({ stage: "generation", generationId, error: String(error?.message || error) });
+              }
+            }
+            const internalResults = await mapWithConcurrency(internalDeleteObjects, DELETE_CONCURRENCY, async (object) => {
+              try { await storage.deleteJson(object.key); return 1; }
+              catch (error) { errors.push({ stage: "internal", key: object.key, error: String(error?.message || error) }); return 0; }
+            });
+            deletedInternalObjects = internalResults.reduce((sum, value) => sum + Number(value || 0), 0);
+            const imageResults = await mapWithConcurrency(imageDeleteObjects, DELETE_CONCURRENCY, async (object) => {
+              try { await storage.deleteJson(object.key); return 1; }
+              catch (error) { errors.push({ stage: "image", key: object.key, error: String(error?.message || error) }); return 0; }
+            });
+            deletedImages = imageResults.reduce((sum, value) => sum + Number(value || 0), 0);
+          }''',
+              '''  async function deleteGroup(objects, stage) {
+            if (!objects.length) return 0;
+            try {
+              return await storage.deleteObjects(objects.map((object) => String(object.key || "")).filter(Boolean));
+            } catch (error) {
+              errors.push({ stage, count: objects.length, error: String(error?.message || error) });
+              return 0;
+            }
+          }
+
+          if (!DRY_RUN && !blocked) {
+            deletedGenerationObjects = await deleteGroup(generationDeleteObjects, "generation");
+            deletedInternalObjects = await deleteGroup(internalDeleteObjects, "internal");
+            deletedImages = await deleteGroup(imageDeleteObjects, "image");
+          }'''
+          )
+
+          replace(
+              ".github/workflows/catalog-storage-cleanup.yml",
+              '''      CATALOG_STORAGE_CLEANUP_MAX_DELETES: "250000"
+                CATALOG_STORAGE_DELETE_CONCURRENCY: "16"''',
+              '''      CATALOG_STORAGE_CLEANUP_MAX_DELETES: ${{ github.event_name == 'push' && '1000000' || '250000' }}
+                CATALOG_STORAGE_DELETE_CONCURRENCY: "16"
+                YC_OBJECT_STORAGE_DELETE_BATCH_CONCURRENCY: "6"'''
+          )
+
+          test_file = Path("tests/catalog-production-hardening.test.ts")
+          test_text = test_file.read_text()
+          test_text = test_text.replace(
+              '''  assert.match(dataStorage, /deletePrefix\\?/);''',
+              '''  assert.match(dataStorage, /deletePrefix\\?/);
+            assert.match(dataStorage, /deleteObjects\\?/);''',
+              1,
+          )
+          test_text = test_text.replace(
+              '''  assert.match(cleanup, /storage\\.deletePrefix\\(`catalog\\/generations\\/\\$\\{generationId\\}`\\)/);''',
+              '''  assert.match(cleanup, /storage\\.deleteObjects/);
+            assert.match(dataStorage, /<Delete xmlns=/);
+            assert.match(dataStorage, /content-md5/);
+            assert.match(dataStorage, /YC_OBJECT_STORAGE_DELETE_BATCH_CONCURRENCY/);''',
+              1,
+          )
+          test_text = test_text.replace(
+              '''  assert.match(cleanupWorkflow, /github\\.event_name == 'push' && '0' \\|\\| '345600000'/);''',
+              '''  assert.match(cleanupWorkflow, /github\\.event_name == 'push' && '0' \\|\\| '345600000'/);
+            assert.match(cleanupWorkflow, /github\\.event_name == 'push' && '1000000' \\|\\| '250000'/);
+            assert.match(cleanupWorkflow, /YC_OBJECT_STORAGE_DELETE_BATCH_CONCURRENCY: "6"/);''',
+              1,
+          )
+          test_file.write_text(test_text)
+
+          Path(".github/workflows/apply-catalog-bulk-cleanup.yml").unlink()
+          PY
+      - name: Validate bulk cleanup
+        run: |
+          node --check scripts/catalog-clean-object-storage.mjs
+          node --import tsx --test tests/catalog-production-hardening.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit patch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: удалять переполненный Object Storage пакетами"
+          git push origin HEAD:fix/catalog-bulk-storage-cleanup
