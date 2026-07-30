@@ -217,3 +217,5 @@ jobs:
           git add -A
           git commit -m "Каталог: удалять переполненный Object Storage пакетами"
           git push origin HEAD:fix/catalog-bulk-storage-cleanup
+
+# retrigger: 2026-07-30
