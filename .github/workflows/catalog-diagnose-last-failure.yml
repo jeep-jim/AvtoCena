@@ -3,7 +3,7 @@ name: Diagnose last catalog failure
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Catalog source-scale daily"]
+    workflows: ["Catalog source-scale daily", "Catalog Object Storage cleanup"]
     types: [completed]
   push:
     branches: [main]
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   diagnose:
-    name: Inspect completed production run
+    name: Inspect completed catalog workflow
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -31,21 +31,28 @@ jobs:
             const repo = context.repo.repo;
             const issueNumber = Number(process.env.TELEMETRY_ISSUE);
             const marker = '<!-- catalog-last-failure -->';
-            const workflowId = 'catalog-production-recovery-v15.yml';
+            const workflowIds = [
+              'catalog-production-recovery-v15.yml',
+              'catalog-storage-cleanup.yml',
+            ];
 
             let run = context.payload.workflow_run;
-            if (!run || run.name !== 'Catalog source-scale daily') {
-              const { data: runs } = await github.rest.actions.listWorkflowRuns({
-                owner,
-                repo,
-                workflow_id: workflowId,
-                branch: 'main',
-                per_page: 30,
-              });
-              run = runs.workflow_runs[0];
+            if (!run || !['Catalog source-scale daily', 'Catalog Object Storage cleanup'].includes(run.name)) {
+              const candidates = [];
+              for (const workflowId of workflowIds) {
+                const { data } = await github.rest.actions.listWorkflowRuns({
+                  owner,
+                  repo,
+                  workflow_id: workflowId,
+                  branch: 'main',
+                  per_page: 10,
+                });
+                candidates.push(...data.workflow_runs.filter((item) => item.status === 'completed'));
+              }
+              run = candidates.sort((left, right) => Date.parse(right.run_started_at || right.created_at) - Date.parse(left.run_started_at || left.created_at))[0];
             }
             if (!run) {
-              core.notice('No Catalog source-scale daily run found.');
+              core.notice('No completed catalog workflow found.');
               return;
             }
 
@@ -63,8 +70,9 @@ jobs:
               if (response.data.jobs.length < 100) break;
             }
             const failedJobs = jobs.filter((job) => ['failure', 'timed_out', 'cancelled'].includes(String(job.conclusion || '')));
+            const jobsToInspect = failedJobs.length ? failedJobs : jobs.slice(-2);
             const logSections = [];
-            for (const job of failedJobs.slice(0, 8)) {
+            for (const job of jobsToInspect.slice(0, 8)) {
               let log = '';
               try {
                 const response = await github.request('GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs', {
@@ -82,25 +90,26 @@ jobs:
               const failedSteps = (job.steps || [])
                 .filter((step) => ['failure', 'timed_out', 'cancelled'].includes(String(step.conclusion || '')))
                 .map((step) => `${step.number}. ${step.name}: ${step.conclusion}`);
-              const important = log.split('\n').filter((line) => /##\[error\]|Error:|AssertionError|catalog_|object_storage_|failed|failure|timed out|exit code/i.test(line));
-              const tail = (important.length ? important : log.split('\n').slice(-120)).slice(-180).join('\n').slice(-16000);
+              const important = log.split('\n').filter((line) => /##\[error\]|Error:|AssertionError|catalog_|object_storage_|BucketMaxSizeExceeded|blocked|planned|deleted|failed|failure|timed out|exit code/i.test(line));
+              const tail = (important.length ? important : log.split('\n').slice(-140)).slice(-220).join('\n').slice(-20000);
               logSections.push(
                 `### ${job.name}\n` +
                 `job_id: \`${job.id}\` · conclusion: \`${job.conclusion}\`\n\n` +
-                `Failed steps:\n${failedSteps.length ? failedSteps.map((line) => `- ${line}`).join('\n') : '- не определены'}\n\n` +
+                `Failed steps:\n${failedSteps.length ? failedSteps.map((line) => `- ${line}`).join('\n') : '- нет'}\n\n` +
                 `<details><summary>Существенные строки лога</summary>\n\n\`\`\`text\n${tail}\n\`\`\`\n</details>`
               );
             }
 
             const status = run.conclusion === 'success' ? '✅ успешно' : `❌ ${run.conclusion || 'unknown'}`;
-            const body = `${marker}\n## Последний production-run каталога: ${status}\n\n` +
-              `- workflow run: [#${run.run_number}](${run.html_url})\n` +
+            const body = `${marker}\n## Последний catalog workflow: ${status}\n\n` +
+              `- workflow: **${run.name}**\n` +
+              `- run: [#${run.run_number}](${run.html_url})\n` +
               `- run_id: \`${run.id}\`\n` +
               `- commit: \`${run.head_sha}\`\n` +
               `- started: \`${run.run_started_at || run.created_at}\`\n` +
               `- conclusion: \`${run.conclusion}\`\n` +
               `- jobs: **${jobs.length}**, failed: **${failedJobs.length}**\n\n` +
-              (logSections.join('\n\n') || 'Упавших jobs нет.');
+              (logSections.join('\n\n') || 'Логи jobs не получены.');
 
             const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number: issueNumber, per_page: 100 });
             const previous = comments.find((comment) => comment.body?.includes(marker));
