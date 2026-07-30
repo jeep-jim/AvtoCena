@@ -47,12 +47,12 @@ jobs:
                   branch: 'main',
                   per_page: 10,
                 });
-                candidates.push(...data.workflow_runs.filter((item) => item.status === 'completed'));
+                candidates.push(...data.workflow_runs);
               }
               run = candidates.sort((left, right) => Date.parse(right.run_started_at || right.created_at) - Date.parse(left.run_started_at || left.created_at))[0];
             }
             if (!run) {
-              core.notice('No completed catalog workflow found.');
+              core.notice('No catalog workflow found.');
               return;
             }
 
@@ -94,19 +94,22 @@ jobs:
               const tail = (important.length ? important : log.split('\n').slice(-140)).slice(-220).join('\n').slice(-20000);
               logSections.push(
                 `### ${job.name}\n` +
-                `job_id: \`${job.id}\` · conclusion: \`${job.conclusion}\`\n\n` +
+                `job_id: \`${job.id}\` · status: \`${job.status}\` · conclusion: \`${job.conclusion}\`\n\n` +
                 `Failed steps:\n${failedSteps.length ? failedSteps.map((line) => `- ${line}`).join('\n') : '- нет'}\n\n` +
                 `<details><summary>Существенные строки лога</summary>\n\n\`\`\`text\n${tail}\n\`\`\`\n</details>`
               );
             }
 
-            const status = run.conclusion === 'success' ? '✅ успешно' : `❌ ${run.conclusion || 'unknown'}`;
+            const status = run.status !== 'completed'
+              ? `🟠 ${run.status}`
+              : run.conclusion === 'success' ? '✅ успешно' : `❌ ${run.conclusion || 'unknown'}`;
             const body = `${marker}\n## Последний catalog workflow: ${status}\n\n` +
               `- workflow: **${run.name}**\n` +
               `- run: [#${run.run_number}](${run.html_url})\n` +
               `- run_id: \`${run.id}\`\n` +
               `- commit: \`${run.head_sha}\`\n` +
               `- started: \`${run.run_started_at || run.created_at}\`\n` +
+              `- status: \`${run.status}\`\n` +
               `- conclusion: \`${run.conclusion}\`\n` +
               `- jobs: **${jobs.length}**, failed: **${failedJobs.length}**\n\n` +
               (logSections.join('\n\n') || 'Логи jobs не получены.');
