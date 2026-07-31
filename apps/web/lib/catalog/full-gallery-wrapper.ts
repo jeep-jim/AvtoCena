@@ -67,13 +67,16 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
     const minimum = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-    const fastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
+    const configuredFastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
+    const catalogV2FastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_V2_SOURCE_SLOTS_ONLY || ""));
+    const fastPath = configuredFastPath || catalogV2FastPath;
     const sourceNativeUrls = rawGalleryUrls(offer);
     const genericOpenSource = source.sourceId.endsWith("_open");
     const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
 
     // Сначала сохраняем только фотографии, уже находящиеся внутри конкретной карточки
-    // выдачи. Это даёт объём и не требует открывать detail-страницу для каждой машины.
+    // выдачи. Для Catalog V2 это основной путь: он не открывает detail-страницу, если
+    // карточка уже дала минимум одну проверенную фотографию именно этого автомобиля.
     const listingImages: CatalogImage[] = [];
     for (const url of sourceNativeUrls.slice(0, limit * 2)) {
       const image = await cacheImageFromUrl(url, offer.market, {
