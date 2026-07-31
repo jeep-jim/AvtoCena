@@ -40,10 +40,11 @@ jobs:
           fixed_lines = []
           for line in raw_lines:
               if line.strip().startswith("usd = '"):
-                  fixed_lines.append('usd = """    [/(?:USD|US\\\\$|\\\\$)\\\\s*([0-9][0-9 ,.\' ]{2,})/i, \\\"USD\\\"],"""'.replace(".\\' ", ".\\'"))
+                  fixed_lines.append('usd = "unused"')
               else:
                   fixed_lines.append(line)
           code = '\n'.join(fixed_lines)
+
           block_start = code.index("old_normalize = '''")
           block_end = code.index("\nenriched = Path", block_start)
           normalize_patch = '''normalize_line = '      market: this.market, offerType: "fixed", status: "active", make: row.make, model: row.model,'
@@ -53,6 +54,28 @@ jobs:
           auto.write_text(text.replace(normalize_line, normalize_replacement, 1))
           '''
           code = code[:block_start] + normalize_patch + code[block_end:]
+
+          open_start = code.index('# 3. Kyrgyz public prices and current source routes.')
+          open_end = code.index('scale = Path("apps/web/lib/catalog/scale-market-sources.ts")', open_start)
+          open_patch = '''# 3. Kyrgyz public prices and current source routes.
+          open_file = Path("apps/web/lib/catalog/open-market-sources.ts")
+          text = open_file.read_text()
+          lines = text.splitlines()
+          insert_at = next((index + 1 for index, line in enumerate(lines) if '"USD"],' in line and 'US\\\\$' in line), -1)
+          if insert_at < 0:
+              raise SystemExit("open_market_usd_pattern_not_found")
+          additions = [
+              '    [/(?:KGS|сом|Som)\\\\s*([0-9][0-9 ,.\\\']{2,})/i, "KGS"],',
+              '    [/(?:GEL|₾)\\\\s*([0-9][0-9 ,.\\\']{2,})/i, "GEL"],',
+              '    [/([0-9][0-9 ,.\\\']{2,})\\\\s*(?:KGS|сом|Som)/i, "KGS"],',
+              '    [/([0-9][0-9 ,.\\\']{2,})\\\\s*(?:GEL|₾)/i, "GEL"],',
+          ]
+          if not any('KGS|сом|Som' in line for line in lines):
+              lines[insert_at:insert_at] = additions
+          open_file.write_text('\\n'.join(lines) + ('\\n' if text.endswith('\\n') else ''))
+
+          '''
+          code = code[:open_start] + open_patch + code[open_end:]
           exec(compile(code, 'apply-regional-catalog-fixes.py', 'exec'))
           RUNNER
       - name: Report patch result
@@ -84,4 +107,4 @@ jobs:
           git commit -m "Каталог: исправить региональный объём, цену и соответствие фото"
           git push origin HEAD:fix/catalog-regional-volume-price-identity
 
-# AUTO.GE patch correction triggers this one-shot workflow
+# currency patch correction triggers this one-shot workflow
