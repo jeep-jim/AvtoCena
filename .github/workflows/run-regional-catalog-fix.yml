@@ -49,3 +49,5 @@ jobs:
           git add -A
           git commit -m "Каталог: исправить региональный объём, цену и соответствие фото"
           git push origin HEAD:fix/catalog-regional-volume-price-identity
+
+# second push intentionally triggers this one-shot workflow
