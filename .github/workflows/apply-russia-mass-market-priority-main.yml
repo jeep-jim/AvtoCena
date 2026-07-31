@@ -1,0 +1,58 @@
+name: Prepare Russia mass-market catalog patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/apply-russia-mass-market-priority-main.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Create patch branch and apply reviewed transformations
+        shell: bash
+        run: |
+          git checkout -b fix/catalog-russia-mass-market-priority-applied
+          python <<'BOOT'
+          from pathlib import Path
+          import textwrap
+          workflow = Path('.github/workflows/apply-russia-mass-market-priority.yml').read_text()
+          marker = "python <<'PY'\n"
+          if marker not in workflow or "\n          PY\n" not in workflow:
+              raise SystemExit('embedded_patch_not_found')
+          source = workflow.split(marker, 1)[1].split("\n          PY\n", 1)[0]
+          exec(compile(textwrap.dedent(source), 'mass-market-patch', 'exec'))
+          Path('.github/workflows/apply-russia-mass-market-priority-main.yml').unlink()
+          BOOT
+      - name: Validate priority, prices, knowledge and full build
+        run: |
+          node --check scripts/catalog-rebuild-source-shard.mjs
+          node --check scripts/catalog-publish-source-scale.mjs
+          node --check scripts/catalog-sync-vehicle-models.mjs
+          node --import tsx --test tests/catalog-source-scale.test.ts tests/vehicle-knowledge.test.ts tests/russia-customs.test.ts tests/catalog-calculation-integrity.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          npm --workspace=@avtocena/engine exec tsc -- --noEmit
+          npm run build
+      - name: Push tested patch branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: приоритизировать массовые авто для рынка РФ"
+          git push origin HEAD:fix/catalog-russia-mass-market-priority-applied
