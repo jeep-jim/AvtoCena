@@ -1,0 +1,195 @@
+name: Apply Catalog V2 encyclopedia
+
+on:
+  push:
+    branches: [feat/catalog-v2-encyclopedia]
+    paths:
+      - .github/workflows/apply-catalog-v2-encyclopedia.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-v2-encyclopedia
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch encyclopedia matching and enrichment
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/web/lib/catalog/vehicle-knowledge.ts')
+          text = path.read_text()
+
+          def replace(old, new):
+              global text
+              if old not in text:
+                  raise SystemExit(f'snippet_not_found:{old[:120]!r}')
+              text = text.replace(old, new, 1)
+
+          replace('  powerHp: number;\n', '  powerHp?: number;\n')
+
+          old = '''function splitAliases(value: unknown) {
+            if (Array.isArray(value)) return unique(value);
+            return unique(String(value || "").split(/[|;,]/));
+          }
+          '''
+          new = '''function splitAliases(value: unknown) {
+            if (Array.isArray(value)) return unique(value);
+            return unique(String(value || "").split(/[|;,]/));
+          }
+
+          function hasUsefulVariantData(row: Partial<VehicleKnowledgeVariant>) {
+            return Boolean(
+              text(row.generation)
+              || positive(row.engineCc, 10_000)
+              || text(row.fuel)
+              || text(row.transmission)
+              || text(row.drive)
+              || text(row.bodyType)
+              || text(row.powertrainKind)
+              || positive(row.powerHp, 2_500)
+              || positive(row.powerKw, 2_000)
+              || positive(row.icePowerKw, 2_000)
+              || positive(row.power30MinKw, 2_000)
+              || positive(row.utilizationPowerKw, 4_000)
+              || (Array.isArray(row.power30MinKwByMotor) && row.power30MinKwByMotor.some((value) => positive(value, 2_000)))
+            );
+          }
+          '''
+          replace(old, new)
+
+          replace(
+            '      .then((rows) => rows.filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));',
+            '      .then((rows) => rows.filter((row) => row && row.id && row.modelId && hasUsefulVariantData(row)));'
+          )
+
+          old = '''  if (variant.drive && offer.drive) {
+            if (vehicleKnowledgeCompact(variant.drive) !== vehicleKnowledgeCompact(offer.drive)) return -1;
+            score += 5;
+          }
+          '''
+          new = '''  if (variant.drive && offer.drive) {
+            if (vehicleKnowledgeCompact(variant.drive) !== vehicleKnowledgeCompact(offer.drive)) return -1;
+            score += 5;
+          }
+          if (variant.bodyType && offer.bodyType) {
+            if (vehicleKnowledgeCompact(variant.bodyType) !== vehicleKnowledgeCompact(offer.bodyType)) return -1;
+            score += 5;
+          }
+          '''
+          replace(old, new)
+
+          old = '''  const powers = new Set(equal.map((entry) => Math.round(entry.variant.powerHp * 10) / 10));
+            return powers.size === 1 ? best.variant : null;'''
+          new = '''  const signatures = new Set(equal.map((entry) => [
+              vehicleKnowledgeCompact(entry.variant.generation),
+              Number(entry.variant.engineCc || 0),
+              vehicleKnowledgeCompact(entry.variant.fuel),
+              vehicleKnowledgeCompact(entry.variant.transmission),
+              vehicleKnowledgeCompact(entry.variant.drive),
+              vehicleKnowledgeCompact(entry.variant.bodyType),
+              Math.round(Number(entry.variant.powerHp || 0) * 10) / 10,
+              Math.round(Number(entry.variant.power30MinKw || 0) * 100) / 100,
+            ].join("|")));
+            return signatures.size === 1 ? best.variant : null;'''
+          replace(old, new)
+
+          old = '''  const canonical = {
+              ...input,
+              make: model.make,
+              model: model.model,
+              bodyType: input.bodyType || model.bodyTypes?.[0],
+            } as T;'''
+          new = '''  const modelBodyTypes = unique(model.bodyTypes || []);
+            const inputBody = vehicleKnowledgeCompact(input.bodyType);
+            const bodyCompatible = !inputBody
+              || !modelBodyTypes.length
+              || modelBodyTypes.some((bodyType) => vehicleKnowledgeCompact(bodyType) === inputBody);
+            const canonical = {
+              ...input,
+              make: model.make,
+              model: model.model,
+              bodyType: bodyCompatible ? input.bodyType : undefined,
+            } as T;'''
+          replace(old, new)
+
+          replace(
+            '  const usedRepresentative = !positive(canonical.powerHp, 2_500) && !variant && Boolean(representativePowerHp);',
+            '  const usedRepresentative = !positive(canonical.powerHp, 2_500) && !positive(variant?.powerHp, 2_500) && Boolean(representativePowerHp);'
+          )
+          replace(
+            '    : variant\n      ? "reference"',
+            '    : positive(variant?.powerHp, 2_500)\n      ? "reference"'
+          )
+          replace(
+            '    bodyType: canonical.bodyType || variant?.bodyType,',
+            '    bodyType: variant?.bodyType || canonical.bodyType || (modelBodyTypes.length === 1 ? modelBodyTypes[0] : undefined),'
+          )
+          replace(
+            '    powerDataSource: canonical.powerDataSource || (variant ? `vehicle-knowledge:${variant.id}` : usedRepresentative ? `vehicle-model-representative:${model.id}` : undefined),',
+            '    powerDataSource: canonical.powerDataSource || (positive(variant?.powerHp, 2_500) ? `vehicle-knowledge:${variant.id}` : usedRepresentative ? `vehicle-model-representative:${model.id}` : undefined),'
+          )
+
+          path.write_text(text)
+          PY
+      - name: Add encyclopedia regression tests
+        shell: bash
+        run: |
+          cat > tests/catalog-v2-encyclopedia.test.ts <<'EOF'
+          import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+
+          const knowledge = fs.readFileSync(new URL("../apps/web/lib/catalog/vehicle-knowledge.ts", import.meta.url), "utf8");
+          const builder = fs.readFileSync(new URL("../scripts/catalog-build-vehicle-variants.mjs", import.meta.url), "utf8");
+
+          test("энциклопедия хранит модификации с кузовом и приводом даже без мощности", () => {
+            assert.match(knowledge, /powerHp\?: number/);
+            assert.match(knowledge, /hasUsefulVariantData/);
+            assert.match(knowledge, /text\(row\.bodyType\)/);
+            assert.match(knowledge, /text\(row\.drive\)/);
+            assert.doesNotMatch(knowledge, /row\.modelId && positive\(row\.powerHp/);
+          });
+
+          test("неверный кузов источника не имеет приоритета над точной модификацией", () => {
+            assert.match(knowledge, /bodyCompatible/);
+            assert.match(knowledge, /variant\?\.bodyType \|\| canonical\.bodyType/);
+            assert.match(knowledge, /variant\.bodyType && offer\.bodyType/);
+          });
+
+          test("builder использует свежие V2 artifacts и сохраняет spec-only variants", () => {
+            assert.match(builder, /CATALOG_VARIANT_INPUT_DIR/);
+            assert.match(builder, /collectedOffers/);
+            assert.match(builder, /generatedSpecOnlyVariants/);
+            assert.match(builder, /variantsWithCoreSpecs/);
+            assert.match(builder, /RECENT_YEAR/);
+            assert.doesNotMatch(builder, /if \(!powerHp\) continue/);
+          });
+          EOF
+      - name: Validate encyclopedia changes
+        run: |
+          node --check scripts/catalog-build-vehicle-variants.mjs
+          node --import tsx --test tests/catalog-v2-encyclopedia.test.ts tests/vehicle-knowledge.test.ts tests/catalog-v2-policy.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit encyclopedia changes
+        shell: bash
+        run: |
+          rm .github/workflows/apply-catalog-v2-encyclopedia.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/vehicle-knowledge.ts scripts/catalog-build-vehicle-variants.mjs tests/catalog-v2-encyclopedia.test.ts .github/workflows/apply-catalog-v2-encyclopedia.yml
+          git commit -m "Catalog V2: расширить энциклопедию модификаций"
+          git push origin HEAD:feat/catalog-v2-encyclopedia
