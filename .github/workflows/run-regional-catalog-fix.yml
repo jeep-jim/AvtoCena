@@ -44,6 +44,15 @@ jobs:
               else:
                   fixed_lines.append(line)
           code = '\n'.join(fixed_lines)
+          block_start = code.index("old_normalize = '''")
+          block_end = code.index("\nenriched = Path", block_start)
+          normalize_patch = '''normalize_line = '      market: this.market, offerType: "fixed", status: "active", make: row.make, model: row.model,'
+          normalize_replacement = '      market: this.market, offerType: "fixed", status: "active", make: (autoGeorgiaIdentityFromUrl(row.detailUrl).make || row.make), model: (autoGeorgiaIdentityFromUrl(row.detailUrl).model || row.model),'
+          if normalize_line not in text:
+              raise SystemExit("auto_georgia_normalize_line_not_found")
+          auto.write_text(text.replace(normalize_line, normalize_replacement, 1))
+          '''
+          code = code[:block_start] + normalize_patch + code[block_end:]
           exec(compile(code, 'apply-regional-catalog-fixes.py', 'exec'))
           RUNNER
       - name: Report patch result
@@ -75,4 +84,4 @@ jobs:
           git commit -m "Каталог: исправить региональный объём, цену и соответствие фото"
           git push origin HEAD:fix/catalog-regional-volume-price-identity
 
-# corrected diagnostic push triggers this one-shot workflow
+# AUTO.GE patch correction triggers this one-shot workflow
