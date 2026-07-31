@@ -24,7 +24,7 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
   japan: [
     { sourceId: "goonet_japan_exact", label: "Goonet", role: "primary" },
     { sourceId: "tcv_japan_open", label: "TCV", role: "primary" },
-    { sourceId: "beforward_japan_public", label: "BE FORWARD", role: "secondary" },
+    { sourceId: "beforward_public", label: "BE FORWARD", role: "secondary" },
     { sourceId: "carused_japan_open", label: "Carused", role: "secondary" },
     { sourceId: "jpauc_japan_past_open", label: "JPAuc completed lots", role: "auction_history" },
     { sourceId: "carvector_japan_stat_open", label: "CarVector auction statistics", role: "auction_history" },
@@ -34,7 +34,7 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
     { sourceId: "dubizzle_uae_open", label: "Dubizzle", role: "primary" },
     { sourceId: "carswitch_uae_open", label: "CarSwitch", role: "secondary" },
     { sourceId: "yallamotor_uae_open", label: "YallaMotor", role: "secondary" },
-    { sourceId: "beforward_uae_public", label: "BE FORWARD UAE", role: "secondary" },
+    { sourceId: "beforward_public", label: "BE FORWARD UAE", role: "secondary" },
   ],
   europe: [
     { sourceId: "mobile_europe_exact", label: "mobile.de", role: "primary" },
