@@ -3,7 +3,9 @@ import fs from "node:fs/promises";
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { classifyCatalogV2Offer } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
+const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
@@ -31,6 +33,9 @@ const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_P
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;
+const ignoreProbe = process.env.CATALOG_REBUILD_IGNORE_PROBE === "1";
+const resetCursor = process.env.CATALOG_REBUILD_RESET_CURSOR === "1";
+const v2SourceSlotsOnly = process.env.CATALOG_V2_SOURCE_SLOTS_ONLY === "1";
 const startedAt = Date.now();
 const deadline = startedAt + timeLimitMs;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|dutro|forward|giga|elf|profia)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -59,8 +64,7 @@ function images(list) {
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
 function isMassMarketPriority(offer) {
-  const priority = catalogPublicPriority(offer);
-  return priority.eligible && priority.tier <= 4;
+  return classifyCatalogV2Offer(offer).tier === "priority";
 }
 function quality(a, b) {
   return compareCatalogPublicPriority(a, b)
@@ -82,12 +86,15 @@ const registered = catalogImportSources
   .filter((source) => source.market === market || source.market === "multi")
   .map((source) => source.sourceId)
   .filter((sourceId) => adapters.has(sourceId));
-const configured = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "")
-  .split(",")
-  .map((value) => value.trim())
+const requestedSources = v2SourceSlotsOnly
+  ? catalogV2SourceIds(market)
+  : String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim());
+const configured = requestedSources
   .filter((value) => value && !value.startsWith("__") && adapters.has(value));
-const retentionSourceIds = [...new Set(registered)].filter((id) => shardOf(id) === shardIndex).sort();
-const liveSourceIds = [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));
+const retentionSourceIds = [...new Set(v2SourceSlotsOnly ? configured : registered)].filter((id) => shardOf(id) === shardIndex).sort();
+const liveSourceIds = ignoreProbe
+  ? [...retentionSourceIds]
+  : [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));
 const sourceIds = retentionSourceIds;
 const retained = new Map(sourceIds.map((id) => [id, new Map()]));
 const fresh = new Map(sourceIds.map((id) => [id, new Map()]));
@@ -117,8 +124,8 @@ function reserveDetail(sourceId) {
 function mergedRows() {
   const output = [];
   for (const sourceId of sourceIds) {
-    const live = [...fresh.get(sourceId).values()].filter((offer) => catalogPublicPriority(offer).eligible).sort(quality);
-    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && catalogPublicPriority(offer).eligible).sort(quality);
+    const live = [...fresh.get(sourceId).values()].filter((offer) => classifyCatalogV2Offer(offer).eligible).sort(quality);
+    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && classifyCatalogV2Offer(offer).eligible).sort(quality);
     output.push(...[...live, ...old].sort(quality).slice(0, targetPerSource));
   }
   return output.sort(quality);
@@ -265,7 +272,8 @@ const storage = getJsonStorage();
 const states = await pool(liveSourceIds, sourceConcurrency, async (sourceId) => {
   let saved = { cursor: null, cycle: 0, pagesVisited: 0 };
   try { saved = await storage.readJson(cursorPath(sourceId), saved); } catch (error) { addError({ sourceId, stage: "cursor_read", error: String(error?.message || error) }); }
-  return { sourceId, source: adapters.get(sourceId), cursor: saved.cursor || null, initialCursor: saved.cursor || null,
+  const initialCursor = resetCursor ? null : saved.cursor || null;
+  return { sourceId, source: adapters.get(sourceId), cursor: initialCursor, initialCursor,
     cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };
 });
 const pagePrepareConcurrency = Math.max(1, Math.floor(prepareConcurrency / Math.max(1, Math.min(sourceConcurrency, liveSourceIds.length || 1))));
@@ -297,7 +305,7 @@ async function fetchOne(state) {
     batch.add(base.id); bases.push(base); normalized++;
     if (bases.length >= targetPerSource - bucket.size) break;
   }
-  bases.sort((left, right) => businessPriority(right) - businessPriority(left) || currentTime(right) - currentTime(left));
+  bases.sort(quality);
   const before = bucket.size;
   for (const offer of await pool(bases, pagePrepareConcurrency, (base) => prepare(base, state.source))) {
     if (offer && bucket.size < targetPerSource) bucket.set(offer.id, offer);
