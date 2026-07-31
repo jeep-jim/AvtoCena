@@ -21,7 +21,7 @@ jobs:
           TELEMETRY_ISSUE: "155"
         with:
           script: |
-            // Read the latest wrapper run after the synchronized test update.
+            // Read the latest wrapper run after the final synchronized price test.
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const issue_number = Number(process.env.TELEMETRY_ISSUE);
