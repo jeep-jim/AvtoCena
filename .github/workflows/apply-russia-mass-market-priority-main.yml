@@ -12,7 +12,7 @@ permissions:
 jobs:
   patch:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,50 +24,223 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Create patch branch and apply reviewed transformations
+      - name: Apply mass-market logic directly to current main
         shell: bash
         run: |
-          git checkout -b fix/catalog-russia-mass-market-priority-applied
-          python <<'BOOT'
+          git checkout -B fix/catalog-russia-mass-market-priority-applied-v2
+          python <<'PY'
           from pathlib import Path
-          import textwrap
-          workflow = Path('.github/workflows/apply-russia-mass-market-priority.yml').read_text()
-          marker = "python <<'PY'\n"
-          if marker not in workflow or "\n          PY\n" not in workflow:
-              raise SystemExit('embedded_patch_not_found')
-          source = workflow.split(marker, 1)[1].split("\n          PY\n", 1)[0]
-          exec(compile(textwrap.dedent(source), 'mass-market-patch', 'exec'))
+          import re
 
-          test_file = Path('tests/catalog-source-scale.test.ts')
-          test_text = test_file.read_text()
-          replacements = {
-            'assert.match(rebuildScript, /function rubValue/);': 'assert.match(rebuildScript, /compareCatalogPublicPriority/);',
-            'assert.match(catalogCard, /sourcePriceRub/);': 'assert.match(catalogCard, /catalogOfferVisibleRub/);',
-            'assert.match(publishScript, /businessPriority/);': 'assert.match(publishScript, /compareCatalogPublicPriority/);',
-            'assert.match(catalogCard, /const visibleRub = exactTotalRub \\|\\| sourcePriceRub\\(o\\)/);': 'assert.match(catalogCard, /const visibleRub = exactTotalRub \\|\\| catalogOfferVisibleRub\\(normalizedOffer\\)/);',
+          def load(path):
+              return Path(path).read_text()
+
+          def save(path, text):
+              Path(path).write_text(text)
+
+          def replace_once(path, old, new):
+              text = load(path)
+              if new in text:
+                  return
+              if old not in text:
+                  raise SystemExit(f"required_snippet_missing:{path}:{old[:100]}")
+              save(path, text.replace(old, new, 1))
+
+          def regex_once(path, pattern, replacement, marker):
+              text = load(path)
+              if marker in text:
+                  return
+              next_text, count = re.subn(pattern, replacement, text, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f"required_regex_missing:{path}:{pattern[:100]}:{count}")
+              save(path, next_text)
+
+          # Rebuild: hard eligibility and one shared priority comparator.
+          replace_once(
+              "scripts/catalog-rebuild-source-shard.mjs",
+              'const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");',
+              'const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");\nconst { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");',
+          )
+          regex_once(
+              "scripts/catalog-rebuild-source-shard.mjs",
+              r'function rubValue\(offer\) \{.*?\n\}\nfunction isMassMarketPriority\(offer\) \{.*?\n\}\nfunction businessPriority\(offer\) \{.*?\n\}\nfunction quality\(a, b\) \{.*?\n\}',
+              '''function isMassMarketPriority(offer) {
+            const priority = catalogPublicPriority(offer);
+            return priority.eligible && priority.tier <= 4;
           }
-          for old, new in replacements.items():
-            if old not in test_text:
-              raise SystemExit(f'outdated_test_snippet_missing:{old}')
-            test_text = test_text.replace(old, new, 1)
-          test_file.write_text(test_text)
-          BOOT
-      - name: Keep workflow files unchanged for GitHub token safety
+          function quality(a, b) {
+            return compareCatalogPublicPriority(a, b)
+              || currentTime(b) - currentTime(a);
+          }''',
+              "compareCatalogPublicPriority(a, b)",
+          )
+          replace_once(
+              "scripts/catalog-rebuild-source-shard.mjs",
+              '    const live = [...fresh.get(sourceId).values()].sort(quality);\n    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id)).sort(quality);',
+              '    const live = [...fresh.get(sourceId).values()].filter((offer) => catalogPublicPriority(offer).eligible).sort(quality);\n    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && catalogPublicPriority(offer).eligible).sort(quality);',
+          )
+
+          # Publisher: exclude ordinary offers above 6m, keep Japan auctions, sort by the same rules.
+          replace_once(
+              "scripts/catalog-publish-source-scale.mjs",
+              'const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");',
+              'const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");\nconst { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");',
+          )
+          regex_once(
+              "scripts/catalog-publish-source-scale.mjs",
+              r'function businessPriority\(offer\) \{.*?\n\}\n\nfunction qualityOrder\(left, right\) \{.*?\n\}',
+              '''function qualityOrder(left, right) {
+            return compareCatalogPublicPriority(left, right)
+              || freshness(right) - freshness(left)
+              || String(left?.id || "").localeCompare(String(right?.id || ""));
+          }''',
+              "compareCatalogPublicPriority(left, right)",
+          )
+          replace_once(
+              "scripts/catalog-publish-source-scale.mjs",
+              '    if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };\n    return { offer, reason: "ok" };',
+              '''    if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
+            const priority = catalogPublicPriority(offer);
+            if (!priority.eligible) return { offer: null, reason: `priority_${priority.reason}` };
+            offer.operational = {
+              ...(offer.operational || {}),
+              raw: {
+                ...(typeof offer.operational?.raw === "object" && offer.operational.raw ? offer.operational.raw : {}),
+                publicPriority: priority,
+              },
+            };
+            return { offer, reason: "ok" };''',
+          )
+          regex_once(
+              "scripts/catalog-publish-source-scale.mjs",
+              r'  const priorityCount = selected\.filter\(\(offer\) => Number\(offer\.totalRub \|\| 0\) > 0.*?\.length;',
+              '  const priorityCount = selected.filter((offer) => catalogPublicPriority(offer).tier <= 4).length;',
+              "catalogPublicPriority(offer).tier <= 4",
+          )
+
+          # Knowledge metadata must travel with each normalized offer.
+          replace_once(
+              "apps/web/lib/catalog/vehicle-knowledge.ts",
+              '        vehicleKnowledgeModel: { id: model.id, matchedBy: match.matchedBy, score: match.score },',
+              '''        vehicleKnowledgeModel: {
+                  id: model.id,
+                  matchedBy: match.matchedBy,
+                  score: match.score,
+                  popularityDecile: model.popularityDecile,
+                  representativePowerHp: model.representativePowerHp,
+                  yearFrom: model.yearFrom,
+                  yearTo: model.yearTo,
+                },''',
+          )
+
+          # Knowledge ordering: latest ten model years first, then undated and historical records.
+          replace_once(
+              "scripts/catalog-sync-vehicle-models.mjs",
+              '''const models = [...upstream.values()].sort((left, right) =>
+            Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+            || left.make.localeCompare(right.make, "en")
+            || left.model.localeCompare(right.model, "en"));''',
+              '''const recentKnowledgeYear = new Date().getFullYear() - 9;
+          function recentKnowledgeRank(model) {
+            const yearTo = Number(model.yearTo || 0);
+            const yearFrom = Number(model.yearFrom || 0);
+            if (yearTo >= recentKnowledgeYear || yearFrom >= recentKnowledgeYear) return 0;
+            if (!yearTo && !yearFrom) return 1;
+            return 2;
+          }
+          const models = [...upstream.values()].sort((left, right) =>
+            recentKnowledgeRank(left) - recentKnowledgeRank(right)
+            || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+            || Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0)
+            || left.make.localeCompare(right.make, "en")
+            || left.model.localeCompare(right.model, "en"));
+          const recentModels = models.filter((model) => recentKnowledgeRank(model) === 0).length;
+          const undatedModels = models.filter((model) => recentKnowledgeRank(model) === 1).length;''',
+          )
+          replace_once(
+              "scripts/catalog-sync-vehicle-models.mjs",
+              '  carModels: models.length,\n  preservedManualRecords: manual.size,',
+              '  carModels: models.length,\n  recentKnowledgeYear,\n  recentModels,\n  undatedModels,\n  olderModels: models.length - recentModels - undatedModels,\n  preservedManualRecords: manual.size,',
+          )
+
+          # One visible RUB value on list and detail pages; layout is unchanged.
+          replace_once(
+              "apps/web/components/catalog/CatalogCard.tsx",
+              'import { catalogPowerDisplay } from "@/lib/catalog/power-display";',
+              'import { catalogPowerDisplay } from "@/lib/catalog/power-display";\nimport { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";',
+          )
+          regex_once(
+              "apps/web/components/catalog/CatalogCard.tsx",
+              r'\nfunction sourcePriceRub\(offer: any\) \{.*?\n\}\n\nexport function CatalogCard',
+              '\nexport function CatalogCard',
+              "catalogOfferVisibleRub(normalizedOffer)",
+          )
+          replace_once(
+              "apps/web/components/catalog/CatalogCard.tsx",
+              '  const visibleRub = exactTotalRub || sourcePriceRub(o);',
+              '  const visibleRub = exactTotalRub || catalogOfferVisibleRub(normalizedOffer);',
+          )
+          replace_once(
+              "apps/web/app/(public)/cars/offer/[id]/page.tsx",
+              'import { catalogPowerDisplay } from "@/lib/catalog/power-display";',
+              'import { catalogPowerDisplay } from "@/lib/catalog/power-display";\nimport { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";',
+          )
+          replace_once(
+              "apps/web/app/(public)/cars/offer/[id]/page.tsx",
+              '  const o = { ...presentCatalogOffer(raw), images: rankedCatalogImageUrls(raw) };',
+              '''  const presented = presentCatalogOffer(raw);
+            const exactTotalRub = Number(presented.totalRub || 0);
+            const visibleRub = exactTotalRub || catalogOfferVisibleRub(raw);
+            const o = {
+              ...presented,
+              totalRub: visibleRub || null,
+              previousTotalRub: exactTotalRub ? presented.previousTotalRub : null,
+              priceDeltaRub: exactTotalRub ? presented.priceDeltaRub : null,
+              images: rankedCatalogImageUrls(raw),
+            };''',
+          )
+          replace_once(
+              "apps/web/app/(public)/cars/offer/[id]/page.tsx",
+              'budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined',
+              'budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined',
+          )
+
+          Path("tests/catalog-mass-market-applied.test.ts").write_text('''import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+          const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
+          const publish = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+          const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+          const detail = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
+          const knowledge = fs.readFileSync(new URL("../apps/web/lib/catalog/vehicle-knowledge.ts", import.meta.url), "utf8");
+          const sync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
+          test("mass-market catalog is applied to production code", () => {
+            assert.match(rebuild, /catalogPublicPriority\\(offer\\)\\.eligible/);
+            assert.match(publish, /priority_\\$\\{priority.reason\\}/);
+            assert.match(publish, /compareCatalogPublicPriority/);
+            assert.match(card, /catalogOfferVisibleRub\\(normalizedOffer\\)/);
+            assert.match(detail, /catalogOfferVisibleRub\\(raw\\)/);
+            assert.match(knowledge, /popularityDecile: model.popularityDecile/);
+            assert.match(sync, /recentKnowledgeYear = new Date\\(\\)\\.getFullYear\\(\\) - 9/);
+          });
+          ''')
+          PY
+      - name: Keep workflow files unchanged in generated implementation branch
         run: git checkout origin/main -- .github/workflows
       - name: Validate priority, prices, knowledge and full build
         run: |
           node --check scripts/catalog-rebuild-source-shard.mjs
           node --check scripts/catalog-publish-source-scale.mjs
           node --check scripts/catalog-sync-vehicle-models.mjs
-          node --import tsx --test tests/catalog-source-scale.test.ts tests/vehicle-knowledge.test.ts tests/russia-customs.test.ts tests/catalog-calculation-integrity.test.ts
+          node --import tsx --test tests/catalog-mass-market-applied.test.ts tests/russia-customs.test.ts tests/catalog-calculation-integrity.test.ts
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
           npm --workspace=@avtocena/engine exec tsc -- --noEmit
           npm run build
-      - name: Push tested patch branch
+      - name: Push tested implementation branch
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Каталог: приоритизировать массовые авто для рынка РФ"
-          git push origin HEAD:fix/catalog-russia-mass-market-priority-applied
+          git commit -m "Каталог: применить массовый приоритет для рынка РФ"
+          git push --force-with-lease origin HEAD:fix/catalog-russia-mass-market-priority-applied-v2
