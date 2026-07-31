@@ -9,6 +9,7 @@ import {
   assertCatalogV2SourceRegistry,
   CATALOG_V2_SOURCE_SLOTS,
 } from "../apps/web/lib/catalog/catalog-v2-source-registry";
+import { catalogImportSources } from "../apps/web/lib/catalog/importer";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
 function offer(id: string, overrides: Partial<VehicleOffer> = {}): VehicleOffer {
@@ -52,6 +53,17 @@ test("каждый рынок Catalog V2 имеет минимум пять не
   assert.equal(Object.keys(CATALOG_V2_SOURCE_SLOTS).length, 7);
   for (const sources of Object.values(CATALOG_V2_SOURCE_SLOTS)) {
     assert.ok(new Set(sources.map((source) => source.sourceId)).size >= 5);
+  }
+});
+
+test("каждый source slot Catalog V2 соответствует реально зарегистрированному адаптеру", () => {
+  const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
+  for (const [market, slots] of Object.entries(CATALOG_V2_SOURCE_SLOTS)) {
+    for (const slot of slots) {
+      const adapter = adapters.get(slot.sourceId);
+      assert.ok(adapter, `${market}: adapter ${slot.sourceId} is not registered`);
+      assert.ok(adapter.market === market || adapter.market === "multi", `${slot.sourceId}: expected ${market}, got ${adapter.market}`);
+    }
   }
 });
 
