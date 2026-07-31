@@ -93,8 +93,8 @@ test("converts source prices to rubles before power and utilization checks", () 
 });
 
 test("catalog cards preserve the compact layout and never render source currency", () => {
-  assert.match(catalogCard, /function sourcePriceRub/);
-  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
+  assert.match(catalogCard, /catalogOfferVisibleRub/);
+  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
   assert.match(catalogCard, /\`\$\{yearLabel\} · ориентир\`/);
