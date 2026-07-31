@@ -45,6 +45,7 @@ jobs:
             'assert.match(rebuildScript, /function rubValue/);': 'assert.match(rebuildScript, /compareCatalogPublicPriority/);',
             'assert.match(catalogCard, /sourcePriceRub/);': 'assert.match(catalogCard, /catalogOfferVisibleRub/);',
             'assert.match(publishScript, /businessPriority/);': 'assert.match(publishScript, /compareCatalogPublicPriority/);',
+            'assert.match(catalogCard, /const visibleRub = exactTotalRub \\|\\| sourcePriceRub\\(o\\)/);': 'assert.match(catalogCard, /const visibleRub = exactTotalRub \\|\\| catalogOfferVisibleRub\\(normalizedOffer\\)/);',
           }
           for old, new in replacements.items():
             if old not in test_text:
