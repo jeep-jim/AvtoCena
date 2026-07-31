@@ -5,7 +5,8 @@ import path from "node:path";
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const {
   CATALOG_CHUNK_SIZE,
@@ -29,6 +30,15 @@ const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORIT
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
+const v2Policy = {
+  priorityTarget: Math.max(1, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
+  maximumPerMarket,
+  priorityMaxAgeYears,
+  recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
+  priorityMaxPowerHp,
+  priorityMaxTotalRub,
+  hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
+};
 const generationKeepCount = Math.max(2, Number(process.env.CATALOG_GENERATION_KEEP_COUNT || 2));
 const generationCleanupGraceMs = Math.max(retentionMs, Number(process.env.CATALOG_GENERATION_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
 const generationHistoryPath = "catalog/generation-history.json";
@@ -294,8 +304,8 @@ async function auditCandidate(sourceOffer, market) {
     const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
     if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };
     if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
-  const priority = catalogPublicPriority(offer);
-  if (!priority.eligible) return { offer: null, reason: `priority_${priority.reason}` };
+  const priority = classifyCatalogV2Offer(offer, v2Policy);
+  if (!priority.eligible) return { offer: null, reason: `v2_${priority.reason}` };
   offer.operational = {
     ...(offer.operational || {}),
     raw: {
@@ -406,6 +416,13 @@ for (const market of markets) {
   }
 
   selected.sort(qualityOrder);
+  const v2Selection = selectCatalogV2MarketOffers(selected, v2Policy);
+  selected.splice(0, selected.length, ...v2Selection.selected);
+  sourceCounts.clear();
+  for (const offer of selected) {
+    const sourceId = String(offer.sourceId || "unknown");
+    sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
+  }
   files.push(...generation.filenames);
   allSelected.push(...selected);
   byMarket[market] = selected.length;
@@ -413,7 +430,7 @@ for (const market of markets) {
   marketReports[market] = generation.payloads.map((payload) => payload.report || payload);
   const imageCounts = selected.map((offer) => offer.images.length);
   const calculatedCount = selected.filter((offer) => Number(offer.totalRub || 0) > 0).length;
-  const priorityCount = selected.filter((offer) => catalogPublicPriority(offer).tier <= 4).length;
+  const priorityCount = v2Selection.priorityCount;
   marketQuality[market] = {
     target: targetPerMarket,
     targetReached: selected.length >= targetPerMarket,
@@ -431,6 +448,12 @@ for (const market of markets) {
     calculatedCount,
     calculatedShare: selected.length ? Number((calculatedCount / selected.length).toFixed(4)) : 0,
     priorityCount,
+    auctionCount: v2Selection.auctionCount,
+    recentCount: v2Selection.recentCount,
+    extendedCount: v2Selection.extendedCount,
+    fallbackUnlocked: v2Selection.fallbackUnlocked,
+    shortageToUnlock: v2Selection.shortageToUnlock,
+    v2Rejected: v2Selection.rejected,
     priorityMaxTotalRub,
     priorityMaxPowerHp,
     priorityMinYear,
@@ -456,7 +479,7 @@ let manifest = null;
 let publicationError = "";
 let generationCleanup = { recorded: false, deletedGenerations: [], deletedObjects: 0, errors: [] };
 
-if (offers.length) {
+if (offers.length && emptyMarkets.length === 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = emptyMarkets.join(",");
     manifest = await persistCatalogOffers(offers);
@@ -465,13 +488,13 @@ if (offers.length) {
     publicationError = String(error?.message || error);
   }
 } else {
-  publicationError = "no_verified_offers_keep_previous_manifest";
+  publicationError = emptyMarkets.length ? `catalog_v2_empty_markets:${emptyMarkets.join(",")}` : "no_verified_offers_keep_previous_manifest";
 }
 
 const marketsBelowTarget = markets.filter((market) => Number(byMarket[market] || 0) < targetPerMarket);
 const report = {
-  version: 37,
-  mode: "atomic_all_markets_with_verified_accumulation",
+  version: 38,
+  mode: "catalog_v2_tiered_atomic_all_markets",
   publishedAt,
   published: Boolean(manifest),
   publicationError,
@@ -484,6 +507,7 @@ const report = {
   priorityMaxTotalRub,
   priorityMaxPowerHp,
   priorityMinYear,
+  v2Policy,
   total: offers.length,
   byMarket,
   byMarketAndSource,
