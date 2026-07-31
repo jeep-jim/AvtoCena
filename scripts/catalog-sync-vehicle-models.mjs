@@ -226,10 +226,22 @@ for (const [id, override] of manual) {
   } : { ...override, updatedAt });
 }
 
+const recentKnowledgeYear = new Date().getFullYear() - 9;
+function recentKnowledgeRank(model) {
+  const yearTo = Number(model.yearTo || 0);
+  const yearFrom = Number(model.yearFrom || 0);
+  if (yearTo >= recentKnowledgeYear || yearFrom >= recentKnowledgeYear) return 0;
+  if (!yearTo && !yearFrom) return 1;
+  return 2;
+}
 const models = [...upstream.values()].sort((left, right) =>
-  Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+  recentKnowledgeRank(left) - recentKnowledgeRank(right)
+  || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
+  || Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0)
   || left.make.localeCompare(right.make, "en")
   || left.model.localeCompare(right.model, "en"));
+const recentModels = models.filter((model) => recentKnowledgeRank(model) === 0).length;
+const undatedModels = models.filter((model) => recentKnowledgeRank(model) === 1).length;
 
 if (models.length < MIN_RETAINED_MODELS && activeCurrent.length >= MIN_RETAINED_MODELS) {
   console.log(JSON.stringify({
@@ -254,6 +266,10 @@ console.log(JSON.stringify({
   csvUrl: csvResult.url,
   fetchedRows: rows.length,
   carModels: models.length,
+  recentKnowledgeYear,
+  recentModels,
+  undatedModels,
+  olderModels: models.length - recentModels - undatedModels,
   preservedManualRecords: manual.size,
   skippedHistoric,
   minimumModelYear: MIN_MODEL_YEAR,

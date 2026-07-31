@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
@@ -57,40 +58,12 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
-function rubValue(offer) {
-  return Number(offer?.totalRub || 0)
-    || Number(offer?.calculationSnapshot?.currencyRate?.sourcePriceRub || 0)
-    || Number(offer?.calculationSnapshot?.sourcePriceRub || 0)
-    || Number(offer?.calculationSnapshot?.customsValue?.vehiclePriceRub || 0);
-}
 function isMassMarketPriority(offer) {
-  const totalRub = rubValue(offer);
-  const powerHp = Number(offer?.powerHp || 0);
-  const year = Number(offer?.year || 0);
-  return totalRub > 0 && totalRub <= priorityMaxTotalRub
-    && powerHp > 0 && powerHp <= priorityMaxPowerHp
-    && year >= priorityMinYear;
-}
-function businessPriority(offer) {
-  const totalRub = rubValue(offer);
-  const powerHp = Number(offer?.powerHp || 0);
-  const year = Number(offer?.year || 0);
-  const affordable = totalRub > 0 && totalRub <= priorityMaxTotalRub;
-  const lowPower = powerHp > 0 && powerHp <= priorityMaxPowerHp;
-  const recent = year >= priorityMinYear;
-  let score = 0;
-  if (affordable) score += 1200;
-  if (lowPower) score += 600;
-  if (recent) score += 600;
-  if (affordable && lowPower && recent) score += 2400;
-  if (totalRub > 0) score += 250;
-  if (Number(offer?.images?.length || 0) >= preferredImages) score += 120;
-  return score;
+  const priority = catalogPublicPriority(offer);
+  return priority.eligible && priority.tier <= 4;
 }
 function quality(a, b) {
-  return businessPriority(b) - businessPriority(a)
-    || (Number(b?.images?.length || 0) >= preferredImages ? 1 : 0) - (Number(a?.images?.length || 0) >= preferredImages ? 1 : 0)
-    || Number(b?.images?.length || 0) - Number(a?.images?.length || 0)
+  return compareCatalogPublicPriority(a, b)
     || currentTime(b) - currentTime(a);
 }
 function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${String(sourceId).replace(/[^a-z0-9_-]/gi, "-")}.json`; }
@@ -144,8 +117,8 @@ function reserveDetail(sourceId) {
 function mergedRows() {
   const output = [];
   for (const sourceId of sourceIds) {
-    const live = [...fresh.get(sourceId).values()].sort(quality);
-    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id)).sort(quality);
+    const live = [...fresh.get(sourceId).values()].filter((offer) => catalogPublicPriority(offer).eligible).sort(quality);
+    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && catalogPublicPriority(offer).eligible).sort(quality);
     output.push(...[...live, ...old].sort(quality).slice(0, targetPerSource));
   }
   return output.sort(quality);
