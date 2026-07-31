@@ -12,6 +12,7 @@ import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
+import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { getOffer, publicOffer, searchOffers } from "@/lib/catalog/storage";
@@ -118,11 +119,20 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const enrichedOffer = await enrichOfferForDisplay(offer);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
-  const o = { ...presentCatalogOffer(raw), images: rankedCatalogImageUrls(raw) };
+  const presented = presentCatalogOffer(raw);
+  const exactTotalRub = Number(presented.totalRub || 0);
+  const visibleRub = exactTotalRub || catalogOfferVisibleRub(raw);
+  const o = {
+    ...presented,
+    totalRub: visibleRub || null,
+    previousTotalRub: exactTotalRub ? presented.previousTotalRub : null,
+    priceDeltaRub: exactTotalRub ? presented.priceDeltaRub : null,
+    images: rankedCatalogImageUrls(raw),
+  };
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
-  const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: raw.totalRub ? Math.round(raw.totalRub * 1.25) : undefined, pageSize: 16, sort: "updatedAt" });
+  const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 16, sort: "updatedAt" });
   const similar = similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)).slice(0, 12);
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;

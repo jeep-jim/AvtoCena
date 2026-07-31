@@ -134,7 +134,7 @@ test("rebuild calculates first and progressively opens detail without exhausting
   assert.match(rebuildScript, /networkImageLimit/);
   assert.match(rebuildScript, /retention_plus_fresh_listing/);
   assert.match(rebuildScript, /galleriesAccumulated/);
-  assert.match(rebuildScript, /function rubValue/);
+  assert.match(rebuildScript, /compareCatalogPublicPriority/);
   assert.match(rebuildScript, /previous\?\.images/);
   assert.doesNotMatch(rebuildScript, /reject\("calculation"\); return null/);
 });
@@ -152,8 +152,8 @@ test("cards convert source prices to rubles while customs calculation is pending
   assert.match(livePricing, /convertToRub/);
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
-  assert.match(catalogCard, /sourcePriceRub/);
-  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
+  assert.match(catalogCard, /catalogOfferVisibleRub/);
+  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
   assert.doesNotMatch(catalogCard, /function sourceMoney/);
@@ -228,11 +228,11 @@ test("generic open sources only attach images bound to the listing card", () => 
 });
 
 test("publisher prioritizes affordable recent cars up to 160 hp", () => {
-  assert.match(rebuildScript, /businessPriority/);
+  assert.match(rebuildScript, /compareCatalogPublicPriority/);
   assert.match(rebuildScript, /priorityMaxTotalRub/);
   assert.match(rebuildScript, /priorityMaxPowerHp/);
   assert.match(rebuildScript, /priorityMinYear/);
-  assert.match(publishScript, /businessPriority/);
+  assert.match(publishScript, /compareCatalogPublicPriority/);
   assert.match(publishScript, /calculatedShare/);
   assert.match(publishScript, /priorityCount/);
 });

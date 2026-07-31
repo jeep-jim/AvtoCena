@@ -4,6 +4,7 @@ import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
+import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 
@@ -26,18 +27,6 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="12" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" stroke="currentColor" strokeWidth="1.7" /><path d="M18 15.8V18l1.4 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-function sourcePriceRub(offer: any) {
-  const sourcePrice = Number(offer?.sourcePrice || 0);
-  if (!sourcePrice) return 0;
-  const currency = String(offer?.sourceCurrency || "").toUpperCase();
-  if (currency === "RUB") return sourcePrice;
-  const rate = offer?.calculationSnapshot?.currencyRate || {};
-  const explicit = Number(rate.sourcePriceRub || offer?.calculationSnapshot?.sourcePriceRub || 0);
-  if (explicit > 0) return explicit;
-  const effectiveRate = Number(rate.effectiveRate || 0);
-  return effectiveRate > 0 ? Math.round(sourcePrice * effectiveRate) : 0;
-}
-
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
   const rankedImages = rankedCatalogImageUrls(normalizedOffer);
@@ -50,7 +39,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
   const exactTotalRub = Number(o.totalRub || 0);
-  const visibleRub = exactTotalRub || sourcePriceRub(o);
+  const visibleRub = exactTotalRub || catalogOfferVisibleRub(normalizedOffer);
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,

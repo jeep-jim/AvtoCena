@@ -5,6 +5,7 @@ import path from "node:path";
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const {
   CATALOG_CHUNK_SIZE,
@@ -43,28 +44,8 @@ function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
 
-function businessPriority(offer) {
-  const totalRub = Number(offer?.totalRub || 0);
-  const powerHp = Number(offer?.powerHp || 0);
-  const year = Number(offer?.year || 0);
-  const affordable = totalRub > 0 && totalRub <= priorityMaxTotalRub;
-  const lowPower = powerHp > 0 && powerHp <= priorityMaxPowerHp;
-  const recent = year >= priorityMinYear;
-  let score = 0;
-  if (affordable) score += 1200;
-  if (lowPower) score += 600;
-  if (recent) score += 600;
-  if (affordable && lowPower && recent) score += 2400;
-  if (totalRub > 0) score += 250;
-  return score;
-}
-
 function qualityOrder(left, right) {
-  const leftPreferred = Number(left?.images?.length || 0) >= preferredImagesPerOffer ? 1 : 0;
-  const rightPreferred = Number(right?.images?.length || 0) >= preferredImagesPerOffer ? 1 : 0;
-  return businessPriority(right) - businessPriority(left)
-    || rightPreferred - leftPreferred
-    || Number(right?.images?.length || 0) - Number(left?.images?.length || 0)
+  return compareCatalogPublicPriority(left, right)
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
@@ -313,7 +294,16 @@ async function auditCandidate(sourceOffer, market) {
     const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
     if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };
     if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
-    return { offer, reason: "ok" };
+  const priority = catalogPublicPriority(offer);
+  if (!priority.eligible) return { offer: null, reason: `priority_${priority.reason}` };
+  offer.operational = {
+    ...(offer.operational || {}),
+    raw: {
+      ...(typeof offer.operational?.raw === "object" && offer.operational.raw ? offer.operational.raw : {}),
+      publicPriority: priority,
+    },
+  };
+  return { offer, reason: "ok" };
   } catch (error) {
     return { offer: null, reason: `exception:${String(error?.message || error)}` };
   }
@@ -423,11 +413,7 @@ for (const market of markets) {
   marketReports[market] = generation.payloads.map((payload) => payload.report || payload);
   const imageCounts = selected.map((offer) => offer.images.length);
   const calculatedCount = selected.filter((offer) => Number(offer.totalRub || 0) > 0).length;
-  const priorityCount = selected.filter((offer) => Number(offer.totalRub || 0) > 0
-    && Number(offer.totalRub) <= priorityMaxTotalRub
-    && Number(offer.powerHp || 0) > 0
-    && Number(offer.powerHp) <= priorityMaxPowerHp
-    && Number(offer.year || 0) >= priorityMinYear).length;
+  const priorityCount = selected.filter((offer) => catalogPublicPriority(offer).tier <= 4).length;
   marketQuality[market] = {
     target: targetPerMarket,
     targetReached: selected.length >= targetPerMarket,

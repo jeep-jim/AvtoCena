@@ -350,7 +350,15 @@ export async function enrichOfferWithVehicleKnowledge<T extends VehicleOffer>(in
       ...canonical.operational,
       raw: {
         ...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),
-        vehicleKnowledgeModel: { id: model.id, matchedBy: match.matchedBy, score: match.score },
+        vehicleKnowledgeModel: {
+        id: model.id,
+        matchedBy: match.matchedBy,
+        score: match.score,
+        popularityDecile: model.popularityDecile,
+        representativePowerHp: model.representativePowerHp,
+        yearFrom: model.yearFrom,
+        yearTo: model.yearTo,
+      },
         ...(variant ? { vehicleKnowledgeVariant: { id: variant.id, sourceType: variant.sourceType } } : {}),
       },
     },
