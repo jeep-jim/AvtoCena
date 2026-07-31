@@ -1,0 +1,50 @@
+name: Diagnose mass-market patch
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-mass-market-patch.yml
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          TELEMETRY_ISSUE: "155"
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = Number(process.env.TELEMETRY_ISSUE);
+            const marker = '<!-- mass-market-patch-diagnostic -->';
+            const workflows = await github.paginate(github.rest.actions.listRepoWorkflows, { owner, repo, per_page: 100 });
+            const workflow = workflows.find((item) => item.path === '.github/workflows/apply-russia-mass-market-priority-main.yml');
+            if (!workflow) throw new Error('mass_market_workflow_not_found');
+            const runs = await github.paginate(github.rest.actions.listWorkflowRuns, { owner, repo, workflow_id: workflow.id, branch: 'main', per_page: 30 });
+            const run = runs[0];
+            if (!run) throw new Error('mass_market_run_not_found');
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, { owner, repo, run_id: run.id, filter: 'latest', per_page: 100 });
+            const failed = jobs.filter((job) => ['failure','timed_out','cancelled'].includes(String(job.conclusion || '')));
+            const sections = [];
+            for (const job of (failed.length ? failed : jobs).slice(0, 5)) {
+              let log = '';
+              try {
+                const response = await github.request('GET /repos/{owner}/{repo}/actions/jobs/{job_id}/logs', { owner, repo, job_id: job.id });
+                log = typeof response.data === 'string' ? response.data : Buffer.from(response.data || []).toString('utf8');
+              } catch (error) { log = `log_download_failed:${error?.message || error}`; }
+              const lines = log.split('\n').filter((line) => /error|failed|snippet_not_found|regex_not_found|not_found|exit code|traceback/i.test(line));
+              sections.push(`### ${job.name} — ${job.conclusion || job.status}\n\n\`\`\`text\n${(lines.length ? lines : log.split('\n').slice(-160)).slice(-200).join('\n').slice(-18000)}\n\`\`\``);
+            }
+            const body = `${marker}\n## Диагностика массового патча\n\n- run: [#${run.run_number}](${run.html_url})\n- run_id: \`${run.id}\`\n- commit: \`${run.head_sha}\`\n- status: \`${run.status}\`\n- conclusion: \`${run.conclusion}\`\n\n${sections.join('\n\n')}`;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number, per_page: 100 });
+            const current = comments.find((comment) => comment.body?.includes(marker));
+            if (current) await github.rest.issues.updateComment({ owner, repo, comment_id: current.id, body });
+            else await github.rest.issues.createComment({ owner, repo, issue_number, body });
