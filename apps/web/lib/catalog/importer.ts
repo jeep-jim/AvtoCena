@@ -29,9 +29,10 @@ import { reliableBootstrapSources } from "./reliable-bootstrap-sources";
 import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source";
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
-import { autoGeorgiaEnrichedSource } from "./auto-georgia-enriched-source";
+import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
+import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
@@ -55,9 +56,9 @@ if (process.env.CATALOG_REBUILD_MARKET) {
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 
-// Generic regional adapters are registered first. Exact/detail adapters below must
-// replace them when sourceId matches; otherwise a broad HTML parser can silently
-// displace the working AUTO.GE or Mashina parser and collapse the public market.
+// Generic regional adapters are registered first. Exact/listing-bound adapters at
+// the end must replace broad HTML parsers with the same sourceId. This prevents a
+// generic page parser from displacing the working AUTO.GE or Mashina implementation.
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
@@ -69,10 +70,11 @@ const completeSources = [
   ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
-  prepareSource(autoGeorgiaEnrichedSource),
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
+  prepareSource(autoGeorgiaStrictSource),
+  prepareSource(mashinaKyrgyzstanListSource),
   encarCompleteSource,
 ];
 

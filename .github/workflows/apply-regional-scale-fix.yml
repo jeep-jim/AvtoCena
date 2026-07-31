@@ -1,0 +1,132 @@
+name: Apply regional scale fix
+
+on:
+  push:
+    branches: [fix/regional-scale-and-photo-identity]
+    paths:
+      - .github/workflows/apply-regional-scale-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/regional-scale-and-photo-identity
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Reset stale regional cursors once and add regressions
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              p = Path(path); text = p.read_text()
+              if old not in text: raise SystemExit(f"snippet_not_found:{path}:{old[:100]}")
+              p.write_text(text.replace(old, new, 1))
+
+          rebuild = 'scripts/catalog-rebuild-source-shard.mjs'
+          replace(rebuild,
+            '    cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };',
+            '    cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set(), restartedFromBeginning: false, cursorResetCount: 0 };')
+          replace(rebuild,
+            'async function fetchOne(state) {\n  const bucket = fresh.get(state.sourceId);',
+            '''async function resetSourceToFirstPage(state, reason) {
+            if (state.restartedFromBeginning || state.cursor == null) return false;
+            state.restartedFromBeginning = true;
+            state.cursorResetCount++;
+            state.cursor = null;
+            state.initialCursor = null;
+            state.seenCursors.clear();
+            state.errors = 0;
+            state.empty = 0;
+            state.stopReason = `cursor_reset_${reason}`;
+            try {
+              await storage.writeJson(cursorPath(state.sourceId), { version: 1, market, sourceId: state.sourceId,
+                cursor: null, cycle: state.cycle + 1, pagesVisited: state.pagesVisited, updatedAt: new Date().toISOString(), resetReason: reason });
+            } catch (error) { addError({ sourceId: state.sourceId, stage: "cursor_reset", error: String(error?.message || error) }); }
+            return true;
+          }
+
+          async function fetchOne(state) {
+            const bucket = fresh.get(state.sourceId);''')
+          replace(rebuild,
+            '  if (state.seenCursors.has(cursorKey)) { state.done = true; state.stopReason = "cursor_loop"; return; }',
+            '  if (state.seenCursors.has(cursorKey)) { if (await resetSourceToFirstPage(state, "cursor_loop")) return; state.done = true; state.stopReason = "cursor_loop"; return; }')
+          replace(rebuild,
+            '    if (state.errors >= 2) { state.done = true; state.stopReason = "source_errors"; }',
+            '    if (state.errors >= 2) { if (!(await resetSourceToFirstPage(state, "source_errors"))) { state.done = true; state.stopReason = "source_errors"; } }')
+          replace(rebuild,
+            '  else if (state.empty >= maxEmptyPages) { state.done = true; state.stopReason = "no_progress"; }',
+            '  else if (state.empty >= maxEmptyPages) { if (!(await resetSourceToFirstPage(state, "no_progress"))) { state.done = true; state.stopReason = "no_progress"; } }')
+          replace(rebuild,
+            '  sourceReports.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, freshSaved: fresh.get(state.sourceId).size,',
+            '  sourceReports.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, freshSaved: fresh.get(state.sourceId).size, cursorResetCount: state.cursorResetCount,')
+
+          test_path = Path('tests/catalog-regional-live-overrides.test.ts')
+          text = test_path.read_text()
+          addition = '''
+          test("regional production resets a stale source cursor once before giving up", () => {
+            const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
+            assert.match(rebuild, /resetSourceToFirstPage/);
+            assert.match(rebuild, /cursor_reset_source_errors/);
+            assert.match(rebuild, /cursor_reset_no_progress/);
+            assert.match(rebuild, /cursorResetCount/);
+          });
+          '''
+          if 'regional production resets a stale source cursor once' not in text:
+              text += addition
+              test_path.write_text(text)
+
+          new_test = Path('tests/regional-market-scale.test.ts')
+          new_test.write_text('''import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+
+          const mashina = fs.readFileSync(new URL("../apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts", import.meta.url), "utf8");
+          const autoGeorgia = fs.readFileSync(new URL("../apps/web/lib/catalog/auto-georgia-strict-source.ts", import.meta.url), "utf8");
+          const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
+
+          test("Mashina uses current listing routes and does not depend on detail parsing for inventory", () => {
+            assert.match(mashina, /https:\\/\\/www\\.mashina\\.kg\\/en\\/search\\/\\?page=/);
+            assert.doesNotMatch(mashina, /search\\/all/);
+            assert.match(mashina, /parseMashinaListingMarkup/);
+            assert.match(mashina, /listingBoundImages: true/);
+            assert.match(mashina, /nextCursor: String\\(page \\+ 1\\)/);
+            assert.match(importer, /prepareSource\\(mashinaKyrgyzstanListSource\\)/);
+          });
+
+          test("regional detail galleries require make and model identity", () => {
+            assert.match(mashina, /identityMatches\\(detail\\.markup, row\\)/);
+            assert.match(autoGeorgia, /identityMatches\\(detail\\.markup, offer\\)/);
+            assert.match(autoGeorgia, /autoGeorgiaExactSource/);
+            assert.doesNotMatch(importer, /autoGeorgiaEnrichedSource/);
+          });
+          ''')
+
+          Path('.github/workflows/apply-regional-scale-fix.yml').unlink()
+          PY
+      - name: Validate regional parsers and complete build
+        run: |
+          node --check scripts/catalog-rebuild-source-shard.mjs
+          node --import tsx --test tests/regional-market-scale.test.ts tests/catalog-regional-live-overrides.test.ts tests/myauto-list-source.test.ts tests/catalog-source-scale.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          npm run build
+      - name: Commit tested regional fix
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: масштабировать Грузию и Кыргызстан без смешения фото"
+          git push origin HEAD:fix/regional-scale-and-photo-identity
