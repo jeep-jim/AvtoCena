@@ -58,13 +58,15 @@ test("каждый рынок Catalog V2 имеет минимум пять не
 
 test("каждый source slot Catalog V2 соответствует реально зарегистрированному адаптеру", () => {
   const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
+  const failures: string[] = [];
   for (const [market, slots] of Object.entries(CATALOG_V2_SOURCE_SLOTS)) {
     for (const slot of slots) {
       const adapter = adapters.get(slot.sourceId);
-      assert.ok(adapter, `${market}: adapter ${slot.sourceId} is not registered`);
-      assert.ok(adapter.market === market || adapter.market === "multi", `${slot.sourceId}: expected ${market}, got ${adapter.market}`);
+      if (!adapter) failures.push(`${market}:${slot.sourceId}:missing`);
+      else if (adapter.market !== market && adapter.market !== "multi") failures.push(`${market}:${slot.sourceId}:actual=${adapter.market}`);
     }
   }
+  assert.deepEqual(failures, []);
 });
 
 test("приоритетный слой требует до 6 лет, до 160 л.с. и до 6 млн рублей", () => {
