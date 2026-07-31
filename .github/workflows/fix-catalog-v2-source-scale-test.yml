@@ -1,0 +1,83 @@
+name: Fix Catalog V2 source-scale test
+
+on:
+  push:
+    branches: [feat/catalog-v2-foundation]
+    paths:
+      - .github/workflows/fix-catalog-v2-source-scale-test.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-v2-foundation
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Point legacy source-scale assertions at Catalog V2
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          p = Path('tests/catalog-source-scale.test.ts')
+          s = p.read_text()
+          s = s.replace(
+              'const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");',
+              'const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");'
+          )
+          start = s.index('test("daily workflow runs all 21 market shards in one wave"')
+          end = s.index('test("all seven markets have at least three independent registered adapters"')
+          replacement = '''test("Catalog V2 runs all 35 market source slots in one wave", () => {
+            assert.match(workflow, /group: catalog-v2-production/);
+            assert.match(workflow, /cancel-in-progress: false/);
+            assert.match(workflow, /max-parallel: 20/);
+            assert.match(workflow, /shard: \\[0, 1, 2, 3, 4\\]/);
+            assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
+            assert.doesNotMatch(workflow, /^\\s*pull_request:/m);
+          });
+
+          test("Catalog V2 targets five source slots, 1000 priority cars and progressive galleries", () => {
+            assert.match(workflow, /market: \\[korea, china, japan, uae, europe, georgia, kyrgyzstan\\]/);
+            assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
+            assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+            assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
+            assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"/);
+            assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+            assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
+            assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+            assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+            assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
+            assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"/);
+            assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "20"/);
+            assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "4800000"/);
+            assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
+            assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
+            assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
+            assert.match(workflow, /retention-days: 1/);
+            assert.match(workflow, /compression-level: 9/);
+            assert.match(workflow, /Catalog V2 health/);
+            assert.match(workflow, /cron: "17 20 \\* \\* \\*"/);
+          });
+
+          '''
+          p.write_text(s[:start] + replacement + s[end:])
+          PY
+      - name: Validate corrected tests
+        run: node --import tsx --test tests/catalog-source-scale.test.ts tests/catalog-probe-source-shard.test.ts tests/catalog-v2-policy.test.ts
+      - name: Commit minimal CI correction
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/catalog-source-scale.test.ts
+          git commit -m "Тесты: проверять production-контур Catalog V2"
+          git push origin HEAD:feat/catalog-v2-foundation
