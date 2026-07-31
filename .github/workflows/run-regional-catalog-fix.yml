@@ -1,0 +1,51 @@
+name: Run regional catalog fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/run-regional-catalog-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-regional-volume-price-identity
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Execute patch stored in branch workflow
+        shell: bash
+        run: |
+          python <<'RUNNER'
+          from pathlib import Path
+          workflow = Path('.github/workflows/apply-regional-catalog-fixes.yml').read_text()
+          start = workflow.index("          python <<'PY'\n") + len("          python <<'PY'\n")
+          end = workflow.index("\n          PY\n", start)
+          code = '\n'.join(line[10:] if line.startswith('          ') else line for line in workflow[start:end].splitlines())
+          exec(compile(code, 'apply-regional-catalog-fixes.py', 'exec'))
+          RUNNER
+      - name: Validate fixes
+        run: |
+          node --import tsx --test tests/catalog-regional-production-fixes.test.ts tests/catalog-live-sources-v19.test.ts tests/catalog-source-scale.test.ts tests/catalog-card-contract.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          npm --workspace=@avtocena/engine exec tsc -- --noEmit
+          npm --workspace=@avtocena/web run build
+      - name: Commit fixes to PR branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: исправить региональный объём, цену и соответствие фото"
+          git push origin HEAD:fix/catalog-regional-volume-price-identity
