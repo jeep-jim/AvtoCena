@@ -27,6 +27,7 @@ jobs:
       - name: Create patch branch and apply reviewed transformations
         shell: bash
         run: |
+          # This commit intentionally triggers the already-installed one-time patch.
           git checkout -b fix/catalog-russia-mass-market-priority-applied
           python <<'BOOT'
           from pathlib import Path
