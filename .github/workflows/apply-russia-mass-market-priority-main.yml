@@ -27,7 +27,6 @@ jobs:
       - name: Create patch branch and apply reviewed transformations
         shell: bash
         run: |
-          # PR merge trigger: create an isolated tested implementation branch.
           git checkout -b fix/catalog-russia-mass-market-priority-applied
           python <<'BOOT'
           from pathlib import Path
@@ -52,14 +51,9 @@ jobs:
               raise SystemExit(f'outdated_test_snippet_missing:{old}')
             test_text = test_text.replace(old, new, 1)
           test_file.write_text(test_text)
-
-          for temporary in [
-            '.github/workflows/apply-russia-mass-market-priority-main.yml',
-            '.github/workflows/diagnose-mass-market-patch.yml',
-          ]:
-            path = Path(temporary)
-            if path.exists(): path.unlink()
           BOOT
+      - name: Keep workflow files unchanged for GitHub token safety
+        run: git checkout origin/main -- .github/workflows
       - name: Validate priority, prices, knowledge and full build
         run: |
           node --check scripts/catalog-rebuild-source-shard.mjs
