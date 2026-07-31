@@ -29,7 +29,7 @@ import { reliableBootstrapSources } from "./reliable-bootstrap-sources";
 import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source";
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
-import { autoGeorgiaExactSource } from "./auto-georgia-source";
+import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
 import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
@@ -73,7 +73,7 @@ const completeSources = [
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
-  prepareSource(autoGeorgiaExactSource),
+  prepareSource(autoGeorgiaStrictSource),
   prepareSource(mashinaKyrgyzstanListSource),
   encarCompleteSource,
 ];
