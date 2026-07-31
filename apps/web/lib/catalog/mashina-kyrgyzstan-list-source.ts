@@ -12,13 +12,14 @@ const HEADERS = {
 const DETAIL_RE = /\/(?:en\/)?details\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
 const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper|canter|elf|dutro|fuso|hino)\b/i;
+const BADGE_RE = /\b(?:Urgent|DIAMOND|Premium|TOP\s+VIP\s+BOOST|SUPER\s+VIP|VIP|BOOST)\b/gi;
 const KNOWN_MAKES = [
-  "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
+  "Mercedes-Benz", "Mercedes Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
   "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
   "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
   "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
   "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
-  "Lada", "VAZ", "UAZ", "GAZ", "Moskvich", "Ravon", "Daewoo", "JAC", "FAW", "Dongfeng", "Exeed", "Omoda", "Jaecoo",
+  "Lada", "VAZ", "UAZ", "GAZ", "Moskvich", "Ravon", "Daewoo", "JAC", "FAW", "Dongfeng", "Exeed", "Omoda", "Jaecoo", "Feifan",
 ].sort((left, right) => right.length - left.length);
 
 export type MashinaListRow = {
@@ -32,6 +33,7 @@ export type MashinaListRow = {
   currency: "USD" | "KGS";
   mileageKm?: number;
   engineCc?: number;
+  powerHp?: number;
   fuel?: string;
   transmission?: string;
   bodyType?: string;
@@ -67,28 +69,31 @@ function imageUrls(markup: string, base: string) {
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
   return [...new Set(values.map((value) => absoluteUrl(value, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
 }
-function deriveMakeModel(title: string) {
-  const cleaned = plainText(title).replace(/^Urgent\s+/i, "").replace(/\b(?:19|20)\d{2}\b.*$/, "").trim();
+function deriveMakeModel(value: string) {
+  const cleaned = plainText(value).replace(BADGE_RE, " ").replace(/\s+/g, " ").trim();
   const lower = cleaned.toLocaleLowerCase("en-US");
-  const make = KNOWN_MAKES.find((candidate) => lower === candidate.toLocaleLowerCase("en-US") || lower.startsWith(`${candidate.toLocaleLowerCase("en-US")} `));
-  if (!make) return { make: "", model: "" };
-  return { make, model: cleaned.slice(make.length).replace(/^[\s\-–—|]+/, "").trim() };
+  let best: { make: string; index: number } | null = null;
+  for (const candidate of KNOWN_MAKES) {
+    const index = lower.indexOf(candidate.toLocaleLowerCase("en-US"));
+    if (index >= 0 && (!best || index < best.index || (index === best.index && candidate.length > best.make.length))) best = { make: candidate, index };
+  }
+  if (!best) return { make: "", model: "" };
+  const make = best.make === "Mercedes Benz" ? "Mercedes-Benz" : best.make;
+  const after = cleaned.slice(best.index + best.make.length)
+    .replace(/^[\s,\-–—|]+/, "")
+    .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
+    .replace(/\s+/g, " ").trim();
+  const model = after.split(/\s+/).slice(0, 7).join(" ");
+  return { make, model };
 }
 function parseMoney(text: string) {
   const usdRaw = text.match(/\$\s*([0-9][0-9\s,.]{2,})/i)?.[1] || text.match(/([0-9][0-9\s,.]{2,})\s*USD\b/i)?.[1];
   const usd = integer(usdRaw);
   if (usd && usd >= 300) return { price: usd, currency: "USD" as const };
-  const kgsRaw = text.match(/([0-9][0-9\s,.]{3,})\s*(?:Som|KGS|сом)\b/i)?.[1];
+  const kgsRaw = text.match(/([0-9][0-9\s,.]{3,})\s*(?:Som|KGS|сом)\b/i)?.[1]
+    || text.match(/(?:Som|KGS|сом)\s*([0-9][0-9\s,.]{3,})/i)?.[1];
   const kgs = integer(kgsRaw);
   return kgs && kgs >= 20_000 ? { price: kgs, currency: "KGS" as const } : null;
-}
-function meaningfulTitle(inner: string, fallback = "") {
-  const candidates = [
-    plainText(inner),
-    plainText(inner.match(/(?:title|aria-label)\s*=\s*["']([^"']+)["']/i)?.[1] || ""),
-    plainText(fallback),
-  ].filter((value) => value.length >= 3 && value.length <= 140 && !/^(?:Urgent|Image|Add|Подробнее|More)$/i.test(value));
-  return candidates.sort((left, right) => left.length - right.length)[0] || "";
 }
 function detailId(url: string) {
   try {
@@ -98,63 +103,56 @@ function detailId(url: string) {
   } catch { return ""; }
 }
 function identityMatches(markup: string, row: Pick<MashinaListRow, "make" | "model">) {
-  const text = compact(plainText(markup).slice(0, 12_000));
+  const text = compact(plainText(markup).slice(0, 20_000));
   const make = compact(row.make);
-  const modelTokens = String(row.model || "").split(/\s+/).map(compact).filter((token) => token.length >= 2).slice(0, 3);
-  return Boolean(make && text.includes(make) && modelTokens.some((token) => text.includes(token)));
+  const tokens = String(row.model || "").split(/\s+/).map(compact).filter((token) => token.length >= 2).slice(0, 3);
+  return Boolean(make && text.includes(make) && tokens.some((token) => text.includes(token)));
 }
 
 export function parseMashinaListingMarkup(markup: string, pageUrl: string): MashinaListRow[] {
   const anchors = [...markup.matchAll(/<a\b([^>]*)href\s*=\s*["']([^"']+)["']([^>]*)>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ attrs: `${match[1]} ${match[3]}`, href: absoluteUrl(match[2], pageUrl), inner: match[4], index: match.index || 0 }))
     .filter((row) => DETAIL_RE.test(row.href));
-  const grouped = new Map<string, { href: string; index: number; titles: string[] }>();
+  const grouped = new Map<string, { href: string; index: number; labels: string[] }>();
   for (const anchor of anchors) {
     const id = detailId(anchor.href);
     if (!id) continue;
-    const current = grouped.get(id) || { href: anchor.href, index: anchor.index, titles: [] };
+    const current = grouped.get(id) || { href: anchor.href, index: anchor.index, labels: [] };
     current.index = Math.min(current.index, anchor.index);
-    const title = meaningfulTitle(anchor.inner, anchor.attrs.match(/(?:title|aria-label)\s*=\s*["']([^"']+)["']/i)?.[1] || "");
-    if (title) current.titles.push(title);
+    const label = plainText(anchor.inner) || plainText(anchor.attrs.match(/(?:title|aria-label)\s*=\s*["']([^"']+)/i)?.[1] || "");
+    if (label) current.labels.push(label);
     grouped.set(id, current);
   }
   const entries = [...grouped.entries()].sort((left, right) => left[1].index - right[1].index);
   const rows: MashinaListRow[] = [];
   for (let index = 0; index < entries.length; index++) {
     const [id, entry] = entries[index];
-    const previousBoundary = index ? entries[index - 1][1].index : 0;
-    const start = Math.max(previousBoundary, entry.index - 3_000);
-    const next = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 18_000);
-    const card = markup.slice(start, Math.max(entry.index + 1, next));
+    const end = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 24_000);
+    const card = markup.slice(entry.index, end);
     const text = plainText(card);
-    const title = [...entry.titles]
-      .filter((value) => KNOWN_MAKES.some((make) => compact(value).startsWith(compact(make))))
-      .sort((left, right) => left.length - right.length)[0] || [...entry.titles].sort((left, right) => left.length - right.length)[0] || "";
-    const { make, model } = deriveMakeModel(title);
+    const label = entry.labels.sort((left, right) => right.length - left.length)[0] || text;
+    const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`);
     const money = parseMoney(text);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:y\.|year|г\.)?/i)?.[1] || 0);
     const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\.?\b/i)?.[1]?.replace(",", ".") || 0);
-    const mileageKm = integer(text.match(/([0-9][0-9\s,.]{1,})\s*km\b/i)?.[1]);
-    const transmission = text.match(/\b(Automatic|Manual|Variator|CVT|Robot|Robotic)\b/i)?.[1];
-    const fuel = text.match(/\b(Gasoline\s*\/\s*gas|Gasoline|Petrol|Diesel|Hybrid|Electric|Gas|LPG|CNG)\b/i)?.[1];
-    const bodyType = text.match(/\b(Sedan|Hatchback(?:\s+[35]\s+doors)?|Liftback|Fastback|Suv(?:\s+[35]\s+doors)?|Wagon|Coupe|Minivan|Compact van|Microvan|Pickup|Limousine|Van|Cabriolet|Roadster)\b/i)?.[1];
-    if (!make || !model || !year || !money || COMMERCIAL_RE.test(`${title} ${text.slice(0, 500)}`)) continue;
+    const images = imageUrls(card, pageUrl).slice(0, 30);
+    if (!identity.make || !identity.model || !year || !money || !images.length || COMMERCIAL_RE.test(`${identity.make} ${identity.model}`)) continue;
     rows.push({
       id,
       detailUrl: entry.href,
-      title,
-      make,
-      model,
+      title: `${identity.make} ${identity.model}`,
+      make: identity.make,
+      model: identity.model,
       year,
       price: money.price,
       currency: money.currency,
-      mileageKm,
+      mileageKm: integer(text.match(/([0-9][0-9\s,.]{1,})\s*km\b/i)?.[1]),
       engineCc: liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined,
-      fuel,
-      transmission,
-      bodyType,
+      fuel: text.match(/\b(Gasoline\s*\/\s*gas|Gasoline|Petrol|Diesel|Hybrid|Electric|Gas|LPG|CNG)\b/i)?.[1],
+      transmission: text.match(/\b(Automatic|Manual|Variator|CVT|Robot|Robotic)\b/i)?.[1],
+      bodyType: text.match(/\b(Sedan|Hatchback(?:\s+[35]\s+doors)?|Liftback|Fastback|Suv(?:\s+[35]\s+doors)?|Wagon|Coupe|Minivan|Compact van|Microvan|Pickup|Limousine|Van|Cabriolet|Roadster)\b/i)?.[1],
       location: text.match(/\b(Bishkek|Osh|Karakol|Tokmok|Jalal-Abad|Naryn|Talas|Batken|Kyrgyzstan)\b/i)?.[1],
-      images: imageUrls(card, pageUrl).slice(0, 30),
+      images,
     });
   }
   return rows;
@@ -162,11 +160,12 @@ export function parseMashinaListingMarkup(markup: string, pageUrl: string): Mash
 
 async function request(url: string, referer: string) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 18_000));
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000));
   try {
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
     if (!response.ok) throw new Error(`mashina_list_http_${response.status}`);
+    if (/captcha|cloudflare|access denied|request blocked|verify you are human|forbidden/i.test(markup.slice(0, 3_000))) throw new Error(`mashina_list_blocked_${response.status}`);
     return { response, markup };
   } finally { clearTimeout(timeout); }
 }
@@ -182,62 +181,46 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
       `https://www.mashina.kg/en/search/?page=${page}`,
       `https://www.mashina.kg/search/?page=${page}`,
       `https://m.mashina.kg/search/en/?page=${page}`,
+      `https://m.mashina.kg/search/?page=${page}`,
     ];
-    let lastStatus = 0;
+    let lastError = "mashina_list_no_route";
     for (const url of urls) {
       try {
         const { response, markup } = await request(url, "https://www.mashina.kg/en/search/");
-        lastStatus = response.status;
         const items = parseMashinaListingMarkup(markup, response.url || url);
-        if (!items.length) continue;
+        if (!items.length) { lastError = `mashina_list_parsed_zero_${response.status}_${markup.length}`; continue; }
         return {
           items,
           nextCursor: String(page + 1),
           finished: false,
           count: items.length,
-          health: { ok: true, message: `Mashina list parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status },
+          health: { ok: true, message: `Mashina strict list parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status },
         };
-      } catch {
-        // Try the next current public route.
+      } catch (error: any) {
+        lastError = String(error?.message || error);
       }
     }
-    throw new Error(`mashina_list_parsed_zero_${lastStatus}`);
+    throw new Error(lastError);
   }
 
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: MashinaListRow): VehicleOffer | null {
-    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl) return null;
+    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl || !raw.images.length) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
-      id: stableOfferId(this.sourceId, raw.id),
-      sourceId: this.sourceId,
-      sourceOfferId: raw.id,
-      market: this.market,
-      offerType: "fixed",
-      status: "active",
-      make: raw.make,
-      model: raw.model,
-      trim: raw.title,
-      year: raw.year,
-      mileageKm: raw.mileageKm,
-      engineCc: raw.engineCc,
-      fuel: raw.fuel,
-      transmission: raw.transmission,
-      bodyType: raw.bodyType,
-      sourcePrice: raw.price,
-      sourceCurrency: raw.currency,
-      priceMode: "fixed",
-      images: [],
-      totalRub: null,
-      calculationStatus: "needs_data",
-      firstSeenAt: now,
-      updatedAt: now,
+      id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id,
+      market: this.market, offerType: "fixed", status: "active", make: raw.make, model: raw.model,
+      trim: raw.title, year: raw.year, mileageKm: raw.mileageKm, engineCc: raw.engineCc, powerHp: raw.powerHp,
+      fuel: raw.fuel, transmission: raw.transmission, bodyType: raw.bodyType,
+      sourcePrice: raw.price, sourceCurrency: raw.currency, priceMode: "fixed", images: [], totalRub: null,
+      calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
       operational: {
         sourceUrl: raw.detailUrl,
         sourceVenueName: raw.location || "Kyrgyzstan",
         sourcePublishedAt: now,
-        raw: { images: raw.images, parsed: raw, listingBoundImages: true },
+        gallerySourceImageCount: raw.images.length,
+        raw: { images: raw.images, parsed: raw, listingBoundImages: true, photoIdentityVerified: true },
       },
     } as VehicleOffer) as VehicleOffer;
   }
@@ -248,16 +231,25 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     let urls = [...new Set(raw?.images || row?.images || [])];
     const detailUrl = offer.operational.sourceUrl || row?.detailUrl || "";
-    if (detailUrl && urls.length < limit) {
+    if (detailUrl && row && urls.length < limit) {
       try {
         const detail = await request(detailUrl, "https://www.mashina.kg/en/search/");
-        if (row && identityMatches(detail.markup, row)) urls = [...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)];
+        if (identityMatches(detail.markup, row)) {
+          urls = [...new Set([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)])];
+          const text = plainText(detail.markup);
+          const cc = integer(text.match(/([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
+          const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
+          offer.engineCc ||= cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined);
+          offer.powerHp ||= integer(text.match(/\b([0-9]{2,4})\s*(?:HP|PS|horsepower|л\.с\.)\b/i)?.[1]);
+          (offer.operational.raw as any).detailIdentityVerified = true;
+        }
       } catch {
-        // Listing-bound images remain valid when detail is temporarily unavailable.
+        // Listing-bound images remain the only accepted fallback.
       }
     }
+    offer.operational.gallerySourceImageCount = urls.length;
     const saved: CatalogImage[] = [];
-    for (const url of [...new Set(urls)].slice(0, limit * 4)) {
+    for (const url of urls.slice(0, limit * 4)) {
       const image = await cacheImageFromUrl(url, this.market, { headers: { ...HEADERS, referer: detailUrl || "https://www.mashina.kg/en/search/" } }).catch(() => null);
       if (image && image.size > 8_000) saved.push(image);
       if (saved.length >= limit) break;
@@ -265,7 +257,7 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
     return saved;
   }
 
-  async healthCheck() { return { ok: true, message: "Mashina.kg listing parser", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "Mashina.kg strict listing parser", checkedAt: new Date().toISOString() }; }
 }
 
 export const mashinaKyrgyzstanListSource = new MashinaKyrgyzstanListAdapter();
