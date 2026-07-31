@@ -58,7 +58,10 @@ test("volume shortages remain diagnostics inside validation", () => {
 test("publisher accumulates verified current markets and keeps previous manifest on failure", () => {
   assert.match(publisher, /readMarketOffers/);
   assert.match(publisher, /readAllOffersForMaintenance/);
-  assert.match(publisher, /atomic_all_markets_with_verified_accumulation/);
+  assert.match(publisher, /catalog_v2_tiered_atomic_all_markets/);
+  assert.match(publisher, /selectCatalogV2MarketOffers/);
+  assert.match(publisher, /emptyMarkets\.length === 0/);
+  assert.match(publisher, /catalog_v2_empty_markets/);
   assert.match(publisher, /previousManifestPreserved/);
   assert.match(publisher, /no_verified_offers_keep_previous_manifest/);
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
