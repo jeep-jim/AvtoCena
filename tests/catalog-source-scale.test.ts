@@ -15,7 +15,7 @@ const probeScript = fs.readFileSync(new URL("../scripts/catalog-probe-source-sha
 const rebuildScript = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
 const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
-const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const reliableSources = fs.readFileSync(new URL("../apps/web/lib/catalog/reliable-bootstrap-sources.ts", import.meta.url), "utf8");
 const regionalOverrides = fs.readFileSync(new URL("../apps/web/lib/catalog/regional-live-overrides.ts", import.meta.url), "utf8");
 const livePricing = fs.readFileSync(new URL("../apps/web/lib/catalog/live-business-pricing.ts", import.meta.url), "utf8");
@@ -44,41 +44,36 @@ test("source-scale catalog keeps 1000-offer quota per source and supports large 
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("daily workflow runs all 21 market shards in one wave", () => {
-  assert.match(workflow, /group: catalog-source-scale-daily/);
+test("Catalog V2 runs all 35 market source slots in one wave", () => {
+  assert.match(workflow, /group: catalog-v2-production/);
   assert.match(workflow, /cancel-in-progress: false/);
-  assert.match(workflow, /max-parallel: 21/);
-  assert.match(workflow, /shard: \[0, 1, 2\]/);
-  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "3"/);
+  assert.match(workflow, /max-parallel: 20/);
+  assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
+  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("daily workflow targets three productive sources, progressive galleries and 3000 cars per market", () => {
+test("Catalog V2 targets five source slots, 1000 priority cars and progressive galleries", () => {
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
-  assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
-  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"/);
-  assert.match(workflow, /CATALOG_IMAGE_FETCH_CONCURRENCY: "6"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "16"/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "3000000"/);
+  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "20"/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "4800000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
   assert.match(workflow, /retention-days: 1/);
   assert.match(workflow, /compression-level: 9/);
-  assert.match(workflow, /continue-on-error: true/);
-  assert.match(workflow, /Catalog health summary/);
+  assert.match(workflow, /Catalog V2 health/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
-  assert.doesNotMatch(workflow, /CATALOG_REBUILD_TARGET: "250"/);
-  assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
 });
 
 test("all seven markets have at least three independent registered adapters", () => {
