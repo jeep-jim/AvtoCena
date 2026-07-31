@@ -38,7 +38,26 @@ jobs:
               raise SystemExit('embedded_patch_not_found')
           source = workflow.split(marker, 1)[1].split("\n          PY\n", 1)[0]
           exec(compile(textwrap.dedent(source), 'mass-market-patch', 'exec'))
-          Path('.github/workflows/apply-russia-mass-market-priority-main.yml').unlink()
+
+          test_file = Path('tests/catalog-source-scale.test.ts')
+          test_text = test_file.read_text()
+          replacements = {
+            'assert.match(rebuildScript, /function rubValue/);': 'assert.match(rebuildScript, /compareCatalogPublicPriority/);',
+            'assert.match(catalogCard, /sourcePriceRub/);': 'assert.match(catalogCard, /catalogOfferVisibleRub/);',
+            'assert.match(publishScript, /businessPriority/);': 'assert.match(publishScript, /compareCatalogPublicPriority/);',
+          }
+          for old, new in replacements.items():
+            if old not in test_text:
+              raise SystemExit(f'outdated_test_snippet_missing:{old}')
+            test_text = test_text.replace(old, new, 1)
+          test_file.write_text(test_text)
+
+          for temporary in [
+            '.github/workflows/apply-russia-mass-market-priority-main.yml',
+            '.github/workflows/diagnose-mass-market-patch.yml',
+          ]:
+            path = Path(temporary)
+            if path.exists(): path.unlink()
           BOOT
       - name: Validate priority, prices, knowledge and full build
         run: |
