@@ -1,0 +1,194 @@
+name: Apply Catalog V2 foundation
+
+on:
+  push:
+    branches: [feat/catalog-v2-foundation]
+    paths:
+      - .github/workflows/apply-catalog-v2-foundation.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-v2-foundation
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch collection and publication for Catalog V2
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new, count=1):
+              file = Path(path)
+              text = file.read_text()
+              if old not in text:
+                  raise SystemExit(f"snippet_not_found:{path}:{old[:120]!r}")
+              file.write_text(text.replace(old, new, count))
+
+          rebuild = "scripts/catalog-rebuild-source-shard.mjs"
+          replace(
+              rebuild,
+              'const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");',
+              'const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");\nconst { classifyCatalogV2Offer } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");\nconst { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");'
+          )
+          replace(
+              rebuild,
+              'const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;',
+              'const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;\nconst ignoreProbe = process.env.CATALOG_REBUILD_IGNORE_PROBE === "1";\nconst resetCursor = process.env.CATALOG_REBUILD_RESET_CURSOR === "1";\nconst v2SourceSlotsOnly = process.env.CATALOG_V2_SOURCE_SLOTS_ONLY === "1";'
+          )
+          replace(
+              rebuild,
+              '''function isMassMarketPriority(offer) {
+            const priority = catalogPublicPriority(offer);
+            return priority.eligible && priority.tier <= 4;
+          }''',
+              '''function isMassMarketPriority(offer) {
+            return classifyCatalogV2Offer(offer).tier === "priority";
+          }'''
+          )
+          replace(
+              rebuild,
+              '''const configured = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "")
+            .split(",")
+            .map((value) => value.trim())
+            .filter((value) => value && !value.startsWith("__") && adapters.has(value));
+          const retentionSourceIds = [...new Set(registered)].filter((id) => shardOf(id) === shardIndex).sort();
+          const liveSourceIds = [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));''',
+              '''const requestedSources = v2SourceSlotsOnly
+            ? catalogV2SourceIds(market)
+            : String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim());
+          const configured = requestedSources
+            .filter((value) => value && !value.startsWith("__") && adapters.has(value));
+          const retentionSourceIds = [...new Set(v2SourceSlotsOnly ? configured : registered)].filter((id) => shardOf(id) === shardIndex).sort();
+          const liveSourceIds = ignoreProbe
+            ? [...retentionSourceIds]
+            : [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));'''
+          )
+          replace(
+              rebuild,
+              '''    const live = [...fresh.get(sourceId).values()].filter((offer) => catalogPublicPriority(offer).eligible).sort(quality);
+              const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && catalogPublicPriority(offer).eligible).sort(quality);''',
+              '''    const live = [...fresh.get(sourceId).values()].filter((offer) => classifyCatalogV2Offer(offer).eligible).sort(quality);
+              const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && classifyCatalogV2Offer(offer).eligible).sort(quality);'''
+          )
+          replace(
+              rebuild,
+              '''  return { sourceId, source: adapters.get(sourceId), cursor: saved.cursor || null, initialCursor: saved.cursor || null,
+              cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };''',
+              '''  const initialCursor = resetCursor ? null : saved.cursor || null;
+            return { sourceId, source: adapters.get(sourceId), cursor: initialCursor, initialCursor,
+              cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };'''
+          )
+          replace(
+              rebuild,
+              '  bases.sort((left, right) => businessPriority(right) - businessPriority(left) || currentTime(right) - currentTime(left));',
+              '  bases.sort(quality);'
+          )
+
+          publisher = "scripts/catalog-publish-source-scale.mjs"
+          replace(
+              publisher,
+              'const { catalogPublicPriority, compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");',
+              'const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");\nconst { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");'
+          )
+          replace(
+              publisher,
+              'const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;',
+              '''const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
+          const v2Policy = {
+            priorityTarget: Math.max(1, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
+            maximumPerMarket,
+            priorityMaxAgeYears,
+            recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),
+            priorityMaxPowerHp,
+            priorityMaxTotalRub,
+            hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 15_000_000)),
+          };'''
+          )
+          replace(
+              publisher,
+              '''  const priority = catalogPublicPriority(offer);
+            if (!priority.eligible) return { offer: null, reason: `priority_${priority.reason}` };''',
+              '''  const priority = classifyCatalogV2Offer(offer, v2Policy);
+            if (!priority.eligible) return { offer: null, reason: `v2_${priority.reason}` };'''
+          )
+          replace(
+              publisher,
+              '''  selected.sort(qualityOrder);
+            files.push(...generation.filenames);''',
+              '''  selected.sort(qualityOrder);
+            const v2Selection = selectCatalogV2MarketOffers(selected, v2Policy);
+            selected.splice(0, selected.length, ...v2Selection.selected);
+            sourceCounts.clear();
+            for (const offer of selected) {
+              const sourceId = String(offer.sourceId || "unknown");
+              sourceCounts.set(sourceId, Number(sourceCounts.get(sourceId) || 0) + 1);
+            }
+            files.push(...generation.filenames);'''
+          )
+          replace(
+              publisher,
+              '  const priorityCount = selected.filter((offer) => catalogPublicPriority(offer).tier <= 4).length;',
+              '  const priorityCount = v2Selection.priorityCount;'
+          )
+          replace(
+              publisher,
+              '''    priorityCount,
+              priorityMaxTotalRub,''',
+              '''    priorityCount,
+              auctionCount: v2Selection.auctionCount,
+              recentCount: v2Selection.recentCount,
+              extendedCount: v2Selection.extendedCount,
+              fallbackUnlocked: v2Selection.fallbackUnlocked,
+              shortageToUnlock: v2Selection.shortageToUnlock,
+              v2Rejected: v2Selection.rejected,
+              priorityMaxTotalRub,'''
+          )
+          replace(
+              publisher,
+              'if (offers.length) {',
+              'if (offers.length && emptyMarkets.length === 0) {'
+          )
+          replace(
+              publisher,
+              '  publicationError = "no_verified_offers_keep_previous_manifest";',
+              '  publicationError = emptyMarkets.length ? `catalog_v2_empty_markets:${emptyMarkets.join(",")}` : "no_verified_offers_keep_previous_manifest";'
+          )
+          replace(
+              publisher,
+              '  version: 37,\n  mode: "atomic_all_markets_with_verified_accumulation",',
+              '  version: 38,\n  mode: "catalog_v2_tiered_atomic_all_markets",'
+          )
+          replace(
+              publisher,
+              '''  priorityMinYear,
+            total: offers.length,''',
+              '''  priorityMinYear,
+            v2Policy,
+            total: offers.length,'''
+          )
+          PY
+      - name: Run Catalog V2 focused validation
+        run: |
+          node --import tsx --test tests/catalog-v2-policy.test.ts tests/catalog-publication-gate.test.ts tests/catalog-production-hardening.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit generated source changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/catalog-v2-policy.ts apps/web/lib/catalog/catalog-v2-source-registry.ts scripts/catalog-rebuild-source-shard.mjs scripts/catalog-publish-source-scale.mjs tests/catalog-v2-policy.test.ts
+          git commit -m "Каталог V2: внедрить поэтапное наполнение семи рынков"
+          git push origin HEAD:feat/catalog-v2-foundation
