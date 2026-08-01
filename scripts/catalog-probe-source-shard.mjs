@@ -13,7 +13,15 @@ const outputFile = process.env.CATALOG_PROBE_OUTPUT || `catalog-probe-${market}-
 const priorityPlan = {
   korea: ["encar_direct", "kcar_korea_open"],
   china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "guazi_china_open", "che168_china_exact"],
-  japan: ["goonet_japan_exact", "goonet_japan", "tcv_japan_open", "carvector_japan_stat_open", "japan_partner_open", "carused_japan_open"],
+  japan: [
+    "japantransit_japan_stat_open",
+    "jpauc_japan_current_open",
+    "jpauc_japan_past_open",
+    "carvector_japan_stat_open",
+    "prestige_japan_auctions_open",
+    "auctions22_japan_upcoming_open",
+    "auctions22_japan_past_open",
+  ],
   uae: ["dubicars_uae_exact", "dubizzle_uae_open", "dubicars_clean", "beforward_uae"],
   europe: ["mobile_de_open", "autoscout_europe_open", "otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
   georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"],
@@ -126,7 +134,9 @@ const registered = catalogImportSources
 const configured = String(process.env.CATALOG_PROBE_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const plannedAll = configured.length
   ? [...new Set(configured)]
-  : [...new Set([...priorityPlan[market], ...registered])];
+  : market === "japan"
+    ? [...new Set(priorityPlan.japan)]
+    : [...new Set([...priorityPlan[market], ...registered])];
 const priorityRank = new Map(priorityPlan[market].map((sourceId, index) => [sourceId, index]));
 const planned = plannedAll
   .filter((sourceId) => adapters.has(sourceId))
@@ -140,7 +150,7 @@ const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.
 // поэтому временный 403 не удаляет уже проверенные автомобили, но больше не съедает час запуска.
 const sourceIdsForRebuild = activeSourceIds.join(",") || "__no_active_sources__";
 const payload = {
-  version: 27,
+  version: 28,
   market,
   shardIndex,
   shardCount,
