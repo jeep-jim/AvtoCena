@@ -20,9 +20,10 @@ test("Catalog V2 downloads shards, audits them, publishes atomically and require
   assert.ok(publish > audit, "publisher must run after source-scale audit");
   assert.ok(enforce > publish, "new generation gate must follow publication attempt");
   assert.ok(health > enforce, "health job must follow the publication gate");
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /missing = markets\.filter/);
