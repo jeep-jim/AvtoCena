@@ -3,9 +3,9 @@ import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatu
 
 type JapanAuctionFeedKind = "upcoming" | "past";
 
-function pageUrl(base: string, page: number) {
+function pageUrl(base: string, page: number, key = "page") {
   const url = new URL(base);
-  if (page > 1) url.searchParams.set("page", String(page));
+  if (page > 1) url.searchParams.set(key, String(page));
   return url.toString();
 }
 
@@ -65,6 +65,59 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
 const configs: Array<{ config: OpenMarketSourceConfig; kind: JapanAuctionFeedKind; venue: string }> = [
   {
     config: {
+      sourceId: "jpauc_japan_current_open",
+      market: "japan",
+      label: "JPAuc current Japan auctions",
+      baseUrl: "https://jpauc.com",
+      currency: "JPY",
+      // /auction is only the date selector. The actual public result list is /auction/listing.
+      listUrls: (page) => [
+        pageUrl("https://jpauc.com/auction/listing", page),
+        pageUrl("https://www.jpauc.com/auction/listing", page),
+      ],
+      detailPattern: /\/auction\/detail\/\d+(?:[/?#]|$)/i,
+      referer: "https://jpauc.com/auction",
+    },
+    kind: "upcoming",
+    venue: "JPAuc Japan auctions",
+  },
+  {
+    config: {
+      sourceId: "jpauc_japan_past_open",
+      market: "japan",
+      label: "JPAuc completed Japan auctions",
+      baseUrl: "https://jpauc.com",
+      currency: "JPY",
+      listUrls: (page) => [
+        page <= 1 ? "https://jpauc.com/auction/past" : `https://jpauc.com/auction/past/listing-${page}`,
+        pageUrl("https://jpauc.com/auction/listing", page),
+      ],
+      detailPattern: /\/auction\/detail\/\d+(?:[/?#]|$)/i,
+      referer: "https://jpauc.com/auction/past",
+    },
+    kind: "past",
+    venue: "JPAuc completed auction results",
+  },
+  {
+    config: {
+      sourceId: "auctiondatasearch_japan_open",
+      market: "japan",
+      label: "Auction Data Search Japan",
+      baseUrl: "https://www.auctiondatasearch.jp",
+      currency: "JPY",
+      listUrls: (page) => [
+        pageUrl("https://www.auctiondatasearch.jp/", page),
+        pageUrl("https://www.auctiondatasearch.jp/search", page),
+      ],
+      detailPattern: /\/(?:auction|vehicle|car|result|detail)\/[^?#]{4,}/i,
+      referer: "https://www.auctiondatasearch.jp/",
+    },
+    kind: "past",
+    venue: "Auction Data Search Japan",
+  },
+  // Дополнительный резервный источник. Он не заменяет пять эталонных площадок.
+  {
+    config: {
       sourceId: "auctions22_japan_upcoming_open",
       market: "japan",
       label: "Auctions22 upcoming Japan auctions",
@@ -90,20 +143,6 @@ const configs: Array<{ config: OpenMarketSourceConfig; kind: JapanAuctionFeedKin
     },
     kind: "past",
     venue: "Auctions22 Japan auction results",
-  },
-  {
-    config: {
-      sourceId: "jpauc_japan_current_open",
-      market: "japan",
-      label: "JPAuc current Japan auctions",
-      baseUrl: "https://jpauc.com",
-      currency: "JPY",
-      listUrls: (page) => [pageUrl("https://jpauc.com/auction", page)],
-      detailPattern: /\/auction\/(?!past(?:[/?#]|$)|listing-?\d+\/?$)[^?#]*(?:lot|vehicle|car)[^?#]*/i,
-      referer: "https://jpauc.com/auction",
-    },
-    kind: "upcoming",
-    venue: "JPAuc Japan auctions",
   },
 ];
 
