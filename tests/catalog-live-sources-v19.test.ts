@@ -41,8 +41,8 @@ test("Catalog V2 probes every configured source slot, crawls live sites and reta
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
