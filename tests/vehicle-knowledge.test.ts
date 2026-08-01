@@ -7,6 +7,9 @@ import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
 const brandDirectoryUi = fs.readFileSync(new URL("../apps/web/components/catalog/BrandModelDirectory.tsx", import.meta.url), "utf8");
 const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
+const productionWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
+const dromEnrichment = fs.readFileSync(new URL("../scripts/catalog-enrich-drom-vehicle-variants.mjs", import.meta.url), "utf8");
+const knowledgeAudit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
 
 function offer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
   return {
@@ -62,12 +65,34 @@ test("model directory aggregates variants and power references into public chara
 });
 
 test("public brand and model pages render knowledge power, kW and 30-minute fields", () => {
-  assert.match(brandDirectoryUi, /Мощность и другие характеристики берутся из базы знаний АвтоЦена/);
+  assert.match(brandDirectoryUi, /Нажмите на модель, чтобы раскрыть характеристики/);
+  assert.match(brandDirectoryUi, /aria-controls/);
+  assert.match(brandDirectoryUi, /Все характеристики и предложения/);
+  assert.match(brandDirectoryUi, /utilizationPowerKw/);
   assert.match(brandDirectoryUi, /power30MinKw/);
+  assert.match(brandDirectoryUi, /fuels/);
+  assert.match(brandDirectoryUi, /powertrains/);
   assert.match(modelPage, /База знаний АвтоЦена/);
   assert.match(modelPage, /Автосопоставление включено/);
   assert.match(modelPage, /30-минутную мощность/);
   assert.match(modelPage, /utilizationPowerKw/);
   assert.match(modelPage, /readVehicleKnowledgeVariants/);
   assert.match(modelPage, /readVehiclePowerKnowledge/);
+});
+
+test("production workflow continuously enriches specifications for the latest ten years", () => {
+  assert.match(productionWorkflow, /catalog-enrich-drom-vehicle-variants\.mjs/);
+  assert.match(productionWorkflow, /VEHICLE_KNOWLEDGE_RECENT_YEARS: "10"/);
+  assert.match(productionWorkflow, /DROM_KNOWLEDGE_LIMIT: "500"/);
+  assert.match(productionWorkflow, /Enrich recent model specifications/);
+  assert.match(dromEnrichment, /RECENT_YEAR_FLOOR/);
+  assert.match(dromEnrichment, /activeModelIds\.has\(model\.id\) \|\| !ONLY_RECENT \|\| modelIsRecent\(model\)/);
+  assert.match(dromEnrichment, /status: "blocked"/);
+});
+
+test("vehicle knowledge audit reports recent specification coverage", () => {
+  assert.match(knowledgeAudit, /recentCoverage/);
+  assert.match(knowledgeAudit, /modelsWithAnySpecifications/);
+  assert.match(knowledgeAudit, /coreSpecificationCoverage/);
+  assert.match(knowledgeAudit, /minimumRecentSpecificationCoverage/);
 });
