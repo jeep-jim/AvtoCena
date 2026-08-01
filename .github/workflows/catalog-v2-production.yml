@@ -14,6 +14,7 @@ on:
       - data/catalog/vehicle-knowledge/**
       - data/catalog/power-reference/**
       - scripts/catalog-sync-vehicle-models.mjs
+      - scripts/catalog-enrich-drom-vehicle-variants.mjs
       - scripts/catalog-build-vehicle-variants.mjs
       - scripts/catalog-build-power-knowledge.mjs
       - scripts/catalog-audit-vehicle-knowledge.mjs
@@ -62,9 +63,10 @@ jobs:
       - run: npm ci
       - name: Validate V2 policy, sources, calculations and types
         run: |
+          node --check scripts/catalog-enrich-drom-vehicle-variants.mjs
           node --check scripts/catalog-rebuild-source-shard.mjs
           node --check scripts/catalog-publish-source-scale.mjs
-          node --import tsx --test tests/catalog-v2-policy.test.ts tests/catalog-calculation-integrity.test.ts tests/russia-customs.test.ts tests/catalog-image-quality.test.ts
+          node --import tsx --test tests/vehicle-knowledge.test.ts tests/catalog-v2-policy.test.ts tests/catalog-calculation-integrity.test.ts tests/russia-customs.test.ts tests/catalog-image-quality.test.ts
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
           npm --workspace=@avtocena/engine exec tsc -- --noEmit
 
@@ -72,7 +74,7 @@ jobs:
     name: Refresh and audit vehicle encyclopedia
     needs: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     concurrency:
       group: catalog-v2-vehicle-knowledge
       cancel-in-progress: false
@@ -87,6 +89,10 @@ jobs:
       CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"
       CATALOG_VEHICLE_KNOWLEDGE_MIN_RETAINED_RATIO: "0.90"
       VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: "1990"
+      VEHICLE_KNOWLEDGE_RECENT_YEARS: "10"
+      DROM_KNOWLEDGE_ONLY_RECENT: "1"
+      DROM_KNOWLEDGE_LIMIT: "500"
+      DROM_KNOWLEDGE_DELAY_MS: "900"
       CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT: catalog-v2-vehicle-knowledge-audit.json
     steps:
       - uses: actions/checkout@v4
@@ -104,6 +110,9 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
       - name: Refresh model encyclopedia
         run: timeout --signal=TERM --kill-after=60s 900s npx tsx scripts/catalog-sync-vehicle-models.mjs
+      - name: Enrich recent model specifications
+        continue-on-error: true
+        run: timeout --signal=TERM --kill-after=60s 2700s npx tsx scripts/catalog-enrich-drom-vehicle-variants.mjs
       - name: Accumulate model variants from verified listings
         run: timeout --signal=TERM --kill-after=60s 1200s npx tsx scripts/catalog-build-vehicle-variants.mjs
       - name: Accumulate power knowledge
