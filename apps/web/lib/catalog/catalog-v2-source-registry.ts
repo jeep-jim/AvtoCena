@@ -36,6 +36,8 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
     { sourceId: "prestige_japan_auctions_open", label: "Prestige Japan auctions", canonicalUrl: "https://prestigemotorsport.com.au/auctions/", role: "auction_history", anchor: true },
     { sourceId: "auctiondatasearch_japan_open", label: "Auction Data Search", canonicalUrl: "https://www.auctiondatasearch.jp/", role: "auction_history", anchor: true },
     { sourceId: "japantransit_japan_stat_open", label: "Japan Transit auction statistics", canonicalUrl: "https://japantransit.ru/stat/", role: "auction_history" },
+    { sourceId: "auctions22_japan_upcoming_open", label: "Auctions22 upcoming auctions", canonicalUrl: "https://auctions22.com/upcoming", role: "secondary" },
+    { sourceId: "auctions22_japan_past_open", label: "Auctions22 auction results", canonicalUrl: "https://auctions22.com/past", role: "auction_history" },
     { sourceId: "jpcenter_japan_catalog_open", label: "JP Center specifications", canonicalUrl: "https://jp.center/catalog", role: "knowledge", anchor: true },
   ],
   uae: [
