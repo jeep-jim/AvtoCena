@@ -28,6 +28,7 @@ import { priorityMarketSources } from "./priority-market-sources";
 import { reliableBootstrapSources } from "./reliable-bootstrap-sources";
 import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source";
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
+import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -70,6 +71,7 @@ const completeSources = [
   ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
+  ...japanAuctionOpenSources.map(prepareSource),
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
