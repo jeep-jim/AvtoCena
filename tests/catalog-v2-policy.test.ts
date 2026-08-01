@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   CATALOG_V2_DEFAULT_POLICY,
   classifyCatalogV2Offer,
+  isJapanAuctionOffer,
   selectCatalogV2MarketOffers,
 } from "../apps/web/lib/catalog/catalog-v2-policy";
 import {
@@ -33,14 +34,17 @@ function offer(id: string, overrides: Partial<VehicleOffer> = {}): VehicleOffer 
     sourceCurrency: "RUB",
     totalRub: 2_500_000,
     status: "active",
+    offerType: "fixed",
+    priceMode: "fixed",
+    calculationStatus: "ready",
     firstSeenAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    images: [{ id: `${id}-image`, url: `https://example.test/${id}.jpg` }],
+    images: [{ id: `${id}-image`, url: `https://example.test/${id}.jpg`, objectKey: `${id}.jpg`, checksum: id, size: 100_000, mimeType: "image/jpeg" }],
     calculationSnapshot: {
       customs: { status: "ready", totalCustomsRub: 500_000 },
       breakdown: [
-        { id: "car", label: "Автомобиль", amountRub: 1_000_000 },
-        { id: "customs", label: "Таможня", amountRub: 500_000 },
+        { id: "car", title: "Цена автомобиля", amountRub: 1_000_000 },
+        { id: "customs", title: "Таможенные платежи", amountRub: 500_000 },
       ],
     },
     operational: { sourceUrl: `https://example.test/${id}` },
@@ -69,6 +73,10 @@ test("каждый source slot Catalog V2 соответствует реаль�
   assert.deepEqual(failures, []);
 });
 
+test("рынок вмещает до 100 тысяч проверенных предложений", () => {
+  assert.equal(CATALOG_V2_DEFAULT_POLICY.maximumPerMarket, 100_000);
+});
+
 test("приоритетный слой требует до 6 лет, до 160 л.с. и до 6 млн рублей", () => {
   assert.equal(classifyCatalogV2Offer(offer("priority")).tier, "priority");
   assert.equal(classifyCatalogV2Offer(offer("power", { powerHp: 161 })).tier, "recent");
@@ -76,40 +84,46 @@ test("приоритетный слой требует до 6 лет, до 160 �
   assert.equal(classifyCatalogV2Offer(offer("age", { year: new Date().getFullYear() - 7 })).tier, "recent");
 });
 
-test("fallback заблокирован, пока рынок не набрал 1000 приоритетных машин", () => {
+test("1000 является ориентиром, а не блокировкой остальных машин", () => {
   const result = selectCatalogV2MarketOffers([
     offer("priority"),
-    offer("fallback", { year: new Date().getFullYear() - 8, totalRub: 7_000_000 }),
-  ]);
-  assert.equal(result.fallbackUnlocked, false);
-  assert.deepEqual(result.selected.map((row) => row.id), ["priority"]);
-  assert.equal(result.shortageToUnlock, 999);
-  assert.equal(result.rejected.fallback_locked, 1);
-});
-
-test("после достижения квоты добавляются машины до 10 лет и затем расширенный слой", () => {
-  const options = { ...CATALOG_V2_DEFAULT_POLICY, priorityTarget: 2 };
-  const result = selectCatalogV2MarketOffers([
-    offer("p1"),
-    offer("p2"),
     offer("recent", { year: new Date().getFullYear() - 8, totalRub: 7_000_000 }),
-    offer("extended", { year: new Date().getFullYear() - 12, totalRub: 8_000_000 }),
-  ], options);
+    offer("extended", { year: new Date().getFullYear() - 12, totalRub: 18_000_000 }),
+  ]);
   assert.equal(result.fallbackUnlocked, true);
-  assert.deepEqual(result.selected.map((row) => row.id), ["p1", "p2", "recent", "extended"]);
+  assert.equal(result.shortageToUnlock, 0);
+  assert.deepEqual(result.selected.map((row) => row.id), ["priority", "recent", "extended"]);
+  assert.equal(result.rejected.fallback_locked, 0);
 });
 
-test("завершённые японские аукционы сохраняются отдельным слоем", () => {
+test("дорогие проверенные машины не отбрасываются, а идут после приоритетных", () => {
   const result = selectCatalogV2MarketOffers([
-    offer("auction", {
-      market: "japan",
-      sourceId: "jpauc_japan_past_open",
-      year: new Date().getFullYear() - 12,
-      totalRub: 9_000_000,
-    }),
+    offer("priority"),
+    offer("expensive", { totalRub: 50_000_000, year: new Date().getFullYear() - 3, powerHp: 500 }),
   ]);
-  assert.equal(result.selected.length, 1);
+  assert.deepEqual(result.selected.map((row) => row.id), ["priority", "expensive"]);
+  assert.equal(result.recentCount, 1);
+});
+
+test("Япония принимает только аукционные карточки", () => {
+  const privateListing = offer("private", { market: "japan", sourceId: "tcv_japan_open" });
+  assert.equal(isJapanAuctionOffer(privateListing), false);
+  assert.equal(classifyCatalogV2Offer(privateListing).reason, "japan_non_auction");
+
+  const auction = offer("auction", {
+    market: "japan",
+    sourceId: "jpauc_japan_past_open",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    status: "sold",
+  });
+  assert.equal(isJapanAuctionOffer(auction), true);
+  assert.equal(classifyCatalogV2Offer(auction).tier, "japan_auction");
+  const result = selectCatalogV2MarketOffers([privateListing, auction]);
+  assert.deepEqual(result.selected.map((row) => row.id), ["auction"]);
   assert.equal(result.auctionCount, 1);
+  assert.equal(result.rejected.japan_non_auction, 1);
 });
 
 test("без полного расчёта предложение не публикуется", () => {
