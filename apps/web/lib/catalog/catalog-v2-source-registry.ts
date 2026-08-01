@@ -25,7 +25,7 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
     { sourceId: "autohome_used_china_open", label: "Che168 / Autohome Used", canonicalUrl: "https://www.che168.com/", role: "primary", anchor: true },
     { sourceId: "dongchedi_china_open", label: "Dongchedi", canonicalUrl: "https://www.dongchedi.com/", role: "primary", anchor: true },
     { sourceId: "guazi_china_open", label: "Guazi", canonicalUrl: "https://www.guazi.com/", role: "primary", anchor: true },
-    { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", anchor: true },
+    { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "knowledge", anchor: true },
     { sourceId: "taoche_china_open", label: "Taoche", canonicalUrl: "https://www.taoche.com/", role: "secondary" },
     { sourceId: "uxin_china_open", label: "Uxin", canonicalUrl: "https://www.xin.com/", role: "secondary" },
   ],
