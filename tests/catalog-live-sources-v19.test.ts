@@ -7,7 +7,7 @@ const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-marke
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
-const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
+const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const probe = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
 
@@ -35,15 +35,16 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
   assert.match(priority, /truck\|dump\|tipper\|bus/);
 });
 
-test("daily production probes every registered site, crawls live sites and retains inactive sites", () => {
-  assert.match(workflow, /Catalog source-scale daily/);
-  assert.match(workflow, /max-parallel: 21/);
+test("Catalog V2 probes every configured source slot, crawls live sites and retains inactive sites", () => {
+  assert.match(workflow, /Catalog V2 production/);
+  assert.match(workflow, /max-parallel: 20/);
+  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "3000"/);
-  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "3"/);
-  assert.match(workflow, /shard: \[0, 1, 2\]/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
+  assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(probe, /sourceIdsForRebuild = activeSourceIds\.join/);
   assert.match(probe, /sourceIdsForRebuild/);
@@ -73,7 +74,7 @@ test("priority galleries cache listing photos and enrich detail progressively", 
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
-  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"/);
+  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"/);
   assert.match(rebuild, /const detailNeeded = mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
   assert.match(rebuild, /reserveDetail/);
   assert.match(rebuild, /detailDeferredBySource/);

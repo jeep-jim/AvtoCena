@@ -22,12 +22,13 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
     { sourceId: "dongchedi_china_open", label: "Dongchedi", role: "secondary" },
   ],
   japan: [
-    { sourceId: "tcv_japan_open", label: "TCV", role: "primary" },
-    { sourceId: "beforward_public", label: "BE FORWARD", role: "primary" },
-    { sourceId: "carused_japan_open", label: "Carused", role: "secondary" },
-    { sourceId: "carfromjapan_open", label: "Car From Japan", role: "secondary" },
-    { sourceId: "jpauc_japan_past_open", label: "JPAuc completed lots", role: "auction_history" },
+    { sourceId: "japantransit_japan_stat_open", label: "Japan Transit auction statistics", role: "auction_history" },
+    { sourceId: "jpauc_japan_current_open", label: "JPAuc current auctions", role: "primary" },
+    { sourceId: "jpauc_japan_past_open", label: "JPAuc completed auctions", role: "auction_history" },
     { sourceId: "carvector_japan_stat_open", label: "CarVector auction statistics", role: "auction_history" },
+    { sourceId: "prestige_japan_auctions_open", label: "Prestige Japan auctions", role: "secondary" },
+    { sourceId: "auctions22_japan_upcoming_open", label: "Auctions22 upcoming auctions", role: "primary" },
+    { sourceId: "auctions22_japan_past_open", label: "Auctions22 completed auctions", role: "auction_history" },
   ],
   uae: [
     { sourceId: "dubicars_uae_exact", label: "DubiCars", role: "primary" },

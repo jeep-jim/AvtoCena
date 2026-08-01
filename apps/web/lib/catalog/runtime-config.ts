@@ -34,8 +34,9 @@ export const CATALOG_MARKET_FLAGS: Record<CatalogMarket, string> = {
 };
 
 export const CATALOG_CHUNK_SIZE = 250;
-// Compatibility target for older incremental jobs. The source-scale production job uses
-// CATALOG_DAILY_TARGET_PER_SOURCE and may publish many thousands of offers per market.
+// Эти значения оставлены для совместимости старых incremental-задач.
+// В Catalog V2 реальный предел задаёт catalog-v2-policy: не менее 100 000
+// проверенных предложений на рынок. 1000 — ориентир обхода, а не лимит публикации.
 export const CATALOG_DAILY_TARGET_PER_MARKET = 1_000;
 export const CATALOG_DAILY_TARGET_PER_SOURCE = 1_000;
 export const CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET = 30_000;

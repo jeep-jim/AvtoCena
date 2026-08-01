@@ -39,19 +39,21 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
 
   // Обеспечительный платёж — часть оплаты автомобиля, а не дополнительная услуга.
   // Показываем его отдельной строкой для прозрачности первого платежа, но вычитаем
-  // из остатка стоимости машины, чтобы не посчитать одну и ту же сумму дважды.
+  // из строки цены автомобиля, чтобы не посчитать одну и ту же сумму дважды.
   const configuredDepositRub = numberOrZero(config.securityDepositRub);
   const appliedDepositRub = Math.min(carPriceRub, configuredDepositRub);
   const remainingCarPriceRub = Math.max(0, carPriceRub - appliedDepositRub);
 
   addLine(lines, {
     id: "car",
-    title: appliedDepositRub ? "Остаток стоимости автомобиля" : "Стоимость автомобиля",
+    title: "Цена автомобиля",
     amountRub: remainingCarPriceRub,
     kind: "car",
     amountType: "manual",
     source: "vehicle",
-    note: appliedDepositRub ? `Полная стоимость автомобиля: ${carPriceRub} ₽` : undefined,
+    note: appliedDepositRub
+      ? `Обеспечительный платёж учтён отдельной строкой. Полная цена автомобиля: ${carPriceRub} ₽`
+      : undefined,
   });
   addLine(lines, {
     id: "security-deposit",
