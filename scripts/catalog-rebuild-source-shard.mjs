@@ -184,12 +184,16 @@ async function checkpoint(stopReason = "running") {
   await fs.rename(temporary, outputFile);
 }
 async function persistCandidatePools() {
+  const cutoff = Date.now() - retentionMs;
   for (const sourceId of sourceIds) {
-    const rows = [...fresh.get(sourceId).values(), ...retained.get(sourceId).values()]
-      .filter((offer, index, list) => offer?.id && list.findIndex((candidate) => candidate.id === offer.id) === index)
-      .filter((offer) => firstSeen(offer) >= Date.now() - retentionMs)
-      .sort(quality)
-      .slice(0, targetPerSource);
+    const byId = new Map();
+    for (const offer of retained.get(sourceId).values()) {
+      if (offer?.id && firstSeen(offer) >= cutoff) byId.set(offer.id, offer);
+    }
+    for (const offer of fresh.get(sourceId).values()) {
+      if (offer?.id && firstSeen(offer) >= cutoff) byId.set(offer.id, offer);
+    }
+    const rows = [...byId.values()].sort(quality).slice(0, targetPerSource);
     try {
       await replaceChunkedDataJson(candidatePath(sourceId), rows, 500);
       candidatePoolsPersisted += rows.length;
