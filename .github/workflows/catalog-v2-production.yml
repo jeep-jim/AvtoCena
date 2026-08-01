@@ -134,7 +134,7 @@ jobs:
     needs: [validate, knowledge]
     if: needs.validate.result == 'success' && needs.knowledge.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 100
+    timeout-minutes: 120
     continue-on-error: true
     strategy:
       fail-fast: false
@@ -156,18 +156,19 @@ jobs:
       CATALOG_REBUILD_SHARD_COUNT: "5"
       CATALOG_V2_SOURCE_SLOTS_ONLY: "1"
       CATALOG_REBUILD_IGNORE_PROBE: "1"
-      CATALOG_REBUILD_RESET_CURSOR: "1"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "500"
-      CATALOG_REBUILD_MAX_TOTAL_PAGES: "12000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "8"
-      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "20"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "5"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "4800000"
-      CATALOG_SOURCE_TIMEOUT_MS: "20000"
-      CATALOG_IMAGE_TIMEOUT_MS: "15000"
+      CATALOG_REBUILD_RESET_CURSOR: "0"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100000"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000000"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"
+      CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"
+      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "8"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"
+      CATALOG_SOURCE_TIMEOUT_MS: "30000"
+      CATALOG_IMAGE_TIMEOUT_MS: "20000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
       CATALOG_GALLERY_FAST_PATH: "false"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
       CATALOG_PROBE_OUTPUT: catalog-v2-probe-${{ matrix.market }}-${{ matrix.shard }}.json
@@ -189,7 +190,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          timeout --signal=TERM --kill-after=120s 5100s npx tsx scripts/catalog-rebuild-source-shard.mjs
+          timeout --signal=TERM --kill-after=120s 6600s npx tsx scripts/catalog-rebuild-source-shard.mjs
           status=$?
           echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
@@ -200,10 +201,10 @@ jobs:
           const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
           const shardCount = 5;
           fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 40, market, shardIndex, shardCount, generatedAt: new Date().toISOString(),
+            version: 41, market, shardIndex, shardCount, generatedAt: new Date().toISOString(),
             count: 0, sourceIds: [], liveSourceIds: [], retentionSourceIds: [], partial: true,
             stopReason: `collector_exit_${process.env.CATALOG_COLLECT_EXIT_CODE || 1}`,
-            report: { version: 40, market, shardIndex, shardCount, saved: 0, publicBySource: {},
+            report: { version: 41, market, shardIndex, shardCount, saved: 0, publicBySource: {},
               rejectionReasons: {}, sources: [], sourceErrors: [{ stage: 'catalog_v2_collector', error: `exit_${process.env.CATALOG_COLLECT_EXIT_CODE || 1}` }] },
             offers: [],
           }, null, 2));
@@ -241,7 +242,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-v2-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v2-publish-report.json
-      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "32"
       CATALOG_INDEX_WRITE_CONCURRENCY: "16"
       CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
     steps:
