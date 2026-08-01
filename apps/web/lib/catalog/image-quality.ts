@@ -2,6 +2,7 @@ type CatalogImageLike = {
   id?: unknown;
   url?: unknown;
   objectKey?: unknown;
+  checksum?: unknown;
   width?: unknown;
   height?: unknown;
   size?: unknown;
@@ -22,6 +23,30 @@ function finite(value: unknown) {
 function stablePublicImageUrl(image: CatalogImageLike) {
   const id = text(image.id);
   return id ? `/api/catalog/images/${encodeURIComponent(id)}` : text(image.url);
+}
+
+function canonicalUrl(value: unknown) {
+  const source = text(value);
+  if (!source) return "";
+  try {
+    const url = new URL(source, "https://catalog.local");
+    url.hash = "";
+    url.search = "";
+    return `${url.hostname.toLowerCase()}${decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/")}`;
+  } catch {
+    return source.replace(/[?#].*$/, "").replace(/\/{2,}/g, "/").toLowerCase();
+  }
+}
+
+function catalogImageDedupKey(image: CatalogImageLike) {
+  const checksum = text(image.checksum).toLowerCase();
+  if (checksum) return `checksum:${checksum}`;
+  const objectKey = canonicalUrl(image.objectKey);
+  if (objectKey) return `object:${objectKey}`;
+  const sourceUrl = canonicalUrl(image.url);
+  if (sourceUrl) return `url:${sourceUrl}`;
+  const id = text(image.id);
+  return id ? `id:${id}` : "";
 }
 
 export function catalogImageScore(image: CatalogImageLike) {
@@ -64,9 +89,27 @@ export function isLikelyVehicleImage(image: CatalogImageLike) {
 
 export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
-  return images
-    .map((image, index) => ({ image, index, url: stablePublicImageUrl(image), score: catalogImageScore(image) }))
+  const candidates = images
+    .map((image, index) => ({
+      image,
+      index,
+      url: stablePublicImageUrl(image),
+      key: catalogImageDedupKey(image),
+      score: catalogImageScore(image),
+    }))
     .filter((candidate) => candidate.url && candidate.score >= 0)
-    .sort((left, right) => right.score - left.score || left.index - right.index)
-    .map((candidate) => candidate.url);
+    .sort((left, right) => right.score - left.score || left.index - right.index);
+
+  const seenKeys = new Set<string>();
+  const seenUrls = new Set<string>();
+  const result: string[] = [];
+  for (const candidate of candidates) {
+    const renderedUrl = canonicalUrl(candidate.url);
+    if ((candidate.key && seenKeys.has(candidate.key)) || (renderedUrl && seenUrls.has(renderedUrl))) continue;
+    if (candidate.key) seenKeys.add(candidate.key);
+    if (renderedUrl) seenUrls.add(renderedUrl);
+    result.push(candidate.url);
+    if (result.length >= 30) break;
+  }
+  return result;
 }
