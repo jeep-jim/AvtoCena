@@ -9,25 +9,27 @@ const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { getJsonStorage } = await import("../apps/web/lib/data.ts");
+const { getJsonStorage, readChunkedDataJson } = await import("../apps/web/lib/data.ts");
+const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked-data.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0));
 const shardCount = Math.max(1, Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 1));
-const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 1000));
-const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 3000));
+const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 100_000));
+const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 100_000));
 const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 8));
+const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 30));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
 const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
-const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100));
+const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100_000));
 const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 259_200_000));
-const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 300));
-const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 5000));
-const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 12));
-const sourceConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 6)));
-const prepareConcurrency = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 16)));
-const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 3_600_000));
+const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 100_000));
+const maxTotalPages = Math.max(maxPagesPerSource, Number(process.env.CATALOG_REBUILD_MAX_TOTAL_PAGES || 1_000_000));
+const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 1_000));
+const maxSourceErrors = Math.max(2, Number(process.env.CATALOG_REBUILD_MAX_SOURCE_ERRORS || 8));
+const sourceConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 8)));
+const prepareConcurrency = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 30)));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 6_300_000));
 const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
@@ -49,6 +51,7 @@ function shardOf(value) {
   for (const char of String(value)) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); }
   return Math.abs(hash >>> 0) % shardCount;
 }
+function cleanSourceId(sourceId) { return String(sourceId).replace(/[^a-z0-9_-]/gi, "-"); }
 function key(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
 function images(list) {
   const seen = new Set();
@@ -63,14 +66,13 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
-function isMassMarketPriority(offer) {
-  return classifyCatalogV2Offer(offer).tier === "priority";
-}
+function isMassMarketPriority(offer) { return classifyCatalogV2Offer(offer).tier === "priority"; }
 function quality(a, b) {
   return compareCatalogPublicPriority(a, b)
     || currentTime(b) - currentTime(a);
 }
-function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${String(sourceId).replace(/[^a-z0-9_-]/gi, "-")}.json`; }
+function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${cleanSourceId(sourceId)}.json`; }
+function candidatePath(sourceId) { return `catalog/source-candidates/${market}/${cleanSourceId(sourceId)}.json`; }
 function expired() { return Date.now() >= deadline; }
 async function pool(rows, limit, worker) {
   if (!rows.length) return [];
@@ -112,9 +114,11 @@ let detailEnriched = 0;
 let detailDeferred = 0;
 let calculationPending = 0;
 let galleriesAccumulated = 0;
+let candidatePoolsLoaded = 0;
+let candidatePoolsPersisted = 0;
 
 function reject(reason) { rejections[reason] = Number(rejections[reason] || 0) + 1; }
-function addError(row) { if (errors.length < 2000) errors.push(row); }
+function addError(row) { if (errors.length < 5000) errors.push(row); }
 function reserveDetail(sourceId) {
   const used = Number(detailReservations.get(sourceId) || 0);
   if (used >= detailLimitPerSource) return false;
@@ -124,27 +128,41 @@ function reserveDetail(sourceId) {
 function mergedRows() {
   const output = [];
   for (const sourceId of sourceIds) {
-    const live = [...fresh.get(sourceId).values()].filter((offer) => classifyCatalogV2Offer(offer).eligible).sort(quality);
-    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id) && classifyCatalogV2Offer(offer).eligible).sort(quality);
+    const live = [...fresh.get(sourceId).values()].sort(quality);
+    const old = [...retained.get(sourceId).values()].filter((offer) => !fresh.get(sourceId).has(offer.id)).sort(quality);
     output.push(...[...live, ...old].sort(quality).slice(0, targetPerSource));
   }
   return output.sort(quality);
 }
 function counts(map) { return Object.fromEntries(sourceIds.map((id) => [id, map.get(id).size])); }
 function numericCounts(map) { return Object.fromEntries(sourceIds.map((id) => [id, Number(map.get(id) || 0)])); }
+function candidateClassification(offers) {
+  const reasons = {};
+  let publishEligible = 0;
+  for (const offer of offers) {
+    const classification = classifyCatalogV2Offer(offer);
+    if (classification.eligible) publishEligible++;
+    else reasons[classification.reason] = Number(reasons[classification.reason] || 0) + 1;
+  }
+  return { publishEligible, reasons };
+}
 function report(stopReason = "running") {
   const offers = mergedRows();
+  const classification = candidateClassification(offers);
   const priorityOffers = offers.filter(isMassMarketPriority).length;
   const imageCounts = offers.map((offer) => Number(offer?.images?.length || 0));
   return {
-    version: 35, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 41, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 35, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
-      detailLimitPerSource, detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
+      version: 41, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      detailLimitPerSource, maxPagesPerSource, maxTotalPages, maxEmptyPages, maxSourceErrors,
+      detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
       detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending, galleriesAccumulated,
       priorityMaxTotalRub, priorityMaxPowerHp, priorityMinYear, priorityOffers,
+      candidateCount: offers.length, publishEligibleCount: classification.publishEligible,
+      candidateRejectionReasons: classification.reasons, candidatePoolsLoaded, candidatePoolsPersisted,
       retentionMs, pages, seen, normalized, knowledgeEnriched, detailEnriched, saved: offers.length, liveSourceIds, retentionSourceIds,
       imageStats: {
         minimum: imageCounts.length ? Math.min(...imageCounts) : 0,
@@ -152,7 +170,8 @@ function report(stopReason = "running") {
         average: imageCounts.length ? Number((imageCounts.reduce((sum, count) => sum + count, 0) / imageCounts.length).toFixed(2)) : 0,
         preferredShare: imageCounts.length ? Number((imageCounts.filter((count) => count >= preferredImages).length / imageCounts.length).toFixed(4)) : 0,
       },
-      publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
+      publicBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id && classifyCatalogV2Offer(offer).eligible).length])),
+      candidatesBySource: Object.fromEntries(sourceIds.map((id) => [id, offers.filter((offer) => offer.sourceId === id).length])),
       freshBySource: counts(fresh), restoredBySource: counts(retained), sourceErrors: errors, sources: sourceReports,
       rejectionReasons: rejections, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, stopReason,
     },
@@ -164,19 +183,54 @@ async function checkpoint(stopReason = "running") {
   await fs.writeFile(temporary, JSON.stringify(report(stopReason), null, 2));
   await fs.rename(temporary, outputFile);
 }
+async function persistCandidatePools() {
+  for (const sourceId of sourceIds) {
+    const rows = [...fresh.get(sourceId).values(), ...retained.get(sourceId).values()]
+      .filter((offer, index, list) => offer?.id && list.findIndex((candidate) => candidate.id === offer.id) === index)
+      .filter((offer) => firstSeen(offer) >= Date.now() - retentionMs)
+      .sort(quality)
+      .slice(0, targetPerSource);
+    try {
+      await replaceChunkedDataJson(candidatePath(sourceId), rows, 500);
+      candidatePoolsPersisted += rows.length;
+    } catch (error) {
+      addError({ sourceId, stage: "candidate_pool_write", error: String(error?.message || error) });
+    }
+  }
+}
 
 let shuttingDown = false;
 for (const signal of ["SIGTERM", "SIGINT"]) process.once(signal, () => {
   if (shuttingDown) return;
   shuttingDown = true;
-  checkpoint(`signal_${signal.toLowerCase()}`).finally(() => process.exit(0));
+  persistCandidatePools()
+    .then(() => checkpoint(`signal_${signal.toLowerCase()}`))
+    .finally(() => process.exit(0));
 });
+
+const storage = getJsonStorage();
+const cutoff = Date.now() - retentionMs;
+for (const sourceId of sourceIds) {
+  try {
+    const rows = await readChunkedDataJson(candidatePath(sourceId), []);
+    const bucket = retained.get(sourceId);
+    for (const row of rows.sort(quality)) {
+      if (!row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+      const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) {
+        bucket.set(offer.id, offer);
+        candidatePoolsLoaded++;
+      }
+    }
+  } catch (error) {
+    addError({ sourceId, stage: "candidate_pool_read", error: String(error?.message || error) });
+  }
+}
 
 let publicRows = [];
 let internalRows = [];
 try { publicRows = await readMarketOffers(market); } catch (error) { addError({ stage: "retention_public", error: String(error?.message || error) }); }
 try { internalRows = await readAllOffersForMaintenance(); } catch (error) { addError({ stage: "retention_internal", error: String(error?.message || error) }); }
-const cutoff = Date.now() - retentionMs;
 for (const row of [...publicRows, ...internalRows].sort(quality)) {
   const sourceId = String(row?.sourceId || "");
   const bucket = retained.get(sourceId);
@@ -268,7 +322,6 @@ async function prepare(base, source) {
   return offer;
 }
 
-const storage = getJsonStorage();
 const states = await pool(liveSourceIds, sourceConcurrency, async (sourceId) => {
   let saved = { cursor: null, cycle: 0, pagesVisited: 0 };
   try { saved = await storage.readJson(cursorPath(sourceId), saved); } catch (error) { addError({ sourceId, stage: "cursor_read", error: String(error?.message || error) }); }
@@ -290,7 +343,7 @@ async function fetchOne(state) {
   catch (error) {
     state.seenCursors.delete(cursorKey); state.errors++;
     addError({ sourceId: state.sourceId, cursor: state.cursor, stage: "list", error: String(error?.message || error) });
-    if (state.errors >= 2) { state.done = true; state.stopReason = "source_errors"; }
+    if (state.errors >= maxSourceErrors) { state.done = true; state.stopReason = "source_errors"; }
     return;
   }
   state.pages++; pages++;
@@ -314,7 +367,7 @@ async function fetchOne(state) {
   const nextCursor = fetched?.nextCursor || null;
   const finished = Boolean((fetched?.finished && !nextCursor) || !nextCursor);
   try {
-    await storage.writeJson(cursorPath(state.sourceId), { version: 1, market, sourceId: state.sourceId,
+    await storage.writeJson(cursorPath(state.sourceId), { version: 2, market, sourceId: state.sourceId,
       cursor: finished ? null : nextCursor, cycle: state.cycle + (finished ? 1 : 0), pagesVisited: state.pagesVisited + 1, updatedAt: new Date().toISOString() });
   } catch (error) { addError({ sourceId: state.sourceId, stage: "cursor_write", error: String(error?.message || error) }); }
   state.cursor = nextCursor; state.pagesVisited++;
@@ -350,5 +403,6 @@ for (const sourceId of retentionSourceIds.filter((id) => !liveSourceIds.includes
     stopReason: "probe_inactive" });
 }
 const stopReason = expired() ? "deadline" : pages >= maxTotalPages ? "total_page_limit" : liveSourceIds.length ? "sources_exhausted" : "no_active_sources";
+await persistCandidatePools();
 await checkpoint(stopReason);
 console.log(JSON.stringify(report(stopReason).report, null, 2));
