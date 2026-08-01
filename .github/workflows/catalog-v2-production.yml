@@ -1,5 +1,5 @@
 name: Catalog V2 production
-run-name: Catalog V2 · 7 markets · 5 source slots · ${{ github.sha }}
+run-name: Catalog V2 · 7 markets · canonical sources · ${{ github.sha }}
 
 on:
   schedule:
@@ -35,11 +35,11 @@ env:
   CATALOG_PRIORITY_MAX_POWER_HP: "160"
   CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
   CATALOG_V2_RECENT_MAX_AGE_YEARS: "10"
-  CATALOG_V2_HARD_MAX_TOTAL_RUB: "15000000"
-  CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
-  CATALOG_REBUILD_TARGET_PER_MARKET: "1000"
-  CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"
-  CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
+  CATALOG_V2_HARD_MAX_TOTAL_RUB: "100000000"
+  CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
+  CATALOG_REBUILD_TARGET_PER_MARKET: "100000"
+  CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"
+  CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
   CATALOG_OFFER_RETENTION_MS: "259200000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
@@ -121,7 +121,7 @@ jobs:
           compression-level: 9
 
   collect:
-    name: Collect V2 ${{ matrix.market }} slot ${{ matrix.shard }}
+    name: Collect V2 ${{ matrix.market }} shard ${{ matrix.shard }}
     needs: [validate, knowledge]
     if: needs.validate.result == 'success' && needs.knowledge.result == 'success'
     runs-on: ubuntu-latest
@@ -174,7 +174,7 @@ jobs:
       - name: Diagnose source routes without disabling live collection
         continue-on-error: true
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect every V2 source slot from fresh pages
+      - name: Collect every canonical source from fresh pages
         id: collect_step
         continue-on-error: true
         shell: bash
@@ -234,7 +234,7 @@ jobs:
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v2-publish-report.json
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "16"
-      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"
+      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -282,7 +282,7 @@ jobs:
             byMarket: report.byMarket || {},
             byMarketAndSource: report.byMarketAndSource || {},
             priority: Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.priorityCount || 0])),
-            shortageToUnlock: Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.shortageToUnlock ?? 1000])),
+            shortageToTarget: Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.shortage || 100000])),
             calculatedShare: Object.fromEntries(markets.map((market) => [market, report.marketQuality?.[market]?.calculatedShare ?? 0])),
             imageStats: Object.fromEntries(markets.map((market) => [market, {
               minimum: report.marketQuality?.[market]?.minimumImages || 0,
