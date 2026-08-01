@@ -15,10 +15,13 @@ const PROGRESS_PATH = "catalog/vehicle-knowledge/drom-progress.json";
 const REPORT_PATH = "catalog/vehicle-knowledge/drom-enrichment-report.json";
 const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
 const VARIANTS_PATH = "catalog/vehicle-knowledge/variants.json";
-const LIMIT = Math.max(1, Math.min(500, Number(process.env.DROM_KNOWLEDGE_LIMIT || 75)));
-const DELAY_MS = Math.max(500, Number(process.env.DROM_KNOWLEDGE_DELAY_MS || 1300));
+const LIMIT = Math.max(1, Math.min(1_000, Number(process.env.DROM_KNOWLEDGE_LIMIT || 300)));
+const DELAY_MS = Math.max(700, Number(process.env.DROM_KNOWLEDGE_DELAY_MS || 1_300));
 const TIMEOUT_MS = Math.max(5_000, Number(process.env.DROM_KNOWLEDGE_TIMEOUT_MS || 25_000));
 const RETRY_DAYS = Math.max(1, Number(process.env.DROM_KNOWLEDGE_RETRY_DAYS || 30));
+const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 10)));
+const RECENT_YEAR_FLOOR = new Date().getFullYear() - RECENT_YEARS + 1;
+const ONLY_RECENT = String(process.env.DROM_KNOWLEDGE_ONLY_RECENT || "1") !== "0";
 
 function clean(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -37,6 +40,14 @@ function dromSpecsUrl(model) {
   const [makeSlug, modelSlug] = String(model.id || "").split("/");
   if (!makeSlug || !modelSlug) return "";
   return `https://www.drom.ru/catalog/${encodeURIComponent(makeSlug)}/${encodeURIComponent(modelSlug)}/specs/engine_capacity/`;
+}
+
+function modelIsRecent(model) {
+  const yearFrom = Number(model.yearFrom || 0);
+  const yearTo = Number(model.yearTo || 0);
+  const newestKnownYear = Math.max(yearFrom, yearTo);
+  if (newestKnownYear) return newestKnownYear >= RECENT_YEAR_FLOOR;
+  return Number(model.popularityDecile || 10) <= 5;
 }
 
 async function fetchHtml(url) {
@@ -90,6 +101,7 @@ const [models, existingVariants, offers, progress] = await Promise.all([
   readAllOffersForMaintenance(),
   readDataJson(PROGRESS_PATH, { version: 1, models: {} }),
 ]);
+progress.models = progress.models || {};
 
 const activeModelIds = new Set();
 for (const offer of offers) {
@@ -98,8 +110,10 @@ for (const offer of offers) {
 }
 
 const now = Date.now();
-const candidates = models
+const eligibleModels = models
   .filter((model) => model.active !== false && dromSpecsUrl(model))
+  .filter((model) => activeModelIds.has(model.id) || !ONLY_RECENT || modelIsRecent(model));
+const candidates = eligibleModels
   .filter((model) => {
     const row = progress.models?.[model.id];
     if (!row) return true;
@@ -109,6 +123,10 @@ const candidates = models
   .sort((left, right) => {
     const activeDelta = Number(activeModelIds.has(right.id)) - Number(activeModelIds.has(left.id));
     if (activeDelta) return activeDelta;
+    const missingDelta = Number(Boolean(progress.models?.[left.id])) - Number(Boolean(progress.models?.[right.id]));
+    if (missingDelta) return missingDelta;
+    const recentDelta = Number(modelIsRecent(right)) - Number(modelIsRecent(left));
+    if (recentDelta) return recentDelta;
     const popularityDelta = Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10);
     if (popularityDelta) return popularityDelta;
     return `${left.make} ${left.model}`.localeCompare(`${right.make} ${right.model}`, "ru");
@@ -128,6 +146,13 @@ for (let index = 0; index < candidates.length; index++) {
     const response = await fetchHtml(url);
     if ([403, 429].includes(response.status)) {
       blocked = true;
+      progress.models[model.id] = {
+        status: "blocked",
+        checkedAt,
+        retryAt: new Date(Date.now() + 6 * 3_600_000).toISOString(),
+        httpStatus: response.status,
+        url,
+      };
       results.push({ modelId: model.id, url, status: "blocked", httpStatus: response.status });
       break;
     }
@@ -198,12 +223,17 @@ const nextModels = models.map((model) => {
   };
 });
 
-progress.version = 1;
+progress.version = 2;
 progress.updatedAt = new Date().toISOString();
 progress.lastBatch = {
   startedAt,
   finishedAt: progress.updatedAt,
   limit: LIMIT,
+  delayMs: DELAY_MS,
+  onlyRecent: ONLY_RECENT,
+  recentYears: RECENT_YEARS,
+  recentYearFloor: RECENT_YEAR_FLOOR,
+  eligibleModels: eligibleModels.length,
   selected: candidates.length,
   processed: results.length,
   ready: results.filter((row) => row.status === "ready").length,
@@ -214,7 +244,7 @@ progress.lastBatch = {
 await replaceChunkedDataJson(VARIANTS_PATH, variants, 250);
 await replaceChunkedDataJson(MODELS_PATH, nextModels, 250);
 await writeDataJson(PROGRESS_PATH, progress);
-await writeDataJson(REPORT_PATH, { ...progress.lastBatch, results: results.slice(0, 500) });
+await writeDataJson(REPORT_PATH, { ...progress.lastBatch, results: results.slice(0, 1_000) });
 resetVehicleKnowledgeCache();
 
 console.log(JSON.stringify({

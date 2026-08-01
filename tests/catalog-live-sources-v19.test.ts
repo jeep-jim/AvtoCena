@@ -74,7 +74,7 @@ test("priority galleries cache listing photos and enrich detail progressively", 
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_GALLERY_FAST_PATH: "false"/);
-  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"/);
+  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"/);
   assert.match(rebuild, /const detailNeeded = mandatoryPhotoMissing \|\| criticalSpecsMissing \|\| priorityGalleryMissing/);
   assert.match(rebuild, /reserveDetail/);
   assert.match(rebuild, /detailDeferredBySource/);

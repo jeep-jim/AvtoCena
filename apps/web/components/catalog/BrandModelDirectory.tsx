@@ -10,15 +10,25 @@ type BrandModelLink = {
   slug: string;
   count: number;
   aliases?: string[];
+  bodyTypes?: string[];
+  yearFrom?: number;
+  yearTo?: number;
   representativePowerHp?: number;
   knowledge?: {
     records: number;
+    variants: number;
+    references: number;
     powerHp?: NumericRange;
     powerKw?: NumericRange;
     power30MinKw?: NumericRange;
+    utilizationPowerKw?: NumericRange;
     engineCc?: NumericRange;
+    fuels: string[];
+    powertrains: string[];
   };
 };
+
+type KnowledgeRow = { label: string; value: string };
 
 const PREVIEW_LIMIT = 6;
 
@@ -39,6 +49,13 @@ function rangeLabel(range?: NumericRange, unit = "") {
   return `${value}${unit ? ` ${unit}` : ""}`;
 }
 
+function yearLabel(from?: number, to?: number) {
+  if (from && to) return from === to ? String(from) : `${from}–${to}`;
+  if (from) return `с ${from}`;
+  if (to) return `до ${to}`;
+  return "";
+}
+
 function modelKnowledgeLabel(model: BrandModelLink) {
   const hp = rangeLabel(model.knowledge?.powerHp, "л.с.");
   const kw30 = rangeLabel(model.knowledge?.power30MinKw, "кВт 30 мин");
@@ -47,6 +64,28 @@ function modelKnowledgeLabel(model: BrandModelLink) {
   if (kw30) return kw30;
   if (model.representativePowerHp) return `${compactNumber(model.representativePowerHp)} л.с.`;
   return model.knowledge?.records ? `${model.knowledge.records} характеристик` : "";
+}
+
+function modelKnowledgeRows(model: BrandModelLink): KnowledgeRow[] {
+  const rows = [
+    yearLabel(model.yearFrom, model.yearTo) ? { label: "Годы выпуска", value: yearLabel(model.yearFrom, model.yearTo) } : null,
+    rangeLabel(model.knowledge?.engineCc, "см³") ? { label: "Объём двигателя", value: rangeLabel(model.knowledge?.engineCc, "см³") } : null,
+    rangeLabel(model.knowledge?.powerHp, "л.с.") ? { label: "Мощность", value: rangeLabel(model.knowledge?.powerHp, "л.с.") } : null,
+    rangeLabel(model.knowledge?.powerKw, "кВт") ? { label: "Мощность", value: rangeLabel(model.knowledge?.powerKw, "кВт") } : null,
+    rangeLabel(model.knowledge?.power30MinKw, "кВт") ? { label: "30-минутная", value: rangeLabel(model.knowledge?.power30MinKw, "кВт") } : null,
+    rangeLabel(model.knowledge?.utilizationPowerKw, "кВт") ? { label: "Для утильсбора", value: rangeLabel(model.knowledge?.utilizationPowerKw, "кВт") } : null,
+    model.knowledge?.variants ? { label: "Модификаций", value: String(model.knowledge.variants) } : null,
+    model.count ? { label: "Предложений", value: String(model.count) } : null,
+  ];
+  return rows.filter((row): row is KnowledgeRow => Boolean(row));
+}
+
+function modelTags(model: BrandModelLink) {
+  return [...new Set([
+    ...(model.knowledge?.fuels || []),
+    ...(model.knowledge?.powertrains || []),
+    ...(model.bodyTypes || []),
+  ].map((value) => String(value || "").trim()).filter(Boolean))].slice(0, 10);
 }
 
 function SearchIcon() {
@@ -73,6 +112,7 @@ export function BrandModelDirectory({
 }) {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
+  const [openModelId, setOpenModelId] = useState<string | null>(null);
   const normalizedQuery = searchable(query);
 
   const prioritizedModels = useMemo(() => {
@@ -95,7 +135,7 @@ export function BrandModelDirectory({
     <div className="flex items-center justify-between gap-3">
       <div>
         <h2 className="text-2xl font-black md:text-4xl">Модели {brand}</h2>
-        <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Мощность и другие характеристики берутся из базы знаний АвтоЦена и автоматически применяются к объявлениям.</p>
+        <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Нажмите на модель, чтобы раскрыть характеристики. Эта же база автоматически дополняет объявления и участвует в расчёте цены.</p>
       </div>
       {canExpand ? <button
         type="button"
@@ -124,17 +164,50 @@ export function BrandModelDirectory({
     {filtered.length ? <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
       {filtered.map((model) => {
         const knowledge = modelKnowledgeLabel(model);
-        return <Link
+        const open = openModelId === model.id;
+        const detailId = `model-knowledge-${searchable(model.id)}`;
+        const rows = modelKnowledgeRows(model);
+        const tags = modelTags(model);
+        return <article
           key={model.id}
-          href={`/cars/brand/${brandSlug}/model/${model.slug}`}
-          className="group flex min-h-14 items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-3 py-2.5 transition hover:bg-[var(--ac-surface-3)] hover:text-red-500"
+          className={`overflow-hidden rounded-2xl bg-[var(--ac-surface-2)] transition ${open ? "col-span-2 sm:col-span-3 lg:col-span-6 ring-1 ring-red-500/20" : ""}`}
         >
-          <span className="min-w-0">
-            <span className="block truncate text-sm font-black">{model.model}</span>
-            {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : null}
-          </span>
-          {model.count > 0 ? <span className="shrink-0 text-[10px] font-black text-[var(--ac-muted)]">{model.count}</span> : null}
-        </Link>;
+          <button
+            type="button"
+            onClick={() => setOpenModelId(open ? null : model.id)}
+            className="group flex min-h-14 w-full items-center justify-between gap-2 px-3 py-2.5 text-left transition hover:bg-[var(--ac-surface-3)] hover:text-red-500"
+            aria-expanded={open}
+            aria-controls={detailId}
+          >
+            <span className="min-w-0">
+              <span className="block truncate text-sm font-black">{model.model}</span>
+              {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">Характеристики собираются</span>}
+            </span>
+            <span className="flex shrink-0 items-center gap-1 text-[10px] font-black text-[var(--ac-muted)]">
+              {model.count > 0 ? <span>{model.count}</span> : null}
+              <Chevron open={open} />
+            </span>
+          </button>
+
+          {open ? <div id={detailId} className="border-t border-black/5 px-3 pb-3 pt-3 dark:border-white/5 md:px-4 md:pb-4">
+            {rows.length ? <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+              {rows.map((row) => <div key={`${row.label}-${row.value}`} className="rounded-xl bg-[var(--ac-surface)] px-3 py-2.5">
+                <div className="text-[9px] font-black uppercase tracking-[0.12em] text-[var(--ac-muted)]">{row.label}</div>
+                <div className="mt-1 text-sm font-black text-[var(--ac-text)]">{row.value}</div>
+              </div>)}
+            </div> : <p className="rounded-xl bg-[var(--ac-surface)] px-3 py-3 text-xs font-bold leading-5 text-[var(--ac-muted)]">Для этой модели пока нет подтверждённой модификации. Она уже стоит в очереди базы знаний; непроверенные цифры в расчёт не подставляются.</p>}
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {tags.map((tag) => <span key={tag} className="rounded-full bg-[var(--ac-surface)] px-3 py-1.5 text-[10px] font-black text-[var(--ac-muted)]">{tag}</span>)}
+              <Link
+                href={`/cars/brand/${brandSlug}/model/${model.slug}`}
+                className="ml-auto inline-flex min-h-10 items-center rounded-xl bg-red-500 px-4 text-xs font-black text-white transition hover:bg-red-600"
+              >
+                Все характеристики и предложения →
+              </Link>
+            </div>
+          </div> : null}
+        </article>;
       })}
     </div> : normalizedQuery ? <p className="mt-5 text-sm font-bold text-[var(--ac-muted)]">Такой модели в списке нет.</p> : null}
   </section>;
