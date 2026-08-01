@@ -73,17 +73,18 @@ test("Catalog V2 refreshes the encyclopedia before collecting offers", () => {
   assert.match(publishBlock, /needs: \[validate, knowledge, collect\]/);
 });
 
-test("Catalog V2 runs seven markets with five source slots and requires all markets", () => {
+test("Catalog V2 runs seven markets with canonical sources and requires all markets", () => {
   assert.match(workflow, /Catalog V2 production/);
+  assert.match(workflow, /canonical sources/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /CATALOG_V2_PRIORITY_TARGET: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /Collect every V2 source slot from fresh pages/);
+  assert.match(workflow, /Collect every canonical source from fresh pages/);
   assert.match(workflow, /Publish only a complete seven-market generation/);
   assert.match(workflow, /missing = markets\.filter/);
   assert.match(workflow, /badFallback/);
