@@ -192,12 +192,14 @@ export function selectCatalogV2MarketOffers(
   // 1000 — ориентир наполнения приоритетного слоя, а не блокировка рынка.
   // Всегда публикуем всё найденное и проверенное: сначала массовые варианты,
   // затем японские аукционы, машины до 10 лет и расширенный слой.
+  // Старый workflow не может вернуть лимит 30 000: нижняя граница всегда 100 000.
+  const publicationLimit = Math.max(100_000, Number(options.maximumPerMarket || 0));
   const selected = [
     ...buckets.priority,
     ...buckets.japan_auction,
     ...buckets.recent,
     ...buckets.extended,
-  ].slice(0, options.maximumPerMarket);
+  ].slice(0, publicationLimit);
 
   return {
     selected,
