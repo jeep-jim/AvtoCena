@@ -13,27 +13,19 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
-test("production workflow repairs vehicle knowledge only when the retained base is unhealthy", () => {
-  const retainedAudit = workflow.indexOf("Audit retained production knowledge first");
-  const syncModels = workflow.indexOf("scripts/catalog-sync-vehicle-models.mjs", retainedAudit);
-  const syncSeed = workflow.indexOf("scripts/catalog-sync-vehicle-knowledge-seed.mjs", syncModels);
-  const buildVariants = workflow.indexOf("scripts/catalog-build-vehicle-variants.mjs", syncSeed);
-  const buildPower = workflow.indexOf("scripts/catalog-build-power-knowledge.mjs", buildVariants);
-  const finalAudit = workflow.indexOf("scripts/catalog-audit-vehicle-knowledge.mjs", buildPower);
-  const collect = workflow.indexOf("Collect listings, calculations and progressive galleries");
+test("production workflow refreshes and audits vehicle knowledge before collection", () => {
+  const syncModels = workflow.indexOf("Refresh model encyclopedia");
+  const buildVariants = workflow.indexOf("Accumulate model variants from verified listings", syncModels);
+  const buildPower = workflow.indexOf("Accumulate power knowledge", buildVariants);
+  const finalAudit = workflow.indexOf("Audit encyclopedia", buildPower);
+  const collect = workflow.indexOf("\n  collect:");
 
-  if (retainedAudit >= 0) {
-    assert.ok(syncModels > retainedAudit);
-    assert.ok(syncSeed > syncModels);
-    assert.ok(buildVariants > syncSeed);
-    assert.ok(buildPower > buildVariants);
-    assert.ok(finalAudit > buildPower);
-    assert.ok(collect > finalAudit);
-  } else {
-    assert.match(workflow, /Audit current production knowledge without rewriting it/);
-    assert.ok(collect >= 0);
-  }
-  assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "5000"/);
+  assert.ok(syncModels >= 0);
+  assert.ok(buildVariants > syncModels);
+  assert.ok(buildPower > buildVariants);
+  assert.ok(finalAudit > buildPower);
+  assert.ok(collect > finalAudit);
+  assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
 });
 
 test("production workflow serializes catalog builds and never cancels a running build", () => {
