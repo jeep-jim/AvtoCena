@@ -35,12 +35,12 @@ export type CatalogV2Selection = {
 
 export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   priorityTarget: 1_000,
-  maximumPerMarket: 30_000,
+  maximumPerMarket: 100_000,
   priorityMaxAgeYears: 6,
   recentMaxAgeYears: 10,
   priorityMaxPowerHp: 160,
   priorityMaxTotalRub: 6_000_000,
-  hardMaxTotalRub: 15_000_000,
+  hardMaxTotalRub: 100_000_000,
 };
 
 function number(value: unknown) {
@@ -77,12 +77,25 @@ function hasCompleteCalculation(offer: Partial<VehicleOffer>) {
   return ids.has("car") && ids.has("customs");
 }
 
-export function isCompletedJapanAuction(offer: Partial<VehicleOffer>) {
+export function isJapanAuctionOffer(offer: Partial<VehicleOffer>) {
   if (offer.market !== "japan") return false;
   const raw = rawObject(offer);
   const sourceId = String(offer.sourceId || "").toLowerCase();
-  const status = String(raw.auctionStatus || raw.saleStatus || raw.status || "").toLowerCase();
-  const sourceMarksHistory = /(?:past|stat|sold|auction_history)/.test(sourceId);
+  const venue = String(offer.auctionName || offer.operational?.sourceVenueName || "").toLowerCase();
+  const rawKind = String(raw.catalogKind || raw.offerType || raw.auctionType || "").toLowerCase();
+  return offer.offerType === "auction"
+    || offer.catalogKind === "auction_result"
+    || /(?:auction|auc|jpauc|japantransit|carvector|uss|ju|taa|caa|jaa|arai|haa|zip|aucnet|baya)/.test(sourceId)
+    || /(?:auction|オークション|uss|ju|taa|caa|jaa|arai|haa|zip|aucnet)/i.test(venue)
+    || /(?:auction|auction_result|past_auction)/.test(rawKind);
+}
+
+export function isCompletedJapanAuction(offer: Partial<VehicleOffer>) {
+  if (!isJapanAuctionOffer(offer)) return false;
+  const raw = rawObject(offer);
+  const sourceId = String(offer.sourceId || "").toLowerCase();
+  const status = String(raw.auctionStatus || raw.saleStatus || raw.status || offer.auctionResult || offer.status || "").toLowerCase();
+  const sourceMarksHistory = /(?:past|stat|sold|result|history)/.test(sourceId);
   const statusMarksCompleted = /(?:sold|completed|finished|result|past|落札|成約)/i.test(status);
   return sourceMarksHistory || statusMarksCompleted;
 }
@@ -101,11 +114,22 @@ export function classifyCatalogV2Offer(
   if (!hasCompleteCalculation(offer)) {
     return { tier: "rejected", eligible: false, reason: "full_calculation", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  if (!totalRub || totalRub > options.hardMaxTotalRub) {
-    return { tier: "rejected", eligible: false, reason: "hard_price_limit", totalRub, ageYears, powerHp, popularityDecile: popularity };
+  if (!totalRub) {
+    return { tier: "rejected", eligible: false, reason: "price_missing", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  if (isCompletedJapanAuction(offer)) {
-    return { tier: "japan_auction", eligible: true, reason: "completed_auction", totalRub, ageYears, powerHp, popularityDecile: popularity };
+  if (offer.market === "japan") {
+    if (!isJapanAuctionOffer(offer)) {
+      return { tier: "rejected", eligible: false, reason: "japan_non_auction", totalRub, ageYears, powerHp, popularityDecile: popularity };
+    }
+    return {
+      tier: "japan_auction",
+      eligible: true,
+      reason: isCompletedJapanAuction(offer) ? "completed_auction" : "current_auction",
+      totalRub,
+      ageYears,
+      powerHp,
+      popularityDecile: popularity,
+    };
   }
   const priority = ageYears !== undefined
     && ageYears <= options.priorityMaxAgeYears
@@ -116,9 +140,9 @@ export function classifyCatalogV2Offer(
     return { tier: "priority", eligible: true, reason: "russia_mass_market", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
   if (ageYears !== undefined && ageYears <= options.recentMaxAgeYears) {
-    return { tier: "recent", eligible: true, reason: "fallback_after_priority_target", totalRub, ageYears, powerHp, popularityDecile: popularity };
+    return { tier: "recent", eligible: true, reason: "recent_after_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  return { tier: "extended", eligible: true, reason: "extended_after_priority_target", totalRub, ageYears, powerHp, popularityDecile: popularity };
+  return { tier: "extended", eligible: true, reason: "extended_after_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
 }
 
 function freshness(offer: Partial<VehicleOffer>) {
@@ -129,9 +153,9 @@ function imageCount(offer: Partial<VehicleOffer>) {
   return Array.isArray(offer.images) ? Math.min(30, offer.images.length) : 0;
 }
 
-function order(left: VehicleOffer, right: VehicleOffer) {
-  const a = classifyCatalogV2Offer(left);
-  const b = classifyCatalogV2Offer(right);
+function order(left: VehicleOffer, right: VehicleOffer, options: CatalogV2PolicyOptions) {
+  const a = classifyCatalogV2Offer(left, options);
+  const b = classifyCatalogV2Offer(right, options);
   const popularityA = a.popularityDecile ?? 99;
   const popularityB = b.popularityDecile ?? 99;
   return popularityA - popularityB
@@ -163,15 +187,17 @@ export function selectCatalogV2MarketOffers(
     }
     buckets[classification.tier].push(offer);
   }
-  for (const rows of Object.values(buckets)) rows.sort(order);
+  for (const rows of Object.values(buckets)) rows.sort((left, right) => order(left, right, options));
 
-  const priorityCount = buckets.priority.length;
-  const fallbackUnlocked = priorityCount >= options.priorityTarget;
-  const base = [...buckets.priority];
-  if (buckets.japan_auction.length) base.push(...buckets.japan_auction);
-  if (fallbackUnlocked) base.push(...buckets.recent, ...buckets.extended);
-  const selected = base.slice(0, options.maximumPerMarket);
-  const selectedIds = new Set(selected.map((offer) => offer.id));
+  // 1000 — ориентир наполнения приоритетного слоя, а не блокировка рынка.
+  // Всегда публикуем всё найденное и проверенное: сначала массовые варианты,
+  // затем японские аукционы, машины до 10 лет и расширенный слой.
+  const selected = [
+    ...buckets.priority,
+    ...buckets.japan_auction,
+    ...buckets.recent,
+    ...buckets.extended,
+  ].slice(0, options.maximumPerMarket);
 
   return {
     selected,
@@ -179,11 +205,11 @@ export function selectCatalogV2MarketOffers(
     auctionCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "japan_auction").length,
     recentCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "recent").length,
     extendedCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "extended").length,
-    fallbackUnlocked,
-    shortageToUnlock: Math.max(0, options.priorityTarget - priorityCount),
+    fallbackUnlocked: true,
+    shortageToUnlock: 0,
     rejected: {
       ...rejected,
-      fallback_locked: fallbackUnlocked ? 0 : [...buckets.recent, ...buckets.extended].filter((offer) => !selectedIds.has(offer.id)).length,
+      fallback_locked: 0,
     },
   };
 }
