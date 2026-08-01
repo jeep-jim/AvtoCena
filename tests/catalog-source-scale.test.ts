@@ -5,6 +5,10 @@ import { catalogImportSources } from "../apps/web/lib/catalog/importer";
 import { scaleMarketSources } from "../apps/web/lib/catalog/scale-market-sources";
 import { japanTransitAuctionStatisticsSource } from "../apps/web/lib/catalog/japan-auction-statistics-source";
 import {
+  CATALOG_FUTURE_USA_ANCHORS,
+  CATALOG_V2_SOURCE_SLOTS,
+} from "../apps/web/lib/catalog/catalog-v2-source-registry";
+import {
   CATALOG_DAILY_TARGET_PER_SOURCE,
   CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET,
   CATALOG_RETENTION_MS,
@@ -31,10 +35,11 @@ const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.met
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
+const japanOpenSources = fs.readFileSync(new URL("../apps/web/lib/catalog/japan-auction-open-sources.ts", import.meta.url), "utf8");
 
-test("source-scale catalog keeps 1000-offer quota per source and supports large markets", () => {
-  assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 1_000);
-  assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 30_000);
+test("source-scale catalog supports 100000 verified offers per source and market", () => {
+  assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 100_000);
+  assert.equal(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET, 100_000);
   assert.equal(CATALOG_RETENTION_MS, 3 * 24 * 60 * 60 * 1_000);
   assert.match(rebuildScript, /minimumMarketTarget/);
   assert.match(rebuildScript, /targetPerSource/);
@@ -44,7 +49,7 @@ test("source-scale catalog keeps 1000-offer quota per source and supports large 
   assert.doesNotMatch(publishScript, /selected\.length >= target\b/);
 });
 
-test("Catalog V2 runs all 35 market source slots in one wave", () => {
+test("Catalog V2 runs all 35 market shards in one wave", () => {
   assert.match(workflow, /group: catalog-v2-production/);
   assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /max-parallel: 20/);
@@ -53,12 +58,14 @@ test("Catalog V2 runs all 35 market source slots in one wave", () => {
   assert.doesNotMatch(workflow, /^\s*pull_request:/m);
 });
 
-test("Catalog V2 targets five source slots, 1000 priority cars and progressive galleries", () => {
+test("Catalog V2 uses canonical sources, 100000 capacity and progressive galleries", () => {
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"/);
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "1000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "5"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
+  assert.match(workflow, /CATALOG_V2_HARD_MAX_TOTAL_RUB: "100000000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
@@ -76,6 +83,28 @@ test("Catalog V2 targets five source slots, 1000 priority cars and progressive g
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
 });
 
+test("canonical anchor sites are fixed for all seven markets and USA remains future", () => {
+  const urls = (market: keyof typeof CATALOG_V2_SOURCE_SLOTS) => new Set(CATALOG_V2_SOURCE_SLOTS[market].map((source) => source.canonicalUrl));
+  assert.deepEqual([...urls("uae")].filter((url) => /dubizzle|dubicars/.test(url)), ["https://uae.dubizzle.com/", "https://www.dubicars.com/"]);
+  assert.ok(urls("korea").has("https://www.encar.com/"));
+  assert.ok(urls("korea").has("https://www.kcar.com/"));
+  assert.ok(urls("europe").has("https://www.mobile.de/"));
+  assert.ok(urls("europe").has("https://www.autoscout24.com/"));
+  assert.ok(urls("georgia").has("https://www.myauto.ge/"));
+  assert.ok(urls("georgia").has("https://autopapa.ge/"));
+  assert.ok(urls("china").has("https://www.che168.com/"));
+  assert.ok(urls("china").has("https://www.dongchedi.com/"));
+  assert.ok(urls("china").has("https://www.guazi.com/"));
+  assert.equal(CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.canonicalUrl === "https://www.autohome.com.cn/")?.role, "knowledge");
+  assert.ok(urls("japan").has("https://jpauc.com/auction/past"));
+  assert.ok(urls("japan").has("https://carvector.com/stat"));
+  assert.ok(urls("japan").has("https://prestigemotorsport.com.au/auctions/"));
+  assert.ok(urls("japan").has("https://www.auctiondatasearch.jp/"));
+  assert.equal(CATALOG_V2_SOURCE_SLOTS.japan.find((source) => source.canonicalUrl === "https://jp.center/catalog")?.role, "knowledge");
+  assert.ok(urls("kyrgyzstan").has("https://www.mashina.kg/"));
+  assert.deepEqual(CATALOG_FUTURE_USA_ANCHORS.map((source) => source.canonicalUrl), ["https://stat.vin/", "https://bid.cars/", "https://auctionstat.com/"]);
+});
+
 test("all seven markets have at least three independent registered adapters", () => {
   const byMarket = new Map(PUBLIC_CATALOG_MARKETS.map((market) => [market, new Set<string>()]));
   for (const source of catalogImportSources) {
@@ -88,6 +117,16 @@ test("all seven markets have at least three independent registered adapters", ()
   assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
   assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
   assert.ok((byMarket.get("europe")?.size || 0) >= 8, "Europe must use the expanded source registry");
+});
+
+test("Japan auction sources use real listing and detail routes", () => {
+  const ids = new Set(catalogImportSources.map((source) => source.sourceId));
+  for (const sourceId of ["jpauc_japan_current_open", "jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "japantransit_japan_stat_open"]) {
+    assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
+  }
+  assert.match(japanOpenSources, /https:\/\/jpauc\.com\/auction\/listing/);
+  assert.match(japanOpenSources, /\\\/auction\\\/detail\\\/\\d\+/);
+  assert.match(japanOpenSources, /https:\/\/www\.auctiondatasearch\.jp\//);
 });
 
 test("Japan Transit sold-auction statistics participates in the production registry", () => {
