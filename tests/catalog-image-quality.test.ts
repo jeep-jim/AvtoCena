@@ -37,10 +37,17 @@ test("rejects a square service pictogram even when it is large", () => {
 });
 
 test("keeps only real photographs and serves them through the stable catalog API", () => {
-  assert.deepEqual(
-    rankedCatalogImageUrls({ images: [squareWrenchIcon, jpegPhoto] }),
-    ["/api/catalog/images/photo"],
-  );
+  assert.deepEqual(rankedCatalogImageUrls({ images: [squareWrenchIcon, jpegPhoto] }), ["/api/catalog/images/photo"]);
+});
+
+test("removes repeated images with the same checksum", () => {
+  const copy = {
+    ...jpegPhoto,
+    id: "photo-copy",
+    objectKey: "catalog/images/uae/photo-copy.jpg",
+    url: "https://img.avtocena.com/catalog/images/uae/photo-copy.jpg?size=large",
+  };
+  assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
 test("falls back to the stored URL only for legacy images without an id", () => {
@@ -63,7 +70,6 @@ test("accepts a server-validated public DTO after private source fields are remo
     calculationStatus: "needs_data",
     images: [jpegPhoto],
   };
-
   assert.equal(isCrediblePublicOffer(publicOffer as any), true);
   assert.equal(isCrediblePublicOffer({ ...publicOffer, images: [] } as any), false);
 });
