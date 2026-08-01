@@ -71,9 +71,14 @@ test("Catalog V2 uses canonical sources, 100000 capacity and progressive galleri
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
-  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "250"/);
-  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "20"/);
-  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "4800000"/);
+  assert.match(workflow, /CATALOG_REBUILD_RESET_CURSOR: "0"/);
+  assert.match(workflow, /CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000000"/);
+  assert.match(workflow, /CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"/);
+  assert.match(workflow, /CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
   assert.match(workflow, /CATALOG_PRIORITY_MAX_AGE_YEARS: "6"/);
@@ -81,6 +86,18 @@ test("Catalog V2 uses canonical sources, 100000 capacity and progressive galleri
   assert.match(workflow, /compression-level: 9/);
   assert.match(workflow, /Catalog V2 health/);
   assert.match(workflow, /cron: "17 20 \* \* \*"/);
+});
+
+test("large collection persists candidate pools instead of discarding incomplete records", () => {
+  assert.match(rebuildScript, /catalog\/source-candidates/);
+  assert.match(rebuildScript, /readChunkedDataJson/);
+  assert.match(rebuildScript, /replaceChunkedDataJson/);
+  assert.match(rebuildScript, /candidateCount/);
+  assert.match(rebuildScript, /publishEligibleCount/);
+  assert.match(rebuildScript, /candidateRejectionReasons/);
+  assert.match(rebuildScript, /candidatePoolsLoaded/);
+  assert.match(rebuildScript, /candidatePoolsPersisted/);
+  assert.doesNotMatch(rebuildScript, /filter\(\(offer\) => classifyCatalogV2Offer\(offer\)\.eligible\)/);
 });
 
 test("canonical anchor sites are fixed for all seven markets and USA remains future", () => {
