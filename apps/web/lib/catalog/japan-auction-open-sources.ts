@@ -3,10 +3,77 @@ import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatu
 
 type JapanAuctionFeedKind = "upcoming" | "past";
 
+const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image/i;
+
 function pageUrl(base: string, page: number, key = "page") {
   const url = new URL(base);
   if (page > 1) url.searchParams.set(key, String(page));
   return url.toString();
+}
+
+function absoluteImageUrl(value: unknown, baseUrl: string) {
+  const raw = String(value || "").trim().replace(/\\\//g, "/");
+  if (!raw || /^(?:data:|javascript:)/i.test(raw)) return "";
+  try {
+    const url = new URL(raw, baseUrl).toString();
+    return /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url) ? url : "";
+  } catch {
+    return "";
+  }
+}
+
+function remoteImage(url: string): CatalogImage {
+  const extension = url.match(/\.(jpe?g|webp|avif|png)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+  const mimeType = extension === "png"
+    ? "image/png"
+    : extension === "webp"
+      ? "image/webp"
+      : extension === "avif"
+        ? "image/avif"
+        : "image/jpeg";
+  return { id: "", url, objectKey: "", size: 0, checksum: "", mimeType };
+}
+
+function rawAuctionImageUrls(offer: VehicleOffer) {
+  const raw = offer.operational?.raw as Record<string, unknown> | undefined;
+  const values = [raw?.images, raw?.photos, raw?.gallery, raw?.imageUrls, raw?.photoUrls];
+  return values.flatMap((value) => Array.isArray(value) ? value : [])
+    .map((value) => typeof value === "string" ? value : (value as any)?.url || (value as any)?.src || (value as any)?.original || "")
+    .map((value) => absoluteImageUrl(value, String(offer.operational?.sourceUrl || "https://jpauc.com")))
+    .filter(Boolean);
+}
+
+async function remoteAuctionImages(offer: VehicleOffer) {
+  const sourceUrl = String(offer.operational?.sourceUrl || "");
+  const urls = new Set(rawAuctionImageUrls(offer));
+  if (sourceUrl) {
+    try {
+      const response = await fetch(sourceUrl, {
+        redirect: "follow",
+        signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 20_000))),
+        headers: {
+          accept: "text/html,application/xhtml+xml,image/avif,image/webp,*/*;q=0.8",
+          "accept-language": "en-US,en;q=0.9,ja;q=0.8,ru;q=0.7",
+          referer: new URL(sourceUrl).origin,
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        },
+      });
+      if (response.ok) {
+        const markup = await response.text();
+        for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src)\s*=\s*["']([^"']+)["']/gi)) {
+          const url = absoluteImageUrl(match[1], sourceUrl);
+          if (url) urls.add(url);
+        }
+        for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) {
+          const url = absoluteImageUrl(match[0], sourceUrl);
+          if (url) urls.add(url);
+        }
+      }
+    } catch {
+      // Сбой кэширования или hotlink-защита не должны удалять сам реальный лот.
+    }
+  }
+  return [...urls].slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))).map(remoteImage);
 }
 
 class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
@@ -49,8 +116,10 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
     };
   }
 
-  fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    return this.base.fetchImages(offer);
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const cached = await this.base.fetchImages(offer).catch(() => []);
+    if (cached.length) return cached;
+    return remoteAuctionImages(offer);
   }
 
   mapStatus(): OfferStatus {
