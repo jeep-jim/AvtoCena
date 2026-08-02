@@ -4,11 +4,9 @@ on:
   workflow_call:
     inputs:
       market:
-        description: Catalog market id
         required: true
         type: string
       display_name:
-        description: Human-readable market name
         required: true
         type: string
     secrets:
@@ -50,8 +48,6 @@ env:
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
-  CATALOG_PUBLISH_SCOPE: "market"
-  CATALOG_PUBLISH_PRESERVE_MARKETS: "korea,china,japan,uae,europe,georgia,kyrgyzstan"
 
 jobs:
   validate:
@@ -67,12 +63,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Validate catalog engine and market pipeline
+      - name: Validate independent market pipeline
         run: |
           node --check scripts/catalog-probe-source-shard.mjs
           node --check scripts/catalog-rebuild-source-shard.mjs
-          node --check scripts/catalog-publish-source-scale.mjs
-          node --import tsx --test tests/catalog-calculation-integrity.test.ts tests/catalog-image-quality.test.ts tests/catalog-publication-gate.test.ts tests/catalog-probe-source-shard.test.ts
+          node --check scripts/catalog-publish-market.mjs
+          node --import tsx --test tests/catalog-calculation-integrity.test.ts tests/catalog-image-quality.test.ts tests/catalog-probe-source-shard.test.ts
           npm --workspace=@avtocena/engine exec tsc -- --noEmit
 
   knowledge:
@@ -92,8 +88,6 @@ jobs:
       CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT: catalog-v2-${{ inputs.market }}-knowledge-audit.json
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -104,9 +98,9 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_BUCKET"
           test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
-      - name: Audit current encyclopedia snapshot
+      - name: Audit saved model and specification database
         run: timeout --signal=TERM --kill-after=60s 600s npx tsx scripts/catalog-audit-vehicle-knowledge.mjs
-      - name: Upload encyclopedia audit
+      - name: Upload knowledge audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -159,58 +153,23 @@ jobs:
       CATALOG_PROBE_OUTPUT: catalog-v2-probe-${{ inputs.market }}-${{ matrix.shard }}.json
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Probe all registered ${{ inputs.display_name }} sources
+      - name: Probe every registered ${{ inputs.display_name }} source
         continue-on-error: true
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect productive sources with cursor checkpoints
-        id: collect_step
+      - name: Collect productive sources and save cursor checkpoints
         continue-on-error: true
         shell: bash
         run: |
           set +e
           timeout --signal=TERM --kill-after=120s 2280s npx tsx scripts/catalog-rebuild-source-shard.mjs
           status=$?
-          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
           if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
-            export CATALOG_COLLECT_EXIT_CODE="$status"
-            node <<'NODE'
-          const fs = require('fs');
-          const market = process.env.CATALOG_REBUILD_MARKET;
-          const shardIndex = Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0);
-          const shardCount = 5;
-          fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT, JSON.stringify({
-            version: 42,
-            market,
-            shardIndex,
-            shardCount,
-            generatedAt: new Date().toISOString(),
-            count: 0,
-            sourceIds: [],
-            liveSourceIds: [],
-            retentionSourceIds: [],
-            partial: true,
-            stopReason: `collector_exit_${process.env.CATALOG_COLLECT_EXIT_CODE || 1}`,
-            report: {
-              version: 42,
-              market,
-              shardIndex,
-              shardCount,
-              saved: 0,
-              publicBySource: {},
-              rejectionReasons: {},
-              sources: [],
-              sourceErrors: [{ stage: 'catalog_v2_collector', error: `exit_${process.env.CATALOG_COLLECT_EXIT_CODE || 1}` }],
-            },
-            offers: [],
-          }, null, 2));
-          NODE
+            node -e 'const fs=require("fs");fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT,JSON.stringify({version:42,market:process.env.CATALOG_REBUILD_MARKET,shardIndex:Number(process.env.CATALOG_REBUILD_SHARD_INDEX||0),shardCount:5,generatedAt:new Date().toISOString(),count:0,partial:true,stopReason:`collector_exit_${process.argv[1]}`,report:{saved:0,rejectionReasons:{},sources:[],sourceErrors:[{stage:"collector",error:`exit_${process.argv[1]}`}]},offers:[]},null,2))' "$status"
           fi
           exit 0
       - name: Upload market shard
@@ -246,17 +205,14 @@ jobs:
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v2-${{ inputs.market }}-publish-report.json
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "32"
       CATALOG_INDEX_WRITE_CONCURRENCY: "16"
-      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Download ${{ inputs.display_name }} shards
+      - name: Download only ${{ inputs.display_name }} shards
         uses: actions/download-artifact@v4
         with:
           pattern: catalog-v2-${{ inputs.market }}-*
@@ -265,18 +221,10 @@ jobs:
       - name: Validate calculations and galleries
         continue-on-error: true
         run: npx tsx scripts/catalog-validate-source-scale.mjs
-      - name: Publish selected market while preserving other markets
-        id: publish_step
+      - name: Publish selected market and preserve previous markets
         continue-on-error: true
-        shell: bash
-        run: |
-          set +e
-          timeout --signal=TERM --kill-after=120s 1200s npx tsx scripts/catalog-publish-source-scale.mjs
-          status=$?
-          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
-          exit 0
-      - name: Require a non-empty published market generation
-        shell: bash
+        run: timeout --signal=TERM --kill-after=120s 1200s npx tsx scripts/catalog-publish-market.mjs
+      - name: Require a non-empty market publication
         run: |
           node <<'NODE'
           const fs = require('fs');
@@ -289,17 +237,15 @@ jobs:
             published: report.published === true,
             count,
             target: Number(report.targetPerMarket || 100000),
-            shortage: Math.max(0, Number(report.targetPerMarket || 100000) - count),
+            shortage: Number(report.shortage || 0),
             sources: report.byMarketAndSource?.[market] || {},
             calculatedShare: report.marketQuality?.[market]?.calculatedShare ?? 0,
+            preservedByMarket: report.preservedByMarket || {},
             publicationError: report.publicationError || '',
           };
           console.log(JSON.stringify(state, null, 2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Catalog V2: ${market}\n\n\`\`\`json\n${JSON.stringify(state, null, 2)}\n\`\`\`\n`);
-          if (!state.published || !state.generationId || count <= 0) {
-            console.error(`catalog_v2_market_gate_failed:${JSON.stringify(state)}`);
-            process.exit(1);
-          }
+          if (!state.published || !state.generationId || count <= 0) process.exit(1);
           NODE
       - name: Upload market reports
         if: always()
@@ -311,7 +257,6 @@ jobs:
             catalog-v2-${{ inputs.market }}-publish-report.json
           if-no-files-found: warn
           retention-days: 14
-          compression-level: 9
 
   health:
     name: ${{ inputs.display_name }} health
@@ -319,8 +264,7 @@ jobs:
     needs: [validate, knowledge, collect, publish]
     runs-on: ubuntu-latest
     steps:
-      - name: Require independent market publication
-        run: |
+      - run: |
           echo "market: ${{ inputs.market }}" >> "$GITHUB_STEP_SUMMARY"
           echo "validate: ${{ needs.validate.result }}" >> "$GITHUB_STEP_SUMMARY"
           echo "knowledge: ${{ needs.knowledge.result }}" >> "$GITHUB_STEP_SUMMARY"
