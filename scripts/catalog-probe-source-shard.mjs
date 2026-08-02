@@ -150,7 +150,7 @@ const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.
 // поэтому временный 403 не удаляет уже проверенные автомобили, но больше не съедает час запуска.
 const sourceIdsForRebuild = activeSourceIds.join(",") || "__no_active_sources__";
 const payload = {
-  version: 28,
+  version: 29,
   market,
   shardIndex,
   shardCount,
@@ -171,5 +171,17 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `source_ids=${sourceIdsForRebuild}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `active_count=${activeSourceIds.length}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `planned_count=${sourceIds.length}\n`);
+}
+if (process.env.GITHUB_ENV) {
+  // Job-level defaults previously forced the collector to ignore this probe and to
+  // crawl only five canonical slots. Override them for the following collection
+  // step so every currently productive registered adapter can contribute volume.
+  await fs.appendFile(process.env.GITHUB_ENV, `CATALOG_REBUILD_SOURCE_IDS=${sourceIdsForRebuild}\n`);
+  await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_V2_SOURCE_SLOTS_ONLY=0\n");
+  await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_IGNORE_PROBE=0\n");
+  // A source that returns pages but produces no publishable cards must stop quickly.
+  // This is only a no-progress circuit breaker; the 100,000-per-source target remains.
+  await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_MAX_EMPTY_PAGES=25\n");
+  await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_MAX_SOURCE_ERRORS=3\n");
 }
 console.log(JSON.stringify(payload, null, 2));
