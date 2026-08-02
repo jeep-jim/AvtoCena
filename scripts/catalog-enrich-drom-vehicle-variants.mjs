@@ -19,7 +19,7 @@ const LIMIT = Math.max(1, Math.min(1_000, Number(process.env.DROM_KNOWLEDGE_LIMI
 const DELAY_MS = Math.max(700, Number(process.env.DROM_KNOWLEDGE_DELAY_MS || 1_300));
 const TIMEOUT_MS = Math.max(5_000, Number(process.env.DROM_KNOWLEDGE_TIMEOUT_MS || 25_000));
 const RETRY_DAYS = Math.max(1, Number(process.env.DROM_KNOWLEDGE_RETRY_DAYS || 30));
-const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 10)));
+const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 15)));
 const RECENT_YEAR_FLOOR = new Date().getFullYear() - RECENT_YEARS + 1;
 const ONLY_RECENT = String(process.env.DROM_KNOWLEDGE_ONLY_RECENT || "1") !== "0";
 

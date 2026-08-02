@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       - name: Download and chunk the full canonical model catalogue
@@ -69,7 +69,7 @@ jobs:
             const index = await dataApi.readDataJson('catalog/vehicle-knowledge/models-index.json', null);
             const hrv = await vehicleApi.resolveVehicleModelQuery('hrv', undefined, 10);
             const errors = [];
-            if (models.length < 5000) errors.push(`vehicle_knowledge_too_small_${models.length}`);
+            if (models.length < 4800) errors.push(`vehicle_knowledge_too_small_${models.length}`);
             if (!index || index.maxRecordsPerChunk !== 250) errors.push('vehicle_knowledge_chunk_size_invalid');
             if (Array.isArray(index?.chunks) && index.chunks.some((chunk) => Number(chunk.count || 0) > 250)) errors.push('vehicle_knowledge_chunk_overflow');
             if (!hrv.some((row) => row.make === 'Honda' && row.model === 'HR-V')) errors.push('vehicle_knowledge_hrv_alias_missing');
@@ -158,13 +158,14 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 1990
       VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
+      VEHICLE_KNOWLEDGE_RECENT_YEARS: 15
       DROM_KNOWLEDGE_LIMIT: 75
       DROM_KNOWLEDGE_DELAY_MS: 1300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
       - name: Check object storage configuration

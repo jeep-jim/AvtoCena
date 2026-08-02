@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   CATALOG_V2_DEFAULT_POLICY,
   classifyCatalogV2Offer,
+  isCompletedJapanAuction,
   isJapanAuctionOffer,
   selectCatalogV2MarketOffers,
 } from "../apps/web/lib/catalog/catalog-v2-policy";
@@ -52,6 +53,10 @@ function offer(id: string, overrides: Partial<VehicleOffer> = {}): VehicleOffer 
   } as VehicleOffer;
 }
 
+function policy(overrides: Partial<typeof CATALOG_V2_DEFAULT_POLICY> = {}) {
+  return { ...CATALOG_V2_DEFAULT_POLICY, ...overrides };
+}
+
 test("каждый рынок Catalog V2 имеет минимум пять независимых source slots", () => {
   assert.equal(assertCatalogV2SourceRegistry(), true);
   assert.equal(Object.keys(CATALOG_V2_SOURCE_SLOTS).length, 7);
@@ -84,46 +89,99 @@ test("приоритетный слой требует до 6 лет, до 160 �
   assert.equal(classifyCatalogV2Offer(offer("age", { year: new Date().getFullYear() - 7 })).tier, "recent");
 });
 
-test("1000 является ориентиром, а не блокировкой остальных машин", () => {
-  const result = selectCatalogV2MarketOffers([
-    offer("priority"),
-    offer("recent", { year: new Date().getFullYear() - 8, totalRub: 7_000_000 }),
-    offer("extended", { year: new Date().getFullYear() - 12, totalRub: 18_000_000 }),
-  ]);
-  assert.equal(result.fallbackUnlocked, true);
-  assert.equal(result.shortageToUnlock, 0);
-  assert.deepEqual(result.selected.map((row) => row.id), ["priority", "recent", "extended"]);
-  assert.equal(result.rejected.fallback_locked, 0);
+test("второй слой охватывает машины до 15 лет", () => {
+  assert.equal(CATALOG_V2_DEFAULT_POLICY.recentMaxAgeYears, 15);
+  assert.equal(classifyCatalogV2Offer(offer("age-15", { year: new Date().getFullYear() - 15, powerHp: 250 })).tier, "recent");
+  assert.equal(classifyCatalogV2Offer(offer("age-16", { year: new Date().getFullYear() - 16, powerHp: 250 })).tier, "extended");
 });
 
-test("дорогие проверенные машины не отбрасываются, а идут после приоритетных", () => {
+test("остальные слои открываются только после наполнения приоритетного целевого объёма", () => {
+  const options = policy({ priorityTarget: 2 });
+  const recent = offer("recent", { year: new Date().getFullYear() - 8, totalRub: 7_000_000 });
+  const extended = offer("extended", { year: new Date().getFullYear() - 16, totalRub: 18_000_000 });
+  const locked = selectCatalogV2MarketOffers([offer("priority-1"), recent, extended], options);
+  assert.equal(locked.fallbackUnlocked, false);
+  assert.equal(locked.shortageToUnlock, 1);
+  assert.deepEqual(locked.selected.map((row) => row.id), ["priority-1"]);
+  assert.equal(locked.rejected.fallback_locked, 2);
+
+  const unlocked = selectCatalogV2MarketOffers([offer("priority-1"), offer("priority-2"), recent, extended], options);
+  assert.equal(unlocked.fallbackUnlocked, true);
+  assert.equal(unlocked.shortageToUnlock, 0);
+  assert.deepEqual(unlocked.selected.map((row) => row.id), ["priority-1", "priority-2", "recent", "extended"]);
+});
+
+test("дорогие проверенные машины добавляются после наполнения приоритетного слоя", () => {
   const result = selectCatalogV2MarketOffers([
     offer("priority"),
     offer("expensive", { totalRub: 50_000_000, year: new Date().getFullYear() - 3, powerHp: 500 }),
-  ]);
+  ], policy({ priorityTarget: 1 }));
   assert.deepEqual(result.selected.map((row) => row.id), ["priority", "expensive"]);
   assert.equal(result.recentCount, 1);
 });
 
-test("Япония принимает только аукционные карточки", () => {
+test("Япония публикует только завершённые аукционные лоты с финальной ценой", () => {
   const privateListing = offer("private", { market: "japan", sourceId: "tcv_japan_open" });
   assert.equal(isJapanAuctionOffer(privateListing), false);
   assert.equal(classifyCatalogV2Offer(privateListing).reason, "japan_non_auction");
 
-  const auction = offer("auction", {
+  const currentAuction = offer("current-auction", {
+    market: "japan",
+    sourceId: "jpauc_japan_current_open",
+    offerType: "auction",
+    status: "active",
+  });
+  assert.equal(isJapanAuctionOffer(currentAuction), true);
+  assert.equal(isCompletedJapanAuction(currentAuction), false);
+  assert.equal(classifyCatalogV2Offer(currentAuction).reason, "japan_auction_not_completed");
+
+  const missingFinalPrice = offer("missing-final-price", {
+    market: "japan",
+    sourceId: "jpauc_japan_past_open",
+    sourcePrice: 0,
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    status: "sold",
+  });
+  assert.equal(classifyCatalogV2Offer(missingFinalPrice).reason, "japan_final_price_missing");
+
+  const completedAuction = offer("completed-auction", {
     market: "japan",
     sourceId: "jpauc_japan_past_open",
     offerType: "auction",
     catalogKind: "auction_result",
     auctionResult: "sold",
     status: "sold",
+    powerHp: 200,
   });
-  assert.equal(isJapanAuctionOffer(auction), true);
-  assert.equal(classifyCatalogV2Offer(auction).tier, "japan_auction");
-  const result = selectCatalogV2MarketOffers([privateListing, auction]);
-  assert.deepEqual(result.selected.map((row) => row.id), ["auction"]);
+  assert.equal(isCompletedJapanAuction(completedAuction), true);
+  assert.equal(classifyCatalogV2Offer(completedAuction).tier, "japan_auction");
+  const result = selectCatalogV2MarketOffers(
+    [privateListing, currentAuction, missingFinalPrice, completedAuction],
+    policy({ priorityTarget: 0 }),
+  );
+  assert.deepEqual(result.selected.map((row) => row.id), ["completed-auction"]);
   assert.equal(result.auctionCount, 1);
   assert.equal(result.rejected.japan_non_auction, 1);
+  assert.equal(result.rejected.japan_auction_not_completed, 1);
+  assert.equal(result.rejected.japan_final_price_missing, 1);
+});
+
+test("завершённый японский лот до 6 лет, 160 л.с. и 6 млн входит в приоритет", () => {
+  const auction = offer("japan-priority", {
+    market: "japan",
+    sourceId: "carvector_japan_stat_open",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+  });
+  const classification = classifyCatalogV2Offer(auction);
+  assert.equal(classification.eligible, true);
+  assert.equal(classification.tier, "priority");
+  assert.equal(classification.reason, "japan_completed_priority");
+  const selected = selectCatalogV2MarketOffers([auction], policy({ priorityTarget: 1 }));
+  assert.equal(selected.auctionCount, 1);
 });
 
 test("неполный расчёт без явного статуса ожидания не публикуется", () => {
@@ -132,7 +190,7 @@ test("неполный расчёт без явного статуса ожид�
   assert.equal(result.reason, "full_calculation");
 });
 
-test("реальная карточка с ожидающим таможенным расчётом остаётся в каталоге", () => {
+test("реальная карточка с ожидающим таможенным расчётом хранится в следующем слое", () => {
   const pending = offer("pending", {
     totalRub: null,
     calculationStatus: "needs_customs_data",
@@ -142,10 +200,12 @@ test("реальная карточка с ожидающим таможенны
   assert.equal(classification.eligible, true);
   assert.equal(classification.tier, "recent");
   assert.equal(classification.reason, "recent_calculation_pending");
-  assert.deepEqual(selectCatalogV2MarketOffers([pending]).selected.map((row) => row.id), ["pending"]);
+  const locked = selectCatalogV2MarketOffers([pending]);
+  assert.deepEqual(locked.selected, []);
+  assert.equal(locked.rejected.fallback_locked, 1);
 });
 
-test("японский аукционный лот с ожидающим расчётом не теряется", () => {
+test("завершённый японский лот с ожидающим расчётом сохраняется, но не подменяет приоритет", () => {
   const pendingAuction = offer("pending-auction", {
     market: "japan",
     sourceId: "carvector_japan_stat_open",
@@ -160,5 +220,5 @@ test("японский аукционный лот с ожидающим рас�
   const classification = classifyCatalogV2Offer(pendingAuction);
   assert.equal(classification.eligible, true);
   assert.equal(classification.tier, "japan_auction");
-  assert.equal(classification.reason, "auction_calculation_pending");
+  assert.equal(classification.reason, "completed_auction_calculation_pending");
 });
