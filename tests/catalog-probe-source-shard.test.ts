@@ -24,7 +24,8 @@ test("probe activates productive adapters and prevents two-hour no-progress craw
   assert.match(probe, /CATALOG_REBUILD_IGNORE_PROBE=0/);
   assert.match(probe, /CATALOG_REBUILD_MAX_EMPTY_PAGES=25/);
   assert.match(probe, /CATALOG_REBUILD_MAX_SOURCE_ERRORS=3/);
-  assert.match(collectBlock, /Diagnose source routes without disabling live collection/);
+  assert.match(collectBlock, /Diagnose source routes and select productive adapters/);
+  assert.match(collectBlock, /Collect productive registered sources with checkpoints/);
 });
 
 test("listing photos are cached before optional detail enrichment", () => {
@@ -76,29 +77,37 @@ test("publisher uses atomic Catalog V2 tiers and preserves manifest on an empty 
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
 });
 
-test("Catalog V2 refreshes the encyclopedia before collecting offers", () => {
+test("Catalog V2 audits the existing encyclopedia instead of rebuilding it for two hours", () => {
   assert.ok(knowledgeBlock.length > 0);
-  assert.match(knowledgeBlock, /Refresh model encyclopedia/);
-  assert.match(knowledgeBlock, /catalog-sync-vehicle-models\.mjs/);
-  assert.match(knowledgeBlock, /catalog-build-vehicle-variants\.mjs/);
-  assert.match(knowledgeBlock, /catalog-build-power-knowledge\.mjs/);
+  assert.match(knowledgeBlock, /Verify current vehicle encyclopedia/);
+  assert.match(knowledgeBlock, /timeout-minutes: 15/);
+  assert.match(knowledgeBlock, /Audit current encyclopedia snapshot/);
+  assert.match(knowledgeBlock, /catalog-audit-vehicle-knowledge\.mjs/);
   assert.match(knowledgeBlock, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-sync-vehicle-models\.mjs/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-enrich-drom-vehicle-variants\.mjs/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-build-vehicle-variants\.mjs/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-build-power-knowledge\.mjs/);
   assert.match(collectBlock, /needs: \[validate, knowledge\]/);
   assert.match(publishBlock, /needs: \[validate, knowledge, collect\]/);
 });
 
-test("Catalog V2 runs seven markets with canonical anchors and accepts every productive adapter", () => {
+test("Catalog V2 caps every production stage and preserves the 100000-offer targets", () => {
   assert.match(workflow, /Catalog V2 production/);
-  assert.match(workflow, /canonical sources/);
+  assert.match(workflow, /productive sources/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
+  assert.match(workflow, /max-parallel: 20/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /CATALOG_V2_PRIORITY_TARGET: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
-  assert.match(workflow, /Collect every canonical source from fresh pages/);
+  assert.match(collectBlock, /timeout-minutes: 45/);
+  assert.match(collectBlock, /CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"/);
+  assert.match(publishBlock, /timeout-minutes: 25/);
   assert.match(workflow, /Publish only a complete seven-market generation/);
   assert.match(workflow, /missing = markets\.filter/);
   assert.match(workflow, /badFallback/);

@@ -80,11 +80,11 @@ test("public brand and model pages render knowledge power, kW and 30-minute fiel
   assert.match(modelPage, /readVehiclePowerKnowledge/);
 });
 
-test("production workflow continuously enriches specifications for the latest ten years", () => {
-  assert.match(productionWorkflow, /catalog-enrich-drom-vehicle-variants\.mjs/);
-  assert.match(productionWorkflow, /VEHICLE_KNOWLEDGE_RECENT_YEARS: "10"/);
-  assert.match(productionWorkflow, /DROM_KNOWLEDGE_LIMIT: "500"/);
-  assert.match(productionWorkflow, /Enrich recent model specifications/);
+test("Drom enrichment remains available but is not a two-hour production prerequisite", () => {
+  assert.match(productionWorkflow, /scripts\/catalog-enrich-drom-vehicle-variants\.mjs/);
+  assert.match(productionWorkflow, /Audit current encyclopedia snapshot/);
+  assert.doesNotMatch(productionWorkflow, /Enrich recent model specifications/);
+  assert.doesNotMatch(productionWorkflow, /DROM_KNOWLEDGE_LIMIT: "500"/);
   assert.match(dromEnrichment, /RECENT_YEAR_FLOOR/);
   assert.match(dromEnrichment, /activeModelIds\.has\(model\.id\) \|\| !ONLY_RECENT \|\| modelIsRecent\(model\)/);
   assert.match(dromEnrichment, /status: "blocked"/);

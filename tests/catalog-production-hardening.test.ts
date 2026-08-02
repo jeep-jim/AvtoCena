@@ -13,19 +13,22 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
-test("production workflow refreshes and audits vehicle knowledge before collection", () => {
-  const syncModels = workflow.indexOf("Refresh model encyclopedia");
-  const buildVariants = workflow.indexOf("Accumulate model variants from verified listings", syncModels);
-  const buildPower = workflow.indexOf("Accumulate power knowledge", buildVariants);
-  const finalAudit = workflow.indexOf("Audit encyclopedia", buildPower);
+test("production workflow audits the existing vehicle knowledge snapshot without a two-hour rebuild gate", () => {
+  const knowledgeStart = workflow.indexOf("\n  knowledge:");
   const collect = workflow.indexOf("\n  collect:");
+  const knowledgeBlock = workflow.slice(knowledgeStart, collect);
 
-  assert.ok(syncModels >= 0);
-  assert.ok(buildVariants > syncModels);
-  assert.ok(buildPower > buildVariants);
-  assert.ok(finalAudit > buildPower);
-  assert.ok(collect > finalAudit);
-  assert.match(workflow, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
+  assert.ok(knowledgeStart >= 0);
+  assert.ok(collect > knowledgeStart);
+  assert.match(knowledgeBlock, /Verify current vehicle encyclopedia/);
+  assert.match(knowledgeBlock, /timeout-minutes: 15/);
+  assert.match(knowledgeBlock, /Audit current encyclopedia snapshot/);
+  assert.match(knowledgeBlock, /catalog-audit-vehicle-knowledge\.mjs/);
+  assert.match(knowledgeBlock, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
+  assert.doesNotMatch(knowledgeBlock, /Refresh model encyclopedia/);
+  assert.doesNotMatch(knowledgeBlock, /Accumulate model variants from verified listings/);
+  assert.doesNotMatch(knowledgeBlock, /Accumulate power knowledge/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-sync-vehicle-models\.mjs/);
 });
 
 test("production workflow serializes catalog builds and never cancels a running build", () => {
