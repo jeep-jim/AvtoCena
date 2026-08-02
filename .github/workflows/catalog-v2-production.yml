@@ -1,4 +1,4 @@
-name: Catalog V2 · all markets disabled
+name: Catalog V2 production · all markets disabled
 
 on:
   workflow_dispatch:
@@ -31,6 +31,7 @@ env:
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+  CATALOG_GALLERY_FAST_PATH: "false"
 
 jobs:
   notice:
@@ -85,9 +86,9 @@ jobs:
       CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"
     steps:
       - name: Diagnose source routes and select productive adapters
-        run: echo "Disabled combined probe"
+        run: echo "npx tsx scripts/catalog-probe-source-shard.mjs"
       - name: Collect productive registered sources with checkpoints
-        run: echo "Disabled combined collection"
+        run: echo "npx tsx scripts/catalog-rebuild-source-shard.mjs"
       - name: Upload V2 shard
         run: |
           echo "retention-days: 1"
