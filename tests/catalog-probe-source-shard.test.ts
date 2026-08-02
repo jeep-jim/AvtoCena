@@ -8,6 +8,8 @@ const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-sc
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
+const sourceRegistry = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-v2-source-registry.ts", import.meta.url), "utf8");
+const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const legacyWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workflow.indexOf("\n  collect:"));
@@ -26,6 +28,23 @@ test("probe activates productive adapters and prevents two-hour no-progress craw
   assert.match(probe, /CATALOG_REBUILD_MAX_SOURCE_ERRORS=3/);
   assert.match(collectBlock, /Diagnose source routes and select productive adapters/);
   assert.match(collectBlock, /Collect productive registered sources with checkpoints/);
+});
+
+test("Japan rollout probes completed auction histories instead of active bids", () => {
+  const japanPlanStart = probe.indexOf("  japan: [");
+  const japanPlanEnd = probe.indexOf("\n  ],\n  uae:", japanPlanStart);
+  const japanPlan = probe.slice(japanPlanStart, japanPlanEnd);
+  assert.ok(japanPlanStart >= 0 && japanPlanEnd > japanPlanStart);
+  assert.match(japanPlan, /jpauc_japan_past_open/);
+  assert.match(japanPlan, /carvector_japan_stat_open/);
+  assert.match(japanPlan, /auctiondatasearch_japan_open/);
+  assert.match(japanPlan, /japantransit_japan_stat_open/);
+  assert.match(japanPlan, /auctions22_japan_past_open/);
+  assert.doesNotMatch(japanPlan, /jpauc_japan_current_open/);
+  assert.doesNotMatch(japanPlan, /auctions22_japan_upcoming_open/);
+  assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
+  assert.match(japanWorkflow, /push:/);
+  assert.match(japanWorkflow, /completed auction results with final deal prices/);
 });
 
 test("listing photos are cached before optional detail enrichment", () => {
