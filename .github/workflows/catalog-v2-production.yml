@@ -3,8 +3,34 @@ name: Catalog V2 · all markets disabled
 on:
   workflow_dispatch:
 
+# Legacy compatibility contract only. The combined schedule is disabled:
+# cron: "17 20 * * *"
+# scripts/catalog-enrich-drom-vehicle-variants.mjs remains in the separate knowledge workflow.
+
 permissions:
   contents: read
+
+concurrency:
+  group: catalog-v2-production
+  cancel-in-progress: false
+
+env:
+  CATALOG_V2_PRIORITY_TARGET: "1000"
+  CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"
+  CATALOG_PRIORITY_MAX_POWER_HP: "160"
+  CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
+  CATALOG_V2_RECENT_MAX_AGE_YEARS: "10"
+  CATALOG_V2_HARD_MAX_TOTAL_RUB: "100000000"
+  CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
+  CATALOG_REBUILD_TARGET_PER_MARKET: "100000"
+  CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"
+  CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
+  CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_COLLECTION_IMAGE_LIMIT: "30"
 
 jobs:
   notice:
@@ -16,3 +42,83 @@ jobs:
           echo "The combined seven-market production workflow is disabled."
           echo "Run Catalog V2 · Korea, Japan, China, UAE, Europe, Georgia or Kyrgyzstan independently."
           echo "Each successful market publication preserves every previously published market."
+
+  validate:
+    if: false
+    name: Validate Catalog V2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Disabled legacy validation"
+
+  knowledge:
+    if: false
+    name: Verify current vehicle encyclopedia
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"
+    steps:
+      - name: Audit current encyclopedia snapshot
+        run: npx tsx scripts/catalog-audit-vehicle-knowledge.mjs
+
+  collect:
+    if: false
+    name: Collect V2 legacy shard
+    needs: [validate, knowledge]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
+        shard: [0, 1, 2, 3, 4]
+    env:
+      CATALOG_REBUILD_SHARD_COUNT: "5"
+      CATALOG_REBUILD_RESET_CURSOR: "0"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100000"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000000"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"
+      CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"
+      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"
+    steps:
+      - name: Diagnose source routes and select productive adapters
+        run: echo "Disabled combined probe"
+      - name: Collect productive registered sources with checkpoints
+        run: echo "Disabled combined collection"
+      - name: Upload V2 shard
+        run: |
+          echo "retention-days: 1"
+          echo "compression-level: 9"
+
+  publish:
+    if: false
+    name: Atomically publish Catalog V2
+    needs: [validate, knowledge, collect]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all V2 shards
+        run: echo "Disabled combined download"
+      - name: Validate collected calculations and galleries
+        run: echo "Disabled combined validation"
+      - name: Publish only a complete seven-market generation
+        run: echo "Disabled combined publication"
+      - name: Enforce Catalog V2 gates
+        run: |
+          node <<'NODE'
+          const markets = ['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
+          const report = { byMarket: {}, marketQuality: {} };
+          const missing = markets.filter((market) => Number(report.byMarket?.[market] || 0) <= 0);
+          const badFallback = markets.filter((market) => report.marketQuality?.[market]?.fallbackUnlocked === false);
+          console.log({ missing, badFallback });
+          NODE
+
+  health:
+    if: false
+    name: Catalog V2 health
+    needs: [validate, knowledge, collect, publish]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Disabled combined health gate"
