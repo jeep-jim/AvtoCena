@@ -7,19 +7,24 @@ const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard
 const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
+const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const legacyWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workflow.indexOf("\n  collect:"));
 const collectBlock = workflow.slice(workflow.indexOf("\n  collect:"), workflow.indexOf("\n  publish:"));
 const publishBlock = workflow.slice(workflow.indexOf("\n  publish:"), workflow.indexOf("\n  health:"));
 
-test("probe remains diagnostic and cannot disable Catalog V2 live collection", () => {
+test("probe activates productive adapters and prevents two-hour no-progress crawls", () => {
   assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /activeSourceIds/);
   assert.match(probe, /inactiveSourceIds/);
+  assert.match(probe, /GITHUB_ENV/);
+  assert.match(probe, /CATALOG_REBUILD_SOURCE_IDS=\$\{sourceIdsForRebuild\}/);
+  assert.match(probe, /CATALOG_V2_SOURCE_SLOTS_ONLY=0/);
+  assert.match(probe, /CATALOG_REBUILD_IGNORE_PROBE=0/);
+  assert.match(probe, /CATALOG_REBUILD_MAX_EMPTY_PAGES=25/);
+  assert.match(probe, /CATALOG_REBUILD_MAX_SOURCE_ERRORS=3/);
   assert.match(collectBlock, /Diagnose source routes without disabling live collection/);
-  assert.match(collectBlock, /CATALOG_REBUILD_IGNORE_PROBE: "1"/);
-  assert.doesNotMatch(collectBlock, /CATALOG_REBUILD_SOURCE_IDS: \$\{\{ steps\.probe/);
 });
 
 test("listing photos are cached before optional detail enrichment", () => {
@@ -30,13 +35,22 @@ test("listing photos are cached before optional detail enrichment", () => {
   assert.match(gallery, /Math\.min\(30/);
 });
 
-test("Catalog V2 retains verified offers, resets stale cursors and crawls source slots", () => {
+test("Japan auction images keep a source-bound remote fallback when caching is blocked", () => {
+  assert.match(fullGallery, /japanAuctionRemoteFallback/);
+  assert.match(fullGallery, /auction_listing_remote_fallback/);
+  assert.match(fullGallery, /auction_source_remote_fallback/);
+  assert.match(fullGallery, /isSafeRemoteAuctionImage/);
+  assert.match(fullGallery, /sourceNativeUrls\.map\(remoteImage\)/);
+});
+
+test("Catalog V2 retains verified offers, continues cursors and can use all productive registered adapters", () => {
   assert.match(rebuild, /retention_loaded/);
   assert.match(rebuild, /readMarketOffers/);
   assert.match(rebuild, /readAllOffersForMaintenance/);
   assert.match(rebuild, /catalogV2SourceIds/);
   assert.match(rebuild, /CATALOG_REBUILD_RESET_CURSOR/);
   assert.match(rebuild, /CATALOG_V2_SOURCE_SLOTS_ONLY/);
+  assert.match(rebuild, /CATALOG_REBUILD_SOURCE_IDS/);
   assert.match(rebuild, /enrichOfferWithVehicleKnowledge/);
   assert.match(rebuild, /bases\.sort\(quality\)/);
   assert.doesNotMatch(rebuild, /businessPriority/);
@@ -73,7 +87,7 @@ test("Catalog V2 refreshes the encyclopedia before collecting offers", () => {
   assert.match(publishBlock, /needs: \[validate, knowledge, collect\]/);
 });
 
-test("Catalog V2 runs seven markets with canonical sources and requires all markets", () => {
+test("Catalog V2 runs seven markets with canonical anchors and accepts every productive adapter", () => {
   assert.match(workflow, /Catalog V2 production/);
   assert.match(workflow, /canonical sources/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
