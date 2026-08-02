@@ -96,7 +96,7 @@ test("Catalog V2 caps every production stage and preserves the 100000-offer targ
   assert.match(workflow, /Catalog V2 production/);
   assert.match(workflow, /productive sources/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
-  assert.match(workflow, /max-parallel: 35/);
+  assert.match(workflow, /max-parallel: 20/);
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /CATALOG_V2_PRIORITY_TARGET: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
@@ -106,7 +106,7 @@ test("Catalog V2 caps every production stage and preserves the 100000-offer targ
   assert.match(workflow, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(collectBlock, /timeout-minutes: 45/);
-  assert.match(collectBlock, /CATALOG_REBUILD_TIME_LIMIT_MS: "2100000"/);
+  assert.match(collectBlock, /CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"/);
   assert.match(publishBlock, /timeout-minutes: 25/);
   assert.match(workflow, /Publish only a complete seven-market generation/);
   assert.match(workflow, /missing = markets\.filter/);
