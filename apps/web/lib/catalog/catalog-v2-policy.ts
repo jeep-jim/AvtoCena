@@ -145,6 +145,7 @@ export function classifyCatalogV2Offer(
   }
 
   const priority = isPriorityOffer(completeCalculation, ageYears, powerHp, totalRub, options);
+  const recentMaxAgeYears = Math.max(15, Number(options.recentMaxAgeYears || 0));
 
   if (offer.market === "japan") {
     if (!isJapanAuctionOffer(offer)) {
@@ -173,7 +174,7 @@ export function classifyCatalogV2Offer(
   if (priority) {
     return { tier: "priority", eligible: true, reason: "russia_mass_market", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  if (ageYears !== undefined && ageYears <= options.recentMaxAgeYears) {
+  if (ageYears !== undefined && ageYears <= recentMaxAgeYears) {
     return {
       tier: "recent",
       eligible: true,
