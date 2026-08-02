@@ -1,0 +1,16 @@
+name: Catalog V2 · UAE
+run-name: Catalog V2 · UAE · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  uae:
+    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    with:
+      market: uae
+      display_name: ОАЭ
+    secrets: inherit
