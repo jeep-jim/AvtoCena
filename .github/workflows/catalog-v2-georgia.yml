@@ -1,0 +1,16 @@
+name: Catalog V2 · Georgia
+run-name: Catalog V2 · Georgia · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  georgia:
+    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    with:
+      market: georgia
+      display_name: Грузия
+    secrets: inherit
