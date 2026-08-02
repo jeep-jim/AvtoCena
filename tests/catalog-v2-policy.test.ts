@@ -126,8 +126,39 @@ test("Япония принимает только аукционные карт
   assert.equal(result.rejected.japan_non_auction, 1);
 });
 
-test("без полного расчёта предложение не публикуется", () => {
+test("неполный расчёт без явного статуса ожидания не публикуется", () => {
   const result = classifyCatalogV2Offer(offer("no-calc", { calculationSnapshot: undefined }));
   assert.equal(result.tier, "rejected");
   assert.equal(result.reason, "full_calculation");
+});
+
+test("реальная карточка с ожидающим таможенным расчётом остаётся в каталоге", () => {
+  const pending = offer("pending", {
+    totalRub: null,
+    calculationStatus: "needs_customs_data",
+    calculationSnapshot: undefined,
+  });
+  const classification = classifyCatalogV2Offer(pending);
+  assert.equal(classification.eligible, true);
+  assert.equal(classification.tier, "recent");
+  assert.equal(classification.reason, "recent_calculation_pending");
+  assert.deepEqual(selectCatalogV2MarketOffers([pending]).selected.map((row) => row.id), ["pending"]);
+});
+
+test("японский аукционный лот с ожидающим расчётом не теряется", () => {
+  const pendingAuction = offer("pending-auction", {
+    market: "japan",
+    sourceId: "carvector_japan_stat_open",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    status: "active",
+    totalRub: null,
+    calculationStatus: "needs_power_data",
+    calculationSnapshot: undefined,
+  });
+  const classification = classifyCatalogV2Offer(pendingAuction);
+  assert.equal(classification.eligible, true);
+  assert.equal(classification.tier, "japan_auction");
+  assert.equal(classification.reason, "auction_calculation_pending");
 });

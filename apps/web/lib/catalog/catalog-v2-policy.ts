@@ -77,6 +77,11 @@ function hasCompleteCalculation(offer: Partial<VehicleOffer>) {
   return ids.has("car") && ids.has("customs");
 }
 
+function hasPendingCalculation(offer: Partial<VehicleOffer>) {
+  const status = String(offer.calculationStatus || "");
+  return !number(offer.totalRub) && (status === "needs_data" || status.startsWith("needs_"));
+}
+
 export function isJapanAuctionOffer(offer: Partial<VehicleOffer>) {
   if (offer.market !== "japan") return false;
   const raw = rawObject(offer);
@@ -111,10 +116,12 @@ export function classifyCatalogV2Offer(
   const ageYears = currentAge(offer.year);
   const powerHp = number(offer.powerHp);
   const popularity = popularityDecile(offer);
-  if (!hasCompleteCalculation(offer)) {
+  const completeCalculation = hasCompleteCalculation(offer);
+  const pendingCalculation = hasPendingCalculation(offer);
+  if (!completeCalculation && !pendingCalculation) {
     return { tier: "rejected", eligible: false, reason: "full_calculation", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  if (!totalRub) {
+  if (completeCalculation && !totalRub) {
     return { tier: "rejected", eligible: false, reason: "price_missing", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
   if (offer.market === "japan") {
@@ -124,25 +131,43 @@ export function classifyCatalogV2Offer(
     return {
       tier: "japan_auction",
       eligible: true,
-      reason: isCompletedJapanAuction(offer) ? "completed_auction" : "current_auction",
+      reason: pendingCalculation ? "auction_calculation_pending" : isCompletedJapanAuction(offer) ? "completed_auction" : "current_auction",
       totalRub,
       ageYears,
       powerHp,
       popularityDecile: popularity,
     };
   }
-  const priority = ageYears !== undefined
+  const priority = completeCalculation
+    && ageYears !== undefined
     && ageYears <= options.priorityMaxAgeYears
     && powerHp !== undefined
     && powerHp <= options.priorityMaxPowerHp
+    && totalRub !== undefined
     && totalRub <= options.priorityMaxTotalRub;
   if (priority) {
     return { tier: "priority", eligible: true, reason: "russia_mass_market", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
   if (ageYears !== undefined && ageYears <= options.recentMaxAgeYears) {
-    return { tier: "recent", eligible: true, reason: "recent_after_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
+    return {
+      tier: "recent",
+      eligible: true,
+      reason: pendingCalculation ? "recent_calculation_pending" : "recent_after_priority",
+      totalRub,
+      ageYears,
+      powerHp,
+      popularityDecile: popularity,
+    };
   }
-  return { tier: "extended", eligible: true, reason: "extended_after_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
+  return {
+    tier: "extended",
+    eligible: true,
+    reason: pendingCalculation ? "extended_calculation_pending" : "extended_after_priority",
+    totalRub,
+    ageYears,
+    powerHp,
+    popularityDecile: popularity,
+  };
 }
 
 function freshness(offer: Partial<VehicleOffer>) {
