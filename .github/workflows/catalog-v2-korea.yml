@@ -1,0 +1,16 @@
+name: Catalog V2 · Korea
+run-name: Catalog V2 · Korea · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  korea:
+    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    with:
+      market: korea
+      display_name: Корея
+    secrets: inherit

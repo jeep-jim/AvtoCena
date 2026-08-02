@@ -2,39 +2,49 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
-const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
+const combinedWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
+const marketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-market-reusable.yml", import.meta.url), "utf8");
+const koreaWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-korea.yml", import.meta.url), "utf8");
 const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const marketPublisher = fs.readFileSync(new URL("../scripts/catalog-publish-market.mjs", import.meta.url), "utf8");
 const freshPublisher = fs.readFileSync(new URL("../scripts/catalog-publish-fresh.mjs", import.meta.url), "utf8");
 const businessAudit = fs.readFileSync(new URL("../scripts/catalog-business-audit.mjs", import.meta.url), "utf8");
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");
 
-test("Catalog V2 downloads shards, audits them, publishes atomically and requires a new generation", () => {
-  const download = workflow.indexOf("Download all V2 shards");
-  const audit = workflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
-  const publish = workflow.indexOf("npx tsx scripts/catalog-publish-source-scale.mjs");
-  const enforce = workflow.indexOf("Enforce Catalog V2 gates");
-  const health = workflow.indexOf("Require new V2 generation");
-  assert.ok(download >= 0, "all available V2 source shards must be downloaded");
+test("Catalog V2 publishes each market independently and preserves completed markets", () => {
+  assert.match(combinedWorkflow, /all markets disabled/);
+  assert.match(combinedWorkflow, /workflow_dispatch/);
+  assert.doesNotMatch(combinedWorkflow, /^\s*schedule:/m);
+  assert.doesNotMatch(combinedWorkflow, /^\s*push:/m);
+
+  const download = marketWorkflow.indexOf("Download only ${{ inputs.display_name }} shards");
+  const audit = marketWorkflow.indexOf("npx tsx scripts/catalog-validate-source-scale.mjs");
+  const publish = marketWorkflow.indexOf("npx tsx scripts/catalog-publish-market.mjs");
+  const enforce = marketWorkflow.indexOf("Require a non-empty market publication");
+  assert.ok(download >= 0, "selected market shards must be downloaded");
   assert.ok(audit > download, "calculation and gallery audit must follow artifact download");
-  assert.ok(publish > audit, "publisher must run after source-scale audit");
-  assert.ok(enforce > publish, "new generation gate must follow publication attempt");
-  assert.ok(health > enforce, "health job must follow the publication gate");
-  assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
-  assert.match(workflow, /CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "1"/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
-  assert.match(workflow, /missing = markets\.filter/);
-  assert.match(workflow, /state\.published/);
-  assert.match(workflow, /state\.generationId/);
-  assert.match(workflow, /catalog_v2_gate_failed/);
-  assert.match(workflow, /process\.exit\(1\)/);
-  assert.match(workflow, /test "\$\{\{ needs\.publish\.result \}\}" = "success"/);
-  assert.match(publisher, /previousManifestPreserved/);
-  assert.match(publisher, /no_verified_offers_keep_previous_manifest/);
-  assert.doesNotMatch(workflow, /Require published 7 × 250 manifest/);
+  assert.ok(publish > audit, "single-market publisher must run after audit");
+  assert.ok(enforce > publish, "market gate must follow publication attempt");
+
+  assert.match(marketWorkflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
+  assert.match(marketWorkflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
+  assert.match(marketWorkflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
+  assert.match(marketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: "100000"/);
+  assert.match(marketWorkflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(marketWorkflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
+  assert.match(marketWorkflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+  assert.match(marketWorkflow, /group: catalog-v2-market-\$\{\{ inputs\.market \}\}/);
+  assert.match(marketWorkflow, /test "\$\{\{ needs\.publish\.result \}\}" = "success"/);
+
+  assert.match(koreaWorkflow, /market: korea/);
+  assert.match(koreaWorkflow, /workflow_dispatch/);
+  assert.match(marketPublisher, /mode: "catalog_v2_independent_market"/);
+  assert.match(marketPublisher, /for \(const otherMarket of PUBLIC_CATALOG_MARKETS\)/);
+  assert.match(marketPublisher, /readMarketOffers\(otherMarket\)/);
+  assert.match(marketPublisher, /preservedByMarket/);
+  assert.match(marketPublisher, /persistCatalogOffers\(allOffers\)/);
+  assert.match(marketPublisher, /catalog_v2_empty_market/);
 });
 
 test("business audit still checks profiles, knowledge, customs and utilization power", () => {
@@ -66,6 +76,8 @@ test("production source-scale audit validates exact calculations and preserves a
   assert.match(publisher, /readMarketOffers/);
   assert.match(publisher, /targetPerSource/);
   assert.match(publisher, /retentionMs/);
+  assert.match(marketPublisher, /calculateOfferWithRussiaCustoms/);
+  assert.match(marketPublisher, /retentionMs/);
 });
 
 test("catalog pricing never substitutes peak power as certified utilization power", () => {

@@ -1,6 +1,5 @@
 import type { CatalogMarket } from "./types";
 
-// Manual production rebuild trigger after the vehicle-knowledge sync fix on 2026-07-29.
 export const PUBLIC_CATALOG_MARKETS: CatalogMarket[] = [
   "korea",
   "china",
@@ -33,10 +32,10 @@ export const CATALOG_MARKET_FLAGS: Record<CatalogMarket, string> = {
   kyrgyzstan: "🇰🇬",
 };
 
-export const CATALOG_CHUNK_SIZE = 250;
-// Catalog V2 не ограничивает рынок тысячей объявлений. Это техническая
-// вместимость обхода и публикации: сколько проверенных предложений найдено,
-// столько сохраняется, но не более 100 000 на один рынок за generation.
+// JSON каталога хранится небольшими независимыми чанками. 500 записей —
+// согласованный верхний предел одного файла, чтобы обновление одного рынка
+// не требовало перечитывать весь каталог.
+export const CATALOG_CHUNK_SIZE = 500;
 export const CATALOG_DAILY_TARGET_PER_MARKET = 100_000;
 export const CATALOG_DAILY_TARGET_PER_SOURCE = 100_000;
 export const CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET = 100_000;

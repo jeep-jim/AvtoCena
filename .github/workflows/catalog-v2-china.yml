@@ -1,0 +1,16 @@
+name: Catalog V2 · China
+run-name: Catalog V2 · China · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  china:
+    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    with:
+      market: china
+      display_name: Китай
+    secrets: inherit
