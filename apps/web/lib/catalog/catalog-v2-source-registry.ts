@@ -30,14 +30,14 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
     { sourceId: "uxin_china_open", label: "Uxin", canonicalUrl: "https://www.xin.com/", role: "secondary" },
   ],
   japan: [
-    { sourceId: "jpauc_japan_current_open", label: "JPAuc current auctions", canonicalUrl: "https://jpauc.com/auction", role: "primary", anchor: true },
     { sourceId: "jpauc_japan_past_open", label: "JPAuc completed auctions", canonicalUrl: "https://jpauc.com/auction/past", role: "auction_history", anchor: true },
     { sourceId: "carvector_japan_stat_open", label: "CarVector auction statistics", canonicalUrl: "https://carvector.com/stat", role: "auction_history", anchor: true },
     { sourceId: "prestige_japan_auctions_open", label: "Prestige Japan auctions", canonicalUrl: "https://prestigemotorsport.com.au/auctions/", role: "auction_history", anchor: true },
     { sourceId: "auctiondatasearch_japan_open", label: "Auction Data Search", canonicalUrl: "https://www.auctiondatasearch.jp/", role: "auction_history", anchor: true },
-    { sourceId: "japantransit_japan_stat_open", label: "Japan Transit auction statistics", canonicalUrl: "https://japantransit.ru/stat/", role: "auction_history" },
+    { sourceId: "japantransit_japan_stat_open", label: "Japan Transit auction statistics", canonicalUrl: "https://japantransit.ru/stat/", role: "auction_history", anchor: true },
+    { sourceId: "auctions22_japan_past_open", label: "Auctions22 auction results", canonicalUrl: "https://auctions22.com/past", role: "auction_history", anchor: true },
+    { sourceId: "jpauc_japan_current_open", label: "JPAuc current auctions", canonicalUrl: "https://jpauc.com/auction", role: "primary" },
     { sourceId: "auctions22_japan_upcoming_open", label: "Auctions22 upcoming auctions", canonicalUrl: "https://auctions22.com/upcoming", role: "secondary" },
-    { sourceId: "auctions22_japan_past_open", label: "Auctions22 auction results", canonicalUrl: "https://auctions22.com/past", role: "auction_history" },
     { sourceId: "jpcenter_japan_catalog_open", label: "JP Center specifications", canonicalUrl: "https://jp.center/catalog", role: "knowledge", anchor: true },
   ],
   uae: [
@@ -79,15 +79,21 @@ export const CATALOG_FUTURE_USA_ANCHORS = [
 
 export const CATALOG_V2_MIN_SOURCE_SLOTS = 5;
 
+function sourceIsCollectible(market: CatalogMarket, source: CatalogV2SourceSlot) {
+  if (source.role === "knowledge") return false;
+  if (market === "japan") return source.role === "auction_history";
+  return true;
+}
+
 export function catalogV2SourceIds(market: CatalogMarket) {
   return CATALOG_V2_SOURCE_SLOTS[market]
-    .filter((source) => source.role !== "knowledge")
+    .filter((source) => sourceIsCollectible(market, source))
     .map((source) => source.sourceId);
 }
 
 export function catalogV2AnchorSourceIds(market: CatalogMarket) {
   return CATALOG_V2_SOURCE_SLOTS[market]
-    .filter((source) => source.anchor && source.role !== "knowledge")
+    .filter((source) => source.anchor && sourceIsCollectible(market, source))
     .map((source) => source.sourceId);
 }
 
@@ -99,7 +105,7 @@ export function catalogV2KnowledgeSourceIds(market: CatalogMarket) {
 
 export function assertCatalogV2SourceRegistry() {
   const failures = Object.entries(CATALOG_V2_SOURCE_SLOTS)
-    .filter(([, sources]) => new Set(sources.filter((source) => source.role !== "knowledge").map((source) => source.sourceId)).size < CATALOG_V2_MIN_SOURCE_SLOTS)
+    .filter(([market, sources]) => new Set(sources.filter((source) => sourceIsCollectible(market as CatalogMarket, source)).map((source) => source.sourceId)).size < CATALOG_V2_MIN_SOURCE_SLOTS)
     .map(([market]) => market);
   if (failures.length) throw new Error(`catalog_v2_source_slots_missing:${failures.join(",")}`);
   return true;
