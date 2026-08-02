@@ -120,7 +120,7 @@ jobs:
     continue-on-error: true
     strategy:
       fail-fast: false
-      max-parallel: 35
+      max-parallel: 20
       matrix:
         market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
         shard: [0, 1, 2, 3, 4]
@@ -141,12 +141,12 @@ jobs:
       CATALOG_REBUILD_RESET_CURSOR: "0"
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100000"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "25"
-      CATALOG_REBUILD_MAX_SOURCE_ERRORS: "3"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"
+      CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"
       CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"
       CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "8"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "2100000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"
       CATALOG_SOURCE_TIMEOUT_MS: "30000"
       CATALOG_IMAGE_TIMEOUT_MS: "20000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
