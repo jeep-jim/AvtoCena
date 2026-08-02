@@ -1,0 +1,16 @@
+name: Catalog V2 · Kyrgyzstan
+run-name: Catalog V2 · Kyrgyzstan · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kyrgyzstan:
+    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    with:
+      market: kyrgyzstan
+      display_name: Кыргызстан
+    secrets: inherit
