@@ -10,7 +10,7 @@ const HEALTH_PATH = "catalog/vehicle-knowledge/health-report.json";
 const OUTPUT_PATH = process.env.CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT || "catalog-vehicle-knowledge-audit.json";
 const MIN_MODELS = Math.max(1, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS || 5_000));
 const MIN_RETAINED_RATIO = Math.min(1, Math.max(0.5, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_RETAINED_RATIO || 0.85)));
-const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 10)));
+const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 15)));
 const RECENT_YEAR_FLOOR = new Date().getFullYear() - RECENT_YEARS + 1;
 const MIN_RECENT_SPEC_COVERAGE = Math.min(1, Math.max(0, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_RECENT_SPEC_COVERAGE || 0)));
 
