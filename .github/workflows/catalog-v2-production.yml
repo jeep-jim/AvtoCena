@@ -99,6 +99,7 @@ jobs:
     name: Atomically publish Catalog V2
     needs: [validate, knowledge, collect]
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Download all V2 shards
         run: echo "Disabled combined download"
