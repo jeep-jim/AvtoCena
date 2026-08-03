@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   georgia:
-    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
     with:
       market: georgia
       display_name: Грузия
