@@ -10,6 +10,7 @@ on:
       - .github/workflows/catalog-v2-market-reusable.yml
 
 # Initial independent-market rollout starts with Korea.
+# rollout-retry: 2026-08-03T09:48+07:00
 permissions:
   contents: read
 
