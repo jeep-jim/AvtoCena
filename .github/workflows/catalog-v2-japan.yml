@@ -3,15 +3,6 @@ run-name: Catalog V2 · Japan · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-japan.yml
-      - .github/workflows/catalog-v2-market-recovery-reusable.yml
-      - scripts/catalog-clean-failed-generations.mjs
-      - apps/web/lib/catalog/catalog-v2-policy.ts
-      - apps/web/lib/catalog/catalog-v2-source-registry.ts
-      - scripts/catalog-probe-source-shard.mjs
 
 # Japan rollout probes completed auction results with final deal prices and publishes only sold lots with positive final prices.
 permissions:
