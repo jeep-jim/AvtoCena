@@ -7,19 +7,19 @@ on:
     branches: [main]
     paths:
       - .github/workflows/catalog-v2-japan.yml
-      - .github/workflows/catalog-v2-market-reusable.yml
+      - .github/workflows/catalog-v2-market-recovery-reusable.yml
+      - scripts/catalog-clean-failed-generations.mjs
       - apps/web/lib/catalog/catalog-v2-policy.ts
       - apps/web/lib/catalog/catalog-v2-source-registry.ts
       - scripts/catalog-probe-source-shard.mjs
 
-# Japan rollout collects completed auction results with final deal prices.
-# rollout-retry: 2026-08-03T02:57+07:00
+# Japan rollout probes completed auction results with final deal prices and publishes only sold lots with positive final prices.
 permissions:
   contents: read
 
 jobs:
   japan:
-    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
     with:
       market: japan
       display_name: Япония

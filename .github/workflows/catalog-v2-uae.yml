@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   uae:
-    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
     with:
       market: uae
       display_name: ОАЭ
