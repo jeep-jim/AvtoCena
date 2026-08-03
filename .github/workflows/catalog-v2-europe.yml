@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   europe:
-    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
     with:
       market: europe
       display_name: Европа
