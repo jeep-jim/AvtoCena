@@ -10,7 +10,7 @@ on:
       - .github/workflows/catalog-v2-market-recovery-reusable.yml
       - scripts/catalog-clean-failed-generations.mjs
 
-# rollout-recovery: 2026-08-03T11:28+07:00
+# rollout-recovery: 2026-08-04T03:29+07:00
 permissions:
   contents: read
 
