@@ -43,7 +43,8 @@ test("Japan rollout probes completed auction histories instead of active bids", 
   assert.doesNotMatch(japanPlan, /jpauc_japan_current_open/);
   assert.doesNotMatch(japanPlan, /auctions22_japan_upcoming_open/);
   assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
-  assert.match(japanWorkflow, /push:/);
+  assert.match(japanWorkflow, /workflow_dispatch:/);
+  assert.doesNotMatch(japanWorkflow, /\n  push:/);
   assert.match(japanWorkflow, /completed auction results with final deal prices/);
 });
 
