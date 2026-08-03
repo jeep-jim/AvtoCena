@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   kyrgyzstan:
-    uses: ./.github/workflows/catalog-v2-market-reusable.yml
+    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
     with:
       market: kyrgyzstan
       display_name: Кыргызстан
