@@ -23,3 +23,14 @@ test("market workflow never turns an empty or failed collection into a fake succ
   assert.match(workflow, /process\.exit\(1\)/);
   assert.match(workflow, /Require a non-empty market publication/);
 });
+
+test("independent market collection keeps the full production crawl budget", () => {
+  assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
+  assert.match(workflow, /max-parallel: 5/);
+  assert.match(workflow, /timeout-minutes: 120/);
+  assert.match(workflow, /CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"/);
+  assert.match(workflow, /CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"/);
+  assert.match(workflow, /CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"/);
+  assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
+  assert.doesNotMatch(workflow, /1200s npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
+});
