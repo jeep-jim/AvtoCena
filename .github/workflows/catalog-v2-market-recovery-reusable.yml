@@ -74,7 +74,7 @@ jobs:
     name: Collect ${{ inputs.display_name }} shard ${{ matrix.shard }}
     needs: validate
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       max-parallel: 5
@@ -97,12 +97,12 @@ jobs:
       CATALOG_REBUILD_RESET_CURSOR: "0"
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100000"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "1000000"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "25"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "1000"
       CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"
       CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100000"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "24"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "6"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "2400000"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "8"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"
       CATALOG_SOURCE_TIMEOUT_MS: "30000"
       CATALOG_IMAGE_TIMEOUT_MS: "20000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
@@ -119,28 +119,20 @@ jobs:
       - run: npm ci
       - name: Probe registered sources
         run: npx tsx scripts/catalog-probe-source-shard.mjs
-      - name: Collect maximum real offers with one retry
+      - name: Collect maximum real offers with checkpoints
         shell: bash
         run: |
           set +e
-          best=0
-          final_status=1
-          for attempt in 1 2; do
-            rm -f "$CATALOG_REBUILD_OUTPUT"
-            timeout --signal=TERM --kill-after=90s 1200s npx tsx scripts/catalog-rebuild-source-shard.mjs
-            status=$?
-            final_status=$status
-            count=0
-            if [ -s "$CATALOG_REBUILD_OUTPUT" ]; then
-              count=$(node -e 'const fs=require("fs");try{const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));process.stdout.write(String(Number(p.count||p.offers?.length||0)))}catch{process.stdout.write("0")}')
-            fi
-            echo "::notice::${CATALOG_REBUILD_MARKET} shard ${CATALOG_REBUILD_SHARD_INDEX} attempt ${attempt}: exit=${status}, offers=${count}"
-            if [ "$count" -gt "$best" ]; then best=$count; fi
-            if [ "$count" -gt 0 ]; then final_status=0; break; fi
-            sleep 10
-          done
+          rm -f "$CATALOG_REBUILD_OUTPUT"
+          timeout --signal=TERM --kill-after=120s 6600s npx tsx scripts/catalog-rebuild-source-shard.mjs
+          status=$?
+          count=0
+          if [ -s "$CATALOG_REBUILD_OUTPUT" ]; then
+            count=$(node -e 'const fs=require("fs");try{const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT,"utf8"));process.stdout.write(String(Number(p.count||p.offers?.length||0)))}catch{process.stdout.write("0")}')
+          fi
+          echo "::notice::${CATALOG_REBUILD_MARKET} shard ${CATALOG_REBUILD_SHARD_INDEX}: exit=${status}, offers=${count}"
           if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
-            node -e 'const fs=require("fs");fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT,JSON.stringify({version:43,market:process.env.CATALOG_REBUILD_MARKET,shardIndex:Number(process.env.CATALOG_REBUILD_SHARD_INDEX||0),shardCount:5,generatedAt:new Date().toISOString(),count:0,partial:true,stopReason:`collector_exit_${process.argv[1]}`,report:{saved:0,rejectionReasons:{},sources:[],sourceErrors:[{stage:"collector",error:`exit_${process.argv[1]}`}]},offers:[]},null,2))' "$final_status"
+            node -e 'const fs=require("fs");fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT,JSON.stringify({version:43,market:process.env.CATALOG_REBUILD_MARKET,shardIndex:Number(process.env.CATALOG_REBUILD_SHARD_INDEX||0),shardCount:5,generatedAt:new Date().toISOString(),count:0,partial:true,stopReason:`collector_exit_${process.argv[1]}`,report:{saved:0,rejectionReasons:{},sources:[],sourceErrors:[{stage:"collector",error:`exit_${process.argv[1]}`}]},offers:[]},null,2))' "$status"
           fi
           exit 0
       - name: Upload market shard diagnostics
