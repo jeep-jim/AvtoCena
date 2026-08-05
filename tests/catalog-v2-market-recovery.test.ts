@@ -60,6 +60,6 @@ test("all seven markets run independently every day", () => {
     assert.match(content, /cron: "\d+ \d+ \* \* \*"/, `${market} must have a daily cron`);
     assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
     assert.match(content, new RegExp(`market: ${market}`));
-    assert.match(content, /catalog-v2-market-recovery-reusable\.yml/);
+    assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
   }
 });
