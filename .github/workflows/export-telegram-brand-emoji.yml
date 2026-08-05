@@ -28,32 +28,28 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image, ImageChops
+          from PIL import Image
           import json, shutil, zipfile
 
           root = Path('apps/web/public/brand-logos/drom')
           manifest = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
           out = Path('telegram-brand-emoji')
-          if out.exists(): shutil.rmtree(out)
-          for folder in ['telegram-100x100/light', 'telegram-100x100/dark', 'original/light', 'original/dark']:
+          if out.exists():
+              shutil.rmtree(out)
+          for folder in ('telegram-100x100/light', 'telegram-100x100/dark', 'original/light', 'original/dark'):
               (out / folder).mkdir(parents=True, exist_ok=True)
 
-          def prepare(src: Path, dst: Path):
+          def prepare(src, dst):
               image = Image.open(src).convert('RGBA')
-              alpha = image.getchannel('A')
-              bbox = alpha.getbbox()
+              bbox = image.getchannel('A').getbbox()
               if bbox:
                   image = image.crop(bbox)
-              max_side = 84
-              image.thumbnail((max_side, max_side), Image.Resampling.LANCZOS)
+              image.thumbnail((84, 84), Image.Resampling.LANCZOS)
               canvas = Image.new('RGBA', (100, 100), (0, 0, 0, 0))
-              x = (100 - image.width) // 2
-              y = (100 - image.height) // 2
-              canvas.alpha_composite(image, (x, y))
+              canvas.alpha_composite(image, ((100 - image.width) // 2, (100 - image.height) // 2))
               canvas.save(dst, 'PNG', optimize=True)
 
-          index = []
-          missing = []
+          index, missing = [], []
           for slug, brand in sorted(manifest.get('brands', {}).items()):
               entry = {'slug': slug, 'name': brand.get('name', slug), 'files': {}}
               for theme in ('light', 'dark'):
@@ -62,45 +58,36 @@ jobs:
                   if not src.exists():
                       missing.append(str(src))
                       continue
-                  original_dst = out / 'original' / theme / f'{slug}{src.suffix.lower()}'
-                  shutil.copy2(src, original_dst)
-                  emoji_dst = out / 'telegram-100x100' / theme / f'{slug}.png'
-                  prepare(src, emoji_dst)
-                  entry['files'][theme] = str(emoji_dst.relative_to(out))
+                  shutil.copy2(src, out / 'original' / theme / f'{slug}{src.suffix.lower()}')
+                  dst = out / 'telegram-100x100' / theme / f'{slug}.png'
+                  prepare(src, dst)
+                  entry['files'][theme] = str(dst.relative_to(out))
               index.append(entry)
 
-          readme = f'''АвтоЦена — логотипы автомобильных брендов для Telegram Custom Emoji
-
-Брендов: {len(index)}
-Формат готовых эмодзи: PNG, 100×100 px, прозрачный фон.
-
-Папки:
-- telegram-100x100/light — версии логотипов для светлой темы Telegram.
-- telegram-100x100/dark — версии логотипов для тёмной темы Telegram.
-- original/light и original/dark — исходные файлы проекта.
-- index.json — названия брендов и соответствующие файлы.
-
-Загрузка через официального бота Telegram:
-1. Откройте @Stickers.
-2. Отправьте /newemojipack.
-3. Выберите Static emoji.
-4. Загружайте PNG из нужной папки telegram-100x100.
-5. Для каждого изображения назначьте обычный emoji-эквивалент.
-
-Светлая и тёмная версии разделены, потому что часть логотипов имеет разные цвета и контраст.
-Источник исходных файлов: существующий каталог брендов проекта AvtoCena.
-'''
-          (out / 'README.txt').write_text(readme, encoding='utf-8')
+          readme_lines = [
+              'АвтоЦена — логотипы автомобильных брендов для Telegram Custom Emoji',
+              '',
+              f'Брендов: {len(index)}',
+              'Формат: PNG, 100×100 px, прозрачный фон.',
+              '',
+              'telegram-100x100/light — для светлой темы Telegram.',
+              'telegram-100x100/dark — для тёмной темы Telegram.',
+              'original/light и original/dark — исходные файлы проекта.',
+              'index.json — названия брендов и пути файлов.',
+              '',
+              'Загрузка: @Stickers → /newemojipack → Static emoji.',
+          ]
+          (out / 'README.txt').write_text('\n'.join(readme_lines), encoding='utf-8')
           (out / 'index.json').write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding='utf-8')
           if missing:
               (out / 'missing.txt').write_text('\n'.join(missing), encoding='utf-8')
 
           archive = Path('avtocena-brand-logos-telegram-emoji.zip')
-          with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+          with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
               for file in sorted(out.rglob('*')):
                   if file.is_file():
                       z.write(file, file.relative_to(out.parent))
-          print(json.dumps({'brands': len(index), 'missing': len(missing), 'archiveBytes': archive.stat().st_size}, ensure_ascii=False))
+          print(json.dumps({'brands': len(index), 'missing': len(missing), 'bytes': archive.stat().st_size}))
           PY
       - name: Upload ready archive
         uses: actions/upload-artifact@v4
