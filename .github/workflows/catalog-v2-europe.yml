@@ -3,7 +3,10 @@ run-name: Catalog V2 · Europe · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "5 5 * * *"
 
+# Independent daily market. 12:05 Asia/Novokuznetsk (UTC+7).
 permissions:
   contents: read
 
