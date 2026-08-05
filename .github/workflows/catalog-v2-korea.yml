@@ -12,7 +12,7 @@ on:
 
 # Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
 # Full rerun uses strict positive source price/currency, verified 1–30 photos, and collects one real image first for throughput.
-# Rerun marker: single-image-fast-path-2026-08-06.
+# Continue marker: accumulate-next-Encar-cursor-2026-08-06-0642.
 permissions:
   contents: read
 
