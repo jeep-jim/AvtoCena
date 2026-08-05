@@ -1,22 +1,15 @@
-name: Catalog V2 · Europe
-run-name: Catalog V2 · Europe · ${{ github.sha }}
+name: Catalog V3 · Europe · 10k
+run-name: Catalog V3 · Europe · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "5 5 * * *"
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-europe.yml
 
-# Independent daily market. 12:05 Asia/Novokuznetsk (UTC+7).
 permissions:
   contents: read
 
 jobs:
   europe:
-    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: europe
       display_name: Европа
