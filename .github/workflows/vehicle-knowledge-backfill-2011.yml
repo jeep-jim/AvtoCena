@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: truthful-readiness-2026-08-05
+# rollout-marker: hydrate-production-catalog-2026-08-05
 
 permissions:
   contents: write
@@ -24,6 +24,12 @@ jobs:
     timeout-minutes: 90
     env:
       JSON_STORAGE_DRIVER: file
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 2011
       VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
       VEHICLE_KNOWLEDGE_RECENT_YEARS: 15
@@ -41,6 +47,29 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Hydrate verified production offers from Object Storage
+        run: |
+          node --import tsx <<'NODE'
+          const { ObjectJsonStorage, LocalJsonStorage } = await import('./apps/web/lib/data.ts');
+          const remote = new ObjectJsonStorage();
+          const local = new LocalJsonStorage();
+          const manifestPath = 'catalog/internal/manifest.json';
+          const manifest = await remote.readJson(manifestPath, { generationId: '', sources: {} });
+          const chunks = [...new Set(Object.values(manifest.sources || {}).flatMap((source) => source?.chunks || []))];
+          if (!manifest.generationId || chunks.length === 0) {
+            throw new Error(`production_catalog_not_ready: generationId=${manifest.generationId || 'empty'}, chunks=${chunks.length}`);
+          }
+          await local.writeJson(manifestPath, manifest);
+          let offers = 0;
+          for (const chunk of chunks) {
+            const rows = await remote.readJson(chunk, []);
+            if (!Array.isArray(rows)) throw new Error(`invalid_production_catalog_chunk:${chunk}`);
+            offers += rows.length;
+            await local.writeJson(chunk, rows);
+          }
+          console.log(JSON.stringify({ generationId: manifest.generationId, chunks: chunks.length, offers }, null, 2));
+          if (offers <= 0) throw new Error('production_catalog_has_no_offers');
+          NODE
       - name: Synchronize every catalog make and model from 2011 onward
         run: npm run catalog:sync-vehicle-models
       - name: Enrich prioritized batches without skipping older 2011+ models
@@ -75,7 +104,7 @@ jobs:
           const totalVariants = Number(build.totalVariants || 0);
           const scannedOffers = Number(build.scannedOffers || 0);
           console.log(JSON.stringify({ ready, enrichedVariants, totalVariants, scannedOffers }, null, 2));
-          if (ready < 1 || enrichedVariants < 1 || totalVariants < 10) {
+          if (ready < 1 || enrichedVariants < 1 || totalVariants < 10 || scannedOffers < 1) {
             throw new Error(`vehicle_knowledge_not_ready: ready=${ready}, enrichedVariants=${enrichedVariants}, totalVariants=${totalVariants}, scannedOffers=${scannedOffers}`);
           }
           NODE
