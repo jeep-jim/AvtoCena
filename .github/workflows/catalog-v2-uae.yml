@@ -1,22 +1,15 @@
-name: Catalog V2 · UAE
-run-name: Catalog V2 · UAE · ${{ github.sha }}
+name: Catalog V3 · UAE · 10k
+run-name: Catalog V3 · UAE · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "5 2 * * *"
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-uae.yml
 
-# Independent daily market. 09:05 Asia/Novokuznetsk (UTC+7).
 permissions:
   contents: read
 
 jobs:
   uae:
-    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: uae
       display_name: ОАЭ
