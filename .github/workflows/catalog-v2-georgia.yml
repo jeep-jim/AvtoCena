@@ -3,7 +3,14 @@ run-name: Catalog V2 · Georgia · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "5 8 * * *"
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v2-georgia.yml
 
+# Independent daily market. 15:05 Asia/Novokuznetsk (UTC+7).
 permissions:
   contents: read
 
