@@ -1,5 +1,5 @@
-name: Catalog V2 · Korea
-run-name: Catalog V2 · Korea · ${{ github.sha }}
+name: Catalog V3 · Korea · 10k
+run-name: Catalog V3 · Korea · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -10,13 +10,13 @@ on:
     paths:
       - .github/workflows/catalog-v2-korea.yml
 
-# Independent daily market. 00:05 Asia/Novokuznetsk (UTC+7).
+# First independent 10k market rollout. Catalog does not depend on vehicle knowledge.
 permissions:
   contents: read
 
 jobs:
   korea:
-    uses: ./.github/workflows/catalog-v2-market-recovery-reusable.yml
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: korea
       display_name: Корея
