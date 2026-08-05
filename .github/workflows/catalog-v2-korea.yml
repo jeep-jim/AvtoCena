@@ -11,7 +11,7 @@ on:
       - .github/workflows/catalog-v2-korea.yml
 
 # Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
-# Full rerun uses strict positive source price/currency and removes conflicting body defaults.
+# Full rerun uses strict positive source price/currency, verified 1–30 photos, and no forced 30-photo detail fetch.
 permissions:
   contents: read
 
