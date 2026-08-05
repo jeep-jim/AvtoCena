@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: catalog-rebuild-2026-08-05-1657
+# rollout-marker: drom-parser-v2-backfill-2026-08-05-1725
 
 permissions:
   contents: write
