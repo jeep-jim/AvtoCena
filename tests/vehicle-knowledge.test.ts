@@ -90,6 +90,16 @@ test("Drom enrichment remains available but is not a two-hour production prerequ
   assert.match(dromEnrichment, /status: "blocked"/);
 });
 
+test("vehicle knowledge is restricted to the rolling 15-year import window", () => {
+  assert.match(knowledgeAudit, /const KNOWLEDGE_WINDOW_YEARS = 15/);
+  assert.match(knowledgeAudit, /new Date\(\)\.getFullYear\(\) - KNOWLEDGE_WINDOW_YEARS/);
+  assert.doesNotMatch(knowledgeAudit, /KNOWLEDGE_WINDOW_YEARS \+ 1/);
+  assert.match(knowledgeAudit, /filter\(withinKnowledgeWindow\)/);
+  assert.match(knowledgeAudit, /excludedOldModels/);
+  assert.match(knowledgeAudit, /excludedOldVariants/);
+  assert.match(knowledgeAudit, /knowledgeYearFloor/);
+});
+
 test("vehicle knowledge audit reports recent specification coverage", () => {
   assert.match(knowledgeAudit, /recentCoverage/);
   assert.match(knowledgeAudit, /modelsWithAnySpecifications/);

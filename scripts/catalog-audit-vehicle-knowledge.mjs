@@ -10,8 +10,8 @@ const HEALTH_PATH = "catalog/vehicle-knowledge/health-report.json";
 const OUTPUT_PATH = process.env.CATALOG_VEHICLE_KNOWLEDGE_AUDIT_OUTPUT || "catalog-vehicle-knowledge-audit.json";
 const MIN_MODELS = Math.max(1, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS || 5_000));
 const MIN_RETAINED_RATIO = Math.min(1, Math.max(0.5, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_RETAINED_RATIO || 0.85)));
-const RECENT_YEARS = Math.max(6, Math.min(15, Number(process.env.VEHICLE_KNOWLEDGE_RECENT_YEARS || 15)));
-const RECENT_YEAR_FLOOR = new Date().getFullYear() - RECENT_YEARS + 1;
+const KNOWLEDGE_WINDOW_YEARS = 15;
+const KNOWLEDGE_YEAR_FLOOR = new Date().getFullYear() - KNOWLEDGE_WINDOW_YEARS;
 const MIN_RECENT_SPEC_COVERAGE = Math.min(1, Math.max(0, Number(process.env.CATALOG_VEHICLE_KNOWLEDGE_MIN_RECENT_SPEC_COVERAGE || 0)));
 
 function positive(value) {
@@ -31,11 +31,20 @@ function modelKey(make, model) {
   return `${compact(make)}:${compact(model)}`;
 }
 
+function withinKnowledgeWindow(row) {
+  const yearFrom = Number(row?.yearFrom || 0);
+  const yearTo = Number(row?.yearTo || 0);
+  const productionToYear = Number(String(row?.productionTo || "").slice(0, 4) || 0);
+  const newestKnownYear = Math.max(yearFrom, yearTo, productionToYear);
+  return !newestKnownYear || newestKnownYear >= KNOWLEDGE_YEAR_FLOOR;
+}
+
 function modelIsRecent(model) {
+  if (!withinKnowledgeWindow(model)) return false;
   const yearFrom = Number(model?.yearFrom || 0);
   const yearTo = Number(model?.yearTo || 0);
   const newestKnownYear = Math.max(yearFrom, yearTo);
-  if (newestKnownYear) return newestKnownYear >= RECENT_YEAR_FLOOR;
+  if (newestKnownYear) return newestKnownYear >= KNOWLEDGE_YEAR_FLOOR;
   return Number(model?.popularityDecile || 10) <= 5;
 }
 
@@ -75,10 +84,14 @@ const [models, variants, powerKnowledge, certifiedPower] = await Promise.all([
   readChunkedDataJson(CERTIFIED_POWER_PATH, []),
 ]);
 
-const activeModels = models.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
-const activeVariants = variants.filter((row) => row?.active !== false && row?.id && row?.modelId && positive(row?.powerHp));
-const activePowerKnowledge = powerKnowledge.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
-const activeCertifiedPower = certifiedPower.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
+const eligibleModels = models.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
+const eligibleVariants = variants.filter((row) => row?.active !== false && row?.id && row?.modelId && positive(row?.powerHp));
+const eligiblePowerKnowledge = powerKnowledge.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
+const eligibleCertifiedPower = certifiedPower.filter((row) => row?.active !== false && row?.id && row?.make && row?.model);
+const activeModels = eligibleModels.filter(withinKnowledgeWindow);
+const activeVariants = eligibleVariants.filter(withinKnowledgeWindow);
+const activePowerKnowledge = eligiblePowerKnowledge.filter(withinKnowledgeWindow);
+const activeCertifiedPower = eligibleCertifiedPower.filter(withinKnowledgeWindow);
 const modelDuplicates = duplicateIds(activeModels);
 const variantDuplicates = duplicateIds(activeVariants);
 const previousModels = positive(previous?.counts?.models);
@@ -134,7 +147,7 @@ if (MIN_RECENT_SPEC_COVERAGE > 0 && recentSpecCoverage < MIN_RECENT_SPEC_COVERAG
 }
 
 const report = {
-  version: 2,
+  version: 3,
   auditedAt: new Date().toISOString(),
   status: failures.length ? "failed" : "healthy",
   thresholds: {
@@ -142,27 +155,31 @@ const report = {
     minimumRetainedRatio: MIN_RETAINED_RATIO,
     previousModels,
     collapseGuardMinimum,
-    recentYears: RECENT_YEARS,
-    recentYearFloor: RECENT_YEAR_FLOOR,
+    knowledgeWindowYears: KNOWLEDGE_WINDOW_YEARS,
+    knowledgeYearFloor: KNOWLEDGE_YEAR_FLOOR,
     minimumRecentSpecificationCoverage: MIN_RECENT_SPEC_COVERAGE,
   },
   counts: {
     models: activeModels.length,
+    excludedOldModels: eligibleModels.length - activeModels.length,
     modelsFromVehiclesDb: activeModels.filter((row) => row.source === "vehiclesdb").length,
     manualOrOfficialModels: activeModels.filter((row) => row.source !== "vehiclesdb").length,
     modelsWithRepresentativePower: activeModels.filter((row) => positive(row.representativePowerHp)).length,
     modelRecordsWithSource: activeModels.filter(hasTrustedSource).length,
     variants: activeVariants.length,
+    excludedOldVariants: eligibleVariants.length - activeVariants.length,
     variantsWithThirtyMinutePower: activeVariants.filter(hasThirtyMinutePower).length,
     variantsWithTrustedSource: activeVariants.filter(hasTrustedSource).length,
     powerKnowledge: activePowerKnowledge.length,
+    excludedOldPowerKnowledge: eligiblePowerKnowledge.length - activePowerKnowledge.length,
     powerKnowledgeWithThirtyMinutePower: activePowerKnowledge.filter(hasThirtyMinutePower).length,
     certifiedPowerReferences: activeCertifiedPower.length,
+    excludedOldCertifiedPowerReferences: eligibleCertifiedPower.length - activeCertifiedPower.length,
     certifiedPowerReferencesWithThirtyMinutePower: activeCertifiedPower.filter(hasThirtyMinutePower).length,
   },
   recentCoverage: {
-    years: RECENT_YEARS,
-    yearFloor: RECENT_YEAR_FLOOR,
+    years: KNOWLEDGE_WINDOW_YEARS,
+    yearFloor: KNOWLEDGE_YEAR_FLOOR,
     models: recentModels.length,
     modelsWithAnySpecifications: recentModelsWithAnySpecifications.length,
     modelsWithCoreSpecifications: recentModelsWithCoreSpecifications.length,
