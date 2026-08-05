@@ -5,6 +5,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "5 20 * * *"
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v2-japan.yml
 
 # Independent daily market. 03:05 Asia/Novokuznetsk (UTC+7).
 # Japan probes completed auction results with final deal prices and publishes only sold lots with positive final prices.
