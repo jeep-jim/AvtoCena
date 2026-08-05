@@ -1,0 +1,90 @@
+[
+  {
+    "id": "toyota/alphard/agh30-2ar-fe-2015-2023",
+    "modelId": "toyota/alphard",
+    "make": "Toyota",
+    "model": "Alphard",
+    "generation": "AGH30/AGH35",
+    "generationAliases": [
+      "30 Series",
+      "AGH30W",
+      "AGH35W"
+    ],
+    "trimContains": [
+      "2.5"
+    ],
+    "yearFrom": 2015,
+    "yearTo": 2023,
+    "engineCc": 2493,
+    "engineCcTolerance": 100,
+    "fuel": "petrol",
+    "bodyType": "minivan",
+    "powertrainKind": "combustion",
+    "powerHp": 182,
+    "powerKw": 134,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "goonet_japan_exact",
+      "goonet_japan"
+    ],
+    "sourceUrl": "https://toyota.jp/pages/contents/carlineup/archive/alphard/2019-12/pdf/alphard_main_s_201912.pdf",
+    "verifiedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/rav4/xa50-a25a-fks-2019-2024",
+    "modelId": "toyota/rav4",
+    "make": "Toyota",
+    "model": "RAV4",
+    "generation": "XA50",
+    "generationAliases": [
+      "5th generation",
+      "RAV 4"
+    ],
+    "yearFrom": 2019,
+    "yearTo": 2024,
+    "engineCc": 2487,
+    "engineCcTolerance": 100,
+    "fuel": "petrol",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 203,
+    "powerKw": 149.5,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "auto_georgia_open"
+    ],
+    "sourceUrl": "https://pressroom.toyota.com/2020-toyota-rav4-offers-a-new-trd-off-road-model-and-multimedia-enhancements/",
+    "verifiedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "volkswagen/touareg/cr-3.0-tsi-2018-2025",
+    "modelId": "volkswagen/touareg",
+    "make": "Volkswagen",
+    "model": "Touareg",
+    "generation": "CR",
+    "generationAliases": [
+      "3rd generation"
+    ],
+    "trimContains": [
+      "3.0 TSI"
+    ],
+    "yearFrom": 2018,
+    "yearTo": 2025,
+    "engineCc": 2995,
+    "engineCcTolerance": 100,
+    "fuel": "petrol",
+    "bodyType": "suv",
+    "powertrainKind": "combustion",
+    "powerHp": 340,
+    "powerKw": 250,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "guazi_china_export"
+    ],
+    "sourceUrl": "https://www.volkswagen-newsroom.com/en/the-new-touareg-world-premiere-16049/overview-of-important-facts-16050",
+    "verifiedAt": "2026-07-28T00:00:00.000Z",
+    "active": true
+  }
+]

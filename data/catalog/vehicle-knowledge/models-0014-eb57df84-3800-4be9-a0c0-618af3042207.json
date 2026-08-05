@@ -1,0 +1,6688 @@
+[
+  {
+    "id": "aston-martin/v8",
+    "make": "Aston Martin",
+    "model": "V8",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "aston-martin/vanquish",
+    "make": "Aston Martin",
+    "model": "Vanquish",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/90",
+    "make": "Audi",
+    "model": "90",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/coupe",
+    "make": "Audi",
+    "model": "Coupe",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/quattro",
+    "make": "Audi",
+    "model": "Quattro",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/r8",
+    "make": "Audi",
+    "model": "R8",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/rs-e-tron-gt",
+    "make": "Audi",
+    "model": "RS E-Tron GT",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "lu",
+      "my",
+      "nl",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/rs4",
+    "make": "Audi",
+    "model": "RS4",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/s-e-tron-gt",
+    "make": "Audi",
+    "model": "S E-Tron GT",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "lu",
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/s1",
+    "make": "Audi",
+    "model": "S1",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/s7",
+    "make": "Audi",
+    "model": "S7",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/sq2",
+    "make": "Audi",
+    "model": "SQ2",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "audi/sq6",
+    "make": "Audi",
+    "model": "SQ6",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/1300",
+    "make": "Austin",
+    "model": "1300",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/16",
+    "make": "Austin",
+    "model": "16",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/eight",
+    "make": "Austin",
+    "model": "Eight",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/healey",
+    "make": "Austin",
+    "model": "Healey",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/maxi",
+    "make": "Austin",
+    "model": "Maxi",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/mini",
+    "make": "Austin",
+    "model": "Mini",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/mini-cooper-s",
+    "make": "Austin",
+    "model": "Mini Cooper S",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin/sprite",
+    "make": "Austin",
+    "model": "Sprite",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "austin-healey/sprite",
+    "make": "Austin-Healey",
+    "model": "Sprite",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ar",
+      "es",
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc",
+      "sa"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "auto-union/audi",
+    "make": "Auto Union",
+    "model": "Audi",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "auto-union/audi-100",
+    "make": "Auto-Union",
+    "model": "Audi 100",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "baic/bj40",
+    "make": "BAIC",
+    "model": "BJ40",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ar",
+      "my"
+    ],
+    "regions": [
+      "as",
+      "sa"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/bentayga",
+    "make": "Bentley",
+    "model": "Bentayga",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/continental",
+    "make": "Bentley",
+    "model": "Continental",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/continental-flying-spur",
+    "make": "Bentley",
+    "model": "Continental Flying Spur",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "my",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/continental-gt",
+    "make": "Bentley",
+    "model": "Continental GT",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "lu",
+      "my",
+      "nl",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/continental-supersports",
+    "make": "Bentley",
+    "model": "Continental Supersports",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/flying-spur",
+    "make": "Bentley",
+    "model": "Flying Spur",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/turbo-r",
+    "make": "Bentley",
+    "model": "Turbo R",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/3-0cs",
+    "make": "BMW",
+    "model": "3.0CS",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/8-series",
+    "make": "BMW",
+    "model": "8 Series",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "ie",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/activehybrid-3",
+    "make": "BMW",
+    "model": "ActiveHybrid 3",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/activehybrid-7",
+    "make": "BMW",
+    "model": "ActiveHybrid 7",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/isetta",
+    "make": "BMW",
+    "model": "Isetta",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/m-roadster",
+    "make": "BMW",
+    "model": "M Roadster",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/m6",
+    "make": "BMW",
+    "model": "M6",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/m8",
+    "make": "BMW",
+    "model": "M8",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/mini",
+    "make": "BMW",
+    "model": "Mini",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/xm",
+    "make": "BMW",
+    "model": "XM",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/century",
+    "make": "Buick",
+    "model": "Century",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/electra",
+    "make": "Buick",
+    "model": "Electra",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/enclave",
+    "make": "Buick",
+    "model": "Enclave",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/encore",
+    "make": "Buick",
+    "model": "Encore",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/estate-wagon",
+    "make": "Buick",
+    "model": "Estate Wagon",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/gs",
+    "make": "Buick",
+    "model": "GS",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "trabant/601-s",
+    "make": "Trabant",
+    "model": "601 S",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "trabant/p60",
+    "make": "Trabant",
+    "model": "P60",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "triumph/2500",
+    "make": "Triumph",
+    "model": "2500",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "triumph/dolomite",
+    "make": "Triumph",
+    "model": "Dolomite",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "triumph/stag",
+    "make": "Triumph",
+    "model": "Stag",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "triumph/tr5",
+    "make": "Triumph",
+    "model": "TR5",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "triumph/tr6",
+    "make": "Triumph",
+    "model": "TR6",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "tvr/cerbera",
+    "make": "TVR",
+    "model": "Cerbera",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "tvr/griffith",
+    "make": "TVR",
+    "model": "Griffith",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "tvr/tuscan",
+    "make": "TVR",
+    "model": "Tuscan",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "vauxhall/cavalier",
+    "make": "Vauxhall",
+    "model": "Cavalier",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "vauxhall/chevette",
+    "make": "Vauxhall",
+    "model": "Chevette",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "vauxhall/cresta",
+    "make": "Vauxhall",
+    "model": "Cresta",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "vauxhall/mokka",
+    "make": "Vauxhall",
+    "model": "Mokka",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "gb",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "vauxhall/zafira",
+    "make": "Vauxhall",
+    "model": "Zafira",
+    "aliases": [],
+    "bodyTypes": [
+      "mpv"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/1600",
+    "make": "Volkswagen",
+    "model": "1600",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/id-6",
+    "make": "Volkswagen",
+    "model": "ID.6",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/karmann-ghia",
+    "make": "Volkswagen",
+    "model": "Karmann Ghia",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/taos",
+    "make": "Volkswagen",
+    "model": "Taos",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/variant",
+    "make": "Volkswagen",
+    "model": "Variant",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volkswagen/vento",
+    "make": "Volkswagen",
+    "model": "Vento",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/140",
+    "make": "Volvo",
+    "model": "140",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/164",
+    "make": "Volvo",
+    "model": "164",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/240",
+    "make": "Volvo",
+    "model": "240",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/480",
+    "make": "Volvo",
+    "model": "480",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/60",
+    "make": "Volvo",
+    "model": "60",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "de"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/760",
+    "make": "Volvo",
+    "model": "760",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/amazon",
+    "make": "Volvo",
+    "model": "Amazon",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/c303",
+    "make": "Volvo",
+    "model": "C303",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/c40",
+    "make": "Volvo",
+    "model": "C40",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "ie",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/duett",
+    "make": "Volvo",
+    "model": "Duett",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/pv544",
+    "make": "Volvo",
+    "model": "PV544",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/s80",
+    "make": "Volvo",
+    "model": "S80",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "volvo/v70-xc",
+    "make": "Volvo",
+    "model": "V70 XC",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "willys/jeep",
+    "make": "Willys",
+    "model": "Jeep",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "wolseley/1300",
+    "make": "Wolseley",
+    "model": "1300",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "wolseley/1500",
+    "make": "Wolseley",
+    "model": "1500",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "wolseley/hornet",
+    "make": "Wolseley",
+    "model": "Hornet",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "xpeng/g6",
+    "make": "XPeng",
+    "model": "G6",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "ie",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "zeekr/001",
+    "make": "Zeekr",
+    "model": "001",
+    "aliases": [],
+    "bodyTypes": [
+      "wagon"
+    ],
+    "countries": [
+      "de",
+      "fi",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "zeekr/x",
+    "make": "Zeekr",
+    "model": "X",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "de",
+      "es",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "abarth/600e",
+    "make": "Abarth",
+    "model": "600E",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "gb",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "acura/mdx",
+    "make": "Acura",
+    "model": "Mdx",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "my",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "acura/rdx",
+    "make": "Acura",
+    "model": "Rdx",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "acura/tsx",
+    "make": "Acura",
+    "model": "Tsx",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "alfa-romeo/145",
+    "make": "Alfa Romeo",
+    "model": "145",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "alfa-romeo/155",
+    "make": "Alfa Romeo",
+    "model": "155",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "alfa-romeo/159-sw",
+    "make": "Alfa Romeo",
+    "model": "159 SW",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mercury/cougar-xr-7",
+    "make": "Mercury",
+    "model": "Cougar XR-7",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mercury/marauder",
+    "make": "Mercury",
+    "model": "Marauder",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mercury/marquis",
+    "make": "Mercury",
+    "model": "Marquis",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mercury/marquis-brougham",
+    "make": "Mercury",
+    "model": "Marquis Brougham",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mercury/montego-mx",
+    "make": "Mercury",
+    "model": "Montego MX",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/gt",
+    "make": "MG",
+    "model": "GT",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/j2",
+    "make": "MG",
+    "model": "J2",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/magnette",
+    "make": "MG",
+    "model": "Magnette",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/metro",
+    "make": "MG",
+    "model": "Metro",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/mg6",
+    "make": "MG",
+    "model": "MG6",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/mgc",
+    "make": "MG",
+    "model": "MGC",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "es",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/mgs6-ev",
+    "make": "MG",
+    "model": "MGS6 EV",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "de",
+      "es",
+      "fi",
+      "lu",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/mgs9-phev",
+    "make": "MG",
+    "model": "MGS9 PHEV",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "de",
+      "es",
+      "lu",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/va",
+    "make": "MG",
+    "model": "VA",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mg/ya",
+    "make": "MG",
+    "model": "YA",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mini/paceman",
+    "make": "Mini",
+    "model": "Paceman",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/airtrek",
+    "make": "Mitsubishi",
+    "model": "Airtrek",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/challenger",
+    "make": "Mitsubishi",
+    "model": "Challenger",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/cordia",
+    "make": "Mitsubishi",
+    "model": "Cordia",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/delica",
+    "make": "Mitsubishi",
+    "model": "Delica",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "my",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/diamante",
+    "make": "Mitsubishi",
+    "model": "Diamante",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/l300",
+    "make": "Mitsubishi",
+    "model": "L300",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/l400",
+    "make": "Mitsubishi",
+    "model": "L400",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/legnum",
+    "make": "Mitsubishi",
+    "model": "Legnum",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/montero",
+    "make": "Mitsubishi",
+    "model": "Montero",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/pajero-mini",
+    "make": "Mitsubishi",
+    "model": "Pajero Mini",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/shogun",
+    "make": "Mitsubishi",
+    "model": "Shogun",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/sigma",
+    "make": "Mitsubishi",
+    "model": "Sigma",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan",
+      "wagon"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "mitsubishi/starion",
+    "make": "Mitsubishi",
+    "model": "Starion",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morgan/aero-8",
+    "make": "Morgan",
+    "model": "Aero 8",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morgan/plus-4",
+    "make": "Morgan",
+    "model": "Plus 4",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morgan/plus-6",
+    "make": "Morgan",
+    "model": "Plus 6",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "gb",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morgan/plus-8",
+    "make": "Morgan",
+    "model": "Plus 8",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/1100",
+    "make": "Morris",
+    "model": "1100",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/1300",
+    "make": "Morris",
+    "model": "1300",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/clubman",
+    "make": "Morris",
+    "model": "Clubman",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/cooper",
+    "make": "Morris",
+    "model": "Cooper",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/cooper-s",
+    "make": "Morris",
+    "model": "Cooper S",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/m8",
+    "make": "Morris",
+    "model": "M8",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/marina",
+    "make": "Morris",
+    "model": "Marina",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/mini-minor",
+    "make": "Morris",
+    "model": "Mini Minor",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/minor-1000-traveller",
+    "make": "Morris",
+    "model": "Minor 1000 Traveller",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "morris/minor-traveller",
+    "make": "Morris",
+    "model": "Minor Traveller",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nilsson/hearse-3d",
+    "make": "Nilsson",
+    "model": "Hearse 3D",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nilsson/volvo-s-80",
+    "make": "Nilsson",
+    "model": "Volvo S 80",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/almera-tino",
+    "make": "Nissan",
+    "model": "Almera Tino",
+    "aliases": [],
+    "bodyTypes": [
+      "mpv"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "lu",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/avenir",
+    "make": "Nissan",
+    "model": "Avenir",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/cedric",
+    "make": "Nissan",
+    "model": "Cedric",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/cefiro",
+    "make": "Nissan",
+    "model": "Cefiro",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "my",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/gloria",
+    "make": "Nissan",
+    "model": "Gloria",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/infiniti",
+    "make": "Nissan",
+    "model": "Infiniti",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/lafesta",
+    "make": "Nissan",
+    "model": "Lafesta",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "nissan/laurel",
+    "make": "Nissan",
+    "model": "Laurel",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bentley/s3",
+    "make": "Bentley",
+    "model": "S3",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/activehybrid-x6",
+    "make": "BMW",
+    "model": "ActiveHybrid X6",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/alpina",
+    "make": "BMW",
+    "model": "Alpina",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan",
+      "wagon"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/cooper",
+    "make": "BMW",
+    "model": "Cooper",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "my",
+      "nl"
+    ],
+    "regions": [
+      "as",
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/cooper-s",
+    "make": "BMW",
+    "model": "Cooper S",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/i8",
+    "make": "BMW",
+    "model": "i8",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/m635csi",
+    "make": "BMW",
+    "model": "M635CSi",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bmw/z1",
+    "make": "BMW",
+    "model": "Z1",
+    "aliases": [],
+    "bodyTypes": [
+      "roadster"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bravia/swan",
+    "make": "Bravia",
+    "model": "Swan",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "lu",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "bugatti/chiron",
+    "make": "Bugatti",
+    "model": "Chiron",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/centurion",
+    "make": "Buick",
+    "model": "Centurion",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/envision",
+    "make": "Buick",
+    "model": "Envision",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/invicta",
+    "make": "Buick",
+    "model": "Invicta",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/skyhawk",
+    "make": "Buick",
+    "model": "Skyhawk",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/tourer",
+    "make": "Buick",
+    "model": "Tourer",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "buick/wild-cat",
+    "make": "Buick",
+    "model": "Wild Cat",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "byd/sea-lion-07",
+    "make": "BYD",
+    "model": "Sea Lion 07",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "byd/yuan-plus",
+    "make": "BYD",
+    "model": "Yuan Plus",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/allante",
+    "make": "Cadillac",
+    "model": "Allante",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/bls",
+    "make": "Cadillac",
+    "model": "Bls",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/calais",
+    "make": "Cadillac",
+    "model": "Calais",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/ct6",
+    "make": "Cadillac",
+    "model": "CT6",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/dts",
+    "make": "Cadillac",
+    "model": "Dts",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/seville",
+    "make": "Cadillac",
+    "model": "Seville",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/xt4",
+    "make": "Cadillac",
+    "model": "XT4",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "lu",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "cadillac/xt5",
+    "make": "Cadillac",
+    "model": "XT5",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "lu",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "campereve/magellan",
+    "make": "Campereve",
+    "model": "Magellan",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "caterham/super-seven",
+    "make": "Caterham",
+    "model": "Super Seven",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chery/jetour-x70",
+    "make": "Chery",
+    "model": "Jetour X70",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chery/tiggo-2-pro",
+    "make": "Chery",
+    "model": "Tiggo 2 Pro",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ar",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "sa"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/150",
+    "make": "Chevrolet",
+    "model": "150",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/alero",
+    "make": "Chevrolet",
+    "model": "Alero",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "lu",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/brookwood",
+    "make": "Chevrolet",
+    "model": "Brookwood",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/c-10",
+    "make": "Chevrolet",
+    "model": "C-10",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/capitol",
+    "make": "Chevrolet",
+    "model": "Capitol",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/chevy",
+    "make": "Chevrolet",
+    "model": "Chevy",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/cobalt",
+    "make": "Chevrolet",
+    "model": "Cobalt",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/fleetmaster",
+    "make": "Chevrolet",
+    "model": "Fleetmaster",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/international",
+    "make": "Chevrolet",
+    "model": "International",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/k2500",
+    "make": "Chevrolet",
+    "model": "K2500",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "nz"
+    ],
+    "regions": [
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/national",
+    "make": "Chevrolet",
+    "model": "National",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/nomad",
+    "make": "Chevrolet",
+    "model": "Nomad",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/sonic",
+    "make": "Chevrolet",
+    "model": "Sonic",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/spark-ev",
+    "make": "Chevrolet",
+    "model": "Spark EV",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/sportvan",
+    "make": "Chevrolet",
+    "model": "Sportvan",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/standard",
+    "make": "Chevrolet",
+    "model": "Standard",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/superior",
+    "make": "Chevrolet",
+    "model": "Superior",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "chevrolet/t10-blazer",
+    "make": "Chevrolet",
+    "model": "T10 Blazer",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 6,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "ford/taunus",
+    "make": "Ford",
+    "model": "Taunus",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "ford/taunus-12m",
+    "make": "Ford",
+    "model": "Taunus 12M",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "ford/thunderbird",
+    "make": "Ford",
+    "model": "Thunderbird",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "ford/y",
+    "make": "Ford",
+    "model": "Y",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "ford/zodiac",
+    "make": "Ford",
+    "model": "Zodiac",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "gac/m8",
+    "make": "GAC",
+    "model": "M8",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "my",
+      "nz",
+      "th"
+    ],
+    "regions": [
+      "as",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "geely/ex5",
+    "make": "Geely",
+    "model": "EX5",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ar",
+      "es",
+      "nl",
+      "nz",
+      "th"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc",
+      "sa"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "gm-daewoo/kalos",
+    "make": "Gm Daewoo",
+    "model": "Kalos",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "gm-daewoo/matiz",
+    "make": "Gm Daewoo",
+    "model": "Matiz",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "gmc/suburban",
+    "make": "GMC",
+    "model": "Suburban",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "haval/h2",
+    "make": "Haval",
+    "model": "H2",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hillman/avenger",
+    "make": "Hillman",
+    "model": "Avenger",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hillman/imp",
+    "make": "Hillman",
+    "model": "Imp",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "holden/commodore",
+    "make": "Holden",
+    "model": "Commodore",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "holden/kingswood",
+    "make": "Holden",
+    "model": "Kingswood",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/civic-4d",
+    "make": "Honda",
+    "model": "Civic 4D",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/civic-type-r",
+    "make": "Honda",
+    "model": "Civic Type R",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "lu",
+      "nl",
+      "th"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/e",
+    "make": "Honda",
+    "model": "E",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/edix",
+    "make": "Honda",
+    "model": "Edix",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/integra",
+    "make": "Honda",
+    "model": "Integra",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/jade",
+    "make": "Honda",
+    "model": "Jade",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "my",
+      "nz"
+    ],
+    "regions": [
+      "as",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/logo",
+    "make": "Honda",
+    "model": "Logo",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/passport",
+    "make": "Honda",
+    "model": "Passport",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/prelude",
+    "make": "Honda",
+    "model": "Prelude",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/prelude-2-0i",
+    "make": "Honda",
+    "model": "Prelude 2.0I",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/prelude-ex",
+    "make": "Honda",
+    "model": "Prelude EX",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/s2000",
+    "make": "Honda",
+    "model": "S2000",
+    "aliases": [],
+    "bodyTypes": [
+      "convertible"
+    ],
+    "countries": [
+      "ar",
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc",
+      "sa"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "honda/torneo",
+    "make": "Honda",
+    "model": "Torneo",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "humber/sceptre",
+    "make": "Humber",
+    "model": "Sceptre",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "humber/super-snipe",
+    "make": "Humber",
+    "model": "Super Snipe",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan",
+      "wagon"
+    ],
+    "countries": [
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hummer/h3",
+    "make": "Hummer",
+    "model": "H3",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/atos",
+    "make": "Hyundai",
+    "model": "Atos",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "lu",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/atoz",
+    "make": "Hyundai",
+    "model": "Atoz",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/creta",
+    "make": "Hyundai",
+    "model": "Creta",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "my",
+      "nl",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/genesis",
+    "make": "Hyundai",
+    "model": "Genesis",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/grandeur",
+    "make": "Hyundai",
+    "model": "Grandeur",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/h-1",
+    "make": "Hyundai",
+    "model": "H-1",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/i800",
+    "make": "Hyundai",
+    "model": "i800",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "gb",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/palisade",
+    "make": "Hyundai",
+    "model": "Palisade",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/staria",
+    "make": "Hyundai",
+    "model": "Staria",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "de",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "th",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/terracan",
+    "make": "Hyundai",
+    "model": "Terracan",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/trajet",
+    "make": "Hyundai",
+    "model": "Trajet",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "lu",
+      "my",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "as",
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/veloster",
+    "make": "Hyundai",
+    "model": "Veloster",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "hyundai/venue",
+    "make": "Hyundai",
+    "model": "Venue",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "infiniti/g35",
+    "make": "Infiniti",
+    "model": "G35",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "infiniti/q30",
+    "make": "Infiniti",
+    "model": "Q30",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "infiniti/q50",
+    "make": "Infiniti",
+    "model": "Q50",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "ca",
+      "es",
+      "fi",
+      "gb",
+      "lu",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "infiniti/q60",
+    "make": "Infiniti",
+    "model": "Q60",
+    "aliases": [],
+    "bodyTypes": [
+      "coupe"
+    ],
+    "countries": [
+      "ca",
+      "gb",
+      "nl",
+      "nz",
+      "ua",
+      "us"
+    ],
+    "regions": [
+      "eu",
+      "na",
+      "oc"
+    ],
+    "popularityDecile": 5,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "lada/2101",
+    "make": "Lada",
+    "model": "2101",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 4,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "lada/2103",
+    "make": "Lada",
+    "model": "2103",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "ua"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 4,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "lada/2107",
+    "make": "Lada",
+    "model": "2107",
+    "aliases": [],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "fi",
+      "nl",
+      "nz",
+      "ua"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 4,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "lada/4x4",
+    "make": "Lada",
+    "model": "4X4",
+    "aliases": [],
+    "bodyTypes": [
+      "hatchback",
+      "wagon"
+    ],
+    "countries": [
+      "es",
+      "fi",
+      "lu",
+      "nl"
+    ],
+    "regions": [
+      "eu"
+    ],
+    "popularityDecile": 4,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  },
+  {
+    "id": "land-rover/110",
+    "make": "Land Rover",
+    "model": "110",
+    "aliases": [],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "fi",
+      "gb",
+      "nl",
+      "nz"
+    ],
+    "regions": [
+      "eu",
+      "oc"
+    ],
+    "popularityDecile": 4,
+    "source": "vehiclesdb",
+    "sourceVersion": "2026.08.2",
+    "sourceUrl": "https://github.com/vehiclesdb/vehiclesdb",
+    "updatedAt": "2026-08-05T07:04:55.181Z",
+    "active": true,
+    "makeAliases": []
+  }
+]
