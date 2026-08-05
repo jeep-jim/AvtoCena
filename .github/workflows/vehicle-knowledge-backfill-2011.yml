@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: checkpointed-backfill-2026-08-05
+# rollout-marker: checkpoint-contract-test-2026-08-05
 
 permissions:
   contents: write
