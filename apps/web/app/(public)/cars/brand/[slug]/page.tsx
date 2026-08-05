@@ -109,10 +109,12 @@ export default async function BrandLandingPage({ params }: PageProps) {
             </div>
           </section>;
         })}
-      </div> : <section className="mt-9 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:p-8">
-        <h2 className="text-2xl font-black md:text-4xl">Подберём {brand.name} под ваш бюджет</h2>
-        <p className="mt-3 max-w-3xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас готовых предложений этой марки нет. Выберите модель выше или оставьте заявку — менеджер найдёт подходящие автомобили и подготовит расчёт под ключ.</p>
-        <Link href="/#form" className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Запросить подбор {brand.name}</Link>
+      </div> : <section className="mt-9 grid gap-5 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-8">
+        <div className="min-w-0">
+          <h2 className="text-2xl font-black md:text-4xl">Подберём {brand.name} под ваш бюджет</h2>
+          <p className="mt-3 max-w-3xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас готовых предложений этой марки нет. Выберите модель выше или оставьте заявку — менеджер найдёт подходящие автомобили и подготовит расчёт под ключ.</p>
+        </div>
+        <Link href="/#form" className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black md:justify-self-end">Запросить подбор {brand.name}</Link>
       </section>}
 
       {!offers.length && similar.length ? <section className="mt-12">
