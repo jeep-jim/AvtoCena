@@ -11,8 +11,8 @@ on:
       - .github/workflows/catalog-v2-korea.yml
 
 # Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
-# Full rerun uses strict positive source price/currency, verified 1–30 photos, and no forced 30-photo detail fetch.
-# Rerun marker: restore-daily-market-schedules-2026-08-06.
+# Full rerun uses strict positive source price/currency, verified 1–30 photos, and collects one real image first for throughput.
+# Rerun marker: single-image-fast-path-2026-08-06.
 permissions:
   contents: read
 
