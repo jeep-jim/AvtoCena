@@ -45,13 +45,12 @@ import {
   PUBLIC_CATALOG_MARKETS,
 } from "./runtime-config";
 
-// The production shard script imports this module before it reads gallery limits.
-// Force the agreed policy there: gather and retain as many listing-bound photos as
-// the source provides, up to 30. Web/runtime imports are not affected.
+// Rebuild workflows may choose any verified gallery size from 1 to 30.
+// Keep the hard cap at 30, but do not overwrite the workflow's preferred count:
+// forcing 30 caused a detail request for every listing and prevented 10k crawls.
 if (process.env.CATALOG_REBUILD_MARKET) {
-  process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER = "30";
-  process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
-  process.env.CATALOG_COLLECTION_IMAGE_LIMIT = "30";
+  process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
+  process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
 }
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
