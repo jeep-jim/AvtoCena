@@ -3,8 +3,11 @@ run-name: Catalog V2 · Japan · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "5 20 * * *"
 
-# Japan rollout probes completed auction results with final deal prices and publishes only sold lots with positive final prices.
+# Independent daily market. 03:05 Asia/Novokuznetsk (UTC+7).
+# Only completed/sold auction results with positive final deal prices are publishable.
 permissions:
   contents: read
 
