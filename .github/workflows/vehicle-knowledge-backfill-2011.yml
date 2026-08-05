@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: drom-parser-v2-backfill-2026-08-05-1725
+# rollout-marker: checkpointed-backfill-2026-08-05
 
 permissions:
   contents: write
@@ -34,8 +34,7 @@ jobs:
       VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
       VEHICLE_KNOWLEDGE_RECENT_YEARS: 15
       DROM_KNOWLEDGE_ONLY_RECENT: 0
-      DROM_KNOWLEDGE_LIMIT: 1000
-      DROM_KNOWLEDGE_BATCHES: 4
+      DROM_KNOWLEDGE_LIMIT: 200
       DROM_KNOWLEDGE_DELAY_MS: 700
       DROM_KNOWLEDGE_RETRY_DAYS: 7
     steps:
@@ -72,23 +71,20 @@ jobs:
           NODE
       - name: Synchronize every catalog make and model from 2011 onward
         run: npm run catalog:sync-vehicle-models
-      - name: Enrich prioritized batches without skipping older 2011+ models
+      - name: Enrich one checkpointed priority batch
+        id: enrich
         shell: bash
         run: |
-          set -euo pipefail
-          for batch in $(seq 1 "$DROM_KNOWLEDGE_BATCHES"); do
-            echo "Knowledge batch ${batch}/${DROM_KNOWLEDGE_BATCHES}"
-            npm run catalog:enrich-drom-variants || status=$?
-            status=${status:-0}
-            if [ "$status" -eq 2 ]; then
-              echo "Source rate-limited; progress is saved and the next daily run will continue."
-              break
-            fi
-            if [ "$status" -ne 0 ]; then
-              exit "$status"
-            fi
-            unset status
-          done
+          set +e
+          npm run catalog:enrich-drom-variants
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ "$status" -ne 0 ] && [ "$status" -ne 2 ]; then
+            exit "$status"
+          fi
+          if [ "$status" -eq 2 ]; then
+            echo "Source rate-limited; the completed part of this batch will still be validated and committed."
+          fi
       - name: Build missing variants from verified live catalog offers
         run: npm run catalog:build-vehicle-variants
       - name: Reject false-green empty knowledge runs
@@ -99,18 +95,18 @@ jobs:
           const fs = require('node:fs');
           const enrichment = JSON.parse(fs.readFileSync('data/catalog/vehicle-knowledge/drom-enrichment-report.json', 'utf8'));
           const build = JSON.parse(fs.readFileSync('data/catalog/vehicle-knowledge/variant-build-report.json', 'utf8'));
-          const ready = Number(enrichment.ready || 0);
-          const enrichedVariants = Number(enrichment.variants || 0);
+          const selected = Number(enrichment.selected || 0);
+          const processed = Number(enrichment.processed || 0);
           const totalVariants = Number(build.totalVariants || 0);
           const scannedOffers = Number(build.scannedOffers || 0);
-          console.log(JSON.stringify({ ready, enrichedVariants, totalVariants, scannedOffers }, null, 2));
-          if (ready < 1 || enrichedVariants < 1 || totalVariants < 10 || scannedOffers < 1) {
-            throw new Error(`vehicle_knowledge_not_ready: ready=${ready}, enrichedVariants=${enrichedVariants}, totalVariants=${totalVariants}, scannedOffers=${scannedOffers}`);
+          console.log(JSON.stringify({ selected, processed, totalVariants, scannedOffers, blocked: Boolean(enrichment.blocked) }, null, 2));
+          if (selected < 1 || processed < 1 || totalVariants < 10 || scannedOffers < 1) {
+            throw new Error(`vehicle_knowledge_not_ready: selected=${selected}, processed=${processed}, totalVariants=${totalVariants}, scannedOffers=${scannedOffers}`);
           }
           NODE
       - name: Validate knowledge and Drom parsing
         run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/drom-vehicle-knowledge.test.ts tests/vehicle-knowledge-production-window.test.mjs
-      - name: Commit versioned vehicle knowledge to GitHub
+      - name: Commit checkpointed vehicle knowledge to GitHub
         shell: bash
         run: |
           set -euo pipefail
@@ -121,5 +117,6 @@ jobs:
             echo "Vehicle knowledge is already current."
             exit 0
           fi
-          git commit -m "data: refresh vehicle knowledge 2011+"
+          git commit -m "data: checkpoint vehicle knowledge 2011+"
+          git pull --rebase origin main
           git push origin HEAD:main
