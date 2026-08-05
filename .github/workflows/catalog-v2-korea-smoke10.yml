@@ -8,6 +8,7 @@ on:
     paths:
       - .github/workflows/catalog-v2-korea-smoke10.yml
 
+# trigger: 2026-08-05T14:39Z
 permissions:
   contents: read
 
