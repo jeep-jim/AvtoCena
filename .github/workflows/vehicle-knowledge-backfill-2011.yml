@@ -1,0 +1,72 @@
+name: Vehicle knowledge backfill 2011+
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "40 1 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vehicle-knowledge-github-data
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      JSON_STORAGE_DRIVER: file
+      VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 2011
+      VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
+      VEHICLE_KNOWLEDGE_RECENT_YEARS: 15
+      DROM_KNOWLEDGE_ONLY_RECENT: 0
+      DROM_KNOWLEDGE_LIMIT: 1000
+      DROM_KNOWLEDGE_BATCHES: 4
+      DROM_KNOWLEDGE_DELAY_MS: 700
+      DROM_KNOWLEDGE_RETRY_DAYS: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Synchronize every catalog make and model from 2011 onward
+        run: npm run catalog:sync-vehicle-models
+      - name: Enrich prioritized batches without skipping older models
+        shell: bash
+        run: |
+          set -euo pipefail
+          for batch in $(seq 1 "$DROM_KNOWLEDGE_BATCHES"); do
+            echo "Knowledge batch ${batch}/${DROM_KNOWLEDGE_BATCHES}"
+            status=0
+            npm run catalog:enrich-drom-variants || status=$?
+            if [ "$status" -eq 2 ]; then
+              echo "Source rate-limited; progress is saved and the next run will continue."
+              break
+            fi
+            if [ "$status" -ne 0 ]; then
+              exit "$status"
+            fi
+          done
+      - name: Build missing variants from verified live catalog offers
+        run: npm run catalog:build-vehicle-variants
+      - name: Validate knowledge and Drom parsing
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/drom-vehicle-knowledge.test.ts tests/vehicle-knowledge-production-window.test.mjs
+      - name: Commit versioned vehicle knowledge to GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/vehicle-knowledge data/catalog/power-knowledge data/catalog/power-reference data/models
+          if git diff --cached --quiet; then
+            echo "Vehicle knowledge is already current."
+            exit 0
+          fi
+          git commit -m "data: refresh vehicle knowledge 2011+"
+          git push origin HEAD:main
