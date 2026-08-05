@@ -82,6 +82,15 @@ function hasPendingCalculation(offer: Partial<VehicleOffer>) {
   return !number(offer.totalRub) && (status === "needs_data" || status.startsWith("needs_"));
 }
 
+function hasSourceCalculationInputs(offer: Partial<VehicleOffer>) {
+  return Boolean(
+    number(offer.sourcePrice)
+    && String(offer.sourceCurrency || "").trim()
+    && number(offer.year)
+    && number(offer.powerHp),
+  );
+}
+
 export function isJapanAuctionOffer(offer: Partial<VehicleOffer>) {
   if (offer.market !== "japan") return false;
   const raw = rawObject(offer);
@@ -100,25 +109,23 @@ export function isCompletedJapanAuction(offer: Partial<VehicleOffer>) {
   const raw = rawObject(offer);
   const sourceId = String(offer.sourceId || "").toLowerCase();
   const status = String(raw.auctionStatus || raw.saleStatus || raw.status || offer.auctionResult || offer.status || "").toLowerCase();
-  const sourceMarksHistory = /(?:past|stat|sold|result|history)/.test(sourceId);
-  const statusMarksCompleted = /(?:sold|completed|finished|result|past|落札|成約)/i.test(status);
-  return sourceMarksHistory || statusMarksCompleted;
+  return /(?:past|stat|sold|result|history)/.test(sourceId)
+    || /(?:sold|completed|finished|result|past|落札|成約)/i.test(status);
 }
 
 function isPriorityOffer(
-  completeCalculation: boolean,
+  offer: Partial<VehicleOffer>,
   ageYears: number | undefined,
   powerHp: number | undefined,
   totalRub: number | undefined,
   options: CatalogV2PolicyOptions,
 ) {
-  return completeCalculation
+  return hasSourceCalculationInputs(offer)
     && ageYears !== undefined
     && ageYears <= options.priorityMaxAgeYears
     && powerHp !== undefined
     && powerHp <= options.priorityMaxPowerHp
-    && totalRub !== undefined
-    && totalRub <= options.priorityMaxTotalRub;
+    && (totalRub === undefined || totalRub <= options.priorityMaxTotalRub);
 }
 
 export function classifyCatalogV2Offer(
@@ -134,17 +141,15 @@ export function classifyCatalogV2Offer(
   const popularity = popularityDecile(offer);
   const completeCalculation = hasCompleteCalculation(offer);
   const pendingCalculation = hasPendingCalculation(offer);
-  if (!completeCalculation && !pendingCalculation) {
-    return { tier: "rejected", eligible: false, reason: "full_calculation", totalRub, ageYears, powerHp, popularityDecile: popularity };
-  }
-  if (completeCalculation && !totalRub) {
-    return { tier: "rejected", eligible: false, reason: "price_missing", totalRub, ageYears, powerHp, popularityDecile: popularity };
+  const sourceInputs = hasSourceCalculationInputs(offer);
+  if (!completeCalculation && !pendingCalculation && !sourceInputs) {
+    return { tier: "rejected", eligible: false, reason: "calculation_inputs", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
   if (totalRub !== undefined && totalRub > options.hardMaxTotalRub) {
     return { tier: "rejected", eligible: false, reason: "hard_price_limit", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
 
-  const priority = isPriorityOffer(completeCalculation, ageYears, powerHp, totalRub, options);
+  const priority = isPriorityOffer(offer, ageYears, powerHp, totalRub, options);
   const recentMaxAgeYears = Math.max(15, Number(options.recentMaxAgeYears || 0));
 
   if (offer.market === "japan") {
@@ -160,40 +165,16 @@ export function classifyCatalogV2Offer(
     if (priority) {
       return { tier: "priority", eligible: true, reason: "japan_completed_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
     }
-    return {
-      tier: "japan_auction",
-      eligible: true,
-      reason: pendingCalculation ? "completed_auction_calculation_pending" : "completed_auction_after_priority",
-      totalRub,
-      ageYears,
-      powerHp,
-      popularityDecile: popularity,
-    };
+    return { tier: "japan_auction", eligible: true, reason: "completed_auction", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
 
   if (priority) {
-    return { tier: "priority", eligible: true, reason: "russia_mass_market", totalRub, ageYears, powerHp, popularityDecile: popularity };
+    return { tier: "priority", eligible: true, reason: "source_price_year_power_priority", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
   if (ageYears !== undefined && ageYears <= recentMaxAgeYears) {
-    return {
-      tier: "recent",
-      eligible: true,
-      reason: pendingCalculation ? "recent_calculation_pending" : "recent_after_priority",
-      totalRub,
-      ageYears,
-      powerHp,
-      popularityDecile: popularity,
-    };
+    return { tier: "recent", eligible: true, reason: "recent_2011_plus", totalRub, ageYears, powerHp, popularityDecile: popularity };
   }
-  return {
-    tier: "extended",
-    eligible: true,
-    reason: pendingCalculation ? "extended_calculation_pending" : "extended_after_priority",
-    totalRub,
-    ageYears,
-    powerHp,
-    popularityDecile: popularity,
-  };
+  return { tier: "extended", eligible: true, reason: "extended_2011_plus", totalRub, ageYears, powerHp, popularityDecile: popularity };
 }
 
 function freshness(offer: Partial<VehicleOffer>) {
@@ -207,9 +188,7 @@ function imageCount(offer: Partial<VehicleOffer>) {
 function order(left: VehicleOffer, right: VehicleOffer, options: CatalogV2PolicyOptions) {
   const a = classifyCatalogV2Offer(left, options);
   const b = classifyCatalogV2Offer(right, options);
-  const popularityA = a.popularityDecile ?? 99;
-  const popularityB = b.popularityDecile ?? 99;
-  return popularityA - popularityB
+  return (a.popularityDecile ?? 99) - (b.popularityDecile ?? 99)
     || Number(a.totalRub || Number.MAX_SAFE_INTEGER) - Number(b.totalRub || Number.MAX_SAFE_INTEGER)
     || imageCount(right) - imageCount(left)
     || freshness(right) - freshness(left)
@@ -221,10 +200,7 @@ export function selectCatalogV2MarketOffers(
   options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY,
 ): CatalogV2Selection {
   const buckets: Record<Exclude<CatalogV2Tier, "rejected">, VehicleOffer[]> = {
-    japan_auction: [],
-    priority: [],
-    recent: [],
-    extended: [],
+    japan_auction: [], priority: [], recent: [], extended: [],
   };
   const rejected: Record<string, number> = {};
   const seen = new Set<string>();
@@ -242,17 +218,9 @@ export function selectCatalogV2MarketOffers(
 
   const priorityTarget = Math.max(0, Number(options.priorityTarget || 0));
   const fallbackUnlocked = buckets.priority.length >= priorityTarget;
-  const fallbackRows = [
-    ...buckets.japan_auction,
-    ...buckets.recent,
-    ...buckets.extended,
-  ];
-  const publicationLimit = Math.max(100_000, Number(options.maximumPerMarket || 0));
-  const selected = [
-    ...buckets.priority,
-    ...(fallbackUnlocked ? fallbackRows : []),
-  ].slice(0, publicationLimit);
-  const fallbackLockedCount = fallbackUnlocked ? 0 : fallbackRows.length;
+  const fallbackRows = [...buckets.japan_auction, ...buckets.recent, ...buckets.extended];
+  const publicationLimit = Math.max(1, Number(options.maximumPerMarket || 0));
+  const selected = [...buckets.priority, ...(fallbackUnlocked ? fallbackRows : [])].slice(0, publicationLimit);
 
   return {
     selected,
@@ -262,9 +230,6 @@ export function selectCatalogV2MarketOffers(
     extendedCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "extended").length,
     fallbackUnlocked,
     shortageToUnlock: Math.max(0, priorityTarget - buckets.priority.length),
-    rejected: {
-      ...rejected,
-      fallback_locked: fallbackLockedCount,
-    },
+    rejected: { ...rejected, fallback_locked: fallbackUnlocked ? 0 : fallbackRows.length },
   };
 }
