@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: storage-migration-backfill-2026-08-05
+# rollout-marker: truthful-readiness-2026-08-05
 
 permissions:
   contents: write
@@ -23,8 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
-      # Stable vehicle knowledge is versioned in GitHub. Object Storage is reserved
-      # for runtime catalog generations, cursors, reports and bounded image cache.
       JSON_STORAGE_DRIVER: file
       VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR: 2011
       VEHICLE_KNOWLEDGE_CHUNK_SIZE: 250
@@ -64,6 +62,23 @@ jobs:
           done
       - name: Build missing variants from verified live catalog offers
         run: npm run catalog:build-vehicle-variants
+      - name: Reject false-green empty knowledge runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const enrichment = JSON.parse(fs.readFileSync('data/catalog/vehicle-knowledge/drom-enrichment-report.json', 'utf8'));
+          const build = JSON.parse(fs.readFileSync('data/catalog/vehicle-knowledge/variant-build-report.json', 'utf8'));
+          const ready = Number(enrichment.ready || 0);
+          const enrichedVariants = Number(enrichment.variants || 0);
+          const totalVariants = Number(build.totalVariants || 0);
+          const scannedOffers = Number(build.scannedOffers || 0);
+          console.log(JSON.stringify({ ready, enrichedVariants, totalVariants, scannedOffers }, null, 2));
+          if (ready < 1 || enrichedVariants < 1 || totalVariants < 10) {
+            throw new Error(`vehicle_knowledge_not_ready: ready=${ready}, enrichedVariants=${enrichedVariants}, totalVariants=${totalVariants}, scannedOffers=${scannedOffers}`);
+          }
+          NODE
       - name: Validate knowledge and Drom parsing
         run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/drom-vehicle-knowledge.test.ts tests/vehicle-knowledge-production-window.test.mjs
       - name: Commit versioned vehicle knowledge to GitHub
