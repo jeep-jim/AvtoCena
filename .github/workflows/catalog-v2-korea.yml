@@ -10,7 +10,8 @@ on:
     paths:
       - .github/workflows/catalog-v2-korea.yml
 
-# Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614. Trigger full 10k rollout.
+# Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
+# Full rerun uses strict positive source price/currency and removes conflicting body defaults.
 permissions:
   contents: read
 
