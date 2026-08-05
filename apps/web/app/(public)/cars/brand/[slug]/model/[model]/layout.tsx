@@ -86,14 +86,14 @@ export default async function ModelSeoLayout({ children, params }: LayoutProps) 
 
   return <>
     {children}
-    <section className="mx-auto w-full max-w-[1500px] px-4 pb-14 md:px-8">
+    <section className="ac-model-seo-copy ac-page-copy mx-auto w-full max-w-[1500px] px-4 pb-14 text-[var(--ac-text)] md:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
 
       {media?.images?.length ? <section className="rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7" aria-labelledby="model-gallery-title">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Фото модели</div>
-            <h2 id="model-gallery-title" className="mt-1 text-2xl font-black md:text-4xl">Как выглядит {brand.name} {model.model}</h2>
+            <h2 id="model-gallery-title" className="mt-1 text-2xl font-black text-[var(--ac-text)] md:text-4xl">Как выглядит {brand.name} {model.model}</h2>
           </div>
           <span className="text-xs font-bold text-[var(--ac-muted)]">{media.generation ? `${media.generation} · ` : ""}{yearRange(media.yearFrom, media.yearTo)}</span>
         </div>
@@ -114,21 +114,30 @@ export default async function ModelSeoLayout({ children, params }: LayoutProps) 
       </section> : null}
 
       <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7" aria-labelledby="model-description-title">
-        <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Описание и характеристики</div>
-        <h2 id="model-description-title" className="mt-1 text-2xl font-black md:text-4xl">{brand.name} {model.model}: характеристики и расчёт стоимости</h2>
-        <div className="mt-4 grid gap-5 text-sm font-medium leading-7 text-[var(--ac-muted)] lg:grid-cols-2">
-          <p>{brand.name} {model.model} представлен в каталоге АвтоЦена для подбора и расчёта автомобиля под ключ. Для точного расчёта система сопоставляет модель, год выпуска, поколение, двигатель и тип силовой установки с подтверждённой базой характеристик.</p>
-          <p>Итоговая стоимость зависит от рынка покупки, цены автомобиля, возраста, объёма и мощности двигателя, доставки, таможенных платежей и утилизационного сбора. Для электрических и гибридных версий используются подтверждённые значения мощности; неизвестные параметры не подставляются автоматически.</p>
-        </div>
-        <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-4">
-          <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Годы выпуска</div><div className="mt-1 text-base font-black">{years}</div></div>
-          {powers.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Мощность</div><div className="mt-1 text-base font-black">{Math.min(...powers)}{Math.max(...powers) !== Math.min(...powers) ? `–${Math.max(...powers)}` : ""} л.с.</div></div> : null}
-          {fuels.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Тип топлива</div><div className="mt-1 text-base font-black">{fuels.slice(0, 3).join(" · ")}</div></div> : null}
-          {drives.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Привод</div><div className="mt-1 text-base font-black">{drives.slice(0, 3).join(" · ")}</div></div> : null}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link href={requestHref} className="avto-button inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</Link>
-          <Link href={`/cars?make=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`} className="inline-flex min-h-12 items-center rounded-2xl bg-[var(--ac-surface-2)] px-5 font-black hover:text-red-500">Смотреть предложения</Link>
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-start">
+          <div className="min-w-0">
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Описание и характеристики</div>
+            <h2 id="model-description-title" className="mt-1 text-2xl font-black text-[var(--ac-text)] md:text-4xl">{brand.name} {model.model}: характеристики и расчёт стоимости</h2>
+            <div className="mt-4 space-y-3 text-sm font-medium leading-7 text-[var(--ac-muted)]">
+              <p>На странице собраны годы выпуска, поколения, двигатели и подтверждённые значения мощности {brand.name} {model.model}. Эти данные помогают выбрать подходящую модификацию и заранее оценить возможность привоза автомобиля.</p>
+              <p>Стоимость под ключ рассчитывается с учётом рынка покупки, цены автомобиля, возраста, объёма и мощности двигателя, доставки, таможенных платежей и утилизационного сбора.</p>
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Годы выпуска</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">{years}</div></div>
+              {powers.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Мощность</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">{Math.min(...powers)}{Math.max(...powers) !== Math.min(...powers) ? `–${Math.max(...powers)}` : ""} л.с.</div></div> : null}
+              {fuels.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Тип топлива</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">{fuels.slice(0, 3).join(" · ")}</div></div> : null}
+              {drives.length ? <div className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">Привод</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">{drives.slice(0, 3).join(" · ")}</div></div> : null}
+            </div>
+          </div>
+
+          <aside className="rounded-2xl bg-[var(--ac-surface-2)] p-4 md:p-5">
+            <div className="text-lg font-black text-[var(--ac-text)]">Подобрать {brand.name} {model.model}</div>
+            <p className="mt-2 text-sm font-medium leading-6 text-[var(--ac-muted)]">Получите расчёт под ключ или откройте доступные предложения этой модели.</p>
+            <div className="mt-5 grid gap-3">
+              <Link href={requestHref} className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black">Рассчитать {brand.name} {model.model}</Link>
+              <Link href={`/cars?make=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`} className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--ac-surface-3)] px-5 text-center font-black text-[var(--ac-text)] hover:text-red-500">Смотреть предложения</Link>
+            </div>
+          </aside>
         </div>
       </section>
     </section>
