@@ -1,0 +1,20 @@
+name: Catalog V2 · Korea · Smoke10
+run-name: Catalog V2 · Korea · Smoke10 · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v2-korea-smoke10.yml
+
+permissions:
+  contents: read
+
+jobs:
+  korea-smoke10:
+    uses: ./.github/workflows/catalog-v2-smoke10-reusable.yml
+    with:
+      market: korea
+      display_name: Корея
+    secrets: inherit
