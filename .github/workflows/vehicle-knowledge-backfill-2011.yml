@@ -9,7 +9,7 @@ on:
     paths:
       - .github/workflows/vehicle-knowledge-backfill-2011.yml
 
-# rollout-marker: hydrate-production-catalog-2026-08-05
+# rollout-marker: catalog-rebuild-2026-08-05-1657
 
 permissions:
   contents: write
