@@ -12,11 +12,19 @@ test('production knowledge backfill covers every catalog model from 2011 onward'
   assert.match(workflow, /catalog:sync-vehicle-models/);
   assert.match(workflow, /catalog:enrich-drom-variants/);
   assert.match(workflow, /catalog:build-vehicle-variants/);
-  assert.match(workflow, /catalog:reindex-vehicle-knowledge/);
 });
 
 test('backfill persists progress and does not restart or skip the 2011-2015 tail', () => {
   assert.match(workflow, /cancel-in-progress:\s*false/);
   assert.match(workflow, /progress is saved/);
   assert.doesNotMatch(workflow, /VEHICLE_KNOWLEDGE_MIN_MODEL_YEAR:\s*(?:19|200\d|2010)\b/);
+});
+
+test('stable knowledge is committed to GitHub and does not consume Object Storage quota', () => {
+  assert.match(workflow, /JSON_STORAGE_DRIVER:\s*file/);
+  assert.match(workflow, /permissions:[\s\S]*contents:\s*write/);
+  assert.match(workflow, /git add data\/catalog\/vehicle-knowledge data\/catalog\/power-knowledge data\/catalog\/power-reference data\/models/);
+  assert.match(workflow, /git push origin HEAD:main/);
+  assert.doesNotMatch(workflow, /YC_OBJECT_STORAGE_BUCKET/);
+  assert.doesNotMatch(workflow, /catalog:reindex-vehicle-knowledge/);
 });
