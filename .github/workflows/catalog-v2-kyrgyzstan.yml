@@ -3,6 +3,8 @@ run-name: Catalog V3 · Kyrgyzstan · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "25 3 * * *"
 
 permissions:
   contents: read
