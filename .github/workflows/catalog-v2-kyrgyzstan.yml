@@ -5,6 +5,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "5 11 * * *"
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v2-kyrgyzstan.yml
 
 # Independent daily market. 18:05 Asia/Novokuznetsk (UTC+7).
 permissions:
