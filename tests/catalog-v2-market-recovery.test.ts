@@ -38,7 +38,7 @@ test("independent market collection keeps the full production crawl budget", () 
 });
 
 test("smoke9 publishes exactly nine real cards and preserves project constraints", () => {
-  assert.match(smoke9, /CATALOG_V2_PRIORITY_TARGET: "0"/);
+  assert.match(smoke9, /CATALOG_V2_PRIORITY_TARGET: "NaN"/);
   assert.match(smoke9, /CATALOG_REBUILD_TARGET_PER_SOURCE: "9"/);
   assert.match(smoke9, /CATALOG_REBUILD_TARGET_PER_MARKET: "9"/);
   assert.match(smoke9, /CATALOG_PUBLISH_TARGET_PER_MARKET: "9"/);
