@@ -3,7 +3,10 @@ run-name: Catalog V2 · Kyrgyzstan · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "5 11 * * *"
 
+# Independent daily market. 18:05 Asia/Novokuznetsk (UTC+7).
 permissions:
   contents: read
 
