@@ -1,7 +1,7 @@
 {
   "parserVersion": 2,
-  "startedAt": "2026-08-05T13:24:09.269Z",
-  "finishedAt": "2026-08-05T14:12:19.267Z",
+  "startedAt": "2026-08-06T04:48:48.381Z",
+  "finishedAt": "2026-08-06T05:42:15.281Z",
   "limit": 200,
   "delayMs": 700,
   "onlyRecent": false,
@@ -10,236 +10,110 @@
   "eligibleModels": 4899,
   "selected": 200,
   "processed": 200,
-  "ready": 106,
-  "variants": 9590,
+  "ready": 105,
+  "variants": 6142,
   "invalidDocuments": 0,
-  "parseEmpty": 7,
+  "parseEmpty": 14,
   "blocked": false,
   "results": [
     {
-      "modelId": "dacia/duster",
-      "url": "https://www.drom.ru/catalog/dacia/duster/specs/engine_capacity/",
+      "modelId": "bmw/i3",
+      "url": "https://www.drom.ru/catalog/bmw/i3/specs/engine_capacity/",
       "status": "ready",
-      "variants": 65,
+      "variants": 11,
       "transport": "jina"
     },
     {
-      "modelId": "dacia/sandero",
-      "url": "https://www.drom.ru/catalog/dacia/sandero/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 36,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/kona",
-      "url": "https://www.drom.ru/catalog/hyundai/kona/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 30,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/tucson",
-      "url": "https://www.drom.ru/catalog/hyundai/tucson/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 143,
-      "transport": "jina"
-    },
-    {
-      "modelId": "kia/sportage",
-      "url": "https://www.drom.ru/catalog/kia/sportage/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 281,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mazda/cx-5",
-      "url": "https://www.drom.ru/catalog/mazda/cx-5/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 135,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mini/cooper",
-      "url": "https://www.drom.ru/catalog/mini/cooper/specs/engine_capacity/",
+      "modelId": "bmw/i4",
+      "url": "https://www.drom.ru/catalog/bmw/i4/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "nissan/qashqai",
-      "url": "https://www.drom.ru/catalog/nissan/qashqai/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 72,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/corolla",
-      "url": "https://www.drom.ru/catalog/toyota/corolla/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 472,
-      "transport": "jina"
-    },
-    {
-      "modelId": "cupra/formentor",
-      "url": "https://www.drom.ru/catalog/cupra/formentor/specs/engine_capacity/",
+      "modelId": "bmw/i5",
+      "url": "https://www.drom.ru/catalog/bmw/i5/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "hyundai/i30",
-      "url": "https://www.drom.ru/catalog/hyundai/i30/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 80,
-      "transport": "jina"
-    },
-    {
-      "modelId": "kia/ceed",
-      "url": "https://www.drom.ru/catalog/kia/ceed/specs/engine_capacity/",
+      "modelId": "bmw/ix3",
+      "url": "https://www.drom.ru/catalog/bmw/ix3/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "mazda/cx-3",
-      "url": "https://www.drom.ru/catalog/mazda/cx-3/specs/engine_capacity/",
+      "modelId": "bmw/m3",
+      "url": "https://www.drom.ru/catalog/bmw/m3/specs/engine_capacity/",
       "status": "ready",
-      "variants": 41,
+      "variants": 58,
       "transport": "jina"
     },
     {
-      "modelId": "mazda/cx-30",
-      "url": "https://www.drom.ru/catalog/mazda/cx-30/specs/engine_capacity/",
+      "modelId": "bmw/x2",
+      "url": "https://www.drom.ru/catalog/bmw/x2/specs/engine_capacity/",
       "status": "ready",
-      "variants": 49,
+      "variants": 60,
       "transport": "jina"
     },
     {
-      "modelId": "nissan/juke",
-      "url": "https://www.drom.ru/catalog/nissan/juke/specs/engine_capacity/",
+      "modelId": "bmw/x4",
+      "url": "https://www.drom.ru/catalog/bmw/x4/specs/engine_capacity/",
       "status": "ready",
-      "variants": 67,
+      "variants": 75,
       "transport": "jina"
     },
     {
-      "modelId": "opel/corsa",
-      "url": "https://www.drom.ru/catalog/opel/corsa/specs/engine_capacity/",
+      "modelId": "bmw/x6",
+      "url": "https://www.drom.ru/catalog/bmw/x6/specs/engine_capacity/",
       "status": "ready",
-      "variants": 135,
+      "variants": 86,
       "transport": "jina"
     },
     {
-      "modelId": "peugeot/208",
-      "url": "https://www.drom.ru/catalog/peugeot/208/specs/engine_capacity/",
+      "modelId": "bmw/z4",
+      "url": "https://www.drom.ru/catalog/bmw/z4/specs/engine_capacity/",
       "status": "ready",
-      "variants": 33,
+      "variants": 62,
       "transport": "jina"
     },
     {
-      "modelId": "peugeot/5008",
-      "url": "https://www.drom.ru/catalog/peugeot/5008/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 51,
-      "transport": "jina"
-    },
-    {
-      "modelId": "renault/captur",
-      "url": "https://www.drom.ru/catalog/renault/captur/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 51,
-      "transport": "jina"
-    },
-    {
-      "modelId": "renault/clio",
-      "url": "https://www.drom.ru/catalog/renault/clio/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 147,
-      "transport": "jina"
-    },
-    {
-      "modelId": "seat/arona",
-      "url": "https://www.drom.ru/catalog/seat/arona/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 20,
-      "transport": "jina"
-    },
-    {
-      "modelId": "seat/ibiza",
-      "url": "https://www.drom.ru/catalog/seat/ibiza/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 120,
-      "transport": "jina"
-    },
-    {
-      "modelId": "seat/leon",
-      "url": "https://www.drom.ru/catalog/seat/leon/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 112,
-      "transport": "jina"
-    },
-    {
-      "modelId": "cupra/leon",
-      "url": "https://www.drom.ru/catalog/cupra/leon/specs/engine_capacity/",
+      "modelId": "bmw/i7",
+      "url": "https://www.drom.ru/catalog/bmw/i7/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "cupra/terramar",
-      "url": "https://www.drom.ru/catalog/cupra/terramar/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 4,
-      "transport": "jina"
-    },
-    {
-      "modelId": "dacia/jogger",
-      "url": "https://www.drom.ru/catalog/dacia/jogger/specs/engine_capacity/",
+      "modelId": "bmw/ix",
+      "url": "https://www.drom.ru/catalog/bmw/ix/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "dacia/logan",
-      "url": "https://www.drom.ru/catalog/dacia/logan/specs/engine_capacity/",
+      "modelId": "bmw/ix2",
+      "url": "https://www.drom.ru/catalog/bmw/ix2/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "bmw/m2",
+      "url": "https://www.drom.ru/catalog/bmw/m2/specs/engine_capacity/",
       "status": "ready",
       "variants": 34,
       "transport": "jina"
     },
     {
-      "modelId": "jeep/avenger",
-      "url": "https://www.drom.ru/catalog/jeep/avenger/specs/engine_capacity/",
+      "modelId": "bmw/m4",
+      "url": "https://www.drom.ru/catalog/bmw/m4/specs/engine_capacity/",
       "status": "ready",
-      "variants": 2,
+      "variants": 56,
       "transport": "jina"
     },
     {
-      "modelId": "jeep/compass",
-      "url": "https://www.drom.ru/catalog/jeep/compass/specs/engine_capacity/",
+      "modelId": "bmw/m5",
+      "url": "https://www.drom.ru/catalog/bmw/m5/specs/engine_capacity/",
       "status": "ready",
-      "variants": 17,
+      "variants": 34,
       "transport": "jina"
     },
     {
-      "modelId": "kia/x-ceed",
-      "url": "https://www.drom.ru/catalog/kia/x-ceed/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "mitsubishi/asx",
-      "url": "https://www.drom.ru/catalog/mitsubishi/asx/specs/engine_capacity/",
+      "modelId": "bmw/x7",
+      "url": "https://www.drom.ru/catalog/bmw/x7/specs/engine_capacity/",
       "status": "ready",
-      "variants": 64,
-      "transport": "jina"
-    },
-    {
-      "modelId": "renault/arkana",
-      "url": "https://www.drom.ru/catalog/renault/arkana/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 10,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/aygo",
-      "url": "https://www.drom.ru/catalog/toyota/aygo/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 19,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/verso",
-      "url": "https://www.drom.ru/catalog/toyota/verso/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 19,
+      "variants": 28,
       "transport": "jina"
     },
     {
@@ -249,82 +123,11 @@
       "transport": "jina"
     },
     {
-      "modelId": "ford/courier",
-      "url": "https://www.drom.ru/catalog/ford/courier/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "dacia/sandero-stepway",
-      "url": "https://www.drom.ru/catalog/dacia/sandero-stepway/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "ford/tourneo",
-      "url": "https://www.drom.ru/catalog/ford/tourneo/specs/engine_capacity/",
+      "modelId": "bmw/xm",
+      "url": "https://www.drom.ru/catalog/bmw/xm/specs/engine_capacity/",
       "status": "ready",
-      "variants": 9,
+      "variants": 8,
       "transport": "jina"
-    },
-    {
-      "modelId": "aion/v-602-luxury",
-      "url": "https://www.drom.ru/catalog/aion/v-602-luxury/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "audi/a4",
-      "url": "https://www.drom.ru/catalog/audi/a4/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 302,
-      "transport": "jina"
-    },
-    {
-      "modelId": "auto-union/audi-80",
-      "url": "https://www.drom.ru/catalog/auto-union/audi-80/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "bmw/3-series",
-      "url": "https://www.drom.ru/catalog/bmw/3-series/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 436,
-      "transport": "jina"
-    },
-    {
-      "modelId": "bmw/x1",
-      "url": "https://www.drom.ru/catalog/bmw/x1/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 127,
-      "transport": "jina"
-    },
-    {
-      "modelId": "byd/seal-design-ev",
-      "url": "https://www.drom.ru/catalog/byd/seal-design-ev/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "byd/song-plus",
-      "url": "https://www.drom.ru/catalog/byd/song-plus/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "changan/cs55-plus",
-      "url": "https://www.drom.ru/catalog/changan/cs55-plus/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/jaecoo-j7",
-      "url": "https://www.drom.ru/catalog/chery/jaecoo-j7/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/omoda-9",
-      "url": "https://www.drom.ru/catalog/chery/omoda-9/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "citroen/berlingoatalla-m-blueh",
-      "url": "https://www.drom.ru/catalog/citroen/berlingoatalla-m-blueh/specs/engine_capacity/",
-      "status": "not_found"
     },
     {
       "modelId": "daewoo/sens",
@@ -333,214 +136,9 @@
       "transport": "jina"
     },
     {
-      "modelId": "ebro/s400",
-      "url": "https://www.drom.ru/catalog/ebro/s400/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "ebro/s700",
-      "url": "https://www.drom.ru/catalog/ebro/s700/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "ebro/s700-hev",
-      "url": "https://www.drom.ru/catalog/ebro/s700-hev/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
       "modelId": "ford/laser",
       "url": "https://www.drom.ru/catalog/ford/laser/specs/engine_capacity/",
       "status": "parse_empty",
-      "transport": "jina"
-    },
-    {
-      "modelId": "ford/mondeo",
-      "url": "https://www.drom.ru/catalog/ford/mondeo/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 121,
-      "transport": "jina"
-    },
-    {
-      "modelId": "ford/puma",
-      "url": "https://www.drom.ru/catalog/ford/puma/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 13,
-      "transport": "jina"
-    },
-    {
-      "modelId": "ford/territory",
-      "url": "https://www.drom.ru/catalog/ford/territory/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 3,
-      "transport": "jina"
-    },
-    {
-      "modelId": "geely/coolray",
-      "url": "https://www.drom.ru/catalog/geely/coolray/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "great-wall/haval-jolion",
-      "url": "https://www.drom.ru/catalog/great-wall/haval-jolion/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/acadia",
-      "url": "https://www.drom.ru/catalog/holden/acadia/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/astra",
-      "url": "https://www.drom.ru/catalog/holden/astra/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/barina",
-      "url": "https://www.drom.ru/catalog/holden/barina/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/berlina",
-      "url": "https://www.drom.ru/catalog/holden/berlina/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/captiva",
-      "url": "https://www.drom.ru/catalog/holden/captiva/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/cruze",
-      "url": "https://www.drom.ru/catalog/holden/cruze/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/equinox",
-      "url": "https://www.drom.ru/catalog/holden/equinox/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/hsv",
-      "url": "https://www.drom.ru/catalog/holden/hsv/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/monaro",
-      "url": "https://www.drom.ru/catalog/holden/monaro/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/spark",
-      "url": "https://www.drom.ru/catalog/holden/spark/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/trailblazer",
-      "url": "https://www.drom.ru/catalog/holden/trailblazer/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/trax",
-      "url": "https://www.drom.ru/catalog/holden/trax/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "honda/cr-v",
-      "url": "https://www.drom.ru/catalog/honda/cr-v/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 151,
-      "transport": "jina"
-    },
-    {
-      "modelId": "honda/fit",
-      "url": "https://www.drom.ru/catalog/honda/fit/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 71,
-      "transport": "jina"
-    },
-    {
-      "modelId": "honda/grace",
-      "url": "https://www.drom.ru/catalog/honda/grace/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 11,
-      "transport": "jina"
-    },
-    {
-      "modelId": "honda/hr-v",
-      "url": "https://www.drom.ru/catalog/honda/hr-v/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 26,
-      "transport": "jina"
-    },
-    {
-      "modelId": "honda/vezel",
-      "url": "https://www.drom.ru/catalog/honda/vezel/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 32,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/i20",
-      "url": "https://www.drom.ru/catalog/hyundai/i20/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 31,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/imax",
-      "url": "https://www.drom.ru/catalog/hyundai/imax/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "isuzu/mu-x",
-      "url": "https://www.drom.ru/catalog/isuzu/mu-x/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 11,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mazda/axela",
-      "url": "https://www.drom.ru/catalog/mazda/axela/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 31,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mazda/verisa",
-      "url": "https://www.drom.ru/catalog/mazda/verisa/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 3,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mercedes-benz/c-class",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/c-class/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 375,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mercedes-benz/clase",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/clase/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "mitsubishi/triton",
-      "url": "https://www.drom.ru/catalog/mitsubishi/triton/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 19,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mitsubishi/xpander-cross",
-      "url": "https://www.drom.ru/catalog/mitsubishi/xpander-cross/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "nissan/dualis",
-      "url": "https://www.drom.ru/catalog/nissan/dualis/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 3,
       "transport": "jina"
     },
     {
@@ -550,172 +148,10 @@
       "transport": "jina"
     },
     {
-      "modelId": "nissan/x-trail",
-      "url": "https://www.drom.ru/catalog/nissan/x-trail/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 111,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/alza",
-      "url": "https://www.drom.ru/catalog/perodua/alza/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 2,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/aruz",
-      "url": "https://www.drom.ru/catalog/perodua/aruz/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 2,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/ativa",
-      "url": "https://www.drom.ru/catalog/perodua/ativa/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 2,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/axia",
-      "url": "https://www.drom.ru/catalog/perodua/axia/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 5,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/bezza",
-      "url": "https://www.drom.ru/catalog/perodua/bezza/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 9,
-      "transport": "jina"
-    },
-    {
-      "modelId": "perodua/traz",
-      "url": "https://www.drom.ru/catalog/perodua/traz/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 2,
-      "transport": "jina"
-    },
-    {
-      "modelId": "proton/e-mas-5",
-      "url": "https://www.drom.ru/catalog/proton/e-mas-5/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/e-mas-7",
-      "url": "https://www.drom.ru/catalog/proton/e-mas-7/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/iriz",
-      "url": "https://www.drom.ru/catalog/proton/iriz/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/s70",
-      "url": "https://www.drom.ru/catalog/proton/s70/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/x50",
-      "url": "https://www.drom.ru/catalog/proton/x50/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/x70",
-      "url": "https://www.drom.ru/catalog/proton/x70/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "proton/x90",
-      "url": "https://www.drom.ru/catalog/proton/x90/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "skoda/fabia",
-      "url": "https://www.drom.ru/catalog/skoda/fabia/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 94,
-      "transport": "jina"
-    },
-    {
-      "modelId": "skoda/karoq",
-      "url": "https://www.drom.ru/catalog/skoda/karoq/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 31,
-      "transport": "jina"
-    },
-    {
-      "modelId": "skoda/kodiaq",
-      "url": "https://www.drom.ru/catalog/skoda/kodiaq/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 54,
-      "transport": "jina"
-    },
-    {
-      "modelId": "skoda/octavia",
-      "url": "https://www.drom.ru/catalog/skoda/octavia/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 208,
-      "transport": "jina"
-    },
-    {
-      "modelId": "skoda/superb",
-      "url": "https://www.drom.ru/catalog/skoda/superb/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 127,
-      "transport": "jina"
-    },
-    {
-      "modelId": "tesla/model-3",
-      "url": "https://www.drom.ru/catalog/tesla/model-3/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "tesla/model-y",
-      "url": "https://www.drom.ru/catalog/tesla/model-y/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
       "modelId": "toyota/allex",
       "url": "https://www.drom.ru/catalog/toyota/allex/specs/engine_capacity/",
       "status": "parse_empty",
       "transport": "jina"
-    },
-    {
-      "modelId": "toyota/allion",
-      "url": "https://www.drom.ru/catalog/toyota/allion/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 17,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/alphard",
-      "url": "https://www.drom.ru/catalog/toyota/alphard/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 40,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/auris",
-      "url": "https://www.drom.ru/catalog/toyota/auris/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 63,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/camry",
-      "url": "https://www.drom.ru/catalog/toyota/camry/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 281,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/commuter",
-      "url": "https://www.drom.ru/catalog/toyota/commuter/specs/engine_capacity/",
-      "status": "not_found"
     },
     {
       "modelId": "toyota/platz",
@@ -724,516 +160,1084 @@
       "transport": "jina"
     },
     {
-      "modelId": "toyota/raum",
-      "url": "https://www.drom.ru/catalog/toyota/raum/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 3,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/rav4",
-      "url": "https://www.drom.ru/catalog/toyota/rav4/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 179,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/spacio",
-      "url": "https://www.drom.ru/catalog/toyota/spacio/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "toyota/veloz",
-      "url": "https://www.drom.ru/catalog/toyota/veloz/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 2,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/yaris",
-      "url": "https://www.drom.ru/catalog/toyota/yaris/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 72,
-      "transport": "jina"
-    },
-    {
-      "modelId": "toyota/yaris-ativ",
-      "url": "https://www.drom.ru/catalog/toyota/yaris-ativ/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "toyota/yaris-cross",
-      "url": "https://www.drom.ru/catalog/toyota/yaris-cross/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "vauxhall/grandland",
-      "url": "https://www.drom.ru/catalog/vauxhall/grandland/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "volkswagen/golf",
-      "url": "https://www.drom.ru/catalog/volkswagen/golf/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 412,
-      "transport": "jina"
-    },
-    {
-      "modelId": "volkswagen/lavida",
-      "url": "https://www.drom.ru/catalog/volkswagen/lavida/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 14,
-      "transport": "jina"
-    },
-    {
-      "modelId": "volkswagen/t-cross",
-      "url": "https://www.drom.ru/catalog/volkswagen/t-cross/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 23,
-      "transport": "jina"
-    },
-    {
-      "modelId": "volkswagen/tiguan",
-      "url": "https://www.drom.ru/catalog/volkswagen/tiguan/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 95,
-      "transport": "jina"
-    },
-    {
-      "modelId": "volkswagen/touareg",
-      "url": "https://www.drom.ru/catalog/volkswagen/touareg/specs/engine_capacity/",
-      "status": "error",
-      "error": "This operation was aborted"
-    },
-    {
-      "modelId": "zaz/lanos",
-      "url": "https://www.drom.ru/catalog/zaz/lanos/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 8,
-      "transport": "jina"
-    },
-    {
-      "modelId": "zaz/sens",
-      "url": "https://www.drom.ru/catalog/zaz/sens/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 4,
-      "transport": "jina"
-    },
-    {
-      "modelId": "zaz/t13110",
-      "url": "https://www.drom.ru/catalog/zaz/t13110/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "aion/hyptec-ht-620-premium",
-      "url": "https://www.drom.ru/catalog/aion/hyptec-ht-620-premium/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "aion/ut-420-standard",
-      "url": "https://www.drom.ru/catalog/aion/ut-420-standard/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "aion/y-plus",
-      "url": "https://www.drom.ru/catalog/aion/y-plus/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "audi/a1",
-      "url": "https://www.drom.ru/catalog/audi/a1/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 79,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/a3",
-      "url": "https://www.drom.ru/catalog/audi/a3/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 192,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/a5",
-      "url": "https://www.drom.ru/catalog/audi/a5/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 154,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/a6",
-      "url": "https://www.drom.ru/catalog/audi/a6/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 304,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/q3",
-      "url": "https://www.drom.ru/catalog/audi/q3/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 66,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/q4",
-      "url": "https://www.drom.ru/catalog/audi/q4/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "audi/q5",
-      "url": "https://www.drom.ru/catalog/audi/q5/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 77,
-      "transport": "jina"
-    },
-    {
-      "modelId": "audi/tt",
-      "url": "https://www.drom.ru/catalog/audi/tt/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 57,
-      "transport": "jina"
-    },
-    {
-      "modelId": "baic/bj30e",
-      "url": "https://www.drom.ru/catalog/baic/bj30e/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "bmw/2-series",
-      "url": "https://www.drom.ru/catalog/bmw/2-series/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 103,
-      "transport": "jina"
-    },
-    {
-      "modelId": "bmw/5-series",
-      "url": "https://www.drom.ru/catalog/bmw/5-series/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 374,
-      "transport": "jina"
-    },
-    {
-      "modelId": "bmw/x3",
-      "url": "https://www.drom.ru/catalog/bmw/x3/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 123,
-      "transport": "jina"
-    },
-    {
-      "modelId": "bmw/x5",
-      "url": "https://www.drom.ru/catalog/bmw/x5/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 107,
-      "transport": "jina"
-    },
-    {
-      "modelId": "byd/dolphin-surf",
-      "url": "https://www.drom.ru/catalog/byd/dolphin-surf/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "byd/m6",
-      "url": "https://www.drom.ru/catalog/byd/m6/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 5,
-      "transport": "jina"
-    },
-    {
-      "modelId": "byd/sealion-6",
-      "url": "https://www.drom.ru/catalog/byd/sealion-6/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "changan/lumin-l-dc",
-      "url": "https://www.drom.ru/catalog/changan/lumin-l-dc/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/icaur-03",
-      "url": "https://www.drom.ru/catalog/chery/icaur-03/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/icaur-v23",
-      "url": "https://www.drom.ru/catalog/chery/icaur-v23/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/jaecoo-j5",
-      "url": "https://www.drom.ru/catalog/chery/jaecoo-j5/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/jaecoo-j8",
-      "url": "https://www.drom.ru/catalog/chery/jaecoo-j8/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chery/tiggo-4",
-      "url": "https://www.drom.ru/catalog/chery/tiggo-4/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chevrolet/bel-air",
-      "url": "https://www.drom.ru/catalog/chevrolet/bel-air/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "chevrolet/bolt-euv",
-      "url": "https://www.drom.ru/catalog/chevrolet/bolt-euv/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
       "modelId": "chevrolet/nubira",
       "url": "https://www.drom.ru/catalog/chevrolet/nubira/specs/engine_capacity/",
       "status": "parse_empty",
       "transport": "jina"
     },
     {
-      "modelId": "citroen/c3",
-      "url": "https://www.drom.ru/catalog/citroen/c3/specs/engine_capacity/",
+      "modelId": "mercedes-benz/gle",
+      "url": "https://www.drom.ru/catalog/mercedes-benz/gle/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "mercedes-benz/glk",
+      "url": "https://www.drom.ru/catalog/mercedes-benz/glk/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "mg/ep",
+      "url": "https://www.drom.ru/catalog/mg/ep/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "mg/mg4",
+      "url": "https://www.drom.ru/catalog/mg/mg4/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "mini/countryman",
+      "url": "https://www.drom.ru/catalog/mini/countryman/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 103,
+      "transport": "jina"
+    },
+    {
+      "modelId": "mitsubishi/xforce",
+      "url": "https://www.drom.ru/catalog/mitsubishi/xforce/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 3,
+      "transport": "jina"
+    },
+    {
+      "modelId": "mitsubishi/xpander",
+      "url": "https://www.drom.ru/catalog/mitsubishi/xpander/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 13,
+      "transport": "jina"
+    },
+    {
+      "modelId": "morris/minor",
+      "url": "https://www.drom.ru/catalog/morris/minor/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "neta/v-ii",
+      "url": "https://www.drom.ru/catalog/neta/v-ii/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "nissan/almera",
+      "url": "https://www.drom.ru/catalog/nissan/almera/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 15,
+      "transport": "jina"
+    },
+    {
+      "modelId": "nissan/micra",
+      "url": "https://www.drom.ru/catalog/nissan/micra/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 61,
+      "transport": "jina"
+    },
+    {
+      "modelId": "opel/mokka",
+      "url": "https://www.drom.ru/catalog/opel/mokka/specs/engine_capacity/",
       "status": "ready",
       "variants": 37,
       "transport": "jina"
     },
     {
-      "modelId": "citroen/c4",
-      "url": "https://www.drom.ru/catalog/citroen/c4/specs/engine_capacity/",
+      "modelId": "peugeot/2008",
+      "url": "https://www.drom.ru/catalog/peugeot/2008/specs/engine_capacity/",
       "status": "ready",
-      "variants": 83,
+      "variants": 62,
       "transport": "jina"
     },
     {
-      "modelId": "citroen/c4-cactus",
-      "url": "https://www.drom.ru/catalog/citroen/c4-cactus/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "citroen/c4-picasso",
-      "url": "https://www.drom.ru/catalog/citroen/c4-picasso/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "citroen/c5",
-      "url": "https://www.drom.ru/catalog/citroen/c5/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 68,
+      "modelId": "peugeot/206",
+      "url": "https://www.drom.ru/catalog/peugeot/206/specs/engine_capacity/",
+      "status": "parse_empty",
       "transport": "jina"
     },
     {
-      "modelId": "citroen/c5-aircross",
-      "url": "https://www.drom.ru/catalog/citroen/c5-aircross/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "dacia/bigster",
-      "url": "https://www.drom.ru/catalog/dacia/bigster/specs/engine_capacity/",
+      "modelId": "peugeot/207",
+      "url": "https://www.drom.ru/catalog/peugeot/207/specs/engine_capacity/",
       "status": "ready",
-      "variants": 5,
+      "variants": 29,
       "transport": "jina"
     },
     {
-      "modelId": "deepal/s05-max",
-      "url": "https://www.drom.ru/catalog/deepal/s05-max/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "denza/d9-fwd",
-      "url": "https://www.drom.ru/catalog/denza/d9-fwd/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "fiat/punto",
-      "url": "https://www.drom.ru/catalog/fiat/punto/specs/engine_capacity/",
+      "modelId": "peugeot/3008",
+      "url": "https://www.drom.ru/catalog/peugeot/3008/specs/engine_capacity/",
       "status": "ready",
-      "variants": 30,
+      "variants": 32,
       "transport": "jina"
     },
     {
-      "modelId": "ford/fairlane",
-      "url": "https://www.drom.ru/catalog/ford/fairlane/specs/engine_capacity/",
+      "modelId": "peugeot/307",
+      "url": "https://www.drom.ru/catalog/peugeot/307/specs/engine_capacity/",
       "status": "ready",
-      "variants": 121,
+      "variants": 40,
       "transport": "jina"
     },
     {
-      "modelId": "ford/galaxy",
-      "url": "https://www.drom.ru/catalog/ford/galaxy/specs/engine_capacity/",
+      "modelId": "peugeot/308",
+      "url": "https://www.drom.ru/catalog/peugeot/308/specs/engine_capacity/",
       "status": "ready",
-      "variants": 43,
+      "variants": 93,
       "transport": "jina"
     },
     {
-      "modelId": "ford/kuga",
-      "url": "https://www.drom.ru/catalog/ford/kuga/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 78,
-      "transport": "jina"
-    },
-    {
-      "modelId": "ford/telstar",
-      "url": "https://www.drom.ru/catalog/ford/telstar/specs/engine_capacity/",
+      "modelId": "porsche/cayenne",
+      "url": "https://www.drom.ru/catalog/porsche/cayenne/specs/engine_capacity/",
       "status": "ready",
       "variants": 51,
       "transport": "jina"
     },
     {
-      "modelId": "gac/gs3",
-      "url": "https://www.drom.ru/catalog/gac/gs3/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "great-wall/tank",
-      "url": "https://www.drom.ru/catalog/great-wall/tank/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "great-wall/wey-g9",
-      "url": "https://www.drom.ru/catalog/great-wall/wey-g9/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/calais",
-      "url": "https://www.drom.ru/catalog/holden/calais/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/colorado",
-      "url": "https://www.drom.ru/catalog/holden/colorado/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/malibu",
-      "url": "https://www.drom.ru/catalog/holden/malibu/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "holden/torana",
-      "url": "https://www.drom.ru/catalog/holden/torana/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "honda/civic",
-      "url": "https://www.drom.ru/catalog/honda/civic/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 457,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/getz",
-      "url": "https://www.drom.ru/catalog/hyundai/getz/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 7,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/i45",
-      "url": "https://www.drom.ru/catalog/hyundai/i45/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "hyundai/ix35",
-      "url": "https://www.drom.ru/catalog/hyundai/ix35/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 33,
-      "transport": "jina"
-    },
-    {
-      "modelId": "hyundai/santa-fe",
-      "url": "https://www.drom.ru/catalog/hyundai/santa-fe/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "jaecoo/jaecoo-6",
-      "url": "https://www.drom.ru/catalog/jaecoo/jaecoo-6/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "jaecoo/jaecoo-7",
-      "url": "https://www.drom.ru/catalog/jaecoo/jaecoo-7/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "kia/picanto",
-      "url": "https://www.drom.ru/catalog/kia/picanto/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 31,
-      "transport": "jina"
-    },
-    {
-      "modelId": "kia/rio",
-      "url": "https://www.drom.ru/catalog/kia/rio/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 69,
-      "transport": "jina"
-    },
-    {
-      "modelId": "kia/stonic",
-      "url": "https://www.drom.ru/catalog/kia/stonic/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 26,
-      "transport": "jina"
-    },
-    {
-      "modelId": "land-rover/freelander",
-      "url": "https://www.drom.ru/catalog/land-rover/freelander/specs/engine_capacity/",
-      "status": "not_found"
-    },
-    {
-      "modelId": "mazda/626",
-      "url": "https://www.drom.ru/catalog/mazda/626/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 81,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mazda/cx-50",
-      "url": "https://www.drom.ru/catalog/mazda/cx-50/specs/engine_capacity/",
+      "modelId": "renault/austral",
+      "url": "https://www.drom.ru/catalog/renault/austral/specs/engine_capacity/",
       "status": "ready",
       "variants": 9,
       "transport": "jina"
     },
     {
-      "modelId": "mazda/cx-8",
-      "url": "https://www.drom.ru/catalog/mazda/cx-8/specs/engine_capacity/",
+      "modelId": "renault/kadjar",
+      "url": "https://www.drom.ru/catalog/renault/kadjar/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 9,
+      "transport": "jina"
+    },
+    {
+      "modelId": "renault/laguna",
+      "url": "https://www.drom.ru/catalog/renault/laguna/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 113,
+      "transport": "jina"
+    },
+    {
+      "modelId": "renault/scenic",
+      "url": "https://www.drom.ru/catalog/renault/scenic/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 61,
+      "transport": "jina"
+    },
+    {
+      "modelId": "seat/altea",
+      "url": "https://www.drom.ru/catalog/seat/altea/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 34,
+      "transport": "jina"
+    },
+    {
+      "modelId": "seat/ateca",
+      "url": "https://www.drom.ru/catalog/seat/ateca/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "skoda/elroq",
+      "url": "https://www.drom.ru/catalog/skoda/elroq/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "skoda/enyaq",
+      "url": "https://www.drom.ru/catalog/skoda/enyaq/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "skoda/kamiq",
+      "url": "https://www.drom.ru/catalog/skoda/kamiq/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 24,
+      "transport": "jina"
+    },
+    {
+      "modelId": "skoda/rapid",
+      "url": "https://www.drom.ru/catalog/skoda/rapid/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 69,
+      "transport": "jina"
+    },
+    {
+      "modelId": "skoda/scala",
+      "url": "https://www.drom.ru/catalog/skoda/scala/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 17,
+      "transport": "jina"
+    },
+    {
+      "modelId": "skoda/yeti",
+      "url": "https://www.drom.ru/catalog/skoda/yeti/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 18,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ssangyong/g4-rexton",
+      "url": "https://www.drom.ru/catalog/ssangyong/g4-rexton/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "suzuki/grand-vitara",
+      "url": "https://www.drom.ru/catalog/suzuki/grand-vitara/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "suzuki/swift",
+      "url": "https://www.drom.ru/catalog/suzuki/swift/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 144,
+      "transport": "jina"
+    },
+    {
+      "modelId": "suzuki/sx4",
+      "url": "https://www.drom.ru/catalog/suzuki/sx4/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 87,
+      "transport": "jina"
+    },
+    {
+      "modelId": "suzuki/vitara",
+      "url": "https://www.drom.ru/catalog/suzuki/vitara/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 48,
+      "transport": "jina"
+    },
+    {
+      "modelId": "toyota/avensis",
+      "url": "https://www.drom.ru/catalog/toyota/avensis/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 73,
+      "transport": "jina"
+    },
+    {
+      "modelId": "toyota/aygo-x",
+      "url": "https://www.drom.ru/catalog/toyota/aygo-x/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "toyota/c-hr",
+      "url": "https://www.drom.ru/catalog/toyota/c-hr/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 36,
+      "transport": "jina"
+    },
+    {
+      "modelId": "toyota/hiace-majesty",
+      "url": "https://www.drom.ru/catalog/toyota/hiace-majesty/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "toyota/innova-zenix",
+      "url": "https://www.drom.ru/catalog/toyota/innova-zenix/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "toyota/runx",
+      "url": "https://www.drom.ru/catalog/toyota/runx/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "toyota/rush",
+      "url": "https://www.drom.ru/catalog/toyota/rush/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 7,
+      "transport": "jina"
+    },
+    {
+      "modelId": "vauxhall/frontera",
+      "url": "https://www.drom.ru/catalog/vauxhall/frontera/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "volkswagen/beetle",
+      "url": "https://www.drom.ru/catalog/volkswagen/beetle/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 84,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/caravelle",
+      "url": "https://www.drom.ru/catalog/volkswagen/caravelle/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 45,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/id-3",
+      "url": "https://www.drom.ru/catalog/volkswagen/id-3/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "volkswagen/id-4",
+      "url": "https://www.drom.ru/catalog/volkswagen/id-4/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "volkswagen/passat",
+      "url": "https://www.drom.ru/catalog/volkswagen/passat/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 320,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/polo",
+      "url": "https://www.drom.ru/catalog/volkswagen/polo/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 194,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/sharan",
+      "url": "https://www.drom.ru/catalog/volkswagen/sharan/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 30,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/t-roc",
+      "url": "https://www.drom.ru/catalog/volkswagen/t-roc/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 45,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/taigo",
+      "url": "https://www.drom.ru/catalog/volkswagen/taigo/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 7,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volkswagen/touran",
+      "url": "https://www.drom.ru/catalog/volkswagen/touran/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 40,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/v40",
+      "url": "https://www.drom.ru/catalog/volvo/v40/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 93,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/v50",
+      "url": "https://www.drom.ru/catalog/volvo/v50/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 23,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/v70",
+      "url": "https://www.drom.ru/catalog/volvo/v70/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 68,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/xc40",
+      "url": "https://www.drom.ru/catalog/volvo/xc40/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 63,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/xc60",
+      "url": "https://www.drom.ru/catalog/volvo/xc60/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 190,
+      "transport": "jina"
+    },
+    {
+      "modelId": "volvo/xc90",
+      "url": "https://www.drom.ru/catalog/volvo/xc90/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 78,
+      "transport": "jina"
+    },
+    {
+      "modelId": "acura/tlx",
+      "url": "https://www.drom.ru/catalog/acura/tlx/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 17,
+      "transport": "jina"
+    },
+    {
+      "modelId": "alfa-romeo/147",
+      "url": "https://www.drom.ru/catalog/alfa-romeo/147/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "alfa-romeo/159",
+      "url": "https://www.drom.ru/catalog/alfa-romeo/159/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "alfa-romeo/giulietta",
+      "url": "https://www.drom.ru/catalog/alfa-romeo/giulietta/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "alfa-romeo/mito",
+      "url": "https://www.drom.ru/catalog/alfa-romeo/mito/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "alpine/a290",
+      "url": "https://www.drom.ru/catalog/alpine/a290/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "audi/100",
+      "url": "https://www.drom.ru/catalog/audi/100/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 82,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/80",
+      "url": "https://www.drom.ru/catalog/audi/80/specs/engine_capacity/",
+      "status": "parse_empty",
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/e-tron",
+      "url": "https://www.drom.ru/catalog/audi/e-tron/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "audi/q2",
+      "url": "https://www.drom.ru/catalog/audi/q2/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 37,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/q6",
+      "url": "https://www.drom.ru/catalog/audi/q6/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 3,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/q7",
+      "url": "https://www.drom.ru/catalog/audi/q7/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 71,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/q8",
+      "url": "https://www.drom.ru/catalog/audi/q8/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 22,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/rs6",
+      "url": "https://www.drom.ru/catalog/audi/rs6/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 14,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/s3",
+      "url": "https://www.drom.ru/catalog/audi/s3/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 47,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/s4",
+      "url": "https://www.drom.ru/catalog/audi/s4/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 16,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/s6",
+      "url": "https://www.drom.ru/catalog/audi/s6/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 14,
+      "transport": "jina"
+    },
+    {
+      "modelId": "audi/sq5",
+      "url": "https://www.drom.ru/catalog/audi/sq5/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 24,
+      "transport": "jina"
+    },
+    {
+      "modelId": "austin-morris/mini",
+      "url": "https://www.drom.ru/catalog/austin-morris/mini/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "bmw/1-series",
+      "url": "https://www.drom.ru/catalog/bmw/1-series/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 149,
+      "transport": "jina"
+    },
+    {
+      "modelId": "bmw/4-series",
+      "url": "https://www.drom.ru/catalog/bmw/4-series/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 121,
+      "transport": "jina"
+    },
+    {
+      "modelId": "bmw/6-series",
+      "url": "https://www.drom.ru/catalog/bmw/6-series/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 61,
+      "transport": "jina"
+    },
+    {
+      "modelId": "bmw/7-series",
+      "url": "https://www.drom.ru/catalog/bmw/7-series/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 194,
+      "transport": "jina"
+    },
+    {
+      "modelId": "bmw/ix1",
+      "url": "https://www.drom.ru/catalog/bmw/ix1/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "buick/le-sabre",
+      "url": "https://www.drom.ru/catalog/buick/le-sabre/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "buick/skylark",
+      "url": "https://www.drom.ru/catalog/buick/skylark/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 128,
+      "transport": "jina"
+    },
+    {
+      "modelId": "byd/atto-2",
+      "url": "https://www.drom.ru/catalog/byd/atto-2/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/atto-3",
+      "url": "https://www.drom.ru/catalog/byd/atto-3/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/dolphin",
+      "url": "https://www.drom.ru/catalog/byd/dolphin/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/dolphin-g",
+      "url": "https://www.drom.ru/catalog/byd/dolphin-g/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/seal",
+      "url": "https://www.drom.ru/catalog/byd/seal/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/sealion-7",
+      "url": "https://www.drom.ru/catalog/byd/sealion-7/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "byd/song-pro",
+      "url": "https://www.drom.ru/catalog/byd/song-pro/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "cadillac/el-dorado",
+      "url": "https://www.drom.ru/catalog/cadillac/el-dorado/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "chevrolet/aveo",
+      "url": "https://www.drom.ru/catalog/chevrolet/aveo/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 53,
+      "transport": "jina"
+    },
+    {
+      "modelId": "chevrolet/bolt-ev",
+      "url": "https://www.drom.ru/catalog/chevrolet/bolt-ev/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "chevrolet/evanda",
+      "url": "https://www.drom.ru/catalog/chevrolet/evanda/specs/engine_capacity/",
+      "status": "parse_empty",
+      "transport": "jina"
+    },
+    {
+      "modelId": "chevrolet/trans-sport",
+      "url": "https://www.drom.ru/catalog/chevrolet/trans-sport/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "chrysler/newport",
+      "url": "https://www.drom.ru/catalog/chrysler/newport/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 70,
+      "transport": "jina"
+    },
+    {
+      "modelId": "citroen/c1",
+      "url": "https://www.drom.ru/catalog/citroen/c1/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 12,
+      "transport": "jina"
+    },
+    {
+      "modelId": "citroen/c2",
+      "url": "https://www.drom.ru/catalog/citroen/c2/specs/engine_capacity/",
+      "status": "parse_empty",
+      "transport": "jina"
+    },
+    {
+      "modelId": "citroen/c3-aircross",
+      "url": "https://www.drom.ru/catalog/citroen/c3-aircross/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "citroen/c3-picasso",
+      "url": "https://www.drom.ru/catalog/citroen/c3-picasso/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "citroen/c5-x",
+      "url": "https://www.drom.ru/catalog/citroen/c5-x/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "citroen/ds4",
+      "url": "https://www.drom.ru/catalog/citroen/ds4/specs/engine_capacity/",
       "status": "ready",
       "variants": 19,
       "transport": "jina"
     },
     {
-      "modelId": "mazda/mazda3",
-      "url": "https://www.drom.ru/catalog/mazda/mazda3/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 152,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mercedes-benz/a-class",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/a-class/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 163,
-      "transport": "jina"
-    },
-    {
-      "modelId": "mercedes-benz/cla",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/cla/specs/engine_capacity/",
+      "modelId": "citroen/e-c3-aircross",
+      "url": "https://www.drom.ru/catalog/citroen/e-c3-aircross/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "mercedes-benz/e-class",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/e-class/specs/engine_capacity/",
-      "status": "ready",
-      "variants": 442,
+      "modelId": "citroen/xsara",
+      "url": "https://www.drom.ru/catalog/citroen/xsara/specs/engine_capacity/",
+      "status": "parse_empty",
       "transport": "jina"
     },
     {
-      "modelId": "mercedes-benz/gla",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/gla/specs/engine_capacity/",
+      "modelId": "citroen/xsara-picasso",
+      "url": "https://www.drom.ru/catalog/citroen/xsara-picasso/specs/engine_capacity/",
       "status": "not_found"
     },
     {
-      "modelId": "mercedes-benz/glc",
-      "url": "https://www.drom.ru/catalog/mercedes-benz/glc/specs/engine_capacity/",
+      "modelId": "cupra/born",
+      "url": "https://www.drom.ru/catalog/cupra/born/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "cupra/tavascan",
+      "url": "https://www.drom.ru/catalog/cupra/tavascan/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "dacia/spring",
+      "url": "https://www.drom.ru/catalog/dacia/spring/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "daewoo/lanos",
+      "url": "https://www.drom.ru/catalog/daewoo/lanos/specs/engine_capacity/",
+      "status": "parse_empty",
+      "transport": "jina"
+    },
+    {
+      "modelId": "daihatsu/fourtrak",
+      "url": "https://www.drom.ru/catalog/daihatsu/fourtrak/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "dodge/journey",
+      "url": "https://www.drom.ru/catalog/dodge/journey/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 5,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ds/ds-7",
+      "url": "https://www.drom.ru/catalog/ds/ds-7/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "fiat/500",
+      "url": "https://www.drom.ru/catalog/fiat/500/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 54,
+      "transport": "jina"
+    },
+    {
+      "modelId": "fiat/500-e",
+      "url": "https://www.drom.ru/catalog/fiat/500-e/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "fiat/500-l",
+      "url": "https://www.drom.ru/catalog/fiat/500-l/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "fiat/500-x",
+      "url": "https://www.drom.ru/catalog/fiat/500-x/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "fiat/abarth-500",
+      "url": "https://www.drom.ru/catalog/fiat/abarth-500/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "fiat/panda",
+      "url": "https://www.drom.ru/catalog/fiat/panda/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 29,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/a",
+      "url": "https://www.drom.ru/catalog/ford/a/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "ford/c-max",
+      "url": "https://www.drom.ru/catalog/ford/c-max/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 34,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/ecosport",
+      "url": "https://www.drom.ru/catalog/ford/ecosport/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 26,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/escape",
+      "url": "https://www.drom.ru/catalog/ford/escape/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 42,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/escort",
+      "url": "https://www.drom.ru/catalog/ford/escort/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 169,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/explorer",
+      "url": "https://www.drom.ru/catalog/ford/explorer/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 53,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/focus",
+      "url": "https://www.drom.ru/catalog/ford/focus/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 157,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/galaxie",
+      "url": "https://www.drom.ru/catalog/ford/galaxie/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 112,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/grand-c-max",
+      "url": "https://www.drom.ru/catalog/ford/grand-c-max/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "ford/ka",
+      "url": "https://www.drom.ru/catalog/ford/ka/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 23,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/model-t",
+      "url": "https://www.drom.ru/catalog/ford/model-t/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "ford/mustang-mach-e",
+      "url": "https://www.drom.ru/catalog/ford/mustang-mach-e/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "ford/s-max",
+      "url": "https://www.drom.ru/catalog/ford/s-max/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 48,
+      "transport": "jina"
+    },
+    {
+      "modelId": "ford/sierra",
+      "url": "https://www.drom.ru/catalog/ford/sierra/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 84,
+      "transport": "jina"
+    },
+    {
+      "modelId": "great-wall/ora",
+      "url": "https://www.drom.ru/catalog/great-wall/ora/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "great-wall/tank-300",
+      "url": "https://www.drom.ru/catalog/great-wall/tank-300/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "haval/jolion",
+      "url": "https://www.drom.ru/catalog/haval/jolion/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 12,
+      "transport": "jina"
+    },
+    {
+      "modelId": "honda/accord",
+      "url": "https://www.drom.ru/catalog/honda/accord/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 350,
+      "transport": "jina"
+    },
+    {
+      "modelId": "honda/civic-aerodeck",
+      "url": "https://www.drom.ru/catalog/honda/civic-aerodeck/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "honda/jazz",
+      "url": "https://www.drom.ru/catalog/honda/jazz/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 27,
+      "transport": "jina"
+    },
+    {
+      "modelId": "honda/prologue",
+      "url": "https://www.drom.ru/catalog/honda/prologue/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "honda/wr-v",
+      "url": "https://www.drom.ru/catalog/honda/wr-v/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 2,
+      "transport": "jina"
+    },
+    {
+      "modelId": "honda/zr-v-sport",
+      "url": "https://www.drom.ru/catalog/honda/zr-v-sport/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "hyundai/accent",
+      "url": "https://www.drom.ru/catalog/hyundai/accent/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 97,
+      "transport": "jina"
+    },
+    {
+      "modelId": "hyundai/bayon",
+      "url": "https://www.drom.ru/catalog/hyundai/bayon/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 2,
+      "transport": "jina"
+    },
+    {
+      "modelId": "hyundai/i10",
+      "url": "https://www.drom.ru/catalog/hyundai/i10/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 39,
+      "transport": "jina"
+    },
+    {
+      "modelId": "hyundai/i40",
+      "url": "https://www.drom.ru/catalog/hyundai/i40/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 14,
+      "transport": "jina"
+    },
+    {
+      "modelId": "hyundai/inster",
+      "url": "https://www.drom.ru/catalog/hyundai/inster/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "hyundai/ioniq",
+      "url": "https://www.drom.ru/catalog/hyundai/ioniq/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 6,
+      "transport": "jina"
+    },
+    {
+      "modelId": "hyundai/ioniq-5",
+      "url": "https://www.drom.ru/catalog/hyundai/ioniq-5/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "infiniti/fx35",
+      "url": "https://www.drom.ru/catalog/infiniti/fx35/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 10,
+      "transport": "jina"
+    },
+    {
+      "modelId": "jaecoo/jaecoo-8",
+      "url": "https://www.drom.ru/catalog/jaecoo/jaecoo-8/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "jaguar/e-pace",
+      "url": "https://www.drom.ru/catalog/jaguar/e-pace/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 17,
+      "transport": "jina"
+    },
+    {
+      "modelId": "jaguar/mark",
+      "url": "https://www.drom.ru/catalog/jaguar/mark/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "jaguar/xf",
+      "url": "https://www.drom.ru/catalog/jaguar/xf/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 84,
+      "transport": "jina"
+    },
+    {
+      "modelId": "jeep/cherokee",
+      "url": "https://www.drom.ru/catalog/jeep/cherokee/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 42,
+      "transport": "jina"
+    },
+    {
+      "modelId": "jeep/grand-cherokee",
+      "url": "https://www.drom.ru/catalog/jeep/grand-cherokee/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "jeep/renegade",
+      "url": "https://www.drom.ru/catalog/jeep/renegade/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 60,
+      "transport": "jina"
+    },
+    {
+      "modelId": "jeep/wrangler-unlimited",
+      "url": "https://www.drom.ru/catalog/jeep/wrangler-unlimited/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/carens",
+      "url": "https://www.drom.ru/catalog/kia/carens/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 21,
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/ev2",
+      "url": "https://www.drom.ru/catalog/kia/ev2/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/ev3",
+      "url": "https://www.drom.ru/catalog/kia/ev3/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/ev4",
+      "url": "https://www.drom.ru/catalog/kia/ev4/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/ev5",
+      "url": "https://www.drom.ru/catalog/kia/ev5/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/ev6",
+      "url": "https://www.drom.ru/catalog/kia/ev6/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "kia/magentis",
+      "url": "https://www.drom.ru/catalog/kia/magentis/specs/engine_capacity/",
+      "status": "parse_empty",
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/niro",
+      "url": "https://www.drom.ru/catalog/kia/niro/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 12,
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/optima",
+      "url": "https://www.drom.ru/catalog/kia/optima/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 57,
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/sorento",
+      "url": "https://www.drom.ru/catalog/kia/sorento/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 131,
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/soul",
+      "url": "https://www.drom.ru/catalog/kia/soul/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 82,
+      "transport": "jina"
+    },
+    {
+      "modelId": "kia/venga",
+      "url": "https://www.drom.ru/catalog/kia/venga/specs/engine_capacity/",
+      "status": "ready",
+      "variants": 7,
+      "transport": "jina"
+    },
+    {
+      "modelId": "lancia/ypsilon",
+      "url": "https://www.drom.ru/catalog/lancia/ypsilon/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "land-rover/defender",
+      "url": "https://www.drom.ru/catalog/land-rover/defender/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "land-rover/discovery-sport",
+      "url": "https://www.drom.ru/catalog/land-rover/discovery-sport/specs/engine_capacity/",
+      "status": "not_found"
+    },
+    {
+      "modelId": "land-rover/range-rover-evoque",
+      "url": "https://www.drom.ru/catalog/land-rover/range-rover-evoque/specs/engine_capacity/",
       "status": "not_found"
     }
   ]
