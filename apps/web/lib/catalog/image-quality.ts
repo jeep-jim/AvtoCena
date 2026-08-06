@@ -21,8 +21,11 @@ function finite(value: unknown) {
 }
 
 function stablePublicImageUrl(image: CatalogImageLike) {
+  const sourceUrl = text(image.url);
   const id = text(image.id);
-  return id ? `/api/catalog/images/${encodeURIComponent(id)}` : text(image.url);
+  const objectKey = text(image.objectKey);
+  if (id && objectKey) return `/api/catalog/images/${encodeURIComponent(id)}`;
+  return sourceUrl;
 }
 
 function canonicalUrl(value: unknown) {
