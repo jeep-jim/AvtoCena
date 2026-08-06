@@ -64,6 +64,8 @@ jobs:
           node --check scripts/catalog-probe-source-shard.mjs
           node --check scripts/catalog-rebuild-source-shard.mjs
           node --check scripts/catalog-publish-market.mjs
+          node --check scripts/catalog-finalize-validation-report.mjs
+          node --check scripts/catalog-enable-grow-only-publication.mjs
           node --import tsx --test tests/catalog-calculation-integrity.test.ts tests/catalog-image-quality.test.ts tests/catalog-v2-market-recovery.test.ts
 
   collect:
@@ -152,6 +154,7 @@ jobs:
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
+      CATALOG_GROW_ONLY_MARKETS: ${{ inputs.market }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -174,6 +177,14 @@ jobs:
           if(total<=0) process.exit(1);
           NODE
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
+      - name: Finalize validation report and require complete shard structure
+        env:
+          CATALOG_VALIDATION_FAIL_ON_STRUCTURAL: "true"
+        run: node scripts/catalog-finalize-validation-report.mjs
+      - name: Enable grow-only publication for the current market
+        run: |
+          node scripts/catalog-enable-grow-only-publication.mjs
+          node --check scripts/catalog-publish-market.mjs
       - name: Publish market
         run: npx tsx scripts/catalog-publish-market.mjs
       - name: Require complete 10k publication
