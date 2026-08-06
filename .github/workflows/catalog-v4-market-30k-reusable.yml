@@ -33,6 +33,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  CATALOG_KNOWLEDGE_DISABLED: "1"
   CATALOG_V2_PRIORITY_TARGET: "0"
   CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"
   CATALOG_PRIORITY_MAX_POWER_HP: "160"
@@ -57,7 +58,7 @@ jobs:
       CATALOG_REBUILD_MARKET: ${{ inputs.market }}
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "10000"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "30"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "10"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "8"
       CATALOG_REBUILD_TIME_LIMIT_MS: "4500000"
       CATALOG_IMAGE_FETCH_CONCURRENCY: "20"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ inputs.market }}-0.json
@@ -68,7 +69,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect real listings from all registered sources
+      - name: Collect real listings from mandatory and additional sources
         shell: bash
         run: |
           set +e
