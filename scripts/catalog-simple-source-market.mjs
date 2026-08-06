@@ -3,16 +3,8 @@ import fs from "node:fs/promises";
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-
-const APPROVED_SOURCE_IDS = {
-  korea: ["encar_direct", "kcar_korea_open"],
-  japan: ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"],
-  china: ["autohome_used_china_open", "dongchedi_china_open", "guazi_china_open", "autohome_new_china_open"],
-  uae: ["dubizzle_uae_open", "dubicars_uae_exact"],
-  europe: ["mobile_de_open", "autoscout_europe_open"],
-  georgia: ["myauto_georgia_list", "autopapa_georgia_open"],
-  kyrgyzstan: ["mashina_kyrgyzstan_exact"],
-};
+const { requiredCatalogSourceIds } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
+const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 30_000)));
@@ -31,10 +23,25 @@ const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tr
 if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "1";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
+process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
 
-const approved = new Set(APPROVED_SOURCE_IDS[market] || []);
-const sources = catalogImportSources.filter((source) => approved.has(source.sourceId));
-if (!sources.length) throw new Error(`catalog_approved_sources_missing:${market}`);
+const adapterById = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
+const requiredSourceIds = requiredCatalogSourceIds(market);
+const missingRequiredSourceIds = requiredSourceIds.filter((sourceId) => !adapterById.has(sourceId));
+if (missingRequiredSourceIds.length) {
+  throw new Error(`catalog_required_sources_missing:${market}:${missingRequiredSourceIds.join(",")}`);
+}
+
+// Every approved source is always included first. Extra registered sources may add
+// volume, but never replace or hide one of the mandatory owner-approved sites.
+const plannedSourceIds = [
+  ...requiredSourceIds,
+  ...catalogV2SourceIds(market).filter((sourceId) => !requiredSourceIds.includes(sourceId)),
+];
+const sources = [...new Set(plannedSourceIds)]
+  .map((sourceId) => adapterById.get(sourceId))
+  .filter(Boolean);
+if (!sources.length) throw new Error(`catalog_sources_missing:${market}`);
 
 const offers = new Map();
 const sourceReports = [];
@@ -88,14 +95,28 @@ async function pool(rows, limit, worker) {
 async function checkpoint(reason = "collecting") {
   const rows = [...offers.values()].slice(0, target);
   const payload = {
-    version: 2,
-    mode: "listing_first_2011_plus",
+    version: 3,
+    mode: "listing_first_2011_plus_no_knowledge",
     market,
     generatedAt: new Date().toISOString(),
     count: rows.length,
     partial: rows.length < target,
     offers: rows,
-    report: { market, target, pages, seen, normalized, rejectedCore, savedWithoutImages, imageDetails, sources: sourceReports, errors, stopReason: reason },
+    report: {
+      market,
+      target,
+      requiredSourceIds,
+      plannedSourceIds: sources.map((source) => source.sourceId),
+      pages,
+      seen,
+      normalized,
+      rejectedCore,
+      savedWithoutImages,
+      imageDetails,
+      sources: sourceReports,
+      errors,
+      stopReason: reason,
+    },
   };
   const temporary = `${output}.tmp`;
   await fs.writeFile(temporary, JSON.stringify(payload));
@@ -124,7 +145,12 @@ async function prepare(base, source) {
     status: "active",
     images: gallery.slice(0, 30),
     updatedAt: now,
-    operational: { ...offer.operational, listingFirstImportedAt: now, galleryImageCount: gallery.length },
+    operational: {
+      ...offer.operational,
+      listingFirstImportedAt: now,
+      galleryImageCount: gallery.length,
+      knowledgeEnriched: false,
+    },
   });
 }
 async function collectSource(source) {
@@ -168,7 +194,7 @@ async function collectSource(source) {
       });
       emptyPages = offers.size === before ? emptyPages + 1 : 0;
       await checkpoint("page_complete");
-      console.log(JSON.stringify({ market, sourceId: source.sourceId, sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, total: offers.size }));
+      console.log(JSON.stringify({ market, sourceId: source.sourceId, required: requiredSourceIds.includes(source.sourceId), sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, total: offers.size }));
       cursor = page?.nextCursor || null;
       if (!cursor || page?.finished) break;
     }
@@ -180,11 +206,33 @@ async function collectSource(source) {
     stopReason = String(error?.message || error).includes("timeout") ? "timeout" : "source_error";
     errors.push({ sourceId: source.sourceId, stage: "list", error: String(error?.message || error) });
   }
-  sourceReports.push({ sourceId: source.sourceId, pages: sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, stopReason });
+  sourceReports.push({
+    sourceId: source.sourceId,
+    required: requiredSourceIds.includes(source.sourceId),
+    pages: sourcePages,
+    seen: sourceSeen,
+    normalized: sourceNormalized,
+    passedCore: sourcePassedCore,
+    saved: sourceSaved,
+    stopReason,
+  });
   await checkpoint("source_complete");
 }
 
 await checkpoint("started");
 await pool(sources, sourceConcurrency, collectSource);
 await checkpoint(expired() ? "deadline" : offers.size >= target ? "market_target_reached" : "sources_exhausted");
-console.log(JSON.stringify({ market, approvedSources: [...approved], activeSources: sources.map((source) => source.sourceId), count: offers.size, target, pages, seen, normalized, rejectedCore, savedWithoutImages, imageDetails, errors: errors.length }, null, 2));
+console.log(JSON.stringify({
+  market,
+  requiredSourceIds,
+  activeSources: sources.map((source) => source.sourceId),
+  count: offers.size,
+  target,
+  pages,
+  seen,
+  normalized,
+  rejectedCore,
+  savedWithoutImages,
+  imageDetails,
+  errors: errors.length,
+}, null, 2));
