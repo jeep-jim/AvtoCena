@@ -43,6 +43,8 @@ let pages = 0;
 let seen = 0;
 let normalized = 0;
 let imageDetails = 0;
+let rejectedCore = 0;
+let savedWithoutImages = 0;
 
 function expired() { return Date.now() >= deadline; }
 function withTimeout(promise, ms, label) {
@@ -93,7 +95,7 @@ async function checkpoint(reason = "collecting") {
     count: rows.length,
     partial: rows.length < target,
     offers: rows,
-    report: { market, target, pages, seen, normalized, imageDetails, sources: sourceReports, errors, stopReason: reason },
+    report: { market, target, pages, seen, normalized, rejectedCore, savedWithoutImages, imageDetails, sources: sourceReports, errors, stopReason: reason },
   };
   const temporary = `${output}.tmp`;
   await fs.writeFile(temporary, JSON.stringify(payload));
@@ -101,7 +103,10 @@ async function checkpoint(reason = "collecting") {
 }
 async function prepare(base, source) {
   const offer = normalizeVehicleOfferSpecs(base);
-  if (!validCore(offer)) return null;
+  if (!validCore(offer)) {
+    rejectedCore++;
+    return null;
+  }
   let gallery = images(offer.images);
   if (gallery.length < 30 && source.fetchImages && !expired()) {
     try {
@@ -112,7 +117,7 @@ async function prepare(base, source) {
       errors.push({ sourceId: source.sourceId, offerId: offer.id, stage: "images", error: String(error?.message || error) });
     }
   }
-  if (!gallery.length) return null;
+  if (!gallery.length) savedWithoutImages++;
   const now = new Date().toISOString();
   return normalizeVehicleOfferSpecs({
     ...offer,
@@ -126,6 +131,8 @@ async function collectSource(source) {
   let cursor = null;
   let sourcePages = 0;
   let sourceSeen = 0;
+  let sourceNormalized = 0;
+  let sourcePassedCore = 0;
   let sourceSaved = 0;
   let emptyPages = 0;
   let stopReason = "finished";
@@ -145,7 +152,13 @@ async function collectSource(source) {
         try { base = source.normalizeOffer(raw); } catch {}
         if (!base?.id || offers.has(base.id)) continue;
         normalized++;
-        if (validCore(base)) bases.push(base);
+        sourceNormalized++;
+        if (validCore(base)) {
+          bases.push(base);
+          sourcePassedCore++;
+        } else {
+          rejectedCore++;
+        }
       }
       const before = offers.size;
       await pool(bases, detailConcurrency, async (base) => {
@@ -155,7 +168,7 @@ async function collectSource(source) {
       });
       emptyPages = offers.size === before ? emptyPages + 1 : 0;
       await checkpoint("page_complete");
-      console.log(JSON.stringify({ market, sourceId: source.sourceId, sourcePages, seen: sourceSeen, saved: sourceSaved, total: offers.size }));
+      console.log(JSON.stringify({ market, sourceId: source.sourceId, sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, total: offers.size }));
       cursor = page?.nextCursor || null;
       if (!cursor || page?.finished) break;
     }
@@ -167,11 +180,11 @@ async function collectSource(source) {
     stopReason = String(error?.message || error).includes("timeout") ? "timeout" : "source_error";
     errors.push({ sourceId: source.sourceId, stage: "list", error: String(error?.message || error) });
   }
-  sourceReports.push({ sourceId: source.sourceId, pages: sourcePages, seen: sourceSeen, saved: sourceSaved, stopReason });
+  sourceReports.push({ sourceId: source.sourceId, pages: sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, stopReason });
   await checkpoint("source_complete");
 }
 
 await checkpoint("started");
 await pool(sources, sourceConcurrency, collectSource);
 await checkpoint(expired() ? "deadline" : offers.size >= target ? "market_target_reached" : "sources_exhausted");
-console.log(JSON.stringify({ market, approvedSources: [...approved], activeSources: sources.map((source) => source.sourceId), count: offers.size, target, pages, seen, normalized, imageDetails, errors: errors.length }, null, 2));
+console.log(JSON.stringify({ market, approvedSources: [...approved], activeSources: sources.map((source) => source.sourceId), count: offers.size, target, pages, seen, normalized, rejectedCore, savedWithoutImages, imageDetails, errors: errors.length }, null, 2));
