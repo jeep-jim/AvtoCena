@@ -88,6 +88,9 @@ jobs:
   publish:
     needs: collect
     if: always() && needs.collect.result != 'cancelled'
+    concurrency:
+      group: catalog-v4-shared-manifest-publish
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 50
     env:
