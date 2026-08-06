@@ -36,6 +36,7 @@ import { myAutoListSource } from "./myauto-list-source";
 import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
+import { strictSourceDetail } from "./strict-source-detail-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
 import { regionalLiveOverrides } from "./regional-live-overrides";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
@@ -46,20 +47,18 @@ import {
   PUBLIC_CATALOG_MARKETS,
 } from "./runtime-config";
 
-// Rebuild workflows may choose any verified gallery size from 1 to 30.
-// Keep the hard cap at 30, but do not overwrite the workflow's preferred count:
-// forcing 30 caused a detail request for every listing and prevented 10k crawls.
 if (process.env.CATALOG_REBUILD_MARKET) {
+  process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
   process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
   process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
+  process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 }
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 
-// Generic regional adapters are registered first. Exact/listing-bound adapters at
-// the end must replace broad HTML parsers with the same sourceId. This prevents a
-// generic page parser from displacing the working AUTO.GE or Mashina implementation.
+// Generic and additional sources remain available for future certified coverage.
+// Exact/listing-bound adapters are registered last so they replace broad parsers.
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
@@ -86,13 +85,20 @@ for (const replacement of completeSources) {
   else catalogImportSources.push(replacement);
 }
 
-// The approved source contract is enforced at runtime, not only documented.
-// Additional adapters may exist, but none of the mandatory 18 sources may be absent.
+const requiredSourceIds = new Set(
+  Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId),
+);
+
+// Mandatory sources never use the old binary-image path. Encar has its own strict
+// public JSON detail adapter; every other mandatory site uses the source page only.
+for (let index = 0; index < catalogImportSources.length; index++) {
+  const source = catalogImportSources[index];
+  if (!requiredSourceIds.has(source.sourceId) || source.sourceId === "encar_direct") continue;
+  catalogImportSources[index] = strictSourceDetail(source);
+}
+
 const registeredAdapterIds = new Set(catalogImportSources.map((source) => source.sourceId));
-const missingRequiredAdapters = Object.values(REQUIRED_CATALOG_SOURCES)
-  .flat()
-  .map((source) => source.sourceId)
-  .filter((sourceId) => !registeredAdapterIds.has(sourceId));
+const missingRequiredAdapters = [...requiredSourceIds].filter((sourceId) => !registeredAdapterIds.has(sourceId));
 if (missingRequiredAdapters.length) {
   throw new Error(`catalog_required_source_adapters_missing:${missingRequiredAdapters.join(",")}`);
 }
@@ -109,7 +115,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   process.env.CATALOG_GROW_ONLY_MARKETS ||= PUBLIC_CATALOG_MARKETS.join(",");
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.min(30, Math.max(1, Number.isFinite(requestedImages) ? requestedImages : 30)),
+    maxImagesPerOffer: Math.min(30, Math.max(5, Number.isFinite(requestedImages) ? requestedImages : 30)),
   });
 }
 
