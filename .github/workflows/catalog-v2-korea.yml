@@ -1,33 +1,18 @@
-name: Cancel legacy Korea catalog runs
-run-name: Cancel legacy Korea catalog runs · ${{ github.sha }}
+name: Catalog V3 · Korea · 10k
+run-name: Catalog V3 · Korea · 10k · ${{ github.sha }}
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-korea.yml
+  workflow_dispatch:
 
+# Automatic schedule, push and chaining triggers are intentionally disabled.
+# Run this market only from the Actions UI when needed.
 permissions:
-  actions: write
   contents: read
 
 jobs:
-  cancel:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            const runIds = [31077850761, 31082481746];
-            for (const run_id of runIds) {
-              try {
-                await github.rest.actions.cancelWorkflowRun({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  run_id,
-                });
-                core.notice(`Cancellation requested for run ${run_id}`);
-              } catch (error) {
-                core.notice(`Run ${run_id}: ${error?.message || String(error)}`);
-              }
-            }
+  korea:
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: korea
+      display_name: Корея
+    secrets: inherit
