@@ -3,9 +3,20 @@ run-name: Catalog V4 · All markets · up to 30k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "30 20 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v4-all-markets-30k.yml"
 
 permissions:
   contents: read
+
+concurrency:
+  group: catalog-v4-all-markets-production
+  cancel-in-progress: false
 
 jobs:
   korea:
@@ -16,8 +27,6 @@ jobs:
     secrets: inherit
 
   japan:
-    needs: korea
-    if: needs.korea.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: japan
@@ -25,8 +34,6 @@ jobs:
     secrets: inherit
 
   china:
-    needs: japan
-    if: needs.japan.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: china
@@ -34,8 +41,6 @@ jobs:
     secrets: inherit
 
   uae:
-    needs: china
-    if: needs.china.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: uae
@@ -43,8 +48,6 @@ jobs:
     secrets: inherit
 
   europe:
-    needs: uae
-    if: needs.uae.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: europe
@@ -52,8 +55,6 @@ jobs:
     secrets: inherit
 
   georgia:
-    needs: europe
-    if: needs.europe.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: georgia
@@ -61,8 +62,6 @@ jobs:
     secrets: inherit
 
   kyrgyzstan:
-    needs: georgia
-    if: needs.georgia.result == 'success'
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: kyrgyzstan
