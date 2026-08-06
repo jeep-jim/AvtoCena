@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
+const { requiredCatalogSourceIds } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0));
@@ -9,25 +10,21 @@ const timeoutMs = Math.max(3_000, Number(process.env.CATALOG_PROBE_TIMEOUT_MS ||
 const attempts = Math.max(1, Math.min(3, Number(process.env.CATALOG_PROBE_ATTEMPTS || 2)));
 const concurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_PROBE_CONCURRENCY || 4)));
 const outputFile = process.env.CATALOG_PROBE_OUTPUT || `catalog-probe-${market}-${shardIndex}.json`;
+const allowRequiredSubset = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_PROBE_ALLOW_REQUIRED_SUBSET || ""));
 
-const priorityPlan = {
-  korea: ["encar_direct", "kcar_korea_open"],
-  china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "guazi_china_open", "che168_china_exact"],
-  japan: [
-    "jpauc_japan_past_open",
-    "carvector_japan_stat_open",
-    "prestige_japan_auctions_open",
-    "auctiondatasearch_japan_open",
-    "japantransit_japan_stat_open",
-    "auctions22_japan_past_open",
-  ],
-  uae: ["dubicars_uae_exact", "dubizzle_uae_open", "dubicars_clean", "beforward_uae"],
-  europe: ["mobile_de_open", "autoscout_europe_open", "otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
-  georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"],
-  kyrgyzstan: ["mashina_kyrgyzstan_exact"],
+// Only optional accelerators live here. The mandatory sites are sourced exclusively
+// from required-catalog-sources.ts so they cannot drift between workflows and code.
+const additionalPriorityPlan = {
+  korea: [],
+  china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "che168_china_exact"],
+  japan: ["japantransit_japan_stat_open", "auctions22_japan_past_open"],
+  uae: ["dubicars_clean", "beforward_uae"],
+  europe: ["otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
+  georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_exact"],
+  kyrgyzstan: [],
 };
 
-if (!Object.prototype.hasOwnProperty.call(priorityPlan, market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
+if (!Object.prototype.hasOwnProperty.call(additionalPriorityPlan, market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
 
 function stableShard(value) {
   let hash = 2166136261;
@@ -90,7 +87,7 @@ async function probe(sourceId, adapters) {
         try {
           if (isUsableOffer(source.normalizeOffer(row), sourceId)) totalUsable++;
         } catch {
-          // Одна повреждённая карточка не выключает весь источник.
+          // One damaged card must not disable an entire source.
         }
       }
       nextCursor = result?.nextCursor || null;
@@ -130,26 +127,29 @@ const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, 
 const registered = catalogImportSources
   .filter((source) => source.market === market || source.market === "multi")
   .map((source) => source.sourceId);
+const requiredSourceIds = requiredCatalogSourceIds(market);
 const configured = String(process.env.CATALOG_PROBE_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
-const plannedAll = configured.length
+const plannedAll = configured.length && allowRequiredSubset
   ? [...new Set(configured)]
-  : market === "japan"
-    ? [...new Set(priorityPlan.japan)]
-    : [...new Set([...priorityPlan[market], ...registered])];
-const priorityRank = new Map(priorityPlan[market].map((sourceId, index) => [sourceId, index]));
+  : [...new Set([...requiredSourceIds, ...configured, ...additionalPriorityPlan[market], ...registered])];
+const priorityOrder = [...requiredSourceIds, ...additionalPriorityPlan[market]];
+const priorityRank = new Map(priorityOrder.map((sourceId, index) => [sourceId, index]));
 const planned = plannedAll
-  .filter((sourceId) => adapters.has(sourceId))
   .sort((left, right) => (priorityRank.get(left) ?? 10_000) - (priorityRank.get(right) ?? 10_000) || left.localeCompare(right));
 const sourceIds = planned.filter((sourceId) => stableShard(sourceId) === shardIndex);
 const results = await runWithConcurrency(sourceIds, concurrency, (sourceId) => probe(sourceId, adapters));
 const activeSourceIds = results.filter((row) => row.active).map((row) => row.sourceId);
 const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.sourceId);
-// В сетевой обход передаются только источники, которые прямо сейчас вернули пригодные карточки.
-// Все зарегистрированные источники всё равно остаются в трёхдневном retention-пуле сборщика,
-// поэтому временный 403 не удаляет уже проверенные автомобили, но больше не съедает час запуска.
+const missingRequiredAdapters = requiredSourceIds.filter((sourceId) => !adapters.has(sourceId));
+const requiredResults = results.filter((row) => requiredSourceIds.includes(row.sourceId));
+const requiredActiveSourceIds = requiredResults.filter((row) => row.active).map((row) => row.sourceId);
+const requiredInactiveSourceIds = requiredResults.filter((row) => !row.active).map((row) => row.sourceId);
+
+// Only sources that returned usable cards are handed to the network collector.
+// Every mandatory source is nevertheless probed on every normal market run.
 const sourceIdsForRebuild = activeSourceIds.join(",") || "__no_active_sources__";
 const payload = {
-  version: 29,
+  version: 30,
   market,
   shardIndex,
   shardCount,
@@ -157,7 +157,13 @@ const payload = {
   timeoutMs,
   attempts,
   concurrency,
+  allowRequiredSubset,
   registeredSourceCount: registered.length,
+  requiredSourceIds,
+  missingRequiredAdapters,
+  requiredActiveSourceIds,
+  requiredInactiveSourceIds,
+  requiredComplete: missingRequiredAdapters.length === 0 && requiredInactiveSourceIds.length === 0,
   plannedSourceIds: sourceIds,
   activeSourceIds,
   inactiveSourceIds,
@@ -170,16 +176,12 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `source_ids=${sourceIdsForRebuild}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `active_count=${activeSourceIds.length}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `planned_count=${sourceIds.length}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `required_complete=${payload.requiredComplete ? "1" : "0"}\n`);
 }
 if (process.env.GITHUB_ENV) {
-  // Job-level defaults previously forced the collector to ignore this probe and to
-  // crawl only five canonical slots. Override them for the following collection
-  // step so every currently productive registered adapter can contribute volume.
   await fs.appendFile(process.env.GITHUB_ENV, `CATALOG_REBUILD_SOURCE_IDS=${sourceIdsForRebuild}\n`);
   await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_V2_SOURCE_SLOTS_ONLY=0\n");
   await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_IGNORE_PROBE=0\n");
-  // A source that returns pages but produces no publishable cards must stop quickly.
-  // This is only a no-progress circuit breaker; the 100,000-per-source target remains.
   await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_MAX_EMPTY_PAGES=25\n");
   await fs.appendFile(process.env.GITHUB_ENV, "CATALOG_REBUILD_MAX_SOURCE_ERRORS=3\n");
 }
