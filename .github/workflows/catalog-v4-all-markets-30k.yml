@@ -1,0 +1,74 @@
+name: Catalog V4 · All markets · up to 30k
+run-name: Catalog V4 · All markets · up to 30k · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v4-all-markets-30k.yml
+
+permissions:
+  contents: read
+
+jobs:
+  korea:
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: korea
+      display_name: Корея
+    secrets: inherit
+
+  japan:
+    needs: korea
+    if: needs.korea.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: japan
+      display_name: Япония
+    secrets: inherit
+
+  china:
+    needs: japan
+    if: needs.japan.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: china
+      display_name: Китай
+    secrets: inherit
+
+  uae:
+    needs: china
+    if: needs.china.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: uae
+      display_name: ОАЭ
+    secrets: inherit
+
+  europe:
+    needs: uae
+    if: needs.uae.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: europe
+      display_name: Европа
+    secrets: inherit
+
+  georgia:
+    needs: europe
+    if: needs.europe.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: georgia
+      display_name: Грузия
+    secrets: inherit
+
+  kyrgyzstan:
+    needs: georgia
+    if: needs.georgia.result == 'success'
+    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    with:
+      market: kyrgyzstan
+      display_name: Кыргызстан
+    secrets: inherit
