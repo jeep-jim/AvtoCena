@@ -1,7 +1,6 @@
-import { cacheImageFromUrl } from "./storage";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
-const bad = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
+const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
 
 function decode(value: unknown) {
   return String(value || "")
@@ -13,48 +12,59 @@ function decode(value: unknown) {
     .trim();
 }
 
-function validSourceImage(value: unknown) {
+function absoluteImageUrl(value: unknown, baseUrl = "") {
   const raw = decode(value);
-  if (!raw || bad.test(raw)) return false;
+  if (!raw || BAD_IMAGE_RE.test(raw)) return "";
   try {
-    const url = new URL(raw);
-    return /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(url.toString())
-      || /olxcdn\.com|picture\d*\.goo-net\.com|\/image(?:[;/?#]|$)/i.test(url.toString());
+    const normalized = raw.startsWith("//") ? `https:${raw}` : raw;
+    const url = new URL(normalized, baseUrl || undefined);
+    if (!["http:", "https:"].includes(url.protocol)) return "";
+    if (/\/api\/catalog\/images\//i.test(url.pathname)) return "";
+    return url.toString();
   } catch {
-    return /^\/?carpicture\//i.test(raw);
+    return "";
   }
 }
 
-function rawGalleryUrls(offer: VehicleOffer) {
+function imageValues(value: unknown) {
+  if (typeof value === "string") return [value];
+  if (!value || typeof value !== "object") return [];
+  const row = value as Record<string, unknown>;
+  return [row.url, row.src, row.location, row.path, row.large, row.original, row.imageUrl]
+    .filter((item): item is string => typeof item === "string");
+}
+
+function sourceGalleryUrls(offer: VehicleOffer) {
+  const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
   const raw = (offer.operational as any)?.raw;
-  const values: unknown[] = [];
-  for (const field of [raw?.images, raw?.photos, raw?.gallery, raw?.imageUrls, raw?.photoUrls, raw?.parsed?.images]) {
-    if (Array.isArray(field)) values.push(...field);
-  }
-  const result: string[] = [];
-  for (const value of values) {
-    if (typeof value === "string") result.push(value);
-    else if (value && typeof value === "object") {
-      for (const field of ["url", "src", "location", "path", "large", "original"]) {
-        const candidate = (value as Record<string, unknown>)[field];
-        if (typeof candidate === "string") result.push(candidate);
+  const collections = [
+    offer.images,
+    raw?.images,
+    raw?.photos,
+    raw?.gallery,
+    raw?.imageUrls,
+    raw?.photoUrls,
+    raw?.parsed?.images,
+  ];
+  const urls: string[] = [];
+  for (const collection of collections) {
+    if (!Array.isArray(collection)) continue;
+    for (const value of collection) {
+      for (const candidate of imageValues(value)) {
+        const url = absoluteImageUrl(candidate, sourceUrl);
+        if (url) urls.push(url);
       }
     }
   }
-  return [...new Set(result.map(decode).filter(validSourceImage))];
+  return [...new Set(urls)];
 }
 
-function imageKey(image: CatalogImage) {
-  return String(image.id || image.checksum || image.objectKey || image.url || "");
-}
-
-function isSafeRemoteAuctionImage(image: CatalogImage) {
-  if (Number(image.size || 0) > 0) return false;
-  const url = decode(image.url);
-  return /^https?:\/\//i.test(url) && validSourceImage(url);
-}
-
-function remoteImage(url: string): CatalogImage {
+function externalImage(value: unknown, baseUrl = ""): CatalogImage | null {
+  const url = absoluteImageUrl(
+    typeof value === "string" ? value : (value as CatalogImage | undefined)?.url,
+    baseUrl,
+  );
+  if (!url) return null;
   const extension = url.match(/\.(jpe?g|webp|avif|png)(?:[?#]|$)/i)?.[1]?.toLowerCase();
   const mimeType = extension === "png"
     ? "image/png"
@@ -63,18 +73,23 @@ function remoteImage(url: string): CatalogImage {
       : extension === "avif"
         ? "image/avif"
         : "image/jpeg";
-  return { id: "", url, objectKey: "", size: 0, checksum: "", mimeType };
+  return {
+    id: "",
+    url,
+    objectKey: "",
+    checksum: "",
+    size: 0,
+    mimeType,
+  };
 }
 
-function uniqueImages(images: CatalogImage[], limit: number, allowRemoteAuctionFallback = false) {
+function uniqueExternalImages(values: unknown[], baseUrl: string, limit: number) {
   const result: CatalogImage[] = [];
   const seen = new Set<string>();
-  for (const image of images) {
-    const id = imageKey(image);
-    const cached = Number(image.size || 0) > 8_000;
-    const safeRemote = allowRemoteAuctionFallback && isSafeRemoteAuctionImage(image);
-    if (!id || seen.has(id) || (!cached && !safeRemote)) continue;
-    seen.add(id);
+  for (const value of values) {
+    const image = externalImage(value, baseUrl);
+    if (!image || seen.has(image.url)) continue;
+    seen.add(image.url);
     result.push(image);
     if (result.length >= limit) break;
   }
@@ -82,72 +97,39 @@ function uniqueImages(images: CatalogImage[], limit: number, allowRemoteAuctionF
 }
 
 export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
-  const original = source.fetchImages.bind(source);
+  const original = source.fetchImages?.bind(source);
   source.fetchImages = async (offer: VehicleOffer) => {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
-    const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
-    const minimum = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-    const configuredFastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
-    const catalogV2FastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_V2_SOURCE_SLOTS_ONLY || ""));
-    const fastPath = configuredFastPath || catalogV2FastPath;
-    const sourceNativeUrls = rawGalleryUrls(offer);
-    const genericOpenSource = source.sourceId.endsWith("_open");
-    const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
-    const japanAuctionRemoteFallback = offer.market === "japan"
-      && offer.offerType === "auction"
-      && /(?:jpauc|auctiondatasearch|auctions22|carvector|prestige|japantransit)/i.test(source.sourceId);
-
-    // Сначала сохраняем только фотографии, уже находящиеся внутри конкретной карточки
-    // выдачи. Для Catalog V2 это основной путь: он не открывает detail-страницу, если
-    // карточка уже дала минимум одну проверенную фотографию именно этого автомобиля.
-    const listingImages: CatalogImage[] = [];
-    for (const url of sourceNativeUrls.slice(0, limit * 2)) {
-      const image = await cacheImageFromUrl(url, offer.market, {
-        headers: sourceUrl ? { referer: sourceUrl } : undefined,
-      }).catch(() => null);
-      if (image && Number(image.size || 0) > 8_000) listingImages.push(image);
-      if (listingImages.length >= limit) break;
-    }
-    const remoteListingImages = japanAuctionRemoteFallback ? sourceNativeUrls.map(remoteImage) : [];
-    const listingResult = uniqueImages(
-      [...listingImages, ...remoteListingImages],
+    const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
+    const minimum = Math.min(
       limit,
-      japanAuctionRemoteFallback,
+      Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)),
     );
-    if (fastPath && listingResult.length >= minimum) {
-      (offer.operational as any).galleryVerified = true;
-      (offer.operational as any).gallerySourceImageCount = Math.max(sourceNativeUrls.length, listingResult.length);
-      (offer.operational as any).galleryImageCount = listingResult.length;
-      (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-      (offer.operational as any).gallerySafetyMode = japanAuctionRemoteFallback
-        ? "auction_listing_remote_fallback"
-        : genericOpenSource ? "listing_bound" : "source_exact";
-      return listingResult;
+    const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
+
+    const listingUrls = sourceGalleryUrls(offer);
+    let detailed: CatalogImage[] = [];
+    if (listingUrls.length < limit && original) {
+      detailed = await original(offer).catch(() => [] as CatalogImage[]);
     }
 
-    // Универсальные HTML-адаптеры не имеют надёжного селектора галереи. Если на странице
-    // есть блоки похожих машин, общий сбор img способен примешать чужие фотографии.
-    const safeLimit = genericOpenSource
-      ? Math.min(limit, Math.max(1, sourceNativeUrls.length || (japanAuctionRemoteFallback ? limit : 0)))
-      : limit;
-    const detailed = await original(offer).catch(() => [] as CatalogImage[]);
-    const result = uniqueImages(
-      [...listingResult, ...detailed],
-      safeLimit,
-      japanAuctionRemoteFallback,
+    const result = uniqueExternalImages(
+      [...listingUrls, ...detailed],
+      sourceUrl,
+      limit,
     );
-    const verified = result.length >= minimum
-      && (!genericOpenSource || japanAuctionRemoteFallback || sourceNativeUrls.length >= result.length);
+    const verified = result.length >= minimum;
 
-    (offer.operational as any).galleryVerified = verified;
-    (offer.operational as any).gallerySourceImageCount = japanAuctionRemoteFallback
-      ? Math.max(sourceNativeUrls.length, result.length)
-      : sourceNativeUrls.length;
-    (offer.operational as any).galleryImageCount = result.length;
-    (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-    (offer.operational as any).gallerySafetyMode = japanAuctionRemoteFallback
-      ? "auction_source_remote_fallback"
-      : genericOpenSource ? "listing_bound" : "source_exact";
+    offer.operational = {
+      ...(offer.operational || {}),
+      galleryVerified: verified,
+      gallerySourceImageCount: listingUrls.length,
+      galleryImageCount: result.length,
+      galleryRefreshedAt: new Date().toISOString(),
+      gallerySafetyMode: "source_urls_only",
+      galleryStoredAs: "json_urls",
+    } as any;
+
     return verified ? result : [];
   };
   return source;
