@@ -1,4 +1,12 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
+
+process.env.CATALOG_RAW_LISTING_MODE = "1";
+process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
+process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
+process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
+process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
@@ -10,49 +18,41 @@ const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 30_000)));
 const output = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-0.json`;
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 10_000));
-const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 30));
+const maxNoProgressPages = Math.max(3, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 50));
 const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 4)));
-const detailConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 12)));
-const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 4_500_000));
-const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
-const galleryTimeoutMs = Math.max(3_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 12_000));
+const detailConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 16)));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 10_800_000));
+const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
+const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 30_000));
 const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
-const deadline = Date.now() + timeLimitMs;
 const currentYear = new Date().getFullYear();
+const priorityYear = currentYear - 6;
+const deadline = Date.now() + timeLimitMs;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 
 if (!market) throw new Error("catalog_market_missing");
-process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
-process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
-process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
 
 const adapterById = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
 const requiredSourceIds = requiredCatalogSourceIds(market);
-const missingRequiredSourceIds = requiredSourceIds.filter((sourceId) => !adapterById.has(sourceId));
-if (missingRequiredSourceIds.length) {
-  throw new Error(`catalog_required_sources_missing:${market}:${missingRequiredSourceIds.join(",")}`);
-}
-
 const plannedSourceIds = [
   ...requiredSourceIds,
   ...catalogV2SourceIds(market).filter((sourceId) => !requiredSourceIds.includes(sourceId)),
 ];
-const sources = [...new Set(plannedSourceIds)]
-  .map((sourceId) => adapterById.get(sourceId))
-  .filter(Boolean);
-if (!sources.length) throw new Error(`catalog_sources_missing:${market}`);
+const missingRequiredSourceIds = requiredSourceIds.filter((sourceId) => !adapterById.has(sourceId));
+const sources = [...new Set(plannedSourceIds)].map((sourceId) => adapterById.get(sourceId)).filter(Boolean);
 
 const offers = new Map();
 const sourceReports = [];
-const errors = [];
+const errors = missingRequiredSourceIds.map((sourceId) => ({ sourceId, stage: "adapter", error: "required_adapter_missing" }));
 let pages = 0;
 let seen = 0;
 let normalized = 0;
-let imageDetails = 0;
+let details = 0;
 let rejectedCore = 0;
 let rejectedImages = 0;
 
 function expired() { return Date.now() >= deadline; }
+function clean(value) { return String(value ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(); }
 function withTimeout(promise, ms, label) {
   let timer;
   return Promise.race([
@@ -60,28 +60,78 @@ function withTimeout(promise, ms, label) {
     new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(label)), ms); }),
   ]).finally(() => clearTimeout(timer));
 }
-function imageKey(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
-function images(rows) {
-  const unique = new Map();
-  for (const image of credibleCatalogImages(Array.isArray(rows) ? rows : [])) {
-    const key = imageKey(image);
-    if (key && !unique.has(key)) unique.set(key, image);
-    if (unique.size >= 30) break;
+function deepTitle(value, depth = 0) {
+  if (value == null || depth > 8 || typeof value !== "object") return "";
+  if (Array.isArray(value)) {
+    for (const item of value) { const title = deepTitle(item, depth + 1); if (title) return title; }
+    return "";
   }
-  return [...unique.values()];
+  for (const key of ["title", "Title", "name", "Name", "heading", "vehicleName", "carName", "displayName", "modelName"]) {
+    const title = clean(value[key]);
+    if (title.length >= 2 && title.length <= 180) return title;
+  }
+  for (const child of Object.values(value)) { const title = deepTitle(child, depth + 1); if (title) return title; }
+  return "";
+}
+function offerTitle(offer) {
+  return clean(
+    offer?.sourceTitle
+      || offer?.operational?.sourceTitle
+      || deepTitle(offer?.operational?.raw)
+      || [offer?.make, offer?.model, offer?.trim].filter(Boolean).join(" "),
+  ).slice(0, 180);
+}
+function modelParts(offer, title) {
+  const make = clean(offer?.make);
+  const model = clean(offer?.model);
+  if (make && model) return { make, model };
+  const tokens = title.split(/\s+/).filter(Boolean);
+  if (!tokens.length) return { make: "Автомобиль", model: String(offer?.sourceOfferId || "") };
+  return {
+    make: make || tokens[0],
+    model: model || tokens.slice(make ? 0 : 1).join(" ").slice(0, 120) || tokens[0],
+  };
 }
 function validCore(offer) {
   const year = Number(offer?.year || 0);
+  const title = offerTitle(offer);
   return Boolean(
-    offer?.id && offer?.sourceId && offer?.make && offer?.model
-    && year >= 2011 && year <= currentYear + 1
-    && Number(offer?.sourcePrice || 0) > 0
-    && String(offer?.sourceCurrency || "").trim()
-    && String(offer?.operational?.sourceUrl || "").trim()
-    && !commercial.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)
+    offer?.id
+      && offer?.sourceId
+      && offer?.sourceOfferId
+      && title
+      && year >= 2011
+      && year <= currentYear + 1
+      && Number(offer?.sourcePrice || 0) > 0
+      && clean(offer?.sourceCurrency)
+      && /^https?:\/\//i.test(clean(offer?.operational?.sourceUrl))
+      && !commercial.test(title),
   );
 }
+function imageId(url) { return crypto.createHash("sha256").update(url).digest("hex").slice(0, 24); }
+function normalizeImages(rows) {
+  const result = [];
+  const seenUrls = new Set();
+  for (const image of credibleCatalogImages(Array.isArray(rows) ? rows : [])) {
+    const url = clean(image?.url);
+    if (!/^https?:\/\//i.test(url) || url.includes("/api/catalog/images/") || seenUrls.has(url)) continue;
+    seenUrls.add(url);
+    result.push({
+      id: imageId(url),
+      url,
+      objectKey: "",
+      checksum: "",
+      size: 0,
+      mimeType: clean(image?.mimeType) || "image/jpeg",
+      ...(Number(image?.width) > 0 ? { width: Number(image.width) } : {}),
+      ...(Number(image?.height) > 0 ? { height: Number(image.height) } : {}),
+    });
+    if (result.length >= 30) break;
+  }
+  return result;
+}
 async function pool(rows, limit, worker) {
+  if (!rows.length) return;
   let index = 0;
   await Promise.all(Array.from({ length: Math.min(limit, rows.length) }, async () => {
     while (true) {
@@ -91,11 +141,23 @@ async function pool(rows, limit, worker) {
     }
   }));
 }
+function orderedOffers() {
+  return [...offers.values()]
+    .sort((left, right) => {
+      const recentLeft = Number(left.year || 0) >= priorityYear ? 1 : 0;
+      const recentRight = Number(right.year || 0) >= priorityYear ? 1 : 0;
+      return recentRight - recentLeft
+        || Number(right.year || 0) - Number(left.year || 0)
+        || Number(right.images?.length || 0) - Number(left.images?.length || 0)
+        || String(right.updatedAt || "").localeCompare(String(left.updatedAt || ""));
+    })
+    .slice(0, target);
+}
 async function checkpoint(reason = "collecting") {
-  const rows = [...offers.values()].slice(0, target);
+  const rows = orderedOffers();
   const payload = {
-    version: 4,
-    mode: "listing_first_2011_plus_no_knowledge_source_image_urls",
+    version: 5,
+    mode: "raw_listing_title_year_price_gallery",
     market,
     generatedAt: new Date().toISOString(),
     count: rows.length,
@@ -104,16 +166,18 @@ async function checkpoint(reason = "collecting") {
     report: {
       market,
       target,
+      priorityYear,
       minimumImages,
       imageStorage: "json_source_urls_only",
       requiredSourceIds,
       plannedSourceIds: sources.map((source) => source.sourceId),
+      missingRequiredSourceIds,
       pages,
       seen,
       normalized,
+      details,
       rejectedCore,
       rejectedImages,
-      imageDetails,
       sources: sourceReports,
       errors,
       stopReason: reason,
@@ -124,37 +188,41 @@ async function checkpoint(reason = "collecting") {
   await fs.rename(temporary, output);
 }
 async function prepare(base, source) {
-  const offer = normalizeVehicleOfferSpecs(base);
-  if (!validCore(offer)) {
-    rejectedCore++;
-    return null;
-  }
-  let gallery = images(offer.images);
+  if (!validCore(base)) { rejectedCore++; return null; }
+  let gallery = normalizeImages(base.images);
   if (gallery.length < 30 && source.fetchImages && !expired()) {
     try {
-      const extra = await withTimeout(Promise.resolve(source.fetchImages(offer)), galleryTimeoutMs, "gallery_timeout");
-      gallery = images([...gallery, ...((extra) || [])]);
-      imageDetails++;
+      const extra = await withTimeout(Promise.resolve(source.fetchImages(base)), galleryTimeoutMs, "gallery_timeout");
+      gallery = normalizeImages([...gallery, ...(Array.isArray(extra) ? extra : [])]);
+      details++;
     } catch (error) {
-      errors.push({ sourceId: source.sourceId, offerId: offer.id, stage: "images", error: String(error?.message || error) });
+      errors.push({ sourceId: source.sourceId, offerId: base.id, stage: "gallery", error: String(error?.message || error) });
     }
   }
-  if (gallery.length < minimumImages) {
-    rejectedImages++;
-    return null;
-  }
+  if (gallery.length < minimumImages) { rejectedImages++; return null; }
+  const title = offerTitle(base);
+  const { make, model } = modelParts(base, title);
   const now = new Date().toISOString();
   return normalizeVehicleOfferSpecs({
-    ...offer,
+    ...base,
+    sourceTitle: title,
+    make,
+    model,
     status: "active",
-    images: gallery.slice(0, 30),
+    images: gallery,
+    totalRub: null,
+    calculationSnapshot: undefined,
+    calculationStatus: "needs_knowledge",
     updatedAt: now,
+    firstSeenAt: base.firstSeenAt || now,
     operational: {
-      ...offer.operational,
-      listingFirstImportedAt: now,
+      ...(base.operational || {}),
+      sourceTitle: title,
+      rawListingImportedAt: now,
       galleryImageCount: gallery.length,
       galleryStoredAs: "json_urls",
       knowledgeEnriched: false,
+      rawListingMode: true,
     },
   });
 }
@@ -163,13 +231,12 @@ async function collectSource(source) {
   let sourcePages = 0;
   let sourceSeen = 0;
   let sourceNormalized = 0;
-  let sourcePassedCore = 0;
   let sourceSaved = 0;
-  let emptyPages = 0;
+  let noProgressPages = 0;
   let stopReason = "finished";
   const seenCursors = new Set();
   try {
-    while (!expired() && offers.size < target && sourcePages < maxPagesPerSource && emptyPages < maxEmptyPages) {
+    while (!expired() && offers.size < target && sourcePages < maxPagesPerSource && noProgressPages < maxNoProgressPages) {
       const cursorKey = JSON.stringify(cursor ?? "first");
       if (seenCursors.has(cursorKey)) { stopReason = "cursor_loop"; break; }
       seenCursors.add(cursorKey);
@@ -180,33 +247,40 @@ async function collectSource(source) {
       const bases = [];
       for (const raw of rawRows) {
         let base = null;
-        try { base = source.normalizeOffer(raw); } catch {}
-        if (!base?.id || offers.has(base.id)) continue;
-        normalized++;
-        sourceNormalized++;
-        if (validCore(base)) {
-          bases.push(base);
-          sourcePassedCore++;
-        } else {
-          rejectedCore++;
+        try { base = source.normalizeOffer(raw); } catch (error) {
+          errors.push({ sourceId: source.sourceId, stage: "normalize", error: String(error?.message || error) });
         }
+        if (!base?.id || offers.has(base.id)) continue;
+        normalized++; sourceNormalized++;
+        if (validCore(base)) bases.push(base); else rejectedCore++;
       }
+      bases.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0));
       const before = offers.size;
       await pool(bases, detailConcurrency, async (base) => {
         if (expired() || offers.size >= target || offers.has(base.id)) return;
         const offer = await prepare(base, source);
         if (offer && !offers.has(offer.id)) { offers.set(offer.id, offer); sourceSaved++; }
       });
-      emptyPages = offers.size === before ? emptyPages + 1 : 0;
+      noProgressPages = offers.size === before ? noProgressPages + 1 : 0;
       await checkpoint("page_complete");
-      console.log(JSON.stringify({ market, sourceId: source.sourceId, required: requiredSourceIds.includes(source.sourceId), sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, rejectedImages, total: offers.size }));
+      console.log(JSON.stringify({
+        market,
+        sourceId: source.sourceId,
+        required: requiredSourceIds.includes(source.sourceId),
+        pages: sourcePages,
+        seen: sourceSeen,
+        normalized: sourceNormalized,
+        saved: sourceSaved,
+        total: offers.size,
+        rejectedImages,
+      }));
       cursor = page?.nextCursor || null;
       if (!cursor || page?.finished) break;
     }
     if (expired()) stopReason = "deadline";
     else if (offers.size >= target) stopReason = "market_target_reached";
     else if (sourcePages >= maxPagesPerSource) stopReason = "page_limit";
-    else if (emptyPages >= maxEmptyPages) stopReason = "no_progress";
+    else if (noProgressPages >= maxNoProgressPages) stopReason = "no_progress";
   } catch (error) {
     stopReason = String(error?.message || error).includes("timeout") ? "timeout" : "source_error";
     errors.push({ sourceId: source.sourceId, stage: "list", error: String(error?.message || error) });
@@ -217,7 +291,6 @@ async function collectSource(source) {
     pages: sourcePages,
     seen: sourceSeen,
     normalized: sourceNormalized,
-    passedCore: sourcePassedCore,
     saved: sourceSaved,
     stopReason,
   });
@@ -225,21 +298,22 @@ async function collectSource(source) {
 }
 
 await checkpoint("started");
-await pool(sources, sourceConcurrency, collectSource);
+if (sources.length) await pool(sources, sourceConcurrency, collectSource);
 await checkpoint(expired() ? "deadline" : offers.size >= target ? "market_target_reached" : "sources_exhausted");
 console.log(JSON.stringify({
   market,
+  count: orderedOffers().length,
+  target,
+  priorityYear,
+  minimumImages,
   requiredSourceIds,
   activeSources: sources.map((source) => source.sourceId),
-  count: offers.size,
-  target,
-  minimumImages,
-  imageStorage: "json_source_urls_only",
+  missingRequiredSourceIds,
   pages,
   seen,
   normalized,
+  details,
   rejectedCore,
   rejectedImages,
-  imageDetails,
   errors: errors.length,
 }, null, 2));
