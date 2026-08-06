@@ -4,14 +4,26 @@ const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 
+const APPROVED_SOURCE_IDS = {
+  korea: ["encar_direct", "kcar_korea_open"],
+  japan: ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"],
+  china: ["autohome_used_china_open", "dongchedi_china_open", "guazi_china_open", "autohome_new_china_open"],
+  uae: ["dubizzle_uae_open", "dubicars_uae_exact"],
+  europe: ["mobile_de_open", "autoscout_europe_open"],
+  georgia: ["myauto_georgia_list", "autopapa_georgia_open"],
+  kyrgyzstan: ["mashina_kyrgyzstan_exact"],
+};
+
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 30_000)));
 const output = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-0.json`;
 const maxPagesPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_PAGES_PER_SOURCE || 10_000));
 const maxEmptyPages = Math.max(1, Number(process.env.CATALOG_REBUILD_MAX_EMPTY_PAGES || 30));
-const sourceConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 8)));
-const detailConcurrency = Math.max(1, Math.min(30, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 20)));
-const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 4_800_000));
+const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 4)));
+const detailConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 12)));
+const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 4_500_000));
+const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
+const galleryTimeoutMs = Math.max(3_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 12_000));
 const deadline = Date.now() + timeLimitMs;
 const currentYear = new Date().getFullYear();
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
@@ -20,7 +32,10 @@ if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "1";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
 
-const sources = catalogImportSources.filter((source) => source.market === market || source.market === "multi");
+const approved = new Set(APPROVED_SOURCE_IDS[market] || []);
+const sources = catalogImportSources.filter((source) => approved.has(source.sourceId));
+if (!sources.length) throw new Error(`catalog_approved_sources_missing:${market}`);
+
 const offers = new Map();
 const sourceReports = [];
 const errors = [];
@@ -30,6 +45,13 @@ let normalized = 0;
 let imageDetails = 0;
 
 function expired() { return Date.now() >= deadline; }
+function withTimeout(promise, ms, label) {
+  let timer;
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(label)), ms); }),
+  ]).finally(() => clearTimeout(timer));
+}
 function imageKey(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
 function images(rows) {
   const unique = new Map();
@@ -64,7 +86,7 @@ async function pool(rows, limit, worker) {
 async function checkpoint(reason = "collecting") {
   const rows = [...offers.values()].slice(0, target);
   const payload = {
-    version: 1,
+    version: 2,
     mode: "listing_first_2011_plus",
     market,
     generatedAt: new Date().toISOString(),
@@ -78,12 +100,13 @@ async function checkpoint(reason = "collecting") {
   await fs.rename(temporary, output);
 }
 async function prepare(base, source) {
-  let offer = normalizeVehicleOfferSpecs(base);
+  const offer = normalizeVehicleOfferSpecs(base);
   if (!validCore(offer)) return null;
   let gallery = images(offer.images);
   if (gallery.length < 30 && source.fetchImages && !expired()) {
     try {
-      gallery = images([...gallery, ...((await source.fetchImages(offer)) || [])]);
+      const extra = await withTimeout(Promise.resolve(source.fetchImages(offer)), galleryTimeoutMs, "gallery_timeout");
+      gallery = images([...gallery, ...((extra) || [])]);
       imageDetails++;
     } catch (error) {
       errors.push({ sourceId: source.sourceId, offerId: offer.id, stage: "images", error: String(error?.message || error) });
@@ -112,7 +135,7 @@ async function collectSource(source) {
       const cursorKey = JSON.stringify(cursor ?? "first");
       if (seenCursors.has(cursorKey)) { stopReason = "cursor_loop"; break; }
       seenCursors.add(cursorKey);
-      const page = await source.fetchPage(cursor);
+      const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), requestTimeoutMs, "page_timeout");
       sourcePages++; pages++;
       const rawRows = Array.isArray(page?.items) ? page.items : [];
       sourceSeen += rawRows.length; seen += rawRows.length;
@@ -131,7 +154,8 @@ async function collectSource(source) {
         if (offer && !offers.has(offer.id)) { offers.set(offer.id, offer); sourceSaved++; }
       });
       emptyPages = offers.size === before ? emptyPages + 1 : 0;
-      if (pages % 10 === 0 || offers.size >= target) await checkpoint("collecting");
+      await checkpoint("page_complete");
+      console.log(JSON.stringify({ market, sourceId: source.sourceId, sourcePages, seen: sourceSeen, saved: sourceSaved, total: offers.size }));
       cursor = page?.nextCursor || null;
       if (!cursor || page?.finished) break;
     }
@@ -140,12 +164,14 @@ async function collectSource(source) {
     else if (sourcePages >= maxPagesPerSource) stopReason = "page_limit";
     else if (emptyPages >= maxEmptyPages) stopReason = "no_progress";
   } catch (error) {
-    stopReason = "source_error";
+    stopReason = String(error?.message || error).includes("timeout") ? "timeout" : "source_error";
     errors.push({ sourceId: source.sourceId, stage: "list", error: String(error?.message || error) });
   }
   sourceReports.push({ sourceId: source.sourceId, pages: sourcePages, seen: sourceSeen, saved: sourceSaved, stopReason });
+  await checkpoint("source_complete");
 }
 
+await checkpoint("started");
 await pool(sources, sourceConcurrency, collectSource);
 await checkpoint(expired() ? "deadline" : offers.size >= target ? "market_target_reached" : "sources_exhausted");
-console.log(JSON.stringify({ market, sources: sources.length, count: offers.size, target, pages, seen, normalized, imageDetails, errors: errors.length }, null, 2));
+console.log(JSON.stringify({ market, approvedSources: [...approved], activeSources: sources.map((source) => source.sourceId), count: offers.size, target, pages, seen, normalized, imageDetails, errors: errors.length }, null, 2));
