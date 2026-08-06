@@ -1,0 +1,87 @@
+name: Catalog V5 · certify 18 required sources
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v5-certify-required-sources.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v5-required-source-certification
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    name: ${{ matrix.market }} · ${{ matrix.source_id }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - market: uae
+            source_id: dubizzle_uae_open
+          - market: uae
+            source_id: dubicars_uae_exact
+          - market: korea
+            source_id: encar_direct
+          - market: korea
+            source_id: kcar_korea_open
+          - market: europe
+            source_id: mobile_de_open
+          - market: europe
+            source_id: autoscout_europe_open
+          - market: georgia
+            source_id: myauto_georgia_list
+          - market: georgia
+            source_id: autopapa_georgia_open
+          - market: china
+            source_id: autohome_used_china_open
+          - market: china
+            source_id: dongchedi_china_open
+          - market: china
+            source_id: guazi_china_open
+          - market: china
+            source_id: autohome_new_china_open
+          - market: japan
+            source_id: jpauc_japan_past_open
+          - market: japan
+            source_id: carvector_japan_stat_open
+          - market: japan
+            source_id: prestige_japan_auctions_open
+          - market: japan
+            source_id: auctiondatasearch_japan_open
+          - market: japan
+            source_id: jpcenter_japan_catalog_open
+          - market: kyrgyzstan
+            source_id: mashina_kyrgyzstan_exact
+    env:
+      CATALOG_CERTIFY_MARKET: ${{ matrix.market }}
+      CATALOG_CERTIFY_SOURCE_ID: ${{ matrix.source_id }}
+      CATALOG_CERTIFY_OUTPUT: catalog-certify-${{ matrix.market }}-${{ matrix.source_id }}.json
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Certify one real source card
+        run: npx tsx scripts/catalog-certify-required-source.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: certify-${{ matrix.market }}-${{ matrix.source_id }}
+          path: catalog-certify-${{ matrix.market }}-${{ matrix.source_id }}.json
+          if-no-files-found: warn
+          retention-days: 3
