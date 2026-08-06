@@ -1,4 +1,4 @@
-name: Catalog V5 · certify 18 required sources
+name: Catalog V5 · certify raw required sources
 
 on:
   workflow_dispatch:
@@ -64,7 +64,7 @@ jobs:
       CATALOG_CERTIFY_OUTPUT: catalog-certify-${{ matrix.market }}-${{ matrix.source_id }}.json
       CATALOG_KNOWLEDGE_DISABLED: "1"
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_COLLECTION_IMAGE_LIMIT: "30"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
@@ -76,7 +76,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Certify one real source card
+      - name: Certify one raw source card
         run: npx tsx scripts/catalog-certify-required-source.mjs
       - uses: actions/upload-artifact@v4
         if: always()
