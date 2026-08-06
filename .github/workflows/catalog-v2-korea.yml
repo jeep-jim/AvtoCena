@@ -11,8 +11,8 @@ on:
       - .github/workflows/catalog-v2-korea.yml
 
 # Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
-# Full rerun uses strict positive source price/currency, verified 1–30 photos, and collects one real image first for throughput.
-# Continue marker: accumulate-next-Encar-cursor-2026-08-06-0642.
+# Full rerun keeps strict publication checks while allowing verified recent/extended cards to accumulate after the first priority card.
+# Continue marker: accumulation-deadlock-fixed-2026-08-06-0844.
 permissions:
   contents: read
 
