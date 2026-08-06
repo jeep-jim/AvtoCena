@@ -33,6 +33,7 @@ export type VehicleOffer = {
   catalogKind?: CatalogKind;
   auctionResult?: AuctionResult;
   auctionPriceKind?: AuctionPriceKind;
+  sourceTitle?: string;
   make: string;
   model: string;
   generation?: string;
@@ -79,6 +80,7 @@ export type VehicleOffer = {
     sourceUrl?: string;
     sourceVenueName?: string;
     sourcePublishedAt?: string;
+    sourceTitle?: string;
     raw?: unknown;
     vin?: string;
     frameNumber?: string;
