@@ -1,5 +1,5 @@
-name: Stop legacy Korea catalog run
-run-name: Stop legacy Korea catalog run · ${{ github.sha }}
+name: Cancel legacy Korea catalog runs
+run-name: Cancel legacy Korea catalog runs · ${{ github.sha }}
 
 on:
   push:
@@ -8,14 +8,26 @@ on:
       - .github/workflows/catalog-v2-korea.yml
 
 permissions:
+  actions: write
   contents: read
 
-concurrency:
-  group: catalog-v3-market-korea
-  cancel-in-progress: true
-
 jobs:
-  stop:
+  cancel:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Legacy Korea catalog run cancelled by concurrency replacement."
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const runIds = [31077850761, 31082481746];
+            for (const run_id of runIds) {
+              try {
+                await github.rest.actions.cancelWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id,
+                });
+                core.notice(`Cancellation requested for run ${run_id}`);
+              } catch (error) {
+                core.notice(`Run ${run_id}: ${error?.message || String(error)}`);
+              }
+            }
