@@ -16,12 +16,13 @@ const detailConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_IM
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 4_500_000));
 const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
 const galleryTimeoutMs = Math.max(3_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 12_000));
+const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const deadline = Date.now() + timeLimitMs;
 const currentYear = new Date().getFullYear();
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 
 if (!market) throw new Error("catalog_market_missing");
-process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "1";
+process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
 process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
 
@@ -32,8 +33,6 @@ if (missingRequiredSourceIds.length) {
   throw new Error(`catalog_required_sources_missing:${market}:${missingRequiredSourceIds.join(",")}`);
 }
 
-// Every approved source is always included first. Extra registered sources may add
-// volume, but never replace or hide one of the mandatory owner-approved sites.
 const plannedSourceIds = [
   ...requiredSourceIds,
   ...catalogV2SourceIds(market).filter((sourceId) => !requiredSourceIds.includes(sourceId)),
@@ -51,7 +50,7 @@ let seen = 0;
 let normalized = 0;
 let imageDetails = 0;
 let rejectedCore = 0;
-let savedWithoutImages = 0;
+let rejectedImages = 0;
 
 function expired() { return Date.now() >= deadline; }
 function withTimeout(promise, ms, label) {
@@ -95,8 +94,8 @@ async function pool(rows, limit, worker) {
 async function checkpoint(reason = "collecting") {
   const rows = [...offers.values()].slice(0, target);
   const payload = {
-    version: 3,
-    mode: "listing_first_2011_plus_no_knowledge",
+    version: 4,
+    mode: "listing_first_2011_plus_no_knowledge_source_image_urls",
     market,
     generatedAt: new Date().toISOString(),
     count: rows.length,
@@ -105,13 +104,15 @@ async function checkpoint(reason = "collecting") {
     report: {
       market,
       target,
+      minimumImages,
+      imageStorage: "json_source_urls_only",
       requiredSourceIds,
       plannedSourceIds: sources.map((source) => source.sourceId),
       pages,
       seen,
       normalized,
       rejectedCore,
-      savedWithoutImages,
+      rejectedImages,
       imageDetails,
       sources: sourceReports,
       errors,
@@ -138,7 +139,10 @@ async function prepare(base, source) {
       errors.push({ sourceId: source.sourceId, offerId: offer.id, stage: "images", error: String(error?.message || error) });
     }
   }
-  if (!gallery.length) savedWithoutImages++;
+  if (gallery.length < minimumImages) {
+    rejectedImages++;
+    return null;
+  }
   const now = new Date().toISOString();
   return normalizeVehicleOfferSpecs({
     ...offer,
@@ -149,6 +153,7 @@ async function prepare(base, source) {
       ...offer.operational,
       listingFirstImportedAt: now,
       galleryImageCount: gallery.length,
+      galleryStoredAs: "json_urls",
       knowledgeEnriched: false,
     },
   });
@@ -194,7 +199,7 @@ async function collectSource(source) {
       });
       emptyPages = offers.size === before ? emptyPages + 1 : 0;
       await checkpoint("page_complete");
-      console.log(JSON.stringify({ market, sourceId: source.sourceId, required: requiredSourceIds.includes(source.sourceId), sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, total: offers.size }));
+      console.log(JSON.stringify({ market, sourceId: source.sourceId, required: requiredSourceIds.includes(source.sourceId), sourcePages, seen: sourceSeen, normalized: sourceNormalized, passedCore: sourcePassedCore, saved: sourceSaved, rejectedImages, total: offers.size }));
       cursor = page?.nextCursor || null;
       if (!cursor || page?.finished) break;
     }
@@ -228,11 +233,13 @@ console.log(JSON.stringify({
   activeSources: sources.map((source) => source.sourceId),
   count: offers.size,
   target,
+  minimumImages,
+  imageStorage: "json_source_urls_only",
   pages,
   seen,
   normalized,
   rejectedCore,
-  savedWithoutImages,
+  rejectedImages,
   imageDetails,
   errors: errors.length,
 }, null, 2));
