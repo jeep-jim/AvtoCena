@@ -15,7 +15,7 @@ const jpegPhoto = {
 };
 
 const sourcePhoto = (index: number) => ({
-  id: "",
+  id: `source-photo-${index}`,
   url: `https://car-photo-source.example/listing-100/photo-${index}.jpg`,
   objectKey: "",
   width: 1280,
@@ -36,19 +36,21 @@ const squareWrenchIcon = {
   mimeType: "image/png",
 };
 
-const completeOffer = {
+const rawOffer = {
   id: "public-card",
+  sourceId: "encar_direct",
+  sourceOfferId: "100",
   market: "korea",
   offerType: "fixed",
   status: "active",
+  sourceTitle: "Kia Sportage 2022",
   make: "Kia",
   model: "Sportage",
   year: 2022,
-  mileageKm: 48_000,
   sourcePrice: 24_000_000,
   sourceCurrency: "KRW",
-  totalRub: 2_850_000,
-  calculationStatus: "ready",
+  totalRub: null,
+  calculationStatus: "needs_knowledge",
   images: Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1)),
 };
 
@@ -84,19 +86,19 @@ test("removes repeated images with the same checksum", () => {
 });
 
 test("rejects four photos and accepts five photos", () => {
-  assert.equal(isCrediblePublicOffer({ ...completeOffer, images: completeOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(completeOffer as any), true);
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
 });
 
-test("rejects price-on-request and unfinished calculation", () => {
-  assert.equal(isCrediblePublicOffer({ ...completeOffer, totalRub: 0 } as any), false);
-  assert.equal(isCrediblePublicOffer({ ...completeOffer, calculationStatus: "needs_data" } as any), false);
-  assert.equal(isCrediblePublicOffer({ ...completeOffer, calculationStatus: "needs_power" } as any), false);
+test("accepts raw source price without knowledge calculation", () => {
+  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, sourcePrice: 0 } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, sourceCurrency: "" } as any), false);
 });
 
-test("rejects an advertising payment string used as a model name", () => {
+test("rejects an advertising payment string used as the source title", () => {
   assert.equal(isCrediblePublicOffer({
-    ...completeOffer,
-    model: "Corolla XLI 2023 AED 718/Month 0 DP 30 Day Return Warranty",
+    ...rawOffer,
+    sourceTitle: "Corolla XLI 2023 AED 718/Month 0 DP 30 Day Return Warranty",
   } as any), false);
 });
