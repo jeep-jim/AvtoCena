@@ -47,7 +47,9 @@ import {
   PUBLIC_CATALOG_MARKETS,
 } from "./runtime-config";
 
-if (process.env.CATALOG_REBUILD_MARKET) {
+const rawListingMode = process.env.CATALOG_RAW_LISTING_MODE === "1";
+
+if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
   process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
   process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
   process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
@@ -57,8 +59,6 @@ if (process.env.CATALOG_REBUILD_MARKET) {
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 
-// Generic and additional sources remain available for future certified coverage.
-// Exact/listing-bound adapters are registered last so they replace broad parsers.
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
@@ -89,11 +89,12 @@ const requiredSourceIds = new Set(
   Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId),
 );
 
-// Mandatory sources never use the old binary-image path. Encar has its own strict
-// public JSON detail adapter; every other mandatory site uses the source page only.
+// Raw collection never uses binary image caching. In raw mode all sources use the
+// listing detail page and return external URLs only. Encar keeps its dedicated API adapter.
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
-  if (!requiredSourceIds.has(source.sourceId) || source.sourceId === "encar_direct") continue;
+  const mustBeStrict = rawListingMode || requiredSourceIds.has(source.sourceId);
+  if (!mustBeStrict || source.sourceId === "encar_direct") continue;
   catalogImportSources[index] = strictSourceDetail(source);
 }
 
