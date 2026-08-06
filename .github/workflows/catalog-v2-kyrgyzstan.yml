@@ -5,7 +5,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "25 3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/catalog-v2-kyrgyzstan.yml
 
+# Recovery marker: guarded-publication-2026-08-06.
 permissions:
   contents: read
 
