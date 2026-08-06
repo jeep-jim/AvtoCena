@@ -1,14 +1,7 @@
-name: Diagnose Catalog V2
+name: Diagnose Catalog V2 (manual only)
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Catalog V2 production"]
-    types: [completed]
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-diagnose-last-failure.yml
 
 permissions:
   actions: read
@@ -17,7 +10,7 @@ permissions:
 
 jobs:
   diagnose:
-    name: Inspect completed Catalog V2 production workflow
+    name: Inspect latest Catalog V2 production workflow
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -32,19 +25,15 @@ jobs:
             const issueNumber = Number(process.env.TELEMETRY_ISSUE);
             const marker = '<!-- catalog-last-failure -->';
             const workflowId = 'catalog-v2-production.yml';
-            const workflowName = 'Catalog V2 production';
 
-            let run = context.payload.workflow_run;
-            if (!run || run.name !== workflowName) {
-              const { data } = await github.rest.actions.listWorkflowRuns({
-                owner,
-                repo,
-                workflow_id: workflowId,
-                branch: 'main',
-                per_page: 20,
-              });
-              run = data.workflow_runs[0];
-            }
+            const { data } = await github.rest.actions.listWorkflowRuns({
+              owner,
+              repo,
+              workflow_id: workflowId,
+              branch: 'main',
+              per_page: 20,
+            });
+            const run = data.workflow_runs[0];
             if (!run) {
               core.notice('No Catalog V2 production run found.');
               return;
