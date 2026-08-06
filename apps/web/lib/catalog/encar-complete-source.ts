@@ -1,8 +1,42 @@
 import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogImage, VehicleOffer } from "./types";
+
+const ENCAR_HEADERS = {
+  accept: "application/json, text/plain, */*",
+  "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+  origin: "https://fem.encar.com",
+  referer: "https://fem.encar.com/",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
+};
 
 function text(value: unknown) {
   return value == null ? "" : String(value).trim().replace(/\\\//g, "/");
+}
+
+function number(value: unknown) {
+  const result = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(result) && result > 0 ? result : undefined;
+}
+
+function deepFind(value: unknown, keys: string[], depth = 0): unknown {
+  if (value == null || depth > 10 || typeof value !== "object") return undefined;
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = deepFind(item, keys, depth + 1);
+      if (found !== undefined && found !== null && text(found)) return found;
+    }
+    return undefined;
+  }
+  const row = value as Record<string, unknown>;
+  for (const key of keys) {
+    if (row[key] !== undefined && row[key] !== null && text(row[key])) return row[key];
+  }
+  for (const child of Object.values(row)) {
+    const found = deepFind(child, keys, depth + 1);
+    if (found !== undefined && found !== null && text(found)) return found;
+  }
+  return undefined;
 }
 
 function imageLike(value: string) {
@@ -60,17 +94,41 @@ function urlImage(url: string): CatalogImage {
   };
 }
 
-function uniqueImages(images: CatalogImage[], limit: number) {
-  const result: CatalogImage[] = [];
-  const seen = new Set<string>();
-  for (const image of images) {
-    const key = String(image.url || image.objectKey || image.id || "").replace(/[?#].*$/, "").toLowerCase();
-    if (!key || seen.has(key)) continue;
-    seen.add(key);
-    result.push(image);
-    if (result.length >= limit) break;
+async function fetchDetail(sourceOfferId: string) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
+  try {
+    const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
+      headers: ENCAR_HEADERS,
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`encar_detail_http_${response.status}`);
+    return await response.json() as any;
+  } finally {
+    clearTimeout(timeout);
   }
-  return result;
+}
+
+function mergeDetail(offer: VehicleOffer, detail: any) {
+  const vehicle = detail?.vehicle || detail?.Vehicle || detail;
+  const merged = normalizeVehicleOfferSpecs({
+    ...offer,
+    engineCc: offer.engineCc || number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"])),
+    powerHp: offer.powerHp || number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"])),
+    fuel: offer.fuel || text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"])),
+    transmission: offer.transmission || text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"])),
+    drive: offer.drive || text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"])),
+    bodyType: offer.bodyType || text(deepFind(vehicle, ["category", "Category", "bodyType", "BodyType", "carType"])),
+    color: offer.color || text(deepFind(vehicle, ["color", "Color", "exteriorColor"])),
+    productionDate: offer.productionDate || text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"])),
+    operational: {
+      ...(offer.operational || {}),
+      raw: { offer: offer.operational?.raw, detail },
+      vin: text(deepFind(vehicle, ["vin", "VIN"])),
+      frameNumber: text(deepFind(vehicle, ["frameNo", "FrameNo", "frameNumber"])),
+    },
+  } as VehicleOffer);
+  Object.assign(offer, merged);
 }
 
 export class EncarCompleteAdapter extends EncarDirectAdapter {
@@ -81,15 +139,10 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const raw: any = offer.operational?.raw || {};
     const listingUrls = uniqueUrls(collectImageValues(raw), limit * 2);
 
-    // Detail is used for source specifications and the full gallery only.
-    // Image bytes are never downloaded or written to AvtoCena storage.
-    const detailed = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
-    const enrichedRaw: any = offer.operational?.raw || {};
-    const detailedUrls = uniqueUrls([
-      ...collectImageValues(enrichedRaw?.detail || enrichedRaw),
-      ...detailed.map((image) => String(image?.url || "")),
-    ], limit * 3);
-    const gallery = uniqueImages([...listingUrls, ...detailedUrls].map(urlImage), limit);
+    const detail = await fetchDetail(String(offer.sourceOfferId || ""));
+    mergeDetail(offer, detail);
+    const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);
+    const gallery = uniqueUrls([...listingUrls, ...detailUrls], limit).map(urlImage);
     const verified = gallery.length >= minimum;
 
     offer.operational = {
