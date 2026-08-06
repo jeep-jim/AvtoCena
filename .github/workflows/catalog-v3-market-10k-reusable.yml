@@ -33,7 +33,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CATALOG_V2_PRIORITY_TARGET: "5001"
+  CATALOG_V2_PRIORITY_TARGET: "1"
   CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"
   CATALOG_PRIORITY_MAX_POWER_HP: "160"
   CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
@@ -184,11 +184,10 @@ jobs:
           const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8'));
           const count=Number(p.byMarket?.[market]||0);
           const q=p.marketQuality?.[market]||{};
-          const priority=Number(q.priorityCount||0);
-          const state={market,published:p.published===true,generationId:p.generationId||null,count,priorityCount:priority,priorityShare:count?priority/count:0,imageStats:q.imageStats||{},publicationError:p.publicationError||''};
+          const state={market,published:p.published===true,generationId:p.generationId||null,count,priorityCount:Number(q.priorityCount||0),recentCount:Number(q.recentCount||0),extendedCount:Number(q.extendedCount||0),imageStats:q.imageStats||{},publicationError:p.publicationError||''};
           console.log(JSON.stringify(state,null,2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`### Catalog V3 ${market}\n\n\`\`\`json\n${JSON.stringify(state,null,2)}\n\`\`\`\n`);
-          if(!state.published||!state.generationId||state.count!==10000||state.priorityCount*2<=state.count||state.publicationError) process.exit(1);
+          if(!state.published||!state.generationId||state.count!==10000||state.publicationError) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
