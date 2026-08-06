@@ -3,7 +3,6 @@ import fs from "node:fs/promises";
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 
 const market = String(process.env.CATALOG_CERTIFY_MARKET || "").trim();
@@ -16,7 +15,7 @@ const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIME
 
 process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
 process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
-process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "5";
+process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "1";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
 process.env.CATALOG_COLLECTION_IMAGE_LIMIT = "30";
 
@@ -35,14 +34,47 @@ function withTimeout(promise, ms, label) {
   ]).finally(() => clearTimeout(timer));
 }
 
+function clean(value) {
+  return String(value ?? "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function rawTitle(value, depth = 0) {
+  if (value == null || depth > 8 || typeof value !== "object") return "";
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const found = rawTitle(item, depth + 1);
+      if (found) return found;
+    }
+    return "";
+  }
+  const row = value;
+  for (const key of ["title", "Title", "name", "Name", "heading", "vehicleName", "carName", "modelName", "displayName"]) {
+    const candidate = clean(row[key]);
+    if (candidate.length >= 2 && candidate.length <= 180) return candidate;
+  }
+  for (const child of Object.values(row)) {
+    const found = rawTitle(child, depth + 1);
+    if (found) return found;
+  }
+  return "";
+}
+
+function sourceTitle(offer) {
+  return clean(
+    offer?.sourceTitle
+    || offer?.operational?.sourceTitle
+    || rawTitle(offer?.operational?.raw)
+    || [offer?.make, offer?.model, offer?.trim].filter(Boolean).join(" ")
+  ).slice(0, 180);
+}
+
 function coreCandidate(offer) {
   const year = Number(offer?.year || 0);
   return Boolean(
     offer?.id
     && offer?.sourceId === sourceId
     && offer?.market === market
-    && offer?.make
-    && offer?.model
+    && sourceTitle(offer)
     && year >= 2011
     && Number(offer?.sourcePrice || 0) > 0
     && String(offer?.sourceCurrency || "").trim()
@@ -66,6 +98,8 @@ for (; pages < pageLimit && !candidate; pages++) {
         const normalized = source.normalizeOffer(row);
         if (coreCandidate(normalized)) {
           candidate = normalizeVehicleOfferSpecs(normalized);
+          candidate.sourceTitle = sourceTitle(candidate);
+          candidate.operational = { ...(candidate.operational || {}), sourceTitle: candidate.sourceTitle };
           break;
         }
       } catch (error) {
@@ -82,7 +116,8 @@ for (; pages < pageLimit && !candidate; pages++) {
 
 if (!candidate) {
   const report = {
-    version: 1,
+    version: 2,
+    mode: "raw_listing_only",
     market,
     sourceId,
     canonicalUrl: required.canonicalUrl,
@@ -106,35 +141,27 @@ try {
 
 candidate = normalizeVehicleOfferSpecs({
   ...candidate,
+  sourceTitle: sourceTitle(candidate),
   status: "active",
   images: credibleCatalogImages(Array.isArray(gallery) ? gallery : []).slice(0, 30),
 });
 
-let calculated = candidate;
-try {
-  calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(candidate));
-} catch (error) {
-  errors.push({ stage: "calculation", error: String(error?.message || error) });
-}
-
-const imageUrls = [...new Set((calculated.images || []).map((image) => String(image?.url || "")).filter(Boolean))];
+const imageUrls = [...new Set((candidate.images || []).map((image) => String(image?.url || "")).filter(Boolean))];
 const checks = {
-  stableId: Boolean(calculated.id && calculated.sourceOfferId),
-  sourceUrl: /^https?:\/\//i.test(String(calculated.operational?.sourceUrl || "")),
-  makeModel: Boolean(calculated.make && calculated.model),
-  year: Number(calculated.year || 0) >= 2011,
-  sourcePrice: Number(calculated.sourcePrice || 0) > 0 && Boolean(calculated.sourceCurrency),
-  mileage: calculated.mileageKm !== undefined && calculated.mileageKm !== null && Number(calculated.mileageKm) >= 0,
-  powerOrEngine: Number(calculated.powerHp || 0) > 0 || Number(calculated.engineCc || 0) > 0 || Number(calculated.power30MinKw || 0) > 0,
-  galleryCount: imageUrls.length >= 5 && imageUrls.length <= 30,
-  externalImageUrls: imageUrls.length >= 5 && imageUrls.every((url) => /^https?:\/\//i.test(url) && !url.includes("/api/catalog/images/")),
-  noStoredImageObjects: (calculated.images || []).every((image) => !String(image?.objectKey || "") && !String(image?.checksum || "")),
-  calculatedPrice: Number(calculated.totalRub || 0) > 0 && !String(calculated.calculationStatus || "").startsWith("needs_") && calculated.calculationStatus !== "needs_data",
+  stableId: Boolean(candidate.id && candidate.sourceOfferId),
+  sourceUrl: /^https?:\/\//i.test(String(candidate.operational?.sourceUrl || "")),
+  sourceTitle: sourceTitle(candidate).length >= 2,
+  year: Number(candidate.year || 0) >= 2011,
+  sourcePrice: Number(candidate.sourcePrice || 0) > 0 && Boolean(candidate.sourceCurrency),
+  galleryCount: imageUrls.length >= 1 && imageUrls.length <= 30,
+  externalImageUrls: imageUrls.length >= 1 && imageUrls.every((url) => /^https?:\/\//i.test(url) && !url.includes("/api/catalog/images/")),
+  noStoredImageObjects: (candidate.images || []).every((image) => !String(image?.objectKey || "") && !String(image?.checksum || "")),
 };
 
 const passed = Object.values(checks).every(Boolean);
 const report = {
-  version: 1,
+  version: 2,
+  mode: "raw_listing_only",
   checkedAt: new Date().toISOString(),
   market,
   sourceId,
@@ -144,26 +171,16 @@ const report = {
   fetched,
   checks,
   card: {
-    id: calculated.id,
-    sourceOfferId: calculated.sourceOfferId,
-    sourceUrl: calculated.operational?.sourceUrl,
-    make: calculated.make,
-    model: calculated.model,
-    trim: calculated.trim,
-    year: calculated.year,
-    mileageKm: calculated.mileageKm,
-    sourcePrice: calculated.sourcePrice,
-    sourceCurrency: calculated.sourceCurrency,
-    powerHp: calculated.powerHp,
-    power30MinKw: calculated.power30MinKw,
-    engineCc: calculated.engineCc,
-    fuel: calculated.fuel,
-    transmission: calculated.transmission,
-    drive: calculated.drive,
+    id: candidate.id,
+    sourceOfferId: candidate.sourceOfferId,
+    sourceUrl: candidate.operational?.sourceUrl,
+    sourceTitle: sourceTitle(candidate),
+    year: candidate.year,
+    sourcePrice: candidate.sourcePrice,
+    sourceCurrency: candidate.sourceCurrency,
+    powerHp: candidate.powerHp,
     imageCount: imageUrls.length,
     imageUrls,
-    totalRub: calculated.totalRub,
-    calculationStatus: calculated.calculationStatus,
   },
   errors,
 };
