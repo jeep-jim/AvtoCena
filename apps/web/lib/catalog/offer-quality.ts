@@ -6,9 +6,9 @@ const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulld
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image))/i;
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
-function meaningfulName(value: unknown) {
+function meaningfulTitle(value: unknown) {
   const text = clean(value);
-  return text.length > 0 && text.length <= 100 && /[\p{L}\p{N}]/u.test(text) && !GENERIC_LISTING_RE.test(text) && !NON_VEHICLE_RE.test(text);
+  return text.length >= 2 && text.length <= 180 && /[\p{L}\p{N}]/u.test(text) && !GENERIC_LISTING_RE.test(text) && !NON_VEHICLE_RE.test(text);
 }
 function imageIdentity(image: CatalogImage) { return String(image.checksum || image.id || image.objectKey || image.url || ""); }
 
@@ -28,30 +28,33 @@ function sourcePriceOk(offer: VehicleOffer) {
   const price = Number(offer.sourcePrice || 0);
   return Number.isFinite(price) && price > 0 && clean(offer.sourceCurrency).length > 0;
 }
-function calculatedPriceOk(offer: VehicleOffer) {
-  const totalRub = Number(offer.totalRub || 0);
-  const status = clean(offer.calculationStatus);
-  return Number.isFinite(totalRub) && totalRub > 0 && !status.startsWith("needs_") && status !== "needs_data";
-}
 function mileageOk(offer: VehicleOffer) {
   if (offer.mileageKm === undefined || offer.mileageKm === null) return true;
   const mileage = Number(offer.mileageKm);
   return Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000;
 }
+function listingTitle(offer: VehicleOffer) {
+  return clean(
+    offer.sourceTitle
+      || offer.operational?.sourceTitle
+      || [offer.make, offer.model, offer.trim].filter(Boolean).join(" "),
+  );
+}
 
 function credibleCoreContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
-  if (!meaningfulName(offer.make) || !meaningfulName(offer.model)) return false;
+  const title = listingTitle(offer);
+  if (!meaningfulTitle(title)) return false;
   if (year < 2011 || year > currentYear + 1) return false;
-  if (!sourcePriceOk(offer) || !calculatedPriceOk(offer) || !mileageOk(offer)) return false;
-  if (NON_VEHICLE_RE.test([offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
+  if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
+  if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   const requiredImages = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
 }
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {
-  return credibleCoreContent(offer) && clean(offer.operational?.sourceUrl).length > 0;
+  return credibleCoreContent(offer) && /^https?:\/\//i.test(clean(offer.operational?.sourceUrl));
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) {
