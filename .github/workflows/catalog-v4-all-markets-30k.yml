@@ -3,13 +3,6 @@ run-name: Catalog V4 · All markets · up to 30k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v4-all-markets-30k.yml
-      - .github/workflows/catalog-v4-market-30k-reusable.yml
-      - scripts/catalog-simple-source-market.mjs
-      - apps/web/lib/catalog/catalog-v2-source-registry.ts
 
 permissions:
   contents: read
