@@ -1,32 +1,6 @@
 name: Vehicle knowledge sync
 
 on:
-  pull_request:
-    paths:
-      - ".github/workflows/vehicle-knowledge-sync.yml"
-      - "apps/web/lib/catalog/vehicle-knowledge.ts"
-      - "apps/web/lib/catalog/drom-vehicle-knowledge.ts"
-      - "apps/web/lib/replace-chunked-data.ts"
-      - "scripts/catalog-sync-vehicle-models.mjs"
-      - "scripts/catalog-enrich-drom-vehicle-variants.mjs"
-      - "scripts/catalog-build-vehicle-variants.mjs"
-      - "data/catalog/vehicle-knowledge/**"
-      - "package.json"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/vehicle-knowledge-sync.yml"
-      - "apps/web/lib/catalog/vehicle-knowledge.ts"
-      - "apps/web/lib/catalog/drom-vehicle-knowledge.ts"
-      - "apps/web/lib/replace-chunked-data.ts"
-      - "scripts/catalog-sync-vehicle-models.mjs"
-      - "scripts/catalog-enrich-drom-vehicle-variants.mjs"
-      - "scripts/catalog-build-vehicle-variants.mjs"
-      - "data/catalog/vehicle-knowledge/**"
-      - "package.json"
-  schedule:
-    - cron: "25 2 * * *"
   workflow_dispatch:
 
 permissions:
