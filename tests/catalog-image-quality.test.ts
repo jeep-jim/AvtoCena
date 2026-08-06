@@ -14,6 +14,17 @@ const jpegPhoto = {
   mimeType: "image/jpeg",
 };
 
+const sourcePhoto = (index: number) => ({
+  id: "",
+  url: `https://car-photo-source.example/listing-100/photo-${index}.jpg`,
+  objectKey: "",
+  width: 1280,
+  height: 853,
+  size: 0,
+  checksum: "",
+  mimeType: "image/jpeg",
+});
+
 const squareWrenchIcon = {
   id: "wrench",
   url: "https://img.avtocena.com/catalog/images/china/wrench.png",
@@ -23,6 +34,22 @@ const squareWrenchIcon = {
   size: 110_000,
   checksum: "wrench-checksum",
   mimeType: "image/png",
+};
+
+const completeOffer = {
+  id: "public-card",
+  market: "korea",
+  offerType: "fixed",
+  status: "active",
+  make: "Kia",
+  model: "Sportage",
+  year: 2022,
+  mileageKm: 48_000,
+  sourcePrice: 24_000_000,
+  sourceCurrency: "KRW",
+  totalRub: 2_850_000,
+  calculationStatus: "ready",
+  images: Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1)),
 };
 
 test("accepts a genuine landscape vehicle photograph", () => {
@@ -36,8 +63,14 @@ test("rejects a square service pictogram even when it is large", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [squareWrenchIcon] }), []);
 });
 
-test("keeps only real photographs and serves them through the stable catalog API", () => {
+test("uses the internal image API only for a legacy stored binary", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [squareWrenchIcon, jpegPhoto] }), ["/api/catalog/images/photo"]);
+});
+
+test("renders source-only JSON gallery URLs directly", () => {
+  const gallery = Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1));
+  assert.deepEqual(rankedCatalogImageUrls({ images: gallery }), gallery.map((image) => image.url));
+  assert.equal(rankedCatalogImageUrls({ images: gallery }).some((url) => url.startsWith("/api/catalog/images/")), false);
 });
 
 test("removes repeated images with the same checksum", () => {
@@ -50,26 +83,20 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("falls back to the stored URL only for legacy images without an id", () => {
-  const legacy = { ...jpegPhoto, id: undefined, url: "https://legacy.example/photo.jpg" };
-  assert.deepEqual(rankedCatalogImageUrls({ images: [legacy] }), [legacy.url]);
+test("rejects four photos and accepts five photos", () => {
+  assert.equal(isCrediblePublicOffer({ ...completeOffer, images: completeOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(completeOffer as any), true);
 });
 
-test("accepts a server-validated public DTO after private source fields are removed", () => {
-  const publicOffer = {
-    id: "public-card",
-    market: "korea",
-    offerType: "fixed",
-    status: "active",
-    make: "Kia",
-    model: "Sportage",
-    year: 2022,
-    mileageKm: 48_000,
-    sourcePrice: 24_000_000,
-    sourceCurrency: "KRW",
-    calculationStatus: "needs_data",
-    images: [jpegPhoto],
-  };
-  assert.equal(isCrediblePublicOffer(publicOffer as any), true);
-  assert.equal(isCrediblePublicOffer({ ...publicOffer, images: [] } as any), false);
+test("rejects price-on-request and unfinished calculation", () => {
+  assert.equal(isCrediblePublicOffer({ ...completeOffer, totalRub: 0 } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...completeOffer, calculationStatus: "needs_data" } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...completeOffer, calculationStatus: "needs_power" } as any), false);
+});
+
+test("rejects an advertising payment string used as a model name", () => {
+  assert.equal(isCrediblePublicOffer({
+    ...completeOffer,
+    model: "Corolla XLI 2023 AED 718/Month 0 DP 30 Day Return Warranty",
+  } as any), false);
 });
