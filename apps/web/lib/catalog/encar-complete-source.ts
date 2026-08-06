@@ -1,14 +1,5 @@
 import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";
-import { cacheImageFromUrl } from "./storage";
 import type { CatalogImage, VehicleOffer } from "./types";
-
-const ENCAR_HEADERS = {
-  accept: "application/json, text/plain, */*",
-  "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-  origin: "https://fem.encar.com",
-  referer: "https://fem.encar.com/",
-  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
-};
 
 function text(value: unknown) {
   return value == null ? "" : String(value).trim().replace(/\\\//g, "/");
@@ -57,11 +48,23 @@ function uniqueUrls(values: string[], limit: number) {
   return result;
 }
 
+function urlImage(url: string): CatalogImage {
+  const extension = url.match(/\.(jpe?g|png|webp)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+  return {
+    id: "",
+    url,
+    objectKey: "",
+    checksum: "",
+    size: 0,
+    mimeType: extension === "png" ? "image/png" : extension === "webp" ? "image/webp" : "image/jpeg",
+  };
+}
+
 function uniqueImages(images: CatalogImage[], limit: number) {
   const result: CatalogImage[] = [];
   const seen = new Set<string>();
   for (const image of images) {
-    const key = String(image.id || image.checksum || image.objectKey || image.url || "");
+    const key = String(image.url || image.objectKey || image.id || "").replace(/[?#].*$/, "").toLowerCase();
     if (!key || seen.has(key)) continue;
     seen.add(key);
     result.push(image);
@@ -70,49 +73,35 @@ function uniqueImages(images: CatalogImage[], limit: number) {
   return result;
 }
 
-async function cacheUrls(urls: string[], limit: number) {
-  const saved: CatalogImage[] = [];
-  for (const url of urls) {
-    const image = await cacheImageFromUrl(url, "korea", { headers: ENCAR_HEADERS }).catch(() => null);
-    if (image && Number(image.size || 0) > 8_000) saved.push(image);
-    if (saved.length >= limit) break;
-  }
-  return uniqueImages(saved, limit);
-}
-
 export class EncarCompleteAdapter extends EncarDirectAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
-    const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
-    const minimum = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-    const fastPath = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GALLERY_FAST_PATH || ""));
+    const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
+    const minimum = Math.min(limit, Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
     const raw: any = offer.operational?.raw || {};
-    const cover = text(raw.Photo ?? raw.photo ?? raw.Image ?? raw.image ?? raw.PhotoPath ?? raw.photoPath);
-    const listing = cover ? await cacheUrls(uniqueUrls([cover], 1), 1) : [];
+    const listingUrls = uniqueUrls(collectImageValues(raw), limit * 2);
 
-    // Если выдача уже содержит реальное фото и достаточные характеристики для расчёта,
-    // не открываем detail для каждой из тысяч карточек.
-    if (fastPath && listing.length >= minimum && Number(offer.engineCc || 0) > 0) {
-      (offer.operational as any).galleryVerified = true;
-      (offer.operational as any).galleryImageCount = listing.length;
-      (offer.operational as any).gallerySafetyMode = "encar_listing_cover";
-      return listing;
-    }
-
-    // Базовый адаптер один раз получает detail, одновременно обогащает характеристики
-    // и сохраняет основные фотографии. Раньше после этого выполнялся второй такой же запрос.
+    // Detail is used for source specifications and the full gallery only.
+    // Image bytes are never downloaded or written to AvtoCena storage.
     const detailed = await super.fetchImages(offer).catch(() => [] as CatalogImage[]);
     const enrichedRaw: any = offer.operational?.raw || {};
-    const extraUrls = uniqueUrls(collectImageValues(enrichedRaw?.detail || enrichedRaw), limit * 2);
-    const existingKeys = new Set([...listing, ...detailed].map((image) => String(image.url || image.objectKey || image.id || "")));
-    const extras = await cacheUrls(extraUrls.filter((url) => !existingKeys.has(url)), Math.max(0, limit - listing.length - detailed.length));
-    const saved = uniqueImages([...listing, ...detailed, ...extras], limit);
+    const detailedUrls = uniqueUrls([
+      ...collectImageValues(enrichedRaw?.detail || enrichedRaw),
+      ...detailed.map((image) => String(image?.url || "")),
+    ], limit * 3);
+    const gallery = uniqueImages([...listingUrls, ...detailedUrls].map(urlImage), limit);
+    const verified = gallery.length >= minimum;
 
-    (offer.operational as any).galleryVerified = saved.length >= minimum;
-    (offer.operational as any).galleryImageCount = saved.length;
-    (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-    (offer.operational as any).gallerySafetyMode = "encar_single_detail";
-    return saved;
+    offer.operational = {
+      ...(offer.operational || {}),
+      galleryVerified: verified,
+      galleryImageCount: gallery.length,
+      galleryRefreshedAt: new Date().toISOString(),
+      gallerySafetyMode: "encar_source_urls_only",
+      galleryStoredAs: "json_urls",
+    } as any;
+
+    return verified ? gallery : [];
   }
 }
 
