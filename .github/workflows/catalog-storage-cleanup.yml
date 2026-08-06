@@ -2,14 +2,7 @@ name: Catalog Object Storage cleanup
 run-name: Catalog storage cleanup · ${{ github.sha }}
 
 on:
-  schedule:
-    - cron: "17 2 * * *"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-storage-cleanup.yml
-      - scripts/catalog-clean-object-storage.mjs
 
 permissions:
   actions: write
@@ -33,10 +26,10 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"
-      CATALOG_STORAGE_KEEP_GENERATIONS: ${{ github.event_name == 'push' && '0' || '2' }}
-      CATALOG_STORAGE_EMERGENCY: ${{ github.event_name == 'push' && 'true' || 'false' }}
-      CATALOG_STORAGE_CLEANUP_GRACE_MS: ${{ github.event_name == 'push' && '0' || '345600000' }}
-      CATALOG_STORAGE_CLEANUP_MAX_DELETES: ${{ github.event_name == 'push' && '1000000' || '250000' }}
+      CATALOG_STORAGE_KEEP_GENERATIONS: "2"
+      CATALOG_STORAGE_EMERGENCY: "false"
+      CATALOG_STORAGE_CLEANUP_GRACE_MS: "345600000"
+      CATALOG_STORAGE_CLEANUP_MAX_DELETES: "250000"
       CATALOG_STORAGE_DELETE_CONCURRENCY: "32"
       YC_OBJECT_STORAGE_DELETE_CONCURRENCY: "16"
       CATALOG_STORAGE_CLEANUP_REPORT: catalog-storage-cleanup-report.json
@@ -81,15 +74,3 @@ jobs:
           if-no-files-found: warn
           compression-level: 9
           retention-days: 14
-      - name: Start catalog production after emergency cleanup
-        if: success() && github.event_name == 'push'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'catalog-production-recovery-v15.yml',
-              ref: 'main',
-            });
-            core.notice('Catalog source-scale daily dispatched after emergency cleanup.');
