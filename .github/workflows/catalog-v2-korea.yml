@@ -3,16 +3,9 @@ run-name: Catalog V3 · Korea · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "5 17 * * *"
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-korea.yml
 
-# Korea Smoke10 confirmed: published=true, count=10, generationId=gen_1785942188995_dfdae614.
-# Full rerun keeps strict publication checks while allowing verified recent/extended cards to accumulate after the first priority card.
-# Continue marker: public-offer-validation-rerun-2026-08-06-1338.
+# Automatic schedule and push triggers are intentionally disabled.
+# Run this market only from the Actions UI when needed.
 permissions:
   contents: read
 
