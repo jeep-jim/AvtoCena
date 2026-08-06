@@ -179,6 +179,7 @@ jobs:
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Finalize validation report and require complete shard structure
         env:
+          CATALOG_VALIDATION_EXPECTED_ARTIFACTS_PER_MARKET: "5"
           CATALOG_VALIDATION_FAIL_ON_STRUCTURAL: "true"
         run: node scripts/catalog-finalize-validation-report.mjs
       - name: Enable grow-only publication for the current market
