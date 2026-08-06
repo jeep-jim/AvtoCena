@@ -3,12 +3,8 @@ run-name: Catalog V2 · Korea · Smoke10 · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-korea-smoke10.yml
 
-# trigger: 2026-08-05T14:58Z source-input-publication-fix
+# Automatic push trigger is intentionally disabled.
 permissions:
   contents: read
 
