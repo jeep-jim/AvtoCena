@@ -38,6 +38,7 @@ import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
 import { regionalLiveOverrides } from "./regional-live-overrides";
+import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import {
   CATALOG_DAILY_TARGET_PER_MARKET,
   CATALOG_DAILY_TARGET_TOTAL,
@@ -83,6 +84,17 @@ for (const replacement of completeSources) {
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
+}
+
+// The approved source contract is enforced at runtime, not only documented.
+// Additional adapters may exist, but none of the mandatory 18 sources may be absent.
+const registeredAdapterIds = new Set(catalogImportSources.map((source) => source.sourceId));
+const missingRequiredAdapters = Object.values(REQUIRED_CATALOG_SOURCES)
+  .flat()
+  .map((source) => source.sourceId)
+  .filter((sourceId) => !registeredAdapterIds.has(sourceId));
+if (missingRequiredAdapters.length) {
+  throw new Error(`catalog_required_source_adapters_missing:${missingRequiredAdapters.join(",")}`);
 }
 
 export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImportOptions) {
