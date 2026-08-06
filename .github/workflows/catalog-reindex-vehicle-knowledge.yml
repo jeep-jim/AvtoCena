@@ -1,24 +1,6 @@
 name: Catalog reindex from vehicle knowledge
 
 on:
-  workflow_run:
-    workflows:
-      - "Vehicle knowledge sync"
-    types:
-      - completed
-  push:
-    branches:
-      - main
-    paths:
-      - apps/web/lib/catalog/customs-pricing.ts
-      - apps/web/lib/catalog/estimated-market-config.ts
-      - apps/web/lib/catalog/offer-quality.ts
-      - apps/web/lib/catalog/power-display.ts
-      - apps/web/lib/catalog/vehicle-knowledge.ts
-      - apps/web/lib/catalog/power-reference.ts
-      - packages/engine/src/calculation/calculateAvtocena.ts
-      - scripts/catalog-reindex-vehicle-knowledge.mjs
-      - .github/workflows/catalog-reindex-vehicle-knowledge.yml
   workflow_dispatch:
 
 permissions:
@@ -26,7 +8,6 @@ permissions:
 
 jobs:
   reindex-production-catalog:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 90
     concurrency:
