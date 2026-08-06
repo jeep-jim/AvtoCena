@@ -8,6 +8,13 @@ if (process.env.CATALOG_RESET_CONFIRM !== "RESET_PUBLIC_CATALOG") {
 }
 
 const storage = getJsonStorage();
+let deletedObjects = 0;
+if (storage.deletePrefix) {
+  deletedObjects = await storage.deletePrefix("catalog");
+} else {
+  throw new Error("catalog_storage_delete_prefix_unavailable");
+}
+
 const now = new Date().toISOString();
 const generationId = `empty_${Date.now()}_${crypto.randomBytes(4).toString("hex")}`;
 const generationRoot = `catalog/generations/${generationId}`;
@@ -28,6 +35,7 @@ await storage.writeJson(`${generationRoot}/indexes/facets.json`, {
 });
 await storage.writeJson(`${generationRoot}/indexes/order-updatedAt.json`, { generationId, ids: [] });
 await storage.writeJson(`${generationRoot}/indexes/offers-by-id.json`, { generationId, byId: {} });
+await storage.writeJson(`${generationRoot}/indexes/images-by-id.json`, { generationId, imagesById: {} });
 
 const manifest = {
   version: 2,
@@ -62,7 +70,8 @@ console.log(JSON.stringify({
   reset: true,
   generationId,
   total: 0,
+  deletedObjects,
   markets: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, 0])),
-  imageBinariesDeleted: false,
-  note: "Old generations are left for scheduled retention cleanup; the public manifest is empty.",
+  oldCatalogAndStoredPhotosDeleted: true,
+  imageStorageForNewRun: "json_source_urls_only",
 }, null, 2));
