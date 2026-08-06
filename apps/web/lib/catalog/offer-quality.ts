@@ -34,18 +34,21 @@ function mileageOk(offer: VehicleOffer) {
   return Number.isFinite(mileage) && mileage >= 0 && mileage <= 5_000_000;
 }
 
-export function hasCredibleOfferContent(offer: VehicleOffer) {
+function credibleCoreContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
-  const sourceUrl = clean(offer.operational?.sourceUrl);
   if (!meaningfulName(offer.make) || !meaningfulName(offer.model)) return false;
   if (year < 2011 || year > currentYear + 1) return false;
-  if (!sourcePriceOk(offer) || !mileageOk(offer) || !sourceUrl) return false;
+  if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (NON_VEHICLE_RE.test([offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   const requiredImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
   return credibleCatalogImages(offer.images || []).length >= requiredImages;
 }
 
+export function hasCredibleOfferContent(offer: VehicleOffer) {
+  return credibleCoreContent(offer) && clean(offer.operational?.sourceUrl).length > 0;
+}
+
 export function isCrediblePublicOffer(offer: VehicleOffer) {
-  return offer.status === "active" && hasCredibleOfferContent(offer);
+  return offer.status === "active" && credibleCoreContent(offer);
 }
