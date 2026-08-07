@@ -38,13 +38,15 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
-  const exactTotalRub = Number(o.totalRub || 0);
-  const visibleRub = exactTotalRub || catalogOfferVisibleRub(normalizedOffer);
+
+  /* Never render raw totalRub directly. It becomes public only after the full
+     calculation and public sanity limits pass in catalogOfferVisibleRub(). */
+  const visibleRub = catalogOfferVisibleRub(normalizedOffer);
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,
-    previousTotalRub: exactTotalRub ? o.previousTotalRub : null,
-    priceDeltaRub: exactTotalRub ? o.priceDeltaRub : null,
+    previousTotalRub: visibleRub ? o.previousTotalRub : null,
+    priceDeltaRub: visibleRub ? o.priceDeltaRub : null,
   };
   const snapshot = {
     id: o.id, title: o.title, price: visibleRub || null, totalRub: visibleRub || null, previousTotalRub: displayOffer.previousTotalRub,
@@ -58,7 +60,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
   const sourcePriceAvailable = !visibleRub && Number(o.sourcePrice || 0) > 0 && Boolean(o.sourceCurrency);
   const priceLabel = sourcePriceAvailable
     ? `${yearLabel} · цена на площадке`
-    : o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated" || !exactTotalRub
+    : o.calculationStatus === "estimated" || o.calculationSnapshot?.pricingConfidence === "estimated" || !visibleRub
       ? `${yearLabel} · ориентир`
       : yearLabel;
   const engineLabel = o.engineCc ? `${o.engineCc} см³` : isElectric ? "Электромотор" : o.fuelLabel;

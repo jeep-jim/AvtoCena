@@ -1,0 +1,85 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
+import { hasCredibleOfferContent } from "../apps/web/lib/catalog/offer-quality";
+
+// Regression coverage for the exact public failures reported from production cards.
+const priceLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
+  .map((id) => ({ id, amountRub: 1000 }));
+
+function calculatedOffer(totalRub: number, market = "korea") {
+  return {
+    totalRub,
+    market,
+    calculationStatus: "ready",
+    calculationSnapshot: {
+      customs: { status: "ready" },
+      breakdown: priceLines,
+    },
+  } as any;
+}
+
+function images(count: number) {
+  return Array.from({ length: count }, (_, index) => ({
+    id: `image-${index}`,
+    url: `https://example.com/car-${index}.jpg`,
+    objectKey: "",
+    checksum: "",
+    size: 0,
+    mimeType: "image/jpeg",
+  }));
+}
+
+function sourceOffer(overrides: Record<string, unknown> = {}) {
+  return {
+    id: "offer-1",
+    sourceId: "dongchedi_china_open",
+    sourceOfferId: "source-1",
+    market: "china",
+    status: "active",
+    sourceTitle: "Changan CS15 EV",
+    make: "Changan",
+    model: "CS15 EV",
+    year: 2024,
+    mileageKm: 10000,
+    sourcePrice: 55000,
+    sourceCurrency: "CNY",
+    images: images(5),
+    operational: { sourceUrl: "https://www.dongchedi.com/usedcar/123", raw: {} },
+    ...overrides,
+  } as any;
+}
+
+test("public price never exposes implausible raw calculated totals", () => {
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(3_200_000)), 3_200_000);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(56_609_760)), 0);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(346_980_250)), 0);
+  assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
+});
+
+test("mandatory source offer is hidden until its exact-card photo identity is verified", () => {
+  assert.equal(hasCredibleOfferContent(sourceOffer()), false);
+  assert.equal(hasCredibleOfferContent(sourceOffer({
+    operational: {
+      sourceUrl: "https://www.dongchedi.com/usedcar/123",
+      photoIdentityVerified: true,
+      raw: { detailIdentityVerified: true },
+    },
+  })), true);
+});
+
+test("JPAuc may publish its verified three source photos", () => {
+  const offer = sourceOffer({
+    sourceId: "jpauc_japan_past_open",
+    market: "japan",
+    sourceCurrency: "JPY",
+    sourcePrice: 2_600_000,
+    images: images(3),
+    operational: {
+      sourceUrl: "https://jpauc.com/auction/past/detail/123",
+      photoIdentityVerified: true,
+      raw: { detailIdentityVerified: true },
+    },
+  });
+  assert.equal(hasCredibleOfferContent(offer), true);
+});
