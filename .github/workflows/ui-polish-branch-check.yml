@@ -1,0 +1,63 @@
+name: UI polish branch check
+
+on:
+  push:
+    branches:
+      - codex-ui-polish-20260807
+    paths:
+      - ".github/workflows/ui-polish-branch-check.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex-ui-polish-20260807
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply final UI text and market coverage
+        shell: python
+        run: |
+          from pathlib import Path
+
+          home = Path("apps/web/components/home/HomePageClient.tsx")
+          text = home.read_text(encoding="utf-8")
+          old_phrase = "Укажите бюджет — покажем, что можно привезти под ключ."
+          new_phrase = "Укажите Ваш город и бюджет — покажем, что можно привезти под ключ."
+          if old_phrase not in text:
+              raise SystemExit("home_phrase_not_found")
+          text = text.replace(old_phrase, new_phrase)
+
+          old_groups = 'const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: matches.slice(0, 6) }; }).filter((group) => group.items.length), [availableItems, catalogMarket, catalogMake]);'
+          new_groups = 'const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: matches.slice(0, 6) }; }), [availableItems, catalogMarket, catalogMake]);'
+          if old_groups not in text:
+              raise SystemExit("market_groups_expression_not_found")
+          text = text.replace(old_groups, new_groups)
+          home.write_text(text, encoding="utf-8")
+
+          css = Path("apps/web/app/flat-ui.css")
+          styles = css.read_text(encoding="utf-8")
+          marker = "/* UI polish coverage and dealer surfaces */"
+          if marker not in styles:
+              styles += '''\n\n/* UI polish coverage and dealer surfaces */\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#12151d]"],\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#151821]"],\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#0c0e14]"],\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-metric-card,\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-hero-preview{background:#222b38!important;background-color:#222b38!important;background-image:none!important}\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page section.relative.overflow-hidden>div.absolute.inset-0{background:transparent!important;background-image:none!important}\nhtml:not([data-theme="light"]):not([data-theme="light"]) body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:rgba(255,255,255,.5);font-size:13px;font-weight:800}\nhtml[data-theme="light"] body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:#657086;font-size:13px;font-weight:800}\n'''
+          css.write_text(styles, encoding="utf-8")
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Commit validated UI polish
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/components/home/HomePageClient.tsx apps/web/app/flat-ui.css
+          git diff --cached --quiet && exit 0
+          git commit -m "Polish dark UI and home market coverage"
+          git push origin HEAD:codex-ui-polish-20260807
