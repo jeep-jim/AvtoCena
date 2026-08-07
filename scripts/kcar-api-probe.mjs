@@ -138,7 +138,18 @@ for (const [name, path, params] of [
 const firstCarCd = String(firstDealerRow?.carCd || firstDealerRow?.cdCarSeq || firstDealerRow?.carSeq || '').trim();
 if (firstCarCd) {
   const detailUrl = `${KCAR_WEB_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(firstCarCd)}`;
-  const detailRecon = { carCd: firstCarCd, detailUrl, pageStatus: 0, pageBytes: 0, pageKeys: [], scripts: [], contexts: [], imageCandidates: [] };
+  const detailRecon = {
+    carCd: firstCarCd,
+    detailUrl,
+    pageStatus: 0,
+    pageBytes: 0,
+    pageKeys: [],
+    scripts: [],
+    contexts: [],
+    imageCandidates: [],
+    endpoints: [],
+    savedScripts: [],
+  };
   try {
     const pageResponse = await fetch(detailUrl, {
       headers: {
@@ -163,34 +174,55 @@ if (firstCarCd) {
       '/api/car-search/vehicle-detail',
       'vehicle-detail',
       'getCarInfo',
+      'i_sCarCd',
+      'searchCondition',
+      'this.rvo',
+      'rvo:',
+      'carInfo:',
       'carSeq',
       'carCd',
       'elanPath',
       'msizeImgPath',
       'ssizeImgPath',
+      '/bc/car-insp/photo',
+      'car_info_dgnos',
       'photo',
       'imageList',
       'CarInfoDtl',
       'carInfoDtl',
     ];
-    for (const scriptUrl of scriptUrls) {
+    for (const [scriptIndex, scriptUrl] of scriptUrls.entries()) {
       try {
         const response = await fetch(scriptUrl, { headers: { referer: detailUrl, 'user-agent': UA }, redirect: 'follow' });
         if (!response.ok) continue;
         const source = await response.text();
+        const endpointMatches = [
+          ...source.matchAll(/\.(?:get|post|put|delete)\(["']([^"']+)["']/g),
+          ...source.matchAll(/(?:API_BASE_URL|PRD_BASEURL|BASE_URL)[^"']*["'](https?:\/\/[^"']+)["']/g),
+        ];
+        for (const match of endpointMatches) {
+          const endpoint = match[1];
+          if (endpoint && /car|bc\/|detail|photo|dgnos|image/i.test(endpoint)) detailRecon.endpoints.push(endpoint);
+        }
+        if (source.includes('i_sCarCd') && (source.includes('carInfoDtl') || source.includes('/bc/detail/') || source.includes('/bc/car-insp/photo'))) {
+          const fileName = `kcar-api-detail-script-${String(scriptIndex).padStart(2, '0')}.txt`;
+          await fs.writeFile(fileName, source);
+          detailRecon.savedScripts.push({ scriptUrl, fileName, bytes: Buffer.byteLength(source) });
+        }
         for (const needle of needles) {
           let from = 0;
           let found = 0;
-          while (found < 8 && detailRecon.contexts.length < 240) {
+          while (found < 12 && detailRecon.contexts.length < 480) {
             const index = source.indexOf(needle, from);
             if (index < 0) break;
-            detailRecon.contexts.push({ scriptUrl, needle, context: source.slice(Math.max(0, index - 2200), index + 4200) });
+            detailRecon.contexts.push({ scriptUrl, needle, context: source.slice(Math.max(0, index - 4200), index + 9000) });
             from = index + needle.length;
             found += 1;
           }
         }
       } catch {}
     }
+    detailRecon.endpoints = [...new Set(detailRecon.endpoints)].sort();
   } catch (error) {
     detailRecon.error = String(error?.stack || error);
   }
@@ -206,7 +238,10 @@ console.log(JSON.stringify({
     pageStatus: output.detailRecon.pageStatus,
     pageBytes: output.detailRecon.pageBytes,
     scriptCount: output.detailRecon.scripts.length,
+    savedScriptCount: output.detailRecon.savedScripts.length,
     contextCount: output.detailRecon.contexts.length,
+    endpointCount: output.detailRecon.endpoints.length,
+    endpoints: output.detailRecon.endpoints,
     imageCandidateCount: output.detailRecon.imageCandidates.length,
     error: output.detailRecon.error,
   } : null,
