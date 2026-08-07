@@ -1,4 +1,4 @@
-name: Catalog source-scale emergency cancel guard
+name: Catalog source-scale emergency cancel guard v3
 
 on:
   workflow_dispatch:
@@ -19,4 +19,4 @@ jobs:
   stopped:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Emergency second cancellation pass: stop legacy raw/source-scale publication on the strict certification branch."
+      - run: echo "Emergency third cancellation pass: terminate any legacy raw publisher still running on the strict certification branch."
