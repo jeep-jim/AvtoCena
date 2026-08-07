@@ -6,8 +6,11 @@ const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps
 
 const market = String(process.env.CATALOG_STRICT_MARKET || "korea").trim();
 const sourceId = String(process.env.CATALOG_STRICT_SOURCE_ID || "encar_direct").trim();
-const target = Math.max(1, Math.min(1000, Number(process.env.CATALOG_STRICT_TARGET || 10)));
-const maxPages = Math.max(1, Math.min(200, Number(process.env.CATALOG_STRICT_MAX_PAGES || 8)));
+const target = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_STRICT_TARGET || 10)));
+const maxPages = Math.max(1, Math.min(500, Number(process.env.CATALOG_STRICT_MAX_PAGES || 8)));
+const startCursor = String(process.env.CATALOG_STRICT_START_CURSOR || "").trim() || null;
+const requireTarget = String(process.env.CATALOG_STRICT_REQUIRE_TARGET ?? "1") !== "0";
+const stopAtTarget = String(process.env.CATALOG_STRICT_STOP_AT_TARGET ?? "1") !== "0";
 const output = process.env.CATALOG_STRICT_OUTPUT || `catalog-strict-${market}-${sourceId}-${target}.json`;
 const currentYear = new Date().getFullYear();
 
@@ -101,17 +104,18 @@ function summaryCard(offer, cardChecks) {
 const accepted = [];
 const rejected = [];
 const seen = new Set();
-let cursor = null;
+let cursor = startCursor;
 let pages = 0;
 let rowsSeen = 0;
+let sourceFinished = false;
 
-while (accepted.length < target && pages < maxPages) {
+while ((!stopAtTarget || accepted.length < target) && pages < maxPages) {
   const page = await source.fetchPage(cursor);
   pages++;
   const rows = Array.isArray(page?.items) ? page.items : [];
   rowsSeen += rows.length;
   for (const raw of rows) {
-    if (accepted.length >= target) break;
+    if (stopAtTarget && accepted.length >= target) break;
     let offer;
     try { offer = source.normalizeOffer(raw); } catch (error) {
       rejected.push({ stage: "normalize", error: String(error?.message || error) });
@@ -134,21 +138,29 @@ while (accepted.length < target && pages < maxPages) {
     }
   }
   cursor = page?.nextCursor || null;
-  if (!cursor || page?.finished) break;
+  sourceFinished = !cursor || page?.finished === true;
+  if (sourceFinished) break;
 }
 
 const rejectionReasons = {};
 for (const row of rejected) {
   for (const reason of row.failed || [row.stage || "unknown"]) rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
 }
+const passed = requireTarget ? accepted.length >= target : pages > 0;
 const report = {
-  version: 3,
+  version: 4,
   mode: "strict_exact_source_only_no_publish_no_generic_normalization",
   checkedAt: new Date().toISOString(),
   market,
   sourceId,
   target,
+  startCursor,
+  nextCursor: cursor,
+  requireTarget,
+  stopAtTarget,
+  maxPages,
   pages,
+  sourceFinished,
   rowsSeen,
   uniqueSeen: seen.size,
   accepted: accepted.length,
@@ -156,7 +168,7 @@ const report = {
   rejectionReasons,
   cards: accepted,
   rejectedSample: rejected.slice(0, 20),
-  passed: accepted.length >= target,
+  passed,
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
