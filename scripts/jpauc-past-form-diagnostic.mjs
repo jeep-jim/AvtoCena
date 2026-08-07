@@ -7,59 +7,83 @@ const baseHeaders = {
 };
 const clean = (value) => String(value || "").replace(/\s+/g, " ").trim();
 
-const first = await fetch("https://jpauc.com/auction/past", {
-  headers: { ...baseHeaders, referer: "https://jpauc.com/auction" },
-  redirect: "follow",
-  signal: AbortSignal.timeout(30000),
-});
-const html = await first.text();
-const cookie = String(first.headers.get("set-cookie") || "").split(";")[0];
-const dates = [...html.matchAll(/name=["']checkdate\[\]["'][^>]*value=["']([^"']+)["']/gi)].map((m) => m[1]);
+function parseInputs(html) {
+  return [...html.matchAll(/<(input|button)\b([^>]*)>/gi)].map((match) => {
+    const attrs = {};
+    for (const attr of match[2].matchAll(/([\w-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)) attrs[attr[1].toLowerCase()] = attr[2] ?? attr[3] ?? attr[4] ?? true;
+    return { tag: match[1].toLowerCase(), ...attrs };
+  });
+}
+
+function summarize(html, url) {
+  const inputs = parseInputs(html);
+  const detailLinks = [...new Set([...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]).filter((href) => /\/auction\/detail\//i.test(href)))];
+  const labels = [...html.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)].map((m) => clean(m[1].replace(/<[^>]+>/g, " "))).filter(Boolean);
+  return {
+    url,
+    bytes: html.length,
+    detailLinks: detailLinks.slice(0, 30),
+    submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20),
+    checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80),
+    labels: labels.slice(0, 120),
+  };
+}
+
+async function request(url, cookie, options = {}) {
+  const response = await fetch(url, {
+    headers: { ...baseHeaders, ...(cookie ? { cookie } : {}), ...(options.headers || {}) },
+    method: options.method || "GET",
+    body: options.body,
+    redirect: "follow",
+    signal: AbortSignal.timeout(30000),
+  });
+  return { response, html: await response.text() };
+}
+
+const initial = await request("https://jpauc.com/auction/past", "", { headers: { referer: "https://jpauc.com/auction" } });
+const cookie = String(initial.response.headers.get("set-cookie") || "").split(";")[0];
+const dates = [...initial.html.matchAll(/name=["']checkdate\[\]["'][^>]*value=["']([^"']+)["']/gi)].map((m) => m[1]);
 const selectedDate = dates[0];
 if (!selectedDate) throw new Error("jpauc_no_past_date");
 
-const body = new URLSearchParams();
-body.append("checkdate[]", selectedDate);
-body.append("submit", "submitauction");
+const stages = [summarize(initial.html, initial.response.url)];
+let currentUrl = "https://jpauc.com/auction/past";
+let currentHtml = initial.html;
+let body = new URLSearchParams([ ["checkdate[]", selectedDate], ["submit", "submitauction"] ]);
 
-const posted = await fetch("https://jpauc.com/auction/past", {
-  method: "POST",
-  headers: {
-    ...baseHeaders,
-    "content-type": "application/x-www-form-urlencoded",
-    cookie,
-    origin: "https://jpauc.com",
-    referer: "https://jpauc.com/auction/past",
-  },
-  body: body.toString(),
-  redirect: "follow",
-  signal: AbortSignal.timeout(30000),
-});
-const postedHtml = await posted.text();
+for (let step = 0; step < 6; step++) {
+  const posted = await request(currentUrl, cookie, {
+    method: "POST",
+    body: body.toString(),
+    headers: { "content-type": "application/x-www-form-urlencoded", origin: "https://jpauc.com", referer: currentUrl },
+  });
+  currentUrl = posted.response.url;
+  currentHtml = posted.html;
+  const summary = summarize(currentHtml, currentUrl);
+  summary.requestBody = body.toString();
+  summary.status = posted.response.status;
+  stages.push(summary);
+  if (summary.detailLinks.length) break;
 
-const hrefs = [...postedHtml.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
-const auctionLinks = [...new Set(hrefs.filter((href) => /auction|maker|model|listing|detail|past|search|lot/i.test(href)))].slice(0, 400);
-const detailLinks = [...new Set(hrefs.filter((href) => /\/auction\/detail\//i.test(href)))].slice(0, 100);
-const forms = [...postedHtml.matchAll(/<form\b[^>]*>[\s\S]*?<\/form>/gi)].map((m) => clean(m[0]).slice(0, 8000)).slice(0, 20);
-const titles = [...postedHtml.matchAll(/<(?:h1|h2|h3|th|td|label|option)\b[^>]*>([\s\S]*?)<\/(?:h1|h2|h3|th|td|label|option)>/gi)]
-  .map((m) => clean(m[1].replace(/<[^>]+>/g, " ")))
-  .filter(Boolean)
-  .slice(0, 300);
+  const inputs = parseInputs(currentHtml);
+  const submit = inputs.find((input) => input.name === "submit" && input.value);
+  const checkboxes = inputs.filter((input) => input.type === "checkbox" && input.name && input.value && !["checkall", "checkcountry[]"].includes(String(input.name)));
+  let chosen = null;
+  if (/\/maker(?:$|[?#])/i.test(currentUrl)) chosen = checkboxes.find((input) => input.name === "mk[]" && String(input.value) === "9") || checkboxes[0];
+  else chosen = checkboxes[0];
+  if (!chosen) break;
+
+  body = new URLSearchParams();
+  body.append(String(chosen.name), String(chosen.value));
+  if (submit?.name && submit?.value) body.append(String(submit.name), String(submit.value));
+}
 
 const output = {
   checkedAt: new Date().toISOString(),
-  initial: { status: first.status, bytes: html.length, dates, cookiePresent: Boolean(cookie) },
-  submission: {
-    selectedDate,
-    requestBody: body.toString(),
-    status: posted.status,
-    finalUrl: posted.url,
-    bytes: postedHtml.length,
-    detailLinks,
-    auctionLinks,
-    forms,
-    textSamples: titles,
-  },
+  cookiePresent: Boolean(cookie),
+  selectedDate,
+  dates,
+  stages,
 };
 await fs.writeFile("jpauc-past-form-diagnostic.json", JSON.stringify(output, null, 2));
 console.log(JSON.stringify(output, null, 2));
