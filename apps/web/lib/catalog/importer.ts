@@ -31,6 +31,7 @@ import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statist
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
+import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -80,6 +81,7 @@ const completeSources = [
   prepareSource(mashinaKyrgyzstanListSource),
   guaziChinaExactSource,
   che168ExactSource,
+  autoscoutEuropeExactSource,
   jpaucPastSource,
   encarCompleteSource,
 ];
@@ -101,6 +103,7 @@ const dedicatedDetailSourceIds = new Set([
   "jpauc_japan_past_open",
   "guazi_china_open",
   "autohome_used_china_open",
+  "autoscout_europe_open",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
