@@ -42,14 +42,38 @@ function clean(value: unknown) {
 function absolute(value: string, base: string) { try { return new URL(value.replace(/&amp;/gi, "&").replace(/\\\//g, "/"), base).toString(); } catch { return ""; } }
 function int(value: unknown) { const n = Number(String(value ?? "").replace(/[^0-9]/g, "")); return Number.isFinite(n) && n > 0 ? Math.round(n) : undefined; }
 function decimal(value: unknown) { const n = Number(String(value ?? "").replace(",", ".").replace(/[^0-9.]/g, "")); return Number.isFinite(n) && n > 0 ? n : undefined; }
+function sleep(ms: number) { return ms > 0 ? new Promise((resolve) => setTimeout(resolve, ms)) : Promise.resolve(); }
+function retryDelayMs(response: Response, fallback: number) {
+  const raw = clean(response.headers.get("retry-after"));
+  const seconds = Number(raw);
+  if (Number.isFinite(seconds) && seconds > 0) return Math.min(60_000, Math.round(seconds * 1000));
+  const date = Date.parse(raw);
+  if (Number.isFinite(date)) return Math.min(60_000, Math.max(0, date - Date.now()));
+  return fallback;
+}
 
 async function request(url: string, referer = "https://www.dubicars.com/uae/used") {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
-  try {
-    const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
-    return { response, markup: await response.text() };
-  } finally { clearTimeout(timer); }
+  const attempts = Math.max(1, Math.min(6, Number(process.env.CATALOG_SOURCE_RETRY_ATTEMPTS || 4)));
+  let lastError: unknown = null;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
+    try {
+      const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
+      const result = { response, markup: await response.text() };
+      const retryable = response.status === 403 || response.status === 429 || [500, 502, 503, 504].includes(response.status);
+      if (!retryable || attempt === attempts - 1) return result;
+      const fallback = Math.min(30_000, 3_000 * (2 ** attempt));
+      await sleep(retryDelayMs(response, fallback));
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts - 1) throw error;
+      await sleep(Math.min(30_000, 3_000 * (2 ** attempt)));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("dubicars_request_failed");
 }
 
 function normalizeFuel(value: string) {
@@ -155,17 +179,22 @@ export class DubicarsStrictAdapter implements CatalogSourceAdapter {
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
+    const pageDelay = Math.max(0, Math.min(10_000, Number(process.env.CATALOG_SOURCE_PAGE_DELAY_MS || 0)));
+    if (page > 1) await sleep(pageDelay);
     const listUrl = `https://www.dubicars.com/uae/used?page=${page}`;
     const listing = await request(listUrl);
-    if (!listing.response.ok) throw new Error(`dubicars_strict_list_http_${listing.response.status}`);
+    if (!listing.response.ok) throw new Error(`dubicars_strict_list_http_${listing.response.status}_page_${page}`);
     const metas = listingMeta(listing.markup, listUrl).slice(0, 50);
     const rows: Row[] = [];
-    for (let index = 0; index < metas.length; index += 5) {
-      const batch = await Promise.all(metas.slice(index, index + 5).map(async (meta) => {
+    const batchSize = Math.max(1, Math.min(5, Number(process.env.CATALOG_SOURCE_DETAIL_BATCH_SIZE || 5)));
+    const batchDelay = Math.max(0, Math.min(5_000, Number(process.env.CATALOG_SOURCE_BATCH_DELAY_MS || 0)));
+    for (let index = 0; index < metas.length; index += batchSize) {
+      const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
         const detail = await request(meta.url, listUrl).catch(() => null);
         return detail?.response.ok ? parseExactDetail(detail.markup, meta) : null;
       }));
       rows.push(...batch.filter(Boolean) as Row[]);
+      if (index + batchSize < metas.length) await sleep(batchDelay);
     }
     return {
       items: rows,
