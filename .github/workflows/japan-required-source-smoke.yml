@@ -1,5 +1,5 @@
-name: Japan required sources smoke
-run-name: Japan required sources smoke · ${{ github.sha }}
+name: JPAuc past form diagnostic
+run-name: JPAuc past form diagnostic · ${{ github.sha }}
 
 on:
   push:
@@ -7,47 +7,27 @@ on:
       - codex-japan-required-source-smoke
     paths:
       - ".github/workflows/japan-required-source-smoke.yml"
+      - "scripts/jpauc-past-form-diagnostic.mjs"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  certify:
+  diagnostic:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    strategy:
-      fail-fast: false
-      matrix:
-        source_id:
-          - jpauc_japan_past_open
-          - carvector_japan_stat_open
-          - prestige_japan_auctions_open
-          - auctiondatasearch_japan_open
-          - jpcenter_japan_catalog_open
-    env:
-      CATALOG_CERTIFY_MARKET: japan
-      CATALOG_CERTIFY_SOURCE_ID: ${{ matrix.source_id }}
-      CATALOG_CERTIFY_OUTPUT: catalog-certify-japan-${{ matrix.source_id }}.json
-      CATALOG_CERTIFY_PAGE_LIMIT: "3"
-      CATALOG_CERTIFY_ROWS_PER_PAGE: "50"
-      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
-      CATALOG_GALLERY_TIMEOUT_MS: "30000"
-      CATALOG_SOURCE_TIMEOUT_MS: "25000"
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Certify one real source card
-        continue-on-error: true
-        run: npx tsx scripts/catalog-certify-required-source.mjs
+      - name: Inspect public JPAuc form and scripts
+        run: node scripts/jpauc-past-form-diagnostic.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-${{ matrix.source_id }}-smoke
-          path: catalog-certify-japan-${{ matrix.source_id }}.json
+          name: jpauc-past-form-diagnostic
+          path: jpauc-past-form-diagnostic.json
           if-no-files-found: warn
           retention-days: 3
