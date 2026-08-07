@@ -1,0 +1,40 @@
+name: Encar source spec endpoint discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/encar-frontend-endpoint-discovery.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encar-source-spec-endpoint-discovery
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ENCAR_DISCOVERY_ID: "42154170"
+      ENCAR_DISCOVERY_OUTPUT: encar-frontend-endpoints.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect Encar page and frontend chunks
+        run: npx tsx scripts/encar-frontend-endpoint-discovery.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: encar-frontend-endpoints
+          path: encar-frontend-endpoints.json
+          if-no-files-found: warn
+          retention-days: 3
