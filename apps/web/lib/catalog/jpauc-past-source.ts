@@ -236,20 +236,40 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     await this.ensureReady();
     const page = Math.max(1, Number(cursor || 1));
-    let html = "";
-    let httpStatus = 200;
-    if (page === 1) {
-      html = this.firstListingHtml;
-    } else {
-      const url = new URL(this.listingUrl);
-      url.searchParams.set("p", String(page));
-      const fetched = await this.request(url.toString(), { referer: this.listingUrl });
-      html = fetched.html;
-      httpStatus = fetched.response.status;
+    const currentYear = new Date().getFullYear();
+    const priorityYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
+
+    const filteredUrl = new URL(this.listingUrl);
+    filteredUrl.searchParams.set("ys", String(currentYear - priorityYears));
+    filteredUrl.searchParams.set("ye", String(currentYear));
+    filteredUrl.searchParams.set("mm", "0");
+    filteredUrl.searchParams.set("mx", "9999");
+    filteredUrl.searchParams.set("start_price_from", "1");
+    filteredUrl.searchParams.set("p", String(page));
+    filteredUrl.searchParams.set("ob", "y_l");
+
+    const filtered = await this.request(filteredUrl.toString(), { referer: this.listingUrl });
+    let html = filtered.html;
+    let items = parseListingRows(html);
+    let total = listingTotal(html, items.length);
+    let httpStatus = filtered.response.status;
+    let mode = "recent_priced";
+
+    if (!items.length && total > 0) {
+      mode = "session_fallback";
+      if (page === 1) {
+        html = this.firstListingHtml;
+      } else {
+        const fallbackUrl = new URL(this.listingUrl);
+        fallbackUrl.searchParams.set("p", String(page));
+        const fallback = await this.request(fallbackUrl.toString(), { referer: this.listingUrl });
+        html = fallback.html;
+        httpStatus = fallback.response.status;
+      }
+      items = parseListingRows(html);
+      total = listingTotal(html, this.totalCount || items.length);
     }
 
-    const items = parseListingRows(html);
-    const total = listingTotal(html, this.totalCount || items.length);
     if (total > 0) this.totalCount = total;
     const pageSize = 10;
     const finished = items.length === 0 || page * pageSize >= total;
@@ -258,7 +278,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       count: total,
       finished,
       nextCursor: finished ? null : String(page + 1),
-      health: { ok: items.length > 0 || finished, message: `jpauc_past:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus },
+      health: { ok: items.length > 0 || finished, message: `jpauc_past:${mode}:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus },
     };
   }
 
