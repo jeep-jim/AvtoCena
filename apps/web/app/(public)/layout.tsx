@@ -18,10 +18,47 @@ const priceTrendTapGuard = `
 const publicPageFixes = `
 /* One neutral background across every public page in dark mode. */
 html:not([data-theme="light"]) body,
-html:not([data-theme="light"]) .ac-page-copy {
+html:not([data-theme="light"]) body main.ac-page-copy,
+html:not([data-theme="light"]) body .ac-page-copy,
+html:not([data-theme="light"]) body .ac-public-header {
   background: #0f172a !important;
   background-color: #0f172a !important;
   background-image: none !important;
+}
+
+/* Keep the browser-visible public shell on exactly the same dark tone. */
+html:not([data-theme="light"]) body main.ac-page-copy.ac-home-page,
+html:not([data-theme="light"]) body main.ac-page-copy.ac-cars-page,
+html:not([data-theme="light"]) body main.ac-page-copy.ac-results-page,
+html:not([data-theme="light"]) body main.ac-page-copy.ac-favorites-page,
+html:not([data-theme="light"]) body main.ac-page-copy.ac-offer-page {
+  background: #0f172a !important;
+  background-color: #0f172a !important;
+  background-image: none !important;
+}
+
+/* Footer calls to action: calculate is always red/white; Dealers stays visible in light mode. */
+.ac-public-footer-cta,
+.ac-public-footer-cta:hover,
+.ac-public-footer-cta:focus-visible {
+  background: #e31b23 !important;
+  background-color: #e31b23 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: transparent !important;
+}
+.ac-public-footer-cta * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html[data-theme="light"] .ac-public-footer-dealers,
+html[data-theme="light"] .ac-public-footer-dealers:hover,
+html[data-theme="light"] .ac-public-footer-dealers:focus-visible {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #171b24 !important;
+  -webkit-text-fill-color: #171b24 !important;
+  border: 1px solid #d9e0e9 !important;
 }
 
 .ac-public-footer-navigation nav[aria-label="Разделы"] a[href="/#form"],
