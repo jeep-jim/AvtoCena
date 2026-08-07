@@ -32,7 +32,7 @@ import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
 import { dubicarsUaeStrictSource } from "./dubicars-strict-source";
-import { kcarKoreaStrictSourceV2 } from "./kcar-strict-source-v2";
+import { kcarKoreaStrictSourceV3 } from "./kcar-strict-source-v3";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -85,7 +85,7 @@ const completeSources = [
   jpaucPastSource,
   dubicarsUaeStrictSource,
   encarCompleteSource,
-  kcarKoreaStrictSourceV2,
+  kcarKoreaStrictSourceV3,
 ];
 
 for (const replacement of completeSources) {
