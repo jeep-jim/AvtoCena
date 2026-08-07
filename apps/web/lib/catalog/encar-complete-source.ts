@@ -1,5 +1,4 @@
 import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";
-import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 const ENCAR_HEADERS = {
@@ -14,29 +13,55 @@ function text(value: unknown) {
   return value == null ? "" : String(value).trim().replace(/\\\//g, "/");
 }
 
-function number(value: unknown) {
+function positive(value: unknown) {
   const result = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
   return Number.isFinite(result) && result > 0 ? result : undefined;
 }
 
-function deepFind(value: unknown, keys: string[], depth = 0): unknown {
-  if (value == null || depth > 12 || typeof value !== "object") return undefined;
-  if (Array.isArray(value)) {
-    for (const item of value) {
-      const found = deepFind(item, keys, depth + 1);
-      if (found !== undefined && found !== null && text(found)) return found;
-    }
-    return undefined;
-  }
-  const row = value as Record<string, unknown>;
-  for (const key of keys) {
-    if (row[key] !== undefined && row[key] !== null && text(row[key])) return row[key];
-  }
-  for (const child of Object.values(row)) {
-    const found = deepFind(child, keys, depth + 1);
-    if (found !== undefined && found !== null && text(found)) return found;
-  }
+function encarPriceWon(value: unknown) {
+  const number = positive(value);
+  if (!number) return undefined;
+  // Encar passenger listings normally expose price in 만원 (10,000 KRW).
+  if (number >= 100 && number < 1_000_000) return Math.round(number * 10_000);
+  if (number >= 1_000_000 && number <= 5_000_000_000) return Math.round(number);
   return undefined;
+}
+
+function fuel(value: unknown) {
+  const raw = text(value);
+  if (/가솔린|gasoline|petrol/i.test(raw)) return "petrol";
+  if (/디젤|diesel/i.test(raw)) return "diesel";
+  if (/전기|electric|\bev\b/i.test(raw)) return "electric";
+  if (/하이브리드|hybrid|phev|hev/i.test(raw)) return "hybrid";
+  if (/lpg/i.test(raw)) return "lpg";
+  return raw || undefined;
+}
+
+function transmission(value: unknown) {
+  const raw = text(value);
+  if (/오토|automatic|\bat\b/i.test(raw)) return "automatic";
+  if (/수동|manual|\bmt\b/i.test(raw)) return "manual";
+  if (/cvt/i.test(raw)) return "cvt";
+  if (/dct|dsg|듀얼/i.test(raw)) return "dct";
+  return raw || undefined;
+}
+
+function exactDrive(category: any) {
+  const raw = [category?.gradeEnglishName, category?.gradeName, category?.gradeDetailEnglishName, category?.gradeDetailName]
+    .map(text).filter(Boolean).join(" ");
+  if (/\b(?:AWD|4WD|4X4)\b|사륜/i.test(raw)) return "awd";
+  if (/\bFWD\b|전륜/i.test(raw)) return "fwd";
+  if (/\bRWD\b|후륜/i.test(raw)) return "rwd";
+  // 2WD alone does not tell us front vs rear drive, so it is deliberately left empty.
+  return undefined;
+}
+
+function exactYear(category: any) {
+  const form = positive(category?.formYear);
+  if (form && form >= 1990 && form <= new Date().getFullYear() + 1) return Math.round(form);
+  const yearMonth = text(category?.yearMonth || category?.yearMon);
+  const match = yearMonth.match(/((?:19|20)\d{2})/);
+  return match ? Number(match[1]) : undefined;
 }
 
 function imageLike(value: string) {
@@ -44,20 +69,20 @@ function imageLike(value: string) {
     && !/logo|icon|banner|sheet|diagram|inspection|event|promotion/i.test(value);
 }
 
-function collectImageValues(value: unknown, key = "", depth = 0, output: string[] = []) {
-  if (value == null || depth > 14) return output;
+function collectPhotoValues(value: unknown, key = "", depth = 0, output: string[] = []) {
+  if (value == null || depth > 10) return output;
   if (typeof value === "string") {
     const candidate = text(value);
-    if (candidate && imageLike(candidate) && /photo|image|picture|gallery|media|location|path|url|^$/i.test(key)) output.push(candidate);
+    if (candidate && imageLike(candidate) && /photo|image|picture|location|path|url|src|^$/i.test(key)) output.push(candidate);
     return output;
   }
   if (Array.isArray(value)) {
-    value.forEach((item) => collectImageValues(item, key, depth + 1, output));
+    value.forEach((item) => collectPhotoValues(item, key, depth + 1, output));
     return output;
   }
   if (typeof value !== "object") return output;
   for (const [childKey, child] of Object.entries(value as Record<string, unknown>)) {
-    if (/photo|image|picture|gallery|media|location|path|url/i.test(childKey) || depth < 7) collectImageValues(child, childKey, depth + 1, output);
+    if (/photo|image|picture|location|path|url|src/i.test(childKey) || depth < 5) collectPhotoValues(child, childKey, depth + 1, output);
   }
   return output;
 }
@@ -122,37 +147,73 @@ async function fetchDetail(sourceOfferId: string) {
   }
 }
 
-function mergeDetail(offer: VehicleOffer, detail: any) {
-  const vehicle = detail?.vehicle || detail?.Vehicle || detail;
-  const powerHp = offer.powerHp || number(deepFind(vehicle, [
-    "power", "Power", "horsePower", "horsepower", "HorsePower", "maxPowerPs", "MaxPowerPs", "ps", "PS",
-  ]));
-  const merged = normalizeVehicleOfferSpecs({
+function mergeExactDetail(offer: VehicleOffer, detail: any) {
+  const category = detail?.category || {};
+  const spec = detail?.spec || {};
+  const advertisement = detail?.advertisement || {};
+  const exactMake = text(category.manufacturerEnglishName || category.manufacturerName);
+  const exactModel = text(category.modelEnglishName || category.modelName || category.modelGroupEnglishName || category.modelGroupName);
+  const exactTrim = [category.gradeEnglishName || category.gradeName, category.gradeDetailEnglishName || category.gradeDetailName]
+    .map(text).filter(Boolean).join(" ");
+  const year = exactYear(category);
+  const mileageKm = positive(spec.mileage);
+  const engineCc = positive(spec.displacement);
+  const exactFuel = fuel(spec.fuelName);
+  const exactTransmission = transmission(spec.transmissionName);
+  const bodyType = text(spec.bodyName) || undefined;
+  const drive = exactDrive(category);
+  const sourcePrice = encarPriceWon(advertisement.price);
+  const sourceExactFields = [
+    ...(exactMake ? ["make"] : []),
+    ...(exactModel ? ["model"] : []),
+    ...(year ? ["year"] : []),
+    ...(mileageKm != null ? ["mileageKm"] : []),
+    ...(engineCc ? ["engineCc"] : []),
+    ...(exactFuel ? ["fuel"] : []),
+    ...(exactTransmission ? ["transmission"] : []),
+    ...(bodyType ? ["bodyType"] : []),
+    ...(drive ? ["drive"] : []),
+    ...(sourcePrice ? ["sourcePrice", "sourceCurrency"] : []),
+  ];
+
+  Object.assign(offer, {
     ...offer,
-    engineCc: offer.engineCc || number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"])),
-    powerHp,
-    powerDataConfidence: powerHp ? (offer.powerDataConfidence || "source_exact") : offer.powerDataConfidence,
-    powerDataSource: powerHp ? (offer.powerDataSource || "encar_exact_detail") : offer.powerDataSource,
-    fuel: offer.fuel || text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"])),
-    transmission: offer.transmission || text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"])),
-    drive: offer.drive || text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"])),
-    bodyType: offer.bodyType || text(deepFind(vehicle, ["category", "Category", "bodyType", "BodyType", "carType"])),
-    color: offer.color || text(deepFind(vehicle, ["color", "Color", "exteriorColor"])),
-    productionDate: offer.productionDate || text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"])),
+    sourceTitle: [exactMake, exactModel, exactTrim].filter(Boolean).join(" ") || offer.sourceTitle,
+    make: exactMake || "",
+    model: exactModel || "",
+    trim: exactTrim || undefined,
+    year: year || 0,
+    mileageKm,
+    engineCc,
+    fuel: exactFuel,
+    transmission: exactTransmission,
+    drive,
+    bodyType,
+    powerHp: undefined,
+    powerKw: undefined,
+    powerDataConfidence: undefined,
+    powerDataSource: undefined,
+    sourcePrice: sourcePrice || null,
+    sourceCurrency: sourcePrice ? "KRW" : null,
+    priceMode: sourcePrice ? "fixed" : "estimated",
+    totalRub: null,
+    calculationStatus: "needs_power_data",
     operational: {
       ...(offer.operational || {}),
+      sourceTitle: [exactMake, exactModel, exactTrim].filter(Boolean).join(" "),
       detailIdentityVerified: true,
       fieldIdentityVerified: true,
+      sourceExactFields,
+      vin: text(detail?.vin) || undefined,
+      frameNumber: text(detail?.frameNo || detail?.frameNumber) || undefined,
       raw: {
         exactDetail: detail,
         detailIdentityVerified: true,
         fieldIdentityVerified: true,
+        sourceExactFields,
       },
-      vin: text(deepFind(vehicle, ["vin", "VIN"])),
-      frameNumber: text(deepFind(vehicle, ["frameNo", "FrameNo", "frameNumber"])),
     },
-  } as VehicleOffer);
-  Object.assign(offer, merged);
+  } satisfies Partial<VehicleOffer>);
 }
 
 export class EncarCompleteAdapter extends EncarDirectAdapter {
@@ -166,15 +227,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
         lastError = error;
         if (!retryableEncarError(error) || attempt >= maxAttempts) throw error;
         const delay = Math.min(12_000, 900 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 350);
-        console.warn(JSON.stringify({
-          sourceId: this.sourceId,
-          event: "list_retry",
-          attempt,
-          maxAttempts,
-          cursor: cursor || null,
-          delayMs: delay,
-          error: String((error as any)?.message || error),
-        }));
+        console.warn(JSON.stringify({ sourceId: this.sourceId, event: "list_retry", attempt, maxAttempts, cursor: cursor || null, delayMs: delay, error: String((error as any)?.message || error) }));
         await sleep(delay);
       }
     }
@@ -187,8 +240,8 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const minimum = Math.min(limit, Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 
     const detail = await fetchDetail(String(offer.sourceOfferId || ""));
-    mergeDetail(offer, detail);
-    const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);
+    mergeExactDetail(offer, detail);
+    const detailUrls = uniqueUrls(collectPhotoValues(detail?.photos || []), limit * 4);
     const gallery = detailUrls.slice(0, limit).map(urlImage);
     const verified = gallery.length >= minimum;
 
@@ -201,7 +254,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       fieldIdentityVerified: true,
       galleryImageCount: gallery.length,
       galleryRefreshedAt: new Date().toISOString(),
-      gallerySafetyMode: "encar_detail_only_v3",
+      gallerySafetyMode: "encar_exact_photos_array_only_v4",
       galleryStoredAs: "json_urls",
       raw: {
         ...((offer.operational as any)?.raw || {}),
