@@ -1,0 +1,50 @@
+name: China required sources smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/china-required-source-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        source_id:
+          - autohome_used_china_open
+          - dongchedi_china_open
+          - guazi_china_open
+          - autohome_new_china_open
+    env:
+      CATALOG_SMOKE_SOURCE_ID: ${{ matrix.source_id }}
+      CATALOG_SMOKE_OUTPUT: china-smoke-${{ matrix.source_id }}.json
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      CATALOG_RAW_LISTING_MODE: "1"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "3"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Smoke exact source
+        run: npx tsx scripts/china-required-source-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: china-smoke-${{ matrix.source_id }}
+          path: china-smoke-${{ matrix.source_id }}.json
+          if-no-files-found: warn
+          retention-days: 3
