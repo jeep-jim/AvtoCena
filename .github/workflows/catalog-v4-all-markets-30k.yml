@@ -1,5 +1,5 @@
-name: Catalog strict · 7 markets · 10k each
-run-name: Catalog strict sequential · ${{ github.sha }}
+name: Catalog raw · 7 markets · up to 30k each
+run-name: Catalog raw parallel refresh · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -11,12 +11,17 @@ on:
         type: boolean
   schedule:
     - cron: "30 20 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v4-all-markets-30k.yml"
 
 permissions:
   contents: read
 
 concurrency:
-  group: catalog-strict-sequential-production
+  group: catalog-raw-all-markets-production
   cancel-in-progress: false
 
 jobs:
@@ -41,12 +46,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Delete old catalog, generations and stored photos
+      - name: Delete old catalog only when explicitly requested
         if: github.event_name == 'workflow_dispatch' && inputs.reset_catalog
         run: npx tsx scripts/catalog-reset-public.mjs
-      - name: Keep current catalog
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.reset_catalog)
-        run: echo "Current catalog retained; three-day retention remains active."
+      - name: Keep current catalog and accumulate for three days
+        if: github.event_name != 'workflow_dispatch' || !inputs.reset_catalog
+        run: echo "Current catalog retained; new stable IDs will be accumulated for three days."
 
   korea:
     needs: reset
@@ -57,7 +62,7 @@ jobs:
     secrets: inherit
 
   japan:
-    needs: korea
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: japan
@@ -65,7 +70,7 @@ jobs:
     secrets: inherit
 
   china:
-    needs: japan
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: china
@@ -73,7 +78,7 @@ jobs:
     secrets: inherit
 
   uae:
-    needs: china
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: uae
@@ -81,7 +86,7 @@ jobs:
     secrets: inherit
 
   europe:
-    needs: uae
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: europe
@@ -89,7 +94,7 @@ jobs:
     secrets: inherit
 
   georgia:
-    needs: europe
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: georgia
@@ -97,7 +102,7 @@ jobs:
     secrets: inherit
 
   kyrgyzstan:
-    needs: georgia
+    needs: reset
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: kyrgyzstan
