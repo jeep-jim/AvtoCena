@@ -16,6 +16,14 @@ const priceTrendTapGuard = `
 `;
 
 const publicPageFixes = `
+/* One neutral background across every public page in dark mode. */
+html:not([data-theme="light"]) body,
+html:not([data-theme="light"]) .ac-page-copy {
+  background: #0f172a !important;
+  background-color: #0f172a !important;
+  background-image: none !important;
+}
+
 .ac-public-footer-navigation nav[aria-label="Разделы"] a[href="/#form"],
 .ac-public-legal-footer-line nav[aria-label="Правовая информация"] a {
   display: none !important;
