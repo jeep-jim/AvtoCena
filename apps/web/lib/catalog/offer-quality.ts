@@ -20,6 +20,18 @@ function meaningfulVehicleField(value: unknown) {
 }
 function imageIdentity(image: CatalogImage) { return String(image.checksum || image.id || image.objectKey || image.url || ""); }
 
+function sourceExactFields(offer: VehicleOffer) {
+  const operational: any = offer.operational || {};
+  const raw: any = operational.raw || {};
+  const list = Array.isArray(operational.sourceExactFields)
+    ? operational.sourceExactFields
+    : Array.isArray(raw.sourceExactFields)
+      ? raw.sourceExactFields
+      : [];
+  return new Set(list.map((value: unknown) => clean(value)).filter(Boolean));
+}
+function exactField(offer: VehicleOffer, field: string) { return sourceExactFields(offer).has(field); }
+
 export function credibleCatalogImages(images: CatalogImage[]) {
   const unique = new Map<string, CatalogImage>();
   for (const image of images || []) {
@@ -34,11 +46,16 @@ export function credibleCatalogImages(images: CatalogImage[]) {
 
 function sourcePriceOk(offer: VehicleOffer) {
   const price = Number(offer.sourcePrice || 0);
-  return Number.isFinite(price) && price > 0 && clean(offer.sourceCurrency).length > 0;
+  return exactField(offer, "sourcePrice")
+    && exactField(offer, "sourceCurrency")
+    && Number.isFinite(price)
+    && price > 0
+    && clean(offer.sourceCurrency).length > 0;
 }
 
 function mileageOk(offer: VehicleOffer) {
   if (offer.mileageKm === undefined || offer.mileageKm === null) return true;
+  if (!exactField(offer, "mileageKm")) return false;
   const mileage = Number(offer.mileageKm);
   return Number.isFinite(mileage) && mileage >= 0 && mileage <= 1_000_000;
 }
@@ -55,8 +72,7 @@ function exactIdentityVerified(offer: VehicleOffer) {
   const operational: any = offer.operational || {};
   const raw: any = operational.raw || {};
   if (!REQUIRED_SOURCE_IDS.has(String(offer.sourceId || ""))) return operational.detailIdentityVerified === true;
-  return operational.detailIdentityVerified === true
-    || raw.detailIdentityVerified === true;
+  return operational.detailIdentityVerified === true || raw.detailIdentityVerified === true;
 }
 
 function exactVehiclePhotosVerified(offer: VehicleOffer) {
@@ -86,16 +102,22 @@ function exactSpecsReady(offer: VehicleOffer) {
   const powertrain = clean(offer.powertrainKind);
   const electric = powertrain === "electric";
   const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(powertrain);
+  const required = ["make", "model", "year", "fuel", "transmission", "drive", "bodyType", "powerHp"];
+  if (required.some((field) => !exactField(offer, field))) return false;
   if (!meaningfulVehicleField(offer.make) || !meaningfulVehicleField(offer.model)) return false;
   if (!meaningfulVehicleField(offer.fuel) || !meaningfulVehicleField(offer.transmission) || !meaningfulVehicleField(offer.drive) || !meaningfulVehicleField(offer.bodyType)) return false;
-  if (!positive(offer.powerHp)) return false;
-  if (!electric && !positive(offer.engineCc)) return false;
+  if (!positive(offer.powerHp) || !["source_exact", "documented"].includes(clean(offer.powerDataConfidence))) return false;
+  if (!electric && (!exactField(offer, "engineCc") || !positive(offer.engineCc))) return false;
   if (electrified) {
     const confidence = clean(offer.powerDataConfidence);
     if (!["source_exact", "documented"].includes(confidence)) return false;
-    const motor30 = positive(offer.power30MinKw)
-      || (Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor.map(positive).reduce((sum, value) => sum + value, 0) : 0);
-    if (!positive(offer.utilizationPowerKw) && !motor30) return false;
+    const motor30 = (exactField(offer, "power30MinKw") ? positive(offer.power30MinKw) : 0)
+      || (exactField(offer, "power30MinKwByMotor") && Array.isArray(offer.power30MinKwByMotor)
+        ? offer.power30MinKwByMotor.map(positive).reduce((sum, value) => sum + value, 0)
+        : 0);
+    const util = exactField(offer, "utilizationPowerKw") ? positive(offer.utilizationPowerKw) : 0;
+    if (!util && !motor30) return false;
+    if (powertrain === "other_hybrid" && (!exactField(offer, "icePowerKw") || !positive(offer.icePowerKw))) return false;
   }
   return true;
 }
@@ -105,7 +127,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (!meaningfulTitle(title)) return false;
-  if (year < 2011 || year > currentYear + 1) return false;
+  if (!exactField(offer, "year") || year < 2011 || year > currentYear + 1) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   if (!exactSpecsReady(offer)) return false;
