@@ -5,15 +5,36 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
 
 const { JpaucPastAdapter } = await import("../apps/web/lib/catalog/jpauc-past-source.ts");
 const source = new JpaucPastAdapter();
-const page = await source.fetchPage(null);
-const candidates = [];
-for (const raw of page.items || []) {
-  const offer = source.normalizeOffer(raw);
-  if (offer) candidates.push(offer);
-}
-if (!candidates.length) throw new Error("jpauc_smoke_no_priced_recent_candidates");
 
-const offer = candidates[0];
+let cursor = null;
+let scannedPages = 0;
+let scannedRows = 0;
+let offer = null;
+let lastPage = null;
+const pageSummaries = [];
+for (let attempt = 0; attempt < 30 && !offer; attempt++) {
+  const page = await source.fetchPage(cursor);
+  lastPage = page;
+  scannedPages++;
+  scannedRows += Number(page.items?.length || 0);
+  const candidates = [];
+  for (const raw of page.items || []) {
+    const normalized = source.normalizeOffer(raw);
+    if (normalized) candidates.push(normalized);
+  }
+  pageSummaries.push({ page: attempt + 1, rows: page.items?.length || 0, priced: candidates.length, total: page.count || 0 });
+  if (candidates.length) offer = candidates[0];
+  cursor = page.nextCursor || null;
+  if (!cursor || page.finished) break;
+}
+
+if (!offer) {
+  const report = { checkedAt: new Date().toISOString(), passed: false, reason: "no_priced_recent_candidate", scannedPages, scannedRows, pageSummaries };
+  await fs.writeFile("jpauc-past-adapter-smoke.json", JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report, null, 2));
+  process.exit(1);
+}
+
 const images = await source.fetchImages(offer);
 const imageChecks = [];
 for (const image of images.slice(0, 3)) {
@@ -45,8 +66,8 @@ for (const image of images.slice(0, 3)) {
 }
 
 const checks = {
-  pageItems: Number(page.items?.length || 0) > 0,
-  pageTotal: Number(page.count || 0) >= Number(page.items?.length || 0),
+  scannedPages: scannedPages > 0,
+  pageTotal: Number(lastPage?.count || 0) >= Number(lastPage?.items?.length || 0),
   stableId: Boolean(offer.id && offer.sourceOfferId),
   sourceTitle: Boolean(offer.sourceTitle && offer.sourceTitle.length > 2),
   year: Number(offer.year || 0) >= new Date().getFullYear() - 6,
@@ -61,7 +82,9 @@ const report = {
   checkedAt: new Date().toISOString(),
   passed,
   checks,
-  page: { items: page.items?.length || 0, total: page.count || 0, nextCursor: page.nextCursor || null },
+  scannedPages,
+  scannedRows,
+  pageSummaries,
   card: {
     id: offer.id,
     sourceOfferId: offer.sourceOfferId,
