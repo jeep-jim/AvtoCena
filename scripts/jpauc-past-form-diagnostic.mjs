@@ -17,16 +17,25 @@ function parseInputs(html) {
 
 function summarize(html, url) {
   const inputs = parseInputs(html);
-  const detailLinks = [...new Set([...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]).filter((href) => /\/auction\/detail\//i.test(href)))];
+  const hrefs = [...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
+  const detailLinks = [...new Set(hrefs.filter((href) => /\/auction\/detail\//i.test(href)))];
   const labels = [...html.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)].map((m) => clean(m[1].replace(/<[^>]+>/g, " "))).filter(Boolean);
-  return { url, bytes: html.length, detailLinks: detailLinks.slice(0, 30), submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20), checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80), labels: labels.slice(0, 120) };
+  const rows = [...html.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi)].map((m) => clean(m[0])).filter((row) => /lot|model|year|price|yen|¥|sold|auction|image/i.test(row)).slice(0, 8);
+  return {
+    url,
+    bytes: html.length,
+    detailLinks: detailLinks.slice(0, 30),
+    hrefs: [...new Set(hrefs.filter((href) => /auction|lot|detail|vehicle|car|listing|image|photo/i.test(href)))].slice(0, 150),
+    submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20),
+    checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80),
+    labels: labels.slice(0, 120),
+    tableRows: rows,
+    listingHtmlSample: /\/listing/i.test(url) ? html.slice(Math.max(0, html.search(/<table|class=["'][^"']*(?:auction|listing|car|vehicle)/i)), Math.min(html.length, Math.max(0, html.search(/<table|class=["'][^"']*(?:auction|listing|car|vehicle)/i)) + 22000)) : undefined,
+  };
 }
 
 async function request(url, cookie, options = {}) {
-  const response = await fetch(url, {
-    headers: { ...baseHeaders, ...(cookie ? { cookie } : {}), ...(options.headers || {}) },
-    method: options.method || "GET", body: options.body, redirect: "follow", signal: AbortSignal.timeout(30000),
-  });
+  const response = await fetch(url, { headers: { ...baseHeaders, ...(cookie ? { cookie } : {}), ...(options.headers || {}) }, method: options.method || "GET", body: options.body, redirect: "follow", signal: AbortSignal.timeout(30000) });
   return { response, html: await response.text() };
 }
 
@@ -40,14 +49,14 @@ const stages = [summarize(initial.html, initial.response.url)];
 let currentUrl = "https://jpauc.com/auction/past";
 let body = new URLSearchParams([["checkdate[]", selectedDate], ["submit", "submitauction"]]);
 
-for (let step = 0; step < 6; step++) {
+for (let step = 0; step < 4; step++) {
   const posted = await request(currentUrl, cookie, { method: "POST", body: body.toString(), headers: { "content-type": "application/x-www-form-urlencoded", origin: "https://jpauc.com", referer: currentUrl } });
   currentUrl = posted.response.url;
   const summary = summarize(posted.html, currentUrl);
   summary.requestBody = body.toString();
   summary.status = posted.response.status;
   stages.push(summary);
-  if (summary.detailLinks.length) break;
+  if (/\/listing/i.test(currentUrl) || summary.detailLinks.length) break;
 
   const inputs = parseInputs(posted.html);
   const submit = inputs.find((input) => input.name === "submit" && input.value);
