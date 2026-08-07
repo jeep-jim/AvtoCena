@@ -136,3 +136,14 @@ html[data-theme="light"] .ac-home-page .ac-home-hero>div:first-child>p:first-of-
 @media(max-width:1023px){html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type{font-size:inherit!important}html .ac-home-page .ac-home-hero>div:first-child>p:first-of-type::after{content:none!important}}
 html .ac-home-page>div.fixed section:has(h2)>p{font-size:0!important}
 html .ac-home-page>div.fixed section:has(h2)>p::after{content:"Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.";font-size:16px;font-weight:500;line-height:1.75;color:var(--ac-muted)}
+
+
+/* UI polish coverage and dealer surfaces */
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#12151d]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#151821]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#0c0e14]"],
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-metric-card,
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page .dealer-hero-preview{background:#222b38!important;background-color:#222b38!important;background-image:none!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-dealers-page section.relative.overflow-hidden>div.absolute.inset-0{background:transparent!important;background-image:none!important}
+html:not([data-theme="light"]):not([data-theme="light"]) body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:rgba(255,255,255,.5);font-size:13px;font-weight:800}
+html[data-theme="light"] body .ac-home-market-rail:empty::after{content:"Предложения этого рынка загружаются";display:flex;min-height:92px;align-items:center;padding:0 1rem;color:#657086;font-size:13px;font-weight:800}

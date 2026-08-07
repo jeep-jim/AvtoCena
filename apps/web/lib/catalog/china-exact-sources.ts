@@ -95,7 +95,7 @@ function parseChineseCards(markup: string, pageUrl: string, linkRe: RegExp, idFr
     const text = clean(cardHtml);
     const anchorText = clean(entry.inner);
     const titleCandidate = anchorText.length >= 4 && anchorText.length <= 220 ? anchorText : text;
-    const title = titleCandidate.replace(/\s+(?:\d+(?:\.\d+)?万公里|\d{4}[-年].*)$/s, "").slice(0, 180).trim();
+    const title = titleCandidate.replace(/\s+(?:\d+(?:\.\d+)?万公里|\d{4}[-年].*)$/, "").slice(0, 180).trim();
     const year = Number(titleCandidate.match(/(20\d{2})款/)?.[1] || text.match(/(20\d{2})[-年]/)?.[1] || 0);
     const mileageKm = wanKm(text.match(/([0-9]+(?:\.[0-9]+)?)\s*万公里/)?.[1]);
     const priceMatches = [...text.matchAll(/([0-9]+(?:\.[0-9]+)?)\s*万/g)].map((m) => Number(m[1])).filter((n) => n > 0 && n < 1_000);
