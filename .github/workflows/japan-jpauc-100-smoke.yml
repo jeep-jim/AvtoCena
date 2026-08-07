@@ -1,0 +1,59 @@
+name: Japan JPAuc · 100 clean cards
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/japan-jpauc-100-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CATALOG_REBUILD_MARKET: japan
+      CATALOG_REBUILD_SOURCE_IDS: jpauc_japan_past_open
+      CATALOG_REBUILD_TARGET_PER_MARKET: "100"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "100"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "30"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "1500000"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_OUTPUT: japan-jpauc-100.json
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      CATALOG_RAW_LISTING_MODE: "1"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect JPAuc exact cards
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Validate 100 exact cards
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('japan-jpauc-100.json','utf8'));
+          const rows=Array.isArray(p.offers)?p.offers:[];
+          const invalid=rows.filter(o=>o.sourceId!=='jpauc_japan_past_open'||!o.sourceOfferId||!o.operational?.sourceUrl||Number(o.sourcePrice||0)<=0||o.sourceCurrency!=='JPY'||Number(o.year||0)<2011||(o.images||[]).length<3||(o.images||[]).some(i=>!/^https?:\/\//.test(String(i.url||''))));
+          console.log(JSON.stringify({count:rows.length,invalid:invalid.length,report:p.report},null,2));
+          if(rows.length<100||invalid.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-jpauc-100
+          path: japan-jpauc-100.json
+          if-no-files-found: warn
+          retention-days: 3
