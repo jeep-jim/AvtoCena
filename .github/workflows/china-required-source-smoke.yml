@@ -1,4 +1,4 @@
-name: China listing shape diagnostic
+name: China Guazi exact smoke
 
 on:
   workflow_dispatch:
@@ -11,18 +11,19 @@ permissions:
   contents: read
 
 jobs:
-  shape:
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    strategy:
-      fail-fast: false
-      matrix:
-        source:
-          - guazi
-          - che168
+    timeout-minutes: 15
     env:
-      CHINA_SHAPE_SOURCE: ${{ matrix.source }}
-      CHINA_SHAPE_OUTPUT: china-shape-${{ matrix.source }}.json
+      CATALOG_SMOKE_SOURCE_ID: guazi_china_open
+      CATALOG_SMOKE_OUTPUT: china-smoke-guazi_china_open.json
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      CATALOG_RAW_LISTING_MODE: "1"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,12 +31,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Inspect server HTML shape
-        run: npx tsx scripts/china-html-shape.mjs
+      - name: Validate one exact Guazi product
+        run: npx tsx scripts/china-required-source-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: china-shape-${{ matrix.source }}
-          path: china-shape-${{ matrix.source }}.json
+          name: china-smoke-guazi-exact
+          path: china-smoke-guazi_china_open.json
           if-no-files-found: warn
           retention-days: 3
