@@ -11,8 +11,9 @@ function sourceFuelKind(value: unknown, engineCc: unknown) {
 
 export class KCarStrictAdapterV3 extends KCarStrictAdapterV2 {
   override normalizeOffer(raw: unknown): VehicleOffer | null {
-    const row = raw && typeof raw === "object" ? { ...(raw as Record<string, unknown>) } : raw;
-    if (row && typeof row === "object") row.fuel = sourceFuelKind(row.fuel, row.engineCc);
+    if (!raw || typeof raw !== "object") return super.normalizeOffer(raw);
+    const row = { ...(raw as Record<string, unknown>) };
+    row.fuel = sourceFuelKind(row.fuel, row.engineCc);
     return super.normalizeOffer(row);
   }
 }
