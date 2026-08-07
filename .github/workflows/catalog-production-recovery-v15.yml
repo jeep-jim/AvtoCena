@@ -1,13 +1,22 @@
-name: Catalog source-scale daily DISABLED on strict certification branch
+name: Catalog source-scale cancel guard
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/catalog-production-recovery-v15.yml"
 
 permissions:
   contents: read
+
+concurrency:
+  group: catalog-source-scale-daily
+  cancel-in-progress: true
 
 jobs:
   stopped:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Raw/source-scale publishing is disabled on codex-strict-catalog-source-only. Certify exact sources through the strict source-only ladder before production publishing."
+      - run: echo "Cancelling legacy raw/source-scale run on the strict certification branch; no catalog publication is performed."
