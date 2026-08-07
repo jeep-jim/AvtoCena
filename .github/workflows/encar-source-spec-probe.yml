@@ -22,13 +22,13 @@ jobs:
     env:
       ENCAR_PROBE_ID: "42154170"
       ENCAR_PROBE_OUTPUT: encar-source-spec-probe.json
-      ENCAR_PROBE_VERSION: "2"
+      ENCAR_PROBE_VERSION: "3"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Probe Encar exact and legacy source APIs
+      - name: Probe Encar exact, legacy and new-car source APIs
         run: node scripts/encar-source-spec-probe.mjs
       - uses: actions/upload-artifact@v4
         if: always()
