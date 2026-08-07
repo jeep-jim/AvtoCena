@@ -20,18 +20,7 @@ function summarize(html, url) {
   const hrefs = [...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]);
   const detailLinks = [...new Set(hrefs.filter((href) => /\/auction\/detail\//i.test(href)))];
   const labels = [...html.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)].map((m) => clean(m[1].replace(/<[^>]+>/g, " "))).filter(Boolean);
-  const rows = [...html.matchAll(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi)].map((m) => clean(m[0])).filter((row) => /lot|model|year|price|yen|¥|sold|auction|image/i.test(row)).slice(0, 8);
-  return {
-    url,
-    bytes: html.length,
-    detailLinks: detailLinks.slice(0, 30),
-    hrefs: [...new Set(hrefs.filter((href) => /auction|lot|detail|vehicle|car|listing|image|photo/i.test(href)))].slice(0, 150),
-    submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20),
-    checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80),
-    labels: labels.slice(0, 120),
-    tableRows: rows,
-    listingHtmlSample: /\/listing/i.test(url) ? html.slice(Math.max(0, html.search(/<table|class=["'][^"']*(?:auction|listing|car|vehicle)/i)), Math.min(html.length, Math.max(0, html.search(/<table|class=["'][^"']*(?:auction|listing|car|vehicle)/i)) + 22000)) : undefined,
-  };
+  return { url, bytes: html.length, detailLinks: detailLinks.slice(0, 30), submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20), checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80), labels: labels.slice(0, 120) };
 }
 
 async function request(url, cookie, options = {}) {
@@ -48,6 +37,7 @@ if (!selectedDate) throw new Error("jpauc_no_past_date");
 const stages = [summarize(initial.html, initial.response.url)];
 let currentUrl = "https://jpauc.com/auction/past";
 let body = new URLSearchParams([["checkdate[]", selectedDate], ["submit", "submitauction"]]);
+let listingHtml = "";
 
 for (let step = 0; step < 4; step++) {
   const posted = await request(currentUrl, cookie, { method: "POST", body: body.toString(), headers: { "content-type": "application/x-www-form-urlencoded", origin: "https://jpauc.com", referer: currentUrl } });
@@ -56,21 +46,32 @@ for (let step = 0; step < 4; step++) {
   summary.requestBody = body.toString();
   summary.status = posted.response.status;
   stages.push(summary);
-  if (/\/listing/i.test(currentUrl) || summary.detailLinks.length) break;
+  if (/\/listing/i.test(currentUrl)) { listingHtml = posted.html; break; }
 
   const inputs = parseInputs(posted.html);
-  const submit = inputs.find((input) => input.name === "submit" && input.value);
   let chosen = null;
   if (/\/maker(?:$|[?#])/i.test(currentUrl)) chosen = inputs.find((input) => input.type === "checkbox" && input.name === "mk[]" && String(input.value) === "9");
   else if (/\/model(?:$|[?#])/i.test(currentUrl)) chosen = inputs.find((input) => input.type === "checkbox" && input.name === "md[]");
-  else chosen = inputs.find((input) => input.type === "checkbox" && input.name && input.value && !["checkall", "checkcountry[]", "checkmaker[]"].includes(String(input.name)));
   if (!chosen) break;
-
-  body = new URLSearchParams();
-  body.append(String(chosen.name), String(chosen.value));
-  if (submit?.name && submit?.value) body.append(String(submit.name), String(submit.value));
+  body = new URLSearchParams([[String(chosen.name), String(chosen.value)]]);
 }
 
-const output = { checkedAt: new Date().toISOString(), cookiePresent: Boolean(cookie), selectedDate, dates, stages };
+const firstRow = listingHtml.match(/<tr\b[^>]*data-id=["'](\d+)["'][^>]*>[\s\S]*?<\/tr>/i);
+const dataId = firstRow?.[1] || "";
+const rowHtml = firstRow?.[0] || "";
+const rowText = clean(rowHtml.replace(/<[^>]+>/g, " "));
+const rowImages = [...rowHtml.matchAll(/(?:data-original|src)=["']([^"']+)["']/gi)].map((m) => new URL(m[1], "https://jpauc.com").toString());
+let detail = null;
+if (dataId) {
+  const detailUrl = `https://jpauc.com/auction/detail/${dataId}`;
+  const detailResponse = await request(detailUrl, cookie, { headers: { referer: currentUrl } });
+  const imageUrls = [...new Set([...detailResponse.html.matchAll(/(?:data-original|data-src|src|href)=["']([^"']+\.(?:jpe?g|png|webp)(?:\?[^"']*)?)["']/gi)].map((m) => {
+    try { return new URL(m[1].replace(/&amp;/g, "&"), detailResponse.response.url).toString(); } catch { return ""; }
+  }).filter(Boolean))];
+  const text = clean(detailResponse.html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " "));
+  detail = { requestedUrl: detailUrl, finalUrl: detailResponse.response.url, status: detailResponse.response.status, bytes: detailResponse.html.length, text: text.slice(0, 12000), imageUrls: imageUrls.slice(0, 60) };
+}
+
+const output = { checkedAt: new Date().toISOString(), cookiePresent: Boolean(cookie), selectedDate, dates, stages, firstListingRow: { dataId, rowText, rowImages }, detail };
 await fs.writeFile("jpauc-past-form-diagnostic.json", JSON.stringify(output, null, 2));
 console.log(JSON.stringify(output, null, 2));
