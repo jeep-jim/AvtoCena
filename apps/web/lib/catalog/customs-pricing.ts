@@ -32,41 +32,42 @@ function customsValueSnapshot(rate: any, borderTransportRub: number, customsValu
   };
 }
 
-function hasTrustedPowerProvenance(offer: VehicleOffer) {
+function hasTrustedPowerProvenance(offer: VehicleOffer, sourceOnly = false) {
   const confidence = String(offer.powerDataConfidence || "");
   const source = String(offer.powerDataSource || "").toLocaleLowerCase("en-US");
+  if (["documented", "source_exact"].includes(confidence) && !source.includes("estimated")) return true;
+  if (sourceOnly) return false;
   const raw: any = offer.operational?.raw || {};
   const variantSourceType = String(raw.vehicleKnowledgeVariant?.sourceType || "");
-  return (["documented", "source_exact"].includes(confidence) && !source.includes("estimated"))
-    || Boolean(raw.certifiedPowerReference)
+  return Boolean(raw.certifiedPowerReference)
     || ["manufacturer", "official_registry"].includes(variantSourceType);
 }
 
-function documentedMotorPower(offer: VehicleOffer) {
-  if (!hasTrustedPowerProvenance(offer)) return 0;
+function documentedMotorPower(offer: VehicleOffer, sourceOnly = false) {
+  if (!hasTrustedPowerProvenance(offer, sourceOnly)) return 0;
   const byMotor = Array.isArray(offer.power30MinKwByMotor)
     ? offer.power30MinKwByMotor.map(positive).filter(Boolean)
     : [];
   return positive(offer.power30MinKw) || (byMotor.length ? byMotor.reduce((sum, value) => sum + value, 0) : 0);
 }
 
-function hasTrustedUtilizationPower(offer: VehicleOffer) {
-  return positive(offer.utilizationPowerKw) > 0 && hasTrustedPowerProvenance(offer);
+function hasTrustedUtilizationPower(offer: VehicleOffer, sourceOnly = false) {
+  return positive(offer.utilizationPowerKw) > 0 && hasTrustedPowerProvenance(offer, sourceOnly);
 }
 
-function exactUtilizationPowerProblem(offer: VehicleOffer) {
+function exactUtilizationPowerProblem(offer: VehicleOffer, sourceOnly = false) {
   const kind = String(offer.powertrainKind || "");
   if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return null;
 
-  // Готовое utilizationPowerKw допускается только из точного источника или сертифицированной
-  // базы модели/модификации. Старые оценочные значения и пиковая мощность удаляются.
-  if (hasTrustedUtilizationPower(offer)) return null;
+  if (hasTrustedUtilizationPower(offer, sourceOnly)) return null;
 
-  const motor30MinKw = documentedMotorPower(offer);
+  const motor30MinKw = documentedMotorPower(offer, sourceOnly);
   if ((kind === "electric" || kind === "series_hybrid") && !motor30MinKw) {
     return {
       missing: ["certified_30_minute_power_kw"],
-      warning: "Для точного утильсбора нужна максимальная 30-минутная мощность тяговых электромоторов из ОТТС, СБКТС, ЗОЕТС, ЭПТС, CoC или официального документа производителя. Пиковая мощность не подставляется.",
+      warning: sourceOnly
+        ? "Для точного утильсбора нужна 30-минутная мощность тяговых электромоторов из exact-карточки источника. База знаний не используется."
+        : "Для точного утильсбора нужна максимальная 30-минутная мощность тяговых электромоторов из ОТТС, СБКТС, ЗОЕТС, ЭПТС, CoC или официального документа производителя. Пиковая мощность не подставляется.",
     };
   }
 
@@ -76,26 +77,40 @@ function exactUtilizationPowerProblem(offer: VehicleOffer) {
         ...(!positive(offer.icePowerKw) ? ["ice_power_kw"] : []),
         ...(!motor30MinKw ? ["certified_30_minute_power_kw"] : []),
       ],
-      warning: "Для точного утильсбора гибрида нужны мощность ДВС и максимальная 30-минутная мощность всех тяговых электромоторов. Пиковая или системная мощность вместо них не используется.",
+      warning: sourceOnly
+        ? "Для точного утильсбора гибрида нужны мощность ДВС и 30-минутная мощность тяговых электромоторов из exact-карточки источника."
+        : "Для точного утильсбора гибрида нужны мощность ДВС и максимальная 30-минутная мощность всех тяговых электромоторов. Пиковая или системная мощность вместо них не используется.",
     };
   }
 
   return null;
 }
 
-export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
-  const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
-  const certified = await enrichOfferWithCertifiedPower(canonical);
-  const known = await enrichOfferWithPowerKnowledge(certified);
-  const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
-  const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
-  const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
-    ? { ...normalized, utilizationPowerKw: undefined }
-    : normalized;
+type CalculationMode = { sourceOnly: boolean };
 
-  // Конвертацию цены источника выполняем до проверки мощности. Даже когда точная
-  // таможня или утильсбор ещё ждут данных, публичная карточка должна иметь честный
-  // рублёвый эквивалент реальной цены объявления или результата торгов.
+function markSourceOnly(offer: VehicleOffer, sourceOnly: boolean): VehicleOffer {
+  if (!sourceOnly) return offer;
+  return {
+    ...offer,
+    operational: {
+      ...(offer.operational || {}),
+      sourceOnlyCalculation: true,
+      calculationInputSource: "exact_detail",
+      knowledgeEnriched: false,
+    },
+  };
+}
+
+async function calculatePreparedOffer(input: VehicleOffer, mode: CalculationMode): Promise<VehicleOffer> {
+  const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(input) as VehicleOffer) as VehicleOffer;
+  const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
+  const offer = markSourceOnly(
+    electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized, mode.sourceOnly)
+      ? { ...normalized, utilizationPowerKw: undefined }
+      : normalized,
+    mode.sourceOnly,
+  );
+
   const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency);
   if (!rate) {
     return {
@@ -104,6 +119,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       calculationStatus: "needs_currency_rate",
       calculationSnapshot: {
         ...(offer.calculationSnapshot || {}),
+        sourceOnly: mode.sourceOnly,
         pricingConfidence: "unavailable",
         customs: { status: "needs_data", missing: ["source_currency_rate"] },
       },
@@ -112,11 +128,12 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
 
   const pendingSnapshot = {
     ...(offer.calculationSnapshot || {}),
+    sourceOnly: mode.sourceOnly,
     currencyRate: rate,
     sourcePriceRub: rate.sourcePriceRub,
   };
 
-  const utilizationProblem = exactUtilizationPowerProblem(offer);
+  const utilizationProblem = exactUtilizationPowerProblem(offer, mode.sourceOnly);
   if (utilizationProblem) {
     return {
       ...offer,
@@ -141,7 +158,9 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         ...pendingSnapshot,
         pricingConfidence: "unavailable",
         missing: ["power_hp"],
-        warnings: ["Автомобиль не публикуется как рассчитанный, пока мощность не найдена в объявлении или базе модели/модификации. Рублёвый эквивалент цены источника при этом сохраняется."],
+        warnings: [mode.sourceOnly
+          ? "Мощность отсутствует в exact-карточке источника. Карточка не публикуется и база знаний не используется."
+          : "Автомобиль не публикуется как рассчитанный, пока мощность не найдена в объявлении или базе модели/модификации. Рублёвый эквивалент цены источника при этом сохраняется."],
       },
     };
   }
@@ -162,6 +181,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
 
   const borderTransportRub = transportToBorderRub(offer);
   const customsValueRub = rate.sourcePriceRub + borderTransportRub;
+  const motorPower = documentedMotorPower(offer, mode.sourceOnly);
   const customs = calculateRussiaCustomsForIndividual({
     customsValueRub,
     eurRateRub: Number(eurRate.effectiveRate || 0),
@@ -169,9 +189,9 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     powerHp: offer.powerHp,
     powerKw: offer.powerKw,
     icePowerKw: offer.icePowerKw,
-    power30MinKw: documentedMotorPower(offer) ? offer.power30MinKw : undefined,
-    power30MinKwByMotor: documentedMotorPower(offer) && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
-    utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
+    power30MinKw: motorPower ? offer.power30MinKw : undefined,
+    power30MinKwByMotor: motorPower && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
+    utilizationPowerKw: hasTrustedUtilizationPower(offer, mode.sourceOnly) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,
@@ -207,7 +227,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     customsRub: customs.totalCustomsRub,
   });
 
-  const powerEstimated = ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
+  const powerEstimated = !mode.sourceOnly && ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || offer.priceMode === "estimated";
   const warnings = [
     ...market.warnings,
@@ -221,6 +241,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     totalRub: calculation.totalRub,
     calculationSnapshot: {
       ...calculation.snapshot,
+      sourceOnly: mode.sourceOnly,
       currencyRate: rate,
       sourcePriceRub: rate.sourcePriceRub,
       customs,
@@ -231,7 +252,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       powerConfidence: offer.powerDataConfidence,
       powerSource: offer.powerDataSource,
       certified30MinutePowerMissing: false,
-      vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
+      vehicleKnowledge: mode.sourceOnly ? null : (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
       warnings,
     },
     calculationStatus: offer.priceMode === "auction_start"
@@ -240,4 +261,25 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         ? "estimated"
         : "ready",
   };
+}
+
+export async function calculateOfferWithRussiaCustomsSourceOnly(input: VehicleOffer): Promise<VehicleOffer> {
+  const explicit = enrichOfferWithExplicitEngineDisplacement(input);
+  const normalized = normalizeVehicleOfferSpecs({
+    ...explicit,
+    operational: {
+      ...(explicit.operational || {}),
+      knowledgeEnriched: false,
+      sourceOnlyCalculation: true,
+      calculationInputSource: "exact_detail",
+    },
+  } as VehicleOffer);
+  return calculatePreparedOffer(normalized, { sourceOnly: true });
+}
+
+export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
+  const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
+  const certified = await enrichOfferWithCertifiedPower(canonical);
+  const known = await enrichOfferWithPowerKnowledge(certified);
+  return calculatePreparedOffer(known, { sourceOnly: false });
 }
