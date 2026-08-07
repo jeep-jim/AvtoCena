@@ -136,9 +136,9 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
   }
 
   const favoriteButtonClass = theme === "dark"
-    ? "bg-[#ff353d] text-white hover:bg-[#ff353d]"
+    ? "bg-white/[0.045] text-[#ff353d] hover:bg-white/[0.085]"
     : "bg-[#f1e4e6] text-[#d92534] hover:bg-[#ead7da]";
-  const favoriteBadgeClass = theme === "dark" ? "bg-[#10131b]" : "bg-[#ff353d]";
+  const favoriteBadgeClass = "bg-[#ff353d]";
   const themeIconClass = theme === "dark" ? "text-amber-300" : "text-slate-600";
 
   return (
