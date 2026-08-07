@@ -1,4 +1,4 @@
-name: China exact source smoke
+name: China listing shape diagnostic
 
 on:
   workflow_dispatch:
@@ -11,25 +11,18 @@ permissions:
   contents: read
 
 jobs:
-  smoke:
+  shape:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        source_id:
-          - autohome_used_china_open
-          - guazi_china_open
+        source:
+          - guazi
+          - che168
     env:
-      CATALOG_SMOKE_SOURCE_ID: ${{ matrix.source_id }}
-      CATALOG_SMOKE_OUTPUT: china-smoke-${{ matrix.source_id }}.json
-      CATALOG_KNOWLEDGE_DISABLED: "1"
-      CATALOG_RAW_LISTING_MODE: "1"
-      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
-      CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
-      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CHINA_SHAPE_SOURCE: ${{ matrix.source }}
+      CHINA_SHAPE_OUTPUT: china-shape-${{ matrix.source }}.json
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,12 +30,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Smoke exact source
-        run: npx tsx scripts/china-required-source-smoke.mjs
+      - name: Inspect server HTML shape
+        run: npx tsx scripts/china-html-shape.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: china-smoke-${{ matrix.source_id }}
-          path: china-smoke-${{ matrix.source_id }}.json
+          name: china-shape-${{ matrix.source }}
+          path: china-shape-${{ matrix.source }}.json
           if-no-files-found: warn
           retention-days: 3
