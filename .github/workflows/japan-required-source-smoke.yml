@@ -1,5 +1,5 @@
-name: JPAuc past form diagnostic
-run-name: JPAuc past form diagnostic · ${{ github.sha }}
+name: JPAuc real adapter smoke
+run-name: JPAuc real adapter smoke · ${{ github.sha }}
 
 on:
   push:
@@ -7,27 +7,30 @@ on:
       - codex-japan-required-source-smoke
     paths:
       - ".github/workflows/japan-required-source-smoke.yml"
-      - "scripts/jpauc-past-form-diagnostic.mjs"
+      - "apps/web/lib/catalog/jpauc-past-source.ts"
+      - "scripts/jpauc-past-adapter-smoke.mjs"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  diagnostic:
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Inspect public JPAuc form and scripts
-        run: node scripts/jpauc-past-form-diagnostic.mjs
+          cache: npm
+      - run: npm ci
+      - name: Verify one real recent priced JPAuc card
+        run: npx tsx scripts/jpauc-past-adapter-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: jpauc-past-form-diagnostic
-          path: jpauc-past-form-diagnostic.json
+          name: jpauc-real-adapter-smoke
+          path: jpauc-past-adapter-smoke.json
           if-no-files-found: warn
           retention-days: 3
