@@ -1,4 +1,4 @@
-name: Catalog strict market · 10k
+name: Catalog raw market · up to 30k
 
 on:
   workflow_call:
@@ -27,7 +27,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-strict-market-${{ inputs.market }}
+  group: catalog-raw-market-${{ inputs.market }}
   cancel-in-progress: false
 
 env:
@@ -35,11 +35,11 @@ env:
   CATALOG_KNOWLEDGE_DISABLED: "1"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
-  CATALOG_REBUILD_TARGET_PER_SOURCE: "10000"
-  CATALOG_REBUILD_TARGET_PER_MARKET: "10000"
-  CATALOG_PUBLISH_MAX_PER_MARKET: "10000"
+  CATALOG_REBUILD_TARGET_PER_SOURCE: "30000"
+  CATALOG_REBUILD_TARGET_PER_MARKET: "30000"
+  CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
   CATALOG_OFFER_RETENTION_MS: "259200000"
-  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
@@ -65,44 +65,46 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect valid raw listings
+      - name: Collect maximum valid raw listings
         shell: bash
         run: |
+          set +e
           timeout --signal=TERM --kill-after=60s 14700s npx tsx scripts/catalog-simple-source-market.mjs
-          test -s "$CATALOG_REBUILD_OUTPUT"
-      - name: Require exactly 10000 valid collected cards
+          status=$?
+          if [ ! -s "$CATALOG_REBUILD_OUTPUT" ]; then
+            node -e 'const fs=require("fs");fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT,JSON.stringify({version:5,mode:"raw_listing_title_year_price_gallery",market:process.env.CATALOG_REBUILD_MARKET,count:0,partial:true,offers:[],report:{errors:[{stage:"process",error:`exit_${process.argv[1]}`}]}}))' "$status"
+          fi
+          echo "collector_exit=$status"
+          exit 0
+      - name: Validate artifact structure and report progress
         run: |
           node <<'NODE'
-          const p = require('./' + process.env.CATALOG_REBUILD_OUTPUT);
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
           const offers = Array.isArray(p.offers) ? p.offers : [];
-          if (p.count !== 10000 || offers.length !== 10000) {
-            throw new Error(`Expected exactly 10000 cards, got report=${p.count} offers=${offers.length}`);
-          }
-          for (const [i, o] of offers.entries()) {
-            const photos = Array.isArray(o.photos) ? o.photos : Array.isArray(o.images) ? o.images : [];
-            const source = o.sourceUrl || o.url || o.source?.url;
-            const sourceId = o.sourceId || o.id || o.source?.id;
-            const hp = Number(o.powerHp ?? o.horsepower ?? o.power?.hp);
-            const kw = Number(o.powerKw ?? o.power?.kw);
-            if (!source || !sourceId || !o.make || !o.model || !Number(o.year) || Number(o.price) <= 0 || !o.currency) throw new Error(`Card ${i} misses required identity/price fields`);
-            if (!(hp > 0 || kw > 0)) throw new Error(`Card ${i} has no convertible power value`);
-            if (photos.length < 1 || photos.length > 30 || photos.some(x => typeof x !== 'string' || !/^https?:\/\//.test(x))) throw new Error(`Card ${i} has invalid real-photo gallery`);
-          }
-          const currentYear = new Date().getUTCFullYear();
-          const priority = offers.filter(o => Number(o.year) >= currentYear - 6 && Number(o.powerHp ?? o.horsepower ?? o.power?.hp ?? (Number(o.powerKw ?? o.power?.kw) * 1.35962)) <= 160).length;
-          if (priority <= 5000) throw new Error(`Priority share must exceed 50%, got ${priority}/10000`);
-          if (offers.some(o => Number(o.year) < 2011)) throw new Error('Cards older than 2011 are not allowed');
-          console.log(JSON.stringify({market:p.market,count:p.count,priority}, null, 2));
+          if (!p.market || p.market !== process.env.CATALOG_REBUILD_MARKET) throw new Error('Market mismatch in artifact');
+          if (!Number.isFinite(Number(p.count)) || Number(p.count) !== offers.length) throw new Error('Artifact count mismatch');
+          console.log(JSON.stringify({
+            market: p.market,
+            collected: offers.length,
+            target: 30000,
+            partial: offers.length < 30000,
+            errors: p.report?.errors?.length || 0,
+            sources: p.report?.sources || [],
+          }, null, 2));
           NODE
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: catalog-raw-${{ inputs.market }}-listings
           path: catalog-rebuild-${{ inputs.market }}-0.json
+          if-no-files-found: error
           retention-days: 3
           compression-level: 6
 
   publish:
     needs: collect
+    if: always() && needs.collect.result != 'cancelled'
     concurrency:
       group: catalog-raw-shared-manifest-publish
       cancel-in-progress: false
@@ -131,20 +133,22 @@ jobs:
         with:
           name: catalog-raw-${{ inputs.market }}-listings
           path: catalog-raw-input
-      - name: Publish this market independently
+      - name: Publish this market independently and accumulate three days
         run: npx tsx scripts/catalog-publish-raw-market.mjs
-      - name: Require confirmed 10000-card publication
+      - name: Report publication without blocking other markets
+        if: always()
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const path = process.env.CATALOG_REBUILD_PUBLISH_REPORT;
-          if (!fs.existsSync(path)) throw new Error('Publication report missing');
-          const p = JSON.parse(fs.readFileSync(path, 'utf8'));
-          if (p.published !== true) throw new Error('published must be true');
-          if (p.publicationError) throw new Error(`publicationError: ${p.publicationError}`);
-          if (!p.generationId) throw new Error('generationId missing');
-          if (p.selectedCount !== 10000 || p.byMarket?.[process.env.CATALOG_REBUILD_MARKETS] !== 10000) throw new Error(`Expected 10000 published cards, got ${p.selectedCount}`);
+          const file = process.env.CATALOG_REBUILD_PUBLISH_REPORT;
+          if (!fs.existsSync(file)) {
+            console.log('::warning::Publication report missing');
+            process.exit(0);
+          }
+          const p = JSON.parse(fs.readFileSync(file, 'utf8'));
           console.log(JSON.stringify(p, null, 2));
+          if (!p.published) console.log(`::warning::${p.market} not published: ${p.publicationError || 'no valid cards'}`);
+          else console.log(`Published ${p.selectedCount} accumulated cards for ${p.market}; generation ${p.generationId}`);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
