@@ -1,4 +1,4 @@
-name: China Guazi exact smoke
+name: China Guazi exact smoke v2
 
 on:
   workflow_dispatch:
@@ -31,12 +31,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Validate one exact Guazi product
+      - name: Validate exact Guazi product and real images
         run: npx tsx scripts/china-required-source-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: china-smoke-guazi-exact
+          name: china-smoke-guazi-exact-v2
           path: china-smoke-guazi_china_open.json
           if-no-files-found: warn
           retention-days: 3
