@@ -1,0 +1,38 @@
+name: Catalog emergency force-cancel legacy publisher
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/catalog-emergency-force-cancel.yml"
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  force-cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Force-cancel legacy raw publisher run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: "31221165263"
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/force-cancel.out -w '%{http_code}' \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPO}/actions/runs/${RUN_ID}/force-cancel")
+          cat /tmp/force-cancel.out || true
+          if [ "$code" != "202" ] && [ "$code" != "409" ]; then
+            echo "Unexpected force-cancel HTTP status: $code" >&2
+            exit 1
+          fi
+          echo "force-cancel HTTP status: $code"
