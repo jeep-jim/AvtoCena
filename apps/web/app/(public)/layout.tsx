@@ -37,8 +37,9 @@ html:not([data-theme="light"]) body main.ac-page-copy.ac-offer-page {
   background-image: none !important;
 }
 
-/* Homepage uses the new neutral graphite background; keep the other public pages unchanged. */
-html:not([data-theme="light"]) body main.ac-page-copy.ac-home-page {
+/* Homepage and offer details use the new neutral graphite background. */
+html:not([data-theme="light"]) body main.ac-page-copy.ac-home-page,
+html:not([data-theme="light"]) body main.ac-page-copy.ac-offer-page {
   background: #1a2029 !important;
   background-color: #1a2029 !important;
   background-image: none !important;
