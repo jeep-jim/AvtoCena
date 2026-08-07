@@ -1,0 +1,38 @@
+name: Encar source spec probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/encar-source-spec-probe.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encar-source-spec-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ENCAR_PROBE_ID: "42154170"
+      ENCAR_PROBE_OUTPUT: encar-source-spec-probe.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe Encar exact source APIs
+        run: node scripts/encar-source-spec-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: encar-source-spec-probe
+          path: encar-source-spec-probe.json
+          if-no-files-found: warn
+          retention-days: 3
