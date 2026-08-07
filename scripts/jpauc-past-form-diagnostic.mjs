@@ -21,6 +21,21 @@ function clean(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function snippets(text, patterns, before = 260, after = 520) {
+  const rows = [];
+  const lower = text.toLowerCase();
+  for (const pattern of patterns) {
+    let offset = 0;
+    while (rows.length < 80) {
+      const index = lower.indexOf(pattern.toLowerCase(), offset);
+      if (index < 0) break;
+      rows.push(clean(text.slice(Math.max(0, index - before), Math.min(text.length, index + pattern.length + after))));
+      offset = index + pattern.length;
+    }
+  }
+  return [...new Set(rows)].slice(0, 80);
+}
+
 function extract(html, url) {
   const forms = [];
   for (const match of html.matchAll(/<form\b[^>]*>[\s\S]*?<\/form>/gi)) {
@@ -60,9 +75,9 @@ for (const src of scriptCandidates.slice(0, 30)) {
   try {
     const absolute = new URL(src, "https://jpauc.com").toString();
     const response = await fetch(absolute, { headers, signal: AbortSignal.timeout(20000) });
-    const text = await response.text();
-    const hits = [...text.matchAll(/.{0,180}(?:auction\/past|auction\/listing|past auction|submitlot|auction_date|auctionDate|selectedDate).{0,260}/gi)].map((m) => clean(m[0])).slice(0, 30);
-    if (hits.length) scriptHits.push({ url: absolute, status: response.status, bytes: text.length, hits });
+    const source = await response.text();
+    const hits = snippets(source, ["submitauction", "auction-dates", "checkdate", "submitlot", "/auction/past", "serialize", ".submit(", "location.href"]);
+    scriptHits.push({ url: absolute, status: response.status, bytes: source.length, hits });
   } catch (error) {
     scriptHits.push({ url: src, error: String(error?.message || error) });
   }
