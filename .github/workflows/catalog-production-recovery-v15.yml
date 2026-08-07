@@ -1,21 +1,260 @@
-name: Legacy catalog source-scale (manual only)
-run-name: Legacy catalog disabled · ${{ github.sha }}
+name: Catalog source-scale daily
+run-name: Catalog 7 markets · 3 sources × 1000 cars · ${{ github.sha }}
 
 on:
+  schedule:
+    - cron: "17 20 * * *"
   workflow_dispatch:
+  push:
+    branches: [main, codex-strict-catalog-source-only]
+    paths:
+      - .github/workflows/catalog-production-recovery-v15.yml
+      - apps/web/lib/catalog/**
+      - packages/engine/src/calculation/**
+      - data/catalog/vehicle-knowledge/**
+      - scripts/catalog-sync-vehicle-knowledge-seed.mjs
+      - scripts/catalog-probe-source-shard.mjs
+      - scripts/catalog-rebuild-source-shard.mjs
+      - scripts/catalog-validate-source-scale.mjs
+      - scripts/catalog-publish-source-scale.mjs
 
 permissions:
   contents: read
 
 concurrency:
-  group: legacy-catalog-source-scale
+  group: catalog-source-scale-daily
   cancel-in-progress: true
 
 jobs:
-  disabled:
-    name: Legacy pipeline is disabled
+  validate:
+    name: Validate source-scale pipeline
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
-      - run: |
-          echo "Legacy Catalog source-scale daily отключён."
-          echo "Production-каталог собирается только workflow Catalog V2."
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate scripts and types
+        run: |
+          node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs
+          node --check scripts/catalog-probe-source-shard.mjs
+          node --check scripts/catalog-rebuild-source-shard.mjs
+          node --check scripts/catalog-validate-source-scale.mjs
+          node --check scripts/catalog-publish-source-scale.mjs
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          npm --workspace=@avtocena/engine exec tsc -- --noEmit
+
+  knowledge:
+    name: Sync vehicle knowledge to JSON storage
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Require object storage configuration
+        run: |
+          test -n "$YC_OBJECT_STORAGE_BUCKET"
+          test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
+          test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
+      - name: Sync seed models and verified variants
+        run: npx tsx scripts/catalog-sync-vehicle-knowledge-seed.mjs
+
+  collect:
+    name: Collect ${{ matrix.market }} shard ${{ matrix.shard }}
+    needs: [validate, knowledge]
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      max-parallel: 21
+      matrix:
+        market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
+        shard: [0, 1, 2]
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_REBUILD_MARKET: ${{ matrix.market }}
+      CATALOG_REBUILD_SHARD_INDEX: ${{ matrix.shard }}
+      CATALOG_REBUILD_SHARD_COUNT: "3"
+      CATALOG_PROBE_TIMEOUT_MS: "15000"
+      CATALOG_PROBE_ATTEMPTS: "2"
+      CATALOG_PROBE_CONCURRENCY: "8"
+      CATALOG_PROBE_OUTPUT: catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3000"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "300"
+      CATALOG_REBUILD_MAX_TOTAL_PAGES: "9000"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "4"
+      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "1"
+      CATALOG_GALLERY_FAST_PATH: "true"
+      CATALOG_SOURCE_TIMEOUT_MS: "18000"
+      CATALOG_IMAGE_TIMEOUT_MS: "12000"
+      CATALOG_IMAGE_MAX_BYTES: "12000000"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "12"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "24"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "6"
+      CATALOG_REBUILD_CHECKPOINT_EVERY: "25"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "3600000"
+      CATALOG_ENCAR_DIRECT_PAGE_SIZE: "50"
+      CATALOG_ENCAR_DIRECT_LIST_RPM: "30"
+      CATALOG_ENCAR_DIRECT_DETAIL_RPM: "120"
+      CATALOG_ENCAR_DIRECT_IMAGE_RPM: "120"
+      CATALOG_CHE168_GLOBAL_PAGE_SIZE: "64"
+      CATALOG_CHE168_GLOBAL_MAX_BRANDS: "64"
+      CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Require object storage configuration
+        shell: bash
+        run: |
+          test -n "$YC_OBJECT_STORAGE_BUCKET"
+          test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
+          test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
+      - name: Probe every registered source in this shard
+        id: probe
+        run: npx tsx scripts/catalog-probe-source-shard.mjs
+      - name: Collect live sources and retain every registered source
+        env:
+          CATALOG_REBUILD_SOURCE_IDS: ${{ steps.probe.outputs.source_ids }}
+        run: npx tsx scripts/catalog-rebuild-source-shard.mjs
+      - name: Verify shard envelope
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const file = process.env.CATALOG_REBUILD_OUTPUT;
+          if (!fs.existsSync(file)) throw new Error(`missing_shard_output_${file}`);
+          const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
+          if (payload.market !== process.env.CATALOG_REBUILD_MARKET) throw new Error('shard_market_mismatch');
+          if (!Array.isArray(payload.offers)) throw new Error('shard_offers_missing');
+          console.log(JSON.stringify({market: payload.market, shard: payload.shardIndex, count: payload.offers.length, live: payload.liveSourceIds, bySource: payload.report?.publicBySource, stop: payload.stopReason}, null, 2));
+          NODE
+      - name: Upload source diagnostics and verified offers
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}
+          path: |
+            catalog-probe-${{ matrix.market }}-${{ matrix.shard }}.json
+            catalog-rebuild-${{ matrix.market }}-${{ matrix.shard }}.json
+          if-no-files-found: warn
+          compression-level: 9
+          retention-days: 1
+
+  publish:
+    name: Publish and require all seven markets
+    if: always()
+    needs: [validate, knowledge, collect]
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_REBUILD_INPUT_DIR: catalog-rebuild
+      CATALOG_REBUILD_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "1000"
+      CATALOG_PUBLISH_TARGET_PER_MARKET: "3000"
+      CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
+      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "4"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_INDEX_WRITE_CONCURRENCY: "16"
+      CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
+      CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES: "3"
+      CATALOG_PUBLISH_MIN_FRESH_BY_MARKET: '{"korea":3,"china":3,"japan":3,"uae":3,"europe":3,"georgia":3,"kyrgyzstan":3}'
+      CATALOG_REBUILD_VALIDATION_REPORT: catalog-source-scale-validation-report.json
+      CATALOG_REBUILD_PUBLISH_REPORT: catalog-source-scale-publish-report.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Download every source shard
+        uses: actions/download-artifact@v4
+        with:
+          pattern: catalog-rebuild-*
+          path: catalog-rebuild
+          merge-multiple: true
+      - name: Audit calculations, customs, utilization fee and galleries
+        run: npx tsx scripts/catalog-validate-source-scale.mjs
+      - name: Publish verified offers with three-day retention
+        run: npx tsx scripts/catalog-publish-source-scale.mjs
+      - name: Require a new manifest containing all seven markets
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT, 'utf8'));
+          const markets = ['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
+          if (!report.published) throw new Error(`catalog_not_published_${report.publicationError || 'unknown'}`);
+          if (!report.generationId) throw new Error('catalog_generation_missing');
+          if (!(Number(report.total || 0) > 0)) throw new Error('catalog_total_empty');
+          const missing = markets.filter((market) => !(Number(report.byMarket?.[market] || 0) > 0));
+          const belowThreeSources = markets.filter((market) => Object.keys(report.byMarketAndSource?.[market] || {}).length < 3);
+          if (missing.length) console.warn(`catalog_markets_empty_${missing.join('_')}: previous verified market data remains in the manifest and the next run will retry these markets`);
+          console.log(JSON.stringify({generationId: report.generationId, total: report.total, byMarket: report.byMarket, byMarketAndSource: report.byMarketAndSource, belowTarget: report.marketsBelowTarget, missing, belowThreeSources}, null, 2));
+          NODE
+      - name: Run production catalog smoke checks
+        continue-on-error: true
+        run: npm run catalog:smoke
+      - name: Upload catalog reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-source-scale-reports
+          path: |
+            catalog-source-scale-validation-report.json
+            catalog-source-scale-publish-report.json
+          if-no-files-found: warn
+          compression-level: 9
+          retention-days: 1
