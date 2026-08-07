@@ -1,0 +1,40 @@
+name: Encar exact identity smoke
+run-name: Encar exact identity smoke · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - codex-encar-exact-identity-v2
+    paths:
+      - ".github/workflows/encar-exact-identity-smoke.yml"
+      - "scripts/encar-exact-identity-smoke.mjs"
+      - "apps/web/lib/catalog/encar-complete-source.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encar-exact-identity-v2
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify one exact Encar source card
+        run: npx tsx scripts/encar-exact-identity-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: encar-exact-identity-smoke
+          path: encar-exact-identity-smoke.json
+          if-no-files-found: warn
+          retention-days: 3
