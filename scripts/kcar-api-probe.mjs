@@ -10,25 +10,25 @@ function encrypt(value) {
   return Buffer.concat([cipher.update(JSON.stringify(value), 'utf8'), cipher.final()]).toString('base64');
 }
 
-const params = {
-  pageno: 1,
-  limit: 26,
+const orderBy = 'iqy_dt:desc';
+const countParams = { orderBy, countFlag: true };
+const initParams = (areaType) => ({
+  deviceType: 'DEVICE_TYPE_200',
+  pageType: 'PAGE_TYPE_100',
+  areaType,
+  orderBy,
   orderFlag: true,
-  orderBy: 'time_deal_yn:desc|time_deal_end_dt:asc|promo_ordr:asc|event_ordr:asc|sort_ordr:asc',
-};
-const countParams = { ...params, countFlag: true };
+});
 const jsonBody = (value) => JSON.stringify({ enc: encrypt(value) });
 
 const probes = [
-  ['www-drct-json', 'https://www.kcar.com/bc/search/list/drct', { 'content-type': 'application/json' }, jsonBody(params)],
-  ['api-drct-json', 'https://api.kcar.com/bc/search/list/drct', { 'content-type': 'application/json' }, jsonBody(params)],
-  ['api-list-json', 'https://api.kcar.com/bc/search/list', { 'content-type': 'application/json' }, jsonBody(params)],
-  ['market-count-json', 'https://market-api.kcar.com/api/v1/ds/carSearchListCount', { 'content-type': 'application/json' }, jsonBody(countParams)],
-  ['market-init-json', 'https://market-api.kcar.com/api/v1/ds/initSearchAdInfo', { 'content-type': 'application/json' }, jsonBody({ ...params, areaType: 'AREA_TYPE_300' })],
+  ['market-count-exact', 'https://market-api.kcar.com/api/v1/ds/carSearchListCount', countParams],
+  ['market-init-premium-exact', 'https://market-api.kcar.com/api/v1/ds/initSearchAdInfo', initParams('AREA_TYPE_100')],
+  ['market-init-normal-exact', 'https://market-api.kcar.com/api/v1/ds/initSearchAdInfo', initParams('AREA_TYPE_300')],
 ];
 
-const output = { generatedAt: new Date().toISOString(), params, probes: [] };
-for (const [name, url, extraHeaders, body] of probes) {
+const output = { generatedAt: new Date().toISOString(), orderBy, probes: [] };
+for (const [name, url, params] of probes) {
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -36,11 +36,11 @@ for (const [name, url, extraHeaders, body] of probes) {
         accept: 'application/json, text/plain, */*',
         'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
         origin: 'https://www.kcar.com',
-        referer: 'https://www.kcar.com/bc/search',
+        referer: 'https://www.kcar.com/bc/search?tab=c2c',
         'user-agent': UA,
-        ...extraHeaders,
+        'content-type': 'application/json',
       },
-      body,
+      body: jsonBody(params),
       redirect: 'follow',
     });
     const text = await response.text();
@@ -57,6 +57,7 @@ for (const [name, url, extraHeaders, body] of probes) {
     output.probes.push({
       name,
       url,
+      params,
       status: response.status,
       contentType: response.headers.get('content-type') || '',
       bytes: Buffer.byteLength(text),
@@ -69,11 +70,12 @@ for (const [name, url, extraHeaders, body] of probes) {
       pageNo: root?.pageNo ?? root?.data?.pageNo,
       rowCount: rows.length,
       firstRows: rows.slice(0, 3),
-      prefix: text.slice(0, 6000),
+      rootPreview: Array.isArray(root) ? root.slice(0, 8) : root,
+      prefix: text.slice(0, 12000),
     });
     await fs.writeFile(`kcar-api-${name}.txt`, text);
   } catch (error) {
-    output.probes.push({ name, url, error: String(error?.stack || error) });
+    output.probes.push({ name, url, params, error: String(error?.stack || error) });
   }
 }
 await fs.writeFile('kcar-api-probe.json', JSON.stringify(output, null, 2));
