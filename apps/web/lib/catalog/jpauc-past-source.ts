@@ -1,0 +1,307 @@
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
+
+type JpaucRawRow = {
+  dataId: string;
+  r: string;
+  rtotal: string;
+  date: string;
+  location: string;
+  lot: string;
+  maker: string;
+  model: string;
+  year: number;
+  grade: string;
+  engineCc?: number;
+  modelCode: string;
+  shift: string;
+  mileageKm?: number;
+  color: string;
+  auctionGrade: string;
+  sourceStatus: string;
+  startPrice: number;
+  listingImage: string;
+  detailUrl: string;
+};
+
+const BASE = "https://jpauc.com";
+const PAST = `${BASE}/auction/past`;
+const REQUEST_HEADERS = {
+  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ja;q=0.8",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+};
+
+function clean(value: unknown) {
+  return String(value ?? "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;|&apos;/gi, "'")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function lines(html: string) {
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .split(/\n+/)
+    .map(clean)
+    .filter(Boolean);
+}
+
+function money(value: unknown) {
+  const parsed = Number(String(value ?? "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+}
+
+function numeric(value: unknown) {
+  const parsed = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+function checkboxValues(html: string, name: string) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return [...html.matchAll(new RegExp(`name=["']${escaped}["'][^>]*value=["']([^"']+)["']`, "gi"))]
+    .map((match) => match[1]);
+}
+
+function remoteImage(url: string): CatalogImage {
+  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" };
+}
+
+function photoVariants(value: string) {
+  if (!value) return [];
+  try {
+    const base = new URL(value, BASE);
+    if (!/aleado\.com$/i.test(base.hostname)) return [base.toString()];
+    base.protocol = "https:";
+    const result: string[] = [];
+    for (const number of [0, 1, 2]) {
+      const image = new URL(base.toString());
+      image.searchParams.set("number", String(number));
+      if (number > 0) image.searchParams.set("h", "640");
+      else image.searchParams.delete("h");
+      result.push(image.toString());
+    }
+    return result;
+  } catch {
+    return [];
+  }
+}
+
+function parseListingRows(html: string): JpaucRawRow[] {
+  const rows: JpaucRawRow[] = [];
+  for (const match of html.matchAll(/<tr\b([^>]*)data-id=["'](\d+)["']([^>]*)>([\s\S]*?)<\/tr>/gi)) {
+    const attrs = `${match[1]} data-id="${match[2]}" ${match[3]}`;
+    const rowHtml = match[0];
+    const cells = [...rowHtml.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map((cell) => cell[1]);
+    if (cells.length < 10) continue;
+
+    const locationLot = lines(cells[3]);
+    const makerModel = lines(cells[4]);
+    const yearGrade = lines(cells[5]);
+    const ccCode = lines(cells[6]);
+    const shiftMileage = lines(cells[7]);
+    const colorGrade = lines(cells[8]);
+    const statusPrice = lines(cells[9]);
+    const listingImageRaw = rowHtml.match(/data-original=["']([^"']+)["']/i)?.[1] || rowHtml.match(/src=["']([^"']+)["']/i)?.[1] || "";
+    let listingImage = "";
+    try { listingImage = new URL(listingImageRaw.replace(/&amp;/g, "&"), BASE).toString(); } catch {}
+
+    const year = Number(yearGrade[0]?.match(/(?:19|20)\d{2}/)?.[0] || 0);
+    const startPrice = money(statusPrice.join(" ").match(/Start\s*:\s*¥?\s*([0-9,]+)/i)?.[1]);
+    const dataId = match[2];
+    const r = attrs.match(/data-r=["']([^"']+)["']/i)?.[1] || "1";
+    const rtotal = attrs.match(/data-r-total=["']([^"']+)["']/i)?.[1] || "1";
+    const detailUrl = `${PAST}/detail/${encodeURIComponent(dataId)}?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=${encodeURIComponent(r)}&rtotal=${encodeURIComponent(rtotal)}`;
+
+    if (!dataId || !makerModel[0] || !makerModel[1] || !year) continue;
+    rows.push({
+      dataId,
+      r,
+      rtotal,
+      date: clean(lines(cells[2])[0]),
+      location: clean(locationLot[0]),
+      lot: clean(locationLot[1]),
+      maker: clean(makerModel[0]),
+      model: clean(makerModel[1]),
+      year,
+      grade: clean(yearGrade.slice(1).join(" ")),
+      engineCc: numeric(ccCode[0]),
+      modelCode: clean(ccCode[1]),
+      shift: clean(shiftMileage[0]),
+      mileageKm: numeric(shiftMileage[1]),
+      color: clean(colorGrade[0]),
+      auctionGrade: clean(colorGrade[1]),
+      sourceStatus: clean(statusPrice[0]).replace(/^Status:\s*/i, ""),
+      startPrice,
+      listingImage,
+      detailUrl,
+    });
+  }
+  return rows;
+}
+
+export class JpaucPastAdapter implements CatalogSourceAdapter {
+  sourceId = "jpauc_japan_past_open";
+  market = "japan" as const;
+  accessMode = "public_html" as const;
+
+  private cookie = "";
+  private selectedDate = "";
+  private listingUrl = `${PAST}/listing-2`;
+  private ready = false;
+
+  private async request(url: string, options: { method?: string; body?: string; referer?: string } = {}) {
+    const response = await fetch(url, {
+      method: options.method || "GET",
+      body: options.body,
+      redirect: "follow",
+      headers: {
+        ...REQUEST_HEADERS,
+        ...(this.cookie ? { cookie: this.cookie } : {}),
+        ...(options.referer ? { referer: options.referer } : {}),
+        ...(options.method === "POST" ? { "content-type": "application/x-www-form-urlencoded", origin: BASE } : {}),
+      },
+      signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+    });
+    if (!response.ok) throw new Error(`jpauc_http_${response.status}:${url}`);
+    if (!this.cookie) this.cookie = String(response.headers.get("set-cookie") || "").split(";")[0];
+    return { response, html: await response.text() };
+  }
+
+  private async ensureReady() {
+    if (this.ready) return;
+    const initial = await this.request(PAST, { referer: `${BASE}/auction` });
+    const dates = checkboxValues(initial.html, "checkdate[]");
+    this.selectedDate = dates[0] || "";
+    if (!this.selectedDate) throw new Error("jpauc_no_past_date");
+
+    const maker = await this.request(PAST, {
+      method: "POST",
+      body: new URLSearchParams([["checkdate[]", this.selectedDate], ["submit", "submitauction"]]).toString(),
+      referer: PAST,
+    });
+    const makers = checkboxValues(maker.html, "mk[]");
+    if (!makers.length) throw new Error("jpauc_no_makers");
+    const makerBody = new URLSearchParams();
+    makers.forEach((value) => makerBody.append("mk[]", value));
+
+    const model = await this.request(maker.response.url, {
+      method: "POST",
+      body: makerBody.toString(),
+      referer: maker.response.url,
+    });
+    const models = checkboxValues(model.html, "md[]");
+    if (!models.length) throw new Error("jpauc_no_models");
+    const modelBody = new URLSearchParams();
+    models.forEach((value) => modelBody.append("md[]", value));
+
+    const listing = await this.request(model.response.url, {
+      method: "POST",
+      body: modelBody.toString(),
+      referer: model.response.url,
+    });
+    this.listingUrl = listing.response.url;
+    this.ready = true;
+  }
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    await this.ensureReady();
+    const page = Math.max(1, Number(cursor || 1));
+    const currentYear = new Date().getFullYear();
+    const priorityYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
+    const url = new URL(this.listingUrl);
+    url.searchParams.set("ys", String(currentYear - priorityYears));
+    url.searchParams.set("ye", String(currentYear));
+    url.searchParams.set("mm", "0");
+    url.searchParams.set("mx", "9999");
+    url.searchParams.set("start_price_from", "1");
+    url.searchParams.set("p", String(page));
+    url.searchParams.set("ob", "y_l");
+
+    const fetched = await this.request(url.toString(), { referer: this.listingUrl });
+    const items = parseListingRows(fetched.html);
+    const total = Number(fetched.html.match(/\d+\s*-\s*\d+\s+of\s+([0-9,]+)/i)?.[1]?.replace(/,/g, "") || items.length);
+    const pageSize = Math.max(1, items.length || 10);
+    const finished = items.length === 0 || page * pageSize >= total;
+    return {
+      items,
+      count: total,
+      finished,
+      nextCursor: finished ? null : String(page + 1),
+      health: { ok: true, message: `jpauc_past:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus: fetched.response.status },
+    };
+  }
+
+  normalizeOffer(raw: unknown): VehicleOffer | null {
+    const row = raw as JpaucRawRow;
+    if (!row?.dataId || !row.maker || !row.model || !row.year || !row.startPrice) return null;
+    const now = new Date().toISOString();
+    const sourceTitle = [row.maker, row.model, row.grade].filter(Boolean).join(" ");
+    return {
+      id: `${this.sourceId}:${row.dataId}`,
+      sourceId: this.sourceId,
+      sourceOfferId: row.dataId,
+      market: "japan",
+      offerType: "auction",
+      status: "active",
+      catalogKind: "auction_result",
+      sourceTitle,
+      make: row.maker,
+      model: row.model,
+      trim: row.grade || undefined,
+      year: row.year,
+      mileageKm: row.mileageKm,
+      engineCc: row.engineCc,
+      transmission: row.shift || undefined,
+      color: row.color || undefined,
+      auctionName: row.location || undefined,
+      auctionDate: row.date || undefined,
+      lotNumber: row.lot || undefined,
+      auctionGrade: row.auctionGrade || undefined,
+      sourcePrice: row.startPrice,
+      sourceCurrency: "JPY",
+      priceMode: "auction_start",
+      images: row.listingImage ? photoVariants(row.listingImage).map(remoteImage) : [],
+      calculationStatus: "auction_start",
+      firstSeenAt: now,
+      updatedAt: now,
+      operational: {
+        sourceUrl: row.detailUrl,
+        sourceVenueName: row.location || "JPAuc",
+        sourcePublishedAt: row.date || undefined,
+        sourceTitle,
+        raw: row,
+        sourceStatus: row.sourceStatus,
+        modelCode: row.modelCode,
+        galleryStoredAs: "json_urls",
+        minimumImages: 3,
+        historicalAuction: true,
+      },
+    };
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const raw = offer.operational?.raw as JpaucRawRow | undefined;
+    const urls = photoVariants(raw?.listingImage || "");
+    return urls.slice(0, Math.min(30, Math.max(3, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)))).map(remoteImage);
+  }
+
+  mapStatus(): OfferStatus {
+    return "active";
+  }
+
+  async healthCheck(): Promise<SourceRunHealth> {
+    try {
+      const response = await fetch(PAST, { headers: REQUEST_HEADERS, redirect: "follow", signal: AbortSignal.timeout(20_000) });
+      return { ok: response.ok, message: response.ok ? "jpauc_past_ok" : `jpauc_past_http_${response.status}`, checkedAt: new Date().toISOString(), httpStatus: response.status };
+    } catch (error) {
+      return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() };
+    }
+  }
+}
+
+export const jpaucPastSource = new JpaucPastAdapter();
