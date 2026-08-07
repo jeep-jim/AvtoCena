@@ -36,18 +36,13 @@ function uniqueImages(images) {
     const key = imageKey(image);
     if (!key || seen.has(key)) continue;
     seen.add(key);
-    result.push({
-      ...image,
-      objectKey: "",
-      checksum: "",
-      size: 0,
-    });
+    result.push({ ...image, objectKey: "", checksum: "", size: 0 });
     if (result.length >= 30) break;
   }
   return result;
 }
 function normalizeRaw(offer) {
-  const normalized = normalizeVehicleOfferSpecs({
+  return normalizeVehicleOfferSpecs({
     ...offer,
     sourceTitle: title(offer),
     status: "active",
@@ -63,7 +58,6 @@ function normalizeRaw(offer) {
       galleryStoredAs: "json_urls",
     },
   });
-  return normalized;
 }
 function order(left, right) {
   const recentLeft = Number(left?.year || 0) >= priorityYear ? 1 : 0;
@@ -74,9 +68,26 @@ function order(left, right) {
     || freshness(right) - freshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
+function validRetained(offer, cutoff) {
+  return isCrediblePublicOffer(offer) && freshness(offer) >= cutoff;
+}
+function mergeById(rows) {
+  const result = new Map();
+  for (const row of rows) {
+    const offer = normalizeRaw(row);
+    if (!offer?.id) continue;
+    const existing = result.get(offer.id);
+    if (!existing || freshness(offer) >= freshness(existing)) result.set(offer.id, offer);
+  }
+  return result;
+}
 
 let filenames = [];
-try { filenames = (await fs.readdir(inputDir)).filter((name) => name.startsWith(`catalog-rebuild-${market}`) && name.endsWith(".json")); } catch {}
+try {
+  filenames = (await fs.readdir(inputDir))
+    .filter((name) => name.startsWith(`catalog-rebuild-${market}`) && name.endsWith(".json"));
+} catch {}
+
 const rawOffers = [];
 const readErrors = [];
 for (const filename of filenames.sort()) {
@@ -89,32 +100,48 @@ for (const filename of filenames.sort()) {
 }
 
 const rejected = {};
-const byId = new Map();
+const incomingById = new Map();
 for (const row of rawOffers) {
   try {
     const offer = normalizeRaw(row);
-    if (!offer?.id || offer.market !== market) { rejected.identity = Number(rejected.identity || 0) + 1; continue; }
-    if (!isCrediblePublicOffer(offer)) { rejected.quality = Number(rejected.quality || 0) + 1; continue; }
-    const existing = byId.get(offer.id);
-    if (!existing || order(offer, existing) < 0) byId.set(offer.id, offer);
-  } catch (error) {
+    if (!offer?.id || offer.market !== market) {
+      rejected.identity = Number(rejected.identity || 0) + 1;
+      continue;
+    }
+    if (!isCrediblePublicOffer(offer)) {
+      rejected.quality = Number(rejected.quality || 0) + 1;
+      continue;
+    }
+    const existing = incomingById.get(offer.id);
+    if (!existing || freshness(offer) >= freshness(existing)) incomingById.set(offer.id, offer);
+  } catch {
     rejected.exception = Number(rejected.exception || 0) + 1;
   }
 }
 
-const selected = [...byId.values()].sort(order).slice(0, maximumPerMarket);
 const cutoff = Date.now() - retentionMs;
+let currentExisting = [];
+try { currentExisting = await readMarketOffers(market); } catch (error) {
+  readErrors.push({ market, stage: "read_current_market", error: String(error?.message || error) });
+}
+
+const retainedCurrent = currentExisting
+  .map(normalizeRaw)
+  .filter((offer) => validRetained(offer, cutoff));
+const accumulatedCurrent = mergeById([...retainedCurrent, ...incomingById.values()]);
+const selected = [...accumulatedCurrent.values()].sort(order).slice(0, maximumPerMarket);
+
 const combined = [...selected];
 const preservedByMarket = {};
-
 for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   if (otherMarket === market) continue;
   let rows = [];
-  try { rows = await readMarketOffers(otherMarket); } catch {}
+  try { rows = await readMarketOffers(otherMarket); } catch (error) {
+    readErrors.push({ market: otherMarket, stage: "read_other_market", error: String(error?.message || error) });
+  }
   const preserved = rows
     .map(normalizeRaw)
-    .filter((offer) => isCrediblePublicOffer(offer))
-    .filter((offer) => freshness(offer) >= cutoff)
+    .filter((offer) => validRetained(offer, cutoff))
     .sort(order)
     .slice(0, maximumPerMarket);
   preservedByMarket[otherMarket] = preserved.length;
@@ -126,7 +153,7 @@ let publicationError = "";
 if (selected.length > 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
-    manifest = await persistCatalogOffers([...new Map(combined.map((offer) => [offer.id, offer])).values()]);
+    manifest = await persistCatalogOffers([...mergeById(combined).values()]);
   } catch (error) {
     publicationError = String(error?.message || error);
   }
@@ -139,13 +166,15 @@ const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId === market ? selected.length : Number(preservedByMarket[marketId] || 0),
 ]));
 const report = {
-  version: 2,
-  mode: "raw_listing_independent_market",
+  version: 3,
+  mode: "raw_listing_accumulative_independent_market",
   market,
   target: maximumPerMarket,
   priorityYear,
   inputFiles: filenames,
   inputCount: rawOffers.length,
+  incomingValidCount: incomingById.size,
+  retainedCurrentCount: retainedCurrent.length,
   selectedCount: selected.length,
   recentCount: selected.filter((offer) => Number(offer.year || 0) >= priorityYear).length,
   byMarket,
