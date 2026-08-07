@@ -26,7 +26,7 @@ function readCount() {
 }
 
 function updateBrowserChrome(theme: Theme) {
-  const color = theme === "light" ? "#ffffff" : "#07080d";
+  const color = theme === "light" ? "#ffffff" : "#0f172a";
   let themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   if (!themeColor) {
     themeColor = document.createElement("meta");
@@ -143,7 +143,7 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
 
   return (
     <>
-      <header className={`ac-public-header sticky top-0 z-50 bg-[#070a12]/90 backdrop-blur-xl ${className}`}>
+      <header className={`ac-public-header sticky top-0 z-50 backdrop-blur-xl ${className}`}>
         <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-3 px-4 md:px-8">
           <div className="flex min-w-0 items-center gap-2.5">
             {backHref ? (
@@ -194,6 +194,48 @@ export function PublicHeader({ backHref, backLabel = "Назад", className = "
       </header>
 
       <style jsx global>{`
+        html:not([data-theme="light"]) body,
+        html:not([data-theme="light"]) body main.ac-page-copy,
+        html:not([data-theme="light"]) body .ac-page-copy,
+        html:not([data-theme="light"]) body .ac-partner-page,
+        html:not([data-theme="light"]) body .ac-dealers-page {
+          background: #0f172a !important;
+          background-image: none !important;
+        }
+
+        html:not([data-theme="light"]) body .ac-public-header {
+          background: rgba(15,23,42,.68) !important;
+          border-bottom: 1px solid rgba(255,255,255,.055) !important;
+          -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+          backdrop-filter: blur(18px) saturate(145%) !important;
+        }
+
+        html:not([data-theme="light"]) body .ac-filter-panel,
+        html:not([data-theme="light"]) body .ac-catalog-filter-panel,
+        html:not([data-theme="light"]) body .ac-mobile-rates,
+        html:not([data-theme="light"]) body .ac-executor-block,
+        html:not([data-theme="light"]) body .ac-home-market-rail,
+        html:not([data-theme="light"]) body .ac-result-summary,
+        html:not([data-theme="light"]) body .ac-offer-panel,
+        html:not([data-theme="light"]) body .ac-offer-form,
+        html:not([data-theme="light"]) body .ac-offer-spec-tile,
+        html:not([data-theme="light"]) body .ac-offer-breakdown,
+        html:not([data-theme="light"]) body .ac-offer-status,
+        html:not([data-theme="light"]) body .ac-login-card,
+        html:not([data-theme="light"]) body .ac-dealers-page article,
+        html:not([data-theme="light"]) body .ac-dealers-page .dealer-metric-card,
+        html:not([data-theme="light"]) body .ac-dealers-page section[class*="bg-[#0c0e14]"],
+        html:not([data-theme="light"]) body .ac-dealers-page [class*="bg-[#12151d]"] {
+          background: #1d2638 !important;
+          background-image: none !important;
+        }
+
+        html[data-theme="light"] .ac-public-footer-cta,
+        html[data-theme="light"] .ac-public-footer-cta:hover {
+          background: #ff353d !important;
+          color: #ffffff !important;
+        }
+
         html[data-theme][data-theme][data-theme] body .ac-public-header,
         html[data-theme][data-theme][data-theme] body .ac-public-header *,
         html[data-theme][data-theme][data-theme] body main.ac-page-copy,
