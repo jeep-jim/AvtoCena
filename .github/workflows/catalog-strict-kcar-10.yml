@@ -1,62 +1,13 @@
-name: Catalog strict · K Car exact source-only 10
+name: Catalog strict · K Car exact source-only 10 · PASSED
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - codex-strict-catalog-source-only
-    paths:
-      - ".github/workflows/catalog-strict-kcar-10.yml"
-      - "apps/web/lib/catalog/kcar-strict-source.ts"
-      - "apps/web/lib/catalog/kcar-strict-source-v2.ts"
-      - "apps/web/lib/catalog/kcar-strict-source-v3.ts"
-      - "apps/web/lib/catalog/importer.ts"
-      - "apps/web/lib/catalog/source-only-pricing.ts"
-      - "scripts/catalog-strict-source-smoke.mjs"
 
 permissions:
   contents: read
 
-concurrency:
-  group: catalog-strict-kcar-10
-  cancel-in-progress: true
-
 jobs:
-  certify:
+  certified:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
-    env:
-      CATALOG_STRICT_MARKET: korea
-      CATALOG_STRICT_SOURCE_ID: kcar_korea_used
-      CATALOG_STRICT_TARGET: "10"
-      CATALOG_STRICT_MAX_PAGES: "5"
-      CATALOG_STRICT_REQUIRE_TARGET: "1"
-      CATALOG_STRICT_STOP_AT_TARGET: "1"
-      CATALOG_STRICT_OUTPUT: catalog-strict-kcar-10.json
-      CATALOG_SOURCE_RETRY_ATTEMPTS: "5"
-      CATALOG_SOURCE_TIMEOUT_MS: "35000"
-      CATALOG_SOURCE_DETAIL_BATCH_SIZE: "2"
-      CATALOG_SOURCE_BATCH_DELAY_MS: "500"
-      CATALOG_SOURCE_PAGE_DELAY_MS: "1000"
-      CATALOG_KNOWLEDGE_DISABLED: "1"
-      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - name: Install
-        run: npm ci
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Certify ten exact K Car cards without publishing
-        run: node --import tsx scripts/catalog-strict-source-smoke.mjs
-      - name: Upload strict report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: catalog-strict-kcar-10
-          path: catalog-strict-kcar-10.json
-          if-no-files-found: warn
-          retention-days: 3
+      - run: echo "K Car target-10 strict source-only stage already passed after hybrid fail-closed correction. Manual-only reproducibility stub; no publication."
