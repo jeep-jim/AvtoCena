@@ -5,9 +5,11 @@ import test from "node:test";
 const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const contract = fs.readFileSync(new URL("../docs/catalog-card-contract.md", import.meta.url), "utf8");
 
-test("catalog backend work keeps the agreed compact public card", () => {
-  assert.match(card, /const visibleRub = exactTotalRub \|\| sourcePriceRub\(o\)/);
-  assert.match(card, /<PriceTrend offer=\{displayOffer\}/);
+test("catalog card never bypasses the validated public ruble price", () => {
+  assert.match(card, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.doesNotMatch(card, /exactTotalRub\s*\|\|/);
+  assert.doesNotMatch(card, /Number\(o\.totalRub\s*\|\|\s*0\)/);
+  assert.match(card, /totalRub: visibleRub \|\| null/);
   assert.match(card, /· ориентир/);
   assert.doesNotMatch(card, /function sourceMoney/);
   assert.doesNotMatch(card, /Цена в объявлении/);
