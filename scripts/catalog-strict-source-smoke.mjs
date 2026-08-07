@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
-const { calculateOfferWithRussiaCustomsSourceOnly } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithRussiaCustomsSourceOnly } = await import("../apps/web/lib/catalog/source-only-pricing.ts");
 const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 
@@ -49,10 +49,10 @@ function checks(offer) {
     transmission: Boolean(clean(offer?.transmission)),
     drive: Boolean(clean(offer?.drive)),
     body: Boolean(clean(offer?.bodyType)),
-    power: positive(offer?.powerHp) > 0,
+    power: positive(offer?.powerHp) > 0 && ["source_exact", "documented"].includes(clean(offer?.powerDataConfidence)),
     gallery: urls.length >= 5 && urls.length <= 30,
     sourceUrlsOnly: urls.length >= 5 && (offer?.images || []).every((image) => !clean(image?.objectKey) && !clean(image?.checksum)),
-    sourceOnlyCalculation: op?.sourceOnlyCalculation === true && snap?.sourceOnly === true,
+    sourceOnlyCalculation: op?.sourceOnlyCalculation === true && snap?.sourceOnly === true && !snap?.vehicleKnowledge,
     customs: customs?.status === "ready" && positive(customs?.totalCustomsRub) > 0,
     rubPrice: positive(offer?.totalRub) > 0 && ["ready", "estimated"].includes(clean(offer?.calculationStatus)),
     publicGate: hasCredibleOfferContent(offer),
@@ -74,6 +74,8 @@ function summaryCard(offer, cardChecks) {
     drive: offer?.drive,
     bodyType: offer?.bodyType,
     powerHp: offer?.powerHp,
+    powerDataConfidence: offer?.powerDataConfidence,
+    powerDataSource: offer?.powerDataSource,
     powertrainKind: offer?.powertrainKind,
     sourcePrice: offer?.sourcePrice,
     sourceCurrency: offer?.sourceCurrency,
@@ -131,7 +133,7 @@ for (const row of rejected) {
   for (const reason of row.failed || [row.stage || "unknown"]) rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
 }
 const report = {
-  version: 1,
+  version: 2,
   mode: "strict_exact_source_only_no_publish",
   checkedAt: new Date().toISOString(),
   market,
