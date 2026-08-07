@@ -3,6 +3,7 @@ import test from "node:test";
 import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
 import { hasCredibleOfferContent } from "../apps/web/lib/catalog/offer-quality";
 
+// Regression coverage for the exact public failures reported from production cards.
 const priceLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
   .map((id) => ({ id, amountRub: 1000 }));
 
