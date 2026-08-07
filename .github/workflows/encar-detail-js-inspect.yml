@@ -1,0 +1,34 @@
+name: Encar detail JS inspect
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/encar-detail-js-inspect.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encar-detail-js-inspect
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download Encar detail and main JS
+        run: |
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://fem.encar.com/static/js/DetailPage.8336363b.chunk.js' -o DetailPage.js
+          curl -fL --retry 3 -A 'Mozilla/5.0' 'https://fem.encar.com/static/js/main.8ef37f04.js' -o main.js
+          wc -c DetailPage.js main.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encar-detail-js
+          path: |
+            DetailPage.js
+            main.js
+          retention-days: 3
