@@ -1,6 +1,6 @@
 import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
-import type { CatalogImage, VehicleOffer } from "./types";
+import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 const ENCAR_HEADERS = {
   accept: "application/json, text/plain, */*",
@@ -94,6 +94,18 @@ function urlImage(url: string): CatalogImage {
   };
 }
 
+function retryableEncarError(error: unknown) {
+  const message = String((error as any)?.message || error || "").toLowerCase();
+  return Boolean(
+    (error as any)?.temporary
+      || /fetch failed|source_timeout|page_timeout|network|econnreset|etimedout|socket|rate_limited_429|http_5\d\d/.test(message),
+  );
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function fetchDetail(sourceOfferId: string) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
@@ -132,6 +144,31 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
 }
 
 export class EncarCompleteAdapter extends EncarDirectAdapter {
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const maxAttempts = Math.max(1, Math.min(8, Number(process.env.CATALOG_ENCAR_DIRECT_LIST_RETRIES || 5)));
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        return await super.fetchPage(cursor);
+      } catch (error) {
+        lastError = error;
+        if (!retryableEncarError(error) || attempt >= maxAttempts) throw error;
+        const delay = Math.min(12_000, 900 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 350);
+        console.warn(JSON.stringify({
+          sourceId: this.sourceId,
+          event: "list_retry",
+          attempt,
+          maxAttempts,
+          cursor: cursor || null,
+          delayMs: delay,
+          error: String((error as any)?.message || error),
+        }));
+        await sleep(delay);
+      }
+    }
+    throw lastError;
+  }
+
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
