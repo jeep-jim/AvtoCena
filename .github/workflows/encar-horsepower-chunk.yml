@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: encar-horsepower-chunk-inspect
+  cancel-in-progress: true
+
 jobs:
   inspect:
     runs-on: ubuntu-latest
@@ -22,12 +26,9 @@ jobs:
             -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36' \
             'https://fem.encar.com/static/js/57576.fd4780c7.chunk.js' \
             -o encar-horsepower-chunk.js
-          grep -o -E '.{0,3000}horsePower.{0,5000}' encar-horsepower-chunk.js > encar-horsepower-context.txt || true
-          wc -c encar-horsepower-chunk.js encar-horsepower-context.txt
+          wc -c encar-horsepower-chunk.js
       - uses: actions/upload-artifact@v4
         with:
           name: encar-horsepower-chunk
-          path: |
-            encar-horsepower-chunk.js
-            encar-horsepower-context.txt
+          path: encar-horsepower-chunk.js
           retention-days: 3
