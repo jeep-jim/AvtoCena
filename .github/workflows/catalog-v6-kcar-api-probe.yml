@@ -26,25 +26,70 @@ jobs:
         shell: bash
         run: |
           node --input-type=module <<'NODE'
+          import crypto from 'node:crypto';
           import fs from 'node:fs/promises';
-          const raw = JSON.parse(await fs.readFile('kcar-api-dealer-direct-api-exact.txt', 'utf8'));
-          const rows = raw?.data?.data?.rows ?? raw?.data?.rows ?? raw?.rows ?? [];
+
+          const KEY = Buffer.from('SKFJ2424DasfaJRI', 'utf8');
+          const IV = Buffer.from('sfq241sf3dscs321', 'utf8');
+          const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36';
+          const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+          function encrypt(value) {
+            const cipher = crypto.createCipheriv('aes-128-cbc', KEY, IV);
+            return Buffer.concat([cipher.update(JSON.stringify(value), 'utf8'), cipher.final()]).toString('base64');
+          }
+          const headers = {
+            accept: 'application/json, text/plain, */*',
+            'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
+            origin: 'https://www.kcar.com',
+            referer: 'https://www.kcar.com/bc/search',
+            'user-agent': UA,
+          };
+          async function fetchRetry(url, init, attempts = 5) {
+            let last;
+            for (let attempt = 1; attempt <= attempts; attempt += 1) {
+              try {
+                const response = await fetch(url, init);
+                if (response.ok || ![403, 429, 500, 502, 503, 504].includes(response.status)) return response;
+                last = new Error(`http_${response.status}`);
+              } catch (error) {
+                last = error;
+              }
+              if (attempt < attempts) await sleep(750 * attempt);
+            }
+            throw last || new Error('fetch_retry_exhausted');
+          }
+
+          const params = {
+            wr_in_multi_columns: 'cntr_rgn_cd|cntr_cd',
+            pageno: 1,
+            limit: 20,
+            orderFlag: true,
+            orderBy: 'time_deal_yn:desc|time_deal_end_dt:asc|promo_ordr:asc|event_ordr:asc|sort_ordr:asc',
+          };
+          const listResponse = await fetchRetry('https://api.kcar.com/bc/search/list/drct', {
+            method: 'POST',
+            headers: { ...headers, 'content-type': 'application/json' },
+            body: JSON.stringify({ enc: encrypt(params) }),
+            redirect: 'follow',
+          });
+          const listText = await listResponse.text();
+          await fs.writeFile('kcar-api-dealer-direct-detail-step-exact.txt', listText);
+          let listJson = null;
+          try { listJson = JSON.parse(listText); } catch {}
+          const rows = listJson?.data?.data?.rows ?? listJson?.data?.rows ?? listJson?.rows ?? [];
           const carCd = String(rows?.[0]?.carCd || '').trim();
-          if (!carCd) throw new Error('kcar_detail_probe_missing_carCd');
+          if (!listResponse.ok || listJson?.success !== true || !carCd) {
+            throw new Error(`kcar_exact_list_failed status=${listResponse.status} success=${listJson?.success} rows=${rows.length}`);
+          }
+
           const url = new URL('https://api.kcar.com/bc/car-info-detail-of-ng');
           url.searchParams.set('i_sCarCd', carCd);
           url.searchParams.set('i_sPassYn', 'N');
-          const response = await fetch(url, {
-            headers: {
-              accept: 'application/json, text/plain, */*',
-              'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
-              origin: 'https://www.kcar.com',
-              referer: `https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}`,
-              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
-            },
+          const detailResponse = await fetchRetry(url, {
+            headers: { ...headers, referer: `https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}` },
             redirect: 'follow',
           });
-          const text = await response.text();
+          const text = await detailResponse.text();
           await fs.writeFile('kcar-api-dealer-detail-api-exact.txt', text);
           let json = null;
           try { json = JSON.parse(text); } catch {}
@@ -52,8 +97,10 @@ jobs:
           console.log(JSON.stringify({
             carCd,
             url: url.toString(),
-            status: response.status,
-            contentType: response.headers.get('content-type') || '',
+            listStatus: listResponse.status,
+            listRows: rows.length,
+            status: detailResponse.status,
+            contentType: detailResponse.headers.get('content-type') || '',
             bytes: Buffer.byteLength(text),
             success: json?.success,
             message: json?.message,
@@ -65,7 +112,7 @@ jobs:
             optionPhotoListCount: Array.isArray(data?.optionPhotoList) ? data.optionPhotoList.length : null,
             prefix: text.slice(0, 1200),
           }, null, 2));
-          if (!response.ok || json?.success !== true || !data?.rvo) process.exit(1);
+          if (!detailResponse.ok || json?.success !== true || !data?.rvo) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
