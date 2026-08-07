@@ -3,7 +3,6 @@ import fs from "node:fs/promises";
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { calculateOfferWithRussiaCustomsSourceOnly } = await import("../apps/web/lib/catalog/source-only-pricing.ts");
 const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 
 const market = String(process.env.CATALOG_STRICT_MARKET || "korea").trim();
 const sourceId = String(process.env.CATALOG_STRICT_SOURCE_ID || "encar_direct").trim();
@@ -23,6 +22,14 @@ if (source.market !== market && source.market !== "multi") throw new Error(`stri
 
 function clean(value) { return String(value ?? "").replace(/\s+/g, " ").trim(); }
 function positive(value) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : 0; }
+function exactFields(offer) {
+  const list = Array.isArray(offer?.operational?.sourceExactFields)
+    ? offer.operational.sourceExactFields
+    : Array.isArray(offer?.operational?.raw?.sourceExactFields)
+      ? offer.operational.raw.sourceExactFields
+      : [];
+  return new Set(list.map(clean).filter(Boolean));
+}
 function imageUrls(offer) {
   return [...new Set(credibleCatalogImages(offer?.images || []).map((image) => clean(image?.url)).filter((url) => /^https?:\/\//i.test(url)))];
 }
@@ -31,25 +38,27 @@ function checks(offer) {
   const snap = offer?.calculationSnapshot || {};
   const customs = snap?.customs || {};
   const urls = imageUrls(offer);
+  const fields = exactFields(offer);
   const powertrain = clean(offer?.powertrainKind);
   const electric = powertrain === "electric";
+  const exact = (field) => fields.has(field);
   return {
     id: Boolean(offer?.id && offer?.sourceOfferId),
     exactUrl: /^https?:\/\//i.test(clean(op?.sourceUrl)),
     exactDetail: op?.detailIdentityVerified === true,
     exactFields: op?.fieldIdentityVerified === true,
     exactPhotos: op?.photoIdentityVerified === true && op?.vehiclePhotoVerified === true,
-    make: Boolean(clean(offer?.make) && !/^(other|unknown)$/i.test(clean(offer?.make))),
-    model: Boolean(clean(offer?.model) && !/^(other|unknown)$/i.test(clean(offer?.model))),
-    year: Number(offer?.year || 0) >= 2011 && Number(offer?.year || 0) <= currentYear + 1,
-    mileage: offer?.mileageKm == null || (Number(offer.mileageKm) >= 0 && Number(offer.mileageKm) <= 1_000_000),
-    price: positive(offer?.sourcePrice) > 0 && Boolean(clean(offer?.sourceCurrency)),
-    engine: electric || positive(offer?.engineCc) > 0,
-    fuel: Boolean(clean(offer?.fuel)),
-    transmission: Boolean(clean(offer?.transmission)),
-    drive: Boolean(clean(offer?.drive)),
-    body: Boolean(clean(offer?.bodyType)),
-    power: positive(offer?.powerHp) > 0 && ["source_exact", "documented"].includes(clean(offer?.powerDataConfidence)),
+    make: exact("make") && Boolean(clean(offer?.make) && !/^(other|unknown)$/i.test(clean(offer?.make))),
+    model: exact("model") && Boolean(clean(offer?.model) && !/^(other|unknown)$/i.test(clean(offer?.model))),
+    year: exact("year") && Number(offer?.year || 0) >= 2011 && Number(offer?.year || 0) <= currentYear + 1,
+    mileage: offer?.mileageKm == null || (exact("mileageKm") && Number(offer.mileageKm) >= 0 && Number(offer.mileageKm) <= 1_000_000),
+    price: exact("sourcePrice") && exact("sourceCurrency") && positive(offer?.sourcePrice) > 0 && Boolean(clean(offer?.sourceCurrency)),
+    engine: electric || (exact("engineCc") && positive(offer?.engineCc) > 0),
+    fuel: exact("fuel") && Boolean(clean(offer?.fuel)),
+    transmission: exact("transmission") && Boolean(clean(offer?.transmission)),
+    drive: exact("drive") && Boolean(clean(offer?.drive)),
+    body: exact("bodyType") && Boolean(clean(offer?.bodyType)),
+    power: exact("powerHp") && positive(offer?.powerHp) > 0 && ["source_exact", "documented"].includes(clean(offer?.powerDataConfidence)),
     gallery: urls.length >= 5 && urls.length <= 30,
     sourceUrlsOnly: urls.length >= 5 && (offer?.images || []).every((image) => !clean(image?.objectKey) && !clean(image?.checksum)),
     sourceOnlyCalculation: op?.sourceOnlyCalculation === true && snap?.sourceOnly === true && !snap?.vehicleKnowledge,
@@ -63,6 +72,7 @@ function summaryCard(offer, cardChecks) {
     id: offer?.id,
     sourceOfferId: offer?.sourceOfferId,
     sourceUrl: offer?.operational?.sourceUrl,
+    sourceExactFields: [...exactFields(offer)],
     make: offer?.make,
     model: offer?.model,
     trim: offer?.trim,
@@ -102,26 +112,25 @@ while (accepted.length < target && pages < maxPages) {
   rowsSeen += rows.length;
   for (const raw of rows) {
     if (accepted.length >= target) break;
-    let base;
-    try { base = source.normalizeOffer(raw); } catch (error) {
+    let offer;
+    try { offer = source.normalizeOffer(raw); } catch (error) {
       rejected.push({ stage: "normalize", error: String(error?.message || error) });
       continue;
     }
-    if (!base?.id || seen.has(base.id)) continue;
-    seen.add(base.id);
+    if (!offer?.id || seen.has(offer.id)) continue;
+    seen.add(offer.id);
     try {
-      const offer = normalizeVehicleOfferSpecs(base);
       const gallery = await source.fetchImages(offer);
       offer.images = credibleCatalogImages(gallery || []).slice(0, 30);
       offer.status = "active";
-      const calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustomsSourceOnly(offer));
+      const calculated = await calculateOfferWithRussiaCustomsSourceOnly(offer);
       const cardChecks = checks(calculated);
       const failed = Object.entries(cardChecks).filter(([, ok]) => !ok).map(([name]) => name);
       const card = summaryCard(calculated, cardChecks);
       if (!failed.length) accepted.push(card);
       else rejected.push({ ...card, failed });
     } catch (error) {
-      rejected.push({ id: base.id, sourceOfferId: base.sourceOfferId, stage: "detail_or_calculation", error: String(error?.message || error) });
+      rejected.push({ id: offer.id, sourceOfferId: offer.sourceOfferId, stage: "detail_or_calculation", error: String(error?.message || error) });
     }
   }
   cursor = page?.nextCursor || null;
@@ -133,8 +142,8 @@ for (const row of rejected) {
   for (const reason of row.failed || [row.stage || "unknown"]) rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
 }
 const report = {
-  version: 2,
-  mode: "strict_exact_source_only_no_publish",
+  version: 3,
+  mode: "strict_exact_source_only_no_publish_no_generic_normalization",
   checkedAt: new Date().toISOString(),
   market,
   sourceId,
