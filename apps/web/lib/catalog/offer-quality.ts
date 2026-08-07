@@ -1,9 +1,11 @@
 import type { CatalogImage, VehicleOffer } from "./types";
 import { isLikelyVehicleImage } from "./image-quality";
+import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image))/i;
+const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function meaningfulTitle(value: unknown) {
@@ -41,6 +43,30 @@ function listingTitle(offer: VehicleOffer) {
   );
 }
 
+function minimumImageCount(offer: VehicleOffer) {
+  if (offer.sourceId === "jpauc_japan_past_open") return 3;
+  return Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+}
+
+function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
+  if (!REQUIRED_SOURCE_IDS.has(String(offer.sourceId || ""))) return true;
+  const operational: any = offer.operational || {};
+  const raw: any = operational.raw || {};
+
+  if (operational.photoIdentityVerified === true
+    || raw.photoIdentityVerified === true
+    || raw.detailIdentityVerified === true
+    || raw.listingBoundImages === true) return true;
+
+  // Encar was already tested card-by-card before this gate existed. Its legacy
+  // dedicated mode is source-offer-bound; newer runs use encar_detail_only_v2.
+  if (offer.sourceId === "encar_direct"
+    && operational.galleryVerified === true
+    && ["encar_source_urls_only", "encar_detail_only_v2"].includes(String(operational.gallerySafetyMode || ""))) return true;
+
+  return false;
+}
+
 function credibleCoreContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
@@ -49,14 +75,18 @@ function credibleCoreContent(offer: VehicleOffer) {
   if (year < 2011 || year > currentYear + 1) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
-  const requiredImages = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
-  return credibleCatalogImages(offer.images || []).length >= requiredImages;
+  return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
 }
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {
-  return credibleCoreContent(offer) && /^https?:\/\//i.test(clean(offer.operational?.sourceUrl));
+  return credibleCoreContent(offer)
+    && /^https?:\/\//i.test(clean(offer.operational?.sourceUrl))
+    && mandatorySourcePhotoIdentityVerified(offer);
 }
 
+// Public API DTOs intentionally omit operational metadata. Server-side storage
+// has already applied hasCredibleOfferContent(), so the client only re-checks
+// the visible core fields here.
 export function isCrediblePublicOffer(offer: VehicleOffer) {
   return offer.status === "active" && credibleCoreContent(offer);
 }
