@@ -51,6 +51,10 @@ function lines(html: string) {
     .filter(Boolean);
 }
 
+function cellText(html: string) {
+  return clean(html.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " "));
+}
+
 function money(value: unknown) {
   const parsed = Number(String(value ?? "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
@@ -99,19 +103,32 @@ function parseListingRows(html: string): JpaucRawRow[] {
     const cells = [...rowHtml.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map((cell) => cell[1]);
     if (cells.length < 10) continue;
 
-    const locationLot = lines(cells[3]);
-    const makerModel = lines(cells[4]);
-    const yearGrade = lines(cells[5]);
-    const ccCode = lines(cells[6]);
-    const shiftMileage = lines(cells[7]);
-    const colorGrade = lines(cells[8]);
-    const statusPrice = lines(cells[9]);
-    const listingImageRaw = rowHtml.match(/data-original=["']([^"']+)["']/i)?.[1] || rowHtml.match(/src=["']([^"']+)["']/i)?.[1] || "";
+    const makerModel = lines(cells[4]).filter((value) => value !== "|");
+    const locationText = cellText(cells[3]);
+    const yearText = cellText(cells[5]);
+    const ccText = cellText(cells[6]);
+    const shiftText = cellText(cells[7]);
+    const colorText = cellText(cells[8]);
+    const statusText = cellText(cells[9]);
+
+    const [location = "", lot = ""] = locationText.split("|").map(clean);
+    const year = Number(yearText.match(/(?:19|20)\d{2}/)?.[0] || 0);
+    const grade = clean(yearText.replace(/^.*?Year:\s*(?:19|20)\d{2}\s*/i, ""));
+    const engineCc = numeric(ccText.match(/([0-9,]+)\s*cc/i)?.[1]);
+    const modelCode = clean(ccText.split("|").slice(1).join("|"));
+    const shift = clean(shiftText.split("|")[0]);
+    const mileageKm = numeric(shiftText.match(/([0-9,]+)\s*KM/i)?.[1]);
+    const color = clean(colorText.match(/Color:\s*(.*?)\s*Auc\.Grade:/i)?.[1]);
+    const auctionGrade = clean(colorText.match(/Auc\.Grade:\s*(.+)$/i)?.[1]);
+    const sourceStatus = clean(statusText.match(/Status:\s*(.*?)\s*(?:\||Start:)/i)?.[1]);
+    const startPrice = money(statusText.match(/Start:\s*¥?\s*([0-9,]+)/i)?.[1]);
+
+    const listingImageRaw = rowHtml.match(/data-original=["']([^"']+)["']/i)?.[1]
+      || rowHtml.match(/src=["']([^"']+)["']/i)?.[1]
+      || "";
     let listingImage = "";
     try { listingImage = new URL(listingImageRaw.replace(/&amp;/g, "&"), BASE).toString(); } catch {}
 
-    const year = Number(yearGrade[0]?.match(/(?:19|20)\d{2}/)?.[0] || 0);
-    const startPrice = money(statusPrice.join(" ").match(/Start\s*:\s*¥?\s*([0-9,]+)/i)?.[1]);
     const dataId = match[2];
     const r = attrs.match(/data-r=["']([^"']+)["']/i)?.[1] || "1";
     const rtotal = attrs.match(/data-r-total=["']([^"']+)["']/i)?.[1] || "1";
@@ -122,20 +139,20 @@ function parseListingRows(html: string): JpaucRawRow[] {
       dataId,
       r,
       rtotal,
-      date: clean(lines(cells[2])[0]),
-      location: clean(locationLot[0]),
-      lot: clean(locationLot[1]),
+      date: cellText(cells[2]),
+      location,
+      lot,
       maker: clean(makerModel[0]),
       model: clean(makerModel[1]),
       year,
-      grade: clean(yearGrade.slice(1).join(" ")),
-      engineCc: numeric(ccCode[0]),
-      modelCode: clean(ccCode[1]),
-      shift: clean(shiftMileage[0]),
-      mileageKm: numeric(shiftMileage[1]),
-      color: clean(colorGrade[0]),
-      auctionGrade: clean(colorGrade[1]),
-      sourceStatus: clean(statusPrice[0]).replace(/^Status:\s*/i, ""),
+      grade,
+      engineCc,
+      modelCode,
+      shift,
+      mileageKm,
+      color,
+      auctionGrade,
+      sourceStatus,
       startPrice,
       listingImage,
       detailUrl,
