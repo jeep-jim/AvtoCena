@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 process.env.CATALOG_RAW_LISTING_MODE = "1";
 process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
 process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
-process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "3";
+process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "5";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = "30";
 process.env.CATALOG_COLLECTION_IMAGE_LIMIT = "30";
 process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS ||= "30000";
@@ -26,6 +26,22 @@ function validCore(offer) {
     && clean(offer?.sourceCurrency)
     && /^https?:\/\//i.test(clean(offer?.operational?.sourceUrl))
   );
+}
+async function verifyImageUrl(url) {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { accept: "image/avif,image/webp,image/jpeg,image/png,image/*,*/*;q=0.8", "user-agent": "Mozilla/5.0" },
+      redirect: "follow",
+      signal: AbortSignal.timeout(20_000),
+    });
+    const contentType = String(response.headers.get("content-type") || "").toLowerCase();
+    const ok = response.ok && contentType.startsWith("image/");
+    try { await response.body?.cancel(); } catch {}
+    return { url, ok, status: response.status, contentType };
+  } catch (error) {
+    return { url, ok: false, status: 0, contentType: "", error: String(error?.message || error) };
+  }
 }
 
 let cursor = null;
@@ -71,14 +87,17 @@ if (candidate) {
 }
 
 const imageUrls = [...new Set(images.map((image) => clean(image?.url)).filter((url) => /^https?:\/\//i.test(url)))];
+const imageChecks = await Promise.all(imageUrls.slice(0, 5).map(verifyImageUrl));
+const verifiedImageCount = imageChecks.filter((check) => check.ok).length;
+const passed = Boolean(candidate && imageUrls.length >= 5 && verifiedImageCount >= Math.min(5, imageUrls.length));
 const report = {
-  version: 1,
+  version: 2,
   checkedAt: new Date().toISOString(),
   sourceId,
   pages,
   fetched,
   pageReports,
-  passed: Boolean(candidate && imageUrls.length >= 3),
+  passed,
   card: candidate ? {
     sourceOfferId: candidate.sourceOfferId,
     sourceUrl: candidate.operational?.sourceUrl,
@@ -91,6 +110,7 @@ const report = {
     powerHp: candidate.powerHp || null,
     imageCount: imageUrls.length,
     imageUrls,
+    imageChecks,
   } : null,
   errors,
 };
