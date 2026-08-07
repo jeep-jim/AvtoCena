@@ -3,7 +3,9 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
     {children}
     <style>{`
       html:not([data-theme="light"]) .ac-catalog-page.ac-page-copy {
-        background: #11141a !important;
+        background: #07090f !important;
+        background-color: #07090f !important;
+        background-image: none !important;
       }
 
       @media (max-width: 767px) {
