@@ -49,7 +49,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
       - name: Certify one exact K Car card without publishing
-        run: node scripts/catalog-strict-source-smoke.mjs
+        run: node --import tsx scripts/catalog-strict-source-smoke.mjs
       - name: Upload strict report
         if: always()
         uses: actions/upload-artifact@v4
