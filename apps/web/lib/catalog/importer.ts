@@ -29,6 +29,7 @@ import { reliableBootstrapSources } from "./reliable-bootstrap-sources";
 import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source";
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
+import { jpaucPastSource } from "./jpauc-past-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -76,6 +77,7 @@ const completeSources = [
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   prepareSource(autoGeorgiaStrictSource),
   prepareSource(mashinaKyrgyzstanListSource),
+  jpaucPastSource,
   encarCompleteSource,
 ];
 
@@ -89,12 +91,13 @@ const requiredSourceIds = new Set(
   Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId),
 );
 
-// Raw collection never uses binary image caching. In raw mode all sources use the
-// listing detail page and return external URLs only. Encar keeps its dedicated API adapter.
+// Dedicated adapters own their detail/gallery flow. Every other raw source can use
+// the generic source-page wrapper, which never stores image binaries.
+const dedicatedDetailSourceIds = new Set(["encar_direct", "jpauc_japan_past_open"]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
   const mustBeStrict = rawListingMode || requiredSourceIds.has(source.sourceId);
-  if (!mustBeStrict || source.sourceId === "encar_direct") continue;
+  if (!mustBeStrict || dedicatedDetailSourceIds.has(source.sourceId)) continue;
   catalogImportSources[index] = strictSourceDetail(source);
 }
 
