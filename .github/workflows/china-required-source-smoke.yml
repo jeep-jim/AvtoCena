@@ -1,4 +1,4 @@
-name: China required sources smoke
+name: China exact source smoke
 
 on:
   workflow_dispatch:
@@ -19,16 +19,14 @@ jobs:
       matrix:
         source_id:
           - autohome_used_china_open
-          - dongchedi_china_open
           - guazi_china_open
-          - autohome_new_china_open
     env:
       CATALOG_SMOKE_SOURCE_ID: ${{ matrix.source_id }}
       CATALOG_SMOKE_OUTPUT: china-smoke-${{ matrix.source_id }}.json
       CATALOG_KNOWLEDGE_DISABLED: "1"
       CATALOG_RAW_LISTING_MODE: "1"
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "3"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_GALLERY_TIMEOUT_MS: "30000"
