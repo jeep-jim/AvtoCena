@@ -7,7 +7,7 @@ const { credibleCatalogImages, hasCredibleOfferContent } = await import("../apps
 const market = String(process.env.CATALOG_STRICT_MARKET || "korea").trim();
 const sourceId = String(process.env.CATALOG_STRICT_SOURCE_ID || "encar_direct").trim();
 const target = Math.max(1, Math.min(100, Number(process.env.CATALOG_STRICT_TARGET || 10)));
-const maxPages = Math.max(1, Math.min(20, Number(process.env.CATALOG_STRICT_MAX_PAGES || 8)));
+const maxPages = Math.max(1, Math.min(50, Number(process.env.CATALOG_STRICT_MAX_PAGES || 8)));
 const output = process.env.CATALOG_STRICT_OUTPUT || `catalog-strict-${market}-${sourceId}-${target}.json`;
 const currentYear = new Date().getFullYear();
 
