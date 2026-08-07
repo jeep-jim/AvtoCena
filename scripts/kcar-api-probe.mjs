@@ -4,7 +4,8 @@ import fs from 'node:fs/promises';
 const KEY = Buffer.from('SKFJ2424DasfaJRI', 'utf8');
 const IV = Buffer.from('sfq241sf3dscs321', 'utf8');
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36';
-const KCAR_BASE = 'https://www.kcar.com';
+const KCAR_WEB_BASE = 'https://www.kcar.com';
+const KCAR_API_BASE = 'https://api.kcar.com';
 
 function encrypt(value) {
   const cipher = crypto.createCipheriv('aes-128-cbc', KEY, IV);
@@ -43,8 +44,8 @@ async function requestProbe({ name, url, params = null, headers = {}, method = p
       headers: {
         accept: 'application/json, text/plain, */*',
         'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
-        origin: KCAR_BASE,
-        referer: `${KCAR_BASE}/bc/search`,
+        origin: KCAR_WEB_BASE,
+        referer: `${KCAR_WEB_BASE}/bc/search`,
         'user-agent': UA,
         ...(params == null ? {} : { 'content-type': 'application/json' }),
         ...headers,
@@ -94,8 +95,8 @@ const c2cInitParams = (areaType) => ({
   orderFlag: true,
 });
 
-// Exact dealer-search defaults recovered from the current K Car /bc/search bundle:
-// storedSnbSearch contributes wr_in_multi_columns, CompanyTab contributes paging/sort.
+// Exact dealer-search defaults recovered from the current K Car /bc/search bundle.
+// The same bundle declares PRD_BASEURL/API_BASE_URL as https://api.kcar.com.
 const dealerSearchParams = {
   wr_in_multi_columns: 'cntr_rgn_cd|cntr_cd',
   pageno: 1,
@@ -108,6 +109,7 @@ const dealerAcmParams = { ...dealerSearchParams, limit: 9 };
 const output = {
   generatedAt: new Date().toISOString(),
   encryption: { algorithm: 'AES-128-CBC', keyBytes: KEY.length, ivBytes: IV.length, wrapper: '{enc:<base64>}' },
+  bases: { web: KCAR_WEB_BASE, api: KCAR_API_BASE },
   dealerSearchParams,
   probes: [],
   detailRecon: null,
@@ -125,24 +127,24 @@ for (const [name, url, params] of c2cProbes) {
 
 let firstDealerRow = null;
 for (const [name, path, params] of [
-  ['dealer-direct-exact', '/bc/search/list/drct', dealerSearchParams],
-  ['dealer-acm-exact', '/bc/search/list/acm', dealerAcmParams],
+  ['dealer-direct-api-exact', '/bc/search/list/drct', dealerSearchParams],
+  ['dealer-acm-api-exact', '/bc/search/list/acm', dealerAcmParams],
 ]) {
-  const { result, rows } = await requestProbe({ name, url: `${KCAR_BASE}${path}`, params });
+  const { result, rows } = await requestProbe({ name, url: `${KCAR_API_BASE}${path}`, params });
   output.probes.push(result);
   if (!firstDealerRow && rows.length) firstDealerRow = rows[0];
 }
 
 const firstCarCd = String(firstDealerRow?.carCd || firstDealerRow?.cdCarSeq || firstDealerRow?.carSeq || '').trim();
 if (firstCarCd) {
-  const detailUrl = `${KCAR_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(firstCarCd)}`;
+  const detailUrl = `${KCAR_WEB_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(firstCarCd)}`;
   const detailRecon = { carCd: firstCarCd, detailUrl, pageStatus: 0, pageBytes: 0, pageKeys: [], scripts: [], contexts: [], imageCandidates: [] };
   try {
     const pageResponse = await fetch(detailUrl, {
       headers: {
         accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
-        referer: `${KCAR_BASE}/bc/search`,
+        referer: `${KCAR_WEB_BASE}/bc/search`,
         'user-agent': UA,
       },
       redirect: 'follow',
@@ -155,7 +157,7 @@ if (firstCarCd) {
     await fs.writeFile('kcar-api-dealer-detail.html.txt', pageText);
 
     const scriptUrls = [...new Set([...pageText.matchAll(/<script[^>]+src=["']([^"']+\.js[^"']*)["']/gi)]
-      .map((match) => new URL(match[1], KCAR_BASE).toString()))].slice(0, 60);
+      .map((match) => new URL(match[1], KCAR_WEB_BASE).toString()))].slice(0, 60);
     detailRecon.scripts = scriptUrls;
     const needles = [
       '/api/car-search/vehicle-detail',
