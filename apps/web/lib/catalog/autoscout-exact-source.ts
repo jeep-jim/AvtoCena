@@ -113,9 +113,10 @@ export function parseAutoScoutNextData(markup: string): AutoScoutExactRow[] {
     const year = parseYear(firstRegistration);
     const price = Number(listing.price?.priceRaw || listing.tracking?.price || 0);
     const currency = clean(listing.price?.currency || listing.priceCurrency || data?.props?.pageProps?.currency || "EUR");
-    const images = [...new Set((Array.isArray(listing.images) ? listing.images : [])
+    const imageCandidates: string[] = (Array.isArray(listing.images) ? listing.images : [])
       .map((value: unknown) => absoluteUrl(value))
-      .filter((url: string) => /^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(url)))];
+      .filter((url: string) => /^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(url));
+    const images: string[] = [...new Set<string>(imageCandidates)];
     const detailPower = parsePower(detailValue(listing.vehicleDetails, /power/i));
     const title = clean([make, model, trim].filter(Boolean).join(" "));
     const mileageKm = integer(listing.tracking?.mileage || listing.vehicle?.mileageInKm || detailValue(listing.vehicleDetails, /mileage/i));
