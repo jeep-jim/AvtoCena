@@ -42,6 +42,13 @@ const detailResponse = await fetch(`https://api.encar.com/v1/readside/vehicle/${
 const detail = detailResponse.ok ? await detailResponse.json() : {};
 const c = detail?.category || {};
 const params = new URLSearchParams({ manufacturerCd: clean(c.manufacturerCd), modelCd: clean(c.modelCd) });
+const jato = new URLSearchParams({
+  manufacturerCd: clean(c.manufacturerCd),
+  modelCd: clean(c.modelCd),
+  badgeCd: clean(c.gradeCd),
+  badgeDetailCd: clean(c.gradeDetailCd),
+  yearMonth: clean(c.formYear),
+});
 const candidates = [
   `https://api.encar.com/v1/readside/vehicles?vehicleIds=${encodeURIComponent(id)}`,
   `https://api.encar.com/v1/readside/vehicles/view?vehicleIds=${encodeURIComponent(id)}`,
@@ -49,6 +56,12 @@ const candidates = [
   `https://api.encar.com/v1/readside/vehicles/car/${encodeURIComponent(id)}/`,
   `https://api.encar.com/v1/readside/vehicle/category?${params}`,
   `https://api.encar.com/v1/readside/vehicle/category?include=PESTER&${params}`,
+  `https://api.encar.com/usedcar/v1/vehicles/${encodeURIComponent(id)}?inflowType=WEB`,
+  `https://api.encar.com/usedcar/v1/vehicles/${encodeURIComponent(id)}?inflowType=PC`,
+  `https://api.encar.com/usedcar/v1/vehicles/${encodeURIComponent(id)}/specs/inspection-mileage`,
+  `https://api.encar.com/usedcar/v1/options/jato?${jato}`,
+  `https://api.encar.com/usedcar/v1/external-vehicles/detail?vehicleId=${encodeURIComponent(id)}`,
+  `https://api.encar.com/usedcar/v1/external-vehicles/simple?vehicleId=${encodeURIComponent(id)}`,
   `https://api.encar.com/legacy/usedcar/sale/car/${encodeURIComponent(id)}`,
   `https://api.encar.com/legacy/usedcar/sale/car/${encodeURIComponent(id)}/simple`,
   `https://api.encar.com/legacy/usedcar/sale/car/simple?id=${encodeURIComponent(id)}`,
