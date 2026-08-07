@@ -5,7 +5,7 @@ const HEADERS = {
   "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
 };
-const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin/i;
+const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin|badge|flag/i;
 
 function clean(value: unknown) {
   return String(value ?? "")
@@ -19,6 +19,9 @@ function clean(value: unknown) {
     .replace(/\s+/g, " ")
     .trim();
 }
+function decodeAttribute(value: unknown) {
+  return String(value ?? "").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").trim();
+}
 function absolute(value: string, base: string) {
   try { return new URL(value.replace(/\\\//g, "/").replace(/&amp;/g, "&"), base).toString(); } catch { return ""; }
 }
@@ -29,6 +32,10 @@ function cnyWan(value: unknown) {
 function wanKm(value: unknown) {
   const n = Number(String(value ?? "").replace(/,/g, ""));
   return Number.isFinite(n) && n >= 0 ? Math.round(n * 10_000) : undefined;
+}
+function integer(value: unknown) {
+  const n = Number(String(value ?? "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 function remoteImage(url: string): CatalogImage {
   return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : "image/jpeg" };
@@ -52,8 +59,11 @@ function imageUrls(markup: string, base: string, hostPattern: RegExp) {
   return result;
 }
 function splitMakeModel(title: string) {
-  const normalized = clean(title).replace(/^(?:大额补贴|惠购818|新上架|抢购价)\s*/g, "");
-  const beforeYear = normalized.split(/\s+(?=20\d{2}款)/)[0] || normalized;
+  const normalized = clean(title)
+    .replace(/^(?:Grade\s*[SABCD]\s*)?Used\s+/i, "")
+    .replace(/^(?:大额补贴|惠购818|新上架|抢购价)\s*/g, "");
+  const yearMatch = normalized.match(/\b(?:19|20)\d{2}\b/);
+  const beforeYear = yearMatch ? normalized.slice(0, yearMatch.index).trim() : normalized.split(/\s+(?=20\d{2}款)/)[0] || normalized;
   const parts = beforeYear.split(/\s+/).filter(Boolean);
   return { make: parts[0] || "中国汽车", model: parts.slice(1).join(" ") || parts[0] || "车型" };
 }
@@ -64,9 +74,9 @@ async function getHtml(url: string, referer?: string) {
   return { response, html };
 }
 
-type ChinaRow = { id: string; detailUrl: string; title: string; year: number; mileageKm?: number; price: number; currency: "CNY"; listingText: string };
+type ChinaRow = { id: string; detailUrl: string; title: string; year: number; mileageKm?: number; price: number; currency: "CNY" | "USD"; listingText: string };
 
-function parseCards(markup: string, pageUrl: string, linkRe: RegExp, idFromUrl: (url: string) => string): ChinaRow[] {
+function parseChineseCards(markup: string, pageUrl: string, linkRe: RegExp, idFromUrl: (url: string) => string): ChinaRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
     .filter((row) => linkRe.test(row.href));
@@ -95,6 +105,39 @@ function parseCards(markup: string, pageUrl: string, linkRe: RegExp, idFromUrl: 
   return rows;
 }
 
+function parseGuaziGlobalCards(markup: string, pageUrl: string): ChinaRow[] {
+  const productRe = /\/products\/([a-z0-9-]+)\.html/i;
+  const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
+    .filter((row) => productRe.test(row.href));
+  const unique = new Map<string, { href: string; index: number; inner: string }>();
+  for (const anchor of anchors) {
+    const id = anchor.href.match(productRe)?.[1];
+    if (id && !unique.has(id)) unique.set(id, { href: anchor.href, index: anchor.index, inner: anchor.inner });
+  }
+  const entries = [...unique.entries()].sort((a, b) => a[1].index - b[1].index);
+  const rows: ChinaRow[] = [];
+  for (let i = 0; i < entries.length; i++) {
+    const [id, entry] = entries[i];
+    const end = entries[i + 1]?.[1].index || Math.min(markup.length, entry.index + 24_000);
+    const cardHtml = markup.slice(Math.max(0, entry.index - 3_000), end);
+    const text = clean(cardHtml);
+    const altTitles = [...cardHtml.matchAll(/\balt\s*=\s*["']([^"']+)["']/gi)]
+      .map((match) => clean(decodeAttribute(match[1])))
+      .filter((value) => /^Used\s+/i.test(value) && /\b(?:19|20)\d{2}\b/.test(value));
+    const anchorText = clean(entry.inner);
+    const rawTitle = altTitles[0] || (anchorText.match(/(?:Grade\s*[SABCD]\s*)?(Used\s+.+?\b(?:19|20)\d{2}[^$]{0,180})/i)?.[1] || "");
+    const title = clean(rawTitle).replace(/\s+Guazi used car.*$/i, "").slice(0, 180);
+    const year = Number(title.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+    const mileageKm = integer(text.match(/(?:19|20)\d{2}\.\d{1,2}\s+([0-9,]+)\s*km/i)?.[1]
+      || text.match(/\b([0-9,]+)\s*km\b/i)?.[1]);
+    const price = integer(text.match(/FOB\s*Price:\s*\$\s*([0-9,]+)/i)?.[1]);
+    if (!id || !entry.href || !title || year < 2011 || !price) continue;
+    rows.push({ id, detailUrl: entry.href, title, year, mileageKm, price, currency: "USD", listingText: text.slice(0, 2_000) });
+  }
+  return rows;
+}
+
 abstract class ExactChinaAdapter implements CatalogSourceAdapter {
   abstract sourceId: string;
   abstract label: string;
@@ -106,11 +149,15 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
   market = "china" as const;
   accessMode = "public_html" as const;
 
+  parseList(html: string, pageUrl: string) {
+    return parseChineseCards(html, pageUrl, this.detailPattern, (value) => this.detailId(value));
+  }
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = this.listUrl(page);
     const { response, html } = await getHtml(url, this.baseUrl);
-    const items = parseCards(html, response.url || url, this.detailPattern, (value) => this.detailId(value));
+    const items = this.parseList(html, response.url || url);
     return { items, nextCursor: items.length ? String(page + 1) : null, finished: !items.length, count: items.length,
       health: { ok: items.length > 0, message: `${this.label}:exact_list:${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" } };
   }
@@ -121,9 +168,17 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
     const now = new Date().toISOString();
     const { make, model } = splitMakeModel(row.title);
     return { id: `${this.sourceId}:${row.id}`, sourceId: this.sourceId, sourceOfferId: row.id, market: "china", offerType: "fixed", status: "active",
-      sourceTitle: row.title, make, model, year: row.year, mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: "CNY", priceMode: "fixed",
+      sourceTitle: row.title, make, model, year: row.year, mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
       images: [], totalRub: null, calculationStatus: "needs_knowledge", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.detailUrl, sourceVenueName: this.label, sourceTitle: row.title, raw: row, galleryStoredAs: "json_urls" } };
+  }
+
+  protected gallerySlice(html: string) {
+    const stopIndexes = [
+      html.search(/猜你喜欢/i), html.search(/同款在售/i), html.search(/相关推荐/i), html.search(/热门推荐/i),
+      html.search(/You May Also Like/i), html.search(/Similar Vehicles/i), html.search(/Recommended/i),
+    ].filter((n) => n > 0);
+    return stopIndexes.length ? html.slice(0, Math.min(...stopIndexes)) : html.slice(0, Math.min(html.length, 900_000));
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
@@ -132,12 +187,10 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
     const { html } = await getHtml(sourceUrl, this.baseUrl);
     const pageText = clean(html);
     const title = clean(offer.sourceTitle || offer.operational?.sourceTitle || "");
-    const keyWords = title.split(/\s+/).filter((x) => x.length >= 2).slice(0, 2);
-    if (keyWords.length && !keyWords.some((key) => pageText.includes(key))) return [];
+    const identityWords = title.replace(/^(?:Grade\s*[SABCD]\s*)?Used\s+/i, "").split(/\s+/).filter((x) => x.length >= 2).slice(0, 3);
+    if (identityWords.length && !identityWords.some((key) => pageText.toLowerCase().includes(key.toLowerCase()))) return [];
 
-    const stopIndexes = [html.search(/猜你喜欢/i), html.search(/同款在售/i), html.search(/相关推荐/i), html.search(/热门推荐/i)].filter((n) => n > 0);
-    const galleryHtml = stopIndexes.length ? html.slice(0, Math.min(...stopIndexes)) : html.slice(0, Math.min(html.length, 700_000));
-    const urls = imageUrls(galleryHtml, sourceUrl, this.imageHostPattern);
+    const urls = imageUrls(this.gallerySlice(html), sourceUrl, this.imageHostPattern);
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
     const verified = urls.length >= minimum;
     offer.operational = { ...(offer.operational || {}), photoIdentityVerified: verified, galleryVerified: verified, galleryImageCount: urls.length,
@@ -154,12 +207,13 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
 
 class GuaziChinaExactAdapter extends ExactChinaAdapter {
   sourceId = "guazi_china_open";
-  label = "Guazi China";
-  baseUrl = "https://www.guazi.com";
-  detailPattern = /\/car-detail\/c\d+\.html/i;
-  imageHostPattern = /guazistatic\.com|guazistatic-global\.com/i;
-  listUrl(page: number) { return page <= 1 ? `${this.baseUrl}/` : `${this.baseUrl}/?page=${page}`; }
-  detailId(url: string) { return url.match(/\/car-detail\/c(\d+)\.html/i)?.[1] || ""; }
+  label = "Guazi China Global";
+  baseUrl = "https://en.guazi.com";
+  detailPattern = /\/products\/([a-z0-9-]+)\.html/i;
+  imageHostPattern = /guazistatic-global\.com|guazistatic\.com/i;
+  listUrl(page: number) { return page <= 1 ? `${this.baseUrl}/used-cars/` : `${this.baseUrl}/used-cars/page${page}/`; }
+  detailId(url: string) { return url.match(this.detailPattern)?.[1] || ""; }
+  parseList(html: string, pageUrl: string) { return parseGuaziGlobalCards(html, pageUrl); }
 }
 
 class Che168ExactAdapter extends ExactChinaAdapter {
