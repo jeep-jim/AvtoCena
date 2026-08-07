@@ -6,6 +6,7 @@ const HEADERS = {
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
 };
 const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin|badge|flag/i;
+const IMAGE_EXTENSION = /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i;
 
 function clean(value: unknown) {
   return String(value ?? "")
@@ -38,7 +39,7 @@ function integer(value: unknown) {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 function remoteImage(url: string): CatalogImage {
-  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : "image/jpeg" };
+  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : /\.avif(?:[?#]|$)/i.test(url) ? "image/avif" : "image/jpeg" };
 }
 function imageUrls(markup: string, base: string, hostPattern: RegExp) {
   const values: string[] = [];
@@ -49,7 +50,7 @@ function imageUrls(markup: string, base: string, hostPattern: RegExp) {
   const result: string[] = [];
   for (const raw of values) {
     const url = absolute(raw, base);
-    if (!url || !hostPattern.test(url) || BAD_IMAGE.test(url)) continue;
+    if (!url || !hostPattern.test(url) || BAD_IMAGE.test(url) || !IMAGE_EXTENSION.test(url)) continue;
     const key = url.replace(/[?#].*$/, "").toLowerCase();
     if (seen.has(key)) continue;
     seen.add(key);
