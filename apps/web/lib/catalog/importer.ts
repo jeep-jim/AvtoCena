@@ -31,6 +31,7 @@ import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statist
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
+import { dubicarsUaeStrictSource } from "./dubicars-strict-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -81,6 +82,7 @@ const completeSources = [
   guaziChinaExactSource,
   che168ExactSource,
   jpaucPastSource,
+  dubicarsUaeStrictSource,
   encarCompleteSource,
 ];
 
@@ -94,13 +96,14 @@ const requiredSourceIds = new Set(
   Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId),
 );
 
-// Dedicated adapters own their detail/gallery flow. Every other raw source can use
+// Dedicated adapters own their exact detail/gallery flow. Every other raw source can use
 // the generic source-page wrapper, which never stores image binaries.
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
   "guazi_china_open",
   "autohome_used_china_open",
+  "dubicars_uae_exact",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
