@@ -1,0 +1,38 @@
+name: Encar new-car spec discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/encar-newcar-spec-discovery.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: encar-newcar-spec-discovery
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ENCAR_NEWCAR_ID: "42154170"
+      ENCAR_NEWCAR_OUTPUT: encar-newcar-spec-discovery.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Discover Encar new-car spec API
+        run: node scripts/encar-newcar-spec-discovery.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: encar-newcar-spec-discovery
+          path: encar-newcar-spec-discovery.json
+          if-no-files-found: warn
+          retention-days: 3
