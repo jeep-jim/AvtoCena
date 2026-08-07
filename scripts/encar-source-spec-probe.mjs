@@ -47,11 +47,13 @@ const candidates = [
   `https://api.encar.com/v1/readside/vehicles/view?vehicleIds=${encodeURIComponent(id)}`,
   `https://api.encar.com/v1/readside/vehicles/car/${encodeURIComponent(id)}`,
   `https://api.encar.com/v1/readside/vehicles/car/${encodeURIComponent(id)}/`,
-  `https://api.encar.com/v2/cars/${encodeURIComponent(id)}`,
-  `https://api.encar.com/v1/vehicles/${encodeURIComponent(id)}`,
-  `https://api.encar.com/v1/vehicles/${encodeURIComponent(id)}/`,
   `https://api.encar.com/v1/readside/vehicle/category?${params}`,
   `https://api.encar.com/v1/readside/vehicle/category?include=PESTER&${params}`,
+  `https://api.encar.com/legacy/usedcar/sale/car/${encodeURIComponent(id)}`,
+  `https://api.encar.com/legacy/usedcar/sale/car/${encodeURIComponent(id)}/simple`,
+  `https://api.encar.com/legacy/usedcar/sale/car/simple?id=${encodeURIComponent(id)}`,
+  `https://api.encar.com/legacy/usedcar/sale/car?carIds=${encodeURIComponent(id)}`,
+  `https://fem.encar.com/cars/newcar/${encodeURIComponent(id)}`,
   `https://api.encar.com/v1/external-vehicles/detail?vehicleId=${encodeURIComponent(id)}`,
   `https://api.encar.com/v1/external-vehicles/simple?vehicleId=${encodeURIComponent(id)}`,
 ];
@@ -81,7 +83,6 @@ for (const url of candidates) {
 
 const legacyUrls = [
   `https://www.encar.com/dc/dc_cardetailview.do?carid=${encodeURIComponent(id)}`,
-  `https://car.encar.com/dc/dc_cardetailview.do?carid=${encodeURIComponent(id)}`,
 ];
 const legacy = [];
 for (const url of legacyUrls) {
