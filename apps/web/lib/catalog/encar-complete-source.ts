@@ -173,21 +173,22 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
     const minimum = Math.min(limit, Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
-    const raw: any = offer.operational?.raw || {};
-    const listingUrls = uniqueUrls(collectImageValues(raw), limit * 2);
 
+    /* Identity rule: once a vehicle ID is known, the gallery comes only from
+       that exact Encar detail response. Listing/raw images are not merged in. */
     const detail = await fetchDetail(String(offer.sourceOfferId || ""));
     mergeDetail(offer, detail);
     const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);
-    const gallery = uniqueUrls([...listingUrls, ...detailUrls], limit).map(urlImage);
+    const gallery = detailUrls.slice(0, limit).map(urlImage);
     const verified = gallery.length >= minimum;
 
     offer.operational = {
       ...(offer.operational || {}),
       galleryVerified: verified,
+      photoIdentityVerified: verified,
       galleryImageCount: gallery.length,
       galleryRefreshedAt: new Date().toISOString(),
-      gallerySafetyMode: "encar_source_urls_only",
+      gallerySafetyMode: "encar_detail_only_v2",
       galleryStoredAs: "json_urls",
     } as any;
 
