@@ -58,11 +58,18 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
     || raw.detailIdentityVerified === true
     || raw.listingBoundImages === true) return true;
 
-  // Encar was already tested card-by-card before this gate existed. Its legacy
-  // dedicated mode is source-offer-bound; newer runs use encar_detail_only_v2.
+  // Encar exact detail was verified card-by-card and its dedicated adapter only
+  // returns photos from the current source offer.
   if (offer.sourceId === "encar_direct"
     && operational.galleryVerified === true
     && ["encar_source_urls_only", "encar_detail_only_v2"].includes(String(operational.gallerySafetyMode || ""))) return true;
+
+  // JPAuc rows are keyed by the auction data-id. The Aleado image URL stored in
+  // that same row is the listing-bound auction sheet/gallery for that exact lot.
+  if (offer.sourceId === "jpauc_japan_past_open"
+    && operational.historicalAuction === true
+    && Number(operational.minimumImages || 0) === 3
+    && String(raw?.dataId || "") === String(offer.sourceOfferId || "")) return true;
 
   return false;
 }
