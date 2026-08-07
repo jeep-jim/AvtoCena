@@ -32,11 +32,12 @@ jobs:
       CATALOG_STRICT_TARGET: "10"
       CATALOG_STRICT_MAX_PAGES: "5"
       CATALOG_STRICT_OUTPUT: catalog-strict-dubicars-10.json
+      DUBICARS_SHAPE_OUTPUT: dubicars-strict-shape.json
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_KNOWLEDGE_DISABLED: "1"
       CATALOG_SOURCE_TIMEOUT_MS: "35000"
-      CATALOG_STRICT_DUBICARS_VERSION: "2"
+      CATALOG_STRICT_DUBICARS_VERSION: "3"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -46,12 +47,17 @@ jobs:
       - run: npm ci
       - name: Typecheck strict catalog changes
         run: npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Inspect runner listing and one exact detail
+        continue-on-error: true
+        run: node scripts/dubicars-strict-shape.mjs
       - name: Verify 10 exact DubiCars cards and source-only RUB calculations
         run: npx tsx scripts/catalog-strict-source-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-strict-dubicars-10
-          path: catalog-strict-dubicars-10.json
+          path: |
+            catalog-strict-dubicars-10.json
+            dubicars-strict-shape.json
           if-no-files-found: warn
           retention-days: 3
