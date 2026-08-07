@@ -32,6 +32,7 @@ import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
 import { dubicarsUaeStrictSource } from "./dubicars-strict-source";
+import { kcarKoreaStrictSource } from "./kcar-strict-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -84,6 +85,7 @@ const completeSources = [
   jpaucPastSource,
   dubicarsUaeStrictSource,
   encarCompleteSource,
+  kcarKoreaStrictSource,
 ];
 
 for (const replacement of completeSources) {
@@ -104,6 +106,7 @@ const dedicatedDetailSourceIds = new Set([
   "guazi_china_open",
   "autohome_used_china_open",
   "dubicars_uae_exact",
+  "kcar_korea_used",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
