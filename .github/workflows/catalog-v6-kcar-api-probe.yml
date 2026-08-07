@@ -1,0 +1,33 @@
+name: Catalog V6 · K Car encrypted API probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-v6-kcar-api-probe.yml"
+      - "scripts/kcar-api-probe.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe exact encrypted K Car inventory endpoints
+        run: node scripts/kcar-api-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kcar-api-probe
+          path: |
+            kcar-api-probe.json
+            kcar-api-*.txt
+          if-no-files-found: warn
+          retention-days: 1
