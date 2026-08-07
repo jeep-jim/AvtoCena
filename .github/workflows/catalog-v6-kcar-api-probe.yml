@@ -22,6 +22,51 @@ jobs:
           node-version: 24
       - name: Probe exact encrypted K Car inventory endpoints
         run: node scripts/kcar-api-probe.mjs
+      - name: Probe exact K Car dealer detail API
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          const raw = JSON.parse(await fs.readFile('kcar-api-dealer-direct-api-exact.txt', 'utf8'));
+          const rows = raw?.data?.data?.rows ?? raw?.data?.rows ?? raw?.rows ?? [];
+          const carCd = String(rows?.[0]?.carCd || '').trim();
+          if (!carCd) throw new Error('kcar_detail_probe_missing_carCd');
+          const url = new URL('https://api.kcar.com/bc/car-info-detail-of-ng');
+          url.searchParams.set('i_sCarCd', carCd);
+          url.searchParams.set('i_sPassYn', 'N');
+          const response = await fetch(url, {
+            headers: {
+              accept: 'application/json, text/plain, */*',
+              'accept-language': 'ko-KR,ko;q=0.9,en;q=0.7',
+              origin: 'https://www.kcar.com',
+              referer: `https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}`,
+              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
+            },
+            redirect: 'follow',
+          });
+          const text = await response.text();
+          await fs.writeFile('kcar-api-dealer-detail-api-exact.txt', text);
+          let json = null;
+          try { json = JSON.parse(text); } catch {}
+          const data = json?.data?.data ?? json?.data ?? null;
+          console.log(JSON.stringify({
+            carCd,
+            url: url.toString(),
+            status: response.status,
+            contentType: response.headers.get('content-type') || '',
+            bytes: Buffer.byteLength(text),
+            success: json?.success,
+            message: json?.message,
+            dataKeys: data && typeof data === 'object' && !Array.isArray(data) ? Object.keys(data) : [],
+            rvoKeys: data?.rvo && typeof data.rvo === 'object' ? Object.keys(data.rvo) : [],
+            photoListCount: Array.isArray(data?.photoList) ? data.photoList.length : null,
+            outerPhotoListCount: Array.isArray(data?.outerPhotoList) ? data.outerPhotoList.length : null,
+            innerPhotoListCount: Array.isArray(data?.innerPhotoList) ? data.innerPhotoList.length : null,
+            optionPhotoListCount: Array.isArray(data?.optionPhotoList) ? data.optionPhotoList.length : null,
+            prefix: text.slice(0, 1200),
+          }, null, 2));
+          if (!response.ok || json?.success !== true || !data?.rvo) process.exit(1);
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
