@@ -144,6 +144,10 @@ function parseListingRows(html: string): JpaucRawRow[] {
   return rows;
 }
 
+function listingTotal(html: string, fallback = 0) {
+  return Number(html.match(/\d+\s*-\s*\d+\s+of\s+([0-9,]+)/i)?.[1]?.replace(/,/g, "") || fallback);
+}
+
 export class JpaucPastAdapter implements CatalogSourceAdapter {
   sourceId = "jpauc_japan_past_open";
   market = "japan" as const;
@@ -152,6 +156,8 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   private cookie = "";
   private selectedDate = "";
   private listingUrl = `${PAST}/listing-2`;
+  private firstListingHtml = "";
+  private totalCount = 0;
   private ready = false;
 
   private async request(url: string, options: { method?: string; body?: string; referer?: string } = {}) {
@@ -205,34 +211,37 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       referer: model.response.url,
     });
     this.listingUrl = listing.response.url;
+    this.firstListingHtml = listing.html;
+    this.totalCount = listingTotal(listing.html, parseListingRows(listing.html).length);
     this.ready = true;
   }
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     await this.ensureReady();
     const page = Math.max(1, Number(cursor || 1));
-    const currentYear = new Date().getFullYear();
-    const priorityYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
-    const url = new URL(this.listingUrl);
-    url.searchParams.set("ys", String(currentYear - priorityYears));
-    url.searchParams.set("ye", String(currentYear));
-    url.searchParams.set("mm", "0");
-    url.searchParams.set("mx", "9999");
-    url.searchParams.set("start_price_from", "1");
-    url.searchParams.set("p", String(page));
-    url.searchParams.set("ob", "y_l");
+    let html = "";
+    let httpStatus = 200;
+    if (page === 1) {
+      html = this.firstListingHtml;
+    } else {
+      const url = new URL(this.listingUrl);
+      url.searchParams.set("p", String(page));
+      const fetched = await this.request(url.toString(), { referer: this.listingUrl });
+      html = fetched.html;
+      httpStatus = fetched.response.status;
+    }
 
-    const fetched = await this.request(url.toString(), { referer: this.listingUrl });
-    const items = parseListingRows(fetched.html);
-    const total = Number(fetched.html.match(/\d+\s*-\s*\d+\s+of\s+([0-9,]+)/i)?.[1]?.replace(/,/g, "") || items.length);
-    const pageSize = Math.max(1, items.length || 10);
+    const items = parseListingRows(html);
+    const total = listingTotal(html, this.totalCount || items.length);
+    if (total > 0) this.totalCount = total;
+    const pageSize = 10;
     const finished = items.length === 0 || page * pageSize >= total;
     return {
       items,
       count: total,
       finished,
       nextCursor: finished ? null : String(page + 1),
-      health: { ok: true, message: `jpauc_past:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus: fetched.response.status },
+      health: { ok: items.length > 0 || finished, message: `jpauc_past:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus },
     };
   }
 
