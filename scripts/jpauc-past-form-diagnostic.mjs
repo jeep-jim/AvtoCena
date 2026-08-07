@@ -19,23 +19,13 @@ function summarize(html, url) {
   const inputs = parseInputs(html);
   const detailLinks = [...new Set([...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]).filter((href) => /\/auction\/detail\//i.test(href)))];
   const labels = [...html.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)].map((m) => clean(m[1].replace(/<[^>]+>/g, " "))).filter(Boolean);
-  return {
-    url,
-    bytes: html.length,
-    detailLinks: detailLinks.slice(0, 30),
-    submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20),
-    checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80),
-    labels: labels.slice(0, 120),
-  };
+  return { url, bytes: html.length, detailLinks: detailLinks.slice(0, 30), submitControls: inputs.filter((input) => input.name === "submit" || input.type === "submit").slice(0, 20), checkboxControls: inputs.filter((input) => input.type === "checkbox").slice(0, 80), labels: labels.slice(0, 120) };
 }
 
 async function request(url, cookie, options = {}) {
   const response = await fetch(url, {
     headers: { ...baseHeaders, ...(cookie ? { cookie } : {}), ...(options.headers || {}) },
-    method: options.method || "GET",
-    body: options.body,
-    redirect: "follow",
-    signal: AbortSignal.timeout(30000),
+    method: options.method || "GET", body: options.body, redirect: "follow", signal: AbortSignal.timeout(30000),
   });
   return { response, html: await response.text() };
 }
@@ -48,29 +38,23 @@ if (!selectedDate) throw new Error("jpauc_no_past_date");
 
 const stages = [summarize(initial.html, initial.response.url)];
 let currentUrl = "https://jpauc.com/auction/past";
-let currentHtml = initial.html;
-let body = new URLSearchParams([ ["checkdate[]", selectedDate], ["submit", "submitauction"] ]);
+let body = new URLSearchParams([["checkdate[]", selectedDate], ["submit", "submitauction"]]);
 
 for (let step = 0; step < 6; step++) {
-  const posted = await request(currentUrl, cookie, {
-    method: "POST",
-    body: body.toString(),
-    headers: { "content-type": "application/x-www-form-urlencoded", origin: "https://jpauc.com", referer: currentUrl },
-  });
+  const posted = await request(currentUrl, cookie, { method: "POST", body: body.toString(), headers: { "content-type": "application/x-www-form-urlencoded", origin: "https://jpauc.com", referer: currentUrl } });
   currentUrl = posted.response.url;
-  currentHtml = posted.html;
-  const summary = summarize(currentHtml, currentUrl);
+  const summary = summarize(posted.html, currentUrl);
   summary.requestBody = body.toString();
   summary.status = posted.response.status;
   stages.push(summary);
   if (summary.detailLinks.length) break;
 
-  const inputs = parseInputs(currentHtml);
+  const inputs = parseInputs(posted.html);
   const submit = inputs.find((input) => input.name === "submit" && input.value);
-  const checkboxes = inputs.filter((input) => input.type === "checkbox" && input.name && input.value && !["checkall", "checkcountry[]"].includes(String(input.name)));
   let chosen = null;
-  if (/\/maker(?:$|[?#])/i.test(currentUrl)) chosen = checkboxes.find((input) => input.name === "mk[]" && String(input.value) === "9") || checkboxes[0];
-  else chosen = checkboxes[0];
+  if (/\/maker(?:$|[?#])/i.test(currentUrl)) chosen = inputs.find((input) => input.type === "checkbox" && input.name === "mk[]" && String(input.value) === "9");
+  else if (/\/model(?:$|[?#])/i.test(currentUrl)) chosen = inputs.find((input) => input.type === "checkbox" && input.name === "md[]");
+  else chosen = inputs.find((input) => input.type === "checkbox" && input.name && input.value && !["checkall", "checkcountry[]", "checkmaker[]"].includes(String(input.name)));
   if (!chosen) break;
 
   body = new URLSearchParams();
@@ -78,12 +62,6 @@ for (let step = 0; step < 6; step++) {
   if (submit?.name && submit?.value) body.append(String(submit.name), String(submit.value));
 }
 
-const output = {
-  checkedAt: new Date().toISOString(),
-  cookiePresent: Boolean(cookie),
-  selectedDate,
-  dates,
-  stages,
-};
+const output = { checkedAt: new Date().toISOString(), cookiePresent: Boolean(cookie), selectedDate, dates, stages };
 await fs.writeFile("jpauc-past-form-diagnostic.json", JSON.stringify(output, null, 2));
 console.log(JSON.stringify(output, null, 2));
