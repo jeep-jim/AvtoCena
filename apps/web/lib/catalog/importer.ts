@@ -30,6 +30,7 @@ import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
+import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -77,6 +78,8 @@ const completeSources = [
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   prepareSource(autoGeorgiaStrictSource),
   prepareSource(mashinaKyrgyzstanListSource),
+  guaziChinaExactSource,
+  che168ExactSource,
   jpaucPastSource,
   encarCompleteSource,
 ];
@@ -93,7 +96,12 @@ const requiredSourceIds = new Set(
 
 // Dedicated adapters own their detail/gallery flow. Every other raw source can use
 // the generic source-page wrapper, which never stores image binaries.
-const dedicatedDetailSourceIds = new Set(["encar_direct", "jpauc_japan_past_open"]);
+const dedicatedDetailSourceIds = new Set([
+  "encar_direct",
+  "jpauc_japan_past_open",
+  "guazi_china_open",
+  "autohome_used_china_open",
+]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
   const mustBeStrict = rawListingMode || requiredSourceIds.has(source.sourceId);
