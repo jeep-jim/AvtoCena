@@ -1,0 +1,76 @@
+name: Catalog V6 · AutoScout exact readiness
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-v6-autoscout-readiness.yml"
+      - "apps/web/lib/catalog/autoscout-exact-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-autoscout-readiness
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CATALOG_REBUILD_MARKET: europe
+      CATALOG_REBUILD_SOURCE_IDS: autoscout_europe_open
+      CATALOG_REBUILD_OUTPUT: readiness-europe-autoscout_europe_open.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "3"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "2"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Collect exact AutoScout cards without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Enforce exact AutoScout source identity and gallery
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const problems = [];
+          if (offers.length < 3) problems.push(`count_${offers.length}`);
+          for (const offer of offers) {
+            if (offer.sourceId !== 'autoscout_europe_open') problems.push('source_identity');
+            if (!/^https:\/\/www\.autoscout24\.com\/offers\//i.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'EUR') problems.push('price');
+            if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery');
+            if (offer.images?.some((image) => !/^https:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(String(image?.url || '')))) problems.push('foreign_image');
+            if (offer?.operational?.raw?.photoIdentityVerified !== true) problems.push('photo_identity');
+          }
+          console.log(JSON.stringify({count: offers.length, problems, sample: offers.slice(0, 3).map(o => ({id:o.sourceOfferId, title:o.sourceTitle, year:o.year, price:o.sourcePrice, images:o.images?.length, sourceUrl:o.operational?.sourceUrl, powerKw:o.powerKw, powerHp:o.powerHp}))}, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-autoscout-exact
+          path: readiness-europe-autoscout_europe_open.json
+          if-no-files-found: warn
+          retention-days: 3
