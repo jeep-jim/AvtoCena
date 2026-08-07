@@ -9,6 +9,7 @@ on:
       - ".github/workflows/catalog-strict-kcar-10.yml"
       - "apps/web/lib/catalog/kcar-strict-source.ts"
       - "apps/web/lib/catalog/kcar-strict-source-v2.ts"
+      - "apps/web/lib/catalog/kcar-strict-source-v3.ts"
       - "apps/web/lib/catalog/importer.ts"
       - "apps/web/lib/catalog/source-only-pricing.ts"
       - "scripts/catalog-strict-source-smoke.mjs"
