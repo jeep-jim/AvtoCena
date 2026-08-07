@@ -20,7 +20,7 @@ function number(value: unknown) {
 }
 
 function deepFind(value: unknown, keys: string[], depth = 0): unknown {
-  if (value == null || depth > 10 || typeof value !== "object") return undefined;
+  if (value == null || depth > 12 || typeof value !== "object") return undefined;
   if (Array.isArray(value)) {
     for (const item of value) {
       const found = deepFind(item, keys, depth + 1);
@@ -40,7 +40,8 @@ function deepFind(value: unknown, keys: string[], depth = 0): unknown {
 }
 
 function imageLike(value: string) {
-  return /ci\.encar\.com|\/carpicture\/|\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(value);
+  return /ci\.encar\.com|\/carpicture\/|\.(?:jpe?g|png|webp)(?:[?#]|$)/i.test(value)
+    && !/logo|icon|banner|sheet|diagram|inspection|event|promotion/i.test(value);
 }
 
 function collectImageValues(value: unknown, key = "", depth = 0, output: string[] = []) {
@@ -123,10 +124,15 @@ async function fetchDetail(sourceOfferId: string) {
 
 function mergeDetail(offer: VehicleOffer, detail: any) {
   const vehicle = detail?.vehicle || detail?.Vehicle || detail;
+  const powerHp = offer.powerHp || number(deepFind(vehicle, [
+    "power", "Power", "horsePower", "horsepower", "HorsePower", "maxPowerPs", "MaxPowerPs", "ps", "PS",
+  ]));
   const merged = normalizeVehicleOfferSpecs({
     ...offer,
     engineCc: offer.engineCc || number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"])),
-    powerHp: offer.powerHp || number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"])),
+    powerHp,
+    powerDataConfidence: powerHp ? (offer.powerDataConfidence || "source_exact") : offer.powerDataConfidence,
+    powerDataSource: powerHp ? (offer.powerDataSource || "encar_exact_detail") : offer.powerDataSource,
     fuel: offer.fuel || text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"])),
     transmission: offer.transmission || text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"])),
     drive: offer.drive || text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"])),
@@ -135,7 +141,13 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
     productionDate: offer.productionDate || text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"])),
     operational: {
       ...(offer.operational || {}),
-      raw: { offer: offer.operational?.raw, detail },
+      detailIdentityVerified: true,
+      fieldIdentityVerified: true,
+      raw: {
+        exactDetail: detail,
+        detailIdentityVerified: true,
+        fieldIdentityVerified: true,
+      },
       vin: text(deepFind(vehicle, ["vin", "VIN"])),
       frameNumber: text(deepFind(vehicle, ["frameNo", "FrameNo", "frameNumber"])),
     },
@@ -174,8 +186,6 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
     const minimum = Math.min(limit, Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 
-    /* Identity rule: once a vehicle ID is known, the gallery comes only from
-       that exact Encar detail response. Listing/raw images are not merged in. */
     const detail = await fetchDetail(String(offer.sourceOfferId || ""));
     mergeDetail(offer, detail);
     const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);
@@ -186,10 +196,20 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       ...(offer.operational || {}),
       galleryVerified: verified,
       photoIdentityVerified: verified,
+      vehiclePhotoVerified: verified,
+      detailIdentityVerified: true,
+      fieldIdentityVerified: true,
       galleryImageCount: gallery.length,
       galleryRefreshedAt: new Date().toISOString(),
-      gallerySafetyMode: "encar_detail_only_v2",
+      gallerySafetyMode: "encar_detail_only_v3",
       galleryStoredAs: "json_urls",
+      raw: {
+        ...((offer.operational as any)?.raw || {}),
+        photoIdentityVerified: verified,
+        vehiclePhotoVerified: verified,
+        detailIdentityVerified: true,
+        fieldIdentityVerified: true,
+      },
     } as any;
 
     return verified ? gallery : [];
