@@ -1,4 +1,4 @@
-name: Catalog strict · DubiCars exact source-only 100
+name: Catalog strict · DubiCars exact source-only 1000
 
 on:
   workflow_dispatch:
@@ -29,15 +29,15 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_STRICT_MARKET: uae
       CATALOG_STRICT_SOURCE_ID: dubicars_uae_exact
-      CATALOG_STRICT_TARGET: "100"
-      CATALOG_STRICT_MAX_PAGES: "40"
-      CATALOG_STRICT_OUTPUT: catalog-strict-dubicars-100.json
+      CATALOG_STRICT_TARGET: "1000"
+      CATALOG_STRICT_MAX_PAGES: "80"
+      CATALOG_STRICT_OUTPUT: catalog-strict-dubicars-1000.json
       DUBICARS_SHAPE_OUTPUT: dubicars-strict-shape.json
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_KNOWLEDGE_DISABLED: "1"
       CATALOG_SOURCE_TIMEOUT_MS: "35000"
-      CATALOG_STRICT_DUBICARS_VERSION: "100-v3"
+      CATALOG_STRICT_DUBICARS_VERSION: "1000-v1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -50,14 +50,14 @@ jobs:
       - name: Inspect runner listing and one exact detail
         continue-on-error: true
         run: node scripts/dubicars-strict-shape.mjs
-      - name: Verify 100 exact DubiCars cards and source-only RUB calculations
+      - name: Verify 1000 exact DubiCars cards and source-only RUB calculations
         run: npx tsx scripts/catalog-strict-source-smoke.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-strict-dubicars-100
+          name: catalog-strict-dubicars-1000
           path: |
-            catalog-strict-dubicars-100.json
+            catalog-strict-dubicars-1000.json
             dubicars-strict-shape.json
           if-no-files-found: warn
           retention-days: 3
