@@ -1,5 +1,5 @@
 name: Catalog raw · 7 markets · up to 30k each
-run-name: Catalog raw parallel refresh · ${{ github.sha }}
+run-name: Catalog raw sequential recovery · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -9,13 +9,6 @@ on:
         required: false
         default: false
         type: boolean
-  schedule:
-    - cron: "30 20 * * *"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-v4-all-markets-30k.yml"
 
 permissions:
   contents: read
@@ -47,10 +40,10 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Delete old catalog only when explicitly requested
-        if: github.event_name == 'workflow_dispatch' && inputs.reset_catalog
+        if: inputs.reset_catalog
         run: npx tsx scripts/catalog-reset-public.mjs
       - name: Keep current catalog and accumulate for three days
-        if: github.event_name != 'workflow_dispatch' || !inputs.reset_catalog
+        if: ${{ !inputs.reset_catalog }}
         run: echo "Current catalog retained; new stable IDs will be accumulated for three days."
 
   korea:
@@ -62,7 +55,7 @@ jobs:
     secrets: inherit
 
   japan:
-    needs: reset
+    needs: korea
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: japan
@@ -70,7 +63,7 @@ jobs:
     secrets: inherit
 
   china:
-    needs: reset
+    needs: japan
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: china
@@ -78,7 +71,7 @@ jobs:
     secrets: inherit
 
   uae:
-    needs: reset
+    needs: china
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: uae
@@ -86,7 +79,7 @@ jobs:
     secrets: inherit
 
   europe:
-    needs: reset
+    needs: uae
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: europe
@@ -94,7 +87,7 @@ jobs:
     secrets: inherit
 
   georgia:
-    needs: reset
+    needs: europe
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: georgia
@@ -102,7 +95,7 @@ jobs:
     secrets: inherit
 
   kyrgyzstan:
-    needs: reset
+    needs: georgia
     uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
     with:
       market: kyrgyzstan
