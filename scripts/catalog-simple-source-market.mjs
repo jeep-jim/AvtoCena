@@ -25,6 +25,7 @@ const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIM
 const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
 const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 30_000));
 const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
+const isolatedSourceIds = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
 const currentYear = new Date().getFullYear();
 const priorityYear = currentYear - 6;
 const deadline = Date.now() + timeLimitMs;
@@ -34,16 +35,22 @@ if (!market) throw new Error("catalog_market_missing");
 
 const adapterById = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
 const requiredSourceIds = requiredCatalogSourceIds(market);
-const plannedSourceIds = [
-  ...requiredSourceIds,
-  ...catalogV2SourceIds(market).filter((sourceId) => !requiredSourceIds.includes(sourceId)),
-];
+const plannedSourceIds = isolatedSourceIds.length
+  ? isolatedSourceIds
+  : [
+      ...requiredSourceIds,
+      ...catalogV2SourceIds(market).filter((sourceId) => !requiredSourceIds.includes(sourceId)),
+    ];
 const missingRequiredSourceIds = requiredSourceIds.filter((sourceId) => !adapterById.has(sourceId));
+const missingIsolatedSourceIds = isolatedSourceIds.filter((sourceId) => !adapterById.has(sourceId));
 const sources = [...new Set(plannedSourceIds)].map((sourceId) => adapterById.get(sourceId)).filter(Boolean);
 
 const offers = new Map();
 const sourceReports = [];
-const errors = missingRequiredSourceIds.map((sourceId) => ({ sourceId, stage: "adapter", error: "required_adapter_missing" }));
+const errors = [
+  ...missingRequiredSourceIds.map((sourceId) => ({ sourceId, stage: "adapter", error: "required_adapter_missing" })),
+  ...missingIsolatedSourceIds.map((sourceId) => ({ sourceId, stage: "adapter", error: "isolated_adapter_missing" })),
+];
 let pages = 0;
 let seen = 0;
 let normalized = 0;
@@ -108,6 +115,11 @@ function validCore(offer) {
       && !commercial.test(title),
   );
 }
+function minimumImagesForOffer(offer, source) {
+  const declared = Number(offer?.operational?.minimumImages || 0);
+  if (source?.sourceId === "jpauc_japan_past_open" && declared === 3) return 3;
+  return minimumImages;
+}
 function imageId(url) { return crypto.createHash("sha256").update(url).digest("hex").slice(0, 24); }
 function normalizeImages(rows) {
   const result = [];
@@ -168,10 +180,12 @@ async function checkpoint(reason = "collecting") {
       target,
       priorityYear,
       minimumImages,
+      isolatedSourceIds,
       imageStorage: "json_source_urls_only",
       requiredSourceIds,
       plannedSourceIds: sources.map((source) => source.sourceId),
       missingRequiredSourceIds,
+      missingIsolatedSourceIds,
       pages,
       seen,
       normalized,
@@ -189,6 +203,7 @@ async function checkpoint(reason = "collecting") {
 }
 async function prepare(base, source) {
   if (!validCore(base)) { rejectedCore++; return null; }
+  const requiredImages = minimumImagesForOffer(base, source);
   let gallery = normalizeImages(base.images);
   if (gallery.length < 30 && source.fetchImages && !expired()) {
     try {
@@ -199,7 +214,11 @@ async function prepare(base, source) {
       errors.push({ sourceId: source.sourceId, offerId: base.id, stage: "gallery", error: String(error?.message || error) });
     }
   }
-  if (gallery.length < minimumImages) { rejectedImages++; return null; }
+  if (gallery.length < requiredImages) {
+    rejectedImages++;
+    errors.push({ sourceId: source.sourceId, offerId: base.id, stage: "gallery_quality", error: `images_${gallery.length}_below_${requiredImages}` });
+    return null;
+  }
   const title = offerTitle(base);
   const { make, model } = modelParts(base, title);
   const now = new Date().toISOString();
@@ -223,6 +242,7 @@ async function prepare(base, source) {
       galleryStoredAs: "json_urls",
       knowledgeEnriched: false,
       rawListingMode: true,
+      collectionMinimumImages: requiredImages,
     },
   });
 }
@@ -306,9 +326,11 @@ console.log(JSON.stringify({
   target,
   priorityYear,
   minimumImages,
+  isolatedSourceIds,
   requiredSourceIds,
   activeSources: sources.map((source) => source.sourceId),
   missingRequiredSourceIds,
+  missingIsolatedSourceIds,
   pages,
   seen,
   normalized,
