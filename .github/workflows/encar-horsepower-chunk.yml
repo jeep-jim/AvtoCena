@@ -1,0 +1,33 @@
+name: Encar horsepower chunk inspect
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex-strict-catalog-source-only
+    paths:
+      - ".github/workflows/encar-horsepower-chunk.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download Encar horsepower frontend chunk
+        run: |
+          curl -fL --retry 3 --retry-delay 1 \
+            -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36' \
+            'https://fem.encar.com/static/js/57576.fd4780c7.chunk.js' \
+            -o encar-horsepower-chunk.js
+          grep -o -E '.{0,3000}horsePower.{0,5000}' encar-horsepower-chunk.js > encar-horsepower-context.txt || true
+          wc -c encar-horsepower-chunk.js encar-horsepower-context.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: encar-horsepower-chunk
+          path: |
+            encar-horsepower-chunk.js
+            encar-horsepower-context.txt
+          retention-days: 3
