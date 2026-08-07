@@ -30,14 +30,14 @@ jobs:
       CATALOG_STRICT_MARKET: uae
       CATALOG_STRICT_SOURCE_ID: dubicars_uae_exact
       CATALOG_STRICT_TARGET: "100"
-      CATALOG_STRICT_MAX_PAGES: "20"
+      CATALOG_STRICT_MAX_PAGES: "40"
       CATALOG_STRICT_OUTPUT: catalog-strict-dubicars-100.json
       DUBICARS_SHAPE_OUTPUT: dubicars-strict-shape.json
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_KNOWLEDGE_DISABLED: "1"
       CATALOG_SOURCE_TIMEOUT_MS: "35000"
-      CATALOG_STRICT_DUBICARS_VERSION: "100-v1"
+      CATALOG_STRICT_DUBICARS_VERSION: "100-v2"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
