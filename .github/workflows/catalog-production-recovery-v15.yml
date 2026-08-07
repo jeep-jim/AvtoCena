@@ -1,22 +1,13 @@
-name: Catalog source-scale emergency cancel guard v3
+name: Catalog source-scale daily DISABLED on strict certification branch
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - codex-strict-catalog-source-only
-    paths:
-      - ".github/workflows/catalog-production-recovery-v15.yml"
 
 permissions:
   contents: read
-
-concurrency:
-  group: catalog-source-scale-daily
-  cancel-in-progress: true
 
 jobs:
   stopped:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Emergency third cancellation pass: terminate any legacy raw publisher still running on the strict certification branch."
+      - run: echo "Raw/source-scale publishing is disabled on codex-strict-catalog-source-only. Certify exact sources through the strict source-only ladder before production publishing."
