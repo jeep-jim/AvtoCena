@@ -116,7 +116,7 @@ function exactGallery(markup: string, detailUrl: string) {
     .map((value) => absolute(value, detailUrl))
     .filter((url) => url
       && !BAD_IMAGE.test(url)
-      && /\/images\/[a-f0-9]{6}\/w_1300x760\/approved-automotive\/[a-f0-9-]+\.(?:jpe?g|webp)(?:[?#]|$)/i.test(url)))];
+      && /\/images\/[a-f0-9]{6}\/w_1300x760\/[a-z0-9][a-z0-9-]*\/[a-f0-9-]+\.(?:jpe?g|webp)(?:[?#]|$)/i.test(url)))];
   return highResolution.slice(0, 30);
 }
 
@@ -209,7 +209,7 @@ export class DubicarsStrictAdapter implements CatalogSourceAdapter {
     offer.operational = {
       ...(offer.operational || {}), galleryVerified: verified, photoIdentityVerified: verified, vehiclePhotoVerified: verified,
       detailIdentityVerified: true, fieldIdentityVerified: true, galleryImageCount: urls.length, galleryStoredAs: "json_urls",
-      gallerySafetyMode: "dubicars_highres_exact_detail_only_v3",
+      gallerySafetyMode: "dubicars_highres_exact_detail_dealer_slug_v4",
       raw: { ...((offer.operational as any)?.raw || {}), photoIdentityVerified: verified, vehiclePhotoVerified: verified },
     } as any;
     return verified ? urls.map(image) : [];
