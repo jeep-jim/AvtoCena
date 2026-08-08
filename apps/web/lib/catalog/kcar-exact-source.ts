@@ -1,0 +1,353 @@
+import crypto from "node:crypto";
+import { stableOfferId } from "./storage";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
+
+type KCarListRow = {
+  carCd?: string;
+  mnuftrNm?: string;
+  modelNm?: string;
+  prc?: string | number;
+  milg?: string | number;
+};
+
+type KCarDetailData = {
+  rvo?: Record<string, any>;
+  vrVo?: Record<string, any>;
+};
+
+type Row = {
+  id: string;
+  url: string;
+  title: string;
+  make: string;
+  model: string;
+  trim: string;
+  year: number;
+  productionDate?: string;
+  mileageKm?: number;
+  engineCc?: number;
+  powerHp?: number;
+  powerKw?: number;
+  fuel: string;
+  transmission: string;
+  drive: string;
+  bodyType: string;
+  color?: string;
+  vin?: string;
+  sourcePrice: number;
+  sourceCurrency: "KRW";
+  images: string[];
+  rawFuelType: string;
+  rawStatus: string;
+};
+
+const API_BASE = "https://api.kcar.com";
+const WEB_BASE = "https://www.kcar.com";
+const KEY = Buffer.from("SKFJ2424DasfaJRI", "utf8");
+const IV = Buffer.from("sfq241sf3dscs321", "utf8");
+const HEADERS = {
+  accept: "application/json, text/plain, */*",
+  "accept-language": "ko-KR,ko;q=0.9,en;q=0.7",
+  origin: WEB_BASE,
+  referer: `${WEB_BASE}/bc/search`,
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+};
+
+function clean(value: unknown) {
+  return String(value ?? "").replace(/\s+/g, " ").trim();
+}
+
+function positiveInt(value: unknown) {
+  const parsed = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : undefined;
+}
+
+function sleep(ms: number) {
+  return ms > 0 ? new Promise((resolve) => setTimeout(resolve, ms)) : Promise.resolve();
+}
+
+function encryptedBody(value: Record<string, unknown>) {
+  const filtered = Object.fromEntries(Object.entries(value).filter(([, item]) => Boolean(item)));
+  const cipher = crypto.createCipheriv("aes-128-cbc", KEY, IV);
+  const encrypted = Buffer.concat([
+    cipher.update(JSON.stringify(filtered), "utf8"),
+    cipher.final(),
+  ]).toString("base64");
+  return JSON.stringify({ enc: encrypted });
+}
+
+function retryDelay(response: Response, fallback: number) {
+  const raw = clean(response.headers.get("retry-after"));
+  const seconds = Number(raw);
+  if (Number.isFinite(seconds) && seconds > 0) return Math.min(60_000, Math.round(seconds * 1000));
+  const date = Date.parse(raw);
+  if (Number.isFinite(date)) return Math.min(60_000, Math.max(0, date - Date.now()));
+  return fallback;
+}
+
+async function requestJson(url: string, init: RequestInit = {}) {
+  const attempts = Math.max(1, Math.min(6, Number(process.env.CATALOG_SOURCE_RETRY_ATTEMPTS || 5)));
+  let lastError: unknown = null;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 35_000));
+    try {
+      const response = await fetch(url, {
+        ...init,
+        headers: { ...HEADERS, ...(init.headers || {}) },
+        redirect: "follow",
+        signal: controller.signal,
+      });
+      const text = await response.text();
+      let json: any = null;
+      try { json = JSON.parse(text); } catch {}
+      const retryable = response.status === 403 || response.status === 429 || [500, 502, 503, 504].includes(response.status);
+      if (retryable && attempt < attempts - 1) {
+        await sleep(retryDelay(response, Math.min(30_000, 1_500 * (2 ** attempt))));
+        continue;
+      }
+      return { response, json };
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts - 1) throw error;
+      await sleep(Math.min(30_000, 1_500 * (2 ** attempt)));
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error("kcar_request_failed");
+}
+
+function detailUrl(carCd: string) {
+  return `${WEB_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}`;
+}
+
+function exactVehicleGallery(data: KCarDetailData, carCd: string) {
+  const numericId = carCd.replace(/^[^0-9]+/, "");
+  if (!numericId) return [];
+  const matcher = new RegExp(`^https://img\\.kcar\\.com/3dcarpicture/\\d{4}/\\d{2}/\\d+/${numericId}_[0-9]+/extra/extra_[0-9]+_hq\\.jpg(?:[?#].*)?$`, "i");
+  const urls = clean(data.vrVo?.v_src_show)
+    .split(",")
+    .map((item) => item.trim().replace(/^['\"]+|['\"]+$/g, "").trim())
+    .filter((url) => matcher.test(url));
+  return [...new Set(urls)].slice(0, 30);
+}
+
+function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
+  const rvo = data?.rvo || {};
+  const id = clean(rvo.carCd);
+  if (!id || id !== clean(meta.carCd) || clean(rvo.statCd) !== "CAR_STATUS010") return null;
+
+  const make = clean(rvo.mnuftrNm);
+  const model = clean(rvo.modelNm);
+  const trim = clean(rvo.grdFullNm || [rvo.grdNm, rvo.grdDtlNm].filter(Boolean).join(" "));
+  const year = Number(rvo.regModelyr || String(rvo.mfgDt || "").slice(0, 4) || 0);
+  const productionDate = clean(rvo.mfgDt) || undefined;
+  const mileageKm = positiveInt(rvo.milg);
+  const engineCc = positiveInt(rvo.engdispmnt);
+  const hrspow = positiveInt(rvo.hrspow);
+  const fuel = clean(rvo.fuelTypecdNm);
+  const rawFuelType = clean(rvo.fuelType);
+  const transmission = clean(rvo.trnsmsncdNm);
+  const drive = clean(rvo.drvgYnNm);
+  const bodyType = clean(rvo.carctgr);
+  const sourcePriceManwon = Number(rvo.salprc || 0);
+  const sourcePrice = Number.isFinite(sourcePriceManwon) && sourcePriceManwon > 0 ? Math.round(sourcePriceManwon * 10_000) : 0;
+  const images = exactVehicleGallery(data, id);
+
+  if (!make || !model || !trim || !year || !fuel || !transmission || !drive || !bodyType || !sourcePrice || !hrspow || images.length < 5) return null;
+  if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return null;
+  if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return null;
+  const listPrice = positiveInt(meta.prc);
+  if (listPrice && listPrice !== Math.round(sourcePriceManwon)) return null;
+  const listMileage = positiveInt(meta.milg);
+  if (listMileage && mileageKm && listMileage !== mileageKm) return null;
+
+  const electricPowerUnit = rawFuelType === "009" || rawFuelType === "013";
+  return {
+    id,
+    url: detailUrl(id),
+    title: [make, model, trim].join(" "),
+    make,
+    model,
+    trim,
+    year,
+    productionDate,
+    mileageKm,
+    engineCc,
+    ...(electricPowerUnit ? { powerKw: hrspow } : { powerHp: hrspow }),
+    fuel,
+    transmission,
+    drive,
+    bodyType,
+    color: clean(rvo.extrColorNm) || undefined,
+    vin: clean(rvo.vin) || undefined,
+    sourcePrice,
+    sourceCurrency: "KRW",
+    images,
+    rawFuelType,
+    rawStatus: clean(rvo.statCdNm || rvo.statCd),
+  };
+}
+
+function image(url: string): CatalogImage {
+  const pathname = (() => { try { return new URL(url).pathname; } catch { return ""; } })();
+  const mimeType = /\.png$/i.test(pathname) ? "image/png" : /\.webp$/i.test(pathname) ? "image/webp" : "image/jpeg";
+  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType };
+}
+
+class KCarExactSource implements CatalogSourceAdapter {
+  sourceId = "kcar_korea_open";
+  market = "korea" as const;
+  accessMode = "public_json" as const;
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const page = Math.max(1, Number(cursor || 1));
+    const pageDelay = Math.max(0, Math.min(10_000, Number(process.env.CATALOG_SOURCE_PAGE_DELAY_MS || 0)));
+    if (page > 1) await sleep(pageDelay);
+
+    const listing = await requestJson(`${API_BASE}/bc/search/list/drct`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: encryptedBody({
+        wr_in_multi_columns: "cntr_rgn_cd|cntr_cd",
+        pageno: page,
+        limit: 20,
+        orderFlag: true,
+        orderBy: "time_deal_yn:desc|time_deal_end_dt:asc|promo_ordr:asc|event_ordr:asc|sort_ordr:asc",
+      }),
+    });
+    if (!listing.response.ok || listing.json?.success !== true) {
+      throw new Error(`kcar_exact_list_http_${listing.response.status}_page_${page}`);
+    }
+    const root = listing.json?.data?.data ?? listing.json?.data ?? {};
+    const metas = (Array.isArray(root?.rows) ? root.rows : []) as KCarListRow[];
+    const total = Number(root?.totalCnt || 0);
+    const rows: Row[] = [];
+    const batchSize = Math.max(1, Math.min(4, Number(process.env.CATALOG_SOURCE_DETAIL_BATCH_SIZE || 2)));
+    const batchDelay = Math.max(0, Math.min(5_000, Number(process.env.CATALOG_SOURCE_BATCH_DELAY_MS || 400)));
+
+    for (let index = 0; index < metas.length; index += batchSize) {
+      const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
+        const carCd = clean(meta.carCd);
+        if (!carCd) return null;
+        const url = new URL(`${API_BASE}/bc/car-info-detail-of-ng`);
+        url.searchParams.set("i_sCarCd", carCd);
+        url.searchParams.set("i_sPassYn", "N");
+        const detail = await requestJson(url.toString(), { headers: { referer: detailUrl(carCd) } }).catch(() => null);
+        if (!detail?.response.ok || detail.json?.success !== true) return null;
+        const data = (detail.json?.data?.data ?? detail.json?.data ?? null) as KCarDetailData | null;
+        return data ? parseExactDetail(meta, data) : null;
+      }));
+      rows.push(...batch.filter(Boolean) as Row[]);
+      if (index + batchSize < metas.length) await sleep(batchDelay);
+    }
+
+    const finished = metas.length === 0 || (total > 0 && page * 20 >= total);
+    return {
+      items: rows,
+      nextCursor: finished ? null : String(page + 1),
+      finished,
+      count: rows.length,
+      health: {
+        ok: metas.length > 0,
+        message: `K Car exact page ${page}: ${rows.length}/${metas.length}; total=${total || "unknown"}`,
+        checkedAt: new Date().toISOString(),
+        httpStatus: listing.response.status,
+        contentType: listing.response.headers.get("content-type") || "",
+      },
+    };
+  }
+
+  normalizeOffer(raw: unknown): VehicleOffer | null {
+    const row = raw as Row;
+    if (!row?.id || !row.make || !row.model || !row.trim || !row.year || !row.sourcePrice || !row.sourceCurrency || row.images.length < 5) return null;
+    if (!row.powerHp && !row.powerKw) return null;
+    const now = new Date().toISOString();
+    const fields = [
+      "make", "model", "trim", "year", "sourcePrice", "sourceCurrency",
+      ...(row.productionDate ? ["productionDate"] : []),
+      ...(row.mileageKm != null ? ["mileageKm"] : []),
+      ...(row.engineCc ? ["engineCc"] : []),
+      ...(row.powerHp ? ["powerHp"] : []),
+      ...(row.powerKw ? ["powerKw"] : []),
+      "fuel", "transmission", "drive", "bodyType",
+      ...(row.color ? ["color"] : []),
+      ...(row.vin ? ["vin"] : []),
+    ];
+    return {
+      id: stableOfferId(this.sourceId, row.id),
+      sourceId: this.sourceId,
+      sourceOfferId: row.id,
+      market: "korea",
+      offerType: "fixed",
+      status: "active",
+      sourceTitle: row.title,
+      make: row.make,
+      model: row.model,
+      trim: row.trim,
+      year: row.year,
+      productionDate: row.productionDate,
+      mileageKm: row.mileageKm,
+      engineCc: row.engineCc,
+      powerHp: row.powerHp,
+      powerKw: row.powerKw,
+      powerDataConfidence: "source_exact",
+      powerDataSource: "kcar_exact_detail_rvo_hrspow",
+      fuel: row.fuel,
+      transmission: row.transmission,
+      drive: row.drive,
+      bodyType: row.bodyType,
+      color: row.color,
+      vin: row.vin,
+      sourcePrice: row.sourcePrice,
+      sourceCurrency: row.sourceCurrency,
+      priceMode: "fixed",
+      images: [],
+      totalRub: null,
+      calculationStatus: "needs_data",
+      firstSeenAt: now,
+      updatedAt: now,
+      operational: {
+        sourceUrl: row.url,
+        sourceTitle: row.title,
+        detailIdentityVerified: true,
+        fieldIdentityVerified: true,
+        photoIdentityVerified: true,
+        vehiclePhotoVerified: true,
+        sourceExactFields: fields,
+        vin: row.vin,
+        raw: {
+          sourceExactFields: fields,
+          sourceApi: `${API_BASE}/bc/car-info-detail-of-ng`,
+          listingApi: `${API_BASE}/bc/search/list/drct`,
+          gallerySafetyMode: "kcar_vrvo_v_src_show_exact_car_id_hq_v1",
+          rawFuelType: row.rawFuelType,
+          rawStatus: row.rawStatus,
+          images: row.images,
+        },
+      },
+    };
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const raw = offer.operational?.raw as any;
+    const urls = Array.isArray(raw?.images) ? raw.images.map(clean).filter(Boolean) : [];
+    return [...new Set(urls)].slice(0, 30).map(image);
+  }
+
+  mapStatus(): OfferStatus {
+    return "active";
+  }
+
+  async healthCheck() {
+    try {
+      const page = await this.fetchPage("1");
+      return page.health || { ok: false, message: "K Car exact health unavailable", checkedAt: new Date().toISOString() };
+    } catch (error) {
+      return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() };
+    }
+  }
+}
+
+export const kcarKoreaExactSource = new KCarExactSource();

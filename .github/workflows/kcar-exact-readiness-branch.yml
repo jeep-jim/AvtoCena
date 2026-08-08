@@ -1,0 +1,89 @@
+name: K Car exact readiness branch
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/kcar-exact-readiness-branch.yml"
+      - "apps/web/lib/catalog/kcar-exact-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
+      - "scripts/kcar-exact-diagnostic.mjs"
+  push:
+    branches:
+      - agent/kcar-exact-readiness
+    paths:
+      - ".github/workflows/kcar-exact-readiness-branch.yml"
+      - "apps/web/lib/catalog/kcar-exact-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
+      - "scripts/kcar-exact-diagnostic.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_REBUILD_MARKET: korea
+      CATALOG_REBUILD_SOURCE_IDS: kcar_korea_open
+      CATALOG_REBUILD_OUTPUT: readiness-korea-kcar_korea_open.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_SOURCE_TIMEOUT_MS: "35000"
+      CATALOG_SOURCE_RETRY_ATTEMPTS: "5"
+      CATALOG_SOURCE_DETAIL_BATCH_SIZE: "2"
+      CATALOG_SOURCE_BATCH_DELAY_MS: "650"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Capture current K Car API shape
+        run: node scripts/kcar-exact-diagnostic.mjs | tee kcar-exact-diagnostic.log
+      - name: Collect exact K Car cards without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Enforce production-quality source readiness
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const expected = 'kcar_korea_open';
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const report = data.report || {};
+          const source = (report.sources || []).find((row) => row.sourceId === expected);
+          const problems = [];
+          if (!source) problems.push('source_report_missing');
+          if (!offers.length) problems.push('zero_production_cards');
+          if (source && Number(source.saved || 0) < 1) problems.push(`saved_${source.saved || 0}`);
+          if (offers.some((offer) => offer.sourceId !== expected)) problems.push('source_identity_mismatch');
+          if (offers.some((offer) => !/^https?:\/\//i.test(String(offer?.operational?.sourceUrl || '')))) problems.push('source_url_missing');
+          if (offers.some((offer) => Number(offer?.sourcePrice || 0) <= 0 || offer?.sourceCurrency !== 'KRW')) problems.push('source_price_missing_or_currency_mismatch');
+          if (offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < 5)) problems.push('gallery_below_minimum');
+          console.log(JSON.stringify({ expected, count: offers.length, source, problems, errors: report.errors || [] }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-korea-kcar_korea_open
+          path: |
+            readiness-korea-kcar_korea_open.json
+            kcar-exact-diagnostic.log
+          if-no-files-found: warn
+          retention-days: 3
