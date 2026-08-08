@@ -30,6 +30,7 @@ import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
+import { prestigeJapanExactSource } from "./prestige-japan-exact-source";
 import { guaziChinaExactSource } from "./china-exact-sources";
 import { che168GlobalExactSource } from "./che168-global-exact-source";
 import { autohomeNewExactSource } from "./autohome-new-exact-source";
@@ -88,6 +89,7 @@ const completeSources = [
   guaziChinaExactSource,
   che168GlobalExactSource,
   autohomeNewExactSource,
+  prestigeJapanExactSource,
   autoscoutEuropeExactSource,
   dubizzleUaeExactSource,
   jpaucPastSource,
@@ -110,6 +112,7 @@ const requiredSourceIds = new Set(
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
+  "prestige_japan_auctions_open",
   "guazi_china_open",
   "autohome_used_china_open",
   "autohome_new_china_open",
