@@ -1,6 +1,8 @@
 import { CurrencyFlag } from "@/components/catalog/PriceTrend";
 import type { CatalogMarket } from "@/lib/catalog/types";
 
+// Use the same SVG flag renderer as the currency strip so Windows never falls
+// back to the two regional-indicator letters (KR, CN, JP, etc.).
 const MARKET_CURRENCY: Record<CatalogMarket, string> = {
   korea: "KRW",
   china: "CNY",
