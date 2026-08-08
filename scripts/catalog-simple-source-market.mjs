@@ -10,7 +10,6 @@ process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { requiredCatalogSourceIds } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");
 
@@ -168,8 +167,8 @@ function orderedOffers() {
 async function checkpoint(reason = "collecting") {
   const rows = orderedOffers();
   const payload = {
-    version: 5,
-    mode: "raw_listing_title_year_price_gallery",
+    version: 6,
+    mode: "source_only_exact_fields_title_year_price_gallery",
     market,
     generatedAt: new Date().toISOString(),
     count: rows.length,
@@ -182,6 +181,7 @@ async function checkpoint(reason = "collecting") {
       minimumImages,
       isolatedSourceIds,
       imageStorage: "json_source_urls_only",
+      fieldPolicy: "preserve_adapter_source_fields_no_generic_spec_normalization",
       requiredSourceIds,
       plannedSourceIds: sources.map((source) => source.sourceId),
       missingRequiredSourceIds,
@@ -222,16 +222,19 @@ async function prepare(base, source) {
   const title = offerTitle(base);
   const { make, model } = modelParts(base, title);
   const now = new Date().toISOString();
-  return normalizeVehicleOfferSpecs({
+  // Source-only collection deliberately does not call normalizeVehicleOfferSpecs().
+  // Source adapters own engine/power/trim/transmission/drive/body values. Missing
+  // fields remain missing; generic text heuristics must not rewrite exact source data.
+  return {
     ...base,
     sourceTitle: title,
     make,
     model,
-    status: "active",
+    status: base.status || "active",
     images: gallery,
     totalRub: null,
     calculationSnapshot: undefined,
-    calculationStatus: "needs_knowledge",
+    calculationStatus: base.calculationStatus || "needs_data",
     updatedAt: now,
     firstSeenAt: base.firstSeenAt || now,
     operational: {
@@ -242,9 +245,10 @@ async function prepare(base, source) {
       galleryStoredAs: "json_urls",
       knowledgeEnriched: false,
       rawListingMode: true,
+      sourceOnlyFieldsPreserved: true,
       collectionMinimumImages: requiredImages,
     },
-  });
+  };
 }
 async function collectSource(source) {
   let cursor = null;
