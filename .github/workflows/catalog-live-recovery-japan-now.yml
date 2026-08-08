@@ -1,0 +1,106 @@
+name: Catalog live recovery · Japan now
+run-name: Immediate Japan live recovery · ${{ github.event.workflow_run.id || inputs.source_run_id || github.sha }}
+
+on:
+  workflow_run:
+    workflows:
+      - "Catalog live recovery · 6 markets"
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Prestige source collection run ID"
+        required: true
+        default: "31247872502"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: catalog-live-recovery-japan
+  cancel-in-progress: true
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  PRESTIGE_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_run_id || '31247872502' }}
+
+jobs:
+  publish-japan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: |
+          node --check scripts/prestige-japan-partial-merge-for-live.mjs
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+      - name: Download all completed and partial strict Prestige chunks
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prestige-source-chunks .prestige-zips
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRESTIGE_SOURCE_RUN_ID/artifacts?per_page=100" --paginate \
+            --jq '.artifacts[] | select(.name | startswith("prestige-japan-chunk-")) | [.id,.name] | @tsv' > prestige-artifacts.tsv
+          test -s prestige-artifacts.tsv
+          echo "Artifacts: $(wc -l < prestige-artifacts.tsv)"
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            zip_path=".prestige-zips/${artifact_id}.zip"
+            out_dir="prestige-source-chunks/$artifact_name"
+            mkdir -p "$out_dir"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+              --output "$zip_path"
+            unzip -q "$zip_path" -d "$out_dir"
+          done < prestige-artifacts.tsv
+      - name: Keep every individually valid sold lot even from timed-out chunks
+        env:
+          PRESTIGE_PARTIAL_INPUT_DIR: prestige-source-chunks
+          PRESTIGE_PARTIAL_OUTPUT: prestige-japan-exact-sold-partial-live.json
+        run: node scripts/prestige-japan-partial-merge-for-live.mjs
+      - name: Calculate exact ruble totals for strict sold lots
+        env:
+          PRESTIGE_RECOVERY_INPUT: prestige-japan-exact-sold-partial-live.json
+          PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan.json
+          PRESTIGE_RECOVERY_TARGET: "1000"
+          PRESTIGE_RECOVERY_CONCURRENCY: "12"
+        run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Publish Japan market
+        env:
+          RECOVERY_PUBLISH_MARKET: japan
+          RECOVERY_PUBLISH_INPUT: catalog-rebuild-japan.json
+          RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-publish-report.json
+          RECOVERY_PUBLISH_MAX: "1000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-live-recovery-japan-now-reports
+          path: |
+            prestige-japan-exact-sold-partial-live.json
+            catalog-rebuild-japan.json
+            catalog-live-recovery-japan-publish-report.json
+          if-no-files-found: warn
+          retention-days: 3
