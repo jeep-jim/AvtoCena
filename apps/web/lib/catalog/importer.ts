@@ -33,6 +33,7 @@ import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
+import { carvectorJapanCurrentSource } from "./carvector-current-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
@@ -80,6 +81,7 @@ const completeSources = [
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   prepareSource(autoGeorgiaStrictSource),
   prepareSource(mashinaKyrgyzstanListSource),
+  prepareSource(carvectorJapanCurrentSource),
   guaziChinaExactSource,
   che168ExactSource,
   autoscoutEuropeExactSource,
