@@ -88,7 +88,6 @@ function resultPriceVerified(offer: VehicleOffer) {
       || raw.resultPriceVerified === true
       || raw.auctionResultPriceVerified === true
       || operational?.auctionPriceKind === "published_result"
-      || offer.priceMode === "auction_result"
   );
 }
 
@@ -130,7 +129,7 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
         auctionStatus: verifiedResult ? "completed_price_verified" : past ? "past_price_unverified" : "upcoming",
         auctionFeed: true,
         auctionResultPriceVerified: verifiedResult,
-      } as any,
+      },
     };
   }
 
@@ -141,9 +140,8 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
   }
 
   mapStatus(): OfferStatus {
-    // Status is resolved per-offer in normalizeOffer. A generic past-feed row is not
-    // considered sold until its final/result price is explicitly verified.
-    return this.kind === "past" ? "active" : "active";
+    // A generic feed row is not marked sold until normalizeOffer verifies a final result price.
+    return "active";
   }
 
   healthCheck() {
