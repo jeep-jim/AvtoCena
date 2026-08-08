@@ -271,8 +271,7 @@ function RateSparkline({ rate, light = false, priceRub }: { rate: CurrencyRateLi
   const currentEffective = Number(rate.effectiveRate || points.at(-1)?.effectiveRate || 0);
   const selectedEffective = selectedValue / Math.max(1, meta.nominal);
   const selectedPrice = priceRub && currentEffective > 0 ? Math.round(priceRub * selectedEffective / currentEffective) : 0;
-  const priceDelta = selectedPrice && priceRub ? selectedPrice - priceRub : 0;
-  const selectedPriceColor = movementColor(priceDelta, light);
+  const selectedPriceColor = selectedColor;
   const selectedBackground = selectedDelta < -1e-12
     ? light ? "rgba(32,168,94,.10)" : "rgba(32,168,94,.16)"
     : selectedDelta > 1e-12

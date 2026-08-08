@@ -10,6 +10,8 @@ const input = String(process.env.RECOVERY_PUBLISH_INPUT || `catalog-rebuild-${ma
 const output = String(process.env.RECOVERY_PUBLISH_REPORT || `catalog-live-recovery-${market}-publish-report.json`).trim();
 const maxPerMarket = Math.max(1, Math.min(5_000, Number(process.env.RECOVERY_PUBLISH_MAX || 3_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
+const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
 const minYear = new Date().getFullYear() - 15;
 
 if (!PUBLIC_CATALOG_MARKETS.includes(market)) throw new Error(`recovery_publish_market_invalid:${market}`);
@@ -46,6 +48,12 @@ function quality(a, b) {
     || Number(a.totalRub || Number.MAX_SAFE_INTEGER) - Number(b.totalRub || Number.MAX_SAFE_INTEGER)
     || String(a.id || "").localeCompare(String(b.id || ""));
 }
+function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
+function modelKey(offer) {
+  const make = makeKey(offer);
+  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
 
 const payload = JSON.parse(await fs.readFile(input, "utf8"));
 const sourceRows = Array.isArray(payload?.offers) ? payload.offers : [];
@@ -67,7 +75,21 @@ for (const raw of sourceRows) {
   selected.push(offer);
 }
 selected.sort(quality);
-const marketRows = selected.slice(0, maxPerMarket);
+const modelCounts = new Map();
+const makeModels = new Map();
+const marketRows = [];
+for (const offer of selected) {
+  const key = modelKey(offer);
+  const make = makeKey(offer);
+  const count = key ? Number(modelCounts.get(key) || 0) : 0;
+  if (key && count >= maxOffersPerModel) { reject("model_quota"); continue; }
+  const modelsForMake = make ? (makeModels.get(make) || new Set()) : null;
+  if (make && key && !modelsForMake.has(key) && modelsForMake.size >= maxModelsPerMake) { reject("make_model_quota"); continue; }
+  marketRows.push(offer);
+  if (key) modelCounts.set(key, count + 1);
+  if (make && key) { modelsForMake.add(key); makeModels.set(make, modelsForMake); }
+  if (marketRows.length >= maxPerMarket) break;
+}
 if (!marketRows.length) {
   const report = { version: 1, mode: "live_market_exact_calculated_publish", market, published: false, generationId: null, count: 0, rejected, publicationError: `recovery_empty_market:${market}` };
   await fs.writeFile(output, JSON.stringify(report, null, 2));
@@ -113,6 +135,10 @@ const report = {
   calculatedCount: marketRows.filter(exactCalculation).length,
   minYear,
   preferredMaxRub,
+  maxOffersPerModel,
+  maxModelsPerMake,
+  distinctModels: modelCounts.size,
+  distinctMakes: makeModels.size,
   sourceCounts: Object.fromEntries([...new Set(marketRows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, marketRows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
   imageStats: {
     min: Math.min(...marketRows.map((offer) => offer.images.length)),

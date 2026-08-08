@@ -3,7 +3,6 @@ import Link from "next/link";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
-import { OfferLeadForm } from "@/components/catalog/OfferLeadForm";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -104,7 +103,25 @@ function priceBreakdown(offer: any): BreakdownLine[] {
 function OfferPriceBreakdown({ offer }: { offer: any }) {
   const lines = priceBreakdown(offer);
   if (!lines.length) return null;
-  return <section className="ac-offer-breakdown min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><h2 className="ac-offer-block-title text-lg font-bold tracking-[-0.02em] text-[var(--ac-text)] md:text-xl">Структура цены</h2><div className="ac-offer-breakdown-lines mt-2 border-t border-dotted border-[var(--ac-border)] pt-2">{lines.map((line, index) => <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 truncate">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span></div>)}</div></section>;
+  const vehicleLine = lines.find((line) => line.id === "car")
+    || lines.find((line) => /цена автомобиля|стоимость автомобиля/i.test(line.title))
+    || lines[0];
+  const detailLines = lines.filter((line) => line !== vehicleLine);
+  return <details className="ac-offer-breakdown group min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+    <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="ac-offer-block-title text-lg font-bold tracking-[-0.02em] text-[var(--ac-text)] md:text-xl">Структура цены</h2>
+        <svg className="mr-1 shrink-0 transition-transform group-open:rotate-180" width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+      <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-[12px] font-medium md:text-[13px]">
+        <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="shrink-0">Цена автомобиля</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
+        <span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(vehicleLine.amountRub)} ₽</span>
+      </div>
+    </summary>
+    {detailLines.length ? <div className="ac-offer-breakdown-lines border-t border-dotted border-[var(--ac-border)] px-4 pb-3 pt-2">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 truncate">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span></div>)}</div> : null}
+  </details>;
 }
 
 function MissingOffer() {
@@ -194,7 +211,6 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             <div className="grid min-w-0 grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4"><div className="ac-offer-block-title text-base font-bold text-[var(--ac-text)]">Статус предложения</div><p className="ac-offer-status-copy mt-2 text-xs font-medium leading-5 text-[var(--ac-muted)]">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}. Возможность покупки и финальную стоимость под ключ подтвердит менеджер.</p></div>
-            <div className="ac-offer-form mt-4 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-6 [&>form]:!grid-cols-1 [&>form]:!gap-3 [&>form]:!mt-0"><OfferLeadForm offerId={o.id} /></div>
           </aside>
         </div>
       </div>

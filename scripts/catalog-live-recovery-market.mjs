@@ -19,6 +19,7 @@ const prepareConcurrency = Math.max(1, Math.min(12, Number(process.env.RECOVERY_
 const requestTimeoutMs = Math.max(8_000, Math.min(120_000, Number(process.env.RECOVERY_REQUEST_TIMEOUT_MS || 35_000)));
 const retryAttempts = Math.max(1, Math.min(6, Number(process.env.RECOVERY_RETRY_ATTEMPTS || 4)));
 const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
+const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const minYear = new Date().getFullYear() - 15;
 const output = process.env.RECOVERY_OUTPUT || `catalog-rebuild-${market}.json`;
 const deadline = Date.now() + timeLimitMs;
@@ -170,6 +171,12 @@ function qualityOrder(a, b) {
     || String(a?.id || "").localeCompare(String(b?.id || ""));
 }
 
+function modelKey(offer) {
+  const make = String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " ");
+  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
+
 const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
 const sources = requestedSourceIds.map((id) => adapterMap.get(id)).filter(Boolean).filter((source) => source.market === market || source.market === "multi");
 if (!sources.length) throw new Error(`recovery_sources_not_registered:${requestedSourceIds.join(",")}`);
@@ -179,6 +186,7 @@ const reports = [];
 
 await Promise.all(sources.map(async (source) => {
   const accepted = new Map();
+  const acceptedModelCounts = new Map();
   const rejections = {};
   const errors = [];
   const cursors = new Set();
@@ -199,6 +207,7 @@ await Promise.all(sources.map(async (source) => {
     pages++;
     const rows = Array.isArray(page?.items) ? page.items : [];
     seen += rows.length;
+    const pageModelReservations = new Map();
 
     const prepared = await pool(rows, prepareConcurrency, async (raw) => {
       if (Date.now() >= deadline) return null;
@@ -210,6 +219,11 @@ await Promise.all(sources.map(async (source) => {
       const year = Number(offer.year || 0);
       if (year < minYear || year > new Date().getFullYear() + 1) { reject(rejections, "year"); return null; }
       if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }
+      const quotaKey = modelKey(offer);
+      const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
+      const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
+      if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
+      if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
       if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl)) { reject(rejections, "source_url"); return null; }
       if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); return null; }
       if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
@@ -246,9 +260,13 @@ await Promise.all(sources.map(async (source) => {
     });
 
     for (const offer of prepared.filter(Boolean)) {
-      if (!accepted.has(offer.id)) accepted.set(offer.id, offer);
-      if (!globalOffers.has(offer.id)) globalOffers.set(offer.id, offer);
+    if (!accepted.has(offer.id)) {
+      accepted.set(offer.id, offer);
+      const key = modelKey(offer);
+      if (key) acceptedModelCounts.set(key, Number(acceptedModelCounts.get(key) || 0) + 1);
     }
+    if (!globalOffers.has(offer.id)) globalOffers.set(offer.id, offer);
+  }
     if (!page?.nextCursor || page?.finished) { finished = true; stopReason = "source_exhausted"; break; }
     cursor = page.nextCursor;
     if (!rows.length && pages >= 3) { stopReason = "empty_pages"; break; }

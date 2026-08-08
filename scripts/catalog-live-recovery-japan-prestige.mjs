@@ -13,6 +13,8 @@ const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-
 const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.json";
 const target = Math.max(1, Math.min(5_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
+const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
 const minYear = new Date().getFullYear() - 15;
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
@@ -85,6 +87,31 @@ function priority(a, b) {
     || Number(a.sourcePrice || Number.MAX_SAFE_INTEGER) - Number(b.sourcePrice || Number.MAX_SAFE_INTEGER)
     || Number(b.images?.length || 0) - Number(a.images?.length || 0);
 }
+function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
+function modelKey(offer) {
+  const make = makeKey(offer);
+  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
+function takeWithDiversityCap(rows, limit) {
+  const counts = new Map();
+  const modelsByMake = new Map();
+  const result = [];
+  let quotaSkipped = 0;
+  for (const offer of rows) {
+    const make = makeKey(offer);
+    const key = modelKey(offer);
+    const count = key ? Number(counts.get(key) || 0) : 0;
+    if (key && count >= maxOffersPerModel) { quotaSkipped++; continue; }
+    const makeModels = make ? (modelsByMake.get(make) || new Set()) : null;
+    if (make && key && !makeModels.has(key) && makeModels.size >= maxModelsPerMake) { quotaSkipped++; continue; }
+    result.push(offer);
+    if (key) counts.set(key, count + 1);
+    if (make && key) { makeModels.add(key); modelsByMake.set(make, makeModels); }
+    if (result.length >= limit) break;
+  }
+  return { rows: result, quotaSkipped, distinctModels: counts.size, distinctMakes: modelsByMake.size };
+}
 function finalOrder(a, b) {
   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
   const bp = Number(b.totalRub || 0) <= preferredMaxRub ? 0 : 1;
@@ -95,10 +122,11 @@ function finalOrder(a, b) {
 }
 
 const payload = JSON.parse(await fs.readFile(input, "utf8"));
-const rows = (Array.isArray(payload?.offers) ? payload.offers : [])
+const eligibleRows = (Array.isArray(payload?.offers) ? payload.offers : [])
   .filter((offer) => Number(offer?.year || 0) >= minYear)
-  .sort(priority)
-  .slice(0, Math.max(target * 8, target));
+  .sort(priority);
+const candidateSelection = takeWithDiversityCap(eligibleRows, Math.max(target * 8, target));
+const rows = candidateSelection.rows;
 const rejected = {};
 function reject(reason) { rejected[reason] = Number(rejected[reason] || 0) + 1; }
 
@@ -133,11 +161,13 @@ const prepared = await pool(rows, concurrency, async (raw) => {
 });
 
 const seen = new Set();
-const offers = prepared.filter(Boolean).sort(finalOrder).filter((offer) => {
+const uniquePrepared = prepared.filter(Boolean).sort(finalOrder).filter((offer) => {
   if (seen.has(offer.id)) return false;
   seen.add(offer.id);
   return true;
-}).slice(0, target);
+});
+const finalSelection = takeWithDiversityCap(uniquePrepared, target);
+const offers = finalSelection.rows;
 const report = {
   version: 1,
   mode: "prestige_strict_sold_to_calculated_live_japan",
@@ -148,6 +178,12 @@ const report = {
   target,
   minYear,
   preferredMaxRub,
+  maxOffersPerModel,
+  maxModelsPerMake,
+  candidateDiversitySkipped: candidateSelection.quotaSkipped,
+  finalDiversitySkipped: finalSelection.quotaSkipped,
+  distinctModels: finalSelection.distinctModels,
+  distinctMakes: finalSelection.distinctMakes,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
   rejected,
