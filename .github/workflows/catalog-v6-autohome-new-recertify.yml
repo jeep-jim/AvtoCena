@@ -16,17 +16,17 @@ concurrency:
 jobs:
   certify:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 330
     env:
       CATALOG_REBUILD_MARKET: china
       CATALOG_REBUILD_SOURCE_IDS: autohome_new_china_open
-      CATALOG_REBUILD_OUTPUT: autohome-new-strict-recertify-1000.json
-      CATALOG_REBUILD_TARGET_PER_MARKET: "1000"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "25"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "4"
+      CATALOG_REBUILD_OUTPUT: autohome-new-strict-recertify-up-to-30000.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "30000"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "400"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "6"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
       CATALOG_IMAGE_FETCH_CONCURRENCY: "5"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "8400000"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "19000000"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_GALLERY_TIMEOUT_MS: "30000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
@@ -44,9 +44,9 @@ jobs:
       - run: npm run typecheck
       - name: Verify section-bound Autohome power fields
         run: npx tsx scripts/autohome-new-exact-power-canary.ts
-      - name: Collect exact Autohome new source-only cards
+      - name: Collect exact Autohome new source-only cards up to source exhaustion
         run: npx tsx scripts/catalog-simple-source-market.mjs
-      - name: Gate exact Autohome new certification
+      - name: Gate corrected Autohome up-to-30k certification
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -55,9 +55,12 @@ jobs:
           const expected = Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET);
           const source = data.report?.sources?.find((row) => row.sourceId === 'autohome_new_china_open');
           const clean = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+          const reachedTarget = offers.length === expected && Number(source?.saved || 0) >= expected;
+          const exhausted = data?.report?.stopReason === 'sources_exhausted' && source?.stopReason === 'finished' && offers.length >= 1000 && Number(source?.pages || 0) >= 9;
           const problems = [];
-          if (offers.length !== expected) problems.push(`count_${offers.length}_expected_${expected}`);
-          if (!source || Number(source.saved || 0) < expected) problems.push(`saved_${source?.saved || 0}`);
+          if (!reachedTarget && !exhausted) problems.push(`not_target_or_verified_exhaustion_count_${offers.length}_report_${data?.report?.stopReason || 'missing'}_source_${source?.stopReason || 'missing'}`);
+          if (!source) problems.push('source_report_missing');
+          if (Number(source?.saved || 0) < offers.length) problems.push(`saved_${source?.saved || 0}_below_count_${offers.length}`);
           if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
           const ids = new Set();
           for (const offer of offers) {
@@ -82,15 +85,16 @@ jobs:
             if (clean(cfg.body) && clean(offer.bodyType) !== clean(cfg.body)) problems.push('body_rewritten');
             if (/插电|增程|电动|纯电|混合动力/.test(clean(cfg.energy)) && offer.powerHp) problems.push('electrified_max_power_mapped_to_customs_power');
           }
-          console.log(JSON.stringify({ target: expected, count: offers.length, unique: ids.size, source, problems: [...new Set(problems)] }, null, 2));
+          if (ids.size !== offers.length) problems.push(`unique_${ids.size}_count_${offers.length}`);
+          console.log(JSON.stringify({ requestedUpTo: expected, strictAccepted: offers.length, unique: ids.size, reachedTarget, exhausted, source, reportStop: data.report?.stopReason, rejectedCore: data.report?.rejectedCore, rejectedImages: data.report?.rejectedImages, problems: [...new Set(problems)] }, null, 2));
           if (problems.length) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: autohome-new-strict-recertify-1000
+          name: autohome-new-strict-recertify-up-to-30000
           path: |
-            autohome-new-strict-recertify-1000.json
+            autohome-new-strict-recertify-up-to-30000.json
             autohome-new-exact-power-canary.json
           if-no-files-found: error
           retention-days: 5
