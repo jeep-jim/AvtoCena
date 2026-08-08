@@ -49,7 +49,7 @@ jobs:
         run: |
           node --check scripts/prestige-japan-official-chassis-enrich.mjs
           node --check scripts/catalog-live-recovery-japan-prestige.mjs
-          node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-recovery-publish-batch-stable.mjs
       - name: Download isolated repaired Prestige sold results
         uses: actions/download-artifact@v4
         with:
@@ -83,13 +83,31 @@ jobs:
           PRESTIGE_RECOVERY_TARGET: "1000"
           PRESTIGE_RECOVERY_CONCURRENCY: "12"
         run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
-      - name: Publish strict Japan market
+      - name: Download verified China recovery artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-live-recovery-china
+          path: recovery-input
+          repository: ${{ github.repository }}
+          run-id: 31261508825
+          github-token: ${{ github.token }}
+      - name: Download verified Georgia direct recovery artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: catalog-direct-recovery-georgia
+          path: recovery-input
+          repository: ${{ github.repository }}
+          run-id: 31264261523
+          github-token: ${{ github.token }}
+      - name: Stage strict Japan recovery with stable preservation artifacts
+        run: cp catalog-rebuild-japan.json recovery-input/catalog-rebuild-japan.json
+      - name: Atomically publish Japan with stable China and Georgia
         env:
-          RECOVERY_PUBLISH_MARKET: japan
-          RECOVERY_PUBLISH_INPUT: catalog-rebuild-japan.json
-          RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-official-publish-report.json
+          RECOVERY_BATCH_MARKETS: japan,china,georgia
+          RECOVERY_BATCH_INPUT_DIR: recovery-input
+          RECOVERY_BATCH_REPORT: catalog-live-recovery-japan-official-publish-report.json
           RECOVERY_PUBLISH_MAX: "3000"
-        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+        run: npx tsx scripts/catalog-live-recovery-publish-batch-stable.mjs
       - name: Verify actual persisted counts for every market
         run: |
           node --import tsx --input-type=module - <<'NODE'
@@ -99,12 +117,13 @@ jobs:
           const report = JSON.parse(fs.readFileSync('catalog-live-recovery-japan-official-publish-report.json', 'utf8'));
           const actual = {};
           for (const market of PUBLIC_CATALOG_MARKETS) actual[market] = (await readMarketOffers(market)).length;
+          const japanExpected = Number(report?.byMarket?.japan?.count || 0);
+          const expected = { korea: 451, china: 819, japan: japanExpected, uae: 82, europe: 350, georgia: 6, kyrgyzstan: 6 };
           const problems = [];
-          if (actual[report.market] !== Number(report.count || 0)) problems.push(`${report.market}:${actual[report.market]}!=${report.count}`);
-          for (const [market, expected] of Object.entries(report.preservedByMarket || {})) {
-            if (actual[market] !== Number(expected)) problems.push(`${market}:${actual[market]}!=${expected}`);
-          }
-          console.log(JSON.stringify({ generationId: report.generationId, actual, expectedPreserved: report.preservedByMarket, problems }, null, 2));
+          if (!(japanExpected > 0)) problems.push('japan:empty');
+          for (const [market, count] of Object.entries(expected)) if (actual[market] !== count) problems.push(`${market}:${actual[market]}!=${count}`);
+          for (const [market, count] of Object.entries(report.manifestCounts || {})) if (actual[market] !== Number(count)) problems.push(`manifest:${market}:${actual[market]}!=${count}`);
+          console.log(JSON.stringify({ generationId: report.generationId, actual, expected, manifestCounts: report.manifestCounts, problems }, null, 2));
           if (problems.length) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
