@@ -1,0 +1,34 @@
+name: Catalog V6 · Che168 Global exact probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-che168-global-probe.yml"
+      - "scripts/che168-global-exact-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-che168-global-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe Che168 Global list and exact details
+        run: node scripts/che168-global-exact-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: che168-global-exact-probe
+          path: che168-global-exact-probe.json
+          if-no-files-found: warn
+          retention-days: 3
