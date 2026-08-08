@@ -90,6 +90,23 @@ jobs:
           RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-official-publish-report.json
           RECOVERY_PUBLISH_MAX: "3000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Verify actual persisted counts for every market
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { PUBLIC_CATALOG_MARKETS } = await import('./apps/web/lib/catalog/runtime-config.ts');
+          const report = JSON.parse(fs.readFileSync('catalog-live-recovery-japan-official-publish-report.json', 'utf8'));
+          const actual = {};
+          for (const market of PUBLIC_CATALOG_MARKETS) actual[market] = (await readMarketOffers(market)).length;
+          const problems = [];
+          if (actual[report.market] !== Number(report.count || 0)) problems.push(`${report.market}:${actual[report.market]}!=${report.count}`);
+          for (const [market, expected] of Object.entries(report.preservedByMarket || {})) {
+            if (actual[market] !== Number(expected)) problems.push(`${market}:${actual[market]}!=${expected}`);
+          }
+          console.log(JSON.stringify({ generationId: report.generationId, actual, expectedPreserved: report.preservedByMarket, problems }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
