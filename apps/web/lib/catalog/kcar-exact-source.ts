@@ -128,7 +128,7 @@ function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   const matcher = new RegExp(`^https://img\\.kcar\\.com/3dcarpicture/\\d{4}/\\d{2}/\\d+/${numericId}_[0-9]+/extra/extra_[0-9]+_hq\\.jpg(?:[?#].*)?$`, "i");
   const urls = clean(data.vrVo?.v_src_show)
     .split(",")
-    .map((item) => item.replace(/^['\"]+|['\"]+$/g, "").trim())
+    .map((item) => item.trim().replace(/^['\"]+|['\"]+$/g, "").trim())
     .filter((url) => matcher.test(url));
   return [...new Set(urls)].slice(0, 30);
 }
