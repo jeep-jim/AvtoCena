@@ -14,7 +14,7 @@ function clean(value) { return String(value ?? '').replace(/&quot;/gi, '"').repl
 function abs(value, base = BASE) { try { return new URL(String(value).replace(/&amp;/g, '&'), base).toString(); } catch { return ''; } }
 function checkbox(html, name) { const e = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); return [...html.matchAll(new RegExp(`name=["']${e}["'][^>]*value=["']([^"']+)["']`, 'gi'))].map(m => m[1]); }
 async function request(url, options = {}) {
-  const res = await fetch(url, { method: options.method || 'GET', body: options.body, redirect: 'follow', headers: { ...HEADERS, ...(cookie ? { cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.method === 'POST' ? { 'content-type': 'application/x-www-form-urlencoded', origin: BASE } : {}) }, signal: AbortSignal.timeout(30_000) });
+  const res = await fetch(url, { method: options.method || 'GET', body: options.body, redirect: 'follow', headers: { ...HEADERS, ...(cookie ? { cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.accept ? { accept: options.accept } : {}), ...(options.method === 'POST' ? { 'content-type': 'application/x-www-form-urlencoded', origin: BASE } : {}) }, signal: AbortSignal.timeout(30_000) });
   const body = await res.text();
   if (!cookie) cookie = String(res.headers.get('set-cookie') || '').split(';')[0];
   return { res, body };
@@ -40,6 +40,33 @@ function endpoints(body, base) {
   return [...new Set(vals.map(v => abs(v, base)).filter(v => /^https?:/i.test(v)))].slice(0, 200);
 }
 function scriptUrls(html, base) { return [...new Set([...html.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map(m => abs(m[1], base)).filter(Boolean))]; }
+function historyVin(html) {
+  return html.match(/id=["']viewhistory["'][^>]*data-vin=["']([^"']+)["']/i)?.[1]
+    || html.match(/data-vin=["']([^"']+)["'][^>]*id=["']viewhistory["']/i)?.[1]
+    || '';
+}
+function jsonParse(body) { try { return JSON.parse(body); } catch { return null; } }
+function summarizeHistory(value) {
+  if (!Array.isArray(value)) return { type: typeof value, value };
+  return {
+    count: value.length,
+    rows: value.slice(0, 20).map((item) => ({
+      keys: item && typeof item === 'object' ? Object.keys(item) : [],
+      lot_date: item?.lot_date,
+      auction_name: item?.auction_name,
+      auct_system_ref: item?.auct_system_ref,
+      end_price_en: item?.end_price_en,
+      result_en: item?.result_en,
+      lot_no: item?.lot_no ?? item?.lot_number,
+      id: item?.id ?? item?.data_id ?? item?.auction_id,
+      vin: item?.vin ?? item?.frame ?? item?.chassis,
+      model: item?.model ?? item?.model_name,
+      grade: item?.grade_en ?? item?.grade,
+      mileage: item?.mileage ?? item?.km,
+      image: item?.image ?? item?.image_url ?? item?.auction_sheet_url,
+    })),
+  };
+}
 
 const initial = await request(PAST, { referer: `${BASE}/auction` });
 const dates = checkbox(initial.body, 'checkdate[]');
@@ -59,12 +86,23 @@ const output = { generatedAt: new Date().toISOString(), selectedDate: dates[0], 
 for (const row of rows.slice(0, 3)) {
   const detail = await request(row.detailUrl, { referer: listing.res.url });
   const scripts = scriptUrls(detail.body, detail.res.url);
+  const vin = historyVin(detail.body);
   const record = {
     dataId: row.dataId, detailUrl: row.detailUrl, status: detail.res.status, finalUrl: detail.res.url, bytes: detail.body.length,
+    historyVin: vin,
     visibleText: clean(detail.body).slice(0, 12000),
-    htmlContexts: contexts(detail.body, ['end_price', 'result_en', 'start_price', 'result', 'sold', 'unsold', 'price', 'status', 'aleado', 'data-id', 'data-r', 'rtotal'], 1100, 4).map(r => ({ term: r.term, context: r.context.slice(0, 4500) })),
-    endpoints: endpoints(detail.body, detail.res.url), scripts, scriptContexts: [],
+    htmlContexts: contexts(detail.body, ['end_price', 'result_en', 'start_price', 'result', 'sold', 'unsold', 'price', 'status', 'aleado', 'data-id', 'data-r', 'rtotal', 'data-vin'], 1100, 4).map(r => ({ term: r.term, context: r.context.slice(0, 4500) })),
+    endpoints: endpoints(detail.body, detail.res.url), scripts, history: null, scriptContexts: [],
   };
+  if (vin) {
+    const historyUrl = `${BASE}/API/auction/history/${encodeURIComponent(vin)}`;
+    try {
+      const history = await request(historyUrl, { referer: detail.res.url, accept: 'application/json,text/plain,*/*' });
+      record.history = { url: historyUrl, status: history.res.status, contentType: history.res.headers.get('content-type') || '', bytes: history.body.length, preview: history.body.slice(0, 1500), summary: summarizeHistory(jsonParse(history.body)) };
+    } catch (error) {
+      record.history = { url: historyUrl, error: String(error?.message || error) };
+    }
+  }
   for (const script of scripts) {
     try {
       const js = await request(script, { referer: detail.res.url });
@@ -75,4 +113,4 @@ for (const row of rows.slice(0, 3)) {
   output.details.push(record);
 }
 await fs.writeFile('jpauc-result-contract-probe.json', JSON.stringify(output, null, 2));
-console.log(JSON.stringify({ generatedAt: output.generatedAt, selectedDate: output.selectedDate, listing: output.listing, details: output.details.map(d => ({ dataId: d.dataId, status: d.status, finalUrl: d.finalUrl, bytes: d.bytes, endpoints: d.endpoints, scriptContexts: d.scriptContexts })) }, null, 2));
+console.log(JSON.stringify({ generatedAt: output.generatedAt, selectedDate: output.selectedDate, listing: output.listing, details: output.details.map(d => ({ dataId: d.dataId, status: d.status, finalUrl: d.finalUrl, historyVin: d.historyVin, history: d.history, endpoints: d.endpoints })) }, null, 2));
