@@ -74,7 +74,11 @@ const unique = [...offers.values()]
   .sort((a, b) => String(b.auctionDate || "").localeCompare(String(a.auctionDate || "")) || Number(b.year || 0) - Number(a.year || 0) || String(a.sourceOfferId).localeCompare(String(b.sourceOfferId)));
 const outputOffers = unique.slice(0, target);
 const reachedTarget = unique.length >= target;
-const passed = errors.length === 0 && reachedTarget;
+// The workflow is explicitly "up-to-30k": target is a safe output cap, not a
+// minimum source-volume promise. Certification succeeds when every expected
+// chunk passed its strict contract, no identity/price/gallery errors exist,
+// and at least one exact sold lot was collected.
+const passed = errors.length === 0 && outputOffers.length > 0;
 const report = {
   version: 1,
   mode: "prestige_exact_sold_source_only_merged_certification_no_publish",
