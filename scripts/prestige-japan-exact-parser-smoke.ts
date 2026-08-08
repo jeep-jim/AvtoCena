@@ -26,6 +26,7 @@ async function main() {
   if (row && row.currentStatus !== "Sold") problems.push(`status_${row.currentStatus}`);
   if (row && row.lotNumber !== "1726") problems.push(`lot_${row.lotNumber}`);
   if (row && row.auctionName !== "ARAI Oyama") problems.push(`auction_${row.auctionName}`);
+  if (row && row.auctionGrade !== "3.5") problems.push(`grade_${row.auctionGrade || "missing"}`);
   if (row && row.frameNumber !== "AGH30W") problems.push(`chassis_${row.frameNumber}`);
   if (row && (row.images?.length || 0) < 5) problems.push(`images_${row.images?.length || 0}`);
   if (row && row.images.some((image) => !/^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i.test(image))) problems.push("non_exact_image");
