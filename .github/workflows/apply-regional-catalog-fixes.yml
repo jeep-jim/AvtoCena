@@ -1,0 +1,310 @@
+name: Apply regional catalog fixes
+
+on:
+  push:
+    branches: [fix/catalog-regional-volume-price-identity]
+    paths:
+      - .github/workflows/apply-regional-catalog-fixes.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-regional-volume-price-identity
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply regional fixes
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import re
+
+          def replace(path, old, new, count=1):
+              file = Path(path)
+              text = file.read_text()
+              if old not in text:
+                  raise SystemExit(f"snippet_not_found:{path}:{old[:100]}")
+              file.write_text(text.replace(old, new, count))
+
+          # 1. One ruble price algorithm for catalog cards and offer detail pages.
+          price = Path("apps/web/components/catalog/PriceTrend.tsx")
+          text = price.read_text()
+          text = text.replace(
+              'type CurrencyRateLike = Partial<PublicCurrencyRate>;',
+              'type CurrencyRateLike = Partial<PublicCurrencyRate> & { sourcePriceRub?: number };'
+          )
+          text = text.replace(
+              '  calculationSnapshot?: { currencyRate?: CurrencyRateLike } | null;',
+              '  calculationSnapshot?: { currencyRate?: CurrencyRateLike; sourcePriceRub?: number; customsValue?: { vehiclePriceRub?: number } } | null;'
+          )
+          pattern = re.compile(r'function withLiveRate\(offer: PriceLike, liveRate: LiveRate \| null\): PriceLike \{[\s\S]*?\n\}\n\nexport function resolvePriceTrend')
+          replacement = '''function visibleRubPrice(offer: PriceLike, liveRate: LiveRate | null = null) {
+            const exact = Number(offer.totalRub || 0);
+            if (exact > 0) return exact;
+            const sourcePrice = Number(offer.sourcePrice || 0);
+            if (!sourcePrice) return 0;
+            if (String(offer.sourceCurrency || "").toUpperCase() === "RUB") return Math.round(sourcePrice);
+            const stored = offer.calculationSnapshot || {};
+            const storedRate = stored.currencyRate || {};
+            const explicit = Number(storedRate.sourcePriceRub || stored.sourcePriceRub || stored.customsValue?.vehiclePriceRub || 0);
+            if (explicit > 0) return Math.round(explicit);
+            const effectiveRate = Number(liveRate?.effectiveRate || storedRate.effectiveRate || 0);
+            return effectiveRate > 0 ? Math.round(sourcePrice * effectiveRate) : 0;
+          }
+
+          function withLiveRate(offer: PriceLike, liveRate: LiveRate | null): PriceLike {
+            const stored = offer.calculationSnapshot?.currencyRate || {};
+            const liveEffective = Number(liveRate?.effectiveRate || 0);
+            const storedEffective = Number(stored.effectiveRate || 0);
+            let previousEffectiveRate = Number(liveRate?.previousEffectiveRate || 0) || Number(stored.previousEffectiveRate || 0);
+            let rateDelta = finiteNumber(liveRate?.rateDelta);
+            if (Math.abs(rateDelta) < 1e-9 && liveEffective && storedEffective && Math.abs(liveEffective - storedEffective) > 1e-9) {
+              previousEffectiveRate = storedEffective;
+              rateDelta = liveEffective - storedEffective;
+            }
+            if (Math.abs(rateDelta) < 1e-9 && Math.abs(finiteNumber(stored.rateDelta)) > 1e-9) {
+              rateDelta = finiteNumber(stored.rateDelta);
+              previousEffectiveRate = Number(stored.previousEffectiveRate || 0) || previousEffectiveRate;
+            }
+            const merged: PriceLike = liveRate ? {
+              ...offer,
+              calculationSnapshot: {
+                ...(offer.calculationSnapshot || {}),
+                currencyRate: {
+                  ...stored,
+                  ...liveRate,
+                  effectiveRate: liveEffective || storedEffective,
+                  previousEffectiveRate: previousEffectiveRate || undefined,
+                  rateDelta: Math.abs(rateDelta) > 1e-9 ? rateDelta : undefined,
+                },
+              },
+            } : offer;
+            const visibleRub = visibleRubPrice(merged, liveRate);
+            return {
+              ...merged,
+              totalRub: visibleRub || null,
+              previousTotalRub: Number(offer.totalRub || 0) > 0 ? offer.previousTotalRub : null,
+              priceDeltaRub: Number(offer.totalRub || 0) > 0 ? offer.priceDeltaRub : null,
+            };
+          }
+
+          export function resolvePriceTrend'''
+          text, changed = pattern.subn(replacement, text, count=1)
+          if changed != 1:
+              raise SystemExit("price_trend_withLiveRate_not_replaced")
+          price.write_text(text)
+
+          # 2. AUTO.GE URL is the identity source of truth.
+          auto = Path("apps/web/lib/catalog/auto-georgia-source.ts")
+          text = auto.read_text()
+          marker = '''function makeModel(cardText: string, detailUrl: string) {
+            const url = new URL(detailUrl);
+            const parts = url.pathname.split("/").filter(Boolean);
+            const autoIndex = parts.indexOf("auto");
+            const pathMake = autoIndex >= 0 ? slugTitle(parts[autoIndex + 1] || "") : "";
+            const pathModel = autoIndex >= 0 ? slugTitle(parts[autoIndex + 2] || "") : "";
+            const lower = cardText.toLocaleLowerCase("en-US");
+            const matched = KNOWN_MAKES.find((make) => lower.includes(make.toLocaleLowerCase("en-US")));
+            const make = matched || pathMake;
+            const escaped = make.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
+            const modelMatch = make ? cardText.match(new RegExp(`${escaped}\\\\s*,\\\\s*([^|]{1,80}?)(?=\\\\s+(?:Sale|Customs|Before Customs|19\\\\d{2}|20\\\\d{2}))`, "i")) : null;
+            const model = String(modelMatch?.[1] || pathModel).replace(/\\s+/g, " ").trim();
+            return { make, model };
+          }'''
+          new_marker = '''export function autoGeorgiaIdentityFromUrl(detailUrl: string) {
+            try {
+              const parts = new URL(detailUrl).pathname.split("/").filter(Boolean);
+              const autoIndex = parts.indexOf("auto");
+              return {
+                make: autoIndex >= 0 ? slugTitle(parts[autoIndex + 1] || "") : "",
+                model: autoIndex >= 0 ? slugTitle(parts[autoIndex + 2] || "") : "",
+              };
+            } catch {
+              return { make: "", model: "" };
+            }
+          }
+
+          function makeModel(cardText: string, detailUrl: string) {
+            const pathIdentity = autoGeorgiaIdentityFromUrl(detailUrl);
+            if (pathIdentity.make && pathIdentity.model) return pathIdentity;
+            const lower = cardText.toLocaleLowerCase("en-US");
+            const matched = KNOWN_MAKES.find((make) => lower.includes(make.toLocaleLowerCase("en-US")));
+            const make = matched || "";
+            const escaped = make.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
+            const modelMatch = make ? cardText.match(new RegExp(`${escaped}\\\\s*,?\\\\s*([^|]{1,80}?)(?=\\\\s+(?:Sale|Customs|Before Customs|19\\\\d{2}|20\\\\d{2}))`, "i")) : null;
+            return { make, model: String(modelMatch?.[1] || "").replace(/\\s+/g, " ").trim() };
+          }'''
+          if marker not in text:
+              raise SystemExit("auto_georgia_makeModel_not_found")
+          text = text.replace(marker, new_marker, 1)
+          old_normalize = '''    const now = new Date().toISOString();
+            return normalizeVehicleOfferSpecs({
+              id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id,
+              market: this.market, offerType: "fixed", status: "active", make: row.make, model: row.model,'''
+          new_normalize = '''    const now = new Date().toISOString();
+            const pathIdentity = autoGeorgiaIdentityFromUrl(row.detailUrl);
+            const make = pathIdentity.make || row.make;
+            const model = pathIdentity.model || row.model;
+            return normalizeVehicleOfferSpecs({
+              id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id,
+              market: this.market, offerType: "fixed", status: "active", make, model,'''
+          if old_normalize not in text:
+              raise SystemExit("auto_georgia_normalize_not_found")
+          auto.write_text(text.replace(old_normalize, new_normalize, 1))
+
+          enriched = Path("apps/web/lib/catalog/auto-georgia-enriched-source.ts")
+          text = enriched.read_text()
+          fetch_pattern = re.compile(r'  async fetchPage\(cursor\): Promise<CatalogFetchResult> \{[\s\S]*?\n  \},\n  normalizeOffer:')
+          fetch_replacement = '''  async fetchPage(cursor): Promise<CatalogFetchResult> {
+            return autoGeorgiaExactSource.fetchPage(cursor);
+          },
+          normalizeOffer:'''
+          text, changed = fetch_pattern.subn(fetch_replacement, text, count=1)
+          if changed != 1:
+              raise SystemExit("auto_georgia_enriched_fetchPage_not_replaced")
+          text = text.replace(
+              '    const rawImages = Array.isArray(row.images) ? row.images.map(String).map(safeAutoGeImageUrl).filter(Boolean) : [];',
+              '    const rawImages: string[] = []; // only exact detail-page images are accepted for AUTO.GE'
+          )
+          enriched.write_text(text)
+
+          # 3. Kyrgyz public prices and current source routes.
+          open_file = Path("apps/web/lib/catalog/open-market-sources.ts")
+          text = open_file.read_text()
+          usd = '    [/(?:USD|US\\$|\\$)\\s*([0-9][0-9 ,.']{2,})/i, "USD"],'
+          if usd not in text:
+              raise SystemExit("open_market_usd_pattern_not_found")
+          text = text.replace(usd, usd + '''
+              [/(?:KGS|сом|Som)\\s*([0-9][0-9 ,.']{2,})/i, "KGS"],
+              [/(?:GEL|₾)\\s*([0-9][0-9 ,.']{2,})/i, "GEL"],
+              [/([0-9][0-9 ,.']{2,})\\s*(?:KGS|сом|Som)/i, "KGS"],
+              [/([0-9][0-9 ,.']{2,})\\s*(?:GEL|₾)/i, "GEL"],''', 1)
+          open_file.write_text(text)
+
+          scale = Path("apps/web/lib/catalog/scale-market-sources.ts")
+          text = scale.read_text()
+          text = text.replace(
+              '    detailPattern: /\\/(?:car|auto|offer|listing)\\/[^?#]+|\\/[a-z0-9-]+\\/\\d{4,}/i,',
+              '    detailPattern: /\\/cars\\/[A-Za-z0-9_-]+(?:[/?#]|$)|\\/(?:car|auto|offer|listing)\\/[^?#]+|\\/[a-z0-9-]+\\/\\d{4,}/i,'
+          )
+          text = text.replace(
+              '      pageQuery("https://market.o.kg/en/avtomobili", page),\n      pageQuery("https://market.o.kg/ru/avtomobili", page),',
+              '      pageQuery("https://market.o.kg/ru/bishkek/avtomobili", page),\n      pageQuery("https://market.o.kg/en/avtomobili", page),\n      pageQuery("https://market.o.kg/ru/avtomobili", page),'
+          )
+          scale.write_text(text)
+
+          current = Path("apps/web/lib/catalog/current-regional-market-sources.ts")
+          current.write_text('''import { MashinaKyrgyzstanAdapter } from "./regional-market-sources";
+          import type { CatalogSourceAdapter } from "./types";
+
+          function pageQuery(base: string, page: number) {
+            const url = new URL(base);
+            url.searchParams.set("page", String(page));
+            return url.toString();
+          }
+
+          class CurrentMashinaKyrgyzstanAdapter extends MashinaKyrgyzstanAdapter {
+            protected pageSize() { return 50; }
+            listUrls(page: number) {
+              return [
+                pageQuery("https://www.mashina.kg/search/", page),
+                pageQuery("https://www.mashina.kg/en/search/", page),
+              ];
+            }
+          }
+
+          export const currentRegionalMarketSources: CatalogSourceAdapter[] = [
+            new CurrentMashinaKyrgyzstanAdapter(),
+          ];
+          ''')
+
+          # 4. Reset stale regional cursors and reject old AUTO.GE identity contamination.
+          rebuild = Path("scripts/catalog-rebuild-source-shard.mjs")
+          text = rebuild.read_text()
+          text = text.replace(
+              'const detailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100));',
+              'const configuredDetailLimitPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE || 100));\nconst detailLimitPerSource = ["georgia", "kyrgyzstan"].includes(market) ? Math.max(1000, configuredDetailLimitPerSource) : configuredDetailLimitPerSource;\nconst REGIONAL_CURSOR_VERSION = 2;'
+          )
+          cursor_marker = 'function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${String(sourceId).replace(/[^a-z0-9_-]/gi, "-")}.json`; }'
+          cursor_new = '''function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${String(sourceId).replace(/[^a-z0-9_-]/gi, "-")}.json`; }
+          function compactIdentity(value) { return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+          function sourceIdentityMatchesUrl(offer) {
+            if (String(offer?.sourceId || "") !== "auto_georgia_open") return true;
+            try {
+              const parts = new URL(String(offer?.operational?.sourceUrl || "")).pathname.split("/").filter(Boolean);
+              const autoIndex = parts.indexOf("auto");
+              if (autoIndex < 0) return false;
+              const urlMake = compactIdentity(parts[autoIndex + 1]);
+              const urlModel = compactIdentity(parts[autoIndex + 2]);
+              return Boolean(urlMake && urlModel && compactIdentity(offer.make) === urlMake && compactIdentity(offer.model) === urlModel);
+            } catch { return false; }
+          }
+          function regionalCursorVersion(sourceId) {
+            return ["georgia", "kyrgyzstan"].includes(market) ? REGIONAL_CURSOR_VERSION : 1;
+          }'''
+          if cursor_marker not in text:
+              raise SystemExit("rebuild_cursor_marker_not_found")
+          text = text.replace(cursor_marker, cursor_new, 1)
+          text = text.replace(
+              '  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);',
+              '  if (!sourceIdentityMatchesUrl(offer)) continue;\n  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);'
+          )
+          text = text.replace(
+              '  if (!offer?.id || offer.market !== market || !sourceIds.includes(String(offer.sourceId || ""))) { reject("identity"); return null; }',
+              '  if (!offer?.id || offer.market !== market || !sourceIds.includes(String(offer.sourceId || ""))) { reject("identity"); return null; }\n  if (!sourceIdentityMatchesUrl(offer)) { reject("source_identity_url_mismatch"); return null; }'
+          )
+          states_pattern = re.compile(r'const states = await pool\(liveSourceIds, sourceConcurrency, async \(sourceId\) => \{[\s\S]*?\n\}\);\nconst pagePrepareConcurrency')
+          states_replacement = '''const states = await pool(liveSourceIds, sourceConcurrency, async (sourceId) => {
+            const expectedVersion = regionalCursorVersion(sourceId);
+            let saved = { cursor: null, cycle: 0, pagesVisited: 0, cursorVersion: expectedVersion };
+            try { saved = await storage.readJson(cursorPath(sourceId), saved); } catch (error) { addError({ sourceId, stage: "cursor_read", error: String(error?.message || error) }); }
+            const savedVersion = Number(saved.cursorVersion || 1);
+            if (savedVersion !== expectedVersion) saved = { cursor: null, cycle: 0, pagesVisited: 0, cursorVersion: expectedVersion };
+            return { sourceId, source: adapters.get(sourceId), cursor: saved.cursor || null, initialCursor: saved.cursor || null,
+              cursorVersion: expectedVersion, cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };
+          });
+          const pagePrepareConcurrency'''
+          text, changed = states_pattern.subn(states_replacement, text, count=1)
+          if changed != 1:
+              raise SystemExit("rebuild_states_not_replaced")
+          text = text.replace(
+              '    await storage.writeJson(cursorPath(state.sourceId), { version: 1, market, sourceId: state.sourceId,\n      cursor: finished ? null : nextCursor,',
+              '    await storage.writeJson(cursorPath(state.sourceId), { version: 1, cursorVersion: state.cursorVersion, market, sourceId: state.sourceId,\n      cursor: finished ? null : nextCursor,'
+          )
+          rebuild.write_text(text)
+
+          workflow = Path(".github/workflows/catalog-production-recovery-v15.yml")
+          text = workflow.read_text()
+          text = text.replace('      CATALOG_PROBE_TIMEOUT_MS: "15000"', '      CATALOG_PROBE_TIMEOUT_MS: "45000"')
+          text = text.replace('      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "100"', '      CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "1000"')
+          workflow.write_text(text)
+
+          Path("tmp-placeholder").unlink(missing_ok=True)
+          Path(".github/workflows/apply-regional-catalog-fixes.yml").unlink()
+          PY
+      - name: Validate fixes
+        run: |
+          node --import tsx --test tests/catalog-regional-production-fixes.test.ts tests/catalog-live-sources-v19.test.ts tests/catalog-source-scale.test.ts tests/catalog-card-contract.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          npm --workspace=@avtocena/engine exec tsc -- --noEmit
+          npm --workspace=@avtocena/web run build
+      - name: Commit fixes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Каталог: исправить региональный объём, цену и соответствие фото"
+          git push origin HEAD:fix/catalog-regional-volume-price-identity
