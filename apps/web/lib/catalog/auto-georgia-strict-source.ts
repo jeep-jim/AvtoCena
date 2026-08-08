@@ -50,6 +50,17 @@ function integer(value: unknown) {
   const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
+function moneyAmount(value: unknown) {
+  const raw = String(value || "").replace(/[\s']/g, "").replace(/[^0-9.,]/g, "");
+  if (!raw) return undefined;
+  const decimalIndex = Math.max(raw.lastIndexOf("."), raw.lastIndexOf(","));
+  const decimals = decimalIndex >= 0 ? raw.length - decimalIndex - 1 : -1;
+  const normalized = decimalIndex >= 0 && decimals === 2
+    ? `${raw.slice(0, decimalIndex).replace(/[.,]/g, "")}.${raw.slice(decimalIndex + 1).replace(/[.,]/g, "")}`
+    : raw.replace(/[.,]/g, "");
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : undefined;
+}
 function compact(value: unknown) {
   return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
 }
@@ -77,13 +88,13 @@ function identityFromTitle(value: string, detailUrl: string) {
 function parseMoney(text: string) {
   const usd = text.match(/([0-9][0-9\s,.']{1,})\s*(?:USD|\$)/i) || text.match(/(?:USD|\$)\s*([0-9][0-9\s,.']{1,})/i);
   const gel = text.match(/([0-9][0-9\s,.']{1,})\s*(?:GEL|₾)/i) || text.match(/(?:GEL|₾)\s*([0-9][0-9\s,.']{1,})/i);
-  const amount = integer(usd?.[1] || gel?.[1]);
+  const amount = moneyAmount(usd?.[1] || gel?.[1]);
   if (!amount) return null;
   return { price: amount, currency: usd ? "USD" as const : "GEL" as const };
 }
 function imageUrls(markup: string, base: string) {
   const values: string[] = [];
-  for (const match of markup.matchAll(/<(?:img|source|meta)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/<(?:img|source|meta)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["'][^>]*>/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
   return [...new Set(values.map((value) => absoluteUrl(value, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
@@ -157,9 +168,9 @@ async function request(url: string, referer = "https://www.auto.ge/en/auto/index
 }
 
 export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
-  sourceId: "auto_georgia_open",
-  market: "georgia",
-  accessMode: "public_html",
+  sourceId = "auto_georgia_open";
+  market = "georgia" as const;
+  accessMode = "public_html" as const;
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = page === 1 ? "https://www.auto.ge/en/auto/index.html" : `https://www.auto.ge/en/auto/index${page}.html`;
@@ -168,8 +179,8 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
     if (!items.length) throw new Error(`auto_georgia_strict_parsed_zero_${response.status}_${markup.length}`);
     return { items, nextCursor: String(page + 1), finished: false, count: items.length,
       health: { ok: true, message: `AUTO.GE strict parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status } };
-  },
-  mapStatus(): OfferStatus { return "active"; },
+  }
+  mapStatus(): OfferStatus { return "active"; }
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutoGeorgiaRow;
     if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.detailUrl || !row.images.length) return null;
@@ -189,7 +200,7 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
         raw: { ...row, images: row.images, listingBoundImages: true, photoIdentityVerified: true },
       },
     } as VehicleOffer) as VehicleOffer;
-  },
+  }
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational?.raw || {}) as AutoGeorgiaRow & { images?: string[] };
     const row: AutoGeorgiaRow = raw;
@@ -216,6 +227,8 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
       if (saved.length >= limit) break;
     }
     return saved;
-  },
-  async healthCheck() { return { ok: true, message: "AUTO.GE strict listing parser", checkedAt: new Date().toISOString() }; },
-};
+  }
+  async healthCheck() { return { ok: true, message: "AUTO.GE strict listing parser", checkedAt: new Date().toISOString() }; }
+}
+
+export const autoGeorgiaStrictSource = new AutoGeorgiaStrictSource();
