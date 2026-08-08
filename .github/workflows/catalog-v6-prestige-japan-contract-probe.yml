@@ -1,0 +1,32 @@
+name: Catalog V6 · Prestige Japan contract probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-prestige-japan-contract-probe.yml"
+      - "scripts/prestige-japan-contract-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-japan-contract-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/prestige-japan-contract-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-contract-probe
+          path: prestige-japan-contract-probe.json
+          retention-days: 3
