@@ -3,11 +3,12 @@ import { readCatalogFacets, readMarketOffers, publicOffer, searchOffers } from "
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
-import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -18,7 +19,6 @@ function numeric(value?: string | string[]) { const result = Number(first(value)
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({
   id,
   label: CATALOG_MARKET_LABELS[id],
-  flag: CATALOG_MARKET_FLAGS[id],
 }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
@@ -174,7 +174,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const brandNames = facets.makes || [];
   const japanStatisticsSelected = selectedMarket === "japan";
 
-  return <main className="ac-catalog-page ac-page-copy min-h-screen bg-[#07080d] text-white">
+  return <main className="ac-catalog-page ac-page-copy min-h-screen bg-[#0f172a] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
@@ -187,7 +187,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       <CatalogFilters initial={initial} facets={facets} />
       <div className="hidden lg:block"><BrandLogoRail brands={brandNames} /></div>
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
-      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{market.flag}</span><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
+      <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
       {selectedMarket && totalPages > 1 ? <nav className="ac-catalog-pagination ac-hide-scrollbar mt-10 flex flex-nowrap items-center justify-center gap-1 overflow-x-auto whitespace-nowrap px-1" aria-label="Страницы каталога">
         {currentPage > 1 ? <Link href={pageHref(params, currentPage - 1)} className="flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.055] px-2 text-base font-black" aria-label="Предыдущая страница">←</Link> : null}
         {pages.map((page, index) => <span key={page} className="contents">{index > 0 && page - pages[index - 1] > 1 ? <span className="shrink-0 px-1 text-white/35">…</span> : null}<Link href={pageHref(params, page)} aria-current={page === currentPage ? "page" : undefined} className={`flex h-11 min-w-10 shrink-0 items-center justify-center rounded-xl px-2 text-sm font-black ${page === currentPage ? "ac-pagination-current bg-red-500 text-white" : "bg-white/[0.055]"}`} style={page === currentPage ? { color: "#ffffff", WebkitTextFillColor: "#ffffff" } : undefined}>{page}</Link></span>)}

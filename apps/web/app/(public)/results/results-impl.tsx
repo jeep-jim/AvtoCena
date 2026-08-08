@@ -2,9 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSearchInputFromParams } from "@/lib/avtocena";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
-import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 
 function firstParam(value?: string | string[]) { return Array.isArray(value) ? value[0] : value; }
@@ -22,7 +23,6 @@ function withoutCity(params: Record<string, string | string[] | undefined>) {
 const markets = PUBLIC_CATALOG_MARKETS.map((id) => ({
   id,
   label: CATALOG_MARKET_LABELS[id],
-  flag: CATALOG_MARKET_FLAGS[id],
 }));
 
 export default async function ResultsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
@@ -106,7 +106,7 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
     drive,
   };
 
-  return <main className="ac-results-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
+  return <main className="ac-results-page ac-page-copy min-h-screen overflow-x-hidden bg-[#0f172a] text-white">
     <PublicHeader backHref="/" backLabel="К подбору" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
       <CatalogFilters initial={filterInitial} facets={facets} />
@@ -121,7 +121,7 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
           const query = new URLSearchParams({ market: group.id });
           if (powerTo) query.set("powerTo", String(powerTo));
           if (electricOnly) query.set("fuel", "electric");
-          return <section key={group.id} className="min-w-0"><div className="mb-4 flex min-w-0 items-end justify-between gap-3"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><span aria-hidden="true">{group.flag}</span><span>{group.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {group.total}</span></h2><Link href={`/cars?${query}`} className="ac-market-all-link shrink-0 whitespace-nowrap text-sm font-black">Все →</Link></div>{group.items.length ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{group.items.map((offer:any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="rounded-2xl bg-white/[0.035] p-5 text-sm font-bold text-white/45">Варианты этого рынка ещё загружаются.</div>}</section>;
+          return <section key={group.id} className="min-w-0"><div className="mb-4 flex min-w-0 items-end justify-between gap-3"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{group.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {group.total}</span></h2><Link href={`/cars?${query}`} className="ac-market-all-link shrink-0 whitespace-nowrap text-sm font-black">Все →</Link></div>{group.items.length ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{group.items.map((offer:any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="rounded-2xl bg-white/[0.035] p-5 text-sm font-bold text-white/45">Варианты этого рынка ещё загружаются.</div>}</section>;
         })}</div>
       </section>
     </section>
