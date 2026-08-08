@@ -107,8 +107,14 @@ jobs:
           RECOVERY_BATCH_INPUT_DIR: recovery-input
           RECOVERY_BATCH_REPORT: catalog-live-recovery-japan-official-publish-report.json
           RECOVERY_PUBLISH_MAX: "3000"
+          # Japan's public gate is hard-coded to 5 source-bound photos. Keep the
+          # normal live-market minimum at 1 so China/Georgia are not re-filtered
+          # more strictly just because they are published in the same batch.
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
         run: npx tsx scripts/catalog-live-recovery-publish-batch-stable.mjs
       - name: Verify actual persisted counts for every market
+        env:
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
         run: |
           node --import tsx --input-type=module - <<'NODE'
           import fs from 'node:fs';
