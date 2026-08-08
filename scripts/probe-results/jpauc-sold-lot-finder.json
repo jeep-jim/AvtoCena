@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T03:13:47.668Z",
+  "generatedAt": "2026-08-08T03:19:49.254Z",
   "allDateCount": 6,
   "firstDates": [
     "2026-08-06",
@@ -1386,6 +1386,7 @@
       "detailUrl": "https://jpauc.com/auction/past/detail/343869102?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=2&rtotal=7408",
       "detail": {
         "status": "unsold Time",
+        "frame": "",
         "startRaw": "¥ 0",
         "startPrice": 0,
         "endRaw": "N/A",
@@ -1403,6 +1404,11 @@
           "bid": "24623",
           "number": "0"
         }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
       }
     },
     {
@@ -1436,6 +1442,7 @@
       "detailUrl": "https://jpauc.com/auction/past/detail/343869104?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=4&rtotal=7408",
       "detail": {
         "status": "sold Time",
+        "frame": "",
         "startRaw": "¥ 0",
         "startPrice": 0,
         "endRaw": "N/A",
@@ -1453,6 +1460,11 @@
           "bid": "25144",
           "number": "0"
         }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
       }
     },
     {
@@ -1486,6 +1498,7 @@
       "detailUrl": "https://jpauc.com/auction/past/detail/343869105?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=5&rtotal=7408",
       "detail": {
         "status": "sold Time",
+        "frame": "",
         "startRaw": "¥ 0",
         "startPrice": 0,
         "endRaw": "N/A",
@@ -1503,6 +1516,11 @@
           "bid": "25143",
           "number": "0"
         }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
       }
     },
     {
@@ -1536,6 +1554,7 @@
       "detailUrl": "https://jpauc.com/auction/past/detail/343869106?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=6&rtotal=7408",
       "detail": {
         "status": "sold Time",
+        "frame": "",
         "startRaw": "¥ 0",
         "startPrice": 0,
         "endRaw": "N/A",
@@ -1553,6 +1572,11 @@
           "bid": "34515",
           "number": "0"
         }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
       }
     },
     {
@@ -1586,6 +1610,7 @@
       "detailUrl": "https://jpauc.com/auction/past/detail/343869107?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=7&rtotal=7408",
       "detail": {
         "status": "sold Time",
+        "frame": "",
         "startRaw": "¥ 0",
         "startPrice": 0,
         "endRaw": "N/A",
@@ -1603,6 +1628,179 @@
           "bid": "34502",
           "number": "0"
         }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "row": {
+        "index": 8,
+        "dataId": "343869108",
+        "r": "8",
+        "rtotal": "7408",
+        "date": "2026-08-03",
+        "locationLot": "AUCNET | 33511",
+        "title": "2026-08-03",
+        "status": "sold",
+        "start": "¥ 10,000",
+        "startPrice": 10000,
+        "end": "",
+        "endPrice": 0,
+        "cells": [
+          "8.",
+          "",
+          "2026-08-03",
+          "AUCNET | 33511",
+          "AUDI A1 SPORTBACK",
+          "Year: 2014 1.4 TFSI",
+          "1,400cc | 8XCAX",
+          "FAT | 95,000 KM",
+          "Color: WHITE Auc.Grade: 4",
+          "Status: sold | Start: ¥ 10,000"
+        ]
+      },
+      "detailUrl": "https://jpauc.com/auction/past/detail/343869108?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=8&rtotal=7408",
+      "detail": {
+        "status": "sold Time",
+        "frame": "",
+        "startRaw": "¥ 0",
+        "startPrice": 0,
+        "endRaw": "N/A",
+        "endPrice": 0,
+        "imageCount": 3,
+        "imageSample": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=33511&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=33511&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=33511&number=2&h=480"
+        ],
+        "aleadoIdentity": {
+          "system": "auto",
+          "date": "2026-08-03",
+          "auct": "17",
+          "bid": "33511",
+          "number": "0"
+        }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "row": {
+        "index": 9,
+        "dataId": "343869109",
+        "r": "9",
+        "rtotal": "7408",
+        "date": "2026-08-03",
+        "locationLot": "AUCNET | 25179",
+        "title": "2026-08-03",
+        "status": "sold",
+        "start": "¥ 0",
+        "startPrice": 0,
+        "end": "",
+        "endPrice": 0,
+        "cells": [
+          "9.",
+          "",
+          "2026-08-03",
+          "AUCNET | 25179",
+          "MITSUBISHI RVR",
+          "Year: 2021 M",
+          "1,800cc | GA4W",
+          "FAT | 128,000 KM",
+          "Color: P WHITE Auc.Grade: 4",
+          "Status: sold | Start: ¥ 0"
+        ]
+      },
+      "detailUrl": "https://jpauc.com/auction/past/detail/343869109?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=9&rtotal=7408",
+      "detail": {
+        "status": "sold Time",
+        "frame": "",
+        "startRaw": "¥ 0",
+        "startPrice": 0,
+        "endRaw": "N/A",
+        "endPrice": 0,
+        "imageCount": 3,
+        "imageSample": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=25179&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=25179&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=25179&number=2&h=480"
+        ],
+        "aleadoIdentity": {
+          "system": "auto",
+          "date": "2026-08-03",
+          "auct": "17",
+          "bid": "25179",
+          "number": "0"
+        }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "row": {
+        "index": 10,
+        "dataId": "343869110",
+        "r": "10",
+        "rtotal": "7408",
+        "date": "2026-08-03",
+        "locationLot": "AUCNET | 24008",
+        "title": "2026-08-03",
+        "status": "unsold",
+        "start": "¥ 80,000",
+        "startPrice": 80000,
+        "end": "",
+        "endPrice": 0,
+        "cells": [
+          "10.",
+          "",
+          "2026-08-03",
+          "AUCNET | 24008",
+          "SUZUKI CARRY TRUCK",
+          "Year: 2017 KC AIR CONDITIONER * POWER STEERING",
+          "660cc | DA16T",
+          "FAT | 38,000 KM",
+          "Color: WHITE Auc.Grade: 4",
+          "Status: unsold | Start: ¥ 80,000"
+        ]
+      },
+      "detailUrl": "https://jpauc.com/auction/past/detail/343869110?&ys=1900&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=10&rtotal=7408",
+      "detail": {
+        "status": "unsold Time",
+        "frame": "",
+        "startRaw": "¥ 0",
+        "startPrice": 0,
+        "endRaw": "N/A",
+        "endPrice": 0,
+        "imageCount": 3,
+        "imageSample": [
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=24008&number=0",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=24008&number=1&h=480",
+          "http://p3.aleado.com/pic/?system=auto&date=2026-08-03&auct=17&bid=24008&number=2&h=480"
+        ],
+        "aleadoIdentity": {
+          "system": "auto",
+          "date": "2026-08-03",
+          "auct": "17",
+          "bid": "24008",
+          "number": "0"
+        }
+      },
+      "history": {
+        "requested": false,
+        "rows": [],
+        "matches": []
       }
     }
   ]
