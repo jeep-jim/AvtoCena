@@ -1,0 +1,32 @@
+name: Catalog V6 · Dongchedi structure probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-dongchedi-structure-probe.yml"
+      - "scripts/dongchedi-structure-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-dongchedi-structure-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/dongchedi-structure-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dongchedi-structure-probe
+          path: dongchedi-structure-probe.json
+          retention-days: 3
