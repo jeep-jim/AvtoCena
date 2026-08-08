@@ -16,17 +16,17 @@ concurrency:
 jobs:
   certify:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       CATALOG_REBUILD_MARKET: china
       CATALOG_REBUILD_SOURCE_IDS: autohome_new_china_open
-      CATALOG_REBUILD_OUTPUT: autohome-new-strict-10.json
-      CATALOG_REBUILD_TARGET_PER_MARKET: "10"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_OUTPUT: autohome-new-strict-100.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "100"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "8"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "3"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "1200000"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "2400000"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_GALLERY_TIMEOUT_MS: "30000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: autohome-new-strict-10
-          path: autohome-new-strict-10.json
+          name: autohome-new-strict-100
+          path: autohome-new-strict-100.json
           if-no-files-found: error
           retention-days: 5
