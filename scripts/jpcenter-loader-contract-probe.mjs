@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 
 const URL = "https://jp.center/";
+const RUNTIME_URLS = ["https://jp.center/z_neo1.js"];
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,*/*;q=0.8",
   "accept-language": "en-US,en;q=0.9,ru;q=0.8,ja;q=0.7",
@@ -56,16 +57,14 @@ function scriptBlocks(html) {
   return result;
 }
 
-const response = await fetch(URL, { headers: HEADERS, redirect: "follow", signal: AbortSignal.timeout(30000) });
-const html = await response.text();
-if (!response.ok) throw new Error(`jpcenter_loader_probe_http_${response.status}`);
-
 const keywords = [
   "aj_neo\\?file=loader(?:_email)?",
   "function\\s+model_submit",
   "model_submit\\s*=",
   "function\\s+doLoad",
   "doLoad\\s*=",
+  "ajx\\.query",
+  "url_loader",
   "XMLHttpRequest",
   "fetch\\s*\\(",
   "FormData",
@@ -74,8 +73,54 @@ const keywords = [
   "loader_email",
   "file=loader",
 ];
-const keywordSnippets = {};
-for (const pattern of keywords) keywordSnippets[pattern] = around(html, pattern, 2200, 12);
+function keywordMap(text) {
+  const out = {};
+  for (const pattern of keywords) out[pattern] = around(text, pattern, 2200, 12);
+  return out;
+}
+
+async function fetchText(url, accept, referer = URL) {
+  const response = await fetch(url, {
+    headers: { ...HEADERS, accept, referer },
+    redirect: "follow",
+    signal: AbortSignal.timeout(30000),
+  });
+  const body = await response.text();
+  return {
+    requestedUrl: url,
+    finalUrl: response.url,
+    status: response.status,
+    contentType: response.headers.get("content-type") || "",
+    bytes: body.length,
+    body,
+  };
+}
+
+const page = await fetchText(URL, HEADERS.accept, URL);
+if (page.status < 200 || page.status >= 300) throw new Error(`jpcenter_loader_probe_http_${page.status}`);
+const html = page.body;
+
+const runtimeAssets = [];
+for (const runtimeUrl of RUNTIME_URLS) {
+  try {
+    const asset = await fetchText(runtimeUrl, "text/javascript,application/javascript,*/*;q=0.8", URL);
+    runtimeAssets.push({
+      requestedUrl: asset.requestedUrl,
+      finalUrl: asset.finalUrl,
+      status: asset.status,
+      contentType: asset.contentType,
+      bytes: asset.bytes,
+      keywordSnippets: keywordMap(asset.body),
+      possibleEndpoints: [...new Set([
+        ...[...asset.body.matchAll(/["']((?:https?:\/\/jp\.center)?\/(?:aj|set|m|catalog|search|ajax|api|price|calcos|account|lists)[^"'<>\s]*)["']/gi)].map((m) => m[1]),
+        ...[...asset.body.matchAll(/["'](aj_neo\?file=[^"'<>\s]+)["']/gi)].map((m) => m[1]),
+      ])].slice(0, 250),
+      sample: asset.body.slice(0, 50000),
+    });
+  } catch (error) {
+    runtimeAssets.push({ requestedUrl: runtimeUrl, error: String(error?.message || error) });
+  }
+}
 
 const possibleEndpoints = [...new Set([
   ...[...html.matchAll(/["']((?:https?:\/\/jp\.center)?\/(?:aj|set|m|catalog|search|ajax|api|price|calcos|account|lists)[^"'<>\s]*)["']/gi)].map((m) => m[1]),
@@ -85,14 +130,15 @@ const possibleEndpoints = [...new Set([
 const report = {
   generatedAt: new Date().toISOString(),
   requestedUrl: URL,
-  finalUrl: response.url,
-  status: response.status,
-  contentType: response.headers.get("content-type") || "",
+  finalUrl: page.finalUrl,
+  status: page.status,
+  contentType: page.contentType,
   bytes: html.length,
   forms: formBlocks(html),
   scripts: scriptBlocks(html),
-  keywordSnippets,
+  keywordSnippets: keywordMap(html),
   possibleEndpoints,
+  runtimeAssets,
 };
 await fs.writeFile("jpcenter-loader-contract-probe.json", JSON.stringify(report, null, 2));
 console.log(JSON.stringify({
@@ -104,4 +150,15 @@ console.log(JSON.stringify({
   scripts: report.scripts.map((s) => ({ index: s.index, attrs: s.attrs, sample: clean(s.body).slice(0, 7000) })),
   keywordSnippets: Object.fromEntries(Object.entries(report.keywordSnippets).map(([k, rows]) => [k, rows.map((x) => ({ index: x.index, sample: clean(x.snippet).slice(0, 6000) }))])),
   possibleEndpoints: report.possibleEndpoints,
+  runtimeAssets: report.runtimeAssets.map((asset) => ({
+    requestedUrl: asset.requestedUrl,
+    finalUrl: asset.finalUrl,
+    status: asset.status,
+    contentType: asset.contentType,
+    bytes: asset.bytes,
+    error: asset.error,
+    keywordSnippets: asset.keywordSnippets ? Object.fromEntries(Object.entries(asset.keywordSnippets).map(([k, rows]) => [k, rows.map((x) => ({ index: x.index, sample: clean(x.snippet).slice(0, 6000) }))])) : undefined,
+    possibleEndpoints: asset.possibleEndpoints,
+    sample: asset.sample ? clean(asset.sample).slice(0, 12000) : undefined,
+  })),
 }, null, 2));
