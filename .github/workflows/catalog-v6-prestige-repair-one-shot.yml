@@ -1,0 +1,141 @@
+name: Catalog V6 · Prestige isolated repair
+run-name: Prestige isolated repair · 31264677735 · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v6-prestige-repair-one-shot.yml"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-isolated-repair-31264677735
+  cancel-in-progress: true
+
+env:
+  SOURCE_RUN_ID: "31264677735"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      repair_count: ${{ steps.plan.outputs.repair_count }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PRESTIGE_REPAIR_SOURCE_DIR: prestige-source-chunks
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download exact source chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$PRESTIGE_REPAIR_SOURCE_DIR" .repair-zips
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate \
+            --jq '.artifacts[] | select(.name | startswith("prestige-japan-chunk-")) | [.id,.name] | @tsv' > artifact-list.tsv
+          test -s artifact-list.tsv
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            zip_path=".repair-zips/${artifact_id}.zip"
+            mkdir -p "$PRESTIGE_REPAIR_SOURCE_DIR/$artifact_name"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+              --output "$zip_path"
+            unzip -q "$zip_path" -d "$PRESTIGE_REPAIR_SOURCE_DIR/$artifact_name"
+          done < artifact-list.tsv
+      - id: plan
+        name: Build exact repair matrix from failed or incomplete chunks
+        run: node scripts/prestige-japan-build-repair-matrix.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prestige-isolated-source-chunks
+          path: |
+            prestige-source-chunks
+            prestige-japan-repair-matrix.json
+          if-no-files-found: error
+          retention-days: 5
+
+  repair:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    env:
+      PRESTIGE_CHUNK_ID: repair-${{ matrix.repairOf }}
+      PRESTIGE_CHUNK_START_CURSOR: ${{ matrix.startCursor }}
+      PRESTIGE_CHUNK_MAKE_INDEX: ${{ matrix.makeIndex }}
+      PRESTIGE_CHUNK_MODEL_INDEX: ${{ matrix.modelIndex }}
+      PRESTIGE_CHUNK_END_OFFSET: ${{ matrix.endOffset }}
+      PRESTIGE_CHUNK_MAX_PAGES: ${{ matrix.maxPages }}
+      PRESTIGE_CHUNK_OUTPUT: prestige-japan-repair-${{ matrix.repairOf }}.json
+      PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "2"
+      PRESTIGE_CHUNK_RETRY_ATTEMPTS: "6"
+      PRESTIGE_CHUNK_RETRY_BASE_MS: "5000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "120000"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: ${{ matrix.skip != true }}
+        with:
+          node-version: 24
+          cache: npm
+      - if: ${{ matrix.skip != true }}
+        run: npm ci
+      - name: Cool down exact source
+        if: ${{ matrix.skip != true }}
+        run: sleep 30
+      - name: Repair only uncovered exact range
+        if: ${{ matrix.skip != true }}
+        run: npx tsx scripts/prestige-japan-strict-chunk.mjs
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && matrix.skip != true }}
+        with:
+          name: prestige-japan-isolated-repair-${{ matrix.repairOf }}
+          path: prestige-japan-repair-${{ matrix.repairOf }}.json
+          if-no-files-found: warn
+          retention-days: 5
+
+  aggregate:
+    needs: [prepare, repair]
+    if: ${{ always() && needs.prepare.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PRESTIGE_REPAIR_SOURCE_DIR: prestige-source-chunks
+      PRESTIGE_REPAIR_RESULT_DIR: prestige-repair-chunks
+      PRESTIGE_REPAIR_MERGE_OUTPUT: prestige-japan-exact-sold-repaired.json
+      PRESTIGE_REPAIR_TARGET: "30000"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: prestige-isolated-source-chunks
+          path: prestige-source-chunks
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: prestige-japan-isolated-repair-*
+          path: prestige-repair-chunks
+          merge-multiple: true
+      - name: Merge original partials plus repaired exact ranges
+        run: node scripts/prestige-japan-repair-merge.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-exact-sold-isolated-repaired
+          path: prestige-japan-exact-sold-repaired.json
+          if-no-files-found: warn
+          retention-days: 5
