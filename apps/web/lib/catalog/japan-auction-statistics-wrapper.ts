@@ -6,6 +6,21 @@ const AUCTION_STAT_SOURCE_IDS = new Set([
   "carvector_japan_stat_open",
 ]);
 
+function verifiedResultPrice(offer: VehicleOffer) {
+  const operational = offer.operational as (VehicleOffer["operational"] & {
+    auctionResultPriceVerified?: boolean;
+    auctionPriceKind?: string;
+    raw?: Record<string, unknown>;
+  }) | undefined;
+  const raw = operational?.raw || {};
+  return Boolean(
+    operational?.auctionResultPriceVerified === true
+      || raw.auctionResultPriceVerified === true
+      || raw.resultPriceVerified === true
+      || operational?.auctionPriceKind === "published_result",
+  );
+}
+
 class AuctionStatisticsWrapper implements CatalogSourceAdapter {
   sourceId: string;
   market = "japan" as const;
@@ -23,20 +38,21 @@ class AuctionStatisticsWrapper implements CatalogSourceAdapter {
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const offer = this.base.normalizeOffer(raw);
     if (!offer?.sourcePrice || !offer.sourceCurrency) return null;
+    const verified = verifiedResultPrice(offer);
     return {
       ...offer,
       offerType: "auction",
-      status: "active",
-      catalogKind: "auction_result",
-      auctionResult: "sold",
-      // Generic public HTML can expose an end price or another published result.
-      // Do not claim a hammer price until the source parser proves the label.
-      auctionPriceKind: "published_result",
+      status: verified ? "sold" : "active",
+      catalogKind: verified ? "auction_result" : "listing",
+      auctionResult: verified ? "sold" : undefined,
+      auctionPriceKind: verified ? "published_result" : undefined,
       calculationStatus: offer.calculationStatus || "needs_data",
       operational: {
         ...offer.operational,
         sourceVenueName: offer.operational?.sourceVenueName || this.sourceId,
         auctionStatistics: true,
+        auctionResultPriceVerified: verified,
+        auctionStatus: verified ? "completed_price_verified" : "price_semantics_unverified",
       },
     };
   }
@@ -46,6 +62,7 @@ class AuctionStatisticsWrapper implements CatalogSourceAdapter {
   }
 
   mapStatus(): OfferStatus {
+    // Per-offer final status is resolved only after final-price verification.
     return "active";
   }
 
