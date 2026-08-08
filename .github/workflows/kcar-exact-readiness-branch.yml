@@ -55,7 +55,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
       - name: Capture current K Car API shape
-        run: node scripts/kcar-exact-diagnostic.mjs
+        run: node scripts/kcar-exact-diagnostic.mjs | tee kcar-exact-diagnostic.log
       - name: Collect exact K Car cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce production-quality source readiness
@@ -82,6 +82,8 @@ jobs:
         if: always()
         with:
           name: readiness-korea-kcar_korea_open
-          path: readiness-korea-kcar_korea_open.json
+          path: |
+            readiness-korea-kcar_korea_open.json
+            kcar-exact-diagnostic.log
           if-no-files-found: warn
           retention-days: 3
