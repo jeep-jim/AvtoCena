@@ -8,7 +8,7 @@ on:
       - "scripts/prestige-japan-past-search-probe.mjs"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-v6-prestige-japan-past-search-probe
@@ -17,7 +17,7 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,19 +31,3 @@ jobs:
           path: prestige-japan-past-search-probe.json
           if-no-files-found: error
           retention-days: 3
-      - name: Persist probe result for connector inspection
-        if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          mkdir -p scripts/probe-results
-          test -f prestige-japan-past-search-probe.json && cp prestige-japan-past-search-probe.json scripts/probe-results/prestige-japan-past-search-probe.json || true
-          cat > scripts/probe-results/latest-prestige-past-search-run.txt <<EOF
-          run_id=$GITHUB_RUN_ID
-          head_sha=$GITHUB_SHA
-          EOF
-          git add scripts/probe-results/prestige-japan-past-search-probe.json scripts/probe-results/latest-prestige-past-search-run.txt
-          git diff --cached --quiet && exit 0
-          git commit -m "Store Prestige past-search probe run $GITHUB_RUN_ID"
-          git push origin HEAD:main
