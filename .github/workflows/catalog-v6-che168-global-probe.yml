@@ -8,7 +8,7 @@ on:
       - "scripts/che168-global-exact-probe.mjs"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: catalog-v6-che168-global-probe
@@ -32,3 +32,15 @@ jobs:
           path: che168-global-exact-probe.json
           if-no-files-found: warn
           retention-days: 3
+      - name: Persist probe result for connector inspection
+        if: always()
+        run: |
+          test -f che168-global-exact-probe.json || exit 0
+          mkdir -p scripts/probe-results
+          cp che168-global-exact-probe.json scripts/probe-results/che168-global-exact-probe.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/probe-results/che168-global-exact-probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Store Che168 Global probe result"
+          git push origin HEAD:main
