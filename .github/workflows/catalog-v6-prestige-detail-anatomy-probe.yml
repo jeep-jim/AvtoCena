@@ -1,0 +1,33 @@
+name: Catalog V6 · Prestige sold detail anatomy
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-prestige-detail-anatomy-probe.yml"
+      - "scripts/prestige-japan-detail-anatomy-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-detail-anatomy-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/prestige-japan-detail-anatomy-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-detail-anatomy-probe
+          path: prestige-japan-detail-anatomy-probe.json
+          if-no-files-found: error
+          retention-days: 3
