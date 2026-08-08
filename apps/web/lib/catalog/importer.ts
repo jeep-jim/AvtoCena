@@ -30,7 +30,8 @@ import { japanAuctionStatisticsSources } from "./japan-auction-statistics-source
 import { additionalJapanAuctionStatisticsSources } from "./japan-auction-statistics-wrapper";
 import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
-import { guaziChinaExactSource, che168ExactSource } from "./china-exact-sources";
+import { guaziChinaExactSource } from "./china-exact-sources";
+import { che168GlobalExactSource } from "./che168-global-exact-source";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { dubizzleUaeExactSource } from "./dubizzle-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
@@ -84,7 +85,7 @@ const completeSources = [
   prepareSource(mashinaKyrgyzstanListSource),
   prepareSource(carvectorJapanCurrentSource),
   guaziChinaExactSource,
-  che168ExactSource,
+  che168GlobalExactSource,
   autoscoutEuropeExactSource,
   dubizzleUaeExactSource,
   jpaucPastSource,
