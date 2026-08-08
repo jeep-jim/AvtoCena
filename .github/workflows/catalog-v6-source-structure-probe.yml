@@ -1,0 +1,36 @@
+name: Catalog V6 · Japan China source structure probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-source-structure-probe.yml"
+      - "scripts/catalog-source-structure-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-source-structure-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe source structures without publishing
+        run: npx tsx scripts/catalog-source-structure-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-structure-probe
+          path: catalog-source-structure-probe.json
+          if-no-files-found: warn
+          retention-days: 3
