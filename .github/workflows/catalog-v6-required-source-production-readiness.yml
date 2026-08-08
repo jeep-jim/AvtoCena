@@ -1,4 +1,4 @@
-# Non-publishing readiness rerun marker: 2026-08-08T03:02Z
+# Non-publishing readiness rerun marker: 2026-08-08T03:52Z
 name: Catalog V6 · required source production readiness
 
 on:
@@ -108,15 +108,15 @@ jobs:
         env:
           READINESS_RESULT: ${{ needs.readiness.result }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
           mkdir -p scripts/probe-results
           cat > scripts/probe-results/latest-required-readiness-run.txt <<EOF
           run_id=$GITHUB_RUN_ID
           head_sha=$GITHUB_SHA
           result=$READINESS_RESULT
           EOF
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add scripts/probe-results/latest-required-readiness-run.txt
           git diff --cached --quiet && exit 0
           git commit -m "Store required readiness run $GITHUB_RUN_ID"
