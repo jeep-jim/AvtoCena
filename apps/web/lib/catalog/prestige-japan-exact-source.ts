@@ -15,7 +15,7 @@ const HEADERS = {
 };
 
 type MakeOption = { value: string; name: string };
-type PrestigeExactRow = {
+export type PrestigeJapanExactRow = {
   carId: string;
   sourceUrl: string;
   sourceTitle: string;
@@ -144,10 +144,51 @@ async function poolMap<T, R>(rows: T[], limit: number, worker: (row: T) => Promi
       try {
         const value = await worker(rows[current]);
         if (value != null) result.push(value);
-      } catch { /* individual lot failure must not rewrite another lot */ }
+      } catch { /* one unavailable lot must not rewrite or poison another lot */ }
     }
   }));
   return result;
+}
+
+export function parsePrestigeJapanExactDetail(markup: string, url: string): PrestigeJapanExactRow | null {
+  const identity = url.match(DETAIL_RE)?.[1] || "";
+  if (!identity) return null;
+  const rawFields: Record<string, string> = {};
+  for (const label of ["Year", "Make", "Model", "Trans", "Kms", "Capacity", "Colour", "Extras", "Grade", "Chassis", "Auction Date", "Auction Time", "Number", "Location", "Start Price", "Final Price", "Current Status"]) {
+    rawFields[label] = tableValue(markup, label);
+  }
+  const currentStatus = rawFields["Current Status"];
+  const finalPrice = yen(rawFields["Final Price"]);
+  if (currentStatus !== "Sold" || !(finalPrice > 0)) return null;
+  const year = Number(rawFields.Year.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+  const make = clean(rawFields.Make);
+  const model = clean(rawFields.Model);
+  if (!year || !make || !model) return null;
+  const images = exactImages(markup, url);
+  const sourceTitle = plainVehicleTitle(markup, year) || `${year} ${make} ${model}`;
+  return {
+    carId: identity,
+    sourceUrl: url,
+    sourceTitle,
+    make,
+    model,
+    trim: trimFromTitle(sourceTitle, year, make, model),
+    year,
+    mileageKm: positiveInteger(rawFields.Kms),
+    engineCc: positiveInteger(rawFields.Capacity),
+    transmission: rawFields.Trans || undefined,
+    color: rawFields.Colour || undefined,
+    frameNumber: rawFields.Chassis || undefined,
+    auctionDate: isoDate(rawFields["Auction Date"]),
+    lotNumber: rawFields.Number || undefined,
+    auctionName: rawFields.Location || undefined,
+    auctionGrade: rawFields.Grade || undefined,
+    startPrice: yen(rawFields["Start Price"]) || undefined,
+    finalPrice,
+    currentStatus: "Sold",
+    images,
+    rawFields,
+  };
 }
 
 export class PrestigeJapanExactSource implements CatalogSourceAdapter {
@@ -161,45 +202,39 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     return this.makesPromise;
   }
 
-  private async exactDetail(url: string): Promise<PrestigeExactRow | null> {
-    const identity = url.match(DETAIL_RE)?.[1] || "";
-    if (!identity) return null;
+  private async exactDetail(url: string): Promise<PrestigeJapanExactRow | null> {
+    if (!DETAIL_RE.test(url)) return null;
     const { body } = await request(url, { headers: { referer: LANDING } });
-    const rawFields: Record<string, string> = {};
-    for (const label of ["Year", "Make", "Model", "Trans", "Kms", "Capacity", "Colour", "Extras", "Grade", "Chassis", "Auction Date", "Auction Time", "Number", "Location", "Start Price", "Final Price", "Current Status"]) {
-      rawFields[label] = tableValue(body, label);
-    }
-    const currentStatus = rawFields["Current Status"];
-    const finalPrice = yen(rawFields["Final Price"]);
-    if (currentStatus !== "Sold" || !(finalPrice > 0)) return null;
-    const year = Number(rawFields.Year.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
-    const make = clean(rawFields.Make);
-    const model = clean(rawFields.Model);
-    if (!year || !make || !model) return null;
-    const images = exactImages(body, url);
-    const sourceTitle = plainVehicleTitle(body, year) || `${year} ${make} ${model}`;
+    return parsePrestigeJapanExactDetail(body, url);
+  }
+
+  private async searchPage(make: MakeOption, offset: number) {
+    const params = new URLSearchParams();
+    params.set("action", "search_results_car_dev");
+    params.set("limit_start", String(offset));
+    params.set("auction-date", "Past");
+    params.set("year_from", "2011");
+    params.set("year_to", String(new Date().getUTCFullYear() + 1));
+    params.set("marka_id", make.value);
+    params.append("auction_name[]", "2"); // verified source form value: Non-USS only
+    const { response, body } = await request(AJAX, {
+      method: "POST",
+      body: params.toString(),
+      headers: {
+        accept: "application/json,text/plain,*/*",
+        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "x-requested-with": "XMLHttpRequest",
+        origin: BASE,
+        referer: LANDING,
+      },
+    });
+    let payload: any = null;
+    try { payload = JSON.parse(body); } catch { payload = null; }
+    const html = String(payload?.cars_html || "");
     return {
-      carId: identity,
-      sourceUrl: url,
-      sourceTitle,
-      make,
-      model,
-      trim: trimFromTitle(sourceTitle, year, make, model),
-      year,
-      mileageKm: positiveInteger(rawFields.Kms),
-      engineCc: positiveInteger(rawFields.Capacity),
-      transmission: rawFields.Trans || undefined,
-      color: rawFields.Colour || undefined,
-      frameNumber: rawFields.Chassis || undefined,
-      auctionDate: isoDate(rawFields["Auction Date"]),
-      lotNumber: rawFields.Number || undefined,
-      auctionName: rawFields.Location || undefined,
-      auctionGrade: rawFields.Grade || undefined,
-      startPrice: yen(rawFields["Start Price"]) || undefined,
-      finalPrice,
-      currentStatus: "Sold",
-      images,
-      rawFields,
+      response,
+      links: carLinks(html),
+      total: Math.max(0, Number(payload?.total || 0)),
     };
   }
 
@@ -208,61 +243,67 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     if (!makes.length) throw new Error("prestige_japan_exact_no_make_options");
     let { makeIndex, offset } = parseCursor(cursor);
     const detailConcurrency = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_DETAIL_CONCURRENCY || 4)));
+    const searchPagesPerFetch = Math.max(1, Math.min(12, Number(process.env.PRESTIGE_JAPAN_SEARCH_PAGES_PER_FETCH || 6)));
+    const desiredSoldRows = Math.max(1, Math.min(20, Number(process.env.PRESTIGE_JAPAN_DESIRED_SOLD_PER_FETCH || 3)));
+    const accepted: PrestigeJapanExactRow[] = [];
+    let scannedSearchPages = 0;
+    let scannedLinks = 0;
+    let lastHttpStatus = 200;
+    let lastContentType = "";
+    let lastMakeName = "";
+    let lastTotal = 0;
+    const startCursor = encodeCursor(makeIndex, offset);
 
-    while (makeIndex < makes.length) {
+    while (makeIndex < makes.length && scannedSearchPages < searchPagesPerFetch && accepted.length < desiredSoldRows) {
       const make = makes[makeIndex];
-      const params = new URLSearchParams();
-      params.set("action", "search_results_car_dev");
-      params.set("limit_start", String(offset));
-      params.set("auction-date", "Past");
-      params.set("year_from", "2011");
-      params.set("year_to", String(new Date().getUTCFullYear() + 1));
-      params.set("marka_id", make.value);
-      params.append("auction_name[]", "2"); // source form value verified as "Non-USS only"
-      const { response, body } = await request(AJAX, {
-        method: "POST",
-        body: params.toString(),
-        headers: {
-          accept: "application/json,text/plain,*/*",
-          "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-          "x-requested-with": "XMLHttpRequest",
-          origin: BASE,
-          referer: LANDING,
-        },
-      });
-      let payload: any = null;
-      try { payload = JSON.parse(body); } catch { payload = null; }
-      const html = String(payload?.cars_html || "");
-      const links = carLinks(html);
-      const total = Math.max(0, Number(payload?.total || 0));
-      if (!links.length) {
+      lastMakeName = make.name;
+      const page = await this.searchPage(make, offset);
+      lastHttpStatus = page.response.status;
+      lastContentType = page.response.headers.get("content-type") || "";
+      lastTotal = page.total;
+      scannedSearchPages++;
+      scannedLinks += page.links.length;
+
+      if (!page.links.length) {
         makeIndex++;
         offset = 0;
         continue;
       }
-      const items = await poolMap(links, detailConcurrency, (link) => this.exactDetail(link));
+
+      const rows = await poolMap(page.links, detailConcurrency, (link) => this.exactDetail(link));
+      for (const row of rows) {
+        if (!accepted.some((item) => item.carId === row.carId)) accepted.push(row);
+      }
+
       const nextOffset = offset + 20;
-      const exhaustedMake = total > 0 ? nextOffset >= total : links.length < 20;
-      const nextCursor = exhaustedMake ? encodeCursor(makeIndex + 1, 0) : encodeCursor(makeIndex, nextOffset);
-      return {
-        items,
-        nextCursor: makeIndex + (exhaustedMake ? 1 : 0) >= makes.length && exhaustedMake ? null : nextCursor,
-        finished: makeIndex + (exhaustedMake ? 1 : 0) >= makes.length && exhaustedMake,
-        count: items.length,
-        health: {
-          ok: true,
-          message: `Prestige exact non-USS make=${make.name} offset=${offset} links=${links.length} sold=${items.length} total=${total}`,
-          checkedAt: new Date().toISOString(),
-          httpStatus: response.status,
-          contentType: response.headers.get("content-type") || "",
-        },
-      };
+      const exhaustedMake = page.total > 0 ? nextOffset >= page.total : page.links.length < 20;
+      if (exhaustedMake) {
+        makeIndex++;
+        offset = 0;
+      } else {
+        offset = nextOffset;
+      }
     }
-    return { items: [], nextCursor: null, finished: true, count: 0, health: { ok: true, message: "Prestige exact non-USS exhausted", checkedAt: new Date().toISOString() } };
+
+    const finished = makeIndex >= makes.length;
+    const nextCursor = finished ? null : encodeCursor(makeIndex, offset);
+    return {
+      items: accepted,
+      nextCursor,
+      finished,
+      count: accepted.length,
+      health: {
+        ok: true,
+        message: `Prestige exact non-USS cursor=${startCursor} next=${nextCursor || "end"} make=${lastMakeName || "end"} searchPages=${scannedSearchPages} links=${scannedLinks} sold=${accepted.length} total=${lastTotal}`,
+        checkedAt: new Date().toISOString(),
+        httpStatus: lastHttpStatus,
+        contentType: lastContentType,
+      },
+    };
   }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
-    const row = raw as PrestigeExactRow;
+    const row = raw as PrestigeJapanExactRow;
     if (!row?.carId || !row.sourceUrl || row.currentStatus !== "Sold" || !(row.finalPrice > 0) || !row.make || !row.model || !row.year) return null;
     const now = new Date().toISOString();
     return {
@@ -271,7 +312,8 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
       sourceOfferId: row.carId,
       market: "japan",
       offerType: "auction",
-      status: "sold",
+      // The catalog record remains active/searchable while auctionResult carries the historical sold state.
+      status: "active",
       catalogKind: "auction_result",
       auctionResult: "sold",
       auctionPriceKind: "published_result",
@@ -326,7 +368,7 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     return [...new Set(urls.map((value: unknown) => clean(value)).filter((url: string) => EXACT_IMAGE_RE.test(url)))].slice(0, 30).map(image);
   }
 
-  mapStatus(): OfferStatus { return "sold"; }
+  mapStatus(): OfferStatus { return "active"; }
 
   async healthCheck(): Promise<SourceRunHealth> {
     try {
