@@ -1,0 +1,87 @@
+name: Catalog V6 · Che168 strict ladder
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-che168-strict-ladder.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-che168-strict-ladder
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CATALOG_REBUILD_MARKET: china
+      CATALOG_REBUILD_SOURCE_IDS: autohome_used_china_open
+      CATALOG_REBUILD_OUTPUT: che168-strict-10.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "10"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "3"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "1200000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Collect strict source-only Che168 cards
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Gate exact Che168 certification
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const expected = Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET);
+          const problems = [];
+          const clean = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+          if (offers.length !== expected) problems.push(`count_${offers.length}_expected_${expected}`);
+          if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
+          const ids = new Set();
+          for (const offer of offers) {
+            const detail = offer?.operational?.raw?.detail || {};
+            if (!offer.sourceOfferId || ids.has(offer.sourceOfferId)) problems.push('duplicate_or_missing_source_id');
+            ids.add(offer.sourceOfferId);
+            if (String(detail.infoid || '') !== String(offer.sourceOfferId || '')) problems.push('detail_identity_mismatch');
+            if (!/^https:\/\/global\.che168\.com\/en\/detail\/\d+$/.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url_mismatch');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'USD') problems.push('price_currency_invalid');
+            if (!offer.make || !offer.model || !Number(offer.year)) problems.push('core_identity_missing');
+            if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
+            if ((offer.images || []).some((img) => !/^https:\/\/erscglobal2\.autoimg\.cn\/escimg\/auto\/.+\/1400x0_c42_autohomecar__.+\.(?:jpe?g|webp|png|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_identity_mismatch');
+            if (offer?.operational?.exactDetail !== true || offer?.operational?.photoIdentityVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
+            if (clean(detail.engine) && clean(offer.engineType) !== clean(detail.engine)) problems.push('engine_rewritten');
+            if (clean(detail.gearbox) && clean(offer.transmission) !== clean(detail.gearbox)) problems.push('transmission_rewritten');
+            if (clean(detail.drivingmode) && clean(offer.drive) !== clean(detail.drivingmode)) problems.push('drive_rewritten');
+            if (clean(detail.structure) && clean(offer.bodyType) !== clean(detail.structure)) problems.push('body_rewritten');
+            if (clean(detail.fuelname) && clean(offer.fuel) !== clean(detail.fuelname)) problems.push('fuel_rewritten');
+            const hp = Number(clean(detail.engine).match(/\b(\d{2,4})\s*(?:hp|ps|bhp)\b/i)?.[1] || 0);
+            if (hp && (Number(offer.powerHp) !== hp || offer.powerDataConfidence !== 'source_exact')) problems.push('power_not_exact');
+          }
+          console.log(JSON.stringify({ target: expected, count: offers.length, unique: ids.size, problems: [...new Set(problems)], source: data.report?.sources?.find((row) => row.sourceId === 'autohome_used_china_open') }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: che168-strict-10
+          path: che168-strict-10.json
+          if-no-files-found: error
+          retention-days: 5
