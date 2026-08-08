@@ -8,6 +8,7 @@ on:
       - "apps/web/lib/catalog/autohome-new-exact-source.ts"
       - "apps/web/lib/catalog/importer.ts"
       - "scripts/catalog-simple-source-market.mjs"
+      - "scripts/autohome-new-exact-power-canary.ts"
 
 permissions:
   contents: read
@@ -45,6 +46,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Verify section-bound Autohome power fields
+        run: npx tsx scripts/autohome-new-exact-power-canary.ts
       - name: Collect exact Autohome new cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce exact Autohome new source contract
@@ -72,6 +75,7 @@ jobs:
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
             if ((offer.images || []).some((img) => !/^https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/.+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_product');
             if (offer?.operational?.exactDetail !== true || offer?.operational?.photoIdentityVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
+            if (raw.powerFieldPolicy !== 'section_bound_engine_motor_system_fields_v2') problems.push('power_field_policy_not_section_bound');
             if (clean(cfg.energy) && clean(offer.fuel) !== clean(cfg.energy)) problems.push('energy_rewritten');
             if (clean(cfg.engine) && clean(offer.engineType) !== clean(cfg.engine)) problems.push('engine_rewritten');
             if (clean(cfg.transmission) && clean(offer.transmission) !== clean(cfg.transmission)) problems.push('transmission_rewritten');
@@ -85,6 +89,8 @@ jobs:
         if: always()
         with:
           name: readiness-autohome-new-exact
-          path: readiness-china-autohome_new_china_open.json
+          path: |
+            readiness-china-autohome_new_china_open.json
+            autohome-new-exact-power-canary.json
           if-no-files-found: warn
           retention-days: 3
