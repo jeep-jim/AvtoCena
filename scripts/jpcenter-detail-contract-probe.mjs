@@ -40,6 +40,24 @@ async function fetchText(url, referer=ROOT) {
   const body=await r.text();
   return {status:r.status,finalUrl:r.url,contentType:r.headers.get("content-type")||"",bytes:body.length,body};
 }
+function routeSummary(route) {
+  return {
+    status: route.status,
+    finalUrl: route.finalUrl,
+    contentType: route.contentType,
+    bytes: route.bytes,
+    title: clean(route.body?.match?.(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||""),
+    images: exactImages(route.body||"",route.finalUrl||ROOT),
+    text: clean(route.body||"").slice(0,16000),
+    markers: {
+      login:/LOGIN|auth_passwd|sign in|login to see/i.test(route.body||""),
+      vip:/BUY\s+VIP|VIP ACCOUNT|tpl_vip/i.test(route.body||""),
+      paid:/ADD MONEY|Price is \d+ USD|from balance|payment|paid/i.test(clean(route.body||"")),
+      sold:/\bsold\b/i.test(clean(route.body||"")),
+      yen:/\b(?:YEN|JPY|¥)\b|&yen;/i.test(route.body||""),
+    },
+  };
+}
 const root=await fetchText(ROOT,ROOT);
 if(root.status<200||root.status>=300) throw new Error(`jpcenter_root_http_${root.status}`);
 const templateSnippets={
@@ -53,7 +71,10 @@ for(const candidate of CANDIDATES){
   const url=`https://jp.center/aj-${candidate.id}.htm`;
   try{
     const d=await fetchText(url,ROOT);
-    const price=await fetchText(`https://jp.center/price-${candidate.id}`,url).catch(error=>({error:String(error?.message||error),status:0,finalUrl:"",contentType:"",bytes:0,body:""}));
+    const [price,photo]=await Promise.all([
+      fetchText(`https://jp.center/price-${candidate.id}`,url).catch(error=>({error:String(error?.message||error),status:0,finalUrl:"",contentType:"",bytes:0,body:""})),
+      fetchText(`https://jp.center/photo-${candidate.id}`,url).catch(error=>({error:String(error?.message||error),status:0,finalUrl:"",contentType:"",bytes:0,body:""})),
+    ]);
     details.push({
       ...candidate,
       url,
@@ -64,12 +85,13 @@ for(const candidate of CANDIDATES){
       title:clean(d.body.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||""),
       images:exactImages(d.body,d.finalUrl),
       rows:fieldRows(d.body),
-      markers:{login:/LOGIN|auth_passwd|sign in/i.test(d.body),vip:/BUY\s+VIP|VIP ACCOUNT|tpl_vip/i.test(d.body),sold:/\bsold\b/i.test(clean(d.body)),soldFor:/Sold(?:&nbsp;|\s)*for|price_finish/i.test(d.body),start:/\bStart\b|price_start/i.test(d.body),lot:/\bLot(?:\s*number)?\b/i.test(clean(d.body)),auction:/\bAuction\b/i.test(clean(d.body)),chassis:/\bChassis\b/i.test(clean(d.body))},
+      markers:{login:/LOGIN|auth_passwd|sign in|login to see/i.test(d.body),vip:/BUY\s+VIP|VIP ACCOUNT|tpl_vip/i.test(d.body),sold:/\bsold\b/i.test(clean(d.body)),soldFor:/Sold(?:&nbsp;|\s)*for|price_finish/i.test(d.body),start:/\bStart\b|price_start/i.test(d.body),lot:/\bLot(?:\s*number)?\b/i.test(clean(d.body)),auction:/\bAuction\b/i.test(clean(d.body)),chassis:/\bChassis\b/i.test(clean(d.body))},
       snippets:{soldFor:around(d.body,/Sold(?:&nbsp;|\s)*for|price_finish|End Price|Final Price/gi,1500,20).map(x=>clean(x.snippet).slice(0,5000)),start:around(d.body,/\bStart\b|price_start/gi,1500,20).map(x=>clean(x.snippet).slice(0,5000)),lot:around(d.body,/\bLot(?:\s*number)?\b|Chassis|Auction Date/gi,1500,30).map(x=>clean(x.snippet).slice(0,5000)),ajes:around(d.body,/ajes\.com\/imgs\//gi,800,20).map(x=>x.snippet.slice(0,3000))},
-      priceEndpoint:{status:price.status,finalUrl:price.finalUrl,contentType:price.contentType,bytes:price.bytes,title:clean(price.body?.match?.(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||""),text:clean(price.body||"").slice(0,12000),markers:{login:/LOGIN|auth_passwd|sign in/i.test(price.body||""),vip:/BUY\s+VIP|VIP ACCOUNT|tpl_vip/i.test(price.body||""),yen:/\b(?:YEN|JPY|¥)\b/i.test(clean(price.body||""))}},
+      priceEndpoint: routeSummary(price),
+      photoEndpoint: routeSummary(photo),
     });
   }catch(error){ details.push({...candidate,url,error:String(error?.message||error)}); }
 }
 const report={generatedAt:new Date().toISOString(),root:{status:root.status,bytes:root.bytes,contentType:root.contentType},templateSnippets,details};
 await fs.writeFile("jpcenter-detail-contract-probe.json",JSON.stringify(report,null,2));
-console.log(JSON.stringify({generatedAt:report.generatedAt,root:report.root,templateSnippets:Object.fromEntries(Object.entries(templateSnippets).map(([k,rows])=>[k,rows.map(x=>clean(x.snippet).slice(0,5000))])),details:details.map(d=>({id:d.id,reason:d.reason,url:d.url,status:d.status,finalUrl:d.finalUrl,contentType:d.contentType,bytes:d.bytes,title:d.title,imageCount:d.images?.length,images:d.images?.slice(0,12),rows:d.rows,markers:d.markers,snippets:d.snippets,priceEndpoint:d.priceEndpoint,error:d.error}))},null,2));
+console.log(JSON.stringify({generatedAt:report.generatedAt,root:report.root,details:details.map(d=>({id:d.id,reason:d.reason,url:d.url,status:d.status,finalUrl:d.finalUrl,bytes:d.bytes,title:d.title,imageCount:d.images?.length,images:d.images?.slice(0,12),markers:d.markers,priceEndpoint:d.priceEndpoint?{status:d.priceEndpoint.status,finalUrl:d.priceEndpoint.finalUrl,bytes:d.priceEndpoint.bytes,title:d.priceEndpoint.title,imageCount:d.priceEndpoint.images?.length,images:d.priceEndpoint.images?.slice(0,12),markers:d.priceEndpoint.markers,text:d.priceEndpoint.text}:undefined,photoEndpoint:d.photoEndpoint?{status:d.photoEndpoint.status,finalUrl:d.photoEndpoint.finalUrl,bytes:d.photoEndpoint.bytes,title:d.photoEndpoint.title,imageCount:d.photoEndpoint.images?.length,images:d.photoEndpoint.images?.slice(0,20),markers:d.photoEndpoint.markers,text:d.photoEndpoint.text}:undefined,error:d.error}))},null,2));
