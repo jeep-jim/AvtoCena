@@ -1,0 +1,32 @@
+name: Catalog V6 · JPAuc history code probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-jpauc-history-code-probe.yml"
+      - "scripts/jpauc-history-code-probe.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-jpauc-history-code-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/jpauc-history-code-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jpauc-history-code-probe
+          path: jpauc-history-code-probe.json
+          retention-days: 3
