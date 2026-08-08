@@ -1,0 +1,97 @@
+name: Catalog V6 · Dubizzle exact probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-dubizzle-exact-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe public Dubizzle HTML variants
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const urls = [
+            'https://uae.dubizzle.com/motors/used-cars/',
+            'https://dubai.dubizzle.com/motors/used-cars/',
+            'https://dubai.dubizzle.com/motors/used-cars/search/',
+            'https://abudhabi.dubizzle.com/motors/used-cars/',
+            'https://uae.dubizzle.com/motors/used-cars/o/cars-under-15000-aed-in-uae/',
+          ];
+          const profiles = {
+            chrome: {
+              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
+              'accept-language': 'en-US,en;q=0.9',
+              accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            },
+            googlebot: {
+              'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+              'accept-language': 'en-US,en;q=0.9',
+              accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            },
+            bingbot: {
+              'user-agent': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)',
+              'accept-language': 'en-US,en;q=0.9',
+              accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            },
+          };
+
+          const out = [];
+          for (const [profile, headers] of Object.entries(profiles)) {
+            for (const url of urls) {
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort(), 20000);
+              try {
+                const res = await fetch(url, { headers: { ...headers, 'cache-control': 'no-cache', pragma: 'no-cache' }, redirect: 'follow', signal: controller.signal });
+                const body = await res.text();
+                const scripts = [...body.matchAll(/<script[^>]+src=["']([^"']+)["']/gi)].map(m => m[1]).slice(0, 30);
+                const detailMatches = [...body.matchAll(/\/motors\/used-cars\/[^"'<>\s]+---[a-f0-9]{32}\/?/gi)].map(m => m[0]);
+                const row = {
+                  profile,
+                  url,
+                  finalUrl: res.url,
+                  status: res.status,
+                  bytes: body.length,
+                  contentType: res.headers.get('content-type'),
+                  contentEncoding: res.headers.get('content-encoding'),
+                  detailCount: new Set(detailMatches).size,
+                  hasAED: /\bAED\b/i.test(body),
+                  hasNextData: /__NEXT_DATA__/i.test(body),
+                  hasNextFlight: /self\.__next_f\.push/i.test(body),
+                  hasNuxt: /__NUXT__/i.test(body),
+                  title: body.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || '',
+                  scripts,
+                  detailSample: [...new Set(detailMatches)].slice(0, 5),
+                  preview: body.slice(0, 2500).replace(/\s+/g, ' '),
+                };
+                out.push(row);
+                console.log(JSON.stringify(row, null, 2));
+              } catch (error) {
+                const row = { profile, url, error: String(error?.message || error) };
+                out.push(row);
+                console.log(JSON.stringify(row, null, 2));
+              } finally {
+                clearTimeout(timer);
+              }
+            }
+          }
+          fs.writeFileSync('dubizzle-probe.json', JSON.stringify(out, null, 2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dubizzle-exact-probe
+          path: dubizzle-probe.json
+          retention-days: 2
