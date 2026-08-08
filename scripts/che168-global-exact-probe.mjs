@@ -21,6 +21,7 @@ async function get(url, referer = LIST) {
   const res = await fetch(url, { headers: { ...HEADERS, referer }, redirect: 'follow', signal: AbortSignal.timeout(30_000) });
   return { res, body: await res.text() };
 }
+function idsOf(body) { return [...new Set([...body.matchAll(/\/en\/detail\/(\d+)/g)].map((m) => m[1]))]; }
 function snippet(html, needle, radius = 3500) {
   const idx = html.indexOf(needle);
   if (idx < 0) return '';
@@ -38,7 +39,8 @@ function contexts(text) {
 }
 
 const { res: listRes, body: listBody } = await get(LIST, `${BASE}/en`);
-const ids = [...new Set([...listBody.matchAll(/\/en\/detail\/(\d+)/g)].map((m) => m[1]))].slice(0, 3);
+const allFirstIds = idsOf(listBody);
+const ids = allFirstIds.slice(0, 3);
 const output = {
   generatedAt: new Date().toISOString(),
   list: {
@@ -47,11 +49,43 @@ const output = {
     bytes: listBody.length,
     title: clean(listBody.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || ''),
     ids,
+    idCount: allFirstIds.length,
     nextFlight: /self\.__next_f\.push/i.test(listBody),
     samples: ids.map((id) => ({ id, context: snippet(listBody, `/en/detail/${id}`) })),
   },
+  pagination: [],
   details: [],
 };
+
+const pageCandidates = [
+  `${LIST}?page=2`,
+  `${LIST}?pageNum=2`,
+  `${LIST}?pageNo=2`,
+  `${LIST}?pageNumber=2`,
+  `${LIST}?currentPage=2`,
+  `${LIST}?p=2`,
+];
+for (const url of pageCandidates) {
+  try {
+    const { res, body } = await get(url, LIST);
+    const pageIds = idsOf(body);
+    const overlap = pageIds.filter((id) => allFirstIds.includes(id));
+    output.pagination.push({
+      url,
+      status: res.status,
+      finalUrl: res.url,
+      bytes: body.length,
+      idCount: pageIds.length,
+      firstIds: pageIds.slice(0, 10),
+      overlapWithFirstCount: overlap.length,
+      differentFromFirst: pageIds.length > 0 && pageIds.some((id) => !allFirstIds.includes(id)),
+      nextFlight: /self\.__next_f\.push/i.test(body),
+    });
+  } catch (error) {
+    output.pagination.push({ url, error: String(error?.message || error) });
+  }
+}
+
 for (const id of ids) {
   const url = `${BASE}/en/detail/${id}`;
   try {
@@ -76,4 +110,4 @@ for (const id of ids) {
   }
 }
 await fs.writeFile('che168-global-exact-probe.json', JSON.stringify(output, null, 2));
-console.log(JSON.stringify(output, null, 2));
+console.log(JSON.stringify({ generatedAt: output.generatedAt, list: output.list, pagination: output.pagination, details: output.details.map((row) => ({ id: row.id, status: row.status, finalUrl: row.finalUrl, bytes: row.bytes, title: row.title, imageCount: row.imageCount, detailIdOccurrences: row.detailIdOccurrences })) }, null, 2));
