@@ -1,0 +1,91 @@
+name: Catalog V6 · Prestige exact sold readiness
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-prestige-exact-readiness.yml"
+      - "apps/web/lib/catalog/prestige-japan-exact-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-exact-sold-readiness
+  cancel-in-progress: true
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_REBUILD_MARKET: japan
+      CATALOG_REBUILD_SOURCE_IDS: prestige_japan_auctions_open
+      CATALOG_REBUILD_OUTPUT: readiness-prestige-japan-exact-sold.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "2"
+      PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "900000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Collect exact Prestige sold results without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Gate exact sold-result contract
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const source = data.report?.sources?.find((row) => row.sourceId === 'prestige_japan_auctions_open');
+          const problems = [];
+          if (offers.length !== 3) problems.push(`count_${offers.length}_expected_3`);
+          if (!source || Number(source.saved || 0) < 3) problems.push(`saved_${source?.saved || 0}`);
+          if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
+          const ids = new Set();
+          for (const offer of offers) {
+            const op = offer?.operational || {};
+            const raw = op.raw || {};
+            if (!offer.sourceOfferId || ids.has(offer.sourceOfferId)) problems.push('duplicate_or_missing_source_id');
+            ids.add(offer.sourceOfferId);
+            if (offer.sourceId !== 'prestige_japan_auctions_open') problems.push('source_identity_mismatch');
+            if (!/^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/.test(String(op.sourceUrl || ''))) problems.push('source_url_invalid');
+            if (String(raw.carId || '') !== String(offer.sourceOfferId || '')) problems.push('detail_identity_mismatch');
+            if (offer.offerType !== 'auction' || offer.catalogKind !== 'auction_result' || offer.auctionResult !== 'sold' || offer.auctionPriceKind !== 'published_result') problems.push('auction_result_semantics_invalid');
+            if (offer.status !== 'sold') problems.push('offer_status_not_sold');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'JPY') problems.push('result_price_invalid');
+            if (Number(raw.finalPriceJpy || 0) !== Number(offer.sourcePrice || 0)) problems.push('final_price_rewritten');
+            if (raw.currentStatus !== 'Sold') problems.push('source_status_not_sold');
+            if (op.auctionResultPriceVerified !== true || op.resultPriceVerified !== true || op.exactDetail !== true || op.sourceOnlyFieldsPreserved !== true) problems.push('exact_result_flags_missing');
+            if (!offer.make || !offer.model || !Number(offer.year)) problems.push('core_identity_missing');
+            if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
+            if ((offer.images || []).some((img) => !/^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_ajes_detail');
+            if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== 'prestige_ajes_exact_detail_v1') problems.push('gallery_identity_flags_missing');
+            if (offer.powerHp || offer.powerKw || offer.power30MinKw || offer.drive || offer.fuel) problems.push('unsupported_fields_filled');
+          }
+          console.log(JSON.stringify({ count: offers.length, unique: ids.size, source, problems: [...new Set(problems)], sample: offers.map(o => ({ id:o.sourceOfferId,title:o.sourceTitle,make:o.make,model:o.model,trim:o.trim,year:o.year,mileageKm:o.mileageKm,engineCc:o.engineCc,transmission:o.transmission,auctionName:o.auctionName,auctionDate:o.auctionDate,lotNumber:o.lotNumber,grade:o.auctionGrade,price:o.sourcePrice,currency:o.sourceCurrency,images:o.images?.length,url:o.operational?.sourceUrl })) }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-prestige-japan-exact-sold
+          path: readiness-prestige-japan-exact-sold.json
+          if-no-files-found: error
+          retention-days: 5
