@@ -10,7 +10,7 @@ const HEADERS = {
   "upgrade-insecure-requests": "1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
-const BLOCK_RE = /captcha|access denied|request blocked|verify you are human|forbidden|cloudflare/i;
+const BLOCK_RE = /captcha|access denied|request blocked|verify you are human|forbidden|cloudflare|pardon our interruption|incapsula|imperva|request unsuccessful|reese/i;
 const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|cookie|qrcode|qr-code|appstore|googleplay/i;
 const DETAIL_RE = /\/motors\/used-cars\/[a-z0-9-]+\/[a-z0-9-]+\/(?:19|20)\d{2}\/\d{1,2}\/\d{1,2}\/[a-z0-9-]+---[a-f0-9]{32}\/?$/i;
 const KNOWN_MAKES = [
@@ -160,7 +160,9 @@ async function request(url: string, referer = BASE_URL) {
   try {
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
-    if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 2_500))) throw new Error(`dubizzle_exact_blocked_${response.status}`);
+    if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 8_000))) {
+      throw new Error(`dubizzle_exact_blocked_${response.status}_imperva_or_challenge`);
+    }
     if (!response.ok) throw new Error(`dubizzle_exact_http_${response.status}`);
     return { response, markup };
   } finally { clearTimeout(timer); }
@@ -179,7 +181,7 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
       `https://dubai.dubizzle.com/motors/used-cars/search/?page=${page}`,
       `https://abudhabi.dubizzle.com/motors/used-cars/?page=${page}`,
     ];
-    let lastStatus = 0; let lastBytes = 0;
+    let lastStatus = 0; let lastBytes = 0; let lastError = "";
     for (const url of candidates) {
       try {
         const { response, markup } = await request(url, "https://uae.dubizzle.com/motors/used-cars/");
@@ -188,10 +190,13 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
         if (!items.length) continue;
         return { items, nextCursor: String(page + 1), finished: false, count: items.length, health: { ok: true, message: `Dubizzle exact parsed ${items.length} from ${new URL(response.url || url).hostname}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" } };
       } catch (error) {
-        if (/blocked|http_/.test(String((error as Error)?.message || error))) continue;
+        const message = String((error as Error)?.message || error);
+        lastError = message;
+        if (/blocked|http_/.test(message)) continue;
         throw error;
       }
     }
+    if (/blocked/.test(lastError)) throw new Error(lastError);
     throw new Error(`dubizzle_exact_parsed_zero_status_${lastStatus}_bytes_${lastBytes}`);
   }
 
