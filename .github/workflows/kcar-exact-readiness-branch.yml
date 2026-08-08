@@ -1,6 +1,13 @@
 name: K Car exact readiness branch
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/kcar-exact-readiness-branch.yml"
+      - "apps/web/lib/catalog/kcar-exact-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
   push:
     branches:
       - agent/kcar-exact-readiness
