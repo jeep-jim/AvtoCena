@@ -70,10 +70,26 @@ async function remoteAuctionImages(offer: VehicleOffer) {
         }
       }
     } catch {
-      // Сбой кэширования или hotlink-защита не должны удалять сам реальный лот.
+      // Source gallery failures must never be replaced with unrelated photos.
     }
   }
   return [...urls].slice(0, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))).map(remoteImage);
+}
+
+function resultPriceVerified(offer: VehicleOffer) {
+  const operational = offer.operational as (VehicleOffer["operational"] & {
+    auctionResultPriceVerified?: boolean;
+    auctionPriceKind?: string;
+    raw?: Record<string, unknown>;
+  }) | undefined;
+  const raw = operational?.raw || {};
+  return Boolean(
+    operational?.auctionResultPriceVerified === true
+      || raw.resultPriceVerified === true
+      || raw.auctionResultPriceVerified === true
+      || operational?.auctionPriceKind === "published_result"
+      || offer.priceMode === "auction_result"
+  );
 }
 
 class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
@@ -97,22 +113,24 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const offer = this.base.normalizeOffer(raw);
     if (!offer?.sourcePrice || !offer.sourceCurrency) return null;
-    const completed = this.kind === "past";
+    const past = this.kind === "past";
+    const verifiedResult = past && resultPriceVerified(offer);
     return {
       ...offer,
       offerType: "auction",
-      status: completed ? "sold" : "active",
-      catalogKind: completed ? "auction_result" : "listing",
-      auctionResult: completed ? "sold" : undefined,
-      auctionPriceKind: completed ? "published_result" : undefined,
-      priceMode: completed ? "fixed" : "auction_start",
-      calculationStatus: completed ? offer.calculationStatus : "auction_start",
+      status: verifiedResult ? "sold" : "active",
+      catalogKind: verifiedResult ? "auction_result" : "listing",
+      auctionResult: verifiedResult ? "sold" : undefined,
+      auctionPriceKind: verifiedResult ? "published_result" : undefined,
+      priceMode: verifiedResult ? "fixed" : offer.priceMode || "auction_start",
+      calculationStatus: past ? offer.calculationStatus : "auction_start",
       operational: {
         ...offer.operational,
         sourceVenueName: offer.operational?.sourceVenueName || this.venue,
-        auctionStatus: completed ? "completed" : "upcoming",
+        auctionStatus: verifiedResult ? "completed_price_verified" : past ? "past_price_unverified" : "upcoming",
         auctionFeed: true,
-      },
+        auctionResultPriceVerified: verifiedResult,
+      } as any,
     };
   }
 
@@ -123,7 +141,9 @@ class JapanAuctionFeedAdapter implements CatalogSourceAdapter {
   }
 
   mapStatus(): OfferStatus {
-    return this.kind === "past" ? "sold" : "active";
+    // Status is resolved per-offer in normalizeOffer. A generic past-feed row is not
+    // considered sold until its final/result price is explicitly verified.
+    return this.kind === "past" ? "active" : "active";
   }
 
   healthCheck() {
@@ -184,7 +204,7 @@ const configs: Array<{ config: OpenMarketSourceConfig; kind: JapanAuctionFeedKin
     kind: "past",
     venue: "Auction Data Search Japan",
   },
-  // Дополнительный резервный источник. Он не заменяет пять эталонных площадок.
+  // Additional fallback source. It never replaces the five required anchors.
   {
     config: {
       sourceId: "auctions22_japan_upcoming_open",
