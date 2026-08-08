@@ -34,6 +34,7 @@ jobs:
           retention-days: 3
       - name: Persist result for connector inspection
         if: always()
+        continue-on-error: true
         run: |
           test -f autohome-new-structure-probe.json || exit 0
           mkdir -p scripts/probe-results
@@ -43,4 +44,6 @@ jobs:
           git add scripts/probe-results/autohome-new-structure-probe.json
           git diff --cached --quiet && exit 0
           git commit -m "Store Autohome new-car probe (run $GITHUB_RUN_ID)"
-          git push origin HEAD:main
+          git fetch origin main
+          git rebase origin/main || { git rebase --abort || true; exit 0; }
+          git push origin HEAD:main || true
