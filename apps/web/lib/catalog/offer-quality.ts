@@ -44,8 +44,11 @@ function listingTitle(offer: VehicleOffer) {
 }
 
 function minimumImageCount(offer: VehicleOffer) {
-  if (offer.sourceId === "jpauc_japan_past_open") return 3;
-  return Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+  // Japan remains strict because auction-sheet/gallery identity is part of the
+  // completed-lot contract. Normal live-market listings may publish with one
+  // source-bound photo and enrich the same card with more photos later.
+  if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
+  return Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
@@ -79,7 +82,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (!meaningfulTitle(title)) return false;
-  if (year < 2011 || year > currentYear + 1) return false;
+  if (year < currentYear - 15 || year > currentYear + 1) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
