@@ -87,6 +87,10 @@ function tableValue(markup: string, label: string) {
   const re = new RegExp(`<tr\\b[^>]*>[\\s\\S]*?<td\\b[^>]*>\\s*<strong>\\s*${escaped(label)}\\s*<\\/strong>\\s*<\\/td>\\s*<td\\b[^>]*>([\\s\\S]*?)<\\/td>`, "i");
   return clean(markup.match(re)?.[1] || "");
 }
+function exactAuctionGrade(value: unknown) {
+  const grade = clean(value).match(/^((?:[0-6](?:\.5)?|R|RA|A\d?|S))\b/i)?.[1] || "";
+  return grade ? grade.toUpperCase() : undefined;
+}
 function makeOptions(markup: string): MakeOption[] {
   const select = markup.match(/<select\b[^>]*id=["']marka_id["'][^>]*>([\s\S]*?)<\/select>/i)?.[1] || "";
   const rows = [...select.matchAll(/<option\b([^>]*)value=["']([^"']+)["']([^>]*)>([\s\S]*?)<\/option>/gi)]
@@ -183,7 +187,7 @@ export function parsePrestigeJapanExactDetail(markup: string, url: string): Pres
     carId: identity, sourceUrl: url, sourceTitle, make, model, trim: trimFromTitle(sourceTitle, year, make, model), year,
     mileageKm: positiveInteger(rawFields.Kms), engineCc: positiveInteger(rawFields.Capacity), transmission: rawFields.Trans || undefined,
     color: rawFields.Colour || undefined, frameNumber: rawFields.Chassis || undefined, auctionDate: isoDate(rawFields["Auction Date"]),
-    lotNumber: rawFields.Number || undefined, auctionName: rawFields.Location || undefined, auctionGrade: rawFields.Grade || undefined,
+    lotNumber: rawFields.Number || undefined, auctionName: rawFields.Location || undefined, auctionGrade: exactAuctionGrade(rawFields.Grade),
     startPrice: yen(rawFields["Start Price"]) || undefined, finalPrice, currentStatus: "Sold", images, rawFields,
   };
 }
