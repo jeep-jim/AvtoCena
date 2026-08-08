@@ -1,0 +1,77 @@
+name: Apply offer UI and balanced model catalog v3
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/apply-offer-ui-model-diversity-v3.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Reuse verified v2 patch body
+        shell: bash
+        run: |
+          python - <<'PYRUN'
+          from pathlib import Path
+          src = Path('.github/workflows/apply-offer-ui-model-diversity-v2.yml').read_text()
+          marker = "          python - <<'PY'\n"
+          start = src.index(marker) + len(marker)
+          end = src.index("\n          PY", start)
+          body = src[start:end]
+          body = "\n".join(line[10:] if line.startswith("          ") else line for line in body.splitlines()) + "\n"
+          Path('/tmp/apply_offer_diversity.py').write_text(body)
+          PYRUN
+          python /tmp/apply_offer_diversity.py
+
+      - name: Verify scripts and TypeScript
+        run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          node --check scripts/prestige-japan-strict-partition-plan.mjs
+          npm run typecheck
+
+      - name: Commit and push only requested files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            'apps/web/app/(public)/cars/offer/[id]/page.tsx' \
+            apps/web/components/catalog/PriceTrend.tsx \
+            scripts/catalog-live-recovery-market.mjs \
+            scripts/catalog-live-recovery-publish.mjs \
+            scripts/catalog-live-recovery-japan-prestige.mjs \
+            scripts/prestige-japan-strict-partition-plan.mjs
+          git commit -m "Simplify offer card and balance catalog models"
+          git reset --hard HEAD
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy UI and resume all-market collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-6-markets.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-v6-prestige-up-to-30k.yml/dispatches" -f ref=main
+          echo "Dispatched deploy, six-market recovery, and diversified Japan sold-results collection." >> "$GITHUB_STEP_SUMMARY"
