@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     strategy:
-      fail-fast: true
+      fail-fast: false
       max-parallel: 2
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
     env:
@@ -67,6 +67,8 @@ jobs:
       PRESTIGE_CHUNK_MAX_PAGES: ${{ matrix.maxPages }}
       PRESTIGE_CHUNK_OUTPUT: prestige-japan-chunk-${{ matrix.id }}.json
       PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "5"
+      PRESTIGE_CHUNK_RETRY_ATTEMPTS: "4"
+      PRESTIGE_CHUNK_RETRY_BASE_MS: "1000"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_IMAGE_STORAGE_MODE: source_urls_only
       CATALOG_KNOWLEDGE_DISABLED: "1"
@@ -80,10 +82,11 @@ jobs:
       - name: Collect exact sold-result partition without publishing
         run: npx tsx scripts/prestige-japan-strict-chunk.mjs
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: prestige-japan-chunk-${{ matrix.id }}
           path: prestige-japan-chunk-${{ matrix.id }}.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 5
 
   aggregate:
@@ -110,5 +113,5 @@ jobs:
         with:
           name: prestige-japan-exact-sold-up-to-30000
           path: prestige-japan-exact-sold-up-to-30000.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 5
