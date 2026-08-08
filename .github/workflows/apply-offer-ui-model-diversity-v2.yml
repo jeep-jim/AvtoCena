@@ -1,0 +1,413 @@
+name: Apply offer UI and balanced model catalog v2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/apply-offer-ui-model-diversity-v2.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync latest main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Patch requested offer UI and catalog diversity
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          def read(path):
+              return Path(path).read_text()
+
+          def write(path, text):
+              Path(path).write_text(text)
+
+          def replace_once(path, old, new):
+              text = read(path)
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{path}: expected exactly one occurrence, got {count}: {old[:160]!r}")
+              write(path, text.replace(old, new, 1))
+
+          def regex_once(path, pattern, replacement, flags=0):
+              text = read(path)
+              text2, count = re.subn(pattern, replacement, text, count=1, flags=flags)
+              if count != 1:
+                  raise SystemExit(f"{path}: regex expected exactly one match, got {count}: {pattern}")
+              write(path, text2)
+
+          # Offer page: only the requested UI changes.
+          offer_page = "apps/web/app/(public)/cars/offer/[id]/page.tsx"
+          replace_once(offer_page, 'import { OfferLeadForm } from "@/components/catalog/OfferLeadForm";\n', '')
+
+          price_block = '''function OfferPriceBreakdown({ offer }: { offer: any }) {
+            const lines = priceBreakdown(offer);
+            if (!lines.length) return null;
+            const vehicleLine = lines.find((line) => line.id === "car")
+              || lines.find((line) => /цена автомобиля|стоимость автомобиля/i.test(line.title))
+              || lines[0];
+            const detailLines = lines.filter((line) => line !== vehicleLine);
+            return <details className="ac-offer-breakdown group min-w-0 rounded-[1.35rem] bg-[var(--ac-surface-2)]">
+              <summary className="cursor-pointer list-none p-4 [&::-webkit-details-marker]:hidden">
+                <div className="flex items-center justify-between gap-3">
+                  <h2 className="ac-offer-block-title text-lg font-bold tracking-[-0.02em] text-[var(--ac-text)] md:text-xl">Структура цены</h2>
+                  <svg className="mr-1 shrink-0 transition-transform group-open:rotate-180" width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 text-[12px] font-medium md:text-[13px]">
+                  <span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="shrink-0">Цена автомобиля</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span>
+                  <span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(vehicleLine.amountRub)} ₽</span>
+                </div>
+              </summary>
+              {detailLines.length ? <div className="ac-offer-breakdown-lines border-t border-dotted border-[var(--ac-border)] px-4 pb-3 pt-2">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 truncate">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span></div>)}</div> : null}
+            </details>;
+          }
+          '''
+          regex_once(
+              offer_page,
+              r'function OfferPriceBreakdown\(\{ offer \}: \{ offer: any \}\) \{.*?\n\}\n\nfunction MissingOffer',
+              price_block + '\nfunction MissingOffer',
+              re.S,
+          )
+          regex_once(
+              offer_page,
+              r'\n\s*<div className="ac-offer-form[^"]*"[^>]*>\s*<OfferLeadForm offerId=\{o\.id\} />\s*</div>',
+              '',
+              re.S,
+          )
+
+          # Rate sheet: ruble price follows selected date/point direction color.
+          price_trend = "apps/web/components/catalog/PriceTrend.tsx"
+          replace_once(
+              price_trend,
+              '  const priceDelta = selectedPrice && priceRub ? selectedPrice - priceRub : 0;\n  const selectedPriceColor = movementColor(priceDelta, light);',
+              '  const selectedPriceColor = selectedColor;',
+          )
+
+          # Shared publisher hard limits: <=20 offers per make+model, <=10 distinct models per make.
+          publisher = "scripts/catalog-live-recovery-publish.mjs"
+          replace_once(
+              publisher,
+              'const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst minYear = new Date().getFullYear() - 15;',
+              'const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));\nconst maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));\nconst minYear = new Date().getFullYear() - 15;',
+          )
+          replace_once(
+              publisher,
+              '    || String(a.id || "").localeCompare(String(b.id || ""));\n}\n\nconst payload = JSON.parse',
+              '    || String(a.id || "").localeCompare(String(b.id || ""));\n}\nfunction makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\\s+/g, " "); }\nfunction modelKey(offer) {\n  const make = makeKey(offer);\n  const model = String(offer?.model || "").trim().toLowerCase().replace(/\\s+/g, " ");\n  return make && model ? `${make}|${model}` : "";\n}\n\nconst payload = JSON.parse',
+          )
+          replace_once(
+              publisher,
+              'selected.sort(quality);\nconst marketRows = selected.slice(0, maxPerMarket);',
+              '''selected.sort(quality);
+          const modelCounts = new Map();
+          const makeModels = new Map();
+          const marketRows = [];
+          for (const offer of selected) {
+            const key = modelKey(offer);
+            const make = makeKey(offer);
+            const count = key ? Number(modelCounts.get(key) || 0) : 0;
+            if (key && count >= maxOffersPerModel) { reject("model_quota"); continue; }
+            const modelsForMake = make ? (makeModels.get(make) || new Set()) : null;
+            if (make && key && !modelsForMake.has(key) && modelsForMake.size >= maxModelsPerMake) { reject("make_model_quota"); continue; }
+            marketRows.push(offer);
+            if (key) modelCounts.set(key, count + 1);
+            if (make && key) { modelsForMake.add(key); makeModels.set(make, modelsForMake); }
+            if (marketRows.length >= maxPerMarket) break;
+          }''',
+          )
+          replace_once(
+              publisher,
+              '  minYear,\n  preferredMaxRub,\n  sourceCounts:',
+              '  minYear,\n  preferredMaxRub,\n  maxOffersPerModel,\n  maxModelsPerMake,\n  distinctModels: modelCounts.size,\n  distinctMakes: makeModels.size,\n  sourceCounts:',
+          )
+
+          # Six-market collector: avoid expensive detail/calculation after 20 accepted candidates of same model.
+          collector = "scripts/catalog-live-recovery-market.mjs"
+          replace_once(
+              collector,
+              'const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst minYear = new Date().getFullYear() - 15;',
+              'const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));\nconst minYear = new Date().getFullYear() - 15;',
+          )
+          replace_once(
+              collector,
+              'const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));',
+              'function modelKey(offer) {\n  const make = String(offer?.make || "").trim().toLowerCase().replace(/\\s+/g, " ");\n  const model = String(offer?.model || "").trim().toLowerCase().replace(/\\s+/g, " ");\n  return make && model ? `${make}|${model}` : "";\n}\n\nconst adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));',
+          )
+          replace_once(
+              collector,
+              'await Promise.all(sources.map(async (source) => {\n  const accepted = new Map();',
+              'await Promise.all(sources.map(async (source) => {\n  const accepted = new Map();\n  const acceptedModelCounts = new Map();',
+          )
+          replace_once(
+              collector,
+              '    seen += rows.length;\n\n    const prepared = await pool(rows, prepareConcurrency, async (raw) => {',
+              '    seen += rows.length;\n    const pageModelReservations = new Map();\n\n    const prepared = await pool(rows, prepareConcurrency, async (raw) => {',
+          )
+          replace_once(
+              collector,
+              '      if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }\n      if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl))',
+              '      if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }\n      const quotaKey = modelKey(offer);\n      const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;\n      const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;\n      if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }\n      if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);\n      if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl))',
+          )
+          replace_once(
+              collector,
+              '    for (const offer of prepared.filter(Boolean)) {\n      if (!accepted.has(offer.id)) accepted.set(offer.id, offer);\n      if (!globalOffers.has(offer.id)) globalOffers.set(offer.id, offer);\n    }',
+              '''    for (const offer of prepared.filter(Boolean)) {
+              if (!accepted.has(offer.id)) {
+                accepted.set(offer.id, offer);
+                const key = modelKey(offer);
+                if (key) acceptedModelCounts.set(key, Number(acceptedModelCounts.get(key) || 0) + 1);
+              }
+              if (!globalOffers.has(offer.id)) globalOffers.set(offer.id, offer);
+            }''',
+          )
+
+          # Japan conversion: diversify before expensive enrichment/customs and again before final output.
+          japan = "scripts/catalog-live-recovery-japan-prestige.mjs"
+          replace_once(
+              japan,
+              'const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst concurrency =',
+              'const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));\nconst maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));\nconst maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));\nconst concurrency =',
+          )
+          replace_once(
+              japan,
+              'function finalOrder(a, b) {\n  const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;',
+              '''function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\\s+/g, " "); }
+          function modelKey(offer) {
+            const make = makeKey(offer);
+            const model = String(offer?.model || "").trim().toLowerCase().replace(/\\s+/g, " ");
+            return make && model ? `${make}|${model}` : "";
+          }
+          function takeWithDiversityCap(rows, limit) {
+            const counts = new Map();
+            const modelsByMake = new Map();
+            const result = [];
+            let quotaSkipped = 0;
+            for (const offer of rows) {
+              const make = makeKey(offer);
+              const key = modelKey(offer);
+              const count = key ? Number(counts.get(key) || 0) : 0;
+              if (key && count >= maxOffersPerModel) { quotaSkipped++; continue; }
+              const makeModels = make ? (modelsByMake.get(make) || new Set()) : null;
+              if (make && key && !makeModels.has(key) && makeModels.size >= maxModelsPerMake) { quotaSkipped++; continue; }
+              result.push(offer);
+              if (key) counts.set(key, count + 1);
+              if (make && key) { makeModels.add(key); modelsByMake.set(make, makeModels); }
+              if (result.length >= limit) break;
+            }
+            return { rows: result, quotaSkipped, distinctModels: counts.size, distinctMakes: modelsByMake.size };
+          }
+          function finalOrder(a, b) {
+            const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;''',
+          )
+          replace_once(
+              japan,
+              '''const payload = JSON.parse(await fs.readFile(input, "utf8"));
+          const rows = (Array.isArray(payload?.offers) ? payload.offers : [])
+            .filter((offer) => Number(offer?.year || 0) >= minYear)
+            .sort(priority)
+            .slice(0, Math.max(target * 8, target));''',
+              '''const payload = JSON.parse(await fs.readFile(input, "utf8"));
+          const eligibleRows = (Array.isArray(payload?.offers) ? payload.offers : [])
+            .filter((offer) => Number(offer?.year || 0) >= minYear)
+            .sort(priority);
+          const candidateSelection = takeWithDiversityCap(eligibleRows, Math.max(target * 8, target));
+          const rows = candidateSelection.rows;''',
+          )
+          replace_once(
+              japan,
+              '''const seen = new Set();
+          const offers = prepared.filter(Boolean).sort(finalOrder).filter((offer) => {
+            if (seen.has(offer.id)) return false;
+            seen.add(offer.id);
+            return true;
+          }).slice(0, target);''',
+              '''const seen = new Set();
+          const uniquePrepared = prepared.filter(Boolean).sort(finalOrder).filter((offer) => {
+            if (seen.has(offer.id)) return false;
+            seen.add(offer.id);
+            return true;
+          });
+          const finalSelection = takeWithDiversityCap(uniquePrepared, target);
+          const offers = finalSelection.rows;''',
+          )
+          replace_once(
+              japan,
+              '  preferredMaxRub,\n  preferredCount:',
+              '  preferredMaxRub,\n  maxOffersPerModel,\n  maxModelsPerMake,\n  candidateDiversitySkipped: candidateSelection.quotaSkipped,\n  finalDiversitySkipped: finalSelection.quotaSkipped,\n  distinctModels: finalSelection.distinctModels,\n  distinctMakes: finalSelection.distinctMakes,\n  preferredCount:',
+          )
+
+          # Japan source partitioning: round-robin by make/model; max 10 models per make and bounded raw slice per model.
+          prestige_plan = '''import fs from "node:fs/promises";
+
+          process.env.CATALOG_KNOWLEDGE_DISABLED = "1";
+          process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+          process.env.PRESTIGE_JAPAN_SEARCH_PAGES_PER_FETCH = "1";
+          process.env.PRESTIGE_JAPAN_DESIRED_SOLD_PER_FETCH = "20";
+
+          const { prestigeJapanExactSource: source } = await import("../apps/web/lib/catalog/prestige-japan-exact-source.ts");
+
+          const rawBudget = Math.max(1_000, Number(process.env.PRESTIGE_PLAN_RAW_BUDGET || 100_000));
+          const maxPartitions = Math.max(1, Math.min(220, Number(process.env.PRESTIGE_PLAN_MAX_PARTITIONS || 120)));
+          const maxMakes = Math.max(1, Math.min(30, Number(process.env.PRESTIGE_PLAN_MAX_MAKES || 10)));
+          const maxModelsPerMake = Math.max(1, Math.min(30, Number(process.env.PRESTIGE_PLAN_MAX_MODELS_PER_MAKE || 10)));
+          const rawPerModel = Math.max(20, Math.min(200, Number(process.env.PRESTIGE_PLAN_RAW_PER_MODEL || 60)));
+          const commercial = /(?:FORK|FORKLIFT|LOADER|EXCAVATOR|TRACTOR|CRANE|DUMP|TRUCK|BUS|COASTER|DYNA|TOYOACE|DUTRO|CANTER|ELF|FORWARD|GIGA|PROFIA|FD\\d|FG\\d|FGL|FDL|SDK)/i;
+
+          const makes = await source.makes();
+          const makeLists = [];
+          for (let makeIndex = 0; makeIndex < Math.min(makes.length, maxMakes); makeIndex++) {
+            const make = makes[makeIndex];
+            const sourceModels = await source.models(make);
+            const usableModels = sourceModels
+              .map((model, modelIndex) => ({ model, modelIndex }))
+              .filter(({ model }) => !commercial.test(String(model?.name || "")))
+              .slice(0, maxModelsPerMake);
+            makeLists.push({ make, makeIndex, models: usableModels });
+          }
+
+          const partitions = [];
+          const models = [];
+          let plannedRows = 0;
+          let complete = true;
+          let round = 0;
+
+          while (partitions.length < maxPartitions && plannedRows < rawBudget) {
+            let anyModelInRound = false;
+            for (const entry of makeLists) {
+              const candidate = entry.models[round];
+              if (!candidate) continue;
+              anyModelInRound = true;
+              const { make, makeIndex } = entry;
+              const { model, modelIndex } = candidate;
+              let total = 0;
+              try {
+                const probe = await source.searchPage(make, model, 0);
+                total = Math.max(0, Number(probe?.total || 0));
+              } catch (error) {
+                models.push({ makeIndex, modelIndex, make: make.name, model: model.name, total: 0, error: String(error?.message || error) });
+                continue;
+              }
+              models.push({ makeIndex, modelIndex, make: make.name, model: model.name, total });
+              if (!total) continue;
+              const remainingBudget = rawBudget - plannedRows;
+              if (remainingBudget <= 0 || partitions.length >= maxPartitions) { complete = false; break; }
+              const plannedForModel = Math.max(1, Math.min(total, rawPerModel, remainingBudget));
+              const id = `m${makeIndex}-d${modelIndex}-o0`;
+              partitions.push({
+                id,
+                makeIndex,
+                modelIndex,
+                make: make.name,
+                model: model.name,
+                startCursor: `${makeIndex}:${modelIndex}:0`,
+                endOffset: plannedForModel,
+                maxPages: Math.max(1, Math.ceil(plannedForModel / 20)),
+                plannedRows: plannedForModel,
+              });
+              plannedRows += plannedForModel;
+              if (partitions.length >= maxPartitions || plannedRows >= rawBudget) { complete = false; break; }
+            }
+            if (!anyModelInRound) break;
+            if (!complete) break;
+            round++;
+          }
+
+          if (!partitions.length) throw new Error("prestige_partition_plan_empty");
+          const matrix = { include: partitions };
+          const report = {
+            generatedAt: new Date().toISOString(),
+            sourceId: "prestige_japan_auctions_open",
+            traversal: "round_robin_make_model",
+            rawBudget,
+            rawPerModel,
+            maxPartitions,
+            maxMakes,
+            maxModelsPerMake,
+            plannedRows,
+            partitionCount: partitions.length,
+            complete,
+            models,
+            partitions,
+          };
+          await fs.writeFile("prestige-japan-strict-partition-plan.json", JSON.stringify(report, null, 2));
+          console.log(JSON.stringify({ plannedRows, partitionCount: partitions.length, rawPerModel, maxModelsPerMake, complete, first: partitions.slice(0, 12), last: partitions.slice(-6) }, null, 2));
+
+          if (process.env.GITHUB_OUTPUT) {
+            await fs.appendFile(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify(matrix)}\\nplanned_rows=${plannedRows}\\npartition_count=${partitions.length}\\ncomplete=${complete}\\n`);
+          }
+          '''
+          write("scripts/prestige-japan-strict-partition-plan.mjs", re.sub(r'^          ', '', prestige_plan, flags=re.M))
+
+          # Guardrails.
+          page = read(offer_page)
+          if "OfferLeadForm" in page or "Запросить точный расчёт" in page:
+              raise SystemExit("lead form was not fully removed")
+          if 'group-open:rotate-180' not in page or '>Цена автомобиля<' not in page:
+              raise SystemExit("price accordion guard missing")
+          if 'const selectedPriceColor = selectedColor;' not in read(price_trend):
+              raise SystemExit("rate color guard missing")
+          if 'CATALOG_MAX_OFFERS_PER_MODEL || 20' not in read(publisher) or 'CATALOG_MAX_MODELS_PER_MAKE || 10' not in read(publisher):
+              raise SystemExit("publisher diversity guards missing")
+          if 'round_robin_make_model' not in read("scripts/prestige-japan-strict-partition-plan.mjs"):
+              raise SystemExit("Japan round-robin plan missing")
+          PY
+
+      - name: Verify scripts and TypeScript
+        run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          node --check scripts/prestige-japan-strict-partition-plan.mjs
+          npm run typecheck
+
+      - name: Commit and push normal code files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            'apps/web/app/(public)/cars/offer/[id]/page.tsx' \
+            apps/web/components/catalog/PriceTrend.tsx \
+            scripts/catalog-live-recovery-market.mjs \
+            scripts/catalog-live-recovery-publish.mjs \
+            scripts/catalog-live-recovery-japan-prestige.mjs \
+            scripts/prestige-japan-strict-partition-plan.mjs
+          git commit -m "Simplify offer card and balance catalog models"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy UI and resume all-market collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-6-markets.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-v6-prestige-up-to-30k.yml/dispatches" -f ref=main
+          echo "Dispatched deploy, six-market recovery, and diversified Japan sold-results collection." >> "$GITHUB_STEP_SUMMARY"
