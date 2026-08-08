@@ -81,6 +81,10 @@ function image(url: string): CatalogImage {
   const mimeType = /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : /\.avif(?:[?#]|$)/i.test(url) ? "image/avif" : "image/jpeg";
   return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType };
 }
+function decodeAutohome(bytes: Uint8Array) {
+  try { return new TextDecoder("utf-8", { fatal: true }).decode(bytes); }
+  catch { return new TextDecoder("gb18030").decode(bytes); }
+}
 async function fetchDecoded(url: string, referer: string) {
   const response = await fetch(url, {
     headers: { ...HEADERS, referer },
@@ -88,12 +92,7 @@ async function fetchDecoded(url: string, referer: string) {
     signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
   });
   const bytes = new Uint8Array(await response.arrayBuffer());
-  const contentType = response.headers.get("content-type") || "";
-  const head = new TextDecoder("latin1").decode(bytes.slice(0, 1_500));
-  const gb = /(?:gb2312|gbk|gb18030)/i.test(contentType) || /(?:gb2312|gbk|gb18030)/i.test(head);
-  let body = "";
-  try { body = new TextDecoder(gb ? "gb18030" : "utf-8").decode(bytes); }
-  catch { body = new TextDecoder("utf-8").decode(bytes); }
+  const body = decodeAutohome(bytes);
   if (!response.ok) throw new Error(`autohome_new_exact_http_${response.status}:${url}`);
   return { response, body };
 }
@@ -116,16 +115,7 @@ function parseListing(markup: string): AutohomeNewListRow[] {
     const around = markup.slice(Math.max(0, (match.index || 0) - 5_000), Math.min(markup.length, end + 3_000));
     const seriesId = around.match(new RegExp(`/pic/series-s${specId}/(\\d+)\\.html`, "i"))?.[1] || "";
     seen.add(specId);
-    rows.push({
-      specId,
-      seriesId: seriesId || undefined,
-      trimTitle,
-      year,
-      priceWan,
-      sourcePriceCny: Math.round(priceWan * 10_000),
-      sourceUrl: specUrl(specId),
-      galleryUrl: seriesId ? galleryUrl(specId, seriesId) : undefined,
-    });
+    rows.push({ specId, seriesId: seriesId || undefined, trimTitle, year, priceWan, sourcePriceCny: Math.round(priceWan * 10_000), sourceUrl: specUrl(specId), galleryUrl: seriesId ? galleryUrl(specId, seriesId) : undefined });
   }
   return rows;
 }
@@ -134,9 +124,7 @@ function extractJsonObject(markup: string, marker: string) {
   if (start < 0) return null;
   const open = markup.indexOf("{", start + marker.length);
   if (open < 0) return null;
-  let depth = 0;
-  let quote = "";
-  let escaped = false;
+  let depth = 0, quote = "", escaped = false;
   for (let index = open; index < markup.length; index++) {
     const char = markup[index];
     if (quote) {
@@ -147,62 +135,39 @@ function extractJsonObject(markup: string, marker: string) {
     }
     if (char === '"' || char === "'") { quote = char; continue; }
     if (char === "{") depth++;
-    else if (char === "}" && --depth === 0) {
-      try { return JSON.parse(markup.slice(open, index + 1)); }
-      catch { return null; }
-    }
+    else if (char === "}" && --depth === 0) { try { return JSON.parse(markup.slice(open, index + 1)); } catch { return null; } }
   }
   return null;
 }
 function configValue(config: any, specId: string, rules: Array<{ id?: number; re?: RegExp }>) {
   const types = config?.result?.paramtypeitems || [];
-  for (const type of types) {
-    for (const parameter of type?.paramitems || []) {
-      const id = Number(parameter?.id);
-      const name = clean(parameter?.name);
-      if (!rules.some((rule) => (rule.id != null && rule.id === id) || (rule.re && rule.re.test(name)))) continue;
-      const item = (parameter?.valueitems || []).find((row: any) => Number(row?.specid) === Number(specId));
-      if (!item) continue;
-      const sub = (item.sublist || []).map((row: any) => clean(row?.subvalue)).filter(Boolean).join(" / ");
-      const value = clean(item.value) || sub;
-      if (value && value !== "-") return value;
-    }
+  for (const type of types) for (const parameter of type?.paramitems || []) {
+    const id = Number(parameter?.id), name = clean(parameter?.name);
+    if (!rules.some((rule) => (rule.id != null && rule.id === id) || (rule.re && rule.re.test(name)))) continue;
+    const item = (parameter?.valueitems || []).find((row: any) => Number(row?.specid) === Number(specId));
+    if (!item) continue;
+    const sub = (item.sublist || []).map((row: any) => clean(row?.subvalue)).filter(Boolean).join(" / ");
+    const value = clean(item.value) || sub;
+    if (value && value !== "-") return value;
   }
   return "";
 }
 function exactConfigFields(config: any, specId: string): ExactConfigFields {
   const first = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules) || undefined;
   return {
-    title: first([{ re: /^车型/ }]),
-    msrpWan: first([{ re: /厂.*指导价/ }]),
-    energy: first([{ id: 1149 }, { re: /能源类型/ }]),
-    engine: first([{ id: 1150 }, { re: /^发动机$/ }]),
-    engineMaxHp: first([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]),
-    engineMaxKw: first([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
-    motorTotalHp: first([{ id: 9013 }, { re: /电动机总马力/ }, { id: 1198 }]),
-    motorTotalKw: first([{ id: 1234 }, { re: /电动机.*总.*功率/ }]),
-    systemHp: first([{ id: 9014 }, { re: /系统.*马力/ }]),
-    systemKw: first([{ id: 8459 }, { re: /系统.*功率/ }]),
-    transmission: first([{ id: 1265 }, { re: /^变速箱$/ }, { id: 1230 }]),
-    // Current HTML decoding produced an ambiguous truncated drive value in probes.
-    // Keep drive only in raw config until a stable exact field contract is verified.
-    body: first([{ id: 1147 }, { re: /^车身结构$/ }]),
-    seats: first([{ id: 1173 }, { re: /座位数/ }]),
-    marketDate: first([{ id: 8453 }, { re: /上市/ }]),
+    title: first([{ re: /^车型/ }]), msrpWan: first([{ re: /厂.*指导价/ }]), energy: first([{ id: 1149 }, { re: /能源类型/ }]), engine: first([{ id: 1150 }, { re: /^发动机$/ }]),
+    engineMaxHp: first([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]), engineMaxKw: first([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
+    motorTotalHp: first([{ id: 9013 }, { re: /电动机总马力/ }, { id: 1198 }]), motorTotalKw: first([{ id: 1234 }, { re: /电动机.*总.*功率/ }]),
+    systemHp: first([{ id: 9014 }, { re: /系统.*马力/ }]), systemKw: first([{ id: 8459 }, { re: /系统.*功率/ }]),
+    transmission: first([{ id: 1265 }, { re: /^变速箱$/ }, { id: 1230 }]), body: first([{ id: 1147 }, { re: /^车身结构$/ }]), seats: first([{ id: 1173 }, { re: /座位数/ }]), marketDate: first([{ id: 8453 }, { re: /上市/ }]),
   };
 }
 function identityFromSpecTitle(markup: string, fallbackTrim: string) {
   const pageTitle = clean(markup.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "");
   const match = pageTitle.match(/^【图】(.+?)\s+((?:19|20)\d{2}款.+?)报价_图片_(.+?)_汽车之家$/);
   if (match) return { model: clean(match[1]), trim: clean(match[2]), make: clean(match[3]), pageTitle };
-  const compact = pageTitle.replace(/^【图】/, "").replace(/报价_图片_.+$/, "");
-  const yearIndex = compact.search(/(?:19|20)\d{2}款/);
-  return {
-    model: yearIndex > 0 ? clean(compact.slice(0, yearIndex)) : "",
-    trim: yearIndex > 0 ? clean(compact.slice(yearIndex)) : fallbackTrim,
-    make: clean(pageTitle.match(/_图片_(.+?)_汽车之家$/)?.[1] || ""),
-    pageTitle,
-  };
+  const compact = pageTitle.replace(/^【图】/, "").replace(/报价_图片_.+$/, ""), yearIndex = compact.search(/(?:19|20)\d{2}款/);
+  return { model: yearIndex > 0 ? clean(compact.slice(0, yearIndex)) : "", trim: yearIndex > 0 ? clean(compact.slice(yearIndex)) : fallbackTrim, make: clean(pageTitle.match(/_图片_(.+?)_汽车之家$/)?.[1] || ""), pageTitle };
 }
 function exactProductImages(markup: string, base: string) {
   const values: string[] = [];
@@ -211,9 +176,7 @@ function exactProductImages(markup: string, base: string) {
   return [...new Set(values.map((value) => absolute(value, base)).filter((url) => PRODUCT_IMAGE_RE.test(url)))].slice(0, 30);
 }
 function engineCc(engine: string | undefined) {
-  const value = clean(engine);
-  const liters = value.match(/\b(\d+(?:\.\d+)?)\s*L\b/i);
-  const cc = value.match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
+  const value = clean(engine), liters = value.match(/\b(\d+(?:\.\d+)?)\s*L\b/i), cc = value.match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
   return cc ? Math.round(Number(cc[1])) : liters ? Math.round(Number(liters[1]) * 1_000) : undefined;
 }
 function isCombustionOnly(energy: string | undefined) {
@@ -227,147 +190,46 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
   accessMode = "public_html" as const;
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
-    const page = Math.max(1, Number(cursor || 1));
-    const url = listUrl(page);
+    const page = Math.max(1, Number(cursor || 1)), url = listUrl(page);
     const { response, body } = await fetchDecoded(url, page > 1 ? listUrl(page - 1) : "https://car.autohome.com.cn/");
     const items = parseListing(body);
-    const nextHref = [...body.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
-      .find((match) => /下一页|下页|next/i.test(clean(match[2])))?.[1] || "";
-    const nextPage = nextHref.match(/-(\d+)\.html/i)?.[1];
-    const finished = !items.length || (!nextPage && page > 1 && items.length < 20);
-    return {
-      items,
-      nextCursor: finished ? null : String(nextPage || page + 1),
-      finished,
-      count: items.length,
-      health: {
-        ok: items.length > 0,
-        message: `Autohome new exact list page=${page} items=${items.length}`,
-        checkedAt: new Date().toISOString(),
-        httpStatus: response.status,
-        contentType: response.headers.get("content-type") || "",
-      },
-    };
+    const nextHref = [...body.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)].find((match) => /下一页|下页|next/i.test(clean(match[2])))?.[1] || "";
+    const nextPage = nextHref.match(/-(\d+)\.html/i)?.[1], finished = !items.length || (!nextPage && page > 1 && items.length < 20);
+    return { items, nextCursor: finished ? null : String(nextPage || page + 1), finished, count: items.length, health: { ok: items.length > 0, message: `Autohome new exact list page=${page} items=${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" } };
   }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutohomeNewListRow;
     if (!row?.specId || !row.trimTitle || !row.year || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
     const now = new Date().toISOString();
-    return {
-      id: stableOfferId(this.sourceId, row.specId),
-      sourceId: this.sourceId,
-      sourceOfferId: row.specId,
-      market: "china",
-      offerType: "fixed",
-      status: "active",
-      catalogKind: "listing",
-      sourceTitle: row.trimTitle,
-      make: "",
-      model: "",
-      trim: row.trimTitle,
-      year: row.year,
-      sourcePrice: row.sourcePriceCny,
-      sourceCurrency: "CNY",
-      priceMode: "fixed",
-      images: [],
-      totalRub: null,
-      calculationStatus: "needs_data",
-      firstSeenAt: now,
-      updatedAt: now,
-      operational: {
-        sourceUrl: row.sourceUrl,
-        sourceVenueName: "汽车之家 / Autohome",
-        sourceTitle: row.trimTitle,
-        exactDetail: false,
-        exactFields: true,
-        exactPhotos: false,
-        galleryVerified: false,
-        galleryImageCount: 0,
-        gallerySafetyMode: "autohome_spec_product_images_v1",
-        galleryStoredAs: "json_urls",
-        raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false },
-      },
-    };
+    return { id: stableOfferId(this.sourceId, row.specId), sourceId: this.sourceId, sourceOfferId: row.specId, market: "china", offerType: "fixed", status: "active", catalogKind: "listing", sourceTitle: row.trimTitle, make: "", model: "", trim: row.trimTitle, year: row.year, sourcePrice: row.sourcePriceCny, sourceCurrency: "CNY", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.sourceUrl, sourceVenueName: "汽车之家 / Autohome", sourceTitle: row.trimTitle, exactDetail: false, exactFields: true, exactPhotos: false, galleryVerified: false, galleryImageCount: 0, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false } } };
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const specId = String(offer.sourceOfferId || "");
     if (!/^\d+$/.test(specId)) return [];
     const listing = (offer.operational?.raw as any)?.listing as AutohomeNewListRow | undefined;
-    const [specPage, configPage] = await Promise.all([
-      fetchDecoded(specUrl(specId), listing?.sourceUrl || listUrl(1)),
-      fetchDecoded(configUrl(specId), specUrl(specId)),
-    ]);
+    const [specPage, configPage] = await Promise.all([fetchDecoded(specUrl(specId), listing?.sourceUrl || listUrl(1)), fetchDecoded(configUrl(specId), specUrl(specId))]);
     const identity = identityFromSpecTitle(specPage.body, listing?.trimTitle || offer.trim || "");
-    if (!identity.make || !identity.model || yearFrom(identity.trim) !== Number(offer.year)) {
-      throw new Error(`autohome_new_exact_identity_failed:${specId}`);
-    }
+    if (!identity.make || !identity.model || yearFrom(identity.trim) !== Number(offer.year)) throw new Error(`autohome_new_exact_identity_failed:${specId}`);
     const config = extractJsonObject(configPage.body, "var config =");
     if (!config) throw new Error(`autohome_new_exact_config_missing:${specId}`);
-    const fields = exactConfigFields(config, specId);
-    const gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
-    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
-    const verifiedGallery = gallery.length >= minimum;
-
-    offer.make = identity.make;
-    offer.model = identity.model;
-    offer.trim = identity.trim || offer.trim;
-    offer.sourceTitle = `${identity.model} ${identity.trim}`.trim();
-    offer.fuel = fields.energy || offer.fuel;
-    offer.engineType = fields.engine || offer.engineType;
-    offer.engineCc = engineCc(fields.engine) || offer.engineCc;
-    offer.transmission = fields.transmission || offer.transmission;
-    offer.bodyType = fields.body || offer.bodyType;
-    // Autohome publishes maximum engine/motor/system power. It is not the 30-minute
-    // customs power for EV/PHEV. Do not map those fields into powerHp for electrified cars.
+    const fields = exactConfigFields(config, specId), gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
+    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;
+    offer.make = identity.make; offer.model = identity.model; offer.trim = identity.trim || offer.trim; offer.sourceTitle = `${identity.model} ${identity.trim}`.trim();
+    offer.fuel = fields.energy || offer.fuel; offer.engineType = fields.engine || offer.engineType; offer.engineCc = engineCc(fields.engine) || offer.engineCc; offer.transmission = fields.transmission || offer.transmission; offer.bodyType = fields.body || offer.bodyType;
     if (isCombustionOnly(fields.energy)) {
-      const hp = positive(fields.engineMaxHp);
-      const kw = positive(fields.engineMaxKw);
-      if (hp || kw) {
-        offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined);
-        offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined);
-        offer.powerDataConfidence = "source_exact";
-        offer.powerDataSource = "Autohome exact config: engine maximum power";
-      }
+      const hp = positive(fields.engineMaxHp), kw = positive(fields.engineMaxKw);
+      if (hp || kw) { offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined); offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined); offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Autohome exact config: engine maximum power"; }
     }
-    offer.operational = {
-      ...(offer.operational || {}),
-      sourceUrl: specUrl(specId),
-      sourceVenueName: "汽车之家 / Autohome",
-      sourceTitle: offer.sourceTitle,
-      exactDetail: true,
-      exactFields: true,
-      exactPhotos: verifiedGallery,
-      galleryVerified: verifiedGallery,
-      galleryImageCount: gallery.length,
-      photoIdentityVerified: verifiedGallery,
-      gallerySafetyMode: "autohome_spec_product_images_v1",
-      galleryStoredAs: "json_urls",
-      raw: {
-        listing,
-        configFields: fields,
-        configSpecId: specId,
-        specPageTitle: identity.pageTitle,
-        galleryUrl: listing?.galleryUrl,
-        exactProductImages: gallery,
-        detailIdentityVerified: true,
-        photoIdentityVerified: verifiedGallery,
-        electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power",
-      },
-    };
+    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: listing?.galleryUrl, exactProductImages: gallery, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
     return gallery.map(image);
   }
 
   mapStatus(): OfferStatus { return "active"; }
-
   async healthCheck(): Promise<SourceRunHealth> {
-    try {
-      const page = await this.fetchPage("1");
-      return page.health || { ok: page.items.length > 0, message: `Autohome new exact items=${page.items.length}`, checkedAt: new Date().toISOString() };
-    } catch (error) {
-      return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() };
-    }
+    try { const page = await this.fetchPage("1"); return page.health || { ok: page.items.length > 0, message: `Autohome new exact items=${page.items.length}`, checkedAt: new Date().toISOString() }; }
+    catch (error) { return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() }; }
   }
 }
 
