@@ -8,6 +8,8 @@ on:
       - main
     paths:
       - ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml"
+      - "apps/web/lib/catalog/auto-georgia-strict-source.ts"
+      - "tests/auto-georgia-price.test.ts"
 
 permissions:
   contents: read
@@ -45,6 +47,7 @@ jobs:
       - run: |
           node --check scripts/catalog-live-recovery-direct-exact.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
+          node --import tsx --test tests/auto-georgia-price.test.ts
           npm run typecheck
 
   collect:
