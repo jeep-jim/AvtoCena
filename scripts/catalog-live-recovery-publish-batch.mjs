@@ -14,6 +14,8 @@ const inputDir = String(process.env.RECOVERY_BATCH_INPUT_DIR || "recovery-input"
 const output = String(process.env.RECOVERY_BATCH_REPORT || "catalog-direct-recovery-batch-publish-report.json").trim();
 const maxPerMarket = Math.max(1, Math.min(5_000, Number(process.env.RECOVERY_PUBLISH_MAX || 3_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
+const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
 const minYear = new Date().getFullYear() - 15;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {
@@ -58,11 +60,56 @@ function quality(a, b) {
 }
 
 function normalizeVisible(raw) {
+  const op = raw?.operational || {};
+  const sourceRaw = op?.raw || {};
+  const exactPhoto = sourceRaw.recoveryExactPhotoIdentity === true;
   return normalizeVehicleOfferSpecs({
     ...raw,
     status: "active",
     images: credibleCatalogImages(raw?.images || []).slice(0, 30),
+    operational: {
+      ...op,
+      ...(exactPhoto ? { photoIdentityVerified: true } : {}),
+      raw: {
+        ...sourceRaw,
+        ...(exactPhoto ? { photoIdentityVerified: true, listingBoundImages: true } : {}),
+      },
+    },
   });
+}
+
+function makeKey(offer) {
+  return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
+}
+function modelKey(offer) {
+  const make = makeKey(offer);
+  const model = String(offer?.model || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
+function applyDiversity(rows, rejected) {
+  const selected = [];
+  const modelsByMake = new Map();
+  const countByModel = new Map();
+  for (const offer of rows) {
+    const make = makeKey(offer);
+    const model = modelKey(offer);
+    if (!make || !model) continue;
+    const knownModels = modelsByMake.get(make) || new Set();
+    if (!knownModels.has(model) && knownModels.size >= maxModelsPerMake) {
+      rejected.model_quota = Number(rejected.model_quota || 0) + 1;
+      continue;
+    }
+    if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) {
+      rejected.make_model_quota = Number(rejected.make_model_quota || 0) + 1;
+      continue;
+    }
+    knownModels.add(model);
+    modelsByMake.set(make, knownModels);
+    countByModel.set(model, Number(countByModel.get(model) || 0) + 1);
+    selected.push(offer);
+    if (selected.length >= maxPerMarket) break;
+  }
+  return selected;
 }
 
 const selectedByMarket = new Map();
@@ -88,7 +135,7 @@ for (const market of markets) {
     selected.push(offer);
   }
   selected.sort(quality);
-  const marketRows = selected.slice(0, maxPerMarket);
+  const marketRows = applyDiversity(selected, rejected);
   if (!marketRows.length) throw new Error(`recovery_batch_empty_market:${market}`);
   selectedByMarket.set(market, marketRows);
   rejectedByMarket[market] = rejected;
@@ -119,13 +166,31 @@ const marketReports = {};
 for (const market of markets) {
   const rows = selectedByMarket.get(market) || [];
   const manifestCount = Number(manifest?.markets?.[market]?.count || 0);
-  if (manifestCount !== rows.length) throw new Error(`recovery_batch_manifest_mismatch:${market}:${manifestCount}:${rows.length}`);
+  if (manifestCount !== rows.length) {
+    const debugReport = {
+      version: 2,
+      mode: "live_markets_exact_calculated_batch_publish",
+      markets,
+      published: false,
+      generationId: manifest?.generationId || null,
+      failure: `recovery_batch_manifest_mismatch:${market}:${manifestCount}:${rows.length}`,
+      selectedCounts: Object.fromEntries(markets.map((item) => [item, (selectedByMarket.get(item) || []).length])),
+      manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((item) => [item, Number(manifest?.markets?.[item]?.count || 0)])),
+      preservedByMarket,
+    };
+    await fs.writeFile(output, JSON.stringify(debugReport, null, 2));
+    throw new Error(debugReport.failure);
+  }
   marketReports[market] = {
     count: rows.length,
     preferredCount: rows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
     calculatedCount: rows.filter(exactCalculation).length,
     minYear,
     preferredMaxRub,
+    maxOffersPerModel,
+    maxModelsPerMake,
+    distinctModels: new Set(rows.map(modelKey)).size,
+    distinctMakes: new Set(rows.map(makeKey)).size,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, rows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
     imageStats: {
       min: Math.min(...rows.map((offer) => offer.images.length)),
@@ -137,7 +202,7 @@ for (const market of markets) {
 }
 
 const report = {
-  version: 1,
+  version: 2,
   mode: "live_markets_exact_calculated_batch_publish",
   markets,
   publishedAt: new Date().toISOString(),
