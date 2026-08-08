@@ -59,7 +59,7 @@ for (const url of scripts) {
 
 const deviceid = crypto.randomUUID();
 const baseParams = { language: 'en', pageindex: '1', pagesize: '24', sort: '0', vehicle_list: '0', fromsource: '0', deviceid };
-const appCandidates = [null, '2046', '123', '1211123', '166001000', '166001e3'];
+const appCandidates = [null, 'g', 'global.m', '2046', '123', '1211123'];
 for (const appid of appCandidates) {
   const params = new URLSearchParams(baseParams);
   if (appid) params.set('_appid', appid);
@@ -71,7 +71,7 @@ for (const appid of appCandidates) {
 }
 const sampleId = idsOf(listBody)[0];
 if (sampleId) {
-  for (const appid of appCandidates.slice(0, 4)) {
+  for (const appid of [null, 'g', 'global.m']) {
     const params = new URLSearchParams({ language: 'en', fromsource: '0', deviceid });
     if (appid) params.set('_appid', appid);
     const url = `${API}/api/v1/carinfo/${sampleId}?${params.toString()}`;
