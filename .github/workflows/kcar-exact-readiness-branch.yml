@@ -8,6 +8,7 @@ on:
       - ".github/workflows/kcar-exact-readiness-branch.yml"
       - "apps/web/lib/catalog/kcar-exact-source.ts"
       - "apps/web/lib/catalog/importer.ts"
+      - "scripts/kcar-exact-diagnostic.mjs"
   push:
     branches:
       - agent/kcar-exact-readiness
@@ -15,6 +16,7 @@ on:
       - ".github/workflows/kcar-exact-readiness-branch.yml"
       - "apps/web/lib/catalog/kcar-exact-source.ts"
       - "apps/web/lib/catalog/importer.ts"
+      - "scripts/kcar-exact-diagnostic.mjs"
 
 permissions:
   contents: read
@@ -52,6 +54,8 @@ jobs:
       - run: npm ci
       - name: Typecheck
         run: npm run typecheck
+      - name: Capture current K Car API shape
+        run: node scripts/kcar-exact-diagnostic.mjs
       - name: Collect exact K Car cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce production-quality source readiness
