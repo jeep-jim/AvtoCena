@@ -17,6 +17,17 @@ const RULES = [
   ["GP3", "SUBARU", "IMPREZA", 2011, 2016, 1599, 15, 115, 85, "DBA-GP3", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10094313"]],
   ["GP7", "SUBARU", "IMPREZA", 2011, 2016, 1995, 15, 150, 110, "DBA-GP7", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10081807"]],
   ["ZC72S", "SUZUKI", "SWIFT", 2011, 2016, 1242, 50, 91, 67, "DBA-ZC72S", ["https://www.suzuki.co.jp/suzuki_digital_library/1_auto/swift.html"]],
+  ["GB3", "HONDA", "FREED", 2011, 2016, 1496, 15, 118, 87, "DBA-GB3", [
+    "https://www.honda.co.jp/auto-archive/freed/2011/webcatalog/spec/",
+    "https://www.honda.co.jp/auto-archive/freed/2014/webcatalog/performance/detail/",
+    "https://www.honda.co.jp/auto-archive/freed/2016/webcatalog/performance/detail/",
+    "https://www.honda.co.jp/auto-archive/freed/2016/"
+  ]],
+  ["FK7", "HONDA", "CIVIC", 2017, 2020, 1496, 15, 182, 134, "DBA/6BA-FK7", [
+    "https://www.honda.co.jp/recall/auto/info/260528_5824.html",
+    "https://www.honda.co.jp/auto-archive/civic/5door/2019/webcatalog/type/type/",
+    "https://www.honda.co.jp/auto-archive/civic/5door/2021/webcatalog/type/type/"
+  ]],
   ["DJLFS", "MAZDA", "MAZDA2", 2019, 2025, 1496, 15, 110, 81, "6BA/5BA-DJLFS regular gasoline; 3BA-DJLFS 15MB excluded by grade", [
     "https://www.mazda.co.jp/globalassets/assets/cars/mazda2/common/pdf/mazda2_specification_201909.pdf",
     "https://www.mazda.co.jp/globalassets/assets/cars/mazda2/common/pdf/mazda2_specification_202105.pdf",
