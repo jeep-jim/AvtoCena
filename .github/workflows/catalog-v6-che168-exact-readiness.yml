@@ -7,6 +7,7 @@ on:
       - ".github/workflows/catalog-v6-che168-exact-readiness.yml"
       - "apps/web/lib/catalog/che168-global-exact-source.ts"
       - "apps/web/lib/catalog/importer.ts"
+      - "scripts/catalog-simple-source-market.mjs"
 
 permissions:
   contents: read
@@ -57,20 +58,33 @@ jobs:
           const offers = Array.isArray(data.offers) ? data.offers : [];
           const source = (data.report?.sources || []).find((row) => row.sourceId === expected);
           const problems = [];
+          const clean = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
+          if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('collector_field_policy_not_source_only');
           if (offers.length < 3) problems.push(`cards_${offers.length}`);
           if (!source || Number(source.saved || 0) < 3) problems.push(`saved_${source?.saved || 0}`);
           for (const offer of offers) {
+            const detail = offer?.operational?.raw?.detail || {};
             if (offer.sourceId !== expected) problems.push('source_identity_mismatch');
             if (!/^https:\/\/global\.che168\.com\/en\/detail\/\d+$/.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url_not_exact_che168_global');
+            if (String(detail.infoid || '') !== String(offer.sourceOfferId || '')) problems.push('detail_identity_mismatch');
             if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'USD') problems.push('price_currency_invalid');
+            if (Number(detail.price) > 0 && Number(offer.sourcePrice) !== Number(detail.price)) problems.push('price_rewritten');
             if (!offer.make || !offer.model || !Number(offer.year)) problems.push('core_identity_missing');
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
             if ((offer.images || []).some((img) => !/^https:\/\/erscglobal2\.autoimg\.cn\/escimg\/auto\/.+\/1400x0_c42_autohomecar__.+\.(?:jpe?g|webp|png|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_carinfo');
             if (offer?.operational?.exactDetail !== true) problems.push('detail_not_verified');
             if (offer?.operational?.photoIdentityVerified !== true) problems.push('photo_identity_not_verified');
+            if (offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('source_fields_not_preserved');
+            if (clean(detail.engine) && clean(offer.engineType) !== clean(detail.engine)) problems.push('engine_text_rewritten');
+            if (clean(detail.gearbox) && clean(offer.transmission) !== clean(detail.gearbox)) problems.push('transmission_rewritten');
+            if (clean(detail.drivingmode) && clean(offer.drive) !== clean(detail.drivingmode)) problems.push('drive_rewritten');
+            if (clean(detail.structure) && clean(offer.bodyType) !== clean(detail.structure)) problems.push('body_rewritten');
+            if (clean(detail.fuelname) && clean(offer.fuel) !== clean(detail.fuelname)) problems.push('fuel_rewritten');
+            const hp = Number(clean(detail.engine).match(/\b(\d{2,4})\s*(?:hp|ps|bhp)\b/i)?.[1] || 0);
+            if (hp && Number(offer.powerHp) !== hp) problems.push('power_value_not_exact_detail');
             if (offer.powerHp && offer.powerDataConfidence !== 'source_exact') problems.push('power_not_source_exact');
           }
-          console.log(JSON.stringify({ count: offers.length, source, problems: [...new Set(problems)], sample: offers.slice(0, 3).map((offer) => ({ id: offer.sourceOfferId, title: offer.sourceTitle, year: offer.year, price: offer.sourcePrice, currency: offer.sourceCurrency, engineCc: offer.engineCc, powerHp: offer.powerHp, transmission: offer.transmission, drive: offer.drive, bodyType: offer.bodyType, images: offer.images?.length, sourceUrl: offer.operational?.sourceUrl })) }, null, 2));
+          console.log(JSON.stringify({ count: offers.length, source, problems: [...new Set(problems)], sample: offers.slice(0, 3).map((offer) => ({ id: offer.sourceOfferId, title: offer.sourceTitle, year: offer.year, price: offer.sourcePrice, currency: offer.sourceCurrency, engineType: offer.engineType, engineCc: offer.engineCc, powerHp: offer.powerHp, transmission: offer.transmission, drive: offer.drive, bodyType: offer.bodyType, fuel: offer.fuel, images: offer.images?.length, sourceUrl: offer.operational?.sourceUrl })) }, null, 2));
           if (problems.length) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
