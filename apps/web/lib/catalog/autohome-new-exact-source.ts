@@ -25,13 +25,14 @@ export type AutohomeNewListRow = {
   galleryUrl?: string;
 };
 
-type ExactConfigFields = {
+export type ExactConfigFields = {
   title?: string;
   msrpWan?: string;
   energy?: string;
   engine?: string;
   engineMaxHp?: string;
   engineMaxKw?: string;
+  overallMaxKw?: string;
   motorTotalHp?: string;
   motorTotalKw?: string;
   systemHp?: string;
@@ -139,28 +140,54 @@ function extractJsonObject(markup: string, marker: string) {
   }
   return null;
 }
-function configValue(config: any, specId: string, rules: Array<{ id?: number; re?: RegExp }>) {
+function configValue(
+  config: any,
+  specId: string,
+  rules: Array<{ id?: number; re?: RegExp }>,
+  section?: RegExp,
+) {
   const types = config?.result?.paramtypeitems || [];
-  for (const type of types) for (const parameter of type?.paramitems || []) {
-    const id = Number(parameter?.id), name = clean(parameter?.name);
-    if (!rules.some((rule) => (rule.id != null && rule.id === id) || (rule.re && rule.re.test(name)))) continue;
-    const item = (parameter?.valueitems || []).find((row: any) => Number(row?.specid) === Number(specId));
-    if (!item) continue;
-    const sub = (item.sublist || []).map((row: any) => clean(row?.subvalue)).filter(Boolean).join(" / ");
-    const value = clean(item.value) || sub;
-    if (value && value !== "-") return value;
+  for (const type of types) {
+    const typeName = clean(type?.name || type?.typename || type?.title || "");
+    if (section && !section.test(typeName)) continue;
+    for (const parameter of type?.paramitems || []) {
+      const id = Number(parameter?.id), name = clean(parameter?.name);
+      if (!rules.some((rule) => (rule.id != null && rule.id === id) || (rule.re && rule.re.test(name)))) continue;
+      const item = (parameter?.valueitems || []).find((row: any) => Number(row?.specid) === Number(specId));
+      if (!item) continue;
+      const sub = (item.sublist || []).map((row: any) => clean(row?.subvalue)).filter(Boolean).join(" / ");
+      const value = clean(item.value) || sub;
+      if (value && value !== "-") return value;
+    }
   }
   return "";
 }
 function exactConfigFields(config: any, specId: string): ExactConfigFields {
-  const first = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules) || undefined;
+  const anySection = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules) || undefined;
+  const engineSection = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules, /^发动机$/) || undefined;
+  const motorSection = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules, /^电动机$/) || undefined;
+  const basicSection = (rules: Array<{ id?: number; re?: RegExp }>) => configValue(config, specId, rules, /^基本参数$/) || undefined;
   return {
-    title: first([{ re: /^车型/ }]), msrpWan: first([{ re: /厂.*指导价/ }]), energy: first([{ id: 1149 }, { re: /能源类型/ }]), engine: first([{ id: 1150 }, { re: /^发动机$/ }]),
-    engineMaxHp: first([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]), engineMaxKw: first([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
-    motorTotalHp: first([{ id: 9013 }, { re: /电动机总马力/ }, { id: 1198 }]), motorTotalKw: first([{ id: 1234 }, { re: /电动机.*总.*功率/ }]),
-    systemHp: first([{ id: 9014 }, { re: /系统.*马力/ }]), systemKw: first([{ id: 8459 }, { re: /系统.*功率/ }]),
-    transmission: first([{ id: 1265 }, { re: /^变速箱$/ }, { id: 1230 }]), body: first([{ id: 1147 }, { re: /^车身结构$/ }]), seats: first([{ id: 1173 }, { re: /座位数/ }]), marketDate: first([{ id: 8453 }, { re: /上市/ }]),
+    title: anySection([{ re: /^车型/ }]),
+    msrpWan: anySection([{ re: /厂.*指导价/ }]),
+    energy: anySection([{ id: 1149 }, { re: /能源类型/ }]),
+    engine: anySection([{ id: 1150 }, { re: /^发动机$/ }]),
+    engineMaxHp: engineSection([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]),
+    engineMaxKw: engineSection([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
+    overallMaxKw: basicSection([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
+    motorTotalHp: motorSection([{ id: 9013 }, { re: /^电动机总马力\(Ps\)$/ }]),
+    motorTotalKw: motorSection([{ id: 8448 }, { re: /^电动机总功率\(kW\)$/ }]),
+    systemHp: motorSection([{ id: 9014 }, { re: /^系统\s*马力\(Ps\)$/ }]),
+    systemKw: motorSection([{ id: 8455 }, { re: /^系统\s*功率\(kW\)$/ }]),
+    transmission: anySection([{ id: 1265 }, { re: /^变速箱$/ }, { id: 1230 }]),
+    body: anySection([{ id: 1147 }, { re: /^车身结构$/ }]),
+    seats: anySection([{ id: 1173 }, { re: /座位数/ }]),
+    marketDate: anySection([{ id: 8453 }, { re: /上市/ }]),
   };
+}
+export function parseAutohomeExactConfigFields(markup: string, specId: string): ExactConfigFields | null {
+  const config = extractJsonObject(markup, "var config =");
+  return config ? exactConfigFields(config, specId) : null;
 }
 function identityFromSpecTitle(markup: string, fallbackTrim: string) {
   const pageTitle = clean(markup.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "");
@@ -212,17 +239,17 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
     const [specPage, configPage] = await Promise.all([fetchDecoded(specUrl(specId), listing?.sourceUrl || listUrl(1)), fetchDecoded(configUrl(specId), specUrl(specId))]);
     const identity = identityFromSpecTitle(specPage.body, listing?.trimTitle || offer.trim || "");
     if (!identity.make || !identity.model || yearFrom(identity.trim) !== Number(offer.year)) throw new Error(`autohome_new_exact_identity_failed:${specId}`);
-    const config = extractJsonObject(configPage.body, "var config =");
-    if (!config) throw new Error(`autohome_new_exact_config_missing:${specId}`);
-    const fields = exactConfigFields(config, specId), gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
+    const fields = parseAutohomeExactConfigFields(configPage.body, specId);
+    if (!fields) throw new Error(`autohome_new_exact_config_missing:${specId}`);
+    const gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;
     offer.make = identity.make; offer.model = identity.model; offer.trim = identity.trim || offer.trim; offer.sourceTitle = `${identity.model} ${identity.trim}`.trim();
     offer.fuel = fields.energy || offer.fuel; offer.engineType = fields.engine || offer.engineType; offer.engineCc = engineCc(fields.engine) || offer.engineCc; offer.transmission = fields.transmission || offer.transmission; offer.bodyType = fields.body || offer.bodyType;
     if (isCombustionOnly(fields.energy)) {
       const hp = positive(fields.engineMaxHp), kw = positive(fields.engineMaxKw);
-      if (hp || kw) { offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined); offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined); offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Autohome exact config: engine maximum power"; }
+      if (hp || kw) { offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined); offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined); offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Autohome exact config: engine-section maximum power"; }
     }
-    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: listing?.galleryUrl, exactProductImages: gallery, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
+    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: listing?.galleryUrl, exactProductImages: gallery, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v2", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
     return gallery.map(image);
   }
 
