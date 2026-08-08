@@ -1,0 +1,46 @@
+name: Catalog V6 · Autohome new-car structure probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-autohome-new-structure-probe.yml"
+      - "scripts/autohome-new-structure-probe.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-v6-autohome-new-structure-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe Autohome current new-car pages without publishing
+        run: node scripts/autohome-new-structure-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autohome-new-structure-probe
+          path: autohome-new-structure-probe.json
+          if-no-files-found: warn
+          retention-days: 3
+      - name: Persist result for connector inspection
+        if: always()
+        run: |
+          test -f autohome-new-structure-probe.json || exit 0
+          mkdir -p scripts/probe-results
+          cp autohome-new-structure-probe.json scripts/probe-results/autohome-new-structure-probe.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/probe-results/autohome-new-structure-probe.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Store Autohome new-car probe (run $GITHUB_RUN_ID)"
+          git push origin HEAD:main
