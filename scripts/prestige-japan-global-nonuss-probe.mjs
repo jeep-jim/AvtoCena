@@ -8,39 +8,23 @@ function clean(v){return String(v??'').replace(/&nbsp;|&#160;/gi,' ').replace(/&
 function abs(v,b=BASE){try{return new URL(String(v).replace(/&amp;/g,'&'),b).toString()}catch{return''}}
 async function req(url,{method='GET',body,referer=PAGE,accept=H.accept}={}){const r=await fetch(url,{method,body,headers:{...H,accept,referer,...(method==='POST'?{'content-type':'application/x-www-form-urlencoded; charset=UTF-8','x-requested-with':'XMLHttpRequest',origin:BASE}:{})},redirect:'follow',signal:AbortSignal.timeout(30000)});return{r,body:await r.text()}}
 function parseJson(body){try{return JSON.parse(body)}catch{return null}}
+function selectHtml(page,id){const e=id.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return page.match(new RegExp(`<select\\b[^>]*id=["']${e}["'][^>]*>([\\s\\S]*?)<\\/select>`,'i'))?.[1]||''}
+function options(page,id){return[...selectHtml(page,id).matchAll(/<option\b([^>]*)value=["']([^"']*)["']([^>]*)>([\s\S]*?)<\/option>/gi)].map(m=>({value:m[2],name:clean(m[4]),dataName:(`${m[1]} ${m[3]}`.match(/data-name=["']([^"']+)/i)?.[1]||'')})).filter(x=>x.value)}
 function carLinks(html){return[...new Set([...html.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)].map(m=>abs(m[1],PAGE)).filter(u=>/auction-vehicle-display\/\?car_id=/i.test(u)))]}
 function money(v){const s=clean(v);const m=s.match(/([0-9][0-9,]*)\s*(?:YEN|JPY)/i);return m?Number(m[1].replace(/,/g,'')):0}
 function lastMatch(text,re){let found=null;for(const m of text.matchAll(re))found=m;return found}
 function status(text){return clean(lastMatch(text,/Current Status\s*(?:-->)?\s*(Not yet available|Sold by negotiation|Not sold|Unsold(?:\s*\/\s*Passed In)?|Passed In|Sold)\b/ig)?.[1]||'')}
 function finalPrice(text){const raw=clean(lastMatch(text,/Final Price\s*(?:-->)?\s*(Not yet available|[0-9][0-9,]*\s*(?:YEN|JPY))/ig)?.[1]||'');return{raw,price:money(raw)}}
-function summaryFromDetail(html,url){const text=clean(html);const f=finalPrice(text);const s=status(text);const title=text.match(/Japanese Auction Vehicle Details\s+((?:19|20)\d{2}\s+[^|]{3,160}?)(?=\s+Year\s+(?:19|20)\d{2})/i)?.[1]||'';const auctionDate=text.match(/Auction Date\s+((?:0?[1-9]|[12]\d|3[01])-(?:0?[1-9]|1[0-2])-(?:19|20)\d{2})/i)?.[1]||'';const location=text.match(/Location\s+([^|]{2,80}?)(?=\s+(?:Start Price|Final Price|Current Status|Send ENQUIRY))/i)?.[1]||'';const lot=text.match(/Number\s+([A-Z0-9-]{1,30})/i)?.[1]||'';const imgs=[...new Set([...html.matchAll(/(?:src|data-src|data-original)=["']([^"']+)["']/gi)].map(m=>abs(m[1],url)).filter(u=>/^https?:/i.test(u)&&!/(?:logo|icon|favicon|banner|sprite|tracking|pixel|qrcode|placeholder)/i.test(u)))];return{url,title:clean(title),auctionDate,location:clean(location),lot,finalPrice:f.price,finalPriceRaw:f.raw,currentStatus:s,soldResult:f.price>0&&s==='Sold',imageCount:imgs.length}}
+function summaryFromDetail(html,url){const text=clean(html);const f=finalPrice(text);const s=status(text);const title=text.match(/Japanese Auction Vehicle Details\s+((?:19|20)\d{2}\s+[^|]{3,160}?)(?=\s+Year\s+(?:19|20)\d{2})/i)?.[1]||'';const auctionDate=text.match(/Auction Date\s+((?:0?[1-9]|[12]\d|3[01])-(?:0?[1-9]|1[0-2])-(?:19|20)\d{2})/i)?.[1]||'';const location=text.match(/Location\s+([^|]{2,80}?)(?=\s+(?:Start Price|Final Price|Current Status|Send ENQUIRY))/i)?.[1]||'';const lot=text.match(/Number\s+([A-Z0-9-]{1,30})/i)?.[1]||'';return{url,title:clean(title),auctionDate,location:clean(location),lot,finalPrice:f.price,finalPriceRaw:f.raw,currentStatus:s,soldResult:f.price>0&&s==='Sold'}}
+async function search({offset=0,makeId='',modelId='',label}){const p=new URLSearchParams();p.set('action','search_results_car_dev');p.set('limit_start',String(offset));p.set('auction-date','Past');p.set('year_from','2011');p.set('year_to','2026');p.append('auction_name[]','2');if(makeId)p.set('marka_id',String(makeId));if(modelId)p.set('model_id',String(modelId));const res=await req(AJAX,{method:'POST',body:p.toString(),accept:'application/json,text/plain,*/*'});const json=parseJson(res.body);const html=String(json?.cars_html||'');const links=carLinks(html);return{label,offset,makeId,modelId,status:res.r.status,contentType:res.r.headers.get('content-type')||'',bodyBytes:res.body.length,jsonKeys:json&&typeof json==='object'?Object.keys(json):[],total:json?.total??null,carsHtmlBytes:html.length,linkCount:links.length,links,plainSample:clean(html).slice(0,2400),bodySample:clean(res.body).slice(0,900)}}
 
-const landing=await req(PAGE);
-const offsets=[0,20,40,60];
-const pages=[];
-const detailMap=new Map();
-for(const offset of offsets){
-  const p=new URLSearchParams();
-  p.set('action','search_results_car_dev');
-  p.set('limit_start',String(offset));
-  p.set('auction-date','Past');
-  p.set('year_from','2011');
-  p.set('year_to','2026');
-  p.append('auction_name[]','2');
-  const res=await req(AJAX,{method:'POST',body:p.toString(),accept:'application/json,text/plain,*/*'});
-  const json=parseJson(res.body);const html=String(json?.cars_html||'');const links=carLinks(html);
-  pages.push({offset,status:res.r.status,total:json?.total??null,carsHtmlBytes:html.length,linkCount:links.length,links:links.slice(0,30),plainSample:clean(html).slice(0,3500)});
-  for(const link of links.slice(0,6)){
-    if(detailMap.has(link))continue;
-    try{const d=await req(link,{referer:PAGE});detailMap.set(link,{...summaryFromDetail(d.body,d.r.url),httpStatus:d.r.status})}
-    catch(e){detailMap.set(link,{url:link,error:String(e?.message||e)})}
-  }
-}
-const details=[...detailMap.values()];
-const allLinks=pages.flatMap(p=>p.links);
-const uniqueLinks=new Set(allLinks);
-const overlap=allLinks.length-uniqueLinks.size;
+const landing=await req(PAGE);const makes=options(landing.body,'marka_id');const toyota=makes.find(x=>/TOYOTA/i.test(clean(x.dataName||x.name)))||makes[0];if(!toyota)throw new Error('prestige_no_make');
+const mr=await req(AJAX,{method:'POST',body:new URLSearchParams({action:'search_model_car',marka_id:toyota.value,'auction-date':'Past'}).toString(),accept:'application/json,text/plain,*/*'});const mj=parseJson(mr.body);const models=Array.isArray(mj?.models)?mj.models:[];const alphard=models.find(x=>/^ALPHARD$/i.test(clean(x?.name)))||models[0];if(!alphard?.ext_id)throw new Error('prestige_no_model');
+const cases=[];
+cases.push(await search({offset:0,label:'global_no_make'}));
+cases.push(await search({offset:0,makeId:toyota.value,label:'toyota_make_only'}));
+for(const offset of [0,10,20,30,40,60])cases.push(await search({offset,makeId:toyota.value,modelId:alphard.ext_id,label:`alphard_${offset}`}));
+const modelCases=cases.filter(x=>x.modelId);const allLinks=modelCases.flatMap(x=>x.links);const uniqueLinks=new Set(allLinks);const adjacent=[];for(let i=1;i<modelCases.length;i++){const prev=new Set(modelCases[i-1].links);adjacent.push({a:modelCases[i-1].offset,b:modelCases[i].offset,overlap:modelCases[i].links.filter(x=>prev.has(x)).length})}
+const details=[];for(const link of [...uniqueLinks].slice(0,12)){try{const d=await req(link,{referer:PAGE});details.push({...summaryFromDetail(d.body,d.r.url),status:d.r.status})}catch(e){details.push({url:link,error:String(e?.message||e)})}}
 const sold=details.filter(d=>d.soldResult);
-const output={generatedAt:new Date().toISOString(),landing:{status:landing.r.status,bytes:landing.body.length},query:{auctionDate:'Past',yearFrom:2011,yearTo:2026,auctionName:'2',meaning:'Non-USS only'},pages,summary:{offsets,linkCount:allLinks.length,uniqueLinkCount:uniqueLinks.size,duplicateLinksAcrossOffsets:overlap,detailCount:details.length,strictSoldResultCount:sold.length,strictSoldSamples:sold.slice(0,12)},details};
-await fs.writeFile('prestige-japan-global-nonuss-probe.json',JSON.stringify(output,null,2));
-console.log(JSON.stringify({generatedAt:output.generatedAt,query:output.query,pages:pages.map(p=>({offset:p.offset,status:p.status,total:p.total,carsHtmlBytes:p.carsHtmlBytes,linkCount:p.linkCount,firstLinks:p.links.slice(0,4),plainSample:p.plainSample.slice(0,600)})),summary:output.summary,detailSamples:details.slice(0,12)},null,2));
+const output={generatedAt:new Date().toISOString(),selection:{make:toyota,model:alphard,makeCount:makes.length,modelCount:models.length},cases,summary:{modelCaseLinkCount:allLinks.length,modelCaseUniqueLinks:uniqueLinks.size,adjacentOverlap:adjacent,strictSoldDetailCount:sold.length,strictSoldSamples:sold},details};await fs.writeFile('prestige-japan-global-nonuss-probe.json',JSON.stringify(output,null,2));console.log(JSON.stringify({generatedAt:output.generatedAt,selection:output.selection,cases:cases.map(x=>({label:x.label,offset:x.offset,status:x.status,total:x.total,carsHtmlBytes:x.carsHtmlBytes,linkCount:x.linkCount,firstLinks:x.links.slice(0,4),jsonKeys:x.jsonKeys,bodySample:x.bodySample.slice(0,250),plainSample:x.plainSample.slice(0,500)})),summary:output.summary,details},null,2));
