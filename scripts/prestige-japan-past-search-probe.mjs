@@ -12,31 +12,49 @@ function options(page,id){return[...selectHtml(page,id).matchAll(/<option\b([^>]
 function parseJson(body){try{return JSON.parse(body)}catch{return null}}
 function carLinks(html,base){return[...new Set([...html.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)].map(m=>abs(m[1],base)).filter(u=>/auction-vehicle-display|[?&]vid=|\/auction[^?#]*vehicle/i.test(u)))]}
 function images(html,base){const vals=[];for(const m of html.matchAll(/(?:src|data-src|data-original|data-lazy-src|content)=["']([^"']+)["']/gi))vals.push(m[1]);for(const m of html.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi))vals.push(m[0].replace(/\\\//g,'/'));return[...new Set(vals.map(v=>abs(v,base)).filter(u=>/^https?:/i.test(u)&&!/logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|qrcode|car_no_image/i.test(u)))]}
-function labeled(text,label){const e=label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return text.match(new RegExp(`${e}\\s*:?\\s*([^|]{1,180}?)(?=\\s{2,}|Auction |Start Price|Final Price|Current Status|Chassis|Model Code|Engine|Kilometers|KM|Grade|Year|$)`,'i'))?.[1]?.trim()||''}
+function around(text,label,n=420){const i=text.toLowerCase().indexOf(label.toLowerCase());return i<0?'':text.slice(i,Math.min(text.length,i+n))}
 function money(v){const s=clean(v);const m=s.match(/(?:¥|JPY|YEN|AUD|\$)\s*([0-9][0-9,]*)/i)||s.match(/([0-9][0-9,]*)\s*(?:JPY|YEN)/i);return m?Number(m[1].replace(/,/g,'')):0}
-function detailSummary(html,url){const text=clean(html);const imgs=images(html,url);return{url,title:clean(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||''),auctionLocation:labeled(text,'Auction Location'),auctionDate:labeled(text,'Auction Date'),auctionGrade:labeled(text,'Auction Grade'),modelCode:labeled(text,'Model Code'),chassis:labeled(text,'Chassis'),kilometers:labeled(text,'Kilometers')||labeled(text,'KM'),engine:labeled(text,'Engine'),startPriceRaw:labeled(text,'Start Price'),startPrice:money(labeled(text,'Start Price')),finalPriceRaw:labeled(text,'Final Price'),finalPrice:money(labeled(text,'Final Price')),currentStatus:labeled(text,'Current Status'),imageCount:imgs.length,imageSample:imgs.slice(0,30),textSample:text.slice(0,10000)} }
+function fieldContext(text,label){const s=around(text,label,520);if(!s)return'';return s.replace(new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*:?\\s*`,'i'),'').trim()}
+function detailSummary(html,url){const text=clean(html);const imgs=images(html,url);const finalCtx=fieldContext(text,'Final Price');const statusCtx=fieldContext(text,'Current Status');const startCtx=fieldContext(text,'Start Price');const auctionCtx=fieldContext(text,'Auction Location');return{url,title:clean(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||''),auctionContext:auctionCtx.slice(0,350),startPriceRaw:startCtx.slice(0,350),startPrice:money(startCtx),finalPriceRaw:finalCtx.slice(0,500),finalPrice:money(finalCtx),finalUnavailable:/not yet available|not available|stopped publishing sale prices/i.test(finalCtx),currentStatusRaw:statusCtx.slice(0,500),imageCount:imgs.length,imageSample:imgs.slice(0,12),textSample:text.slice(0,9000)} }
+function venueLabel(v){return clean(v?.dataName||v?.name||v?.value||'')}
 
 const landing=await req(PAGE);
 const makes=options(landing.body,'marka_id');
-const preferred=makes.find(x=>/toyota/i.test(x.name||x.dataName))||makes.find(x=>/nissan|honda|mazda|subaru/i.test(x.name||x.dataName))||makes[0];
-if(!preferred)throw new Error('prestige_no_make_options');
-const modelBody=new URLSearchParams({action:'search_model_car',marka_id:preferred.value,'auction-date':'Past'}).toString();
-const modelsRes=await req(AJAX,{method:'POST',body:modelBody,accept:'application/json,text/plain,*/*'});
+const auctions=options(landing.body,'auction_name');
+const toyota=makes.find(x=>/toyota/i.test(venueLabel(x)))||makes[0];
+if(!toyota)throw new Error('prestige_no_make_options');
+const modelsRes=await req(AJAX,{method:'POST',body:new URLSearchParams({action:'search_model_car',marka_id:toyota.value,'auction-date':'Past'}).toString(),accept:'application/json,text/plain,*/*'});
 const modelsJson=parseJson(modelsRes.body);
 const models=Array.isArray(modelsJson?.models)?modelsJson.models:[];
-const preferredModel=models.find(x=>/rav4|corolla|land cruiser|prius|alphard/i.test(String(x?.name||'')))||models[0];
-if(!preferredModel?.ext_id)throw new Error(`prestige_no_models_for_make_${preferred.value}`);
+const model=models.find(x=>/^ALPHARD$/i.test(clean(x?.name)))||models.find(x=>/RAV4|COROLLA|PRIUS|LAND CRUISER/i.test(clean(x?.name)))||models[0];
+if(!model?.ext_id)throw new Error(`prestige_no_models_for_make_${toyota.value}`);
 
-const params=new URLSearchParams();
-params.set('action','search_results_car_dev');params.set('limit_start','0');params.set('auction-date','Past');params.set('year_from','2011');params.set('year_to','2026');params.set('marka_id',String(preferred.value));params.set('model_id',String(preferredModel.ext_id));
-const search=await req(AJAX,{method:'POST',body:params.toString(),accept:'application/json,text/plain,*/*'});
-const json=parseJson(search.body);
-const carsHtml=String(json?.cars_html||'');
-const links=carLinks(carsHtml,PAGE);
-const output={generatedAt:new Date().toISOString(),landing:{status:landing.r.status,bytes:landing.body.length,makeCount:makes.length,makeSample:makes.slice(0,20)},selection:{make:preferred,modelCount:models.length,model:preferredModel,modelSample:models.slice(0,30)},search:{status:search.r.status,contentType:search.r.headers.get('content-type')||'',bytes:search.body.length,total:json?.total,carsHtmlBytes:carsHtml.length,links:links.slice(0,100),plainSample:clean(carsHtml).slice(0,12000)},details:[]};
-for(const link of links.slice(0,5)){
- try{const d=await req(link,{referer:PAGE});output.details.push({...detailSummary(d.body,d.r.url),status:d.r.status,bytes:d.body.length,contentType:d.r.headers.get('content-type')||''})}
- catch(e){output.details.push({url:link,error:String(e?.message||e)})}
+const usableAuctions=auctions.filter(x=>venueLabel(x)&&!/^all$/i.test(venueLabel(x)));
+const nonUss=usableAuctions.filter(x=>!/USS/i.test(venueLabel(x))).slice(0,12);
+const uss=usableAuctions.filter(x=>/USS/i.test(venueLabel(x))).slice(0,4);
+const venueCases=[null,...nonUss,...uss];
+const searches=[];
+const detailMap=new Map();
+for(const venue of venueCases){
+  const params=new URLSearchParams();
+  params.set('action','search_results_car_dev');params.set('limit_start','0');params.set('auction-date','Past');params.set('year_from','2011');params.set('year_to','2026');params.set('marka_id',String(toyota.value));params.set('model_id',String(model.ext_id));
+  if(venue)params.append('auction_name[]',String(venue.value));
+  try{
+    const search=await req(AJAX,{method:'POST',body:params.toString(),accept:'application/json,text/plain,*/*'});
+    const json=parseJson(search.body);const carsHtml=String(json?.cars_html||'');const links=carLinks(carsHtml,PAGE);
+    const row={venue:venue?{value:venue.value,label:venueLabel(venue)}:{value:'',label:'UNFILTERED'},status:search.r.status,total:json?.total??null,carsHtmlBytes:carsHtml.length,links:links.slice(0,12),plainSample:clean(carsHtml).slice(0,3500)};
+    searches.push(row);
+    for(const link of links.slice(0,4)){
+      if(detailMap.size>=48||detailMap.has(link))continue;
+      try{const d=await req(link,{referer:PAGE});detailMap.set(link,{venueFilter:row.venue,...detailSummary(d.body,d.r.url),status:d.r.status,bytes:d.body.length,contentType:d.r.headers.get('content-type')||''})}
+      catch(e){detailMap.set(link,{venueFilter:row.venue,url:link,error:String(e?.message||e)})}
+    }
+  }catch(e){searches.push({venue:venue?{value:venue.value,label:venueLabel(venue)}:{value:'',label:'UNFILTERED'},error:String(e?.message||e)})}
 }
+const details=[...detailMap.values()];
+const positive=details.filter(d=>Number(d.finalPrice)>0);
+const unavailable=details.filter(d=>d.finalUnavailable===true);
+const statusPresent=details.filter(d=>clean(d.currentStatusRaw));
+const output={generatedAt:new Date().toISOString(),landing:{status:landing.r.status,bytes:landing.body.length,makeCount:makes.length,auctionCount:auctions.length,auctionOptions:auctions},selection:{make:toyota,modelCount:models.length,model,venueCases:venueCases.map(v=>v?{value:v.value,label:venueLabel(v)}:{value:'',label:'UNFILTERED'})},searches,details,summary:{detailCount:details.length,positiveFinalPriceCount:positive.length,unavailableFinalPriceCount:unavailable.length,currentStatusContextCount:statusPresent.length,positiveFinalPriceSamples:positive.slice(0,10).map(d=>({url:d.url,venueFilter:d.venueFilter,finalPrice:d.finalPrice,finalPriceRaw:d.finalPriceRaw,currentStatusRaw:d.currentStatusRaw,imageCount:d.imageCount}))}};
 await fs.writeFile('prestige-japan-past-search-probe.json',JSON.stringify(output,null,2));
-console.log(JSON.stringify({generatedAt:output.generatedAt,selection:output.selection,search:{status:output.search.status,total:output.search.total,carsHtmlBytes:output.search.carsHtmlBytes,links:output.search.links.slice(0,20),plainSample:output.search.plainSample.slice(0,4000)},details:output.details.map(d=>({url:d.url,status:d.status,title:d.title,auctionLocation:d.auctionLocation,auctionDate:d.auctionDate,auctionGrade:d.auctionGrade,modelCode:d.modelCode,chassis:d.chassis,kilometers:d.kilometers,engine:d.engine,startPriceRaw:d.startPriceRaw,startPrice:d.startPrice,finalPriceRaw:d.finalPriceRaw,finalPrice:d.finalPrice,currentStatus:d.currentStatus,imageCount:d.imageCount,error:d.error}))},null,2));
+console.log(JSON.stringify({generatedAt:output.generatedAt,selection:output.selection,summary:output.summary,searches:searches.map(s=>({venue:s.venue,status:s.status,total:s.total,carsHtmlBytes:s.carsHtmlBytes,links:s.links?.length,error:s.error,plainSample:s.plainSample?.slice(0,500)})),detailSamples:details.slice(0,12).map(d=>({venueFilter:d.venueFilter,url:d.url,status:d.status,finalPrice:d.finalPrice,finalUnavailable:d.finalUnavailable,finalPriceRaw:d.finalPriceRaw?.slice(0,220),currentStatusRaw:d.currentStatusRaw?.slice(0,220),imageCount:d.imageCount,error:d.error}))},null,2));
