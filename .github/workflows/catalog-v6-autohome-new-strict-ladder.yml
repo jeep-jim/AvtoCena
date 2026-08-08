@@ -1,0 +1,91 @@
+name: Catalog V6 · Autohome new strict ladder
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-autohome-new-strict-ladder.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-autohome-new-strict-ladder
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CATALOG_REBUILD_MARKET: china
+      CATALOG_REBUILD_SOURCE_IDS: autohome_new_china_open
+      CATALOG_REBUILD_OUTPUT: autohome-new-strict-10.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "10"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "3"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "1200000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Collect exact Autohome new source-only cards
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Gate exact Autohome new certification
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const expected = Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET);
+          const source = data.report?.sources?.find((row) => row.sourceId === 'autohome_new_china_open');
+          const clean = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+          const problems = [];
+          if (offers.length !== expected) problems.push(`count_${offers.length}_expected_${expected}`);
+          if (!source || Number(source.saved || 0) < expected) problems.push(`saved_${source?.saved || 0}`);
+          if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
+          const ids = new Set();
+          for (const offer of offers) {
+            const raw = offer?.operational?.raw || {};
+            const listing = raw.listing || {};
+            const cfg = raw.configFields || {};
+            if (!offer.sourceOfferId || ids.has(offer.sourceOfferId)) problems.push('duplicate_or_missing_source_id');
+            ids.add(offer.sourceOfferId);
+            if (offer.sourceId !== 'autohome_new_china_open') problems.push('source_identity_mismatch');
+            if (!/^https:\/\/www\.autohome\.com\.cn\/spec\/\d+\/$/.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url_invalid');
+            if (String(raw.configSpecId || '') !== String(offer.sourceOfferId || '')) problems.push('config_spec_identity_mismatch');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'CNY') problems.push('price_currency_invalid');
+            if (Number(listing.sourcePriceCny || 0) !== Number(offer.sourcePrice || 0)) problems.push('source_price_rewritten');
+            if (!offer.make || !offer.model || !offer.trim || !Number(offer.year)) problems.push('core_identity_missing');
+            if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
+            if ((offer.images || []).some((img) => !/^https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/.+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_identity_mismatch');
+            if (offer?.operational?.exactDetail !== true || offer?.operational?.photoIdentityVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
+            if (clean(cfg.energy) && clean(offer.fuel) !== clean(cfg.energy)) problems.push('energy_rewritten');
+            if (clean(cfg.engine) && clean(offer.engineType) !== clean(cfg.engine)) problems.push('engine_rewritten');
+            if (clean(cfg.transmission) && clean(offer.transmission) !== clean(cfg.transmission)) problems.push('transmission_rewritten');
+            if (clean(cfg.body) && clean(offer.bodyType) !== clean(cfg.body)) problems.push('body_rewritten');
+            if (/插电|增程|电动|纯电|混合动力/.test(clean(cfg.energy)) && offer.powerHp) problems.push('electrified_max_power_mapped_to_customs_power');
+          }
+          console.log(JSON.stringify({ target: expected, count: offers.length, unique: ids.size, source, problems: [...new Set(problems)] }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autohome-new-strict-10
+          path: autohome-new-strict-10.json
+          if-no-files-found: error
+          retention-days: 5
