@@ -17,6 +17,8 @@ const id = String(process.env.PRESTIGE_CHUNK_ID || startCursor || "chunk").repla
 const output = process.env.PRESTIGE_CHUNK_OUTPUT || `prestige-japan-chunk-${id}.json`;
 const detailConcurrency = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_DETAIL_CONCURRENCY || 5)));
 const timeoutMs = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
+const retryAttempts = Math.max(1, Math.min(6, Number(process.env.PRESTIGE_CHUNK_RETRY_ATTEMPTS || 4)));
+const retryBaseMs = Math.max(250, Math.min(10_000, Number(process.env.PRESTIGE_CHUNK_RETRY_BASE_MS || 1_000)));
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
@@ -35,6 +37,34 @@ function withTimeout(promise, label) {
     promise,
     new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(label)), timeoutMs); }),
   ]).finally(() => clearTimeout(timer));
+}
+function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+function errorText(error) {
+  const parts = [];
+  let current = error;
+  for (let depth = 0; current && depth < 5; depth++) {
+    parts.push(String(current?.code || ""), String(current?.message || current || ""));
+    current = current?.cause;
+  }
+  return parts.filter(Boolean).join(" ");
+}
+function isRetryable(error) {
+  return /UND_ERR_SOCKET|ECONNRESET|ECONNREFUSED|EPIPE|ETIMEDOUT|ENETUNREACH|EAI_AGAIN|fetch failed|socket|other side closed|timeout|HTTP[_ -]?(?:408|425|429|500|502|503|504)|\b(?:408|425|429|500|502|503|504)\b/i.test(errorText(error));
+}
+async function retryTransient(label, operation) {
+  let lastError;
+  for (let attempt = 1; attempt <= retryAttempts; attempt++) {
+    try {
+      return await withTimeout(Promise.resolve().then(operation), `${label}_timeout`);
+    } catch (error) {
+      lastError = error;
+      if (!isRetryable(error) || attempt >= retryAttempts) throw error;
+      const delay = Math.min(15_000, retryBaseMs * (2 ** (attempt - 1)) + Math.floor(Math.random() * 500));
+      console.warn(JSON.stringify({ event: "prestige_transient_retry", label, attempt, retryAttempts, delayMs: delay, error: errorText(error).slice(0, 500) }));
+      await sleep(delay);
+    }
+  }
+  throw lastError;
 }
 async function pool(rows, limit, worker) {
   let index = 0;
@@ -74,6 +104,7 @@ function strictCheck(offer) {
 const offers = new Map();
 const rejectionReasons = {};
 const invariantProblems = [];
+const transportErrors = [];
 let cursor = startCursor;
 let pages = 0;
 let seen = 0;
@@ -81,6 +112,7 @@ let normalized = 0;
 let nextCursor = startCursor;
 let sourceFinished = false;
 let boundaryReached = false;
+let fatalError = "";
 
 while (pages < maxPages) {
   const parsed = parseCursor(cursor);
@@ -89,7 +121,17 @@ while (pages < maxPages) {
     boundaryReached = true;
     break;
   }
-  const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), "prestige_chunk_page_timeout");
+
+  let page;
+  try {
+    page = await retryTransient("prestige_chunk_page", () => source.fetchPage(cursor));
+  } catch (error) {
+    fatalError = errorText(error).slice(0, 1_000) || "prestige_chunk_page_failed";
+    transportErrors.push({ stage: "page", cursor, error: fatalError, retryable: isRetryable(error) });
+    invariantProblems.push("page_fetch_failed_after_retries");
+    break;
+  }
+
   pages++;
   const rows = Array.isArray(page?.items) ? page.items : [];
   seen += rows.length;
@@ -101,11 +143,15 @@ while (pages < maxPages) {
     normalized++;
     bases.push(offer);
   }
+
   await pool(bases, detailConcurrency, async (offer) => {
     try {
-      const images = await withTimeout(Promise.resolve(source.fetchImages(offer)), "prestige_chunk_gallery_timeout");
+      const images = await retryTransient("prestige_chunk_gallery", () => source.fetchImages(offer));
       if (Array.isArray(images) && images.length) offer.images = images;
-    } catch { reason(rejectionReasons, "galleryFetch"); }
+    } catch (error) {
+      reason(rejectionReasons, "galleryFetch");
+      transportErrors.push({ stage: "gallery", sourceOfferId: offer?.sourceOfferId || "", error: errorText(error).slice(0, 500), retryable: isRetryable(error) });
+    }
     const problems = strictCheck(offer);
     if (problems.length) {
       for (const problem of problems) reason(rejectionReasons, problem);
@@ -113,6 +159,7 @@ while (pages < maxPages) {
     }
     if (!offers.has(offer.sourceOfferId)) offers.set(offer.sourceOfferId, offer);
   });
+
   nextCursor = page?.nextCursor || "";
   if (!nextCursor || page?.finished) { sourceFinished = true; break; }
   const next = parseCursor(nextCursor);
@@ -127,7 +174,7 @@ const rows = [...offers.values()];
 const digest = crypto.createHash("sha256").update(rows.map((offer) => `${offer.sourceOfferId}|${offer.sourcePrice}|${offer.operational?.sourceUrl}`).sort().join("\n")).digest("hex");
 const passed = invariantProblems.length === 0 && pages > 0;
 const report = {
-  version: 1,
+  version: 2,
   mode: "prestige_exact_sold_source_only_chunk_no_publish",
   sourceId: "prestige_japan_auctions_open",
   market: "japan",
@@ -146,6 +193,10 @@ const report = {
   nextCursor,
   sourceFinished,
   boundaryReached,
+  retryAttempts,
+  transportErrorCount: transportErrors.length,
+  transportErrors: transportErrors.slice(0, 100),
+  fatalError,
   digest,
   invariantProblems,
   passed,
