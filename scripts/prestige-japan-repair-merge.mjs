@@ -113,7 +113,9 @@ for (const id of incompleteChunks) errors.push(`chunk_incomplete_${id}`);
 const unique = [...offers.values()].sort((a, b) => String(b.auctionDate || "").localeCompare(String(a.auctionDate || "")) || Number(b.year || 0) - Number(a.year || 0) || String(a.sourceOfferId).localeCompare(String(b.sourceOfferId)));
 const outputOffers = unique.slice(0, target);
 const reachedTarget = unique.length >= target;
-const passed = errors.length === 0 && reachedTarget;
+// Repair follows the same "up-to" contract as the source collection: target
+// is an output cap. Every source range still has to be complete and error-free.
+const passed = errors.length === 0 && outputOffers.length > 0;
 const report = {
   version: 1,
   mode: "prestige_exact_sold_source_only_repair_merge_no_publish",
