@@ -1,0 +1,89 @@
+name: Catalog Japan exact frame recovery
+run-name: Japan exact frame recovery · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-japan-exact-frame-recovery.yml"
+      - "scripts/prestige-japan-exact-frame-enrich.mjs"
+
+permissions:
+  actions: read
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  PRESTIGE_SOURCE_RUN_ID: "31264677735"
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Download exact Prestige chunk artifacts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prestige-source-chunks .prestige-zips
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRESTIGE_SOURCE_RUN_ID/artifacts?per_page=100" --paginate \
+            --jq '.artifacts[] | select(.name | startswith("prestige-japan-chunk-")) | [.id,.name] | @tsv' > prestige-artifacts.tsv
+          test -s prestige-artifacts.tsv
+          while IFS=$'\t' read -r artifact_id artifact_name; do
+            zip_path=".prestige-zips/${artifact_id}.zip"
+            out_dir="prestige-source-chunks/$artifact_name"
+            mkdir -p "$out_dir"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+              --output "$zip_path"
+            unzip -q "$zip_path" -d "$out_dir"
+          done < prestige-artifacts.tsv
+      - name: Merge individually valid strict sold lots
+        env:
+          PRESTIGE_PARTIAL_INPUT_DIR: prestige-source-chunks
+          PRESTIGE_PARTIAL_OUTPUT: prestige-japan-exact-sold-partial-live.json
+        run: node scripts/prestige-japan-partial-merge-for-live.mjs
+      - name: Enrich only exact chassis matches backed by manufacturer or official registry
+        env:
+          PRESTIGE_FRAME_INPUT: prestige-japan-exact-sold-partial-live.json
+          PRESTIGE_FRAME_OUTPUT: prestige-japan-exact-sold-frame-enriched.json
+        run: npx tsx scripts/prestige-japan-exact-frame-enrich.mjs
+      - name: Recalculate Japan strict sold lots without publishing
+        env:
+          PRESTIGE_RECOVERY_INPUT: prestige-japan-exact-sold-frame-enriched.json
+          PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan-exact-frame.json
+          PRESTIGE_RECOVERY_TARGET: "1000"
+          PRESTIGE_RECOVERY_CONCURRENCY: "12"
+        run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-japan-exact-frame-recovery
+          path: |
+            prestige-japan-exact-sold-frame-enriched.json
+            catalog-rebuild-japan-exact-frame.json
+          if-no-files-found: warn
+          retention-days: 3
