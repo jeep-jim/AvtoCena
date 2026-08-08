@@ -1,0 +1,149 @@
+name: Catalog live recovery · 6 markets
+run-name: Live recovery 6 markets · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-live-recovery-6-markets.yml"
+      - "scripts/catalog-live-recovery-market.mjs"
+      - "scripts/catalog-live-recovery-publish.mjs"
+      - "apps/web/lib/catalog/offer-quality.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-live-recovery-6-markets
+  cancel-in-progress: true
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  RECOVERY_TARGET: "1000"
+  RECOVERY_MAX_PAGES: "120"
+  RECOVERY_TIME_LIMIT_MS: "2700000"
+  RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+  RECOVERY_RETRY_ATTEMPTS: "4"
+  RECOVERY_PREPARE_CONCURRENCY: "6"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+          npm run typecheck
+
+  collect:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        include:
+          - market: korea
+            sources: "encar_direct,kcar_korea_open"
+          - market: china
+            sources: "autohome_used_china_open,guazi_china_open,autohome_new_china_open"
+          - market: uae
+            sources: "dubicars_uae_exact"
+          - market: europe
+            sources: "autoscout_europe_open"
+          - market: georgia
+            sources: "auto_georgia_open"
+          - market: kyrgyzstan
+            sources: "mashina_kyrgyzstan_exact"
+    env:
+      RECOVERY_MARKET: ${{ matrix.market }}
+      RECOVERY_SOURCE_IDS: ${{ matrix.sources }}
+      RECOVERY_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect exact source-bound and fully calculated offers
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-live-recovery-${{ matrix.market }}
+          path: catalog-rebuild-${{ matrix.market }}.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  publish:
+    needs: [validate, collect]
+    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: catalog-live-recovery-*
+          path: recovery-input
+          merge-multiple: true
+      - name: Atomically replace each recovered market while preserving the others
+        shell: bash
+        run: |
+          set +e
+          failed=""
+          for market in korea china uae europe georgia kyrgyzstan; do
+            input="recovery-input/catalog-rebuild-${market}.json"
+            if [ ! -s "$input" ]; then
+              echo "Missing $input"
+              failed="$failed $market(no-artifact)"
+              continue
+            fi
+            export RECOVERY_PUBLISH_MARKET="$market"
+            export RECOVERY_PUBLISH_INPUT="$input"
+            export RECOVERY_PUBLISH_REPORT="catalog-live-recovery-${market}-publish-report.json"
+            export RECOVERY_PUBLISH_MAX="3000"
+            echo "=== Publishing $market ==="
+            if npx tsx scripts/catalog-live-recovery-publish.mjs; then
+              echo "$market published"
+            else
+              echo "$market failed publication"
+              failed="$failed $market"
+            fi
+          done
+          echo "failed=$failed" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$failed" ]; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-live-recovery-publish-reports
+          path: catalog-live-recovery-*-publish-report.json
+          if-no-files-found: warn
+          retention-days: 3
