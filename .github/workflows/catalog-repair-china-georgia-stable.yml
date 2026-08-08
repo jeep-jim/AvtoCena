@@ -66,6 +66,22 @@ jobs:
           RECOVERY_BATCH_REPORT: catalog-china-georgia-stable-repair-report.json
           RECOVERY_PUBLISH_MAX: "3000"
         run: npx tsx scripts/catalog-live-recovery-publish-batch-stable.mjs
+      - name: Verify actual persisted counts and recovery baseline
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { PUBLIC_CATALOG_MARKETS } = await import('./apps/web/lib/catalog/runtime-config.ts');
+          const report = JSON.parse(fs.readFileSync('catalog-china-georgia-stable-repair-report.json', 'utf8'));
+          const actual = {};
+          for (const market of PUBLIC_CATALOG_MARKETS) actual[market] = (await readMarketOffers(market)).length;
+          const expected = { korea: 451, china: 819, japan: 78, uae: 82, europe: 350, georgia: 6, kyrgyzstan: 6 };
+          const problems = [];
+          for (const [market, count] of Object.entries(expected)) if (actual[market] !== count) problems.push(`${market}:${actual[market]}!=${count}`);
+          for (const [market, count] of Object.entries(report.manifestCounts || {})) if (actual[market] !== Number(count)) problems.push(`manifest:${market}:${actual[market]}!=${count}`);
+          console.log(JSON.stringify({ generationId: report.generationId, actual, expected, manifestCounts: report.manifestCounts, problems }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
