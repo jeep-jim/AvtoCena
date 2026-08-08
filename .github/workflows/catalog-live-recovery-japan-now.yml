@@ -1,12 +1,7 @@
 name: Catalog live recovery · Japan now
-run-name: Immediate Japan live recovery · ${{ github.event.workflow_run.id || inputs.source_run_id || github.sha }}
+run-name: Immediate Japan live recovery · ${{ inputs.source_run_id || github.sha }}
 
 on:
-  workflow_run:
-    workflows:
-      - "Catalog live recovery · 6 markets"
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       source_run_id:
@@ -35,7 +30,7 @@ env:
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
-  PRESTIGE_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_run_id || '31247872502' }}
+  PRESTIGE_SOURCE_RUN_ID: ${{ inputs.source_run_id || '31247872502' }}
 
 jobs:
   publish-japan:
