@@ -1,0 +1,114 @@
+name: Catalog V6 · Prestige exact sold up-to-30k
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-prestige-up-to-30k.yml"
+      - "scripts/prestige-japan-strict-partition-plan.mjs"
+      - "scripts/prestige-japan-strict-chunk.mjs"
+      - "scripts/prestige-japan-strict-merge.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-prestige-exact-sold-up-to-30k
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      planned_rows: ${{ steps.plan.outputs.planned_rows }}
+      partition_count: ${{ steps.plan.outputs.partition_count }}
+      complete: ${{ steps.plan.outputs.complete }}
+    env:
+      PRESTIGE_PLAN_CHUNK_PAGES: "60"
+      PRESTIGE_PLAN_RAW_BUDGET: "100000"
+      PRESTIGE_PLAN_MAX_PARTITIONS: "120"
+      PRESTIGE_PLAN_MAX_MAKES: "10"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - id: plan
+        name: Build exact non-overlapping source partitions
+        run: npx tsx scripts/prestige-japan-strict-partition-plan.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prestige-japan-up-to-30k-plan
+          path: prestige-japan-strict-partition-plan.json
+          if-no-files-found: error
+          retention-days: 5
+
+  chunks:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: true
+      max-parallel: 2
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    env:
+      PRESTIGE_CHUNK_ID: ${{ matrix.id }}
+      PRESTIGE_CHUNK_START_CURSOR: ${{ matrix.startCursor }}
+      PRESTIGE_CHUNK_MAKE_INDEX: ${{ matrix.makeIndex }}
+      PRESTIGE_CHUNK_MODEL_INDEX: ${{ matrix.modelIndex }}
+      PRESTIGE_CHUNK_END_OFFSET: ${{ matrix.endOffset }}
+      PRESTIGE_CHUNK_MAX_PAGES: ${{ matrix.maxPages }}
+      PRESTIGE_CHUNK_OUTPUT: prestige-japan-chunk-${{ matrix.id }}.json
+      PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "5"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect exact sold-result partition without publishing
+        run: npx tsx scripts/prestige-japan-strict-chunk.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prestige-japan-chunk-${{ matrix.id }}
+          path: prestige-japan-chunk-${{ matrix.id }}.json
+          if-no-files-found: error
+          retention-days: 5
+
+  aggregate:
+    needs: [plan, chunks]
+    if: ${{ always() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PRESTIGE_MERGE_INPUT_DIR: prestige-japan-chunks
+      PRESTIGE_MERGE_OUTPUT: prestige-japan-exact-sold-up-to-30000.json
+      PRESTIGE_MERGE_TARGET: "30000"
+      PRESTIGE_EXPECTED_CHUNKS: ${{ needs.plan.outputs.partition_count }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: prestige-japan-chunk-*
+          path: prestige-japan-chunks
+          merge-multiple: true
+      - name: Merge, deduplicate and gate 30k exact sold results
+        run: node scripts/prestige-japan-strict-merge.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-exact-sold-up-to-30000
+          path: prestige-japan-exact-sold-up-to-30000.json
+          if-no-files-found: error
+          retention-days: 5
