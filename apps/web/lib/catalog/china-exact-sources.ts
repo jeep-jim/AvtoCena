@@ -75,7 +75,20 @@ async function getHtml(url: string, referer?: string) {
   return { response, html };
 }
 
-type ChinaRow = { id: string; detailUrl: string; title: string; year: number; mileageKm?: number; price: number; currency: "CNY" | "USD"; listingText: string };
+type ChinaRow = {
+  id: string;
+  detailUrl: string;
+  title: string;
+  year: number;
+  mileageKm?: number;
+  price: number;
+  currency: "CNY" | "USD";
+  listingText: string;
+  make?: string;
+  model?: string;
+  trim?: string;
+  fuel?: string;
+};
 
 function parseChineseCards(markup: string, pageUrl: string, linkRe: RegExp, idFromUrl: (url: string) => string): ChinaRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
@@ -167,9 +180,10 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
     const row = raw as ChinaRow;
     if (!row?.id || !row.detailUrl || !row.title || !row.year || !row.price) return null;
     const now = new Date().toISOString();
-    const { make, model } = splitMakeModel(row.title);
+    const derived = splitMakeModel(row.title);
     return { id: `${this.sourceId}:${row.id}`, sourceId: this.sourceId, sourceOfferId: row.id, market: "china", offerType: "fixed", status: "active",
-      sourceTitle: row.title, make, model, year: row.year, mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
+      sourceTitle: row.title, make: clean(row.make) || derived.make, model: clean(row.model) || derived.model, trim: clean(row.trim) || undefined,
+      year: row.year, mileageKm: row.mileageKm, fuel: clean(row.fuel) || undefined, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
       images: [], totalRub: null, calculationStatus: "needs_knowledge", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.detailUrl, sourceVenueName: this.label, sourceTitle: row.title, raw: row, galleryStoredAs: "json_urls" } };
   }
@@ -219,12 +233,126 @@ class GuaziChinaExactAdapter extends ExactChinaAdapter {
 
 class Che168ExactAdapter extends ExactChinaAdapter {
   sourceId = "autohome_used_china_open";
-  label = "Che168 Used Cars";
-  baseUrl = "https://www.che168.com";
-  detailPattern = /\/dealer\/\d+\/\d+\.html/i;
+  label = "Che168 Global Used Cars";
+  baseUrl = "https://global.che168.com";
+  detailPattern = /\/(?:en\/)?detail\/(\d+)(?:[/?#]|$)/i;
   imageHostPattern = /autoimg\.cn|che168\.com/i;
-  listUrl(page: number) { return page <= 1 ? `${this.baseUrl}/china/list/` : `${this.baseUrl}/china/a0_0msdgscncgpi1ltocsp${page}exx0/`; }
-  detailId(url: string) { const m = url.match(/\/dealer\/(\d+)\/(\d+)\.html/i); return m ? `${m[1]}_${m[2]}` : ""; }
+  private readonly apiBase = "https://globalapi.che168.com";
+  private readonly deviceId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (token) => {
+    const value = Math.floor(Math.random() * 16);
+    return (token === "x" ? value : (value & 0x3) | 0x8).toString(16);
+  });
+
+  listUrl(_page: number) { return `${this.baseUrl}/en/used-cars`; }
+  detailId(url: string) { return url.match(this.detailPattern)?.[1] || ""; }
+
+  private apiParams(extra: Record<string, string> = {}) {
+    return new URLSearchParams({ _appid: "g", deviceid: this.deviceId, language: "en", fromsource: "0", ...extra });
+  }
+
+  private async apiJson(url: string, referer = `${this.baseUrl}/en/used-cars`) {
+    const response = await fetch(url, {
+      headers: {
+        accept: "application/json,text/plain,*/*",
+        "accept-language": "en-US,en;q=0.9,zh-CN;q=0.7",
+        origin: this.baseUrl,
+        referer,
+        "user-agent": HEADERS["user-agent"],
+      },
+      redirect: "follow",
+      signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+    });
+    const body = await response.text();
+    if (!response.ok) throw new Error(`che168_global_api_http_${response.status}:${url}`);
+    let payload: any;
+    try { payload = JSON.parse(body); } catch { throw new Error(`che168_global_api_non_json_${response.status}_bytes_${body.length}`); }
+    if (Number(payload?.returncode) !== 0 || !payload?.result) throw new Error(`che168_global_api_result_${payload?.returncode ?? "missing"}`);
+    return { response, result: payload.result as Record<string, any> };
+  }
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const page = Math.max(1, Number(cursor || 1));
+    const params = this.apiParams({ pageindex: String(page), pagesize: "24", sort: "0", vehicle_list: "0" });
+    const url = `${this.apiBase}/api/v1/search?${params.toString()}`;
+    const { response, result } = await this.apiJson(url);
+    const rows = Array.isArray(result.carlist) ? result.carlist : [];
+    const items: ChinaRow[] = rows.map((row: Record<string, unknown>) => {
+      const id = String(row.infoid || "").trim();
+      const title = clean(row.carname);
+      const year = Number(title.match(/\b((?:19|20)\d{2})\b/)?.[1] || clean(row.regdate).match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+      const price = Number(String(row.price ?? "").replace(/,/g, ""));
+      return {
+        id,
+        detailUrl: id ? `${this.baseUrl}/en/detail/${encodeURIComponent(id)}` : "",
+        title,
+        year,
+        mileageKm: integer(row.mileage),
+        price: Number.isFinite(price) && price > 0 ? price : 0,
+        currency: "USD" as const,
+        listingText: "",
+        make: clean(row.brandname),
+        model: clean(row.seriesname),
+        trim: clean(row.specname),
+        fuel: clean(row.fuelname),
+      };
+    }).filter((row: ChinaRow) => Boolean(row.id && row.detailUrl && row.title && row.year >= 2011 && row.price > 0));
+    const pageCount = Number(result.pagecount || 0);
+    const total = Number(result.totalcount || items.length);
+    const finished = items.length === 0 || (pageCount > 0 && page >= pageCount);
+    return {
+      items,
+      count: total,
+      finished,
+      nextCursor: finished ? null : String(page + 1),
+      health: { ok: items.length > 0, message: `Che168 Global API exact:${items.length}/${total}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
+    };
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const id = String(offer.sourceOfferId || "").trim();
+    const sourceUrl = String(offer.operational?.sourceUrl || "");
+    if (!/^\d+$/.test(id) || !sourceUrl || !this.detailPattern.test(sourceUrl)) return [];
+    const params = this.apiParams();
+    const { result } = await this.apiJson(`${this.apiBase}/api/v1/carinfo/${encodeURIComponent(id)}?${params.toString()}`, sourceUrl);
+    if (String(result.infoid || "") !== id) return [];
+    const detailPrice = Number(String(result.price ?? "").replace(/,/g, ""));
+    if (!(detailPrice > 0) || detailPrice !== Number(offer.sourcePrice || 0)) return [];
+    const expectedTitle = clean(offer.sourceTitle || offer.operational?.sourceTitle || "").toLowerCase();
+    const detailTitle = clean(result.carname).toLowerCase();
+    if (expectedTitle && detailTitle && expectedTitle !== detailTitle) return [];
+
+    const urls = [...new Set((Array.isArray(result.catepiclist) ? result.catepiclist : [])
+      .flatMap((group: any) => Array.isArray(group?.list) ? group.list : [])
+      .map((value: unknown) => clean(value))
+      .filter((url: string) => /^https?:\/\//i.test(url) && /autoimg\.cn/i.test(url) && !BAD_IMAGE.test(url)))]
+      .slice(0, Math.max(5, Math.min(30, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
+
+    offer.engineType = clean(result.engine) || offer.engineType;
+    offer.transmission = clean(result.gearbox) || offer.transmission;
+    offer.drive = clean(result.drivingmode) || offer.drive;
+    offer.bodyType = clean(result.structure) || offer.bodyType;
+    offer.color = clean(result.color) || offer.color;
+    offer.productionDate = clean(result.manufacturedate || result.producedate) || offer.productionDate;
+    offer.operational = {
+      ...(offer.operational || {}),
+      photoIdentityVerified: urls.length >= 5,
+      galleryVerified: urls.length >= 5,
+      galleryImageCount: urls.length,
+      gallerySafetyMode: "che168_global_exact_api_detail",
+      galleryStoredAs: "json_urls",
+      apiDetailVerified: true,
+    };
+    return urls.map(remoteImage);
+  }
+
+  async healthCheck(): Promise<SourceRunHealth> {
+    try {
+      const page = await this.fetchPage(null);
+      return { ok: Array.isArray(page.items) && page.items.length > 0, message: page.health?.message || "Che168 Global API exact", checkedAt: new Date().toISOString(), httpStatus: page.health?.httpStatus, contentType: page.health?.contentType };
+    } catch (error) {
+      return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() };
+    }
+  }
 }
 
 export const guaziChinaExactSource = new GuaziChinaExactAdapter();
