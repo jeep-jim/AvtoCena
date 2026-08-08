@@ -32,6 +32,7 @@ import { japanAuctionOpenSources } from "./japan-auction-open-sources";
 import { jpaucPastSource } from "./jpauc-past-source";
 import { guaziChinaExactSource } from "./china-exact-sources";
 import { che168GlobalExactSource } from "./che168-global-exact-source";
+import { autohomeNewExactSource } from "./autohome-new-exact-source";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { dubizzleUaeExactSource } from "./dubizzle-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
@@ -86,6 +87,7 @@ const completeSources = [
   prepareSource(carvectorJapanCurrentSource),
   guaziChinaExactSource,
   che168GlobalExactSource,
+  autohomeNewExactSource,
   autoscoutEuropeExactSource,
   dubizzleUaeExactSource,
   jpaucPastSource,
@@ -110,6 +112,7 @@ const dedicatedDetailSourceIds = new Set([
   "jpauc_japan_past_open",
   "guazi_china_open",
   "autohome_used_china_open",
+  "autohome_new_china_open",
   "autoscout_europe_open",
   "dubizzle_uae_open",
   "kcar_korea_open",
