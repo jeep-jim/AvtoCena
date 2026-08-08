@@ -1,0 +1,46 @@
+name: Catalog V6 · JPAuc sold-lot finder
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-jpauc-sold-lot-finder.yml"
+      - "scripts/jpauc-sold-lot-finder.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-v6-jpauc-sold-lot-finder
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Find published sold/result lots without publishing catalog
+        run: node scripts/jpauc-sold-lot-finder.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jpauc-sold-lot-finder
+          path: jpauc-sold-lot-finder.json
+          if-no-files-found: warn
+          retention-days: 3
+      - name: Persist result for connector inspection
+        if: always()
+        run: |
+          test -f jpauc-sold-lot-finder.json || exit 0
+          mkdir -p scripts/probe-results
+          cp jpauc-sold-lot-finder.json scripts/probe-results/jpauc-sold-lot-finder.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/probe-results/jpauc-sold-lot-finder.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Store JPAuc sold-lot probe (run $GITHUB_RUN_ID)"
+          git push origin HEAD:main
