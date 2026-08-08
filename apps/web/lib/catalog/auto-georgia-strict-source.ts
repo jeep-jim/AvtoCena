@@ -168,9 +168,9 @@ async function request(url: string, referer = "https://www.auto.ge/en/auto/index
 }
 
 export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
-  sourceId = "auto_georgia_open";
-  market = "georgia" as const;
-  accessMode = "public_html" as const;
+  sourceId: "auto_georgia_open",
+  market: "georgia",
+  accessMode: "public_html",
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = page === 1 ? "https://www.auto.ge/en/auto/index.html" : `https://www.auto.ge/en/auto/index${page}.html`;
@@ -179,8 +179,8 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
     if (!items.length) throw new Error(`auto_georgia_strict_parsed_zero_${response.status}_${markup.length}`);
     return { items, nextCursor: String(page + 1), finished: false, count: items.length,
       health: { ok: true, message: `AUTO.GE strict parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status } };
-  }
-  mapStatus(): OfferStatus { return "active"; }
+  },
+  mapStatus(): OfferStatus { return "active"; },
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutoGeorgiaRow;
     if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.detailUrl || !row.images.length) return null;
@@ -200,7 +200,7 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
         raw: { ...row, images: row.images, listingBoundImages: true, photoIdentityVerified: true },
       },
     } as VehicleOffer) as VehicleOffer;
-  }
+  },
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational?.raw || {}) as AutoGeorgiaRow & { images?: string[] };
     const row: AutoGeorgiaRow = raw;
@@ -227,8 +227,6 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
       if (saved.length >= limit) break;
     }
     return saved;
-  }
-  async healthCheck() { return { ok: true, message: "AUTO.GE strict listing parser", checkedAt: new Date().toISOString() }; }
-}
-
-export const autoGeorgiaStrictSource = new AutoGeorgiaStrictSource();
+  },
+  async healthCheck() { return { ok: true, message: "AUTO.GE strict listing parser", checkedAt: new Date().toISOString() }; },
+};
