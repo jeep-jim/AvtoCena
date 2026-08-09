@@ -9,14 +9,13 @@ const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalo
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
-const target = Math.max(1, Math.min(3000, Number(process.env.RECOVERY_TARGET || 1000)));
-const maxPages = Math.max(1, Math.min(100, Number(process.env.RECOVERY_MAX_PAGES || 45)));
+const target = Math.max(1, Math.min(10_000, Number(process.env.RECOVERY_TARGET || 5_000)));
+const maxPages = Math.max(1, Math.min(400, Number(process.env.RECOVERY_MAX_PAGES || 120)));
 const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
 const minYear = new Date().getFullYear() - 15;
 const output = process.env.RECOVERY_OUTPUT || "catalog-rebuild-europe.json";
-const timeLimitMs = Math.max(60_000, Math.min(5_400_000, Number(process.env.RECOVERY_TIME_LIMIT_MS || 2_700_000)));
+const timeLimitMs = Math.max(60_000, Math.min(5_400_000, Number(process.env.RECOVERY_TIME_LIMIT_MS || 5_100_000)));
 const deadline = Date.now() + timeLimitMs;
 
 function sourceImage(url) {
@@ -181,30 +180,24 @@ while (pages < maxPages && Date.now() < deadline) {
 
 candidates.sort(quality);
 const offers = [];
-const modelsByMake = new Map();
 const countByModel = new Map();
 for (const offer of candidates) {
-  const make = makeKey(offer);
   const model = modelKey(offer);
-  const known = modelsByMake.get(make) || new Set();
-  if (!known.has(model) && known.size >= maxModelsPerMake) { reject(rejections, "model_quota"); continue; }
-  if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) { reject(rejections, "make_model_quota"); continue; }
-  known.add(model);
-  modelsByMake.set(make, known);
+  if (!model) continue;
+  if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) { reject(rejections, "model_quota"); continue; }
   countByModel.set(model, Number(countByModel.get(model) || 0) + 1);
   offers.push(offer);
   if (offers.length >= target) break;
 }
 
 const report = {
-  version: 1,
+  version: 2,
   mode: "europe_otomoto_direct_exact_calculated_recovery",
   market: "europe",
   sourceId: source.sourceId,
   minYear,
   preferredMaxRub: maxPreferredRub,
   maxOffersPerModel,
-  maxModelsPerMake,
   pages,
   seen,
   normalized,
