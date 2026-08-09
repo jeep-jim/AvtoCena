@@ -106,19 +106,46 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/*
+ * The complete adapter used to bypass the normal Encar detail limiter and the
+ * generic collector could fan out six exact-detail requests at once. In the
+ * long Korea run this made page 0 succeed, then every list request for offset
+ * 50 fail, while an isolated list-only probe fetched 0/50/100/150 normally.
+ * Pace the exact-detail endpoint so list pagination shares a calm connection/IP
+ * profile. This changes transport timing only; source identity and acceptance
+ * rules remain untouched.
+ */
+let detailQueue: Promise<unknown> = Promise.resolve();
+let lastDetailStart = 0;
+async function pacedDetail<T>(operation: () => Promise<T>): Promise<T> {
+  const configured = Number(process.env.CATALOG_ENCAR_COMPLETE_DETAIL_RPM || 180);
+  const rpm = Math.max(20, Math.min(240, Number.isFinite(configured) ? configured : 180));
+  const gapMs = Math.ceil(60_000 / rpm);
+  const task = detailQueue.then(async () => {
+    const waitMs = Math.max(0, lastDetailStart + gapMs - Date.now());
+    if (waitMs) await sleep(waitMs);
+    lastDetailStart = Date.now();
+    return await operation();
+  });
+  detailQueue = task.catch(() => undefined);
+  return task;
+}
+
 async function fetchDetail(sourceOfferId: string) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
-  try {
-    const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
-      headers: ENCAR_HEADERS,
-      signal: controller.signal,
-    });
-    if (!response.ok) throw new Error(`encar_detail_http_${response.status}`);
-    return await response.json() as any;
-  } finally {
-    clearTimeout(timeout);
-  }
+  return pacedDetail(async () => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 25_000));
+    try {
+      const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
+        headers: ENCAR_HEADERS,
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`encar_detail_http_${response.status}`);
+      return await response.json() as any;
+    } finally {
+      clearTimeout(timeout);
+    }
+  });
 }
 
 function mergeDetail(offer: VehicleOffer, detail: any) {
