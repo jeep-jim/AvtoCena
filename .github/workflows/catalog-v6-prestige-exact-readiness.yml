@@ -96,3 +96,5 @@ jobs:
             prestige-japan-exact-parser-smoke.json
           if-no-files-found: error
           retention-days: 5
+
+# parallel-readiness-trigger: 2026-08-09T16:00Z
