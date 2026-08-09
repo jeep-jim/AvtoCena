@@ -47,6 +47,11 @@ const RULES = [
     "https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/mazda2/common/pdf/mazda2_specification_202404.pdf",
     "https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/mazda2/common/pdf/mazda2_specification_202511.pdf"
   ], "(?:^|\\s)15(?:C|S|\\s*BD|\\s*SPORT)"],
+  ["BP5P", "MAZDA", "MAZDA3", 2019, 2021, 1496, 15, 111, 82, "6BA-BP5P", [
+    "https://www2.mazda.co.jp/service/recall/sca/20210202003/",
+    "https://www.mazda.co.jp/globalassets/assets/cars/mazda3/common/pdf/mazda3_specification_202004.pdf",
+    "https://www.mazda.co.jp/globalassets/assets/cars/mazda3/common/pdf/mazda3_specification_202110.pdf"
+  ]],
   ["KSP210", "TOYOTA", "YARIS", 2020, 2025, 996, 15, 69, 51, "5BA-KSP210", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202002/10127871/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202208/10144259/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202401/10151992/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202502/10156806/"]],
   ["MXPA10", "TOYOTA", "YARIS", 2020, 2025, 1490, 15, 120, 88, "5BA-MXPA10", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202002/10127869/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202105/10137203/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202208/10144256/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202401/10151989/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202502/10156802/"]],
   ["MXPA15", "TOYOTA", "YARIS", 2020, 2025, 1490, 15, 120, 88, "5BA-MXPA15", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202004/10127879/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202105/10137240/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202208/10144268/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202401/10151990/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202502/10156801/"]],
