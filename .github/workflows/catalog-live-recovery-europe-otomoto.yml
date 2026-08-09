@@ -32,16 +32,16 @@ env:
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_OFFERS_PER_MODEL: "20"
-  CATALOG_MAX_MODELS_PER_MAKE: "10"
-  RECOVERY_TARGET: "1000"
-  RECOVERY_MAX_PAGES: "45"
-  RECOVERY_TIME_LIMIT_MS: "2700000"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_TARGET: "5000"
+  RECOVERY_MAX_PAGES: "120"
+  RECOVERY_TIME_LIMIT_MS: "5100000"
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
 
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -69,7 +69,7 @@ jobs:
     needs: collect
     if: ${{ always() && needs.collect.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -81,12 +81,12 @@ jobs:
         with:
           name: catalog-europe-otomoto-recovery
           path: recovery-input
-      - name: Publish Europe while preserving every other market
+      - name: Publish Europe cumulatively while preserving every other market
         env:
           RECOVERY_BATCH_MARKETS: europe
           RECOVERY_BATCH_INPUT_DIR: recovery-input
           RECOVERY_BATCH_REPORT: catalog-europe-otomoto-publish-report.json
-          RECOVERY_PUBLISH_MAX: "3000"
+          RECOVERY_PUBLISH_MAX: "100000"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
       - uses: actions/upload-artifact@v4
         if: always()
