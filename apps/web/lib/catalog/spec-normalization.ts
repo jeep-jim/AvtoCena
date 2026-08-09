@@ -296,10 +296,13 @@ function normalizedCurrency(offer: Partial<VehicleOffer>) {
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
   const primary = primaryText(offer);
   const full = allText(offer);
-  const engineCc = reasonable(offer.engineCc, 300, 10_000)
+  const knownPureElectricModel = String(offer.make || "").trim().toLowerCase() === "audi"
+    && /\be[- ]?tron\b/i.test(`${offer.model || ""} ${offer.trim || ""}`);
+  const parsedEngineCc = reasonable(offer.engineCc, 300, 10_000)
     || structuredEngineCc(offer)
     || inferEngineCc(primary)
     || inferEngineCc(full);
+  const engineCc = knownPureElectricModel ? undefined : parsedEngineCc;
   const powerHp = reasonable(offer.powerHp, 20, 2_500)
     || structuredPowerHp(offer)
     || inferPowerHp(primary)
@@ -310,14 +313,16 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   let fuel = inferFuel(primary)
     || offer.fuel
     || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
-  const strongElectric = /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
+  const strongElectric = knownPureElectricModel || /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
   if (engineCc && fuel === "electric" && !strongElectric) {
     fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
   }
   if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
 
+  if (knownPureElectricModel) fuel = "electric";
+
   const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;
-  const primaryPowertrainKind = inferPowertrainKind(primary, engineCc);
+  const primaryPowertrainKind = knownPureElectricModel ? "electric" : inferPowertrainKind(primary, engineCc);
   const fallbackPowertrainKind = primaryPowertrainKind !== "unknown" ? primaryPowertrainKind : inferPowertrainKind(full, engineCc);
   const inferredElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(primaryPowertrainKind)
     ? primaryPowertrainKind
