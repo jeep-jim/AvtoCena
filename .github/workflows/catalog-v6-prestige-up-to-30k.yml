@@ -21,7 +21,7 @@ concurrency:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       planned_rows: ${{ steps.plan.outputs.planned_rows }}
@@ -96,7 +96,7 @@ jobs:
     needs: [plan, chunks]
     if: ${{ always() && needs.plan.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     env:
       PRESTIGE_MERGE_INPUT_DIR: prestige-japan-chunks
       PRESTIGE_MERGE_OUTPUT: prestige-japan-exact-sold-up-to-30000.json
