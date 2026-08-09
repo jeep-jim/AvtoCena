@@ -173,6 +173,18 @@ try {
   publicationError = String(error?.message || error);
 }
 
+const postPersistByMarket = {};
+let postPersistError = "";
+if (manifest) {
+  try {
+    for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
+      postPersistByMarket[currentMarket] = (await readMarketOffers(currentMarket)).length;
+    }
+  } catch (error) {
+    postPersistError = String(error?.message || error);
+  }
+}
+
 const currentIncomingIds = new Set(incoming.keys());
 const report = {
   version: 2,
@@ -182,6 +194,9 @@ const report = {
   published: Boolean(manifest),
   generationId: manifest?.generationId || null,
   count: marketRows.length,
+  postPersistCount: Object.prototype.hasOwnProperty.call(postPersistByMarket, market) ? postPersistByMarket[market] : null,
+  postPersistByMarket,
+  postPersistError,
   incomingCount: incoming.size,
   retainedCount: marketRows.filter((offer) => !currentIncomingIds.has(offer.id)).length,
   refreshedOrNewCount: marketRows.filter((offer) => currentIncomingIds.has(offer.id)).length,
