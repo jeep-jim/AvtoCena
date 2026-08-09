@@ -35,6 +35,7 @@ env:
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
   SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.source_run_id }}
@@ -80,7 +81,7 @@ jobs:
       - name: Convert strict sold lots into exact calculated ruble cards
         env:
           PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan.json
-          PRESTIGE_RECOVERY_TARGET: "1500"
+          PRESTIGE_RECOVERY_TARGET: "3000"
           PRESTIGE_RECOVERY_CONCURRENCY: "12"
         run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
       - name: Publish Japan without touching recovered live markets
@@ -88,7 +89,7 @@ jobs:
           RECOVERY_PUBLISH_MARKET: japan
           RECOVERY_PUBLISH_INPUT: catalog-rebuild-japan.json
           RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-publish-report.json
-          RECOVERY_PUBLISH_MAX: "1500"
+          RECOVERY_PUBLISH_MAX: "3000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
       - uses: actions/upload-artifact@v4
         if: always()
