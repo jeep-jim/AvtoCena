@@ -18,6 +18,33 @@ const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_
 const minYear = new Date().getFullYear() - 15;
 const output = process.env.RECOVERY_OUTPUT || `catalog-rebuild-${market}.json`;
 const deadline = Date.now() + timeLimitMs;
+const pageRetryAttempts = Math.max(1, Math.min(8, Number(process.env.RECOVERY_DIRECT_PAGE_RETRY_ATTEMPTS || 4)));
+const pageRetryBaseMs = Math.max(1_000, Math.min(60_000, Number(process.env.RECOVERY_DIRECT_PAGE_RETRY_BASE_MS || 15_000)));
+const pageCooldownMs = Math.max(0, Math.min(60_000, Number(process.env.RECOVERY_DIRECT_PAGE_COOLDOWN_MS || (market === "uae" ? 8_000 : 0))));
+const pageRetryEvents = [];
+let pageRetryCount = 0;
+
+function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+function transientPageError(error) {
+  const message = String(error?.message || error || "");
+  return /(?:http_(?:403|408|409|425|429|5\d\d)|ETIMEDOUT|ECONNRESET|ECONNREFUSED|EAI_AGAIN|fetch failed|aborted|timeout)/i.test(message);
+}
+async function fetchPageWithRetry(currentCursor) {
+  let lastError;
+  for (let attempt = 1; attempt <= pageRetryAttempts; attempt++) {
+    try { return await source.fetchPage(currentCursor); }
+    catch (error) {
+      lastError = error;
+      const retryable = transientPageError(error);
+      if (!retryable || attempt >= pageRetryAttempts || Date.now() >= deadline) throw error;
+      const delayMs = Math.min(60_000, pageRetryBaseMs * attempt);
+      pageRetryCount++;
+      pageRetryEvents.push({ cursor: currentCursor, attempt, delayMs, error: String(error?.message || error) });
+      await sleep(delayMs);
+    }
+  }
+  throw lastError;
+}
 
 const source = market === "uae" ? dubicarsUaeCurrentSource : market === "georgia" ? autoGeorgiaStrictSource : null;
 if (!source) throw new Error(`direct_recovery_market_unsupported:${market || "missing"}`);
@@ -134,7 +161,7 @@ let normalized = 0;
 
 while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
   let page;
-  try { page = await source.fetchPage(cursor); }
+  try { page = await fetchPageWithRetry(cursor); }
   catch (error) { errors.push({ stage: "page", cursor, error: String(error?.message || error) }); break; }
   pages++;
   const rows = Array.isArray(page?.items) ? page.items : [];
@@ -178,6 +205,7 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
   }
   if (!page?.nextCursor || page?.finished) break;
   cursor = page.nextCursor;
+  if (pageCooldownMs > 0 && Date.now() < deadline) await sleep(pageCooldownMs);
 }
 
 const offers = [...accepted.values()].sort(quality).slice(0, target);
@@ -203,6 +231,10 @@ const report = {
     average: offers.length ? Number((offers.reduce((sum, offer) => sum + offer.images.length, 0) / offers.length).toFixed(2)) : 0,
   },
   rejections,
+  pageRetryAttempts,
+  pageRetryCount,
+  pageRetryEvents: pageRetryEvents.slice(0, 50),
+  pageCooldownMs,
   errors: errors.slice(0, 100),
   passed: offers.length > 0,
 };
