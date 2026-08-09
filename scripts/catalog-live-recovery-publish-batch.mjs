@@ -4,7 +4,7 @@ import path from "node:path";
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia")
   .split(",")
@@ -12,10 +12,11 @@ const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia")
   .filter(Boolean);
 const inputDir = String(process.env.RECOVERY_BATCH_INPUT_DIR || "recovery-input").trim();
 const output = String(process.env.RECOVERY_BATCH_REPORT || "catalog-direct-recovery-batch-publish-report.json").trim();
-const maxPerMarket = Math.max(1, Math.min(5_000, Number(process.env.RECOVERY_PUBLISH_MAX || 3_000)));
+const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
+const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
+const retentionCutoff = Date.now() - retentionMs;
 const minYear = new Date().getFullYear() - 15;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {
@@ -48,12 +49,26 @@ function exactSourceBound(offer) {
     && raw.recoveryCalculatedRub === true
     && raw.recoveryBodySourceOnly === true;
 }
+function publicExistingStillValid(offer) {
+  return /^https?:\/\//i.test(String(offer?.operational?.sourceUrl || ""))
+    && Number(offer?.sourcePrice || 0) > 0
+    && Boolean(String(offer?.sourceCurrency || "").trim())
+    && exactCalculation(offer);
+}
+function freshness(offer) {
+  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+}
+function withinRetention(offer) {
+  const timestamp = freshness(offer);
+  return timestamp > 0 && timestamp >= retentionCutoff;
+}
 
 function quality(a, b) {
   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
   const bp = Number(b.totalRub || 0) <= preferredMaxRub ? 0 : 1;
   return ap - bp
     || Number(b.year || 0) - Number(a.year || 0)
+    || freshness(b) - freshness(a)
     || Number(b.images?.length || 0) - Number(a.images?.length || 0)
     || Number(a.totalRub || Number.MAX_SAFE_INTEGER) - Number(b.totalRub || Number.MAX_SAFE_INTEGER)
     || String(a.id || "").localeCompare(String(b.id || ""));
@@ -86,58 +101,64 @@ function modelKey(offer) {
   const model = String(offer?.model || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
   return make && model ? `${make}|${model}` : "";
 }
-function applyDiversity(rows, rejected) {
+function applyPerModelCap(rows, rejected) {
   const selected = [];
-  const modelsByMake = new Map();
   const countByModel = new Map();
   for (const offer of rows) {
-    const make = makeKey(offer);
     const model = modelKey(offer);
-    if (!make || !model) continue;
-    const knownModels = modelsByMake.get(make) || new Set();
-    if (!knownModels.has(model) && knownModels.size >= maxModelsPerMake) {
+    if (!model) continue;
+    if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) {
       rejected.model_quota = Number(rejected.model_quota || 0) + 1;
       continue;
     }
-    if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) {
-      rejected.make_model_quota = Number(rejected.make_model_quota || 0) + 1;
-      continue;
-    }
-    knownModels.add(model);
-    modelsByMake.set(make, knownModels);
     countByModel.set(model, Number(countByModel.get(model) || 0) + 1);
     selected.push(offer);
     if (selected.length >= maxPerMarket) break;
   }
-  return selected;
+  return { selected, countByModel };
 }
 
 const selectedByMarket = new Map();
+const incomingIdsByMarket = new Map();
 const rejectedByMarket = {};
 for (const market of markets) {
   const input = path.join(inputDir, `catalog-rebuild-${market}.json`);
   const payload = JSON.parse(await fs.readFile(input, "utf8"));
   const sourceRows = Array.isArray(payload?.offers) ? payload.offers : [];
-  const seen = new Set();
-  const selected = [];
+  const incoming = new Map();
   const rejected = {};
   const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
   for (const raw of sourceRows) {
     const offer = normalizeVisible(raw);
-    if (!offer?.id || seen.has(offer.id)) continue;
-    seen.add(offer.id);
+    if (!offer?.id || incoming.has(offer.id)) continue;
     if (offer.market !== market) { reject("market"); continue; }
     const year = Number(offer.year || 0);
     if (year < minYear || year > new Date().getFullYear() + 1) { reject("year"); continue; }
     if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
     if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
     if (!exactCalculation(offer)) { reject("calculation"); continue; }
-    selected.push(offer);
+    incoming.set(offer.id, offer);
   }
-  selected.sort(quality);
-  const marketRows = applyDiversity(selected, rejected);
+
+  let previous = [];
+  try { previous = await readMarketOffers(market); } catch { previous = []; }
+  const candidates = new Map();
+  for (const raw of previous) {
+    const offer = normalizeVisible(raw);
+    const year = Number(offer?.year || 0);
+    if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
+    if (year < minYear || year > new Date().getFullYear() + 1 || !offer.make || !offer.model || !offer.images.length) continue;
+    if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
+    candidates.set(offer.id, offer);
+  }
+  for (const [id, offer] of incoming) candidates.set(id, offer);
+
+  const cumulative = [...candidates.values()].sort(quality);
+  const capped = applyPerModelCap(cumulative, rejected);
+  const marketRows = capped.selected;
   if (!marketRows.length) throw new Error(`recovery_batch_empty_market:${market}`);
   selectedByMarket.set(market, marketRows);
+  incomingIdsByMarket.set(market, new Set(incoming.keys()));
   rejectedByMarket[market] = rejected;
 }
 
@@ -151,8 +172,8 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map((offer) => normalizeVisible(offer))
-    .filter((offer) => offer.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0)
-    .slice(0, 5_000);
+    .filter((offer) => offer.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0 && withinRetention(offer))
+    .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
 }
@@ -168,8 +189,8 @@ for (const market of markets) {
   const manifestCount = Number(manifest?.markets?.[market]?.count || 0);
   if (manifestCount !== rows.length) {
     const debugReport = {
-      version: 2,
-      mode: "live_markets_exact_calculated_batch_publish",
+      version: 3,
+      mode: "live_markets_exact_calculated_cumulative_batch_publish",
       markets,
       published: false,
       generationId: manifest?.generationId || null,
@@ -181,14 +202,17 @@ for (const market of markets) {
     await fs.writeFile(output, JSON.stringify(debugReport, null, 2));
     throw new Error(debugReport.failure);
   }
+  const incomingIds = incomingIdsByMarket.get(market) || new Set();
   marketReports[market] = {
     count: rows.length,
+    incomingCount: rows.filter((offer) => incomingIds.has(offer.id)).length,
+    retainedCount: rows.filter((offer) => !incomingIds.has(offer.id)).length,
     preferredCount: rows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
     calculatedCount: rows.filter(exactCalculation).length,
     minYear,
+    retentionMs,
     preferredMaxRub,
     maxOffersPerModel,
-    maxModelsPerMake,
     distinctModels: new Set(rows.map(modelKey)).size,
     distinctMakes: new Set(rows.map(makeKey)).size,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, rows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
@@ -202,12 +226,13 @@ for (const market of markets) {
 }
 
 const report = {
-  version: 2,
-  mode: "live_markets_exact_calculated_batch_publish",
+  version: 3,
+  mode: "live_markets_exact_calculated_cumulative_batch_publish",
   markets,
   publishedAt: new Date().toISOString(),
   published: true,
   generationId: manifest.generationId,
+  retentionMs,
   byMarket: marketReports,
   preservedByMarket,
   manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)])),
