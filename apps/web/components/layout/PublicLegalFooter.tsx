@@ -13,6 +13,8 @@ const marketLinks = [
   { href: "/cars?market=korea", label: "Автомобили из Кореи" },
   { href: "/cars?market=uae", label: "Автомобили из ОАЭ" },
   { href: "/cars?market=europe", label: "Автомобили из Европы" },
+  { href: "/cars?market=georgia", label: "Автомобили из Грузии" },
+  { href: "/cars?market=kyrgyzstan", label: "Автомобили из Кыргызстана" },
 ];
 
 const budgetLinks = [
@@ -73,10 +75,10 @@ export function PublicLegalFooter() {
         <div className="ac-public-footer-navigation grid gap-8 py-7 sm:grid-cols-2 lg:grid-cols-[minmax(290px,1.25fr)_1fr_1fr_1fr] lg:gap-10 lg:py-9">
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
-            <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ и Европы.</p>
+            <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.</p>
             <div className="mt-4 flex flex-wrap gap-2">
-              <Link href="/#form" className="ac-public-footer-cta inline-flex min-h-10 items-center rounded-xl px-4 text-sm font-black">Рассчитать АвтоЦену</Link>
-              <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 items-center rounded-xl bg-white/[.07] px-4 text-sm font-black text-[var(--ac-text)] transition hover:bg-white/[.12]">🚗 Дилерам</Link>
+              <Link href="/cars" className="ac-public-footer-cta inline-flex min-h-10 items-center rounded-xl px-4 text-sm font-black" style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>Каталог автомобилей</Link>
+              <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 items-center rounded-xl bg-white/[.07] px-4 text-sm font-black text-[var(--ac-text)] transition hover:bg-white/[.12]">🚗 АвтоДилерам</Link>
             </div>
           </div>
 
@@ -86,7 +88,7 @@ export function PublicLegalFooter() {
             { href: "/", label: "Главная" },
             { href: "/cars", label: "Каталог автомобилей" },
             { href: "/favorites", label: "Избранные автомобили" },
-            { href: "/dealers", label: "🚗 Дилерам" },
+            { href: "/dealers", label: "🚗 АвтоДилерам" },
             { href: "/login", label: "Вход для сотрудников" },
           ]} />
         </div>
@@ -97,7 +99,7 @@ export function PublicLegalFooter() {
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 lg:justify-end" aria-label="Правовая информация">
             <button type="button" onClick={() => setCookieOpen(true)} className="ac-public-legal-link">Cookie</button>
             <Link href="/cars" className="ac-public-legal-link">Каталог</Link>
-            <Link href="/dealers" className="ac-public-legal-link">🚗 Дилерам</Link>
+            <Link href="/dealers" className="ac-public-legal-link">🚗 АвтоДилерам</Link>
             <Link href="/login" className="ac-public-legal-link">Вход</Link>
           </nav>
         </div>
