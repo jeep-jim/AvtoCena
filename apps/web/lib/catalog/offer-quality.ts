@@ -63,10 +63,12 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 
 function minimumImageCount(offer: VehicleOffer) {
   // Japan remains strict because auction-sheet/gallery identity is part of the
-  // completed-lot contract. Normal live-market listings may publish with one
-  // source-bound photo and enrich the same card with more photos later.
+  // completed-lot contract. Normal live-market listings are valid with one
+  // source-bound vehicle photo and may enrich the same card with more later.
+  // Do not use the current workflow's global image threshold for other markets:
+  // a strict Japan publisher must never purge preserved UAE/Georgia/KG rows.
   if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
-  return Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+  return 1;
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
