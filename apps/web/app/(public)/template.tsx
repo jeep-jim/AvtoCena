@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { LeadCaptureInteractionEnhancer } from "@/components/leads/LeadCaptureInteractionEnhancer";
 import { PublicLeadCaptureV2 } from "@/components/leads/PublicLeadCaptureV2";
 import { PublicLeadCaptureStyles } from "@/components/leads/PublicLeadCaptureStyles";
 
@@ -68,6 +69,7 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
   return <>
     {children}
     <PublicLeadCaptureV2 />
+    <LeadCaptureInteractionEnhancer />
     <PublicLeadCaptureStyles />
     <style dangerouslySetInnerHTML={{ __html: publicVisualFixes }} />
   </>;
