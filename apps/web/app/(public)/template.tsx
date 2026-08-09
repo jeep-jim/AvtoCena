@@ -2,6 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { PublicLeadCaptureV2 } from "@/components/leads/PublicLeadCaptureV2";
+import { PublicLeadCaptureStyles } from "@/components/leads/PublicLeadCaptureStyles";
 
 const publicVisualFixes = `
 /* One neutral dark canvas across every public page. This matches the footer
@@ -67,6 +68,7 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
   return <>
     {children}
     <PublicLeadCaptureV2 />
+    <PublicLeadCaptureStyles />
     <style dangerouslySetInnerHTML={{ __html: publicVisualFixes }} />
   </>;
 }
