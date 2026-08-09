@@ -88,6 +88,11 @@ jobs:
           git add scripts/catalog-live-recovery-direct-exact.mjs
           git add scripts/catalog-live-recovery-japan-prestige.mjs
           git commit -m "Fix EV hybrid classification and certified power"
+          # Validation can update tracked build metadata. The intended patch is
+          # already fully committed above, so clean only post-validation noise
+          # before rebasing onto any newer main commits.
+          git status --short
+          git reset --hard HEAD
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
