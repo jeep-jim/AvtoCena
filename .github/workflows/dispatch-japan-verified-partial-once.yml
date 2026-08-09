@@ -1,0 +1,26 @@
+name: Dispatch Japan verified Prestige partial once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/dispatch-japan-verified-partial-once.yml"
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    if: ${{ github.event.head_commit.message == 'Dispatch Japan verified partial Prestige' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Japan live recovery from verified partial artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-japan-from-prestige.yml/dispatches" \
+            -f ref=main \
+            -f 'inputs[source_run_id]=31323394021'
