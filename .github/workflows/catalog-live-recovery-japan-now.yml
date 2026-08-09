@@ -18,9 +18,12 @@ permissions:
   actions: read
   contents: read
 
+# Japan publishes by reading and preserving the other live markets too. Queue it
+# behind the other daily publishers so no workflow can restore an older market
+# snapshot while another market is publishing.
 concurrency:
-  group: catalog-live-recovery-japan
-  cancel-in-progress: true
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
