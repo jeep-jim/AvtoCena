@@ -24,7 +24,7 @@ concurrency:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       repair_count: ${{ steps.plan.outputs.repair_count }}
@@ -117,7 +117,7 @@ jobs:
     needs: [prepare, repair]
     if: ${{ always() && needs.prepare.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     env:
       PRESTIGE_REPAIR_SOURCE_DIR: prestige-source-chunks
       PRESTIGE_REPAIR_RESULT_DIR: prestige-repair-chunks
