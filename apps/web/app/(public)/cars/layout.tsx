@@ -45,6 +45,22 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         display: none;
       }
 
+      /* Keep the status card's original typography: the update line takes the old heading style, the confirmation stays the old small copy. */
+      .ac-offer-page .ac-offer-status .ac-offer-status-copy > span:first-child {
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
+        font-weight: 700 !important;
+        color: var(--ac-text) !important;
+      }
+      .ac-offer-page .ac-offer-status .ac-offer-status-copy > span:last-child {
+        margin-top: .5rem !important;
+        font-size: .75rem !important;
+        line-height: 1.25rem !important;
+        font-weight: 500 !important;
+        color: var(--ac-muted) !important;
+        white-space: normal !important;
+      }
+
       /* On desktop the offer heading may use both columns, while the price panel starts level with the main photo. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
