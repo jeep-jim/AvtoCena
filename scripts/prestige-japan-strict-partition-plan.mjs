@@ -8,9 +8,8 @@ process.env.PRESTIGE_JAPAN_DESIRED_SOLD_PER_FETCH = "20";
 const { prestigeJapanExactSource: source } = await import("../apps/web/lib/catalog/prestige-japan-exact-source.ts");
 
 const rawBudget = Math.max(1_000, Number(process.env.PRESTIGE_PLAN_RAW_BUDGET || 100_000));
-const maxPartitions = Math.max(1, Math.min(220, Number(process.env.PRESTIGE_PLAN_MAX_PARTITIONS || 120)));
-const maxMakes = Math.max(1, Math.min(30, Number(process.env.PRESTIGE_PLAN_MAX_MAKES || 10)));
-const maxModelsPerMake = Math.max(1, Math.min(30, Number(process.env.PRESTIGE_PLAN_MAX_MODELS_PER_MAKE || 10)));
+const maxPartitions = Math.max(1, Math.min(500, Number(process.env.PRESTIGE_PLAN_MAX_PARTITIONS || 220)));
+const maxMakes = Math.max(1, Math.min(100, Number(process.env.PRESTIGE_PLAN_MAX_MAKES || 100)));
 const rawPerModel = Math.max(20, Math.min(200, Number(process.env.PRESTIGE_PLAN_RAW_PER_MODEL || 60)));
 const commercial = /(?:FORK|FORKLIFT|LOADER|EXCAVATOR|TRACTOR|CRANE|DUMP|TRUCK|BUS|COASTER|DYNA|TOYOACE|DUTRO|CANTER|ELF|FORWARD|GIGA|PROFIA|FD\d|FG\d|FGL|FDL|SDK)/i;
 
@@ -21,8 +20,7 @@ for (let makeIndex = 0; makeIndex < Math.min(makes.length, maxMakes); makeIndex+
   const sourceModels = await source.models(make);
   const usableModels = sourceModels
     .map((model, modelIndex) => ({ model, modelIndex }))
-    .filter(({ model }) => !commercial.test(String(model?.name || "")))
-    .slice(0, maxModelsPerMake);
+    .filter(({ model }) => !commercial.test(String(model?.name || "")));
   makeLists.push({ make, makeIndex, models: usableModels });
 }
 
@@ -32,6 +30,10 @@ let plannedRows = 0;
 let complete = true;
 let round = 0;
 
+// Round-robin across every available make and model. We deliberately do not
+// cap the number of distinct models per make. The final catalog cap is only
+// 10–20 offers of the same make+model, which keeps variety without hiding
+// Toyota/Nissan/Honda model ranges.
 while (partitions.length < maxPartitions && plannedRows < rawBudget) {
   let anyModelInRound = false;
   for (const entry of makeLists) {
@@ -78,12 +80,11 @@ const matrix = { include: partitions };
 const report = {
   generatedAt: new Date().toISOString(),
   sourceId: "prestige_japan_auctions_open",
-  traversal: "round_robin_make_model",
+  traversal: "round_robin_all_make_models",
   rawBudget,
   rawPerModel,
   maxPartitions,
   maxMakes,
-  maxModelsPerMake,
   plannedRows,
   partitionCount: partitions.length,
   complete,
@@ -91,7 +92,7 @@ const report = {
   partitions,
 };
 await fs.writeFile("prestige-japan-strict-partition-plan.json", JSON.stringify(report, null, 2));
-console.log(JSON.stringify({ plannedRows, partitionCount: partitions.length, rawPerModel, maxModelsPerMake, complete, first: partitions.slice(0, 12), last: partitions.slice(-6) }, null, 2));
+console.log(JSON.stringify({ plannedRows, partitionCount: partitions.length, rawPerModel, maxMakes, complete, first: partitions.slice(0, 12), last: partitions.slice(-6) }, null, 2));
 
 if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify(matrix)}\nplanned_rows=${plannedRows}\npartition_count=${partitions.length}\ncomplete=${complete}\n`);
