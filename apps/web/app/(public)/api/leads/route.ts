@@ -52,6 +52,33 @@ function normalizeAttribution(value: unknown, body: Record<string, unknown>) {
   };
 }
 
+function truthy(value: unknown) {
+  return value === true || value === 1 || value === "1" || String(value || "").toLowerCase() === "true";
+}
+
+function normalizeSelectedOfferIds(value: unknown) {
+  if (!Array.isArray(value)) return [];
+  return [...new Set(value.map((item) => clean(item, 200)).filter(Boolean))].slice(0, 5);
+}
+
+function normalizeSelectedOffers(value: unknown, allowedIds: string[]) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 5).flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const row = item as Record<string, unknown>;
+    const id = clean(row.id, 200);
+    if (!id || (allowedIds.length && !allowedIds.includes(id))) return [];
+    return [{
+      id,
+      title: clean(row.title, 500),
+      totalRub: numberOrNull(row.totalRub),
+      year: numberOrNull(row.year),
+      marketLabel: clean(row.marketLabel, 160),
+      href: clean(row.href, 600),
+    }];
+  });
+}
+
 export async function GET() {
   const user = getCurrentUser();
   if (!isCrmRole(user?.role)) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
@@ -67,19 +94,47 @@ export async function POST(request: Request) {
 
   const phone = clean(body.phone, 80);
   const telegram = clean(body.telegram, 160);
+  const max = clean(body.max, 160);
   const name = clean(body.name, 300);
   const city = clean(body.city, 300);
   const comment = clean(body.comment, 2000);
+  const contactPreference = clean(body.contactPreference, 40);
+  const messenger = clean(body.messenger, 40);
+  const personalDataConsentVersion = clean(body.personalDataConsentVersion, 120);
+  const personalDataConsent = truthy(body.personalDataConsent);
+  const selectedOfferIds = normalizeSelectedOfferIds(body.selectedOfferIds);
+  const selectedOffers = normalizeSelectedOffers(body.selectedOffers, selectedOfferIds);
 
-  if (!phone && !telegram) {
+  if (personalDataConsentVersion && !personalDataConsent) {
     return NextResponse.json(
-      { ok: false, error: "phone_or_telegram_required" },
+      { ok: false, error: "personal_data_consent_required" },
+      { status: 400 }
+    );
+  }
+
+  if (contactPreference === "call" && !phone) {
+    return NextResponse.json(
+      { ok: false, error: "phone_required" },
+      { status: 400 }
+    );
+  }
+
+  if (contactPreference === "message" && !telegram && !max) {
+    return NextResponse.json(
+      { ok: false, error: "messenger_contact_required" },
+      { status: 400 }
+    );
+  }
+
+  if (!phone && !telegram && !max) {
+    return NextResponse.json(
+      { ok: false, error: "phone_or_messenger_required" },
       { status: 400 }
     );
   }
 
   const createdAt = new Date().toISOString();
-  const rawOperationId = clean(body.operationId, 120) || crypto.createHash("sha256").update(`${clean(body.offerId, 200)}:${phone}:${telegram}`).digest("hex").slice(0, 32);
+  const rawOperationId = clean(body.operationId, 120) || crypto.createHash("sha256").update(`${clean(body.offerId, 200)}:${phone}:${telegram}:${max}`).digest("hex").slice(0, 32);
   const operationId = rawOperationId.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 80);
   const clientId = operationId ? `client_${operationId}` : makeId("client");
   const leadId = operationId ? `lead_${operationId}` : makeId("lead");
@@ -108,6 +163,12 @@ export async function POST(request: Request) {
   const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
   const existingClient = operationId ? existingClients.find((client) => client.operationId === operationId || client.id === clientId || client.id === duplicate?.clientId) : null;
 
+  const consentSnapshot = personalDataConsentVersion ? {
+    personalDataConsent,
+    personalDataConsentVersion,
+    personalDataConsentAt: personalDataConsent ? createdAt : "",
+  } : {};
+
   const clientPayload = {
     id: clientId,
     operationId,
@@ -116,8 +177,12 @@ export async function POST(request: Request) {
     fio: name,
     phone,
     telegram,
+    max,
     city,
     comment,
+    contactPreference,
+    messenger,
+    ...consentSnapshot,
     source,
     partnerRef: attribution.partnerRef,
     attribution,
@@ -150,8 +215,14 @@ export async function POST(request: Request) {
     name,
     phone,
     telegram,
+    max,
     city,
     comment,
+    contactPreference,
+    messenger,
+    ...consentSnapshot,
+    selectedOfferIds,
+    selectedOffers,
     carId: offerId || clean(body.carId, 200),
     offerId,
     offerSnapshot,
@@ -186,7 +257,7 @@ export async function POST(request: Request) {
     leadId: lead.id,
     source: lead.source,
     partnerRef: lead.partnerRef,
-    text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram
+    text: lead.car || lead.comment || lead.name || lead.phone || lead.telegram || lead.max
   });
 
   const cpaEvent = await appendChunkedDataJson("cpa/events.json", {
