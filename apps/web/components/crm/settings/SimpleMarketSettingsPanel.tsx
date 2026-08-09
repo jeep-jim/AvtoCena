@@ -1,14 +1,5 @@
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { money } from "@/lib/avtocena";
-
-const MARKET_FLAGS: Record<string, string> = {
-  japan: "🇯🇵",
-  china: "🇨🇳",
-  korea: "🇰🇷",
-  uae: "🇦🇪",
-  europe: "🇪🇺",
-  georgia: "🇬🇪",
-  kyrgyzstan: "🇰🇬",
-};
 
 const paymentFields = [
   ["securityDepositRub", "Обеспечительный платёж, ₽"],
@@ -28,6 +19,8 @@ const calculationFields = [
   ["rfDeliveryRub", "Доставка по России, ₽"],
   ["otherFixedExpensesRub", "Другие расходы, ₽"],
 ] as const;
+
+const fieldLabelClass = "ac-market-setting-label grid gap-1.5 text-xs font-black uppercase tracking-[.08em]";
 
 function numberValue(value: unknown) {
   const result = Number(value);
@@ -73,7 +66,7 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-2xl" aria-hidden="true">{MARKET_FLAGS[market.id] || "🌐"}</span>
+                  <CatalogMarketFlag market={market.id} className="h-5 w-7 shrink-0" />
                   <h2 className="text-2xl font-black">{market.name}</h2>
                   <span className="rounded-full bg-emerald-400/12 px-2.5 py-1 text-[11px] font-black text-emerald-300">активна · версия {version.version || 1}</span>
                   {provisional ? <span className="rounded-full bg-amber-400/12 px-2.5 py-1 text-[11px] font-black text-amber-200">средние значения</span> : null}
@@ -102,26 +95,26 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
                   {hiddenJson("minMax", version.minMax)}
                   {hiddenJson("dealStages", version.dealStages)}
 
-                  <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42">
+                  <label className={fieldLabelClass}>
                     Валюта
                     <input name="currency" defaultValue={version.currency || ""} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                   </label>
 
                   {paymentFields.map(([name, label]) => (
-                    <label key={name} className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42">
+                    <label key={name} className={fieldLabelClass}>
                       {label}
                       <input name={name} type="number" step="1" min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                     </label>
                   ))}
 
                   {calculationFields.map(([name, label]) => (
-                    <label key={name} className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42">
+                    <label key={name} className={fieldLabelClass}>
                       {label}
                       <input name={name} type="number" step={name === "exchangeRateReservePercent" ? "0.01" : "1"} min="0" defaultValue={numberValue(version[name])} className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                     </label>
                   ))}
 
-                  <label className="grid gap-1.5 text-xs font-black uppercase tracking-[.08em] text-white/42 md:col-span-2 xl:col-span-3">
+                  <label className={`${fieldLabelClass} md:col-span-2 xl:col-span-3`}>
                     Комментарий к изменению
                     <input name="comment" placeholder="Например: обновили логистику с 1 августа" className="soft-input rounded-xl px-3 py-3 text-sm font-black normal-case tracking-normal" />
                   </label>
@@ -140,6 +133,10 @@ export function SimpleMarketSettingsPanel({ markets, canEdit }: { markets: any[]
           </details>
         );
       })}
+      <style dangerouslySetInnerHTML={{ __html: `
+        html:not([data-theme="light"]) .ac-market-setting-label{color:rgba(255,255,255,.46)!important}
+        html[data-theme="light"] .ac-market-setting-label{color:rgba(30,36,48,.58)!important}
+      ` }} />
     </div>
   );
 }
