@@ -2,11 +2,6 @@ name: Catalog live recovery · Japan now
 run-name: Immediate Japan live recovery · ${{ github.event.workflow_run.id || inputs.source_run_id || github.sha }}
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-live-recovery-japan-now.yml"
   workflow_run:
     workflows:
       - "Catalog V6 · Prestige exact sold up-to-30k"
@@ -46,7 +41,7 @@ env:
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
-  PRESTIGE_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.source_run_id || '31289609485' }}
+  PRESTIGE_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.source_run_id || '31261509359' }}
 
 jobs:
   publish-japan:
