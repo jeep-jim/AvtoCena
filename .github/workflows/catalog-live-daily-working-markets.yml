@@ -1,5 +1,5 @@
 name: Catalog live daily · working markets
-# recovery-trigger: strict EV/hybrid support 2026-08-09
+# recovery-trigger: Georgia specs + e-tron strict customs 2026-08-09
 run-name: Daily cumulative catalog · Korea China Europe Georgia · ${{ github.sha }}
 
 on:
