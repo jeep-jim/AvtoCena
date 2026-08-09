@@ -1,0 +1,69 @@
+name: Verify buyer gallery originals
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/public/buyers/**"
+      - "apps/web/components/home/HomePageClient.tsx"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-buyer-gallery-originals
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Verify originals and untouched carousel
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          expected = {
+              16: (187020, '35f9ab5f881750f9fe6ffc3af4f414287a203f23851cb1b8a6e1891df5e5acc1'),
+              17: (237069, '9ac3989c4e7663a9a51eb0bf68bd1c842f40b43f99dc23cce72d657689304a9a'),
+              18: (221967, '713b3e4135368983895141622fdce3c0f4808a6c6c082c27f01bb14ac029e89e'),
+              19: (199069, '5951ebf112e5b9a3c0b07536932193453ec9a3d2c0bbb2b2053774e451599598'),
+              20: (206658, '96491b897119876608885ea645825441aa536e7856742edfa617efdb926729a3'),
+              21: (167627, 'e43e5849634131458f7ad9cd2c4d36432233ad9ef142de39ee119f1775963309'),
+              22: (269094, '1039116331706219763880764b32b1b6ec4906108335dd86c07dc91ab6a595cc'),
+              23: (181925, 'eff198af1ab7ec0662e6f2f9eebbb86b2ef032806a8645884811c5b0f5ae03d8'),
+              24: (167363, '441824999317d5187ed24715b2885e404c1e6ca98b9a826821904403db6c6a20'),
+          }
+          rows=[]
+          for n,(size,digest) in expected.items():
+              p=Path(f'apps/web/public/buyers/{n}.jpg')
+              data=p.read_bytes()
+              actual=(len(data), hashlib.sha256(data).hexdigest())
+              if actual != (size,digest):
+                  raise SystemExit(f'{n}.jpg mismatch {actual}')
+              rows.append({'file':f'{n}.jpg','bytes':size,'sha256':digest})
+          home=Path('apps/web/components/home/HomePageClient.tsx').read_text(encoding='utf-8')
+          if 'const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);' not in home:
+              raise SystemExit('gallery count is not 24')
+          out={'verified':True,'count':24,'carouselFileTouched':False,'files':rows}
+          Path('data/buyer-gallery-originals-verified.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit verification marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/buyer-gallery-originals-verified.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Verify buyer gallery originals'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
