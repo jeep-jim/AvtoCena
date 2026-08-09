@@ -7,6 +7,7 @@ const output = process.env.PRESTIGE_OFFICIAL_OUTPUT || "prestige-japan-exact-sol
 // with an official archived model specification (engine displacement and output).
 // MAZDA2 DJLFS is additionally constrained by an explicit regular-grade title so the
 // 3BA-DJLFS 15MB 116 PS premium-fuel variant can never be matched as the 110 PS car.
+// Diesel rules must opt in explicitly; all existing rules default to petrol.
 const RULES = [
   ["SJ5", "SUBARU", "FORESTER", 2013, 2017, 1995, 15, 148, 109, "DBA-SJ5", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10085479"]],
   ["SK5", "SUBARU", "FORESTER", 2020, 2025, 1795, 15, 177, 130, "4BA-SK5", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10132246"]],
@@ -28,6 +29,16 @@ const RULES = [
     "https://www.honda.co.jp/auto-archive/civic/5door/2019/webcatalog/type/type/",
     "https://www.honda.co.jp/auto-archive/civic/5door/2021/webcatalog/type/type/"
   ]],
+  ["ND5RC", "MAZDA", "ROADSTER", 2015, 2017, 1496, 15, 131, 96, "DBA-ND5RC pre-2018 engine revision", [
+    "https://www2.mazda.co.jp/service/recall/ra/20190129001/",
+    "https://newsroom.mazda.com/ja/publicity/release/2015/201509/150924a.html",
+    "https://www.mazda.co.jp/owner_support/manual/roadster/"
+  ]],
+  ["DK5FW", "MAZDA", "CX-3", 2015, 2016, 1498, 20, 105, 77, "LDA-DK5FW", [
+    "https://www2.mazda.co.jp/service/recall/ra/20160901222/",
+    "https://newsroom.mazda.com/en/publicity/release/2014/201406/140610a.html",
+    "https://www.mazda.co.jp/owner_support/manual/cx-3/"
+  ], null, "diesel"],
   ["DJLFS", "MAZDA", "MAZDA2", 2019, 2025, 1496, 15, 110, 81, "6BA/5BA-DJLFS regular gasoline; 3BA-DJLFS 15MB excluded by grade", [
     "https://www.mazda.co.jp/globalassets/assets/cars/mazda2/common/pdf/mazda2_specification_201909.pdf",
     "https://www.mazda.co.jp/globalassets/assets/cars/mazda2/common/pdf/mazda2_specification_202105.pdf",
@@ -49,7 +60,7 @@ const RULES = [
   ["ZRE212", "TOYOTA", "COROLLA", 2019, 2022, 1797, 10, 140, 103, "3BA-ZRE212", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA/201910/10124215/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA/202107/10139387/"]],
   ...["C26", "NC26", "FC26", "FNC26"].map((code) => [code, "NISSAN", "SERENA", 2011, 2016, 1997, 15, 147, 108, `DBA-${code}`, ["https://www2.nissan.co.jp/RECALL/DATA/report3248.html", "https://history.nissan.co.jp/SERENA/C26/1011/c261011g01.html?gradeID=G01&model=SERENA"]]),
   ...["T32", "NT32"].map((code) => [code, "NISSAN", "X-TRAIL", 2014, 2021, 1997, 15, 147, 108, `DBA-${code}`, ["https://www.nissan.co.jp/RECALL/DATA/report3803.html", "https://history.nissan.co.jp/X-TRAIL/T32/1706/performance_safety/performance.html"]]),
-].map(([chassis, make, model, yearFrom, yearTo, engineCc, tolerance, powerHp, powerKw, typeCode, sourceUrls, trimPattern]) => ({ chassis, make, model, yearFrom, yearTo, engineCc, tolerance, powerHp, powerKw, typeCode, sourceUrls, trimPattern }));
+].map(([chassis, make, model, yearFrom, yearTo, engineCc, tolerance, powerHp, powerKw, typeCode, sourceUrls, trimPattern, fuel]) => ({ chassis, make, model, yearFrom, yearTo, engineCc, tolerance, powerHp, powerKw, typeCode, sourceUrls, trimPattern, fuel: fuel || "petrol" }));
 
 const upper = (value) => String(value || "").trim().toUpperCase();
 const frame = (value) => upper(value).replace(/[^A-Z0-9-]+/g, "");
@@ -75,7 +86,7 @@ for (const offer of offers) {
   offer.engineCc = rule.engineCc;
   offer.powerHp = rule.powerHp;
   offer.powerKw = rule.powerKw;
-  offer.fuel = "petrol";
+  offer.fuel = rule.fuel;
   offer.powertrainKind = "combustion";
   offer.powerDataConfidence = "documented";
   offer.powerDataSource = rule.sourceUrls[0];
@@ -88,6 +99,7 @@ for (const offer of offers) {
     recoveryOfficialEngineCc: rule.engineCc,
     recoveryOfficialPowerHp: rule.powerHp,
     recoveryOfficialPowerKw: rule.powerKw,
+    recoveryOfficialFuel: rule.fuel,
     recoveryOfficialSourceUrls: rule.sourceUrls,
     recoveryOfficialTrimPattern: rule.trimPattern || null,
   };
