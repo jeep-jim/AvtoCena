@@ -55,9 +55,9 @@ jobs:
           check("audi-q4-electro", {make:"Audi", model:"Q4 e-tron 40", trim:"Audi Q4 e-tron 40 Electro AT"}, "electric", "electric");
           check("byd-dolphin-electro", {make:"BYD", model:"Dolphin", trim:"BYD Dolphin Electro AT"}, "electric", "electric");
           check("combustion-control", {make:"Toyota", model:"Corolla", trim:"Toyota Corolla 2.0 AT", engineCc:2000, fuel:"petrol"}, "combustion", "petrol");
-          const neutral: any = normalizeVehicleOfferSpecs({make:"Tesla", model:"Model 3"});
-          console.log(JSON.stringify({label:"no-marker-control", powertrainKind:neutral.powertrainKind, fuel:neutral.fuel}));
-          if (neutral.powertrainKind === "electric") throw new Error("bare Model 3 must not become electric from Electro marker patch");
+          const neutral: any = normalizeVehicleOfferSpecs({make:"Acme", model:"Sample", trim:"Electronic package"});
+          console.log(JSON.stringify({label:"word-boundary-control", powertrainKind:neutral.powertrainKind, fuel:neutral.fuel}));
+          if (neutral.powertrainKind === "electric" || neutral.fuel === "electric") throw new Error("electronic must not match exact Electro token");
           TS
           npx tsx /tmp/assert-electro.mts
           npm run typecheck
