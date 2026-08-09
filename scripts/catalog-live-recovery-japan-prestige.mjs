@@ -53,21 +53,36 @@ function uniqueNumberArray(rows, selector) {
 async function uniqueVariantEnrich(offer) {
   const engineCc = Number(offer?.engineCc || 0);
   const year = Number(offer?.year || 0);
-  if (!(engineCc > 0) || !year) return offer;
+  if (!year) return offer;
   const match = await findVehicleModel(offer).catch(() => null);
   if (!match) return offer;
   const allVariants = await readVehicleKnowledgeVariants().catch(() => []);
-  const variants = allVariants.filter((variant) => {
+  const baseVariants = allVariants.filter((variant) => {
     if (variant.active === false || variant.modelId !== match.model.id) return false;
     if (variant.yearFrom && year < variant.yearFrom) return false;
     if (variant.yearTo && year > variant.yearTo) return false;
-    if (!(Number(variant.engineCc || 0) > 0)) return false;
-    const tolerance = Math.max(20, Number(variant.engineCcTolerance || 80));
-    if (Math.abs(Number(variant.engineCc) - engineCc) > tolerance) return false;
     if (!compatibleText(variant.transmission, offer.transmission)) return false;
     if (!compatibleText(variant.fuel, offer.fuel)) return false;
     return true;
   });
+  let variants = [];
+  if (engineCc > 0) {
+    variants = baseVariants.filter((variant) => {
+      if (!(Number(variant.engineCc || 0) > 0)) return false;
+      const tolerance = Math.max(20, Number(variant.engineCcTolerance || 80));
+      return Math.abs(Number(variant.engineCc) - engineCc) <= tolerance;
+    });
+  } else {
+    // Source-side EV auction results legitimately have no engine displacement.
+    // Allow that only for an unambiguous exact/alias model match where every
+    // active year-compatible knowledge variant is explicitly electric and
+    // itself has no combustion displacement. This cannot turn mixed ICE/EV
+    // model families into EVs by inference.
+    const strictModelMatch = match.matchedBy !== "text" && Number(match.score || 0) >= 120;
+    const allExplicitElectric = baseVariants.length > 0 && baseVariants.every((variant) =>
+      String(variant.powertrainKind || "") === "electric" && !(Number(variant.engineCc || 0) > 0));
+    if (strictModelMatch && allExplicitElectric) variants = baseVariants;
+  }
   if (!variants.length) return offer;
 
   const powerHp = Number(offer.powerHp || 0) || uniqueNumber(variants, (variant) => variant.powerHp);
@@ -81,7 +96,7 @@ async function uniqueVariantEnrich(offer) {
   const power30MinKw = Number(offer.power30MinKw || 0) || uniqueNumber(variants, (variant) => variant.power30MinKw);
   const power30MinKwByMotor = offer.power30MinKwByMotor?.length ? offer.power30MinKwByMotor : uniqueNumberArray(variants, (variant) => variant.power30MinKwByMotor);
   const utilizationPowerKw = Number(offer.utilizationPowerKw || 0) || uniqueNumber(variants, (variant) => variant.utilizationPowerKw);
-  const enriched = Boolean(powerHp || power30MinKw || utilizationPowerKw || icePowerKw);
+  const enriched = Boolean(powerHp || power30MinKw || utilizationPowerKw || icePowerKw || powertrainKind === "electric");
 
   return normalizeVehicleOfferSpecs({
     ...offer,
@@ -103,7 +118,10 @@ async function uniqueVariantEnrich(offer) {
       raw: {
         ...(offer.operational?.raw || {}),
         recoveryVariantIds: variants.map((variant) => variant.id).slice(0, 30),
-        recoveryVariantEngineCc: engineCc,
+        recoveryVariantEngineCc: engineCc || null,
+        recoveryEngineLessElectricKnowledge: engineCc <= 0 && powertrainKind === "electric",
+        recoveryVehicleModelMatchScore: match.score,
+        recoveryVehicleModelMatchedBy: match.matchedBy,
         recoveryUniquePowerHp: powerHp || null,
         recoveryUniquePower30MinKw: power30MinKw || null,
         recoveryUniqueUtilizationPowerKw: utilizationPowerKw || null,
@@ -179,11 +197,12 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   if (!EXACT_URL.test(String(op.sourceUrl || ""))) { reject("source_url"); return null; }
   if (offer.images.length < 5 || offer.images.some((image) => !EXACT_IMAGE.test(String(image?.url || "")))) { reject("images"); return null; }
   if (COMMERCIAL_RE.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""}`)) { reject("commercial"); return null; }
-  if (!(Number(offer.engineCc || 0) > 0)) { reject("engine_cc"); return null; }
   offer = await uniqueVariantEnrich(offer);
-  if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {
-    offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
-  }
+  // Certified documents may also classify a source-exact make/model/year
+  // as electrified; calling this unconditionally is safe because the
+  // reference matcher requires an exact make/model plus verified document.
+  offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
+  if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }
   let calculated;
   try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
   catch { reject("calculation_exception"); return null; }
