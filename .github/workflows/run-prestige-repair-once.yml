@@ -1,0 +1,21 @@
+name: Launch repaired Prestige source preparation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/run-prestige-repair-once.yml"
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch repaired Prestige chunk recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run catalog-v6-prestige-repair.yml --ref main -f source_run_id=31289609485
