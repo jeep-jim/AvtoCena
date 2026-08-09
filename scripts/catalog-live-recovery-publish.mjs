@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -44,7 +44,8 @@ function publicExistingStillValid(offer) {
   return /^https?:\/\//i.test(String(offer?.operational?.sourceUrl || ""))
     && Number(offer?.sourcePrice || 0) > 0
     && Boolean(String(offer?.sourceCurrency || "").trim())
-    && exactCalculation(offer);
+    && exactCalculation(offer)
+    && isCatalogOfferBusinessLiquid(offer);
 }
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
@@ -116,6 +117,7 @@ for (const raw of sourceRows) {
   if (offer.market !== market) { reject("market"); continue; }
   const year = Number(offer.year || 0);
   if (year < minYear || year > new Date().getFullYear() + 1) { reject("year"); continue; }
+  if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
   if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
   if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
   if (!exactCalculation(offer)) { reject("calculation"); continue; }
@@ -154,7 +156,7 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map(normalizeVisible)
-    .filter((offer) => offer.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0 && withinRetention(offer))
+    .filter((offer) => offer.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0 && withinRetention(offer) && isCatalogOfferBusinessLiquid(offer))
     .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
