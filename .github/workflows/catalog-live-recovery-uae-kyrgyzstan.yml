@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - ".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml"
+      - "scripts/catalog-live-recovery-market.mjs"
       - "scripts/catalog-live-recovery-kyrgyzstan-direct.mjs"
       - "scripts/catalog-live-recovery-direct-exact.mjs"
       - "scripts/catalog-live-recovery-publish.mjs"
@@ -37,10 +38,14 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_OFFERS_PER_MODEL: "20"
   CATALOG_OFFER_RETENTION_MS: "259200000"
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+  RECOVERY_RETRY_ATTEMPTS: "4"
+  RECOVERY_PREPARE_CONCURRENCY: "6"
 
 jobs:
   validate:
@@ -54,6 +59,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: |
+          node --check scripts/catalog-live-recovery-market.mjs
           node --check scripts/catalog-live-recovery-direct-exact.mjs
           node --check scripts/catalog-live-recovery-kyrgyzstan-direct.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
@@ -91,6 +97,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
+      RECOVERY_MARKET: kyrgyzstan
+      RECOVERY_SOURCE_IDS: mashina_kyrgyzstan_exact
       RECOVERY_OUTPUT: catalog-rebuild-kyrgyzstan.json
       RECOVERY_TARGET: "5000"
       RECOVERY_MAX_PAGES: "240"
@@ -102,8 +110,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect exact Mashina.kg cards and safely enrich calculation fields
-        run: npx tsx scripts/catalog-live-recovery-kyrgyzstan-direct.mjs
+      - name: Collect exact Mashina.kg cards with exact detail specs before calculation
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
