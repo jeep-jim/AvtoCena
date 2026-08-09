@@ -27,8 +27,9 @@ async function pool(rows, limit, worker) {
 
 const firstStarted = Date.now();
 const first = await source.fetchPage();
-const rows = Array.isArray(first?.items) ? first.items : [];
-console.log(JSON.stringify({event:"first_page", elapsedMs:Date.now()-firstStarted, rows:rows.length, nextCursor:first?.nextCursor || null}));
+const rawRows = Array.isArray(first?.items) ? first.items : [];
+const rows = rawRows.map((raw) => source.normalizeOffer(raw)).filter(Boolean);
+console.log(JSON.stringify({event:"first_page", elapsedMs:Date.now()-firstStarted, rawRows:rawRows.length, normalizedRows:rows.length, nextCursor:first?.nextCursor || null, sampleIds:rows.slice(0,3).map((row)=>row.sourceOfferId)}));
 if (!rows.length || !first?.nextCursor) throw new Error("encar_first_page_missing");
 
 let detailOk = 0;
