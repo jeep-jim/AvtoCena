@@ -1,0 +1,75 @@
+name: Validate Kyrgyzstan AMT displacement parsing
+
+on:
+  push:
+    branches:
+      - fix/kyrgyzstan-amt-engine-token
+    paths:
+      - ".github/workflows/validate-kyrgyzstan-amt-engine-token.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Add exact AMT marker to Mashina displacement parser
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts')
+          text = p.read_text()
+          old = 'A\\/?T|M\\/?T|AT|MT|CVT|DCT|DSG|hyb'
+          new = 'A\\/?T|M\\/?T|AT|MT|AMT|CVT|DCT|DSG|hyb'
+          if text.count(old) != 2:
+              raise SystemExit(f'expected two transmission-marker anchors, got {text.count(old)}')
+          p.write_text(text.replace(old, new))
+          PY
+      - name: Assert engine and model parsing
+        shell: bash
+        run: |
+          cat > /tmp/assert-kg-amt.mts <<'TS'
+          import { parseMashinaExplicitEngineLiters, parseMashinaListingMarkup } from "${{ github.workspace }}/apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts";
+          const exact: Array<[string, number]> = [
+            ["Hyundai Kona I 1.6 AMT", 1.6],
+            ["Geely Binyue Cool 1.5 AMT", 1.5],
+            ["Volkswagen Tiguan III (China Market) 2.0 AMT", 2.0],
+            ["Changan X5 Plus 1.5 AMT", 1.5],
+          ];
+          for (const [text, expected] of exact) {
+            const actual = parseMashinaExplicitEngineLiters(text);
+            console.log(JSON.stringify({text, actual}));
+            if (actual !== expected) throw new Error(`${text}: ${actual} != ${expected}`);
+          }
+          for (const text of ["Tesla Model 3 AMT", "Audi Q5 AMT", "Mazda CX-5 AMT"]) {
+            const actual = parseMashinaExplicitEngineLiters(text);
+            console.log(JSON.stringify({text, actual}));
+            if (actual !== 0) throw new Error(`${text}: bare model number became displacement`);
+          }
+          const html = `<a href="/details/volkswagen-tiguan-abcdef123456789012345678">Volkswagen Tiguan III (China Market) 2.0 AMT</a> 2026 $25000 <img src="https://example.com/tiguan.jpg">`;
+          const rows = parseMashinaListingMarkup(html, "https://mashina.kg/search/all/");
+          console.log(JSON.stringify(rows));
+          if (rows.length !== 1) throw new Error(`synthetic listing rows=${rows.length}`);
+          if (rows[0].engineCc !== 2000) throw new Error(`synthetic engineCc=${rows[0].engineCc}`);
+          if (/2\.0|AMT/i.test(rows[0].model)) throw new Error(`engine token leaked into model=${rows[0].model}`);
+          TS
+          npx tsx /tmp/assert-kg-amt.mts
+          npm run typecheck
+      - name: Commit validated parser patch to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts
+          git commit -m "Parse explicit AMT displacement tokens on Mashina"
+          git push origin HEAD:fix/kyrgyzstan-amt-engine-token
