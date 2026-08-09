@@ -62,8 +62,14 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p prestige-input
-          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | tail -n1)"
+          # A rerun of one failed repair job creates another artifact with the
+          # same name under the same workflow run. GitHub returns artifacts in
+          # API order, not oldest-to-newest order; selecting the last line can
+          # therefore pick the stale failed-attempt aggregate. Artifact IDs are
+          # monotonic, so always take the highest matching ID.
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | sort -n | tail -n1)"
           test -n "$artifact_id"
+          echo "Using repaired Prestige artifact id=$artifact_id from run=$SOURCE_RUN_ID"
           curl --fail --silent --show-error --location \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
