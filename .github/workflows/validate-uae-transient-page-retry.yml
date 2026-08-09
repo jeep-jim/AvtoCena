@@ -1,0 +1,123 @@
+name: Validate UAE transient page retry
+
+on:
+  push:
+    branches:
+      - "fix/uae-transient-page-retry"
+    paths:
+      - ".github/workflows/validate-uae-transient-page-retry.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_MAX_OFFERS_PER_MODEL: "20"
+      RECOVERY_DIRECT_MARKET: uae
+      RECOVERY_OUTPUT: uae-transient-retry-smoke.json
+      RECOVERY_TARGET: "20"
+      RECOVERY_MAX_PAGES: "6"
+      RECOVERY_TIME_LIMIT_MS: "1200000"
+      RECOVERY_DIRECT_PAGE_RETRY_ATTEMPTS: "4"
+      RECOVERY_DIRECT_PAGE_RETRY_BASE_MS: "15000"
+      RECOVERY_DIRECT_PAGE_COOLDOWN_MS: "8000"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply bounded transient page retry
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/catalog-live-recovery-direct-exact.mjs')
+          text = p.read_text()
+          anchor = 'const deadline = Date.now() + timeLimitMs;\n'
+          insert = '''const deadline = Date.now() + timeLimitMs;
+          const pageRetryAttempts = Math.max(1, Math.min(8, Number(process.env.RECOVERY_DIRECT_PAGE_RETRY_ATTEMPTS || 4)));
+          const pageRetryBaseMs = Math.max(1_000, Math.min(60_000, Number(process.env.RECOVERY_DIRECT_PAGE_RETRY_BASE_MS || 15_000)));
+          const pageCooldownMs = Math.max(0, Math.min(60_000, Number(process.env.RECOVERY_DIRECT_PAGE_COOLDOWN_MS || (market === "uae" ? 8_000 : 0))));
+          const pageRetryEvents = [];
+          let pageRetryCount = 0;
+
+          function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+          function transientPageError(error) {
+            const message = String(error?.message || error || "");
+            return /(?:http_(?:403|408|409|425|429|5\\d\\d)|ETIMEDOUT|ECONNRESET|ECONNREFUSED|EAI_AGAIN|fetch failed|aborted|timeout)/i.test(message);
+          }
+          async function fetchPageWithRetry(currentCursor) {
+            let lastError;
+            for (let attempt = 1; attempt <= pageRetryAttempts; attempt++) {
+              try { return await source.fetchPage(currentCursor); }
+              catch (error) {
+                lastError = error;
+                const retryable = transientPageError(error);
+                if (!retryable || attempt >= pageRetryAttempts || Date.now() >= deadline) throw error;
+                const delayMs = Math.min(60_000, pageRetryBaseMs * attempt);
+                pageRetryCount++;
+                pageRetryEvents.push({ cursor: currentCursor, attempt, delayMs, error: String(error?.message || error) });
+                await sleep(delayMs);
+              }
+            }
+            throw lastError;
+          }
+          '''
+          if text.count(anchor) != 1:
+              raise SystemExit(f'deadline anchor count={text.count(anchor)}')
+          text = text.replace(anchor, insert, 1)
+          old = '  try { page = await source.fetchPage(cursor); }\n  catch (error) { errors.push({ stage: "page", cursor, error: String(error?.message || error) }); break; }'
+          new = '  try { page = await fetchPageWithRetry(cursor); }\n  catch (error) { errors.push({ stage: "page", cursor, error: String(error?.message || error) }); break; }'
+          if text.count(old) != 1:
+              raise SystemExit(f'fetch anchor count={text.count(old)}')
+          text = text.replace(old, new, 1)
+          old = '  cursor = page.nextCursor;\n}'
+          new = '  cursor = page.nextCursor;\n  if (pageCooldownMs > 0 && Date.now() < deadline) await sleep(pageCooldownMs);\n}'
+          if text.count(old) != 1:
+              raise SystemExit(f'cursor anchor count={text.count(old)}')
+          text = text.replace(old, new, 1)
+          old = '  errors: errors.slice(0, 100),\n  passed: offers.length > 0,'
+          new = '  pageRetryAttempts,\n  pageRetryCount,\n  pageRetryEvents: pageRetryEvents.slice(0, 50),\n  pageCooldownMs,\n  errors: errors.slice(0, 100),\n  passed: offers.length > 0,'
+          if text.count(old) != 1:
+              raise SystemExit(f'report anchor count={text.count(old)}')
+          text = text.replace(old, new, 1)
+          p.write_text(text)
+          PY
+      - name: Validate patched source
+        run: |
+          node --check scripts/catalog-live-recovery-direct-exact.mjs
+          npm run typecheck
+      - name: Live UAE smoke without publishing
+        run: npx tsx scripts/catalog-live-recovery-direct-exact.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uae-transient-retry-smoke
+          path: uae-transient-retry-smoke.json
+          if-no-files-found: warn
+          retention-days: 3
+      - name: Commit validated retry patch to branch
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-direct-exact.mjs
+          git commit -m "Retry transient UAE source pages" || exit 0
+          git push origin HEAD:fix/uae-transient-page-retry
