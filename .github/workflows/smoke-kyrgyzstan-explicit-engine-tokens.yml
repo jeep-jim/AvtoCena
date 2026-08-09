@@ -1,0 +1,54 @@
+name: Smoke Kyrgyzstan explicit engine tokens
+
+on:
+  push:
+    branches:
+      - "fix/kyrgyzstan-explicit-engine-tokens"
+    paths:
+      - ".github/workflows/smoke-kyrgyzstan-explicit-engine-tokens.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_MAX_OFFERS_PER_MODEL: "20"
+      RECOVERY_MARKET: kyrgyzstan
+      RECOVERY_SOURCE_IDS: mashina_kyrgyzstan_exact
+      RECOVERY_OUTPUT: kyrgyzstan-explicit-token-smoke.json
+      RECOVERY_TARGET: "50"
+      RECOVERY_MAX_PAGES: "35"
+      RECOVERY_TIME_LIMIT_MS: "1200000"
+      RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+      RECOVERY_RETRY_ATTEMPTS: "4"
+      RECOVERY_PREPARE_CONCURRENCY: "4"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --check apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts
+      - name: Live Mashina smoke without publishing
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kyrgyzstan-explicit-token-smoke
+          path: kyrgyzstan-explicit-token-smoke.json
+          if-no-files-found: warn
+          retention-days: 3
