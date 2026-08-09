@@ -7,6 +7,8 @@ const urls = [
 const headers = {
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
   "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+  origin: "https://fem.encar.com",
+  referer: `https://fem.encar.com/cars/detail/${encodeURIComponent(id)}`,
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
 };
 function uniq(values) { return [...new Set(values.filter(Boolean))]; }
@@ -26,8 +28,8 @@ for (const url of urls) {
         const js = await jsResponse.text();
         const hits = uniq([
           ...[...js.matchAll(/https?:\\?\/\\?\/api\.encar\.com[^"'`\\\s]+/gi)].map((m)=>m[0].replace(/\\\//g,"/")),
-          ...[...js.matchAll(/\/(?:v\d+\/)?(?:readside|vehicle|vehicles|cars|car)[A-Za-z0-9_?=&{}.$/:-]{1,180}/g)].map((m)=>m[0]),
-        ]).filter((value)=>/vehicle|car|readside|api\.encar/i.test(value)).slice(0,100);
+          ...[...js.matchAll(/\/(?:v\d+\/)?(?:readside|vehicle|vehicles|cars|car)[A-Za-z0-9_?=&{}.$/,:+-]{1,220}/g)].map((m)=>m[0]),
+        ]).filter((value)=>/vehicle|car|readside|api\.encar/i.test(value)).slice(0,120);
         if (hits.length) console.log(JSON.stringify({event:"script_hits", jsUrl, status:jsResponse.status, bytes:js.length, hits}));
       } catch (error) {
         console.log(JSON.stringify({event:"script_error", jsUrl, message:String(error?.message || error)}));
@@ -35,5 +37,25 @@ for (const url of urls) {
     }
   } catch (error) {
     console.log(JSON.stringify({event:"page_error", url, elapsedMs:Date.now()-started, name:error?.name||null, message:String(error?.message||error), cause:String(error?.cause?.message||error?.cause||"")}));
+  }
+}
+
+const apiUrls = [
+  `https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(id)}`,
+  `https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(id)}?include=PHOTOS`,
+  `https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(id)}?include=ADVERTISEMENT,CATEGORY,CONDITION,CONTACT,MANAGE,OPTIONS,PHOTOS,SPEC,PARTNERSHIP,CENTER,VIEW`,
+  `https://api.encar.com/v1/readside/vehicles/view?vehicleIds=${encodeURIComponent(id)}`,
+];
+for (const url of apiUrls) {
+  const started = Date.now();
+  try {
+    const response = await fetch(url, {headers:{...headers, accept:"application/json, text/plain, */*"}, redirect:"follow"});
+    const body = await response.text();
+    let json = null;
+    try { json = JSON.parse(body); } catch {}
+    const galleryStrings = uniq([...body.matchAll(/https?:\\?\/\\?\/[^"'\\\s]+(?:jpe?g|png|webp)[^"'\\\s]*/gi)].map((m)=>m[0].replace(/\\\//g,"/"))).slice(0,10);
+    console.log(JSON.stringify({event:"api_probe", url, status:response.status, ok:response.ok, contentType:response.headers.get("content-type"), bytes:body.length, elapsedMs:Date.now()-started, topKeys:json && typeof json === "object" ? Object.keys(json).slice(0,40) : [], galleryStrings, head:body.slice(0,1000).replace(/\s+/g," ")}));
+  } catch (error) {
+    console.log(JSON.stringify({event:"api_error", url, elapsedMs:Date.now()-started, name:error?.name||null, message:String(error?.message||error), cause:String(error?.cause?.message||error?.cause||"")}));
   }
 }
