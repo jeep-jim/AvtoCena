@@ -7,6 +7,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
 const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-repaired.json";
@@ -180,6 +181,9 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   if (COMMERCIAL_RE.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""}`)) { reject("commercial"); return null; }
   if (!(Number(offer.engineCc || 0) > 0)) { reject("engine_cc"); return null; }
   offer = await uniqueVariantEnrich(offer);
+  if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {
+    offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
+  }
   let calculated;
   try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
   catch { reject("calculation_exception"); return null; }
@@ -226,6 +230,9 @@ const report = {
   distinctMakes: finalSelection.distinctMakes,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
+  electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
+  hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,
+  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
   rejected,
   passed: offers.length > 0,
 };

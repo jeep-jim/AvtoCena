@@ -104,7 +104,11 @@ function matchesFilters(offer: any, common: any) {
   if (common.engineTo && (!engine || engine > common.engineTo)) return false;
   if (common.powerFrom && power < common.powerFrom) return false;
   if (common.powerTo && (!power || power > common.powerTo)) return false;
-  if (common.fuel && String(offer.fuel || "") !== common.fuel) return false;
+  if (common.fuel) {
+    const kind = String(offer.powertrainKind || "");
+    const canonicalFuel = kind === "electric" ? "electric" : ["series_hybrid", "other_hybrid"].includes(kind) ? "hybrid" : String(offer.fuel || "");
+    if (canonicalFuel !== common.fuel) return false;
+  }
   if (common.transmission && String(offer.transmission || "") !== common.transmission) return false;
   if (common.drive && String(offer.drive || "") !== common.drive) return false;
   if (common.bodyType && String(offer.bodyType || "") !== common.bodyType) return false;

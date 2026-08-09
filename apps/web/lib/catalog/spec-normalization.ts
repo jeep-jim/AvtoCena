@@ -101,7 +101,7 @@ function findStructuredNumbers(value: unknown, keys: string[], depth = 0): numbe
 }
 
 function inferFuel(text: string) {
-  if (/phev|plug[ -]?in|hybrid|hev|mhev|reev|erev|range extender|гибрид|混合动力|增程|하이브리드/.test(text)) return "hybrid";
+  if (/\b(?:phev|hev|mhev|reev|erev)\b|plug[ -]?in|hybrid|\be[- ]?power\b|range extender|гибрид|混合动力|增程|하이브리드/.test(text)) return "hybrid";
   if (/diesel|tdi|crdi|d-4d|d4d|bluehdi|dci|hdi|дизел|柴油|디젤/.test(text)) return "diesel";
   if (/lpg|cng|gpl|газ/.test(text)) return "lpg";
   if (/petrol|gasoline|benzin|essence|gdi|mpi|tgdi|tsi|tfsi|бензин|汽油|가솔린/.test(text)) return "petrol";
@@ -110,7 +110,7 @@ function inferFuel(text: string) {
 }
 
 function inferPowertrainKind(text: string, engineCc?: number): PowertrainKind {
-  if (/series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev)\b|последовательн\w*\s+гибрид|增程/.test(text)) return "series_hybrid";
+  if (/series[ -]?hybrid|range[ -]?extender|\be[- ]?power\b|\b(?:reev|erev)\b|последовательн\w*\s+гибрид|增程/.test(text)) return "series_hybrid";
   if (/plug[ -]?in|\bphev\b|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|hybrid|混合动力|하이브리드/.test(text)) return "other_hybrid";
   if (/battery[ -]?electric|pure[ -]?electric|\bbev\b|\bev\b|электромоб|纯电|전기차/.test(text) && !engineCc) return "electric";
   if (engineCc || /petrol|gasoline|diesel|бензин|дизел|汽油|柴油|가솔린|디젤/.test(text)) return "combustion";
@@ -316,9 +316,18 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   }
   if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
 
-  const powertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown"
-    ? offer.powertrainKind
-    : inferPowertrainKind(`${primary} ${full}`, engineCc);
+  const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;
+  const primaryPowertrainKind = inferPowertrainKind(primary, engineCc);
+  const fallbackPowertrainKind = primaryPowertrainKind !== "unknown" ? primaryPowertrainKind : inferPowertrainKind(full, engineCc);
+  const inferredElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(primaryPowertrainKind)
+    ? primaryPowertrainKind
+    : undefined;
+  const powertrainKind = inferredElectrified || explicitPowertrainKind || fallbackPowertrainKind;
+  if (powertrainKind === "electric") fuel = "electric";
+  else if (["series_hybrid", "other_hybrid"].includes(powertrainKind)) fuel = "hybrid";
+  else if (powertrainKind === "combustion" && fuel === "hybrid" && primaryPowertrainKind === "combustion") {
+    fuel = inferFuel(primary.replace(/hybrid|\b(?:phev|hev|mhev|reev|erev)\b|\be[- ]?power\b/gi, " ")) || offer.fuel || inferFuel(full) || fuel;
+  }
   const thirtyMinute = exactThirtyMinutePowers(offer, full);
   const power30MinKwByMotor = thirtyMinute.values.length ? thirtyMinute.values : undefined;
   const power30MinKw = power30MinKwByMotor?.length

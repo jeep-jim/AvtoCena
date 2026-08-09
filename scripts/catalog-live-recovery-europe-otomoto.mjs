@@ -5,6 +5,7 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 
 const { otomotoEuropeDetailSource: source } = await import("../apps/web/lib/catalog/otomoto-detail-source.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
@@ -153,6 +154,9 @@ while (pages < maxPages && Date.now() < deadline) {
     if (!exactImages.length) { reject(rejections, "exact_images"); continue; }
     offer.images = exactImages;
     offer = await fillOnlyUnambiguousSpecs(offer);
+    if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {
+      offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
+    }
     let calculated;
     try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
     catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: String(error?.message || error) }); reject(rejections, "calculation_exception"); continue; }
@@ -202,6 +206,9 @@ const report = {
   seen,
   normalized,
   count: offers.length,
+  electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
+  hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,
+  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
   distinctModels: new Set(offers.map(modelKey)).size,
