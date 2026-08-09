@@ -1,0 +1,130 @@
+name: Validate AUTO.GE exact engine label recovery
+
+on:
+  push:
+    branches:
+      - fix/georgia-auto-ge-engine-label
+    paths:
+      - ".github/workflows/fix-georgia-engine-label-once.yml"
+
+permissions:
+  contents: write
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+  RECOVERY_RETRY_ATTEMPTS: "3"
+  RECOVERY_PREPARE_CONCURRENCY: "4"
+
+jobs:
+  patch-and-live-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch exact AUTO.GE detail labels
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/catalog-live-recovery-market.mjs')
+          text = p.read_text()
+          old = '''  const sourceText = autoGeorgiaPlainText(markup);
+          const cc = autoGeorgiaInteger(sourceText.match(/([0-9][0-9\\s,.']{2,5})\\s*(?:cc|cm3|cm³)/i)?.[1]);
+          const liters = Number(sourceText.match(/\\b([0-9]+(?:[.,][0-9]+)?)\\s*(?:L|liter|litre)\\b/i)?.[1]?.replace(",", ".") || 0);
+          const hp = autoGeorgiaInteger(sourceText.match(/\\b([0-9]{2,4})\\s*(?:HP|PS|horsepower)\\b/i)?.[1]);
+          if (!(Number(offer.engineCc || 0) > 0)) offer.engineCc = cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : offer.engineCc);
+          if (!(Number(offer.powerHp || 0) > 0) && hp) {
+            offer.powerHp = hp;
+            offer.powerKw ||= Math.round((hp / 1.359621617) * 10) / 10;
+          }
+'''
+          new = '''  const sourceText = autoGeorgiaPlainText(markup);
+          const cc = autoGeorgiaInteger(sourceText.match(/([0-9][0-9\\s,.']{2,5})\\s*(?:cc|cm3|cm³)/i)?.[1]);
+          const liters = Number(sourceText.match(/\\b([0-9]+(?:[.,][0-9]+)?)\\s*(?:L|liter|litre)\\b/i)?.[1]?.replace(",", ".") || 0);
+          // AUTO.GE exact detail pages expose displacement as a labelled value such as
+          // "Engine 1.5" rather than "1.5 L". Read only that exact source label;
+          // never infer displacement from model names or unrelated numbers.
+          const engineLabelLiters = Number(sourceText.match(/\\bEngine\\s+([0-9]+(?:[.,][0-9]+)?)\\b/i)?.[1]?.replace(",", ".") || 0);
+          const exactEngineCc = cc
+            || (engineLabelLiters >= 0.3 && engineLabelLiters <= 15 ? Math.round(engineLabelLiters * 1_000) : undefined)
+            || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined);
+          const hp = autoGeorgiaInteger(sourceText.match(/\\b([0-9]{2,4})\\s*(?:HP|PS|horsepower)\\b/i)?.[1]);
+          const exactFuel = sourceText.match(/\\bFuel\\s+(Hybrid Engine|ELECTRIC|Electric|Gasoline|Petrol|Diesel|COMPRESSED NATURAL GAS|CNG|LPG|Gas|Other)\\b/i)?.[1];
+          const exactTransmission = sourceText.match(/\\bTransmission\\s+(Automatic|Manual|Automanual|CVT|Variator|Robot)\\b/i)?.[1];
+          const exactDrive = sourceText.match(/\\bDrive Train\\s+(Front-wheel Drive|Rear-wheel Drive|All-wheel Drive|4WD|AWD|2WD)\\b/i)?.[1];
+          if (!(Number(offer.engineCc || 0) > 0) && exactEngineCc) offer.engineCc = exactEngineCc;
+          if (exactFuel) offer.fuel = exactFuel;
+          if (!offer.transmission && exactTransmission) offer.transmission = exactTransmission;
+          if (!offer.drive && exactDrive) offer.drive = exactDrive;
+          if (!(Number(offer.powerHp || 0) > 0) && hp) {
+            offer.powerHp = hp;
+            offer.powerKw ||= Math.round((hp / 1.359621617) * 10) / 10;
+          }
+'''
+          if text.count(old) != 1:
+              raise SystemExit(f'expected one AUTO.GE detail-spec anchor, got {text.count(old)}')
+          p.write_text(text.replace(old, new, 1))
+          PY
+      - name: Validate syntax and types
+        run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo || true
+      - name: Live AUTO.GE strict collector smoke without publishing
+        env:
+          RECOVERY_MARKET: georgia
+          RECOVERY_SOURCE_IDS: auto_georgia_open
+          RECOVERY_OUTPUT: georgia-live-smoke.json
+          RECOVERY_TARGET: "3"
+          RECOVERY_MAX_PAGES: "12"
+          RECOVERY_TIME_LIMIT_MS: "900000"
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - name: Require real exact calculated Georgia progress
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync('georgia-live-smoke.json','utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const report = data.reports?.[0] || data.report?.sources?.[0] || null;
+          console.log(JSON.stringify({count:offers.length, report, sample:offers.slice(0,5).map(o=>({make:o.make,model:o.model,year:o.year,engineCc:o.engineCc,powerHp:o.powerHp,fuel:o.fuel,powertrainKind:o.powertrainKind,totalRub:o.totalRub,url:o.operational?.sourceUrl,images:o.images?.length}))},null,2));
+          if (offers.length < 1) process.exit(1);
+          for (const o of offers) {
+            if (!/^https?:\/\/(?:www\.)?auto\.ge\//i.test(String(o.operational?.sourceUrl || ''))) process.exit(2);
+            if (!(Number(o.totalRub || 0) > 0)) process.exit(3);
+            if (o.calculationSnapshot?.customs?.status !== 'ready') process.exit(4);
+          }
+          NODE
+      - name: Commit only validated production fix to branch
+        run: |
+          rm .github/workflows/fix-georgia-engine-label-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-market.mjs .github/workflows/fix-georgia-engine-label-once.yml
+          git commit -m "Parse exact AUTO.GE Engine labels for customs"
+          git push origin HEAD:fix/georgia-auto-ge-engine-label
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-engine-label-live-smoke
+          path: georgia-live-smoke.json
+          if-no-files-found: warn
+          retention-days: 3
