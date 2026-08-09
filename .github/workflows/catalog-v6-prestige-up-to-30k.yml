@@ -2,6 +2,8 @@ name: Catalog V6 · Prestige exact sold up-to-30k
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "40 19 * * *"
   push:
     paths:
       - ".github/workflows/catalog-v6-prestige-up-to-30k.yml"
@@ -19,7 +21,7 @@ concurrency:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       planned_rows: ${{ steps.plan.outputs.planned_rows }}
@@ -28,8 +30,9 @@ jobs:
     env:
       PRESTIGE_PLAN_CHUNK_PAGES: "60"
       PRESTIGE_PLAN_RAW_BUDGET: "100000"
-      PRESTIGE_PLAN_MAX_PARTITIONS: "120"
-      PRESTIGE_PLAN_MAX_MAKES: "10"
+      PRESTIGE_PLAN_MAX_PARTITIONS: "220"
+      PRESTIGE_PLAN_MAX_MAKES: "30"
+      PRESTIGE_PLAN_RAW_PER_MODEL: "60"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
@@ -41,7 +44,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - id: plan
-        name: Build exact non-overlapping source partitions
+        name: Build round-robin partitions across all available models
         run: npx tsx scripts/prestige-japan-strict-partition-plan.mjs
       - uses: actions/upload-artifact@v4
         with:
@@ -93,7 +96,7 @@ jobs:
     needs: [plan, chunks]
     if: ${{ always() && needs.plan.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       PRESTIGE_MERGE_INPUT_DIR: prestige-japan-chunks
       PRESTIGE_MERGE_OUTPUT: prestige-japan-exact-sold-up-to-30000.json
@@ -106,7 +109,7 @@ jobs:
           pattern: prestige-japan-chunk-*
           path: prestige-japan-chunks
           merge-multiple: true
-      - name: Merge, deduplicate and gate 30k exact sold results
+      - name: Merge and deduplicate exact sold results up to 30k
         run: node scripts/prestige-japan-strict-merge.mjs
       - uses: actions/upload-artifact@v4
         if: always()
