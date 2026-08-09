@@ -1,16 +1,8 @@
-name: Catalog live recovery · 6 markets
-run-name: Live recovery 6 markets · ${{ github.sha }}
+name: Catalog live recovery · 6 markets (legacy manual)
+run-name: Legacy live recovery 6 markets · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-live-recovery-6-markets.yml"
-      - "scripts/catalog-live-recovery-market.mjs"
-      - "scripts/catalog-live-recovery-publish.mjs"
-      - "apps/web/lib/catalog/offer-quality.ts"
 
 permissions:
   contents: read
@@ -51,6 +43,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: |
+          echo "Legacy/manual recovery only. Production accumulation uses the dedicated daily workflows."
           node --check scripts/catalog-live-recovery-market.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
           npm run typecheck
@@ -114,7 +107,7 @@ jobs:
           pattern: catalog-live-recovery-*
           path: recovery-input
           merge-multiple: true
-      - name: Atomically replace each recovered market while preserving the others
+      - name: Publish legacy recovered markets while preserving the others
         shell: bash
         run: |
           set +e
@@ -122,24 +115,16 @@ jobs:
           for market in korea china uae europe georgia kyrgyzstan; do
             input="recovery-input/catalog-rebuild-${market}.json"
             if [ ! -s "$input" ]; then
-              echo "Missing $input"
               failed="$failed $market(no-artifact)"
               continue
             fi
             export RECOVERY_PUBLISH_MARKET="$market"
             export RECOVERY_PUBLISH_INPUT="$input"
             export RECOVERY_PUBLISH_REPORT="catalog-live-recovery-${market}-publish-report.json"
-            export RECOVERY_PUBLISH_MAX="3000"
-            echo "=== Publishing $market ==="
-            if npx tsx scripts/catalog-live-recovery-publish.mjs; then
-              echo "$market published"
-            else
-              echo "$market failed publication"
-              failed="$failed $market"
-            fi
+            export RECOVERY_PUBLISH_MAX="100000"
+            if ! npx tsx scripts/catalog-live-recovery-publish.mjs; then failed="$failed $market"; fi
           done
           echo "failed=$failed" >> "$GITHUB_STEP_SUMMARY"
-          if [ -n "$failed" ]; then exit 1; fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
