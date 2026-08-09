@@ -1,0 +1,128 @@
+name: Validate Encar complete detail rate limit
+
+on:
+  push:
+    branches:
+      - fix/encar-complete-detail-rate-limit
+    paths:
+      - ".github/workflows/validate-encar-complete-detail-rate-limit.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Add serialized detail limiter to EncarCompleteAdapter
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/lib/catalog/encar-complete-source.ts')
+          text = p.read_text()
+          anchor = '''function sleep(ms: number) {
+            return new Promise((resolve) => setTimeout(resolve, ms));
+          }
+
+          async function fetchDetail(sourceOfferId: string) {'''
+          replacement = '''function sleep(ms: number) {
+            return new Promise((resolve) => setTimeout(resolve, ms));
+          }
+
+          class EncarDetailRateLimiter {
+            private queue: Promise<unknown> = Promise.resolve();
+            private lastStartedAt = 0;
+
+            run<T>(fn: () => Promise<T>) {
+              const rpm = Math.max(1, Math.min(120, Number(process.env.CATALOG_ENCAR_DIRECT_DETAIL_RPM || 30)));
+              const gapMs = Math.ceil(60_000 / rpm);
+              const task = this.queue.then(async () => {
+                const waitMs = Math.max(0, this.lastStartedAt + gapMs - Date.now());
+                if (waitMs) await sleep(waitMs);
+                this.lastStartedAt = Date.now();
+                return await fn();
+              });
+              this.queue = task.catch(() => undefined);
+              return task;
+            }
+          }
+
+          const encarDetailLimiter = new EncarDetailRateLimiter();
+
+          async function fetchDetail(sourceOfferId: string) {'''
+          if text.count(anchor) != 1:
+              raise SystemExit(f'limiter anchor count={text.count(anchor)}')
+          text = text.replace(anchor, replacement, 1)
+          old_fetch = '''  try {
+              const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
+                headers: ENCAR_HEADERS,
+                signal: controller.signal,
+              });
+              if (!response.ok) throw new Error(`encar_detail_http_${response.status}`);
+              return await response.json() as any;
+            } finally {'''
+          new_fetch = '''  try {
+              return await encarDetailLimiter.run(async () => {
+                const response = await fetch(`https://api.encar.com/v1/readside/vehicle/${encodeURIComponent(sourceOfferId)}`, {
+                  headers: ENCAR_HEADERS,
+                  signal: controller.signal,
+                });
+                if (!response.ok) throw new Error(`encar_detail_http_${response.status}`);
+                return await response.json() as any;
+              });
+            } finally {'''
+          if text.count(old_fetch) != 1:
+              raise SystemExit(f'fetch anchor count={text.count(old_fetch)}')
+          p.write_text(text.replace(old_fetch, new_fetch, 1))
+          PY
+      - name: Stress exact details then verify next list page
+        shell: bash
+        env:
+          CATALOG_RAW_LISTING_MODE: "1"
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_ENCAR_DIRECT_LIST_RPM: "10"
+          CATALOG_ENCAR_DIRECT_LIST_RETRIES: "5"
+          CATALOG_ENCAR_DIRECT_DETAIL_RPM: "30"
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "25000"
+        run: |
+          cat > /tmp/stress-encar.mts <<'TS'
+          const { catalogImportSources } = await import("${{ github.workspace }}/apps/web/lib/catalog/importer.ts");
+          const source: any = catalogImportSources.find((candidate: any) => candidate.sourceId === "encar_direct");
+          if (!source) throw new Error("encar_direct_missing");
+          const first: any = await source.fetchPage();
+          const rawRows: any[] = Array.isArray(first?.items) ? first.items : [];
+          const rows = rawRows.map((raw: any) => source.normalizeOffer(raw)).filter(Boolean).slice(0, 20);
+          if (rows.length !== 20 || !first.nextCursor) throw new Error(`first page incomplete rows=${rows.length}`);
+          const started = Date.now();
+          const results = await Promise.all(rows.map(async (offer: any) => ({id: offer.sourceOfferId, images: (await source.fetchImages(offer)).length})));
+          const elapsedMs = Date.now() - started;
+          console.log(JSON.stringify({event:"detail_limiter_batch", elapsedMs, results}));
+          if (results.some((row: any) => row.images < 5)) throw new Error("exact_detail_gallery_missing");
+          if (elapsedMs < 36000) throw new Error(`detail_limiter_not_applied:${elapsedMs}`);
+          const next: any = await source.fetchPage(first.nextCursor);
+          const nextRows = Array.isArray(next?.items) ? next.items.length : 0;
+          console.log(JSON.stringify({event:"next_page_after_limited_details", nextRows, nextCursor: next?.nextCursor || null}));
+          if (nextRows !== 50) throw new Error(`encar_next_page_failed:${nextRows}`);
+          TS
+          npx tsx /tmp/stress-encar.mts
+          npm run typecheck
+      - name: Commit validated Encar limiter to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/encar-complete-source.ts
+          git commit -m "Pace Encar exact detail requests"
+          git push origin HEAD:fix/encar-complete-detail-rate-limit
