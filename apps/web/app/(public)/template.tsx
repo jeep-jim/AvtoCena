@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { PublicLeadCapture } from "@/components/leads/PublicLeadCapture";
+import { PublicLeadCaptureV2 } from "@/components/leads/PublicLeadCaptureV2";
 
 const publicVisualFixes = `
 /* One neutral dark canvas across every public page. This matches the footer
@@ -66,7 +66,7 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
 
   return <>
     {children}
-    <PublicLeadCapture />
+    <PublicLeadCaptureV2 />
     <style dangerouslySetInnerHTML={{ __html: publicVisualFixes }} />
   </>;
 }
