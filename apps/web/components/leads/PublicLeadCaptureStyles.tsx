@@ -43,6 +43,28 @@ export function PublicLeadCaptureStyles() {
     .ac-lead-capture-banner > .min-w-0 > h2 {
       margin-top: 0 !important;
     }
+
+    /* Favorites selection is marked by the red check only. */
+    .ac-lead-favorites-list > button {
+      background: var(--ac-surface-2) !important;
+    }
+
+    /* Keep card price arrows inside the cards and below fixed favorites UI. */
+    body:has([data-ac-favorites-bar]) .ac-favorites-card {
+      contain: paint !important;
+      isolation: isolate !important;
+      z-index: 0 !important;
+    }
+    body:has([data-ac-favorites-bar]) .ac-favorites-card .ac-price-trend-arrow {
+      z-index: 0 !important;
+    }
+    body:has([data-ac-favorites-bar]) [data-ac-favorites-bar] {
+      z-index: 10000 !important;
+    }
+    body:has([data-ac-favorites-bar]) .ac-public-header {
+      z-index: 10001 !important;
+    }
+
     .ac-public-footer-cta {
       background: rgba(255,255,255,.07) !important;
       color: var(--ac-text) !important;
@@ -61,6 +83,14 @@ export function PublicLeadCaptureStyles() {
     html[data-theme="light"] .ac-public-footer-cta:hover {
       background: #f8f9fb !important;
     }
+
+    /* Match the dark currency sheet surface to the lead form. */
+    html:not([data-theme="light"]) .ac-rate-sheet,
+    html:not([data-theme="light"]) .ac-rate-sheet > .sticky {
+      background: var(--ac-surface) !important;
+      color: var(--ac-text) !important;
+    }
+
     body:has(main.ac-home-page) main.ac-home-page > div.mx-auto {
       padding-bottom: 1rem !important;
     }
