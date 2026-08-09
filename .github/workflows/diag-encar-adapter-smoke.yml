@@ -1,0 +1,34 @@
+name: Diagnostic Encar adapter pagination smoke
+
+on:
+  push:
+    branches:
+      - diag/encar-adapter-smoke-20260809
+    paths:
+      - ".github/workflows/diag-encar-adapter-smoke.yml"
+      - "scripts/diag-encar-adapter-smoke.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adapter-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fetch 8 consecutive pages through the production Encar adapter
+        env:
+          CATALOG_RAW_LISTING_MODE: "1"
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_ENCAR_DIRECT_LIST_RPM: "10"
+          CATALOG_ENCAR_DIRECT_LIST_RETRIES: "2"
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "35000"
+        run: npx tsx scripts/diag-encar-adapter-smoke.mjs
