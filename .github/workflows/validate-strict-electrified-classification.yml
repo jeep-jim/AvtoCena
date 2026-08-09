@@ -54,3 +54,5 @@ jobs:
           git add apps/web/lib/catalog/spec-normalization.ts .github/workflows/validate-strict-electrified-classification.yml .github/patches/fix-strict-electrified-classification.py .github/patches/verify-strict-electrified-classification.ts
           git commit -m "Recognize strict HEV and known BEV model tokens"
           git push origin HEAD:fix/strict-electrified-model-classification
+
+# rerun-after-async-fix: 2026-08-09T16:20Z
