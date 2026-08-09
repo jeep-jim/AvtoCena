@@ -1,0 +1,28 @@
+name: Diagnostic Encar detail referer
+
+on:
+  push:
+    branches:
+      - diag/encar-adapter-smoke-20260809
+    paths:
+      - ".github/workflows/diag-encar-detail-referer.yml"
+      - "scripts/diag-encar-detail-referer.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  referer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Compare root versus exact-detail referer on one live Encar ID
+        env:
+          ENCAR_DIAG_ID: "42508437"
+        run: node scripts/diag-encar-detail-referer.mjs
