@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/catalog-v6-source-structure-probe.yml"
       - "scripts/catalog-source-structure-probe.mjs"
+      - "scripts/encar-power-field-probe.mjs"
 
 permissions:
   contents: read
@@ -27,10 +28,14 @@ jobs:
       - run: npm ci
       - name: Probe source structures without publishing
         run: npx tsx scripts/catalog-source-structure-probe.mjs
+      - name: Probe exact Encar detail power fields without publishing
+        run: node scripts/encar-power-field-probe.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-source-structure-probe
-          path: catalog-source-structure-probe.json
+          path: |
+            catalog-source-structure-probe.json
+            encar-power-field-probe.json
           if-no-files-found: warn
           retention-days: 3
