@@ -15,8 +15,9 @@ for (let pageIndex = 0; pageIndex < 8; pageIndex += 1) {
   const started = Date.now();
   try {
     const page = await source.fetchPage(cursor);
-    const rows = Array.isArray(page?.offers) ? page.offers : [];
-    const ids = rows.map((row) => String(row?.sourceOfferId || row?.id || "")).filter(Boolean);
+    const candidates = [page?.offers, page?.items, page?.rows, page?.listings, page?.results, page?.data];
+    const rows = candidates.find(Array.isArray) || [];
+    const ids = rows.map((row) => String(row?.sourceOfferId || row?.id || row?.Id || row?.vehicleId || "")).filter(Boolean);
     const duplicateIds = ids.filter((id) => seen.has(id));
     for (const id of ids) seen.add(id);
     console.log(JSON.stringify({
@@ -24,6 +25,7 @@ for (let pageIndex = 0; pageIndex < 8; pageIndex += 1) {
       pageIndex,
       cursor: cursor ?? null,
       elapsedMs: Date.now() - started,
+      keys: Object.keys(page || {}),
       rows: rows.length,
       uniqueIds: new Set(ids).size,
       duplicateIds: duplicateIds.slice(0, 10),
@@ -31,7 +33,7 @@ for (let pageIndex = 0; pageIndex < 8; pageIndex += 1) {
       finished: page?.finished === true,
       sampleIds: ids.slice(0, 3),
     }));
-    if (!rows.length || page?.finished === true || page?.nextCursor == null) break;
+    if (page?.finished === true || page?.nextCursor == null) break;
     cursor = page.nextCursor;
   } catch (error) {
     console.log(JSON.stringify({
