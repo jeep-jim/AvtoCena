@@ -51,6 +51,77 @@ replace_once(
 )
 replace_once(
     generic,
+    '''function modelKey(offer) {
+  const make = String(offer?.make || "").trim().toLowerCase().replace(/\\s+/g, " ");
+  const model = String(offer?.model || "").trim().toLowerCase().replace(/\\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
+
+const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));''',
+    '''function modelKey(offer) {
+  const make = String(offer?.make || "").trim().toLowerCase().replace(/\\s+/g, " ");
+  const model = String(offer?.model || "").trim().toLowerCase().replace(/\\s+/g, " ");
+  return make && model ? `${make}|${model}` : "";
+}
+
+function listingBoundSourceImages(offer) {
+  const raw = offer?.operational?.raw || {};
+  if (raw.listingBoundImages !== true || raw.photoIdentityVerified !== true || !Array.isArray(raw.images)) return [];
+  return raw.images.map((value) => {
+    const url = String(value || "").trim();
+    if (!/^https?:\\/\\//i.test(url)) return null;
+    const extension = url.match(/\\.(jpe?g|webp|avif|png)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+    if (!extension) return null;
+    return {
+      id: "",
+      url,
+      objectKey: "",
+      checksum: "",
+      size: 0,
+      mimeType: extension === "png" ? "image/png" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "image/jpeg",
+    };
+  }).filter(Boolean);
+}
+
+const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));''',
+)
+replace_once(
+    generic,
+    '''      try {
+        const fetched = typeof source.fetchImages === "function" ? await retry(`${source.sourceId}_images`, () => source.fetchImages(offer)) : [];
+        const combined = credibleCatalogImages([...(offer.images || []), ...(Array.isArray(fetched) ? fetched : [])]);
+        offer.images = combined.slice(0, 30);
+      } catch (error) {
+        errors.push({ stage: "images", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) });
+        offer.images = credibleCatalogImages(offer.images || []).slice(0, 30);
+      }
+      if (!offer.images.length) { reject(rejections, "images"); return null; }''',
+    '''      const trustedListingImages = source.sourceId === "auto_georgia_open" && process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only"
+        ? listingBoundSourceImages(offer)
+        : [];
+      if (trustedListingImages.length) {
+        offer.images = credibleCatalogImages(trustedListingImages).slice(0, 30);
+        offer.operational = {
+          ...(offer.operational || {}),
+          galleryVerified: offer.images.length > 0,
+          galleryImageCount: offer.images.length,
+          gallerySafetyMode: "auto_georgia_listing_bound_source_urls",
+          galleryStoredAs: "json_urls",
+        };
+      } else {
+        try {
+          const fetched = typeof source.fetchImages === "function" ? await retry(`${source.sourceId}_images`, () => source.fetchImages(offer)) : [];
+          const combined = credibleCatalogImages([...(offer.images || []), ...(Array.isArray(fetched) ? fetched : [])]);
+          offer.images = combined.slice(0, 30);
+        } catch (error) {
+          errors.push({ stage: "images", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) });
+          offer.images = credibleCatalogImages(offer.images || []).slice(0, 30);
+        }
+      }
+      if (!offer.images.length) { reject(rejections, "images"); return null; }''',
+)
+replace_once(
+    generic,
     '      offer = normalizeVehicleOfferSpecs(await safeVariantEnrich(offer));\n      let calculated;',
     '''      offer = normalizeVehicleOfferSpecs(await safeVariantEnrich(offer));
       if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {
