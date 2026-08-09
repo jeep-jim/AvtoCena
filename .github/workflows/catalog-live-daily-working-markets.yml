@@ -10,6 +10,11 @@ on:
       - main
     paths:
       - ".github/workflows/catalog-live-daily-working-markets.yml"
+      - "scripts/catalog-live-recovery-market.mjs"
+      - "scripts/catalog-live-recovery-europe-otomoto.mjs"
+      - "scripts/catalog-live-recovery-direct-exact.mjs"
+      - "scripts/catalog-live-recovery-publish.mjs"
+      - "apps/web/lib/catalog/auto-georgia-strict-source.ts"
 
 permissions:
   contents: read
@@ -80,7 +85,7 @@ jobs:
             target: 5000
             max_pages: 120
           - market: georgia
-            mode: direct
+            mode: generic
             source_ids: auto_georgia_open
             target: 3000
             max_pages: 240
