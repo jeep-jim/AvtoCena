@@ -84,7 +84,7 @@ jobs:
           echo "Artifacts: $(wc -l < prestige-artifacts.tsv)"
           while IFS=$'\t' read -r artifact_id artifact_name; do
             zip_path=".prestige-zips/${artifact_id}.zip"
-            out_dir="prestige-source-chunks/$artifact_name"
+            out_dir="prestige-source-chunks/$artifact_name/$artifact_id"
             mkdir -p "$out_dir"
             curl --fail --silent --show-error --location \
               -H "Authorization: Bearer $GH_TOKEN" \
