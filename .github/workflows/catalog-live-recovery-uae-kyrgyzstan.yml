@@ -19,9 +19,13 @@ on:
 permissions:
   contents: read
 
+# This recovery and the daily Korea/China/Europe/Georgia recovery both perform
+# read-preserve-write catalog publication. They must never overlap, otherwise
+# a publisher that started from an older generation can restore stale counts
+# for markets published by the other workflow while it was running.
 concurrency:
-  group: catalog-live-recovery-uae-kyrgyzstan
-  cancel-in-progress: true
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
