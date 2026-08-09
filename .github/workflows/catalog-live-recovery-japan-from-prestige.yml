@@ -17,9 +17,12 @@ permissions:
   actions: read
   contents: read
 
+# This publisher reads/preserves every other live market before writing a new
+# generation. Keep it in the same queue as every other catalog publisher and
+# cleanup job so it can never restore an older snapshot over a newer one.
 concurrency:
-  group: catalog-live-recovery-japan
-  cancel-in-progress: true
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
@@ -38,6 +41,10 @@ env:
 
 jobs:
   recover-and-publish:
+    # workflow_run fires for success, failure and cancellation. A cancelled or
+    # failed repair run cannot contain the required repaired artifact, so skip it
+    # rather than turning an upstream cancellation into a false downstream error.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
