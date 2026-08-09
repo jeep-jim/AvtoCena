@@ -65,23 +65,33 @@ export function PublicLeadCaptureStyles() {
       z-index: 10001 !important;
     }
 
-    .ac-public-footer-cta {
+    /* The catalog link is navigation, not a lead CTA. Match the dealer button. */
+    html:not([data-theme="light"]) .ac-public-legal-footer .ac-public-footer-cta {
       background: rgba(255,255,255,.07) !important;
+      background-color: rgba(255,255,255,.07) !important;
+      background-image: none !important;
       color: var(--ac-text) !important;
       -webkit-text-fill-color: var(--ac-text) !important;
+      box-shadow: none !important;
       transition: background-color .18s ease !important;
     }
-    .ac-public-footer-cta:hover {
+    html:not([data-theme="light"]) .ac-public-legal-footer .ac-public-footer-cta:hover {
       background: rgba(255,255,255,.12) !important;
+      background-color: rgba(255,255,255,.12) !important;
+      background-image: none !important;
     }
-    html[data-theme="light"] .ac-public-footer-cta {
+    html[data-theme="light"] .ac-public-legal-footer .ac-public-footer-cta {
       background: #fff !important;
+      background-color: #fff !important;
+      background-image: none !important;
       color: var(--ac-text) !important;
       -webkit-text-fill-color: var(--ac-text) !important;
       box-shadow: 0 7px 20px rgba(38,43,57,.08) !important;
     }
-    html[data-theme="light"] .ac-public-footer-cta:hover {
+    html[data-theme="light"] .ac-public-legal-footer .ac-public-footer-cta:hover {
       background: #f8f9fb !important;
+      background-color: #f8f9fb !important;
+      background-image: none !important;
     }
 
     /* Match the dark currency sheet surface to the lead form. */
