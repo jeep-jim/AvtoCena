@@ -1,0 +1,90 @@
+name: Validate Autohome deferred identity branch
+
+on:
+  push:
+    branches:
+      - fix/autohome-new-deferred-identity-20260810
+    paths:
+      - "scripts/catalog-live-recovery-market.mjs"
+      - ".github/workflows/validate-autohome-deferred-identity-branch.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-autohome-deferred-identity-branch
+  cancel-in-progress: true
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_MARKET: china
+  RECOVERY_SOURCE_IDS: autohome_new_china_open
+  RECOVERY_TARGET: "20"
+  RECOVERY_MAX_PAGES: "1"
+  RECOVERY_TIME_LIMIT_MS: "900000"
+  RECOVERY_PREPARE_CONCURRENCY: "2"
+  RECOVERY_REQUEST_TIMEOUT_MS: "60000"
+  RECOVERY_RETRY_ATTEMPTS: "3"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  RECOVERY_OUTPUT: autohome-deferred-recovery.json
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          npm run typecheck
+      - name: Run exact Autohome new recovery flow without publishing
+        shell: bash
+        run: |
+          set +e
+          npx tsx scripts/catalog-live-recovery-market.mjs
+          rc=$?
+          set -e
+          echo "collector_exit=$rc"
+          test -s "$RECOVERY_OUTPUT"
+      - name: Assert list identity is deferred to verified spec detail
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.RECOVERY_OUTPUT, 'utf8'));
+          const source = data.report?.sources?.find((row) => row.sourceId === 'autohome_new_china_open');
+          const identity = Number(source?.rejections?.identity || 0);
+          const pending = Number(source?.rejections?.calculation_pending || 0);
+          const accepted = Number(source?.accepted || 0);
+          const normalized = Number(source?.normalized || 0);
+          const imageErrors = (source?.errors || []).filter((row) => row.stage === 'images');
+          const result = { normalized, identity, pending, accepted, imageErrors: imageErrors.length, source, outputCount: Number(data.count || 0) };
+          console.log(JSON.stringify(result, null, 2));
+          if (!(normalized > 0)) throw new Error('no_normalized_rows');
+          if (identity >= normalized) throw new Error(`identity_still_blocks_all_${identity}_of_${normalized}`);
+          if (!(pending > 0 || accepted > 0)) throw new Error('detail_identity_did_not_reach_calculation_or_acceptance');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validate-autohome-deferred-identity
+          path: autohome-deferred-recovery.json
+          if-no-files-found: warn
+          retention-days: 3
