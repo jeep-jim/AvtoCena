@@ -220,6 +220,19 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
       }
     }
     offer.operational.gallerySourceImageCount = urls.length;
+    if (process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only") {
+      return urls.slice(0, limit).map((url) => {
+        const extension = url.match(/\.(jpe?g|webp|avif|png)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+        return {
+          id: "",
+          url,
+          objectKey: "",
+          checksum: "",
+          size: 0,
+          mimeType: extension === "png" ? "image/png" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "image/jpeg",
+        } as CatalogImage;
+      });
+    }
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit * 4)) {
       const image = await cacheImageFromUrl(url, this.market, { headers: { ...HEADERS, referer: detailUrl || "https://www.auto.ge/en/auto/index.html" } }).catch(() => null);
