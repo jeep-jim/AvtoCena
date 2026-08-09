@@ -2,7 +2,7 @@
 
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 type Hosts = {
   desktop: HTMLElement | null;
@@ -33,7 +33,7 @@ function ActionButtons({ className = "" }: { className?: string }) {
 
 function MobilePinnedActions() {
   const anchorRef = useRef<HTMLDivElement>(null);
-  const [fixedStyle, setFixedStyle] = useState<React.CSSProperties | null>(null);
+  const [fixedStyle, setFixedStyle] = useState<CSSProperties | null>(null);
 
   useEffect(() => {
     let frame = 0;
