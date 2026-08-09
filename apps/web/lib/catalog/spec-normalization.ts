@@ -105,14 +105,14 @@ function inferFuel(text: string) {
   if (/diesel|tdi|crdi|d-4d|d4d|bluehdi|dci|hdi|дизел|柴油|디젤/.test(text)) return "diesel";
   if (/lpg|cng|gpl|газ/.test(text)) return "lpg";
   if (/petrol|gasoline|benzin|essence|gdi|mpi|tgdi|tsi|tfsi|бензин|汽油|가솔린/.test(text)) return "petrol";
-  if (/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(text)) return "electric";
+  if (/electric|battery electric|\belectro\b|\bbev\b|\bev\b|электро|纯电|전기/.test(text)) return "electric";
   return undefined;
 }
 
 function inferPowertrainKind(text: string, engineCc?: number): PowertrainKind {
   if (/series[ -]?hybrid|range[ -]?extender|\be[- ]?power\b|\b(?:reev|erev)\b|последовательн\w*\s+гибрид|增程/.test(text)) return "series_hybrid";
   if (/plug[ -]?in|\b(?:phev|hev|mhev)\b|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|hybrid|混合动力|하이브리드/.test(text)) return "other_hybrid";
-  if (/battery[ -]?electric|pure[ -]?electric|\bbev\b|\bev\b|электромоб|纯电|전기차/.test(text) && !engineCc) return "electric";
+  if (/battery[ -]?electric|pure[ -]?electric|\belectro\b|\bbev\b|\bev\b|электромоб|纯电|전기차/.test(text) && !engineCc) return "electric";
   if (engineCc || /petrol|gasoline|diesel|бензин|дизел|汽油|柴油|가솔린|디젤/.test(text)) return "combustion";
   return "unknown";
 }
