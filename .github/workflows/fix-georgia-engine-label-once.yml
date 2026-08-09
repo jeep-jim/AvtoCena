@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: fix-georgia-engine-label-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   patch-and-live-smoke:
     runs-on: ubuntu-latest
