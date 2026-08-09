@@ -25,8 +25,17 @@ export function PublicLeadCaptureStyles() {
       color: #8c96a7 !important;
       opacity: 1 !important;
     }
+    .ac-lead-sheet-handle span {
+      background: rgba(255,255,255,.60) !important;
+      box-shadow: 0 1px 5px rgba(0,0,0,.28) !important;
+    }
     html[data-theme="light"] .ac-lead-sheet-handle span {
-      background: #768093 !important;
+      background: rgba(255,255,255,.85) !important;
+    }
+    .ac-lead-banner-manager {
+      display: block !important;
+      background: transparent !important;
+      filter: none !important;
     }
     body:has(main.ac-home-page) main.ac-home-page > div.mx-auto {
       padding-bottom: 1rem !important;
