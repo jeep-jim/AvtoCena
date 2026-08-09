@@ -5,7 +5,10 @@ import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image))/i;
+const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
+const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
+const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function meaningfulTitle(value: unknown) {
@@ -41,6 +44,21 @@ function listingTitle(offer: VehicleOffer) {
       || offer.operational?.sourceTitle
       || [offer.make, offer.model, offer.trim].filter(Boolean).join(" "),
   );
+}
+
+export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
+  const currentYear = new Date().getFullYear();
+  const year = Number(offer.year || 0);
+  const powerHp = Number(offer.powerHp || 0);
+  if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
+
+  // Do not apply an ICE horsepower heuristic to EV/PHEV/hybrid cards because
+  // their public horsepower field may not be the utilization-power value.
+  const powertrainKind = clean(offer.powertrainKind).toLowerCase();
+  if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)) return true;
+  if (ALTERNATIVE_POWERTRAIN_RE.test(clean(offer.fuel))) return true;
+
+  return false;
 }
 
 function minimumImageCount(offer: VehicleOffer) {
@@ -83,6 +101,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const title = listingTitle(offer);
   if (!meaningfulTitle(title)) return false;
   if (year < currentYear - 15 || year > currentYear + 1) return false;
+  if (!isCatalogOfferBusinessLiquid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
