@@ -1,0 +1,131 @@
+name: Apply buyer gallery originals v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/apply-buyer-gallery-images-once-v2.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: buyer-gallery-original-resolution-v2
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Download exact uploaded originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p apps/web/public/buyers
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445636/16.jpg' -o apps/web/public/buyers/16.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445665/17.jpg' -o apps/web/public/buyers/17.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445704/18.jpg' -o apps/web/public/buyers/18.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445729/19.jpg' -o apps/web/public/buyers/19.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445753/20.jpg' -o apps/web/public/buyers/20.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445776/21.jpg' -o apps/web/public/buyers/21.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445799/22.jpg' -o apps/web/public/buyers/22.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445817/23.jpg' -o apps/web/public/buyers/23.jpg
+          curl -fL --retry 4 --retry-delay 2 'https://tmpfiles.org/dl/21445841/24.jpg' -o apps/web/public/buyers/24.jpg
+
+      - name: Verify exact bytes and original dimensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          expected = {
+              16: (187020, '35f9ab5f881750f9fe6ffc3af4f414287a203f23851cb1b8a6e1891df5e5acc1', (1280, 826)),
+              17: (237069, '9ac3989c4e7663a9a51eb0bf68bd1c842f40b43f99dc23cce72d657689304a9a', (1280, 960)),
+              18: (221967, '713b3e4135368983895141622fdce3c0f4808a6c6c082c27f01bb14ac029e89e', (1280, 992)),
+              19: (199069, '5951ebf112e5b9a3c0b07536932193453ec9a3d2c0bbb2b2053774e451599598', (1280, 960)),
+              20: (206658, '96491b897119876608885ea645825441aa536e7856742edfa617efdb926729a3', (1280, 951)),
+              21: (167627, 'e43e5849634131458f7ad9cd2c4d36432233ad9ef142de39ee119f1775963309', (1280, 922)),
+              22: (269094, '1039116331706219763880764b32b1b6ec4906108335dd86c07dc91ab6a595cc', (1280, 960)),
+              23: (181925, 'eff198af1ab7ec0662e6f2f9eebbb86b2ef032806a8645884811c5b0f5ae03d8', (1195, 896)),
+              24: (167363, '441824999317d5187ed24715b2885e404c1e6ca98b9a826821904403db6c6a20', (1280, 963)),
+          }
+
+          def jpeg_size(data: bytes):
+              if data[:2] != b'\xff\xd8':
+                  raise ValueError('not_jpeg')
+              i = 2
+              sof = {0xC0,0xC1,0xC2,0xC3,0xC5,0xC6,0xC7,0xC9,0xCA,0xCB,0xCD,0xCE,0xCF}
+              while i + 3 < len(data):
+                  if data[i] != 0xFF:
+                      i += 1
+                      continue
+                  while i < len(data) and data[i] == 0xFF:
+                      i += 1
+                  if i >= len(data): break
+                  marker = data[i]; i += 1
+                  if marker in {0xD8,0xD9} or 0xD0 <= marker <= 0xD7: continue
+                  if i + 1 >= len(data): break
+                  length = int.from_bytes(data[i:i+2], 'big')
+                  if marker in sof:
+                      h = int.from_bytes(data[i+3:i+5], 'big')
+                      w = int.from_bytes(data[i+5:i+7], 'big')
+                      return (w, h)
+                  if length < 2: break
+                  i += length
+              raise ValueError('jpeg_dimensions_not_found')
+
+          for number, wanted in expected.items():
+              data = Path(f'apps/web/public/buyers/{number}.jpg').read_bytes()
+              actual = (len(data), hashlib.sha256(data).hexdigest(), jpeg_size(data))
+              if actual != wanted:
+                  raise SystemExit(f'{number}.jpg mismatch: {actual} != {wanted}')
+              print(f'{number}.jpg OK: {actual[0]} bytes, {actual[2][0]}x{actual[2][1]}')
+          PY
+
+      - name: Update gallery count only
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/home/HomePageClient.tsx')
+          s = p.read_text(encoding='utf-8')
+          old = 'const buyers = Array.from({ length: 16 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          new = 'const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          if new not in s:
+              if old not in s:
+                  raise SystemExit('buyer gallery count line not found')
+              s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Confirm carousel implementation untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git diff --name-only -- apps/web/components/home/BuyerGallery.tsx)"
+
+      - name: Commit and push exact originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/public/buyers/16.jpg apps/web/public/buyers/17.jpg apps/web/public/buyers/18.jpg apps/web/public/buyers/19.jpg apps/web/public/buyers/20.jpg apps/web/public/buyers/21.jpg apps/web/public/buyers/22.jpg apps/web/public/buyers/23.jpg apps/web/public/buyers/24.jpg apps/web/components/home/HomePageClient.tsx
+          if git diff --cached --quiet; then
+            echo 'Gallery originals already applied.'
+            exit 0
+          fi
+          git commit -m 'Add nine original-resolution buyer gallery photos'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
