@@ -50,7 +50,7 @@ const bodies: Option[] = [
 ];
 const marketIds = [...PUBLIC_CATALOG_MARKETS];
 const markets: Option[] = [{ value: "", label: "Страна" }, ...marketIds.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
-const buyers = Array.from({ length: 16 }, (_, index) => `/buyers/${index + 1}.jpg`);
+const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);
 const benefits = [
   { icon: "approved", title: "Без регистрации", text: "Сразу получите первую выдачу по вашему бюджету." },
   { icon: "markets", title: "7 рынков", text: "Япония, Китай, Корея, ОАЭ, Европа, Грузия и Кыргызстан в одном подборе." },
