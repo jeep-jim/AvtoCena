@@ -1,0 +1,78 @@
+name: Diagnose Encar pagination transport
+
+on:
+  push:
+    branches:
+      - diag/encar-pagination-20260809
+    paths:
+      - ".github/workflows/diagnose-encar-pagination-20260809.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe exact Encar list pages without publishing
+        shell: bash
+        run: |
+          node <<'NODE'
+          const mobileHeaders = {
+            accept: 'application/json, text/plain, */*',
+            'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+            origin: 'https://m.encar.com',
+            referer: 'https://m.encar.com/',
+            'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+          };
+          const femHeaders = {
+            accept: 'application/json, text/plain, */*',
+            'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+            origin: 'https://fem.encar.com',
+            referer: 'https://fem.encar.com/',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36',
+          };
+          function url(offset) {
+            const u = new URL('https://api.encar.com/search/car/list/mobile');
+            u.searchParams.set('count', 'true');
+            u.searchParams.set('q', '(And.Hidden.N._.CarType.A.)');
+            u.searchParams.set('sr', `|MobileModifiedDate|${offset}|50`);
+            u.searchParams.set('inav', '|Metadata|Sort');
+            return u;
+          }
+          const sleep = ms => new Promise(r => setTimeout(r, ms));
+          async function probe(label, offset, headers) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 35000);
+            const started = Date.now();
+            try {
+              const res = await fetch(url(offset), {headers, signal: controller.signal, redirect: 'follow'});
+              const body = await res.text();
+              let rows = null, count = null, keys = [];
+              try {
+                const json = JSON.parse(body);
+                const items = json.SearchResults || json.searchResults || json.cars || json.items || [];
+                rows = Array.isArray(items) ? items.length : null;
+                count = json.Count ?? json.count ?? null;
+                keys = Object.keys(json).slice(0, 15);
+              } catch {}
+              console.log(JSON.stringify({label, offset, status: res.status, ok: res.ok, contentType: res.headers.get('content-type'), ms: Date.now()-started, bytes: body.length, rows, count, keys, preview: body.replace(/\s+/g,' ').slice(0,160)}));
+            } catch (error) {
+              console.log(JSON.stringify({label, offset, error: String(error?.message || error), name: error?.name, cause: String(error?.cause?.message || error?.cause || ''), ms: Date.now()-started}));
+            } finally { clearTimeout(timer); }
+          }
+          for (const offset of [0, 50, 100, 150]) {
+            await probe('mobile', offset, mobileHeaders);
+            await sleep(7000);
+          }
+          await sleep(15000);
+          for (const offset of [0, 50, 100]) {
+            await probe('fem', offset, femHeaders);
+            await sleep(7000);
+          }
+          NODE
