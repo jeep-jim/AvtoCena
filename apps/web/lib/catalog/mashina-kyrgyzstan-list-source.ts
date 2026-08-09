@@ -59,6 +59,16 @@ function integer(value: unknown) {
   const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
+export function parseMashinaExplicitEngineLiters(value: unknown) {
+  const text = String(value || "").replace(/,/g, ".");
+  // Mashina.kg frequently writes exact source specs as "3.5 AT", "2.5hyb"
+  // or "2.0d" without an L unit. Accept only a decimal displacement directly
+  // bound to an explicit transmission/fuel/engine marker; bare numbers are never
+  // treated as engine volume (protects Model 3, Q5, CX-5, years, prices, etc.).
+  const match = text.match(/(?:^|\s)([0-8](?:\.[0-9]))\s*(?=(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b)/i);
+  const liters = Number(match?.[1] || 0);
+  return Number.isFinite(liters) && liters >= 0.6 && liters <= 8 ? liters : 0;
+}
 function compact(value: unknown) {
   return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
 }
@@ -83,7 +93,8 @@ function deriveMakeModel(value: string) {
     .replace(/^[\s,\-–—|]+/, "")
     .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
     .replace(/\s+/g, " ").trim();
-  const model = after.split(/\s+/).slice(0, 7).join(" ");
+  const modelSource = after.replace(/\s+[0-8](?:[.,][0-9])\s*(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b[\s\S]*$/i, "").trim();
+  const model = modelSource.split(/\s+/).slice(0, 7).join(" ");
   return { make, model };
 }
 function parseMoney(text: string) {
@@ -134,7 +145,8 @@ export function parseMashinaListingMarkup(markup: string, pageUrl: string): Mash
     const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`);
     const money = parseMoney(text);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:y\.|year|г\.)?/i)?.[1] || 0);
-    const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\.?\b/i)?.[1]?.replace(",", ".") || 0);
+    const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\.?\b/i)?.[1]?.replace(",", ".") || 0);
+    const liters = unitLiters || parseMashinaExplicitEngineLiters(text);
     const images = imageUrls(card, pageUrl).slice(0, 30);
     if (!identity.make || !identity.model || !year || !money || !images.length || COMMERCIAL_RE.test(`${identity.make} ${identity.model}`)) continue;
     rows.push({
@@ -238,7 +250,8 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
           urls = [...new Set([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)])];
           const text = plainText(detail.markup);
           const cc = integer(text.match(/([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
-          const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
+          const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
+          const liters = unitLiters || parseMashinaExplicitEngineLiters(text);
           offer.engineCc ||= cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined);
           offer.powerHp ||= integer(text.match(/\b([0-9]{2,4})\s*(?:HP|PS|horsepower|л\.с\.)\b/i)?.[1]);
           (offer.operational.raw as any).detailIdentityVerified = true;
