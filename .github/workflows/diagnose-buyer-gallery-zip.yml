@@ -1,0 +1,66 @@
+name: Diagnose buyer gallery ZIP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-buyer-gallery-zip.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct staged archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin buyer-gallery-upload-zip:refs/remotes/origin/buyer-gallery-upload-zip
+          : > /tmp/gallery.b64
+          for n in 00 01 02 03 04 05 06 07; do
+            git show "origin/buyer-gallery-upload-zip:.gallery-upload/zip/${n}.b64" >> /tmp/gallery.b64
+          done
+          tr -d '\r\n\t ' < /tmp/gallery.b64 | base64 -d > /tmp/gallery.zip
+          echo "archive_bytes=$(wc -c < /tmp/gallery.zip)"
+          sha256sum /tmp/gallery.zip
+          file /tmp/gallery.zip
+          unzip -t /tmp/gallery.zip
+          unzip -l /tmp/gallery.zip
+      - name: Inspect extracted images
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/gallery-out && mkdir -p /tmp/gallery-out
+          unzip -q /tmp/gallery.zip -d /tmp/gallery-out
+          find /tmp/gallery-out -type f -maxdepth 3 -printf '%P\t%s bytes\n' | sort
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, struct
+          root=Path('/tmp/gallery-out')
+          def jpeg_size(path):
+              b=path.read_bytes()
+              if b[:2] != b'\xff\xd8': return None
+              i=2
+              while i+9 < len(b):
+                  if b[i] != 0xff:
+                      i += 1; continue
+                  marker=b[i+1]; i += 2
+                  if marker in (0xd8,0xd9): continue
+                  if i+2 > len(b): break
+                  ln=int.from_bytes(b[i:i+2], 'big')
+                  if marker in {0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf}:
+                      h=int.from_bytes(b[i+3:i+5],'big'); w=int.from_bytes(b[i+5:i+7],'big')
+                      return w,h
+                  i += ln
+              return None
+          for p in sorted(root.rglob('*')):
+              if p.is_file():
+                  data=p.read_bytes()
+                  print(f"IMAGE {p.relative_to(root)} bytes={len(data)} sha256={hashlib.sha256(data).hexdigest()} size={jpeg_size(p)}")
+          PY
