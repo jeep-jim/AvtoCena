@@ -15,7 +15,10 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch repaired Prestige chunk recovery
+      - name: Dispatch repaired Prestige chunk recovery through Actions API
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run catalog-v6-prestige-repair.yml --ref main -f source_run_id=31289609485
+        run: |
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-v6-prestige-repair.yml/dispatches" \
+            -f ref=main \
+            -f 'inputs[source_run_id]=31289609485'
