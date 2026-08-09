@@ -1,0 +1,35 @@
+name: Diagnostic Encar list after detail pressure
+
+on:
+  push:
+    branches:
+      - diag/encar-adapter-smoke-20260809
+    paths:
+      - ".github/workflows/diag-encar-detail-pressure.yml"
+      - "scripts/diag-encar-detail-pressure.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  pressure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fetch list, 50 exact details, then next list page
+        env:
+          CATALOG_RAW_LISTING_MODE: "1"
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_ENCAR_DIRECT_LIST_RPM: "10"
+          CATALOG_ENCAR_DIRECT_LIST_RETRIES: "5"
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "25000"
+        run: npx tsx scripts/diag-encar-detail-pressure.mjs
