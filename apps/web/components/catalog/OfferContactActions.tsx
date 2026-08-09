@@ -47,17 +47,17 @@ function MobilePinnedActions() {
       }
 
       const rect = anchor.getBoundingClientRect();
-      const bottomOffset = 10;
-      const buttonHeight = 56;
-      const fixedTop = window.innerHeight - bottomOffset - buttonHeight;
+      const header = document.querySelector<HTMLElement>(".ac-public-header");
+      const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 64;
+      const fixedTop = headerBottom + 8;
       const shouldFix = rect.top <= fixedTop;
 
       setFixedStyle(shouldFix ? {
         position: "fixed",
         left: `${rect.left}px`,
         width: `${rect.width}px`,
-        bottom: "max(10px, env(safe-area-inset-bottom))",
-        zIndex: 80,
+        top: `${fixedTop}px`,
+        zIndex: 45,
       } : null);
     };
 
