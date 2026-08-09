@@ -37,6 +37,30 @@ export function PublicLeadCaptureStyles() {
       background: transparent !important;
       filter: none !important;
     }
+    .ac-lead-capture-banner > .min-w-0 > div:first-child {
+      display: none !important;
+    }
+    .ac-lead-capture-banner > .min-w-0 > h2 {
+      margin-top: 0 !important;
+    }
+    .ac-public-footer-cta {
+      background: rgba(255,255,255,.07) !important;
+      color: var(--ac-text) !important;
+      -webkit-text-fill-color: var(--ac-text) !important;
+      transition: background-color .18s ease !important;
+    }
+    .ac-public-footer-cta:hover {
+      background: rgba(255,255,255,.12) !important;
+    }
+    html[data-theme="light"] .ac-public-footer-cta {
+      background: #fff !important;
+      color: var(--ac-text) !important;
+      -webkit-text-fill-color: var(--ac-text) !important;
+      box-shadow: 0 7px 20px rgba(38,43,57,.08) !important;
+    }
+    html[data-theme="light"] .ac-public-footer-cta:hover {
+      background: #f8f9fb !important;
+    }
     body:has(main.ac-home-page) main.ac-home-page > div.mx-auto {
       padding-bottom: 1rem !important;
     }
