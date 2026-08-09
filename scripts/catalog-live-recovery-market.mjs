@@ -345,16 +345,19 @@ await Promise.all(sources.map(async (source) => {
       offer = normalizeVehicleOfferSpecs(offer);
       const year = Number(offer.year || 0);
       if (year < minYear || year > new Date().getFullYear() + 1) { reject(rejections, "year"); return null; }
-      if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }
-      const quotaKey = modelKey(offer);
-      const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
-      const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
-      if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
-      if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
+      const detailBoundIdentity = source.sourceId === "autohome_new_china_open" && (!offer.make || !offer.model);
+      if (!offer.sourceOfferId || ((!offer.make || !offer.model) && !detailBoundIdentity)) { reject(rejections, "identity"); return null; }
+      if (!detailBoundIdentity) {
+        const quotaKey = modelKey(offer);
+        const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
+        const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
+        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
+        if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
+      }
       if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl)) { reject(rejections, "source_url"); return null; }
       if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); return null; }
-      if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
-      if (!saneBody(offer)) { reject(rejections, "body"); return null; }
+      if (!detailBoundIdentity && COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
+      if (!detailBoundIdentity && !saneBody(offer)) { reject(rejections, "body"); return null; }
 
       const trustedListingImages = source.sourceId === "auto_georgia_open" && process.env.CATALOG_IMAGE_STORAGE_MODE === "source_urls_only"
         ? listingBoundSourceImages(offer)
@@ -380,6 +383,18 @@ await Promise.all(sources.map(async (source) => {
       }
       if (!offer.images.length) { reject(rejections, "images"); return null; }
       if (!photoBound(offer)) { reject(rejections, "photo_identity"); return null; }
+
+      if (detailBoundIdentity) {
+        offer = normalizeVehicleOfferSpecs(offer);
+        if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }
+        const quotaKey = modelKey(offer);
+        const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
+        const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
+        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
+        if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
+        if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
+        if (!saneBody(offer)) { reject(rejections, "body"); return null; }
+      }
 
       if (source.sourceId === "auto_georgia_open" && (!(Number(offer.engineCc || 0) > 0) || !(Number(offer.powerHp || 0) > 0))) {
         try { offer = normalizeVehicleOfferSpecs(await retry(`${source.sourceId}_detail_specs`, () => enrichAutoGeorgiaExactSpecs(offer))); }
