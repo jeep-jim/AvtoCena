@@ -18,32 +18,31 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
-
       - run: npm ci
-
-      - name: Patch Georgia exact specs and pending diagnostics
+      - name: Patch Georgia exact specs, pending diagnostics, and Audi e-tron classification
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          p = Path("scripts/catalog-live-recovery-market.mjs")
-          text = p.read_text()
-
-          def replace_once(old, new):
-              global text
+          def patch_once(path, old, new):
+              p = Path(path)
+              text = p.read_text()
               count = text.count(old)
               if count != 1:
-                  raise SystemExit(f"expected one anchor, got {count}: {old[:180]!r}")
-              text = text.replace(old, new, 1)
+                  raise SystemExit(f"{path}: expected one anchor, got {count}: {old[:180]!r}")
+              p.write_text(text.replace(old, new, 1))
 
-          helper_anchor = '''const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));'''
-          helper_block = r'''const AUTO_GEORGIA_DETAIL_HEADERS = {
+          market = "scripts/catalog-live-recovery-market.mjs"
+
+          patch_once(
+              market,
+              'const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));',
+              r'''const AUTO_GEORGIA_DETAIL_HEADERS = {
             accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
             "cache-control": "no-cache",
@@ -51,20 +50,11 @@ jobs:
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
           };
           function autoGeorgiaPlainText(value) {
-            return String(value || "")
-              .replace(/<script[\s\S]*?<\/script>/gi, " ")
-              .replace(/<style[\s\S]*?<\/style>/gi, " ")
-              .replace(/<[^>]+>/g, " ")
-              .replace(/&nbsp;|&#160;/gi, " ")
-              .replace(/&amp;/gi, "&")
-              .replace(/&quot;/gi, '"')
-              .replace(/&#39;|&apos;/gi, "'")
-              .replace(/\s+/g, " ")
-              .trim();
+            return String(value || "").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
+              .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"')
+              .replace(/&#39;|&apos;/gi, "'").replace(/\s+/g, " ").trim();
           }
-          function autoGeorgiaCompact(value) {
-            return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
-          }
+          function autoGeorgiaCompact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, ""); }
           function autoGeorgiaInteger(value) {
             const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
             return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
@@ -135,15 +125,14 @@ jobs:
           }
 
           const adapterMap = new Map(catalogImportSources.map((source) => [source.sourceId, source]));'''
-          replace_once(helper_anchor, helper_block)
+          )
 
-          replace_once(
-              '''    try { page = await retry(`${source.sourceId}_page`, () => source.fetchPage(cursor)); }
-              catch (error) { errors.push({ stage: "page", cursor, error: errorText(error).slice(0, 800) }); stopReason = "source_error"; break; }''',
-              '''    try { page = await retry(`${source.sourceId}_page`, () => source.fetchPage(cursor)); }
-              catch (error) {
+          patch_once(
+              market,
+              '    catch (error) { errors.push({ stage: "page", cursor, error: errorText(error).slice(0, 800) }); stopReason = "source_error"; break; }',
+              '''    catch (error) {
                 const pageError = errorText(error);
-                if (source.sourceId === "auto_georgia_open" && pages > 0 && /auto_georgia_strict_parsed_zero_200_\d+/i.test(pageError)) {
+                if (source.sourceId === "auto_georgia_open" && pages > 0 && /auto_georgia_strict_parsed_zero_200_\\d+/i.test(pageError)) {
                   finished = true;
                   stopReason = "source_exhausted";
                   break;
@@ -154,28 +143,22 @@ jobs:
               }'''
           )
 
-          replace_once(
-              '''      offer = normalizeVehicleOfferSpecs(await safeVariantEnrich(offer));
-              if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {''',
+          patch_once(
+              market,
+              '      offer = normalizeVehicleOfferSpecs(await safeVariantEnrich(offer));\n',
               '''      if (source.sourceId === "auto_georgia_open" && (!(Number(offer.engineCc || 0) > 0) || !(Number(offer.powerHp || 0) > 0))) {
                 try { offer = normalizeVehicleOfferSpecs(await retry(`${source.sourceId}_detail_specs`, () => enrichAutoGeorgiaExactSpecs(offer))); }
                 catch (error) { errors.push({ stage: "detail_specs", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) }); }
               }
               offer = normalizeVehicleOfferSpecs(await safeVariantEnrich(offer));
-              if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {'''
+'''
           )
 
-          replace_once(
-              '''const globalOffers = new Map();
-              const reports = [];''',
-              '''const globalOffers = new Map();
-              const reports = [];
-              const pendingElectrifiedModels = new Map();
-              const pendingCombustionModels = new Map();'''
-          )
+          patch_once(market, 'const reports = [];\n', 'const reports = [];\nconst pendingElectrifiedModels = new Map();\nconst pendingCombustionModels = new Map();\n')
 
-          replace_once(
-              '''      if (!exactCalculation(calculated)) { reject(rejections, "calculation_pending"); return null; }''',
+          patch_once(
+              market,
+              '      if (!exactCalculation(calculated)) { reject(rejections, "calculation_pending"); return null; }',
               '''      if (!exactCalculation(calculated)) {
                 const diagnostic = calculationPendingDiagnostic(calculated);
                 const diagnosticKey = `${diagnostic.make}|${diagnostic.model}|${diagnostic.trim}|${diagnostic.year}|${diagnostic.powertrainKind}|${diagnostic.reason}`.toLocaleLowerCase("en-US");
@@ -186,16 +169,43 @@ jobs:
               }'''
           )
 
-          replace_once(
-              '''  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
-              preferredCount,''',
-              '''  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
-              calculationPendingElectrifiedModels: [...pendingElectrifiedModels.values()].slice(0, 250),
-              calculationPendingCombustionModels: [...pendingCombustionModels.values()].slice(0, 100),
-              preferredCount,'''
+          patch_once(
+              market,
+              '  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,\n',
+              '  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,\n  calculationPendingElectrifiedModels: [...pendingElectrifiedModels.values()].slice(0, 250),\n  calculationPendingCombustionModels: [...pendingCombustionModels.values()].slice(0, 100),\n'
           )
 
-          p.write_text(text)
+          spec = "apps/web/lib/catalog/spec-normalization.ts"
+          patch_once(
+              spec,
+              '  const primary = primaryText(offer);\n  const full = allText(offer);\n  const engineCc = reasonable(offer.engineCc, 300, 10_000)\n    || structuredEngineCc(offer)\n    || inferEngineCc(primary)\n    || inferEngineCc(full);',
+              '''  const primary = primaryText(offer);
+              const full = allText(offer);
+              const knownPureElectricModel = String(offer.make || "").trim().toLowerCase() === "audi"
+                && /\\be[- ]?tron\\b/i.test(`${offer.model || ""} ${offer.trim || ""}`);
+              const parsedEngineCc = reasonable(offer.engineCc, 300, 10_000)
+                || structuredEngineCc(offer)
+                || inferEngineCc(primary)
+                || inferEngineCc(full);
+              const engineCc = knownPureElectricModel ? undefined : parsedEngineCc;'''
+          )
+          patch_once(
+              spec,
+              '  const strongElectric = /electric|battery electric|\\bbev\\b|\\bev\\b|электро|纯电|전기/.test(primary);',
+              '  const strongElectric = knownPureElectricModel || /electric|battery electric|\\bbev\\b|\\bev\\b|электро|纯电|전기/.test(primary);'
+          )
+          patch_once(
+              spec,
+              '  const primaryPowertrainKind = inferPowertrainKind(primary, engineCc);',
+              '  const primaryPowertrainKind = knownPureElectricModel ? "electric" : inferPowertrainKind(primary, engineCc);'
+          )
+
+          # Ensure the known pure-electric model cannot retain a combustion fuel label.
+          patch_once(
+              spec,
+              '  const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;',
+              '  if (knownPureElectricModel) fuel = "electric";\n\n  const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;'
+          )
           PY
 
       - name: Validate patch
@@ -203,14 +213,13 @@ jobs:
           node --check scripts/catalog-live-recovery-market.mjs
           npm run typecheck
           git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
-
       - name: Commit patch and remove one-shot workflow
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/catalog-live-recovery-market.mjs
+          git add scripts/catalog-live-recovery-market.mjs apps/web/lib/catalog/spec-normalization.ts
           git rm .github/workflows/fix-georgia-calculation-diagnostics.yml
-          git commit -m "Recover Georgia exact specs and diagnose pending power"
+          git commit -m "Recover Georgia specs and reject misclassified e-tron customs"
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
