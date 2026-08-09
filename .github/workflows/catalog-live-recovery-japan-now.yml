@@ -104,7 +104,7 @@ jobs:
         env:
           PRESTIGE_RECOVERY_INPUT: prestige-japan-exact-sold-partial-live.json
           PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan.json
-          PRESTIGE_RECOVERY_TARGET: "1000"
+          PRESTIGE_RECOVERY_TARGET: "3000"
           PRESTIGE_RECOVERY_CONCURRENCY: "12"
         run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
       - name: Enforce Japan max 20 offers per make-model and interleave every model
@@ -158,7 +158,7 @@ jobs:
           };
           payload.offers = kept;
           payload.count = kept.length;
-          payload.partial = Boolean(payload.partial) || kept.length < Number(payload?.report?.target || 1000);
+          payload.partial = Boolean(payload.partial) || kept.length < Number(payload?.report?.target || 3000);
           payload.report = {
             ...(payload.report || {}),
             count: kept.length,
@@ -176,7 +176,7 @@ jobs:
           RECOVERY_PUBLISH_MARKET: japan
           RECOVERY_PUBLISH_INPUT: catalog-rebuild-japan.json
           RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-publish-report.json
-          RECOVERY_PUBLISH_MAX: "1000"
+          RECOVERY_PUBLISH_MAX: "3000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
       - name: Verify actual persisted counts for every market
         run: |
