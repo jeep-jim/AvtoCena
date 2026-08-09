@@ -10,8 +10,10 @@ permissions:
   actions: write
   contents: read
 
+# Cleanup reads current manifests and removes expired generations, so keep it in
+# the same queue as daily catalog publication to avoid maintenance/publish races.
 concurrency:
-  group: catalog-object-storage-cleanup
+  group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
 jobs:
