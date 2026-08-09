@@ -3,6 +3,8 @@ run-name: Catalog storage cleanup · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "40 2 * * *"
 
 permissions:
   actions: write
@@ -28,7 +30,7 @@ jobs:
       CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"
       CATALOG_STORAGE_KEEP_GENERATIONS: "2"
       CATALOG_STORAGE_EMERGENCY: "false"
-      CATALOG_STORAGE_CLEANUP_GRACE_MS: "345600000"
+      CATALOG_STORAGE_CLEANUP_GRACE_MS: "259200000"
       CATALOG_STORAGE_CLEANUP_MAX_DELETES: "250000"
       CATALOG_STORAGE_DELETE_CONCURRENCY: "32"
       YC_OBJECT_STORAGE_DELETE_CONCURRENCY: "16"
