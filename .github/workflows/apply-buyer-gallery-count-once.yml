@@ -1,0 +1,43 @@
+name: Apply buyer gallery count once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/apply-buyer-gallery-count-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update buyer gallery count only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/components/home/HomePageClient.tsx')
+          text = path.read_text()
+          old = 'const buyers = Array.from({ length: 15 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          new = 'const buyers = Array.from({ length: 16 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          if old not in text:
+              if new in text:
+                  print('Buyer gallery already has 16 images')
+              else:
+                  raise SystemExit('Expected buyer gallery count line not found')
+          else:
+              text = text.replace(old, new, 1)
+              path.write_text(text)
+          PY
+          rm .github/workflows/apply-buyer-gallery-count-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-buyer-gallery-count-once.yml
+          git commit -m "Show 16 buyer photos on homepage" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
