@@ -65,7 +65,7 @@ export function parseMashinaExplicitEngineLiters(value: unknown) {
   // or "2.0d" without an L unit. Accept only a decimal displacement directly
   // bound to an explicit transmission/fuel/engine marker; bare numbers are never
   // treated as engine volume (protects Model 3, Q5, CX-5, years, prices, etc.).
-  const match = text.match(/(?:^|\s)([0-8](?:\.[0-9]))\s*(?=(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b)/i);
+  const match = text.match(/(?:^|\s)([0-8](?:\.[0-9]))\s*(?=(?:A\/?T|M\/?T|AT|MT|AMT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b)/i);
   const liters = Number(match?.[1] || 0);
   return Number.isFinite(liters) && liters >= 0.6 && liters <= 8 ? liters : 0;
 }
@@ -93,7 +93,7 @@ function deriveMakeModel(value: string) {
     .replace(/^[\s,\-–—|]+/, "")
     .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
     .replace(/\s+/g, " ").trim();
-  const modelSource = after.replace(/\s+[0-8](?:[.,][0-9])\s*(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b[\s\S]*$/i, "").trim();
+  const modelSource = after.replace(/\s+[0-8](?:[.,][0-9])\s*(?:A\/?T|M\/?T|AT|MT|AMT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b[\s\S]*$/i, "").trim();
   const model = modelSource.split(/\s+/).slice(0, 7).join(" ");
   return { make, model };
 }
