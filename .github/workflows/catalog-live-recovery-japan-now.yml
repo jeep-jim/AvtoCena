@@ -34,7 +34,10 @@ env:
   YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  # Japan's recovery script itself requires five exact listing-bound photos.
+  # Keep the global persistence minimum at one so preserving Japan can never
+  # re-filter unrelated markets that legitimately publish one-photo offers.
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
@@ -55,6 +58,19 @@ jobs:
           node --check scripts/prestige-japan-partial-merge-for-live.mjs
           node --check scripts/catalog-live-recovery-japan-prestige.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
+      - name: Restrict Japan fallback knowledge to primary official sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/catalog-live-recovery-japan-prestige.mjs')
+          text = path.read_text()
+          needle = '    if (variant.active === false || variant.modelId !== match.model.id) return false;\n'
+          replacement = needle + '    if (!["manufacturer", "official_registry"].includes(String(variant.sourceType || "").trim().toLowerCase())) return false;\n'
+          if text.count(needle) != 1:
+              raise SystemExit(f'strict_variant_patch_anchor_count={text.count(needle)}')
+          path.write_text(text.replace(needle, replacement, 1))
+          PY
+          grep -F 'official_registry' scripts/catalog-live-recovery-japan-prestige.mjs
       - name: Download all completed and partial strict Prestige chunks
         shell: bash
         env:
@@ -90,6 +106,53 @@ jobs:
           PRESTIGE_RECOVERY_TARGET: "1000"
           PRESTIGE_RECOVERY_CONCURRENCY: "12"
         run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Enforce Japan max 20 offers per model and max 10 models per make
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const path = 'catalog-rebuild-japan.json';
+          const payload = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const rows = Array.isArray(payload?.offers) ? payload.offers : [];
+          const normalize = (value) => String(value || '').trim().toLocaleLowerCase('en-US').replace(/\s+/g, ' ');
+          const modelsByMake = new Map();
+          const offersByModel = new Map();
+          const kept = [];
+          let modelQuotaSkipped = 0;
+          let makeModelQuotaSkipped = 0;
+          let invalidIdentitySkipped = 0;
+          for (const offer of rows) {
+            const make = normalize(offer?.make);
+            const model = normalize(offer?.model);
+            if (!make || !model) { invalidIdentitySkipped++; continue; }
+            const modelKey = `${make}|${model}`;
+            const modelCount = Number(offersByModel.get(modelKey) || 0);
+            if (modelCount >= 20) { modelQuotaSkipped++; continue; }
+            let models = modelsByMake.get(make);
+            if (!models) { models = new Set(); modelsByMake.set(make, models); }
+            if (!models.has(model) && models.size >= 10) { makeModelQuotaSkipped++; continue; }
+            models.add(model);
+            offersByModel.set(modelKey, modelCount + 1);
+            kept.push(offer);
+          }
+          const diversity = {
+            countBefore: rows.length,
+            countAfter: kept.length,
+            distinctMakes: modelsByMake.size,
+            distinctModels: [...modelsByMake.values()].reduce((sum, models) => sum + models.size, 0),
+            modelQuotaSkipped,
+            makeModelQuotaSkipped,
+            invalidIdentitySkipped,
+            maxOffersPerModel: 20,
+            maxModelsPerMake: 10,
+          };
+          payload.offers = kept;
+          payload.count = kept.length;
+          payload.partial = Boolean(payload.partial) || kept.length < Number(payload?.report?.target || 1000);
+          payload.report = { ...(payload.report || {}), count: kept.length, maxOffersPerModel: 20, maxModelsPerMake: 10, strictDiversity: diversity };
+          fs.writeFileSync(path, JSON.stringify(payload, null, 2));
+          console.log(JSON.stringify(diversity, null, 2));
+          if (!kept.length) process.exit(1);
+          NODE
       - name: Publish Japan market
         env:
           RECOVERY_PUBLISH_MARKET: japan
@@ -97,6 +160,26 @@ jobs:
           RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-publish-report.json
           RECOVERY_PUBLISH_MAX: "1000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Verify actual persisted counts for every market
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { PUBLIC_CATALOG_MARKETS } = await import('./apps/web/lib/catalog/runtime-config.ts');
+          const report = JSON.parse(fs.readFileSync('catalog-live-recovery-japan-publish-report.json', 'utf8'));
+          const actual = {};
+          for (const market of PUBLIC_CATALOG_MARKETS) actual[market] = (await readMarketOffers(market)).length;
+          const problems = [];
+          const japanExpected = Number(report?.count || report?.byMarket?.japan?.count || 0);
+          if (!(japanExpected > 0)) problems.push('japan:empty_expected');
+          if (actual.japan !== japanExpected) problems.push(`japan:${actual.japan}!=${japanExpected}`);
+          for (const [market, expectedRaw] of Object.entries(report?.preservedByMarket || {})) {
+            const expected = Number(expectedRaw || 0);
+            if (market !== 'japan' && actual[market] !== expected) problems.push(`${market}:${actual[market]}!=${expected}`);
+          }
+          console.log(JSON.stringify({ generationId: report.generationId, actual, expectedJapan: japanExpected, preservedByMarket: report.preservedByMarket, problems }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
