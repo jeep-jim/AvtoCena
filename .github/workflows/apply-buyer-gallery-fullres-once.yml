@@ -1,0 +1,54 @@
+name: Apply buyer gallery full resolution once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/gallery-payload.ready'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decode and apply buyer photos
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat scripts/gallery-payload.part* | base64 -d > /tmp/buyers.zip
+          rm -rf /tmp/buyers
+          mkdir -p /tmp/buyers
+          unzip -q /tmp/buyers.zip -d /tmp/buyers
+          mkdir -p apps/web/public/buyers
+          cp /tmp/buyers/{16,17,18,19,20,21,22,23,24}.jpg apps/web/public/buyers/
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/components/home/HomePageClient.tsx')
+          s=p.read_text()
+          old='const buyers = Array.from({ length: 16 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          new='const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);'
+          if old not in s and new not in s:
+              raise SystemExit('buyer count line not found')
+          p.write_text(s.replace(old,new))
+          PY
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          expected={16:(1280,826),17:(1280,960),18:(1280,992),19:(1280,960),20:(1280,951),21:(1280,922),22:(1280,960),23:(1195,896),24:(1280,963)}
+          for n,size in expected.items():
+              p=Path(f'apps/web/public/buyers/{n}.jpg')
+              with Image.open(p) as im:
+                  if im.size != size: raise SystemExit(f'{n}.jpg size {im.size} != {size}')
+          PY
+          rm -f scripts/gallery-payload.part* scripts/gallery-payload.ready
+          git rm -f .github/workflows/apply-buyer-gallery-fullres-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/public/buyers apps/web/components/home/HomePageClient.tsx scripts
+          git commit -m 'Add nine full-resolution buyer gallery photos'
+          git push origin HEAD:main
