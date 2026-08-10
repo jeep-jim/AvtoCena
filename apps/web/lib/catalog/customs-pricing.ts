@@ -83,19 +83,45 @@ function exactUtilizationPowerProblem(offer: VehicleOffer) {
   return null;
 }
 
+const PRELIMINARY_POWER_MISSING = new Set([
+  "certified_30_minute_power_kw",
+  "utilization_power_kw",
+  "utilization_coefficient",
+  "ice_power_kw",
+  "electric_excise_power_kw",
+]);
+
+function isElectrifiedKind(value: unknown) {
+  return ["electric", "series_hybrid", "other_hybrid"].includes(String(value || ""));
+}
+
+function onlyPowerDependentMissing(values: unknown) {
+  const rows = Array.isArray(values) ? values.map(String).filter(Boolean) : [];
+  return rows.length > 0 && rows.every((value) => PRELIMINARY_POWER_MISSING.has(value));
+}
+
+export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
+  const snapshot = offer?.calculationSnapshot || {};
+  const customs = snapshot.customs || {};
+  return isElectrifiedKind(offer?.powertrainKind)
+    && String(offer?.calculationStatus || "") === "preliminary_power_pending"
+    && positive(offer?.totalRub) > 0
+    && snapshot.pricingConfidence === "preliminary"
+    && snapshot.priceIncludesUtilizationFee === false
+    && customs.status === "needs_data"
+    && onlyPowerDependentMissing(snapshot.missing || customs.missing);
+}
+
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
   const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
-  const electrified = ["electric", "series_hybrid", "other_hybrid"].includes(String(normalized.powertrainKind || ""));
+  const electrified = isElectrifiedKind(normalized.powertrainKind);
   const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
     ? { ...normalized, utilizationPowerKw: undefined }
     : normalized;
 
-  // Конвертацию цены источника выполняем до проверки мощности. Даже когда точная
-  // таможня или утильсбор ещё ждут данных, публичная карточка должна иметь честный
-  // рублёвый эквивалент реальной цены объявления или результата торгов.
   const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency);
   if (!rate) {
     return {
@@ -116,23 +142,10 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     sourcePriceRub: rate.sourcePriceRub,
   };
 
-  const utilizationProblem = exactUtilizationPowerProblem(offer);
-  if (utilizationProblem) {
-    return {
-      ...offer,
-      totalRub: null,
-      calculationStatus: "needs_utilization_power",
-      calculationSnapshot: {
-        ...pendingSnapshot,
-        pricingConfidence: "unavailable",
-        certified30MinutePowerMissing: true,
-        missing: utilizationProblem.missing,
-        warnings: [utilizationProblem.warning],
-      },
-    };
-  }
-
-  if (!positive(offer.powerHp)) {
+  // Missing ordinary combustion power still blocks a calculated public price.
+  // Electrified vehicles are different: missing short-term/utilization power may
+  // produce a clearly marked preliminary lower-bound instead of disappearing.
+  if (!electrified && !positive(offer.powerHp)) {
     return {
       ...offer,
       totalRub: null,
@@ -180,6 +193,53 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
 
   const configured: any = await getActiveMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
+  const utilizationProblem = exactUtilizationPowerProblem(offer);
+  const combinedMissing = [...new Set([
+    ...(utilizationProblem?.missing || []),
+    ...(Array.isArray(customs.missing) ? customs.missing : []),
+  ])];
+
+  if (electrified && onlyPowerDependentMissing(combinedMissing) && positive(customs.knownCustomsRub) > 0) {
+    const calculation = calculateAvtocenaFromBusinessConfig({
+      marketId: offer.market,
+      marketConfig: market.config,
+      sourcePriceRub: rate.sourcePriceRub,
+      customsRub: customs.knownCustomsRub,
+    });
+    const excludedPriceItems = [
+      ...(combinedMissing.some((item) => ["certified_30_minute_power_kw", "utilization_power_kw", "utilization_coefficient", "ice_power_kw"].includes(item)) ? ["utilization-fee"] : []),
+      ...(combinedMissing.includes("electric_excise_power_kw") ? ["excise", "vat-excise-increment"] : []),
+    ];
+    const warning = "Предварительный расчёт: включены только подтверждённые на данный момент платежи. Компоненты, зависящие от недостающей мощности, не включены; финальную сумму подтвердит менеджер.";
+    return {
+      ...offer,
+      priceMode: offer.priceMode === "auction_start" ? "auction_start" : "estimated",
+      totalRub: calculation.totalRub,
+      calculationSnapshot: {
+        ...calculation.snapshot,
+        currencyRate: rate,
+        sourcePriceRub: rate.sourcePriceRub,
+        customs,
+        customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
+        customsCompleteness: "needs_data",
+        marketConfigStatus: configured?.status || "missing",
+        pricingConfidence: "preliminary",
+        preliminary: true,
+        preliminaryKnownCustomsRub: customs.knownCustomsRub,
+        priceIncludesUtilizationFee: false,
+        priceIncludesAllCustoms: false,
+        excludedPriceItems,
+        missing: combinedMissing,
+        estimatedMarketFields: market.estimatedFields,
+        powerConfidence: offer.powerDataConfidence,
+        powerSource: offer.powerDataSource,
+        certified30MinutePowerMissing: combinedMissing.includes("certified_30_minute_power_kw"),
+        vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
+        warnings: [...market.warnings, ...customs.warnings, ...(utilizationProblem ? [utilizationProblem.warning] : []), warning],
+      },
+      calculationStatus: "preliminary_power_pending",
+    };
+  }
 
   if (customs.status !== "ready" || customs.totalCustomsRub === undefined) {
     return {
@@ -194,9 +254,10 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         pricingConfidence: "unavailable",
         estimatedMarketFields: market.estimatedFields,
         certified30MinutePowerMissing: customs.missing.includes("certified_30_minute_power_kw"),
-        warnings: [...market.warnings, ...customs.warnings],
+        missing: combinedMissing,
+        warnings: [...market.warnings, ...customs.warnings, ...(utilizationProblem ? [utilizationProblem.warning] : [])],
       },
-      calculationStatus: "needs_customs_data",
+      calculationStatus: utilizationProblem ? "needs_utilization_power" : "needs_customs_data",
     };
   }
 
@@ -231,6 +292,8 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       powerConfidence: offer.powerDataConfidence,
       powerSource: offer.powerDataSource,
       certified30MinutePowerMissing: false,
+      priceIncludesUtilizationFee: true,
+      priceIncludesAllCustoms: true,
       vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
       warnings,
     },
