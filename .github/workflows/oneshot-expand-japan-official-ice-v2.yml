@@ -43,16 +43,17 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('scripts/prestige-japan-official-chassis-enrich.mjs')
-          s=p.read_text()
-          anchor='const RULES = [\n'
-          rules='''const RULES = [
-  ["L235S", "DAIHATSU", "ESSE", 2011, 2011, 658, 10, 58, 43, "DBA-L235S", ["https://u-catch.daihatsu.co.jp/catalog/ESSE/GRADE__10061324/"]],
-  ["ZRT272W", "TOYOTA", "AVENSIS WAGON", 2011, 2016, 1986, 20, 152, 112, "DBA-ZRT272W", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201109/10070440/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201510/10099909/"]],
-'''
+          p = Path('scripts/prestige-japan-official-chassis-enrich.mjs')
+          s = p.read_text()
+          anchor = 'const RULES = [\n'
+          addition = (
+              '  ["L235S", "DAIHATSU", "ESSE", 2011, 2011, 658, 10, 58, 43, "DBA-L235S", ["https://u-catch.daihatsu.co.jp/catalog/ESSE/GRADE__10061324/"]],\n'
+              '  ["ZRT272W", "TOYOTA", "AVENSIS WAGON", 2011, 2016, 1986, 20, 152, 112, "DBA-ZRT272W", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201109/10070440/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201510/10099909/"]],\n'
+          )
           if '"L235S", "DAIHATSU", "ESSE"' not in s:
-              if anchor not in s: raise SystemExit('RULES anchor missing')
-              s=s.replace(anchor,rules,1)
+              if anchor not in s:
+                  raise SystemExit('RULES anchor missing')
+              s = s.replace(anchor, anchor + addition, 1)
           p.write_text(s)
           PY
       - name: Validate code
@@ -86,16 +87,16 @@ jobs:
           PRESTIGE_RECOVERY_INPUT=prestige-japan-v2-power.json PRESTIGE_RECOVERY_OUTPUT=catalog-rebuild-japan-v2-validation.json PRESTIGE_RECOVERY_TARGET=3000 PRESTIGE_RECOVERY_CONCURRENCY=12 npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
           node --input-type=module - <<'NODE'
           import fs from 'node:fs';
-          const enriched=JSON.parse(fs.readFileSync('prestige-japan-v2-power.json','utf8'));
-          const result=JSON.parse(fs.readFileSync('catalog-rebuild-japan-v2-validation.json','utf8'));
-          const gained=Number(enriched?.report?.officialPowerEnrichment?.enriched||0);
-          const calculated=Number(result?.report?.calculatedCount||result?.report?.count||0);
-          const by=enriched?.report?.officialPowerEnrichment?.byChassis||{};
-          console.log(JSON.stringify({gained,calculated,byChassis:by,report:result.report},null,2));
-          if (Number(by.L235S||0)!==32) throw new Error(`L235S_exact_match_regressed:${by.L235S||0}`);
-          if (Number(by.ZRT272W||0)<20) throw new Error(`ZRT272W_exact_match_regressed:${by.ZRT272W||0}`);
-          if (gained<178) throw new Error(`japan_v2_enrichment_too_low:${gained}`);
-          if (calculated<145) throw new Error(`japan_v2_calculated_too_low:${calculated}`);
+          const enriched = JSON.parse(fs.readFileSync('prestige-japan-v2-power.json','utf8'));
+          const result = JSON.parse(fs.readFileSync('catalog-rebuild-japan-v2-validation.json','utf8'));
+          const gained = Number(enriched?.report?.officialPowerEnrichment?.enriched || 0);
+          const calculated = Number(result?.report?.calculatedCount || result?.report?.count || 0);
+          const by = enriched?.report?.officialPowerEnrichment?.byChassis || {};
+          console.log(JSON.stringify({gained, calculated, byChassis: by, report: result.report}, null, 2));
+          if (Number(by.L235S || 0) !== 32) throw new Error(`L235S_exact_match_regressed:${by.L235S || 0}`);
+          if (Number(by.ZRT272W || 0) < 20) throw new Error(`ZRT272W_exact_match_regressed:${by.ZRT272W || 0}`);
+          if (gained < 178) throw new Error(`japan_v2_enrichment_too_low:${gained}`);
+          if (calculated < 145) throw new Error(`japan_v2_calculated_too_low:${calculated}`);
           NODE
       - name: Commit only validated manufacturer rules
         shell: bash
