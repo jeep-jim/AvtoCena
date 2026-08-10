@@ -36,6 +36,7 @@ jobs:
         run: |
           npm ci
           npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo
 
       - name: Verify targeted diff
         run: |
