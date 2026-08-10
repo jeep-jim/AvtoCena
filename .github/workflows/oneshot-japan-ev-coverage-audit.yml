@@ -1,0 +1,152 @@
+name: One-shot Japan EV and official-power coverage audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-japan-ev-coverage-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Download newest final repaired Prestige artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: "31338331776"
+        run: |
+          set -euo pipefail
+          mkdir -p prestige-input
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | sort -n | tail -n1)"
+          test -n "$artifact_id"
+          echo "artifact_id=$artifact_id"
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+            -o prestige.zip
+          unzip -qo prestige.zip -d prestige-input
+          source_file="$(find prestige-input -type f -name 'prestige-japan-exact-sold-repaired.json' | head -n1)"
+          test -s "$source_file"
+          echo "PRESTIGE_SOURCE=$source_file" >> "$GITHUB_ENV"
+
+      - name: Audit runtime certified power stores
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE' | tee japan-power-store-audit.json
+          const { getCertifiedPowerReferences } = await import('./apps/web/lib/catalog/power-reference.ts');
+          const { readVehiclePowerKnowledge } = await import('./apps/web/lib/catalog/power-knowledge.ts');
+          const refs = await getCertifiedPowerReferences();
+          const knowledge = await readVehiclePowerKnowledge();
+          const byDoc = refs.reduce((acc, r) => (acc[r.sourceDocumentType] = (acc[r.sourceDocumentType] || 0) + 1, acc), {});
+          const electrified = refs.filter(r => ['electric','series_hybrid','other_hybrid'].includes(String(r.powertrainKind)));
+          console.log(JSON.stringify({ certifiedPowerReferenceCount: refs.length, certifiedByDocumentType: byDoc, certifiedElectrifiedCount: electrified.length, powerKnowledgeCount: knowledge.length }, null, 2));
+          NODE
+
+      - name: Stage primary-manufacturer Japan chassis rules and fix current Prestige chassis field
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show origin/fix/japan-official-ice-power-20260810:scripts/prestige-japan-official-chassis-enrich.mjs > scripts/tmp-japan-official-chassis-enrich.mjs
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/tmp-japan-official-chassis-enrich.mjs')
+          s = p.read_text()
+          old = 'const code = frame(offer?.frameNumber || offer?.operational?.raw?.chassis);'
+          new = 'const code = frame(offer?.frameNumber || offer?.operational?.raw?.chassis || offer?.operational?.raw?.fields?.Chassis || offer?.operational?.raw?.fields?.CHASSIS || offer?.operational?.raw?.fields?.chassis);'
+          if s.count(old) != 1:
+              raise SystemExit(f'chassis anchor mismatch: {s.count(old)}')
+          p.write_text(s.replace(old, new, 1))
+          PY
+          node --check scripts/tmp-japan-official-chassis-enrich.mjs
+
+      - name: Audit source chassis and electrified signals
+        shell: bash
+        run: |
+          node --input-type=module - <<'NODE' | tee japan-source-shape-audit.json
+          import fs from 'node:fs';
+          const p = JSON.parse(fs.readFileSync(process.env.PRESTIGE_SOURCE, 'utf8'));
+          const offers = Array.isArray(p.offers) ? p.offers : [];
+          const chassis = o => String(o?.frameNumber || o?.operational?.raw?.chassis || o?.operational?.raw?.fields?.Chassis || o?.operational?.raw?.fields?.CHASSIS || '').trim();
+          const electrifiedRe = /(EV|ELECTRIC|HYBRID|HEV|PHEV|E[- ]?POWER|e:HEV|ARIYA|LEAF|E-TRON|BZ4X|RZ\b|MX-30)/i;
+          const withChassis = offers.filter(o => chassis(o));
+          const electrified = offers.filter(o => electrifiedRe.test([o.make,o.model,o.trim,o.sourceTitle,o.fuel].filter(Boolean).join(' ')));
+          const groups = new Map();
+          for (const o of electrified) {
+            const k = `${o.make || ''}|${o.model || ''}|${o.year || ''}`;
+            groups.set(k, (groups.get(k) || 0) + 1);
+          }
+          const top = [...groups.entries()].sort((a,b)=>b[1]-a[1]).slice(0,40).map(([key,count])=>({key,count}));
+          console.log(JSON.stringify({ inputCount: offers.length, withChassis: withChassis.length, electrifiedSignalCount: electrified.length, topElectrifiedGroups: top }, null, 2));
+          NODE
+
+      - name: Apply verified manufacturer chassis ICE enrichment no publish
+        env:
+          PRESTIGE_OFFICIAL_INPUT: ${{ env.PRESTIGE_SOURCE }}
+          PRESTIGE_OFFICIAL_OUTPUT: prestige-japan-exact-sold-official-power-audit.json
+        run: node scripts/tmp-japan-official-chassis-enrich.mjs
+
+      - name: Convert all repaired sold lots after official chassis enrichment no publish
+        env:
+          PRESTIGE_RECOVERY_INPUT: prestige-japan-exact-sold-official-power-audit.json
+          PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan-official-audit.json
+          PRESTIGE_RECOVERY_TARGET: "3000"
+          PRESTIGE_RECOVERY_CONCURRENCY: "12"
+        run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+
+      - name: Summarize Japan unlock potential
+        shell: bash
+        run: |
+          node --input-type=module - <<'NODE' | tee japan-unlock-summary.json
+          import fs from 'node:fs';
+          const source = JSON.parse(fs.readFileSync('prestige-japan-exact-sold-official-power-audit.json','utf8'));
+          const result = JSON.parse(fs.readFileSync('catalog-rebuild-japan-official-audit.json','utf8'));
+          console.log(JSON.stringify({
+            inputCount: source?.offers?.length || 0,
+            officialPowerEnrichment: source?.report?.officialPowerEnrichment || null,
+            conversion: result?.report || null,
+          }, null, 2));
+          NODE
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-ev-official-power-audit
+          path: |
+            japan-power-store-audit.json
+            japan-source-shape-audit.json
+            prestige-japan-exact-sold-official-power-audit.json
+            catalog-rebuild-japan-official-audit.json
+            japan-unlock-summary.json
+          if-no-files-found: warn
+          retention-days: 3
