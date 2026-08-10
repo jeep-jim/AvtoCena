@@ -96,7 +96,7 @@ jobs:
       RECOVERY_OUTPUT: catalog-shard-${{ matrix.market }}-${{ matrix.source }}.json
       RECOVERY_TARGET: ${{ matrix.target }}
       RECOVERY_MAX_PAGES: ${{ matrix.max_pages }}
-      RECOVERY_TIME_LIMIT_MS: "5100000"
+      RECOVERY_TIME_LIMIT_MS: ${{ matrix.source == 'encar_direct' && '4200000' || '5100000' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
