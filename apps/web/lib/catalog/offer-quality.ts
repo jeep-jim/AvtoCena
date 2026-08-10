@@ -1,10 +1,10 @@
 import type { CatalogImage, VehicleOffer } from "./types";
-import { isLikelyVehicleImage } from "./image-quality";
+import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
-const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image))/i;
+const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
@@ -15,7 +15,28 @@ function meaningfulTitle(value: unknown) {
   const text = clean(value);
   return text.length >= 2 && text.length <= 180 && /[\p{L}\p{N}]/u.test(text) && !GENERIC_LISTING_RE.test(text) && !NON_VEHICLE_RE.test(text);
 }
-function imageIdentity(image: CatalogImage) { return String(image.checksum || image.id || image.objectKey || image.url || ""); }
+function mashinaSourcePhotoIdentity(value: unknown) {
+  const source = String(value || "").trim();
+  if (!source) return "";
+  try {
+    const url = new URL(source);
+    const host = url.hostname.toLowerCase();
+    let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
+    if (host === "storage.mashina.kg") {
+      pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+      return `mashina:${host}${pathname}`;
+    }
+    if (host === "im.mashina.kg") {
+      pathname = pathname.replace(/_\d{2,5}x\d{2,5}(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+      return `mashina:${host}${pathname}`;
+    }
+  } catch { /* fall through to stored identity */ }
+  return "";
+}
+function imageIdentity(image: CatalogImage) {
+  return mashinaSourcePhotoIdentity(image.url)
+    || String(image.checksum || image.id || image.objectKey || image.url || "");
+}
 
 export function credibleCatalogImages(images: CatalogImage[]) {
   const unique = new Map<string, CatalogImage>();
@@ -23,10 +44,11 @@ export function credibleCatalogImages(images: CatalogImage[]) {
     const url = String(image?.url || image?.objectKey || "");
     if (!image || !url || BAD_IMAGE_RE.test(url) || !isLikelyVehicleImage(image)) continue;
     const key = imageIdentity(image);
-    if (key && !unique.has(key)) unique.set(key, image);
-    if (unique.size >= 30) break;
+    if (!key) continue;
+    const existing = unique.get(key);
+    if (!existing || catalogImageScore(image) > catalogImageScore(existing)) unique.set(key, image);
   }
-  return [...unique.values()];
+  return [...unique.values()].slice(0, 30);
 }
 
 function sourcePriceOk(offer: VehicleOffer) {
