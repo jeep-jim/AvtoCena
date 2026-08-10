@@ -31,9 +31,13 @@ const EXPECTED_HOSTS = {
   autohome_used_china_open: ["che168.com"],
   guazi_china_open: ["guazi.com"],
   autohome_new_china_open: ["autohome.com.cn"],
+  dongchedi_china_open: ["dongchedi.com"],
   dubicars_uae_exact: ["dubicars.com"],
   autoscout_europe_open: ["autoscout24.com", "autoscout24.de", "autoscout24.it", "autoscout24.fr", "autoscout24.nl"],
+  mobile_de_open: ["mobile.de"],
   auto_georgia_open: ["auto.ge"],
+  myauto_georgia_list: ["myauto.ge"],
+  autopapa_georgia_open: ["autopapa.ge"],
   mashina_kyrgyzstan_exact: ["mashina.kg"],
 };
 
