@@ -32,22 +32,27 @@ jobs:
         shell: bash
         run: |
           cat > /tmp/mashina-gallery-check.ts <<'TS'
-          import { dedupeMashinaImageUrls } from process.env.GITHUB_WORKSPACE + "/apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts";
-          const storage = dedupeMashinaImageUrls([
-            "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_small.webp",
-            "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_medium.webp",
-            "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_large.webp",
-            "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/def_medium.webp",
-          ]);
-          if (storage.length !== 2 || !storage[0].includes("abc_large.webp")) throw new Error(`storage dedupe failed: ${JSON.stringify(storage)}`);
-          const legacy = dedupeMashinaImageUrls([
-            "https://im.mashina.kg/tachka/images/1/3/8/hash_640x480.jpg",
-            "https://im.mashina.kg/tachka/images/1/3/8/hash_1200x900.jpg",
-          ]);
-          if (legacy.length !== 1 || !legacy[0].includes("1200x900.jpg")) throw new Error(`legacy dedupe failed: ${JSON.stringify(legacy)}`);
-          const bogus = dedupeMashinaImageUrls(["https://mashina.kg/cdn-cgi/challenge-platform/scripts/jsd/main.js"]);
-          if (bogus.length !== 0) throw new Error(`bogus asset accepted: ${JSON.stringify(bogus)}`);
-          console.log(JSON.stringify({ storage, legacy, bogus }, null, 2));
+          import { pathToFileURL } from "node:url";
+          async function main() {
+            const source = pathToFileURL(`${process.env.GITHUB_WORKSPACE}/apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts`).href;
+            const { dedupeMashinaImageUrls } = await import(source);
+            const storage = dedupeMashinaImageUrls([
+              "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_small.webp",
+              "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_medium.webp",
+              "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/abc_large.webp",
+              "https://storage.mashina.kg/catalog/images/2026-08-02/10102361/def_medium.webp",
+            ]);
+            if (storage.length !== 2 || !storage[0].includes("abc_large.webp")) throw new Error(`storage dedupe failed: ${JSON.stringify(storage)}`);
+            const legacy = dedupeMashinaImageUrls([
+              "https://im.mashina.kg/tachka/images/1/3/8/hash_640x480.jpg",
+              "https://im.mashina.kg/tachka/images/1/3/8/hash_1200x900.jpg",
+            ]);
+            if (legacy.length !== 1 || !legacy[0].includes("1200x900.jpg")) throw new Error(`legacy dedupe failed: ${JSON.stringify(legacy)}`);
+            const bogus = dedupeMashinaImageUrls(["https://mashina.kg/cdn-cgi/challenge-platform/scripts/jsd/main.js"]);
+            if (bogus.length !== 0) throw new Error(`bogus asset accepted: ${JSON.stringify(bogus)}`);
+            console.log(JSON.stringify({ storage, legacy, bogus }, null, 2));
+          }
+          main().catch((error) => { console.error(error); process.exit(1); });
           TS
           npx tsx /tmp/mashina-gallery-check.ts
       - name: Commit validated source patch to branch
