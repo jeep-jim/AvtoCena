@@ -1,0 +1,70 @@
+name: One-shot add OSAGO footer button
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-add-osago-footer-button.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oneshot-add-osago-footer-button
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Add placeholder insurance button
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/layout/PublicLegalFooter.tsx')
+          s = p.read_text()
+          old = '''            <div className="mt-4 grid grid-cols-[minmax(0,1.12fr)_minmax(0,.88fr)] gap-2 sm:flex sm:flex-wrap">\n              <Link href="/cars" className="ac-public-footer-cta inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl px-3 text-center text-[13px] font-black sm:px-4 sm:text-sm" style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>Смотреть каталог</Link>\n              <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl bg-white/[.07] px-3 text-center text-[13px] font-black text-[var(--ac-text)] transition hover:bg-white/[.12] sm:px-4 sm:text-sm">🚗 АвтоДилерам</Link>\n            </div>\n'''
+          new = old + '''            <button type="button" aria-disabled="true" className="mt-2 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-white/[.07] px-4 text-center text-sm font-black text-[var(--ac-text)]">Рассчитать ОСАГО</button>\n'''
+          if old not in s:
+              raise SystemExit('footer CTA block not found')
+          if 'Рассчитать ОСАГО' in s:
+              raise SystemExit('OSAGO button already exists')
+          p.write_text(s.replace(old, new, 1))
+          PY
+
+      - name: Typecheck
+        run: |
+          npm ci
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo packages/engine/tsconfig.tsbuildinfo 2>/dev/null || true
+
+      - name: Verify and publish
+        shell: bash
+        run: |
+          git diff --check
+          grep -q 'Рассчитать ОСАГО' apps/web/components/layout/PublicLegalFooter.tsx
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+          test "$(git hash-object apps/web/components/home/BuyerGallery.tsx)" = "11511c3184cb80776feec332a06e7191d5ad618c"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-add-osago-footer-button.yml
+          git add apps/web/components/layout/PublicLegalFooter.tsx
+          git commit -m "feat: add OSAGO footer placeholder button"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+          fi
+          git push origin HEAD:main
