@@ -5,7 +5,7 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
-const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
@@ -31,9 +31,13 @@ const EXPECTED_HOSTS = {
   autohome_used_china_open: ["che168.com"],
   guazi_china_open: ["guazi.com"],
   autohome_new_china_open: ["autohome.com.cn"],
+  dongchedi_china_open: ["dongchedi.com"],
   dubicars_uae_exact: ["dubicars.com"],
   autoscout_europe_open: ["autoscout24.com", "autoscout24.de", "autoscout24.it", "autoscout24.fr", "autoscout24.nl"],
+  mobile_de_open: ["mobile.de"],
   auto_georgia_open: ["auto.ge"],
+  myauto_georgia_list: ["myauto.ge"],
+  autopapa_georgia_open: ["autopapa.ge"],
   mashina_kyrgyzstan_exact: ["mashina.kg"],
 };
 
@@ -407,7 +411,7 @@ await Promise.all(sources.map(async (source) => {
       let calculated;
       try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
       catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) }); reject(rejections, "calculation_exception"); return null; }
-      if (!exactCalculation(calculated)) {
+      if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) {
         const diagnostic = calculationPendingDiagnostic(calculated);
         const diagnosticKey = `${diagnostic.make}|${diagnostic.model}|${diagnostic.trim}|${diagnostic.year}|${diagnostic.powertrainKind}|${diagnostic.reason}`.toLocaleLowerCase("en-US");
         const targetDiagnostics = ["electric", "series_hybrid", "other_hybrid"].includes(diagnostic.powertrainKind) ? pendingElectrifiedModels : pendingCombustionModels;
@@ -423,6 +427,7 @@ await Promise.all(sources.map(async (source) => {
           recoveryExactSourceUrl: true,
           recoveryExactPhotoIdentity: true,
           recoveryCalculatedRub: true,
+          recoveryPreliminaryPowerPending: isPreliminaryElectrifiedCalculation(calculated),
           recoveryBodySourceOnly: true,
         },
       };
@@ -464,6 +469,7 @@ const report = {
   calculationPendingCombustionModels: [...pendingCombustionModels.values()].slice(0, 100),
   preferredCount,
   calculatedCount: offers.filter(exactCalculation).length,
+  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
   imageStats: offers.length ? {
     min: Math.min(...offers.map((offer) => offer.images?.length || 0)),
     max: Math.max(...offers.map((offer) => offer.images?.length || 0)),

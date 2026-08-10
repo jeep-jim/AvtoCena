@@ -1,12 +1,7 @@
 name: Catalog live recovery · Japan from Prestige
-run-name: Japan calculated recovery · ${{ github.event.workflow_run.id || inputs.source_run_id || github.sha }}
+run-name: Japan calculated recovery · ${{ inputs.source_run_id || github.sha }}
 
 on:
-  workflow_run:
-    workflows:
-      - "Catalog V6 · Prestige repair failed chunks"
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       source_run_id:
@@ -29,22 +24,18 @@ env:
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
-  SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.source_run_id }}
+  SOURCE_RUN_ID: ${{ inputs.source_run_id }}
 
 jobs:
   recover-and-publish:
-    # workflow_run fires for success, failure and cancellation. A cancelled or
-    # failed repair run cannot contain the required repaired artifact, so skip it
-    # before acquiring the shared live-publisher slot. Successful/manual runs
-    # remain serialized with every other read-preserve-write catalog publisher.
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     concurrency:
       group: catalog-live-daily-working-markets
       cancel-in-progress: false
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -52,10 +43,18 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: |
+      - name: Validate Japan recovery and preflight all-seven preservation
+        shell: bash
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-japan-preflight-audit.json
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+        run: |
           node --check scripts/prestige-japan-official-chassis-enrich.mjs
           node --check scripts/catalog-live-recovery-japan-prestige.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
+          npm run typecheck
+          npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Download repaired strict Prestige result
         shell: bash
         env:
@@ -63,11 +62,6 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p prestige-input
-          # A rerun of one failed repair job creates another artifact with the
-          # same name under the same workflow run. GitHub returns artifacts in
-          # API order, not oldest-to-newest order; selecting the last line can
-          # therefore pick the stale failed-attempt aggregate. Artifact IDs are
-          # monotonic, so always take the highest matching ID.
           artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | sort -n | tail -n1)"
           test -n "$artifact_id"
           echo "Using repaired Prestige artifact id=$artifact_id from run=$SOURCE_RUN_ID"
@@ -78,11 +72,10 @@ jobs:
             "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
             --output prestige.zip
           unzip -q prestige.zip -d prestige-input
-          find prestige-input -maxdepth 3 -type f -print
           source_file="$(find prestige-input -type f -name 'prestige-japan-exact-sold-repaired.json' | head -n1)"
           test -s "$source_file"
           echo "PRESTIGE_RECOVERY_INPUT=$source_file" >> "$GITHUB_ENV"
-      - name: Enrich strict sold lots with exact manufacturer chassis power
+      - name: Enrich sold lots with documented chassis power where available
         shell: bash
         run: |
           set -euo pipefail
@@ -91,26 +84,36 @@ jobs:
           node scripts/prestige-japan-official-chassis-enrich.mjs
           test -s "$PRESTIGE_OFFICIAL_OUTPUT"
           echo "PRESTIGE_RECOVERY_INPUT=$PRESTIGE_OFFICIAL_OUTPUT" >> "$GITHUB_ENV"
-      - name: Convert strict sold lots into exact calculated ruble cards
+      - name: Convert sold lots into exact or preliminary calculated ruble cards
         env:
           PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan.json
-          PRESTIGE_RECOVERY_TARGET: "3000"
+          PRESTIGE_RECOVERY_TARGET: "30000"
           PRESTIGE_RECOVERY_CONCURRENCY: "12"
         run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
-      - name: Publish Japan without touching recovered live markets
+      - name: Publish Japan cumulatively while preserving the other six markets
         env:
           RECOVERY_PUBLISH_MARKET: japan
           RECOVERY_PUBLISH_INPUT: catalog-rebuild-japan.json
           RECOVERY_PUBLISH_REPORT: catalog-live-recovery-japan-publish-report.json
-          RECOVERY_PUBLISH_MAX: "3000"
+          RECOVERY_PUBLISH_MAX: "30000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit all seven markets after Japan publish
+        if: always()
+        shell: bash
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-japan-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: japan
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-live-recovery-japan-reports
           path: |
+            catalog-japan-preflight-audit.json
             prestige-japan-exact-sold-official-power.json
             catalog-rebuild-japan.json
             catalog-live-recovery-japan-publish-report.json
+            catalog-japan-postpersist-audit.json
           if-no-files-found: warn
           retention-days: 3

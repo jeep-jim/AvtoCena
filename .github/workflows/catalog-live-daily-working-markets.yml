@@ -1,21 +1,10 @@
 name: Catalog live daily · working markets
-# recovery-trigger: preliminary electrified live publish 2026-08-10
-run-name: Daily cumulative catalog · Korea China Europe Georgia · ${{ github.sha }}
+run-name: Source-sharded cumulative catalog · Korea China Europe Georgia · ${{ github.sha }}
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "17 20 * * *"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-live-daily-working-markets.yml"
-      - "scripts/catalog-live-recovery-market.mjs"
-      - "scripts/catalog-live-recovery-europe-otomoto.mjs"
-      - "scripts/catalog-live-recovery-direct-exact.mjs"
-      - "scripts/catalog-live-recovery-publish.mjs"
-      - "apps/web/lib/catalog/auto-georgia-strict-source.ts"
 
 permissions:
   contents: read
@@ -46,7 +35,7 @@ env:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -54,47 +43,57 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: |
+      - name: Static validation
+        shell: bash
+        run: |
+          set -euo pipefail
           node --check scripts/catalog-live-recovery-market.mjs
           node --check scripts/catalog-live-recovery-europe-otomoto.mjs
-          node --check scripts/catalog-live-recovery-direct-exact.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-recovery-merge-shards.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
           npm run typecheck
+          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
+      - name: Verify current seven-market baseline before any write
+        shell: bash
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-preflight-audit.json
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-kceg-preflight-audit
+          path: catalog-preflight-audit.json
+          if-no-files-found: warn
+          retention-days: 3
 
-  collect:
+  collect_generic:
     needs: validate
+    if: needs.validate.result == 'success'
+    continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 95
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 6
       matrix:
         include:
-          - market: korea
-            mode: generic
-            source_ids: encar_direct,kcar_korea_open
-            target: 5000
-            max_pages: 300
-          - market: china
-            mode: generic
-            source_ids: autohome_used_china_open,guazi_china_open,autohome_new_china_open
-            target: 5000
-            max_pages: 300
-          - market: europe
-            mode: europe_otomoto
-            source_ids: otomoto_europe_exact
-            target: 5000
-            max_pages: 120
-          - market: georgia
-            mode: generic
-            source_ids: auto_georgia_open
-            target: 3000
-            max_pages: 240
+          - { market: korea, source: encar_direct, target: 5000, max_pages: 300 }
+          - { market: korea, source: kcar_korea_open, target: 5000, max_pages: 300 }
+          - { market: china, source: autohome_used_china_open, target: 5000, max_pages: 300 }
+          - { market: china, source: dongchedi_china_open, target: 5000, max_pages: 300 }
+          - { market: china, source: guazi_china_open, target: 5000, max_pages: 300 }
+          - { market: china, source: autohome_new_china_open, target: 5000, max_pages: 300 }
+          - { market: europe, source: mobile_de_open, target: 5000, max_pages: 300 }
+          - { market: europe, source: autoscout_europe_open, target: 5000, max_pages: 300 }
+          - { market: georgia, source: myauto_georgia_list, target: 5000, max_pages: 300 }
+          - { market: georgia, source: autopapa_georgia_open, target: 5000, max_pages: 300 }
+          - { market: georgia, source: auto_georgia_open, target: 5000, max_pages: 300 }
     env:
       RECOVERY_MARKET: ${{ matrix.market }}
-      RECOVERY_SOURCE_IDS: ${{ matrix.source_ids }}
-      RECOVERY_DIRECT_MARKET: ${{ matrix.market }}
-      RECOVERY_OUTPUT: catalog-rebuild-${{ matrix.market }}.json
+      RECOVERY_SOURCE_IDS: ${{ matrix.source }}
+      RECOVERY_OUTPUT: catalog-shard-${{ matrix.market }}-${{ matrix.source }}.json
       RECOVERY_TARGET: ${{ matrix.target }}
       RECOVERY_MAX_PAGES: ${{ matrix.max_pages }}
       RECOVERY_TIME_LIMIT_MS: "5100000"
@@ -105,27 +104,85 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect exact calculated market inventory
-        shell: bash
-        run: |
-          set -euo pipefail
-          case "${{ matrix.mode }}" in
-            generic) npx tsx scripts/catalog-live-recovery-market.mjs ;;
-            europe_otomoto) npx tsx scripts/catalog-live-recovery-europe-otomoto.mjs ;;
-            direct) npx tsx scripts/catalog-live-recovery-direct-exact.mjs ;;
-            *) echo "Unknown collection mode" >&2; exit 2 ;;
-          esac
+      - name: Collect one exact source shard
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-daily-${{ matrix.market }}
-          path: catalog-rebuild-${{ matrix.market }}.json
+          name: catalog-shard-${{ matrix.market }}-${{ matrix.source }}
+          path: catalog-shard-${{ matrix.market }}-${{ matrix.source }}.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  collect_otomoto:
+    needs: validate
+    if: needs.validate.result == 'success'
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    env:
+      RECOVERY_MARKET: europe
+      RECOVERY_SOURCE_IDS: otomoto_europe_exact
+      RECOVERY_OUTPUT: catalog-shard-europe-otomoto_europe_exact.json
+      RECOVERY_TARGET: "5000"
+      RECOVERY_MAX_PAGES: "300"
+      RECOVERY_TIME_LIMIT_MS: "5100000"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect OTOMOTO exact shard
+        run: npx tsx scripts/catalog-live-recovery-europe-otomoto.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-shard-europe-otomoto_europe_exact
+          path: catalog-shard-europe-otomoto_europe_exact.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  merge:
+    needs: [validate, collect_generic, collect_otomoto]
+    if: always() && needs.validate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: catalog-shard-*
+          path: shard-input
+      - name: Merge successful source shards per market
+        shell: bash
+        run: |
+          set -euo pipefail
+          merged=""
+          for market in korea china europe georgia; do
+            export RECOVERY_MERGE_MARKET="$market"
+            export RECOVERY_MERGE_INPUT_DIR="shard-input"
+            export RECOVERY_MERGE_OUTPUT="catalog-rebuild-${market}.json"
+            if node scripts/catalog-live-recovery-merge-shards.mjs; then merged="$merged $market"; fi
+          done
+          echo "merged=$merged" >> "$GITHUB_STEP_SUMMARY"
+          test -n "$merged"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-kceg-merged
+          path: catalog-rebuild-*.json
           if-no-files-found: warn
           retention-days: 3
 
   publish:
-    needs: [validate, collect]
-    if: always() && needs.validate.result == 'success'
+    needs: [validate, merge]
+    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -136,12 +193,10 @@ jobs:
           cache: npm
       - run: npm ci
       - uses: actions/download-artifact@v4
-        continue-on-error: true
         with:
-          pattern: catalog-daily-*
+          name: catalog-kceg-merged
           path: daily-input
-          merge-multiple: true
-      - name: Publish each successful market cumulatively
+      - name: Publish markets serially, preserving all seven
         shell: bash
         run: |
           set +e
@@ -149,28 +204,30 @@ jobs:
           failed=""
           for market in korea china europe georgia; do
             input="daily-input/catalog-rebuild-${market}.json"
-            if [ ! -s "$input" ]; then
-              echo "$market: no usable artifact; preserving current market"
-              failed="$failed $market(no-artifact)"
-              continue
-            fi
+            if [ ! -s "$input" ]; then failed="$failed $market(no-artifact)"; continue; fi
             export RECOVERY_PUBLISH_MARKET="$market"
             export RECOVERY_PUBLISH_INPUT="$input"
             export RECOVERY_PUBLISH_REPORT="catalog-daily-${market}-publish-report.json"
-            export RECOVERY_PUBLISH_MAX="100000"
-            if npx tsx scripts/catalog-live-recovery-publish.mjs; then
-              published="$published $market"
-            else
-              failed="$failed $market"
-            fi
+            export RECOVERY_PUBLISH_MAX="30000"
+            if npx tsx scripts/catalog-live-recovery-publish.mjs; then published="$published $market"; else failed="$failed $market"; fi
           done
           echo "published=$published" >> "$GITHUB_STEP_SUMMARY"
           echo "failed=$failed" >> "$GITHUB_STEP_SUMMARY"
           test -n "$published"
+      - name: Audit all seven markets after publish
+        if: always()
+        shell: bash
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-kceg-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-daily-publish-reports
-          path: catalog-daily-*-publish-report.json
+          name: catalog-kceg-publish-reports
+          path: |
+            catalog-daily-*-publish-report.json
+            catalog-kceg-postpersist-audit.json
           if-no-files-found: warn
           retention-days: 3

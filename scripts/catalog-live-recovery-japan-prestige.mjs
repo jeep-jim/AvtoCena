@@ -4,7 +4,7 @@ process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
-const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
@@ -12,7 +12,7 @@ const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps
 
 const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-repaired.json";
 const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.json";
-const target = Math.max(1, Math.min(10_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
+const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
@@ -73,11 +73,6 @@ async function uniqueVariantEnrich(offer) {
       return Math.abs(Number(variant.engineCc) - engineCc) <= tolerance;
     });
   } else {
-    // Source-side EV auction results legitimately have no engine displacement.
-    // Allow that only for an unambiguous exact/alias model match where every
-    // active year-compatible knowledge variant is explicitly electric and
-    // itself has no combustion displacement. This cannot turn mixed ICE/EV
-    // model families into EVs by inference.
     const strictModelMatch = match.matchedBy !== "text" && Number(match.score || 0) >= 120;
     const allExplicitElectric = baseVariants.length > 0 && baseVariants.every((variant) =>
       String(variant.powertrainKind || "") === "electric" && !(Number(variant.engineCc || 0) > 0));
@@ -198,15 +193,12 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   if (offer.images.length < 5 || offer.images.some((image) => !EXACT_IMAGE.test(String(image?.url || "")))) { reject("images"); return null; }
   if (COMMERCIAL_RE.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""}`)) { reject("commercial"); return null; }
   offer = await uniqueVariantEnrich(offer);
-  // Certified documents may also classify a source-exact make/model/year
-  // as electrified; calling this unconditionally is safe because the
-  // reference matcher requires an exact make/model plus verified document.
   offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
   if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }
   let calculated;
   try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
   catch { reject("calculation_exception"); return null; }
-  if (!exactCalculation(calculated)) { reject("calculation_pending"); return null; }
+  if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) { reject("calculation_pending"); return null; }
   calculated.status = "active";
   calculated.operational = {
     ...(calculated.operational || {}),
@@ -240,21 +232,18 @@ const report = {
   candidateCount: rows.length,
   count: offers.length,
   target,
-  minYear,
-  preferredMaxRub,
-  maxOffersPerModel,
-  candidateDiversitySkipped: candidateSelection.quotaSkipped,
-  finalDiversitySkipped: finalSelection.quotaSkipped,
+  candidateModelQuotaSkipped: candidateSelection.quotaSkipped,
+  finalModelQuotaSkipped: finalSelection.quotaSkipped,
   distinctModels: finalSelection.distinctModels,
   distinctMakes: finalSelection.distinctMakes,
-  preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
-  calculatedCount: offers.filter(exactCalculation).length,
+  maxOffersPerModel,
+  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
+  exactCalculatedCount: offers.filter(exactCalculation).length,
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
   hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,
-  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
+  preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   rejected,
-  passed: offers.length > 0,
 };
-await fs.writeFile(output, JSON.stringify({ market: "japan", count: offers.length, partial: offers.length < target, report, offers }, null, 2));
+await fs.writeFile(output, JSON.stringify({ offers, report }, null, 2));
 console.log(JSON.stringify(report, null, 2));
 if (!offers.length) process.exit(1);
