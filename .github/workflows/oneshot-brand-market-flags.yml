@@ -1,0 +1,88 @@
+name: One-shot brand market flag icons
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-brand-market-flags.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Replace market letter flags with SVG flag icons
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('apps/web/app/(public)/cars/brand/[slug]/page.tsx')
+          text = p.read_text()
+
+          replacements = [
+            (
+              'import { CatalogCard } from "@/components/catalog/CatalogCard";\n',
+              'import { CatalogCard } from "@/components/catalog/CatalogCard";\nimport { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";\n',
+              'CatalogMarketFlag import',
+            ),
+            (
+              'import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";',
+              'import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";',
+              'remove text flag map import',
+            ),
+            (
+              '{availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black">{CATALOG_MARKET_FLAGS[market]} {CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}',
+              '{availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}',
+              'market availability pills',
+            ),
+            (
+              '<h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{CATALOG_MARKET_FLAGS[group.market]}</span><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>',
+              '<h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>',
+              'market section heading',
+            ),
+          ]
+
+          for old, new, label in replacements:
+            count = text.count(old)
+            if count != 1:
+              raise SystemExit(f'{label}: expected 1 match, found {count}')
+            text = text.replace(old, new, 1)
+
+          p.write_text(text)
+          print('patched', p)
+          PY
+
+      - name: Typecheck
+        run: |
+          npm ci
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo || true
+
+      - name: Verify and publish
+        shell: bash
+        run: |
+          git diff --check
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-brand-market-flags.yml
+          git add 'apps/web/app/(public)/cars/brand/[slug]/page.tsx'
+          git commit -m "fix: render market flags as icons on brand pages"
+          git fetch origin main
+          git pull --rebase --autostash origin main
+          git push origin HEAD:main
