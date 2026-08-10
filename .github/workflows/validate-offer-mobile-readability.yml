@@ -1,0 +1,47 @@
+name: Validate offer mobile readability
+
+on:
+  push:
+    branches: [fix/offer-mobile-readability-cjk-20260810]
+    paths:
+      - .github/workflows/validate-offer-mobile-readability.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/offer-mobile-readability-cjk-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply patch
+        run: python3 scripts/patch-offer-mobile-readability.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Smoke localization and power display
+        run: |
+          npx tsx -e 'import {catalogTransmissionName,translateCatalogText,catalogOfferTitle} from "./apps/web/lib/catalog/presentation.ts"; import {catalogPowerDisplay} from "./apps/web/lib/catalog/power-display.ts"; const t=catalogTransmissionName("电动汽车单速变速箱"); if(t!=="Одноступенчатый редуктор") throw new Error(t); const raw=translateCatalogText("电动汽车单速变速箱"); if(/[\u3400-\u4dbf\u4e00-\u9fff\u3040-\u30ff가-힣]/u.test(raw)) throw new Error(`foreign leaked: ${raw}`); const title=catalogOfferTitle({market:"china",make:"长安",model:"测试车型",operational:{raw:{seriesId:7434}}}); if(/[\u3400-\u4dbf\u4e00-\u9fff\u3040-\u30ff가-힣]/u.test(title)) throw new Error(`title foreign leaked: ${title}`); const estimated=catalogPowerDisplay({powertrainKind:"electric",powerHp:190,powerKw:139.74,calculationSnapshot:{certified30MinutePowerMissing:true}}); if(estimated!==null) throw new Error(`peak leaked as 30-min ${JSON.stringify(estimated)}`); const exact=catalogPowerDisplay({powertrainKind:"electric",power30MinKw:65}); if(!exact || !exact.thirtyMinuteLabel.includes("65")) throw new Error("exact 30-min missing"); console.log({t,title,exact:exact.thirtyMinuteLabel})'
+      - name: Static UI checks
+        run: |
+          grep -q 'ac-preliminary-notice' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          grep -q 'ac-spec-info-popover' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          grep -q 'mileageKm > 0' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          grep -q 'last-child:nth-child(odd)' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-offer-mobile-readability.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/presentation.ts apps/web/lib/catalog/power-display.ts 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix offer readability and public localization [skip actions]"
+          git push origin HEAD:fix/offer-mobile-readability-cjk-20260810
