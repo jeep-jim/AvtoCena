@@ -134,6 +134,31 @@ export const CATALOG_BRANDS: CatalogBrand[] = DROM_BRAND_NAMES
   })
   .sort((left, right) => left.name.localeCompare(right.name, "en"));
 
+const LOCALIZED_ALIASES: Record<string, string> = {
+  "기아": "Kia",
+  "현대": "Hyundai",
+  "쉐보레(GM대우)": "Chevrolet",
+  "제네시스": "Genesis",
+  "르노코리아(삼성)": "Renault Samsung",
+  "벤츠": "Mercedes-Benz",
+  "미니": "MINI",
+  "아우디": "Audi",
+  "폭스바겐": "Volkswagen",
+  "KG모빌리티(쌍용)": "KGM",
+  "랜드로버": "Land Rover",
+  "지프": "Jeep",
+  "볼보": "Volvo",
+  "푸조": "Peugeot",
+  "혼다": "Honda",
+  "포르쉐": "Porsche",
+  "크라이슬러": "Chrysler",
+  "포드": "Ford",
+  "도요타": "Toyota",
+  "렉서스": "Lexus",
+  "링컨": "Lincoln",
+  "마세라티": "Maserati",
+};
+
 const ALIASES: Record<string, string> = {
   mercedes: "Mercedes-Benz",
   mercedesbenz: "Mercedes-Benz",
@@ -177,7 +202,8 @@ for (const brand of CATALOG_BRANDS) {
 
 export function canonicalCatalogBrand(value: string) {
   const cleaned = String(value || "").replace(/\s+/g, " ").trim();
-  const alias = ALIASES[key(cleaned)];
+  const localizedAlias = LOCALIZED_ALIASES[cleaned];
+  const alias = localizedAlias || ALIASES[key(cleaned)];
   return alias || byKey.get(key(cleaned))?.name || cleaned;
 }
 
