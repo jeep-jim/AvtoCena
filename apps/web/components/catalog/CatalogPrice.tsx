@@ -14,7 +14,9 @@ export function CatalogPrice({
   const totalRub = Number(offer?.totalRub || 0);
 
   if (totalRub > 0) {
-    return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
+      || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
+    return <PriceTrend offer={offer} label={preliminary ? "Предварительно от" : label} dense={dense} priceClassName={priceClassName} />;
   }
 
   return (

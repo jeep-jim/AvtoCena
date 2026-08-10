@@ -4,7 +4,7 @@ process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
-const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
@@ -206,7 +206,7 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   let calculated;
   try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
   catch { reject("calculation_exception"); return null; }
-  if (!exactCalculation(calculated)) { reject("calculation_pending"); return null; }
+  if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) { reject("calculation_pending"); return null; }
   calculated.status = "active";
   calculated.operational = {
     ...(calculated.operational || {}),
@@ -249,6 +249,7 @@ const report = {
   distinctMakes: finalSelection.distinctMakes,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
+  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
   hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,
   documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
