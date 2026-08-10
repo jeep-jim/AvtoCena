@@ -21,12 +21,22 @@ jobs:
       - run: npm ci
       - name: Typecheck and Georgia identity smoke
         run: |
+          node --check scripts/catalog-live-recovery-direct-exact.mjs
+          node --check scripts/catalog-live-recovery-publish-batch.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
           npm run typecheck
           node --import tsx --test tests/auto-georgia-price.test.ts
-      - name: Verify manual-only shared writer serialization
+      - name: Verify manual-only shared writer and all-seven guards
         run: |
-          grep -q 'group: catalog-live-daily-working-markets' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          grep -q 'cancel-in-progress: false' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          grep -q '^  workflow_dispatch:' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          ! grep -q '^  push:' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          grep -q "if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'" .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          f=.github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q 'group: catalog-live-daily-working-markets' "$f"
+          grep -q 'cancel-in-progress: false' "$f"
+          grep -q '^  workflow_dispatch:' "$f"
+          ! grep -q '^  push:' "$f"
+          grep -q "if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'" "$f"
+          grep -q 'Snapshot all seven markets before batch write' "$f"
+          grep -q 'Audit all seven markets after batch write' "$f"
+          grep -q 'cross_market_loss' "$f"
+          grep -q "\['korea','china','japan','europe','kyrgyzstan'\]" "$f"
+          grep -q 'maxPerExactModel' "$f"
+          grep -q 'nonVehicleCount' "$f"
