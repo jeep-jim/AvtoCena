@@ -46,6 +46,8 @@ jobs:
           git add apps/web/components/catalog/OfferContactActions.tsx
           git rm .github/workflows/oneshot-compact-credit-mobile-button-v1.yml .github/oneshot/compact_credit_patch.py
           git commit -m 'Compact credit placeholder and add mobile credit entry'
+          git reset --hard HEAD
+          git clean -fd
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
