@@ -302,7 +302,7 @@ function RateSparkline({ rate, light = false, priceRub }: { rate: CurrencyRateLi
         {coords.map((point, index) => {
           const delta = index > 0 ? values[index] - values[index - 1] : totalDelta;
           const selected = index === selectedIndex;
-          return <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={selected ? 5.6 : 4.4} fill={movementColor(delta, light)} stroke={selected ? (light ? "#ffffff" : "#0f1219") : light ? "#f1f3f7" : "#151821"} strokeWidth={selected ? 3.2 : 2.1} className="cursor-pointer" onClick={() => setSelectedIndex(index)} />;
+          return <circle key={`${point.x}-${point.y}`} cx={point.x} cy={point.y} r={selected ? 5.6 : 4.4} fill={movementColor(delta, light)} stroke={light ? (selected ? "#ffffff" : "#f1f3f7") : "var(--ac-surface-2, #293444)"} strokeWidth={selected ? 3.2 : 2.1} className="cursor-pointer" onClick={() => setSelectedIndex(index)} />;
         })}
         {coords.map((point, index) => {
           if (index === 0) return null;

@@ -10,7 +10,7 @@ type Hosts = {
 };
 
 function ActionButtons({ className = "" }: { className?: string }) {
-  const buttonClass = "ac-offer-contact-button h-14 min-w-0 rounded-[1.35rem] px-3 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:text-sm md:text-base";
+  const buttonClass = "ac-offer-contact-button inline-flex h-[54px] min-w-0 items-center justify-center gap-2.5 rounded-[1.05rem] px-3 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:text-sm md:text-base xl:h-14";
   return (
     <div className={`grid grid-cols-2 gap-3 md:gap-4 ${className}`}>
       <button
@@ -18,14 +18,16 @@ function ActionButtons({ className = "" }: { className?: string }) {
         data-offer-action="messenger"
         className={`${buttonClass} bg-[#00A2E8]`}
       >
-        Чат в мессенджере
+        <span className="hidden xl:inline-flex" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 19 17.5h-7.1L7 21v-3.5H5A2.5 2.5 0 0 1 2.5 15V8A2.5 2.5 0 0 1 5 5.5Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.5 10h9M7.5 13.5h6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"/></svg></span>
+        <span>Чат в мессенджере</span>
       </button>
       <button
         type="button"
         data-offer-action="lead"
         className={`${buttonClass} bg-[#22B14C]`}
       >
-        Оставить заявку
+        <span>Оставить заявку</span>
+        <span className="hidden xl:inline-flex" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M7.2 3.8 10 8.3 8.4 10a14.7 14.7 0 0 0 5.6 5.6l1.7-1.6 4.5 2.8c.5.3.7.9.5 1.4-.5 1.4-1.8 2.4-3.3 2.5C10.1 21.1 2.9 13.9 3.3 6.6c.1-1.5 1.1-2.8 2.5-3.3.5-.2 1.1 0 1.4.5Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
       </button>
     </div>
   );
@@ -77,7 +79,7 @@ function MobilePinnedActions() {
   }, []);
 
   return (
-    <div ref={anchorRef} className="relative mt-4 h-14 xl:hidden">
+    <div ref={anchorRef} className="relative mt-4 h-[54px] xl:hidden">
       <div style={fixedStyle || undefined} className="w-full">
         <ActionButtons />
       </div>
@@ -140,6 +142,13 @@ export function OfferContactActions() {
       <style jsx global>{`
         .ac-offer-contact-button {
           color: #fff !important;
+        }
+        .ac-offer-page > section > section {
+          border-top: 1px solid rgba(255,255,255,.085) !important;
+          padding-top: 1rem;
+        }
+        html[data-theme="light"] .ac-offer-page > section > section {
+          border-top-color: rgba(35,42,55,.12) !important;
         }
       `}</style>
     </>
