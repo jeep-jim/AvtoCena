@@ -73,7 +73,7 @@ export default async function ResultsPage({ searchParams }: { searchParams?: Pro
     sort: "updatedAt" as const,
   };
   const [facets, exactGroups] = await Promise.all([
-    readCatalogFacets({ market: market || undefined, make: make || undefined }),
+    readCatalogFacets({ ...searchInput, market: market || undefined }),
     Promise.all(marketList.map(async (item) => {
       const result = await searchOffers({ ...searchInput, market: item.id, pageSize: 12 });
       return { ...item, items: result.items, total: result.total };

@@ -16,7 +16,7 @@ type FavoriteLeadItem = {
   href?: string;
 };
 
-type HostKind = "home" | "catalog" | "brand";
+type HostKind = "home" | "brand" | "offer";
 type HostTarget = { kind: HostKind; node: HTMLElement };
 type LeadRequest =
   | { mode: "generic"; source: string; car?: string }
@@ -327,8 +327,8 @@ export function PublicLeadCaptureV2() {
       if (cancelled) return;
       const targets: Array<{ kind: HostKind; parent: HTMLElement | null }> = [];
       if (pathname === "/") targets.push({ kind: "home", parent: document.querySelector<HTMLElement>("main.ac-home-page > div.mx-auto") });
-      if (pathname === "/cars") targets.push({ kind: "catalog", parent: document.querySelector<HTMLElement>("main.ac-catalog-page > section") });
       if (/^\/cars\/brand\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "brand", parent: document.querySelector<HTMLElement>("main.ac-brand-catalog-page > section") });
+      if (/^\/cars\/offer\/[^/]+\/?$/.test(pathname)) targets.push({ kind: "offer", parent: document.querySelector<HTMLElement>("main.ac-offer-page > section") });
       if (!targets.length) { setHosts([]); return; }
       if (targets.some((target) => !target.parent)) { frame = window.requestAnimationFrame(mount); return; }
       const next = targets.flatMap(({ kind, parent }) => { if (!parent) return []; const node = document.createElement("div"); node.dataset.acLeadHost = kind; node.style.gridColumn = "1 / -1"; node.style.width = "100%"; parent.appendChild(node); created.push(node); return [{ kind, node }]; });
@@ -364,5 +364,5 @@ export function PublicLeadCaptureV2() {
     document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);
   }, [pathname]);
 
-  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const brand = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\s+под ключ$/i, "") : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car: brand }); }} />, host.node))}{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
+  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const car = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\s+под ключ$/i, "") : host.kind === "offer" ? cleanText(document.querySelector<HTMLElement>("main.ac-offer-page h1")?.textContent) : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car }); }} />, host.node))}{pathname === "/favorites" && favorites.length && !request ? <FavoritesPinnedActions onLead={() => setRequest({ mode: "favorites", source: "favorites_request" })} /> : null}{request ? <LeadDialog key={`${request.mode}:${request.mode === "offer" ? request.offerId : request.source}`} request={request} favorites={favorites} onClose={() => setRequest(null)} /> : null}</>;
 }

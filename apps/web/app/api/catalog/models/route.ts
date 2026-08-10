@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { readCatalogFacets } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +15,7 @@ export async function GET(request: Request) {
   if (!query) {
     if (!make) {
       if (scope !== "makes") return NextResponse.json({ items: [] });
-      const facets = await vehicleKnowledgeFacets();
+      const facets = await readCatalogFacets();
       return NextResponse.json({
         items: facets.makes.slice(0, limit).map((item) => ({ value: item, label: item })),
       });

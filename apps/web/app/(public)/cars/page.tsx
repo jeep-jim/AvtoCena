@@ -129,7 +129,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
   const [facets, groupedMarkets] = await Promise.all([
-    readCatalogFacets({ market: selectedMarket || undefined, make: common.make || undefined }),
+    readCatalogFacets({ ...common, market: selectedMarket || undefined }),
     Promise.all(markets.map(async (market) => {
       const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
       const page = selectedMarket ? requestedPage : 1;

@@ -61,15 +61,11 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     }
     return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
   }, [brands]);
-  const allBrands = useMemo(() => CATALOG_BRANDS.map((brand) => brand.name), []);
-  const orderedBrands = useMemo(() => {
-    const active = new Set(activeBrands.map((brand) => brand.toLocaleLowerCase("en-US")));
-    return [...activeBrands, ...allBrands.filter((brand) => !active.has(brand.toLocaleLowerCase("en-US")))];
-  }, [activeBrands, allBrands]);
+  const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
-    return normalized ? allBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : allBrands;
-  }, [allBrands, query]);
+    return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
+  }, [activeBrands, query]);
 
   useEffect(() => {
     if (!open) return;

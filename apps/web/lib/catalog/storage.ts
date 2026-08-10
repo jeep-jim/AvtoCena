@@ -4,7 +4,7 @@ import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOff
 import { hasCredibleOfferContent } from "./offer-quality";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
-import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery, vehicleKnowledgeFacets } from "./vehicle-knowledge";
+import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -184,31 +184,73 @@ export async function readAllOffersForMaintenance() {
   return readOfferLists(chunks);
 }
 export const readAllOffers = readAllOffersForMaintenance;
-export async function readCatalogFacets(params: Pick<CatalogSearchParams, "market" | "make"> = {}): Promise<CatalogFacets> {
+export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
   const manifest = await readManifest();
   const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
-  const [indexed, knowledge] = await Promise.all([
-    readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback),
-    vehicleKnowledgeFacets(params.make),
-  ]);
-  if (!params.market && !params.make) {
+  const indexed = await readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
+  const hasFilters = Boolean(params.market || params.make || params.model || params.hasPrice
+    || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
+    || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
+    || params.powerFrom || params.powerTo || params.fuel || params.bodyType
+    || params.transmission || params.drive || params.auctionGrade);
+
+  if (!hasFilters) {
     return {
       ...indexed,
       generationId: manifest.generationId,
-      makes: uniqueText([...knowledge.makes, ...(indexed.makes || [])]).sort((a, b) => a.localeCompare(b, "ru")),
+      makes: uniqueText(indexed.makes || []).sort((a, b) => a.localeCompare(b, "ru")),
       models: [],
       markets: [...PUBLIC_CATALOG_MARKETS],
     };
   }
+
   const marketIds = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
   const rows = (await Promise.all(marketIds.map((market) => readMarketOffers(market)))).flat().filter(isPublicOffer);
-  const offers = params.make ? rows.filter((offer) => cleanFacet(offer.make) === cleanFacet(params.make)) : rows;
+  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
+  let modelKeys: Set<string> | null = null;
+
+  if (params.model) {
+    const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
+    const candidates = matches.length
+      ? matches.map((match) => ({ make: match.make, model: match.model }))
+      : params.make ? [{ make: params.make, model: params.model }] : [];
+    modelKeys = new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
+  }
+
+  const offers = rows.filter((offer) => {
+    if (params.make && lower(offer.make) !== lower(params.make)) return false;
+    if (params.model && (!modelKeys?.size || !modelKeys.has(`${lower(offer.make)}:${lower(offer.model)}`))) return false;
+    if (params.hasPrice) {
+      const value = Number(offer.totalRub || 0) > 0 ? "yes" : "no";
+      if (value !== params.hasPrice) return false;
+    }
+    if (params.budgetFrom && (offer.totalRub || 0) < params.budgetFrom) return false;
+    if (params.budgetTo && (offer.totalRub || Infinity) > params.budgetTo) return false;
+    if (params.yearFrom && offer.year < params.yearFrom) return false;
+    if (params.yearTo && offer.year > params.yearTo) return false;
+    if (params.mileageFrom && (offer.mileageKm || 0) < params.mileageFrom) return false;
+    if (params.mileageTo && (offer.mileageKm || Infinity) > params.mileageTo) return false;
+    if (params.engineFrom && (offer.engineCc || 0) < params.engineFrom) return false;
+    if (params.engineTo && (offer.engineCc || Infinity) > params.engineTo) return false;
+    if (params.powerFrom && (offer.powerHp || 0) < params.powerFrom) return false;
+    if (params.powerTo && (offer.powerHp || Infinity) > params.powerTo) return false;
+    if (params.fuel && lower(offer.fuel) !== lower(params.fuel)) return false;
+    if (params.bodyType && lower(offer.bodyType) !== lower(params.bodyType)) return false;
+    if (params.transmission && lower(offer.transmission) !== lower(params.transmission)) return false;
+    if (params.drive && lower(offer.drive) !== lower(params.drive)) return false;
+    if (params.auctionGrade && lower(offer.auctionGrade) !== lower(params.auctionGrade)) return false;
+    return true;
+  });
+
   const values = (selector: (offer: VehicleOffer) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
-  const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()].filter((item) => item.make && item.model);
+  const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()]
+    .filter((item) => item.make && item.model)
+    .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
+
   return {
     generationId: manifest.generationId,
-    makes: uniqueText([...knowledge.makes, ...values((offer) => offer.make)]).sort((a, b) => a.localeCompare(b, "ru")),
-    models: params.make ? knowledge.models : offerModels.sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru")),
+    makes: values((offer) => offer.make),
+    models: offerModels,
     markets: [...PUBLIC_CATALOG_MARKETS],
     bodyTypes: values((offer) => offer.bodyType),
     fuels: values((offer) => offer.fuel),
