@@ -59,6 +59,7 @@ async function uniqueVariantEnrich(offer) {
   const allVariants = await readVehicleKnowledgeVariants().catch(() => []);
   const baseVariants = allVariants.filter((variant) => {
     if (variant.active === false || variant.modelId !== match.model.id) return false;
+    if (!["manufacturer", "official_registry"].includes(String(variant.sourceType || "").trim().toLowerCase())) return false;
     if (variant.yearFrom && year < variant.yearFrom) return false;
     if (variant.yearTo && year > variant.yearTo) return false;
     if (!compatibleText(variant.transmission, offer.transmission)) return false;
