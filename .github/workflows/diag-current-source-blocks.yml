@@ -1,0 +1,59 @@
+name: Diagnose current source shard blockers
+on:
+  push:
+    branches: [diag/source-blocks-20260810-1529]
+    paths: [.github/workflows/diag-current-source-blocks.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Probe source routes without publishing
+        shell: bash
+        run: |
+          node <<'NODE'
+          const targets = [
+            ['dongchedi_used','https://www.dongchedi.com/usedcar'],
+            ['dongchedi_library','https://www.dongchedi.com/auto/library/x-x-x-x-x-x-x-x-x-x-x'],
+            ['dongchedi_used_filter','https://www.dongchedi.com/usedcar/x-x-x-x-x-x-x-x-x-x-x'],
+            ['myauto_main','https://www.myauto.ge/en/main?page=1'],
+            ['myauto_search','https://www.myauto.ge/en/s/?page=1'],
+            ['myauto_root','https://www.myauto.ge/'],
+            ['autopapa_root','https://autopapa.ge/'],
+            ['autopapa_en','https://autopapa.ge/en/'],
+            ['mobile_search','https://suchen.mobile.de/fahrzeuge/search.html?dam=false&isSearchRequest=true&vc=Car'],
+            ['mobile_root','https://suchen.mobile.de/'],
+            ['mobile_www','https://www.mobile.de/'],
+          ];
+          const variants = [
+            {name:'chrome',headers:{accept:'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8','accept-language':'en-US,en;q=0.9,ru;q=0.8','cache-control':'no-cache',pragma:'no-cache','user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36'}},
+            {name:'googlebot',headers:{accept:'text/html,application/xhtml+xml','accept-language':'en-US,en;q=0.9','user-agent':'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}},
+          ];
+          const summarize=(text)=>({
+            bytes:text.length,
+            title:(text.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'').replace(/\s+/g,' ').slice(0,180),
+            usedcarLinks:(text.match(/\/usedcar\/\d+/g)||[]).length,
+            detailLinks:(text.match(/(?:\/en\/pr\/\d+|\/fahrzeuge\/details\.html|\/auto-inserat\/|\/car\/\d+)/gi)||[]).length,
+            nextData:/__NEXT_DATA__/.test(text),
+            challenge:/captcha|cloudflare|access denied|forbidden|verify you are human|robot check|just a moment/i.test(text.slice(0,6000)),
+            snippets:[...new Set((text.match(/https?:\\?\/\\?\/[^"'\s<>]{10,220}/gi)||[]).map(x=>x.replaceAll('\\/','/')).filter(x=>/api|usedcar|search|vehicle|product|motor/i.test(x)))].slice(0,12),
+          });
+          for (const [label,url] of targets) {
+            for (const variant of variants) {
+              try {
+                const r=await fetch(url,{headers:variant.headers,redirect:'follow',signal:AbortSignal.timeout(20000)});
+                const text=await r.text();
+                console.log(JSON.stringify({label,variant:variant.name,url,status:r.status,finalUrl:r.url,contentType:r.headers.get('content-type'),...summarize(text)},null,2));
+                if (label.startsWith('dongchedi') && r.status===200) {
+                  const markers=['sku','api','motor/pc','usedcar','__NEXT_DATA__','window.__','search'];
+                  for (const marker of markers) {
+                    const i=text.toLowerCase().indexOf(marker.toLowerCase());
+                    if(i>=0) console.log('DCD_MARKER',label,marker,text.slice(Math.max(0,i-300),Math.min(text.length,i+700)).replace(/\s+/g,' '));
+                  }
+                }
+              } catch(e) { console.log(JSON.stringify({label,variant:variant.name,url,error:String(e)})); }
+            }
+          }
+          NODE
