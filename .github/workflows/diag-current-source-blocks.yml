@@ -10,50 +10,39 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Probe source routes without publishing
+      - name: Probe source APIs without publishing
         shell: bash
         run: |
           node <<'NODE'
-          const targets = [
-            ['dongchedi_used','https://www.dongchedi.com/usedcar'],
-            ['dongchedi_library','https://www.dongchedi.com/auto/library/x-x-x-x-x-x-x-x-x-x-x'],
-            ['dongchedi_used_filter','https://www.dongchedi.com/usedcar/x-x-x-x-x-x-x-x-x-x-x'],
-            ['myauto_main','https://www.myauto.ge/en/main?page=1'],
-            ['myauto_search','https://www.myauto.ge/en/s/?page=1'],
-            ['myauto_root','https://www.myauto.ge/'],
-            ['autopapa_root','https://autopapa.ge/'],
-            ['autopapa_en','https://autopapa.ge/en/'],
-            ['mobile_search','https://suchen.mobile.de/fahrzeuge/search.html?dam=false&isSearchRequest=true&vc=Car'],
-            ['mobile_root','https://suchen.mobile.de/'],
-            ['mobile_www','https://www.mobile.de/'],
-          ];
-          const variants = [
-            {name:'chrome',headers:{accept:'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8','accept-language':'en-US,en;q=0.9,ru;q=0.8','cache-control':'no-cache',pragma:'no-cache','user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36'}},
-            {name:'googlebot',headers:{accept:'text/html,application/xhtml+xml','accept-language':'en-US,en;q=0.9','user-agent':'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}},
-          ];
-          const summarize=(text)=>({
-            bytes:text.length,
-            title:(text.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'').replace(/\s+/g,' ').slice(0,180),
-            usedcarLinks:(text.match(/\/usedcar\/\d+/g)||[]).length,
-            detailLinks:(text.match(/(?:\/en\/pr\/\d+|\/fahrzeuge\/details\.html|\/auto-inserat\/|\/car\/\d+)/gi)||[]).length,
-            nextData:/__NEXT_DATA__/.test(text),
-            challenge:/captcha|cloudflare|access denied|forbidden|verify you are human|robot check|just a moment/i.test(text.slice(0,6000)),
-            snippets:[...new Set((text.match(/https?:\\?\/\\?\/[^"'\s<>]{10,220}/gi)||[]).map(x=>x.replaceAll('\\/','/')).filter(x=>/api|usedcar|search|vehicle|product|motor/i.test(x)))].slice(0,12),
-          });
-          for (const [label,url] of targets) {
-            for (const variant of variants) {
-              try {
-                const r=await fetch(url,{headers:variant.headers,redirect:'follow',signal:AbortSignal.timeout(20000)});
-                const text=await r.text();
-                console.log(JSON.stringify({label,variant:variant.name,url,status:r.status,finalUrl:r.url,contentType:r.headers.get('content-type'),...summarize(text)},null,2));
-                if (label.startsWith('dongchedi') && r.status===200) {
-                  const markers=['sku','api','motor/pc','usedcar','__NEXT_DATA__','window.__','search'];
-                  for (const marker of markers) {
-                    const i=text.toLowerCase().indexOf(marker.toLowerCase());
-                    if(i>=0) console.log('DCD_MARKER',label,marker,text.slice(Math.max(0,i-300),Math.min(text.length,i+700)).replace(/\s+/g,' '));
-                  }
-                }
-              } catch(e) { console.log(JSON.stringify({label,variant:variant.name,url,error:String(e)})); }
-            }
+          const ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36';
+          async function req(label,url,init={}){
+            try{
+              const r=await fetch(url,{redirect:'follow',signal:AbortSignal.timeout(20000),...init,headers:{'user-agent':ua,'accept-language':'en-US,en;q=0.9,zh-CN;q=0.7',...(init.headers||{})}});
+              const text=await r.text();
+              let json=null; try{json=JSON.parse(text)}catch{}
+              const keys=json&&typeof json==='object'?Object.keys(json).slice(0,20):[];
+              console.log(JSON.stringify({label,url,status:r.status,finalUrl:r.url,type:r.headers.get('content-type'),bytes:text.length,keys,preview:text.slice(0,1200).replace(/\s+/g,' ')},null,2));
+              return {r,text,json};
+            }catch(e){console.log(JSON.stringify({label,url,error:String(e)}));return null}
           }
+
+          // Dongchedi used-car consumer API: current HTML route redirects to login-required,
+          // so verify whether the same public data endpoint still works anonymously.
+          const dcd='https://www.dongchedi.com/motor/pc/sh/sh_sku_list?aid=1839&app_name=auto_web_pc';
+          await req('dcd_form',dcd,{method:'POST',headers:{accept:'application/json,text/plain,*/*','content-type':'application/x-www-form-urlencoded',origin:'https://www.dongchedi.com',referer:'https://www.dongchedi.com/usedcar'},body:new URLSearchParams({sh_city_name:'全国',page:'1',limit:'20'})});
+          await req('dcd_json',dcd,{method:'POST',headers:{accept:'application/json,text/plain,*/*','content-type':'application/json',origin:'https://www.dongchedi.com',referer:'https://www.dongchedi.com/usedcar'},body:JSON.stringify({sh_city_name:'全国',page:1,limit:20})});
+
+          // MyAuto SPA API is on a separate host; HTML is Cloudflare-blocked on GitHub runners.
+          for(const url of [
+            'https://api2.myauto.ge/en/products?page=1',
+            'https://api2.myauto.ge/ka/products?page=1',
+            'https://api2.myauto.ge/en/appdata/other.json',
+            'https://api2.myauto.ge/ka/appdata/other.json',
+          ]) await req('myauto_api',url,{headers:{accept:'application/json',origin:'https://www.myauto.ge',referer:'https://www.myauto.ge/'}});
+
+          // mobile.de consumer BFF. Probe likely URL parameter spellings; error payloads reveal the active contract.
+          const classic='https://suchen.mobile.de/fahrzeuge/search.html?dam=false&isSearchRequest=true&vc=Car&fr=2020%3A&pw=%3A118&pageNumber=1';
+          for(const [name,qs] of [
+            ['none',''],['url','?url='+encodeURIComponent(classic)],['searchUrl','?searchUrl='+encodeURIComponent(classic)],['searchQuery','?searchQuery='+encodeURIComponent(classic)],['query','?query='+encodeURIComponent(classic)]
+          ]) await req('mobile_bff_'+name,'https://www.mobile.de/consumer/api/search/srp'+qs,{headers:{accept:'application/json','x-mobile-client':'de.mobile.consumer-webapp',referer:'https://www.mobile.de/'}});
           NODE
