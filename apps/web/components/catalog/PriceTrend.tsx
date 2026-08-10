@@ -473,6 +473,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const [desktopHover, setDesktopHover] = useState(false);
   const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
   const trendRoot = useRef<HTMLSpanElement>(null);
+  const panelRoot = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!currency || currency === "RUB") return;
@@ -507,6 +508,21 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const pricedOffer = useMemo(() => withLiveRate(offer, liveRate), [offer, liveRate]);
   const trend = resolvePriceTrend(pricedOffer);
   const direction = trend?.direction;
+  useEffect(() => {
+    const node = panelRoot.current;
+    if (!node || !panel) return;
+    if (!lightTheme && direction === "up") {
+      node.style.setProperty("background", "#3d3644", "important");
+      node.style.setProperty("background-color", "#3d3644", "important");
+    } else {
+      node.style.removeProperty("background");
+      node.style.removeProperty("background-color");
+    }
+    return () => {
+      node.style.removeProperty("background");
+      node.style.removeProperty("background-color");
+    };
+  }, [panel, lightTheme, direction]);
   const stateClass = direction === "down" ? "is-down" : direction === "up" ? "is-up" : "is-flat";
   const priceStateClass = direction === "down" ? "ac-price--down" : direction === "up" ? "ac-price--up" : "ac-price--flat";
   const hasPrice = Boolean(pricedOffer.totalRub);
@@ -516,6 +532,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const openSheet = () => { if (sheetRate && trend) { setPopoverOpen(false); setSheetOpen(true); } };
 
   return <div
+    ref={panelRoot}
     className={`relative ${panel ? "ac-price-trend-panel cursor-pointer rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${stateClass} ${className}`}
     role={panel ? "button" : undefined}
     tabIndex={panel ? 0 : undefined}

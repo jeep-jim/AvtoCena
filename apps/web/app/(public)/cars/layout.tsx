@@ -75,11 +75,6 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
-      /* Dark price-rise surface matches the financing payment accent sampled from the approved mock. */
-      html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-up {
-        background: #3d3644 !important;
-      }
-
       /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image; responsive financing UI stays inside the offer components. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
