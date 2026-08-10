@@ -76,9 +76,9 @@ jobs:
       - name: Live Encar source-order smoke without publishing
         shell: bash
         run: |
-          cat > /tmp/encar-gallery-smoke.mts <<'TS'
-          import { encarCompleteSource } from process.cwd() + "/apps/web/lib/catalog/encar-complete-source.ts";
-          import { buildEncarImageUrl } from process.cwd() + "/apps/web/lib/catalog/adapters.ts";
+          cat > scripts/tmp-encar-gallery-smoke.mts <<'TS'
+          import { encarCompleteSource } from "../apps/web/lib/catalog/encar-complete-source.ts";
+          import { buildEncarImageUrl } from "../apps/web/lib/catalog/adapters.ts";
           const page:any = await encarCompleteSource.fetchPage(null);
           const raw:any = page.items?.[0];
           if (!raw) throw new Error("encar_no_live_row");
@@ -92,11 +92,13 @@ jobs:
           if (offer.operational?.gallerySafetyMode !== "encar_source_cover_photolist_v3") throw new Error("encar_source_mode_missing");
           if (expected && actual !== expected) throw new Error(`encar_cover_order_mismatch expected=${expected} actual=${actual}`);
           TS
-          npx tsx /tmp/encar-gallery-smoke.mts
+          npx tsx scripts/tmp-encar-gallery-smoke.mts
+          rm -f scripts/tmp-encar-gallery-smoke.mts
       - name: Commit only verified Encar source changes
         shell: bash
         run: |
           set -euo pipefail
+          rm -f scripts/tmp-encar-gallery-smoke.mts
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/web/lib/catalog/adapters.ts apps/web/lib/catalog/encar-complete-source.ts
