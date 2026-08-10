@@ -1,0 +1,78 @@
+name: Apply China title and home diversity hotfix v2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/apply-china-ui-hotfix-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: ui-hotfix-china-home-diversity-v2
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Apply verified patch body
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, re
+          workflow = Path('.github/workflows/apply-offer-ui-model-diversity-v3.yml').read_text()
+          match = re.search(r"printf '%s' '([A-Za-z0-9+/=]+)' \| base64 -d > /tmp/ui_hotfix\.py", workflow)
+          if not match:
+              raise SystemExit('verified UI patch payload not found')
+          Path('/tmp/ui_hotfix.py').write_bytes(base64.b64decode(match.group(1)))
+          PY
+          python /tmp/ui_hotfix.py
+
+      - name: Verify patched UI
+        shell: bash
+        run: |
+          npm run typecheck
+          grep -q 'balancedMarketItems(matches, 6)' apps/web/components/home/HomePageClient.tsx
+          grep -q 'function publicChinaMake' apps/web/lib/catalog/presentation.ts
+          grep -q 'function publicChinaModel' apps/web/lib/catalog/presentation.ts
+          if grep -n 'items: matches.slice(0, 6)' apps/web/components/home/HomePageClient.tsx; then
+            echo 'old non-diverse home selection still present' >&2
+            exit 1
+          fi
+
+      - name: Commit source files only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/presentation.ts apps/web/components/home/HomePageClient.tsx
+          git commit -m "Fix China public titles and diversify home market cards"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy UI only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
+          echo "China title sanitizer + market round-robin deployed; no catalog writer dispatched." >> "$GITHUB_STEP_SUMMARY"
