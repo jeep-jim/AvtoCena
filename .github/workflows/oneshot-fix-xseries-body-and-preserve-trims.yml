@@ -1,0 +1,95 @@
+name: One-shot fix x-series body and preserve trims
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-fix-xseries-body-and-preserve-trims.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: oneshot-fix-xseries-body-and-preserve-trims
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Fix body inference and keep factual trims in storage
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text()
+              if text.count(old) != 1:
+                  raise SystemExit(f"expected one block in {path}, got {text.count(old)}")
+              p.write_text(text.replace(old, new, 1))
+
+          presentation = 'apps/web/lib/catalog/presentation.ts'
+          replace_once(
+              presentation,
+              '  if (/\\b(cargo|panel van|фургон)\\b/.test(text)) return "Фургон";\n  if (/\\b(carnival|staria|starex|grand starex|h-1|mpv|minivan|минивэн|odyssey|sienna|alphard|vellfire|serena|noah|voxy)\\b/.test(text)) return "Минивэн";\n  if (/\\b(gv60|gv70|gv80|tucson|santa fe|santafe|sorento|sportage|palisade|kona|seltos|casper|venue|niro|glc|gle|gls|x1|x2|x3|x4|x5|x6|x7|q3|q5|q7|q8|rav4|harrier|cr-v|vezel|cx-3|cx-30|cx-4|cx-5|cx-8|cx-9|suv|crossover|кроссовер|внедорожник)\\b/.test(text)) return "Кроссовер";',
+              '  if (/\\b(cargo|panel van|фургон)\\b/.test(text)) return "Фургон";\n  if (/栏板|仓栅|货车|微卡/.test(text)) return "Малотоннажный грузовик";\n  if (/\\b(carnival|staria|starex|grand starex|h-1|mpv|minivan|минивэн|odyssey|sienna|alphard|vellfire|serena|noah|voxy)\\b/.test(text)) return "Минивэн";\n  if (/\\bbmw\\b/.test(text) && /\\b(x1|x2|x3|x4|x5|x6|x7)\\b/.test(text)) return "Кроссовер";\n  if (/\\b(gv60|gv70|gv80|tucson|santa fe|santafe|sorento|sportage|palisade|kona|seltos|casper|venue|niro|glc|gle|gls|q3|q5|q7|q8|rav4|harrier|cr-v|vezel|cx-3|cx-30|cx-4|cx-5|cx-8|cx-9|suv|crossover|кроссовер|внедорожник)\\b/.test(text)) return "Кроссовер";',
+          )
+
+          publish = 'scripts/catalog-live-recovery-publish.mjs'
+          p = Path(publish)
+          text = p.read_text()
+          start = text.index('\nfunction equivalentNewVariantKey(offer) {')
+          end = text.index('\nfunction applyPerModelCap(rows, rejected) {', start)
+          text = text[:start] + '\n' + text[end:]
+          old = 'const cumulative = [...candidates.values()].sort(quality);\nconst equivalentCollapsed = collapseEquivalentNewVariants(cumulative, rejected);\nconst diversity = applyPerModelCap(equivalentCollapsed, rejected);'
+          new = 'const cumulative = [...candidates.values()].sort(quality);\nconst diversity = applyPerModelCap(cumulative, rejected);'
+          if text.count(old) != 1:
+              raise SystemExit('publisher collapse call not found exactly once')
+          p.write_text(text.replace(old, new, 1))
+
+          Path('.github/workflows/oneshot-fix-xseries-body-and-preserve-trims.yml').unlink()
+          PY
+
+      - name: Verify
+        shell: bash
+        run: |
+          node --check scripts/catalog-live-recovery-publish.mjs
+          npm run typecheck
+          npx tsx -e 'import { catalogBodyName } from "./apps/web/lib/catalog/presentation.ts"; const karry = catalogBodyName("", { make: "开瑞", model: "开瑞X6", trim: "2024 1.6L单排栏板舒适型" }); const bmw = catalogBodyName("", { make: "BMW", model: "X6" }); console.log({karry,bmw}); if (karry !== "Малотоннажный грузовик" || bmw !== "Кроссовер") process.exit(2);'
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 'apps/web/lib/catalog/presentation.ts' 'scripts/catalog-live-recovery-publish.mjs' '.github/workflows/oneshot-fix-xseries-body-and-preserve-trims.yml'
+          git commit -m "Fix generic X-series body inference and preserve source trims"
+          git reset --hard HEAD
+          git clean -fd
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy and refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-daily-working-markets.yml/dispatches" -f ref=main
