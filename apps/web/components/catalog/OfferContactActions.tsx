@@ -99,7 +99,10 @@ function MobilePinnedActions() {
 
   return (
     <div ref={anchorRef} className="relative mt-4 h-[54px] xl:hidden">
-      <div style={fixedStyle || undefined} className="w-full">
+      <div
+        style={fixedStyle || undefined}
+        className={`ac-offer-pinned-actions w-full ${fixedStyle ? "is-fixed" : ""}`}
+      >
         <ActionButtons />
       </div>
     </div>
@@ -161,6 +164,28 @@ export function OfferContactActions() {
       <style jsx global>{`
         .ac-offer-contact-button {
           color: #fff !important;
+        }
+        .ac-offer-pinned-actions {
+          position: relative;
+          isolation: isolate;
+        }
+        .ac-offer-pinned-actions.is-fixed::before {
+          content: "";
+          position: absolute;
+          inset: -7px -6px;
+          z-index: -1;
+          pointer-events: none;
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 1.35rem;
+          background: rgba(26,32,41,.72);
+          -webkit-backdrop-filter: blur(16px) saturate(125%);
+          backdrop-filter: blur(16px) saturate(125%);
+          box-shadow: 0 10px 30px rgba(0,0,0,.16);
+        }
+        html[data-theme="light"] .ac-offer-pinned-actions.is-fixed::before {
+          border-color: rgba(35,42,55,.10);
+          background: rgba(246,248,251,.78);
+          box-shadow: 0 10px 28px rgba(38,43,57,.10);
         }
         .ac-offer-page > section > section {
           border-top: 1px solid rgba(255,255,255,.085) !important;
