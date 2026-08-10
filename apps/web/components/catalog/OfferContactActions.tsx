@@ -63,7 +63,7 @@ function CreditCalculatorMockup() {
           <span className="text-xs font-black text-[var(--ac-text)]">Ежемесячный платёж</span>
           <span className="text-lg font-black text-red-500">— ₽</span>
         </div>
-        <button type="button" aria-disabled="true" className="min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black text-white">Подобрать кредит</button>
+        <button type="button" aria-disabled="true" className="ac-credit-partner-button min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black !text-white">Подобрать кредит</button>
       </div>
     </section>
   );
@@ -228,6 +228,10 @@ export function OfferContactActions() {
         .ac-offer-contact-button {
           color: #fff !important;
         }
+        .ac-credit-partner-button {
+          color: #fff !important;
+          -webkit-text-fill-color: #fff !important;
+        }
         .ac-offer-pinned-actions {
           position: relative;
           isolation: isolate;
@@ -270,6 +274,10 @@ export function OfferContactActions() {
             grid-column: span 2 !important;
             order: 3;
           }
+          .ac-offer-page .ac-offer-detail-stack > div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"])) > .ac-offer-spec-tile[aria-label^="Год:"],
+          .ac-offer-page .ac-offer-detail-stack > div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"])) > .ac-offer-spec-tile[aria-label^="Двигатель:"] {
+            grid-column: span 3 !important;
+          }
           .ac-offer-page [data-offer-credit-host] {
             display: none;
             margin-top: 1.25rem;
@@ -307,7 +315,7 @@ export function OfferContactActions() {
             height: 46px;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,.08);
+            border: 0;
             border-radius: .9rem;
             background: #0b0d11;
             color: #fff !important;
