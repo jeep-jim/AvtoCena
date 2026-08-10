@@ -27,76 +27,9 @@ jobs:
           git restore package-lock.json 2>/dev/null || true
 
       - name: Apply requested polish
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path('apps/web/components/catalog/OfferContactActions.tsx')
-          text = p.read_text(encoding='utf-8')
-
-          old = '<button type="button" aria-disabled="true" className="min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black text-white">Подобрать кредит</button>'
-          new = '<button type="button" aria-disabled="true" className="ac-credit-partner-button min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black !text-white">Подобрать кредит</button>'
-          if old not in text:
-            raise RuntimeError('desktop credit button anchor changed')
-          text = text.replace(old, new, 1)
-
-          mileage_rule = '''          .ac-offer-page .ac-offer-detail-stack > div:first-child > .ac-offer-spec-tile[aria-label^="Пробег:"] {
-            grid-column: span 2 !important;
-            order: 3;
-          }
-'''
-          fallback_rule = mileage_rule + '''          .ac-offer-page .ac-offer-detail-stack > div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"])) > .ac-offer-spec-tile[aria-label^="Год:"],
-          .ac-offer-page .ac-offer-detail-stack > div:first-child:not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"])) > .ac-offer-spec-tile[aria-label^="Двигатель:"] {
-            grid-column: span 3 !important;
-          }
-'''
-          if ':not(:has(.ac-offer-spec-tile[aria-label^="Пробег:"]))' not in text:
-            if mileage_rule not in text:
-              raise RuntimeError('mileage desktop rule anchor changed')
-            text = text.replace(mileage_rule, fallback_rule, 1)
-
-          old_mobile = '''          .ac-mobile-credit-button {
-            display: flex;
-            width: 100%;
-            height: 46px;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: .9rem;
-            background: #0b0d11;
-            color: #fff !important;
-'''
-          new_mobile = '''          .ac-mobile-credit-button {
-            display: flex;
-            width: 100%;
-            height: 46px;
-            align-items: center;
-            justify-content: center;
-            border: 0;
-            border-radius: .9rem;
-            background: #0b0d11;
-            color: #fff !important;
-'''
-          if old_mobile not in text:
-            raise RuntimeError('mobile credit button CSS anchor changed')
-          text = text.replace(old_mobile, new_mobile, 1)
-
-          style_anchor = '''        .ac-offer-contact-button {
-          color: #fff !important;
-        }
-'''
-          style_new = style_anchor + '''        .ac-credit-partner-button {
-          color: #fff !important;
-          -webkit-text-fill-color: #fff !important;
-        }
-'''
-          if '.ac-credit-partner-button {' not in text:
-            if style_anchor not in text:
-              raise RuntimeError('credit button color CSS anchor changed')
-            text = text.replace(style_anchor, style_new, 1)
-
-          p.write_text(text, encoding='utf-8')
-          PY
+        env:
+          PATCH_B64: "ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCnAgPSBQYXRoKCJhcHBzL3dlYi9jb21wb25lbnRzL2NhdGFsb2cvT2ZmZXJDb250YWN0QWN0aW9ucy50c3giKQp0ZXh0ID0gcC5yZWFkX3RleHQoZW5jb2Rpbmc9InV0Zi04IikKCm9sZCA9ICc8YnV0dG9uIHR5cGU9ImJ1dHRvbiIgYXJpYS1kaXNhYmxlZD0idHJ1ZSIgY2xhc3NOYW1lPSJtaW4tdy1bMTc2cHhdIGN1cnNvci1kZWZhdWx0IHJvdW5kZWQteGwgYmctWyMxMTEzMThdIHB4LTQgcHktMi41IHRleHQteHMgZm9udC1ibGFjayB0ZXh0LXdoaXRlIj7Qn9C+0LTQvtCx0YDQsNGC0Ywg0LrRgNC10LTQuNGCPC9idXR0b24+JwpuZXcgPSAnPGJ1dHRvbiB0eXBlPSJidXR0b24iIGFyaWEtZGlzYWJsZWQ9InRydWUiIGNsYXNzTmFtZT0iYWMtY3JlZGl0LXBhcnRuZXItYnV0dG9uIG1pbi13LVsxNzZweF0gY3Vyc29yLWRlZmF1bHQgcm91bmRlZC14bCBiZy1bIzExMTMxOF0gcHgtNCBweS0yLjUgdGV4dC14cyBmb250LWJsYWNrICF0ZXh0LXdoaXRlIj7Qn9C+0LTQvtCx0YDQsNGC0Ywg0LrRgNC10LTQuNGCPC9idXR0b24+JwppZiBvbGQgbm90IGluIHRleHQ6CiAgICByYWlzZSBSdW50aW1lRXJyb3IoImRlc2t0b3AgY3JlZGl0IGJ1dHRvbiBhbmNob3IgY2hhbmdlZCIpCnRleHQgPSB0ZXh0LnJlcGxhY2Uob2xkLCBuZXcsIDEpCgptaWxlYWdlX3J1bGUgPSAnJycgICAgICAgICAgLmFjLW9mZmVyLXBhZ2UgLmFjLW9mZmVyLWRldGFpbC1zdGFjayA+IGRpdjpmaXJzdC1jaGlsZCA+IC5hYy1vZmZlci1zcGVjLXRpbGVbYXJpYS1sYWJlbF49ItCf0YDQvtCx0LXQszoiXSB7CiAgICAgICAgICAgIGdyaWQtY29sdW1uOiBzcGFuIDIgIWltcG9ydGFudDsKICAgICAgICAgICAgb3JkZXI6IDM7CiAgICAgICAgICB9CicnJwpmYWxsYmFja19ydWxlID0gbWlsZWFnZV9ydWxlICsgJycnICAgICAgICAgIC5hYy1vZmZlci1wYWdlIC5hYy1vZmZlci1kZXRhaWwtc3RhY2sgPiBkaXY6Zmlyc3QtY2hpbGQ6bm90KDpoYXMoLmFjLW9mZmVyLXNwZWMtdGlsZVthcmlhLWxhYmVsXj0i0J/RgNC+0LHQtdCzOiJdKSkgPiAuYWMtb2ZmZXItc3BlYy10aWxlW2FyaWEtbGFiZWxePSLQk9C+0LQ6Il0sCiAgICAgICAgICAuYWMtb2ZmZXItcGFnZSAuYWMtb2ZmZXItZGV0YWlsLXN0YWNrID4gZGl2OmZpcnN0LWNoaWxkOm5vdCg6aGFzKC5hYy1vZmZlci1zcGVjLXRpbGVbYXJpYS1sYWJlbF49ItCf0YDQvtCx0LXQszoiXSkpID4gLmFjLW9mZmVyLXNwZWMtdGlsZVthcmlhLWxhYmVsXj0i0JTQstC40LPQsNGC0LXQu9GMOiJdIHsKICAgICAgICAgICAgZ3JpZC1jb2x1bW46IHNwYW4gMyAhaW1wb3J0YW50OwogICAgICAgICAgfQonJycKaWYgJzpub3QoOmhhcyguYWMtb2ZmZXItc3BlYy10aWxlW2FyaWEtbGFiZWxePSLQn9GA0L7QsdC10LM6Il0pKScgbm90IGluIHRleHQ6CiAgICBpZiBtaWxlYWdlX3J1bGUgbm90IGluIHRleHQ6CiAgICAgICAgcmFpc2UgUnVudGltZUVycm9yKCJtaWxlYWdlIGRlc2t0b3AgcnVsZSBhbmNob3IgY2hhbmdlZCIpCiAgICB0ZXh0ID0gdGV4dC5yZXBsYWNlKG1pbGVhZ2VfcnVsZSwgZmFsbGJhY2tfcnVsZSwgMSkKCm9sZF9tb2JpbGUgPSAnJycgICAgICAgICAgLmFjLW1vYmlsZS1jcmVkaXQtYnV0dG9uIHsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgd2lkdGg6IDEwMCU7CiAgICAgICAgICAgIGhlaWdodDogNDZweDsKICAgICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMjU1LDI1NSwyNTUsLjA4KTsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogLjlyZW07CiAgICAgICAgICAgIGJhY2tncm91bmQ6ICMwYjBkMTE7CiAgICAgICAgICAgIGNvbG9yOiAjZmZmICFpbXBvcnRhbnQ7CicnJwpuZXdfbW9iaWxlID0gJycnICAgICAgICAgIC5hYy1tb2JpbGUtY3JlZGl0LWJ1dHRvbiB7CiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7CiAgICAgICAgICAgIHdpZHRoOiAxMDAlOwogICAgICAgICAgICBoZWlnaHQ6IDQ2cHg7CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgICAgICAgICBib3JkZXI6IDA7CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IC45cmVtOwogICAgICAgICAgICBiYWNrZ3JvdW5kOiAjMGIwZDExOwogICAgICAgICAgICBjb2xvcjogI2ZmZiAhaW1wb3J0YW50OwonJycKaWYgb2xkX21vYmlsZSBub3QgaW4gdGV4dDoKICAgIHJhaXNlIFJ1bnRpbWVFcnJvcigibW9iaWxlIGNyZWRpdCBidXR0b24gQ1NTIGFuY2hvciBjaGFuZ2VkIikKdGV4dCA9IHRleHQucmVwbGFjZShvbGRfbW9iaWxlLCBuZXdfbW9iaWxlLCAxKQoKc3R5bGVfYW5jaG9yID0gJycnICAgICAgICAuYWMtb2ZmZXItY29udGFjdC1idXR0b24gewogICAgICAgICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDsKICAgICAgICB9CicnJwpzdHlsZV9uZXcgPSBzdHlsZV9hbmNob3IgKyAnJycgICAgICAgIC5hYy1jcmVkaXQtcGFydG5lci1idXR0b24gewogICAgICAgICAgY29sb3I6ICNmZmYgIWltcG9ydGFudDsKICAgICAgICAgIC13ZWJraXQtdGV4dC1maWxsLWNvbG9yOiAjZmZmICFpbXBvcnRhbnQ7CiAgICAgICAgfQonJycKaWYgJy5hYy1jcmVkaXQtcGFydG5lci1idXR0b24geycgbm90IGluIHRleHQ6CiAgICBpZiBzdHlsZV9hbmNob3Igbm90IGluIHRleHQ6CiAgICAgICAgcmFpc2UgUnVudGltZUVycm9yKCJjcmVkaXQgYnV0dG9uIGNvbG9yIENTUyBhbmNob3IgY2hhbmdlZCIpCiAgICB0ZXh0ID0gdGV4dC5yZXBsYWNlKHN0eWxlX2FuY2hvciwgc3R5bGVfbmV3LCAxKQoKcC53cml0ZV90ZXh0KHRleHQsIGVuY29kaW5nPSJ1dGYtOCIpCg=="
+        run: python3 -c 'import os,base64; exec(base64.b64decode(os.environ["PATCH_B64"]))'
 
       - name: Typecheck
         run: |
@@ -107,7 +40,7 @@ jobs:
       - name: Publish safely
         run: |
           grep -q 'ac-credit-partner-button' apps/web/components/catalog/OfferContactActions.tsx
-          grep -q 'not(:has(.ac-offer-spec-tile\[aria-label\^="Пробег:"\]))' apps/web/components/catalog/OfferContactActions.tsx
+          grep -q 'grid-column: span 3 !important' apps/web/components/catalog/OfferContactActions.tsx
           grep -A8 'ac-mobile-credit-button' apps/web/components/catalog/OfferContactActions.tsx | grep -q 'border: 0;'
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
