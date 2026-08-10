@@ -1,0 +1,37 @@
+name: Validate non-passenger filter and Encar mode
+
+on:
+  push:
+    branches: [fix/reject-nonpassenger-bodytypes-20260810]
+    paths:
+      - apps/web/lib/catalog/offer-quality.ts
+      - .github/workflows/validate-nonpassenger-encar-mode.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/reject-nonpassenger-bodytypes-20260810
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Body-type smoke
+        run: |
+          npx tsx -e 'import {isNonPassengerCatalogBodyType} from "./apps/web/lib/catalog/offer-quality.ts"; const rejected=["Truck","Light Truck","commercial vehicle","Bus","special purpose vehicle"]; for (const x of rejected) if(!isNonPassengerCatalogBodyType(x)) throw new Error(`must reject ${x}`); const allowed=["Sedan","SUV","Crossover","Pickup","Minivan","Hatchback"]; for (const x of allowed) if(isNonPassengerCatalogBodyType(x)) throw new Error(`must allow ${x}`); console.log({rejected,allowed})'
+          grep -q 'encar_source_cover_photolist_v3' apps/web/lib/catalog/offer-quality.ts
+      - name: Live Encar NO-PUBLISH source smoke
+        env:
+          CATALOG_MAX_IMAGES_PER_OFFER: 30
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: 5
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: 35000
+          CATALOG_ENCAR_COMPLETE_DETAIL_RPM: 120
+        run: npx tsx scripts/encar-primary-gallery-smoke.ts
