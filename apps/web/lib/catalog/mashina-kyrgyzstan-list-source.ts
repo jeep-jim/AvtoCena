@@ -72,12 +72,51 @@ export function parseMashinaExplicitEngineLiters(value: unknown) {
 function compact(value: unknown) {
   return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
 }
+function mashinaImageIdentity(value: string) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
+    if (!/\.(?:jpe?g|png|webp|avif)$/i.test(pathname)) return "";
+    if (host === "storage.mashina.kg" && pathname.startsWith("/catalog/images/")) {
+      pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+      return `${host}${pathname}`;
+    }
+    if (host === "im.mashina.kg" && pathname.startsWith("/tachka/images/")) {
+      pathname = pathname.replace(/_\d{2,5}x\d{2,5}(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+      return `${host}${pathname}`;
+    }
+  } catch { /* invalid URL */ }
+  return "";
+}
+function mashinaImageRank(value: string) {
+  if (/_large\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(value)) return 3_000_000;
+  if (/_medium\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(value)) return 2_000_000;
+  if (/_small\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i.test(value)) return 1_000_000;
+  const dimensions = value.match(/_(\d{2,5})x(\d{2,5})\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i);
+  return dimensions ? Number(dimensions[1]) * Number(dimensions[2]) : 1;
+}
+export function dedupeMashinaImageUrls(values: string[]) {
+  const best = new Map<string, { url: string; rank: number; index: number }>();
+  values.forEach((value, index) => {
+    const identity = mashinaImageIdentity(value);
+    if (!identity) return;
+    const rank = mashinaImageRank(value);
+    const current = best.get(identity);
+    if (!current) best.set(identity, { url: value, rank, index });
+    else if (rank > current.rank) best.set(identity, { url: value, rank, index: current.index });
+  });
+  return [...best.values()].sort((left, right) => left.index - right.index).map((item) => item.url);
+}
 function imageUrls(markup: string, base: string) {
   const values: string[] = [];
   for (const match of markup.matchAll(/<(?:img|source|meta)[^>]+(?:data-original|data-lazy-src|data-src|src|content)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
-  return [...new Set(values.map((value) => absoluteUrl(value, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
+  const sourceUrls = [...new Set(values
+    .map((value) => absoluteUrl(value, base))
+    .filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
+  return dedupeMashinaImageUrls(sourceUrls);
 }
 function deriveMakeModel(value: string) {
   const cleaned = plainText(value).replace(BADGE_RE, " ").replace(/\s+/g, " ").trim();
@@ -241,13 +280,13 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
     const raw = offer.operational.raw as { images?: string[]; parsed?: MashinaListRow } | undefined;
     const row = raw?.parsed;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    let urls = [...new Set(raw?.images || row?.images || [])];
+    let urls = dedupeMashinaImageUrls(raw?.images || row?.images || []);
     const detailUrl = offer.operational.sourceUrl || row?.detailUrl || "";
     if (detailUrl && row && urls.length < limit) {
       try {
         const detail = await request(detailUrl, "https://www.mashina.kg/en/search/");
         if (identityMatches(detail.markup, row)) {
-          urls = [...new Set([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)])];
+          urls = dedupeMashinaImageUrls([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)]);
           const text = plainText(detail.markup);
           const cc = integer(text.match(/([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
           const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
