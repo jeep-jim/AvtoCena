@@ -121,7 +121,7 @@ function inferTransmission(text: string) {
   if (/cvt|e-cvt|ecvt|xtronic|вариатор|无级变速/.test(text)) return "cvt";
   if (/dct|dsg|pdk|dual clutch|робот|双离合/.test(text)) return "dct";
   if (/manual|\bmt\b|stick shift|механик|手动|수동/.test(text)) return "manual";
-  if (/automatic|automatik|\bauto\b|a\/t|\bat\b|автомат|自动|오토|자동/.test(text)) return "automatic";
+  if (/automatic|automatik|\bauto\b|a\/t|\bat\b|автомат|手自一体|自动挡?|오토|자동/.test(text)) return "automatic";
   return undefined;
 }
 

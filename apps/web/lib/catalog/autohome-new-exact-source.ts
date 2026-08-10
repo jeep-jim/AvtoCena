@@ -12,7 +12,8 @@ const HEADERS = {
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
 const MAIN_SPEC_RE = /<a\b[^>]*href=["'](?:https?:)?\/\/www\.autohome\.com\.cn\/spec\/(\d+)\/?(?:#[^"']*)?["'][^>]*>([\s\S]*?)<\/a>/gi;
-const PRODUCT_IMAGE_RE = /^https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/.+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i;
+const PRODUCT_IMAGE_RE = /^(?:https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/|https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\/)/i;
+const DIRECT_PRODUCT_IMAGE_RE = /^https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\//i;
 
 export type AutohomeNewListRow = {
   specId: string;
@@ -77,6 +78,9 @@ function configUrl(specId: string) {
 }
 function galleryUrl(specId: string, seriesId: string) {
   return `${CAR_BASE}/pic/series-s${specId}/${seriesId}.html`;
+}
+function modernSpecGalleryUrl(specId: string, seriesId: string) {
+  return `${SITE_BASE}/cars/imglist-x-x-${seriesId}-${specId}-x-x-x-x-x-1.html`;
 }
 function image(url: string): CatalogImage {
   const mimeType = /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : /\.avif(?:[?#]|$)/i.test(url) ? "image/avif" : "image/jpeg";
@@ -198,9 +202,35 @@ function identityFromSpecTitle(markup: string, fallbackTrim: string) {
 }
 function exactProductImages(markup: string, base: string) {
   const values: string[] = [];
-  for (const match of markup.matchAll(/(?:src|data-src|data-original|data-src2|content)=["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/(?:src|data-src|data-original|data-src2|data-webp|content)=["']([^"']+)["']/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
-  return [...new Set(values.map((value) => absolute(value, base)).filter((url) => PRODUCT_IMAGE_RE.test(url)))].slice(0, 30);
+  const urls = [...new Set(values.map((value) => absolute(value, base)).filter((url) => PRODUCT_IMAGE_RE.test(url)))];
+  return [...urls.filter((url) => DIRECT_PRODUCT_IMAGE_RE.test(url)), ...urls.filter((url) => !DIRECT_PRODUCT_IMAGE_RE.test(url))].slice(0, 30);
+}
+function nextData(markup: string) {
+  const match = markup.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/i);
+  if (!match?.[1]) return null;
+  try { return JSON.parse(match[1]); } catch { return null; }
+}
+function seriesIdFromSpecPage(markup: string) {
+  const data = nextData(markup);
+  const value = data?.props?.pageProps?.seriesId || data?.props?.pageProps?.specDetails?.bread?.seriesid;
+  const parsed = String(value || markup.match(/\bseries\s*:\s*(\d+)/i)?.[1] || "");
+  return /^\d+$/.test(parsed) ? parsed : "";
+}
+export function exactAutohomeSpecGalleryImages(markup: string, specId: string) {
+  const data = nextData(markup);
+  const groups = data?.props?.pageProps?.SeriesPicList?.picinfo?.callist;
+  if (!Array.isArray(groups)) return [];
+  const values: string[] = [];
+  for (const group of groups) {
+    for (const item of Array.isArray(group?.list) ? group.list : []) {
+      if (Number(item?.specid) !== Number(specId)) continue;
+      const url = absolute(String(item?.picpath || ""), SITE_BASE);
+      if (DIRECT_PRODUCT_IMAGE_RE.test(url)) values.push(url);
+    }
+  }
+  return [...new Set(values)].slice(0, 30);
 }
 function engineCc(engine: string | undefined) {
   const value = clean(engine), liters = value.match(/\b(\d+(?:\.\d+)?)\s*L\b/i), cc = value.match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
@@ -229,7 +259,7 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
     const row = raw as AutohomeNewListRow;
     if (!row?.specId || !row.trimTitle || !row.year || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
     const now = new Date().toISOString();
-    return { id: stableOfferId(this.sourceId, row.specId), sourceId: this.sourceId, sourceOfferId: row.specId, market: "china", offerType: "fixed", status: "active", catalogKind: "listing", sourceTitle: row.trimTitle, make: "", model: "", trim: row.trimTitle, year: row.year, sourcePrice: row.sourcePriceCny, sourceCurrency: "CNY", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.sourceUrl, sourceVenueName: "汽车之家 / Autohome", sourceTitle: row.trimTitle, exactDetail: false, exactFields: true, exactPhotos: false, galleryVerified: false, galleryImageCount: 0, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false } } };
+    return { id: stableOfferId(this.sourceId, row.specId), sourceId: this.sourceId, sourceOfferId: row.specId, market: "china", offerType: "fixed", status: "active", catalogKind: "listing", sourceTitle: row.trimTitle, make: "", model: "", trim: row.trimTitle, year: row.year, sourcePrice: row.sourcePriceCny, sourceCurrency: "CNY", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.sourceUrl, sourceVenueName: "汽车之家 / Autohome", sourceTitle: row.trimTitle, exactDetail: false, exactFields: true, exactPhotos: false, galleryVerified: false, galleryImageCount: 0, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false } } };
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
@@ -241,15 +271,25 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
     if (!identity.make || !identity.model || yearFrom(identity.trim) !== Number(offer.year)) throw new Error(`autohome_new_exact_identity_failed:${specId}`);
     const fields = parseAutohomeExactConfigFields(configPage.body, specId);
     if (!fields) throw new Error(`autohome_new_exact_config_missing:${specId}`);
-    const gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
-    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;
+    const seriesId = String(listing?.seriesId || seriesIdFromSpecPage(specPage.body) || "");
+    const exactGalleryUrl = seriesId ? modernSpecGalleryUrl(specId, seriesId) : "";
+    const galleryPage = exactGalleryUrl
+      ? await fetchDecoded(exactGalleryUrl, specUrl(specId)).catch(() => null)
+      : null;
+    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+    const exactGallery = galleryPage ? exactAutohomeSpecGalleryImages(galleryPage.body, specId) : [];
+    const fallbackGallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
+    const gallery = (exactGallery.length >= minimum
+      ? exactGallery
+      : [...new Set([...exactGallery, ...fallbackGallery])]).slice(0, 30);
+    const verifiedGallery = gallery.length >= minimum && (exactGallery.length >= minimum || gallery.every((url) => PRODUCT_IMAGE_RE.test(url)));
     offer.make = identity.make; offer.model = identity.model; offer.trim = identity.trim || offer.trim; offer.sourceTitle = `${identity.model} ${identity.trim}`.trim();
     offer.fuel = fields.energy || offer.fuel; offer.engineType = fields.engine || offer.engineType; offer.engineCc = engineCc(fields.engine) || offer.engineCc; offer.transmission = fields.transmission || offer.transmission; offer.bodyType = fields.body || offer.bodyType;
     if (isCombustionOnly(fields.energy)) {
       const hp = positive(fields.engineMaxHp), kw = positive(fields.engineMaxKw);
       if (hp || kw) { offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined); offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined); offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Autohome exact config: engine-section maximum power"; }
     }
-    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_spec_product_images_v1", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: listing?.galleryUrl, exactProductImages: gallery, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v2", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
+    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: exactGalleryUrl || listing?.galleryUrl, legacyGalleryUrl: listing?.galleryUrl, exactProductImages: gallery, exactGalleryImageCount: exactGallery.length, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v2", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
     return gallery.map(image);
   }
 
