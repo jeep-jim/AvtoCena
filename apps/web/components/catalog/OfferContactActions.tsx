@@ -29,7 +29,7 @@ function PhoneIcon() {
 }
 
 function ActionButtons({ className = "" }: { className?: string }) {
-  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-11 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:text-sm md:px-12 md:text-base xl:h-14";
+  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-2 text-[12px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:px-3 sm:text-sm md:px-12 md:text-base xl:h-14";
   return (
     <div className={`grid grid-cols-2 gap-3 md:gap-4 ${className}`}>
       <button
@@ -38,14 +38,14 @@ function ActionButtons({ className = "" }: { className?: string }) {
         className={`${buttonClass} bg-[#00A2E8]`}
       >
         <span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><ChatIcon /></span>
-        <span className="truncate">Чат в мессенджере</span>
+        <span className="whitespace-nowrap">Чат в мессенджере</span>
       </button>
       <button
         type="button"
         data-offer-action="lead"
         className={`${buttonClass} bg-[#22B14C]`}
       >
-        <span className="truncate">Оставить заявку</span>
+        <span className="whitespace-nowrap">Оставить заявку</span>
         <span className="pointer-events-none absolute right-4 hidden items-center justify-center md:inline-flex xl:right-5"><PhoneIcon /></span>
       </button>
     </div>
