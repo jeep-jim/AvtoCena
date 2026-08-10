@@ -228,8 +228,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
-          <PriceTrend offer={o} label={String(raw?.calculationStatus || "") === "preliminary_power_pending" ? "Предварительно от" : "Ориентир стоимости"} priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
-          {String(raw?.calculationStatus || "") === "preliminary_power_pending" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold leading-5 text-amber-200">Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.</p> : null}
+          <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="grid min-w-0 grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>

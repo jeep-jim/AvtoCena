@@ -261,21 +261,15 @@ function exciseRateRubPerHp2026(powerKw: number) {
   return 1_829;
 }
 
-function pureElectricKnownCustomsPayment(input: RussiaCustomsInput, customsValueRub: number) {
+function pureElectricCustomsPayment(input: RussiaCustomsInput, customsValueRub: number, utilizationPowerKw: number) {
   const excisePowerKw = positive(input.powerKw)
-    || (positive(input.powerHp) ? Number(input.powerHp) * 0.75 : undefined);
-  const importDutyRub = Math.round(customsValueRub * EV_IMPORT_DUTY_RATE);
-  if (!excisePowerKw) {
-    // We can still calculate the exact 15% duty and the VAT base that does not
-    // depend on excise. The unknown excise and its incremental VAT stay excluded
-    // from the preliminary lower-bound price until source/certified power is known.
-    const vatRub = Math.round((customsValueRub + importDutyRub) * VAT_RATE_2026);
-    return { importDutyRub, exciseRub: 0, vatRub, excisePowerKnown: false };
-  }
+    || (positive(input.powerHp) ? Number(input.powerHp) * 0.75 : undefined)
+    || utilizationPowerKw;
   const excisePowerHp = positive(input.powerHp) || excisePowerKw / 0.75;
+  const importDutyRub = Math.round(customsValueRub * EV_IMPORT_DUTY_RATE);
   const exciseRub = Math.round(excisePowerHp * exciseRateRubPerHp2026(excisePowerKw));
   const vatRub = Math.round((customsValueRub + importDutyRub + exciseRub) * VAT_RATE_2026);
-  return { importDutyRub, exciseRub, vatRub, excisePowerKnown: true };
+  return { importDutyRub, exciseRub, vatRub };
 }
 
 export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): RussiaCustomsResult {
@@ -300,7 +294,6 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
     powertrainKind === "electric" || powertrainKind === "series_hybrid"
       ? "certified_30_minute_power_kw" : "utilization_power_kw",
   );
-  if (pureElectric && !positive(input.powerKw) && !positive(input.powerHp)) missing.push("electric_excise_power_kw");
   if (needsCombustionDisplacement && !engineCc) missing.push("engine_cc");
 
   const ageCandidates = production
@@ -327,8 +320,8 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
     let importDutyRub = 0;
     let exciseRub = 0;
     let vatRub = 0;
-    if (customsValueRub && pureElectric) {
-      ({ importDutyRub, exciseRub, vatRub } = pureElectricKnownCustomsPayment(input, customsValueRub));
+    if (customsValueRub && pureElectric && utilizationPowerKw) {
+      ({ importDutyRub, exciseRub, vatRub } = pureElectricCustomsPayment(input, customsValueRub, utilizationPowerKw));
     } else if (customsValueEur && eurRateRub && engineCc && !pureElectric) {
       importDutyRub = unifiedDutyRub(customsValueEur, eurRateRub, engineCc, band);
     }
@@ -350,10 +343,7 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
     `Месяц производства не указан: выбран максимальный платёж из категорий ${possibleAgeBands.join(", ")}.`,
   );
   if ((powertrainKind === "electric" || powertrainKind === "series_hybrid") && !utilizationPowerKw) warnings.push(
-    "Нужна максимальная 30-минутная мощность из ОТТС, СБКТС, ЗОЕТС или ЭПТС; пиковая мощность для утильсбора не используется. До её получения утильсбор не включается в предварительный итог.",
-  );
-  if (pureElectric && !positive(input.powerKw) && !positive(input.powerHp)) warnings.push(
-    "Мощность электродвигателя для акциза не подтверждена источником: акциз и зависящая от него часть НДС не включены в предварительный итог.",
+    "Нужна максимальная 30-минутная мощность из ОТТС, СБКТС, ЗОЕТС или ЭПТС; пиковая мощность для утильсбора не используется.",
   );
   if (powertrainKind === "other_hybrid" && !utilizationPowerKw) warnings.push(
     "Нужна сумма мощности ДВС и максимальной 30-минутной мощности всех тяговых электромоторов.",

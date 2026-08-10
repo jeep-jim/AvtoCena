@@ -3,7 +3,6 @@ import fs from "node:fs/promises";
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const market = String(process.env.RECOVERY_PUBLISH_MARKET || "").trim();
@@ -30,9 +29,6 @@ function exactCalculation(offer) {
   const motor30 = Number(offer?.power30MinKw || 0) || (Array.isArray(offer?.power30MinKwByMotor) ? offer.power30MinKwByMotor.reduce((sum, value) => sum + Math.max(0, Number(value || 0)), 0) : 0);
   return kind === "other_hybrid" ? motor30 > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30 > 0;
 }
-function publishableCalculation(offer) {
-  return exactCalculation(offer) || isPreliminaryElectrifiedCalculation(offer);
-}
 function exactSourceBound(offer) {
   const op = offer?.operational || {};
   const raw = op?.raw || {};
@@ -48,7 +44,7 @@ function publicExistingStillValid(offer) {
   return /^https?:\/\//i.test(String(offer?.operational?.sourceUrl || ""))
     && Number(offer?.sourcePrice || 0) > 0
     && Boolean(String(offer?.sourceCurrency || "").trim())
-    && publishableCalculation(offer)
+    && exactCalculation(offer)
     && isCatalogOfferBusinessLiquid(offer);
 }
 function freshness(offer) {
@@ -125,7 +121,7 @@ for (const raw of sourceRows) {
   if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
   if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
   if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
-  if (!publishableCalculation(offer)) { reject("calculation"); continue; }
+  if (!exactCalculation(offer)) { reject("calculation"); continue; }
   incoming.set(offer.id, offer);
 }
 
@@ -207,7 +203,6 @@ const report = {
   refreshedOrNewCount: marketRows.filter((offer) => currentIncomingIds.has(offer.id)).length,
   preferredCount: marketRows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   calculatedCount: marketRows.filter(exactCalculation).length,
-  preliminaryCount: marketRows.filter(isPreliminaryElectrifiedCalculation).length,
   minYear,
   retentionMs,
   preferredMaxRub,

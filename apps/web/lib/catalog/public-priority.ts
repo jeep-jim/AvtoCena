@@ -9,7 +9,6 @@ export type CatalogPublicPriority = {
   powerHp: number;
   popularityDecile: number;
   calculated: boolean;
-  preliminary: boolean;
   imageCount: number;
   japanAuction: boolean;
 };
@@ -49,23 +48,6 @@ function completeCalculation(offer: Partial<VehicleOffer> | any) {
   );
 }
 
-function preliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
-  const totalRub = positive(offer?.totalRub, 1_000_000_000);
-  const kind = String(offer?.powertrainKind || "");
-  const snapshot = offer?.calculationSnapshot || {};
-  const customs = snapshot.customs || {};
-  const breakdown = Array.isArray(snapshot.breakdown) ? snapshot.breakdown : [];
-  const hasCar = breakdown.some((line: any) => String(line?.id || "") === "car" && positive(line?.amountRub) > 0);
-  const hasKnownCustoms = breakdown.some((line: any) => String(line?.id || "") === "customs" && positive(line?.amountRub) > 0);
-  return Boolean(totalRub
-    && ["electric", "series_hybrid", "other_hybrid"].includes(kind)
-    && String(offer?.calculationStatus || "") === "preliminary_power_pending"
-    && snapshot.pricingConfidence === "preliminary"
-    && snapshot.priceIncludesUtilizationFee === false
-    && customs.status === "needs_data"
-    && hasCar && hasKnownCustoms);
-}
-
 function regionalPhotoIdentityVerified(offer: Partial<VehicleOffer> | any) {
   const market = String(offer?.market || "").toLowerCase();
   if (!["georgia", "kyrgyzstan"].includes(market)) return true;
@@ -94,7 +76,7 @@ function publicPriceLimits() {
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
-  if (!completeCalculation(offer) && !preliminaryElectrifiedCalculation(offer)) return 0;
+  if (!completeCalculation(offer)) return 0;
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return 0;
   const { absoluteMaximumRub } = publicPriceLimits();
@@ -129,7 +111,6 @@ function offerAgeYears(offer: Partial<VehicleOffer> | any) {
 export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): CatalogPublicPriority {
   const japanAuction = isJapanAuctionOffer(offer);
   const calculated = completeCalculation(offer);
-  const preliminary = preliminaryElectrifiedCalculation(offer);
   const visibleRub = catalogOfferVisibleRub(offer);
   const ageYears = offerAgeYears(offer);
   const powerHp = offerPowerHp(offer);
@@ -140,17 +121,12 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   const maximumAgeYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
   const popularDecile = Math.max(1, Math.min(10, Number(process.env.CATALOG_PRIORITY_POPULARITY_DECILE || 5)));
   const rawTotalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
-  const base = { visibleRub, ageYears, powerHp, popularityDecile, calculated, preliminary, imageCount, japanAuction };
 
-  if (!calculated && !preliminary) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
-  if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
-  if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
-  if (rawTotalRub > absoluteMaximumRub) return { eligible: false, tier: 99, reason: "above_absolute_price_limit", ...base };
-  if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
-
-  if (preliminary) {
-    return { eligible: true, tier: rawTotalRub <= preferredMaximumRub ? 8 : 9, reason: "preliminary_electrified_power_pending", ...base };
-  }
+  if (!calculated) return { eligible: false, tier: 99, reason: "missing_full_calculation", visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
+  if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
+  if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
+  if (rawTotalRub > absoluteMaximumRub) return { eligible: false, tier: 99, reason: "above_absolute_price_limit", visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
+  if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
 
   const recent = ageYears <= maximumAgeYears;
   const economicalPower = powerHp > 0 && powerHp <= maximumPowerHp;
@@ -162,7 +138,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   else if (preferredPrice && recent && economicalPower) { tier = 2; reason = "recent_economical_calculated"; }
   else if (preferredPrice && popular) { tier = 3; reason = "popular_calculated"; }
   else if (japanAuction && preferredPrice) { tier = 4; reason = "japan_auction_calculated"; }
-  return { eligible: true, tier, reason, ...base };
+  return { eligible: true, tier, reason, visibleRub, ageYears, powerHp, popularityDecile, calculated, imageCount, japanAuction };
 }
 
 export function compareCatalogPublicPriority(left: Partial<VehicleOffer> | any, right: Partial<VehicleOffer> | any) {

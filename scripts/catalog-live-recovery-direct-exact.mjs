@@ -4,7 +4,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
 
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
-const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { dubicarsUaeCurrentSource } = await import("../apps/web/lib/catalog/dubicars-current-source.ts");
@@ -188,7 +188,7 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
     let calculated;
     try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
     catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: String(error?.message || error) }); reject(rejections, "calculation_exception"); continue; }
-    if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) { reject(rejections, "calculation_pending"); continue; }
+    if (!exactCalculation(calculated)) { reject(rejections, "calculation_pending"); continue; }
     calculated.status = "active";
     calculated.operational = {
       ...(calculated.operational || {}),
@@ -197,7 +197,6 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
         recoveryExactSourceUrl: true,
         recoveryExactPhotoIdentity: true,
         recoveryCalculatedRub: true,
-        recoveryPreliminaryPowerPending: isPreliminaryElectrifiedCalculation(calculated),
         recoveryBodySourceOnly: true,
         recoveryDirectExactAdapter: true,
       },
@@ -226,7 +225,6 @@ const report = {
   documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
-  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
   imageStats: {
     min: offers.length ? Math.min(...offers.map((offer) => offer.images.length)) : 0,
     max: offers.length ? Math.max(...offers.map((offer) => offer.images.length)) : 0,
