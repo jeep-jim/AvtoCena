@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
+// The reserve registry is only for canonical names and logos; the rail renders live brands passed by catalog facets.
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
