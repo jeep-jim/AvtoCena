@@ -1,0 +1,150 @@
+name: One-shot clean public catalog titles and diversity
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-clean-public-catalog-titles-diversity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: oneshot-clean-public-catalog-titles-diversity
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Patch titles, model diversity, similar offers and equivalent new trims
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text()
+              if old not in text:
+                  raise SystemExit(f"expected block not found in {path}: {old[:120]!r}")
+              if text.count(old) != 1:
+                  raise SystemExit(f"expected exactly one block in {path}, got {text.count(old)}")
+              p.write_text(text.replace(old, new, 1))
+
+          presentation = 'apps/web/lib/catalog/presentation.ts'
+          replace_once(
+              presentation,
+              '  [/奇瑞/g, "Chery "],\n  [/哈弗/g, "Haval "],',
+              '  [/奇瑞/g, "Chery "],\n  [/开瑞/g, "Karry "],\n  [/哈弗/g, "Haval "],',
+          )
+          replace_once(
+              presentation,
+              '\nexport function catalogMarketName(value: unknown) {',
+              '''\nconst unresolvedHanRe = /[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]/u;\n\nfunction publicTitleTrim(value: unknown) {\n  const original = compactListingText(value);\n  if (!original || !unresolvedHanRe.test(original)) return original;\n  const cleaned = original\n    .replace(/[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]+/gu, " ")\n    .replace(/\\s+/g, " ")\n    .trim();\n  // Keep only a factual non-CJK remainder (for example "2024 1.6L").\n  // If the source trim contains nothing safely readable, omit it from the public title.\n  return /[A-Za-zА-Яа-яЁё]/u.test(cleaned) ? cleaned : "";\n}\n\nexport function catalogMarketName(value: unknown) {''',
+          )
+          replace_once(
+              presentation,
+              '  let trim = collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim));',
+              '  let trim = collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));',
+          )
+          replace_once(
+              presentation,
+              '    trimLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim)),',
+              '    trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),',
+          )
+
+          cars_page = 'apps/web/app/(public)/cars/page.tsx'
+          replace_once(
+              cars_page,
+              '\nfunction matchesFilters(offer: any, common: any) {',
+              '''\nfunction catalogModelGroupKey(offer: any) {\n  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\\s+/g, " ");\n  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\\s+/g, " ");\n  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;\n}\n\nfunction balanceBusinessRows(rows: any[]) {\n  const sorted = [...rows].sort(businessOrder);\n  const groups = new Map<string, any[]>();\n  for (const row of sorted) {\n    const key = catalogModelGroupKey(row);\n    const group = groups.get(key) || [];\n    group.push(row);\n    groups.set(key, group);\n  }\n  const balanced: any[] = [];\n  for (let depth = 0; balanced.length < sorted.length; depth++) {\n    let added = false;\n    for (const group of groups.values()) {\n      const row = group[depth];\n      if (!row) continue;\n      balanced.push(row);\n      added = true;\n    }\n    if (!added) break;\n  }\n  return balanced;\n}\n\nfunction matchesFilters(offer: any, common: any) {''',
+          )
+          replace_once(
+              cars_page,
+              '''        const rows = (await readMarketOffers(market.id))\n          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))\n          .sort(businessOrder);\n        const start = (page - 1) * pageSize;\n        const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));\n        return {\n          ...market,\n          items: visible.sort(businessOrder).map(publicOffer),\n          total: rows.length,\n          page,\n          pageSize,\n        };''',
+              '''        const rows = balanceBusinessRows((await readMarketOffers(market.id))\n          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer)));\n        const start = (page - 1) * pageSize;\n        const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));\n        return {\n          ...market,\n          items: balanceBusinessRows(visible).map(publicOffer),\n          total: rows.length,\n          page,\n          pageSize,\n        };''',
+          )
+          replace_once(
+              cars_page,
+              '''      const result = await searchOffers({ ...common, market: market.id, page, pageSize });\n      const repriced = await applyActiveBusinessPricingBatch(result.items as any[]);\n      return { ...market, items: repriced.sort(businessOrder), total: result.total, page: result.page, pageSize: result.pageSize };''',
+              '''      const result = await searchOffers({ ...common, market: market.id, page, pageSize });\n      const pageRows = common.model ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);\n      const repriced = await applyActiveBusinessPricingBatch(pageRows);\n      return { ...market, items: common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced), total: result.total, page: result.page, pageSize: result.pageSize };''',
+          )
+
+          offer_page = 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          replace_once(
+              offer_page,
+              '\ntype BreakdownLine = { id?: string; title: string; amountRub: number };',
+              '''\nfunction similarModelKey(offer: any) {\n  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\\s+/g, " ");\n  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\\s+/g, " ");\n  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;\n}\n\nfunction diverseSimilarOffers(rows: any[], current: any, limit = 12) {\n  const currentKey = similarModelKey(current);\n  const seen = new Set<string>(currentKey ? [currentKey] : []);\n  const differentModels: any[] = [];\n  const repeats: any[] = [];\n  for (const row of rows) {\n    const key = similarModelKey(row);\n    if (key && !seen.has(key)) {\n      seen.add(key);\n      differentModels.push(row);\n    } else {\n      repeats.push(row);\n    }\n  }\n  return [...differentModels, ...repeats].slice(0, limit);\n}\n\ntype BreakdownLine = { id?: string; title: string; amountRub: number };''',
+          )
+          replace_once(
+              offer_page,
+              '''  const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 16, sort: "updatedAt" });\n  const similar = similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)).slice(0, 12);''',
+              '''  const similarResult = await searchOffers({ market: raw.market, budgetFrom: visibleRub ? Math.round(visibleRub * 0.75) : undefined, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 48, sort: "updatedAt" });\n  const similar = diverseSimilarOffers(similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)), raw, 12);''',
+          )
+          replace_once(
+              offer_page,
+              '<Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link>',
+              '<Link href={`/cars?market=${encodeURIComponent(raw.market)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link>',
+          )
+
+          publish = 'scripts/catalog-live-recovery-publish.mjs'
+          replace_once(
+              publish,
+              '\nfunction applyPerModelCap(rows, rejected) {',
+              '''\nfunction equivalentNewVariantKey(offer) {\n  if (String(offer?.sourceId || "") !== "autohome_new_china_open") return "";\n  const clean = (value) => String(value || "").trim().toLocaleLowerCase("en-US").replace(/\\s+/g, " ");\n  return [\n    modelKey(offer),\n    Number(offer?.year || 0),\n    Number(offer?.engineCc || 0),\n    Math.round(Number(offer?.powerHp || 0) * 10) / 10,\n    clean(offer?.powertrainKind),\n    clean(offer?.transmission),\n    clean(offer?.drive),\n    clean(offer?.bodyType),\n  ].join("|");\n}\nfunction collapseEquivalentNewVariants(rows, rejected) {\n  const result = [];\n  const seen = new Set();\n  for (const offer of rows) {\n    const key = equivalentNewVariantKey(offer);\n    if (key && seen.has(key)) {\n      rejected.equivalent_new_variant = Number(rejected.equivalent_new_variant || 0) + 1;\n      continue;\n    }\n    if (key) seen.add(key);\n    result.push(offer);\n  }\n  return result;\n}\n\nfunction applyPerModelCap(rows, rejected) {''',
+          )
+          replace_once(
+              publish,
+              '''const cumulative = [...candidates.values()].sort(quality);\nconst diversity = applyPerModelCap(cumulative, rejected);''',
+              '''const cumulative = [...candidates.values()].sort(quality);\nconst equivalentCollapsed = collapseEquivalentNewVariants(cumulative, rejected);\nconst diversity = applyPerModelCap(equivalentCollapsed, rejected);''',
+          )
+
+          Path('.github/workflows/oneshot-clean-public-catalog-titles-diversity.yml').unlink()
+          PY
+
+      - name: Verify public title example and TypeScript
+        shell: bash
+        run: |
+          node --check scripts/catalog-live-recovery-publish.mjs
+          npm run typecheck
+          npx tsx -e 'import { catalogOfferTitle } from "./apps/web/lib/catalog/presentation.ts"; const title = catalogOfferTitle({ make: "开瑞", model: "开瑞X6", trim: "2024 1.6L单排栏板舒适型", year: 2024 }); console.log(title); if (title !== "Karry X6 2024 1.6L") process.exit(2);'
+
+      - name: Commit patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            'apps/web/lib/catalog/presentation.ts' \
+            'apps/web/app/(public)/cars/page.tsx' \
+            'apps/web/app/(public)/cars/offer/[id]/page.tsx' \
+            'scripts/catalog-live-recovery-publish.mjs' \
+            '.github/workflows/oneshot-clean-public-catalog-titles-diversity.yml'
+          git commit -m "Clean catalog titles and diversify visible models"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - name: Deploy and refresh live markets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
+          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-daily-working-markets.yml/dispatches" -f ref=main
+          echo "Deployed clean titles/model-balanced UI and started cumulative Korea/China/Europe/Georgia refresh." >> "$GITHUB_STEP_SUMMARY"
