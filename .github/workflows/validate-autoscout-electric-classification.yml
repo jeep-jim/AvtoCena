@@ -1,0 +1,82 @@
+name: Validate AutoScout exact EV classification
+
+on:
+  push:
+    branches:
+      - fix/autoscout-electric-classification-20260810
+    paths:
+      - ".github/workflows/validate-autoscout-electric-classification.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+  RECOVERY_RETRY_ATTEMPTS: "3"
+  RECOVERY_PREPARE_CONCURRENCY: "4"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply source-specific EV classification fix
+        run: python .github/patches/fix-autoscout-electric-classification.py
+      - name: Typecheck
+        run: |
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+      - name: Strict Europe no-publish smoke
+        continue-on-error: true
+        env:
+          RECOVERY_MARKET: europe
+          RECOVERY_SOURCE_IDS: autoscout_europe_open
+          RECOVERY_OUTPUT: autoscout-electric-fix-smoke.json
+          RECOVERY_TARGET: "300"
+          RECOVERY_MAX_PAGES: "6"
+          RECOVERY_TIME_LIMIT_MS: "600000"
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - name: Verify explicit AutoScout electric rows are not left unknown
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p='autoscout-electric-fix-smoke.json';
+          if(!fs.existsSync(p)) throw new Error('autoscout smoke output missing');
+          const r=JSON.parse(fs.readFileSync(p,'utf8')).report||{};
+          const pending=[...(r.calculationPendingElectrifiedModels||[]),...(r.calculationPendingCombustionModels||[])];
+          const id4=pending.filter(x=>x.make==='Volkswagen' && x.model==='ID.4');
+          if(id4.some(x=>x.powertrainKind==='unknown')) throw new Error(`ID.4 still unknown: ${JSON.stringify(id4)}`);
+          console.log(JSON.stringify({count:r.count,electricCount:r.electricCount,hybridCount:r.hybridCount,pendingElectrified:r.calculationPendingElectrifiedModels||[],id4},null,2));
+          NODE
+      - name: Commit validated source change to branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/autoscout-exact-source.ts
+          git commit -m "Classify exact AutoScout electric listings from source fuel slug"
+          git reset --hard HEAD
+          git clean -fd
+          git push origin HEAD:fix/autoscout-electric-classification-20260810
