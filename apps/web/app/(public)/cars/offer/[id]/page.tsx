@@ -239,6 +239,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
                 <span className="mt-1 block xl:whitespace-nowrap">Возможность покупки и финальную стоимость под ключ подтвердит менеджер.</span>
               </p>
             </div>
+            <div data-offer-desktop-actions-slot className="hidden xl:block" />
           </aside>
         </div>
       </div>

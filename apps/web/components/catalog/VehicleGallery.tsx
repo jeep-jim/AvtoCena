@@ -10,6 +10,8 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   const touchStartX = useRef<number | null>(null);
   const didSwipe = useRef(false);
   const activeSideThumb = useRef<HTMLButtonElement | null>(null);
+  const mainImageButton = useRef<HTMLButtonElement | null>(null);
+  const lastWheelAt = useRef(0);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -17,8 +19,26 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   }, [images.join("|")]);
 
   useEffect(() => {
-    activeSideThumb.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    activeSideThumb.current?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }, [activeIndex]);
+
+  useEffect(() => {
+    const node = mainImageButton.current;
+    if (!node || cleanImages.length < 2) return;
+    const handleWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 1280) return;
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastWheelAt.current < 135) return;
+      lastWheelAt.current = now;
+      if (delta > 0) next();
+      else previous();
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [cleanImages.length]);
 
   useEffect(() => {
     if (!fullscreen) return;
@@ -86,15 +106,15 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     />
   );
 
-  const thumbButton = (thumbnail: string, index: number, mode: "side" | "mobile") => (
+  const thumbButton = (thumbnail: string, index: number, mode: "side" | "mobile" | "desktop") => (
     <button
       key={`${mode}-${thumbnail}-${index}`}
-      ref={mode === "side" && index === activeIndex ? activeSideThumb : undefined}
+      ref={(mode === "side" || mode === "desktop") && index === activeIndex ? activeSideThumb : undefined}
       type="button"
       onClick={() => setActiveIndex(index)}
       className={`relative w-full shrink-0 cursor-pointer overflow-hidden rounded-xl transition-opacity duration-200 ${
-        mode === "side" ? "h-[82px]" : "h-14 sm:h-16 md:h-24"
-      } ${index === activeIndex ? "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent" : "opacity-55 hover:opacity-90"}`}
+        mode === "side" ? "h-[82px]" : mode === "desktop" ? "h-16" : "h-14 sm:h-16 md:h-24"
+      } ${index === activeIndex ? (mode === "desktop" ? "opacity-100" : "opacity-100 ring-2 ring-red-500 ring-offset-2 ring-offset-transparent") : "opacity-55 hover:opacity-90"}`}
       aria-label={`Открыть фото ${index + 1}`}
       aria-pressed={index === activeIndex}
     >
@@ -186,8 +206,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   return (
     <>
       <div className="min-w-0 max-w-full overflow-hidden">
-        <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3" : ""}`}>
+        <div className={`min-w-0 ${cleanImages.length > 1 ? "md:grid md:grid-cols-[minmax(0,1fr)_104px] md:gap-3 xl:block" : ""}`}>
           <button
+            ref={mainImageButton}
             type="button"
             onClick={openFullscreen}
             onTouchStart={(event) => startSwipe(event.touches[0]?.clientX || 0)}
@@ -196,23 +217,34 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             aria-label="Открыть фотографии автомобиля"
           >
             {image}
-            <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur">
+            {cleanImages.length > 1 ? <div className="pointer-events-none absolute bottom-4 left-8 right-24 hidden gap-2 xl:flex" aria-hidden="true">
+              {cleanImages.map((_, index) => <span key={`progress-${index}`} className={`h-[3px] min-w-0 flex-1 rounded-full ${index === activeIndex ? "bg-red-500" : "bg-white/85"}`} />)}
+            </div> : null}
+            <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur xl:bottom-4">
               {activeIndex + 1} / {cleanImages.length}
             </div>
           </button>
 
           {cleanImages.length > 1 ? (
-            <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex">
+            <div className="ac-vehicle-side-thumbnails ac-hide-scrollbar hidden h-[520px] min-w-0 flex-col gap-2 overflow-y-auto py-1 pr-1 md:flex xl:hidden">
               {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "side"))}
             </div>
           ) : null}
         </div>
 
-        {cleanImages.length > 1 ? (
+        {cleanImages.length > 1 ? <>
           <div className="ac-vehicle-thumbnails ac-hide-scrollbar -mr-4 mt-3 grid max-w-[calc(100%+1rem)] grid-flow-col auto-cols-[3.75rem] gap-2 overflow-x-auto p-1 pb-2 pr-4 sm:auto-cols-[4.5rem] md:hidden">
             {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
-        ) : null}
+          <div className="relative mt-3 hidden xl:block">
+            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1 pr-14">
+              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}
+            </div>
+            <button type="button" onClick={next} className="absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/38 text-white backdrop-blur transition hover:bg-black/55" aria-label="Следующее фото">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+          </div>
+        </> : null}
       </div>
 
       {fullscreenGallery && typeof document !== "undefined" ? createPortal(fullscreenGallery, document.body) : null}
