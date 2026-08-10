@@ -92,11 +92,15 @@ jobs:
           const gained = Number(enriched?.report?.officialPowerEnrichment?.enriched || 0);
           const calculated = Number(result?.report?.calculatedCount || result?.report?.count || 0);
           const by = enriched?.report?.officialPowerEnrichment?.byChassis || {};
-          console.log(JSON.stringify({gained, calculated, byChassis: by, report: result.report}, null, 2));
+          const distinctModels = Number(result?.report?.distinctModels || 0);
+          const documentedPowerCount = Number(result?.report?.documentedPowerCount || 0);
+          console.log(JSON.stringify({gained, calculated, distinctModels, documentedPowerCount, byChassis: by, report: result.report}, null, 2));
           if (Number(by.L235S || 0) !== 32) throw new Error(`L235S_exact_match_regressed:${by.L235S || 0}`);
           if (Number(by.ZRT272W || 0) < 20) throw new Error(`ZRT272W_exact_match_regressed:${by.ZRT272W || 0}`);
-          if (gained < 178) throw new Error(`japan_v2_enrichment_too_low:${gained}`);
-          if (calculated < 145) throw new Error(`japan_v2_calculated_too_low:${calculated}`);
+          if (gained < 179) throw new Error(`japan_v2_enrichment_regressed:${gained}`);
+          if (calculated < 138) throw new Error(`japan_v2_calculated_regressed:${calculated}`);
+          if (distinctModels < 22) throw new Error(`japan_v2_model_diversity_regressed:${distinctModels}`);
+          if (documentedPowerCount < 130) throw new Error(`japan_v2_documented_power_regressed:${documentedPowerCount}`);
           NODE
       - name: Commit only validated manufacturer rules
         shell: bash
