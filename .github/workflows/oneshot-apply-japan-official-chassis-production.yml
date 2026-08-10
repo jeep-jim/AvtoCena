@@ -86,14 +86,14 @@ jobs:
           if (gained < 100) throw new Error(`official_chassis_enrichment_regressed:${gained}`);
           if (calculated < 100) throw new Error(`japan_strict_conversion_regressed:${calculated}`);
           NODE
-      - name: Commit verified production flow only
+      - name: Commit verified chassis matcher only
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/prestige-japan-official-chassis-enrich.mjs .github/workflows/catalog-live-recovery-japan-from-prestige.yml
-          git commit -m "Apply official chassis power before Japan customs [skip actions]"
+          git add scripts/prestige-japan-official-chassis-enrich.mjs
+          git commit -m "Read Prestige chassis fields for official Japan power [skip actions]"
           git reset --hard HEAD
           git fetch origin main
           git rebase origin/main
