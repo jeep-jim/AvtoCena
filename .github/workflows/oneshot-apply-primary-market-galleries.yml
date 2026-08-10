@@ -33,12 +33,15 @@ jobs:
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
           CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "35000"
           CATALOG_SOURCE_TIMEOUT_MS: "35000"
-        run: npx tsx scripts/tmp-gallery-source-smoke.ts
+        shell: bash
+        run: |
+          mv scripts/tmp-gallery-source-smoke.ts scripts/tmp-gallery-source-smoke.mts
+          npx tsx scripts/tmp-gallery-source-smoke.mts
       - name: Commit verified source changes only
         shell: bash
         run: |
           set -euo pipefail
-          rm -f scripts/tmp-gallery-source-smoke.ts
+          rm -f scripts/tmp-gallery-source-smoke.ts scripts/tmp-gallery-source-smoke.mts
           rm -f .github/workflows/oneshot-fix-market-galleries.yml
           rm -f .github/workflows/oneshot-fix-market-galleries-v2.yml
           rm -f .github/workflows/oneshot-apply-primary-market-galleries.yml
