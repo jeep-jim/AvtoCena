@@ -1,0 +1,131 @@
+name: One-shot KCar primary gallery repair v3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-kcar-primary-gallery-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-smoke-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Patch exact KCar listing-bound primary gallery
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/web/lib/catalog/kcar-exact-source.ts')
+          text = path.read_text()
+          start = text.index('function exactVehicleGallery(data: KCarDetailData, carCd: string) {')
+          end = text.index('\n}\n\nfunction parseExactDetail', start) + 3
+          new_block = "\n".join([
+              'function collectExactKCarImages(value: unknown, numericId: string, output: string[] = [], depth = 0) {',
+              '  if (value == null || depth > 12) return output;',
+              '  if (typeof value === "string") {',
+              '    const candidates = value.split(",").map((item) => item.trim().replace(/^[\\\'\\\"]+|[\\\'\\\"]+$/g, "").trim());',
+              '    const matcher = new RegExp(`^https://img\\\\.kcar\\\\.com/3dcarpicture/\\\\d{4}/\\\\d{2}/\\\\d+/${numericId}_[0-9]+/.+?_hq\\\\.(?:jpe?g|webp)(?:[?#].*)?$`, "i");',
+              '    for (const candidate of candidates) if (matcher.test(candidate)) output.push(candidate);',
+              '    return output;',
+              '  }',
+              '  if (Array.isArray(value)) {',
+              '    value.forEach((item) => collectExactKCarImages(item, numericId, output, depth + 1));',
+              '    return output;',
+              '  }',
+              '  if (typeof value === "object") {',
+              '    Object.values(value as Record<string, unknown>).forEach((item) => collectExactKCarImages(item, numericId, output, depth + 1));',
+              '  }',
+              '  return output;',
+              '}',
+              '',
+              'function exactVehicleGallery(data: KCarDetailData, carCd: string) {',
+              '  const numericId = carCd.replace(/^[^0-9]+/, "");',
+              '  if (!numericId) return [];',
+              '  const unique = [...new Set(collectExactKCarImages(data, numericId))];',
+              '  const primary = unique.filter((url) => !/\\/extra\\//i.test(url));',
+              '  const extra = unique.filter((url) => /\\/extra\\//i.test(url));',
+              '  return [...primary, ...extra].slice(0, 30);',
+              '}',
+              '',
+          ])
+          text = text[:start] + new_block + text[end:]
+          old_mode = 'gallerySafetyMode: "kcar_vrvo_v_src_show_exact_car_id_hq_v1"'
+          if text.count(old_mode) != 1:
+              raise SystemExit(f'expected one old KCar gallery mode, got {text.count(old_mode)}')
+          text = text.replace(old_mode, 'gallerySafetyMode: "kcar_exact_car_id_primary_then_extra_hq_v2"', 1)
+          path.write_text(text)
+          PY
+
+      - name: Verify TypeScript
+        run: |
+          set -euo pipefail
+          npm run typecheck
+          grep -F 'kcar_exact_car_id_primary_then_extra_hq_v2' apps/web/lib/catalog/kcar-exact-source.ts
+          grep -F 'collectExactKCarImages' apps/web/lib/catalog/kcar-exact-source.ts
+
+      - name: Live NO-PUBLISH KCar exact gallery smoke
+        shell: bash
+        env:
+          CATALOG_SOURCE_TIMEOUT_MS: "35000"
+          CATALOG_SOURCE_RETRY_ATTEMPTS: "4"
+          CATALOG_SOURCE_DETAIL_BATCH_SIZE: "2"
+          CATALOG_SOURCE_BATCH_DELAY_MS: "300"
+        run: |
+          set -euo pipefail
+          cat > /tmp/kcar-gallery-smoke.ts <<'TS'
+          import { kcarKoreaExactSource } from "./apps/web/lib/catalog/kcar-exact-source.ts";
+
+          const checked: any[] = [];
+          let primary: any = null;
+          for (let page = 1; page <= 3 && !primary; page++) {
+            const result: any = await kcarKoreaExactSource.fetchPage(String(page));
+            const rows: any[] = Array.isArray(result.items) ? result.items : [];
+            for (const row of rows) {
+              const images = Array.isArray(row?.images) ? row.images : [];
+              const numericId = String(row?.id || "").replace(/^[^0-9]+/, "");
+              const bound = numericId && images.every((url: string) => new RegExp(`/[0-9]+/${numericId}_[0-9]+/`, "i").test(String(url)));
+              checked.push({ id: row?.id, count: images.length, first: images[0] || null, bound });
+              if (images.length >= 5 && bound && !/\/extra\//i.test(String(images[0] || ""))) {
+                primary = row;
+                break;
+              }
+            }
+          }
+          console.log(JSON.stringify({ checked: checked.length, sample: checked.slice(0, 8), primaryId: primary?.id || null, primaryCount: primary?.images?.length || 0, primaryFirst: primary?.images?.[0] || null }));
+          if (!primary) throw new Error('kcar_primary_listing_bound_gallery_not_verified');
+          const offer: any = kcarKoreaExactSource.normalizeOffer(primary);
+          if (!offer) throw new Error('kcar_primary_normalize_failed');
+          if (offer.operational?.raw?.gallerySafetyMode !== 'kcar_exact_car_id_primary_then_extra_hq_v2') throw new Error('kcar_gallery_mode_not_set');
+          const fetched: any[] = await kcarKoreaExactSource.fetchImages(offer);
+          if (fetched.length < 5 || /\/extra\//i.test(String(fetched[0]?.url || ''))) throw new Error('kcar_fetch_images_primary_order_failed');
+          TS
+          npx tsx /tmp/kcar-gallery-smoke.ts
+
+      - name: Commit verified source only and remove broken one-shots
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/kcar-exact-source.ts
+          git rm -f .github/workflows/oneshot-fix-market-galleries-v2.yml .github/workflows/oneshot-kcar-primary-gallery-v3.yml
+          git commit -m 'Use listing-bound primary KCar galleries'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
