@@ -1,0 +1,140 @@
+name: One-shot expand Japan official ICE chassis v3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-expand-japan-official-ice-v3.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  validate-and-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Add only exact Nissan manufacturer chassis rules
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('scripts/prestige-japan-official-chassis-enrich.mjs')
+          s = p.read_text()
+          anchor = 'const RULES = [\n'
+          additions = []
+          if '"Z12", "NISSAN", "CUBE", 2011, 2011' not in s:
+              additions.append('  ["Z12", "NISSAN", "CUBE", 2011, 2011, 1498, 20, 109, 80, "DBA-Z12 2011", ["https://history.nissan.co.jp/CUBE/Z12/0811/z120811g01.html", "https://history.nissan.co.jp/CUBE/Z12/0811/z120811g02.html"]],\n')
+          if '"Z12", "NISSAN", "CUBE", 2013, 2018' not in s:
+              additions.append('  ["Z12", "NISSAN", "CUBE", 2013, 2018, 1498, 20, 111, 82, "DBA-Z12 2013-2018", ["https://history.nissan.co.jp/CUBE/Z12/1210/www3.nissan.co.jp/content/dam/Nissan/jp/vehicles/cube/1804/pdf/cube_specsheet.pdf"]],\n')
+          if '"DR17W", "NISSAN", "CLIPPER RIO", 2015, 2024' not in s:
+              additions.append('  ["DR17W", "NISSAN", "CLIPPER RIO", 2015, 2024, 658, 15, 64, 47, "ABA/3BA-DR17W", ["https://www3.nissan.co.jp/content/dam/Nissan/jp/vehicles/nv100clipperrio/1906/specifications/pdf/nv100clipperrio_specsheet.pdf", "https://history.nissan.co.jp/ARCHIVES/PDF/NV100CLIPPERRIO/WZA1/20220420/nv100clipperrio_specsheet.pdf", "https://history.nissan.co.jp/ARCHIVES/PDF/CLIPPERRIO/WZA1/20240326/clipperrio_specsheet.pdf"]],\n')
+          if additions:
+              if anchor not in s:
+                  raise SystemExit('RULES anchor missing')
+              s = s.replace(anchor, anchor + ''.join(additions), 1)
+          p.write_text(s)
+          PY
+
+      - name: Validate code
+        run: |
+          set -euo pipefail
+          node --check scripts/prestige-japan-official-chassis-enrich.mjs
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+
+      - name: Download repaired 3157 sold lots
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: "31338331776"
+        run: |
+          set -euo pipefail
+          mkdir -p prestige-input
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | sort -n | tail -n1)"
+          test -n "$artifact_id"
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" -o prestige.zip
+          unzip -qo prestige.zip -d prestige-input
+          source_file="$(find prestige-input -type f -name 'prestige-japan-exact-sold-repaired.json' | head -n1)"
+          test -s "$source_file"
+          echo "PRESTIGE_SOURCE=$source_file" >> "$GITHUB_ENV"
+
+      - name: NO-PUBLISH exact enrichment and strict conversion
+        shell: bash
+        run: |
+          set -euo pipefail
+          PRESTIGE_OFFICIAL_INPUT="$PRESTIGE_SOURCE" PRESTIGE_OFFICIAL_OUTPUT=prestige-japan-v3-power.json node scripts/prestige-japan-official-chassis-enrich.mjs
+          PRESTIGE_RECOVERY_INPUT=prestige-japan-v3-power.json PRESTIGE_RECOVERY_OUTPUT=catalog-rebuild-japan-v3-validation.json PRESTIGE_RECOVERY_TARGET=3000 PRESTIGE_RECOVERY_CONCURRENCY=12 npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const enriched = JSON.parse(fs.readFileSync('prestige-japan-v3-power.json','utf8'));
+          const result = JSON.parse(fs.readFileSync('catalog-rebuild-japan-v3-validation.json','utf8'));
+          const gained = Number(enriched?.report?.officialPowerEnrichment?.enriched || 0);
+          const calculated = Number(result?.report?.calculatedCount || result?.report?.count || 0);
+          const by = enriched?.report?.officialPowerEnrichment?.byChassis || {};
+          const distinctModels = Number(result?.report?.distinctModels || 0);
+          const documentedPowerCount = Number(result?.report?.documentedPowerCount || 0);
+          const maxOffersPerModel = Number(result?.report?.maxOffersPerModel || 0);
+          console.log(JSON.stringify({gained, calculated, distinctModels, documentedPowerCount, maxOffersPerModel, byChassis: by, report: result.report}, null, 2));
+          if (Number(by.Z12 || 0) !== 28) throw new Error(`Z12_exact_match_expected_28:${by.Z12 || 0}`);
+          if (Number(by.DR17W || 0) !== 27) throw new Error(`DR17W_exact_match_expected_27:${by.DR17W || 0}`);
+          if (gained < 234) throw new Error(`japan_v3_enrichment_regressed:${gained}`);
+          if (calculated < 150) throw new Error(`japan_v3_calculated_not_meaningful:${calculated}`);
+          if (distinctModels < 24) throw new Error(`japan_v3_model_diversity_not_expanded:${distinctModels}`);
+          if (documentedPowerCount < 142) throw new Error(`japan_v3_documented_power_not_expanded:${documentedPowerCount}`);
+          if (maxOffersPerModel > 20) throw new Error(`exact_model_quota_broken:${maxOffersPerModel}`);
+          NODE
+
+      - name: Commit only validated manufacturer rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/prestige-japan-official-chassis-enrich.mjs
+          git rm -f .github/workflows/oneshot-expand-japan-official-ice-v3.yml
+          git commit -m "Expand exact Japan Nissan chassis power v3 [skip actions]"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-official-ice-v3-validation
+          path: |
+            prestige-japan-v3-power.json
+            catalog-rebuild-japan-v3-validation.json
+          if-no-files-found: warn
+          retention-days: 3
