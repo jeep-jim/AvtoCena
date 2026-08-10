@@ -16,6 +16,7 @@ const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.js
 const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const candidateMaxOffersPerModel = Math.max(maxOffersPerModel, Math.min(100, Number(process.env.PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL || maxOffersPerModel * 4)));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
 const minYear = new Date().getFullYear() - 15;
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
@@ -148,7 +149,7 @@ function modelKey(offer) {
   const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
   return make && model ? `${make}|${model}` : "";
 }
-function takeWithPerModelCap(rows, limit) {
+function takeWithPerModelCap(rows, limit, perModelCap = maxOffersPerModel) {
   const counts = new Map();
   const makes = new Set();
   const result = [];
@@ -156,7 +157,7 @@ function takeWithPerModelCap(rows, limit) {
   for (const offer of rows) {
     const key = modelKey(offer);
     const count = key ? Number(counts.get(key) || 0) : 0;
-    if (key && count >= maxOffersPerModel) { quotaSkipped++; continue; }
+    if (key && count >= perModelCap) { quotaSkipped++; continue; }
     result.push(offer);
     if (key) counts.set(key, count + 1);
     if (makeKey(offer)) makes.add(makeKey(offer));
@@ -177,7 +178,7 @@ const payload = JSON.parse(await fs.readFile(input, "utf8"));
 const eligibleRows = (Array.isArray(payload?.offers) ? payload.offers : [])
   .filter((offer) => Number(offer?.year || 0) >= minYear)
   .sort(priority);
-const candidateSelection = takeWithPerModelCap(eligibleRows, Math.max(target * 8, target));
+const candidateSelection = takeWithPerModelCap(eligibleRows, Math.max(target * 8, target), candidateMaxOffersPerModel);
 const rows = candidateSelection.rows;
 const rejected = {};
 function reject(reason) { rejected[reason] = Number(rejected[reason] || 0) + 1; }
@@ -237,6 +238,7 @@ const report = {
   distinctModels: finalSelection.distinctModels,
   distinctMakes: finalSelection.distinctMakes,
   maxOffersPerModel,
+  candidateMaxOffersPerModel,
   preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
   exactCalculatedCount: offers.filter(exactCalculation).length,
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
