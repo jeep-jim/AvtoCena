@@ -80,7 +80,7 @@ export function PublicLegalFooter() {
               <Link href="/cars" className="ac-public-footer-cta inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl px-3 text-center text-[13px] font-black sm:px-4 sm:text-sm" style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>Смотреть каталог</Link>
               <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl bg-white/[.07] px-3 text-center text-[13px] font-black text-[var(--ac-text)] transition hover:bg-white/[.12] sm:px-4 sm:text-sm">🚗 АвтоДилерам</Link>
             </div>
-            <button type="button" aria-disabled="true" className="mt-2 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-white/[.07] px-4 text-center text-sm font-black text-[var(--ac-text)]">Рассчитать ОСАГО</button>
+            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-2 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-white/[.07] px-4 text-center text-sm font-black text-[var(--ac-text)]">Рассчитать ОСАГО</button>
           </div>
 
           <FooterLinkGroup title="По странам" links={marketLinks} />
