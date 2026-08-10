@@ -1,0 +1,69 @@
+name: Validate Japan chassis-bound power knowledge
+
+on:
+  push:
+    branches:
+      - fix/japan-chassis-power-knowledge-20260810
+    paths:
+      - ".github/workflows/japan-chassis-power-branch.yml"
+      - ".github/patches/apply-japan-chassis-power.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        run: python .github/patches/apply-japan-chassis-power.py
+      - name: Validate code
+        run: |
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          npm run typecheck
+      - name: Validate chassis matcher with local fixture
+        shell: bash
+        run: |
+          mkdir -p data/catalog/power-knowledge
+          cat > data/catalog/power-knowledge/vehicles.json <<'JSON'
+          [
+            {
+              "id":"test-esse-l235s","make":"DAIHATSU","model":"ESSE","chassisCodes":["L235S"],"yearFrom":2011,"yearTo":2011,"engineCc":658,"engineCcTolerance":20,"fuel":"gasoline","powertrainKind":"combustion","powerHp":58,"powerKw":43,"confidence":"manufacturer","sourceIds":["daihatsu"],"sourceUrl":"https://u-catch.daihatsu.co.jp/catalog/ESSE/GRADE__10061324/","verifiedAt":"2026-08-10T00:00:00.000Z"
+            }
+          ]
+          JSON
+          cat > /tmp/chassis-test.ts <<'TS'
+          import { pathToFileURL } from "node:url";
+          async function main() {
+            process.env.JSON_STORAGE_DRIVER = "local";
+            const url = pathToFileURL(process.env.GITHUB_WORKSPACE + "/apps/web/lib/catalog/power-knowledge.ts").href;
+            const { findVehiclePowerKnowledge, resetVehiclePowerKnowledgeCache } = await import(url);
+            resetVehiclePowerKnowledgeCache();
+            const base:any = { make:"DAIHATSU", model:"ESSE", year:2011, engineCc:660, fuel:"gasoline", powertrainKind:"combustion" };
+            const yes = await findVehiclePowerKnowledge({ ...base, operational:{ raw:{ fields:{ Chassis:"L235S" }}}});
+            resetVehiclePowerKnowledgeCache();
+            const no = await findVehiclePowerKnowledge({ ...base, operational:{ raw:{ fields:{ Chassis:"L245S" }}}});
+            if (!yes || yes.powerHp !== 58) throw new Error(`expected chassis match: ${JSON.stringify(yes)}`);
+            if (no) throw new Error(`wrong chassis matched: ${JSON.stringify(no)}`);
+            console.log(JSON.stringify({ matched: yes.id, wrongChassis: no }, null, 2));
+          }
+          main().catch((e)=>{console.error(e);process.exit(1)});
+          TS
+          npx tsx /tmp/chassis-test.ts
+      - name: Commit validated code to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/power-knowledge.ts scripts/catalog-live-recovery-japan-prestige.mjs
+          git commit -m "Use chassis-bound official power for Japan"
+          git push origin HEAD:fix/japan-chassis-power-knowledge-20260810
