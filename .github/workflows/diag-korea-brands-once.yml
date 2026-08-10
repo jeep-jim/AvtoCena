@@ -29,18 +29,18 @@ jobs:
       - name: Print Korea facets and live offer makes
         shell: bash
         run: |
-          cat > /tmp/diag-korea-brands.ts <<'TS'
-          import { readCatalogFacets, readMarketOffers } from process.cwd() + '/apps/web/lib/catalog/storage.ts';
-          import { isCrediblePublicOffer } from process.cwd() + '/apps/web/lib/catalog/offer-quality.ts';
-          const facets = await readCatalogFacets({ market: 'korea' });
-          const rows = (await readMarketOffers('korea')).filter((offer:any) => offer.status === 'active' && isCrediblePublicOffer(offer));
+          cat > diag-korea-brands.ts <<'TS'
+          import { readCatalogFacets, readMarketOffers } from "./apps/web/lib/catalog/storage";
+          import { isCrediblePublicOffer } from "./apps/web/lib/catalog/offer-quality";
+          const facets = await readCatalogFacets({ market: "korea" });
+          const rows = (await readMarketOffers("korea")).filter((offer:any) => offer.status === "active" && isCrediblePublicOffer(offer));
           const counts = new Map<string, number>();
           for (const row of rows as any[]) {
-            const make = String(row.make || '').trim() || '<EMPTY>';
+            const make = String(row.make || "").trim() || "<EMPTY>";
             counts.set(make, (counts.get(make) || 0) + 1);
           }
-          console.log('FACETS_MAKES', JSON.stringify(facets.makes));
-          console.log('LIVE_MAKE_COUNTS', JSON.stringify([...counts.entries()].sort((a,b)=>b[1]-a[1])));
-          console.log('LIVE_TOTAL', rows.length);
+          console.log("FACETS_MAKES", JSON.stringify(facets.makes));
+          console.log("LIVE_MAKE_COUNTS", JSON.stringify([...counts.entries()].sort((a,b)=>b[1]-a[1])));
+          console.log("LIVE_TOTAL", rows.length);
           TS
-          npx tsx /tmp/diag-korea-brands.ts
+          npx tsx diag-korea-brands.ts
