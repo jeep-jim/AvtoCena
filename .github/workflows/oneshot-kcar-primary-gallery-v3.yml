@@ -91,29 +91,36 @@ jobs:
           cat > /tmp/kcar-gallery-smoke.ts <<'TS'
           import { kcarKoreaExactSource } from "./apps/web/lib/catalog/kcar-exact-source.ts";
 
-          const checked: any[] = [];
-          let primary: any = null;
-          for (let page = 1; page <= 3 && !primary; page++) {
-            const result: any = await kcarKoreaExactSource.fetchPage(String(page));
-            const rows: any[] = Array.isArray(result.items) ? result.items : [];
-            for (const row of rows) {
-              const images = Array.isArray(row?.images) ? row.images : [];
-              const numericId = String(row?.id || "").replace(/^[^0-9]+/, "");
-              const bound = numericId && images.every((url: string) => new RegExp(`/[0-9]+/${numericId}_[0-9]+/`, "i").test(String(url)));
-              checked.push({ id: row?.id, count: images.length, first: images[0] || null, bound });
-              if (images.length >= 5 && bound && !/\/extra\//i.test(String(images[0] || ""))) {
-                primary = row;
-                break;
+          async function main() {
+            const checked: any[] = [];
+            let primary: any = null;
+            for (let page = 1; page <= 3 && !primary; page++) {
+              const result: any = await kcarKoreaExactSource.fetchPage(String(page));
+              const rows: any[] = Array.isArray(result.items) ? result.items : [];
+              for (const row of rows) {
+                const images = Array.isArray(row?.images) ? row.images : [];
+                const numericId = String(row?.id || "").replace(/^[^0-9]+/, "");
+                const bound = numericId && images.every((url: string) => new RegExp(`/[0-9]+/${numericId}_[0-9]+/`, "i").test(String(url)));
+                checked.push({ id: row?.id, count: images.length, first: images[0] || null, bound });
+                if (images.length >= 5 && bound && !/\/extra\//i.test(String(images[0] || ""))) {
+                  primary = row;
+                  break;
+                }
               }
             }
+            console.log(JSON.stringify({ checked: checked.length, sample: checked.slice(0, 8), primaryId: primary?.id || null, primaryCount: primary?.images?.length || 0, primaryFirst: primary?.images?.[0] || null }));
+            if (!primary) throw new Error('kcar_primary_listing_bound_gallery_not_verified');
+            const offer: any = kcarKoreaExactSource.normalizeOffer(primary);
+            if (!offer) throw new Error('kcar_primary_normalize_failed');
+            if (offer.operational?.raw?.gallerySafetyMode !== 'kcar_exact_car_id_primary_then_extra_hq_v2') throw new Error('kcar_gallery_mode_not_set');
+            const fetched: any[] = await kcarKoreaExactSource.fetchImages(offer);
+            if (fetched.length < 5 || /\/extra\//i.test(String(fetched[0]?.url || ''))) throw new Error('kcar_fetch_images_primary_order_failed');
           }
-          console.log(JSON.stringify({ checked: checked.length, sample: checked.slice(0, 8), primaryId: primary?.id || null, primaryCount: primary?.images?.length || 0, primaryFirst: primary?.images?.[0] || null }));
-          if (!primary) throw new Error('kcar_primary_listing_bound_gallery_not_verified');
-          const offer: any = kcarKoreaExactSource.normalizeOffer(primary);
-          if (!offer) throw new Error('kcar_primary_normalize_failed');
-          if (offer.operational?.raw?.gallerySafetyMode !== 'kcar_exact_car_id_primary_then_extra_hq_v2') throw new Error('kcar_gallery_mode_not_set');
-          const fetched: any[] = await kcarKoreaExactSource.fetchImages(offer);
-          if (fetched.length < 5 || /\/extra\//i.test(String(fetched[0]?.url || ''))) throw new Error('kcar_fetch_images_primary_order_failed');
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
           TS
           npx tsx /tmp/kcar-gallery-smoke.ts
 
