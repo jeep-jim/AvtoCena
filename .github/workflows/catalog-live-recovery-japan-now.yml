@@ -1,12 +1,7 @@
 name: Catalog live recovery · Japan now
-run-name: Immediate Japan live recovery · ${{ github.event.workflow_run.id || inputs.source_run_id || github.sha }}
+run-name: Immediate Japan live recovery · ${{ inputs.source_run_id || github.sha }}
 
 on:
-  workflow_run:
-    workflows:
-      - "Catalog V6 · Prestige exact sold up-to-30k"
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       source_run_id:
@@ -18,9 +13,6 @@ permissions:
   actions: read
   contents: read
 
-# Japan publishes by reading and preserving the other live markets too. Queue it
-# behind the other daily publishers so no workflow can restore an older market
-# snapshot while another market is publishing.
 concurrency:
   group: catalog-live-daily-working-markets
   cancel-in-progress: false
@@ -34,15 +26,12 @@ env:
   YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-  # Japan's recovery script itself requires five exact listing-bound photos.
-  # Keep the global persistence minimum at one so preserving Japan can never
-  # re-filter unrelated markets that legitimately publish one-photo offers.
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   CATALOG_MAX_OFFERS_PER_MODEL: "20"
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
-  PRESTIGE_SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || inputs.source_run_id || '31261509359' }}
+  PRESTIGE_SOURCE_RUN_ID: ${{ inputs.source_run_id || '31261509359' }}
 
 jobs:
   publish-japan:
