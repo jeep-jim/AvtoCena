@@ -1,0 +1,153 @@
+name: One-shot country and model UI fixes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-country-model-ui.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oneshot-country-model-ui
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Apply targeted UI fixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new, label):
+              p = Path(path)
+              text = p.read_text()
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected exactly 1 match in {path}, found {count}")
+              p.write_text(text.replace(old, new, 1))
+              print(f"patched {label}: {path}")
+
+          # 1) When one market/country is selected, show only its result count.
+          path = "apps/web/app/(public)/cars/page.tsx"
+          replace_once(
+              path,
+              '  const visibleFrom = selectedResult?.total ? (currentPage - 1) * selectedResult.pageSize + 1 : 0;\n  const visibleTo = selectedResult ? Math.min(currentPage * selectedResult.pageSize, selectedResult.total) : 0;\n',
+              '',
+              "remove selected-market visible range copy",
+          )
+          replace_once(
+              path,
+              '        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{japanStatisticsSelected\n          ? `Отыгранные лоты японских аукционов с опубликованной ценой продажи. Найдено результатов: ${total}.${selectedMarket ? ` Показаны лоты ${visibleFrom}–${visibleTo}.` : ""}`\n          : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.${selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}`}</p>',
+              '        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{selectedMarket ? `Найдено автомобилей: ${total}.` : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.`}</p>',
+              "selected market concise count",
+          )
+
+          # 2) Model detail pages use the same SVG market flags as the catalog.
+          path = "apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx"
+          replace_once(
+              path,
+              'import { CatalogCard } from "@/components/catalog/CatalogCard";\n',
+              'import { CatalogCard } from "@/components/catalog/CatalogCard";\nimport { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";\n',
+              "model page flag component import",
+          )
+          replace_once(
+              path,
+              'import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";',
+              'import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";',
+              "model page remove emoji flag import",
+          )
+          replace_once(
+              path,
+              '  const requestHref = `/results?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`;\n',
+              '',
+              "model page remove result href",
+          )
+          replace_once(
+              path,
+              '          <Link href={requestHref} className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</Link>',
+              '          <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</button>',
+              "model top calculate button",
+          )
+          replace_once(
+              path,
+              '<h2 className="flex min-w-0 items-center gap-2 text-2xl font-black md:text-4xl"><span>{CATALOG_MARKET_FLAGS[group.market]}</span><span className="min-w-0 break-words">{CATALOG_MARKET_LABELS[group.market]}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>',
+              '<h2 className="flex min-w-0 items-center gap-2 text-2xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span className="min-w-0 break-words">{CATALOG_MARKET_LABELS[group.market]}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>',
+              "model market heading SVG flag",
+          )
+          replace_once(
+              path,
+              '        <Link href={requestHref} className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Оставить запрос на {brand.name} {model.model}</Link>',
+              '        <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Оставить запрос на {brand.name} {model.model}</button>',
+              "model empty-state lead button",
+          )
+
+          # 3) Bottom model SEO CTA opens the same lead/calculation dialog.
+          path = "apps/web/app/(public)/cars/brand/[slug]/model/[model]/layout.tsx"
+          replace_once(
+              path,
+              '  const requestHref = `/results?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`;\n',
+              '',
+              "model SEO remove result href",
+          )
+          replace_once(
+              path,
+              '              <Link href={requestHref} className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black">Рассчитать {brand.name} {model.model}</Link>',
+              '              <button type="button" data-model-lead className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black">Рассчитать {brand.name} {model.model}</button>',
+              "model bottom calculate button",
+          )
+
+          # 4) Wire all model calculation buttons into the existing generic lead form.
+          path = "apps/web/components/leads/PublicLeadCaptureV2.tsx"
+          needle = '''  useEffect(() => {\n    if (!pathname.startsWith("/cars/offer/")) return;\n    const offerId = decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || ""); if (!offerId) return;\n'''
+          insert = '''  useEffect(() => {\n    if (!/^\\/cars\\/brand\\/[^/]+\\/model\\/[^/]+\\/?$/.test(pathname)) return;\n    const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-model-lead]"); if (!button) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-model-catalog-page h1"); const car = cleanText(heading?.textContent).replace(/\\s+под заказ$/i, ""); setRequest({ mode: "generic", source: "model_calculation_request", car }); };\n    document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);\n  }, [pathname]);\n\n''' + needle
+          replace_once(path, needle, insert, "model lead dialog wiring")
+
+          # Guard unrelated fragile UI.
+          import subprocess
+          buyer = subprocess.check_output(["git", "hash-object", "apps/web/components/home/BuyerGallery.tsx"], text=True).strip()
+          if buyer != "11511c3184cb80776feec332a06e7191d5ad618c":
+              raise SystemExit(f"BuyerGallery.tsx guard failed: {buyer}")
+          print("BuyerGallery.tsx guard OK", buyer)
+          PY
+
+      - name: Typecheck
+        run: |
+          npm ci
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo packages/engine/tsconfig.tsbuildinfo 2>/dev/null || true
+
+      - name: Verify and publish
+        shell: bash
+        run: |
+          git diff --check
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-country-model-ui.yml
+          git add 'apps/web/app/(public)/cars/page.tsx'
+          git add 'apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx'
+          git add 'apps/web/app/(public)/cars/brand/[slug]/model/[model]/layout.tsx'
+          git add apps/web/components/leads/PublicLeadCaptureV2.tsx
+          git commit -m "fix: simplify market copy and wire model lead actions"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+          fi
+          git push origin HEAD:main
