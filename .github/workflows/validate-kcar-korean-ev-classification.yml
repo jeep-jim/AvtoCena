@@ -1,0 +1,60 @@
+name: Validate KCar Korean EV classification
+on:
+  push:
+    branches: [fix/kcar-korean-ev-classification-20260810]
+    paths:
+      - scripts/apply-kcar-korean-ev-classification.py
+      - .github/workflows/validate-kcar-korean-ev-classification.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/kcar-korean-ev-classification-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply classification patch
+        run: python3 scripts/apply-kcar-korean-ev-classification.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: NO-PUBLISH exact KCar regression samples
+        shell: bash
+        run: |
+          cat > kcar-korean-ev-smoke.mts <<'TS'
+          import { normalizeVehicleOfferSpecs } from './apps/web/lib/catalog/spec-normalization.ts';
+          const rows:any[] = [
+            {make:'테슬라',model:'모델 3',trim:'롱레인지 AWD',year:2022},
+            {make:'쉐보레(GM대우)',model:'볼트 EUV',trim:'전기 2WD 프리미어',year:2022},
+            {make:'현대',model:'더 뉴 아이오닉 일렉트릭',trim:'Q',year:2020},
+          ];
+          for (const row of rows) {
+            const offer:any = normalizeVehicleOfferSpecs({
+              id:'smoke',sourceId:'kcar_korea_open',sourceOfferId:'smoke',market:'korea',offerType:'fixed',status:'active',
+              sourcePrice:10000000,sourceCurrency:'KRW',images:[],totalRub:null,calculationStatus:'needs_data',
+              firstSeenAt:new Date().toISOString(),updatedAt:new Date().toISOString(),operational:{raw:{}},...row,
+            } as any);
+            console.log(JSON.stringify({make:offer.make,model:offer.model,trim:offer.trim,fuel:offer.fuel,powertrainKind:offer.powertrainKind,engineCc:offer.engineCc,power30MinKw:offer.power30MinKw,utilizationPowerKw:offer.utilizationPowerKw}));
+            if (offer.powertrainKind !== 'electric' || offer.fuel !== 'electric') throw new Error(`not_electric:${row.make}:${row.model}`);
+            if (offer.engineCc != null) throw new Error(`electric_engine_cc_present:${row.make}:${row.model}`);
+            if (offer.utilizationPowerKw != null || offer.power30MinKw != null) throw new Error(`invented_customs_power:${row.make}:${row.model}`);
+          }
+          TS
+          npx tsx kcar-korean-ev-smoke.mts
+          rm kcar-korean-ev-smoke.mts
+      - name: Commit validated production file only
+        shell: bash
+        run: |
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/spec-normalization.ts
+          git commit -m 'Recognize Korean EV model names without inventing customs power'
+          git push origin HEAD:fix/kcar-korean-ev-classification-20260810
