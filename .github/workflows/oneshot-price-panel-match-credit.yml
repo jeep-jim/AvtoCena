@@ -1,0 +1,69 @@
+name: One-shot exact dark price panel color
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-price-panel-match-credit.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: git pull --ff-only origin main
+
+      - name: Apply exact sampled color
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          target = '#3d3644'
+
+          layout = Path('apps/web/app/(public)/cars/layout.tsx')
+          text = layout.read_text(encoding='utf-8')
+          old = 'background: #42272b !important;'
+          if old in text:
+              text = text.replace(old, f'background: {target} !important;', 1)
+          layout.write_text(text, encoding='utf-8')
+
+          page = Path('apps/web/app/(public)/cars/offer/[id]/page.tsx')
+          text = page.read_text(encoding='utf-8')
+          anchor = '      html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}\n'
+          up_rule = f'      html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-up{{background:{target}!important}}\n'
+          if up_rule not in text:
+              if anchor not in text:
+                  raise RuntimeError('offer price panel anchor changed')
+              text = text.replace(anchor, up_rule + anchor, 1)
+          page.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Install and typecheck
+        run: |
+          npm ci --ignore-scripts
+          npm run typecheck
+          git restore package-lock.json 2>/dev/null || true
+          git restore apps/web/tsconfig.tsbuildinfo packages/engine/tsconfig.tsbuildinfo 2>/dev/null || true
+
+      - name: Publish safely
+        run: |
+          grep -q 'ac-offer-price-panel.is-up{background:#3d3644!important}' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          grep -q 'background: #3d3644 !important;' 'apps/web/app/(public)/cars/layout.tsx'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 'apps/web/app/(public)/cars/layout.tsx' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          git rm .github/workflows/oneshot-price-panel-match-credit.yml
+          git commit -m 'Match dark price rise panel to financing accent'
+          git reset --hard HEAD
+          git clean -fd
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
