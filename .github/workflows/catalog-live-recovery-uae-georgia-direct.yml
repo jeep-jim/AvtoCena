@@ -82,7 +82,9 @@ jobs:
 
   publish:
     needs: [validate, collect]
-    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
+    # Georgia/UAE batch publishing is temporarily quarantined: current batch publisher
+    # accepts exact-calculated offers only and would drop valid EV/HEV preliminary cards.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
