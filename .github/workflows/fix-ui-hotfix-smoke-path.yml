@@ -1,0 +1,43 @@
+name: Fix UI hotfix smoke path
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/fix-ui-hotfix-smoke-path.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fix smoke test module path
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/apply-offer-ui-model-diversity-v3.yml')
+          text = path.read_text()
+          text = text.replace('> /tmp/china_title_smoke.ts', '> .tmp-china-title-smoke.ts')
+          text = text.replace('npx tsx /tmp/china_title_smoke.ts', 'npx tsx .tmp-china-title-smoke.ts\n          rm -f .tmp-china-title-smoke.ts')
+          path.write_text(text)
+          PY
+      - name: Commit corrected hotfix workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/apply-offer-ui-model-diversity-v3.yml
+          git commit -m "Fix China UI hotfix smoke module path"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
