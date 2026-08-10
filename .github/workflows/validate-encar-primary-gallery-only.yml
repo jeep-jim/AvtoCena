@@ -1,0 +1,45 @@
+name: Validate Encar primary gallery only
+
+on:
+  push:
+    branches: [fix/korea-primary-gallery-order-20260810]
+    paths:
+      - .github/workflows/validate-encar-primary-gallery-only.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CATALOG_MAX_IMAGES_PER_OFFER: 30
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: 5
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: 35000
+      CATALOG_ENCAR_COMPLETE_DETAIL_RPM: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/korea-primary-gallery-order-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply gallery patch locally
+        run: python3 scripts/patch-korea-primary-galleries.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Live Encar NO-PUBLISH smoke
+        run: npx tsx scripts/encar-primary-gallery-smoke.ts
+      - name: Commit validated Encar production file only
+        run: |
+          git checkout -- apps/web/lib/catalog/kcar-exact-source.ts
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/encar-complete-source.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix Encar primary gallery ordering [skip actions]"
+          git push origin HEAD:fix/korea-primary-gallery-order-20260810
