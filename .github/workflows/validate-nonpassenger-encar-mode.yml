@@ -5,6 +5,7 @@ on:
     branches: [fix/reject-nonpassenger-bodytypes-20260810]
     paths:
       - apps/web/lib/catalog/offer-quality.ts
+      - scripts/encar-primary-gallery-smoke.ts
       - .github/workflows/validate-nonpassenger-encar-mode.yml
 
 permissions:
