@@ -109,7 +109,7 @@ export function extractEncarImageUrls(offer: VehicleOffer, detail?: any) {
   const listRaw = raw.offer || raw;
   const photos = detail?.photos || detail?.PhotoList || detail?.vehicle?.photos || detail?.vehicle?.PhotoList || [];
   const listCover = listRaw?.Photo || listRaw?.photo || raw?.offer?.Photo || raw?.offer?.photo;
-  return [...new Set([buildEncarImageUrl(listCover, 1), ...photos.map((photo: any, index: number) => buildEncarImageUrl(photo.path || photo.url || photo.Photo || photo.location || photo, num(photo.imageNumber || photo.no || photo.seq) || index + 1))].filter(Boolean))].slice(0, 10);
+  return [...new Set([buildEncarImageUrl(listCover, 1), ...photos.map((photo: any, index: number) => buildEncarImageUrl(photo.path || photo.url || photo.Photo || photo.location || photo, num(photo.imageNumber || photo.no || photo.seq) || index + 1))].filter(Boolean))].slice(0, 30);
 }
 
 async function pricedOffer(offer: VehicleOffer) {
