@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Inspect exact Autohome pages
+      - name: Inspect exact Autohome pages and embedded gallery data
         shell: bash
         run: |
           node <<'NODE'
@@ -23,14 +23,21 @@ jobs:
             ['legacyExact','https://car.autohome.com.cn/pic/series-s68589/7768.html'],
             ['modernSeries','https://www.autohome.com.cn/cars/imglist-x-x-7768-x-x-x-x-x-x-1.html'],
           ];
+          const snippet=(text,needle,radius=240)=>{
+            const i=text.toLowerCase().indexOf(needle.toLowerCase());
+            return i<0?'':text.slice(Math.max(0,i-radius),Math.min(text.length,i+needle.length+radius)).replace(/\s+/g,' ');
+          };
           for (const [label,url] of pages) {
             try {
               const r=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(30000)});
               const text=await r.text();
-              const urls=[...text.matchAll(/https?:\\?\/\\?\/[^"'\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\s<>]*)?/gi)].map(m=>m[0].replaceAll('\\/','/'));
-              const attrs=[...text.matchAll(/(?:src|data-src|data-original|data-src2|data-url|content)=["']([^"']+)["']/gi)].map(m=>m[1]);
-              const all=[...new Set([...urls,...attrs].filter(x=>/autoimg\.cn/i.test(x)))];
-              console.log(JSON.stringify({label,status:r.status,finalUrl:r.url,bytes:text.length,totalAutoimg:all.length,samples:all.slice(0,30),has68589:text.includes('68589'),has7768:text.includes('7768')},null,2));
+              const rawUrls=[...text.matchAll(/(?:https?:)?\\?\/\\?\/[^"'\\s<>]+?(?:\.jpe?g|\.png|\.webp|\.avif|cardfs\/product\/[^"'\\s<>]+)/gi)].map(m=>m[0].replaceAll('\\/','/'));
+              const product=[...new Set(rawUrls.filter(x=>/cardfs\/product|autoimg\.cn/i.test(x)))];
+              const nextMatch=text.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/i);
+              let nextKeys=[];
+              if(nextMatch){ try { const obj=JSON.parse(nextMatch[1]); const walk=(v,p='')=>{ if(!v||typeof v!=='object') return; for(const [k,x] of Object.entries(v)){ const q=p?`${p}.${k}`:k; if(/pic|img|image|photo|spec|series/i.test(k)) nextKeys.push(q); if(nextKeys.length<500) walk(x,q); } }; walk(obj); } catch{} }
+              const apiStrings=[...new Set([...text.matchAll(/(?:https?:)?\\?\/\\?\/[^"'\\s<>]*(?:api|pic|image)[^"'\\s<>]*/gi)].map(m=>m[0].replaceAll('\\/','/')).filter(x=>/autohome|autoimg/i.test(x)))];
+              console.log(JSON.stringify({label,status:r.status,finalUrl:r.url,bytes:text.length,productCount:product.length,productSamples:product.slice(0,60),nextKeys:nextKeys.slice(0,120),apiStrings:apiStrings.slice(0,80),snippets:{spec68589:snippet(text,'68589'),count189:snippet(text,'189张'),picList:snippet(text,'picList'),imageList:snippet(text,'imageList'),imgUrl:snippet(text,'imgUrl'),picUrl:snippet(text,'picUrl'),cardfs:snippet(text,'cardfs/product')}},null,2));
             } catch(e) { console.log(JSON.stringify({label,error:String(e)})); }
           }
           NODE
