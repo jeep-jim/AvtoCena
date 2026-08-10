@@ -269,11 +269,14 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     const urls = [...new Set((Array.isArray(ad?.galleryImages) ? ad.galleryImages : []).map(largestGalleryUrl).filter(Boolean))]
       .slice(0, Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
     const verified = urls.length >= Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+    const previousRaw = (offer.operational?.raw && typeof offer.operational.raw === "object"
+      ? offer.operational.raw
+      : {}) as Record<string, unknown>;
     offer.operational = {
       ...(offer.operational || {}), exactDetail: true, exactFields: true, exactPhotos: verified, photoIdentityVerified: verified,
       galleryVerified: verified, galleryImageCount: urls.length, gallerySafetyMode: "mobile_consumer_bff_exact_v1", galleryStoredAs: "json_urls",
       raw: {
-        ...(offer.operational?.raw || {}), vip: ad, images: urls, listingBoundImages: verified, photoIdentityVerified: verified,
+        ...previousRaw, vip: ad, images: urls, listingBoundImages: verified, photoIdentityVerified: verified,
         detailIdentityVerified: true,
       },
     };
