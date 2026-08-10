@@ -1,0 +1,54 @@
+name: Validate Korea primary gallery order
+
+on:
+  push:
+    branches: [fix/korea-primary-gallery-order-20260810]
+    paths:
+      - .github/workflows/validate-korea-primary-gallery-order.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      CATALOG_MAX_IMAGES_PER_OFFER: 30
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: 5
+      CATALOG_SOURCE_TIMEOUT_MS: 35000
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: 35000
+      CATALOG_SOURCE_RETRY_ATTEMPTS: 4
+      CATALOG_SOURCE_DETAIL_BATCH_SIZE: 2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/korea-primary-gallery-order-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply Korea gallery patch
+        run: python3 scripts/patch-korea-primary-galleries.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Static identity/order assertions
+        run: |
+          grep -q 'extractEncarImageUrls(offer, detail)' apps/web/lib/catalog/encar-complete-source.ts
+          grep -q 'encar_source_cover_photolist_v3' apps/web/lib/catalog/encar-complete-source.ts
+          grep -q 'if (!primary.length) return \[\]' apps/web/lib/catalog/kcar-exact-source.ts
+          grep -q 'kcar_exact_car_id_primary_then_extra_hq_v2' apps/web/lib/catalog/kcar-exact-source.ts
+      - name: Live NO-PUBLISH source smoke
+        run: npx tsx scripts/korea-primary-gallery-smoke.ts
+      - name: Commit validated production files only
+        run: |
+          git checkout -- .
+          python3 scripts/patch-korea-primary-galleries.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/encar-complete-source.ts apps/web/lib/catalog/kcar-exact-source.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix Korea primary gallery ordering [skip actions]"
+          git push origin HEAD:fix/korea-primary-gallery-order-20260810
