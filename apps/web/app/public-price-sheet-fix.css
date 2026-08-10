@@ -93,14 +93,19 @@ html[data-theme="light"] .ac-catalog-card,
 html[data-theme="light"] .ac-price-trend-panel.is-down {
   background: #cfe5d8 !important;
 }
-html[data-theme="dark"] .ac-price-trend-panel.is-down {
-  background: #0b3021 !important;
-}
 html[data-theme="light"] .ac-price-trend-panel.is-up {
   background: #f2d1d5 !important;
 }
-html[data-theme="dark"] .ac-price-trend-panel.is-up {
+
+/* The offer price panel uses the same is-up / is-down state logic in dark mode.
+   Keep these selectors stronger than the generic graphite-panel rule in flat-ui.css. */
+html:not([data-theme="light"]) body .ac-price-trend-panel.ac-offer-price-panel.is-down {
+  background: #0b3021 !important;
+  background-color: #0b3021 !important;
+}
+html:not([data-theme="light"]) body .ac-price-trend-panel.ac-offer-price-panel.is-up {
   background: #3b161c !important;
+  background-color: #3b161c !important;
 }
 
 /* The budget help icon is mobile-only regardless of Tailwind output or cache. */
