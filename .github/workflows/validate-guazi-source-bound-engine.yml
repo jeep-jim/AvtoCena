@@ -1,0 +1,61 @@
+name: Validate Guazi source-bound engine parsing
+on:
+  push:
+    branches: [fix/guazi-source-bound-engine-20260810]
+    paths:
+      - scripts/apply-guazi-source-bound-engine.py
+      - .github/workflows/validate-guazi-source-bound-engine.yml
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/guazi-source-bound-engine-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply Guazi engine patch
+        run: python3 scripts/apply-guazi-source-bound-engine.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: NO-PUBLISH exact Guazi slug regression samples
+        shell: bash
+        run: |
+          cat > guazi-engine-smoke.mts <<'TS'
+          import { OpenMarketAdapter } from './apps/web/lib/catalog/open-market-sources.ts';
+          const adapter:any = new OpenMarketAdapter({
+            sourceId:'guazi_china_open',market:'china',label:'Guazi China',baseUrl:'https://en.guazi.com',currency:'CNY',
+            detailPattern:/\/products\//i,listUrls:()=>[]
+          } as any);
+          const samples:any[] = [
+            ['audi-a4l-2013-20l-white-125900km-at-2wd-5-seats-7r97wzz92r', 4000, 2000],
+            ['land-rover-range-rover-sport-2011-50l-white-185600km-at-4wd-5-seats-hu2azwc9lt', undefined, 5000],
+            ['lincoln-navigator-2017-35l-black-121600km-at-7-seats-w3lzfkal25', undefined, 3500],
+            ['mercedes-benz-gla-2018-16l-white-68800km-at-2wd-5-seats-mu4uer4q8e', undefined, 1600],
+            ['chevrolet-orlando-2020-13l-gray-100700km-at-2wd-7-seats-9dnzq4n9hf', undefined, 1300],
+          ];
+          for (const [slug,badCc,want] of samples) {
+            const row:any={id:slug,title:'Guazi exact listing',make:'Test',model:'Model',year:2020,engineCc:badCc,price:100000,currency:'CNY',images:[],detailUrl:`https://en.guazi.com/products/${slug}.html`,status:'active'};
+            const offer:any=adapter.normalizeOffer(row);
+            console.log(JSON.stringify({slug,badCc,engineCc:offer?.engineCc,want}));
+            if (Number(offer?.engineCc)!==want) throw new Error(`guazi_engine_mismatch:${slug}:${offer?.engineCc}:${want}`);
+          }
+          TS
+          npx tsx guazi-engine-smoke.mts
+          rm guazi-engine-smoke.mts
+      - name: Commit validated production file only
+        shell: bash
+        run: |
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/open-market-sources.ts
+          git commit -m 'Use Guazi listing identity for exact engine displacement'
+          git push origin HEAD:fix/guazi-source-bound-engine-20260810
