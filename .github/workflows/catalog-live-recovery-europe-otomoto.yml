@@ -3,15 +3,6 @@ run-name: Europe OTOMOTO recovery · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-live-recovery-europe-otomoto.yml"
-      - "scripts/catalog-live-recovery-europe-otomoto.mjs"
-      - "scripts/catalog-live-recovery-publish-batch.mjs"
-      - "apps/web/lib/catalog/otomoto-current-source.ts"
-      - "apps/web/lib/catalog/otomoto-detail-source.ts"
 
 permissions:
   contents: read
@@ -86,7 +77,7 @@ jobs:
           RECOVERY_BATCH_MARKETS: europe
           RECOVERY_BATCH_INPUT_DIR: recovery-input
           RECOVERY_BATCH_REPORT: catalog-europe-otomoto-publish-report.json
-          RECOVERY_PUBLISH_MAX: "100000"
+          RECOVERY_PUBLISH_MAX: "30000"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
       - uses: actions/upload-artifact@v4
         if: always()
