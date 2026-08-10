@@ -88,34 +88,6 @@ function modelKey(offer) {
   const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
   return make && model ? `${make}|${model}` : "";
 }
-function equivalentNewVariantKey(offer) {
-  if (String(offer?.sourceId || "") !== "autohome_new_china_open") return "";
-  const clean = (value) => String(value || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
-  return [
-    modelKey(offer),
-    Number(offer?.year || 0),
-    Number(offer?.engineCc || 0),
-    Math.round(Number(offer?.powerHp || 0) * 10) / 10,
-    clean(offer?.powertrainKind),
-    clean(offer?.transmission),
-    clean(offer?.drive),
-    clean(offer?.bodyType),
-  ].join("|");
-}
-function collapseEquivalentNewVariants(rows, rejected) {
-  const result = [];
-  const seen = new Set();
-  for (const offer of rows) {
-    const key = equivalentNewVariantKey(offer);
-    if (key && seen.has(key)) {
-      rejected.equivalent_new_variant = Number(rejected.equivalent_new_variant || 0) + 1;
-      continue;
-    }
-    if (key) seen.add(key);
-    result.push(offer);
-  }
-  return result;
-}
 
 function applyPerModelCap(rows, rejected) {
   const result = [];
@@ -167,8 +139,7 @@ for (const raw of previousMarket) {
 for (const [id, offer] of incoming) candidates.set(id, offer);
 
 const cumulative = [...candidates.values()].sort(quality);
-const equivalentCollapsed = collapseEquivalentNewVariants(cumulative, rejected);
-const diversity = applyPerModelCap(equivalentCollapsed, rejected);
+const diversity = applyPerModelCap(cumulative, rejected);
 const marketRows = diversity.rows;
 if (!marketRows.length) {
   const report = { version: 2, mode: "live_market_exact_calculated_cumulative_publish", market, published: false, generationId: null, count: 0, retainedCount: 0, incomingCount: incoming.size, rejected, publicationError: `recovery_empty_market:${market}` };

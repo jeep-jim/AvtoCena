@@ -217,8 +217,10 @@ function inferBodyFromOffer(offer: any) {
   if (/\b(wagon|estate|touring|avant|универсал)\b/.test(text)) return "Универсал";
   if (/\b(pickup|пикап|double cab)\b/.test(text)) return "Пикап";
   if (/\b(cargo|panel van|фургон)\b/.test(text)) return "Фургон";
+  if (/栏板|仓栅|货车|微卡/.test(text)) return "Малотоннажный грузовик";
   if (/\b(carnival|staria|starex|grand starex|h-1|mpv|minivan|минивэн|odyssey|sienna|alphard|vellfire|serena|noah|voxy)\b/.test(text)) return "Минивэн";
-  if (/\b(gv60|gv70|gv80|tucson|santa fe|santafe|sorento|sportage|palisade|kona|seltos|casper|venue|niro|glc|gle|gls|x1|x2|x3|x4|x5|x6|x7|q3|q5|q7|q8|rav4|harrier|cr-v|vezel|cx-3|cx-30|cx-4|cx-5|cx-8|cx-9|suv|crossover|кроссовер|внедорожник)\b/.test(text)) return "Кроссовер";
+  if (/\bbmw\b/.test(text) && /\b(x1|x2|x3|x4|x5|x6|x7)\b/.test(text)) return "Кроссовер";
+  if (/\b(gv60|gv70|gv80|tucson|santa fe|santafe|sorento|sportage|palisade|kona|seltos|casper|venue|niro|glc|gle|gls|q3|q5|q7|q8|rav4|harrier|cr-v|vezel|cx-3|cx-30|cx-4|cx-5|cx-8|cx-9|suv|crossover|кроссовер|внедорожник)\b/.test(text)) return "Кроссовер";
   if (/\b(spark|morning|picanto|ray|i10|i20|i30|golf|hatchback|хэтчбек)\b/.test(text)) return "Хэтчбек";
   if (/\b(g70|g80|g90|sonata|avante|elantra|grandeur|azera|k3|k5|k7|k8|camry|corolla|accord|civic|sedan|saloon|седан|e class|cls|s class|a6|a8|3 series|5 series|7 series)\b/.test(text)) return "Седан";
   return "";
