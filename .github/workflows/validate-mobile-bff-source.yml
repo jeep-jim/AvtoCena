@@ -28,7 +28,8 @@ jobs:
         run: |
           cat > mobile-smoke.mts <<'TS'
           import { MobileDeExactAdapter } from './apps/web/lib/catalog/mobile-de-exact-source.ts';
-          import { catalogImportSources } from './apps/web/lib/catalog/importer.ts';
+          import './apps/web/lib/catalog/importer.ts';
+          import { catalogImportSources } from './apps/web/lib/catalog/importer-impl.ts';
           const adapter = new MobileDeExactAdapter();
           const page = await adapter.fetchPage(null);
           const rows:any[] = page.items as any[];
