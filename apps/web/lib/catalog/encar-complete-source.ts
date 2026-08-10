@@ -1,4 +1,4 @@
-import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";
+import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
@@ -205,7 +205,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
        that exact Encar detail response. Listing/raw images are not merged in. */
     const detail = await fetchDetail(String(offer.sourceOfferId || ""));
     mergeDetail(offer, detail);
-    const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);
+    const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);
     const gallery = detailUrls.slice(0, limit).map(urlImage);
     const verified = gallery.length >= minimum;
 
@@ -215,7 +215,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       photoIdentityVerified: verified,
       galleryImageCount: gallery.length,
       galleryRefreshedAt: new Date().toISOString(),
-      gallerySafetyMode: "encar_detail_only_v2",
+      gallerySafetyMode: "encar_source_cover_photolist_v3",
       galleryStoredAs: "json_urls",
     } as any;
 
