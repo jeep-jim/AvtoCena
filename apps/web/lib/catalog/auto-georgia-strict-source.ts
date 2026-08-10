@@ -99,6 +99,18 @@ function imageUrls(markup: string, base: string) {
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
   return [...new Set(values.map((value) => absoluteUrl(value, base)).filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
 }
+
+export function autoGeorgiaImageBelongsToListing(value: string, listingId: unknown) {
+  const id = String(listingId || "").trim().toLocaleLowerCase("en-US");
+  if (!id) return false;
+  try {
+    const pathname = decodeURIComponent(new URL(String(value || "")).pathname).toLocaleLowerCase("en-US");
+    return pathname.includes(`/ad${id}/`);
+  } catch { return false; }
+}
+function listingImageUrls(markup: string, base: string, listingId: unknown) {
+  return imageUrls(markup, base).filter((url) => autoGeorgiaImageBelongsToListing(url, listingId));
+}
 function identityMatches(markup: string, row: Pick<AutoGeorgiaRow, "make" | "model">) {
   const text = compact(plainText(markup).slice(0, 20_000));
   const make = compact(row.make);
@@ -149,7 +161,7 @@ export function parseAutoGeorgiaStrictListing(markup: string, pageUrl: string): 
       location: text.match(/\b(Tbilisi|Kutaisi|Qutaisi|Batumi|Poti|Rustavi|Telavi|Gori|Senaki|Zugdidi|Gurjaani|Kaspi)\b/i)?.[1] || "Georgia",
       price: money.price,
       currency: money.currency,
-      images: imageUrls(card, pageUrl).slice(0, 30),
+      images: listingImageUrls(card, pageUrl, id).slice(0, 30),
     });
   }
   return rows;
@@ -197,7 +209,12 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
         sourceVenueName: row.location || "AUTO.GE Georgia",
         sourcePublishedAt: now,
         gallerySourceImageCount: row.images.length,
-        raw: { ...row, images: row.images, listingBoundImages: true, photoIdentityVerified: true },
+        raw: {
+          ...row,
+          images: row.images.filter((url) => autoGeorgiaImageBelongsToListing(url, row.id)),
+          listingBoundImages: row.images.length > 0 && row.images.every((url) => autoGeorgiaImageBelongsToListing(url, row.id)),
+          photoIdentityVerified: row.images.length > 0 && row.images.every((url) => autoGeorgiaImageBelongsToListing(url, row.id)),
+        },
       },
     } as VehicleOffer) as VehicleOffer;
   },
@@ -206,17 +223,19 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
     const row: AutoGeorgiaRow = raw;
     const detailUrl = String(offer.operational?.sourceUrl || row.detailUrl || "");
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    let urls = [...new Set((row.images || []).map(String).filter(Boolean))];
+    let urls = [...new Set((row.images || []).map(String).filter((url) => autoGeorgiaImageBelongsToListing(url, row.id)))];
     if (detailUrl && urls.length < limit) {
       const detail = await request(detailUrl, detailUrl).catch(() => null);
       if (detail && identityMatches(detail.markup, row)) {
-        urls = [...new Set([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)])];
+        urls = [...new Set([...urls, ...listingImageUrls(detail.markup, detail.response.url || detailUrl, row.id)])];
         const text = plainText(detail.markup);
         const cc = integer(text.match(/([0-9][0-9\s,.']{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
         const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
         offer.engineCc ||= cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined);
         offer.powerHp ||= integer(text.match(/\b([0-9]{2,4})\s*(?:HP|PS|horsepower)\b/i)?.[1]);
         (offer.operational.raw as any).detailIdentityVerified = true;
+        (offer.operational.raw as any).listingBoundImages = urls.length > 0;
+        (offer.operational.raw as any).photoIdentityVerified = urls.length > 0;
       }
     }
     offer.operational.gallerySourceImageCount = urls.length;
