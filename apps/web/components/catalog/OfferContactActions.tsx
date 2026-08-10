@@ -31,58 +31,40 @@ function PhoneIcon() {
 
 function CreditCalculatorMockup() {
   return (
-    <section className="ac-credit-calculator-mock rounded-[1.7rem] bg-[var(--ac-surface-2)] p-5 md:p-6" aria-label="Кредитный калькулятор">
+    <section className="ac-credit-calculator-mock rounded-[1.35rem] border border-[var(--ac-border)] bg-[var(--ac-surface-2)] p-4" aria-label="Кредитный калькулятор">
       <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-500">Финансирование</div>
-          <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] text-[var(--ac-text)]">Кредитный калькулятор</h2>
-          <p className="mt-1 text-sm font-medium text-[var(--ac-muted)]">Предварительный шаблон расчёта. Параметры банка подключим позже.</p>
+        <div className="min-w-0">
+          <div className="text-[10px] font-black uppercase tracking-[0.16em] text-red-500">Финансирование</div>
+          <div className="mt-0.5 flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 className="text-xl font-black tracking-[-0.035em] text-[var(--ac-text)]">Кредитный калькулятор</h2>
+            <span className="text-xs font-semibold text-[var(--ac-muted)]">Сюда подключим форму партнёра.</span>
+          </div>
         </div>
-        <span className="shrink-0 rounded-full bg-red-500/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-red-500">Скоро</span>
+        <span className="shrink-0 rounded-full bg-red-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-red-500">Скоро</span>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 rounded-2xl bg-black/[0.055] p-1">
-        <div className="rounded-xl bg-red-500 px-4 py-2.5 text-center text-sm font-black text-white">Кредит</div>
-        <div className="px-4 py-2.5 text-center text-sm font-black text-[var(--ac-muted)]">Лизинг</div>
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3">
-        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5">
-          <div className="text-[11px] font-bold text-[var(--ac-muted)]">Стоимость автомобиля</div>
-          <div className="mt-1 text-lg font-black text-[var(--ac-text)]">— ₽</div>
-          <div className="mt-1 text-[10px] font-bold text-[var(--ac-muted)]">подставим из карточки</div>
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        <div className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 py-2.5">
+          <div className="text-[10px] font-bold text-[var(--ac-muted)]">Стоимость авто</div>
+          <div className="mt-0.5 text-sm font-black text-[var(--ac-text)]">из карточки</div>
         </div>
-        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5">
-          <div className="text-[11px] font-bold text-[var(--ac-muted)]">Первоначальный взнос</div>
-          <div className="mt-1 text-lg font-black text-[var(--ac-text)]">0 ₽</div>
-          <div className="mt-1 text-[10px] font-bold text-[var(--ac-muted)]">можно будет изменить</div>
+        <div className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 py-2.5">
+          <div className="text-[10px] font-bold text-[var(--ac-muted)]">Первый взнос</div>
+          <div className="mt-0.5 text-sm font-black text-[var(--ac-text)]">0 ₽</div>
+        </div>
+        <div className="rounded-xl border border-[var(--ac-border)] bg-[var(--ac-surface)] px-3 py-2.5">
+          <div className="text-[10px] font-bold text-[var(--ac-muted)]">Срок</div>
+          <div className="mt-0.5 text-sm font-black text-[var(--ac-text)]">60 мес</div>
         </div>
       </div>
 
-      <div className="ac-credit-field mt-4 rounded-2xl bg-black/[0.035] p-4">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs font-bold text-[var(--ac-muted)]">Срок кредита</span>
-          <span className="rounded-full bg-[var(--ac-surface-3)] px-3 py-1 text-sm font-black text-[var(--ac-text)]">60 мес</span>
+      <div className="mt-2 flex items-stretch gap-2">
+        <div className="flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl bg-red-500/10 px-3 py-2.5">
+          <span className="text-xs font-black text-[var(--ac-text)]">Ежемесячный платёж</span>
+          <span className="text-lg font-black text-red-500">— ₽</span>
         </div>
-        <div className="relative mt-4 h-1.5 overflow-visible rounded-full bg-black/10">
-          <div className="absolute inset-y-0 left-0 w-[72%] rounded-full bg-red-500" />
-          <span className="absolute left-[72%] top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-red-500 shadow-sm" />
-        </div>
-        <div className="mt-2 flex justify-between text-[10px] font-bold text-[var(--ac-muted)]"><span>12 мес</span><span>84 мес</span></div>
+        <button type="button" aria-disabled="true" className="min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black text-white">Подобрать кредит</button>
       </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5"><div className="text-[11px] font-bold text-[var(--ac-muted)]">Сумма финансирования</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">— ₽</div></div>
-        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5"><div className="text-[11px] font-bold text-[var(--ac-muted)]">Ставка</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">— %</div></div>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between gap-4 rounded-2xl bg-red-500/10 px-4 py-3.5">
-        <span className="text-sm font-black text-[var(--ac-text)]">Ежемесячный платёж</span>
-        <span className="text-xl font-black text-red-500">— ₽</span>
-      </div>
-
-      <button type="button" aria-disabled="true" className="mt-3 w-full cursor-default rounded-[1.05rem] bg-red-500 px-5 py-3.5 text-sm font-black text-white opacity-90">Подать заявку</button>
-      <p className="mt-2 text-center text-[10px] font-semibold leading-4 text-[var(--ac-muted)]">Форма демонстрационная — расчёт и отправку заявки подключим отдельно.</p>
     </section>
   );
 }
@@ -173,7 +155,7 @@ export function OfferContactActions() {
   const [hosts, setHosts] = useState<Hosts>({ desktop: null, mobile: null, credit: null });
 
   useEffect(() => {
-    document.querySelectorAll<HTMLElement>("[data-offer-actions-host]").forEach((node) => node.remove());
+    document.querySelectorAll<HTMLElement>("[data-offer-actions-host], [data-offer-credit-host], [data-offer-credit-mobile-host]").forEach((node) => node.remove());
     setHosts({ desktop: null, mobile: null, credit: null });
 
     if (!pathname?.startsWith("/cars/offer/")) return;
@@ -183,6 +165,7 @@ export function OfferContactActions() {
     let desktopHost: HTMLElement | null = null;
     let mobileHost: HTMLElement | null = null;
     let creditHost: HTMLElement | null = null;
+    let mobileCreditHost: HTMLElement | null = null;
 
     const mount = () => {
       if (cancelled) return;
@@ -191,6 +174,7 @@ export function OfferContactActions() {
       const grid = section?.querySelector<HTMLElement>(":scope > div.grid");
       const mediaColumn = grid?.children?.[0] as HTMLElement | undefined;
       const desktopSlot = page?.querySelector<HTMLElement>("[data-offer-desktop-actions-slot]");
+      const breakdown = page?.querySelector<HTMLElement>(".ac-offer-breakdown");
 
       if (!page || !section || !grid || !mediaColumn) {
         frame = window.requestAnimationFrame(mount);
@@ -209,6 +193,17 @@ export function OfferContactActions() {
       creditHost.dataset.offerCreditHost = "true";
       mediaColumn.appendChild(creditHost);
 
+      if (breakdown) {
+        mobileCreditHost = document.createElement("div");
+        mobileCreditHost.dataset.offerCreditMobileHost = "true";
+        const mobileCreditButton = document.createElement("button");
+        mobileCreditButton.type = "button";
+        mobileCreditButton.className = "ac-mobile-credit-button";
+        mobileCreditButton.textContent = "Кредитный калькулятор";
+        mobileCreditHost.appendChild(mobileCreditButton);
+        breakdown.appendChild(mobileCreditHost);
+      }
+
       if (!cancelled) setHosts({ desktop: desktopHost, mobile: mobileHost, credit: creditHost });
     };
 
@@ -220,6 +215,7 @@ export function OfferContactActions() {
       desktopHost?.remove();
       mobileHost?.remove();
       creditHost?.remove();
+      mobileCreditHost?.remove();
     };
   }, [pathname]);
 
@@ -294,6 +290,48 @@ export function OfferContactActions() {
           }
           html[data-theme="light"] .ac-credit-calculator-mock .ac-credit-field {
             background: rgba(35,42,55,.045) !important;
+          }
+        }
+        .ac-offer-page [data-offer-credit-host],
+        .ac-offer-page [data-offer-credit-mobile-host] {
+          display: none !important;
+        }
+        @media (max-width: 1279px) {
+          .ac-offer-page [data-offer-credit-mobile-host] {
+            display: block !important;
+            padding: 0 1rem 1rem;
+          }
+          .ac-mobile-credit-button {
+            display: flex;
+            width: 100%;
+            height: 46px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: .9rem;
+            background: #0b0d11;
+            color: #fff !important;
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 1;
+            box-shadow: 0 8px 18px rgba(0,0,0,.12);
+          }
+          html[data-theme="light"] .ac-mobile-credit-button {
+            border-color: #0b0d11;
+            background: #0b0d11;
+            color: #fff !important;
+          }
+        }
+        @media (min-width: 1280px) {
+          .ac-offer-page:has(.ac-offer-breakdown[open]) [data-offer-credit-host] {
+            display: block !important;
+            margin-top: 1rem;
+          }
+          .ac-credit-calculator-mock {
+            box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
+          }
+          html[data-theme="light"] .ac-credit-calculator-mock {
+            box-shadow: 0 12px 26px rgba(38,43,57,.07) !important;
           }
         }
         .ac-offer-page > section > section {
