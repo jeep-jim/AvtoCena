@@ -1,0 +1,56 @@
+name: Validate strict Japan commercial filtering
+
+on:
+  push:
+    branches: [fix/japan-commercial-filter-20260810]
+    paths:
+      - .github/workflows/validate-japan-commercial-filter.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/japan-commercial-filter-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        run: python3 scripts/patch-japan-commercial-filter.py
+      - name: Typecheck and syntax
+        run: |
+          npm run typecheck
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Unit smoke commercial identities
+        run: |
+          npx tsx -e 'import {isJapanCommercialAuctionOffer as f} from "./apps/web/lib/catalog/japan-commercial.ts"; const bad=[{model:"ALTO VAN"},{model:"CLIPPER VAN"},{model:"BONGO"},{model:"BONGO BRAWNY VAN"},{model:"ATLAS"},{model:"CONDOR"},{model:"COMO"},{model:"CLIPPER EV"},{model:"RANDOM",trim:"Dump"}]; const good=[{model:"CLIPPER RIO"},{model:"ATRAI WAGON"},{model:"CARAVAN",trim:"Wagon"},{model:"A4",trim:"A4 35TDI ad Van s"},{model:"CROWN",trim:"Hybrid RS ad Van s"},{model:"ALPHARD"}]; for(const x of bad){if(!f(x)) throw new Error(`commercial missed ${JSON.stringify(x)}`)} for(const x of good){if(f(x)) throw new Error(`passenger false positive ${JSON.stringify(x)}`)} console.log({bad:bad.length,good:good.length})'
+      - name: Download latest successful current Prestige aggregate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: "31333233639"
+        run: |
+          set -euo pipefail
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-up-to-30000") | [.created_at,.id] | @tsv' | sort | tail -n1 | cut -f2)"
+          test -n "$artifact_id"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > prestige.zip
+          unzip -q prestige.zip -d prestige-input
+          test -s prestige-input/prestige-japan-exact-sold-up-to-30000.json
+      - name: NO-PUBLISH source aggregate smoke with patched filter
+        run: |
+          npx tsx -e 'import fs from "node:fs"; import {isJapanCommercialAuctionOffer as f} from "./apps/web/lib/catalog/japan-commercial.ts"; const p=JSON.parse(fs.readFileSync("prestige-input/prestige-japan-exact-sold-up-to-30000.json","utf8")); if(!p?.report?.passed||p.report.errors?.length) throw new Error(`source aggregate not passed ${JSON.stringify(p.report)}`); const rows=p.offers||[]; const invalid=rows.filter(o=>!(Number(o.sourcePrice)>0)||o.sourceCurrency!=="JPY"||String(o.auctionResult).toLowerCase()!=="sold"||(o.images||[]).length<5); if(invalid.length) throw new Error(`strict source invalid=${invalid.length}`); const blocked=rows.filter(f); const must=["ALTO VAN","BONGO","CLIPPER VAN","CONDOR","ATLAS","COMO"]; for(const m of must){if(!rows.some(o=>String(o.model).toUpperCase()===m&&f(o))) throw new Error(`current source commercial not blocked ${m}`)} console.log({sourceCount:rows.length,commercialBlocked:blocked.length,passed:p.report.passed})'
+      - name: Commit validated production script only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-japan-prestige.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Reject proven commercial Japan auction models [skip actions]"
+          git push origin HEAD:fix/japan-commercial-filter-20260810
