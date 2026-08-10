@@ -76,11 +76,11 @@ export function PublicLegalFooter() {
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
             <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.</p>
-            <div className="mt-4 grid grid-cols-[minmax(0,1.12fr)_minmax(0,.88fr)] gap-2 sm:flex sm:flex-wrap">
+            <div className="mt-4 grid grid-cols-2 gap-2">
               <Link href="/cars" className="ac-public-footer-cta inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl px-3 text-center text-[13px] font-black sm:px-4 sm:text-sm" style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>Смотреть каталог</Link>
               <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl bg-white/[.07] px-3 text-center text-[13px] font-black text-[var(--ac-text)] transition hover:bg-white/[.12] sm:px-4 sm:text-sm">🚗 АвтоДилерам</Link>
             </div>
-            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-2 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-white/[.07] px-4 text-center text-sm font-black text-[var(--ac-text)]">Рассчитать ОСАГО</button>
+            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-4 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-4 text-center text-sm font-black text-black" style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}>Рассчитать ОСАГО</button>
           </div>
 
           <FooterLinkGroup title="По странам" links={marketLinks} />
