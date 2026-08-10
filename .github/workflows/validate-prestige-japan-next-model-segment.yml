@@ -1,0 +1,90 @@
+name: Validate Prestige Japan next model segment
+
+on:
+  push:
+    branches: [fix/prestige-japan-next-model-segment-20260811]
+    paths:
+      - scripts/prestige-japan-strict-partition-plan.mjs
+      - .github/workflows/validate-prestige-japan-next-model-segment.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-prestige-japan-next-model-segment
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PRESTIGE_PLAN_START_MODEL_INDEX: "91"
+      PRESTIGE_PLAN_MAX_PARTITIONS: "12"
+      PRESTIGE_PLAN_MAX_MAKES: "30"
+      PRESTIGE_PLAN_RAW_BUDGET: "1000"
+      PRESTIGE_PLAN_RAW_PER_MODEL: "60"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      PRESTIGE_JAPAN_DETAIL_CONCURRENCY: "5"
+      PRESTIGE_CHUNK_RETRY_ATTEMPTS: "4"
+      PRESTIGE_CHUNK_RETRY_BASE_MS: "1000"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/prestige-japan-next-model-segment-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Syntax and typecheck
+        run: |
+          node --check scripts/prestige-japan-strict-partition-plan.mjs
+          node --check scripts/prestige-japan-strict-chunk.mjs
+          npm run typecheck
+      - name: Plan deeper model band without publishing
+        run: npx tsx scripts/prestige-japan-strict-partition-plan.mjs
+      - name: Assert traversal moved beyond the exhausted first band
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('prestige-japan-strict-partition-plan.json','utf8'));
+          const problems=[];
+          if (p.startModelIndex !== 91) problems.push(`start_${p.startModelIndex}`);
+          if (!Array.isArray(p.partitions) || p.partitions.length < 3) problems.push(`partitions_${p.partitions?.length||0}`);
+          if ((p.partitions||[]).some(x=>Number(x.modelIndex)<91)) problems.push('old_model_band_leaked');
+          if (new Set((p.partitions||[]).map(x=>x.id)).size !== (p.partitions||[]).length) problems.push('duplicate_partition_ids');
+          console.log(JSON.stringify({startModelIndex:p.startModelIndex,partitionCount:p.partitionCount,plannedRows:p.plannedRows,first:p.partitions?.slice(0,5),problems},null,2));
+          if (problems.length) process.exit(1);
+          NODE
+      - name: Smoke first three deeper exact sold chunks without publishing
+        run: |
+          set -euo pipefail
+          total_accepted=0
+          for idx in 0 1 2; do
+            export PRESTIGE_CHUNK_ID="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].id")"
+            export PRESTIGE_CHUNK_START_CURSOR="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].startCursor")"
+            export PRESTIGE_CHUNK_MAKE_INDEX="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].makeIndex")"
+            export PRESTIGE_CHUNK_MODEL_INDEX="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].modelIndex")"
+            export PRESTIGE_CHUNK_END_OFFSET="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].endOffset")"
+            export PRESTIGE_CHUNK_MAX_PAGES="$(node -p "require('./prestige-japan-strict-partition-plan.json').partitions[$idx].maxPages")"
+            export PRESTIGE_CHUNK_OUTPUT="prestige-next-segment-smoke-${idx}.json"
+            npx tsx scripts/prestige-japan-strict-chunk.mjs
+            accepted="$(node -p "require('./prestige-next-segment-smoke-${idx}.json').report.accepted")"
+            passed="$(node -p "require('./prestige-next-segment-smoke-${idx}.json').report.passed")"
+            test "$passed" = "true"
+            total_accepted=$((total_accepted + accepted))
+          done
+          echo "accepted across smoke chunks: $total_accepted"
+          test "$total_accepted" -gt 0
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: prestige-japan-next-segment-smoke
+          path: |
+            prestige-japan-strict-partition-plan.json
+            prestige-next-segment-smoke-*.json
+          if-no-files-found: warn
+          retention-days: 3
