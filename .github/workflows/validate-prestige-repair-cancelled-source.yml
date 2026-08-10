@@ -1,0 +1,39 @@
+name: Validate cancelled Prestige repair guard
+
+on:
+  push:
+    branches: [fix/prestige-repair-cancelled-source-20260811]
+    paths:
+      - .github/workflows/validate-prestige-repair-cancelled-source.yml
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/prestige-repair-cancelled-source-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Validate repair scripts and cancelled-source root cause
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: "31423941985"
+        run: |
+          set -euo pipefail
+          node --check scripts/prestige-japan-build-repair-matrix.mjs
+          node --check scripts/prestige-japan-repair-merge.mjs
+          grep -Fq "github.event.workflow_run.conclusion != 'cancelled'" .github/workflows/catalog-v6-prestige-repair.yml
+          conclusion="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID" --jq '.conclusion')"
+          test "$conclusion" = "cancelled"
+          chunks="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '[.artifacts[] | select(.name | startswith("prestige-japan-chunk-"))] | length' | awk '{s+=$1} END{print s+0}')"
+          test "$chunks" -eq 0
+          echo "cancelled_source_guard_ok source=$SOURCE_RUN_ID chunk_artifacts=$chunks"
