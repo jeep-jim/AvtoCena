@@ -25,7 +25,9 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply preliminary EV/HEV patch
-        run: python scripts/apply-preliminary-electrified-mode.py
+        run: |
+          python scripts/apply-preliminary-electrified-mode.py
+          python scripts/apply-preliminary-electrified-collector-fix.py
       - name: Typecheck and script syntax
         shell: bash
         run: |
