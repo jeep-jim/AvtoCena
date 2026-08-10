@@ -105,14 +105,14 @@ function inferFuel(text: string) {
   if (/diesel|tdi|crdi|d-4d|d4d|bluehdi|dci|hdi|дизел|柴油|디젤/.test(text)) return "diesel";
   if (/lpg|cng|gpl|газ/.test(text)) return "lpg";
   if (/petrol|gasoline|benzin|essence|gdi|mpi|tgdi|tsi|tfsi|бензин|汽油|가솔린/.test(text)) return "petrol";
-  if (/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(text)) return "electric";
+  if (/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기|일렉트릭/.test(text)) return "electric";
   return undefined;
 }
 
 function inferPowertrainKind(text: string, engineCc?: number): PowertrainKind {
   if (/series[ -]?hybrid|range[ -]?extender|\be[- ]?power\b|\b(?:reev|erev)\b|последовательн\w*\s+гибрид|增程/.test(text)) return "series_hybrid";
   if (/plug[ -]?in|\b(?:phev|hev|mhev)\b|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|hybrid|混合动力|하이브리드/.test(text)) return "other_hybrid";
-  if (/battery[ -]?electric|pure[ -]?electric|\bbev\b|\bev\b|электромоб|纯电|전기차/.test(text) && !engineCc) return "electric";
+  if (/battery[ -]?electric|pure[ -]?electric|\bbev\b|\bev\b|электромоб|纯电|전기차|일렉트릭/.test(text) && !engineCc) return "electric";
   if (engineCc || /petrol|gasoline|diesel|бензин|дизел|汽油|柴油|가솔린|디젤/.test(text)) return "combustion";
   return "unknown";
 }
@@ -302,11 +302,11 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   // This improves powertrain classification but does not supply customs power.
   const knownPureElectricModel = (normalizedMake === "audi" && /\be[- ]?tron\b/i.test(normalizedModelTrim))
     || /\b(?:ev3|ev4|ev5|ev6|ev9)\b/i.test(normalizedModelTrim)
-    || /아이오닉\s*[56]/i.test(normalizedModelTrim)
+    || /아이오닉(?:\s*[56]|.*?일렉트릭)/i.test(normalizedModelTrim)
     || /(?:코나|캐스퍼).*?(?:electric|일렉트릭)/i.test(normalizedModelTrim)
     || /(?:레이|니로|쏘울(?:\s+부스터)?).*?\bev\b/i.test(normalizedModelTrim)
-    || (/tesla|테슬라/i.test(normalizedMake) && /\bmodel\s*[3sxy]\b|cybertruck/i.test(normalizedModelTrim))
-    || (/chevrolet|쉐보레/i.test(normalizedMake) && /\bbolt\s*(?:ev|euv)\b/i.test(normalizedModelTrim))
+    || (/tesla|테슬라/i.test(normalizedMake) && /(?:\bmodel|모델)\s*[3sxy]\b|cybertruck/i.test(normalizedModelTrim))
+    || (/chevrolet|쉐보레/i.test(normalizedMake) && /(?:\bbolt|볼트)\s*(?:ev|euv)\b/i.test(normalizedModelTrim))
     || (/nissan|닛산/i.test(normalizedMake) && /\b(?:leaf|ariya)\b|리프|아리야/i.test(normalizedModelTrim))
     || (/peugeot|푸조/i.test(normalizedMake) && /\be[- ]?(?:208|2008)\b/i.test(normalizedModelTrim));
   const parsedEngineCc = reasonable(offer.engineCc, 300, 10_000)
@@ -324,7 +324,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   let fuel = inferFuel(primary)
     || offer.fuel
     || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
-  const strongElectric = knownPureElectricModel || /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/.test(primary);
+  const strongElectric = knownPureElectricModel || /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기|일렉트릭/.test(primary);
   if (engineCc && fuel === "electric" && !strongElectric) {
     fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
   }
