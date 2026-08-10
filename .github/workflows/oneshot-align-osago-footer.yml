@@ -1,0 +1,76 @@
+name: One-shot align OSAGO footer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-align-osago-footer.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oneshot-align-osago-footer
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Align footer buttons and style OSAGO
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/layout/PublicLegalFooter.tsx')
+          s = p.read_text()
+          old_top = '            <div className="mt-4 grid grid-cols-[minmax(0,1.12fr)_minmax(0,.88fr)] gap-2 sm:flex sm:flex-wrap">\n'
+          new_top = '            <div className="mt-4 grid grid-cols-2 gap-2">\n'
+          if s.count(old_top) != 1:
+              raise SystemExit(f'top button layout match count={s.count(old_top)}')
+          s = s.replace(old_top, new_top, 1)
+          old_osago = '            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-2 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-white/[.07] px-4 text-center text-sm font-black text-[var(--ac-text)]">Рассчитать ОСАГО</button>\n'
+          new_osago = '            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-4 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-4 text-center text-sm font-black text-black" style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}>Рассчитать ОСАГО</button>\n'
+          if s.count(old_osago) != 1:
+              raise SystemExit(f'OSAGO button match count={s.count(old_osago)}')
+          s = s.replace(old_osago, new_osago, 1)
+          p.write_text(s)
+          PY
+
+      - name: Typecheck
+        run: |
+          npm ci
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo packages/engine/tsconfig.tsbuildinfo 2>/dev/null || true
+
+      - name: Verify and publish
+        shell: bash
+        run: |
+          git diff --check
+          grep -q 'grid grid-cols-2 gap-2' apps/web/components/layout/PublicLegalFooter.tsx
+          grep -q 'backgroundColor: "#FFD400"' apps/web/components/layout/PublicLegalFooter.tsx
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+          buyer=$(git hash-object apps/web/components/home/BuyerGallery.tsx)
+          test "$buyer" = "11511c3184cb80776feec332a06e7191d5ad618c"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-align-osago-footer.yml
+          git add apps/web/components/layout/PublicLegalFooter.tsx
+          git commit -m "fix: align footer actions and highlight OSAGO"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+          fi
+          git push origin HEAD:main
