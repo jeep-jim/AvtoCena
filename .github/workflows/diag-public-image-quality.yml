@@ -20,6 +20,9 @@ jobs:
       YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_MAX_IMAGES_PER_OFFER: 30
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,6 +32,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Probe reported AutoHome gallery
+        run: npx tsx scripts/diag-autohome-gallery-target.mts
       - name: Audit China public galleries
         env:
           DIAG_MARKET: china
@@ -38,6 +43,7 @@ jobs:
           DIAG_MARKET: georgia
         run: npx tsx scripts/diag-public-image-quality.mts
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: public-image-quality-diagnostic
           path: diag-public-image-quality-*.json
