@@ -75,7 +75,7 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
-      /* Softer price-rise surface on the dark theme, shared by phone and desktop. */
+      /* Dark price-rise surface matches the financing payment accent sampled from the approved mock. */
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-up {
         background: #3d3644 !important;
       }
