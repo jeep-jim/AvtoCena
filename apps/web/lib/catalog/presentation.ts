@@ -81,6 +81,8 @@ const directPhrases: Array<[RegExp, string]> = [
   [/凯迪拉克/g, "Cadillac "],
   [/路虎/g, "Land Rover "],
   [/特斯拉/g, "Tesla "],
+  [/钧天纵横家/g, "Juntian Zonghengjia "],
+  [/钧天机械|钧天汽车|钧天/g, "Juntian "],
   [/比亚迪/g, "BYD "],
   [/吉利/g, "Geely "],
   [/长安/g, "Changan "],
@@ -336,10 +338,12 @@ export function catalogFuelName(value: unknown) {
 export function catalogTransmissionName(value: unknown) {
   const raw = safeCatalogText(value).toLowerCase();
   if (!raw) return "уточняется";
-  if (/automatic|auto|at|自动|오토|자동/.test(raw)) return "автомат";
-  if (/manual|mt|手动|수동/.test(raw)) return "механика";
+  const gears = Number(raw.match(/(?:^|\D)(\d{1,2})\s*挡/)?.[1] || 0);
+  const label = (name: string) => gears > 0 && gears <= 12 ? `${gears}-ступ. ${name}` : name;
   if (/cvt|无级变速|вариатор/.test(raw)) return "вариатор";
-  if (/robot|dct|双离合|робот/.test(raw)) return "робот";
+  if (/robot|dct|dsg|双离合|робот/.test(raw)) return label("робот");
+  if (/manual|(?:^|\W)mt(?:$|\W)|手动|수동/.test(raw) && !/手自一体/.test(raw)) return label("механика");
+  if (/automatic|auto|(?:^|\W)at(?:$|\W)|手自一体|自动挡?|오토|자동/.test(raw)) return label("автомат");
   return translateCatalogText(raw) || "уточняется";
 }
 
