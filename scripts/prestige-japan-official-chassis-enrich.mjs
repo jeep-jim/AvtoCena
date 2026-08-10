@@ -9,6 +9,9 @@ const output = process.env.PRESTIGE_OFFICIAL_OUTPUT || "prestige-japan-exact-sol
 // 3BA-DJLFS 15MB 116 PS premium-fuel variant can never be matched as the 110 PS car.
 // Diesel rules must opt in explicitly; all existing rules default to petrol.
 const RULES = [
+  ["Z12", "NISSAN", "CUBE", 2011, 2011, 1498, 20, 109, 80, "DBA-Z12 2011", ["https://history.nissan.co.jp/CUBE/Z12/0811/z120811g01.html", "https://history.nissan.co.jp/CUBE/Z12/0811/z120811g02.html"]],
+  ["Z12", "NISSAN", "CUBE", 2013, 2018, 1498, 20, 111, 82, "DBA-Z12 2013-2018", ["https://history.nissan.co.jp/CUBE/Z12/1210/www3.nissan.co.jp/content/dam/Nissan/jp/vehicles/cube/1804/pdf/cube_specsheet.pdf"]],
+  ["DR17W", "NISSAN", "CLIPPER RIO", 2015, 2024, 658, 15, 64, 47, "ABA/3BA-DR17W", ["https://www3.nissan.co.jp/content/dam/Nissan/jp/vehicles/nv100clipperrio/1906/specifications/pdf/nv100clipperrio_specsheet.pdf", "https://history.nissan.co.jp/ARCHIVES/PDF/NV100CLIPPERRIO/WZA1/20220420/nv100clipperrio_specsheet.pdf", "https://history.nissan.co.jp/ARCHIVES/PDF/CLIPPERRIO/WZA1/20240326/clipperrio_specsheet.pdf"]],
   ["L235S", "DAIHATSU", "ESSE", 2011, 2011, 658, 10, 58, 43, "DBA-L235S", ["https://u-catch.daihatsu.co.jp/catalog/ESSE/GRADE__10061324/"]],
   ["ZRT272W", "TOYOTA", "AVENSIS WAGON", 2011, 2016, 1986, 20, 152, 112, "DBA-ZRT272W", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201109/10070440/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201510/10099909/"]],
   ["SJ5", "SUBARU", "FORESTER", 2013, 2017, 1995, 15, 148, 109, "DBA-SJ5", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10085479"]],
