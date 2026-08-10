@@ -2,7 +2,7 @@ from pathlib import Path
 
 p = Path("apps/web/lib/catalog/presentation.ts")
 s = p.read_text()
-marker = '  [/特斯拉/gi, "Tesla"],\n'
+marker = '  [/테슬라/gi, "Tesla"],\n'
 insert = '''  [/零跑汽车|零跑/g, "Leapmotor "],
   [/AITO\\s*问界|问界/g, "AITO "],
   [/智己汽车|智己/g, "IM Motors "],
