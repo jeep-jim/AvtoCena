@@ -1,0 +1,117 @@
+name: Validate Japan candidate cap after calculation
+
+on:
+  push:
+    branches: [fix/japan-candidate-cap-after-calculation-20260811]
+    paths:
+      - .github/workflows/validate-japan-candidate-cap-after-calculation.yml
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: validate-japan-candidate-cap-after-calculation
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      SOURCE_RUN_ID: "31418667417"
+      CATALOG_MAX_OFFERS_PER_MODEL: "20"
+      PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL: "80"
+      PRESTIGE_RECOVERY_TARGET: "30000"
+      PRESTIGE_RECOVERY_CONCURRENCY: "12"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      RECOVERY_PREFERRED_MAX_RUB: "8000000"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/japan-candidate-cap-after-calculation-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply candidate-cap patch
+        run: python3 scripts/patch-japan-candidate-cap.py
+      - name: Syntax and typecheck
+        run: |
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          npm run typecheck
+      - name: Download validated repaired Prestige source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | .id' | sort -n | tail -n1)"
+          test -n "$artifact_id"
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+            -o prestige.zip
+          mkdir -p prestige-input
+          unzip -q prestige.zip -d prestige-input
+          source_file="$(find prestige-input -type f -name 'prestige-japan-exact-sold-repaired.json' | head -n1)"
+          test -s "$source_file"
+          echo "PRESTIGE_RECOVERY_INPUT=$source_file" >> "$GITHUB_ENV"
+      - name: Enrich only documented chassis power
+        run: |
+          export PRESTIGE_OFFICIAL_INPUT="$PRESTIGE_RECOVERY_INPUT"
+          export PRESTIGE_OFFICIAL_OUTPUT="prestige-japan-exact-sold-official-power.json"
+          node scripts/prestige-japan-official-chassis-enrich.mjs
+          test -s "$PRESTIGE_OFFICIAL_OUTPUT"
+          echo "PRESTIGE_RECOVERY_INPUT=$PRESTIGE_OFFICIAL_OUTPUT" >> "$GITHUB_ENV"
+      - name: Convert with wider candidate pool without publishing
+        run: |
+          export PRESTIGE_RECOVERY_OUTPUT="catalog-rebuild-japan-candidate-cap.json"
+          npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Assert improvement and final exact-model cap
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const p=JSON.parse(fs.readFileSync('catalog-rebuild-japan-candidate-cap.json','utf8'));
+          const offers=Array.isArray(p.offers)?p.offers:[];
+          const r=p.report||{};
+          const counts=new Map();
+          const problems=[];
+          for(const o of offers){
+            const key=`${String(o.make||'').trim().toLowerCase()}|${String(o.model||'').trim().toLowerCase()}`;
+            counts.set(key,(counts.get(key)||0)+1);
+          }
+          const max=Math.max(0,...counts.values());
+          if(Number(r.candidateMaxOffersPerModel)!==80) problems.push(`candidate_cap_${r.candidateMaxOffersPerModel}`);
+          if(Number(r.maxOffersPerModel)!==20||max>20) problems.push(`final_model_cap_${max}`);
+          if(Number(r.count)<=371) problems.push(`no_count_improvement_${r.count}`);
+          if((offers||[]).some(o=>Number(o.year||0)<2011)) problems.push('older_than_15');
+          if((offers||[]).some(o=>!(Number(o.sourcePrice||0)>0))) problems.push('nonpositive_source_price');
+          console.log(JSON.stringify({baselineCount:371,count:r.count,candidateCount:r.candidateCount,candidateQuotaSkipped:r.candidateModelQuotaSkipped,finalQuotaSkipped:r.finalModelQuotaSkipped,models:r.distinctModels,makes:r.distinctMakes,exact:r.exactCalculatedCount,preliminary:r.preliminaryCount,maxPerExactModel:max,rejected:r.rejected,problems},null,2));
+          if(problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-candidate-cap-no-publish
+          path: |
+            catalog-rebuild-japan-candidate-cap.json
+            prestige-japan-exact-sold-official-power.json
+          if-no-files-found: warn
+          retention-days: 3
+      - name: Commit validated production file only
+        if: success()
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-japan-candidate-cap.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-japan-prestige.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Broaden Japan recovery candidates before final model cap [skip actions]"
+          git push origin HEAD:fix/japan-candidate-cap-after-calculation-20260811
