@@ -1,0 +1,36 @@
+name: Diagnose Autohome gallery 68589
+on:
+  push:
+    branches: [fix/china-quality-scale-20260810]
+    paths: [.github/workflows/diag-autohome-gallery-68589.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Inspect exact Autohome pages
+        shell: bash
+        run: |
+          node <<'NODE'
+          const headers={
+            'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+            'accept-language':'zh-CN,zh;q=0.9,en;q=0.7',
+          };
+          const pages=[
+            ['spec','https://www.autohome.com.cn/spec/68589/'],
+            ['legacyExact','https://car.autohome.com.cn/pic/series-s68589/7768.html'],
+            ['modernSeries','https://www.autohome.com.cn/cars/imglist-x-x-7768-x-x-x-x-x-x-1.html'],
+          ];
+          for (const [label,url] of pages) {
+            try {
+              const r=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(30000)});
+              const text=await r.text();
+              const urls=[...text.matchAll(/https?:\\?\/\\?\/[^"'\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\s<>]*)?/gi)].map(m=>m[0].replaceAll('\\/','/'));
+              const attrs=[...text.matchAll(/(?:src|data-src|data-original|data-src2|data-url|content)=["']([^"']+)["']/gi)].map(m=>m[1]);
+              const all=[...new Set([...urls,...attrs].filter(x=>/autoimg\.cn/i.test(x)))];
+              console.log(JSON.stringify({label,status:r.status,finalUrl:r.url,bytes:text.length,totalAutoimg:all.length,samples:all.slice(0,30),has68589:text.includes('68589'),has7768:text.includes('7768')},null,2));
+            } catch(e) { console.log(JSON.stringify({label,error:String(e)})); }
+          }
+          NODE
