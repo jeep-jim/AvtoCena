@@ -11,6 +11,7 @@ const rawBudget = Math.max(1_000, Number(process.env.PRESTIGE_PLAN_RAW_BUDGET ||
 const maxPartitions = Math.max(1, Math.min(500, Number(process.env.PRESTIGE_PLAN_MAX_PARTITIONS || 220)));
 const maxMakes = Math.max(1, Math.min(100, Number(process.env.PRESTIGE_PLAN_MAX_MAKES || 100)));
 const rawPerModel = Math.max(20, Math.min(200, Number(process.env.PRESTIGE_PLAN_RAW_PER_MODEL || 60)));
+const startModelIndex = Math.max(0, Math.min(10_000, Number(process.env.PRESTIGE_PLAN_START_MODEL_INDEX || 0)));
 const commercial = /(?:FORK|FORKLIFT|LOADER|EXCAVATOR|TRACTOR|CRANE|DUMP|TRUCK|BUS|COASTER|DYNA|TOYOACE|DUTRO|CANTER|ELF|FORWARD|GIGA|PROFIA|FD\d|FG\d|FGL|FDL|SDK)/i;
 
 const makes = await source.makes();
@@ -28,12 +29,17 @@ const partitions = [];
 const models = [];
 let plannedRows = 0;
 let complete = true;
-let round = 0;
+let round = startModelIndex;
 
 // Round-robin across every available make and model. We deliberately do not
 // cap the number of distinct models per make. The final catalog cap is only
 // 10–20 offers of the same make+model, which keeps variety without hiding
 // Toyota/Nissan/Honda model ranges.
+//
+// startModelIndex lets later no-publish/source-sharded passes continue from a
+// deeper model band instead of repeatedly exhausting the first 220 positive
+// partitions. This is a traversal offset only; source identity and all strict
+// sold/detail/gallery gates remain unchanged.
 while (partitions.length < maxPartitions && plannedRows < rawBudget) {
   let anyModelInRound = false;
   for (const entry of makeLists) {
@@ -81,6 +87,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   sourceId: "prestige_japan_auctions_open",
   traversal: "round_robin_all_make_models",
+  startModelIndex,
   rawBudget,
   rawPerModel,
   maxPartitions,
@@ -92,7 +99,7 @@ const report = {
   partitions,
 };
 await fs.writeFile("prestige-japan-strict-partition-plan.json", JSON.stringify(report, null, 2));
-console.log(JSON.stringify({ plannedRows, partitionCount: partitions.length, rawPerModel, maxMakes, complete, first: partitions.slice(0, 12), last: partitions.slice(-6) }, null, 2));
+console.log(JSON.stringify({ startModelIndex, plannedRows, partitionCount: partitions.length, rawPerModel, maxMakes, complete, first: partitions.slice(0, 12), last: partitions.slice(-6) }, null, 2));
 
 if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `matrix=${JSON.stringify(matrix)}\nplanned_rows=${plannedRows}\npartition_count=${partitions.length}\ncomplete=${complete}\n`);
