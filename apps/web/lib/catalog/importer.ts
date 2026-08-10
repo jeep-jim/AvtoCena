@@ -35,6 +35,7 @@ import { guaziChinaExactSource } from "./china-exact-sources";
 import { che168GlobalExactSource } from "./che168-global-exact-source";
 import { autohomeNewExactSource } from "./autohome-new-exact-source";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
+import { mobileDeExactSource } from "./mobile-de-exact-source";
 import { dubizzleUaeExactSource } from "./dubizzle-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
@@ -91,6 +92,7 @@ const completeSources = [
   autohomeNewExactSource,
   prestigeJapanExactSource,
   autoscoutEuropeExactSource,
+  mobileDeExactSource,
   dubizzleUaeExactSource,
   jpaucPastSource,
   encarCompleteSource,
@@ -117,6 +119,7 @@ const dedicatedDetailSourceIds = new Set([
   "autohome_used_china_open",
   "autohome_new_china_open",
   "autoscout_europe_open",
+  "mobile_de_open",
   "dubizzle_uae_open",
   "kcar_korea_open",
 ]);

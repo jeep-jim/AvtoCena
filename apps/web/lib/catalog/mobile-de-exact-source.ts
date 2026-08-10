@@ -1,0 +1,297 @@
+import { stableOfferId } from "./storage";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
+
+const MOBILE_BASE = "https://www.mobile.de";
+const SEARCH_BASE = "https://suchen.mobile.de";
+const SRP_API = `${MOBILE_BASE}/consumer/api/search/srp`;
+const VIP_API = `${MOBILE_BASE}/consumer/api/search/vip`;
+const MAX_SHARD_PAGES = 25;
+const HEADERS = {
+  accept: "application/json,text/plain,*/*",
+  "accept-language": "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  referer: `${MOBILE_BASE}/`,
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+  "x-mobile-client": "de.mobile.consumer-webapp",
+};
+
+export type MobileDeExactRow = {
+  id: string;
+  sourceUrl: string;
+  title: string;
+  make: string;
+  model: string;
+  trim?: string;
+  year: number;
+  productionDate?: string;
+  mileageKm?: number;
+  engineCc?: number;
+  powerKw?: number;
+  powerHp?: number;
+  fuel?: string;
+  transmission?: string;
+  drive?: string;
+  bodyType?: string;
+  price: number;
+  currency: string;
+  location?: string;
+  numImages?: number;
+  raw: Record<string, any>;
+};
+
+type CursorState = { shard: number; page: number };
+type SearchShard = { yearFrom: number; yearTo: number; maxPowerKw?: number; label: string };
+
+function clean(value: unknown) {
+  return String(value ?? "").replace(/\s+/g, " ").trim();
+}
+function positive(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : undefined;
+}
+function integer(value: unknown) {
+  const raw = clean(value).replace(/\u00a0/g, " ");
+  const digits = raw.replace(/[^0-9]/g, "");
+  const number = Number(digits);
+  return Number.isFinite(number) && number > 0 ? number : undefined;
+}
+function parsePower(value: unknown) {
+  const raw = clean(value).replace(/\u00a0/g, " ");
+  const kw = Number(raw.match(/([0-9]{1,4}(?:[.,][0-9]+)?)\s*kW/i)?.[1]?.replace(",", "."));
+  const hp = Number(raw.match(/([0-9]{1,4}(?:[.,][0-9]+)?)\s*(?:PS|hp)/i)?.[1]?.replace(",", "."));
+  return {
+    powerKw: Number.isFinite(kw) && kw > 0 ? Math.round(kw * 10) / 10 : undefined,
+    powerHp: Number.isFinite(hp) && hp > 0 ? Math.round(hp * 10) / 10 : Number.isFinite(kw) && kw > 0 ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined,
+  };
+}
+function parseRegistration(value: unknown) {
+  const raw = clean(value);
+  const match = raw.match(/\b(0?[1-9]|1[0-2])[/.]((?:19|20)\d{2})\b/) || raw.match(/\b((?:19|20)\d{2})\b/);
+  if (!match) return { year: 0, productionDate: undefined };
+  if (match.length >= 3) return { year: Number(match[2]), productionDate: `${match[2]}-${String(Number(match[1])).padStart(2, "0")}` };
+  return { year: Number(match[1]), productionDate: undefined };
+}
+function absoluteListingUrl(value: unknown) {
+  const raw = clean(value);
+  if (!raw) return "";
+  try { return new URL(raw, SEARCH_BASE).toString(); } catch { return ""; }
+}
+function image(url: string): CatalogImage {
+  return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" };
+}
+function parseCursor(cursor?: string | null): CursorState {
+  if (!cursor) return { shard: 0, page: 1 };
+  try {
+    const parsed = JSON.parse(cursor);
+    const shard = Number(parsed?.shard);
+    const page = Number(parsed?.page);
+    return { shard: Number.isInteger(shard) && shard >= 0 ? shard : 0, page: Number.isInteger(page) && page >= 1 ? page : 1 };
+  } catch {
+    const page = Number(cursor);
+    return { shard: 0, page: Number.isInteger(page) && page >= 1 ? page : 1 };
+  }
+}
+function searchShards(): SearchShard[] {
+  const currentYear = new Date().getUTCFullYear();
+  const recentYears = Array.from({ length: 7 }, (_, index) => currentYear - index);
+  const extendedYears = Array.from({ length: 9 }, (_, index) => currentYear - 7 - index).filter((year) => year >= currentYear - 15);
+  const rotate = (values: number[]) => {
+    if (!values.length) return values;
+    const day = Math.floor(Date.now() / 86_400_000);
+    const offset = day % values.length;
+    return [...values.slice(offset), ...values.slice(0, offset)];
+  };
+  return [
+    ...rotate(recentYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `recent_liquid_${year}` })),
+    ...rotate(recentYears).map((year) => ({ yearFrom: year, yearTo: year, label: `recent_all_${year}` })),
+    ...rotate(extendedYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `extended_liquid_${year}` })),
+    ...rotate(extendedYears).map((year) => ({ yearFrom: year, yearTo: year, label: `extended_all_${year}` })),
+  ];
+}
+function classicSearchUrl(shard: SearchShard, page: number) {
+  const url = new URL("/fahrzeuge/search.html", SEARCH_BASE);
+  url.searchParams.set("dam", "false");
+  url.searchParams.set("isSearchRequest", "true");
+  url.searchParams.set("vc", "Car");
+  url.searchParams.set("fr", `${shard.yearFrom}:${shard.yearTo}`);
+  if (shard.maxPowerKw) url.searchParams.set("pw", `:${shard.maxPowerKw}`);
+  url.searchParams.set("pageNumber", String(page));
+  return url.toString();
+}
+async function getJson(url: string) {
+  const response = await fetch(url, {
+    headers: HEADERS,
+    redirect: "follow",
+    signal: AbortSignal.timeout(Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+  });
+  const body = await response.text();
+  if (!response.ok) throw new Error(`mobile_de_bff_http_${response.status}:${url}`);
+  let json: any;
+  try { json = JSON.parse(body); } catch { throw new Error(`mobile_de_bff_non_json_${response.status}_bytes_${body.length}`); }
+  if (json?.error) throw new Error(`mobile_de_bff_error:${clean(json.error?.errors?.[0]?.reason || json.error?.message || "unknown")}`);
+  return { response, json };
+}
+function rowFromItem(item: Record<string, any>): MobileDeExactRow | null {
+  const id = clean(item?.id);
+  const make = clean(item?.make);
+  const model = clean(item?.model);
+  const sourceUrl = absoluteListingUrl(item?.relativeUrl || item?.url);
+  const price = positive(item?.price?.grossAmount);
+  const currency = clean(item?.price?.grossCurrency || "EUR");
+  const registration = parseRegistration(item?.attr?.fr || item?.firstRegistration);
+  const power = parsePower(item?.attr?.pw);
+  const mileageKm = integer(item?.attr?.ml);
+  const engineCc = integer(item?.attr?.cc);
+  const title = clean(item?.title || [make, model, item?.subTitle].filter(Boolean).join(" "));
+  const trim = clean(item?.subTitle);
+  const fuel = clean(item?.attr?.ft);
+  const transmission = clean(item?.attr?.tr);
+  const bodyType = clean(item?.attr?.c || item?.category);
+  const location = clean(item?.contactInfo?.location || [item?.attr?.z, item?.attr?.loc].filter(Boolean).join(" "));
+  const vc = clean(item?.vc || item?.segment);
+  if (!id || !make || !model || !sourceUrl.includes("mobile.de/") || !price || !currency || !registration.year) return null;
+  if (vc && !/^car$/i.test(vc)) return null;
+  return {
+    id, sourceUrl, title, make, model, trim: trim || undefined, year: registration.year, productionDate: registration.productionDate,
+    mileageKm, engineCc, ...power, fuel: fuel || undefined, transmission: transmission || undefined, bodyType: bodyType || undefined,
+    price, currency, location: location || undefined, numImages: positive(item?.numImages), raw: item,
+  };
+}
+function attributeMap(ad: any) {
+  const values = new Map<string, string>();
+  for (const row of Array.isArray(ad?.attributes) ? ad.attributes : []) {
+    const tag = clean(row?.tag);
+    const value = Array.isArray(row?.value) ? row.value.map(clean).filter(Boolean).join(" / ") : clean(row?.value);
+    if (tag && value) values.set(tag, value);
+  }
+  return values;
+}
+function largestGalleryUrl(value: any) {
+  const srcSet = clean(value?.srcSet);
+  const entries = srcSet.split(",").map((part) => {
+    const pieces = part.trim().split(/\s+/);
+    const width = Number(pieces[1]?.match(/(\d+)w/i)?.[1] || pieces[0]?.match(/rule=mo-(\d+)/i)?.[1] || 0);
+    return { url: pieces[0] || "", width };
+  }).filter((entry) => /^https?:\/\/img\.classistatic\.de\/api\/v1\/mo-prod\/images\//i.test(entry.url));
+  entries.sort((left, right) => right.width - left.width);
+  const direct = entries[0]?.url || clean(value?.src);
+  if (!/^https?:\/\/img\.classistatic\.de\/api\/v1\/mo-prod\/images\//i.test(direct)) return "";
+  return direct;
+}
+
+export class MobileDeExactAdapter implements CatalogSourceAdapter {
+  sourceId = "mobile_de_open";
+  market = "europe" as const;
+  accessMode = "public_json" as const;
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const shards = searchShards();
+    const state = parseCursor(cursor);
+    if (state.shard >= shards.length) return { items: [], nextCursor: null, finished: true, count: 0 };
+    const shard = shards[state.shard];
+    const classic = classicSearchUrl(shard, state.page);
+    const api = `${SRP_API}?url=${encodeURIComponent(classic)}`;
+    const { response, json } = await getJson(api);
+    const result = json?.searchResults || {};
+    const items = (Array.isArray(result?.items) ? result.items : []).map(rowFromItem).filter((row: MobileDeExactRow | null): row is MobileDeExactRow => Boolean(row));
+    const reportedPages = Math.max(1, Number(result?.numPages || 1));
+    const shardPageLimit = Math.min(MAX_SHARD_PAGES, reportedPages);
+    const nextState = state.page < shardPageLimit
+      ? { shard: state.shard, page: state.page + 1 }
+      : state.shard + 1 < shards.length
+        ? { shard: state.shard + 1, page: 1 }
+        : null;
+    return {
+      items,
+      nextCursor: nextState ? JSON.stringify(nextState) : null,
+      finished: !nextState,
+      count: Number(result?.numResultsTotal || items.length),
+      health: {
+        ok: response.ok && items.length > 0,
+        message: `mobile.de BFF ${shard.label} page=${state.page}/${shardPageLimit} parsed=${items.length} total=${Number(result?.numResultsTotal || 0)}`,
+        checkedAt: new Date().toISOString(),
+        httpStatus: response.status,
+        contentType: response.headers.get("content-type") || "",
+      },
+    };
+  }
+
+  normalizeOffer(raw: unknown): VehicleOffer | null {
+    const row = raw as MobileDeExactRow;
+    if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.sourceUrl) return null;
+    const now = new Date().toISOString();
+    return {
+      id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "europe", offerType: "fixed", status: "active",
+      sourceTitle: row.title, make: row.make, model: row.model, trim: row.trim, year: row.year, productionDate: row.productionDate,
+      mileageKm: row.mileageKm, engineCc: row.engineCc, powerKw: row.powerKw, powerHp: row.powerHp, fuel: row.fuel,
+      transmission: row.transmission, bodyType: row.bodyType,
+      powerDataConfidence: row.powerKw || row.powerHp ? "source_exact" : undefined,
+      powerDataSource: row.powerKw || row.powerHp ? "mobile.de consumer SRP" : undefined,
+      sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
+      firstSeenAt: now, updatedAt: now,
+      operational: {
+        sourceUrl: row.sourceUrl, sourceVenueName: row.location || "mobile.de Europe", sourceTitle: row.title,
+        exactFields: true, exactDetail: false, exactPhotos: false, galleryVerified: false, galleryImageCount: 0,
+        gallerySafetyMode: "mobile_consumer_bff_pending_detail_v1", galleryStoredAs: "json_urls",
+        raw: { parsed: row, srp: row.raw },
+      },
+    } as VehicleOffer;
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const sourceUrl = clean(offer.operational?.sourceUrl);
+    if (!sourceUrl || !sourceUrl.includes("mobile.de/")) return [];
+    const { json } = await getJson(`${VIP_API}?url=${encodeURIComponent(sourceUrl)}`);
+    const ad = json?.ad;
+    if (!ad || clean(ad?.id) !== clean(offer.sourceOfferId)) throw new Error(`mobile_de_vip_identity_mismatch:${offer.sourceOfferId}`);
+    if (positive(ad?.price?.grossAmount) !== positive(offer.sourcePrice)) throw new Error(`mobile_de_vip_price_mismatch:${offer.sourceOfferId}`);
+    const attrs = attributeMap(ad);
+    const power = parsePower(attrs.get("power"));
+    const registration = parseRegistration(attrs.get("firstRegistration"));
+    offer.make = clean(ad?.makeKey) || offer.make;
+    offer.model = clean(ad?.modelKey) || offer.model;
+    offer.sourceTitle = clean(ad?.title) || offer.sourceTitle;
+    offer.trim = clean(ad?.subTitle) || offer.trim;
+    offer.year = registration.year || offer.year;
+    offer.productionDate = registration.productionDate || offer.productionDate;
+    offer.mileageKm = integer(attrs.get("mileage")) || offer.mileageKm;
+    offer.engineCc = integer(attrs.get("cubicCapacity")) || offer.engineCc;
+    offer.powerKw = power.powerKw || offer.powerKw;
+    offer.powerHp = power.powerHp || offer.powerHp;
+    offer.fuel = clean(attrs.get("fuel")) || offer.fuel;
+    offer.transmission = clean(attrs.get("transmission")) || offer.transmission;
+    offer.bodyType = clean(attrs.get("category") || ad?.category) || offer.bodyType;
+    if (offer.powerKw || offer.powerHp) {
+      offer.powerDataConfidence = "source_exact";
+      offer.powerDataSource = "mobile.de consumer VIP attributes";
+    }
+    const urls = [...new Set((Array.isArray(ad?.galleryImages) ? ad.galleryImages : []).map(largestGalleryUrl).filter(Boolean))]
+      .slice(0, Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
+    const verified = urls.length >= Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+    const previousRaw = (offer.operational?.raw && typeof offer.operational.raw === "object"
+      ? offer.operational.raw
+      : {}) as Record<string, unknown>;
+    offer.operational = {
+      ...(offer.operational || {}), exactDetail: true, exactFields: true, exactPhotos: verified, photoIdentityVerified: verified,
+      galleryVerified: verified, galleryImageCount: urls.length, gallerySafetyMode: "mobile_consumer_bff_exact_v1", galleryStoredAs: "json_urls",
+      raw: {
+        ...previousRaw, vip: ad, images: urls, listingBoundImages: verified, photoIdentityVerified: verified,
+        detailIdentityVerified: true,
+      },
+    };
+    return urls.map(image);
+  }
+
+  mapStatus(): OfferStatus { return "active"; }
+  async healthCheck(): Promise<SourceRunHealth> {
+    try {
+      const page = await this.fetchPage(null);
+      return page.health || { ok: page.items.length > 0, message: `mobile.de BFF parsed=${page.items.length}`, checkedAt: new Date().toISOString() };
+    } catch (error) {
+      return { ok: false, message: clean((error as Error)?.message || error), checkedAt: new Date().toISOString() };
+    }
+  }
+}
+
+export const mobileDeExactSource = new MobileDeExactAdapter();
