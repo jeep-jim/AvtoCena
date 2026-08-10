@@ -218,7 +218,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
           >
             {image}
             {cleanImages.length > 1 ? <div className="pointer-events-none absolute bottom-4 left-8 right-24 hidden gap-2 xl:flex" aria-hidden="true">
-              {cleanImages.map((_, index) => <span key={`progress-${index}`} className={`h-[3px] min-w-0 flex-1 rounded-full ${index === activeIndex ? "bg-red-500" : "bg-white/85"}`} />)}
+              {cleanImages.map((_, index) => <span key={`progress-${index}`} className={`h-[3px] min-w-0 flex-1 rounded-full ${index === activeIndex ? "bg-red-500" : "bg-white/50"}`} />)}
             </div> : null}
             <div className="ac-on-image absolute bottom-3 right-3 rounded-full bg-black/55 px-3 py-1 text-xs font-black text-white/85 backdrop-blur xl:bottom-4">
               {activeIndex + 1} / {cleanImages.length}
