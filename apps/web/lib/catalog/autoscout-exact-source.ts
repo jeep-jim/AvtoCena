@@ -123,7 +123,7 @@ export function parseAutoScoutNextData(markup: string): AutoScoutExactRow[] {
     const mileageKm = integer(listing.tracking?.mileage || listing.vehicle?.mileageInKm || detailValue(listing.vehicleDetails, /mileage/i));
     const engineCc = integer(listing.vehicle?.engineDisplacementInCCM);
     const sourcePureElectric = /-electric-/i.test(sourceUrl)
-      && !/-electric-(?:gasoline|petrol|diesel)|-(?:gasoline|petrol|diesel)-electric-|hybrid|phev|hev/i.test(sourceUrl);
+      && !/-(?:gasoline|petrol|diesel)-|hybrid|phev|hev/i.test(sourceUrl);
     const fuel = clean(listing.vehicle?.fuel || detailValue(listing.vehicleDetails, /fuel/i) || (sourcePureElectric ? "Electric" : ""));
     const transmission = clean(listing.vehicle?.transmission || detailValue(listing.vehicleDetails, /gear/i));
     const location = clean([listing.location?.city, listing.location?.countryCode].filter(Boolean).join(", "));
