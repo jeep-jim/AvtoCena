@@ -1,0 +1,59 @@
+name: Validate hold Georgia live until gallery identity verified
+
+on:
+  push:
+    branches: [fix/hold-georgia-live-until-gallery-verified-20260811]
+    paths:
+      - .github/workflows/validate-hold-georgia-live-until-gallery-verified.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/hold-georgia-live-until-gallery-verified-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch scheduled writer without publishing
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/catalog-live-daily-working-markets.yml')
+          s=p.read_text()
+          old='for market in korea china europe georgia; do'
+          assert s.count(old)==2, s.count(old)
+          s=s.replace(old,'for market in korea china europe; do')
+          s=s.replace('CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia','CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe')
+          p.write_text(s)
+          PY
+      - name: Typecheck and static safety assertions
+        shell: bash
+        run: |
+          npm run typecheck
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('.github/workflows/catalog-live-daily-working-markets.yml').read_text()
+          assert s.count('for market in korea china europe; do') == 2
+          assert 'for market in korea china europe georgia; do' not in s
+          assert '- { market: georgia, source: auto_georgia_open' in s
+          assert 'CATALOG_AUDIT_MIN_COUNTS_JSON' in s
+          print('Georgia remains collect-only diagnostics; scheduled merge/publish excludes Georgia')
+          PY
+      - name: Commit validated production workflow only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/catalog-live-daily-working-markets.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Hold Georgia live writes until gallery identity verified [skip deploy]"
+          git push origin HEAD:fix/hold-georgia-live-until-gallery-verified-20260811
