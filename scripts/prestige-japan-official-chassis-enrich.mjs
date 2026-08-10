@@ -9,6 +9,8 @@ const output = process.env.PRESTIGE_OFFICIAL_OUTPUT || "prestige-japan-exact-sol
 // 3BA-DJLFS 15MB 116 PS premium-fuel variant can never be matched as the 110 PS car.
 // Diesel rules must opt in explicitly; all existing rules default to petrol.
 const RULES = [
+  ["L235S", "DAIHATSU", "ESSE", 2011, 2011, 658, 10, 58, 43, "DBA-L235S", ["https://u-catch.daihatsu.co.jp/catalog/ESSE/GRADE__10061324/"]],
+  ["ZRT272W", "TOYOTA", "AVENSIS WAGON", 2011, 2016, 1986, 20, 152, 112, "DBA-ZRT272W", ["https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201109/10070440/", "https://toyota.jp/ucar/catalog/brand-TOYOTA/car-AVEVSIS_WAGON/201510/10099909/"]],
   ["SJ5", "SUBARU", "FORESTER", 2013, 2017, 1995, 15, 148, 109, "DBA-SJ5", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10085479"]],
   ["SK5", "SUBARU", "FORESTER", 2020, 2025, 1795, 15, 177, 130, "4BA-SK5", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10132246"]],
   ["SK9", "SUBARU", "FORESTER", 2018, 2020, 2498, 15, 184, 136, "5BA-SK9", ["https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10124779"]],
