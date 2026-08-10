@@ -75,7 +75,7 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
-      /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image. */
+      /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image; detailed composition lives in the offer components. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
           width: calc(min(100vw, 1500px) - 4rem) !important;
