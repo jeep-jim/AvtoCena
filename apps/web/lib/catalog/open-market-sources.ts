@@ -456,7 +456,7 @@ export class OpenMarketAdapter implements CatalogSourceAdapter {
       trim: row.title,
       year: row.year,
       mileageKm: row.mileageKm,
-      engineCc: row.engineCc,
+      engineCc: sourceBoundEngineCc(this.sourceId, row) || row.engineCc,
       powerHp: row.powerHp,
       fuel: row.fuel,
       transmission: row.transmission,
@@ -512,6 +512,15 @@ export class OpenMarketAdapter implements CatalogSourceAdapter {
 
 function pageQuery(base: string, page: number, key = "page") { const url = new URL(base); url.searchParams.set(key, String(page)); return url.toString(); }
 function pathPage(base: string, page: number) { return page <= 1 ? base : `${base.replace(/\/$/, "")}/page/${page}`; }
+
+function sourceBoundEngineCc(sourceId: string, row: OpenRow) {
+  if (sourceId !== "guazi_china_open") return undefined;
+  const identity = `${row.detailUrl || ""} ${row.id || ""}`.toLowerCase();
+  const token = identity.match(/-(\d{2})l(?:-|\.|\/|$)/i)?.[1];
+  if (!token) return undefined;
+  const cc = Math.round(Number(token) * 100);
+  return cc >= 500 && cc <= 10_000 ? cc : undefined;
+}
 
 const japanConfigs: OpenMarketSourceConfig[] = [
   { sourceId: "beforward_japan_open", market: "japan", label: "BE FORWARD Japan", baseUrl: "https://www.beforward.jp", currency: "USD", detailPattern: /\/(?:auto|stocklist)\/[^?#]*[A-Z]{1,4}\d{4,}/i, listUrls: (p) => [`https://www.beforward.jp/stocklist/stock_country%3D47/page%3D${p}/sortkey%3Dn`, `https://www.beforward.jp/stocklist/page%3D${p}/sortkey%3Dn`] },
