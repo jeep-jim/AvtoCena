@@ -41,6 +41,7 @@ jobs:
           node --check scripts/catalog-live-recovery-direct-exact.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
           node --check scripts/catalog-live-recovery-publish-batch.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
           node --import tsx --test tests/auto-georgia-price.test.ts
           npm run typecheck
 
@@ -76,7 +77,7 @@ jobs:
     needs: [validate, collect]
     if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -89,6 +90,11 @@ jobs:
           pattern: catalog-direct-recovery-*
           path: recovery-input
           merge-multiple: true
+      - name: Snapshot all seven markets before batch write
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-direct-before-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Publish UAE and Georgia in one atomic generation
         env:
           RECOVERY_BATCH_MARKETS: uae,georgia
@@ -96,10 +102,38 @@ jobs:
           RECOVERY_BATCH_REPORT: catalog-direct-recovery-batch-publish-report.json
           RECOVERY_PUBLISH_MAX: "3000"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+      - name: Audit all seven markets after batch write
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-direct-after-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Assert non-target markets preserved and global invariants
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const before = JSON.parse(fs.readFileSync('catalog-direct-before-all7.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
+          const preserved = ['korea','china','japan','europe','kyrgyzstan'];
+          for (const market of preserved) {
+            const a = Number(before.markets?.[market]?.count || 0);
+            const b = Number(after.markets?.[market]?.count || 0);
+            if (a !== b) throw new Error(`cross_market_loss:${market}:${a}->${b}`);
+          }
+          for (const [market, stats] of Object.entries(after.markets || {})) {
+            if (Number(stats.olderThan15Count || 0) !== 0) throw new Error(`older_than_15:${market}`);
+            if (Number(stats.nonPositiveSourcePriceCount || 0) !== 0) throw new Error(`nonpositive_source_price:${market}`);
+            if (Number(stats.nonVehicleCount || 0) !== 0) throw new Error(`nonvehicle:${market}`);
+            if (Number(stats.maxPerExactModel || 0) > 20) throw new Error(`model_cap:${market}:${stats.maxPerExactModel}`);
+          }
+          console.log({preserved:Object.fromEntries(preserved.map(m=>[m,after.markets[m].count])), uae:after.markets.uae, georgia:after.markets.georgia});
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-direct-recovery-publish-reports
-          path: catalog-direct-recovery-batch-publish-report.json
+          path: |
+            catalog-direct-recovery-batch-publish-report.json
+            catalog-direct-before-all7.json
+            catalog-direct-after-all7.json
           if-no-files-found: warn
           retention-days: 3
