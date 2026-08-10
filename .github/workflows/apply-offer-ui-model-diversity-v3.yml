@@ -1,4 +1,4 @@
-name: Apply offer UI and balanced model catalog v3
+name: Hotfix China public titles and home model diversity
 
 on:
   workflow_dispatch:
@@ -12,10 +12,14 @@ permissions:
   contents: write
   actions: write
 
+concurrency:
+  group: ui-hotfix-china-home-diversity
+  cancel-in-progress: false
+
 jobs:
   patch:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,52 +30,231 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Reuse verified v2 patch body
+      - name: Patch China display labels and home market round-robin
         shell: bash
         run: |
-          python - <<'PYRUN'
+          python - <<'PY'
           from pathlib import Path
-          src = Path('.github/workflows/apply-offer-ui-model-diversity-v2.yml').read_text()
-          marker = "          python - <<'PY'\n"
-          start = src.index(marker) + len(marker)
-          end = src.index("\n          PY", start)
-          body = src[start:end]
-          body = "\n".join(line[10:] if line.startswith("          ") else line for line in body.splitlines()) + "\n"
-          Path('/tmp/apply_offer_diversity.py').write_text(body)
-          PYRUN
-          python /tmp/apply_offer_diversity.py
 
-      - name: Verify scripts and TypeScript
+          presentation = Path('apps/web/lib/catalog/presentation.ts')
+          text = presentation.read_text()
+
+          brand_marker = '  [/雷克萨斯/g, "Lexus "],\n'
+          extra = '''  [/上汽跃进/g, "Yuejin "],
+  [/新龙马汽车/g, "New Longma "],
+  [/东风风行/g, "Forthing "],
+  [/北京汽车制造厂/g, "BAW "],
+  [/北京越野/g, "BAIC "],
+  [/江汽集团/g, "JAC "],
+  [/江淮瑞风/g, "JAC Refine "],
+  [/东风风度/g, "Dongfeng Fengdu "],
+  [/中国重汽/g, "Sinotruk "],
+  [/吉利汽车/g, "Geely "],
+  [/长城汽车/g, "Great Wall "],
+  [/东风/g, "Dongfeng "],
+  [/大通/g, "Maxus "],
+  [/五十铃/g, "Isuzu "],
+  [/福田/g, "Foton "],
+  [/江铃/g, "JMC "],
+  [/中兴/g, "ZX "],
+  [/红旗/g, "Hongqi "],
+  [/捷达/g, "Jetta "],
+  [/长城/g, "Great Wall "],
+  [/大运/g, "Dayun "],
+  [/凯翼/g, "Kaiyi "],
+  [/黄海/g, "Huanghai "],
+  [/跃进/g, "Yuejin "],
+  [/帝豪/g, "Emgrand "],
+  [/菱智/g, "Lingzhi "],
+  [/凯美瑞/g, "Camry "],
+  [/雷凌/g, "Levin "],
+  [/亚洲龙/g, "Avalon "],
+  [/帕萨特/g, "Passat "],
+  [/狮铂拓界/g, "Sportage "],
+  [/卡罗拉/g, "Corolla "],
+  [/轩逸/g, "Sylphy "],
+  [/天籁/g, "Teana "],
+  [/逍客/g, "Qashqai "],
+  [/奇骏/g, "X-Trail "],
+  [/雅阁/g, "Accord "],
+  [/思域/g, "Civic "],
+  [/秦PLUS/g, "Qin PLUS "],
+  [/宋PLUS/g, "Song PLUS "],
+  [/海豹/g, "Seal "],
+  [/海豚/g, "Dolphin "],
+'''
+          if '[/上汽跃进/g, "Yuejin "]' not in text:
+              if brand_marker not in text:
+                  raise SystemExit('presentation brand marker not found')
+              text = text.replace(brand_marker, extra + brand_marker, 1)
+
+          han_marker = '''const unresolvedHanRe = /[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]/u;\n\nfunction publicTitleTrim(value: unknown) {'''
+          han_replacement = '''const unresolvedHanRe = /[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]/u;
+
+function stripUnresolvedHan(value: string) {
+  return value
+    .replace(/[\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff]+/gu, " ")
+    .replace(/\\s+/g, " ")
+    .trim();
+}
+
+function isChinaOffer(offer: any) {
+  return safeCatalogText(offer?.market).toLowerCase() === "china";
+}
+
+function chinaSourceSeriesId(offer: any) {
+  return safeCatalogText(
+    offer?.operational?.raw?.listing?.seriesId ||
+    offer?.operational?.raw?.seriesId ||
+    offer?.seriesId,
+  );
+}
+
+function publicChinaMake(offer: any) {
+  const translated = compactListingText(offer?.make);
+  const cleaned = stripUnresolvedHan(translated);
+  return cleaned || "Китайский бренд";
+}
+
+function publicChinaModel(offer: any) {
+  const translated = compactListingText(offer?.model);
+  if (translated && !unresolvedHanRe.test(translated)) return translated;
+
+  const cleaned = stripUnresolvedHan(translated);
+  const seriesId = chinaSourceSeriesId(offer);
+  const usefulLatinModel = cleaned && (
+    /[A-Za-z]{2,}[- ]?\\d+/u.test(cleaned) ||
+    /\\d+[A-Za-z]{1,}/u.test(cleaned) ||
+    /\\b(?:D-MAX|MU-X|PLUS|PRO|MAX|EV|DM-i|Hi4|PHEV|HEV|BEV)\\b/i.test(cleaned)
+  );
+
+  if (usefulLatinModel && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(cleaned)) return cleaned;
+  if (seriesId) return `серия ${seriesId}${cleaned ? ` ${cleaned}` : ""}`.trim();
+  return cleaned || "модель";
+}
+
+function publicTitleTrim(value: unknown) {'''
+          if 'function publicChinaMake(offer: any)' not in text:
+              if han_marker not in text:
+                  raise SystemExit('presentation Han marker not found')
+              text = text.replace(han_marker, han_replacement, 1)
+
+          start = text.index('export function catalogOfferTitle(offer: any) {')
+          end = text.index('export function presentCatalogOffer(offer: any) {', start)
+          title_fn = '''export function catalogOfferTitle(offer: any) {
+  const china = isChinaOffer(offer);
+  const make = china ? publicChinaMake(offer) : compactListingText(offer?.make);
+  const model = china ? publicChinaModel(offer) : compactListingText(offer?.model);
+  const rawBase = model && make && model.toLocaleLowerCase("en-US").startsWith(make.toLocaleLowerCase("en-US"))
+    ? model
+    : [make, model].filter(Boolean).join(" ").trim();
+  const base = collapseAdjacentRepeatedPhrases(stripUnresolvedHan(rawBase));
+
+  // Chinese source trim strings contain edition words, dimensions and engine codes.
+  // Keep the exact raw trim in the offer data, but never leak unresolved Han or noisy
+  // source-title fragments into the public card title.
+  let trim = china ? "" : collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
+  trim = removeLeadingPhrase(trim, base);
+  trim = removeLeadingPhrase(trim, make);
+  trim = removeLeadingPhrase(trim, model);
+  if (trim && base && trim.toLocaleLowerCase("en-US").includes(base.toLocaleLowerCase("en-US"))) {
+    trim = trim.slice(0, trim.toLocaleLowerCase("en-US").indexOf(base.toLocaleLowerCase("en-US"))).trim();
+  }
+
+  const combined = collapseAdjacentRepeatedPhrases([base, trim]
+    .filter(Boolean)
+    .join(" "))
+    .split(/\\s+/)
+    .slice(0, 16)
+    .join(" ")
+    .slice(0, 140)
+    .trim();
+
+  if (combined) return combined;
+  return `${catalogMarketName(offer?.market)} · автомобиль ${offer?.year || ""}`.trim();
+}
+
+'''
+          text = text[:start] + title_fn + text[end:]
+
+          text = text.replace(
+              '    makeLabel: compactListingText(offer?.make) || "Марка уточняется",\n',
+              '    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : compactListingText(offer?.make) || "Марка уточняется",\n',
+          )
+          text = text.replace(
+              '    modelLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",\n',
+              '    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",\n',
+          )
+          presentation.write_text(text)
+
+          home = Path('apps/web/components/home/HomePageClient.tsx')
+          home_text = home.read_text()
+          old_item = '  return { raw, id: offer.id, make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };\n}\n'
+          new_item = '  return { raw, id: offer.id, make: canonicalCatalogBrand(String(offer.makeLabel || raw.make || "")), model: String(offer.modelLabel || raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };\n}\n\nfunction balancedMarketItems(items: Item[], limit = 6) {\n  const buckets = new Map<string, Item[]>();\n  for (const item of items) {\n    const key = `${item.make.toLocaleLowerCase("en-US")}::${item.model.toLocaleLowerCase("en-US")}`;\n    const bucket = buckets.get(key);\n    if (bucket) bucket.push(item);\n    else buckets.set(key, [item]);\n  }\n\n  const groups = [...buckets.values()];\n  const output: Item[] = [];\n  for (let depth = 0; output.length < limit; depth++) {\n    let added = false;\n    for (const group of groups) {\n      const item = group[depth];\n      if (!item) continue;\n      output.push(item);\n      added = true;\n      if (output.length >= limit) break;\n    }\n    if (!added) break;\n  }\n  return output;\n}\n'
+          if 'function balancedMarketItems(items: Item[]' not in home_text:
+              if old_item not in home_text:
+                  raise SystemExit('HomePageClient toItem marker not found')
+              home_text = home_text.replace(old_item, new_item, 1)
+          else:
+              home_text = home_text.replace(
+                  'make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || "")',
+                  'make: canonicalCatalogBrand(String(offer.makeLabel || raw.make || "")), model: String(offer.modelLabel || raw.model || "")',
+              )
+
+          old_group = 'return { id, total: matches.length, items: matches.slice(0, 6) };'
+          new_group = 'return { id, total: matches.length, items: balancedMarketItems(matches, 6) };'
+          if old_group in home_text:
+              home_text = home_text.replace(old_group, new_group, 1)
+          elif new_group not in home_text:
+              raise SystemExit('HomePageClient marketGroups marker not found')
+          home.write_text(home_text)
+          PY
+
+      - name: Verify China public titles contain no Han
+        shell: bash
         run: |
-          node --check scripts/catalog-live-recovery-market.mjs
-          node --check scripts/catalog-live-recovery-publish.mjs
-          node --check scripts/catalog-live-recovery-japan-prestige.mjs
-          node --check scripts/prestige-japan-strict-partition-plan.mjs
+          npx tsx -e '
+            import { catalogOfferTitle, presentCatalogOffer } from "./apps/web/lib/catalog/presentation.ts";
+            const samples = [
+              { market:"china", make:"上汽跃进", model:"跃进超越H", trim:"2026款 500 2.5L 3600 8挡", year:2026, operational:{raw:{listing:{seriesId:"9991"}}} },
+              { market:"china", make:"新龙马汽车", model:"龙7", trim:"2021款 2.0T", year:2021, operational:{raw:{listing:{seriesId:"9992"}}} },
+              { market:"china", make:"黄海", model:"黄海翔龙", trim:"2023款 2.8T N1S", year:2023, operational:{raw:{listing:{seriesId:"9993"}}} },
+              { market:"china", make:"吉利汽车", model:"帝豪", trim:"2027款 向上 1.5L CVT豪华型", year:2027, operational:{raw:{listing:{seriesId:"3556"}}} },
+              { market:"china", make:"丰田", model:"凯美瑞", trim:"2025款 2.0L 豪华版", year:2025 },
+            ];
+            const han = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
+            for (const sample of samples) {
+              const title = catalogOfferTitle(sample);
+              const presented = presentCatalogOffer(sample);
+              console.log(title, "|", presented.makeLabel, "|", presented.modelLabel);
+              if (han.test(title) || han.test(String(presented.makeLabel)) || han.test(String(presented.modelLabel))) throw new Error(`Han leaked to public UI: ${title}`);
+            }
+          '
           npm run typecheck
 
-      - name: Commit and push only requested files
+      - name: Commit UI fix
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add \
-            'apps/web/app/(public)/cars/offer/[id]/page.tsx' \
-            apps/web/components/catalog/PriceTrend.tsx \
-            scripts/catalog-live-recovery-market.mjs \
-            scripts/catalog-live-recovery-publish.mjs \
-            scripts/catalog-live-recovery-japan-prestige.mjs \
-            scripts/prestige-japan-strict-partition-plan.mjs
-          git commit -m "Simplify offer card and balance catalog models"
-          git reset --hard HEAD
+          git add apps/web/lib/catalog/presentation.ts apps/web/components/home/HomePageClient.tsx
+          if git diff --cached --quiet; then
+            echo "No UI changes needed." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m "Fix China public titles and diversify home market cards"
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
+          echo "China titles sanitized and home market cards round-robin by exact make+model." >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Deploy UI and resume all-market collection
+      - name: Deploy UI only
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
           set -euo pipefail
           gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-yandex.yml/dispatches" -f ref=main
-          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-6-markets.yml/dispatches" -f ref=main
-          gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-v6-prestige-up-to-30k.yml/dispatches" -f ref=main
-          echo "Dispatched deploy, six-market recovery, and diversified Japan sold-results collection." >> "$GITHUB_STEP_SUMMARY"
+          echo "UI deploy dispatched. No catalog writer was dispatched." >> "$GITHUB_STEP_SUMMARY"
