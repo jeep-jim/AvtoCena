@@ -1,0 +1,254 @@
+name: One-shot offer banner + live brands
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-offer-banner-live-brands.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oneshot-offer-banner-live-brands
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Apply targeted UI and catalog facet changes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          def replace_once(path, old, new, label):
+              p = Path(path)
+              text = p.read_text()
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected exactly 1 match in {path}, found {count}")
+              p.write_text(text.replace(old, new, 1))
+              print(f"patched {label}: {path}")
+
+          # 1) Move the existing generic lead banner off /cars and mount it
+          #    at the very bottom of an offer page, after the similar cars.
+          path = "apps/web/components/leads/PublicLeadCaptureV2.tsx"
+          replace_once(
+              path,
+              'type HostKind = "home" | "catalog" | "brand";',
+              'type HostKind = "home" | "brand" | "offer";',
+              "lead host type",
+          )
+          replace_once(
+              path,
+              '      if (pathname === "/") targets.push({ kind: "home", parent: document.querySelector<HTMLElement>("main.ac-home-page > div.mx-auto") });\n      if (pathname === "/cars") targets.push({ kind: "catalog", parent: document.querySelector<HTMLElement>("main.ac-catalog-page > section") });\n      if (/^\\/cars\\/brand\\/[^/]+\\/?$/.test(pathname)) targets.push({ kind: "brand", parent: document.querySelector<HTMLElement>("main.ac-brand-catalog-page > section") });',
+              '      if (pathname === "/") targets.push({ kind: "home", parent: document.querySelector<HTMLElement>("main.ac-home-page > div.mx-auto") });\n      if (/^\\/cars\\/brand\\/[^/]+\\/?$/.test(pathname)) targets.push({ kind: "brand", parent: document.querySelector<HTMLElement>("main.ac-brand-catalog-page > section") });\n      if (/^\\/cars\\/offer\\/[^/]+\\/?$/.test(pathname)) targets.push({ kind: "offer", parent: document.querySelector<HTMLElement>("main.ac-offer-page > section") });',
+              "lead host placement",
+          )
+          replace_once(
+              path,
+              '  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const brand = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\\s+под ключ$/i, "") : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car: brand }); }} />, host.node))}',
+              '  return <>{hosts.map((host) => createPortal(<GenericLeadBanner kind={host.kind} onOpen={() => { const car = host.kind === "brand" ? cleanText(document.querySelector<HTMLElement>("main.ac-brand-catalog-page h1")?.textContent).replace(/\\s+под ключ$/i, "") : host.kind === "offer" ? cleanText(document.querySelector<HTMLElement>("main.ac-offer-page h1")?.textContent) : ""; setRequest({ mode: "generic", source: `${host.kind}_lead_banner`, car }); }} />, host.node))}',
+              "lead banner request context",
+          )
+
+          # 2) Brand rail must render only brands explicitly passed as live/available.
+          path = "apps/web/components/catalog/BrandLogoRail.tsx"
+          replace_once(
+              path,
+              '  const allBrands = useMemo(() => CATALOG_BRANDS.map((brand) => brand.name), []);\n  const orderedBrands = useMemo(() => {\n    const active = new Set(activeBrands.map((brand) => brand.toLocaleLowerCase("en-US")));\n    return [...activeBrands, ...allBrands.filter((brand) => !active.has(brand.toLocaleLowerCase("en-US")))];\n  }, [activeBrands, allBrands]);\n  const filtered = useMemo(() => {\n    const normalized = query.trim().toLocaleLowerCase("ru-RU");\n    return normalized ? allBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : allBrands;\n  }, [allBrands, query]);',
+              '  const orderedBrands = activeBrands;\n  const filtered = useMemo(() => {\n    const normalized = query.trim().toLocaleLowerCase("ru-RU");\n    return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;\n  }, [activeBrands, query]);',
+              "brand rail live-only list",
+          )
+
+          # 3) The reserve make knowledge remains available for model search, but
+          #    scope=makes used by the homepage must return only live catalog makes.
+          path = "apps/web/app/api/catalog/models/route.ts"
+          replace_once(
+              path,
+              'import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";',
+              'import { readCatalogFacets } from "@/lib/catalog/storage";\nimport { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";',
+              "models route live facet import",
+          )
+          replace_once(
+              path,
+              '      const facets = await vehicleKnowledgeFacets();',
+              '      const facets = await readCatalogFacets();',
+              "models route live makes",
+          )
+
+          # 4) Catalog facets: brands are derived only from current public offers,
+          #    and when filters are active the brand set follows those filters.
+          path = "apps/web/lib/catalog/storage.ts"
+          replace_once(
+              path,
+              'import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery, vehicleKnowledgeFacets } from "./vehicle-knowledge";',
+              'import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";',
+              "storage knowledge import",
+          )
+          p = Path(path)
+          text = p.read_text()
+          pattern = re.compile(r'export async function readCatalogFacets\(.*?\n}\n\nasync function persistInternalCatalog', re.S)
+          replacement = '''export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  const manifest = await readManifest();
+  const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
+  const indexed = await readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
+  const hasFilters = Boolean(params.market || params.make || params.model || params.hasPrice
+    || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
+    || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
+    || params.powerFrom || params.powerTo || params.fuel || params.bodyType
+    || params.transmission || params.drive || params.auctionGrade);
+
+  if (!hasFilters) {
+    return {
+      ...indexed,
+      generationId: manifest.generationId,
+      makes: uniqueText(indexed.makes || []).sort((a, b) => a.localeCompare(b, "ru")),
+      models: [],
+      markets: [...PUBLIC_CATALOG_MARKETS],
+    };
+  }
+
+  const marketIds = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+  const rows = (await Promise.all(marketIds.map((market) => readMarketOffers(market)))).flat().filter(isPublicOffer);
+  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
+  let modelKeys: Set<string> | null = null;
+
+  if (params.model) {
+    const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
+    const candidates = matches.length
+      ? matches.map((match) => ({ make: match.make, model: match.model }))
+      : params.make ? [{ make: params.make, model: params.model }] : [];
+    modelKeys = new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
+  }
+
+  const offers = rows.filter((offer) => {
+    if (params.make && lower(offer.make) !== lower(params.make)) return false;
+    if (params.model && (!modelKeys?.size || !modelKeys.has(`${lower(offer.make)}:${lower(offer.model)}`))) return false;
+    if (params.hasPrice) {
+      const value = Number(offer.totalRub || 0) > 0 ? "yes" : "no";
+      if (value !== params.hasPrice) return false;
+    }
+    if (params.budgetFrom && (offer.totalRub || 0) < params.budgetFrom) return false;
+    if (params.budgetTo && (offer.totalRub || Infinity) > params.budgetTo) return false;
+    if (params.yearFrom && offer.year < params.yearFrom) return false;
+    if (params.yearTo && offer.year > params.yearTo) return false;
+    if (params.mileageFrom && (offer.mileageKm || 0) < params.mileageFrom) return false;
+    if (params.mileageTo && (offer.mileageKm || Infinity) > params.mileageTo) return false;
+    if (params.engineFrom && (offer.engineCc || 0) < params.engineFrom) return false;
+    if (params.engineTo && (offer.engineCc || Infinity) > params.engineTo) return false;
+    if (params.powerFrom && (offer.powerHp || 0) < params.powerFrom) return false;
+    if (params.powerTo && (offer.powerHp || Infinity) > params.powerTo) return false;
+    if (params.fuel && lower(offer.fuel) !== lower(params.fuel)) return false;
+    if (params.bodyType && lower(offer.bodyType) !== lower(params.bodyType)) return false;
+    if (params.transmission && lower(offer.transmission) !== lower(params.transmission)) return false;
+    if (params.drive && lower(offer.drive) !== lower(params.drive)) return false;
+    if (params.auctionGrade && lower(offer.auctionGrade) !== lower(params.auctionGrade)) return false;
+    return true;
+  });
+
+  const values = (selector: (offer: VehicleOffer) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
+  const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()]
+    .filter((item) => item.make && item.model)
+    .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
+
+  return {
+    generationId: manifest.generationId,
+    makes: values((offer) => offer.make),
+    models: offerModels,
+    markets: [...PUBLIC_CATALOG_MARKETS],
+    bodyTypes: values((offer) => offer.bodyType),
+    fuels: values((offer) => offer.fuel),
+    transmissions: values((offer) => offer.transmission),
+    drives: values((offer) => offer.drive),
+  };
+}
+
+async function persistInternalCatalog'''
+          text, count = pattern.subn(lambda _: replacement, text, count=1)
+          if count != 1:
+              raise SystemExit(f"readCatalogFacets replacement: expected 1 block, found {count}")
+          p.write_text(text)
+          print("patched filtered live catalog facets")
+
+          # 5) Pass all active catalog filters into facet computation.
+          replace_once(
+              "apps/web/app/(public)/cars/page.tsx",
+              '    readCatalogFacets({ market: selectedMarket || undefined, make: common.make || undefined }),',
+              '    readCatalogFacets({ ...common, market: selectedMarket || undefined }),',
+              "cars page filtered facets",
+          )
+          replace_once(
+              "apps/web/app/(public)/results/results-impl.tsx",
+              '    readCatalogFacets({ market: market || undefined, make: make || undefined }),',
+              '    readCatalogFacets({ ...searchInput, market: market || undefined }),',
+              "results page filtered facets",
+          )
+
+          # 6) Homepage keeps the complete live make list; when EV mode is active,
+          #    use the fully loaded EV offers so non-EV brands cannot leak in.
+          path = "apps/web/components/home/HomePageClient.tsx"
+          replace_once(
+              path,
+              '  const makeOptions = useMemo<Option[]>(() => { const values = new Map<string, string>(); [...knowledgeMakes, ...availableItems.map((item) => item.make)].forEach((item) => values.set(item.toLocaleLowerCase("en-US"), item)); return [{ value: "", label: "Марка" }, ...[...values.values()].sort((a, b) => a.localeCompare(b, "ru")).map((label) => ({ value: label, label }))]; }, [availableItems, knowledgeMakes]);',
+              '  const makeOptions = useMemo<Option[]>(() => { const values = new Map<string, string>(); const source = electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make); source.forEach((item) => values.set(item.toLocaleLowerCase("en-US"), item)); return [{ value: "", label: "Марка" }, ...[...values.values()].sort((a, b) => a.localeCompare(b, "ru")).map((label) => ({ value: label, label }))]; }, [availableItems, electricOnly, knowledgeMakes]);',
+              "homepage live make options",
+          )
+          replace_once(
+              path,
+              '        <BrandLogoRail brands={knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />',
+              '        <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />',
+              "homepage live brand rail",
+          )
+
+          # Guard the recently completed buyer gallery from accidental edits.
+          buyer = Path("apps/web/components/home/BuyerGallery.tsx")
+          import subprocess
+          blob = subprocess.check_output(["git", "hash-object", str(buyer)], text=True).strip()
+          if blob != "11511c3184cb80776feec332a06e7191d5ad618c":
+              raise SystemExit(f"BuyerGallery.tsx changed unexpectedly: {blob}")
+          print("BuyerGallery.tsx guard OK", blob)
+          PY
+
+      - name: Install and typecheck
+        run: |
+          npm ci
+          npm run typecheck
+
+      - name: Verify targeted diff
+        run: |
+          git diff --check
+          git diff --name-only
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+
+      - name: Commit once and remove this workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-offer-banner-live-brands.yml
+          git add apps/web/components/leads/PublicLeadCaptureV2.tsx \
+                  apps/web/components/catalog/BrandLogoRail.tsx \
+                  apps/web/app/api/catalog/models/route.ts \
+                  apps/web/lib/catalog/storage.ts \
+                  'apps/web/app/(public)/cars/page.tsx' \
+                  'apps/web/app/(public)/results/results-impl.tsx' \
+                  apps/web/components/home/HomePageClient.tsx
+          git commit -m "fix: move fallback lead CTA and hide unavailable brands"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
