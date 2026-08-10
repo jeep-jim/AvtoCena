@@ -1,0 +1,30 @@
+name: Validate Georgia direct recovery quarantine
+
+on:
+  push:
+    branches: [fix/direct-recovery-shared-writer-georgia-identity-20260811]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/direct-recovery-shared-writer-georgia-identity-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck and Georgia identity smoke
+        run: |
+          npm run typecheck
+          node --import tsx --test tests/auto-georgia-price.test.ts
+      - name: Verify live publish is quarantined
+        run: |
+          grep -q 'if: \${{ false }}' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q 'group: catalog-live-recovery-uae-georgia-direct' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q 'cancel-in-progress: true' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
