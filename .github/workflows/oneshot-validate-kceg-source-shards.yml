@@ -46,7 +46,7 @@ jobs:
       - name: Probe every configured KCEG shard list endpoint without publishing
         shell: bash
         run: |
-          cat > /tmp/probe-kceg.mts <<'TS'
+          cat > probe-kceg.mts <<'TS'
           import fs from 'node:fs/promises';
           import { catalogImportSources } from './apps/web/lib/catalog/importer.ts';
           const ids=['encar_direct','kcar_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open'];
@@ -69,7 +69,8 @@ jobs:
           console.log(JSON.stringify(results,null,2));
           if(results.some(x=>x.error==='adapter_missing')) process.exit(2);
           TS
-          npx tsx /tmp/probe-kceg.mts
+          npx tsx probe-kceg.mts
+          rm probe-kceg.mts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
