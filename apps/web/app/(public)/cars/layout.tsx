@@ -75,6 +75,11 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
+      /* Softer price-rise surface on the dark theme, shared by phone and desktop. */
+      html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-up {
+        background: #42272b !important;
+      }
+
       /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image; responsive financing UI stays inside the offer components. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
