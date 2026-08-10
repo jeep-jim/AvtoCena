@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { isJapanCommercialAuctionOffer } from "../apps/web/lib/catalog/japan-commercial.ts";
 
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
@@ -19,7 +20,6 @@ const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVER
 const minYear = new Date().getFullYear() - 15;
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const EXACT_IMAGE = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
-const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|dutro|forward|giga|elf|profia)\b/i;
 
 function exactCalculation(offer) {
   const total = Number(offer?.totalRub || 0);
@@ -191,7 +191,7 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   if (sourceRaw.currentStatus !== "Sold" || Number(sourceRaw.finalPriceJpy || 0) !== Number(offer.sourcePrice || 0) || offer.sourceCurrency !== "JPY") { reject("final_price"); return null; }
   if (!EXACT_URL.test(String(op.sourceUrl || ""))) { reject("source_url"); return null; }
   if (offer.images.length < 5 || offer.images.some((image) => !EXACT_IMAGE.test(String(image?.url || "")))) { reject("images"); return null; }
-  if (COMMERCIAL_RE.test(`${offer.make || ""} ${offer.model || ""} ${offer.trim || ""}`)) { reject("commercial"); return null; }
+  if (isJapanCommercialAuctionOffer(offer)) { reject("commercial"); return null; }
   offer = await uniqueVariantEnrich(offer);
   offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
   if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }
