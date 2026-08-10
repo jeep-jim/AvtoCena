@@ -1,0 +1,96 @@
+name: Validate Japan official-only fallback enrichment
+
+on:
+  push:
+    branches: [fix/japan-official-variant-only-20260810]
+    paths:
+      - .github/workflows/validate-japan-official-variant-only.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/japan-official-variant-only-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        run: python3 scripts/patch-japan-official-variant-only.py
+      - name: Typecheck and syntax
+        run: |
+          npm run typecheck
+          node --check scripts/catalog-live-recovery-japan-prestige.mjs
+          grep -F '["manufacturer", "official_registry"]' scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Download current repaired strict Prestige artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: "31414742813"
+        run: |
+          set -euo pipefail
+          artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name == "prestige-japan-exact-sold-repaired") | [.created_at,.id] | @tsv' | sort | tail -n1 | cut -f2)"
+          test -n "$artifact_id"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > prestige.zip
+          mkdir -p prestige-input
+          unzip -q prestige.zip -d prestige-input
+          source_file="$(find prestige-input -type f -name 'prestige-japan-exact-sold-repaired.json' | head -n1)"
+          test -s "$source_file"
+          echo "PRESTIGE_RECOVERY_INPUT=$source_file" >> "$GITHUB_ENV"
+      - name: NO-PUBLISH official chassis enrichment
+        run: |
+          export PRESTIGE_OFFICIAL_INPUT="$PRESTIGE_RECOVERY_INPUT"
+          export PRESTIGE_OFFICIAL_OUTPUT="prestige-japan-official-validation.json"
+          node scripts/prestige-japan-official-chassis-enrich.mjs
+          test -s "$PRESTIGE_OFFICIAL_OUTPUT"
+          echo "PRESTIGE_RECOVERY_INPUT=$PRESTIGE_OFFICIAL_OUTPUT" >> "$GITHUB_ENV"
+      - name: NO-PUBLISH strict calculated sample
+        env:
+          PRESTIGE_RECOVERY_OUTPUT: catalog-rebuild-japan-validation.json
+          PRESTIGE_RECOVERY_TARGET: "120"
+          PRESTIGE_RECOVERY_CONCURRENCY: "12"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          RECOVERY_PREFERRED_MAX_RUB: "8000000"
+        run: npx tsx scripts/catalog-live-recovery-japan-prestige.mjs
+      - name: Assert fallback variants are official-only and strict source identity holds
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const {readVehicleKnowledgeVariants}=await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const {isJapanCommercialAuctionOffer}=await import('./apps/web/lib/catalog/japan-commercial.ts');
+          const p=JSON.parse(fs.readFileSync('catalog-rebuild-japan-validation.json','utf8'));
+          const rows=Array.isArray(p?.offers)?p.offers:[];
+          if(!rows.length) throw new Error('no calculated validation rows');
+          const variants=await readVehicleKnowledgeVariants();
+          const byId=new Map(variants.map(v=>[v.id,v]));
+          const badVariantIds=[]; const badRows=[];
+          for(const o of rows){
+            if(isJapanCommercialAuctionOffer(o)) badRows.push(`commercial:${o.make} ${o.model}`);
+            if(o.market!=='japan'||o.sourceId!=='prestige_japan_auctions_open') badRows.push(`source:${o.id}`);
+            if(!(Number(o.sourcePrice)>0)||o.sourceCurrency!=='JPY') badRows.push(`price:${o.id}`);
+            if(!/^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=/.test(String(o.operational?.sourceUrl||''))) badRows.push(`url:${o.id}`);
+            if(!Array.isArray(o.images)||o.images.length<5||o.images.some(i=>!/^https:\/\/(?:\d+\.)?ajes\.com\/imgs\//i.test(String(i?.url||'')))) badRows.push(`images:${o.id}`);
+            for(const id of o.operational?.raw?.recoveryVariantIds||[]){ const v=byId.get(id); if(!v||!['manufacturer','official_registry'].includes(String(v.sourceType||'').toLowerCase())) badVariantIds.push({offer:o.id,id,sourceType:v?.sourceType}); }
+          }
+          console.log(JSON.stringify({count:rows.length,report:p.report,badVariantIds,badRows},null,2));
+          if(badVariantIds.length||badRows.length) process.exit(1);
+          NODE
+      - name: Commit validated production script only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-japan-prestige.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Restrict Japan fallback variants to official sources [skip actions]"
+          git push origin HEAD:fix/japan-official-variant-only-20260810
