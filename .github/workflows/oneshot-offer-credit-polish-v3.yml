@@ -45,8 +45,10 @@ jobs:
           git add apps/web/components/catalog/OfferContactActions.tsx
           git rm .github/workflows/oneshot-offer-credit-polish-v2.yml .github/workflows/oneshot-offer-credit-polish-v3.yml scripts/oneshot_offer_credit_polish_v3.py
           git commit -m 'Polish desktop specs and credit button contrast'
+          git reset --hard HEAD
+          git clean -fd
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
 
-# trigger v3
+# trigger v4
