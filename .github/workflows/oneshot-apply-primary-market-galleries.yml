@@ -13,7 +13,7 @@ permissions:
 jobs:
   validate-and-apply:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,11 +23,23 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Apply source gallery patch
-        run: python .github/patches/fix-primary-market-galleries.py
+      - name: Apply gallery patch but hold unverified KCar change
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .github/patches/fix-primary-market-galleries.py
+          git checkout -- apps/web/lib/catalog/kcar-exact-source.ts
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/tmp-gallery-source-smoke.ts')
+          text = p.read_text()
+          start = text.index('const kcarPage:')
+          end = text.index('const ahOffer:', start)
+          p.write_text(text[:start] + text[end:])
+          PY
       - name: Verify TypeScript
         run: npm run typecheck
-      - name: Live source smoke without publishing
+      - name: Live Encar and exact Autohome smoke without publishing
         env:
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
@@ -37,7 +49,7 @@ jobs:
         run: |
           mv scripts/tmp-gallery-source-smoke.ts scripts/tmp-gallery-source-smoke.mts
           npx tsx scripts/tmp-gallery-source-smoke.mts
-      - name: Commit verified source changes only
+      - name: Commit verified Encar and Autohome source changes
         shell: bash
         run: |
           set -euo pipefail
@@ -51,13 +63,12 @@ jobs:
           git add \
             apps/web/lib/catalog/adapters.ts \
             apps/web/lib/catalog/encar-complete-source.ts \
-            apps/web/lib/catalog/kcar-exact-source.ts \
             apps/web/lib/catalog/autohome-new-exact-source.ts \
             .github/workflows/oneshot-fix-market-galleries.yml \
             .github/workflows/oneshot-fix-market-galleries-v2.yml \
             .github/workflows/oneshot-apply-primary-market-galleries.yml \
             .github/patches/fix-primary-market-galleries.py
-          git commit -m "Use primary full source galleries for Korea and China"
+          git commit -m "Use source primary galleries for Encar and Autohome"
           git reset --hard HEAD
           git fetch origin main
           git rebase origin/main
