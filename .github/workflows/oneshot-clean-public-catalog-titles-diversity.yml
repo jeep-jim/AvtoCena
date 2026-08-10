@@ -135,6 +135,8 @@ jobs:
             'scripts/catalog-live-recovery-publish.mjs' \
             '.github/workflows/oneshot-clean-public-catalog-titles-diversity.yml'
           git commit -m "Clean catalog titles and diversify visible models"
+          git reset --hard HEAD
+          git clean -fd
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
