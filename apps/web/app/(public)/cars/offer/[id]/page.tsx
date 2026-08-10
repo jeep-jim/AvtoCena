@@ -79,6 +79,29 @@ function safeExternalUrl(value: unknown) {
   }
 }
 
+function similarModelKey(offer: any) {
+  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
+  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
+}
+
+function diverseSimilarOffers(rows: any[], current: any, limit = 12) {
+  const currentKey = similarModelKey(current);
+  const seen = new Set<string>(currentKey ? [currentKey] : []);
+  const differentModels: any[] = [];
+  const repeats: any[] = [];
+  for (const row of rows) {
+    const key = similarModelKey(row);
+    if (key && !seen.has(key)) {
+      seen.add(key);
+      differentModels.push(row);
+    } else {
+      repeats.push(row);
+    }
+  }
+  return [...differentModels, ...repeats].slice(0, limit);
+}
+
 type BreakdownLine = { id?: string; title: string; amountRub: number };
 function customerBreakdownTitle(id: string, title: string) {
   if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
@@ -149,8 +172,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
-  const similarResult = await searchOffers({ market: raw.market, make: raw.make, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 16, sort: "updatedAt" });
-  const similar = similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)).slice(0, 12);
+  const similarResult = await searchOffers({ market: raw.market, budgetFrom: visibleRub ? Math.round(visibleRub * 0.75) : undefined, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 48, sort: "updatedAt" });
+  const similar = diverseSimilarOffers(similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)), raw, 12);
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
@@ -220,7 +243,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}&make=${encodeURIComponent(raw.make)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>
+      <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}

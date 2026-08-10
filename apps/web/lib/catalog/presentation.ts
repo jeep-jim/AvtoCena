@@ -43,6 +43,7 @@ const directPhrases: Array<[RegExp, string]> = [
   [/吉利/g, "Geely "],
   [/长安/g, "Changan "],
   [/奇瑞/g, "Chery "],
+  [/开瑞/g, "Karry "],
   [/哈弗/g, "Haval "],
   [/广汽/g, "GAC "],
   [/理想/g, "Li Auto "],
@@ -182,6 +183,20 @@ function compactListingText(value: unknown) {
     .trim();
 }
 
+const unresolvedHanRe = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
+
+function publicTitleTrim(value: unknown) {
+  const original = compactListingText(value);
+  if (!original || !unresolvedHanRe.test(original)) return original;
+  const cleaned = original
+    .replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  // Keep only a factual non-CJK remainder (for example "2024 1.6L").
+  // If the source trim contains nothing safely readable, omit it from the public title.
+  return /[A-Za-zА-Яа-яЁё]/u.test(cleaned) ? cleaned : "";
+}
+
 export function catalogMarketName(value: unknown) {
   const key = safeCatalogText(value).toLowerCase();
   return marketNames[key] || translateCatalogText(value) || "Рынок уточняется";
@@ -297,7 +312,7 @@ export function catalogOfferTitle(offer: any) {
     : [make, model].filter(Boolean).join(" ").trim();
   const base = collapseAdjacentRepeatedPhrases(rawBase);
 
-  let trim = collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim));
+  let trim = collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
   trim = removeLeadingPhrase(trim, model);
@@ -327,7 +342,7 @@ export function presentCatalogOffer(offer: any) {
     title: catalogOfferTitle(offer),
     makeLabel: compactListingText(offer?.make) || "Марка уточняется",
     modelLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",
-    trimLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.trim)),
+    trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),
     fuelLabel: catalogFuelName(offer?.fuel),

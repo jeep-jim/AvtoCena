@@ -83,6 +83,35 @@ function businessOrder(left: any, right: any) {
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
 
+function catalogModelGroupKey(offer: any) {
+  const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
+  const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
+  return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
+}
+
+function balanceBusinessRows(rows: any[]) {
+  const sorted = [...rows].sort(businessOrder);
+  const groups = new Map<string, any[]>();
+  for (const row of sorted) {
+    const key = catalogModelGroupKey(row);
+    const group = groups.get(key) || [];
+    group.push(row);
+    groups.set(key, group);
+  }
+  const balanced: any[] = [];
+  for (let depth = 0; balanced.length < sorted.length; depth++) {
+    let added = false;
+    for (const group of groups.values()) {
+      const row = group[depth];
+      if (!row) continue;
+      balanced.push(row);
+      added = true;
+    }
+    if (!added) break;
+  }
+  return balanced;
+}
+
 function matchesFilters(offer: any, common: any) {
   const make = String(offer.make || "").toLocaleLowerCase("ru-RU");
   const model = String(offer.model || "").toLocaleLowerCase("ru-RU");
@@ -147,22 +176,22 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       }
 
       if (!hasFilters) {
-        const rows = (await readMarketOffers(market.id))
-          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer))
-          .sort(businessOrder);
+        const rows = balanceBusinessRows((await readMarketOffers(market.id))
+          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer)));
         const start = (page - 1) * pageSize;
         const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));
         return {
           ...market,
-          items: visible.sort(businessOrder).map(publicOffer),
+          items: balanceBusinessRows(visible).map(publicOffer),
           total: rows.length,
           page,
           pageSize,
         };
       }
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
-      const repriced = await applyActiveBusinessPricingBatch(result.items as any[]);
-      return { ...market, items: repriced.sort(businessOrder), total: result.total, page: result.page, pageSize: result.pageSize };
+      const pageRows = common.model ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);
+      const repriced = await applyActiveBusinessPricingBatch(pageRows);
+      return { ...market, items: common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced), total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
