@@ -4,11 +4,12 @@ import { notFound } from "next/navigation";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { BrandModelDirectory } from "@/components/catalog/BrandModelDirectory";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { canonicalCatalogBrand, catalogBrandBySlug } from "@/lib/catalog/brands";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
-import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
 
@@ -90,7 +91,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
       <section className="mt-7 rounded-[1.6rem] bg-[var(--ac-surface)] p-5 md:p-6">
         <div className="flex flex-wrap items-center gap-3">
           <h2 className="mr-auto text-xl font-black md:text-2xl">Где можно подобрать {brand.name}</h2>
-          {availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black">{CATALOG_MARKET_FLAGS[market]} {CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}
+          {availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}
         </div>
       </section>
 
@@ -101,7 +102,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           const label = CATALOG_MARKET_LABELS[group.market];
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
-              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><span aria-hidden="true">{CATALOG_MARKET_FLAGS[group.market]}</span><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
+              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
               <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMake)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
