@@ -50,7 +50,10 @@ function sentence(value: unknown) {
 
 function knownValue(value: unknown) {
   const normalized = sentence(value);
-  return normalized && !/уточняется|не указан|unknown|неизвест/i.test(normalized) ? normalized : "";
+  if (!normalized || /уточняется|не указан|unknown|неизвест/i.test(normalized)) return "";
+  // Never leak unresolved Chinese/Japanese/Korean source text into public specs.
+  if (/[가-힣\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u.test(normalized)) return "";
+  return normalized;
 }
 
 function driveValue(value: unknown) {
@@ -63,9 +66,9 @@ function SpecTile({ label, value, icon, info }: SpecItem) {
   return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5">
     <SpecIcon name={icon} />
     <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
-    {info ? <details className="group relative z-30 ml-auto shrink-0">
+    {info ? <details className="group static z-30 ml-auto shrink-0">
       <summary className="flex h-7 w-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/12 bg-white/10 text-xs font-black text-[var(--ac-text)] shadow-[inset_0_1px_0_rgba(255,255,255,.12)] backdrop-blur-md transition hover:bg-white/15 [&::-webkit-details-marker]:hidden" aria-label={`Что означает ${label}`}>?</summary>
-      <div className="absolute right-0 top-9 z-50 w-[min(280px,75vw)] rounded-2xl border border-white/10 bg-[var(--ac-surface)] p-4 text-left text-xs font-semibold leading-5 text-[var(--ac-muted)] shadow-2xl">{info}</div>
+      <div className="ac-spec-info-popover absolute right-0 top-[calc(100%+.5rem)] z-50 w-[min(290px,calc(100vw-2rem))] rounded-2xl border border-white/10 bg-[var(--ac-surface)] p-4 text-left text-xs font-semibold leading-5 text-[var(--ac-muted)] shadow-2xl">{info}</div>
     </details> : null}
   </div>;
 }
@@ -183,6 +186,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
+  const mileageKm = Number(o.mileageKm || 0);
+  const mileageTile = mileageKm > 0 ? { label: "Пробег", value: `${money(mileageKm)} км`, icon: "mileage" as const } : null;
   const transmissionValue = knownValue(o.transmissionLabel);
   const fuelValue = knownValue(o.fuelLabel);
   const driveLabel = driveValue(o.driveLabel);
@@ -196,7 +201,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
   const specs = (isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
-    o.mileageKm ? { label: "Пробег", value: `${money(o.mileageKm)} км`, icon: "mileage" as const } : null,
+    mileageTile,
     { label: "Силовая установка", value: "Электромотор", icon: "electricMotor" as const },
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
     powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
@@ -205,7 +210,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
   ] : [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
-    o.mileageKm ? { label: "Пробег", value: `${money(o.mileageKm)} км`, icon: "mileage" as const } : null,
+    mileageTile,
     o.engineCc ? { label: "Двигатель", value: `${money(o.engineCc)} см³`, icon: "engine" as const } : null,
     fuelValue ? { label: "Топливо", value: fuelValue, icon: "fuel" as const } : null,
     powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
@@ -229,10 +234,10 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
           <PriceTrend offer={o} label={String(raw?.calculationStatus || "") === "preliminary_power_pending" ? "Предварительно от" : "Ориентир стоимости"} priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
-          {String(raw?.calculationStatus || "") === "preliminary_power_pending" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold leading-5 text-amber-200">Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.</p> : null}
+          {String(raw?.calculationStatus || "") === "preliminary_power_pending" ? <p className="ac-preliminary-notice mt-2 rounded-2xl border border-amber-300/15 bg-amber-400/10 p-3 text-sm font-bold leading-5 text-amber-200">Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.</p> : null}
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="grid min-w-0 grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
+            <div className="ac-offer-spec-grid grid min-w-0 grid-flow-row-dense grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
@@ -255,9 +260,12 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       html[data-theme="light"] .ac-offer-page .ac-offer-form{background:#f8f9fb!important;border:1px solid rgba(30,36,48,.10)!important;box-shadow:0 14px 34px rgba(38,43,57,.10)!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input{background:#e3e7ed!important;border:1px solid #c7ced9!important;color:#171b24!important;box-shadow:none!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input::placeholder{color:#737d8e!important;opacity:1!important}
+      html[data-theme="light"] .ac-offer-page .ac-preliminary-notice{background:#fff2cc!important;border-color:#e9c56b!important;color:#704500!important;box-shadow:0 8px 24px rgba(111,75,0,.08)!important}
+      html[data-theme="light"] .ac-offer-page .ac-spec-info-popover{background:#fff!important;border-color:rgba(30,36,48,.14)!important;color:#394150!important}
+      .ac-offer-page .ac-offer-spec-grid>.ac-offer-spec-tile:last-child:nth-child(odd){grid-column:span 2}
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-price-panel.is-down{background:#cfe5d8!important}
-      @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}}
+      @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}.ac-offer-page .ac-offer-spec-tile:nth-child(odd) .ac-spec-info-popover{left:0!important;right:auto!important}.ac-offer-page .ac-offer-spec-tile:nth-child(even) .ac-spec-info-popover{left:auto!important;right:0!important}}
     ` }} />
   </main>;
 }

@@ -266,7 +266,7 @@ export function translateCatalogText(value: unknown) {
   let text = safeCatalogText(value);
   for (const [pattern, replacement] of directPhrases) text = text.replace(pattern, replacement);
   text = text
-    .replace(/[가-힣]+/g, " ")
+    .replace(/[가-힣\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
     .replace(/([0-9]{4})款/g, "$1 ")
     .replace(/\s*[-·|]+\s*/g, " ")
     .replace(/\s+/g, " ")
@@ -311,7 +311,7 @@ function chinaSourceSeriesId(offer: any) {
 function publicChinaMake(offer: any) {
   const translated = compactListingText(offer?.make);
   const cleaned = stripUnresolvedHan(translated);
-  return cleaned || "Китайский бренд";
+  return cleaned || "Марка уточняется";
 }
 
 function publicChinaModel(offer: any) {
@@ -328,7 +328,7 @@ function publicChinaModel(offer: any) {
 
   if (usefulLatinModel && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(cleaned)) return cleaned;
   if (seriesId) return `серия ${seriesId}${cleaned ? ` ${cleaned}` : ""}`.trim();
-  return cleaned || "модель";
+  return cleaned || "Модель уточняется";
 }
 
 function publicTitleTrim(value: unknown) {
@@ -400,6 +400,8 @@ export function catalogTransmissionName(value: unknown) {
   if (!raw) return "уточняется";
   const gears = Number(raw.match(/(?:^|\D)(\d{1,2})\s*挡/)?.[1] || 0);
   const label = (name: string) => gears > 0 && gears <= 12 ? `${gears}-ступ. ${name}` : name;
+  if (/电动车?单速变速箱|电动汽车单速变速箱|单速变速箱|固定齿比|固定传动比/.test(raw)) return "Одноступенчатый редуктор";
+  if (/电子无级变速|e[- ]?cvt/.test(raw)) return "вариатор (e-CVT)";
   if (/cvt|无级变速|вариатор/.test(raw)) return "вариатор";
   if (/robot|dct|dsg|双离合|робот/.test(raw)) return label("робот");
   if (/manual|(?:^|\W)mt(?:$|\W)|手动|수동/.test(raw) && !/手自一体/.test(raw)) return label("механика");
