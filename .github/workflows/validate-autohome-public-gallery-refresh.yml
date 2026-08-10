@@ -1,0 +1,52 @@
+name: Validate AutoHome public gallery refresh
+
+on:
+  push:
+    branches: [fix/autohome-public-gallery-refresh-20260810]
+    paths:
+      - .github/workflows/validate-autohome-public-gallery-refresh.yml
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_MAX_IMAGES_PER_OFFER: 30
+      GALLERY_REFRESH_LIMIT: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/autohome-public-gallery-refresh-20260810
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Refresh 40 stale public galleries without publish
+        run: npx tsx scripts/catalog-refresh-autohome-galleries.mts
+      - name: Assert reported target and full-res output
+        run: |
+          node - <<'NODE'
+          const r=require('./catalog-autohome-gallery-refresh-report.json');
+          if (!r.passed || r.refreshed < 20) throw new Error(`weak refresh ${JSON.stringify({refreshed:r.refreshed,failed:r.failed})}`);
+          const target=r.samples.find(x=>String(x.sourceOfferId)==='68589');
+          if (target && (!Array.isArray(target.after) || target.after.length < 5 || target.after.some(u=>!/https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\//i.test(u)))) throw new Error('68589 not full-res');
+          console.log({refreshed:r.refreshed,failed:r.failed,target68589:Boolean(target)});
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: autohome-public-gallery-refresh-smoke
+          path: |
+            catalog-autohome-gallery-refresh.json
+            catalog-autohome-gallery-refresh-report.json
+          retention-days: 3
