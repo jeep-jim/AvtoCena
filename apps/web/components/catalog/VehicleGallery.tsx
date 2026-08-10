@@ -237,12 +237,9 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
           <div className="relative mt-3 hidden xl:block">
-            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1 pr-14">
+            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
               {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}
             </div>
-            <button type="button" onClick={next} className="absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/38 text-white backdrop-blur transition hover:bg-black/55" aria-label="Следующее фото">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
           </div>
         </> : null}
       </div>
