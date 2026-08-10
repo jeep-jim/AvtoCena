@@ -1,4 +1,4 @@
-name: Validate Georgia direct recovery quarantine
+name: Validate Georgia direct recovery safety
 
 on:
   push:
@@ -23,8 +23,10 @@ jobs:
         run: |
           npm run typecheck
           node --import tsx --test tests/auto-georgia-price.test.ts
-      - name: Verify live publish is quarantined
+      - name: Verify manual-only shared writer serialization
         run: |
-          grep -q 'if: \${{ false }}' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          grep -q 'group: catalog-live-recovery-uae-georgia-direct' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
-          grep -q 'cancel-in-progress: true' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q 'group: catalog-live-daily-working-markets' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q 'cancel-in-progress: false' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q '^  workflow_dispatch:' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          ! grep -q '^  push:' .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          grep -q "if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'" .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
