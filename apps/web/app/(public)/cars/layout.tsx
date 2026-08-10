@@ -75,7 +75,7 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
-      /* On desktop the offer heading may use both columns, while the price panel starts level with the main photo. */
+      /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
           width: calc(min(100vw, 1500px) - 4rem) !important;
