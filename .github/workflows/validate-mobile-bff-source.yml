@@ -1,0 +1,50 @@
+name: Validate mobile.de BFF source
+on:
+  push:
+    branches: [fix/mobile-consumer-bff-20260810]
+    paths:
+      - apps/web/lib/catalog/mobile-de-exact-source.ts
+      - apps/web/lib/catalog/importer.ts
+      - .github/workflows/validate-mobile-bff-source.yml
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-consumer-bff-20260810
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: NO-PUBLISH live mobile.de adapter smoke
+        shell: bash
+        run: |
+          cat > /tmp/mobile-smoke.mts <<'TS'
+          import { MobileDeExactAdapter } from process.cwd() + '/apps/web/lib/catalog/mobile-de-exact-source.ts';
+          import { catalogImportSources } from process.cwd() + '/apps/web/lib/catalog/importer.ts';
+          const adapter = new MobileDeExactAdapter();
+          const page = await adapter.fetchPage(null);
+          const rows:any[] = page.items as any[];
+          console.log(JSON.stringify({count:rows.length,nextCursor:page.nextCursor,health:page.health,sample:rows.slice(0,3)},null,2));
+          if (rows.length < 10) throw new Error(`mobile_srp_too_few:${rows.length}`);
+          if (!rows.every(r => Number(r.price)>0 && r.currency==='EUR' && Number(r.year)>=2011 && r.make && r.model && /mobile\.de\//.test(r.sourceUrl))) throw new Error('mobile_srp_core_invalid');
+          const withPower = rows.find(r => Number(r.powerHp)>0 && Number(r.engineCc)>0) || rows[0];
+          const offer:any = adapter.normalizeOffer(withPower);
+          if (!offer) throw new Error('mobile_normalize_failed');
+          const images = await adapter.fetchImages(offer);
+          console.log(JSON.stringify({offer:{id:offer.sourceOfferId,make:offer.make,model:offer.model,year:offer.year,engineCc:offer.engineCc,powerHp:offer.powerHp,fuel:offer.fuel,transmission:offer.transmission,price:offer.sourcePrice,url:offer.operational?.sourceUrl},imageCount:images.length,images:images.slice(0,5).map((x:any)=>x.url),gallerySafetyMode:offer.operational?.gallerySafetyMode,verified:offer.operational?.photoIdentityVerified},null,2));
+          if (images.length < 5) throw new Error(`mobile_vip_gallery_too_small:${images.length}`);
+          if (!images.every((x:any)=>/^https:\/\/img\.classistatic\.de\/api\/v1\/mo-prod\/images\//i.test(String(x.url)))) throw new Error('mobile_vip_gallery_host_invalid');
+          if (!images.some((x:any)=>/rule=mo-(?:1024|1600)/i.test(String(x.url)))) throw new Error('mobile_vip_not_fullsize');
+          if (offer.operational?.photoIdentityVerified !== true || offer.operational?.gallerySafetyMode !== 'mobile_consumer_bff_exact_v1') throw new Error('mobile_vip_identity_not_verified');
+          const registered = catalogImportSources.find((s:any)=>s.sourceId==='mobile_de_open');
+          if (!registered || registered.constructor?.name !== 'MobileDeExactAdapter') throw new Error(`mobile_importer_not_replaced:${registered?.constructor?.name}`);
+          TS
+          npx tsx /tmp/mobile-smoke.mts
