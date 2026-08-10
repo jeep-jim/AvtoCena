@@ -1,0 +1,51 @@
+name: Validate Georgia exact gallery identity fix
+
+on:
+  push:
+    branches:
+      - fix/georgia-exact-gallery-ad-id-20260811
+    paths:
+      - .github/workflows/validate-georgia-exact-gallery-ad-id.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_MAX_IMAGES_PER_OFFER: 30
+  CATALOG_SOURCE_TIMEOUT_MS: 25000
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-exact-gallery-ad-id-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        run: python3 scripts/patch-georgia-exact-gallery-ad-id.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Source-only no-publish smoke
+        run: npx tsx scripts/validate-georgia-exact-gallery-ad-id.mjs
+      - name: Static safety assertions
+        run: |
+          grep -q 'autoGeorgiaImageBelongsToListing' apps/web/lib/catalog/auto-georgia-strict-source.ts
+          grep -q 'listingImageUrls(card, pageUrl, id)' apps/web/lib/catalog/auto-georgia-strict-source.ts
+          grep -q 'listingImageUrls(detail.markup, detail.response.url || detailUrl, row.id)' apps/web/lib/catalog/auto-georgia-strict-source.ts
+      - name: Commit validated production file only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/auto-georgia-strict-source.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Bind Georgia galleries to exact listing IDs [skip actions]"
+          git push origin HEAD:fix/georgia-exact-gallery-ad-id-20260811
