@@ -358,6 +358,12 @@ export function PublicLeadCaptureV2() {
   }, [pathname]);
 
   useEffect(() => {
+    if (!/^\/cars\/brand\/[^/]+\/model\/[^/]+\/?$/.test(pathname)) return;
+    const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-model-lead]"); if (!button) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-model-catalog-page h1"); const car = cleanText(heading?.textContent).replace(/\s+под заказ$/i, ""); setRequest({ mode: "generic", source: "model_calculation_request", car }); };
+    document.addEventListener("click", click, true); return () => document.removeEventListener("click", click, true);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!pathname.startsWith("/cars/offer/")) return;
     const offerId = decodeURIComponent(pathname.slice("/cars/offer/".length).split("/")[0] || ""); if (!offerId) return;
     const click = (event: MouseEvent) => { const target = event.target as HTMLElement | null; const button = target?.closest<HTMLElement>("[data-offer-action='lead']"); if (!button) return; event.preventDefault(); event.stopPropagation(); const heading = document.querySelector<HTMLElement>("main.ac-offer-page h1"); setRequest({ mode: "offer", source: "catalog_offer_request", offerId, car: cleanText(heading?.textContent) }); };

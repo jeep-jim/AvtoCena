@@ -81,7 +81,6 @@ export default async function ModelSeoLayout({ children, params }: LayoutProps) 
   const drives = unique(variants.map((row) => row.drive));
   const powers = variants.map((row) => Number(row.powerHp || 0)).filter((value) => Number.isFinite(value) && value > 0);
   const years = yearRange(model.yearFrom, model.yearTo);
-  const requestHref = `/results?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`;
   const faq = faqJsonLd(brand.name, model.model, years, engines, powers);
 
   return <>
@@ -134,7 +133,7 @@ export default async function ModelSeoLayout({ children, params }: LayoutProps) 
             <div className="text-lg font-black text-[var(--ac-text)]">Подобрать {brand.name} {model.model}</div>
             <p className="mt-2 text-sm font-medium leading-6 text-[var(--ac-muted)]">Получите расчёт под ключ или откройте доступные предложения этой модели.</p>
             <div className="mt-5 grid gap-3">
-              <Link href={requestHref} className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black">Рассчитать {brand.name} {model.model}</Link>
+              <button type="button" data-model-lead className="avto-button inline-flex min-h-12 items-center justify-center rounded-2xl px-5 text-center font-black">Рассчитать {brand.name} {model.model}</button>
               <Link href={`/cars?make=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`} className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[var(--ac-surface-3)] px-5 text-center font-black text-[var(--ac-text)] hover:text-red-500">Смотреть предложения</Link>
             </div>
           </aside>

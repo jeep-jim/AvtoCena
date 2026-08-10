@@ -199,8 +199,6 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const selectedResult = selectedMarket ? groupedMarkets[0] : undefined;
   const totalPages = selectedResult ? Math.max(1, Math.ceil(selectedResult.total / selectedResult.pageSize)) : 1;
   const currentPage = Math.min(requestedPage, totalPages);
-  const visibleFrom = selectedResult?.total ? (currentPage - 1) * selectedResult.pageSize + 1 : 0;
-  const visibleTo = selectedResult ? Math.min(currentPage * selectedResult.pageSize, selectedResult.total) : 0;
   const pages = paginationItems(currentPage, totalPages);
   const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
@@ -212,9 +210,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика Японии" : "Каталог автомобилей"}</h1>
-        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{japanStatisticsSelected
-          ? `Отыгранные лоты японских аукционов с опубликованной ценой продажи. Найдено результатов: ${total}.${selectedMarket ? ` Показаны лоты ${visibleFrom}–${visibleTo}.` : ""}`
-          : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.${selectedMarket ? ` Показаны автомобили ${visibleFrom}–${visibleTo}.` : ""}`}</p>
+        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{selectedMarket ? `Найдено автомобилей: ${total}.` : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.`}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} /></div>
       </div>
       <CatalogFilters initial={initial} facets={facets} />

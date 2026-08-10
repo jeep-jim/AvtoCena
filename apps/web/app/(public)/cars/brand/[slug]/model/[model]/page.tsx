@@ -3,12 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandBySlug } from "@/lib/catalog/brands";
 import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { readVehiclePowerKnowledge } from "@/lib/catalog/power-knowledge";
-import { CATALOG_MARKET_FLAGS, CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
 import { readVehicleKnowledgeVariants, vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
@@ -158,7 +159,6 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
   const brandFallback = offers.length ? [] : (await searchOffers({ make: brand.name, pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const otherModels = directory.filter((item) => item.id !== model.id).slice(0, 18);
-  const requestHref = `/results?brand=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`;
   const canonicalUrl = `https://avtocena.com/cars/brand/${brand.slug}/model/${model.slug}`;
   const structuredData = {
     "@context": "https://schema.org",
@@ -203,7 +203,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
             {model.knowledge.powerHp ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{rangeText(model.knowledge.powerHp, "л.с.")}</span> : null}
             {model.knowledge.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">30 мин: {rangeText(model.knowledge.power30MinKw, "кВт")}</span> : null}
           </div>
-          <Link href={requestHref} className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</Link>
+          <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Рассчитать {brand.name} {model.model}</button>
         </div>
       </header>
 
@@ -237,7 +237,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
       {grouped.length ? <div className="mt-10 space-y-12">
         {grouped.map((group) => <section key={group.market}>
           <div className="flex items-end justify-between gap-3">
-            <h2 className="flex min-w-0 items-center gap-2 text-2xl font-black md:text-4xl"><span>{CATALOG_MARKET_FLAGS[group.market]}</span><span className="min-w-0 break-words">{CATALOG_MARKET_LABELS[group.market]}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
+            <h2 className="flex min-w-0 items-center gap-2 text-2xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span className="min-w-0 break-words">{CATALOG_MARKET_LABELS[group.market]}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
             <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(brand.name)}&model=${encodeURIComponent(model.model)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
           </div>
           <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div>
@@ -245,7 +245,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
       </div> : <section className="mt-9 rounded-[1.8rem] bg-[var(--ac-surface)] p-6 md:p-8">
         <h2 className="text-2xl font-black md:text-4xl">Подберём {brand.name} {model.model}</h2>
         <p className="mt-3 max-w-4xl font-medium leading-7 text-[var(--ac-muted)]">Сейчас подходящих предложений нет. Оставьте запрос — менеджер проверит доступные варианты на семи рынках и подготовит расчёт под ключ.</p>
-        <Link href={requestHref} className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Оставить запрос на {brand.name} {model.model}</Link>
+        <button type="button" data-model-lead className="avto-button mt-5 inline-flex min-h-12 items-center rounded-2xl px-5 font-black">Оставить запрос на {brand.name} {model.model}</button>
       </section>}
 
       {!offers.length && brandFallback.length ? <section className="mt-12">
