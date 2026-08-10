@@ -9,7 +9,7 @@ type CatalogImageLike = {
   mimeType?: unknown;
 };
 
-const promoUrlPattern = /(?:^|[\/_-])(banner|bnr|campaign|promo|promotion|advert|ad_|loan|credit|warranty|guarantee|inspection|diagnosis|service|support|feature|header|footer|sprite|icon|logo|obd|low[-_]?rate|placeholder|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|tools?|camera[-_ ]?off|car[-_ ]?silhouette|dummy)(?:[\/_\-.]|$)/i;
+const promoUrlPattern = /(?:^|[\/_-])(banner|bnr|campaign|promo|promotion|advert|ad_|loan|credit|warranty|guarantee|inspection|diagnosis|service|support|feature|header|footer|sprite|icon|logo|obd|low[-_]?rate|placeholder|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|tools?|camera[-_ ]?off|car[-_ ]?silhouette|dummy|cdn[-_]?cgi|challenge[-_]?platform)(?:[\/_\-.]|$)/i;
 
 function text(value: unknown) {
   return String(value || "").trim();
@@ -35,7 +35,15 @@ function canonicalUrl(value: unknown) {
     const url = new URL(source, "https://catalog.local");
     url.hash = "";
     url.search = "";
-    return `${url.hostname.toLowerCase()}${decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/")}`;
+    const hostname = url.hostname.toLowerCase();
+    let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
+    // Mashina.kg exposes the same source photo as _small/_medium/_large.
+    // Treat those delivery-size variants as one photo identity while keeping
+    // genuinely different source hashes as separate gallery frames.
+    if (hostname === "storage.mashina.kg") {
+      pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+    }
+    return `${hostname}${pathname}`;
   } catch {
     return source.replace(/[?#].*$/, "").replace(/\/{2,}/g, "/").toLowerCase();
   }
@@ -67,6 +75,12 @@ export function catalogImageScore(image: CatalogImageLike) {
   if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 20;
   if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
   if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
+
+  // When Mashina provides several delivery sizes of one exact source photo,
+  // rank the largest rendition first. canonicalUrl() then collapses the rest.
+  if (/^https?:\/\/storage\.mashina\.kg\/.*_large\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 4;
+  else if (/^https?:\/\/storage\.mashina\.kg\/.*_medium\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 2;
+  else if (/^https?:\/\/storage\.mashina\.kg\/.*_small\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score -= 2;
 
   if (width && height) {
     if (width >= 640 && height >= 400) score += 3;
