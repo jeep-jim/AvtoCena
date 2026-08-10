@@ -6,6 +6,7 @@ on:
       - fix/japan-official-ice-power-20260810
     paths:
       - ".github/workflows/japan-official-ice-power-branch.yml"
+      - ".github/patches/apply-japan-official-ice-power.py"
   workflow_dispatch:
 
 permissions:
@@ -41,48 +42,23 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply strict branch-only Japan enrichment
-        shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/catalog-live-recovery-japan-prestige.mjs')
-          s = p.read_text()
-          old = 'const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");\nconst { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");\n'
-          new = 'const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");\nconst { findVehiclePowerKnowledge } = await import("../apps/web/lib/catalog/power-knowledge.ts");\nconst { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");\n'
-          if s.count(old) != 1: raise SystemExit('import anchor mismatch')
-          s = s.replace(old, new, 1)
-
-          old = '  const baseVariants = allVariants.filter((variant) => {\n    if (variant.active === false || variant.modelId !== match.model.id) return false;\n'
-          new = '  const baseVariants = allVariants.filter((variant) => {\n    if (variant.active === false || variant.modelId !== match.model.id) return false;\n    if (!["manufacturer", "official_registry"].includes(String(variant.sourceType || ""))) return false;\n'
-          if s.count(old) != 1: raise SystemExit('variant anchor mismatch')
-          s = s.replace(old, new, 1)
-
-          insert_anchor = '}\nasync function pool(rows, limit, worker) {'
-          helper = '''}\nasync function officialIcePowerEnrich(offer) {\n  const kind = String(offer?.powertrainKind || "");\n  if (["electric", "series_hybrid", "other_hybrid"].includes(kind)) return offer;\n  const engineCc = Number(offer?.engineCc || 0);\n  if (!(engineCc > 0) || Number(offer?.powerHp || 0) > 0) return offer;\n  const reference = await findVehiclePowerKnowledge(offer).catch(() => null);\n  if (!reference || !["manufacturer", "registry"].includes(String(reference.confidence || ""))) return offer;\n  if (["electric", "series_hybrid", "other_hybrid"].includes(String(reference.powertrainKind || ""))) return offer;\n  const referenceEngineCc = Number(reference.engineCc || 0);\n  if (!(referenceEngineCc > 0)) return offer;\n  const tolerance = Math.max(20, Number(reference.engineCcTolerance || 80));\n  if (Math.abs(referenceEngineCc - engineCc) > tolerance) return offer;\n  const powerHp = Number(reference.powerHp || 0);\n  if (!(powerHp > 0)) return offer;\n  return normalizeVehicleOfferSpecs({\n    ...offer,\n    powerHp,\n    powerKw: Number(reference.powerKw || 0) > 0 ? Number(reference.powerKw) : Math.round((powerHp / 1.359621617) * 10) / 10,\n    powerDataConfidence: "documented",\n    powerDataSource: reference.sourceUrl || `power-knowledge:${reference.id}`,\n    operational: {\n      ...(offer.operational || {}),\n      raw: {\n        ...(offer.operational?.raw || {}),\n        recoveryOfficialIcePowerReferenceId: reference.id,\n        recoveryOfficialIcePowerConfidence: reference.confidence,\n      },\n    },\n  });\n}\nasync function pool(rows, limit, worker) {'''
-          if s.count(insert_anchor) != 1: raise SystemExit('helper anchor mismatch')
-          s = s.replace(insert_anchor, helper, 1)
-
-          old = '  offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));\n  if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }\n'
-          new = '  offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));\n  offer = await officialIcePowerEnrich(offer);\n  if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }\n'
-          if s.count(old) != 1: raise SystemExit('enrich anchor mismatch')
-          s = s.replace(old, new, 1)
-
-          old = '  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,\n  rejected,\n'
-          new = '  documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,\n  officialIcePowerCount: offers.filter((offer) => Boolean(offer?.operational?.raw?.recoveryOfficialIcePowerReferenceId)).length,\n  rejected,\n'
-          if s.count(old) != 1: raise SystemExit('report anchor mismatch')
-          s = s.replace(old, new, 1)
-          p.write_text(s)
-          PY
+          python .github/patches/apply-japan-official-ice-power.py
           node --check scripts/catalog-live-recovery-japan-prestige.mjs
           npm run typecheck
       - name: Audit available official power knowledge
         shell: bash
         run: |
           cat > /tmp/audit-power.ts <<'TS'
-          import { readVehiclePowerKnowledge } from process.env.GITHUB_WORKSPACE + "/apps/web/lib/catalog/power-knowledge.ts";
-          const rows = await readVehiclePowerKnowledge();
-          const official = rows.filter((r:any) => ["manufacturer","registry"].includes(String(r.confidence || "")));
-          console.log(JSON.stringify({ total: rows.length, official: official.length, samples: official.slice(0,20).map((r:any)=>({id:r.id,make:r.make,model:r.model,yearFrom:r.yearFrom,yearTo:r.yearTo,engineCc:r.engineCc,powerHp:r.powerHp,confidence:r.confidence})) }, null, 2));
+          import { pathToFileURL } from "node:url";
+          async function main() {
+            const url = pathToFileURL(process.env.GITHUB_WORKSPACE + "/apps/web/lib/catalog/power-knowledge.ts").href;
+            const { readVehiclePowerKnowledge } = await import(url);
+            const rows = await readVehiclePowerKnowledge();
+            const official = rows.filter((r:any) => ["manufacturer","registry"].includes(String(r.confidence || "")));
+            console.log(JSON.stringify({ total: rows.length, official: official.length, samples: official.slice(0,20).map((r:any)=>({id:r.id,make:r.make,model:r.model,yearFrom:r.yearFrom,yearTo:r.yearTo,engineCc:r.engineCc,powerHp:r.powerHp,confidence:r.confidence})) }, null, 2));
+          }
+          main().catch((error) => { console.error(error); process.exit(1); });
           TS
           npx tsx /tmp/audit-power.ts
       - name: Download newest repaired Prestige aggregate
