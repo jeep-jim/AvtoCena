@@ -54,6 +54,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
   const [query, setQuery] = useState("");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
   const activeBrands = useMemo(() => {
+    // Source-localized make names (for example Korean Encar labels) are canonicalized before the live-only filter.
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
