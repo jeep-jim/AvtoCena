@@ -35,7 +35,7 @@ jobs:
       - name: Scan exact DubiCars detail rows without publishing
         shell: bash
         run: |
-          cat > .tmp-uae-dubicars-electrified.ts <<'TS'
+          cat > .tmp-uae-dubicars-electrified.mts <<'TS'
           import fs from "node:fs/promises";
           import { dubicarsUaeCurrentSource as source } from "./apps/web/lib/catalog/dubicars-current-source.ts";
           import { normalizeVehicleOfferSpecs } from "./apps/web/lib/catalog/spec-normalization.ts";
@@ -48,7 +48,8 @@ jobs:
             try{
               const page:any=await source.fetchPage(cursor);
               for(const raw of page.items||[]){
-                const offer:any=normalizeVehicleOfferSpecs(source.normalizeOffer(raw));
+                const normalized=source.normalizeOffer(raw);
+                const offer:any=normalized ? normalizeVehicleOfferSpecs(normalized) : null;
                 if(!offer) continue;
                 let calc:any=offer;
                 try { calc=normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
@@ -72,7 +73,7 @@ jobs:
           await fs.writeFile("uae-dubicars-electrified-diagnostic.json",JSON.stringify({report,rows},null,2));
           console.log(JSON.stringify(report,null,2));
           TS
-          npx tsx .tmp-uae-dubicars-electrified.ts
+          npx tsx .tmp-uae-dubicars-electrified.mts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
