@@ -1,0 +1,197 @@
+name: Apply China Autohome full-gallery quality v1
+on:
+  push:
+    branches: [fix/china-quality-scale-20260810]
+    paths: [.github/workflows/apply-china-autohome-quality-v1.yml]
+permissions:
+  contents: write
+jobs:
+  apply-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/china-quality-scale-20260810
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch exact Autohome gallery and Russian presentation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('apps/web/lib/catalog/autohome-new-exact-source.ts')
+          s = p.read_text()
+          old = 'const PRODUCT_IMAGE_RE = /^https:\\/\\/g\\.autoimg\\.cn\\/@img\\/car\\d?\\/cardfs\\/product\\/.+\\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i;'
+          new = '''const PRODUCT_IMAGE_RE = /^(?:https:\\/\\/g\\.autoimg\\.cn\\/@img\\/car\\d?\\/cardfs\\/product\\/|https:\\/\\/car\\d+\\.autoimg\\.cn\\/cardfs\\/product\\/)/i;
+const DIRECT_PRODUCT_IMAGE_RE = /^https:\\/\\/car\\d+\\.autoimg\\.cn\\/cardfs\\/product\\//i;'''
+          assert old in s, 'Autohome product regex anchor changed'
+          s = s.replace(old, new, 1)
+
+          old = '''function galleryUrl(specId: string, seriesId: string) {
+  return `${CAR_BASE}/pic/series-s${specId}/${seriesId}.html`;
+}'''
+          new = '''function galleryUrl(specId: string, seriesId: string) {
+  return `${CAR_BASE}/pic/series-s${specId}/${seriesId}.html`;
+}
+function modernSpecGalleryUrl(specId: string, seriesId: string) {
+  return `${SITE_BASE}/cars/imglist-x-x-${seriesId}-${specId}-x-x-x-x-x-1.html`;
+}'''
+          assert old in s, 'galleryUrl anchor changed'
+          s = s.replace(old, new, 1)
+
+          old = '''function exactProductImages(markup: string, base: string) {
+  const values: string[] = [];
+  for (const match of markup.matchAll(/(?:src|data-src|data-original|data-src2|content)=["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/https?:\\\\?\\/\\\\?\\/[^"'\\\\\\s<>]+?\\.(?:jpe?g|png|webp|avif)(?:\\?[^"'\\\\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\\\\//g, "/"));
+  return [...new Set(values.map((value) => absolute(value, base)).filter((url) => PRODUCT_IMAGE_RE.test(url)))].slice(0, 30);
+}'''
+          new = '''function exactProductImages(markup: string, base: string) {
+  const values: string[] = [];
+  for (const match of markup.matchAll(/(?:src|data-src|data-original|data-src2|data-webp|content)=["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/https?:\\\\?\\/\\\\?\\/[^"'\\\\\\s<>]+?\\.(?:jpe?g|png|webp|avif)(?:\\?[^"'\\\\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\\\\//g, "/"));
+  const urls = [...new Set(values.map((value) => absolute(value, base)).filter((url) => PRODUCT_IMAGE_RE.test(url)))];
+  return [...urls.filter((url) => DIRECT_PRODUCT_IMAGE_RE.test(url)), ...urls.filter((url) => !DIRECT_PRODUCT_IMAGE_RE.test(url))].slice(0, 30);
+}
+function nextData(markup: string) {
+  const match = markup.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\\s\\S]*?)<\\/script>/i);
+  if (!match?.[1]) return null;
+  try { return JSON.parse(match[1]); } catch { return null; }
+}
+function seriesIdFromSpecPage(markup: string) {
+  const data = nextData(markup);
+  const value = data?.props?.pageProps?.seriesId || data?.props?.pageProps?.specDetails?.bread?.seriesid;
+  const parsed = String(value || markup.match(/\\bseries\\s*:\\s*(\\d+)/i)?.[1] || "");
+  return /^\\d+$/.test(parsed) ? parsed : "";
+}
+export function exactAutohomeSpecGalleryImages(markup: string, specId: string) {
+  const data = nextData(markup);
+  const groups = data?.props?.pageProps?.SeriesPicList?.picinfo?.callist;
+  if (!Array.isArray(groups)) return [];
+  const values: string[] = [];
+  for (const group of groups) {
+    for (const item of Array.isArray(group?.list) ? group.list : []) {
+      if (Number(item?.specid) !== Number(specId)) continue;
+      const url = absolute(String(item?.picpath || ""), SITE_BASE);
+      if (DIRECT_PRODUCT_IMAGE_RE.test(url)) values.push(url);
+    }
+  }
+  return [...new Set(values)].slice(0, 30);
+}'''
+          assert old in s, 'exactProductImages anchor changed'
+          s = s.replace(old, new, 1)
+
+          old = '''    const fields = parseAutohomeExactConfigFields(configPage.body, specId);
+    if (!fields) throw new Error(`autohome_new_exact_config_missing:${specId}`);
+    const gallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
+    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)), verifiedGallery = gallery.length >= minimum;'''
+          new = '''    const fields = parseAutohomeExactConfigFields(configPage.body, specId);
+    if (!fields) throw new Error(`autohome_new_exact_config_missing:${specId}`);
+    const seriesId = String(listing?.seriesId || seriesIdFromSpecPage(specPage.body) || "");
+    const exactGalleryUrl = seriesId ? modernSpecGalleryUrl(specId, seriesId) : "";
+    const galleryPage = exactGalleryUrl
+      ? await fetchDecoded(exactGalleryUrl, specUrl(specId)).catch(() => null)
+      : null;
+    const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
+    const exactGallery = galleryPage ? exactAutohomeSpecGalleryImages(galleryPage.body, specId) : [];
+    const fallbackGallery = exactProductImages(specPage.body, specPage.response.url || specUrl(specId));
+    const gallery = (exactGallery.length >= minimum
+      ? exactGallery
+      : [...new Set([...exactGallery, ...fallbackGallery])]).slice(0, 30);
+    const verifiedGallery = gallery.length >= minimum && (exactGallery.length >= minimum || gallery.every((url) => PRODUCT_IMAGE_RE.test(url)));'''
+          assert old in s, 'fetchImages gallery anchor changed'
+          s = s.replace(old, new, 1)
+
+          s = s.replace('gallerySafetyMode: "autohome_spec_product_images_v1"', 'gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2"')
+          old = 'galleryUrl: listing?.galleryUrl, exactProductImages: gallery, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery,'
+          new = 'galleryUrl: exactGalleryUrl || listing?.galleryUrl, legacyGalleryUrl: listing?.galleryUrl, exactProductImages: gallery, exactGalleryImageCount: exactGallery.length, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery,'
+          assert old in s, 'raw gallery metadata anchor changed'
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          p = Path('apps/web/lib/catalog/spec-normalization.ts')
+          s = p.read_text()
+          old = 'if (/automatic|automatik|\\bauto\\b|a\\/t|\\bat\\b|автомат|自动|오토|자동/.test(text)) return "automatic";'
+          new = 'if (/automatic|automatik|\\bauto\\b|a\\/t|\\bat\\b|автомат|手自一体|自动挡?|오토|자동/.test(text)) return "automatic";'
+          assert old in s, 'inferTransmission automatic anchor changed'
+          p.write_text(s.replace(old, new, 1))
+
+          p = Path('apps/web/lib/catalog/presentation.ts')
+          s = p.read_text()
+          anchor = '  [/特斯拉/g, "Tesla "],\n'
+          insert = '''  [/特斯拉/g, "Tesla "],
+  [/钧天纵横家/g, "Juntian Zonghengjia "],
+  [/钧天机械|钧天汽车|钧天/g, "Juntian "],
+'''
+          assert anchor in s, 'Chinese alias insertion anchor changed'
+          s = s.replace(anchor, insert, 1)
+
+          old = '''export function catalogTransmissionName(value: unknown) {
+  const raw = safeCatalogText(value).toLowerCase();
+  if (!raw) return "уточняется";
+  if (/automatic|auto|at|自动|오토|자동/.test(raw)) return "автомат";
+  if (/manual|mt|手动|수동/.test(raw)) return "механика";
+  if (/cvt|无级变速|вариатор/.test(raw)) return "вариатор";
+  if (/robot|dct|双离合|робот/.test(raw)) return "робот";
+  return translateCatalogText(raw) || "уточняется";
+}'''
+          new = '''export function catalogTransmissionName(value: unknown) {
+  const raw = safeCatalogText(value).toLowerCase();
+  if (!raw) return "уточняется";
+  const gears = Number(raw.match(/(?:^|\\D)(\\d{1,2})\\s*挡/)?.[1] || 0);
+  const label = (name: string) => gears > 0 && gears <= 12 ? `${gears}-ступ. ${name}` : name;
+  if (/cvt|无级变速|вариатор/.test(raw)) return "вариатор";
+  if (/robot|dct|dsg|双离合|робот/.test(raw)) return label("робот");
+  if (/manual|(?:^|\\W)mt(?:$|\\W)|手动|수동/.test(raw) && !/手自一体/.test(raw)) return label("механика");
+  if (/automatic|auto|(?:^|\\W)at(?:$|\\W)|手自一体|自动挡?|오토|자동/.test(raw)) return label("автомат");
+  return translateCatalogText(raw) || "уточняется";
+}'''
+          assert old in s, 'catalogTransmissionName anchor changed'
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Validate exact Autohome spec 68589 no-publish
+        shell: bash
+        run: |
+          cat > validate-autohome-68589.mts <<'TS'
+          import { AutohomeNewExactAdapter } from './apps/web/lib/catalog/autohome-new-exact-source';
+          import { catalogOfferTitle, catalogTransmissionName } from './apps/web/lib/catalog/presentation';
+          const adapter = new AutohomeNewExactAdapter();
+          const now = new Date().toISOString();
+          const offer:any = {
+            id:'diag', sourceId:'autohome_new_china_open', sourceOfferId:'68589', market:'china', offerType:'fixed', status:'active', catalogKind:'listing',
+            sourceTitle:'2025款 2.0T 尊享版', make:'', model:'', trim:'2025款 2.0T 尊享版', year:2025,
+            sourcePrice:298000, sourceCurrency:'CNY', priceMode:'fixed', images:[], totalRub:null, calculationStatus:'needs_data', firstSeenAt:now, updatedAt:now,
+            operational:{sourceUrl:'https://www.autohome.com.cn/spec/68589/', raw:{listing:{specId:'68589',seriesId:'7768',trimTitle:'2025款 2.0T 尊享版',year:2025,priceWan:29.8,sourcePriceCny:298000,sourceUrl:'https://www.autohome.com.cn/spec/68589/',galleryUrl:'https://car.autohome.com.cn/pic/series-s68589/7768.html'}}}
+          };
+          const images = await adapter.fetchImages(offer);
+          const title = catalogOfferTitle(offer);
+          const transmission = catalogTransmissionName(offer.transmission);
+          const direct = images.filter((x:any)=>/^https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\//i.test(String(x.url)));
+          console.log(JSON.stringify({title,make:offer.make,model:offer.model,transmissionRaw:offer.transmission,transmission,imageCount:images.length,directCount:direct.length,first:images.slice(0,5).map((x:any)=>x.url),gallerySafetyMode:offer.operational?.gallerySafetyMode,raw:offer.operational?.raw?.exactGalleryImageCount},null,2));
+          if (images.length < 20) throw new Error(`too_few_exact_images:${images.length}`);
+          if (direct.length !== images.length) throw new Error(`non_original_images:${direct.length}/${images.length}`);
+          if (!/автомат/.test(transmission) || /[\u3400-\u9fff]/u.test(transmission)) throw new Error(`transmission_not_russian:${transmission}`);
+          if (/Китайский бренд|\bмодель\b/i.test(title) || /[\u3400-\u9fff]/u.test(title)) throw new Error(`title_not_clean:${title}`);
+          if (!/Juntian/i.test(title)) throw new Error(`title_identity_missing:${title}`);
+          if (offer.operational?.raw?.exactGalleryImageCount < 20) throw new Error('next_data_gallery_not_used');
+          TS
+          npx tsx validate-autohome-68589.mts
+          rm validate-autohome-68589.mts
+      - name: Commit validated production files
+        shell: bash
+        run: |
+          git checkout -- apps/web/tsconfig.tsbuildinfo 2>/dev/null || true
+          git rm -f .github/workflows/apply-china-autohome-quality-v1.yml .github/workflows/diag-autohome-gallery-68589.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/autohome-new-exact-source.ts apps/web/lib/catalog/spec-normalization.ts apps/web/lib/catalog/presentation.ts
+          git commit -m 'Fix China exact galleries and Russian transmission labels'
+          git push origin HEAD:fix/china-quality-scale-20260810
