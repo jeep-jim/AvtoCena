@@ -48,7 +48,8 @@ jobs:
         run: |
           cat > probe-kceg.mts <<'TS'
           import fs from 'node:fs/promises';
-          import { catalogImportSources } from './apps/web/lib/catalog/importer-impl.ts';
+          await import('./apps/web/lib/catalog/importer.ts');
+          const { catalogImportSources } = await import('./apps/web/lib/catalog/importer-impl.ts');
           const ids=['encar_direct','kcar_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open'];
           const map=new Map(catalogImportSources.map((s:any)=>[s.sourceId,s]));
           const results:any[]=[];
