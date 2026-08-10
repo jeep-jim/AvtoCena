@@ -18,6 +18,48 @@ const directPhrases: Array<[RegExp, string]> = [
   [/랜드로버/gi, "Land Rover"],
   [/포르쉐/gi, "Porsche"],
   [/테슬라/gi, "Tesla"],
+  [/上汽跃进/g, "Yuejin "],
+  [/新龙马汽车/g, "New Longma "],
+  [/东风风行/g, "Forthing "],
+  [/北京汽车制造厂/g, "BAW "],
+  [/北京越野/g, "BAIC "],
+  [/江汽集团/g, "JAC "],
+  [/江淮瑞风/g, "JAC Refine "],
+  [/东风风度/g, "Dongfeng Fengdu "],
+  [/中国重汽/g, "Sinotruk "],
+  [/吉利汽车/g, "Geely "],
+  [/长城汽车/g, "Great Wall "],
+  [/东风/g, "Dongfeng "],
+  [/大通/g, "Maxus "],
+  [/五十铃/g, "Isuzu "],
+  [/福田/g, "Foton "],
+  [/江铃/g, "JMC "],
+  [/中兴/g, "ZX "],
+  [/红旗/g, "Hongqi "],
+  [/捷达/g, "Jetta "],
+  [/长城/g, "Great Wall "],
+  [/大运/g, "Dayun "],
+  [/凯翼/g, "Kaiyi "],
+  [/黄海/g, "Huanghai "],
+  [/跃进/g, "Yuejin "],
+  [/帝豪/g, "Emgrand "],
+  [/菱智/g, "Lingzhi "],
+  [/凯美瑞/g, "Camry "],
+  [/雷凌/g, "Levin "],
+  [/亚洲龙/g, "Avalon "],
+  [/帕萨特/g, "Passat "],
+  [/狮铂拓界/g, "Sportage "],
+  [/卡罗拉/g, "Corolla "],
+  [/轩逸/g, "Sylphy "],
+  [/天籁/g, "Teana "],
+  [/逍客/g, "Qashqai "],
+  [/奇骏/g, "X-Trail "],
+  [/雅阁/g, "Accord "],
+  [/思域/g, "Civic "],
+  [/秦PLUS/g, "Qin PLUS "],
+  [/宋PLUS/g, "Song PLUS "],
+  [/海豹/g, "Seal "],
+  [/海豚/g, "Dolphin "],
   [/雷克萨斯/g, "Lexus "],
   [/梅赛德斯[-·]?奔驰|奔驰/g, "Mercedes-Benz "],
   [/宝马/g, "BMW "],
@@ -185,6 +227,48 @@ function compactListingText(value: unknown) {
 
 const unresolvedHanRe = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
 
+function stripUnresolvedHan(value: string) {
+  return value
+    .replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isChinaOffer(offer: any) {
+  return safeCatalogText(offer?.market).toLowerCase() === "china";
+}
+
+function chinaSourceSeriesId(offer: any) {
+  return safeCatalogText(
+    offer?.operational?.raw?.listing?.seriesId ||
+    offer?.operational?.raw?.seriesId ||
+    offer?.seriesId,
+  );
+}
+
+function publicChinaMake(offer: any) {
+  const translated = compactListingText(offer?.make);
+  const cleaned = stripUnresolvedHan(translated);
+  return cleaned || "Китайский бренд";
+}
+
+function publicChinaModel(offer: any) {
+  const translated = compactListingText(offer?.model);
+  if (translated && !unresolvedHanRe.test(translated)) return translated;
+
+  const cleaned = stripUnresolvedHan(translated);
+  const seriesId = chinaSourceSeriesId(offer);
+  const usefulLatinModel = cleaned && (
+    /[A-Za-z]{2,}[- ]?\d+/u.test(cleaned) ||
+    /\d+[A-Za-z]{1,}/u.test(cleaned) ||
+    /\b(?:D-MAX|MU-X|PLUS|PRO|MAX|EV|DM-i|Hi4|PHEV|HEV|BEV)\b/i.test(cleaned)
+  );
+
+  if (usefulLatinModel && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(cleaned)) return cleaned;
+  if (seriesId) return `серия ${seriesId}${cleaned ? ` ${cleaned}` : ""}`.trim();
+  return cleaned || "модель";
+}
+
 function publicTitleTrim(value: unknown) {
   const original = compactListingText(value);
   if (!original || !unresolvedHanRe.test(original)) return original;
@@ -307,14 +391,18 @@ function collapseAdjacentRepeatedPhrases(value: string) {
 }
 
 export function catalogOfferTitle(offer: any) {
-  const make = compactListingText(offer?.make);
-  const model = compactListingText(offer?.model);
+  const china = isChinaOffer(offer);
+  const make = china ? publicChinaMake(offer) : compactListingText(offer?.make);
+  const model = china ? publicChinaModel(offer) : compactListingText(offer?.model);
   const rawBase = model && make && model.toLocaleLowerCase("en-US").startsWith(make.toLocaleLowerCase("en-US"))
     ? model
     : [make, model].filter(Boolean).join(" ").trim();
-  const base = collapseAdjacentRepeatedPhrases(rawBase);
+  const base = collapseAdjacentRepeatedPhrases(stripUnresolvedHan(rawBase));
 
-  let trim = collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
+  // Chinese source trim strings contain edition words, dimensions and engine codes.
+  // Keep the exact raw trim in the offer data, but never leak unresolved Han or noisy
+  // source-title fragments into the public card title.
+  let trim = china ? "" : collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
   trim = removeLeadingPhrase(trim, model);
@@ -342,8 +430,8 @@ export function presentCatalogOffer(offer: any) {
   return {
     ...offer,
     title: catalogOfferTitle(offer),
-    makeLabel: compactListingText(offer?.make) || "Марка уточняется",
-    modelLabel: collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",
+    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : compactListingText(offer?.make) || "Марка уточняется",
+    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",
     trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),

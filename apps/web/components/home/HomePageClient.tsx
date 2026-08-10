@@ -65,7 +65,32 @@ function isElectricOffer(value: { fuel?: string; raw?: any }) {
 function toItem(raw: any): Item | null {
   if (!isCrediblePublicOffer(raw as any)) return null;
   const offer = presentCatalogOffer(raw);
-  return { raw, id: offer.id, make: canonicalCatalogBrand(String(raw.make || "")), model: String(raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };
+  return { raw, id: offer.id, make: canonicalCatalogBrand(String(offer.makeLabel || raw.make || "")), model: String(offer.modelLabel || raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };
+}
+
+function balancedMarketItems(items: Item[], limit = 6) {
+  const buckets = new Map<string, Item[]>();
+  for (const item of items) {
+    const key = `${item.make.toLocaleLowerCase("en-US")}::${item.model.toLocaleLowerCase("en-US")}`;
+    const bucket = buckets.get(key);
+    if (bucket) bucket.push(item);
+    else buckets.set(key, [item]);
+  }
+
+  const groups = [...buckets.values()];
+  const output: Item[] = [];
+  for (let depth = 0; output.length < limit; depth++) {
+    let added = false;
+    for (const group of groups) {
+      const item = group[depth];
+      if (!item) continue;
+      output.push(item);
+      added = true;
+      if (output.length >= limit) break;
+    }
+    if (!added) break;
+  }
+  return output;
 }
 async function loadFuelOffers(fuel: string) {
   const loadMarket = async (market: string) => {
@@ -164,7 +189,7 @@ export default function HomePageClient({ initialCity = "" }: Props) {
     }, 180); return () => window.clearTimeout(timer);
   }, [selectedBudget.min, selectedBudget.max, make, model, market, body, year, powerLimited, electricOnly]);
 
-  const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: matches.slice(0, 6) }; }), [availableItems, catalogMarket, catalogMake]);
+  const marketGroups = useMemo(() => marketIds.filter((id) => !catalogMarket || id === catalogMarket).map((id) => { const matches = availableItems.filter((item) => item.market === id && (!catalogMake || item.make === catalogMake)); return { id, total: matches.length, items: balancedMarketItems(matches, 6) }; }), [availableItems, catalogMarket, catalogMake]);
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setFuelItems(null); setMake(""); setModel(""); setBody(""); setMarket(""); setCatalogMake(""); setCatalogMarket(""); };
   const submit = () => { const params = new URLSearchParams(); if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budget", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric"); if (city) params.set("city", city); appendAttributionToSearchParams(params); router.push(`/cars${params.toString() ? `?${params}` : ""}`); };
   const catalogQuery = new URLSearchParams(); if (catalogMarket) catalogQuery.set("market", catalogMarket); if (catalogMake) catalogQuery.set("make", catalogMake); if (electricOnly) catalogQuery.set("fuel", "electric"); const catalogHref = `/cars${catalogQuery.toString() ? `?${catalogQuery}` : ""}`;
