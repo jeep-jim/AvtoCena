@@ -43,26 +43,18 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
     ? Math.round(motorPowersKw.reduce((sum, value) => sum + value, 0) * 100) / 100
     : undefined;
   const explicitThirtyMinute = positive(offer.power30MinKw);
-  const kind = String(offer.powertrainKind || "").toLowerCase();
   const customsPower = positive(offer.calculationSnapshot?.customs?.utilizationPowerKw);
   const snapshotPreviewPower = positive(offer.calculationSnapshot?.utilizationPowerPreviewKw);
   const storedUtilizationPower = positive(offer.utilizationPowerKw);
-  const peakPowerKw = positive(offer.powerKw)
-    || (positive(offer.powerHp) ? Math.round((Number(offer.powerHp) / 1.35962) * 100) / 100 : undefined);
-  const legacyEstimate = isElectricOrHybrid(offer)
-    ? storedUtilizationPower || snapshotPreviewPower || peakPowerKw
-    : undefined;
-  const certifiedMissing = Boolean(offer.calculationSnapshot?.certified30MinutePowerMissing);
-  const thirtyMinutePowerKw = summedMotors
-    || explicitThirtyMinute
-    || (["electric", "series_hybrid"].includes(kind) ? customsPower : undefined)
-    || legacyEstimate;
+  // Public 30-minute power is shown ONLY when the exact 30-minute value exists.
+  // Peak motor power, hp->kW conversion and preliminary utilization previews must never
+  // masquerade as 30-minute power. Preliminary cards simply omit this tile.
+  const thirtyMinutePowerKw = summedMotors || explicitThirtyMinute;
 
   if (!thirtyMinutePowerKw) return null;
 
-  const exactAvailable = Boolean(summedMotors || explicitThirtyMinute);
-  const estimated = !exactAvailable && (certifiedMissing || Boolean(legacyEstimate));
-  const utilizationPowerKw = storedUtilizationPower || customsPower || snapshotPreviewPower || (estimated ? thirtyMinutePowerKw : undefined);
+  const estimated = false;
+  const utilizationPowerKw = storedUtilizationPower || customsPower || snapshotPreviewPower;
   const motorEquation = motorPowersKw.length > 1
     ? `${motorPowersKw.map(formatKw).join(" + ")} = ${formatKw(thirtyMinutePowerKw)} кВт`
     : `${formatKw(thirtyMinutePowerKw)} кВт`;
@@ -71,19 +63,15 @@ export function catalogPowerDisplay(offer: PowerDisplayInput): CatalogPowerDispl
 
   return {
     thirtyMinutePowerKw,
-    thirtyMinuteLabel: estimated
-      ? `${formatKw(thirtyMinutePowerKw)} кВт`
-      : `30 мин: ${motorEquation}`,
+    thirtyMinuteLabel: `30 мин: ${motorEquation}`,
     utilizationPowerKw,
     utilizationLabel: utilizationDiffers
       ? `Для утиля: ${formatKw(utilizationPowerKw)} кВт`
       : undefined,
     motorPowersKw,
-    sourceLabel: estimated
-      ? "Для предварительного расчёта использована доступная мощность электромотора. Точная 30-минутная мощность будет подтверждена по документам автомобиля."
-      : motorPowersKw.length > 1
-        ? "Сумма максимальной 30-минутной мощности тяговых электромоторов"
-        : "Максимальная 30-минутная мощность тягового электромотора",
+    sourceLabel: motorPowersKw.length > 1
+      ? "Сумма максимальной 30-минутной мощности тяговых электромоторов"
+      : "Максимальная 30-минутная мощность тягового электромотора",
     estimated,
   };
 }
