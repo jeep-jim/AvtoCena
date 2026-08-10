@@ -76,7 +76,7 @@ const byChassis = {};
 
 for (const offer of offers) {
   if (Number(offer?.powerHp || 0) > 0) continue;
-  const code = frame(offer?.frameNumber || offer?.operational?.raw?.chassis);
+  const code = frame(offer?.frameNumber || offer?.operational?.raw?.chassis || offer?.operational?.raw?.fields?.Chassis || offer?.operational?.raw?.fields?.CHASSIS || offer?.operational?.raw?.fields?.chassis);
   const year = Number(offer?.year || 0);
   const cc = Number(offer?.engineCc || 0);
   const gradeText = `${offer?.trim || ""} ${offer?.sourceTitle || ""}`.trim();
