@@ -6,6 +6,7 @@ on:
       - fix/autoscout-electric-classification-20260810
     paths:
       - ".github/workflows/validate-autoscout-electric-classification.yml"
+      - ".github/patches/fix-autoscout-electric-classification.py"
   workflow_dispatch:
 
 permissions:
@@ -67,6 +68,7 @@ jobs:
           const pending=[...(r.calculationPendingElectrifiedModels||[]),...(r.calculationPendingCombustionModels||[])];
           const id4=pending.filter(x=>x.make==='Volkswagen' && x.model==='ID.4');
           if(id4.some(x=>x.powertrainKind==='unknown')) throw new Error(`ID.4 still unknown: ${JSON.stringify(id4)}`);
+          if(!id4.some(x=>x.powertrainKind==='electric')) throw new Error(`ID.4 exact electric row not observed: ${JSON.stringify(id4)}`);
           console.log(JSON.stringify({count:r.count,electricCount:r.electricCount,hybridCount:r.hybridCount,pendingElectrified:r.calculationPendingElectrifiedModels||[],id4},null,2));
           NODE
       - name: Commit validated source change to branch
