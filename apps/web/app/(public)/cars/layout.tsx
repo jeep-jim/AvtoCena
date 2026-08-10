@@ -75,6 +75,8 @@ export default function CarsLayout({ children }: { children: React.ReactNode }) 
         white-space: normal !important;
       }
 
+      /* Price-rise color is enforced inside PriceTrend itself so theme CSS cannot override it. */
+
       /* Desktop offer: heading spans both columns; gallery thumbnails sit below the main image; responsive financing UI stays inside the offer components. */
       @media (min-width: 1280px) {
         .ac-offer-page > section > div.grid > div:first-child > header {
