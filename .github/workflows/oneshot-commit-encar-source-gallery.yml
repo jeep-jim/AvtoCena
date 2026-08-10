@@ -1,0 +1,110 @@
+name: One-shot commit verified Encar source gallery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-commit-encar-source-gallery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "35000"
+  CATALOG_SOURCE_TIMEOUT_MS: "35000"
+
+jobs:
+  validate-and-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply Encar-only source gallery patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('apps/web/lib/catalog/adapters.ts')
+          text = p.read_text()
+          start = text.index('export function extractEncarImageUrls')
+          end = text.index('\n}\n', start) + 3
+          block = text[start:end]
+          if '.slice(0, 10);' in block:
+              block = block.replace('.slice(0, 10);', '.slice(0, 30);', 1)
+              p.write_text(text[:start] + block + text[end:])
+          elif '.slice(0, 30);' not in block:
+              raise SystemExit('unexpected Encar image helper cap')
+
+          p = Path('apps/web/lib/catalog/encar-complete-source.ts')
+          text = p.read_text()
+          old = 'import { EncarDirectAdapter, buildEncarImageUrl } from "./adapters";'
+          new = 'import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";'
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('unexpected Encar import')
+
+          old = '    const detailUrls = uniqueUrls(collectImageValues(detail), limit * 4);\n    const gallery = detailUrls.slice(0, limit).map(urlImage);'
+          new = '    const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);\n    const gallery = detailUrls.slice(0, limit).map(urlImage);'
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('unexpected Encar gallery extraction block')
+
+          old = '      gallerySafetyMode: "encar_detail_only_v2",'
+          new = '      gallerySafetyMode: "encar_source_cover_photolist_v3",'
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('unexpected Encar gallery safety mode')
+          p.write_text(text)
+          PY
+      - name: Validate TypeScript
+        run: npm run typecheck
+      - name: Live Encar source-order smoke without publishing
+        shell: bash
+        run: |
+          cat > /tmp/encar-gallery-smoke.mts <<'TS'
+          import { encarCompleteSource } from process.cwd() + "/apps/web/lib/catalog/encar-complete-source.ts";
+          import { buildEncarImageUrl } from process.cwd() + "/apps/web/lib/catalog/adapters.ts";
+          const page:any = await encarCompleteSource.fetchPage(null);
+          const raw:any = page.items?.[0];
+          if (!raw) throw new Error("encar_no_live_row");
+          const offer:any = encarCompleteSource.normalizeOffer(raw);
+          if (!offer) throw new Error("encar_normalize_failed");
+          const expected = buildEncarImageUrl(raw.Photo || raw.photo, 1).replace(/[?#].*$/, "").toLowerCase();
+          const images:any[] = await encarCompleteSource.fetchImages(offer);
+          const actual = String(images[0]?.url || "").replace(/[?#].*$/, "").toLowerCase();
+          console.log(JSON.stringify({id:offer.sourceOfferId,count:images.length,expectedCover:expected,first:actual,mode:offer.operational?.gallerySafetyMode}));
+          if (images.length < 5) throw new Error(`encar_gallery_too_small:${images.length}`);
+          if (offer.operational?.gallerySafetyMode !== "encar_source_cover_photolist_v3") throw new Error("encar_source_mode_missing");
+          if (expected && actual !== expected) throw new Error(`encar_cover_order_mismatch expected=${expected} actual=${actual}`);
+          TS
+          npx tsx /tmp/encar-gallery-smoke.mts
+      - name: Commit only verified Encar source changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/adapters.ts apps/web/lib/catalog/encar-complete-source.ts
+          if git diff --cached --quiet; then
+            echo "Encar source gallery already applied"
+            exit 0
+          fi
+          git commit -m "Use Encar source cover and PhotoList gallery [skip actions]"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
