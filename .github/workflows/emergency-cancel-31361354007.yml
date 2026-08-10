@@ -1,4 +1,4 @@
-name: Emergency cancel stale preliminary publisher
+name: Emergency force-cancel stale preliminary publisher
 on:
   push:
     branches: [main]
@@ -9,7 +9,7 @@ jobs:
   cancel:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel stale run
+      - name: Force cancel stale run
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/31361354007/cancel
+        run: gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/31361354007/force-cancel
