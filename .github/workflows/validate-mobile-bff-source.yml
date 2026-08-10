@@ -26,9 +26,9 @@ jobs:
       - name: NO-PUBLISH live mobile.de adapter smoke
         shell: bash
         run: |
-          cat > /tmp/mobile-smoke.mts <<'TS'
-          import { MobileDeExactAdapter } from process.cwd() + '/apps/web/lib/catalog/mobile-de-exact-source.ts';
-          import { catalogImportSources } from process.cwd() + '/apps/web/lib/catalog/importer.ts';
+          cat > mobile-smoke.mts <<'TS'
+          import { MobileDeExactAdapter } from './apps/web/lib/catalog/mobile-de-exact-source.ts';
+          import { catalogImportSources } from './apps/web/lib/catalog/importer.ts';
           const adapter = new MobileDeExactAdapter();
           const page = await adapter.fetchPage(null);
           const rows:any[] = page.items as any[];
@@ -47,4 +47,5 @@ jobs:
           const registered = catalogImportSources.find((s:any)=>s.sourceId==='mobile_de_open');
           if (!registered || registered.constructor?.name !== 'MobileDeExactAdapter') throw new Error(`mobile_importer_not_replaced:${registered?.constructor?.name}`);
           TS
-          npx tsx /tmp/mobile-smoke.mts
+          npx tsx mobile-smoke.mts
+          rm mobile-smoke.mts
