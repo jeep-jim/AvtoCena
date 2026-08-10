@@ -1,0 +1,45 @@
+name: Diagnose AUTO.GE exact power fields
+on:
+  push:
+    branches: [diag/georgia-blocked-routes-20260810]
+    paths:
+      - .github/workflows/diag-auto-georgia-power-fields-20260810.yml
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Inspect exact detail power labels
+        shell: bash
+        run: |
+          node <<'NODE'
+          const urls=[
+            'https://www.auto.ge/en/auto/hyundai/elantra/hyundai-elantra-1632034.html',
+            'https://www.auto.ge/en/auto/toyota/rav4/toyota-rav4-1628269.html',
+            'https://www.auto.ge/en/auto/honda/civic/honda-civic-1628285.html',
+            'https://www.auto.ge/en/auto/hyundai/accent/hyundai-accent-1628357.html',
+            'https://www.auto.ge/en/auto/ford/ecosport/ford-ecosport-1172388.html',
+          ];
+          const headers={
+            'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+            'accept-language':'en-US,en;q=0.9,ka;q=0.8,ru;q=0.7',
+          };
+          const needles=['horsepower','horse power','power',' hp',' bhp',' ps','kw','ძალა','ცხენის','engine'];
+          for(const url of urls){
+            try{
+              const r=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(20000)});
+              const html=await r.text();
+              const plain=html.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;|&#160;/gi,' ').replace(/\s+/g,' ');
+              const snippets={};
+              for(const n of needles){
+                const positions=[]; let from=0;
+                while(positions.length<8){ const i=(n===' hp'||n===' bhp'||n===' ps')?plain.toLowerCase().indexOf(n,from):plain.toLowerCase().indexOf(n.toLowerCase(),from); if(i<0)break; positions.push(plain.slice(Math.max(0,i-100),Math.min(plain.length,i+220))); from=i+n.length; }
+                if(positions.length)snippets[n]=positions;
+              }
+              const rawMatches=[...html.matchAll(/.{0,100}(?:horsepower|horse_power|powerhp|maxpower|enginepower|\bkw\b|ცხენის|ძალა).{0,180}/gi)].slice(0,30).map(m=>m[0].replace(/\s+/g,' '));
+              console.log(JSON.stringify({url,status:r.status,bytes:html.length,title:(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'').replace(/\s+/g,' '),snippets,rawMatches},null,2));
+            }catch(e){console.log(JSON.stringify({url,error:String(e)}));}
+          }
+          NODE
