@@ -1,0 +1,28 @@
+name: One-shot dispatch Japan priority
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/oneshot-dispatch-japan-priority.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch strict Japan from repaired Prestige source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-japan-from-prestige.yml/dispatches" \
+            -f ref=main \
+            -f 'inputs[source_run_id]=31338331776'
+          echo "Dispatched Japan priority from repaired Prestige run 31338331776"
