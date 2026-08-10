@@ -1,0 +1,91 @@
+name: One-shot fix Korea brand rail
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-fix-korea-brand-rail.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oneshot-fix-korea-brand-rail
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: |
+          git fetch origin main
+          git pull --ff-only origin main
+
+      - name: Add localized Korea make aliases
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/lib/catalog/brands.ts')
+          s = p.read_text()
+          marker = '''const ALIASES: Record<string, string> = {\n'''
+          if marker not in s:
+              raise SystemExit('ALIASES marker not found')
+          localized = '''const LOCALIZED_ALIASES: Record<string, string> = {\n  "기아": "Kia",\n  "현대": "Hyundai",\n  "쉐보레(GM대우)": "Chevrolet",\n  "제네시스": "Genesis",\n  "르노코리아(삼성)": "Renault Samsung",\n  "벤츠": "Mercedes-Benz",\n  "미니": "MINI",\n  "아우디": "Audi",\n  "폭스바겐": "Volkswagen",\n  "KG모빌리티(쌍용)": "KGM",\n  "랜드로버": "Land Rover",\n  "지프": "Jeep",\n  "볼보": "Volvo",\n  "푸조": "Peugeot",\n  "혼다": "Honda",\n  "포르쉐": "Porsche",\n  "크라이슬러": "Chrysler",\n  "포드": "Ford",\n  "도요타": "Toyota",\n  "렉서스": "Lexus",\n  "링컨": "Lincoln",\n  "마세라티": "Maserati",\n};\n\n'''
+          if 'const LOCALIZED_ALIASES' not in s:
+              s = s.replace(marker, localized + marker, 1)
+          old = '''export function canonicalCatalogBrand(value: string) {\n  const cleaned = String(value || "").replace(/\\s+/g, " ").trim();\n  const alias = ALIASES[key(cleaned)];\n  return alias || byKey.get(key(cleaned))?.name || cleaned;\n}\n'''
+          new = '''export function canonicalCatalogBrand(value: string) {\n  const cleaned = String(value || "").replace(/\\s+/g, " ").trim();\n  const localizedAlias = LOCALIZED_ALIASES[cleaned];\n  const alias = localizedAlias || ALIASES[key(cleaned)];\n  return alias || byKey.get(key(cleaned))?.name || cleaned;\n}\n'''
+          if old not in s:
+              raise SystemExit('canonicalCatalogBrand block not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+
+      - name: Typecheck and Korea brand smoke
+        shell: bash
+        run: |
+          npm ci
+          npm run typecheck
+          git checkout -- apps/web/tsconfig.tsbuildinfo packages/engine/tsconfig.tsbuildinfo 2>/dev/null || true
+          cat > brand-alias-smoke.ts <<'TS'
+          import { canonicalCatalogBrand, CATALOG_BRANDS } from "./apps/web/lib/catalog/brands";
+          const live = ["BMW","KGM","KG모빌리티(쌍용)","기아","도요타","랜드로버","렉서스","르노코리아(삼성)","링컨","마세라티","미니","벤츠","볼보","쉐보레(GM대우)","아우디","제네시스","지프","크라이슬러","포드","포르쉐","폭스바겐","푸조","현대","혼다"];
+          const known = new Set(CATALOG_BRANDS.map((brand) => brand.name));
+          const mapped = [...new Set(live.map(canonicalCatalogBrand))];
+          const missing = mapped.filter((brand) => !known.has(brand));
+          console.log('KOREA_CANONICAL_BRANDS', JSON.stringify(mapped));
+          if (missing.length) throw new Error(`Unmapped Korea brands: ${missing.join(', ')}`);
+          if (mapped.length < 20) throw new Error(`Expected >=20 live Korea brands, got ${mapped.length}`);
+          TS
+          npx tsx brand-alias-smoke.ts
+          rm brand-alias-smoke.ts
+
+      - name: Verify and publish
+        shell: bash
+        run: |
+          git diff --check
+          test "$(git diff --name-only | grep -c '^apps/web/components/home/BuyerGallery.tsx$' || true)" = "0"
+          test "$(git diff --name-only | grep -c '^.github/workflows/catalog' || true)" = "0"
+          # The existing BrandLogoRail arrow/modal stays intact; fixing canonicalization
+          # restores both the visible rail and its 'all brands' button to the live list.
+          grep -q 'const orderedBrands = activeBrands' apps/web/components/catalog/BrandLogoRail.tsx
+          grep -q 'setOpen(true)' apps/web/components/catalog/BrandLogoRail.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/oneshot-fix-korea-brand-rail.yml
+          git rm .github/workflows/diag-korea-brands-once.yml
+          git add apps/web/lib/catalog/brands.ts
+          git commit -m "fix: restore all live Korea brands in catalog rail"
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            git rebase origin/main
+          fi
+          git push origin HEAD:main
