@@ -9,8 +9,27 @@ type Hosts = {
   mobile: HTMLElement | null;
 };
 
+function ChatIcon() {
+  return (
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5.5 5.25h13A2.25 2.25 0 0 1 20.75 7.5v8A2.25 2.25 0 0 1 18.5 17.75h-7.25L6 21v-3.25h-.5a2.25 2.25 0 0 1-2.25-2.25v-8A2.25 2.25 0 0 1 5.5 5.25Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="8" cy="11.5" r=".85" fill="currentColor" />
+      <circle cx="12" cy="11.5" r=".85" fill="currentColor" />
+      <circle cx="16" cy="11.5" r=".85" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7.15 3.75 10 8.35 8.3 10.1a14.9 14.9 0 0 0 5.6 5.6l1.75-1.7 4.6 2.85c.5.3.7.92.48 1.46-.56 1.38-1.83 2.3-3.31 2.4C10.08 21.13 2.87 13.92 3.29 6.58c.1-1.48 1.02-2.75 2.4-3.31.54-.22 1.16-.02 1.46.48Z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function ActionButtons({ className = "" }: { className?: string }) {
-  const buttonClass = "ac-offer-contact-button inline-flex h-[54px] min-w-0 items-center justify-center gap-2.5 rounded-[1.05rem] px-3 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:text-sm md:text-base xl:h-14";
+  const buttonClass = "ac-offer-contact-button relative inline-flex h-[54px] min-w-0 items-center justify-center rounded-[1.05rem] px-11 text-[13px] font-black leading-none !text-white transition-[filter,transform] hover:brightness-95 active:scale-[.99] sm:text-sm md:px-12 md:text-base xl:h-14";
   return (
     <div className={`grid grid-cols-2 gap-3 md:gap-4 ${className}`}>
       <button
@@ -18,16 +37,16 @@ function ActionButtons({ className = "" }: { className?: string }) {
         data-offer-action="messenger"
         className={`${buttonClass} bg-[#00A2E8]`}
       >
-        <span className="hidden xl:inline-flex" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 19 17.5h-7.1L7 21v-3.5H5A2.5 2.5 0 0 1 2.5 15V8A2.5 2.5 0 0 1 5 5.5Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/><path d="M7.5 10h9M7.5 13.5h6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"/></svg></span>
-        <span>Чат в мессенджере</span>
+        <span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><ChatIcon /></span>
+        <span className="truncate">Чат в мессенджере</span>
       </button>
       <button
         type="button"
         data-offer-action="lead"
         className={`${buttonClass} bg-[#22B14C]`}
       >
-        <span>Звонок</span>
-        <span className="hidden xl:inline-flex" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M7.2 3.8 10 8.3 8.4 10a14.7 14.7 0 0 0 5.6 5.6l1.7-1.6 4.5 2.8c.5.3.7.9.5 1.4-.5 1.4-1.8 2.4-3.3 2.5C10.1 21.1 2.9 13.9 3.3 6.6c.1-1.5 1.1-2.8 2.5-3.3.5-.2 1.1 0 1.4.5Z" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/></svg></span>
+        <span className="truncate">Оставить заявку</span>
+        <span className="pointer-events-none absolute right-4 hidden items-center justify-center md:inline-flex xl:right-5"><PhoneIcon /></span>
       </button>
     </div>
   );
