@@ -1,0 +1,116 @@
+name: One-shot offer desktop credit polish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/oneshot-offer-desktop-credit-polish-v1.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Update from current main
+        run: git pull --ff-only origin main
+
+      - name: Install dependencies
+        run: |
+          npm ci --ignore-scripts
+          git restore package-lock.json 2>/dev/null || true
+
+      - name: Apply requested desktop polish
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          actions = Path('apps/web/components/catalog/OfferContactActions.tsx')
+          text = actions.read_text()
+
+          old = '''type Hosts = {\n  desktop: HTMLElement | null;\n  mobile: HTMLElement | null;\n};'''
+          new = '''type Hosts = {\n  desktop: HTMLElement | null;\n  mobile: HTMLElement | null;\n  credit: HTMLElement | null;\n};'''
+          assert text.count(old) == 1, 'hosts type anchor changed'
+          text = text.replace(old, new)
+
+          anchor = '''function ActionButtons({ className = "", stacked = false }: { className?: string; stacked?: boolean }) {'''
+          calculator = '''function CreditCalculatorMockup() {\n  return (\n    <section className="ac-credit-calculator-mock rounded-[1.7rem] bg-[var(--ac-surface-2)] p-5 md:p-6" aria-label="Кредитный калькулятор">\n      <div className="flex items-start justify-between gap-4">\n        <div>\n          <div className="text-[11px] font-black uppercase tracking-[0.16em] text-red-500">Финансирование</div>\n          <h2 className="mt-1 text-2xl font-black tracking-[-0.035em] text-[var(--ac-text)]">Кредитный калькулятор</h2>\n          <p className="mt-1 text-sm font-medium text-[var(--ac-muted)]">Предварительный шаблон расчёта. Параметры банка подключим позже.</p>\n        </div>\n        <span className="shrink-0 rounded-full bg-red-500/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-red-500">Скоро</span>\n      </div>\n\n      <div className="mt-5 grid grid-cols-2 rounded-2xl bg-black/[0.055] p-1 dark:bg-white/[0.045]">\n        <div className="rounded-xl bg-red-500 px-4 py-2.5 text-center text-sm font-black text-white">Кредит</div>\n        <div className="px-4 py-2.5 text-center text-sm font-black text-[var(--ac-muted)]">Лизинг</div>\n      </div>\n\n      <div className="mt-4 grid grid-cols-2 gap-3">\n        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5 dark:bg-white/[0.045]">\n          <div className="text-[11px] font-bold text-[var(--ac-muted)]">Стоимость автомобиля</div>\n          <div className="mt-1 text-lg font-black text-[var(--ac-text)]">— ₽</div>\n          <div className="mt-1 text-[10px] font-bold text-[var(--ac-muted)]">подставим из карточки</div>\n        </div>\n        <div className="ac-credit-field rounded-2xl bg-black/[0.045] p-3.5 dark:bg-white/[0.045]">\n          <div className="text-[11px] font-bold text-[var(--ac-muted)]">Первоначальный взнос</div>\n          <div className="mt-1 text-lg font-black text-[var(--ac-text)]">0 ₽</div>\n          <div className="mt-1 text-[10px] font-bold text-[var(--ac-muted)]">можно будет изменить</div>\n        </div>\n      </div>\n\n      <div className="mt-4 rounded-2xl bg-black/[0.035] p-4 dark:bg-white/[0.035]">\n        <div className="flex items-center justify-between gap-3">\n          <span className="text-xs font-bold text-[var(--ac-muted)]">Срок кредита</span>\n          <span className="rounded-full bg-[var(--ac-surface-3)] px-3 py-1 text-sm font-black text-[var(--ac-text)]">60 мес</span>\n        </div>\n        <div className="relative mt-4 h-1.5 overflow-hidden rounded-full bg-black/10 dark:bg-white/10">\n          <div className="absolute inset-y-0 left-0 w-[72%] rounded-full bg-red-500" />\n          <span className="absolute left-[72%] top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-red-500 shadow-sm" />\n        </div>\n        <div className="mt-2 flex justify-between text-[10px] font-bold text-[var(--ac-muted)]"><span>12 мес</span><span>84 мес</span></div>\n      </div>\n\n      <div className="mt-3 grid grid-cols-2 gap-3">\n        <div className="rounded-2xl bg-black/[0.045] p-3.5 dark:bg-white/[0.045]"><div className="text-[11px] font-bold text-[var(--ac-muted)]">Сумма финансирования</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">— ₽</div></div>\n        <div className="rounded-2xl bg-black/[0.045] p-3.5 dark:bg-white/[0.045]"><div className="text-[11px] font-bold text-[var(--ac-muted)]">Ставка</div><div className="mt-1 text-base font-black text-[var(--ac-text)]">— %</div></div>\n      </div>\n\n      <div className="mt-3 flex items-center justify-between gap-4 rounded-2xl bg-red-500/10 px-4 py-3.5">\n        <span className="text-sm font-black text-[var(--ac-text)]">Ежемесячный платёж</span>\n        <span className="text-xl font-black text-red-500">— ₽</span>\n      </div>\n\n      <button type="button" aria-disabled="true" className="mt-3 h-13 w-full cursor-default rounded-[1.05rem] bg-red-500 px-5 py-3.5 text-sm font-black text-white opacity-90">Подать заявку</button>\n      <p className="mt-2 text-center text-[10px] font-semibold leading-4 text-[var(--ac-muted)]">Форма демонстрационная — расчёт и отправку заявки подключим отдельно.</p>\n    </section>\n  );\n}\n\n'''
+          assert text.count(anchor) == 1, 'action buttons anchor changed'
+          text = text.replace(anchor, calculator + anchor)
+
+          old = '''        <span className="whitespace-nowrap">Оставить заявку</span>\n        <span className="pointer-events-none absolute right-4 hidden items-center justify-center md:inline-flex xl:right-5"><PhoneIcon /></span>'''
+          new = '''        <span className="pointer-events-none absolute left-4 hidden items-center justify-center md:inline-flex xl:left-5"><PhoneIcon /></span>\n        <span className="whitespace-nowrap">Оставить заявку</span>'''
+          assert text.count(old) == 1, 'phone icon anchor changed'
+          text = text.replace(old, new)
+
+          old = '''  const [hosts, setHosts] = useState<Hosts>({ desktop: null, mobile: null });'''
+          new = '''  const [hosts, setHosts] = useState<Hosts>({ desktop: null, mobile: null, credit: null });'''
+          assert text.count(old) == 1, 'hosts state anchor changed'
+          text = text.replace(old, new)
+
+          old = '''    setHosts({ desktop: null, mobile: null });'''
+          new = '''    setHosts({ desktop: null, mobile: null, credit: null });'''
+          assert text.count(old) == 1, 'hosts reset anchor changed'
+          text = text.replace(old, new)
+
+          old = '''    let desktopHost: HTMLElement | null = null;\n    let mobileHost: HTMLElement | null = null;'''
+          new = '''    let desktopHost: HTMLElement | null = null;\n    let mobileHost: HTMLElement | null = null;\n    let creditHost: HTMLElement | null = null;'''
+          assert text.count(old) == 1, 'host vars anchor changed'
+          text = text.replace(old, new)
+
+          old = '''      mobileHost = document.createElement("div");\n      mobileHost.dataset.offerActionsHost = "mobile";\n      grid.insertAdjacentElement("afterend", mobileHost);\n\n      if (!cancelled) setHosts({ desktop: desktopHost, mobile: mobileHost });'''
+          new = '''      mobileHost = document.createElement("div");\n      mobileHost.dataset.offerActionsHost = "mobile";\n      grid.insertAdjacentElement("afterend", mobileHost);\n\n      creditHost = document.createElement("div");\n      creditHost.dataset.offerCreditHost = "true";\n      mediaColumn.appendChild(creditHost);\n\n      if (!cancelled) setHosts({ desktop: desktopHost, mobile: mobileHost, credit: creditHost });'''
+          assert text.count(old) == 1, 'host mount anchor changed'
+          text = text.replace(old, new)
+
+          old = '''      desktopHost?.remove();\n      mobileHost?.remove();'''
+          new = '''      desktopHost?.remove();\n      mobileHost?.remove();\n      creditHost?.remove();'''
+          assert text.count(old) == 1, 'host cleanup anchor changed'
+          text = text.replace(old, new)
+
+          old = '''      {hosts.desktop ? createPortal(<ActionButtons stacked className="mt-4 hidden xl:grid" />, hosts.desktop) : null}\n      {hosts.mobile ? createPortal(<MobilePinnedActions />, hosts.mobile) : null}'''
+          new = '''      {hosts.desktop ? createPortal(<ActionButtons stacked className="mt-4 hidden xl:grid" />, hosts.desktop) : null}\n      {hosts.mobile ? createPortal(<MobilePinnedActions />, hosts.mobile) : null}\n      {hosts.credit ? createPortal(<CreditCalculatorMockup />, hosts.credit) : null}'''
+          assert text.count(old) == 1, 'portal anchor changed'
+          text = text.replace(old, new)
+
+          css_anchor = '''        .ac-offer-page > section > section {\n          border-top: 1px solid rgba(255,255,255,.085) !important;'''
+          css_insert = '''        @media (min-width: 1280px) {\n          .ac-offer-page .ac-offer-detail-stack > div:first-child {\n            grid-template-columns: repeat(6, minmax(0, 1fr)) !important;\n          }\n          .ac-offer-page .ac-offer-detail-stack > div:first-child > .ac-offer-spec-tile {\n            grid-column: span 3 !important;\n            order: 10;\n          }\n          .ac-offer-page .ac-offer-detail-stack > div:first-child > .ac-offer-spec-tile[aria-label^="Год:"] {\n            grid-column: span 2 !important;\n            order: 1;\n          }\n          .ac-offer-page .ac-offer-detail-stack > div:first-child > .ac-offer-spec-tile[aria-label^="Двигатель:"] {\n            grid-column: span 2 !important;\n            order: 2;\n          }\n          .ac-offer-page .ac-offer-detail-stack > div:first-child > .ac-offer-spec-tile[aria-label^="Пробег:"] {\n            grid-column: span 2 !important;\n            order: 3;\n          }\n          .ac-offer-page [data-offer-credit-host] {\n            display: none;\n            margin-top: 1.25rem;\n          }\n          .ac-offer-page:has(.ac-offer-breakdown[open]) [data-offer-credit-host] {\n            display: block;\n          }\n          .ac-credit-calculator-mock {\n            border: 1px solid rgba(255,255,255,.06);\n            box-shadow: 0 18px 44px rgba(0,0,0,.13);\n          }\n          html[data-theme="light"] .ac-credit-calculator-mock {\n            border-color: rgba(35,42,55,.09);\n            box-shadow: 0 18px 44px rgba(38,43,57,.08);\n          }\n        }\n'''
+          assert text.count(css_anchor) == 1, 'css anchor changed'
+          text = text.replace(css_anchor, css_insert + css_anchor)
+          actions.write_text(text)
+
+          gallery = Path('apps/web/components/catalog/VehicleGallery.tsx')
+          text = gallery.read_text()
+          old = '''          <div className="relative mt-3 hidden xl:block">\n            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1 pr-14">\n              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}\n            </div>\n            <button type="button" onClick={next} className="absolute right-0 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-black/38 text-white backdrop-blur transition hover:bg-black/55" aria-label="Следующее фото">\n              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>\n            </button>\n          </div>'''
+          new = '''          <div className="relative mt-3 hidden xl:block">\n            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">\n              {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}\n            </div>\n          </div>'''
+          assert text.count(old) == 1, 'desktop gallery arrow anchor changed'
+          text = text.replace(old, new)
+          gallery.write_text(text)
+          PY
+
+      - name: Typecheck
+        run: |
+          npm run typecheck
+          git restore package-lock.json 2>/dev/null || true
+
+      - name: Verify and publish safely
+        run: |
+          grep -q 'CreditCalculatorMockup' apps/web/components/catalog/OfferContactActions.tsx
+          grep -q 'aria-label\^="Двигатель:"' apps/web/components/catalog/OfferContactActions.tsx
+          grep -q 'data-offer-credit-host' apps/web/components/catalog/OfferContactActions.tsx
+          ! grep -q 'aria-label="Следующее фото"' apps/web/components/catalog/VehicleGallery.tsx
+          test -z "$(git diff --name-only | grep -v -E '^(apps/web/components/catalog/OfferContactActions.tsx|apps/web/components/catalog/VehicleGallery.tsx)$')"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/components/catalog/OfferContactActions.tsx apps/web/components/catalog/VehicleGallery.tsx
+          git rm .github/workflows/oneshot-offer-desktop-credit-polish-v1.yml
+          git commit -m 'Polish desktop offer specs and add credit calculator mockup'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
