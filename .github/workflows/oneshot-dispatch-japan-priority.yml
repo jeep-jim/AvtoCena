@@ -25,4 +25,4 @@ jobs:
             "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-japan-from-prestige.yml/dispatches" \
             -f ref=main \
             -f 'inputs[source_run_id]=31338331776'
-          echo "Dispatched Japan priority from repaired Prestige run 31338331776"
+          echo "Dispatched Japan priority from repaired Prestige run 31338331776 after official chassis v2"
