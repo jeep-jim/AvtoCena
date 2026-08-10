@@ -37,11 +37,12 @@ function canonicalUrl(value: unknown) {
     url.search = "";
     const hostname = url.hostname.toLowerCase();
     let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
-    // Mashina.kg exposes the same source photo as _small/_medium/_large.
-    // Treat those delivery-size variants as one photo identity while keeping
-    // genuinely different source hashes as separate gallery frames.
+    // Mashina.kg exposes one exact source photo through multiple delivery sizes.
+    // Collapse only the known size suffix, never the source-photo hash itself.
     if (hostname === "storage.mashina.kg") {
       pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
+    } else if (hostname === "im.mashina.kg") {
+      pathname = pathname.replace(/_\d{2,5}x\d{2,5}(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
     }
     return `${hostname}${pathname}`;
   } catch {
@@ -50,12 +51,19 @@ function canonicalUrl(value: unknown) {
 }
 
 function catalogImageDedupKey(image: CatalogImageLike) {
+  const sourceUrl = text(image.url);
+  // Source-URL identity must win for Mashina because source_urls_only stores
+  // different delivery renditions as separate image records/checksums.
+  if (/^https?:\/\/(?:storage|im)\.mashina\.kg\//i.test(sourceUrl)) {
+    const canonical = canonicalUrl(sourceUrl);
+    if (canonical) return `mashina:${canonical}`;
+  }
   const checksum = text(image.checksum).toLowerCase();
   if (checksum) return `checksum:${checksum}`;
   const objectKey = canonicalUrl(image.objectKey);
   if (objectKey) return `object:${objectKey}`;
-  const sourceUrl = canonicalUrl(image.url);
-  if (sourceUrl) return `url:${sourceUrl}`;
+  const canonicalSource = canonicalUrl(sourceUrl);
+  if (canonicalSource) return `url:${canonicalSource}`;
   const id = text(image.id);
   return id ? `id:${id}` : "";
 }
@@ -76,11 +84,13 @@ export function catalogImageScore(image: CatalogImageLike) {
   if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
   if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
 
-  // When Mashina provides several delivery sizes of one exact source photo,
-  // rank the largest rendition first. canonicalUrl() then collapses the rest.
+  // Prefer the largest known rendition before canonical identity collapses the
+  // delivery-size variants into one gallery frame.
   if (/^https?:\/\/storage\.mashina\.kg\/.*_large\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 4;
   else if (/^https?:\/\/storage\.mashina\.kg\/.*_medium\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 2;
   else if (/^https?:\/\/storage\.mashina\.kg\/.*_small\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score -= 2;
+  const legacySize = url.match(/^https?:\/\/im\.mashina\.kg\/.*_(\d{2,5})x(\d{2,5})\.(?:jpe?g|png|webp|avif)(?:\?|$)/i);
+  if (legacySize) score += Math.min(4, Math.max(0, Math.log2((Number(legacySize[1]) * Number(legacySize[2])) / (640 * 480))));
 
   if (width && height) {
     if (width >= 640 && height >= 400) score += 3;
