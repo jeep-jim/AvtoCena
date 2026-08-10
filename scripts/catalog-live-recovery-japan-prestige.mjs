@@ -8,6 +8,7 @@ const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalo
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
+const { findVehiclePowerKnowledge } = await import("../apps/web/lib/catalog/power-knowledge.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
 const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-repaired.json";
@@ -59,6 +60,7 @@ async function uniqueVariantEnrich(offer) {
   const allVariants = await readVehicleKnowledgeVariants().catch(() => []);
   const baseVariants = allVariants.filter((variant) => {
     if (variant.active === false || variant.modelId !== match.model.id) return false;
+    if (!["manufacturer", "official_registry"].includes(String(variant.sourceType || ""))) return false;
     if (variant.yearFrom && year < variant.yearFrom) return false;
     if (variant.yearTo && year > variant.yearTo) return false;
     if (!compatibleText(variant.transmission, offer.transmission)) return false;
@@ -126,6 +128,36 @@ async function uniqueVariantEnrich(offer) {
         recoveryUniquePower30MinKw: power30MinKw || null,
         recoveryUniqueUtilizationPowerKw: utilizationPowerKw || null,
         recoveryBodySourceOnly: true,
+      },
+    },
+  });
+}
+async function officialIcePowerEnrich(offer) {
+  const kind = String(offer?.powertrainKind || "");
+  if (["electric", "series_hybrid", "other_hybrid"].includes(kind)) return offer;
+  const engineCc = Number(offer?.engineCc || 0);
+  if (!(engineCc > 0) || Number(offer?.powerHp || 0) > 0) return offer;
+  const reference = await findVehiclePowerKnowledge(offer).catch(() => null);
+  if (!reference || !["manufacturer", "registry"].includes(String(reference.confidence || ""))) return offer;
+  if (String(reference.powertrainKind || "combustion") !== "combustion") return offer;
+  const referenceEngineCc = Number(reference.engineCc || 0);
+  if (!(referenceEngineCc > 0)) return offer;
+  const tolerance = Math.max(20, Number(reference.engineCcTolerance || 80));
+  if (Math.abs(referenceEngineCc - engineCc) > tolerance) return offer;
+  const powerHp = Number(reference.powerHp || 0);
+  if (!(powerHp > 0)) return offer;
+  return normalizeVehicleOfferSpecs({
+    ...offer,
+    powerHp,
+    powerKw: Number(reference.powerKw || 0) > 0 ? Number(reference.powerKw) : Math.round((powerHp / 1.359621617) * 10) / 10,
+    powerDataConfidence: "documented",
+    powerDataSource: reference.sourceUrl || `power-knowledge:${reference.id}`,
+    operational: {
+      ...(offer.operational || {}),
+      raw: {
+        ...(offer.operational?.raw || {}),
+        recoveryOfficialIcePowerReferenceId: reference.id,
+        recoveryOfficialIcePowerConfidence: reference.confidence,
       },
     },
   });
@@ -202,6 +234,7 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   // as electrified; calling this unconditionally is safe because the
   // reference matcher requires an exact make/model plus verified document.
   offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
+  offer = await officialIcePowerEnrich(offer);
   if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }
   let calculated;
   try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
@@ -252,6 +285,7 @@ const report = {
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
   hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,
   documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
+  officialIcePowerCount: offers.filter((offer) => Boolean(offer?.operational?.raw?.recoveryOfficialIcePowerReferenceId)).length,
   rejected,
   passed: offers.length > 0,
 };

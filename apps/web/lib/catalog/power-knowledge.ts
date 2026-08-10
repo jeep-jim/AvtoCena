@@ -7,6 +7,7 @@ export type VehiclePowerKnowledge = {
   model: string;
   aliases?: string[];
   trimContains?: string[];
+  chassisCodes?: string[];
   yearFrom?: number;
   yearTo?: number;
   engineCc?: number;
@@ -52,6 +53,12 @@ function modelMatches(reference: VehiclePowerKnowledge, offer: Partial<VehicleOf
   return Boolean(offerModel && candidates.some((candidate) => candidate === offerModel));
 }
 
+function offerChassis(offer: Partial<VehicleOffer>) {
+  const raw: any = offer.operational?.raw || {};
+  const fields: any = raw?.fields || {};
+  return compact(fields.Chassis || fields.CHASSIS || fields.chassis || raw.chassis || raw.chassisCode || raw.modelCode || raw.model_code);
+}
+
 function score(reference: VehiclePowerKnowledge, offer: Partial<VehicleOffer>) {
   if (reference.active === false || compact(reference.make) !== compact(offer.make) || !modelMatches(reference, offer)) return -1;
   const year = Number(offer.year || 0);
@@ -60,6 +67,13 @@ function score(reference: VehiclePowerKnowledge, offer: Partial<VehicleOffer>) {
 
   let result = 100;
   if (reference.yearFrom || reference.yearTo) result += 10;
+
+  if (reference.chassisCodes?.length) {
+    const chassis = offerChassis(offer);
+    const allowed = reference.chassisCodes.map(compact).filter(Boolean);
+    if (!chassis || !allowed.includes(chassis)) return -1;
+    result += 50;
+  }
 
   const engineCc = positive(offer.engineCc, 10_000);
   if (reference.engineCc) {
