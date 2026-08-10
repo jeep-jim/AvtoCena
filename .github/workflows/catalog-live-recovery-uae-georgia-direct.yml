@@ -3,21 +3,13 @@ run-name: Direct recovery UAE + Georgia · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml"
-      - "apps/web/lib/catalog/auto-georgia-strict-source.ts"
-      - "tests/auto-georgia-price.test.ts"
-      - "scripts/catalog-live-recovery-publish-batch.mjs"
 
 permissions:
   contents: read
 
 concurrency:
-  group: catalog-live-recovery-uae-georgia-direct
-  cancel-in-progress: true
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
@@ -82,8 +74,7 @@ jobs:
 
   publish:
     needs: [validate, collect]
-    # Georgia live writes stay quarantined until exact listing-bound gallery identity is explicitly validated.
-    if: ${{ false }}
+    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
