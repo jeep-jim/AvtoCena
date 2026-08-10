@@ -14,8 +14,21 @@ function key(offer) {
 }
 function isElectric(offer) { return String(offer?.powertrainKind || "") === "electric" || /(?:electric|pure electric|bev|纯电|электро)/i.test(String(offer?.fuel || "")); }
 function isHybrid(offer) { return ["series_hybrid", "other_hybrid"].includes(String(offer?.powertrainKind || "")) || /(?:hybrid|phev|hev|增程|混合动力|гибрид)/i.test(String(offer?.fuel || "")); }
+function japanSoldIdentityOk(offer) {
+  const raw = offer?.operational?.raw || {};
+  return offer?.market !== "japan" || (
+    offer?.offerType === "auction"
+    && offer?.catalogKind === "auction_result"
+    && offer?.auctionResult === "sold"
+    && offer?.auctionPriceKind === "published_result"
+    && raw?.listingBoundImages === true
+    && raw?.photoIdentityVerified === true
+    && raw?.recoveryExactSourceUrl === true
+    && raw?.recoveryExactPhotoIdentity === true
+  );
+}
 
-const report = { version: 1, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
+const report = { version: 2, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
   try { rows = await readMarketOffers(market); } catch (error) { report.failures.push(`${market}:read:${String(error?.message || error)}`); continue; }
@@ -33,6 +46,9 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     distinctMakes: new Set(rows.map((offer) => String(offer?.make || "").trim().toLowerCase()).filter(Boolean)).size,
     maxPerExactModel: modelCounts.size ? Math.max(...modelCounts.values()) : 0,
     nonVehicleCount: rows.filter((offer) => nonVehicle.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)).length,
+    nonPositiveSourcePriceCount: rows.filter((offer) => !(Number(offer?.sourcePrice || 0) > 0) || !String(offer?.sourceCurrency || "").trim()).length,
+    belowFiveImagesCount: rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < 5).length,
+    japanSoldIdentityFailureCount: market === "japan" ? rows.filter((offer) => !japanSoldIdentityOk(offer)).length : 0,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer?.sourceId || "unknown")))].sort().map((sourceId) => [sourceId, rows.filter((offer) => String(offer?.sourceId || "unknown") === sourceId).length])),
   };
   report.markets[market] = stats;
@@ -41,6 +57,9 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   if (assertMarkets.has(market) && stats.maxPerExactModel > 20) report.failures.push(`${market}:model_quota:${stats.maxPerExactModel}`);
   if (assertMarkets.has(market) && stats.olderThan15Count > 0) report.failures.push(`${market}:older_than_15:${stats.olderThan15Count}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
+  if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
+  if (market === "japan" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`japan:below_five_images:${stats.belowFiveImagesCount}`);
+  if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);
 }
 
 await (await import("node:fs/promises")).writeFile(output, JSON.stringify(report, null, 2));
