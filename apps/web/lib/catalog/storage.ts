@@ -586,6 +586,54 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
   await runWithConcurrency(tasks, concurrency);
 }
+
+export async function publishCurrentCatalogReadModels() {
+  const manifest = await readManifest();
+  const marketIds = Object.keys(manifest.markets || {}).filter((market) => Number(manifest.markets[market]?.count || 0) > 0);
+  const offers = (await mapWithConcurrency(marketIds, Math.min(7, Math.max(1, marketIds.length)), (market) => readMarketOffers(market))).flat()
+    .filter(isPublicOffer);
+
+  const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
+  const models = [...new Map(offers.map((offer) => {
+    const make = cleanFacet(offer.make);
+    const model = cleanFacet(offer.model);
+    return [`${make}:${model}`, { make, model }];
+  })).values()].filter((item) => item.make && item.model)
+    .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
+  const facets: CatalogFacets = {
+    generationId: manifest.generationId,
+    makes,
+    models,
+    markets: [...new Set(offers.map((offer) => cleanFacet(offer.market)).filter(Boolean))].sort(),
+    bodyTypes: uniqueText(offers.map((offer) => offer.bodyType)).sort(),
+    fuels: uniqueText(offers.map((offer) => offer.fuel)).sort(),
+    transmissions: uniqueText(offers.map((offer) => offer.transmission)).sort(),
+    drives: uniqueText(offers.map((offer) => offer.drive)).sort(),
+  };
+
+  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  const offersByShard = new Map<string, VehicleOffer[]>();
+  for (const offer of offers) {
+    const market = String(offer.market || "");
+    if (market) projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), searchProjectionFromOffer(offer)]);
+    const shard = currentOfferShardName(offer.id);
+    offersByShard.set(shard, [...(offersByShard.get(shard) || []), offer]);
+  }
+
+  await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
+  await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>
+    writeJsonAtomic(currentProjectionPath(market), { generationId: manifest.generationId, items }, false));
+  await mapWithConcurrency([...offersByShard.entries()], 12, ([shard, items]) =>
+    writeJsonAtomic(`catalog/public/offers/${shard}.json`, { generationId: manifest.generationId, items }, false));
+
+  return {
+    generationId: manifest.generationId,
+    total: offers.length,
+    markets: Object.fromEntries(marketIds.map((market) => [market, offers.filter((offer) => offer.market === market).length])),
+    projectionMarkets: projectionsByMarket.size,
+    offerShards: offersByShard.size,
+  };
+}
 export async function getOffer(id: string) {
   const current = await readCurrentOfferShard(id);
   if (current.generationId) {
