@@ -39,7 +39,7 @@ jobs:
           ! grep -A12 'if (!hasFilters)' 'apps/web/app/(public)/cars/page.tsx' | grep -q 'await readMarketOffers(market.id)'
       - name: Live read-only index smoke
         run: |
-          npx tsx -e 'import {readCatalogFacets,searchOffers} from "./apps/web/lib/catalog/storage.ts"; const t0=performance.now(); const facets=await readCatalogFacets({market:"europe"}); const t1=performance.now(); const r=await searchOffers({market:"europe",page:1,pageSize:48,sort:"updatedAt"}); const t2=performance.now(); if(!(r.total>0)||r.items.length<1||r.items.length>48) throw new Error(JSON.stringify({total:r.total,items:r.items.length})); console.log(JSON.stringify({facetsMs:Math.round(t1-t0),searchMs:Math.round(t2-t1),total:r.total,items:r.items.length,makes:facets.makes.length}))'
+          npx tsx -e 'import {readCatalogFacets,searchOffers} from "./apps/web/lib/catalog/storage.ts"; (async()=>{ const t0=performance.now(); const facets=await readCatalogFacets({market:"europe"}); const t1=performance.now(); const r=await searchOffers({market:"europe",page:1,pageSize:48,sort:"updatedAt"}); const t2=performance.now(); if(!(r.total>0)||r.items.length<1||r.items.length>48) throw new Error(JSON.stringify({total:r.total,items:r.items.length})); console.log(JSON.stringify({facetsMs:Math.round(t1-t0),searchMs:Math.round(t2-t1),total:r.total,items:r.items.length,makes:facets.makes.length})); })().catch(e=>{console.error(e);process.exit(1)})'
       - name: Commit validated production files only
         run: |
           git checkout -- . || true
