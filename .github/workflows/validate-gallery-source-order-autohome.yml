@@ -1,0 +1,39 @@
+name: Validate gallery source order and AutoHome guard
+
+on:
+  push:
+    branches: [fix/gallery-source-order-autohome-20260811]
+    paths:
+      - .github/workflows/validate-gallery-source-order-autohome.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/gallery-source-order-autohome-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-gallery-source-order-autohome.py
+      - run: npm run typecheck
+      - name: Gallery order smoke
+        run: |
+          npx tsx -e 'import {rankedCatalogImageUrls} from "./apps/web/lib/catalog/image-quality.ts"; const offer={images:[{url:"https://car3.autoimg.cn/cardfs/product/g1/a/autohomecar__cover.jpg",size:0,mimeType:"image/jpeg"},{url:"https://g.autoimg.cn/@img/car3/cardfs/product/g1/b/240x0_c42_autohomecar__tiny.jpg",size:0,mimeType:"image/jpeg"},{url:"https://car3.autoimg.cn/cardfs/product/g1/c/autohomecar__second.jpg",size:0,mimeType:"image/jpeg"},{url:"https://g.autoimg.cn/@img/car3/cardfs/product/g1/a/900x0_c42_autohomecar__cover.jpg",size:0,mimeType:"image/jpeg"}]}; const rows=rankedCatalogImageUrls(offer); if(rows.length!==2) throw new Error(`expected2:${JSON.stringify(rows)}`); if(!rows[0].includes("cover")||!rows[1].includes("second"))throw new Error(`source order:${JSON.stringify(rows)}`); console.log(rows)'
+      - name: Commit production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-gallery-source-order-autohome.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/image-quality.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Preserve source gallery order and hide AutoHome thumbnails [skip actions]"
+          git push origin HEAD:fix/gallery-source-order-autohome-20260811
