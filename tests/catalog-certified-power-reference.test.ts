@@ -203,3 +203,69 @@ test("EV6 GT Line uses the documented long-range drivetrain and never matches EV
     make: "Kia", model: "EV6", trim: "GT Line", drive: "RWD", year: 2022, powertrainKind: "electric", powerKw: 168,
   }), false);
 });
+
+test("an ambiguous model-year reference may require peak power from the offer", () => {
+  const q4Reference: CertifiedPowerReference = {
+    id: "audi-q4-45-quattro-2023-facelift",
+    make: "Audi",
+    model: "Q4 e-tron",
+    trimContains: ["45"],
+    yearFrom: 2023,
+    yearTo: 2026,
+    powertrainKind: "electric",
+    peakPowerKw: 210,
+    peakPowerToleranceKw: 1,
+    requireOfferPeakPower: true,
+    power30MinKw: 77,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:0588/BZW",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(q4Reference, {
+    make: "Audi", model: "Q4 e-tron", trim: "45 quattro", year: 2023, powertrainKind: "electric", powerKw: 210,
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(q4Reference, {
+    make: "Audi", model: "Q4 e-tron", trim: "45 quattro", year: 2023, powertrainKind: "electric",
+  }), false);
+  assert.equal(certifiedPowerReferenceMatches(q4Reference, {
+    make: "Audi", model: "Q4 e-tron", trim: "45 quattro", year: 2023, powertrainKind: "electric", powerKw: 195,
+  }), false);
+});
+
+test("Leaf references distinguish the documented e+ drivetrain from the 40 kWh version", () => {
+  const leaf40Reference: CertifiedPowerReference = {
+    id: "nissan-leaf-ze1-40kwh",
+    make: "Nissan",
+    model: "Leaf",
+    trimNotContains: ["e+", "62 kWh"],
+    yearFrom: 2018,
+    yearTo: 2024,
+    powertrainKind: "electric",
+    peakPowerKw: 110,
+    peakPowerToleranceKw: 1,
+    power30MinKw: 90,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:1329/ALE,2228/AAJ",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+  const leafPlusReference: CertifiedPowerReference = {
+    ...leaf40Reference,
+    id: "nissan-leaf-ze1-e-plus-62kwh",
+    trimContains: ["e+"],
+    trimNotContains: undefined,
+    peakPowerKw: 160,
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(leaf40Reference, {
+    make: "Nissan", model: "LEAF", trim: "X V Selection", year: 2021, powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(leaf40Reference, {
+    make: "Nissan", model: "LEAF", trim: "e+G", year: 2023, powertrainKind: "electric",
+  }), false);
+  assert.equal(certifiedPowerReferenceMatches(leafPlusReference, {
+    make: "Nissan", model: "LEAF", trim: "e+G", year: 2023, powertrainKind: "electric",
+  }), true);
+});

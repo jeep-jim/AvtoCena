@@ -18,6 +18,7 @@ export type CertifiedPowerReference = {
   powertrainKind: Exclude<PowertrainKind, "unknown">;
   peakPowerKw?: number;
   peakPowerToleranceKw?: number;
+  requireOfferPeakPower?: boolean;
   icePowerKw?: number;
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
@@ -37,6 +38,7 @@ function token(value: unknown) {
   return String(value || "")
     .toLocaleLowerCase("ru-RU")
     .replace(/ё/g, "е")
+    .replace(/\be\+/g, " eplus ")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }
@@ -123,6 +125,7 @@ export function certifiedPowerReferenceMatches(reference: CertifiedPowerReferenc
   }
   if (validPower(reference.peakPowerKw)) {
     const offerPeakPowerKw = Number(offer.powerKw || 0);
+    if (reference.requireOfferPeakPower && !validPower(offerPeakPowerKw)) return false;
     const tolerance = Math.max(0, Number(reference.peakPowerToleranceKw ?? 1));
     // The reviewed reference is also allowed to fill a missing peak value for
     // excise. If the source supplied a conflicting peak value, reject it.
