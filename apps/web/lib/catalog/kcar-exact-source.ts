@@ -11,6 +11,8 @@ type KCarListRow = {
 };
 
 type KCarDetailData = {
+  photoList?: Array<Record<string, any>>;
+  outerPhotoList?: Array<Record<string, any>>;
   rvo?: Record<string, any>;
   vrVo?: Record<string, any>;
 };
@@ -122,15 +124,65 @@ function detailUrl(carCd: string) {
   return `${WEB_BASE}/bc/detail/carInfoDtl?i_sCarCd=${encodeURIComponent(carCd)}`;
 }
 
-function exactVehicleGallery(data: KCarDetailData, carCd: string) {
-  const numericId = carCd.replace(/^[^0-9]+/, "");
-  if (!numericId) return [];
-  const matcher = new RegExp(`^https://img\\.kcar\\.com/3dcarpicture/\\d{4}/\\d{2}/\\d+/${numericId}_[0-9]+/extra/extra_[0-9]+_hq\\.jpg(?:[?#].*)?$`, "i");
-  const urls = clean(data.vrVo?.v_src_show)
+async function fetchExactDetailData(carCd: string) {
+  const url = new URL(`${API_BASE}/bc/car-info-detail-of-ng`);
+  url.searchParams.set("i_sCarCd", carCd);
+  url.searchParams.set("i_sPassYn", "N");
+  const detail = await requestJson(url.toString(), { headers: { referer: detailUrl(carCd) } });
+  if (!detail.response.ok || detail.json?.success !== true) throw new Error(`kcar_exact_detail_http_${detail.response.status}_${carCd}`);
+  const data = (detail.json?.data?.data ?? detail.json?.data ?? null) as KCarDetailData | null;
+  if (!data || clean(data.rvo?.carCd) !== carCd) throw new Error(`kcar_exact_detail_identity_${carCd}`);
+  return data;
+}
+
+export const KCAR_EXTERIOR_FIRST_GALLERY_MODE = "kcar_exterior_cover_vr_extra_exact_car_id_v2";
+
+function splitImageList(value: unknown) {
+  return clean(value)
     .split(",")
     .map((item) => item.trim().replace(/^['\"]+|['\"]+$/g, "").trim())
-    .filter((url) => matcher.test(url));
-  return [...new Set(urls)].slice(0, 30);
+    .filter(Boolean);
+}
+
+function exactVehiclePhotoUrl(value: unknown, numericId: string) {
+  const source = clean(value);
+  if (!source) return "";
+  try {
+    const url = new URL(source);
+    if (url.protocol !== "https:" || url.hostname.toLowerCase() !== "img.kcar.com") return "";
+    if (!new RegExp(`/3dcarpicture/\\d{4}/\\d{2}/\\d+/${numericId}_[0-9]+/`, "i").test(url.pathname)) return "";
+    if (!/\.(?:jpe?g|webp)(?:$|[?#])/i.test(source)) return "";
+    return source;
+  } catch {
+    return "";
+  }
+}
+
+function representativeExteriorFrames(values: string[]) {
+  if (values.length <= 4) return values;
+  const indexes = [0, Math.floor(values.length / 4), Math.floor(values.length / 2), Math.floor(values.length * 3 / 4)];
+  return [...new Set(indexes)].map((index) => values[index]).filter(Boolean);
+}
+
+export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
+  const numericId = carCd.replace(/^[^0-9]+/, "");
+  if (!numericId) return [];
+  const exact = (value: unknown) => exactVehiclePhotoUrl(value, numericId);
+  const explicitExterior = [...(data.outerPhotoList || []), ...(data.photoList || [])]
+    .filter((photo) => clean(photo?.thumbnailType) === "01" || clean(photo?.thumbnailTypenm) === "외관")
+    .sort((left, right) => Number(left?.sortOrdr || Number.MAX_SAFE_INTEGER) - Number(right?.sortOrdr || Number.MAX_SAFE_INTEGER))
+    .map((photo) => exact(photo?.elanPath || photo?.url || photo?.path))
+    .filter(Boolean);
+  const closedExterior = representativeExteriorFrames(splitImageList(data.vrVo?.v_src_close).map(exact).filter(Boolean));
+  const openExterior = representativeExteriorFrames(splitImageList(data.vrVo?.v_src_open).map(exact).filter(Boolean));
+  const details = splitImageList(data.vrVo?.v_src_show)
+    .map(exact)
+    .filter((url) => /\/extra\/extra_[0-9]+_hq\.jpg(?:[?#].*)?$/i.test(url));
+
+  // K Car's v_src_show begins with interior/detail frames. Its separately typed
+  // exterior cover (and 360-degree exterior frames when present) must lead the
+  // customer gallery; cabin, wheels and diagnostics belong after the body.
+  return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
 }
 
 function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
@@ -231,12 +283,7 @@ class KCarExactSource implements CatalogSourceAdapter {
       const batch = await Promise.all(metas.slice(index, index + batchSize).map(async (meta) => {
         const carCd = clean(meta.carCd);
         if (!carCd) return null;
-        const url = new URL(`${API_BASE}/bc/car-info-detail-of-ng`);
-        url.searchParams.set("i_sCarCd", carCd);
-        url.searchParams.set("i_sPassYn", "N");
-        const detail = await requestJson(url.toString(), { headers: { referer: detailUrl(carCd) } }).catch(() => null);
-        if (!detail?.response.ok || detail.json?.success !== true) return null;
-        const data = (detail.json?.data?.data ?? detail.json?.data ?? null) as KCarDetailData | null;
+        const data = await fetchExactDetailData(carCd).catch(() => null);
         return data ? parseExactDetail(meta, data) : null;
       }));
       rows.push(...batch.filter(Boolean) as Row[]);
@@ -321,7 +368,7 @@ class KCarExactSource implements CatalogSourceAdapter {
           sourceExactFields: fields,
           sourceApi: `${API_BASE}/bc/car-info-detail-of-ng`,
           listingApi: `${API_BASE}/bc/search/list/drct`,
-          gallerySafetyMode: "kcar_vrvo_v_src_show_exact_car_id_hq_v1",
+          gallerySafetyMode: KCAR_EXTERIOR_FIRST_GALLERY_MODE,
           rawFuelType: row.rawFuelType,
           rawStatus: row.rawStatus,
           images: row.images,
@@ -331,8 +378,28 @@ class KCarExactSource implements CatalogSourceAdapter {
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const raw = offer.operational?.raw as any;
-    const urls = Array.isArray(raw?.images) ? raw.images.map(clean).filter(Boolean) : [];
+    const raw = (offer.operational?.raw || {}) as any;
+    const previousMode = clean(offer.operational?.gallerySafetyMode || raw.gallerySafetyMode);
+    let urls = Array.isArray(raw.images) ? raw.images.map(clean).filter(Boolean) : [];
+    if (previousMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE) {
+      const carCd = clean(offer.sourceOfferId);
+      if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
+      const data = await fetchExactDetailData(carCd);
+      const rebuilt = exactVehicleGallery(data, carCd);
+      if (rebuilt.length < 5) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
+      urls = rebuilt;
+      raw.images = rebuilt;
+      raw.gallerySafetyMode = KCAR_EXTERIOR_FIRST_GALLERY_MODE;
+    }
+    offer.operational = {
+      ...(offer.operational || {}),
+      gallerySafetyMode: KCAR_EXTERIOR_FIRST_GALLERY_MODE,
+      galleryImageCount: urls.length,
+      galleryRefreshedAt: new Date().toISOString(),
+      vehiclePhotoVerified: urls.length > 0,
+      photoIdentityVerified: urls.length > 0,
+      raw,
+    };
     return [...new Set(urls)].slice(0, 30).map(image);
   }
 

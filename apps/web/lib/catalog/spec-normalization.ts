@@ -138,7 +138,7 @@ function inferBody(text: string) {
   if (/minivan|\bmpv\b|staria|starex|carnival|odyssey|sienna|alphard|vellfire|serena|stepwgn|noah|voxy|freed|минивэн/.test(text)) return "minivan";
   if (/convertible|cabrio|roadster|кабриолет/.test(text)) return "convertible";
   if (/coupe|coupé|купе|쿠페/.test(text)) return "coupe";
-  if (/wagon|estate|touring|avant|универсал|旅行车/.test(text)) return "wagon";
+  if (/wagon|estate|touring|\bavant\b|универсал|旅行车/.test(text)) return "wagon";
   if (/hatchback|hatch|fastback|хэтчбек|两厢/.test(text)) return "hatchback";
   if (/sedan|saloon|limousine|седан|轿车|三厢/.test(text)) return "sedan";
   if (/\boff[ -]?road\b|внедорожник|越野车|land cruiser|\bprado\b|\bpatrol\b|\bdefender\b|\bwrangler\b|\bbronco\b|\bfortuner\b|\bpajero\b|\bmontero\b|\bjimny\b|\b4runner\b|g[- ]?class|\bg\s?(?:350|400|500|550|580|63)\b|\bhummer\b/.test(text)) return "offroad";

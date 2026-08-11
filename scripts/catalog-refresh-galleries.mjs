@@ -1,4 +1,4 @@
-const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
+const { catalogImportSources, needsSourceOrderedGalleryRefresh } = await import("../apps/web/lib/catalog/importer.ts");
 const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
@@ -6,9 +6,7 @@ const markets = new Set(String(process.env.CATALOG_GALLERY_MARKETS || "korea,chi
   .split(",").map((value) => value.trim()).filter(Boolean));
 const sourceIds = new Set(String(process.env.CATALOG_GALLERY_SOURCE_IDS || "")
   .split(",").map((value) => value.trim()).filter(Boolean));
-const reportedOfferIds = ["d4353979acb720365324de54", "81937e0dbd5b509f183597a4", "6915dc63976acf885d99f13b"];
 const offerIds = new Set([
-  ...reportedOfferIds,
   ...String(process.env.CATALOG_GALLERY_OFFER_IDS || "").split(",").map((value) => value.trim()).filter(Boolean),
 ]);
 const maxOffers = Math.max(1, Number(process.env.CATALOG_GALLERY_MAX_OFFERS || 250));
@@ -40,8 +38,9 @@ const candidates = allOffers
   .filter((offer) => offerIds.has(offer.id) || markets.has(String(offer.market)))
   .filter((offer) => offerIds.has(offer.id) || !sourceIds.size || sourceIds.has(String(offer.sourceId)))
   .filter((offer) => adapters.has(offer.sourceId))
-  .filter((offer) => offerIds.has(offer.id) || force || (offer.images?.length || 0) < minImages)
+  .filter((offer) => offerIds.has(offer.id) || force || needsSourceOrderedGalleryRefresh(offer) || (offer.images?.length || 0) < minImages)
   .sort((a, b) => Number(offerIds.has(b.id)) - Number(offerIds.has(a.id))
+    || Number(needsSourceOrderedGalleryRefresh(b)) - Number(needsSourceOrderedGalleryRefresh(a))
     || (a.images?.length || 0) - (b.images?.length || 0)
     || Date.parse(String(b.operational?.sourcePublishedAt || b.updatedAt || "")) - Date.parse(String(a.operational?.sourcePublishedAt || a.updatedAt || "")))
   .filter((offer) => {
@@ -55,6 +54,7 @@ const candidates = allOffers
 
 const byId = new Map(allOffers.map((offer) => [offer.id, offer]));
 const report = { startedAt: new Date().toISOString(), markets: [...markets], priorityOfferIds: [...offerIds], selected: candidates.length, refreshed: 0, expanded: 0, replaced: 0, unchanged: 0, failed: 0, rows: [] };
+let lastPersistedCount = 0;
 
 for (let index = 0; index < candidates.length; index++) {
   const offer = candidates[index];
@@ -97,11 +97,12 @@ for (let index = 0; index < candidates.length; index++) {
 
   if ((index + 1) % persistEvery === 0) {
     await persistCatalogOffers([...byId.values()]);
+    lastPersistedCount = index + 1;
     console.log(`[gallery] checkpoint persisted after ${index + 1} offers`);
   }
 }
 
-if (candidates.length) await persistCatalogOffers([...byId.values()]);
+if (candidates.length > lastPersistedCount) await persistCatalogOffers([...byId.values()]);
 report.finishedAt = new Date().toISOString();
 await (await import("node:fs/promises")).writeFile(process.env.CATALOG_GALLERY_REPORT_FILE || "catalog-gallery-refresh-report.json", JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));

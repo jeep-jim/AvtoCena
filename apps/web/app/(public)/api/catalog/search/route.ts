@@ -3,6 +3,9 @@ import { readDataJson } from "@/lib/data";
 import { convertToRub } from "@/lib/catalog/rates";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const RATE_CODES = ["JPY", "CNY", "KRW", "AED", "EUR", "GEL", "USD", "GBP", "PLN", "CHF", "SEK", "NOK", "DKK", "HUF", "CZK"];
 const CBR_HISTORY_TTL_MS = 15 * 60_000;
 
@@ -202,13 +205,35 @@ async function enrichRateHistory(rates: PublicRate[]): Promise<PublicRate[]> {
   });
 }
 
+async function loadPublicRateExtras() {
+  const rawRates = await readDataJson<any>("fees/exchange-rates.json", {});
+  let rates = publicRates(rawRates);
+  if (!rates.some((rate) => rate.currency === "GEL")) {
+    const liveGel = await convertToRub(1, "GEL").catch(() => null);
+    if (liveGel) {
+      rates.push({
+        currency: "GEL",
+        effectiveRate: liveGel.effectiveRate,
+        previousEffectiveRate: liveGel.previousEffectiveRate,
+        rateDelta: liveGel.rateDelta,
+        rateDate: validIsoDate(liveGel.rateDate),
+        previousRateDate: validIsoDate(liveGel.previousRateDate) || undefined,
+        history: [],
+      });
+    }
+  }
+  rates = await enrichRateHistory(rates);
+  return { rates, ratesUpdatedAt: rawRates?.updatedAt || null };
+}
+
 export async function GET(request: Request) {
   const u = new URL(request.url);
   const p = u.searchParams;
-  const result = await searchOffers({
+  const query: Parameters<typeof searchOffers>[0] = {
     market: p.get("market") || undefined,
     make: p.get("make") || p.get("brand") || undefined,
     model: p.get("model") || undefined,
+    hasPrice: p.get("hasPrice") || undefined,
     budgetFrom: n(p.get("budgetFrom")),
     budgetTo: n(p.get("budgetTo") || p.get("budget")),
     yearFrom: n(p.get("yearFrom")),
@@ -227,30 +252,14 @@ export async function GET(request: Request) {
     sort: p.get("sort") || undefined,
     page: n(p.get("page")),
     pageSize: n(p.get("pageSize")),
-  });
-
+  };
+  const [result, facets, rateExtras] = await Promise.all([
+    searchOffers(query),
+    p.get("includeFacets") === "1" ? readCatalogFacets(query) : Promise.resolve(undefined),
+    p.get("includeRates") === "1" ? loadPublicRateExtras() : Promise.resolve(undefined),
+  ]);
   const extras: Record<string, unknown> = {};
-  if (p.get("includeRates") === "1") {
-    const rawRates = await readDataJson<any>("fees/exchange-rates.json", {});
-    let rates = publicRates(rawRates);
-    if (!rates.some((rate) => rate.currency === "GEL")) {
-      const liveGel = await convertToRub(1, "GEL").catch(() => null);
-      if (liveGel) {
-        rates.push({
-          currency: "GEL",
-          effectiveRate: liveGel.effectiveRate,
-          previousEffectiveRate: liveGel.previousEffectiveRate,
-          rateDelta: liveGel.rateDelta,
-          rateDate: validIsoDate(liveGel.rateDate),
-          previousRateDate: validIsoDate(liveGel.previousRateDate) || undefined,
-          history: [],
-        });
-      }
-    }
-    rates = await enrichRateHistory(rates);
-    extras.rates = rates;
-    extras.ratesUpdatedAt = rawRates?.updatedAt || null;
-  }
-  if (p.get("includeFacets") === "1") extras.facets = await readCatalogFacets();
-  return NextResponse.json({ ok: true, ...result, ...extras });
+  if (facets) extras.facets = facets;
+  if (rateExtras) Object.assign(extras, rateExtras);
+  return NextResponse.json({ ok: true, ...result, ...extras }, { headers: { "Cache-Control": "no-store, max-age=0" } });
 }

@@ -216,6 +216,11 @@ function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleO
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 let projectionCacheGeneration = "";
+export function resetCatalogReadCachesForTests() {
+  manifestCache = null;
+  searchProjectionCache.clear();
+  projectionCacheGeneration = "";
+}
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
   projectionCacheGeneration = generationId;
@@ -237,7 +242,11 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
   if (params.make && lower(row.make) !== lower(params.make)) return false;
-  if (params.model && (!modelKeys?.size || !modelKeys.has(`${lower(row.make)}:${lower(row.model)}`))) return false;
+  if (params.model) {
+    const canonicalMatch = modelKeys?.size ? modelKeys.has(`${lower(row.make)}:${lower(row.model)}`) : false;
+    const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
+    if (!canonicalMatch && !literalMatch) return false;
+  }
   if (params.hasPrice) { const value = Number(row.totalRub || 0) > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
   if (params.budgetFrom && projectionNumber(row.totalRub, 0) < params.budgetFrom) return false;
   if (params.budgetTo && projectionNumber(row.totalRub, Infinity) > params.budgetTo) return false;
@@ -474,77 +483,15 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
   await runWithConcurrency(tasks, concurrency);
 }
-function intersect(a: Set<string> | null, ids: string[]) { const b = new Set(ids); if (!a) return b; return new Set([...a].filter((id) => b.has(id))); }
-function rangeKeys(from: number | undefined, to: number | undefined, step: number, maximum: number) {
-  const low = Math.max(0, Number(from || 0));
-  const high = Math.min(maximum, Number(to || maximum));
-  if (!Number.isFinite(low) || !Number.isFinite(high) || high < low) return [];
-  const first = Math.max(step, Math.ceil(low / step) * step);
-  const last = Math.max(first, Math.ceil(high / step) * step);
-  const keys: number[] = [];
-  for (let value = first; value <= last && keys.length < 1_000; value += step) keys.push(value);
-  return keys;
-}
-function yearKeys(from?: number, to?: number) {
-  const current = new Date().getFullYear() + 2;
-  const low = Math.max(1886, Math.floor(Number(from || 1886)));
-  const high = Math.min(current, Math.floor(Number(to || current)));
-  if (high < low) return [];
-  return Array.from({ length: high - low + 1 }, (_, index) => low + index);
-}
-async function unionIndexIds(manifest: CatalogManifest, name: string, keys: Array<string | number>, used: string[]) {
-  const uniqueKeys = [...new Set(keys.map(cleanShard).filter((key) => key && key !== "unknown"))];
-  const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_INDEX_READ_CONCURRENCY || 16)));
-  const shards = await mapWithConcurrency(uniqueKeys, concurrency, async (key) => {
-    const path = `${name}/${key}.json`;
-    used.push(`catalog/generations/${manifest.generationId}/indexes/${path}`);
-    return readIndex<{ ids: string[] }>(manifest.generationId, path, { ids: [] });
-  });
-  return [...new Set(shards.flatMap((shard) => shard.ids || []))];
-}
-async function candidateIds(manifest: CatalogManifest, params: CatalogSearchParams) {
-  const used: string[] = [];
-  let ids: Set<string> | null = null;
-  const specs: [string, string | number | undefined][] = [
-    ["market", params.market && params.market !== "any" ? params.market : undefined],
-    ["make", params.make], ["fuel", params.fuel], ["body", params.bodyType],
-    ["transmission", params.transmission], ["drive", params.drive], ["hasPrice", params.hasPrice],
-  ];
-  for (const [name, key] of specs) if (key) {
-    const path = `${name}/${cleanShard(key)}.json`;
-    const shard = await readIndex<{ ids: string[] }>(manifest.generationId, path, { ids: [] });
-    used.push(`catalog/generations/${manifest.generationId}/indexes/${path}`);
-    ids = intersect(ids, shard.ids || []);
-  }
-  if (params.model) {
-    let modelIds: string[] = [];
-    if (params.make) {
-      const directPath = `model/${cleanShard(`${params.make}:${params.model}`)}.json`;
-      const direct = await readIndex<{ ids: string[] }>(manifest.generationId, directPath, { ids: [] });
-      used.push(`catalog/generations/${manifest.generationId}/indexes/${directPath}`);
-      modelIds = direct.ids || [];
-    }
-    if (!modelIds.length) {
-      const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
-      const candidates = matches.length ? matches.map((match) => `${match.make}:${match.model}`) : params.make ? [`${params.make}:${params.model}`] : [];
-      modelIds = await unionIndexIds(manifest, "model", candidates, used);
-    }
-    ids = intersect(ids, modelIds);
-  }
-  if (params.yearFrom || params.yearTo) ids = intersect(ids, await unionIndexIds(manifest, "year", yearKeys(params.yearFrom, params.yearTo), used));
-  if (params.budgetFrom || params.budgetTo) ids = intersect(ids, await unionIndexIds(manifest, "budget", rangeKeys(params.budgetFrom, params.budgetTo, 500_000, 100_000_000), used));
-  if (params.mileageFrom || params.mileageTo) ids = intersect(ids, await unionIndexIds(manifest, "mileage", rangeKeys(params.mileageFrom, params.mileageTo, 25_000, 1_000_000), used));
-  if (params.engineFrom || params.engineTo) ids = intersect(ids, await unionIndexIds(manifest, "engine", rangeKeys(params.engineFrom, params.engineTo, 250, 10_000), used));
-  if (params.powerFrom || params.powerTo) ids = intersect(ids, await unionIndexIds(manifest, "power", rangeKeys(params.powerFrom, params.powerTo, 25, 2_500), used));
-  return { ids, used };
-}
 export async function getOffer(id: string) { const manifest = await readManifest(); const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }); const loc = byId.byId[id]; if (!loc) return null; const chunk = await readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []); return chunk.find((o) => o.id === id && isPublicOffer(o)) || null; }
 export async function searchOffers(params: CatalogSearchParams) {
   const manifest = await readManifest();
   const page = Math.max(1, Number(params.page || 1));
   const pageSize = Math.min(48, Math.max(1, Number(params.pageSize || 24)));
-  const needsProjection = Boolean(params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo
+  const needsProjection = Boolean((params.market && params.market !== "any") || params.make || params.model || params.hasPrice
+    || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo
     || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo
+    || params.fuel || params.bodyType || params.transmission || params.drive
     || (params.sort && params.sort !== "updatedAt"));
 
   // Current generations contain a compact per-market projection with every field
@@ -582,7 +529,11 @@ export async function searchOffers(params: CatalogSearchParams) {
     }
   }
 
-  const { ids, used } = await candidateIds(manifest, params);
+  // Legacy generations may not contain every optional index shard. Use their
+  // ordering index only as the candidate list, then apply every requested
+  // filter against the projection (or its exact offer-scan fallback) below.
+  const ids: Set<string> | null = null;
+  const used: string[] = [];
   const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} });
   const order = await readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: Object.keys(byId.byId) });
   const idList = ids ? order.ids.filter((id) => ids.has(id)) : order.ids;

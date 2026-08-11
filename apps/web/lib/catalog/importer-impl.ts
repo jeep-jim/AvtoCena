@@ -3,6 +3,7 @@ import { mutateDataJson, readDataJson, writeDataJson } from "../data";
 import { catalogSources } from "./adapters";
 import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
 import { credibleCatalogImages, isCrediblePublicOffer } from "./offer-quality";
+import { KCAR_EXTERIOR_FIRST_GALLERY_MODE } from "./kcar-exact-source";
 import { publicMarketSources } from "./public-market-sources";
 import { persistCatalogOffers, readAllOffersForMaintenance } from "./storage";
 import { getSourcePolicy, policyAllowsRun, updatePolicyAfterRun } from "./policy";
@@ -49,6 +50,13 @@ function mergeImages(previous: CatalogImage[], fresh: CatalogImage[], limit: num
     if (result.length >= limit) break;
   }
   return result;
+}
+
+export function needsSourceOrderedGalleryRefresh(offer: VehicleOffer | undefined) {
+  if (!offer || offer.sourceId !== "kcar_korea_open") return false;
+  const operational = offer.operational as any;
+  return operational?.gallerySafetyMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE
+    && operational?.raw?.gallerySafetyMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE;
 }
 
 function mergeOfferBase(previous: VehicleOffer | undefined, base: VehicleOffer, seenAt: string, scanCycleId: string) {
@@ -248,6 +256,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
 
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
+            const refreshSourceOrder = needsSourceOrderedGalleryRefresh(previous);
             seen.add(base.id);
             let images: CatalogImage[] = [];
             await refreshLock();
@@ -256,13 +265,16 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             images = previousImages;
             let attemptedImages = false;
 
-            if (policy.imagesEnabled && sourceDetails < configuredMaxDetails && images.length < maxImagesPerOffer) {
+            if (policy.imagesEnabled && sourceDetails < configuredMaxDetails && (images.length < maxImagesPerOffer || refreshSourceOrder)) {
               attemptedImages = true;
               const previousImageLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
               process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
               try {
-                const freshImages = await source.fetchImages(base);
-                images = credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));
+                const freshImages = credibleCatalogImages(await source.fetchImages(base));
+                const sourceOrderedMinimum = Math.min(5, maxImagesPerOffer);
+                images = refreshSourceOrder && freshImages.length >= sourceOrderedMinimum
+                  ? freshImages.slice(0, maxImagesPerOffer)
+                  : credibleCatalogImages(mergeImages(previousImages, freshImages, maxImagesPerOffer));
               } finally {
                 if (previousImageLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
                 else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousImageLimit;

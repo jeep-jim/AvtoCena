@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
@@ -11,11 +11,12 @@ import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getOffer, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
 
@@ -106,6 +107,32 @@ function diverseSimilarOffers(rows: any[], current: any, limit = 12) {
   return [...differentModels, ...repeats].slice(0, limit);
 }
 
+async function SimilarOffers({ current, visibleRub }: { current: any; visibleRub: number }) {
+  let similar: any[] = [];
+  try {
+    const result = await searchOffers({
+      market: current.market,
+      budgetFrom: visibleRub ? Math.round(visibleRub * 0.75) : undefined,
+      budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined,
+      pageSize: 48,
+      sort: "updatedAt",
+    });
+    similar = diverseSimilarOffers(
+      result.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item)),
+      current,
+      12,
+    );
+  } catch (error) {
+    console.error("offer_similar_search_failed", error);
+  }
+
+  return <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(current.market)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>;
+}
+
+function SimilarOffersFallback() {
+  return <section className="mt-10 md:mt-14" aria-label="Загружаем похожие предложения"><div className="h-9 w-52 animate-pulse rounded-xl bg-white/[0.08]" /><div className="mt-5 grid grid-cols-2 gap-2.5 md:grid-cols-4">{Array.from({ length: 4 }, (_, index) => <div key={index} className="min-h-64 animate-pulse rounded-[1.35rem] bg-white/[0.045]" />)}</div></section>;
+}
+
 type BreakdownLine = { id?: string; title: string; amountRub: number };
 function customerBreakdownTitle(id: string, title: string) {
   if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
@@ -157,7 +184,7 @@ function MissingOffer() {
 
 export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const offer = await getOffer(id);
+  const offer = await getOfferForPage(id);
   if (!offer || !isCrediblePublicOffer(offer)) return <MissingOffer />;
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
@@ -176,8 +203,6 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
-  const similarResult = await searchOffers({ market: raw.market, budgetFrom: visibleRub ? Math.round(visibleRub * 0.75) : undefined, budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined, pageSize: 48, sort: "updatedAt" });
-  const similar = diverseSimilarOffers(similarResult.items.filter((item: any) => item.id !== raw.id && isCrediblePublicOffer(item)), raw, 12);
   const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
@@ -260,7 +285,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(raw.market)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>
+      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} visibleRub={visibleRub} /></Suspense>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}
