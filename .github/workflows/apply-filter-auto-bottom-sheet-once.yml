@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/apply-filter-auto-bottom-sheet-once.yml
 
+# retry after typecheck correction
 permissions:
   contents: write
 
