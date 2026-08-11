@@ -33,6 +33,16 @@ test("Japan scale collection goes deeper and publishes in the shared single-writ
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "100"/);
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
+
+  const merge = fs.readFileSync("scripts/prestige-japan-strict-merge.mjs", "utf8");
+  assert.match(merge, /warnings\.push\(`chunk_incomplete_/);
+  assert.match(merge, /const passed = errors\.length === 0 && outputOffers\.length > 0/);
+
+  const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish-verified-aggregate.yml", "utf8");
+  assert.match(verifiedPublish, /PRESTIGE_AGGREGATE_MIN_COUNT: "5000"/);
+  assert.match(verifiedPublish, /prestige-japan-aggregate-salvage\.mjs/);
+  assert.match(verifiedPublish, /group: catalog-live-daily-working-markets/);
+  assert.match(verifiedPublish, /"japan":5000/);
 });
 
 test("certified 30-minute power is applied automatically without accepting peak power", () => {
