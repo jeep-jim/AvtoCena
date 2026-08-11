@@ -1,0 +1,43 @@
+name: Validate Mobile.de min five photos
+
+on:
+  push:
+    branches: [fix/mobile-de-min-five-photos-20260811]
+    paths:
+      - .github/workflows/validate-mobile-de-min-five-photos.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-de-min-five-photos-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply patch
+        run: python3 scripts/patch-mobile-de-min-five-photos.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Smoke canonical public quality
+        run: |
+          npx tsx -e 'import {hasCredibleOfferContent} from "./apps/web/lib/catalog/offer-quality.ts"; const image=(n:number)=>({id:"",url:`https://img.classistatic.de/api/v1/mo-prod/images/${n}.jpg`,objectKey:"",checksum:"",size:120000,width:1200,height:800,mimeType:"image/jpeg"}); const base:any={id:"x",sourceId:"mobile_de_open",sourceOfferId:"1",market:"europe",offerType:"fixed",status:"active",sourceTitle:"BMW 320i",make:"BMW",model:"320i",year:2025,powerHp:156,sourcePrice:25000,sourceCurrency:"EUR",images:[],operational:{sourceUrl:"https://suchen.mobile.de/fahrzeuge/details.html?id=1",photoIdentityVerified:true,raw:{photoIdentityVerified:true,listingBoundImages:true}}}; const four={...base,images:[1,2,3,4].map(image)}; const five={...base,images:[1,2,3,4,5].map(image)}; if(hasCredibleOfferContent(four)) throw new Error("mobile four photos must fail"); if(!hasCredibleOfferContent(five)) throw new Error("mobile five photos must pass"); console.log({four:false,five:true})'
+      - name: Static collector gate
+        run: grep -q '"mobile_de_open"].includes(source.sourceId)' scripts/catalog-live-recovery-market.mjs
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-mobile-de-min-five-photos.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/offer-quality.ts scripts/catalog-live-recovery-market.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Require five source photos for Mobile.de cards [skip actions]"
+          git push origin HEAD:fix/mobile-de-min-five-photos-20260811
