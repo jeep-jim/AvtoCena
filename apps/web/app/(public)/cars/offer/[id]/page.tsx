@@ -206,9 +206,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       : null;
   const powerTile = powerDisplay && electrified
     ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
-    : preliminaryPricing && electrified
-      ? { label: "30-минутная мощность", value: "30 мин: уточняется", icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
-      : null;
+    : null;
 
   const specs = (isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
