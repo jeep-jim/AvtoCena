@@ -10,6 +10,7 @@ const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
 const preloader = fs.readFileSync("apps/web/components/layout/RoutePreloader.tsx", "utf8");
 const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
 const deploy = fs.readFileSync(".github/workflows/deploy-yandex.yml", "utf8");
+const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings.ts", "utf8");
 
 test("offer navigation swaps the catalog for an immediate route skeleton", () => {
   assert.match(loading, /main className="ac-offer-page/);
@@ -48,4 +49,11 @@ test("production keeps one warm container and serves navigation bursts in-proces
   assert.match(deploy, /revision-provisioned: 1/);
   assert.match(deploy, /Warm public catalog and first offer/);
   assert.match(deploy, /cars\/offer\/\$offer_id/);
+});
+
+test("catalog pricing shares one short-lived market-settings read", () => {
+  assert.match(effectiveMarkets, /EFFECTIVE_MARKETS_CACHE_MS/);
+  assert.match(effectiveMarkets, /getCachedMarketsSettings\(\)/);
+  assert.match(effectiveMarkets, /selectActiveMarketVersion\(market\)/);
+  assert.doesNotMatch(effectiveMarkets, /Promise\.all\(MARKET_IDS\.map/);
 });

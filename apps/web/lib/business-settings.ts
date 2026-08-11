@@ -27,6 +27,13 @@ function chooseEffectiveVersion(versions: any[] = [], asOf = new Date()) {
     .sort((a, b) => effectiveTime(b.effectiveFrom) - effectiveTime(a.effectiveFrom) || Number(b.version || 0) - Number(a.version || 0))[0] || null;
 }
 
+export function selectActiveMarketVersion(market: any, asOf = new Date()) {
+  if (!market) return null;
+  return chooseEffectiveVersion(market.versions || [], asOf)
+    || market.versions?.find((version: any) => version.id === market.activeVersionId)
+    || null;
+}
+
 
 export async function getMarketsSettings() {
   return await readDataJson<any[]>("markets/markets.json", []);
@@ -38,21 +45,20 @@ export async function getMarketSettings(marketId: string) {
 
 export async function getActiveMarketVersion(marketId: string, asOf = new Date()) {
   const market = await getMarketSettings(marketId);
-  if (!market) return null;
-  return chooseEffectiveVersion(market.versions || [], asOf) || market.versions?.find((version: any) => version.id === market.activeVersionId) || null;
+  return selectActiveMarketVersion(market, asOf);
 }
 
 export async function getMarketsWithEffectiveVersions(asOf = new Date()) {
   const markets = await getMarketsSettings();
-  return Promise.all(markets.map(async (market) => ({
+  return markets.map((market) => ({
     ...market,
-    effectiveVersion: await getActiveMarketVersion(market.id, asOf),
-  })));
+    effectiveVersion: selectActiveMarketVersion(market, asOf),
+  }));
 }
 
 export async function getBusinessSettingsSnapshot(marketId: string) {
   const market = await getMarketSettings(marketId);
-  const version = await getActiveMarketVersion(marketId);
+  const version = selectActiveMarketVersion(market);
   if (!market || !version) return null;
   return {
     snapshotAt: nowIso(),
