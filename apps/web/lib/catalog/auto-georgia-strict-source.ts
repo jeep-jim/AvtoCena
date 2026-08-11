@@ -111,6 +111,15 @@ export function autoGeorgiaImageBelongsToListing(value: string, listingId: unkno
 function listingImageUrls(markup: string, base: string, listingId: unknown) {
   return imageUrls(markup, base).filter((url) => autoGeorgiaImageBelongsToListing(url, listingId));
 }
+function sourceCatalogImage(urlValue: string): CatalogImage | null {
+  const url = String(urlValue || "").trim();
+  const extension = url.match(/\.(jpe?g|webp|png)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+  if (!url || !extension) return null;
+  return {
+    id: "", url, objectKey: "", checksum: "", size: 0,
+    mimeType: extension === "png" ? "image/png" : extension === "webp" ? "image/webp" : "image/jpeg",
+  };
+}
 function identityMatches(markup: string, row: Pick<AutoGeorgiaRow, "make" | "model">) {
   const text = compact(plainText(markup).slice(0, 20_000));
   const make = compact(row.make);
@@ -238,9 +247,23 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
         (offer.operational.raw as any).photoIdentityVerified = urls.length > 0;
       }
     }
+    urls = urls.filter((url) => autoGeorgiaImageBelongsToListing(url, row.id)).slice(0, limit);
     offer.operational.gallerySourceImageCount = urls.length;
+    (offer.operational.raw as any).images = urls;
+    (offer.operational.raw as any).listingBoundImages = urls.length > 0;
+    (offer.operational.raw as any).photoIdentityVerified = urls.length > 0;
+    (offer.operational.raw as any).exactDetailGallery = true;
+
+    // Live recovery deliberately uses source_urls_only. AUTO.GE serves its exact
+    // listing galleries from a public DigitalOcean Spaces origin whose URL embeds
+    // /ad<listingId>/. Do not discard those already identity-verified source photos
+    // just because the generic binary cache host allow-list is narrower.
+    if (String(process.env.CATALOG_IMAGE_STORAGE_MODE || "") === "source_urls_only") {
+      return urls.map(sourceCatalogImage).filter((image): image is CatalogImage => Boolean(image));
+    }
+
     const saved: CatalogImage[] = [];
-    for (const url of urls.slice(0, limit * 4)) {
+    for (const url of urls) {
       const image = await cacheImageFromUrl(url, this.market, { headers: { ...HEADERS, referer: detailUrl || "https://www.auto.ge/en/auto/index.html" } }).catch(() => null);
       if (image && image.size > 8_000) saved.push(image);
       if (saved.length >= limit) break;

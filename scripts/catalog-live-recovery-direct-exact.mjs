@@ -178,7 +178,15 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
     if (!offer.make || !offer.model || !offer.sourceOfferId || !hostOk(offer.operational?.sourceUrl)) { reject(rejections, "identity"); continue; }
     if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); continue; }
     if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); continue; }
-    const exactImages = rawBoundImages(offer);
+    let exactImages = rawBoundImages(offer);
+    if (market === "georgia") {
+      try {
+        const detailImages = credibleCatalogImages(await source.fetchImages(offer));
+        if (detailImages.length > exactImages.length) exactImages = detailImages.slice(0, 30);
+      } catch (error) {
+        errors.push({ stage: "exact_gallery", sourceOfferId: offer.sourceOfferId, error: String(error?.message || error) });
+      }
+    }
     if (!exactImages.length) { reject(rejections, "exact_images"); continue; }
     offer.images = exactImages;
     offer = await fillOnlyUnambiguousSpecs(offer);
