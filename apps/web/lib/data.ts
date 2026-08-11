@@ -172,7 +172,7 @@ export class ObjectJsonStorage implements JsonStorage {
     } while (continuationToken);
     return objects;
   }
-  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); const concurrency = Math.max(1, Math.min(16, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 8))); let cursor = 0; let deleted = 0; await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, objects.length)) }, async () => { while (true) { const index = cursor++; if (index >= objects.length) return; await this.deleteJson(objects[index].key); deleted++; } })); return deleted; }
+  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); const concurrency = Math.max(1, Math.min(64, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 8))); let cursor = 0; let deleted = 0; await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, objects.length)) }, async () => { while (true) { const index = cursor++; if (index >= objects.length) return; await this.deleteJson(objects[index].key); deleted++; } })); return deleted; }
 }
 
 let singleton: JsonStorage | null = null;
