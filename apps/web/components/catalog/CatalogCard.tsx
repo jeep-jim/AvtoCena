@@ -28,7 +28,7 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="12" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8" /><path d="M15.5 10h2v4h-2M7.5 9.5h4M7.5 14.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="18" cy="18" r="4" fill="var(--ac-surface, #11141c)" stroke="currentColor" strokeWidth="1.7" /><path d="M18 15.8V18l1.4 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
+export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
   const projectedCover = String((offer as any)?.cardImageUrl || "").trim();
   const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
@@ -65,7 +65,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
-      <IntentPrefetchLink href={href} className="block overflow-hidden rounded-[1.35rem]">
+      <IntentPrefetchLink href={href} eager={eagerPrefetch} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" loading="lazy" decoding="async" fetchPriority="low" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />

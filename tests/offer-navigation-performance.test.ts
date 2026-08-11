@@ -46,6 +46,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /router\.prefetch\(href\)/);
   assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
   assert.match(intentLink, /onTouchStart=\{prefetch\}/);
+  assert.match(intentLink, /window\.setTimeout\(prefetch, 1_200\)/);
+  assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
   assert.match(storage, /currentOfferShardCache/);
