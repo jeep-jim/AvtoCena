@@ -386,7 +386,7 @@ await Promise.all(sources.map(async (source) => {
         }
       }
       if (!offer.images.length) { reject(rejections, "images"); return null; }
-      if (source.sourceId === "autohome_new_china_open" && offer.images.length < 5) {
+      if (["autohome_new_china_open", "mobile_de_open"].includes(source.sourceId) && offer.images.length < 5) {
         reject(rejections, "exact_gallery_below_5");
         return null;
       }
