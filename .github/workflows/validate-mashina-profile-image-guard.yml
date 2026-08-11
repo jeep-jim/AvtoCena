@@ -1,0 +1,40 @@
+name: Validate Mashina profile image guard
+
+on:
+  push:
+    branches: [fix/mashina-profile-image-guard-20260811]
+    paths:
+      - .github/workflows/validate-mashina-profile-image-guard.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mashina-profile-image-guard-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-mashina-profile-image-guard.py
+      - run: npm run typecheck
+      - name: Unit smoke profile image suppression
+        run: |
+          npx tsx -e 'import {rankedCatalogImageUrls,isLikelyVehicleImage} from "./apps/web/lib/catalog/image-quality.ts"; import {credibleCatalogImages} from "./apps/web/lib/catalog/offer-quality.ts"; const profile={url:"https://im.mashina.kg/tachka/images//users/e/0/4/e042c72697abd009f5425aab1ed32860_200x200.jpg",mimeType:"image/jpeg",size:50000}; const vehicle={url:"https://storage.mashina.kg/catalog/images/2026-08-01/10101487/28ab0b32ef4f03a5b9b432b5fe571c57_large.webp",mimeType:"image/webp",size:120000}; if(isLikelyVehicleImage(profile)) throw new Error("profile accepted as vehicle image"); const ranked=rankedCatalogImageUrls({images:[profile,vehicle]}); if(ranked.length!==1||!ranked[0].includes("storage.mashina.kg")) throw new Error(JSON.stringify(ranked)); const credible=credibleCatalogImages([profile,vehicle] as any); if(credible.length!==1||!String(credible[0].url).includes("storage.mashina.kg")) throw new Error(JSON.stringify(credible)); console.log({ranked,credible:credible.map(x=>x.url)});'
+          grep -q '\\/users\\/' apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-mashina-profile-image-guard.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts apps/web/lib/catalog/image-quality.ts apps/web/lib/catalog/offer-quality.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Reject Mashina seller profile images from galleries [skip actions]"
+          git push origin HEAD:fix/mashina-profile-image-guard-20260811
