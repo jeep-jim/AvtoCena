@@ -36,6 +36,22 @@ test("K Car exterior cover and representative body angles lead the detail galler
   ]);
 });
 
+test("K Car two-dimensional listings prepend their exact front and rear body photos", () => {
+  const gallery = exactVehicleGallery({
+    rvo: {
+      carCd: "EC61399471",
+      frontImgPath: "/ucms/202607/CM/CMBIZ11120D/front.jpeg",
+      backImgPath: "/ucms/202607/CM/CMBIZ11120D/rear.jpeg",
+    },
+    photoList: [{ elanPath: "https://img.kcar.com/ucms/unbound-diagnostic.png" }],
+  }, "EC61399471");
+
+  assert.deepEqual(gallery, [
+    "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/front.jpeg",
+    "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/rear.jpeg",
+  ]);
+});
+
 test("old K Car galleries refresh once and the exterior-first version does not loop", () => {
   const oldOffer = { sourceId: "kcar_korea_open", operational: { raw: { gallerySafetyMode: "kcar_vrvo_v_src_show_exact_car_id_hq_v1" } } } as any;
   const currentOffer = { sourceId: "kcar_korea_open", operational: { gallerySafetyMode: KCAR_EXTERIOR_FIRST_GALLERY_MODE } } as any;
