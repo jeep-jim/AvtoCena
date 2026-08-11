@@ -57,7 +57,7 @@ jobs:
           node --check scripts/catalog-live-recovery-merge-shards.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
           npm run typecheck
-          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
+          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','kbchachacha_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
       - name: Verify current seven-market baseline before any write
         shell: bash
         env:
@@ -85,6 +85,7 @@ jobs:
         include:
           - { market: korea, source: encar_direct, target: 5000, max_pages: 300 }
           - { market: korea, source: kcar_korea_open, target: 5000, max_pages: 300 }
+          - { market: korea, source: kbchachacha_korea_open, target: 5000, max_pages: 300 }
           - { market: china, source: autohome_used_china_open, target: 5000, max_pages: 300 }
           - { market: china, source: dongchedi_china_open, target: 5000, max_pages: 300 }
           - { market: china, source: guazi_china_open, target: 5000, max_pages: 300 }

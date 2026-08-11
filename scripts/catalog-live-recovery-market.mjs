@@ -28,6 +28,7 @@ const deadline = Date.now() + timeLimitMs;
 const EXPECTED_HOSTS = {
   encar_direct: ["encar.com"],
   kcar_korea_open: ["kcar.com"],
+  kbchachacha_korea_open: ["kbchachacha.com"],
   autohome_used_china_open: ["che168.com"],
   guazi_china_open: ["guazi.com"],
   autohome_new_china_open: ["autohome.com.cn"],

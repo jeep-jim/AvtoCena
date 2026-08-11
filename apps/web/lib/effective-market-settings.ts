@@ -1,4 +1,4 @@
-import { getActiveMarketVersion, getMarketsSettings } from "./business-settings";
+import { getMarketsSettings, selectActiveMarketVersion } from "./business-settings";
 import { CATALOG_MARKET_DEFAULTS } from "./catalog/estimated-market-config";
 import { MARKET_IDS, type MarketId } from "./settings-validation";
 
@@ -12,6 +12,24 @@ const MARKET_NAMES: Record<MarketId, string> = {
   georgia: "Грузия",
   kyrgyzstan: "Кыргызстан",
 };
+
+// A catalog page can price cards from every market. Reading the same remote
+// markets.json once per market turned one render into eight signed Object
+// Storage requests. Share one immutable snapshot during a browsing session;
+// rejected reads are never retained and edits become visible within a minute.
+const EFFECTIVE_MARKETS_CACHE_MS = Math.max(1_000, Number(process.env.EFFECTIVE_MARKETS_CACHE_MS || 60_000));
+let marketsSettingsCache: { expiresAt: number; promise: ReturnType<typeof getMarketsSettings> } | null = null;
+
+async function getCachedMarketsSettings() {
+  const now = Date.now();
+  if (marketsSettingsCache && marketsSettingsCache.expiresAt > now) return marketsSettingsCache.promise;
+  const promise = getMarketsSettings().catch((error) => {
+    marketsSettingsCache = null;
+    throw error;
+  });
+  marketsSettingsCache = { expiresAt: now + EFFECTIVE_MARKETS_CACHE_MS, promise };
+  return promise;
+}
 
 function present(value: unknown) {
   if (value === null || value === undefined || value === "") return false;
@@ -81,16 +99,18 @@ export function resolveEffectiveMarketVersion(marketId: MarketId, current: any) 
 
 export async function getEffectiveMarketVersion(marketId: string) {
   if (!MARKET_IDS.includes(marketId as MarketId)) return null;
-  const current = await getActiveMarketVersion(marketId);
+  const raw = await getCachedMarketsSettings();
+  const market = raw.find((item) => item.id === marketId);
+  const current = selectActiveMarketVersion(market);
   return resolveEffectiveMarketVersion(marketId as MarketId, current);
 }
 
 export async function getEffectiveMarketsWithDefaults() {
-  const raw = await getMarketsSettings();
+  const raw = await getCachedMarketsSettings();
   const byId = new Map(raw.map((market) => [market.id, market]));
-  return Promise.all(MARKET_IDS.map(async (marketId) => {
+  return MARKET_IDS.map((marketId) => {
     const market = byId.get(marketId) || { id: marketId, name: MARKET_NAMES[marketId], versions: [] };
-    const current = await getActiveMarketVersion(marketId);
+    const current = selectActiveMarketVersion(market);
     const effectiveVersion = resolveEffectiveMarketVersion(marketId, current);
     return {
       ...market,
@@ -99,5 +119,5 @@ export async function getEffectiveMarketsWithDefaults() {
       activeVersionId: effectiveVersion.id,
       effectiveVersion,
     };
-  }));
+  });
 }

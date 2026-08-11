@@ -38,6 +38,7 @@ import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { mobileDeExactSource } from "./mobile-de-exact-source";
 import { dubizzleUaeExactSource } from "./dubizzle-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
+import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
@@ -97,6 +98,7 @@ const completeSources = [
   jpaucPastSource,
   encarCompleteSource,
   kcarKoreaExactSource,
+  kbChaChaChaExactSource,
 ];
 
 for (const replacement of completeSources) {
@@ -122,6 +124,7 @@ const dedicatedDetailSourceIds = new Set([
   "mobile_de_open",
   "dubizzle_uae_open",
   "kcar_korea_open",
+  "kbchachacha_korea_open",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];

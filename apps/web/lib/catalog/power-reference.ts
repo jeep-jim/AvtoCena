@@ -1,4 +1,6 @@
 import { readChunkedDataJson } from "../data";
+import { canonicalCatalogBrand } from "./brands";
+import { translateCatalogText } from "./presentation";
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 
 export type CertifiedPowerReference = {
@@ -6,6 +8,7 @@ export type CertifiedPowerReference = {
   make: string;
   model: string;
   modelAliases?: string[];
+  rawModelContains?: string[];
   trimContains?: string[];
   driveContains?: string[];
   yearFrom?: number;
@@ -17,7 +20,7 @@ export type CertifiedPowerReference = {
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
   utilizationPowerKw?: number;
-  sourceDocumentType: "OTTS" | "SBKTS" | "ZOETS" | "EPTS" | "COC" | "manufacturer_document";
+  sourceDocumentType: "OTTS" | "SBKTS" | "ZOETS" | "EPTS" | "COC" | "KBA_registration_data" | "manufacturer_document";
   sourceDocumentId: string;
   sourceUrl?: string;
   verifiedAt: string;
@@ -36,13 +39,47 @@ function token(value: unknown) {
     .trim();
 }
 
+function translatedToken(value: unknown) {
+  return token(translateCatalogText(value));
+}
+
+function modelToken(value: unknown) {
+  return translatedToken(value);
+}
+
+function makeToken(value: unknown) {
+  return token(canonicalCatalogBrand(String(value || "")));
+}
+
+function searchableText(...values: unknown[]) {
+  const raw = values.map((value) => String(value || "")).join(" ");
+  const translated = values.map((value) => translateCatalogText(value)).join(" ");
+  return token(`${raw} ${translated}`);
+}
+
+function containsSearchTerm(haystack: string, value: unknown) {
+  const terms = [...new Set([token(value), translatedToken(value)].filter(Boolean))];
+  return terms.some((term) => haystack.includes(term));
+}
+
+function searchableDrive(offer: Partial<VehicleOffer>) {
+  const value = searchableText(offer.drive, offer.trim, offer.generation);
+  const tags = [
+    /(?:^| )(?:awd|4wd|allrad|all wheel drive|полный привод|사륜)(?: |$)/u.test(value) ? "awd" : "",
+    /(?:^| )(?:rwd|rear wheel drive|задний привод|후륜)(?: |$)/u.test(value) ? "rwd" : "",
+    /(?:^| )(?:fwd|front wheel drive|передний привод|전륜)(?: |$)/u.test(value) ? "fwd" : "",
+  ].filter(Boolean).join(" ");
+  return token(`${value} ${tags}`);
+}
+
 function validPower(value: unknown) {
   const number = Number(value);
   return Number.isFinite(number) && number > 0 && number <= 4_000;
 }
 
 function referenceSpecificity(reference: CertifiedPowerReference) {
-  return (reference.trimContains?.length || 0) * 10
+  return (reference.rawModelContains?.length || 0) * 15
+    + (reference.trimContains?.length || 0) * 10
     + (reference.driveContains?.length || 0) * 5
     + (reference.peakPowerKw ? 5 : 0)
     + (reference.yearFrom ? 1 : 0)
@@ -51,27 +88,33 @@ function referenceSpecificity(reference: CertifiedPowerReference) {
 
 export function certifiedPowerReferenceMatches(reference: CertifiedPowerReference, offer: Partial<VehicleOffer>) {
   if (reference.active === false) return false;
-  if (token(reference.make) !== token(offer.make)) return false;
-  const offerModel = token(offer.model);
-  const exactModelNames = [reference.model, ...(reference.modelAliases || [])].map(token).filter(Boolean);
+  if (makeToken(reference.make) !== makeToken(offer.make)) return false;
+  const offerModel = modelToken(offer.model);
+  const exactModelNames = [reference.model, ...(reference.modelAliases || [])].map(modelToken).filter(Boolean);
   if (!offerModel || !exactModelNames.includes(offerModel)) return false;
+  if (reference.rawModelContains?.length) {
+    const rawModel = token(offer.model);
+    if (!reference.rawModelContains.every((part) => rawModel.includes(token(part)))) return false;
+  }
   const offerKind = String(offer.powertrainKind || "unknown");
   if (offerKind !== "unknown" && offerKind !== reference.powertrainKind) return false;
   const year = Number(offer.year || 0);
   if (reference.yearFrom && (!year || year < reference.yearFrom)) return false;
   if (reference.yearTo && (!year || year > reference.yearTo)) return false;
   if (reference.trimContains?.length) {
-    const haystack = token([offer.generation, offer.trim, offer.engineType].filter(Boolean).join(" "));
-    if (!reference.trimContains.every((part) => haystack.includes(token(part)))) return false;
+    const haystack = searchableText(offer.generation, offer.trim, offer.engineType);
+    if (!reference.trimContains.every((part) => containsSearchTerm(haystack, part))) return false;
   }
   if (reference.driveContains?.length) {
-    const drive = token(offer.drive);
+    const drive = searchableDrive(offer);
     if (!drive || !reference.driveContains.every((part) => drive.includes(token(part)))) return false;
   }
   if (validPower(reference.peakPowerKw)) {
     const offerPeakPowerKw = Number(offer.powerKw || 0);
     const tolerance = Math.max(0, Number(reference.peakPowerToleranceKw ?? 1));
-    if (!validPower(offerPeakPowerKw) || Math.abs(offerPeakPowerKw - Number(reference.peakPowerKw)) > tolerance) return false;
+    // The reviewed reference is also allowed to fill a missing peak value for
+    // excise. If the source supplied a conflicting peak value, reject it.
+    if (validPower(offerPeakPowerKw) && Math.abs(offerPeakPowerKw - Number(reference.peakPowerKw)) > tolerance) return false;
   }
   return Boolean(reference.sourceDocumentId && reference.verifiedAt && reference.verifiedBy);
 }
@@ -112,6 +155,10 @@ export async function enrichOfferWithCertifiedPower<T extends VehicleOffer>(offe
   return {
     ...offer,
     powertrainKind: reference.powertrainKind,
+    powerKw: validPower(reference.peakPowerKw) ? Number(reference.peakPowerKw) : offer.powerKw,
+    powerHp: validPower(reference.peakPowerKw) && !validPower(offer.powerHp)
+      ? Math.round(Number(reference.peakPowerKw) * 1.3596216173 * 10) / 10
+      : offer.powerHp,
     icePowerKw: validPower(reference.icePowerKw) ? Number(reference.icePowerKw) : offer.icePowerKw,
     power30MinKwByMotor: motorPowers.length ? motorPowers : offer.power30MinKwByMotor,
     power30MinKw: total30Minute || offer.power30MinKw,
