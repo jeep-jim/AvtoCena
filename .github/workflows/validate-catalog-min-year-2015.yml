@@ -1,4 +1,4 @@
-name: Validate catalog min year 2015
+name: Validate market-specific catalog year floors
 
 on:
   push:
@@ -22,19 +22,19 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Apply patch
+      - name: Apply market-specific year patch
         run: python3 scripts/patch-catalog-min-year-2015.py
       - name: Typecheck
         run: npm run typecheck
-      - name: Verify year floor directly
+      - name: Verify market floors directly
         run: |
-          npx tsx -e 'import {isCatalogYearAllowed,CATALOG_MIN_YEAR} from "./apps/web/lib/catalog/offer-quality.ts"; if(CATALOG_MIN_YEAR!==2015) throw new Error(String(CATALOG_MIN_YEAR)); if(!isCatalogYearAllowed(2015)) throw new Error("2015 must pass"); if(isCatalogYearAllowed(2014)) throw new Error("2014 must fail"); console.log({CATALOG_MIN_YEAR,pass2015:true,fail2014:true})'
+          npx tsx -e 'import {isCatalogYearAllowed,catalogMinYearForMarket,CATALOG_NON_JAPAN_MIN_YEAR,CATALOG_JAPAN_MAX_AGE_YEARS} from "./apps/web/lib/catalog/offer-quality.ts"; const current=new Date().getFullYear(); if(CATALOG_NON_JAPAN_MIN_YEAR!==2020) throw new Error(String(CATALOG_NON_JAPAN_MIN_YEAR)); if(CATALOG_JAPAN_MAX_AGE_YEARS!==15) throw new Error(String(CATALOG_JAPAN_MAX_AGE_YEARS)); for (const m of ["china","korea","uae","europe","georgia","kyrgyzstan"]) { if(!isCatalogYearAllowed(2020,m)) throw new Error(`${m}:2020 must pass`); if(isCatalogYearAllowed(2019,m)) throw new Error(`${m}:2019 must fail`); if(catalogMinYearForMarket(m)!==2020) throw new Error(`${m}:floor`) } const jpMin=current-15; if(catalogMinYearForMarket("japan")!==jpMin) throw new Error(`japan floor ${catalogMinYearForMarket("japan")} != ${jpMin}`); if(!isCatalogYearAllowed(jpMin,"japan")) throw new Error("japan rolling floor must pass"); if(isCatalogYearAllowed(jpMin-1,"japan")) throw new Error("japan older than15 must fail"); console.log({nonJapan:2020,japan:jpMin})'
       - name: Static collector publisher checks
         run: |
-          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-market.mjs
-          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-direct-exact.mjs
-          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-japan-prestige.mjs
-          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-publish.mjs
+          grep -q 'const minYear = catalogMinYearForMarket(market);' scripts/catalog-live-recovery-market.mjs
+          grep -q 'const minYear = catalogMinYearForMarket(market);' scripts/catalog-live-recovery-direct-exact.mjs
+          grep -q 'const minYear = catalogMinYearForMarket("japan");' scripts/catalog-live-recovery-japan-prestige.mjs
+          grep -q 'isCatalogYearAllowed(offer.year, other)' scripts/catalog-live-recovery-publish.mjs
       - name: Commit validated production files only
         run: |
           git checkout -- . || true
@@ -43,5 +43,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/web/lib/catalog/offer-quality.ts scripts/catalog-live-recovery-market.mjs scripts/catalog-live-recovery-direct-exact.mjs scripts/catalog-live-recovery-japan-prestige.mjs scripts/catalog-live-recovery-publish.mjs
           git diff --cached --quiet && exit 0
-          git commit -m "Enforce catalog year 2015 floor [skip actions]"
+          git commit -m "Enforce Japan 15y and other markets 2020+ [skip actions]"
           git push origin HEAD:fix/catalog-min-year-2015-20260811
