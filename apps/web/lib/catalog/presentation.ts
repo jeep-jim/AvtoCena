@@ -196,7 +196,7 @@ const directPhrases: Array<[RegExp, string]> = [
   [/스포티지/gi, "Sportage"],
   [/셀토스/gi, "Seltos"],
   [/모닝/gi, "Morning"],
-  [/레이/gi, "Ray"],
+  [/(?<![가-힣])레이(?![가-힣])/gi, "Ray"],
   [/니로/gi, "Niro"],
   [/스팅어/gi, "Stinger"],
   [/카렌스/gi, "Carens"],

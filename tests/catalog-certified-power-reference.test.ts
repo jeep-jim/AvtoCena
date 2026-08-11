@@ -110,3 +110,35 @@ test("raw model qualifier prevents a newer Niro reference from matching the old 
     make: "기아", model: "니로 EV", year: 2023, powertrainKind: "electric",
   }), false);
 });
+
+test("Casper Electric Inspiration matches the documented European Inster homologation", () => {
+  const casperReference: CertifiedPowerReference = {
+    id: "hyundai-casper-electric-inster-49kwh",
+    make: "Hyundai",
+    model: "Casper",
+    modelAliases: ["Casper Electric"],
+    rawModelContains: ["캐스퍼"],
+    trimContains: ["인스퍼레이션"],
+    yearFrom: 2024,
+    yearTo: 2026,
+    powertrainKind: "electric",
+    peakPowerKw: 85,
+    peakPowerToleranceKw: 1,
+    power30MinKw: 28,
+    utilizationPowerKw: 28,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:8252/AMA",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(casperReference, {
+    make: "현대", model: "캐스퍼 일렉트릭", trim: "인스퍼레이션", year: 2025, powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(casperReference, {
+    make: "현대", model: "캐스퍼", trim: "인스퍼레이션", year: 2025, powertrainKind: "electric", powerKw: 84.5,
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(casperReference, {
+    make: "현대", model: "캐스퍼", trim: "인스퍼레이션", year: 2025, powertrainKind: "electric", powerKw: 71,
+  }), false);
+});

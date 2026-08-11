@@ -38,3 +38,8 @@ test("unknown Kana, Hangul and Han fragments are removed without invented transl
   assert.equal(text, "Toyota");
   assert.equal(forbiddenSourceScript.test(text), false);
 });
+
+test("Korean Inspiration trim is not corrupted by the shorter Ray model token", () => {
+  assert.equal(translateCatalogText("인스퍼레이션"), "Inspiration");
+  assert.equal(translateCatalogText("더 뉴 기아 레이 EV"), "Kia Ray EV");
+});
