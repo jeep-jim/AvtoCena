@@ -1,0 +1,45 @@
+name: Validate route preloader contrast delay 20260811
+
+on:
+  push:
+    branches: [fix/route-preloader-contrast-delay-20260811]
+    paths:
+      - .github/workflows/validate-route-preloader-contrast-delay-20260811.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/route-preloader-contrast-delay-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply route preloader patch
+        run: python3 scripts/patch-route-preloader-contrast-delay.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Static checks
+        run: |
+          grep -q 'REVEAL_DELAY_MS = 320' apps/web/components/layout/RoutePreloader.tsx
+          grep -q 'MIN_VISIBLE_MS = 120' apps/web/components/layout/RoutePreloader.tsx
+          grep -q 'MAX_VISIBLE_MS = 3000' apps/web/components/layout/RoutePreloader.tsx
+          grep -q 'ac-route-loader__pill' apps/web/components/layout/RoutePreloader.tsx
+          grep -q 'html\[data-theme="light"\] .ac-route-loader__pill' apps/web/components/layout/RoutePreloader.tsx
+      - name: Commit validated production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-route-preloader-contrast-delay.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/components/layout/RoutePreloader.tsx
+          git diff --cached --quiet && exit 0
+          git commit -m "Improve route preloader contrast and reduce flashing [skip actions]"
+          git push origin HEAD:fix/route-preloader-contrast-delay-20260811
