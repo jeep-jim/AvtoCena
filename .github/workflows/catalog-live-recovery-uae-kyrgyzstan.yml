@@ -7,7 +7,6 @@ on:
     - cron: "55 20 * * *"
   workflow_run:
     workflows:
-      - "Catalog live daily · working markets"
       - "Catalog emergency · restore Japan baseline"
     types: [completed]
 
