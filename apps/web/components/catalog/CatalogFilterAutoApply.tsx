@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const FILTER_FORM_SELECTOR = ".ac-catalog-filter-panel, .ac-catalog-filter-drawer";
 
@@ -18,8 +18,6 @@ function formParams(form: HTMLFormElement) {
     else params.delete(key);
   }
 
-  // Unchecked checkboxes do not appear in FormData, but they still represent
-  // an explicit filter state and therefore must clear the URL value.
   for (const name of ["fuel", "powerTo"]) {
     if (!form.querySelector(`input[type="checkbox"][name="${name}"]`)) continue;
     if (!present.has(name)) params.delete(name);
@@ -31,20 +29,28 @@ function formParams(form: HTMLFormElement) {
   return params;
 }
 
+function simplifyCatalogSummary() {
+  const summary = document.querySelector<HTMLElement>(".ac-catalog-page section > .max-w-4xl > p");
+  if (!summary) return;
+  const text = summary.textContent || "";
+  if (/^Найдено:\s*[\d\s]+$/.test(text.trim())) return;
+  const matches = [...text.matchAll(/\d[\d\s]*/g)];
+  const last = matches.at(-1)?.[0]?.replace(/\s+/g, " ").trim();
+  if (last) summary.textContent = `Найдено: ${last}`;
+}
+
 export function CatalogFilterAutoApply() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const debounceRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // The catalog header should only say how many offers are currently shown.
-    // Keep the server-provided number, only remove the verbose markets copy.
-    const summary = document.querySelector<HTMLElement>(".ac-catalog-page section > .max-w-4xl > p");
-    const text = summary?.textContent || "";
-    const matches = [...text.matchAll(/\d[\d\s]*/g)];
-    const last = matches.at(-1)?.[0]?.replace(/\s+/g, " ").trim();
-    if (summary && last) summary.textContent = `Найдено: ${last}`;
-  }, [searchParams]);
+    simplifyCatalogSummary();
+    const root = document.querySelector<HTMLElement>(".ac-catalog-page");
+    if (!root) return;
+    const observer = new MutationObserver(simplifyCatalogSummary);
+    observer.observe(root, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const navigateFrom = (form: HTMLFormElement) => {
@@ -92,8 +98,6 @@ export function CatalogFilterAutoApply() {
       const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>(".ac-filter-option") : null;
       const form = button?.closest<HTMLFormElement>(FILTER_FORM_SELECTOR);
       if (!button || !form) return;
-      // Custom selects update their hidden inputs through React state. Read the
-      // form on the next frame, after that state has been committed.
       schedule(form);
     };
 
