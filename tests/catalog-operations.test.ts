@@ -1,0 +1,45 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
+
+test("production year gates keep Japan rolling and every other market at 2020+", () => {
+  assert.equal(catalogMinYearForMarket("japan"), new Date().getFullYear() - 15);
+  for (const market of ["korea", "china", "uae", "europe", "georgia", "kyrgyzstan"]) {
+    assert.equal(catalogMinYearForMarket(market), 2020, market);
+    assert.equal(isCatalogYearAllowed(2019, market), false, market);
+    assert.equal(isCatalogYearAllowed(2020, market), true, market);
+  }
+});
+
+test("daily market writer publishes Georgia and repairs only old K Car gallery order", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
+  assert.match(workflow, /for market in korea china europe georgia/);
+  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia/);
+  assert.match(workflow, /CATALOG_GALLERY_SOURCE_IDS: kcar_korea_open/);
+  assert.match(workflow, /CATALOG_GALLERY_MAX_OFFERS: "500"/);
+
+  const refresh = fs.readFileSync("scripts/catalog-refresh-galleries.mjs", "utf8");
+  assert.match(refresh, /needsSourceOrderedGalleryRefresh\(offer\)/);
+  assert.doesNotMatch(refresh, /const reportedOfferIds/);
+});
+
+test("Japan scale collection goes deeper and publishes in the shared single-writer lane", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-v6-prestige-up-to-30k.yml", "utf8");
+  assert.match(workflow, /PRESTIGE_PLAN_RAW_PER_MODEL: "200"/);
+  assert.match(workflow, /max-parallel: 6/);
+  assert.match(workflow, /group: catalog-live-daily-working-markets/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "100"/);
+  assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
+});
+
+test("certified 30-minute power is applied automatically without accepting peak power", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-certified-power-apply.yml", "utf8");
+  assert.match(workflow, /CATALOG_CERTIFIED_POWER_APPLY: "1"/);
+  assert.match(workflow, /group: catalog-live-daily-working-markets/);
+  assert.match(workflow, /catalog-certified-power-reference\.test\.ts/);
+  assert.match(workflow, /catalog-build-certified-power-queue\.mjs/);
+
+  const strictMerge = fs.readFileSync("scripts/catalog-japan-strict-merge-publish.mjs", "utf8");
+  assert.match(strictMerge, /isCatalogYearAllowed\(offer\.year, market\)/);
+});

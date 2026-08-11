@@ -5,10 +5,14 @@ export type CertifiedPowerReference = {
   id: string;
   make: string;
   model: string;
+  modelAliases?: string[];
   trimContains?: string[];
+  driveContains?: string[];
   yearFrom?: number;
   yearTo?: number;
   powertrainKind: Exclude<PowertrainKind, "unknown">;
+  peakPowerKw?: number;
+  peakPowerToleranceKw?: number;
   icePowerKw?: number;
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
@@ -39,20 +43,35 @@ function validPower(value: unknown) {
 
 function referenceSpecificity(reference: CertifiedPowerReference) {
   return (reference.trimContains?.length || 0) * 10
+    + (reference.driveContains?.length || 0) * 5
+    + (reference.peakPowerKw ? 5 : 0)
     + (reference.yearFrom ? 1 : 0)
     + (reference.yearTo ? 1 : 0);
 }
 
-function matches(reference: CertifiedPowerReference, offer: Partial<VehicleOffer>) {
+export function certifiedPowerReferenceMatches(reference: CertifiedPowerReference, offer: Partial<VehicleOffer>) {
   if (reference.active === false) return false;
   if (token(reference.make) !== token(offer.make)) return false;
-  if (token(reference.model) !== token(offer.model)) return false;
+  const offerModel = token(offer.model);
+  const exactModelNames = [reference.model, ...(reference.modelAliases || [])].map(token).filter(Boolean);
+  if (!offerModel || !exactModelNames.includes(offerModel)) return false;
+  const offerKind = String(offer.powertrainKind || "unknown");
+  if (offerKind !== "unknown" && offerKind !== reference.powertrainKind) return false;
   const year = Number(offer.year || 0);
   if (reference.yearFrom && (!year || year < reference.yearFrom)) return false;
   if (reference.yearTo && (!year || year > reference.yearTo)) return false;
   if (reference.trimContains?.length) {
     const haystack = token([offer.generation, offer.trim, offer.engineType].filter(Boolean).join(" "));
     if (!reference.trimContains.every((part) => haystack.includes(token(part)))) return false;
+  }
+  if (reference.driveContains?.length) {
+    const drive = token(offer.drive);
+    if (!drive || !reference.driveContains.every((part) => drive.includes(token(part)))) return false;
+  }
+  if (validPower(reference.peakPowerKw)) {
+    const offerPeakPowerKw = Number(offer.powerKw || 0);
+    const tolerance = Math.max(0, Number(reference.peakPowerToleranceKw ?? 1));
+    if (!validPower(offerPeakPowerKw) || Math.abs(offerPeakPowerKw - Number(reference.peakPowerKw)) > tolerance) return false;
   }
   return Boolean(reference.sourceDocumentId && reference.verifiedAt && reference.verifiedBy);
 }
@@ -72,7 +91,7 @@ export function resetCertifiedPowerReferenceCache() {
 export async function findCertifiedPowerReference(offer: Partial<VehicleOffer>) {
   const references = await getCertifiedPowerReferences();
   return references
-    .filter((reference) => matches(reference, offer))
+    .filter((reference) => certifiedPowerReferenceMatches(reference, offer))
     .sort((left, right) => referenceSpecificity(right) - referenceSpecificity(left)
       || Date.parse(right.verifiedAt) - Date.parse(left.verifiedAt))[0] || null;
 }

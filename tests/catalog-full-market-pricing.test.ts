@@ -67,7 +67,7 @@ test("keeps the Japan contract payment at 70,000 rubles", () => {
   assert.equal(contractPayment, 70_000);
 });
 
-test("shows a calculated power chip for a hybrid preview without redundant wording", () => {
+test("does not present an unverified hybrid preview as certified 30-minute power", () => {
   const display = catalogPowerDisplay({
     powertrainKind: "other_hybrid",
     fuel: "hybrid",
@@ -78,15 +78,13 @@ test("shows a calculated power chip for a hybrid preview without redundant wordi
       utilizationPowerPreviewKw: 180.2,
     },
   });
-  assert.ok(display);
-  assert.equal(display?.estimated, true);
-  assert.equal(display?.thirtyMinuteLabel, "180,2 кВт");
+  assert.equal(display, null);
 });
 
 test("converts source prices to rubles before power and utilization checks", () => {
   const rateAt = customsPricing.indexOf("const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency)");
   const utilizationAt = customsPricing.indexOf("const utilizationProblem = exactUtilizationPowerProblem(offer)");
-  const powerAt = customsPricing.indexOf("if (!positive(offer.powerHp))");
+  const powerAt = customsPricing.indexOf("if (!electrified && !positive(offer.powerHp))");
   assert.ok(rateAt >= 0 && utilizationAt > rateAt && powerAt > rateAt);
   assert.match(customsPricing, /currencyRate: rate/);
   assert.match(customsPricing, /sourcePriceRub: rate\.sourcePriceRub/);
@@ -94,10 +92,10 @@ test("converts source prices to rubles before power and utilization checks", () 
 
 test("catalog cards preserve the compact layout and never render source currency", () => {
   assert.match(catalogCard, /catalogOfferVisibleRub/);
-  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(catalogCard, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
-  assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
-  assert.match(catalogCard, /\`\$\{yearLabel\} · ориентир\`/);
+  assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\} label=\{priceLabel\}/);
+  assert.match(catalogCard, /const priceLabel = o\.year \? `\$\{o\.year\} г\.` : "Год уточняется"/);
   assert.doesNotMatch(catalogCard, /function sourceMoney/);
   assert.doesNotMatch(catalogCard, /Цена в объявлении/);
   assert.doesNotMatch(catalogCard, /Цена торгов/);

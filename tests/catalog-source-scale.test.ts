@@ -30,6 +30,7 @@ const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[
 const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
 const sitemap = fs.readFileSync(new URL("../apps/web/app/sitemap.ts", import.meta.url), "utf8");
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
+const publicPriority = fs.readFileSync(new URL("../apps/web/lib/catalog/public-priority.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const flatUi = fs.readFileSync(new URL("../apps/web/app/flat-ui.css", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
@@ -112,12 +113,12 @@ test("canonical anchor sites are fixed for all seven markets and USA remains fut
   assert.ok(urls("china").has("https://www.che168.com/"));
   assert.ok(urls("china").has("https://www.dongchedi.com/"));
   assert.ok(urls("china").has("https://www.guazi.com/"));
-  assert.equal(CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.canonicalUrl === "https://www.autohome.com.cn/")?.role, "knowledge");
+  assert.equal(CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.canonicalUrl === "https://www.autohome.com.cn/")?.role, "primary");
   assert.ok(urls("japan").has("https://jpauc.com/auction/past"));
   assert.ok(urls("japan").has("https://carvector.com/stat"));
   assert.ok(urls("japan").has("https://prestigemotorsport.com.au/auctions/"));
   assert.ok(urls("japan").has("https://www.auctiondatasearch.jp/"));
-  assert.equal(CATALOG_V2_SOURCE_SLOTS.japan.find((source) => source.canonicalUrl === "https://jp.center/catalog")?.role, "knowledge");
+  assert.equal(CATALOG_V2_SOURCE_SLOTS.japan.find((source) => source.sourceId === "jpcenter_japan_catalog_open")?.role, "primary");
   assert.ok(urls("kyrgyzstan").has("https://www.mashina.kg/"));
   assert.deepEqual(CATALOG_FUTURE_USA_ANCHORS.map((source) => source.canonicalUrl), ["https://stat.vin/", "https://bid.cars/", "https://auctionstat.com/"]);
 });
@@ -191,8 +192,8 @@ test("rebuild calculates first and progressively opens detail without exhausting
 });
 
 test("real listings stay public while exact customs calculation is pending", () => {
-  assert.match(offerQuality, /hasPendingCalculation/);
-  assert.match(offerQuality, /status\.startsWith\("needs_"\)/);
+  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer\)/);
+  assert.doesNotMatch(offerQuality, /Boolean\(offer\.totalRub\)/);
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
   assert.match(publishScript, /calculationPending/);
@@ -204,9 +205,9 @@ test("cards convert source prices to rubles while customs calculation is pending
   assert.match(livePricing, /attachCurrentCurrencyRate/);
   assert.match(livePricing, /sourcePriceRub: rate\.sourcePriceRub/);
   assert.match(catalogCard, /catalogOfferVisibleRub/);
-  assert.match(catalogCard, /const visibleRub = exactTotalRub \|\| catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(catalogCard, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
-  assert.match(catalogCard, /<PriceTrend offer=\{displayOffer\}/);
+  assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\} label=\{priceLabel\}/);
   assert.doesNotMatch(catalogCard, /function sourceMoney/);
   assert.doesNotMatch(catalogCard, /Цена в объявлении/);
   assert.doesNotMatch(catalogCard, /Цена торгов/);
@@ -262,7 +263,9 @@ test("bootstrap replacements follow current regional public routes", () => {
 });
 
 test("brand rail opens existing brand and model SEO pages", () => {
-  assert.match(brandRail, /href=\{`\/cars\/brand\/\$\{catalogBrandSlug\(brand\)\}`\}/);
+  assert.match(brandRail, /const hrefForBrand = \(brand: string\) => homeBrandDirectory/);
+  assert.match(brandRail, /`\/cars\/brand\/\$\{catalogBrandSlug\(brand\)\}`/);
+  assert.match(brandRail, /`\/cars\?make=\$\{encodeURIComponent\(brand\)\}`/);
   assert.match(brandPage, /BrandModelDirectory/);
   assert.match(brandPage, /readBrandModelDirectory/);
   assert.match(modelPage, /generateMetadata/);
@@ -270,12 +273,11 @@ test("brand rail opens existing brand and model SEO pages", () => {
 });
 
 test("generic open sources only attach images bound to the listing card", () => {
-  assert.match(galleryWrapper, /source\.sourceId\.endsWith\("_open"\)/);
-  assert.match(galleryWrapper, /gallerySafetyMode/);
-  assert.match(galleryWrapper, /listing_bound/);
-  assert.match(galleryWrapper, /sourceNativeUrls\.length >= result\.length/);
-  assert.match(galleryWrapper, /listingImages/);
-  assert.match(galleryWrapper, /fastPath/);
+  assert.match(galleryWrapper, /sourceGalleryUrls\(offer\)/);
+  assert.match(galleryWrapper, /original\(offer\)/);
+  assert.match(galleryWrapper, /uniqueExternalImages/);
+  assert.match(galleryWrapper, /gallerySafetyMode: "source_urls_only"/);
+  assert.match(galleryWrapper, /return verified \? result : \[\]/);
 });
 
 test("publisher prioritizes affordable recent cars up to 160 hp", () => {
@@ -288,11 +290,12 @@ test("publisher prioritizes affordable recent cars up to 160 hp", () => {
   assert.match(publishScript, /priorityCount/);
 });
 
-test("catalog rejects implausible ordinary-car prices and power", () => {
-  assert.match(offerQuality, /totalRub > 50_000_000/);
-  assert.match(offerQuality, /performance \|\| commercial \? 1_500 : 650/);
-  assert.match(offerQuality, /powerHp \/ engineCc > 0\.21/);
-  assert.match(offerQuality, /hasPlausibleSourcePrice/);
+test("catalog rejects prices above the absolute public limit and bounds parsed power", () => {
+  assert.match(publicPriority, /absoluteMaximumRub/);
+  assert.match(publicPriority, /above_absolute_price_limit/);
+  assert.match(publicPriority, /function offerPowerHp/);
+  assert.match(publicPriority, /offer\?\.powerHp/);
+  assert.match(publicPriority, /2_500/);
 });
 
 test("dealer verification badge keeps absolute placement and company rows align at the top", () => {

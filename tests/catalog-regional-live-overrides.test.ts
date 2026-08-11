@@ -36,8 +36,8 @@ test("strict regional adapters replace generic adapters", () => {
 });
 
 test("production collection caps listing galleries at 30 photos", () => {
-  assert.match(importer, /if \(process\.env\.CATALOG_REBUILD_MARKET\)/);
-  assert.match(importer, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER = "30"/);
-  assert.match(importer, /CATALOG_MAX_IMAGES_PER_OFFER = "30"/);
-  assert.match(importer, /CATALOG_COLLECTION_IMAGE_LIMIT = "30"/);
+  assert.match(importer, /if \(process\.env\.CATALOG_REBUILD_MARKET \|\| rawListingMode\)/);
+  assert.match(importer, /CATALOG_MAX_IMAGES_PER_OFFER \|\|= "30"/);
+  assert.match(importer, /CATALOG_COLLECTION_IMAGE_LIMIT \|\|= "30"/);
+  assert.match(importer, /maxImagesPerOffer: Math\.min\(30/);
 });

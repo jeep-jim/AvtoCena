@@ -2,12 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
+import { catalogFilterOptions } from "@/lib/catalog/filter-options";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
 type Option = { value: string; label: string };
 type Facets = { makes: string[]; models: Array<{ make: string; model: string; aliases?: string[] }>; markets?: string[]; bodyTypes?: string[]; fuels?: string[]; transmissions?: string[]; drives?: string[] };
-
-const marketIds = [...PUBLIC_CATALOG_MARKETS];
 
 function clean(value: string) { return String(value || "").replace(/\s+/g, " ").trim(); }
 function label(value: string) { return clean(value).replace(/\[object Object\]/gi, "") || "Без названия"; }
@@ -73,26 +72,12 @@ const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { va
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
 const drives: Option[] = [{ value: "", label: "Любой привод" }, { value: "fwd", label: "Передний" }, { value: "rwd", label: "Задний" }, { value: "awd", label: "Полный" }];
 
-function onlyAvailable(options: Option[], values?: string[]) {
-  const allowed = new Set((values || []).map(clean));
-  return [options[0], ...options.slice(1).filter((option) => allowed.has(clean(option.value)))];
-}
-
-function deriveFacets(items: any[]): Facets {
-  const makes = [...new Set(items.map((item) => clean(item?.make)).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ru"));
-  const models = [...new Map(items.map((item) => { const make = clean(item?.make); const model = clean(item?.model); return [`${make}:${model}`, { make, model }]; })).values()].filter((item) => item.make && item.model).sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
-  const values = (key: string) => [...new Set(items.map((item) => clean(item?.[key])).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ru"));
-  return { makes, models, markets: values("market"), bodyTypes: values("bodyType"), fuels: values("fuel"), transmissions: values("transmission"), drives: values("drive") };
-}
-
 async function loadElectricFacets() {
-  const loadMarket = async (market: string) => {
-    const first = await fetch(`/api/catalog/search?market=${market}&fuel=electric&pageSize=48&page=1&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json());
-    const pages = Math.max(1, Math.ceil(Number(first?.total || 0) / 48));
-    const rest = pages > 1 ? await Promise.all(Array.from({ length: pages - 1 }, (_, index) => fetch(`/api/catalog/search?market=${market}&fuel=electric&pageSize=48&page=${index + 2}&sort=updatedAt`, { cache: "no-store" }).then((response) => response.json()))) : [];
-    return [first, ...rest].flatMap((response) => Array.isArray(response?.items) ? response.items : []);
-  };
-  return deriveFacets((await Promise.all(marketIds.map(loadMarket))).flat());
+  const response = await fetch("/api/catalog/search?fuel=electric&pageSize=1&includeFacets=1", { cache: "no-store" });
+  if (!response.ok) throw new Error(`catalog_electric_facets_http_${response.status}`);
+  const payload = await response.json();
+  if (!payload?.facets) throw new Error("catalog_electric_facets_missing");
+  return payload.facets as Facets;
 }
 
 function RangeFields({ fromName, toName, fromValue, toValue, fromPlaceholder, toPlaceholder, inputMode = "numeric" }: { fromName: string; toName: string; fromValue?: string; toValue?: string; fromPlaceholder: string; toPlaceholder: string; inputMode?: "numeric" | "decimal" }) {
@@ -113,14 +98,14 @@ function PowerLimitCheckbox({ initialChecked }: { initialChecked: boolean }) {
 }
 
 function AdvancedFields({ initial, make, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, setMake, includePrimary = true, includeFuel = true }: { initial: Record<string, string>; make: string; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; setMake: (value: string) => void; includePrimary?: boolean; includeFuel?: boolean }) {
-  return <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">{includePrimary ? <><SearchSelect name="make" value={make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={setMake} /><VehicleModelSearch value={initial.model || ""} make={make} onMakeChange={setMake} /><SimpleSelect name="market" value={initial.market || ""} placeholder="Все рынки" options={marketOptions} /></> : null}{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={initial.bodyType || ""} placeholder="Любой кузов" options={bodyOptions} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={initial.transmission || ""} placeholder="Любая трансмиссия" options={transmissionOptions} /> : null}<RangeFields fromName="yearFrom" toName="yearTo" fromValue={initial.yearFrom} toValue={initial.yearTo} fromPlaceholder="Год от" toPlaceholder="до" /><RangeFields fromName="budgetFrom" toName="budget" fromValue={initial.budgetFrom} toValue={initial.budget} fromPlaceholder="Цена от, ₽" toPlaceholder="до" /><RangeFields fromName="mileageFrom" toName="mileageTo" fromValue={initial.mileageFrom} toValue={initial.mileageTo} fromPlaceholder="Пробег от, км" toPlaceholder="до" /><RangeFields fromName="engineFrom" toName="engineTo" fromValue={initial.engineFrom} toValue={initial.engineTo} fromPlaceholder="Объём от, см³" toPlaceholder="до" />{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={initial.fuel === "electric" ? "" : initial.fuel || ""} placeholder="Любое топливо" options={fuelOptions} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={initial.drive || ""} placeholder="Любой привод" options={driveOptions} /> : null}</div>;
+  return <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">{includePrimary ? <><SearchSelect name="make" value={make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={setMake} /><VehicleModelSearch value={initial.model || ""} make={make} onMakeChange={setMake} /><SimpleSelect name="market" value={initial.market || ""} placeholder="Все рынки" options={marketOptions} /></> : null}{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={initial.bodyType || ""} placeholder="Любой кузов" options={bodyOptions} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={initial.transmission || ""} placeholder="Любая трансмиссия" options={transmissionOptions} /> : null}<RangeFields fromName="yearFrom" toName="yearTo" fromValue={initial.yearFrom} toValue={initial.yearTo} fromPlaceholder="Год от" toPlaceholder="до" /><RangeFields fromName="budgetFrom" toName="budget" fromValue={initial.budgetFrom} toValue={initial.budget || initial.budgetTo} fromPlaceholder="Цена от, ₽" toPlaceholder="до" /><RangeFields fromName="mileageFrom" toName="mileageTo" fromValue={initial.mileageFrom} toValue={initial.mileageTo} fromPlaceholder="Пробег от, км" toPlaceholder="до" /><RangeFields fromName="engineFrom" toName="engineTo" fromValue={initial.engineFrom} toValue={initial.engineTo} fromPlaceholder="Объём от, см³" toPlaceholder="до" />{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={initial.fuel === "electric" ? "" : initial.fuel || ""} placeholder="Любое топливо" options={fuelOptions} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={initial.drive || ""} placeholder="Любой привод" options={driveOptions} /> : null}</div>;
 }
 
 export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
   const [make, setMake] = useState(initial.make || "");
   const [electricOnly, setElectricOnly] = useState(initial.fuel === "electric");
   const [electricFacets, setElectricFacets] = useState<Facets | null>(null);
-  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || initial.powerTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
+  const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || initial.powerFrom || initial.powerTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -132,18 +117,18 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [electricOnly]);
 
   const activeFacets = electricOnly ? electricFacets || facets : facets;
-  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>((activeFacets?.makes || []).map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets]);
+  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), initial.make].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, initial.make]);
   const marketOptions = markets;
-  const bodyOptions = useMemo(() => onlyAvailable(bodies, activeFacets?.bodyTypes), [activeFacets]);
-  const fuelOptions = useMemo(() => onlyAvailable(fuels, activeFacets?.fuels), [activeFacets]);
-  const transmissionOptions = useMemo(() => onlyAvailable(transmissions, activeFacets?.transmissions), [activeFacets]);
-  const driveOptions = useMemo(() => onlyAvailable(drives, activeFacets?.drives), [activeFacets]);
+  const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, initial.bodyType), [activeFacets, initial.bodyType]);
+  const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, initial.fuel), [activeFacets, initial.fuel]);
+  const transmissionOptions = useMemo(() => catalogFilterOptions(transmissions, activeFacets?.transmissions, initial.transmission), [activeFacets, initial.transmission]);
+  const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, initial.drive), [activeFacets, initial.drive]);
 
   useEffect(() => setMake(initial.make || ""), [initial.make]);
   useEffect(() => { if (make && !makeOptions.some((option) => option.value === make)) setMake(""); }, [make, makeOptions]);
   useEffect(() => { if (!mobileOpen) return; const old = document.body.style.overflow; document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = old; }; }, [mobileOpen]);
 
-  const setElectric = (checked: boolean) => { setElectricOnly(checked); setElectricFacets(null); setMake(""); };
+  const setElectric = (checked: boolean) => { setElectricOnly(checked); setElectricFacets(null); };
 
   return <>
     <form method="get" className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">

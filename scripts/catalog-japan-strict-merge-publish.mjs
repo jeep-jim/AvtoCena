@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
@@ -10,7 +10,7 @@ const input = process.env.JAPAN_STRICT_MERGE_INPUT || "catalog-rebuild-japan-exa
 const output = process.env.JAPAN_STRICT_MERGE_REPORT || "catalog-japan-strict-merge-publish-report.json";
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
-const minYear = new Date().getFullYear() - 15;
+const minYear = catalogMinYearForMarket("japan");
 
 function compact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""); }
 function positive(value) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : 0; }
@@ -87,7 +87,7 @@ const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 
 for (const rawOffer of combinedCandidates) {
   const offer = normalizeVehicleOfferSpecs({ ...rawOffer, status: "active", images: credibleCatalogImages(rawOffer?.images || []).slice(0, 30) });
   if (!offer?.id || unique.has(offer.id)) continue;
-  if (Number(offer.year || 0) < minYear || Number(offer.year || 0) > new Date().getFullYear() + 1) { reject("year"); continue; }
+  if (!isCatalogYearAllowed(offer.year, "japan")) { reject("year"); continue; }
   if (!soldSemantics(offer)) { reject("sold_semantics"); continue; }
   if (!exactPhotos(offer)) { reject("exact_photos"); continue; }
   if (!exactCalculation(offer)) { reject("calculation"); continue; }
@@ -124,7 +124,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map((offer) => normalizeVehicleOfferSpecs({ ...offer, status: "active", images: credibleCatalogImages(offer?.images || []).slice(0, 30) }))
-    .filter((offer) => offer?.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0)
+    .filter((offer) => offer?.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, market) && offer.images.length > 0)
     .slice(0, 5_000);
   preservedByMarket[market] = preserved.length;
   all.push(...preserved);

@@ -23,6 +23,7 @@
     "catalog:power-review": "tsx scripts/catalog-power-review.mjs",
     "catalog:power-knowledge": "tsx scripts/catalog-build-power-knowledge.mjs",
     "catalog:power-reference-queue": "tsx scripts/catalog-build-certified-power-queue.mjs",
+    "catalog:power-apply": "tsx scripts/catalog-apply-certified-power.mjs",
     "catalog:sync-vehicle-models": "tsx scripts/catalog-sync-vehicle-models.mjs",
     "catalog:enrich-drom-variants": "tsx scripts/catalog-enrich-drom-vehicle-variants-v2.mjs",
     "catalog:build-vehicle-variants": "tsx scripts/catalog-build-vehicle-variants.mjs",

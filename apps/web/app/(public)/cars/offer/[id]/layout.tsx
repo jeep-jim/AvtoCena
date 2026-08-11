@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";
 import { money } from "@/lib/avtocena";
+import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
-import { getOffer } from "@/lib/catalog/storage";
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -12,7 +12,7 @@ function clean(value: unknown) {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const offer = await getOffer(id);
+  const offer = await getOfferForPage(id);
   if (!offer) {
     return {
       title: "Автомобиль под заказ — АвтоЦена",

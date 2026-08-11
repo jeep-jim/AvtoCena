@@ -85,9 +85,12 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("rejects four photos and accepts five photos", () => {
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
+test("enforces five photos only for strict source contracts", () => {
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 1) } as any), true);
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: [] } as any), false);
+  const autoHome = { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" };
+  assert.equal(isCrediblePublicOffer({ ...autoHome, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(autoHome as any), true);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
