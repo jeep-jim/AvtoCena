@@ -142,7 +142,7 @@ async function fetchExactDetailData(carCd: string) {
   return data;
 }
 
-export const KCAR_EXTERIOR_FIRST_GALLERY_MODE = "kcar_exterior_cover_vr_extra_exact_car_id_v2";
+export const KCAR_EXTERIOR_FIRST_GALLERY_MODE = "kcar_exterior_cover_vr_extra_exact_car_id_v3";
 
 function splitImageList(value: unknown) {
   return clean(value)
@@ -165,19 +165,6 @@ function exactVehiclePhotoUrl(value: unknown, numericId: string) {
   }
 }
 
-function exactDetailBoundPhotoUrl(value: unknown) {
-  const source = clean(value);
-  if (!source) return "";
-  try {
-    const url = new URL(source, "https://img.kcar.com");
-    if (url.protocol !== "https:" || url.hostname.toLowerCase() !== "img.kcar.com") return "";
-    if (!/\.(?:jpe?g|png|webp)(?:$|[?#])/i.test(url.toString())) return "";
-    return url.toString();
-  } catch {
-    return "";
-  }
-}
-
 function representativeExteriorFrames(values: string[]) {
   if (values.length <= 4) return values;
   const indexes = [0, Math.floor(values.length / 4), Math.floor(values.length / 2), Math.floor(values.length * 3 / 4)];
@@ -188,11 +175,6 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   const numericId = carCd.replace(/^[^0-9]+/, "");
   if (!numericId) return [];
   const exact = (value: unknown) => exactVehiclePhotoUrl(value, numericId);
-  // Two-dimensional K Car listings have no 360-degree vrVo gallery. Their
-  // listing-bound rvo still exposes exact front and rear body photographs.
-  const listingBoundExterior = [data.rvo?.frontImgPath, data.rvo?.backImgPath]
-    .map(exactDetailBoundPhotoUrl)
-    .filter(Boolean);
   const explicitExterior = [...(data.outerPhotoList || []), ...(data.photoList || [])]
     .filter((photo) => clean(photo?.thumbnailType) === "01" || clean(photo?.thumbnailTypenm) === "외관")
     .sort((left, right) => Number(left?.sortOrdr || Number.MAX_SAFE_INTEGER) - Number(right?.sortOrdr || Number.MAX_SAFE_INTEGER))
@@ -207,7 +189,7 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   // K Car's v_src_show begins with interior/detail frames. Its separately typed
   // exterior cover (and 360-degree exterior frames when present) must lead the
   // customer gallery; cabin, wheels and diagnostics belong after the body.
-  return [...new Set([...listingBoundExterior, ...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
+  return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
 }
 
 function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
@@ -411,11 +393,22 @@ class KCarExactSource implements CatalogSourceAdapter {
       if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
       const data = await fetchExactDetailData(carCd);
       const rebuilt = exactVehicleGallery(data, carCd);
-      // Two exact exterior covers are enough to repair the order safely: the
-      // maintenance merger keeps the rest of the existing listing-bound gallery.
-      if (rebuilt.length < 2) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
-      urls = rebuilt;
-      raw.images = rebuilt;
+      if (rebuilt.length < 5) {
+        // K Car's rvo.frontImgPath/backImgPath are dealer credential scans, not
+        // vehicle angles. A short-lived maintenance version could have merged
+        // them into one 2D listing, so remove those exact URLs while retaining
+        // the listing-bound vehicle gallery already stored on the offer.
+        const forbidden = new Set([data.rvo?.frontImgPath, data.rvo?.backImgPath]
+          .map((value) => {
+            try { return new URL(clean(value), "https://img.kcar.com").toString(); } catch { return ""; }
+          }).filter(Boolean));
+        const cleaned = (offer.images || []).map((item) => clean(item?.url)).filter((url) => url && !forbidden.has(url));
+        if (cleaned.length < 5) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
+        urls = cleaned;
+      } else {
+        urls = rebuilt;
+      }
+      raw.images = urls;
       raw.gallerySafetyMode = KCAR_EXTERIOR_FIRST_GALLERY_MODE;
     }
     offer.operational = {
