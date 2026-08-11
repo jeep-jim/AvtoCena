@@ -39,6 +39,33 @@ function FooterLinkGroup({ title, links }: { title: string; links: Array<{ href:
   );
 }
 
+function CreditIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.25" y="5.25" width="17.5" height="13.5" rx="2.75" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M3.8 9.4H20.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M7 14H11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function InsuranceIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3.2 19 6v5.2c0 4.4-2.7 7.6-7 9.6-4.3-2-7-5.2-7-9.6V6l7-2.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="m8.8 12.1 2.1 2.1 4.5-4.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="m7 4 5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
@@ -76,11 +103,36 @@ export function PublicLegalFooter() {
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
             <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.</p>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              <Link href="/cars" className="ac-public-footer-cta inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl px-3 text-center text-[13px] font-black sm:px-4 sm:text-sm" style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>Смотреть каталог</Link>
-              <Link href="/dealers" className="ac-public-footer-dealers inline-flex min-h-10 min-w-0 items-center justify-center whitespace-nowrap rounded-xl bg-white/[.07] px-3 text-center text-[13px] font-black text-[var(--ac-text)] transition hover:bg-white/[.12] sm:px-4 sm:text-sm">🚗 АвтоДилерам</Link>
+
+            <div className="mt-4 grid gap-2">
+              <button
+                type="button"
+                aria-disabled="true"
+                data-credit-placeholder="calculator"
+                className="ac-public-footer-credit inline-flex min-h-12 w-full cursor-default items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#0d1117] px-3 text-left text-sm font-black text-white sm:px-3.5"
+                style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[.09] text-white"><CreditIcon /></span>
+                  <span className="truncate">Кредитный калькулятор</span>
+                </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[.07] text-white/70"><ChevronRightIcon /></span>
+              </button>
+
+              <button
+                type="button"
+                aria-disabled="true"
+                data-insurance-placeholder="osago"
+                className="ac-public-footer-osago inline-flex min-h-12 w-full cursor-default items-center justify-between gap-3 rounded-xl bg-[#FFD400] px-3 text-left text-sm font-black text-[#111111] sm:px-3.5"
+                style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/[.08] text-[#111111]"><InsuranceIcon /></span>
+                  <span className="truncate">Рассчитать страховой полис ОСАГО</span>
+                </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/[.07] text-black/70"><ChevronRightIcon /></span>
+              </button>
             </div>
-            <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="mt-4 inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-4 text-center text-sm font-black text-black" style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}>Рассчитать страховой полис ОСАГО</button>
           </div>
 
           <FooterLinkGroup title="По странам" links={marketLinks} />
