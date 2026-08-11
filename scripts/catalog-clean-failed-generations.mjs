@@ -46,33 +46,33 @@ if (candidateObjects.length + orphanInternalObjects.length > maxDeletes) {
 }
 
 const errors = [];
-let deleted = 0;
-for (const generationId of candidates) {
-  try {
-    deleted += await storage.deletePrefix(`catalog/generations/${generationId}`);
-  } catch (error) {
-    errors.push({ generationId, error: String(error?.message || error) });
-  }
-}
-let deletedOrphanInternalObjects = 0;
-const orphanBatches = [];
-for (let index = 0; index < orphanInternalObjects.length; index += 1_000) orphanBatches.push(orphanInternalObjects.slice(index, index + 1_000));
-let orphanCursor = 0;
-await Promise.all(Array.from({ length: Math.min(deleteConcurrency, Math.max(1, orphanBatches.length)) }, async () => {
-  while (true) {
-    const batch = orphanBatches[orphanCursor++];
-    if (!batch) return;
-    try {
-      if (!storage.deleteObjects) throw new Error("batch_delete_not_supported");
-      deletedOrphanInternalObjects += await storage.deleteObjects(batch.map((object) => object.key));
-    } catch (error) {
-      for (const object of batch) {
-        try { await storage.deleteJson(object.key); deletedOrphanInternalObjects++; }
-        catch (fallbackError) { errors.push({ internalObject: object.key, error: String(fallbackError?.message || error?.message || error) }); }
+async function deleteListedObjects(items, errorField) {
+  const batches = [];
+  for (let index = 0; index < items.length; index += 1_000) batches.push(items.slice(index, index + 1_000));
+  let cursor = 0;
+  let deletedCount = 0;
+  await Promise.all(Array.from({ length: Math.min(deleteConcurrency, Math.max(1, batches.length)) }, async () => {
+    while (true) {
+      const batch = batches[cursor++];
+      if (!batch) return;
+      try {
+        if (!storage.deleteObjects) throw new Error("batch_delete_not_supported");
+        deletedCount += await storage.deleteObjects(batch.map((object) => object.key));
+      } catch (error) {
+        for (const object of batch) {
+          try { await storage.deleteJson(object.key); deletedCount++; }
+          catch (fallbackError) { errors.push({ [errorField]: object.key, error: String(fallbackError?.message || error?.message || error) }); }
+        }
       }
     }
-  }
-}));
+  }));
+  return deletedCount;
+}
+
+const [deleted, deletedOrphanInternalObjects] = await Promise.all([
+  deleteListedObjects(candidateObjects, "generationObject"),
+  deleteListedObjects(orphanInternalObjects, "internalObject"),
+]);
 
 const report = {
   version: 1,
@@ -82,6 +82,7 @@ const report = {
   currentInternalGeneration: String(internalManifest?.generationId || "") || null,
   deleteConcurrency,
   batchDelete: Boolean(storage.deleteObjects),
+  reusedInitialObjectListing: true,
   discoveredGenerations: generations.length,
   protectedGenerations: [...protectedGenerations],
   removedGenerations: candidates,
