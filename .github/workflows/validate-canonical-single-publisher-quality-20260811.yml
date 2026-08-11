@@ -1,0 +1,54 @@
+name: Validate canonical single publisher quality
+
+on:
+  push:
+    branches: [fix/canonical-single-publisher-quality-20260811]
+    paths:
+      - .github/workflows/validate-canonical-single-publisher-quality-20260811.yml
+
+permissions:
+  contents: write
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/canonical-single-publisher-quality-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-canonical-single-publisher-quality.py
+      - run: node --check scripts/catalog-live-recovery-publish.mjs
+      - run: npm run typecheck
+      - name: Read-only canonical public impact
+        run: |
+          npx tsx -e 'import {readMarketOffers} from "./apps/web/lib/catalog/storage.ts"; import {hasCredibleOfferContent,credibleCatalogImages,isCatalogYearAllowed} from "./apps/web/lib/catalog/offer-quality.ts"; import {PUBLIC_CATALOG_MARKETS} from "./apps/web/lib/catalog/runtime-config.ts"; (async()=>{const out:any={}; for(const m of PUBLIC_CATALOG_MARKETS){const rows=await readMarketOffers(m); const kept=rows.filter((o:any)=>isCatalogYearAllowed(o.year,m)&&hasCredibleOfferContent({...o,status:"active"})); out[m]={before:rows.length,canonical:kept.length,below5:kept.filter((o:any)=>credibleCatalogImages(o.images||[]).length<5).length};} console.log(JSON.stringify(out,null,2)); if(out.china.before!==7981) throw new Error(`unexpected China baseline ${out.china.before}`); if(out.china.canonical!==6686) throw new Error(`unexpected China canonical ${out.china.canonical}`); for(const m of ["korea","japan","uae","europe","georgia","kyrgyzstan"]){if(out[m].canonical!==out[m].before) throw new Error(`${m} unexpected canonical loss ${out[m].before}->${out[m].canonical}`);} })()'
+      - name: Static canonical publisher checks
+        run: |
+          grep -q 'hasCredibleOfferContent' scripts/catalog-live-recovery-publish.mjs
+          grep -q 'reject("public_quality")' scripts/catalog-live-recovery-publish.mjs
+          grep -q 'publicExistingStillValid(offer)' scripts/catalog-live-recovery-publish.mjs
+      - name: Commit validated production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-canonical-single-publisher-quality.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-recovery-publish.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Align single-market publisher with canonical public quality [skip actions]"
+          git push origin HEAD:fix/canonical-single-publisher-quality-20260811
