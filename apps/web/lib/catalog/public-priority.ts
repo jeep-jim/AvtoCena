@@ -26,6 +26,15 @@ const REQUIRED_PRICE_LINES = [
   "customs",
 ];
 
+const PRELIMINARY_POWER_MISSING = new Set([
+  "certified_30_minute_power_kw",
+  "utilization_power_kw",
+  "utilization_coefficient",
+  "ice_power_kw",
+  "electric_excise_power_kw",
+  "power_hp",
+]);
+
 function positive(value: unknown, max = Number.MAX_SAFE_INTEGER) {
   const number = Number(value);
   return Number.isFinite(number) && number > 0 && number <= max ? number : 0;
@@ -54,6 +63,7 @@ function preliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) 
   const kind = String(offer?.powertrainKind || "");
   const snapshot = offer?.calculationSnapshot || {};
   const customs = snapshot.customs || {};
+  const missing = (Array.isArray(snapshot.missing) ? snapshot.missing : customs.missing || []).map(String).filter(Boolean);
   const breakdown = Array.isArray(snapshot.breakdown) ? snapshot.breakdown : [];
   const hasCar = breakdown.some((line: any) => String(line?.id || "") === "car" && positive(line?.amountRub) > 0);
   const hasKnownCustoms = breakdown.some((line: any) => String(line?.id || "") === "customs" && positive(line?.amountRub) > 0);
@@ -63,6 +73,8 @@ function preliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) 
     && snapshot.pricingConfidence === "preliminary"
     && snapshot.priceIncludesUtilizationFee === false
     && customs.status === "needs_data"
+    && missing.length > 0
+    && missing.every((item: string) => PRELIMINARY_POWER_MISSING.has(item))
     && hasCar && hasKnownCustoms);
 }
 
