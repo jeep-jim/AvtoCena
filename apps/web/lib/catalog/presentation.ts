@@ -263,10 +263,13 @@ export function safeCatalogText(value: unknown) {
 }
 
 export function translateCatalogText(value: unknown) {
-  let text = safeCatalogText(value);
+  // Source feeds sometimes return Japanese in the half-width compatibility
+  // block (for example `ﾊｯﾁ`). Normalize it first so the script gate below
+  // treats half-width and ordinary Kana identically.
+  let text = safeCatalogText(value).normalize("NFKC");
   for (const [pattern, replacement] of directPhrases) text = text.replace(pattern, replacement);
   text = text
-    .replace(/[가-힣\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
+    .replace(/[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\ud7b0-\ud7ff\uf900-\ufaff\uff61-\uff9f]+/gu, " ")
     .replace(/([0-9]{4})款/g, "$1 ")
     .replace(/\s*[-·|]+\s*/g, " ")
     .replace(/\s+/g, " ")
