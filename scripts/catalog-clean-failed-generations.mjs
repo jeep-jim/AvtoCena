@@ -57,7 +57,8 @@ async function deleteListedObjects(items, errorField) {
       if (!batch) return;
       try {
         if (!storage.deleteObjects) throw new Error("batch_delete_not_supported");
-        deletedCount += await storage.deleteObjects(batch.map((object) => object.key));
+        const batchDeleted = await storage.deleteObjects(batch.map((object) => object.key));
+        deletedCount += batchDeleted;
       } catch (error) {
         for (const object of batch) {
           try { await storage.deleteJson(object.key); deletedCount++; }
