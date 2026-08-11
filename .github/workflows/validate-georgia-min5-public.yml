@@ -13,7 +13,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,6 +23,10 @@ jobs:
       - run: npm ci
       - run: python3 scripts/patch-georgia-min5-public-20260811.py
       - run: npm run typecheck
+      - name: Assert generic collector routes AUTO.GE through exact detail gallery
+        run: |
+          grep -q 'trustedListingImages.length && source.sourceId !== "auto_georgia_open"' scripts/catalog-live-recovery-market.mjs
+          grep -q '"auto_georgia_open"].includes(source.sourceId) && offer.images.length < 5' scripts/catalog-live-recovery-market.mjs
       - name: Assert sparse AUTO.GE fails and exact 5-photo card passes
         run: |
           npx tsx -e '
@@ -33,3 +37,24 @@ jobs:
           const rich={...base,images:[1,2,3,4,5].map(image)};
           if(!isCrediblePublicOffer(rich)) throw new Error("5-photo AUTO.GE must pass");
           console.log({sparse:false,rich:true});'
+      - name: Real AUTO.GE exact-detail gallery smoke, no publish
+        env:
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+        run: |
+          npx tsx -e '
+          import {autoGeorgiaStrictSource as source} from "./apps/web/lib/catalog/auto-georgia-strict-source.ts";
+          (async()=>{
+            const page:any=await source.fetchPage(null as any);
+            const rows=(page.items||[]).map((raw:any)=>source.normalizeOffer(raw)).filter((o:any)=>o && Number(o.year)>=2020).slice(0,4);
+            if(rows.length<2) throw new Error(`not enough current rows:${rows.length}`);
+            const report=[] as any[];
+            for(const offer of rows){
+              const images=await source.fetchImages!(offer as any);
+              const raw:any=offer.operational?.raw||{};
+              report.push({id:offer.sourceOfferId,count:images.length,bound:raw.listingBoundImages===true,verified:raw.photoIdentityVerified===true});
+              if(images.length<5) throw new Error(`exact gallery below5:${offer.sourceOfferId}:${images.length}`);
+              if(raw.listingBoundImages!==true || raw.photoIdentityVerified!==true) throw new Error(`identity flags missing:${offer.sourceOfferId}`);
+            }
+            console.log(JSON.stringify(report,null,2));
+          })().catch(e=>{console.error(e);process.exit(1)});'
