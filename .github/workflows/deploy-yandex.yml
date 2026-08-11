@@ -43,7 +43,13 @@ jobs:
           revision-cores: 1
           revision-memory: 1Gb
           revision-core-fraction: 100
-          revision-concurrency: 1
+          # Next.js spends most of its time waiting for object storage. Let one
+          # warm instance serve a normal page burst instead of cold-starting a
+          # separate container for every RSC/image/navigation request.
+          revision-concurrency: 8
+          # The catalog is a public storefront: keep one initialized instance
+          # ready so the first visitor does not pay the 4-6 second cold start.
+          revision-provisioned: 1
           revision-execution-timeout: 30
           revision-env: |
             NODE_ENV=production
