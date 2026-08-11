@@ -36,7 +36,7 @@ test("K Car exterior cover and representative body angles lead the detail galler
   ]);
 });
 
-test("K Car two-dimensional listings prepend their exact front and rear body photos", () => {
+test("K Car dealer credential scans are never treated as vehicle body photos", () => {
   const gallery = exactVehicleGallery({
     rvo: {
       carCd: "EC61399471",
@@ -46,10 +46,7 @@ test("K Car two-dimensional listings prepend their exact front and rear body pho
     photoList: [{ elanPath: "https://img.kcar.com/ucms/unbound-diagnostic.png" }],
   }, "EC61399471");
 
-  assert.deepEqual(gallery, [
-    "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/front.jpeg",
-    "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/rear.jpeg",
-  ]);
+  assert.deepEqual(gallery, []);
 });
 
 test("old K Car galleries refresh once and the exterior-first version does not loop", () => {
