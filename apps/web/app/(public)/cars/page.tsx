@@ -87,7 +87,6 @@ function businessOrder(left: any, right: any) {
     || offerFreshness(right) - offerFreshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
 }
-
 function sortCatalogRows(rows: any[], sort: string) {
   const sorted = [...rows];
   if (sort === "totalRub") return sorted.sort((left, right) => {
@@ -205,10 +204,6 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       </nav> : null}
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
-      @media(min-width:1024px){
-        .ac-catalog-page .ac-advanced-fields{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:.75rem!important}
-        .ac-catalog-page .ac-advanced-fields>div{display:contents!important}
-      }
       @media(max-width:767px){
         .ac-catalog-page .ac-catalog-card,.ac-catalog-page .ac-catalog-card *,.ac-catalog-page .ac-catalog-market-rail,.ac-catalog-page .ac-catalog-market-rail>*{box-shadow:none!important}
         .ac-catalog-page .ac-catalog-card,.ac-catalog-page .ac-catalog-market-rail{filter:none!important}
