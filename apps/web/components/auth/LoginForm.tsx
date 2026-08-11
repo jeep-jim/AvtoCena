@@ -48,24 +48,24 @@ export function LoginForm({ nextPath, errorCode = "" }: { nextPath: string; erro
 
   return (
     <div className="glass ac-login-card mx-auto w-full max-w-[460px] rounded-[2rem] p-5 md:p-6">
-      <div className="text-sm font-black uppercase tracking-[0.18em] text-red-300">АвтоЦена CRM</div>
-      <h1 className="mt-2 text-4xl font-black tracking-[-0.05em] text-white md:text-5xl">Вход</h1>
-      <p className="mt-3 text-sm font-bold leading-6 text-white/55">Администратор заранее добавляет ваш Telegram username и роль. После этого вход выполняется через подтверждённый аккаунт Telegram.</p>
+      <div className="ac-login-eyebrow text-sm font-black uppercase tracking-[0.18em] text-red-300">АвтоЦена CRM</div>
+      <h1 className="ac-login-title mt-2 text-4xl font-black tracking-[-0.05em] text-white md:text-5xl">Вход</h1>
+      <p className="ac-login-description mt-3 text-sm font-bold leading-6 text-white/55">Администратор заранее добавляет ваш Telegram username и роль. После этого вход выполняется через подтверждённый аккаунт Telegram.</p>
 
       {error ? <div className="ac-login-error mt-5 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
 
-      <div className="mt-6 rounded-2xl bg-white/[0.045] p-4">
+      <div className="ac-login-telegram-shell mt-6 rounded-2xl bg-white/[0.045] p-4">
         <TelegramLoginButton nextPath={nextPath} />
       </div>
 
-      <details className="mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-        <summary className="cursor-pointer list-none text-sm font-black text-white/55 [&::-webkit-details-marker]:hidden">Резервный вход по ключу доступа</summary>
+      <details className="ac-login-details mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+        <summary className="ac-login-details-summary cursor-pointer list-none text-sm font-black text-white/55 [&::-webkit-details-marker]:hidden">Резервный вход по ключу доступа</summary>
         <form onSubmit={submit} className="mt-4">
           <div className="grid gap-3">
-            <label className="grid gap-2"><span className="text-xs font-black uppercase tracking-[0.14em] text-white/38">Telegram username</span><input value={username} onChange={(event) => setUsername(event.target.value)} placeholder="@username" className="soft-input ac-login-input rounded-2xl px-4 py-4 text-base font-black" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} /></label>
-            <label className="grid gap-2"><span className="text-xs font-black uppercase tracking-[0.14em] text-white/38">Ключ доступа</span><input value={accessKey} onChange={(event) => setAccessKey(event.target.value)} placeholder="резервный ключ" type="password" className="soft-input ac-login-input rounded-2xl px-4 py-4 text-base font-black" autoComplete="current-password" /></label>
+            <label className="grid gap-2"><span className="ac-login-field-label text-xs font-black uppercase tracking-[0.14em] text-white/38">Telegram username</span><input value={username} onChange={(event) => setUsername(event.target.value)} placeholder="@username" className="soft-input ac-login-input rounded-2xl px-4 py-4 text-base font-black" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} /></label>
+            <label className="grid gap-2"><span className="ac-login-field-label text-xs font-black uppercase tracking-[0.14em] text-white/38">Ключ доступа</span><input value={accessKey} onChange={(event) => setAccessKey(event.target.value)} placeholder="резервный ключ" type="password" className="soft-input ac-login-input rounded-2xl px-4 py-4 text-base font-black" autoComplete="current-password" /></label>
           </div>
-          <button disabled={loading} className="avto-button mt-5 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Проверяем доступ..." : "Войти резервным способом"}</button>
+          <button disabled={loading} className="avto-button ac-login-submit mt-5 w-full rounded-2xl px-5 py-4 font-black disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Проверяем доступ..." : "Войти резервным способом"}</button>
         </form>
       </details>
 
