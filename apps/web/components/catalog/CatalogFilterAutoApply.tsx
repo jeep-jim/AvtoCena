@@ -54,12 +54,18 @@ export function CatalogFilterAutoApply() {
 
   useEffect(() => {
     const navigateFrom = (form: HTMLFormElement) => {
-      const params = formParams(form);
-      const next = params.toString();
       const current = new URLSearchParams(window.location.search);
+      const currentMake = current.get("make") || current.get("brand") || "";
+      const params = formParams(form);
+      const nextMake = params.get("make") || "";
+      if (currentMake !== nextMake) params.delete("model");
+
       current.delete("brand");
       current.delete("page");
       current.delete("advanced");
+      if (currentMake !== nextMake) current.delete("model");
+
+      const next = params.toString();
       if (current.toString() === next) return;
       router.replace(next ? `/cars?${next}` : "/cars", { scroll: false });
     };
