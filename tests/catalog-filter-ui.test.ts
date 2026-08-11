@@ -30,22 +30,27 @@ test("catalog filters apply automatically and show the active query", () => {
   assert.match(source, /key=\{`mobile-\$\{formKey\}`\}/);
 });
 
-test("catalog filters use compact sliders, removable chips and a mobile bottom sheet", () => {
+test("catalog filters use compact sliders, removable chips and a real mobile bottom sheet", () => {
   const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
   const page = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
   const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
   const template = fs.readFileSync("apps/web/app/(public)/template.tsx", "utf8");
   assert.match(source, /ac-dual-range/);
+  assert.match(source, /ac-mobile-filter-backdrop fixed inset-0[^\n]*flex items-end/);
   assert.match(source, /ac-mobile-filter-sheet/);
+  assert.match(source, /rounded-t-\[30px\]/);
   assert.match(source, /ac-filter-chip/);
   assert.match(source, /aria-label="Расширенные фильтры"/);
   assert.match(source, /totalRubDesc/);
   assert.match(source, /yearAsc/);
+  assert.doesNotMatch(source, /FilterActions/);
+  assert.doesNotMatch(source, /Показать<\/button>/);
   assert.match(page, /totalRubDesc/);
   assert.match(page, /yearAsc/);
   assert.match(storage, /totalRubDesc/);
   assert.match(storage, /yearAsc/);
   assert.match(template, /ac-home-filter-drawer::before/);
+  assert.match(template, /align-items: flex-end/);
 });
 
 test("the single public catalog search route owns filtered facets and live rates", () => {
