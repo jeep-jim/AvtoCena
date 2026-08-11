@@ -54,19 +54,22 @@ for (const generationId of candidates) {
     errors.push({ generationId, error: String(error?.message || error) });
   }
 }
-
 let deletedOrphanInternalObjects = 0;
+const orphanBatches = [];
+for (let index = 0; index < orphanInternalObjects.length; index += 1_000) orphanBatches.push(orphanInternalObjects.slice(index, index + 1_000));
 let orphanCursor = 0;
-await Promise.all(Array.from({ length: Math.min(deleteConcurrency, Math.max(1, orphanInternalObjects.length)) }, async () => {
+await Promise.all(Array.from({ length: Math.min(deleteConcurrency, Math.max(1, orphanBatches.length)) }, async () => {
   while (true) {
-    const index = orphanCursor++;
-    if (index >= orphanInternalObjects.length) return;
-    const object = orphanInternalObjects[index];
+    const batch = orphanBatches[orphanCursor++];
+    if (!batch) return;
     try {
-      await storage.deleteJson(object.key);
-      deletedOrphanInternalObjects++;
+      if (!storage.deleteObjects) throw new Error("batch_delete_not_supported");
+      deletedOrphanInternalObjects += await storage.deleteObjects(batch.map((object) => object.key));
     } catch (error) {
-      errors.push({ internalObject: object.key, error: String(error?.message || error) });
+      for (const object of batch) {
+        try { await storage.deleteJson(object.key); deletedOrphanInternalObjects++; }
+        catch (fallbackError) { errors.push({ internalObject: object.key, error: String(fallbackError?.message || error?.message || error) }); }
+      }
     }
   }
 }));
@@ -77,12 +80,13 @@ const report = {
   finishedAt: new Date().toISOString(),
   liveGeneration,
   currentInternalGeneration: String(internalManifest?.generationId || "") || null,
+  deleteConcurrency,
+  batchDelete: Boolean(storage.deleteObjects),
   discoveredGenerations: generations.length,
   protectedGenerations: [...protectedGenerations],
   removedGenerations: candidates,
   plannedObjects: candidateObjects.length + orphanInternalObjects.length,
   plannedBytes,
-  deleteConcurrency,
   deletedObjects: deleted + deletedOrphanInternalObjects,
   reclaimedBytes: errors.length ? null : plannedBytes,
   removedOrphanInternalObjects: deletedOrphanInternalObjects,
