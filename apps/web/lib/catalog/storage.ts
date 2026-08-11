@@ -504,6 +504,54 @@ export async function searchOffers(params: CatalogSearchParams) {
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
 
+export async function readHomeCatalogSnapshot(perMarket = 6) {
+  const manifest = await readManifest();
+  const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
+  const [byId, order, marketShards] = await Promise.all([
+    readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }),
+    readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: [] }),
+    mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
+      market,
+      shard: await readIndex<{ ids: string[] }>(manifest.generationId, `market/${cleanShard(market)}.json`, { ids: [] }),
+    })),
+  ]);
+
+  const selectedIds: string[] = [];
+  const marketCounts: Record<string, number> = {};
+  for (const { market, shard } of marketShards) {
+    const allowed = new Set(shard.ids || []);
+    marketCounts[market] = allowed.size;
+    let selected = 0;
+    for (const id of order.ids || []) {
+      if (!allowed.has(id) || !byId.byId[id]) continue;
+      selectedIds.push(id);
+      selected += 1;
+      if (selected >= limit) break;
+    }
+  }
+
+  const chunkLocations = new Map<string, OfferLocation>();
+  for (const id of selectedIds) {
+    const location = byId.byId[id];
+    if (location) chunkLocations.set(`${location.market}/${location.chunk}`, location);
+  }
+  const readConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_SEARCH_CHUNK_CONCURRENCY || 12)));
+  const loaded = (await mapWithConcurrency([...chunkLocations.values()], readConcurrency, (location) =>
+    readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, location.market, location.chunk), []))).flat();
+  const offersById = new Map(loaded.filter(isPublicOffer).map((offer) => [offer.id, offer]));
+  const items = selectedIds.flatMap((id) => {
+    const offer = offersById.get(id);
+    return offer ? [publicOffer(offer)] : [];
+  });
+
+  return {
+    generationId: manifest.generationId,
+    items,
+    marketCounts,
+    total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
+  };
+}
+
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
 export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
