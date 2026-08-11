@@ -94,6 +94,7 @@ for (const rawOffer of combinedCandidates) {
   const variantId = String(raw.vehicleKnowledgeVariant?.id || raw.recoveryVariantId || raw.exactFrameVariantIds?.[0] || "");
   const variant = variantById.get(variantId);
   if (!frameMatchesVariant(variant, offer)) { reject("exact_frame_power"); continue; }
+  if (!hasCredibleOfferContent({ ...offer, status: "active" })) { reject("public_quality"); continue; }
   unique.set(offer.id, offer);
 }
 
@@ -130,7 +131,7 @@ const manifestCount = Number(manifest?.markets?.japan?.count || 0);
 if (manifestCount !== japanRows.length) throw new Error(`japan_strict_manifest_mismatch:${manifestCount}:${japanRows.length}`);
 
 const report = {
-  version: 2,
+  version: 3,
   mode: "japan_strict_exact_frame_merge_publish",
   published: true,
   generationId: manifest.generationId,
