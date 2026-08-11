@@ -64,12 +64,10 @@ export function PreliminaryPrice({
 
   const panelBackground = lightTheme ? "#fff2cc" : "rgba(251,191,36,.10)";
   const panelText = lightTheme ? "#704500" : "#fde68a";
-  const priceColor = panel ? panelText : "#ffd21f";
+  const priceColor = panel ? panelText : lightTheme ? "#c58a00" : "#ffd21f";
   const popoverClass = lightTheme
     ? "border-[#e9c56b] bg-[#fff2cc] text-[#704500] shadow-[0_12px_34px_rgba(111,75,0,.14)]"
     : "border-amber-300/15 bg-[#2c281c] text-amber-200 shadow-[0_20px_65px_rgba(0,0,0,.45)]";
-  const placementClass = panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]";
-  const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
 
   const togglePanelInfo = (event: ReactMouseEvent | ReactKeyboardEvent) => {
     event.preventDefault();
@@ -80,7 +78,7 @@ export function PreliminaryPrice({
   return (
     <div
       ref={rootRef}
-      className={`relative ${panel ? "ac-price-trend-panel ac-preliminary-price-panel cursor-pointer rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}
+      className={`relative ${panel ? "ac-price-trend-panel ac-preliminary-price-panel cursor-pointer rounded-[1.35rem] p-4 pr-16 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}
       style={panel ? { background: panelBackground, backgroundColor: panelBackground } : undefined}
       role={panel ? "button" : undefined}
       tabIndex={panel ? 0 : undefined}
@@ -91,16 +89,19 @@ export function PreliminaryPrice({
       <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em]`} style={{ color: panel ? panelText : undefined }}>
         {label}
       </div>
-      <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
+      <div className={dense ? "mt-1 sm:mt-1.5" : "mt-1.5"}>
         <div className={`ac-price ac-price--preliminary min-w-0 whitespace-nowrap font-black leading-none tracking-[-0.05em] ${priceClassName}`} style={{ color: priceColor }}>
           {totalRub > 0 ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
         </div>
+      </div>
+
+      {panel ? <>
         <span
           role="button"
           tabIndex={0}
           aria-label="Почему цена предварительная"
           aria-expanded={open}
-          className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black outline-none"
+          className="absolute right-4 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-sm font-black outline-none"
           style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)", color: "var(--ac-text)" }}
           onMouseEnter={() => { if (desktopHover) setOpen(true); }}
           onMouseLeave={() => { if (desktopHover) setOpen(false); }}
@@ -119,17 +120,17 @@ export function PreliminaryPrice({
           }}
         >
           ?
-          {open ? (
-            <div
-              className={`ac-price-trend-popover ac-preliminary-price-popover absolute right-0 z-[400] ${placementClass} ${widthClass} rounded-2xl border p-4 text-left text-xs font-bold leading-5 ${popoverClass}`}
-              role="tooltip"
-              onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
-            >
-              {PRELIMINARY_PRICE_INFO}
-            </div>
-          ) : null}
         </span>
-      </div>
+        {open ? (
+          <div
+            className={`ac-price-trend-popover ac-preliminary-price-popover absolute right-0 top-[calc(100%+12px)] z-[400] w-[min(430px,calc(100vw-48px))] rounded-2xl border p-4 text-left text-xs font-bold leading-5 ${popoverClass}`}
+            role="tooltip"
+            onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
+          >
+            {PRELIMINARY_PRICE_INFO}
+          </div>
+        ) : null}
+      </> : null}
     </div>
   );
 }
