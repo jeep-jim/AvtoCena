@@ -1,0 +1,178 @@
+import crypto from "node:crypto";
+import fs from "node:fs/promises";
+
+const { mutateDataJson } = await import("../apps/web/lib/data.ts");
+const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+
+const MAX_OFFERS_PER_MODEL = 20;
+const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
+const output = String(process.env.CATALOG_GLOBAL_MODEL_CAP_REPORT || "catalog-global-model-cap-report.json");
+const dryRun = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GLOBAL_MODEL_CAP_DRY_RUN || ""));
+const lockPath = "catalog/import-lock.json";
+const operationId = `catalog_global_model_cap_${crypto.randomUUID()}`;
+const waitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
+const pollMs = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_LOCK_POLL_MS || 15_000));
+const ttlMs = Math.max(30 * 60_000, Number(process.env.CATALOG_PUBLISH_LOCK_TTL_MS || 90 * 60_000));
+let lockHeld = false;
+
+function sleep(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+async function acquireLock() {
+  const deadline = Date.now() + waitMs;
+  let last = "catalog_import_locked";
+  while (true) {
+    try {
+      await mutateDataJson(lockPath, { lockedUntil: "" }, (current) => {
+        const lockedUntil = Date.parse(String(current?.lockedUntil || ""));
+        if (Number.isFinite(lockedUntil) && lockedUntil > Date.now() && current?.operationId !== operationId) {
+          throw new Error(`catalog_import_locked_until_${new Date(lockedUntil).toISOString()}`);
+        }
+        return {
+          operationId,
+          operationType: "global_model_cap",
+          lockedUntil: new Date(Date.now() + ttlMs).toISOString(),
+          startedAt: new Date().toISOString(),
+        };
+      });
+      lockHeld = true;
+      return;
+    } catch (error) {
+      last = String(error?.message || error);
+      if (!/catalog_(?:publish|import|certified_power)_locked/i.test(last) || Date.now() + pollMs > deadline) {
+        throw new Error(`catalog_global_model_cap_lock_wait_failed:${last}`);
+      }
+      console.log(`[global-model-cap] waiting: ${last}`);
+      await sleep(pollMs);
+    }
+  }
+}
+async function releaseLock() {
+  if (!lockHeld) return;
+  await mutateDataJson(lockPath, { lockedUntil: "" }, (current) => current?.operationId === operationId
+    ? { operationId, operationType: "global_model_cap", lockedUntil: "", finishedAt: new Date().toISOString() }
+    : current);
+  lockHeld = false;
+}
+
+function clean(value) { return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US"); }
+function modelKey(offer) {
+  const make = clean(offer?.make);
+  const model = clean(offer?.model);
+  return make && model ? `${make}|${model}` : "";
+}
+function freshness(offer) {
+  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+}
+function quality(a, b) {
+  const ap = Number(a?.totalRub || 0) > 0 && Number(a.totalRub) <= preferredMaxRub ? 0 : 1;
+  const bp = Number(b?.totalRub || 0) > 0 && Number(b.totalRub) <= preferredMaxRub ? 0 : 1;
+  return ap - bp
+    || Number(b?.year || 0) - Number(a?.year || 0)
+    || freshness(b) - freshness(a)
+    || Number(b?.images?.length || 0) - Number(a?.images?.length || 0)
+    || Number(a?.totalRub || Number.MAX_SAFE_INTEGER) - Number(b?.totalRub || Number.MAX_SAFE_INTEGER)
+    || String(a?.id || "").localeCompare(String(b?.id || ""));
+}
+function normalizeVisible(raw) {
+  return normalizeVehicleOfferSpecs({
+    ...raw,
+    status: "active",
+    images: credibleCatalogImages(raw?.images || []).slice(0, 30),
+  });
+}
+function selectMarket(rows, market) {
+  const rejected = { quality: 0, modelQuota: 0 };
+  const candidates = rows
+    .map(normalizeVisible)
+    .filter((offer) => {
+      const ok = offer?.id
+        && offer?.market === market
+        && offer?.make
+        && offer?.model
+        && isCatalogYearAllowed(offer?.year, market)
+        && isCatalogOfferBusinessLiquid(offer)
+        && hasCredibleOfferContent({ ...offer, status: "active" });
+      if (!ok) rejected.quality += 1;
+      return Boolean(ok);
+    })
+    .sort(quality);
+  const counts = new Map();
+  const selected = [];
+  for (const offer of candidates) {
+    const key = modelKey(offer);
+    if (!key) { rejected.quality += 1; continue; }
+    const count = Number(counts.get(key) || 0);
+    if (count >= MAX_OFFERS_PER_MODEL) { rejected.modelQuota += 1; continue; }
+    counts.set(key, count + 1);
+    selected.push(offer);
+  }
+  return { selected, rejected, distinctModels: counts.size, maxPerExactModel: counts.size ? Math.max(...counts.values()) : 0 };
+}
+
+await acquireLock();
+try {
+  const combined = [];
+  const beforeByMarket = {};
+  const selectedByMarket = {};
+  const statsByMarket = {};
+  for (const market of PUBLIC_CATALOG_MARKETS) {
+    const rows = await readMarketOffers(market);
+    beforeByMarket[market] = rows.length;
+    const result = selectMarket(rows, market);
+    if (rows.length && !result.selected.length) throw new Error(`catalog_global_model_cap_empty:${market}`);
+    selectedByMarket[market] = result.selected.length;
+    statsByMarket[market] = {
+      before: rows.length,
+      selected: result.selected.length,
+      removedByQuality: result.rejected.quality,
+      removedByModelQuota: result.rejected.modelQuota,
+      distinctModels: result.distinctModels,
+      maxPerExactModel: result.maxPerExactModel,
+    };
+    combined.push(...result.selected);
+  }
+
+  if (dryRun) {
+    const report = { version: 1, mode: "global_model_cap_dry_run", dryRun: true, maxOffersPerModel: MAX_OFFERS_PER_MODEL, preferredMaxRub, beforeByMarket, selectedByMarket, byMarket: statsByMarket };
+    await fs.writeFile(output, JSON.stringify(report, null, 2));
+    console.log(JSON.stringify(report, null, 2));
+  } else {
+    process.env.CATALOG_GROW_ONLY_MARKETS = "";
+    const manifest = await persistCatalogOffers(combined);
+    const afterByMarket = {};
+    const failures = [];
+    for (const market of PUBLIC_CATALOG_MARKETS) {
+      const rows = await readMarketOffers(market);
+      afterByMarket[market] = rows.length;
+      const counts = new Map();
+      for (const offer of rows) {
+        const key = modelKey(offer);
+        if (key) counts.set(key, Number(counts.get(key) || 0) + 1);
+        if (!isCatalogYearAllowed(offer?.year, market)) failures.push(`${market}:year:${offer?.id}`);
+      }
+      const max = counts.size ? Math.max(...counts.values()) : 0;
+      if (max > MAX_OFFERS_PER_MODEL) failures.push(`${market}:model_quota:${max}`);
+      if (rows.length !== Number(manifest?.markets?.[market]?.count || 0)) failures.push(`${market}:manifest_count:${rows.length}:${Number(manifest?.markets?.[market]?.count || 0)}`);
+    }
+    const report = {
+      version: 1,
+      mode: "global_model_cap_publish",
+      published: true,
+      generationId: manifest.generationId,
+      maxOffersPerModel: MAX_OFFERS_PER_MODEL,
+      preferredMaxRub,
+      beforeByMarket,
+      selectedByMarket,
+      afterByMarket,
+      byMarket: statsByMarket,
+      failures,
+    };
+    await fs.writeFile(output, JSON.stringify(report, null, 2));
+    console.log(JSON.stringify(report, null, 2));
+    if (failures.length) process.exitCode = 1;
+  }
+} finally {
+  await releaseLock();
+}
