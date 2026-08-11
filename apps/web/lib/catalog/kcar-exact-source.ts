@@ -397,18 +397,10 @@ class KCarExactSource implements CatalogSourceAdapter {
       const data = await fetchExactDetailData(carCd);
       const rebuilt = exactVehicleGallery(data, carCd);
       if (rebuilt.length < 5) {
-        // K Car's rvo.frontImgPath/backImgPath are dealer credential scans, not
-        // vehicle angles. A short-lived maintenance version could have merged
-        // them into one 2D listing, so remove those exact URLs while retaining
-        // the listing-bound vehicle gallery already stored on the offer.
-        const forbidden = new Set([data.rvo?.frontImgPath, data.rvo?.backImgPath]
-          .map((value) => {
-            try { return new URL(clean(value), "https://img.kcar.com").toString(); } catch { return ""; }
-          }).filter(Boolean));
-        const cleaned = (offer.images || []).map((item) => clean(item?.url)).filter((url) => url && !forbidden.has(url));
-        if (cleaned.length < 5) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
-        urls = cleaned;
-        offer.operational = { ...(offer.operational || {}), galleryForceReplace: true };
+        // An active 2D listing can contain detail/cabin photos and dealer
+        // credentials but no source-verified full-body image. Do not publish it
+        // as a vehicle card until K Car exposes an exact exterior gallery.
+        throw new Error(`kcar_exact_gallery_no_exterior_${carCd}`);
       } else {
         urls = rebuilt;
       }
