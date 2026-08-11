@@ -23,7 +23,9 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply projection patch
-        run: python3 scripts/patch-catalog-search-projection.py
+        run: |
+          python3 scripts/patch-catalog-search-projection.py
+          python3 scripts/patch-catalog-search-projection-fallback.py
       - name: Typecheck
         run: npm run typecheck
       - name: Pure projection filter smoke
@@ -34,23 +36,25 @@ jobs:
           grep -q 'indexes/projection/' apps/web/lib/catalog/storage.ts
           grep -q 'readProjectionRows(manifest, params)' apps/web/lib/catalog/storage.ts
           grep -q 'projectionRows.slice' apps/web/lib/catalog/storage.ts
+          grep -q 'Backward-compatible bridge' apps/web/lib/catalog/storage.ts
           python3 - <<'PY'
           from pathlib import Path
           s=Path('apps/web/lib/catalog/storage.ts').read_text()
           a=s.index('export async function readCatalogFacets')
           b=s.index('async function persistInternalCatalog',a)
-          if 'readMarketOffers(' in s[a:b]: raise SystemExit('filtered facets still full-scan market offers')
+          if 'readMarketOffers(' in s[a:b]: raise SystemExit('filtered facets still directly full-scan market offers')
           a=s.index('export async function searchOffers')
           b=s.index('function isPrivateHost',a)
           block=s[a:b]
           if 'pageIds = idList;' in block: raise SystemExit('range search still expands pageIds to every candidate')
-          if 'readMarketOffers(' in block: raise SystemExit('searchOffers full-scan regression')
+          if 'readMarketOffers(' in block: raise SystemExit('searchOffers direct full-scan regression')
           print('static_projection_fastpath_ok')
           PY
       - name: Commit validated production file only
         run: |
           git checkout -- . || true
           python3 scripts/patch-catalog-search-projection.py
+          python3 scripts/patch-catalog-search-projection-fallback.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/web/lib/catalog/storage.ts
