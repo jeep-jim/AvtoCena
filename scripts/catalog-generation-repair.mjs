@@ -1,4 +1,4 @@
-const { readDataJson } = await import("../apps/web/lib/data/index.ts");
+const { readDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers, offerPath } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, hasCredibleOfferContent, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
