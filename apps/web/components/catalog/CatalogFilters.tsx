@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
 import { catalogFilterOptions } from "@/lib/catalog/filter-options";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
@@ -102,6 +103,20 @@ function initialSort(sort: string): { key: SortKey; direction: SortDir } {
   if (sort === "year") return { key: "year", direction: "desc" };
   return { key: "", direction: "asc" };
 }
+function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDirection: SortDir) {
+  const params = new URLSearchParams();
+  const add = (key: string, value: string) => { if (clean(value)) params.set(key, clean(value)); };
+  add("make", draft.make); add("model", draft.model); add("market", draft.market);
+  add("bodyType", draft.bodyType); add("transmission", draft.transmission); add("fuel", draft.fuel); add("drive", draft.drive);
+  add("yearFrom", draft.yearFrom); add("yearTo", draft.yearTo);
+  add("budgetFrom", draft.budgetFrom); add("budget", draft.budget);
+  add("mileageFrom", draft.mileageFrom); add("mileageTo", draft.mileageTo);
+  add("engineFrom", draft.engineFrom); add("engineTo", draft.engineTo); add("powerTo", draft.powerTo);
+  const sort = sortParam(sortKey, sortDirection);
+  if (sort) params.set("sort", sort);
+  return params.toString();
+}
+
 function sortParam(key: SortKey, direction: SortDir) {
   if (key === "totalRub") return direction === "desc" ? "totalRubDesc" : "totalRub";
   if (key === "year") return direction === "asc" ? "yearAsc" : "year";
@@ -181,11 +196,9 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
   </>;
 }
 
-function FilterActions({ mobile = false }: { mobile?: boolean }) {
-  return <div className={`flex items-center gap-2.5 ${mobile ? "" : ""}`}><Link href="/cars" className={`ac-filter-reset flex h-13 items-center justify-center rounded-[15px] px-4 text-sm font-black ${mobile ? "flex-1" : ""}`}>Сбросить</Link><button type="submit" className={`avto-button flex h-13 items-center justify-center rounded-[15px] px-5 text-sm font-black ${mobile ? "flex-[1.8]" : "min-w-[150px]"}`}>Показать автомобили</button></div>;
-}
 
 export function CatalogFilters({ initial, facets }: { initial: Record<string, string>; facets?: Facets }) {
+  const router = useRouter();
   const formKey = useMemo(() => JSON.stringify(initial), [initial]);
   const [draft, setDraft] = useState<FilterDraft>(() => draftFromInitial(initial));
   const initialSortState = useMemo(() => initialSort(initial.sort || ""), [initial.sort]);
@@ -203,6 +216,18 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     setSortKey(nextSort.key);
     setSortDirection(nextSort.direction);
   }, [formKey]);
+
+  useEffect(() => {
+    const nextInitial = draftFromInitial(initial);
+    const initialSorting = initialSort(initial.sort || "");
+    const serverQuery = catalogQuery(nextInitial, initialSorting.key, initialSorting.direction);
+    const nextQuery = catalogQuery(draft, sortKey, sortDirection);
+    if (nextQuery === serverQuery) return;
+    const timer = window.setTimeout(() => {
+      router.replace(nextQuery ? `/cars?${nextQuery}` : "/cars", { scroll: false });
+    }, 180);
+    return () => window.clearTimeout(timer);
+  }, [draft, sortKey, sortDirection, formKey, initial, router]);
 
   useEffect(() => {
     if (!electricOnly) { setElectricFacets(null); return; }
@@ -264,17 +289,17 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const advancedCount = chips.filter((item) => ["bodyType", "transmission", "fuel", "drive", "year", "budget", "mileage", "engine"].includes(item.key)).length;
 
   return <>
-    <form key={`desktop-${formKey}`} method="get" className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
+    <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
       <div className="grid grid-cols-3 gap-2.5">
         <SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1.25fr)_minmax(145px,.58fr)_minmax(310px,1.05fr)_auto_54px] items-center gap-2.5">
+      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(145px,.55fr)_minmax(80px,1fr)_minmax(310px,1.05fr)_54px] items-center gap-2.5">
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
+        <div aria-hidden="true" />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
-        <button type="submit" className="avto-button flex h-13 items-center justify-center rounded-[15px] px-5 text-sm font-black">Показать</button>
         <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 w-[54px] items-center justify-center rounded-[15px] ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon />{advancedCount ? <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white">{advancedCount}</span> : null}</button>
       </div>
       {expanded ? <section className="ac-advanced-fields mt-3 rounded-[1.35rem] p-3.5"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includeFuel={!electricOnly} /></section> : null}
@@ -283,7 +308,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
     <button type="button" onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span className="flex items-center gap-2"><span>Фильтры</span>{chips.length ? <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-red-500 px-1.5 text-[11px] text-white">{chips.length}</span> : null}</span><SlidersIcon /></button>
 
-    {mobileOpen ? <div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
+    {mobileOpen ? <div className="ac-mobile-filter-backdrop fixed inset-0 z-[10040] flex items-end bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog" aria-modal="true" aria-label="Фильтры каталога" className="ac-mobile-filter-sheet flex w-full max-h-[91dvh] flex-col overflow-hidden rounded-t-[30px] bg-[var(--ac-surface)] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}>
       <div className="shrink-0 px-4 pt-2"><div className="mx-auto h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-center justify-between gap-3 pb-3 pt-3"><div><div className="text-[10px] font-black uppercase tracking-[.15em] text-red-500">Каталог</div><h2 className="mt-0.5 text-2xl font-black">Фильтры</h2></div><button type="button" onClick={() => setMobileOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl" aria-label="Закрыть">×</button></div></div>
       <div className="ac-hide-scrollbar min-h-0 flex-1 overflow-y-auto px-4 pb-4">
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
@@ -291,7 +316,6 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includePrimary includeFuel={!electricOnly} /></section>
       </div>
-      <div className="shrink-0 border-t border-white/5 bg-[var(--ac-surface)] px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3"><FilterActions mobile /></div>
     </form></div> : null}
 
     <style jsx global>{`
