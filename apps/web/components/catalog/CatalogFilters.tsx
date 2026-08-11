@@ -62,6 +62,12 @@ function SimpleSelect({ name, value, options, placeholder, onChange, className =
 }
 
 const markets: Option[] = [{ value: "", label: "Все рынки" }, ...PUBLIC_CATALOG_MARKETS.map((value) => ({ value, label: CATALOG_MARKET_LABELS[value] }))];
+const sorts: Option[] = [
+  { value: "", label: "Сортировка: по умолчанию" },
+  { value: "totalRub", label: "Цена: сначала дешевле" },
+  { value: "year", label: "Год: сначала новые" },
+  { value: "mileage", label: "Пробег: сначала меньше" },
+];
 const bodies: Option[] = [{ value: "", label: "Любой кузов" }, { value: "suv", label: "Кроссовер" }, { value: "offroad", label: "Внедорожник" }, { value: "sedan", label: "Седан" }, { value: "hatchback", label: "Хэтчбек" }, { value: "wagon", label: "Универсал" }, { value: "minivan", label: "Минивэн" }, { value: "coupe", label: "Купе" }, { value: "convertible", label: "Кабриолет" }, { value: "pickup", label: "Пикап" }, { value: "van", label: "Фургон" }];
 const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { value: "petrol", label: "Бензин" }, { value: "diesel", label: "Дизель" }, { value: "hybrid", label: "Гибрид" }, { value: "electric", label: "Электро" }, { value: "lpg", label: "Газ" }];
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
@@ -141,22 +147,22 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
 
   return <>
     <form method="get" className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
-      <div className="grid grid-cols-[1fr_1fr_1fr_auto] gap-3">
+      <div className="grid grid-cols-4 gap-3">
         <SearchSelect name="make" value={make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={setMake} />
         <VehicleModelSearch value={initial.model || ""} make={make} onMakeChange={setMake} />
         <SimpleSelect name="market" value={initial.market || ""} placeholder="Все рынки" options={marketOptions} />
-        <button className="avto-button h-14 rounded-2xl px-12 text-base font-black">Найти</button>
+        <SimpleSelect name="sort" value={initial.sort || ""} placeholder="Сортировка" options={sorts} />
       </div>
       <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3">
         <PowerLimitCheckbox initialChecked={initial.powerTo === "160"} />
         <button type="button" onClick={() => setExpanded((current) => !current)} className="ac-advanced-toggle flex min-h-10 items-center gap-2 rounded-xl px-4 text-sm font-black transition">{expanded ? "Скрыть расширенный поиск" : "Расширенный поиск"}<Chevron open={expanded} /></button>
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
       </div>
-      {expanded ? <div className="ac-advanced-fields mt-4 rounded-[1.35rem] p-4"><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includePrimary={false} includeFuel={!electricOnly} /><button className="avto-button mt-4 h-14 w-full rounded-2xl text-base font-black">Найти</button></div> : null}
+      {expanded ? <div className="ac-advanced-fields mt-4 rounded-[1.35rem] p-4"><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includePrimary={false} includeFuel={!electricOnly} /></div> : null}
     </form>
 
     <button type="button" onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span>Фильтры</span><SlidersIcon /></button>
 
-    {mobileOpen ? <div className="fixed inset-0 z-[9998] bg-black/70 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" className="ac-catalog-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto p-5 pb-8" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileOpen(false)} className="ac-filter-close flex h-10 w-10 items-center justify-center rounded-xl text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox initialChecked={initial.powerTo === "160"} /><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includeFuel={!electricOnly} /></div><button className="avto-button mt-8 h-14 w-full rounded-2xl text-base font-black">Показать результаты</button></form></div> : null}
+    {mobileOpen ? <div className="fixed inset-0 z-[9998] bg-black/70 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" className="ac-catalog-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto p-5 pb-8" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileOpen(false)} className="ac-filter-close flex h-10 w-10 items-center justify-center rounded-xl text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><SimpleSelect name="sort" value={initial.sort || ""} placeholder="Сортировка" options={sorts} /><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox initialChecked={initial.powerTo === "160"} /><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includeFuel={!electricOnly} /></div></form></div> : null}
   </>;
 }
