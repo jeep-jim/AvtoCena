@@ -45,6 +45,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /onTouchStart=\{prefetch\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
+  assert.match(storage, /currentOfferShardCache/);
+  assert.match(storage, /catalog\/public\/offers/);
   assert.match(storage, /offerLookupCacheGeneration !== manifest\.generationId/);
   assert.match(storage, /CATALOG_MANIFEST_CACHE_MS \|\| 60_000/);
 });
@@ -61,4 +63,12 @@ test("catalog pricing shares one short-lived market-settings read", () => {
   assert.match(effectiveMarkets, /getCachedMarketsSettings\(\)/);
   assert.match(effectiveMarkets, /selectActiveMarketVersion\(market\)/);
   assert.doesNotMatch(effectiveMarkets, /Promise\.all\(MARKET_IDS\.map/);
+});
+
+test("catalog reads a current one-hop projection before generation indexes", () => {
+  assert.match(storage, /catalog\/public\/projection/);
+  assert.match(storage, /CURRENT_FACETS_PATH/);
+  assert.match(storage, /readCurrentSearchProjection\(currentMarket\)/);
+  assert.match(storage, /if \(current\.generationId\)/);
+  assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), projection, false\)/);
 });

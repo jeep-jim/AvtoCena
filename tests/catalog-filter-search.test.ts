@@ -50,17 +50,18 @@ test("all catalog filters use the projection when optional categorical shards ar
     const originalRead = storage.readJsonWithMeta.bind(storage);
     let projectionReads = 0;
     storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
-      if (relativePath.endsWith("/indexes/projection/korea.json")) projectionReads++;
+      if (relativePath === "catalog/public/projection/korea.json") projectionReads++;
       return originalRead(relativePath, fallback);
     };
     try {
       await Promise.all([searchOffers(filters), readCatalogFacets(filters)]);
-      assert.equal(projectionReads, 1, "parallel result and facets must share one immutable projection read");
+      assert.equal(projectionReads, 1, "parallel result and facets must share one current projection read");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
 
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`), { force: true });
+    fs.rmSync(safeStoragePath("catalog/public/projection/korea.json"), { force: true });
     resetCatalogReadCachesForTests();
     const legacyFiltered = await searchOffers(filters);
     assert.deepEqual(legacyFiltered.items.map((offer) => offer.id), ["filter-target"], "legacy generations must still apply every filter exactly");
