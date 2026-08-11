@@ -157,23 +157,65 @@ function SortControl({ sortKey, direction, onKeyChange, onDirectionChange, mobil
 }
 
 function DualRange({ title, fromName, toName, fromValue, toValue, min, max, step, unit = "", format = formatNumber, onChange }: { title: string; fromName: string; toName: string; fromValue: string; toValue: string; min: number; max: number; step: number; unit?: string; format?: (value: number) => string; onChange: (from: string, to: string) => void }) {
-  const parsedFrom = Number(fromValue);
-  const parsedTo = Number(toValue);
-  const low = Number.isFinite(parsedFrom) && parsedFrom > 0 ? Math.min(max, Math.max(min, parsedFrom)) : min;
-  const high = Number.isFinite(parsedTo) && parsedTo > 0 ? Math.min(max, Math.max(low, parsedTo)) : max;
-  const span = Math.max(1, max - min);
-  const left = ((low - min) / span) * 100;
-  const right = 100 - ((high - min) / span) * 100;
-  const clear = () => onChange("", "");
-  const formatValue = (value: number) => `${format(value)}${unit}`;
+  const [fromText, setFromText] = useState(fromValue);
+  const [toText, setToText] = useState(toValue);
+  useEffect(() => setFromText(fromValue), [fromValue]);
+  useEffect(() => setToText(toValue), [toValue]);
+
+  const digits = (value: string) => String(value || "").replace(/[^0-9]/g, "").slice(0, 10);
+  const normalize = (value: string) => {
+    const raw = digits(value);
+    if (!raw) return "";
+    const numeric = Math.min(max, Math.max(min, Number(raw)));
+    const snapped = step > 1 ? Math.round(numeric / step) * step : Math.round(numeric);
+    return String(Math.min(max, Math.max(min, snapped)));
+  };
+  const commit = (side: "from" | "to") => {
+    let nextFrom = normalize(fromText);
+    let nextTo = normalize(toText);
+    if (nextFrom && nextTo && Number(nextFrom) > Number(nextTo)) {
+      if (side === "from") nextTo = nextFrom;
+      else nextFrom = nextTo;
+    }
+    setFromText(nextFrom);
+    setToText(nextTo);
+    onChange(nextFrom, nextTo);
+  };
+  const applyPreset = (from: string, to: string) => {
+    setFromText(from);
+    setToText(to);
+    onChange(from, to);
+  };
+  const clear = () => applyPreset("", "");
+  const summary = fromValue || toValue
+    ? `${fromValue ? `от ${format(Number(fromValue))}${unit}` : "без минимума"} · ${toValue ? `до ${format(Number(toValue))}${unit}` : "без максимума"}`
+    : "Без ограничений";
+  const presets = title === "Год"
+    ? [{ label: "2020+", from: "2020", to: "" }, { label: "2023+", from: "2023", to: "" }, { label: "2025+", from: "2025", to: "" }]
+    : title === "Цена"
+      ? [{ label: "до 2 млн", from: "", to: "2000000" }, { label: "до 3 млн", from: "", to: "3000000" }, { label: "до 5 млн", from: "", to: "5000000" }]
+      : title === "Пробег"
+        ? [{ label: "до 50 тыс.", from: "", to: "50000" }, { label: "до 100 тыс.", from: "", to: "100000" }, { label: "до 150 тыс.", from: "", to: "150000" }]
+        : [{ label: "до 1.5 л", from: "", to: "1500" }, { label: "до 2.0 л", from: "", to: "2000" }, { label: "до 2.5 л", from: "", to: "2500" }];
+  const keyHandler = (side: "from" | "to") => (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") { event.preventDefault(); event.currentTarget.blur(); }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      if (side === "from") setFromText(fromValue); else setToText(toValue);
+      event.currentTarget.blur();
+    }
+  };
+
   return <div className="ac-range-card rounded-[17px] p-3.5">
-    <div className="flex items-center justify-between gap-3"><span className="text-xs font-black uppercase tracking-[.08em] text-[var(--ac-muted)]">{title}</span>{fromValue || toValue ? <button type="button" onClick={clear} className="flex h-6 w-6 items-center justify-center rounded-full text-sm font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}</div>
-    <div className="mt-1.5 flex items-center justify-between gap-3 text-sm font-black"><span>{fromValue ? `от ${formatValue(low)}` : "без минимума"}</span><span>{toValue ? `до ${formatValue(high)}` : "без максимума"}</span></div>
-    <div className="ac-dual-range mt-3">
-      <div className="ac-dual-range__track"><span style={{ left: `${left}%`, right: `${right}%` }} /></div>
-      <input type="range" min={min} max={max} step={step} value={low} onChange={(event) => { const next = Math.min(Number(event.target.value), high); onChange(next <= min ? "" : String(next), toValue); }} className="ac-range-slider ac-range-slider--min" aria-label={`${title}: минимум`} />
-      <input type="range" min={min} max={max} step={step} value={high} onChange={(event) => { const next = Math.max(Number(event.target.value), low); onChange(fromValue, next >= max ? "" : String(next)); }} className="ac-range-slider ac-range-slider--max" aria-label={`${title}: максимум`} />
+    <div className="flex items-start justify-between gap-3">
+      <div className="min-w-0"><div className="text-xs font-black uppercase tracking-[.08em] text-[var(--ac-muted)]">{title}</div><div className="mt-1 truncate text-[11px] font-bold text-[var(--ac-muted)]">{summary}</div></div>
+      {fromValue || toValue ? <button type="button" onClick={clear} className="ac-range-clear flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-base font-black text-[var(--ac-muted)]" aria-label={`Сбросить ${title}`}>×</button> : null}
     </div>
+    <div className="mt-3 grid grid-cols-2 gap-2">
+      <label className="ac-range-input-wrap"><span>От</span><div className="ac-range-input-box"><input inputMode="numeric" autoComplete="off" value={fromText} onChange={(event) => setFromText(digits(event.target.value))} onBlur={() => commit("from")} onKeyDown={keyHandler("from")} placeholder="Не важно" aria-label={`${title}: от`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
+      <label className="ac-range-input-wrap"><span>До</span><div className="ac-range-input-box"><input inputMode="numeric" autoComplete="off" value={toText} onChange={(event) => setToText(digits(event.target.value))} onBlur={() => commit("to")} onKeyDown={keyHandler("to")} placeholder="Не важно" aria-label={`${title}: до`} />{unit ? <small>{unit.trim()}</small> : null}</div></label>
+    </div>
+    <div className="mt-2.5 flex flex-wrap gap-1.5" aria-label={`Быстрый выбор: ${title}`}>{presets.map((preset) => <button key={preset.label} type="button" onClick={() => applyPreset(preset.from, preset.to)} className="ac-range-preset rounded-full px-2.5 py-1.5 text-[10px] font-black">{preset.label}</button>)}</div>
     <input type="hidden" name={fromName} value={fromValue} /><input type="hidden" name={toName} value={toValue} />
   </div>;
 }
@@ -187,7 +229,8 @@ function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptio
   return <>
     {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
     <div className={`grid gap-2.5 md:grid-cols-2 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
-    <div className="mt-3 grid gap-3 md:grid-cols-2">
+    <div className="mt-4 flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>
+    <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
       <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
       <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
       <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
@@ -295,12 +338,11 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(145px,.55fr)_minmax(80px,1fr)_minmax(310px,1.05fr)_54px] items-center gap-2.5">
+      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(158px,.52fr)] items-center gap-2.5">
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
-        <div aria-hidden="true" />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
-        <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 w-[54px] items-center justify-center rounded-[15px] ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon />{advancedCount ? <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white">{advancedCount}</span> : null}</button>
+        <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="truncate">{expanded ? "Скрыть" : "Ещё фильтры"}</span>{advancedCount ? <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white">{advancedCount}</span> : null}</button>
       </div>
       {expanded ? <section className="ac-advanced-fields mt-3 rounded-[1.35rem] p-3.5"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includeFuel={!electricOnly} /></section> : null}
       <FilterChips chips={chips} onRemove={removeFilter} />
@@ -326,20 +368,21 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-sort-direction:disabled{opacity:.35;cursor:not-allowed}
       .ac-filter-settings{transition:background-color .16s ease,color .16s ease,transform .16s ease}
       .ac-filter-settings:hover,.ac-filter-settings.is-active{background:var(--ac-surface-3);color:#ff353d}
-      .ac-filter-settings:active{transform:scale(.96)}
+      .ac-filter-settings:active{transform:scale(.98)}
       .ac-advanced-fields{background:var(--ac-surface-2)}
       .ac-range-card{background:var(--ac-surface)}
       .ac-filter-chip{background:var(--ac-surface-2)}
       .ac-filter-chip:hover{background:var(--ac-surface-3)}
-      .ac-dual-range{position:relative;height:22px}
-      .ac-dual-range__track{position:absolute;left:8px;right:8px;top:9px;height:4px;border-radius:999px;background:var(--ac-surface-3);overflow:hidden}
-      .ac-dual-range__track span{position:absolute;top:0;bottom:0;border-radius:999px;background:#ff353d}
-      .ac-range-slider{position:absolute;inset:0;width:100%;height:22px;margin:0;background:transparent!important;border:0!important;appearance:none;-webkit-appearance:none;pointer-events:none;outline:none!important;box-shadow:none!important}
-      .ac-range-slider::-webkit-slider-runnable-track{height:4px;background:transparent}
-      .ac-range-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-7px;border:3px solid var(--ac-surface);border-radius:999px;background:#ff353d;pointer-events:auto;cursor:pointer;box-shadow:0 0 0 1px rgba(255,53,61,.2)!important}
-      .ac-range-slider::-moz-range-track{height:4px;background:transparent}
-      .ac-range-slider::-moz-range-thumb{width:18px;height:18px;border:3px solid var(--ac-surface);border-radius:999px;background:#ff353d;pointer-events:auto;cursor:pointer;box-shadow:0 0 0 1px rgba(255,53,61,.2)!important}
-      .ac-range-slider--min{z-index:2}.ac-range-slider--max{z-index:3}
+      .ac-range-clear,.ac-range-preset{background:var(--ac-surface-2);border:1px solid var(--ac-border);transition:background-color .15s ease,color .15s ease,border-color .15s ease}
+      .ac-range-clear:hover,.ac-range-preset:hover{background:var(--ac-surface-3);color:var(--ac-text);border-color:rgba(255,53,61,.35)}
+      .ac-range-input-wrap{display:block;min-width:0}
+      .ac-range-input-wrap>span{display:block;margin:0 0 5px 2px;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--ac-muted)}
+      .ac-range-input-box{display:flex;align-items:center;min-width:0;height:42px;border-radius:12px;background:var(--ac-surface-2);border:1px solid var(--ac-border);overflow:hidden;transition:border-color .15s ease,background-color .15s ease}
+      .ac-range-input-box:focus-within{border-color:rgba(255,53,61,.72);background:var(--ac-surface-3)}
+      .ac-range-input-box input{min-width:0;width:100%;height:100%;padding:0 10px;background:transparent!important;border:0!important;outline:0!important;color:var(--ac-text)!important;font-size:13px;font-weight:900;box-shadow:none!important}
+      .ac-range-input-box input::placeholder{color:var(--ac-muted);opacity:.72;font-weight:700}
+      .ac-range-input-box small{flex:none;padding-right:9px;color:var(--ac-muted);font-size:10px;font-weight:800;white-space:nowrap}
+      .ac-range-preset{color:var(--ac-muted)}
       .ac-mobile-filter-section{margin-top:12px;padding:12px;border-radius:20px;background:var(--ac-surface-2)}
       .ac-mobile-filter-section__title{margin:0 0 9px;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ac-muted)}
       @media(max-width:1023px){
