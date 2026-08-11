@@ -5,6 +5,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "55 20 * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml"
 
 permissions:
   contents: read
