@@ -13,6 +13,8 @@ const generations = [...new Set([...configured, ...CONFIRMED_GENERATIONS, ...his
 const maxChunks = Math.max(1, Number(process.env.CATALOG_RECOVERY_MAX_CHUNKS || 50));
 const forceRestore = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_RECOVERY_FORCE || "true").toLowerCase());
 const recoveredAt = new Date().toISOString();
+let minimums = {};
+try { minimums = JSON.parse(process.env.CATALOG_RECOVERY_MIN_COUNTS_JSON || "{}"); } catch { throw new Error("catalog_recovery_invalid_minimums_json"); }
 
 function completeness(offer) {
   return [offer?.mileageKm != null, offer?.engineCc, offer?.powerHp || offer?.powerKw, offer?.fuel, offer?.transmission, offer?.drive, offer?.bodyType, offer?.color].filter(Boolean).length;
@@ -103,6 +105,14 @@ const afterByMarket = next.reduce((totals, offer) => {
 const restoredMissingMarket = MARKETS.some((market) => Number(beforeByMarket[market] || 0) === 0 && Number(afterByMarket[market] || 0) > 0);
 const richerMarket = MARKETS.some((market) => Number(afterByMarket[market] || 0) > Number(beforeByMarket[market] || 0));
 const shouldPublish = next.length > 0 && (forceRestore || restoredMissingMarket || richerMarket);
+const belowMinimum = Object.entries(minimums)
+  .filter(([, minimum]) => Number(minimum) > 0)
+  .filter(([market, minimum]) => Number(afterByMarket[market] || 0) < Number(minimum))
+  .map(([market, minimum]) => `${market}:${Number(afterByMarket[market] || 0)}<${Number(minimum)}`);
+
+if (belowMinimum.length) {
+  throw new Error(`catalog_recovery_preflight_below_min:${belowMinimum.join(",")}`);
+}
 
 if (!shouldPublish) {
   console.log(JSON.stringify({ restored: false, beforeByMarket, afterByMarket, recoveredByGeneration, reason: "no_recoverable_market_data" }, null, 2));
@@ -110,4 +120,5 @@ if (!shouldPublish) {
 }
 
 const manifest = await persistCatalogOffers(next);
-console.log(JSON.stringify({ restored: true, generationId: manifest.generationId, beforeTotal: current.length, afterTotal: next.length, beforeByMarket, afterByMarket, recoveredByGeneration }, null, 2));
+const manifestByMarket = Object.fromEntries(Object.entries(manifest.markets || {}).map(([market, state]) => [market, Number(state?.count || 0)]));
+console.log(JSON.stringify({ restored: true, generationId: manifest.generationId, beforeTotal: current.length, afterTotal: next.length, beforeByMarket, afterByMarket, manifestByMarket, recoveredByGeneration }, null, 2));

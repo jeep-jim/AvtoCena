@@ -3,12 +3,10 @@ run-name: Japan strict merge publish · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-japan-strict-merge-publish.yml"
-      - "scripts/catalog-japan-strict-merge-publish.mjs"
+    inputs:
+      source_run_id:
+        description: "Verified exact-frame recovery workflow run ID"
+        required: true
 
 permissions:
   actions: read
@@ -24,7 +22,11 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-  SOURCE_RUN_ID: "31266050935"
+  SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -58,6 +60,7 @@ jobs:
         env:
           JAPAN_STRICT_MERGE_INPUT: recovery-input/catalog-rebuild-japan-exact-frame.json
           JAPAN_STRICT_MERGE_REPORT: catalog-japan-strict-merge-publish-report.json
+          JAPAN_STRICT_MIN_PUBLISH_COUNT: "193"
           CATALOG_MAX_OFFERS_PER_MODEL: "20"
           CATALOG_MAX_MODELS_PER_MAKE: "10"
         run: npx tsx scripts/catalog-japan-strict-merge-publish.mjs

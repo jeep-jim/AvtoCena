@@ -5,10 +5,11 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "55 20 * * *"
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml"
+  workflow_run:
+    workflows:
+      - "Catalog live daily · working markets"
+      - "Catalog emergency · restore Japan baseline"
+    types: [completed]
 
 permissions:
   contents: read
@@ -38,6 +39,7 @@ env:
 
 jobs:
   validate:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
