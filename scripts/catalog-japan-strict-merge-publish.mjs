@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, catalogMinYearForMarket, hasCredibleOfferContent, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
@@ -10,6 +10,7 @@ const input = process.env.JAPAN_STRICT_MERGE_INPUT || "catalog-rebuild-japan-exa
 const output = process.env.JAPAN_STRICT_MERGE_REPORT || "catalog-japan-strict-merge-publish-report.json";
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
+const minPublishCount = Math.max(1, Number(process.env.JAPAN_STRICT_MIN_PUBLISH_COUNT || 193));
 const minYear = catalogMinYearForMarket("japan");
 
 function compact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""); }
@@ -91,6 +92,7 @@ for (const rawOffer of combinedCandidates) {
   if (!soldSemantics(offer)) { reject("sold_semantics"); continue; }
   if (!exactPhotos(offer)) { reject("exact_photos"); continue; }
   if (!exactCalculation(offer)) { reject("calculation"); continue; }
+  if (!hasCredibleOfferContent(offer)) { reject("public_content"); continue; }
   const raw = offer.operational?.raw || {};
   const variantId = String(raw.vehicleKnowledgeVariant?.id || raw.recoveryVariantId || raw.exactFrameVariantIds?.[0] || "");
   const variant = variantById.get(variantId);
@@ -113,7 +115,9 @@ for (const offer of strictRows) {
   if (key) modelCounts.set(key, count + 1);
   if (make && key) { makeModels.add(key); modelsByMake.set(make, makeModels); }
 }
-if (!japanRows.length) throw new Error("japan_strict_merge_empty");
+if (japanRows.length < minPublishCount) {
+  throw new Error(`japan_strict_preflight_below_min:${japanRows.length}:${minPublishCount}`);
+}
 
 const all = [...japanRows];
 const preservedByMarket = {};
@@ -145,6 +149,7 @@ const report = {
   inputCurrent: current.length,
   strictBeforeDiversity: strictRows.length,
   count: japanRows.length,
+  minPublishCount,
   maxOffersPerModel,
   maxModelsPerMake,
   distinctModels: modelCounts.size,

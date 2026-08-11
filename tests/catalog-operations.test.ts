@@ -18,6 +18,8 @@ test("daily market writer publishes Georgia and repairs only old K Car gallery o
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia/);
   assert.match(workflow, /CATALOG_GALLERY_SOURCE_IDS: kcar_korea_open/);
   assert.match(workflow, /CATALOG_GALLERY_MAX_OFFERS: "500"/);
+  assert.match(workflow, /continue-on-error: true/);
+  assert.match(workflow, /if: always\(\) && needs\.validate\.result == 'success'/);
 
   const refresh = fs.readFileSync("scripts/catalog-refresh-galleries.mjs", "utf8");
   assert.match(refresh, /needsSourceOrderedGalleryRefresh\(offer\)/);
@@ -45,4 +47,25 @@ test("certified 30-minute power is applied automatically without accepting peak 
 
   const strictMerge = fs.readFileSync("scripts/catalog-japan-strict-merge-publish.mjs", "utf8");
   assert.match(strictMerge, /isCatalogYearAllowed\(offer\.year, market\)/);
+  assert.match(strictMerge, /hasCredibleOfferContent\(offer\)/);
+  assert.match(strictMerge, /japan_strict_preflight_below_min/);
+
+  const strictWorkflow = fs.readFileSync(".github/workflows/catalog-japan-strict-merge-publish.yml", "utf8");
+  assert.match(strictWorkflow, /JAPAN_STRICT_MIN_PUBLISH_COUNT: "193"/);
+  assert.doesNotMatch(strictWorkflow, /SOURCE_RUN_ID: "\d+"/);
+});
+
+test("emergency Japan recovery restores a verified generation before the remaining writers", () => {
+  const recovery = fs.readFileSync(".github/workflows/catalog-emergency-restore-japan.yml", "utf8");
+  assert.match(recovery, /CATALOG_RECOVERY_GENERATIONS: "gen_1786426826475_e390aa80"/);
+  assert.match(recovery, /CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia,kyrgyzstan"/);
+  assert.match(recovery, /group: catalog-live-daily-working-markets/);
+  assert.match(recovery, /CATALOG_AUDIT_ASSERT_MARKETS: japan/);
+
+  const markets = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", "utf8");
+  assert.match(markets, /Catalog emergency · restore Japan baseline/);
+  assert.match(markets, /github\.event\.workflow_run\.conclusion == 'success'/);
+
+  const script = fs.readFileSync("scripts/catalog-recover-generations.mjs", "utf8");
+  assert.match(script, /catalog_recovery_preflight_below_min/);
 });
