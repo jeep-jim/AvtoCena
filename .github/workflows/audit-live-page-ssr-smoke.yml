@@ -1,0 +1,61 @@
+name: Audit live homepage SSR and page latency
+
+on:
+  push:
+    branches: [audit/live-page-ssr-smoke-20260811]
+    paths:
+      - .github/workflows/audit-live-page-ssr-smoke.yml
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Probe public pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, subprocess, re, statistics
+          urls = {
+            'home': 'https://avtocena.com/',
+            'europe': 'https://avtocena.com/cars?market=europe',
+            'china': 'https://avtocena.com/cars?market=china',
+          }
+          report = {}
+          for name, url in urls.items():
+              samples=[]
+              last_html=''
+              for i in range(3):
+                  out=f'/tmp/{name}-{i}.html'
+                  fmt='%{http_code} %{time_starttransfer} %{time_total} %{size_download}'
+                  raw=subprocess.check_output(['curl','-L','--fail','--silent','--show-error','--compressed','-A','Mozilla/5.0 AvtoCenaAudit/1.0','-o',out,'-w',fmt,url], text=True).strip()
+                  code, ttfb, total, size=raw.split()
+                  html=open(out, encoding='utf-8', errors='ignore').read()
+                  last_html=html
+                  samples.append({'http':int(code),'ttfb':float(ttfb),'total':float(total),'bytes':int(size),'offerLinks':html.count('/cars/offer/')})
+              report[name] = {
+                  'samples': samples,
+                  'medianTtfb': statistics.median(x['ttfb'] for x in samples),
+                  'medianTotal': statistics.median(x['total'] for x in samples),
+                  'lastOfferLinks': samples[-1]['offerLinks'],
+                  'hasNextData': '__next' in last_html.lower(),
+                  'hasCatalogCopy': ('Автомоб' in last_html or 'Каталог' in last_html),
+              }
+          # Homepage must now contain server-rendered car links. Market pages should also return useful HTML.
+          if report['home']['lastOfferLinks'] < 6:
+              raise SystemExit(f"home_ssr_missing_offer_links:{report['home']['lastOfferLinks']}")
+          if report['europe']['lastOfferLinks'] < 1 or report['china']['lastOfferLinks'] < 1:
+              raise SystemExit('market_page_missing_offer_links')
+          open('live-page-ssr-smoke.json','w').write(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-page-ssr-smoke
+          path: live-page-ssr-smoke.json
+          if-no-files-found: warn
+          retention-days: 3
