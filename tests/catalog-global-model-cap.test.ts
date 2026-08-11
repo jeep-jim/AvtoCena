@@ -5,6 +5,20 @@ import test from "node:test";
 const script = fs.readFileSync("scripts/catalog-enforce-global-model-cap.mjs", "utf8");
 const workflow = fs.readFileSync(".github/workflows/catalog-global-model-cap.yml", "utf8");
 
+const liveWriterWorkflowPaths = [
+  ".github/workflows/catalog-live-daily-working-markets.yml",
+  ".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml",
+  ".github/workflows/catalog-global-model-cap.yml",
+  ".github/workflows/catalog-kcar-exterior-gallery-repair.yml",
+  ".github/workflows/catalog-certified-power-apply.yml",
+  ".github/workflows/catalog-emergency-restore-japan.yml",
+  ".github/workflows/catalog-japan-strict-merge-publish.yml",
+  ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml",
+  ".github/workflows/catalog-v6-prestige-up-to-30k.yml",
+];
+
+const sharedWriterConcurrency = /group:\s*catalog-live-daily-working-markets\s*\n\s*cancel-in-progress:\s*false/;
+
 test("canonical catalog cleanup hard-caps every exact model at twenty", () => {
   assert.match(script, /const MAX_OFFERS_PER_MODEL = 20/);
   assert.match(script, /for \(const market of PUBLIC_CATALOG_MARKETS\)/);
@@ -31,4 +45,11 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog live daily · working markets'/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+});
+
+test("every production catalog writer uses the shared non-cancelling concurrency slot", () => {
+  for (const path of liveWriterWorkflowPaths) {
+    const source = fs.readFileSync(path, "utf8");
+    assert.match(source, sharedWriterConcurrency, `${path} must use the shared writer slot`);
+  }
 });

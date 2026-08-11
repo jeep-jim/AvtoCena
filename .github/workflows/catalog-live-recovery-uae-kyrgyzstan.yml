@@ -188,7 +188,7 @@ jobs:
     needs: [validate, merge]
     if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
     concurrency:
-      group: catalog-publish-uae-kyrgyzstan
+      group: catalog-live-daily-working-markets
       cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 70

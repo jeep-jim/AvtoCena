@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-global-model-cap
+  group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
 env:
