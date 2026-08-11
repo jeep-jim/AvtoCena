@@ -1,0 +1,28 @@
+name: Validate UAE financing price guard
+
+on:
+  push:
+    branches:
+      - fix/uae-financing-price-guard-20260811
+    paths:
+      - "apps/web/lib/catalog/offer-quality.ts"
+      - ".github/workflows/validate-uae-financing-price-guard.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Regression smoke for monthly financing text
+        run: |
+          npx tsx -e "import assert from 'node:assert/strict'; import { isFinancingOnlyListingText } from './apps/web/lib/catalog/offer-quality.ts'; assert.equal(isFinancingOnlyListingText('GMC Hummer EV EDITION 1 AED 6,899 P.M • 0% Downpayment'), true); assert.equal(isFinancingOnlyListingText('GMC Hummer EV EDITION 1 AED 368,000'), false); assert.equal(isFinancingOnlyListingText('AED 4,250 per month'), true); console.log('uae_financing_price_guard_smoke_ok');"
