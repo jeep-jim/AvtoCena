@@ -1,0 +1,30 @@
+name: Diagnose Georgia gallery depth
+
+on:
+  push:
+    branches: [diag/georgia-gallery-depth-20260811]
+    paths:
+      - .github/workflows/diag-georgia-gallery-depth.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: diag/georgia-gallery-depth-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fetch exact detail galleries without publishing
+        run: npx tsx scripts/diag-georgia-gallery-depth.mts | tee georgia-gallery-depth.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: georgia-gallery-depth
+          path: georgia-gallery-depth.json
+          retention-days: 3
