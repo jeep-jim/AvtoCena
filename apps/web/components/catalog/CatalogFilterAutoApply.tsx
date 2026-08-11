@@ -29,28 +29,9 @@ function formParams(form: HTMLFormElement) {
   return params;
 }
 
-function simplifyCatalogSummary() {
-  const summary = document.querySelector<HTMLElement>(".ac-catalog-page section > .max-w-4xl > p");
-  if (!summary) return;
-  const text = summary.textContent || "";
-  if (/^Найдено:\s*[\d\s]+$/.test(text.trim())) return;
-  const matches = [...text.matchAll(/\d[\d\s]*/g)];
-  const last = matches.at(-1)?.[0]?.replace(/\s+/g, " ").trim();
-  if (last) summary.textContent = `Найдено: ${last}`;
-}
-
 export function CatalogFilterAutoApply() {
   const router = useRouter();
   const debounceRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    simplifyCatalogSummary();
-    const root = document.querySelector<HTMLElement>(".ac-catalog-page");
-    if (!root) return;
-    const observer = new MutationObserver(simplifyCatalogSummary);
-    observer.observe(root, { childList: true, subtree: true, characterData: true });
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const navigateFrom = (form: HTMLFormElement) => {
@@ -120,18 +101,5 @@ export function CatalogFilterAutoApply() {
     };
   }, [router]);
 
-  return <style>{`
-    .ac-catalog-filter-panel .avto-button,
-    .ac-catalog-filter-drawer .avto-button {
-      display: none !important;
-    }
-    @media (min-width: 1024px) {
-      .ac-catalog-filter-panel > div:first-child {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-      }
-      .ac-catalog-filter-panel .ac-advanced-fields > button {
-        display: none !important;
-      }
-    }
-  `}</style>;
+  return null;
 }
