@@ -1,0 +1,39 @@
+name: Validate safe public spec labels
+
+on:
+  push:
+    branches: [fix/public-spec-safe-labels-20260811]
+    paths:
+      - .github/workflows/validate-public-spec-safe-labels.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/public-spec-safe-labels-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-public-spec-safe-labels.py
+      - run: npm run typecheck
+      - name: Spec label smoke
+        run: |
+          npx tsx -e 'import {catalogTransmissionName,catalogDriveName} from "./apps/web/lib/catalog/presentation.ts"; const cases=[["LEV","уточняется"],["6-speed automatic","6-ступ. автомат"],["7-speed DCT","7-ступ. робот"],["e-CVT","вариатор (e-CVT)"],["single-speed gearbox","одноступенчатый редуктор"]]; for(const [raw,want] of cases){const got=catalogTransmissionName(raw);if(got!==want)throw new Error(`${raw}:${got}!=${want}`)}; if(catalogDriveName("Front-wheel drive")!=="передний")throw new Error("fwd"); if(catalogDriveName("LEV")!=="уточняется")throw new Error("drive leak"); console.log({safeLabels:true})'
+      - name: Commit production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-public-spec-safe-labels.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/presentation.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Hide invalid public transmission and drive tokens [skip actions]"
+          git push origin HEAD:fix/public-spec-safe-labels-20260811
