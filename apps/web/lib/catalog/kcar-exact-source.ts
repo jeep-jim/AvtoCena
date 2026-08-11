@@ -387,8 +387,11 @@ class KCarExactSource implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = (offer.operational?.raw || {}) as any;
     const previousMode = clean(offer.operational?.gallerySafetyMode || raw.gallerySafetyMode);
+    const credentialPattern = /\/ucms\/\d{6}\/CM\/CMBIZ11120D\//i;
+    const hasCredentialScans = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS || "false").toLowerCase())
+      && (offer.images || []).some((item) => credentialPattern.test(clean(item?.url)));
     let urls = Array.isArray(raw.images) ? raw.images.map(clean).filter(Boolean) : [];
-    if (previousMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE) {
+    if (previousMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE || hasCredentialScans) {
       const carCd = clean(offer.sourceOfferId);
       if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
       const data = await fetchExactDetailData(carCd);
@@ -405,6 +408,7 @@ class KCarExactSource implements CatalogSourceAdapter {
         const cleaned = (offer.images || []).map((item) => clean(item?.url)).filter((url) => url && !forbidden.has(url));
         if (cleaned.length < 5) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
         urls = cleaned;
+        offer.operational = { ...(offer.operational || {}), galleryForceReplace: true };
       } else {
         urls = rebuilt;
       }
