@@ -1,0 +1,39 @@
+name: Validate engine liters vs consumption guard
+
+on:
+  push:
+    branches: [fix/spec-engine-liters-consumption-20260811]
+    paths:
+      - scripts/patch-spec-engine-liters-consumption-20260811.py
+      - .github/workflows/validate-spec-engine-liters-consumption.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-spec-engine-liters-consumption-20260811.py
+      - run: npm run typecheck
+      - name: Runtime regression cases
+        run: |
+          npx tsx -e '
+          import {normalizeVehicleOfferSpecs} from "./apps/web/lib/catalog/spec-normalization.ts";
+          const base:any={market:"europe",make:"Mazda",model:"CX-30",year:2021,fuel:"Gasoline",operational:{raw:{}}};
+          const consumption=normalizeVehicleOfferSpecs({...base,operational:{raw:{wltpValues:["6.0 l/100 km (comb.)","134 g/km (comb.)"]}}});
+          if(consumption.engineCc) throw new Error(`fuel consumption became engine cc:${consumption.engineCc}`);
+          const dealer=normalizeVehicleOfferSpecs({...base,operational:{raw:{rating:{score:4.9},languages:"Deutsch, English"}}});
+          if(dealer.engineCc) throw new Error(`dealer rating/languages became engine cc:${dealer.engineCc}`);
+          const realLiters=normalizeVehicleOfferSpecs({...base,trim:"2.0 L SKYACTIV-G"});
+          if(realLiters.engineCc!==2000) throw new Error(`real 2.0 L not parsed:${realLiters.engineCc}`);
+          const exactCc=normalizeVehicleOfferSpecs({...base,engineCc:1498,operational:{raw:{wltpValues:["6.4 l/100 km"]}}});
+          if(exactCc.engineCc!==1498) throw new Error(`exact cc changed:${exactCc.engineCc}`);
+          console.log({consumption:consumption.engineCc||null,dealer:dealer.engineCc||null,realLiters:realLiters.engineCc,exactCc:exactCc.engineCc});'
