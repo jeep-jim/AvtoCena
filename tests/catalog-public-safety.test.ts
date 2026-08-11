@@ -57,6 +57,26 @@ test("public price never exposes implausible raw calculated totals", () => {
   assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
 });
 
+test("verified preliminary combustion price is visible without pretending the utilization fee is known", () => {
+  const offer = {
+    market: "japan",
+    powertrainKind: "combustion",
+    totalRub: 2_450_000,
+    calculationStatus: "preliminary_power_pending",
+    calculationSnapshot: {
+      pricingConfidence: "preliminary",
+      priceIncludesUtilizationFee: false,
+      missing: ["utilization_power_kw"],
+      customs: { status: "needs_data", knownCustomsRub: 720_000, missing: ["utilization_power_kw"] },
+      breakdown: [
+        { id: "car", amountRub: 1_200_000 },
+        { id: "customs", amountRub: 720_000 },
+      ],
+    },
+  } as any;
+  assert.equal(catalogOfferVisibleRub(offer), 2_450_000);
+});
+
 test("mandatory source offer is hidden until its exact-card photo identity is verified", () => {
   assert.equal(hasCredibleOfferContent(sourceOffer()), false);
   assert.equal(hasCredibleOfferContent(sourceOffer({
