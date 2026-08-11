@@ -1,6 +1,7 @@
 import { performance } from "node:perf_hooks";
 import { readCatalogFacets, readMarketOffers, searchOffers } from "../apps/web/lib/catalog/storage.ts";
 import { isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality.ts";
+import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority.ts";
 
 const market = String(process.env.SMOKE_MARKET || "europe");
 const now = () => performance.now();
@@ -34,7 +35,7 @@ for (const row of makeRows) {
 const commonModel = [...modelCounts.values()].sort((a,b)=>b.count-a.count)[0]?.label;
 const years = legacy.map((row)=>Number(row.year||0)).filter((n)=>n>0).sort((a,b)=>a-b);
 const yearFrom = years[Math.floor(years.length * 0.55)] || 2022;
-const prices = legacy.map((row)=>positive(row.totalRub)).filter((n): n is number => Boolean(n)).sort((a,b)=>a-b);
+const prices = legacy.map((row)=>positive(catalogOfferVisibleRub(row))).filter((n): n is number => Boolean(n)).sort((a,b)=>a-b);
 const budgetTo = prices[Math.floor(prices.length * 0.55)] || 5_000_000;
 const mileageTo = 100_000;
 const powerTo = 160;
@@ -42,7 +43,7 @@ const powerTo = 160;
 const cases = [
   { name: "make", params: { market, make: commonMake }, expected: makeRows.length },
   { name: "year", params: { market, yearFrom }, expected: legacy.filter((row)=>Number(row.year||0)>=yearFrom).length },
-  { name: "budget", params: { market, budgetTo }, expected: legacy.filter((row)=>{ const n=positive(row.totalRub); return n !== undefined && n <= budgetTo; }).length },
+  { name: "budget", params: { market, budgetTo }, expected: legacy.filter((row)=>{ const n=positive(catalogOfferVisibleRub(row)); return n !== undefined && n <= budgetTo; }).length },
   { name: "mileage", params: { market, mileageTo }, expected: legacy.filter((row)=>{ const n=positive(row.mileageKm); return n !== undefined && n <= mileageTo; }).length },
   { name: "power", params: { market, powerTo }, expected: legacy.filter((row)=>{ const n=positive(row.powerHp); return n !== undefined && n <= powerTo; }).length },
 ];
