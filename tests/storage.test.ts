@@ -146,6 +146,32 @@ test('ObjectJsonStorage binaryExists uses HEAD and putBinary conditions are idem
   } finally { globalThis.fetch = originalFetch; }
 });
 
+test('ObjectJsonStorage deletes up to one thousand keys with one signed batch request', async () => {
+  const { ObjectJsonStorage } = await import('../apps/web/lib/data.ts?batch-delete=' + Date.now());
+  process.env.YC_OBJECT_STORAGE_BUCKET = 'bucket';
+  process.env.YC_OBJECT_STORAGE_ACCESS_KEY_ID = 'access';
+  process.env.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY = 'secret';
+  process.env.YC_OBJECT_STORAGE_REGION = 'ru-central1';
+  process.env.YC_OBJECT_STORAGE_ENDPOINT = 'https://storage.test';
+  process.env.YC_OBJECT_STORAGE_PREFIX = 'catalog-prefix';
+  const originalFetch = globalThis.fetch;
+  let seen: { url: string; method: string; body: string; headers: Record<string, string> } | null = null;
+  globalThis.fetch = (async (url: any, init: any) => {
+    seen = { url: String(url), method: init.method, body: String(init.body), headers: init.headers };
+    return new Response('<DeleteResult/>', { status: 200 });
+  }) as typeof fetch;
+  try {
+    const storage = new ObjectJsonStorage();
+    assert.equal(await storage.deleteObjects(['catalog/internal/a.json', 'catalog/internal/b&c.json']), 2);
+    assert.equal(seen?.method, 'POST');
+    assert.match(seen?.url || '', /\?delete=$/);
+    assert.match(seen?.body || '', /catalog-prefix\/catalog\/internal\/a\.json/);
+    assert.match(seen?.body || '', /b&amp;c\.json/);
+    assert.ok(seen?.headers['content-md5']);
+    assert.equal(seen?.headers['content-length'], String(Buffer.byteLength(seen?.body || '')));
+  } finally { globalThis.fetch = originalFetch; delete process.env.YC_OBJECT_STORAGE_PREFIX; }
+});
+
 test('safeStoragePath rejects traversal storage keys', async () => {
   const { normalizeStorageKey, safeStoragePath } = await import('../apps/web/lib/data.ts?safe=' + Date.now());
   assert.throws(() => normalizeStorageKey('../secret.png'), /invalid_storage_key/);
