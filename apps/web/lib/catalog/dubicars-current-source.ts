@@ -102,8 +102,15 @@ function price(plain: string) {
     [new RegExp(`${token}\\s*(?:USD|US\\$)`, "i"), "USD", 2_000_000],
   ];
   for (const [pattern, currency, maximum] of patterns) {
-    const parsed = amount(plain.match(pattern)?.[1] || "");
-    if (parsed && parsed <= maximum) return { price: parsed, currency };
+    const matches = [...plain.matchAll(new RegExp(pattern.source, "gi"))];
+    for (const match of matches) {
+      const parsed = amount(match[1] || "");
+      const start = Math.max(0, Number(match.index || 0) - 24);
+      const end = Math.min(plain.length, Number(match.index || 0) + String(match[0] || "").length + 36);
+      const context = plain.slice(start, end);
+      if (/\bP\.?\s*M\.?\b|per\s+month|\/\s*month|monthly|installment|downpayment/i.test(context)) continue;
+      if (parsed && parsed <= maximum) return { price: parsed, currency };
+    }
   }
   return { price: undefined, currency: undefined };
 }
