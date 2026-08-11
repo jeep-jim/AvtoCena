@@ -5,6 +5,7 @@ on:
     branches: [diag/georgia-gallery-depth-20260811]
     paths:
       - .github/workflows/diag-georgia-gallery-depth.yml
+      - scripts/diag-georgia-gallery-depth.mts
 
 permissions:
   contents: read
@@ -21,7 +22,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Fetch exact detail galleries without publishing
+      - name: Probe exact detail galleries without publishing
         run: npx tsx scripts/diag-georgia-gallery-depth.mts | tee georgia-gallery-depth.json
       - uses: actions/upload-artifact@v4
         with:
