@@ -37,6 +37,8 @@ const candidateObjects = objects.filter((item) => candidates.includes(generation
 const protectedInternalPaths = new Set(Object.values(internalManifest?.sources || {})
   .flatMap((source) => Array.isArray(source?.chunks) ? source.chunks.map(String) : []));
 const orphanInternalObjects = internalObjects.filter((item) => item?.key && !protectedInternalPaths.has(String(item.key)));
+const plannedBytes = [...candidateObjects, ...orphanInternalObjects]
+  .reduce((sum, item) => sum + Math.max(0, Number(item?.size || 0)), 0);
 
 if (candidateObjects.length + orphanInternalObjects.length > maxDeletes) {
   throw new Error(`failed_generation_cleanup_limit_${candidateObjects.length + orphanInternalObjects.length}_exceeds_${maxDeletes}`);
@@ -71,7 +73,9 @@ const report = {
   protectedGenerations: [...protectedGenerations],
   removedGenerations: candidates,
   plannedObjects: candidateObjects.length + orphanInternalObjects.length,
+  plannedBytes,
   deletedObjects: deleted + deletedOrphanInternalObjects,
+  reclaimedBytes: errors.length ? null : plannedBytes,
   removedOrphanInternalObjects: deletedOrphanInternalObjects,
   preservedImages: true,
   preservedInternalCandidatePools: true,
