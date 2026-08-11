@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { readCatalogFacets, readMarketOffers, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
@@ -22,7 +22,7 @@ const MARKET_PAGE_SIZE = 48;
 const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
-const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
+const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "year", "mileage"]);
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
@@ -47,7 +47,9 @@ function offerFreshness(offer: any) {
 }
 
 function isJapanAuctionResult(offer: any) {
-  return offer?.market === "japan" && (offer?.catalogKind === "auction_result" || (offer?.offerType === "auction" && offer?.auctionResult === "sold"));
+  return offer?.market === "japan" && (offer?.catalogKind === "auction_result"
+    || (offer?.offerType === "auction" && offer?.auctionResult === "sold")
+    || Boolean(offer?.auctionDate || offer?.auctionGrade));
 }
 
 function offerRubValue(offer: any) {
@@ -88,19 +90,12 @@ function businessOrder(left: any, right: any) {
 
 function sortCatalogRows(rows: any[], sort: string) {
   const sorted = [...rows];
-  if (sort === "totalRub" || sort === "totalRubDesc") return sorted.sort((left, right) => {
+  if (sort === "totalRub") return sorted.sort((left, right) => {
     const a = offerRubValue(left) || Number.POSITIVE_INFINITY;
     const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
-    if (!Number.isFinite(a) && !Number.isFinite(b)) return businessOrder(left, right);
-    if (!Number.isFinite(a)) return 1;
-    if (!Number.isFinite(b)) return -1;
-    const direction = sort === "totalRubDesc" ? -1 : 1;
-    return (a - b) * direction || businessOrder(left, right);
+    return a - b || businessOrder(left, right);
   });
-  if (sort === "year" || sort === "yearAsc") {
-    const direction = sort === "yearAsc" ? 1 : -1;
-    return sorted.sort((left, right) => (Number(left?.year || 0) - Number(right?.year || 0)) * direction || businessOrder(left, right));
-  }
+  if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
   if (sort === "mileage") return sorted.sort((left, right) => {
     const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
     const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;
@@ -138,38 +133,6 @@ function balanceBusinessRows(rows: any[]) {
   return balanced;
 }
 
-function matchesFilters(offer: any, common: any) {
-  const make = String(offer.make || "").toLocaleLowerCase("ru-RU");
-  const model = String(offer.model || "").toLocaleLowerCase("ru-RU");
-  const totalRub = offerRubValue(offer);
-  const mileage = Number(offer.mileageKm || 0);
-  const engine = Number(offer.engineCc || 0);
-  const power = Number(offer.powerHp || 0);
-  if (common.make && make !== String(common.make).toLocaleLowerCase("ru-RU")) return false;
-  if (common.model && !model.includes(String(common.model).toLocaleLowerCase("ru-RU"))) return false;
-  if (common.hasPrice === "yes" && !Number(offer.sourcePrice || totalRub || 0)) return false;
-  if (common.hasPrice === "no" && Number(offer.sourcePrice || totalRub || 0)) return false;
-  if (common.budgetFrom && (!totalRub || totalRub < common.budgetFrom)) return false;
-  if (common.budgetTo && (!totalRub || totalRub > common.budgetTo)) return false;
-  if (common.yearFrom && Number(offer.year || 0) < common.yearFrom) return false;
-  if (common.yearTo && Number(offer.year || 0) > common.yearTo) return false;
-  if (common.mileageFrom && mileage < common.mileageFrom) return false;
-  if (common.mileageTo && (!mileage || mileage > common.mileageTo)) return false;
-  if (common.engineFrom && engine < common.engineFrom) return false;
-  if (common.engineTo && (!engine || engine > common.engineTo)) return false;
-  if (common.powerFrom && power < common.powerFrom) return false;
-  if (common.powerTo && (!power || power > common.powerTo)) return false;
-  if (common.fuel) {
-    const kind = String(offer.powertrainKind || "");
-    const canonicalFuel = kind === "electric" ? "electric" : ["series_hybrid", "other_hybrid"].includes(kind) ? "hybrid" : String(offer.fuel || "");
-    if (canonicalFuel !== common.fuel) return false;
-  }
-  if (common.transmission && String(offer.transmission || "") !== common.transmission) return false;
-  if (common.drive && String(offer.drive || "") !== common.drive) return false;
-  if (common.bodyType && String(offer.bodyType || "") !== common.bodyType) return false;
-  return true;
-}
-
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const selectedMarket = first(params.market);
@@ -191,23 +154,12 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
       const page = selectedMarket ? requestedPage : 1;
 
-      if (market.id === "japan") {
-        const auctionRows = (await readMarketOffers("japan"))
-          .filter((offer) => offer.status === "active" && isJapanAuctionResult(offer) && isCrediblePublicOffer(offer))
-          .filter((offer) => !hasFilters || matchesFilters(offer, common));
-        const orderedRows = customSort ? sortCatalogRows(auctionRows, selectedSort) : auctionRows.sort(businessOrder);
-        const start = (page - 1) * pageSize;
-        const visible = await applyActiveBusinessPricingBatch(orderedRows.slice(start, start + pageSize));
-        const orderedVisible = customSort ? sortCatalogRows(visible, selectedSort) : visible.sort(businessOrder);
-        return { ...market, items: orderedVisible.map(publicOffer), total: orderedRows.length, page, pageSize, auctionStatistics: true };
-      }
-
       if (!hasFilters && !customSort) {
         const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
         const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
         const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
         const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
-        return { ...market, items: balanceBusinessRows(visible).map(publicOffer), total: indexed.total, page: indexed.page, pageSize };
+        return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
       }
 
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
