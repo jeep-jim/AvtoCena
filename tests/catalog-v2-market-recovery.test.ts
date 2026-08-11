@@ -34,6 +34,7 @@ test("market workflow preserves diagnostics and retries quota failures after saf
   assert.match(capacityWorkflow, /CATALOG_FAILED_GENERATION_KEEP: "2"/);
   assert.match(capacityWorkflow, /gen_1786426826475_e390aa80/);
   assert.match(capacityWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(capacityWorkflow, /cancel-in-progress: true/);
 });
 
 test("market workflow never turns an empty or failed collection into a fake success", () => {

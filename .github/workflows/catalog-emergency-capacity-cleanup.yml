@@ -12,12 +12,15 @@ on:
 permissions:
   contents: read
 
-# The currently running legacy daily writer still uses this group. The one-shot
-# cleanup therefore cannot delete an incomplete generation while that writer is
-# publishing. New writers additionally use the Object Storage import lock.
+# The currently running legacy daily writer still uses this group. Because a
+# full bucket cannot accept that writer's result, the one-shot cleanup stops it
+# before deleting unreachable data. The interrupted collector is retried after
+# recovery. New writers additionally use the Object Storage import lock.
 concurrency:
   group: catalog-live-daily-working-markets
-  cancel-in-progress: false
+  # The bucket is already full, so an older collector cannot publish safely.
+  # Stop that run first, reclaim capacity, then retry its interrupted job.
+  cancel-in-progress: true
 
 env:
   JSON_STORAGE_DRIVER: object
