@@ -6,7 +6,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, findVehicleVariant } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
@@ -21,7 +21,7 @@ const requestTimeoutMs = Math.max(8_000, Math.min(120_000, Number(process.env.RE
 const retryAttempts = Math.max(1, Math.min(6, Number(process.env.RECOVERY_RETRY_ATTEMPTS || 4)));
 const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const minYear = new Date().getFullYear() - 15;
+const minYear = catalogMinYearForMarket(market);
 const output = process.env.RECOVERY_OUTPUT || `catalog-rebuild-${market}.json`;
 const deadline = Date.now() + timeLimitMs;
 
