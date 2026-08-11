@@ -3,6 +3,7 @@ import Link from "next/link";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
+import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -181,6 +182,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
+  const preliminaryPricing = String(raw?.calculationStatus || "") === "preliminary_power_pending"
+    || raw?.calculationSnapshot?.pricingConfidence === "preliminary";
   const powertrainKind = String(raw.powertrainKind || "").toLowerCase();
   const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
@@ -233,8 +236,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
-          <PriceTrend offer={o} label={String(raw?.calculationStatus || "") === "preliminary_power_pending" ? "Предварительно от" : "Ориентир стоимости"} priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
-          {String(raw?.calculationStatus || "") === "preliminary_power_pending" ? <p className="ac-preliminary-notice mt-2 rounded-2xl border border-amber-300/15 bg-amber-400/10 p-3 text-sm font-bold leading-5 text-amber-200">Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.</p> : null}
+          {preliminaryPricing
+            ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
+            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-grid grid min-w-0 grid-flow-row-dense grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
