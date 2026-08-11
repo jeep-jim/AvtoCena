@@ -63,8 +63,8 @@ function driveValue(value: unknown) {
   return /привод/i.test(normalized) ? normalized : `${normalized} привод`;
 }
 
-function SpecTile({ label, value, icon, info }: SpecItem) {
-  return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5">
+function SpecTile({ label, value, icon, info, fullWidth = false }: SpecItem & { fullWidth?: boolean }) {
+  return <div aria-label={`${label}: ${value}`} className="ac-offer-spec-tile relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-3.5" style={fullWidth ? { gridColumn: "1 / -1" } : undefined}>
     <SpecIcon name={icon} />
     <span className="min-w-0 flex-1 break-words text-[13px] font-semibold leading-[1.28] text-[var(--ac-text)] md:text-sm">{value}</span>
     {info ? <details className="group static z-30 ml-auto shrink-0">
@@ -241,7 +241,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="ac-offer-spec-grid grid min-w-0 grid-flow-row-dense grid-cols-2 gap-2.5">{specs.map((spec) => <SpecTile key={spec.label} {...spec} />)}</div>
+            <div className="ac-offer-spec-grid grid min-w-0 grid-flow-row-dense grid-cols-2 gap-2.5">{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
@@ -266,7 +266,6 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input::placeholder{color:#737d8e!important;opacity:1!important}
       html[data-theme="light"] .ac-offer-page .ac-preliminary-notice{background:#fff2cc!important;border-color:#e9c56b!important;color:#704500!important;box-shadow:0 8px 24px rgba(111,75,0,.08)!important}
       html[data-theme="light"] .ac-offer-page .ac-spec-info-popover{background:#fff!important;border-color:rgba(30,36,48,.14)!important;color:#394150!important}
-      .ac-offer-page .ac-offer-spec-grid>.ac-offer-spec-tile:last-child:nth-child(odd){grid-column:span 2}
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-price-panel.is-down{background:#0b3021!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-price-panel.is-down{background:#cfe5d8!important}
       @media (max-width:639px){.ac-offer-page .ac-public-header{z-index:1000!important;isolation:isolate!important;background:var(--ac-surface)!important}.ac-offer-page .ac-price-trend-arrow{z-index:0!important}.ac-offer-page .ac-price-trend-popover{z-index:40!important}.ac-offer-page button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}.ac-offer-page .ac-vehicle-thumbnails{margin-top:10px!important}.ac-offer-page .ac-offer-spec-tile:nth-child(odd) .ac-spec-info-popover{left:0!important;right:auto!important}.ac-offer-page .ac-offer-spec-tile:nth-child(even) .ac-spec-info-popover{left:auto!important;right:0!important}}
