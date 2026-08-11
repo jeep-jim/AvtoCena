@@ -33,6 +33,8 @@ test("all catalog filters use the projection when optional categorical shards ar
     const manifest = await readDataJson<any>("catalog/manifest.json", {});
     const projection = await readDataJson<any>(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {});
     assert.equal(projection.items?.[0]?.bodyType, "sedan");
+    const allProjection = await readDataJson<any>("catalog/public/projection/all.json", {});
+    assert.deepEqual(allProjection.items?.map((item: any) => item.id), ["filter-target"]);
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/make/hyundai.json`), { force: true });
     fs.rmSync(safeStoragePath(`catalog/generations/${manifest.generationId}/indexes/model/hyundai-avante-cn7.json`), { force: true });
 
@@ -56,6 +58,25 @@ test("all catalog filters use the projection when optional categorical shards ar
     try {
       await Promise.all([searchOffers(filters), readCatalogFacets(filters)]);
       assert.equal(projectionReads, 1, "parallel result and facets must share one current projection read");
+    } finally {
+      storage.readJsonWithMeta = originalRead;
+    }
+
+    resetCatalogReadCachesForTests();
+    let allProjectionReads = 0;
+    let manifestReads = 0;
+    storage.readJsonWithMeta = async (relativePath: string, fallback: unknown) => {
+      if (relativePath === "catalog/public/projection/all.json") allProjectionReads++;
+      if (relativePath === "catalog/manifest.json") manifestReads++;
+      return originalRead(relativePath, fallback);
+    };
+    try {
+      const globalFilters = { ...filters, market: "any" } as const;
+      const [globalResults, globalFacets] = await Promise.all([searchOffers(globalFilters), readCatalogFacets(globalFilters)]);
+      assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
+      assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
+      assert.equal(allProjectionReads, 1, "global results and filtered facets must share one all-market projection read");
+      assert.equal(manifestReads, 0, "the current all-market projection must bypass the generation manifest");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
