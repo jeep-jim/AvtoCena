@@ -8,7 +8,14 @@ if 'export const CATALOG_MIN_YEAR = 2015;' not in s:
     if marker not in s:
         raise SystemExit('offer-quality marker missing')
     s = s.replace(marker, marker + 'export const CATALOG_MIN_YEAR = 2015;\n', 1)
-s = s.replace('if (year < currentYear - 15 || year > currentYear + 1) return false;', 'if (year < CATALOG_MIN_YEAR || year > currentYear + 1) return false;')
+if 'export function isCatalogYearAllowed' not in s:
+    marker = 'export const CATALOG_MIN_YEAR = 2015;\n'
+    helper = '''export function isCatalogYearAllowed(yearValue: unknown) {\n  const year = Number(yearValue || 0);\n  const currentYear = new Date().getFullYear();\n  return Number.isFinite(year) && year >= CATALOG_MIN_YEAR && year <= currentYear + 1;\n}\n'''
+    if marker not in s:
+        raise SystemExit('CATALOG_MIN_YEAR marker missing')
+    s = s.replace(marker, marker + helper, 1)
+s = s.replace('if (year < currentYear - 15 || year > currentYear + 1) return false;', 'if (!isCatalogYearAllowed(year)) return false;')
+s = s.replace('if (year < CATALOG_MIN_YEAR || year > currentYear + 1) return false;', 'if (!isCatalogYearAllowed(year)) return false;')
 p.write_text(s)
 
 # Generic source recovery
@@ -48,7 +55,7 @@ for path in [
 ]:
     text = Path(path).read_text()
     if path.endswith('offer-quality.ts'):
-        if 'CATALOG_MIN_YEAR = 2015' not in text or 'year < CATALOG_MIN_YEAR' not in text:
+        if 'CATALOG_MIN_YEAR = 2015' not in text or 'isCatalogYearAllowed' not in text:
             raise SystemExit(f'2015 gate missing in {path}')
     else:
         if 'const minYear = CATALOG_MIN_YEAR;' not in text:
