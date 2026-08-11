@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: catalog-publish-daily-working-markets
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
@@ -42,8 +42,9 @@ jobs:
         env:
           CATALOG_GALLERY_MARKETS: korea
           CATALOG_GALLERY_SOURCE_IDS: kcar_korea_open
-          CATALOG_GALLERY_MAX_OFFERS: "500"
-          CATALOG_GALLERY_MAX_PER_MARKET: "500"
+          CATALOG_GALLERY_OFFER_IDS: ea47a6479af9573f028be640
+          CATALOG_GALLERY_MAX_OFFERS: "1000"
+          CATALOG_GALLERY_MAX_PER_MARKET: "1000"
           CATALOG_GALLERY_MIN_IMAGES: "1"
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
           CATALOG_GALLERY_PERSIST_EVERY: "500"
