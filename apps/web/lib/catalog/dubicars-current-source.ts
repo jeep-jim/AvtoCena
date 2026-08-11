@@ -111,7 +111,9 @@ function price(plain: string) {
 function labelValue(plain: string, labels: string[], stops: string[]) {
   const labelPattern = labels.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const stopPattern = stops.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
-  return clean(plain.match(new RegExp(`(?:${labelPattern})\\s*[:：]?\\s*(.{1,80}?)(?=\\s+(?:${stopPattern})\\s*[:：]?|$)`, "i"))?.[1]);
+  const pattern = new RegExp(`(?:^|\\s)(?:${labelPattern})\\s*[:：]?\\s*(.{1,80}?)(?=\\s+(?:${stopPattern})\\s*[:：]?|$)`, "gi");
+  const matches = [...plain.matchAll(pattern)];
+  return clean(matches.at(-1)?.[1]);
 }
 
 function normalizeFuel(value: string) {
