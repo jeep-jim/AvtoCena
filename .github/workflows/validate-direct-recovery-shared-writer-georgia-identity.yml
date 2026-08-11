@@ -87,5 +87,5 @@ jobs:
           if (!(selectedPre>0)) throw new Error(`batch_dropped_preliminary:${srcPre}->${selectedPre}`);
           if (!report.dryRun || report.published) throw new Error('dry_run_persist_guard_failed');
           if (Number(report.byMarket?.georgia?.count||0)<=0) throw new Error('empty_georgia_selection');
-          console.log({source:rows.length,sourcePre,selected:report.byMarket.georgia.count,selectedPre,badImages:badImages.length});
+          console.log({source:rows.length,srcPre,selected:report.byMarket.georgia.count,selectedPre,badImages:badImages.length});
           NODE
