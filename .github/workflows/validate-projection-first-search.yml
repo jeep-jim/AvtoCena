@@ -1,0 +1,50 @@
+name: Validate projection-first catalog search
+
+on:
+  push:
+    branches: [fix/projection-first-search-20260811]
+    paths:
+      - .github/workflows/validate-projection-first-search.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/projection-first-search-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        run: python3 scripts/patch-projection-first-search.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Read-only live correctness and latency smoke
+        run: |
+          npx tsx -e '(async()=>{ const {searchOffers}=await import("./apps/web/lib/catalog/storage.ts"); const cases=[ ["europe.market",{market:"europe",pageSize:48}], ["europe.year",{market:"europe",yearFrom:2024,yearTo:2026,pageSize:48}], ["europe.budget",{market:"europe",budgetFrom:1500000,budgetTo:4000000,pageSize:48}], ["europe.power",{market:"europe",powerFrom:80,powerTo:160,pageSize:48}], ["europe.mileage",{market:"europe",mileageTo:100000,pageSize:48}], ["china.year.power",{market:"china",yearFrom:2023,yearTo:2026,powerFrom:50,powerTo:160,pageSize:48}] ]; const out=[]; for(const [name,p] of cases){ const t=performance.now(); const r=await searchOffers(p); const ms=Math.round((performance.now()-t)*10)/10; if(r.items.length>48||r.total<r.items.length) throw new Error(`bad result ${name}`); if(!r.usedIndexShards?.length||r.usedIndexShards.some((x)=>!x.includes("/indexes/projection/"))) throw new Error(`non projection path ${name}: ${JSON.stringify(r.usedIndexShards)}`); out.push({name,ms,total:r.total,returned:r.items.length,used:r.usedIndexShards}); } const maxMs=Math.max(...out.map(x=>x.ms)); console.log(JSON.stringify({out,maxMs},null,2)); if(maxMs>2500) throw new Error(`projection_first_latency_over_2500:${maxMs}`); })().catch(e=>{console.error(e);process.exit(1)})'
+      - name: Commit validated production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-projection-first-search.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/storage.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Use compact projection as primary catalog search path [skip actions]"
+          git push origin HEAD:fix/projection-first-search-20260811
