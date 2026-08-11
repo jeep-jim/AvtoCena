@@ -5,9 +5,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { BrandMark } from "@/components/brand/BrandMark";
 
 const START_EVENT = "avtocena:navigation-start";
-const REVEAL_DELAY_MS = 180;
-const MIN_VISIBLE_MS = 180;
-const MAX_VISIBLE_MS = 4500;
+const REVEAL_DELAY_MS = 320;
+const MIN_VISIBLE_MS = 120;
+const MAX_VISIBLE_MS = 3000;
 
 const publicLayoutFixes = `
 button[aria-label^="Почему есть фильтр"],
@@ -130,6 +130,14 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
 @media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
 }
+html[data-theme="light"] .ac-route-loader__pill{
+  background:#fff!important;
+  background-color:#fff!important;
+  border-color:rgba(30,36,48,.14)!important;
+  color:#171b24!important;
+  -webkit-text-fill-color:#171b24!important;
+  box-shadow:0 8px 24px rgba(30,36,48,.14)!important;
+}
 @media(max-width:1023px){
 .ac-home-page #form>div.relative.mt-4{position:relative!important;display:flex!important;align-items:stretch!important;gap:8px!important;overflow:visible!important}
 .ac-home-page #form>div.relative.mt-4>.avto-button{display:flex!important;flex:1 1 auto!important;width:auto!important;min-width:0!important;align-items:center!important;justify-content:center!important;padding-right:1rem!important;text-align:center!important}
@@ -237,7 +245,7 @@ function RoutePreloaderInner(){
   return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
  useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(revealTimerRef.current!==null){hide();return}if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>hide(),delay)},[routeKey,visible]);
- return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-150 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite"><div className="ac-route-loader__bar h-[3px] w-full origin-left bg-red-500 shadow-[0_1px_8px_rgba(239,68,68,.45)]"/><div className="mx-auto mt-2 flex w-fit max-w-[calc(100vw-24px)] items-center gap-2 rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)]/95 px-3 py-2 text-[var(--ac-text)] shadow-lg backdrop-blur-md"><BrandMark className="h-5 w-5 shrink-0"/><span className="text-xs font-black">Загружаем страницу</span><span className="ac-route-loader__dot h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" aria-hidden="true"/></div></div>;
+ return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-150 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite"><div className="ac-route-loader__bar h-[3px] w-full origin-left bg-red-500 shadow-[0_1px_8px_rgba(239,68,68,.45)]"/><div className="ac-route-loader__pill mx-auto mt-2 flex w-fit max-w-[calc(100vw-24px)] items-center gap-2 rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)]/95 px-3 py-2 text-[var(--ac-text)] shadow-lg backdrop-blur-md"><BrandMark className="h-5 w-5 shrink-0"/><span className="text-xs font-black">Загружаем страницу</span><span className="ac-route-loader__dot h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" aria-hidden="true"/></div></div>;
 }
 
 export function RoutePreloader(){return <><style dangerouslySetInnerHTML={{__html:publicLayoutFixes}}/><Suspense fallback={null}><RoutePreloaderInner/></Suspense></>}
