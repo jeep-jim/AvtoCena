@@ -12,6 +12,8 @@ const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf
 const intentLink = fs.readFileSync("apps/web/components/catalog/IntentPrefetchLink.tsx", "utf8");
 const deploy = fs.readFileSync(".github/workflows/deploy-yandex.yml", "utf8");
 const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings.ts", "utf8");
+const readModelsWorkflow = fs.readFileSync(".github/workflows/catalog-current-read-models.yml", "utf8");
+const readModelsScript = fs.readFileSync("scripts/catalog-publish-current-read-models.mjs", "utf8");
 
 test("offer navigation swaps the catalog for an immediate route skeleton", () => {
   assert.match(loading, /main className="ac-offer-page/);
@@ -71,4 +73,9 @@ test("catalog reads a current one-hop projection before generation indexes", () 
   assert.match(storage, /readCurrentSearchProjection\(currentMarket\)/);
   assert.match(storage, /if \(current\.generationId\)/);
   assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), projection, false\)/);
+  assert.match(storage, /export async function publishCurrentCatalogReadModels/);
+  assert.match(readModelsScript, /publishCurrentCatalogReadModels/);
+  assert.match(readModelsWorkflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
+  assert.match(readModelsWorkflow, /Catalog · apply certified 30-minute power/);
+  assert.match(readModelsWorkflow, /group: catalog-current-read-models/);
 });
