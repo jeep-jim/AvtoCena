@@ -15,6 +15,7 @@ const minImages = Math.max(1, Number(process.env.CATALOG_GALLERY_MIN_IMAGES || 1
 const maxImages = Math.min(120, Math.max(minImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120)));
 const force = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_FORCE || "false").toLowerCase());
 const persistEvery = Math.max(1, Number(process.env.CATALOG_GALLERY_PERSIST_EVERY || 25));
+const concurrency = Math.min(20, Math.max(1, Number(process.env.CATALOG_GALLERY_CONCURRENCY || 1)));
 
 function identity(image) { return String(image?.id || image?.checksum || image?.objectKey || image?.url || ""); }
 function mergeImages(fresh, previous) {
@@ -54,15 +55,11 @@ const candidates = allOffers
 
 const byId = new Map(allOffers.map((offer) => [offer.id, offer]));
 const report = { startedAt: new Date().toISOString(), markets: [...markets], priorityOfferIds: [...offerIds], selected: candidates.length, refreshed: 0, expanded: 0, replaced: 0, unchanged: 0, failed: 0, rows: [] };
-let lastPersistedCount = 0;
-
-for (let index = 0; index < candidates.length; index++) {
+async function refreshCandidate(index) {
   const offer = candidates[index];
   const source = adapters.get(offer.sourceId);
   const previous = credibleCatalogImages(Array.isArray(offer.images) ? offer.images : []);
   const before = previous.length;
-  const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
-  process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
   try {
     const fetched = await source.fetchImages(offer);
     const fresh = credibleCatalogImages(Array.isArray(fetched) ? fetched : []);
@@ -90,19 +87,32 @@ for (let index = 0; index < candidates.length; index++) {
     report.failed++;
     report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: String(error?.message || error) });
     console.error(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${String(error?.message || error)}`);
-  } finally {
-    if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
-    else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
-  }
-
-  if ((index + 1) % persistEvery === 0) {
-    await persistCatalogOffers([...byId.values()]);
-    lastPersistedCount = index + 1;
-    console.log(`[gallery] checkpoint persisted after ${index + 1} offers`);
   }
 }
 
-if (candidates.length > lastPersistedCount) await persistCatalogOffers([...byId.values()]);
+const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
+process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImages);
+try {
+  // Persist one complete chunk at a time. This keeps recovery checkpoints while
+  // allowing slow, independent source-detail requests inside the chunk to run
+  // concurrently instead of making a 500-card repair take close to an hour.
+  for (let start = 0; start < candidates.length; start += persistEvery) {
+    const end = Math.min(candidates.length, start + persistEvery);
+    let cursor = start;
+    const workers = Array.from({ length: Math.min(concurrency, end - start) }, async () => {
+      while (cursor < end) {
+        const index = cursor++;
+        await refreshCandidate(index);
+      }
+    });
+    await Promise.all(workers);
+    await persistCatalogOffers([...byId.values()]);
+    console.log(`[gallery] checkpoint persisted after ${end} offers (concurrency ${concurrency})`);
+  }
+} finally {
+  if (previousLimit === undefined) delete process.env.CATALOG_MAX_IMAGES_PER_OFFER;
+  else process.env.CATALOG_MAX_IMAGES_PER_OFFER = previousLimit;
+}
 report.finishedAt = new Date().toISOString();
 await (await import("node:fs/promises")).writeFile(process.env.CATALOG_GALLERY_REPORT_FILE || "catalog-gallery-refresh-report.json", JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));

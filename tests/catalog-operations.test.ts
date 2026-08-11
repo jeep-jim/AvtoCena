@@ -18,12 +18,15 @@ test("daily market writer publishes Georgia and repairs only old K Car gallery o
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia/);
   assert.match(workflow, /CATALOG_GALLERY_SOURCE_IDS: kcar_korea_open/);
   assert.match(workflow, /CATALOG_GALLERY_MAX_OFFERS: "500"/);
+  assert.match(workflow, /CATALOG_GALLERY_CONCURRENCY: "8"/);
   assert.match(workflow, /continue-on-error: true/);
   assert.match(workflow, /if: always\(\) && needs\.validate\.result == 'success'/);
   assert.match(workflow, /group: catalog-publish-daily-working-markets/);
 
   const refresh = fs.readFileSync("scripts/catalog-refresh-galleries.mjs", "utf8");
   assert.match(refresh, /needsSourceOrderedGalleryRefresh\(offer\)/);
+  assert.match(refresh, /Promise\.all\(workers\)/);
+  assert.match(refresh, /Math\.min\(20, Math\.max\(1, Number\(process\.env\.CATALOG_GALLERY_CONCURRENCY/);
   assert.doesNotMatch(refresh, /const reportedOfferIds/);
 });
 
