@@ -58,14 +58,6 @@ function InsuranceIcon() {
   );
 }
 
-function ChevronRightIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path d="m7 4 5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export function PublicLegalFooter() {
   const pathname = usePathname();
   const publicPath = isPublicPath(pathname || "/");
@@ -109,28 +101,22 @@ export function PublicLegalFooter() {
                 type="button"
                 aria-disabled="true"
                 data-credit-placeholder="calculator"
-                className="ac-public-footer-credit inline-flex min-h-12 w-full cursor-default items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#0d1117] px-3 text-left text-sm font-black text-white sm:px-3.5"
-                style={{ color: "#ffffff", WebkitTextFillColor: "#ffffff" }}
+                className="ac-public-footer-credit relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white sm:px-12 sm:text-sm"
+                style={{ backgroundColor: "#0d1117", color: "#ffffff", WebkitTextFillColor: "#ffffff" }}
               >
-                <span className="flex min-w-0 items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[.09] text-white"><CreditIcon /></span>
-                  <span className="truncate">Кредитный калькулятор</span>
-                </span>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/[.07] text-white/70"><ChevronRightIcon /></span>
+                <span className="absolute left-4 text-white"><CreditIcon /></span>
+                <span className="text-center">Кредитный калькулятор</span>
               </button>
 
               <button
                 type="button"
                 aria-disabled="true"
                 data-insurance-placeholder="osago"
-                className="ac-public-footer-osago inline-flex min-h-12 w-full cursor-default items-center justify-between gap-3 rounded-xl bg-[#FFD400] px-3 text-left text-sm font-black text-[#111111] sm:px-3.5"
+                className="ac-public-footer-osago relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111] sm:px-12 sm:text-sm"
                 style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}
               >
-                <span className="flex min-w-0 items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/[.08] text-[#111111]"><InsuranceIcon /></span>
-                  <span className="truncate">Рассчитать страховой полис ОСАГО</span>
-                </span>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-black/[.07] text-black/70"><ChevronRightIcon /></span>
+                <span className="absolute left-4 text-[#111111]"><InsuranceIcon /></span>
+                <span className="text-center">Рассчитать страховой полис ОСАГО</span>
               </button>
             </div>
           </div>
