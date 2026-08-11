@@ -118,6 +118,10 @@ export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
+export type CatalogSearchProjection = {
+  id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
+  fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
+};
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
@@ -168,6 +172,71 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker:
   return results;
 }
 
+function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection {
+  return {
+    id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
+    totalRub: offer.totalRub, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
+    transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
+    firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
+  };
+}
+async function readSearchProjection(generationId: string, market: string) {
+  return readIndex<{ generationId: string; items: CatalogSearchProjection[] }>(generationId, `projection/${cleanShard(market)}.json`, { generationId, items: [] });
+}
+function projectionNumber(value: unknown, missing: number) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : missing; }
+export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
+  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
+  if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
+  if (params.make && lower(row.make) !== lower(params.make)) return false;
+  if (params.model && (!modelKeys?.size || !modelKeys.has(`${lower(row.make)}:${lower(row.model)}`))) return false;
+  if (params.hasPrice) { const value = Number(row.totalRub || 0) > 0 ? "yes" : "no"; if (value !== params.hasPrice) return false; }
+  if (params.budgetFrom && projectionNumber(row.totalRub, 0) < params.budgetFrom) return false;
+  if (params.budgetTo && projectionNumber(row.totalRub, Infinity) > params.budgetTo) return false;
+  if (params.yearFrom && Number(row.year || 0) < params.yearFrom) return false;
+  if (params.yearTo && Number(row.year || 0) > params.yearTo) return false;
+  if (params.mileageFrom && projectionNumber(row.mileageKm, 0) < params.mileageFrom) return false;
+  if (params.mileageTo && projectionNumber(row.mileageKm, Infinity) > params.mileageTo) return false;
+  if (params.engineFrom && projectionNumber(row.engineCc, 0) < params.engineFrom) return false;
+  if (params.engineTo && projectionNumber(row.engineCc, Infinity) > params.engineTo) return false;
+  if (params.powerFrom && projectionNumber(row.powerHp, 0) < params.powerFrom) return false;
+  if (params.powerTo && projectionNumber(row.powerHp, Infinity) > params.powerTo) return false;
+  if (params.fuel && lower(row.fuel) !== lower(params.fuel)) return false;
+  if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
+  if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
+  if (params.drive && lower(row.drive) !== lower(params.drive)) return false;
+  if (params.auctionGrade && lower(row.auctionGrade) !== lower(params.auctionGrade)) return false;
+  if (params.auctionDateFrom && (!row.auctionDate || String(row.auctionDate) < params.auctionDateFrom)) return false;
+  if (params.auctionDateTo && (!row.auctionDate || String(row.auctionDate) > params.auctionDateTo)) return false;
+  return true;
+}
+function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
+export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
+  return rows.sort((a, b) => sort === "totalRub" ? projectionNumber(a.totalRub, Infinity) - projectionNumber(b.totalRub, Infinity)
+    : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
+      : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
+        : projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+}
+async function projectionModelKeys(params: CatalogSearchParams) {
+  if (!params.model) return null;
+  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
+  const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
+  const candidates = matches.length ? matches.map((match) => ({ make: match.make, model: match.model })) : params.make ? [{ make: params.make, model: params.model }] : [];
+  return new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
+}
+async function readProjectionRows(manifest: CatalogManifest, params: CatalogSearchParams) {
+  const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+  return (await mapWithConcurrency(markets, Math.min(7, markets.length || 1), async (market) => {
+    const projection = await readSearchProjection(manifest.generationId, market);
+    if ((projection.items || []).length || Number(manifest.markets?.[market]?.count || 0) === 0) return projection.items || [];
+    // Backward-compatible bridge for the currently published generation: older
+    // generations do not have compact projection shards yet. Preserve correctness
+    // by falling back to one market scan until the next catalog generation writes
+    // the new projection index; subsequent generations stay on the compact path.
+    const legacy = (await readMarketOffers(market)).filter(isPublicOffer);
+    return legacy.map(searchProjectionFromOffer);
+  })).flat();
+}
+
 async function readOfferLists(paths: string[]) {
   const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_READ_CONCURRENCY || 12)));
   return (await mapWithConcurrency(paths, concurrency, (path) => readDataJson<VehicleOffer[]>(path, []))).flat();
@@ -188,78 +257,29 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
   const manifest = await readManifest();
   const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
   const indexed = await readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
-  // `market` alone is not a reason to deserialize the full market merely to draw the
-  // filter UI. Use the generation facet index for the initial/market-only screen.
-  // More selective facet projections are handled separately; this fast path removes
-  // the worst navigation cost immediately.
   const hasFilters = Boolean(params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
-    || params.transmission || params.drive || params.auctionGrade);
+    || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
 
   if (!hasFilters) {
     return {
-      ...indexed,
-      generationId: manifest.generationId,
+      ...indexed, generationId: manifest.generationId,
       makes: uniqueText(indexed.makes || []).sort((a, b) => a.localeCompare(b, "ru")),
-      models: [],
-      markets: [...PUBLIC_CATALOG_MARKETS],
+      models: [], markets: [...PUBLIC_CATALOG_MARKETS],
     };
   }
 
-  const marketIds = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
-  const rows = (await Promise.all(marketIds.map((market) => readMarketOffers(market)))).flat().filter(isPublicOffer);
-  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
-  let modelKeys: Set<string> | null = null;
-
-  if (params.model) {
-    const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
-    const candidates = matches.length
-      ? matches.map((match) => ({ make: match.make, model: match.model }))
-      : params.make ? [{ make: params.make, model: params.model }] : [];
-    modelKeys = new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
-  }
-
-  const offers = rows.filter((offer) => {
-    if (params.make && lower(offer.make) !== lower(params.make)) return false;
-    if (params.model && (!modelKeys?.size || !modelKeys.has(`${lower(offer.make)}:${lower(offer.model)}`))) return false;
-    if (params.hasPrice) {
-      const value = Number(offer.totalRub || 0) > 0 ? "yes" : "no";
-      if (value !== params.hasPrice) return false;
-    }
-    if (params.budgetFrom && (offer.totalRub || 0) < params.budgetFrom) return false;
-    if (params.budgetTo && (offer.totalRub || Infinity) > params.budgetTo) return false;
-    if (params.yearFrom && offer.year < params.yearFrom) return false;
-    if (params.yearTo && offer.year > params.yearTo) return false;
-    if (params.mileageFrom && (offer.mileageKm || 0) < params.mileageFrom) return false;
-    if (params.mileageTo && (offer.mileageKm || Infinity) > params.mileageTo) return false;
-    if (params.engineFrom && (offer.engineCc || 0) < params.engineFrom) return false;
-    if (params.engineTo && (offer.engineCc || Infinity) > params.engineTo) return false;
-    if (params.powerFrom && (offer.powerHp || 0) < params.powerFrom) return false;
-    if (params.powerTo && (offer.powerHp || Infinity) > params.powerTo) return false;
-    if (params.fuel && lower(offer.fuel) !== lower(params.fuel)) return false;
-    if (params.bodyType && lower(offer.bodyType) !== lower(params.bodyType)) return false;
-    if (params.transmission && lower(offer.transmission) !== lower(params.transmission)) return false;
-    if (params.drive && lower(offer.drive) !== lower(params.drive)) return false;
-    if (params.auctionGrade && lower(offer.auctionGrade) !== lower(params.auctionGrade)) return false;
-    return true;
-  });
-
-  const values = (selector: (offer: VehicleOffer) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
+  const modelKeys = await projectionModelKeys(params);
+  const offers = (await readProjectionRows(manifest, params)).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+  const values = (selector: (offer: CatalogSearchProjection) => unknown) => uniqueText(offers.map(selector)).sort((a, b) => a.localeCompare(b, "ru"));
   const offerModels = [...new Map(offers.map((offer) => [`${cleanFacet(offer.make)}:${cleanFacet(offer.model)}`, { make: cleanFacet(offer.make), model: cleanFacet(offer.model) }])).values()]
     .filter((item) => item.make && item.model)
     .sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`, "ru"));
-
   return {
-    generationId: manifest.generationId,
-    makes: values((offer) => offer.make),
-    models: offerModels,
-    markets: [...PUBLIC_CATALOG_MARKETS],
-    bodyTypes: values((offer) => offer.bodyType),
-    fuels: values((offer) => offer.fuel),
-    transmissions: values((offer) => offer.transmission),
-    drives: values((offer) => offer.drive),
+    generationId: manifest.generationId, makes: values((offer) => offer.make), models: offerModels, markets: [...PUBLIC_CATALOG_MARKETS],
+    bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive),
   };
 }
 
@@ -377,6 +397,14 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     transmissions: [...new Set(offers.map((offer) => cleanFacet(offer.transmission)).filter(Boolean))].sort(),
     drives: [...new Set(offers.map((offer) => cleanFacet(offer.drive)).filter(Boolean))].sort(),
   });
+  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  for (const offer of offers) {
+    const market = String(offer.market || "");
+    if (!market) continue;
+    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), searchProjectionFromOffer(offer)]);
+  }
+  await mapWithConcurrency([...projectionsByMarket.entries()], 4, ([market, items]) =>
+    writeJsonAtomic(generationPath(generationId, `indexes/projection/${cleanShard(market)}.json`), { generationId, items }));
   const freshness = (offer: VehicleOffer) => Date.parse(String((offer.operational as any)?.sourcePublishedAt || offer.firstSeenAt || offer.updatedAt || "")) || 0;
   await writeJsonAtomic(generationPath(generationId, "indexes/order-updatedAt.json"), { generationId, ids: [...offers].sort((a,b) => freshness(b) - freshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""))).map((o) => o.id) });
   const tasks = Object.entries(maps).flatMap(([name, map]) => [...map.entries()].map(([key, ids]) => () => writeIndexShard(generationId, name, key, ids)));
@@ -446,10 +474,24 @@ export async function searchOffers(params: CatalogSearchParams) {
   const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} });
   const order = await readIndex<{ ids: string[] }>(manifest.generationId, "order-updatedAt.json", { ids: Object.keys(byId.byId) });
   const idList = ids ? order.ids.filter((id) => ids.has(id)) : order.ids;
-  const hasRangeFilters = Boolean(params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.transmission || params.auctionGrade || (params.sort && params.sort !== "updatedAt"));
+  const needsProjection = Boolean(params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo
+    || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo
+    || (params.sort && params.sort !== "updatedAt"));
   let total = idList.length;
   let pageIds = idList.slice((page - 1) * pageSize, page * pageSize);
-  if (hasRangeFilters) pageIds = idList;
+
+  if (needsProjection) {
+    const allowed = new Set(idList);
+    const modelKeys = await projectionModelKeys(params);
+    const projectionRows = (await readProjectionRows(manifest, params))
+      .filter((row) => allowed.has(row.id) && catalogSearchProjectionMatches(row, params, modelKeys));
+    catalogSearchProjectionSort(projectionRows, params.sort || "updatedAt");
+    total = projectionRows.length;
+    pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
+    const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
+    used.push(...markets.map((market) => `catalog/generations/${manifest.generationId}/indexes/projection/${cleanShard(market)}.json`));
+  }
+
   const pageSet = new Set(pageIds);
   const chunkKeys = new Map<string, OfferLocation>();
   for (const id of pageIds) { const loc = byId.byId[id]; if (loc) chunkKeys.set(`${loc.market}/${loc.chunk}`, loc); }
@@ -457,27 +499,11 @@ export async function searchOffers(params: CatalogSearchParams) {
   const readConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_SEARCH_CHUNK_CONCURRENCY || 12)));
   const loaded = (await mapWithConcurrency(chunkLocations, readConcurrency, (loc) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []))).flat();
   let items = loaded.filter((offer) => pageSet.has(offer.id) && isPublicOffer(offer));
-  if (hasRangeFilters) {
-    items = items.filter((offer) => (!params.budgetFrom || (offer.totalRub || 0) >= params.budgetFrom)
-      && (!params.budgetTo || (offer.totalRub || Infinity) <= params.budgetTo)
-      && (!params.yearFrom || offer.year >= params.yearFrom) && (!params.yearTo || offer.year <= params.yearTo)
-      && (!params.mileageFrom || (offer.mileageKm || 0) >= params.mileageFrom) && (!params.mileageTo || (offer.mileageKm || Infinity) <= params.mileageTo)
-      && (!params.engineFrom || (offer.engineCc || 0) >= params.engineFrom) && (!params.engineTo || (offer.engineCc || Infinity) <= params.engineTo)
-      && (!params.powerFrom || (offer.powerHp || 0) >= params.powerFrom) && (!params.powerTo || (offer.powerHp || Infinity) <= params.powerTo)
-      && (!params.transmission || offer.transmission === params.transmission) && (!params.auctionGrade || offer.auctionGrade === params.auctionGrade));
-    const sort = params.sort || "updatedAt";
-    items.sort((a,b) => sort === "totalRub" ? (a.totalRub ?? Infinity) - (b.totalRub ?? Infinity)
-      : sort === "year" ? b.year - a.year
-        : sort === "mileage" ? (a.mileageKm || 0) - (b.mileageKm || 0)
-          : String(b.auctionDate || b.updatedAt).localeCompare(String(a.auctionDate || a.updatedAt)));
-    total = items.length;
-    items = items.slice((page - 1) * pageSize, page * pageSize);
-  } else {
-    const rank = new Map(pageIds.map((id, index) => [id, index]));
-    items.sort((a,b) => (rank.get(a.id) ?? 0) - (rank.get(b.id) ?? 0));
-  }
+  const rank = new Map(pageIds.map((id, index) => [id, index]));
+  items.sort((a,b) => (rank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (rank.get(b.id) ?? Number.MAX_SAFE_INTEGER));
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
+
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
 export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
