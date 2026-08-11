@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import HomePageClient from "@/components/home/HomePageClient";
-import { readHomeCatalogSnapshot } from "@/lib/catalog/storage";
 import styles from "./home.module.css";
 
 export const dynamic = "force-dynamic";
@@ -16,11 +15,6 @@ function cleanCity(value: string) {
 
 function decodeCity(value: string) {
   try { return cleanCity(decodeURIComponent(value)); } catch { return cleanCity(value); }
-}
-
-async function loadInitialCatalog() {
-  try { return await readHomeCatalogSnapshot(6); }
-  catch { return { items: [] as any[], marketCounts: {} as Record<string, number>, total: 0 }; }
 }
 
 export async function generateMetadata({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }): Promise<Metadata> {
@@ -40,9 +34,8 @@ export default async function HomePage({ searchParams }: { searchParams?: Promis
   const cookieStore = await cookies();
   const fromQuery = cleanCity(first(params.city));
   const fromCookie = decodeCity(cookieStore.get("avtocena_city")?.value || "");
-  const initialCatalog = await loadInitialCatalog();
   return <>
-    <div className={styles.scope}><HomePageClient initialCity={fromQuery || fromCookie} initialOffers={initialCatalog.items} initialMarketCounts={initialCatalog.marketCounts} initialCount={initialCatalog.total} /></div>
+    <div className={styles.scope}><HomePageClient initialCity={fromQuery || fromCookie} /></div>
     <style dangerouslySetInnerHTML={{ __html: "@media (min-width:1024px){.ac-budget-help{display:none!important}}" }} />
   </>;
 }

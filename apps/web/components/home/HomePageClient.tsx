@@ -141,32 +141,48 @@ function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checke
 }
 function BudgetLabel({ onInfo }: { onInfo: () => void }) { return <span className="inline-flex shrink-0 items-center gap-1 text-xs font-black uppercase tracking-[0.16em] text-red-400"><span>Бюджет</span><button type="button" onClick={onInfo} className="ac-budget-help flex h-5 w-5 items-center justify-center rounded-full bg-red-500/12 text-[11px] font-black normal-case tracking-normal lg:hidden" aria-label="Как работает подбор по бюджету">?</button></span>; }
 
+function CatalogLoadingSkeleton() {
+  return <div className="mt-7 space-y-8" role="status" aria-live="polite" aria-label="Загружаем предложения каталога">
+    {marketIds.map((market) => <section key={market}>
+      <div className="mb-4 flex items-end justify-between gap-3">
+        <h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={market} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[market]}</span><span className="h-4 w-12 animate-pulse rounded-full bg-white/10" aria-hidden="true" /></h3>
+        <span className="text-sm font-black text-white/35 md:text-base">Загружаем…</span>
+      </div>
+      <div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-hidden pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:pr-0" aria-hidden="true">
+        {Array.from({ length: 4 }, (_, index) => <div key={index} className="min-h-[330px] animate-pulse overflow-hidden rounded-[1.4rem] border border-white/[0.06] bg-white/[0.045]">
+          <div className="h-40 bg-white/[0.055] md:h-48" />
+          <div className="space-y-3 p-4"><div className="h-5 w-4/5 rounded bg-white/10" /><div className="h-4 w-2/5 rounded bg-white/[0.07]" /><div className="h-8 w-3/5 rounded bg-white/10" /><div className="h-4 w-full rounded bg-white/[0.06]" /></div>
+        </div>)}
+      </div>
+    </section>)}
+  </div>;
+}
+
 export default function HomePageClient({ initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
-  const skipInitialCountFetch = useRef(Number.isFinite(initialCount));
+  const skipInitialCountFetch = useRef(true);
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
-  const [items, setItems] = useState<Item[]>(() => initialOffers.flatMap((raw) => { const item = toItem(raw); return item ? [item] : []; })); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates, setRates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>(initialMarketCounts); const [count, setCount] = useState<number | null>(Number.isFinite(initialCount) ? Number(initialCount) : null); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
+  const [items, setItems] = useState<Item[]>(() => initialOffers.flatMap((raw) => { const item = toItem(raw); return item ? [item] : []; })); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>(initialMarketCounts); const [count, setCount] = useState<number | null>(Number.isFinite(initialCount) ? Number(initialCount) : null); const [catalogStatus, setCatalogStatus] = useState<"loading" | "ready" | "error">(initialOffers.length ? "ready" : "loading"); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     const loadCatalog = async () => {
       const stamp = Date.now();
       try {
-        const responses = await Promise.all([
-          fetch(`/api/catalog/search?pageSize=48&sort=updatedAt&includeRates=1&_=${stamp}`, { cache: "no-store" }).then((response) => response.json()),
-          ...marketIds.map((id) => fetch(`/api/catalog/search?market=${id}&pageSize=48&sort=updatedAt&_=${stamp}`, { cache: "no-store" }).then((response) => response.json())),
-          fetch(`/api/catalog/models?scope=makes&limit=500&_=${stamp}`, { cache: "no-store" }).then((response) => response.json()),
+        const [catalogPayload, makePayload] = await Promise.all([
+          fetch(`/api/catalog/home?_=${stamp}`, { cache: "no-store" }).then((response) => { if (!response.ok) throw new Error("catalog_home_failed"); return response.json(); }),
+          fetch(`/api/catalog/models?scope=makes&limit=500&_=${stamp}`, { cache: "no-store" }).then((response) => response.ok ? response.json() : { items: [] }).catch(() => ({ items: [] })),
         ]);
         if (cancelled) return;
         const unique = new Map<string, Item>();
-        responses.slice(0, marketIds.length + 1).flatMap((response) => Array.isArray(response?.items) ? response.items : []).forEach((raw) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
+        (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
         setItems([...unique.values()]);
-        setRates(Array.isArray(responses[0]?.rates) ? responses[0].rates : []);
-        setMarketCounts(Object.fromEntries(marketIds.map((id, index) => [id, Number(responses[index + 1]?.total || 0)])));
-        const makePayload = responses[marketIds.length + 1];
+        setMarketCounts(catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts : {});
+        setCount(Number(catalogPayload?.total || 0));
         setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
-      } catch { /* Keep the server-rendered snapshot on a transient refresh failure. */ }
+        setCatalogStatus("ready");
+      } catch { if (!cancelled) setCatalogStatus((current) => current === "loading" ? "error" : current); }
     };
     loadCatalog(); const interval = window.setInterval(loadCatalog, 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
@@ -220,7 +236,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
       <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch"><section className="ac-executor-block grid gap-5 rounded-[1.6rem] p-4 md:grid-cols-[minmax(0,1fr)_290px] md:items-center md:p-5"><div><h3 className="text-xl font-black">АвтоЦена — подбор автомобиля под ваш бюджет</h3><p className="mt-3 text-sm font-medium leading-7 text-white/60">Сервис помогает быстро понять, какой автомобиль можно привезти из Японии, Китая, Кореи, ОАЭ, Европы, Грузии или Кыргызстана. Вы задаёте параметры, а система показывает реальные варианты и актуальный расчёт.</p><p className="mt-2 text-sm font-bold leading-6 text-white/75">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><div className="ac-executor-logo flex min-h-32 items-center justify-center rounded-2xl p-5"><img src="/brands/topavto-logo.png" alt="TopAvto" className="max-h-24 w-full object-contain" /></div></section><CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" /></div>
       <section className="mt-8"><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="text-xs font-black uppercase tracking-[0.18em] text-red-400"><span className="lg:hidden">Автомобили в каталоге</span><span className="hidden lg:inline">Свежие предложения</span></div><h2 className="mt-2 text-3xl font-black md:text-5xl"><span className="lg:hidden">Свежие предложения</span><span className="hidden lg:inline">Автомобили в каталоге</span></h2></div><div className="hidden gap-3 sm:grid-cols-[180px_220px_auto] lg:grid"><HomeSelect value={catalogMarket} options={marketOptions} onChange={setCatalogMarket} /><HomeSelect value={catalogMake} options={makeOptions} onChange={setCatalogMake} searchable searchPlaceholder="Найти марку" /><Link href={catalogHref} className="avto-button flex h-14 items-center justify-center rounded-2xl px-5 font-black">Показать</Link></div></div>
         <CurrencyRatesStrip rates={rates} variant="mobile" className="mt-4 lg:hidden" />
-        {marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {electricOnly ? group.total : marketCounts[group.id] || group.total}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
+        {catalogStatus === "loading" ? <CatalogLoadingSkeleton /> : catalogStatus === "error" && !items.length ? <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">Не удалось загрузить каталог. Обновите страницу через минуту.</div> : marketGroups.length ? <div className="mt-7 space-y-8">{marketGroups.map((group) => { const params = new URLSearchParams({ market: group.id }); if (catalogMake) params.set("make", catalogMake); if (electricOnly) params.set("fuel", "electric"); return <section key={group.id}><div className="mb-4 flex items-end justify-between gap-3"><h3 className="flex min-w-0 items-center gap-2 text-[25px] font-black leading-none md:text-4xl"><CatalogMarketFlag market={group.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{CATALOG_MARKET_LABELS[group.id]}</span><span className="text-sm font-black text-[var(--ac-muted)] md:text-base">· {electricOnly ? group.total : marketCounts[group.id] || group.total}</span></h3><Link href={`/cars?${params}`} className="ac-market-all-link shrink-0 text-sm font-black md:text-base">Все →</Link></div><div className="ac-home-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] md:mr-0 md:grid-flow-row md:grid-cols-4 md:overflow-visible md:pr-0">{group.items.map((item, index) => <div key={item.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={item.raw} dense /></div>)}</div></section>; })}</div> : <div className="mt-6 rounded-2xl bg-white/[0.045] p-6">{electricOnly ? "Электромобили по выбранным параметрам пока не найдены." : "Каталог обновляется."}</div>}
         <BrandLogoRail brands={electricOnly ? availableItems.map((item) => item.make) : knowledgeMakes.length ? knowledgeMakes : availableItems.map((item) => item.make)} />
       </section>
     </div>
