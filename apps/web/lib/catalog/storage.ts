@@ -348,7 +348,9 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
 function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
 export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
   return rows.sort((a, b) => sort === "totalRub" ? projectionNumber(a.totalRub, Infinity) - projectionNumber(b.totalRub, Infinity)
-    : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
+    : sort === "totalRubDesc" ? projectionNumber(b.totalRub, -Infinity) - projectionNumber(a.totalRub, -Infinity)
+      : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
+        : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
       : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
         : projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
 }
