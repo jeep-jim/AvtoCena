@@ -4,6 +4,7 @@ const { catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
+const maxOffersPerModel = Math.max(1, Number(process.env.CATALOG_AUDIT_MAX_PER_MODEL || 20));
 let minimums = {};
 try { minimums = JSON.parse(process.env.CATALOG_AUDIT_MIN_COUNTS_JSON || "{}"); } catch { minimums = {}; }
 const currentYear = new Date().getFullYear();
@@ -57,7 +58,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   report.markets[market] = stats;
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
-  if (assertMarkets.has(market) && stats.maxPerExactModel > 20) report.failures.push(`${market}:model_quota:${stats.maxPerExactModel}`);
+  if (assertMarkets.has(market) && stats.maxPerExactModel > maxOffersPerModel) report.failures.push(`${market}:model_quota:${stats.maxPerExactModel}>${maxOffersPerModel}`);
   if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
