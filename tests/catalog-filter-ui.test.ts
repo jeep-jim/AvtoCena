@@ -19,6 +19,15 @@ test("electric filter loads one facet response instead of every catalog page", (
   assert.doesNotMatch(source, /Array\.from\(\{ length: pages - 1/);
 });
 
+test("catalog filter forms can be applied and show the active query", () => {
+  const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
+  assert.match(source, /type="submit"/);
+  assert.match(source, /Показать автомобили/);
+  assert.match(source, /aria-label="Выбранные параметры"/);
+  assert.match(source, /key=\{`desktop-\$\{formKey\}`\}/);
+  assert.match(source, /key=\{`mobile-\$\{formKey\}`\}/);
+});
+
 test("the single public catalog search route owns filtered facets and live rates", () => {
   assert.equal(fs.existsSync("apps/web/app/api/catalog/search/route.ts"), false);
   const route = fs.readFileSync("apps/web/app/(public)/api/catalog/search/route.ts", "utf8");

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
 import { catalogFilterOptions } from "@/lib/catalog/filter-options";
@@ -72,6 +73,39 @@ const fuels: Option[] = [{ value: "", label: "Любое топливо" }, { va
 const transmissions: Option[] = [{ value: "", label: "Любая трансмиссия" }, { value: "automatic", label: "Автомат" }, { value: "manual", label: "Механика" }, { value: "cvt", label: "Вариатор" }, { value: "dct", label: "Робот" }];
 const drives: Option[] = [{ value: "", label: "Любой привод" }, { value: "fwd", label: "Передний" }, { value: "rwd", label: "Задний" }, { value: "awd", label: "Полный" }];
 
+function optionLabel(options: Option[], value: string) {
+  return options.find((option) => option.value === value)?.label || label(value);
+}
+
+function filterSummary(initial: Record<string, string>) {
+  const rows: string[] = [];
+  const range = (title: string, from?: string, to?: string, suffix = "") => {
+    if (from && to) rows.push(`${title}: ${from}–${to}${suffix}`);
+    else if (from) rows.push(`${title}: от ${from}${suffix}`);
+    else if (to) rows.push(`${title}: до ${to}${suffix}`);
+  };
+  if (initial.market) rows.push(optionLabel(markets, initial.market));
+  if (initial.make) rows.push(initial.make);
+  if (initial.model) rows.push(initial.model);
+  if (initial.bodyType) rows.push(optionLabel(bodies, initial.bodyType));
+  if (initial.fuel) rows.push(optionLabel(fuels, initial.fuel));
+  if (initial.transmission) rows.push(optionLabel(transmissions, initial.transmission));
+  if (initial.drive) rows.push(optionLabel(drives, initial.drive));
+  range("Год", initial.yearFrom, initial.yearTo);
+  range("Цена", initial.budgetFrom, initial.budget || initial.budgetTo, " ₽");
+  range("Пробег", initial.mileageFrom, initial.mileageTo, " км");
+  range("Объём", initial.engineFrom, initial.engineTo, " см³");
+  range("Мощность", initial.powerFrom, initial.powerTo, " л.с.");
+  return [...new Set(rows.filter(Boolean))];
+}
+
+function FilterActions({ mobile = false }: { mobile?: boolean }) {
+  return <div className={`flex items-center gap-3 ${mobile ? "sticky bottom-0 z-10 -mx-1 mt-2 bg-[var(--ac-surface)]/95 px-1 pb-1 pt-3 backdrop-blur-xl" : "mt-4 justify-end"}`}>
+    <Link href="/cars" className="flex h-12 items-center justify-center rounded-2xl bg-white/[0.055] px-5 text-sm font-black">Сбросить</Link>
+    <button type="submit" className="avto-button flex h-12 flex-1 items-center justify-center rounded-2xl px-6 text-sm font-black lg:max-w-64">Показать автомобили</button>
+  </div>;
+}
+
 async function loadElectricFacets() {
   const response = await fetch("/api/catalog/search?fuel=electric&pageSize=1&includeFacets=1", { cache: "no-store" });
   if (!response.ok) throw new Error(`catalog_electric_facets_http_${response.status}`);
@@ -108,6 +142,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const hasAdvancedValue = Boolean(initial.advanced === "1" || initial.bodyType || initial.transmission || initial.yearFrom || initial.yearTo || initial.budgetFrom || initial.budget || initial.budgetTo || initial.mileageFrom || initial.mileageTo || initial.engineFrom || initial.engineTo || initial.powerFrom || initial.powerTo || (initial.fuel && initial.fuel !== "electric") || initial.drive);
   const [expanded, setExpanded] = useState(hasAdvancedValue);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const appliedFilters = useMemo(() => filterSummary(initial), [initial]);
+  const formKey = useMemo(() => JSON.stringify(initial), [initial]);
 
   useEffect(() => {
     if (!electricOnly) { setElectricFacets(null); return; }
@@ -131,7 +167,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const setElectric = (checked: boolean) => { setElectricOnly(checked); setElectricFacets(null); };
 
   return <>
-    <form method="get" className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
+    <form key={`desktop-${formKey}`} method="get" className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
       <div className="grid grid-cols-4 gap-3">
         <SearchSelect name="make" value={make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={setMake} />
         <VehicleModelSearch value={initial.model || ""} make={make} onMakeChange={setMake} />
@@ -144,10 +180,12 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
       </div>
       {expanded ? <div className="ac-advanced-fields mt-4 rounded-[1.35rem] p-4"><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includePrimary={false} includeFuel={!electricOnly} /></div> : null}
+      <FilterActions />
     </form>
 
     <button type="button" onClick={() => setMobileOpen(true)} className="ac-filter-more-button mt-5 flex h-14 w-full items-center justify-between rounded-2xl px-4 text-sm font-black lg:hidden" aria-label="Открыть фильтры"><span>Фильтры</span><SlidersIcon /></button>
 
-    {mobileOpen ? <div className="fixed inset-0 z-[9998] bg-black/70 lg:hidden" onClick={() => setMobileOpen(false)}><form method="get" className="ac-catalog-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto p-5 pb-8" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileOpen(false)} className="ac-filter-close flex h-10 w-10 items-center justify-center rounded-xl text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><SimpleSelect name="sort" value={initial.sort || ""} placeholder="Сортировка" options={sorts} /><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox initialChecked={initial.powerTo === "160"} /><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includeFuel={!electricOnly} /></div></form></div> : null}
+    {mobileOpen ? <div className="fixed inset-0 z-[9998] bg-black/70 lg:hidden" onClick={() => setMobileOpen(false)}><form key={`mobile-${formKey}`} method="get" className="ac-catalog-filter-drawer ac-hide-scrollbar absolute inset-y-0 right-0 w-[min(92vw,390px)] overflow-y-auto p-5 pb-8" onClick={(event) => event.stopPropagation()}><div className="mb-6 flex items-center justify-between"><h2 className="text-2xl font-black">Фильтры</h2><button type="button" onClick={() => setMobileOpen(false)} className="ac-filter-close flex h-10 w-10 items-center justify-center rounded-xl text-2xl" aria-label="Закрыть">×</button></div><div className="grid gap-3"><SimpleSelect name="sort" value={initial.sort || ""} placeholder="Сортировка" options={sorts} /><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox initialChecked={initial.powerTo === "160"} /><AdvancedFields initial={initial} make={make} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} setMake={setMake} includeFuel={!electricOnly} /><FilterActions mobile /></div></form></div> : null}
+    {appliedFilters.length ? <div className="mt-4 flex min-w-0 flex-wrap items-center gap-2" aria-label="Выбранные параметры"><span className="mr-1 text-xs font-black uppercase tracking-[0.12em] text-[var(--ac-muted)]">Выбрано</span>{appliedFilters.map((item) => <span key={item} className="rounded-full bg-white/[0.065] px-3 py-1.5 text-xs font-black text-[var(--ac-text)]">{item}</span>)}<Link href="/cars" className="px-2 py-1.5 text-xs font-black text-red-500">Сбросить всё</Link></div> : null}
   </>;
 }

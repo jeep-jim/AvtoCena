@@ -7,7 +7,10 @@ import { BrandMark } from "@/components/brand/BrandMark";
 const START_EVENT = "avtocena:navigation-start";
 const REVEAL_DELAY_MS = 320;
 const MIN_VISIBLE_MS = 120;
-const MAX_VISIBLE_MS = 3000;
+// Object-storage cold starts can legitimately take several seconds. Hiding the
+// indicator after three seconds exposed the unchanged catalog immediately
+// before the offer route committed, which looked like a failed first tap.
+const MAX_VISIBLE_MS = 15000;
 
 const publicLayoutFixes = `
 button[aria-label^="Почему есть фильтр"],
