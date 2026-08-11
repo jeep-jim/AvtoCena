@@ -37,6 +37,81 @@ html:not([data-theme="light"]) body .ac-partner-page {
     touch-action: pan-x pan-y !important;
   }
 }
+
+/* Mobile filter overlays use the same bottom-sheet interaction as currency details. */
+@media (max-width: 1023px) {
+  .ac-home-page > div.fixed:has(> .ac-home-filter-drawer) {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    background: rgba(0,0,0,.62) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+  .ac-home-page > div.fixed > .ac-home-filter-drawer {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: min(91dvh, 820px) !important;
+    border-radius: 30px 30px 0 0 !important;
+    padding: 28px 16px calc(14px + env(safe-area-inset-bottom)) !important;
+    overflow-y: auto !important;
+    background: var(--ac-surface) !important;
+    color: var(--ac-text) !important;
+    overscroll-behavior: contain !important;
+  }
+  .ac-home-page > div.fixed > .ac-home-filter-drawer::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 9px !important;
+    left: 50% !important;
+    width: 48px !important;
+    height: 6px !important;
+    transform: translateX(-50%) !important;
+    border-radius: 999px !important;
+    background: var(--ac-muted) !important;
+    opacity: .3 !important;
+  }
+  .ac-home-page .ac-home-filter-drawer__header {
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+  }
+  .ac-home-page .ac-home-filter-drawer__header button { border-radius: 999px !important; }
+  .ac-home-page .ac-home-filter-drawer__fields {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .ac-home-page .ac-home-filter-drawer__budget {
+    padding: 10px 12px !important;
+    border-radius: 16px !important;
+    background: var(--ac-surface-2) !important;
+  }
+  .ac-home-page .ac-home-filter-drawer__actions {
+    position: sticky !important;
+    bottom: -1px !important;
+    z-index: 20 !important;
+    margin: 12px -4px -4px !important;
+    padding: 10px 4px 4px !important;
+    background: var(--ac-surface) !important;
+  }
+  .ac-home-page .ac-home-filter-drawer .ac-filter-dropdown {
+    position: static !important;
+    inset: auto !important;
+    margin-top: 6px !important;
+    background: var(--ac-surface-3) !important;
+    border: 1px solid var(--ac-border) !important;
+    box-shadow: none !important;
+  }
+  .ac-home-page .ac-home-filter-drawer .relative:has(> .ac-filter-dropdown) { z-index: auto !important; }
+  .ac-home-page .ac-home-filter-drawer .ac-filter-control,
+  .ac-home-page .ac-home-filter-drawer .ac-search-select {
+    min-height: 52px !important;
+    height: 52px !important;
+    border-radius: 15px !important;
+  }
+}
 `;
 
 export default function PublicTemplate({ children }: { children: ReactNode }) {
