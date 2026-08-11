@@ -1,0 +1,59 @@
+name: Validate catalog search projection
+
+on:
+  push:
+    branches: [fix/catalog-search-projection-20260811]
+    paths:
+      - .github/workflows/validate-catalog-search-projection.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-search-projection-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply projection patch
+        run: python3 scripts/patch-catalog-search-projection.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Pure projection filter smoke
+        run: |
+          npx tsx -e 'import {catalogSearchProjectionMatches,catalogSearchProjectionSort} from "./apps/web/lib/catalog/storage.ts"; const a={id:"a",market:"europe",make:"Kia",model:"Sportage",year:2022,totalRub:2500000,mileageKm:40000,engineCc:1998,powerHp:150,fuel:"gasoline",bodyType:"suv",transmission:"automatic",drive:"awd",auctionDate:"2026-08-01",updatedAt:"2026-08-02"}; const b={...a,id:"b",year:2024,totalRub:3200000,mileageKm:10000,auctionDate:"2026-08-05"}; if(!catalogSearchProjectionMatches(a,{market:"europe",yearFrom:2020,budgetTo:3000000,powerTo:160})) throw new Error("expected match"); if(catalogSearchProjectionMatches(a,{market:"europe",yearFrom:2023})) throw new Error("year exact filter failed"); if(catalogSearchProjectionMatches(a,{budgetTo:2000000})) throw new Error("budget exact filter failed"); if(catalogSearchProjectionMatches({...a,mileageKm:undefined},{mileageTo:50000})) throw new Error("missing mileage upper-bound must fail"); const sorted=catalogSearchProjectionSort([a,b],"year"); if(sorted[0].id!=="b") throw new Error("year sort failed"); console.log({projectionFilter:true,sort:true})'
+      - name: Static no-full-scan checks
+        run: |
+          grep -q 'indexes/projection/' apps/web/lib/catalog/storage.ts
+          grep -q 'readProjectionRows(manifest, params)' apps/web/lib/catalog/storage.ts
+          grep -q 'projectionRows.slice' apps/web/lib/catalog/storage.ts
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('apps/web/lib/catalog/storage.ts').read_text()
+          a=s.index('export async function readCatalogFacets')
+          b=s.index('async function persistInternalCatalog',a)
+          if 'readMarketOffers(' in s[a:b]: raise SystemExit('filtered facets still full-scan market offers')
+          a=s.index('export async function searchOffers')
+          b=s.index('function isPrivateHost',a)
+          block=s[a:b]
+          if 'pageIds = idList;' in block: raise SystemExit('range search still expands pageIds to every candidate')
+          if 'readMarketOffers(' in block: raise SystemExit('searchOffers full-scan regression')
+          print('static_projection_fastpath_ok')
+          PY
+      - name: Commit validated production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-catalog-search-projection.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/storage.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Use compact projections for catalog filters [skip actions]"
+          git push origin HEAD:fix/catalog-search-projection-20260811
