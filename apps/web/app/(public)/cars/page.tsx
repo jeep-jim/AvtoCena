@@ -16,15 +16,18 @@ export const revalidate = 0;
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
 function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
 
-const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({
-  id,
-  label: CATALOG_MARKET_LABELS[id],
-}));
+const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
 const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
+const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "year", "mileage"]);
+
+function requestedSort(value?: string | string[]) {
+  const sort = first(value);
+  return SUPPORTED_SORTS.has(sort) ? sort : "updatedAt";
+}
 
 function pageHref(params: Record<string, string | string[] | undefined>, page: number) {
   const query = new URLSearchParams();
@@ -81,6 +84,22 @@ function businessOrder(left: any, right: any) {
   return businessPriority(right) - businessPriority(left)
     || offerFreshness(right) - offerFreshness(left)
     || String(left?.id || "").localeCompare(String(right?.id || ""));
+}
+
+function sortCatalogRows(rows: any[], sort: string) {
+  const sorted = [...rows];
+  if (sort === "totalRub") return sorted.sort((left, right) => {
+    const a = offerRubValue(left) || Number.POSITIVE_INFINITY;
+    const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
+    return a - b || businessOrder(left, right);
+  });
+  if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
+  if (sort === "mileage") return sorted.sort((left, right) => {
+    const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
+    const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;
+    return a - b || businessOrder(left, right);
+  });
+  return sorted.sort(businessOrder);
 }
 
 function catalogModelGroupKey(offer: any) {
@@ -147,11 +166,13 @@ function matchesFilters(offer: any, common: any) {
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const selectedMarket = first(params.market);
+  const selectedSort = requestedSort(params.sort);
+  const customSort = selectedSort !== "updatedAt";
   const requestedPage = Math.max(1, Number(first(params.page)) || 1);
   const common = {
     make: first(params.make) || first(params.brand), model: first(params.model), budgetFrom: numeric(params.budgetFrom), budgetTo: numeric(params.budget) || numeric(params.budgetTo), hasPrice: first(params.hasPrice),
     yearFrom: numeric(params.yearFrom), yearTo: numeric(params.yearTo), mileageFrom: numeric(params.mileageFrom), mileageTo: numeric(params.mileageTo), engineFrom: numeric(params.engineFrom), engineTo: numeric(params.engineTo), powerFrom: numeric(params.powerFrom), powerTo: numeric(params.powerTo),
-    fuel: first(params.fuel), transmission: first(params.transmission), drive: first(params.drive), bodyType: first(params.bodyType), sort: "updatedAt" as const,
+    fuel: first(params.fuel), transmission: first(params.transmission), drive: first(params.drive), bodyType: first(params.bodyType), sort: selectedSort,
   };
   const hasFilters = Boolean(common.make || common.model || common.budgetFrom || common.budgetTo || common.hasPrice
     || common.yearFrom || common.yearTo || common.mileageFrom || common.mileageTo || common.engineFrom || common.engineTo
@@ -163,39 +184,30 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
       const page = selectedMarket ? requestedPage : 1;
 
-      // Япония — прежде всего каталог отыгранных лотов. Внутри него сначала идут
-      // доступные свежие автомобили до 6 млн ₽ и до 160 л.с., затем остальные.
       if (market.id === "japan") {
         const auctionRows = (await readMarketOffers("japan"))
           .filter((offer) => offer.status === "active" && isJapanAuctionResult(offer) && isCrediblePublicOffer(offer))
-          .filter((offer) => !hasFilters || matchesFilters(offer, common))
-          .sort(businessOrder);
+          .filter((offer) => !hasFilters || matchesFilters(offer, common));
+        const orderedRows = customSort ? sortCatalogRows(auctionRows, selectedSort) : auctionRows.sort(businessOrder);
         const start = (page - 1) * pageSize;
-        const visible = await applyActiveBusinessPricingBatch(auctionRows.slice(start, start + pageSize));
-        return { ...market, items: visible.sort(businessOrder).map(publicOffer), total: auctionRows.length, page, pageSize, auctionStatistics: true };
+        const visible = await applyActiveBusinessPricingBatch(orderedRows.slice(start, start + pageSize));
+        const orderedVisible = customSort ? sortCatalogRows(visible, selectedSort) : visible.sort(businessOrder);
+        return { ...market, items: orderedVisible.map(publicOffer), total: orderedRows.length, page, pageSize, auctionStatistics: true };
       }
 
-      if (!hasFilters) {
-        // Fast path: the generation index already knows the requested page IDs.
-        // Do not deserialize the entire market (8K-30K rows) just to render 6/48 cards.
-        // Overview deliberately oversamples a small fresh window, then applies the same
-        // business/diversity ordering in-memory. A selected market uses the exact page.
+      if (!hasFilters && !customSort) {
         const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
         const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
         const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
         const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
-        return {
-          ...market,
-          items: balanceBusinessRows(visible).map(publicOffer),
-          total: indexed.total,
-          page: indexed.page,
-          pageSize,
-        };
+        return { ...market, items: balanceBusinessRows(visible).map(publicOffer), total: indexed.total, page: indexed.page, pageSize };
       }
+
       const result = await searchOffers({ ...common, market: market.id, page, pageSize });
-      const pageRows = common.model ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);
+      const pageRows = common.model || customSort ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);
       const repriced = await applyActiveBusinessPricingBatch(pageRows);
-      return { ...market, items: common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced), total: result.total, page: result.page, pageSize: result.pageSize };
+      const items = customSort ? sortCatalogRows(repriced, selectedSort) : common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced);
+      return { ...market, items, total: result.total, page: result.page, pageSize: result.pageSize };
     })),
   ]);
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
@@ -204,7 +216,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const totalPages = selectedResult ? Math.max(1, Math.ceil(selectedResult.total / selectedResult.pageSize)) : 1;
   const currentPage = Math.min(requestedPage, totalPages);
   const pages = paginationItems(currentPage, totalPages);
-  const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive"];
+  const initialKeys = ["advanced", "budget", "budgetTo", "budgetFrom", "market", "make", "model", "yearFrom", "yearTo", "hasPrice", "bodyType", "mileageFrom", "mileageTo", "engineFrom", "engineTo", "powerFrom", "powerTo", "fuel", "transmission", "drive", "sort"];
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   const brandNames = facets.makes || [];
   const japanStatisticsSelected = selectedMarket === "japan";
@@ -214,11 +226,11 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика Японии" : "Каталог автомобилей"}</h1>
-        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">{selectedMarket ? `Найдено автомобилей: ${total}.` : `7 рынков: Корея, Китай, Япония, ОАЭ, Европа, Грузия и Кыргызстан. Найдено предложений: ${total}.`}</p>
-        <div className="lg:hidden"><BrandLogoRail brands={brandNames} /></div>
+        <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">Найдено: {total}</p>
+        <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>
       <CatalogFilters initial={initial} facets={facets} />
-      <div className="hidden lg:block"><BrandLogoRail brands={brandNames} /></div>
+      <div className="hidden lg:block"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       <CurrencyRatesStrip variant="mobile" className="mt-5 lg:hidden" />
       <div className="mt-8 grid gap-10 md:mt-9 md:gap-12">{visibleMarkets.map((market) => <section key={market.id} className="min-w-0"><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={market.id} className="h-5 w-7 md:h-6 md:w-9" /><span>{market.label}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {market.total}</span></h2>{!selectedMarket ? <Link href={`/cars?market=${market.id}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link> : null}</div>{market.items.length ? selectedMarket ? <div className="grid min-w-0 grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">{market.items.map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}</div> : <div className="ac-catalog-market-rail -mr-4 grid grid-flow-col auto-cols-[47%] gap-2.5 overflow-x-auto pr-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mr-0 md:grid-flow-row md:grid-cols-4 md:auto-cols-auto md:overflow-visible md:pr-0">{market.items.map((offer: any, index: number) => <div key={offer.id} className={index >= 4 ? "md:hidden" : ""}><CatalogCard offer={offer} compact dense /></div>)}</div> : <div className="rounded-[1.5rem] bg-white/[0.04] px-6 py-7 text-sm font-bold text-white/55">{market.id === "japan" ? "Статистика отыгранных лотов ещё загружается." : "Подходящих предложений сейчас нет."}</div>}</section>)}</div>
       {selectedMarket && totalPages > 1 ? <nav className="ac-catalog-pagination ac-hide-scrollbar mt-10 flex flex-nowrap items-center justify-center gap-1 overflow-x-auto whitespace-nowrap px-1" aria-label="Страницы каталога">
@@ -229,11 +241,8 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       @media(min-width:1024px){
-        .ac-catalog-page .ac-catalog-filter-panel:has(.ac-advanced-fields)>div:first-child{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-        .ac-catalog-page .ac-catalog-filter-panel:has(.ac-advanced-fields)>div:first-child>button{display:none!important}
         .ac-catalog-page .ac-advanced-fields{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:.75rem!important}
         .ac-catalog-page .ac-advanced-fields>div{display:contents!important}
-        .ac-catalog-page .ac-advanced-fields>button{grid-column:3!important;margin-top:0!important;width:100%!important}
       }
       @media(max-width:767px){
         .ac-catalog-page .ac-catalog-card,.ac-catalog-page .ac-catalog-card *,.ac-catalog-page .ac-catalog-market-rail,.ac-catalog-page .ac-catalog-market-rail>*{box-shadow:none!important}
