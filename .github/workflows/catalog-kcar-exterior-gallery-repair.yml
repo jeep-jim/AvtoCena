@@ -1,5 +1,5 @@
 name: Catalog Korea · K Car exterior gallery repair
-run-name: K Car exterior-first repair · ${{ github.sha }}
+run-name: K Car exterior-first v3 repair · ${{ github.sha }}
 
 on:
   workflow_dispatch:

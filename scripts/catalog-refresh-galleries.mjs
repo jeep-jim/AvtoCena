@@ -88,13 +88,15 @@ async function refreshCandidate(index) {
     console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${offer.images.length} (fetched ${fresh.length})`);
   } catch (error) {
     const message = String(error?.message || error);
-    if (retireConfirmedUnavailable && /^kcar_exact_detail_sold_[A-Za-z0-9_-]+$/.test(message)) {
-      offer.status = "sold";
+    const confirmedSold = /^kcar_exact_detail_sold_[A-Za-z0-9_-]+$/.test(message);
+    const missingExterior = /^kcar_exact_gallery_no_exterior_[A-Za-z0-9_-]+$/.test(message);
+    if (retireConfirmedUnavailable && (confirmedSold || missingExterior)) {
+      offer.status = confirmedSold ? "sold" : "removed";
       offer.updatedAt = new Date().toISOString();
       byId.set(offer.id, offer);
       report.retired++;
       report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, retired: true, ok: true, reason: message });
-      console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: retired confirmed sold listing`);
+      console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: retired ${confirmedSold ? "confirmed sold listing" : "listing without a verified exterior cover"}`);
       return;
     }
     report.failed++;
