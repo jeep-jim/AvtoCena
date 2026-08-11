@@ -176,15 +176,19 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       }
 
       if (!hasFilters) {
-        const rows = balanceBusinessRows((await readMarketOffers(market.id))
-          .filter((offer) => offer.status === "active" && isCrediblePublicOffer(offer)));
-        const start = (page - 1) * pageSize;
-        const visible = await applyActiveBusinessPricingBatch(rows.slice(start, start + pageSize));
+        // Fast path: the generation index already knows the requested page IDs.
+        // Do not deserialize the entire market (8K-30K rows) just to render 6/48 cards.
+        // Overview deliberately oversamples a small fresh window, then applies the same
+        // business/diversity ordering in-memory. A selected market uses the exact page.
+        const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
+        const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
+        const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
+        const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
         return {
           ...market,
           items: balanceBusinessRows(visible).map(publicOffer),
-          total: rows.length,
-          page,
+          total: indexed.total,
+          page: indexed.page,
           pageSize,
         };
       }

@@ -188,7 +188,11 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
   const manifest = await readManifest();
   const fallback: CatalogFacets = { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
   const indexed = await readIndex<CatalogFacets>(manifest.generationId, "facets.json", fallback);
-  const hasFilters = Boolean(params.market || params.make || params.model || params.hasPrice
+  // `market` alone is not a reason to deserialize the full market merely to draw the
+  // filter UI. Use the generation facet index for the initial/market-only screen.
+  // More selective facet projections are handled separately; this fast path removes
+  // the worst navigation cost immediately.
+  const hasFilters = Boolean(params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
