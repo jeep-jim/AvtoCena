@@ -94,6 +94,11 @@ function publicPriceLimits() {
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
+  const projectedVisibleRub = Math.round(positive(offer?.publicVisibleRub, 1_000_000_000));
+  if (projectedVisibleRub) {
+    const { absoluteMaximumRub } = publicPriceLimits();
+    return projectedVisibleRub <= absoluteMaximumRub ? projectedVisibleRub : 0;
+  }
   if (!completeCalculation(offer) && !preliminaryElectrifiedCalculation(offer)) return 0;
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return 0;
