@@ -131,7 +131,14 @@ async function fetchExactDetailData(carCd: string) {
   const detail = await requestJson(url.toString(), { headers: { referer: detailUrl(carCd) } });
   if (!detail.response.ok || detail.json?.success !== true) throw new Error(`kcar_exact_detail_http_${detail.response.status}_${carCd}`);
   const data = (detail.json?.data?.data ?? detail.json?.data ?? null) as KCarDetailData | null;
-  if (!data || clean(data.rvo?.carCd) !== carCd) throw new Error(`kcar_exact_detail_identity_${carCd}`);
+  if (!data || clean(data.rvo?.carCd) !== carCd) {
+    const message = clean(detail.json?.data?.message ?? detail.json?.message);
+    // K Car responds with HTTP 200/success=true for listings that have just sold,
+    // but deliberately omits rvo and the exact gallery. Keep this distinct from
+    // an identity failure so maintenance can retire only confirmed sold offers.
+    if (message.includes("판매완료")) throw new Error(`kcar_exact_detail_sold_${carCd}`);
+    throw new Error(`kcar_exact_detail_identity_${carCd}`);
+  }
   return data;
 }
 
@@ -158,6 +165,19 @@ function exactVehiclePhotoUrl(value: unknown, numericId: string) {
   }
 }
 
+function exactDetailBoundPhotoUrl(value: unknown) {
+  const source = clean(value);
+  if (!source) return "";
+  try {
+    const url = new URL(source, "https://img.kcar.com");
+    if (url.protocol !== "https:" || url.hostname.toLowerCase() !== "img.kcar.com") return "";
+    if (!/\.(?:jpe?g|png|webp)(?:$|[?#])/i.test(url.toString())) return "";
+    return url.toString();
+  } catch {
+    return "";
+  }
+}
+
 function representativeExteriorFrames(values: string[]) {
   if (values.length <= 4) return values;
   const indexes = [0, Math.floor(values.length / 4), Math.floor(values.length / 2), Math.floor(values.length * 3 / 4)];
@@ -168,6 +188,11 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   const numericId = carCd.replace(/^[^0-9]+/, "");
   if (!numericId) return [];
   const exact = (value: unknown) => exactVehiclePhotoUrl(value, numericId);
+  // Two-dimensional K Car listings have no 360-degree vrVo gallery. Their
+  // listing-bound rvo still exposes exact front and rear body photographs.
+  const listingBoundExterior = [data.rvo?.frontImgPath, data.rvo?.backImgPath]
+    .map(exactDetailBoundPhotoUrl)
+    .filter(Boolean);
   const explicitExterior = [...(data.outerPhotoList || []), ...(data.photoList || [])]
     .filter((photo) => clean(photo?.thumbnailType) === "01" || clean(photo?.thumbnailTypenm) === "외관")
     .sort((left, right) => Number(left?.sortOrdr || Number.MAX_SAFE_INTEGER) - Number(right?.sortOrdr || Number.MAX_SAFE_INTEGER))
@@ -182,7 +207,7 @@ export function exactVehicleGallery(data: KCarDetailData, carCd: string) {
   // K Car's v_src_show begins with interior/detail frames. Its separately typed
   // exterior cover (and 360-degree exterior frames when present) must lead the
   // customer gallery; cabin, wheels and diagnostics belong after the body.
-  return [...new Set([...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
+  return [...new Set([...listingBoundExterior, ...explicitExterior, ...closedExterior, ...openExterior, ...details])].slice(0, 30);
 }
 
 function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
@@ -386,7 +411,9 @@ class KCarExactSource implements CatalogSourceAdapter {
       if (!carCd) throw new Error("kcar_gallery_refresh_missing_source_offer_id");
       const data = await fetchExactDetailData(carCd);
       const rebuilt = exactVehicleGallery(data, carCd);
-      if (rebuilt.length < 5) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
+      // Two exact exterior covers are enough to repair the order safely: the
+      // maintenance merger keeps the rest of the existing listing-bound gallery.
+      if (rebuilt.length < 2) throw new Error(`kcar_gallery_refresh_underfilled_${carCd}_${rebuilt.length}`);
       urls = rebuilt;
       raw.images = rebuilt;
       raw.gallerySafetyMode = KCAR_EXTERIOR_FIRST_GALLERY_MODE;
