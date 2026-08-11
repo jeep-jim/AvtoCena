@@ -1,0 +1,55 @@
+name: Validate China AutoHome exact gallery minimum
+
+on:
+  push:
+    branches: [fix/china-autohome-min5-exact-20260811]
+    paths:
+      - .github/workflows/validate-china-autohome-min5-exact-20260811.yml
+
+permissions:
+  contents: write
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/china-autohome-min5-exact-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply patch
+        run: python3 scripts/patch-china-autohome-min5-exact.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit smoke public AutoHome threshold
+        run: |
+          npx tsx -e 'import {isCrediblePublicOffer} from "./apps/web/lib/catalog/offer-quality.ts"; const mk=(n:number)=>({id:"x",sourceId:"autohome_new_china_open",sourceOfferId:"123",market:"china",offerType:"fixed",status:"active",catalogKind:"listing",sourceTitle:"Mercedes E 2024",make:"Mercedes-Benz",model:"E-Class",year:2024,sourcePrice:300000,sourceCurrency:"CNY",priceMode:"fixed",images:Array.from({length:n},(_,i)=>({id:"",url:`https://car2.autoimg.cn/cardfs/product/g1/M00/00/0${i}/autohomecar__photo${i}.jpg`,objectKey:"",checksum:"",size:90000,mimeType:"image/jpeg",width:1200,height:800})),totalRub:3000000,firstSeenAt:new Date().toISOString(),updatedAt:new Date().toISOString()}) as any; if(isCrediblePublicOffer(mk(4))) throw new Error("4-photo AutoHome card must fail"); if(!isCrediblePublicOffer(mk(5))) throw new Error("5-photo AutoHome card must pass"); console.log({pass4:false,pass5:true})'
+      - name: Read-only current China impact audit
+        run: |
+          npx tsx -e 'import {readMarketOffers} from "./apps/web/lib/catalog/storage.ts"; import {isCrediblePublicOffer,credibleCatalogImages} from "./apps/web/lib/catalog/offer-quality.ts"; (async()=>{const rows=await readMarketOffers("china"); const ah=rows.filter((o:any)=>String(o.sourceId)==="autohome_new_china_open"); const weak=ah.filter((o:any)=>credibleCatalogImages(o.images||[]).length<5); const visible=rows.filter((o:any)=>isCrediblePublicOffer(o)); const leaked=visible.filter((o:any)=>String(o.sourceId)==="autohome_new_china_open"&&credibleCatalogImages(o.images||[]).length<5); console.log(JSON.stringify({current:rows.length,autohomeNew:ah.length,weakAutohomeNew:weak.length,visibleAfterGate:visible.length,weakLeaked:leaked.length},null,2)); if(weak.length<1000) throw new Error(`unexpected weak sample ${weak.length}`); if(leaked.length) throw new Error(`weak AutoHome leak ${leaked.length}`);})()'
+      - name: Static collector guard
+        run: grep -q 'exact_gallery_below_5' scripts/catalog-live-recovery-market.mjs
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-china-autohome-min5-exact.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/offer-quality.ts scripts/catalog-live-recovery-market.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Require five exact photos for AutoHome new cards [skip actions]"
+          git push origin HEAD:fix/china-autohome-min5-exact-20260811
