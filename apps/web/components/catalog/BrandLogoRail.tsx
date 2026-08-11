@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
 // The reserve registry is only for canonical names and logos; the rail renders live brands passed by catalog facets.
@@ -37,10 +38,18 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   />;
 }
 
-function BrandTile({ brand, onNavigate }: { brand: string; onNavigate?: () => void }) {
+function BrandTile({
+  brand,
+  href,
+  onClick,
+}: {
+  brand: string;
+  href: string;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+}) {
   return <Link
-    href={`/cars/brand/${catalogBrandSlug(brand)}`}
-    onClick={onNavigate}
+    href={href}
+    onClick={onClick}
     className="flex h-[78px] min-w-[94px] shrink-0 touch-manipulation select-none flex-col items-center justify-center gap-1.5 px-1.5 transition md:hover:-translate-y-0.5"
     title={`Автомобили ${brand} под заказ`}
   >
@@ -50,6 +59,8 @@ function BrandTile({ brand, onNavigate }: { brand: string; onNavigate?: () => vo
 }
 
 export function BrandLogoRail({ brands }: { brands: string[] }) {
+  const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
@@ -68,6 +79,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
     return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
   }, [activeBrands, query]);
+  const homeBrandDirectory = pathname === "/";
 
   useEffect(() => {
     if (!open) return;
@@ -81,6 +93,26 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
   const close = () => {
     setOpen(false);
     setQuery("");
+  };
+
+  const hrefForBrand = (brand: string) => homeBrandDirectory
+    ? `/cars/brand/${catalogBrandSlug(brand)}`
+    : `/cars?make=${encodeURIComponent(brand)}`;
+
+  const handleBrandClick = (brand: string, closeAfter = false) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (homeBrandDirectory) {
+      if (closeAfter) close();
+      return;
+    }
+
+    event.preventDefault();
+    const params = new URLSearchParams(window.location.search);
+    params.set("make", brand);
+    params.delete("brand");
+    params.delete("model");
+    params.delete("page");
+    if (closeAfter) close();
+    router.push(`/cars?${params.toString()}`);
   };
 
   return <>
@@ -99,7 +131,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
           pointer.current = null;
         }}
       >
-        {orderedBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} />)}
+        {orderedBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
       </div>
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>
@@ -111,7 +143,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
         </div>
         <div className="grid grid-cols-2 gap-x-1 gap-y-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7">
-          {filtered.map((brand) => <BrandTile key={brand} brand={brand} onNavigate={close} />)}
+          {filtered.map((brand) => <BrandTile key={brand} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand, true)} />)}
         </div>
         {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>

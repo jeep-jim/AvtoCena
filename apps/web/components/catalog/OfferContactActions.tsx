@@ -119,7 +119,7 @@ function MobilePinnedActions() {
         left: `${rect.left}px`,
         width: `${rect.width}px`,
         top: `${fixedTop}px`,
-        zIndex: 45,
+        zIndex: 9000,
       } : null);
     };
 
@@ -138,14 +138,18 @@ function MobilePinnedActions() {
     };
   }, []);
 
+  const actions = (
+    <div
+      style={fixedStyle || undefined}
+      className={`ac-offer-pinned-actions w-full ${fixedStyle ? "is-fixed" : ""}`}
+    >
+      <ActionButtons />
+    </div>
+  );
+
   return (
     <div ref={anchorRef} className="relative mt-4 h-[54px] xl:hidden">
-      <div
-        style={fixedStyle || undefined}
-        className={`ac-offer-pinned-actions w-full ${fixedStyle ? "is-fixed" : ""}`}
-      >
-        <ActionButtons />
-      </div>
+      {fixedStyle && typeof document !== "undefined" ? createPortal(actions, document.body) : actions}
     </div>
   );
 }
@@ -235,6 +239,9 @@ export function OfferContactActions() {
         .ac-offer-pinned-actions {
           position: relative;
           isolation: isolate;
+        }
+        .ac-offer-pinned-actions.is-fixed {
+          z-index: 9000 !important;
         }
         .ac-offer-pinned-actions.is-fixed::before {
           content: "";
