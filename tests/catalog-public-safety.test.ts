@@ -75,6 +75,9 @@ test("verified preliminary combustion price is visible without pretending the ut
     },
   } as any;
   assert.equal(catalogOfferVisibleRub(offer), 2_450_000);
+  offer.calculationSnapshot.missing = ["engine_cc"];
+  offer.calculationSnapshot.customs.missing = ["engine_cc"];
+  assert.equal(catalogOfferVisibleRub(offer), 0);
 });
 
 test("mandatory source offer is hidden until its exact-card photo identity is verified", () => {
