@@ -1,0 +1,47 @@
+name: Validate catalog min year 2015
+
+on:
+  push:
+    branches: [fix/catalog-min-year-2015-20260811]
+    paths:
+      - .github/workflows/validate-catalog-min-year-2015.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-min-year-2015-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply patch
+        run: python3 scripts/patch-catalog-min-year-2015.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Verify public quality floor
+        run: |
+          npx tsx -e 'import {isCrediblePublicOffer,CATALOG_MIN_YEAR} from "./apps/web/lib/catalog/offer-quality.ts"; const base:any={id:"x",status:"active",market:"europe",sourceId:"otomoto_europe_exact",sourcePrice:10000,sourceCurrency:"EUR",make:"Toyota",model:"Yaris",year:2015,images:[{id:"1",url:"https://example.com/car.jpg",objectKey:"",checksum:"1",size:1000,mimeType:"image/jpeg"}],totalRub:1000000,powerHp:100,engineCc:1500,operational:{}}; if(CATALOG_MIN_YEAR!==2015) throw new Error(String(CATALOG_MIN_YEAR)); if(!isCrediblePublicOffer(base)) throw new Error("2015 must pass"); if(isCrediblePublicOffer({...base,year:2014})) throw new Error("2014 must fail"); console.log({CATALOG_MIN_YEAR,pass2015:true,fail2014:true})'
+      - name: Static collector publisher checks
+        run: |
+          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-market.mjs
+          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-direct-exact.mjs
+          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-japan-prestige.mjs
+          grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-publish.mjs
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-catalog-min-year-2015.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/offer-quality.ts scripts/catalog-live-recovery-market.mjs scripts/catalog-live-recovery-direct-exact.mjs scripts/catalog-live-recovery-japan-prestige.mjs scripts/catalog-live-recovery-publish.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Enforce catalog year 2015 floor [skip actions]"
+          git push origin HEAD:fix/catalog-min-year-2015-20260811
