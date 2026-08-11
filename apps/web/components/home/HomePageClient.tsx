@@ -20,7 +20,12 @@ import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/run
 
 type Option = { value: string; label: string; min?: number; max?: number };
 type Item = { raw: any; id: string; make: string; model: string; market: string; bodyType?: string; fuel?: string };
-type Props = { initialCity?: string };
+type Props = {
+  initialCity?: string;
+  initialOffers?: any[];
+  initialMarketCounts?: Record<string, number>;
+  initialCount?: number;
+};
 
 const budgets: Option[] = [
   { value: "", label: "Любой бюджет" },
@@ -136,11 +141,12 @@ function PowerLimit({ checked, onChange }: { checked: boolean; onChange: (checke
 }
 function BudgetLabel({ onInfo }: { onInfo: () => void }) { return <span className="inline-flex shrink-0 items-center gap-1 text-xs font-black uppercase tracking-[0.16em] text-red-400"><span>Бюджет</span><button type="button" onClick={onInfo} className="ac-budget-help flex h-5 w-5 items-center justify-center rounded-full bg-red-500/12 text-[11px] font-black normal-case tracking-normal lg:hidden" aria-label="Как работает подбор по бюджету">?</button></span>; }
 
-export default function HomePageClient({ initialCity = "" }: Props) {
+export default function HomePageClient({ initialCity = "", initialOffers = [], initialMarketCounts = {}, initialCount }: Props) {
   const router = useRouter();
+  const skipInitialCountFetch = useRef(Number.isFinite(initialCount));
   const [city, setCity] = useState(initialCity); const [budget, setBudget] = useState(""); const [make, setMake] = useState(""); const [model, setModel] = useState(""); const [year, setYear] = useState(""); const [market, setMarket] = useState(""); const [body, setBody] = useState("");
   const [powerLimited, setPowerLimited] = useState(false); const [electricOnly, setElectricOnly] = useState(false); const [fuelItems, setFuelItems] = useState<Item[] | null>(null); const [catalogMarket, setCatalogMarket] = useState(""); const [catalogMake, setCatalogMake] = useState("");
-  const [items, setItems] = useState<Item[]>([]); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates, setRates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>({}); const [count, setCount] = useState<number | null>(null); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
+  const [items, setItems] = useState<Item[]>(() => initialOffers.flatMap((raw) => { const item = toItem(raw); return item ? [item] : []; })); const [knowledgeMakes, setKnowledgeMakes] = useState<string[]>([]); const [rates, setRates] = useState<PublicCurrencyRate[]>([]); const [marketCounts, setMarketCounts] = useState<Record<string, number>>(initialMarketCounts); const [count, setCount] = useState<number | null>(Number.isFinite(initialCount) ? Number(initialCount) : null); const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false); const [budgetInfoOpen, setBudgetInfoOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -160,7 +166,7 @@ export default function HomePageClient({ initialCity = "" }: Props) {
         setMarketCounts(Object.fromEntries(marketIds.map((id, index) => [id, Number(responses[index + 1]?.total || 0)])));
         const makePayload = responses[marketIds.length + 1];
         setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
-      } catch { if (!cancelled) setItems([]); }
+      } catch { /* Keep the server-rendered snapshot on a transient refresh failure. */ }
     };
     loadCatalog(); const interval = window.setInterval(loadCatalog, 60_000); const focus = () => loadCatalog(); const visibility = () => { if (document.visibilityState === "visible") loadCatalog(); };
     window.addEventListener("focus", focus); document.addEventListener("visibilitychange", visibility);
@@ -182,6 +188,7 @@ export default function HomePageClient({ initialCity = "" }: Props) {
   const selectedBudget = budgets.find((option) => option.value === budget) || budgets[0];
 
   useEffect(() => {
+    if (skipInitialCountFetch.current) { skipInitialCountFetch.current = false; return; }
     const timer = window.setTimeout(() => {
       const params = new URLSearchParams({ pageSize: "1" });
       if (selectedBudget.min) params.set("budgetFrom", String(selectedBudget.min)); if (selectedBudget.max) params.set("budgetTo", String(selectedBudget.max)); if (make) params.set("make", make); if (model) params.set("model", model); if (market) params.set("market", market); if (body && !model) params.set("bodyType", body); if (year === "older") params.set("yearTo", "2017"); else if (year) params.set("yearFrom", year); if (powerLimited) params.set("powerTo", "160"); if (electricOnly) params.set("fuel", "electric");
