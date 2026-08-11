@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { parseAutoGeorgiaMoney } from "../apps/web/lib/catalog/auto-georgia-enriched-source";
+import { parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -27,6 +28,43 @@ test("AUTO.GE prices keep decimal cents separate from thousands", () => {
   assert.equal(parseAutoGeorgiaMoney("17,500.00"), 17_500);
   assert.equal(parseAutoGeorgiaMoney("28 700"), 28_700);
   assert.equal(parseAutoGeorgiaMoney("9.200,00"), 9_200);
+});
+
+test("DubiCars exact specs own make, model and trim instead of marketing h1 text", () => {
+  const markup = `
+    <h1>Used 2024 Nissan Patrol AED 3,449 P.M • 0% Downpayment • Agency Warranty</h1>
+    <div>AED 215,000</div>
+    <section>Model year 2024 Kilometers 12,300 Km Engine capacity 5.6 L Horsepower 400 HP
+      Transmission Automatic Export status Can be exported Interior color Tan Steering side Left hand Updated on 11 Aug, 2026
+      Make Nissan Model Patrol Trim LE T1 5.6L Color White Cylinders 8 Cylinders Drive type Four Wheel Drive
+      Vehicle type SUV/Crossover Number of doors 5 Doors Seating capacity 8 seater Wheel size 22 Fuel Type Petrol Service history No
+    </section>
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/12345678-abcd-1234-abcd-123456789abc.jpg" />
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/22345678-abcd-1234-abcd-123456789abc.jpg" />
+  `;
+  const row = parseDubicarsCurrentListing(markup, "https://www.dubicars.com/2024-nissan-patrol-marketing-copy-1000265.html");
+  assert.ok(row);
+  assert.equal(row.make, "Nissan");
+  assert.equal(row.model, "Patrol");
+  assert.equal(row.trim, "LE T1 5.6L");
+  assert.equal(row.engineCc, 5600);
+  assert.equal(row.powerHp, 400);
+  assert.equal(row.price, 215_000);
+  assert.equal(row.images.length, 2);
+});
+
+test("DubiCars ignores an implausible source horsepower typo instead of pricing it as certified power", () => {
+  const markup = `
+    <h1>New Toyota Land Cruiser VX 4.0L 2023</h1><div>AED 200,000</div>
+    <section>Model year 2023 Engine capacity 4 L Horsepower 4,000 HP Make Toyota Model Land Cruiser Trim VX 4.0L
+      Transmission Automatic Drive type Four Wheel Drive Vehicle type SUV/Crossover Fuel Type Petrol</section>
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/32345678-abcd-1234-abcd-123456789abc.jpg" />
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/42345678-abcd-1234-abcd-123456789abc.jpg" />
+  `;
+  const row = parseDubicarsCurrentListing(markup, "https://www.dubicars.com/2023-toyota-land-cruiser-vx-666205.html");
+  assert.ok(row);
+  assert.equal(row.model, "Land Cruiser");
+  assert.equal(row.powerHp, undefined);
 });
 
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
