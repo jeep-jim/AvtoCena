@@ -41,18 +41,24 @@ function rateColor(delta: number) {
   return "text-[var(--ac-muted)]";
 }
 
-function displayRate(rate: PublicCurrencyRate | undefined, amount: number) {
+function displayRate(rate: PublicCurrencyRate | undefined, amount: number, showRuble: boolean) {
   if (!rate) return "—";
   const value = Number(rate.effectiveRate || 0) * amount;
   const digits = amount > 1 ? 2 : value < 1 ? 4 : 2;
-  return `${new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(value)} ₽`;
+  const formatted = new Intl.NumberFormat("ru-RU", { minimumFractionDigits: 0, maximumFractionDigits: digits }).format(value);
+  return showRuble ? `${formatted} ₽` : formatted;
 }
 
 export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", className = "" }: Props) {
   const [loadedRates, setLoadedRates] = useState<PublicCurrencyRate[]>(suppliedRates || []);
   const [open, setOpen] = useState(false);
   const [initialCurrency, setInitialCurrency] = useState("JPY");
+  const [todayLabel, setTodayLabel] = useState("");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
+
+  useEffect(() => {
+    if (variant === "desktop") setTodayLabel(new Intl.DateTimeFormat("ru-RU").format(new Date()));
+  }, [variant]);
 
   useEffect(() => {
     if (suppliedRates?.length) {
@@ -99,7 +105,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
 
   return <>
     <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
-      {variant === "desktop" ? <h3 className="mb-3 text-lg font-black">Курс валют</h3> : null}
+      {variant === "desktop" ? <div className="mb-3 flex items-baseline gap-3"><h3 className="text-lg font-black">Курс валют</h3><span className="text-xs font-medium text-[var(--ac-muted)]">на {todayLabel || "сегодня"} в Рублях</span></div> : null}
       <div
         className={rail}
         style={{ WebkitOverflowScrolling: "touch" }}
@@ -121,7 +127,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
           >
             <CurrencyFlag currency={currency} className="h-4 w-6" />
             <span className="pointer-events-none mt-1 text-[9px] font-black">{currency}</span>
-            <span className={`pointer-events-none mt-0.5 block text-[10px] font-black ${rateColor(delta)}`}>{displayRate(rate, amount)}</span>
+            <span className={`pointer-events-none mt-0.5 block text-[10px] font-black ${rateColor(delta)}`}>{displayRate(rate, amount, variant !== "desktop")}</span>
           </button>;
         })}
       </div>
