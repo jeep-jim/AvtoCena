@@ -35,6 +35,7 @@ test("market workflow preserves diagnostics and retries quota failures after saf
   assert.match(cleanup, /storage\.deleteObjects/);
   assert.match(cleanup, /deleteListedObjects\(candidateObjects/);
   assert.match(cleanup, /reusedInitialObjectListing: true/);
+  assert.doesNotMatch(cleanup, /deletedCount \+= await/);
   assert.match(capacityWorkflow, /CATALOG_FAILED_GENERATION_MAX_DELETES: "300000"/);
   assert.match(capacityWorkflow, /CATALOG_FAILED_GENERATION_KEEP: "2"/);
   assert.match(capacityWorkflow, /gen_1786426826475_e390aa80/);
