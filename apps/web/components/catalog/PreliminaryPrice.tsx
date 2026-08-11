@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
 
-const PRELIMINARY_PRICE_INFO = "Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.";
+const PRELIMINARY_PRICE_INFO = "Предварительный расчёт: платежи, зависящие от неподтверждённой мощности силовой установки, пока не включены. Финальную стоимость подтвердит менеджер.";
 
 function money(value: number) {
   return new Intl.NumberFormat("ru-RU").format(Math.round(value));
