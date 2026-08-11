@@ -49,7 +49,7 @@ function completeCalculation(offer: Partial<VehicleOffer> | any) {
   );
 }
 
-function preliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
+function preliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) {
   const totalRub = positive(offer?.totalRub, 1_000_000_000);
   const kind = String(offer?.powertrainKind || "");
   const snapshot = offer?.calculationSnapshot || {};
@@ -58,7 +58,7 @@ function preliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
   const hasCar = breakdown.some((line: any) => String(line?.id || "") === "car" && positive(line?.amountRub) > 0);
   const hasKnownCustoms = breakdown.some((line: any) => String(line?.id || "") === "customs" && positive(line?.amountRub) > 0);
   return Boolean(totalRub
-    && ["electric", "series_hybrid", "other_hybrid"].includes(kind)
+    && ["combustion", "electric", "series_hybrid", "other_hybrid"].includes(kind)
     && String(offer?.calculationStatus || "") === "preliminary_power_pending"
     && snapshot.pricingConfidence === "preliminary"
     && snapshot.priceIncludesUtilizationFee === false
@@ -99,7 +99,7 @@ export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
     const { absoluteMaximumRub } = publicPriceLimits();
     return projectedVisibleRub <= absoluteMaximumRub ? projectedVisibleRub : 0;
   }
-  if (!completeCalculation(offer) && !preliminaryElectrifiedCalculation(offer)) return 0;
+  if (!completeCalculation(offer) && !preliminaryPowerPendingCalculation(offer)) return 0;
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return 0;
   const { absoluteMaximumRub } = publicPriceLimits();
@@ -134,7 +134,7 @@ function offerAgeYears(offer: Partial<VehicleOffer> | any) {
 export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): CatalogPublicPriority {
   const japanAuction = isJapanAuctionOffer(offer);
   const calculated = completeCalculation(offer);
-  const preliminary = preliminaryElectrifiedCalculation(offer);
+  const preliminary = preliminaryPowerPendingCalculation(offer);
   const visibleRub = catalogOfferVisibleRub(offer);
   const ageYears = offerAgeYears(offer);
   const powerHp = offerPowerHp(offer);
@@ -154,7 +154,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
 
   if (preliminary) {
-    return { eligible: true, tier: rawTotalRub <= preferredMaximumRub ? 8 : 9, reason: "preliminary_electrified_power_pending", ...base };
+    return { eligible: true, tier: rawTotalRub <= preferredMaximumRub ? 8 : 9, reason: "preliminary_power_pending", ...base };
   }
 
   const recent = ageYears <= maximumAgeYears;
