@@ -50,8 +50,23 @@ function canonicalUrl(value: unknown) {
   }
 }
 
+function autoHomePhotoIdentity(value: unknown) {
+  const source = text(value);
+  if (!source) return "";
+  try {
+    const url = new URL(source, "https://catalog.local");
+    if (!/(?:^|\.)autoimg\.cn$/i.test(url.hostname)) return "";
+    const filename = decodeURIComponent(url.pathname.split("/").pop() || "")
+      .replace(/^\d{2,4}x\d{1,4}_c\d+_/i, "")
+      .toLowerCase();
+    return filename.includes("autohomecar__") ? `autohome:${filename}` : "";
+  } catch { return ""; }
+}
+
 function catalogImageDedupKey(image: CatalogImageLike) {
   const sourceUrl = text(image.url);
+  const autohomeIdentity = autoHomePhotoIdentity(sourceUrl);
+  if (autohomeIdentity) return autohomeIdentity;
   // Source-URL identity must win for Mashina because source_urls_only stores
   // different delivery renditions as separate image records/checksums.
   if (/^https?:\/\/(?:storage|im)\.mashina\.kg\//i.test(sourceUrl)) {
@@ -118,24 +133,41 @@ export function rankedCatalogImageUrls(offer: any) {
   const images: CatalogImageLike[] = Array.isArray(offer?.images) ? offer.images : [];
   const candidates = images
     .map((image, index) => ({
-      image,
-      index,
-      url: stablePublicImageUrl(image),
-      key: catalogImageDedupKey(image),
-      score: catalogImageScore(image),
+      image, index, url: stablePublicImageUrl(image), key: catalogImageDedupKey(image), score: catalogImageScore(image),
+      sourceUrl: text(image.url),
     }))
-    .filter((candidate) => candidate.url && candidate.score >= 0)
-    .sort((left, right) => right.score - left.score || left.index - right.index);
+    .filter((candidate) => candidate.url && candidate.score >= 0);
 
-  const seenKeys = new Set<string>();
+  // AutoHome legacy public rows can contain one 900px image followed by 240px
+  // thumbnails even when a full-size exact gallery exists upstream. Do not render
+  // those tiny delivery renditions in the customer gallery. The exact-gallery
+  // refresh replaces them in storage; this display guard prevents blur meanwhile.
+  const displayCandidates = candidates.filter((candidate) =>
+    !/^https?:\/\/g\.autoimg\.cn\/@img\/.*\/(?:240|300|320|360|400)x0_c\d+_/i.test(candidate.sourceUrl));
+  const usable = displayCandidates.length ? displayCandidates : candidates;
+
+  // Preserve source gallery/cover order. For duplicate delivery renditions of the
+  // same source photo, keep the highest-quality rendition but retain the original
+  // photo's first source position. Global score sorting used to move dashboards or
+  // inspection frames ahead of a source-designated exterior cover.
+  const groups = new Map<string, { firstIndex: number; best: typeof usable[number] }>();
+  for (const candidate of usable) {
+    const renderedUrl = canonicalUrl(candidate.url);
+    const key = candidate.key || (renderedUrl ? `rendered:${renderedUrl}` : `index:${candidate.index}`);
+    const existing = groups.get(key);
+    const directAutoHome = /^https?:\/\/car\d+\.autoimg\.cn\/cardfs\/product\//i.test(candidate.sourceUrl) ? 8 : 0;
+    const existingDirect = existing && /^https?:\/\/car\d+\.autoimg\.cn\/cardfs\/product\//i.test(existing.best.sourceUrl) ? 8 : 0;
+    if (!existing) groups.set(key, { firstIndex: candidate.index, best: candidate });
+    else if (candidate.score + directAutoHome > existing.best.score + existingDirect) groups.set(key, { firstIndex: existing.firstIndex, best: candidate });
+  }
+
   const seenUrls = new Set<string>();
   const result: string[] = [];
-  for (const candidate of candidates) {
-    const renderedUrl = canonicalUrl(candidate.url);
-    if ((candidate.key && seenKeys.has(candidate.key)) || (renderedUrl && seenUrls.has(renderedUrl))) continue;
-    if (candidate.key) seenKeys.add(candidate.key);
+  for (const group of [...groups.values()].sort((a, b) => a.firstIndex - b.firstIndex)) {
+    const renderedUrl = canonicalUrl(group.best.url);
+    if (renderedUrl && seenUrls.has(renderedUrl)) continue;
     if (renderedUrl) seenUrls.add(renderedUrl);
-    result.push(candidate.url);
+    result.push(group.best.url);
     if (result.length >= 30) break;
   }
   return result;
