@@ -33,6 +33,7 @@ jobs:
         run: docker push "$IMAGE"
 
       - name: Deploy Serverless Container
+        id: deploy
         uses: yc-actions/yc-sls-container-deploy@v4
         with:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
@@ -64,3 +65,11 @@ jobs:
             YC_OBJECT_STORAGE_ACCESS_KEY_ID=${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
             YC_OBJECT_STORAGE_SECRET_ACCESS_KEY=${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
             YC_OBJECT_STORAGE_PREFIX=${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+      - name: Warm public catalog and first offer
+        run: |
+          catalog_json="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
+          offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"
+          test -n "$offer_id"
+          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null 'https://avtocena.com/cars'
+          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null "https://avtocena.com/cars/offer/$offer_id"

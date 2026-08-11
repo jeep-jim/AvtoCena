@@ -40,9 +40,12 @@ test("offer navigation stays visibly pending and warms immutable lookup data", (
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
   assert.match(storage, /offerLookupCacheGeneration !== manifest\.generationId/);
+  assert.match(storage, /CATALOG_MANIFEST_CACHE_MS \|\| 60_000/);
 });
 
 test("production keeps one warm container and serves navigation bursts in-process", () => {
   assert.match(deploy, /revision-concurrency: 8/);
   assert.match(deploy, /revision-provisioned: 1/);
+  assert.match(deploy, /Warm public catalog and first offer/);
+  assert.match(deploy, /cars\/offer\/\$offer_id/);
 });

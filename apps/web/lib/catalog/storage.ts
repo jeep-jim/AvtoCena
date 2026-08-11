@@ -158,7 +158,11 @@ function generationPath(generationId: string, rel: string) { return `catalog/gen
 function uniqueText(values: unknown[]) { return [...new Set(values.map(cleanFacet).filter(Boolean))]; }
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
 export function chunkName(index: number) { return `chunk-${String(index).padStart(4, "0")}`; }
-const MANIFEST_CACHE_MS = Math.max(250, Number(process.env.CATALOG_MANIFEST_CACHE_MS || 2_000));
+// The manifest is tiny but a signed cross-service Object Storage GET can take
+// several seconds after a container resumes. Catalog publications are atomic
+// and tolerate a short visibility delay, so keep it in the warm process long
+// enough for a real browsing session instead of re-reading it on every tap.
+const MANIFEST_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_MANIFEST_CACHE_MS || 60_000));
 let manifestCache: { expiresAt: number; promise: Promise<CatalogManifest> } | null = null;
 async function readManifest(): Promise<CatalogManifest> {
   const now = Date.now();
@@ -245,6 +249,15 @@ async function readSearchProjection(generationId: string, market: string) {
   return promise;
 }
 function projectionNumber(value: unknown, missing: number) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : missing; }
+function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
+  const utilizationPowerKw = projectionNumber(row.utilizationPowerKw, 0);
+  if (utilizationPowerKw) return utilizationPowerKw * 1.35962;
+  const powertrainKind = cleanFacet(row.powertrainKind).toLowerCase();
+  const fuel = cleanFacet(row.fuel).toLowerCase();
+  if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)
+    || /electric|hybrid|phev|hev|bev|электро|гибрид/.test(fuel)) return 0;
+  return projectionNumber(row.powerHp, 0);
+}
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
@@ -263,8 +276,16 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.mileageTo && projectionNumber(row.mileageKm, Infinity) > params.mileageTo) return false;
   if (params.engineFrom && projectionNumber(row.engineCc, 0) < params.engineFrom) return false;
   if (params.engineTo && projectionNumber(row.engineCc, Infinity) > params.engineTo) return false;
-  if (params.powerFrom && projectionNumber(row.powerHp, 0) < params.powerFrom) return false;
-  if (params.powerTo && projectionNumber(row.powerHp, Infinity) > params.powerTo) return false;
+  if (params.powerFrom || params.powerTo) {
+    // This public control explains the utilization-fee threshold, so EVs and
+    // hybrids must be filtered by the certified calculation power rather than
+    // by their much larger short peak rating. Missing certified power remains
+    // excluded from an upper-bound query instead of being presented as eligible.
+    const utilizationPowerHp = projectionUtilizationPowerHp(row);
+    if (!utilizationPowerHp) return false;
+    if (params.powerFrom && utilizationPowerHp < params.powerFrom) return false;
+    if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
+  }
   if (params.fuel && lower(row.fuel) !== lower(params.fuel)) return false;
   if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
   if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;
