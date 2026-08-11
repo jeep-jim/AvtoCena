@@ -1,0 +1,26 @@
+name: Audit AutoHome known exact gallery depth 20260811
+
+on:
+  push:
+    branches: [audit/autohome-known-gallery-depth-20260811]
+    paths:
+      - .github/workflows/audit-autohome-known-gallery-depth-20260811.yml
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: audit/autohome-known-gallery-depth-20260811
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe known exact spec galleries
+        env:
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: '5'
+        run: |
+          npx tsx -e '(async()=>{ const {autohomeNewExactSource}=await import("./apps/web/lib/catalog/autohome-new-exact-source.ts"); const cases=[["49598",2021],["51210",2021],["48719",2021],["77137",2026]]; const out=[]; for(const [id,year] of cases){ const offer={id:`probe-${id}`,sourceId:"autohome_new_china_open",sourceOfferId:id,market:"china",offerType:"fixed",status:"active",catalogKind:"listing",sourceTitle:"probe",make:"",model:"",trim:"",year,sourcePrice:100000,sourceCurrency:"CNY",priceMode:"fixed",images:[],totalRub:null,calculationStatus:"needs_data",firstSeenAt:new Date().toISOString(),updatedAt:new Date().toISOString(),operational:{sourceUrl:`https://www.autohome.com.cn/spec/${id}/`,raw:{listing:{specId:id,trimTitle:`${year}款`,year,sourcePriceCny:100000,sourceUrl:`https://www.autohome.com.cn/spec/${id}/`}}}}; try{ const imgs=await autohomeNewExactSource.fetchImages(offer as any); out.push({id,year,count:imgs.length,galleryUrl:(offer as any).operational?.raw?.galleryUrl,exactGalleryImageCount:(offer as any).operational?.raw?.exactGalleryImageCount,title:(offer as any).sourceTitle}); }catch(e){ out.push({id,year,error:String((e as Error)?.message||e)}); }} console.log(JSON.stringify(out,null,2)); if(!out.some(x=>Number((x as any).count)>=5)) throw new Error("no_known_deep_gallery"); })()'
