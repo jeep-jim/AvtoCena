@@ -4,7 +4,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
 
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
-const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { dubicarsUaeCurrentSource } = await import("../apps/web/lib/catalog/dubicars-current-source.ts");
@@ -194,9 +194,10 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
       offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
     }
     let calculated;
-    try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
+    try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithPreliminaryPowerPricing(offer)); }
     catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: String(error?.message || error) }); reject(rejections, "calculation_exception"); continue; }
-    if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) { reject(rejections, "calculation_pending"); continue; }
+    const preliminaryPowerPending = isPreliminaryPowerPendingCalculation(calculated);
+    if (!exactCalculation(calculated) && !preliminaryPowerPending) { reject(rejections, "calculation_pending"); continue; }
     calculated.status = "active";
     calculated.operational = {
       ...(calculated.operational || {}),
@@ -205,7 +206,7 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
         recoveryExactSourceUrl: true,
         recoveryExactPhotoIdentity: true,
         recoveryCalculatedRub: true,
-        recoveryPreliminaryPowerPending: isPreliminaryElectrifiedCalculation(calculated),
+        recoveryPreliminaryPowerPending: preliminaryPowerPending,
         recoveryBodySourceOnly: true,
         recoveryDirectExactAdapter: true,
       },
@@ -219,7 +220,7 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
 
 const offers = [...accepted.values()].sort(quality).slice(0, target);
 const report = {
-  version: 1,
+  version: 2,
   mode: "direct_exact_adapter_recovery",
   market,
   sourceId: source.sourceId,
@@ -234,7 +235,7 @@ const report = {
   documentedPowerCount: offers.filter((offer) => String(offer.powerDataConfidence || "") === "documented").length,
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
-  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
+  preliminaryCount: offers.filter(isPreliminaryPowerPendingCalculation).length,
   imageStats: {
     min: offers.length ? Math.min(...offers.map((offer) => offer.images.length)) : 0,
     max: offers.length ? Math.max(...offers.map((offer) => offer.images.length)) : 0,
