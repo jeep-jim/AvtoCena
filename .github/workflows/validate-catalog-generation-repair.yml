@@ -24,6 +24,7 @@ jobs:
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
       CATALOG_REPAIR_SOURCE_GENERATION: gen_1786426826475_e390aa80
+      CATALOG_REPAIR_MARKETS: japan
       CATALOG_REPAIR_DRY_RUN: "1"
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +35,9 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --check scripts/catalog-generation-repair.mjs
-      - name: Dry-run exact previous generation through current canonical gates
+      - name: Dry-run Japan repair while preserving current other six markets
         run: npx tsx scripts/catalog-generation-repair.mjs | tee catalog-generation-repair-dry.json
-      - name: Assert repair restores material inventory without weakening quality
+      - name: Assert selective repair restores Japan and preserves canonical current markets
         run: |
           node - <<'NODE'
           const fs=require('fs');
@@ -44,12 +45,16 @@ jobs:
           const start=text.indexOf('{');
           if(start<0) throw new Error('repair report missing');
           const r=JSON.parse(text.slice(start));
-          const floors={korea:2200,china:6000,japan:500,uae:190,europe:4500,georgia:30,kyrgyzstan:1900};
+          if(JSON.stringify(r.repairMarkets)!==JSON.stringify(['japan'])) throw new Error(`unexpected repairMarkets:${JSON.stringify(r.repairMarkets)}`);
+          if(r.markets?.japan?.sourceMode!=='source_generation' || Number(r.markets?.japan?.canonical||0)!==520) throw new Error(`japan_restore_invalid:${JSON.stringify(r.markets?.japan)}`);
+          const floors={korea:2200,china:4000,uae:190,europe:4500,georgia:30,kyrgyzstan:1900};
           for(const [market,floor] of Object.entries(floors)){
             const m=r.markets?.[market];
-            if(!m || Number(m.canonical||0)<floor) throw new Error(`${market}:canonical_too_low:${m?.canonical}:${floor}`);
+            if(!m || m.sourceMode!=='current') throw new Error(`${market}:not_current_preservation`);
+            if(Number(m.canonical||0)<floor) throw new Error(`${market}:canonical_too_low:${m?.canonical}:${floor}`);
             if(Number(m.maxPerExactModel||0)>20) throw new Error(`${market}:model_cap:${m.maxPerExactModel}`);
           }
+          if(Number(r.markets.japan.maxPerExactModel||0)>20) throw new Error(`japan:model_cap:${r.markets.japan.maxPerExactModel}`);
           if(r.dryRun!==true) throw new Error('validation unexpectedly not dry-run');
           console.log(JSON.stringify(r.markets,null,2));
           NODE
