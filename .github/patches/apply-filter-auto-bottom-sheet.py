@@ -17,15 +17,13 @@ insert = '''function catalogQuery(draft: FilterDraft, sortKey: SortKey, sortDire
   add("mileageFrom", draft.mileageFrom); add("mileageTo", draft.mileageTo);
   add("engineFrom", draft.engineFrom); add("engineTo", draft.engineTo); add("powerTo", draft.powerTo);
   const sort = sortParam(sortKey, sortDirection);
-  if (sort && sort !== "updatedAt") params.set("sort", sort);
+  if (sort) params.set("sort", sort);
   return params.toString();
 }
 
 '''
 if anchor not in text: raise SystemExit('sortParam anchor missing')
 text = text.replace(anchor, insert + anchor, 1)
-
-# Move helper below sortParam because catalogQuery calls it as a function declaration (hoisted); this is valid JS/TS.
 
 old_actions_start = 'function FilterActions({ mobile = false }: { mobile?: boolean }) {'
 start = text.find(old_actions_start)
@@ -89,13 +87,11 @@ old_footer = '''      <div className="shrink-0 border-t border-white/5 bg-[var(-
 if old_footer not in text: raise SystemExit('mobile footer missing')
 text = text.replace(old_footer, '', 1)
 
-# Forms are navigation containers now; prevent Enter from creating an accidental submit/reload.
 text = text.replace('<form key={`desktop-${formKey}`} method="get"', '<form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()}', 1)
 text = text.replace('<form key={`mobile-${formKey}`} method="get" role="dialog"', '<form key={`mobile-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} role="dialog"', 1)
 
 path.write_text(text)
 
-# Update regression expectations: there are no apply buttons; filters update the URL automatically.
 test = Path('tests/catalog-filter-ui.test.ts')
 t = test.read_text()
 old = '''test("catalog filter forms can be applied and show the active query", () => {
