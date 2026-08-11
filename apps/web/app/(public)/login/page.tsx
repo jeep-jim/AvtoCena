@@ -68,6 +68,21 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
         html[data-theme="light"] .ac-login-dealers{background:#171b24!important;border-color:#171b24!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
         html[data-theme="light"] .ac-login-dealers *{color:#fff!important;-webkit-text-fill-color:#fff!important}
 
+        html[data-theme="light"] .ac-login-card{background:#fff!important;background-image:none!important;border:1px solid rgba(30,36,48,.11)!important;color:#171b24!important}
+        html[data-theme="light"] .ac-login-eyebrow{color:#c91f2d!important;-webkit-text-fill-color:#c91f2d!important}
+        html[data-theme="light"] .ac-login-title{color:#171b24!important;-webkit-text-fill-color:#171b24!important}
+        html[data-theme="light"] .ac-login-description{color:#505a6a!important;-webkit-text-fill-color:#505a6a!important}
+        html[data-theme="light"] .ac-login-telegram-shell{background:#eef1f5!important;border:1px solid rgba(30,36,48,.08)!important}
+        html[data-theme="light"] .ac-login-telegram-placeholder{background:#fff2bf!important;border:1px solid #e5c65a!important;color:#6f5200!important;-webkit-text-fill-color:#6f5200!important}
+        html[data-theme="light"] .ac-login-details{background:#f4f6f9!important;border-color:rgba(30,36,48,.12)!important}
+        html[data-theme="light"] .ac-login-details-summary{color:#394251!important;-webkit-text-fill-color:#394251!important}
+        html[data-theme="light"] .ac-login-field-label{color:#667183!important;-webkit-text-fill-color:#667183!important}
+        html[data-theme="light"] .ac-login-input{background:#e9edf3!important;border-color:rgba(30,36,48,.14)!important;color:#171b24!important;-webkit-text-fill-color:#171b24!important}
+        html[data-theme="light"] .ac-login-input::placeholder{color:#778191!important;-webkit-text-fill-color:#778191!important;opacity:1!important}
+        html[data-theme="light"] .ac-login-note{background:#edf0f5!important;border-color:rgba(30,36,48,.11)!important;color:#4e5869!important;-webkit-text-fill-color:#4e5869!important}
+        html[data-theme="light"] .ac-login-error{background:#f9e3e6!important;color:#941c28!important;-webkit-text-fill-color:#941c28!important}
+        html[data-theme="light"] .ac-login-submit,html[data-theme="light"] .ac-login-submit *{color:#fff!important;-webkit-text-fill-color:#fff!important}
+
         @media(max-width:560px){
           .ac-login-header-actions{gap:.4rem}
           .ac-login-dealers,.ac-login-home{height:38px!important;padding-left:.65rem!important;padding-right:.65rem!important;font-size:12px!important}
