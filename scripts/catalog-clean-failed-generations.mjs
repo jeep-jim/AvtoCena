@@ -4,6 +4,9 @@ const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts")
 
 const reportFile = process.env.CATALOG_FAILED_GENERATION_CLEANUP_REPORT || "catalog-failed-generation-cleanup-report.json";
 const maxDeletes = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_MAX_DELETES || 100_000));
+const keepGenerations = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_KEEP || 2));
+const configuredProtectedGenerations = new Set(String(process.env.CATALOG_FAILED_GENERATION_PROTECT || "")
+  .split(",").map((value) => value.trim()).filter(Boolean));
 const storage = getJsonStorage();
 
 if (!storage.listObjects || !storage.deletePrefix) {
@@ -15,17 +18,28 @@ function generationIdFromKey(key) {
 }
 
 const startedAt = new Date().toISOString();
-const manifest = await readDataJson("catalog/manifest.json", { generationId: "", markets: {} });
+const [manifest, internalManifest] = await Promise.all([
+  readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
+  readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
+]);
 const liveGeneration = String(manifest?.generationId || "");
 if (!liveGeneration) throw new Error("failed_generation_cleanup_live_manifest_missing");
 
-const objects = await storage.listObjects("catalog/generations");
-const generations = [...new Set(objects.map((item) => generationIdFromKey(item.key)).filter(Boolean))];
-const candidates = generations.filter((generationId) => generationId !== liveGeneration);
+const [objects, internalObjects] = await Promise.all([
+  storage.listObjects("catalog/generations"),
+  storage.listObjects("catalog/internal/offers"),
+]);
+const generations = [...new Set(objects.map((item) => generationIdFromKey(item.key)).filter(Boolean))]
+  .sort((left, right) => Number(right.match(/^gen_(\d+)_/)?.[1] || 0) - Number(left.match(/^gen_(\d+)_/)?.[1] || 0));
+const protectedGenerations = new Set([liveGeneration, ...generations.slice(0, keepGenerations), ...configuredProtectedGenerations]);
+const candidates = generations.filter((generationId) => !protectedGenerations.has(generationId));
 const candidateObjects = objects.filter((item) => candidates.includes(generationIdFromKey(item.key)));
+const protectedInternalPaths = new Set(Object.values(internalManifest?.sources || {})
+  .flatMap((source) => Array.isArray(source?.chunks) ? source.chunks.map(String) : []));
+const orphanInternalObjects = internalObjects.filter((item) => item?.key && !protectedInternalPaths.has(String(item.key)));
 
-if (candidateObjects.length > maxDeletes) {
-  throw new Error(`failed_generation_cleanup_limit_${candidateObjects.length}_exceeds_${maxDeletes}`);
+if (candidateObjects.length + orphanInternalObjects.length > maxDeletes) {
+  throw new Error(`failed_generation_cleanup_limit_${candidateObjects.length + orphanInternalObjects.length}_exceeds_${maxDeletes}`);
 }
 
 const errors = [];
@@ -37,16 +51,28 @@ for (const generationId of candidates) {
     errors.push({ generationId, error: String(error?.message || error) });
   }
 }
+let deletedOrphanInternalObjects = 0;
+for (const object of orphanInternalObjects) {
+  try {
+    await storage.deleteJson(object.key);
+    deletedOrphanInternalObjects++;
+  } catch (error) {
+    errors.push({ internalObject: object.key, error: String(error?.message || error) });
+  }
+}
 
 const report = {
   version: 1,
   startedAt,
   finishedAt: new Date().toISOString(),
   liveGeneration,
+  currentInternalGeneration: String(internalManifest?.generationId || "") || null,
   discoveredGenerations: generations.length,
+  protectedGenerations: [...protectedGenerations],
   removedGenerations: candidates,
-  plannedObjects: candidateObjects.length,
-  deletedObjects: deleted,
+  plannedObjects: candidateObjects.length + orphanInternalObjects.length,
+  deletedObjects: deleted + deletedOrphanInternalObjects,
+  removedOrphanInternalObjects: deletedOrphanInternalObjects,
   preservedImages: true,
   preservedInternalCandidatePools: true,
   errors,
