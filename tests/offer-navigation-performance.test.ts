@@ -69,8 +69,10 @@ test("catalog pricing shares one short-lived market-settings read", () => {
 
 test("catalog reads a current one-hop projection before generation indexes", () => {
   assert.match(storage, /catalog\/public\/projection/);
+  assert.match(storage, /CURRENT_ALL_MARKETS_PROJECTION = "all"/);
   assert.match(storage, /CURRENT_FACETS_PATH/);
-  assert.match(storage, /readCurrentSearchProjection\(currentMarket\)/);
+  assert.match(storage, /readCurrentSearchProjection\(currentProjectionScope\)/);
+  assert.match(storage, /currentProjectionPath\(CURRENT_ALL_MARKETS_PROJECTION\)/);
   assert.match(storage, /if \(current\.generationId\)/);
   assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), projection, false\)/);
   assert.match(storage, /export async function publishCurrentCatalogReadModels/);
