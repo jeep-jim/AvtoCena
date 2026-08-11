@@ -5,8 +5,9 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { BrandMark } from "@/components/brand/BrandMark";
 
 const START_EVENT = "avtocena:navigation-start";
-const MIN_VISIBLE_MS = 260;
-const MAX_VISIBLE_MS = 8000;
+const REVEAL_DELAY_MS = 180;
+const MIN_VISIBLE_MS = 180;
+const MAX_VISIBLE_MS = 4500;
 
 const publicLayoutFixes = `
 button[aria-label^="Почему есть фильтр"],
@@ -212,9 +213,10 @@ function sameDocumentHashNavigation(anchor:HTMLAnchorElement,url:URL){return url
 
 function RoutePreloaderInner(){
  const pathname=usePathname();const searchParams=useSearchParams();const router=useRouter();const [visible,setVisible]=useState(false);
- const startedAtRef=useRef(0);const routeKey=`${pathname}?${searchParams.toString()}`;const previousRouteKeyRef=useRef(routeKey);const warmedRoutesRef=useRef(new Set<string>());const hideTimerRef=useRef<number|null>(null);const safetyTimerRef=useRef<number|null>(null);
- const clearTimers=()=>{if(hideTimerRef.current!==null)window.clearTimeout(hideTimerRef.current);if(safetyTimerRef.current!==null)window.clearTimeout(safetyTimerRef.current);hideTimerRef.current=null;safetyTimerRef.current=null};
- const show=()=>{clearTimers();startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)};
+ const startedAtRef=useRef(0);const routeKey=`${pathname}?${searchParams.toString()}`;const previousRouteKeyRef=useRef(routeKey);const warmedRoutesRef=useRef(new Set<string>());const revealTimerRef=useRef<number|null>(null);const hideTimerRef=useRef<number|null>(null);const safetyTimerRef=useRef<number|null>(null);
+ const clearTimers=()=>{if(revealTimerRef.current!==null)window.clearTimeout(revealTimerRef.current);if(hideTimerRef.current!==null)window.clearTimeout(hideTimerRef.current);if(safetyTimerRef.current!==null)window.clearTimeout(safetyTimerRef.current);revealTimerRef.current=null;hideTimerRef.current=null;safetyTimerRef.current=null};
+ const hide=()=>{clearTimers();setVisible(false)};
+ const show=()=>{clearTimers();revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};
  useEffect(()=>{
   const handleStart=()=>show();
   const handleClick=(event:MouseEvent)=>{
@@ -234,8 +236,8 @@ function RoutePreloaderInner(){
   window.addEventListener(START_EVENT,handleStart);document.addEventListener("click",handleClick,true);document.addEventListener("submit",handleSubmit,true);document.addEventListener("pointerover",warm,true);document.addEventListener("focusin",warm,true);
   return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
- useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>{setVisible(false);clearTimers()},delay)},[routeKey,visible]);
- return <div className={`ac-route-loader fixed inset-0 z-[2147483646] grid place-items-center bg-[#080a11]/88 px-6 backdrop-blur-xl transition-opacity duration-200 ${visible?"pointer-events-auto opacity-100":"pointer-events-none opacity-0"}`} aria-hidden={!visible} aria-live="polite"><div className="flex flex-col items-center text-center"><div className="ac-route-loader__mark relative grid h-24 w-24 place-items-center rounded-[2rem] border border-white/12 bg-white/[0.06]"><BrandMark className="h-16 w-16"/></div><div className="mt-5 grid grid-cols-4 gap-2" aria-hidden="true">{["+","−","=","₽"].map((symbol,index)=><span key={symbol} className="ac-route-loader__key grid h-9 w-9 place-items-center rounded-xl border border-white/12 bg-white/[0.075] text-base font-black text-white" style={{animationDelay:`${index*150}ms`}}>{symbol}</span>)}</div><div className="mt-4 text-sm font-black text-white">Подбираем автомобили</div><div className="mt-1 text-xs font-bold text-white/45">АвтоЦена загружает подходящие варианты</div></div></div>;
+ useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(revealTimerRef.current!==null){hide();return}if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>hide(),delay)},[routeKey,visible]);
+ return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-150 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite"><div className="ac-route-loader__bar h-[3px] w-full origin-left bg-red-500 shadow-[0_1px_8px_rgba(239,68,68,.45)]"/><div className="mx-auto mt-2 flex w-fit max-w-[calc(100vw-24px)] items-center gap-2 rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)]/95 px-3 py-2 text-[var(--ac-text)] shadow-lg backdrop-blur-md"><BrandMark className="h-5 w-5 shrink-0"/><span className="text-xs font-black">Загружаем страницу</span><span className="ac-route-loader__dot h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" aria-hidden="true"/></div></div>;
 }
 
 export function RoutePreloader(){return <><style dangerouslySetInnerHTML={{__html:publicLayoutFixes}}/><Suspense fallback={null}><RoutePreloaderInner/></Suspense></>}
