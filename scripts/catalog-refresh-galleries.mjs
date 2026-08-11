@@ -66,9 +66,10 @@ async function refreshCandidate(index) {
     const fresh = credibleCatalogImages(Array.isArray(fetched) ? fetched : []);
     // Never shrink or clear a working gallery. A complete fresh gallery replaces the
     // old one; a partial response is only merged into the existing correct photos.
-    const replaced = fresh.length >= Math.max(4, before);
+    const forceReplace = offer.operational?.galleryForceReplace === true;
+    const replaced = forceReplace || fresh.length >= Math.max(4, before);
     const merged = replaced ? mergeImages(fresh, []) : mergeImages(fresh, previous);
-    offer.images = merged.length >= before ? merged : previous;
+    offer.images = forceReplace ? merged : merged.length >= before ? merged : previous;
     offer.operational = {
       ...offer.operational,
       galleryVerified: fresh.length >= 2 || Boolean(offer.operational?.galleryVerified),
@@ -76,6 +77,7 @@ async function refreshCandidate(index) {
       gallerySourceImageCount: fresh.length,
       galleryImageCount: offer.images.length,
       galleryReplaced: replaced,
+      galleryForceReplace: false,
     };
     byId.set(offer.id, offer);
     report.refreshed++;
