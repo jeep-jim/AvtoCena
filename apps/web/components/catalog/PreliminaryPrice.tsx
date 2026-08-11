@@ -86,10 +86,12 @@ export function PreliminaryPrice({
       onClick={panel ? togglePanelInfo : undefined}
       onKeyDown={panel ? (event) => { if (event.key === "Enter" || event.key === " ") togglePanelInfo(event); } : undefined}
     >
-      <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em]`} style={{ color: panel ? panelText : undefined }}>
-        {label}
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em]`} style={{ color: panel ? panelText : undefined }}>
+          {label}
+        </div>
       </div>
-      <div className={dense ? "mt-1 sm:mt-1.5" : "mt-1.5"}>
+      <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
         <div className={`ac-price ac-price--preliminary min-w-0 whitespace-nowrap font-black leading-none tracking-[-0.05em] ${priceClassName}`} style={{ color: priceColor }}>
           {totalRub > 0 ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
         </div>
