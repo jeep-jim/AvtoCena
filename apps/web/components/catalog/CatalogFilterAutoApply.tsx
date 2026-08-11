@@ -1,0 +1,105 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+
+const FILTER_FORM_SELECTOR = ".ac-catalog-filter-panel, .ac-catalog-filter-drawer";
+
+function formParams(form: HTMLFormElement) {
+  const params = new URLSearchParams(window.location.search);
+  const data = new FormData(form);
+  const present = new Set<string>();
+
+  for (const [key, raw] of data.entries()) {
+    if (typeof raw !== "string") continue;
+    present.add(key);
+    const value = raw.trim();
+    if (value) params.set(key, value);
+    else params.delete(key);
+  }
+
+  for (const name of ["fuel", "powerTo"]) {
+    if (!form.querySelector(`input[type="checkbox"][name="${name}"]`)) continue;
+    if (!present.has(name)) params.delete(name);
+  }
+
+  params.delete("brand");
+  params.delete("page");
+  params.delete("advanced");
+  return params;
+}
+
+export function CatalogFilterAutoApply() {
+  const router = useRouter();
+  const debounceRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const navigateFrom = (form: HTMLFormElement) => {
+      const current = new URLSearchParams(window.location.search);
+      const currentMake = current.get("make") || current.get("brand") || "";
+      const params = formParams(form);
+      const nextMake = params.get("make") || "";
+      if (currentMake !== nextMake) params.delete("model");
+
+      current.delete("brand");
+      current.delete("page");
+      current.delete("advanced");
+      if (currentMake !== nextMake) current.delete("model");
+
+      const next = params.toString();
+      if (current.toString() === next) return;
+      router.replace(next ? `/cars?${next}` : "/cars", { scroll: false });
+    };
+
+    const schedule = (form: HTMLFormElement, delay = 0) => {
+      if (debounceRef.current !== null) window.clearTimeout(debounceRef.current);
+      debounceRef.current = window.setTimeout(() => {
+        debounceRef.current = null;
+        window.requestAnimationFrame(() => navigateFrom(form));
+      }, delay);
+    };
+
+    const onSubmit = (event: SubmitEvent) => {
+      const form = event.target instanceof HTMLFormElement ? event.target : null;
+      if (!form?.matches(FILTER_FORM_SELECTOR)) return;
+      event.preventDefault();
+      schedule(form);
+    };
+
+    const onChange = (event: Event) => {
+      const target = event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement ? event.target : null;
+      const form = target?.closest<HTMLFormElement>(FILTER_FORM_SELECTOR);
+      if (!target || !form || !target.name) return;
+      schedule(form);
+    };
+
+    const onInput = (event: Event) => {
+      const input = event.target instanceof HTMLInputElement ? event.target : null;
+      const form = input?.closest<HTMLFormElement>(FILTER_FORM_SELECTOR);
+      if (!input || !form || !input.name) return;
+      if (!["search", "text", "number", "tel"].includes(input.type) && !input.inputMode) return;
+      schedule(form, 380);
+    };
+
+    const onClick = (event: MouseEvent) => {
+      const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>(".ac-filter-option") : null;
+      const form = button?.closest<HTMLFormElement>(FILTER_FORM_SELECTOR);
+      if (!button || !form) return;
+      schedule(form);
+    };
+
+    document.addEventListener("submit", onSubmit, true);
+    document.addEventListener("change", onChange, true);
+    document.addEventListener("input", onInput, true);
+    document.addEventListener("click", onClick, true);
+    return () => {
+      document.removeEventListener("submit", onSubmit, true);
+      document.removeEventListener("change", onChange, true);
+      document.removeEventListener("input", onInput, true);
+      document.removeEventListener("click", onClick, true);
+      if (debounceRef.current !== null) window.clearTimeout(debounceRef.current);
+    };
+  }, [router]);
+
+  return null;
+}

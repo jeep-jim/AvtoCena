@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
-// The reserve registry is only for canonical names and logos; the rail renders live brands passed by catalog facets.
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
@@ -38,15 +37,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   />;
 }
 
-function BrandTile({
-  brand,
-  href,
-  onClick,
-}: {
-  brand: string;
-  href: string;
-  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-}) {
+function BrandTile({ brand, href, onClick }: { brand: string; href: string; onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return <Link
     href={href}
     onClick={onClick}
@@ -58,14 +49,14 @@ function BrandTile({
   </Link>;
 }
 
-export function BrandLogoRail({ brands }: { brands: string[] }) {
+export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resultCount?: number }) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
   const activeBrands = useMemo(() => {
-    // Source-localized make names (for example Korean Encar labels) are canonicalized before the live-only filter.
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
@@ -80,6 +71,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
   }, [activeBrands, query]);
   const homeBrandDirectory = pathname === "/";
+  const selectedBrand = !homeBrandDirectory ? canonicalCatalogBrand(searchParams.get("make") || searchParams.get("brand") || "") : "";
 
   useEffect(() => {
     if (!open) return;
@@ -93,6 +85,16 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
   const close = () => {
     setOpen(false);
     setQuery("");
+  };
+
+  const clearSelectedBrand = () => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("make");
+    params.delete("brand");
+    params.delete("model");
+    params.delete("page");
+    const queryString = params.toString();
+    router.push(queryString ? `/cars?${queryString}` : "/cars");
   };
 
   const hrefForBrand = (brand: string) => homeBrandDirectory
@@ -114,6 +116,19 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
     if (closeAfter) close();
     router.push(`/cars?${params.toString()}`);
   };
+
+  if (selectedBrand) {
+    return <section className="ac-brand-rail mt-5 flex min-h-[94px] items-center justify-between gap-4 rounded-[1.6rem] p-4" aria-label={`Выбрана марка ${selectedBrand}`}>
+      <div className="flex min-w-0 items-center gap-3">
+        <BrandLogoVisual brand={selectedBrand} />
+        <div className="min-w-0">
+          <div className="truncate text-base font-black text-[var(--ac-text)]">{selectedBrand}</div>
+          {Number.isFinite(resultCount) ? <div className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Найдено: {resultCount}</div> : null}
+        </div>
+      </div>
+      <button type="button" onClick={clearSelectedBrand} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black text-red-500" aria-label={`Сбросить марку ${selectedBrand}`}>×</button>
+    </section>;
+  }
 
   return <>
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
