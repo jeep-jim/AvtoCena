@@ -24,7 +24,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-certified-power-apply
+  group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
 env:
