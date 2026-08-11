@@ -142,3 +142,33 @@ test("Casper Electric Inspiration matches the documented European Inster homolog
     make: "현대", model: "캐스퍼", trim: "인스퍼레이션", year: 2025, powertrainKind: "electric", powerKw: 71,
   }), false);
 });
+
+test("negative trim and drive qualifiers allow a documented 2WD variant but reject AWD", () => {
+  const twoWheelDriveReference: CertifiedPowerReference = {
+    id: "hyundai-ioniq6-long-range-2wd",
+    make: "Hyundai",
+    model: "Ioniq6",
+    trimContains: ["롱레인지"],
+    trimNotContains: ["AWD", "4WD"],
+    driveNotContains: ["AWD"],
+    yearFrom: 2023,
+    yearTo: 2025,
+    powertrainKind: "electric",
+    peakPowerKw: 168,
+    power30MinKw: 56,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:8252/ALD,8252/AMB",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(twoWheelDriveReference, {
+    make: "현대", model: "아이오닉6", trim: "롱레인지 프레스티지", year: 2024, powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(twoWheelDriveReference, {
+    make: "현대", model: "아이오닉6", trim: "롱레인지 AWD 프레스티지", year: 2024, powertrainKind: "electric",
+  }), false);
+  assert.equal(certifiedPowerReferenceMatches(twoWheelDriveReference, {
+    make: "현대", model: "아이오닉6", trim: "롱레인지 프레스티지", drive: "awd", year: 2024, powertrainKind: "electric",
+  }), false);
+});
