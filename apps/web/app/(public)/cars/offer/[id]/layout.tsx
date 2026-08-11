@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";
 import { money } from "@/lib/avtocena";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
@@ -48,5 +49,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 export default function OfferLayout({ children }: { children: ReactNode }) {
-  return children;
+  return <>
+    <style dangerouslySetInnerHTML={{ __html: `
+      html body .ac-offer-page .ac-offer-spec-grid{display:flex!important;flex-wrap:wrap!important;gap:10px!important;grid-template-columns:none!important;grid-auto-flow:row!important}
+      html body .ac-offer-page .ac-offer-spec-grid>.ac-offer-spec-tile{flex:0 0 calc(50% - 5px)!important;width:calc(50% - 5px)!important;max-width:calc(50% - 5px)!important;grid-column:auto!important}
+      html body .ac-offer-page .ac-offer-spec-grid>.ac-offer-spec-tile:last-child:nth-child(odd){flex-basis:100%!important;width:100%!important;max-width:100%!important}
+    ` }} />
+    {children}
+    <OfferSpecGridStabilizer />
+  </>;
 }
