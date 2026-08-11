@@ -1,3 +1,4 @@
+import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 
 export function CatalogPrice({
@@ -16,7 +17,8 @@ export function CatalogPrice({
   if (totalRub > 0) {
     const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
-    return <PriceTrend offer={offer} label={preliminary ? "Предварительно от" : label} dense={dense} priceClassName={priceClassName} />;
+    if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
   }
 
   return (
