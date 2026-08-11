@@ -398,24 +398,26 @@ export function catalogFuelName(value: unknown) {
 export function catalogTransmissionName(value: unknown) {
   const raw = safeCatalogText(value).toLowerCase();
   if (!raw) return "уточняется";
-  const gears = Number(raw.match(/(?:^|\D)(\d{1,2})\s*挡/)?.[1] || 0);
+  const gears = Number(raw.match(/(?:^|\D)(\d{1,2})[-\s]*(?:挡|speed|speeds|gear|gears|gang|ступ)/i)?.[1] || 0);
   const label = (name: string) => gears > 0 && gears <= 12 ? `${gears}-ступ. ${name}` : name;
-  if (/电动车?单速变速箱|电动汽车单速变速箱|单速变速箱|固定齿比|固定传动比/.test(raw)) return "Одноступенчатый редуктор";
+  if (/电动车?单速变速箱|电动汽车单速变速箱|单速变速箱|固定齿比|固定传动比|single[- ]?speed|1[- ]?speed/.test(raw)) return "одноступенчатый редуктор";
   if (/电子无级变速|e[- ]?cvt/.test(raw)) return "вариатор (e-CVT)";
   if (/cvt|无级变速|вариатор/.test(raw)) return "вариатор";
-  if (/robot|dct|dsg|双离合|робот/.test(raw)) return label("робот");
-  if (/manual|(?:^|\W)mt(?:$|\W)|手动|수동/.test(raw) && !/手自一体/.test(raw)) return label("механика");
-  if (/automatic|auto|(?:^|\W)at(?:$|\W)|手自一体|自动挡?|오토|자동/.test(raw)) return label("автомат");
-  return translateCatalogText(raw) || "уточняется";
+  if (/robot|dct|dsg|pdk|dual[- ]?clutch|double[- ]?clutch|双离合|робот|semi[- ]?automatic/.test(raw)) return label("робот");
+  if (/manual|(?:^|\W)mt(?:$|\W)|stick[- ]?shift|手动|수동|механик/.test(raw) && !/手自一体/.test(raw)) return label("механика");
+  if (/automatic|automatik|auto|(?:^|\W)at(?:$|\W)|tiptronic|steptronic|tronic|手自一体|自动挡?|오토|자동|автомат/.test(raw)) return label("автомат");
+  // Do not expose arbitrary source tokens (for example emissions/trim codes such
+  // as LEV) as a gearbox. If the value is not positively recognized, hide it.
+  return "уточняется";
 }
 
 export function catalogDriveName(value: unknown) {
   const raw = safeCatalogText(value).toLowerCase();
   if (!raw) return "уточняется";
-  if (/4wd|awd|四驱|사륜|полный/.test(raw)) return "полный";
-  if (/fwd|2wd|前驱|两驱|전륜|передн/.test(raw)) return "передний";
-  if (/rwd|后驱|후륜|задн/.test(raw)) return "задний";
-  return translateCatalogText(raw) || "уточняется";
+  if (/4wd|awd|4x4|four[- ]?wheel|all[- ]?wheel|quattro|xdrive|4matic|四驱|사륜|полный/.test(raw)) return "полный";
+  if (/fwd|2wd|front[- ]?wheel|前驱|两驱|전륜|передн/.test(raw)) return "передний";
+  if (/rwd|rear[- ]?wheel|后驱|후륜|задн/.test(raw)) return "задний";
+  return "уточняется";
 }
 
 function removeLeadingPhrase(value: string, phrase: string) {
