@@ -58,14 +58,23 @@ jobs:
       - name: Merge reviewed reference seed into object storage
         env:
           CATALOG_CERTIFIED_POWER_SEED: "1"
-        run: npx tsx scripts/catalog-seed-certified-power-reference.mjs | tee catalog-certified-power-seed.log
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsx scripts/catalog-seed-certified-power-reference.mjs | tee catalog-certified-power-seed.log
       - name: Recalculate every exactly matched electrified card
         env:
           CATALOG_CERTIFIED_POWER_APPLY: "1"
           CATALOG_CERTIFIED_POWER_WRITE_REPORT: "1"
-        run: npx tsx scripts/catalog-apply-certified-power.mjs | tee catalog-certified-power-apply.log
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsx scripts/catalog-apply-certified-power.mjs | tee catalog-certified-power-apply.log
       - name: Rebuild the prioritized queue for variants still missing a document
-        run: npx tsx scripts/catalog-build-certified-power-queue.mjs | tee catalog-certified-power-queue.log
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsx scripts/catalog-build-certified-power-queue.mjs | tee catalog-certified-power-queue.log
       - name: Audit all seven markets and age limits after recalculation
         env:
           CATALOG_AUDIT_OUTPUT: catalog-certified-power-postpersist-audit.json
