@@ -48,13 +48,9 @@ export function LoginForm({ nextPath, errorCode = "" }: { nextPath: string; erro
 
   return (
     <div className="glass ac-login-card mx-auto w-full max-w-[460px] rounded-[2rem] p-5 md:p-6">
-      <div className="ac-login-eyebrow text-sm font-black uppercase tracking-[0.18em] text-red-300">АвтоЦена CRM</div>
-      <h1 className="ac-login-title mt-2 text-4xl font-black tracking-[-0.05em] text-white md:text-5xl">Вход</h1>
-      <p className="ac-login-description mt-3 text-sm font-bold leading-6 text-white/55">Администратор заранее добавляет ваш Telegram username и роль. После этого вход выполняется через подтверждённый аккаунт Telegram.</p>
+      {error ? <div className="ac-login-error mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
 
-      {error ? <div className="ac-login-error mt-5 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
-
-      <div className="ac-login-telegram-shell mt-6 rounded-2xl bg-white/[0.045] p-4">
+      <div className="ac-login-telegram-shell rounded-2xl bg-white/[0.045] p-4">
         <TelegramLoginButton nextPath={nextPath} />
       </div>
 
