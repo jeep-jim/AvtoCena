@@ -1,0 +1,44 @@
+name: Validate Georgia exact detail galleries
+
+on:
+  push:
+    branches: [fix/georgia-exact-detail-gallery-20260811]
+    paths:
+      - .github/workflows/validate-georgia-exact-detail-gallery.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-exact-detail-gallery-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-georgia-exact-detail-gallery.py
+      - run: npm run typecheck
+      - name: Real AUTO.GE exact gallery smoke (no publish)
+        run: |
+          CATALOG_IMAGE_STORAGE_MODE=source_urls_only CATALOG_MAX_IMAGES_PER_OFFER=30 npx tsx -e 'import {autoGeorgiaStrictSource,autoGeorgiaImageBelongsToListing} from "./apps/web/lib/catalog/auto-georgia-strict-source.ts"; let cursor=null; let tested=0; let good=0; while(tested<6){const page=await autoGeorgiaStrictSource.fetchPage(cursor); for(const raw of page.items){const offer=autoGeorgiaStrictSource.normalizeOffer(raw); if(!offer||Number(offer.year)<2020)continue; const images=await autoGeorgiaStrictSource.fetchImages(offer); tested++; if(images.length>=5)good++; if(images.some(i=>!autoGeorgiaImageBelongsToListing(String(i.url),offer.sourceOfferId)))throw new Error(`cross listing ${offer.sourceOfferId}`); if(images.length<5)throw new Error(`weak exact gallery ${offer.sourceOfferId}:${images.length}`); if(!((offer.operational?.raw as any)?.listingBoundImages===true&&(offer.operational?.raw as any)?.photoIdentityVerified===true))throw new Error(`identity flags ${offer.sourceOfferId}`); console.log({id:offer.sourceOfferId,count:images.length,first:images[0]?.url}); if(tested>=6)break;} if(!page.nextCursor||page.finished)break; cursor=String(page.nextCursor);} if(tested<6||good!==tested)throw new Error(`insufficient smoke ${tested}/${good}`); console.log({tested,good})'
+      - name: Direct recovery wiring smoke
+        run: |
+          grep -q 'market === "georgia"' scripts/catalog-live-recovery-direct-exact.mjs
+          grep -q 'source.fetchImages(offer)' scripts/catalog-live-recovery-direct-exact.mjs
+          grep -q 'exactDetailGallery' apps/web/lib/catalog/auto-georgia-strict-source.ts
+      - name: Commit production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-georgia-exact-detail-gallery.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/auto-georgia-strict-source.ts scripts/catalog-live-recovery-direct-exact.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Use AUTO.GE exact detail galleries [skip actions]"
+          git push origin HEAD:fix/georgia-exact-detail-gallery-20260811
