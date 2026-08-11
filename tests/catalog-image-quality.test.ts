@@ -85,9 +85,27 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("rejects four photos and accepts five photos", () => {
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
+test("keeps normal live-market cards valid while Japan auction galleries remain strict", () => {
+  // Non-Japan source-specific gallery repair is incremental: a valid source-bound
+  // live listing is not globally purged merely because it currently has <5 photos.
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), true);
+
+  // Japan auction identity remains strict: Prestige/current sold lots need >=5
+  // credible lot-bound photos before the public card is accepted.
+  const japanOffer = {
+    ...rawOffer,
+    id: "japan-auction-card",
+    sourceId: "prestige_japan_auctions_open",
+    sourceOfferId: "JP-100",
+    market: "japan",
+    sourceTitle: "Toyota Corolla 2022 sold auction",
+    make: "Toyota",
+    model: "Corolla",
+    sourcePrice: 1_500_000,
+    sourceCurrency: "JPY",
+  };
+  assert.equal(isCrediblePublicOffer({ ...japanOffer, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...japanOffer, images: rawOffer.images } as any), true);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
