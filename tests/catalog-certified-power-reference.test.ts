@@ -42,3 +42,63 @@ test("certified power reference rejects another powertrain, drive or peak-power 
   assert.equal(certifiedPowerReferenceMatches(reference, { ...base, drive: "RWD" }), false);
   assert.equal(certifiedPowerReferenceMatches(reference, { ...base, powerKw: 168 }), false);
 });
+
+test("certified power reference canonicalizes Korean make, model, trim and drive text", () => {
+  const koreanReference: CertifiedPowerReference = {
+    id: "hyundai-ioniq5-facelift-awd-2025",
+    make: "Hyundai",
+    model: "Ioniq5",
+    rawModelContains: ["더 뉴"],
+    trimContains: ["롱레인지"],
+    driveContains: ["awd"],
+    yearFrom: 2025,
+    yearTo: 2026,
+    powertrainKind: "electric",
+    power30MinKw: 81,
+    utilizationPowerKw: 81,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:8252/ALA",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(koreanReference, {
+    make: "현대",
+    model: "더 뉴 아이오닉5",
+    trim: "롱레인지 AWD 프레스티지",
+    year: 2025,
+    powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(koreanReference, {
+    make: "현대",
+    model: "아이오닉5",
+    trim: "롱레인지 2WD 프레스티지",
+    year: 2025,
+    powertrainKind: "electric",
+  }), false);
+});
+
+test("raw model qualifier prevents a newer Niro reference from matching the old generation", () => {
+  const niroReference: CertifiedPowerReference = {
+    id: "kia-niro-ev-sg2",
+    make: "Kia",
+    model: "Niro EV",
+    rawModelContains: ["디 올 뉴"],
+    yearFrom: 2023,
+    yearTo: 2025,
+    powertrainKind: "electric",
+    power30MinKw: 50,
+    utilizationPowerKw: 50,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:2233/ABP",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(niroReference, {
+    make: "기아", model: "디 올 뉴 니로 EV", year: 2024, powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(niroReference, {
+    make: "기아", model: "니로 EV", year: 2023, powertrainKind: "electric",
+  }), false);
+});

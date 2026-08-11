@@ -41,9 +41,14 @@ jobs:
       - run: npm ci
       - name: Validate exact variant matching before any write
         run: |
+          node --check scripts/catalog-seed-certified-power-reference.mjs
           node --check scripts/catalog-apply-certified-power.mjs
           node --import tsx --test tests/catalog-certified-power-reference.test.ts
           npm run typecheck
+      - name: Merge reviewed reference seed into object storage
+        env:
+          CATALOG_CERTIFIED_POWER_SEED: "1"
+        run: npx tsx scripts/catalog-seed-certified-power-reference.mjs | tee catalog-certified-power-seed.log
       - name: Recalculate every exactly matched electrified card
         env:
           CATALOG_CERTIFIED_POWER_APPLY: "1"
@@ -61,6 +66,7 @@ jobs:
         with:
           name: catalog-certified-power-apply-report
           path: |
+            catalog-certified-power-seed.log
             catalog-certified-power-apply.log
             catalog-certified-power-queue.log
             catalog-certified-power-postpersist-audit.json
