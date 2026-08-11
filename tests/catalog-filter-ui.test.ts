@@ -28,6 +28,24 @@ test("catalog filter forms can be applied and show the active query", () => {
   assert.match(source, /key=\{`mobile-\$\{formKey\}`\}/);
 });
 
+test("catalog filters use compact sliders, removable chips and a mobile bottom sheet", () => {
+  const source = fs.readFileSync("apps/web/components/catalog/CatalogFilters.tsx", "utf8");
+  const page = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
+  const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
+  const template = fs.readFileSync("apps/web/app/(public)/template.tsx", "utf8");
+  assert.match(source, /ac-dual-range/);
+  assert.match(source, /ac-mobile-filter-sheet/);
+  assert.match(source, /ac-filter-chip/);
+  assert.match(source, /aria-label="Расширенные фильтры"/);
+  assert.match(source, /totalRubDesc/);
+  assert.match(source, /yearAsc/);
+  assert.match(page, /totalRubDesc/);
+  assert.match(page, /yearAsc/);
+  assert.match(storage, /totalRubDesc/);
+  assert.match(storage, /yearAsc/);
+  assert.match(template, /ac-home-filter-drawer::before/);
+});
+
 test("the single public catalog search route owns filtered facets and live rates", () => {
   assert.equal(fs.existsSync("apps/web/app/api/catalog/search/route.ts"), false);
   const route = fs.readFileSync("apps/web/app/(public)/api/catalog/search/route.ts", "utf8");
