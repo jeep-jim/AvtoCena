@@ -127,7 +127,7 @@ export function PreliminaryPrice({
         </span>
         {open ? (
           <div
-            className={`ac-price-trend-popover ac-preliminary-price-popover absolute right-0 top-[calc(100%+12px)] z-[400] w-[min(430px,calc(100vw-48px))] rounded-2xl border p-4 text-left text-xs font-bold leading-5 ${popoverClass}`}
+            className={`ac-preliminary-price-popover absolute left-0 right-0 top-[calc(100%+10px)] z-[400] w-full rounded-2xl border p-4 text-left text-xs font-bold leading-5 sm:left-auto sm:right-0 sm:top-[calc(100%+12px)] sm:w-[min(430px,calc(100vw-48px))] ${popoverClass}`}
             role="tooltip"
             onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
           >
