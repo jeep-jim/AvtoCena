@@ -72,7 +72,7 @@ test("publisher accumulates galleries before deduplication and protects the newe
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
-test("daily cleanup keeps four-day grace while emergency cleanup preserves only the live public generation", () => {
+test("daily cleanup keeps a three-day grace while emergency cleanup preserves the live generation", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
@@ -86,23 +86,22 @@ test("daily cleanup keeps four-day grace while emergency cleanup preserves only 
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
   assert.match(cleanup, /plannedBytes/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
-  assert.match(cleanupWorkflow, /cron: "17 2 \* \* \*"/);
+  assert.match(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
-  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: \$\{\{ github\.event_name == 'push' && '0' \|\| '2' \}\}/);
-  assert.match(cleanupWorkflow, /github\.event_name == 'push' && '0' \|\| '345600000'/);
-  assert.match(cleanupWorkflow, /Start catalog production after emergency cleanup/);
-  assert.match(cleanupWorkflow, /createWorkflowDispatch/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_EMERGENCY: "false"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "259200000"/);
+  assert.doesNotMatch(cleanupWorkflow, /createWorkflowDispatch/);
 });
 
-test("large catalog search uses range shards and bounded chunk reads", () => {
+test("large catalog search uses compact projections and bounded fallback chunk reads", () => {
   assert.match(storage, /power: new Map\(\)/);
   assert.match(storage, /mileage: new Map\(\)/);
   assert.match(storage, /engine: new Map\(\)/);
-  assert.match(storage, /unionIndexIds\(manifest, "budget"/);
-  assert.match(storage, /unionIndexIds\(manifest, "year"/);
-  assert.match(storage, /unionIndexIds\(manifest, "mileage"/);
-  assert.match(storage, /unionIndexIds\(manifest, "engine"/);
-  assert.match(storage, /unionIndexIds\(manifest, "power"/);
+  assert.match(storage, /const searchProjectionCache = new Map/);
+  assert.match(storage, /readSearchProjection\(manifest\.generationId, market\)/);
+  assert.match(storage, /indexes\/projection/);
+  assert.match(storage, /const needsProjection = Boolean/);
   assert.match(storage, /CATALOG_SEARCH_CHUNK_CONCURRENCY/);
   assert.match(storage, /mapWithConcurrency\(chunkLocations/);
   assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]\)/);

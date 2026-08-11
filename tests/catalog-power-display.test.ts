@@ -40,18 +40,16 @@ test("shows separate utilization power for a non-series hybrid", () => {
   assert.equal(result.utilizationLabel, "Для утиля: 130 кВт");
 });
 
-test("uses calculated customs power as fallback for electric vehicles", () => {
+test("does not present calculated customs power as certified 30-minute power", () => {
   const result = catalogPowerDisplay({
     powertrainKind: "series_hybrid",
     calculationSnapshot: { customs: { utilizationPowerKw: 58.84 } },
   });
 
-  assert.ok(result);
-  assert.equal(result.thirtyMinutePowerKw, 58.84);
-  assert.equal(result.thirtyMinuteLabel, "30 мин: 58,84 кВт");
+  assert.equal(result, null);
 });
 
-test("shows preliminary power as a clean kW value without a redundant calculation prefix", () => {
+test("does not show preliminary customs power in the certified power slot", () => {
   const result = catalogPowerDisplay({
     powertrainKind: "electric",
     calculationSnapshot: {
@@ -60,23 +58,15 @@ test("shows preliminary power as a clean kW value without a redundant calculatio
     },
   });
 
-  assert.ok(result);
-  assert.equal(result.thirtyMinutePowerKw, 110);
-  assert.equal(result.thirtyMinuteLabel, "110 кВт");
-  assert.equal(result.estimated, true);
-  assert.match(result.sourceLabel, /предварительного расчёта/i);
+  assert.equal(result, null);
 });
 
-test("shows a conservative value for a legacy EV without a customs snapshot", () => {
+test("does not derive certified 30-minute power from legacy peak horsepower", () => {
   const result = catalogPowerDisplay({
     powertrainKind: "electric",
     fuel: "electric",
     powerHp: 340,
   });
 
-  assert.ok(result);
-  assert.equal(result.thirtyMinutePowerKw, 250.07);
-  assert.equal(result.thirtyMinuteLabel, "250,07 кВт");
-  assert.equal(result.utilizationPowerKw, 250.07);
-  assert.equal(result.estimated, true);
+  assert.equal(result, null);
 });

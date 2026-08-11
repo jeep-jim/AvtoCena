@@ -56,14 +56,16 @@ test("Catalog V2 probes every configured source slot, crawls live sites and reta
   assert.doesNotMatch(workflow, /catalog-rebuild-market-retry/);
 });
 
-test("priority galleries cache listing photos and enrich detail progressively", () => {
+test("priority galleries preserve listing photos and enrich detail progressively", () => {
   const listingCache = fastGallery.indexOf("cacheImageFromUrl");
   const detailedFetch = fastGallery.indexOf("source.fetchImages(offer)");
   assert.ok(listingCache >= 0 && detailedFetch > listingCache);
   assert.match(fastGallery, /CATALOG_GALLERY_FAST_PATH/);
   assert.match(fastGallery, /listingImages\.length >= minimum/);
-  assert.match(fullGallery, /listingImages/);
-  assert.match(fullGallery, /fastPath/);
+  assert.match(fullGallery, /sourceGalleryUrls\(offer\)/);
+  assert.match(fullGallery, /\[\.\.\.listingUrls, \.\.\.detailed\]/);
+  assert.match(fullGallery, /gallerySafetyMode: "source_urls_only"/);
+  assert.match(fullGallery, /return verified \? result : \[\]/);
   assert.match(importer, /priorityFastGallery/);
   assert.match(importer, /myAutoListSource/);
   assert.match(importer, /autoGeorgiaStrictSource/);

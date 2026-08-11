@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
+import { catalogPowerDisplay } from "../apps/web/lib/catalog/power-display";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
 const completeBreakdown = [
@@ -55,11 +56,15 @@ function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
   } as VehicleOffer;
 }
 
-test("publishes an EV only when the missing certified power is explicitly marked as an estimate", () => {
-  assert.equal(isCrediblePublicOffer(electricOffer()), true);
-  assert.equal(isCrediblePublicOffer(electricOffer({
+test("keeps an EV public while missing certified power remains unresolved", () => {
+  const explicitlyMissing = electricOffer();
+  const unresolved = electricOffer({
     calculationSnapshot: { pricingConfidence: "estimated", certified30MinutePowerMissing: false, customs: { status: "ready" } },
-  })), false);
+  });
+  assert.equal(isCrediblePublicOffer(explicitlyMissing), true);
+  assert.equal(isCrediblePublicOffer(unresolved), true);
+  assert.equal(catalogPowerDisplay(explicitlyMissing), null);
+  assert.equal(catalogPowerDisplay(unresolved), null);
 });
 
 test("publishes an EV with exact documented 30-minute power", () => {

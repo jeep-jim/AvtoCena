@@ -9,6 +9,7 @@ const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-sca
 const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
 const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const sourceRegistry = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-v2-source-registry.ts", import.meta.url), "utf8");
+const requiredSources = fs.readFileSync(new URL("../apps/web/lib/catalog/required-catalog-sources.ts", import.meta.url), "utf8");
 const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const legacyWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
@@ -30,25 +31,23 @@ test("probe activates productive adapters and prevents two-hour no-progress craw
   assert.match(collectBlock, /Collect productive registered sources with checkpoints/);
 });
 
-test("Japan rollout probes completed auction histories instead of active bids", () => {
-  const japanPlanStart = probe.indexOf("  japan: [");
-  const japanPlanEnd = probe.indexOf("\n  ],\n  uae:", japanPlanStart);
+test("Japan rollout combines mandatory and optional completed auction histories", () => {
+  const japanPlanStart = probe.indexOf("  japan:");
+  const japanPlanEnd = probe.indexOf("\n  uae:", japanPlanStart);
   const japanPlan = probe.slice(japanPlanStart, japanPlanEnd);
   assert.ok(japanPlanStart >= 0 && japanPlanEnd > japanPlanStart);
-  assert.match(japanPlan, /jpauc_japan_past_open/);
-  assert.match(japanPlan, /carvector_japan_stat_open/);
-  assert.match(japanPlan, /auctiondatasearch_japan_open/);
+  assert.match(requiredSources, /jpauc_japan_past_open/);
+  assert.match(requiredSources, /carvector_japan_stat_open/);
+  assert.match(requiredSources, /auctiondatasearch_japan_open/);
   assert.match(japanPlan, /japantransit_japan_stat_open/);
   assert.match(japanPlan, /auctions22_japan_past_open/);
   assert.doesNotMatch(japanPlan, /jpauc_japan_current_open/);
   assert.doesNotMatch(japanPlan, /auctions22_japan_upcoming_open/);
   assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
-  assert.match(japanWorkflow, /schedule:/);
-  assert.match(japanWorkflow, /\.github\/workflows\/catalog-v2-japan\.yml/);
-  assert.doesNotMatch(japanWorkflow, /catalog-v2-market-recovery-reusable\.yml\n      -/);
+  assert.doesNotMatch(japanWorkflow, /schedule:/);
+  assert.match(japanWorkflow, /catalog-v3-market-10k-reusable\.yml/);
   assert.doesNotMatch(japanWorkflow, /\bneeds:/);
-  assert.match(japanWorkflow, /completed auction results with final deal prices/);
 });
 
 test("listing photos are cached before optional detail enrichment", () => {
@@ -59,12 +58,12 @@ test("listing photos are cached before optional detail enrichment", () => {
   assert.match(gallery, /Math\.min\(30/);
 });
 
-test("Japan auction images keep a source-bound remote fallback when caching is blocked", () => {
-  assert.match(fullGallery, /japanAuctionRemoteFallback/);
-  assert.match(fullGallery, /auction_listing_remote_fallback/);
-  assert.match(fullGallery, /auction_source_remote_fallback/);
-  assert.match(fullGallery, /isSafeRemoteAuctionImage/);
-  assert.match(fullGallery, /sourceNativeUrls\.map\(remoteImage\)/);
+test("Japan auction images keep source-bound URLs without binary cache fallbacks", () => {
+  assert.match(fullGallery, /sourceGalleryUrls\(offer\)/);
+  assert.match(fullGallery, /externalImage/);
+  assert.match(fullGallery, /uniqueExternalImages/);
+  assert.match(fullGallery, /gallerySafetyMode: "source_urls_only"/);
+  assert.match(fullGallery, /galleryStoredAs: "json_urls"/);
 });
 
 test("Catalog V2 retains verified offers, continues cursors and can use all productive registered adapters", () => {

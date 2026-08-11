@@ -64,7 +64,7 @@ test("explicit petrol engine overrides unrelated hybrid text in raw listing payl
     powerHp: 203,
     operational: { raw: { imageUrl: "https://cdn.example/hybrid/recommendation/photo.jpg" } },
   });
-  assert.equal(normalized.powertrainKind, "other_hybrid");
+  assert.equal(normalized.powertrainKind, "combustion");
   const safe = preferExplicitCombustionPowertrain(normalized);
   assert.equal(safe.powertrainKind, "combustion");
   assert.equal(safe.power30MinKw, undefined);
