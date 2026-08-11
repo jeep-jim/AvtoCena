@@ -1,0 +1,49 @@
+name: Validate catalog card projection
+
+on:
+  push:
+    branches: [fix/catalog-card-projection-20260811]
+    paths:
+      - .github/workflows/validate-catalog-card-projection.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-card-projection-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply patch
+        run: python3 scripts/patch-catalog-card-projection.py
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Static projection checks
+        run: |
+          grep -q 'cardProjectionVersion?: 1' apps/web/lib/catalog/storage.ts
+          grep -q 'publicOfferFromProjection' apps/web/lib/catalog/storage.ts
+          grep -q 'projectedCover' apps/web/components/catalog/CatalogCard.tsx
+          grep -q 'projectedVisibleRub' apps/web/lib/catalog/public-priority.ts
+          grep -q 'directPath = `model/' apps/web/lib/catalog/storage.ts
+      - name: Public visible price smoke
+        run: |
+          npx tsx -e 'import {catalogOfferVisibleRub} from "./apps/web/lib/catalog/public-priority.ts"; const v=catalogOfferVisibleRub({publicVisibleRub:2345678,totalRub:999999999,calculationStatus:"needs_data"}); if(v!==2345678) throw new Error(String(v)); if(catalogOfferVisibleRub({publicVisibleRub:0,totalRub:123})!==0) throw new Error("unsafe raw price became visible"); console.log({projectedVisible:v})'
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-catalog-card-projection.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/storage.ts apps/web/components/catalog/CatalogCard.tsx apps/web/lib/catalog/public-priority.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Use compact card projection for catalog lists [skip actions]"
+          git push origin HEAD:fix/catalog-card-projection-20260811
