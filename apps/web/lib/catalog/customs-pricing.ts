@@ -16,6 +16,26 @@ function positive(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 }
 
+const activeMarketVersionCache = new Map<string, { pending: Promise<any>; expiresAt: number }>();
+
+function getCalculationMarketVersion(market: string) {
+  const key = String(market || "").trim();
+  const now = Date.now();
+  const cached = activeMarketVersionCache.get(key);
+  if (cached && cached.expiresAt > now) return cached.pending;
+  const ttlMs = Math.max(1_000, Number(process.env.CATALOG_MARKET_CONFIG_CACHE_MS || 10_000));
+  const entry = {
+    expiresAt: now + ttlMs,
+    pending: Promise.resolve(null) as Promise<any>,
+  };
+  entry.pending = getActiveMarketVersion(key).catch((error) => {
+      if (activeMarketVersionCache.get(key) === entry) activeMarketVersionCache.delete(key);
+      throw error;
+  });
+  activeMarketVersionCache.set(key, entry);
+  return entry.pending;
+}
+
 function transportToBorderRub(offer: VehicleOffer) {
   const raw: any = offer.operational?.raw || {};
   return positive(raw.transportToBorderRub)
@@ -89,6 +109,7 @@ const PRELIMINARY_POWER_MISSING = new Set([
   "utilization_coefficient",
   "ice_power_kw",
   "electric_excise_power_kw",
+  "power_hp",
 ]);
 
 function isElectrifiedKind(value: unknown) {
@@ -100,10 +121,10 @@ function onlyPowerDependentMissing(values: unknown) {
   return rows.length > 0 && rows.every((value) => PRELIMINARY_POWER_MISSING.has(value));
 }
 
-export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
+export function isPreliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) {
   const snapshot = offer?.calculationSnapshot || {};
   const customs = snapshot.customs || {};
-  return isElectrifiedKind(offer?.powertrainKind)
+  return ["combustion", "electric", "series_hybrid", "other_hybrid"].includes(String(offer?.powertrainKind || ""))
     && String(offer?.calculationStatus || "") === "preliminary_power_pending"
     && positive(offer?.totalRub) > 0
     && snapshot.pricingConfidence === "preliminary"
@@ -112,7 +133,11 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
     && onlyPowerDependentMissing(snapshot.missing || customs.missing);
 }
 
-export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
+export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer> | any) {
+  return isElectrifiedKind(offer?.powertrainKind) && isPreliminaryPowerPendingCalculation(offer);
+}
+
+async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean): Promise<VehicleOffer> {
   const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
@@ -145,7 +170,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
   // Missing ordinary combustion power still blocks a calculated public price.
   // Electrified vehicles are different: missing short-term/utilization power may
   // produce a clearly marked preliminary lower-bound instead of disappearing.
-  if (!electrified && !positive(offer.powerHp)) {
+  if (!electrified && !positive(offer.powerHp) && !allowCombustionPreliminary) {
     return {
       ...offer,
       totalRub: null,
@@ -191,7 +216,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     fuel: offer.fuel,
   });
 
-  const configured: any = await getActiveMarketVersion(offer.market);
+  const configured: any = await getCalculationMarketVersion(offer.market);
   const market = resolveCatalogMarketConfig(offer.market, configured);
   const utilizationProblem = exactUtilizationPowerProblem(offer);
   const combinedMissing = [...new Set([
@@ -199,7 +224,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
     ...(Array.isArray(customs.missing) ? customs.missing : []),
   ])];
 
-  if (electrified && onlyPowerDependentMissing(combinedMissing) && positive(customs.knownCustomsRub) > 0) {
+  if ((electrified || allowCombustionPreliminary) && onlyPowerDependentMissing(combinedMissing) && positive(customs.knownCustomsRub) > 0) {
     const calculation = calculateAvtocenaFromBusinessConfig({
       marketId: offer.market,
       marketConfig: market.config,
@@ -210,7 +235,7 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
       ...(combinedMissing.some((item) => ["certified_30_minute_power_kw", "utilization_power_kw", "utilization_coefficient", "ice_power_kw"].includes(item)) ? ["utilization-fee"] : []),
       ...(combinedMissing.includes("electric_excise_power_kw") ? ["excise", "vat-excise-increment"] : []),
     ];
-    const warning = "Предварительный расчёт: включены только подтверждённые на данный момент платежи. Компоненты, зависящие от недостающей мощности, не включены; финальную сумму подтвердит менеджер.";
+    const warning = "Предварительный расчёт: включены только подтверждённые на данный момент платежи. Утилизационный сбор и другие компоненты, зависящие от недостающей мощности, не включены; финальную сумму подтвердит менеджер.";
     return {
       ...offer,
       priceMode: offer.priceMode === "auction_start" ? "auction_start" : "estimated",
@@ -303,4 +328,15 @@ export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Prom
         ? "estimated"
         : "ready",
   };
+}
+
+export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
+  return calculateOfferWithRussiaCustomsInternal(input, false);
+}
+
+// Recovery imports may publish a clearly marked lower bound when an exact sold
+// lot has every source-bound field needed for customs except documented power.
+// Regular imports keep the stricter default above and remain unpublished.
+export async function calculateOfferWithPreliminaryPowerPricing(input: VehicleOffer): Promise<VehicleOffer> {
+  return calculateOfferWithRussiaCustomsInternal(input, true);
 }

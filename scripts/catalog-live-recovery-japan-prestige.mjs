@@ -5,7 +5,7 @@ process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
-const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
@@ -197,9 +197,9 @@ const prepared = await pool(rows, concurrency, async (raw) => {
   offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
   if (!(Number(offer.engineCc || 0) > 0) && String(offer.powertrainKind || "") !== "electric") { reject("engine_cc"); return null; }
   let calculated;
-  try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
+  try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithPreliminaryPowerPricing(offer)); }
   catch { reject("calculation_exception"); return null; }
-  if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) { reject("calculation_pending"); return null; }
+  if (!exactCalculation(calculated) && !isPreliminaryPowerPendingCalculation(calculated)) { reject("calculation_pending"); return null; }
   calculated.status = "active";
   calculated.operational = {
     ...(calculated.operational || {}),
@@ -239,7 +239,7 @@ const report = {
   distinctMakes: finalSelection.distinctMakes,
   maxOffersPerModel,
   candidateMaxOffersPerModel,
-  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
+  preliminaryCount: offers.filter(isPreliminaryPowerPendingCalculation).length,
   exactCalculatedCount: offers.filter(exactCalculation).length,
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
   hybridCount: offers.filter((offer) => ["series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))).length,

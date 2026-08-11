@@ -5,7 +5,7 @@ const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const market = String(process.env.RECOVERY_PUBLISH_MARKET || "").trim();
@@ -81,7 +81,7 @@ function exactCalculation(offer) {
   return kind === "other_hybrid" ? motor30 > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30 > 0;
 }
 function publishableCalculation(offer) {
-  return exactCalculation(offer) || isPreliminaryElectrifiedCalculation(offer);
+  return exactCalculation(offer) || isPreliminaryPowerPendingCalculation(offer);
 }
 function exactSourceBound(offer) {
   const op = offer?.operational || {};
@@ -259,7 +259,7 @@ const report = {
   refreshedOrNewCount: marketRows.filter((offer) => currentIncomingIds.has(offer.id)).length,
   preferredCount: marketRows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
   calculatedCount: marketRows.filter(exactCalculation).length,
-  preliminaryCount: marketRows.filter(isPreliminaryElectrifiedCalculation).length,
+  preliminaryCount: marketRows.filter(isPreliminaryPowerPendingCalculation).length,
   minYear,
   retentionMs,
   preferredMaxRub,
