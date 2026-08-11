@@ -15,8 +15,8 @@ const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-
 const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.json";
 const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const candidateMaxOffersPerModel = Math.max(maxOffersPerModel, Math.min(100, Number(process.env.PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL || maxOffersPerModel * 4)));
+const maxOffersPerModel = Math.max(1, Math.min(1_000, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const candidateMaxOffersPerModel = Math.max(maxOffersPerModel, Math.min(1_000, Number(process.env.PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL || maxOffersPerModel * 4)));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
 const minYear = catalogMinYearForMarket("japan");
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
