@@ -6,6 +6,13 @@ import test from "node:test";
 import { catalogSearchProjectionMatches, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
+const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
+
+test("model suggestions merge the live catalog with the curated knowledge base", () => {
+  assert.match(modelRoute, /readCatalogFacets\(\{ make \}\)/);
+  assert.match(modelRoute, /mergeSuggestions\(knowledgeMatches, catalogFacets\.models, query, limit\)/);
+});
+
 test("all catalog filters use the projection when optional categorical shards are absent", async () => {
   const cwd = process.cwd();
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-filter-search-"));
