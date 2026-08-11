@@ -1,5 +1,5 @@
-name: One-shot canonical catalog generation repair
-run-name: Canonical catalog repair · ${{ github.sha }}
+name: One-shot canonical Japan generation repair
+run-name: Canonical Japan catalog repair · ${{ github.sha }}
 
 on:
   push:
@@ -24,6 +24,7 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_REPAIR_SOURCE_GENERATION: gen_1786426826475_e390aa80
+  CATALOG_REPAIR_MARKETS: japan
 
 jobs:
   repair:
@@ -38,11 +39,11 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --check scripts/catalog-generation-repair.mjs
-      - name: Reconfirm source generation can restore canonical inventory without writing
+      - name: Reconfirm old Japan generation while preserving current other six markets
         env:
           CATALOG_REPAIR_DRY_RUN: "1"
         run: npx tsx scripts/catalog-generation-repair.mjs | tee catalog-generation-repair-preflight.json
-      - name: Publish repaired canonical all-seven generation
+      - name: Publish repaired Japan plus canonical current other six markets
         env:
           CATALOG_REPAIR_DRY_RUN: "0"
         run: npx tsx scripts/catalog-generation-repair.mjs | tee catalog-generation-repair-live.json
