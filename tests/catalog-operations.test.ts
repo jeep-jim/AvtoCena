@@ -28,6 +28,11 @@ test("daily market writer publishes Georgia and repairs only old K Car gallery o
   assert.match(refresh, /Promise\.all\(workers\)/);
   assert.match(refresh, /Math\.min\(20, Math\.max\(1, Number\(process\.env\.CATALOG_GALLERY_CONCURRENCY/);
   assert.doesNotMatch(refresh, /const reportedOfferIds/);
+
+  const repairWorkflow = fs.readFileSync(".github/workflows/catalog-kcar-exterior-gallery-repair.yml", "utf8");
+  assert.match(repairWorkflow, /group: catalog-publish-daily-working-markets/);
+  assert.match(repairWorkflow, /CATALOG_GALLERY_CONCURRENCY: "8"/);
+  assert.match(repairWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
 });
 
 test("Japan scale collection goes deeper and publishes through the durable object lock", () => {
