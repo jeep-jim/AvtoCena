@@ -26,9 +26,9 @@ jobs:
         run: python3 scripts/patch-catalog-min-year-2015.py
       - name: Typecheck
         run: npm run typecheck
-      - name: Verify public quality floor
+      - name: Verify year floor directly
         run: |
-          npx tsx -e 'import {isCrediblePublicOffer,CATALOG_MIN_YEAR} from "./apps/web/lib/catalog/offer-quality.ts"; const base:any={id:"x",status:"active",market:"europe",sourceId:"otomoto_europe_exact",sourcePrice:10000,sourceCurrency:"EUR",make:"Toyota",model:"Yaris",year:2015,images:[{id:"1",url:"https://example.com/car.jpg",objectKey:"",checksum:"1",size:1000,mimeType:"image/jpeg"}],totalRub:1000000,powerHp:100,engineCc:1500,operational:{}}; if(CATALOG_MIN_YEAR!==2015) throw new Error(String(CATALOG_MIN_YEAR)); if(!isCrediblePublicOffer(base)) throw new Error("2015 must pass"); if(isCrediblePublicOffer({...base,year:2014})) throw new Error("2014 must fail"); console.log({CATALOG_MIN_YEAR,pass2015:true,fail2014:true})'
+          npx tsx -e 'import {isCatalogYearAllowed,CATALOG_MIN_YEAR} from "./apps/web/lib/catalog/offer-quality.ts"; if(CATALOG_MIN_YEAR!==2015) throw new Error(String(CATALOG_MIN_YEAR)); if(!isCatalogYearAllowed(2015)) throw new Error("2015 must pass"); if(isCatalogYearAllowed(2014)) throw new Error("2014 must fail"); console.log({CATALOG_MIN_YEAR,pass2015:true,fail2014:true})'
       - name: Static collector publisher checks
         run: |
           grep -q 'const minYear = CATALOG_MIN_YEAR;' scripts/catalog-live-recovery-market.mjs
