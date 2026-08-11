@@ -225,7 +225,16 @@ async function projectionModelKeys(params: CatalogSearchParams) {
 }
 async function readProjectionRows(manifest: CatalogManifest, params: CatalogSearchParams) {
   const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
-  return (await mapWithConcurrency(markets, Math.min(7, markets.length || 1), async (market) => (await readSearchProjection(manifest.generationId, market)).items || [])).flat();
+  return (await mapWithConcurrency(markets, Math.min(7, markets.length || 1), async (market) => {
+    const projection = await readSearchProjection(manifest.generationId, market);
+    if ((projection.items || []).length || Number(manifest.markets?.[market]?.count || 0) === 0) return projection.items || [];
+    // Backward-compatible bridge for the currently published generation: older
+    // generations do not have compact projection shards yet. Preserve correctness
+    // by falling back to one market scan until the next catalog generation writes
+    // the new projection index; subsequent generations stay on the compact path.
+    const legacy = (await readMarketOffers(market)).filter(isPublicOffer);
+    return legacy.map(searchProjectionFromOffer);
+  })).flat();
 }
 
 async function readOfferLists(paths: string[]) {
