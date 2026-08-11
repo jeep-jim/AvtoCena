@@ -1,0 +1,35 @@
+name: Validate Georgia exact-gallery min5 public gate
+
+on:
+  push:
+    branches: [fix/georgia-min5-public-20260811]
+    paths:
+      - scripts/patch-georgia-min5-public-20260811.py
+      - .github/workflows/validate-georgia-min5-public.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-georgia-min5-public-20260811.py
+      - run: npm run typecheck
+      - name: Assert sparse AUTO.GE fails and exact 5-photo card passes
+        run: |
+          npx tsx -e '
+          import {isCrediblePublicOffer} from "./apps/web/lib/catalog/offer-quality.ts";
+          const image=(n:number)=>({url:`https://fra1.digitaloceanspaces.com/www.auto.ge-example/listings/demo/ad12345/${n}_large.webp`,mimeType:"image/webp",size:90000,width:1280,height:720});
+          const base:any={id:"g",market:"georgia",status:"active",year:2024,make:"Toyota",model:"Camry",sourceId:"auto_georgia_open",sourcePrice:18000,sourceCurrency:"USD",images:[image(1),image(2)]};
+          if(isCrediblePublicOffer(base)) throw new Error("2-photo AUTO.GE must fail");
+          const rich={...base,images:[1,2,3,4,5].map(image)};
+          if(!isCrediblePublicOffer(rich)) throw new Error("5-photo AUTO.GE must pass");
+          console.log({sparse:false,rich:true});'
