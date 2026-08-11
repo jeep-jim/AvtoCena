@@ -1,0 +1,135 @@
+"use client";
+
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
+
+const PRELIMINARY_PRICE_INFO = "Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.";
+
+function money(value: number) {
+  return new Intl.NumberFormat("ru-RU").format(Math.round(value));
+}
+
+export function PreliminaryPrice({
+  offer,
+  label,
+  dense = false,
+  priceClassName = "text-[22px]",
+  className = "",
+  panel = false,
+}: {
+  offer: any;
+  label: string;
+  dense?: boolean;
+  priceClassName?: string;
+  className?: string;
+  panel?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [desktopHover, setDesktopHover] = useState(false);
+  const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
+  const rootRef = useRef<HTMLDivElement>(null);
+  const totalRub = Number(offer?.totalRub || 0);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
+    const sync = () => { setDesktopHover(media.matches); if (!media.matches) setOpen(false); };
+    sync();
+    media.addEventListener?.("change", sync);
+    return () => media.removeEventListener?.("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => setLightTheme(root.dataset.theme === "light");
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (rootRef.current?.contains(target)) return;
+      setOpen(false);
+    };
+    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", close);
+    window.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      window.removeEventListener("keydown", escape);
+    };
+  }, [open]);
+
+  const panelBackground = lightTheme ? "#fff2cc" : "rgba(251,191,36,.10)";
+  const panelText = lightTheme ? "#704500" : "#fde68a";
+  const priceColor = panel ? panelText : "#ffd21f";
+  const popoverClass = lightTheme
+    ? "border-[#e9c56b] bg-[#fff2cc] text-[#704500] shadow-[0_12px_34px_rgba(111,75,0,.14)]"
+    : "border-amber-300/15 bg-[#2c281c] text-amber-200 shadow-[0_20px_65px_rgba(0,0,0,.45)]";
+  const placementClass = panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]";
+  const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
+
+  const togglePanelInfo = (event: ReactMouseEvent | ReactKeyboardEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpen((current) => !current);
+  };
+
+  return (
+    <div
+      ref={rootRef}
+      className={`relative ${panel ? "ac-price-trend-panel ac-preliminary-price-panel cursor-pointer rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${className}`}
+      style={panel ? { background: panelBackground, backgroundColor: panelBackground } : undefined}
+      role={panel ? "button" : undefined}
+      tabIndex={panel ? 0 : undefined}
+      aria-expanded={panel ? open : undefined}
+      onClick={panel ? togglePanelInfo : undefined}
+      onKeyDown={panel ? (event) => { if (event.key === "Enter" || event.key === " ") togglePanelInfo(event); } : undefined}
+    >
+      <div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em]`} style={{ color: panel ? panelText : undefined }}>
+        {label}
+      </div>
+      <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
+        <div className={`ac-price ac-price--preliminary min-w-0 whitespace-nowrap font-black leading-none tracking-[-0.05em] ${priceClassName}`} style={{ color: priceColor }}>
+          {totalRub > 0 ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
+        </div>
+        <span
+          role="button"
+          tabIndex={0}
+          aria-label="Почему цена предварительная"
+          aria-expanded={open}
+          className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black outline-none"
+          style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)", color: "var(--ac-text)" }}
+          onMouseEnter={() => { if (desktopHover) setOpen(true); }}
+          onMouseLeave={() => { if (desktopHover) setOpen(false); }}
+          onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setOpen((current) => !current);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              event.stopPropagation();
+              setOpen((current) => !current);
+            }
+          }}
+        >
+          ?
+          {open ? (
+            <div
+              className={`ac-price-trend-popover ac-preliminary-price-popover absolute right-0 z-[400] ${placementClass} ${widthClass} rounded-2xl border p-4 text-left text-xs font-bold leading-5 ${popoverClass}`}
+              role="tooltip"
+              onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}
+            >
+              {PRELIMINARY_PRICE_INFO}
+            </div>
+          ) : null}
+        </span>
+      </div>
+    </div>
+  );
+}
