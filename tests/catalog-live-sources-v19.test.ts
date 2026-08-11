@@ -120,3 +120,5 @@ test("priority galleries preserve listing photos and enrich detail progressively
   assert.match(rebuild, /detailDeferredBySource/);
   assert.match(rebuild, /source\.fetchImages\(offer\)/);
 });
+
+// Keep this suite synchronized with the current main pricing safety baseline.
