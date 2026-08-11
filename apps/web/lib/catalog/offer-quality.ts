@@ -7,6 +7,7 @@ const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulld
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
+const UAE_FINANCE_MARKER_RE = /(?:\bp\.?\s*m\.?\b|\bper\s+month\b|\/\s*month\b|\bmonthly\b|\binstallments?\b|\bemi\b|\b0\s*%\s*down(?:\s*payment|payment)?\b|\bdown\s*payment\b)/i;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
@@ -83,6 +84,30 @@ function listingTitle(offer: VehicleOffer) {
   );
 }
 
+function uaeFinancePaymentUsedAsSalePrice(offer: VehicleOffer) {
+  if (String(offer.market || "").toLowerCase() !== "uae") return false;
+  if (clean(offer.sourceCurrency).toUpperCase() !== "AED") return false;
+  const price = Number(offer.sourcePrice || 0);
+  if (!(price > 0) || !Number.isFinite(price)) return false;
+  const title = listingTitle(offer);
+  if (!UAE_FINANCE_MARKER_RE.test(title)) return false;
+
+  const patterns = [
+    /(?:AED|د\.?إ\.?)\s*([0-9][0-9, ]{2,})/gi,
+    /([0-9][0-9, ]{2,})\s*(?:AED|د\.?إ\.?)\b/gi,
+  ];
+  for (const pattern of patterns) {
+    for (const match of title.matchAll(pattern)) {
+      const amount = Number(String(match[1] || "").replace(/[^0-9]/g, ""));
+      if (!Number.isFinite(amount) || amount !== price) continue;
+      const index = match.index || 0;
+      const context = title.slice(Math.max(0, index - 40), Math.min(title.length, index + match[0].length + 56));
+      if (UAE_FINANCE_MARKER_RE.test(context)) return true;
+    }
+  }
+  return false;
+}
+
 export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
@@ -144,6 +169,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   if (!isCatalogYearAllowed(year, offer.market)) return false;
   if (!isCatalogOfferBusinessLiquid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
+  if (uaeFinancePaymentUsedAsSalePrice(offer)) return false;
   if (isNonPassengerCatalogBodyType(offer.bodyType)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
   return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
