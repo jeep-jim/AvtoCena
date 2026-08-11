@@ -1,0 +1,52 @@
+name: Validate catalog page fastpath
+
+on:
+  push:
+    branches: [fix/catalog-page-fastpath-20260811]
+    paths:
+      - .github/workflows/validate-catalog-page-fastpath.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-page-fastpath-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-catalog-page-fastpath.py
+      - run: npm run typecheck
+      - name: Static fastpath guards
+        run: |
+          grep -q 'indexedPageSize' 'apps/web/app/(public)/cars/page.tsx'
+          grep -q 'await searchOffers({ market: market.id, page, pageSize: indexedPageSize' 'apps/web/app/(public)/cars/page.tsx'
+          ! grep -A12 'if (!hasFilters)' 'apps/web/app/(public)/cars/page.tsx' | grep -q 'await readMarketOffers(market.id)'
+      - name: Live read-only index smoke
+        run: |
+          npx tsx -e 'import {readCatalogFacets,searchOffers} from "./apps/web/lib/catalog/storage.ts"; const t0=performance.now(); const facets=await readCatalogFacets({market:"europe"}); const t1=performance.now(); const r=await searchOffers({market:"europe",page:1,pageSize:48,sort:"updatedAt"}); const t2=performance.now(); if(!(r.total>0)||r.items.length<1||r.items.length>48) throw new Error(JSON.stringify({total:r.total,items:r.items.length})); console.log(JSON.stringify({facetsMs:Math.round(t1-t0),searchMs:Math.round(t2-t1),total:r.total,items:r.items.length,makes:facets.makes.length}))'
+      - name: Commit validated production files only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-catalog-page-fastpath.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 'apps/web/app/(public)/cars/page.tsx' apps/web/lib/catalog/storage.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "Use indexed catalog page fastpath [skip actions]"
+          git push origin HEAD:fix/catalog-page-fastpath-20260811
