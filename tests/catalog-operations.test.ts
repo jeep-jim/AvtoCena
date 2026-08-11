@@ -41,9 +41,16 @@ test("Japan scale collection goes deeper and publishes through the durable objec
 
   const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish-verified-aggregate.yml", "utf8");
   assert.match(verifiedPublish, /PRESTIGE_AGGREGATE_MIN_COUNT: "5000"/);
+  assert.match(verifiedPublish, /CATALOG_MAX_OFFERS_PER_MODEL: "500"/);
+  assert.match(verifiedPublish, /CATALOG_AUDIT_MAX_PER_MODEL: "500"/);
   assert.match(verifiedPublish, /prestige-japan-aggregate-salvage\.mjs/);
   assert.match(verifiedPublish, /"japan":5000/);
   assert.match(verifiedPublish, /group: catalog-publish-japan-verified-aggregate/);
+
+  const japanRecovery = fs.readFileSync("scripts/catalog-live-recovery-japan-prestige.mjs", "utf8");
+  assert.match(japanRecovery, /Math\.min\(1_000, Number\(process\.env\.CATALOG_MAX_OFFERS_PER_MODEL/);
+  const livePublisher = fs.readFileSync("scripts/catalog-live-recovery-publish.mjs", "utf8");
+  assert.match(livePublisher, /Math\.min\(1_000, Number\(process\.env\.CATALOG_MAX_OFFERS_PER_MODEL/);
 });
 
 test("certified 30-minute power is applied automatically without accepting peak power", () => {
