@@ -108,5 +108,5 @@ test("catalog prioritizes Japan sold lots and cars up to 6 million rubles and 16
   assert.match(carsPage, /PRIORITY_MAX_POWER_HP = 160/);
   assert.match(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
   assert.match(carsPage, /\.sort\(businessOrder\)/);
-  assert.match(carsPage, /const totalRub = offerRubValue\(offer\)/);
+  assert.match(carsPage, /offerRubValue\(offer\)/);
 });

@@ -22,7 +22,7 @@ const MARKET_PAGE_SIZE = 48;
 const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
-const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "year", "mileage"]);
+const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
@@ -90,12 +90,19 @@ function businessOrder(left: any, right: any) {
 
 function sortCatalogRows(rows: any[], sort: string) {
   const sorted = [...rows];
-  if (sort === "totalRub") return sorted.sort((left, right) => {
+  if (sort === "totalRub" || sort === "totalRubDesc") return sorted.sort((left, right) => {
     const a = offerRubValue(left) || Number.POSITIVE_INFINITY;
     const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
-    return a - b || businessOrder(left, right);
+    if (!Number.isFinite(a) && !Number.isFinite(b)) return businessOrder(left, right);
+    if (!Number.isFinite(a)) return 1;
+    if (!Number.isFinite(b)) return -1;
+    const direction = sort === "totalRubDesc" ? -1 : 1;
+    return (a - b) * direction || businessOrder(left, right);
   });
-  if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
+  if (sort === "year" || sort === "yearAsc") {
+    const direction = sort === "yearAsc" ? 1 : -1;
+    return sorted.sort((left, right) => (Number(left?.year || 0) - Number(right?.year || 0)) * direction || businessOrder(left, right));
+  }
   if (sort === "mileage") return sorted.sort((left, right) => {
     const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
     const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;
@@ -199,10 +206,6 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
       </nav> : null}
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
-      @media(min-width:1024px){
-        .ac-catalog-page .ac-advanced-fields{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:.75rem!important}
-        .ac-catalog-page .ac-advanced-fields>div{display:contents!important}
-      }
       @media(max-width:767px){
         .ac-catalog-page .ac-catalog-card,.ac-catalog-page .ac-catalog-card *,.ac-catalog-page .ac-catalog-market-rail,.ac-catalog-page .ac-catalog-market-rail>*{box-shadow:none!important}
         .ac-catalog-page .ac-catalog-card,.ac-catalog-page .ac-catalog-market-rail{filter:none!important}
