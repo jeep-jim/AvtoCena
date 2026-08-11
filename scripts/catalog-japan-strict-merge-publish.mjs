@@ -1,15 +1,14 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
 const input = process.env.JAPAN_STRICT_MERGE_INPUT || "catalog-rebuild-japan-exact-frame.json";
 const output = process.env.JAPAN_STRICT_MERGE_REPORT || "catalog-japan-strict-merge-publish-report.json";
-const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const maxModelsPerMake = Math.max(1, Math.min(50, Number(process.env.CATALOG_MAX_MODELS_PER_MAKE || 10)));
+const maxOffersPerModel = 20;
 const minYear = catalogMinYearForMarket("japan");
 
 function compact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""); }
@@ -100,18 +99,13 @@ for (const rawOffer of combinedCandidates) {
 
 const strictRows = [...unique.values()].sort(quality);
 const modelCounts = new Map();
-const modelsByMake = new Map();
 const japanRows = [];
 for (const offer of strictRows) {
-  const make = makeKey(offer);
   const key = modelKey(offer);
   const count = Number(modelCounts.get(key) || 0);
   if (key && count >= maxOffersPerModel) { reject("model_quota"); continue; }
-  const makeModels = make ? (modelsByMake.get(make) || new Set()) : null;
-  if (make && key && !makeModels.has(key) && makeModels.size >= maxModelsPerMake) { reject("make_model_quota"); continue; }
   japanRows.push(offer);
   if (key) modelCounts.set(key, count + 1);
-  if (make && key) { makeModels.add(key); modelsByMake.set(make, makeModels); }
 }
 if (!japanRows.length) throw new Error("japan_strict_merge_empty");
 
@@ -124,8 +118,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map((offer) => normalizeVehicleOfferSpecs({ ...offer, status: "active", images: credibleCatalogImages(offer?.images || []).slice(0, 30) }))
-    .filter((offer) => offer?.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, market) && offer.images.length > 0)
-    .slice(0, 5_000);
+    .filter((offer) => offer?.id && isCatalogYearAllowed(offer.year, market) && hasCredibleOfferContent({ ...offer, status: "active" }));
   preservedByMarket[market] = preserved.length;
   all.push(...preserved);
 }
@@ -137,7 +130,7 @@ const manifestCount = Number(manifest?.markets?.japan?.count || 0);
 if (manifestCount !== japanRows.length) throw new Error(`japan_strict_manifest_mismatch:${manifestCount}:${japanRows.length}`);
 
 const report = {
-  version: 1,
+  version: 2,
   mode: "japan_strict_exact_frame_merge_publish",
   published: true,
   generationId: manifest.generationId,
@@ -146,9 +139,8 @@ const report = {
   strictBeforeDiversity: strictRows.length,
   count: japanRows.length,
   maxOffersPerModel,
-  maxModelsPerMake,
   distinctModels: modelCounts.size,
-  distinctMakes: modelsByMake.size,
+  distinctMakes: new Set(japanRows.map(makeKey)).size,
   sourceCounts: Object.fromEntries([...new Set(japanRows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, japanRows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
   preservedByMarket,
   rejected,
