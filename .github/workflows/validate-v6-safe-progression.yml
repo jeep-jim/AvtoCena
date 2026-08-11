@@ -1,0 +1,63 @@
+name: Validate V6 safe Japan progression no-publish
+
+on:
+  push:
+    branches: [fix/v6-safe-progression-20260811]
+    paths:
+      - scripts/patch-v6-safe-progression-20260811.py
+      - .github/workflows/validate-v6-safe-progression.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Apply V6 workflow patch in working tree only
+        run: python3 scripts/patch-v6-safe-progression-20260811.py
+      - name: Assert production workflow invariants
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'); const s=fs.readFileSync('.github/workflows/catalog-v6-prestige-up-to-30k.yml','utf8');
+          if(!s.includes('PRESTIGE_PLAN_START_MODEL_INDEX: "91"')) throw new Error('start index91 missing');
+          if(!s.includes('CATALOG_MAX_OFFERS_PER_MODEL: "20"')) throw new Error('cap20 missing');
+          if(s.includes('CATALOG_MAX_OFFERS_PER_MODEL: "100"')) throw new Error('unsafe cap100 remains');
+          if(!s.includes('CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan')) throw new Error('all7 postpersist assert missing');
+          console.log('v6_workflow_invariants_ok');
+          NODE
+      - name: Smoke deeper planner band without publishing
+        env:
+          PRESTIGE_PLAN_START_MODEL_INDEX: "91"
+          PRESTIGE_PLAN_CHUNK_PAGES: "10"
+          PRESTIGE_PLAN_RAW_BUDGET: "1000"
+          PRESTIGE_PLAN_MAX_PARTITIONS: "12"
+          PRESTIGE_PLAN_MAX_MAKES: "30"
+          PRESTIGE_PLAN_RAW_PER_MODEL: "50"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+          CATALOG_KNOWLEDGE_DISABLED: "1"
+        run: |
+          npx tsx scripts/prestige-japan-strict-partition-plan.mjs | tee v6-safe-plan-smoke.log
+          node - <<'NODE'
+          const fs=require('fs'); const r=JSON.parse(fs.readFileSync('prestige-japan-strict-partition-plan.json','utf8'));
+          if(Number(r.startModelIndex)!==91) throw new Error(`wrong start:${r.startModelIndex}`);
+          if(!Array.isArray(r.matrix?.include) || !r.matrix.include.length) throw new Error('no deeper partitions');
+          console.log(JSON.stringify({startModelIndex:r.startModelIndex,partitionCount:r.partitionCount,plannedRows:r.plannedRows,complete:r.complete},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v6-safe-progression-validation
+          path: |
+            prestige-japan-strict-partition-plan.json
+            v6-safe-plan-smoke.log
+          if-no-files-found: warn
+          retention-days: 2
