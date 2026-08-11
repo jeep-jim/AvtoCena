@@ -24,7 +24,7 @@ jobs:
       - run: npm ci
       - run: python3 scripts/patch-public-spec-safe-labels.py
       - run: npm run typecheck
-      - name: Spec label smoke
+      - name: Spec label smoke v2
         run: |
           npx tsx -e 'import {catalogTransmissionName,catalogDriveName} from "./apps/web/lib/catalog/presentation.ts"; const cases=[["LEV","уточняется"],["6-speed automatic","6-ступ. автомат"],["7-speed DCT","7-ступ. робот"],["e-CVT","вариатор (e-CVT)"],["single-speed gearbox","одноступенчатый редуктор"]]; for(const [raw,want] of cases){const got=catalogTransmissionName(raw);if(got!==want)throw new Error(`${raw}:${got}!=${want}`)}; if(catalogDriveName("Front-wheel drive")!=="передний")throw new Error("fwd"); if(catalogDriveName("LEV")!=="уточняется")throw new Error("drive leak"); console.log({safeLabels:true})'
       - name: Commit production file only
