@@ -53,6 +53,8 @@ test("certified 30-minute power is applied automatically without accepting peak 
   assert.match(workflow, /catalog-build-certified-power-queue\.mjs/);
   assert.match(workflow, /workflow_run:/);
   assert.match(workflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
+  assert.match(workflow, /Catalog live · daily working markets/);
+  assert.match(workflow, /Catalog Japan · publish verified Prestige aggregate/);
   assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
 
   const strictMerge = fs.readFileSync("scripts/catalog-japan-strict-merge-publish.mjs", "utf8");

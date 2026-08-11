@@ -172,3 +172,34 @@ test("negative trim and drive qualifiers allow a documented 2WD variant but reje
     make: "현대", model: "아이오닉6", trim: "롱레인지 프레스티지", drive: "awd", year: 2024, powertrainKind: "electric",
   }), false);
 });
+
+test("EV6 GT Line uses the documented long-range drivetrain and never matches EV6 GT", () => {
+  const gtLineAwdReference: CertifiedPowerReference = {
+    id: "kia-ev6-gt-line-awd",
+    make: "Kia",
+    model: "EV6",
+    trimContains: ["GT Line"],
+    driveContains: ["awd"],
+    yearFrom: 2021,
+    yearTo: 2024,
+    powertrainKind: "electric",
+    peakPowerKw: 239,
+    peakPowerToleranceKw: 1,
+    power30MinKw: 81,
+    utilizationPowerKw: 81,
+    sourceDocumentType: "KBA_registration_data",
+    sourceDocumentId: "KBA:2233/ABC",
+    verifiedAt: "2026-08-11T00:00:00.000Z",
+    verifiedBy: "test",
+  };
+
+  assert.equal(certifiedPowerReferenceMatches(gtLineAwdReference, {
+    make: "기아", model: "EV6", trim: "4WD GT Line", year: 2022, powertrainKind: "electric",
+  }), true);
+  assert.equal(certifiedPowerReferenceMatches(gtLineAwdReference, {
+    make: "Kia", model: "EV6", trim: "GT", drive: "AWD", year: 2022, powertrainKind: "electric", powerKw: 430,
+  }), false);
+  assert.equal(certifiedPowerReferenceMatches(gtLineAwdReference, {
+    make: "Kia", model: "EV6", trim: "GT Line", drive: "RWD", year: 2022, powertrainKind: "electric", powerKw: 168,
+  }), false);
+});

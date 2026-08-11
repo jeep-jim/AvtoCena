@@ -12,6 +12,8 @@ on:
   workflow_run:
     workflows:
       - "Catalog live recovery · UAE + Kyrgyzstan"
+      - "Catalog live · daily working markets"
+      - "Catalog Japan · publish verified Prestige aggregate"
       - "Catalog · apply certified 30-minute power"
     types: [completed]
 

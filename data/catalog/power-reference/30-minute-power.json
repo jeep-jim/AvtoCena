@@ -364,5 +364,43 @@
     "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/hyundai/ioniq-5/1generation-facelift/336719/",
     "verifiedAt": "2026-08-11T00:00:00.000Z",
     "verifiedBy": "avtocena:manual-kba-cross-check"
+  },
+  {
+    "id": "kia-ev6-gt-line-awd-2021-2024-kba-2233-abc",
+    "make": "Kia",
+    "model": "EV6",
+    "trimContains": ["GT Line"],
+    "driveContains": ["awd"],
+    "yearFrom": 2021,
+    "yearTo": 2024,
+    "powertrainKind": "electric",
+    "peakPowerKw": 239,
+    "peakPowerToleranceKw": 1,
+    "power30MinKw": 81,
+    "utilizationPowerKw": 81,
+    "sourceDocumentType": "KBA_registration_data",
+    "sourceDocumentId": "KBA:2233/ABC",
+    "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/kia/ev6/cv/330784/",
+    "verifiedAt": "2026-08-11T00:00:00.000Z",
+    "verifiedBy": "avtocena:manual-kba-cross-check"
+  },
+  {
+    "id": "kia-ev6-gt-line-rwd-2021-2024-kba-2233-aba",
+    "make": "Kia",
+    "model": "EV6",
+    "trimContains": ["GT Line"],
+    "driveContains": ["rwd"],
+    "yearFrom": 2021,
+    "yearTo": 2024,
+    "powertrainKind": "electric",
+    "peakPowerKw": 168,
+    "peakPowerToleranceKw": 1,
+    "power30MinKw": 56,
+    "utilizationPowerKw": 56,
+    "sourceDocumentType": "KBA_registration_data",
+    "sourceDocumentId": "KBA:2233/ABA",
+    "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/kia/ev6/cv/330783/",
+    "verifiedAt": "2026-08-11T00:00:00.000Z",
+    "verifiedBy": "avtocena:manual-kba-cross-check"
   }
 ]
