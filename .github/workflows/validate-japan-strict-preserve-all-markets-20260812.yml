@@ -1,0 +1,51 @@
+name: Validate Japan strict preservation fix · 20260812
+
+on:
+  push:
+    branches: [fix/japan-strict-preserve-all-markets-20260812-validation]
+    paths:
+      - scripts/catalog-japan-strict-merge-publish.mjs
+      - .github/workflows/validate-japan-strict-preserve-all-markets-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Japan strict source smoke
+        run: |
+          node --check scripts/catalog-japan-strict-merge-publish.mjs
+          node - <<'NODE'
+          const fs = require('fs');
+          const s = fs.readFileSync('scripts/catalog-japan-strict-merge-publish.mjs','utf8');
+          if (!/const maxOffersPerModel = 20;/.test(s)) throw new Error('hard exact-model cap 20 missing');
+          if (/CATALOG_MAX_OFFERS_PER_MODEL/.test(s)) throw new Error('unsafe exact-model cap override remains');
+          if (/maxModelsPerMake|CATALOG_MAX_MODELS_PER_MAKE|make_model_quota/.test(s)) throw new Error('make-level quota remains');
+          if (/\.slice\(0,\s*5_000\)/.test(s)) throw new Error('5000 preservation truncation remains');
+          if (!/hasCredibleOfferContent/.test(s)) throw new Error('canonical content predicate missing');
+          console.log('japan_strict_preservation_source_ok');
+          NODE
+      - name: Workflow guard smoke
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const s = fs.readFileSync('.github/workflows/catalog-japan-strict-merge-publish.yml','utf8');
+          if (!/workflow_dispatch:/.test(s)) throw new Error('manual dispatch missing');
+          if (/workflow_run:|\npush:|\nschedule:/.test(s)) throw new Error('automatic live trigger present');
+          if (!/group:\s*catalog-live-daily-working-markets/.test(s)) throw new Error('shared writer concurrency guard missing');
+          if (!/cancel-in-progress:\s*false/.test(s)) throw new Error('shared writer cancel protection missing');
+          console.log('japan_strict_workflow_guard_ok');
+          NODE
+      - name: Global model-cap regression smoke
+        run: node --import tsx --test tests/catalog-global-model-cap.test.ts
