@@ -4,6 +4,7 @@ import test from "node:test";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-market-recovery-reusable.yml", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-failed-generations.mjs", import.meta.url), "utf8");
+const capacityWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-emergency-capacity-cleanup.yml", import.meta.url), "utf8");
 const marketFiles = [
   "korea",
   "japan",
@@ -24,9 +25,15 @@ test("market workflow preserves diagnostics and retries quota failures after saf
   assert.match(workflow, /quota|max size|storage.*full|object_storage_.*(?:409|413|507)/i);
   assert.match(workflow, /retention-days: 3/);
   assert.match(cleanup, /liveGeneration/);
-  assert.match(cleanup, /generationId !== liveGeneration/);
+  assert.match(cleanup, /!protectedGenerations\.has\(generationId\)/);
   assert.match(cleanup, /preservedImages: true/);
   assert.match(cleanup, /preservedInternalCandidatePools: true/);
+  assert.match(cleanup, /protectedInternalPaths/);
+  assert.match(cleanup, /orphanInternalObjects/);
+  assert.match(cleanup, /protectedGenerations/);
+  assert.match(capacityWorkflow, /CATALOG_FAILED_GENERATION_KEEP: "2"/);
+  assert.match(capacityWorkflow, /gen_1786426826475_e390aa80/);
+  assert.match(capacityWorkflow, /group: catalog-live-daily-working-markets/);
 });
 
 test("market workflow never turns an empty or failed collection into a fake success", () => {
@@ -52,12 +59,10 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("all seven markets run independently every day", () => {
+test("all seven reserve market collectors remain independently dispatchable", () => {
   assert.equal(marketFiles.length, 7);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
-    assert.match(content, /schedule:/, `${market} must run daily`);
-    assert.match(content, /cron: "\d+ \d+ \* \* \*"/, `${market} must have a daily cron`);
     assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
     assert.match(content, new RegExp(`market: ${market}`));
     assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
