@@ -10,11 +10,16 @@ const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|г
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
-export const CATALOG_MIN_YEAR = 2015;
-export function isCatalogYearAllowed(yearValue: unknown) {
+export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
+export const CATALOG_JAPAN_MAX_AGE_YEARS = 15;
+export function catalogMinYearForMarket(marketValue: unknown) {
+  const market = String(marketValue || "").trim().toLowerCase();
+  return market === "japan" ? new Date().getFullYear() - CATALOG_JAPAN_MAX_AGE_YEARS : CATALOG_NON_JAPAN_MIN_YEAR;
+}
+export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) {
   const year = Number(yearValue || 0);
   const currentYear = new Date().getFullYear();
-  return Number.isFinite(year) && year >= CATALOG_MIN_YEAR && year <= currentYear + 1;
+  return Number.isFinite(year) && year >= catalogMinYearForMarket(marketValue) && year <= currentYear + 1;
 }
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
@@ -134,7 +139,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (!meaningfulTitle(title)) return false;
-  if (!isCatalogYearAllowed(year)) return false;
+  if (!isCatalogYearAllowed(year, offer.market)) return false;
   if (!isCatalogOfferBusinessLiquid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (isNonPassengerCatalogBodyType(offer.bodyType)) return false;

@@ -6,7 +6,7 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
 const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { credibleCatalogImages, CATALOG_MIN_YEAR } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
@@ -18,7 +18,7 @@ const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const candidateMaxOffersPerModel = Math.max(maxOffersPerModel, Math.min(100, Number(process.env.PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL || maxOffersPerModel * 4)));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
-const minYear = CATALOG_MIN_YEAR;
+const minYear = catalogMinYearForMarket("japan");
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const EXACT_IMAGE = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 
