@@ -99,6 +99,11 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 }
 
 function minimumImageCount(offer: VehicleOffer) {
+  // Compact public projections are created only from offers that already passed
+  // the server-side source/gallery quality gate. They intentionally carry one
+  // ranked cover instead of the complete listing gallery, so the browser must
+  // not reject a validated Japan card merely because the DTO is compact.
+  if (Number((offer as any).cardProjectionVersion || 0) === 1) return 1;
   // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
   // keep rows whose exact spec page/gallery exposes fewer than five verified
   // source-bound photos. Never borrow another trim/series gallery to pad depth.
