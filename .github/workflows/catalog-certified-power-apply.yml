@@ -3,6 +3,14 @@ run-name: Certified power recalculation · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-certified-power-apply.yml"
+      - "apps/web/lib/catalog/power-reference.ts"
+      - "data/catalog/power-reference/30-minute-power.json"
+      - "scripts/catalog-seed-certified-power-reference.mjs"
+      - "scripts/catalog-apply-certified-power.mjs"
   schedule:
     - cron: "35 23 * * *"
   workflow_run:
