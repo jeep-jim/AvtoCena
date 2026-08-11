@@ -78,6 +78,8 @@ test("catalog reads a current one-hop projection before generation indexes", () 
   assert.match(storage, /export async function publishCurrentCatalogReadModels/);
   assert.match(readModelsScript, /publishCurrentCatalogReadModels/);
   assert.match(readModelsWorkflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
+  assert.match(readModelsWorkflow, /Catalog live · daily working markets/);
+  assert.match(readModelsWorkflow, /Catalog Japan · publish verified Prestige aggregate/);
   assert.match(readModelsWorkflow, /Catalog · apply certified 30-minute power/);
   assert.match(readModelsWorkflow, /group: catalog-current-read-models/);
 });
