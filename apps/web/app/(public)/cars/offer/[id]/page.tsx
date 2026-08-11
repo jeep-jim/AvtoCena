@@ -188,6 +188,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
+  const electrified = isElectric || isHybrid;
   const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
   const mileageKm = Number(o.mileageKm || 0);
   const mileageTile = mileageKm > 0 ? { label: "Пробег", value: `${money(mileageKm)} км`, icon: "mileage" as const } : null;
@@ -198,16 +199,23 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const thirtyMinuteInfo = powerDisplay?.estimated
     ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
     : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
-  const powerTile = powerDisplay && (isElectric || isHybrid)
+  const peakPowerTile = powerValue
+    ? { label: "Мощность", value: powerValue, icon: "power" as const }
+    : preliminaryPricing && electrified
+      ? { label: "Мощность", value: "Мощность уточняется", icon: "power" as const }
+      : null;
+  const powerTile = powerDisplay && electrified
     ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
-    : null;
+    : preliminaryPricing && electrified
+      ? { label: "30-минутная мощность", value: "30 мин: уточняется", icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
+      : null;
 
   const specs = (isElectric ? [
     { label: "Год", value: `${o.year} г.`, icon: "year" as const },
     mileageTile,
     { label: "Силовая установка", value: "Электромотор", icon: "electricMotor" as const },
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
-    powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
+    peakPowerTile,
     powerTile,
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
@@ -216,7 +224,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     mileageTile,
     o.engineCc ? { label: "Двигатель", value: `${money(o.engineCc)} см³`, icon: "engine" as const } : null,
     fuelValue ? { label: "Топливо", value: fuelValue, icon: "fuel" as const } : null,
-    powerValue ? { label: "Мощность", value: powerValue, icon: "power" as const } : null,
+    peakPowerTile,
     powerTile,
     transmissionValue ? { label: "Коробка", value: transmissionValue, icon: "transmission" as const } : null,
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
@@ -241,7 +249,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="ac-offer-spec-grid grid min-w-0 grid-flow-row-dense grid-cols-2 gap-2.5">{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
+            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
@@ -259,6 +267,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-spec-tile{background:#e3e7ed!important}
+      html body .ac-offer-page .ac-offer-detail-stack>.ac-offer-spec-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-flow:row!important}
+      html body .ac-offer-page .ac-offer-detail-stack>.ac-offer-spec-grid>.ac-offer-spec-tile:last-child:nth-child(odd){grid-column:1/-1!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-breakdown,
       html[data-theme="light"] .ac-offer-page .ac-offer-status,
       html[data-theme="light"] .ac-offer-page .ac-offer-form{background:#f8f9fb!important;border:1px solid rgba(30,36,48,.10)!important;box-shadow:0 14px 34px rgba(38,43,57,.10)!important}
