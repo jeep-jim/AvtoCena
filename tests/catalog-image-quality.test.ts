@@ -93,6 +93,25 @@ test("enforces five photos only for strict source contracts", () => {
   assert.equal(isCrediblePublicOffer(autoHome as any), true);
 });
 
+test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
+  const japanProjection = {
+    ...rawOffer,
+    id: "japan-projection-card",
+    sourceId: undefined,
+    sourceOfferId: undefined,
+    sourceTitle: undefined,
+    market: "japan",
+    make: "Toyota",
+    model: "Corolla",
+    sourcePrice: 1_500_000,
+    sourceCurrency: "JPY",
+    images: rawOffer.images.slice(0, 1),
+    cardProjectionVersion: 1,
+  };
+  assert.equal(isCrediblePublicOffer(japanProjection as any), true);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
+});
+
 test("accepts raw source price without knowledge calculation", () => {
   assert.equal(isCrediblePublicOffer(rawOffer as any), true);
   assert.equal(isCrediblePublicOffer({ ...rawOffer, sourcePrice: 0 } as any), false);
