@@ -1,0 +1,74 @@
+name: Catalog quality · enforce global model cap
+run-name: Enforce 20 exact offers per model · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - "Catalog live daily · working markets"
+      - "Catalog live recovery · UAE + Georgia direct"
+      - "Catalog live recovery · UAE + Kyrgyzstan"
+      - "Catalog Japan · publish verified Prestige aggregate"
+      - "Catalog certified power · apply"
+    types: [completed]
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: catalog-global-model-cap
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+
+jobs:
+  enforce:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate global model-cap enforcement
+        run: |
+          node --check scripts/catalog-enforce-global-model-cap.mjs
+          node --import tsx --test tests/catalog-global-model-cap.test.ts
+      - name: Enforce exact market + make + model quota across all seven markets
+        env:
+          CATALOG_GLOBAL_MODEL_CAP_REPORT: catalog-global-model-cap-report.json
+        run: npx tsx scripts/catalog-enforce-global-model-cap.mjs
+      - name: Audit all seven markets after canonical cleanup
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-global-model-cap-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Start fresh UAE and Georgia growth after the daily writer
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Catalog live daily · working markets'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run catalog-live-recovery-uae-georgia-direct.yml --ref main
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-global-model-cap-reports
+          path: |
+            catalog-global-model-cap-report.json
+            catalog-global-model-cap-audit.json
+          if-no-files-found: warn
+          retention-days: 7
