@@ -216,10 +216,17 @@ function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleO
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 let projectionCacheGeneration = "";
+let offerLookupCacheGeneration = "";
+let offerLocationIndexCache: Promise<{ byId: Record<string, OfferLocation> }> | null = null;
+const offerChunkCache = new Map<string, Promise<VehicleOffer[]>>();
+const OFFER_CHUNK_CACHE_MAX = Math.max(1, Math.min(24, Number(process.env.CATALOG_OFFER_CHUNK_CACHE_MAX || 8)));
 export function resetCatalogReadCachesForTests() {
   manifestCache = null;
   searchProjectionCache.clear();
   projectionCacheGeneration = "";
+  offerLookupCacheGeneration = "";
+  offerLocationIndexCache = null;
+  offerChunkCache.clear();
 }
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
@@ -483,7 +490,32 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   const concurrency = Math.max(1, Number(process.env.CATALOG_INDEX_WRITE_CONCURRENCY || 6));
   await runWithConcurrency(tasks, concurrency);
 }
-export async function getOffer(id: string) { const manifest = await readManifest(); const byId = await readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }); const loc = byId.byId[id]; if (!loc) return null; const chunk = await readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []); return chunk.find((o) => o.id === id && isPublicOffer(o)) || null; }
+export async function getOffer(id: string) {
+  const manifest = await readManifest();
+  if (offerLookupCacheGeneration !== manifest.generationId) {
+    offerLookupCacheGeneration = manifest.generationId;
+    offerLocationIndexCache = null;
+    offerChunkCache.clear();
+  }
+  offerLocationIndexCache ||= readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} })
+    .catch((error) => { offerLocationIndexCache = null; throw error; });
+  const byId = await offerLocationIndexCache;
+  const loc = byId.byId[id];
+  if (!loc) return null;
+  const path = offerPath(manifest.generationId, loc.market, loc.chunk);
+  let chunkPromise = offerChunkCache.get(path);
+  if (!chunkPromise) {
+    chunkPromise = readDataJson<VehicleOffer[]>(path, []).catch((error) => { offerChunkCache.delete(path); throw error; });
+    offerChunkCache.set(path, chunkPromise);
+    while (offerChunkCache.size > OFFER_CHUNK_CACHE_MAX) {
+      const oldest = offerChunkCache.keys().next().value as string | undefined;
+      if (!oldest || oldest === path) break;
+      offerChunkCache.delete(oldest);
+    }
+  }
+  const chunk = await chunkPromise;
+  return chunk.find((offer) => offer.id === id && isPublicOffer(offer)) || null;
+}
 export async function searchOffers(params: CatalogSearchParams) {
   const manifest = await readManifest();
   const page = Math.max(1, Number(params.page || 1));

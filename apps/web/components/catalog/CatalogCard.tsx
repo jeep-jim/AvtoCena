@@ -65,7 +65,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
-      <Link href={href} className="block overflow-hidden rounded-[1.35rem]">
+      <Link href={href} prefetch className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" loading="lazy" decoding="async" fetchPriority="low" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
