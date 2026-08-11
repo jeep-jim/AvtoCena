@@ -48,6 +48,7 @@ jobs:
           node --check scripts/catalog-live-postpersist-audit.mjs
           node --import tsx --test tests/auto-georgia-price.test.ts
           node --import tsx --test tests/catalog-live-sources-v19.test.ts
+          node --import tsx --test tests/catalog-direct-recovery.test.ts
           npm run typecheck
 
   collect:
