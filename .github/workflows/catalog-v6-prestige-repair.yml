@@ -41,21 +41,15 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$SOURCE_RUN_ID"
-          mkdir -p "$PRESTIGE_REPAIR_SOURCE_DIR" .repair-zips
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=100" --paginate --jq '.artifacts[] | select(.name | startswith("prestige-japan-chunk-")) | [.id,.name] | @tsv' > artifact-list.tsv
-          test -s artifact-list.tsv
-          while IFS=$'\t' read -r artifact_id artifact_name; do
-            zip_path=".repair-zips/${artifact_id}.zip"
-            mkdir -p "$PRESTIGE_REPAIR_SOURCE_DIR/$artifact_name"
-            curl --fail --silent --show-error --location \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
-              --output "$zip_path"
-            unzip -qo "$zip_path" -d "$PRESTIGE_REPAIR_SOURCE_DIR/$artifact_name"
-          done < artifact-list.tsv
-          echo "Downloaded $(wc -l < artifact-list.tsv) source chunk artifacts from run $SOURCE_RUN_ID"
+          rm -rf "$PRESTIGE_REPAIR_SOURCE_DIR"
+          mkdir -p "$PRESTIGE_REPAIR_SOURCE_DIR"
+          gh run download "$SOURCE_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --pattern 'prestige-japan-chunk-*' \
+            --dir "$PRESTIGE_REPAIR_SOURCE_DIR"
+          source_chunk_count="$(find "$PRESTIGE_REPAIR_SOURCE_DIR" -type f -name 'prestige-japan-chunk-*.json' | wc -l | tr -d ' ')"
+          test "$source_chunk_count" -gt 0
+          echo "Downloaded $source_chunk_count source chunk artifacts from run $SOURCE_RUN_ID"
       - id: plan
         name: Build repair matrix from exact missing ranges
         run: node scripts/prestige-japan-build-repair-matrix.mjs
