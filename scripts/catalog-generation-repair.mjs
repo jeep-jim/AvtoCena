@@ -6,7 +6,12 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 
 const sourceGeneration = String(process.env.CATALOG_REPAIR_SOURCE_GENERATION || "").trim();
 const dryRun = String(process.env.CATALOG_REPAIR_DRY_RUN || "1") !== "0";
+const requestedMarkets = String(process.env.CATALOG_REPAIR_MARKETS || PUBLIC_CATALOG_MARKETS.join(","))
+  .split(",").map((value) => value.trim()).filter(Boolean);
+const repairMarkets = new Set(requestedMarkets);
 if (!/^gen_[A-Za-z0-9_-]+$/.test(sourceGeneration)) throw new Error("catalog_repair_source_generation_invalid");
+for (const market of repairMarkets) if (!PUBLIC_CATALOG_MARKETS.includes(market)) throw new Error(`catalog_repair_market_invalid:${market}`);
+if (!repairMarkets.size) throw new Error("catalog_repair_markets_empty");
 
 const maxOffersPerModel = 20;
 function modelKey(offer) {
@@ -26,6 +31,20 @@ function japanSold(offer) {
     && Number(raw.finalPriceJpy || 0) === Number(offer?.sourcePrice || 0)
     && String(offer?.sourceCurrency || "") === "JPY";
 }
+function canonicalize(rows, market) {
+  const unique = new Map();
+  const rejected = {};
+  const reject = (key) => { rejected[key] = Number(rejected[key] || 0) + 1; };
+  for (const raw of rows) {
+    const offer = normalizeVehicleOfferSpecs({ ...raw, status: "active", images: credibleCatalogImages(raw?.images || []).slice(0, 30) });
+    if (!offer?.id || unique.has(offer.id)) continue;
+    if (!isCatalogYearAllowed(offer.year, market)) { reject("year"); continue; }
+    if (!hasCredibleOfferContent({ ...offer, status: "active" })) { reject("public_quality"); continue; }
+    if (!japanSold(offer)) { reject("japan_sold"); continue; }
+    unique.set(offer.id, offer);
+  }
+  return { kept: [...unique.values()], rejected };
+}
 async function mapPool(items, limit, worker) {
   const out = new Array(items.length);
   let cursor = 0;
@@ -41,31 +60,31 @@ async function mapPool(items, limit, worker) {
 
 const byIdIndex = await readDataJson(`catalog/generations/${sourceGeneration}/indexes/offers-by-id.json`, { byId: {} });
 const all = [];
-const report = { version: 1, sourceGeneration, dryRun, markets: {}, failures: [] };
+const report = { version: 2, sourceGeneration, dryRun, repairMarkets: [...repairMarkets], markets: {}, failures: [] };
 
 for (const market of PUBLIC_CATALOG_MARKETS) {
-  const marketIndex = await readDataJson(`catalog/generations/${sourceGeneration}/indexes/market/${market}.json`, { ids: [] });
-  const ids = Array.isArray(marketIndex?.ids) ? marketIndex.ids : [];
-  const wanted = new Set(ids);
-  const locations = new Map();
-  for (const id of ids) {
-    const loc = byIdIndex?.byId?.[id];
-    if (loc?.market === market && loc?.chunk) locations.set(`${market}/${loc.chunk}`, loc);
+  let rows = [];
+  let indexed = null;
+  let sourceMode = "current";
+  if (repairMarkets.has(market)) {
+    sourceMode = "source_generation";
+    const marketIndex = await readDataJson(`catalog/generations/${sourceGeneration}/indexes/market/${market}.json`, { ids: [] });
+    const ids = Array.isArray(marketIndex?.ids) ? marketIndex.ids : [];
+    indexed = ids.length;
+    const wanted = new Set(ids);
+    const locations = new Map();
+    for (const id of ids) {
+      const loc = byIdIndex?.byId?.[id];
+      if (loc?.market === market && loc?.chunk) locations.set(`${market}/${loc.chunk}`, loc);
+    }
+    const chunks = await mapPool([...locations.values()], 12, (loc) => readDataJson(offerPath(sourceGeneration, market, loc.chunk), []));
+    rows = chunks.flat().filter((offer) => offer?.id && wanted.has(offer.id));
+  } else {
+    rows = await readMarketOffers(market);
+    indexed = rows.length;
   }
-  const chunks = await mapPool([...locations.values()], 12, (loc) => readDataJson(offerPath(sourceGeneration, market, loc.chunk), []));
-  const rows = chunks.flat().filter((offer) => offer?.id && wanted.has(offer.id));
-  const unique = new Map();
-  const rejected = {};
-  const reject = (key) => { rejected[key] = Number(rejected[key] || 0) + 1; };
-  for (const raw of rows) {
-    const offer = normalizeVehicleOfferSpecs({ ...raw, status: "active", images: credibleCatalogImages(raw?.images || []).slice(0, 30) });
-    if (!offer?.id || unique.has(offer.id)) continue;
-    if (!isCatalogYearAllowed(offer.year, market)) { reject("year"); continue; }
-    if (!hasCredibleOfferContent({ ...offer, status: "active" })) { reject("public_quality"); continue; }
-    if (!japanSold(offer)) { reject("japan_sold"); continue; }
-    unique.set(offer.id, offer);
-  }
-  const kept = [...unique.values()];
+
+  const { kept, rejected } = canonicalize(rows, market);
   const modelCounts = new Map();
   for (const offer of kept) {
     const key = modelKey(offer);
@@ -75,7 +94,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const maxPerExactModel = Math.max(0, ...modelCounts.values());
   if (maxPerExactModel > maxOffersPerModel) throw new Error(`catalog_repair_model_cap:${market}:${maxPerExactModel}`);
   report.markets[market] = {
-    indexed: ids.length,
+    sourceMode,
+    indexed,
     loaded: rows.length,
     canonical: kept.length,
     rejected,
