@@ -5,10 +5,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "35 23 * * *"
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-certified-power-apply.yml"
+  workflow_run:
+    workflows:
+      - "Catalog live recovery · UAE + Kyrgyzstan"
+    types: [completed]
 
 permissions:
   contents: read
@@ -29,6 +29,7 @@ env:
 
 jobs:
   apply:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
