@@ -158,7 +158,11 @@ function generationPath(generationId: string, rel: string) { return `catalog/gen
 function uniqueText(values: unknown[]) { return [...new Set(values.map(cleanFacet).filter(Boolean))]; }
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
 export function chunkName(index: number) { return `chunk-${String(index).padStart(4, "0")}`; }
-const MANIFEST_CACHE_MS = Math.max(250, Number(process.env.CATALOG_MANIFEST_CACHE_MS || 2_000));
+// The manifest is tiny but a signed cross-service Object Storage GET can take
+// several seconds after a container resumes. Catalog publications are atomic
+// and tolerate a short visibility delay, so keep it in the warm process long
+// enough for a real browsing session instead of re-reading it on every tap.
+const MANIFEST_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_MANIFEST_CACHE_MS || 60_000));
 let manifestCache: { expiresAt: number; promise: Promise<CatalogManifest> } | null = null;
 async function readManifest(): Promise<CatalogManifest> {
   const now = Date.now();
