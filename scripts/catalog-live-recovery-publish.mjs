@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, isCatalogOfferBusinessLiquid } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid, CATALOG_MIN_YEAR } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
@@ -14,7 +14,7 @@ const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
-const minYear = new Date().getFullYear() - 15;
+const minYear = CATALOG_MIN_YEAR;
 
 if (!PUBLIC_CATALOG_MARKETS.includes(market)) throw new Error(`recovery_publish_market_invalid:${market}`);
 
