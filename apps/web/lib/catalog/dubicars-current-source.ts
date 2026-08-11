@@ -8,6 +8,7 @@ type Row = {
   title: string;
   make: string;
   model: string;
+  trim?: string;
   year: number;
   price?: number;
   currency?: string;
@@ -101,8 +102,15 @@ function price(plain: string) {
     [new RegExp(`${token}\\s*(?:USD|US\\$)`, "i"), "USD", 2_000_000],
   ];
   for (const [pattern, currency, maximum] of patterns) {
-    const parsed = amount(plain.match(pattern)?.[1] || "");
-    if (parsed && parsed <= maximum) return { price: parsed, currency };
+    const matches = [...plain.matchAll(new RegExp(pattern.source, "gi"))];
+    for (const match of matches) {
+      const parsed = amount(match[1] || "");
+      const start = Math.max(0, Number(match.index || 0) - 24);
+      const end = Math.min(plain.length, Number(match.index || 0) + String(match[0] || "").length + 36);
+      const context = plain.slice(start, end);
+      if (/\bP\.?\s*M\.?\b|per\s+month|\/\s*month|monthly|installment|downpayment/i.test(context)) continue;
+      if (parsed && parsed <= maximum) return { price: parsed, currency };
+    }
   }
   return { price: undefined, currency: undefined };
 }
@@ -110,7 +118,9 @@ function price(plain: string) {
 function labelValue(plain: string, labels: string[], stops: string[]) {
   const labelPattern = labels.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const stopPattern = stops.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
-  return clean(plain.match(new RegExp(`(?:${labelPattern})\\s*[:：]?\\s*(.{1,80}?)(?=\\s+(?:${stopPattern})\\s*[:：]?|$)`, "i"))?.[1]);
+  const pattern = new RegExp(`(?:^|\\s)(?:${labelPattern})\\s*[:：]?\\s*(.{1,80}?)(?=\\s+(?:${stopPattern})\\s*[:：]?|$)`, "gi");
+  const matches = [...plain.matchAll(pattern)];
+  return clean(matches.at(-1)?.[1]);
 }
 
 function normalizeFuel(value: string) {
@@ -149,7 +159,6 @@ function normalizeBody(value: string) {
 
 function images(markup: string, url: string) {
   const values: string[] = [];
-  const decoded = clean(markup).replace(/\s+/g, " ");
   for (const match of markup.matchAll(/(?:data-src|data-original|data-lazy-src|src|content|poster)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) {
     for (const part of match[1].split(",")) values.push(part.trim().split(/\s+/)[0]);
@@ -171,7 +180,7 @@ function images(markup: string, url: string) {
   return best && best.length >= 2 ? best : valid;
 }
 
-function parse(markup: string, url: string): Row | null {
+export function parseDubicarsCurrentListing(markup: string, url: string): Row | null {
   const fullPlain = clean(markup);
   const plain = fullPlain.split(/\b(?:Similar cars|People also viewed|Related links)\b/i)[0];
   const rawTitle = clean(
@@ -181,7 +190,15 @@ function parse(markup: string, url: string): Row | null {
   const title = rawTitle.replace(/\s+(?:19|20)\d{2}\s+for sale.*$/i, "").trim();
   const parsedName = makeModel(title);
   const year = Number(`${title} ${plain}`.match(/\b(?:19|20)\d{2}\b/)?.[0]);
-  if (!parsedName.make || !parsedName.model || !year) return null;
+
+  const stops = ["Transmission", "Export status", "Interior color", "Steering side", "Horsepower", "Updated on", "Make", "Model", "Trim", "Color", "Engine capacity", "Cylinders", "Drive type", "Vehicle type", "Number of doors", "Seating capacity", "Wheel size", "Fuel Type", "Service history", "Location", "Specs"];
+  const exactMakeRaw = labelValue(plain, ["Make"], stops);
+  const exactModelRaw = labelValue(plain, ["Model"], stops);
+  const exactTrim = labelValue(plain, ["Trim"], stops);
+  const exactIdentity = exactMakeRaw && exactModelRaw ? makeModel(`${exactMakeRaw} ${exactModelRaw}`) : { make: "", model: "" };
+  const make = exactIdentity.make || parsedName.make;
+  const model = exactIdentity.model || clean(exactModelRaw) || parsedName.model;
+  if (!make || !model || !year) return null;
 
   const parsedPrice = price(plain);
   const mileageKm = integer(
@@ -193,13 +210,13 @@ function parse(markup: string, url: string): Row | null {
     || plain.match(/\b([0-9]+(?:\.[0-9]+)?)L\b/i)?.[1],
   );
   const engineCc = liters ? Math.round(liters * 1_000) : integer(plain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
-  const powerHp = integer(
+  const parsedPowerHp = integer(
     plain.match(/Horsepower\s*[:：]?\s*([0-9]{2,4})\s*(?:HP|PS|BHP)?\b/i)?.[1]
     || plain.match(/\b([0-9]{2,4})\s*(?:HP|PS|BHP)\b/i)?.[1]
     || title.match(/\b([0-9]{2,4})\s*HP\b/i)?.[1],
   );
+  const powerHp = parsedPowerHp && parsedPowerHp <= 1_500 ? parsedPowerHp : undefined;
 
-  const stops = ["Transmission", "Export status", "Interior color", "Steering side", "Updated on", "Make", "Model", "Trim", "Color", "Cylinders", "Drive type", "Vehicle type", "Number of doors", "Seating capacity", "Wheel size", "Fuel Type", "Service history", "Location", "Specs"];
   const fuelRaw = labelValue(plain, ["Fuel Type", "Fuel"], stops) || plain.match(/\bFuel\s*:\s*([A-Za-z -]{3,24})/i)?.[1] || "";
   const transmissionRaw = labelValue(plain, ["Transmission"], stops);
   const driveRaw = labelValue(plain, ["Drive type", "Drive Train"], stops);
@@ -212,8 +229,9 @@ function parse(markup: string, url: string): Row | null {
     id: url.match(/-(\d{5,})\.html/i)?.[1] || url,
     url,
     title,
-    make: parsedName.make,
-    model: parsedName.model,
+    make,
+    model,
+    trim: exactTrim || undefined,
     year,
     price: parsedPrice.price,
     currency: parsedPrice.currency,
@@ -244,7 +262,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     for (let index = 0; index < links.length; index += 4) {
       const batch = await Promise.all(links.slice(index, index + 4).map(async (detailUrl) => {
         const detail = await request(detailUrl, listUrl).catch(() => null);
-        return detail?.response.ok ? parse(detail.markup, detailUrl) : null;
+        return detail?.response.ok ? parseDubicarsCurrentListing(detail.markup, detailUrl) : null;
       }));
       rows.push(...batch.filter(Boolean) as Row[]);
       if (index + 4 < links.length) await new Promise((resolve) => setTimeout(resolve, 160));
@@ -273,7 +291,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
-      make: row.make, model: row.model, trim: row.title, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp,
+      make: row.make, model: row.model, trim: row.trim || row.title, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp,
       fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,
       sourcePrice: row.price || null, sourceCurrency: row.price ? (row.currency || "AED") : null, priceMode: row.price ? "fixed" : "estimated",
       images: [], totalRub: null, calculationStatus: row.price ? "ready" : "needs_data", firstSeenAt: now, updatedAt: now,
