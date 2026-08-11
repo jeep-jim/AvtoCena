@@ -5,6 +5,7 @@ const { getJsonStorage, readDataJson } = await import("../apps/web/lib/data.ts")
 const reportFile = process.env.CATALOG_FAILED_GENERATION_CLEANUP_REPORT || "catalog-failed-generation-cleanup-report.json";
 const maxDeletes = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_MAX_DELETES || 100_000));
 const keepGenerations = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_KEEP || 2));
+const deleteConcurrency = Math.max(1, Math.min(64, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 16)));
 const configuredProtectedGenerations = new Set(String(process.env.CATALOG_FAILED_GENERATION_PROTECT || "")
   .split(",").map((value) => value.trim()).filter(Boolean));
 const storage = getJsonStorage();
@@ -54,14 +55,19 @@ for (const generationId of candidates) {
   }
 }
 let deletedOrphanInternalObjects = 0;
-for (const object of orphanInternalObjects) {
-  try {
-    await storage.deleteJson(object.key);
-    deletedOrphanInternalObjects++;
-  } catch (error) {
-    errors.push({ internalObject: object.key, error: String(error?.message || error) });
+let orphanCursor = 0;
+await Promise.all(Array.from({ length: Math.min(deleteConcurrency, Math.max(1, orphanInternalObjects.length)) }, async () => {
+  while (true) {
+    const object = orphanInternalObjects[orphanCursor++];
+    if (!object) return;
+    try {
+      await storage.deleteJson(object.key);
+      deletedOrphanInternalObjects++;
+    } catch (error) {
+      errors.push({ internalObject: object.key, error: String(error?.message || error) });
+    }
   }
-}
+}));
 
 const report = {
   version: 1,
@@ -69,6 +75,7 @@ const report = {
   finishedAt: new Date().toISOString(),
   liveGeneration,
   currentInternalGeneration: String(internalManifest?.generationId || "") || null,
+  deleteConcurrency,
   discoveredGenerations: generations.length,
   protectedGenerations: [...protectedGenerations],
   removedGenerations: candidates,
