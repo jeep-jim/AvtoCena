@@ -20,17 +20,18 @@ test("daily market writer publishes Georgia and repairs only old K Car gallery o
   assert.match(workflow, /CATALOG_GALLERY_MAX_OFFERS: "500"/);
   assert.match(workflow, /continue-on-error: true/);
   assert.match(workflow, /if: always\(\) && needs\.validate\.result == 'success'/);
+  assert.match(workflow, /group: catalog-publish-daily-working-markets/);
 
   const refresh = fs.readFileSync("scripts/catalog-refresh-galleries.mjs", "utf8");
   assert.match(refresh, /needsSourceOrderedGalleryRefresh\(offer\)/);
   assert.doesNotMatch(refresh, /const reportedOfferIds/);
 });
 
-test("Japan scale collection goes deeper and publishes in the shared single-writer lane", () => {
+test("Japan scale collection goes deeper and publishes through the durable object lock", () => {
   const workflow = fs.readFileSync(".github/workflows/catalog-v6-prestige-up-to-30k.yml", "utf8");
   assert.match(workflow, /PRESTIGE_PLAN_RAW_PER_MODEL: "200"/);
   assert.match(workflow, /max-parallel: 6/);
-  assert.match(workflow, /group: catalog-live-daily-working-markets/);
+  assert.match(workflow, /group: catalog-publish-prestige-up-to-30k/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "100"/);
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
 
@@ -41,14 +42,13 @@ test("Japan scale collection goes deeper and publishes in the shared single-writ
   const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish-verified-aggregate.yml", "utf8");
   assert.match(verifiedPublish, /PRESTIGE_AGGREGATE_MIN_COUNT: "5000"/);
   assert.match(verifiedPublish, /prestige-japan-aggregate-salvage\.mjs/);
-  assert.match(verifiedPublish, /group: catalog-live-daily-working-markets/);
   assert.match(verifiedPublish, /"japan":5000/);
+  assert.match(verifiedPublish, /group: catalog-publish-japan-verified-aggregate/);
 });
 
 test("certified 30-minute power is applied automatically without accepting peak power", () => {
   const workflow = fs.readFileSync(".github/workflows/catalog-certified-power-apply.yml", "utf8");
   assert.match(workflow, /CATALOG_CERTIFIED_POWER_APPLY: "1"/);
-  assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /catalog-certified-power-reference\.test\.ts/);
   assert.match(workflow, /catalog-build-certified-power-queue\.mjs/);
   assert.match(workflow, /workflow_run:/);
@@ -56,6 +56,16 @@ test("certified 30-minute power is applied automatically without accepting peak 
   assert.match(workflow, /Catalog live · daily working markets/);
   assert.match(workflow, /Catalog Japan · publish verified Prestige aggregate/);
   assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
+  assert.match(workflow, /group: catalog-certified-power-apply/);
+
+  const publisher = fs.readFileSync("scripts/catalog-live-recovery-publish.mjs", "utf8");
+  assert.match(publisher, /catalog\/import-lock\.json/);
+  assert.match(publisher, /catalog_publish_lock_wait_failed/);
+  assert.match(publisher, /finally \{\s*await releasePublishLock\(\)/);
+
+  const applyPower = fs.readFileSync("scripts/catalog-apply-certified-power.mjs", "utf8");
+  assert.match(applyPower, /CATALOG_IMPORT_LOCK_WAIT_MS/);
+  assert.match(applyPower, /\[power-lock\] waiting/);
 
   const strictMerge = fs.readFileSync("scripts/catalog-japan-strict-merge-publish.mjs", "utf8");
   assert.match(strictMerge, /isCatalogYearAllowed\(offer\.year, market\)/);
@@ -77,6 +87,7 @@ test("emergency Japan recovery restores a verified generation before the remaini
   const markets = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", "utf8");
   assert.match(markets, /Catalog emergency · restore Japan baseline/);
   assert.match(markets, /github\.event\.workflow_run\.conclusion == 'success'/);
+  assert.match(markets, /group: catalog-publish-uae-kyrgyzstan/);
 
   const script = fs.readFileSync("scripts/catalog-recover-generations.mjs", "utf8");
   assert.match(script, /catalog_recovery_preflight_below_min/);
