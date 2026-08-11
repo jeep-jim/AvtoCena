@@ -6,7 +6,6 @@ on:
     - cron: "40 19 * * *"
   push:
     paths:
-      - ".github/workflows/catalog-v6-prestige-up-to-30k.yml"
       - "scripts/prestige-japan-strict-partition-plan.mjs"
       - "scripts/prestige-japan-strict-chunk.mjs"
       - "scripts/prestige-japan-strict-merge.mjs"
@@ -124,7 +123,7 @@ jobs:
     needs: aggregate
     if: needs.aggregate.result == 'success'
     concurrency:
-      group: catalog-live-daily-working-markets
+      group: catalog-publish-prestige-up-to-30k
       cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 90

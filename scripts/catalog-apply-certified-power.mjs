@@ -16,6 +16,8 @@ const WRITE_REPORT = ["1", "true", "yes", "on"].includes(String(process.env.CATA
 const MAX_OFFERS = Math.max(0, Number(process.env.CATALOG_CERTIFIED_POWER_MAX_OFFERS || 0));
 const LOCK_PATH = "catalog/import-lock.json";
 const REPORT_PATH = "catalog/power-reference/apply-report.json";
+const LOCK_WAIT_MS = Math.max(0, Number(process.env.CATALOG_IMPORT_LOCK_WAIT_MS || 7_200_000));
+const LOCK_POLL_MS = Math.max(1_000, Number(process.env.CATALOG_IMPORT_LOCK_POLL_MS || 15_000));
 const operationId = `catalog_certified_power_${crypto.randomUUID()}`;
 const startedAt = new Date().toISOString();
 let lockHeld = false;
@@ -51,19 +53,30 @@ function comparisonSnapshot(offer) {
 }
 
 async function acquireLock() {
-  await mutateDataJson(LOCK_PATH, { lockedUntil: "" }, (current) => {
-    const lockedUntil = Date.parse(String(current?.lockedUntil || ""));
-    if (Number.isFinite(lockedUntil) && lockedUntil > Date.now()) {
-      throw new Error(`catalog_import_locked_until_${new Date(lockedUntil).toISOString()}`);
+  const deadline = Date.now() + LOCK_WAIT_MS;
+  while (true) {
+    try {
+      await mutateDataJson(LOCK_PATH, { lockedUntil: "" }, (current) => {
+        const lockedUntil = Date.parse(String(current?.lockedUntil || ""));
+        if (Number.isFinite(lockedUntil) && lockedUntil > Date.now()) {
+          throw new Error(`catalog_import_locked_until_${new Date(lockedUntil).toISOString()}`);
+        }
+        return {
+          operationId,
+          operationType: "certified_power_apply",
+          lockedUntil: new Date(Date.now() + 30 * 60_000).toISOString(),
+          startedAt,
+        };
+      });
+      lockHeld = true;
+      return;
+    } catch (error) {
+      const message = String(error?.message || error);
+      if (!/catalog_(?:publish|import|certified_power)_locked/i.test(message) || Date.now() + LOCK_POLL_MS > deadline) throw error;
+      console.log(`[power-lock] waiting: ${message}`);
+      await new Promise((resolve) => setTimeout(resolve, LOCK_POLL_MS));
     }
-    return {
-      operationId,
-      operationType: "certified_power_apply",
-      lockedUntil: new Date(Date.now() + 30 * 60_000).toISOString(),
-      startedAt,
-    };
-  });
-  lockHeld = true;
+  }
 }
 
 async function refreshLock() {
