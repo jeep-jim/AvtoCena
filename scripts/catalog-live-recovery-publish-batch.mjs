@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, isCatalogOfferBusinessLiquid } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
@@ -19,7 +19,6 @@ const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_
 const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
-const minYear = new Date().getFullYear() - 15;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {
   throw new Error(`recovery_batch_markets_invalid:${markets.join(",")}`);
@@ -54,12 +53,11 @@ function exactSourceBound(offer) {
     && raw.recoveryCalculatedRub === true
     && raw.recoveryBodySourceOnly === true;
 }
+function canonicalPublic(offer) {
+  return hasCredibleOfferContent({ ...offer, status: "active" });
+}
 function publicExistingStillValid(offer) {
-  return /^https?:\/\//i.test(String(offer?.operational?.sourceUrl || ""))
-    && Number(offer?.sourcePrice || 0) > 0
-    && Boolean(String(offer?.sourceCurrency || "").trim())
-    && publishableCalculation(offer)
-    && isCatalogOfferBusinessLiquid(offer);
+  return canonicalPublic(offer) && publishableCalculation(offer) && isCatalogOfferBusinessLiquid(offer);
 }
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
@@ -139,11 +137,12 @@ for (const market of markets) {
     if (!offer?.id || incoming.has(offer.id)) continue;
     if (offer.market !== market) { reject("market"); continue; }
     const year = Number(offer.year || 0);
-    if (year < minYear || year > new Date().getFullYear() + 1) { reject("year"); continue; }
+    if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
     if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
     if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
     if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
     if (!publishableCalculation(offer)) { reject("calculation"); continue; }
+    if (!canonicalPublic(offer)) { reject("public_quality"); continue; }
     incoming.set(offer.id, offer);
   }
 
@@ -154,7 +153,7 @@ for (const market of markets) {
     const offer = normalizeVisible(raw);
     const year = Number(offer?.year || 0);
     if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
-    if (year < minYear || year > new Date().getFullYear() + 1 || !offer.make || !offer.model || !offer.images.length) continue;
+    if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || !offer.images.length) continue;
     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
   }
@@ -175,11 +174,12 @@ const preservedByMarket = {};
 for (const other of PUBLIC_CATALOG_MARKETS) {
   if (markets.includes(other)) continue;
   let rows = [];
-  try { rows = await readMarketOffers(other); } catch { rows = []; }
+  try { rows = await readMarketOffers(other); } catch { rows = [];
+  }
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map((offer) => normalizeVisible(offer))
-    .filter((offer) => offer.id && offer.make && offer.model && Number(offer.year || 0) >= minYear && offer.images.length > 0 && withinRetention(offer) && isCatalogOfferBusinessLiquid(offer))
+    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && canonicalPublic(offer) && isCatalogOfferBusinessLiquid(offer))
     .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
@@ -196,7 +196,7 @@ for (const market of markets) {
     preferredCount: rows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
     calculatedCount: rows.filter(exactCalculation).length,
     preliminaryCount: rows.filter(isPreliminaryElectrifiedCalculation).length,
-    minYear,
+    minYear: catalogMinYearForMarket(market),
     retentionMs,
     preferredMaxRub,
     maxOffersPerModel,
