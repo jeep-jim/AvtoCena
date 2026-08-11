@@ -245,6 +245,15 @@ async function readSearchProjection(generationId: string, market: string) {
   return promise;
 }
 function projectionNumber(value: unknown, missing: number) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : missing; }
+function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
+  const utilizationPowerKw = projectionNumber(row.utilizationPowerKw, 0);
+  if (utilizationPowerKw) return utilizationPowerKw * 1.35962;
+  const powertrainKind = cleanFacet(row.powertrainKind).toLowerCase();
+  const fuel = cleanFacet(row.fuel).toLowerCase();
+  if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)
+    || /electric|hybrid|phev|hev|bev|электро|гибрид/.test(fuel)) return 0;
+  return projectionNumber(row.powerHp, 0);
+}
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
@@ -263,8 +272,16 @@ export function catalogSearchProjectionMatches(row: CatalogSearchProjection, par
   if (params.mileageTo && projectionNumber(row.mileageKm, Infinity) > params.mileageTo) return false;
   if (params.engineFrom && projectionNumber(row.engineCc, 0) < params.engineFrom) return false;
   if (params.engineTo && projectionNumber(row.engineCc, Infinity) > params.engineTo) return false;
-  if (params.powerFrom && projectionNumber(row.powerHp, 0) < params.powerFrom) return false;
-  if (params.powerTo && projectionNumber(row.powerHp, Infinity) > params.powerTo) return false;
+  if (params.powerFrom || params.powerTo) {
+    // This public control explains the utilization-fee threshold, so EVs and
+    // hybrids must be filtered by the certified calculation power rather than
+    // by their much larger short peak rating. Missing certified power remains
+    // excluded from an upper-bound query instead of being presented as eligible.
+    const utilizationPowerHp = projectionUtilizationPowerHp(row);
+    if (!utilizationPowerHp) return false;
+    if (params.powerFrom && utilizationPowerHp < params.powerFrom) return false;
+    if (params.powerTo && utilizationPowerHp > params.powerTo + 0.01) return false;
+  }
   if (params.fuel && lower(row.fuel) !== lower(params.fuel)) return false;
   if (params.bodyType && lower(row.bodyType) !== lower(params.bodyType)) return false;
   if (params.transmission && lower(row.transmission) !== lower(params.transmission)) return false;

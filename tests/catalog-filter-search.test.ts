@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
+import { catalogSearchProjectionMatches, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
 test("all catalog filters use the projection when optional categorical shards are absent", async () => {
@@ -70,4 +70,24 @@ test("all catalog filters use the projection when optional categorical shards ar
     resetJsonStorageForTests();
     fs.rmSync(directory, { recursive: true, force: true });
   }
+});
+
+test("the 160 hp utilization-fee filter uses certified calculation power", () => {
+  const certifiedElectric = {
+    id: "certified-electric", market: "china", make: "BYD", model: "Seal", year: 2025,
+    powerHp: 530, powerKw: 390, powertrainKind: "electric", power30MinKw: 100, utilizationPowerKw: 100,
+  } as any;
+  const uncertifiedElectric = {
+    id: "uncertified-electric", market: "china", make: "BYD", model: "Seal", year: 2025,
+    powerHp: 150, powerKw: 110, powertrainKind: "electric",
+  } as any;
+  const hybridAboveThreshold = {
+    id: "hybrid-above", market: "japan", make: "Toyota", model: "Harrier", year: 2024,
+    powerHp: 152, powertrainKind: "other_hybrid", power30MinKw: 35, utilizationPowerKw: 130,
+  } as any;
+
+  assert.equal(catalogSearchProjectionMatches(certifiedElectric, { powerTo: 160 }), true);
+  assert.equal(catalogSearchProjectionMatches(certifiedElectric, { powerTo: 130 }), false);
+  assert.equal(catalogSearchProjectionMatches(uncertifiedElectric, { powerTo: 160 }), false);
+  assert.equal(catalogSearchProjectionMatches(hybridAboveThreshold, { powerTo: 160 }), false);
 });
