@@ -22,7 +22,7 @@ const MARKET_PAGE_SIZE = 48;
 const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
-const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "year", "mileage"]);
+const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
@@ -95,7 +95,13 @@ function sortCatalogRows(rows: any[], sort: string) {
     const b = offerRubValue(right) || Number.POSITIVE_INFINITY;
     return a - b || businessOrder(left, right);
   });
+  if (sort === "totalRubDesc") return sorted.sort((left, right) => {
+    const a = offerRubValue(left);
+    const b = offerRubValue(right);
+    return (b || Number.NEGATIVE_INFINITY) - (a || Number.NEGATIVE_INFINITY) || businessOrder(left, right);
+  });
   if (sort === "year") return sorted.sort((left, right) => Number(right?.year || 0) - Number(left?.year || 0) || businessOrder(left, right));
+  if (sort === "yearAsc") return sorted.sort((left, right) => Number(left?.year || 0) - Number(right?.year || 0) || businessOrder(left, right));
   if (sort === "mileage") return sorted.sort((left, right) => {
     const a = Number(left?.mileageKm || 0) || Number.POSITIVE_INFINITY;
     const b = Number(right?.mileageKm || 0) || Number.POSITIVE_INFINITY;

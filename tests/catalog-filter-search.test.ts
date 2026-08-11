@@ -3,7 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { catalogSearchProjectionMatches, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
+import { catalogSearchProjectionMatches, catalogSearchProjectionSort, persistCatalogOffers, readCatalogFacets, resetCatalogReadCachesForTests, searchOffers } from "../apps/web/lib/catalog/storage";
 import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath } from "../apps/web/lib/data";
 
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
@@ -119,4 +119,14 @@ test("the 160 hp utilization-fee filter uses certified calculation power", () =>
   assert.equal(catalogSearchProjectionMatches(certifiedElectric, { powerTo: 130 }), false);
   assert.equal(catalogSearchProjectionMatches(uncertifiedElectric, { powerTo: 160 }), false);
   assert.equal(catalogSearchProjectionMatches(hybridAboveThreshold, { powerTo: 160 }), false);
+});
+
+test("catalog sort directions used by the filter UI reach the search projection", () => {
+  const rows = [
+    { id: "middle", totalRub: 2_000_000, year: 2023 },
+    { id: "new-expensive", totalRub: 3_000_000, year: 2025 },
+    { id: "old-cheap", totalRub: 1_000_000, year: 2021 },
+  ] as any[];
+  assert.deepEqual(catalogSearchProjectionSort([...rows], "totalRubDesc").map((row) => row.id), ["new-expensive", "middle", "old-cheap"]);
+  assert.deepEqual(catalogSearchProjectionSort([...rows], "yearAsc").map((row) => row.id), ["old-cheap", "middle", "new-expensive"]);
 });
