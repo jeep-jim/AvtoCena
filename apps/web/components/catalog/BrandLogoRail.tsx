@@ -5,7 +5,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
-// The reserve registry is only for canonical names and logos; the rail renders live brands passed by catalog facets.
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
@@ -38,15 +37,7 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   />;
 }
 
-function BrandTile({
-  brand,
-  href,
-  onClick,
-}: {
-  brand: string;
-  href: string;
-  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
-}) {
+function BrandTile({ brand, href, onClick }: { brand: string; href: string; onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return <Link
     href={href}
     onClick={onClick}
@@ -58,7 +49,7 @@ function BrandTile({
   </Link>;
 }
 
-export function BrandLogoRail({ brands }: { brands: string[] }) {
+export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resultCount?: number }) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -66,7 +57,6 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
   const [query, setQuery] = useState("");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
   const activeBrands = useMemo(() => {
-    // Source-localized make names (for example Korean Encar labels) are canonicalized before the live-only filter.
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
@@ -133,7 +123,7 @@ export function BrandLogoRail({ brands }: { brands: string[] }) {
         <BrandLogoVisual brand={selectedBrand} />
         <div className="min-w-0">
           <div className="truncate text-base font-black text-[var(--ac-text)]">{selectedBrand}</div>
-          <div className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Фильтр по марке включён</div>
+          {Number.isFinite(resultCount) ? <div className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Найдено: {resultCount}</div> : null}
         </div>
       </div>
       <button type="button" onClick={clearSelectedBrand} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black text-red-500" aria-label={`Сбросить марку ${selectedBrand}`}>×</button>
