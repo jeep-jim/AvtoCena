@@ -48,6 +48,12 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
       });
     };
 
+    const normalizeLeadBannerCopy = () => {
+      document.querySelectorAll<HTMLButtonElement>(".ac-lead-capture-banner .avto-button").forEach((button) => {
+        if (button.textContent?.trim() === "Оставить заявку") button.textContent = "Оставить запрос";
+      });
+    };
+
     const pointerDown = (event: PointerEvent) => {
       closeOpenDetails(event.target);
       window.dispatchEvent(new CustomEvent("avtocena:dismiss-tooltips", { detail: { target: event.target } }));
@@ -58,9 +64,14 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
       window.dispatchEvent(new CustomEvent("avtocena:dismiss-tooltips"));
     };
 
+    const observer = new MutationObserver(normalizeLeadBannerCopy);
+    observer.observe(document.body, { childList: true, subtree: true });
+    normalizeLeadBannerCopy();
+
     document.addEventListener("pointerdown", pointerDown, true);
     window.addEventListener("keydown", keyDown);
     return () => {
+      observer.disconnect();
       document.removeEventListener("pointerdown", pointerDown, true);
       window.removeEventListener("keydown", keyDown);
     };
