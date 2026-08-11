@@ -99,11 +99,13 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 }
 
 function minimumImageCount(offer: VehicleOffer) {
+  // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
+  // keep rows whose exact spec page/gallery exposes fewer than five verified
+  // source-bound photos. Never borrow another trim/series gallery to pad depth.
+  if (offer.sourceId === "autohome_new_china_open") return 5;
   // Japan remains strict because auction-sheet/gallery identity is part of the
-  // completed-lot contract. Normal live-market listings are valid with one
-  // source-bound vehicle photo and may enrich the same card with more later.
-  // Do not use the current workflow's global image threshold for other markets:
-  // a strict Japan publisher must never purge preserved UAE/Georgia/KG rows.
+  // completed-lot contract. Other live-market sources remain source-specific and
+  // are tightened separately only after their exact-gallery contracts are proven.
   if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
   return 1;
 }
