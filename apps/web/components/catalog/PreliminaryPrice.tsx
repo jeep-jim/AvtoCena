@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
 
 const PRELIMINARY_PRICE_INFO = "Предварительный расчёт: платежи, зависящие от неподтверждённой мощности электромотора/гибридной системы, пока не включены. Финальную стоимость подтвердит менеджер.";
 
@@ -27,7 +27,6 @@ export function PreliminaryPrice({
   const [desktopHover, setDesktopHover] = useState(false);
   const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
   const rootRef = useRef<HTMLDivElement>(null);
-  const helpRef = useRef<HTMLSpanElement>(null);
   const totalRub = Number(offer?.totalRub || 0);
 
   useEffect(() => {
@@ -72,7 +71,7 @@ export function PreliminaryPrice({
   const placementClass = panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]";
   const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
 
-  const togglePanelInfo = (event: React.MouseEvent | React.KeyboardEvent) => {
+  const togglePanelInfo = (event: ReactMouseEvent | ReactKeyboardEvent) => {
     event.preventDefault();
     event.stopPropagation();
     setOpen((current) => !current);
@@ -97,7 +96,6 @@ export function PreliminaryPrice({
           {totalRub > 0 ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
         </div>
         <span
-          ref={helpRef}
           role="button"
           tabIndex={0}
           aria-label="Почему цена предварительная"
