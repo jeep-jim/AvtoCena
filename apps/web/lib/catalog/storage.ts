@@ -156,6 +156,7 @@ function mileageBucket(value?: number | null) { return numericBucket(value, 25_0
 function engineBucket(value?: number | null) { return numericBucket(value, 250); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }
+const CURRENT_ALL_MARKETS_PROJECTION = "all";
 function currentOfferShardName(id: string) { return String(id || "").toLowerCase().replace(/[^a-f0-9]/g, "").slice(0, 2) || "unknown"; }
 function currentOfferShardPath(id: string) { return `catalog/public/offers/${currentOfferShardName(id)}.json`; }
 const CURRENT_FACETS_PATH = "catalog/public/facets.json";
@@ -417,8 +418,11 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
     || params.powerFrom || params.powerTo || params.fuel || params.bodyType
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
-  if (params.market && params.market !== "any") {
-    const current = await readCurrentSearchProjection(String(params.market));
+  const currentProjectionScope = params.market && params.market !== "any"
+    ? String(params.market)
+    : hasFilters ? CURRENT_ALL_MARKETS_PROJECTION : "";
+  if (currentProjectionScope) {
+    const current = await readCurrentSearchProjection(currentProjectionScope);
     if (current.generationId) return facetsFromProjection(current.generationId, current.items || [], params, hasFilters);
   } else if (!hasFilters) {
     const current = await readCurrentFacets();
@@ -563,11 +567,15 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), facets);
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  const allProjectionItems: CatalogSearchProjection[] = [];
   for (const offer of offers) {
     const market = String(offer.market || "");
     if (!market) continue;
-    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), searchProjectionFromOffer(offer)]);
+    const row = searchProjectionFromOffer(offer);
+    allProjectionItems.push(row);
+    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
   }
+  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
   await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {
     const projection = { generationId, items };
     await writeJsonAtomic(generationPath(generationId, `indexes/projection/${cleanShard(market)}.json`), projection);
@@ -612,15 +620,21 @@ export async function publishCurrentCatalogReadModels() {
   };
 
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  const allProjectionItems: CatalogSearchProjection[] = [];
   const offersByShard = new Map<string, VehicleOffer[]>();
   for (const offer of offers) {
     const market = String(offer.market || "");
-    if (market) projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), searchProjectionFromOffer(offer)]);
+    if (market) {
+      const row = searchProjectionFromOffer(offer);
+      allProjectionItems.push(row);
+      projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
+    }
     const shard = currentOfferShardName(offer.id);
     offersByShard.set(shard, [...(offersByShard.get(shard) || []), offer]);
   }
 
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
+  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId: manifest.generationId, items: allProjectionItems }, false);
   await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>
     writeJsonAtomic(currentProjectionPath(market), { generationId: manifest.generationId, items }, false));
   await mapWithConcurrency([...offersByShard.entries()], 12, ([shard, items]) =>
@@ -631,6 +645,7 @@ export async function publishCurrentCatalogReadModels() {
     total: offers.length,
     markets: Object.fromEntries(marketIds.map((market) => [market, offers.filter((offer) => offer.market === market).length])),
     projectionMarkets: projectionsByMarket.size,
+    allProjectionCount: allProjectionItems.length,
     offerShards: offersByShard.size,
   };
 }
@@ -674,9 +689,9 @@ export async function searchOffers(params: CatalogSearchParams) {
     || params.fuel || params.bodyType || params.transmission || params.drive
     || (params.sort && params.sort !== "updatedAt"));
 
-  const currentMarket = params.market && params.market !== "any" ? String(params.market) : "";
-  if (currentMarket) {
-    const current = await readCurrentSearchProjection(currentMarket);
+  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
+  if (currentProjectionScope) {
+    const current = await readCurrentSearchProjection(currentProjectionScope);
     if (current.generationId) {
       const modelKeys = await projectionModelKeys(params);
       const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
@@ -688,7 +703,7 @@ export async function searchOffers(params: CatalogSearchParams) {
         return {
           generationId: current.generationId, total, page, pageSize,
           items: pageRows.map(publicOfferFromProjection),
-          usedIndexShards: [currentProjectionPath(currentMarket)],
+          usedIndexShards: [currentProjectionPath(currentProjectionScope)],
         };
       }
     }
