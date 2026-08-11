@@ -41,6 +41,7 @@ function checkOffer(offer) {
 const files = (await walk(inputDir)).sort();
 const chunks = [];
 const errors = [];
+const warnings = [];
 const offers = new Map();
 let pages = 0;
 let seen = 0;
@@ -55,7 +56,12 @@ for (const file of files) {
   pages += Number(report.pages || 0);
   seen += Number(report.seen || 0);
   acceptedAcrossChunks += rows.length;
-  if (report.passed !== true) errors.push(`chunk_failed_${report.id || path.basename(file)}`);
+  // A chunk may keep individually verified rows and still end as incomplete
+  // after a transient page/gallery failure. Do not discard thousands of exact
+  // sold lots because one later request exhausted its retries. Contract and
+  // row-level failures remain fatal below; incomplete ranges are retried by
+  // the next scheduled collection.
+  if (report.passed !== true) warnings.push(`chunk_incomplete_${report.id || path.basename(file)}`);
   if (report.sourceId !== "prestige_japan_auctions_open" || report.mode !== "prestige_exact_sold_source_only_chunk_no_publish") errors.push(`chunk_contract_${report.id || path.basename(file)}`);
   for (const offer of rows) {
     const problems = checkOffer(offer);
@@ -94,6 +100,7 @@ const report = {
   outputCount: outputOffers.length,
   reachedTarget,
   errors,
+  warnings,
   passed,
 };
 await fs.writeFile(output, JSON.stringify({ report, offers: outputOffers }, null, 2));
