@@ -1,0 +1,41 @@
+name: Validate exact-only 30-minute power tile
+
+on:
+  push:
+    branches: [fix/exact-30min-tile-only-20260811]
+    paths:
+      - .github/workflows/validate-exact-30min-tile-only.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/exact-30min-tile-only-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-exact-30min-tile-only.py
+      - run: npm run typecheck
+      - name: Static exact-only guard
+        run: |
+          grep -q 'const powerTile = powerDisplay && electrified' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          ! grep -q '30 мин: уточняется' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          grep -q 'preliminaryPricing && electrified' 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+      - name: Commit validated production file only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-exact-30min-tile-only.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          git diff --cached --quiet && exit 0
+          git commit -m "Hide undocumented 30-minute power tile [skip actions]"
+          git push origin HEAD:fix/exact-30min-tile-only-20260811
