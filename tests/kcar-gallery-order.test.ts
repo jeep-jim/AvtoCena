@@ -93,3 +93,35 @@ test("an old stored K Car gallery is rebuilt from the exact detail API", async (
     (global as any).fetch = originalFetch;
   }
 });
+
+test("a current K Car gallery force-replaces dealer credential scans instead of merging them back", async () => {
+  const originalFetch = global.fetch;
+  const previousFlag = process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS;
+  const front = "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/front.jpeg";
+  const back = "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/rear.jpeg";
+  const safe = Array.from({ length: 5 }, (_, index) => `${base}/extra/extra_${index}_hq.jpg`);
+  (global as any).fetch = async () => new Response(JSON.stringify({
+    success: true,
+    data: { data: { rvo: { carCd: "EC61390500", frontImgPath: new URL(front).pathname, backImgPath: new URL(back).pathname } } },
+  }), { headers: { "content-type": "application/json" } });
+  process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS = "true";
+  const offer = {
+    sourceId: "kcar_korea_open",
+    sourceOfferId: "EC61390500",
+    images: [front, back, ...safe].map((url) => ({ url })),
+    operational: {
+      gallerySafetyMode: KCAR_EXTERIOR_FIRST_GALLERY_MODE,
+      raw: { gallerySafetyMode: KCAR_EXTERIOR_FIRST_GALLERY_MODE, images: [front, back, ...safe] },
+    },
+  } as any;
+
+  try {
+    const images = await kcarKoreaExactSource.fetchImages(offer);
+    assert.deepEqual(images.map((item) => item.url), safe);
+    assert.equal(offer.operational.galleryForceReplace, true);
+  } finally {
+    (global as any).fetch = originalFetch;
+    if (previousFlag === undefined) delete process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS;
+    else process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS = previousFlag;
+  }
+});
