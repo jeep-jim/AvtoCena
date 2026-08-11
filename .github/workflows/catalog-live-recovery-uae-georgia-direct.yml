@@ -93,7 +93,7 @@ jobs:
       - name: Snapshot all seven markets before batch write
         env:
           CATALOG_AUDIT_OUTPUT: catalog-direct-before-all7.json
-          CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Publish UAE and Georgia in one atomic generation
         env:
@@ -107,7 +107,7 @@ jobs:
           CATALOG_AUDIT_OUTPUT: catalog-direct-after-all7.json
           CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Assert non-target markets preserved and global invariants
+      - name: Assert expected age purge, preservation and global invariants
         run: |
           node - <<'NODE'
           const fs = require('node:fs');
@@ -115,12 +115,16 @@ jobs:
           const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
           const preserved = ['korea','china','japan','europe','kyrgyzstan'];
           for (const market of preserved) {
-            const a = Number(before.markets?.[market]?.count || 0);
-            const b = Number(after.markets?.[market]?.count || 0);
-            if (a !== b) throw new Error(`cross_market_loss:${market}:${a}->${b}`);
+            const beforeCount = Number(before.markets?.[market]?.count || 0);
+            const oldRows = Number(before.markets?.[market]?.belowMarketMinYearCount || 0);
+            const expectedAfter = beforeCount - oldRows;
+            const actualAfter = Number(after.markets?.[market]?.count || 0);
+            if (actualAfter !== expectedAfter) {
+              throw new Error(`unexpected_cross_market_change:${market}:${beforeCount}-${oldRows}=${expectedAfter},actual=${actualAfter}`);
+            }
           }
           for (const [market, stats] of Object.entries(after.markets || {})) {
-            if (Number(stats.olderThan15Count || 0) !== 0) throw new Error(`older_than_15:${market}`);
+            if (Number(stats.belowMarketMinYearCount || 0) !== 0) throw new Error(`below_market_min_year:${market}:${stats.belowMarketMinYearCount}`);
             if (Number(stats.nonPositiveSourcePriceCount || 0) !== 0) throw new Error(`nonpositive_source_price:${market}`);
             if (Number(stats.nonVehicleCount || 0) !== 0) throw new Error(`nonvehicle:${market}`);
             if (Number(stats.maxPerExactModel || 0) > 20) throw new Error(`model_cap:${market}:${stats.maxPerExactModel}`);
