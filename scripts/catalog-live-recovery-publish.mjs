@@ -1,5 +1,7 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 
+const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
@@ -15,8 +17,56 @@ const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_M
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
 const minYear = catalogMinYearForMarket(market);
+const publishLockPath = "catalog/import-lock.json";
+const publishOperationId = `catalog_recovery_publish_${market}_${crypto.randomUUID()}`;
+const publishLockWaitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
+const publishLockPollMs = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_LOCK_POLL_MS || 15_000));
+const publishLockTtlMs = Math.max(30 * 60_000, Number(process.env.CATALOG_PUBLISH_LOCK_TTL_MS || 90 * 60_000));
+let publishLockHeld = false;
 
 if (!PUBLIC_CATALOG_MARKETS.includes(market)) throw new Error(`recovery_publish_market_invalid:${market}`);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function acquirePublishLock() {
+  const deadline = Date.now() + publishLockWaitMs;
+  let lastLock = "catalog_publish_locked";
+  while (true) {
+    try {
+      await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
+        const lockedUntil = Date.parse(String(current?.lockedUntil || ""));
+        if (Number.isFinite(lockedUntil) && lockedUntil > Date.now() && current?.operationId !== publishOperationId) {
+          throw new Error(`catalog_publish_locked_until_${new Date(lockedUntil).toISOString()}`);
+        }
+        return {
+          operationId: publishOperationId,
+          operationType: `recovery_publish_${market}`,
+          lockedUntil: new Date(Date.now() + publishLockTtlMs).toISOString(),
+          startedAt: new Date().toISOString(),
+        };
+      });
+      publishLockHeld = true;
+      return;
+    } catch (error) {
+      lastLock = String(error?.message || error);
+      if (!/catalog_(?:publish|import|certified_power)_locked/i.test(lastLock) || Date.now() + publishLockPollMs > deadline) {
+        throw new Error(`catalog_publish_lock_wait_failed:${lastLock}`);
+      }
+      console.log(`[publish-lock] ${market} waiting: ${lastLock}`);
+      await sleep(publishLockPollMs);
+    }
+  }
+}
+
+async function releasePublishLock() {
+  if (!publishLockHeld) return;
+  await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => current?.operationId === publishOperationId
+    ? { operationId: publishOperationId, operationType: `recovery_publish_${market}`, lockedUntil: "", finishedAt: new Date().toISOString() }
+    : current);
+  publishLockHeld = false;
+}
 
 function exactCalculation(offer) {
   const total = Number(offer?.totalRub || 0);
@@ -129,6 +179,8 @@ for (const raw of sourceRows) {
   incoming.set(offer.id, offer);
 }
 
+await acquirePublishLock();
+try {
 let previousMarket = [];
 try { previousMarket = await readMarketOffers(market); } catch { previousMarket = []; }
 const candidates = new Map();
@@ -149,7 +201,7 @@ if (!marketRows.length) {
   const report = { version: 2, mode: "live_market_exact_calculated_cumulative_publish", market, published: false, generationId: null, count: 0, retainedCount: 0, incomingCount: incoming.size, rejected, publicationError: `recovery_empty_market:${market}` };
   await fs.writeFile(output, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
-  process.exit(1);
+  throw new Error(`recovery_empty_market:${market}`);
 }
 
 const combined = [...marketRows];
@@ -226,4 +278,7 @@ const report = {
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
-if (!manifest || publicationError) process.exit(1);
+if (!manifest || publicationError) process.exitCode = 1;
+} finally {
+  await releasePublishLock();
+}
