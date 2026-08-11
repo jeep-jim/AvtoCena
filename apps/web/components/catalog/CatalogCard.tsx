@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
@@ -8,6 +7,7 @@ import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
+import { IntentPrefetchLink } from "@/components/catalog/IntentPrefetchLink";
 
 function MileageIcon({ dense = false }: { dense?: boolean }) {
   return <svg className={dense ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5"} viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 17a7 7 0 1 1 14 0" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><path d="M12 17l3.4-4.1" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /><path d="M6.5 17h11" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>;
@@ -65,7 +65,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
 
   return (
     <article className="ac-catalog-card group relative min-w-0 overflow-visible rounded-[1.35rem] bg-white/[0.045] transition-colors hover:bg-white/[0.06]">
-      <Link href={href} prefetch className="block overflow-hidden rounded-[1.35rem]">
+      <IntentPrefetchLink href={href} className="block overflow-hidden rounded-[1.35rem]">
         <div className={`relative overflow-hidden bg-white/[0.04] ${mediaHeight}`}>
           {imageUrl ? <img src={imageUrl} alt={o.title} className="h-full w-full object-cover object-[center_42%]" loading="lazy" decoding="async" fetchPriority="low" /> : <div className="flex h-full items-center justify-center text-xs font-black text-white/35 sm:text-sm">Фото загружается</div>}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 via-black/42 to-transparent sm:h-24" />
@@ -86,7 +86,7 @@ export function CatalogCard({ offer, compact = false, dense = false }: { offer: 
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}
           </div>
         </div>
-      </Link>
+      </IntentPrefetchLink>
       <FavoriteToggle offerId={o.id} compact snapshot={snapshot} className={`ac-on-image absolute z-20 bg-black/52 text-red-400 backdrop-blur-md hover:bg-black/68 ${dense ? "right-2 top-2 h-8 w-8 sm:right-3 sm:top-3 sm:h-10 sm:w-10 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]" : "right-3 top-3"}`} />
     </article>
   );

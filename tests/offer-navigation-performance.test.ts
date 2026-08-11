@@ -9,6 +9,7 @@ const data = fs.readFileSync("apps/web/lib/catalog/offer-page-data.ts", "utf8");
 const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
 const preloader = fs.readFileSync("apps/web/components/layout/RoutePreloader.tsx", "utf8");
 const card = fs.readFileSync("apps/web/components/catalog/CatalogCard.tsx", "utf8");
+const intentLink = fs.readFileSync("apps/web/components/catalog/IntentPrefetchLink.tsx", "utf8");
 const deploy = fs.readFileSync(".github/workflows/deploy-yandex.yml", "utf8");
 const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings.ts", "utf8");
 
@@ -35,9 +36,13 @@ test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(layout, /getOfferForPage\(id\)/);
 });
 
-test("offer navigation stays visibly pending and warms immutable lookup data", () => {
+test("offer navigation stays visibly pending and warms only the intended offer", () => {
   assert.match(preloader, /MAX_VISIBLE_MS = 15000/);
-  assert.match(card, /<Link href=\{href\} prefetch/);
+  assert.match(card, /<IntentPrefetchLink href=\{href\}/);
+  assert.match(intentLink, /prefetch=\{false\}/);
+  assert.match(intentLink, /router\.prefetch\(href\)/);
+  assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
+  assert.match(intentLink, /onTouchStart=\{prefetch\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
   assert.match(storage, /offerLookupCacheGeneration !== manifest\.generationId/);
