@@ -4,6 +4,7 @@ import test from "node:test";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
+const prestigeRepairWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v6-prestige-repair.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
 const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
@@ -35,6 +36,14 @@ test("production workflow serializes catalog builds and never cancels a running 
   assert.match(workflow, /group: catalog-v2-production\n  cancel-in-progress: false/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+});
+
+test("Prestige failed-chunk repair uses GitHub CLI artifact downloads and remains no-publish", () => {
+  assert.match(prestigeRepairWorkflow, /permissions:\n  actions: read\n  contents: read/);
+  assert.match(prestigeRepairWorkflow, /gh run download "\$SOURCE_RUN_ID"/);
+  assert.match(prestigeRepairWorkflow, /--pattern 'prestige-japan-chunk-\*'/);
+  assert.doesNotMatch(prestigeRepairWorkflow, /\bcurl\b/);
+  assert.doesNotMatch(prestigeRepairWorkflow, /catalog-publish|persistCatalogOffers|JSON_STORAGE_DRIVER|YC_OBJECT_STORAGE/);
 });
 
 test("vehicle model sync uses current VehiclesDB paths and retained knowledge on upstream failure", () => {
