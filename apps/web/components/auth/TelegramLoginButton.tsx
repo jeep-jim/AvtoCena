@@ -27,7 +27,7 @@ export function TelegramLoginButton({ nextPath }: { nextPath: string }) {
 
   if (!botUsername) {
     return (
-      <div className="rounded-2xl bg-amber-400/10 px-4 py-3 text-sm font-bold leading-6 text-amber-100">
+      <div className="ac-login-telegram-placeholder rounded-2xl bg-amber-400/10 px-4 py-3 text-sm font-bold leading-6 text-amber-100">
         Telegram-вход подготовлен. Для активации нужно указать имя бота в настройках окружения.
       </div>
     );
