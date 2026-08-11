@@ -2,6 +2,8 @@ import crypto from "node:crypto";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasCredibleOfferContent } from "./offer-quality";
+import { rankedCatalogImageUrls } from "./image-quality";
+import { catalogOfferVisibleRub } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
@@ -121,6 +123,9 @@ export type CatalogFacets = { generationId: string; makes: string[]; models: Arr
 export type CatalogSearchProjection = {
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
   fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
+  trim?: string; powerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
+  sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
+  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
@@ -173,12 +178,31 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker:
 }
 
 function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection {
+  const visibleRub = catalogOfferVisibleRub(offer);
+  const raw: any = offer.operational?.raw || {};
   return {
     id: offer.id, market: String(offer.market || ""), make: cleanFacet(offer.make), model: cleanFacet(offer.model), year: Number(offer.year || 0),
-    totalRub: offer.totalRub, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
+    totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
+    trim: cleanFacet(offer.trim), powerKw: offer.powerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
+    sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
+    calculationStatus: offer.calculationStatus, calculationSnapshot: { currencyRate: offer.calculationSnapshot?.currencyRate, pricingConfidence: offer.calculationSnapshot?.pricingConfidence },
+    publicVisibleRub: visibleRub || undefined, cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
+    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 1,
   };
+}
+function projectionCanRenderCard(row: CatalogSearchProjection) {
+  return row.cardProjectionVersion === 1 && Boolean(row.id && row.market && row.make && row.model && row.year);
+}
+function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
+  const imageUrl = String(row.cardImageUrl || "");
+  return {
+    ...row, status: "active", offerType: "fixed", priceMode: (row.priceMode || "fixed") as any, calculationStatus: (row.calculationStatus || "needs_data") as any,
+    sourcePrice: row.sourcePrice ?? null, sourceCurrency: row.sourceCurrency ?? null,
+    images: imageUrl ? [{ id: "", url: imageUrl, width: undefined, height: undefined, size: 0, mimeType: "image/jpeg" }] : [],
+    firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",
+  } as any;
 }
 async function readSearchProjection(generationId: string, market: string) {
   return readIndex<{ generationId: string; items: CatalogSearchProjection[] }>(generationId, `projection/${cleanShard(market)}.json`, { generationId, items: [] });
@@ -264,6 +288,20 @@ export async function readCatalogFacets(params: CatalogSearchParams = {}): Promi
     || params.transmission || params.drive || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo);
 
   if (!hasFilters) {
+    if (params.market && params.market !== "any") {
+      const projection = await readSearchProjection(manifest.generationId, String(params.market));
+      if ((projection.items || []).length) {
+        return {
+          generationId: manifest.generationId,
+          makes: uniqueText((projection.items || []).map((row) => row.make)).sort((a, b) => a.localeCompare(b, "ru")),
+          models: [], markets: [...PUBLIC_CATALOG_MARKETS],
+          bodyTypes: uniqueText((projection.items || []).map((row) => row.bodyType)).sort(),
+          fuels: uniqueText((projection.items || []).map((row) => row.fuel)).sort(),
+          transmissions: uniqueText((projection.items || []).map((row) => row.transmission)).sort(),
+          drives: uniqueText((projection.items || []).map((row) => row.drive)).sort(),
+        };
+      }
+    }
     return {
       ...indexed, generationId: manifest.generationId,
       makes: uniqueText(indexed.makes || []).sort((a, b) => a.localeCompare(b, "ru")),
@@ -454,9 +492,19 @@ async function candidateIds(manifest: CatalogManifest, params: CatalogSearchPara
     ids = intersect(ids, shard.ids || []);
   }
   if (params.model) {
-    const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
-    const candidates = matches.length ? matches.map((match) => `${match.make}:${match.model}`) : params.make ? [`${params.make}:${params.model}`] : [];
-    ids = intersect(ids, await unionIndexIds(manifest, "model", candidates, used));
+    let modelIds: string[] = [];
+    if (params.make) {
+      const directPath = `model/${cleanShard(`${params.make}:${params.model}`)}.json`;
+      const direct = await readIndex<{ ids: string[] }>(manifest.generationId, directPath, { ids: [] });
+      used.push(`catalog/generations/${manifest.generationId}/indexes/${directPath}`);
+      modelIds = direct.ids || [];
+    }
+    if (!modelIds.length) {
+      const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
+      const candidates = matches.length ? matches.map((match) => `${match.make}:${match.model}`) : params.make ? [`${params.make}:${params.model}`] : [];
+      modelIds = await unionIndexIds(manifest, "model", candidates, used);
+    }
+    ids = intersect(ids, modelIds);
   }
   if (params.yearFrom || params.yearTo) ids = intersect(ids, await unionIndexIds(manifest, "year", yearKeys(params.yearFrom, params.yearTo), used));
   if (params.budgetFrom || params.budgetTo) ids = intersect(ids, await unionIndexIds(manifest, "budget", rangeKeys(params.budgetFrom, params.budgetTo, 500_000, 100_000_000), used));
@@ -490,6 +538,16 @@ export async function searchOffers(params: CatalogSearchParams) {
     pageIds = projectionRows.slice((page - 1) * pageSize, page * pageSize).map((row) => row.id);
     const markets = params.market && params.market !== "any" ? [String(params.market)] : MARKETS;
     used.push(...markets.map((market) => `catalog/generations/${manifest.generationId}/indexes/projection/${cleanShard(market)}.json`));
+  }
+
+  const projectionMarkets = params.market && params.market !== "any" ? [String(params.market)] : [...new Set(pageIds.map((id) => String(byId.byId[id]?.market || "")).filter(Boolean))];
+  if (projectionMarkets.length) {
+    const projected = (await mapWithConcurrency(projectionMarkets, Math.min(7, projectionMarkets.length), async (market) => (await readSearchProjection(manifest.generationId, market)).items || [])).flat();
+    const projectedById = new Map(projected.filter(projectionCanRenderCard).map((row) => [row.id, row]));
+    if (pageIds.length && pageIds.every((id) => projectedById.has(id))) {
+      used.push(...projectionMarkets.map((market) => `catalog/generations/${manifest.generationId}/indexes/projection/${cleanShard(market)}.json`));
+      return { generationId: manifest.generationId, total, page, pageSize, items: pageIds.map((id) => publicOfferFromProjection(projectedById.get(id)!)), usedIndexShards: [...new Set(used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`])] };
+    }
   }
 
   const pageSet = new Set(pageIds);

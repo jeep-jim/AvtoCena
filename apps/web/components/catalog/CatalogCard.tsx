@@ -30,7 +30,8 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 
 export function CatalogCard({ offer, compact = false, dense = false }: { offer: any; compact?: boolean; dense?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
-  const rankedImages = rankedCatalogImageUrls(normalizedOffer);
+  const projectedCover = String((offer as any)?.cardImageUrl || "").trim();
+  const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
