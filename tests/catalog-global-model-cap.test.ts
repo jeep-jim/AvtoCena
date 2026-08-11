@@ -16,6 +16,7 @@ test("canonical catalog cleanup hard-caps every exact model at twenty", () => {
 });
 
 test("global cleanup follows every completed writer and audits all seven markets", () => {
+  assert.match(workflow, /push:[\s\S]*branches: \[main\][\s\S]*catalog-global-model-cap\.yml/);
   assert.match(workflow, /Catalog live daily · working markets/);
   assert.match(workflow, /Catalog live recovery · UAE \+ Georgia direct/);
   assert.match(workflow, /Catalog Japan · publish verified Prestige aggregate/);
@@ -23,7 +24,9 @@ test("global cleanup follows every completed writer and audits all seven markets
   assert.doesNotMatch(workflow, /workflow_run\.conclusion != 'cancelled'/);
   assert.match(workflow, /actions: write/);
   assert.match(workflow, /gh workflow run catalog-live-recovery-uae-georgia-direct\.yml --ref main/);
+  assert.match(workflow, /github\.event_name == 'push'/);
   assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog live daily · working markets'/);
+  assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog Korea · K Car exterior gallery repair'/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
 });
