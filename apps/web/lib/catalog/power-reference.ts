@@ -10,7 +10,9 @@ export type CertifiedPowerReference = {
   modelAliases?: string[];
   rawModelContains?: string[];
   trimContains?: string[];
+  trimNotContains?: string[];
   driveContains?: string[];
+  driveNotContains?: string[];
   yearFrom?: number;
   yearTo?: number;
   powertrainKind: Exclude<PowertrainKind, "unknown">;
@@ -80,7 +82,9 @@ function validPower(value: unknown) {
 function referenceSpecificity(reference: CertifiedPowerReference) {
   return (reference.rawModelContains?.length || 0) * 15
     + (reference.trimContains?.length || 0) * 10
+    + (reference.trimNotContains?.length || 0) * 8
     + (reference.driveContains?.length || 0) * 5
+    + (reference.driveNotContains?.length || 0) * 4
     + (reference.peakPowerKw ? 5 : 0)
     + (reference.yearFrom ? 1 : 0)
     + (reference.yearTo ? 1 : 0);
@@ -105,9 +109,17 @@ export function certifiedPowerReferenceMatches(reference: CertifiedPowerReferenc
     const haystack = searchableText(offer.generation, offer.trim, offer.engineType);
     if (!reference.trimContains.every((part) => containsSearchTerm(haystack, part))) return false;
   }
+  if (reference.trimNotContains?.length) {
+    const haystack = searchableText(offer.generation, offer.trim, offer.engineType);
+    if (reference.trimNotContains.some((part) => containsSearchTerm(haystack, part))) return false;
+  }
   if (reference.driveContains?.length) {
     const drive = searchableDrive(offer);
     if (!drive || !reference.driveContains.every((part) => drive.includes(token(part)))) return false;
+  }
+  if (reference.driveNotContains?.length) {
+    const drive = searchableDrive(offer);
+    if (reference.driveNotContains.some((part) => drive.includes(token(part)))) return false;
   }
   if (validPower(reference.peakPowerKw)) {
     const offerPeakPowerKw = Number(offer.powerKw || 0);
