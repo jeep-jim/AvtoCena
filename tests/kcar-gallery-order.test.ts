@@ -94,7 +94,7 @@ test("an old stored K Car gallery is rebuilt from the exact detail API", async (
   }
 });
 
-test("a current K Car gallery force-replaces dealer credential scans instead of merging them back", async () => {
+test("a current K Car listing without an exact exterior cover is rejected", async () => {
   const originalFetch = global.fetch;
   const previousFlag = process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS;
   const front = "https://img.kcar.com/ucms/202607/CM/CMBIZ11120D/front.jpeg";
@@ -116,9 +116,7 @@ test("a current K Car gallery force-replaces dealer credential scans instead of 
   } as any;
 
   try {
-    const images = await kcarKoreaExactSource.fetchImages(offer);
-    assert.deepEqual(images.map((item) => item.url), safe);
-    assert.equal(offer.operational.galleryForceReplace, true);
+    await assert.rejects(() => kcarKoreaExactSource.fetchImages(offer), /kcar_exact_gallery_no_exterior_EC61390500/);
   } finally {
     (global as any).fetch = originalFetch;
     if (previousFlag === undefined) delete process.env.CATALOG_GALLERY_DROP_CREDENTIAL_SCANS;
