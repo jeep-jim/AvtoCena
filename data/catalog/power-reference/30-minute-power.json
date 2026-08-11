@@ -303,5 +303,25 @@
     "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/mini/mini/j01-f65-f66-f67/330184/",
     "verifiedAt": "2026-08-11T00:00:00.000Z",
     "verifiedBy": "avtocena:manual-kba-cross-check"
+  },
+  {
+    "id": "hyundai-casper-electric-inster-49kwh-fwd-2024-2026-kba-8252-ama",
+    "make": "Hyundai",
+    "model": "Casper",
+    "modelAliases": ["Casper Electric"],
+    "rawModelContains": ["캐스퍼"],
+    "trimContains": ["인스퍼레이션"],
+    "yearFrom": 2024,
+    "yearTo": 2026,
+    "powertrainKind": "electric",
+    "peakPowerKw": 85,
+    "peakPowerToleranceKw": 1,
+    "power30MinKw": 28,
+    "utilizationPowerKw": 28,
+    "sourceDocumentType": "KBA_registration_data",
+    "sourceDocumentId": "KBA:8252/AMA",
+    "sourceUrl": "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/hyundai/inster/1generation/337914/",
+    "verifiedAt": "2026-08-11T00:00:00.000Z",
+    "verifiedBy": "avtocena:manual-kba-cross-check"
   }
 ]
