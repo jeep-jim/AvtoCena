@@ -102,7 +102,7 @@ function minimumImageCount(offer: VehicleOffer) {
   // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
   // keep rows whose exact spec page/gallery exposes fewer than five verified
   // source-bound photos. Never borrow another trim/series gallery to pad depth.
-  if (offer.sourceId === "autohome_new_china_open") return 5;
+  if (["autohome_new_china_open", "mobile_de_open"].includes(String(offer.sourceId || ""))) return 5;
   // Japan remains strict because auction-sheet/gallery identity is part of the
   // completed-lot contract. Other live-market sources remain source-specific and
   // are tightened separately only after their exact-gallery contracts are proven.
