@@ -50,6 +50,7 @@ jobs:
           CATALOG_GALLERY_PERSIST_EVERY: "500"
           CATALOG_GALLERY_CONCURRENCY: "8"
           CATALOG_GALLERY_RETIRE_CONFIRMED_UNAVAILABLE: "true"
+          CATALOG_GALLERY_DROP_CREDENTIAL_SCANS: "true"
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_GALLERY_REPORT_FILE: catalog-kcar-exterior-gallery-refresh.json
         run: npx tsx scripts/catalog-refresh-galleries.mjs
