@@ -1,0 +1,40 @@
+name: Validate postpersist market age audit
+
+on:
+  push:
+    branches: [fix/catalog-min-year-2015-20260811]
+    paths:
+      - .github/workflows/validate-postpersist-market-age-audit-20260811.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-min-year-2015-20260811
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-postpersist-market-age-audit-20260811.py
+      - run: node --check scripts/catalog-live-postpersist-audit.mjs
+      - run: |
+          grep -q 'belowMarketMinYearCount' scripts/catalog-live-postpersist-audit.mjs
+          grep -q 'below_market_min_year' scripts/catalog-live-postpersist-audit.mjs
+          grep -q 'catalogMinYearForMarket' scripts/catalog-live-postpersist-audit.mjs
+      - name: Commit production audit only
+        run: |
+          git checkout -- . || true
+          python3 scripts/patch-postpersist-market-age-audit-20260811.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-postpersist-audit.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Audit market-specific year floors [skip actions]"
+          git push origin HEAD:fix/catalog-min-year-2015-20260811
