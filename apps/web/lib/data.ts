@@ -27,6 +27,7 @@ export interface JsonStorage {
   binaryExists?(relativePath: string): Promise<boolean>;
   deleteBinary?(relativePath: string): Promise<void>;
   listObjects?(prefix: string): Promise<StorageObject[]>;
+  deleteObjects?(relativePaths: string[]): Promise<number>;
   deletePrefix?(prefix: string): Promise<number>;
 }
 
@@ -64,6 +65,7 @@ export class LocalJsonStorage implements JsonStorage {
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async listObjects(prefix: string) { const normalized = normalizeStorageKey(prefix); const root = localPath(normalized); const dataRoot = path.resolve(getDataRoot()); const files = await walkLocalFiles(root); return Promise.all(files.map(async (file) => { const stat = await fs.promises.stat(file); return { key: path.relative(dataRoot, file).replace(/\\/g, "/"), lastModified: stat.mtime.toISOString(), size: stat.size }; })); }
+  async deleteObjects(relativePaths: string[]) { const keys = [...new Set(relativePaths.map(normalizeStorageKey))]; await Promise.all(keys.map((key) => fs.promises.rm(localPath(key), { force: true }))); return keys.length; }
   async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); await Promise.all(objects.map((object) => fs.promises.rm(localPath(object.key), { force: true }))); return objects.length; }
 }
 
@@ -84,6 +86,7 @@ function awsEncode(value: string) { return encodeURIComponent(value).replace(/[!
 function canonicalQuery(params: Record<string, string>) { return Object.entries(params).sort(([left], [right]) => left.localeCompare(right)).map(([key, value]) => `${awsEncode(key)}=${awsEncode(value)}`).join("&"); }
 function cleanEtag(value: string | null) { return value?.replace(/^W\//, "") || undefined; }
 function decodeXml(value: string) { return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&apos;/g, "'").replace(/&amp;/g, "&"); }
+function encodeXml(value: string) { return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&apos;"); }
 
 export class ObjectJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "object";
@@ -137,7 +140,8 @@ export class ObjectJsonStorage implements JsonStorage {
     throw new Error(`${detail}:path=${normalizedPath.slice(0, 240)}:bytes=${Buffer.byteLength(body ?? "")}`);
   }
 }
-  private async bucketRequest(params: Record<string, string>) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest("GET", url, undefined, {}, query); }
+  private async signedBucketRequest(method: string, params: Record<string, string>, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest(method, url, body, extraHeaders, query); }
+  private async bucketRequest(params: Record<string, string>) { return this.signedBucketRequest("GET", params); }
   async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: await res.json() as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
   async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
@@ -172,7 +176,39 @@ export class ObjectJsonStorage implements JsonStorage {
     } while (continuationToken);
     return objects;
   }
-  async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); const concurrency = Math.max(1, Math.min(16, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 8))); let cursor = 0; let deleted = 0; await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, objects.length)) }, async () => { while (true) { const index = cursor++; if (index >= objects.length) return; await this.deleteJson(objects[index].key); deleted++; } })); return deleted; }
+  async deleteObjects(relativePaths: string[]) {
+    const relative = [...new Set(relativePaths.map(normalizeStorageKey))];
+    if (!relative.length) return 0;
+    if (relative.length > 1_000) throw new Error(`object_storage_batch_delete_limit_${relative.length}`);
+    const body = `<?xml version="1.0" encoding="UTF-8"?><Delete><Quiet>true</Quiet>${relative.map((key) => `<Object><Key>${encodeXml(this.key(key))}</Key></Object>`).join("")}</Delete>`;
+    const response = await this.signedBucketRequest("POST", { delete: "" }, body, {
+      "content-type": "application/xml",
+      "content-md5": crypto.createHash("md5").update(body).digest("base64"),
+      "content-length": String(Buffer.byteLength(body)),
+    });
+    if (!response.ok) throw new Error(`object_storage_batch_delete_${response.status}`);
+    const result = await response.text();
+    const failures = result.match(/<Error>[\s\S]*?<\/Error>/g) || [];
+    if (failures.length) throw new Error(`object_storage_batch_delete_partial_${failures.length}`);
+    return relative.length;
+  }
+  async deletePrefix(prefix: string) {
+    const objects = await this.listObjects(prefix);
+    const batches: StorageObject[][] = [];
+    for (let index = 0; index < objects.length; index += 1_000) batches.push(objects.slice(index, index + 1_000));
+    const concurrency = Math.max(1, Math.min(16, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 4)));
+    let cursor = 0;
+    let deleted = 0;
+    await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, batches.length)) }, async () => {
+      while (true) {
+        const batch = batches[cursor++];
+        if (!batch) return;
+        try { deleted += await this.deleteObjects(batch.map((object) => object.key)); }
+        catch { for (const object of batch) { await this.deleteJson(object.key); deleted++; } }
+      }
+    }));
+    return deleted;
+  }
 }
 
 let singleton: JsonStorage | null = null;
