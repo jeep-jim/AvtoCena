@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed, hasCredibleOfferContent } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
@@ -45,9 +45,7 @@ function exactSourceBound(offer) {
     && raw.recoveryBodySourceOnly === true;
 }
 function publicExistingStillValid(offer) {
-  return /^https?:\/\//i.test(String(offer?.operational?.sourceUrl || ""))
-    && Number(offer?.sourcePrice || 0) > 0
-    && Boolean(String(offer?.sourceCurrency || "").trim())
+  return hasCredibleOfferContent({ ...offer, status: "active" })
     && publishableCalculation(offer)
     && isCatalogOfferBusinessLiquid(offer);
 }
@@ -123,6 +121,7 @@ for (const raw of sourceRows) {
   const year = Number(offer.year || 0);
   if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
   if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
+  if (!hasCredibleOfferContent({ ...offer, status: "active" })) { reject("public_quality"); continue; }
   if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
   if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
   if (!publishableCalculation(offer)) { reject("calculation"); continue; }
@@ -161,7 +160,7 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map(normalizeVisible)
-    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && isCatalogOfferBusinessLiquid(offer))
+    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && publicExistingStillValid(offer))
     .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
