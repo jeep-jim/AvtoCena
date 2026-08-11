@@ -112,7 +112,9 @@ export function certifiedPowerReferenceMatches(reference: CertifiedPowerReferenc
   if (validPower(reference.peakPowerKw)) {
     const offerPeakPowerKw = Number(offer.powerKw || 0);
     const tolerance = Math.max(0, Number(reference.peakPowerToleranceKw ?? 1));
-    if (!validPower(offerPeakPowerKw) || Math.abs(offerPeakPowerKw - Number(reference.peakPowerKw)) > tolerance) return false;
+    // The reviewed reference is also allowed to fill a missing peak value for
+    // excise. If the source supplied a conflicting peak value, reject it.
+    if (validPower(offerPeakPowerKw) && Math.abs(offerPeakPowerKw - Number(reference.peakPowerKw)) > tolerance) return false;
   }
   return Boolean(reference.sourceDocumentId && reference.verifiedAt && reference.verifiedBy);
 }
@@ -153,6 +155,10 @@ export async function enrichOfferWithCertifiedPower<T extends VehicleOffer>(offe
   return {
     ...offer,
     powertrainKind: reference.powertrainKind,
+    powerKw: validPower(reference.peakPowerKw) ? Number(reference.peakPowerKw) : offer.powerKw,
+    powerHp: validPower(reference.peakPowerKw) && !validPower(offer.powerHp)
+      ? Math.round(Number(reference.peakPowerKw) * 1.3596216173 * 10) / 10
+      : offer.powerHp,
     icePowerKw: validPower(reference.icePowerKw) ? Number(reference.icePowerKw) : offer.icePowerKw,
     power30MinKwByMotor: motorPowers.length ? motorPowers : offer.power30MinKwByMotor,
     power30MinKw: total30Minute || offer.power30MinKw,

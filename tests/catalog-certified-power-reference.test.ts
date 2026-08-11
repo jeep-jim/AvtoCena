@@ -34,6 +34,14 @@ test("certified power reference accepts an exact documented variant and explicit
     powertrainKind: "electric",
     powerKw: 239.4,
   }), true);
+  assert.equal(certifiedPowerReferenceMatches(reference, {
+    make: "Kia",
+    model: "EV6 Long Range",
+    trim: "4WD GT Line",
+    drive: "AWD",
+    year: 2022,
+    powertrainKind: "electric",
+  }), true);
 });
 
 test("certified power reference rejects another powertrain, drive or peak-power variant", () => {
