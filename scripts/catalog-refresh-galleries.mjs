@@ -16,6 +16,7 @@ const maxImages = Math.min(120, Math.max(minImages, Number(process.env.CATALOG_M
 const force = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_FORCE || "false").toLowerCase());
 const persistEvery = Math.max(1, Number(process.env.CATALOG_GALLERY_PERSIST_EVERY || 25));
 const concurrency = Math.min(20, Math.max(1, Number(process.env.CATALOG_GALLERY_CONCURRENCY || 1)));
+const retireConfirmedUnavailable = ["1", "true", "yes", "on"].includes(String(process.env.CATALOG_GALLERY_RETIRE_CONFIRMED_UNAVAILABLE || "false").toLowerCase());
 
 function identity(image) { return String(image?.id || image?.checksum || image?.objectKey || image?.url || ""); }
 function mergeImages(fresh, previous) {
@@ -54,7 +55,7 @@ const candidates = allOffers
   .slice(0, Math.max(maxOffers, offerIds.size));
 
 const byId = new Map(allOffers.map((offer) => [offer.id, offer]));
-const report = { startedAt: new Date().toISOString(), markets: [...markets], priorityOfferIds: [...offerIds], selected: candidates.length, refreshed: 0, expanded: 0, replaced: 0, unchanged: 0, failed: 0, rows: [] };
+const report = { startedAt: new Date().toISOString(), markets: [...markets], priorityOfferIds: [...offerIds], selected: candidates.length, refreshed: 0, expanded: 0, replaced: 0, unchanged: 0, retired: 0, failed: 0, rows: [] };
 async function refreshCandidate(index) {
   const offer = candidates[index];
   const source = adapters.get(offer.sourceId);
@@ -84,9 +85,19 @@ async function refreshCandidate(index) {
     report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, fetched: fresh.length, after: offer.images.length, replaced, ok: true });
     console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${before} -> ${offer.images.length} (fetched ${fresh.length})`);
   } catch (error) {
+    const message = String(error?.message || error);
+    if (retireConfirmedUnavailable && /^kcar_exact_detail_sold_[A-Za-z0-9_-]+$/.test(message)) {
+      offer.status = "sold";
+      offer.updatedAt = new Date().toISOString();
+      byId.set(offer.id, offer);
+      report.retired++;
+      report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, retired: true, ok: true, reason: message });
+      console.log(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: retired confirmed sold listing`);
+      return;
+    }
     report.failed++;
-    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: String(error?.message || error) });
-    console.error(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${String(error?.message || error)}`);
+    report.rows.push({ id: offer.id, sourceId: offer.sourceId, market: offer.market, before, after: before, ok: false, error: message });
+    console.error(`[gallery] ${index + 1}/${candidates.length} ${offer.market}/${offer.sourceId}/${offer.id}: ${message}`);
   }
 }
 
