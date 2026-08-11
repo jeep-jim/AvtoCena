@@ -3,10 +3,6 @@ run-name: Enforce 20 exact offers per model · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-global-model-cap.yml"
   workflow_run:
     workflows:
       - "Catalog live daily · working markets"
@@ -38,7 +34,7 @@ env:
 
 jobs:
   enforce:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion != 'cancelled'
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion != 'cancelled'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
