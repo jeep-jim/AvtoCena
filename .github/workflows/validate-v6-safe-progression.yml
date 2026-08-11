@@ -49,8 +49,9 @@ jobs:
           node - <<'NODE'
           const fs=require('fs'); const r=JSON.parse(fs.readFileSync('prestige-japan-strict-partition-plan.json','utf8'));
           if(Number(r.startModelIndex)!==91) throw new Error(`wrong start:${r.startModelIndex}`);
-          if(!Array.isArray(r.matrix?.include) || !r.matrix.include.length) throw new Error('no deeper partitions');
-          console.log(JSON.stringify({startModelIndex:r.startModelIndex,partitionCount:r.partitionCount,plannedRows:r.plannedRows,complete:r.complete},null,2));
+          if(!Array.isArray(r.partitions) || !r.partitions.length) throw new Error('no deeper partitions');
+          if(Number(r.partitions[0]?.modelIndex || -1) < 91) throw new Error(`unexpected first model index:${r.partitions[0]?.modelIndex}`);
+          console.log(JSON.stringify({startModelIndex:r.startModelIndex,partitionCount:r.partitionCount,plannedRows:r.plannedRows,complete:r.complete,first:r.partitions[0]?.id},null,2));
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
