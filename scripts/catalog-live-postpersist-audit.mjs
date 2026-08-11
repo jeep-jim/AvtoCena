@@ -1,5 +1,6 @@
 const { readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
@@ -42,6 +43,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0).length,
     priorityAgeCount: rows.filter((offer) => Number(offer?.year || 0) >= currentYear - 6).length,
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
+    marketMinYear: catalogMinYearForMarket(market),
+    belowMarketMinYearCount: rows.filter((offer) => Number(offer?.year || 0) < catalogMinYearForMarket(market)).length,
     distinctModels: modelCounts.size,
     distinctMakes: new Set(rows.map((offer) => String(offer?.make || "").trim().toLowerCase()).filter(Boolean)).size,
     maxPerExactModel: modelCounts.size ? Math.max(...modelCounts.values()) : 0,
@@ -55,7 +58,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
   if (assertMarkets.has(market) && stats.maxPerExactModel > 20) report.failures.push(`${market}:model_quota:${stats.maxPerExactModel}`);
-  if (assertMarkets.has(market) && stats.olderThan15Count > 0) report.failures.push(`${market}:older_than_15:${stats.olderThan15Count}`);
+  if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
   if (market === "japan" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`japan:below_five_images:${stats.belowFiveImagesCount}`);
