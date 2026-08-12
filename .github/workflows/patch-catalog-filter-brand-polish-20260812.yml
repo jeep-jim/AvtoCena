@@ -1,0 +1,159 @@
+name: Patch catalog filter brand polish 20260812
+
+on:
+  push:
+    branches:
+      - ui/catalog-filter-brand-polish-20260812
+    paths:
+      - .github/workflows/patch-catalog-filter-brand-polish-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/catalog-filter-brand-polish-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply UI patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def read(path): return Path(path).read_text()
+          def write(path, text): Path(path).write_text(text)
+          def once(text, old, new, label):
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected 1 match, got {count}")
+              return text.replace(old, new, 1)
+
+          # CatalogFilters: branded multi-select, directional color, flatter desktop advanced controls.
+          p = "apps/web/components/catalog/CatalogFilters.tsx"
+          s = read(p)
+          s = once(s,
+              'import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";\n',
+              'import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";\nimport { CatalogBrandMultiSelect } from "@/components/catalog/CatalogBrandMultiSelect";\n',
+              "filters import brand multiselect")
+          s = once(s,
+              'function SortDirectionIcon({ direction }: { direction: SortDir }) { return <svg className={`transition-transform ${direction === "desc" ? "rotate-180" : ""}`} width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 3V16M6 3L3.5 5.5M6 3L8.5 5.5M14 17V4M14 17L11.5 14.5M14 17L16.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }\n',
+              'function SortDirectionIcon({ direction, active }: { direction: SortDir; active: boolean }) { return <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 16V3M6 3L3.5 5.5M6 3L8.5 5.5" stroke={active && direction === "asc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "asc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M14 4V17M14 17L11.5 14.5M14 17L16.5 14.5" stroke={active && direction === "desc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "desc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }\n',
+              "sort directional icon")
+          s = once(s,
+              '<SortDirectionIcon direction={direction} />',
+              '<SortDirectionIcon direction={direction} active={Boolean(sortKey)} />',
+              "sort icon active prop")
+          s = once(s,
+              'function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; includePrimary?: boolean; includeFuel?: boolean }) {\n',
+              'function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {\n',
+              "advanced fields context signature")
+          s = once(s,
+              '{includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder={splitMakeValues(draft.make).length > 1 ? `${splitMakeValues(draft.make).length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}\n',
+              '{includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}\n',
+              "advanced primary brand multiselect")
+          s = once(s,
+              '<div className={`grid gap-2.5 md:grid-cols-2 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>',
+              '<div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>',
+              "advanced select grid")
+          old_ranges = '''    <div className="mt-4 flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>\n    <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">\n      <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />\n      <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />\n      <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />\n      <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />\n    </div>\n'''
+          new_ranges = '''    <div className="ac-range-fields-shell mt-2.5">\n      <div className="flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>\n      <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">\n        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />\n        <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />\n        <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />\n        <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />\n      </div>\n    </div>\n'''
+          s = once(s, old_ranges, new_ranges, "range nested shell")
+          marker = '  const marketOptions = markets;\n'
+          addition = '''  const brandStatsContext = useMemo(() => {\n    const contextDraft: FilterDraft = { ...draft, make: "", model: "" };\n    return catalogQuery(contextDraft, "", "asc");\n  }, [draft]);\n'''
+          s = once(s, marker, marker + addition, "brand stats context")
+          s = once(s,
+              '  const advancedCount = chips.filter((item) => ["bodyType", "transmission", "fuel", "drive", "year", "budget", "mileage", "engine"].includes(item.key)).length;\n\n',
+              '',
+              "remove desktop advanced count")
+          s = once(s,
+              '<SearchSelect name="make" value={draft.make} placeholder={selectedMakes.length > 1 ? `${selectedMakes.length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />\n',
+              '<CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />\n',
+              "desktop brand multiselect")
+          s = once(s,
+              '      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(158px,.52fr)] items-center gap-2.5">\n',
+              '      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(180px,.58fr)] items-center gap-2.5">\n',
+              "desktop second row width")
+          old_settings = '<button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="truncate">{expanded ? "Скрыть" : "Ещё фильтры"}</span>{advancedCount ? <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white">{advancedCount}</span> : null}</button>'
+          new_settings = '<button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>'
+          s = once(s, old_settings, new_settings, "desktop settings full label")
+          s = once(s,
+              '{expanded ? <section className="ac-advanced-fields mt-3 rounded-[1.35rem] p-3.5"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includeFuel={!electricOnly} /></section> : null}',
+              '{expanded ? <section className="ac-advanced-fields mt-3"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel={!electricOnly} /></section> : null}',
+              "desktop advanced flat shell")
+          s = once(s,
+              '<AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includePrimary includeFuel={!electricOnly} />',
+              '<AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} />',
+              "mobile advanced brand context")
+          s = once(s,
+              '      .ac-advanced-fields{background:var(--ac-surface-2)}\n',
+              '      .ac-advanced-fields{background:transparent}\n      .ac-range-fields-shell{background:var(--ac-surface-2);border:1px solid var(--ac-border);border-radius:1.35rem;padding:13px 14px 14px}\n',
+              "advanced/range shell CSS")
+          s = once(s,
+              '        .ac-mobile-filter-sheet .ac-advanced-fields{background:transparent}\n',
+              '        .ac-mobile-filter-sheet .ac-advanced-fields{background:transparent}\n        .ac-mobile-filter-sheet .ac-range-fields-shell{background:transparent;border:0;border-radius:0;padding:0}\n',
+              "mobile range shell CSS")
+          write(p, s)
+
+          # Dependent facets: understand multi-brand rows and give settings enough room.
+          p = "apps/web/components/catalog/VehicleModelSearch.tsx"
+          s = read(p)
+          old = '''    const allowed = facets ? allowedFacetLabels(hidden.name, facets) : null;\n    const selected = selectedFacetLabel(hidden.name, clean(hidden.value));\n    dropdown.querySelectorAll<HTMLButtonElement>(".ac-filter-option").forEach((option, index) => {\n      const text = clean(option.querySelector(":scope > span")?.textContent || option.textContent).replace(/✓$/, "").trim();\n      const keep = !allowed || index === 0 || !text || allowed.has(text) || Boolean(selected && text === selected);\n'''
+          new = '''    const allowed = facets ? allowedFacetLabels(hidden.name, facets) : null;\n    const selected = hidden.name === "make"\n      ? new Set(clean(hidden.value).split(",").map(clean).filter(Boolean))\n      : new Set([selectedFacetLabel(hidden.name, clean(hidden.value))].filter(Boolean));\n    dropdown.querySelectorAll<HTMLButtonElement>(".ac-filter-option").forEach((option, index) => {\n      const text = clean(option.dataset.facetValue || option.querySelector(":scope > span")?.textContent || option.textContent).replace(/✓$/, "").trim();\n      const keep = !allowed || index === 0 || !text || allowed.has(text) || selected.has(text);\n'''
+          s = once(s, old, new, "dependent multibrand options")
+          s = once(s,
+              'minmax(158px,.52fr)!important;',
+              'minmax(180px,.58fr)!important;',
+              "dependent settings width")
+          write(p, s)
+
+          # Brand rail: do not capture pointer until it is genuinely a drag; clicks remain filter taps.
+          p = "apps/web/components/catalog/BrandLogoRail.tsx"
+          s = read(p)
+          s = once(s,
+              '    rail.setPointerCapture(event.pointerId);\n    rail.classList.add("is-dragging");\n',
+              '',
+              "brand rail delay capture")
+          s = once(s,
+              '    if (Math.abs(dx) > 4) state.moved = true;\n    if (!state.moved) return;\n    event.preventDefault();\n',
+              '    if (Math.abs(dx) > 4 && !state.moved) {\n      state.moved = true;\n      if (!event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.setPointerCapture(event.pointerId);\n      event.currentTarget.classList.add("is-dragging");\n    }\n    if (!state.moved) return;\n    event.preventDefault();\n',
+              "brand rail capture on drag")
+          write(p, s)
+
+          # Brand stats: expose unique live model count per make in the same generation-guarded read.
+          p = "apps/web/lib/catalog/storage.ts"
+          s = read(p)
+          old = '''      const counts = Object.fromEntries(Object.values(summary.brands)\n        .map((brand) => [brand.make, filters.market && filters.market !== "any" ? Number(brand.marketCounts[filters.market] || 0) : brand.count])\n        .filter(([, count]) => Number(count) > 0)\n        .sort((a, b) => String(a[0]).localeCompare(String(b[0]), "ru")));\n      return { generationId: manifest.generationId, counts };\n'''
+          new = '''      const visibleBrands = Object.values(summary.brands)\n        .map((brand) => ({\n          brand,\n          count: filters.market && filters.market !== "any" ? Number(brand.marketCounts[filters.market] || 0) : brand.count,\n          modelCount: filters.market && filters.market !== "any"\n            ? brand.models.filter((model) => Number(model.marketCounts[filters.market!] || 0) > 0).length\n            : brand.models.length,\n        }))\n        .filter((item) => item.count > 0)\n        .sort((a, b) => a.brand.make.localeCompare(b.brand.make, "ru"));\n      const counts = Object.fromEntries(visibleBrands.map((item) => [item.brand.make, item.count]));\n      const modelCounts = Object.fromEntries(visibleBrands.map((item) => [item.brand.make, item.modelCount]));\n      return { generationId: manifest.generationId, counts, modelCounts };\n'''
+          s = once(s, old, new, "summary model counts")
+          old = '''  const modelKeys = await projectionModelKeys(filters);\n  const counts = new Map<string, number>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;\n    const make = cleanFacet(row.make);\n    if (!make) continue;\n    counts.set(make, (counts.get(make) || 0) + 1);\n  }\n  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };\n'''
+          new = '''  const modelKeys = await projectionModelKeys(filters);\n  const counts = new Map<string, number>();\n  const models = new Map<string, Set<string>>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;\n    const make = cleanFacet(row.make);\n    if (!make) continue;\n    counts.set(make, (counts.get(make) || 0) + 1);\n    const model = cleanFacet(row.model);\n    if (model) {\n      const set = models.get(make) || new Set<string>();\n      set.add(model.toLocaleLowerCase("ru-RU"));\n      models.set(make, set);\n    }\n  }\n  const ordered = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"));\n  return {\n    generationId,\n    counts: Object.fromEntries(ordered),\n    modelCounts: Object.fromEntries(ordered.map(([make]) => [make, models.get(make)?.size || 0])),\n  };\n'''
+          s = once(s, old, new, "filtered model counts")
+          write(p, s)
+
+          # Static regression guards for exactly this UI behavior.
+          write("tests/catalog-filter-brand-polish.test.ts", '''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\n\nconst filters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");\nconst brandSelect = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogBrandMultiSelect.tsx", import.meta.url), "utf8");\nconst rail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");\nconst storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");\n\ntest("sort direction highlights only the active arrow", () => {\n  assert.match(filters, /direction === "asc" \? "#ff353d"/);\n  assert.match(filters, /direction === "desc" \? "#ff353d"/);\n  assert.match(filters, /active=\{Boolean\(sortKey\)\}/);\n});\n\ntest("catalog brand picker is a multiselect with logos and model counts", () => {\n  assert.match(filters, /CatalogBrandMultiSelect/);\n  assert.match(brandSelect, /BrandLogoVisual/);\n  assert.match(brandSelect, /modelCounts/);\n  assert.match(brandSelect, /aria-pressed=\{active\}/);\n  assert.match(storage, /modelCounts/);\n});\n\ntest("desktop advanced selects are outside the range input shell", () => {\n  assert.match(filters, /ac-advanced-select-row/);\n  assert.match(filters, /ac-range-fields-shell/);\n  assert.match(filters, /ac-advanced-fields\{background:transparent\}/);\n  assert.doesNotMatch(filters, /advancedCount \?/);\n  assert.match(filters, /whitespace-nowrap.*Ещё фильтры/);\n});\n\ntest("brand rail captures the pointer only after real drag movement", () => {\n  const begin = rail.indexOf("const beginMouseDrag");\n  const move = rail.indexOf("const moveMouseDrag");\n  const end = rail.indexOf("const endMouseDrag");\n  assert.ok(begin >= 0 && move > begin && end > move);\n  assert.doesNotMatch(rail.slice(begin, move), /setPointerCapture/);\n  assert.match(rail.slice(move, end), /setPointerCapture/);\n});\n''')
+
+          Path('.github/workflows/patch-catalog-filter-brand-polish-20260812.yml').unlink()
+          PY
+      - name: Validate patch
+        run: |
+          node --import tsx --test tests/catalog-filter-brand-polish.test.ts tests/catalog-filter-search.test.ts tests/catalog-filter-layout-regression.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit patched branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "UI: polish catalog filter and brand multiselect"
+          git push origin HEAD:ui/catalog-filter-brand-polish-20260812
