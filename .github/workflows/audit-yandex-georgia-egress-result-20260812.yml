@@ -1,0 +1,28 @@
+name: Audit Yandex Georgia egress result
+
+on:
+  push:
+    branches:
+      - audit/yandex-georgia-egress-result-20260812
+    paths:
+      - .github/workflows/audit-yandex-georgia-egress-result-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch deployed fixed-route diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in 1 2 3 4 5; do
+            if curl --connect-timeout 10 --max-time 70 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o /tmp/result.json; then
+              cat /tmp/result.json | jq .
+              exit 0
+            fi
+            sleep 8
+          done
+          exit 1
