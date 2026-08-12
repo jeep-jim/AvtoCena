@@ -74,7 +74,7 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
   return slugify(idTail || model.model);
 }
 
-const readKnowledge = cache(async () => {const readKnowledge = cache(async () => {
+const readKnowledge = cache(async () => {
   const [models, variants, references] = await Promise.all([
     readVehicleKnowledgeModels(),
     readVehicleKnowledgeVariants(),
@@ -105,7 +105,6 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
   const make = canonicalCatalogBrand(rawMake);
   const [{ models: knowledge, variants, references }, live] = await Promise.all([readKnowledge(), readCatalogBrandModelCounts(make)]);
   const models = knowledge.filter((model) => model.active !== false && canonicalCatalogBrand(model.make) === make);
-  const modelByKey = new Map(models.map((model) => [modelKey(make, model.model), model]));
   const variantsByModel = new Map<string, any[]>();
   for (const row of variants.filter((item) => item.active !== false)) {
     const list = variantsByModel.get(row.modelId) || [];
