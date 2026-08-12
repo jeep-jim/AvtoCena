@@ -19,16 +19,59 @@ const headers = {
   "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
 };
 
+function isListingUrl(url: string, base: string) {
+  try {
+    const pathname = new URL(url).pathname;
+    if (/myauto\.ge/i.test(base)) return /\/en\/pr\/\d+/i.test(pathname);
+    if (/autopapa\.ge/i.test(base)) return /\/en\/usd\/[^/?#]+\/[^/?#]+\/\d{5,}\/?$/i.test(pathname);
+    return false;
+  } catch { return false; }
+}
+
 function linksFromHtml(text: string, base: string) {
   const links: string[] = [];
   for (const match of text.matchAll(/href=["']([^"']+)["']/gi)) {
     try {
       const url = new URL(match[1].replace(/&amp;/g, "&"), base).toString();
-      if (/myauto\.ge/i.test(base) && /\/en\/pr\/\d+/i.test(url)) links.push(url);
-      if (/autopapa\.ge/i.test(base) && /\/(?:en\/)?(?:usd\/)?(?:search\/)?(?:car|cars|vehicle|vehicles|auto|detail|stock|lot|offer|listing)?[^?#]*\d{3,}/i.test(new URL(url).pathname)) links.push(url);
+      if (isListingUrl(url, base)) links.push(url);
     } catch { /* ignore malformed href */ }
   }
   return [...new Set(links)].slice(0, 24);
+}
+
+function publicListingSamples(text: string, base: string) {
+  const samples: Array<{ url: string; anchorText: string; contextText: string; imageUrls: string[] }> = [];
+  const seen = new Set<string>();
+  for (const match of text.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    let url = "";
+    try { url = new URL(match[1].replace(/&amp;/g, "&"), base).toString(); } catch { continue; }
+    if (!isListingUrl(url, base) || seen.has(url)) continue;
+    seen.add(url);
+    const index = match.index || 0;
+    const context = text.slice(Math.max(0, index - 1_200), Math.min(text.length, index + 4_000));
+    const strip = (value: string) => value
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"')
+      .replace(/\+?\d[\d\s()\-]{7,}\d/g, "[phone]")
+      .replace(/\s+/g, " ").trim();
+    const imageUrls: string[] = [];
+    for (const image of context.matchAll(/(?:src|data-src|data-original)=["']([^"']+)["']/gi)) {
+      try {
+        const resolved = new URL(image[1].replace(/&amp;/g, "&"), base).toString();
+        if (/\.(?:jpe?g|png|webp|avif)(?:$|\?)/i.test(resolved) && !/logo|icon|banner|placeholder/i.test(resolved)) imageUrls.push(resolved);
+      } catch { /* ignore */ }
+    }
+    samples.push({
+      url,
+      anchorText: strip(match[2]).slice(0, 220),
+      contextText: strip(context).slice(0, 1_100),
+      imageUrls: [...new Set(imageUrls)].slice(0, 8),
+    });
+    if (samples.length >= 8) break;
+  }
+  return samples;
 }
 
 function imageHosts(text: string, base: string) {
@@ -65,6 +108,7 @@ export async function GET() {
         title: text.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/\s+/g, " ").trim().slice(0, 120) || null,
         listingHints: (text.match(/\/(?:en\/)?(?:pr|usd)\/[A-Za-z0-9_\-/?=&%]+/gi) || []).length,
         listingLinks: linksFromHtml(text, response.url || url),
+        listingSamples: /myauto-main|autopapa-(?:home|search)/.test(name) ? publicListingSamples(text, response.url || url) : [],
         imageHosts: imageHosts(text, response.url || url),
       });
     } catch (error) {
