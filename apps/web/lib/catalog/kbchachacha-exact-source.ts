@@ -176,8 +176,8 @@ async function requestMarkup(url: string, referer: string) {
   try {
     const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
+    if (response.status === 429 || BLOCKED.test(markup.slice(0, 4_000))) throw new Error(`kbchachacha_blocked_${response.status}`);
     if (!response.ok) throw new Error(`kbchachacha_http_${response.status}`);
-    if (BLOCKED.test(markup.slice(0, 4_000))) throw new Error(`kbchachacha_blocked_${response.status}`);
     return { response, markup };
   } finally {
     clearTimeout(timeout);
@@ -185,6 +185,42 @@ async function requestMarkup(url: string, referer: string) {
 }
 
 let detailPausedUntil = 0;
+let detailQueue: Promise<void> = Promise.resolve();
+let detailLastStartedAt = 0;
+
+function sleep(ms: number) {
+  return new Promise<void>((resolve) => setTimeout(resolve, ms));
+}
+
+function detailMinIntervalMs() {
+  const configured = Number(process.env.KBCHACHACHA_DETAIL_MIN_INTERVAL_MS || 750);
+  return Number.isFinite(configured) ? Math.max(0, configured) : 750;
+}
+
+function detailPauseMs() {
+  const configured = Number(process.env.KBCHACHACHA_DETAIL_PAUSE_MS || 10 * 60_000);
+  return Number.isFinite(configured) ? Math.max(60_000, configured) : 10 * 60_000;
+}
+
+async function requestDetailMarkup(url: string, referer: string) {
+  const run = detailQueue.then(async () => {
+    if (Date.now() < detailPausedUntil) return null;
+    const waitMs = Math.max(0, detailLastStartedAt + detailMinIntervalMs() - Date.now());
+    if (waitMs > 0) await sleep(waitMs);
+    detailLastStartedAt = Date.now();
+    try {
+      return await requestMarkup(url, referer);
+    } catch (error) {
+      if (/kbchachacha_blocked_\d+/i.test(String((error as Error)?.message || error))) {
+        detailPausedUntil = Date.now() + detailPauseMs();
+        return null;
+      }
+      throw error;
+    }
+  });
+  detailQueue = run.then(() => undefined, () => undefined);
+  return run;
+}
 
 function listingGallery(offer: VehicleOffer) {
   const raw = typeof offer.operational?.raw === "object" && offer.operational.raw ? offer.operational.raw as Record<string, unknown> : {};
@@ -275,21 +311,10 @@ class KbChaChaChaExactSource implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const carSeq = String(offer.sourceOfferId || "");
     if (!carSeq) throw new Error("kbchachacha_gallery_missing_id");
-    if (Date.now() < detailPausedUntil) return listingGallery(offer);
     const detailUrl = `${BASE}/public/car/detail.kbc?carSeq=${encodeURIComponent(carSeq)}`;
-    let markup = "";
-    try {
-      ({ markup } = await requestMarkup(detailUrl, `${BASE}/public/search/main.kbc`));
-    } catch (error) {
-      if (/kbchachacha_blocked_200/i.test(String((error as Error)?.message || error))) {
-        // The public site sometimes enables its normal browser challenge after a
-        // short burst. Pause detail requests instead of hammering it; the four
-        // exterior photos already bound to this exact list card remain usable.
-        detailPausedUntil = Date.now() + Math.max(60_000, Number(process.env.KBCHACHACHA_DETAIL_PAUSE_MS || 10 * 60_000));
-        return listingGallery(offer);
-      }
-      throw error;
-    }
+    const detailResult = await requestDetailMarkup(detailUrl, `${BASE}/public/search/main.kbc`);
+    if (!detailResult) return listingGallery(offer);
+    const { markup } = detailResult;
     const detail = parseKbChaChaChaDetail(markup, carSeq);
     if (canonicalCatalogBrand(String(offer.make || "")) !== canonicalCatalogBrand(detail.make)) throw new Error(`kbchachacha_make_mismatch_${carSeq}`);
     if (Number(offer.year || 0) !== detail.year || Number(offer.sourcePrice || 0) !== detail.sourcePrice) throw new Error(`kbchachacha_listing_detail_mismatch_${carSeq}`);
