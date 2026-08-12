@@ -50,7 +50,7 @@ jobs:
         run: |
           node --import tsx --test tests/georgia-canonical-source-policy-20260812.test.ts
           node --import tsx --test tests/myauto-list-source.test.ts
-          node --import tsx --test tests/autopapa-source.test.ts
+          node --import tsx --test tests/catalog-live-sources-v19.test.ts
       - name: Collect canonical Georgia without publication
         run: npx tsx scripts/catalog-live-recovery-market.mjs
       - name: Audit exact identity, galleries, and calculations
