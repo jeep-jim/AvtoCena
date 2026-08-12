@@ -9,7 +9,7 @@ const HEADERS = {
   "accept-language": "en-US,en;q=0.9,ka;q=0.8",
   "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
 };
-const NON_CAR_RE = /\b(?:motorcycle|scooter|forklift|excavator|tractor|crane|truck|bus|commercial|cargo|spare parts?)\b/i;
+const NON_CAR_RE = /\b(?:motorcycle|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s*jet|forklift|excavator|tractor|crane|truck|bus|commercial|cargo|spare parts?)\b/i;
 const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image|question|\/flags\//i;
 const KNOWN_MAKES = [
   "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
