@@ -77,7 +77,7 @@ function isDetailHref(value: string) {
 function isSaleDetailHref(value: string) {
   try {
     const path = new URL(value).pathname;
-    return isDetailHref(value) && /\/for-sale(?:-|\/)/i.test(path) && !COMMERCIAL_RE.test(path.replace(/[\/_-]+/g, " "));
+    return isDetailHref(value) && !/\/for-rent(?:-|\/)/i.test(path) && !COMMERCIAL_RE.test(path.replace(/[\/_-]+/g, " "));
   } catch { return false; }
 }
 
