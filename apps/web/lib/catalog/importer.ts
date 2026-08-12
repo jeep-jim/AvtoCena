@@ -69,6 +69,7 @@ if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
 const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia" || source.sourceId === "autopapa_georgia_open");
+const bannedGeorgiaSourceIds = new Set(["auto_georgia_open", "mymarket_georgia_open", "ss_georgia_open"]);
 
 const completeSources = [
   prepareSource(guaziRuSource),
@@ -104,6 +105,9 @@ for (const replacement of completeSources) {
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
+}
+for (let index = catalogImportSources.length - 1; index >= 0; index--) {
+  if (bannedGeorgiaSourceIds.has(catalogImportSources[index].sourceId)) catalogImportSources.splice(index, 1);
 }
 
 const requiredSourceIds = new Set(
