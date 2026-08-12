@@ -12,17 +12,23 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare placeholder and real image ranged GET responses
+      - name: Verify exact Mazda NO FOTO gallery and real control
         run: |
           set -euo pipefail
-          for url in \
-            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVCZ2h7MH' \
-            'https://8.ajes.com/imgs/pqf8kxMtGvcqkJdcaSoQz2ukcXf52tBQoeKI0gtp72uSZV40aFp'; do
-            echo "URL=$url"
-            echo '--- first response ---'
-            curl -sS --max-time 20 -r 0-5 -D - -o /dev/null "$url" | tr -d '\r' | grep -Ei '^(HTTP/|location:|content-type:|content-length:|content-range:|etag:|last-modified:)' || true
-            echo '--- followed response ---'
-            curl -sSL --max-time 20 -r 0-5 -D - -o /tmp/ajes-prefix.bin "$url" | tr -d '\r' | grep -Ei '^(HTTP/|location:|content-type:|content-length:|content-range:|etag:|last-modified:)' || true
-            echo -n 'prefix='; od -An -tx1 -N6 /tmp/ajes-prefix.bin | tr -d ' \n'; echo
-            echo -n 'downloaded='; wc -c < /tmp/ajes-prefix.bin
+          urls=(
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVCZ2h7MH'
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVDaAWvva'
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVFMEi6xI'
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVFYdXugb'
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVBRzgItT'
+            'https://8.ajes.com/imgs/pqf8kxMtGvcqkJdcaSoQz2ukcXf52tBQoeKI0gtp72uSZV40aFp'
+          )
+          for url in "${urls[@]}"; do
+            headers="$(mktemp)"; prefix="$(mktemp)"
+            curl -fsSL --max-time 20 -r 0-5 -D "$headers" -o "$prefix" "$url"
+            type="$(tr -d '\r' < "$headers" | awk 'tolower($0) ~ /^content-type:/ {v=$0} END {sub(/^[^:]+:[[:space:]]*/,"",v); print tolower(v)}')"
+            range="$(tr -d '\r' < "$headers" | awk 'tolower($0) ~ /^content-range:/ {v=$0} END {sub(/^[^:]+:[[:space:]]*/,"",v); print v}')"
+            magic="$(od -An -tx1 -N6 "$prefix" | tr -d ' \n')"
+            echo "$type $range magic=$magic url=$url"
+            rm -f "$headers" "$prefix"
           done
