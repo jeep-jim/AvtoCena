@@ -1,0 +1,207 @@
+name: Refresh Georgia exact power safely once
+
+on:
+  push:
+    branches:
+      - ops/georgia-power-refresh-20260812
+    paths:
+      - .github/workflows/georgia-power-refresh-20260812.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Snapshot all seven markets before write
+        env:
+          CATALOG_AUDIT_OUTPUT: georgia-power-before-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Collect 700 dense AutoPapa pages with exact detail power and galleries
+        run: |
+          set -euo pipefail
+          mkdir -p autopapa-batches recovery-input
+          for start in $(seq 1 5 696); do
+            file="autopapa-batches/start-${start}.json"
+            echo "collecting startPage=${start} pages=5"
+            curl --connect-timeout 10 --max-time 300 --retry 3 --retry-delay 5 --retry-all-errors -fsS \
+              "https://avtocena.com/api/internal/georgia-recovery-c4f812?source=autopapa&startPage=${start}&pages=5&refresh=20260812" \
+              -o "${file}"
+            jq -e --argjson start "${start}" '
+              .market == "georgia"
+              and .report.source == "autopapa"
+              and .report.startPage == $start
+              and .report.pagesPerSource == 5
+              and .report.rawSourceCounts.autopapa_georgia_open > 0
+              and .count > 0
+              and ([.offers[] | select(
+                .sourceId != "autopapa_georgia_open"
+                or .year < 2020
+                or .sourcePrice <= 0
+                or .totalRub <= 0
+                or (.images | length) == 0
+              )] | length == 0)
+            ' "${file}" >/dev/null
+            jq '{startPage:.report.startPage,raw:.report.rawSourceCounts.autopapa_georgia_open,accepted:.count,exact:.report.calculatedCount,preliminary:.report.preliminaryCount,rejected:.report.rejected,images:.report.imageStats}' "${file}"
+          done
+      - name: Merge batches and require listing-bound galleries
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const files = fs.readdirSync('autopapa-batches').filter((name) => name.endsWith('.json')).sort((a, b) => Number(a.match(/\d+/)?.[0] || 0) - Number(b.match(/\d+/)?.[0] || 0));
+          const offers = new Map();
+          const rejected = {};
+          let rawCount = 0;
+          let endpointAccepted = 0;
+          let endpointExact = 0;
+          let endpointPreliminary = 0;
+          const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
+          for (const name of files) {
+            const payload = JSON.parse(fs.readFileSync(path.join('autopapa-batches', name), 'utf8'));
+            rawCount += Number(payload.report?.rawSourceCounts?.autopapa_georgia_open || 0);
+            endpointAccepted += Number(payload.count || 0);
+            endpointExact += Number(payload.report?.calculatedCount || 0);
+            endpointPreliminary += Number(payload.report?.preliminaryCount || 0);
+            for (const offer of payload.offers || []) {
+              if (offer?.sourceId !== 'autopapa_georgia_open') { reject('source'); continue; }
+              if (Number(offer?.year || 0) < 2020) { reject('year'); continue; }
+              if (!(Number(offer?.sourcePrice || 0) > 0) || !(Number(offer?.totalRub || 0) > 0)) { reject('price'); continue; }
+              if (!Array.isArray(offer?.images) || offer.images.length < 5) { reject('gallery_below_five'); continue; }
+              const raw = offer?.operational?.raw || {};
+              if (raw.recoveryExactSourceUrl !== true || raw.recoveryExactPhotoIdentity !== true || raw.recoveryCalculatedRub !== true || raw.recoveryBodySourceOnly !== true) {
+                reject('source_binding'); continue;
+              }
+              const previous = offers.get(offer.id);
+              if (!previous || offer.images.length > previous.images.length || (Number(offer.powerHp || 0) > 0 && !(Number(previous.powerHp || 0) > 0))) offers.set(offer.id, offer);
+            }
+          }
+          const rows = [...offers.values()];
+          const report = {
+            mode: 'autopapa_700_page_exact_power_input', batchCount: files.length, firstPage: 1, lastPage: 700,
+            rawCount, endpointAccepted, endpointExact, endpointPreliminary, uniquePublishableInput: rows.length,
+            exactPowerRows: rows.filter((offer) => Number(offer.powerHp || 0) > 0).length,
+            preliminaryRows: rows.filter((offer) => offer.calculationStatus === 'preliminary_power_pending').length,
+            rejected,
+          };
+          fs.writeFileSync('recovery-input/catalog-rebuild-georgia.json', JSON.stringify({ market:'georgia', count:rows.length, partial:false, report, offers:rows }));
+          fs.writeFileSync('georgia-power-aggregate-report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (rows.length < 2000) throw new Error('georgia_input_below_2000:' + rows.length);
+          if (report.exactPowerRows < 1) throw new Error('georgia_exact_power_zero');
+          NODE
+      - name: Dry-run full-seven-market replacement
+        env:
+          GEORGIA_REPLACE_DRY_RUN: "1"
+          GEORGIA_REPLACE_REPORT: georgia-power-dry-run.json
+          GEORGIA_REPLACE_MIN_COUNT: "2000"
+          GEORGIA_REPLACE_MAX_COUNT: "5000"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+        run: |
+          set -euo pipefail
+          npx tsx scripts/catalog-replace-georgia-atomic.mjs
+          jq . georgia-power-dry-run.json
+          jq -e '
+            .dryRun == true
+            and .published == false
+            and .georgia.selectedCount >= 2000
+            and .georgia.calculatedCount > 0
+            and .georgia.preliminaryCount < .georgia.selectedCount
+            and .georgia.maxPerModel == 20
+            and .georgia.belowFiveImages == 0
+            and .projectedPublicCounts.korea == .beforeCounts.korea
+            and .projectedPublicCounts.china == .beforeCounts.china
+            and .projectedPublicCounts.japan == .beforeCounts.japan
+            and .projectedPublicCounts.uae == .beforeCounts.uae
+            and .projectedPublicCounts.europe == .beforeCounts.europe
+            and .projectedPublicCounts.kyrgyzstan == .beforeCounts.kyrgyzstan
+          ' georgia-power-dry-run.json >/dev/null
+      - name: Publish one full seven-market generation
+        env:
+          GEORGIA_REPLACE_REPORT: georgia-power-publish.json
+          GEORGIA_REPLACE_MIN_COUNT: "2000"
+          GEORGIA_REPLACE_MAX_COUNT: "5000"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+        run: npx tsx scripts/catalog-replace-georgia-atomic.mjs
+      - name: Audit all seven markets after write
+        env:
+          CATALOG_AUDIT_OUTPUT: georgia-power-after-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: georgia
+          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"georgia":2000}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Assert preservation, age, canonical sources, photos and power improvement
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const before = JSON.parse(fs.readFileSync('georgia-power-before-all7.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('georgia-power-after-all7.json', 'utf8'));
+          const publish = JSON.parse(fs.readFileSync('georgia-power-publish.json', 'utf8'));
+          for (const market of ['korea','china','japan','uae','europe','kyrgyzstan']) {
+            const b = Number(before.markets?.[market]?.count || 0);
+            const a = Number(after.markets?.[market]?.count || 0);
+            if (a !== b || Number(publish.manifestCounts?.[market] || 0) !== b) throw new Error('preservation_mismatch:' + market + ':' + b + ':' + a);
+          }
+          const g = after.markets?.georgia || {};
+          if (Number(g.count || 0) < 2000) throw new Error('georgia_count');
+          if (Number(g.belowMarketMinYearCount || 0) !== 0) throw new Error('georgia_year');
+          if (Number(g.nonVehicleCount || 0) !== 0) throw new Error('georgia_nonvehicle');
+          if (Number(g.belowFiveImagesCount || 0) !== 0) throw new Error('georgia_photos');
+          if (Number(g.maxPerExactModel || 0) > 20) throw new Error('georgia_model_cap');
+          const canonical = new Set(['myauto_georgia_list','autopapa_georgia_open']);
+          if (Object.keys(g.sourceCounts || {}).some((source) => !canonical.has(source))) throw new Error('georgia_source');
+          if (!(Number(publish.georgia?.calculatedCount || 0) > 0)) throw new Error('georgia_exact_power_zero');
+          if (!(Number(publish.georgia?.preliminaryCount || 0) < Number(publish.georgia?.selectedCount || 0))) throw new Error('georgia_power_not_improved');
+          console.log(JSON.stringify({generationId:publish.generationId,before:before.markets,after:after.markets,georgia:publish.georgia}, null, 2));
+          NODE
+      - name: Verify public generation
+        run: |
+          set -euo pipefail
+          expected="$(jq -r '.manifestCounts.georgia' georgia-power-publish.json)"
+          matched=0
+          for attempt in {1..20}; do
+            curl --connect-timeout 10 --max-time 60 -fsS -H 'cache-control: no-cache' \
+              "https://avtocena.com/api/catalog/home?verify=power-${attempt}" -o public-home.json
+            actual="$(jq -r '.marketCounts.georgia // -1' public-home.json)"
+            if [ "${actual}" = "${expected}" ]; then matched=1; break; fi
+            sleep 5
+          done
+          test "${matched}" = "1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-power-refresh-reports
+          path: |
+            georgia-power-before-all7.json
+            georgia-power-aggregate-report.json
+            georgia-power-dry-run.json
+            georgia-power-publish.json
+            georgia-power-after-all7.json
+            public-home.json
+          if-no-files-found: warn
+          retention-days: 7
