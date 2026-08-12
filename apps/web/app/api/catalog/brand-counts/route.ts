@@ -54,7 +54,10 @@ export async function GET(request: Request) {
   };
 
   const facets = await readCatalogFacets(params);
-  const pairs = await mapWithConcurrency(facets.makes || [], 8, async (make) => {
+  // All per-brand searches share the same immutable/current projection cache in
+  // the process. A wider fan-out therefore avoids making the modal wait through
+  // many small sequential batches without introducing any catalog writes.
+  const pairs = await mapWithConcurrency(facets.makes || [], 32, async (make) => {
     const result = await searchOffers({ ...params, make, page: 1, pageSize: 1, sort: "updatedAt" });
     return [make, Number(result.total || 0)] as const;
   });
