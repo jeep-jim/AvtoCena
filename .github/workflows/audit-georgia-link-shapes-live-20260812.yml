@@ -1,0 +1,24 @@
+name: Audit live Georgia link shapes
+
+on:
+  push:
+    branches:
+      - audit/georgia-link-shapes-live-20260812
+    paths:
+      - .github/workflows/audit-georgia-link-shapes-live-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch deployed Georgia link-shape diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --connect-timeout 10 --max-time 90 -fsS \
+            'https://avtocena.com/api/internal/georgia-egress-8d4c2f' \
+            | jq '{runtime,elapsedMs,results: [.results[] | {name,status,finalHost,bytes,ms,challenge,title,listingHints,listingLinks,imageHosts}]}'
