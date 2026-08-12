@@ -130,7 +130,8 @@ test("all seven markets have at least three independent registered adapters", ()
     byMarket.get(source.market)?.add(source.sourceId);
   }
   for (const market of PUBLIC_CATALOG_MARKETS) {
-    assert.ok((byMarket.get(market)?.size || 0) >= 3, `${market} must have at least three registered sources`);
+    const minimum = market === "georgia" ? 2 : 3;
+    assert.ok((byMarket.get(market)?.size || 0) >= minimum, `${market} must have at least ${minimum} registered sources`);
   }
   assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
   assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
@@ -235,10 +236,7 @@ test("requested high-volume public sources are registered", () => {
     "dubizzle_uae_open",
     "yallamotor_uae_open",
     "carswitch_uae_open",
-    "auto_georgia_open",
     "autopapa_georgia_open",
-    "ss_georgia_open",
-    "mymarket_georgia_open",
     "lalafo_kyrgyzstan_open",
     "bazar_kyrgyzstan_open",
     "turbo_kyrgyzstan_open",
@@ -250,12 +248,15 @@ test("requested high-volume public sources are registered", () => {
   ]) {
     assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
   }
+  for (const sourceId of ["auto_georgia_open", "ss_georgia_open", "mymarket_georgia_open"]) {
+    assert.equal(ids.has(sourceId), false, `${sourceId} must remain banned`);
+  }
 });
 
 test("bootstrap replacements follow current regional public routes", () => {
   assert.match(reliableSources, /https:\/\/en\.guazi\.com\/\$\{path\}/);
   assert.match(reliableSources, /https:\/\/ru\.guazi\.com\/\$\{path\}/);
-  assert.match(regionalOverrides, /https:\/\/www\.auto\.ge\/en\/index\.html/);
+  assert.doesNotMatch(regionalOverrides, /auto_georgia_open|www\.auto\.ge/);
   assert.match(regionalOverrides, /https:\/\/www\.mashina\.kg\/search\/all\//);
   assert.match(regionalOverrides, /sourceId: "mashina_kyrgyzstan_exact"/);
   assert.match(regionalOverrides, /sourceId: "turbo_kyrgyzstan_open"/);
