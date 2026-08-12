@@ -712,7 +712,8 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     allProjectionItems.push(row);
     projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
     const make = cleanFacet(row.make);
-    if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);
+    const brandKey = catalogBrandReadModelKey(make);
+    if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);
   }
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
   await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, buildCatalogBrandSummary(generationId, allProjectionItems), false);
@@ -772,7 +773,8 @@ export async function publishCurrentCatalogReadModels() {
       allProjectionItems.push(row);
       projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
       const make = cleanFacet(row.make);
-      if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);
+      const brandKey = catalogBrandReadModelKey(make);
+      if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);
     }
     const shard = currentOfferShardName(offer.id);
     offersByShard.set(shard, [...(offersByShard.get(shard) || []), offer]);

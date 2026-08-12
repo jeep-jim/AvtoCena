@@ -13,3 +13,9 @@ test("current read models publish and consume per-brand projections", () => {
   assert.match(source, /requestedMakes = catalogMakeFilterValues\(params\.make\)/);
   assert.match(source, /usedIndexShards: requestedMakes\.map\(currentBrandProjectionPath\)/);
 });
+
+
+test("per-brand projection grouping uses the same normalized key as its collision-safe path", () => {
+  assert.match(source, /const brandKey = catalogBrandReadModelKey\(make\)/);
+  assert.match(source, /projectionsByBrand\.set\(brandKey/);
+});
