@@ -468,23 +468,43 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
   if (simpleSummaryQuery) {
     const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
     if (summary.generationId === manifest.generationId) {
-      const counts = Object.fromEntries(Object.values(summary.brands)
-        .map((brand) => [brand.make, filters.market && filters.market !== "any" ? Number(brand.marketCounts[filters.market] || 0) : brand.count])
-        .filter(([, count]) => Number(count) > 0)
-        .sort((a, b) => String(a[0]).localeCompare(String(b[0]), "ru")));
-      return { generationId: manifest.generationId, counts };
+      const visibleBrands = Object.values(summary.brands)
+        .map((brand) => ({
+          brand,
+          count: filters.market && filters.market !== "any" ? Number(brand.marketCounts[filters.market] || 0) : brand.count,
+          modelCount: filters.market && filters.market !== "any"
+            ? brand.models.filter((model) => Number(model.marketCounts[filters.market!] || 0) > 0).length
+            : brand.models.length,
+        }))
+        .filter((item) => item.count > 0)
+        .sort((a, b) => a.brand.make.localeCompare(b.brand.make, "ru"));
+      const counts = Object.fromEntries(visibleBrands.map((item) => [item.brand.make, item.count]));
+      const modelCounts = Object.fromEntries(visibleBrands.map((item) => [item.brand.make, item.modelCount]));
+      return { generationId: manifest.generationId, counts, modelCounts };
     }
   }
   const { generationId, rows } = await currentProjectionRows(filters);
   const modelKeys = await projectionModelKeys(filters);
   const counts = new Map<string, number>();
+  const models = new Map<string, Set<string>>();
   for (const row of rows) {
     if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;
     const make = cleanFacet(row.make);
     if (!make) continue;
     counts.set(make, (counts.get(make) || 0) + 1);
+    const model = cleanFacet(row.model);
+    if (model) {
+      const set = models.get(make) || new Set<string>();
+      set.add(model.toLocaleLowerCase("ru-RU"));
+      models.set(make, set);
+    }
   }
-  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };
+  const ordered = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"));
+  return {
+    generationId,
+    counts: Object.fromEntries(ordered),
+    modelCounts: Object.fromEntries(ordered.map(([make]) => [make, models.get(make)?.size || 0])),
+  };
 }
 
 export async function readCatalogBrandModelCounts(make: string) {

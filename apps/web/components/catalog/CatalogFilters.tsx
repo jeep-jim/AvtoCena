@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
+import { CatalogBrandMultiSelect } from "@/components/catalog/CatalogBrandMultiSelect";
 import { catalogFilterOptions } from "@/lib/catalog/filter-options";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
@@ -37,7 +38,7 @@ function joinMakeValues(values: string[]) { return [...new Set(values.map(clean)
 function label(value: string) { return clean(value).replace(/\[object Object\]/gi, "") || "Без названия"; }
 function Chevron({ open = false }: { open?: boolean }) { return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 function SlidersIcon() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>; }
-function SortDirectionIcon({ direction }: { direction: SortDir }) { return <svg className={`transition-transform ${direction === "desc" ? "rotate-180" : ""}`} width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 3V16M6 3L3.5 5.5M6 3L8.5 5.5M14 17V4M14 17L11.5 14.5M14 17L16.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
+function SortDirectionIcon({ direction, active }: { direction: SortDir; active: boolean }) { return <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 16V3M6 3L3.5 5.5M6 3L8.5 5.5" stroke={active && direction === "asc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "asc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /><path d="M14 4V17M14 17L11.5 14.5M14 17L16.5 14.5" stroke={active && direction === "desc" ? "#ff353d" : "currentColor"} opacity={active && direction !== "desc" ? .42 : 1} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 
 function useDropdown(open: boolean, root: React.RefObject<HTMLDivElement | null>, close: () => void) {
   useEffect(() => {
@@ -152,7 +153,7 @@ function SortControl({ sortKey, direction, onKeyChange, onDirectionChange, mobil
       <button type="button" onClick={() => onKeyChange("")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "" ? "is-active" : ""}`}><span className="hidden 2xl:inline">По умолчанию</span><span className="2xl:hidden">По умолч.</span></button>
       <button type="button" onClick={() => onKeyChange("totalRub")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "totalRub" ? "is-active" : ""}`}>Цена</button>
       <button type="button" onClick={() => onKeyChange("year")} className={`min-w-0 px-2 text-xs font-black ${sortKey === "year" ? "is-active" : ""}`}>Год</button>
-      <button type="button" disabled={!sortKey} onClick={() => onDirectionChange(direction === "asc" ? "desc" : "asc")} className="ac-sort-direction flex items-center justify-center" aria-label={sortKey ? `Изменить порядок: ${caption}` : "Выберите сортировку по цене или году"} title={caption}><SortDirectionIcon direction={direction} /></button>
+      <button type="button" disabled={!sortKey} onClick={() => onDirectionChange(direction === "asc" ? "desc" : "asc")} className="ac-sort-direction flex items-center justify-center" aria-label={sortKey ? `Изменить порядок: ${caption}` : "Выберите сортировку по цене или году"} title={caption}><SortDirectionIcon direction={direction} active={Boolean(sortKey)} /></button>
     </div>
     {mobile ? <div className="mt-1.5 px-1 text-[11px] font-bold text-[var(--ac-muted)]">{caption}</div> : null}
   </div>;
@@ -227,16 +228,18 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
   return <div className={`flex min-w-0 flex-wrap items-center gap-2 ${compact ? "" : "mt-3"}`} aria-label="Выбранные параметры">{!compact ? <span className="mr-1 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)]">Выбрано</span> : null}{chips.map((item) => <button key={item.key} type="button" onClick={() => onRemove(item.key)} className="ac-filter-chip flex min-h-8 max-w-full items-center gap-1.5 rounded-full px-3 text-xs font-black"><span className="truncate">{item.label}</span><span className="text-base leading-none opacity-55">×</span></button>)}</div>;
 }
 
-function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; includePrimary?: boolean; includeFuel?: boolean }) {
+function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, brandStatsContext, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; brandStatsContext: string; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
-    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder={splitMakeValues(draft.make).length > 1 ? `${splitMakeValues(draft.make).length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
-    <div className={`grid gap-2.5 md:grid-cols-2 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
-    <div className="mt-4 flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>
-    <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-      <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
-      <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
-      <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
-      <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
+    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
+    <div className={`ac-advanced-select-row grid grid-cols-2 gap-2.5 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
+    <div className="ac-range-fields-shell mt-2.5">
+      <div className="flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>
+      <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <DualRange title="Год" fromName="yearFrom" toName="yearTo" fromValue={draft.yearFrom} toValue={draft.yearTo} min={1990} max={new Date().getFullYear()} step={1} format={(value) => String(Math.round(value))} onChange={(from, to) => { setField("yearFrom", from); setField("yearTo", to); }} />
+        <DualRange title="Цена" fromName="budgetFrom" toName="budget" fromValue={draft.budgetFrom} toValue={draft.budget} min={0} max={30_000_000} step={100_000} unit=" ₽" onChange={(from, to) => { setField("budgetFrom", from); setField("budget", to); }} />
+        <DualRange title="Пробег" fromName="mileageFrom" toName="mileageTo" fromValue={draft.mileageFrom} toValue={draft.mileageTo} min={0} max={500_000} step={5_000} unit=" км" onChange={(from, to) => { setField("mileageFrom", from); setField("mileageTo", to); }} />
+        <DualRange title="Объём двигателя" fromName="engineFrom" toName="engineTo" fromValue={draft.engineFrom} toValue={draft.engineTo} min={0} max={8_000} step={100} unit=" см³" onChange={(from, to) => { setField("engineFrom", from); setField("engineTo", to); }} />
+      </div>
     </div>
   </>;
 }
@@ -294,6 +297,10 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
   const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
   const marketOptions = markets;
+  const brandStatsContext = useMemo(() => {
+    const contextDraft: FilterDraft = { ...draft, make: "", model: "" };
+    return catalogQuery(contextDraft, "", "asc");
+  }, [draft]);
   const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, draft.bodyType), [activeFacets, draft.bodyType]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
   const transmissionOptions = useMemo(() => catalogFilterOptions(transmissions, activeFacets?.transmissions, draft.transmission), [activeFacets, draft.transmission]);
@@ -342,22 +349,20 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
     if (key === "totalRub") setSortDirection("asc");
     if (key === "year") setSortDirection("desc");
   };
-  const advancedCount = chips.filter((item) => ["bodyType", "transmission", "fuel", "drive", "year", "budget", "mileage", "engine"].includes(item.key)).length;
-
   return <>
     <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
       <div className="grid grid-cols-3 gap-2.5">
-        <SearchSelect name="make" value={draft.make} placeholder={selectedMakes.length > 1 ? `${selectedMakes.length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />
+        <CatalogBrandMultiSelect value={draft.make} options={makeOptions} contextQuery={brandStatsContext} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(158px,.52fr)] items-center gap-2.5">
+      <div className="mt-2.5 grid grid-cols-[minmax(0,1.15fr)_minmax(155px,.58fr)_minmax(320px,1fr)_minmax(180px,.58fr)] items-center gap-2.5">
         <PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} />
         <ElectricCheckbox checked={electricOnly} onChange={setElectric} />
         <SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} />
-        <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="truncate">{expanded ? "Скрыть" : "Ещё фильтры"}</span>{advancedCount ? <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-black text-white">{advancedCount}</span> : null}</button>
+        <button type="button" onClick={() => setExpanded((current) => !current)} className={`ac-filter-settings relative flex h-13 min-w-0 items-center justify-center gap-2 rounded-[15px] px-3 text-xs font-black ${expanded ? "is-active" : ""}`} aria-label="Расширенные фильтры" aria-expanded={expanded}><SlidersIcon /><span className="whitespace-nowrap">{expanded ? "Скрыть" : "Ещё фильтры"}</span></button>
       </div>
-      {expanded ? <section className="ac-advanced-fields mt-3 rounded-[1.35rem] p-3.5"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includeFuel={!electricOnly} /></section> : null}
+      {expanded ? <section className="ac-advanced-fields mt-3"><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includeFuel={!electricOnly} /></section> : null}
       <FilterChips chips={chips} onRemove={removeFilter} />
     </form>
 
@@ -369,7 +374,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         {chips.length ? <section className="mb-4"><div className="mb-2 text-[10px] font-black uppercase tracking-[.14em] text-[var(--ac-muted)]">Выбрано</div><FilterChips chips={chips} onRemove={removeFilter} compact /></section> : null}
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Сортировка</div><SortControl sortKey={sortKey} direction={sortDirection} onKeyChange={chooseSort} onDirectionChange={setSortDirection} mobile /></section>
         <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Быстрые параметры</div><div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"><ElectricCheckbox checked={electricOnly} onChange={setElectric} /><PowerLimitCheckbox checked={draft.powerTo === "160"} onChange={(checked) => setField("powerTo", checked ? "160" : "")} /></div></section>
-        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} includePrimary includeFuel={!electricOnly} /></section>
+        <section className="ac-mobile-filter-section"><div className="ac-mobile-filter-section__title">Автомобиль</div><AdvancedFields draft={draft} setField={setField} makeOptions={makeOptions} marketOptions={marketOptions} bodyOptions={bodyOptions} transmissionOptions={transmissionOptions} fuelOptions={fuelOptions} driveOptions={driveOptions} brandStatsContext={brandStatsContext} includePrimary includeFuel={!electricOnly} /></section>
       </div>
     </form></div> : null}
 
@@ -382,7 +387,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
       .ac-filter-settings{transition:background-color .16s ease,color .16s ease,transform .16s ease}
       .ac-filter-settings:hover,.ac-filter-settings.is-active{background:var(--ac-surface-3);color:#ff353d}
       .ac-filter-settings:active{transform:scale(.98)}
-      .ac-advanced-fields{background:var(--ac-surface-2)}
+      .ac-advanced-fields{background:transparent}
+      .ac-range-fields-shell{background:var(--ac-surface-2);border:1px solid var(--ac-border);border-radius:1.35rem;padding:13px 14px 14px}
       .ac-range-card{background:var(--ac-surface)}
       .ac-filter-chip{background:var(--ac-surface-2)}
       .ac-filter-chip:hover{background:var(--ac-surface-3)}
@@ -405,6 +411,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option{background:transparent}
         .ac-mobile-filter-sheet .ac-filter-dropdown .ac-filter-option.is-active{background:rgba(255,53,61,.12);color:#ff5962}
         .ac-mobile-filter-sheet .ac-advanced-fields{background:transparent}
+        .ac-mobile-filter-sheet .ac-range-fields-shell{background:transparent;border:0;border-radius:0;padding:0}
         .ac-mobile-filter-sheet .ac-range-card{background:var(--ac-surface)}
       }
       html[data-theme="light"] .ac-mobile-filter-sheet [class*="border-white/"]{border-color:rgba(30,36,48,.09)!important}

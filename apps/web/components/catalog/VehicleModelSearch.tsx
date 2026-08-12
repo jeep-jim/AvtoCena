@@ -91,10 +91,12 @@ function applyDependentFacetOptions(facets: ContextFacets | null) {
     const dropdown = root?.querySelector<HTMLElement>(":scope > .ac-filter-dropdown");
     if (!dropdown) return;
     const allowed = facets ? allowedFacetLabels(hidden.name, facets) : null;
-    const selected = selectedFacetLabel(hidden.name, clean(hidden.value));
+    const selected = hidden.name === "make"
+      ? new Set(clean(hidden.value).split(",").map(clean).filter(Boolean))
+      : new Set([selectedFacetLabel(hidden.name, clean(hidden.value))].filter(Boolean));
     dropdown.querySelectorAll<HTMLButtonElement>(".ac-filter-option").forEach((option, index) => {
-      const text = clean(option.querySelector(":scope > span")?.textContent || option.textContent).replace(/✓$/, "").trim();
-      const keep = !allowed || index === 0 || !text || allowed.has(text) || Boolean(selected && text === selected);
+      const text = clean(option.dataset.facetValue || option.querySelector(":scope > span")?.textContent || option.textContent).replace(/✓$/, "").trim();
+      const keep = !allowed || index === 0 || !text || allowed.has(text) || selected.has(text);
       option.classList.toggle("ac-facet-incompatible", !keep);
       option.setAttribute("aria-hidden", keep ? "false" : "true");
     });
@@ -110,7 +112,7 @@ function ensureCatalogFilterLayoutPolish() {
       .ac-facet-incompatible{display:none!important}
       @media(min-width:1024px){
         .ac-catalog-filter-panel input.ac-filter-control[name="model"]{height:52px!important;min-height:52px!important;border-radius:15px!important}
-        .ac-catalog-filter-panel .ac-primary-lower-grid{grid-template-columns:calc((100% - 20px)/3) calc((100% - 20px)/3) minmax(0,1fr) minmax(158px,.52fr)!important;gap:10px!important}
+        .ac-catalog-filter-panel .ac-primary-lower-grid{grid-template-columns:calc((100% - 20px)/3) calc((100% - 20px)/3) minmax(0,1fr) minmax(180px,.58fr)!important;gap:10px!important}
       }
       @media(max-width:1023px){
         .ac-mobile-filter-sheet input.ac-filter-control[name="model"]{height:46px!important;min-height:46px!important;border-radius:13px!important}
