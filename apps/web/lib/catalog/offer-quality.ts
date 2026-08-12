@@ -4,7 +4,7 @@ import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
-const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
+const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s*jet|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
@@ -110,8 +110,11 @@ function minimumImageCount(offer: VehicleOffer) {
   // Compact public projections are created only from offers that already passed
   // the server-side source/gallery quality gate. They intentionally carry one
   // ranked cover instead of the complete listing gallery, so the browser must
-  // not reject a validated Japan card merely because the DTO is compact.
+  // not reject a validated card merely because the DTO is compact.
   if (Number((offer as any).cardProjectionVersion || 0) === 1) return 1;
+  // Georgia recovery has an exact listing-bound gallery contract: publication
+  // must keep at least five verified frames from the same source listing.
+  if (offer.market === "georgia") return 5;
   // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
   // keep rows whose exact spec page/gallery exposes fewer than five verified
   // source-bound photos. Never borrow another trim/series gallery to pad depth.
