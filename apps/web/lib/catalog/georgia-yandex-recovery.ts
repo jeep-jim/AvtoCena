@@ -227,13 +227,18 @@ async function collectPages(source: CatalogSourceAdapter, pages: number, startPa
 
 export type GeorgiaRecoverySource = "all" | "myauto" | "autopapa";
 
+function boundedInteger(value: unknown, fallback: number, maximum: number) {
+  const parsed = Math.floor(Number(value));
+  return Number.isFinite(parsed) ? Math.max(1, Math.min(maximum, parsed)) : fallback;
+}
+
 export async function collectGeorgiaYandexRecoverySnapshot(
   pagesPerSource = 2,
   startPage = 1,
   source: GeorgiaRecoverySource = "all",
 ): Promise<RecoverySnapshot> {
-  const pages = Math.max(1, Math.min(20, Math.floor(pagesPerSource)));
-  const firstPage = Math.max(1, Math.min(10_000, Math.floor(startPage)));
+  const pages = boundedInteger(pagesPerSource, 2, 20);
+  const firstPage = boundedInteger(startPage, 1, 10_000);
   const selectedSource: GeorgiaRecoverySource = ["myauto", "autopapa"].includes(source) ? source : "all";
   const rejected: Record<string, number> = {};
   const reject = (reason: string) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
