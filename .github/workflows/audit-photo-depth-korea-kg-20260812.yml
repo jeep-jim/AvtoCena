@@ -37,46 +37,48 @@ jobs:
         run: |
           set -euo pipefail
           cat >/tmp/audit-photo-depth.ts <<'TS'
-          const storage = await import(process.cwd() + '/apps/web/lib/catalog/storage.ts');
-          const host = (raw: unknown) => {
-            try { return new URL(String(raw || '')).hostname; } catch { return ''; }
-          };
-          for (const market of ['korea','kyrgyzstan']) {
-            const rows = await storage.readMarketOffers(market);
-            const bySource = new Map<string, any>();
-            for (const offer of rows) {
-              const source = String(offer.sourceId || 'unknown');
-              const images = Array.isArray(offer.images) ? offer.images : [];
-              const stat = bySource.get(source) || { source, total:0, zero:0, below5:0, sum:0, min:999, max:0, samples:[] };
-              stat.total += 1;
-              stat.sum += images.length;
-              stat.min = Math.min(stat.min, images.length);
-              stat.max = Math.max(stat.max, images.length);
-              if (images.length === 0) stat.zero += 1;
-              if (images.length < 5) {
-                stat.below5 += 1;
-                if (stat.samples.length < 8) {
-                  stat.samples.push({
-                    id: offer.id,
-                    make: offer.make,
-                    model: offer.model,
-                    year: offer.year,
-                    imageCount: images.length,
-                    sourceUrl: offer.sourceUrl,
-                    imageHosts: [...new Set(images.map((img:any) => host(img?.url)).filter(Boolean))].slice(0,4),
-                    imageObjectKeys: images.map((img:any) => String(img?.objectKey || '')).filter(Boolean).slice(0,2),
-                  });
+          (async () => {
+            const storage = await import(process.cwd() + '/apps/web/lib/catalog/storage.ts');
+            const host = (raw: unknown) => {
+              try { return new URL(String(raw || '')).hostname; } catch { return ''; }
+            };
+            for (const market of ['korea','kyrgyzstan']) {
+              const rows = await storage.readMarketOffers(market);
+              const bySource = new Map<string, any>();
+              for (const offer of rows) {
+                const source = String(offer.sourceId || 'unknown');
+                const images = Array.isArray(offer.images) ? offer.images : [];
+                const stat = bySource.get(source) || { source, total:0, zero:0, below5:0, sum:0, min:999, max:0, samples:[] };
+                stat.total += 1;
+                stat.sum += images.length;
+                stat.min = Math.min(stat.min, images.length);
+                stat.max = Math.max(stat.max, images.length);
+                if (images.length === 0) stat.zero += 1;
+                if (images.length < 5) {
+                  stat.below5 += 1;
+                  if (stat.samples.length < 8) {
+                    stat.samples.push({
+                      id: offer.id,
+                      make: offer.make,
+                      model: offer.model,
+                      year: offer.year,
+                      imageCount: images.length,
+                      sourceUrl: offer.sourceUrl,
+                      imageHosts: [...new Set(images.map((img:any) => host(img?.url)).filter(Boolean))].slice(0,4),
+                      imageObjectKeys: images.map((img:any) => String(img?.objectKey || '')).filter(Boolean).slice(0,2),
+                    });
+                  }
                 }
+                bySource.set(source, stat);
               }
-              bySource.set(source, stat);
+              const sources = [...bySource.values()].map((stat:any) => ({
+                ...stat,
+                min: stat.min === 999 ? 0 : stat.min,
+                avg: stat.total ? Math.round((stat.sum / stat.total) * 100) / 100 : 0,
+              })).sort((a:any,b:any) => b.below5 - a.below5 || b.total - a.total);
+              const below5 = sources.reduce((n:number,s:any) => n + s.below5, 0);
+              console.log(JSON.stringify({ market, total: rows.length, below5, sources }, null, 2));
             }
-            const sources = [...bySource.values()].map((stat:any) => ({
-              ...stat,
-              min: stat.min === 999 ? 0 : stat.min,
-              avg: stat.total ? Math.round((stat.sum / stat.total) * 100) / 100 : 0,
-            })).sort((a:any,b:any) => b.below5 - a.below5 || b.total - a.total);
-            const below5 = sources.reduce((n:number,s:any) => n + s.below5, 0);
-            console.log(JSON.stringify({ market, total: rows.length, below5, sources }, null, 2));
-          }
+          })().catch((error) => { console.error(error); process.exit(1); });
           TS
           npx tsx /tmp/audit-photo-depth.ts
