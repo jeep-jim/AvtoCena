@@ -46,15 +46,15 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p autopapa-batches recovery-input
-          for start in $(seq 1 20 281); do
+          for start in $(seq 1 5 296); do
             file="autopapa-batches/start-${start}.json"
-            echo "collecting startPage=${start} pages=20"
-            curl --connect-timeout 10 --max-time 300 --retry 3 --retry-delay 5 --retry-all-errors -fsS               "https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=${start}&pages=20"               -o "${file}"
+            echo "collecting startPage=${start} pages=5"
+            curl --connect-timeout 10 --max-time 300 --retry 3 --retry-delay 5 --retry-all-errors -fsS               "https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=${start}&pages=5"               -o "${file}"
             jq -e --argjson start "${start}" '
               .market == "georgia"
               and .report.source == "autopapa"
               and .report.startPage == $start
-              and .report.pagesPerSource == 20
+              and .report.pagesPerSource == 5
               and .report.rawSourceCounts.autopapa_georgia_open > 0
               and .count > 0
               and ([.offers[] | select(
