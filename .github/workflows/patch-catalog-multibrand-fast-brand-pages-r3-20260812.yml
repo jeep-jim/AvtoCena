@@ -1,0 +1,51 @@
+name: Fix multibrand model directory patch
+
+on:
+  push:
+    branches:
+      - ui/catalog-multibrand-fast-brand-pages-20260812
+    paths:
+      - .github/workflows/patch-catalog-multibrand-fast-brand-pages-r3-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/catalog-multibrand-fast-brand-pages-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fix model directory source
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/lib/catalog/model-directory.ts')
+          s = p.read_text()
+          bad = 'const readKnowledge = cache(async () => {const readKnowledge = cache(async () => {'
+          if bad not in s:
+              raise SystemExit('duplicate readKnowledge marker not found')
+          s = s.replace(bad, 'const readKnowledge = cache(async () => {', 1)
+          s = s.replace('  const modelByKey = new Map(models.map((model) => [modelKey(make, model.model), model]));\n', '', 1)
+          p.write_text(s)
+          Path('.github/workflows/patch-catalog-multibrand-fast-brand-pages-r3-20260812.yml').unlink()
+          PY
+      - name: Targeted tests and web typecheck
+        run: |
+          node --import tsx --test tests/catalog-filter-search.test.ts tests/catalog-brand-rail-ui.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix multibrand model directory source"
+          git push origin HEAD:ui/catalog-multibrand-fast-brand-pages-20260812
