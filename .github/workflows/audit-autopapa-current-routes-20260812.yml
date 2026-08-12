@@ -1,0 +1,51 @@
+name: Audit AutoPapa current marketplace routes
+run-name: AutoPapa current route probe · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/autopapa-current-routes-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe official public marketplace routes without publishing
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const urls = [
+            'https://autopapa.ge/en/usd',
+            'https://www.autopapa.ge/en/usd',
+            'https://autopapa.ge/en/usd/search',
+            'https://www.autopapa.ge/en/usd/search',
+            'https://autopapa.ge/en/usd/search?page=1',
+            'https://autopapa.ge/en/usd/search?s%5Bcity_id%5D=34&s%5Bcountry_id%5D=2',
+            'https://autopapa.ge/en/usd/toyota/prius/603915',
+            'https://autobazroba.com/',
+          ];
+          const headers = {
+            accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'accept-language': 'en-US,en;q=0.9',
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/136 Safari/537.36',
+          };
+          for (const url of urls) {
+            try {
+              const response = await fetch(url, {headers, redirect:'follow', signal:AbortSignal.timeout(20000)});
+              const text = await response.text();
+              const links = [...text.matchAll(/href=["']([^"']+)["']/gi)].map(m=>m[1]).filter(h=>/\/(?:en\/usd\/)?[^?#]+\/\d{5,}(?:[?#]|$)/i.test(h)).slice(0,10);
+              console.log(JSON.stringify({url,status:response.status,finalUrl:response.url,contentType:response.headers.get('content-type'),bytes:Buffer.byteLength(text),title:text.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/\s+/g,' ').trim(),listingLinks:links,bodyPrefix:text.slice(0,120).replace(/\s+/g,' ')},null,2));
+            } catch(error) {
+              console.log(JSON.stringify({url,error:String(error?.message||error)}));
+            }
+          }
+          NODE
