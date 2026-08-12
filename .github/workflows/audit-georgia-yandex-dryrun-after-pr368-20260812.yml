@@ -21,7 +21,7 @@ jobs:
           curl -fsS --max-time 180 --retry 2 --retry-delay 2 \
             'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' \
             | python3 -m json.tool
-          echo '=== fixed egress diagnostic ==='
+          echo '=== fixed egress diagnostic after PR371 ==='
           curl -fsS --max-time 180 --retry 2 --retry-delay 2 \
             'https://avtocena.com/api/internal/georgia-egress-8d4c2f' \
             | python3 -m json.tool
