@@ -1,3 +1,5 @@
+import { CATALOG_BRANDS } from "./brands";
+
 const directPhrases: Array<[RegExp, string]> = [
   [/쉐보레\s*\(GM대우\)/gi, "Chevrolet"],
   [/쉐보레/gi, "Chevrolet"],
@@ -146,6 +148,31 @@ const directPhrases: Array<[RegExp, string]> = [
   [/凯迪拉克/g, "Cadillac "],
   [/路虎/g, "Land Rover "],
   [/特斯拉/g, "Tesla "],
+  [/林肯/g, "Lincoln "],
+  [/玛莎拉蒂/g, "Maserati "],
+  [/标致/g, "Peugeot "],
+  [/宾利/g, "Bentley "],
+  [/阿斯顿[·・]?马丁/g, "Aston Martin "],
+  [/莲花跑车|路特斯/g, "Lotus "],
+  [/雪铁龙/g, "Citroen "],
+  [/小米汽车|小米/g, "Xiaomi "],
+  [/法拉利/g, "Ferrari "],
+  [/英菲尼迪/g, "Infiniti "],
+  [/捷豹/g, "Jaguar "],
+  [/兰博基尼/g, "Lamborghini "],
+  [/阿尔法[·・]?罗密欧/g, "Alfa Romeo "],
+  [/创维汽车|创维/g, "Skyworth "],
+  [/威麟/g, "Rely "],
+  [/北京汽车/g, "BAIC "],
+  [/睿蓝汽车|睿蓝/g, "Livan "],
+  [/江淮钇为|钇为/g, "JAC Yiwei "],
+  [/思皓/g, "Sehol "],
+  [/远程/g, "Farizon "],
+  [/东南/g, "Soueast "],
+  [/凌宝汽车|凌宝/g, "Lingbox "],
+  [/知豆/g, "Zhidou "],
+  [/乐道/g, "Onvo "],
+  [/英力士掷弹兵/g, "Ineos Grenadier "],
   [/钧天纵横家/g, "Juntian Zonghengjia "],
   [/钧天机械|钧天汽车|钧天/g, "Juntian "],
   [/比亚迪/g, "BYD "],
@@ -329,10 +356,36 @@ function chinaSourceSeriesId(offer: any) {
   );
 }
 
+const catalogBrandsByLength = [...CATALOG_BRANDS]
+  .sort((left, right) => right.name.length - left.name.length);
+
+function knownCatalogBrandInText(value: unknown) {
+  const translated = compactListingText(value);
+  if (!translated) return "";
+  const normalized = ` ${translated.toLocaleLowerCase("en-US").replace(/[^a-z0-9&+-]+/g, " ")} `;
+  for (const brand of catalogBrandsByLength) {
+    const candidate = brand.name.toLocaleLowerCase("en-US").replace(/[^a-z0-9&+-]+/g, " ").trim();
+    if (candidate && normalized.includes(` ${candidate} `)) return brand.name;
+  }
+  return "";
+}
+
 function publicChinaMake(offer: any) {
   const translated = compactListingText(offer?.make);
   const cleaned = stripUnresolvedHan(translated);
-  return cleaned || "Марка уточняется";
+  if (cleaned) return cleaned;
+
+  // AutoHome occasionally stores an empty/unmapped manufacturer field while
+  // the exact listing/model title still contains a known Latin manufacturer.
+  // Recover only a catalog-known brand from source-bound text; never guess.
+  for (const candidate of [offer?.sourceTitle, offer?.model, offer?.operational?.sourceTitle]) {
+    const brand = knownCatalogBrandInText(candidate);
+    if (brand) return brand;
+  }
+
+  // A missing public brand must not become the literal card title
+  // "Марка уточняется ...". The factual model remains visible by itself.
+  return "";
 }
 
 function publicChinaModel(offer: any) {

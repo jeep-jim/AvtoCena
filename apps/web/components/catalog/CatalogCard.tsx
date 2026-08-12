@@ -39,7 +39,6 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isElectrified = isElectric || ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
-  const thirtyMinutePowerMissing = isElectrified && !powerDisplay;
   const href = `/cars/offer/${o.id}`;
   const imageUrl = o.images[0] || "";
 
@@ -77,11 +76,11 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
         <div className={dense ? "p-2.5 sm:p-3.5" : "p-3.5"}>
           <CatalogPrice offer={displayOffer} label={priceLabel} dense={dense} priceClassName={dense ? "text-[15px] sm:text-[20px] md:text-[22px]" : "text-[20px] sm:text-[22px]"} />
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
-            <span className={tagClass}><MileageIcon dense={dense} /><span>{o.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км` : "Пробег уточняется"}</span></span>
-            {!isElectric || !thirtyMinutePowerMissing ? <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span> : null}
-            {thirtyMinutePowerMissing
-              ? <span className={tagClass} title="Максимальная 30-минутная мощность уточняется по официальному документу"><ThirtyMinuteIcon dense={dense} /><span>30 мин: уточняется</span></span>
-              : <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp ? `${o.powerHp} л.с.` : "Мощность уточняется"}</span></span>}
+            {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
+            <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
+            {o.powerHp
+              ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
+              : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}
             {powerDisplay?.utilizationLabel ? <span className={tagClass} title="Мощность, по которой рассчитывается утилизационный сбор"><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.utilizationLabel}</span></span> : null}
           </div>
