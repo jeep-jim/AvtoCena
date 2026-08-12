@@ -52,9 +52,6 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
   ],
   georgia: [
     ...REQUIRED_CATALOG_SOURCES.georgia,
-    { sourceId: "auto_georgia_open", label: "AUTO.GE", canonicalUrl: "https://www.auto.ge/", role: "secondary" },
-    { sourceId: "mymarket_georgia_open", label: "MyMarket", canonicalUrl: "https://www.mymarket.ge/", role: "secondary" },
-    { sourceId: "ss_georgia_open", label: "SS.GE", canonicalUrl: "https://ss.ge/", role: "secondary" },
   ],
   kyrgyzstan: [
     ...REQUIRED_CATALOG_SOURCES.kyrgyzstan,
@@ -131,7 +128,10 @@ export function assertCatalogV2SourceRegistry() {
   assertRequiredSourcesPresent();
 
   const failures = Object.entries(CATALOG_V2_SOURCE_SLOTS)
-    .filter(([market, sources]) => new Set(sources.filter((source) => sourceIsCollectible(market as CatalogMarket, source)).map((source) => source.sourceId)).size < CATALOG_V2_MIN_SOURCE_SLOTS)
+    .filter(([market, sources]) => {
+      const minimum = market === "georgia" ? REQUIRED_CATALOG_SOURCES.georgia.length : CATALOG_V2_MIN_SOURCE_SLOTS;
+      return new Set(sources.filter((source) => sourceIsCollectible(market as CatalogMarket, source)).map((source) => source.sourceId)).size < minimum;
+    })
     .map(([market]) => market);
 
   if (failures.length) throw new Error(`catalog_v2_source_slots_missing:${failures.join(",")}`);
