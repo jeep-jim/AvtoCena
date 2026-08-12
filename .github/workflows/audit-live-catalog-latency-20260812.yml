@@ -1,0 +1,68 @@
+name: Audit live catalog latency
+run-name: Live catalog latency · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/live-catalog-latency-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Measure live catalog pages read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/136 Safari/537.36'
+          urls=(
+            'https://avtocena.com/'
+            'https://avtocena.com/cars'
+            'https://avtocena.com/cars?market=europe'
+            'https://avtocena.com/cars?market=europe&make=BMW'
+            'https://avtocena.com/cars?market=korea&make=Hyundai&model=Palisade&yearFrom=2026&yearTo=2026'
+          )
+          names=(home cars europe europe_bmw korea_palisade)
+          : > latency.tsv
+          for i in "${!urls[@]}"; do
+            url="${urls[$i]}"
+            name="${names[$i]}"
+            curl -L --max-time 30 -A "$UA" -sS -o "/tmp/${name}-warm.html" "$url"
+            for sample in 1 2 3; do
+              metrics=$(curl -L --max-time 30 -A "$UA" -sS -o "/tmp/${name}-${sample}.html" -w '%{http_code}\t%{time_starttransfer}\t%{time_total}\t%{size_download}' "$url")
+              printf '%s\t%s\t%s\n' "$name" "$sample" "$metrics" | tee -a latency.tsv
+              code=$(printf '%s' "$metrics" | cut -f1)
+              if [[ ! "$code" =~ ^2 ]]; then
+                echo "non_2xx:${name}:${sample}:${code}" >&2
+                exit 1
+              fi
+              if grep -Eqi 'Signal:killed|Internal Server Error|Application error' "/tmp/${name}-${sample}.html"; then
+                echo "page_error_marker:${name}:${sample}" >&2
+                exit 1
+              fi
+            done
+          done
+          python3 - <<'PY'
+          import csv, statistics
+          rows={}
+          with open('latency.tsv', newline='') as f:
+              for r in csv.reader(f, delimiter='\t'):
+                  name,sample,code,ttfb,total,size=r
+                  rows.setdefault(name,[]).append((float(ttfb),float(total),int(size)))
+          print('MEDIANS')
+          for name,vals in rows.items():
+              print(f'{name}\tttfb={statistics.median(v[0] for v in vals):.3f}s\ttotal={statistics.median(v[1] for v in vals):.3f}s\tbytes={int(statistics.median(v[2] for v in vals))}')
+          PY
+      - name: Check filter-state rendering markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Eqi 'BMW|БМВ' /tmp/europe_bmw-1.html || { echo 'BMW filter marker missing'; exit 1; }
+          grep -Eqi 'Palisade|Палисад' /tmp/korea_palisade-1.html || { echo 'Palisade filter marker missing'; exit 1; }
+          echo 'filter markers present'
