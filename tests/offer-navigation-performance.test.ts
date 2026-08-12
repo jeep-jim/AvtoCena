@@ -46,7 +46,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /router\.prefetch\(href\)/);
   assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
   assert.match(intentLink, /onTouchStart=\{prefetch\}/);
-  assert.match(intentLink, /window\.setTimeout\(prefetch, 1_200\)/);
+  assert.match(intentLink, /EAGER_PREFETCH_DELAY_MS = 120/);
+  assert.match(intentLink, /window\.setTimeout\(prefetch, EAGER_PREFETCH_DELAY_MS\)/);
   assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
@@ -57,7 +58,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
 });
 
 test("production keeps one warm container and serves navigation bursts in-process", () => {
-  assert.match(deploy, /revision-concurrency: 8/);
+  assert.match(deploy, /revision-memory: 2Gb/);
+  assert.match(deploy, /revision-concurrency: 4/);
   assert.match(deploy, /revision-provisioned: 1/);
   assert.match(deploy, /Warm public catalog and first offer/);
   assert.match(deploy, /cars\/offer\/\$offer_id/);
@@ -76,7 +78,7 @@ test("catalog reads a current one-hop projection before generation indexes", () 
   assert.match(storage, /CURRENT_FACETS_PATH/);
   assert.match(storage, /readCurrentSearchProjection\(currentProjectionScope\)/);
   assert.match(storage, /currentProjectionPath\(CURRENT_ALL_MARKETS_PROJECTION\)/);
-  assert.match(storage, /if \(current\.generationId\)/);
+  assert.match(storage, /current\.generationId === manifest\.generationId/);
   assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), projection, false\)/);
   assert.match(storage, /export async function publishCurrentCatalogReadModels/);
   assert.match(readModelsScript, /publishCurrentCatalogReadModels/);

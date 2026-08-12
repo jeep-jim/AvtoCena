@@ -9,7 +9,7 @@ import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
 
 test("model suggestions merge the live catalog with the curated knowledge base", () => {
-  assert.match(modelRoute, /readCatalogFacets\(\{ make \}\)/);
+  assert.match(modelRoute, /readCatalogFacets\(modelFilters\)/);
   assert.match(modelRoute, /mergeSuggestions\(knowledgeMatches, catalogFacets\.models, query, limit\)/);
 });
 
@@ -83,7 +83,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
       assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
       assert.equal(allProjectionReads, 1, "global results and filtered facets must share one all-market projection read");
-      assert.equal(manifestReads, 0, "the current all-market projection must bypass the generation manifest");
+      assert.equal(manifestReads, 1, "the current all-market projection must validate the active manifest generation once");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
