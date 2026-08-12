@@ -1,0 +1,136 @@
+name: Audit Georgia with repository knowledge 20260812
+
+on:
+  push:
+    branches: [audit/georgia-power-coverage-20260812]
+    paths:
+      - ".github/workflows/audit-georgia-repo-knowledge-20260812.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Measure current Georgia against committed chunked knowledge without writes
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          process.env.JSON_STORAGE_DRIVER = 'object';
+          const dataModule = await import('./apps/web/lib/data.ts');
+          const data = dataModule.default || dataModule;
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const knowledgeModule = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const knowledge = knowledgeModule.default || knowledgeModule;
+          const certifiedModule = await import('./apps/web/lib/catalog/power-reference.ts');
+          const certified = certifiedModule.default || certifiedModule;
+          const powerModule = await import('./apps/web/lib/catalog/power-knowledge.ts');
+          const power = powerModule.default || powerModule;
+
+          const rows = await storage.readMarketOffers('georgia');
+
+          data.resetJsonStorageForTests();
+          process.env.JSON_STORAGE_DRIVER = 'local';
+          knowledge.resetVehicleKnowledgeCache();
+          certified.resetCertifiedPowerReferenceCache();
+          power.resetVehiclePowerKnowledgeCache();
+
+          const [models, variants, powerKnowledge] = await Promise.all([
+            knowledge.readVehicleKnowledgeModels(),
+            knowledge.readVehicleKnowledgeVariants(),
+            power.readVehiclePowerKnowledge(),
+          ]);
+
+          const stats = {
+            total: rows.length,
+            currentPower: 0,
+            currentPreliminary: 0,
+            modelMatched: 0,
+            variantMatched: 0,
+            representativePowerUsed: 0,
+            filledByVehicleKnowledge: 0,
+            filledByCertified: 0,
+            filledByStandalonePower: 0,
+            finalPower: 0,
+            finalMissingPower: 0,
+            finalPowerByConfidence: {},
+            powertrain: {},
+          };
+          const gained = [];
+          const missing = [];
+          let cursor = 0;
+          async function worker() {
+            while (true) {
+              const i = cursor++;
+              if (i >= rows.length) return;
+              const row = rows[i];
+              if (Number(row.powerHp || 0) > 0) stats.currentPower++;
+              if (row.calculationStatus === 'preliminary_power_pending') stats.currentPreliminary++;
+              const byVehicle = await knowledge.enrichOfferWithVehicleKnowledge(row);
+              const raw = byVehicle?.operational?.raw || {};
+              if (raw.vehicleKnowledgeModel) stats.modelMatched++;
+              if (raw.vehicleKnowledgeVariant) stats.variantMatched++;
+              if (String(byVehicle.powerDataSource || '').startsWith('vehicle-model-representative:')) stats.representativePowerUsed++;
+              if (!(Number(row.powerHp || 0) > 0) && Number(byVehicle.powerHp || 0) > 0) stats.filledByVehicleKnowledge++;
+              const byCertified = await certified.enrichOfferWithCertifiedPower(byVehicle);
+              if (!(Number(byVehicle.powerHp || 0) > 0) && Number(byCertified.powerHp || 0) > 0) stats.filledByCertified++;
+              const final = await power.enrichOfferWithPowerKnowledge(byCertified);
+              if (!(Number(byCertified.powerHp || 0) > 0) && Number(final.powerHp || 0) > 0) stats.filledByStandalonePower++;
+              if (Number(final.powerHp || 0) > 0) {
+                stats.finalPower++;
+                const confidence = String(final.powerDataConfidence || 'none');
+                stats.finalPowerByConfidence[confidence] = (stats.finalPowerByConfidence[confidence] || 0) + 1;
+                if (!(Number(row.powerHp || 0) > 0) && gained.length < 80) gained.push({
+                  sourceOfferId: row.sourceOfferId, make: row.make, model: row.model, year: row.year,
+                  engineCc: row.engineCc, fuel: row.fuel, transmission: row.transmission, drive: row.drive,
+                  powerHp: final.powerHp, powerKw: final.powerKw, source: final.powerDataSource, confidence: final.powerDataConfidence,
+                  modelRef: raw.vehicleKnowledgeModel || null, variantRef: raw.vehicleKnowledgeVariant || null,
+                });
+              } else {
+                stats.finalMissingPower++;
+                if (missing.length < 80) missing.push({
+                  sourceOfferId: row.sourceOfferId, make: row.make, model: row.model, year: row.year,
+                  engineCc: row.engineCc, fuel: row.fuel, transmission: row.transmission, drive: row.drive,
+                  modelRef: raw.vehicleKnowledgeModel || null,
+                });
+              }
+              const kind = String(final.powertrainKind || 'unknown');
+              stats.powertrain[kind] = (stats.powertrain[kind] || 0) + 1;
+            }
+          }
+          await Promise.all(Array.from({ length: 8 }, worker));
+          const report = {
+            checkedAt: new Date().toISOString(),
+            repositoryKnowledge: { models: models.length, variants: variants.length, standalonePowerRows: powerKnowledge.length },
+            stats,
+            gained,
+            missing,
+          };
+          await fs.writeFile('georgia-repo-knowledge.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (models.length < 4000 || variants.length < 10000) throw new Error(`repository_knowledge_unexpected_${models.length}_${variants.length}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-repo-knowledge
+          path: georgia-repo-knowledge.json
+          retention-days: 3
