@@ -1,5 +1,7 @@
 import { PublicHeader } from "@/components/layout/PublicHeader";
 
+// Route-level shell is intentionally content-light: it gives every public
+// navigation an immediate layout target while server data is still resolving.
 export default function PublicLoading() {
   return <main className="ac-page-copy min-h-screen bg-[#0f172a] text-white" aria-busy="true" aria-label="Загружаем страницу">
     <PublicHeader />
