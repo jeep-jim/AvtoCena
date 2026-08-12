@@ -1,6 +1,8 @@
 import "../flat-ui.css";
 import "../public-regression-fixes.css";
 import "../public-price-sheet-fix.css";
+import "../catalog-filter-compact.css";
+import { CatalogFilterUiEnhancer } from "@/components/catalog/CatalogFilterUiEnhancer";
 
 const priceTrendTapGuard = `
 (() => {
@@ -286,6 +288,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <>
       {children}
+      <CatalogFilterUiEnhancer />
       <style dangerouslySetInnerHTML={{ __html: publicPageFixes }} />
       <script dangerouslySetInnerHTML={{ __html: priceTrendTapGuard }} />
     </>
