@@ -33,6 +33,7 @@ env:
   YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_ALLOW_EMPTY_MARKETS: "georgia"
 
 jobs:
   refresh:
@@ -49,10 +50,12 @@ jobs:
       - name: Validate current read-model publisher
         run: |
           node --check scripts/catalog-publish-current-read-models.mjs
-          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts
+          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts
           npm run typecheck
       - name: Publish one-hop projections and offer shards
-        run: npx tsx scripts/catalog-publish-current-read-models.mjs | tee catalog-current-read-models.log
+        run: |
+          set -o pipefail
+          npx tsx scripts/catalog-publish-current-read-models.mjs | tee catalog-current-read-models.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
