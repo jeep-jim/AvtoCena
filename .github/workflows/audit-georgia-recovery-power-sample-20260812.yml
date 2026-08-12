@@ -1,0 +1,25 @@
+name: Audit Georgia recovery power sample 20260812
+
+on:
+  push:
+    branches:
+      - audit/georgia-recovery-power-sample-20260812
+    paths:
+      - .github/workflows/audit-georgia-recovery-power-sample-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch five-page canonical AutoPapa recovery sample
+        run: |
+          set -euo pipefail
+          curl --connect-timeout 10 --max-time 600 --retry 2 --retry-delay 3 --retry-all-errors -fsS \
+            'https://avtocena.com/api/internal/georgia-recovery-c4f812?source=autopapa&startPage=1&pages=5&audit=20260812-power-refresh' \
+            -o sample.json
+          jq -e '.market == "georgia" and .report.source == "autopapa" and .report.startPage == 1 and .report.pagesPerSource == 5' sample.json >/dev/null
+          jq '{count,report, exactPowerRows:([.offers[]|select((.powerHp//0)>0)]|length), preliminaryRows:([.offers[]|select(.calculationStatus=="preliminary_power_pending")]|length), sampleExact:[.offers[]|select((.powerHp//0)>0)|{sourceOfferId,make,model,year,engineCc,fuel,powerHp,powerDataConfidence,powerDataSource,calculationStatus}]|.[0:30]}' sample.json
