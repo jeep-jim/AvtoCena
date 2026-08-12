@@ -1,0 +1,45 @@
+name: Audit production brand route latency 20260812
+
+on:
+  push:
+    branches:
+      - audit/brand-route-prod-latency-20260812
+    paths:
+      - .github/workflows/audit-brand-route-prod-latency-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Measure production routes and validate multi-brand OR
+        shell: bash
+        run: |
+          set -euo pipefail
+          measure() {
+            local label="$1" url="$2"
+            echo "=== $label ==="
+            for i in 1 2 3 4; do
+              curl --fail-with-body -L -sS -o "/tmp/${label// /_}-$i.out" \
+                -w "run=$i code=%{http_code} size=%{size_download} ttfb=%{time_starttransfer} total=%{time_total}\n" \
+                "$url"
+            done
+          }
+          stamp="$(date +%s)"
+          measure "brand_bmw" "https://avtocena.com/cars/brand/bmw?audit=$stamp"
+          measure "brand_audi" "https://avtocena.com/cars/brand/audi?audit=$stamp"
+          measure "brand_counts" "https://avtocena.com/api/catalog/brand-counts?audit=$stamp"
+          measure "multibrand_search" "https://avtocena.com/api/catalog/search?make=Audi%2CBMW&page=1&pageSize=48&audit=$stamp"
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('/tmp/multibrand_search-4.out','utf8'));
+          if (!(Number(data.total) > 0)) throw new Error(`multibrand total invalid: ${data.total}`);
+          const makes = new Set((data.items || []).map(x => String(x.make || '').toLowerCase()));
+          for (const make of makes) if (!['audi','bmw'].includes(make)) throw new Error(`unexpected make in OR result: ${make}`);
+          console.log(JSON.stringify({multibrandTotal:Number(data.total), pageMakes:[...makes]}, null, 2));
+          const counts = JSON.parse(fs.readFileSync('/tmp/brand_counts-4.out','utf8'));
+          console.log(JSON.stringify({brandCountKeys:Object.keys(counts.counts || {}).length, audi:counts.counts?.Audi, bmw:counts.counts?.BMW, generationId:counts.generationId}, null, 2));
+          NODE
