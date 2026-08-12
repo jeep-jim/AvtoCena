@@ -161,7 +161,13 @@ function mileageBucket(value?: number | null) { return numericBucket(value, 25_0
 function engineBucket(value?: number | null) { return numericBucket(value, 250); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }
-function currentBrandProjectionPath(make: string) { return `catalog/public/projection-brand/${cleanShard(make)}.json`; }
+function catalogBrandReadModelKey(value: unknown) { return cleanFacet(value).toLocaleLowerCase("ru-RU"); }
+function currentBrandProjectionPath(make: string) {
+  const normalized = catalogBrandReadModelKey(make);
+  const digest = crypto.createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+  const label = cleanShard(make);
+  return `catalog/public/projection-brand/${label}-${digest}.json`;
+}
 const CURRENT_ALL_MARKETS_PROJECTION = "all";
 function currentOfferShardName(id: string) { return String(id || "").toLowerCase().replace(/[^a-f0-9]/g, "").slice(0, 2) || "unknown"; }
 function currentOfferShardPath(id: string) { return `catalog/public/offers/${currentOfferShardName(id)}.json`; }
@@ -174,7 +180,7 @@ export function buildCatalogBrandSummary(generationId: string, rows: CatalogSear
     const make = cleanFacet(row.make);
     const model = cleanFacet(row.model);
     if (!make) continue;
-    const brandKey = cleanShard(make);
+    const brandKey = catalogBrandReadModelKey(make);
     const brand = brands.get(brandKey) || { make, count: 0, marketCounts: {}, models: new Map<string, CatalogBrandSummaryModel>() };
     brand.count += 1;
     if (row.market) brand.marketCounts[row.market] = (brand.marketCounts[row.market] || 0) + 1;
@@ -484,7 +490,7 @@ export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
 export async function readCatalogBrandModelCounts(make: string) {
   const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);
   if (summary.generationId === manifest.generationId) {
-    const brand = summary.brands[cleanShard(make)];
+    const brand = summary.brands[catalogBrandReadModelKey(make)];
     if (brand) return { generationId: manifest.generationId, models: brand.models };
   }
   const filters: CatalogSearchParams = { make };
