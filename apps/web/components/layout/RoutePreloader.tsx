@@ -132,27 +132,32 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
 @media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
 }
-/* The route loader deliberately covers the complete 64px public header.
-   The red/white diagonal sweep is readable in both themes and on mobile. */
+/* Route loading occupies exactly the same 64px as the public header.
+   Use plain straight diagonal bands; the oversized stripe sheet moves only
+   on the X axis, so the visual direction is unambiguously left to right. */
 .ac-route-loader{
   height:64px!important;
+  min-height:64px!important;
+  max-height:64px!important;
   overflow:hidden!important;
-  background:#111827!important;
+  background:rgba(15,23,42,.18)!important;
   isolation:isolate!important;
 }
 .ac-route-loader__candy{
   position:absolute!important;
-  inset:0!important;
-  background:repeating-linear-gradient(125deg,#ff303b 0 17px,#ff303b 34px,#fff 34px,#fff 51px,#ff303b 51px,#ff303b 68px)!important;
-  background-size:96px 96px!important;
-  animation:ac-route-candy-sweep .72s linear infinite!important;
-  box-shadow:inset 0 -1px 0 rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.18)!important;
+  top:0!important;
+  bottom:0!important;
+  left:-64px!important;
+  right:-64px!important;
+  height:64px!important;
+  background:repeating-linear-gradient(120deg,#ff353d 0 34px,#fff 34px 52px)!important;
+  opacity:.72!important;
+  animation:ac-route-candy-sweep .86s linear infinite!important;
+  will-change:transform!important;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)!important;
 }
 .ac-route-loader__candy::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.08));
+  content:none!important;
 }
 .ac-route-loader__label{
   position:absolute!important;
@@ -162,9 +167,9 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
   transform:translate(-50%,-50%)!important;
   max-width:calc(100vw - 32px)!important;
   white-space:nowrap!important;
-  border:1px solid rgba(255,255,255,.42)!important;
+  border:1px solid rgba(255,255,255,.30)!important;
   border-radius:999px!important;
-  background:rgba(12,18,30,.78)!important;
+  background:rgba(12,18,30,.66)!important;
   color:#fff!important;
   -webkit-text-fill-color:#fff!important;
   padding:7px 13px!important;
@@ -172,13 +177,13 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
   font-weight:900!important;
   line-height:1!important;
   letter-spacing:.04em!important;
-  box-shadow:0 4px 14px rgba(0,0,0,.24)!important;
-  backdrop-filter:blur(6px)!important;
-  -webkit-backdrop-filter:blur(6px)!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.16)!important;
+  backdrop-filter:blur(5px)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
 }
 @keyframes ac-route-candy-sweep{
-  from{background-position:0 0}
-  to{background-position:96px 0}
+  from{transform:translate3d(-60px,0,0)}
+  to{transform:translate3d(0,0,0)}
 }
 @media(max-width:420px){
   .ac-route-loader__label{padding:6px 10px!important;font-size:11px!important}
