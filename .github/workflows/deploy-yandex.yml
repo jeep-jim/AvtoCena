@@ -42,12 +42,12 @@ jobs:
           revision-service-account-id: ajekvv7ulcilmppf8qj3
           revision-image-url: ${{ env.IMAGE }}
           revision-cores: 1
-          revision-memory: 1Gb
+          revision-memory: 2Gb
           revision-core-fraction: 100
-          # Next.js spends most of its time waiting for object storage. Let one
-          # warm instance serve a normal page burst instead of cold-starting a
-          # separate container for every RSC/image/navigation request.
-          revision-concurrency: 8
+          # Next.js spends most of its time waiting for object storage. Limit one
+          # warm instance to four simultaneous SSR/RSC requests so a page burst
+          # has enough heap headroom instead of risking a runtime signal kill.
+          revision-concurrency: 4
           # The catalog is a public storefront: keep one initialized instance
           # ready so the first visitor does not pay the 4-6 second cold start.
           revision-provisioned: 1
