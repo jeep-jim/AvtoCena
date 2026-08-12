@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { readCatalogOverview } from "@/lib/catalog/overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { BrandLogoRail } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
@@ -23,6 +24,7 @@ const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
 const SUPPORTED_SORTS = new Set(["updatedAt", "totalRub", "totalRubDesc", "year", "yearAsc", "mileage"]);
+type MarketGroup = { id: string; label: string; items: any[]; total: number; page: number; pageSize: number };
 
 function requestedSort(value?: string | string[]) {
   const sort = first(value);
@@ -153,27 +155,45 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     || common.yearFrom || common.yearTo || common.mileageFrom || common.mileageTo || common.engineFrom || common.engineTo
     || common.powerFrom || common.powerTo || common.fuel || common.transmission || common.drive || common.bodyType);
   const markets = selectedMarket ? marketOrder.filter((item) => item.id === selectedMarket) : marketOrder;
-  const [facets, groupedMarkets] = await Promise.all([
-    readCatalogFacets({ ...common, market: selectedMarket || undefined }),
-    Promise.all(markets.map(async (market) => {
-      const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
-      const page = selectedMarket ? requestedPage : 1;
+  const overviewEligible = !selectedMarket && !hasFilters && !customSort && requestedPage === 1;
+  const overview = overviewEligible ? await readCatalogOverview().catch((error) => {
+    console.error("catalog_overview_read_failed", error);
+    return null;
+  }) : null;
 
-      if (!hasFilters && !customSort) {
-        const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
-        const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
-        const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
-        const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
-        return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
-      }
+  let facets: Awaited<ReturnType<typeof readCatalogFacets>>;
+  let groupedMarkets: MarketGroup[];
+  if (overview) {
+    facets = overview.facets;
+    groupedMarkets = await Promise.all(marketOrder.map(async (market) => {
+      const snapshot = overview.markets[market.id] || { total: 0, items: [] };
+      const candidates = balanceBusinessRows((snapshot.items as any[]).filter(isCrediblePublicOffer));
+      const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, OVERVIEW_CARDS));
+      return { ...market, items: balanceBusinessRows(visible), total: snapshot.total, page: 1, pageSize: OVERVIEW_CARDS };
+    }));
+  } else {
+    [facets, groupedMarkets] = await Promise.all([
+      readCatalogFacets({ ...common, market: selectedMarket || undefined }),
+      Promise.all(markets.map(async (market) => {
+        const pageSize = selectedMarket ? MARKET_PAGE_SIZE : OVERVIEW_CARDS;
+        const page = selectedMarket ? requestedPage : 1;
 
-      const result = await searchOffers({ ...common, market: market.id, page, pageSize });
-      const pageRows = common.model || customSort ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);
-      const repriced = await applyActiveBusinessPricingBatch(pageRows);
-      const items = customSort ? sortCatalogRows(repriced, selectedSort) : common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced);
-      return { ...market, items, total: result.total, page: result.page, pageSize: result.pageSize };
-    })),
-  ]);
+        if (!hasFilters && !customSort) {
+          const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
+          const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
+          const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
+          const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
+          return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
+        }
+
+        const result = await searchOffers({ ...common, market: market.id, page, pageSize });
+        const pageRows = common.model || customSort ? (result.items as any[]) : balanceBusinessRows(result.items as any[]);
+        const repriced = await applyActiveBusinessPricingBatch(pageRows);
+        const items = customSort ? sortCatalogRows(repriced, selectedSort) : common.model ? repriced.sort(businessOrder) : balanceBusinessRows(repriced);
+        return { ...market, items, total: result.total, page: result.page, pageSize: result.pageSize };
+      })),
+    ]);
+  }
   const visibleMarkets = selectedMarket ? groupedMarkets : groupedMarkets.filter((market) => market.total > 0);
   const total = groupedMarkets.reduce((sum, market) => sum + market.total, 0);
   const selectedResult = selectedMarket ? groupedMarkets[0] : undefined;
