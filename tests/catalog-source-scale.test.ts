@@ -193,7 +193,7 @@ test("rebuild calculates first and progressively opens detail without exhausting
 });
 
 test("real listings stay public while exact customs calculation is pending", () => {
-  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer\)/);
+  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer, false\)/);
   assert.doesNotMatch(offerQuality, /Boolean\(offer\.totalRub\)/);
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
