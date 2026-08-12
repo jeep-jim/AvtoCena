@@ -40,17 +40,16 @@ jobs:
           test = Path('tests/autopapa-georgia-current-parser-20260812.test.ts')
           test_text = test.read_text()
           marker = 'AutoPapa seller power below the catalog plausibility floor stays unknown'
-          addition = r'''
-
-test("AutoPapa seller power below the catalog plausibility floor stays unknown", () => {
-  const oneHp = `<div>Body Type: suv Power: 1 hp Engine Vol: 1.5 l</div><div>Car description</div>`;
-  const twoHp = `<div>Body Type: sedan Power: 2 hp Engine Vol: 2.0 l</div><div>Car description</div>`;
-  const boundary = `<div>Body Type: hatchback Power: 20 hp Engine Vol: 1.0 l</div><div>Car description</div>`;
-  assert.equal(autoPapaDetailPowerHp(oneHp), undefined);
-  assert.equal(autoPapaDetailPowerHp(twoHp), undefined);
-  assert.equal(autoPapaDetailPowerHp(boundary), 20);
-});
-'''
+          addition = "\n\n" + "\n".join([
+              'test("AutoPapa seller power below the catalog plausibility floor stays unknown", () => {',
+              '  const oneHp = `<div>Body Type: suv Power: 1 hp Engine Vol: 1.5 l</div><div>Car description</div>`;',
+              '  const twoHp = `<div>Body Type: sedan Power: 2 hp Engine Vol: 2.0 l</div><div>Car description</div>`;',
+              '  const boundary = `<div>Body Type: hatchback Power: 20 hp Engine Vol: 1.0 l</div><div>Car description</div>`;',
+              '  assert.equal(autoPapaDetailPowerHp(oneHp), undefined);',
+              '  assert.equal(autoPapaDetailPowerHp(twoHp), undefined);',
+              '  assert.equal(autoPapaDetailPowerHp(boundary), 20);',
+              '});',
+          ]) + "\n"
           if marker not in test_text:
               test.write_text(test_text.rstrip() + addition)
           PY
