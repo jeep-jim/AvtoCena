@@ -291,6 +291,7 @@ export function VehicleModelSearch({
     };
   }, [open]);
 
+  const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;
   const canSearch = Boolean(clean(make) || compact(query).length >= 2);
   useEffect(() => {
     if (!open || !canSearch) {
@@ -391,7 +392,7 @@ export function VehicleModelSearch({
           onClick={() => choose(item)}
           className="ac-filter-option flex min-h-11 w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold"
         >
-          <span className="min-w-0"><span className="block truncate">{item.model}</span>{!make ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
+          <span className="min-w-0"><span className="block truncate">{item.model}</span>{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}</span>
           <span className="shrink-0 opacity-45">↵</span>
         </button>) : null}
         {canSearch && !loading && !items.length ? <div className="px-3 py-4 text-sm font-bold text-white/45">Совпадений в каталоге нет</div> : null}

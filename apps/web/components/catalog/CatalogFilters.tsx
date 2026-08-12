@@ -32,6 +32,8 @@ type FilterDraft = {
 type FilterChip = { key: string; label: string };
 
 function clean(value: string) { return String(value || "").replace(/\s+/g, " ").trim(); }
+function splitMakeValues(value: string) { return [...new Set(String(value || "").split(",").map(clean).filter(Boolean))]; }
+function joinMakeValues(values: string[]) { return [...new Set(values.map(clean).filter(Boolean))].join(","); }
 function label(value: string) { return clean(value).replace(/\[object Object\]/gi, "") || "Без названия"; }
 function Chevron({ open = false }: { open?: boolean }) { return <svg className={`shrink-0 transition ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7L9 11L13 7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 function SlidersIcon() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7H20M4 17H20M8 4V10M16 14V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><circle cx="8" cy="7" r="2" fill="currentColor" /><circle cx="16" cy="17" r="2" fill="currentColor" /></svg>; }
@@ -227,7 +229,7 @@ function FilterChips({ chips, onRemove, compact = false }: { chips: FilterChip[]
 
 function AdvancedFields({ draft, setField, makeOptions, marketOptions, bodyOptions, transmissionOptions, fuelOptions, driveOptions, includePrimary = false, includeFuel = true }: { draft: FilterDraft; setField: (key: keyof FilterDraft, value: string) => void; makeOptions: Option[]; marketOptions: Option[]; bodyOptions: Option[]; transmissionOptions: Option[]; fuelOptions: Option[]; driveOptions: Option[]; includePrimary?: boolean; includeFuel?: boolean }) {
   return <>
-    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
+    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder={splitMakeValues(draft.make).length > 1 ? `${splitMakeValues(draft.make).length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}
     <div className={`grid gap-2.5 md:grid-cols-2 lg:grid-cols-4 ${includePrimary ? "mt-2.5" : ""}`}>{bodyOptions.length > 1 ? <SimpleSelect name="bodyType" value={draft.bodyType} placeholder="Любой кузов" options={bodyOptions} onChange={(value) => setField("bodyType", value)} /> : null}{transmissionOptions.length > 1 ? <SimpleSelect name="transmission" value={draft.transmission} placeholder="Любая трансмиссия" options={transmissionOptions} onChange={(value) => setField("transmission", value)} /> : null}{includeFuel && fuelOptions.length > 1 ? <SimpleSelect name="fuel" value={draft.fuel === "electric" ? "" : draft.fuel} placeholder="Любое топливо" options={fuelOptions.filter((item) => item.value !== "electric")} onChange={(value) => setField("fuel", value)} /> : null}{driveOptions.length > 1 ? <SimpleSelect name="drive" value={draft.drive} placeholder="Любой привод" options={driveOptions} onChange={(value) => setField("drive", value)} /> : null}</div>
     <div className="mt-4 flex items-end justify-between gap-3"><div className="text-[10px] font-black uppercase tracking-[.13em] text-[var(--ac-muted)]">Диапазоны</div><div className="text-right text-[10px] font-bold text-[var(--ac-muted)]">Введите «от» и/или «до» — пустое поле не ограничивает выдачу</div></div>
     <div className="mt-2 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -289,7 +291,8 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [mobileOpen]);
 
   const activeFacets = electricOnly ? electricFacets || facets : facets;
-  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), draft.make].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, draft.make]);
+  const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);
+  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);
   const marketOptions = markets;
   const bodyOptions = useMemo(() => catalogFilterOptions(bodies, activeFacets?.bodyTypes, draft.bodyType), [activeFacets, draft.bodyType]);
   const fuelOptions = useMemo(() => catalogFilterOptions(fuels, activeFacets?.fuels, draft.fuel), [activeFacets, draft.fuel]);
@@ -297,11 +300,17 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   const driveOptions = useMemo(() => catalogFilterOptions(drives, activeFacets?.drives, draft.drive), [activeFacets, draft.drive]);
 
   const setField = (key: keyof FilterDraft, value: string) => setDraft((current) => ({ ...current, [key]: value }));
-  useEffect(() => { if (draft.make && !makeOptions.some((option) => option.value === draft.make)) setField("make", ""); }, [draft.make, makeOptions]);
+  useEffect(() => {
+    if (!draft.make) return;
+    const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));
+    const next = selectedMakes.filter((make) => allowed.has(make));
+    const joined = joinMakeValues(next);
+    if (joined !== draft.make) setDraft((current) => ({ ...current, make: joined, model: "" }));
+  }, [draft.make, makeOptions, selectedMakes]);
 
   const chips = useMemo<FilterChip[]>(() => {
     const rows: FilterChip[] = [];
-    if (draft.make) rows.push({ key: "make", label: draft.make });
+    splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));
     if (draft.model) rows.push({ key: "model", label: draft.model });
     if (draft.market) rows.push({ key: "market", label: optionLabel(markets, draft.market) });
     if (draft.bodyType) rows.push({ key: "bodyType", label: optionLabel(bodies, draft.bodyType) });
@@ -317,6 +326,10 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   }, [draft]);
 
   const removeFilter = (key: string) => {
+    if (key.startsWith("make:")) {
+      const removed = key.slice(5);
+      return setDraft((current) => ({ ...current, make: joinMakeValues(splitMakeValues(current.make).filter((make) => make !== removed)), model: "" }));
+    }
     if (key === "year") return setDraft((current) => ({ ...current, yearFrom: "", yearTo: "" }));
     if (key === "budget") return setDraft((current) => ({ ...current, budgetFrom: "", budget: "" }));
     if (key === "mileage") return setDraft((current) => ({ ...current, mileageFrom: "", mileageTo: "" }));
@@ -334,7 +347,7 @@ export function CatalogFilters({ initial, facets }: { initial: Record<string, st
   return <>
     <form key={`desktop-${formKey}`} method="get" onSubmit={(event) => event.preventDefault()} className="ac-catalog-filter-panel ac-filter-panel mt-6 hidden rounded-[1.8rem] p-4 lg:block">
       <div className="grid grid-cols-3 gap-2.5">
-        <SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />
+        <SearchSelect name="make" value={draft.make} placeholder={selectedMakes.length > 1 ? `${selectedMakes.length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />
         <VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} />
         <SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} />
       </div>

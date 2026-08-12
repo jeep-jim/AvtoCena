@@ -149,6 +149,9 @@ export function catalogIndexShardKey(value?: string | number) {
 }
 const cleanShard = catalogIndexShardKey;
 function cleanFacet(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
+export function catalogMakeFilterValues(value: unknown) {
+  return [...new Set(String(value || "").split(",").map(cleanFacet).filter(Boolean))];
+}
 function numericBucket(value: number | null | undefined, size: number) { const number = Number(value || 0); return number > 0 ? String(Math.ceil(number / size) * size) : "unknown"; }
 function budgetBucket(value?: number | null) { return numericBucket(value, 500_000); }
 function powerBucket(value?: number | null) { return numericBucket(value, 25); }
@@ -311,7 +314,7 @@ function projectionUtilizationPowerHp(row: CatalogSearchProjection) {
 export function catalogSearchProjectionMatches(row: CatalogSearchProjection, params: CatalogSearchParams, modelKeys: Set<string> | null = null) {
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
   if (params.market && params.market !== "any" && lower(row.market) !== lower(params.market)) return false;
-  if (params.make && lower(row.make) !== lower(params.make)) return false;
+  if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;
   if (params.model) {
     const canonicalMatch = modelKeys?.size ? modelKeys.has(`${lower(row.make)}:${lower(row.model)}`) : false;
     const literalMatch = !modelKeys?.size && lower(row.model).includes(lower(params.model));
@@ -357,8 +360,14 @@ export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sor
 async function projectionModelKeys(params: CatalogSearchParams) {
   if (!params.model) return null;
   const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");
-  const matches = await resolveVehicleModelQuery(params.model, params.make, 100);
-  const candidates = matches.length ? matches.map((match) => ({ make: match.make, model: match.model })) : params.make ? [{ make: params.make, model: params.model }] : [];
+  const makes = catalogMakeFilterValues(params.make);
+  const scopes: Array<string | undefined> = makes.length ? makes : [undefined];
+  const matches = (await Promise.all(scopes.map((make) => resolveVehicleModelQuery(params.model, make, 100)))).flat();
+  const candidates = matches.length
+    ? matches.map((match) => ({ make: match.make, model: match.model }))
+    : makes.length
+      ? makes.map((make) => ({ make, model: String(params.model) }))
+      : [];
   return new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));
 }
 async function readProjectionRows(manifest: CatalogManifest, params: CatalogSearchParams) {
@@ -373,6 +382,45 @@ async function readProjectionRows(manifest: CatalogManifest, params: CatalogSear
     const legacy = (await readMarketOffers(market)).filter(isPublicOffer);
     return legacy.map(searchProjectionFromOffer);
   })).flat();
+}
+
+async function currentProjectionRows(params: CatalogSearchParams = {}) {
+  const manifest = await readManifest();
+  const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
+  const current = await readCurrentSearchProjection(scope);
+  if (current.generationId === manifest.generationId) return { generationId: manifest.generationId, rows: current.items || [] };
+  return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
+}
+
+export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {
+  const filters: CatalogSearchParams = { ...params, make: undefined };
+  const { generationId, rows } = await currentProjectionRows(filters);
+  const modelKeys = await projectionModelKeys(filters);
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;
+    const make = cleanFacet(row.make);
+    if (!make) continue;
+    counts.set(make, (counts.get(make) || 0) + 1);
+  }
+  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };
+}
+
+export async function readCatalogBrandModelCounts(make: string) {
+  const filters: CatalogSearchParams = { make };
+  const { generationId, rows } = await currentProjectionRows(filters);
+  const models = new Map<string, { model: string; count: number; marketCounts: Record<string, number> }>();
+  for (const row of rows) {
+    if (!catalogSearchProjectionMatches(row, filters)) continue;
+    const model = cleanFacet(row.model);
+    if (!model) continue;
+    const key = model.toLocaleLowerCase("ru-RU");
+    const current = models.get(key) || { model, count: 0, marketCounts: {} };
+    current.count += 1;
+    current.marketCounts[row.market] = (current.marketCounts[row.market] || 0) + 1;
+    models.set(key, current);
+  }
+  return { generationId, models: [...models.values()].sort((a, b) => b.count - a.count || a.model.localeCompare(b.model, "ru")) };
 }
 
 async function readOfferLists(paths: string[]) {

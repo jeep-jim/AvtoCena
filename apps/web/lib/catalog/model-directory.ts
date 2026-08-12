@@ -1,11 +1,8 @@
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
-import { isCrediblePublicOffer } from "./offer-quality";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
-import { PUBLIC_CATALOG_MARKETS } from "./runtime-config";
-import { readMarketOffers } from "./storage";
+import { readCatalogBrandModelCounts } from "./storage";
 import {
-  findVehicleModel,
   readVehicleKnowledgeModels,
   readVehicleKnowledgeVariants,
   vehicleKnowledgeCompact,
@@ -77,11 +74,6 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
   return slugify(idTail || model.model);
 }
 
-const readLiveOffers = cache(async () => {
-  const rows = (await Promise.all(PUBLIC_CATALOG_MARKETS.map((market) => readMarketOffers(market)))).flat();
-  return rows.filter((offer) => isCrediblePublicOffer(offer));
-});
-
 const readKnowledge = cache(async () => {
   const [models, variants, references] = await Promise.all([
     readVehicleKnowledgeModels(),
@@ -111,9 +103,8 @@ function summarizeModel(model: VehicleKnowledgeModel, variants: any[], reference
 
 export const readBrandModelDirectory = cache(async (rawMake: string): Promise<CatalogModelDirectoryItem[]> => {
   const make = canonicalCatalogBrand(rawMake);
-  const [{ models: knowledge, variants, references }, offers] = await Promise.all([readKnowledge(), readLiveOffers()]);
+  const [{ models: knowledge, variants, references }, live] = await Promise.all([readKnowledge(), readCatalogBrandModelCounts(make)]);
   const models = knowledge.filter((model) => model.active !== false && canonicalCatalogBrand(model.make) === make);
-  const modelByKey = new Map(models.map((model) => [modelKey(make, model.model), model]));
   const variantsByModel = new Map<string, any[]>();
   for (const row of variants.filter((item) => item.active !== false)) {
     const list = variantsByModel.get(row.modelId) || [];
@@ -127,17 +118,21 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
     list.push(row);
     referencesByModel.set(key, list);
   }
+  const modelByAlias = new Map<string, VehicleKnowledgeModel | null>();
+  for (const model of models) {
+    for (const value of [model.model, ...(model.aliases || [])]) {
+      const key = vehicleKnowledgeCompact(value);
+      if (!key) continue;
+      const current = modelByAlias.get(key);
+      if (current && current.id !== model.id) modelByAlias.set(key, null);
+      else if (current === undefined) modelByAlias.set(key, model);
+    }
+  }
   const counters = new Map<string, { count: number; marketCounts: Record<string, number> }>();
-  const brandOffers = offers.filter((offer) => canonicalCatalogBrand(offer.make) === make);
-  const matches = await Promise.all(brandOffers.map(async (offer) => ({ offer, match: await findVehicleModel(offer) })));
-
-  for (const { offer, match } of matches) {
-    const recognized = match && canonicalCatalogBrand(match.model.make) === make ? match.model : modelByKey.get(modelKey(make, offer.model));
+  for (const item of live.models) {
+    const recognized = modelByAlias.get(vehicleKnowledgeCompact(item.model));
     if (!recognized) continue;
-    const current = counters.get(recognized.id) || { count: 0, marketCounts: {} };
-    current.count += 1;
-    current.marketCounts[offer.market] = (current.marketCounts[offer.market] || 0) + 1;
-    counters.set(recognized.id, current);
+    counters.set(recognized.id, { count: item.count, marketCounts: item.marketCounts });
   }
 
   return models.map((model) => {

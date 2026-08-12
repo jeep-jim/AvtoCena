@@ -76,23 +76,30 @@ function BrandDirectoryTile({
   brand,
   href,
   countLabel,
+  selected = false,
   onClick,
+  onPointerEnter,
 }: {
   brand: string;
   href: string;
   countLabel: string;
+  selected?: boolean;
   onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+  onPointerEnter?: () => void;
 }) {
   return <Link
     href={href}
+    prefetch={false}
     onClick={onClick}
-    className="group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none"
+    onPointerEnter={onPointerEnter}
+    className={`group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none ${selected ? "bg-[var(--ac-surface-2)]" : ""}`}
     title={`Автомобили ${brand} под заказ`}
   >
     <BrandLogoVisual brand={brand} className="h-9 w-[64px] shrink-0" />
-    <span className="min-w-0 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">
+    <span className="min-w-0 flex-1 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">
       {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>
     </span>
+    {selected ? <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-[12px] font-black text-white" aria-label="Выбрано">✓</span> : null}
   </Link>;
 }
 
@@ -109,7 +116,17 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   const drag = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
   const homeBrandDirectory = pathname === "/";
-  const selectedBrand = !homeBrandDirectory ? canonicalCatalogBrand(searchParams.get("make") || searchParams.get("brand") || "") : "";
+  const selectedBrands = useMemo(() => {
+    if (homeBrandDirectory) return [] as string[];
+    const raw = searchParams.get("make") || searchParams.get("brand") || "";
+    const map = new Map<string, string>();
+    for (const value of raw.split(",").map((item) => canonicalCatalogBrand(item.trim())).filter(Boolean)) {
+      const known = KNOWN_BRANDS.get(value.toLocaleLowerCase("en-US"));
+      if (known) map.set(known.toLocaleLowerCase("en-US"), known);
+    }
+    return [...map.values()];
+  }, [homeBrandDirectory, searchParamsText]);
+  const selectedBrandKeys = useMemo(() => new Set(selectedBrands.map((brand) => brand.toLocaleLowerCase("en-US"))), [selectedBrands]);
   const countQuery = useMemo(() => {
     if (homeBrandDirectory) return "";
     const params = new URLSearchParams(searchParamsText);
@@ -198,15 +215,18 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     setQuery("");
   };
 
-  const clearSelectedBrand = () => {
+  const setCatalogBrands = (nextBrands: string[]) => {
     const params = new URLSearchParams(window.location.search);
-    params.delete("make");
+    const ordered = [...new Set(nextBrands)].sort((a, b) => a.localeCompare(b, "ru"));
+    if (ordered.length) params.set("make", ordered.join(",")); else params.delete("make");
     params.delete("brand");
     params.delete("model");
     params.delete("page");
     const queryString = params.toString();
-    router.push(queryString ? `/cars?${queryString}` : "/cars");
+    router.replace(queryString ? `/cars?${queryString}` : "/cars", { scroll: false });
   };
+
+  const clearSelectedBrands = () => setCatalogBrands([]);
 
   const hrefForBrand = (brand: string) => homeBrandDirectory
     ? `/cars/brand/${catalogBrandSlug(brand)}`
@@ -219,13 +239,11 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     }
 
     event.preventDefault();
-    const params = new URLSearchParams(window.location.search);
-    params.set("make", brand);
-    params.delete("brand");
-    params.delete("model");
-    params.delete("page");
-    if (closeAfter) close();
-    router.push(`/cars?${params.toString()}`);
+    const key = brand.toLocaleLowerCase("en-US");
+    const next = selectedBrandKeys.has(key)
+      ? selectedBrands.filter((item) => item.toLocaleLowerCase("en-US") !== key)
+      : [...selectedBrands, brand];
+    setCatalogBrands(next);
   };
 
   const countLabelForBrand = (brand: string) => {
@@ -262,19 +280,6 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     window.setTimeout(() => { suppressClick.current = false; }, 0);
   };
 
-  if (selectedBrand) {
-    return <section className="ac-brand-rail mt-5 flex min-h-[94px] items-center justify-between gap-4 rounded-[1.6rem] p-4" aria-label={`Выбрана марка ${selectedBrand}`}>
-      <div className="flex min-w-0 items-center gap-3">
-        <BrandLogoVisual brand={selectedBrand} />
-        <div className="min-w-0">
-          <div className="truncate text-base font-black text-[var(--ac-text)]">{selectedBrand}</div>
-          {Number.isFinite(resultCount) ? <div className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Найдено: {resultCount}</div> : null}
-        </div>
-      </div>
-      <button type="button" onClick={clearSelectedBrand} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black text-red-500" aria-label={`Сбросить марку ${selectedBrand}`}>×</button>
-    </section>;
-  }
-
   return <>
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
       <div
@@ -299,11 +304,11 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     {open ? <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/80 p-2.5 backdrop-blur-sm md:p-5" onClick={close} role="dialog" aria-modal="true" aria-label="Все марки автомобилей">
       <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()}>
         <div className="sticky -top-4 z-10 bg-[var(--ac-surface)] pb-4 pt-1 md:-top-7 md:pt-2">
-          <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div>
+          <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
         </div>
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
-          {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} onClick={handleBrandClick(brand, true)} />)}
+          {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}
         </div>
         {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
