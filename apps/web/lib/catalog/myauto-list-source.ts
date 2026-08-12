@@ -3,16 +3,11 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const HEADERS = {
-  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
-  "cache-control": "no-cache",
-  pragma: "no-cache",
-  referer: "https://www.myauto.ge/en/main",
-  "sec-fetch-dest": "document",
-  "sec-fetch-mode": "navigate",
-  "sec-fetch-site": "same-origin",
-  "upgrade-insecure-requests": "1",
-  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+  // Verified from the deployed Yandex Serverless egress. Extra navigation/cache headers
+  // trigger MyAuto Cloudflare 403 from the same runtime.
+  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
 };
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
