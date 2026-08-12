@@ -13,8 +13,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Fetch fixed Georgia gallery diagnostic
+      - name: Fetch compact Georgia gallery diagnostic
         shell: bash
         run: |
           set -euo pipefail
-          curl -fsS --max-time 30 -H 'accept: application/json' 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' | python3 -m json.tool
+          curl -fsS --max-time 45 -H 'accept: application/json' 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' > /tmp/georgia.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/georgia.json').read_text())
+          m=data.get('myauto') or {}
+          print('MODE', data.get('mode'))
+          print('MYAUTO', json.dumps({k:m.get(k) for k in ['ok','id','make','model','year','photo','photoVer','picNumber','apiStatus','detailStatus']}, ensure_ascii=False))
+          for script in m.get('scripts') or []:
+              helper=script.get('helper') or {}
+              print('SCRIPT', script.get('url'))
+              print('TARGETS', json.dumps(helper.get('exportTargets') or [], ensure_ascii=False))
+              for d in helper.get('definitions') or []:
+                  snippet=' '.join(str(d.get('snippet') or '').split())
+                  print('DEF', d.get('target'), d.get('pattern'), snippet[:5000])
+              for o in helper.get('occurrences') or []:
+                  if o.get('probe') in ('E0:()=>','.E0)(','.E0)','myauto/photos/thumbs/','myauto/photos/'):
+                      snippet=' '.join(str(o.get('snippet') or '').split())
+                      print('OCC', o.get('probe'), snippet[:3500])
+          a=data.get('autopapa') or {}
+          print('AUTOPAPA', json.dumps({'ok':a.get('ok'),'fetched':a.get('fetched'),'normalized2020Plus':a.get('normalized2020Plus'),'samples':[{'id':s.get('id'),'originalCount':s.get('originalCount')} for s in (a.get('samples') or [])]}, ensure_ascii=False))
+          PY
