@@ -1,5 +1,6 @@
 import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { encarNonCashContractReason } from "./encar-sale-contract";
 import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 const ENCAR_HEADERS = {
@@ -204,6 +205,23 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
     /* Identity rule: once a vehicle ID is known, the gallery comes only from
        that exact Encar detail response. Listing/raw images are not merged in. */
     const detail = await fetchDetail(String(offer.sourceOfferId || ""));
+    const nonCashContractReason = encarNonCashContractReason(detail);
+    if (nonCashContractReason) {
+      offer.sourcePrice = null;
+      offer.sourceCurrency = null;
+      offer.totalRub = null;
+      offer.priceMode = "estimated";
+      offer.calculationStatus = "needs_data";
+      offer.operational = {
+        ...(offer.operational || {}),
+        raw: { offer: offer.operational?.raw, detail },
+        galleryVerified: false,
+        photoIdentityVerified: false,
+        nonCashContractRejected: true,
+        nonCashContractReason,
+      } as any;
+      return [];
+    }
     mergeDetail(offer, detail);
     const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);
     const gallery = detailUrls.slice(0, limit).map(urlImage);
