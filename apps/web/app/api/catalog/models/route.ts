@@ -70,6 +70,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = clean(url.searchParams.get("q"));
   const make = clean(url.searchParams.get("make"));
+  const makeValues = [...new Set(make.split(",").map(clean).filter(Boolean))];
   const scope = clean(url.searchParams.get("scope"));
   const limit = Math.min(500, Math.max(1, Number(url.searchParams.get("limit") || 30)));
   const facetFilters = contextualFilters(url.searchParams, make, true);
@@ -112,7 +113,7 @@ export async function GET(request: Request) {
       make: item.make,
       model: item.model,
       aliases: item.aliases || [],
-      label: make ? item.model : `${item.make} ${item.model}`,
+        label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,
     })),
   });
 }

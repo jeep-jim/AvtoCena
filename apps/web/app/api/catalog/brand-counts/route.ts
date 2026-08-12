@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
+import { readCatalogBrandCounts } from "@/lib/catalog/storage";
 import type { CatalogSearchParams } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
@@ -12,21 +12,6 @@ function text(url: URL, key: string) {
 function positiveNumber(url: URL, key: string) {
   const value = Number(url.searchParams.get(key) || 0);
   return Number.isFinite(value) && value > 0 ? value : undefined;
-}
-
-async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker: (item: T) => Promise<R>): Promise<R[]> {
-  if (!items.length) return [];
-  const results = new Array<R>(items.length);
-  let cursor = 0;
-  const workerCount = Math.min(Math.max(1, concurrency), items.length);
-  await Promise.all(Array.from({ length: workerCount }, async () => {
-    while (true) {
-      const index = cursor++;
-      if (index >= items.length) return;
-      results[index] = await worker(items[index]);
-    }
-  }));
-  return results;
 }
 
 export async function GET(request: Request) {
@@ -52,18 +37,6 @@ export async function GET(request: Request) {
     auctionDateFrom: text(url, "auctionDateFrom"),
     auctionDateTo: text(url, "auctionDateTo"),
   };
-
-  const facets = await readCatalogFacets(params);
-  // All per-brand searches share the same immutable/current projection cache in
-  // the process. A wider fan-out therefore avoids making the modal wait through
-  // many small sequential batches without introducing any catalog writes.
-  const pairs = await mapWithConcurrency(facets.makes || [], 32, async (make) => {
-    const result = await searchOffers({ ...params, make, page: 1, pageSize: 1, sort: "updatedAt" });
-    return [make, Number(result.total || 0)] as const;
-  });
-
-  return NextResponse.json(
-    { generationId: facets.generationId, counts: Object.fromEntries(pairs) },
-    { headers: { "Cache-Control": "no-store, max-age=0" } },
-  );
+  const summary = await readCatalogBrandCounts(params);
+  return NextResponse.json(summary, { headers: { "Cache-Control": "private, max-age=15, stale-while-revalidate=30" } });
 }

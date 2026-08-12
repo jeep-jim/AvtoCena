@@ -101,6 +101,15 @@ test("all catalog filters use the projection when optional categorical shards ar
   }
 });
 
+test("catalog make filter accepts several selected brands as OR", () => {
+  const audi = { id: "audi", market: "europe", make: "Audi", model: "A4", year: 2024 } as any;
+  const bmw = { id: "bmw", market: "europe", make: "BMW", model: "3 Series", year: 2024 } as any;
+  const kia = { id: "kia", market: "korea", make: "Kia", model: "K5", year: 2024 } as any;
+  assert.equal(catalogSearchProjectionMatches(audi, { make: "Audi,BMW" }), true);
+  assert.equal(catalogSearchProjectionMatches(bmw, { make: "Audi,BMW" }), true);
+  assert.equal(catalogSearchProjectionMatches(kia, { make: "Audi,BMW" }), false);
+});
+
 test("the 160 hp utilization-fee filter uses certified calculation power", () => {
   const certifiedElectric = {
     id: "certified-electric", market: "china", make: "BYD", model: "Seal", year: 2025,
