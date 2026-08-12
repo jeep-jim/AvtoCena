@@ -29,9 +29,11 @@ test("Georgia direct recovery tries company anchor sites before AUTO.GE fallback
   assert.match(requiredSources, /sourceId: "myauto_georgia_list"[\s\S]*canonicalUrl: "https:\/\/www\.myauto\.ge\/"[\s\S]*required: true[\s\S]*anchor: true/);
   assert.match(requiredSources, /sourceId: "autopapa_georgia_open"[\s\S]*canonicalUrl: "https:\/\/autopapa\.ge\/"[\s\S]*required: true[\s\S]*anchor: true/);
   assert.match(workflow, /RECOVERY_SOURCE_IDS="myauto_georgia_list,autopapa_georgia_open"/);
-  assert.match(workflow, /if \[ "\$primary_count" -gt 0 \]/);
+  assert.match(workflow, /canonical_unavailable=.*stopReason==='source_error'/);
+  assert.match(workflow, /elif \[ "\$canonical_unavailable" = "1" \]/);
   assert.match(workflow, /fallbackSourceId: 'auto_georgia_open'/);
-  assert.match(workflow, /fallbackReason: 'canonical_sources_zero_publishable_rows'/);
+  assert.match(workflow, /fallbackReason: 'both_canonical_sources_unavailable'/);
+  assert.match(workflow, /fallbackReason: 'canonical_source_available_but_zero_publishable_rows'/);
   assert.match(workflow, /usedFallback: false/);
   assert.match(workflow, /usedFallback: true/);
 });
