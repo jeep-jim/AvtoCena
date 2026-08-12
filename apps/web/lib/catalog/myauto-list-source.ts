@@ -3,19 +3,15 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const HEADERS = {
-  // These intentionally match the minimal browser-like request that the deployed
-  // Yandex runtime can use against MyAuto. Extra sec-fetch navigation headers
-  // currently trigger Cloudflare while this exact public page remains HTTP 200.
+  // Keep this request byte-for-byte equivalent in shape to the minimal request
+  // already proven HTTP 200 from the deployed Yandex Serverless runtime.
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
-  "cache-control": "no-cache",
-  pragma: "no-cache",
-  referer: "https://www.myauto.ge/",
-  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
 };
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
-const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper)\b/i;
+const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper|loader)\b/i;
 const KNOWN_MAKES = [
   "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
   "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
@@ -81,7 +77,7 @@ function isDetailHref(value: string) {
 function isSaleDetailHref(value: string) {
   try {
     const path = new URL(value).pathname;
-    return isDetailHref(value) && !/\/for-rent(?:-|\/)/i.test(path);
+    return isDetailHref(value) && /\/for-sale(?:-|\/)/i.test(path) && !COMMERCIAL_RE.test(path.replace(/[\/_-]+/g, " "));
   } catch { return false; }
 }
 
@@ -163,7 +159,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
       try {
-        const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+        const response = await fetch(url, { headers: HEADERS, redirect: "follow", cache: "no-store", signal: controller.signal });
         const markup = await response.text();
         attempts.push(`${new URL(url).host}${new URL(url).pathname}${new URL(url).search}:${response.status}:${markup.length}`);
         if (!response.ok) continue;
