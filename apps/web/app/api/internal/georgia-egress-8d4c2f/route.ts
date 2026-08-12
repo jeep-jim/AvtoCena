@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { myAutoListSource } from "@/lib/catalog/myauto-list-source";
 import { autoPapaGeorgiaSource, autoPapaDetailOriginalPhotoUrls } from "@/lib/catalog/autopapa-georgia-source";
 import type { VehicleOffer } from "@/lib/catalog/types";
+import { collectGeorgiaYandexRecoverySnapshot } from "@/lib/catalog/georgia-yandex-recovery";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
+export const maxDuration = 300;
 
 const headers = {
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
@@ -160,7 +162,14 @@ async function inspectAutoPapa() {
   return { ok: true, fetched: page.items?.length || 0, normalized2020Plus: offers.length, samples };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("mode") === "recovery") {
+    const pages = Number(url.searchParams.get("pages") || 2);
+    const snapshot = await collectGeorgiaYandexRecoverySnapshot(pages);
+    return NextResponse.json(snapshot, { headers: { "cache-control": "no-store" } });
+  }
+
   const [myauto, autopapa] = await Promise.all([
     inspectMyAuto().catch((error) => ({ ok: false, error: String((error as Error)?.message || error) })),
     inspectAutoPapa().catch((error) => ({ ok: false, error: String((error as Error)?.message || error) })),
