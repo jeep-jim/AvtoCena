@@ -1,0 +1,255 @@
+import { cacheImageFromUrl, stableOfferId } from "./storage";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
+
+const BASE_URL = "https://autopapa.ge";
+const DETAIL_PATH_RE = /^\/en\/usd\/[^/?#]+\/[^/?#]+\/(\d{5,})\/?$/i;
+const HEADERS = {
+  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
+};
+const NON_CAR_RE = /\b(?:motorcycle|scooter|forklift|excavator|tractor|crane|truck|bus|commercial|cargo|spare parts?)\b/i;
+const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image|question|\/flags\//i;
+const KNOWN_MAKES = [
+  "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
+  "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
+  "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
+  "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
+  "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
+].sort((left, right) => right.length - left.length);
+
+export type AutoPapaGeorgiaRow = {
+  id: string;
+  detailUrl: string;
+  title: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  currency: "USD";
+  mileageKm?: number;
+  engineCc?: number;
+  fuel?: string;
+  transmission?: string;
+  bodyType?: string;
+  location?: string;
+  images: string[];
+};
+
+function decode(value: string) {
+  return String(value || "")
+    .replace(/&nbsp;|&#160;|\u00a0/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
+function plain(value: string) {
+  return decode(value)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[\u0000-\u001f]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function absolute(value: string, base: string) {
+  if (!value || /^(?:data:|javascript:|mailto:|tel:)/i.test(value)) return "";
+  try { return new URL(decode(value).replace(/\\\//g, "/"), base).toString(); } catch { return ""; }
+}
+
+function integer(value: string | undefined) {
+  const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+function titleIdentity(value: string) {
+  const title = plain(value).replace(/\s+/g, " ").trim();
+  const lower = title.toLocaleLowerCase("en-US");
+  const known = KNOWN_MAKES.find((candidate) => lower === candidate.toLocaleLowerCase("en-US") || lower.startsWith(`${candidate.toLocaleLowerCase("en-US")} `));
+  if (known) {
+    const model = title.slice(known.length).replace(/^[\s\-–—|]+/, "").trim();
+    return { title, make: known, model };
+  }
+  const parts = title.split(/\s+/).filter(Boolean);
+  return { title, make: parts[0] || "", model: parts.slice(1).join(" ") };
+}
+
+function listingPhotoUrls(markup: string, base: string) {
+  const values: string[] = [];
+  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
+  for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
+  return [...new Set(values.map((value) => absolute(value, base)).filter((url) => {
+    if (!/^https?:/i.test(url) || BAD_IMAGE_RE.test(url)) return false;
+    try {
+      const parsed = new URL(url);
+      return parsed.host === "autopapa.ge" && /\/system\/car\/photos\//i.test(parsed.pathname);
+    } catch { return false; }
+  }))];
+}
+
+export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_URL}/en/usd/search?page=1`): AutoPapaGeorgiaRow[] {
+  const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
+    .filter((item) => {
+      try { return DETAIL_PATH_RE.test(new URL(item.href).pathname); } catch { return false; }
+    });
+
+  const grouped = new Map<string, { href: string; index: number; titles: string[] }>();
+  for (const anchor of anchors) {
+    const current = grouped.get(anchor.href) || { href: anchor.href, index: anchor.index, titles: [] };
+    current.index = Math.min(current.index, anchor.index);
+    const candidate = plain(anchor.inner);
+    if (candidate.length >= 3 && candidate.length <= 140 && !/^(?:image|details?|view|save|add)$/i.test(candidate)) current.titles.push(candidate);
+    grouped.set(anchor.href, current);
+  }
+
+  const entries = [...grouped.values()].sort((left, right) => left.index - right.index);
+  const rows: AutoPapaGeorgiaRow[] = [];
+  for (let index = 0; index < entries.length; index++) {
+    const entry = entries[index];
+    const parsedUrl = new URL(entry.href);
+    const id = parsedUrl.pathname.match(DETAIL_PATH_RE)?.[1];
+    if (!id) continue;
+    const nextIndex = entries[index + 1]?.index || Math.min(markup.length, entry.index + 14_000);
+    const card = markup.slice(entry.index, Math.max(entry.index + 1, nextIndex));
+    const cardText = plain(card);
+    const title = [...entry.titles].sort((left, right) => right.length - left.length)[0] || "";
+    const identity = titleIdentity(title);
+    const year = Number(cardText.match(/\b(19\d{2}|20\d{2})\s*year\b/i)?.[1] || 0);
+    const priceToken = cardText.match(/(?:USD|US\$|\$)\s*([0-9]{1,3}(?:[\s\u00a0,.'][0-9]{3}){1,2}|[0-9]{3,7})(?![0-9])/i)?.[1];
+    const price = integer(priceToken);
+    if (!identity.make || !identity.model || year < 2020 || !price || price < 500 || price > 5_000_000 || NON_CAR_RE.test(`${identity.title} ${cardText}`)) continue;
+
+    const mileageToken = cardText.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*K\.\s*km\b/i)?.[1]
+      || cardText.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*km\b/i)?.[1];
+    const liters = cardText.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*l\b/i)?.[1];
+    const fuel = cardText.match(/\b(petrol\/gas|petrol|gasoline|diesel|hybrid|plug[- ]?in hybrid|phev|electric|ev|lpg)\b/i)?.[1];
+    const transmission = cardText.match(/\b(automatic|manual|cvt|dct|at|mt)\b/i)?.[1];
+    const bodyType = cardText.match(/\b(suv|crossover|minivan|sedan|hatchback|coupe|wagon|estate|mpv|convertible|cabrio)\b/i)?.[1];
+    const location = cardText.match(/\b(Tbilisi|Batumi|Rustavi|Kutaisi|Poti|Gori|Kobuleti|Telavi)\b/i)?.[1];
+
+    rows.push({
+      id,
+      detailUrl: entry.href,
+      title: identity.title,
+      make: identity.make,
+      model: identity.model,
+      year,
+      price,
+      currency: "USD",
+      mileageKm: integer(mileageToken),
+      engineCc: liters ? Math.round(Number(liters.replace(",", ".")) * 1_000) : undefined,
+      fuel,
+      transmission,
+      bodyType,
+      location,
+      images: listingPhotoUrls(card, pageUrl),
+    });
+  }
+  return rows;
+}
+
+async function request(url: string) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 20_000));
+  try {
+    const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+    const markup = await response.text();
+    if ([401, 403, 429].includes(response.status) || /just a moment|cf-chl|captcha|access denied/i.test(markup.slice(0, 2_000))) {
+      throw new Error(`autopapa_georgia_blocked_${response.status}`);
+    }
+    if (!response.ok) throw new Error(`autopapa_georgia_http_${response.status}`);
+    return { response, markup };
+  } finally { clearTimeout(timeout); }
+}
+
+export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
+  sourceId = "autopapa_georgia_open";
+  market = "georgia" as const;
+  accessMode = "public_html" as const;
+
+  async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
+    const page = Math.max(1, Number(cursor || 1));
+    const url = new URL(`${BASE_URL}/en/usd/search`);
+    url.searchParams.set("page", String(page));
+    const result = await request(url.toString());
+    const items = parseAutoPapaGeorgiaListing(result.markup, result.response.url || url.toString());
+    if (!items.length) throw new Error(`autopapa_georgia_parsed_zero_status_${result.response.status}_bytes_${result.markup.length}`);
+    return {
+      items,
+      nextCursor: String(page + 1),
+      finished: false,
+      count: items.length,
+      health: { ok: true, message: `AutoPapa Georgia parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: result.response.status, contentType: result.response.headers.get("content-type") || "" },
+    };
+  }
+
+  mapStatus(): OfferStatus { return "active"; }
+
+  normalizeOffer(raw: AutoPapaGeorgiaRow): VehicleOffer | null {
+    if (!raw?.id || !raw.make || !raw.model || raw.year < 2020 || !raw.price || !raw.detailUrl) return null;
+    const now = new Date().toISOString();
+    return normalizeVehicleOfferSpecs({
+      id: stableOfferId(this.sourceId, raw.id),
+      sourceId: this.sourceId,
+      sourceOfferId: raw.id,
+      market: "georgia",
+      offerType: "fixed",
+      status: "active",
+      make: raw.make,
+      model: raw.model,
+      trim: raw.title,
+      year: raw.year,
+      mileageKm: raw.mileageKm,
+      engineCc: raw.engineCc,
+      fuel: raw.fuel,
+      transmission: raw.transmission,
+      bodyType: raw.bodyType,
+      sourcePrice: raw.price,
+      sourceCurrency: raw.currency,
+      priceMode: "fixed",
+      images: [],
+      totalRub: null,
+      calculationStatus: "needs_data",
+      firstSeenAt: now,
+      updatedAt: now,
+      operational: {
+        sourceUrl: raw.detailUrl,
+        sourceVenueName: raw.location || "AutoPapa Georgia",
+        sourcePublishedAt: now,
+        raw: { images: raw.images, parsed: raw, listingBoundImages: true },
+      },
+    } as VehicleOffer) as VehicleOffer;
+  }
+
+  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
+    const raw = offer.operational?.raw as { images?: string[]; parsed?: AutoPapaGeorgiaRow } | undefined;
+    let urls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])];
+    const detailUrl = String(offer.operational?.sourceUrl || raw?.parsed?.detailUrl || "");
+    if (detailUrl) {
+      const detail = await request(detailUrl).catch(() => null);
+      if (detail) urls = [...new Set([...urls, ...listingPhotoUrls(detail.markup, detail.response.url || detailUrl)])];
+    }
+    const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    const saved: CatalogImage[] = [];
+    for (const url of urls.slice(0, limit)) {
+      const image = await cacheImageFromUrl(url, "georgia", { headers: HEADERS }).catch(() => null);
+      if (image && image.size > 8_000 && !saved.some((item) => item.id === image.id)) saved.push(image);
+      if (saved.length >= limit) break;
+    }
+    return saved;
+  }
+
+  async healthCheck() {
+    return { ok: true, message: "AutoPapa canonical Yandex parser", checkedAt: new Date().toISOString() };
+  }
+}
+
+export const autoPapaGeorgiaSource = new AutoPapaGeorgiaAdapter();
