@@ -15,3 +15,13 @@ test("brand summary aggregates make/model/market counts compactly", () => {
   assert.deepEqual(summary.brands.bmw.models.map((x) => [x.model,x.count]), [["X3",2],["X5",1]]);
   assert.equal(summary.brands.audi.count, 1);
 });
+
+
+test("brand summary does not collapse non-latin makes onto one unknown key", () => {
+  const summary = buildCatalogBrandSummary("gen_i18n", [
+    { id:"1", market:"china", make:"奇瑞", model:"A", year:2024 },
+    { id:"2", market:"china", make:"吉利", model:"B", year:2024 },
+  ] as any);
+  assert.equal(Object.keys(summary.brands).length, 2);
+  assert.equal(Object.values(summary.brands).reduce((sum, brand) => sum + brand.count, 0), 2);
+});
