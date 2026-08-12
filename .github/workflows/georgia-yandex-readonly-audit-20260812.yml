@@ -1,0 +1,108 @@
+name: Audit Georgia canonical recovery through Yandex read-only
+
+on:
+  push:
+    branches:
+      - ops/georgia-yandex-audit-20260812
+    paths:
+      - .github/workflows/georgia-yandex-readonly-audit-20260812.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-readonly-georgia-yandex-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Collect 100 AutoPapa pages through production Yandex endpoint without image cache or catalog persistence
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const base = 'https://avtocena.com/api/internal/georgia-recovery-e2f913';
+          const all = new Map();
+          const chunks = [];
+          for (let startPage = 1; startPage <= 100; startPage += 5) {
+            const url = `${base}?source=autopapa&startPage=${startPage}&pages=5`;
+            const response = await fetch(url, { headers: { accept: 'application/json' }, signal: AbortSignal.timeout(120_000) });
+            const text = await response.text();
+            if (!response.ok) throw new Error(`autopapa_yandex_${startPage}_http_${response.status}:${text.slice(0,300)}`);
+            const payload = JSON.parse(text);
+            chunks.push({ startPage, count: payload.count, report: payload.report });
+            for (const offer of payload.offers || []) all.set(String(offer.id || `${offer.sourceId}:${offer.sourceOfferId}`), offer);
+            console.log(JSON.stringify({startPage, count: payload.count, calculated: payload.report?.calculatedCount, preliminary: payload.report?.preliminaryCount, images: payload.report?.imageStats}));
+          }
+
+          const offers = [...all.values()];
+          const sourceCounts = Object.fromEntries([...new Set(offers.map((o) => String(o.sourceId || '')))].sort().map((id) => [id, offers.filter((o) => String(o.sourceId || '') === id).length]));
+          const imageCounts = offers.map((o) => Array.isArray(o.images) ? o.images.length : 0);
+          const combustion = offers.filter((o) => String(o.powertrainKind || '') === 'combustion');
+          const exactPower = combustion.filter((o) => String(o.powerDataConfidence || '') === 'source_exact' && Number(o.powerHp || 0) > 0);
+          const calculated = offers.filter((o) => ['ready','estimated','auction_start'].includes(String(o.calculationStatus || '')) && Number(o.totalRub || 0) > 0);
+          const preliminary = offers.filter((o) => String(o.calculationStatus || '') === 'preliminary_power_pending');
+          const badYear = offers.filter((o) => Number(o.year || 0) < 2020);
+          const badSource = offers.filter((o) => !['autopapa_georgia_open','myauto_georgia_list','myauto_georgia_exact'].includes(String(o.sourceId || '')));
+          const bannedUrl = offers.filter((o) => /(?:^|\.)auto\.ge|(?:^|\.)ss\.ge|(?:^|\.)mymarket\.ge/i.test(String(o.operational?.sourceUrl || '')));
+          const below5 = offers.filter((o) => (Array.isArray(o.images) ? o.images.length : 0) < 5);
+          const wrongGalleryHost = offers.filter((o) => (o.images || []).some((img) => {
+            try { return new URL(String(img?.url || '')).hostname !== 'autopapa.ge'; } catch { return true; }
+          }));
+          const duplicateGallery = offers.filter((o) => {
+            const urls = (o.images || []).map((img) => String(img?.url || '').replace(/[?#].*$/, ''));
+            return new Set(urls).size !== urls.length;
+          });
+          const crossListingIdentity = offers.filter((o) => String(o.operational?.raw?.detailIdentityVerified || '') !== 'true' || String(o.operational?.raw?.photoIdentityVerified || '') !== 'true');
+
+          const report = {
+            mode: 'yandex_read_only_no_image_cache_no_catalog_persist',
+            requestedAutoPapaPages: 100,
+            uniqueOffers: offers.length,
+            sourceCounts,
+            calculatedCount: calculated.length,
+            preliminaryCount: preliminary.length,
+            combustionCount: combustion.length,
+            sourceExactPowerCount: exactPower.length,
+            sourceExactPowerRate: combustion.length ? Number((exactPower.length / combustion.length).toFixed(4)) : 0,
+            images: imageCounts.length ? { min: Math.min(...imageCounts), max: Math.max(...imageCounts), average: Number((imageCounts.reduce((a,b)=>a+b,0)/imageCounts.length).toFixed(2)), below5: below5.length } : {min:0,max:0,average:0,below5:0},
+            ageBelow2020: badYear.length,
+            nonCanonicalSources: badSource.length,
+            bannedSourceUrls: bannedUrl.length,
+            wrongGalleryHost: wrongGalleryHost.length,
+            duplicateGalleryOffers: duplicateGallery.length,
+            unverifiedDetailOrPhotoIdentity: crossListingIdentity.length,
+            poweredSample: exactPower.slice(0,20).map((o) => ({sourceOfferId:o.sourceOfferId, make:o.make, model:o.model, year:o.year, powerHp:o.powerHp, images:o.images?.length, calculationStatus:o.calculationStatus, totalRub:o.totalRub})),
+            preliminarySample: preliminary.slice(0,20).map((o) => ({sourceOfferId:o.sourceOfferId, make:o.make, model:o.model, year:o.year, engineCc:o.engineCc, powerHp:o.powerHp, kind:o.powertrainKind, images:o.images?.length, missing:o.calculationSnapshot?.missing || o.calculationSnapshot?.customs?.missing})),
+          };
+
+          const myAutoResponse = await fetch(`${base}?source=myauto&startPage=1&pages=5`, {headers:{accept:'application/json'}, signal:AbortSignal.timeout(120_000)});
+          const myAutoText = await myAutoResponse.text();
+          if (!myAutoResponse.ok) throw new Error(`myauto_yandex_http_${myAutoResponse.status}:${myAutoText.slice(0,300)}`);
+          const myAuto = JSON.parse(myAutoText);
+          report.myAutoFirst5Pages = { count: myAuto.count, sourceCounts: myAuto.report?.sourceCounts, imageStats: myAuto.report?.imageStats, calculatedCount: myAuto.report?.calculatedCount, preliminaryCount: myAuto.report?.preliminaryCount };
+
+          fs.writeFileSync('georgia-yandex-readonly-audit.json', JSON.stringify({report, chunks, offers}, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+
+          if (!offers.length) throw new Error('autopapa_yandex_no_offers');
+          if (badYear.length || badSource.length || bannedUrl.length || wrongGalleryHost.length || duplicateGallery.length || crossListingIdentity.length) throw new Error('georgia_canonical_integrity_failed');
+          if (below5.length) throw new Error('georgia_gallery_below5');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-yandex-readonly-audit
+          path: georgia-yandex-readonly-audit.json
+          if-no-files-found: warn
+          retention-days: 3
