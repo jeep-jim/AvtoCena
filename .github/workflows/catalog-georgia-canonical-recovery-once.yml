@@ -17,4 +17,4 @@ jobs:
       - name: Dispatch canonical-first UAE + Georgia recovery
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run catalog-live-recovery-uae-georgia-direct.yml --ref main
+        run: gh workflow run catalog-live-recovery-uae-georgia-direct.yml --repo jeep-jim/AvtoCena --ref main
