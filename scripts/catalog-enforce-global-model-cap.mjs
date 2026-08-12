@@ -11,6 +11,12 @@ const MAX_OFFERS_PER_MODEL = 20;
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const output = String(process.env.CATALOG_GLOBAL_MODEL_CAP_REPORT || "catalog-global-model-cap-report.json");
 const dryRun = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GLOBAL_MODEL_CAP_DRY_RUN || ""));
+const allowedEmptyMarkets = new Set(
+  String(process.env.CATALOG_ALLOW_EMPTY_MARKETS || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value) => PUBLIC_CATALOG_MARKETS.includes(value)),
+);
 const lockPath = "catalog/import-lock.json";
 const operationId = `catalog_global_model_cap_${crypto.randomUUID()}`;
 const waitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
@@ -121,13 +127,16 @@ try {
     const rows = await readMarketOffers(market);
     beforeByMarket[market] = rows.length;
     const result = selectMarket(rows, market);
-    if (rows.length && !result.selected.length) throw new Error(`catalog_global_model_cap_empty:${market}`);
+    if (rows.length && !result.selected.length && !allowedEmptyMarkets.has(market)) {
+      throw new Error(`catalog_global_model_cap_empty:${market}`);
+    }
     selectedByMarket[market] = result.selected.length;
     statsByMarket[market] = {
       before: rows.length,
       selected: result.selected.length,
       removedByQuality: result.rejected.quality,
       removedByModelQuota: result.rejected.modelQuota,
+      allowedEmpty: allowedEmptyMarkets.has(market),
       distinctModels: result.distinctModels,
       maxPerExactModel: result.maxPerExactModel,
     };
@@ -135,7 +144,17 @@ try {
   }
 
   if (dryRun) {
-    const report = { version: 1, mode: "global_model_cap_dry_run", dryRun: true, maxOffersPerModel: MAX_OFFERS_PER_MODEL, preferredMaxRub, beforeByMarket, selectedByMarket, byMarket: statsByMarket };
+    const report = {
+      version: 2,
+      mode: "global_model_cap_dry_run",
+      dryRun: true,
+      maxOffersPerModel: MAX_OFFERS_PER_MODEL,
+      preferredMaxRub,
+      allowedEmptyMarkets: [...allowedEmptyMarkets],
+      beforeByMarket,
+      selectedByMarket,
+      byMarket: statsByMarket,
+    };
     await fs.writeFile(output, JSON.stringify(report, null, 2));
     console.log(JSON.stringify(report, null, 2));
   } else {
@@ -155,14 +174,16 @@ try {
       const max = counts.size ? Math.max(...counts.values()) : 0;
       if (max > MAX_OFFERS_PER_MODEL) failures.push(`${market}:model_quota:${max}`);
       if (rows.length !== Number(manifest?.markets?.[market]?.count || 0)) failures.push(`${market}:manifest_count:${rows.length}:${Number(manifest?.markets?.[market]?.count || 0)}`);
+      if (rows.length === 0 && !allowedEmptyMarkets.has(market)) failures.push(`${market}:unexpected_empty_after_publish`);
     }
     const report = {
-      version: 1,
+      version: 2,
       mode: "global_model_cap_publish",
       published: true,
       generationId: manifest.generationId,
       maxOffersPerModel: MAX_OFFERS_PER_MODEL,
       preferredMaxRub,
+      allowedEmptyMarkets: [...allowedEmptyMarkets],
       beforeByMarket,
       selectedByMarket,
       afterByMarket,
