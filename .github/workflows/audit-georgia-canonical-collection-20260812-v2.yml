@@ -20,9 +20,11 @@ jobs:
           curl --connect-timeout 10 --max-time 120 -fsS 'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' -o adapters.json
           curl --connect-timeout 10 --max-time 180 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o galleries.json
           curl --connect-timeout 10 --max-time 60 -fsS 'https://avtocena.com/api/catalog/home' -o public-home.json
+          curl --connect-timeout 10 --max-time 300 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&pages=2' -o recovery.json
           jq . adapters.json
           jq '{runtime,mode,myauto:{ok:.myauto.ok,id:.myauto.id,make:.myauto.make,model:.myauto.model,year:.myauto.year,apiStatus:.myauto.apiStatus,photo:.myauto.photo,photoVer:.myauto.photoVer,picNumber:.myauto.picNumber,safeSpecFields:.myauto.safeSpecFields},autopapa:{ok:.autopapa.ok,fetched:.autopapa.fetched,normalized2020Plus:.autopapa.normalized2020Plus,samples:[.autopapa.samples[]|{id,make,model,year,sourcePrice,detailStatus,originalCount}]}}' galleries.json
           jq '{generationId,marketCounts,total}' public-home.json
+          jq '{market,count,partial,report,examples:[.offers[:5][]|{sourceId,sourceOfferId,make,model,year,engineCc,powerHp,sourcePrice,sourceCurrency,totalRub,imageCount:(.images|length),sourceUrl:.operational.sourceUrl}]}' recovery.json
       - name: Assert live Georgia source access and exact gallery metadata
         shell: bash
         run: |
@@ -41,6 +43,13 @@ jobs:
             and ([.autopapa.samples[] | select(.detailStatus == 200 and .originalCount >= 5)] | length) > 0
           ' galleries.json >/dev/null
           jq -e '(.marketCounts.georgia | tonumber) >= 0' public-home.json >/dev/null
+          jq -e '
+            .market == "georgia"
+            and .count > 0
+            and .report.sourceCounts.myauto_georgia_list > 0
+            and .report.sourceCounts.autopapa_georgia_open > 0
+            and ([.offers[] | select(.year < 2020 or (.images | length) < 5 or .totalRub <= 0)] | length == 0)
+          ' recovery.json >/dev/null
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -49,5 +58,6 @@ jobs:
             adapters.json
             galleries.json
             public-home.json
+            recovery.json
           if-no-files-found: warn
           retention-days: 3
