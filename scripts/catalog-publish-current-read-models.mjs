@@ -2,9 +2,28 @@ import { publishCurrentCatalogReadModels } from "../apps/web/lib/catalog/storage
 
 const result = await publishCurrentCatalogReadModels();
 const requiredMarkets = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"];
-const missingMarkets = requiredMarkets.filter((market) => Number(result.markets?.[market] || 0) <= 0);
+const allowedEmptyMarkets = new Set(
+  String(process.env.CATALOG_ALLOW_EMPTY_MARKETS || "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter((value) => requiredMarkets.includes(value)),
+);
+const marketCounts = result.markets || {};
+const hasMarket = (market) => Object.prototype.hasOwnProperty.call(marketCounts, market);
+const allowedAbsentMarkets = requiredMarkets.filter((market) => !hasMarket(market) && allowedEmptyMarkets.has(market));
+const missingMarkets = requiredMarkets.filter((market) => {
+  if (hasMarket(market)) return Number(marketCounts[market] || 0) <= 0;
+  return !allowedEmptyMarkets.has(market);
+});
+const expectedProjectionMarkets = requiredMarkets.length - allowedAbsentMarkets.length;
 
-console.log(JSON.stringify({ event: "catalog_current_read_models_published", ...result, missingMarkets }));
-if (!result.generationId || !result.total || result.allProjectionCount !== result.total || result.projectionMarkets < requiredMarkets.length || result.offerShards < 16 || missingMarkets.length) {
+console.log(JSON.stringify({
+  event: "catalog_current_read_models_published",
+  ...result,
+  allowedEmptyMarkets: allowedAbsentMarkets,
+  missingMarkets,
+  expectedProjectionMarkets,
+}));
+if (!result.generationId || !result.total || result.allProjectionCount !== result.total || result.projectionMarkets < expectedProjectionMarkets || result.offerShards < 16 || missingMarkets.length) {
   throw new Error("catalog_current_read_models_incomplete");
 }
