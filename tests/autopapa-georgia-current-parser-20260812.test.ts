@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { autoPapaDetailOriginalPhotoUrls, parseAutoPapaGeorgiaListing } from "../apps/web/lib/catalog/autopapa-georgia-source";
+import { autoPapaDetailOriginalPhotoUrls, autoPapaDetailPowerHp, parseAutoPapaGeorgiaListing } from "../apps/web/lib/catalog/autopapa-georgia-source";
 
 test("AutoPapa binds price, year, mileage and image to one exact listing and rejects pre-2020", () => {
   const markup = `
@@ -72,4 +72,22 @@ test("AutoPapa exact detail gallery keeps only direct full-size originals in sou
     "https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545",
     "https://autopapa.ge/system/car/photos/009/066/597/original.jpg?1770802546",
   ]);
+});
+
+test("AutoPapa exact detail power comes only from the primary facts block", () => {
+  const markup = `
+    <div>Year: 2024 Body Type: sedan State: good Engine Type: petrol Power: 147 hp Engine Vol: 2.0 l Mileage: 19 000 K. km Drive: front-wheel drive</div>
+    <div>Car description</div>
+    <div>Others also watch Example SUV Power: 999 hp</div>
+  `;
+  assert.equal(autoPapaDetailPowerHp(markup), 147);
+});
+
+test("AutoPapa blank primary power stays unknown and cannot borrow a recommendation power", () => {
+  const markup = `
+    <div>Year: 2025 Body Type: suv State: good Engine Type: petrol Power: Engine Vol: 2.0 l Mileage: 1 440 K. km Drive: front-wheel drive</div>
+    <div>Car description</div>
+    <div>Others also watch Example SUV Power: 250 hp</div>
+  `;
+  assert.equal(autoPapaDetailPowerHp(markup), undefined);
 });

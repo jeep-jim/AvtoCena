@@ -1,4 +1,4 @@
-import { autoPapaDetailOriginalPhotoUrls, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
+import { autoPapaDetailOriginalPhotoUrls, autoPapaDetailPowerHp, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
 import { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { credibleCatalogImages, isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "./offer-quality";
@@ -189,9 +189,18 @@ async function prepareAutoPapa(offer: VehicleOffer) {
   if (!expectedPath.test(new URL(detail.response.url || detailUrl).pathname)) throw new Error("autopapa_redirect_identity");
   const urls = autoPapaDetailOriginalPhotoUrls(detail.markup, detail.response.url || detailUrl).slice(0, 30);
   if (!urls.length) throw new Error("autopapa_gallery_empty");
+  const sourceExactPowerHp = String(offer.powertrainKind || "") === "combustion"
+    ? autoPapaDetailPowerHp(detail.markup)
+    : undefined;
 
   return normalizeVehicleOfferSpecs({
     ...offer,
+    powerHp: sourceExactPowerHp || offer.powerHp,
+    powerKw: sourceExactPowerHp
+      ? Math.round((sourceExactPowerHp / 1.359621617) * 10) / 10
+      : offer.powerKw,
+    powerDataConfidence: sourceExactPowerHp ? "source_exact" : offer.powerDataConfidence,
+    powerDataSource: sourceExactPowerHp ? `autopapa-detail:${id}:Power` : offer.powerDataSource,
     images: credibleCatalogImages(urls.map(imageRecord)).slice(0, 30),
     operational: {
       ...offer.operational,
@@ -206,6 +215,7 @@ async function prepareAutoPapa(offer: VehicleOffer) {
         listingBoundImages: true,
         photoIdentityVerified: true,
         detailIdentityVerified: true,
+        autoPapaDetailPowerHp: sourceExactPowerHp || null,
       },
     },
   });
