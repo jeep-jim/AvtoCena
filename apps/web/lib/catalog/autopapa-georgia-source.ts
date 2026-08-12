@@ -106,6 +106,25 @@ export function autoPapaDetailOriginalPhotoUrls(markup: string, base = BASE_URL)
   }))];
 }
 
+/**
+ * Some exact AutoPapa detail pages publish the seller-entered engine power in
+ * the primary vehicle facts block as `Power: N hp`. Keep the parser deliberately
+ * narrow: only the facts block between `Body Type:` and `Car description` is
+ * considered, so recommendation cards later on the page cannot donate power to
+ * this listing. A blank primary `Power:` remains unknown.
+ */
+export function autoPapaDetailPowerHp(markup: string) {
+  const text = plain(markup);
+  const start = text.search(/\bBody\s+Type\s*:/i);
+  if (start < 0) return undefined;
+  const carDescription = text.indexOf("Car description", start);
+  const facts = text.slice(start, carDescription > start ? carDescription : Math.min(text.length, start + 1_800));
+  const match = facts.match(/\bPower\s*:\s*([0-9]{1,4}(?:[.,][0-9]+)?)\s*(?:hp|horsepower)\b/i);
+  if (!match) return undefined;
+  const value = Number(match[1].replace(",", "."));
+  return Number.isFinite(value) && value > 0 && value <= 2_500 ? value : undefined;
+}
+
 export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_URL}/en/usd/search?page=1`): AutoPapaGeorgiaRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
