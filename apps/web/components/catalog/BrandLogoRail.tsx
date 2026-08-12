@@ -2,11 +2,33 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type MouseEvent, type WheelEvent as ReactWheelEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
+const BRAND_COUNT_CACHE_MS = 30_000;
+const BRAND_COUNT_REQUESTS = new Map<string, { at: number; promise: Promise<Record<string, number>> }>();
+
+function loadBrandCounts(query: string) {
+  const key = query || "__all__";
+  const now = Date.now();
+  const cached = BRAND_COUNT_REQUESTS.get(key);
+  if (cached && now - cached.at < BRAND_COUNT_CACHE_MS) return cached.promise;
+  const suffix = query ? `?${query}` : "";
+  const promise = fetch(`/api/catalog/brand-counts${suffix}`, { cache: "no-store" })
+    .then(async (response) => {
+      if (!response.ok) throw new Error(`Brand counts request failed: ${response.status}`);
+      const payload = await response.json();
+      return payload?.counts && typeof payload.counts === "object" ? payload.counts as Record<string, number> : {};
+    })
+    .catch((error) => {
+      BRAND_COUNT_REQUESTS.delete(key);
+      throw error;
+    });
+  BRAND_COUNT_REQUESTS.set(key, { at: now, promise });
+  return promise;
+}
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -83,21 +105,9 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   const [query, setQuery] = useState("");
   const [brandCounts, setBrandCounts] = useState<Record<string, number>>({});
   const [countStatus, setCountStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
-  const pointer = useRef<{ x: number; moved: boolean } | null>(null);
-  const activeBrands = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const value of brands) {
-      const canonical = canonicalCatalogBrand(value);
-      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
-      if (known) map.set(known.toLocaleLowerCase("en-US"), known);
-    }
-    return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
-  }, [brands]);
-  const orderedBrands = activeBrands;
-  const filtered = useMemo(() => {
-    const normalized = query.trim().toLocaleLowerCase("ru-RU");
-    return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
-  }, [activeBrands, query]);
+  const railRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
+  const suppressClick = useRef(false);
   const homeBrandDirectory = pathname === "/";
   const selectedBrand = !homeBrandDirectory ? canonicalCatalogBrand(searchParams.get("make") || searchParams.get("brand") || "") : "";
   const countQuery = useMemo(() => {
@@ -107,14 +117,37 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     return params.toString();
   }, [homeBrandDirectory, searchParamsText]);
   const normalizedCounts = useMemo(() => {
-    const result = new Map<string, number>();
+    const result = new Map<string, { brand: string; count: number }>();
     for (const [brand, value] of Object.entries(brandCounts)) {
       const canonical = canonicalCatalogBrand(brand);
+      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
       const count = Number(value);
-      if (canonical && Number.isFinite(count) && count >= 0) result.set(canonical.toLocaleLowerCase("en-US"), count);
+      if (known && Number.isFinite(count) && count >= 0) result.set(known.toLocaleLowerCase("en-US"), { brand: known, count });
     }
     return result;
   }, [brandCounts]);
+  const activeBrands = useMemo(() => {
+    // Once live counts arrive, they become the source of truth on both /cars and
+    // the homepage. This removes old knowledge-only brands with no live cars.
+    if (countStatus === "ready") {
+      return [...normalizedCounts.values()]
+        .filter((item) => item.count > 0)
+        .map((item) => item.brand)
+        .sort((a, b) => a.localeCompare(b, "ru"));
+    }
+    const map = new Map<string, string>();
+    for (const value of brands) {
+      const canonical = canonicalCatalogBrand(value);
+      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
+      if (known) map.set(known.toLocaleLowerCase("en-US"), known);
+    }
+    return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
+  }, [brands, countStatus, normalizedCounts]);
+  const orderedBrands = activeBrands;
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase("ru-RU");
+    return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
+  }, [activeBrands, query]);
 
   useEffect(() => {
     if (!open) return;
@@ -126,27 +159,39 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
-    const controller = new AbortController();
+    let cancelled = false;
     setCountStatus("loading");
-    const suffix = countQuery ? `?${countQuery}` : "";
-    fetch(`/api/catalog/brand-counts${suffix}`, { cache: "no-store", signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`Brand counts request failed: ${response.status}`);
-        return response.json();
-      })
-      .then((payload) => {
-        if (controller.signal.aborted) return;
-        setBrandCounts(payload?.counts && typeof payload.counts === "object" ? payload.counts : {});
+    loadBrandCounts(countQuery)
+      .then((counts) => {
+        if (cancelled) return;
+        setBrandCounts(counts);
         setCountStatus("ready");
       })
       .catch(() => {
-        if (controller.signal.aborted) return;
+        if (cancelled) return;
         setBrandCounts({});
         setCountStatus("error");
       });
-    return () => controller.abort();
-  }, [countQuery, open]);
+    return () => { cancelled = true; };
+  }, [countQuery]);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const onWheel = (event: globalThis.WheelEvent) => {
+      const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      if (maxScroll <= 2) return;
+      const dominant = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (Math.abs(dominant) < 0.5) return;
+      // While the pointer is over the brand rail, the wheel belongs only to the
+      // rail. Do not let the page drift vertically at the same time.
+      event.preventDefault();
+      event.stopPropagation();
+      rail.scrollLeft = Math.max(0, Math.min(maxScroll, rail.scrollLeft + dominant));
+    };
+    rail.addEventListener("wheel", onWheel, { passive: false });
+    return () => rail.removeEventListener("wheel", onWheel);
+  }, [orderedBrands.length]);
 
   const close = () => {
     setOpen(false);
@@ -183,21 +228,38 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     router.push(`/cars?${params.toString()}`);
   };
 
-  const handleRailWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
-    const rail = event.currentTarget;
-    const maxScroll = rail.scrollWidth - rail.clientWidth;
-    if (maxScroll <= 2 || Math.abs(event.deltaY) < 1) return;
-    const next = Math.max(0, Math.min(maxScroll, rail.scrollLeft + event.deltaY));
-    if (Math.abs(next - rail.scrollLeft) < 0.5) return;
-    event.preventDefault();
-    rail.scrollLeft = next;
-  };
-
   const countLabelForBrand = (brand: string) => {
     if (countStatus === "loading" || countStatus === "idle") return "…";
     if (countStatus === "error") return "—";
-    const count = normalizedCounts.get(brand.toLocaleLowerCase("en-US")) || 0;
+    const count = normalizedCounts.get(brand.toLocaleLowerCase("en-US"))?.count || 0;
     return BRAND_COUNT_FORMATTER.format(count);
+  };
+
+  const beginMouseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const rail = event.currentTarget;
+    drag.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: rail.scrollLeft, moved: false };
+    suppressClick.current = false;
+    rail.setPointerCapture(event.pointerId);
+    rail.classList.add("is-dragging");
+  };
+  const moveMouseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const state = drag.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+    const dx = event.clientX - state.startX;
+    if (Math.abs(dx) > 4) state.moved = true;
+    if (!state.moved) return;
+    event.preventDefault();
+    event.currentTarget.scrollLeft = state.startScrollLeft - dx;
+  };
+  const endMouseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    const state = drag.current;
+    if (!state || state.pointerId !== event.pointerId) return;
+    suppressClick.current = state.moved;
+    drag.current = null;
+    event.currentTarget.classList.remove("is-dragging");
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    window.setTimeout(() => { suppressClick.current = false; }, 0);
   };
 
   if (selectedBrand) {
@@ -216,18 +278,17 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   return <>
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
       <div
-        className="ac-hide-scrollbar flex min-w-0 touch-pan-x items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1"
+        ref={railRef}
+        className="ac-hide-scrollbar flex min-w-0 cursor-grab touch-pan-x items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 [&.is-dragging]:cursor-grabbing [&.is-dragging]:scroll-auto"
         style={{ WebkitOverflowScrolling: "touch" }}
-        onWheel={handleRailWheel}
-        onPointerDown={(event) => { pointer.current = { x: event.clientX, moved: false }; }}
-        onPointerMove={(event) => { if (pointer.current && Math.abs(event.clientX - pointer.current.x) > 7) pointer.current.moved = true; }}
-        onPointerUp={() => { window.setTimeout(() => { pointer.current = null; }, 0); }}
-        onPointerCancel={() => { pointer.current = null; }}
+        onPointerDown={beginMouseDrag}
+        onPointerMove={moveMouseDrag}
+        onPointerUp={endMouseDrag}
+        onPointerCancel={endMouseDrag}
         onClickCapture={(event) => {
-          if (!pointer.current?.moved) return;
+          if (!suppressClick.current) return;
           event.preventDefault();
           event.stopPropagation();
-          pointer.current = null;
         }}
       >
         {orderedBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
