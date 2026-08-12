@@ -1,11 +1,11 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const START_EVENT = "avtocena:navigation-start";
 const REVEAL_DELAY_MS = 100;
-const MIN_VISIBLE_MS = 80;
+const MIN_VISIBLE_MS = 0;
 // Object-storage cold starts can legitimately take several seconds. Hiding the
 // indicator after three seconds exposed the unchanged catalog immediately
 // before the offer route committed, which looked like a failed first tap.
@@ -140,8 +140,10 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
   min-height:64px!important;
   max-height:64px!important;
   overflow:hidden!important;
-  background:rgba(15,23,42,.18)!important;
+  background:rgba(15,23,42,.10)!important;
   isolation:isolate!important;
+  clip-path:inset(0)!important;
+  contain:paint!important;
 }
 .ac-route-loader__candy{
   position:absolute!important;
@@ -151,7 +153,7 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
   right:-64px!important;
   height:64px!important;
   background:repeating-linear-gradient(120deg,#ff353d 0 34px,#fff 34px 52px)!important;
-  opacity:.72!important;
+  opacity:.58!important;
   animation:ac-route-candy-sweep .86s linear infinite!important;
   will-change:transform!important;
   box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)!important;
@@ -169,7 +171,7 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
   white-space:nowrap!important;
   border:1px solid rgba(255,255,255,.30)!important;
   border-radius:999px!important;
-  background:rgba(12,18,30,.66)!important;
+  background:rgba(12,18,30,.56)!important;
   color:#fff!important;
   -webkit-text-fill-color:#fff!important;
   padding:7px 13px!important;
@@ -277,7 +279,7 @@ function RoutePreloaderInner(){
  const startedAtRef=useRef(0);const routeKey=`${pathname}?${searchParams.toString()}`;const previousRouteKeyRef=useRef(routeKey);const warmedRoutesRef=useRef(new Set<string>());const revealTimerRef=useRef<number|null>(null);const hideTimerRef=useRef<number|null>(null);const safetyTimerRef=useRef<number|null>(null);
  const clearTimers=()=>{if(revealTimerRef.current!==null)window.clearTimeout(revealTimerRef.current);if(hideTimerRef.current!==null)window.clearTimeout(hideTimerRef.current);if(safetyTimerRef.current!==null)window.clearTimeout(safetyTimerRef.current);revealTimerRef.current=null;hideTimerRef.current=null;safetyTimerRef.current=null};
  const hide=()=>{clearTimers();setVisible(false)};
- const show=()=>{clearTimers();revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};
+ const show=()=>{clearTimers();const startedRoute=`${window.location.pathname}${window.location.search}`;revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;if(`${window.location.pathname}${window.location.search}`!==startedRoute)return;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};
  useEffect(()=>{
   const handleStart=()=>show();
   const handleClick=(event:MouseEvent)=>{
@@ -297,7 +299,7 @@ function RoutePreloaderInner(){
   window.addEventListener(START_EVENT,handleStart);document.addEventListener("click",handleClick,true);document.addEventListener("submit",handleSubmit,true);document.addEventListener("pointerover",warm,true);document.addEventListener("focusin",warm,true);
   return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
- useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(revealTimerRef.current!==null){hide();return}if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>hide(),delay)},[routeKey,visible]);
+ useLayoutEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;hide()},[routeKey]);
  return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-75 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite" role="status"><div className="ac-route-loader__candy" aria-hidden="true"/><div className="ac-route-loader__label">Загружаем страницу</div><span className="sr-only">Загружаем страницу</span></div>;
 }
 
