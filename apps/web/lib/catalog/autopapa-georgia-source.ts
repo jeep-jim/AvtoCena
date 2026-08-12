@@ -125,6 +125,44 @@ export function autoPapaDetailPowerHp(markup: string) {
   return Number.isFinite(value) && value >= 20 && value <= 2_500 ? value : undefined;
 }
 
+function autoPapaDetailIdentity(url: string) {
+  try { return new URL(url).pathname.match(DETAIL_PATH_RE)?.[1] || ""; } catch { return ""; }
+}
+
+export function autoPapaExactDetailFacts(offer: Partial<VehicleOffer>, markup: string, responseUrl: string) {
+  const sourceOfferId = String(offer.sourceOfferId || "").trim();
+  const requestedUrl = String(offer.operational?.sourceUrl || "");
+  if (offer.sourceId !== "autopapa_georgia_open" || !/^\d{5,}$/.test(sourceOfferId)) return null;
+  if (autoPapaDetailIdentity(requestedUrl) !== sourceOfferId || autoPapaDetailIdentity(responseUrl) !== sourceOfferId) return null;
+  const originals = autoPapaDetailOriginalPhotoUrls(markup, responseUrl).slice(0, 30);
+  const powerHp = String(offer.powertrainKind || "") === "combustion" ? autoPapaDetailPowerHp(markup) : undefined;
+  return { sourceOfferId, originals, powerHp };
+}
+
+export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: string, responseUrl: string) {
+  const facts = autoPapaExactDetailFacts(offer, markup, responseUrl);
+  if (!facts) return null;
+  const raw = typeof offer.operational?.raw === "object" && offer.operational.raw
+    ? offer.operational.raw as Record<string, unknown>
+    : {};
+  offer.operational = {
+    ...offer.operational,
+    raw: {
+      ...raw,
+      autoPapaDetailIdentityVerified: true,
+      autoPapaDetailOriginals: facts.originals,
+      ...(facts.powerHp ? { autoPapaDetailPowerHp: facts.powerHp } : {}),
+    },
+  };
+  if (facts.powerHp) {
+    offer.powerHp = facts.powerHp;
+    offer.powerKw = Math.round((facts.powerHp / 1.3596216173) * 100) / 100;
+    offer.powerDataConfidence = "source_exact";
+    offer.powerDataSource = `autopapa-detail:${facts.sourceOfferId}:Power`;
+  }
+  return facts;
+}
+
 export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_URL}/en/usd/search?page=1`): AutoPapaGeorgiaRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
@@ -227,8 +265,8 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
     if (detailUrl) {
       const detail = await request(detailUrl).catch(() => null);
       if (detail) {
-        const originals = autoPapaDetailOriginalPhotoUrls(detail.markup, detail.response.url || detailUrl);
-        urls = [...new Set([...urls, ...originals])];
+        const facts = enrichAutoPapaOfferFromExactDetail(offer, detail.markup, detail.response.url || detailUrl);
+        if (facts) urls = [...new Set([...urls, ...facts.originals])];
       }
     }
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
