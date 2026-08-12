@@ -50,6 +50,14 @@ function integer(value: unknown) {
   const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
+export function parseAutoGeorgiaMileageKm(value: string) {
+  // Match the number immediately attached to the km unit. The previous
+  // permissive expression could swallow the listing year as part of a
+  // spaced odometer, e.g. "2024 60 000 km" -> 202460000.
+  const match = String(value || "").match(/(?:^|[^\d])([0-9]{1,3}(?:[ .,'’\u00a0][0-9]{3})+|[0-9]{1,7})\s*km\b/i);
+  const parsed = integer(match?.[1]);
+  return parsed && parsed <= 2_000_000 ? parsed : undefined;
+}
 function moneyAmount(value: unknown) {
   const raw = String(value || "").replace(/[\s']/g, "").replace(/[^0-9.,]/g, "");
   if (!raw) return undefined;
@@ -85,6 +93,11 @@ function identityFromTitle(value: string, detailUrl: string) {
   if (comma) return { make: comma[1].trim(), model: comma[2].trim() };
   return identityFromUrl(detailUrl);
 }
+function exactAutoGeorgiaIdentity(identity: { make: string; model: string }) {
+  const make = compact(identity.make);
+  const model = compact(identity.model);
+  return Boolean(make && model && !/^(?:other|othermodel|unknown|na|notset)$/.test(model));
+}
 function parseMoney(text: string) {
   const usd = text.match(/([0-9][0-9\s,.']{1,})\s*(?:USD|\$)/i) || text.match(/(?:USD|\$)\s*([0-9][0-9\s,.']{1,})/i);
   const gel = text.match(/([0-9][0-9\s,.']{1,})\s*(?:GEL|₾)/i) || text.match(/(?:GEL|₾)\s*([0-9][0-9\s,.']{1,})/i);
@@ -108,8 +121,36 @@ export function autoGeorgiaImageBelongsToListing(value: string, listingId: unkno
     return pathname.includes(`/ad${id}/`);
   } catch { return false; }
 }
+export function autoGeorgiaImageIdentity(value: string) {
+  try {
+    const parsed = new URL(String(value || ""));
+    const pathname = decodeURIComponent(parsed.pathname).toLocaleLowerCase("en-US")
+      .replace(/_(?:x2|large)(?=\.[a-z0-9]+$)/i, "");
+    return `${parsed.hostname.toLocaleLowerCase("en-US")}${pathname}`;
+  } catch { return ""; }
+}
+function autoGeorgiaImageVariantScore(value: string) {
+  try {
+    const pathname = new URL(String(value || "")).pathname;
+    if (/_large(?=\.[a-z0-9]+$)/i.test(pathname)) return 3;
+    if (/_x2(?=\.[a-z0-9]+$)/i.test(pathname)) return 2;
+    return 1;
+  } catch { return 0; }
+}
+export function dedupeAutoGeorgiaListingImages(values: string[], listingId: unknown) {
+  const selected = new Map<string, string>();
+  for (const raw of values) {
+    const url = String(raw || "").trim();
+    if (!autoGeorgiaImageBelongsToListing(url, listingId)) continue;
+    const identity = autoGeorgiaImageIdentity(url);
+    if (!identity) continue;
+    const current = selected.get(identity);
+    if (!current || autoGeorgiaImageVariantScore(url) > autoGeorgiaImageVariantScore(current)) selected.set(identity, url);
+  }
+  return [...selected.values()];
+}
 function listingImageUrls(markup: string, base: string, listingId: unknown) {
-  return imageUrls(markup, base).filter((url) => autoGeorgiaImageBelongsToListing(url, listingId));
+  return dedupeAutoGeorgiaListingImages(imageUrls(markup, base), listingId);
 }
 function sourceCatalogImage(urlValue: string): CatalogImage | null {
   const url = String(urlValue || "").trim();
@@ -152,7 +193,7 @@ export function parseAutoGeorgiaStrictListing(markup: string, pageUrl: string): 
     const identity = identityFromTitle(label, entry.href);
     const money = parseMoney(text);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\b/)?.[1] || 0);
-    if (!identity.make || !identity.model || !money || !year || !/\bSale\b/i.test(text)) continue;
+    if (!exactAutoGeorgiaIdentity(identity) || !money || !year || !/\bSale\b/i.test(text)) continue;
     const id = entry.href.match(/-(\d+)\.html$/i)?.[1] || stableOfferId("auto_georgia_open", entry.href);
     const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
     rows.push({
@@ -162,7 +203,7 @@ export function parseAutoGeorgiaStrictListing(markup: string, pageUrl: string): 
       make: identity.make,
       model: identity.model,
       year,
-      mileageKm: integer(text.match(/([0-9][0-9\s,.']+)\s*km\b/i)?.[1]),
+      mileageKm: parseAutoGeorgiaMileageKm(text),
       engineCc: liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined,
       fuel: text.match(/\b(Gasoline|Petrol|Diesel|Hybrid|Electric|LPG|CNG|Gas)\b/i)?.[1],
       transmission: text.match(/\b(Automatic|Manual|Variator|CVT|Robot|Automanual)\b/i)?.[1],
@@ -232,11 +273,11 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
     const row: AutoGeorgiaRow = raw;
     const detailUrl = String(offer.operational?.sourceUrl || row.detailUrl || "");
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    let urls = [...new Set((row.images || []).map(String).filter((url) => autoGeorgiaImageBelongsToListing(url, row.id)))];
+    let urls = dedupeAutoGeorgiaListingImages((row.images || []).map(String), row.id).slice(0, limit);
     if (detailUrl && urls.length < limit) {
       const detail = await request(detailUrl, detailUrl).catch(() => null);
       if (detail && identityMatches(detail.markup, row)) {
-        urls = [...new Set([...urls, ...listingImageUrls(detail.markup, detail.response.url || detailUrl, row.id)])];
+        urls = dedupeAutoGeorgiaListingImages([...urls, ...listingImageUrls(detail.markup, detail.response.url || detailUrl, row.id)], row.id);
         const text = plainText(detail.markup);
         const cc = integer(text.match(/([0-9][0-9\s,.']{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
         const liters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
@@ -247,7 +288,7 @@ export const autoGeorgiaStrictSource: CatalogSourceAdapter = {
         (offer.operational.raw as any).photoIdentityVerified = urls.length > 0;
       }
     }
-    urls = urls.filter((url) => autoGeorgiaImageBelongsToListing(url, row.id)).slice(0, limit);
+    urls = dedupeAutoGeorgiaListingImages(urls, row.id).slice(0, limit);
     offer.operational.gallerySourceImageCount = urls.length;
     (offer.operational.raw as any).images = urls;
     (offer.operational.raw as any).listingBoundImages = urls.length > 0;
