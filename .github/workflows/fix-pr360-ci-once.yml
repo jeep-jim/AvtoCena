@@ -26,29 +26,15 @@ jobs:
 
           test_path = Path('tests/catalog-source-scale.test.ts')
           s = test_path.read_text()
-
-          old = '''  for (const market of PUBLIC_CATALOG_MARKETS) {
-    assert.ok((byMarket.get(market)?.size || 0) >= 3, `${market} must have at least three registered sources`);
-  }
-'''
-          new = '''  for (const market of PUBLIC_CATALOG_MARKETS) {
-    const minimum = market === "georgia" ? 2 : 3;
-    assert.ok((byMarket.get(market)?.size || 0) >= minimum, `${market} must have at least ${minimum} registered sources`);
-  }
-'''
+          old = '  for (const market of PUBLIC_CATALOG_MARKETS) {\n    assert.ok((byMarket.get(market)?.size || 0) >= 3, `${market} must have at least three registered sources`);\n  }\n'
+          new = '  for (const market of PUBLIC_CATALOG_MARKETS) {\n    const minimum = market === "georgia" ? 2 : 3;\n    assert.ok((byMarket.get(market)?.size || 0) >= minimum, `${market} must have at least ${minimum} registered sources`);\n  }\n'
           if old not in s:
               raise SystemExit('minimum-source block not found')
           s = s.replace(old, new, 1)
-
-          for line in [
-              '    "auto_georgia_open",\n',
-              '    "ss_georgia_open",\n',
-              '    "mymarket_georgia_open",\n',
-          ]:
+          for line in ['    "auto_georgia_open",\n', '    "ss_georgia_open",\n', '    "mymarket_georgia_open",\n']:
               if line not in s:
                   raise SystemExit(f'stale scale source line not found: {line!r}')
               s = s.replace(line, '', 1)
-
           old = '  assert.match(regionalOverrides, /https:\\/\\/www\\.auto\\.ge\\/en\\/index\\.html/);\n'
           new = '  assert.doesNotMatch(regionalOverrides, /auto_georgia_open|https:\\/\\/www\\.auto\\.ge/);\n'
           if old not in s:
@@ -58,12 +44,7 @@ jobs:
 
           regional_path = Path('apps/web/lib/catalog/regional-live-overrides.ts')
           s = regional_path.read_text()
-          old = '''  {
-    sourceId: "auto_georgia_open", market: "georgia", label: "AUTO.GE live homepage", baseUrl: "https://www.auto.ge", fallbackCurrency: "USD",
-    detailPattern: /\\/(?:en|ru|ka)\\/auto\\/[^?#]+-\\d+\\.html(?:[?#]|$)/i,
-    listUrls: (page) => [page <= 1 ? "https://www.auto.ge/en/index.html" : `https://www.auto.ge/en/auto/index${page}.html`, pageQuery("https://www.auto.ge/en/index.html", page), pageQuery("https://www.auto.ge/en/auto/index.html", page)],
-  },
-'''
+          old = '  {\n    sourceId: "auto_georgia_open", market: "georgia", label: "AUTO.GE live homepage", baseUrl: "https://www.auto.ge", fallbackCurrency: "USD",\n    detailPattern: /\\/(?:en|ru|ka)\\/auto\\/[^?#]+-\\d+\\.html(?:[?#]|$)/i,\n    listUrls: (page) => [page <= 1 ? "https://www.auto.ge/en/index.html" : `https://www.auto.ge/en/auto/index${page}.html`, pageQuery("https://www.auto.ge/en/index.html", page), pageQuery("https://www.auto.ge/en/auto/index.html", page)],\n  },\n'
           if old not in s:
               raise SystemExit('regional AUTO.GE config block not found')
           s = s.replace(old, '', 1)
@@ -75,9 +56,9 @@ jobs:
           node --import tsx --test tests/catalog-source-scale.test.ts tests/georgia-canonical-source-policy-20260812.test.ts
       - name: Commit and push PR branch
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add tests/catalog-source-scale.test.ts apps/web/lib/catalog/regional-live-overrides.ts
           git diff --cached --check
-          git commit -m "test: align Georgia source scale with canonical-only policy"
+          git commit -m 'test: align Georgia source scale with canonical-only policy'
           git push origin HEAD:fix/remove-banned-georgia-scale-sources-20260812
