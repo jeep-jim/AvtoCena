@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Read-only public catalog filter and route audit
+      - name: Warm then audit public catalog filters and latency read-only
         shell: bash
         run: |
           node - <<'NODE'
@@ -34,18 +34,20 @@ jobs:
             const text = await response.text();
             return { status: response.status, ms: Math.round(performance.now() - started), bytes: Buffer.byteLength(text), text };
           }
+          const cold = await request('/cars');
+          if (cold.status !== 200) throw new Error(`cars_cold_http_${cold.status}`);
           const cases = [
-            { label: 'cars-default', path: '/cars' },
             { label: 'georgia', path: '/cars?market=georgia' },
             { label: 'georgia-toyota', path: '/cars?market=georgia&make=Toyota' },
             { label: 'georgia-year-2025', path: '/cars?market=georgia&yearFrom=2025' },
             { label: 'china', path: '/cars?market=china' },
+            { label: 'cars-default-warm', path: '/cars' },
           ];
           const summary = [];
           for (const item of cases) {
             const runs = [];
             let last = null;
-            for (let i = 0; i < 3; i += 1) {
+            for (let i = 0; i < 5; i += 1) {
               last = await request(item.path);
               runs.push(last.ms);
               if (last.status !== 200) throw new Error(`${item.label}_http_${last.status}`);
@@ -65,17 +67,14 @@ jobs:
               const old = cardYears.filter((year) => year < 2025);
               if (old.length) throw new Error(`georgia_year_filter_leak:${old.slice(0,10).join(',')}`);
             }
-            summary.push({ label: item.label, status: last.status, runsMs: runs, p50Ms: sorted[1], maxMs: sorted[2], bytes: last.bytes, articleCount, titleSample: cardTitles.slice(0,6), yearSample: cardYears.slice(0,10) });
+            summary.push({ label: item.label, status: last.status, runsMs: runs, p50Ms: sorted[2], p90ApproxMs: sorted[4], bytes: last.bytes, articleCount, titleSample: cardTitles.slice(0,6), yearSample: cardYears.slice(0,10) });
           }
-          const removedRoutes = [
-            '/api/internal/georgia-egress-8d4c2f',
-            '/api/internal/georgia-adapters-dryrun-6a91d7',
-          ];
+          const removedRoutes = ['/api/internal/georgia-egress-8d4c2f','/api/internal/georgia-adapters-dryrun-6a91d7'];
           const removed = [];
           for (const path of removedRoutes) {
             const result = await request(path);
             removed.push({ path, status: result.status, ms: result.ms, bytes: result.bytes });
             if (result.status !== 404) throw new Error(`temporary_route_still_public:${path}:${result.status}`);
           }
-          console.log(JSON.stringify({ checkedAt: new Date().toISOString(), summary, removed }, null, 2));
+          console.log(JSON.stringify({ checkedAt: new Date().toISOString(), coldCarsMs: cold.ms, coldCarsBytes: cold.bytes, summary, removed }, null, 2));
           NODE
