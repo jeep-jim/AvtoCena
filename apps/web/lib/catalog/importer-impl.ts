@@ -59,6 +59,13 @@ export function needsSourceOrderedGalleryRefresh(offer: VehicleOffer | undefined
     && operational?.raw?.gallerySafetyMode !== KCAR_EXTERIOR_FIRST_GALLERY_MODE;
 }
 
+export function needsSourceDetailFactRefresh(offer: VehicleOffer | undefined) {
+  if (!offer || offer.sourceId !== "autopapa_georgia_open") return false;
+  if (String(offer.powertrainKind || "") !== "combustion") return false;
+  return String(offer.calculationStatus || "") === "preliminary_power_pending"
+    || !(Number.isFinite(Number(offer.powerHp)) && Number(offer.powerHp) > 0);
+}
+
 function mergeOfferBase(previous: VehicleOffer | undefined, base: VehicleOffer, seenAt: string, scanCycleId: string) {
   if (!previous) {
     return {
@@ -257,6 +264,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             const previous = existing.get(normalized.id);
             const base = mergeOfferBase(previous, normalized, startedAt, scan.scanCycleId);
             const refreshSourceOrder = needsSourceOrderedGalleryRefresh(previous);
+            const refreshDetailFacts = needsSourceDetailFactRefresh(previous);
             seen.add(base.id);
             let images: CatalogImage[] = [];
             await refreshLock();
@@ -265,7 +273,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
             images = previousImages;
             let attemptedImages = false;
 
-            if (policy.imagesEnabled && sourceDetails < configuredMaxDetails && (images.length < maxImagesPerOffer || refreshSourceOrder)) {
+            if (policy.imagesEnabled && sourceDetails < configuredMaxDetails && (images.length < maxImagesPerOffer || refreshSourceOrder || refreshDetailFacts)) {
               attemptedImages = true;
               const previousImageLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
               process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(maxImagesPerOffer);
