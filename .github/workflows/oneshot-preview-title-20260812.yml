@@ -1,0 +1,45 @@
+name: One-shot preview title and chips 20260812
+
+on:
+  push:
+    branches:
+      - fix/catalog-preview-truth-power-titles-20260812
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-preview-truth-power-titles-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-preview-title-20260812.py
+      - run: node --import tsx --test tests/catalog-preview-presentation-20260812.test.ts
+      - name: Preview chip source assertions
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const card=fs.readFileSync('apps/web/components/catalog/CatalogCard.tsx','utf8');
+          if(card.includes('Пробег уточняется')) throw new Error('preview still renders missing mileage copy');
+          if(card.includes('30 мин: уточняется')) throw new Error('preview still renders unknown 30-minute power');
+          if(!card.includes('o.mileageKm ? <span')) throw new Error('mileage chip is not conditional');
+          NODE
+      - run: npm run typecheck
+      - run: npm --workspace apps/web run build
+      - name: Commit validated app and test changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/lib/catalog/presentation.ts apps/web/components/catalog/CatalogCard.tsx tests/catalog-preview-presentation-20260812.test.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix(catalog): hide unknown preview chips and recover China titles"
+          git push origin HEAD:fix/catalog-preview-truth-power-titles-20260812
