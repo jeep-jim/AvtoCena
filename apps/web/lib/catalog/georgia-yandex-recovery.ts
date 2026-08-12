@@ -2,7 +2,7 @@ import { autoPapaDetailOriginalPhotoUrls, autoPapaGeorgiaSource } from "./autopa
 import { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { credibleCatalogImages, isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "./offer-quality";
-import { buildMyAutoLargePhotoUrls, myAutoListSource, parseMyAutoListingImageUrl } from "./myauto-list-source";
+import { myAutoListSource, myAutoProductSnapshotFromInfo, parseMyAutoListingImageUrl } from "./myauto-list-source";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { findVehicleModel, findVehicleVariant } from "./vehicle-knowledge";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
@@ -140,43 +140,38 @@ async function prepareMyAuto(offer: VehicleOffer) {
   const id = String(offer.sourceOfferId || "");
   const listUrls = [...new Set([...(raw.images || []), ...(raw.parsed?.images || [])].map(String))];
   const identity = listUrls.map((url) => parseMyAutoListingImageUrl(url, id)).find(Boolean);
-  if (!identity) throw new Error("myauto_list_image_identity");
 
   const payload = await fetchJson(MYAUTO_PRODUCT_API + "/" + id);
   const info = payload?.data?.info;
-  if (!info || String(info.car_id ?? "") !== id || String(info.photo ?? "") !== identity.photo) {
-    throw new Error("myauto_product_identity");
-  }
-  const engineCc = Number(info.engine_volume || 0);
-  const urls = buildMyAutoLargePhotoUrls({
-    id,
-    photo: info.photo,
-    count: info.pic_number,
-    version: info.photo_ver,
-  });
-  if (!urls.length) throw new Error("myauto_gallery_empty");
+  if (!info || typeof info !== "object") throw new Error("myauto_product_identity");
+  const snapshot = myAutoProductSnapshotFromInfo(info as Record<string, unknown>, id, identity?.photo);
+  if (!snapshot) throw new Error("myauto_product_identity");
+  const urls = snapshot.galleryUrls;
 
   return normalizeVehicleOfferSpecs({
     ...offer,
-    engineCc: Number(offer.engineCc || 0) > 0 ? offer.engineCc : (engineCc >= 300 && engineCc <= 15_000 ? engineCc : undefined),
+    engineCc: Number(offer.engineCc || 0) > 0 ? offer.engineCc : snapshot.engineCc,
+    powerHp: Number(offer.powerHp || 0) > 0 ? offer.powerHp : snapshot.powerHp,
     images: credibleCatalogImages(urls.map(imageRecord)).slice(0, 30),
     operational: {
       ...offer.operational,
       photoIdentityVerified: true,
       galleryVerified: true,
       galleryImageCount: urls.length,
-      gallerySafetyMode: "myauto_official_large_formula",
+      gallerySafetyMode: identity ? "myauto_list_plus_product_exact_large_formula" : "myauto_exact_product_large_formula",
       galleryStoredAs: "json_urls",
       raw: {
         ...raw,
         images: urls,
         listingBoundImages: true,
         photoIdentityVerified: true,
+        myAutoListPhotoIdentityPresent: Boolean(identity),
         myAutoProductCarId: String(info.car_id),
         myAutoProductPhoto: String(info.photo),
         myAutoProductPhotoVersion: Number(info.photo_ver),
         myAutoProductPictureCount: Number(info.pic_number),
-        myAutoProductEngineCc: engineCc || null,
+        myAutoProductEngineCc: snapshot.engineCc || null,
+        myAutoProductPowerHp: snapshot.powerHp || null,
       },
     },
   });
