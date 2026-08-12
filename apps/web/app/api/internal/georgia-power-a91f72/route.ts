@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readMarketOffers } from "../../../../../lib/catalog/storage";
+import { readMarketOffers } from "../../../../lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
