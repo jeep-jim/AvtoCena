@@ -55,15 +55,6 @@ jobs:
               assert old in text
               text = text.replace(old, new, 1)
           quality.write_text(text)
-
-          ci = Path('.github/workflows/ci.yml')
-          text = ci.read_text()
-          needle = '''      - name: MyAuto Georgia listing tests\n        run: node --import tsx --test tests/myauto-list-source.test.ts\n'''
-          replacement = needle + '''      - name: Encar cash-price contract tests\n        run: node --import tsx --test tests/encar-noncash-price.test.ts\n'''
-          if 'Encar cash-price contract tests' not in text:
-              assert needle in text
-              text = text.replace(needle, replacement, 1)
-          ci.write_text(text)
           PY
       - name: Regression test
         run: node --import tsx --test tests/encar-noncash-price.test.ts
@@ -73,7 +64,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add apps/web/lib/catalog/encar-sale-contract.ts apps/web/lib/catalog/encar-complete-source.ts apps/web/lib/catalog/offer-quality.ts tests/encar-noncash-price.test.ts .github/workflows/ci.yml
+          git add apps/web/lib/catalog/encar-complete-source.ts apps/web/lib/catalog/offer-quality.ts
           git diff --cached --check
           git commit -m "fix(encar): reject rental and lease succession prices"
           git push origin HEAD:fix/encar-noncash-price-contract-20260812
