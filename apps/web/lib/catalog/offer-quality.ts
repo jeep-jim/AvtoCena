@@ -1,6 +1,7 @@
 import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
+import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
@@ -145,6 +146,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
+  if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
   if (!isCatalogYearAllowed(year, offer.market)) return false;
   if (!isCatalogOfferBusinessLiquid(offer)) return false;
