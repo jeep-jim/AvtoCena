@@ -1,0 +1,94 @@
+name: Audit Korea + Kyrgyz photo depth
+run-name: Korea/Kyrgyz photo depth · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/korea-kyrgyz-photo-depth-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Read current sparse-gallery breakdown without publishing
+        run: |
+          npx tsx -e '
+            import { readMarketOffers } from "./apps/web/lib/catalog/storage.ts";
+            import { rankedCatalogImageUrls } from "./apps/web/lib/catalog/image-quality.ts";
+            (async () => {
+              const result:any = {};
+              for (const market of ["korea", "kyrgyzstan"]) {
+                const rows:any[] = await readMarketOffers(market);
+                const bySource = new Map<string, any[]>();
+                for (const row of rows) {
+                  const source = String(row.sourceId || "unknown");
+                  bySource.set(source, [...(bySource.get(source) || []), row]);
+                }
+                const sources:any = {};
+                for (const [source, list] of [...bySource.entries()].sort((a,b)=>a[0].localeCompare(b[0]))) {
+                  const depths = list.map((row:any) => rankedCatalogImageUrls(row).length);
+                  const sparse = list.filter((row:any) => rankedCatalogImageUrls(row).length < 5);
+                  const hostCounts:Record<string,number> = {};
+                  for (const row of list) {
+                    for (const image of (row.images || [])) {
+                      try {
+                        const host = new URL(String(image.url || ""), "https://catalog.local").hostname || "relative";
+                        hostCounts[host] = Number(hostCounts[host] || 0) + 1;
+                      } catch {}
+                    }
+                  }
+                  sources[source] = {
+                    count: list.length,
+                    below5: sparse.length,
+                    below5Pct: list.length ? Number((sparse.length * 100 / list.length).toFixed(2)) : 0,
+                    zero: depths.filter((n:number)=>n===0).length,
+                    one: depths.filter((n:number)=>n===1).length,
+                    twoToFour: depths.filter((n:number)=>n>=2 && n<=4).length,
+                    min: depths.length ? Math.min(...depths) : 0,
+                    max: depths.length ? Math.max(...depths) : 0,
+                    avg: depths.length ? Number((depths.reduce((a:number,b:number)=>a+b,0)/depths.length).toFixed(2)) : 0,
+                    imageHosts: Object.fromEntries(Object.entries(hostCounts).sort((a:any,b:any)=>b[1]-a[1]).slice(0,8)),
+                    sparseSamples: sparse.slice(0,5).map((row:any) => ({
+                      id: row.id,
+                      sourceOfferId: row.sourceOfferId,
+                      make: row.make,
+                      model: row.model,
+                      year: row.year,
+                      imageCount: rankedCatalogImageUrls(row).length,
+                      rawImageCount: Array.isArray(row.images) ? row.images.length : 0,
+                      sourceUrl: row.operational?.sourceUrl,
+                      firstImages: (row.images || []).slice(0,4).map((image:any)=>image.url),
+                      rawKeys: Object.keys(row.operational?.raw || {}).sort().slice(0,80),
+                    })),
+                  };
+                }
+                result[market] = {
+                  count: rows.length,
+                  below5: rows.filter((row:any)=>rankedCatalogImageUrls(row).length < 5).length,
+                  sources,
+                };
+              }
+              console.log(JSON.stringify(result, null, 2));
+            })().catch((error) => { console.error(error); process.exit(1); });
+          '
