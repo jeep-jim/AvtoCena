@@ -1,0 +1,28 @@
+name: Audit Georgia adapters on Yandex
+
+on:
+  push:
+    branches:
+      - audit/georgia-adapters-yandex-result-20260812
+    paths:
+      - .github/workflows/audit-georgia-adapters-yandex-result-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch deployed adapter dry-run
+        shell: bash
+        run: |
+          set -euo pipefail
+          for i in 1 2 3 4 5; do
+            if curl --connect-timeout 10 --max-time 90 -fsS 'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' -o /tmp/result.json; then
+              cat /tmp/result.json | jq .
+              exit 0
+            fi
+            sleep 8
+          done
+          exit 1
