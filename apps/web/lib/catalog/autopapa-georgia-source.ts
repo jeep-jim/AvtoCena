@@ -260,16 +260,19 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational?.raw as { images?: string[]; parsed?: AutoPapaGeorgiaRow } | undefined;
+    const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     let urls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])];
     const detailUrl = String(offer.operational?.sourceUrl || raw?.parsed?.detailUrl || "");
     if (detailUrl) {
       const detail = await request(detailUrl).catch(() => null);
       if (detail) {
         const facts = enrichAutoPapaOfferFromExactDetail(offer, detail.markup, detail.response.url || detailUrl);
-        if (facts) urls = [...new Set([...urls, ...facts.originals])];
+        if (facts) {
+          if (facts.originals.length) urls = facts.originals;
+          if ((offer.images || []).length >= limit) return offer.images.slice(0, limit);
+        }
       }
     }
-    const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit)) {
       const image = await cacheImageFromUrl(url, "georgia", { headers: HEADERS }).catch(() => null);
