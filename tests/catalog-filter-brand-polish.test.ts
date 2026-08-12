@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
-// Regression guards for the compact catalog filtering UI and its catalog-only brand multiselect.
+// Final regression guards for the compact catalog filtering UI and its catalog-only brand multiselect.
 const filters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");
 const brandSelect = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogBrandMultiSelect.tsx", import.meta.url), "utf8");
 const rail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
