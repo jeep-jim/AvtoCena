@@ -1,0 +1,64 @@
+name: Audit vehicle knowledge storage 20260812
+
+on:
+  push:
+    branches: [audit/georgia-power-coverage-20260812]
+    paths:
+      - ".github/workflows/audit-vehicle-knowledge-storage-20260812.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect vehicle knowledge object storage without writes
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          const dataModule = await import('./apps/web/lib/data.ts');
+          const data = dataModule.default || dataModule;
+          const store = data.getJsonStorage();
+          const [modelsIndex, variantsIndex, objects, models, variants] = await Promise.all([
+            store.readJsonWithMeta('catalog/vehicle-knowledge/models-index.json', null),
+            store.readJsonWithMeta('catalog/vehicle-knowledge/variants-index.json', null),
+            store.listObjects ? store.listObjects('catalog/vehicle-knowledge') : Promise.resolve([]),
+            data.readChunkedDataJson('catalog/vehicle-knowledge/models.json', []),
+            data.readChunkedDataJson('catalog/vehicle-knowledge/variants.json', []),
+          ]);
+          const report = {
+            checkedAt: new Date().toISOString(),
+            driver: store.driver,
+            modelsIndex: { found: modelsIndex.found, etag: modelsIndex.etag || null, value: modelsIndex.value },
+            variantsIndex: { found: variantsIndex.found, etag: variantsIndex.etag || null, value: variantsIndex.value },
+            objectCount: objects.length,
+            objectKeys: objects.map((row) => ({ key: row.key, size: row.size, lastModified: row.lastModified })).slice(0, 250),
+            resolvedCounts: { models: models.length, variants: variants.length },
+          };
+          await fs.writeFile('vehicle-knowledge-storage.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vehicle-knowledge-storage
+          path: vehicle-knowledge-storage.json
+          retention-days: 3
