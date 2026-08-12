@@ -55,3 +55,58 @@ jobs:
                   start = idx + len(needle)
                   shown += 1
           PY
+      - name: Verify exact MyAuto large gallery URLs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, struct, urllib.request
+          proof = json.load(open("/tmp/proof.json", encoding="utf-8"))
+          car = proof["myauto"]
+          car_id = str(car["id"])
+          photo = str(car["photo"])
+          version = int(car["photoVer"])
+          count = min(30, int(car["picNumber"]))
+          def jpeg_size(data):
+              if len(data) < 4 or data[:2] != b"\xff\xd8":
+                  return None
+              i = 2
+              while i + 9 < len(data):
+                  if data[i] != 0xFF:
+                      i += 1
+                      continue
+                  marker = data[i + 1]
+                  i += 2
+                  if marker in (0xD8, 0xD9):
+                      continue
+                  if i + 2 > len(data):
+                      break
+                  length = int.from_bytes(data[i:i+2], "big")
+                  if length < 2 or i + length > len(data):
+                      break
+                  if marker in list(range(0xC0, 0xC4)) + list(range(0xC5, 0xC8)) + list(range(0xC9, 0xCC)) + list(range(0xCD, 0xD0)):
+                      h = int.from_bytes(data[i+3:i+5], "big")
+                      w = int.from_bytes(data[i+5:i+7], "big")
+                      return [w, h]
+                  i += length
+              return None
+          results = []
+          for index in range(1, count + 1):
+              url = f"https://static.tnet.ge/myauto/photos/{photo}/large/{car_id}_{index}.jpg?v={version}"
+              request = urllib.request.Request(url, headers={"Referer": car["detailUrl"], "User-Agent": "Mozilla/5.0"})
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      data = response.read()
+                      results.append({
+                          "index": index,
+                          "url": url,
+                          "status": response.status,
+                          "contentType": response.headers.get("content-type"),
+                          "bytes": len(data),
+                          "sha256": hashlib.sha256(data).hexdigest(),
+                          "dimensions": jpeg_size(data),
+                      })
+              except Exception as exc:
+                  results.append({"index": index, "url": url, "error": str(exc)})
+          print(json.dumps({"id": car_id, "expected": count, "results": results}, indent=2))
+          PY
