@@ -1,0 +1,37 @@
+name: Sync catalog filter follow-up with latest main
+on:
+  push:
+    branches:
+      - ui/catalog-filter-followup-20260812
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/catalog-filter-followup-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Merge latest main and validate
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit origin/main
+          git checkout origin/main -- apps/web/tsconfig.tsbuildinfo
+          npx tsx --test tests/catalog-filter-followup.test.ts
+          npx tsc -p apps/web/tsconfig.json --noEmit
+          git checkout origin/main -- apps/web/tsconfig.tsbuildinfo
+          git diff --check
+      - name: Remove one-shot workflow and push
+        run: |
+          rm .github/workflows/sync-catalog-filter-followup-main-20260812.yml
+          git add -A
+          if ! git diff --cached --quiet; then git commit -m 'Sync catalog filter follow-up with latest main'; fi
+          git push origin HEAD:ui/catalog-filter-followup-20260812
