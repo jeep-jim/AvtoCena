@@ -41,7 +41,6 @@ import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
-import { autoGeorgiaStrictSource } from "./auto-georgia-strict-source";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
 import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
@@ -85,7 +84,6 @@ const completeSources = [
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
-  prepareSource(autoGeorgiaStrictSource),
   prepareSource(mashinaKyrgyzstanListSource),
   prepareSource(carvectorJapanCurrentSource),
   guaziChinaExactSource,
