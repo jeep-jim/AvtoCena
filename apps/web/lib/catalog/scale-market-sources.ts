@@ -95,11 +95,9 @@ const configs: OpenMarketSourceConfig[] = [
     label: "AutoPapa Georgia",
     baseUrl: "https://autopapa.ge",
     currency: "USD",
-    detailPattern: /\/(?:en\/)?(?:car|vehicle|auto)\/[^?#]*\d+|\/detail\/\d+/i,
+    detailPattern: /\/en\/usd\/[^/?#]+\/[^/?#]+\/\d+(?:[/?#]|$)/i,
     listUrls: (page) => [
-      pageQuery("https://autopapa.ge/en/search", page),
-      pageQuery("https://autopapa.ge/en/cars", page),
-      pageQuery("https://autopapa.ge/search", page),
+      pageQuery("https://autopapa.ge/en/usd/search", page),
     ],
   },
 
