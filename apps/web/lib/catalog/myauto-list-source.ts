@@ -3,15 +3,14 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const HEADERS = {
-  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  // These intentionally match the minimal browser-like request that the deployed
+  // Yandex runtime can use against MyAuto. Extra sec-fetch navigation headers
+  // currently trigger Cloudflare while this exact public page remains HTTP 200.
+  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
   "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
   "cache-control": "no-cache",
   pragma: "no-cache",
-  referer: "https://www.myauto.ge/en/main",
-  "sec-fetch-dest": "document",
-  "sec-fetch-mode": "navigate",
-  "sec-fetch-site": "same-origin",
-  "upgrade-insecure-requests": "1",
+  referer: "https://www.myauto.ge/",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
@@ -79,6 +78,12 @@ function meaningfulAnchorTitle(inner: string) {
 function isDetailHref(value: string) {
   try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }
 }
+function isSaleDetailHref(value: string) {
+  try {
+    const path = new URL(value).pathname;
+    return isDetailHref(value) && !/\/for-rent(?:-|\/)/i.test(path);
+  } catch { return false; }
+}
 
 export function buildMyAutoListUrls(page: number) {
   const safePage = Math.max(1, Math.floor(Number(page) || 1));
@@ -114,6 +119,7 @@ export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAut
   const rows: MyAutoListRow[] = [];
   for (let index = 0; index < entries.length; index++) {
     const [id, entry] = entries[index];
+    if (!isSaleDetailHref(entry.href)) continue;
     const nextIndex = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 12_000);
     const card = markup.slice(entry.index, Math.max(entry.index + 1, nextIndex));
     const text = plainText(card);
