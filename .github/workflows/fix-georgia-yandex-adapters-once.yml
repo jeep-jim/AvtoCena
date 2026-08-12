@@ -18,27 +18,58 @@ jobs:
         with:
           ref: fix/georgia-yandex-canonical-adapters-20260812
           fetch-depth: 0
-      - name: Patch MyAuto request fingerprint to verified Yandex egress
+      - name: Patch AutoPapa to observed current canonical route shape
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          path = Path('apps/web/lib/catalog/myauto-list-source.ts')
+          path = Path('apps/web/lib/catalog/scale-market-sources.ts')
           s = path.read_text()
-          start = s.index('const HEADERS = {')
-          end = s.index('\n};', start) + 3
-          new = 'const HEADERS = {\n  // Verified from the deployed Yandex Serverless egress. Extra navigation/cache headers\n  // trigger MyAuto Cloudflare 403 from the same runtime.\n  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",\n  "accept-language": "en-US,en;q=0.9,ka;q=0.8",\n  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",\n};'
-          path.write_text(s[:start] + new + s[end:])
+          old = '''    detailPattern: /\\/(?:en\\/)?(?:car|vehicle|auto)\\/[^?#]*\\d+|\\/detail\\/\\d+/i,
+    listUrls: (page) => [
+      pageQuery("https://autopapa.ge/en/search", page),
+      pageQuery("https://autopapa.ge/en/cars", page),
+      pageQuery("https://autopapa.ge/search", page),
+    ],'''
+          new = '''    detailPattern: /\\/en\\/usd\\/[^/?#]+\\/[^/?#]+\\/\\d+(?:[/?#]|$)/i,
+    listUrls: (page) => [
+      pageQuery("https://autopapa.ge/en/usd/search", page),
+      page <= 1 ? "https://autopapa.ge/en/usd" : pageQuery("https://autopapa.ge/en/usd/search", page),
+    ],'''
+          if old not in s:
+              raise SystemExit('stale AutoPapa config block not found')
+          path.write_text(s.replace(old, new, 1))
+
+          test_path = Path('tests/georgia-canonical-source-policy-20260812.test.ts')
+          t = test_path.read_text()
+          marker = 'import { SCALE_MARKET_SOURCE_IDS } from "../apps/web/lib/catalog/scale-market-sources";\n'
+          if 'node:fs' not in t:
+              t = t.replace('import test from "node:test";\n', 'import test from "node:test";\nimport fs from "node:fs";\n', 1)
+          if 'const scaleSourcesText' not in t:
+              t = t.replace(marker, marker + '\nconst scaleSourcesText = fs.readFileSync(new URL("../apps/web/lib/catalog/scale-market-sources.ts", import.meta.url), "utf8");\n', 1)
+          anchor = 'test("Georgia canonical quality permanently rejects non-company sources", () => {'
+          current_test = '''test("AutoPapa uses the observed canonical USD listing and detail routes", () => {
+  assert.match(scaleSourcesText, /https:\\/\\/autopapa\\.ge\\/en\\/usd\\/search/);
+  assert.match(scaleSourcesText, /detailPattern: \/\\\\\\/en\\\\\\/usd/);
+  assert.doesNotMatch(scaleSourcesText, /https:\\/\\/autopapa\\.ge\\/en\\/search/);
+});
+
+'''
+          if current_test not in t:
+              if anchor not in t:
+                  raise SystemExit('test insertion anchor not found')
+              t = t.replace(anchor, current_test + anchor, 1)
+          test_path.write_text(t)
           PY
       - name: Focused tests
         run: |
           npm ci
-          node --import tsx --test tests/myauto-list-source.test.ts tests/georgia-canonical-source-policy-20260812.test.ts
+          node --import tsx --test tests/myauto-list-source.test.ts tests/georgia-canonical-source-policy-20260812.test.ts tests/catalog-source-scale.test.ts
       - name: Commit branch
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add apps/web/lib/catalog/myauto-list-source.ts
+          git add apps/web/lib/catalog/scale-market-sources.ts tests/georgia-canonical-source-policy-20260812.test.ts
           git diff --cached --check
-          git commit -m 'fix(georgia): use verified MyAuto Yandex request headers'
+          git commit -m 'fix(georgia): follow current AutoPapa canonical routes'
           git push origin HEAD:fix/georgia-yandex-canonical-adapters-20260812
