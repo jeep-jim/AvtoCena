@@ -119,7 +119,7 @@ function ensureCatalogFilterLayoutPolish() {
         .ac-mobile-filter-sheet .ac-mobile-secondary-grid .ac-filter-control{min-width:0!important;padding-left:11px!important;padding-right:11px!important;font-size:12px!important}
         .ac-mobile-filter-sheet .ac-mobile-secondary-grid>.ac-mobile-secondary-span{grid-column:1/-1!important}
         .ac-mobile-filter-sheet .ac-mobile-eyebrow-hidden{display:none!important}
-        .ac-mobile-filter-sheet .ac-filter-clear--mobile{margin-left:auto!important;margin-right:24px!important}
+        .ac-mobile-filter-sheet.ac-mobile-filter-sheet.ac-mobile-filter-sheet .ac-filter-clear--mobile{margin-left:auto!important;margin-right:24px!important}
         .ac-filter-more-button>.ac-filter-tray-main{display:inline-flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
         .ac-filter-more-button>.ac-filter-tray-main>svg{width:20px!important;height:20px!important;flex:0 0 20px!important}
         .ac-filter-more-button>.ac-filter-tray-clear{order:5!important;margin-left:auto!important;margin-right:0!important}
@@ -192,17 +192,19 @@ function useCatalogFilterDependentUi() {
         applyDependentFacetOptions(null);
         return;
       }
-      facetController = new AbortController();
+      const controller = new AbortController();
+      facetController = controller;
       const request = new URLSearchParams(params);
       request.set("scope", "facets");
-      fetch(`/api/catalog/models?${request.toString()}`, { cache: "no-store", signal: facetController.signal })
+      fetch(`/api/catalog/models?${request.toString()}`, { cache: "no-store", signal: controller.signal })
         .then((response) => response.ok ? response.json() : Promise.reject(new Error(`facets_http_${response.status}`)))
         .then((payload) => {
+          if (controller.signal.aborted) return;
           facets = payload?.facets || null;
           applyDependentFacetOptions(facets);
         })
         .catch(() => {
-          if (!facetController?.signal.aborted) {
+          if (!controller.signal.aborted) {
             facets = null;
             applyDependentFacetOptions(null);
           }
