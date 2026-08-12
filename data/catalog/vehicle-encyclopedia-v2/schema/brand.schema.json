@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avtocena.com/schema/vehicle-encyclopedia-v2/brand.schema.json",
+  "title": "AvtoCena Vehicle Encyclopedia V2 Brand",
+  "type": "object",
+  "required": ["schemaVersion", "canonicalMake", "brandSlug", "status", "models", "sources", "updatedAt"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "canonicalMake": { "type": "string", "minLength": 1 },
+    "brandSlug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "makeAliases": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "countries": { "type": "array", "items": { "type": "string", "minLength": 2 }, "uniqueItems": true },
+    "regions": { "type": "array", "items": { "type": "string", "minLength": 2 }, "uniqueItems": true },
+    "status": { "enum": ["seed", "researching", "review", "complete", "blocked"] },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "targetYearFrom": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+        "targetYearTo": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+        "modelsExpected": { "type": ["integer", "null"], "minimum": 0 },
+        "modelsDocumented": { "type": "integer", "minimum": 0 },
+        "variantsDocumented": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/model" }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "researchNotes": { "type": "array", "items": { "type": "string" } },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["id", "type", "url", "accessedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["manufacturer", "manufacturer_archive", "government_registry", "type_approval", "homologation", "official_safety", "official_efficiency", "licensed_open_dataset", "authoritative_catalog", "secondary_reference"] },
+        "title": { "type": "string" },
+        "publisher": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "market": { "type": "string" },
+        "language": { "type": "string" },
+        "documentDate": { "type": ["string", "null"] },
+        "accessedAt": { "type": "string", "format": "date-time" },
+        "license": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["sourceId", "fields"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "fields": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+    "localizedName": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "market": { "type": ["string", "null"] },
+        "language": { "type": ["string", "null"] },
+        "yearFrom": { "type": ["integer", "null"] },
+        "yearTo": { "type": ["integer", "null"] },
+        "sourceIds": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["id", "canonicalModel", "aliases", "generations", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "canonicalModel": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "sourceNames": { "type": "array", "items": { "$ref": "#/$defs/localizedName" } },
+        "yearFrom": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "yearTo": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "bodyTypes": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "countries": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "regions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "rebadges": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "generations": { "type": "array", "items": { "$ref": "#/$defs/generation" } },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "required": ["id", "name", "aliases", "variants", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "name": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "platformCodes": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "yearFrom": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "yearTo": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "productionFrom": { "type": ["string", "null"] },
+        "productionTo": { "type": ["string", "null"] },
+        "bodyTypes": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "steeringPositions": { "type": "array", "items": { "enum": ["left", "right", "both", "unknown"] }, "uniqueItems": true },
+        "variants": { "type": "array", "items": { "$ref": "#/$defs/variant" } },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "required": ["id", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "trimNames": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "market": { "type": ["string", "null"] },
+        "yearFrom": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "yearTo": { "type": ["integer", "null"], "minimum": 1880, "maximum": 2100 },
+        "productionFrom": { "type": ["string", "null"] },
+        "productionTo": { "type": ["string", "null"] },
+        "engineCode": { "type": ["string", "null"] },
+        "engineCc": { "type": ["number", "null"], "minimum": 0, "maximum": 20000 },
+        "cylinders": { "type": ["integer", "null"], "minimum": 0, "maximum": 24 },
+        "induction": { "type": ["string", "null"] },
+        "fuel": { "type": ["string", "null"] },
+        "powertrainKind": { "type": ["string", "null"] },
+        "transmission": { "type": ["string", "null"] },
+        "transmissionSpeeds": { "type": ["integer", "null"], "minimum": 0, "maximum": 20 },
+        "drive": { "type": ["string", "null"] },
+        "bodyType": { "type": ["string", "null"] },
+        "steeringPosition": { "enum": ["left", "right", "both", "unknown", null] },
+        "doors": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "seats": { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
+        "powerHp": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "powerKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "icePowerKw": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "motorPeakKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "power30MinKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "power30MinKwByMotor": { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 2000 } },
+        "utilizationPowerKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "batteryKwh": { "type": ["number", "null"], "minimum": 0, "maximum": 500 },
+        "rangeKm": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "rangeStandard": { "type": ["string", "null"] },
+        "dcChargeKw": { "type": ["number", "null"], "minimum": 0, "maximum": 1500 },
+        "lengthMm": { "type": ["number", "null"], "minimum": 500, "maximum": 30000 },
+        "widthMm": { "type": ["number", "null"], "minimum": 500, "maximum": 10000 },
+        "heightMm": { "type": ["number", "null"], "minimum": 500, "maximum": 10000 },
+        "wheelbaseMm": { "type": ["number", "null"], "minimum": 500, "maximum": 20000 },
+        "curbWeightKg": { "type": ["number", "null"], "minimum": 100, "maximum": 20000 },
+        "grossWeightKg": { "type": ["number", "null"], "minimum": 100, "maximum": 30000 },
+        "groundClearanceMm": { "type": ["number", "null"], "minimum": 0, "maximum": 2000 },
+        "fuelTankL": { "type": ["number", "null"], "minimum": 0, "maximum": 1000 },
+        "zeroTo100Sec": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "topSpeedKmh": { "type": ["number", "null"], "minimum": 0, "maximum": 1000 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
