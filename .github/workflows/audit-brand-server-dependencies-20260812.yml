@@ -42,15 +42,17 @@ jobs:
             console.log(JSON.stringify({ label, ms: Math.round(ms * 10) / 10, size }));
             return value;
           };
-          const storage = await import(process.cwd() + '/apps/web/lib/catalog/storage.ts');
-          const knowledge = await import(process.cwd() + '/apps/web/lib/catalog/vehicle-knowledge.ts');
-          const power = await import(process.cwd() + '/apps/web/lib/catalog/power-knowledge.ts');
-          const directory = await import(process.cwd() + '/apps/web/lib/catalog/model-directory.ts');
-          await time('brandModelCounts BMW cold', () => storage.readCatalogBrandModelCounts('BMW'));
-          await time('knowledgeModels cold', () => knowledge.readVehicleKnowledgeModels());
-          await time('knowledgeVariants cold', () => knowledge.readVehicleKnowledgeVariants());
-          await time('powerKnowledge cold', () => power.readVehiclePowerKnowledge());
-          await time('brandDirectory BMW warm-deps', () => directory.readBrandModelDirectory('BMW'));
-          await time('brandDirectory Audi warm-deps', () => directory.readBrandModelDirectory('Audi'));
+          (async () => {
+            const storage = await import(process.cwd() + '/apps/web/lib/catalog/storage.ts');
+            const knowledge = await import(process.cwd() + '/apps/web/lib/catalog/vehicle-knowledge.ts');
+            const power = await import(process.cwd() + '/apps/web/lib/catalog/power-knowledge.ts');
+            const directory = await import(process.cwd() + '/apps/web/lib/catalog/model-directory.ts');
+            await time('brandModelCounts BMW cold', () => storage.readCatalogBrandModelCounts('BMW'));
+            await time('knowledgeModels cold', () => knowledge.readVehicleKnowledgeModels());
+            await time('knowledgeVariants cold', () => knowledge.readVehicleKnowledgeVariants());
+            await time('powerKnowledge cold', () => power.readVehiclePowerKnowledge());
+            await time('brandDirectory BMW warm-deps', () => directory.readBrandModelDirectory('BMW'));
+            await time('brandDirectory Audi warm-deps', () => directory.readBrandModelDirectory('Audi'));
+          })().catch((error) => { console.error(error); process.exit(1); });
           TS
           npx tsx /tmp/audit-brand-deps.ts
