@@ -1,0 +1,19 @@
+name: Audit Georgia current link shapes
+
+on:
+  push:
+    branches:
+      - audit/georgia-link-shape-result-20260812
+    paths:
+      - .github/workflows/audit-georgia-link-shape-result-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch deployed fixed-route diagnostic
+        run: |
+          curl --connect-timeout 10 --max-time 90 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' | jq .
