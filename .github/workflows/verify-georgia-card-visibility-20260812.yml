@@ -1,0 +1,37 @@
+name: Verify Georgia cards after DTO fix once
+
+on:
+  push:
+    branches:
+      - ops/verify-georgia-card-visibility-20260812
+    paths:
+      - .github/workflows/verify-georgia-card-visibility-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch uncached Georgia catalog HTML
+        run: |
+          set -euo pipefail
+          url="https://avtocena.com/cars?market=georgia&verify=42c787e80a8ddb0f"
+          curl --connect-timeout 10 --max-time 60 -fsS -H 'cache-control: no-cache' "$url" -o georgia.html
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const html = fs.readFileSync('georgia.html', 'utf8');
+          const articleCount = (html.match(/<article\b/gi) || []).length;
+          const hiddenEmptyState = html.includes('Подходящих предложений сейчас нет.');
+          const countMatch = html.match(/Грузия[\s\S]{0,200}?[·•]\s*(\d+)/i);
+          console.log(JSON.stringify({bytes:Buffer.byteLength(html), articleCount, hiddenEmptyState, headingCount:countMatch?.[1] || null}));
+          if (articleCount < 2 || hiddenEmptyState) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-card-visibility-html
+          path: georgia.html
+          retention-days: 1
