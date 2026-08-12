@@ -1,0 +1,49 @@
+name: Audit stale Palisade projection
+run-name: Stale Palisade projection audit · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/stale-palisade-projection-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Compare current alias, immutable generation and public search
+        run: |
+          npx tsx -e '
+            import { readDataJson } from "./apps/web/lib/data.ts";
+            import { searchOffers, readMarketOffers } from "./apps/web/lib/catalog/storage.ts";
+            const manifest:any = await readDataJson("catalog/manifest.json", {generationId:"",markets:{}});
+            const current:any = await readDataJson("catalog/public/projection/korea.json", {generationId:"",items:[]});
+            const gen:any = await readDataJson(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {generationId:"",items:[]});
+            const match=(row:any)=>/palisade/i.test(`${row.make||""} ${row.model||""} ${row.trim||""}`) && Number(row.year||0)===2026 && Number(row.mileageKm||0)===17780;
+            const currentMatches=(current.items||[]).filter(match);
+            const generationMatches=(gen.items||[]).filter(match);
+            const market=(await readMarketOffers("korea")).filter(match);
+            const search=await searchOffers({market:"korea",make:"Hyundai",model:"Palisade",yearFrom:2026,yearTo:2026,page:1,pageSize:48});
+            const searchMatches=(search.items||[]).filter((row:any)=>Number(row.mileageKm||0)===17780);
+            console.log(JSON.stringify({manifestGeneration:manifest.generationId,currentGeneration:current.generationId,generationProjection:gen.generationId,currentMatches,generationMatches,marketMatches:market.map((x:any)=>({id:x.id,sourceId:x.sourceId,sourceOfferId:x.sourceOfferId,totalRub:x.totalRub,sourcePrice:x.sourcePrice,advertisementType:x.operational?.raw?.advertisementType})),searchGeneration:search.generationId,searchMatches},null,2));
+          '
