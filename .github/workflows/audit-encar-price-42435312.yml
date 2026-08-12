@@ -1,0 +1,69 @@
+name: Audit Encar rental price 42435312
+
+on:
+  push:
+    branches:
+      - audit/encar-rental-price-42435312-20260812
+    paths:
+      - .github/workflows/audit-encar-price-42435312.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Inspect exact Encar detail and visible page price/rental fields
+        shell: bash
+        run: |
+          node <<'NODE'
+          const id = '42435312';
+          const headers = {
+            accept: 'application/json, text/plain, */*',
+            'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+            origin: 'https://fem.encar.com',
+            referer: 'https://fem.encar.com/',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36',
+          };
+          const detailUrl = `https://api.encar.com/v1/readside/vehicle/${id}`;
+          const pageUrl = `https://fem.encar.com/cars/detail/${id}`;
+          const detailRes = await fetch(detailUrl, {headers});
+          const detailText = await detailRes.text();
+          console.log('DETAIL_HTTP', detailRes.status, detailRes.headers.get('content-type'), 'bytes', detailText.length);
+          if (!detailRes.ok) throw new Error(`detail_http_${detailRes.status}`);
+          const json = JSON.parse(detailText);
+          const keyRe = /(price|rent|lease|month|acqui|deposit|payment|finance|잔존|인수가|렌트|리스|월|가격|금액|보증금)/i;
+          const valueRe = /(렌트|리스|월\s*\d|인수가|차량가격|가격|rent|lease|monthly|acquisition|deposit|payment)/i;
+          const hits = [];
+          function walk(v, path = '$', depth = 0) {
+            if (depth > 14 || v == null) return;
+            if (Array.isArray(v)) return v.forEach((x,i)=>walk(x, `${path}[${i}]`, depth+1));
+            if (typeof v !== 'object') return;
+            for (const [k,val] of Object.entries(v)) {
+              const p = `${path}.${k}`;
+              const printable = typeof val === 'string' || typeof val === 'number' || typeof val === 'boolean';
+              if ((keyRe.test(k) && printable) || (typeof val === 'string' && valueRe.test(val))) hits.push([p,val]);
+              walk(val,p,depth+1);
+            }
+          }
+          walk(json);
+          console.log('DETAIL_MATCHES');
+          for (const [p,v] of hits.slice(0,250)) console.log(JSON.stringify({path:p,value:v}));
+          const pageRes = await fetch(pageUrl, {headers:{...headers,accept:'text/html,application/xhtml+xml'}});
+          const page = await pageRes.text();
+          console.log('PAGE_HTTP', pageRes.status, pageRes.headers.get('content-type'), 'bytes', page.length);
+          const snippets = [];
+          for (const term of ['렌트','리스','인수가','차량가격','월','price','rent','lease']) {
+            let start = 0;
+            while (snippets.length < 120) {
+              const i = page.toLowerCase().indexOf(term.toLowerCase(), start);
+              if (i < 0) break;
+              snippets.push(page.slice(Math.max(0,i-180), Math.min(page.length,i+320)).replace(/\s+/g,' '));
+              start = i + term.length;
+            }
+          }
+          console.log('PAGE_SNIPPETS');
+          [...new Set(snippets)].slice(0,120).forEach((s)=>console.log(s));
+          NODE
