@@ -17,14 +17,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --max-time 180 \
+          curl --fail --silent --show-error --max-time 240 \
             -H 'accept: application/json' \
-            'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&pages=2' > /tmp/recovery.json
+            'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&pages=4' > /tmp/recovery.json
           jq '{
             market,
             count,
             partial,
             report,
+            sourceCounts: (.report.sourceCounts // {}),
+            rejections: (.report.rejected // {}),
+            imageStats: (.report.imageStats // {}),
+            byPowertrain: ([.offers[]?.powertrainKind] | group_by(.) | map({key: .[0], value: length}) | from_entries),
             offers: [.offers[]? | {
               sourceId,
               sourceOfferId,
@@ -36,8 +40,6 @@ jobs:
               engineCc,
               powerHp,
               imageCount: (.images|length),
-              firstImage: (.images[0].url // null),
-              lastImage: (.images[-1].url // null),
               totalRub,
               calculationStatus,
               powertrainKind,
