@@ -34,8 +34,8 @@ test("Yandex diagnostic route exposes recovery only as explicit no-store GET mod
 
 
 test("Georgia recovery supports bounded AutoPapa page ranges and honest preliminary pricing", () => {
-  assert.match(recovery, /Math\.min\(20, Math\.floor\(pagesPerSource\)\)/);
-  assert.match(recovery, /Math\.min\(10_000, Math\.floor\(startPage\)\)/);
+  assert.match(recovery, /boundedInteger\(pagesPerSource, 2, 20\)/);
+  assert.match(recovery, /boundedInteger\(startPage, 1, 10_000\)/);
   assert.match(recovery, /selectedSource === "myauto"/);
   assert.match(recovery, /selectedSource === "autopapa"/);
   assert.match(recovery, /collectPages\(autoPapaGeorgiaSource, pages, firstPage\)/);
