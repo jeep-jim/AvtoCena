@@ -22,7 +22,157 @@ function compactRangeCopy() {
   });
 
   document.querySelectorAll<HTMLElement>(".ac-mobile-filter-sheet .ac-range-card > div:first-child > div:first-child > div:first-child").forEach((title) => {
-    if ((title.textContent || "").trim() === "Объём двигателя") title.textContent = "Объём";
+    const plain = (title.textContent || "").trim();
+    if (plain === "Объём двигателя") title.textContent = "Объём";
+  });
+}
+
+function rangeIconMarkup(title: string) {
+  if (/^год$/i.test(title)) {
+    return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2v3M17 2v3M4 8h16M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+  }
+  if (/^цена$/i.test(title)) {
+    return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="M9 7.8h4.1a3 3 0 1 1 0 6H9m0-3.1h6M10.2 13.8V18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  }
+  if (/^пробег$/i.test(title)) {
+    return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 17a7 7 0 1 1 14 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M12 17l3.4-4.1M6.5 17h11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>`;
+  }
+  return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 8h12l2 3v6H5V8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 11h3M19 12h3M8 5v3M15 5v3M8 17v2M16 17v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+}
+
+function decorateRangeControls() {
+  document.querySelectorAll<HTMLElement>(".ac-catalog-filter-panel .ac-range-card, .ac-mobile-filter-sheet .ac-range-card").forEach((card) => {
+    const title = card.querySelector<HTMLElement>(":scope > div:first-child > div:first-child > div:first-child");
+    if (!title) return;
+    const plainTitle = (title.dataset.acRangeTitle || title.textContent || "").trim();
+    if (!plainTitle) return;
+    title.dataset.acRangeTitle = plainTitle;
+    title.classList.add("ac-range-title-with-icon");
+    if (!title.querySelector(":scope > .ac-range-title-icon")) {
+      const icon = document.createElement("span");
+      icon.className = "ac-range-title-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = rangeIconMarkup(plainTitle);
+      title.prepend(icon);
+    }
+
+    const presetRow = card.querySelector<HTMLElement>(":scope > div:nth-child(3)");
+    const presetButtons = presetRow ? Array.from(presetRow.querySelectorAll<HTMLButtonElement>("button.ac-range-preset")) : [];
+    if (!presetButtons.length || card.querySelector(":scope > .ac-range-preset-select-wrap")) return;
+
+    const wrap = document.createElement("label");
+    wrap.className = "ac-range-preset-select-wrap";
+    wrap.setAttribute("aria-label", `Быстрые значения: ${plainTitle}`);
+    const select = document.createElement("select");
+    select.className = "ac-range-preset-select";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Быстро";
+    select.appendChild(placeholder);
+    presetButtons.forEach((button, index) => {
+      const option = document.createElement("option");
+      option.value = String(index);
+      option.textContent = (button.textContent || "").trim();
+      select.appendChild(option);
+    });
+    select.addEventListener("change", () => {
+      const index = Number(select.value);
+      if (Number.isInteger(index) && index >= 0 && presetButtons[index]) presetButtons[index].click();
+      select.value = "";
+    });
+    wrap.appendChild(select);
+    card.appendChild(wrap);
+  });
+}
+
+function clearCatalogFilters() {
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>(".ac-catalog-filter-panel .ac-filter-chip"));
+  buttons.forEach((button) => button.click());
+}
+
+function activeChipCount() {
+  return document.querySelectorAll(".ac-catalog-filter-panel .ac-filter-chip").length;
+}
+
+function makeClearButton(className: string) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `ac-filter-clear ${className}`;
+  button.textContent = "Очистить";
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    clearCatalogFilters();
+  });
+  return button;
+}
+
+function ensureClearControls() {
+  const chipCount = activeChipCount();
+  const desktop = document.querySelector<HTMLElement>(".ac-catalog-filter-panel");
+  if (desktop) {
+    let clear = desktop.querySelector<HTMLButtonElement>(":scope > .ac-filter-clear--desktop");
+    if (!clear) {
+      clear = makeClearButton("ac-filter-clear--desktop");
+      desktop.appendChild(clear);
+    }
+    clear.hidden = chipCount === 0;
+  }
+
+  const sheet = document.querySelector<HTMLElement>(".ac-mobile-filter-sheet");
+  if (sheet) {
+    const header = sheet.querySelector<HTMLElement>(":scope > div:first-child > div:nth-child(2)");
+    if (header) {
+      let clear = header.querySelector<HTMLButtonElement>(":scope > .ac-filter-clear--mobile");
+      if (!clear) {
+        clear = makeClearButton("ac-filter-clear--mobile");
+        header.insertBefore(clear, header.lastElementChild);
+      }
+      clear.hidden = chipCount === 0;
+    }
+  }
+
+  const tray = document.querySelector<HTMLElement>(".ac-filter-more-button");
+  if (tray) {
+    let clear = tray.querySelector<HTMLElement>(":scope > .ac-filter-tray-clear");
+    if (!clear) {
+      clear = document.createElement("span");
+      clear.className = "ac-filter-tray-clear";
+      clear.textContent = "Очистить";
+      clear.setAttribute("role", "button");
+      clear.tabIndex = 0;
+      const activate = (event: Event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        clearCatalogFilters();
+      };
+      clear.addEventListener("click", activate);
+      clear.addEventListener("keydown", (event) => {
+        const key = (event as KeyboardEvent).key;
+        if (key === "Enter" || key === " ") activate(event);
+      });
+      tray.insertBefore(clear, tray.lastElementChild);
+    }
+    clear.hidden = chipCount === 0;
+  }
+}
+
+function decorateCatalogCounts() {
+  document.querySelectorAll<HTMLElement>(".ac-catalog-page *").forEach((element) => {
+    if (element.dataset.acCountPulse === "1") return;
+    const ownText = Array.from(element.childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .map((node) => node.textContent || "")
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!/^(Найдено|Нашлось|Нашли)\s*:/i.test(ownText)) return;
+    const dot = document.createElement("span");
+    dot.className = "ac-catalog-count-pulse";
+    dot.setAttribute("aria-hidden", "true");
+    element.prepend(dot);
+    element.dataset.acCountPulse = "1";
+    element.classList.add("ac-catalog-count-with-pulse");
   });
 }
 
@@ -88,6 +238,9 @@ export function CatalogFilterUiEnhancer() {
     const refresh = () => {
       frame = 0;
       compactRangeCopy();
+      decorateRangeControls();
+      ensureClearControls();
+      decorateCatalogCounts();
       document.querySelectorAll<HTMLElement>(".ac-mobile-filter-sheet .ac-filter-dropdown").forEach(positionMobileDropdown);
     };
     const requestRefresh = () => {
