@@ -1,0 +1,91 @@
+name: Patch brand summary read model 20260812
+
+on:
+  push:
+    branches:
+      - perf/brand-summary-read-model-20260812
+    paths:
+      - .github/workflows/patch-brand-summary-read-model-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: perf/brand-summary-read-model-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply brand summary read-model patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def once(text, old, new, label):
+              n=text.count(old)
+              if n != 1: raise SystemExit(f'{label}: expected 1 match, got {n}')
+              return text.replace(old,new,1)
+
+          p=Path('apps/web/lib/catalog/storage.ts')
+          s=p.read_text()
+          s=once(s,
+            'export type CatalogSearchProjection = {\n',
+            'export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };\nexport type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };\nexport type CatalogSearchProjection = {\n',
+            'summary types')
+          s=once(s,
+            'const CURRENT_FACETS_PATH = "catalog/public/facets.json";\n',
+            'const CURRENT_FACETS_PATH = "catalog/public/facets.json";\nconst CURRENT_BRAND_SUMMARY_PATH = "catalog/public/brand-summary.json";\n',
+            'summary path')
+          anchor='function uniqueText(values: unknown[]) { return [...new Set(values.map(cleanFacet).filter(Boolean))]; }\n'
+          helper='''function uniqueText(values: unknown[]) { return [...new Set(values.map(cleanFacet).filter(Boolean))]; }\nexport function buildCatalogBrandSummary(generationId: string, rows: CatalogSearchProjection[]): CatalogBrandSummary {\n  const brands = new Map<string, { make: string; count: number; marketCounts: Record<string, number>; models: Map<string, CatalogBrandSummaryModel> }>();\n  for (const row of rows) {\n    const make = cleanFacet(row.make);\n    const model = cleanFacet(row.model);\n    if (!make) continue;\n    const brandKey = cleanShard(make);\n    const brand = brands.get(brandKey) || { make, count: 0, marketCounts: {}, models: new Map<string, CatalogBrandSummaryModel>() };\n    brand.count += 1;\n    if (row.market) brand.marketCounts[row.market] = (brand.marketCounts[row.market] || 0) + 1;\n    if (model) {\n      const modelKey = model.toLocaleLowerCase("ru-RU");\n      const current = brand.models.get(modelKey) || { model, count: 0, marketCounts: {} };\n      current.count += 1;\n      if (row.market) current.marketCounts[row.market] = (current.marketCounts[row.market] || 0) + 1;\n      brand.models.set(modelKey, current);\n    }\n    brands.set(brandKey, brand);\n  }\n  return {\n    generationId,\n    brands: Object.fromEntries([...brands.entries()]\n      .sort((a, b) => a[1].make.localeCompare(b[1].make, "ru"))\n      .map(([key, brand]) => [key, {\n        make: brand.make, count: brand.count, marketCounts: brand.marketCounts,\n        models: [...brand.models.values()].sort((a, b) => b.count - a.count || a.model.localeCompare(b.model, "ru")),\n      }])),\n  };\n}\n'''
+          s=once(s,anchor,helper,'summary builder')
+          s=once(s,
+            'let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;\n',
+            'let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;\nlet currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;\n',
+            'summary cache')
+          s=once(s,
+            '  currentFacetsCache = null;\n',
+            '  currentFacetsCache = null;\n  currentBrandSummaryCache = null;\n',
+            'summary reset')
+          read_anchor='''async function readCurrentFacets() {\n  const now = Date.now();\n  if (currentFacetsCache && currentFacetsCache.expiresAt > now) return currentFacetsCache.promise;\n  const promise = readDataJson<CatalogFacets>(CURRENT_FACETS_PATH, { generationId: "", makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] })\n    .catch((error) => { currentFacetsCache = null; throw error; });\n  currentFacetsCache = { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise };\n  return promise;\n}\n'''
+          read_new=read_anchor+'''async function readCurrentBrandSummary() {\n  const now = Date.now();\n  if (currentBrandSummaryCache && currentBrandSummaryCache.expiresAt > now) return currentBrandSummaryCache.promise;\n  const promise = readDataJson<CatalogBrandSummary>(CURRENT_BRAND_SUMMARY_PATH, { generationId: "", brands: {} })\n    .catch((error) => { currentBrandSummaryCache = null; throw error; });\n  currentBrandSummaryCache = { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise };\n  return promise;\n}\n'''
+          s=once(s,read_anchor,read_new,'summary reader')
+          old_counts='''export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {\n  const filters: CatalogSearchParams = { ...params, make: undefined };\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const modelKeys = await projectionModelKeys(filters);\n  const counts = new Map<string, number>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;\n    const make = cleanFacet(row.make);\n    if (!make) continue;\n    counts.set(make, (counts.get(make) || 0) + 1);\n  }\n  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };\n}\n\nexport async function readCatalogBrandModelCounts(make: string) {\n  const filters: CatalogSearchParams = { make };\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const models = new Map<string, { model: string; count: number; marketCounts: Record<string, number> }>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters)) continue;\n    const model = cleanFacet(row.model);\n    if (!model) continue;\n    const key = model.toLocaleLowerCase("ru-RU");\n    const current = models.get(key) || { model, count: 0, marketCounts: {} };\n    current.count += 1;\n    current.marketCounts[row.market] = (current.marketCounts[row.market] || 0) + 1;\n    models.set(key, current);\n  }\n  return { generationId, models: [...models.values()].sort((a, b) => b.count - a.count || a.model.localeCompare(b.model, "ru")) };\n}\n'''
+          new_counts='''export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {\n  const filters: CatalogSearchParams = { ...params, make: undefined };\n  const simpleSummaryQuery = !filters.model && !filters.hasPrice && !filters.budgetFrom && !filters.budgetTo\n    && !filters.yearFrom && !filters.yearTo && !filters.mileageFrom && !filters.mileageTo\n    && !filters.engineFrom && !filters.engineTo && !filters.powerFrom && !filters.powerTo\n    && !filters.fuel && !filters.bodyType && !filters.transmission && !filters.drive\n    && !filters.auctionGrade && !filters.auctionDateFrom && !filters.auctionDateTo;\n  if (simpleSummaryQuery) {\n    const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);\n    if (summary.generationId === manifest.generationId) {\n      const counts = Object.fromEntries(Object.values(summary.brands)\n        .map((brand) => [brand.make, filters.market && filters.market !== "any" ? Number(brand.marketCounts[filters.market] || 0) : brand.count])\n        .filter(([, count]) => Number(count) > 0)\n        .sort((a, b) => String(a[0]).localeCompare(String(b[0]), "ru")));\n      return { generationId: manifest.generationId, counts };\n    }\n  }\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const modelKeys = await projectionModelKeys(filters);\n  const counts = new Map<string, number>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;\n    const make = cleanFacet(row.make);\n    if (!make) continue;\n    counts.set(make, (counts.get(make) || 0) + 1);\n  }\n  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };\n}\n\nexport async function readCatalogBrandModelCounts(make: string) {\n  const [manifest, summary] = await Promise.all([readManifest(), readCurrentBrandSummary()]);\n  if (summary.generationId === manifest.generationId) {\n    const brand = summary.brands[cleanShard(make)];\n    if (brand) return { generationId: manifest.generationId, models: brand.models };\n  }\n  const filters: CatalogSearchParams = { make };\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const models = new Map<string, CatalogBrandSummaryModel>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters)) continue;\n    const model = cleanFacet(row.model);\n    if (!model) continue;\n    const key = model.toLocaleLowerCase("ru-RU");\n    const current = models.get(key) || { model, count: 0, marketCounts: {} };\n    current.count += 1;\n    current.marketCounts[row.market] = (current.marketCounts[row.market] || 0) + 1;\n    models.set(key, current);\n  }\n  return { generationId, models: [...models.values()].sort((a, b) => b.count - a.count || a.model.localeCompare(b.model, "ru")) };\n}\n'''
+          s=once(s,old_counts,new_counts,'summary reads')
+          old_write='''  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {\n'''
+          new_write='''  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);\n  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, buildCatalogBrandSummary(generationId, allProjectionItems), false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {\n'''
+          s=once(s,old_write,new_write,'rebuild summary write')
+          old_pub='''  await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);\n  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId: manifest.generationId, items: allProjectionItems }, false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>\n'''
+          new_pub='''  await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);\n  await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId: manifest.generationId, items: allProjectionItems }, false);\n  const brandSummary = buildCatalogBrandSummary(manifest.generationId, allProjectionItems);\n  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>\n'''
+          s=once(s,old_pub,new_pub,'publisher summary write')
+          s=once(s,
+            '    allProjectionCount: allProjectionItems.length,\n    offerShards: offersByShard.size,\n',
+            '    allProjectionCount: allProjectionItems.length,\n    brandSummaryCount: Object.keys(brandSummary.brands).length,\n    offerShards: offersByShard.size,\n',
+            'publisher summary report')
+          p.write_text(s)
+
+          test=Path('tests/catalog-brand-summary-read-model.test.ts')
+          test.write_text('''import assert from "node:assert/strict";\nimport test from "node:test";\nimport { buildCatalogBrandSummary } from "../apps/web/lib/catalog/storage";\n\ntest("brand summary aggregates make/model/market counts compactly", () => {\n  const summary = buildCatalogBrandSummary("gen_test", [\n    { id:"1", market:"europe", make:"BMW", model:"X3", year:2024 },\n    { id:"2", market:"korea", make:"BMW", model:"X3", year:2023 },\n    { id:"3", market:"europe", make:"BMW", model:"X5", year:2024 },\n    { id:"4", market:"europe", make:"Audi", model:"A4", year:2024 },\n  ] as any);\n  assert.equal(summary.generationId, "gen_test");\n  assert.equal(summary.brands.bmw.count, 3);\n  assert.deepEqual(summary.brands.bmw.marketCounts, { europe:2, korea:1 });\n  assert.deepEqual(summary.brands.bmw.models.map((x) => [x.model,x.count]), [["X3",2],["X5",1]]);\n  assert.equal(summary.brands.audi.count, 1);\n});\n''')
+          Path('.github/workflows/patch-brand-summary-read-model-20260812.yml').unlink()
+          PY
+      - name: Validate
+        run: |
+          node --import tsx --test tests/catalog-brand-summary-read-model.test.ts tests/catalog-filter-search.test.ts tests/catalog-brand-rail-ui.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Perf: add compact brand summary read model"
+          git push origin HEAD:perf/brand-summary-read-model-20260812
