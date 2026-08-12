@@ -1,0 +1,82 @@
+name: Audit Korea KG photo depth 20260812
+run-name: Read-only Korea KG photo depth · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/photo-depth-korea-kg-20260812
+    paths:
+      - ".github/workflows/audit-photo-depth-korea-kg-20260812.yml"
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Audit current public photo depth by source
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >/tmp/audit-photo-depth.ts <<'TS'
+          const storage = await import(process.cwd() + '/apps/web/lib/catalog/storage.ts');
+          const host = (raw: unknown) => {
+            try { return new URL(String(raw || '')).hostname; } catch { return ''; }
+          };
+          for (const market of ['korea','kyrgyzstan']) {
+            const rows = await storage.readMarketOffers(market);
+            const bySource = new Map<string, any>();
+            for (const offer of rows) {
+              const source = String(offer.sourceId || 'unknown');
+              const images = Array.isArray(offer.images) ? offer.images : [];
+              const stat = bySource.get(source) || { source, total:0, zero:0, below5:0, sum:0, min:999, max:0, samples:[] };
+              stat.total += 1;
+              stat.sum += images.length;
+              stat.min = Math.min(stat.min, images.length);
+              stat.max = Math.max(stat.max, images.length);
+              if (images.length === 0) stat.zero += 1;
+              if (images.length < 5) {
+                stat.below5 += 1;
+                if (stat.samples.length < 8) {
+                  stat.samples.push({
+                    id: offer.id,
+                    make: offer.make,
+                    model: offer.model,
+                    year: offer.year,
+                    imageCount: images.length,
+                    sourceUrl: offer.sourceUrl,
+                    imageHosts: [...new Set(images.map((img:any) => host(img?.url)).filter(Boolean))].slice(0,4),
+                    imageObjectKeys: images.map((img:any) => String(img?.objectKey || '')).filter(Boolean).slice(0,2),
+                  });
+                }
+              }
+              bySource.set(source, stat);
+            }
+            const sources = [...bySource.values()].map((stat:any) => ({
+              ...stat,
+              min: stat.min === 999 ? 0 : stat.min,
+              avg: stat.total ? Math.round((stat.sum / stat.total) * 100) / 100 : 0,
+            })).sort((a:any,b:any) => b.below5 - a.below5 || b.total - a.total);
+            const below5 = sources.reduce((n:number,s:any) => n + s.below5, 0);
+            console.log(JSON.stringify({ market, total: rows.length, below5, sources }, null, 2));
+          }
+          TS
+          npx tsx /tmp/audit-photo-depth.ts
