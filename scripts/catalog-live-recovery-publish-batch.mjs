@@ -4,7 +4,7 @@ import path from "node:path";
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia")
@@ -39,7 +39,7 @@ function exactCalculation(offer) {
   return kind === "other_hybrid" ? motor30 > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30 > 0;
 }
 function publishableCalculation(offer) {
-  return exactCalculation(offer) || isPreliminaryElectrifiedCalculation(offer);
+  return exactCalculation(offer) || isPreliminaryPowerPendingCalculation(offer);
 }
 
 function exactSourceBound(offer) {
@@ -195,7 +195,7 @@ for (const market of markets) {
     retainedCount: rows.filter((offer) => !incomingIds.has(offer.id)).length,
     preferredCount: rows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
     calculatedCount: rows.filter(exactCalculation).length,
-    preliminaryCount: rows.filter(isPreliminaryElectrifiedCalculation).length,
+    preliminaryCount: rows.filter(isPreliminaryPowerPendingCalculation).length,
     minYear: catalogMinYearForMarket(market),
     retentionMs,
     preferredMaxRub,
