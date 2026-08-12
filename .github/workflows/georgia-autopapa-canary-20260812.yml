@@ -1,0 +1,65 @@
+name: Audit AutoPapa Georgia canary once
+
+on:
+  push:
+    branches:
+      - ops/georgia-autopapa-canary-20260812
+    paths:
+      - .github/workflows/georgia-autopapa-canary-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Wait for ranged recovery deployment and collect five dense pages
+        run: |
+          set -euo pipefail
+          ready=0
+          for attempt in {1..20}; do
+            if curl --connect-timeout 10 --max-time 300 -fsS               'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=1&pages=5'               -o autopapa-canary.json               && jq -e '.report.source == "autopapa" and .report.startPage == 1 and .report.pagesPerSource == 5' autopapa-canary.json >/dev/null; then
+              ready=1
+              break
+            fi
+            echo "attempt=$attempt ranged endpoint not ready"
+            sleep 10
+          done
+          test "$ready" = "1"
+      - name: Assert canonical rows and report acceptance
+        run: |
+          set -euo pipefail
+          jq '{
+            count,
+            rawSourceCounts:.report.rawSourceCounts,
+            sourceCounts:.report.sourceCounts,
+            rejected:.report.rejected,
+            calculatedCount:.report.calculatedCount,
+            preliminaryCount:.report.preliminaryCount,
+            imageStats:.report.imageStats,
+            belowFiveImages:([.offers[] | select((.images | length) < 5)] | length)
+          }' autopapa-canary.json
+          jq -e '
+            .market == "georgia"
+            and .report.rawSourceCounts.autopapa_georgia_open > 0
+            and .count > 0
+            and ([.offers[] | select(
+              .sourceId != "autopapa_georgia_open"
+              or .year < 2020
+              or .sourcePrice <= 0
+              or .totalRub <= 0
+              or (.images | length) == 0
+              or (.calculationStatus != "preliminary_power_pending"
+                  and .calculationStatus != "ready"
+                  and .calculationStatus != "estimated"
+                  and .calculationStatus != "auction_start")
+            )] | length == 0)
+          ' autopapa-canary.json >/dev/null
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-autopapa-canary
+          path: autopapa-canary.json
+          retention-days: 3
