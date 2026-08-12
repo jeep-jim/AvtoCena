@@ -23,6 +23,19 @@ function uniqueText(values: unknown[]) {
   return [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
 }
 
+type EffectiveMarkets = Awaited<ReturnType<typeof getEffectiveMarketsWithDefaults>>;
+let effectiveMarketsInFlight: Promise<EffectiveMarkets> | null = null;
+
+async function getEffectiveMarketsForCatalogBatch(): Promise<EffectiveMarkets> {
+  if (effectiveMarketsInFlight) return effectiveMarketsInFlight;
+  effectiveMarketsInFlight = getEffectiveMarketsWithDefaults();
+  try {
+    return await effectiveMarketsInFlight;
+  } finally {
+    effectiveMarketsInFlight = null;
+  }
+}
+
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
   const sourcePrice = positive(offer.sourcePrice);
   const sourceCurrency = String(offer.sourceCurrency || "").trim().toUpperCase();
@@ -106,7 +119,7 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
   if (!offers.length) return offers;
   const [markets, ratedOffers] = await Promise.all([
-    getEffectiveMarketsWithDefaults(),
+    getEffectiveMarketsForCatalogBatch(),
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(offer))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
