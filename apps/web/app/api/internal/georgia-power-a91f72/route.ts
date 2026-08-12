@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { autoPapaDetailPowerHp } from "../../../../lib/catalog/autopapa-georgia-source";
 import { readMarketOffers } from "../../../../lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
@@ -82,6 +83,7 @@ async function inspect(offer: any) {
       fuel: offer.fuel,
       powertrainKind: offer.powertrainKind,
       currentPowerHp: offer.powerHp,
+      detailPowerHp: autoPapaDetailPowerHp(markup),
       calculationStatus: offer.calculationStatus,
       exactSourceUrl: url,
       status: response.status,
