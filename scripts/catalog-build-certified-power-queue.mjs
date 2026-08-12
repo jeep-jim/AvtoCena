@@ -47,12 +47,19 @@ function needsCertifiedPower(offer) {
 }
 
 function groupKey(offer) {
+  // Certified 30-minute power is variant-specific. Do not collapse different
+  // trims, drive layouts or peak-power variants into one research item merely
+  // because make/model/year happen to match.
   return [
     token(offer.make),
     token(offer.model),
     Number(offer.year || 0),
     token(offer.generation),
+    token(offer.trim),
+    token(offer.drive),
     Number(offer.engineCc || 0),
+    positive(offer.powerKw) || 0,
+    positive(offer.powerHp) || 0,
     token(offer.powertrainKind),
   ].join("|");
 }
@@ -71,6 +78,7 @@ for (const raw of offers) {
     powertrainKind: offer.powertrainKind,
     missing: new Set(),
     trims: new Set(),
+    drives: new Set(),
     sourceIds: new Set(),
     sourceUrls: new Set(),
     offerIds: new Set(),
@@ -79,6 +87,7 @@ for (const raw of offers) {
   };
   missing.forEach((field) => group.missing.add(field));
   if (offer.trim) group.trims.add(clean(offer.trim));
+  if (offer.drive) group.drives.add(clean(offer.drive));
   if (offer.sourceId) group.sourceIds.add(clean(offer.sourceId));
   if (offer.operational?.sourceUrl) group.sourceUrls.add(clean(offer.operational.sourceUrl));
   group.offerIds.add(offer.id);
@@ -99,13 +108,14 @@ const queue = [...groups.entries()].map(([key, group]) => ({
   powertrainKind: group.powertrainKind,
   missing: [...group.missing],
   sampleTrims: [...group.trims].slice(0, 20),
+  drives: [...group.drives].slice(0, 10),
   peakPowersHp: [...group.peakPowersHp].slice(0, 20),
   peakPowersKw: [...group.peakPowersKw].slice(0, 20),
   sourceIds: [...group.sourceIds],
   sourceUrls: [...group.sourceUrls].slice(0, 20),
   offerIds: [...group.offerIds].slice(0, 100),
   offersCount: group.offerIds.size,
-  requiredDocumentTypes: ["OTTS", "SBKTS", "ZOETS", "EPTS", "COC", "manufacturer_document"],
+  requiredDocumentTypes: ["OTTS", "SBKTS", "ZOETS", "EPTS", "COC", "KBA_registration_data", "manufacturer_document"],
   generatedAt,
 })).sort((left, right) => right.offersCount - left.offersCount
   || left.make.localeCompare(right.make, "ru")
@@ -126,6 +136,9 @@ const report = {
     make: item.make,
     model: item.model,
     year: item.yearFrom,
+    trim: item.sampleTrims[0],
+    drive: item.drives[0],
+    peakPowersKw: item.peakPowersKw,
     powertrainKind: item.powertrainKind,
     offersCount: item.offersCount,
     missing: item.missing,
