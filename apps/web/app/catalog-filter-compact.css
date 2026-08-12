@@ -89,29 +89,155 @@
 
 .ac-catalog-filter-panel .ac-range-card > div:nth-child(3),
 .ac-mobile-filter-sheet .ac-range-card > div:nth-child(3) {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  gap: 4px !important;
-  margin-top: 6px !important;
-  overflow-x: auto !important;
-  overscroll-behavior-x: contain !important;
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
-}
-
-.ac-catalog-filter-panel .ac-range-card > div:nth-child(3)::-webkit-scrollbar,
-.ac-mobile-filter-sheet .ac-range-card > div:nth-child(3)::-webkit-scrollbar {
   display: none !important;
 }
 
-.ac-catalog-filter-panel .ac-range-preset,
-.ac-mobile-filter-sheet .ac-range-preset {
-  flex: 0 0 auto !important;
-  padding: 5px 8px !important;
-  border-radius: 999px !important;
-  font-size: 9px !important;
-  line-height: 1 !important;
-  white-space: nowrap !important;
+.ac-range-preset-select-wrap {
+  display: block;
+  min-width: 0;
+}
+
+.ac-range-preset-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 28px;
+  padding: 0 24px 0 9px;
+  border: 1px solid var(--ac-border);
+  border-radius: 9px;
+  outline: 0;
+  background-color: var(--ac-surface-2);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%239da5b4' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  color: var(--ac-muted);
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ac-range-preset-select:focus {
+  border-color: rgba(255,53,61,.62);
+  color: var(--ac-text);
+}
+
+.ac-range-title-with-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.ac-range-title-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  color: var(--ac-muted);
+}
+
+.ac-range-title-icon svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.ac-filter-clear {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,53,61,.34);
+  border-radius: 10px;
+  background: transparent;
+  color: #ff4650;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.ac-filter-clear:hover,
+.ac-filter-clear:focus-visible {
+  background: #ff353d;
+  border-color: #ff353d;
+  color: #fff;
+  outline: 0;
+}
+
+.ac-filter-clear[hidden],
+.ac-filter-tray-clear[hidden] {
+  display: none !important;
+}
+
+.ac-filter-clear--desktop {
+  position: absolute;
+  right: 16px;
+  bottom: 10px;
+  z-index: 3;
+}
+
+.ac-catalog-filter-panel > div[aria-label="Выбранные параметры"] {
+  padding-right: 112px;
+}
+
+/* Selected chips are deliberately high-contrast in both themes. */
+html:not([data-theme="light"]) .ac-filter-chip {
+  background: #f5f7fa !important;
+  border-color: #f5f7fa !important;
+  color: #161b24 !important;
+  -webkit-text-fill-color: #161b24 !important;
+}
+
+html[data-theme="light"] .ac-filter-chip {
+  background: #171c25 !important;
+  border-color: #171c25 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Red numeric badges must keep white numbers in the light theme too. */
+.ac-filter-settings span[class*="bg-red-500"],
+.ac-filter-more-button span[class*="bg-red-500"] {
+  background: #ff3f48 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Give the red util-fee explanation a little breathing room. */
+.ac-power-limit > span:last-child {
+  column-gap: 10px !important;
+}
+
+.ac-catalog-count-with-pulse {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.ac-catalog-count-pulse {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 999px;
+  background: #ff3d47;
+}
+
+.ac-catalog-count-pulse::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 1px solid rgba(255,61,71,.5);
+  border-radius: inherit;
+  animation: ac-catalog-pulse 1.65s ease-out infinite;
+}
+
+@keyframes ac-catalog-pulse {
+  0% { transform: scale(.72); opacity: .9; }
+  75%,100% { transform: scale(1.7); opacity: 0; }
 }
 
 @media (min-width: 1024px) {
@@ -122,6 +248,21 @@
   .ac-catalog-filter-panel .ac-range-card + .ac-range-card {
     border-left: 1px solid var(--ac-border) !important;
     padding-left: 10px !important;
+  }
+
+  .ac-catalog-filter-panel .ac-range-card {
+    position: relative !important;
+  }
+
+  .ac-catalog-filter-panel .ac-range-card > div:first-child {
+    padding-right: 112px !important;
+  }
+
+  .ac-catalog-filter-panel .ac-range-preset-select-wrap {
+    position: absolute;
+    top: 4px;
+    right: 30px;
+    width: 78px;
   }
 }
 
@@ -134,6 +275,11 @@
   .ac-mobile-filter-sheet > div:first-child {
     padding-left: 12px !important;
     padding-right: 12px !important;
+  }
+
+  .ac-mobile-filter-sheet > div:first-child > div:nth-child(2) .ac-filter-clear--mobile {
+    margin-left: auto;
+    margin-right: 8px;
   }
 
   .ac-mobile-filter-sheet > .ac-hide-scrollbar {
@@ -151,8 +297,9 @@
   }
 
   .ac-mobile-filter-sheet .ac-mobile-filter-section__title {
-    margin-bottom: 6px !important;
+    margin-bottom: 9px !important;
     font-size: 9px !important;
+    line-height: 1.2 !important;
     letter-spacing: .11em !important;
   }
 
@@ -211,19 +358,14 @@
     min-width: 0 !important;
   }
 
-  .ac-mobile-filter-sheet .ac-range-card > div:nth-child(3) {
+  .ac-mobile-filter-sheet .ac-range-preset-select-wrap {
     grid-area: presets !important;
+    width: min(150px, 100%) !important;
     margin-top: 0 !important;
-    padding-bottom: 1px !important;
   }
 
   .ac-mobile-filter-sheet .ac-range-input-box {
     height: 38px !important;
-  }
-
-  .ac-mobile-filter-sheet .ac-range-preset {
-    padding: 5px 8px !important;
-    font-size: 9px !important;
   }
 
   .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-adaptive="1"] {
@@ -242,4 +384,31 @@
   .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="down"] {
     transform-origin: top center !important;
   }
+
+  .ac-filter-more-button .ac-filter-tray-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    margin-left: auto;
+    margin-right: 10px;
+    padding: 0 9px;
+    border: 1px solid rgba(255,53,61,.3);
+    border-radius: 9px;
+    color: #ff4650;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  html[data-theme="light"] .ac-filter-more-button .ac-filter-tray-clear {
+    background: rgba(255,53,61,.06);
+  }
+}
+
+html[data-theme="light"] .ac-mobile-filter-sheet .ac-range-preset-select,
+html[data-theme="light"] .ac-catalog-filter-panel .ac-range-preset-select {
+  background-color: #dde3eb;
+  color: #4c5668;
+  border-color: rgba(30,36,48,.13);
 }
