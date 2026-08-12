@@ -73,14 +73,36 @@ function titleIdentity(value: string) {
   return { title, make: parts[0] || "", model: parts.slice(1).join(" ") };
 }
 
-function listingPhotoUrls(markup: string, base: string) {
+function markupImageValues(markup: string) {
   const values: string[] = [];
-  for (const match of markup.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
+  for (const match of markup.matchAll(/<(?:img|source|meta|a)[^>]+(?:data-original|data-lazy-src|data-src|src|content|href)\s*=\s*["']([^"']+)["']/gi)) values.push(match[1]);
   for (const match of markup.matchAll(/(?:data-srcset|srcset)\s*=\s*["']([^"']+)["']/gi)) match[1].split(",").forEach((item) => values.push(item.trim().split(/\s+/)[0]));
   for (const match of markup.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) values.push(match[0].replace(/\\\//g, "/"));
-  return [...new Set(values.map((value) => absolute(value, base)).filter((url) => {
+  return values;
+}
+
+function listingPhotoUrls(markup: string, base: string) {
+  return [...new Set(markupImageValues(markup).map((value) => absolute(value, base)).filter((url) => {
     if (!/^https?:/i.test(url) || BAD_IMAGE_RE.test(url)) return false;
     try { const parsed = new URL(url); return parsed.host === "autopapa.ge" && /\/system\/car\/photos\//i.test(parsed.pathname); } catch { return false; }
+  }))];
+}
+
+/**
+ * AutoPapa exact detail pages expose the listing gallery's full-size images as
+ * direct `.../system/car/photos/.../original.jpg` URLs. Recommendation cards on
+ * the same page use `thumb.jpg`; label/cover variants use `labels*`/`small.jpg`.
+ * Keep only direct originals that AutoPapa actually emitted. Never synthesize a
+ * missing original URL from a thumb/medium/small path.
+ */
+export function autoPapaDetailOriginalPhotoUrls(markup: string, base = BASE_URL) {
+  return [...new Set(markupImageValues(markup).map((value) => absolute(value, base)).filter((url) => {
+    if (!/^https:/i.test(url) || BAD_IMAGE_RE.test(url)) return false;
+    try {
+      const parsed = new URL(url);
+      return parsed.host === "autopapa.ge"
+        && /^\/system\/car\/photos\/\d{3}\/\d{3}\/\d{3}\/original\.jpg$/i.test(parsed.pathname);
+    } catch { return false; }
   }))];
 }
 
@@ -182,7 +204,10 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
     const detailUrl = String(offer.operational?.sourceUrl || raw?.parsed?.detailUrl || "");
     if (detailUrl) {
       const detail = await request(detailUrl).catch(() => null);
-      if (detail) urls = [...new Set([...urls, ...listingPhotoUrls(detail.markup, detail.response.url || detailUrl)])];
+      if (detail) {
+        const originals = autoPapaDetailOriginalPhotoUrls(detail.markup, detail.response.url || detailUrl);
+        urls = [...new Set([...urls, ...originals])];
+      }
     }
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const saved: CatalogImage[] = [];

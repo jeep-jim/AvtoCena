@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseAutoPapaGeorgiaListing } from "../apps/web/lib/catalog/autopapa-georgia-source";
+import { autoPapaDetailOriginalPhotoUrls, parseAutoPapaGeorgiaListing } from "../apps/web/lib/catalog/autopapa-georgia-source";
 
 test("AutoPapa binds price, year, mileage and image to one exact listing and rejects pre-2020", () => {
   const markup = `
@@ -47,4 +47,21 @@ test("AutoPapa binds price, year, mileage and image to one exact listing and rej
   assert.equal(levante.engineCc, 3_000);
 
   assert.equal(rows.some((row) => row.id === "954330"), false);
+});
+
+test("AutoPapa exact detail gallery keeps only direct full-size originals in source order", () => {
+  const markup = `
+    <img src="https://autopapa.ge/system/car/photos/009/066/595/labels1.jpg">
+    <img src="https://autopapa.ge/system/car/photos/009/066/595/small.jpg?1770802543">
+    <a href="https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545">full</a>
+    <img data-src="https://autopapa.ge/system/car/photos/009/066/597/original.jpg?1770802546">
+    <img src="https://autopapa.ge/system/car/photos/009/066/597/small.jpg?1770802546">
+    <img src="https://autopapa.ge/system/car/photos/009/411/399/thumb.jpg?1786202604">
+    <script>const duplicate = "https:\/\/autopapa.ge\/system\/car\/photos\/009\/066\/596\/original.jpg?1770802545";</script>
+  `;
+
+  assert.deepEqual(autoPapaDetailOriginalPhotoUrls(markup), [
+    "https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545",
+    "https://autopapa.ge/system/car/photos/009/066/597/original.jpg?1770802546",
+  ]);
 });
