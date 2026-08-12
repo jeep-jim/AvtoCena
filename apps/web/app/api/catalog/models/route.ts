@@ -11,6 +11,15 @@ function compact(value: unknown) {
   return String(value || "").trim().toLocaleLowerCase("ru-RU").replace(/ё/g, "е").replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
+function clean(value: unknown) {
+  return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function positiveNumber(value: string | null) {
+  const number = Number(value || 0);
+  return Number.isFinite(number) && number > 0 ? number : undefined;
+}
+
 function mergeSuggestions(primary: ModelSuggestion[], catalog: ModelSuggestion[], query: string, limit: number) {
   const requested = compact(query);
   const merged = new Map<string, ModelSuggestion>();
@@ -30,25 +39,59 @@ function mergeSuggestions(primary: ModelSuggestion[], catalog: ModelSuggestion[]
     .slice(0, limit);
 }
 
+function contextualFilters(searchParams: URLSearchParams, make: string, includeModel: boolean) {
+  const budgetTo = positiveNumber(searchParams.get("budgetTo")) || positiveNumber(searchParams.get("budget"));
+  return {
+    market: clean(searchParams.get("market")) || undefined,
+    make: make || undefined,
+    model: includeModel ? clean(searchParams.get("model")) || undefined : undefined,
+    bodyType: clean(searchParams.get("bodyType")) || undefined,
+    transmission: clean(searchParams.get("transmission")) || undefined,
+    fuel: clean(searchParams.get("fuel")) || undefined,
+    drive: clean(searchParams.get("drive")) || undefined,
+    yearFrom: positiveNumber(searchParams.get("yearFrom")),
+    yearTo: positiveNumber(searchParams.get("yearTo")),
+    budgetFrom: positiveNumber(searchParams.get("budgetFrom")),
+    budgetTo,
+    mileageFrom: positiveNumber(searchParams.get("mileageFrom")),
+    mileageTo: positiveNumber(searchParams.get("mileageTo")),
+    engineFrom: positiveNumber(searchParams.get("engineFrom")),
+    engineTo: positiveNumber(searchParams.get("engineTo")),
+    powerFrom: positiveNumber(searchParams.get("powerFrom")),
+    powerTo: positiveNumber(searchParams.get("powerTo")),
+  };
+}
+
+function hasInventoryContext(filters: ReturnType<typeof contextualFilters>) {
+  return Object.values(filters).some((value) => value !== undefined && value !== "");
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const query = String(url.searchParams.get("q") || "").trim();
-  const make = String(url.searchParams.get("make") || "").trim();
-  const scope = String(url.searchParams.get("scope") || "").trim();
+  const query = clean(url.searchParams.get("q"));
+  const make = clean(url.searchParams.get("make"));
+  const scope = clean(url.searchParams.get("scope"));
   const limit = Math.min(500, Math.max(1, Number(url.searchParams.get("limit") || 30)));
+  const facetFilters = contextualFilters(url.searchParams, make, true);
+  const modelFilters = contextualFilters(url.searchParams, make, false);
+  const inventoryContext = hasInventoryContext(modelFilters);
+
+  if (scope === "facets") {
+    const facets = await readCatalogFacets(facetFilters);
+    return NextResponse.json({ facets });
+  }
 
   if (!query) {
     if (!make) {
       if (scope !== "makes") return NextResponse.json({ items: [] });
-      const facets = await readCatalogFacets();
+      const facets = await readCatalogFacets(facetFilters);
       return NextResponse.json({
         items: facets.makes.slice(0, limit).map((item) => ({ value: item, label: item })),
       });
     }
-    const [knowledge, catalog] = await Promise.all([
-      vehicleKnowledgeFacets(make),
-      readCatalogFacets({ make }),
-    ]);
+
+    const catalog = await readCatalogFacets(modelFilters);
+    const knowledge = inventoryContext ? { models: [] as ModelSuggestion[] } : await vehicleKnowledgeFacets(make);
     const models = mergeSuggestions(knowledge.models, catalog.models, "", limit);
     return NextResponse.json({
       items: models.map((item) => ({
@@ -60,10 +103,8 @@ export async function GET(request: Request) {
     });
   }
 
-  const [knowledgeMatches, catalogFacets] = await Promise.all([
-    resolveVehicleModelQuery(query, make || undefined, limit),
-    make ? readCatalogFacets({ make }) : Promise.resolve({ models: [] }),
-  ]);
+  const catalogFacets = inventoryContext ? await readCatalogFacets(modelFilters) : { models: [] as ModelSuggestion[] };
+  const knowledgeMatches = inventoryContext ? [] : await resolveVehicleModelQuery(query, make || undefined, limit);
   const matches = mergeSuggestions(knowledgeMatches, catalogFacets.models, query, limit);
   return NextResponse.json({
     items: matches.map((item) => ({
