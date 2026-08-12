@@ -34,17 +34,41 @@ function scriptUrls(markup: string, base: string) {
   return [...new Set(urls)];
 }
 
-function proofSnippets(text: string) {
-  const terms = ["myauto/photos", "photo_ver", "pic_number", "thumbs/", "original", "large", "medium", "static.tnet.ge"];
+function windowAt(text: string, index: number, before = 2_000, after = 4_000) {
+  return text.slice(Math.max(0, index - before), Math.min(text.length, index + after));
+}
+
+function helperProof(text: string) {
   const compact = text.replace(/\s+/g, " ");
-  const lower = compact.toLowerCase();
-  const snippets: Array<{ term: string; snippet: string }> = [];
-  for (const term of terms) {
-    const index = lower.indexOf(term.toLowerCase());
-    if (index < 0) continue;
-    snippets.push({ term, snippet: compact.slice(Math.max(0, index - 220), Math.min(compact.length, index + term.length + 320)) });
+  const probes = ["E0:()=>", ".E0)(", ".E0)", "myauto/photos/thumbs/", "myauto/photos/"];
+  const occurrences: Array<{ probe: string; index: number; snippet: string }> = [];
+  for (const probe of probes) {
+    let from = 0;
+    while (occurrences.length < 24) {
+      const index = compact.indexOf(probe, from);
+      if (index < 0) break;
+      occurrences.push({ probe, index, snippet: windowAt(compact, index, 1_200, 2_200) });
+      from = index + probe.length;
+    }
   }
-  return snippets;
+
+  const exportTargets = [...new Set([...compact.matchAll(/E0:\(\)=>([A-Za-z_$][A-Za-z0-9_$]*)/g)].map((match) => match[1]))].slice(0, 8);
+  const definitions: Array<{ target: string; pattern: string; index: number; snippet: string }> = [];
+  for (const target of exportTargets) {
+    const patterns = [`${target}=function`, `function ${target}(`, `${target}=(`, `${target}=e=>`, `${target}=function(`];
+    for (const pattern of patterns) {
+      let from = 0;
+      let hits = 0;
+      while (hits < 3 && definitions.length < 24) {
+        const index = compact.indexOf(pattern, from);
+        if (index < 0) break;
+        definitions.push({ target, pattern, index, snippet: windowAt(compact, index, 3_500, 6_500) });
+        from = index + pattern.length;
+        hits += 1;
+      }
+    }
+  }
+  return { exportTargets, occurrences, definitions };
 }
 
 async function fetchText(url: string, timeoutMs = 12_000) {
@@ -71,12 +95,13 @@ async function inspectMyAuto() {
   const scripts = scriptUrls(detail.text, detail.response.url || detailUrl).slice(0, 16);
   const inspected = await Promise.all(scripts.map(async (url) => {
     try {
-      const result = await fetchText(url, 8_000);
+      const result = await fetchText(url, 10_000);
+      const helper = helperProof(result.text);
       return {
         url,
         status: result.response.status,
         bytes: Buffer.byteLength(result.text),
-        proofs: proofSnippets(result.text),
+        helper,
       };
     } catch (error) {
       return { url, error: String((error as Error)?.message || error) };
@@ -97,8 +122,7 @@ async function inspectMyAuto() {
     picNumber: info.pic_number ?? null,
     detailStatus: detail.response.status,
     detailBytes: Buffer.byteLength(detail.text),
-    scriptCount: scripts.length,
-    scripts: inspected,
+    scripts: inspected.filter((item) => "helper" in item && (item.helper.occurrences.length || item.helper.definitions.length)),
   };
 }
 
@@ -135,7 +159,7 @@ export async function GET() {
   ]);
   return NextResponse.json({
     runtime: "yandex-serverless",
-    mode: "georgia-gallery-formula-proof-read-only",
+    mode: "georgia-myauto-e0-helper-proof-read-only",
     myauto,
     autopapa,
   }, { headers: { "cache-control": "no-store" } });
