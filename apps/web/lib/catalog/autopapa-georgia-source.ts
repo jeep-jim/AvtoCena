@@ -84,6 +84,42 @@ function listingPhotoUrls(markup: string, base: string) {
   }))];
 }
 
+function autoPapaPhotoIdentity(url: string) {
+  try {
+    return new URL(url).pathname.match(/(\/system\/car\/photos\/\d+\/\d+\/\d+)\//i)?.[1] || new URL(url).pathname;
+  } catch { return url; }
+}
+
+function autoPapaListingOwnerPrefix(url: string) {
+  try {
+    return new URL(url).pathname.match(/(\/system\/car\/photos\/\d+\/\d+)\/\d+\//i)?.[1] || "";
+  } catch { return ""; }
+}
+
+export function selectAutoPapaGeorgiaGallery(markup: string, base: string, listingImages: string[]) {
+  const safeListingImages = [...new Set(listingImages.filter((url) => {
+    try {
+      const parsed = new URL(url);
+      return parsed.host === "autopapa.ge" && /\/system\/car\/photos\//i.test(parsed.pathname) && !BAD_IMAGE_RE.test(parsed.pathname);
+    } catch { return false; }
+  }))];
+  const ownerPrefix = safeListingImages.map(autoPapaListingOwnerPrefix).find(Boolean) || "";
+  if (!ownerPrefix) return safeListingImages;
+  const exactOriginals = listingPhotoUrls(markup, base).filter((url) => {
+    try {
+      const pathname = new URL(url).pathname;
+      return pathname.startsWith(`${ownerPrefix}/`) && /\/original\.jpg$/i.test(pathname);
+    } catch { return false; }
+  });
+  const seen = new Set<string>();
+  return [...safeListingImages, ...exactOriginals].filter((url) => {
+    const identity = autoPapaPhotoIdentity(url);
+    if (seen.has(identity)) return false;
+    seen.add(identity);
+    return true;
+  });
+}
+
 export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_URL}/en/usd/search?page=1`): AutoPapaGeorgiaRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absolute(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
@@ -182,7 +218,7 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
     const detailUrl = String(offer.operational?.sourceUrl || raw?.parsed?.detailUrl || "");
     if (detailUrl) {
       const detail = await request(detailUrl).catch(() => null);
-      if (detail) urls = [...new Set([...urls, ...listingPhotoUrls(detail.markup, detail.response.url || detailUrl)])];
+      if (detail) urls = selectAutoPapaGeorgiaGallery(detail.markup, detail.response.url || detailUrl, urls);
     }
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const saved: CatalogImage[] = [];
