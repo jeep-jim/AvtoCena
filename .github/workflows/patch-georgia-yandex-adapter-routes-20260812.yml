@@ -1,0 +1,88 @@
+name: Patch Georgia Yandex adapter routes
+
+on:
+  push:
+    branches:
+      - fix/georgia-yandex-adapter-routes-20260812
+    paths:
+      - .github/workflows/patch-georgia-yandex-adapter-routes-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-yandex-adapter-routes-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply adapter route corrections
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def once(text, old, new, label):
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected 1 match, got {count}")
+              return text.replace(old, new, 1)
+
+          p = Path('apps/web/lib/catalog/myauto-list-source.ts')
+          s = p.read_text()
+          old_headers = '''const HEADERS = {\n  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",\n  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",\n  "cache-control": "no-cache",\n  pragma: "no-cache",\n  referer: "https://www.myauto.ge/en/main",\n  "sec-fetch-dest": "document",\n  "sec-fetch-mode": "navigate",\n  "sec-fetch-site": "same-origin",\n  "upgrade-insecure-requests": "1",\n  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",\n};'''
+          new_headers = '''const HEADERS = {\n  // These intentionally match the minimal browser-like request that the deployed\n  // Yandex runtime can use against MyAuto. Extra sec-fetch navigation headers\n  // currently trigger Cloudflare while this exact public page remains HTTP 200.\n  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",\n  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",\n  "cache-control": "no-cache",\n  pragma: "no-cache",\n  referer: "https://www.myauto.ge/",\n  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",\n};'''
+          s = once(s, old_headers, new_headers, 'myauto headers')
+          s = once(s,
+              '''function isDetailHref(value: string) {\n  try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }\n}\n''',
+              '''function isDetailHref(value: string) {\n  try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }\n}\nfunction isSaleDetailHref(value: string) {\n  try {\n    const path = new URL(value).pathname;\n    return isDetailHref(value) && !/\\/for-rent(?:-|\\/)/i.test(path);\n  } catch { return false; }\n}\n''',
+              'myauto sale helper')
+          s = once(s,
+              '''    const [id, entry] = entries[index];\n    const nextIndex = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 12_000);\n''',
+              '''    const [id, entry] = entries[index];\n    if (!isSaleDetailHref(entry.href)) continue;\n    const nextIndex = entries[index + 1]?.[1].index || Math.min(markup.length, entry.index + 12_000);\n''',
+              'myauto rental exclusion')
+          p.write_text(s)
+
+          p = Path('apps/web/lib/catalog/scale-market-sources.ts')
+          s = p.read_text()
+          old = '''  {\n    sourceId: "autopapa_georgia_open",\n    market: "georgia",\n    label: "AutoPapa Georgia",\n    baseUrl: "https://autopapa.ge",\n    currency: "USD",\n    detailPattern: /\\/(?:en\\/)?(?:car|vehicle|auto)\\/[^?#]*\\d+|\\/detail\\/\\d+/i,\n    listUrls: (page) => [\n      pageQuery("https://autopapa.ge/en/search", page),\n      pageQuery("https://autopapa.ge/en/cars", page),\n      pageQuery("https://autopapa.ge/search", page),\n    ],\n  },'''
+          new = '''  {\n    sourceId: "autopapa_georgia_open",\n    market: "georgia",\n    label: "AutoPapa Georgia",\n    baseUrl: "https://autopapa.ge",\n    currency: "USD",\n    // Current canonical listing links are /en/usd/{make}/{model}/{numeric-id}.\n    detailPattern: /\\/(?:en\\/)?(?:usd\\/)?[^/?#]+\\/[^/?#]+\\/\\d{5,}\\/?$/i,\n    referer: "https://autopapa.ge/en/usd",\n    listUrls: (page) => [pageQuery("https://autopapa.ge/en/usd/search", page)],\n  },'''
+          s = once(s, old, new, 'autopapa current route')
+          p.write_text(s)
+
+          p = Path('tests/myauto-list-source.test.ts')
+          s = p.read_text()
+          s = once(s,
+              '''  <a href="/en/pr/122000001/ford-transit"><img src="https://static.myauto.ge/photos/transit.jpg"></a>\n  <a href="/en/pr/122000001/ford-transit">Ford Transit Commercial Minibus</a>\n  <div>2020 year · Diesel · 110 000</div>\n''',
+              '''  <a href="/en/pr/122000001/ford-transit"><img src="https://static.myauto.ge/photos/transit.jpg"></a>\n  <a href="/en/pr/122000001/ford-transit">Ford Transit Commercial Minibus</a>\n  <div>2020 year · Diesel · 110 000</div>\n  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo"><img src="https://static.myauto.ge/photos/rental.jpg"></a>\n  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo">BMW 330</a>\n  <div>2024 year · Sedan · Petrol · Tbilisi · 500 km · 9 000</div>\n''',
+              'myauto rental fixture')
+          s = once(s,
+              '''  assert.equal(rows.length, 2);\n''',
+              '''  assert.equal(rows.length, 2, "commercial and rental listings must be excluded");\n''',
+              'myauto row count message')
+          p.write_text(s)
+
+          Path('tests/georgia-current-route-contract-20260812.test.ts').write_text('''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\n\nconst myauto = fs.readFileSync(new URL("../apps/web/lib/catalog/myauto-list-source.ts", import.meta.url), "utf8");\nconst scale = fs.readFileSync(new URL("../apps/web/lib/catalog/scale-market-sources.ts", import.meta.url), "utf8");\n\ntest("MyAuto uses the Yandex-compatible minimal canonical request and rejects rental ads", () => {\n  assert.match(myauto, /accept: "text\\/html,application\\/xhtml\\+xml,application\\/json;q=0\\.9,\\*\\/\\*;q=0\\.8"/);\n  assert.doesNotMatch(myauto, /sec-fetch-dest/);\n  assert.match(myauto, /for-rent/);\n});\n\ntest("AutoPapa uses the current USD search path and current detail link shape", () => {\n  assert.match(scale, /https:\\/\\/autopapa\\.ge\\/en\\/usd\\/search/);\n  assert.match(scale, /numeric-id/);\n  assert.doesNotMatch(scale, /pageQuery\\("https:\\/\\/autopapa\\.ge\\/en\\/cars"/);\n});\n''')
+
+          Path('.github/workflows/patch-georgia-yandex-adapter-routes-20260812.yml').unlink()
+          PY
+      - name: Validate route and policy tests
+        run: |
+          node --import tsx --test tests/myauto-list-source.test.ts tests/georgia-canonical-source-policy-20260812.test.ts tests/georgia-current-route-contract-20260812.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit corrected adapters
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix Georgia canonical routes for Yandex runtime"
+          git push origin HEAD:fix/georgia-yandex-adapter-routes-20260812
