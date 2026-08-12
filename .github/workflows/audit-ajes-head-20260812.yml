@@ -1,0 +1,23 @@
+name: Audit AJES placeholder HEAD 20260812
+
+on:
+  push:
+    branches:
+      - audit/catalog-nuance-scan-20260812
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare placeholder and real image HEAD responses
+        run: |
+          set -euo pipefail
+          for url in \
+            'https://8.ajes.com/imgs/5KyLtsy0x1tDGe9LaPkQlwFYeimgtn7ZbTeLPpkuuYNmoaSJJVCZ2h7MH' \
+            'https://8.ajes.com/imgs/pqf8kxMtGvcqkJdcaSoQz2ukcXf52tBQoeKI0gtp72uSZV40aFp'; do
+            echo "URL=$url"
+            curl -fsSIL --max-time 20 "$url" | tr -d '\r' | grep -Ei '^(HTTP/|content-type:|content-length:|etag:|last-modified:)' || true
+          done
