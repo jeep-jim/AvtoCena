@@ -198,21 +198,23 @@ jobs:
           CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
           CATALOG_AUDIT_MAX_PER_MODEL: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Assert expected age purge, preservation and global invariants
+      - name: Assert atomic manifest preservation and global invariants
         run: |
           node - <<'NODE'
           const fs = require('node:fs');
           const before = JSON.parse(fs.readFileSync('catalog-direct-before-all7.json', 'utf8'));
           const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
+          const publish = JSON.parse(fs.readFileSync('catalog-direct-recovery-batch-publish-report.json', 'utf8'));
           const preserved = ['korea','china','japan','europe','kyrgyzstan'];
           for (const market of preserved) {
-            const beforeCount = Number(before.markets?.[market]?.count || 0);
-            const oldRows = Number(before.markets?.[market]?.belowMarketMinYearCount || 0);
-            const expectedAfter = beforeCount - oldRows;
+            const expectedAfter = Number(publish.preservedByMarket?.[market] ?? publish.manifestCounts?.[market] ?? 0);
             const actualAfter = Number(after.markets?.[market]?.count || 0);
-            if (actualAfter !== expectedAfter) {
-              throw new Error(`unexpected_cross_market_change:${market}:${beforeCount}-${oldRows}=${expectedAfter},actual=${actualAfter}`);
-            }
+            if (actualAfter !== expectedAfter) throw new Error(`preserved_manifest_mismatch:${market}:expected=${expectedAfter},actual=${actualAfter}`);
+          }
+          for (const market of ['uae','georgia']) {
+            const expectedAfter = Number(publish.manifestCounts?.[market] || 0);
+            const actualAfter = Number(after.markets?.[market]?.count || 0);
+            if (actualAfter !== expectedAfter) throw new Error(`published_manifest_mismatch:${market}:expected=${expectedAfter},actual=${actualAfter}`);
           }
           for (const [market, stats] of Object.entries(after.markets || {})) {
             if (Number(stats.belowMarketMinYearCount || 0) !== 0) throw new Error(`below_market_min_year:${market}:${stats.belowMarketMinYearCount}`);
@@ -220,7 +222,7 @@ jobs:
             if (Number(stats.nonVehicleCount || 0) !== 0) throw new Error(`nonvehicle:${market}`);
             if (Number(stats.maxPerExactModel || 0) > 20) throw new Error(`model_cap:${market}:${stats.maxPerExactModel}`);
           }
-          console.log({preserved:Object.fromEntries(preserved.map(m=>[m,after.markets[m].count])), uae:after.markets.uae, georgia:after.markets.georgia});
+          console.log({preSnapshot:Object.fromEntries(preserved.map(m=>[m,before.markets?.[m]?.count||0])), atomicPreserved:publish.preservedByMarket, uae:after.markets.uae, georgia:after.markets.georgia});
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
