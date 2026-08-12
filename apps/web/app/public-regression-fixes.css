@@ -343,3 +343,41 @@
     overflow: hidden !important;
   }
 }
+
+/* 12.08.2026 — catalog brands sit directly on the page background on desktop and mobile. */
+.ac-catalog-page section.ac-brand-rail {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] {
+  padding-right: 2.75rem !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > .ac-hide-scrollbar > a:first-child {
+  margin-left: -9px !important;
+}
+.ac-catalog-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button {
+  right: 0 !important;
+}
+
+/* Desktop sorting has the same 52px field height as the neighboring controls. */
+@media (min-width: 1024px) {
+  .ac-catalog-page .ac-catalog-filter-panel .ac-sort-control {
+    height: 3.25rem !important;
+    min-height: 3.25rem !important;
+  }
+  .ac-catalog-page .ac-catalog-filter-panel .ac-sort-control > button {
+    height: 100% !important;
+    min-height: 3.25rem !important;
+  }
+}
