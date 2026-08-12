@@ -161,6 +161,7 @@ function mileageBucket(value?: number | null) { return numericBucket(value, 25_0
 function engineBucket(value?: number | null) { return numericBucket(value, 250); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }
+function currentBrandProjectionPath(make: string) { return `catalog/public/projection-brand/${cleanShard(make)}.json`; }
 const CURRENT_ALL_MARKETS_PROJECTION = "all";
 function currentOfferShardName(id: string) { return String(id || "").toLowerCase().replace(/[^a-f0-9]/g, "").slice(0, 2) || "unknown"; }
 function currentOfferShardPath(id: string) { return `catalog/public/offers/${currentOfferShardName(id)}.json`; }
@@ -261,6 +262,7 @@ const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
 const currentProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
+const currentBrandProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();
 let currentFacetsCache: { expiresAt: number; promise: Promise<CatalogFacets> } | null = null;
 let currentBrandSummaryCache: { expiresAt: number; promise: Promise<CatalogBrandSummary> } | null = null;
 const currentOfferShardCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: VehicleOffer[] }> }>();
@@ -273,6 +275,7 @@ export function resetCatalogReadCachesForTests() {
   manifestCache = null;
   searchProjectionCache.clear();
   currentProjectionCache.clear();
+  currentBrandProjectionCache.clear();
   currentFacetsCache = null;
   currentBrandSummaryCache = null;
   currentOfferShardCache.clear();
@@ -293,6 +296,21 @@ async function readCurrentSearchProjection(market: string) {
     const oldest = currentProjectionCache.keys().next().value as string | undefined;
     if (!oldest || oldest === key) break;
     currentProjectionCache.delete(oldest);
+  }
+  return promise;
+}
+async function readCurrentBrandProjection(make: string) {
+  const key = cleanShard(make);
+  const now = Date.now();
+  const current = currentBrandProjectionCache.get(key);
+  if (current && current.expiresAt > now) return current.promise;
+  const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentBrandProjectionPath(make), { generationId: "", items: [] })
+    .catch((error) => { currentBrandProjectionCache.delete(key); throw error; });
+  currentBrandProjectionCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });
+  while (currentBrandProjectionCache.size > 96) {
+    const oldest = currentBrandProjectionCache.keys().next().value as string | undefined;
+    if (!oldest || oldest === key) break;
+    currentBrandProjectionCache.delete(oldest);
   }
   return promise;
 }
@@ -679,6 +697,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await writeJsonAtomic(generationPath(generationId, "indexes/facets.json"), facets);
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();
   const allProjectionItems: CatalogSearchProjection[] = [];
   for (const offer of offers) {
     const market = String(offer.market || "");
@@ -686,9 +705,13 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     const row = searchProjectionFromOffer(offer);
     allProjectionItems.push(row);
     projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
+    const make = cleanFacet(row.make);
+    if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);
   }
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId, items: allProjectionItems }, false);
   await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, buildCatalogBrandSummary(generationId, allProjectionItems), false);
+  await mapWithConcurrency([...projectionsByBrand.entries()], 16, ([make, items]) =>
+    writeJsonAtomic(currentBrandProjectionPath(make), { generationId, items }, false));
   await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {
     const projection = { generationId, items };
     await writeJsonAtomic(generationPath(generationId, `indexes/projection/${cleanShard(market)}.json`), projection);
@@ -733,6 +756,7 @@ export async function publishCurrentCatalogReadModels() {
   };
 
   const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();
+  const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();
   const allProjectionItems: CatalogSearchProjection[] = [];
   const offersByShard = new Map<string, VehicleOffer[]>();
   for (const offer of offers) {
@@ -741,6 +765,8 @@ export async function publishCurrentCatalogReadModels() {
       const row = searchProjectionFromOffer(offer);
       allProjectionItems.push(row);
       projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);
+      const make = cleanFacet(row.make);
+      if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);
     }
     const shard = currentOfferShardName(offer.id);
     offersByShard.set(shard, [...(offersByShard.get(shard) || []), offer]);
@@ -750,6 +776,8 @@ export async function publishCurrentCatalogReadModels() {
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId: manifest.generationId, items: allProjectionItems }, false);
   const brandSummary = buildCatalogBrandSummary(manifest.generationId, allProjectionItems);
   await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);
+  await mapWithConcurrency([...projectionsByBrand.entries()], 16, ([make, items]) =>
+    writeJsonAtomic(currentBrandProjectionPath(make), { generationId: manifest.generationId, items }, false));
   await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>
     writeJsonAtomic(currentProjectionPath(market), { generationId: manifest.generationId, items }, false));
   await mapWithConcurrency([...offersByShard.entries()], 12, ([shard, items]) =>
@@ -762,6 +790,7 @@ export async function publishCurrentCatalogReadModels() {
     projectionMarkets: projectionsByMarket.size,
     allProjectionCount: allProjectionItems.length,
     brandSummaryCount: Object.keys(brandSummary.brands).length,
+    brandProjectionCount: projectionsByBrand.size,
     offerShards: offersByShard.size,
   };
 }
@@ -803,6 +832,28 @@ export async function searchOffers(params: CatalogSearchParams) {
     || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo
     || params.fuel || params.bodyType || params.transmission || params.drive
     || (params.sort && params.sort !== "updatedAt"));
+
+  const requestedMakes = catalogMakeFilterValues(params.make);
+  if ((!params.market || params.market === "any") && requestedMakes.length) {
+    const manifest = await readManifest();
+    const parts = await mapWithConcurrency(requestedMakes, Math.min(8, requestedMakes.length), async (make) => ({
+      make, projection: await readCurrentBrandProjection(make),
+    }));
+    if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {
+      const modelKeys = await projectionModelKeys(params);
+      const rows = parts.flatMap(({ projection }) => projection.items || [])
+        .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+      if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+      else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+      const total = rows.length;
+      const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
+      if (pageRows.every(projectionCanRenderCard)) return {
+        generationId: manifest.generationId, total, page, pageSize,
+        items: pageRows.map(publicOfferFromProjection),
+        usedIndexShards: requestedMakes.map(currentBrandProjectionPath),
+      };
+    }
+  }
 
   const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
   const [manifest, current] = await Promise.all([
