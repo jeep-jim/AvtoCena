@@ -7,6 +7,11 @@ const HEADERS = {
   "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
   "cache-control": "no-cache",
   pragma: "no-cache",
+  referer: "https://www.myauto.ge/en/main",
+  "sec-fetch-dest": "document",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-site": "same-origin",
+  "upgrade-insecure-requests": "1",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
@@ -75,6 +80,22 @@ function isDetailHref(value: string) {
   try { return DETAIL_RE.test(new URL(value).pathname); } catch { return false; }
 }
 
+export function buildMyAutoListUrls(page: number) {
+  const safePage = Math.max(1, Math.floor(Number(page) || 1));
+  const urls = safePage === 1
+    ? [
+      "https://www.myauto.ge/en/main",
+      "https://myauto.ge/en/main",
+      "https://www.myauto.ge/en/main?page=1",
+      "https://myauto.ge/en/main?page=1",
+    ]
+    : [
+      `https://www.myauto.ge/en/main?page=${safePage}`,
+      `https://myauto.ge/en/main?page=${safePage}`,
+    ];
+  return [...new Set(urls)];
+}
+
 export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAutoListRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
     .map((match) => ({ href: absoluteUrl(match[1], pageUrl), inner: match[2], index: match.index || 0 }))
@@ -131,22 +152,29 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
-    const url = `https://www.myauto.ge/en/main?page=${page}`;
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
-    try {
-      const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
-      const markup = await response.text();
-      if (!response.ok) throw new Error(`myauto_list_http_${response.status}`);
-      const items = parseMyAutoListingMarkup(markup, response.url || url);
-      return {
-        items,
-        nextCursor: items.length ? String(page + 1) : null,
-        finished: !items.length,
-        count: items.length,
-        health: { ok: items.length > 0, message: `MyAuto list parsed ${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
-      };
-    } finally { clearTimeout(timeout); }
+    const attempts: string[] = [];
+    for (const url of buildMyAutoListUrls(page)) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
+      try {
+        const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+        const markup = await response.text();
+        attempts.push(`${new URL(url).host}${new URL(url).pathname}${new URL(url).search}:${response.status}:${markup.length}`);
+        if (!response.ok) continue;
+        const items = parseMyAutoListingMarkup(markup, response.url || url);
+        if (!items.length) continue;
+        return {
+          items,
+          nextCursor: String(page + 1),
+          finished: false,
+          count: items.length,
+          health: { ok: true, message: `MyAuto list parsed ${items.length} via ${new URL(response.url || url).host}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" },
+        };
+      } catch (error) {
+        attempts.push(`${url}:${String((error as Error)?.message || error).slice(0, 160)}`);
+      } finally { clearTimeout(timeout); }
+    }
+    throw new Error(`myauto_list_routes_failed:${attempts.join("|").slice(0, 1_500)}`);
   }
 
   mapStatus(): OfferStatus { return "active"; }

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { MyAutoListAdapter, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
+import { buildMyAutoListUrls, MyAutoListAdapter, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
 
 const markup = `
 <section>
@@ -23,6 +23,19 @@ test("MyAuto listing parser extracts passenger cars without opening every detail
   assert.equal(rows[1].price, 72_500);
   assert.equal(rows[0].images[0], "https://static.myauto.ge/photos/x5-main.webp");
   assert.equal(rows[1].location, "Rustavi Car Market");
+});
+
+test("MyAuto canonical list routes try current no-query and both host variants before giving up", () => {
+  assert.deepEqual(buildMyAutoListUrls(1), [
+    "https://www.myauto.ge/en/main",
+    "https://myauto.ge/en/main",
+    "https://www.myauto.ge/en/main?page=1",
+    "https://myauto.ge/en/main?page=1",
+  ]);
+  assert.deepEqual(buildMyAutoListUrls(2), [
+    "https://www.myauto.ge/en/main?page=2",
+    "https://myauto.ge/en/main?page=2",
+  ]);
 });
 
 test("MyAuto normalized offer is ready for knowledge enrichment and exact calculation", () => {
