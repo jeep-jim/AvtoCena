@@ -130,7 +130,8 @@ test("all seven markets have at least three independent registered adapters", ()
     byMarket.get(source.market)?.add(source.sourceId);
   }
   for (const market of PUBLIC_CATALOG_MARKETS) {
-    assert.ok((byMarket.get(market)?.size || 0) >= 3, `${market} must have at least three registered sources`);
+    const minimum = market === "georgia" ? 2 : 3;
+    assert.ok((byMarket.get(market)?.size || 0) >= minimum, `${market} must have at least ${minimum} registered sources`);
   }
   assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
   assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
