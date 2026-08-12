@@ -12,6 +12,7 @@ const HEADERS = {
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
 const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper)\b/i;
+const MYAUTO_PRODUCT_API = "https://api2.myauto.ge/en/products";
 const KNOWN_MAKES = [
   "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
   "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
@@ -34,6 +35,63 @@ export type MyAutoListRow = {
   location?: string;
   images: string[];
 };
+
+export type MyAutoListingImageIdentity = {
+  id: string;
+  photo: string;
+  size: "thumbs" | "large";
+  index: number;
+  version: number;
+};
+
+export function parseMyAutoListingImageUrl(value: string, expectedId: string): MyAutoListingImageIdentity | null {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:" || url.hostname !== "static.tnet.ge") return null;
+    const match = url.pathname.match(/^\/myauto\/photos\/(\d+(?:\/\d+){4})\/(thumbs|large)\/(\d+)_([1-9]\d*)\.jpg$/i);
+    const versionText = url.searchParams.get("v") || "";
+    if (!match || match[3] !== String(expectedId) || !/^\d+$/.test(versionText)) return null;
+    const index = Number(match[4]);
+    const version = Number(versionText);
+    if (!Number.isSafeInteger(index) || index < 1 || !Number.isSafeInteger(version) || version < 0) return null;
+    return { id: match[3], photo: match[1], size: match[2].toLowerCase() as "thumbs" | "large", index, version };
+  } catch {
+    return null;
+  }
+}
+
+export function buildMyAutoLargePhotoUrls(input: { id: unknown; photo: unknown; count: unknown; version: unknown }) {
+  const id = String(input.id ?? "");
+  const photo = String(input.photo ?? "");
+  const countText = String(input.count ?? "");
+  const versionText = String(input.version ?? "");
+  if (!/^\d{5,}$/.test(id) || !/^\d+(?:\/\d+){4}$/.test(photo) || !/^\d+$/.test(countText) || !/^\d+$/.test(versionText)) return [];
+  const count = Math.min(30, Number(countText));
+  const version = Number(versionText);
+  if (!Number.isSafeInteger(count) || count < 1 || !Number.isSafeInteger(version) || version < 0) return [];
+  return Array.from({ length: count }, (_, offset) =>
+    `https://static.tnet.ge/myauto/photos/${photo}/large/${id}_${offset + 1}.jpg?v=${version}`);
+}
+
+async function fetchMyAutoLargeGallery(id: string, expectedPhoto: string) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
+  try {
+    const response = await fetch(`${MYAUTO_PRODUCT_API}/${id}`, {
+      headers: HEADERS,
+      redirect: "follow",
+      cache: "no-store",
+      signal: controller.signal,
+    });
+    if (!response.ok) return [];
+    const payload = await response.json().catch(() => null) as any;
+    const info = payload?.data?.info;
+    if (!info || String(info.car_id ?? "") !== id || String(info.photo ?? "") !== expectedPhoto) return [];
+    return buildMyAutoLargePhotoUrls({ id, photo: info.photo, count: info.pic_number, version: info.photo_ver });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
 
 function decodeHtml(value: string) {
   return String(value || "")
@@ -142,7 +200,7 @@ export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAut
       fuel,
       bodyType,
       location: text.match(/\b(Tbilisi|Batumi|Rustavi(?: Car Market)?|Kutaisi|Poti|Gori|Kobuleti|Telavi|Georgia)\b/i)?.[1],
-      images: imageUrls(card, pageUrl).slice(0, 8),
+      images: imageUrls(card, pageUrl).filter((url) => Boolean(parseMyAutoListingImageUrl(url, id))).slice(0, 8),
     });
   }
   return rows;
@@ -217,12 +275,19 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational.raw as { images?: string[]; parsed?: MyAutoListRow } | undefined;
-    const urls = [...new Set(raw?.images || raw?.parsed?.images || [])];
+    const sourceId = String(offer.sourceOfferId || "");
+    const listingUrls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])]
+      .filter((url) => Boolean(parseMyAutoListingImageUrl(url, sourceId)));
+    const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
+    const exactGallery = listingIdentity
+      ? await fetchMyAutoLargeGallery(sourceId, listingIdentity.photo).catch(() => [])
+      : [];
+    const urls = exactGallery.length ? exactGallery : listingUrls;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const saved: CatalogImage[] = [];
     for (const url of urls.slice(0, limit)) {
       const image = await cacheImageFromUrl(url, "georgia", { headers: { ...HEADERS, referer: offer.operational.sourceUrl || "https://www.myauto.ge/en/main" } }).catch(() => null);
-      if (image && image.size > 8_000) saved.push(image);
+      if (image && image.size > 8_000 && !saved.some((item) => item.id === image.id)) saved.push(image);
       if (saved.length >= limit) break;
     }
     return saved;
