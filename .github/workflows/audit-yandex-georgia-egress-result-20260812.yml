@@ -14,15 +14,9 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch deployed AutoPapa card-context diagnostic
+      - name: Fetch deployed canonical Georgia gallery schema diagnostic
         shell: bash
         run: |
           set -euo pipefail
-          for i in 1 2 3 4 5; do
-            if curl --connect-timeout 10 --max-time 70 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o /tmp/result.json; then
-              cat /tmp/result.json | jq .
-              exit 0
-            fi
-            sleep 8
-          done
-          exit 1
+          curl --connect-timeout 10 --max-time 90 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o /tmp/result.json
+          cat /tmp/result.json | jq .
