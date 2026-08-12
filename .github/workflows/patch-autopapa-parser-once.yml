@@ -1,0 +1,173 @@
+name: Patch AutoPapa canonical parser once
+
+on:
+  push:
+    branches:
+      - fix/georgia-yandex-canonical-v2-20260812
+    paths:
+      - .github/workflows/patch-autopapa-parser-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-yandex-canonical-v2-20260812
+          fetch-depth: 0
+      - name: Add source-specific AutoPapa list parser
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/lib/catalog/open-market-sources.ts')
+          s = path.read_text()
+          anchor = 'function rowsFromHtml(markup: string, config: OpenMarketSourceConfig) {'
+          if anchor not in s:
+              raise SystemExit('rowsFromHtml anchor not found')
+          if 'function rowsFromAutoPapaHtml' not in s:
+              parser = r'''
+function rowsFromAutoPapaHtml(markup: string, config: OpenMarketSourceConfig) {
+  const raw = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((match) => ({ href: absoluteUrl(match[1], config.baseUrl), inner: match[2], index: match.index || 0 }))
+    .filter((item) => {
+      if (!item.href) return false;
+      try { return config.detailPattern.test(new URL(item.href).pathname); } catch { return false; }
+    });
+  const grouped = new Map<string, { href: string; index: number; inner: string }>();
+  for (const item of raw) {
+    const previous = grouped.get(item.href);
+    if (!previous) { grouped.set(item.href, item); continue; }
+    const previousTitle = stripHtml(previous.inner);
+    const nextTitle = stripHtml(item.inner);
+    grouped.set(item.href, {
+      href: item.href,
+      index: Math.min(previous.index, item.index),
+      inner: nextTitle.length > previousTitle.length ? item.inner : previous.inner,
+    });
+  }
+  const anchors = [...grouped.values()].sort((left, right) => left.index - right.index);
+  const rows: OpenRow[] = [];
+  for (let index = 0; index < anchors.length; index++) {
+    const anchor = anchors[index];
+    let pathname = "";
+    try { pathname = new URL(anchor.href).pathname; } catch { continue; }
+    const id = pathname.match(/\/(\d{5,})\/?$/)?.[1];
+    if (!id) continue;
+    const nextIndex = anchors[index + 1]?.index || Math.min(markup.length, anchor.index + 14_000);
+    const card = markup.slice(anchor.index, Math.max(anchor.index + 1, nextIndex));
+    const plain = normalizeText(stripHtml(card));
+    const title = titleFromCard(anchor.inner, card);
+    const derived = deriveMakeModel(title);
+    const year = Number(plain.match(/\b(19\d{2}|20\d{2})\s*year\b/i)?.[1]);
+    const money = plain.match(/(?:USD|US\$|\$)\s*([0-9]{1,3}(?:[\s\u00a0,.'][0-9]{3}){1,2}|[0-9]{3,7})(?![0-9])/i);
+    const price = integer(money?.[1]);
+    if (!derived.make || !derived.model || !year || !price || NON_CAR_RE.test(`${title} ${plain}`)) continue;
+    const liters = plain.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*l\b/i);
+    const mileageToken = plain.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*K\.\s*km\b/i)
+      || plain.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*km\b/i);
+    const images = collectMarkupImages(card, config.baseUrl).filter((url) => {
+      try { return new URL(url).host === 'autopapa.ge' && /\/system\/car\/photos\//i.test(new URL(url).pathname); } catch { return false; }
+    });
+    rows.push({
+      id,
+      title: derived.title,
+      make: derived.make,
+      model: derived.model,
+      year,
+      mileageKm: mileage(mileageToken?.[1]),
+      engineCc: liters ? Math.round(Number(liters[1].replace(',', '.')) * 1_000) : undefined,
+      fuel: detectFuel(plain),
+      transmission: detectTransmission(plain),
+      drive: detectDrive(plain),
+      bodyType: detectBody(plain),
+      price,
+      currency: 'USD',
+      images,
+      detailUrl: anchor.href,
+      location: plain.match(/\b(Tbilisi|Batumi|Rustavi|Kutaisi|Poti|Gori|Kobuleti|Telavi)\b/i)?.[1],
+      status: 'active',
+    });
+  }
+  return rows;
+}
+
+'''
+              s = s.replace(anchor, parser + anchor, 1)
+          needle = 'export function parseOpenMarketPage(markup: string, config: OpenMarketSourceConfig) {\n'
+          if needle not in s:
+              raise SystemExit('parseOpenMarketPage anchor not found')
+          guard = '  if (config.sourceId === "autopapa_georgia_open") return rowsFromAutoPapaHtml(markup, config).filter((row) => row.year >= 1990 && row.year <= new Date().getFullYear() + 1);\n'
+          if guard not in s:
+              s = s.replace(needle, needle + guard, 1)
+          path.write_text(s)
+          PY
+      - name: Add parser regression test
+        shell: bash
+        run: |
+          cat > tests/autopapa-georgia-current-parser-20260812.test.ts <<'TS'
+          import assert from "node:assert/strict";
+          import test from "node:test";
+          import { parseOpenMarketPage, type OpenMarketSourceConfig } from "../apps/web/lib/catalog/open-market-sources";
+
+          const config: OpenMarketSourceConfig = {
+            sourceId: "autopapa_georgia_open",
+            market: "georgia",
+            label: "AutoPapa Georgia",
+            baseUrl: "https://autopapa.ge",
+            currency: "USD",
+            detailPattern: /\/en\/usd\/[^/?#]+\/[^/?#]+\/\d{5,}\/?$/i,
+            listUrls: () => ["https://autopapa.ge/en/usd/search?page=1"],
+          };
+
+          test("AutoPapa parser binds identity, price and image to one exact listing", () => {
+            const markup = `
+              <a href="/en/usd/chevrolet/captiva/932906">Chevrolet Captiva</a>
+              <div class="paramCatalog">minivan $13 000 2023 year, Rustavi, customs not cleared 22 K. km / 14 Miles automatic 1.5 l, petrol</div>
+              <img src="/system/car/photos/009/066/595/medium.jpg?1770802543">
+              <img src="/system/flags/2.jpg">
+              <img src="/images/question.png">
+              <a href="/en/usd/maserati/mLevante/956987">Maserati Levante</a>
+              <div class="paramCatalog">suv $29 500 2022 year, Tbilisi 48 000 K. km / 30 000 Miles automatic 3.0 l, petrol</div>
+              <img src="/system/car/photos/009/414/327/medium.jpg?1786349130">
+            `;
+            const rows = parseOpenMarketPage(markup, config);
+            assert.equal(rows.length, 2);
+            assert.deepEqual(rows[0], {
+              id: "932906",
+              title: "Chevrolet Captiva",
+              make: "Chevrolet",
+              model: "Captiva",
+              year: 2023,
+              mileageKm: 22,
+              engineCc: 1500,
+              fuel: "petrol",
+              transmission: "automatic",
+              drive: "",
+              bodyType: "minivan",
+              price: 13000,
+              currency: "USD",
+              images: ["https://autopapa.ge/system/car/photos/009/066/595/medium.jpg?1770802543"],
+              detailUrl: "https://autopapa.ge/en/usd/chevrolet/captiva/932906",
+              location: "Rustavi",
+              status: "active",
+            });
+            assert.equal(rows[1].id, "956987");
+            assert.equal(rows[1].price, 29500);
+          });
+          TS
+      - name: Run focused tests
+        run: |
+          npm ci
+          node --import tsx --test tests/autopapa-georgia-current-parser-20260812.test.ts tests/georgia-current-route-contract-20260812.test.ts tests/myauto-list-source.test.ts tests/georgia-canonical-source-policy-20260812.test.ts
+      - name: Commit parser fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/open-market-sources.ts tests/autopapa-georgia-current-parser-20260812.test.ts
+          git diff --cached --check
+          git commit -m 'fix(georgia): parse AutoPapa exact listing cards'
+          git push origin HEAD:fix/georgia-yandex-canonical-v2-20260812
