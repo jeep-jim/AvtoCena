@@ -99,7 +99,7 @@ function BrandDirectoryTile({
     <span className="min-w-0 flex-1 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">
       {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>
     </span>
-    {selected ? <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-[12px] font-black text-white" aria-label="Выбрано">✓</span> : null}
+    {selected ? <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-[12px] font-black text-white" style={{ color: "#fff", WebkitTextFillColor: "#fff" }} aria-label="Выбрано">✓</span> : null}
   </Link>;
 }
 
@@ -306,7 +306,7 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     {open ? <div className="fixed inset-0 z-[10020] flex items-center justify-center bg-black/80 p-2.5 backdrop-blur-sm md:p-5" onClick={close} role="dialog" aria-modal="true" aria-label="Все марки автомобилей">
       <div className="ac-brand-rail ac-hide-scrollbar max-h-[92dvh] w-full max-w-6xl overflow-y-auto rounded-[1.8rem] p-4 md:p-7" onClick={(event) => event.stopPropagation()}>
         <div className="sticky -top-4 z-10 bg-[var(--ac-surface)] pb-4 pt-1 md:-top-7 md:pt-2">
-          <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>
+          <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="mr-7 min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500 md:mr-14">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
         </div>
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
