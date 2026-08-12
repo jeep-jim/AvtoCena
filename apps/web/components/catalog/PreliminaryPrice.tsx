@@ -62,12 +62,12 @@ export function PreliminaryPrice({
     };
   }, [open]);
 
-  const panelBackground = lightTheme ? "#fff2cc" : "rgba(251,191,36,.10)";
-  const panelText = lightTheme ? "#704500" : "#fde68a";
-  const priceColor = panel ? panelText : lightTheme ? "#c58a00" : "#ffd21f";
+  const panelBackground = "var(--ac-surface-2)";
+  const panelText = "var(--ac-text)";
+  const priceColor = "var(--ac-text)";
   const popoverClass = lightTheme
-    ? "border-[#e9c56b] bg-[#fff2cc] text-[#704500] shadow-[0_12px_34px_rgba(111,75,0,.14)]"
-    : "border-amber-300/15 bg-[#2c281c] text-amber-200 shadow-[0_20px_65px_rgba(0,0,0,.45)]";
+    ? "border-[#d8dee8] bg-[#f8f9fb] text-[#303744] shadow-[0_12px_34px_rgba(38,43,57,.14)]"
+    : "border-white/10 bg-[#181b24] text-white/78 shadow-[0_20px_65px_rgba(0,0,0,.45)]";
 
   const togglePanelInfo = (event: ReactMouseEvent | ReactKeyboardEvent) => {
     event.preventDefault();
