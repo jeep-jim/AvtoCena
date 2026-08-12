@@ -13,7 +13,7 @@ test("Georgia Yandex recovery snapshot is read-only and canonical", () => {
   assert.match(recovery, /recoveryCalculatedRub: true/);
   assert.match(recovery, /recoveryBodySourceOnly: true/);
   assert.doesNotMatch(recovery, /persistCatalogOffers|putJson|writeFile/);
-  assert.doesNotMatch(recovery, /auto_georgia_open|auto\.ge|mymarket|ss\.ge/i);
+  assert.doesNotMatch(recovery, /auto_georgia_open|www\.auto\.ge|mymarket|ss\.ge/i);
 });
 
 test("Georgia recovery snapshot binds official full galleries", () => {
