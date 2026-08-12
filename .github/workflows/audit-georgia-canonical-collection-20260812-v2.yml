@@ -1,4 +1,4 @@
-name: Audit Georgia production egress 20260812
+name: Audit Georgia canonical publish dry run 20260812
 
 on:
   push:
@@ -8,56 +8,75 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
 jobs:
-  probe:
+  dry-run:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
-      - name: Fetch live Yandex adapter and gallery diagnostics
-        shell: bash
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Fetch calculated canonical snapshot through Yandex
         run: |
           set -euo pipefail
-          curl --connect-timeout 10 --max-time 120 -fsS 'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' -o adapters.json
-          curl --connect-timeout 10 --max-time 180 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o galleries.json
-          curl --connect-timeout 10 --max-time 60 -fsS 'https://avtocena.com/api/catalog/home' -o public-home.json
           curl --connect-timeout 10 --max-time 300 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&pages=2' -o recovery.json
-          jq . adapters.json
-          jq '{runtime,mode,myauto:{ok:.myauto.ok,id:.myauto.id,make:.myauto.make,model:.myauto.model,year:.myauto.year,apiStatus:.myauto.apiStatus,photo:.myauto.photo,photoVer:.myauto.photoVer,picNumber:.myauto.picNumber,safeSpecFields:.myauto.safeSpecFields},autopapa:{ok:.autopapa.ok,fetched:.autopapa.fetched,normalized2020Plus:.autopapa.normalized2020Plus,samples:[.autopapa.samples[]|{id,make,model,year,sourcePrice,detailStatus,originalCount}]}}' galleries.json
-          jq '{generationId,marketCounts,total}' public-home.json
-          jq '{market,count,partial,report,examples:[.offers[:5][]|{sourceId,sourceOfferId,make,model,year,engineCc,powerHp,sourcePrice,sourceCurrency,totalRub,imageCount:(.images|length),sourceUrl:.operational.sourceUrl}]}' recovery.json
-      - name: Assert live Georgia source access and exact gallery metadata
-        shell: bash
+          mkdir -p recovery-input
+          cp recovery.json recovery-input/catalog-rebuild-georgia.json
+          jq '{count,report}' recovery.json
+      - name: Evaluate exact production publisher without writing
+        env:
+          RECOVERY_BATCH_MARKETS: georgia
+          RECOVERY_BATCH_INPUT_DIR: recovery-input
+          RECOVERY_BATCH_REPORT: georgia-publish-dry-run.json
+          RECOVERY_BATCH_DRY_RUN: "true"
+          RECOVERY_PUBLISH_MAX: "5000"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+      - name: Assert canonical Georgia and six-market preservation
         run: |
-          set -euo pipefail
-          jq -e '
-            .runtime == "yandex-serverless"
-            and ([.results[] | select(.sourceId == "myauto_georgia_list" and .ok == true and .canonical > 0 and .year2020Plus > 0)] | length == 1)
-            and ([.results[] | select(.sourceId == "autopapa_georgia_open" and .ok == true and .canonical > 0 and .year2020Plus > 0)] | length == 1)
-          ' adapters.json >/dev/null
-          jq -e '
-            .myauto.ok == true
-            and .myauto.apiStatus == 200
-            and (.myauto.picNumber | tonumber) > 0
-            and .autopapa.ok == true
-            and .autopapa.normalized2020Plus > 0
-            and ([.autopapa.samples[] | select(.detailStatus == 200 and .originalCount >= 5)] | length) > 0
-          ' galleries.json >/dev/null
-          jq -e '(.marketCounts.georgia | tonumber) >= 0' public-home.json >/dev/null
-          jq -e '
-            .market == "georgia"
-            and .count > 0
-            and .report.sourceCounts.myauto_georgia_list > 0
-            and .report.sourceCounts.autopapa_georgia_open > 0
-            and ([.offers[] | select(.year < 2020 or (.images | length) < 5 or .totalRub <= 0)] | length == 0)
-          ' recovery.json >/dev/null
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const snapshot = JSON.parse(fs.readFileSync('recovery.json', 'utf8'));
+          const report = JSON.parse(fs.readFileSync('georgia-publish-dry-run.json', 'utf8'));
+          const georgia = report.byMarket?.georgia || {};
+          const canonical = new Set(['myauto_georgia_list', 'autopapa_georgia_open']);
+          if (!(snapshot.count > 0)) throw new Error('snapshot_empty');
+          if (!(georgia.count > 0) || !(georgia.incomingCount > 0)) throw new Error('publisher_selected_empty');
+          if (Object.keys(georgia.sourceCounts || {}).some((sourceId) => !canonical.has(sourceId))) throw new Error('noncanonical_source');
+          if (Number(georgia.imageStats?.min || 0) < 5) throw new Error('gallery_below_5');
+          const current = { korea:3640, china:7579, japan:2557, uae:223, europe:5741, kyrgyzstan:2332 };
+          for (const [market, expected] of Object.entries(current)) {
+            if (Number(report.preservedByMarket?.[market] || 0) !== expected) {
+              throw new Error(`preservation_mismatch:${market}:${report.preservedByMarket?.[market]}:${expected}`);
+            }
+          }
+          console.log(JSON.stringify({snapshot:snapshot.report, publisher:georgia, preserved:report.preservedByMarket}, null, 2));
+          NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: georgia-production-egress-audit
+          name: georgia-canonical-publish-dry-run
           path: |
-            adapters.json
-            galleries.json
-            public-home.json
             recovery.json
+            georgia-publish-dry-run.json
           if-no-files-found: warn
           retention-days: 3
