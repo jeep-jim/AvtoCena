@@ -1,0 +1,46 @@
+name: Georgia canonical recovery live audit
+
+on:
+  push:
+    branches:
+      - audit/georgia-recovery-live-20260812
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Fetch deployed recovery snapshot read-only
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 180 \
+            -H 'accept: application/json' \
+            'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&pages=2' > /tmp/recovery.json
+          jq '{
+            market,
+            count,
+            partial,
+            report,
+            offers: [.offers[]? | {
+              sourceId,
+              sourceOfferId,
+              make,
+              model,
+              year,
+              sourcePrice,
+              sourceCurrency,
+              engineCc,
+              powerHp,
+              imageCount: (.images|length),
+              firstImage: (.images[0].url // null),
+              lastImage: (.images[-1].url // null),
+              totalRub,
+              calculationStatus,
+              powertrainKind,
+              gallerySafetyMode: .operational.gallerySafetyMode
+            }]
+          }' /tmp/recovery.json
