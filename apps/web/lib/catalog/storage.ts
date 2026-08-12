@@ -652,12 +652,11 @@ export async function publishCurrentCatalogReadModels() {
   };
 }
 export async function getOffer(id: string) {
-  const current = await readCurrentOfferShard(id);
-  if (current.generationId) {
+  const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
+  if (current.generationId === manifest.generationId) {
     const offer = (current.items || []).find((item) => item.id === id && isPublicOffer(item));
     if (offer) return offer;
   }
-  const manifest = await readManifest();
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
     offerLocationIndexCache = null;
@@ -692,26 +691,25 @@ export async function searchOffers(params: CatalogSearchParams) {
     || (params.sort && params.sort !== "updatedAt"));
 
   const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
-  if (currentProjectionScope) {
-    const current = await readCurrentSearchProjection(currentProjectionScope);
-    if (current.generationId) {
-      const modelKeys = await projectionModelKeys(params);
-      const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
-      if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
-      else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
-      const total = rows.length;
-      const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
-      if (pageRows.every(projectionCanRenderCard)) {
-        return {
-          generationId: current.generationId, total, page, pageSize,
-          items: pageRows.map(publicOfferFromProjection),
-          usedIndexShards: [currentProjectionPath(currentProjectionScope)],
-        };
-      }
+  const [manifest, current] = await Promise.all([
+    readManifest(),
+    readCurrentSearchProjection(currentProjectionScope),
+  ]);
+  if (current.generationId === manifest.generationId) {
+    const modelKeys = await projectionModelKeys(params);
+    const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+    if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+    else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+    const total = rows.length;
+    const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
+    if (pageRows.every(projectionCanRenderCard)) {
+      return {
+        generationId: current.generationId, total, page, pageSize,
+        items: pageRows.map(publicOfferFromProjection),
+        usedIndexShards: [currentProjectionPath(currentProjectionScope)],
+      };
     }
   }
-
-  const manifest = await readManifest();
 
   // Current generations contain a compact per-market projection with every field
   // required by public cards and filters. Prefer that single object over reading a
