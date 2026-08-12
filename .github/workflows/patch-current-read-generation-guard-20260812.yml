@@ -1,0 +1,126 @@
+name: Patch catalog current-read generation guard
+run-name: Patch current-read generation guard · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - fix/catalog-current-read-generation-guard-r2-20260812
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[generation-guard-patched]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch storage current aliases to require manifest generation match
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/lib/catalog/storage.ts')
+          text = path.read_text()
+          old_get = '''export async function getOffer(id: string) {
+            const current = await readCurrentOfferShard(id);
+            if (current.generationId) {
+              const offer = (current.items || []).find((item) => item.id === id && isPublicOffer(item));
+              if (offer) return offer;
+            }
+            const manifest = await readManifest();'''.replace('          ', '')
+          new_get = '''export async function getOffer(id: string) {
+            const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
+            if (current.generationId === manifest.generationId) {
+              const offer = (current.items || []).find((item) => item.id === id && isPublicOffer(item));
+              if (offer) return offer;
+            }'''.replace('          ', '')
+          old_search = '''  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
+            if (currentProjectionScope) {
+              const current = await readCurrentSearchProjection(currentProjectionScope);
+              if (current.generationId) {
+                const modelKeys = await projectionModelKeys(params);
+                const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+                if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+                else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+                const total = rows.length;
+                const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
+                if (pageRows.every(projectionCanRenderCard)) {
+                  return {
+                    generationId: current.generationId, total, page, pageSize,
+                    items: pageRows.map(publicOfferFromProjection),
+                    usedIndexShards: [currentProjectionPath(currentProjectionScope)],
+                  };
+                }
+              }
+            }
+
+            const manifest = await readManifest();'''.replace('          ', '')
+          new_search = '''  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
+            const [manifest, current] = await Promise.all([
+              readManifest(),
+              readCurrentSearchProjection(currentProjectionScope),
+            ]);
+            if (current.generationId === manifest.generationId) {
+              const modelKeys = await projectionModelKeys(params);
+              const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
+              if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
+              else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+              const total = rows.length;
+              const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
+              if (pageRows.every(projectionCanRenderCard)) {
+                return {
+                  generationId: current.generationId, total, page, pageSize,
+                  items: pageRows.map(publicOfferFromProjection),
+                  usedIndexShards: [currentProjectionPath(currentProjectionScope)],
+                };
+              }
+            }'''.replace('          ', '')
+          if old_get not in text:
+              raise SystemExit('getOffer exact patch target not found')
+          if old_search not in text:
+              raise SystemExit('searchOffers exact patch target not found')
+          text = text.replace(old_get, new_get, 1).replace(old_search, new_search, 1)
+          path.write_text(text)
+          PY
+      - name: Add regression test
+        shell: bash
+        run: |
+          cat > tests/catalog-current-read-generation-guard.test.ts <<'EOF'
+          import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+
+          const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+
+          test("current offer shard is trusted only for the active manifest generation", () => {
+            assert.match(storage, /Promise\.all\(\[readManifest\(\), readCurrentOfferShard\(id\)\]\)/);
+            assert.match(storage, /current\.generationId === manifest\.generationId/);
+          });
+
+          test("current search projection is trusted only for the active manifest generation", () => {
+            assert.match(storage, /readCurrentSearchProjection\(currentProjectionScope\)/);
+            assert.match(storage, /const \[manifest, current\] = await Promise\.all/);
+            assert.ok((storage.match(/current\.generationId === manifest\.generationId/g) || []).length >= 2);
+          });
+          EOF
+      - run: |
+          node --import tsx --test tests/catalog-current-read-generation-guard.test.ts
+          npm run typecheck
+          npm run build
+      - name: Commit patched code
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/lib/catalog/storage.ts tests/catalog-current-read-generation-guard.test.ts
+          git commit -m 'fix(catalog): reject stale mutable read aliases [generation-guard-patched]'
+          git push origin HEAD:${GITHUB_REF_NAME}
