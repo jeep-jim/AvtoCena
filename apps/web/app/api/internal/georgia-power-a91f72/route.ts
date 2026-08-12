@@ -67,15 +67,36 @@ function structuredPowerFields(markup: string) {
   return hits;
 }
 
-async function inspect(offer: any) {
-  const url = String(offer?.operational?.sourceUrl || "");
-  if (!url || !/^https:\/\/autopapa\.ge\//i.test(url)) return { sourceOfferId: offer?.sourceOfferId, error: "missing_exact_autopapa_source_url" };
+function exactAutoPapaUrl(offer: any) {
+  const id = String(offer?.sourceOfferId || "");
+  const sourceUrl = String(offer?.operational?.sourceUrl || "");
+  if (!/^\d{5,}$/.test(id) || !sourceUrl) return "";
+  try {
+    const url = new URL(sourceUrl);
+    if (url.protocol !== "https:" || url.hostname !== "autopapa.ge") return "";
+    if (!new RegExp(`/${id}/?$`).test(url.pathname)) return "";
+    return url.toString();
+  } catch { return ""; }
+}
+
+async function inspect(offer: any, verbose = false) {
+  const id = String(offer?.sourceOfferId || "");
+  const url = exactAutoPapaUrl(offer);
+  if (!url) return { sourceOfferId: id, error: "missing_exact_autopapa_source_url" };
   const started = Date.now();
   try {
     const response = await fetch(url, { headers: HEADERS, redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(15_000) });
     const markup = await response.text();
-    return {
-      sourceOfferId: offer.sourceOfferId,
+    const finalUrl = response.url || url;
+    let finalIdentity = false;
+    try { finalIdentity = new URL(finalUrl).hostname === "autopapa.ge" && new RegExp(`/${id}/?$`).test(new URL(finalUrl).pathname); } catch { /* false */ }
+    if (!response.ok || !finalIdentity) {
+      return { sourceOfferId: id, make: offer.make, model: offer.model, exactSourceUrl: url, status: response.status,
+        error: !response.ok ? `http_${response.status}` : "redirect_identity", ms: Date.now() - started };
+    }
+    const base = {
+      id: offer.id,
+      sourceOfferId: id,
       make: offer.make,
       model: offer.model,
       year: offer.year,
@@ -89,35 +110,68 @@ async function inspect(offer: any) {
       status: response.status,
       bytes: Buffer.byteLength(markup),
       ms: Date.now() - started,
-      snippets: keywordSnippets(markup),
-      structured: structuredPowerFields(markup),
     };
+    return verbose ? { ...base, snippets: keywordSnippets(markup), structured: structuredPowerFields(markup) } : base;
   } catch (error) {
-    return { sourceOfferId: offer.sourceOfferId, make: offer.make, model: offer.model, exactSourceUrl: url,
+    return { sourceOfferId: id, make: offer.make, model: offer.model, exactSourceUrl: url,
       error: String((error as Error)?.message || error), ms: Date.now() - started };
   }
 }
 
-export async function GET() {
-  const offers = (await readMarketOffers("georgia"))
+async function pool(rows: any[], concurrency: number, verbose: boolean) {
+  const results = new Array<any>(rows.length);
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, rows.length)) }, async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= rows.length) return;
+      results[index] = await inspect(rows[index], verbose);
+    }
+  }));
+  return results;
+}
+
+export async function GET(request: Request) {
+  const requestUrl = new URL(request.url);
+  const allOffers = (await readMarketOffers("georgia"))
     .filter((offer) => offer.sourceId === "autopapa_georgia_open" && Number(offer.year || 0) >= 2020);
+
+  if (requestUrl.searchParams.get("batch") === "1") {
+    const candidates = allOffers
+      .filter((offer) => String(offer.powertrainKind || "") === "combustion" && !(Number(offer.powerHp || 0) > 0) && exactAutoPapaUrl(offer))
+      .sort((left, right) => String(left.sourceOfferId || "").localeCompare(String(right.sourceOfferId || "")) || String(left.id).localeCompare(String(right.id)));
+    const offset = Math.max(0, Math.floor(Number(requestUrl.searchParams.get("offset") || 0)));
+    const limit = Math.max(1, Math.min(80, Math.floor(Number(requestUrl.searchParams.get("limit") || 40))));
+    const selected = candidates.slice(offset, offset + limit);
+    const results = await pool(selected, 6, false);
+    return NextResponse.json({
+      runtime: "yandex-serverless",
+      mode: "read-only-exact-autopapa-power-batch",
+      liveGeorgia: allOffers.length,
+      totalCandidates: candidates.length,
+      offset,
+      limit,
+      inspected: results.length,
+      parsedExactPowerCount: results.filter((row) => Number(row?.detailPowerHp || 0) > 0).length,
+      nextOffset: offset + selected.length < candidates.length ? offset + selected.length : null,
+      results,
+    }, { headers: { "cache-control": "no-store" } });
+  }
+
   const selected: any[] = [];
   for (const [make, model] of TARGETS) {
-    const row = offers.find((offer) => String(offer.make) === make && String(offer.model) === model && !selected.some((item) => item.id === offer.id));
+    const row = allOffers.find((offer) => String(offer.make) === make && String(offer.model) === model && !selected.some((item) => item.id === offer.id));
     if (row) selected.push(row);
   }
-  for (const row of offers.filter((offer) => ["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || "")))) {
+  for (const row of allOffers.filter((offer) => ["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || "")))) {
     if (selected.length >= 24) break;
     if (!selected.some((item) => item.id === row.id)) selected.push(row);
   }
-  const results: any[] = [];
-  for (let index = 0; index < selected.length; index += 4) {
-    results.push(...await Promise.all(selected.slice(index, index + 4).map(inspect)));
-  }
+  const results = await pool(selected, 4, true);
   return NextResponse.json({
     runtime: "yandex-serverless",
     mode: "read-only-exact-autopapa-power-detail",
-    liveGeorgia: offers.length,
+    liveGeorgia: allOffers.length,
     inspected: results.length,
     results,
   }, { headers: { "cache-control": "no-store" } });
