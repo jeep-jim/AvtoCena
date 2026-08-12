@@ -3,6 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 
 const myauto = fs.readFileSync(new URL("../apps/web/lib/catalog/myauto-list-source.ts", import.meta.url), "utf8");
+const autopapa = fs.readFileSync(new URL("../apps/web/lib/catalog/autopapa-georgia-source.ts", import.meta.url), "utf8");
 const scale = fs.readFileSync(new URL("../apps/web/lib/catalog/scale-market-sources.ts", import.meta.url), "utf8");
 
 test("MyAuto uses the exact Yandex-compatible canonical request and rejects rental ads", () => {
@@ -16,8 +17,12 @@ test("MyAuto uses the exact Yandex-compatible canonical request and rejects rent
   assert.match(myauto, /for-rent/);
 });
 
-test("AutoPapa uses the current USD search path and current detail link shape", () => {
-  assert.match(scale, /https:\/\/autopapa\.ge\/en\/usd\/search/);
-  assert.match(scale, /numeric-id/);
+test("AutoPapa uses a dedicated current canonical Yandex adapter", () => {
+  assert.match(autopapa, /https:\/\/autopapa\.ge/);
+  assert.match(autopapa, /en\\\/usd\\\/\[\^\/\?#\]\+\\\/\[\^\/\?#\]\+\\\/\(\\d\{5,\}\)/);
+  assert.match(autopapa, /en\/usd\/search/);
+  assert.match(autopapa, /system\\\/car\\\/photos/);
+  assert.match(scale, /autoPapaGeorgiaSource/);
+  assert.doesNotMatch(scale, /sourceId: "autopapa_georgia_open"/);
   assert.doesNotMatch(scale, /pageQuery\("https:\/\/autopapa\.ge\/en\/cars"/);
 });
