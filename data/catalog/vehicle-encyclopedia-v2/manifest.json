@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "workspace": "vehicle-encyclopedia-v2",
+  "productionConnected": false,
+  "targetYearFrom": 2015,
+  "targetYearTo": 2026,
+  "brandSource": "apps/web/lib/catalog/brands.ts",
+  "status": "prepared",
+  "completedBrands": [],
+  "inProgressBrands": [],
+  "blockedBrands": [],
+  "lastCheckpoint": null,
+  "notes": [
+    "Research staging only. Do not publish or modify data/catalog/vehicle-knowledge during collection.",
+    "Start with brands already present in CATALOG_BRANDS, then report globally relevant missing passenger-car brands before adding them.",
+    "Exact 30-minute power is source-only and must never be derived from peak power."
+  ]
+}
