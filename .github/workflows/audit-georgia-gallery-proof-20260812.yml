@@ -21,4 +21,37 @@ jobs:
           set -euo pipefail
           curl --connect-timeout 10 --max-time 180 --retry 2 --retry-delay 2 -fsS \
             'https://avtocena.com/api/internal/georgia-egress-8d4c2f' \
-            | python3 -m json.tool
+            -o /tmp/proof.json
+          python3 -m json.tool /tmp/proof.json
+      - name: Extract exact MyAuto image helper formula
+        shell: bash
+        run: |
+          set -euo pipefail
+          script_url="$(jq -r '.myauto.scripts[] | select(.url | test("/build/js/main-")) | .url' /tmp/proof.json | head -1)"
+          test -n "$script_url"
+          curl --connect-timeout 10 --max-time 120 --retry 2 --retry-delay 2 -fsS "$script_url" -o /tmp/myauto-main.js
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path("/tmp/myauto-main.js").read_text(errors="replace")
+          needles = [
+              "myauto/photos/",
+              ".E0)(",
+              "E0:",
+              "E0=",
+              "pic_number",
+              "photo_ver",
+              "thumbs/",
+          ]
+          for needle in needles:
+              print(f"=== NEEDLE {needle} ===")
+              start = 0
+              shown = 0
+              while shown < 12:
+                  idx = text.find(needle, start)
+                  if idx < 0:
+                      break
+                  print(f"--- offset {idx} ---")
+                  print(text[max(0, idx - 1200): min(len(text), idx + len(needle) + 1800)])
+                  start = idx + len(needle)
+                  shown += 1
+          PY
