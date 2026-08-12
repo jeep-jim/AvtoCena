@@ -50,6 +50,7 @@ jobs:
           RECOVERY_BATCH_DRY_RUN: "true"
           RECOVERY_PUBLISH_MAX: "5000"
           CATALOG_MAX_OFFERS_PER_MODEL: "20"
+          CATALOG_OFFER_RETENTION_MS: "315360000000"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
       - name: Assert canonical Georgia and six-market preservation
         run: |
