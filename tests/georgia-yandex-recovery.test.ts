@@ -6,6 +6,7 @@ const recovery = fs.readFileSync(new URL("../apps/web/lib/catalog/georgia-yandex
 const egressRoute = new URL("../apps/web/app/api/internal/georgia-egress-8d4c2f/route.ts", import.meta.url);
 const dryRunRoute = new URL("../apps/web/app/api/internal/georgia-adapters-dryrun-6a91d7/route.ts", import.meta.url);
 const recoveryBridge = fs.readFileSync(new URL("../apps/web/app/api/internal/georgia-recovery-c4f812/route.ts", import.meta.url), "utf8");
+const replacementPublisher = fs.readFileSync(new URL("../scripts/catalog-replace-georgia-atomic.mjs", import.meta.url), "utf8");
 
 test("Georgia Yandex recovery snapshot is read-only and canonical", () => {
   assert.match(recovery, /myAutoListSource/);
@@ -40,6 +41,18 @@ test("temporary Georgia recovery bridge stays read-only and bounded", () => {
   assert.match(recoveryBridge, /sourceValue === "myauto" \|\| sourceValue === "autopapa"/);
   assert.match(recoveryBridge, /"cache-control": "no-store"/);
   assert.doesNotMatch(recoveryBridge, /persistCatalogOffers|writeDataJson|putJson|POST|PUT|DELETE/);
+});
+
+test("Georgia replacement publisher preserves the full non-Georgia maintenance array", () => {
+  assert.match(replacementPublisher, /readAllOffersForMaintenance/);
+  assert.match(replacementPublisher, /market === "georgia"/);
+  assert.match(replacementPublisher, /projectedPublicCounts/);
+  assert.match(replacementPublisher, /preservation_projection_mismatch/);
+  assert.match(replacementPublisher, /persistCatalogOffers\(full\)/);
+  assert.match(replacementPublisher, /CATALOG_GROW_ONLY_MARKETS = ""/);
+  assert.match(replacementPublisher, /canonicalGeorgiaSources/);
+  assert.match(replacementPublisher, /isCatalogYearAllowed/);
+  assert.match(replacementPublisher, /gallery_below_five/);
 });
 
 test("Georgia recovery keeps bounded AutoPapa page ranges and honest preliminary pricing", () => {
