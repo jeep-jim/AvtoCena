@@ -42,11 +42,11 @@ jobs:
           CATALOG_AUDIT_OUTPUT: georgia-before-all7.json
           CATALOG_AUDIT_ASSERT_MARKETS: ""
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Collect 300 dense AutoPapa pages in bounded recovery batches
+      - name: Collect 700 dense AutoPapa pages in bounded recovery batches
         run: |
           set -euo pipefail
           mkdir -p autopapa-batches recovery-input
-          for start in $(seq 1 5 496); do
+          for start in $(seq 1 5 696); do
             file="autopapa-batches/start-${start}.json"
             echo "collecting startPage=${start} pages=5"
             curl --connect-timeout 10 --max-time 300 --retry 3 --retry-delay 5 --retry-all-errors -fsS               "https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=${start}&pages=5"               -o "${file}"
@@ -109,10 +109,10 @@ jobs:
             count: rows.length,
             partial: false,
             report: {
-              mode: 'autopapa_500_page_atomic_input',
+              mode: 'autopapa_700_page_atomic_input',
               batchCount: files.length,
               firstPage: 1,
-              lastPage: 500,
+              lastPage: 700,
               rawCount,
               endpointAccepted,
               uniquePublishableInput: rows.length,
