@@ -3,6 +3,11 @@ run-name: Enforce 20 exact offers per model · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-global-model-cap.yml"
   workflow_run:
     workflows:
       - "Catalog live daily · working markets"
@@ -35,6 +40,7 @@ env:
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
   CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+  CATALOG_ALLOW_EMPTY_MARKETS: "georgia"
 
 jobs:
   enforce:
