@@ -21,6 +21,13 @@ test("Georgia importer cannot expose banned fallback adapters", () => {
   }
 });
 
+test("Georgia production importer uses the dedicated AutoPapa adapter", async () => {
+  const source = catalogImportSources.find((candidate) => candidate.sourceId === "autopapa_georgia_open");
+  assert.ok(source, "dedicated AutoPapa source must be registered");
+  const health = await source.healthCheck();
+  assert.match(String(health.message || ""), /AutoPapa canonical Yandex parser/i);
+});
+
 test("Georgia scale source definitions contain AutoPapa but no banned fallback sources", () => {
   const ids = new Set(SCALE_MARKET_SOURCE_IDS);
   assert.equal(ids.has("autopapa_georgia_open"), true);
