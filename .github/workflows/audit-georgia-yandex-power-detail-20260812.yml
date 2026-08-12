@@ -1,0 +1,38 @@
+name: Audit Georgia Yandex exact AutoPapa power detail 20260812
+
+on:
+  push:
+    branches: [audit/georgia-power-coverage-20260812]
+    paths:
+      - ".github/workflows/audit-georgia-yandex-power-detail-20260812.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch read-only Yandex power diagnostic
+        run: |
+          set -euo pipefail
+          curl --connect-timeout 10 --max-time 120 --retry 2 --retry-delay 3 --retry-all-errors -fsS \
+            -H 'cache-control: no-cache' \
+            'https://avtocena.com/api/internal/georgia-power-a91f72?audit=20260812' \
+            -o georgia-yandex-power-detail.json
+          jq -e '
+            .runtime == "yandex-serverless"
+            and .mode == "read-only-exact-autopapa-power-detail"
+            and .liveGeorgia >= 2000
+            and .inspected > 0
+          ' georgia-yandex-power-detail.json >/dev/null
+          jq '{runtime,mode,liveGeorgia,inspected,results}' georgia-yandex-power-detail.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-yandex-power-detail
+          path: georgia-yandex-power-detail.json
+          if-no-files-found: warn
+          retention-days: 3
