@@ -95,12 +95,10 @@ const configs: OpenMarketSourceConfig[] = [
     label: "AutoPapa Georgia",
     baseUrl: "https://autopapa.ge",
     currency: "USD",
-    detailPattern: /\/(?:en\/)?(?:car|vehicle|auto)\/[^?#]*\d+|\/detail\/\d+/i,
-    listUrls: (page) => [
-      pageQuery("https://autopapa.ge/en/search", page),
-      pageQuery("https://autopapa.ge/en/cars", page),
-      pageQuery("https://autopapa.ge/search", page),
-    ],
+    // Current canonical listing links are /en/usd/{make}/{model}/{numeric-id}.
+    detailPattern: /\/(?:en\/)?(?:usd\/)?[^/?#]+\/[^/?#]+\/\d{5,}\/?$/i,
+    referer: "https://autopapa.ge/en/usd",
+    listUrls: (page) => [pageQuery("https://autopapa.ge/en/usd/search", page)],
   },
 
   // Kyrgyzstan: Mashina has a dedicated adapter; the public alternatives below

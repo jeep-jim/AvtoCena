@@ -13,11 +13,14 @@ const markup = `
   <a href="/en/pr/122000001/ford-transit"><img src="https://static.myauto.ge/photos/transit.jpg"></a>
   <a href="/en/pr/122000001/ford-transit">Ford Transit Commercial Minibus</a>
   <div>2020 year · Diesel · 110 000</div>
+  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo"><img src="https://static.myauto.ge/photos/rental.jpg"></a>
+  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo">BMW 330</a>
+  <div>2024 year · Sedan · Petrol · Tbilisi · 500 km · 9 000</div>
 </section>`;
 
 test("MyAuto listing parser extracts passenger cars without opening every detail page", () => {
   const rows = parseMyAutoListingMarkup(markup, "https://www.myauto.ge/en/main?page=1");
-  assert.equal(rows.length, 2);
+  assert.equal(rows.length, 2, "commercial and rental listings must be excluded");
   assert.deepEqual(rows.map((row) => `${row.make} ${row.model}`), ["BMW X5", "Toyota Camry"]);
   assert.equal(rows[0].price, 65_000);
   assert.equal(rows[1].price, 72_500);
