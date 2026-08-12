@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { autoPapaDetailOriginalPhotoUrls, autoPapaDetailPowerHp, parseAutoPapaGeorgiaListing } from "../apps/web/lib/catalog/autopapa-georgia-source";
+import {
+  autoPapaDetailOriginalPhotoUrls,
+  autoPapaDetailPowerHp,
+  autoPapaExactDetailFacts,
+  enrichAutoPapaOfferFromExactDetail,
+  parseAutoPapaGeorgiaListing,
+} from "../apps/web/lib/catalog/autopapa-georgia-source";
+import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
 test("AutoPapa binds price, year, mileage and image to one exact listing and rejects pre-2020", () => {
   const markup = `
@@ -99,4 +106,50 @@ test("AutoPapa seller power below the catalog plausibility floor stays unknown",
   assert.equal(autoPapaDetailPowerHp(oneHp), undefined);
   assert.equal(autoPapaDetailPowerHp(twoHp), undefined);
   assert.equal(autoPapaDetailPowerHp(boundary), 20);
+});
+
+function exactOffer(powertrainKind: VehicleOffer["powertrainKind"] = "combustion") {
+  return {
+    sourceId: "autopapa_georgia_open",
+    sourceOfferId: "932906",
+    powertrainKind,
+    operational: { sourceUrl: "https://autopapa.ge/en/usd/chevrolet/captiva/932906", raw: {} },
+  } as VehicleOffer;
+}
+
+test("AutoPapa exact detail facts require both requested and redirected URLs to match the listing ID", () => {
+  const markup = `
+    <div>Body Type: suv Power: 147 hp Engine Vol: 1.5 l</div><div>Car description</div>
+    <a href="https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545">full</a>
+  `;
+  const exact = autoPapaExactDetailFacts(exactOffer(), markup, "https://autopapa.ge/en/usd/chevrolet/captiva/932906");
+  assert.deepEqual(exact, {
+    sourceOfferId: "932906",
+    originals: ["https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545"],
+    powerHp: 147,
+  });
+  assert.equal(autoPapaExactDetailFacts(exactOffer(), markup, "https://autopapa.ge/en/usd/toyota/camry/953315"), null);
+});
+
+test("AutoPapa importer enriches exact combustion power before customs calculation", () => {
+  const offer = exactOffer();
+  const markup = `<div>Body Type: suv Power: 147 hp Engine Vol: 1.5 l</div><div>Car description</div>`;
+  const facts = enrichAutoPapaOfferFromExactDetail(offer, markup, "https://autopapa.ge/en/usd/chevrolet/captiva/932906");
+  assert.equal(facts?.powerHp, 147);
+  assert.equal(offer.powerHp, 147);
+  assert.equal(offer.powerKw, 108.12);
+  assert.equal(offer.powerDataConfidence, "source_exact");
+  assert.equal(offer.powerDataSource, "autopapa-detail:932906:Power");
+  assert.equal((offer.operational.raw as Record<string, unknown>).autoPapaDetailIdentityVerified, true);
+});
+
+test("AutoPapa seller peak power is not promoted to EV or hybrid utilization power", () => {
+  const markup = `<div>Body Type: suv Power: 250 hp Engine Vol: 2.0 l</div><div>Car description</div>`;
+  for (const kind of ["electric", "other_hybrid", "series_hybrid"] as const) {
+    const offer = exactOffer(kind);
+    const facts = enrichAutoPapaOfferFromExactDetail(offer, markup, "https://autopapa.ge/en/usd/chevrolet/captiva/932906");
+    assert.equal(facts?.powerHp, undefined);
+    assert.equal(offer.powerHp, undefined);
+    assert.equal(offer.powerDataSource, undefined);
+  }
 });
