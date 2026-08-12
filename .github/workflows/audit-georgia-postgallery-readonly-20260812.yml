@@ -1,0 +1,53 @@
+name: Georgia post-gallery read-only audit
+
+on:
+  push:
+    branches:
+      - audit/georgia-postgallery-readonly-20260812
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch deployed fixed Georgia diagnostic and print safe summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 90 \
+            -H 'accept: application/json' \
+            'https://avtocena.com/api/internal/georgia-egress-8d4c2f' > /tmp/georgia.json
+          jq '{
+            runtime,
+            mode,
+            myauto: {
+              ok: .myauto.ok,
+              id: .myauto.id,
+              make: .myauto.make,
+              model: .myauto.model,
+              year: .myauto.year,
+              listImageCount: (.myauto.listImages|length),
+              apiStatus: .myauto.apiStatus,
+              photo: .myauto.photo,
+              photoVer: .myauto.photoVer,
+              picNumber: .myauto.picNumber,
+              safeSpecFields: .myauto.safeSpecFields,
+              detailStatus: .myauto.detailStatus
+            },
+            autopapa: {
+              ok: .autopapa.ok,
+              fetched: .autopapa.fetched,
+              normalized2020Plus: .autopapa.normalized2020Plus,
+              samples: [.autopapa.samples[]? | {
+                id, make, model, year, sourcePrice,
+                listImageCount: (.listImages|length),
+                detailStatus,
+                originalCount,
+                firstOriginal: (.originals[0] // null),
+                lastOriginal: (.originals[-1] // null)
+              }]
+            }
+          }' /tmp/georgia.json
