@@ -1,0 +1,137 @@
+name: Audit Georgia combustion power consensus 20260812
+
+on:
+  push:
+    branches: [audit/georgia-power-coverage-20260812]
+    paths:
+      - ".github/workflows/audit-georgia-combustion-consensus-20260812.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Measure strict combustion consensus without writes
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          process.env.JSON_STORAGE_DRIVER = 'object';
+          const dataModule = await import('./apps/web/lib/data.ts');
+          const data = dataModule.default || dataModule;
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const knowledgeModule = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const knowledge = knowledgeModule.default || knowledgeModule;
+
+          const rows = await storage.readMarketOffers('georgia');
+          data.resetJsonStorageForTests();
+          process.env.JSON_STORAGE_DRIVER = 'local';
+          knowledge.resetVehicleKnowledgeCache();
+          const variants = await knowledge.readVehicleKnowledgeVariants();
+
+          const token = (value) => String(value || '').toLowerCase().replace(/ё/g, 'е').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+          const fuelToken = (value) => {
+            const t = token(value);
+            if (/petrol|gasoline|бензин/.test(t)) return 'petrol';
+            if (/diesel|дизел/.test(t)) return 'diesel';
+            if (/hybrid|hev|phev/.test(t)) return 'hybrid';
+            if (/electric|\bev\b|электро/.test(t)) return 'electric';
+            return t;
+          };
+          const positive = (value) => Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : 0;
+
+          const stats = {
+            total: rows.length,
+            combustionMissingPower: 0,
+            strictConsensusRows: 0,
+            strictConsensusOffers: 0,
+            ambiguousOffers: 0,
+            noModelMatch: 0,
+            noVariantCandidates: 0,
+            nonVehicle: 0,
+          };
+          const consensusKeys = new Map();
+          const examples = [];
+          const ambiguous = [];
+          const nonVehicle = [];
+
+          for (const row of rows) {
+            const nonVehicleText = `${row.make || ''} ${row.model || ''} ${row.trim || ''} ${row.bodyType || ''}`;
+            if (/\b(super\s*jet|jet\s*ski|watercraft|personal\s+watercraft|motorcycle|scooter|forklift|excavator|tractor|crane|truck|bus)\b/i.test(nonVehicleText)) {
+              stats.nonVehicle++;
+              if (nonVehicle.length < 30) nonVehicle.push({ id: row.sourceOfferId, make: row.make, model: row.model, year: row.year, bodyType: row.bodyType });
+            }
+            if (String(row.powertrainKind || '') !== 'combustion' || positive(row.powerHp)) continue;
+            stats.combustionMissingPower++;
+            const modelMatch = await knowledge.findVehicleModel(row);
+            if (!modelMatch) { stats.noModelMatch++; continue; }
+            const modelVariants = variants.filter((variant) => {
+              if (variant.active === false || variant.modelId !== modelMatch.model.id) return false;
+              const year = Number(row.year || 0);
+              if (variant.yearFrom && (!year || year < variant.yearFrom)) return false;
+              if (variant.yearTo && (!year || year > variant.yearTo)) return false;
+              const engine = positive(row.engineCc);
+              if (variant.engineCc) {
+                if (!engine) return false;
+                const tolerance = Math.max(20, Number(variant.engineCcTolerance || 80));
+                if (Math.abs(engine - Number(variant.engineCc)) > tolerance) return false;
+              }
+              if (variant.fuel && row.fuel && fuelToken(variant.fuel) !== fuelToken(row.fuel)) return false;
+              if (variant.powertrainKind && variant.powertrainKind !== 'combustion') return false;
+              return positive(variant.powerHp) > 0;
+            });
+            if (!modelVariants.length) { stats.noVariantCandidates++; continue; }
+            const powers = [...new Set(modelVariants.map((v) => Math.round(Number(v.powerHp) * 10) / 10))];
+            if (powers.length !== 1) {
+              stats.ambiguousOffers++;
+              if (ambiguous.length < 60) ambiguous.push({ id: row.sourceOfferId, make: row.make, model: row.model, year: row.year, engineCc: row.engineCc, fuel: row.fuel, candidateCount: modelVariants.length, powers: powers.slice(0, 12) });
+              continue;
+            }
+            stats.strictConsensusOffers++;
+            const powerHp = powers[0];
+            const key = [modelMatch.model.id, row.year, Math.round(Number(row.engineCc || 0) / 10) * 10, fuelToken(row.fuel), powerHp].join('|');
+            if (!consensusKeys.has(key)) {
+              consensusKeys.set(key, {
+                key,
+                modelId: modelMatch.model.id,
+                make: modelMatch.model.make,
+                model: modelMatch.model.model,
+                year: row.year,
+                engineCc: row.engineCc,
+                fuel: fuelToken(row.fuel),
+                powerHp,
+                sourceVariants: modelVariants.map((v) => v.id),
+                sourceUrls: [...new Set(modelVariants.map((v) => v.sourceUrl).filter(Boolean))],
+              });
+            }
+            if (examples.length < 100) examples.push({ id: row.sourceOfferId, make: row.make, model: row.model, year: row.year, engineCc: row.engineCc, fuel: row.fuel, powerHp, variants: modelVariants.length, sourceUrl: modelVariants[0]?.sourceUrl });
+          }
+          stats.strictConsensusRows = consensusKeys.size;
+          const report = { checkedAt: new Date().toISOString(), stats, consensus: [...consensusKeys.values()], examples, ambiguous, nonVehicle };
+          await fs.writeFile('georgia-combustion-consensus.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-combustion-consensus
+          path: georgia-combustion-consensus.json
+          retention-days: 3
