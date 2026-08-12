@@ -44,6 +44,12 @@ export type MyAutoListingImageIdentity = {
   version: number;
 };
 
+export type MyAutoProductSnapshot = {
+  galleryUrls: string[];
+  engineCc?: number;
+  powerHp?: number;
+};
+
 export function parseMyAutoListingImageUrl(value: string, expectedId: string): MyAutoListingImageIdentity | null {
   try {
     const url = new URL(value);
@@ -73,7 +79,27 @@ export function buildMyAutoLargePhotoUrls(input: { id: unknown; photo: unknown; 
     `https://static.tnet.ge/myauto/photos/${photo}/large/${id}_${offset + 1}.jpg?v=${version}`);
 }
 
-async function fetchMyAutoLargeGallery(id: string, expectedPhoto: string) {
+function boundedExactInteger(value: unknown, minimum: number, maximum: number) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && Number.isInteger(parsed) && parsed >= minimum && parsed <= maximum ? parsed : undefined;
+}
+
+export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, expectedId: string, expectedPhoto?: string): MyAutoProductSnapshot | null {
+  const id = String(info?.car_id ?? "");
+  const photo = String(info?.photo ?? "");
+  if (!/^\d{5,}$/.test(expectedId) || id !== expectedId) return null;
+  if (expectedPhoto && photo !== expectedPhoto) return null;
+  const galleryUrls = buildMyAutoLargePhotoUrls({ id, photo, count: info.pic_number, version: info.photo_ver });
+  if (!galleryUrls.length) return null;
+  return {
+    galleryUrls,
+    engineCc: boundedExactInteger(info.engine_volume ?? info.engine_cc, 300, 10_000),
+    powerHp: boundedExactInteger(info.power_hp ?? info.horsepower, 20, 2_500),
+  };
+}
+
+async function fetchMyAutoProductSnapshot(id: string, expectedPhoto?: string) {
+  if (!/^\d{5,}$/.test(id)) return null;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
   try {
@@ -83,11 +109,11 @@ async function fetchMyAutoLargeGallery(id: string, expectedPhoto: string) {
       cache: "no-store",
       signal: controller.signal,
     });
-    if (!response.ok) return [];
+    if (!response.ok) return null;
     const payload = await response.json().catch(() => null) as any;
     const info = payload?.data?.info;
-    if (!info || String(info.car_id ?? "") !== id || String(info.photo ?? "") !== expectedPhoto) return [];
-    return buildMyAutoLargePhotoUrls({ id, photo: info.photo, count: info.pic_number, version: info.photo_ver });
+    if (!info || typeof info !== "object") return null;
+    return myAutoProductSnapshotFromInfo(info as Record<string, unknown>, id, expectedPhoto);
   } finally {
     clearTimeout(timeout);
   }
@@ -279,9 +305,10 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
     const listingUrls = [...new Set([...(raw?.images || []), ...(raw?.parsed?.images || [])])]
       .filter((url) => Boolean(parseMyAutoListingImageUrl(url, sourceId)));
     const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
-    const exactGallery = listingIdentity
-      ? await fetchMyAutoLargeGallery(sourceId, listingIdentity.photo).catch(() => [])
-      : [];
+    const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(() => null);
+    if (snapshot?.engineCc && !offer.engineCc) offer.engineCc = snapshot.engineCc;
+    if (snapshot?.powerHp && !offer.powerHp) offer.powerHp = snapshot.powerHp;
+    const exactGallery = snapshot?.galleryUrls || [];
     const urls = exactGallery.length ? exactGallery : listingUrls;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const saved: CatalogImage[] = [];
