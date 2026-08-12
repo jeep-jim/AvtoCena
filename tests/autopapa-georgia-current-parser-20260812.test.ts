@@ -91,3 +91,12 @@ test("AutoPapa blank primary power stays unknown and cannot borrow a recommendat
   `;
   assert.equal(autoPapaDetailPowerHp(markup), undefined);
 });
+
+test("AutoPapa seller power below the catalog plausibility floor stays unknown", () => {
+  const oneHp = `<div>Body Type: suv Power: 1 hp Engine Vol: 1.5 l</div><div>Car description</div>`;
+  const twoHp = `<div>Body Type: sedan Power: 2 hp Engine Vol: 2.0 l</div><div>Car description</div>`;
+  const boundary = `<div>Body Type: hatchback Power: 20 hp Engine Vol: 1.0 l</div><div>Car description</div>`;
+  assert.equal(autoPapaDetailPowerHp(oneHp), undefined);
+  assert.equal(autoPapaDetailPowerHp(twoHp), undefined);
+  assert.equal(autoPapaDetailPowerHp(boundary), 20);
+});
