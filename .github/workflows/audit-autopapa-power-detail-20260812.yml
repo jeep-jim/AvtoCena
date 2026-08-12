@@ -1,0 +1,89 @@
+name: Audit AutoPapa detail power 20260812
+
+on:
+  push:
+    branches: [audit/georgia-power-coverage-20260812]
+    paths:
+      - ".github/workflows/audit-autopapa-power-detail-20260812.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect exact AutoPapa detail markup without cache/storage writes
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs/promises';
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const rows = (await storage.readMarketOffers('georgia'))
+            .filter((row) => row.sourceId === 'autopapa_georgia_open' && !(Number(row.powerHp || 0) > 0) && /^https:\/\/autopapa\.ge\//i.test(String(row.operational?.sourceUrl || '')))
+            .sort((a,b) => Number(b.year || 0) - Number(a.year || 0) || String(a.sourceOfferId).localeCompare(String(b.sourceOfferId)))
+            .slice(0, 30);
+          const headers = {
+            accept: 'text/html,application/xhtml+xml,*/*;q=0.8',
+            'accept-language': 'en-US,en;q=0.9',
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+          };
+          const decode = (s) => String(s || '').replace(/&nbsp;|&#160;/gi,' ').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&lt;/gi,'<').replace(/&gt;/gi,'>');
+          const plain = (s) => decode(s).replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+          const results = [];
+          for (const row of rows) {
+            const url = String(row.operational.sourceUrl);
+            const response = await fetch(url, { headers, redirect: 'follow', cache: 'no-store' });
+            const html = await response.text();
+            const text = plain(html);
+            const snippets = [];
+            const patterns = [
+              /(?:horse\s*power|horsepower|engine\s*power|motor\s*power|power|hp|kw|ps|bhp).{0,180}/ig,
+              /.{0,120}(?:horse\s*power|horsepower|engine\s*power|motor\s*power|\b\d{2,4}\s*(?:hp|kw|ps|bhp)\b).{0,120}/ig,
+            ];
+            for (const re of patterns) {
+              for (const match of text.matchAll(re)) {
+                const value = String(match[0]).replace(/\s+/g,' ').trim();
+                if (value && !snippets.includes(value)) snippets.push(value);
+                if (snippets.length >= 12) break;
+              }
+              if (snippets.length >= 12) break;
+            }
+            const jsonLike = [];
+            for (const match of html.matchAll(/["']([^"']*(?:horse|power|kw|hp)[^"']*)["']\s*:\s*(?:["']([^"']{0,100})["']|([0-9.]+))/ig)) {
+              jsonLike.push({ key: match[1], value: match[2] || match[3] });
+              if (jsonLike.length >= 20) break;
+            }
+            results.push({
+              sourceOfferId: row.sourceOfferId, make: row.make, model: row.model, year: row.year, engineCc: row.engineCc, fuel: row.fuel,
+              url, status: response.status, bytes: html.length, snippets, jsonLike,
+            });
+            await new Promise((resolve) => setTimeout(resolve, 120));
+          }
+          const report = { checkedAt: new Date().toISOString(), sampled: results.length, results };
+          await fs.writeFile('autopapa-power-detail.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autopapa-power-detail
+          path: autopapa-power-detail.json
+          retention-days: 3
