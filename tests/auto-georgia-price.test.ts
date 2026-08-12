@@ -50,3 +50,43 @@ test("AUTO.GE listing-bound gallery accepts only image paths carrying the exact 
   assert.equal(rows.length, 1);
   assert.deepEqual(rows[0].images, [matching]);
 });
+
+
+test("AUTO.GE mileage parsing keeps the listing year out of the odometer", () => {
+  const markup = `
+    <html><body>
+      <a href="/en/auto/toyota/rav4/toyota-rav4-1172033.html">Toyota, RAV4</a>
+      <div>Sale 2024 60 000 km 14,000.00 $</div>
+    </body></html>`;
+  const rows = parseAutoGeorgiaStrictListing(markup, pageUrl);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].mileageKm, 60_000);
+});
+
+test("AUTO.GE rejects generic Other model identities instead of creating make-level catch-all offers", () => {
+  const markup = `
+    <html><body>
+      <a href="/en/auto/changan/other/changan-other-1432716.html">CHANGAN</a>
+      <div>Sale 2026 606 km 20,000.00 $</div>
+    </body></html>`;
+  assert.equal(parseAutoGeorgiaStrictListing(markup, pageUrl).length, 0);
+});
+
+test("AUTO.GE collapses base, x2 and large URLs for the same listing photo", () => {
+  const first = "https://fra1.digitaloceanspaces.com/www.auto.ge/listings/02-2026/ad1172033/toyota-rav4-111.webp";
+  const firstX2 = "https://fra1.digitaloceanspaces.com/www.auto.ge/listings/02-2026/ad1172033/toyota-rav4-111_x2.webp";
+  const firstLarge = "https://fra1.digitaloceanspaces.com/www.auto.ge/listings/02-2026/ad1172033/toyota-rav4-111_large.webp";
+  const secondLarge = "https://fra1.digitaloceanspaces.com/www.auto.ge/listings/02-2026/ad1172033/toyota-rav4-222_large.webp";
+  const markup = `
+    <html><body>
+      <a href="/en/auto/toyota/rav4/toyota-rav4-1172033.html">Toyota, RAV4</a>
+      <div>Sale 2024 966 km 14,000.00 $</div>
+      <img src="${first}" />
+      <img src="${firstX2}" />
+      <img src="${firstLarge}" />
+      <img src="${secondLarge}" />
+    </body></html>`;
+  const rows = parseAutoGeorgiaStrictListing(markup, pageUrl);
+  assert.equal(rows.length, 1);
+  assert.deepEqual(rows[0].images, [firstLarge, secondLarge]);
+});
