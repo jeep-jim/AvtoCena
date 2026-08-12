@@ -1,19 +1,19 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildMyAutoListUrls, MyAutoListAdapter, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
+import { buildMyAutoLargePhotoUrls, buildMyAutoListUrls, MyAutoListAdapter, parseMyAutoListingImageUrl, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
 
 const markup = `
 <section>
-  <a href="/en/pr/122724917/bmw-x5"><img src="https://static.myauto.ge/photos/x5-main.webp" alt="BMW X5"></a>
+  <a href="/en/pr/122724917/bmw-x5"><img src="https://static.tnet.ge/myauto/photos/1/2/3/4/5/thumbs/122724917_1.jpg?v=4" alt="BMW X5"></a>
   <a href="/en/pr/122724917/bmw-x5">BMW X5</a>
   <div>2019 year · Jeep · Petrol · Tbilisi · 88 000 km · 65 000</div>
-  <a href="/en/pr/122433509/toyota-camry"><img data-src="https://static.myauto.ge/photos/camry-main.jpg" alt="Toyota Camry"></a>
+  <a href="/en/pr/122433509/toyota-camry"><img data-src="https://static.tnet.ge/myauto/photos/9/8/7/6/5/thumbs/122433509_1.jpg?v=7" alt="Toyota Camry"></a>
   <a href="/en/pr/122433509/toyota-camry">Toyota Camry</a>
   <div>2021 year · Sedan · Hybrid · Rustavi Car Market · 42 000 km · 72 500</div>
-  <a href="/en/pr/122000001/ford-transit"><img src="https://static.myauto.ge/photos/transit.jpg"></a>
+  <a href="/en/pr/122000001/ford-transit"><img src="https://static.tnet.ge/myauto/photos/2/2/2/2/2/thumbs/122000001_1.jpg?v=1"></a>
   <a href="/en/pr/122000001/ford-transit">Ford Transit Commercial Minibus</a>
   <div>2020 year · Diesel · 110 000</div>
-  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo"><img src="https://static.myauto.ge/photos/rental.jpg"></a>
+  <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo"><img src="https://static.tnet.ge/myauto/photos/3/3/3/3/3/thumbs/122999999_1.jpg?v=1"></a>
   <a href="/en/pr/122999999/for-rent-sedan-bmw-330-2024-petrol-geo">BMW 330</a>
   <div>2024 year · Sedan · Petrol · Tbilisi · 500 km · 9 000</div>
 </section>`;
@@ -24,7 +24,7 @@ test("MyAuto listing parser hard-rejects pre-2020, commercial and rental listing
   assert.deepEqual(rows.map((row) => `${row.make} ${row.model}`), ["Toyota Camry"]);
   assert.equal(rows[0].year, 2021);
   assert.equal(rows[0].price, 72_500);
-  assert.equal(rows[0].images[0], "https://static.myauto.ge/photos/camry-main.jpg");
+  assert.equal(rows[0].images[0], "https://static.tnet.ge/myauto/photos/9/8/7/6/5/thumbs/122433509_1.jpg?v=7");
   assert.equal(rows[0].location, "Rustavi Car Market");
 });
 
@@ -71,3 +71,34 @@ test("MyAuto normalization rejects a pre-2020 row even if it bypasses the list p
   });
   assert.equal(offer, null);
 });
+
+test("MyAuto image URLs remain bound to the exact listing id", () => {
+  const exact = "https://static.tnet.ge/myauto/photos/9/8/7/6/5/thumbs/122433509_1.jpg?v=7";
+  assert.deepEqual(parseMyAutoListingImageUrl(exact, "122433509"), {
+    id: "122433509",
+    photo: "9/8/7/6/5",
+    size: "thumbs",
+    index: 1,
+    version: 7,
+  });
+  assert.equal(parseMyAutoListingImageUrl(exact, "122433500"), null);
+  assert.equal(parseMyAutoListingImageUrl("https://static.tnet.ge/myauto/photos/9/8/7/6/5/thumbs/122433500_1.jpg?v=7", "122433509"), null);
+  assert.equal(parseMyAutoListingImageUrl("https://other.example/myauto/photos/9/8/7/6/5/thumbs/122433509_1.jpg?v=7", "122433509"), null);
+});
+
+test("MyAuto full gallery uses the official id/photo/count/version large-image formula", () => {
+  assert.deepEqual(buildMyAutoLargePhotoUrls({
+    id: "122928158",
+    photo: "5/1/8/2/9",
+    count: 3,
+    version: 1,
+  }), [
+    "https://static.tnet.ge/myauto/photos/5/1/8/2/9/large/122928158_1.jpg?v=1",
+    "https://static.tnet.ge/myauto/photos/5/1/8/2/9/large/122928158_2.jpg?v=1",
+    "https://static.tnet.ge/myauto/photos/5/1/8/2/9/large/122928158_3.jpg?v=1",
+  ]);
+  assert.equal(buildMyAutoLargePhotoUrls({ id: "122928158", photo: "../foreign", count: 3, version: 1 }).length, 0);
+  assert.equal(buildMyAutoLargePhotoUrls({ id: "other", photo: "5/1/8/2/9", count: 3, version: 1 }).length, 0);
+  assert.equal(buildMyAutoLargePhotoUrls({ id: "122928158", photo: "5/1/8/2/9", count: 99, version: 1 }).length, 30);
+});
+
