@@ -20,15 +20,9 @@ jobs:
           curl --connect-timeout 10 --max-time 120 -fsS 'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' -o adapters.json
           curl --connect-timeout 10 --max-time 180 -fsS 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' -o galleries.json
           curl --connect-timeout 10 --max-time 60 -fsS 'https://avtocena.com/api/catalog/home' -o public-home.json
-          curl --connect-timeout 10 --max-time 60 -fsS \
-            -H 'accept: text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8' \
-            -H 'accept-language: en-US,en;q=0.9,ka;q=0.8' \
-            -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36' \
-            'https://api2.myauto.ge/en/products/122964935' -o myauto-product.json
           jq . adapters.json
-          jq '{runtime,mode,myauto:{ok:.myauto.ok,id:.myauto.id,make:.myauto.make,model:.myauto.model,year:.myauto.year,apiStatus:.myauto.apiStatus,photo:.myauto.photo,photoVer:.myauto.photoVer,picNumber:.myauto.picNumber},autopapa:{ok:.autopapa.ok,fetched:.autopapa.fetched,normalized2020Plus:.autopapa.normalized2020Plus,samples:[.autopapa.samples[]|{id,make,model,year,sourcePrice,detailStatus,originalCount}]}}' galleries.json
+          jq '{runtime,mode,myauto:{ok:.myauto.ok,id:.myauto.id,make:.myauto.make,model:.myauto.model,year:.myauto.year,apiStatus:.myauto.apiStatus,photo:.myauto.photo,photoVer:.myauto.photoVer,picNumber:.myauto.picNumber,safeSpecFields:.myauto.safeSpecFields},autopapa:{ok:.autopapa.ok,fetched:.autopapa.fetched,normalized2020Plus:.autopapa.normalized2020Plus,samples:[.autopapa.samples[]|{id,make,model,year,sourcePrice,detailStatus,originalCount}]}}' galleries.json
           jq '{generationId,marketCounts,total}' public-home.json
-          jq '.data.info | with_entries(select(.key | test("engine|volume|power|horse|fuel|cyl|transmission|gear|drive|manufacturer|model|car_id|photo"; "i")))' myauto-product.json
       - name: Assert live Georgia source access and exact gallery metadata
         shell: bash
         run: |
@@ -55,6 +49,5 @@ jobs:
             adapters.json
             galleries.json
             public-home.json
-            myauto-product.json
           if-no-files-found: warn
           retention-days: 3
