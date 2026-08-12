@@ -1,0 +1,158 @@
+name: Audit Mashina gallery schema 20260812
+
+on:
+  push:
+    branches: [audit/mashina-gallery-schema-20260812]
+    paths:
+      - .github/workflows/audit-mashina-gallery-schema-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Inspect exact Mashina detail gallery markup without cache/storage writes
+        shell: bash
+        run: |
+          cat > /tmp/mashina-gallery-audit.mjs <<'JS'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+
+          const samples = [
+            {
+              sourceOfferId: '6969e4b03523b772288670',
+              sourceUrl: 'https://mashina.kg/details/toyota-camry-6969e4b03523b772288670',
+              seedUrl: 'https://im.mashina.kg/tachka/images/7/2/5/7251d17216063fbadd146ea51192125f_640x480.jpg',
+            },
+            {
+              sourceOfferId: '6a486354fe32172ec57f0a9b',
+              sourceUrl: 'https://mashina.kg/details/tesla-model-y-6a486354fe32172ec57f0a9b',
+              seedUrl: 'https://storage.mashina.kg/catalog/images/2026-07-10/10076958/f5a12c679ca6542ef9b687313851e4d0_medium.webp',
+            },
+            {
+              sourceOfferId: '6a70b660a1eece5448a9df18',
+              sourceUrl: 'https://mashina.kg/details/toyota-rav4-6a70b660a1eece5448a9df18',
+              seedUrl: 'https://storage.mashina.kg/catalog/images/2026-08-03/10103462/f342269f954c8a5fe97d0c8c1f79e21a_medium.webp',
+            },
+            {
+              sourceOfferId: '6a6db2108d37ba3bb9455967',
+              sourceUrl: 'https://mashina.kg/details/hyundai-tucson-6a6db2108d37ba3bb9455967',
+              seedUrl: 'https://storage.mashina.kg/catalog/images/2026-08-01/10101487/28ab0b32ef4f03a5b9b432b5fe571c57_medium.webp',
+            },
+            {
+              sourceOfferId: '6a75c2d60b08d699a74ef510',
+              sourceUrl: 'https://mashina.kg/details/mazda-cx-5-6a75c2d60b08d699a74ef510',
+              seedUrl: 'https://storage.mashina.kg/catalog/images/2026-08-07/10106759/970af77c078343791f506b69c15af9dc_medium.webp',
+            },
+          ];
+
+          const headers = {
+            accept: 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+          };
+          const bad = /logo|favicon|icon|sprite|banner|placeholder|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image/i;
+          const decode = (s) => String(s || '').replaceAll('\\/', '/').replace(/&amp;/gi, '&').replace(/\\u0026/g, '&');
+          const cleanSnippet = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 3200);
+          const imageIdentity = (url) => {
+            try {
+              const u = new URL(url);
+              const ext = path.extname(u.pathname);
+              const name = path.basename(u.pathname, ext)
+                .replace(/_(?:small|medium|large|original|thumb)$/i, '')
+                .replace(/_\d{2,4}x\d{2,4}$/i, '');
+              return `${u.host}${path.posix.dirname(u.pathname)}/${name}`;
+            } catch { return ''; }
+          };
+          const directoryKey = (url) => {
+            try { const u = new URL(url); return `${u.host}${path.posix.dirname(u.pathname)}`; } catch { return ''; }
+          };
+          const extractUrls = (markup) => {
+            const values = [];
+            for (const m of markup.matchAll(/https?:\\?\/\\?\/[^"'<>\s\\]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'<>\s\\]*)?/gi)) values.push(decode(m[0]));
+            for (const m of markup.matchAll(/(?:src|href|content|data-src|data-original|data-lazy-src)\s*=\s*["']([^"']+)["']/gi)) values.push(decode(m[1]));
+            for (const m of markup.matchAll(/(?:srcset|data-srcset)\s*=\s*["']([^"']+)["']/gi)) m[1].split(',').forEach((item) => values.push(decode(item.trim().split(/\s+/)[0])));
+            return [...new Set(values.map((v) => {
+              try { return new URL(v, 'https://mashina.kg').toString(); } catch { return ''; }
+            }).filter((url) => /^https:/i.test(url) && !bad.test(url) && /(?:storage\.mashina\.kg\/catalog\/images\/|im\.mashina\.kg\/tachka\/images\/)/i.test(url)))];
+          };
+          const contextAround = (markup, needle, radius = 1400) => {
+            if (!needle) return null;
+            const idx = markup.indexOf(needle);
+            if (idx < 0) return null;
+            return cleanSnippet(markup.slice(Math.max(0, idx - radius), Math.min(markup.length, idx + needle.length + radius)));
+          };
+
+          const output = [];
+          for (const sample of samples) {
+            const response = await fetch(sample.sourceUrl, { headers, redirect: 'follow', cache: 'no-store' });
+            const markup = await response.text();
+            const urls = extractUrls(markup);
+            const seedDir = directoryKey(sample.seedUrl);
+            const seedIdentity = imageIdentity(sample.seedUrl);
+            const sameDir = urls.filter((url) => directoryKey(url) === seedDir);
+            const sameDirUniqueIdentities = [...new Map(sameDir.map((url) => [imageIdentity(url), url])).values()];
+            const sameSeedIdentityVariants = urls.filter((url) => imageIdentity(url) === seedIdentity);
+            const groups = new Map();
+            for (const url of urls) {
+              const key = directoryKey(url);
+              if (!groups.has(key)) groups.set(key, []);
+              groups.get(key).push(url);
+            }
+            const topDirectories = [...groups.entries()]
+              .map(([directory, list]) => ({ directory, urls: list.length, identities: new Set(list.map(imageIdentity)).size }))
+              .sort((a, b) => b.identities - a.identities || b.urls - a.urls)
+              .slice(0, 12);
+            const scriptBlocks = [...markup.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
+              .map((m) => m[1])
+              .filter((body) => /storage\.mashina\.kg\/catalog\/images\/|im\.mashina\.kg\/tachka\/images\//i.test(body))
+              .slice(0, 10)
+              .map((body) => cleanSnippet(body));
+            const allHostTokens = urls.map((url) => {
+              try { return new URL(url).pathname; } catch { return url; }
+            });
+            output.push({
+              sourceOfferId: sample.sourceOfferId,
+              sourceUrl: sample.sourceUrl,
+              status: response.status,
+              finalUrl: response.url,
+              bytes: Buffer.byteLength(markup),
+              sourceOfferIdInMarkup: markup.includes(sample.sourceOfferId),
+              sourceOfferIdContext: contextAround(markup, sample.sourceOfferId),
+              title: markup.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || null,
+              totalMashinaImageUrls: urls.length,
+              totalMashinaImageIdentities: new Set(urls.map(imageIdentity)).size,
+              seedUrl: sample.seedUrl,
+              seedUrlInMarkup: markup.includes(sample.seedUrl),
+              seedPathInMarkup: markup.includes(new URL(sample.seedUrl).pathname),
+              seedDirectory: seedDir,
+              sameDirectoryUrls: sameDir.length,
+              sameDirectoryUniqueIdentities: sameDirUniqueIdentities.length,
+              sameDirectory: sameDirUniqueIdentities.slice(0, 40),
+              sameSeedIdentityVariants,
+              topDirectories,
+              seedContext: contextAround(markup, new URL(sample.seedUrl).pathname),
+              directoryContext: contextAround(markup, path.posix.dirname(new URL(sample.seedUrl).pathname)),
+              galleryWordContexts: ['gallery','photos','images','swiper','slider'].map((word) => ({ word, context: contextAround(markup.toLowerCase(), word, 900) })).filter((x) => x.context),
+              scriptBlocks,
+              firstImagePaths: allHostTokens.slice(0, 60),
+            });
+          }
+          await fs.writeFile('mashina-gallery-schema-audit.json', JSON.stringify({ checkedAt: new Date().toISOString(), output }, null, 2));
+          console.log(JSON.stringify({ checkedAt: new Date().toISOString(), output }, null, 2));
+          JS
+          node /tmp/mashina-gallery-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mashina-gallery-schema-audit
+          path: mashina-gallery-schema-audit.json
+          if-no-files-found: error
+          retention-days: 2
