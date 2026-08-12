@@ -1,0 +1,38 @@
+name: Audit Georgia AutoPapa exact power batch coverage 20260812
+
+on:
+  push:
+    branches:
+      - audit/georgia-power-batch-coverage-20260812
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Read-only exact AutoPapa power batches
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > rows.ndjson
+          for offset in 0 80 160 240 320; do
+            url="https://avtocena.com/api/internal/georgia-power-a91f72?batch=1&offset=${offset}&limit=80&audit=20260812-batch-coverage"
+            curl --connect-timeout 10 --max-time 150 --retry 2 --retry-delay 3 --retry-all-errors -fsS \
+              -H 'cache-control: no-cache' "$url" -o "batch-${offset}.json"
+            jq -e '.runtime == "yandex-serverless" and .mode == "read-only-exact-autopapa-power-batch"' "batch-${offset}.json" >/dev/null
+            jq -c '.results[]' "batch-${offset}.json" >> rows.ndjson
+            jq '{offset,totalCandidates,inspected,parsedExactPowerCount,nextOffset}' "batch-${offset}.json"
+          done
+          jq -s '{
+            inspected: length,
+            parsedExactPowerCount: ([.[] | select((.detailPowerHp // 0) > 0)] | length),
+            parsedExactPowerPct: (([.[] | select((.detailPowerHp // 0) > 0)] | length) * 100 / (length|if .==0 then 1 else . end)),
+            httpOk: ([.[] | select(.status == 200)] | length),
+            errors: ([.[] | select(.error != null)] | length),
+            byPower: ([.[] | select((.detailPowerHp // 0) > 0) | .detailPowerHp] | group_by(.) | map({powerHp: .[0], count: length})),
+            sampleParsed: ([.[] | select((.detailPowerHp // 0) > 0) | {sourceOfferId,make,model,year,engineCc,fuel,detailPowerHp}] | .[:30]),
+            sampleMissing: ([.[] | select((.detailPowerHp // 0) <= 0) | {sourceOfferId,make,model,year,engineCc,fuel,status,error}] | .[:20])
+          }' rows.ndjson | tee summary.json
