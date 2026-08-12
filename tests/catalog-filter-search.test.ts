@@ -8,8 +8,11 @@ import { getJsonStorage, readDataJson, resetJsonStorageForTests, safeStoragePath
 
 const modelRoute = fs.readFileSync(new URL("../apps/web/app/api/catalog/models/route.ts", import.meta.url), "utf8");
 
-test("model suggestions merge the live catalog with the curated knowledge base", () => {
-  assert.match(modelRoute, /readCatalogFacets\(\{ make \}\)/);
+test("model suggestions use dependent live facets and only mix knowledge without inventory context", () => {
+  assert.match(modelRoute, /const modelFilters = contextualFilters\(url\.searchParams, make, false\)/);
+  assert.match(modelRoute, /const inventoryContext = hasInventoryContext\(modelFilters\)/);
+  assert.match(modelRoute, /const catalog = await readCatalogFacets\(modelFilters\)/);
+  assert.match(modelRoute, /const knowledge = inventoryContext \? \{ models: \[\] as ModelSuggestion\[\] \} : await vehicleKnowledgeFacets\(make\)/);
   assert.match(modelRoute, /mergeSuggestions\(knowledgeMatches, catalogFacets\.models, query, limit\)/);
 });
 
@@ -83,7 +86,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       assert.deepEqual(globalResults.items.map((offer) => offer.id), ["filter-target"]);
       assert.deepEqual(globalFacets.models, [{ make: "Hyundai", model: "Avante (CN7)" }]);
       assert.equal(allProjectionReads, 1, "global results and filtered facets must share one all-market projection read");
-      assert.equal(manifestReads, 0, "the current all-market projection must bypass the generation manifest");
+      assert.equal(manifestReads, 1, "current search projection must be validated against the active manifest generation");
     } finally {
       storage.readJsonWithMeta = originalRead;
     }
