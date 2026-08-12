@@ -23,8 +23,8 @@ jobs:
         run: |
           set -euo pipefail
           sed -i '/sourceId: "autopapa_georgia_open"/,/^  },$/ {
-            s|    detailPattern: .*|    detailPattern: /\\/en\\/usd\\/[^/?#]+\\/[^/?#]+\\/\\d+(?:[/?#]|$)/i,|
-            s|pageQuery("https://autopapa.ge/en/search", page),|pageQuery("https://autopapa.ge/en/usd/search", page),|
+            s~    detailPattern: .*~    detailPattern: /\\/en\\/usd\\/[^/?#]+\\/[^/?#]+\\/\\d+(?:[/?#]|$)/i,~
+            s~pageQuery("https://autopapa.ge/en/search", page),~pageQuery("https://autopapa.ge/en/usd/search", page),~
             /pageQuery("https:\/\/autopapa.ge\/en\/cars", page),/d
             /pageQuery("https:\/\/autopapa.ge\/search", page),/d
           }' apps/web/lib/catalog/scale-market-sources.ts
