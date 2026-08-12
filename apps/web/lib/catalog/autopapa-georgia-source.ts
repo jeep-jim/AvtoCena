@@ -122,7 +122,7 @@ export function autoPapaDetailPowerHp(markup: string) {
   const match = facts.match(/\bPower\s*:\s*([0-9]{1,4}(?:[.,][0-9]+)?)\s*(?:hp|horsepower)\b/i);
   if (!match) return undefined;
   const value = Number(match[1].replace(",", "."));
-  return Number.isFinite(value) && value > 0 && value <= 2_500 ? value : undefined;
+  return Number.isFinite(value) && value >= 20 && value <= 2_500 ? value : undefined;
 }
 
 export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_URL}/en/usd/search?page=1`): AutoPapaGeorgiaRow[] {
