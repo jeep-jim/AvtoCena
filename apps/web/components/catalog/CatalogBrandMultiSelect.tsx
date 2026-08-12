@@ -112,12 +112,20 @@ export function CatalogBrandMultiSelect({
     };
   }, [open]);
 
-  const brands = useMemo(() => options
-    .filter((option) => Boolean(option.value))
-    .filter((option) => {
-      const needle = query.trim().toLocaleLowerCase("ru-RU");
-      return !needle || option.label.toLocaleLowerCase("ru-RU").includes(needle);
-    }), [options, query]);
+  const brands = useMemo(() => {
+    const optionLabels = new Map(options.filter((option) => option.value).map((option) => [option.value.toLocaleLowerCase("ru-RU"), option.label]));
+    const liveMakes = Object.keys(stats.counts).filter((make) => Number(stats.counts[make] || 0) > 0);
+    const source = liveMakes.length ? [...liveMakes, ...selected] : [...options.map((option) => option.value), ...selected];
+    const seen = new Map<string, Option>();
+    for (const make of source.map(clean).filter(Boolean)) {
+      const key = make.toLocaleLowerCase("ru-RU");
+      if (!seen.has(key)) seen.set(key, { value: make, label: optionLabels.get(key) || make });
+    }
+    const needle = query.trim().toLocaleLowerCase("ru-RU");
+    return [...seen.values()]
+      .filter((option) => !needle || option.label.toLocaleLowerCase("ru-RU").includes(needle))
+      .sort((left, right) => left.label.localeCompare(right.label, "ru"));
+  }, [options, query, selected, stats.counts]);
 
   const toggle = (make: string) => {
     const key = make.toLocaleLowerCase("ru-RU");
