@@ -5,6 +5,7 @@ import test from "node:test";
 const script = fs.readFileSync("scripts/catalog-enforce-global-model-cap.mjs", "utf8");
 const workflow = fs.readFileSync(".github/workflows/catalog-global-model-cap.yml", "utf8");
 const japanStrictWorkflow = fs.readFileSync(".github/workflows/catalog-japan-strict-merge-publish.yml", "utf8");
+const kcarRepairWorkflow = fs.readFileSync(".github/workflows/catalog-kcar-exterior-gallery-repair.yml", "utf8");
 
 const liveWriterWorkflowPaths = [
   ".github/workflows/catalog-live-daily-working-markets.yml",
@@ -60,6 +61,13 @@ test("Japan strict writer is dispatch-only and proves all-seven safety after eve
   assert.match(japanStrictWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/);
   assert.match(japanStrictWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(japanStrictWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+});
+
+test("K Car repair post-write audit uses the canonical model cap and no stale market floors", () => {
+  assert.match(kcarRepairWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(kcarRepairWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+  assert.doesNotMatch(kcarRepairWorkflow, /CATALOG_AUDIT_MIN_COUNTS_JSON/);
+  assert.doesNotMatch(kcarRepairWorkflow, /japan\\?\"?:5000/);
 });
 
 test("every production catalog writer uses the shared non-cancelling concurrency slot", () => {
