@@ -11,7 +11,7 @@ const HEADERS = {
 };
 const DETAIL_RE = /\/en\/pr\/(\d+)\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
-const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper)\b/i;
+const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|loader|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper)\b/i;
 const KNOWN_MAKES = [
   "Mercedes-Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
   "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
@@ -128,7 +128,7 @@ export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAut
     const price = numberTokens.at(-1);
     const bodyType = text.match(/\b(Sedan|Hatchback|Jeep|Coupe|Cabriolet|Minivan|Universal|Wagon)\b/i)?.[1];
     const fuel = text.match(/\b(Petrol|Diesel|Electric|Hybrid|Plug-in Hybrid|LPG|CNG|Hydrogen)\b/i)?.[1];
-    if (!make || !model || !year || !price || COMMERCIAL_RE.test(`${title} ${text.slice(0, 400)}`)) continue;
+    if (!make || !model || year < 2020 || !price || COMMERCIAL_RE.test(`${title} ${text.slice(0, 400)}`)) continue;
     rows.push({
       id,
       detailUrl: entry.href,
@@ -159,7 +159,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 15_000));
       try {
-        const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+        const response = await fetch(url, { headers: HEADERS, redirect: "follow", cache: "no-store", signal: controller.signal });
         const markup = await response.text();
         attempts.push(`${new URL(url).host}${new URL(url).pathname}${new URL(url).search}:${response.status}:${markup.length}`);
         if (!response.ok) continue;
@@ -182,7 +182,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: MyAutoListRow): VehicleOffer | null {
-    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl) return null;
+    if (!raw?.id || !raw.make || !raw.model || raw.year < 2020 || !raw.price || !raw.detailUrl) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id),
