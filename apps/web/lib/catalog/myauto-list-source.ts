@@ -122,13 +122,14 @@ export function parseMyAutoListingMarkup(markup: string, pageUrl: string): MyAut
     const title = [...entry.titles].sort((left, right) => right.length - left.length)[0] || "";
     const { make, model } = deriveMakeModel(title);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:წ|year)?\b/i)?.[1]);
+    if (!year || year < 2020) continue;
     const numberTokens = [...text.matchAll(/(?:^|\s)([0-9]{1,3}(?:[ ,][0-9]{3})+|[0-9]{4,6})(?=\s|$)/g)]
       .map((match) => integer(match[1]))
       .filter((value): value is number => Boolean(value && value !== year && value > 2_999 && value < 2_000_000));
     const price = numberTokens.at(-1);
     const bodyType = text.match(/\b(Sedan|Hatchback|Jeep|Coupe|Cabriolet|Minivan|Universal|Wagon)\b/i)?.[1];
     const fuel = text.match(/\b(Petrol|Diesel|Electric|Hybrid|Plug-in Hybrid|LPG|CNG|Hydrogen)\b/i)?.[1];
-    if (!make || !model || !year || !price || COMMERCIAL_RE.test(`${title} ${text.slice(0, 400)}`)) continue;
+    if (!make || !model || !price || COMMERCIAL_RE.test(`${title} ${text.slice(0, 400)}`)) continue;
     rows.push({
       id,
       detailUrl: entry.href,
@@ -182,7 +183,7 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: MyAutoListRow): VehicleOffer | null {
-    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl) return null;
+    if (!raw?.id || !raw.make || !raw.model || !raw.year || raw.year < 2020 || !raw.price || !raw.detailUrl) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id),
