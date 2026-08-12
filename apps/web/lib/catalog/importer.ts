@@ -68,6 +68,7 @@ if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
+const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia" || source.sourceId === "autopapa_georgia_open");
 
 const completeSources = [
   prepareSource(guaziRuSource),
@@ -76,7 +77,7 @@ const completeSources = [
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
-  ...scaleMarketSources.map(prepareSource),
+  ...allowedScaleSources.map(prepareSource),
   ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
