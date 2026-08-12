@@ -17,6 +17,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo '=== adapter dry-run ==='
           curl -fsS --max-time 180 --retry 2 --retry-delay 2 \
             'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' \
+            | python3 -m json.tool
+          echo '=== fixed egress diagnostic ==='
+          curl -fsS --max-time 180 --retry 2 --retry-delay 2 \
+            'https://avtocena.com/api/internal/georgia-egress-8d4c2f' \
             | python3 -m json.tool
