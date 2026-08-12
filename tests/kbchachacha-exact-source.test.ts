@@ -51,3 +51,44 @@ test("KB ChaChaCha detail parser rejects cross-car galleries and reads exact spe
   assert.equal(detail.images.length, 6);
   assert.throws(() => parseKbChaChaChaDetail(html, "99999999"), /identity/);
 });
+
+test("KB ChaChaCha concurrent detail challenge pauses queued requests and keeps exact listing galleries", async () => {
+  const ids = ["28651936", "28651937", "28651938"];
+  const html = ids.map((carSeq, index) => `<div class="area" data-car-seq="${carSeq}">
+    <div class="thumnail"><img src="https://img.kbchachacha.com/IMG/carimg/l/x/${carSeq}_1.jpeg"><img src="https://img.kbchachacha.com/IMG/carimg/l/x/${carSeq}_2.jpeg"></div>
+    <strong class="tit">기아 더 뉴 카니발 프레스티지</strong>
+    <div class="data-line"><span>23/10식(24년형)</span><span>${12_345 + index}km</span></div>
+    <span class="price">4,500<span class="unit">만원</span></span>
+  </div>`).join("");
+  const rows = parseKbChaChaChaList(html);
+  assert.equal(rows.length, 3);
+  const offers = rows.map((row) => kbChaChaChaExactSource.normalizeOffer(row));
+  assert.equal(offers.filter(Boolean).length, 3);
+
+  const originalFetch = globalThis.fetch;
+  const originalInterval = process.env.KBCHACHACHA_DETAIL_MIN_INTERVAL_MS;
+  const originalPause = process.env.KBCHACHACHA_DETAIL_PAUSE_MS;
+  let fetchCalls = 0;
+  process.env.KBCHACHACHA_DETAIL_MIN_INTERVAL_MS = "0";
+  process.env.KBCHACHACHA_DETAIL_PAUSE_MS = "60000";
+  globalThis.fetch = async () => {
+    fetchCalls += 1;
+    return new Response("<html><body>Access denied</body></html>", { status: 403, headers: { "content-type": "text/html" } });
+  };
+
+  try {
+    const galleries = await Promise.all(offers.map((offer) => kbChaChaChaExactSource.fetchImages(offer!)));
+    assert.equal(fetchCalls, 1);
+    for (let index = 0; index < galleries.length; index++) {
+      assert.deepEqual(galleries[index].map((image) => image.url), rows[index].images);
+      assert.equal(offers[index]?.operational?.gallerySafetyMode, "kbchachacha_exact_listing_card_car_seq_v1");
+      assert.ok(galleries[index].every((image) => new URL(image.url).pathname.includes(`/${ids[index]}_`)));
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalInterval === undefined) delete process.env.KBCHACHACHA_DETAIL_MIN_INTERVAL_MS;
+    else process.env.KBCHACHACHA_DETAIL_MIN_INTERVAL_MS = originalInterval;
+    if (originalPause === undefined) delete process.env.KBCHACHACHA_DETAIL_PAUSE_MS;
+    else process.env.KBCHACHACHA_DETAIL_PAUSE_MS = originalPause;
+  }
+});
