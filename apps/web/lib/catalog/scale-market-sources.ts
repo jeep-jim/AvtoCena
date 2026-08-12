@@ -1,3 +1,4 @@
+import { autoPapaGeorgiaSource } from "./autopapa-georgia-source";
 import { OpenMarketAdapter, type OpenMarketSourceConfig } from "./open-market-sources";
 import type { CatalogSourceAdapter } from "./types";
 
@@ -87,19 +88,8 @@ const configs: OpenMarketSourceConfig[] = [
     ],
   },
 
-  // Georgia is intentionally restricted to the company anchor AutoPapa here.
-  // MyAuto has its dedicated adapter. AUTO.GE, SS.GE and MyMarket are banned.
-  {
-    sourceId: "autopapa_georgia_open",
-    market: "georgia",
-    label: "AutoPapa Georgia",
-    baseUrl: "https://autopapa.ge",
-    currency: "USD",
-    // Current canonical listing links are /en/usd/{make}/{model}/{numeric-id}.
-    detailPattern: /\/(?:en\/)?(?:usd\/)?[^/?#]+\/[^/?#]+\/\d{5,}\/?$/i,
-    referer: "https://autopapa.ge/en/usd",
-    listUrls: (page) => [pageQuery("https://autopapa.ge/en/usd/search", page)],
-  },
+  // Georgia is intentionally restricted to the dedicated company anchor adapters:
+  // MyAuto and AutoPapa. AUTO.GE, SS.GE and MyMarket are banned.
 
   // Kyrgyzstan: Mashina has a dedicated adapter; the public alternatives below
   // are probed independently and accumulated for three days.
@@ -210,5 +200,5 @@ const configs: OpenMarketSourceConfig[] = [
   },
 ];
 
-export const scaleMarketSources: CatalogSourceAdapter[] = configs.map((config) => new OpenMarketAdapter(config));
+export const scaleMarketSources: CatalogSourceAdapter[] = [...configs.map((config) => new OpenMarketAdapter(config)), autoPapaGeorgiaSource];
 export const SCALE_MARKET_SOURCE_IDS = scaleMarketSources.map((source) => source.sourceId);
