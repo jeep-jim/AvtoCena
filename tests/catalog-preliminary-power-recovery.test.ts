@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import {
   isPreliminaryElectrifiedCalculation,
   isPreliminaryPowerPendingCalculation,
 } from "../apps/web/lib/catalog/customs-pricing";
+
+const publisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
 
 function preliminary(powertrainKind: string) {
   return {
@@ -30,4 +33,10 @@ test("preliminary recovery rejects non-power gaps", () => {
   offer.calculationSnapshot.missing = ["engine_cc"];
   offer.calculationSnapshot.customs.missing = ["engine_cc"];
   assert.equal(isPreliminaryPowerPendingCalculation(offer), false);
+});
+
+
+test("atomic recovery publisher accepts the same preliminary power contract", () => {
+  assert.match(publisher, /isPreliminaryPowerPendingCalculation/);
+  assert.doesNotMatch(publisher, /isPreliminaryElectrifiedCalculation/);
 });
