@@ -1,0 +1,145 @@
+name: One-shot loader skeleton runtime
+
+on:
+  push:
+    branches:
+      - fix/loader-skeleton-runtime-20260812
+
+jobs:
+  patch-and-validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/loader-skeleton-runtime-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch route loader timing and clipping
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/components/layout/RoutePreloader.tsx')
+          s=p.read_text()
+          s=s.replace('import { Suspense, useEffect, useRef, useState } from "react";', 'import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";')
+          s=s.replace('const MIN_VISIBLE_MS = 80;', 'const MIN_VISIBLE_MS = 0;')
+          s=s.replace('  background:rgba(15,23,42,.18)!important;\n  isolation:isolate!important;', '  background:rgba(15,23,42,.10)!important;\n  isolation:isolate!important;\n  clip-path:inset(0)!important;\n  contain:paint!important;')
+          s=s.replace('  opacity:.72!important;', '  opacity:.58!important;')
+          s=s.replace('  background:rgba(12,18,30,.66)!important;', '  background:rgba(12,18,30,.56)!important;')
+          old=' const show=()=>{clearTimers();revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};'
+          new=' const show=()=>{clearTimers();const startedRoute=`${window.location.pathname}${window.location.search}`;revealTimerRef.current=window.setTimeout(()=>{revealTimerRef.current=null;if(`${window.location.pathname}${window.location.search}`!==startedRoute)return;startedAtRef.current=performance.now();setVisible(true);safetyTimerRef.current=window.setTimeout(()=>setVisible(false),MAX_VISIBLE_MS)},REVEAL_DELAY_MS)};'
+          if old not in s: raise SystemExit('show block not found')
+          s=s.replace(old,new)
+          old2=' useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(revealTimerRef.current!==null){hide();return}if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>hide(),delay)},[routeKey,visible]);'
+          new2=' useLayoutEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;hide()},[routeKey]);'
+          if old2 not in s: raise SystemExit('route hide effect not found')
+          s=s.replace(old2,new2)
+          p.write_text(s)
+          PY
+      - name: Add public route skeleton
+        shell: bash
+        run: |
+          cat > 'apps/web/app/(public)/loading.tsx' <<'EOF'
+          import { PublicHeader } from "@/components/layout/PublicHeader";
+
+          export default function PublicLoading() {
+            return <main className="ac-page-copy min-h-screen bg-[#0f172a] text-white" aria-busy="true" aria-label="Загружаем страницу">
+              <PublicHeader />
+              <section className="mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
+                <div className="h-10 w-[min(72vw,560px)] animate-pulse rounded-2xl bg-white/[0.09] md:h-14" />
+                <div className="mt-4 h-5 w-[min(54vw,360px)] animate-pulse rounded-full bg-white/[0.055]" />
+                <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,.75fr)]">
+                  <div className="min-h-[320px] animate-pulse rounded-[1.7rem] bg-white/[0.055] md:min-h-[500px]" />
+                  <div className="grid content-start gap-3">
+                    <div className="h-24 animate-pulse rounded-[1.35rem] bg-white/[0.065]" />
+                    <div className="grid grid-cols-2 gap-3">{Array.from({ length: 6 }, (_, index) => <div key={index} className="h-16 animate-pulse rounded-2xl bg-white/[0.045]" />)}</div>
+                    <div className="h-28 animate-pulse rounded-[1.35rem] bg-white/[0.045]" />
+                  </div>
+                </div>
+                <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">{Array.from({ length: 4 }, (_, index) => <div key={index} className="h-56 animate-pulse rounded-[1.35rem] bg-white/[0.045]" />)}</div>
+              </section>
+            </main>;
+          }
+          EOF
+      - name: Give public runtime more memory and lower per-instance concurrency
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/deploy-yandex.yml')
+          s=p.read_text()
+          if 'revision-memory: 1Gb' not in s: raise SystemExit('memory setting not found')
+          if 'revision-concurrency: 8' not in s: raise SystemExit('concurrency setting not found')
+          s=s.replace('revision-memory: 1Gb','revision-memory: 2Gb')
+          s=s.replace('revision-concurrency: 8','revision-concurrency: 4')
+          p.write_text(s)
+          PY
+      - name: Make UAE Georgia post-write assertion concurrency-safe
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/catalog-live-recovery-uae-georgia-direct.yml')
+          s=p.read_text()
+          old='''          const before = JSON.parse(fs.readFileSync('catalog-direct-before-all7.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
+          const preserved = ['korea','china','japan','europe','kyrgyzstan'];
+          for (const market of preserved) {
+            const beforeCount = Number(before.markets?.[market]?.count || 0);
+            const oldRows = Number(before.markets?.[market]?.belowMarketMinYearCount || 0);
+            const expectedAfter = beforeCount - oldRows;
+            const actualAfter = Number(after.markets?.[market]?.count || 0);
+            if (actualAfter !== expectedAfter) {
+              throw new Error(`unexpected_cross_market_change:${market}:${beforeCount}-${oldRows}=${expectedAfter},actual=${actualAfter}`);
+            }
+          }
+'''
+          new='''          const before = JSON.parse(fs.readFileSync('catalog-direct-before-all7.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
+          const publish = JSON.parse(fs.readFileSync('catalog-direct-recovery-batch-publish-report.json', 'utf8'));
+          const preserved = ['korea','china','japan','europe','kyrgyzstan'];
+          for (const market of preserved) {
+            const expectedAfter = Number(publish.preservedByMarket?.[market] ?? publish.manifestCounts?.[market] ?? 0);
+            const actualAfter = Number(after.markets?.[market]?.count || 0);
+            if (actualAfter !== expectedAfter) {
+              throw new Error(`preserved_manifest_mismatch:${market}:expected=${expectedAfter},actual=${actualAfter}`);
+            }
+          }
+          for (const market of ['uae','georgia']) {
+            const expectedAfter = Number(publish.manifestCounts?.[market] || 0);
+            const actualAfter = Number(after.markets?.[market]?.count || 0);
+            if (actualAfter !== expectedAfter) throw new Error(`published_manifest_mismatch:${market}:expected=${expectedAfter},actual=${actualAfter}`);
+          }
+          console.log({preSnapshot:Object.fromEntries(preserved.map(m=>[m,before.markets?.[m]?.count||0])), atomicPreserved:publish.preservedByMarket});
+'''
+          if old not in s: raise SystemExit('old assertion block not found')
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Regression assertions
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const loader=fs.readFileSync('apps/web/components/layout/RoutePreloader.tsx','utf8');
+          for (const token of ['height:64px!important','min-height:64px!important','max-height:64px!important','opacity:.58!important','clip-path:inset(0)!important','useLayoutEffect','startedRoute']) if(!loader.includes(token)) throw new Error(`loader missing ${token}`);
+          if(!fs.existsSync('apps/web/app/(public)/loading.tsx')) throw new Error('public loading skeleton missing');
+          const deploy=fs.readFileSync('.github/workflows/deploy-yandex.yml','utf8');
+          if(!deploy.includes('revision-memory: 2Gb')||!deploy.includes('revision-concurrency: 4')) throw new Error('runtime hardening missing');
+          const recovery=fs.readFileSync('.github/workflows/catalog-live-recovery-uae-georgia-direct.yml','utf8');
+          if(!recovery.includes('preserved_manifest_mismatch')||recovery.includes('unexpected_cross_market_change')) throw new Error('recovery assertion not fixed');
+          NODE
+          node --import tsx --test tests/auto-georgia-price.test.ts
+          npm run typecheck
+          npm --workspace apps/web run build
+      - name: Commit validated changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/components/layout/RoutePreloader.tsx 'apps/web/app/(public)/loading.tsx' .github/workflows/deploy-yandex.yml .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+          git commit -m 'fix(ui): finish route loading shell and runtime hardening'
+          git push origin HEAD:fix/loader-skeleton-runtime-20260812
