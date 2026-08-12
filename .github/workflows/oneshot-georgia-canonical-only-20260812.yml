@@ -22,7 +22,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: python3 scripts/patch-georgia-canonical-only-20260812.py
+      - run: |
+          python3 scripts/patch-georgia-canonical-only-20260812.py
+          python3 scripts/patch-georgia-remove-autoge-residuals-20260812.py
       - run: node --check scripts/catalog-live-recovery-direct-exact.mjs
       - run: node --check scripts/catalog-live-recovery-market.mjs
       - run: node --import tsx --test tests/georgia-canonical-source-policy-20260812.test.ts
