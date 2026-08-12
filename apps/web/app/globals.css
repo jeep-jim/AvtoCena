@@ -452,3 +452,13 @@ textarea::placeholder {
     animation: none !important;
   }
 }
+
+/* Filled red UI is a site-wide semantic contract: its text is always white. */
+:where([class~="bg-red-400"],[class~="bg-red-500"],[class~="bg-red-600"],[class~="bg-red-700"],[class~="bg-red-800"],[class~="bg-red-900"]) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+:where([class~="bg-red-400"],[class~="bg-red-500"],[class~="bg-red-600"],[class~="bg-red-700"],[class~="bg-red-800"],[class~="bg-red-900"]) :where(span,strong,small,p) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
