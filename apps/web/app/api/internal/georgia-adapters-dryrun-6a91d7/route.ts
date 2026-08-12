@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { myAutoListSource } from "@/lib/catalog/myauto-list-source";
-import { scaleMarketSources } from "@/lib/catalog/scale-market-sources";
+import { autoPapaGeorgiaSource } from "@/lib/catalog/autopapa-georgia-source";
 import { isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "@/lib/catalog/offer-quality";
 import type { CatalogSourceAdapter, VehicleOffer } from "@/lib/catalog/types";
 
@@ -38,6 +38,10 @@ async function dryRun(source: CatalogSourceAdapter) {
         year: offer.year,
         sourcePrice: offer.sourcePrice,
         sourceCurrency: offer.sourceCurrency,
+        mileageKm: offer.mileageKm || null,
+        engineCc: offer.engineCc || null,
+        transmission: offer.transmission || null,
+        fuel: offer.fuel || null,
         sourceHost: (() => { try { return new URL(String(offer.operational?.sourceUrl || "")).host; } catch { return ""; } })(),
         rawImages: rawImageUrls(offer).length,
         rawImageHosts: [...new Set(rawImageUrls(offer).map((url) => { try { return new URL(url).host; } catch { return ""; } }).filter(Boolean))],
@@ -49,8 +53,7 @@ async function dryRun(source: CatalogSourceAdapter) {
 }
 
 export async function GET() {
-  const autoPapa = scaleMarketSources.find((source) => source.sourceId === "autopapa_georgia_open");
-  const sources = [myAutoListSource, autoPapa].filter((source): source is CatalogSourceAdapter => Boolean(source));
+  const sources: CatalogSourceAdapter[] = [myAutoListSource, autoPapaGeorgiaSource];
   const results = [];
   for (const source of sources) results.push(await dryRun(source));
   return NextResponse.json({ runtime: "yandex-serverless", mode: "dry-run-no-persist-no-image-cache", results }, { headers: { "cache-control": "no-store" } });
