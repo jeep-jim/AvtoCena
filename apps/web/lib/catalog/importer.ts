@@ -43,6 +43,7 @@ import { carvectorJapanCurrentSource } from "./carvector-current-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
+import { autoPapaGeorgiaSource } from "./autopapa-georgia-source";
 import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
@@ -68,12 +69,15 @@ if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
-const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia" || source.sourceId === "autopapa_georgia_open");
+// Georgia is canonical-only: MyAuto plus the dedicated AutoPapa adapter. Do not
+// let the generic scale adapter with the same sourceId replace the dedicated one.
+const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia");
 const bannedGeorgiaSourceIds = new Set(["auto_georgia_open", "mymarket_georgia_open", "ss_georgia_open"]);
 
 const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoListSource),
+  prepareSource(autoPapaGeorgiaSource),
   ...regionalLiveOverrides.map(prepareSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
@@ -128,6 +132,7 @@ const dedicatedDetailSourceIds = new Set([
   "dubizzle_uae_open",
   "kcar_korea_open",
   "kbchachacha_korea_open",
+  "autopapa_georgia_open",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
