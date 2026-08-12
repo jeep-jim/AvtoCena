@@ -14,20 +14,22 @@ test("sort direction highlights only the active arrow", () => {
   assert.match(filters, /active=\{Boolean\(sortKey\)\}/);
 });
 
-test("catalog brand picker is a multiselect with logos and model counts", () => {
+test("catalog brand picker is a multiselect with logos and live compatible model counts", () => {
   assert.match(filters, /CatalogBrandMultiSelect/);
   assert.match(brandSelect, /BrandLogoVisual/);
   assert.match(brandSelect, /modelCounts/);
+  assert.match(brandSelect, /Object\.keys\(stats\.counts\)/);
   assert.match(brandSelect, /aria-pressed=\{active\}/);
   assert.match(storage, /modelCounts/);
 });
 
-test("desktop advanced selects are outside the range input shell", () => {
+test("desktop advanced selects are outside the range input shell and count sits with chips", () => {
   assert.match(filters, /ac-advanced-select-row/);
   assert.match(filters, /ac-range-fields-shell/);
   assert.match(filters, /ac-advanced-fields\{background:transparent\}/);
   assert.doesNotMatch(filters, /advancedCount \?/);
   assert.match(filters, /whitespace-nowrap.*Ещё фильтры/);
+  assert.match(filters, /Выбрано[\s\S]*\{chips\.length\}/);
 });
 
 test("brand rail captures the pointer only after real drag movement", () => {
