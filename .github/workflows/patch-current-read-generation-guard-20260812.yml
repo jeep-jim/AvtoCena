@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   patch:
-    if: ${{ !contains(github.event.head_commit.message, '[generation-guard-patched]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -23,65 +22,13 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Patch storage current aliases to require manifest generation match
+      - name: Apply deterministic storage patch
+        run: python3 scripts/patch-current-read-generation-guard-20260812.py
+      - name: Add regression test if missing
         shell: bash
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          path = Path('apps/web/lib/catalog/storage.ts')
-          text = path.read_text()
-
-          get_pattern = re.compile(r'''export async function getOffer\(id: string\) \{\n  const current = await readCurrentOfferShard\(id\);\n  if \(current\.generationId\) \{\n    const offer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id && isPublicOffer\(item\)\);\n    if \(offer\) return offer;\n  \}\n  const manifest = await readManifest\(\);''')
-          get_replacement = '''export async function getOffer(id: string) {
-  const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
-  if (current.generationId === manifest.generationId) {
-    const offer = (current.items || []).find((item) => item.id === id && isPublicOffer(item));
-    if (offer) return offer;
-  }'''
-          text, get_count = get_pattern.subn(get_replacement, text, count=1)
-          if get_count != 1:
-              raise SystemExit(f'getOffer patch count={get_count}')
-
-          start = '  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;\n'
-          start_at = text.find(start)
-          if start_at < 0:
-              raise SystemExit('searchOffers scope target not found')
-          manifest_marker = '  const manifest = await readManifest();\n'
-          manifest_at = text.find(manifest_marker, start_at)
-          if manifest_at < 0:
-              raise SystemExit('searchOffers manifest target not found')
-          old_block = text[start_at:manifest_at + len(manifest_marker)]
-          if 'readCurrentSearchProjection(currentProjectionScope)' not in old_block or 'generationId: current.generationId' not in old_block:
-              raise SystemExit('searchOffers block identity mismatch')
-          new_block = '''  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;
-  const [manifest, current] = await Promise.all([
-    readManifest(),
-    readCurrentSearchProjection(currentProjectionScope),
-  ]);
-  if (current.generationId === manifest.generationId) {
-    const modelKeys = await projectionModelKeys(params);
-    const rows = (current.items || []).filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));
-    if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");
-    else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
-    const total = rows.length;
-    const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
-    if (pageRows.every(projectionCanRenderCard)) {
-      return {
-        generationId: current.generationId, total, page, pageSize,
-        items: pageRows.map(publicOfferFromProjection),
-        usedIndexShards: [currentProjectionPath(currentProjectionScope)],
-      };
-    }
-  }
-'''
-          text = text[:start_at] + new_block + text[manifest_at + len(manifest_marker):]
-          path.write_text(text)
-          PY
-      - name: Add regression test
-        shell: bash
-        run: |
-          cat > tests/catalog-current-read-generation-guard.test.ts <<'EOF'
+          if [ ! -f tests/catalog-current-read-generation-guard.test.ts ]; then
+            cat > tests/catalog-current-read-generation-guard.test.ts <<'EOF'
           import assert from "node:assert/strict";
           import fs from "node:fs";
           import test from "node:test";
@@ -99,13 +46,18 @@ jobs:
             assert.ok((storage.match(/current\.generationId === manifest\.generationId/g) || []).length >= 2);
           });
           EOF
+          fi
       - run: |
           node --import tsx --test tests/catalog-current-read-generation-guard.test.ts
           npm run typecheck
           npm run build
-      - name: Commit patched code
+      - name: Commit patched code when changed
         shell: bash
         run: |
+          if git diff --quiet -- apps/web/lib/catalog/storage.ts tests/catalog-current-read-generation-guard.test.ts; then
+            echo "storage already patched"
+            exit 0
+          fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add apps/web/lib/catalog/storage.ts tests/catalog-current-read-generation-guard.test.ts
