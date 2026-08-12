@@ -1,0 +1,57 @@
+name: Fix normalized grouping for brand projections
+
+on:
+  push:
+    branches:
+      - fix/catalog-brand-projection-grouping-20260812
+    paths:
+      - .github/workflows/patch-brand-projection-grouping-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-brand-projection-grouping-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Normalize projection grouping
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/storage.ts'); s=p.read_text()
+          old='''    const make = cleanFacet(row.make);\n    if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);\n'''
+          new='''    const make = cleanFacet(row.make);\n    const brandKey = catalogBrandReadModelKey(make);\n    if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);\n'''
+          if s.count(old)!=1: raise SystemExit(f'rebuild grouping matches={s.count(old)}')
+          s=s.replace(old,new,1)
+          old='''      const make = cleanFacet(row.make);\n      if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);\n'''
+          new='''      const make = cleanFacet(row.make);\n      const brandKey = catalogBrandReadModelKey(make);\n      if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);\n'''
+          if s.count(old)!=1: raise SystemExit(f'publisher grouping matches={s.count(old)}')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          t=Path('tests/catalog-brand-projection-read-model.test.ts')
+          ts=t.read_text()
+          ts += '''\n\ntest("per-brand projection grouping uses the same normalized key as its collision-safe path", () => {\n  assert.match(source, /const brandKey = catalogBrandReadModelKey\(make\)/);\n  assert.match(source, /projectionsByBrand\.set\(brandKey/);\n});\n'''
+          t.write_text(ts)
+          Path('.github/workflows/patch-brand-projection-grouping-20260812.yml').unlink()
+          PY
+      - name: Validate
+        run: |
+          node --import tsx --test tests/catalog-brand-projection-read-model.test.ts tests/catalog-brand-summary-read-model.test.ts tests/catalog-filter-search.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix normalized grouping for brand projections"
+          git push origin HEAD:fix/catalog-brand-projection-grouping-20260812
