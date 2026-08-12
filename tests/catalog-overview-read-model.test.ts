@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
+// Static guards keep the compact landing optimization fail-closed and narrowly scoped.
 const overview = fs.readFileSync(new URL("../apps/web/lib/catalog/overview.ts", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const builder = fs.readFileSync(new URL("../scripts/catalog-build-overview-read-model.mjs", import.meta.url), "utf8");
