@@ -1,4 +1,4 @@
-/* Compact advanced catalog filters: less nesting, less vertical waste, no wrapping preset rows. */
+/* Compact advanced catalog filters: simple two-field ranges and anchored choices. */
 
 .ac-catalog-filter-panel .ac-advanced-fields {
   padding: 10px !important;
@@ -34,7 +34,6 @@
 
 .ac-catalog-filter-panel .ac-range-card > div:first-child > div:first-child > div:first-child,
 .ac-mobile-filter-sheet .ac-range-card > div:first-child > div:first-child > div:first-child {
-  color: var(--ac-text) !important;
   font-size: 11px !important;
   line-height: 1.1 !important;
   letter-spacing: .04em !important;
@@ -69,58 +68,31 @@
 
 .ac-catalog-filter-panel .ac-range-input-box,
 .ac-mobile-filter-sheet .ac-range-input-box {
+  position: relative !important;
   height: 38px !important;
   border-radius: 11px !important;
+  overflow: visible !important;
 }
 
 .ac-catalog-filter-panel .ac-range-input-box input,
 .ac-mobile-filter-sheet .ac-range-input-box input {
-  padding: 0 9px !important;
+  min-width: 0 !important;
+  padding: 0 5px 0 9px !important;
   font-size: 12px !important;
   white-space: nowrap !important;
 }
 
+/* Units no longer repeat inside the fields; the right-side chevron opens a value picker. */
 .ac-catalog-filter-panel .ac-range-input-box small,
 .ac-mobile-filter-sheet .ac-range-input-box small {
-  padding-right: 8px !important;
-  font-size: 9px !important;
-  white-space: nowrap !important;
-}
-
-.ac-catalog-filter-panel .ac-range-card > div:nth-child(3),
-.ac-mobile-filter-sheet .ac-range-card > div:nth-child(3) {
   display: none !important;
 }
 
+/* Keep the original preset buttons as an internal implementation detail only. */
+.ac-catalog-filter-panel .ac-range-card > div:nth-child(3),
+.ac-mobile-filter-sheet .ac-range-card > div:nth-child(3),
 .ac-range-preset-select-wrap {
-  display: block;
-  min-width: 0;
-}
-
-.ac-range-preset-select {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 28px;
-  padding: 0 24px 0 9px;
-  border: 1px solid var(--ac-border);
-  border-radius: 9px;
-  outline: 0;
-  background-color: var(--ac-surface-2);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%239da5b4' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 7px center;
-  color: var(--ac-muted);
-  font-size: 9px;
-  font-weight: 900;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.ac-range-preset-select:focus {
-  border-color: rgba(255,53,61,.62);
-  color: var(--ac-text);
+  display: none !important;
 }
 
 .ac-range-title-with-icon {
@@ -135,13 +107,167 @@
   width: 14px;
   height: 14px;
   flex: 0 0 14px;
-  color: var(--ac-muted);
 }
 
 .ac-range-title-icon svg {
   display: block;
   width: 14px;
   height: 14px;
+}
+
+.ac-range-value-toggle {
+  display: inline-flex;
+  flex: 0 0 31px;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  min-width: 31px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--ac-border);
+  border-radius: 0 10px 10px 0;
+  background: transparent;
+  color: var(--ac-muted);
+  cursor: pointer;
+  transition: color .15s ease, background-color .15s ease;
+}
+
+.ac-range-value-toggle:hover,
+.ac-range-value-toggle:focus-visible,
+.ac-range-value-toggle[aria-expanded="true"] {
+  color: var(--ac-text);
+  background: color-mix(in srgb, var(--ac-surface-3) 72%, transparent);
+  outline: 0;
+}
+
+.ac-range-value-toggle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform .15s ease;
+}
+
+.ac-range-value-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.ac-range-value-menu {
+  position: absolute;
+  z-index: 10120;
+  left: 0;
+  right: 0;
+  top: calc(100% + 5px);
+  display: none;
+  padding: 5px;
+  border: 1px solid var(--ac-border);
+  border-radius: 12px;
+  background: var(--ac-surface-3);
+  box-shadow: 0 14px 34px rgba(0,0,0,.24);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.ac-range-value-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.ac-range-value-menu.is-open {
+  display: block;
+}
+
+.ac-range-value-menu.is-up {
+  top: auto;
+  bottom: calc(100% + 5px);
+}
+
+.ac-range-value-option {
+  display: flex;
+  width: 100%;
+  min-height: 32px;
+  align-items: center;
+  padding: 6px 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ac-text);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ac-range-value-option:hover,
+.ac-range-value-option:focus-visible {
+  background: rgba(255,53,61,.11);
+  color: #ff4650;
+  outline: 0;
+}
+
+/* Empty controls stay quiet; a chosen value becomes the visual focus. */
+.ac-stateful-control:not(.is-filled) {
+  color: var(--ac-muted) !important;
+  -webkit-text-fill-color: var(--ac-muted) !important;
+}
+
+.ac-stateful-control.is-filled {
+  color: var(--ac-text) !important;
+  -webkit-text-fill-color: var(--ac-text) !important;
+}
+
+.ac-range-card:not(.is-filled) .ac-range-title-with-icon,
+.ac-range-card:not(.is-filled) .ac-range-title-icon {
+  color: var(--ac-muted) !important;
+}
+
+.ac-range-card.is-filled .ac-range-title-with-icon,
+.ac-range-card.is-filled .ac-range-title-icon {
+  color: var(--ac-text) !important;
+}
+
+.ac-range-input-box:not(.is-filled) input {
+  color: var(--ac-muted) !important;
+  -webkit-text-fill-color: var(--ac-muted) !important;
+}
+
+.ac-range-input-box.is-filled input {
+  color: var(--ac-text) !important;
+  -webkit-text-fill-color: var(--ac-text) !important;
+}
+
+html[data-theme="light"] .ac-stateful-control:not(.is-filled),
+html[data-theme="light"] .ac-range-card:not(.is-filled) .ac-range-title-with-icon,
+html[data-theme="light"] .ac-range-card:not(.is-filled) .ac-range-title-icon,
+html[data-theme="light"] .ac-range-input-box:not(.is-filled) input {
+  color: #7c8797 !important;
+  -webkit-text-fill-color: #7c8797 !important;
+}
+
+html[data-theme="light"] .ac-stateful-control.is-filled,
+html[data-theme="light"] .ac-range-card.is-filled .ac-range-title-with-icon,
+html[data-theme="light"] .ac-range-card.is-filled .ac-range-title-icon,
+html[data-theme="light"] .ac-range-input-box.is-filled input {
+  color: #171c25 !important;
+  -webkit-text-fill-color: #171c25 !important;
+}
+
+html:not([data-theme="light"]) .ac-stateful-control:not(.is-filled),
+html:not([data-theme="light"]) .ac-range-card:not(.is-filled) .ac-range-title-with-icon,
+html:not([data-theme="light"]) .ac-range-card:not(.is-filled) .ac-range-title-icon,
+html:not([data-theme="light"]) .ac-range-input-box:not(.is-filled) input {
+  color: #8d96a6 !important;
+  -webkit-text-fill-color: #8d96a6 !important;
+}
+
+html:not([data-theme="light"]) .ac-stateful-control.is-filled,
+html:not([data-theme="light"]) .ac-range-card.is-filled .ac-range-title-with-icon,
+html:not([data-theme="light"]) .ac-range-card.is-filled .ac-range-title-icon,
+html:not([data-theme="light"]) .ac-range-input-box.is-filled input {
+  color: #f5f7fb !important;
+  -webkit-text-fill-color: #f5f7fb !important;
 }
 
 .ac-filter-clear {
@@ -182,7 +308,7 @@
   padding-right: 112px;
 }
 
-/* Selected chips are deliberately high-contrast in both themes. */
+/* Selected chips stay deliberately high-contrast in both themes. */
 html:not([data-theme="light"]) .ac-filter-chip {
   background: #f5f7fa !important;
   border-color: #f5f7fa !important;
@@ -197,7 +323,6 @@ html[data-theme="light"] .ac-filter-chip {
   -webkit-text-fill-color: #fff !important;
 }
 
-/* Red numeric badges must keep white numbers in the light theme too. */
 .ac-filter-settings span[class*="bg-red-500"],
 .ac-filter-more-button span[class*="bg-red-500"] {
   background: #ff3f48 !important;
@@ -205,7 +330,6 @@ html[data-theme="light"] .ac-filter-chip {
   -webkit-text-fill-color: #fff !important;
 }
 
-/* Give the red util-fee explanation a little breathing room. */
 .ac-power-limit > span:last-child {
   column-gap: 10px !important;
 }
@@ -255,14 +379,7 @@ html[data-theme="light"] .ac-filter-chip {
   }
 
   .ac-catalog-filter-panel .ac-range-card > div:first-child {
-    padding-right: 112px !important;
-  }
-
-  .ac-catalog-filter-panel .ac-range-preset-select-wrap {
-    position: absolute;
-    top: 4px;
-    right: 30px;
-    width: 78px;
+    padding-right: 24px !important;
   }
 }
 
@@ -280,6 +397,22 @@ html[data-theme="light"] .ac-filter-chip {
   .ac-mobile-filter-sheet > div:first-child > div:nth-child(2) .ac-filter-clear--mobile {
     margin-left: auto;
     margin-right: 8px;
+  }
+
+  .ac-mobile-filter-sheet > div:first-child > div:nth-child(2) > button[data-ac-mobile-close="1"] {
+    transition: background-color .16s ease, color .16s ease, transform .16s ease;
+  }
+
+  .ac-mobile-filter-sheet > div:first-child > div:nth-child(2) > button[data-ac-mobile-close="1"].ac-mobile-apply {
+    background: #ff353d !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+  }
+
+  .ac-mobile-filter-sheet > div:first-child > div:nth-child(2) > button[data-ac-mobile-close="1"].ac-mobile-apply:active {
+    transform: scale(.95);
   }
 
   .ac-mobile-filter-sheet > .ac-hide-scrollbar {
@@ -301,6 +434,7 @@ html[data-theme="light"] .ac-filter-chip {
     font-size: 9px !important;
     line-height: 1.2 !important;
     letter-spacing: .11em !important;
+    color: var(--ac-muted) !important;
   }
 
   .ac-mobile-filter-sheet .ac-filter-control,
@@ -329,11 +463,9 @@ html[data-theme="light"] .ac-filter-chip {
   .ac-mobile-filter-sheet .ac-range-card {
     display: grid !important;
     grid-template-columns: 92px minmax(0, 1fr) !important;
-    grid-template-areas:
-      "head inputs"
-      "presets presets" !important;
+    grid-template-areas: "head inputs" !important;
     align-items: center !important;
-    gap: 5px 8px !important;
+    gap: 0 8px !important;
     padding: 8px 0 !important;
     border-top: 1px solid var(--ac-border) !important;
   }
@@ -358,14 +490,14 @@ html[data-theme="light"] .ac-filter-chip {
     min-width: 0 !important;
   }
 
-  .ac-mobile-filter-sheet .ac-range-preset-select-wrap {
-    grid-area: presets !important;
-    width: min(150px, 100%) !important;
-    margin-top: 0 !important;
-  }
-
   .ac-mobile-filter-sheet .ac-range-input-box {
     height: 38px !important;
+  }
+
+  /* Dropdown stays attached to the pressed control; only direction changes. */
+  html body .ac-mobile-filter-sheet .relative:has(> .ac-filter-dropdown[data-ac-adaptive="1"]) {
+    z-index: 10080 !important;
+    overflow: visible !important;
   }
 
   .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-adaptive="1"] {
@@ -373,7 +505,7 @@ html[data-theme="light"] .ac-filter-chip {
     border: 1px solid var(--ac-border) !important;
     border-radius: 15px !important;
     background: var(--ac-surface-3) !important;
-    box-shadow: 0 16px 40px rgba(0,0,0,.28) !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.24) !important;
     overflow: hidden !important;
   }
 
@@ -383,6 +515,22 @@ html[data-theme="light"] .ac-filter-chip {
 
   .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="down"] {
     transform-origin: top center !important;
+  }
+
+  /* Lists remain scrollable when truly needed, but no visible inner scrollbar. */
+  .ac-mobile-filter-sheet .ac-filter-dropdown,
+  .ac-mobile-filter-sheet .ac-filter-dropdown .ac-hide-scrollbar,
+  .ac-mobile-filter-sheet .ac-range-value-menu {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-filter-dropdown::-webkit-scrollbar,
+  .ac-mobile-filter-sheet .ac-filter-dropdown .ac-hide-scrollbar::-webkit-scrollbar,
+  .ac-mobile-filter-sheet .ac-range-value-menu::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .ac-filter-more-button .ac-filter-tray-clear {
@@ -406,9 +554,12 @@ html[data-theme="light"] .ac-filter-chip {
   }
 }
 
-html[data-theme="light"] .ac-mobile-filter-sheet .ac-range-preset-select,
-html[data-theme="light"] .ac-catalog-filter-panel .ac-range-preset-select {
-  background-color: #dde3eb;
-  color: #4c5668;
+html[data-theme="light"] .ac-range-value-menu {
+  background: #eef2f7;
   border-color: rgba(30,36,48,.13);
+  box-shadow: 0 14px 30px rgba(31,38,50,.16);
+}
+
+html[data-theme="light"] .ac-range-value-option {
+  color: #171c25;
 }
