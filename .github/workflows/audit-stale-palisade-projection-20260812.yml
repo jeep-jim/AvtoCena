@@ -36,14 +36,16 @@ jobs:
           npx tsx -e '
             import { readDataJson } from "./apps/web/lib/data.ts";
             import { searchOffers, readMarketOffers } from "./apps/web/lib/catalog/storage.ts";
-            const manifest:any = await readDataJson("catalog/manifest.json", {generationId:"",markets:{}});
-            const current:any = await readDataJson("catalog/public/projection/korea.json", {generationId:"",items:[]});
-            const gen:any = await readDataJson(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {generationId:"",items:[]});
-            const match=(row:any)=>/palisade/i.test(`${row.make||""} ${row.model||""} ${row.trim||""}`) && Number(row.year||0)===2026 && Number(row.mileageKm||0)===17780;
-            const currentMatches=(current.items||[]).filter(match);
-            const generationMatches=(gen.items||[]).filter(match);
-            const market=(await readMarketOffers("korea")).filter(match);
-            const search=await searchOffers({market:"korea",make:"Hyundai",model:"Palisade",yearFrom:2026,yearTo:2026,page:1,pageSize:48});
-            const searchMatches=(search.items||[]).filter((row:any)=>Number(row.mileageKm||0)===17780);
-            console.log(JSON.stringify({manifestGeneration:manifest.generationId,currentGeneration:current.generationId,generationProjection:gen.generationId,currentMatches,generationMatches,marketMatches:market.map((x:any)=>({id:x.id,sourceId:x.sourceId,sourceOfferId:x.sourceOfferId,totalRub:x.totalRub,sourcePrice:x.sourcePrice,advertisementType:x.operational?.raw?.advertisementType})),searchGeneration:search.generationId,searchMatches},null,2));
+            (async () => {
+              const manifest:any = await readDataJson("catalog/manifest.json", {generationId:"",markets:{}});
+              const current:any = await readDataJson("catalog/public/projection/korea.json", {generationId:"",items:[]});
+              const gen:any = await readDataJson(`catalog/generations/${manifest.generationId}/indexes/projection/korea.json`, {generationId:"",items:[]});
+              const match=(row:any)=>/palisade/i.test(`${row.make||""} ${row.model||""} ${row.trim||""}`) && Number(row.year||0)===2026 && Number(row.mileageKm||0)===17780;
+              const currentMatches=(current.items||[]).filter(match);
+              const generationMatches=(gen.items||[]).filter(match);
+              const market=(await readMarketOffers("korea")).filter(match);
+              const search=await searchOffers({market:"korea",make:"Hyundai",model:"Palisade",yearFrom:2026,yearTo:2026,page:1,pageSize:48});
+              const searchMatches=(search.items||[]).filter((row:any)=>Number(row.mileageKm||0)===17780);
+              console.log(JSON.stringify({manifestGeneration:manifest.generationId,currentGeneration:current.generationId,generationProjection:gen.generationId,currentMatches,generationMatches,marketMatches:market.map((x:any)=>({id:x.id,sourceId:x.sourceId,sourceOfferId:x.sourceOfferId,totalRub:x.totalRub,sourcePrice:x.sourcePrice,advertisementType:x.operational?.raw?.advertisementType})),searchGeneration:search.generationId,searchMatches},null,2));
+            })().catch((error)=>{ console.error(error); process.exit(1); });
           '
