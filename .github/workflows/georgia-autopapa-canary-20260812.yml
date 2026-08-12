@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Wait for ranged recovery deployment and collect five dense pages
+      - name: Wait for ranged recovery deployment and collect five deep pages
         run: |
           set -euo pipefail
           ready=0
           for attempt in {1..20}; do
-            if curl --connect-timeout 10 --max-time 300 -fsS               'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=1&pages=5'               -o autopapa-canary.json               && jq -e '.report.source == "autopapa" and .report.startPage == 1 and .report.pagesPerSource == 5' autopapa-canary.json >/dev/null; then
+            if curl --connect-timeout 10 --max-time 300 -fsS               'https://avtocena.com/api/internal/georgia-egress-8d4c2f?mode=recovery&source=autopapa&startPage=496&pages=5'               -o autopapa-canary.json               && jq -e '.report.source == "autopapa" and .report.startPage == 496 and .report.pagesPerSource == 5' autopapa-canary.json >/dev/null; then
               ready=1
               break
             fi
