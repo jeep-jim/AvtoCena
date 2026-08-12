@@ -1,5 +1,5 @@
 import { autoPapaDetailOriginalPhotoUrls, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
-import { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } from "./customs-pricing";
+import { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { credibleCatalogImages, isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "./offer-quality";
 import { myAutoListSource, myAutoProductSnapshotFromInfo, parseMyAutoListingImageUrl } from "./myauto-list-source";
@@ -21,6 +21,9 @@ type RecoverySnapshot = {
   report: {
     mode: string;
     pagesPerSource: number;
+    startPage: number;
+    source: GeorgiaRecoverySource;
+    rawSourceCounts: Record<string, number>;
     sourceCounts: Record<string, number>;
     rejected: Record<string, number>;
     imageStats: { min: number; max: number; average: number };
@@ -208,9 +211,9 @@ async function prepareAutoPapa(offer: VehicleOffer) {
   });
 }
 
-async function collectPages(source: CatalogSourceAdapter, pages: number) {
+async function collectPages(source: CatalogSourceAdapter, pages: number, startPage: number) {
   const offers = new Map<string, VehicleOffer>();
-  let cursor: string | null = "1";
+  let cursor: string | null = String(startPage);
   for (let pageIndex = 0; pageIndex < pages && cursor; pageIndex++) {
     const page = await source.fetchPage(cursor);
     for (const raw of page.items || []) {
@@ -222,15 +225,32 @@ async function collectPages(source: CatalogSourceAdapter, pages: number) {
   return [...offers.values()];
 }
 
-export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): Promise<RecoverySnapshot> {
-  const pages = Math.max(1, Math.min(4, Math.floor(pagesPerSource)));
+export type GeorgiaRecoverySource = "all" | "myauto" | "autopapa";
+
+function boundedInteger(value: unknown, fallback: number, maximum: number) {
+  const parsed = Math.floor(Number(value));
+  return Number.isFinite(parsed) ? Math.max(1, Math.min(maximum, parsed)) : fallback;
+}
+
+export async function collectGeorgiaYandexRecoverySnapshot(
+  pagesPerSource = 2,
+  startPage = 1,
+  source: GeorgiaRecoverySource = "all",
+): Promise<RecoverySnapshot> {
+  const pages = boundedInteger(pagesPerSource, 2, 20);
+  const firstPage = boundedInteger(startPage, 1, 10_000);
+  const selectedSource: GeorgiaRecoverySource = ["myauto", "autopapa"].includes(source) ? source : "all";
   const rejected: Record<string, number> = {};
   const reject = (reason: string) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
 
   const [myAutoRows, autoPapaRows] = await Promise.all([
-    collectPages(myAutoListSource, pages),
-    collectPages(autoPapaGeorgiaSource, pages),
+    selectedSource === "autopapa" ? Promise.resolve([]) : collectPages(myAutoListSource, pages, firstPage),
+    selectedSource === "myauto" ? Promise.resolve([]) : collectPages(autoPapaGeorgiaSource, pages, firstPage),
   ]);
+  const rawSourceCounts = {
+    myauto_georgia_list: myAutoRows.length,
+    autopapa_georgia_open: autoPapaRows.length,
+  };
   const incoming = [...myAutoRows, ...autoPapaRows]
     .filter((offer) => isCatalogMarketSourceAllowed(offer) && isCatalogYearAllowed(offer.year, "georgia"));
 
@@ -247,8 +267,8 @@ export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): 
       if (["electric", "series_hybrid", "other_hybrid"].includes(String(offer.powertrainKind || ""))) {
         offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
       }
-      offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
-      if (!exactCalculation(offer) && !isPreliminaryElectrifiedCalculation(offer)) {
+      offer = normalizeVehicleOfferSpecs(await calculateOfferWithPreliminaryPowerPricing(offer));
+      if (!exactCalculation(offer) && !isPreliminaryPowerPendingCalculation(offer)) {
         reject("calculation");
         return null;
       }
@@ -260,7 +280,7 @@ export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): 
           recoveryExactSourceUrl: true,
           recoveryExactPhotoIdentity: true,
           recoveryCalculatedRub: true,
-          recoveryPreliminaryPowerPending: isPreliminaryElectrifiedCalculation(offer),
+          recoveryPreliminaryPowerPending: isPreliminaryPowerPendingCalculation(offer),
           recoveryBodySourceOnly: true,
         },
       };
@@ -283,6 +303,9 @@ export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): 
     report: {
       mode: "yandex_read_only_canonical_recovery_snapshot",
       pagesPerSource: pages,
+      startPage: firstPage,
+      source: selectedSource,
+      rawSourceCounts,
       sourceCounts,
       rejected,
       imageStats: imageCounts.length ? {
@@ -291,7 +314,7 @@ export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): 
         average: Number((imageCounts.reduce((sum, value) => sum + value, 0) / imageCounts.length).toFixed(2)),
       } : { min: 0, max: 0, average: 0 },
       calculatedCount: offers.filter(exactCalculation).length,
-      preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
+      preliminaryCount: offers.filter(isPreliminaryPowerPendingCalculation).length,
     },
     offers,
   };

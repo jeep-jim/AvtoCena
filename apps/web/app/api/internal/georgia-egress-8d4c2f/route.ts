@@ -166,7 +166,10 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   if (url.searchParams.get("mode") === "recovery") {
     const pages = Number(url.searchParams.get("pages") || 2);
-    const snapshot = await collectGeorgiaYandexRecoverySnapshot(pages);
+    const startPage = Number(url.searchParams.get("startPage") || 1);
+    const sourceValue = url.searchParams.get("source");
+    const source = sourceValue === "myauto" || sourceValue === "autopapa" ? sourceValue : "all";
+    const snapshot = await collectGeorgiaYandexRecoverySnapshot(pages, startPage, source);
     return NextResponse.json(snapshot, { headers: { "cache-control": "no-store" } });
   }
 

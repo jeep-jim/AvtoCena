@@ -21,6 +21,8 @@ test("AutoPapa uses a dedicated current canonical Yandex adapter", () => {
   assert.equal(autopapa.includes('const BASE_URL = "https://autopapa.ge"'), true);
   assert.equal(autopapa.includes('const DETAIL_PATH_RE = /^\\/en\\/usd\\/[^/?#]+\\/[^/?#]+\\/(\\d{5,})\\/?$/i'), true);
   assert.equal(autopapa.includes('new URL(`${BASE_URL}/en/usd/search`)'), true);
+  assert.equal(autopapa.includes('url.searchParams.set("order", "date_desc")'), true);
+  assert.equal(autopapa.includes('url.searchParams.set("s[year_from]", "2020")'), true);
   assert.equal(autopapa.includes('/\\/system\\/car\\/photos\\//i'), true);
   assert.match(scale, /autoPapaGeorgiaSource/);
   assert.doesNotMatch(scale, /sourceId: "autopapa_georgia_open"/);
