@@ -1,0 +1,22 @@
+name: Georgia Yandex adapter dry-run after PR368
+
+on:
+  push:
+    branches:
+      - audit/georgia-yandex-dryrun-after-pr368-20260812
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch deployed Georgia adapter dry-run
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --max-time 180 --retry 2 --retry-delay 2 \
+            'https://avtocena.com/api/internal/georgia-adapters-dryrun-6a91d7' \
+            | python3 -m json.tool
