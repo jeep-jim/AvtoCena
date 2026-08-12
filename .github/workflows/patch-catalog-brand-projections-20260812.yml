@@ -1,0 +1,95 @@
+name: Patch catalog brand projections 20260812
+
+on:
+  push:
+    branches:
+      - perf/catalog-brand-projections-20260812
+    paths:
+      - .github/workflows/patch-catalog-brand-projections-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: perf/catalog-brand-projections-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply per-brand current projection patch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          def once(s,a,b,label):
+            n=s.count(a)
+            if n!=1: raise SystemExit(f'{label}: expected1 got{n}')
+            return s.replace(a,b,1)
+          p=Path('apps/web/lib/catalog/storage.ts'); s=p.read_text()
+          s=once(s,
+            'function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }\n',
+            'function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }\nfunction currentBrandProjectionPath(make: string) { return `catalog/public/projection-brand/${cleanShard(make)}.json`; }\n',
+            'brand path')
+          s=once(s,
+            'const currentProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();\n',
+            'const currentProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();\nconst currentBrandProjectionCache = new Map<string, { expiresAt: number; promise: Promise<{ generationId: string; items: CatalogSearchProjection[] }> }>();\n',
+            'brand cache')
+          s=once(s,
+            '  currentProjectionCache.clear();\n',
+            '  currentProjectionCache.clear();\n  currentBrandProjectionCache.clear();\n',
+            'brand cache reset')
+          anchor='''async function readCurrentFacets() {\n'''
+          reader='''async function readCurrentBrandProjection(make: string) {\n  const key = cleanShard(make);\n  const now = Date.now();\n  const current = currentBrandProjectionCache.get(key);\n  if (current && current.expiresAt > now) return current.promise;\n  const promise = readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(currentBrandProjectionPath(make), { generationId: "", items: [] })\n    .catch((error) => { currentBrandProjectionCache.delete(key); throw error; });\n  currentBrandProjectionCache.set(key, { expiresAt: now + CURRENT_READ_MODEL_CACHE_MS, promise });\n  while (currentBrandProjectionCache.size > 96) {\n    const oldest = currentBrandProjectionCache.keys().next().value as string | undefined;\n    if (!oldest || oldest === key) break;\n    currentBrandProjectionCache.delete(oldest);\n  }\n  return promise;\n}\n'''
+          s=once(s,anchor,reader+anchor,'brand reader')
+
+          # rebuildIndexes: group and publish mutable current per-brand projections
+          old='''  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();\n  const allProjectionItems: CatalogSearchProjection[] = [];\n  for (const offer of offers) {\n    const market = String(offer.market || "");\n    if (!market) continue;\n    const row = searchProjectionFromOffer(offer);\n    allProjectionItems.push(row);\n    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);\n  }\n'''
+          new='''  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();\n  const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();\n  const allProjectionItems: CatalogSearchProjection[] = [];\n  for (const offer of offers) {\n    const market = String(offer.market || "");\n    if (!market) continue;\n    const row = searchProjectionFromOffer(offer);\n    allProjectionItems.push(row);\n    projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);\n    const make = cleanFacet(row.make);\n    if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);\n  }\n'''
+          s=once(s,old,new,'rebuild group brands')
+          old='''  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, buildCatalogBrandSummary(generationId, allProjectionItems), false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {\n'''
+          new='''  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, buildCatalogBrandSummary(generationId, allProjectionItems), false);\n  await mapWithConcurrency([...projectionsByBrand.entries()], 16, ([make, items]) =>\n    writeJsonAtomic(currentBrandProjectionPath(make), { generationId, items }, false));\n  await mapWithConcurrency([...projectionsByMarket.entries()], 4, async ([market, items]) => {\n'''
+          s=once(s,old,new,'rebuild brand writes')
+
+          # current read-model publisher: same brand grouping and aliases
+          old='''  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();\n  const allProjectionItems: CatalogSearchProjection[] = [];\n  const offersByShard = new Map<string, VehicleOffer[]>();\n'''
+          new='''  const projectionsByMarket = new Map<string, CatalogSearchProjection[]>();\n  const projectionsByBrand = new Map<string, CatalogSearchProjection[]>();\n  const allProjectionItems: CatalogSearchProjection[] = [];\n  const offersByShard = new Map<string, VehicleOffer[]>();\n'''
+          s=once(s,old,new,'publisher brand map')
+          old='''      allProjectionItems.push(row);\n      projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);\n'''
+          # occurs twice? after rebuild replacement, this exact exists in publisher only likely one
+          new='''      allProjectionItems.push(row);\n      projectionsByMarket.set(market, [...(projectionsByMarket.get(market) || []), row]);\n      const make = cleanFacet(row.make);\n      if (make) projectionsByBrand.set(make, [...(projectionsByBrand.get(make) || []), row]);\n'''
+          s=once(s,old,new,'publisher group brand')
+          old='''  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);\n  await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>\n'''
+          new='''  await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);\n  await mapWithConcurrency([...projectionsByBrand.entries()], 16, ([make, items]) =>\n    writeJsonAtomic(currentBrandProjectionPath(make), { generationId: manifest.generationId, items }, false));\n  await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>\n'''
+          s=once(s,old,new,'publisher brand writes')
+          s=once(s,
+            '    brandSummaryCount: Object.keys(brandSummary.brands).length,\n    offerShards: offersByShard.size,\n',
+            '    brandSummaryCount: Object.keys(brandSummary.brands).length,\n    brandProjectionCount: projectionsByBrand.size,\n    offerShards: offersByShard.size,\n',
+            'publisher report')
+
+          # searchOffers: before all-market current projection, prefer one small current projection per selected make
+          anchor='''  const currentProjectionScope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;\n'''
+          fast='''  const requestedMakes = catalogMakeFilterValues(params.make);\n  if ((!params.market || params.market === "any") && requestedMakes.length) {\n    const manifest = await readManifest();\n    const parts = await mapWithConcurrency(requestedMakes, Math.min(8, requestedMakes.length), async (make) => ({\n      make, projection: await readCurrentBrandProjection(make),\n    }));\n    if (parts.every(({ projection }) => projection.generationId === manifest.generationId)) {\n      const modelKeys = await projectionModelKeys(params);\n      const rows = parts.flatMap(({ projection }) => projection.items || [])\n        .filter((row) => catalogSearchProjectionMatches(row, params, modelKeys));\n      if (needsProjection) catalogSearchProjectionSort(rows, params.sort || "updatedAt");\n      else rows.sort((a, b) => projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));\n      const total = rows.length;\n      const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);\n      if (pageRows.every(projectionCanRenderCard)) return {\n        generationId: manifest.generationId, total, page, pageSize,\n        items: pageRows.map(publicOfferFromProjection),\n        usedIndexShards: requestedMakes.map(currentBrandProjectionPath),\n      };\n    }\n  }\n\n'''
+          s=once(s,anchor,fast+anchor,'search brand fast path')
+          p.write_text(s)
+
+          Path('tests/catalog-brand-projection-read-model.test.ts').write_text('''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\n\nconst source = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");\n\ntest("current read models publish and consume per-brand projections", () => {\n  assert.match(source, /catalog\\/public\\/projection-brand\\/\\$\\{cleanShard\\(make\\)\\}\\.json/);\n  assert.match(source, /projectionsByBrand/);\n  assert.match(source, /brandProjectionCount: projectionsByBrand\.size/);\n  assert.match(source, /readCurrentBrandProjection/);\n  assert.match(source, /requestedMakes = catalogMakeFilterValues\(params\.make\)/);\n  assert.match(source, /usedIndexShards: requestedMakes\.map\(currentBrandProjectionPath\)/);\n});\n''')
+          Path('.github/workflows/patch-catalog-brand-projections-20260812.yml').unlink()
+          PY
+      - name: Validate
+        run: |
+          node --import tsx --test tests/catalog-brand-projection-read-model.test.ts tests/catalog-brand-summary-read-model.test.ts tests/catalog-filter-search.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+          git diff --check
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Perf: add per-brand current catalog projections"
+          git push origin HEAD:perf/catalog-brand-projections-20260812
