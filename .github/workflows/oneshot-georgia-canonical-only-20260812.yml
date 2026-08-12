@@ -1,0 +1,78 @@
+name: One-shot Georgia canonical-only 20260812
+
+on:
+  push:
+    branches:
+      - fix/georgia-only-myauto-autopapa-20260812
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-only-myauto-autopapa-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/patch-georgia-canonical-only-20260812.py
+      - run: node --check scripts/catalog-live-recovery-direct-exact.mjs
+      - run: node --check scripts/catalog-live-recovery-market.mjs
+      - run: node --import tsx --test tests/georgia-canonical-source-policy-20260812.test.ts
+      - name: Assert AUTO.GE is absent from active Georgia paths
+        run: |
+          set -euo pipefail
+          ! grep -R "auto_georgia_open\|autoGeorgiaStrictSource" \
+            apps/web/lib/catalog/importer.ts \
+            apps/web/lib/catalog/catalog-v2-source-registry.ts \
+            apps/web/lib/catalog/scale-market-sources.ts \
+            scripts/catalog-live-recovery-direct-exact.mjs \
+            scripts/catalog-live-recovery-market.mjs \
+            .github/workflows/catalog-live-recovery-uae-georgia-direct.yml
+      - run: npm run typecheck
+      - run: npm --workspace apps/web run build
+      - name: Probe company Georgia anchors without publishing
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          RECOVERY_MARKET=georgia \
+          RECOVERY_SOURCE_IDS="myauto_georgia_list,autopapa_georgia_open" \
+          RECOVERY_TARGET=10 \
+          RECOVERY_MAX_PAGES=2 \
+          RECOVERY_TIME_LIMIT_MS=180000 \
+          RECOVERY_REQUEST_TIMEOUT_MS=25000 \
+          RECOVERY_RETRY_ATTEMPTS=1 \
+          RECOVERY_OUTPUT=georgia-company-source-smoke.json \
+          npx tsx scripts/catalog-live-recovery-market.mjs | tee georgia-company-source-smoke.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-company-source-smoke-20260812
+          path: |
+            georgia-company-source-smoke.json
+            georgia-company-source-smoke.log
+          if-no-files-found: warn
+          retention-days: 3
+      - name: Commit validated production files
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add \
+            apps/web/lib/catalog/catalog-v2-source-registry.ts \
+            apps/web/lib/catalog/importer.ts \
+            apps/web/lib/catalog/scale-market-sources.ts \
+            apps/web/lib/catalog/offer-quality.ts \
+            scripts/catalog-live-recovery-market.mjs \
+            scripts/catalog-live-recovery-direct-exact.mjs \
+            .github/workflows/catalog-live-recovery-uae-georgia-direct.yml \
+            tests/georgia-canonical-source-policy-20260812.test.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix(georgia): allow only MyAuto and AutoPapa"
+          git push origin HEAD:fix/georgia-only-myauto-autopapa-20260812
