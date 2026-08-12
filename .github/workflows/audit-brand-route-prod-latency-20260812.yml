@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# rerun after brand-summary production deploy 2026-08-12T09:42Z
 jobs:
   audit:
     runs-on: ubuntu-latest
