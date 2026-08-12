@@ -4,6 +4,7 @@ import test from "node:test";
 
 const script = fs.readFileSync("scripts/catalog-enforce-global-model-cap.mjs", "utf8");
 const workflow = fs.readFileSync(".github/workflows/catalog-global-model-cap.yml", "utf8");
+const japanStrictWorkflow = fs.readFileSync(".github/workflows/catalog-japan-strict-merge-publish.yml", "utf8");
 
 const liveWriterWorkflowPaths = [
   ".github/workflows/catalog-live-daily-working-markets.yml",
@@ -34,6 +35,7 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.match(workflow, /Catalog live recovery · UAE \+ Georgia direct/);
   assert.match(workflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
   assert.match(workflow, /Catalog Japan · publish verified Prestige aggregate/);
+  assert.match(workflow, /Catalog Japan strict merge publish/);
   assert.match(workflow, /Catalog certified power · apply/);
   assert.match(workflow, /Catalog Korea · K Car exterior gallery repair/);
   assert.match(workflow, /Catalog emergency · restore Japan baseline/);
@@ -45,6 +47,19 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog live daily · working markets'/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+});
+
+test("Japan strict writer is dispatch-only and proves all-seven safety after every write", () => {
+  assert.match(japanStrictWorkflow, /workflow_dispatch:/);
+  assert.doesNotMatch(japanStrictWorkflow, /^\s+schedule:/m);
+  assert.doesNotMatch(japanStrictWorkflow, /^\s+push:/m);
+  assert.doesNotMatch(japanStrictWorkflow, /^\s+workflow_run:/m);
+  assert.match(japanStrictWorkflow, /gh run download "\$SOURCE_RUN_ID"/);
+  assert.doesNotMatch(japanStrictWorkflow, /actions\/artifacts\/\$artifact_id\/zip/);
+  assert.doesNotMatch(japanStrictWorkflow, /CATALOG_MAX_MODELS_PER_MAKE/);
+  assert.match(japanStrictWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/);
+  assert.match(japanStrictWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(japanStrictWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
 });
 
 test("every production catalog writer uses the shared non-cancelling concurrency slot", () => {
