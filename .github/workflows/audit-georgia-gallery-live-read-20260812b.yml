@@ -1,0 +1,20 @@
+name: Georgia gallery live read audit
+
+on:
+  push:
+    branches:
+      - audit/georgia-gallery-live-read-20260812b
+
+permissions:
+  contents: read
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch fixed Georgia gallery diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --max-time 30 -H 'accept: application/json' 'https://avtocena.com/api/internal/georgia-egress-8d4c2f' | python3 -m json.tool
