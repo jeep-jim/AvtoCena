@@ -1,0 +1,27 @@
+name: Audit homepage route recheck 20260812
+
+on:
+  push:
+    branches:
+      - audit/offer-route-latency-20260812-r2
+    paths:
+      - .github/workflows/audit-home-route-recheck-20260812.yml
+
+permissions:
+  contents: read
+
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Recheck homepage and catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in '/' '/cars'; do
+            for attempt in $(seq 1 10); do
+              curl -sS -o /dev/null --max-time 20 -w "RECHECK path=$path attempt=$attempt http=%{http_code} connect=%{time_connect} ttfb=%{time_starttransfer} total=%{time_total}\n" "https://avtocena.com$path" || true
+              sleep 2
+            done
+          done
