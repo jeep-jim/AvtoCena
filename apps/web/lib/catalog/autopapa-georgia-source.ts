@@ -174,6 +174,9 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = new URL(`${BASE_URL}/en/usd/search`);
+    url.searchParams.set("order", "date_desc");
+    url.searchParams.set("s[year_from]", "2020");
+    url.searchParams.set("show_comments", "1");
     url.searchParams.set("page", String(page));
     const result = await request(url.toString());
     const items = parseAutoPapaGeorgiaListing(result.markup, result.response.url || url.toString());
