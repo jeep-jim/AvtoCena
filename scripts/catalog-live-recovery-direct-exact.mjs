@@ -8,7 +8,6 @@ const { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalc
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { dubicarsUaeCurrentSource } = await import("../apps/web/lib/catalog/dubicars-current-source.ts");
-const { autoGeorgiaStrictSource } = await import("../apps/web/lib/catalog/auto-georgia-strict-source.ts");
 
 const market = String(process.env.RECOVERY_DIRECT_MARKET || "").trim();
 const target = Math.max(1, Math.min(3000, Number(process.env.RECOVERY_TARGET || 1000)));
@@ -46,10 +45,10 @@ async function fetchPageWithRetry(currentCursor) {
   throw lastError;
 }
 
-const source = market === "uae" ? dubicarsUaeCurrentSource : market === "georgia" ? autoGeorgiaStrictSource : null;
+const source = market === "uae" ? dubicarsUaeCurrentSource : null;
 if (!source) throw new Error(`direct_recovery_market_unsupported:${market || "missing"}`);
 
-const EXPECTED_HOST = market === "uae" ? "dubicars.com" : "auto.ge";
+const EXPECTED_HOST = "dubicars.com";
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|dutro|forward|giga|elf|profia)\b/i;
 
 function hostOk(value) {
@@ -72,11 +71,7 @@ function rawBoundImages(offer) {
   const sourceUrl = String(op.sourceUrl || "");
   const rawUrls = Array.isArray(raw.images) ? raw.images.map(String).filter(Boolean) : [];
   if (!sourceUrl || !rawUrls.length || !hostOk(sourceUrl)) return [];
-  if (market === "uae") {
-    if (String(raw.url || "") !== sourceUrl || String(raw.id || "") !== String(offer.sourceOfferId || "")) return [];
-  } else {
-    if (String(raw.detailUrl || "") !== sourceUrl || raw.listingBoundImages !== true || raw.photoIdentityVerified !== true) return [];
-  }
+  if (String(raw.url || "") !== sourceUrl || String(raw.id || "") !== String(offer.sourceOfferId || "")) return [];
   return credibleCatalogImages(rawUrls.map(image)).slice(0, 30);
 }
 function token(value) { return String(value || "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ""); }
@@ -178,15 +173,7 @@ while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
     if (!offer.make || !offer.model || !offer.sourceOfferId || !hostOk(offer.operational?.sourceUrl)) { reject(rejections, "identity"); continue; }
     if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); continue; }
     if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); continue; }
-    let exactImages = rawBoundImages(offer);
-    if (market === "georgia") {
-      try {
-        const detailImages = credibleCatalogImages(await source.fetchImages(offer));
-        if (detailImages.length > exactImages.length) exactImages = detailImages.slice(0, 30);
-      } catch (error) {
-        errors.push({ stage: "exact_gallery", sourceOfferId: offer.sourceOfferId, error: String(error?.message || error) });
-      }
-    }
+    const exactImages = rawBoundImages(offer);
     if (!exactImages.length) { reject(rejections, "exact_images"); continue; }
     offer.images = exactImages;
     offer = await fillOnlyUnambiguousSpecs(offer);
