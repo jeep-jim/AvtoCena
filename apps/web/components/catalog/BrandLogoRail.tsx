@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
 const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
+const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -49,12 +50,39 @@ function BrandTile({ brand, href, onClick }: { brand: string; href: string; onCl
   </Link>;
 }
 
+function BrandDirectoryTile({
+  brand,
+  href,
+  countLabel,
+  onClick,
+}: {
+  brand: string;
+  href: string;
+  countLabel: string;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  return <Link
+    href={href}
+    onClick={onClick}
+    className="group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none"
+    title={`Автомобили ${brand} под заказ`}
+  >
+    <BrandLogoVisual brand={brand} className="h-9 w-[64px] shrink-0" />
+    <span className="min-w-0 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">
+      {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>
+    </span>
+  </Link>;
+}
+
 export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resultCount?: number }) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const searchParamsText = searchParams.toString();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [brandCounts, setBrandCounts] = useState<Record<string, number>>({});
+  const [countStatus, setCountStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const pointer = useRef<{ x: number; moved: boolean } | null>(null);
   const activeBrands = useMemo(() => {
     const map = new Map<string, string>();
@@ -72,6 +100,21 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   }, [activeBrands, query]);
   const homeBrandDirectory = pathname === "/";
   const selectedBrand = !homeBrandDirectory ? canonicalCatalogBrand(searchParams.get("make") || searchParams.get("brand") || "") : "";
+  const countQuery = useMemo(() => {
+    if (homeBrandDirectory) return "";
+    const params = new URLSearchParams(searchParamsText);
+    for (const key of ["make", "brand", "model", "page", "sort", "advanced"]) params.delete(key);
+    return params.toString();
+  }, [homeBrandDirectory, searchParamsText]);
+  const normalizedCounts = useMemo(() => {
+    const result = new Map<string, number>();
+    for (const [brand, value] of Object.entries(brandCounts)) {
+      const canonical = canonicalCatalogBrand(brand);
+      const count = Number(value);
+      if (canonical && Number.isFinite(count) && count >= 0) result.set(canonical.toLocaleLowerCase("en-US"), count);
+    }
+    return result;
+  }, [brandCounts]);
 
   useEffect(() => {
     if (!open) return;
@@ -81,6 +124,29 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     window.addEventListener("keydown", escape);
     return () => { document.body.style.overflow = old; window.removeEventListener("keydown", escape); };
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const controller = new AbortController();
+    setCountStatus("loading");
+    const suffix = countQuery ? `?${countQuery}` : "";
+    fetch(`/api/catalog/brand-counts${suffix}`, { cache: "no-store", signal: controller.signal })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`Brand counts request failed: ${response.status}`);
+        return response.json();
+      })
+      .then((payload) => {
+        if (controller.signal.aborted) return;
+        setBrandCounts(payload?.counts && typeof payload.counts === "object" ? payload.counts : {});
+        setCountStatus("ready");
+      })
+      .catch(() => {
+        if (controller.signal.aborted) return;
+        setBrandCounts({});
+        setCountStatus("error");
+      });
+    return () => controller.abort();
+  }, [countQuery, open]);
 
   const close = () => {
     setOpen(false);
@@ -117,6 +183,23 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     router.push(`/cars?${params.toString()}`);
   };
 
+  const handleRailWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const rail = event.currentTarget;
+    const maxScroll = rail.scrollWidth - rail.clientWidth;
+    if (maxScroll <= 2 || Math.abs(event.deltaY) < 1) return;
+    const next = Math.max(0, Math.min(maxScroll, rail.scrollLeft + event.deltaY));
+    if (Math.abs(next - rail.scrollLeft) < 0.5) return;
+    event.preventDefault();
+    rail.scrollLeft = next;
+  };
+
+  const countLabelForBrand = (brand: string) => {
+    if (countStatus === "loading" || countStatus === "idle") return "…";
+    if (countStatus === "error") return "—";
+    const count = normalizedCounts.get(brand.toLocaleLowerCase("en-US")) || 0;
+    return BRAND_COUNT_FORMATTER.format(count);
+  };
+
   if (selectedBrand) {
     return <section className="ac-brand-rail mt-5 flex min-h-[94px] items-center justify-between gap-4 rounded-[1.6rem] p-4" aria-label={`Выбрана марка ${selectedBrand}`}>
       <div className="flex min-w-0 items-center gap-3">
@@ -135,6 +218,7 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
       <div
         className="ac-hide-scrollbar flex min-w-0 touch-pan-x items-center gap-1 overflow-x-auto overscroll-x-contain scroll-smooth pb-1"
         style={{ WebkitOverflowScrolling: "touch" }}
+        onWheel={handleRailWheel}
         onPointerDown={(event) => { pointer.current = { x: event.clientX, moved: false }; }}
         onPointerMove={(event) => { if (pointer.current && Math.abs(event.clientX - pointer.current.x) > 7) pointer.current.moved = true; }}
         onPointerUp={() => { window.setTimeout(() => { pointer.current = null; }, 0); }}
@@ -157,8 +241,8 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
           <div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div>
           <input value={query} onChange={(event) => setQuery(event.target.value)} autoFocus placeholder="Найти марку" className="ac-filter-search mt-4 h-12 w-full rounded-2xl px-4 text-sm font-bold outline-none" />
         </div>
-        <div className="grid grid-cols-2 gap-x-1 gap-y-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7">
-          {filtered.map((brand) => <BrandTile key={brand} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand, true)} />)}
+        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-1.5">
+          {filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} onClick={handleBrandClick(brand, true)} />)}
         </div>
         {!filtered.length ? <div className="py-12 text-center font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
