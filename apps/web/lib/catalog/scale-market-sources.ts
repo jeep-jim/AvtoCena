@@ -87,43 +87,8 @@ const configs: OpenMarketSourceConfig[] = [
     ],
   },
 
-  // Georgia: MyAuto and AutoPapa have dedicated adapters.
-  {
-    sourceId: "auto_georgia_open",
-    market: "georgia",
-    label: "AUTO.GE Georgia",
-    baseUrl: "https://www.auto.ge",
-    currency: "USD",
-    detailPattern: /\/(?:en|ru|ka)\/auto\/[^?#]+-\d+\.html$/i,
-    listUrls: (page) => [
-      page <= 1 ? "https://www.auto.ge/en/auto/index.html" : `https://www.auto.ge/en/auto/index${page}.html`,
-      pageQuery("https://www.auto.ge/en/auto/index.html", page),
-    ],
-  },
-  {
-    sourceId: "ss_georgia_open",
-    market: "georgia",
-    label: "SS.GE Auto",
-    baseUrl: "https://ss.ge",
-    currency: "GEL",
-    detailPattern: /\/(?:en|ru|ka)\/auto\/(?:details?|view)\/[^?#]+|\/auto\/[^?#]*\d{5,}/i,
-    listUrls: (page) => [
-      pageQuery("https://ss.ge/en/auto/list", page, "Page"),
-      pageQuery("https://ss.ge/ka/auto/list", page, "Page"),
-    ],
-  },
-  {
-    sourceId: "mymarket_georgia_open",
-    market: "georgia",
-    label: "MyMarket Georgia Auto",
-    baseUrl: "https://www.mymarket.ge",
-    currency: "GEL",
-    detailPattern: /\/(?:en|ru|ka)\/(?:pr|product|auto)\/[^?#]*\d{5,}|\/(?:pr|product)\/\d+/i,
-    listUrls: (page) => [
-      pageQuery("https://www.mymarket.ge/en/search/1/auto", page),
-      pageQuery("https://www.mymarket.ge/ru/search/1/auto", page),
-    ],
-  },
+  // Georgia is intentionally restricted to the company anchor AutoPapa here.
+  // MyAuto has its dedicated adapter. AUTO.GE, SS.GE and MyMarket are banned.
   {
     sourceId: "autopapa_georgia_open",
     market: "georgia",
