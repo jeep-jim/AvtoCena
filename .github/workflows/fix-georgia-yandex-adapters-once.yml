@@ -25,29 +25,10 @@ jobs:
           from pathlib import Path
           path = Path('apps/web/lib/catalog/myauto-list-source.ts')
           s = path.read_text()
-          old = '''const HEADERS = {
-  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
-  "cache-control": "no-cache",
-  pragma: "no-cache",
-  referer: "https://www.myauto.ge/en/main",
-  "sec-fetch-dest": "document",
-  "sec-fetch-mode": "navigate",
-  "sec-fetch-site": "same-origin",
-  "upgrade-insecure-requests": "1",
-  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
-};'''
-          new = '''const HEADERS = {
-  // This exact minimal fingerprint is verified from the deployed Yandex
-  // Serverless runtime. Extra navigation/cache headers cause MyAuto's
-  // Cloudflare policy to return 403 from the same egress address.
-  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
-  "accept-language": "en-US,en;q=0.9,ka;q=0.8",
-  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
-};'''
-          if old not in s:
-              raise SystemExit('MyAuto header block not found')
-          path.write_text(s.replace(old, new, 1))
+          start = s.index('const HEADERS = {')
+          end = s.index('\n};', start) + 3
+          new = 'const HEADERS = {\n  // Verified from the deployed Yandex Serverless egress. Extra navigation/cache headers\n  // trigger MyAuto Cloudflare 403 from the same runtime.\n  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",\n  "accept-language": "en-US,en;q=0.9,ka;q=0.8",\n  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",\n};'
+          path.write_text(s[:start] + new + s[end:])
           PY
       - name: Focused tests
         run: |
