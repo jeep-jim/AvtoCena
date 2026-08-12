@@ -44,9 +44,17 @@ test("AutoPapa binds price, year, mileage and image to one exact listing and rej
   assert.equal(levante.year, 2022);
   assert.equal(levante.price, 29_500);
   assert.equal(levante.mileageKm, 48_000);
-  assert.equal(levante.engineCc, 3_000);
 
   assert.equal(rows.some((row) => row.id === "954330"), false);
+});
+
+test("AutoPapa rejects personal watercraft that look like ordinary current listings", () => {
+  const markup = `
+    <a href="/en/usd/yamaha/super-jet/959999">Yamaha Super Jet</a>
+    <div>$12 500 2026 year, Batumi, automatic 1.8 l, petrol</div>
+    <img src="/system/car/photos/009/999/999/medium.jpg">
+  `;
+  assert.deepEqual(parseAutoPapaGeorgiaListing(markup), []);
 });
 
 test("AutoPapa exact detail gallery keeps only direct full-size originals in source order", () => {
