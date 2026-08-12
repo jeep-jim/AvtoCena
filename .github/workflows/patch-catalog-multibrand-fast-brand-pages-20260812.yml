@@ -1,0 +1,197 @@
+name: Patch catalog multibrand and brand route performance
+
+on:
+  push:
+    branches:
+      - ui/catalog-multibrand-fast-brand-pages-20260812
+    paths:
+      - .github/workflows/patch-catalog-multibrand-fast-brand-pages-20260812.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/catalog-multibrand-fast-brand-pages-20260812
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Apply production patch
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def read(path):
+              return Path(path).read_text()
+          def write(path, text):
+              Path(path).write_text(text)
+          def once(text, old, new, label):
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: expected 1 match, got {count}")
+              return text.replace(old, new, 1)
+          def between(text, start, end, replacement, label):
+              a = text.find(start)
+              if a < 0: raise SystemExit(f"{label}: start not found")
+              b = text.find(end, a)
+              if b < 0: raise SystemExit(f"{label}: end not found")
+              return text[:a] + replacement + text[b:]
+
+          # ---- storage: OR-make filtering + one-scan read-only aggregations ----
+          p = "apps/web/lib/catalog/storage.ts"
+          s = read(p)
+          s = once(s,
+              'function cleanFacet(value: unknown) { return String(value || "").replace(/\\s+/g, " ").trim(); }\n',
+              'function cleanFacet(value: unknown) { return String(value || "").replace(/\\s+/g, " ").trim(); }\nexport function catalogMakeFilterValues(value: unknown) {\n  return [...new Set(String(value || "").split(",").map(cleanFacet).filter(Boolean))];\n}\n',
+              "storage make split")
+          s = once(s,
+              '  if (params.make && lower(row.make) !== lower(params.make)) return false;\n',
+              '  if (params.make && !catalogMakeFilterValues(params.make).some((make) => lower(row.make) === lower(make))) return false;\n',
+              "storage make OR matcher")
+          old_model_keys = '''async function projectionModelKeys(params: CatalogSearchParams) {\n  if (!params.model) return null;\n  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");\n  const matches = await resolveVehicleModelQuery(params.model, params.make, 100);\n  const candidates = matches.length ? matches.map((match) => ({ make: match.make, model: match.model })) : params.make ? [{ make: params.make, model: params.model }] : [];\n  return new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));\n}\n'''
+          new_model_keys = '''async function projectionModelKeys(params: CatalogSearchParams) {\n  if (!params.model) return null;\n  const lower = (value: unknown) => cleanFacet(value).toLocaleLowerCase("ru-RU");\n  const makes = catalogMakeFilterValues(params.make);\n  const scopes: Array<string | undefined> = makes.length ? makes : [undefined];\n  const matches = (await Promise.all(scopes.map((make) => resolveVehicleModelQuery(params.model, make, 100)))).flat();\n  const candidates = matches.length\n    ? matches.map((match) => ({ make: match.make, model: match.model }))\n    : makes.length\n      ? makes.map((make) => ({ make, model: String(params.model) }))\n      : [];\n  return new Set(candidates.map((item) => `${lower(item.make)}:${lower(item.model)}`));\n}\n'''
+          s = once(s, old_model_keys, new_model_keys, "storage model keys")
+          marker = 'async function readOfferLists(paths: string[]) {'
+          helper = '''async function currentProjectionRows(params: CatalogSearchParams = {}) {\n  const manifest = await readManifest();\n  const scope = params.market && params.market !== "any" ? String(params.market) : CURRENT_ALL_MARKETS_PROJECTION;\n  const current = await readCurrentSearchProjection(scope);\n  if (current.generationId === manifest.generationId) return { generationId: manifest.generationId, rows: current.items || [] };\n  return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };\n}\n\nexport async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {\n  const filters: CatalogSearchParams = { ...params, make: undefined };\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const modelKeys = await projectionModelKeys(filters);\n  const counts = new Map<string, number>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters, modelKeys)) continue;\n    const make = cleanFacet(row.make);\n    if (!make) continue;\n    counts.set(make, (counts.get(make) || 0) + 1);\n  }\n  return { generationId, counts: Object.fromEntries([...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], "ru"))) };\n}\n\nexport async function readCatalogBrandModelCounts(make: string) {\n  const filters: CatalogSearchParams = { make };\n  const { generationId, rows } = await currentProjectionRows(filters);\n  const models = new Map<string, { model: string; count: number; marketCounts: Record<string, number> }>();\n  for (const row of rows) {\n    if (!catalogSearchProjectionMatches(row, filters)) continue;\n    const model = cleanFacet(row.model);\n    if (!model) continue;\n    const key = model.toLocaleLowerCase("ru-RU");\n    const current = models.get(key) || { model, count: 0, marketCounts: {} };\n    current.count += 1;\n    current.marketCounts[row.market] = (current.marketCounts[row.market] || 0) + 1;\n    models.set(key, current);\n  }\n  return { generationId, models: [...models.values()].sort((a, b) => b.count - a.count || a.model.localeCompare(b.model, "ru")) };\n}\n\n'''
+          if helper not in s:
+              s = once(s, marker, helper + marker, "storage aggregate helpers")
+          write(p, s)
+
+          # ---- brand counts endpoint: one projection scan, not one search per make ----
+          p = "apps/web/app/api/catalog/brand-counts/route.ts"
+          write(p, '''import { NextResponse } from "next/server";\nimport { readCatalogBrandCounts } from "@/lib/catalog/storage";\nimport type { CatalogSearchParams } from "@/lib/catalog/types";\n\nexport const dynamic = "force-dynamic";\nexport const revalidate = 0;\n\nfunction text(url: URL, key: string) {\n  return String(url.searchParams.get(key) || "").trim() || undefined;\n}\n\nfunction positiveNumber(url: URL, key: string) {\n  const value = Number(url.searchParams.get(key) || 0);\n  return Number.isFinite(value) && value > 0 ? value : undefined;\n}\n\nexport async function GET(request: Request) {\n  const url = new URL(request.url);\n  const params: CatalogSearchParams = {\n    market: text(url, "market"),\n    hasPrice: text(url, "hasPrice"),\n    budgetFrom: positiveNumber(url, "budgetFrom"),\n    budgetTo: positiveNumber(url, "budgetTo") || positiveNumber(url, "budget"),\n    yearFrom: positiveNumber(url, "yearFrom"),\n    yearTo: positiveNumber(url, "yearTo"),\n    mileageFrom: positiveNumber(url, "mileageFrom"),\n    mileageTo: positiveNumber(url, "mileageTo"),\n    engineFrom: positiveNumber(url, "engineFrom"),\n    engineTo: positiveNumber(url, "engineTo"),\n    powerFrom: positiveNumber(url, "powerFrom"),\n    powerTo: positiveNumber(url, "powerTo"),\n    fuel: text(url, "fuel"),\n    transmission: text(url, "transmission"),\n    drive: text(url, "drive"),\n    bodyType: text(url, "bodyType"),\n    auctionGrade: text(url, "auctionGrade"),\n    auctionDateFrom: text(url, "auctionDateFrom"),\n    auctionDateTo: text(url, "auctionDateTo"),\n  };\n  const summary = await readCatalogBrandCounts(params);\n  return NextResponse.json(summary, { headers: { "Cache-Control": "private, max-age=15, stale-while-revalidate=30" } });\n}\n''')
+
+          # ---- model directory: stop reading every offer from seven full market JSON sets ----
+          p = "apps/web/lib/catalog/model-directory.ts"
+          s = read(p)
+          s = s.replace('import { isCrediblePublicOffer } from "./offer-quality";\n', '')
+          s = s.replace('import { PUBLIC_CATALOG_MARKETS } from "./runtime-config";\n', '')
+          s = s.replace('import { readMarketOffers } from "./storage";\n', 'import { readCatalogBrandModelCounts } from "./storage";\n')
+          s = s.replace('  findVehicleModel,\n', '')
+          start = 'const readLiveOffers = cache(async () => {'
+          end = 'const readKnowledge = cache(async () => {'
+          s = between(s, start, end, end, "model directory remove full live scan")
+          s = once(s,
+              '  const [{ models: knowledge, variants, references }, offers] = await Promise.all([readKnowledge(), readLiveOffers()]);\n',
+              '  const [{ models: knowledge, variants, references }, live] = await Promise.all([readKnowledge(), readCatalogBrandModelCounts(make)]);\n',
+              "model directory live summary")
+          start = '  const counters = new Map<string, { count: number; marketCounts: Record<string, number> }>();\n'
+          end = '\n\n  return models.map((model) => {'
+          replacement = '''  const modelByAlias = new Map<string, VehicleKnowledgeModel | null>();\n  for (const model of models) {\n    for (const value of [model.model, ...(model.aliases || [])]) {\n      const key = vehicleKnowledgeCompact(value);\n      if (!key) continue;\n      const current = modelByAlias.get(key);\n      if (current && current.id !== model.id) modelByAlias.set(key, null);\n      else if (current === undefined) modelByAlias.set(key, model);\n    }\n  }\n  const counters = new Map<string, { count: number; marketCounts: Record<string, number> }>();\n  for (const item of live.models) {\n    const recognized = modelByAlias.get(vehicleKnowledgeCompact(item.model));\n    if (!recognized) continue;\n    counters.set(recognized.id, { count: item.count, marketCounts: item.marketCounts });\n  }'''
+          s = between(s, start, end, replacement, "model directory counters")
+          write(p, s)
+
+          # ---- catalog filter UI: CSV multi-make state + one chip per selected brand ----
+          p = "apps/web/components/catalog/CatalogFilters.tsx"
+          s = read(p)
+          s = once(s,
+              'function clean(value: string) { return String(value || "").replace(/\\s+/g, " ").trim(); }\n',
+              'function clean(value: string) { return String(value || "").replace(/\\s+/g, " ").trim(); }\nfunction splitMakeValues(value: string) { return [...new Set(String(value || "").split(",").map(clean).filter(Boolean))]; }\nfunction joinMakeValues(values: string[]) { return [...new Set(values.map(clean).filter(Boolean))].join(","); }\n',
+              "filter make helpers")
+          old = '    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}\n'
+          new = '    {includePrimary ? <div className="grid gap-2.5 md:grid-cols-3"><SearchSelect name="make" value={draft.make} placeholder={splitMakeValues(draft.make).length > 1 ? `${splitMakeValues(draft.make).length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} /><VehicleModelSearch value={draft.model} make={draft.make} onMakeChange={(value) => setField("make", value)} onValueChange={(value) => setField("model", value)} /><SimpleSelect name="market" value={draft.market} placeholder="Все рынки" options={marketOptions} onChange={(value) => setField("market", value)} /></div> : null}\n'
+          s = once(s, old, new, "filter mobile primary make")
+          old = '  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), draft.make].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, draft.make]);\n'
+          new = '  const selectedMakes = useMemo(() => splitMakeValues(draft.make), [draft.make]);\n  const makeOptions = useMemo<Option[]>(() => [{ value: "", label: "Любая марка" }, ...[...new Set<string>([...(activeFacets?.makes || []), ...selectedMakes].map(clean).filter(Boolean))].sort((a, b) => label(a).localeCompare(label(b), "ru")).map((value) => ({ value, label: label(value) }))], [activeFacets, selectedMakes]);\n'
+          s = once(s, old, new, "filter selected makes options")
+          old = '  useEffect(() => { if (draft.make && !makeOptions.some((option) => option.value === draft.make)) setField("make", ""); }, [draft.make, makeOptions]);\n'
+          new = '  useEffect(() => {\n    if (!draft.make) return;\n    const allowed = new Set(makeOptions.map((option) => option.value).filter(Boolean));\n    const next = selectedMakes.filter((make) => allowed.has(make));\n    const joined = joinMakeValues(next);\n    if (joined !== draft.make) setDraft((current) => ({ ...current, make: joined, model: "" }));\n  }, [draft.make, makeOptions, selectedMakes]);\n'
+          s = once(s, old, new, "filter selected makes validation")
+          s = once(s,
+              '    if (draft.make) rows.push({ key: "make", label: draft.make });\n',
+              '    splitMakeValues(draft.make).forEach((make) => rows.push({ key: `make:${make}`, label: make }));\n',
+              "filter brand chips")
+          old = '  const removeFilter = (key: string) => {\n    if (key === "year") return setDraft((current) => ({ ...current, yearFrom: "", yearTo: "" }));\n'
+          new = '  const removeFilter = (key: string) => {\n    if (key.startsWith("make:")) {\n      const removed = key.slice(5);\n      return setDraft((current) => ({ ...current, make: joinMakeValues(splitMakeValues(current.make).filter((make) => make !== removed)), model: "" }));\n    }\n    if (key === "year") return setDraft((current) => ({ ...current, yearFrom: "", yearTo: "" }));\n'
+          s = once(s, old, new, "filter remove brand chip")
+          old = '        <SearchSelect name="make" value={draft.make} placeholder="Любая марка" searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />\n'
+          new = '        <SearchSelect name="make" value={draft.make} placeholder={selectedMakes.length > 1 ? `${selectedMakes.length} марки` : "Любая марка"} searchPlaceholder="Найти марку" options={makeOptions} onChange={(value) => { setField("make", value); setField("model", ""); }} />\n'
+          s = once(s, old, new, "filter desktop make placeholder")
+          write(p, s)
+
+          # ---- models API / model picker: make CSV means inventory OR across selected brands ----
+          p = "apps/web/app/api/catalog/models/route.ts"
+          s = read(p)
+          s = once(s,
+              '  const make = clean(url.searchParams.get("make"));\n',
+              '  const make = clean(url.searchParams.get("make"));\n  const makeValues = [...new Set(make.split(",").map(clean).filter(Boolean))];\n',
+              "models make values")
+          s = once(s,
+              '        label: make ? item.model : `${item.make} ${item.model}`,\n',
+              '        label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,\n',
+              "models result labels")
+          write(p, s)
+
+          p = "apps/web/components/catalog/VehicleModelSearch.tsx"
+          s = read(p)
+          s = once(s,
+              '  const canSearch = Boolean(clean(make) || compact(query).length >= 2);\n',
+              '  const multipleMakes = String(make || "").split(",").map(clean).filter(Boolean).length > 1;\n  const canSearch = Boolean(clean(make) || compact(query).length >= 2);\n',
+              "model picker multiple makes")
+          s = once(s,
+              '{!make ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}',
+              '{!make || multipleMakes ? <span className="block truncate text-[11px] font-semibold opacity-55">{item.make}</span> : null}',
+              "model picker show make")
+          write(p, s)
+
+          # ---- brand rail: catalog-only multi-select, homepage remains direct brand navigation ----
+          p = "apps/web/components/catalog/BrandLogoRail.tsx"
+          s = read(p)
+          old = '''function BrandDirectoryTile({\n  brand,\n  href,\n  countLabel,\n  onClick,\n}: {\n  brand: string;\n  href: string;\n  countLabel: string;\n  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;\n}) {\n  return <Link\n    href={href}\n    onClick={onClick}\n    className="group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none"\n    title={`Автомобили ${brand} под заказ`}\n  >\n    <BrandLogoVisual brand={brand} className="h-9 w-[64px] shrink-0" />\n    <span className="min-w-0 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">\n      {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>\n    </span>\n  </Link>;\n}\n'''
+          new = '''function BrandDirectoryTile({\n  brand,\n  href,\n  countLabel,\n  selected = false,\n  onClick,\n  onPointerEnter,\n}: {\n  brand: string;\n  href: string;\n  countLabel: string;\n  selected?: boolean;\n  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;\n  onPointerEnter?: () => void;\n}) {\n  return <Link\n    href={href}\n    prefetch={false}\n    onClick={onClick}\n    onPointerEnter={onPointerEnter}\n    className={`group flex min-h-[62px] min-w-0 items-center gap-3 rounded-2xl px-3 py-2 transition hover:bg-[var(--ac-surface-2)] focus-visible:bg-[var(--ac-surface-2)] focus-visible:outline-none ${selected ? "bg-[var(--ac-surface-2)]" : ""}`}\n    title={`Автомобили ${brand} под заказ`}\n  >\n    <BrandLogoVisual brand={brand} className="h-9 w-[64px] shrink-0" />\n    <span className="min-w-0 flex-1 truncate text-sm font-black text-[var(--ac-text)] md:text-[15px]">\n      {brand}<span className="font-bold text-[var(--ac-muted)]"> · {countLabel}</span>\n    </span>\n    {selected ? <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-500 text-[12px] font-black text-white" aria-label="Выбрано">✓</span> : null}\n  </Link>;\n}\n'''
+          s = once(s, old, new, "brand directory tile selected")
+          s = once(s,
+              '  const selectedBrand = !homeBrandDirectory ? canonicalCatalogBrand(searchParams.get("make") || searchParams.get("brand") || "") : "";\n',
+              '  const selectedBrands = useMemo(() => {\n    if (homeBrandDirectory) return [] as string[];\n    const raw = searchParams.get("make") || searchParams.get("brand") || "";\n    const map = new Map<string, string>();\n    for (const value of raw.split(",").map((item) => canonicalCatalogBrand(item.trim())).filter(Boolean)) {\n      const known = KNOWN_BRANDS.get(value.toLocaleLowerCase("en-US"));\n      if (known) map.set(known.toLocaleLowerCase("en-US"), known);\n    }\n    return [...map.values()];\n  }, [homeBrandDirectory, searchParamsText]);\n  const selectedBrandKeys = useMemo(() => new Set(selectedBrands.map((brand) => brand.toLocaleLowerCase("en-US"))), [selectedBrands]);\n',
+              "brand selected set")
+          old = '''  const clearSelectedBrand = () => {\n    const params = new URLSearchParams(window.location.search);\n    params.delete("make");\n    params.delete("brand");\n    params.delete("model");\n    params.delete("page");\n    const queryString = params.toString();\n    router.push(queryString ? `/cars?${queryString}` : "/cars");\n  };\n'''
+          new = '''  const setCatalogBrands = (nextBrands: string[]) => {\n    const params = new URLSearchParams(window.location.search);\n    const ordered = [...new Set(nextBrands)].sort((a, b) => a.localeCompare(b, "ru"));\n    if (ordered.length) params.set("make", ordered.join(",")); else params.delete("make");\n    params.delete("brand");\n    params.delete("model");\n    params.delete("page");\n    const queryString = params.toString();\n    router.replace(queryString ? `/cars?${queryString}` : "/cars", { scroll: false });\n  };\n\n  const clearSelectedBrands = () => setCatalogBrands([]);\n'''
+          s = once(s, old, new, "brand set catalog brands")
+          old = '''    event.preventDefault();\n    const params = new URLSearchParams(window.location.search);\n    params.set("make", brand);\n    params.delete("brand");\n    params.delete("model");\n    params.delete("page");\n    if (closeAfter) close();\n    router.push(`/cars?${params.toString()}`);\n'''
+          new = '''    event.preventDefault();\n    const key = brand.toLocaleLowerCase("en-US");\n    const next = selectedBrandKeys.has(key)\n      ? selectedBrands.filter((item) => item.toLocaleLowerCase("en-US") !== key)\n      : [...selectedBrands, brand];\n    setCatalogBrands(next);\n'''
+          s = once(s, old, new, "brand toggle click")
+          start = '  if (selectedBrand) {\n'
+          end = '\n\n  return <>\n'
+          s = between(s, start, end, '  return <>\n', "brand remove selected-only rail")
+          # between included a return marker; normalize accidental duplicate
+          s = s.replace('  return <>\n\n\n  return <>\n', '  return <>\n')
+          old_header = '<div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div>'
+          new_header = '<div className="flex items-center justify-between gap-4"><h2 className="text-2xl font-black md:text-4xl">Все марки</h2><div className="flex items-center gap-3">{!homeBrandDirectory && selectedBrands.length ? <button type="button" onClick={clearSelectedBrands} className="min-h-10 rounded-xl border border-red-500/45 px-4 text-sm font-black text-red-500">Очистить</button> : null}<button type="button" onClick={close} className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-2xl font-black">×</button></div></div>'
+          s = once(s, old_header, new_header, "brand modal clear header")
+          old_map = '{filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} onClick={handleBrandClick(brand, true)} />)}'
+          new_map = '{filtered.map((brand) => <BrandDirectoryTile key={brand} brand={brand} href={hrefForBrand(brand)} countLabel={countLabelForBrand(brand)} selected={!homeBrandDirectory && selectedBrandKeys.has(brand.toLocaleLowerCase("en-US"))} onPointerEnter={homeBrandDirectory ? () => router.prefetch(hrefForBrand(brand)) : undefined} onClick={handleBrandClick(brand, true)} />)}'
+          s = once(s, old_map, new_map, "brand modal tile mapping")
+          write(p, s)
+
+          # ---- regression tests ----
+          p = "tests/catalog-filter-search.test.ts"
+          s = read(p)
+          anchor = 'test("the 160 hp utilization-fee filter uses certified calculation power", () => {'
+          test_block = '''test("catalog make filter accepts several selected brands as OR", () => {\n  const audi = { id: "audi", market: "europe", make: "Audi", model: "A4", year: 2024 } as any;\n  const bmw = { id: "bmw", market: "europe", make: "BMW", model: "3 Series", year: 2024 } as any;\n  const kia = { id: "kia", market: "korea", make: "Kia", model: "K5", year: 2024 } as any;\n  assert.equal(catalogSearchProjectionMatches(audi, { make: "Audi,BMW" }), true);\n  assert.equal(catalogSearchProjectionMatches(bmw, { make: "Audi,BMW" }), true);\n  assert.equal(catalogSearchProjectionMatches(kia, { make: "Audi,BMW" }), false);\n});\n\n'''
+          s = once(s, anchor, test_block + anchor, "multi make test")
+          write(p, s)
+
+          write("tests/catalog-brand-rail-ui.test.ts", '''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\n\nconst rail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");\nconst filters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");\nconst modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");\nconst brandCounts = fs.readFileSync(new URL("../apps/web/app/api/catalog/brand-counts/route.ts", import.meta.url), "utf8");\n\ntest("catalog brand directory keeps homepage navigation but supports catalog multi-select", () => {\n  assert.match(rail, /homeBrandDirectory[\\s\\S]*\\/cars\\/brand\\/\\$\\{catalogBrandSlug\\(brand\\)\\}/);\n  assert.match(rail, /selectedBrands/);\n  assert.match(rail, /selectedBrandKeys/);\n  assert.match(rail, /ordered\\.join\\(","\\)/);\n  assert.match(rail, /Очистить/);\n  assert.match(rail, /aria-label="Выбрано">✓/);\n  assert.match(filters, /splitMakeValues/);\n  assert.match(filters, /key: `make:\\$\\{make\\}`/);\n});\n\ntest("brand counts and brand landing use compact projection summaries", () => {\n  assert.match(brandCounts, /readCatalogBrandCounts/);\n  assert.doesNotMatch(brandCounts, /searchOffers/);\n  assert.match(modelDirectory, /readCatalogBrandModelCounts/);\n  assert.doesNotMatch(modelDirectory, /readMarketOffers/);\n  assert.doesNotMatch(modelDirectory, /findVehicleModel\\(offer\\)/);\n});\n''')
+
+          workflow = Path('.github/workflows/patch-catalog-multibrand-fast-brand-pages-20260812.yml')
+          workflow.unlink()
+          PY
+      - name: Validate targeted tests
+        run: |
+          npx tsx --test tests/catalog-filter-search.test.ts tests/catalog-brand-rail-ui.test.ts
+          git diff --check
+      - name: Commit patched branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "UI: multiselect brands and accelerate brand pages"
+          git push origin HEAD:ui/catalog-multibrand-fast-brand-pages-20260812
