@@ -1,0 +1,66 @@
+name: Audit MyAuto current public API2
+run-name: MyAuto API2 read-only probe · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/myauto-api2-current-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe current public API routes without publishing
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const urls = [
+            'https://api2.myauto.ge/en/products/122857826',
+            'https://api2.myauto.ge/ka/products/122857826',
+            'https://api2.myauto.ge/en/appdata/other.json',
+            'https://api2.myauto.ge/ka/appdata/other.json',
+            'https://api2.myauto.ge/en/products',
+            'https://api2.myauto.ge/ka/products',
+            'https://api2.myauto.ge/en/products?page=1',
+            'https://api2.myauto.ge/ka/products?page=1',
+          ];
+          const headers = {
+            'accept': 'application/json,text/plain,*/*',
+            'accept-language': 'en-US,en;q=0.9,ka;q=0.8',
+            'origin': 'https://www.myauto.ge',
+            'referer': 'https://www.myauto.ge/',
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/136 Safari/537.36',
+          };
+          for (const url of urls) {
+            try {
+              const response = await fetch(url, { headers, redirect: 'follow', signal: AbortSignal.timeout(20000) });
+              const text = await response.text();
+              let json = null;
+              try { json = JSON.parse(text); } catch {}
+              const data = json?.data;
+              console.log(JSON.stringify({
+                url,
+                status: response.status,
+                finalUrl: response.url,
+                contentType: response.headers.get('content-type'),
+                bytes: Buffer.byteLength(text),
+                topKeys: json && typeof json === 'object' ? Object.keys(json).slice(0, 30) : [],
+                dataKeys: data && typeof data === 'object' && !Array.isArray(data) ? Object.keys(data).slice(0, 40) : [],
+                itemsLength: Array.isArray(data?.items) ? data.items.length : Array.isArray(data) ? data.length : null,
+                sampleId: data?.info?.car_id || data?.info?.id || data?.items?.[0]?.car_id || data?.items?.[0]?.id || null,
+                bodyPrefix: json ? undefined : text.slice(0, 180).replace(/\s+/g, ' '),
+              }));
+            } catch (error) {
+              console.log(JSON.stringify({ url, error: String(error?.message || error) }));
+            }
+          }
+          NODE
