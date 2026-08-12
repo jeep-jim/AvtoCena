@@ -77,6 +77,13 @@ async function fetchText(url: string, timeoutMs = 12_000) {
   return { response, text };
 }
 
+function safeMyAutoSpecFields(info: Record<string, unknown>) {
+  const allowed = /^(?:car_id|photo|photo_ver|pic_number|engine|engine_volume|engine_cc|fuel|fuel_type|power|power_hp|horsepower|cylinders?|transmission|gear|gear_type|drive|drive_type|man_id|model_id)$/i;
+  return Object.fromEntries(Object.entries(info || {})
+    .filter(([key, value]) => allowed.test(key) && ["string", "number", "boolean"].includes(typeof value))
+    .slice(0, 40));
+}
+
 async function inspectMyAuto() {
   const page = await myAutoListSource.fetchPage("1");
   const offer = (page.items || [])
@@ -120,6 +127,7 @@ async function inspectMyAuto() {
     photo: info.photo ?? null,
     photoVer: info.photo_ver ?? null,
     picNumber: info.pic_number ?? null,
+    safeSpecFields: safeMyAutoSpecFields(info),
     detailStatus: detail.response.status,
     detailBytes: Buffer.byteLength(detail.text),
     scripts: inspected.filter((item) => "helper" in item && (item.helper.occurrences.length || item.helper.definitions.length)),
