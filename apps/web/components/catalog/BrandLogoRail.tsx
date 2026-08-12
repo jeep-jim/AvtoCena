@@ -258,14 +258,16 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     const rail = event.currentTarget;
     drag.current = { pointerId: event.pointerId, startX: event.clientX, startScrollLeft: rail.scrollLeft, moved: false };
     suppressClick.current = false;
-    rail.setPointerCapture(event.pointerId);
-    rail.classList.add("is-dragging");
   };
   const moveMouseDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     const state = drag.current;
     if (!state || state.pointerId !== event.pointerId) return;
     const dx = event.clientX - state.startX;
-    if (Math.abs(dx) > 4) state.moved = true;
+    if (Math.abs(dx) > 4 && !state.moved) {
+      state.moved = true;
+      if (!event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.setPointerCapture(event.pointerId);
+      event.currentTarget.classList.add("is-dragging");
+    }
     if (!state.moved) return;
     event.preventDefault();
     event.currentTarget.scrollLeft = state.startScrollLeft - dx;
