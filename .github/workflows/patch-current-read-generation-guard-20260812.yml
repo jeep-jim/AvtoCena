@@ -1,5 +1,4 @@
 name: Patch catalog current-read generation guard
-run-name: Patch current-read generation guard · ${{ github.sha }}
 
 on:
   push:
@@ -20,15 +19,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
       - run: npm ci
       - name: Apply deterministic storage patch
         run: python3 scripts/patch-current-read-generation-guard-20260812.py
-      - name: Add regression test if missing
+      - name: Write regression test
         shell: bash
         run: |
-          if [ ! -f tests/catalog-current-read-generation-guard.test.ts ]; then
-            cat > tests/catalog-current-read-generation-guard.test.ts <<'EOF'
+          cat > tests/catalog-current-read-generation-guard.test.ts <<'EOF'
           import assert from "node:assert/strict";
           import fs from "node:fs";
           import test from "node:test";
@@ -46,8 +43,8 @@ jobs:
             assert.ok((storage.match(/current\.generationId === manifest\.generationId/g) || []).length >= 2);
           });
           EOF
-          fi
-      - run: |
+      - name: Validate patch
+        run: |
           node --import tsx --test tests/catalog-current-read-generation-guard.test.ts
           npm run typecheck
           npm run build
