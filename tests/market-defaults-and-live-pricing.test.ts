@@ -5,6 +5,7 @@ import { resolveEffectiveMarketVersion } from "../apps/web/lib/effective-market-
 import { applyActiveBusinessPricing, repriceOfferWithBusinessConfig } from "../apps/web/lib/catalog/live-business-pricing";
 
 const markets = JSON.parse(fs.readFileSync(new URL("../data/markets/markets.json", import.meta.url), "utf8"));
+const livePricingSource = fs.readFileSync(new URL("../apps/web/lib/catalog/live-business-pricing.ts", import.meta.url), "utf8");
 const expectedMarkets = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
 const requiredAmounts = [
   "securityDepositRub", "topAvtoCommissionRub", "contractInitialPaymentRub",
@@ -119,4 +120,12 @@ test("pending public offer gets a ruble source-price snapshot even before custom
   assert.equal(result.calculationStatus, "needs_power_data");
   assert.equal(result.calculationSnapshot?.currencyRate?.sourcePriceRub, 1_750_000);
   assert.equal(result.calculationSnapshot?.sourcePriceRub, 1_750_000);
+});
+
+test("concurrent catalog pricing batches share one effective-market settings read", () => {
+  assert.match(livePricingSource, /let effectiveMarketsInFlight: Promise<EffectiveMarkets> \| null = null/);
+  assert.match(livePricingSource, /if \(effectiveMarketsInFlight\) return effectiveMarketsInFlight/);
+  assert.match(livePricingSource, /getEffectiveMarketsForCatalogBatch\(\)/);
+  assert.match(livePricingSource, /finally \{\s*effectiveMarketsInFlight = null;/);
+  assert.equal((livePricingSource.match(/getEffectiveMarketsWithDefaults\(\)/g) || []).length, 1);
 });
