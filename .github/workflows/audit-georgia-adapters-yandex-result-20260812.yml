@@ -14,7 +14,7 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch deployed adapter dry-run after exact MyAuto Yandex fingerprint
+      - name: Fetch deployed adapter dry-run after dedicated AutoPapa adapter
         shell: bash
         run: |
           set -euo pipefail
