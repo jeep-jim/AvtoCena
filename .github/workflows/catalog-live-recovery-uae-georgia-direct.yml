@@ -47,7 +47,7 @@ jobs:
           node --check scripts/catalog-live-recovery-publish.mjs
           node --check scripts/catalog-live-recovery-publish-batch.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
-          node --import tsx --test tests/auto-georgia-price.test.ts
+          node --import tsx --test tests/georgia-canonical-source-policy-20260812.test.ts
           node --import tsx --test tests/catalog-live-sources-v19.test.ts
           node --import tsx --test tests/catalog-direct-recovery.test.ts
           npm run typecheck
@@ -70,88 +70,43 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Collect canonical company sources first; fallback only when both Georgia anchors are unavailable
+      - name: Collect UAE direct or Georgia company anchors only
         shell: bash
         run: |
           set -euo pipefail
-          if [ "$RECOVERY_DIRECT_MARKET" != "georgia" ]; then
+          if [ "$RECOVERY_DIRECT_MARKET" = "uae" ]; then
             npx tsx scripts/catalog-live-recovery-direct-exact.mjs
             exit 0
           fi
 
-          PRIMARY_OUTPUT="catalog-rebuild-georgia-canonical.json"
           FINAL_OUTPUT="catalog-rebuild-georgia.json"
-          FALLBACK_OUTPUT="catalog-rebuild-georgia-fallback.json"
           SELECTION_REPORT="catalog-georgia-source-selection.json"
-
           set +e
           RECOVERY_MARKET=georgia \
           RECOVERY_SOURCE_IDS="myauto_georgia_list,autopapa_georgia_open" \
-          RECOVERY_OUTPUT="$PRIMARY_OUTPUT" \
+          RECOVERY_OUTPUT="$FINAL_OUTPUT" \
           npx tsx scripts/catalog-live-recovery-market.mjs
-          primary_status=$?
+          canonical_status=$?
           set -e
 
-          primary_count=$(node -e "const fs=require('fs');let n=0;try{n=Number(JSON.parse(fs.readFileSync(process.argv[1],'utf8')).count||0)}catch{};process.stdout.write(String(n))" "$PRIMARY_OUTPUT")
-          canonical_unavailable=$(node -e "const fs=require('fs');let p={};try{p=JSON.parse(fs.readFileSync(process.argv[1],'utf8'))}catch{};const expected=['myauto_georgia_list','autopapa_georgia_open'];const rows=p.report?.sources||[];const unavailable=expected.every(id=>{const row=rows.find(x=>x.sourceId===id);return !row||row.stopReason==='source_error'});process.stdout.write(unavailable?'1':'0')" "$PRIMARY_OUTPUT")
-
-          if [ "$primary_count" -gt 0 ]; then
-            cp "$PRIMARY_OUTPUT" "$FINAL_OUTPUT"
-            node - "$PRIMARY_OUTPUT" "$SELECTION_REPORT" "$primary_status" <<'NODE'
+          node - "$FINAL_OUTPUT" "$SELECTION_REPORT" "$canonical_status" <<'NODE'
           const fs = require('fs');
           const [input, output, status] = process.argv.slice(2);
-          const payload = JSON.parse(fs.readFileSync(input, 'utf8'));
-          fs.writeFileSync(output, JSON.stringify({
+          let payload = {};
+          try { payload = JSON.parse(fs.readFileSync(input, 'utf8')); } catch {}
+          const count = Number(payload.count || 0);
+          const report = {
             canonicalSourceIds: ['myauto_georgia_list', 'autopapa_georgia_open'],
-            fallbackSourceId: 'auto_georgia_open',
             canonicalExitStatus: Number(status),
-            canonicalCount: Number(payload.count || 0),
+            canonicalCount: count,
             canonicalDiagnostics: payload.report?.sources || [],
             usedFallback: false,
-            fallbackReason: null,
-          }, null, 2));
+            fallbackForbidden: true,
+          };
+          fs.writeFileSync(output, JSON.stringify(report, null, 2));
+          console.log(report);
+          if (Number(status) !== 0 || count <= 0) process.exit(2);
           NODE
-          elif [ "$canonical_unavailable" = "1" ]; then
-            echo "Both canonical Georgia anchors are unavailable; AUTO.GE fallback is now allowed."
-            RECOVERY_DIRECT_MARKET=georgia RECOVERY_OUTPUT="$FALLBACK_OUTPUT" npx tsx scripts/catalog-live-recovery-direct-exact.mjs
-            cp "$FALLBACK_OUTPUT" "$FINAL_OUTPUT"
-            node - "$PRIMARY_OUTPUT" "$FALLBACK_OUTPUT" "$SELECTION_REPORT" "$primary_status" <<'NODE'
-          const fs = require('fs');
-          const [primaryPath, fallbackPath, output, status] = process.argv.slice(2);
-          let primary = {};
-          try { primary = JSON.parse(fs.readFileSync(primaryPath, 'utf8')); } catch {}
-          const fallback = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
-          fs.writeFileSync(output, JSON.stringify({
-            canonicalSourceIds: ['myauto_georgia_list', 'autopapa_georgia_open'],
-            fallbackSourceId: 'auto_georgia_open',
-            canonicalExitStatus: Number(status),
-            canonicalCount: Number(primary.count || 0),
-            canonicalDiagnostics: primary.report?.sources || [],
-            usedFallback: true,
-            fallbackReason: 'both_canonical_sources_unavailable',
-            fallbackCount: Number(fallback.count || 0),
-          }, null, 2));
-          NODE
-          else
-            node - "$PRIMARY_OUTPUT" "$SELECTION_REPORT" "$primary_status" <<'NODE'
-          const fs = require('fs');
-          const [primaryPath, output, status] = process.argv.slice(2);
-          let primary = {};
-          try { primary = JSON.parse(fs.readFileSync(primaryPath, 'utf8')); } catch {}
-          fs.writeFileSync(output, JSON.stringify({
-            canonicalSourceIds: ['myauto_georgia_list', 'autopapa_georgia_open'],
-            fallbackSourceId: 'auto_georgia_open',
-            canonicalExitStatus: Number(status),
-            canonicalCount: Number(primary.count || 0),
-            canonicalDiagnostics: primary.report?.sources || [],
-            usedFallback: false,
-            fallbackReason: 'canonical_source_available_but_zero_publishable_rows',
-          }, null, 2));
-          NODE
-            cat "$SELECTION_REPORT"
-            echo "At least one canonical Georgia source is reachable but yielded zero publishable rows; refusing to hide that problem behind fallback."
-            exit 1
-          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -164,7 +119,7 @@ jobs:
 
   publish:
     needs: [validate, collect]
-    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
+    if: needs.validate.result == 'success' && needs.collect.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:

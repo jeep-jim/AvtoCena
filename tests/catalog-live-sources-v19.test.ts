@@ -106,7 +106,8 @@ test("priority galleries preserve listing photos and enrich detail progressively
   assert.match(fullGallery, /return verified \? result : \[\]/);
   assert.match(importer, /priorityFastGallery/);
   assert.match(importer, /myAutoListSource/);
-  assert.match(importer, /autoGeorgiaStrictSource/);
+  assert.doesNotMatch(importer, /import \{ autoGeorgiaStrictSource \}/);
+  assert.match(importer, /bannedGeorgiaSourceIds/);
   assert.match(importer, /mashinaKyrgyzstanListSource/);
   assert.match(importer, /reliableBootstrapSources/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);

@@ -9,10 +9,17 @@ const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
+const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
 export const CATALOG_JAPAN_MAX_AGE_YEARS = 15;
+
+export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
+  if (String(offer.market || "") !== "georgia") return true;
+  return GEORGIA_ALLOWED_SOURCE_IDS.has(String(offer.sourceId || ""));
+}
+
 export function catalogMinYearForMarket(marketValue: unknown) {
   const market = String(marketValue || "").trim().toLowerCase();
   return market === "japan" ? new Date().getFullYear() - CATALOG_JAPAN_MAX_AGE_YEARS : CATALOG_NON_JAPAN_MIN_YEAR;
@@ -146,6 +153,7 @@ function credibleCoreContent(offer: VehicleOffer) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
+  if (!isCatalogMarketSourceAllowed(offer)) return false;
   if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
   if (!isCatalogYearAllowed(year, offer.market)) return false;
