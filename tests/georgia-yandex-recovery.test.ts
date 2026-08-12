@@ -3,7 +3,8 @@ import fs from "node:fs";
 import test from "node:test";
 
 const recovery = fs.readFileSync(new URL("../apps/web/lib/catalog/georgia-yandex-recovery.ts", import.meta.url), "utf8");
-const route = fs.readFileSync(new URL("../apps/web/app/api/internal/georgia-egress-8d4c2f/route.ts", import.meta.url), "utf8");
+const egressRoute = new URL("../apps/web/app/api/internal/georgia-egress-8d4c2f/route.ts", import.meta.url);
+const dryRunRoute = new URL("../apps/web/app/api/internal/georgia-adapters-dryrun-6a91d7/route.ts", import.meta.url);
 
 test("Georgia Yandex recovery snapshot is read-only and canonical", () => {
   assert.match(recovery, /myAutoListSource/);
@@ -26,14 +27,12 @@ test("Georgia recovery snapshot binds official full galleries", () => {
   assert.match(recovery, /autopapa_exact_detail_originals/);
 });
 
-test("Yandex diagnostic route exposes recovery only as explicit no-store GET mode", () => {
-  assert.match(route, /searchParams\.get\("mode"\) === "recovery"/);
-  assert.match(route, /collectGeorgiaYandexRecoverySnapshot/);
-  assert.match(route, /"cache-control": "no-store"/);
+test("temporary Georgia public-internal diagnostic routes are removed after recovery", () => {
+  assert.equal(fs.existsSync(egressRoute), false);
+  assert.equal(fs.existsSync(dryRunRoute), false);
 });
 
-
-test("Georgia recovery supports bounded AutoPapa page ranges and honest preliminary pricing", () => {
+test("Georgia recovery keeps bounded AutoPapa page ranges and honest preliminary pricing", () => {
   assert.match(recovery, /boundedInteger\(pagesPerSource, 2, 20\)/);
   assert.match(recovery, /boundedInteger\(startPage, 1, 10_000\)/);
   assert.match(recovery, /selectedSource === "myauto"/);
@@ -42,6 +41,4 @@ test("Georgia recovery supports bounded AutoPapa page ranges and honest prelimin
   assert.match(recovery, /calculateOfferWithPreliminaryPowerPricing/);
   assert.match(recovery, /isPreliminaryPowerPendingCalculation/);
   assert.doesNotMatch(recovery, /isPreliminaryElectrifiedCalculation/);
-  assert.match(route, /searchParams\.get\("startPage"\)/);
-  assert.match(route, /searchParams\.get\("source"\)/);
 });
