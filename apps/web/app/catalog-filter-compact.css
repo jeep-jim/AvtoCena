@@ -1,0 +1,245 @@
+/* Compact advanced catalog filters: less nesting, less vertical waste, no wrapping preset rows. */
+
+.ac-catalog-filter-panel .ac-advanced-fields {
+  padding: 10px !important;
+  border-radius: 16px !important;
+}
+
+.ac-catalog-filter-panel .ac-advanced-fields > div[class*="items-end"][class*="justify-between"],
+.ac-mobile-filter-sheet .ac-advanced-fields > div[class*="items-end"][class*="justify-between"] {
+  display: none !important;
+}
+
+.ac-catalog-filter-panel .ac-advanced-fields > div[class~="grid"][class~="gap-3"],
+.ac-mobile-filter-sheet .ac-advanced-fields > div[class~="grid"][class~="gap-3"] {
+  margin-top: 8px !important;
+  gap: 8px !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card,
+.ac-mobile-filter-sheet .ac-range-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 7px 4px 3px !important;
+  min-width: 0 !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:first-child,
+.ac-mobile-filter-sheet .ac-range-card > div:first-child {
+  min-height: 22px !important;
+  align-items: center !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:first-child > div:first-child > div:first-child,
+.ac-mobile-filter-sheet .ac-range-card > div:first-child > div:first-child > div:first-child {
+  color: var(--ac-text) !important;
+  font-size: 11px !important;
+  line-height: 1.1 !important;
+  letter-spacing: .04em !important;
+  white-space: nowrap !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:first-child > div:first-child > div:nth-child(2),
+.ac-mobile-filter-sheet .ac-range-card > div:first-child > div:first-child > div:nth-child(2) {
+  display: none !important;
+}
+
+.ac-catalog-filter-panel .ac-range-clear,
+.ac-mobile-filter-sheet .ac-range-clear {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  border: 0 !important;
+  background: transparent !important;
+  font-size: 15px !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:nth-child(2),
+.ac-mobile-filter-sheet .ac-range-card > div:nth-child(2) {
+  margin-top: 6px !important;
+  gap: 6px !important;
+}
+
+.ac-catalog-filter-panel .ac-range-input-wrap > span,
+.ac-mobile-filter-sheet .ac-range-input-wrap > span {
+  display: none !important;
+}
+
+.ac-catalog-filter-panel .ac-range-input-box,
+.ac-mobile-filter-sheet .ac-range-input-box {
+  height: 38px !important;
+  border-radius: 11px !important;
+}
+
+.ac-catalog-filter-panel .ac-range-input-box input,
+.ac-mobile-filter-sheet .ac-range-input-box input {
+  padding: 0 9px !important;
+  font-size: 12px !important;
+  white-space: nowrap !important;
+}
+
+.ac-catalog-filter-panel .ac-range-input-box small,
+.ac-mobile-filter-sheet .ac-range-input-box small {
+  padding-right: 8px !important;
+  font-size: 9px !important;
+  white-space: nowrap !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:nth-child(3),
+.ac-mobile-filter-sheet .ac-range-card > div:nth-child(3) {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 4px !important;
+  margin-top: 6px !important;
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.ac-catalog-filter-panel .ac-range-card > div:nth-child(3)::-webkit-scrollbar,
+.ac-mobile-filter-sheet .ac-range-card > div:nth-child(3)::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ac-catalog-filter-panel .ac-range-preset,
+.ac-mobile-filter-sheet .ac-range-preset {
+  flex: 0 0 auto !important;
+  padding: 5px 8px !important;
+  border-radius: 999px !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+@media (min-width: 1024px) {
+  .ac-catalog-filter-panel .ac-advanced-fields > div[class~="grid"]:first-child {
+    gap: 8px !important;
+  }
+
+  .ac-catalog-filter-panel .ac-range-card + .ac-range-card {
+    border-left: 1px solid var(--ac-border) !important;
+    padding-left: 10px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ac-mobile-filter-sheet {
+    max-height: 96dvh !important;
+    border-radius: 24px 24px 0 0 !important;
+  }
+
+  .ac-mobile-filter-sheet > div:first-child {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .ac-mobile-filter-sheet > .ac-hide-scrollbar {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-mobile-filter-section {
+    margin-top: 9px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-mobile-filter-section__title {
+    margin-bottom: 6px !important;
+    font-size: 9px !important;
+    letter-spacing: .11em !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-filter-control,
+  .ac-mobile-filter-sheet .ac-sort-control {
+    min-height: 46px !important;
+    height: 46px !important;
+    border-radius: 13px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-advanced-fields {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-advanced-fields > div[class~="grid"] {
+    gap: 7px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-advanced-fields > div[class~="grid"][class~="gap-3"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    margin-top: 7px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card {
+    display: grid !important;
+    grid-template-columns: 92px minmax(0, 1fr) !important;
+    grid-template-areas:
+      "head inputs"
+      "presets presets" !important;
+    align-items: center !important;
+    gap: 5px 8px !important;
+    padding: 8px 0 !important;
+    border-top: 1px solid var(--ac-border) !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card:first-child {
+    border-top: 0 !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card > div:first-child {
+    grid-area: head !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card > div:first-child > div:first-child {
+    min-width: 0 !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card > div:nth-child(2) {
+    grid-area: inputs !important;
+    margin-top: 0 !important;
+    min-width: 0 !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-card > div:nth-child(3) {
+    grid-area: presets !important;
+    margin-top: 0 !important;
+    padding-bottom: 1px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-input-box {
+    height: 38px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-range-preset {
+    padding: 5px 8px !important;
+    font-size: 9px !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-adaptive="1"] {
+    margin: 0 !important;
+    border: 1px solid var(--ac-border) !important;
+    border-radius: 15px !important;
+    background: var(--ac-surface-3) !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,.28) !important;
+    overflow: hidden !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="up"] {
+    transform-origin: bottom center !important;
+  }
+
+  .ac-mobile-filter-sheet .ac-filter-dropdown[data-ac-drop-direction="down"] {
+    transform-origin: top center !important;
+  }
+}
