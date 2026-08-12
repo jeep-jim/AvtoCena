@@ -239,9 +239,9 @@ export async function collectGeorgiaYandexRecoverySnapshot(pagesPerSource = 2): 
   const incoming = [...myAutoRows, ...autoPapaRows]
     .filter((offer) => isCatalogMarketSourceAllowed(offer) && isCatalogYearAllowed(offer.year, "georgia"));
 
-  const prepared = await pool(incoming, 4, async (raw) => {
+  const prepared = await pool(incoming, 4, async (raw): Promise<VehicleOffer | null> => {
     try {
-      let offer = raw.sourceId === "myauto_georgia_list"
+      let offer: VehicleOffer = raw.sourceId === "myauto_georgia_list"
         ? await prepareMyAuto(raw)
         : await prepareAutoPapa(raw);
       if (!offer.images.length || !(Number(offer.sourcePrice || 0) > 0) || !String(offer.sourceCurrency || "")) {
