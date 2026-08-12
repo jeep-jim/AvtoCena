@@ -149,11 +149,11 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
   return false;
 }
 
-function credibleCoreContent(offer: VehicleOffer) {
+function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
-  if (!isCatalogMarketSourceAllowed(offer)) return false;
+  if (checkSourcePolicy && !isCatalogMarketSourceAllowed(offer)) return false;
   if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
   if (!isCatalogYearAllowed(year, offer.market)) return false;
@@ -174,5 +174,8 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
 // has already applied hasCredibleOfferContent(), so the client only re-checks
 // the visible core fields here.
 export function isCrediblePublicOffer(offer: VehicleOffer) {
-  return offer.status === "active" && credibleCoreContent(offer);
+  // Public DTOs intentionally omit sourceId after storage has already enforced
+  // the source policy. Re-check only visible fields here; otherwise every
+  // canonical Georgia card is hidden even though its count remains public.
+  return offer.status === "active" && credibleCoreContent(offer, false);
 }
