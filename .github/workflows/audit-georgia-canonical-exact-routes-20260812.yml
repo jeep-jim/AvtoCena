@@ -1,0 +1,56 @@
+name: Audit Georgia canonical exact routes
+run-name: Georgia canonical exact route probe · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/georgia-canonical-exact-routes-20260812
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe current first-party exact/list/print routes without publishing
+        run: |
+          node - <<'NODE'
+          const routes = [
+            ['myauto-main','https://www.myauto.ge/en/main'],
+            ['myauto-exact-122650043','https://www.myauto.ge/en/pr/122650043/iyideba-miniveni-honda-step-wagon-2020-benzini-tbilisi?offerType=basic'],
+            ['myauto-exact-67592932','https://www.myauto.ge/en/pr/67592932/iyideba-jipi-nissan-x-trail-2017-benzini-tbilisi?offerType=basic'],
+            ['myauto-print-122650043','https://www.myauto.ge/en/prints/1/122650043'],
+            ['myauto-print-67592932','https://www.myauto.ge/en/prints/1/67592932'],
+            ['autopapa-main','https://autopapa.ge/'],
+            ['autopapa-en','https://autopapa.ge/en/'],
+            ['autopapa-export','https://export.autopapa.ge/'],
+            ['autopapa-export-robots','https://export.autopapa.ge/robots.txt'],
+            ['autopapa-export-sitemap','https://export.autopapa.ge/sitemap.xml'],
+          ];
+          const headers = {
+            accept: 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
+            'accept-language': 'en-US,en;q=0.9,ka;q=0.8',
+            'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/136 Safari/537.36',
+          };
+          const results = [];
+          for (const [name,url] of routes) {
+            try {
+              const response = await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(20000)});
+              const text = await response.text();
+              const challenge = /just a moment|cf-chl|cloudflare|captcha|access denied/i.test(text);
+              const hrefs = [...text.matchAll(/href=["']([^"']+)["']/gi)].map((m)=>m[1]).filter(Boolean).slice(0,80);
+              const vehicleLinks = hrefs.filter((href)=>/(car|vehicle|auto|pr\/|detail|listing|stock)/i.test(href)).slice(0,30);
+              results.push({name,url,status:response.status,finalUrl:response.url,contentType:response.headers.get('content-type'),bytes:Buffer.byteLength(text),challenge,title:(text.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1]||'').trim(),vehicleLinks,bodyPrefix:text.slice(0,180).replace(/\s+/g,' ')});
+            } catch (error) {
+              results.push({name,url,error:String(error?.message||error)});
+            }
+          }
+          console.log(JSON.stringify(results,null,2));
+          NODE
