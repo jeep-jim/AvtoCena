@@ -2,11 +2,10 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { BrandMark } from "@/components/brand/BrandMark";
 
 const START_EVENT = "avtocena:navigation-start";
-const REVEAL_DELAY_MS = 320;
-const MIN_VISIBLE_MS = 120;
+const REVEAL_DELAY_MS = 100;
+const MIN_VISIBLE_MS = 80;
 // Object-storage cold starts can legitimately take several seconds. Hiding the
 // indicator after three seconds exposed the unchanged catalog immediately
 // before the offer route committed, which looked like a failed first tap.
@@ -133,13 +132,59 @@ body:has(main.ac-home-page) .z-\\[15020\\] section>div:nth-child(2) h2{margin-to
 @media(min-width:768px){
   html body main.ac-home-page #form .ac-budget-help{display:none!important}
 }
-html[data-theme="light"] .ac-route-loader__pill{
-  background:#fff!important;
-  background-color:#fff!important;
-  border-color:rgba(30,36,48,.14)!important;
-  color:#171b24!important;
-  -webkit-text-fill-color:#171b24!important;
-  box-shadow:0 8px 24px rgba(30,36,48,.14)!important;
+/* The route loader deliberately covers the complete 64px public header.
+   The red/white diagonal sweep is readable in both themes and on mobile. */
+.ac-route-loader{
+  height:64px!important;
+  overflow:hidden!important;
+  background:#111827!important;
+  isolation:isolate!important;
+}
+.ac-route-loader__candy{
+  position:absolute!important;
+  inset:0!important;
+  background:repeating-linear-gradient(125deg,#ff303b 0 17px,#ff303b 34px,#fff 34px,#fff 51px,#ff303b 51px,#ff303b 68px)!important;
+  background-size:96px 96px!important;
+  animation:ac-route-candy-sweep .72s linear infinite!important;
+  box-shadow:inset 0 -1px 0 rgba(0,0,0,.32),0 8px 24px rgba(0,0,0,.18)!important;
+}
+.ac-route-loader__candy::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.08));
+}
+.ac-route-loader__label{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  z-index:1!important;
+  transform:translate(-50%,-50%)!important;
+  max-width:calc(100vw - 32px)!important;
+  white-space:nowrap!important;
+  border:1px solid rgba(255,255,255,.42)!important;
+  border-radius:999px!important;
+  background:rgba(12,18,30,.78)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  padding:7px 13px!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  letter-spacing:.04em!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.24)!important;
+  backdrop-filter:blur(6px)!important;
+  -webkit-backdrop-filter:blur(6px)!important;
+}
+@keyframes ac-route-candy-sweep{
+  from{background-position:0 0}
+  to{background-position:96px 0}
+}
+@media(max-width:420px){
+  .ac-route-loader__label{padding:6px 10px!important;font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .ac-route-loader__candy{animation:none!important}
 }
 @media(max-width:1023px){
 .ac-home-page #form>div.relative.mt-4{position:relative!important;display:flex!important;align-items:stretch!important;gap:8px!important;overflow:visible!important}
@@ -248,7 +293,7 @@ function RoutePreloaderInner(){
   return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
  useEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;if(revealTimerRef.current!==null){hide();return}if(!visible)return;const delay=Math.max(0,MIN_VISIBLE_MS-(performance.now()-startedAtRef.current));hideTimerRef.current=window.setTimeout(()=>hide(),delay)},[routeKey,visible]);
- return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-150 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite"><div className="ac-route-loader__bar h-[3px] w-full origin-left bg-red-500 shadow-[0_1px_8px_rgba(239,68,68,.45)]"/><div className="ac-route-loader__pill mx-auto mt-2 flex w-fit max-w-[calc(100vw-24px)] items-center gap-2 rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface)]/95 px-3 py-2 text-[var(--ac-text)] shadow-lg backdrop-blur-md"><BrandMark className="h-5 w-5 shrink-0"/><span className="text-xs font-black">Загружаем страницу</span><span className="ac-route-loader__dot h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" aria-hidden="true"/></div></div>;
+ return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-75 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite" role="status"><div className="ac-route-loader__candy" aria-hidden="true"/><div className="ac-route-loader__label">Загружаем страницу</div><span className="sr-only">Загружаем страницу</span></div>;
 }
 
 export function RoutePreloader(){return <><style dangerouslySetInnerHTML={{__html:publicLayoutFixes}}/><Suspense fallback={null}><RoutePreloaderInner/></Suspense></>}
