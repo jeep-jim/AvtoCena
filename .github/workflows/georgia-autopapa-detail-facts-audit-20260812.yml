@@ -1,0 +1,132 @@
+name: Audit Georgia AutoPapa exact detail facts read-only
+
+on:
+  push:
+    branches:
+      - fix/autopapa-source-urls-only-20260812
+    paths:
+      - .github/workflows/georgia-autopapa-detail-facts-audit-20260812.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-readonly-georgia-autopapa-detail-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect 120 AutoPapa pages and exact detail facts without image cache or catalog writes
+        env:
+          CATALOG_SOURCE_TIMEOUT_MS: "25000"
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { autoPapaGeorgiaSource, autoPapaExactDetailFacts } from './apps/web/lib/catalog/autopapa-georgia-source.ts';
+
+          const pages = 120;
+          const detailConcurrency = 6;
+          const rows = new Map();
+          const pageErrors = [];
+          let cursor = null;
+          for (let page = 1; page <= pages; page++) {
+            try {
+              const result = await autoPapaGeorgiaSource.fetchPage(cursor);
+              for (const raw of result.items || []) {
+                const offer = autoPapaGeorgiaSource.normalizeOffer(raw);
+                if (offer?.sourceOfferId && Number(offer.year || 0) >= 2020) rows.set(String(offer.sourceOfferId), offer);
+              }
+              cursor = result.nextCursor || String(page + 1);
+            } catch (error) {
+              pageErrors.push({page, error:String(error?.message || error).slice(0,300)});
+              cursor = String(page + 1);
+            }
+          }
+
+          const offers = [...rows.values()];
+          const results = new Array(offers.length);
+          let next = 0;
+          await Promise.all(Array.from({length: Math.min(detailConcurrency, offers.length)}, async () => {
+            while (true) {
+              const index = next++;
+              if (index >= offers.length) return;
+              const offer = offers[index];
+              const url = String(offer.operational?.sourceUrl || '');
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort(), 25000);
+              try {
+                const response = await fetch(url, {
+                  headers: {
+                    accept: 'text/html,application/xhtml+xml,*/*;q=0.8',
+                    'accept-language': 'en-US,en;q=0.9,ka;q=0.8',
+                    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36',
+                  },
+                  redirect: 'follow', cache: 'no-store', signal: controller.signal,
+                });
+                const markup = await response.text();
+                const facts = response.ok ? autoPapaExactDetailFacts(offer, markup, response.url || url) : null;
+                results[index] = {
+                  id: offer.sourceOfferId,
+                  year: offer.year,
+                  make: offer.make,
+                  model: offer.model,
+                  kind: offer.powertrainKind,
+                  http: response.status,
+                  responseUrl: response.url,
+                  identityVerified: Boolean(facts),
+                  originals: facts?.originals?.length || 0,
+                  powerHp: facts?.powerHp || null,
+                };
+              } catch (error) {
+                results[index] = {id: offer.sourceOfferId, year: offer.year, make: offer.make, model: offer.model, kind: offer.powertrainKind, error:String(error?.message || error).slice(0,300), identityVerified:false, originals:0, powerHp:null};
+              } finally { clearTimeout(timer); }
+            }
+          }));
+
+          const valid = results.filter(Boolean);
+          const combustion = valid.filter((row) => row.kind === 'combustion');
+          const report = {
+            mode: 'read_only_autopapa_exact_detail_facts',
+            requestedPages: pages,
+            unique2020PlusOffers: offers.length,
+            pageErrorCount: pageErrors.length,
+            detailHttp200: valid.filter((row) => row.http === 200).length,
+            exactIdentityVerified: valid.filter((row) => row.identityVerified).length,
+            galleryAtLeast5: valid.filter((row) => row.originals >= 5).length,
+            galleryAtLeast10: valid.filter((row) => row.originals >= 10).length,
+            galleryMin: valid.length ? Math.min(...valid.map((row) => row.originals)) : 0,
+            galleryMax: valid.length ? Math.max(...valid.map((row) => row.originals)) : 0,
+            combustionCount: combustion.length,
+            combustionExactPowerCount: combustion.filter((row) => Number(row.powerHp || 0) > 0).length,
+            combustionExactPowerRate: combustion.length ? Number((combustion.filter((row) => Number(row.powerHp || 0) > 0).length / combustion.length).toFixed(4)) : 0,
+            electrifiedCount: valid.filter((row) => ['electric','series_hybrid','other_hybrid'].includes(String(row.kind || ''))).length,
+            pageErrors: pageErrors.slice(0,20),
+            missingPowerSample: combustion.filter((row) => !row.powerHp).slice(0,30),
+            poweredSample: combustion.filter((row) => row.powerHp).slice(0,30),
+            shallowGallerySample: valid.filter((row) => row.originals < 5).slice(0,30),
+          };
+          fs.writeFileSync('autopapa-detail-facts-audit.json', JSON.stringify({report, results}, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (!offers.length) throw new Error('autopapa_no_2020_plus_offers');
+          if (report.exactIdentityVerified === 0) throw new Error('autopapa_no_exact_identity');
+          if (report.galleryAtLeast5 === 0) throw new Error('autopapa_no_full_gallery');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autopapa-detail-facts-audit
+          path: autopapa-detail-facts-audit.json
+          if-no-files-found: warn
+          retention-days: 3
