@@ -1,0 +1,63 @@
+name: Fix Georgia Yandex adapters once
+
+on:
+  push:
+    branches:
+      - fix/georgia-yandex-canonical-adapters-20260812
+    paths:
+      - .github/workflows/fix-georgia-yandex-adapters-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-yandex-canonical-adapters-20260812
+          fetch-depth: 0
+      - name: Patch MyAuto request fingerprint to verified Yandex egress
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/lib/catalog/myauto-list-source.ts')
+          s = path.read_text()
+          old = '''const HEADERS = {
+  accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8,ru;q=0.7",
+  "cache-control": "no-cache",
+  pragma: "no-cache",
+  referer: "https://www.myauto.ge/en/main",
+  "sec-fetch-dest": "document",
+  "sec-fetch-mode": "navigate",
+  "sec-fetch-site": "same-origin",
+  "upgrade-insecure-requests": "1",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+};'''
+          new = '''const HEADERS = {
+  // This exact minimal fingerprint is verified from the deployed Yandex
+  // Serverless runtime. Extra navigation/cache headers cause MyAuto's
+  // Cloudflare policy to return 403 from the same egress address.
+  accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
+  "accept-language": "en-US,en;q=0.9,ka;q=0.8",
+  "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/150 Safari/537.36",
+};'''
+          if old not in s:
+              raise SystemExit('MyAuto header block not found')
+          path.write_text(s.replace(old, new, 1))
+          PY
+      - name: Focused tests
+        run: |
+          npm ci
+          node --import tsx --test tests/myauto-list-source.test.ts tests/georgia-canonical-source-policy-20260812.test.ts
+      - name: Commit branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/myauto-list-source.ts
+          git diff --cached --check
+          git commit -m 'fix(georgia): use verified MyAuto Yandex request headers'
+          git push origin HEAD:fix/georgia-yandex-canonical-adapters-20260812
