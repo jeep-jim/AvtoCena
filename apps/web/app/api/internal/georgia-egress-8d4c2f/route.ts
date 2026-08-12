@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { autoPapaGeorgiaDetailImageCandidates } from "@/lib/catalog/autopapa-georgia-source";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -47,10 +48,17 @@ function listingContexts(markup: string, base: string) {
     return {
       href: item.href,
       anchor: item.anchor,
-      context: plain(html).slice(0, 1_200),
+      context: plain(html).replace(/\+?\d[\d\s()\-]{7,}\d/g, "[phone]").slice(0, 1_200),
       images: [...new Set(imageUrls)],
     };
   });
+}
+
+function photoTags(markup: string) {
+  return [...markup.matchAll(/<[^>]{0,700}\/system\/car\/photos\/[^>]{0,700}>/gi)]
+    .map((match) => match[0].replace(/\s+/g, " ").slice(0, 900))
+    .filter((value, index, all) => all.indexOf(value) === index)
+    .slice(0, 40);
 }
 
 export async function GET() {
@@ -59,12 +67,32 @@ export async function GET() {
   try {
     const response = await fetch(url, { headers, redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(12_000) });
     const markup = await response.text();
+    const cards = listingContexts(markup, response.url || url);
+    const detailUrl = cards[0]?.href || "";
+    let detail: unknown = null;
+    if (detailUrl) {
+      try {
+        const detailResponse = await fetch(detailUrl, { headers, redirect: "follow", cache: "no-store", signal: AbortSignal.timeout(12_000) });
+        const detailMarkup = await detailResponse.text();
+        detail = {
+          url: detailUrl,
+          status: detailResponse.status,
+          bytes: Buffer.byteLength(detailMarkup),
+          title: plain(detailMarkup.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "").slice(0, 180),
+          imageCandidates: autoPapaGeorgiaDetailImageCandidates(detailMarkup, detailResponse.url || detailUrl),
+          photoTags: photoTags(detailMarkup),
+        };
+      } catch (detailError) {
+        detail = { url: detailUrl, error: String((detailError as Error)?.message || detailError).slice(0, 300) };
+      }
+    }
     return NextResponse.json({
       runtime: "yandex-serverless",
       status: response.status,
       bytes: Buffer.byteLength(markup),
       ms: Date.now() - started,
-      cards: listingContexts(markup, response.url || url),
+      cards,
+      detail,
     }, { headers: { "cache-control": "no-store" } });
   } catch (error) {
     return NextResponse.json({ error: String((error as Error)?.message || error), ms: Date.now() - started }, { status: 500 });
