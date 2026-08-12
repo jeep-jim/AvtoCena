@@ -1,0 +1,52 @@
+name: Audit public runtime signal-kill smoke
+
+on:
+  push:
+    branches:
+      - audit/runtime-signal-smoke-20260812
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Sequential and four-way public smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          search='https://avtocena.com/api/catalog/search?market=korea&pageSize=1'
+          json="$(curl --retry 3 --retry-delay 2 --retry-all-errors --max-time 30 -fsS "$search")"
+          offer_id="$(jq -r '.items[0].id // empty' <<<"$json")"
+          test -n "$offer_id"
+          urls=(
+            'https://avtocena.com/'
+            'https://avtocena.com/cars'
+            "https://avtocena.com/cars/offer/$offer_id"
+          )
+          failures=0
+          signal_killed=0
+          for round in $(seq 1 6); do
+            for url in "${urls[@]}"; do
+              body="$(mktemp)"
+              code="$(curl --max-time 30 -sS -o "$body" -w '%{http_code}' "$url" || true)"
+              if grep -q 'signal: killed' "$body"; then signal_killed=$((signal_killed+1)); fi
+              if [ "$code" != '200' ]; then failures=$((failures+1)); echo "FAIL sequential round=$round code=$code url=$url body=$(head -c 180 "$body")"; fi
+              rm -f "$body"
+            done
+          done
+          export OFFER_URL="https://avtocena.com/cars/offer/$offer_id"
+          seq 1 16 | xargs -P4 -I{} bash -c '
+            body=$(mktemp)
+            code=$(curl --max-time 30 -sS -o "$body" -w "%{http_code}" "$OFFER_URL" || true)
+            killed=0; grep -q "signal: killed" "$body" && killed=1 || true
+            printf "%s %s\n" "$code" "$killed"
+            rm -f "$body"
+          ' > parallel-results.txt
+          parallel_failures="$(awk '$1 != 200 {n++} END {print n+0}' parallel-results.txt)"
+          parallel_killed="$(awk '$2 == 1 {n++} END {print n+0}' parallel-results.txt)"
+          cat parallel-results.txt
+          echo "sequentialFailures=$failures sequentialSignalKilled=$signal_killed parallelFailures=$parallel_failures parallelSignalKilled=$parallel_killed offer=$offer_id"
+          test "$failures" -eq 0
+          test "$signal_killed" -eq 0
+          test "$parallel_failures" -eq 0
+          test "$parallel_killed" -eq 0
