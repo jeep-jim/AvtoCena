@@ -1,0 +1,19 @@
+name: One-shot dispatch current-main UAE Georgia recovery
+
+on:
+  push:
+    branches:
+      - ops/dispatch-georgia-current-main-20260812
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch current main recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run catalog-live-recovery-uae-georgia-direct.yml --repo jeep-jim/AvtoCena --ref main
