@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   JSON_STORAGE_DRIVER: object
@@ -34,8 +35,16 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Download proven Korea candidate
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-crossrun-artifact-gate
+          path: proven
+          github-token: ${{ github.token }}
+          repository: jeep-jim/AvtoCena
+          run-id: 31726594201
 
-      - name: Live Korea semantic snapshot
+      - name: Live Korea semantic snapshot and retained-row trace
         shell: bash
         run: |
           node --import tsx --input-type=module - <<'NODE'
@@ -43,6 +52,9 @@ jobs:
           const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
           const { catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
           const rows=await readMarketOffers('korea');
+          const proven=JSON.parse(fs.readFileSync('proven/catalog-rebuild-korea.json','utf8'));
+          const provenRows=Array.isArray(proven?.offers)?proven.offers:[];
+          const provenIds=new Set(provenRows.map(r=>String(r?.id||'')).filter(Boolean));
           const dist=(field,subset=rows)=>subset.reduce((o,r)=>{const k=String(r?.[field]??'<missing>').trim()||'<missing>';o[k]=(o[k]||0)+1;return o;},{});
           const identityText=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''}`;
           const fullText=r=>`${identityText(r)} ${JSON.stringify(r?.operational?.raw||{})}`;
@@ -54,9 +66,11 @@ jobs:
           const ratio=encar.length?suv/encar.length:1;
           const known=r=>/(?:genesis|제네시스)[\s_-]*g80|(?:hyundai|현대)[\s_-]*(?:grandeur|그랜저)|(?:hyundai|현대)[\s_-]*(?:ioniq\s*6|아이오닉\s*6)|(?:kia|기아)[\s_-]*(?:k9|k900|quoris|퀴리스)/i.test(identityText(r));
           const badSedans=rows.filter(r=>known(r)&&/^(?:suv|crossover|offroad)$/i.test(String(r.bodyType||'')));
+          const badSedansFromProven=badSedans.filter(r=>provenIds.has(String(r.id||'')));
+          const badSedansRetained=badSedans.filter(r=>!provenIds.has(String(r.id||'')));
           const sedanGroups={};
           for(const r of badSedans){const k=`${r.sourceId}|${r.make}|${r.model}|${r.bodyType}`;sedanGroups[k]=(sedanGroups[k]||0)+1;}
-          const sedanExamples=badSedans.slice(0,20).map(r=>({id:r.id,sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,sourceTitle:r.sourceTitle}));
+          const sedanExamples=badSedans.slice(0,20).map(r=>({id:r.id,inProvenCandidate:provenIds.has(String(r.id||'')),sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,sourceTitle:r.sourceTitle}));
           const casper2022=rows.filter(r=>Number(r.year)===2022&&/(?:hyundai|현대)/i.test(identityText(r))&&/(?:casper|캐스퍼)/i.test(identityText(r)));
           const quota=new Map();
           for(const r of rows){const k=catalogModelYearQuotaKey(r,'korea');if(k) quota.set(k,(quota.get(k)||0)+1);}
@@ -65,7 +79,8 @@ jobs:
           const k933=rows.filter(isK933);
           const badK9=k933.filter(r=>[3000,3300].includes(Number(r.engineCc||0)));
           const exactK9=k933.filter(r=>Number(r.engineCc||0)===3342);
-          const report={count:rows.length,sources,minYear:rows.length?Math.min(...rows.map(r=>Number(r.year||0))):0,maxPerExactModelYear:maxQuota,below5Images:badImages.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedanViolations:badSedans.length,knownSedanViolationGroups:sedanGroups,knownSedanViolationExamples:sedanExamples,casper2022:casper2022.length,k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),roundedUnsafe:badK9.length,exact3342:exactK9.length},bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel')};
+          const cleaned=rows.filter(r=>!badSedans.includes(r));
+          const report={count:rows.length,provenCandidateRows:provenRows.length,liveRowsPresentInProvenCandidate:rows.filter(r=>provenIds.has(String(r.id||''))).length,liveRowsRetainedOutsideProvenCandidate:rows.filter(r=>!provenIds.has(String(r.id||''))).length,sources,minYear:rows.length?Math.min(...rows.map(r=>Number(r.year||0))):0,maxPerExactModelYear:maxQuota,below5Images:badImages.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedanViolations:badSedans.length,knownSedanViolationsFromProvenCandidate:badSedansFromProven.length,knownSedanViolationsRetainedOutsideCandidate:badSedansRetained.length,knownSedanViolationGroups:sedanGroups,knownSedanViolationExamples:sedanExamples,cleanRemovalSimulation:{countAfterRemovingViolations:cleaned.length,sourceCounts:dist('sourceId',cleaned)},casper2022:casper2022.length,k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),roundedUnsafe:badK9.length,exact3342:exactK9.length},bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel')};
           fs.writeFileSync('korea-live-semantic-readonly.json',JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
           NODE
