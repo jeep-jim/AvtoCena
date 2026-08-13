@@ -1,12 +1,12 @@
 name: Apply model-year inventory quota 20260813
-# export validated generated changes because Actions token cannot push workflow edits
+# Actions commits only code/tests; workflow edits are applied separately through GitHub API.
 on:
   push:
     branches: [fix/model-year-quota-20260813]
     paths:
       - .github/workflows/apply-model-year-quota-20260813.yml
 permissions:
-  contents: read
+  contents: write
 jobs:
   patch:
     runs-on: ubuntu-24.04
@@ -38,27 +38,16 @@ jobs:
           node --check scripts/catalog-live-recovery-publish-batch-stable.mjs
           node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
           npm run typecheck
-      - name: Package validated generated files
+      - name: Commit only code and tests
         shell: bash
         run: |
           set -euo pipefail
-          git diff --name-status HEAD > generated-model-year-quota-name-status.txt
-          git diff --binary HEAD > generated-model-year-quota.patch
-          git diff --name-only --diff-filter=ACMRT HEAD > generated-model-year-quota-present-files.txt
-          mkdir -p generated-model-year-quota-files
-          while IFS= read -r file; do
-            test -n "$file" || continue
-            mkdir -p "generated-model-year-quota-files/$(dirname "$file")"
-            cp "$file" "generated-model-year-quota-files/$file"
-          done < generated-model-year-quota-present-files.txt
-          tar -czf generated-model-year-quota-files.tgz generated-model-year-quota-files
-          cat generated-model-year-quota-name-status.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: validated-model-year-quota-patch
-          path: |
-            generated-model-year-quota-name-status.txt
-            generated-model-year-quota.patch
-            generated-model-year-quota-files.tgz
-          if-no-files-found: error
-          retention-days: 3
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/lib/catalog/inventory-quota.ts scripts tests
+          if git diff --cached --quiet; then
+            echo "No code changes"
+            exit 0
+          fi
+          git commit -m "Apply per-model-year catalog quota"
+          git push origin HEAD:fix/model-year-quota-20260813
