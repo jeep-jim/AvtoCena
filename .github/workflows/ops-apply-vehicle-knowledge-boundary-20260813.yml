@@ -1,0 +1,65 @@
+name: Ops · apply vehicle knowledge boundary matcher fix
+
+on:
+  push:
+    branches:
+      - ops/apply-vehicle-knowledge-boundary-20260813
+    paths:
+      - ".github/workflows/ops-apply-vehicle-knowledge-boundary-20260813.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/vehicle-knowledge-boundary-match-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch matcher and regression
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/vehicle-knowledge.ts')
+          s=p.read_text()
+          old='if (candidateCompact.length >= 3 && combinedCompact.includes(candidateCompact)) {'
+          new='if (candidateToken.length >= 3 && boundaryIncludes(combined, candidateToken)) {'
+          if s.count(old)!=1:
+              raise SystemExit(f'matcher occurrence count={s.count(old)}')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+
+          t=Path('tests/vehicle-knowledge.test.ts')
+          s=t.read_text()
+          s=s.replace('import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";', 'import { enrichOfferWithVehicleKnowledge, findVehicleModel, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";')
+          marker='does not join adjacent trim tokens into a false model match'
+          if marker not in s:
+              anchor='test("model directory aggregates variants and power references into public characteristics", () => {'
+              addition='''test("does not join adjacent trim tokens into a false model match", async () => {\n  const match = await findVehicleModel(offer({\n    make: "Chevrolet",\n    model: "2.0 Turbo LT",\n    trim: "2.0 Turbo LT",\n    year: 2021,\n  }));\n  assert.notEqual(match?.model.id, "chevrolet/bolt");\n});\n\n'''
+              if anchor not in s:
+                  raise SystemExit('vehicle knowledge test anchor missing')
+              s=s.replace(anchor, addition+anchor, 1)
+          t.write_text(s)
+          PY
+      - name: Focused tests
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Push code-only patch
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/lib/catalog/vehicle-knowledge.ts tests/vehicle-knowledge.test.ts
+          git diff --cached --check
+          git commit -m "Require token boundaries for vehicle text matching"
+          git push origin HEAD:fix/vehicle-knowledge-boundary-match-20260813
