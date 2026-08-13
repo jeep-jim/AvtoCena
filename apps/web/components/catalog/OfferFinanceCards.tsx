@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 function FinanceCards() {
   return (
     <section className="ac-offer-finance-cards grid gap-4 xl:grid-cols-2" aria-label="Финансовые сервисы">
-      <article className="ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6">
+      <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
         <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#35c932]" aria-hidden="true">
@@ -17,10 +17,10 @@ function FinanceCards() {
           </div>
           <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите<br className="hidden xl:block" /> удобные условия покупки автомобиля.</p>
         </div>
-        <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-[-2px] right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
+        <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
       </article>
 
-      <article className="ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6">
+      <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
         <div className="relative z-10 h-full min-h-[158px] pr-[215px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#ffd21f]" aria-hidden="true">
@@ -30,7 +30,7 @@ function FinanceCards() {
           </div>
           <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса<br className="hidden xl:block" /> для выбранного автомобиля.</p>
         </div>
-        <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-[-3px] right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
+        <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
       </article>
     </section>
   );
