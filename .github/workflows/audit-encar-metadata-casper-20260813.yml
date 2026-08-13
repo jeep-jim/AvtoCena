@@ -1,0 +1,20 @@
+name: Audit Encar Casper metadata 20260813
+on:
+  push:
+    branches: [audit/encar-casper-years-20260813]
+    paths:
+      - .github/workflows/audit-encar-metadata-casper-20260813.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: audit/encar-casper-years-20260813 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - name: Inspect Encar list metadata without storage or image writes
+        run: npx tsx scripts/audit-encar-metadata-casper-20260813.mts
