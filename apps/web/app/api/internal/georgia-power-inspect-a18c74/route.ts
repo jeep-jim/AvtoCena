@@ -22,6 +22,8 @@ const TARGETS = [
   ["957218", "https://autopapa.ge/en/usd/bmw/x5/957218", "powered"],
 ] as const;
 
+type VpicResult = Record<string, string | null | undefined>;
+
 function plain(value: string) {
   return String(value || "")
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
@@ -47,6 +49,45 @@ function windows(text: string, pattern: RegExp, radius = 180, limit = 20) {
   return [...new Set(rows)];
 }
 
+function exactPrimaryVin(facts: string) {
+  const candidates = [...facts.toUpperCase().matchAll(/\b[A-HJ-NPR-Z0-9]{17}\b/g)].map((match) => match[0]);
+  const unique = [...new Set(candidates)];
+  return unique.length === 1 ? unique[0] : null;
+}
+
+function numeric(value: unknown) {
+  const parsed = Number(String(value || "").replace(",", "."));
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+}
+
+async function decodeVpic(vin: string) {
+  const url = new URL(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/${encodeURIComponent(vin)}`);
+  url.searchParams.set("format", "json");
+  const response = await fetch(url, {
+    headers: { accept: "application/json", "user-agent": HEADERS["user-agent"] },
+    redirect: "follow",
+    cache: "no-store",
+    signal: AbortSignal.timeout(20_000),
+  });
+  if (!response.ok) return { ok: false, status: response.status };
+  const payload = await response.json() as { Results?: VpicResult[] };
+  const row = payload.Results?.[0] || {};
+  return {
+    ok: true,
+    status: response.status,
+    make: row.Make || null,
+    model: row.Model || null,
+    modelYear: numeric(row.ModelYear),
+    displacementL: numeric(row.DisplacementL),
+    engineHp: numeric(row.EngineHP),
+    engineKw: numeric(row.EngineKW),
+    engineCylinders: numeric(row.EngineCylinders),
+    fuelTypePrimary: row.FuelTypePrimary || null,
+    errorCode: row.ErrorCode || null,
+    errorText: row.ErrorText || null,
+  };
+}
+
 export async function GET() {
   const results = [];
   for (const [id, url, expected] of TARGETS) {
@@ -57,21 +98,24 @@ export async function GET() {
       const start = text.search(/\bBody\s+Type\s*:/i);
       const end = start >= 0 ? text.indexOf("Car description", start) : -1;
       const facts = start >= 0 ? text.slice(start, end > start ? end : Math.min(text.length, start + 2_500)) : "";
-      const powerField = facts.match(/\bPower\s*:\s*([^:]{0,80}?)(?=\s+[A-Z][A-Za-z ]{1,30}\s*:|$)/i)?.[1]?.trim() || null;
+      const sellerPowerHp = numeric(facts.match(/\bPower\s*:\s*(\d+(?:[.,]\d+)?)\s*hp\b/i)?.[1]);
+      const vin = exactPrimaryVin(facts);
+      const vpic = vin ? await decodeVpic(vin).catch((error) => ({ ok: false, error: String((error as Error)?.message || error).slice(0, 180) })) : null;
       results.push({
         id,
         expected,
         status: response.status,
         finalUrl: response.url,
         facts,
-        powerField,
+        sellerPowerHp,
+        vinFound: Boolean(vin),
+        vinTail: vin ? vin.slice(-6) : null,
+        vpic,
         factPowerMentions: windows(facts, /\b(?:power|horsepower|hp|kw|kilowatt)\b/ig, 120, 12),
-        pagePowerMentions: windows(text, /\b(?:power|horsepower|hp|kw|kilowatt)\b/ig, 140, 20),
-        markupKeyMentions: windows(markup.replace(/\s+/g, " "), /(?:power|horsepower|horse_power|engine_power|hp|kw)/ig, 160, 25),
       });
     } catch (error) {
       results.push({ id, expected, error: String((error as Error)?.message || error).slice(0, 300) });
     }
   }
-  return NextResponse.json({ mode: "read_only_fixed_autopapa_power_inspection", results }, { headers: { "cache-control": "no-store" } });
+  return NextResponse.json({ mode: "read_only_fixed_autopapa_vin_power_inspection", results }, { headers: { "cache-control": "no-store" } });
 }
