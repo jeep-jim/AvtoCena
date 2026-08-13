@@ -25,10 +25,8 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
-
           path = Path('apps/web/components/home/HomePageClient.tsx')
           text = path.read_text()
-
           start_token = '        <section className="grid min-h-[168px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">'
           end_token = '        </section>\n        <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />'
           start = text.find(start_token)
@@ -36,42 +34,32 @@ jobs:
           if start < 0 or end_anchor < 0:
               raise SystemExit(f'finance section anchors not found start={start} end={end_anchor}')
           end = end_anchor + len('        </section>')
-
-          new_section = '''        <section className="grid min-h-[176px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
-          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">
-            <div className="relative z-10 grid h-full min-h-[128px] grid-cols-[48px_minmax(0,1fr)] gap-x-5">
-              <div className="mt-0.5 flex h-12 w-12 items-center justify-center text-[#35c932]" aria-hidden="true"><svg width="43" height="43" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg></div>
-              <h3 className="min-w-0 max-w-[250px] pt-0.5 text-[22px] font-black leading-[1.08] text-[var(--ac-text)]">Кредитный<br />калькулятор</h3>
-              <p className="col-span-2 mt-auto max-w-[335px] pt-5 text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>
-            </div>
-            <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[150px] w-[150px] object-contain xl:right-4 xl:h-[156px] xl:w-[156px]" aria-hidden="true" />
-          </article>
-          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">
-            <div className="relative z-10 grid h-full min-h-[128px] grid-cols-[48px_minmax(0,1fr)] gap-x-5">
-              <div className="mt-0.5 flex h-12 w-12 items-center justify-center text-[#ffd21f]" aria-hidden="true"><svg width="43" height="43" viewBox="0 0 48 48" fill="none"><path d="M24 5 38 10v10.5c0 9-5.7 16.4-14 20.5-8.3-4.1-14-11.5-14-20.5V10l14-5Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/><path d="m17 23 5 5 10-10" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
-              <h3 className="min-w-0 max-w-[270px] pt-0.5 text-[22px] font-black leading-[1.08] text-[var(--ac-text)]">Страховой полис<br />ОСАГО</h3>
-              <p className="col-span-2 mt-auto max-w-[335px] pt-5 text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
-            </div>
-            <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[150px] w-[150px] object-contain xl:right-4 xl:h-[156px] xl:w-[156px]" aria-hidden="true" />
-          </article>
-        </section>'''
-
+          new_section = '\n'.join([
+              '        <section className="grid min-h-[176px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">',
+              '          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">',
+              '            <div className="relative z-10 grid h-full min-h-[128px] grid-cols-[48px_minmax(0,1fr)] gap-x-5">',
+              '              <div className="mt-0.5 flex h-12 w-12 items-center justify-center text-[#35c932]" aria-hidden="true"><svg width="43" height="43" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg></div>',
+              '              <h3 className="min-w-0 max-w-[250px] pt-0.5 text-[22px] font-black leading-[1.08] text-[var(--ac-text)]">Кредитный<br />калькулятор</h3>',
+              '              <p className="col-span-2 mt-auto max-w-[335px] pt-5 text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>',
+              '            </div>',
+              '            <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[150px] w-[150px] object-contain xl:right-4 xl:h-[156px] xl:w-[156px]" aria-hidden="true" />',
+              '          </article>',
+              '          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">',
+              '            <div className="relative z-10 grid h-full min-h-[128px] grid-cols-[48px_minmax(0,1fr)] gap-x-5">',
+              '              <div className="mt-0.5 flex h-12 w-12 items-center justify-center text-[#ffd21f]" aria-hidden="true"><svg width="43" height="43" viewBox="0 0 48 48" fill="none"><path d="M24 5 38 10v10.5c0 9-5.7 16.4-14 20.5-8.3-4.1-14-11.5-14-20.5V10l14-5Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/><path d="m17 23 5 5 10-10" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg></div>',
+              '              <h3 className="min-w-0 max-w-[270px] pt-0.5 text-[22px] font-black leading-[1.08] text-[var(--ac-text)]">Страховой полис<br />ОСАГО</h3>',
+              '              <p className="col-span-2 mt-auto max-w-[335px] pt-5 text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>',
+              '            </div>',
+              '            <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[150px] w-[150px] object-contain xl:right-4 xl:h-[156px] xl:w-[156px]" aria-hidden="true" />',
+              '          </article>',
+              '        </section>',
+          ])
           text = text[:start] + new_section + text[end:]
-
-          required = (
-              '/home/credit-mascot.webp',
-              '/home/osago-mascot.webp',
-              'Кредитный<br />калькулятор',
-              'Страховой полис<br />ОСАГО',
-              'max-w-[335px]',
-              'bottom:calc(100% + 7px)!important',
-          )
-          for token in required:
+          for token in ('/home/credit-mascot.webp','/home/osago-mascot.webp','Кредитный<br />калькулятор','Страховой полис<br />ОСАГО','max-w-[335px]','bottom:calc(100% + 7px)!important'):
               if token not in text:
                   raise SystemExit(f'missing token: {token}')
           if '/avatars/manager-green.webp' in text or '/avatars/manager-yellow.webp' in text:
               raise SystemExit('old finance avatars remained in home component')
-
           path.write_text(text)
           PY
       - run: test -s apps/web/public/home/credit-mascot.webp
