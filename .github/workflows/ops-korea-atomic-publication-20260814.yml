@@ -1,0 +1,248 @@
+name: Ops · guarded atomic Korea publication 20260814
+run-name: Korea guarded atomic publication · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/korea-semantic-live-refresh-v3-20260813
+    paths:
+      - ".github/workflows/ops-korea-atomic-publication-20260814.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+# Share the production daily writer lock; never cancel an existing writer.
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+  CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fb0ff8248301e2f61849e67e3c8ef3683bc7d74f
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Fail if another catalog writer became active or queued
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const https=require('node:https');
+          const token=process.env.GH_TOKEN;
+          const current=Number(process.env.GITHUB_RUN_ID||0);
+          const get=(path)=>new Promise((resolve,reject)=>{
+            const req=https.request({hostname:'api.github.com',path,headers:{'user-agent':'AvtoCena-korea-writer-guard','authorization':`Bearer ${token}`,'accept':'application/vnd.github+json'}},res=>{
+              let body=''; res.on('data',d=>body+=d); res.on('end',()=>res.statusCode>=200&&res.statusCode<300?resolve(JSON.parse(body)):reject(new Error(`github_${res.statusCode}:${body.slice(0,200)}`)));
+            }); req.on('error',reject); req.end();
+          });
+          (async()=>{
+            const all=[];
+            for(const status of ['in_progress','queued']){
+              const data=await get(`/repos/jeep-jim/AvtoCena/actions/runs?status=${status}&per_page=100`);
+              for(const r of data.workflow_runs||[]) if(Number(r.id)!==current) all.push(r);
+            }
+            const writerRe=/(?:catalog.*(?:daily|recovery|publish|publication|repair|writer)|(?:daily|recovery|publish|publication|repair|writer).*catalog|korea.*(?:publish|publication))/i;
+            const writers=all.filter(r=>writerRe.test(`${r.name||''} ${r.path||''} ${r.display_title||''}`));
+            console.log(JSON.stringify({current,otherActiveOrQueued:all.map(r=>({id:r.id,status:r.status,name:r.name,path:r.path})),writers:writers.map(r=>({id:r.id,status:r.status,name:r.name,path:r.path}))},null,2));
+            if(writers.length) throw new Error(`other_catalog_writer_present:${writers.map(r=>r.id).join(',')}`);
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+
+      - name: Fresh strict all-seven preflight
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-publish-preflight-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Download proven read-only Korea candidate
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-crossrun-artifact-gate
+          path: proven
+          github-token: ${{ github.token }}
+          repository: jeep-jim/AvtoCena
+          run-id: 31726594201
+
+      - name: Verify proven artifact identity and K9 safety evidence
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const sem=JSON.parse(fs.readFileSync('proven/korea-crossrun-semantic-gate.json','utf8'));
+          const k9=JSON.parse(fs.readFileSync('proven/korea-k9-engine-safety.json','utf8'));
+          const prior=JSON.parse(fs.readFileSync('proven/korea-crossrun-publish-dry-run.json','utf8'));
+          const p=JSON.parse(fs.readFileSync('proven/catalog-rebuild-korea.json','utf8'));
+          const rows=Array.isArray(p.offers)?p.offers:[];
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sem.sources?.[source]||0)>0)) throw new Error(`proven_missing_source:${source}`);
+          if(Number(sem.badYears||0)!==0||Number(sem.foreign||0)!==0) throw new Error('proven_market_age_gate_failed');
+          if(Number(sem.encar?.suvRatio||1)>0.75||Number(sem.knownSedans?.violations||0)!==0||Number(sem.casper2022||0)<=0) throw new Error('proven_semantic_gate_failed');
+          if(Number(k9.exact3342Kept||0)<=0||!Array.isArray(k9.excluded)||k9.excluded.length!==5) throw new Error('proven_k9_safety_missing');
+          if(Number(prior.byMarket?.korea?.maxOffersPerModelYear||0)!==20||Number(prior.byMarket?.korea?.imageStats?.belowMinimum||0)!==0) throw new Error('proven_dry_run_gate_failed');
+          const text=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''} ${JSON.stringify(r?.operational?.raw||{})}`;
+          const isK933=r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(text(r))&&/(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(text(r));
+          const unsafe=rows.filter(r=>isK933(r)&&[3000,3300].includes(Number(r.engineCc||0)));
+          const exact=rows.filter(r=>isK933(r)&&Number(r.engineCc||0)===3342);
+          if(unsafe.length||exact.length===0) throw new Error(`proven_candidate_k9_gate:${unsafe.length}:${exact.length}`);
+          console.log(JSON.stringify({rows:rows.length,sources:sem.sources,encarRatio:sem.encar.suvRatio,knownSedanViolations:sem.knownSedans.violations,casper2022:sem.casper2022,k9Excluded:k9.excluded.length,k9Exact3342:exact.length},null,2));
+          NODE
+
+      - name: Patch one-shot publisher for exact six-market preservation and rounded K9 exclusion
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/catalog-live-recovery-publish-batch.mjs')
+          s=p.read_text()
+          old_preserve='''.filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && canonicalPublic(offer) && isCatalogOfferBusinessLiquid(offer))'''
+          new_preserve='''.filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0)'''
+          if s.count(old_preserve)!=1: raise SystemExit(f'preservation_anchor_count={s.count(old_preserve)}')
+          s=s.replace(old_preserve,new_preserve,1)
+          anchor='''function makeKey(offer) {\n  return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\\s+/g, " ");\n}\n'''
+          helper='''function makeKey(offer) {\n  return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\\s+/g, " ");\n}\nfunction unsafeK9RoundedEngine(offer) {\n  if (String(offer?.market || "") !== "korea") return false;\n  const text = `${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.sourceTitle || ""} ${JSON.stringify(offer?.operational?.raw || {})}`;\n  const k9 = /(?:\\bk9\\b|k900|quoris|퀴리스)/i.test(text);\n  const gdi33 = /(?:\\b3[.,]3\\b[^\\n]{0,40}\\bgdi\\b|\\bgdi\\b[^\\n]{0,40}\\b3[.,]3\\b)/i.test(text);\n  return k9 && gdi33 && [3000, 3300].includes(Number(offer?.engineCc || 0));\n}\n'''
+          if s.count(anchor)!=1: raise SystemExit(f'k9_helper_anchor_count={s.count(anchor)}')
+          s=s.replace(anchor,helper,1)
+          in_anchor='''    if (!offer?.id || incoming.has(offer.id)) continue;\n    if (offer.market !== market) { reject("market"); continue; }'''
+          in_new='''    if (!offer?.id || incoming.has(offer.id)) continue;\n    if (offer.market !== market) { reject("market"); continue; }\n    if (unsafeK9RoundedEngine(offer)) { reject("k9_rounded_engine"); continue; }'''
+          if s.count(in_anchor)!=1: raise SystemExit(f'incoming_k9_anchor_count={s.count(in_anchor)}')
+          s=s.replace(in_anchor,in_new,1)
+          prev_anchor='''    const year = Number(offer?.year || 0);\n    if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;'''
+          prev_new='''    const year = Number(offer?.year || 0);\n    if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;\n    if (unsafeK9RoundedEngine(offer)) continue;'''
+          if s.count(prev_anchor)!=1: raise SystemExit(f'previous_k9_anchor_count={s.count(prev_anchor)}')
+          s=s.replace(prev_anchor,prev_new,1)
+          p.write_text(s)
+          PY
+          git diff -- scripts/catalog-live-recovery-publish-batch.mjs
+
+      - name: Fresh dry-run against current storage immediately before write
+        env:
+          RECOVERY_BATCH_MARKETS: korea
+          RECOVERY_BATCH_INPUT_DIR: proven
+          RECOVERY_BATCH_REPORT: korea-publish-final-dry-run.json
+          RECOVERY_BATCH_DRY_RUN: "1"
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+
+      - name: Gate final dry-run and exact six-market preservation
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const before=JSON.parse(fs.readFileSync('korea-publish-preflight-all7.json','utf8'));
+          const dry=JSON.parse(fs.readFileSync('korea-publish-final-dry-run.json','utf8'));
+          const k=dry.byMarket?.korea||{};
+          if(!dry.dryRun||Number(k.count||0)<=0) throw new Error('final_dry_run_empty');
+          if(Number(k.maxOffersPerModelYear||0)!==20) throw new Error(`final_model_year_cap:${k.maxOffersPerModelYear}`);
+          if(Number(k.minImagesPerOffer||0)!==5||Number(k.imageStats?.min||0)<5||Number(k.imageStats?.belowMinimum||0)!==0) throw new Error(`final_image_gate:${JSON.stringify(k.imageStats)}`);
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(k.sourceCounts?.[source]||0)>0)) throw new Error(`final_missing_source:${source}`);
+          for(const market of ['china','japan','uae','europe','georgia','kyrgyzstan']){
+            const a=Number(before.markets?.[market]?.count||0), b=Number(dry.preservedByMarket?.[market]||0);
+            if(a!==b) throw new Error(`final_would_change_${market}:${a}->${b}`);
+          }
+          fs.writeFileSync('korea-publication-expected.json',JSON.stringify({korea:Number(k.count||0),sources:k.sourceCounts,preserved:dry.preservedByMarket},null,2));
+          console.log(JSON.stringify({korea:k,preserved:dry.preservedByMarket},null,2));
+          NODE
+
+      - name: Atomic Korea publication
+        env:
+          RECOVERY_BATCH_MARKETS: korea
+          RECOVERY_BATCH_INPUT_DIR: proven
+          RECOVERY_BATCH_REPORT: korea-publication-report.json
+          RECOVERY_BATCH_DRY_RUN: "0"
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+
+      - name: Strict postpublish all-seven audit
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-postpublish-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Live semantic audit and exact postpublish counts
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
+          const before=JSON.parse(fs.readFileSync('korea-publish-preflight-all7.json','utf8'));
+          const expected=JSON.parse(fs.readFileSync('korea-publication-expected.json','utf8'));
+          const post=JSON.parse(fs.readFileSync('korea-postpublish-all7.json','utf8'));
+          const rows=await readMarketOffers('korea');
+          const dist=(field,subset=rows)=>subset.reduce((o,r)=>{const k=String(r?.[field]??'<missing>').trim()||'<missing>';o[k]=(o[k]||0)+1;return o;},{});
+          const text=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''} ${JSON.stringify(r?.operational?.raw||{})}`;
+          const sources=dist('sourceId');
+          const badYears=rows.filter(r=>Number(r.year)<2020);
+          const badImages=rows.filter(r=>(Array.isArray(r.images)?r.images.length:0)<5);
+          const encar=rows.filter(r=>r.sourceId==='encar_direct');
+          const suv=encar.filter(r=>/^(?:suv|crossover)$/i.test(String(r.bodyType||''))).length;
+          const ratio=encar.length?suv/encar.length:1;
+          const known=r=>/(?:genesis|제네시스)[\s_-]*g80|(?:hyundai|현대)[\s_-]*(?:grandeur|그랜저)|(?:hyundai|현대)[\s_-]*(?:ioniq\s*6|아이오닉\s*6)|(?:kia|기아)[\s_-]*(?:k9|k900|quoris|퀴리스)/i.test(text(r));
+          const badSedans=rows.filter(r=>known(r)&&/^(?:suv|crossover|offroad)$/i.test(String(r.bodyType||'')));
+          const casper2022=rows.filter(r=>Number(r.year)===2022&&/(?:hyundai|현대)/i.test(text(r))&&/(?:casper|캐스퍼)/i.test(text(r)));
+          const quota=new Map();
+          for(const r of rows){const k=catalogModelYearQuotaKey(r,'korea');if(k) quota.set(k,(quota.get(k)||0)+1);}
+          const maxQuota=Math.max(0,...quota.values());
+          const isK933=r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(text(r))&&/(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(text(r));
+          const k933=rows.filter(isK933);
+          const badK9=k933.filter(r=>[3000,3300].includes(Number(r.engineCc||0)));
+          const exactK9=k933.filter(r=>Number(r.engineCc||0)===3342);
+          const report={count:rows.length,sources,minYear:rows.length?Math.min(...rows.map(r=>Number(r.year||0))):0,maxPerExactModelYear:maxQuota,below5Images:badImages.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedanViolations:badSedans.length,casper2022:casper2022.length,k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),roundedUnsafe:badK9.length,exact3342:exactK9.length},bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel')};
+          fs.writeFileSync('korea-live-semantic-postpublish.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report,null,2));
+          if(rows.length!==Number(expected.korea||0)||Number(post.markets?.korea?.count||0)!==rows.length) throw new Error(`korea_post_count_mismatch:${rows.length}:${expected.korea}:${post.markets?.korea?.count}`);
+          for(const market of ['china','japan','uae','europe','georgia','kyrgyzstan']){
+            const a=Number(before.markets?.[market]?.count||0), b=Number(post.markets?.[market]?.count||0);
+            if(a!==b) throw new Error(`post_changed_${market}:${a}->${b}`);
+          }
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sources[source]||0)>0)) throw new Error(`live_missing_source:${source}`);
+          if(badYears.length||badImages.length||maxQuota>20) throw new Error(`live_age_image_quota:${badYears.length}:${badImages.length}:${maxQuota}`);
+          if(ratio>0.75||badSedans.length||!casper2022.length) throw new Error(`live_semantic_gate:${ratio}:${badSedans.length}:${casper2022.length}`);
+          if(badK9.length||exactK9.length===0) throw new Error(`live_k9_engine_gate:${badK9.length}:${exactK9.length}`);
+          NODE
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-guarded-atomic-publication
+          path: |
+            korea-publish-preflight-all7.json
+            korea-publish-final-dry-run.json
+            korea-publication-expected.json
+            korea-publication-report.json
+            korea-postpublish-all7.json
+            korea-live-semantic-postpublish.json
+          if-no-files-found: warn
+          retention-days: 7
