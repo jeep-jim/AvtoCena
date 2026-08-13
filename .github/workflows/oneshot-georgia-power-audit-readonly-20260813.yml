@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Fetch four bounded AutoPapa VIN-power batches
+      - name: Fetch four scattered bounded AutoPapa VIN-power batches
         run: |
           set -euo pipefail
-          for start in 1 6 11 16; do
+          for start in 21 51 101 201; do
             echo "batch startPage=$start"
             curl -fsS --retry 1 --retry-delay 2 --max-time 240 \
               "https://avtocena.com/api/internal/georgia-vin-recovery-5c7d21?source=autopapa&pages=5&startPage=${start}" \
