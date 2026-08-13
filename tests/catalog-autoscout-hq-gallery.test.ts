@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { autoscoutEuropeExactSource, parseAutoScoutDetailGallery } from "../apps/web/lib/catalog/autoscout-exact-source";
+import { AutoScoutCurrentAdapter, autoscoutEuropeExactSource, parseAutoScoutDetailGallery } from "../apps/web/lib/catalog/autoscout-exact-source";
 
 const id = "e69f4836-88ed-4c84-b8ae-034e73c485c7";
 function page(images: string[], declaredId = id) {
@@ -25,4 +25,10 @@ test("AutoScout list thumbnails are not claimed as verified exact photos before 
   assert.equal(offer!.operational?.exactPhotos, false);
   assert.equal(offer!.operational?.galleryVerified, false);
   assert.equal(offer!.operational?.photoIdentityVerified, false);
+});
+
+test("AutoScout current adapter rejects pre-2020 rows before normalization", () => {
+  const source = new AutoScoutCurrentAdapter();
+  const offer = source.normalizeOffer({ id, sourceUrl: `https://www.autoscout24.com/offers/example-${id}`, title: "Volvo XC60", make: "Volvo", model: "XC60", trim: "Momentum", year: 2019, mileageKm: 50000, price: 20000, currency: "EUR", images: Array.from({ length: 5 }, (_, i) => `https://prod.pictures.autoscout24.net/listing-images/${id}_${i}.jpg/250x188.webp`), raw: {} });
+  assert.equal(offer, null);
 });
