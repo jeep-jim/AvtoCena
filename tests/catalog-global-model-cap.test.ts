@@ -21,10 +21,10 @@ const liveWriterWorkflowPaths = [
 
 const sharedWriterConcurrency = /group:\s*catalog-live-daily-working-markets\s*\n\s*cancel-in-progress:\s*false/;
 
-test("canonical catalog cleanup hard-caps every exact model at twenty", () => {
-  assert.match(script, /const MAX_OFFERS_PER_MODEL = 20/);
+test("canonical catalog cleanup hard-caps every exact model-year at twenty", () => {
+  assert.match(script, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR/);
   assert.match(script, /for \(const market of PUBLIC_CATALOG_MARKETS\)/);
-  assert.match(script, /if \(count >= MAX_OFFERS_PER_MODEL\)/);
+  assert.match(script, /if \(count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR\)/);
   assert.match(script, /process\.env\.CATALOG_GROW_ONLY_MARKETS = ""/);
   assert.match(script, /isCatalogYearAllowed\(offer\?\.year, market\)/);
   assert.match(script, /hasCredibleOfferContent/);
@@ -47,7 +47,7 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.match(workflow, /gh workflow run catalog-live-recovery-uae-georgia-direct\.yml --ref main/);
   assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog live daily · working markets'/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
-  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
 });
 
 test("Japan strict writer is dispatch-only and proves all-seven safety after every write", () => {
@@ -58,14 +58,14 @@ test("Japan strict writer is dispatch-only and proves all-seven safety after eve
   assert.match(japanStrictWorkflow, /gh run download "\$SOURCE_RUN_ID"/);
   assert.doesNotMatch(japanStrictWorkflow, /actions\/artifacts\/\$artifact_id\/zip/);
   assert.doesNotMatch(japanStrictWorkflow, /CATALOG_MAX_MODELS_PER_MAKE/);
-  assert.match(japanStrictWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/);
+  assert.match(japanStrictWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
   assert.match(japanStrictWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
-  assert.match(japanStrictWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+  assert.match(japanStrictWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
 });
 
-test("K Car repair post-write audit uses the canonical model cap and no stale market floors", () => {
+test("K Car repair post-write audit uses the canonical model-year cap and no stale market floors", () => {
   assert.match(kcarRepairWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
-  assert.match(kcarRepairWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/);
+  assert.match(kcarRepairWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
   assert.doesNotMatch(kcarRepairWorkflow, /CATALOG_AUDIT_MIN_COUNTS_JSON/);
   assert.doesNotMatch(kcarRepairWorkflow, /japan\\?\"?:5000/);
 });

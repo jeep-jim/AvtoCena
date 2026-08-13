@@ -12,13 +12,14 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const input = String(process.env.GEORGIA_REPLACE_INPUT || "recovery-input/catalog-rebuild-georgia.json");
 const output = String(process.env.GEORGIA_REPLACE_REPORT || "georgia-replace-report.json");
 const dryRun = /^(1|true|yes)$/i.test(String(process.env.GEORGIA_REPLACE_DRY_RUN || ""));
 const minGeorgia = Math.max(1, Number(process.env.GEORGIA_REPLACE_MIN_COUNT || 2_000));
 const maxGeorgia = Math.max(minGeorgia, Number(process.env.GEORGIA_REPLACE_MAX_COUNT || 5_000));
-const maxPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const canonicalGeorgiaSources = new Set(["myauto_georgia_list", "autopapa_georgia_open"]);
 
 function exactCalculation(offer) {
@@ -66,10 +67,6 @@ function sourceBound(offer) {
     && raw.recoveryBodySourceOnly === true;
 }
 
-function modelKey(offer) {
-  return `${String(offer?.make || "").trim().toLowerCase()}|${String(offer?.model || "").trim().toLowerCase()}`;
-}
-
 function quality(left, right) {
   return Number(right.year || 0) - Number(left.year || 0)
     || Number(right.images?.length || 0) - Number(left.images?.length || 0)
@@ -99,12 +96,12 @@ for (const raw of Array.isArray(payload?.offers) ? payload.offers : []) {
   incoming.set(offer.id, offer);
 }
 
-const modelCounts = new Map();
+const modelYearCounts = new Map();
 const selectedGeorgia = [];
 for (const offer of [...incoming.values()].sort(quality)) {
-  const key = modelKey(offer);
-  if (!key || Number(modelCounts.get(key) || 0) >= maxPerModel) { reject("model_quota"); continue; }
-  modelCounts.set(key, Number(modelCounts.get(key) || 0) + 1);
+  const key = catalogModelYearQuotaKey(offer, "georgia");
+  if (!key || Number(modelYearCounts.get(key) || 0) >= maxPerModelYear) { reject("model_year_quota"); continue; }
+  modelYearCounts.set(key, Number(modelYearCounts.get(key) || 0) + 1);
   selectedGeorgia.push(offer);
   if (selectedGeorgia.length >= maxGeorgia) break;
 }
@@ -156,11 +153,11 @@ const reportBase = {
   preservedInternalCount: preserved.length,
   georgia: {
     inputCount: Array.isArray(payload?.offers) ? payload.offers.length : 0,
-    acceptedBeforeModelCap: incoming.size,
+    acceptedBeforeModelYearCap: incoming.size,
     selectedCount: selectedGeorgia.length,
     calculatedCount: selectedGeorgia.filter(exactCalculation).length,
     preliminaryCount: selectedGeorgia.filter(isPreliminaryPowerPendingCalculation).length,
-    maxPerModel,
+    maxPerModelYear,
     sourceCounts: Object.fromEntries([...canonicalGeorgiaSources].map((sourceId) => [sourceId, selectedGeorgia.filter((offer) => offer.sourceId === sourceId).length])),
     minYear: Math.min(...selectedGeorgia.map((offer) => Number(offer.year || 0))),
     belowFiveImages: selectedGeorgia.filter((offer) => (offer.images?.length || 0) < 5).length,

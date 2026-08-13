@@ -6,15 +6,16 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 const { mashinaKyrgyzstanListSource: source } = await import("../apps/web/lib/catalog/mashina-kyrgyzstan-list-source.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { credibleCatalogImages } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const target = Math.max(1, Math.min(10_000, Number(process.env.RECOVERY_TARGET || 5_000)));
 const maxPages = Math.max(1, Math.min(500, Number(process.env.RECOVERY_MAX_PAGES || 240)));
 const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const timeLimitMs = Math.max(60_000, Math.min(5_400_000, Number(process.env.RECOVERY_TIME_LIMIT_MS || 5_100_000)));
-const minYear = new Date().getFullYear() - 15;
+const minYear = catalogMinYearForMarket("kyrgyzstan");
 const output = process.env.RECOVERY_OUTPUT || "catalog-rebuild-kyrgyzstan.json";
 const deadline = Date.now() + timeLimitMs;
 const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper|canter|elf|dutro|fuso|hino)\b/i;
@@ -142,11 +143,6 @@ function exactCalculation(offer) {
   return kind === "other_hybrid" ? motor30 > 0 && Number(offer?.icePowerKw || 0) > 0 : motor30 > 0;
 }
 function makeKey(offer) { return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " "); }
-function modelKey(offer) {
-  const make = makeKey(offer);
-  const model = String(offer?.model || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : "";
-}
 function quality(a, b) {
   const ap = Number(a.totalRub || 0) <= maxPreferredRub ? 0 : 1;
   const bp = Number(b.totalRub || 0) <= maxPreferredRub ? 0 : 1;
@@ -215,12 +211,12 @@ while (pages < maxPages && Date.now() < deadline) {
 
 candidates.sort(quality);
 const offers = [];
-const countByModel = new Map();
+const countByModelYear = new Map();
 for (const offer of candidates) {
-  const model = modelKey(offer);
+  const model = catalogModelYearQuotaKey(offer, "kyrgyzstan");
   if (!model) continue;
-  if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) { reject(rejections, "model_quota"); continue; }
-  countByModel.set(model, Number(countByModel.get(model) || 0) + 1);
+  if (Number(countByModelYear.get(model) || 0) >= maxOffersPerModelYear) { reject(rejections, "model_year_quota"); continue; }
+  countByModelYear.set(model, Number(countByModelYear.get(model) || 0) + 1);
   offers.push(offer);
   if (offers.length >= target) break;
 }
@@ -232,7 +228,7 @@ const report = {
   sourceId: source.sourceId,
   minYear,
   preferredMaxRub: maxPreferredRub,
-  maxOffersPerModel,
+  maxOffersPerModelYear,
   pages,
   seen,
   normalized,
@@ -240,7 +236,8 @@ const report = {
   preferredCount: offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length,
   calculatedCount: offers.filter(exactCalculation).length,
   preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
-  distinctModels: countByModel.size,
+  distinctModels: new Set(offers.map((offer) => catalogExactModelKey(offer, "kyrgyzstan")).filter(Boolean)).size,
+  distinctModelYears: countByModelYear.size,
   distinctMakes: new Set(offers.map(makeKey)).size,
   imageStats: {
     min: offers.length ? Math.min(...offers.map((offer) => offer.images.length)) : 0,

@@ -8,6 +8,7 @@ process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 const { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
@@ -15,8 +16,8 @@ const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-
 const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.json";
 const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_RECOVERY_TARGET || 1_500)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = Math.max(1, Math.min(1_000, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
-const candidateMaxOffersPerModel = Math.max(maxOffersPerModel, Math.min(1_000, Number(process.env.PRESTIGE_RECOVERY_CANDIDATE_PER_MODEL || maxOffersPerModel * 4)));
+const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+const candidateMaxOffersPerModelYear = maxOffersPerModelYear * 4;
 const concurrency = Math.max(1, Math.min(16, Number(process.env.PRESTIGE_RECOVERY_CONCURRENCY || 12)));
 const minYear = catalogMinYearForMarket("japan");
 const EXACT_URL = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
@@ -144,18 +145,13 @@ function priority(a, b) {
     || Number(b.images?.length || 0) - Number(a.images?.length || 0);
 }
 function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
-function modelKey(offer) {
-  const make = makeKey(offer);
-  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : "";
-}
-function takeWithPerModelCap(rows, limit, perModelCap = maxOffersPerModel) {
+function takeWithPerModelYearCap(rows, limit, perModelCap = maxOffersPerModelYear) {
   const counts = new Map();
   const makes = new Set();
   const result = [];
   let quotaSkipped = 0;
   for (const offer of rows) {
-    const key = modelKey(offer);
+    const key = catalogModelYearQuotaKey(offer, "japan");
     const count = key ? Number(counts.get(key) || 0) : 0;
     if (key && count >= perModelCap) { quotaSkipped++; continue; }
     result.push(offer);
@@ -163,7 +159,7 @@ function takeWithPerModelCap(rows, limit, perModelCap = maxOffersPerModel) {
     if (makeKey(offer)) makes.add(makeKey(offer));
     if (result.length >= limit) break;
   }
-  return { rows: result, quotaSkipped, distinctModels: counts.size, distinctMakes: makes.size };
+  return { rows: result, quotaSkipped, distinctModels: new Set(result.map((offer) => catalogExactModelKey(offer, "japan")).filter(Boolean)).size, distinctModelYears: counts.size, distinctMakes: makes.size };
 }
 function finalOrder(a, b) {
   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
@@ -178,7 +174,7 @@ const payload = JSON.parse(await fs.readFile(input, "utf8"));
 const eligibleRows = (Array.isArray(payload?.offers) ? payload.offers : [])
   .filter((offer) => Number(offer?.year || 0) >= minYear)
   .sort(priority);
-const candidateSelection = takeWithPerModelCap(eligibleRows, Math.max(target * 8, target), candidateMaxOffersPerModel);
+const candidateSelection = takeWithPerModelYearCap(eligibleRows, Math.max(target * 8, target), candidateMaxOffersPerModelYear);
 const rows = candidateSelection.rows;
 const rejected = {};
 function reject(reason) { rejected[reason] = Number(rejected[reason] || 0) + 1; }
@@ -223,7 +219,7 @@ const uniquePrepared = prepared.filter(Boolean).sort(finalOrder).filter((offer) 
   seen.add(offer.id);
   return true;
 });
-const finalSelection = takeWithPerModelCap(uniquePrepared, target);
+const finalSelection = takeWithPerModelYearCap(uniquePrepared, target);
 const offers = finalSelection.rows;
 const report = {
   version: 2,
@@ -233,12 +229,13 @@ const report = {
   candidateCount: rows.length,
   count: offers.length,
   target,
-  candidateModelQuotaSkipped: candidateSelection.quotaSkipped,
-  finalModelQuotaSkipped: finalSelection.quotaSkipped,
+  candidateModelYearQuotaSkipped: candidateSelection.quotaSkipped,
+  finalModelYearQuotaSkipped: finalSelection.quotaSkipped,
   distinctModels: finalSelection.distinctModels,
+  distinctModelYears: finalSelection.distinctModelYears,
   distinctMakes: finalSelection.distinctMakes,
-  maxOffersPerModel,
-  candidateMaxOffersPerModel,
+  maxOffersPerModelYear,
+  candidateMaxOffersPerModelYear,
   preliminaryCount: offers.filter(isPreliminaryPowerPendingCalculation).length,
   exactCalculatedCount: offers.filter(exactCalculation).length,
   electricCount: offers.filter((offer) => String(offer.powertrainKind || "") === "electric").length,
