@@ -5,6 +5,7 @@ const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
@@ -61,7 +62,6 @@ async function releaseLock() {
   lockHeld = false;
 }
 
-function clean(value) { return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US"); }
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
@@ -82,10 +82,9 @@ function normalizeVisible(raw) {
     images: credibleCatalogImages(raw?.images || []).slice(0, 30),
   });
 }
-function selectMarket(rows, market) {
+async function selectMarket(rows, market) {
   const rejected = { quality: 0, modelYearQuota: 0 };
-  const candidates = rows
-    .map(normalizeVisible)
+  const candidates = (await Promise.all(rows.map(async (raw) => normalizeVisible(await enrichOfferWithVehicleKnowledge(raw)))))
     .filter((offer) => {
       const ok = offer?.id
         && offer?.market === market
@@ -120,7 +119,7 @@ try {
   for (const market of PUBLIC_CATALOG_MARKETS) {
     const rows = await readMarketOffers(market);
     beforeByMarket[market] = rows.length;
-    const result = selectMarket(rows, market);
+    const result = await selectMarket(rows, market);
     if (rows.length && !result.selected.length && !allowedEmptyMarkets.has(market)) {
       throw new Error(`catalog_global_model_cap_empty:${market}`);
     }
@@ -140,9 +139,10 @@ try {
 
   if (dryRun) {
     const report = {
-      version: 2,
+      version: 3,
       mode: "global_model_cap_dry_run",
       dryRun: true,
+      postEnrichmentQuota: true,
       maxOffersPerModelYear: CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
       preferredMaxRub,
       allowedEmptyMarkets: [...allowedEmptyMarkets],
@@ -172,9 +172,10 @@ try {
       if (rows.length === 0 && !allowedEmptyMarkets.has(market)) failures.push(`${market}:unexpected_empty_after_publish`);
     }
     const report = {
-      version: 2,
+      version: 3,
       mode: "global_model_cap_publish",
       published: true,
+      postEnrichmentQuota: true,
       generationId: manifest.generationId,
       maxOffersPerModelYear: CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
       preferredMaxRub,
