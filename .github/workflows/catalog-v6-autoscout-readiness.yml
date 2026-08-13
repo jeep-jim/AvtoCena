@@ -3,12 +3,13 @@ name: Catalog V6 · AutoScout exact readiness
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, fix/autoscout-2020-hard-gate-20260813]
     paths:
       - ".github/workflows/catalog-v6-autoscout-readiness.yml"
       - "apps/web/lib/catalog/autoscout-exact-source.ts"
       - "apps/web/lib/catalog/autoscout-exact-source-base.ts"
       - "apps/web/lib/catalog/autoscout-hq-source.ts"
+      - "apps/web/lib/catalog/autoscout-current-source.ts"
       - "apps/web/lib/catalog/importer.ts"
 
 permissions:
@@ -27,8 +28,8 @@ jobs:
       CATALOG_REBUILD_SOURCE_IDS: autoscout_europe_open
       CATALOG_REBUILD_OUTPUT: readiness-europe-autoscout_europe_open.json
       CATALOG_REBUILD_TARGET_PER_MARKET: "3"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "3"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "2"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
       CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
       CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
       CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
@@ -48,6 +49,8 @@ jobs:
       - run: npm ci
       - name: Typecheck
         run: npm run typecheck
+      - name: AutoScout HQ regression tests
+        run: node --import tsx --test tests/catalog-autoscout-hq-gallery.test.ts
       - name: Collect exact AutoScout cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce exact AutoScout source identity, age and HQ gallery
