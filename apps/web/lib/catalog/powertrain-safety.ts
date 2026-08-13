@@ -9,13 +9,36 @@ function positive(value: unknown) {
 }
 
 /**
- * A listing's raw payload can contain unrelated words such as "hybrid" in image paths,
- * recommendation blocks or surrounding page markup. An explicit combustion fuel plus a
- * real engine displacement wins unless the vehicle's own title/specification says hybrid.
+ * A listing's raw payload can contain unrelated words or numbers in image paths,
+ * recommendation blocks or surrounding page markup. Source-explicit powertrain
+ * semantics win over such fallback enrichment.
  */
 export function preferExplicitCombustionPowertrain<T extends Partial<VehicleOffer>>(input: T): T {
   const fuel = String(input.fuel || "").trim().toLocaleLowerCase("en-US");
   const engineCc = positive(input.engineCc);
+
+  // A pure EV cannot have combustion-engine displacement. If a broad raw-payload
+  // fallback inferred one, remove it before customs so an unrelated value such as
+  // 3000 cannot move the vehicle into an ICE duty/utilization band.
+  if ((input.powertrainKind === "electric" || fuel === "electric") && engineCc) {
+    return {
+      ...input,
+      engineCc: undefined,
+      icePowerKw: undefined,
+      operational: {
+        ...input.operational,
+        raw: {
+          ...(typeof input.operational?.raw === "object" && input.operational.raw ? input.operational.raw as object : {}),
+          powertrainSafety: {
+            correctedTo: "electric",
+            reason: "electric_powertrain_cannot_have_engine_displacement",
+            removedEngineCc: engineCc,
+          },
+        },
+      },
+    } as T;
+  }
+
   const primary = [input.make, input.model, input.generation, input.trim, input.engineType, input.fuel]
     .filter(Boolean)
     .join(" ");
