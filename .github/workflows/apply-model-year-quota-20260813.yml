@@ -1,4 +1,5 @@
 name: Validate model-year inventory quota 20260813
+# final validation after making K Car repair dispatch-only
 on:
   push:
     branches: [fix/model-year-quota-20260813]
