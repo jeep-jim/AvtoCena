@@ -21,7 +21,7 @@ env:
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
-  CATALOG_MAX_OFFERS_PER_MODEL: "20"
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
   CATALOG_OFFER_RETENTION_MS: "259200000"
   RECOVERY_PREFERRED_MAX_RUB: "8000000"
   RECOVERY_REQUEST_TIMEOUT_MS: "35000"
@@ -49,7 +49,7 @@ jobs:
           node --check scripts/catalog-live-recovery-merge-shards.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
           npm run typecheck
-          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','kbchachacha_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open','auto_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
+          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','kbchachacha_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
       - name: Verify current seven-market baseline before any write
         shell: bash
         env:
@@ -86,7 +86,6 @@ jobs:
           - { market: europe, source: autoscout_europe_open, target: 5000, max_pages: 300 }
           - { market: georgia, source: myauto_georgia_list, target: 5000, max_pages: 300 }
           - { market: georgia, source: autopapa_georgia_open, target: 5000, max_pages: 300 }
-          - { market: georgia, source: auto_georgia_open, target: 5000, max_pages: 300 }
     env:
       RECOVERY_MARKET: ${{ matrix.market }}
       RECOVERY_SOURCE_IDS: ${{ matrix.source }}
