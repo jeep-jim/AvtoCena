@@ -200,8 +200,8 @@ function inferThirtyMinutePowers(text: string) {
   const label = String.raw`(?:(?:maximum\s+)?30[\s-]?(?:minute|min)(?:\s+power)?|30\s*мин(?:ут\w*)?(?:\s+мощност\w*)?|最大\s*30\s*分钟(?:功率)?|30\s*分钟(?:最大)?功率|30\s*분(?:\s*최대)?(?:\s*출력)?)`;
   const unit = String.raw`(?:kw|квт|კვტ|千瓦|킬로와트)`;
   const patterns = [
-    new RegExp(`${label}[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\s*${unit}`, "gi"),
-    new RegExp(`([0-9]+(?:[.,][0-9]+)?)\s*${unit}[^.;|]{0,45}${label}`, "gi"),
+    new RegExp(String.raw`${label}[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\s*${unit}`, "gi"),
+    new RegExp(String.raw`([0-9]+(?:[.,][0-9]+)?)\s*${unit}[^.;|]{0,45}${label}`, "gi"),
   ];
 
   for (const pattern of patterns) {
