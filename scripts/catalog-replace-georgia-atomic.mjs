@@ -9,6 +9,7 @@ const {
   isCatalogYearAllowed,
 } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -128,9 +129,14 @@ for (const offer of full) {
   ids.set(offer.id, offer.market);
 }
 
+// persistCatalogOffers enriches every offer with vehicle knowledge before the
+// public gate. Project through that same enrichment before any write so a dry
+// run cannot claim exact preservation and then lose another market at persist.
+const projectedFull = await Promise.all(full.map(async (offer) =>
+  normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
 const projectedPublicCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [
   market,
-  full.filter((offer) => offer.market === market && publicLike(offer)).length,
+  projectedFull.filter((offer) => offer.market === market && publicLike(offer)).length,
 ]));
 for (const market of PUBLIC_CATALOG_MARKETS) {
   if (market === "georgia") continue;
@@ -141,7 +147,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
 if (projectedPublicCounts.georgia !== selectedGeorgia.length) throw new Error("georgia_projection_mismatch");
 
 const reportBase = {
-  version: 1,
+  version: 2,
   mode: "full-seven-market-georgia-replacement",
   dryRun,
   beforeCounts,
@@ -170,7 +176,7 @@ if (dryRun) {
 }
 
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
-const manifest = await persistCatalogOffers(full);
+const manifest = await persistCatalogOffers(projectedFull);
 const manifestCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)]));
 for (const market of PUBLIC_CATALOG_MARKETS) {
   if (manifestCounts[market] !== projectedPublicCounts[market]) {
