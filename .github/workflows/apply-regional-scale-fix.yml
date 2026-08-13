@@ -1,13 +1,103 @@
-name: Apply regional scale fix (legacy, manual only)
+name: Korea retry1 combined read-only gate
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - audit/korea-semantic-combine-retry1-20260813
+    paths:
+      - ".github/workflows/apply-regional-scale-fix.yml"
 
 permissions:
   contents: read
+  actions: read
+
+env:
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
 
 jobs:
-  disabled:
+  gate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - run: echo "Legacy automatic patch workflow is disabled."
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Download Encar from proof v3
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-v3-source-encar_direct
+          path: korea-shards/encar
+          repository: jeep-jim/AvtoCena
+          run-id: 31706669299
+          github-token: ${{ github.token }}
+      - name: Download K Car from proof v3
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-v3-source-kcar_korea_open
+          path: korea-shards/kcar
+          repository: jeep-jim/AvtoCena
+          run-id: 31706669299
+          github-token: ${{ github.token }}
+      - name: Download first successful KB-only retry
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-kb-retry-1
+          path: korea-shards/kb
+          repository: jeep-jim/AvtoCena
+          run-id: 31709325251
+          github-token: ${{ github.token }}
+      - name: Merge exact three shards
+        env:
+          RECOVERY_MERGE_MARKET: korea
+          RECOVERY_MERGE_INPUT_DIR: korea-shards
+          RECOVERY_MERGE_OUTPUT: catalog-rebuild-korea.json
+        run: node scripts/catalog-live-recovery-merge-shards.mjs
+      - name: Required semantic gate
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          import { catalogModelYearQuotaKey } from './apps/web/lib/catalog/inventory-quota.ts';
+          const p=JSON.parse(fs.readFileSync('catalog-rebuild-korea.json','utf8'));
+          const rows=Array.isArray(p.offers)?p.offers:[];
+          const n=v=>String(v??'').trim().replace(/\s+/g,' ');
+          const d=(f,s=rows)=>Object.fromEntries([...s.reduce((m,r)=>{const k=n(r?.[f])||'<missing>';m.set(k,(m.get(k)||0)+1);return m;},new Map())].sort((a,b)=>b[1]-a[1]));
+          const sources=d('sourceId');
+          const buckets=new Map(); for(const r of rows){const k=catalogModelYearQuotaKey(r,'korea'); if(k)buckets.set(k,(buckets.get(k)||0)+1)}
+          const max=Math.max(0,...buckets.values());
+          const badYears=rows.filter(r=>Number(r.year)<2020), foreign=rows.filter(r=>n(r.market)!=='korea');
+          const encar=rows.filter(r=>r.sourceId==='encar_direct');
+          const suv=encar.filter(r=>/^(?:suv|crossover)$/i.test(n(r.bodyType))).length, ratio=encar.length?suv/encar.length:1;
+          const text=r=>`${n(r.make)} ${n(r.model)} ${n(r.trim)} ${n(r.sourceTitle)}`;
+          const casper=rows.filter(r=>Number(r.year)===2022&&/hyundai|현대/i.test(n(r.make))&&/casper|캐스퍼/i.test(text(r)));
+          const sedans=rows.filter(r=>/(?:genesis\s*)?g80|grandeur|그랜저|ioniq\s*6|아이오닉\s*6|\bk9\b|\bk900\b|\bquoris\b/i.test(text(r)));
+          const badSedans=sedans.filter(r=>/^(?:suv|crossover|offroad)$/i.test(n(r.bodyType)));
+          const k9=rows.filter(r=>/kia|기아/i.test(n(r.make))&&/\bk9\b|\bk900\b|\bquoris\b/i.test(text(r))&&/(?:^|\D)3[.,]3(?:\D|$)/.test(text(r))&&/\bgdi\b/i.test(text(r)));
+          const k9cc=k9.filter(r=>Number(r.engineCc)>0), badK9=k9cc.filter(r=>Number(r.engineCc)!==3342);
+          const checks={allThree:['encar_direct','kcar_korea_open','kbchachacha_korea_open'].every(x=>Number(sources[x]||0)>0),koreaOnly:!foreign.length,year2020Plus:!badYears.length,max20:max<=20,casper2022:casper.length>0,encarSuvRatio:encar.length>0&&ratio<=.75,knownSedansNotSuv:!badSedans.length,k9Exact3342WhenPresent:!badK9.length};
+          const report={total:rows.length,sources,checks,maxExactModelYear:max,overCap:[...buckets.entries()].filter(([,v])=>v>20).slice(0,20),casper2022:casper.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedans:{count:sedans.length,violations:badSedans.length,sample:badSedans.slice(0,10).map(r=>({sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,id:r.sourceOfferId}))},kiaK9_3_3_GDI:{count:k9.length,withCc:k9cc.length,exact3342:k9cc.filter(r=>Number(r.engineCc)===3342).length,bad:badK9.slice(0,10).map(r=>({sourceId:r.sourceId,model:r.model,trim:r.trim,year:r.year,engineCc:r.engineCc,id:r.sourceOfferId}))},distributions:{bodyType:d('bodyType'),drive:d('drive'),transmission:d('transmission'),fuel:d('fuel')}};
+          report.passed=Object.values(checks).every(Boolean);
+          fs.writeFileSync('korea-retry1-semantic-gate.json',JSON.stringify(report,null,2)); console.log(JSON.stringify(report,null,2));
+          if(!report.passed) process.exit(17);
+          NODE
+      - name: Fail-closed photo depth gate
+        if: always()
+        env:
+          RECOVERY_PHOTO_GATE_MARKET: korea
+          RECOVERY_PHOTO_GATE_INPUT: catalog-rebuild-korea.json
+          RECOVERY_PHOTO_GATE_REPORT: korea-retry1-photo-gate.json
+          RECOVERY_MIN_IMAGES_PER_OFFER: "5"
+        run: node scripts/catalog-recovery-photo-gate.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-retry1-combined-readonly-gate
+          path: |
+            catalog-rebuild-korea.json
+            korea-retry1-semantic-gate.json
+            korea-retry1-photo-gate.json
+          if-no-files-found: warn
+          retention-days: 3
