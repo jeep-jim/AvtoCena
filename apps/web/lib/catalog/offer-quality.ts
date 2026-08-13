@@ -97,6 +97,11 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
   const powerHp = Number(offer.powerHp || 0);
   if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
 
+  // A model-wide representative horsepower value is not variant-bound evidence
+  // for this exact listing. It is intentionally excluded from customs too, so it
+  // must not silently evict an otherwise valid older card during re-publication.
+  if (/^vehicle-model-representative:/i.test(clean(offer.powerDataSource))) return true;
+
   // Do not apply an ICE horsepower heuristic to EV/PHEV/hybrid cards because
   // their public horsepower field may not be the utilization-power value.
   const powertrainKind = clean(offer.powertrainKind).toLowerCase();

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { credibleCatalogImages, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
+import { credibleCatalogImages, isCatalogOfferBusinessLiquid, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import { isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
 
 const jpegPhoto = {
@@ -122,5 +122,28 @@ test("rejects an advertising payment string used as the source title", () => {
   assert.equal(isCrediblePublicOffer({
     ...rawOffer,
     sourceTitle: "Corolla XLI 2023 AED 718/Month 0 DP 30 Day Return Warranty",
+  } as any), false);
+});
+
+test("model-wide representative power cannot evict an older exact listing", () => {
+  const olderJapan = {
+    ...rawOffer,
+    market: "japan",
+    year: new Date().getFullYear() - 7,
+    fuel: "petrol",
+    powerHp: 220,
+    powerDataConfidence: "estimated",
+    powerDataSource: "vehicle-model-representative:toyota/crown",
+  };
+  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), true);
+  assert.equal(isCatalogOfferBusinessLiquid({
+    ...olderJapan,
+    powerDataConfidence: "reference",
+    powerDataSource: "vehicle-knowledge:drom_variant_220hp",
+  } as any), false);
+  assert.equal(isCatalogOfferBusinessLiquid({
+    ...olderJapan,
+    powerDataConfidence: "source_exact",
+    powerDataSource: "source:horsepower",
   } as any), false);
 });
