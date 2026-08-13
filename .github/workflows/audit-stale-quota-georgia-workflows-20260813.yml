@@ -1,0 +1,25 @@
+name: Audit stale quota and Georgia workflows 20260813
+on:
+  push:
+    branches: [audit/stale-quota-georgia-workflows-20260813]
+    paths:
+      - .github/workflows/audit-stale-quota-georgia-workflows-20260813.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: audit/stale-quota-georgia-workflows-20260813 }
+      - name: Exhaustive static contract audit only
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== OLD MODEL-ONLY QUOTA ENV ==='
+          grep -RInE 'CATALOG_MAX_OFFERS_PER_MODEL([^_A-Z]|$)|CATALOG_AUDIT_MAX_PER_MODEL([^_A-Z]|$)|CATALOG_MAX_MODELS_PER_MAKE' .github/workflows scripts apps tests || true
+          echo '=== BANNED GEORGIA SOURCE IDS/NAMES ==='
+          grep -RInE 'auto_georgia_open|AUTO\.GE|ss_georgia|SS\.GE|mymarket|MyMarket' .github/workflows scripts apps/web/lib/catalog tests || true
+          echo '=== CURRENT MODEL-YEAR QUOTA ==='
+          grep -RIn 'CATALOG_MAX_OFFERS_PER_MODEL_YEAR\|CATALOG_AUDIT_MAX_PER_MODEL_YEAR\|catalogModelYearQuotaKey' .github/workflows scripts apps/web/lib/catalog tests | head -n 300 || true
