@@ -151,16 +151,27 @@ async function fetchDetail(sourceOfferId: string) {
 
 function mergeDetail(offer: VehicleOffer, detail: any) {
   const vehicle = detail?.vehicle || detail?.Vehicle || detail;
+  const exactEngineCc = number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"]));
+  const exactPowerHp = number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"]));
+  const exactFuel = text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"]));
+  const exactTransmission = text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"]));
+  const exactDrive = text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"]));
+  // Encar list Category is not trusted as a body-shape field. Only body-specific
+  // exact-detail keys may publish a body type; otherwise it remains unknown.
+  const exactBodyType = text(deepFind(vehicle, ["bodyType", "BodyType", "carType"]));
+  const exactColor = text(deepFind(vehicle, ["color", "Color", "exteriorColor"]));
+  const exactProductionDate = text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"]));
+
   const merged = normalizeVehicleOfferSpecs({
     ...offer,
-    engineCc: offer.engineCc || number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"])),
-    powerHp: offer.powerHp || number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"])),
-    fuel: offer.fuel || text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"])),
-    transmission: offer.transmission || text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"])),
-    drive: offer.drive || text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"])),
-    bodyType: offer.bodyType || text(deepFind(vehicle, ["category", "Category", "bodyType", "BodyType", "carType"])),
-    color: offer.color || text(deepFind(vehicle, ["color", "Color", "exteriorColor"])),
-    productionDate: offer.productionDate || text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"])),
+    engineCc: exactEngineCc || offer.engineCc,
+    powerHp: exactPowerHp || offer.powerHp,
+    fuel: exactFuel || offer.fuel,
+    transmission: exactTransmission || offer.transmission,
+    drive: exactDrive || offer.drive,
+    bodyType: exactBodyType || undefined,
+    color: exactColor || offer.color,
+    productionDate: exactProductionDate || offer.productionDate,
     operational: {
       ...(offer.operational || {}),
       raw: { offer: offer.operational?.raw, detail },

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { classifyCatalogV2Offer, selectCatalogV2MarketOffers } from "../apps/web/lib/catalog/catalog-v2-policy";
+import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 
 const base = {
   id: "encar-1",
@@ -43,4 +44,41 @@ test("conflicting crossover default is removed for unambiguous sedan model", () 
   });
   assert.equal(selection.selected.length, 1);
   assert.equal(selection.selected[0].bodyType, undefined);
+});
+
+test("raw page noise cannot invent semantic vehicle attributes", () => {
+  const result = normalizeVehicleOfferSpecs({
+    ...base,
+    operational: {
+      raw: {
+        navigation: "SUV AWD automatic hybrid crossover",
+        recommendations: [{ bodyType: "SUV", drive: "4WD", fuel: "Hybrid", transmission: "Automatic" }],
+        description: "Maximum 30-minute power: 68 kW",
+      },
+    },
+  } as any);
+
+  assert.equal(result.bodyType, undefined);
+  assert.equal(result.drive, undefined);
+  assert.equal(result.transmission, undefined);
+  assert.equal(result.fuel, undefined);
+  assert.equal(result.powertrainKind, "unknown");
+  assert.equal(result.power30MinKw, 68);
+});
+
+test("explicit source semantic fields are normalized without model-name guessing", () => {
+  const result = normalizeVehicleOfferSpecs({
+    ...base,
+    fuel: "Gasoline",
+    transmission: "Automatic",
+    drive: "Front-wheel drive",
+    bodyType: "Sedan",
+    operational: { raw: { recommendations: "SUV AWD hybrid" } },
+  } as any);
+
+  assert.equal(result.fuel, "petrol");
+  assert.equal(result.transmission, "automatic");
+  assert.equal(result.drive, "fwd");
+  assert.equal(result.bodyType, "sedan");
+  assert.equal(result.powertrainKind, "combustion");
 });
