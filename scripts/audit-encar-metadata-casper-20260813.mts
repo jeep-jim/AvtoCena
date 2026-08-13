@@ -34,7 +34,7 @@ function actionObjects(root: any) {
       const direct: any = scalars(value);
       if (typeof direct.Action === "string" && direct.Action.includes("(And.")) rows.push({ path, ...direct });
     }
-    if (Array.isArray(value)) value.slice(0, 2000).forEach((child, index) => visit(child, `${path}[${index}]`, depth + 1));
+    if (Array.isArray(value)) value.slice(0, 3000).forEach((child, index) => visit(child, `${path}[${index}]`, depth + 1));
     else for (const [key, child] of Object.entries(value)) if (child && typeof child === "object") visit(child, `${path}.${key}`, depth + 1);
   }
   visit(root);
@@ -49,16 +49,12 @@ function rowText(row: any) {
     .map(([, value]) => String(value ?? ""))
     .join(" ");
 }
-
-function findAction(rows: any[], pattern: RegExp) {
-  return rows.find((row) => pattern.test(rowText(row))) || null;
-}
-
+function findAction(rows: any[], pattern: RegExp) { return rows.find((row) => pattern.test(rowText(row))) || null; }
+function findExpression(rows: any[], expression: string) { return rows.find((row) => String(row?.Expression || "") === expression) || null; }
 function summarizeAction(row: any) {
   if (!row) return null;
   return { path: row.path, Name: row.Name, Value: row.Value, Count: row.Count, Expression: row.Expression, Action: row.Action };
 }
-
 function firstRows(json: any) {
   const items = Array.isArray(json?.SearchResults) ? json.SearchResults : [];
   return items.slice(0, 10).map((row: any) => ({
@@ -71,37 +67,50 @@ function firstRows(json: any) {
     modifiedDate: row.ModifiedDate,
   }));
 }
+function fail(stage: string, payload: any, code: number): never {
+  console.log(JSON.stringify({ checkedAt: new Date().toISOString(), stage, ...payload }, null, 2));
+  process.exit(code);
+}
 
 const baseQ = "(And.Hidden.N._.CarType.A.)";
 const base = await request(baseQ);
 const baseActions = actionObjects(base.json);
 const hyundai = findAction(baseActions, /(?:^|\s)(?:현대|hyundai)(?:\s|$)/i);
-if (!hyundai) {
-  console.log(JSON.stringify({
-    checkedAt: new Date().toISOString(),
-    stage: "manufacturer_not_found",
-    baseCount: Number(base.json?.Count || 0),
-    actionCount: baseActions.length,
-    manufacturerCandidates: baseActions.filter((row) => /Manufacturer/i.test(String(row?.Expression || row?.path || ""))).slice(0, 80).map(summarizeAction),
-  }, null, 2));
-  process.exit(2);
-}
+if (!hyundai) fail("manufacturer_not_found", { baseCount: Number(base.json?.Count || 0) }, 2);
 
 const hyundaiResult = await request(hyundai.Action);
 const hyundaiActions = actionObjects(hyundaiResult.json);
-const casper = findAction(hyundaiActions, /(?:캐스퍼|casper)/i);
-if (!casper) {
-  console.log(JSON.stringify({
-    checkedAt: new Date().toISOString(),
-    stage: "casper_not_found",
-    baseCount: Number(base.json?.Count || 0),
-    hyundai: summarizeAction(hyundai),
-    hyundaiCount: Number(hyundaiResult.json?.Count || 0),
-    actionCount: hyundaiActions.length,
-    modelCandidates: hyundaiActions.filter((row) => /Model/i.test(String(row?.Expression || row?.path || ""))).slice(0, 160).map(summarizeAction),
-  }, null, 2));
-  process.exit(3);
+const domestic = findExpression(hyundaiActions, "ModelCarType.A.");
+if (!domestic) fail("domestic_filter_not_found", {
+  hyundai: summarizeAction(hyundai),
+  hyundaiCount: Number(hyundaiResult.json?.Count || 0),
+  candidates: hyundaiActions.filter((row) => /ModelCarType/i.test(String(row?.Expression || ""))).map(summarizeAction),
+}, 3);
+
+const domesticResult = await request(domestic.Action);
+const domesticActions = actionObjects(domesticResult.json);
+let casper = findAction(domesticActions, /(?:캐스퍼|casper)/i);
+let casperParent: any = null;
+
+// Some Encar hierarchies expose a model group first and the exact model only
+// after applying that source-provided action. Never manufacture the q syntax.
+if (casper && /ModelGroup/i.test(String(casper?.Expression || casper?.path || "")) && !/^Model\./i.test(String(casper?.Expression || ""))) {
+  casperParent = casper;
+  const parentResult = await request(casperParent.Action);
+  const parentActions = actionObjects(parentResult.json);
+  const exact = findAction(parentActions, /(?:캐스퍼|casper)/i);
+  if (exact) casper = exact;
 }
+
+if (!casper) fail("casper_not_found", {
+  hyundai: summarizeAction(hyundai),
+  domestic: summarizeAction(domestic),
+  domesticCount: Number(domesticResult.json?.Count || 0),
+  modelGroupCandidates: domesticActions
+    .filter((row) => /ModelGroup|Model\./i.test(String(row?.Expression || row?.path || "")))
+    .slice(0, 220)
+    .map(summarizeAction),
+}, 4);
 
 const casperResult = await request(casper.Action);
 const casperActions = actionObjects(casperResult.json);
@@ -115,8 +124,18 @@ for (const row of casperActions) {
   const existing = yearsByYear.get(year);
   if (!existing || Number(row?.Count || 0) > Number(existing?.Count || 0)) yearsByYear.set(year, row);
 }
+if (!yearsByYear.size) fail("formyear_not_found", {
+  hyundai: summarizeAction(hyundai),
+  domestic: summarizeAction(domestic),
+  casperParent: summarizeAction(casperParent),
+  casper: summarizeAction(casper),
+  casperCount: Number(casperResult.json?.Count || 0),
+  formYearCandidates: casperActions.filter((row) => /FormYear/i.test(String(row?.Expression || row?.path || ""))).slice(0, 100).map(summarizeAction),
+}, 5);
 
-const allowedYears = [...yearsByYear.keys()].filter((year) => year >= 2020 && year <= new Date().getFullYear() + 1).sort((a, b) => a - b);
+const allowedYears = [...yearsByYear.keys()]
+  .filter((year) => year >= 2020 && year <= new Date().getFullYear() + 1)
+  .sort((a, b) => a - b);
 const exactYearCounts: any[] = [];
 for (const year of allowedYears) {
   const row = yearsByYear.get(year);
@@ -135,6 +154,9 @@ console.log(JSON.stringify({
   baseCount: Number(base.json?.Count || 0),
   hyundai: summarizeAction(hyundai),
   hyundaiCount: Number(hyundaiResult.json?.Count || 0),
+  domestic: summarizeAction(domestic),
+  domesticCount: Number(domesticResult.json?.Count || 0),
+  casperParent: summarizeAction(casperParent),
   casper: summarizeAction(casper),
   casperCount: Number(casperResult.json?.Count || 0),
   casperFirstRows: firstRows(casperResult.json),
