@@ -92,7 +92,6 @@ jobs:
           PY
 
       - run: npm ci
-      - run: npm run prisma:generate
       - run: npm run typecheck
       - run: npm run build
       - run: git diff --check
