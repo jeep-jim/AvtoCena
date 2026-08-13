@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { OfferFinanceCards } from "@/components/catalog/OfferFinanceCards";
 import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabilizer";
 import { money } from "@/lib/avtocena";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
@@ -56,6 +57,7 @@ export default function OfferLayout({ children }: { children: ReactNode }) {
       html body .ac-offer-page .ac-offer-spec-grid>.ac-offer-spec-tile:last-child:nth-child(odd){flex-basis:100%!important;width:100%!important;max-width:100%!important}
     ` }} />
     {children}
+    <OfferFinanceCards />
     <OfferSpecGridStabilizer />
   </>;
 }
