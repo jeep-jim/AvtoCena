@@ -14,7 +14,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
@@ -26,11 +26,22 @@ jobs:
     steps:
       - name: Confirm AWS CLI
         run: aws --version
-      - name: Read bucket versioning and current-generation prefixes
+      - name: Read bucket versioning and generation versions
         run: |
           set -euo pipefail
           aws --endpoint-url "$ENDPOINT" s3api get-bucket-versioning --bucket "$BUCKET" > versioning.json
           jq . versioning.json
           root="${PREFIX:+${PREFIX}/}catalog/generations/"
           aws --endpoint-url "$ENDPOINT" s3api list-object-versions --bucket "$BUCKET" --prefix "$root" --max-items 2000 > versions-sample.json
-          jq '{versions:(.Versions//[]|length),deleteMarkers:(.DeleteMarkers//[]|length),isTruncated:(.IsTruncated//false),versionBytes:(.Versions//[]|map(.Size//0)|add//0),latestVersionSamples:(.Versions//[]|sort_by(.LastModified)|reverse|.[0:10]|map({Key,VersionId,IsLatest,Size,LastModified})),deleteMarkerSamples:(.DeleteMarkers//[]|sort_by(.LastModified)|reverse|.[0:10]|map({Key,VersionId,IsLatest,LastModified}))}' versions-sample.json
+          jq '{versions:(.Versions//[]|length),deleteMarkers:(.DeleteMarkers//[]|length),isTruncated:(.IsTruncated//false),versionBytes:(.Versions//[]|map(.Size//0)|add//0),versionIds:(.Versions//[]|map(.VersionId)|unique),deleteMarkerSamples:(.DeleteMarkers//[]|.[0:3]|map({VersionId,IsLatest,LastModified}))}' versions-sample.json
+      - name: Sum current object bytes without printing object keys
+        run: |
+          set -euo pipefail
+          root="${PREFIX:+${PREFIX}/}"
+          aws --endpoint-url "$ENDPOINT" s3api list-objects-v2 --bucket "$BUCKET" --prefix "$root" --query '[length(Contents), sum(Contents[].Size)]' --output json > current-size.json
+          jq '{objectCount:.[0],bytes:.[1],gib:((.[1]/1073741824)*100|round/100)}' current-size.json
+          for p in catalog images; do
+            target="${root}${p}/"
+            aws --endpoint-url "$ENDPOINT" s3api list-objects-v2 --bucket "$BUCKET" --prefix "$target" --query '[length(Contents), sum(Contents[].Size)]' --output json > "${p}-size.json"
+            jq --arg prefix "$p" '{prefix:$prefix,objectCount:.[0],bytes:.[1],gib:((.[1]/1073741824)*100|round/100)}' "${p}-size.json"
+          done
