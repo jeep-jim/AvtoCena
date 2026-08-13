@@ -224,7 +224,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         <div><h1 className="max-w-5xl text-[42px] font-black leading-[.93] tracking-[-0.055em] sm:text-[64px] lg:text-[78px] xl:text-[90px]"><span>Цена на авто под заказ</span> <CitySelector value={city} onChange={setCity} /></h1><p className="mt-5 hidden text-lg font-medium text-white/75 lg:block lg:text-xl">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><div className="mt-7 hidden grid-cols-1 gap-4 lg:grid">{benefits.map((item) => <div key={item.title} className="flex items-center gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-500/10 text-red-400"><BenefitIcon type={item.icon} /></div><div><div className="font-black">{item.title}</div><div className="mt-1 text-sm text-white/45">{item.text}</div></div></div>)}</div></div>
         <div id="form" className="ac-filter-panel flex min-h-[416px] flex-col rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px]">
           <div className="mb-4 flex items-center justify-between gap-3"><BudgetLabel onInfo={() => setBudgetInfoOpen(true)} /><span className="flex items-center gap-2 text-[11px] font-black text-white/65"><span className="ac-pulse-dot ac-pulse-dot--status"><span /></span>{count === null ? "Считаем варианты" : `Нашли ${count} вариантов`}</span></div>
-          <div className="w-full min-w-0"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
+          <div className="ac-budget-select w-full min-w-0 max-w-none"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>
           <div className="mt-5 flex flex-1 flex-col">
             <h3 className="text-lg font-black leading-tight md:text-xl">АвтоЦена — подбор автомобиля под ваш бюджет</h3>
             <p className="mt-4 text-sm font-medium leading-6 text-white/75 md:text-base md:leading-6">Сервис помогает быстро понять, какой автомобиль можно привезти под ключ. Задайте параметры, система покажет варианты и актуальный расчёт.</p>
@@ -234,22 +234,21 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         </div>
       </section>
       <BuyerGallery images={buyers} />
-      <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
-        <section className="ac-hide-scrollbar -mr-4 flex min-h-[168px] snap-x snap-mandatory gap-3 overflow-x-auto pr-4 md:mr-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:pr-0" aria-label="Финансовые сервисы">
-          <article className="ac-executor-block relative min-h-[168px] min-w-[82%] snap-start overflow-hidden rounded-[1.6rem] p-5 md:min-w-0 lg:pr-[150px]">
-            <div className="relative z-10 flex h-full flex-col">
-              <div className="flex items-start justify-between gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#ffd21f] text-[#111827]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2.5" stroke="currentColor" strokeWidth="1.8"/><path d="M3.5 10h17M7 14h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg></div><span className="rounded-full border border-[var(--ac-border)] bg-[var(--ac-surface-2)] px-3 py-1 text-[10px] font-black uppercase tracking-[.12em] text-[var(--ac-text)]">Автокредит</span></div>
-              <div className="mt-auto pt-5 lg:max-w-[270px]"><h3 className="text-lg font-black leading-tight text-[var(--ac-text)] md:text-xl">Кредитный калькулятор</h3><p className="mt-2 max-w-[330px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p></div>
+      <div className="mt-4 hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
+        <section className="grid min-h-[168px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
+          <article className="ac-executor-block relative min-h-[168px] overflow-hidden rounded-[1.6rem] p-6 pr-[160px]">
+            <div className="relative z-10 flex h-full min-h-[120px] flex-col justify-center">
+              <h3 className="max-w-[290px] text-xl font-black leading-tight text-[var(--ac-text)]">Кредитный калькулятор</h3>
+              <p className="mt-2 max-w-[300px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>
             </div>
-            <img src="/avatars/manager-green.webp" alt="" className="pointer-events-none absolute bottom-0 right-2 hidden h-[156px] w-[138px] object-contain lg:block xl:h-[166px] xl:w-[148px]" aria-hidden="true" />
+            <img src="/avatars/manager-green.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[162px] w-[145px] object-contain xl:h-[170px] xl:w-[152px]" aria-hidden="true" />
           </article>
-          <article className="ac-executor-block relative min-h-[168px] min-w-[82%] snap-start overflow-hidden rounded-[1.6rem] p-5 md:min-w-0 lg:pr-[150px]">
-            <div className="absolute inset-y-5 left-0 w-[3px] rounded-r-full bg-[#ffd21f]" aria-hidden="true" />
-            <div className="relative z-10 flex h-full flex-col">
-              <div className="flex items-start justify-between gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#ffd21f] text-[#111827]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.5 19 6v5.3c0 4.2-2.8 7.5-7 9.2-4.2-1.7-7-5-7-9.2V6l7-2.5Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></div><span className="rounded-full border border-[#d6ad00] bg-[#ffd21f] px-3 py-1 text-[10px] font-black uppercase tracking-[.12em] text-[#111827]">ОСАГО</span></div>
-              <div className="mt-auto pt-5 lg:max-w-[270px]"><h3 className="text-lg font-black leading-tight text-[var(--ac-text)] md:text-xl">Страховой полис ОСАГО</h3><p className="mt-2 max-w-[330px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p></div>
+          <article className="ac-executor-block relative min-h-[168px] overflow-hidden rounded-[1.6rem] p-6 pr-[160px]">
+            <div className="relative z-10 flex h-full min-h-[120px] flex-col justify-center">
+              <h3 className="max-w-[290px] text-xl font-black leading-tight text-[var(--ac-text)]">Страховой полис ОСАГО</h3>
+              <p className="mt-2 max-w-[300px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
             </div>
-            <img src="/avatars/manager-yellow.webp" alt="" className="pointer-events-none absolute bottom-0 right-2 hidden h-[156px] w-[138px] object-contain lg:block xl:h-[166px] xl:w-[148px]" aria-hidden="true" />
+            <img src="/avatars/manager-yellow.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[162px] w-[145px] object-contain xl:h-[170px] xl:w-[152px]" aria-hidden="true" />
           </article>
         </section>
         <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
@@ -261,6 +260,6 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
       </section>
     </div>
     {budgetInfoOpen ? <div className="fixed inset-0 z-[15020] flex items-end justify-center bg-black/65 backdrop-blur-md lg:hidden" onClick={() => setBudgetInfoOpen(false)}><section className="w-full rounded-t-[28px] bg-[var(--ac-surface)] p-5 pb-[calc(24px+env(safe-area-inset-bottom))] text-[var(--ac-text)]" onClick={(event) => event.stopPropagation()}><div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--ac-muted)]/35" /><div className="flex items-start justify-between gap-4"><div><div className="text-xs font-black uppercase tracking-[.16em] text-red-500">Бюджет</div><h2 className="mt-1 text-2xl font-black">Как работает подбор?</h2></div><button type="button" onClick={() => setBudgetInfoOpen(false)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-2xl">×</button></div><p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" /></section></div> : null}
-    <style dangerouslySetInnerHTML={{ __html: `@media(max-width:1023px){.ac-home-filter-drawer{padding:20px!important}.ac-home-filter-drawer__header{margin:0 0 26px!important}.ac-home-filter-drawer__fields{display:flex!important;flex-direction:column!important;gap:14px!important}.ac-home-filter-drawer__actions{margin-top:20px!important}}@media(max-width:767px){.ac-home-page .ac-catalog-card,.ac-home-page .ac-catalog-card *,.ac-home-page .ac-home-market-rail,.ac-home-page .ac-home-market-rail>*{box-shadow:none!important}}` }} />
+    <style dangerouslySetInnerHTML={{ __html: `@media(max-width:1023px){.ac-home-page .ac-budget-select,.ac-home-page .ac-budget-select>div,.ac-home-page .ac-budget-select .ac-filter-control{width:100%!important;max-width:none!important;min-width:0!important}.ac-home-filter-drawer{padding:20px!important}.ac-home-filter-drawer__header{margin:0 0 26px!important}.ac-home-filter-drawer__fields{display:flex!important;flex-direction:column!important;gap:14px!important}.ac-home-filter-drawer__actions{margin-top:20px!important}}@media(max-width:767px){.ac-home-page .ac-catalog-card,.ac-home-page .ac-catalog-card *,.ac-home-page .ac-home-market-rail,.ac-home-page .ac-home-market-rail>*{box-shadow:none!important}}` }} />
   </main>;
 }
