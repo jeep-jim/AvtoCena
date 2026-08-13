@@ -1,4 +1,4 @@
-name: Restore exact finance mascot assets once
+name: Restore full resolution finance mascot assets once
 
 on:
   push:
@@ -24,27 +24,26 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Rebuild exact supplied PNG assets
+      - name: Install supplied full-resolution PNG assets without lossy conversion
         shell: bash
         run: |
           set -euo pipefail
-          cat .mascot-upload/credit_*.txt | tr -d '\n\r ' | base64 -d > apps/web/public/home/credit-mascot.png
-          cat .mascot-upload/osago_*.txt | tr -d '\n\r ' | base64 -d > apps/web/public/home/osago-mascot.png
-          echo '3393c48834755d30b41e05ee890d5d6f24a5affa4d59aac6129020938ba1f28b  apps/web/public/home/credit-mascot.png' | sha256sum -c -
-          echo '7e9e9f4a63e4b34c96f3fe8db776bdf418b22e7e165839513204078f6f462bc7  apps/web/public/home/osago-mascot.png' | sha256sum -c -
+          mkdir -p apps/web/public/home
+          curl -fsSL --retry 3 --retry-delay 2 'https://filebin.net/avtocena-assets-20260813-9e7b4c2a1d/credit-mascot.png' -o apps/web/public/home/credit-mascot.png
+          curl -fsSL --retry 3 --retry-delay 2 'https://filebin.net/avtocena-assets-20260813-9e7b4c2a1d/osago-mascot.png' -o apps/web/public/home/osago-mascot.png
+          echo '7d7a8da384a7d8f8374f46030374b91e841ca621ff8a7c1c2ce6b82be7e58772  apps/web/public/home/credit-mascot.png' | sha256sum -c -
+          echo '1f6042dad23b094ab9ba0348ce4cc86ba5b4cd3c8d6c723d77909563dc527666  apps/web/public/home/osago-mascot.png' | sha256sum -c -
+          file apps/web/public/home/credit-mascot.png apps/web/public/home/osago-mascot.png
           rm -f apps/web/public/home/credit-mascot.webp apps/web/public/home/osago-mascot.webp
 
-      - name: Keep both finance cards clipped and use PNG originals
+      - name: Fix finance card clipping and asset references
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
 
-          files = [
-              Path('apps/web/components/home/HomePageClient.tsx'),
-              Path('apps/web/components/catalog/OfferFinanceCards.tsx'),
-          ]
-          for path in files:
+          for name in ['apps/web/components/home/HomePageClient.tsx', 'apps/web/components/catalog/OfferFinanceCards.tsx']:
+              path = Path(name)
               text = path.read_text()
               text = text.replace(
                   'ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6',
@@ -52,25 +51,28 @@ jobs:
               )
               text = text.replace('/home/credit-mascot.webp', '/home/credit-mascot.png')
               text = text.replace('/home/osago-mascot.webp', '/home/osago-mascot.png')
-              text = text.replace('absolute bottom-[-2px] right-3', 'absolute bottom-0 right-3')
-              text = text.replace('absolute bottom-[-3px] right-1', 'absolute bottom-0 right-1')
-              text = text.replace('absolute bottom-[-2px] right-4', 'absolute bottom-0 right-4')
-              text = text.replace('absolute bottom-[-3px] right-2', 'absolute bottom-0 right-2')
+              text = text.replace('bottom-[-2px]', 'bottom-0')
+              text = text.replace('bottom-[-3px]', 'bottom-0')
               path.write_text(text)
 
           home = Path('apps/web/components/home/HomePageClient.tsx').read_text()
-          if '<div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget}' not in home:
-              raise SystemExit('desktop-only top budget selector guard missing')
-          if 'emptyLabel="Бюджет"' not in home:
-              raise SystemExit('mobile bottom budget label missing')
-          for token in ['/home/credit-mascot.png', '/home/osago-mascot.png', 'ac-finance-card']:
+          required_home = [
+              'hidden w-full min-w-0 max-w-none lg:block',
+              'emptyLabel="Бюджет"',
+              '/home/credit-mascot.png',
+              '/home/osago-mascot.png',
+              'ac-finance-card',
+              'overflow-hidden',
+              'bottom-0',
+          ]
+          for token in required_home:
               if token not in home:
-                  raise SystemExit(f'homepage missing {token}')
+                  raise SystemExit(f'homepage missing required token: {token}')
 
           offer = Path('apps/web/components/catalog/OfferFinanceCards.tsx').read_text()
-          for token in ['/home/credit-mascot.png', '/home/osago-mascot.png', 'overflow-hidden', 'bottom-0']:
+          for token in ['/home/credit-mascot.png', '/home/osago-mascot.png', 'ac-finance-card', 'overflow-hidden', 'bottom-0']:
               if token not in offer:
-                  raise SystemExit(f'offer finance cards missing {token}')
+                  raise SystemExit(f'offer finance cards missing required token: {token}')
           PY
 
       - run: npm ci
@@ -79,7 +81,7 @@ jobs:
       - run: npm run build
       - run: git diff --check
 
-      - name: Commit verified UI-only result
+      - name: Commit verified UI-only result and restore workflows
         shell: bash
         run: |
           set -euo pipefail
@@ -90,5 +92,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add apps/web/components/home/HomePageClient.tsx apps/web/components/catalog/OfferFinanceCards.tsx apps/web/public/home/credit-mascot.png apps/web/public/home/osago-mascot.png .github/workflows/ui-home-finance-pixel-match-20260813.yml .github/workflows/apply-buyer-gallery-fullres-once.yml
           git add -u apps/web/public/home .mascot-upload || true
-          git commit -m 'Use original finance mascots and clip cards'
+          git commit -m 'Use full resolution finance mascots and clip cards'
           git push origin HEAD:fix/finance-originals-offer-mobile-20260813
