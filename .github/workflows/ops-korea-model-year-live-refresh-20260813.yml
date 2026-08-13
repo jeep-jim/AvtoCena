@@ -1,0 +1,303 @@
+name: Ops · Korea model-year live refresh 20260813
+run-name: Korea model-year live refresh · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/korea-model-year-live-refresh-20260813
+    paths:
+      - ".github/workflows/ops-korea-model-year-live-refresh-20260813.yml"
+
+permissions:
+  contents: read
+
+# The whole run waits behind any current catalog writer (including AutoScout).
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+  CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+  RECOVERY_REQUEST_TIMEOUT_MS: "35000"
+  RECOVERY_RETRY_ATTEMPTS: "4"
+  RECOVERY_PREPARE_CONCURRENCY: "6"
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate current quota paths
+        run: |
+          set -euo pipefail
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --check scripts/catalog-live-recovery-merge-shards.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
+          node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
+      - name: Snapshot and audit all seven markets before any write
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-before-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Prove preserved markets can survive an exact republish
+        shell: bash
+        run: |
+          npx tsx --eval '
+            import { readMarketOffers } from "./apps/web/lib/catalog/storage.ts";
+            import { hasCredibleOfferContent, isCatalogYearAllowed } from "./apps/web/lib/catalog/offer-quality.ts";
+            const markets = ["china","japan","uae","europe","georgia","kyrgyzstan"];
+            const report:any = {};
+            for (const market of markets) {
+              const rows = await readMarketOffers(market);
+              const invalid = rows.filter((offer:any) => !offer?.id || !isCatalogYearAllowed(Number(offer?.year||0), market) || !hasCredibleOfferContent({...offer,status:"active"}));
+              report[market] = {count:rows.length, invalid:invalid.length};
+              if (invalid.length) throw new Error(`preserved_market_not_republishable:${market}:${invalid.length}`);
+            }
+            console.log(JSON.stringify(report,null,2));
+          '
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-model-year-preflight
+          path: korea-before-all7.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  collect:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        source: [encar_direct, kcar_korea_open, kbchachacha_korea_open]
+    env:
+      RECOVERY_MARKET: korea
+      RECOVERY_SOURCE_IDS: ${{ matrix.source }}
+      RECOVERY_OUTPUT: catalog-shard-korea-${{ matrix.source }}.json
+      RECOVERY_TARGET: "5000"
+      RECOVERY_MAX_PAGES: "300"
+      RECOVERY_TIME_LIMIT_MS: "5100000"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect one source shard without catalog writes
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-model-year-${{ matrix.source }}
+          path: catalog-shard-korea-${{ matrix.source }}.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  merge_and_gate:
+    needs: [preflight, collect]
+    if: always() && needs.preflight.result == 'success' && needs.collect.result != 'cancelled'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: korea-model-year-*
+          path: korea-shards
+      - name: Merge successful Korea shards
+        env:
+          RECOVERY_MERGE_MARKET: korea
+          RECOVERY_MERGE_INPUT_DIR: korea-shards
+          RECOVERY_MERGE_OUTPUT: catalog-rebuild-korea.json
+        run: node scripts/catalog-live-recovery-merge-shards.mjs
+      - name: Require real Encar Casper 2022 before publication is even possible
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const payload = JSON.parse(fs.readFileSync('catalog-rebuild-korea.json','utf8'));
+          const offers = Array.isArray(payload.offers) ? payload.offers : [];
+          const isHyundai = (value) => /hyundai|현대|хенд[эе]/i.test(String(value || ''));
+          const isCasper = (value) => /casper|캐스퍼|каспер/i.test(String(value || ''));
+          const casper2022 = offers.filter((o) => o.sourceId === 'encar_direct' && Number(o.year) === 2022 && isHyundai(o.make) && isCasper(o.model));
+          const byYear = {};
+          for (const o of offers.filter((o) => isHyundai(o.make) && isCasper(o.model))) byYear[o.year] = (byYear[o.year] || 0) + 1;
+          const badYears = offers.filter((o) => Number(o.year) < 2020);
+          const foreign = offers.filter((o) => o.market !== 'korea');
+          const report = {merged:offers.length, casper2022:casper2022.length, casperByYear:byYear, badYears:badYears.length, foreign:foreign.length, sample:casper2022.slice(0,5).map((o)=>({id:o.id,sourceOfferId:o.sourceOfferId,make:o.make,model:o.model,year:o.year,images:o.images?.length||0}))};
+          fs.writeFileSync('korea-casper-merged-gate.json', JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report,null,2));
+          if (!offers.length || badYears.length || foreign.length || casper2022.length < 1) process.exit(1);
+          NODE
+      - name: Dry-run the exact cumulative publisher and global model-year cap
+        env:
+          RECOVERY_BATCH_MARKETS: korea
+          RECOVERY_BATCH_INPUT_DIR: .
+          RECOVERY_BATCH_REPORT: korea-publish-dry-run.json
+          RECOVERY_BATCH_DRY_RUN: "1"
+          RECOVERY_PUBLISH_MAX: "30000"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+      - name: Require dry-run to keep every other market and a valid Korea result
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const before=JSON.parse(fs.readFileSync('korea-before-all7.json','utf8'));
+          const dry=JSON.parse(fs.readFileSync('korea-publish-dry-run.json','utf8'));
+          const k=dry.byMarket?.korea || {};
+          if (!dry.dryRun || Number(k.count||0) <= 0 || Number(k.maxOffersPerModelYear||0) !== 20) throw new Error('korea_dry_run_invalid');
+          for (const market of ['china','japan','uae','europe','georgia','kyrgyzstan']) {
+            const expected=Number(before.markets?.[market]?.count||0);
+            const preserved=Number(dry.preservedByMarket?.[market]||0);
+            if (preserved !== expected) throw new Error(`dry_run_would_change_${market}:${expected}->${preserved}`);
+          }
+          console.log(JSON.stringify({korea:k,preserved:dry.preservedByMarket},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-model-year-merged
+          path: |
+            catalog-rebuild-korea.json
+            korea-casper-merged-gate.json
+            korea-publish-dry-run.json
+            korea-before-all7.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  publish:
+    needs: [preflight, merge_and_gate]
+    if: needs.preflight.result == 'success' && needs.merge_and_gate.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: korea-model-year-merged
+          path: korea-input
+      - name: Re-check no second writer appeared
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-write-edge-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Make targeted publisher preserve the other six current public markets exactly
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/catalog-live-recovery-publish.mjs')
+          s=p.read_text()
+          old='''  const preserved = rows\n    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))\n    .map(normalizeVisible)\n    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && isCatalogOfferBusinessLiquid(offer))\n    .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);'''
+          new='''  const preserved = rows\n    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))\n    .map(normalizeVisible)\n    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0)\n    .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);'''
+          if s.count(old) != 1:
+              raise SystemExit('preservation block not found exactly once')
+          p.write_text(s.replace(old,new,1))
+          PY
+          node --check scripts/catalog-live-recovery-publish.mjs
+      - name: Publish Korea as one atomic seven-market generation
+        env:
+          RECOVERY_PUBLISH_MARKET: korea
+          RECOVERY_PUBLISH_INPUT: korea-input/catalog-rebuild-korea.json
+          RECOVERY_PUBLISH_REPORT: korea-model-year-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit all seven markets after write
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-after-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Assert other six markets are byte-count preserved and Casper 2022 is live
+        shell: bash
+        run: |
+          cp korea-input/korea-before-all7.json korea-before-all7.json
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const before=JSON.parse(fs.readFileSync('korea-before-all7.json','utf8'));
+          const after=JSON.parse(fs.readFileSync('korea-after-all7.json','utf8'));
+          for (const market of ['china','japan','uae','europe','georgia','kyrgyzstan']) {
+            const a=Number(before.markets?.[market]?.count||0), b=Number(after.markets?.[market]?.count||0);
+            if (a!==b) throw new Error(`preservation_failed:${market}:${a}->${b}`);
+          }
+          if (Number(after.markets?.korea?.maxPerExactModelYear||0)>20) throw new Error(`korea_model_year_cap:${after.markets.korea.maxPerExactModelYear}`);
+          console.log(JSON.stringify({before:Object.fromEntries(Object.entries(before.markets||{}).map(([k,v])=>[k,v.count])),after:Object.fromEntries(Object.entries(after.markets||{}).map(([k,v])=>[k,v.count])),korea:after.markets?.korea},null,2));
+          NODE
+          npx tsx --eval '
+            import fs from "node:fs";
+            import { readMarketOffers } from "./apps/web/lib/catalog/storage.ts";
+            const rows = await readMarketOffers("korea");
+            const hyundai=(v:any)=>/hyundai|현대|хенд[эе]/i.test(String(v||""));
+            const casper=(v:any)=>/casper|캐스퍼|каспер/i.test(String(v||""));
+            const matches=rows.filter((o:any)=>Number(o.year)===2022 && hyundai(o.make) && casper(o.model));
+            const all=rows.filter((o:any)=>hyundai(o.make)&&casper(o.model));
+            const byYear:any={}; for(const o of all) byYear[o.year]=(byYear[o.year]||0)+1;
+            const report={count:matches.length,byYear,sample:matches.slice(0,5).map((o:any)=>({id:o.id,make:o.make,model:o.model,year:o.year,sourceId:o.sourceId,sourceOfferId:o.sourceOfferId,images:o.images?.length||0}))};
+            fs.writeFileSync("korea-casper-live.json",JSON.stringify(report,null,2));
+            console.log(JSON.stringify(report,null,2));
+            if(matches.length<1||matches.length>20) process.exit(1);
+          '
+      - name: Verify a live Casper 2022 offer renders on avtocena.com
+        shell: bash
+        run: |
+          sample_id="$(jq -r '.sample[0].id // empty' korea-casper-live.json)"
+          test -n "$sample_id"
+          ok=0
+          for attempt in $(seq 1 12); do
+            if curl --retry 2 --retry-delay 2 --retry-all-errors --max-time 30 -fsS "https://avtocena.com/cars/offer/$sample_id" -o korea-casper-production.html; then
+              if grep -q '2022' korea-casper-production.html; then ok=1; break; fi
+            fi
+            sleep 5
+          done
+          test "$ok" = "1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-model-year-live-result
+          path: |
+            korea-input/catalog-rebuild-korea.json
+            korea-input/korea-casper-merged-gate.json
+            korea-input/korea-publish-dry-run.json
+            korea-model-year-publish-report.json
+            korea-before-all7.json
+            korea-write-edge-all7.json
+            korea-after-all7.json
+            korea-casper-live.json
+          if-no-files-found: warn
+          retention-days: 3
