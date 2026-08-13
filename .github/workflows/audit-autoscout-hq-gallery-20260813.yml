@@ -1,0 +1,130 @@
+name: Audit AutoScout exact gallery renditions read-only
+run-name: AutoScout HQ gallery audit · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/autoscout-hq-gallery-20260813
+    paths:
+      - .github/workflows/audit-autoscout-hq-gallery-20260813.yml
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Inspect live AutoScout listing pages for source-declared large renditions
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const offers = await storage.readMarketOffers('europe');
+          const autoscout = offers.filter((offer) => String(offer.sourceId || '') === 'autoscout_europe_open');
+          const thumbnailRows = autoscout.filter((offer) => (offer.images || []).some((image) => /\/250x188\.webp(?:[?#]|$)/i.test(String(image.url || ''))));
+          const samples = (thumbnailRows.length ? thumbnailRows : autoscout).slice(0, 5);
+          const headers = {
+            accept: 'text/html,application/xhtml+xml,application/json;q=0.9,image/avif,image/webp,*/*;q=0.8',
+            'accept-language': 'en-GB,en;q=0.9,de;q=0.7',
+            'cache-control': 'no-cache',
+            pragma: 'no-cache',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
+          };
+          const clean = (value) => String(value || '').replace(/\\\//g, '/').trim();
+          const isListingImage = (value) => /^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(clean(value));
+          const resolution = (url) => clean(url).match(/\/(\d{2,5}x\d{2,5})\.(?:webp|jpe?g|png|avif)(?:[?#]|$)/i)?.[1] || '';
+          function collectStrings(value, path = '$', out = [], depth = 0) {
+            if (value == null || depth > 12) return out;
+            if (typeof value === 'string') {
+              for (const match of value.matchAll(/https?:\\?\/\\?\/[^\"'\\\s<>]+/g)) {
+                const url = clean(match[0]);
+                if (isListingImage(url)) out.push({ path, url, resolution: resolution(url) });
+              }
+              return out;
+            }
+            if (Array.isArray(value)) {
+              value.forEach((item, index) => collectStrings(item, `${path}[${index}]`, out, depth + 1));
+              return out;
+            }
+            if (typeof value === 'object') {
+              for (const [key, item] of Object.entries(value)) collectStrings(item, `${path}.${key}`, out, depth + 1);
+            }
+            return out;
+          }
+          const unique = (rows) => [...new Map(rows.map((row) => [row.url, row])).values()];
+          const report = {
+            currentEuropeCount: offers.length,
+            currentAutoScoutCount: autoscout.length,
+            currentAutoScoutThumbnailCount: thumbnailRows.length,
+            samples: [],
+          };
+          for (const offer of samples) {
+            const sourceUrl = clean(offer.operational?.sourceUrl);
+            const currentUrls = (offer.images || []).map((image) => clean(image.url)).filter(Boolean);
+            const currentIdentities = currentUrls.map((url) => url.match(/listing-images\/([^/?#]+)/i)?.[1]).filter(Boolean);
+            const response = await fetch(sourceUrl, { headers, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+            const markup = await response.text();
+            let next = null;
+            const nextMatch = markup.match(/<script[^>]+id=[\"']__NEXT_DATA__[\"'][^>]*>([\s\S]*?)<\/script>/i);
+            if (nextMatch?.[1]) { try { next = JSON.parse(nextMatch[1]); } catch {} }
+            const htmlUrls = [];
+            for (const match of markup.matchAll(/(?:src|data-src|srcset|data-srcset)=[\"']([^\"']+)[\"']/gi)) {
+              for (const part of match[1].split(',')) {
+                const url = clean(part.trim().split(/\s+/)[0]);
+                if (isListingImage(url)) htmlUrls.push({ path: `html:${match[0].slice(0, 24)}`, url, resolution: resolution(url) });
+              }
+            }
+            for (const match of markup.matchAll(/https?:\\?\/\\?\/[^\"'\\\s<>]+/g)) {
+              const url = clean(match[0]);
+              if (isListingImage(url)) htmlUrls.push({ path: 'html:text', url, resolution: resolution(url) });
+            }
+            const nextUrls = next ? collectStrings(next) : [];
+            const all = unique([...nextUrls, ...htmlUrls]);
+            const sameListing = all.filter((row) => currentIdentities.some((identity) => row.url.includes(`/listing-images/${identity}`)));
+            const widths = sameListing.map((row) => Number(row.resolution.split('x')[0] || 0)).filter(Boolean);
+            report.samples.push({
+              id: offer.sourceOfferId,
+              sourceUrl,
+              status: response.status,
+              bytes: markup.length,
+              currentUrls: currentUrls.slice(0, 5),
+              currentResolutions: [...new Set(currentUrls.map(resolution).filter(Boolean))],
+              nextDataFound: Boolean(next),
+              listingImageUrlsFound: all.length,
+              sameListingUrlsFound: sameListing.length,
+              maxDeclaredWidth: widths.length ? Math.max(...widths) : 0,
+              sameListingRenditions: sameListing.sort((a,b) => Number(b.resolution.split('x')[0]||0)-Number(a.resolution.split('x')[0]||0)).slice(0, 40),
+            });
+          }
+          fs.writeFileSync('autoscout-hq-gallery-audit.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (!samples.length) throw new Error('no_live_autoscout_samples');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autoscout-hq-gallery-audit
+          path: autoscout-hq-gallery-audit.json
+          if-no-files-found: warn
+          retention-days: 3
