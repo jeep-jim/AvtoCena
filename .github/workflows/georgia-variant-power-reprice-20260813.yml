@@ -1,0 +1,227 @@
+name: Reprice Georgia with exact variant power safely once
+run-name: Georgia variant-power reprice · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/georgia-variant-power-reprice-20260813
+    paths:
+      - .github/workflows/georgia-variant-power-reprice-20260813.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  reprice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Snapshot all seven markets before any write
+        env:
+          CATALOG_AUDIT_OUTPUT: georgia-variant-before-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Build same-card Georgia input with unambiguous variant power only
+        run: |
+          mkdir -p recovery-input
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const knowledgeModule = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const knowledge = knowledgeModule.default || knowledgeModule;
+          const pricingModule = await import('./apps/web/lib/catalog/customs-pricing.ts');
+          const pricing = pricingModule.default || pricingModule;
+
+          const rows = await storage.readMarketOffers('georgia');
+          const canonical = new Set(['myauto_georgia_list','autopapa_georgia_open']);
+          if (rows.length < 2000) throw new Error(`georgia_current_below_2000:${rows.length}`);
+          for (const offer of rows) {
+            if (!canonical.has(String(offer.sourceId || ''))) throw new Error(`noncanonical:${offer.sourceId}`);
+            if (Number(offer.year || 0) < 2020) throw new Error(`old_offer:${offer.sourceOfferId}:${offer.year}`);
+            if (!Array.isArray(offer.images) || offer.images.length < 5) throw new Error(`gallery_below_five:${offer.sourceOfferId}`);
+          }
+
+          const beforeCalculated = rows.filter((offer) => ['ready','estimated','auction_start'].includes(String(offer.calculationStatus || '')) && Number(offer.totalRub || 0) > 0).length;
+          const beforePreliminary = rows.filter(pricing.isPreliminaryPowerPendingCalculation).length;
+          const pendingCombustion = rows.filter((offer) => pricing.isPreliminaryPowerPendingCalculation(offer) && String(offer.powertrainKind || '') === 'combustion');
+          const candidates = [];
+          for (const offer of pendingCombustion) {
+            const match = await knowledge.findVehicleModel(offer);
+            if (!match) continue;
+            const variant = await knowledge.findVehicleVariant(match.model, offer);
+            if (!variant || !(Number(variant.powerHp || 0) > 0)) continue;
+            candidates.push({ offer, match, variant });
+          }
+
+          const replacements = new Map();
+          let cursor = 0;
+          const workers = Array.from({ length: Math.min(8, Math.max(1, candidates.length)) }, async () => {
+            while (true) {
+              const index = cursor++;
+              const candidate = candidates[index];
+              if (!candidate) return;
+              const enriched = await knowledge.enrichOfferWithVehicleKnowledge(structuredClone(candidate.offer));
+              if (!(Number(enriched.powerHp || 0) > 0) || !String(enriched.powerDataSource || '').startsWith('vehicle-knowledge:')) continue;
+              const recalculated = await pricing.calculateOfferWithPreliminaryPowerPricing(enriched);
+              if (!(Number(recalculated.totalRub || 0) > 0)) continue;
+              if (pricing.isPreliminaryPowerPendingCalculation(recalculated)) continue;
+              if (recalculated.calculationSnapshot?.priceIncludesUtilizationFee !== true) continue;
+              replacements.set(candidate.offer.id, recalculated);
+            }
+          });
+          await Promise.all(workers);
+
+          const next = rows.map((offer) => replacements.get(offer.id) || offer);
+          const afterCalculated = next.filter((offer) => ['ready','estimated','auction_start'].includes(String(offer.calculationStatus || '')) && Number(offer.totalRub || 0) > 0).length;
+          const afterPreliminary = next.filter(pricing.isPreliminaryPowerPendingCalculation).length;
+          const report = {
+            mode: 'same_card_variant_power_reprice', inputCount: rows.length,
+            beforeCalculated, beforePreliminary, pendingCombustion: pendingCombustion.length,
+            variantCandidates: candidates.length, converted: replacements.size,
+            afterCalculated, afterPreliminary,
+            convertedSamples: [...replacements.values()].slice(0,40).map((offer) => ({
+              id: offer.sourceOfferId, make: offer.make, model: offer.model, year: offer.year,
+              engineCc: offer.engineCc, fuel: offer.fuel, powerHp: offer.powerHp,
+              powerDataSource: offer.powerDataSource, calculationStatus: offer.calculationStatus,
+            })),
+          };
+          console.log(JSON.stringify(report, null, 2));
+          if (replacements.size < 1) throw new Error('no_variant_power_conversions');
+          if (!(afterCalculated > beforeCalculated)) throw new Error('calculated_not_improved');
+          if (!(afterPreliminary < beforePreliminary)) throw new Error('preliminary_not_reduced');
+          fs.writeFileSync('georgia-variant-reprice-input-report.json', JSON.stringify(report, null, 2));
+          fs.writeFileSync('recovery-input/catalog-rebuild-georgia.json', JSON.stringify({ market:'georgia', count:next.length, partial:false, report, offers:next }));
+          NODE
+      - name: Dry-run full-seven-market replacement and require exact preservation
+        env:
+          GEORGIA_REPLACE_DRY_RUN: "1"
+          GEORGIA_REPLACE_REPORT: georgia-variant-dry-run.json
+          GEORGIA_REPLACE_MIN_COUNT: "2000"
+          GEORGIA_REPLACE_MAX_COUNT: "5000"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+        run: |
+          set -euo pipefail
+          npx tsx scripts/catalog-replace-georgia-atomic.mjs
+          jq . georgia-variant-dry-run.json
+          jq -e --slurpfile input georgia-variant-reprice-input-report.json '
+            .dryRun == true
+            and .published == false
+            and .georgia.selectedCount == $input[0].inputCount
+            and .georgia.maxPerModel == 20
+            and .georgia.belowFiveImages == 0
+            and .projectedPublicCounts.georgia == .beforeCounts.georgia
+            and .projectedPublicCounts.korea == .beforeCounts.korea
+            and .projectedPublicCounts.china == .beforeCounts.china
+            and .projectedPublicCounts.japan == .beforeCounts.japan
+            and .projectedPublicCounts.uae == .beforeCounts.uae
+            and .projectedPublicCounts.europe == .beforeCounts.europe
+            and .projectedPublicCounts.kyrgyzstan == .beforeCounts.kyrgyzstan
+          ' georgia-variant-dry-run.json >/dev/null
+      - name: Wait until no other GitHub Action is active before live write
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?status=in_progress&per_page=100"
+          for attempt in {1..60}; do
+            curl -fsS -H "authorization: Bearer ${GH_TOKEN}" -H 'accept: application/vnd.github+json' "${api}" -o active.json
+            others="$(jq --argjson self "${GITHUB_RUN_ID}" '[.workflow_runs[] | select(.id != $self)] | length' active.json)"
+            if [ "${others}" = "0" ]; then
+              echo "No competing active Actions; live write may proceed."
+              exit 0
+            fi
+            echo "Waiting for ${others} other active Action run(s), attempt ${attempt}/60"
+            jq --argjson self "${GITHUB_RUN_ID}" -r '.workflow_runs[] | select(.id != $self) | [.id,.name,.path,.status] | @tsv' active.json
+            sleep 15
+          done
+          echo "Competing Action remained active; aborting before catalog write." >&2
+          exit 1
+      - name: Publish one full seven-market generation
+        env:
+          GEORGIA_REPLACE_REPORT: georgia-variant-publish.json
+          GEORGIA_REPLACE_MIN_COUNT: "2000"
+          GEORGIA_REPLACE_MAX_COUNT: "5000"
+          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+        run: npx tsx scripts/catalog-replace-georgia-atomic.mjs
+      - name: Audit all seven markets after write
+        env:
+          CATALOG_AUDIT_OUTPUT: georgia-variant-after-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: georgia
+          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"georgia":2000}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Assert all-market preservation and power improvement
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const before = JSON.parse(fs.readFileSync('georgia-variant-before-all7.json','utf8'));
+          const after = JSON.parse(fs.readFileSync('georgia-variant-after-all7.json','utf8'));
+          const input = JSON.parse(fs.readFileSync('georgia-variant-reprice-input-report.json','utf8'));
+          const publish = JSON.parse(fs.readFileSync('georgia-variant-publish.json','utf8'));
+          for (const market of ['korea','china','japan','uae','europe','kyrgyzstan']) {
+            const b=Number(before.markets?.[market]?.count||0), a=Number(after.markets?.[market]?.count||0);
+            if (a !== b || Number(publish.manifestCounts?.[market]||0) !== b) throw new Error(`preservation_mismatch:${market}:${b}:${a}`);
+          }
+          const gb=Number(before.markets?.georgia?.count||0), ga=Number(after.markets?.georgia?.count||0);
+          if (ga !== gb || ga !== Number(input.inputCount||0)) throw new Error(`georgia_count_changed:${gb}:${ga}:${input.inputCount}`);
+          const g=after.markets?.georgia||{};
+          if (Number(g.belowMarketMinYearCount||0)!==0) throw new Error('georgia_year');
+          if (Number(g.nonVehicleCount||0)!==0) throw new Error('georgia_nonvehicle');
+          if (Number(g.belowFiveImagesCount||0)!==0) throw new Error('georgia_photos');
+          if (Number(g.maxPerExactModel||0)>20) throw new Error('georgia_model_cap');
+          const canonical=new Set(['myauto_georgia_list','autopapa_georgia_open']);
+          if (Object.keys(g.sourceCounts||{}).some((source)=>!canonical.has(source))) throw new Error('georgia_source');
+          if (!(Number(publish.georgia?.calculatedCount||0) >= Number(input.afterCalculated||0))) throw new Error('calculated_projection_mismatch');
+          if (!(Number(publish.georgia?.preliminaryCount||0) <= Number(input.afterPreliminary||0))) throw new Error('preliminary_projection_mismatch');
+          console.log(JSON.stringify({generationId:publish.generationId,input,georgia:publish.georgia,before:before.markets,after:after.markets},null,2));
+          NODE
+      - name: Verify public home exposes the new generation count
+        run: |
+          set -euo pipefail
+          expected="$(jq -r '.manifestCounts.georgia' georgia-variant-publish.json)"
+          matched=0
+          for attempt in {1..20}; do
+            curl --connect-timeout 10 --max-time 60 -fsS -H 'cache-control: no-cache' "https://avtocena.com/api/catalog/home?verify=variant-${attempt}" -o public-home.json
+            actual="$(jq -r '.marketCounts.georgia // -1' public-home.json)"
+            if [ "${actual}" = "${expected}" ]; then matched=1; break; fi
+            sleep 5
+          done
+          test "${matched}" = "1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-variant-power-reprice-reports
+          path: |
+            georgia-variant-before-all7.json
+            georgia-variant-reprice-input-report.json
+            georgia-variant-dry-run.json
+            active.json
+            georgia-variant-publish.json
+            georgia-variant-after-all7.json
+            public-home.json
+          if-no-files-found: warn
+          retention-days: 7
