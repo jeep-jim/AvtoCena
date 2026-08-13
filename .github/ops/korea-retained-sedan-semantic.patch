@@ -1,0 +1,59 @@
+diff --git a/scripts/catalog-live-recovery-publish-batch.mjs b/scripts/catalog-live-recovery-publish-batch.mjs
+--- a/scripts/catalog-live-recovery-publish-batch.mjs
++++ b/scripts/catalog-live-recovery-publish-batch.mjs
+@@ -67,6 +67,20 @@ function withinRetention(offer) {
+   const timestamp = freshness(offer);
+   return timestamp > 0 && timestamp >= retentionCutoff;
+ }
+ 
++function koreaKnownSedanIdentity(offer) {
++  const make = String(offer?.make || "").trim();
++  const identity = [offer?.model, offer?.trim, offer?.sourceTitle].filter(Boolean).join(" ");
++  if (/^(?:genesis|제네시스)$/i.test(make)) return /\bG80\b/i.test(identity);
++  if (/^(?:hyundai|현대)$/i.test(make)) return /(?:\bGrandeur\b|그랜저|\bIoniq\s*6\b|아이오닉\s*6)/i.test(identity);
++  if (/^(?:kia|기아)$/i.test(make)) return /(?:\bK9\b|\bK900\b|\bQuoris\b|퀴리스)/i.test(identity);
++  return false;
++}
++function semanticBodyValid(offer, market) {
++  if (market !== "korea") return true;
++  if (!koreaKnownSedanIdentity(offer)) return true;
++  return !/^(?:suv|crossover|offroad)$/i.test(String(offer?.bodyType || ""));
++}
++
+ function quality(a, b) {
+   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
+   const bp = Number(b.totalRub || 0) <= preferredMaxRub ? 0 : 1;
+@@ -137,7 +151,8 @@ for (const market of markets) {
+     if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
+     if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
+     if (!offer.make || !offer.model) { reject("visible_core"); continue; }
++    if (!semanticBodyValid(offer, market)) { reject("semantic_body"); continue; }
+     if (offer.images.length < minImagesPerOffer) { reject("images"); continue; }
+     if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
+     if (!publishableCalculation(offer)) { reject("calculation"); continue; }
+@@ -153,4 +168,5 @@ for (const market of markets) {
+     if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
+     if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
+     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
++    if (!semanticBodyValid(offer, market)) { reject("retained_semantic_body"); continue; }
+     candidates.set(offer.id, offer);
+   }
+diff --git a/tests/catalog-recovery-publisher-min-images.test.ts b/tests/catalog-recovery-publisher-min-images.test.ts
+--- a/tests/catalog-recovery-publisher-min-images.test.ts
++++ b/tests/catalog-recovery-publisher-min-images.test.ts
+@@ -15,4 +15,16 @@ test("batch recovery publisher does not apply target image floor to untouched-market preservation", () => {
+   assert.match(source, /isCatalogYearAllowed\(offer\.year, other\) && offer\.images\.length > 0 && withinRetention/);
+   assert.doesNotMatch(source, /isCatalogYearAllowed\(offer\.year, other\) && offer\.images\.length >= minImagesPerOffer/);
+ });
++
++test("batch recovery publisher excludes impossible Korean sedan body types from incoming and retained rows", () => {
++  assert.match(source, /function koreaKnownSedanIdentity\(offer\)/);
++  assert.match(source, /G80/);
++  assert.match(source, /Grandeur/);
++  assert.match(source, /Ioniq/);
++  assert.match(source, /K900/);
++  assert.match(source, /Quoris/);
++  assert.match(source, /function semanticBodyValid\(offer, market\)/);
++  assert.match(source, /reject\("semantic_body"\)/);
++  assert.match(source, /reject\("retained_semantic_body"\)/);
++});
