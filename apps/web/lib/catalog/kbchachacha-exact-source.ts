@@ -80,8 +80,14 @@ function listImages(card: string, carSeq: string) {
 function splitTitle(value: unknown) {
   const source = clean(value);
   const [rawMake = "", ...rest] = source.split(/\s+/);
-  const make = canonicalCatalogBrand(rawMake);
-  const translated = clean(translateCatalogText(rest.join(" ")));
+  const makeToken = rawMake.replace(/^한국GM$/i, "쉐보레");
+  const make = canonicalCatalogBrand(clean(translateCatalogText(makeToken)) || makeToken);
+  const modelSource = rest.join(" ")
+    .replace(/더\s*뉴\s*말리부/gi, "The New Malibu")
+    .replace(/말리부/gi, "Malibu")
+    .replace(/터보/gi, "Turbo")
+    .replace(/스페셜/gi, "Special");
+  const translated = clean(translateCatalogText(modelSource));
   const model = translated || clean(rest.join(" "));
   return { title: [make, model].filter(Boolean).join(" "), make, model, trim: model };
 }
