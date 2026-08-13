@@ -19,7 +19,6 @@ env:
   YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
   YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
 
 jobs:
   audit:
@@ -34,7 +33,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Inspect live AutoScout listing pages for source-declared large renditions
+      - name: Inspect exact AutoScout page image schema and source order
         run: |
           node --import tsx --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -47,74 +46,61 @@ jobs:
           const headers = {
             accept: 'text/html,application/xhtml+xml,application/json;q=0.9,image/avif,image/webp,*/*;q=0.8',
             'accept-language': 'en-GB,en;q=0.9,de;q=0.7',
-            'cache-control': 'no-cache',
-            pragma: 'no-cache',
+            'cache-control': 'no-cache', pragma: 'no-cache',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
           };
-          const clean = (value) => String(value || '').replace(/\\\//g, '/').trim();
-          const isListingImage = (value) => /^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(clean(value));
+          const clean = (value) => String(value || '').replace(/\\\//g, '/').replace(/&amp;/g, '&').trim();
           const resolution = (url) => clean(url).match(/\/(\d{2,5}x\d{2,5})\.(?:webp|jpe?g|png|avif)(?:[?#]|$)/i)?.[1] || '';
-          function collectStrings(value, path = '$', out = [], depth = 0) {
-            if (value == null || depth > 12) return out;
+          const imageIdentity = (url) => clean(url).match(/listing-images\/([^/?#]+\.(?:jpe?g|png|webp|avif))/i)?.[1] || '';
+          function collect(value, path = '$', out = [], depth = 0) {
+            if (value == null || depth > 14) return out;
             if (typeof value === 'string') {
-              for (const match of value.matchAll(/https?:\\?\/\\?\/[^\"'\\\s<>]+/g)) {
-                const url = clean(match[0]);
-                if (isListingImage(url)) out.push({ path, url, resolution: resolution(url) });
-              }
+              const raw = clean(value);
+              if (/listing-images\//i.test(raw)) out.push({ path, raw: raw.slice(0, 1200) });
               return out;
             }
-            if (Array.isArray(value)) {
-              value.forEach((item, index) => collectStrings(item, `${path}[${index}]`, out, depth + 1));
-              return out;
-            }
-            if (typeof value === 'object') {
-              for (const [key, item] of Object.entries(value)) collectStrings(item, `${path}.${key}`, out, depth + 1);
-            }
+            if (Array.isArray(value)) { value.forEach((item, index) => collect(item, `${path}[${index}]`, out, depth + 1)); return out; }
+            if (typeof value === 'object') for (const [key, item] of Object.entries(value)) collect(item, `${path}.${key}`, out, depth + 1);
             return out;
           }
-          const unique = (rows) => [...new Map(rows.map((row) => [row.url, row])).values()];
-          const report = {
-            currentEuropeCount: offers.length,
-            currentAutoScoutCount: autoscout.length,
-            currentAutoScoutThumbnailCount: thumbnailRows.length,
-            samples: [],
-          };
+          function allUrls(markup) {
+            const rows = [];
+            const normalized = clean(markup);
+            for (const match of normalized.matchAll(/https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\/[^\"'\\\s<>]+/gi)) {
+              const url = clean(match[0]).replace(/[),;]+$/g, '');
+              rows.push({ url, resolution: resolution(url), identity: imageIdentity(url), index: match.index || 0 });
+            }
+            return [...new Map(rows.map((row) => [row.url, row])).values()];
+          }
+          const report = { currentEuropeCount: offers.length, currentAutoScoutCount: autoscout.length, currentAutoScoutThumbnailCount: thumbnailRows.length, samples: [] };
           for (const offer of samples) {
+            const id = String(offer.sourceOfferId || '');
             const sourceUrl = clean(offer.operational?.sourceUrl);
-            const currentUrls = (offer.images || []).map((image) => clean(image.url)).filter(Boolean);
-            const currentIdentities = currentUrls.map((url) => url.match(/listing-images\/([^/?#]+)/i)?.[1]).filter(Boolean);
             const response = await fetch(sourceUrl, { headers, redirect: 'follow', signal: AbortSignal.timeout(30000) });
             const markup = await response.text();
-            let next = null;
             const nextMatch = markup.match(/<script[^>]+id=[\"']__NEXT_DATA__[\"'][^>]*>([\s\S]*?)<\/script>/i);
+            let next = null;
             if (nextMatch?.[1]) { try { next = JSON.parse(nextMatch[1]); } catch {} }
-            const htmlUrls = [];
-            for (const match of markup.matchAll(/(?:src|data-src|srcset|data-srcset)=[\"']([^\"']+)[\"']/gi)) {
-              for (const part of match[1].split(',')) {
-                const url = clean(part.trim().split(/\s+/)[0]);
-                if (isListingImage(url)) htmlUrls.push({ path: `html:${match[0].slice(0, 24)}`, url, resolution: resolution(url) });
-              }
-            }
-            for (const match of markup.matchAll(/https?:\\?\/\\?\/[^\"'\\\s<>]+/g)) {
-              const url = clean(match[0]);
-              if (isListingImage(url)) htmlUrls.push({ path: 'html:text', url, resolution: resolution(url) });
-            }
-            const nextUrls = next ? collectStrings(next) : [];
-            const all = unique([...nextUrls, ...htmlUrls]);
-            const sameListing = all.filter((row) => currentIdentities.some((identity) => row.url.includes(`/listing-images/${identity}`)));
-            const widths = sameListing.map((row) => Number(row.resolution.split('x')[0] || 0)).filter(Boolean);
+            const offerRows = allUrls(markup).filter((row) => row.identity.startsWith(`${id}_`));
+            const firstSeenIdentities = [...new Map(offerRows.map((row) => [row.identity, row])).values()];
+            const bestByIdentity = firstSeenIdentities.map((first) => {
+              const variants = offerRows.filter((row) => row.identity === first.identity);
+              return variants.sort((a,b) => {
+                const [aw,ah]=a.resolution.split('x').map(Number), [bw,bh]=b.resolution.split('x').map(Number);
+                return (bw*bh)-(aw*ah) || bw-aw;
+              })[0];
+            });
+            const nextContainers = next ? collect(next).filter((row) => row.raw.includes(id)).slice(0, 30) : [];
             report.samples.push({
-              id: offer.sourceOfferId,
-              sourceUrl,
-              status: response.status,
-              bytes: markup.length,
-              currentUrls: currentUrls.slice(0, 5),
-              currentResolutions: [...new Set(currentUrls.map(resolution).filter(Boolean))],
-              nextDataFound: Boolean(next),
-              listingImageUrlsFound: all.length,
-              sameListingUrlsFound: sameListing.length,
-              maxDeclaredWidth: widths.length ? Math.max(...widths) : 0,
-              sameListingRenditions: sameListing.sort((a,b) => Number(b.resolution.split('x')[0]||0)-Number(a.resolution.split('x')[0]||0)).slice(0, 40),
+              id, sourceUrl, status: response.status, bytes: markup.length,
+              currentCount: (offer.images || []).length,
+              currentFirst: (offer.images || []).slice(0,3).map((image) => clean(image.url)),
+              nextDataFound: Boolean(next), nextContainers,
+              offerBoundUrlCount: offerRows.length,
+              sourceOrderIdentityCount: firstSeenIdentities.length,
+              sourceOrderFirst10: firstSeenIdentities.slice(0,10).map((row) => row.identity),
+              bestDeclaredFirst10: bestByIdentity.slice(0,10),
+              maxDeclaredWidth: Math.max(0, ...offerRows.map((row) => Number(row.resolution.split('x')[0] || 0))),
             });
           }
           fs.writeFileSync('autoscout-hq-gallery-audit.json', JSON.stringify(report, null, 2));
