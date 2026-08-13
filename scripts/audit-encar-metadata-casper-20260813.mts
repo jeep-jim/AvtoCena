@@ -6,7 +6,9 @@ const HEADERS = {
   "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
 };
 
-async function request(q: string, inav = "|Metadata|Sort") {
+const FULL_INAV = "|Manufacturer|ModelGroup|Model|FormYear|Metadata|Sort";
+
+async function request(q: string, inav = FULL_INAV) {
   const url = new URL("https://api.encar.com/search/car/list/mobile");
   url.searchParams.set("count", "true");
   url.searchParams.set("q", q);
@@ -22,55 +24,120 @@ function scalars(value: any) {
   return Object.fromEntries(Object.entries(value || {}).filter(([, v]) => v == null || ["string", "number", "boolean"].includes(typeof v)));
 }
 
-function interestingObjects(root: any) {
+function actionObjects(root: any) {
   const rows: any[] = [];
   const seen = new Set<any>();
-  const wanted = /(?:^|\b)(?:manufacturer|maker|model|formyear|year|현대|hyundai|캐스퍼|casper)(?:\b|$)/i;
   function visit(value: any, path = "$", depth = 0) {
-    if (value == null || depth > 10 || typeof value !== "object" || seen.has(value)) return;
+    if (value == null || depth > 12 || typeof value !== "object" || seen.has(value)) return;
     seen.add(value);
     if (!Array.isArray(value)) {
-      const direct = scalars(value);
-      if (Object.entries(direct).some(([k, v]) => wanted.test(k) || wanted.test(String(v ?? "")))) {
-        rows.push({ path, ...direct });
-      }
+      const direct: any = scalars(value);
+      if (typeof direct.Action === "string" && direct.Action.includes("(And.")) rows.push({ path, ...direct });
     }
-    if (Array.isArray(value)) value.slice(0, 500).forEach((child, index) => visit(child, `${path}[${index}]`, depth + 1));
+    if (Array.isArray(value)) value.slice(0, 2000).forEach((child, index) => visit(child, `${path}[${index}]`, depth + 1));
     else for (const [key, child] of Object.entries(value)) if (child && typeof child === "object") visit(child, `${path}.${key}`, depth + 1);
   }
   visit(root);
-  return rows.slice(0, 500);
+  const dedup = new Map<string, any>();
+  for (const row of rows) if (!dedup.has(row.Action)) dedup.set(row.Action, row);
+  return [...dedup.values()];
 }
 
-function nodeSummary(json: any) {
-  return (Array.isArray(json?.iNav?.Nodes) ? json.iNav.Nodes : []).map((node: any, index: number) => ({
-    index,
-    name: node?.Name,
-    facetCount: Array.isArray(node?.Facets) ? node.Facets.length : 0,
-    facets: (Array.isArray(node?.Facets) ? node.Facets : []).slice(0, 12).map((facet: any) => ({
-      ...scalars(facet),
-      refinements: Array.isArray(facet?.Refinements?.Nodes)
-        ? facet.Refinements.Nodes.slice(0, 8).map((row: any) => scalars(row))
-        : undefined,
-    })),
+function rowText(row: any) {
+  return Object.entries(row)
+    .filter(([key]) => key !== "Action" && key !== "path")
+    .map(([, value]) => String(value ?? ""))
+    .join(" ");
+}
+
+function findAction(rows: any[], pattern: RegExp) {
+  return rows.find((row) => pattern.test(rowText(row))) || null;
+}
+
+function summarizeAction(row: any) {
+  if (!row) return null;
+  return { path: row.path, Name: row.Name, Value: row.Value, Count: row.Count, Expression: row.Expression, Action: row.Action };
+}
+
+function firstRows(json: any) {
+  const items = Array.isArray(json?.SearchResults) ? json.SearchResults : [];
+  return items.slice(0, 10).map((row: any) => ({
+    id: row.Id,
+    manufacturer: row.Manufacturer,
+    modelGroup: row.ModelGroup,
+    model: row.Model,
+    formYear: row.FormYear,
+    badge: row.Badge,
+    modifiedDate: row.ModifiedDate,
   }));
 }
 
 const baseQ = "(And.Hidden.N._.CarType.A.)";
 const base = await request(baseQ);
-const items = base.json.SearchResults || [];
+const baseActions = actionObjects(base.json);
+const hyundai = findAction(baseActions, /(?:^|\s)(?:현대|hyundai)(?:\s|$)/i);
+if (!hyundai) {
+  console.log(JSON.stringify({
+    checkedAt: new Date().toISOString(),
+    stage: "manufacturer_not_found",
+    baseCount: Number(base.json?.Count || 0),
+    actionCount: baseActions.length,
+    manufacturerCandidates: baseActions.filter((row) => /Manufacturer/i.test(String(row?.Expression || row?.path || ""))).slice(0, 80).map(summarizeAction),
+  }, null, 2));
+  process.exit(2);
+}
+
+const hyundaiResult = await request(hyundai.Action);
+const hyundaiActions = actionObjects(hyundaiResult.json);
+const casper = findAction(hyundaiActions, /(?:캐스퍼|casper)/i);
+if (!casper) {
+  console.log(JSON.stringify({
+    checkedAt: new Date().toISOString(),
+    stage: "casper_not_found",
+    baseCount: Number(base.json?.Count || 0),
+    hyundai: summarizeAction(hyundai),
+    hyundaiCount: Number(hyundaiResult.json?.Count || 0),
+    actionCount: hyundaiActions.length,
+    modelCandidates: hyundaiActions.filter((row) => /Model/i.test(String(row?.Expression || row?.path || ""))).slice(0, 160).map(summarizeAction),
+  }, null, 2));
+  process.exit(3);
+}
+
+const casperResult = await request(casper.Action);
+const casperActions = actionObjects(casperResult.json);
+const yearsByYear = new Map<number, any>();
+for (const row of casperActions) {
+  const scope = `${row?.Expression || ""} ${row?.path || ""}`;
+  if (!/FormYear/i.test(scope)) continue;
+  const match = rowText(row).match(/\b(20\d{2})\b/);
+  if (!match) continue;
+  const year = Number(match[1]);
+  const existing = yearsByYear.get(year);
+  if (!existing || Number(row?.Count || 0) > Number(existing?.Count || 0)) yearsByYear.set(year, row);
+}
+
+const allowedYears = [...yearsByYear.keys()].filter((year) => year >= 2020 && year <= new Date().getFullYear() + 1).sort((a, b) => a - b);
+const exactYearCounts: any[] = [];
+for (const year of allowedYears) {
+  const row = yearsByYear.get(year);
+  const result = await request(row.Action, "|Metadata|Sort");
+  exactYearCounts.push({
+    year,
+    sourceFacetCount: Number(row?.Count || 0),
+    exactQueryCount: Number(result.json?.Count || 0),
+    action: summarizeAction(row),
+    firstRows: firstRows(result.json).slice(0, 3),
+  });
+}
+
 console.log(JSON.stringify({
   checkedAt: new Date().toISOString(),
-  httpStatus: base.status,
-  bytes: base.bytes,
-  count: Number(base.json.Count || 0),
-  firstRows: items.slice(0, 8).map((row: any) => ({
-    id: row.Id,
-    manufacturer: row.Manufacturer,
-    model: row.Model,
-    formYear: row.FormYear,
-    modifiedDate: row.ModifiedDate,
-  })),
-  nodes: nodeSummary(base.json),
-  interesting: interestingObjects(base.json),
+  baseCount: Number(base.json?.Count || 0),
+  hyundai: summarizeAction(hyundai),
+  hyundaiCount: Number(hyundaiResult.json?.Count || 0),
+  casper: summarizeAction(casper),
+  casperCount: Number(casperResult.json?.Count || 0),
+  casperFirstRows: firstRows(casperResult.json),
+  discoveredFormYears: [...yearsByYear.entries()].sort((a, b) => a[0] - b[0]).map(([year, row]) => ({ year, ...summarizeAction(row) })),
+  allowedExactYearCounts: exactYearCounts,
 }, null, 2));
