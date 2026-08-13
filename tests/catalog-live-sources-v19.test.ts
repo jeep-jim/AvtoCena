@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { parseAutoGeorgiaMoney } from "../apps/web/lib/catalog/auto-georgia-enriched-source";
-import { parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";
+import { DubicarsCurrentAdapter, parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -51,6 +51,33 @@ test("DubiCars exact specs own make, model and trim instead of marketing h1 text
   assert.equal(row.powerHp, 400);
   assert.equal(row.price, 215_000);
   assert.equal(row.images.length, 2);
+});
+
+test("DubiCars marketing model-year text cannot promote an old UAE car into the 2020+ catalog", () => {
+  const markup = `
+    <h1>Toyota Land Cruiser 4.0L Completely Modified Exteriorly & Interiorly to 2025 Model Year V6 1GR Petrol Engine Automatic</h1>
+    <div>USD 32,300</div>
+    <section>Model year 2016 Kilometers 68,000 Km Engine capacity 4 L Horsepower 271 HP
+      Transmission Automatic Export status Can be exported Interior color Red Steering side Left hand Updated on 12 Aug, 2026
+      Make Toyota Model Land Cruiser Trim GXR 4.0L Color Black Cylinders 6 Cylinders Drive type Four Wheel Drive
+      Vehicle type SUV/Crossover Number of doors 5 Doors Seating capacity 8 seater Wheel size 20 Fuel Type Petrol Service history No
+    </section>
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/52345678-abcd-1234-abcd-123456789abc.jpg" />
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/62345678-abcd-1234-abcd-123456789abc.jpg" />
+  `;
+  const row = parseDubicarsCurrentListing(markup, "https://www.dubicars.com/2016-toyota-land-cruiser-40l-completely-modified-to-2025-model-year-973822.html");
+  assert.equal(row, null);
+
+  const adapter = new DubicarsCurrentAdapter();
+  assert.equal(adapter.normalizeOffer({
+    id: "973822",
+    url: "https://www.dubicars.com/2016-toyota-land-cruiser-40l-completely-modified-to-2025-model-year-973822.html",
+    title: "Toyota Land Cruiser modified to 2025 model year",
+    make: "Toyota",
+    model: "Land Cruiser",
+    year: 2016,
+    images: ["https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/52345678-abcd-1234-abcd-123456789abc.jpg"],
+  } as any), null);
 });
 
 test("DubiCars ignores an implausible source horsepower typo instead of pricing it as certified power", () => {
