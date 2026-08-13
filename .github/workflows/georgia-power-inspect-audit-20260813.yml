@@ -16,7 +16,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --max-time 120 \
+          curl --fail --silent --show-error --max-time 180 \
             https://avtocena.com/api/internal/georgia-power-inspect-a18c74 \
             -o /tmp/georgia-power-inspect.json
           python3 - <<'PY'
@@ -25,12 +25,28 @@ jobs:
           data=json.load(open(p, encoding='utf-8'))
           print(json.dumps(data, ensure_ascii=False, indent=2))
           results=data.get('results') or []
+          missing=[r for r in results if r.get('expected')=='missing']
           print('SUMMARY', json.dumps({
+            'mode': data.get('mode'),
             'count': len(results),
-            'powered': sum(1 for r in results if r.get('expected')=='powered'),
-            'missing': sum(1 for r in results if r.get('expected')=='missing'),
-            'missing_with_power_field': sum(1 for r in results if r.get('expected')=='missing' and r.get('powerField')),
-            'missing_with_page_power_mentions': sum(1 for r in results if r.get('expected')=='missing' and r.get('pagePowerMentions')),
-            'missing_with_markup_key_mentions': sum(1 for r in results if r.get('expected')=='missing' and r.get('markupKeyMentions')),
+            'missing': len(missing),
+            'missing_with_exact_vin': sum(1 for r in missing if r.get('vinFound')),
+            'missing_vpic_ok': sum(1 for r in missing if (r.get('vpic') or {}).get('ok')),
+            'missing_vpic_engine_hp': sum(1 for r in missing if (r.get('vpic') or {}).get('engineHp')),
+            'missing_vpic_engine_kw': sum(1 for r in missing if (r.get('vpic') or {}).get('engineKw')),
+            'missing_vpic_identity': [
+              {
+                'id': r.get('id'),
+                'vinTail': r.get('vinTail'),
+                'make': (r.get('vpic') or {}).get('make'),
+                'model': (r.get('vpic') or {}).get('model'),
+                'modelYear': (r.get('vpic') or {}).get('modelYear'),
+                'displacementL': (r.get('vpic') or {}).get('displacementL'),
+                'engineHp': (r.get('vpic') or {}).get('engineHp'),
+                'engineKw': (r.get('vpic') or {}).get('engineKw'),
+                'errorCode': (r.get('vpic') or {}).get('errorCode'),
+              }
+              for r in missing if r.get('vinFound')
+            ],
           }, ensure_ascii=False))
           PY
