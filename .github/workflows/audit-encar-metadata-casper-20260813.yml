@@ -4,6 +4,7 @@ on:
     branches: [audit/encar-casper-years-20260813]
     paths:
       - .github/workflows/audit-encar-metadata-casper-20260813.yml
+      - scripts/audit-encar-metadata-casper-20260813.mts
 permissions:
   contents: read
 jobs:
@@ -16,5 +17,5 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 24, cache: npm }
       - run: npm ci
-      - name: Inspect Encar list metadata without storage or image writes
+      - name: Inspect exact Encar filter actions without storage or image writes
         run: npx tsx scripts/audit-encar-metadata-casper-20260813.mts
