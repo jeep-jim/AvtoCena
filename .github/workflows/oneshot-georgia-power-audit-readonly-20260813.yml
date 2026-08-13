@@ -16,42 +16,52 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Fetch bounded canonical AutoPapa recovery with strict VIN power
+      - name: Fetch four bounded AutoPapa VIN-power batches
         run: |
           set -euo pipefail
-          curl -fsS --retry 1 --retry-delay 2 --max-time 720 \
-            'https://avtocena.com/api/internal/georgia-vin-recovery-5c7d21?source=autopapa&pages=20&startPage=1' \
-            -o recovery-vin.json
+          for start in 1 6 11 16; do
+            echo "batch startPage=$start"
+            curl -fsS --retry 1 --retry-delay 2 --max-time 240 \
+              "https://avtocena.com/api/internal/georgia-vin-recovery-5c7d21?source=autopapa&pages=5&startPage=${start}" \
+              -o "recovery-vin-${start}.json"
+          done
       - name: Summarize read-only results
         run: |
           python3 - <<'PY'
-          import json
-          r=json.load(open('recovery-vin.json'))
-          rep=r.get('report') or {}
-          vin=rep.get('vinPower') or {}
-          offers=r.get('offers') or []
-          print('RECOVERY_VIN',json.dumps({
-              'count':r.get('count'),'rawSourceCounts':rep.get('rawSourceCounts'),'sourceCounts':rep.get('sourceCounts'),
-              'rejected':rep.get('rejected'),'imageStats':rep.get('imageStats'),
-              'calculatedCount':rep.get('calculatedCount'),'preliminaryCount':rep.get('preliminaryCount'),
-              'vinPower':vin,
-          },ensure_ascii=False))
-          converted=[o for o in offers if str(o.get('powerDataSource') or '').startswith('nhtsa-vpic:')]
-          print('CONVERTED_COUNT',len(converted))
-          for o in converted[:50]:
-              raw=((o.get('operational') or {}).get('raw') or {})
-              print('CONVERTED',json.dumps({
-                  'id':o.get('sourceOfferId'),'make':o.get('make'),'model':o.get('model'),'year':o.get('year'),
-                  'engineCc':o.get('engineCc'),'powerHp':o.get('powerHp'),'powerSource':o.get('powerDataSource'),
-                  'status':o.get('calculationStatus'),'images':len(o.get('images') or []),
-                  'vinTail':raw.get('autoPapaVinTail'),'vpicYear':raw.get('autoPapaVpicModelYear'),
-                  'vpicDisplacementL':raw.get('autoPapaVpicDisplacementL')
-              },ensure_ascii=False))
+          import glob,json
+          totals={'count':0,'calculated':0,'preliminary':0,'converted':0}
+          outcomes={}
+          converted=[]
+          for fn in sorted(glob.glob('recovery-vin-*.json')):
+              r=json.load(open(fn)); rep=r.get('report') or {}; vin=rep.get('vinPower') or {}
+              row={
+                  'file':fn,'count':r.get('count'),'rawSourceCounts':rep.get('rawSourceCounts'),'sourceCounts':rep.get('sourceCounts'),
+                  'rejected':rep.get('rejected'),'imageStats':rep.get('imageStats'),
+                  'calculatedCount':rep.get('calculatedCount'),'preliminaryCount':rep.get('preliminaryCount'),'vinPower':vin,
+              }
+              print('BATCH',json.dumps(row,ensure_ascii=False))
+              totals['count']+=int(r.get('count') or 0)
+              totals['calculated']+=int(rep.get('calculatedCount') or 0)
+              totals['preliminary']+=int(rep.get('preliminaryCount') or 0)
+              totals['converted']+=int(vin.get('convertedCount') or 0)
+              for k,v in (vin.get('outcomes') or {}).items(): outcomes[k]=outcomes.get(k,0)+int(v or 0)
+              for o in r.get('offers') or []:
+                  if str(o.get('powerDataSource') or '').startswith('nhtsa-vpic:'):
+                      raw=((o.get('operational') or {}).get('raw') or {})
+                      converted.append({
+                          'id':o.get('sourceOfferId'),'make':o.get('make'),'model':o.get('model'),'year':o.get('year'),
+                          'engineCc':o.get('engineCc'),'powerHp':o.get('powerHp'),'powerSource':o.get('powerDataSource'),
+                          'status':o.get('calculationStatus'),'images':len(o.get('images') or []),
+                          'vinTail':raw.get('autoPapaVinTail'),'vpicYear':raw.get('autoPapaVpicModelYear'),
+                          'vpicDisplacementL':raw.get('autoPapaVpicDisplacementL')
+                      })
+          print('TOTAL',json.dumps({**totals,'outcomes':outcomes},ensure_ascii=False))
+          for row in converted[:100]: print('CONVERTED',json.dumps(row,ensure_ascii=False))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: georgia-vin-power-audit-readonly
-          path: recovery-vin.json
+          path: recovery-vin-*.json
           if-no-files-found: warn
           retention-days: 1
