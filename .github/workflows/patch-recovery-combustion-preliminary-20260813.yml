@@ -29,7 +29,7 @@ jobs:
         run: |
           node --check scripts/catalog-live-recovery-market.mjs
           node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
-          npm run typecheck:web
+          npm run typecheck
       - name: Commit production and test files only
         run: |
           git config user.name "jeep-jim"
