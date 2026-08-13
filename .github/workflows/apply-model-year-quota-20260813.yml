@@ -1,0 +1,47 @@
+name: Apply model-year inventory quota 20260813
+on:
+  push:
+    branches: [fix/model-year-quota-20260813]
+    paths:
+      - .github/workflows/apply-model-year-quota-20260813.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/model-year-quota-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply deterministic quota patch
+        run: python3 .github/patches/apply-model-year-quota-20260813.py
+      - name: Validate quota scripts
+        run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --check scripts/catalog-live-recovery-publish.mjs
+          node --check scripts/catalog-enforce-global-model-cap.mjs
+          node --check scripts/catalog-japan-strict-merge-publish.mjs
+          node --check scripts/catalog-replace-georgia-atomic.mjs
+          node --check scripts/catalog-live-postpersist-audit.mjs
+          node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
+          npm run typecheck
+      - name: Commit generated quota changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/lib/catalog/inventory-quota.ts scripts .github/workflows tests
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "Apply per-model-year catalog quota"
+          git push origin HEAD:fix/model-year-quota-20260813
