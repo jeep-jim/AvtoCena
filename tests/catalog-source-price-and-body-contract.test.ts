@@ -3,6 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 import { classifyCatalogV2Offer, selectCatalogV2MarketOffers } from "../apps/web/lib/catalog/catalog-v2-policy";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
+import { strictSourceDetail } from "../apps/web/lib/catalog/strict-source-detail-wrapper";
 
 const base = {
   id: "encar-1",
@@ -90,4 +91,102 @@ test("source-specific listing-bound gallery adapters are never replaced by gener
   for (const sourceId of ["myauto_georgia_list", "dubicars_uae_exact", "mashina_kyrgyzstan_exact"]) {
     assert.match(dedicatedBlock, new RegExp(`"${sourceId}"`), `${sourceId} must keep its source-specific fetchImages implementation`);
   }
+});
+
+function fakeImage(index: number) {
+  return {
+    id: `img-${index}`,
+    url: `https://example.test/listing/image-${index}.jpg`,
+    objectKey: "",
+    checksum: `checksum-${index}`,
+    size: 100_000,
+    mimeType: "image/jpeg",
+  };
+}
+
+function fakeOffer() {
+  return {
+    id: "generic-1",
+    sourceId: "generic_source",
+    sourceOfferId: "1",
+    market: "china",
+    offerType: "fixed",
+    status: "active",
+    make: "Test",
+    model: "Car",
+    year: 2025,
+    sourcePrice: 100_000,
+    sourceCurrency: "CNY",
+    priceMode: "fixed",
+    images: [],
+    calculationStatus: "needs_data",
+    firstSeenAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    operational: {
+      sourceUrl: "https://example.test/listing/1",
+      raw: {
+        recommendations: "SUV AWD automatic hybrid",
+        images: Array.from({ length: 10 }, (_, index) => `https://example.test/recommendation-${index}.jpg`),
+      },
+    },
+  } as any;
+}
+
+test("generic strict wrapper is fail-closed and never performs broad page scraping", async () => {
+  const previousFetch = globalThis.fetch;
+  let networkCalls = 0;
+  globalThis.fetch = (async () => {
+    networkCalls += 1;
+    throw new Error("network scrape must not happen");
+  }) as typeof fetch;
+
+  try {
+    const adapter = strictSourceDetail({
+      sourceId: "generic_source",
+      market: "china",
+      accessMode: "public_html",
+      async fetchPage() { return { items: [], finished: true }; },
+      normalizeOffer() { return null; },
+      async fetchImages() { return Array.from({ length: 5 }, (_, index) => fakeImage(index)); },
+      mapStatus() { return "active"; },
+      async healthCheck() { return { ok: true, message: "ok", checkedAt: new Date().toISOString() }; },
+    } as any);
+    const offer = fakeOffer();
+    const images = await adapter.fetchImages(offer);
+
+    assert.equal(networkCalls, 0);
+    assert.deepEqual(images, []);
+    assert.equal(offer.bodyType, undefined);
+    assert.equal(offer.drive, undefined);
+    assert.equal(offer.transmission, undefined);
+    assert.equal(offer.fuel, undefined);
+    assert.equal(offer.operational.galleryVerified, false);
+    assert.equal(offer.operational.gallerySafetyMode, "strict_source_adapter_identity_only");
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
+test("generic strict wrapper accepts only an adapter-proven exact-listing gallery", async () => {
+  const adapter = strictSourceDetail({
+    sourceId: "generic_source",
+    market: "china",
+    accessMode: "public_html",
+    async fetchPage() { return { items: [], finished: true }; },
+    normalizeOffer() { return null; },
+    async fetchImages(offer: any) {
+      offer.operational.photoIdentityVerified = true;
+      offer.operational.raw.photoIdentityVerified = true;
+      return Array.from({ length: 6 }, (_, index) => fakeImage(index));
+    },
+    mapStatus() { return "active"; },
+    async healthCheck() { return { ok: true, message: "ok", checkedAt: new Date().toISOString() }; },
+  } as any);
+  const offer = fakeOffer();
+  const images = await adapter.fetchImages(offer);
+
+  assert.equal(images.length, 6);
+  assert.equal(offer.operational.galleryVerified, true);
+  assert.equal(offer.operational.galleryImageCount, 6);
+  assert.equal(offer.operational.gallerySafetyMode, "strict_source_adapter_identity_only");
 });
