@@ -12,10 +12,34 @@ function positive(value: unknown) {
  * A listing's raw payload can contain unrelated words such as "hybrid" in image paths,
  * recommendation blocks or surrounding page markup. An explicit combustion fuel plus a
  * real engine displacement wins unless the vehicle's own title/specification says hybrid.
+ *
+ * Pure EVs can never have an ICE displacement. Some broad legacy payloads contained
+ * unrelated displacement-like numbers; fail closed by clearing them before customs.
  */
 export function preferExplicitCombustionPowertrain<T extends Partial<VehicleOffer>>(input: T): T {
   const fuel = String(input.fuel || "").trim().toLocaleLowerCase("en-US");
+  const kind = String(input.powertrainKind || "").trim();
   const engineCc = positive(input.engineCc);
+
+  if ((kind === "electric" || fuel === "electric") && engineCc) {
+    return {
+      ...input,
+      engineCc: undefined,
+      icePowerKw: undefined,
+      operational: {
+        ...input.operational,
+        raw: {
+          ...(typeof input.operational?.raw === "object" && input.operational.raw ? input.operational.raw as object : {}),
+          powertrainSafety: {
+            correctedTo: "electric",
+            reason: "pure_ev_cannot_have_engine_displacement",
+            rejectedEngineCc: engineCc,
+          },
+        },
+      },
+    } as T;
+  }
+
   const primary = [input.make, input.model, input.generation, input.trim, input.engineType, input.fuel]
     .filter(Boolean)
     .join(" ");

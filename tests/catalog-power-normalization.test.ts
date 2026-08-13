@@ -82,3 +82,33 @@ test("explicit hybrid title is never downgraded to combustion", () => {
   });
   assert.equal(safe.powertrainKind, "other_hybrid");
 });
+
+test("pure EV drops impossible engine displacement before customs", () => {
+  const normalized = normalizeVehicleOfferSpecs({
+    make: "Hyundai",
+    model: "Casper Electric",
+    fuel: "electric",
+    powertrainKind: "electric" as const,
+    engineCc: 3000,
+    operational: { raw: { recommendation: { displacement: 3000 } } },
+  });
+  const safe = preferExplicitCombustionPowertrain(normalized);
+  assert.equal(safe.powertrainKind, "electric");
+  assert.equal(safe.engineCc, undefined);
+  assert.equal((safe.operational?.raw as any)?.powertrainSafety?.reason, "pure_ev_cannot_have_engine_displacement");
+  assert.equal((safe.operational?.raw as any)?.powertrainSafety?.rejectedEngineCc, 3000);
+});
+
+test("real combustion displacement above 3000 cc is preserved exactly", () => {
+  const safe = preferExplicitCombustionPowertrain({
+    make: "Kia",
+    model: "K9",
+    trim: "3.3 GDI AWD",
+    fuel: "petrol",
+    engineCc: 3342,
+    powerHp: 370,
+    powertrainKind: "combustion" as const,
+  });
+  assert.equal(safe.engineCc, 3342);
+  assert.equal(safe.powertrainKind, "combustion");
+});
