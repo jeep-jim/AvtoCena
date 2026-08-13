@@ -1,0 +1,48 @@
+name: Ops · Korea Encar Casper 2022 probe 20260813
+run-name: Korea Encar Casper 2022 read-only probe · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/korea-encar-casper-probe-20260813
+    paths:
+      - ".github/workflows/ops-korea-encar-casper-probe-20260813.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-readonly-diagnostics
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ENCAR_PROBE_MAX_PAGES: "600"
+      ENCAR_PROBE_PAGE_SIZE: "100"
+      ENCAR_PROBE_MAX_MATCHES: "20"
+      ENCAR_PROBE_GAP_MS: "150"
+      ENCAR_PROBE_OUTPUT: korea-encar-casper-2022-probe.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read-only scan of Encar current inventory
+        run: node scripts/korea-encar-casper-probe.mjs
+      - name: Summarize exact 2022 Casper candidates
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const report=JSON.parse(fs.readFileSync('korea-encar-casper-2022-probe.json','utf8'));
+          console.log(JSON.stringify({pages:report.pages,seen:report.seen,count:report.count,finished:report.finished,casper2022:report.casper2022,exactDetailOk:report.exactDetailOk,matches:(report.matches||[]).map((x)=>({sourceOfferId:x.sourceOfferId,manufacturer:x.manufacturer,model:x.model,year:x.year,priceRaw:x.priceRaw,mileage:x.mileage,offset:x.offset,detail:x.detail}))},null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-encar-casper-2022-probe
+          path: korea-encar-casper-2022-probe.json
+          if-no-files-found: error
+          retention-days: 3
