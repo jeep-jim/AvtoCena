@@ -38,7 +38,7 @@ export function catalogExactModelKey(
  * the output before other discovered years get represented. Every discovered
  * model-year receives one turn before any bucket receives a second turn, then
  * the process repeats. Rows inside one bucket can still be ranked by source
- * quality via `compare`.
+ * quality via `compare`. A bucket can never exceed the shared 20-card quota.
  */
 export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOffer>>(
   rows: readonly T[],
@@ -59,7 +59,7 @@ export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOff
 
   const orderedBuckets = [...buckets.entries()]
     .sort(([a], [b]) => a.localeCompare(b, "en"))
-    .map(([, bucket]) => [...bucket].sort(compare));
+    .map(([, bucket]) => [...bucket].sort(compare).slice(0, CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
   const selected: T[] = [];
   for (let round = 0; selected.length < boundedLimit; round++) {
     let added = false;
