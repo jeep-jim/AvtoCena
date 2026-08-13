@@ -1,0 +1,37 @@
+name: Patch model-year quota admission follow-up 20260813
+on:
+  push:
+    branches: [fix/model-year-quota-admission-20260813]
+    paths:
+      - .github/workflows/patch-model-year-quota-admission-20260813.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/model-year-quota-admission-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: python3 .github/patches/fix-model-year-quota-admission-20260813.py
+      - name: Validate collector and quota tests
+        run: |
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
+          npm run typecheck
+      - name: Commit collector fix only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add scripts/catalog-live-recovery-market.mjs
+          git commit -m "Count model-year quota only after successful preparation"
+          git push origin HEAD:fix/model-year-quota-admission-20260813
