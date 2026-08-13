@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 
-# The whole run waits behind any current catalog writer (including AutoScout).
+# The whole run waits behind any current catalog writer.
 concurrency:
   group: catalog-live-daily-working-markets
   cancel-in-progress: false
@@ -35,11 +35,12 @@ env:
   RECOVERY_REQUEST_TIMEOUT_MS: "35000"
   RECOVERY_RETRY_ATTEMPTS: "4"
   RECOVERY_PREPARE_CONCURRENCY: "6"
+  CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
 
 jobs:
   preflight:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -54,11 +55,44 @@ jobs:
           node --check scripts/catalog-live-recovery-merge-shards.mjs
           node --check scripts/catalog-live-recovery-publish.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
+          node --check scripts/catalog-enforce-global-model-cap.mjs
           node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
-      - name: Snapshot and audit all seven markets before any write
+      - name: Snapshot current all-seven state without asserting the new cap yet
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-before-cleanup-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Dry-run canonical all-seven model-year cleanup
+        env:
+          CATALOG_GLOBAL_MODEL_CAP_DRY_RUN: "1"
+          CATALOG_GLOBAL_MODEL_CAP_REPORT: korea-global-cap-dry-run.json
+        run: npx tsx scripts/catalog-enforce-global-model-cap.mjs
+      - name: Allow only quota removals, never unrelated quality loss
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const dry=JSON.parse(fs.readFileSync('korea-global-cap-dry-run.json','utf8'));
+          const problems=[];
+          for (const [market,s] of Object.entries(dry.byMarket||{})) {
+            if (Number(s.removedByQuality||0)!==0) problems.push(`${market}:quality:${s.removedByQuality}`);
+            if (Number(s.selected||0)<=0) problems.push(`${market}:empty`);
+            const removed=Number(s.before||0)-Number(s.selected||0);
+            if (removed!==Number(s.removedByModelYearQuota||0)) problems.push(`${market}:unexplained:${removed}:${s.removedByModelYearQuota}`);
+            if (Number(s.maxPerExactModelYear||0)>20) problems.push(`${market}:cap:${s.maxPerExactModelYear}`);
+          }
+          console.log(JSON.stringify({before:dry.beforeByMarket,selected:dry.selectedByMarket,byMarket:dry.byMarket,problems},null,2));
+          if(problems.length) process.exit(1);
+          NODE
+      - name: Apply one canonical all-seven model-year cleanup
+        env:
+          CATALOG_GLOBAL_MODEL_CAP_REPORT: korea-global-cap-publish.json
+        run: npx tsx scripts/catalog-enforce-global-model-cap.mjs
+      - name: Strict all-seven audit after canonical cleanup
         env:
           CATALOG_AUDIT_OUTPUT: korea-before-all7.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Prove preserved markets can survive an exact republish
         shell: bash
@@ -80,7 +114,11 @@ jobs:
         if: always()
         with:
           name: korea-model-year-preflight
-          path: korea-before-all7.json
+          path: |
+            korea-before-cleanup-all7.json
+            korea-global-cap-dry-run.json
+            korea-global-cap-publish.json
+            korea-before-all7.json
           if-no-files-found: warn
           retention-days: 3
 
@@ -159,6 +197,11 @@ jobs:
           console.log(JSON.stringify(report,null,2));
           if (!offers.length || badYears.length || foreign.length || casper2022.length < 1) process.exit(1);
           NODE
+      - name: Download post-cleanup baseline
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-model-year-preflight
+          path: korea-baseline
       - name: Dry-run the exact cumulative publisher and global model-year cap
         env:
           RECOVERY_BATCH_MARKETS: korea
@@ -172,7 +215,7 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('node:fs');
-          const before=JSON.parse(fs.readFileSync('korea-before-all7.json','utf8'));
+          const before=JSON.parse(fs.readFileSync('korea-baseline/korea-before-all7.json','utf8'));
           const dry=JSON.parse(fs.readFileSync('korea-publish-dry-run.json','utf8'));
           const k=dry.byMarket?.korea || {};
           if (!dry.dryRun || Number(k.count||0) <= 0 || Number(k.maxOffersPerModelYear||0) !== 20) throw new Error('korea_dry_run_invalid');
@@ -191,7 +234,7 @@ jobs:
             catalog-rebuild-korea.json
             korea-casper-merged-gate.json
             korea-publish-dry-run.json
-            korea-before-all7.json
+            korea-baseline/korea-before-all7.json
           if-no-files-found: warn
           retention-days: 3
 
@@ -211,7 +254,7 @@ jobs:
         with:
           name: korea-model-year-merged
           path: korea-input
-      - name: Re-check no second writer appeared
+      - name: Re-check strict all-seven state at the write edge
         env:
           CATALOG_AUDIT_OUTPUT: korea-write-edge-all7.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
@@ -244,7 +287,7 @@ jobs:
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Assert other six markets are byte-count preserved and Casper 2022 is live
+      - name: Assert other six market counts are preserved and Casper 2022 is live
         shell: bash
         run: |
           cp korea-input/korea-before-all7.json korea-before-all7.json
