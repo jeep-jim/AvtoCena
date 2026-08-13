@@ -16,6 +16,17 @@ function positive(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 }
 
+export function discardRepresentativeModelPowerForCustoms<T extends VehicleOffer>(offer: T): T {
+  if (!String(offer.powerDataSource || "").startsWith("vehicle-model-representative:")) return offer;
+  return {
+    ...offer,
+    powerHp: undefined,
+    powerKw: undefined,
+    powerDataConfidence: undefined,
+    powerDataSource: undefined,
+  } as T;
+}
+
 const activeMarketVersionCache = new Map<string, { pending: Promise<any>; expiresAt: number }>();
 
 function getCalculationMarketVersion(market: string) {
@@ -138,7 +149,9 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 }
 
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean): Promise<VehicleOffer> {
-  const canonical = await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input));
+  const canonical = discardRepresentativeModelPowerForCustoms(
+    await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input)),
+  );
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
