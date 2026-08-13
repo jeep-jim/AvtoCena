@@ -108,7 +108,7 @@ jobs:
           const badK9Rounded=k933.filter(r=>[3000,3300].includes(Number(r.engineCc||0)));
           const badK9Exact=k9ExactEvidence.filter(r=>Number(r.engineCc||0)!==3342);
           const imageStats=Object.fromEntries(['encar_direct','kcar_korea_open','kbchachacha_korea_open'].map(source=>{const x=rows.filter(r=>r.sourceId===source);const nums=x.map(r=>Array.isArray(r.images)?r.images.length:0);return [source,{count:x.length,min:nums.length?Math.min(...nums):0,max:nums.length?Math.max(...nums):0,average:nums.length?Number((nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(2)):0,below5:nums.filter(n=>n<5).length}]}));
-          const report={total:rows.length,sources,bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel'),imageStats,encar:{count:encar.length,suvOrCrossover:suv,suvRatio:Number(encarRatio.toFixed(4))},knownSedans:{count:knownRows.length,violations:badSedans.length,sample:badSedans.slice(0,10).map(r=>({sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,id:r.sourceOfferId}))},casper2022:casper2022.length,badYears:badYears.length,foreign:foreign.length,exactModelYear:{max:maxModelYear,overCap},k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),exact3342Evidence:k9ExactEvidence.length,roundedViolations:badK9Rounded.length,exactEvidenceViolations:badK9Exact.length}};
+          const report={total:rows.length,sources,bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel'),imageStats,encar:{count:encar.length,suvOrCrossover:suv,suvRatio:Number(encarRatio.toFixed(4))},knownSedans:{count:knownRows.length,violations:badSedans.length,sample:badSedans.slice(0,10).map(r=>({sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,id:r.sourceOfferId}))},casper2022:casper2022.length,badYears:badYears.length,foreign:foreign.length,exactModelYear:{rawMax:maxModelYear,overCap},k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),exact3342Evidence:k9ExactEvidence.length,roundedUnsafe:badK9Rounded.length,exactEvidenceViolations:badK9Exact.length,roundedRows:badK9Rounded.map(r=>({sourceId:r.sourceId,sourceOfferId:r.sourceOfferId,make:r.make,model:r.model,trim:r.trim,year:r.year,engineCc:r.engineCc}))}};
           fs.writeFileSync('korea-crossrun-semantic-gate.json',JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
           for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sources[source]||0)>0)) throw new Error(`missing_source:${source}`);
@@ -116,7 +116,27 @@ jobs:
           if(encar.length<100||encarRatio>0.75) throw new Error(`encar_body_distribution_corrupt:${encar.length}:${encarRatio}`);
           if(badSedans.length) throw new Error(`known_sedan_body_violation:${badSedans.length}`);
           if(!casper2022.length) throw new Error('casper_2022_missing');
-          if(badK9Rounded.length||badK9Exact.length) throw new Error(`k9_3342_cc_violation:${badK9Rounded.length}:${badK9Exact.length}`);
+          if(badK9Exact.length) throw new Error(`k9_exact_3342_evidence_violation:${badK9Exact.length}`);
+          NODE
+      - name: Fail closed on rounded K9 3.3 GDI engine displacement
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('catalog-rebuild-korea.json','utf8'));
+          const rows=Array.isArray(p.offers)?p.offers:[];
+          const text=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''} ${JSON.stringify(r?.operational?.raw||{})}`;
+          const isK933=r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(text(r)) && /(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(text(r));
+          const unsafe=rows.filter(r=>isK933(r)&&[3000,3300].includes(Number(r.engineCc||0)));
+          const kept=rows.filter(r=>!unsafe.includes(r));
+          const exact=kept.filter(r=>isK933(r)&&Number(r.engineCc||0)===3342);
+          p.offers=kept;
+          p.report={...(p.report||{}),k9UnsafeRoundedExcluded:unsafe.length,k9Exact3342Kept:exact.length};
+          fs.writeFileSync('catalog-rebuild-korea.json',JSON.stringify(p,null,2));
+          fs.writeFileSync('korea-k9-engine-safety.json',JSON.stringify({excluded:unsafe.map(r=>({sourceId:r.sourceId,sourceOfferId:r.sourceOfferId,make:r.make,model:r.model,trim:r.trim,year:r.year,engineCc:r.engineCc})),exact3342Kept:exact.length},null,2));
+          console.log(JSON.stringify({excluded:unsafe.length,exact3342Kept:exact.length},null,2));
+          if(exact.length===0) throw new Error('k9_exact_3342_lost');
+          if(kept.some(r=>isK933(r)&&[3000,3300].includes(Number(r.engineCc||0)))) throw new Error('k9_rounded_engine_survived');
           NODE
       - name: Patch only untouched-market preservation for exact dry-run proof
         shell: bash
@@ -140,7 +160,7 @@ jobs:
           CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
           CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
-      - name: Require dry-run semantic quota, three-source survival, and six exact preserved counts
+      - name: Require dry-run cap, three-source survival, and six exact preserved counts
         shell: bash
         run: |
           node - <<'NODE'
@@ -166,6 +186,7 @@ jobs:
             catalog-rebuild-korea.json
             korea-crossrun-preflight-all7.json
             korea-crossrun-semantic-gate.json
+            korea-k9-engine-safety.json
             korea-crossrun-publish-dry-run.json
           if-no-files-found: warn
           retention-days: 3
