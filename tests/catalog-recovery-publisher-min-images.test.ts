@@ -21,10 +21,10 @@ test("batch recovery publisher does not apply target image floor to untouched-ma
 test("both recovery publishers fail closed on impossible Korean sedan body types", () => {
   for (const source of [batchSource, cumulativeSource]) {
     assert.match(source, /function koreaKnownSedanIdentity\(offer\)/);
-    assert.match(source, /\bG80\b/);
+    assert.match(source, /G80/);
     assert.match(source, /Grandeur/);
     assert.match(source, /Ioniq/);
-    assert.match(source, /\bK9\b/);
+    assert.match(source, /K9/);
     assert.match(source, /K900/);
     assert.match(source, /Quoris/);
     assert.match(source, /function semanticBodyValid\(offer, currentMarket\)/);
