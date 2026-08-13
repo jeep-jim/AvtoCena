@@ -1,5 +1,5 @@
-name: One-shot Georgia power audit read-only
-run-name: Georgia power audit read-only · ${{ github.sha }}
+name: One-shot Georgia VIN power audit read-only
+run-name: Georgia VIN power audit read-only · ${{ github.sha }}
 
 on:
   push:
@@ -14,56 +14,44 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
-      - name: Fetch deployed exact AutoPapa power diagnostic
+      - name: Fetch bounded canonical AutoPapa recovery with strict VIN power
         run: |
           set -euo pipefail
-          curl -fsS --retry 2 --retry-delay 2 --max-time 300 \
-            'https://avtocena.com/api/internal/georgia-power-inspect-a18c74' \
-            -o power.json
-      - name: Fetch bounded canonical AutoPapa recovery snapshot
-        run: |
-          set -euo pipefail
-          curl -fsS --retry 2 --retry-delay 2 --max-time 300 \
-            'https://avtocena.com/api/internal/georgia-recovery-e2f913?source=autopapa&pages=3&startPage=1' \
-            -o recovery.json
+          curl -fsS --retry 1 --retry-delay 2 --max-time 720 \
+            'https://avtocena.com/api/internal/georgia-vin-recovery-5c7d21?source=autopapa&pages=20&startPage=1' \
+            -o recovery-vin.json
       - name: Summarize read-only results
         run: |
           python3 - <<'PY'
           import json
-          p=json.load(open('power.json'))
-          r=json.load(open('recovery.json'))
-          print('POWER_MODE',p.get('mode'))
-          for x in p.get('results',[]):
-              v=x.get('vpic') or {}
-              print(json.dumps({
-                  'id':x.get('id'),'expected':x.get('expected'),'status':x.get('status'),
-                  'sellerPowerHp':x.get('sellerPowerHp'),'vinFound':x.get('vinFound'),'vinTail':x.get('vinTail'),
-                  'vpicOk':v.get('ok'),'vpicMake':v.get('make'),'vpicModel':v.get('model'),
-                  'vpicYear':v.get('modelYear'),'vpicHp':v.get('engineHp'),'vpicKw':v.get('engineKw'),
-                  'vpicDisplacementL':v.get('displacementL'),'vpicErrorCode':v.get('errorCode')
-              },ensure_ascii=False))
+          r=json.load(open('recovery-vin.json'))
           rep=r.get('report') or {}
+          vin=rep.get('vinPower') or {}
           offers=r.get('offers') or []
-          print('RECOVERY',json.dumps({
+          print('RECOVERY_VIN',json.dumps({
               'count':r.get('count'),'rawSourceCounts':rep.get('rawSourceCounts'),'sourceCounts':rep.get('sourceCounts'),
               'rejected':rep.get('rejected'),'imageStats':rep.get('imageStats'),
-              'calculatedCount':rep.get('calculatedCount'),'preliminaryCount':rep.get('preliminaryCount')
+              'calculatedCount':rep.get('calculatedCount'),'preliminaryCount':rep.get('preliminaryCount'),
+              'vinPower':vin,
           },ensure_ascii=False))
-          for o in offers[:20]:
-              print('OFFER',json.dumps({
+          converted=[o for o in offers if str(o.get('powerDataSource') or '').startswith('nhtsa-vpic:')]
+          print('CONVERTED_COUNT',len(converted))
+          for o in converted[:50]:
+              raw=((o.get('operational') or {}).get('raw') or {})
+              print('CONVERTED',json.dumps({
                   'id':o.get('sourceOfferId'),'make':o.get('make'),'model':o.get('model'),'year':o.get('year'),
                   'engineCc':o.get('engineCc'),'powerHp':o.get('powerHp'),'powerSource':o.get('powerDataSource'),
-                  'status':o.get('calculationStatus'),'images':len(o.get('images') or [])
+                  'status':o.get('calculationStatus'),'images':len(o.get('images') or []),
+                  'vinTail':raw.get('autoPapaVinTail'),'vpicYear':raw.get('autoPapaVpicModelYear'),
+                  'vpicDisplacementL':raw.get('autoPapaVpicDisplacementL')
               },ensure_ascii=False))
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: georgia-power-audit-readonly
-          path: |
-            power.json
-            recovery.json
+          name: georgia-vin-power-audit-readonly
+          path: recovery-vin.json
           if-no-files-found: warn
           retention-days: 1
