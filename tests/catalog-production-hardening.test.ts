@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import { parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
@@ -137,6 +138,34 @@ test("generic source detail wrapper is fail-closed and never scrapes page-wide s
   assert.doesNotMatch(strictSourceDetail, /htmlAttributeImages/);
   assert.doesNotMatch(strictSourceDetail, /scriptImages/);
   assert.doesNotMatch(strictSourceDetail, /\bfetch\s*\(/);
+});
+
+test("Dubizzle detail semantics are label-bound to Car Overview and ignore seller/recommendation noise", () => {
+  const markup = `
+    <section><h2>Car Overview</h2>
+      <div>Body Type</div><div>Sedan</div>
+      <div>Fuel Type</div><div>Petrol</div>
+      <div>Transmission Type</div><div>Automatic</div>
+      <div>Drive Type</div><div>RWD</div>
+      <div>Engine Capacity</div><div>3.0 L</div>
+      <div>Horsepower</div><div>375 HP</div>
+      <div>Mileage</div><div>48,200 km</div>
+    </section>
+    <h2>Description</h2><p>Seller says SUV AWD Hybrid CVT 999 HP in unrelated marketing text.</p>
+    <aside>Recommended cars: SUV AWD Diesel Manual</aside>`;
+  const fields = parseDubizzleLabelBoundDetailFields(markup);
+  assert.equal(fields.bodyType, "Sedan");
+  assert.equal(fields.fuel, "Petrol");
+  assert.equal(fields.transmission, "Automatic");
+  assert.equal(fields.drive, "RWD");
+  assert.equal(fields.engineCc, 3000);
+  assert.equal(fields.powerHp, 375);
+  assert.equal(fields.mileageKm, 48200);
+});
+
+test("Dubizzle refuses semantic inference when Car Overview labels are absent", () => {
+  const fields = parseDubizzleLabelBoundDetailFields(`<p>Seller description: SUV AWD Automatic Hybrid, 500 HP, only 10,000 km.</p>`);
+  assert.deepEqual(fields, {});
 });
 
 test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {

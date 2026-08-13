@@ -136,22 +136,48 @@ function parseList(markup: string, pageUrl: string): DubizzleExactRow[] {
   });
   return rows;
 }
-function detailFields(markup: string, row: DubizzleExactRow) {
+
+const DETAIL_LABELS = [
+  "Body Type", "Fuel Type", "Transmission Type", "Drive Type", "Drive", "Engine Capacity", "Engine Size",
+  "Horsepower", "Power", "Mileage", "Kilometers", "Colour", "Color", "Doors", "Seats",
+];
+function overviewText(markup: string) {
   const text = plain(markup);
-  const liters = text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\b/i);
-  const cc = text.match(/\b([0-9][0-9, ]{2,5})\s*(?:cc|cm3|cm³)\b/i);
-  const hp = text.match(/\b([0-9]{2,4})\s*(?:HP|PS|bhp)\b/i);
-  const mileage = text.match(/([0-9][0-9, ]{1,8})\s*km\b/i);
-  const images = collectImages(markup, row.sourceUrl).filter((url) => !/thumbnail|thumb/i.test(url));
+  const start = text.search(/\bCar\s+Overview\b/i);
+  if (start < 0) return "";
+  const rest = text.slice(start + text.match(/\bCar\s+Overview\b/i)![0].length);
+  const endMatch = rest.search(/\b(?:Description|Seller(?:'s)?\s+Description|Location|Similar\s+Cars|Recommended|Related\s+Ads|Safety\s+Tips)\b/i);
+  return rest.slice(0, endMatch >= 0 ? endMatch : Math.min(rest.length, 6_000)).trim();
+}
+function escaped(value: string) { return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function labelValue(section: string, label: string) {
+  const otherLabels = DETAIL_LABELS.filter((item) => item !== label).map(escaped).join("|");
+  const pattern = new RegExp(`(?:^|\\s)${escaped(label)}\\s*[:：]?\\s*(.{1,100}?)(?=\\s+(?:${otherLabels})\\s*[:：]?|$)`, "i");
+  return section.match(pattern)?.[1]?.trim() || "";
+}
+function firstLabelValue(section: string, labels: string[]) {
+  for (const label of labels) {
+    const value = labelValue(section, label);
+    if (value) return value;
+  }
+  return "";
+}
+export function parseDubizzleLabelBoundDetailFields(markup: string) {
+  const section = overviewText(markup);
+  if (!section) return {};
+  const engineText = firstLabelValue(section, ["Engine Capacity", "Engine Size"]);
+  const powerText = firstLabelValue(section, ["Horsepower", "Power"]);
+  const mileageText = firstLabelValue(section, ["Mileage", "Kilometers"]);
+  const liters = engineText.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\b/i);
+  const cc = engineText.match(/\b([0-9][0-9, ]{2,5})\s*(?:cc|cm3|cm³)\b/i);
   return {
     engineCc: cc ? integer(cc[1]) : liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined,
-    powerHp: integer(hp?.[1]),
-    mileageKm: integer(mileage?.[1]),
-    fuel: text.match(/\b(Petrol|Gasoline|Diesel|Hybrid|Plug[- ]?in Hybrid|PHEV|Electric|EV)\b/i)?.[1],
-    transmission: text.match(/\b(Automatic|Manual|CVT|DCT|Tiptronic|AT|MT)\b/i)?.[1],
-    drive: text.match(/\b(AWD|4WD|4x4|FWD|RWD|2WD)\b/i)?.[1],
-    bodyType: text.match(/\b(SUV|Crossover|Sedan|Hatchback|Coupe|Convertible|Pickup|Wagon|Minivan|MPV)\b/i)?.[1],
-    images: [...new Set(images)].slice(0, 30),
+    powerHp: integer(powerText.match(/\b([0-9]{2,4})\s*(?:HP|PS|bhp)\b/i)?.[1]),
+    mileageKm: integer(mileageText.match(/([0-9][0-9, ]{1,8})\s*km\b/i)?.[1]),
+    fuel: firstLabelValue(section, ["Fuel Type"]) || undefined,
+    transmission: firstLabelValue(section, ["Transmission Type"]) || undefined,
+    drive: firstLabelValue(section, ["Drive Type", "Drive"]) || undefined,
+    bodyType: firstLabelValue(section, ["Body Type"]) || undefined,
   };
 }
 async function request(url: string, referer = BASE_URL) {
@@ -204,25 +230,28 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
     const row = raw as DubizzleExactRow;
     if (!row?.id || !row.sourceUrl || !row.make || !row.model || !row.year || !row.price) return null;
     const now = new Date().toISOString();
+    const listingGalleryVerified = row.images.length >= 5;
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
       sourceTitle: row.title, make: row.make, model: row.model, trim: row.trim, year: row.year, mileageKm: row.mileageKm,
       engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType,
       sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
-      operational: { sourceUrl: row.sourceUrl, sourceVenueName: row.location || "Dubizzle UAE", sourceTitle: row.title, exactDetail: true, exactFields: true, exactPhotos: true,
-        galleryVerified: row.images.length >= 5, galleryImageCount: row.images.length, gallerySafetyMode: "dubizzle_exact_detail_uuid_v1", galleryStoredAs: "json_urls", photoIdentityVerified: row.images.length >= 5,
-        raw: { parsed: row, images: row.images, detailIdentityVerified: true, listingBoundImages: row.images.length > 0, photoIdentityVerified: row.images.length >= 5 } },
+      operational: { sourceUrl: row.sourceUrl, sourceVenueName: row.location || "Dubizzle UAE", sourceTitle: row.title, exactDetail: false, exactFields: false, exactPhotos: listingGalleryVerified,
+        galleryVerified: listingGalleryVerified, galleryImageCount: row.images.length, gallerySafetyMode: "dubizzle_listing_card_uuid_v2", galleryStoredAs: "json_urls", photoIdentityVerified: listingGalleryVerified,
+        raw: { parsed: row, images: row.images, detailIdentityVerified: false, listingBoundImages: row.images.length > 0, photoIdentityVerified: listingGalleryVerified } },
     };
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational?.raw as { parsed?: DubizzleExactRow; images?: string[] } | undefined;
     const row = raw?.parsed;
-    if (!row?.sourceUrl) return [];
-    let urls = [...new Set(raw?.images || row.images || [])];
+    if (!row?.sourceUrl || detailId(row.sourceUrl) !== String(offer.sourceOfferId || "")) return [];
+    const urls = [...new Set(raw?.images || row.images || [])];
     try {
-      const { markup } = await request(row.sourceUrl, "https://uae.dubizzle.com/motors/used-cars/");
-      const fields = detailFields(markup, row);
+      const { response, markup } = await request(row.sourceUrl, "https://uae.dubizzle.com/motors/used-cars/");
+      const responseUrl = response.url || row.sourceUrl;
+      if (detailId(responseUrl) !== String(offer.sourceOfferId || "")) throw new Error(`dubizzle_exact_detail_identity_${offer.sourceOfferId}`);
+      const fields = parseDubizzleLabelBoundDetailFields(markup);
       offer.engineCc = fields.engineCc || offer.engineCc;
       offer.powerHp = fields.powerHp || offer.powerHp;
       offer.mileageKm = fields.mileageKm || offer.mileageKm;
@@ -230,22 +259,23 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
       offer.transmission = fields.transmission || offer.transmission;
       offer.drive = fields.drive || offer.drive;
       offer.bodyType = fields.bodyType || offer.bodyType;
-      if (fields.powerHp) { offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Dubizzle detail page"; }
-      urls = fields.images.length >= 5 ? fields.images : urls;
+      if (fields.powerHp) { offer.powerDataConfidence = "source_exact"; offer.powerDataSource = `Dubizzle Car Overview:${offer.sourceOfferId}:Power`; }
       const op = offer.operational as any;
+      op.exactDetail = true;
+      op.exactFields = true;
       op.galleryVerified = urls.length >= 5;
       op.galleryImageCount = urls.length;
       op.photoIdentityVerified = urls.length >= 5;
-      op.raw = { ...(op.raw || {}), images: urls, detailIdentityVerified: true, listingBoundImages: true, photoIdentityVerified: urls.length >= 5 };
+      op.raw = { ...(op.raw || {}), images: urls, detailIdentityVerified: true, listingBoundImages: true, photoIdentityVerified: urls.length >= 5, semanticFieldPolicy: "car_overview_label_bound_v1" };
     } catch {
-      // Keep only listing-bound source URLs. Never substitute another source or a generic image.
+      // Keep only listing-card-bound source URLs and never infer semantics from page-wide text.
     }
     const limit = Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     return urls.slice(0, limit).map(asImage);
   }
 
   mapStatus(): OfferStatus { return "active"; }
-  async healthCheck() { return { ok: true, message: "Dubizzle exact listing/detail UUID adapter", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "Dubizzle exact listing UUID + label-bound overview adapter", checkedAt: new Date().toISOString() }; }
 }
 
 export const dubizzleUaeExactSource = new DubizzleUaeExactAdapter();
