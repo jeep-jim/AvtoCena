@@ -1,0 +1,81 @@
+name: One-shot fix bundled vehicle knowledge runtime
+run-name: Fix bundled vehicle knowledge runtime · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - fix/runtime-bundled-vehicle-knowledge-20260813
+    paths:
+      - .github/workflows/oneshot-fix-bundled-vehicle-knowledge-runtime-20260813.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/runtime-bundled-vehicle-knowledge-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Route stable vehicle knowledge reads to bundled GitHub snapshot
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/vehicle-knowledge.ts')
+          s=p.read_text()
+          old='import { readChunkedDataJson } from "../data";'
+          new='import { readBundledChunkedDataJson } from "../bundled-data";'
+          if old not in s:
+              raise SystemExit('vehicle knowledge import anchor missing')
+          s=s.replace(old,new,1)
+          s=s.replace('readChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, [])','readBundledChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, [])')
+          s=s.replace('readChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, [])','readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, [])')
+          p.write_text(s)
+          PY
+      - name: Add regression test for object-storage shadowing
+        run: |
+          cat > tests/vehicle-knowledge-bundled-runtime.test.ts <<'EOF'
+          import assert from "node:assert/strict";
+          import test from "node:test";
+          import fs from "node:fs";
+          import { readBundledChunkedDataJson } from "../apps/web/lib/bundled-data";
+          import { readVehicleKnowledgeModels, readVehicleKnowledgeVariants, resetVehicleKnowledgeCache } from "../apps/web/lib/catalog/vehicle-knowledge";
+
+          test("bundled vehicle knowledge ignores runtime Object Storage shadow copies", async () => {
+            const modelIndex = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/models-index.json", "utf8"));
+            const variantIndex = JSON.parse(fs.readFileSync("data/catalog/vehicle-knowledge/variants-index.json", "utf8"));
+            assert.ok(modelIndex.total > 4_000, `expected bundled model corpus, got ${modelIndex.total}`);
+            assert.ok(variantIndex.total > 10_000, `expected bundled variant corpus, got ${variantIndex.total}`);
+            const models = await readBundledChunkedDataJson<any>("catalog/vehicle-knowledge/models.json", []);
+            const variants = await readBundledChunkedDataJson<any>("catalog/vehicle-knowledge/variants.json", []);
+            assert.equal(models.length, modelIndex.total);
+            assert.equal(variants.length, variantIndex.total);
+            resetVehicleKnowledgeCache();
+            const resolvedModels = await readVehicleKnowledgeModels();
+            const resolvedVariants = await readVehicleKnowledgeVariants();
+            assert.equal(resolvedModels.length, modelIndex.total);
+            assert.equal(resolvedVariants.length, variantIndex.total);
+          });
+          EOF
+      - name: Run focused regression and typecheck
+        env:
+          JSON_STORAGE_DRIVER: object
+        run: |
+          node --import tsx --test tests/vehicle-knowledge-bundled-runtime.test.ts tests/vehicle-knowledge.test.ts
+          npm run typecheck
+      - name: Commit branch fix
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/bundled-data.ts apps/web/lib/catalog/vehicle-knowledge.ts tests/vehicle-knowledge-bundled-runtime.test.ts
+          git commit -m "Fix runtime vehicle knowledge shadowing"
+          git push origin HEAD:fix/runtime-bundled-vehicle-knowledge-20260813
