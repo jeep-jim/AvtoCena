@@ -5,7 +5,7 @@ process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
 process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
-const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, selectCatalogModelYearCoverageFirst } = await import("../apps/web/lib/catalog/inventory-quota.ts");
@@ -406,9 +406,9 @@ await Promise.all(sources.map(async (source) => {
         offer = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(offer));
       }
       let calculated;
-      try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
+      try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithPreliminaryPowerPricing(offer)); }
       catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) }); reject(rejections, "calculation_exception"); return null; }
-      if (!exactCalculation(calculated) && !isPreliminaryElectrifiedCalculation(calculated)) {
+      if (!exactCalculation(calculated) && !isPreliminaryPowerPendingCalculation(calculated)) {
         const diagnostic = calculationPendingDiagnostic(calculated);
         const diagnosticKey = `${diagnostic.make}|${diagnostic.model}|${diagnostic.trim}|${diagnostic.year}|${diagnostic.powertrainKind}|${diagnostic.reason}`.toLocaleLowerCase("en-US");
         const targetDiagnostics = ["electric", "series_hybrid", "other_hybrid"].includes(diagnostic.powertrainKind) ? pendingElectrifiedModels : pendingCombustionModels;
@@ -424,7 +424,7 @@ await Promise.all(sources.map(async (source) => {
           recoveryExactSourceUrl: true,
           recoveryExactPhotoIdentity: true,
           recoveryCalculatedRub: true,
-          recoveryPreliminaryPowerPending: isPreliminaryElectrifiedCalculation(calculated),
+          recoveryPreliminaryPowerPending: isPreliminaryPowerPendingCalculation(calculated),
           recoveryBodySourceOnly: true,
         },
       };
@@ -476,7 +476,7 @@ const report = {
   calculationPendingCombustionModels: [...pendingCombustionModels.values()].slice(0, 100),
   preferredCount,
   calculatedCount: offers.filter(exactCalculation).length,
-  preliminaryCount: offers.filter(isPreliminaryElectrifiedCalculation).length,
+  preliminaryCount: offers.filter(isPreliminaryPowerPendingCalculation).length,
   imageStats: offers.length ? {
     min: Math.min(...offers.map((offer) => offer.images?.length || 0)),
     max: Math.max(...offers.map((offer) => offer.images?.length || 0)),
