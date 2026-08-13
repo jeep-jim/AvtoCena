@@ -1,0 +1,36 @@
+name: Georgia AutoPapa power inspect read-only
+
+on:
+  push:
+    branches:
+      - ops/georgia-power-inspect-audit-20260813
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Fetch fixed Yandex diagnostic endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --max-time 120 \
+            https://avtocena.com/api/internal/georgia-power-inspect-a18c74 \
+            -o /tmp/georgia-power-inspect.json
+          python3 - <<'PY'
+          import json
+          p='/tmp/georgia-power-inspect.json'
+          data=json.load(open(p, encoding='utf-8'))
+          print(json.dumps(data, ensure_ascii=False, indent=2))
+          results=data.get('results') or []
+          print('SUMMARY', json.dumps({
+            'count': len(results),
+            'powered': sum(1 for r in results if r.get('expected')=='powered'),
+            'missing': sum(1 for r in results if r.get('expected')=='missing'),
+            'missing_with_power_field': sum(1 for r in results if r.get('expected')=='missing' and r.get('powerField')),
+            'missing_with_page_power_mentions': sum(1 for r in results if r.get('expected')=='missing' and r.get('pagePowerMentions')),
+            'missing_with_markup_key_mentions': sum(1 for r in results if r.get('expected')=='missing' and r.get('markupKeyMentions')),
+          }, ensure_ascii=False))
+          PY
