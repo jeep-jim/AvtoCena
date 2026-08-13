@@ -1,13 +1,46 @@
-name: Apply regional scale fix (legacy, manual only)
+name: Validate recovery photo gate fix
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/recovery-photo-gate-object-images-20260813
+    paths:
+      - ".github/workflows/apply-regional-scale-fix.yml"
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
-  disabled:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - run: echo "Legacy automatic patch workflow is disabled."
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --import tsx --test tests/catalog-recovery-min-images.test.ts
+      - uses: actions/download-artifact@v4
+        with:
+          name: korea-retry1-combined-readonly-gate
+          path: prior
+          repository: jeep-jim/AvtoCena
+          run-id: 31724210188
+          github-token: ${{ github.token }}
+      - name: Corrected Korea photo gate
+        env:
+          RECOVERY_PHOTO_GATE_MARKET: korea
+          RECOVERY_PHOTO_GATE_INPUT: prior/catalog-rebuild-korea.json
+          RECOVERY_PHOTO_GATE_REPORT: korea-retry1-photo-gate-corrected.json
+          RECOVERY_MIN_IMAGES_PER_OFFER: "5"
+        run: node scripts/catalog-recovery-photo-gate.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-retry1-photo-gate-corrected
+          path: korea-retry1-photo-gate-corrected.json
+          if-no-files-found: warn
+          retention-days: 3
