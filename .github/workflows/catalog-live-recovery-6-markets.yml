@@ -23,6 +23,8 @@ env:
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+  CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
   RECOVERY_TARGET: "1000"
   RECOVERY_MAX_PAGES: "120"
   RECOVERY_TIME_LIMIT_MS: "2700000"
@@ -66,7 +68,7 @@ jobs:
           - market: europe
             sources: "autoscout_europe_open"
           - market: georgia
-            sources: "auto_georgia_open"
+            sources: "myauto_georgia_list,autopapa_georgia_open"
           - market: kyrgyzstan
             sources: "mashina_kyrgyzstan_exact"
     env:
