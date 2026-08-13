@@ -1,0 +1,102 @@
+name: Issue241 post-enrichment public quota 20260814
+
+on:
+  push:
+    branches: [issue241-integrity-run-20260814]
+    paths:
+      - '.github/workflows/issue241-post-enrichment-quota-20260814.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: issue241-integrity-run-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply post-enrichment public quota guard
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          storage = Path('apps/web/lib/catalog/storage.ts')
+          text = storage.read_text()
+          runtime_import = 'import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";\n'
+          quota_import = 'import { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } from "./inventory-quota";\n'
+          if quota_import not in text:
+              if text.count(runtime_import) != 1:
+                  raise SystemExit(f'runtime_import_anchor_count={text.count(runtime_import)}')
+              text = text.replace(runtime_import, runtime_import + quota_import, 1)
+          anchor = 'export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {\n'
+          helper = '''export function capPublicCatalogOffersByModelYear(offers: VehicleOffer[]) {\n  const selected: VehicleOffer[] = [];\n  const counts = new Map<string, number>();\n  for (const offer of offers) {\n    const key = catalogModelYearQuotaKey(offer, offer.market);\n    if (!key) continue;\n    const count = counts.get(key) || 0;\n    if (count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR) continue;\n    counts.set(key, count + 1);\n    selected.push(offer);\n  }\n  return selected;\n}\n\n'''
+          if 'export function capPublicCatalogOffersByModelYear' not in text:
+              if text.count(anchor) != 1:
+                  raise SystemExit(f'persist_anchor_count={text.count(anchor)}')
+              text = text.replace(anchor, helper + anchor, 1)
+          old = '''  await persistInternalCatalog(storage, generationId, nextOffers);\n  const byMarket = new Map<string, VehicleOffer[]>();\n  for (const offer of nextOffers.filter(isPublicOffer)) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);\n'''
+          new = '''  await persistInternalCatalog(storage, generationId, nextOffers);\n  // Vehicle-knowledge enrichment can canonicalize previously distinct model labels\n  // into one exact model-year bucket. Preserve the full internal generation for\n  // retention, but enforce the shared 20-card invariant on public read models\n  // only after that enrichment has completed.\n  const publicOffers = capPublicCatalogOffersByModelYear(nextOffers.filter(isPublicOffer));\n  const byMarket = new Map<string, VehicleOffer[]>();\n  for (const offer of publicOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);\n'''
+          if old not in text:
+              raise SystemExit('public_by_market_anchor_missing')
+          text = text.replace(old, new, 1)
+          old_idx = '  await rebuildIndexes(generationId, nextOffers.filter(isPublicOffer), byId, imagesById);\n'
+          if text.count(old_idx) != 1:
+              raise SystemExit(f'rebuild_anchor_count={text.count(old_idx)}')
+          text = text.replace(old_idx, '  await rebuildIndexes(generationId, publicOffers, byId, imagesById);\n', 1)
+          storage.write_text(text)
+          Path('tests/catalog-persist-public-quota.test.ts').write_text(r'''import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+          import { capPublicCatalogOffersByModelYear } from "../apps/web/lib/catalog/storage";
+
+          function offer(id: string, model: string, year: number) {
+            return { id, market: "europe", make: "BMW", model, year, status: "active" } as any;
+          }
+
+          test("public persistence caps each canonicalized exact model-year at twenty", () => {
+            const rows = [
+              ...Array.from({ length: 23 }, (_, index) => offer(`x3-2022-${index}`, "X3", 2022)),
+              ...Array.from({ length: 21 }, (_, index) => offer(`x3-2023-${index}`, "X3", 2023)),
+              ...Array.from({ length: 5 }, (_, index) => offer(`x5-2022-${index}`, "X5", 2022)),
+            ];
+            const selected = capPublicCatalogOffersByModelYear(rows);
+            assert.equal(selected.filter((row) => row.model === "X3" && row.year === 2022).length, 20);
+            assert.equal(selected.filter((row) => row.model === "X3" && row.year === 2023).length, 20);
+            assert.equal(selected.filter((row) => row.model === "X5" && row.year === 2022).length, 5);
+          });
+
+          test("persist applies public cap after enrichment while retaining the full internal generation", () => {
+            const source = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
+            const enrichAt = source.indexOf("const normalized = await Promise.all(nextOffers.map(async (offer) => normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))))");
+            const internalAt = source.indexOf("await persistInternalCatalog(storage, generationId, nextOffers)");
+            const capAt = source.indexOf("const publicOffers = capPublicCatalogOffersByModelYear(nextOffers.filter(isPublicOffer))");
+            const publicAt = source.indexOf("for (const offer of publicOffers) byMarket.set");
+            assert.ok(enrichAt >= 0 && internalAt > enrichAt && capAt > internalAt && publicAt > capAt);
+            assert.match(source, /await rebuildIndexes\(generationId, publicOffers, byId, imagesById\)/);
+          });
+          '''.replace(/^          /gm, ''))
+          PY
+      - name: Validate quota guard
+        run: |
+          node --import tsx --test tests/catalog-persist-public-quota.test.ts tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
+          npm run typecheck
+          git diff --check
+      - name: Commit validated code only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/issue241-post-enrichment-quota-20260814.yml
+          git config user.name 'jeep-jim'
+          git config user.email 'yokkey@ya.ru'
+          git add apps/web/lib/catalog/storage.ts tests/catalog-persist-public-quota.test.ts
+          git add -u .github/workflows/issue241-post-enrichment-quota-20260814.yml
+          git commit -m 'Enforce public quota after vehicle enrichment'
+          git push origin HEAD:issue241-integrity-run-20260814
