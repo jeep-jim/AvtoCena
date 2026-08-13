@@ -118,8 +118,10 @@ const requiredSourceIds = new Set(
   Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId),
 );
 
-// Dedicated adapters own their detail/gallery flow. Every other raw source can use
-// the generic source-page wrapper, which never stores image binaries.
+// Dedicated adapters own their exact listing-bound detail/gallery flow. Every
+// other raw source can use the generic source-page wrapper. Never replace a
+// source-specific gallery parser with broad page scraping: that can mix related
+// or recommended vehicle images into the current listing.
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
@@ -130,9 +132,12 @@ const dedicatedDetailSourceIds = new Set([
   "autoscout_europe_open",
   "mobile_de_open",
   "dubizzle_uae_open",
+  "dubicars_uae_exact",
   "kcar_korea_open",
   "kbchachacha_korea_open",
+  "myauto_georgia_list",
   "autopapa_georgia_open",
+  "mashina_kyrgyzstan_exact",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
