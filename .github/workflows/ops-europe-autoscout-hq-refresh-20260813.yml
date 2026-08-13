@@ -1,0 +1,221 @@
+name: Ops · Europe AutoScout HQ refresh 20260813
+
+on:
+  push:
+    branches:
+      - ops/europe-autoscout-hq-refresh-20260813
+    paths:
+      - .github/workflows/ops-europe-autoscout-hq-refresh-20260813.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_GROW_ONLY_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Refuse to overlap another catalog writer
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          runs="$(curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?status=in_progress&per_page=100")"
+          jq --arg current "$GITHUB_RUN_ID" '[.workflow_runs[] | select((.id|tostring) != $current) | select((.name|ascii_downcase|test("catalog|recovery|gallery|inventory quota|market refresh")))]' <<<"$runs" > competing-runs.json
+          test "$(jq length competing-runs.json)" -eq 0
+
+      - name: Verify current AutoScout HQ source contract without publishing
+        shell: bash
+        env:
+          CATALOG_REBUILD_MARKET: europe
+          CATALOG_REBUILD_SOURCE_IDS: autoscout_europe_open
+          CATALOG_REBUILD_OUTPUT: autoscout-readiness.json
+          CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+          CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+          CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+          CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+          CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+          CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+          CATALOG_GALLERY_TIMEOUT_MS: "30000"
+          CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+          CATALOG_KNOWLEDGE_DISABLED: "1"
+        run: |
+          set -euo pipefail
+          npm run typecheck
+          node --import tsx --test tests/catalog-autoscout-hq-gallery.test.ts
+          npx tsx scripts/catalog-simple-source-market.mjs
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync('autoscout-readiness.json','utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const bad = offers.filter(o => o.sourceId !== 'autoscout_europe_open' || Number(o.year) < 2020 || !Array.isArray(o.images) || o.images.length < 5 || o.images.some(i => !/^https:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(String(i?.url||'')) || Number(i?.width||0) < 900 || Number(i?.height||0) < 600) || o?.operational?.raw?.photoIdentityVerified !== true || o?.operational?.raw?.photoResolutionVerified !== true);
+          console.log(JSON.stringify({count: offers.length, bad: bad.length, sample: offers.slice(0,3).map(o=>({sourceOfferId:o.sourceOfferId,year:o.year,images:o.images?.length,first:o.images?.[0]}))},null,2));
+          if (offers.length < 3 || bad.length) process.exit(1);
+          NODE
+
+      - name: Acquire production catalog writer lock
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import { mutateDataJson } from './apps/web/lib/data.ts';
+          const operationId = `europe_autoscout_hq_${process.env.GITHUB_RUN_ID}`;
+          await mutateDataJson('catalog/import-lock.json',{lockedUntil:''},current=>{
+            const active=current?.lockedUntil && Date.parse(current.lockedUntil)>Date.now();
+            if(active && current.operationId!==operationId) throw new Error(`catalog_writer_locked:${current.operationId||'unknown'}:${current.lockedUntil}`);
+            return {operationId,startedAt:new Date().toISOString(),heartbeatAt:new Date().toISOString(),lockedUntil:new Date(Date.now()+2*60*60*1000).toISOString()};
+          });
+          NODE
+
+      - name: Preflight writer storage safety and snapshot all seven markets
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+          import { readAllOffersForMaintenance } from './apps/web/lib/catalog/storage.ts';
+          import { normalizeVehicleOfferSpecs } from './apps/web/lib/catalog/spec-normalization.ts';
+          import { enrichOfferWithVehicleKnowledge } from './apps/web/lib/catalog/vehicle-knowledge.ts';
+          const markets=['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
+          const canonical=v=>Array.isArray(v)?v.map(canonical):(v&&typeof v==='object')?Object.fromEntries(Object.keys(v).sort().filter(k=>v[k]!==undefined).map(k=>[k,canonical(v[k])])):v;
+          const stable=v=>JSON.stringify(canonical(v));
+          const hash=v=>crypto.createHash('sha256').update(stable(v)).digest('hex');
+          const all=await readAllOffersForMaintenance();
+          const state={createdAt:new Date().toISOString(),counts:{},hashes:{},autoscout:{active:0,under2020:[],ids:[]},production:{}};
+          for(const market of markets){const rows=all.filter(o=>o.market===market).sort((a,b)=>String(a.id).localeCompare(String(b.id))); state.counts[market]=rows.filter(o=>o.status==='active').length; state.hashes[market]=hash(rows);}
+          const autoscout=all.filter(o=>o.market==='europe'&&o.sourceId==='autoscout_europe_open'&&o.status==='active');
+          state.autoscout.active=autoscout.length; state.autoscout.under2020=autoscout.filter(o=>Number(o.year||0)<2020).map(o=>({id:o.id,sourceOfferId:o.sourceOfferId,year:o.year})); state.autoscout.ids=autoscout.map(o=>({id:o.id,sourceOfferId:o.sourceOfferId,year:o.year,images:o.images?.length||0}));
+          if(!autoscout.length) throw new Error('no_active_autoscout_europe');
+          if(state.autoscout.under2020.length) throw new Error(`autoscout_age_constraint_violation:${state.autoscout.under2020.length}`);
+          const idempotence=[];
+          for(const offer of all){if(offer.market==='europe') continue; const next=normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(structuredClone(offer))); if(stable(next)!==stable(offer)){idempotence.push({id:offer.id,market:offer.market,before:hash(offer),wouldBecome:hash(next)}); if(idempotence.length>=20) break;}}
+          state.nonEuropeWriterIdempotenceProblems=idempotence;
+          if(idempotence.length) throw new Error(`non_europe_writer_not_idempotent:${idempotence.length}`);
+          for(const market of markets){const r=await fetch(`https://avtocena.com/api/catalog/search?market=${market}&pageSize=8&page=1&sort=updatedAt`,{cache:'no-store'}); if(!r.ok) throw new Error(`prod_${market}_${r.status}`); const j=await r.json(); state.production[market]={total:Number(j?.total||0),sampleIds:(j?.items||[]).slice(0,8).map(x=>x.id)};}
+          fs.writeFileSync('before-state.json',JSON.stringify(state,null,2));
+          console.log(JSON.stringify({counts:state.counts,production:Object.fromEntries(markets.map(m=>[m,state.production[m].total])),autoscoutActive:autoscout.length,nonEuropeWriterIdempotent:true},null,2));
+          NODE
+
+      - name: Force exact AutoScout galleries to replace legacy previews
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/catalog-refresh-galleries.mjs')
+          s=p.read_text()
+          old='    const forceReplace = offer.operational?.galleryForceReplace === true;'
+          new='    const forceReplace = offer.operational?.galleryForceReplace === true || (offer.sourceId === "autoscout_europe_open" && fresh.length >= minImages && offer.operational?.photoIdentityVerified === true && offer.operational?.photoResolutionVerified === true);'
+          if s.count(old)!=1: raise SystemExit(f'forceReplace anchor count={s.count(old)}')
+          p.write_text(s.replace(old,new,1))
+          PY
+
+      - name: Refresh every active AutoScout Europe gallery from its exact HQ listing
+        shell: bash
+        env:
+          CATALOG_GALLERY_MARKETS: europe
+          CATALOG_GALLERY_SOURCE_IDS: autoscout_europe_open
+          CATALOG_GALLERY_FORCE: "1"
+          CATALOG_GALLERY_MAX_OFFERS: "10000"
+          CATALOG_GALLERY_MAX_PER_MARKET: "10000"
+          CATALOG_GALLERY_MIN_IMAGES: "5"
+          CATALOG_GALLERY_PERSIST_EVERY: "10000"
+          CATALOG_GALLERY_CONCURRENCY: "10"
+          CATALOG_GALLERY_RETIRE_CONFIRMED_UNAVAILABLE: "false"
+          CATALOG_GALLERY_REPORT_FILE: europe-autoscout-hq-refresh.json
+          CATALOG_GALLERY_TIMEOUT_MS: "30000"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+        run: npx tsx scripts/catalog-refresh-galleries.mjs
+
+      - name: Verify storage isolation, HQ identity, age constraint and complete refresh
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import crypto from 'node:crypto';
+          import fs from 'node:fs';
+          import { readAllOffersForMaintenance } from './apps/web/lib/catalog/storage.ts';
+          const before=JSON.parse(fs.readFileSync('before-state.json','utf8')); const gallery=JSON.parse(fs.readFileSync('europe-autoscout-hq-refresh.json','utf8'));
+          const markets=['korea','china','japan','uae','europe','georgia','kyrgyzstan']; const others=markets.filter(m=>m!=='europe');
+          const canonical=v=>Array.isArray(v)?v.map(canonical):(v&&typeof v==='object')?Object.fromEntries(Object.keys(v).sort().filter(k=>v[k]!==undefined).map(k=>[k,canonical(v[k])])):v; const stable=v=>JSON.stringify(canonical(v)); const hash=v=>crypto.createHash('sha256').update(stable(v)).digest('hex');
+          const all=await readAllOffersForMaintenance(); const after={counts:{},hashes:{},autoscout:{},production:{}};
+          for(const market of markets){const rows=all.filter(o=>o.market===market).sort((a,b)=>String(a.id).localeCompare(String(b.id))); after.counts[market]=rows.filter(o=>o.status==='active').length; after.hashes[market]=hash(rows);}
+          const changed=others.filter(m=>before.hashes[m]!==after.hashes[m]||before.counts[m]!==after.counts[m]);
+          if(changed.length) throw new Error(`non_europe_storage_changed:${changed.join(',')}`);
+          if(gallery.selected!==before.autoscout.active || gallery.failed!==0 || gallery.refreshed!==gallery.selected || gallery.replaced!==gallery.selected) throw new Error(`incomplete_gallery_refresh:selected=${gallery.selected},expected=${before.autoscout.active},refreshed=${gallery.refreshed},replaced=${gallery.replaced},failed=${gallery.failed}`);
+          const autoscout=all.filter(o=>o.market==='europe'&&o.sourceId==='autoscout_europe_open'&&o.status==='active'); const problems=[];
+          for(const o of autoscout){const sourceId=String(o.sourceOfferId||'').toLowerCase(); if(Number(o.year||0)<2020||!Array.isArray(o.images)||o.images.length<5){problems.push({id:o.id,reason:'age_or_count'});continue;} for(const i of o.images){let u;try{u=new URL(String(i?.url||''));}catch{problems.push({id:o.id,reason:'bad_url'});break;} if(u.hostname.toLowerCase()!=='prod.pictures.autoscout24.net'||!decodeURIComponent(u.pathname).toLowerCase().startsWith(`/listing-images/${sourceId}_`)||Number(i?.width||0)<900||Number(i?.height||0)<600){problems.push({id:o.id,reason:'not_listing_bound_hq',image:i});break;}}}
+          if(problems.length) throw new Error(`stored_autoscout_hq_problems:${problems.length}`);
+          fs.writeFileSync('after-state.json',JSON.stringify({...after,nonEuropeHashesUnchanged:true,autoscout:{active:autoscout.length,verified:autoscout.length,problems}},null,2));
+          console.log(JSON.stringify({selected:gallery.selected,refreshed:gallery.refreshed,replaced:gallery.replaced,failed:gallery.failed,autoscoutVerified:autoscout.length,nonEuropeHashesUnchanged:true},null,2));
+          NODE
+
+      - name: Verify production cards and unchanged other-market counts
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const before=JSON.parse(fs.readFileSync('before-state.json','utf8')); const gallery=JSON.parse(fs.readFileSync('europe-autoscout-hq-refresh.json','utf8')); const afterStorage=JSON.parse(fs.readFileSync('after-state.json','utf8'));
+          const markets=['korea','china','japan','uae','europe','georgia','kyrgyzstan']; const others=markets.filter(m=>m!=='europe'); const prodAfter={};
+          await new Promise(r=>setTimeout(r,12000));
+          for(const market of markets){const r=await fetch(`https://avtocena.com/api/catalog/search?market=${market}&pageSize=48&page=1&sort=updatedAt`,{cache:'no-store'}); if(!r.ok) throw new Error(`prod_${market}_${r.status}`); const j=await r.json(); prodAfter[market]={total:Number(j?.total||0),first:j};}
+          const changedCounts=others.filter(m=>before.production[m].total!==prodAfter[m].total); if(changedCounts.length) throw new Error(`production_other_market_counts_changed:${changedCounts.join(',')}`);
+          const wanted=new Map(before.autoscout.ids.map(x=>[String(x.id),x])); const found=new Map(); const first=prodAfter.europe.first; const pages=Math.max(1,Math.ceil(Number(first?.total||0)/48));
+          const take=j=>{for(const item of (j?.items||[])) if(wanted.has(String(item.id))) found.set(String(item.id),item);}; take(first);
+          for(let p=2;p<=pages&&found.size<wanted.size;p++){const r=await fetch(`https://avtocena.com/api/catalog/search?market=europe&pageSize=48&page=${p}&sort=updatedAt`,{cache:'no-store'}); if(!r.ok) throw new Error(`prod_europe_page_${p}_${r.status}`); take(await r.json());}
+          const problems=[]; const verified=[];
+          for(const [id,meta] of wanted){const item=found.get(id); if(!item){problems.push({id,reason:'missing_public_card'});continue;} const image=String(item.cardImageUrl||item.images?.[0]?.url||''); let u;try{u=new URL(image,'https://avtocena.com');}catch{problems.push({id,reason:'bad_card_image',image});continue;} const bound=u.hostname.toLowerCase()==='prod.pictures.autoscout24.net'&&decodeURIComponent(u.pathname).toLowerCase().startsWith(`/listing-images/${String(meta.sourceOfferId||'').toLowerCase()}_`); if(!bound){problems.push({id,reason:'card_not_bound_to_listing',image});continue;} verified.push({id,sourceOfferId:meta.sourceOfferId,image});}
+          if(problems.length) throw new Error(`production_autoscout_card_problems:${problems.length}`);
+          for(const row of verified.slice(0,Math.min(30,verified.length))){const imageResponse=await fetch(row.image,{headers:{Range:'bytes=0-2047'}}); if(!imageResponse.ok) throw new Error(`production_image_http_${imageResponse.status}:${row.id}`); const page=await fetch(`https://avtocena.com/cars/offer/${encodeURIComponent(row.id)}`,{redirect:'follow'}); if(!page.ok) throw new Error(`production_offer_page_${page.status}:${row.id}`);}
+          const result={verifiedAt:new Date().toISOString(),gallerySelected:gallery.selected,galleryRefreshed:gallery.refreshed,galleryReplaced:gallery.replaced,storageAutoScoutVerified:afterStorage.autoscout.verified,productionAutoScoutFound:found.size,productionAutoScoutVerified:verified.length,productionSampleHttpVerified:Math.min(30,verified.length),otherMarketCountsUnchanged:true,otherMarketStorageHashesUnchanged:true,productionCounts:Object.fromEntries(markets.map(m=>[m,prodAfter[m].total]))};
+          fs.writeFileSync('production-verification.json',JSON.stringify(result,null,2)); console.log(JSON.stringify(result,null,2));
+          NODE
+
+      - name: Release production catalog writer lock
+        if: always()
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import { mutateDataJson } from './apps/web/lib/data.ts';
+          const operationId=`europe_autoscout_hq_${process.env.GITHUB_RUN_ID}`;
+          await mutateDataJson('catalog/import-lock.json',{lockedUntil:''},current=>current?.operationId===operationId?{operationId:'',lockedUntil:'',releasedAt:new Date().toISOString()}:current);
+          NODE
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: europe-autoscout-hq-refresh-proof
+          path: |
+            competing-runs.json
+            autoscout-readiness.json
+            before-state.json
+            europe-autoscout-hq-refresh.json
+            after-state.json
+            production-verification.json
+          if-no-files-found: warn
+          retention-days: 5
