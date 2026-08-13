@@ -111,6 +111,43 @@ html:not([data-theme="light"]) body .ac-partner-page {
     height: 52px !important;
     border-radius: 15px !important;
   }
+
+  /* Keep only the lower budget selector next to the red CTA on mobile. */
+  .ac-home-page #form > div:nth-child(2) {
+    display: none !important;
+  }
+}
+
+/* The finance cards reuse an older class that previously forced overflow:visible.
+   Override that legacy rule only inside the finance section so mascot artwork
+   stays inside the rounded card and the authored text layout is preserved. */
+@media (min-width: 1024px) {
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block {
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 24px !important;
+    border-radius: 1.6rem !important;
+  }
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > div:first-child {
+    display: block !important;
+    position: relative !important;
+    background: transparent !important;
+  }
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > div:first-child > div:first-child {
+    display: flex !important;
+  }
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > div:first-child > p {
+    display: block !important;
+    width: auto !important;
+    max-width: 350px !important;
+    margin-top: 32px !important;
+  }
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > img {
+    bottom: 0 !important;
+    object-fit: contain !important;
+    object-position: center bottom !important;
+  }
 }
 `;
 
