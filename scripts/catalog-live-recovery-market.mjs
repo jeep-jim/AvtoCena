@@ -8,7 +8,7 @@ const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.
 const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, selectCatalogModelYearCoverageFirst } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, findVehicleVariant } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
@@ -314,7 +314,7 @@ await Promise.all(sources.map(async (source) => {
   let finished = false;
   let stopReason = "source_exhausted";
 
-  while (pages < maxPages && accepted.size < target && Date.now() < deadline) {
+  while (pages < maxPages && Date.now() < deadline) {
     const cursorKey = String(cursor ?? "__start__");
     if (cursors.has(cursorKey)) { stopReason = "cursor_loop"; break; }
     cursors.add(cursorKey);
@@ -345,6 +345,17 @@ await Promise.all(sources.map(async (source) => {
       if (year < minYear || year > new Date().getFullYear() + 1) { reject(rejections, "year"); return null; }
       const detailBoundIdentity = source.sourceId === "autohome_new_china_open" && (!offer.make || !offer.model);
       if (!offer.sourceOfferId || ((!offer.make || !offer.model) && !detailBoundIdentity)) { reject(rejections, "identity"); return null; }
+      // Coverage scanning continues after the output target. Once a model-year
+      // already has 20 successfully prepared rows from earlier pages, skip its
+      // expensive detail/gallery work. This is not a speculative reservation:
+      // failed rows never occupy quota.
+      if (!detailBoundIdentity) {
+        const quotaKey = catalogModelYearQuotaKey(offer, market);
+        if (quotaKey && Number(acceptedModelYearCounts.get(quotaKey) || 0) >= maxOffersPerModelYear) {
+          reject(rejections, "model_year_quota");
+          return null;
+        }
+      }
       if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl)) { reject(rejections, "source_url"); return null; }
       if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); return null; }
       if (!detailBoundIdentity && COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
@@ -440,18 +451,21 @@ await Promise.all(sources.map(async (source) => {
     if (!rows.length && pages >= 3) { stopReason = "empty_pages"; break; }
   }
   if (Date.now() >= deadline) stopReason = "time_limit";
-  else if (accepted.size >= target) stopReason = "target_reached";
+  else if (!finished && pages >= maxPages && stopReason === "source_exhausted") stopReason = "page_limit";
   reports.push({ sourceId: source.sourceId, pages, seen, normalized, accepted: accepted.size, rejected: Object.values(rejections).reduce((a, b) => a + b, 0), rejections, errors: errors.slice(0, 100), finished, stopReason });
 }));
 
-const offers = [...globalOffers.values()].sort(qualityOrder).slice(0, target);
+const discoveredOffers = [...globalOffers.values()];
+const offers = selectCatalogModelYearCoverageFirst(discoveredOffers, target, qualityOrder);
 const preferredCount = offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length;
 const report = {
-  version: 1,
+  version: 2,
   mode: "live_market_exact_calculated_recovery",
   market,
   sourceIds: sources.map((source) => source.sourceId),
   target,
+  discoveredCount: discoveredOffers.length,
+  discoveredModelYears: new Set(discoveredOffers.map((offer) => catalogModelYearQuotaKey(offer, market)).filter(Boolean)).size,
   minYear,
   preferredMaxRub: maxPreferredRub,
   count: offers.length,
