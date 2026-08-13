@@ -1,0 +1,36 @@
+name: Audit object storage versioning 20260813
+run-name: Audit Object Storage versions after cleanup · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - audit/catalog-integrity-after-failed-writers-20260813
+    paths:
+      - .github/workflows/audit-object-storage-versioning-20260813.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      AWS_EC2_METADATA_DISABLED: "true"
+      ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - name: Confirm AWS CLI
+        run: aws --version
+      - name: Read bucket versioning and current-generation prefixes
+        run: |
+          set -euo pipefail
+          aws --endpoint-url "$ENDPOINT" s3api get-bucket-versioning --bucket "$BUCKET" > versioning.json
+          jq . versioning.json
+          root="${PREFIX:+${PREFIX}/}catalog/generations/"
+          aws --endpoint-url "$ENDPOINT" s3api list-object-versions --bucket "$BUCKET" --prefix "$root" --max-items 2000 > versions-sample.json
+          jq '{versions:(.Versions//[]|length),deleteMarkers:(.DeleteMarkers//[]|length),isTruncated:(.IsTruncated//false),versionBytes:(.Versions//[]|map(.Size//0)|add//0),latestVersionSamples:(.Versions//[]|sort_by(.LastModified)|reverse|.[0:10]|map({Key,VersionId,IsLatest,Size,LastModified})),deleteMarkerSamples:(.DeleteMarkers//[]|sort_by(.LastModified)|reverse|.[0:10]|map({Key,VersionId,IsLatest,LastModified}))}' versions-sample.json
