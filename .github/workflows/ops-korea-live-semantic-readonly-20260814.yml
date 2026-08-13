@@ -35,7 +35,7 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Live Korea semantic gate
+      - name: Live Korea semantic snapshot
         shell: bash
         run: |
           node --import tsx --input-type=module - <<'NODE'
@@ -44,30 +44,30 @@ jobs:
           const { catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
           const rows=await readMarketOffers('korea');
           const dist=(field,subset=rows)=>subset.reduce((o,r)=>{const k=String(r?.[field]??'<missing>').trim()||'<missing>';o[k]=(o[k]||0)+1;return o;},{});
-          const text=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''} ${JSON.stringify(r?.operational?.raw||{})}`;
+          const identityText=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''}`;
+          const fullText=r=>`${identityText(r)} ${JSON.stringify(r?.operational?.raw||{})}`;
           const sources=dist('sourceId');
           const badYears=rows.filter(r=>Number(r.year)<2020);
           const badImages=rows.filter(r=>(Array.isArray(r.images)?r.images.length:0)<5);
           const encar=rows.filter(r=>r.sourceId==='encar_direct');
           const suv=encar.filter(r=>/^(?:suv|crossover)$/i.test(String(r.bodyType||''))).length;
           const ratio=encar.length?suv/encar.length:1;
-          const known=r=>/(?:genesis|제네시스)[\s_-]*g80|(?:hyundai|현대)[\s_-]*(?:grandeur|그랜저)|(?:hyundai|현대)[\s_-]*(?:ioniq\s*6|아이오닉\s*6)|(?:kia|기아)[\s_-]*(?:k9|k900|quoris|퀴리스)/i.test(text(r));
+          const known=r=>/(?:genesis|제네시스)[\s_-]*g80|(?:hyundai|현대)[\s_-]*(?:grandeur|그랜저)|(?:hyundai|현대)[\s_-]*(?:ioniq\s*6|아이오닉\s*6)|(?:kia|기아)[\s_-]*(?:k9|k900|quoris|퀴리스)/i.test(identityText(r));
           const badSedans=rows.filter(r=>known(r)&&/^(?:suv|crossover|offroad)$/i.test(String(r.bodyType||'')));
-          const casper2022=rows.filter(r=>Number(r.year)===2022&&/(?:hyundai|현대)/i.test(text(r))&&/(?:casper|캐스퍼)/i.test(text(r)));
+          const sedanGroups={};
+          for(const r of badSedans){const k=`${r.sourceId}|${r.make}|${r.model}|${r.bodyType}`;sedanGroups[k]=(sedanGroups[k]||0)+1;}
+          const sedanExamples=badSedans.slice(0,20).map(r=>({id:r.id,sourceId:r.sourceId,make:r.make,model:r.model,year:r.year,bodyType:r.bodyType,sourceTitle:r.sourceTitle}));
+          const casper2022=rows.filter(r=>Number(r.year)===2022&&/(?:hyundai|현대)/i.test(identityText(r))&&/(?:casper|캐스퍼)/i.test(identityText(r)));
           const quota=new Map();
           for(const r of rows){const k=catalogModelYearQuotaKey(r,'korea');if(k) quota.set(k,(quota.get(k)||0)+1);}
           const maxQuota=Math.max(0,...quota.values());
-          const isK933=r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(text(r))&&/(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(text(r));
+          const isK933=r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(identityText(r))&&/(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(fullText(r));
           const k933=rows.filter(isK933);
           const badK9=k933.filter(r=>[3000,3300].includes(Number(r.engineCc||0)));
           const exactK9=k933.filter(r=>Number(r.engineCc||0)===3342);
-          const report={count:rows.length,sources,minYear:rows.length?Math.min(...rows.map(r=>Number(r.year||0))):0,maxPerExactModelYear:maxQuota,below5Images:badImages.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedanViolations:badSedans.length,casper2022:casper2022.length,k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),roundedUnsafe:badK9.length,exact3342:exactK9.length},bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel')};
+          const report={count:rows.length,sources,minYear:rows.length?Math.min(...rows.map(r=>Number(r.year||0))):0,maxPerExactModelYear:maxQuota,below5Images:badImages.length,encar:{count:encar.length,suvOrCrossover:suv,ratio:Number(ratio.toFixed(4))},knownSedanViolations:badSedans.length,knownSedanViolationGroups:sedanGroups,knownSedanViolationExamples:sedanExamples,casper2022:casper2022.length,k9_3_3_gdi:{count:k933.length,engineCc:dist('engineCc',k933),roundedUnsafe:badK9.length,exact3342:exactK9.length},bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel')};
           fs.writeFileSync('korea-live-semantic-readonly.json',JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
-          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sources[source]||0)>0)) throw new Error(`live_missing_source:${source}`);
-          if(badYears.length||badImages.length||maxQuota>20) throw new Error(`live_age_image_quota:${badYears.length}:${badImages.length}:${maxQuota}`);
-          if(ratio>0.75||badSedans.length||!casper2022.length) throw new Error(`live_semantic_gate:${ratio}:${badSedans.length}:${casper2022.length}`);
-          if(badK9.length||exactK9.length===0) throw new Error(`live_k9_engine_gate:${badK9.length}:${exactK9.length}`);
           NODE
 
       - name: Strict all-seven audit snapshot
@@ -77,6 +77,18 @@ jobs:
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Evaluate Korea semantic gate
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const r=JSON.parse(fs.readFileSync('korea-live-semantic-readonly.json','utf8'));
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(r.sources?.[source]||0)>0)) throw new Error(`live_missing_source:${source}`);
+          if(Number(r.minYear||0)<2020||Number(r.below5Images||0)!==0||Number(r.maxPerExactModelYear||0)>20) throw new Error(`live_age_image_quota:${r.minYear}:${r.below5Images}:${r.maxPerExactModelYear}`);
+          if(Number(r.encar?.ratio||1)>0.75||Number(r.knownSedanViolations||0)!==0||Number(r.casper2022||0)<=0) throw new Error(`live_semantic_gate:${r.encar?.ratio}:${r.knownSedanViolations}:${r.casper2022}`);
+          if(Number(r.k9_3_3_gdi?.roundedUnsafe||0)!==0||Number(r.k9_3_3_gdi?.exact3342||0)<=0) throw new Error(`live_k9_engine_gate:${r.k9_3_3_gdi?.roundedUnsafe}:${r.k9_3_3_gdi?.exact3342}`);
+          NODE
 
       - uses: actions/upload-artifact@v4
         if: always()
