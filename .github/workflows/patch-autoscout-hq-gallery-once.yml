@@ -1,0 +1,56 @@
+name: Patch AutoScout HQ gallery once
+on:
+  push:
+    branches: [fix/autoscout-exact-hq-gallery-20260813]
+    paths: [.github/workflows/patch-autoscout-hq-gallery-once.yml]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/autoscout-exact-hq-gallery-20260813
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply exact-page gallery patch and tests
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/autoscout-exact-source.ts')
+          s=p.read_text()
+          old='''function image(url: string): CatalogImage {\n  const extension = url.match(/\\.(jpe?g|webp|avif|png)(?:[/?#]|$)/i)?.[1]?.toLowerCase();\n  return {\n    id: "",\n    url,\n    objectKey: "",\n    checksum: "",\n    size: 0,\n    mimeType: extension === "png" ? "image/png" : extension === "avif" ? "image/avif" : extension === "webp" ? "image/webp" : "image/jpeg",\n  };\n}\n'''
+          new='''function imageResolution(url: string) {\n  const match = url.match(/\\/(\\d{2,5})x(\\d{2,5})\\.(jpe?g|webp|avif|png)(?:[?#]|$)/i);\n  if (!match) return { width: undefined, height: undefined, extension: undefined };\n  return { width: Number(match[1]) || undefined, height: Number(match[2]) || undefined, extension: match[3]?.toLowerCase() };\n}\n\nfunction image(url: string): CatalogImage {\n  const rendition = imageResolution(url);\n  const extension = rendition.extension || url.match(/\\.(jpe?g|webp|avif|png)(?:[/?#]|$)/i)?.[1]?.toLowerCase();\n  return {\n    id: "", url, objectKey: "", checksum: "", width: rendition.width, height: rendition.height, size: 0,\n    mimeType: extension === "png" ? "image/png" : extension === "avif" ? "image/avif" : extension === "webp" ? "image/webp" : "image/jpeg",\n  };\n}\n'''
+          assert old in s
+          s=s.replace(old,new,1)
+          anchor='''function nextData(markup: string): Record<string, any> | null {\n  const match = markup.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\\s\\S]*?)<\\/script>/i);\n  if (!match?.[1]) return null;\n  try { return JSON.parse(match[1]); } catch { return null; }\n}\n'''
+          helper=anchor+'''\nexport function parseAutoScoutDetailGallery(markup: string, sourceOfferId: string, limit = 30) {\n  const details = nextData(markup)?.props?.pageProps?.listingDetails;\n  if (!details || !Array.isArray(details.images) || !sourceOfferId) return [];\n  const declaredId = clean(details.id || details.listingId || details.uuid);\n  if (declaredId && declaredId !== sourceOfferId) return [];\n  const prefix = `/listing-images/${sourceOfferId}_`.toLowerCase();\n  const result: string[] = [];\n  const seen = new Set<string>();\n  for (const value of details.images) {\n    const url = absoluteUrl(value);\n    if (!/^https?:\\/\\/prod\\.pictures\\.autoscout24\\.net\\/listing-images\\//i.test(url)) continue;\n    let pathname = "";\n    try { pathname = new URL(url).pathname.toLowerCase(); } catch { continue; }\n    const { width, height } = imageResolution(url);\n    if (!pathname.startsWith(prefix) || !width || !height || width < 900 || height < 600 || seen.has(url)) continue;\n    seen.add(url);\n    result.push(url);\n    if (result.length >= Math.min(30, Math.max(1, limit))) break;\n  }\n  return result;\n}\n'''
+          assert anchor in s
+          s=s.replace(anchor,helper,1)
+          old_flags='''        exactDetail: true,\n        exactFields: true,\n        exactPhotos: true,\n        galleryVerified: row.images.length >= 5,\n        galleryImageCount: row.images.length,\n        gallerySafetyMode: "autoscout_next_listing_id_bound_v1",\n        galleryStoredAs: "json_urls",\n        photoIdentityVerified: true,\n        raw: {\n          parsed: row,\n          images: row.images,\n          listingBoundImages: true,\n          photoIdentityVerified: true,\n          detailIdentityVerified: true,\n        },\n'''
+          new_flags='''        exactDetail: false,\n        exactFields: true,\n        exactPhotos: false,\n        galleryVerified: false,\n        galleryImageCount: 0,\n        gallerySafetyMode: "autoscout_exact_detail_pending_v2",\n        galleryStoredAs: "json_urls",\n        photoIdentityVerified: false,\n        raw: {\n          parsed: row,\n          searchImages: row.images,\n          listingBoundSearchImages: true,\n          photoIdentityVerified: false,\n          detailIdentityVerified: false,\n        },\n'''
+          assert old_flags in s
+          s=s.replace(old_flags,new_flags,1)
+          old_fetch='''  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {\n    const raw = offer.operational?.raw as { images?: string[]; parsed?: AutoScoutExactRow } | undefined;\n    const urls = [...new Set(raw?.images || raw?.parsed?.images || [])];\n    const limit = Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));\n    return urls.slice(0, limit).map(image);\n  }\n'''
+          new_fetch='''  async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {\n    const sourceOfferId = clean(offer.sourceOfferId);\n    const sourceUrl = clean(offer.operational?.sourceUrl);\n    if (!sourceOfferId || !sourceUrl.includes("/offers/") || !sourceUrl.includes(sourceOfferId)) return [];\n    const controller = new AbortController();\n    const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));\n    try {\n      const response = await fetch(sourceUrl, { headers: HEADERS, redirect: "follow", signal: controller.signal });\n      const markup = await response.text();\n      if (!response.ok) throw new Error(`autoscout_detail_http_${response.status}:${sourceOfferId}`);\n      const limit = Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));\n      const urls = parseAutoScoutDetailGallery(markup, sourceOfferId, limit);\n      if (urls.length < 5) return [];\n      const previousRaw = offer.operational?.raw && typeof offer.operational.raw === "object" ? offer.operational.raw as Record<string, unknown> : {};\n      offer.operational = {\n        ...(offer.operational || {}), exactDetail: true, exactPhotos: true, galleryVerified: true, galleryImageCount: urls.length,\n        gallerySafetyMode: "autoscout_exact_detail_next_gallery_v2", galleryStoredAs: "json_urls", photoIdentityVerified: true,\n        photoResolutionVerified: true,\n        raw: { ...previousRaw, detailImages: urls, listingBoundImages: true, photoIdentityVerified: true, photoResolutionVerified: true, detailIdentityVerified: true },\n      } as any;\n      return urls.map(image);\n    } finally { clearTimeout(timer); }\n  }\n'''
+          assert old_fetch in s
+          s=s.replace(old_fetch,new_fetch,1)
+          p.write_text(s)
+          test=Path('tests/catalog-autoscout-hq-gallery.test.ts')
+          test.write_text('''import assert from "node:assert/strict";\nimport test from "node:test";\nimport { AutoScoutEuropeExactAdapter, parseAutoScoutDetailGallery } from "../apps/web/lib/catalog/autoscout-exact-source";\n\nconst id = "e69f4836-88ed-4c84-b8ae-034e73c485c7";\nfunction page(images: string[], declaredId = id) {\n  return `<script id="__NEXT_DATA__" type="application/json">${JSON.stringify({props:{pageProps:{listingDetails:{id:declaredId,images,headerImage:`https://prod.pictures.autoscout24.net/listing-images/${id}_header.jpg/120x90.webp`}}}})}</script>`;\n}\n\ntest("AutoScout exact detail gallery uses only source-declared HQ images for the exact listing", () => {\n  const good = Array.from({length:6},(_,i)=>`https://prod.pictures.autoscout24.net/listing-images/${id}_photo${i}.jpg/1280x960.webp`);\n  const rows = parseAutoScoutDetailGallery(page([good[0], `https://prod.pictures.autoscout24.net/listing-images/foreign_photo.jpg/1280x960.webp`, `${good[1].replace("1280x960","250x188")}`, ...good.slice(1), good[0]]), id);\n  assert.deepEqual(rows, good);\n});\n\ntest("AutoScout detail gallery rejects a mismatched declared listing id", () => {\n  const images = Array.from({length:5},(_,i)=>`https://prod.pictures.autoscout24.net/listing-images/${id}_photo${i}.jpg/1280x960.webp`);\n  assert.deepEqual(parseAutoScoutDetailGallery(page(images, "different-id"), id), []);\n});\n\ntest("AutoScout list thumbnails are not claimed as verified exact photos before detail fetch", () => {\n  const adapter = new AutoScoutEuropeExactAdapter();\n  const offer = adapter.normalizeOffer({ id, sourceUrl:`https://www.autoscout24.com/offers/example-${id}`, title:"Volvo EX90", make:"Volvo", model:"EX90", trim:"Ultra", year:2025, mileageKm:13909, price:70000, currency:"EUR", images:Array.from({length:5},(_,i)=>`https://prod.pictures.autoscout24.net/listing-images/${id}_${i}.jpg/250x188.webp`), raw:{} });\n  assert.ok(offer);\n  assert.equal(offer!.operational?.exactDetail, false);\n  assert.equal(offer!.operational?.exactPhotos, false);\n  assert.equal(offer!.operational?.galleryVerified, false);\n  assert.equal(offer!.operational?.photoIdentityVerified, false);\n});\n''')
+          PY
+          npm test -- --test-name-pattern='AutoScout'
+          npm run typecheck
+      - name: Commit tested patch
+        run: |
+          rm .github/workflows/patch-autoscout-hq-gallery-once.yml
+          git config user.name "AvtoCena automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add apps/web/lib/catalog/autoscout-exact-source.ts tests/catalog-autoscout-hq-gallery.test.ts .github/workflows/patch-autoscout-hq-gallery-once.yml
+          git commit -m "Fix AutoScout exact HQ gallery"
+          git push origin HEAD:fix/autoscout-exact-hq-gallery-20260813
