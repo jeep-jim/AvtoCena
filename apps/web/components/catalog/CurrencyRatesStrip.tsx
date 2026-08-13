@@ -98,10 +98,10 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
 
   const shell = variant === "desktop"
     ? "rounded-[1.6rem] p-4"
-    : "rounded-[1.35rem] px-2 py-3";
+    : "w-full min-w-0 max-w-full overflow-hidden rounded-[1.35rem] px-2 py-3";
   const rail = variant === "desktop"
     ? "grid grid-cols-5 gap-2"
-    : "ac-hide-scrollbar flex touch-pan-x gap-2 overflow-x-auto overscroll-x-contain";
+    : "ac-hide-scrollbar flex w-full min-w-0 touch-pan-x gap-2 overflow-x-auto overscroll-x-contain";
 
   return <>
     <section className={`ac-currency-rates-strip ${shell} ${className}`} aria-label="Курсы валют">
@@ -122,7 +122,7 @@ export function CurrencyRatesStrip({ rates: suppliedRates, variant = "mobile", c
             key={currency}
             type="button"
             onClick={() => openCurrency(currency)}
-            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "min-w-[62px] flex-1"}`}
+            className={`relative z-[1] flex touch-manipulation flex-col items-center justify-center rounded-xl px-1.5 py-2 text-center transition active:scale-[.97] ${variant === "desktop" ? "min-w-0 bg-white/[0.045]" : "min-w-[62px] shrink-0"}`}
             aria-label={`Открыть курс ${currency}`}
           >
             <CurrencyFlag currency={currency} className="h-4 w-6" />
