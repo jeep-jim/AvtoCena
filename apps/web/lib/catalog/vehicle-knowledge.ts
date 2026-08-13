@@ -1,4 +1,4 @@
-import { readChunkedDataJson } from "../data";
+import { readBundledChunkedDataJson } from "../bundled-data";
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 
 export type VehicleKnowledgeModel = {
@@ -170,7 +170,7 @@ function scoreModel(model: VehicleKnowledgeModel, offer: Partial<VehicleOffer>) 
 
 export async function readVehicleKnowledgeModels() {
   if (!modelCache) {
-    modelCache = readChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, [])
+    modelCache = readBundledChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, [])
       .then((rows) => rows
         .filter((row) => row && row.id && validName(row.make) && validName(row.model, 1))
         .map((row) => ({
@@ -189,7 +189,7 @@ export async function readVehicleKnowledgeModels() {
 
 export async function readVehicleKnowledgeVariants() {
   if (!variantCache) {
-    variantCache = readChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, [])
+    variantCache = readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, [])
       .then((rows) => rows.filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));
   }
   return variantCache;
