@@ -18,6 +18,7 @@ const dryRun = /^(1|true|yes)$/i.test(String(process.env.RECOVERY_BATCH_DRY_RUN 
 const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
 
@@ -135,7 +136,8 @@ for (const market of markets) {
     const year = Number(offer.year || 0);
     if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
     if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
-    if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
+    if (!offer.make || !offer.model) { reject("visible_core"); continue; }
+    if (offer.images.length < minImagesPerOffer) { reject("images"); continue; }
     if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
     if (!publishableCalculation(offer)) { reject("calculation"); continue; }
     if (!canonicalPublic(offer)) { reject("public_quality"); continue; }
@@ -149,7 +151,7 @@ for (const market of markets) {
     const offer = normalizeVisible(raw);
     const year = Number(offer?.year || 0);
     if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
-    if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || !offer.images.length) continue;
+    if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
   }
@@ -159,6 +161,9 @@ for (const market of markets) {
   const capped = applyPerModelYearCap(cumulative, rejected);
   const marketRows = capped.selected;
   if (!marketRows.length) throw new Error(`recovery_batch_empty_market:${market}`);
+  if (marketRows.some((offer) => offer.images.length < minImagesPerOffer)) {
+    throw new Error(`recovery_batch_target_image_gate_failed:${market}:${minImagesPerOffer}`);
+  }
   selectedByMarket.set(market, marketRows);
   incomingIdsByMarket.set(market, new Set(incoming.keys()));
   rejectedByMarket[market] = rejected;
@@ -196,6 +201,7 @@ for (const market of markets) {
     retentionMs,
     preferredMaxRub,
     maxOffersPerModelYear,
+    minImagesPerOffer,
     distinctModels: new Set(rows.map((offer) => catalogExactModelKey(offer, market)).filter(Boolean)).size,
     distinctModelYears: new Set(rows.map((offer) => catalogModelYearQuotaKey(offer, market)).filter(Boolean)).size,
     distinctMakes: new Set(rows.map(makeKey)).size,
@@ -204,6 +210,7 @@ for (const market of markets) {
       min: Math.min(...rows.map((offer) => offer.images.length)),
       max: Math.max(...rows.map((offer) => offer.images.length)),
       average: Number((rows.reduce((sum, offer) => sum + offer.images.length, 0) / rows.length).toFixed(2)),
+      belowMinimum: rows.filter((offer) => offer.images.length < minImagesPerOffer).length,
     },
     rejected: rejectedByMarket[market],
   };
@@ -211,12 +218,13 @@ for (const market of markets) {
 
 if (dryRun) {
   const report = {
-    version: 4,
+    version: 5,
     mode: "live_markets_publishable_cumulative_batch_dry_run",
     markets,
     dryRun: true,
     published: false,
     retentionMs,
+    minImagesPerOffer,
     byMarket: marketReports,
     preservedByMarket,
   };
@@ -235,7 +243,7 @@ for (const market of markets) {
   const manifestCount = Number(manifest?.markets?.[market]?.count || 0);
   if (manifestCount !== rows.length) {
     const debugReport = {
-      version: 4,
+      version: 5,
       mode: "live_markets_publishable_cumulative_batch_publish",
       markets,
       published: false,
@@ -251,13 +259,14 @@ for (const market of markets) {
 }
 
 const report = {
-  version: 4,
+  version: 5,
   mode: "live_markets_publishable_cumulative_batch_publish",
   markets,
   publishedAt: new Date().toISOString(),
   published: true,
   generationId: manifest.generationId,
   retentionMs,
+  minImagesPerOffer,
   byMarket: marketReports,
   preservedByMarket,
   manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)])),
