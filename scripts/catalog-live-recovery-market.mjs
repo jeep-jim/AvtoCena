@@ -8,6 +8,7 @@ const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.
 const { calculateOfferWithRussiaCustoms, isPreliminaryElectrifiedCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, findVehicleVariant } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 
@@ -20,7 +21,7 @@ const prepareConcurrency = Math.max(1, Math.min(12, Number(process.env.RECOVERY_
 const requestTimeoutMs = Math.max(8_000, Math.min(120_000, Number(process.env.RECOVERY_REQUEST_TIMEOUT_MS || 35_000)));
 const retryAttempts = Math.max(1, Math.min(6, Number(process.env.RECOVERY_RETRY_ATTEMPTS || 4)));
 const maxPreferredRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minYear = catalogMinYearForMarket(market);
 const output = process.env.RECOVERY_OUTPUT || `catalog-rebuild-${market}.json`;
 const deadline = Date.now() + timeLimitMs;
@@ -177,12 +178,6 @@ function qualityOrder(a, b) {
     || String(a?.id || "").localeCompare(String(b?.id || ""));
 }
 
-function modelKey(offer) {
-  const make = String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " ");
-  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : "";
-}
-
 function listingBoundSourceImages(offer) {
   const raw = offer?.operational?.raw || {};
   if (raw.listingBoundImages !== true || raw.photoIdentityVerified !== true || !Array.isArray(raw.images)) return [];
@@ -308,7 +303,7 @@ const pendingCombustionModels = new Map();
 
 await Promise.all(sources.map(async (source) => {
   const accepted = new Map();
-  const acceptedModelCounts = new Map();
+  const acceptedModelYearCounts = new Map();
   const rejections = {};
   const errors = [];
   const cursors = new Set();
@@ -339,7 +334,7 @@ await Promise.all(sources.map(async (source) => {
     pages++;
     const rows = Array.isArray(page?.items) ? page.items : [];
     seen += rows.length;
-    const pageModelReservations = new Map();
+    const pageModelYearReservations = new Map();
 
     const prepared = await pool(rows, prepareConcurrency, async (raw) => {
       if (Date.now() >= deadline) return null;
@@ -353,11 +348,11 @@ await Promise.all(sources.map(async (source) => {
       const detailBoundIdentity = source.sourceId === "autohome_new_china_open" && (!offer.make || !offer.model);
       if (!offer.sourceOfferId || ((!offer.make || !offer.model) && !detailBoundIdentity)) { reject(rejections, "identity"); return null; }
       if (!detailBoundIdentity) {
-        const quotaKey = modelKey(offer);
-        const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
-        const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
-        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
-        if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
+        const quotaKey = catalogModelYearQuotaKey(offer, market);
+        const acceptedForModel = quotaKey ? Number(acceptedModelYearCounts.get(quotaKey) || 0) : 0;
+        const reservedForModel = quotaKey ? Number(pageModelYearReservations.get(quotaKey) || 0) : 0;
+        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModelYear) { reject(rejections, "model_year_quota"); return null; }
+        if (quotaKey) pageModelYearReservations.set(quotaKey, reservedForModel + 1);
       }
       if (!hostAllowed(source.sourceId, offer.operational?.sourceUrl)) { reject(rejections, "source_url"); return null; }
       if (!(Number(offer.sourcePrice) > 0) || !String(offer.sourceCurrency || "").trim()) { reject(rejections, "source_price"); return null; }
@@ -396,11 +391,11 @@ await Promise.all(sources.map(async (source) => {
       if (detailBoundIdentity) {
         offer = normalizeVehicleOfferSpecs(offer);
         if (!offer.make || !offer.model || !offer.sourceOfferId) { reject(rejections, "identity"); return null; }
-        const quotaKey = modelKey(offer);
-        const acceptedForModel = quotaKey ? Number(acceptedModelCounts.get(quotaKey) || 0) : 0;
-        const reservedForModel = quotaKey ? Number(pageModelReservations.get(quotaKey) || 0) : 0;
-        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModel) { reject(rejections, "model_quota"); return null; }
-        if (quotaKey) pageModelReservations.set(quotaKey, reservedForModel + 1);
+        const quotaKey = catalogModelYearQuotaKey(offer, market);
+        const acceptedForModel = quotaKey ? Number(acceptedModelYearCounts.get(quotaKey) || 0) : 0;
+        const reservedForModel = quotaKey ? Number(pageModelYearReservations.get(quotaKey) || 0) : 0;
+        if (quotaKey && acceptedForModel + reservedForModel >= maxOffersPerModelYear) { reject(rejections, "model_year_quota"); return null; }
+        if (quotaKey) pageModelYearReservations.set(quotaKey, reservedForModel + 1);
         if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""} ${offer.bodyType || ""}`)) { reject(rejections, "commercial"); return null; }
         if (!saneBody(offer)) { reject(rejections, "body"); return null; }
       }
@@ -442,8 +437,8 @@ await Promise.all(sources.map(async (source) => {
     for (const offer of prepared.filter(Boolean)) {
     if (!accepted.has(offer.id)) {
       accepted.set(offer.id, offer);
-      const key = modelKey(offer);
-      if (key) acceptedModelCounts.set(key, Number(acceptedModelCounts.get(key) || 0) + 1);
+      const key = catalogModelYearQuotaKey(offer, market);
+      if (key) acceptedModelYearCounts.set(key, Number(acceptedModelYearCounts.get(key) || 0) + 1);
     }
     if (!globalOffers.has(offer.id)) globalOffers.set(offer.id, offer);
   }

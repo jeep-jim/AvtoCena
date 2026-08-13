@@ -3,10 +3,6 @@ run-name: K Car exterior-first v3 repair · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-kcar-exterior-gallery-repair.yml"
 
 permissions:
   contents: read
@@ -59,7 +55,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-kcar-exterior-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
-          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

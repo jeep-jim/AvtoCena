@@ -5,6 +5,7 @@ const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -13,7 +14,7 @@ const input = String(process.env.RECOVERY_PUBLISH_INPUT || `catalog-rebuild-${ma
 const output = String(process.env.RECOVERY_PUBLISH_REPORT || `catalog-live-recovery-${market}-publish-report.json`).trim();
 const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = 20;
+const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
 const minYear = catalogMinYearForMarket(market);
@@ -137,27 +138,22 @@ function quality(a, b) {
     || String(a.id || "").localeCompare(String(b.id || ""));
 }
 function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
-function modelKey(offer) {
-  const make = makeKey(offer);
-  const model = String(offer?.model || "").trim().toLowerCase().replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : "";
-}
 
-function applyPerModelCap(rows, rejected) {
+function applyPerModelYearCap(rows, rejected) {
   const result = [];
-  const modelCounts = new Map();
+  const modelYearCounts = new Map();
   for (const offer of rows) {
-    const key = modelKey(offer);
-    const count = key ? Number(modelCounts.get(key) || 0) : 0;
-    if (key && count >= maxOffersPerModel) {
-      rejected.model_quota = Number(rejected.model_quota || 0) + 1;
+    const key = catalogModelYearQuotaKey(offer, market);
+    const count = key ? Number(modelYearCounts.get(key) || 0) : 0;
+    if (key && count >= maxOffersPerModelYear) {
+      rejected.model_year_quota = Number(rejected.model_year_quota || 0) + 1;
       continue;
     }
     result.push(offer);
-    if (key) modelCounts.set(key, count + 1);
+    if (key) modelYearCounts.set(key, count + 1);
     if (result.length >= maxPerMarket) break;
   }
-  return { rows: result, modelCounts };
+  return { rows: result, modelYearCounts };
 }
 
 const payload = JSON.parse(await fs.readFile(input, "utf8"));
@@ -195,7 +191,7 @@ for (const raw of previousMarket) {
 for (const [id, offer] of incoming) candidates.set(id, offer);
 
 const cumulative = [...candidates.values()].sort(quality);
-const diversity = applyPerModelCap(cumulative, rejected);
+const diversity = applyPerModelYearCap(cumulative, rejected);
 const marketRows = diversity.rows;
 if (!marketRows.length) {
   const report = { version: 2, mode: "live_market_exact_calculated_cumulative_publish", market, published: false, generationId: null, count: 0, retainedCount: 0, incomingCount: incoming.size, rejected, publicationError: `recovery_empty_market:${market}` };
@@ -263,8 +259,9 @@ const report = {
   minYear,
   retentionMs,
   preferredMaxRub,
-  maxOffersPerModel,
-  distinctModels: diversity.modelCounts.size,
+  maxOffersPerModelYear,
+  distinctModels: new Set(marketRows.map((offer) => catalogExactModelKey(offer, market)).filter(Boolean)).size,
+  distinctModelYears: diversity.modelYearCounts.size,
   distinctMakes: new Set(marketRows.map(makeKey)).size,
   sourceCounts: Object.fromEntries([...new Set(marketRows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, marketRows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
   imageStats: {

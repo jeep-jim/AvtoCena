@@ -6,8 +6,7 @@ const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib
 const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
-
-const MAX_OFFERS_PER_MODEL = 20;
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const output = String(process.env.CATALOG_GLOBAL_MODEL_CAP_REPORT || "catalog-global-model-cap-report.json");
 const dryRun = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_GLOBAL_MODEL_CAP_DRY_RUN || ""));
@@ -63,11 +62,6 @@ async function releaseLock() {
 }
 
 function clean(value) { return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US"); }
-function modelKey(offer) {
-  const make = clean(offer?.make);
-  const model = clean(offer?.model);
-  return make && model ? `${make}|${model}` : "";
-}
 function freshness(offer) {
   return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
@@ -89,7 +83,7 @@ function normalizeVisible(raw) {
   });
 }
 function selectMarket(rows, market) {
-  const rejected = { quality: 0, modelQuota: 0 };
+  const rejected = { quality: 0, modelYearQuota: 0 };
   const candidates = rows
     .map(normalizeVisible)
     .filter((offer) => {
@@ -107,14 +101,14 @@ function selectMarket(rows, market) {
   const counts = new Map();
   const selected = [];
   for (const offer of candidates) {
-    const key = modelKey(offer);
+    const key = catalogModelYearQuotaKey(offer, market);
     if (!key) { rejected.quality += 1; continue; }
     const count = Number(counts.get(key) || 0);
-    if (count >= MAX_OFFERS_PER_MODEL) { rejected.modelQuota += 1; continue; }
+    if (count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR) { rejected.modelYearQuota += 1; continue; }
     counts.set(key, count + 1);
     selected.push(offer);
   }
-  return { selected, rejected, distinctModels: counts.size, maxPerExactModel: counts.size ? Math.max(...counts.values()) : 0 };
+  return { selected, rejected, distinctModels: new Set(selected.map((offer) => catalogExactModelKey(offer, market)).filter(Boolean)).size, distinctModelYears: counts.size, maxPerExactModelYear: counts.size ? Math.max(...counts.values()) : 0 };
 }
 
 await acquireLock();
@@ -135,10 +129,11 @@ try {
       before: rows.length,
       selected: result.selected.length,
       removedByQuality: result.rejected.quality,
-      removedByModelQuota: result.rejected.modelQuota,
+      removedByModelYearQuota: result.rejected.modelYearQuota,
       allowedEmpty: allowedEmptyMarkets.has(market),
       distinctModels: result.distinctModels,
-      maxPerExactModel: result.maxPerExactModel,
+      distinctModelYears: result.distinctModelYears,
+      maxPerExactModelYear: result.maxPerExactModelYear,
     };
     combined.push(...result.selected);
   }
@@ -148,7 +143,7 @@ try {
       version: 2,
       mode: "global_model_cap_dry_run",
       dryRun: true,
-      maxOffersPerModel: MAX_OFFERS_PER_MODEL,
+      maxOffersPerModelYear: CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
       preferredMaxRub,
       allowedEmptyMarkets: [...allowedEmptyMarkets],
       beforeByMarket,
@@ -167,12 +162,12 @@ try {
       afterByMarket[market] = rows.length;
       const counts = new Map();
       for (const offer of rows) {
-        const key = modelKey(offer);
+        const key = catalogModelYearQuotaKey(offer, market);
         if (key) counts.set(key, Number(counts.get(key) || 0) + 1);
         if (!isCatalogYearAllowed(offer?.year, market)) failures.push(`${market}:year:${offer?.id}`);
       }
       const max = counts.size ? Math.max(...counts.values()) : 0;
-      if (max > MAX_OFFERS_PER_MODEL) failures.push(`${market}:model_quota:${max}`);
+      if (max > CATALOG_MAX_OFFERS_PER_MODEL_YEAR) failures.push(`${market}:model_year_quota:${max}`);
       if (rows.length !== Number(manifest?.markets?.[market]?.count || 0)) failures.push(`${market}:manifest_count:${rows.length}:${Number(manifest?.markets?.[market]?.count || 0)}`);
       if (rows.length === 0 && !allowedEmptyMarkets.has(market)) failures.push(`${market}:unexpected_empty_after_publish`);
     }
@@ -181,7 +176,7 @@ try {
       mode: "global_model_cap_publish",
       published: true,
       generationId: manifest.generationId,
-      maxOffersPerModel: MAX_OFFERS_PER_MODEL,
+      maxOffersPerModelYear: CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
       preferredMaxRub,
       allowedEmptyMarkets: [...allowedEmptyMarkets],
       beforeByMarket,

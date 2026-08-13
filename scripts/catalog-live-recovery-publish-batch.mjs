@@ -6,6 +6,7 @@ const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferCon
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia")
   .split(",")
@@ -16,7 +17,7 @@ const output = String(process.env.RECOVERY_BATCH_REPORT || "catalog-direct-recov
 const dryRun = /^(1|true|yes)$/i.test(String(process.env.RECOVERY_BATCH_DRY_RUN || ""));
 const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
-const maxOffersPerModel = Math.max(1, Math.min(100, Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL || 20)));
+const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
 
@@ -100,26 +101,21 @@ function normalizeVisible(raw) {
 function makeKey(offer) {
   return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
 }
-function modelKey(offer) {
-  const make = makeKey(offer);
-  const model = String(offer?.model || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
-  return make && model ? `${make}|${model}` : "";
-}
-function applyPerModelCap(rows, rejected) {
+function applyPerModelYearCap(rows, rejected) {
   const selected = [];
-  const countByModel = new Map();
+  const countByModelYear = new Map();
   for (const offer of rows) {
-    const model = modelKey(offer);
+    const model = catalogModelYearQuotaKey(offer, offer?.market);
     if (!model) continue;
-    if (Number(countByModel.get(model) || 0) >= maxOffersPerModel) {
-      rejected.model_quota = Number(rejected.model_quota || 0) + 1;
+    if (Number(countByModelYear.get(model) || 0) >= maxOffersPerModelYear) {
+      rejected.model_year_quota = Number(rejected.model_year_quota || 0) + 1;
       continue;
     }
-    countByModel.set(model, Number(countByModel.get(model) || 0) + 1);
+    countByModelYear.set(model, Number(countByModelYear.get(model) || 0) + 1);
     selected.push(offer);
     if (selected.length >= maxPerMarket) break;
   }
-  return { selected, countByModel };
+  return { selected, countByModelYear };
 }
 
 const selectedByMarket = new Map();
@@ -160,7 +156,7 @@ for (const market of markets) {
   for (const [id, offer] of incoming) candidates.set(id, offer);
 
   const cumulative = [...candidates.values()].sort(quality);
-  const capped = applyPerModelCap(cumulative, rejected);
+  const capped = applyPerModelYearCap(cumulative, rejected);
   const marketRows = capped.selected;
   if (!marketRows.length) throw new Error(`recovery_batch_empty_market:${market}`);
   selectedByMarket.set(market, marketRows);
@@ -199,8 +195,9 @@ for (const market of markets) {
     minYear: catalogMinYearForMarket(market),
     retentionMs,
     preferredMaxRub,
-    maxOffersPerModel,
-    distinctModels: new Set(rows.map(modelKey)).size,
+    maxOffersPerModelYear,
+    distinctModels: new Set(rows.map((offer) => catalogExactModelKey(offer, market)).filter(Boolean)).size,
+    distinctModelYears: new Set(rows.map((offer) => catalogModelYearQuotaKey(offer, market)).filter(Boolean)).size,
     distinctMakes: new Set(rows.map(makeKey)).size,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer.sourceId || "unknown")))].map((sourceId) => [sourceId, rows.filter((offer) => String(offer.sourceId || "unknown") === sourceId).length])),
     imageStats: {

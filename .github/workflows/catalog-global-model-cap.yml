@@ -1,5 +1,5 @@
-name: Catalog quality · enforce global model cap
-run-name: Enforce 20 exact offers per model · ${{ github.sha }}
+name: Catalog quality · enforce global model-year cap
+run-name: Enforce 20 exact offers per model-year · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -47,11 +47,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Validate global model-cap enforcement
+      - name: Validate global model-year cap enforcement
         run: |
           node --check scripts/catalog-enforce-global-model-cap.mjs
-          node --import tsx --test tests/catalog-global-model-cap.test.ts
-      - name: Enforce exact market + make + model quota across all seven markets
+          node --import tsx --test tests/catalog-global-model-cap.test.ts tests/catalog-model-year-quota.test.ts
+      - name: Enforce exact market + make + model + year quota across all seven markets
         env:
           CATALOG_GLOBAL_MODEL_CAP_REPORT: catalog-global-model-cap-report.json
         run: npx tsx scripts/catalog-enforce-global-model-cap.mjs
@@ -59,7 +59,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-global-model-cap-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
-          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Start fresh UAE and Georgia growth after the daily writer
         if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Catalog live daily · working markets'
