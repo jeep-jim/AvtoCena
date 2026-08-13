@@ -5,6 +5,7 @@ import {
   CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
   catalogExactModelKey,
   catalogModelYearQuotaKey,
+  selectCatalogModelYearCoverageFirst,
 } from "../apps/web/lib/catalog/inventory-quota";
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
 
@@ -46,6 +47,35 @@ test("different years can each retain twenty cards for the same model", () => {
   assert.equal(selected.length, 40);
 });
 
+test("coverage-first bounded output represents every discovered model-year before taking seconds", () => {
+  const rows = [
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2025), id: `25-${index}`, score: 100 - index })),
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2024), id: `24-${index}`, score: 80 - index })),
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2022), id: `22-${index}`, score: 60 - index })),
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Kia", "Morning", 2021), id: `m21-${index}`, score: 40 - index })),
+  ];
+  const selected = selectCatalogModelYearCoverageFirst(rows, 8, (a: any, b: any) => b.score - a.score);
+  const counts = new Map<string, number>();
+  for (const row of selected) {
+    const key = catalogModelYearQuotaKey(row);
+    counts.set(key, Number(counts.get(key) || 0) + 1);
+  }
+  assert.equal(counts.size, 4);
+  assert.deepEqual([...counts.values()].sort((a, b) => a - b), [2, 2, 2, 2]);
+  assert.equal(selected.filter((row) => row.model === "Casper" && row.year === 2022).length, 2);
+});
+
+test("coverage-first does not let newer Casper rows crowd out Casper 2022 at a small target", () => {
+  const rows = [
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2025), id: `25-${index}` })),
+    ...Array.from({ length: 20 }, (_, index) => ({ ...offer("korea", "Hyundai", "Casper", 2022), id: `22-${index}` })),
+  ];
+  const selected = selectCatalogModelYearCoverageFirst(rows, 2);
+  assert.equal(selected.length, 2);
+  assert.equal(selected.filter((row) => row.year === 2022).length, 1);
+  assert.equal(selected.filter((row) => row.year === 2025).length, 1);
+});
+
 test("market age gates stay unchanged while quota changes", () => {
   const currentYear = new Date().getFullYear();
   assert.equal(catalogMinYearForMarket("korea"), 2020);
@@ -69,6 +99,14 @@ test("all active quota paths use the shared model-year identity", () => {
     const source = fs.readFileSync(path, "utf8");
     assert.match(source, /catalogModelYearQuotaKey/, `${path} must use model-year quota identity`);
   }
+});
+
+test("generic collector scans beyond the output target and selects model-year coverage first", () => {
+  const source = fs.readFileSync("scripts/catalog-live-recovery-market.mjs", "utf8");
+  assert.match(source, /selectCatalogModelYearCoverageFirst/);
+  assert.match(source, /while \(pages < maxPages && Date\.now\(\) < deadline\)/);
+  assert.doesNotMatch(source, /while \(pages < maxPages && accepted\.size < target/);
+  assert.doesNotMatch(source, /sort\(qualityOrder\)\.slice\(0, target\)/);
 });
 
 test("daily and legacy recovery workflows expose only model-year quota and canonical Georgia sources", () => {
