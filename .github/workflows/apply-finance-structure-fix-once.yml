@@ -1,0 +1,113 @@
+name: Apply finance structure fix once
+
+on:
+  push:
+    branches:
+      - fix/finance-originals-offer-mobile-20260813
+    paths:
+      - '.ui-fix/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/finance-originals-offer-mobile-20260813
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Apply finance layout fixes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          home_path = Path('apps/web/components/home/HomePageClient.tsx')
+          home = home_path.read_text()
+          home = home.replace(
+              '<div className="hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>',
+              '<div className="ac-budget-desktop hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>',
+          )
+          home = home.replace(
+              'ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6',
+              'ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6',
+          )
+          home = home.replace('bottom-[-2px]', 'bottom-0').replace('bottom-[-3px]', 'bottom-0')
+          home = home.replace('/home/credit-mascot.png', '/home/credit-mascot.webp')
+          home = home.replace('/home/osago-mascot.png', '/home/osago-mascot.webp')
+          css_anchor = '@media(max-width:1023px){.ac-home-page .ac-budget-mobile'
+          if css_anchor in home:
+              home = home.replace(css_anchor, '@media(max-width:1023px){.ac-home-page .ac-budget-desktop{display:none!important}.ac-home-page .ac-budget-mobile', 1)
+          elif '.ac-budget-desktop{display:none!important}' not in home:
+              raise SystemExit('homepage mobile budget css anchor not found')
+          required_home = [
+              'ac-budget-desktop hidden',
+              'emptyLabel="Бюджет"',
+              '.ac-budget-desktop{display:none!important}',
+              'ac-finance-card relative min-h-[206px] overflow-hidden',
+              'bottom-0',
+          ]
+          for token in required_home:
+              if token not in home:
+                  raise SystemExit(f'homepage missing {token}')
+          if 'bottom-[-2px]' in home or 'bottom-[-3px]' in home:
+              raise SystemExit('negative finance mascot bottom remains on homepage')
+          home_path.write_text(home)
+
+          offer_path = Path('apps/web/components/catalog/OfferFinanceCards.tsx')
+          offer = offer_path.read_text()
+          offer = offer.replace('/home/credit-mascot.png', '/home/credit-mascot.webp')
+          offer = offer.replace('/home/osago-mascot.png', '/home/osago-mascot.webp')
+          offer = offer.replace('bottom-[-2px]', 'bottom-0').replace('bottom-[-3px]', 'bottom-0')
+          offer = offer.replace(
+              'ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6',
+              'ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6',
+          )
+          required_offer = [
+              'ac-finance-card relative min-h-[206px] overflow-hidden',
+              '/home/credit-mascot.webp',
+              '/home/osago-mascot.webp',
+              'bottom-0',
+              'window.innerWidth >= 1280 && breakdown.open',
+          ]
+          for token in required_offer:
+              if token not in offer:
+                  raise SystemExit(f'offer finance cards missing {token}')
+          if 'bottom-[-2px]' in offer or 'bottom-[-3px]' in offer:
+              raise SystemExit('negative finance mascot bottom remains on offer cards')
+          offer_path.write_text(offer)
+
+          layout = Path('apps/web/app/(public)/cars/offer/[id]/layout.tsx').read_text()
+          if '<OfferFinanceCards />' not in layout:
+              raise SystemExit('OfferFinanceCards is not mounted in offer layout')
+          PY
+
+      - run: npm ci
+      - run: npm run prisma:generate
+      - run: npm run typecheck
+      - run: npm run build
+      - run: git diff --check
+
+      - name: Commit verified UI-only fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .ui-fix .mascot-upload
+          git fetch origin main
+          git checkout origin/main -- .github/workflows/apply-buyer-gallery-fullres-once.yml .github/workflows/ui-home-finance-pixel-match-20260813.yml
+          rm -f .github/workflows/apply-finance-structure-fix-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/components/home/HomePageClient.tsx apps/web/components/catalog/OfferFinanceCards.tsx 'apps/web/app/(public)/cars/offer/[id]/layout.tsx' .github/workflows/apply-buyer-gallery-fullres-once.yml .github/workflows/ui-home-finance-pixel-match-20260813.yml
+          git add -u .ui-fix .mascot-upload .github/workflows/apply-finance-structure-fix-once.yml || true
+          git commit -m 'Fix finance card clipping and mobile budget duplicate'
+          git push origin HEAD:fix/finance-originals-offer-mobile-20260813
