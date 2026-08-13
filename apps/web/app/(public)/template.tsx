@@ -113,8 +113,15 @@ html:not([data-theme="light"]) body .ac-partner-page {
   }
 
   /* Keep only the lower budget selector next to the red CTA on mobile. */
-  .ac-home-page #form > div:nth-child(2) {
+  html body .ac-home-page #form > div:nth-child(2) {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
   }
 }
 
@@ -143,7 +150,9 @@ html:not([data-theme="light"]) body .ac-partner-page {
     max-width: 350px !important;
     margin-top: 32px !important;
   }
-  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > img {
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > img,
+  .ac-home-page section[aria-label="Финансовые сервисы"] .ac-finance-card > img,
+  .ac-offer-finance-cards .ac-finance-card > img {
     bottom: 0 !important;
     object-fit: contain !important;
     object-position: center bottom !important;
@@ -166,6 +175,28 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
       });
     };
 
+    const applyFinanceUiHotfix = () => {
+      const mobile = window.matchMedia("(max-width: 1023px)").matches;
+      const form = document.querySelector<HTMLElement>(".ac-home-page #form");
+      const upperBudget = form?.children.item(1);
+      if (upperBudget instanceof HTMLElement) {
+        if (mobile) {
+          upperBudget.style.setProperty("display", "none", "important");
+          upperBudget.setAttribute("aria-hidden", "true");
+        } else {
+          upperBudget.style.removeProperty("display");
+          upperBudget.removeAttribute("aria-hidden");
+        }
+      }
+
+      document.querySelectorAll<HTMLImageElement>('img[src="/home/credit-mascot.webp"]').forEach((image) => {
+        image.setAttribute("src", "/home/credit-mascot.png");
+      });
+      document.querySelectorAll<HTMLImageElement>('img[src="/home/osago-mascot.webp"]').forEach((image) => {
+        image.setAttribute("src", "/home/osago-mascot.png");
+      });
+    };
+
     const pointerDown = (event: PointerEvent) => {
       closeOpenDetails(event.target);
       window.dispatchEvent(new CustomEvent("avtocena:dismiss-tooltips", { detail: { target: event.target } }));
@@ -176,16 +207,24 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
       window.dispatchEvent(new CustomEvent("avtocena:dismiss-tooltips"));
     };
 
-    const observer = new MutationObserver(normalizeLeadBannerCopy);
+    const observer = new MutationObserver(() => {
+      normalizeLeadBannerCopy();
+      applyFinanceUiHotfix();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
     normalizeLeadBannerCopy();
+    applyFinanceUiHotfix();
 
     document.addEventListener("pointerdown", pointerDown, true);
     window.addEventListener("keydown", keyDown);
+    window.addEventListener("resize", applyFinanceUiHotfix);
+    window.addEventListener("pageshow", applyFinanceUiHotfix);
     return () => {
       observer.disconnect();
       document.removeEventListener("pointerdown", pointerDown, true);
       window.removeEventListener("keydown", keyDown);
+      window.removeEventListener("resize", applyFinanceUiHotfix);
+      window.removeEventListener("pageshow", applyFinanceUiHotfix);
     };
   }, []);
 
