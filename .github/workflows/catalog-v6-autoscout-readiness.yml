@@ -7,6 +7,8 @@ on:
     paths:
       - ".github/workflows/catalog-v6-autoscout-readiness.yml"
       - "apps/web/lib/catalog/autoscout-exact-source.ts"
+      - "apps/web/lib/catalog/autoscout-exact-source-base.ts"
+      - "apps/web/lib/catalog/autoscout-hq-source.ts"
       - "apps/web/lib/catalog/importer.ts"
 
 permissions:
@@ -48,7 +50,7 @@ jobs:
         run: npm run typecheck
       - name: Collect exact AutoScout cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
-      - name: Enforce exact AutoScout source identity and gallery
+      - name: Enforce exact AutoScout source identity, age and HQ gallery
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
@@ -59,12 +61,15 @@ jobs:
           for (const offer of offers) {
             if (offer.sourceId !== 'autoscout_europe_open') problems.push('source_identity');
             if (!/^https:\/\/www\.autoscout24\.com\/offers\//i.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url');
+            if (Number(offer.year) < 2020) problems.push(`year_${offer.year}`);
             if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'EUR') problems.push('price');
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery');
             if (offer.images?.some((image) => !/^https:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(String(image?.url || '')))) problems.push('foreign_image');
+            if (offer.images?.some((image) => Number(image?.width || 0) < 900 || Number(image?.height || 0) < 600)) problems.push('low_resolution');
             if (offer?.operational?.raw?.photoIdentityVerified !== true) problems.push('photo_identity');
+            if (offer?.operational?.raw?.photoResolutionVerified !== true) problems.push('photo_resolution');
           }
-          console.log(JSON.stringify({count: offers.length, problems, sample: offers.slice(0, 3).map(o => ({id:o.sourceOfferId, title:o.sourceTitle, year:o.year, price:o.sourcePrice, images:o.images?.length, sourceUrl:o.operational?.sourceUrl, powerKw:o.powerKw, powerHp:o.powerHp}))}, null, 2));
+          console.log(JSON.stringify({count: offers.length, problems, sample: offers.slice(0, 3).map(o => ({id:o.sourceOfferId, title:o.sourceTitle, year:o.year, price:o.sourcePrice, images:o.images?.length, firstImage:o.images?.[0] && {url:o.images[0].url,width:o.images[0].width,height:o.images[0].height}, sourceUrl:o.operational?.sourceUrl, powerKw:o.powerKw, powerHp:o.powerHp}))}, null, 2));
           if (problems.length) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
