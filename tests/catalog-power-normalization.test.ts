@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { preferExplicitCombustionPowertrain } from "../apps/web/lib/catalog/powertrain-safety";
+import { canonicalizeSemanticSourceFields, preferExplicitCombustionPowertrain } from "../apps/web/lib/catalog/powertrain-safety";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 
 test("extracts structured peak kW without treating it as 30-minute power", () => {
@@ -56,14 +56,7 @@ test("extracts engine volume from nested raw details", () => {
 });
 
 test("explicit petrol engine overrides unrelated hybrid text in raw listing payload", () => {
-  const normalized = normalizeVehicleOfferSpecs({
-    make: "Toyota",
-    model: "RAV4",
-    fuel: "petrol",
-    engineCc: 2500,
-    powerHp: 203,
-    operational: { raw: { imageUrl: "https://cdn.example/hybrid/recommendation/photo.jpg" } },
-  });
+  const normalized = normalizeVehicleOfferSpecs({ make: "Toyota", model: "RAV4", fuel: "petrol", engineCc: 2500, powerHp: 203, operational: { raw: { imageUrl: "https://cdn.example/hybrid/recommendation/photo.jpg" } } });
   assert.equal(normalized.powertrainKind, "combustion");
   const safe = preferExplicitCombustionPowertrain(normalized);
   assert.equal(safe.powertrainKind, "combustion");
@@ -72,13 +65,32 @@ test("explicit petrol engine overrides unrelated hybrid text in raw listing payl
 });
 
 test("explicit hybrid title is never downgraded to combustion", () => {
-  const safe = preferExplicitCombustionPowertrain({
-    make: "Toyota",
-    model: "RAV4",
-    trim: "2.5 Plug-in Hybrid",
-    fuel: "petrol",
-    engineCc: 2500,
-    powertrainKind: "other_hybrid" as const,
-  });
+  const safe = preferExplicitCombustionPowertrain({ make: "Toyota", model: "RAV4", trim: "2.5 Plug-in Hybrid", fuel: "petrol", engineCc: 2500, powertrainKind: "other_hybrid" as const });
   assert.equal(safe.powertrainKind, "other_hybrid");
+});
+
+test("K Car size class is dropped while exact Korean semantic fields are canonicalized", () => {
+  const safe = canonicalizeSemanticSourceFields({ make: "Genesis", model: "G80", fuel: "가솔린", transmission: "자동", drive: "4륜", bodyType: "대형차" });
+  assert.equal(safe.fuel, "petrol");
+  assert.equal(safe.transmission, "automatic");
+  assert.equal(safe.drive, "awd");
+  assert.equal(safe.bodyType, undefined);
+});
+
+test("K Car SUV category remains a canonical SUV", () => {
+  assert.equal(canonicalizeSemanticSourceFields({ bodyType: "SUV" }).bodyType, "suv");
+});
+
+test("pure EV cannot retain a leaked combustion displacement", () => {
+  const safe = preferExplicitCombustionPowertrain({ make: "Hyundai", model: "Casper Electric", fuel: "전기", powertrainKind: "electric" as const, engineCc: 3000 });
+  assert.equal(safe.fuel, "electric");
+  assert.equal(safe.engineCc, undefined);
+});
+
+test("exact Kia K9 3342 cc and Korean AWD are preserved correctly", () => {
+  const safe = preferExplicitCombustionPowertrain({ make: "Kia", model: "K9", trim: "3.3 GDI AWD", fuel: "가솔린", engineCc: 3342, drive: "4륜", bodyType: "대형차", powerHp: 370, powertrainKind: "combustion" as const });
+  assert.equal(safe.engineCc, 3342);
+  assert.equal(safe.drive, "awd");
+  assert.equal(safe.bodyType, undefined);
+  assert.equal(safe.powertrainKind, "combustion");
 });
