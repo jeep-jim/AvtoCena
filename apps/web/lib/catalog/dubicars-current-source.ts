@@ -1,5 +1,6 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { isCatalogYearAllowed } from "./offer-quality";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 type Row = {
@@ -189,7 +190,8 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
   );
   const title = rawTitle.replace(/\s+(?:19|20)\d{2}\s+for sale.*$/i, "").trim();
   const parsedName = makeModel(title);
-  const year = Number(`${title} ${plain}`.match(/\b(?:19|20)\d{2}\b/)?.[0]);
+  const year = Number(plain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
+  if (!isCatalogYearAllowed(year, "uae")) return null;
 
   const stops = ["Transmission", "Export status", "Interior color", "Steering side", "Horsepower", "Updated on", "Make", "Model", "Trim", "Color", "Engine capacity", "Cylinders", "Drive type", "Vehicle type", "Number of doors", "Seating capacity", "Wheel size", "Fuel Type", "Service history", "Location", "Specs"];
   const exactMakeRaw = labelValue(plain, ["Make"], stops);
@@ -198,7 +200,7 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
   const exactIdentity = exactMakeRaw && exactModelRaw ? makeModel(`${exactMakeRaw} ${exactModelRaw}`) : { make: "", model: "" };
   const make = exactIdentity.make || parsedName.make;
   const model = exactIdentity.model || clean(exactModelRaw) || parsedName.model;
-  if (!make || !model || !year) return null;
+  if (!make || !model) return null;
 
   const parsedPrice = price(plain);
   const mileageKm = integer(
@@ -287,7 +289,7 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as Row;
-    if (!row.id || !row.make || !row.model || !row.year || !row.images.length) return null;
+    if (!row.id || !row.make || !row.model || !isCatalogYearAllowed(row.year, "uae") || !row.images.length) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
