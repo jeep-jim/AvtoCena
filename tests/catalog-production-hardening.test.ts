@@ -11,6 +11,7 @@ const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
@@ -124,6 +125,18 @@ test("Object Storage publication bounds dynamic index keys and reports the faili
   assert.match(dataStorage, /object_storage_\$\{method\}_\$\{response\.status\}/);
   assert.match(dataStorage, /path=\$\{normalizedPath\.slice/);
   assert.match(publisher, /Buffer\.byteLength\(normalized, "utf8"\) <= 180/);
+});
+
+test("generic source detail wrapper is fail-closed and never scrapes page-wide semantics or galleries", () => {
+  assert.match(strictSourceDetail, /strict_source_adapter_identity_only/);
+  assert.match(strictSourceDetail, /photoIdentityVerified/);
+  assert.match(strictSourceDetail, /originalFetchImages/);
+  assert.doesNotMatch(strictSourceDetail, /findStructuredValue/);
+  assert.doesNotMatch(strictSourceDetail, /mergeStructuredFields/);
+  assert.doesNotMatch(strictSourceDetail, /mergeTextFields/);
+  assert.doesNotMatch(strictSourceDetail, /htmlAttributeImages/);
+  assert.doesNotMatch(strictSourceDetail, /scriptImages/);
+  assert.doesNotMatch(strictSourceDetail, /\bfetch\s*\(/);
 });
 
 test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {
