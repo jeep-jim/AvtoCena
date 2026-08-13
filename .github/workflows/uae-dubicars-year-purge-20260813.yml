@@ -1,0 +1,208 @@
+name: Purge stale DubiCars source-year mismatches safely once
+run-name: UAE DubiCars source-year purge · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/uae-dubicars-year-purge-20260813
+    paths:
+      - .github/workflows/uae-dubicars-year-purge-20260813.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Snapshot all seven markets before cleanup
+        env:
+          CATALOG_AUDIT_OUTPUT: uae-dubicars-year-before-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Wait until no other GitHub Action is active before live write
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?status=in_progress&per_page=100"
+          for attempt in {1..60}; do
+            curl -fsS -H "authorization: Bearer ${GH_TOKEN}" -H 'accept: application/vnd.github+json' "${api}" -o active.json
+            others="$(jq --argjson self "${GITHUB_RUN_ID}" '[.workflow_runs[] | select(.id != $self)] | length' active.json)"
+            if [ "${others}" = "0" ]; then
+              echo "No competing active Actions; UAE cleanup may proceed."
+              exit 0
+            fi
+            echo "Waiting for ${others} other active Action run(s), attempt ${attempt}/60"
+            jq --argjson self "${GITHUB_RUN_ID}" -r '.workflow_runs[] | select(.id != $self) | [.id,.name,.path,.status] | @tsv' active.json
+            sleep 15
+          done
+          echo "Competing Action remained active; aborting before catalog write." >&2
+          exit 1
+
+      - name: Dry-project and atomically purge only contradictory DubiCars UAE rows
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const qualityModule = await import('./apps/web/lib/catalog/offer-quality.ts');
+          const quality = qualityModule.default || qualityModule;
+          const knowledgeModule = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const knowledge = knowledgeModule.default || knowledgeModule;
+          const normalizationModule = await import('./apps/web/lib/catalog/spec-normalization.ts');
+          const normalization = normalizationModule.default || normalizationModule;
+          const runtimeModule = await import('./apps/web/lib/catalog/runtime-config.ts');
+          const runtime = runtimeModule.default || runtimeModule;
+
+          const markets = [...runtime.PUBLIC_CATALOG_MARKETS];
+          const byMarket = new Map();
+          for (const market of markets) byMarket.set(market, await storage.readMarketOffers(market));
+          const beforeCounts = Object.fromEntries(markets.map((market) => [market, byMarket.get(market).length]));
+
+          function sourceUrl(offer) {
+            return String(offer?.operational?.sourceUrl || offer?.operational?.raw?.url || offer?.operational?.raw?.detailUrl || '');
+          }
+          function dubicarsUrlYear(offer) {
+            if (String(offer?.sourceId || '') !== 'dubicars_uae_exact') return null;
+            try {
+              const parsed = new URL(sourceUrl(offer));
+              if (!/(^|\.)dubicars\.com$/i.test(parsed.hostname)) return null;
+              const match = parsed.pathname.match(/^\/((?:19|20)\d{2})-[^/]*-\d{5,}\.html$/i);
+              return match ? Number(match[1]) : null;
+            } catch { return null; }
+          }
+          function contradiction(offer) {
+            const sourceYear = dubicarsUrlYear(offer);
+            if (!sourceYear) return false;
+            return sourceYear < quality.catalogMinYearForMarket('uae') || sourceYear !== Number(offer?.year || 0);
+          }
+
+          const uae = byMarket.get('uae') || [];
+          const rejected = uae.filter(contradiction);
+          const rejectedIds = new Set(rejected.map((offer) => offer.id));
+          const rawNext = markets.flatMap((market) => (byMarket.get(market) || []).filter((offer) => !rejectedIds.has(offer.id)));
+
+          const projected = await Promise.all(rawNext.map(async (offer) =>
+            normalization.normalizeVehicleOfferSpecs(await knowledge.enrichOfferWithVehicleKnowledge(offer))));
+          const projectedPublic = projected.filter((offer) => offer.status === 'active' && quality.hasCredibleOfferContent(offer));
+          const projectedCounts = Object.fromEntries(markets.map((market) => [market, projectedPublic.filter((offer) => offer.market === market).length]));
+          const expectedCounts = { ...beforeCounts, uae: Number(beforeCounts.uae || 0) - rejected.length };
+          for (const market of markets) {
+            if (Number(projectedCounts[market] || 0) !== Number(expectedCounts[market] || 0)) {
+              throw new Error(`dry_projection_mismatch:${market}:${beforeCounts[market]}:${expectedCounts[market]}:${projectedCounts[market]}`);
+            }
+          }
+
+          let manifest = null;
+          if (rejected.length > 0) {
+            process.env.CATALOG_GROW_ONLY_MARKETS = '';
+            manifest = await storage.persistCatalogOffers(rawNext);
+            for (const market of markets) {
+              const actual = Number(manifest?.markets?.[market]?.count || 0);
+              const expected = Number(expectedCounts[market] || 0);
+              if (actual !== expected) throw new Error(`manifest_count_mismatch:${market}:${actual}:${expected}`);
+            }
+          }
+
+          const report = {
+            mode: 'dubicars_source_year_contradiction_purge',
+            published: rejected.length > 0,
+            generationId: manifest?.generationId || null,
+            beforeCounts,
+            expectedCounts,
+            projectedCounts,
+            removedCount: rejected.length,
+            removed: rejected.map((offer) => ({
+              id: offer.id,
+              sourceOfferId: offer.sourceOfferId,
+              storedYear: offer.year,
+              sourceYear: dubicarsUrlYear(offer),
+              make: offer.make,
+              model: offer.model,
+              sourceUrl: sourceUrl(offer),
+            })),
+          };
+          fs.writeFileSync('uae-dubicars-year-purge-report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+
+      - name: Audit all seven markets after cleanup
+        env:
+          CATALOG_AUDIT_OUTPUT: uae-dubicars-year-after-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: ""
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Assert exact preservation and no remaining DubiCars source-year contradiction
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('uae-dubicars-year-purge-report.json','utf8'));
+          const storageModule = await import('./apps/web/lib/catalog/storage.ts');
+          const storage = storageModule.default || storageModule;
+          const qualityModule = await import('./apps/web/lib/catalog/offer-quality.ts');
+          const quality = qualityModule.default || qualityModule;
+          const runtimeModule = await import('./apps/web/lib/catalog/runtime-config.ts');
+          const runtime = runtimeModule.default || runtimeModule;
+          const markets = [...runtime.PUBLIC_CATALOG_MARKETS];
+          const after = {};
+          for (const market of markets) after[market] = await storage.readMarketOffers(market);
+          for (const market of markets) {
+            const actual = after[market].length;
+            const expected = Number(report.expectedCounts?.[market] || 0);
+            if (actual !== expected) throw new Error(`after_count_mismatch:${market}:${actual}:${expected}`);
+          }
+          const minYear = quality.catalogMinYearForMarket('uae');
+          const remaining = after.uae.filter((offer) => {
+            if (String(offer?.sourceId || '') !== 'dubicars_uae_exact') return false;
+            const rawUrl = String(offer?.operational?.sourceUrl || offer?.operational?.raw?.url || offer?.operational?.raw?.detailUrl || '');
+            try {
+              const parsed = new URL(rawUrl);
+              if (!/(^|\.)dubicars\.com$/i.test(parsed.hostname)) return false;
+              const match = parsed.pathname.match(/^\/((?:19|20)\d{2})-[^/]*-\d{5,}\.html$/i);
+              if (!match) return false;
+              const sourceYear = Number(match[1]);
+              return sourceYear < minYear || sourceYear !== Number(offer?.year || 0);
+            } catch { return false; }
+          });
+          if (remaining.length) throw new Error(`remaining_dubicars_year_contradictions:${remaining.length}`);
+          console.log(JSON.stringify({removedCount:report.removedCount,generationId:report.generationId,afterCounts:Object.fromEntries(markets.map((m)=>[m,after[m].length]))},null,2));
+          NODE
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uae-dubicars-year-purge-reports
+          path: |
+            uae-dubicars-year-before-all7.json
+            active.json
+            uae-dubicars-year-purge-report.json
+            uae-dubicars-year-after-all7.json
+          if-no-files-found: warn
+          retention-days: 7
