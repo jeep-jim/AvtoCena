@@ -1,0 +1,33 @@
+name: CI · recovery target image gate 20260814
+
+on:
+  push:
+    branches:
+      - fix/recovery-target-min-images-20260814
+    paths:
+      - scripts/catalog-live-recovery-publish-batch.mjs
+      - tests/catalog-recovery-publisher-min-images.test.ts
+      - .github/workflows/ci-recovery-target-min-images-20260814.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Syntax check
+        run: node --check scripts/catalog-live-recovery-publish-batch.mjs
+      - name: Recovery image gate tests
+        run: node --import tsx --test tests/catalog-recovery-min-images.test.ts tests/catalog-recovery-publisher-min-images.test.ts tests/catalog-production-hardening.test.ts tests/catalog-publication-gate.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
