@@ -3,7 +3,7 @@ name: Catalog V6 · AutoScout exact readiness
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/autoscout-2020-hard-gate-20260813]
+    branches: [main]
     paths:
       - ".github/workflows/catalog-v6-autoscout-readiness.yml"
       - "apps/web/lib/catalog/autoscout-exact-source.ts"
