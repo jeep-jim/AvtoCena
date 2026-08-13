@@ -70,3 +70,26 @@ test("all active quota paths use the shared model-year identity", () => {
     assert.match(source, /catalogModelYearQuotaKey/, `${path} must use model-year quota identity`);
   }
 });
+
+test("daily and legacy recovery workflows expose only model-year quota and canonical Georgia sources", () => {
+  for (const path of [
+    ".github/workflows/catalog-live-daily-working-markets.yml",
+    ".github/workflows/catalog-live-recovery-6-markets.yml",
+    ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml",
+  ]) {
+    const workflow = fs.readFileSync(path, "utf8");
+    assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/, `${path} must expose model-year quota`);
+    assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/, `${path} must audit model-year quota`);
+    assert.doesNotMatch(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/, `${path} must not expose model-only quota`);
+    assert.doesNotMatch(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/, `${path} must not audit model-only quota`);
+  }
+
+  const daily = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
+  assert.match(daily, /myauto_georgia_list/);
+  assert.match(daily, /autopapa_georgia_open/);
+  assert.doesNotMatch(daily, /auto_georgia_open|www\.auto\.ge/i);
+
+  const legacy = fs.readFileSync(".github/workflows/catalog-live-recovery-6-markets.yml", "utf8");
+  assert.match(legacy, /sources: "myauto_georgia_list,autopapa_georgia_open"/);
+  assert.doesNotMatch(legacy, /auto_georgia_open|www\.auto\.ge/i);
+});
