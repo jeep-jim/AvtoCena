@@ -153,7 +153,7 @@ function scoreModel(model: VehicleKnowledgeModel, offer: Partial<VehicleOffer>) 
       if (score > best) { best = score; matchedBy = index === 0 ? "model" : "alias"; }
       continue;
     }
-    if (candidateCompact.length >= 3 && combinedCompact.includes(candidateCompact)) {
+    if (candidateToken.length >= 3 && boundaryIncludes(combined, candidateToken)) {
       const score = index === 0 ? 100 : 95;
       if (score > best) { best = score; matchedBy = "text"; }
     }

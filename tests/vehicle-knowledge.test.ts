@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";
+import { enrichOfferWithVehicleKnowledge, findVehicleModel, resolveVehicleModelQuery } from "../apps/web/lib/catalog/vehicle-knowledge";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
 const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
@@ -53,6 +53,16 @@ test("does not confuse Honda Vezel with HR-V", async () => {
   const result = await enrichOfferWithVehicleKnowledge(offer({ model: "VEZEL e:HEV Z", year: 2023 }));
   assert.equal(result.make, "Honda");
   assert.equal(result.model, "Vezel");
+});
+
+test("does not join adjacent trim tokens into a false model match", async () => {
+  const match = await findVehicleModel(offer({
+    make: "Chevrolet",
+    model: "2.0 Turbo LT",
+    trim: "2.0 Turbo LT",
+    year: 2021,
+  }));
+  assert.notEqual(match?.model.id, "chevrolet/bolt");
 });
 
 test("model directory aggregates variants and power references into public characteristics", () => {
