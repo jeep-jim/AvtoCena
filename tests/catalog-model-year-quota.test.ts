@@ -49,8 +49,11 @@ test("different years can each retain twenty cards for the same model", () => {
 test("market age gates stay unchanged while quota changes", () => {
   const currentYear = new Date().getFullYear();
   assert.equal(catalogMinYearForMarket("korea"), 2020);
+  assert.equal(catalogMinYearForMarket("china"), 2020);
+  assert.equal(catalogMinYearForMarket("uae"), 2020);
   assert.equal(catalogMinYearForMarket("europe"), 2020);
   assert.equal(catalogMinYearForMarket("georgia"), 2020);
+  assert.equal(catalogMinYearForMarket("kyrgyzstan"), 2020);
   assert.equal(catalogMinYearForMarket("japan"), currentYear - 15);
   assert.equal(isCatalogYearAllowed(2019, "korea"), false);
   assert.equal(isCatalogYearAllowed(2020, "korea"), true);
@@ -69,4 +72,25 @@ test("all active quota paths use the shared model-year identity", () => {
     const source = fs.readFileSync(path, "utf8");
     assert.match(source, /catalogModelYearQuotaKey/, `${path} must use model-year quota identity`);
   }
+});
+
+test("scheduled daily collection cannot reintroduce banned Georgia sources", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
+  assert.match(workflow, /market: georgia, source: myauto_georgia_list/);
+  assert.match(workflow, /market: georgia, source: autopapa_georgia_open/);
+  assert.doesNotMatch(workflow, /market: georgia, source: auto_georgia_open/);
+  assert.doesNotMatch(workflow, /market: georgia, source: ss_georgia_open/);
+  assert.doesNotMatch(workflow, /market: georgia, source: mymarket_georgia_open/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR:\s*"20"/);
+  assert.doesNotMatch(workflow, /CATALOG_MAX_OFFERS_PER_MODEL:(?!_YEAR)/);
+});
+
+test("direct UAE Georgia publisher audits the model-year quota", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-georgia-direct.yml", "utf8");
+  assert.match(workflow, /RECOVERY_SOURCE_IDS="myauto_georgia_list,autopapa_georgia_open"/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR:\s*"20"/);
+  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR:\s*"20"/);
+  assert.match(workflow, /maxPerExactModelYear/);
+  assert.doesNotMatch(workflow, /CATALOG_MAX_OFFERS_PER_MODEL:(?!_YEAR)/);
+  assert.doesNotMatch(workflow, /CATALOG_AUDIT_MAX_PER_MODEL:(?!_YEAR)/);
 });

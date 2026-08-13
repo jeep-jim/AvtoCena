@@ -145,13 +145,13 @@ jobs:
           RECOVERY_BATCH_INPUT_DIR: recovery-input
           RECOVERY_BATCH_REPORT: catalog-direct-recovery-batch-publish-report.json
           RECOVERY_PUBLISH_MAX: "5000"
-          CATALOG_MAX_OFFERS_PER_MODEL: "20"
+          CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
       - name: Audit all seven markets after batch write
         env:
           CATALOG_AUDIT_OUTPUT: catalog-direct-after-all7.json
           CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
-          CATALOG_AUDIT_MAX_PER_MODEL: "20"
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Assert atomic manifest preservation and global invariants
         run: |
@@ -175,7 +175,7 @@ jobs:
             if (Number(stats.belowMarketMinYearCount || 0) !== 0) throw new Error(`below_market_min_year:${market}:${stats.belowMarketMinYearCount}`);
             if (Number(stats.nonPositiveSourcePriceCount || 0) !== 0) throw new Error(`nonpositive_source_price:${market}`);
             if (Number(stats.nonVehicleCount || 0) !== 0) throw new Error(`nonvehicle:${market}`);
-            if (Number(stats.maxPerExactModel || 0) > 20) throw new Error(`model_cap:${market}:${stats.maxPerExactModel}`);
+            if (Number(stats.maxPerExactModelYear || 0) > 20) throw new Error(`model_year_cap:${market}:${stats.maxPerExactModelYear}`);
           }
           console.log({preSnapshot:Object.fromEntries(preserved.map(m=>[m,before.markets?.[m]?.count||0])), atomicPreserved:publish.preservedByMarket, uae:after.markets.uae, georgia:after.markets.georgia});
           NODE

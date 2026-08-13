@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import { catalogImportSources } from "../apps/web/lib/catalog/importer";
 import { catalogV2SourceIds, assertCatalogV2SourceRegistry } from "../apps/web/lib/catalog/catalog-v2-source-registry";
@@ -6,6 +7,8 @@ import { isCatalogMarketSourceAllowed } from "../apps/web/lib/catalog/offer-qual
 import { SCALE_MARKET_SOURCE_IDS } from "../apps/web/lib/catalog/scale-market-sources";
 
 const bannedGeorgiaSources = ["auto_georgia_open", "mymarket_georgia_open", "ss_georgia_open"];
+const dailyWorkflow = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
+const directWorkflow = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-georgia-direct.yml", "utf8");
 
 test("Georgia registry contains only MyAuto and AutoPapa", () => {
   assert.deepEqual(catalogV2SourceIds("georgia"), ["myauto_georgia_list", "autopapa_georgia_open"]);
@@ -43,4 +46,22 @@ test("Georgia canonical quality permanently rejects non-company sources", () => 
   for (const sourceId of bannedGeorgiaSources) {
     assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId } as any), false);
   }
+});
+
+test("scheduled daily Georgia collection is canonical-only", () => {
+  assert.match(dailyWorkflow, /market: georgia, source: myauto_georgia_list/);
+  assert.match(dailyWorkflow, /market: georgia, source: autopapa_georgia_open/);
+  for (const sourceId of bannedGeorgiaSources) {
+    assert.doesNotMatch(dailyWorkflow, new RegExp(`market: georgia, source: ${sourceId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+  }
+});
+
+test("current Georgia publishers use model-year quota semantics", () => {
+  assert.match(dailyWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR:\s*"20"/);
+  assert.doesNotMatch(dailyWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL:(?!_YEAR)/);
+  assert.match(directWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR:\s*"20"/);
+  assert.match(directWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR:\s*"20"/);
+  assert.match(directWorkflow, /maxPerExactModelYear/);
+  assert.doesNotMatch(directWorkflow, /CATALOG_MAX_OFFERS_PER_MODEL:(?!_YEAR)/);
+  assert.doesNotMatch(directWorkflow, /CATALOG_AUDIT_MAX_PER_MODEL:(?!_YEAR)/);
 });
