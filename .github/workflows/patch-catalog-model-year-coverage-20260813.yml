@@ -1,0 +1,47 @@
+name: Patch catalog model-year coverage 20260813
+
+on:
+  push:
+    branches:
+      - fix/catalog-model-year-coverage-20260813
+    paths:
+      - ".github/workflows/patch-catalog-model-year-coverage-20260813.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-model-year-coverage-20260813
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply collector patch
+        run: python3 .github/patches/fix-catalog-model-year-coverage-20260813.py
+      - name: Validate coverage behavior
+        run: |
+          set -euo pipefail
+          node --check scripts/catalog-live-recovery-market.mjs
+          node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
+          npm run typecheck
+          git diff --check
+          grep -F 'while (pages < maxPages && Date.now() < deadline)' scripts/catalog-live-recovery-market.mjs
+          ! grep -F 'accepted.size < target' scripts/catalog-live-recovery-market.mjs
+          grep -F 'selectCatalogModelYearCoverageFirst(discoveredOffers, target, qualityOrder)' scripts/catalog-live-recovery-market.mjs
+      - name: Commit production collector only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name jeep-jim
+          git config user.email yokkey@ya.ru
+          git add scripts/catalog-live-recovery-market.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m 'Scan source pages for model-year coverage before target selection'
+          git push origin HEAD:fix/catalog-model-year-coverage-20260813
