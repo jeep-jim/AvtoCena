@@ -1,0 +1,57 @@
+name: Apply original finance PNGs once 20260813
+
+on:
+  push:
+    branches: [fix/finance-original-pngs-20260813]
+    paths:
+      - '.original-mascot-upload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/finance-original-pngs-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Reconstruct exact user-supplied PNGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .original-mascot-upload/credit-*.b64 | tr -d '\n\r ' | base64 -d > apps/web/public/home/credit-mascot.png
+          cat .original-mascot-upload/osago-*.b64 | tr -d '\n\r ' | base64 -d > apps/web/public/home/osago-mascot.png
+          echo '3393c48834755d30b41e05ee890d5d6f24a5affa4d59aac6129020938ba1f28b  apps/web/public/home/credit-mascot.png' | sha256sum -c -
+          echo '7e9e9f4a63e4b34c96f3fe8db776bdf418b22e7e165839513204078f6f462bc7  apps/web/public/home/osago-mascot.png' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          for path in [Path('apps/web/components/home/HomePageClient.tsx'), Path('apps/web/components/catalog/OfferFinanceCards.tsx')]:
+              text = path.read_text()
+              text = text.replace('/home/credit-mascot.webp', '/home/credit-mascot.png')
+              text = text.replace('/home/osago-mascot.webp', '/home/osago-mascot.png')
+              path.write_text(text)
+          PY
+          test "$(stat -c %s apps/web/public/home/credit-mascot.png)" = 237259
+          test "$(stat -c %s apps/web/public/home/osago-mascot.png)" = 261807
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: git diff --check
+      - name: Commit exact binaries and remove temporary uploader
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .original-mascot-upload
+          rm -f .github/workflows/apply-original-finance-pngs-once-20260813.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/public/home/credit-mascot.png apps/web/public/home/osago-mascot.png apps/web/components/home/HomePageClient.tsx apps/web/components/catalog/OfferFinanceCards.tsx
+          git add -u .original-mascot-upload .github/workflows/apply-original-finance-pngs-once-20260813.yml || true
+          git commit -m 'Use exact original finance mascot PNGs'
+          git push origin HEAD:fix/finance-original-pngs-20260813
