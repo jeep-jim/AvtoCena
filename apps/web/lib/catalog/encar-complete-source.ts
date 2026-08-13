@@ -149,6 +149,12 @@ async function fetchDetail(sourceOfferId: string) {
   });
 }
 
+export function extractEncarExactBodyType(vehicle: unknown) {
+  // `carType` and list `Category` are Encar navigation/classification fields,
+  // not proven body-shape fields. Accept only explicitly body-named detail keys.
+  return text(deepFind(vehicle, ["bodyType", "BodyType"]));
+}
+
 function mergeDetail(offer: VehicleOffer, detail: any) {
   const vehicle = detail?.vehicle || detail?.Vehicle || detail;
   const exactEngineCc = number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"]));
@@ -156,9 +162,9 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
   const exactFuel = text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"]));
   const exactTransmission = text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"]));
   const exactDrive = text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"]));
-  // Encar list Category is not trusted as a body-shape field. Only body-specific
-  // exact-detail keys may publish a body type; otherwise it remains unknown.
-  const exactBodyType = text(deepFind(vehicle, ["bodyType", "BodyType", "carType"]));
+  // Encar list Category and generic carType are not trusted as body-shape fields.
+  // Only body-specific exact-detail keys may publish a body type; otherwise it remains unknown.
+  const exactBodyType = extractEncarExactBodyType(vehicle);
   const exactColor = text(deepFind(vehicle, ["color", "Color", "exteriorColor"]));
   const exactProductionDate = text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"]));
 
