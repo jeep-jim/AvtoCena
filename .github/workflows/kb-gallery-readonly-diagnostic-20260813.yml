@@ -1,0 +1,36 @@
+name: KB gallery read-only diagnostic 20260813
+
+on:
+  push:
+    branches: [fix/recovery-target-min-images-20260813]
+    paths:
+      - '.github/workflows/kb-gallery-readonly-diagnostic-20260813.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe exact KB detail galleries without storage writes
+        env:
+          CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+          CATALOG_SOURCE_TIMEOUT_MS: 35000
+          KBCHACHACHA_DETAIL_MIN_INTERVAL_MS: 900
+          KBCHACHACHA_DETAIL_PAUSE_MS: 60000
+          KB_GALLERY_DIAGNOSTIC_LIMIT: 12
+          KB_GALLERY_DIAGNOSTIC_PAGES: 2
+        run: npx tsx scripts/kbchachacha-gallery-diagnostic.mjs | tee kb-gallery-diagnostic.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kb-gallery-readonly-diagnostic
+          path: kb-gallery-diagnostic.json
+          retention-days: 3
