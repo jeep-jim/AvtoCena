@@ -4,7 +4,7 @@ import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
-const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s*jet|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
+const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s+jet|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
@@ -91,7 +91,19 @@ function listingTitle(offer: VehicleOffer) {
   );
 }
 
+export function isCatalogKnownBodySemanticValid(offer: Pick<VehicleOffer, "market" | "make" | "model" | "trim" | "sourceTitle" | "bodyType">) {
+  if (clean(offer.market).toLowerCase() !== "korea") return true;
+  if (!/^(?:suv|crossover|offroad)$/i.test(clean(offer.bodyType))) return true;
+  const make = clean(offer.make);
+  const identity = [offer.model, offer.trim, offer.sourceTitle].map(clean).filter(Boolean).join(" ");
+  if (/^(?:genesis|제네시스)$/i.test(make) && /\bG80\b/i.test(identity)) return false;
+  if (/^(?:hyundai|현대)$/i.test(make) && /(?:\bGrandeur\b|그랜저|\bIoniq\s*6\b|아이오닉\s*6)/i.test(identity)) return false;
+  if (/^(?:kia|기아)$/i.test(make) && /(?:\bK9\b|\bK900\b|\bQuoris\b|퀴리스)/i.test(identity)) return false;
+  return true;
+}
+
 export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
+  if (!isCatalogKnownBodySemanticValid(offer)) return false;
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const powerHp = Number(offer.powerHp || 0);
