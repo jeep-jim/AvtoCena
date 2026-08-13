@@ -11,6 +11,7 @@ on:
       - "apps/web/lib/catalog/autoscout-hq-source.ts"
       - "apps/web/lib/catalog/autoscout-current-source.ts"
       - "apps/web/lib/catalog/importer.ts"
+      - "scripts/europe-hq-safety-audit-20260814.mjs"
 
 permissions:
   contents: read
@@ -19,27 +20,28 @@ concurrency:
   group: catalog-v6-autoscout-readiness
   cancel-in-progress: true
 
+env:
+  CATALOG_REBUILD_MARKET: europe
+  CATALOG_REBUILD_SOURCE_IDS: autoscout_europe_open
+  CATALOG_REBUILD_OUTPUT: readiness-europe-autoscout_europe_open.json
+  CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+  CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+  CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+  CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+  CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+  CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
+  CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+  CATALOG_GALLERY_TIMEOUT_MS: "30000"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_KNOWLEDGE_DISABLED: "1"
+
 jobs:
   certify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      CATALOG_REBUILD_MARKET: europe
-      CATALOG_REBUILD_SOURCE_IDS: autoscout_europe_open
-      CATALOG_REBUILD_OUTPUT: readiness-europe-autoscout_europe_open.json
-      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
-      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
-      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
-      CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
-      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
-      CATALOG_GALLERY_TIMEOUT_MS: "30000"
-      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
-      CATALOG_MAX_IMAGES_PER_OFFER: "30"
-      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
-      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-      CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -72,7 +74,7 @@ jobs:
             if (offer?.operational?.raw?.photoIdentityVerified !== true) problems.push('photo_identity');
             if (offer?.operational?.raw?.photoResolutionVerified !== true) problems.push('photo_resolution');
           }
-          console.log(JSON.stringify({count: offers.length, problems, sample: offers.slice(0, 3).map(o => ({id:o.sourceOfferId, title:o.sourceTitle, year:o.year, price:o.sourcePrice, images:o.images?.length, firstImage:o.images?.[0] && {url:o.images[0].url,width:o.images[0].width,height:o.images[0].height}, sourceUrl:o.operational?.sourceUrl, powerKw:o.powerKw, powerHp:o.powerHp}))}, null, 2));
+          console.log(JSON.stringify({count: offers.length, problems}, null, 2));
           if (problems.length) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
@@ -80,5 +82,40 @@ jobs:
         with:
           name: readiness-autoscout-exact
           path: readiness-europe-autoscout_europe_open.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  audit-storage:
+    needs: certify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+      EUROPE_HQ_AUDIT_LIMIT: "30"
+      EUROPE_HQ_AUDIT_REPORT: europe-hq-safety-report.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Read-only writer/storage and current Europe gallery audit
+        run: npx tsx scripts/europe-hq-safety-audit-20260814.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: europe-hq-safety-report
+          path: europe-hq-safety-report.json
           if-no-files-found: warn
           retention-days: 3
