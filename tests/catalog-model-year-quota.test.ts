@@ -109,6 +109,15 @@ test("generic collector scans beyond the output target and selects model-year co
   assert.doesNotMatch(source, /sort\(qualityOrder\)\.slice\(0, target\)/);
 });
 
+test("generic recovery retains source-bound combustion offers as explicit preliminary power-pending instead of dropping them", () => {
+  const source = fs.readFileSync("scripts/catalog-live-recovery-market.mjs", "utf8");
+  assert.match(source, /calculateOfferWithPreliminaryPowerPricing/);
+  assert.match(source, /isPreliminaryPowerPendingCalculation/);
+  assert.doesNotMatch(source, /isPreliminaryElectrifiedCalculation/);
+  assert.match(source, /recoveryPreliminaryPowerPending:\s*isPreliminaryPowerPendingCalculation/);
+  assert.match(source, /preliminaryCount:\s*offers\.filter\(isPreliminaryPowerPendingCalculation\)/);
+});
+
 test("daily and legacy recovery workflows expose only model-year quota and canonical Georgia sources", () => {
   for (const path of [
     ".github/workflows/catalog-live-daily-working-markets.yml",
