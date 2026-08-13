@@ -68,6 +68,19 @@ function withinRetention(offer) {
   const timestamp = freshness(offer);
   return timestamp > 0 && timestamp >= retentionCutoff;
 }
+function koreaKnownSedanIdentity(offer) {
+  const make = String(offer?.make || "").trim();
+  const identity = [offer?.model, offer?.trim, offer?.sourceTitle].filter(Boolean).join(" ");
+  if (/^(?:genesis|제네시스)$/i.test(make)) return /\bG80\b/i.test(identity);
+  if (/^(?:hyundai|현대)$/i.test(make)) return /(?:\bGrandeur\b|그랜저|\bIoniq\s*6\b|아이오닉\s*6)/i.test(identity);
+  if (/^(?:kia|기아)$/i.test(make)) return /(?:\bK9\b|\bK900\b|\bQuoris\b|퀴리스)/i.test(identity);
+  return false;
+}
+function semanticBodyValid(offer, currentMarket) {
+  if (currentMarket !== "korea") return true;
+  if (!koreaKnownSedanIdentity(offer)) return true;
+  return !/^(?:suv|crossover|offroad)$/i.test(String(offer?.bodyType || ""));
+}
 
 function quality(a, b) {
   const ap = Number(a.totalRub || 0) <= preferredMaxRub ? 0 : 1;
@@ -137,6 +150,7 @@ for (const market of markets) {
     if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
     if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
     if (!offer.make || !offer.model) { reject("visible_core"); continue; }
+    if (!semanticBodyValid(offer, market)) { reject("semantic_body"); continue; }
     if (offer.images.length < minImagesPerOffer) { reject("images"); continue; }
     if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
     if (!publishableCalculation(offer)) { reject("calculation"); continue; }
@@ -152,6 +166,7 @@ for (const market of markets) {
     const year = Number(offer?.year || 0);
     if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
     if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
+    if (!semanticBodyValid(offer, market)) { reject("retained_semantic_body"); continue; }
     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
   }
@@ -180,7 +195,7 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
     .map((offer) => normalizeVisible(offer))
-    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && canonicalPublic(offer) && isCatalogOfferBusinessLiquid(offer))
+    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && canonicalPublic(offer) && isCatalogOfferBusinessLiquid(offer) && semanticBodyValid(offer, other))
     .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
