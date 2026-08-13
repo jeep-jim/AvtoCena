@@ -1,0 +1,51 @@
+name: Georgia exact variant match probe read-only
+
+on:
+  push:
+    branches:
+      - ops/georgia-power-inspect-audit-20260813
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Compare variant matching with exact AutoPapa detail facts
+        shell: bash
+        run: |
+          cat >/tmp/georgia-variant-probe.ts <<'TS'
+          import { findVehicleModel, findVehicleVariant } from './apps/web/lib/catalog/vehicle-knowledge.ts';
+          import { normalizeVehicleOfferSpecs } from './apps/web/lib/catalog/spec-normalization.ts';
+
+          const samples = [
+            { id:'913967', make:'Kia', model:'Seltos', year:2021, engineCc:1600, fuel:'petrol', transmission:'automatic', drive:'four-wheel drive' },
+            { id:'913963', make:'Kia', model:'Sorento', year:2021, engineCc:2500, fuel:'petrol', transmission:'automatic', drive:'front-wheel drive' },
+            { id:'913954', make:'Hyundai', model:'Sonata', year:2022, engineCc:1600, fuel:'petrol', transmission:'automatic', drive:'front-wheel drive' },
+            { id:'913950', make:'Honda', model:'Accord', year:2021, engineCc:1500, fuel:'petrol', transmission:'automatic', drive:'front-wheel drive' },
+            { id:'909902', make:'Mercedes-Benz', model:'GLE 350', year:2022, engineCc:2000, fuel:'petrol', transmission:'automatic', drive:'four-wheel drive' },
+            { id:'909900', make:'Mazda', model:'CX-5', year:2021, engineCc:2500, fuel:'petrol', transmission:'automatic', drive:'four-wheel drive' },
+          ];
+
+          for (const sample of samples) {
+            const base:any = normalizeVehicleOfferSpecs({ ...sample, market:'georgia', sourceId:'autopapa_georgia_open', sourceOfferId:sample.id, sourcePrice:1, sourceCurrency:'USD', images:[], status:'active', powertrainKind:'combustion' } as any);
+            const modelMatch = await findVehicleModel(base);
+            const baseVariant = modelMatch ? await findVehicleVariant(modelMatch.model, { ...base, transmission:undefined, drive:undefined } as any) : null;
+            const detailVariant = modelMatch ? await findVehicleVariant(modelMatch.model, base) : null;
+            console.log(JSON.stringify({
+              id: sample.id,
+              normalized: { make:base.make, model:base.model, year:base.year, engineCc:base.engineCc, fuel:base.fuel, transmission:base.transmission, drive:base.drive },
+              model: modelMatch ? { id:modelMatch.model.id, make:modelMatch.model.make, model:modelMatch.model.model, score:modelMatch.score, matchedBy:modelMatch.matchedBy } : null,
+              baseVariant: baseVariant ? { id:baseVariant.id, powerHp:baseVariant.powerHp, engineCc:baseVariant.engineCc, fuel:baseVariant.fuel, transmission:baseVariant.transmission, drive:baseVariant.drive, sourceType:baseVariant.sourceType } : null,
+              detailVariant: detailVariant ? { id:detailVariant.id, powerHp:detailVariant.powerHp, engineCc:detailVariant.engineCc, fuel:detailVariant.fuel, transmission:detailVariant.transmission, drive:detailVariant.drive, sourceType:detailVariant.sourceType } : null,
+            }, null, 2));
+          }
+          TS
+          npx tsx /tmp/georgia-variant-probe.ts
