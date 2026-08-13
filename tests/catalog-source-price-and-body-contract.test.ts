@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import { classifyCatalogV2Offer, selectCatalogV2MarketOffers } from "../apps/web/lib/catalog/catalog-v2-policy";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
@@ -81,4 +82,12 @@ test("explicit source semantic fields are normalized without model-name guessing
   assert.equal(result.drive, "fwd");
   assert.equal(result.bodyType, "sedan");
   assert.equal(result.powertrainKind, "combustion");
+});
+
+test("source-specific listing-bound gallery adapters are never replaced by generic detail scraping", () => {
+  const importer = fs.readFileSync("apps/web/lib/catalog/importer.ts", "utf8");
+  const dedicatedBlock = importer.match(/const dedicatedDetailSourceIds = new Set\(\[([\s\S]*?)\]\);/)?.[1] || "";
+  for (const sourceId of ["myauto_georgia_list", "dubicars_uae_exact", "mashina_kyrgyzstan_exact"]) {
+    assert.match(dedicatedBlock, new RegExp(`"${sourceId}"`), `${sourceId} must keep its source-specific fetchImages implementation`);
+  }
 });
