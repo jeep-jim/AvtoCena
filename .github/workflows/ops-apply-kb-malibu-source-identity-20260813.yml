@@ -1,0 +1,106 @@
+name: Ops · apply KB Malibu source identity fix
+
+on:
+  push:
+    branches:
+      - ops/apply-kb-malibu-source-identity-20260813
+    paths:
+      - ".github/workflows/ops-apply-kb-malibu-source-identity-20260813.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/kb-malibu-source-identity-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch KB source identity and regression
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p=Path('apps/web/lib/catalog/presentation.ts')
+          s=p.read_text()
+          make_anchor='  [/쉐보레/gi, "Chevrolet"],'
+          if '[/한국GM/gi, "Chevrolet"]' not in s:
+              if make_anchor not in s: raise SystemExit('Chevrolet Korean make anchor missing')
+              s=s.replace(make_anchor, '  [/한국GM/gi, "Chevrolet"],\n'+make_anchor, 1)
+          model_anchor='  [/더\\s*뉴\\s*레이/gi, "The New Ray"],'
+          if 'The New Malibu' not in s:
+              if model_anchor not in s: raise SystemExit('Korean model anchor missing')
+              s=s.replace(model_anchor, '  [/더\\s*뉴\\s*말리부/gi, "The New Malibu"],\n  [/말리부/gi, "Malibu"],\n'+model_anchor, 1)
+          p.write_text(s)
+
+          k=Path('apps/web/lib/catalog/kbchachacha-exact-source.ts')
+          s=k.read_text()
+          old='  const make = canonicalCatalogBrand(rawMake);'
+          new='  const make = canonicalCatalogBrand(clean(translateCatalogText(rawMake)) || rawMake);'
+          if s.count(old)!=1: raise SystemExit(f'KB make canonicalization count={s.count(old)}')
+          s=s.replace(old,new,1)
+          k.write_text(s)
+
+          t=Path('tests/catalog-live-sources-v19.test.ts')
+          s=t.read_text()
+          import_anchor='import { DubicarsCurrentAdapter, parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";'
+          kb_import='import { parseKbChaChaChaDetail } from "../apps/web/lib/catalog/kbchachacha-exact-source";'
+          if kb_import not in s:
+              if import_anchor not in s: raise SystemExit('test import anchor missing')
+              s=s.replace(import_anchor, import_anchor+'\n'+kb_import,1)
+          marker='KB ChaChaCha preserves Korean Malibu model identity'
+          if marker not in s:
+              s += r'''
+
+test("KB ChaChaCha preserves Korean Malibu model identity", () => {
+  const carSeq = "28512227";
+  const images = Array.from({ length: 5 }, (_, index) => `https://img.kbchachacha.com/IMG/carimg/l/img01/img2851/${carSeq}_${1000 + index}.jpeg`);
+  const markup = `
+    <script type="application/ld+json">${JSON.stringify({
+      "@type": "Product",
+      name: "한국GM 더 뉴 말리부 2.0 터보 LT 스페셜 (21년형)",
+      description: "21년06월 가솔린",
+      image: images,
+      offers: { url: `https://www.kbchachacha.com/public/car/detail.kbc?carSeq=${carSeq}`, price: "11990000" },
+    })}</script>
+    <table>
+      <tr><th>연식</th><td>21년06월(21년형)</td></tr>
+      <tr><th>주행거리</th><td>71,414km</td></tr>
+      <tr><th>연료</th><td>가솔린</td></tr>
+      <tr><th>변속기</th><td>자동</td></tr>
+      <tr><th>차종</th><td>중형차</td></tr>
+      <tr><th>배기량</th><td>1,998cc</td></tr>
+    </table>
+  `;
+  const parsed = parseKbChaChaChaDetail(markup, carSeq);
+  assert.equal(parsed.make, "Chevrolet");
+  assert.match(parsed.model, /Malibu/i);
+  assert.doesNotMatch(parsed.model, /Bolt/i);
+  assert.equal(parsed.engineCc, 1998);
+  assert.equal(parsed.sourcePrice, 11990000);
+});
+'''
+          t.write_text(s)
+          PY
+      - name: Focused source tests
+        run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Push code-only patch
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/lib/catalog/presentation.ts apps/web/lib/catalog/kbchachacha-exact-source.ts tests/catalog-live-sources-v19.test.ts
+          git diff --cached --check
+          git commit -m "Preserve KB Malibu source identity"
+          git push origin HEAD:fix/kb-malibu-source-identity-20260813
