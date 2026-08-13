@@ -1,0 +1,75 @@
+name: UI home mobile budget bottom 20260813
+
+on:
+  push:
+    branches:
+      - ui/home-finance-desktop-cleanup-20260813
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/home-finance-desktop-cleanup-20260813
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply mobile budget layout patch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/components/home/HomePageClient.tsx')
+          text = path.read_text()
+
+          old_select = '<div className="ac-budget-select w-full min-w-0 max-w-none"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>'
+          new_select = '<div className="ac-budget-select hidden w-full min-w-0 max-w-none lg:block"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div>'
+          if text.count(old_select) != 1:
+              raise SystemExit(f'budget top select anchor count={text.count(old_select)}')
+          text = text.replace(old_select, new_select, 1)
+
+          old_action = '<div className="mt-auto flex items-end gap-4 pt-5"><button type="button" onClick={submit} className="avto-button h-[58px] min-w-0 flex-1 rounded-2xl px-4 text-sm font-black md:text-base">Узнать Цену Авто</button><img src="/brands/topavto-logo.png" alt="TopAvto" className="mb-1 hidden h-auto w-[108px] shrink-0 object-contain lg:block" /></div>'
+          new_action = '''<div className="mt-auto grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 pt-5 lg:hidden"><div className="ac-budget-mobile min-w-0"><HomeSelect value={budget} options={budgets} onChange={setBudget} /></div><button type="button" onClick={submit} className="avto-button h-14 min-w-0 rounded-2xl px-3 text-sm font-black">Узнать Цену Авто</button></div><div className="mt-auto hidden items-end gap-4 pt-5 lg:flex"><button type="button" onClick={submit} className="avto-button h-[58px] min-w-0 flex-1 rounded-2xl px-4 text-sm font-black md:text-base">Узнать Цену Авто</button><img src="/brands/topavto-logo.png" alt="TopAvto" className="mb-1 h-auto w-[108px] shrink-0 object-contain" /></div>'''
+          if text.count(old_action) != 1:
+              raise SystemExit(f'action anchor count={text.count(old_action)}')
+          text = text.replace(old_action, new_action, 1)
+
+          text = text.replace('max-w-[300px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж', 'max-w-[250px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж', 1)
+          text = text.replace('max-w-[300px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт', 'max-w-[250px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт', 1)
+
+          old_css = '.ac-home-page .ac-budget-select,.ac-home-page .ac-budget-select>div,.ac-home-page .ac-budget-select .ac-filter-control{width:100%!important;max-width:none!important;min-width:0!important}'
+          new_css = old_css + '.ac-home-page .ac-budget-mobile,.ac-home-page .ac-budget-mobile>div,.ac-home-page .ac-budget-mobile .ac-filter-control{width:100%!important;max-width:none!important;min-width:0!important}.ac-home-page .ac-budget-mobile .ac-filter-dropdown{top:auto!important;bottom:calc(100% + 7px)!important}'
+          if text.count(old_css) != 1:
+              raise SystemExit(f'budget css anchor count={text.count(old_css)}')
+          text = text.replace(old_css, new_css, 1)
+
+          for token in (
+              'ac-budget-select hidden w-full',
+              'ac-budget-mobile min-w-0',
+              'bottom:calc(100% + 7px)!important',
+              'mt-auto hidden items-end gap-4 pt-5 lg:flex',
+              'max-w-[250px] text-sm font-medium leading-5',
+          ):
+              if token not in text:
+                  raise SystemExit(f'missing token: {token}')
+
+          path.write_text(text)
+          PY
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: git diff --check
+      - name: Commit UI-only changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/components/home/HomePageClient.tsx
+          git diff --cached --quiet && exit 1
+          git commit -m "Match mobile budget card layout"
+          git push origin HEAD:ui/home-finance-desktop-cleanup-20260813
