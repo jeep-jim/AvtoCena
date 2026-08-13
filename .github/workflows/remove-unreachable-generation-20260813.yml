@@ -1,0 +1,32 @@
+name: Remove unreachable catalog generation 20260813
+on:
+  push:
+    branches: [audit/catalog-capacity-20260813]
+    paths:
+      - .github/workflows/remove-unreachable-generation-20260813.yml
+permissions:
+  contents: read
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_UNREACHABLE_GENERATION_TARGET: gen_1786590122960_edc61186
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: audit/catalog-capacity-20260813 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - name: Delete only the proven unreachable generation
+        run: npx tsx scripts/remove-unreachable-generation-20260813.mts
