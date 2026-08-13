@@ -1,5 +1,5 @@
 name: Apply model-year inventory quota 20260813
-# retry: cover every legacy model-only selector and remove obsolete reapply workflows
+# retry: exhaustive wrapper removes every old model-only/models-per-make knob
 on:
   push:
     branches: [fix/model-year-quota-20260813]
@@ -22,7 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply deterministic quota patch
-        run: python3 .github/patches/apply-model-year-quota-20260813.py
+        run: python3 .github/patches/run-model-year-quota-20260813.py
       - name: Validate quota scripts
         run: |
           node --check scripts/catalog-live-recovery-market.mjs
