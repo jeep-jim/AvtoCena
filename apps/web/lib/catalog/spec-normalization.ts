@@ -200,8 +200,8 @@ function inferThirtyMinutePowers(text: string) {
   const label = String.raw`(?:(?:maximum\s+)?30[\s-]?(?:minute|min)(?:\s+power)?|30\s*мин(?:ут\w*)?(?:\s+мощност\w*)?|最大\s*30\s*分钟(?:功率)?|30\s*分钟(?:最大)?功率|30\s*분(?:\s*최대)?(?:\s*출력)?)`;
   const unit = String.raw`(?:kw|квт|კვტ|千瓦|킬로와트)`;
   const patterns = [
-    new RegExp(`${label}[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\\s*${unit}`, "gi"),
-    new RegExp(`([0-9]+(?:[.,][0-9]+)?)\\s*${unit}[^.;|]{0,45}${label}`, "gi"),
+    new RegExp(`${label}[^0-9]{0,50}([0-9]+(?:[.,][0-9]+)?)\s*${unit}`, "gi"),
+    new RegExp(`([0-9]+(?:[.,][0-9]+)?)\s*${unit}[^.;|]{0,45}${label}`, "gi"),
   ];
 
   for (const pattern of patterns) {
@@ -296,24 +296,11 @@ function normalizedCurrency(offer: Partial<VehicleOffer>) {
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
   const primary = primaryText(offer);
   const full = allText(offer);
-  const normalizedMake = String(offer.make || "").trim().toLowerCase();
-  const normalizedModelTrim = `${offer.model || ""} ${offer.trim || ""}`.trim();
-  // Only source-exact, manufacturer-defined BEV model names are allowed here.
-  // This improves powertrain classification but does not supply customs power.
-  const knownPureElectricModel = (normalizedMake === "audi" && /\be[- ]?tron\b/i.test(normalizedModelTrim))
-    || /\b(?:ev3|ev4|ev5|ev6|ev9)\b/i.test(normalizedModelTrim)
-    || /아이오닉(?:\s*[56]|.*?일렉트릭)/i.test(normalizedModelTrim)
-    || /(?:코나|캐스퍼).*?(?:electric|일렉트릭)/i.test(normalizedModelTrim)
-    || /(?:레이|니로|쏘울(?:\s+부스터)?).*?\bev\b/i.test(normalizedModelTrim)
-    || (/tesla|테슬라/i.test(normalizedMake) && /(?:\bmodel|모델)\s*[3sxy]\b|cybertruck/i.test(normalizedModelTrim))
-    || (/chevrolet|쉐보레/i.test(normalizedMake) && /(?:\bbolt|볼트)\s*(?:ev|euv)\b/i.test(normalizedModelTrim))
-    || (/nissan|닛산/i.test(normalizedMake) && /\b(?:leaf|ariya)\b|리프|아리야/i.test(normalizedModelTrim))
-    || (/peugeot|푸조/i.test(normalizedMake) && /\be[- ]?(?:208|2008)\b/i.test(normalizedModelTrim));
-  const parsedEngineCc = reasonable(offer.engineCc, 300, 10_000)
+  const explicitEngineCc = reasonable(offer.engineCc, 300, 10_000);
+  const engineCc = explicitEngineCc
     || structuredEngineCc(offer)
     || inferEngineCc(primary)
     || inferEngineCc(full);
-  const engineCc = knownPureElectricModel ? undefined : parsedEngineCc;
   const powerHp = reasonable(offer.powerHp, 20, 2_500)
     || structuredPowerHp(offer)
     || inferPowerHp(primary)
@@ -321,29 +308,24 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const explicitPowerKw = reasonable(offer.powerKw, 10, 2_000);
   const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
 
-  let fuel = inferFuel(primary)
-    || offer.fuel
-    || inferFuel(full.replace(/electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기/g, " "));
-  const strongElectric = knownPureElectricModel || /electric|battery electric|\bbev\b|\bev\b|электро|纯电|전기|일렉트릭/.test(primary);
-  if (engineCc && fuel === "electric" && !strongElectric) {
-    fuel = inferFuel(primary.replace(/electric|\bbev\b|\bev\b|электро/g, " ")) || "petrol";
-  }
-  if (engineCc && fuel === "electric" && /diesel|tdi|crdi|d-4d|d4d|дизел/.test(primary)) fuel = "diesel";
-
-  if (knownPureElectricModel) fuel = "electric";
-
+  // Semantic vehicle attributes are provenance-sensitive. They may only be
+  // normalized from the corresponding source field (plus engineType for fuel /
+  // powertrain wording). Raw page payloads can contain filters, menus and
+  // recommended vehicles and therefore are never evidence for these fields.
+  const semanticPowertrainText = [offer.fuel, offer.engineType]
+    .filter(Boolean)
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+  let fuel = inferFuel(semanticPowertrainText) || offer.fuel;
   const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;
-  const primaryPowertrainKind = knownPureElectricModel ? "electric" : inferPowertrainKind(primary, engineCc);
-  const fallbackPowertrainKind = primaryPowertrainKind !== "unknown" ? primaryPowertrainKind : inferPowertrainKind(full, engineCc);
-  const inferredElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(primaryPowertrainKind)
-    ? primaryPowertrainKind
-    : undefined;
-  const powertrainKind = inferredElectrified || explicitPowertrainKind || fallbackPowertrainKind;
+  const scopedPowertrainKind = fuel === "electric"
+    ? "electric"
+    : inferPowertrainKind(semanticPowertrainText, explicitEngineCc);
+  const powertrainKind = explicitPowertrainKind || scopedPowertrainKind;
   if (powertrainKind === "electric") fuel = "electric";
   else if (["series_hybrid", "other_hybrid"].includes(powertrainKind)) fuel = "hybrid";
-  else if (powertrainKind === "combustion" && fuel === "hybrid" && primaryPowertrainKind === "combustion") {
-    fuel = inferFuel(primary.replace(/hybrid|\b(?:phev|hev|mhev|reev|erev)\b|\be[- ]?power\b/gi, " ")) || offer.fuel || inferFuel(full) || fuel;
-  }
+
   const thirtyMinute = exactThirtyMinutePowers(offer, full);
   const power30MinKwByMotor = thirtyMinute.values.length ? thirtyMinute.values : undefined;
   const power30MinKw = power30MinKwByMotor?.length
@@ -364,9 +346,9 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     sourceCurrency: normalizedCurrency(offer),
     fuel,
     powertrainKind,
-    transmission: inferTransmission(`${offer.transmission || ""} ${primary}`) || inferTransmission(full) || offer.transmission,
-    drive: inferDrive(`${offer.drive || ""} ${primary}`) || inferDrive(full) || offer.drive,
-    bodyType: inferBody(`${offer.bodyType || ""} ${primary}`) || inferBody(full) || offer.bodyType,
+    transmission: inferTransmission(String(offer.transmission || "").toLowerCase()) || offer.transmission,
+    drive: inferDrive(String(offer.drive || "").toLowerCase()) || offer.drive,
+    bodyType: inferBody(String(offer.bodyType || "").toLowerCase()) || offer.bodyType,
     engineCc,
     powerHp,
     powerKw,
