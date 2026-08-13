@@ -3,10 +3,6 @@ run-name: K Car exterior-first v3 repair · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-kcar-exterior-gallery-repair.yml"
 
 permissions:
   contents: read
