@@ -1,0 +1,13 @@
+name: UI home mobile budget final 20260813
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo placeholder
