@@ -29,22 +29,16 @@ jobs:
           path = Path('apps/web/components/home/HomePageClient.tsx')
           text = path.read_text()
 
-          old = '''          <article className="ac-executor-block relative min-h-[168px] overflow-hidden rounded-[1.6rem] p-6 pr-[160px]">
-            <div className="relative z-10 flex h-full min-h-[120px] flex-col justify-center">
-              <h3 className="max-w-[290px] text-xl font-black leading-tight text-[var(--ac-text)]">Кредитный калькулятор</h3>
-              <p className="mt-2 max-w-[250px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>
-            </div>
-            <img src="/avatars/manager-green.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[162px] w-[145px] object-contain xl:h-[170px] xl:w-[152px]" aria-hidden="true" />
-          </article>
-          <article className="ac-executor-block relative min-h-[168px] overflow-hidden rounded-[1.6rem] p-6 pr-[160px]">
-            <div className="relative z-10 flex h-full min-h-[120px] flex-col justify-center">
-              <h3 className="max-w-[290px] text-xl font-black leading-tight text-[var(--ac-text)]">Страховой полис ОСАГО</h3>
-              <p className="mt-2 max-w-[250px] text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
-            </div>
-            <img src="/avatars/manager-yellow.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[162px] w-[145px] object-contain xl:h-[170px] xl:w-[152px]" aria-hidden="true" />
-          </article>'''
+          start_token = '        <section className="grid min-h-[168px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">'
+          end_token = '        </section>\n        <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />'
+          start = text.find(start_token)
+          end_anchor = text.find(end_token, start)
+          if start < 0 or end_anchor < 0:
+              raise SystemExit(f'finance section anchors not found start={start} end={end_anchor}')
+          end = end_anchor + len('        </section>')
 
-          new = '''          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">
+          new_section = '''        <section className="grid min-h-[176px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
+          <article className="ac-executor-block relative min-h-[176px] overflow-hidden rounded-[1.6rem] p-6 pr-[168px]">
             <div className="relative z-10 grid h-full min-h-[128px] grid-cols-[48px_minmax(0,1fr)] gap-x-5">
               <div className="mt-0.5 flex h-12 w-12 items-center justify-center text-[#35c932]" aria-hidden="true"><svg width="43" height="43" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg></div>
               <h3 className="min-w-0 max-w-[250px] pt-0.5 text-[22px] font-black leading-[1.08] text-[var(--ac-text)]">Кредитный<br />калькулятор</h3>
@@ -59,11 +53,10 @@ jobs:
               <p className="col-span-2 mt-auto max-w-[335px] pt-5 text-sm font-medium leading-5 text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
             </div>
             <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[150px] w-[150px] object-contain xl:right-4 xl:h-[156px] xl:w-[156px]" aria-hidden="true" />
-          </article>'''
+          </article>
+        </section>'''
 
-          if text.count(old) != 1:
-              raise SystemExit(f'finance card anchor count={text.count(old)}')
-          text = text.replace(old, new, 1)
+          text = text[:start] + new_section + text[end:]
 
           required = (
               '/home/credit-mascot.webp',
@@ -76,7 +69,6 @@ jobs:
           for token in required:
               if token not in text:
                   raise SystemExit(f'missing token: {token}')
-
           if '/avatars/manager-green.webp' in text or '/avatars/manager-yellow.webp' in text:
               raise SystemExit('old finance avatars remained in home component')
 
