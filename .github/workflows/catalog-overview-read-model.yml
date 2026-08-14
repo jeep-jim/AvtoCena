@@ -8,6 +8,8 @@ on:
       - main
     paths:
       - ".github/workflows/catalog-overview-read-model.yml"
+      - "scripts/catalog-build-overview-read-model.mjs"
+      - "scripts/catalog-publish-current-read-models.mjs"
   workflow_run:
     workflows:
       - "Catalog quality · enforce global model cap"

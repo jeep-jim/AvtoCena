@@ -6,6 +6,7 @@ import test from "node:test";
 const overview = fs.readFileSync(new URL("../apps/web/lib/catalog/overview.ts", import.meta.url), "utf8");
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const builder = fs.readFileSync(new URL("../scripts/catalog-build-overview-read-model.mjs", import.meta.url), "utf8");
+const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-current-read-models.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-overview-read-model.yml", import.meta.url), "utf8");
 
 test("overview alias is accepted only for the active manifest generation", () => {
@@ -28,10 +29,20 @@ test("overview builder fails closed if the catalog generation changes", () => {
   assert.match(builder, /generation_changed_after_write/);
 });
 
-test("overview refresh follows successful model-cap runs and has a path-scoped merge bootstrap", () => {
+test("every successful current read-model refresh rebuilds the compact overview", () => {
+  const completenessGate = publisher.indexOf('throw new Error("catalog_current_read_models_incomplete")');
+  const overviewRefresh = publisher.indexOf('await import("./catalog-build-overview-read-model.mjs")');
+  assert.ok(completenessGate >= 0);
+  assert.ok(overviewRefresh > completenessGate);
+  assert.match(publisher, /catalog_overview_refreshed_with_current_read_models/);
+});
+
+test("overview workflow remains a guarded backstop and refreshes after publisher changes", () => {
   assert.match(workflow, /Catalog quality · enforce global model cap/);
   assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(workflow, /branches:\s*\n\s*- main/);
-  assert.match(workflow, /paths:\s*\n\s*- "\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.match(workflow, /"\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.match(workflow, /"scripts\/catalog-build-overview-read-model\.mjs"/);
+  assert.match(workflow, /"scripts\/catalog-publish-current-read-models\.mjs"/);
   assert.match(workflow, /github\.event_name == 'push'/);
 });
