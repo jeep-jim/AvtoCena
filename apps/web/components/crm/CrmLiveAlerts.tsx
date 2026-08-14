@@ -60,13 +60,13 @@ export function CrmLiveAlerts() {
 
   const poll = useCallback(async () => {
     try {
-      const response = await fetch("/api/leads", { cache: "no-store" });
+      const response = await fetch("/api/crm/inbox", { cache: "no-store" });
       if (!response.ok) return;
-      const payload = await response.json().catch(() => null) as { leads?: LeadPreview[] } | null;
+      const payload = await response.json().catch(() => null) as { leads?: LeadPreview[]; newCount?: number } | null;
       const leads = Array.isArray(payload?.leads) ? payload!.leads! : [];
-      setNewCount(leads.filter((lead) => lead.status === "new").length);
+      setNewCount(Number(payload?.newCount ?? leads.filter((lead) => lead.status === "new").length));
 
-      const newest = [...leads].sort((a, b) => createdMs(b) - createdMs(a))[0];
+      const newest = leads[0];
       const newestMs = newest ? createdMs(newest) : 0;
       if (!initializedRef.current) {
         initializedRef.current = true;
