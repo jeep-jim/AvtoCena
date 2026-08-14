@@ -136,24 +136,27 @@ function HomeSelect({ value, options, onChange, searchable = false, searchPlaceh
 function MobileBudgetPicker({ value, options, onChange }: { value: string; options: Option[]; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   const [tradeIn, setTradeIn] = useState(false);
+  const [tradeInfoOpen, setTradeInfoOpen] = useState(false);
   const active = options.find((option) => option.value === value) || options[0];
-  const choose = (next: string) => { onChange(next); setOpen(false); };
+  const choose = (next: string) => { onChange(next); setTradeInfoOpen(false); setOpen(false); };
 
   return <>
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}>
       <span className="min-w-0 whitespace-nowrap">{value ? active?.label : "Бюджет"}</span>{!value ? <Chevron open={!open} /> : null}
     </button>
     {open ? <div className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden" style={{ border: "0", outline: "none", boxShadow: "none" }}>
-      <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
+      {tradeInfoOpen ? <button type="button" onClick={() => setTradeInfoOpen(false)} className="flex h-full w-full items-center justify-center px-6 text-center text-[13px] font-bold leading-5 text-[var(--ac-text)]" aria-label="Вернуться к выбору бюджета"><span>Условия по трейд-ин уточняются индивидуально с менеджером дилера в вашем городе.</span></button> : <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
         {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-0 items-center rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight ${value === option.value ? "is-active" : ""}`}>
           <span className="truncate">{option.label}</span>
         </button>)}
-        <label onClick={(event) => { event.preventDefault(); setTradeIn((current) => !current); }} className="ac-filter-option flex min-h-0 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight">
-          <input type="checkbox" checked={tradeIn} readOnly className="sr-only" />
-          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>
-          <span className="truncate">Трейд-ин</span>
-        </label>
-      </div>
+        <div className="ac-filter-option flex min-h-0 items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-[11px] font-black leading-tight">
+          <button type="button" onClick={() => setTradeIn((current) => !current)} className="flex min-w-0 flex-1 items-center gap-2 text-left" aria-pressed={tradeIn}>
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>
+            <span className="truncate">Трейд-ин</span>
+          </button>
+          <button type="button" onClick={() => setTradeInfoOpen(true)} className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-black text-[var(--ac-muted)]" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Условия трейд-ин">?</button>
+        </div>
+      </div>}
     </div> : null}
   </>;
 }
