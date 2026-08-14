@@ -1,0 +1,97 @@
+name: Europe AutoScout HQ safe refresh 20260814
+run-name: Europe AutoScout listing-bound HQ refresh · ${{ github.sha }}
+
+on:
+  push:
+    branches: [ops/europe-hq-safe-20260814]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Serialize with every catalog writer that uses the production catalog lock group.
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Prove AutoScout HQ parser and writer safety before production write
+        run: |
+          node --check scripts/catalog-refresh-europe-autoscout-hq-safe.mjs
+          node --import tsx --test tests/catalog-autoscout-hq-gallery.test.ts
+          node --import tsx --test tests/catalog-image-quality.test.ts
+          node --import tsx --test tests/storage.test.ts
+          node --import tsx --test tests/catalog-v6-shared-publish-lock.test.ts
+
+      - name: Refresh only existing Europe AutoScout offers with listing-bound HQ galleries
+        env:
+          CATALOG_EUROPE_HQ_MAX_OFFERS: "4000"
+          CATALOG_EUROPE_HQ_CONCURRENCY: "4"
+          CATALOG_EUROPE_HQ_MIN_IMAGES: "5"
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "25000"
+          CATALOG_EUROPE_HQ_REPORT_FILE: catalog-europe-hq-refresh-report.json
+        shell: bash
+        run: |
+          set -o pipefail
+          npx tsx scripts/catalog-refresh-europe-autoscout-hq-safe.mjs | tee catalog-europe-hq-refresh.log
+
+      - name: Verify production pages expose refreshed listing-bound galleries
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE' > /tmp/europe-hq-samples.tsv
+          const fs = require('fs');
+          const r = JSON.parse(fs.readFileSync('catalog-europe-hq-refresh-report.json','utf8'));
+          if (!r.preservedPreflight || !r.preservedPostflight) throw new Error('preserved_markets_not_verified');
+          if ((r.refreshed || 0) < 1 && (r.alreadyHq || 0) < 1) throw new Error('no_verified_europe_hq_gallery');
+          for (const x of (r.productionSamples || []).slice(0,10)) {
+            console.log([x.id, x.sourceOfferId, x.firstImage].join('\t'));
+          }
+          NODE
+          test -s /tmp/europe-hq-samples.tsv
+          matched=0
+          checked=0
+          while IFS=$'\t' read -r id source_id image_url; do
+            test -n "$id" || continue
+            checked=$((checked+1))
+            page="$(curl --retry 6 --retry-delay 4 --retry-all-errors --max-time 30 -fsS "https://avtocena.com/cars/offer/${id}?hqcheck=20260814")"
+            if grep -Fq "listing-images/${source_id}_" <<<"$page"; then matched=$((matched+1)); fi
+            curl --retry 4 --retry-delay 2 --retry-all-errors --max-time 30 -fsSI "$image_url" >/dev/null
+            if [ "$checked" -ge 5 ]; then break; fi
+          done < /tmp/europe-hq-samples.tsv
+          test "$checked" -ge 1
+          test "$matched" -ge 1
+          printf 'production_offer_pages_checked=%s\nproduction_pages_with_listing_bound_hq=%s\n' "$checked" "$matched" | tee catalog-europe-hq-production-check.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: europe-autoscout-hq-safe-refresh-report
+          path: |
+            catalog-europe-hq-refresh-report.json
+            catalog-europe-hq-refresh.log
+            catalog-europe-hq-production-check.txt
+          if-no-files-found: warn
+          retention-days: 14
