@@ -12,6 +12,7 @@ const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-m
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const recoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
+const singleRecoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish.mjs", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
@@ -93,14 +94,26 @@ test("publisher accumulates galleries before deduplication and protects the newe
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
-test("recovery publisher has opt-in exact preservation for untouched full maintenance state", () => {
+test("recovery publisher always preserves untouched full maintenance state exactly", () => {
   assert.match(recoveryPublisher, /readAllOffersForMaintenance/);
-  assert.match(recoveryPublisher, /RECOVERY_BATCH_PRESERVE_UNTOUCHED_EXACT/);
+  assert.match(recoveryPublisher, /const preserveUntouchedExact = true/);
   assert.match(recoveryPublisher, /preservedInternalByMarket/);
   assert.match(recoveryPublisher, /preservedPublicHashByMarket/);
   assert.match(recoveryPublisher, /recovery_batch_preserved_internal_gate_failed/);
   assert.match(recoveryPublisher, /recovery_batch_preserved_manifest_mismatch/);
   assert.match(recoveryPublisher, /recovery_batch_preserved_hash_mismatch/);
+});
+
+test("single recovery publisher preserves full maintenance state and enforces target gallery depth", () => {
+  assert.match(singleRecoveryPublisher, /readAllOffersForMaintenance/);
+  assert.match(singleRecoveryPublisher, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER\s*\|\|\s*5/);
+  assert.match(singleRecoveryPublisher, /recovery_target_image_gate_failed/);
+  assert.match(singleRecoveryPublisher, /preservedInternalByMarket/);
+  assert.match(singleRecoveryPublisher, /preservedPublicHashByMarket/);
+  assert.match(singleRecoveryPublisher, /postPersistPublicHashByMarket/);
+  assert.match(singleRecoveryPublisher, /preservationFailures/);
+  assert.match(singleRecoveryPublisher, /recovery_preserved_internal_gate_failed/);
+  assert.match(singleRecoveryPublisher, /recovery_duplicate_id_in_full_state/);
 });
 
 test("daily cleanup keeps a three-day grace while emergency cleanup preserves the live generation", () => {
