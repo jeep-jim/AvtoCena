@@ -1,0 +1,72 @@
+name: Ops · Mashina read-only readiness 20260814
+run-name: Mashina exact source URL readiness · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/mashina-readonly-readiness-20260814
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_REBUILD_MARKET: kyrgyzstan
+      CATALOG_REBUILD_SOURCE_IDS: mashina_kyrgyzstan_exact
+      CATALOG_REBUILD_OUTPUT: readiness-mashina-kyrgyzstan.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "20"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "12"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "4"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "900000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_SOURCE_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate Mashina source URL gallery contract
+        run: node --import tsx --test tests/catalog-source-price-and-body-contract.test.ts tests/catalog-image-quality.test.ts
+      - name: Collect current Mashina cards without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Enforce current Kyrgyzstan readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const source = (data.report?.sources || []).find((row) => row.sourceId === 'mashina_kyrgyzstan_exact');
+          const problems = [];
+          if (offers.length < 5) problems.push(`too_few_cards:${offers.length}`);
+          if (!source || Number(source.saved || 0) < 5) problems.push('source_saved_below_five');
+          if (offers.some((offer) => offer.sourceId !== 'mashina_kyrgyzstan_exact')) problems.push('source_identity_mismatch');
+          if (offers.some((offer) => !String(offer.make || '').trim() || !String(offer.model || '').trim())) problems.push('make_model_missing');
+          if (offers.some((offer) => Number(offer.year || 0) < 2020)) problems.push('pre_2020');
+          if (offers.some((offer) => Number(offer.sourcePrice || 0) <= 0 || !String(offer.sourceCurrency || '').trim())) problems.push('source_price_missing');
+          if (offers.some((offer) => !/^https?:\/\//i.test(String(offer.operational?.sourceUrl || '')))) problems.push('source_url_missing');
+          if (offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < 5)) problems.push('gallery_below_five');
+          if (offers.some((offer) => offer.operational?.galleryStoredAs !== 'json_urls')) problems.push('gallery_not_source_urls');
+          console.log(JSON.stringify({ count: offers.length, source, problems, errors: data.report?.errors || [], sample: offers.slice(0, 10).map((offer) => ({ id: offer.id, make: offer.make, model: offer.model, year: offer.year, price: offer.sourcePrice, currency: offer.sourceCurrency, images: offer.images?.length, storedAs: offer.operational?.galleryStoredAs, sourceUrl: offer.operational?.sourceUrl })) }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-mashina-kyrgyzstan
+          path: readiness-mashina-kyrgyzstan.json
+          if-no-files-found: warn
+          retention-days: 5
