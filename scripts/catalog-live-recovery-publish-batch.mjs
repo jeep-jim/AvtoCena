@@ -1,8 +1,9 @@
+import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { persistCatalogOffers, readMarketOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
@@ -15,6 +16,7 @@ const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia")
 const inputDir = String(process.env.RECOVERY_BATCH_INPUT_DIR || "recovery-input").trim();
 const output = String(process.env.RECOVERY_BATCH_REPORT || "catalog-direct-recovery-batch-publish-report.json").trim();
 const dryRun = /^(1|true|yes)$/i.test(String(process.env.RECOVERY_BATCH_DRY_RUN || ""));
+const preserveUntouchedExact = /^(1|true|yes)$/i.test(String(process.env.RECOVERY_BATCH_PRESERVE_UNTOUCHED_EXACT || ""));
 const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
@@ -102,6 +104,9 @@ function normalizeVisible(raw) {
 function makeKey(offer) {
   return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
 }
+function hashRows(rows) {
+  return crypto.createHash("sha256").update(JSON.stringify(rows)).digest("hex");
+}
 function applyPerModelYearCap(rows, rejected) {
   const selected = [];
   const countByModelYear = new Map();
@@ -172,10 +177,26 @@ for (const market of markets) {
 const combined = [];
 for (const marketRows of selectedByMarket.values()) combined.push(...marketRows);
 const preservedByMarket = {};
+const preservedInternalByMarket = {};
+const preservedPublicHashByMarket = {};
+const maintenanceOffers = preserveUntouchedExact ? await readAllOffersForMaintenance() : [];
+if (preserveUntouchedExact && !Array.isArray(maintenanceOffers)) throw new Error("recovery_batch_maintenance_state_invalid");
 for (const other of PUBLIC_CATALOG_MARKETS) {
   if (markets.includes(other)) continue;
   let rows = [];
-  try { rows = await readMarketOffers(other); } catch { rows = [];
+  try { rows = await readMarketOffers(other); } catch { rows = []; }
+  if (preserveUntouchedExact) {
+    const invalidPublic = rows.filter((offer) => !offer?.id || !offer?.make || !offer?.model || !isCatalogYearAllowed(offer?.year, other) || !isCatalogMarketSourceAllowed(offer) || !Array.isArray(offer?.images) || offer.images.length === 0);
+    if (invalidPublic.length) throw new Error(`recovery_batch_preserved_public_gate_failed:${other}:${invalidPublic.length}`);
+    const internalRows = maintenanceOffers.filter((offer) => String(offer?.market || "") === other);
+    if (rows.length > 0 && internalRows.length === 0) throw new Error(`recovery_batch_preserved_internal_missing:${other}`);
+    const invalidInternal = internalRows.filter((offer) => !offer?.id || !isCatalogYearAllowed(offer?.year, other) || !isCatalogMarketSourceAllowed(offer));
+    if (invalidInternal.length) throw new Error(`recovery_batch_preserved_internal_gate_failed:${other}:${invalidInternal.length}`);
+    preservedByMarket[other] = rows.length;
+    preservedInternalByMarket[other] = internalRows.length;
+    preservedPublicHashByMarket[other] = hashRows(rows);
+    combined.push(...internalRows);
+    continue;
   }
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
@@ -225,8 +246,11 @@ if (dryRun) {
     published: false,
     retentionMs,
     minImagesPerOffer,
+    preserveUntouchedExact,
     byMarket: marketReports,
     preservedByMarket,
+    preservedInternalByMarket,
+    preservedPublicHashByMarket,
   };
   await fs.writeFile(output, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
@@ -235,6 +259,7 @@ if (dryRun) {
 
 const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
+if (preserveUntouchedExact && unique.size !== combined.length) throw new Error(`recovery_batch_duplicate_id_in_full_state:${combined.length - unique.size}`);
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers([...unique.values()]);
 
@@ -258,6 +283,18 @@ for (const market of markets) {
   }
 }
 
+if (preserveUntouchedExact) {
+  for (const other of PUBLIC_CATALOG_MARKETS) {
+    if (markets.includes(other)) continue;
+    const manifestCount = Number(manifest?.markets?.[other]?.count || 0);
+    if (manifestCount !== Number(preservedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_manifest_mismatch:${other}:${manifestCount}:${preservedByMarket[other] || 0}`);
+    const afterRows = await readMarketOffers(other);
+    if (afterRows.length !== Number(preservedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_count_mismatch:${other}:${afterRows.length}:${preservedByMarket[other] || 0}`);
+    const afterHash = hashRows(afterRows);
+    if (afterHash !== preservedPublicHashByMarket[other]) throw new Error(`recovery_batch_preserved_hash_mismatch:${other}:${afterHash}:${preservedPublicHashByMarket[other]}`);
+  }
+}
+
 const report = {
   version: 5,
   mode: "live_markets_publishable_cumulative_batch_publish",
@@ -267,8 +304,11 @@ const report = {
   generationId: manifest.generationId,
   retentionMs,
   minImagesPerOffer,
+  preserveUntouchedExact,
   byMarket: marketReports,
   preservedByMarket,
+  preservedInternalByMarket,
+  preservedPublicHashByMarket,
   manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)])),
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2));
