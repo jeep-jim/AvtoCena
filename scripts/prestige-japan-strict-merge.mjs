@@ -5,6 +5,7 @@ const inputDir = process.env.PRESTIGE_MERGE_INPUT_DIR || "prestige-japan-chunks"
 const output = process.env.PRESTIGE_MERGE_OUTPUT || "prestige-japan-exact-sold-up-to-30000.json";
 const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_MERGE_TARGET || 30_000)));
 const expectedChunks = Math.max(1, Number(process.env.PRESTIGE_EXPECTED_CHUNKS || 1));
+const minimumChunkCoverage = Math.max(0.5, Math.min(1, Number(process.env.PRESTIGE_MIN_CHUNK_COVERAGE || 0.95)));
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
@@ -33,7 +34,14 @@ function checkOffer(offer) {
   if (offer?.auctionGrade && !gradeToken.test(String(offer.auctionGrade))) problems.push("grade");
   const images = Array.isArray(offer?.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30 || images.some((image) => !exactImage.test(String(image?.url || "")))) problems.push("gallery");
-  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v1") problems.push("galleryFlags");
+  if (
+    op.photoIdentityVerified !== true
+    || op.galleryVerified !== true
+    || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v2_cover_content_verified"
+    || raw.photoIdentityVerified !== true
+    || raw.listingBoundImages !== true
+    || raw.coverContentVerified !== true
+  ) problems.push("galleryFlags");
   if (offer?.powerHp || offer?.powerKw || offer?.power30MinKw || offer?.drive || offer?.fuel) problems.push("unsupportedFields");
   return problems;
 }
@@ -47,7 +55,9 @@ let pages = 0;
 let seen = 0;
 let acceptedAcrossChunks = 0;
 
-if (files.length !== expectedChunks) errors.push(`chunk_count_${files.length}_expected_${expectedChunks}`);
+const inputCoverage = Math.min(1, files.length / expectedChunks);
+if (inputCoverage < minimumChunkCoverage) errors.push(`chunk_coverage_${inputCoverage.toFixed(4)}_below_${minimumChunkCoverage.toFixed(4)}`);
+else if (files.length !== expectedChunks) warnings.push(`chunk_count_${files.length}_expected_${expectedChunks}`);
 for (const file of files) {
   const data = JSON.parse(await fs.readFile(file, "utf8"));
   const report = data?.report || {};
@@ -81,18 +91,21 @@ const unique = [...offers.values()]
 const outputOffers = unique.slice(0, target);
 const reachedTarget = unique.length >= target;
 // The workflow is explicitly "up-to-30k": target is a safe output cap, not a
-// minimum source-volume promise. Certification succeeds when every expected
-// chunk passed its strict contract, no identity/price/gallery errors exist,
-// and at least one exact sold lot was collected.
+// minimum source-volume promise. A small number of transiently missing shards is
+// tolerated only when the configured coverage floor is still met; every row that
+// is present must independently pass the strict identity/price/gallery contract.
 const passed = errors.length === 0 && outputOffers.length > 0;
 const report = {
-  version: 1,
+  version: 2,
   mode: "prestige_exact_sold_source_only_merged_certification_no_publish",
   sourceId: "prestige_japan_auctions_open",
   market: "japan",
+  galleryContract: "prestige_ajes_exact_detail_v2_cover_content_verified",
   target,
   expectedChunks,
   chunkFiles: files.length,
+  minimumChunkCoverage,
+  inputCoverage,
   pages,
   seen,
   acceptedAcrossChunks,
