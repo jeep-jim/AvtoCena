@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { aiCatalogManifestCount, readAiCatalogManifest } from "@/lib/ai-discovery";
 
+export const dynamic = "force-dynamic";
+
 const PRIVATE_PATHS = ["/crm/", "/api/", "/login", "/favorites", "/mcp"];
 const CARS_PER_SITEMAP = 45_000;
 
