@@ -62,7 +62,7 @@ jobs:
               const urls = (o.images || []).map(img => String(img.url || img.objectKey || '')).filter(Boolean);
               if (!id) errors.push(`${name}:missing_sourceOfferId`);
               if (urls.length > 30) errors.push(`${name}:${id}:images_gt_30`);
-              if (name === 'autopapa' && urls.some(url => !/\/system\/car\/photos\/[^/?#]+\/original\.jpg(?:[?#]|$)/i.test(url))) {
+              if (name === 'autopapa' && urls.some(url => !/\/system\/car\/photos\/(?:[^/?#]+\/)+original\.jpg(?:[?#]|$)/i.test(url))) {
                 errors.push(`${name}:${id}:non_original_gallery_url`);
               }
               if (o.operational?.photoIdentityVerified !== true || o.operational?.raw?.listingBoundImages !== true) {
