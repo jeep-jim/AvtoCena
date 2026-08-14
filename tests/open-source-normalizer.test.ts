@@ -19,7 +19,6 @@ test("keeps well-known multiword model names", () => {
   assert.equal(canonicalOpenModel("2023 Mercedes-Benz GLE Class W167", "Mercedes-Benz"), "GLE Class");
 });
 
-
 test("repairs generic Mercedes-Benz model identity from exact source titles", () => {
   assert.equal(canonicalSourceModelIdentity("Mercedes Benz A 200 AMG Line", "Mercedes", "Benz"), "A-Class");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz E 200 Avantgarde", "Mercedes-Benz", "Benz"), "E-Class");
@@ -29,6 +28,13 @@ test("repairs generic Mercedes-Benz model identity from exact source titles", ()
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz ALLRAD SPRINTER 314 4X4 DOKA AHK-3,5T STANDHEIZU", "Mercedes-Benz", "Benz"), "Sprinter");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz Klasa C 200", "Mercedes-Benz", "Benz"), "C-Class");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz GLC 300 4MATIC", "Mercedes-Benz", "Benz"), "GLC Class");
+});
+
+test("repairs compact diesel suffixes and explicit AWD prefixes", () => {
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz A 200d Progressive Advanced", "Mercedes-Benz", "Benz"), "A-Class");
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz E 300de 4MATIC", "Mercedes-Benz", "Benz"), "E-Class");
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz ALLRAD SPRINTER 314 4X4 DOKA", "Mercedes-Benz", "Benz"), "Sprinter");
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz 4MATIC GLC 300", "Mercedes-Benz", "Benz"), "GLC Class");
 });
 
 test("source identity repair remains fail-closed for unrelated brands and unknown Mercedes shapes", () => {
