@@ -106,6 +106,16 @@ test("enforces five photos for Korea and preserves existing strict market contra
   assert.equal(isCrediblePublicOffer(japan as any), true);
 });
 
+test("rejects catalog cards without real source make and model identity", () => {
+  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
+  for (const make of ["", "unknown", "N/A", "Марка уточняется", "не указано", "기타", "其他"]) {
+    assert.equal(isCrediblePublicOffer({ ...rawOffer, make } as any), false, `make=${make || "<empty>"}`);
+  }
+  for (const model of ["", "unknown", "N/A", "Модель уточняется", "неизвестно", "미상", "未知"]) {
+    assert.equal(isCrediblePublicOffer({ ...rawOffer, model } as any), false, `model=${model || "<empty>"}`);
+  }
+});
+
 test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
   const japanProjection = {
     ...rawOffer,

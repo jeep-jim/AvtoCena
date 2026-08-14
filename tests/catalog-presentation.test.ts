@@ -43,3 +43,17 @@ test("Korean Inspiration trim is not corrupted by the shorter Ray model token", 
   assert.equal(translateCatalogText("인스퍼레이션"), "Inspiration");
   assert.equal(translateCatalogText("더 뉴 기아 레이 EV"), "Kia Ray EV");
 });
+
+test("presentation never invents unknown make or model labels", () => {
+  const presented = presentCatalogOffer({
+    id: "broken-source-identity",
+    market: "korea",
+    make: "",
+    model: "",
+    year: 2020,
+    images: [],
+  });
+  assert.equal(presented.makeLabel, "");
+  assert.equal(presented.modelLabel, "");
+  assert.doesNotMatch(JSON.stringify(presented), /Марка уточняется|Модель уточняется/i);
+});
