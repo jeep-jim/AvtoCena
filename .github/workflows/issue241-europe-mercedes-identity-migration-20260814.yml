@@ -5,6 +5,7 @@ on:
     branches: [ops/issue241-europe-mercedes-identity-migration-20260814]
     paths:
       - '.github/workflows/issue241-europe-mercedes-identity-migration-20260814.yml'
+      - 'scripts/issue241-europe-mercedes-identity-migration.mjs'
 
 permissions:
   contents: read
