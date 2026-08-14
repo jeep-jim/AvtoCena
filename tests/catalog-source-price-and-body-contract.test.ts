@@ -123,6 +123,21 @@ test("Mashina uses the shared brand directory so Wuling MINI EV is not misclassi
   assert.match(rows[0].model, /^MINI EV/);
 });
 
+test("Mashina source URL identity wins over short dealer brand noise", () => {
+  const markup = `
+    <article>
+      <a href="/details/lotus-eletre-6a6c4cb466c1fe88563bc6c4">
+        <img src="https://storage.mashina.kg/catalog/images/lotus-eletre_large.jpg" />
+        AC CARS В наличии 1 ч назад Lotus Eletre 2025 $66,800 Electric Automatic 14,000 km
+      </a>
+    </article>`;
+  const rows = parseMashinaListingMarkup(markup, "https://mashina.kg/en/search/?page=1");
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].make, "Lotus");
+  assert.match(rows[0].model, /^Eletre/);
+  assert.notEqual(rows[0].make, "AC");
+});
+
 test("Mashina rejects pre-2020 rows at the source adapter boundary", () => {
   const adapter = new MashinaKyrgyzstanListAdapter();
   assert.equal(adapter.normalizeOffer({
