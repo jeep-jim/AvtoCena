@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 
 const CHALLENGES_PATH = "auth/telegram-login-challenges.json";
 const CHALLENGE_COOKIE = "avtocena_tg_bot_login";
+const CANONICAL_WEBHOOK_URL = "https://avtocena.com/api/telegram/webhook";
 const MAX_AGE_SECONDS = 5 * 60;
 const MAX_STORED_CHALLENGES = 200;
 
@@ -21,6 +22,14 @@ type LoginChallenge = {
   expiresAt: string;
   approvedAt?: string;
   userId?: string;
+};
+
+type WebhookInfo = {
+  url?: string;
+  pending_update_count?: number;
+  last_error_date?: number;
+  last_error_message?: string;
+  allowed_updates?: string[];
 };
 
 function safeNext(value: unknown) {
@@ -59,11 +68,90 @@ function clearChallengeCookie(response: NextResponse) {
   });
 }
 
+async function telegramRequest<T>(token: string, method: string, body?: Record<string, unknown>) {
+  const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body || {}),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
+  });
+  const payload = await response.json().catch(() => null) as { ok?: boolean; result?: T; description?: string } | null;
+  if (!response.ok || !payload?.ok) {
+    throw new Error(String(payload?.description || `telegram_${method}_${response.status}`).slice(0, 300));
+  }
+  return payload.result as T;
+}
+
+function safeWebhookStatus(info?: WebhookInfo | null) {
+  return {
+    url: String(info?.url || ""),
+    pending: Number(info?.pending_update_count || 0),
+    lastError: String(info?.last_error_message || "").slice(0, 240),
+    lastErrorAt: info?.last_error_date ? new Date(info.last_error_date * 1000).toISOString() : "",
+    allowedUpdates: Array.isArray(info?.allowed_updates) ? info.allowed_updates : [],
+  };
+}
+
+async function verifyAndRepairWebhook(token: string, webhookSecret: string) {
+  let before: WebhookInfo | null = null;
+  let repairError = "";
+  try {
+    before = await telegramRequest<WebhookInfo>(token, "getWebhookInfo");
+  } catch (error) {
+    repairError = error instanceof Error ? error.message : "getWebhookInfo_failed";
+  }
+
+  const allowed = Array.isArray(before?.allowed_updates) ? before!.allowed_updates! : [];
+  const needsRepair = !before
+    || String(before.url || "") !== CANONICAL_WEBHOOK_URL
+    || !allowed.includes("message")
+    || !allowed.includes("callback_query");
+
+  if (needsRepair) {
+    try {
+      await telegramRequest<boolean>(token, "setWebhook", {
+        url: CANONICAL_WEBHOOK_URL,
+        secret_token: webhookSecret,
+        allowed_updates: ["message", "callback_query", "my_chat_member", "channel_post", "edited_channel_post"],
+        drop_pending_updates: false,
+      });
+      repairError = "";
+    } catch (error) {
+      repairError = error instanceof Error ? error.message : "setWebhook_failed";
+    }
+  }
+
+  let after = before;
+  try {
+    after = await telegramRequest<WebhookInfo>(token, "getWebhookInfo");
+  } catch (error) {
+    if (!repairError) repairError = error instanceof Error ? error.message : "getWebhookInfo_failed";
+  }
+
+  return {
+    ok: String(after?.url || "") === CANONICAL_WEBHOOK_URL,
+    repaired: needsRepair && !repairError,
+    error: repairError,
+    status: safeWebhookStatus(after),
+  };
+}
+
 export async function POST(request: Request) {
   const config = await getTelegramRuntimeConfig();
   const username = String(config?.username || "").replace(/^@+/, "").trim();
   if (!config?.token || !username) {
     return NextResponse.json({ ok: false, error: "telegram_not_configured" }, { status: 503 });
+  }
+
+  const webhook = await verifyAndRepairWebhook(config.token, config.webhookSecret);
+  if (!webhook.ok) {
+    return NextResponse.json({
+      ok: false,
+      error: "telegram_webhook_unavailable",
+      detail: webhook.error || webhook.status.lastError || "Telegram webhook не активен",
+      webhook: webhook.status,
+    }, { status: 502, headers: { "cache-control": "no-store" } });
   }
 
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;
@@ -78,16 +166,19 @@ export async function POST(request: Request) {
     expiresAt: new Date(now + MAX_AGE_SECONDS * 1000).toISOString(),
   };
 
-  await mutateDataJson<LoginChallenge[]>(CHALLENGES_PATH, [], (stored) => [
-    ...cleanChallenges(Array.isArray(stored) ? stored : [], now),
-    challenge,
-  ].slice(-MAX_STORED_CHALLENGES));
+  await mutateDataJson<LoginChallenge[]>(CHALLENGES_PATH, [], (stored) => {
+    const cleaned = cleanChallenges(Array.isArray(stored) ? stored : [], now);
+    const withoutOlderPending = cleaned.filter((item) => item.status !== "pending");
+    return [...withoutOlderPending, challenge].slice(-MAX_STORED_CHALLENGES);
+  });
 
   const response = NextResponse.json({
     ok: true,
     status: "pending",
     telegramUrl: `https://t.me/${encodeURIComponent(username)}?start=login_${rawToken}`,
     expiresIn: MAX_AGE_SECONDS,
+    webhook: webhook.status,
+    webhookRepaired: webhook.repaired,
   });
   response.headers.set("cache-control", "no-store");
   response.cookies.set(CHALLENGE_COOKIE, rawToken, {
