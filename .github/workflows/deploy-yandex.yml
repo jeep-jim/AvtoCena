@@ -69,37 +69,66 @@ jobs:
       - name: Warm public catalog and verify AI discovery
         run: |
           set -euo pipefail
+          CURL=(curl --retry 20 --retry-delay 5 --retry-all-errors --max-time 30 -fsS)
 
-          catalog_json="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
+          echo '1/9 health'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/api/health'
+
+          echo '2/9 public catalog'
+          catalog_json="$("${CURL[@]}" 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
           offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"
           test -n "$offer_id"
-          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null 'https://avtocena.com/cars'
-          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null "https://avtocena.com/cars/offer/$offer_id"
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars'
+          "${CURL[@]}" -o /dev/null "https://avtocena.com/cars/offer/$offer_id"
 
-          robots="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS 'https://avtocena.com/robots.txt')"
+          echo '3/9 OpenAI crawler rules'
+          robots="$("${CURL[@]}" 'https://avtocena.com/robots.txt')"
           grep -q 'User-Agent: OAI-SearchBot' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/sitemap.xml' <<<"$robots"
+          grep -q 'Sitemap: https://avtocena.com/cars/sitemap/0.xml' <<<"$robots"
 
-          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null 'https://avtocena.com/sitemap.xml'
-          curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS -o /dev/null 'https://avtocena.com/cars/sitemap/0.xml'
+          echo '4/9 sitemaps'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/sitemap.xml'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/sitemap/0.xml'
 
-          llms="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS 'https://avtocena.com/llms.txt')"
+          echo '5/9 llms guide'
+          llms="$("${CURL[@]}" 'https://avtocena.com/llms.txt')"
           grep -q '# АвтоЦена' <<<"$llms"
 
-          feed_header="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS 'https://avtocena.com/feeds/openai-products.csv' | head -n 1)"
+          echo '6/9 OpenAI product feed'
+          feed_file="$(mktemp)"
+          "${CURL[@]}" -o "$feed_file" 'https://avtocena.com/feeds/openai-products.csv'
+          feed_header="$(head -n 1 "$feed_file")"
           grep -q 'id,title,description,link,image_link,availability,price,brand,identifier_exists,product_type' <<<"$feed_header"
+          test "$(wc -l < "$feed_file")" -gt 1
+          rm -f "$feed_file"
 
-          mcp_init="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS \
+          echo '7/9 MCP initialize'
+          mcp_init="$("${CURL[@]}" \
             -H 'content-type: application/json' \
             -H 'accept: application/json, text/event-stream' \
             -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"avtocena-deploy-check","version":"1.0.0"}}}' \
             'https://avtocena.com/mcp')"
           jq -e '.result.serverInfo.name == "avtocena"' <<<"$mcp_init" >/dev/null
 
-          mcp_tools="$(curl --retry 8 --retry-delay 5 --retry-all-errors --max-time 30 -fsS \
+          echo '8/9 MCP tools'
+          mcp_tools="$("${CURL[@]}" \
             -H 'content-type: application/json' \
             -H 'accept: application/json, text/event-stream' \
             -H 'mcp-protocol-version: 2025-06-18' \
             -d '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
             'https://avtocena.com/mcp')"
           jq -e '.result.tools | map(.name) | index("search_cars") != null' <<<"$mcp_tools" >/dev/null
+          jq -e '.result.tools | map(.name) | index("get_import_calculation") != null' <<<"$mcp_tools" >/dev/null
+          jq -e '.result.tools | map(.name) | index("get_vehicle_specs") != null' <<<"$mcp_tools" >/dev/null
+
+          echo '9/9 live MCP search'
+          mcp_search="$("${CURL[@]}" \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -H 'mcp-protocol-version: 2025-06-18' \
+            -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"search_cars","arguments":{"market":"korea","limit":1}}}' \
+            'https://avtocena.com/mcp')"
+          jq -e '.result.isError == false' <<<"$mcp_search" >/dev/null
+          jq -e '.result.structuredContent.items | length >= 1' <<<"$mcp_search" >/dev/null
+          jq -e '.result.structuredContent.items[0].url | startswith("https://avtocena.com/cars/offer/")' <<<"$mcp_search" >/dev/null
