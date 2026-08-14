@@ -11,7 +11,8 @@ const TELEGRAM_ISSUER = "https://oauth.telegram.org";
 const TELEGRAM_JWKS_URL = "https://oauth.telegram.org/.well-known/jwks.json";
 const TELEGRAM_TOKEN_URL = "https://oauth.telegram.org/token";
 const OIDC_COOKIE_NAME = "avtocena_tg_oidc";
-const CALLBACK_URL = "https://avtocena.com/api/auth/telegram";
+const PUBLIC_ORIGIN = "https://avtocena.com";
+const CALLBACK_URL = `${PUBLIC_ORIGIN}/api/auth/telegram`;
 const MAX_AUTH_AGE_SECONDS = 10 * 60;
 
 type TelegramJwtHeader = {
@@ -162,14 +163,17 @@ function clearOidcCookie(response: NextResponse) {
   });
 }
 
-function redirectLogin(origin: string, error: string) {
-  return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, origin));
+function redirectLogin(error: string) {
+  return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, PUBLIC_ORIGIN));
 }
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const telegramError = url.searchParams.get("error");
-  if (telegramError) return redirectLogin(url.origin, "telegram_invalid");
+  const telegramError = String(url.searchParams.get("error") || "").trim();
+  if (telegramError) {
+    console.error("telegram_oidc_authorization_error", telegramError.slice(0, 120));
+    return redirectLogin("telegram_oauth_error");
+  }
 
   const code = String(url.searchParams.get("code") || "").trim();
   const returnedState = String(url.searchParams.get("state") || "").trim();
@@ -186,7 +190,7 @@ export async function GET(request: Request) {
     storedState.issuedAt > now + 60 ||
     now - storedState.issuedAt > MAX_AUTH_AGE_SECONDS
   ) {
-    const response = redirectLogin(url.origin, "telegram_expired");
+    const response = redirectLogin("telegram_state_invalid");
     clearOidcCookie(response);
     return response;
   }
@@ -195,7 +199,7 @@ export async function GET(request: Request) {
   const botId = String(telegramConfig?.botId || "");
   const clientSecret = String(telegramConfig?.clientSecret || "");
   if (!telegramConfig?.token || !botId || !clientSecret) {
-    const response = redirectLogin(url.origin, "telegram_not_configured");
+    const response = redirectLogin("telegram_not_configured");
     clearOidcCookie(response);
     return response;
   }
@@ -220,35 +224,41 @@ export async function GET(request: Request) {
     });
     const tokenPayload = await tokenResponse.json().catch(() => null) as { id_token?: string; error?: string; error_description?: string } | null;
     if (!tokenResponse.ok || !tokenPayload?.id_token) {
-      console.error("telegram_oidc_token_exchange_failed", tokenResponse.status, String(tokenPayload?.error || tokenPayload?.error_description || "unknown").slice(0, 200));
-      const response = redirectLogin(url.origin, "telegram_invalid");
+      console.error(
+        "telegram_oidc_token_exchange_failed",
+        tokenResponse.status,
+        String(tokenPayload?.error || "unknown").slice(0, 120),
+        String(tokenPayload?.error_description || "").slice(0, 180),
+      );
+      const response = redirectLogin("telegram_token_exchange_failed");
       clearOidcCookie(response);
       return response;
     }
     idToken = tokenPayload.id_token;
   } catch (error) {
     console.error("telegram_oidc_token_exchange_error", error instanceof Error ? error.message : "unknown");
-    const response = redirectLogin(url.origin, "telegram_invalid");
+    const response = redirectLogin("telegram_token_exchange_failed");
     clearOidcCookie(response);
     return response;
   }
 
   const claims = await verifyTelegramIdToken(idToken, botId);
   if (!claims) {
-    const response = redirectLogin(url.origin, "telegram_invalid");
+    console.error("telegram_oidc_id_token_invalid", botId);
+    const response = redirectLogin("telegram_id_token_invalid");
     clearOidcCookie(response);
     return response;
   }
 
   const user = await resolveCrmUser(claims);
   if (!user) {
-    const response = redirectLogin(url.origin, "telegram_not_allowed");
+    const response = redirectLogin("telegram_not_allowed");
     clearOidcCookie(response);
     return response;
   }
 
   const nextPath = safeNext(storedState.nextPath);
-  const response = NextResponse.redirect(new URL(nextPath, url.origin));
+  const response = NextResponse.redirect(new URL(nextPath, PUBLIC_ORIGIN));
   response.cookies.set(AUTH_COOKIE_NAME, createSessionCookie(user), {
     httpOnly: true,
     sameSite: "lax",
