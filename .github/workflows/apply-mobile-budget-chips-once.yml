@@ -22,62 +22,8 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - name: Update mobile budget interaction and spacing
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          path = Path('apps/web/components/home/HomePageClient.tsx')
-          s = path.read_text()
-
-          marker = '\nfunction ElectricFilter({ checked, onChange }:'
-          if marker not in s:
-              raise SystemExit('ElectricFilter marker not found')
-
-          mobile_picker = r'''
-function MobileBudgetPicker({ value, options, onChange }: { value: string; options: Option[]; onChange: (value: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const active = options.find((option) => option.value === value) || options[0];
-  const choose = (next: string) => { onChange(next); setOpen(false); };
-
-  return <>
-    <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}>
-      <span className="min-w-0 truncate">{value ? active?.label : "Бюджет"}</span><Chevron open={open} />
-    </button>
-    {open ? <div className="absolute inset-0 z-[320] overflow-y-auto rounded-[1.8rem] bg-[#1b2635]/90 p-3 backdrop-blur-md lg:hidden">
-      <div className="flex items-center justify-between gap-3">
-        <div><div className="text-xs font-black uppercase tracking-[.14em] text-red-400">Бюджет</div><div className="mt-0.5 text-sm font-black text-white">Выберите стоимость автомобиля</div></div>
-        <button type="button" onClick={() => setOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-xl font-bold text-white" aria-label="Закрыть">×</button>
-      </div>
-      <div className="mt-3 grid grid-cols-2 gap-1.5">
-        {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`min-h-9 rounded-xl border px-3 py-2 text-left text-[11px] font-black leading-tight transition ${value === option.value ? "border-red-400 bg-red-500 text-white" : "border-white/10 bg-white/[0.07] text-white/85"}`}>
-          {option.label}
-        </button>)}
-      </div>
-    </div> : null}
-  </>;
-}
-'''
-          s = s.replace(marker, mobile_picker + marker, 1)
-
-          s = s.replace('className="ac-filter-panel flex min-h-0 flex-col rounded-[1.8rem]', 'className="ac-filter-panel relative flex min-h-0 flex-col rounded-[1.8rem]', 1)
-          s = s.replace('className="mb-4 flex items-center justify-between gap-3"', 'className="mb-3 flex items-center justify-between gap-3 lg:mb-4"', 1)
-          s = s.replace('<div className="mt-3 flex flex-1 flex-col lg:mt-5">', '<div className="mt-2 flex flex-1 flex-col lg:mt-5">', 1)
-          old_mobile = '<div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 lg:hidden"><div className="ac-budget-mobile min-w-0"><HomeSelect value={budget} options={budgets} onChange={setBudget} emptyLabel="Бюджет" /></div><button type="button" onClick={submit} className="avto-button h-14 min-w-0 rounded-2xl px-3 text-sm font-black">Узнать Цену Авто</button></div>'
-          new_mobile = '<div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 lg:hidden"><div className="ac-budget-mobile min-w-0"><MobileBudgetPicker value={budget} options={budgets} onChange={setBudget} /></div><button type="button" onClick={submit} className="avto-button h-14 min-w-0 rounded-2xl px-3 text-sm font-black">Узнать Цену Авто</button></div>'
-          if old_mobile not in s:
-              raise SystemExit('mobile budget row anchor not found')
-          s = s.replace(old_mobile, new_mobile, 1)
-
-          old_gallery = '      <BuyerGallery images={buyers} />'
-          new_gallery = '      <div className="-mt-2 lg:mt-0"><BuyerGallery images={buyers} /></div>'
-          if old_gallery not in s:
-              raise SystemExit('buyer gallery anchor not found')
-          s = s.replace(old_gallery, new_gallery, 1)
-
-          path.write_text(s)
-          PY
+      - name: Apply mobile UI patch
+        run: python3 .github/scripts/apply-mobile-budget-chips.py
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
@@ -85,8 +31,9 @@ function MobileBudgetPicker({ value, options, onChange }: { value: string; optio
         shell: bash
         run: |
           rm .github/workflows/apply-mobile-budget-chips-once.yml
+          rm .github/scripts/apply-mobile-budget-chips.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-mobile-budget-chips-once.yml
+          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-mobile-budget-chips-once.yml .github/scripts/apply-mobile-budget-chips.py
           git commit -m "Refine mobile budget picker and spacing"
           git push origin HEAD:ui/mobile-budget-chips-20260814
