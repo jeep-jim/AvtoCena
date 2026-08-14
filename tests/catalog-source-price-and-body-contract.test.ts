@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { classifyCatalogV2Offer, selectCatalogV2MarketOffers } from "../apps/web/lib/catalog/catalog-v2-policy";
+import { mashinaSourceGallery } from "../apps/web/lib/catalog/mashina-kyrgyzstan-list-source";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 import { strictSourceDetail } from "../apps/web/lib/catalog/strict-source-detail-wrapper";
 
@@ -91,6 +92,21 @@ test("source-specific listing-bound gallery adapters are never replaced by gener
   for (const sourceId of ["myauto_georgia_list", "dubicars_uae_exact", "mashina_kyrgyzstan_exact"]) {
     assert.match(dedicatedBlock, new RegExp(`"${sourceId}"`), `${sourceId} must keep its source-specific fetchImages implementation`);
   }
+});
+
+test("Mashina keeps exact listing-bound galleries as source URLs without binary recaching", () => {
+  const gallery = mashinaSourceGallery([
+    "https://storage.mashina.kg/catalog/images/a_small.jpg",
+    "https://storage.mashina.kg/catalog/images/a_large.jpg",
+    "https://storage.mashina.kg/catalog/images/b_large.jpg",
+    "https://storage.mashina.kg/catalog/images/c_large.jpg",
+    "https://storage.mashina.kg/catalog/images/d_large.jpg",
+    "https://storage.mashina.kg/catalog/images/e_large.jpg",
+  ], 30);
+  assert.equal(gallery.length, 5);
+  assert.equal(gallery[0].url, "https://storage.mashina.kg/catalog/images/a_large.jpg");
+  assert.equal(gallery.every((image) => image.objectKey === "" && image.size === 0), true);
+  assert.equal(gallery.every((image) => /^https:\/\/storage\.mashina\.kg\//.test(image.url)), true);
 });
 
 function fakeImage(index: number) {
