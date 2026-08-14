@@ -6,6 +6,7 @@ const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/Cat
 const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");
 const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
 const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");
+const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
@@ -17,7 +18,15 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(priceTrend, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : undefined/);
   assert.match(priceTrend, /style=\{priceColor \? \{ color: priceColor \} : undefined\}/);
   assert.match(preliminaryPrice, /Почему цена предварительная/);
-  assert.match(preliminaryPrice, /const panelBackground = "var\(--ac-surface-2\)"/);
+  assert.match(offerPage, /PreliminaryPrice[^;]+highlightElectrified=\{electrified\}/s);
+  assert.match(offerPage, /PriceTrend[^;]+highlightElectrified=\{electrified\}/s);
+  assert.match(preliminaryPrice, /rgba\(197, 138, 0, 0\.10\)/);
+  assert.match(preliminaryPrice, /rgba\(255, 210, 31, 0\.10\)/);
+  assert.match(preliminaryPrice, /: "var\(--ac-surface-2\)"/);
+  assert.match(priceTrend, /if \(highlightElectrified\)/);
+  assert.match(priceTrend, /rgba\(197, 138, 0, 0\.10\)/);
+  assert.match(priceTrend, /rgba\(255, 210, 31, 0\.10\)/);
+  assert.match(priceTrend, /\[panel, lightTheme, direction, highlightElectrified\]/);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {
