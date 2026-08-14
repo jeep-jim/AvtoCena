@@ -4,6 +4,7 @@ import {
   deriveTelegramWebhookSecret,
   expectedTelegramBotUsername,
   getTelegramPublicConfig,
+  getTelegramRuntimeConfig,
   saveTelegramRuntimeConfig,
   telegramWebhookUrl,
 } from "@/lib/telegram-config";
@@ -80,12 +81,19 @@ export async function POST(request: Request) {
   if (!adminAllowed()) return failure("forbidden", "", "auth", 403);
 
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;
-  const token = String(body.token || "").trim();
+  const incomingToken = String(body.token || "").trim();
+  const clientSecret = String(body.clientSecret || "").trim();
   const requestedUsername = normalizeUsername(body.username) || expectedTelegramBotUsername();
-  if (!token) return failure("token_required", "", "token", 400);
   if (requestedUsername !== expectedTelegramBotUsername()) {
     return failure("wrong_bot_username", "", "token", 400);
   }
+  if (clientSecret.length > 500) {
+    return failure("client_secret_invalid", "Client Secret слишком длинный", "oidc", 400);
+  }
+
+  const runtimeConfig = await getTelegramRuntimeConfig().catch(() => null);
+  const token = incomingToken || runtimeConfig?.token || "";
+  if (!token) return failure("token_required", "", "token", 400);
 
   let me: { id: number; is_bot?: boolean; first_name?: string; username?: string };
   try {
@@ -117,6 +125,7 @@ export async function POST(request: Request) {
     webhookSecret = deriveTelegramWebhookSecret(actualUsername);
     await saveTelegramRuntimeConfig({
       token,
+      clientSecret: clientSecret || undefined,
       username: actualUsername,
       botId: String(me.id),
       firstName: me.first_name || "АвтоЦена",
@@ -177,6 +186,7 @@ export async function POST(request: Request) {
   try {
     const publicConfig = await saveTelegramRuntimeConfig({
       token,
+      clientSecret: clientSecret || undefined,
       username: actualUsername,
       botId: String(me.id),
       firstName: me.first_name || "АвтоЦена",

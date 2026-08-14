@@ -17,6 +17,7 @@ type StoredTelegramConfig = {
   botId?: string;
   firstName?: string;
   encryptedToken: EncryptedValue;
+  encryptedClientSecret?: EncryptedValue;
   webhookUrl?: string;
   webhookConfiguredAt?: string;
   pendingUpdateCount?: number;
@@ -25,6 +26,7 @@ type StoredTelegramConfig = {
 
 export type TelegramRuntimeConfig = {
   token: string;
+  clientSecret?: string;
   username: string;
   webhookSecret: string;
   botId?: string;
@@ -35,6 +37,7 @@ export type TelegramRuntimeConfig = {
 
 export type TelegramPublicConfig = {
   configured: boolean;
+  oidcConfigured: boolean;
   username: string;
   botId?: string;
   firstName?: string;
@@ -60,10 +63,10 @@ function encryptionKey() {
     .digest();
 }
 
-function encryptToken(token: string): EncryptedValue {
+function encryptValue(value: string): EncryptedValue {
   const iv = crypto.randomBytes(12);
   const cipher = crypto.createCipheriv("aes-256-gcm", encryptionKey(), iv);
-  const ciphertext = Buffer.concat([cipher.update(token, "utf8"), cipher.final()]);
+  const ciphertext = Buffer.concat([cipher.update(value, "utf8"), cipher.final()]);
   return {
     iv: iv.toString("base64url"),
     tag: cipher.getAuthTag().toString("base64url"),
@@ -71,7 +74,7 @@ function encryptToken(token: string): EncryptedValue {
   };
 }
 
-function decryptToken(value: EncryptedValue) {
+function decryptValue(value: EncryptedValue) {
   const decipher = crypto.createDecipheriv(
     "aes-256-gcm",
     encryptionKey(),
@@ -99,17 +102,18 @@ async function readStoredTelegramConfig() {
 
 export async function getTelegramRuntimeConfig(): Promise<TelegramRuntimeConfig | null> {
   const envToken = String(process.env.TELEGRAM_BOT_TOKEN || "").trim();
+  const envClientSecret = String(process.env.TELEGRAM_CLIENT_SECRET || "").trim();
   const envUsername = normalizeUsername(process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME);
   const stored = await readStoredTelegramConfig().catch(() => null);
 
   let token = envToken;
-  if (!token && stored?.encryptedToken) {
-    try {
-      token = decryptToken(stored.encryptedToken);
-    } catch (error) {
-      console.error("telegram_config_decrypt_failed", error instanceof Error ? error.message : "decrypt_failed");
-      return null;
-    }
+  let clientSecret = envClientSecret;
+  try {
+    if (!token && stored?.encryptedToken) token = decryptValue(stored.encryptedToken);
+    if (!clientSecret && stored?.encryptedClientSecret) clientSecret = decryptValue(stored.encryptedClientSecret);
+  } catch (error) {
+    console.error("telegram_config_decrypt_failed", error instanceof Error ? error.message : "decrypt_failed");
+    return null;
   }
   if (!token) return null;
 
@@ -119,6 +123,7 @@ export async function getTelegramRuntimeConfig(): Promise<TelegramRuntimeConfig 
 
   return {
     token,
+    clientSecret: clientSecret || undefined,
     username,
     webhookSecret,
     botId: stored?.botId,
@@ -130,11 +135,13 @@ export async function getTelegramRuntimeConfig(): Promise<TelegramRuntimeConfig 
 
 export async function getTelegramPublicConfig(): Promise<TelegramPublicConfig> {
   const envToken = String(process.env.TELEGRAM_BOT_TOKEN || "").trim();
+  const envClientSecret = String(process.env.TELEGRAM_CLIENT_SECRET || "").trim();
   const envUsername = normalizeUsername(process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME);
   const stored = await readStoredTelegramConfig().catch(() => null);
   const username = envUsername || normalizeUsername(stored?.username) || (envToken ? TELEGRAM_BOT_USERNAME : "");
   return {
     configured: Boolean(envToken || stored?.encryptedToken),
+    oidcConfigured: Boolean(envClientSecret || stored?.encryptedClientSecret),
     username,
     botId: stored?.botId,
     firstName: stored?.firstName,
@@ -147,6 +154,7 @@ export async function getTelegramPublicConfig(): Promise<TelegramPublicConfig> {
 
 export async function saveTelegramRuntimeConfig(input: {
   token: string;
+  clientSecret?: string;
   username?: string;
   botId?: string;
   firstName?: string;
@@ -155,19 +163,24 @@ export async function saveTelegramRuntimeConfig(input: {
   pendingUpdateCount?: number;
 }) {
   const token = String(input.token || "").trim();
+  const clientSecret = String(input.clientSecret || "").trim();
   const username = normalizeUsername(input.username) || TELEGRAM_BOT_USERNAME;
   if (!token) throw new Error("telegram_token_required");
   if (username !== TELEGRAM_BOT_USERNAME) throw new Error("telegram_username_mismatch");
 
+  const previous = await readStoredTelegramConfig().catch(() => null);
   const stored: StoredTelegramConfig = {
     version: 1,
     username,
-    botId: input.botId ? String(input.botId) : undefined,
-    firstName: input.firstName ? String(input.firstName).slice(0, 160) : undefined,
-    encryptedToken: encryptToken(token),
-    webhookUrl: input.webhookUrl || TELEGRAM_WEBHOOK_URL,
-    webhookConfiguredAt: input.webhookConfiguredAt,
-    pendingUpdateCount: Number.isFinite(Number(input.pendingUpdateCount)) ? Number(input.pendingUpdateCount) : undefined,
+    botId: input.botId ? String(input.botId) : previous?.botId,
+    firstName: input.firstName ? String(input.firstName).slice(0, 160) : previous?.firstName,
+    encryptedToken: encryptValue(token),
+    encryptedClientSecret: clientSecret ? encryptValue(clientSecret) : previous?.encryptedClientSecret,
+    webhookUrl: input.webhookUrl || previous?.webhookUrl || TELEGRAM_WEBHOOK_URL,
+    webhookConfiguredAt: input.webhookConfiguredAt ?? previous?.webhookConfiguredAt,
+    pendingUpdateCount: Number.isFinite(Number(input.pendingUpdateCount))
+      ? Number(input.pendingUpdateCount)
+      : previous?.pendingUpdateCount,
     updatedAt: new Date().toISOString(),
   };
   await writeDataJson(TELEGRAM_CONFIG_PATH, stored);
