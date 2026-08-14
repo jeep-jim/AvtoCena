@@ -79,7 +79,9 @@ export function PreliminaryPrice({
 
   const panelBackground = highlightElectrified
     ? electrifiedPanelBackground
-    : "var(--ac-surface-2)";
+    : lightTheme
+      ? "#ffffff"
+      : "var(--ac-surface-2)";
   const panelText = "var(--ac-text)";
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : "var(--ac-text)";
   const popoverClass = lightTheme
