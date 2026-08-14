@@ -145,7 +145,10 @@ function MobileBudgetPicker({ value, options, onChange }: { value: string; optio
       <span className="min-w-0 whitespace-nowrap">{value ? active?.label : "Бюджет"}</span>{!value ? <Chevron open={!open} /> : null}
     </button>
     {open ? <div className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden" style={{ border: "0", outline: "none", boxShadow: "none" }}>
-      {tradeInfoOpen ? <button type="button" onClick={() => setTradeInfoOpen(false)} className="flex h-full w-full items-center justify-center px-6 text-center text-[13px] font-bold leading-5 text-[var(--ac-text)]" aria-label="Вернуться к выбору бюджета"><span>Условия по трейд-ин уточняются индивидуально с менеджером дилера в вашем городе.</span></button> : <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
+      {tradeInfoOpen ? <div className="relative h-full w-full">
+        <button type="button" onClick={() => setTradeInfoOpen(false)} className="absolute left-1 top-1 z-10 px-2 py-1 text-[11px] font-black text-[var(--ac-muted)]" aria-label="Вернуться к выбору бюджета">← Назад</button>
+        <div className="flex h-full w-full items-center justify-center px-6 text-center text-[13px] font-bold leading-5 text-[var(--ac-text)]"><span>Условия по трейд-ин уточняются индивидуально с менеджером дилера в вашем городе.</span></div>
+      </div> : <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
         {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-0 items-center rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight ${value === option.value ? "is-active" : ""}`}>
           <span className="truncate">{option.label}</span>
         </button>)}
