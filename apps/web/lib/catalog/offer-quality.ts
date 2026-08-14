@@ -40,7 +40,14 @@ function credibleIdentityValue(value: unknown) {
     && !INVALID_CATALOG_IDENTITY_RE.test(identity);
 }
 export function hasCredibleCatalogIdentity(offer: Pick<VehicleOffer, "make" | "model">) {
-  return credibleIdentityValue(offer.make) && credibleIdentityValue(offer.model);
+  const make = clean(offer.make);
+  const model = clean(offer.model);
+  if (!credibleIdentityValue(make) || !credibleIdentityValue(model)) return false;
+  // "Benz" is never a model family for modern Mercedes-Benz stock. It appears
+  // when a source/normalizer collapses the make token into the model field and
+  // cannot be safely matched to Encyclopedia variants, so fail closed.
+  if (/^Mercedes[- ]?Benz$/i.test(make) && /^Benz$/i.test(model)) return false;
+  return true;
 }
 function meaningfulTitle(value: unknown) {
   const text = clean(value);
