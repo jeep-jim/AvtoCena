@@ -17,6 +17,15 @@ export const revalidate = 0;
 function first(value?: string | string[]) { return Array.isArray(value) ? value[0] : value || ""; }
 function numeric(value?: string | string[]) { const result = Number(first(value)); return Number.isFinite(result) && result > 0 ? result : undefined; }
 
+function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?: string }) {
+  const query = new URLSearchParams();
+  if (filters.market) query.set("market", filters.market);
+  if (filters.make) query.set("make", filters.make);
+  if (filters.model) query.set("model", filters.model);
+  const suffix = query.toString();
+  return suffix ? `/cars?${suffix}` : "/cars";
+}
+
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
@@ -204,11 +213,39 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
   const initial = Object.fromEntries(initialKeys.map((key) => [key, first(params[key])])) as Record<string, string>;
   const brandNames = facets.makes || [];
   const japanStatisticsSelected = selectedMarket === "japan";
+  const selectedMake = common.make;
+  const selectedModel = common.model;
+  const selectedMarketLabel = marketOrder.find((item) => item.id === selectedMarket)?.label || selectedMarket;
+  const hasCatalogContext = Boolean(selectedMarket || selectedMake || selectedModel);
+  const breadcrumbItems: Array<{ label: string; href: string }> = [
+    { label: "Главная", href: "/" },
+    { label: hasCatalogContext ? "Каталог" : "Каталог автомобилей", href: "/cars" },
+  ];
+  if (selectedMarket) breadcrumbItems.push({ label: selectedMarketLabel, href: catalogBreadcrumbHref({ market: selectedMarket }) });
+  if (selectedMake) breadcrumbItems.push({ label: selectedMake, href: catalogBreadcrumbHref({ market: selectedMarket, make: selectedMake }) });
+  if (selectedModel) breadcrumbItems.push({ label: selectedModel, href: catalogBreadcrumbHref({ market: selectedMarket, make: selectedMake, model: selectedModel }) });
+  const breadcrumbJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      item: `https://avtocena.com${item.href}`,
+    })),
+  }).replace(/</g, "\\u003c");
 
   return <main className="ac-catalog-page ac-page-copy min-h-screen bg-[#0f172a] text-white">
     <PublicHeader backHref="/" backLabel="На главную" />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-6 md:px-8 md:py-10">
       <div className="max-w-4xl">
+        <nav aria-label="Хлебные крошки" className="ac-catalog-breadcrumbs ac-hide-scrollbar -mx-1 mb-4 flex min-w-0 items-center gap-x-2 overflow-x-auto whitespace-nowrap px-1 pb-1 text-[11px] font-black uppercase tracking-[0.14em] text-[var(--ac-muted)] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mb-5 md:overflow-visible md:text-xs">
+          {breadcrumbItems.map((item, index) => <span key={`${item.href}-${item.label}`} className="flex shrink-0 items-center gap-x-2">
+            {index > 0 ? <span aria-hidden="true">/</span> : null}
+            {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
+          </span>)}
+        </nav>
         <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика Японии" : "Каталог автомобилей"}</h1>
         <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">Найдено: {total}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
