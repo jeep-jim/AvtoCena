@@ -13,7 +13,7 @@ const AUTH_MESSAGES: Record<string, string> = {
   telegram_not_configured: "Вход через Telegram ещё не активирован в настройках сервиса. Используйте резервный ключ.",
 };
 
-export function LoginForm({ nextPath, errorCode = "" }: { nextPath: string; errorCode?: string }) {
+export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { nextPath: string; errorCode?: string; botUsername?: string }) {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [accessKey, setAccessKey] = useState("");
@@ -51,7 +51,7 @@ export function LoginForm({ nextPath, errorCode = "" }: { nextPath: string; erro
       {error ? <div className="ac-login-error mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
 
       <div className="ac-login-telegram-shell rounded-2xl bg-white/[0.045] p-4">
-        <TelegramLoginButton nextPath={nextPath} />
+        <TelegramLoginButton nextPath={nextPath} botUsername={botUsername} />
       </div>
 
       <details className="ac-login-details mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
