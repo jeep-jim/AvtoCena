@@ -102,8 +102,22 @@ export function isCatalogKnownBodySemanticValid(offer: Pick<VehicleOffer, "marke
   return true;
 }
 
+export function isCatalogKnownK9EngineSemanticValid(offer: VehicleOffer) {
+  if (clean(offer.market).toLowerCase() !== "korea") return true;
+  const raw = (offer.operational as any)?.raw || {};
+  const identity = [offer.make, offer.model, offer.trim, offer.sourceTitle, JSON.stringify(raw)].map(clean).filter(Boolean).join(" ");
+  if (!/(?:\bk9\b|k900|quoris|퀴리스)/i.test(identity)) return true;
+  const isThreeThreeGdi = /(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(identity);
+  if (!isThreeThreeGdi) return true;
+  const engineCc = Number(offer.engineCc || 0);
+  if ([3000, 3300].includes(engineCc)) return false;
+  const exact3342Evidence = /(?:\b3342\b|\b3,342\b|\b3\.342\b)/i.test(identity);
+  if (exact3342Evidence && engineCc !== 3342) return false;
+  return true;
+}
+
 export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
-  if (!isCatalogKnownBodySemanticValid(offer)) return false;
+  if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
   const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const powerHp = Number(offer.powerHp || 0);

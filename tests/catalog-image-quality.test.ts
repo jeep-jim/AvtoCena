@@ -160,3 +160,19 @@ test("model-wide representative power cannot evict an older exact listing", () =
     powerDataSource: "source:horsepower",
   } as any), false);
 });
+
+test("rejects rounded Korea K9 3.3 GDI displacement and keeps exact 3342cc evidence", () => {
+  const k9 = {
+    ...rawOffer,
+    make: "Kia",
+    model: "K9(II) 3.3 GDI AWD",
+    trim: "K9(II) 3.3 GDI AWD",
+    sourceTitle: "Kia K9 3.3 GDI AWD",
+    engineCc: 3300,
+    operational: { raw: {} },
+  };
+  assert.equal(isCatalogOfferBusinessLiquid(k9 as any), false);
+  assert.equal(isCatalogOfferBusinessLiquid({ ...k9, engineCc: 3000 } as any), false);
+  assert.equal(isCatalogOfferBusinessLiquid({ ...k9, engineCc: 3342 } as any), true);
+  assert.equal(isCatalogOfferBusinessLiquid({ ...k9, engineCc: 3300, sourceTitle: "Kia K9 3.3 GDI 3342 cc" } as any), false);
+});

@@ -10,6 +10,7 @@ const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledg
 const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const recoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
@@ -81,6 +82,16 @@ test("publisher accumulates galleries before deduplication and protects the newe
   assert.match(publisher, /generationCleanupGraceMs/);
   assert.match(publisher, /entry\.objectKeys\.length > 0/);
   assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
+});
+
+test("recovery publisher has opt-in exact preservation for untouched full maintenance state", () => {
+  assert.match(recoveryPublisher, /readAllOffersForMaintenance/);
+  assert.match(recoveryPublisher, /RECOVERY_BATCH_PRESERVE_UNTOUCHED_EXACT/);
+  assert.match(recoveryPublisher, /preservedInternalByMarket/);
+  assert.match(recoveryPublisher, /preservedPublicHashByMarket/);
+  assert.match(recoveryPublisher, /recovery_batch_preserved_internal_gate_failed/);
+  assert.match(recoveryPublisher, /recovery_batch_preserved_manifest_mismatch/);
+  assert.match(recoveryPublisher, /recovery_batch_preserved_hash_mismatch/);
 });
 
 test("daily cleanup keeps a three-day grace while emergency cleanup preserves the live generation", () => {
