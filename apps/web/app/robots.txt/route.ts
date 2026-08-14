@@ -15,6 +15,7 @@ export function GET() {
   const body = [
     ...USER_AGENTS.map(blockFor),
     "Sitemap: https://avtocena.com/sitemap.xml",
+    "Sitemap: https://avtocena.com/cars/models-sitemap.xml",
     "Sitemap: https://avtocena.com/cars/sitemap.xml",
     "Host: https://avtocena.com",
     "",
