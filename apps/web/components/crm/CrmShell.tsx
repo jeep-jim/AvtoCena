@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { CrmThemeToggle } from "@/components/crm/CrmThemeToggle";
+import { CrmLiveAlerts } from "@/components/crm/CrmLiveAlerts";
 import { defaultManagerAvatar } from "@/lib/default-avatars";
 
 type CrmShellProps = {
@@ -37,11 +38,12 @@ export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProp
             <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-base font-black text-black">AC</div>
             <div>
               <div className="font-black">АвтоЦена CRM</div>
-              <div className="text-xs font-bold text-white/45">платформа дилеров</div>
+              <div className="text-xs font-bold text-white/45">рабочее пространство команды</div>
             </div>
           </Link>
 
           <div className="flex flex-wrap items-center justify-end gap-2">
+            <CrmLiveAlerts />
             <CrmThemeToggle />
             <Link href={user?.id ? `/crm/managers/${encodeURIComponent(user.id)}` : "/crm/managers"} className="crm-user-chip flex min-h-10 items-center gap-2 rounded-full border border-white/10 bg-white/8 py-1.5 pl-1.5 pr-4 text-sm font-black text-white/70">
               <img src={avatar} alt="" className="h-8 w-8 rounded-full object-cover" referrerPolicy="no-referrer" />
