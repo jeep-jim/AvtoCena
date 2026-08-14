@@ -159,7 +159,7 @@ async function notifyCrmStaffAboutLead(lead: any) {
   if (!botToken) return;
   try {
     const users = await readCrmUsers();
-    const targets = users.filter((user) => user.status !== "blocked"
+    const targets = users.filter((user) => user.status === "active"
       && Boolean(user.telegramId)
       && (user.role === "owner" || user.role === "admin" || user.id === lead.assignedManagerId));
     if (!targets.length) return;
@@ -460,7 +460,7 @@ export async function POST(request: Request) {
     if (cpaRetryStatuses.has(cpaEvent.deliveryStatus) && retryDue) {
       await deliverCpaEvent(cpaEvent);
     }
-    void notifyCrmStaffAboutLead(lead);
+    await notifyCrmStaffAboutLead(lead);
   }
 
   return NextResponse.json({
