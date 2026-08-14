@@ -167,6 +167,15 @@ function redirectLogin(error: string) {
   return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, PUBLIC_ORIGIN));
 }
 
+function tokenExchangeErrorCode(error: unknown) {
+  const code = String(error || "").trim().toLowerCase();
+  if (code === "invalid_client") return "telegram_token_invalid_client";
+  if (code === "invalid_grant") return "telegram_token_invalid_grant";
+  if (code === "invalid_request") return "telegram_token_invalid_request";
+  if (code === "unauthorized_client") return "telegram_token_unauthorized_client";
+  return "telegram_token_exchange_failed";
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const telegramError = String(url.searchParams.get("error") || "").trim();
@@ -224,13 +233,14 @@ export async function GET(request: Request) {
     });
     const tokenPayload = await tokenResponse.json().catch(() => null) as { id_token?: string; error?: string; error_description?: string } | null;
     if (!tokenResponse.ok || !tokenPayload?.id_token) {
+      const telegramCode = String(tokenPayload?.error || "").trim();
       console.error(
         "telegram_oidc_token_exchange_failed",
         tokenResponse.status,
-        String(tokenPayload?.error || "unknown").slice(0, 120),
+        telegramCode.slice(0, 120) || "unknown",
         String(tokenPayload?.error_description || "").slice(0, 180),
       );
-      const response = redirectLogin("telegram_token_exchange_failed");
+      const response = redirectLogin(tokenExchangeErrorCode(telegramCode));
       clearOidcCookie(response);
       return response;
     }
