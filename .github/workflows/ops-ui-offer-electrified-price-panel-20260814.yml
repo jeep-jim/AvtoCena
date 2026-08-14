@@ -1,0 +1,99 @@
+name: Ops · Offer electrified price panel 20260814
+
+on:
+  push:
+    branches:
+      - ui/offer-electrified-price-panel-20260814
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/offer-electrified-price-panel-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Patch offer electrified price panels
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected 1 match, got {count}')
+              p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          page = 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          replace_once(
+              page,
+              '? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />',
+              '? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />',
+          )
+          replace_once(
+              page,
+              ': <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}',
+              ': <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}',
+          )
+
+          preliminary = 'apps/web/components/catalog/PreliminaryPrice.tsx'
+          replace_once(
+              preliminary,
+              '  const panelBackground = "var(--ac-surface-2)";',
+              '  const panelBackground = highlightElectrified\n    ? (lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)")\n    : "var(--ac-surface-2)";',
+          )
+
+          trend = 'apps/web/components/catalog/PriceTrend.tsx'
+          replace_once(
+              trend,
+              '''    if (!lightTheme && direction === "up") {\n      node.style.setProperty("background", "#3d3644", "important");\n      node.style.setProperty("background-color", "#3d3644", "important");\n    } else {\n      node.style.removeProperty("background");\n      node.style.removeProperty("background-color");\n    }''',
+              '''    if (highlightElectrified) {\n      const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)";\n      node.style.setProperty("background", background, "important");\n      node.style.setProperty("background-color", background, "important");\n    } else if (!lightTheme && direction === "up") {\n      node.style.setProperty("background", "#3d3644", "important");\n      node.style.setProperty("background-color", "#3d3644", "important");\n    } else {\n      node.style.removeProperty("background");\n      node.style.removeProperty("background-color");\n    }''',
+          )
+          replace_once(
+              trend,
+              '  }, [panel, lightTheme, direction]);',
+              '  }, [panel, lightTheme, direction, highlightElectrified]);',
+          )
+
+          test_path = Path('tests/catalog-ui-neutral-preliminary-20260812.test.ts')
+          text = test_path.read_text(encoding='utf-8')
+          anchor = 'const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");'
+          if anchor not in text:
+              raise SystemExit('test import anchor missing')
+          text = text.replace(anchor, anchor + '\nconst offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");', 1)
+          old_assert = '  assert.match(preliminaryPrice, /const panelBackground = "var\\(--ac-surface-2\\)"/);'
+          if old_assert not in text:
+              raise SystemExit('old preliminary background assertion missing')
+          new_asserts = '''  assert.match(offerPage, /PreliminaryPrice[^;]+highlightElectrified=\\{electrified\\}/s);\n  assert.match(offerPage, /PriceTrend[^;]+highlightElectrified=\\{electrified\\}/s);\n  assert.match(preliminaryPrice, /rgba\\(197, 138, 0, 0\\.10\\)/);\n  assert.match(preliminaryPrice, /rgba\\(255, 210, 31, 0\\.10\\)/);\n  assert.match(preliminaryPrice, /: "var\\(--ac-surface-2\\)"/);\n  assert.match(priceTrend, /if \\(highlightElectrified\\)/);\n  assert.match(priceTrend, /rgba\\(197, 138, 0, 0\\.10\\)/);\n  assert.match(priceTrend, /rgba\\(255, 210, 31, 0\\.10\\)/);\n  assert.match(priceTrend, /\\[panel, lightTheme, direction, highlightElectrified\\]/);'''
+          text = text.replace(old_assert, new_asserts, 1)
+          test_path.write_text(text, encoding='utf-8')
+          PY
+      - name: Focused UI test
+        run: node --import tsx --test tests/catalog-ui-neutral-preliminary-20260812.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build --workspace @avtocena/web
+      - name: Commit patch
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/app/'(public)'/cars/offer/'[id]'/page.tsx apps/web/components/catalog/PreliminaryPrice.tsx apps/web/components/catalog/PriceTrend.tsx tests/catalog-ui-neutral-preliminary-20260812.test.ts
+          if git diff --cached --quiet; then
+            echo "No code changes to commit"
+            exit 0
+          fi
+          git commit -m "Style electrified offer price panels"
+          git push origin HEAD:ui/offer-electrified-price-panel-20260814
