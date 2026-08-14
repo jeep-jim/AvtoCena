@@ -6,6 +6,8 @@ const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/Cat
 const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");
 const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
 const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");
+const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
+const catalogFilters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
@@ -38,4 +40,9 @@ test("catalog route loader follows active light or dark theme variables", () => 
   assert.match(carsLoading, /text-\[var\(--ac-muted\)\]/);
   assert.match(carsLoading, /bg-\[var\(--ac-surface-3\)\]/);
   assert.doesNotMatch(carsLoading, /bg-\[#0f172a\]|text-white|bg-white\/\[/);
+});
+
+test("catalog filter changes have one client navigation owner", () => {
+  assert.match(catalogFilters, /router\.replace/);
+  assert.doesNotMatch(carsLayout, /CatalogFilterAutoApply/);
 });
