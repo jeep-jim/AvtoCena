@@ -207,7 +207,9 @@ if (marketRows.some((offer) => offer.images.length < minImagesPerOffer)) {
 }
 
 // Recovery replaces only the requested market inside the complete internal state.
-// Untouched markets are never reconstructed from filtered public projections.
+// Public rows of untouched markets must keep their existing order; source-grouped
+// maintenance reads are used only to supply the canonical internal objects and
+// internal-only rows that are not currently public.
 const currentInternal = await readAllOffersForMaintenance();
 if (!Array.isArray(currentInternal)) throw new Error("recovery_maintenance_state_invalid");
 const preservedInternal = currentInternal.filter((offer) => String(offer?.market || "") !== market);
@@ -220,6 +222,7 @@ if (invalidInternal.length) throw new Error(`recovery_preserved_internal_gate_fa
 const preservedByMarket = {};
 const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
+const preservedOrderedInternal = [];
 for (const other of PUBLIC_CATALOG_MARKETS) {
   if (other === market) continue;
   const internalRows = preservedInternal.filter((offer) => String(offer?.market || "") === other);
@@ -229,11 +232,34 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   const invalidPublic = rows.filter((offer) => !offer?.id || !offer?.make || !offer?.model || !isCatalogYearAllowed(offer?.year, other) || !isCatalogMarketSourceAllowed(offer) || !Array.isArray(offer?.images) || offer.images.length === 0);
   if (invalidPublic.length) throw new Error(`recovery_preserved_public_gate_failed:${other}:${invalidPublic.length}`);
   if (rows.length > 0 && internalRows.length === 0) throw new Error(`recovery_preserved_internal_missing:${other}`);
+
+  const internalById = new Map();
+  for (const internalRow of internalRows) {
+    const id = String(internalRow?.id || "");
+    if (!id || internalById.has(id)) throw new Error(`recovery_preserved_internal_duplicate:${other}:${id || "missing"}`);
+    internalById.set(id, internalRow);
+  }
+  const publicIds = new Set();
+  for (const publicRow of rows) {
+    const id = String(publicRow?.id || "");
+    if (publicIds.has(id)) throw new Error(`recovery_preserved_public_duplicate:${other}:${id}`);
+    const internalRow = internalById.get(id);
+    if (!internalRow) throw new Error(`recovery_preserved_public_internal_mismatch:${other}:${id}`);
+    preservedOrderedInternal.push(internalRow);
+    publicIds.add(id);
+  }
+  for (const internalRow of internalRows) {
+    if (!publicIds.has(String(internalRow?.id || ""))) preservedOrderedInternal.push(internalRow);
+  }
+
   preservedByMarket[other] = rows.length;
   preservedPublicHashByMarket[other] = hashRows(rows);
 }
+if (preservedOrderedInternal.length !== preservedInternal.length) {
+  throw new Error(`recovery_preserved_internal_order_binding_failed:${preservedOrderedInternal.length}:${preservedInternal.length}`);
+}
 
-const combined = [...preservedInternal, ...marketRows];
+const combined = [...preservedOrderedInternal, ...marketRows];
 const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 if (unique.size !== combined.length) throw new Error(`recovery_duplicate_id_in_full_state:${combined.length - unique.size}`);

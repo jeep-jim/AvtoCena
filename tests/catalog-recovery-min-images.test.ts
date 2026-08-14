@@ -6,6 +6,7 @@ import path from "node:path";
 import test from "node:test";
 
 const gate = new URL("../scripts/catalog-recovery-photo-gate.mjs", import.meta.url).pathname;
+const publisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish.mjs", import.meta.url), "utf8");
 
 function runGate(env: Record<string, string>) {
   return spawnSync(process.execPath, [gate], { env: { ...process.env, ...env }, encoding: "utf8" });
@@ -35,4 +36,12 @@ test("recovery dry-run photo gate requires the combined target minimum", () => {
   const report = JSON.parse(fs.readFileSync(path.join(dir, "report.json"), "utf8"));
   assert.equal(report.observedMinimum, 3);
   assert.equal(report.minimumImages, 5);
+});
+
+test("market recovery preserves untouched public order before appending internal-only rows", () => {
+  assert.match(publisher, /const preservedOrderedInternal = \[\]/);
+  assert.match(publisher, /for \(const publicRow of rows\)[\s\S]*internalById\.get\(id\)[\s\S]*preservedOrderedInternal\.push\(internalRow\)/);
+  assert.match(publisher, /for \(const internalRow of internalRows\)[\s\S]*!publicIds\.has[\s\S]*preservedOrderedInternal\.push\(internalRow\)/);
+  assert.match(publisher, /const combined = \[\.\.\.preservedOrderedInternal, \.\.\.marketRows\]/);
+  assert.doesNotMatch(publisher, /const combined = \[\.\.\.preservedInternal, \.\.\.marketRows\]/);
 });
