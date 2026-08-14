@@ -190,3 +190,5 @@ jobs:
             korea-crossrun-publish-dry-run.json
           if-no-files-found: warn
           retention-days: 3
+
+# rerun 2026-08-14 exact proven artifacts against current main
