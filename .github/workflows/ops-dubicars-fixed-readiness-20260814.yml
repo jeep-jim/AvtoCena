@@ -1,0 +1,61 @@
+name: Ops · DubiCars fixed readiness 20260814
+run-name: DubiCars fixed exact readiness · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/dubicars-fixed-readiness-20260814
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RECOVERY_DIRECT_MARKET: uae
+      RECOVERY_OUTPUT: dubicars-fixed-readiness.json
+      RECOVERY_TARGET: "20"
+      RECOVERY_MAX_PAGES: "5"
+      RECOVERY_TIME_LIMIT_MS: "900000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Run DubiCars parser regressions
+        run: node --import tsx --test tests/catalog-alternate-markets.test.ts
+      - name: Collect current DubiCars cards without publishing
+        run: npx tsx scripts/catalog-live-recovery-direct-exact.mjs
+      - name: Enforce fixed DubiCars live readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync('dubicars-fixed-readiness.json','utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const problems = [];
+          if (offers.length < 5) problems.push(`too_few:${offers.length}`);
+          if (offers.some((o) => o.sourceId !== 'dubicars_uae_exact')) problems.push('source_mismatch');
+          if (offers.some((o) => !o.make || !o.model)) problems.push('identity_missing');
+          if (offers.some((o) => Number(o.year || 0) < 2020)) problems.push('pre_2020');
+          if (offers.some((o) => !(Number(o.sourcePrice || 0) > 0) || !String(o.sourceCurrency || '').trim())) problems.push('price_missing');
+          if (offers.some((o) => !Array.isArray(o.images) || o.images.length < 5)) problems.push('gallery_below_five');
+          if (offers.some((o) => !/^https?:\/\//.test(String(o.operational?.sourceUrl || '')))) problems.push('source_url_missing');
+          console.log(JSON.stringify({ count: offers.length, problems, sample: offers.slice(0,8).map((o)=>({make:o.make,model:o.model,year:o.year,price:o.sourcePrice,currency:o.sourceCurrency,images:o.images?.length,url:o.operational?.sourceUrl})) },null,2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dubicars-fixed-readiness
+          path: dubicars-fixed-readiness.json
+          if-no-files-found: warn
+          retention-days: 5
