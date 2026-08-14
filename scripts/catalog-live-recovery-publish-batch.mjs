@@ -104,8 +104,18 @@ function normalizeVisible(raw) {
 function makeKey(offer) {
   return String(offer?.make || "").trim().toLocaleLowerCase("en-US").replace(/\s+/g, " ");
 }
+function stableJsonValue(value) {
+  if (Array.isArray(value)) return value.map(stableJsonValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableJsonValue(value[key])]));
+  }
+  return value;
+}
 function hashRows(rows) {
-  return crypto.createHash("sha256").update(JSON.stringify(rows)).digest("hex");
+  const canonical = [...rows]
+    .sort((left, right) => String(left?.id || "").localeCompare(String(right?.id || "")))
+    .map(stableJsonValue);
+  return crypto.createHash("sha256").update(JSON.stringify(canonical)).digest("hex");
 }
 function applyPerModelYearCap(rows, rejected) {
   const selected = [];
@@ -261,7 +271,20 @@ const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 if (preserveUntouchedExact && unique.size !== combined.length) throw new Error(`recovery_batch_duplicate_id_in_full_state:${combined.length - unique.size}`);
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
-const manifest = await persistCatalogOffers([...unique.values()]);
+const manifest = await persistCatalogOffers([...unique.values()], {
+  beforePersistValidate(publicOffers) {
+    const failures = [];
+    for (const other of PUBLIC_CATALOG_MARKETS) {
+      if (markets.includes(other)) continue;
+      const projectedRows = publicOffers.filter((offer) => String(offer?.market || "") === other);
+      const expectedCount = Number(preservedByMarket[other] || 0);
+      const projectedHash = hashRows(projectedRows);
+      if (projectedRows.length !== expectedCount) failures.push(`${other}:count:${projectedRows.length}:${expectedCount}`);
+      if (projectedHash !== preservedPublicHashByMarket[other]) failures.push(`${other}:hash:${projectedHash}:${preservedPublicHashByMarket[other]}`);
+    }
+    if (failures.length) throw new Error(`recovery_batch_prewrite_preservation_gate_failed:${failures.join("|")}`);
+  },
+});
 
 for (const market of markets) {
   const rows = selectedByMarket.get(market) || [];

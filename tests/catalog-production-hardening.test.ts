@@ -104,6 +104,14 @@ test("recovery publisher always preserves untouched full maintenance state exact
   assert.match(recoveryPublisher, /recovery_batch_preserved_hash_mismatch/);
 });
 
+test("recovery preservation gates inspect the exact normalized public rows before any generation write", () => {
+  assert.match(storage, /const publicOffers = nextOffers\.filter\(isPublicOffer\);[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
+  assert.match(singleRecoveryPublisher, /beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
+  assert.match(recoveryPublisher, /beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
+  assert.match(singleRecoveryPublisher, /function stableJsonValue/);
+  assert.match(recoveryPublisher, /function stableJsonValue/);
+});
+
 test("single recovery publisher preserves full maintenance state and enforces target gallery depth", () => {
   assert.match(singleRecoveryPublisher, /readAllOffersForMaintenance/);
   assert.match(singleRecoveryPublisher, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER\s*\|\|\s*5/);

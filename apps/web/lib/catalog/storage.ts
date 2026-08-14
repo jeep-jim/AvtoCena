@@ -641,7 +641,10 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
     }
   }));
 }
-export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
+export type PersistCatalogOptions = {
+  beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
+};
+export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
   const storage = getJsonStorage();
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
   const normalized = await Promise.all(nextOffers.map(async (offer) => normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
@@ -660,11 +663,17 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
   } else {
     nextOffers = normalized;
   }
+  const publicOffers = nextOffers.filter(isPublicOffer);
+  // A guarded writer can inspect the exact normalized public rows that would be
+  // persisted. The validator runs before any generation/internal/index object is
+  // written, so a preservation mismatch cannot switch or partially stage a new
+  // catalog generation.
+  if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   await persistInternalCatalog(storage, generationId, nextOffers);
   const byMarket = new Map<string, VehicleOffer[]>();
-  for (const offer of nextOffers.filter(isPublicOffer)) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
+  for (const offer of publicOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
   const byId: Record<string, OfferLocation> = {};
   const imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {};
@@ -679,7 +688,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[]) {
     }
     markets[market] = { count: offers.length, chunks, updatedAt: now };
   }
-  await rebuildIndexes(generationId, nextOffers.filter(isPublicOffer), byId, imagesById);
+  await rebuildIndexes(generationId, publicOffers, byId, imagesById);
   const manifest: CatalogManifest = { version: 2, generationId, updatedAt: now, markets };
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);

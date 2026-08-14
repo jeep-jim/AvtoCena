@@ -139,7 +139,19 @@ function quality(a, b) {
     || String(a.id || "").localeCompare(String(b.id || ""));
 }
 function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
-function hashRows(rows) { return crypto.createHash("sha256").update(JSON.stringify(rows)).digest("hex"); }
+function stableJsonValue(value) {
+  if (Array.isArray(value)) return value.map(stableJsonValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableJsonValue(value[key])]));
+  }
+  return value;
+}
+function hashRows(rows) {
+  const canonical = [...rows]
+    .sort((left, right) => String(left?.id || "").localeCompare(String(right?.id || "")))
+    .map(stableJsonValue);
+  return crypto.createHash("sha256").update(JSON.stringify(canonical)).digest("hex");
+}
 
 function applyPerModelYearCap(rows, rejected) {
   const result = [];
@@ -242,7 +254,20 @@ let manifest = null;
 let publicationError = "";
 try {
   process.env.CATALOG_GROW_ONLY_MARKETS = "";
-  manifest = await persistCatalogOffers([...unique.values()]);
+  manifest = await persistCatalogOffers([...unique.values()], {
+    beforePersistValidate(publicOffers) {
+      const failures = [];
+      for (const other of PUBLIC_CATALOG_MARKETS) {
+        if (other === market) continue;
+        const projectedRows = publicOffers.filter((offer) => String(offer?.market || "") === other);
+        const expectedCount = Number(preservedByMarket[other] || 0);
+        const projectedHash = hashRows(projectedRows);
+        if (projectedRows.length !== expectedCount) failures.push(`${other}:count:${projectedRows.length}:${expectedCount}`);
+        if (projectedHash !== preservedPublicHashByMarket[other]) failures.push(`${other}:hash:${projectedHash}:${preservedPublicHashByMarket[other]}`);
+      }
+      if (failures.length) throw new Error(`recovery_prewrite_preservation_gate_failed:${failures.join("|")}`);
+    },
+  });
 } catch (error) {
   publicationError = String(error?.message || error);
 }
