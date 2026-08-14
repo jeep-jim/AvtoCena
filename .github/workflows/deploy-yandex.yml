@@ -82,7 +82,7 @@ jobs:
 
           echo '3/9 OpenAI crawler rules'
           robots="$("${CURL[@]}" 'https://avtocena.com/robots.txt')"
-          grep -q 'User-Agent: OAI-SearchBot' <<<"$robots"
+          grep -qi '^User-agent: OAI-SearchBot$' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/sitemap.xml' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/cars/sitemap.xml' <<<"$robots"
 
