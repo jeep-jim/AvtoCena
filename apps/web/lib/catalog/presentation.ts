@@ -41,6 +41,8 @@ const directPhrases: Array<[RegExp, string]> = [
   [/广汽昊铂|昊铂/g, "Hyptec "],
   [/东风奕派/g, "Dongfeng eπ "],
   [/奇瑞风云/g, "Chery Fulwin "],
+  [/QQ冰淇淋/g, "QQ Ice Cream "],
+  [/奇瑞QQ/g, "Chery "],
   [/星途/g, "Exeed "],
   [/星纪元/g, "Exlantix "],
   [/猛士/g, "M-Hero "],
