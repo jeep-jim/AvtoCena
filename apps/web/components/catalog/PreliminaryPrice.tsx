@@ -64,8 +64,21 @@ export function PreliminaryPrice({
     };
   }, [open]);
 
+  const electrifiedPanelBackground = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.14)";
+
+  useEffect(() => {
+    const node = rootRef.current;
+    if (!node || !panel || !highlightElectrified) return;
+    node.style.setProperty("background", electrifiedPanelBackground, "important");
+    node.style.setProperty("background-color", electrifiedPanelBackground, "important");
+    return () => {
+      node.style.removeProperty("background");
+      node.style.removeProperty("background-color");
+    };
+  }, [panel, highlightElectrified, electrifiedPanelBackground]);
+
   const panelBackground = highlightElectrified
-    ? (lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)")
+    ? electrifiedPanelBackground
     : "var(--ac-surface-2)";
   const panelText = "var(--ac-text)";
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : "var(--ac-text)";

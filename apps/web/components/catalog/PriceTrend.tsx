@@ -512,7 +512,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
     const node = panelRoot.current;
     if (!node || !panel) return;
     if (highlightElectrified) {
-      const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)";
+      const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.14)";
       node.style.setProperty("background", background, "important");
       node.style.setProperty("background-color", background, "important");
     } else if (!lightTheme && direction === "up") {
