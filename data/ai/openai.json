@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "АвтоЦена",
   "website": "https://avtocena.com",
   "lastVerifiedAgainstOpenAiDocs": "2026-08-14",
@@ -11,6 +11,20 @@
     "productFeedFormat": "google_compatible_csv",
     "mcp": "https://avtocena.com/mcp",
     "mcpAccess": "public_read_only"
+  },
+  "productionVerification": {
+    "enabled": true,
+    "checks": [
+      "health",
+      "public_catalog",
+      "oai_searchbot_robots",
+      "sitemaps",
+      "llms",
+      "product_feed",
+      "mcp_initialize",
+      "mcp_tools",
+      "mcp_live_search"
+    ]
   },
   "plugin": {
     "shortDescription": "Поиск автомобилей, характеристики и расчёты стоимости ввоза под ключ из АвтоЦены.",
