@@ -12,6 +12,10 @@ const AUTH_MESSAGES: Record<string, string> = {
   telegram_expired: "Подтверждение Telegram устарело. Нажмите кнопку входа ещё раз.",
   telegram_not_configured: "Вход через Telegram ещё не активирован в настройках сервиса. Используйте резервный ключ.",
   telegram_deprecated: "Старый Telegram Login больше не поддерживается. Используйте новую кнопку входа.",
+  telegram_oauth_error: "Telegram отклонил авторизацию до возврата к АвтоЦене. Повторите вход.",
+  telegram_state_invalid: "Telegram вернулся в АвтоЦену, но защитная сессия входа не совпала или устарела. Начните вход заново.",
+  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог обменять его на токен. Настройки Client Secret или OIDC требуют проверки.",
+  telegram_id_token_invalid: "Telegram вернул токен, но сервер не смог подтвердить его подпись или параметры. Вход остановлен безопасно.",
 };
 
 export function LoginForm({ nextPath, errorCode = "", botId = "" }: { nextPath: string; errorCode?: string; botId?: string }) {
