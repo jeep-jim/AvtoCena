@@ -41,6 +41,8 @@ export type MashinaListRow = {
   images: string[];
 };
 
+type MashinaSourceIdentity = { make: string; modelHint: string };
+
 function decodeHtml(value: string) {
   return String(value || "")
     .replace(/&nbsp;|&#160;/gi, " ").replace(/&amp;/gi, "&").replace(/&quot;/gi, '"')
@@ -128,22 +130,64 @@ function imageUrls(markup: string, base: string) {
     .filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
   return dedupeMashinaImageUrls(sourceUrls);
 }
-function deriveMakeModel(value: string) {
+function escapedPattern(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s\\-]+");
+}
+function boundaryIndex(value: string, candidate: string) {
+  if (!candidate) return -1;
+  const match = new RegExp(`(^|[^\\p{L}\\p{N}])(${escapedPattern(candidate)})(?=$|[^\\p{L}\\p{N}])`, "iu").exec(value);
+  return match?.index === undefined ? -1 : match.index + String(match[1] || "").length;
+}
+function brandSlug(value: unknown) {
+  return String(value || "")
+    .toLocaleLowerCase("en-US")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+const SOURCE_URL_BRANDS = CATALOG_BRANDS
+  .flatMap((brand) => {
+    const slugs = [...new Set([brand.slug, brand.dromSlug, brandSlug(brand.name)].map(brandSlug).filter(Boolean))];
+    return slugs.map((slug) => ({ make: brand.name, slug }));
+  })
+  .sort((left, right) => right.slug.length - left.slug.length);
+function titleCaseSlugModel(value: string) {
+  return value.split("-").filter(Boolean).map((token) => {
+    if (/^[a-z]{1,3}\d*$/i.test(token)) return token.toUpperCase();
+    return token ? `${token[0].toUpperCase()}${token.slice(1)}` : token;
+  }).join(" ").trim();
+}
+function sourceIdentityFromDetailUrl(value: string): MashinaSourceIdentity | null {
+  try {
+    const tail = decodeURIComponent(new URL(value).pathname).split("/").filter(Boolean).at(-1) || "";
+    const slug = tail.replace(/-[a-f0-9]{18,}$/i, "").toLocaleLowerCase("en-US");
+    for (const candidate of SOURCE_URL_BRANDS) {
+      if (slug !== candidate.slug && !slug.startsWith(`${candidate.slug}-`)) continue;
+      const modelSlug = slug.slice(candidate.slug.length).replace(/^-+/, "");
+      if (!modelSlug) continue;
+      return { make: candidate.make, modelHint: titleCaseSlugModel(modelSlug) };
+    }
+  } catch { /* invalid detail URL */ }
+  return null;
+}
+function deriveMakeModel(value: string, sourceIdentity?: MashinaSourceIdentity | null) {
   const cleaned = plainText(value).replace(BADGE_RE, " ").replace(/\s+/g, " ").trim();
-  const lower = cleaned.toLocaleLowerCase("en-US");
   let best: { make: string; index: number } | null = null;
-  for (const candidate of KNOWN_MAKES) {
-    const index = lower.indexOf(candidate.toLocaleLowerCase("en-US"));
+  const candidates = sourceIdentity
+    ? KNOWN_MAKES.filter((candidate) => canonicalCatalogBrand(candidate) === sourceIdentity.make)
+    : KNOWN_MAKES;
+  for (const candidate of candidates) {
+    const index = boundaryIndex(cleaned, candidate);
     if (index >= 0 && (!best || index < best.index || (index === best.index && candidate.length > best.make.length))) best = { make: candidate, index };
   }
-  if (!best) return { make: "", model: "" };
-  const make = canonicalCatalogBrand(best.make);
+  if (!best) return sourceIdentity ? { make: sourceIdentity.make, model: sourceIdentity.modelHint } : { make: "", model: "" };
+  const make = sourceIdentity?.make || canonicalCatalogBrand(best.make);
   const after = cleaned.slice(best.index + best.make.length)
     .replace(/^[\s,\-–—|]+/, "")
     .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
     .replace(/\s+/g, " ").trim();
   const modelSource = after.replace(/\s+[0-8](?:[.,][0-9])\s*(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b[\s\S]*$/i, "").trim();
-  const model = modelSource.split(/\s+/).slice(0, 7).join(" ");
+  const model = modelSource.split(/\s+/).slice(0, 7).join(" ") || sourceIdentity?.modelHint || "";
   return { make, model };
 }
 function parseMoney(text: string) {
@@ -191,7 +235,8 @@ export function parseMashinaListingMarkup(markup: string, pageUrl: string): Mash
     const card = markup.slice(entry.index, end);
     const text = plainText(card);
     const label = entry.labels.sort((left, right) => right.length - left.length)[0] || text;
-    const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`);
+    const sourceIdentity = sourceIdentityFromDetailUrl(entry.href);
+    const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`, sourceIdentity);
     const money = parseMoney(text);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:y\.|year|г\.)?/i)?.[1] || 0);
     const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\.?\b/i)?.[1]?.replace(",", ".") || 0);
