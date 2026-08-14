@@ -35,6 +35,14 @@ async function telegramCall(token: string, method: string, body: Record<string, 
   if (!response.ok || !payload?.ok) throw new Error(payload?.description || `telegram_${method}_failed`);
 }
 
+async function telegramCallBestEffort(token: string, method: string, body: Record<string, unknown>) {
+  try {
+    await telegramCall(token, method, body);
+  } catch (error) {
+    console.error("telegram_employee_login_notify_failed", method, error instanceof Error ? error.message : "unknown");
+  }
+}
+
 function cleanChallenges(challenges: LoginChallenge[], now = Date.now()) {
   return challenges
     .filter((challenge) => Date.parse(challenge.expiresAt) > now)
@@ -57,6 +65,33 @@ async function resolveTelegramUser(from: any, fallbackChatId?: string) {
   const displayName = [from?.first_name, from?.last_name].filter(Boolean).join(" ").trim();
   const user = await findCrmUserByTelegram({ id: telegramId, username: telegramUsername });
   return { telegramId, telegramUsername, displayName, user };
+}
+
+async function markChallengeApproved(
+  challenge: LoginChallenge,
+  identity: { telegramId: string; telegramUsername: string; displayName: string; user: any },
+  now = Date.now(),
+) {
+  const { telegramId, telegramUsername, displayName, user } = identity;
+  if (!user || !isCrmRole(user.role)) return false;
+
+  const approvedAt = new Date(now).toISOString();
+  await updateCrmUser(user.id, {
+    telegramId,
+    telegramUsername: telegramUsername || user.telegramUsername,
+    displayName: displayName || user.displayName,
+    lastLoginAt: approvedAt,
+  });
+
+  await mutateDataJson<LoginChallenge[]>(CHALLENGES_PATH, [], (stored) =>
+    cleanChallenges((Array.isArray(stored) ? stored : []).map((item) => item.tokenHash === challenge.tokenHash ? {
+      ...item,
+      status: "approved" as const,
+      userId: user.id,
+      approvedAt,
+    } : item), now));
+
+  return true;
 }
 
 async function sendLoginButton(botToken: string, chatId: string, challenge: LoginChallenge, displayName = "") {
@@ -87,7 +122,7 @@ async function approveChallenge(botToken: string, callback: any) {
 
   if (!challenge) {
     if (callbackQueryId) {
-      await telegramCall(botToken, "answerCallbackQuery", {
+      await telegramCallBestEffort(botToken, "answerCallbackQuery", {
         callback_query_id: callbackQueryId,
         text: "Попытка входа устарела. Начните вход на сайте ещё раз.",
         show_alert: true,
@@ -96,15 +131,15 @@ async function approveChallenge(botToken: string, callback: any) {
     return true;
   }
 
-  const { telegramId, telegramUsername, displayName, user } = await resolveTelegramUser(callback?.from, chatId);
-  if (!user || !isCrmRole(user.role)) {
+  const identity = await resolveTelegramUser(callback?.from, chatId);
+  if (!identity.user || !isCrmRole(identity.user.role)) {
     await mutateDataJson<LoginChallenge[]>(CHALLENGES_PATH, [], (stored) =>
       cleanChallenges((Array.isArray(stored) ? stored : []).map((item) => item.tokenHash === challenge.tokenHash ? {
         ...item,
         status: "denied" as const,
       } : item), now));
     if (callbackQueryId) {
-      await telegramCall(botToken, "answerCallbackQuery", {
+      await telegramCallBestEffort(botToken, "answerCallbackQuery", {
         callback_query_id: callbackQueryId,
         text: "Этот Telegram не добавлен в команду АвтоЦены.",
         show_alert: true,
@@ -113,34 +148,20 @@ async function approveChallenge(botToken: string, callback: any) {
     return true;
   }
 
-  const approvedAt = new Date(now).toISOString();
-  await updateCrmUser(user.id, {
-    telegramId,
-    telegramUsername: telegramUsername || user.telegramUsername,
-    displayName: displayName || user.displayName,
-    lastLoginAt: approvedAt,
-  });
-
-  await mutateDataJson<LoginChallenge[]>(CHALLENGES_PATH, [], (stored) =>
-    cleanChallenges((Array.isArray(stored) ? stored : []).map((item) => item.tokenHash === challenge.tokenHash ? {
-      ...item,
-      status: "approved" as const,
-      userId: user.id,
-      approvedAt,
-    } : item), now));
+  await markChallengeApproved(challenge, identity, now);
 
   if (callbackQueryId) {
-    await telegramCall(botToken, "answerCallbackQuery", {
+    await telegramCallBestEffort(botToken, "answerCallbackQuery", {
       callback_query_id: callbackQueryId,
       text: "Вход подтверждён",
     });
   }
 
   if (chatId && callback?.message?.message_id) {
-    await telegramCall(botToken, "editMessageText", {
+    await telegramCallBestEffort(botToken, "editMessageText", {
       chat_id: chatId,
       message_id: callback.message.message_id,
-      text: `✅ Вход в АвтоЦена CRM подтверждён${displayName ? `, ${displayName}` : ""}.\n\nВернитесь в браузер — CRM откроется автоматически.`,
+      text: `✅ Вход в АвтоЦена CRM подтверждён${identity.displayName ? `, ${identity.displayName}` : ""}.\n\nВернитесь в браузер — CRM откроется автоматически.`,
     });
   }
   return true;
@@ -167,10 +188,10 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
     ? pending.find((item) => item.tokenHash === crypto.createHash("sha256").update(exactMatch[1]).digest("hex"))
     : pending[0];
   const chatId = String(message.chat.id);
-  const { displayName, user } = await resolveTelegramUser(message.from, chatId);
+  const identity = await resolveTelegramUser(message.from, chatId);
 
-  if (!user || !isCrmRole(user.role)) {
-    await telegramCall(botToken, "sendMessage", {
+  if (!identity.user || !isCrmRole(identity.user.role)) {
+    await telegramCallBestEffort(botToken, "sendMessage", {
       chat_id: chatId,
       text: "⛔ Этот Telegram не добавлен в команду АвтоЦены. Вход в CRM не разрешён.",
     });
@@ -178,7 +199,7 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
   }
 
   if (!challenge) {
-    await telegramCall(botToken, "sendMessage", {
+    await telegramCallBestEffort(botToken, "sendMessage", {
       chat_id: chatId,
       text: "Сейчас нет активной попытки входа. Откройте avtocena.com/login, нажмите «Войти через Telegram», затем вернитесь сюда.",
       reply_markup: {
@@ -191,6 +212,26 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
     return true;
   }
 
-  await sendLoginButton(botToken, chatId, challenge, displayName || user.displayName);
+  const exactChallenge = Boolean(exactMatch?.[1]);
+  const canAutoApprove = exactChallenge || pending.length === 1;
+
+  if (canAutoApprove) {
+    const approved = await markChallengeApproved(challenge, identity, now);
+    if (approved) {
+      await telegramCallBestEffort(botToken, "sendMessage", {
+        chat_id: chatId,
+        text: `✅ Вход в АвтоЦена CRM подтверждён${identity.displayName ? `, ${identity.displayName}` : ""}.\n\nВернитесь в браузер — CRM откроется автоматически.`,
+        reply_markup: {
+          inline_keyboard: [[{
+            text: "Открыть CRM",
+            url: "https://avtocena.com/crm",
+          }]],
+        },
+      });
+      return true;
+    }
+  }
+
+  await sendLoginButton(botToken, chatId, challenge, identity.displayName || identity.user.displayName);
   return true;
 }
