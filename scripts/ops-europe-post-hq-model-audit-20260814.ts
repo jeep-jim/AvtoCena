@@ -40,6 +40,7 @@ function quality(a: any, b: any) {
     || clean(a?.id).localeCompare(clean(b?.id));
 }
 
+async function main() {
 const manifestStart: any = await storage.readJson("catalog/manifest.json", null);
 if (!manifestStart?.generationId) throw new Error("manifest_missing");
 const lock: any = await storage.readJson("catalog/import-lock.json", {});
@@ -142,3 +143,9 @@ const report = {
 fs.writeFileSync("europe-post-hq-model-audit.json", JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
 if (!Object.values(report.gates).every(Boolean)) throw new Error(`post_hq_audit_gate_failed:${JSON.stringify(report.gates)}`);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
