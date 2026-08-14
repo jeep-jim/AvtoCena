@@ -1,20 +1,8 @@
 import type { MetadataRoute } from "next";
-import { aiCatalogManifestCount, readAiCatalogManifest } from "@/lib/ai-discovery";
-
-export const dynamic = "force-dynamic";
 
 const PRIVATE_PATHS = ["/crm/", "/api/", "/login", "/favorites", "/mcp"];
-const CARS_PER_SITEMAP = 45_000;
 
-export default async function robots(): Promise<MetadataRoute.Robots> {
-  const manifest = await readAiCatalogManifest().catch(() => ({ generationId: "", markets: {} }));
-  const offerCount = aiCatalogManifestCount(manifest);
-  const offerSitemapCount = Math.ceil(offerCount / CARS_PER_SITEMAP);
-  const sitemaps = [
-    "https://avtocena.com/sitemap.xml",
-    ...Array.from({ length: offerSitemapCount }, (_, id) => `https://avtocena.com/cars/sitemap/${id}.xml`),
-  ];
-
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
@@ -38,7 +26,10 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         disallow: PRIVATE_PATHS,
       },
     ],
-    sitemap: sitemaps,
+    sitemap: [
+      "https://avtocena.com/sitemap.xml",
+      "https://avtocena.com/cars/sitemap.xml",
+    ],
     host: "https://avtocena.com",
   };
 }
