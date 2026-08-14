@@ -217,8 +217,14 @@ export async function POST(request: Request) {
   const telegramConfig = await getTelegramRuntimeConfig();
   const token = telegramConfig?.token || "";
   const expectedSecret = telegramConfig?.webhookSecret || "";
-  const actualSecret = request.headers.get("x-telegram-bot-api-secret-token") || "";
-  if (expectedSecret && actualSecret !== expectedSecret) return NextResponse.json({ ok: false }, { status: 403 });
+  const headerSecret = request.headers.get("x-telegram-bot-api-secret-token") || "";
+  let urlSecret = "";
+  try {
+    urlSecret = new URL(request.url).searchParams.get("key") || "";
+  } catch {}
+  if (expectedSecret && headerSecret !== expectedSecret && urlSecret !== expectedSecret) {
+    return NextResponse.json({ ok: false }, { status: 403 });
+  }
   if (!token) return NextResponse.json({ ok: true, ignored: "telegram_not_configured" });
 
   const update = await request.json().catch(() => null) as any;
