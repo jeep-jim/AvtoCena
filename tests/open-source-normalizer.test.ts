@@ -26,6 +26,7 @@ test("repairs generic Mercedes-Benz model identity from exact source titles", ()
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz B 200 Progressive", "Mercedes-Benz", "Benz"), "B-Class");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz Vito 114 CDI", "Mercedes-Benz", "Benz"), "Vito");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz Sprinter 319 CDI", "Mercedes-Benz", "Benz"), "Sprinter");
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz ALLRAD SPRINTER 314 4X4 DOKA AHK-3,5T STANDHEIZU", "Mercedes-Benz", "Benz"), "Sprinter");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz Klasa C 200", "Mercedes-Benz", "Benz"), "C-Class");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz GLC 300 4MATIC", "Mercedes-Benz", "Benz"), "GLC Class");
 });
@@ -33,4 +34,5 @@ test("repairs generic Mercedes-Benz model identity from exact source titles", ()
 test("source identity repair remains fail-closed for unrelated brands and unknown Mercedes shapes", () => {
   assert.equal(canonicalSourceModelIdentity("BMW 320i M Sport", "BMW", "3 Series"), "3 Series");
   assert.equal(canonicalSourceModelIdentity("Mercedes-Benz Unknown Special", "Mercedes-Benz", "Benz"), "Benz");
+  assert.equal(canonicalSourceModelIdentity("Mercedes-Benz ALLRAD Unknown Special", "Mercedes-Benz", "Benz"), "Benz");
 });
