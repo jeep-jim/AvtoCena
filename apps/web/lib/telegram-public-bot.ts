@@ -1,5 +1,9 @@
 import crypto from "node:crypto";
-import { mutateDataJson, readDataJson } from "./data";
+import {
+  appendChunkedDataJson,
+  readChunkedDataJson,
+  updateChunkedDataJson,
+} from "./data";
 import { getOffer, searchOffers } from "./catalog/storage";
 import { CATALOG_MARKET_LABELS } from "./catalog/runtime-config";
 
@@ -8,8 +12,6 @@ const LOGO_URL = `${SITE_URL}/apple-touch-icon.png`;
 const USERS_PATH = "telegram/public-users.json";
 const SUBSCRIPTIONS_PATH = "telegram/subscriptions.json";
 const MENU_PROFILE_TTL_MS = 10 * 60_000;
-const MAX_PUBLIC_USERS = 50_000;
-const MAX_SUBSCRIPTIONS = 50_000;
 
 const BUTTON_CARS = "🚗 Подобрать авто";
 const BUTTON_CALCULATE = "🧮 Рассчитать";
@@ -24,6 +26,7 @@ const BUTTON_SITE = "🌐 АвтоЦена";
 let botProfileConfiguredAt = 0;
 
 type PublicBotUser = {
+  id: string;
   telegramUserId: string;
   chatId: string;
   username?: string;
@@ -91,7 +94,7 @@ function formatKm(value: unknown) {
 
 function formatEngine(value: unknown) {
   const cc = Number(value);
-  return Number.isFinite(cc) && cc > 0 ? `${(cc / 1000).toFixed(cc % 1000 === 0 ? 1 : 1)} л` : "";
+  return Number.isFinite(cc) && cc > 0 ? `${(cc / 1000).toFixed(1)} л` : "";
 }
 
 function marketLabel(value: unknown) {
@@ -114,7 +117,12 @@ function offerPrice(offer: any) {
 
 function offerCardText(offer: any, prefix = "🚘") {
   const meta = [offer?.year, marketLabel(offer?.market), formatKm(offer?.mileageKm)].filter(Boolean).join(" · ");
-  const specs = [formatEngine(offer?.engineCc), offer?.powerHp ? `${Math.round(Number(offer.powerHp))} л.с.` : "", cleanText(offer?.drive), cleanText(offer?.transmission)].filter(Boolean).join(" · ");
+  const specs = [
+    formatEngine(offer?.engineCc),
+    offer?.powerHp ? `${Math.round(Number(offer.powerHp))} л.с.` : "",
+    cleanText(offer?.drive),
+    cleanText(offer?.transmission),
+  ].filter(Boolean).join(" · ");
   const price = formatRub(offerPrice(offer));
   return [
     `${prefix} ${offerTitle(offer)}`,
@@ -129,12 +137,17 @@ function offerUrl(offer: any) {
 }
 
 function budgetSiteUrl(budgetTo?: number) {
-  const query = new URLSearchParams();
+  const query = new URLSearchParams({
+    utm_source: "telegram",
+    utm_medium: "bot",
+    utm_campaign: "public_bot",
+  });
   if (budgetTo) query.set("budget", String(budgetTo));
-  query.set("utm_source", "telegram");
-  query.set("utm_medium", "bot");
-  query.set("utm_campaign", "public_bot");
   return `${SITE_URL}/cars?${query.toString()}`;
+}
+
+function requestSiteUrl() {
+  return `${SITE_URL}/request?utm_source=telegram&utm_medium=bot&utm_campaign=public_bot`;
 }
 
 function mainReplyKeyboard() {
@@ -214,18 +227,27 @@ function identityFromUpdate(update: any) {
 async function rememberPublicUser(update: any) {
   const identity = identityFromUpdate(update);
   if (!identity.telegramUserId || !identity.chatId) return identity;
+  const id = identity.telegramUserId;
   const now = new Date().toISOString();
-  await mutateDataJson<PublicBotUser[]>(USERS_PATH, [], (stored) => {
-    const users = Array.isArray(stored) ? stored : [];
-    const existing = users.find((item) => item.telegramUserId === identity.telegramUserId);
-    const next: PublicBotUser = {
-      ...existing,
+  const users = await readChunkedDataJson<PublicBotUser>(USERS_PATH, []);
+  const existing = users.find((item) => item.id === id);
+  if (existing) {
+    await updateChunkedDataJson<PublicBotUser>(USERS_PATH, id, (stored) => ({
+      ...stored,
       ...identity,
-      startedAt: existing?.startedAt || now,
+      id,
+      telegramUserId: id,
       lastSeenAt: now,
-    } as PublicBotUser;
-    return [...users.filter((item) => item.telegramUserId !== identity.telegramUserId), next].slice(-MAX_PUBLIC_USERS);
-  });
+    }));
+  } else {
+    await appendChunkedDataJson<PublicBotUser>(USERS_PATH, {
+      id,
+      ...identity,
+      telegramUserId: id,
+      startedAt: now,
+      lastSeenAt: now,
+    });
+  }
   return identity;
 }
 
@@ -257,9 +279,7 @@ async function sendWelcome(token: string, chatId: string, firstName = "") {
     await telegramCall(token, "sendMessage", {
       chat_id: chatId,
       text: caption,
-      reply_markup: {
-        inline_keyboard: [[{ text: "🚗 Подобрать авто", callback_data: "ac:cars" }]],
-      },
+      reply_markup: { inline_keyboard: [[{ text: "🚗 Подобрать авто", callback_data: "ac:cars" }]] },
     });
   }
 
@@ -333,7 +353,7 @@ async function sendOfferCard(token: string, chatId: string, offer: any, prefix =
   const replyMarkup = {
     inline_keyboard: [
       [{ text: "Открыть на АвтоЦене", url: offerUrl(offer) }],
-      [{ text: "🔔 Следить за моделью", callback_data: `ac:subm:${String(offer?.id || "").slice(0, 32)}` }],
+      [{ text: "🔔 Следить за моделью", callback_data: `ac:subm:${String(offer?.id || "").slice(0, 48)}` }],
     ],
   };
   const image = offerImage(offer);
@@ -356,8 +376,7 @@ async function sendOfferCard(token: string, chatId: string, offer: any, prefix =
 
 async function sendBudgetResults(token: string, chatId: string, budgetTo?: number) {
   await telegramBestEffort(token, "sendChatAction", { chat_id: chatId, action: "typing" });
-  const raw = await searchBudgetOffers(budgetTo);
-  const offers = diverseOffers(raw, 5);
+  const offers = diverseOffers(await searchBudgetOffers(budgetTo), 5);
   if (!offers.length) {
     await telegramCall(token, "sendMessage", {
       chat_id: chatId,
@@ -365,7 +384,7 @@ async function sendBudgetResults(token: string, chatId: string, budgetTo?: numbe
       reply_markup: {
         inline_keyboard: [
           [{ text: "📚 Открыть каталог", url: budgetSiteUrl(budgetTo) }],
-          [{ text: "📝 Оставить заявку", url: `${SITE_URL}/?lead=1&utm_source=telegram&utm_medium=bot` }],
+          [{ text: "📝 Оставить заявку", url: requestSiteUrl() }],
         ],
       },
     });
@@ -406,10 +425,16 @@ async function currentOfferIds(criteria: { budgetTo?: number; make?: string; mod
     page: 1,
     pageSize: Math.min(48, Math.max(1, limit)),
   });
-  return (Array.isArray(result.items) ? result.items : []).map((offer: any) => String(offer?.id || "")).filter(Boolean).slice(0, limit);
+  return (Array.isArray(result.items) ? result.items : [])
+    .map((offer: any) => String(offer?.id || ""))
+    .filter(Boolean)
+    .slice(0, limit);
 }
 
-async function saveSubscription(identity: ReturnType<typeof identityFromUpdate>, input: { kind: SubscriptionKind; budgetTo?: number; make?: string; model?: string }) {
+async function saveSubscription(
+  identity: ReturnType<typeof identityFromUpdate>,
+  input: { kind: SubscriptionKind; budgetTo?: number; make?: string; model?: string },
+) {
   if (!identity.telegramUserId || !identity.chatId) throw new Error("telegram_identity_missing");
   const make = cleanText(input.make);
   const model = cleanText(input.model);
@@ -417,6 +442,8 @@ async function saveSubscription(identity: ReturnType<typeof identityFromUpdate>,
   const id = subscriptionId(identity.telegramUserId, input.kind, scope);
   const now = new Date().toISOString();
   const lastOfferIds = await currentOfferIds({ budgetTo: input.budgetTo, make, model });
+  const subscriptions = await readChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, []);
+  const existing = subscriptions.find((item) => item.id === id);
   const record: PublicBotSubscription = {
     id,
     telegramUserId: identity.telegramUserId,
@@ -425,16 +452,16 @@ async function saveSubscription(identity: ReturnType<typeof identityFromUpdate>,
     budgetTo: input.budgetTo || undefined,
     make: make || undefined,
     model: model || undefined,
-    createdAt: now,
+    createdAt: existing?.createdAt || now,
     updatedAt: now,
     active: true,
     lastOfferIds,
   };
-  await mutateDataJson<PublicBotSubscription[]>(SUBSCRIPTIONS_PATH, [], (stored) => {
-    const items = Array.isArray(stored) ? stored : [];
-    const previous = items.find((item) => item.id === id);
-    return [...items.filter((item) => item.id !== id), { ...record, createdAt: previous?.createdAt || record.createdAt }].slice(-MAX_SUBSCRIPTIONS);
-  });
+  if (existing) {
+    await updateChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, id, () => record);
+  } else {
+    await appendChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, record);
+  }
   return record;
 }
 
@@ -444,8 +471,8 @@ function subscriptionLabel(item: PublicBotSubscription) {
 }
 
 async function showSubscriptions(token: string, chatId: string, telegramUserId: string) {
-  const items = await readDataJson<PublicBotSubscription[]>(SUBSCRIPTIONS_PATH, []);
-  const active = (Array.isArray(items) ? items : []).filter((item) => item.telegramUserId === telegramUserId && item.active);
+  const items = await readChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, []);
+  const active = items.filter((item) => item.telegramUserId === telegramUserId && item.active);
   if (!active.length) {
     await telegramCall(token, "sendMessage", {
       chat_id: chatId,
@@ -458,23 +485,32 @@ async function showSubscriptions(token: string, chatId: string, telegramUserId: 
     chat_id: chatId,
     text: `Активные подписки: ${active.length}\n\n${active.map((item, index) => `${index + 1}. ${item.kind === "budget" ? "Бюджет" : "Модель"}: ${subscriptionLabel(item)}`).join("\n")}`,
     reply_markup: {
-      inline_keyboard: active.slice(0, 12).map((item) => [{ text: `Отключить: ${subscriptionLabel(item)}`.slice(0, 60), callback_data: `ac:unsub:${item.id}` }]),
+      inline_keyboard: active.slice(0, 12).map((item) => [{
+        text: `Отключить: ${subscriptionLabel(item)}`.slice(0, 60),
+        callback_data: `ac:unsub:${item.id}`,
+      }]),
     },
   });
 }
 
 async function disableSubscription(userId: string, id: string) {
-  let changed = false;
-  await mutateDataJson<PublicBotSubscription[]>(SUBSCRIPTIONS_PATH, [], (stored) => (Array.isArray(stored) ? stored : []).map((item) => {
-    if (item.id !== id || item.telegramUserId !== userId || !item.active) return item;
-    changed = true;
-    return { ...item, active: false, updatedAt: new Date().toISOString() };
+  const items = await readChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, []);
+  const existing = items.find((item) => item.id === id && item.telegramUserId === userId && item.active);
+  if (!existing) return false;
+  await updateChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, id, (stored) => ({
+    ...stored,
+    active: false,
+    updatedAt: new Date().toISOString(),
   }));
-  return changed;
+  return true;
 }
 
 function parseBudgetText(value: string) {
-  const normalized = value.replace(/[₽р.рублейруб]/gi, "").replace(/[\s_]/g, "").replace(/,/g, ".").trim();
+  const normalized = value
+    .replace(/(?:₽|руб(?:лей)?|р\.?)/gi, "")
+    .replace(/[\s_]/g, "")
+    .replace(/,/g, ".")
+    .trim();
   const number = Number(normalized);
   return Number.isFinite(number) && number >= 300_000 && number <= 50_000_000 ? Math.round(number) : 0;
 }
@@ -482,7 +518,10 @@ function parseBudgetText(value: string) {
 async function answerCallback(token: string, callback: any, text = "") {
   const id = String(callback?.id || "");
   if (!id) return;
-  await telegramBestEffort(token, "answerCallbackQuery", { callback_query_id: id, ...(text ? { text } : {}) });
+  await telegramBestEffort(token, "answerCallbackQuery", {
+    callback_query_id: id,
+    ...(text ? { text } : {}),
+  });
 }
 
 async function handleCallback(update: any, token: string) {
@@ -508,21 +547,27 @@ async function handleCallback(update: any, token: string) {
     await showSubscriptions(token, chatId, identity.telegramUserId);
     return true;
   }
+
   const budgetMatch = data.match(/^ac:budget:(\d+)$/);
   if (budgetMatch) {
     await answerCallback(token, callback, "Подбираю варианты…");
     await sendBudgetResults(token, chatId, Number(budgetMatch[1]) || undefined);
     return true;
   }
+
   const subBudgetMatch = data.match(/^ac:subb:(\d+)$/);
   if (subBudgetMatch) {
     const budgetTo = Number(subBudgetMatch[1]);
     await saveSubscription(identity, { kind: "budget", budgetTo });
     await answerCallback(token, callback, "Подписка включена");
-    await telegramCall(token, "sendMessage", { chat_id: chatId, text: `🔔 Готово. Буду следить за новыми вариантами до ${formatRub(budgetTo)}.` });
+    await telegramCall(token, "sendMessage", {
+      chat_id: chatId,
+      text: `🔔 Готово. Буду следить за новыми вариантами до ${formatRub(budgetTo)}.`,
+    });
     return true;
   }
-  const subModelMatch = data.match(/^ac:subm:([A-Za-z0-9_-]{8,40})$/);
+
+  const subModelMatch = data.match(/^ac:subm:([A-Za-z0-9_-]{8,48})$/);
   if (subModelMatch) {
     const offer = await getOffer(subModelMatch[1]);
     if (!offer) {
@@ -531,9 +576,13 @@ async function handleCallback(update: any, token: string) {
     }
     await saveSubscription(identity, { kind: "model", make: offer.make, model: offer.model });
     await answerCallback(token, callback, "Подписка включена");
-    await telegramCall(token, "sendMessage", { chat_id: chatId, text: `🔔 Готово. Буду следить за новыми ${[offer.make, offer.model].filter(Boolean).join(" ")}.` });
+    await telegramCall(token, "sendMessage", {
+      chat_id: chatId,
+      text: `🔔 Готово. Буду следить за новыми ${[offer.make, offer.model].filter(Boolean).join(" ")}.`,
+    });
     return true;
   }
+
   const unsubMatch = data.match(/^ac:unsub:([a-f0-9]{16})$/i);
   if (unsubMatch) {
     const changed = await disableSubscription(identity.telegramUserId, unsubMatch[1]);
@@ -541,6 +590,7 @@ async function handleCallback(update: any, token: string) {
     await showSubscriptions(token, chatId, identity.telegramUserId);
     return true;
   }
+
   await answerCallback(token, callback);
   return true;
 }
@@ -557,7 +607,17 @@ export async function handlePublicBotUpdate(update: any, token: string) {
   const carsCommand = /^\/cars(?:@[A-Za-z0-9_]+)?$/i.test(text);
   const subscriptionsCommand = /^\/subscriptions(?:@[A-Za-z0-9_]+)?$/i.test(text);
   const siteCommand = /^\/site(?:@[A-Za-z0-9_]+)?$/i.test(text);
-  const publicText = [BUTTON_CARS, BUTTON_CALCULATE, BUTTON_CATALOG, BUTTON_REQUEST, BUTTON_SUBSCRIPTIONS, BUTTON_FAVORITES, BUTTON_OSAGO, BUTTON_CREDIT, BUTTON_SITE].includes(text);
+  const publicText = [
+    BUTTON_CARS,
+    BUTTON_CALCULATE,
+    BUTTON_CATALOG,
+    BUTTON_REQUEST,
+    BUTTON_SUBSCRIPTIONS,
+    BUTTON_FAVORITES,
+    BUTTON_OSAGO,
+    BUTTON_CREDIT,
+    BUTTON_SITE,
+  ].includes(text);
   const typedBudget = parseBudgetText(text);
   if (!genericStart && !menuCommand && !carsCommand && !subscriptionsCommand && !siteCommand && !publicText && !typedBudget) return false;
 
@@ -588,7 +648,7 @@ export async function handlePublicBotUpdate(update: any, token: string) {
 
   const urlByText: Record<string, string> = {
     [BUTTON_CATALOG]: `${SITE_URL}/cars?utm_source=telegram&utm_medium=bot`,
-    [BUTTON_REQUEST]: `${SITE_URL}/?lead=1&utm_source=telegram&utm_medium=bot&utm_campaign=public_bot`,
+    [BUTTON_REQUEST]: requestSiteUrl(),
     [BUTTON_FAVORITES]: `${SITE_URL}/favorites?utm_source=telegram&utm_medium=bot`,
     [BUTTON_OSAGO]: `${SITE_URL}/osago?utm_source=telegram&utm_medium=bot`,
     [BUTTON_CREDIT]: `${SITE_URL}/autocredit?utm_source=telegram&utm_medium=bot`,
@@ -601,7 +661,12 @@ export async function handlePublicBotUpdate(update: any, token: string) {
       text: text === BUTTON_OSAGO || text === BUTTON_CREDIT
         ? "Этот раздел открывается на сайте АвтоЦены. Партнёрские предложения внутри Telegram не размещаются."
         : "Открыть на АвтоЦене:",
-      reply_markup: { inline_keyboard: [[{ text: text.replace(/^[^\p{L}\p{N}]+/u, "") || "Открыть сайт", url }]] },
+      reply_markup: {
+        inline_keyboard: [[{
+          text: text.replace(/^[^\p{L}\p{N}]+/u, "") || "Открыть сайт",
+          url,
+        }]],
+      },
     });
     return true;
   }
@@ -610,14 +675,15 @@ export async function handlePublicBotUpdate(update: any, token: string) {
 }
 
 export async function runPublicBotSubscriptionNotifications(token: string) {
-  const stored = await readDataJson<PublicBotSubscription[]>(SUBSCRIPTIONS_PATH, []);
-  const active = (Array.isArray(stored) ? stored : []).filter((item) => item.active).slice(0, 250);
-  const updates = new Map<string, Partial<PublicBotSubscription>>();
+  const all = await readChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, []);
+  const active = all.filter((item) => item.active).slice(0, 250);
+  const updates: Array<{ id: string; patch: Partial<PublicBotSubscription> }> = [];
   let delivered = 0;
   let checked = 0;
 
   for (const subscription of active) {
     checked += 1;
+    const checkedAt = new Date().toISOString();
     try {
       const result = await searchOffers({
         budgetTo: subscription.budgetTo || undefined,
@@ -632,24 +698,42 @@ export async function runPublicBotSubscriptionNotifications(token: string) {
       const currentIds = offers.map((offer: any) => String(offer?.id || "")).filter(Boolean).slice(0, 20);
       const previous = new Set(subscription.lastOfferIds || []);
       const newOffers = offers.filter((offer: any) => offer?.id && !previous.has(String(offer.id))).slice(0, 3);
+
       if ((subscription.lastOfferIds || []).length) {
         for (const offer of newOffers) {
           await sendOfferCard(token, subscription.chatId, offer, "🔔 Новый вариант");
           delivered += 1;
         }
       }
-      updates.set(subscription.id, { lastOfferIds: currentIds, lastCheckedAt: new Date().toISOString(), lastError: "", updatedAt: new Date().toISOString() });
+
+      updates.push({
+        id: subscription.id,
+        patch: {
+          lastOfferIds: currentIds,
+          lastCheckedAt: checkedAt,
+          lastError: "",
+          updatedAt: checkedAt,
+        },
+      });
     } catch (error) {
       const message = error instanceof Error ? error.message : "subscription_check_failed";
       const disabled = error instanceof TelegramCallError && error.status === 403;
-      updates.set(subscription.id, { lastCheckedAt: new Date().toISOString(), lastError: message.slice(0, 240), updatedAt: new Date().toISOString(), ...(disabled ? { active: false } : {}) });
+      updates.push({
+        id: subscription.id,
+        patch: {
+          lastCheckedAt: checkedAt,
+          lastError: message.slice(0, 240),
+          updatedAt: checkedAt,
+          ...(disabled ? { active: false } : {}),
+        },
+      });
     }
   }
 
-  if (updates.size) {
-    await mutateDataJson<PublicBotSubscription[]>(SUBSCRIPTIONS_PATH, [], (items) => (Array.isArray(items) ? items : []).map((item) => {
-      const update = updates.get(item.id);
-      return update ? { ...item, ...update } : item;
+  for (const update of updates) {
+    await updateChunkedDataJson<PublicBotSubscription>(SUBSCRIPTIONS_PATH, update.id, (stored) => ({
+      ...stored,
+      ...update.patch,
     }));
   }
 
