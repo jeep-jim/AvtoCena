@@ -572,8 +572,8 @@ export function presentCatalogOffer(offer: any) {
   return {
     ...offer,
     title: catalogOfferTitle(offer),
-    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : compactListingText(offer?.make) || "Марка уточняется",
-    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)) || "Модель уточняется",
+    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : compactListingText(offer?.make),
+    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)),
     trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),
