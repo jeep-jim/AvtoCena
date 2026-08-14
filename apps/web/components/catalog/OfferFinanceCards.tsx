@@ -8,27 +8,27 @@ function FinanceCards() {
   return (
     <section className="ac-offer-finance-cards grid gap-4 xl:grid-cols-2" aria-label="Финансовые сервисы">
       <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
-        <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
+        <div className="relative z-10 h-full min-h-[158px] pr-[150px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#35c932]" aria-hidden="true">
               <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg>
             </div>
             <h3 className="min-w-0 pt-0.5 text-[23px] font-black leading-[1.08] text-[var(--ac-text)]">Кредитный<br />калькулятор</h3>
           </div>
-          <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите<br className="hidden xl:block" /> удобные условия покупки автомобиля.</p>
+          <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>
         </div>
         <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
       </article>
 
       <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
-        <div className="relative z-10 h-full min-h-[158px] pr-[215px]">
+        <div className="relative z-10 h-full min-h-[158px] pr-[150px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#ffd21f]" aria-hidden="true">
               <svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M24 5 38 10v10.5c0 9-5.7 16.4-14 20.5-8.3-4.1-14-11.5-14-20.5V10l14-5Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/><path d="m17 23 5 5 10-10" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
             <h3 className="min-w-0 pt-0.5 text-[23px] font-black leading-[1.08] text-[var(--ac-text)]">Страховой полис<br />ОСАГО</h3>
           </div>
-          <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса<br className="hidden xl:block" /> для выбранного автомобиля.</p>
+          <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
         </div>
         <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
       </article>
