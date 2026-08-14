@@ -112,9 +112,6 @@ async function buildSelectedOfferSnapshot(offerId: string) {
     bodyType: offer.bodyType || "",
     totalRub,
     sourcePrice: offer.sourcePrice || null,
-    sourceUrl: offer.sourceUrl || "",
-    sourceSite: offer.sourceSite || "",
-    sourceListingId: offer.sourceListingId || "",
     calculationSnapshot,
     breakdown: calculationSnapshot && Array.isArray((calculationSnapshot as any).breakdown)
       ? (calculationSnapshot as any).breakdown
