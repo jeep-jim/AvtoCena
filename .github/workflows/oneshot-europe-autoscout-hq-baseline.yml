@@ -42,3 +42,5 @@ jobs:
           path: europe-autoscout-hq-baseline.json
           if-no-files-found: error
           retention-days: 3
+
+# Fresh read-only verification after the completed HQ refresh.
