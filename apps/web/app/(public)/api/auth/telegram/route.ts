@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { AUTH_COOKIE_NAME, AUTH_MAX_AGE_SECONDS, createSessionCookie } from "@/lib/auth";
 import { findCrmUserByTelegram, updateCrmUser } from "@/lib/crm-users";
+import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
 
 const MAX_AUTH_AGE_SECONDS = 10 * 60;
 
@@ -18,7 +19,8 @@ function equalHex(left: string, right: string) {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const nextPath = safeNext(url.searchParams.get("next"));
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || "";
+  const telegramConfig = await getTelegramRuntimeConfig();
+  const botToken = telegramConfig?.token || "";
   if (!botToken) return NextResponse.redirect(new URL("/login?error=telegram_not_configured", url.origin));
 
   const hash = url.searchParams.get("hash") || "";

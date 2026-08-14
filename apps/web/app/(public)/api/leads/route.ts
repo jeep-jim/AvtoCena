@@ -12,6 +12,7 @@ import { deliverCpaEvent } from "@/lib/cpa-gateway";
 import { getBusinessSettingsSnapshot } from "@/lib/business-settings";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
+import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -155,7 +156,8 @@ async function telegramSend(token: string, chatId: string, text: string) {
 }
 
 async function notifyCrmStaffAboutLead(lead: any) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || "";
+  const telegramConfig = await getTelegramRuntimeConfig();
+  const botToken = telegramConfig?.token || "";
   if (!botToken) return;
   try {
     const users = await readCrmUsers();
@@ -288,7 +290,10 @@ export async function POST(request: Request) {
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
   const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
   const existingClient = operationId ? existingClients.find((client) => client.operationId === operationId || client.id === clientId || client.id === duplicate?.clientId) : null;
-  const botUsername = telegramContact(process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "");
+  const telegramRuntime = !crmUser && contactPreference === "message" && messenger === "telegram"
+    ? await getTelegramRuntimeConfig()
+    : null;
+  const botUsername = telegramContact(telegramRuntime?.username || "");
   const telegramBind = !crmUser && contactPreference === "message" && messenger === "telegram" && botUsername
     ? telegramBindFor(botUsername)
     : null;

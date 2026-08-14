@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { getTelegramPublicConfig } from "@/lib/telegram-config";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,8 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/crm";
   const errorCode = firstParam(params.error) || "";
-  const botUsername = process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "";
+  const telegramConfig = await getTelegramPublicConfig();
+  const botUsername = telegramConfig.configured ? telegramConfig.username : "";
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen text-white">
