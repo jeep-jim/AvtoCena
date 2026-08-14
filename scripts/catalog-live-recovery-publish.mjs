@@ -2,8 +2,8 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
-const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
-const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { credibleCatalogImages, isCatalogOfferBusinessLiquid, catalogMinYearForMarket, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
@@ -15,6 +15,7 @@ const output = String(process.env.RECOVERY_PUBLISH_REPORT || `catalog-live-recov
 const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000, Number(process.env.RECOVERY_PUBLISH_MAX || CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000)));
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
+const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
 const minYear = catalogMinYearForMarket(market);
@@ -138,6 +139,7 @@ function quality(a, b) {
     || String(a.id || "").localeCompare(String(b.id || ""));
 }
 function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
+function hashRows(rows) { return crypto.createHash("sha256").update(JSON.stringify(rows)).digest("hex"); }
 
 function applyPerModelYearCap(rows, rejected) {
   const result = [];
@@ -169,7 +171,8 @@ for (const raw of sourceRows) {
   const year = Number(offer.year || 0);
   if (!isCatalogYearAllowed(year, market)) { reject("year"); continue; }
   if (!isCatalogOfferBusinessLiquid(offer)) { reject("business_liquidity"); continue; }
-  if (!offer.make || !offer.model || !offer.images.length) { reject("visible_core"); continue; }
+  if (!offer.make || !offer.model) { reject("visible_core"); continue; }
+  if (offer.images.length < minImagesPerOffer) { reject("images"); continue; }
   if (!exactSourceBound(offer)) { reject("source_binding"); continue; }
   if (!publishableCalculation(offer)) { reject("calculation"); continue; }
   incoming.set(offer.id, offer);
@@ -184,7 +187,7 @@ for (const raw of previousMarket) {
   const offer = normalizeVisible(raw);
   const year = Number(offer?.year || 0);
   if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
-  if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || !offer.images.length) continue;
+  if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
   if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
   candidates.set(offer.id, offer);
 }
@@ -194,28 +197,46 @@ const cumulative = [...candidates.values()].sort(quality);
 const diversity = applyPerModelYearCap(cumulative, rejected);
 const marketRows = diversity.rows;
 if (!marketRows.length) {
-  const report = { version: 2, mode: "live_market_exact_calculated_cumulative_publish", market, published: false, generationId: null, count: 0, retainedCount: 0, incomingCount: incoming.size, rejected, publicationError: `recovery_empty_market:${market}` };
+  const report = { version: 3, mode: "live_market_exact_calculated_cumulative_publish", market, published: false, generationId: null, count: 0, retainedCount: 0, incomingCount: incoming.size, rejected, publicationError: `recovery_empty_market:${market}` };
   await fs.writeFile(output, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
   throw new Error(`recovery_empty_market:${market}`);
 }
+if (marketRows.some((offer) => offer.images.length < minImagesPerOffer)) {
+  throw new Error(`recovery_target_image_gate_failed:${market}:${minImagesPerOffer}`);
+}
 
-const combined = [...marketRows];
+// Recovery replaces only the requested market inside the complete internal state.
+// Untouched markets are never reconstructed from filtered public projections.
+const currentInternal = await readAllOffersForMaintenance();
+if (!Array.isArray(currentInternal)) throw new Error("recovery_maintenance_state_invalid");
+const preservedInternal = currentInternal.filter((offer) => String(offer?.market || "") !== market);
+const invalidInternal = preservedInternal.filter((offer) => {
+  const other = String(offer?.market || "");
+  return !offer?.id || !PUBLIC_CATALOG_MARKETS.includes(other) || !isCatalogYearAllowed(offer?.year, other) || !isCatalogMarketSourceAllowed(offer);
+});
+if (invalidInternal.length) throw new Error(`recovery_preserved_internal_gate_failed:${invalidInternal.length}`);
+
 const preservedByMarket = {};
+const preservedInternalByMarket = {};
+const preservedPublicHashByMarket = {};
 for (const other of PUBLIC_CATALOG_MARKETS) {
   if (other === market) continue;
+  const internalRows = preservedInternal.filter((offer) => String(offer?.market || "") === other);
+  preservedInternalByMarket[other] = internalRows.length;
   let rows = [];
-  try { rows = await readMarketOffers(other); } catch { rows = []; }
-  const preserved = rows
-    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
-    .map(normalizeVisible)
-    .filter((offer) => offer.id && offer.make && offer.model && isCatalogYearAllowed(offer.year, other) && offer.images.length > 0 && withinRetention(offer) && isCatalogOfferBusinessLiquid(offer))
-    .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
-  preservedByMarket[other] = preserved.length;
-  combined.push(...preserved);
+  try { rows = await readMarketOffers(other); } catch (error) { throw new Error(`recovery_preserved_public_read_failed:${other}:${String(error?.message || error)}`); }
+  const invalidPublic = rows.filter((offer) => !offer?.id || !offer?.make || !offer?.model || !isCatalogYearAllowed(offer?.year, other) || !isCatalogMarketSourceAllowed(offer) || !Array.isArray(offer?.images) || offer.images.length === 0);
+  if (invalidPublic.length) throw new Error(`recovery_preserved_public_gate_failed:${other}:${invalidPublic.length}`);
+  if (rows.length > 0 && internalRows.length === 0) throw new Error(`recovery_preserved_internal_missing:${other}`);
+  preservedByMarket[other] = rows.length;
+  preservedPublicHashByMarket[other] = hashRows(rows);
 }
+
+const combined = [...preservedInternal, ...marketRows];
 const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
+if (unique.size !== combined.length) throw new Error(`recovery_duplicate_id_in_full_state:${combined.length - unique.size}`);
 
 let manifest = null;
 let publicationError = "";
@@ -227,11 +248,20 @@ try {
 }
 
 const postPersistByMarket = {};
+const postPersistPublicHashByMarket = {};
+const preservationFailures = [];
 let postPersistError = "";
 if (manifest) {
   try {
     for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
-      postPersistByMarket[currentMarket] = (await readMarketOffers(currentMarket)).length;
+      const rows = await readMarketOffers(currentMarket);
+      postPersistByMarket[currentMarket] = rows.length;
+      if (currentMarket !== market) {
+        const afterHash = hashRows(rows);
+        postPersistPublicHashByMarket[currentMarket] = afterHash;
+        if (rows.length !== Number(preservedByMarket[currentMarket] || 0)) preservationFailures.push(`${currentMarket}:count:${rows.length}:${preservedByMarket[currentMarket] || 0}`);
+        if (afterHash !== preservedPublicHashByMarket[currentMarket]) preservationFailures.push(`${currentMarket}:hash:${afterHash}:${preservedPublicHashByMarket[currentMarket]}`);
+      }
     }
   } catch (error) {
     postPersistError = String(error?.message || error);
@@ -240,7 +270,7 @@ if (manifest) {
 
 const currentIncomingIds = new Set(incoming.keys());
 const report = {
-  version: 2,
+  version: 3,
   mode: "live_market_exact_calculated_cumulative_publish",
   market,
   publishedAt: new Date().toISOString(),
@@ -260,6 +290,11 @@ const report = {
   retentionMs,
   preferredMaxRub,
   maxOffersPerModelYear,
+  minImagesPerOffer,
+  preservedInternalByMarket,
+  preservedPublicHashByMarket,
+  postPersistPublicHashByMarket,
+  preservationFailures,
   distinctModels: new Set(marketRows.map((offer) => catalogExactModelKey(offer, market)).filter(Boolean)).size,
   distinctModelYears: diversity.modelYearCounts.size,
   distinctMakes: new Set(marketRows.map(makeKey)).size,
@@ -275,7 +310,7 @@ const report = {
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
-if (!manifest || publicationError) process.exitCode = 1;
+if (!manifest || publicationError || postPersistError || preservationFailures.length) process.exitCode = 1;
 } finally {
   await releasePublishLock();
 }
