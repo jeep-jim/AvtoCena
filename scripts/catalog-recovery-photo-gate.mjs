@@ -11,10 +11,16 @@ if (!market) throw new Error("recovery_photo_gate_market_required");
 if (!input && !dryRunReport) throw new Error("recovery_photo_gate_input_required");
 if (input && dryRunReport) throw new Error("recovery_photo_gate_choose_one_input");
 
+function imageUrl(value) {
+  if (typeof value === "string") return value.trim();
+  if (value && typeof value === "object") return String(value.url || "").trim();
+  return "";
+}
+
 function imageCount(offer) {
   const seen = new Set();
   for (const value of Array.isArray(offer?.images) ? offer.images : []) {
-    const url = String(value || "").trim();
+    const url = imageUrl(value);
     if (/^https?:\/\//i.test(url)) seen.add(url);
   }
   return seen.size;
