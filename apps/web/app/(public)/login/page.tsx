@@ -3,6 +3,8 @@ import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Вход — АвтоЦена",
   robots: { index: false, follow: false },
@@ -16,6 +18,7 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const params = (await searchParams) ?? {};
   const nextPath = firstParam(params.next) || "/crm";
   const errorCode = firstParam(params.error) || "";
+  const botUsername = process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "";
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen text-white">
@@ -27,7 +30,7 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
             <span aria-hidden="true" className="text-base leading-none">🚗</span>
             <span>АвтоДилерам</span>
           </Link>
-          <LoginForm nextPath={nextPath} errorCode={errorCode} />
+          <LoginForm nextPath={nextPath} errorCode={errorCode} botUsername={botUsername} />
         </div>
       </section>
 

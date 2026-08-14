@@ -14,6 +14,7 @@ type LeadActionsProps = {
   currentStatus?: string;
   currentManagerId?: string | null;
   managers: ManagerOption[];
+  canAssignManagers?: boolean;
 };
 
 export function LeadActions({
@@ -21,6 +22,7 @@ export function LeadActions({
   currentStatus = "new",
   currentManagerId,
   managers,
+  canAssignManagers = false,
 }: LeadActionsProps) {
   const router = useRouter();
   const [status, setStatus] = useState(currentStatus);
@@ -30,6 +32,7 @@ export function LeadActions({
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
   const requiresReason = status === "rejected" || status === "duplicate";
+  const currentManagerName = managers.find((manager) => manager.id === assignedManagerId)?.displayName || "Вы";
 
   async function save() {
     setSaved(false);
@@ -48,16 +51,15 @@ export function LeadActions({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           status,
-          assignedManagerId,
+          assignedManagerId: canAssignManagers ? assignedManagerId : undefined,
           note,
         }),
       });
 
       if (!response.ok) {
         const result = await response.json().catch(() => ({}));
-        if (result?.error === "reason_required") {
-          throw new Error("reason_required");
-        }
+        if (result?.error === "reason_required") throw new Error("reason_required");
+        if (result?.error === "lead_forbidden" || result?.error === "manager_assignment_forbidden") throw new Error("forbidden");
         throw new Error("lead_update_error");
       }
 
@@ -68,7 +70,9 @@ export function LeadActions({
       setError(
         saveError instanceof Error && saveError.message === "reason_required"
           ? "Для отказа или дубля причина обязательна."
-          : "Не получилось сохранить изменения."
+          : saveError instanceof Error && saveError.message === "forbidden"
+            ? "У вас нет прав на изменение этой заявки или её менеджера."
+            : "Не получилось сохранить изменения."
       );
     } finally {
       setLoading(false);
@@ -90,19 +94,25 @@ export function LeadActions({
         ))}
       </select>
 
-      <select
-        value={assignedManagerId}
-        onChange={(event) => setAssignedManagerId(event.target.value)}
-        className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
-        aria-label="Назначенный менеджер"
-      >
-        <option value="">Не назначен</option>
-        {managers.map((manager) => (
-          <option key={manager.id} value={manager.id}>
-            {manager.displayName}
-          </option>
-        ))}
-      </select>
+      {canAssignManagers ? (
+        <select
+          value={assignedManagerId}
+          onChange={(event) => setAssignedManagerId(event.target.value)}
+          className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold"
+          aria-label="Назначенный менеджер"
+        >
+          <option value="">Не назначен</option>
+          {managers.map((manager) => (
+            <option key={manager.id} value={manager.id}>
+              {manager.displayName}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <div className="soft-input min-w-0 rounded-xl px-3 py-2.5 text-xs font-bold text-white/70">
+          Менеджер: {currentManagerName}
+        </div>
+      )}
 
       <input
         value={note}

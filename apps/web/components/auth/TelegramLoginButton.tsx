@@ -2,18 +2,18 @@
 
 import { useEffect, useRef } from "react";
 
-export function TelegramLoginButton({ nextPath }: { nextPath: string }) {
+export function TelegramLoginButton({ nextPath, botUsername }: { nextPath: string; botUsername?: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const botUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "";
+  const normalizedBotUsername = String(botUsername || "").trim().replace(/^@+/, "");
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || !botUsername) return;
+    if (!root || !normalizedBotUsername) return;
     root.innerHTML = "";
     const script = document.createElement("script");
     script.async = true;
     script.src = "https://telegram.org/js/telegram-widget.js?22";
-    script.setAttribute("data-telegram-login", botUsername.replace(/^@+/, ""));
+    script.setAttribute("data-telegram-login", normalizedBotUsername);
     script.setAttribute("data-size", "large");
     script.setAttribute("data-radius", "12");
     script.setAttribute("data-userpic", "true");
@@ -23,12 +23,12 @@ export function TelegramLoginButton({ nextPath }: { nextPath: string }) {
     script.setAttribute("data-auth-url", callback.toString());
     root.appendChild(script);
     return () => { root.innerHTML = ""; };
-  }, [botUsername, nextPath]);
+  }, [normalizedBotUsername, nextPath]);
 
-  if (!botUsername) {
+  if (!normalizedBotUsername) {
     return (
       <div className="ac-login-telegram-placeholder rounded-2xl bg-amber-400/10 px-4 py-3 text-sm font-bold leading-6 text-amber-100">
-        Telegram-вход подготовлен. Для активации нужно указать имя бота в настройках окружения.
+        Telegram-вход готов технически. Для активации укажите TELEGRAM_BOT_USERNAME и TELEGRAM_BOT_TOKEN в окружении production.
       </div>
     );
   }
