@@ -32,7 +32,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Guarded atomic all-market publication
-        run: node scripts/oneshot-europe-model-quota-publish-20260814.mjs
+        run: npx tsx scripts/oneshot-europe-model-quota-publish-20260814.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
