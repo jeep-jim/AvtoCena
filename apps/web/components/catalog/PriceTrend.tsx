@@ -511,7 +511,11 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   useEffect(() => {
     const node = panelRoot.current;
     if (!node || !panel) return;
-    if (!lightTheme && direction === "up") {
+    if (highlightElectrified) {
+      const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)";
+      node.style.setProperty("background", background, "important");
+      node.style.setProperty("background-color", background, "important");
+    } else if (!lightTheme && direction === "up") {
       node.style.setProperty("background", "#3d3644", "important");
       node.style.setProperty("background-color", "#3d3644", "important");
     } else {
@@ -522,7 +526,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
       node.style.removeProperty("background");
       node.style.removeProperty("background-color");
     };
-  }, [panel, lightTheme, direction]);
+  }, [panel, lightTheme, direction, highlightElectrified]);
   const stateClass = direction === "down" ? "is-down" : direction === "up" ? "is-up" : "is-flat";
   const priceStateClass = direction === "down" ? "ac-price--down" : direction === "up" ? "ac-price--up" : "ac-price--flat";
   const hasPrice = Boolean(pricedOffer.totalRub);
