@@ -8,6 +8,20 @@ const nextConfig = {
     outputFileTracingRoot: path.join(__dirname, "../..")
   },
 
+  async headers() {
+    return [
+      {
+        source: "/login",
+        headers: [
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin-allow-popups"
+          }
+        ]
+      }
+    ];
+  },
+
   eslint: {
     ignoreDuringBuilds: true
   },
