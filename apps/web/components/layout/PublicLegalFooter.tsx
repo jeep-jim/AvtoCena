@@ -116,7 +116,7 @@ export function PublicLegalFooter() {
                 style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}
               >
                 <span className="absolute left-4 text-[#111111]"><InsuranceIcon /></span>
-                <span className="text-center">Рассчитать страховой полис ОСАГО</span>
+                <span className="text-center">Рассчитать полис ОСАГО</span>
               </button>
             </div>
           </div>
