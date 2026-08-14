@@ -28,7 +28,7 @@ const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandL
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/page.tsx", import.meta.url), "utf8");
 const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
-const sitemap = fs.readFileSync(new URL("../apps/web/app/sitemap.ts", import.meta.url), "utf8");
+const sitemap = fs.readFileSync(new URL("../apps/web/app/sitemap.xml/route.ts", import.meta.url), "utf8");
 const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const publicPriority = fs.readFileSync(new URL("../apps/web/lib/catalog/public-priority.ts", import.meta.url), "utf8");
 const galleryWrapper = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -270,7 +270,9 @@ test("brand rail opens existing brand and model SEO pages", () => {
   assert.match(brandPage, /BrandModelDirectory/);
   assert.match(brandPage, /readBrandModelDirectory/);
   assert.match(modelPage, /generateMetadata/);
-  assert.match(sitemap, /\/cars\/brand\/\$\{model\.brandSlug\}\/model\/\$\{model\.modelSlug\}/);
+  assert.match(sitemap, /CATALOG_BRANDS\.map/);
+  assert.match(sitemap, /\/cars\/brand\/\$\{brand\.slug\}/);
+  assert.match(sitemap, /content-type.*application\/xml/si);
 });
 
 test("generic open sources only attach images bound to the listing card", () => {
