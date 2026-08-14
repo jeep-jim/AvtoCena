@@ -1,4 +1,5 @@
 import { canonicalSourceModelIdentity } from "./open-source-normalizer";
+import { hasCredibleCatalogIdentity, isCatalogYearAllowed } from "./offer-quality";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
@@ -95,8 +96,8 @@ function parseCursor(cursor?: string | null): CursorState {
 }
 function searchShards(): SearchShard[] {
   const currentYear = new Date().getUTCFullYear();
-  const recentYears = Array.from({ length: 7 }, (_, index) => currentYear - index);
-  const extendedYears = Array.from({ length: 9 }, (_, index) => currentYear - 7 - index).filter((year) => year >= currentYear - 15);
+  const allowedYears = Array.from({ length: Math.max(1, currentYear - 2020 + 1) }, (_, index) => currentYear - index)
+    .filter((year) => year >= 2020);
   const rotate = (values: number[]) => {
     if (!values.length) return values;
     const day = Math.floor(Date.now() / 86_400_000);
@@ -104,10 +105,8 @@ function searchShards(): SearchShard[] {
     return [...values.slice(offset), ...values.slice(0, offset)];
   };
   return [
-    ...rotate(recentYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `recent_liquid_${year}` })),
-    ...rotate(recentYears).map((year) => ({ yearFrom: year, yearTo: year, label: `recent_all_${year}` })),
-    ...rotate(extendedYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `extended_liquid_${year}` })),
-    ...rotate(extendedYears).map((year) => ({ yearFrom: year, yearTo: year, label: `extended_all_${year}` })),
+    ...rotate(allowedYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `recent_liquid_${year}` })),
+    ...rotate(allowedYears).map((year) => ({ yearFrom: year, yearTo: year, label: `recent_all_${year}` })),
   ];
 }
 function classicSearchUrl(shard: SearchShard, page: number) {
@@ -153,6 +152,7 @@ function rowFromItem(item: Record<string, any>): MobileDeExactRow | null {
   const location = clean(item?.contactInfo?.location || [item?.attr?.z, item?.attr?.loc].filter(Boolean).join(" "));
   const vc = clean(item?.vc || item?.segment);
   if (!id || !make || !model || !sourceUrl.includes("mobile.de/") || !price || !currency || !registration.year) return null;
+  if (!isCatalogYearAllowed(registration.year, "europe") || !hasCredibleCatalogIdentity({ make, model })) return null;
   if (vc && !/^car$/i.test(vc)) return null;
   return {
     id, sourceUrl, title, make, model, trim: trim || undefined, year: registration.year, productionDate: registration.productionDate,
@@ -222,6 +222,7 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as MobileDeExactRow;
     if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.sourceUrl) return null;
+    if (!isCatalogYearAllowed(row.year, "europe") || !hasCredibleCatalogIdentity(row)) return null;
     const now = new Date().toISOString();
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "europe", offerType: "fixed", status: "active",
@@ -254,6 +255,12 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     const detailMake = clean(ad?.makeKey) || offer.make;
     const detailTitle = clean(ad?.title) || offer.sourceTitle;
     const detailModel = canonicalSourceModelIdentity(detailTitle, detailMake, clean(ad?.modelKey) || offer.model);
+    if (!hasCredibleCatalogIdentity({ make: detailMake, model: detailModel })) {
+      throw new Error(`mobile_de_vip_placeholder_identity:${offer.sourceOfferId}`);
+    }
+    if (registration.year && !isCatalogYearAllowed(registration.year, "europe")) {
+      throw new Error(`mobile_de_vip_year_out_of_policy:${offer.sourceOfferId}:${registration.year}`);
+    }
     offer.make = detailMake;
     offer.model = detailModel;
     offer.sourceTitle = detailTitle;
