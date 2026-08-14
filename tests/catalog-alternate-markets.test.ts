@@ -13,6 +13,7 @@ import {
   parsePublicFallbackPage,
   publicFallbackSources,
 } from "../apps/web/lib/catalog/public-fallback-sources";
+import { parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";
 
 const fixture = `
 <!doctype html>
@@ -96,6 +97,40 @@ const dubicarsHtmlFixture = `
   </body>
 </html>`;
 
+const currentDubicarsDetailFixture = `
+<!doctype html>
+<html>
+  <body>
+    <h1>Voyah Free EREV 2025 GCC 1.5L Turbo Plug-in Hybrid Low Mileage</h1>
+    <section>People also viewed</section>
+    <section>
+      <div>Model year 2025</div>
+      <div>Make Voyah Model Free Trim EREV Transmission Automatic Fuel Type Hybrid Drive type AWD Vehicle type SUV</div>
+      <div>AED 129,000</div>
+      <div>Kilometers 14,000 Km</div>
+      <div>Engine capacity 1.5 L</div>
+    </section>
+    <img src="https://www.dubicars.com/images/111111/w_1300x760/oasis-cars/a1111111-1111-4111-8111-111111111111.jpeg" />
+    <img src="https://www.dubicars.com/images/222222/w_1300x760/oasis-cars/b2222222-2222-4222-8222-222222222222.jpeg" />
+    <img src="https://www.dubicars.com/images/333333/w_1300x760/oasis-cars/c3333333-3333-4333-8333-333333333333.jpeg" />
+    <img src="https://www.dubicars.com/images/444444/w_1300x760/oasis-cars/d4444444-4444-4444-8444-444444444444.jpeg" />
+    <img src="https://www.dubicars.com/images/555555/w_1300x760/oasis-cars/e5555555-5555-4555-8555-555555555555.jpeg" />
+  </body>
+</html>`;
+
+const currentDubicarsUrlYearFixture = `
+<!doctype html>
+<html><body>
+<h1>Toyota Highlander Limited 2.5L AWD</h1>
+<section>People also viewed</section>
+<div>AED 148,000</div>
+<img src="https://www.dubicars.com/images/111111/w_1300x760/dealer-one/a1111111-1111-4111-8111-111111111111.jpeg" />
+<img src="https://www.dubicars.com/images/222222/w_1300x760/dealer-one/b2222222-2222-4222-8222-222222222222.jpeg" />
+<img src="https://www.dubicars.com/images/333333/w_1300x760/dealer-one/c3333333-3333-4333-8333-333333333333.jpeg" />
+<img src="https://www.dubicars.com/images/444444/w_1300x760/dealer-one/d4444444-4444-4444-8444-444444444444.jpeg" />
+<img src="https://www.dubicars.com/images/555555/w_1300x760/dealer-one/e5555555-5555-4555-8555-555555555555.jpeg" />
+</body></html>`;
+
 const autoscoutHtmlFixture = `
 <!doctype html>
 <html>
@@ -160,6 +195,32 @@ test("server-rendered DubiCars listing cards are parsed", () => {
   assert.equal(rows[0].currency, "USD");
   assert.equal(rows[0].mileageKm, 22_000);
   assert.equal(rows[0].images.length, 1);
+});
+
+test("current DubiCars parser keeps exact specs even when recommendation copy appears before the spec block", () => {
+  const row = parseDubicarsCurrentListing(currentDubicarsDetailFixture, "https://www.dubicars.com/2025-voyah-free-erev-2025-gcc-15l-turbo-990199.html");
+  assert.ok(row);
+  assert.equal(row?.make, "Voyah");
+  assert.match(row?.model || "", /^Free/);
+  assert.equal(row?.year, 2025);
+  assert.equal(row?.price, 129_000);
+  assert.equal(row?.currency, "AED");
+  assert.equal(row?.images.length, 5);
+});
+
+test("current DubiCars parser uses the exact listing URL year when the page year label is absent", () => {
+  const row = parseDubicarsCurrentListing(currentDubicarsUrlYearFixture, "https://www.dubicars.com/2023-toyota-highlander-limited-25l-awd-855685.html");
+  assert.ok(row);
+  assert.equal(row?.make, "Toyota");
+  assert.match(row?.model || "", /^Highlander/);
+  assert.equal(row?.year, 2023);
+  assert.equal(row?.price, 148_000);
+  assert.equal(row?.images.length, 5);
+});
+
+test("current DubiCars parser fails closed when page and source URL years conflict", () => {
+  const row = parseDubicarsCurrentListing(currentDubicarsDetailFixture, "https://www.dubicars.com/2024-voyah-free-erev-990199.html");
+  assert.equal(row, null);
 });
 
 test("server-rendered AutoScout listing cards are parsed", () => {

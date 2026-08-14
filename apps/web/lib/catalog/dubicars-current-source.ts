@@ -1,3 +1,4 @@
+import { CATALOG_BRANDS } from "./brands";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { isCatalogYearAllowed } from "./offer-quality";
@@ -32,12 +33,11 @@ const HEADERS = {
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
 };
 
-const MAKES = [
-  "Mercedes-Benz", "Land Rover", "Rolls-Royce", "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Mazda", "Mitsubishi",
-  "Subaru", "Suzuki", "Hyundai", "Genesis", "Kia", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet",
-  "Cadillac", "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "MINI", "BYD", "Geely", "Changan", "Chery",
-  "GAC", "Haval", "Tesla", "Jetour", "RAM", "GMC", "Bentley", "Lamborghini", "Ferrari", "Maserati", "McLaren",
-].sort((left, right) => right.length - left.length);
+const MAKE_LABELS = [...new Map(CATALOG_BRANDS.flatMap((brand) => [
+  brand.name,
+  brand.name.replace(/-/g, " "),
+].map((label) => [label.toLocaleLowerCase("en-US"), { label, make: brand.name }]))).values()]
+  .sort((left, right) => right.label.length - left.label.length);
 
 const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|related|similar|people-also-viewed|dealer|tracking|pixel|calendar|calender|kilometers|share|email|heart|settings|feature_groups|social|homepage|mobile-mockup/i;
 
@@ -82,9 +82,10 @@ async function request(url: string, referer = "https://www.dubicars.com/uae/used
 
 function makeModel(raw: string) {
   const title = clean(raw).replace(/^\s*(?:19|20)\d{2}\s+/, "").replace(/^used\s+/i, "").trim();
-  const lower = title.toLowerCase();
-  const make = MAKES.find((item) => lower === item.toLowerCase() || lower.startsWith(`${item.toLowerCase()} `)) || "";
-  const model = make ? title.slice(make.length).replace(/^\s*[-–—|]\s*/, "").split(/\s+/).slice(0, 8).join(" ").trim() : "";
+  const lower = title.toLocaleLowerCase("en-US");
+  const candidate = MAKE_LABELS.find((item) => lower === item.label.toLocaleLowerCase("en-US") || lower.startsWith(`${item.label.toLocaleLowerCase("en-US")} `));
+  const make = candidate?.make || "";
+  const model = candidate ? title.slice(candidate.label.length).replace(/^\s*[-–—|]\s*/, "").split(/\s+/).slice(0, 8).join(" ").trim() : "";
   return { make, model };
 }
 
@@ -181,49 +182,59 @@ function images(markup: string, url: string) {
   return best && best.length >= 2 ? best : valid;
 }
 
+function yearFromUrl(url: string) {
+  try {
+    return Number(new URL(url).pathname.match(/^\/((?:19|20)\d{2})-/)?.[1] || 0);
+  } catch {
+    return 0;
+  }
+}
+
 export function parseDubicarsCurrentListing(markup: string, url: string): Row | null {
   const fullPlain = clean(markup);
-  const plain = fullPlain.split(/\b(?:Similar cars|People also viewed|Related links)\b/i)[0];
   const rawTitle = clean(
     markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]
     || markup.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i)?.[1],
   );
   const title = rawTitle.replace(/\s+(?:19|20)\d{2}\s+for sale.*$/i, "").trim();
   const parsedName = makeModel(title);
-  const year = Number(plain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
+  const pageYear = Number(fullPlain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
+  const urlYear = yearFromUrl(url);
+  if (pageYear && urlYear && pageYear !== urlYear) return null;
+  const year = pageYear || urlYear;
   if (!isCatalogYearAllowed(year, "uae")) return null;
 
   const stops = ["Transmission", "Export status", "Interior color", "Steering side", "Horsepower", "Updated on", "Make", "Model", "Trim", "Color", "Engine capacity", "Cylinders", "Drive type", "Vehicle type", "Number of doors", "Seating capacity", "Wheel size", "Fuel Type", "Service history", "Location", "Specs"];
-  const exactMakeRaw = labelValue(plain, ["Make"], stops);
-  const exactModelRaw = labelValue(plain, ["Model"], stops);
-  const exactTrim = labelValue(plain, ["Trim"], stops);
+  const exactMakeRaw = labelValue(fullPlain, ["Make"], stops);
+  const exactModelRaw = labelValue(fullPlain, ["Model"], stops);
+  const exactTrim = labelValue(fullPlain, ["Trim"], stops);
   const exactIdentity = exactMakeRaw && exactModelRaw ? makeModel(`${exactMakeRaw} ${exactModelRaw}`) : { make: "", model: "" };
   const make = exactIdentity.make || parsedName.make;
   const model = exactIdentity.model || clean(exactModelRaw) || parsedName.model;
   if (!make || !model) return null;
 
-  const parsedPrice = price(plain);
+  const parsedPrice = price(fullPlain);
   const mileageKm = integer(
-    plain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]
-    || plain.match(/([0-9][0-9, ]+)\s*Km\b/i)?.[1],
+    fullPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]
+    || fullPlain.match(/([0-9][0-9, ]+)\s*Km\b/i)?.[1],
   );
   const liters = decimal(
-    plain.match(/Engine capacity\s*[:：]?\s*([0-9]+(?:\.[0-9]+)?)\s*L\b/i)?.[1]
-    || plain.match(/\b([0-9]+(?:\.[0-9]+)?)L\b/i)?.[1],
+    fullPlain.match(/Engine capacity\s*[:：]?\s*([0-9]+(?:\.[0-9]+)?)\s*L\b/i)?.[1]
+    || fullPlain.match(/\b([0-9]+(?:\.[0-9]+)?)L\b/i)?.[1],
   );
-  const engineCc = liters ? Math.round(liters * 1_000) : integer(plain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
+  const engineCc = liters ? Math.round(liters * 1_000) : integer(fullPlain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
   const parsedPowerHp = integer(
-    plain.match(/Horsepower\s*[:：]?\s*([0-9]{2,4})\s*(?:HP|PS|BHP)?\b/i)?.[1]
-    || plain.match(/\b([0-9]{2,4})\s*(?:HP|PS|BHP)\b/i)?.[1]
+    fullPlain.match(/Horsepower\s*[:：]?\s*([0-9]{2,4})\s*(?:HP|PS|BHP)?\b/i)?.[1]
+    || fullPlain.match(/\b([0-9]{2,4})\s*(?:HP|PS|BHP)\b/i)?.[1]
     || title.match(/\b([0-9]{2,4})\s*HP\b/i)?.[1],
   );
   const powerHp = parsedPowerHp && parsedPowerHp <= 1_500 ? parsedPowerHp : undefined;
 
-  const fuelRaw = labelValue(plain, ["Fuel Type", "Fuel"], stops) || plain.match(/\bFuel\s*:\s*([A-Za-z -]{3,24})/i)?.[1] || "";
-  const transmissionRaw = labelValue(plain, ["Transmission"], stops);
-  const driveRaw = labelValue(plain, ["Drive type", "Drive Train"], stops);
-  const bodyRaw = labelValue(plain, ["Vehicle type", "Body Style"], stops);
-  const color = labelValue(plain, ["Color", "Exterior color"], stops);
+  const fuelRaw = labelValue(fullPlain, ["Fuel Type", "Fuel"], stops) || fullPlain.match(/\bFuel\s*:\s*([A-Za-z -]{3,24})/i)?.[1] || "";
+  const transmissionRaw = labelValue(fullPlain, ["Transmission"], stops);
+  const driveRaw = labelValue(fullPlain, ["Drive type", "Drive Train"], stops);
+  const bodyRaw = labelValue(fullPlain, ["Vehicle type", "Body Style"], stops);
+  const color = labelValue(fullPlain, ["Color", "Exterior color"], stops);
   const photos = images(markup, url);
   if (!photos.length) return null;
 
