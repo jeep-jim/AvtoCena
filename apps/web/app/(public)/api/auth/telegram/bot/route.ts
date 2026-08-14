@@ -83,9 +83,24 @@ async function telegramRequest<T>(token: string, method: string, body?: Record<s
   return payload.result as T;
 }
 
+function deliveryWebhookUrl(webhookSecret: string) {
+  return `${CANONICAL_WEBHOOK_URL}?key=${encodeURIComponent(webhookSecret)}`;
+}
+
+function publicWebhookUrl(value: unknown) {
+  const raw = String(value || "");
+  if (!raw) return "";
+  try {
+    const url = new URL(raw);
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return raw.split("?")[0];
+  }
+}
+
 function safeWebhookStatus(info?: WebhookInfo | null) {
   return {
-    url: String(info?.url || ""),
+    url: publicWebhookUrl(info?.url),
     pending: Number(info?.pending_update_count || 0),
     lastError: String(info?.last_error_message || "").slice(0, 240),
     lastErrorAt: info?.last_error_date ? new Date(info.last_error_date * 1000).toISOString() : "",
@@ -94,6 +109,7 @@ function safeWebhookStatus(info?: WebhookInfo | null) {
 }
 
 async function verifyAndRepairWebhook(token: string, webhookSecret: string) {
+  const expectedUrl = deliveryWebhookUrl(webhookSecret);
   let before: WebhookInfo | null = null;
   let repairError = "";
   try {
@@ -104,14 +120,14 @@ async function verifyAndRepairWebhook(token: string, webhookSecret: string) {
 
   const allowed = Array.isArray(before?.allowed_updates) ? before!.allowed_updates! : [];
   const needsRepair = !before
-    || String(before.url || "") !== CANONICAL_WEBHOOK_URL
+    || String(before.url || "") !== expectedUrl
     || !allowed.includes("message")
     || !allowed.includes("callback_query");
 
   if (needsRepair) {
     try {
       await telegramRequest<boolean>(token, "setWebhook", {
-        url: CANONICAL_WEBHOOK_URL,
+        url: expectedUrl,
         secret_token: webhookSecret,
         allowed_updates: ["message", "callback_query", "my_chat_member", "channel_post", "edited_channel_post"],
         drop_pending_updates: false,
@@ -130,7 +146,7 @@ async function verifyAndRepairWebhook(token: string, webhookSecret: string) {
   }
 
   return {
-    ok: String(after?.url || "") === CANONICAL_WEBHOOK_URL,
+    ok: String(after?.url || "") === expectedUrl,
     repaired: needsRepair && !repairError,
     error: repairError,
     status: safeWebhookStatus(after),
