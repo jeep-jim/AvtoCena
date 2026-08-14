@@ -1,5 +1,12 @@
+import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { appendChunkedDataJson, getJsonStorage, mutateDataJson } from "@/lib/data";
+import {
+  appendChunkedDataJson,
+  getJsonStorage,
+  mutateDataJson,
+  readChunkedDataJson,
+  updateChunkedDataJson,
+} from "@/lib/data";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -37,6 +44,133 @@ async function telegramCall<T>(token: string, method: string, body: Record<strin
   const payload = await response.json().catch(() => null) as { ok?: boolean; result?: T; description?: string } | null;
   if (!response.ok || !payload?.ok) throw new Error(payload?.description || `telegram_${method}_failed`);
   return payload.result as T;
+}
+
+function formatRub(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0
+    ? `${new Intl.NumberFormat("ru-RU").format(Math.round(number))} ₽`
+    : "";
+}
+
+function compactBreakdown(offer: any) {
+  const rows = Array.isArray(offer?.breakdown)
+    ? offer.breakdown
+    : Array.isArray(offer?.calculationSnapshot?.breakdown)
+      ? offer.calculationSnapshot.breakdown
+      : [];
+  return rows.slice(0, 8).map((row: any) => {
+    const label = String(row?.label || row?.title || row?.name || "").trim();
+    const amount = Number(row?.amountRub ?? row?.valueRub ?? row?.rub ?? row?.amount ?? row?.value);
+    if (!label || !Number.isFinite(amount) || amount <= 0) return "";
+    return `• ${label}: ${formatRub(amount)}`;
+  }).filter(Boolean);
+}
+
+function customerOfferMessage(offer: any, index: number, total: number) {
+  const title = String(offer?.title || [offer?.make, offer?.model, offer?.year].filter(Boolean).join(" ") || "Автомобиль").trim();
+  const meta = [offer?.marketLabel, offer?.year].filter(Boolean).join(" · ");
+  const price = formatRub(offer?.totalRub);
+  const breakdown = compactBreakdown(offer);
+  return [
+    total > 1 ? `🚘 Вариант ${index + 1} из ${total}` : "🚘 Ваш автомобиль",
+    title,
+    meta,
+    price ? `Под ключ: ${price}` : "Точный расчёт проверит менеджер",
+    ...breakdown,
+    offer?.href ? String(offer.href) : "",
+  ].filter(Boolean).join("\n");
+}
+
+async function handlePrivateLeadStart(update: any, token: string) {
+  const message = update?.message;
+  if (!message?.chat?.id || message.chat.type !== "private") return false;
+  const text = String(message.text || "").trim();
+  const match = text.match(/^\/start(?:@[A-Za-z0-9_]+)?\s+lead_([A-Za-z0-9_-]{16,64})$/);
+  if (!match?.[1]) return false;
+
+  const rawToken = match[1];
+  const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+  const leads = await readChunkedDataJson<any>("leads/leads.json", []);
+  const now = new Date();
+  const lead = leads.find((candidate) => candidate.telegramBindTokenHash === tokenHash
+    && candidate.telegramBindExpiresAt
+    && Date.parse(candidate.telegramBindExpiresAt) > now.getTime());
+  const chatId = String(message.chat.id);
+
+  if (!lead) {
+    await telegramCall(token, "sendMessage", {
+      chat_id: chatId,
+      text: "Эта ссылка на заявку уже использована или устарела. Вернитесь в АвтоЦену и отправьте заявку ещё раз — новая ссылка будет создана автоматически.",
+    });
+    return true;
+  }
+
+  const boundAt = now.toISOString();
+  const telegramUsername = cleanUsername(message.from?.username);
+  const telegramUserId = String(message.from?.id || message.chat.id);
+  const telegramDisplayName = [message.from?.first_name, message.from?.last_name].filter(Boolean).join(" ").trim();
+
+  const updatedLead = await updateChunkedDataJson<any>("leads/leads.json", lead.id, (stored) => ({
+    ...stored,
+    updatedAt: boundAt,
+    telegramChatId: chatId,
+    telegramUserId,
+    telegramUsername: telegramUsername || stored.telegramUsername || stored.telegram || "",
+    telegramDisplayName: telegramDisplayName || stored.telegramDisplayName || "",
+    telegramBoundAt: boundAt,
+    telegramDeliveryStatus: "connected",
+    telegramBindTokenHash: "",
+    telegramBindExpiresAt: "",
+  })) || lead;
+
+  if (lead.clientId) {
+    await updateChunkedDataJson<any>("clients/clients.json", lead.clientId, (client) => ({
+      ...client,
+      updatedAt: boundAt,
+      telegramChatId: chatId,
+      telegramUserId,
+      telegramUsername: telegramUsername || client.telegramUsername || client.telegram || "",
+      telegramDisplayName: telegramDisplayName || client.telegramDisplayName || "",
+      telegramBoundAt: boundAt,
+    }));
+  }
+
+  await appendChunkedDataJson("activity/feed.json", {
+    id: `telegram_bound_${lead.id}_${Date.now()}`,
+    createdAt: boundAt,
+    type: "lead_telegram_connected",
+    title: "Клиент подключил Telegram",
+    leadId: lead.id,
+    clientId: lead.clientId || "",
+    text: telegramUsername ? `@${telegramUsername}` : telegramDisplayName || telegramUserId,
+  });
+
+  await telegramCall(token, "sendMessage", {
+    chat_id: chatId,
+    text: "✅ Telegram подключён к вашей заявке в АвтоЦене. Ниже отправляю сохранённые варианты и расчёты. Менеджер сможет продолжить общение здесь.",
+    disable_web_page_preview: true,
+  });
+
+  const offers = Array.isArray(updatedLead.selectedOffers) ? updatedLead.selectedOffers.slice(0, 5) : [];
+  if (offers.length) {
+    for (const [index, offer] of offers.entries()) {
+      await telegramCall(token, "sendMessage", {
+        chat_id: chatId,
+        text: customerOfferMessage(offer, index, offers.length),
+        disable_web_page_preview: true,
+      });
+    }
+  } else {
+    await telegramCall(token, "sendMessage", {
+      chat_id: chatId,
+      text: updatedLead.car
+        ? `Запрос: ${updatedLead.car}\n\nМенеджер проверит варианты и отправит расчёт сюда.`
+        : "Менеджер проверит вашу заявку и отправит расчёт сюда.",
+    });
+  }
+
+  return true;
 }
 
 function mimeFromPath(filePath: string) {
@@ -86,6 +220,16 @@ export async function POST(request: Request) {
 
   const update = await request.json().catch(() => null) as any;
   if (!update) return NextResponse.json({ ok: true, ignored: "invalid_update" });
+
+  try {
+    if (await handlePrivateLeadStart(update, token)) {
+      return NextResponse.json({ ok: true, handled: "lead_telegram_connected" });
+    }
+  } catch (error) {
+    console.error("telegram_lead_start_failed", error);
+    return NextResponse.json({ ok: true, warning: "lead_start_processing_failed" });
+  }
+
   const chat = findChat(update);
   if (!chat?.id) return NextResponse.json({ ok: true, ignored: "no_chat" });
 
