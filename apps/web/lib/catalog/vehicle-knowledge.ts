@@ -127,8 +127,10 @@ function scoreModel(model: VehicleKnowledgeModel, offer: Partial<VehicleOffer>) 
   if (model.active === false || !validName(model.make) || !validName(model.model, 1)) return null;
   const rawModel = vehicleKnowledgeToken(offer.model);
   const compactModel = vehicleKnowledgeCompact(offer.model);
-  const combined = vehicleKnowledgeToken([offer.make, offer.model, offer.generation, offer.trim].filter(Boolean).join(" "));
-  const combinedCompact = vehicleKnowledgeCompact(combined);
+  // Model identity must come from model/generation/trim evidence only. Including
+  // the make here lets a knowledge model such as "Benz" match the "Benz" token
+  // in make="Mercedes-Benz" and overwrite exact source models like Vito/Sprinter.
+  const combined = vehicleKnowledgeToken([offer.model, offer.generation, offer.trim].filter(Boolean).join(" "));
   if (!makeMatches(model, offer.make, combined)) return null;
 
   let best = 0;
