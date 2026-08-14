@@ -59,7 +59,10 @@ function canonicalMercedesModel(titleInput: string, makeInput: string, fallbackM
     || title.match(/^([ABCEGSV])[-\s]?(?:class|klasse|klasa|classe|clase)\b/i);
   if (match?.[1]) return MERCEDES_CLASS_BY_LETTER[match[1].toUpperCase()] || "";
 
-  match = title.match(/^(GLA|GLB|GLC|GLE|GLS|CLA|CLS|EQA|EQB|EQC|EQE|EQS|EQV|VITO|SPRINTER|CITAN|SLC|SLK|SL)\b/i);
+  // Some exact mobile.de titles prefix the model family with the German AWD descriptor
+  // "ALLRAD" (for example: "Mercedes-Benz ALLRAD SPRINTER 314 4X4 ...").
+  // Accept only this observed source-bound descriptor; do not search arbitrarily inside titles.
+  match = title.match(/^(?:ALLRAD\s+)?(GLA|GLB|GLC|GLE|GLS|CLA|CLS|EQA|EQB|EQC|EQE|EQS|EQV|VITO|SPRINTER|CITAN|SLC|SLK|SL)\b/i);
   if (match?.[1]) return MERCEDES_CODE_MODELS[match[1].toUpperCase()] || "";
 
   match = title.match(/^(AMG\s+(?:GT|SL))\b/i);
