@@ -3,14 +3,13 @@ import { NextResponse } from "next/server";
 import { AUTH_COOKIE_NAME, AUTH_MAX_AGE_SECONDS, createSessionCookie, isCrmRole } from "@/lib/auth";
 import { readCrmUsers } from "@/lib/crm-users";
 import { mutateDataJson, readDataJson } from "@/lib/data";
-import { getTelegramRuntimeConfig, type TelegramRuntimeConfig } from "@/lib/telegram-config";
+import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const CHALLENGES_PATH = "auth/telegram-login-challenges.json";
 const CHALLENGE_COOKIE = "avtocena_tg_bot_login";
-const LOGIN_WEBHOOK_URL = "https://avtocena.com/api/telegram/webhook-v2";
 const MAX_AGE_SECONDS = 5 * 60;
 const MAX_STORED_CHALLENGES = 200;
 
@@ -60,45 +59,11 @@ function clearChallengeCookie(response: NextResponse) {
   });
 }
 
-async function ensureLoginWebhook(config: TelegramRuntimeConfig) {
-  const apiBase = `https://api.telegram.org/bot${config.token}`;
-  const infoResponse = await fetch(`${apiBase}/getWebhookInfo`, {
-    method: "POST",
-    cache: "no-store",
-    signal: AbortSignal.timeout(8_000),
-  });
-  const info = await infoResponse.json().catch(() => null) as { ok?: boolean; result?: { url?: string } } | null;
-  if (!infoResponse.ok || !info?.ok) throw new Error("telegram_getWebhookInfo_failed");
-  if (String(info.result?.url || "") === LOGIN_WEBHOOK_URL) return;
-
-  const setResponse = await fetch(`${apiBase}/setWebhook`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      url: LOGIN_WEBHOOK_URL,
-      secret_token: config.webhookSecret,
-    }),
-    cache: "no-store",
-    signal: AbortSignal.timeout(8_000),
-  });
-  const setResult = await setResponse.json().catch(() => null) as { ok?: boolean; description?: string } | null;
-  if (!setResponse.ok || !setResult?.ok) {
-    throw new Error(String(setResult?.description || "telegram_setWebhook_failed").slice(0, 200));
-  }
-}
-
 export async function POST(request: Request) {
   const config = await getTelegramRuntimeConfig();
   const username = String(config?.username || "").replace(/^@+/, "").trim();
   if (!config?.token || !username) {
     return NextResponse.json({ ok: false, error: "telegram_not_configured" }, { status: 503 });
-  }
-
-  try {
-    await ensureLoginWebhook(config);
-  } catch (error) {
-    console.error("telegram_login_webhook_switch_failed", error instanceof Error ? error.message : "unknown");
-    return NextResponse.json({ ok: false, error: "telegram_webhook_switch_failed" }, { status: 502 });
   }
 
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;

@@ -8,6 +8,7 @@ import {
   updateChunkedDataJson,
 } from "@/lib/data";
 import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
+import { handlePrivateEmployeeLoginStart } from "@/lib/telegram-employee-login";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -222,6 +223,15 @@ export async function POST(request: Request) {
 
   const update = await request.json().catch(() => null) as any;
   if (!update) return NextResponse.json({ ok: true, ignored: "invalid_update" });
+
+  try {
+    if (await handlePrivateEmployeeLoginStart(update, token)) {
+      return NextResponse.json({ ok: true, handled: "employee_login_confirmed" });
+    }
+  } catch (error) {
+    console.error("telegram_employee_login_failed", error);
+    return NextResponse.json({ ok: true, warning: "employee_login_processing_failed" });
+  }
 
   try {
     if (await handlePrivateLeadStart(update, token)) {
