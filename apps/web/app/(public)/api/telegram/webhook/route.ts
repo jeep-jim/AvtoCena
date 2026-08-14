@@ -9,6 +9,7 @@ import {
 } from "@/lib/data";
 import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
 import { handlePrivateEmployeeLoginStart } from "@/lib/telegram-employee-login";
+import { handlePublicBotUpdate } from "@/lib/telegram-public-bot";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -246,6 +247,15 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("telegram_lead_start_failed", error);
     return NextResponse.json({ ok: true, warning: "lead_start_processing_failed" });
+  }
+
+  try {
+    if (await handlePublicBotUpdate(update, token)) {
+      return NextResponse.json({ ok: true, handled: "public_bot" });
+    }
+  } catch (error) {
+    console.error("telegram_public_bot_failed", error);
+    return NextResponse.json({ ok: true, warning: "public_bot_processing_failed" });
   }
 
   const chat = findChat(update);
