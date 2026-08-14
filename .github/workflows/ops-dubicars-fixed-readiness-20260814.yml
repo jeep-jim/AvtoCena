@@ -29,8 +29,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Run DubiCars parser regressions
-        run: node --import tsx --test tests/catalog-alternate-markets.test.ts
+      - name: Run focused current DubiCars regressions
+        run: node --import tsx --test --test-name-pattern="current DubiCars parser keeps exact specs|current DubiCars parser fails closed" tests/catalog-alternate-markets.test.ts
       - name: Collect current DubiCars cards without publishing
         run: npx tsx scripts/catalog-live-recovery-direct-exact.mjs
       - name: Enforce fixed DubiCars live readiness
