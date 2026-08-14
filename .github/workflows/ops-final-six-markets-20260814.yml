@@ -1,0 +1,36 @@
+name: Ops · Final six markets 20260814
+run-name: Final six-market dispatch · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/final-six-markets-20260814
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch Korea China Europe Georgia on current main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-live-daily-working-markets.yml/dispatches" \
+            -f ref=main
+      - name: Dispatch UAE Kyrgyzstan on current main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-live-recovery-uae-kyrgyzstan.yml/dispatches" \
+            -f ref=main
+      - name: Confirm Japan is intentionally untouched
+        run: |
+          echo "Dispatched: Korea, China, Europe, Georgia, UAE, Kyrgyzstan" >> "$GITHUB_STEP_SUMMARY"
+          echo "Japan V6: NOT DISPATCHED; protected live baseline remains 9,759." >> "$GITHUB_STEP_SUMMARY"
