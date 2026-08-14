@@ -1,3 +1,5 @@
+import { CATALOG_BRANDS, canonicalCatalogBrand } from "./brands";
+import { isCatalogYearAllowed } from "./offer-quality";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
@@ -13,14 +15,12 @@ const DETAIL_RE = /\/(?:en\/)?details\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|\/users\/|qrcode|qr-code|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
 const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper|canter|elf|dutro|fuso|hino)\b/i;
 const BADGE_RE = /\b(?:Urgent|DIAMOND|Premium|TOP\s+VIP\s+BOOST|SUPER\s+VIP|VIP|BOOST)\b/gi;
-const KNOWN_MAKES = [
-  "Mercedes-Benz", "Mercedes Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
-  "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
-  "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
-  "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
-  "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
-  "Lada", "VAZ", "UAZ", "GAZ", "Moskvich", "Ravon", "Daewoo", "JAC", "FAW", "Dongfeng", "Exeed", "Omoda", "Jaecoo", "Feifan",
-].sort((left, right) => right.length - left.length);
+const KNOWN_MAKES = [...new Set(CATALOG_BRANDS.flatMap((brand) => [
+  brand.name,
+  brand.name.replace(/-/g, " "),
+  brand.name.replace(/\s*&\s*/g, " and "),
+]).map((value) => value.replace(/\s+/g, " ").trim()).filter(Boolean))]
+  .sort((left, right) => right.length - left.length);
 
 export type MashinaListRow = {
   id: string;
@@ -137,7 +137,7 @@ function deriveMakeModel(value: string) {
     if (index >= 0 && (!best || index < best.index || (index === best.index && candidate.length > best.make.length))) best = { make: candidate, index };
   }
   if (!best) return { make: "", model: "" };
-  const make = best.make === "Mercedes Benz" ? "Mercedes-Benz" : best.make;
+  const make = canonicalCatalogBrand(best.make);
   const after = cleaned.slice(best.index + best.make.length)
     .replace(/^[\s,\-–—|]+/, "")
     .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
@@ -267,7 +267,7 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: MashinaListRow): VehicleOffer | null {
-    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl || !raw.images.length) return null;
+    if (!raw?.id || !raw.make || !raw.model || !isCatalogYearAllowed(raw.year, this.market) || !raw.price || !raw.detailUrl || !raw.images.length) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id,
