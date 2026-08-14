@@ -30,7 +30,7 @@ test("OTOMOTO detail accepts only Product/Vehicle JSON-LD bound to the current -
       url: targetUrl,
       name: "Toyota Corolla 1.8 Hybrid Style",
       offers: { price: "109900" },
-      image: ["https://img.otomoto.pl/target-cover.webp"],
+      image: [targetUrl, "https://www.otomoto.pl/", "https://img.otomoto.pl/target-cover.webp"],
       itemOffered: {
         "@type": "Vehicle",
         name: "Toyota Corolla 1.8 Hybrid Style",

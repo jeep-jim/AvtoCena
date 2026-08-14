@@ -83,6 +83,30 @@ function catalogImageDedupKey(image: CatalogImageLike) {
   return id ? `id:${id}` : "";
 }
 
+function hasImageEvidence(image: CatalogImageLike) {
+  const url = text(image.url || image.objectKey);
+  const mime = text(image.mimeType).toLowerCase();
+  const width = finite(image.width);
+  const height = finite(image.height);
+  const id = text(image.id);
+  const objectKey = text(image.objectKey);
+
+  // Stored binaries were already decoded/validated by the importer.
+  if (id && objectKey) return true;
+  if (/^image\/(?:jpe?g|png|webp|avif|gif)$/i.test(mime)) return true;
+  if (/\.(?:jpe?g|png|webp|avif|gif)(?:[?#]|$)/i.test(url)) return true;
+  if (width >= 420 && height >= 260) return true;
+
+  // Explicit source-image delivery contracts whose URLs intentionally have no
+  // ordinary file extension. Arbitrary website/root/listing URLs are not images.
+  if (/^https?:\/\/[^/]*apollo\.olxcdn\.com\/v1\/files\/[^/]+\/image(?:[;/?#]|$)/i.test(url)) return true;
+  if (/^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\/[^/?#]+\/\d{2,5}x\d{2,5}\.(?:jpe?g|webp|avif|png)(?:[?#]|$)/i.test(url)) return true;
+  if (/^https?:\/\/(?:storage|im)\.mashina\.kg\//i.test(url)) return true;
+  if (/^https?:\/\/(?:car\d+|g)\.autoimg\.cn\//i.test(url)) return true;
+
+  return false;
+}
+
 export function catalogImageScore(image: CatalogImageLike) {
   const url = text(image.url || image.objectKey);
   const mime = text(image.mimeType).toLowerCase();
@@ -126,7 +150,7 @@ export function catalogImageScore(image: CatalogImageLike) {
 }
 
 export function isLikelyVehicleImage(image: CatalogImageLike) {
-  return Boolean(text(image?.url || image?.objectKey)) && catalogImageScore(image) >= 0;
+  return Boolean(text(image?.url || image?.objectKey)) && hasImageEvidence(image) && catalogImageScore(image) >= 0;
 }
 
 export function rankedCatalogImageUrls(offer: any) {
@@ -136,7 +160,7 @@ export function rankedCatalogImageUrls(offer: any) {
       image, index, url: stablePublicImageUrl(image), key: catalogImageDedupKey(image), score: catalogImageScore(image),
       sourceUrl: text(image.url),
     }))
-    .filter((candidate) => candidate.url && candidate.score >= 0);
+    .filter((candidate) => candidate.url && isLikelyVehicleImage(candidate.image));
 
   // AutoHome legacy public rows can contain one 900px image followed by 240px
   // thumbnails even when a full-size exact gallery exists upstream. Do not render

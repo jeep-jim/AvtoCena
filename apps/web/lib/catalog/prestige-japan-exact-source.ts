@@ -333,8 +333,33 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     };
   }
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const urls = Array.isArray((offer.operational?.raw as any)?.images) ? (offer.operational?.raw as any).images : [];
-    return [...new Set(urls.map((value: unknown) => clean(value)).filter((url: string) => EXACT_IMAGE_RE.test(url)))].slice(0, 30).map(image);
+    const raw = offer.operational?.raw && typeof offer.operational.raw === "object" ? offer.operational.raw as Record<string, unknown> : {};
+    const urls = [...new Set((Array.isArray(raw.images) ? raw.images : [])
+      .map((value: unknown) => clean(value))
+      .filter((url: string) => EXACT_IMAGE_RE.test(url)))].slice(0, 30);
+    const concurrency = Math.max(1, Math.min(8, Number(process.env.PRESTIGE_JAPAN_IMAGE_PROBE_CONCURRENCY || 6)));
+    const verified: string[] = [];
+    for (let start = 0; start < urls.length; start += concurrency) {
+      const batch = urls.slice(start, start + concurrency);
+      const kinds = await Promise.all(batch.map((url) => probeExactImage(url)));
+      for (let index = 0; index < batch.length; index++) if (kinds[index] === "vehicle") verified.push(batch[index]);
+    }
+    const galleryVerified = verified.length >= 5;
+    raw.images = verified;
+    raw.galleryContentVerified = galleryVerified;
+    raw.photoIdentityVerified = galleryVerified;
+    raw.listingBoundImages = true;
+    offer.operational = {
+      ...(offer.operational || {}),
+      galleryVerified,
+      photoIdentityVerified: galleryVerified,
+      galleryImageCount: verified.length,
+      gallerySourceImageCount: urls.length,
+      galleryRefreshedAt: new Date().toISOString(),
+      gallerySafetyMode: "prestige_ajes_exact_detail_v2_cover_content_verified",
+      raw,
+    } as any;
+    return galleryVerified ? verified.map(image) : [];
   }
   mapStatus(): OfferStatus { return "active"; }
   async healthCheck(): Promise<SourceRunHealth> {
