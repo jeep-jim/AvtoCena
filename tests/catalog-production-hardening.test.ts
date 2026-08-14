@@ -104,10 +104,12 @@ test("recovery publisher always preserves untouched full maintenance state exact
   assert.match(recoveryPublisher, /recovery_batch_preserved_hash_mismatch/);
 });
 
-test("recovery preservation gates inspect the exact normalized public rows before any generation write", () => {
-  assert.match(storage, /const publicOffers = nextOffers\.filter\(isPublicOffer\);[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
-  assert.match(singleRecoveryPublisher, /beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
-  assert.match(recoveryPublisher, /beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
+test("recovery preservation gates keep untouched public rows exact before any generation write", () => {
+  assert.match(storage, /preservePublicOffersByMarket/);
+  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
+  assert.match(storage, /const publicOffers = nextOffers\.filter\(\(offer\) => !exactPreserveMarkets\.has\(offer\.market\) && isPublicOffer\(offer\)\);[\s\S]*Object\.entries\(preservedPublicOffersByMarket\)[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
+  assert.match(singleRecoveryPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
+  assert.match(recoveryPublisher, /preservePublicOffersByMarket: preserveUntouchedExact \? preservedPublicRowsByMarket : undefined[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
   assert.match(singleRecoveryPublisher, /function stableJsonValue/);
   assert.match(recoveryPublisher, /function stableJsonValue/);
 });

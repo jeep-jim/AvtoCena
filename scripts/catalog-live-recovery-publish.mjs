@@ -232,6 +232,7 @@ if (invalidInternal.length) throw new Error(`recovery_preserved_internal_gate_fa
 const preservedByMarket = {};
 const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
+const preservedPublicRowsByMarket = {};
 for (const other of PUBLIC_CATALOG_MARKETS) {
   if (other === market) continue;
   const internalRows = preservedInternal.filter((offer) => String(offer?.market || "") === other);
@@ -243,6 +244,7 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   if (rows.length > 0 && internalRows.length === 0) throw new Error(`recovery_preserved_internal_missing:${other}`);
   preservedByMarket[other] = rows.length;
   preservedPublicHashByMarket[other] = hashRows(rows);
+  preservedPublicRowsByMarket[other] = rows;
 }
 
 const combined = [...preservedInternal, ...marketRows];
@@ -255,6 +257,7 @@ let publicationError = "";
 try {
   process.env.CATALOG_GROW_ONLY_MARKETS = "";
   manifest = await persistCatalogOffers([...unique.values()], {
+    preservePublicOffersByMarket: preservedPublicRowsByMarket,
     beforePersistValidate(publicOffers) {
       const failures = [];
       for (const other of PUBLIC_CATALOG_MARKETS) {

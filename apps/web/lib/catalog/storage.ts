@@ -643,15 +643,28 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
 }
 export type PersistCatalogOptions = {
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
+  // Recovery writers may preserve already-published markets byte-for-byte while
+  // rebuilding only their target market. Those rows are trusted only because
+  // the caller has already read and hash-validated the current public market.
+  preservePublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
 };
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
   const storage = getJsonStorage();
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
-  const normalized = await Promise.all(nextOffers.map(async (offer) => normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
+  const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};
+  const preservedMarketKeys = Object.keys(preservedPublicOffersByMarket);
+  for (const market of preservedMarketKeys) {
+    if (!MARKETS.includes(market as CatalogMarket)) throw new Error(`catalog_preserved_public_market_unknown:${market}`);
+  }
+  const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);
+  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market)
+    ? offer
+    : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
   if (growOnlyMarkets.size) {
     const current = await readAllOffersForMaintenance();
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
     for (const offer of current) {
+      if (exactPreserveMarkets.has(offer.market)) continue;
       if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
       const incoming = merged.get(offer.id);
       if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
@@ -663,7 +676,20 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   } else {
     nextOffers = normalized;
   }
-  const publicOffers = nextOffers.filter(isPublicOffer);
+  const publicOffers = nextOffers.filter((offer) => !exactPreserveMarkets.has(offer.market) && isPublicOffer(offer));
+  for (const [market, rows] of Object.entries(preservedPublicOffersByMarket)) {
+    for (const offer of rows || []) {
+      if (!offer?.id || String(offer.market || "") !== market) throw new Error(`catalog_preserved_public_row_invalid:${market}:${String(offer?.id || "missing")}`);
+      publicOffers.push(offer);
+    }
+  }
+  const seenPublicIds = new Set<string>();
+  for (const offer of publicOffers) {
+    const id = String(offer?.id || "");
+    if (!id) throw new Error("catalog_public_offer_id_missing");
+    if (seenPublicIds.has(id)) throw new Error(`catalog_public_offer_id_duplicate:${id}`);
+    seenPublicIds.add(id);
+  }
   // A guarded writer can inspect the exact normalized public rows that would be
   // persisted. The validator runs before any generation/internal/index object is
   // written, so a preservation mismatch cannot switch or partially stage a new

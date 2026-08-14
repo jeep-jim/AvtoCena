@@ -189,6 +189,7 @@ for (const marketRows of selectedByMarket.values()) combined.push(...marketRows)
 const preservedByMarket = {};
 const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
+const preservedPublicRowsByMarket = {};
 const maintenanceOffers = preserveUntouchedExact ? await readAllOffersForMaintenance() : [];
 if (preserveUntouchedExact && !Array.isArray(maintenanceOffers)) throw new Error("recovery_batch_maintenance_state_invalid");
 for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -205,6 +206,7 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
     preservedByMarket[other] = rows.length;
     preservedInternalByMarket[other] = internalRows.length;
     preservedPublicHashByMarket[other] = hashRows(rows);
+    preservedPublicRowsByMarket[other] = rows;
     combined.push(...internalRows);
     continue;
   }
@@ -272,6 +274,7 @@ for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set
 if (preserveUntouchedExact && unique.size !== combined.length) throw new Error(`recovery_batch_duplicate_id_in_full_state:${combined.length - unique.size}`);
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers([...unique.values()], {
+  preservePublicOffersByMarket: preserveUntouchedExact ? preservedPublicRowsByMarket : undefined,
   beforePersistValidate(publicOffers) {
     const failures = [];
     for (const other of PUBLIC_CATALOG_MARKETS) {
