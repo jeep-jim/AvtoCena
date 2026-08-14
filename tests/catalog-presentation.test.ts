@@ -119,8 +119,27 @@ test("China presentation keeps the source model suffix instead of collapsing it 
   assert.equal(wuling.title, "Wuling 五菱星驰");
 });
 
-test("generic source identity rejects the observed Europe Andere placeholder", () => {
+test("China keeps the exact Chery QQ Ice Cream model instead of a make-only title", () => {
+  const presented = presentCatalogOffer({
+    id: "china-chery-qq-ice-cream",
+    market: "china",
+    make: "奇瑞QQ",
+    model: "QQ冰淇淋",
+    sourceTitle: "QQ冰淇淋 2026款 甜筒版",
+    year: 2026,
+    operational: { raw: { listing: { seriesId: "5758" } } },
+    images: [],
+  });
+  assert.equal(presented.makeLabel, "Chery");
+  assert.equal(presented.modelLabel, "QQ Ice Cream");
+  assert.equal(presented.title, "Chery QQ Ice Cream");
+});
+
+test("generic source identity rejects observed Europe and collapsed Mercedes placeholders", () => {
   assert.equal(hasCredibleCatalogIdentity({ make: "Andere", model: "Andere" } as any), false);
+  assert.equal(hasCredibleCatalogIdentity({ make: "Aixam", model: "Andere" } as any), false);
+  assert.equal(hasCredibleCatalogIdentity({ make: "Mercedes-Benz", model: "Benz" } as any), false);
+  assert.equal(hasCredibleCatalogIdentity({ make: "Mercedes-Benz", model: "Vito" } as any), true);
 });
 
 test("presentation never invents unknown make or model labels", () => {
