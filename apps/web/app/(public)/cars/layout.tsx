@@ -1,10 +1,8 @@
-import { CatalogFilterAutoApply } from "@/components/catalog/CatalogFilterAutoApply";
 import { OfferContactActions } from "@/components/catalog/OfferContactActions";
 
 export default function CarsLayout({ children }: { children: React.ReactNode }) {
   return <>
     {children}
-    <CatalogFilterAutoApply />
     <OfferContactActions />
     <style>{`
       html:not([data-theme="light"]) .ac-catalog-page.ac-page-copy {
