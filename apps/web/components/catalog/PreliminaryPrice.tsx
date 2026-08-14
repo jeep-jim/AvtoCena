@@ -64,7 +64,9 @@ export function PreliminaryPrice({
     };
   }, [open]);
 
-  const panelBackground = "var(--ac-surface-2)";
+  const panelBackground = highlightElectrified
+    ? (lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)")
+    : "var(--ac-surface-2)";
   const panelText = "var(--ac-text)";
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : "var(--ac-text)";
   const popoverClass = lightTheme

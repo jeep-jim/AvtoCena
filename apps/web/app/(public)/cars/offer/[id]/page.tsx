@@ -268,8 +268,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
           {preliminaryPricing
-            ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
-            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />}
+            ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />
+            : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
           {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
