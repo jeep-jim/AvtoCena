@@ -92,3 +92,28 @@ test("KB ChaChaCha concurrent detail challenge pauses queued requests and keeps 
     else process.env.KBCHACHACHA_DETAIL_PAUSE_MS = originalPause;
   }
 });
+
+test("KB ChaChaCha preserves Korean Malibu model identity", () => {
+  const carSeq = "28512227";
+  const images = Array.from({ length: 5 }, (_, index) => `https://img.kbchachacha.com/IMG/carimg/l/x/${carSeq}_${index + 1}.jpeg`);
+  const product = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: "한국GM 더 뉴 말리부 2.0 터보 LT 스페셜 (21년형)",
+    image: images,
+    description: "21년06월 가솔린",
+    brand: { "@type": "Brand", name: "한국GM" },
+    offers: { "@type": "Offer", url: `https://www.kbchachacha.com/public/car/detail.kbc?carSeq=${carSeq}`, priceCurrency: "KRW", price: "11990000" },
+  };
+  const html = `<script type="application/ld+json">${JSON.stringify(product)}</script><table><tbody>
+    <tr><th>연식</th><td>21년06월(21년형)</td><th>주행거리</th><td>71,414km</td></tr>
+    <tr><th>연료</th><td>가솔린</td><th>변속기</th><td>자동</td></tr>
+    <tr><th>차종</th><td>중형차</td><th>배기량</th><td>1,998cc</td></tr>
+  </tbody></table>`;
+  const detail = parseKbChaChaChaDetail(html, carSeq);
+  assert.equal(detail.make, "Chevrolet");
+  assert.match(detail.model, /Malibu/i);
+  assert.doesNotMatch(detail.model, /Bolt/i);
+  assert.equal(detail.engineCc, 1998);
+  assert.equal(detail.sourcePrice, 11_990_000);
+});
