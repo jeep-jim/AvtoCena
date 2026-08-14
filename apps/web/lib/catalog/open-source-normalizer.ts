@@ -53,6 +53,8 @@ function canonicalMercedesModel(titleInput: string, makeInput: string, fallbackM
   title = title
     .replace(/^mercedes(?:[-\s]+benz)?\s+/i, "")
     .replace(/^benz\s+/i, "")
+    .trim()
+    .replace(/^(?:ALLRAD|4MATIC)\s+/i, "")
     .trim();
 
   let match = title.match(/^(?:class|klasse|klasa|classe|clase)\s*([ABCEGSV])\b/i)
@@ -66,7 +68,7 @@ function canonicalMercedesModel(titleInput: string, makeInput: string, fallbackM
   if (match?.[1]) return match[1].toUpperCase().replace(/\s+/g, " ");
   if (/^Marco\s+Polo\b/i.test(title)) return "Marco Polo";
 
-  match = title.match(/^([ABCEGSV])\s+(?=\d{2,3}\b)/i);
+  match = title.match(/^([ABCEGSV])\s+(?=\d{2,3}(?:\s*[a-z]{1,2})?\b)/i);
   if (match?.[1]) return MERCEDES_CLASS_BY_LETTER[match[1].toUpperCase()] || "";
 
   return "";
@@ -108,9 +110,6 @@ export function normalizeOpenSource<T extends CatalogSourceAdapter>(source: T): 
     const offer = originalNormalize(raw);
     if (!offer) return null;
 
-    // Dedicated auction-statistics adapters already parsed make/model from a sold lot.
-    // Their trim can begin with a grade/trim token, so generic title inference would
-    // incorrectly replace NOTE with e.g. "15G+".
     if (offer.catalogKind === "auction_result") return normalizeVehicleOfferSpecs(offer) as VehicleOffer;
 
     const title = rawTitle(raw as any, offer);
