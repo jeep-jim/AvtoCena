@@ -7,6 +7,7 @@ import {
   readChunkedDataJson,
   updateChunkedDataJson,
 } from "@/lib/data";
+import { getTelegramRuntimeConfig } from "@/lib/telegram-config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -212,8 +213,9 @@ function isAdministratorUpdate(update: any) {
 }
 
 export async function POST(request: Request) {
-  const token = process.env.TELEGRAM_BOT_TOKEN || "";
-  const expectedSecret = process.env.TELEGRAM_WEBHOOK_SECRET || "";
+  const telegramConfig = await getTelegramRuntimeConfig();
+  const token = telegramConfig?.token || "";
+  const expectedSecret = telegramConfig?.webhookSecret || "";
   const actualSecret = request.headers.get("x-telegram-bot-api-secret-token") || "";
   if (expectedSecret && actualSecret !== expectedSecret) return NextResponse.json({ ok: false }, { status: 403 });
   if (!token) return NextResponse.json({ ok: true, ignored: "telegram_not_configured" });
