@@ -77,32 +77,39 @@ async function probe(url: string, make: string, model: string) {
   }
 }
 
-const pageStart = Date.now();
-const page = await mashinaKyrgyzstanListSource.fetchPage("1");
-console.log(JSON.stringify({ event: "page", ms: Date.now() - pageStart, count: page.count, health: page.health }, null, 2));
+async function main() {
+  const pageStart = Date.now();
+  const page = await mashinaKyrgyzstanListSource.fetchPage("1");
+  console.log(JSON.stringify({ event: "page", ms: Date.now() - pageStart, count: page.count, health: page.health }, null, 2));
 
-let sampled = 0;
-for (const raw of page.items as any[]) {
-  if (sampled >= SAMPLE) break;
-  const offer = mashinaKyrgyzstanListSource.normalizeOffer(raw);
-  if (!offer) continue;
-  sampled++;
-  const listImages = Array.isArray(raw.images) ? raw.images.length : 0;
-  const sourceUrl = String(offer.operational.sourceUrl || "");
-  const variants = [];
-  for (const variant of detailVariants(sourceUrl)) variants.push(await probe(variant, String(offer.make || ""), String(offer.model || "")));
-  const adapterStart = Date.now();
-  const gallery = await mashinaKyrgyzstanListSource.fetchImages(offer);
-  const adapterMs = Date.now() - adapterStart;
-  console.log(JSON.stringify({
-    event: "listing",
-    id: offer.sourceOfferId,
-    title: `${offer.make} ${offer.model} ${offer.year}`,
-    sourceUrl,
-    listImages,
-    probes: variants,
-    adapter: { ms: adapterMs, images: gallery.length, verified: Boolean(offer.operational.galleryVerified), sampleImages: gallery.slice(0, 3).map((row: any) => row.url || row.sourceUrl || row) },
-  }, null, 2));
+  let sampled = 0;
+  for (const raw of page.items as any[]) {
+    if (sampled >= SAMPLE) break;
+    const offer = mashinaKyrgyzstanListSource.normalizeOffer(raw);
+    if (!offer) continue;
+    sampled++;
+    const listImages = Array.isArray(raw.images) ? raw.images.length : 0;
+    const sourceUrl = String(offer.operational.sourceUrl || "");
+    const variants = [];
+    for (const variant of detailVariants(sourceUrl)) variants.push(await probe(variant, String(offer.make || ""), String(offer.model || "")));
+    const adapterStart = Date.now();
+    const gallery = await mashinaKyrgyzstanListSource.fetchImages(offer);
+    const adapterMs = Date.now() - adapterStart;
+    console.log(JSON.stringify({
+      event: "listing",
+      id: offer.sourceOfferId,
+      title: `${offer.make} ${offer.model} ${offer.year}`,
+      sourceUrl,
+      listImages,
+      probes: variants,
+      adapter: { ms: adapterMs, images: gallery.length, verified: Boolean(offer.operational.galleryVerified), sampleImages: gallery.slice(0, 3).map((row: any) => row.url || row.sourceUrl || row) },
+    }, null, 2));
+  }
+
+  if (!sampled) throw new Error("mashina_diag_no_normalized_samples");
 }
 
-if (!sampled) throw new Error("mashina_diag_no_normalized_samples");
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
