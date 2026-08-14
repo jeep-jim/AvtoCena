@@ -96,7 +96,14 @@ function strictCheck(offer) {
   const images = Array.isArray(offer?.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30) problems.push("images");
   if (images.some((image) => !exactImage.test(String(image?.url || "")))) problems.push("imageIdentity");
-  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v1") problems.push("galleryFlags");
+  if (
+    op.photoIdentityVerified !== true
+    || op.galleryVerified !== true
+    || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v2_cover_content_verified"
+    || raw.photoIdentityVerified !== true
+    || raw.listingBoundImages !== true
+    || raw.coverContentVerified !== true
+  ) problems.push("galleryFlags");
   if (offer?.powerHp || offer?.powerKw || offer?.power30MinKw || offer?.drive || offer?.fuel) problems.push("unsupportedFields");
   return problems;
 }
@@ -174,10 +181,11 @@ const rows = [...offers.values()];
 const digest = crypto.createHash("sha256").update(rows.map((offer) => `${offer.sourceOfferId}|${offer.sourcePrice}|${offer.operational?.sourceUrl}`).sort().join("\n")).digest("hex");
 const passed = invariantProblems.length === 0 && pages > 0;
 const report = {
-  version: 2,
+  version: 3,
   mode: "prestige_exact_sold_source_only_chunk_no_publish",
   sourceId: "prestige_japan_auctions_open",
   market: "japan",
+  galleryContract: "prestige_ajes_exact_detail_v2_cover_content_verified",
   id,
   startCursor,
   expectedMakeIndex,
