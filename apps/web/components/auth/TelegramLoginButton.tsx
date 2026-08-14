@@ -10,7 +10,7 @@ type TelegramLoginResult = {
 
 type TelegramLoginApi = {
   auth: (
-    options: { client_id: number; scope?: string[]; lang?: string; nonce?: string },
+    options: { client_id: number; request_access?: Array<"phone" | "write">; lang?: string; nonce?: string },
     callback: (result: TelegramLoginResult) => void,
   ) => void;
 };
@@ -86,7 +86,7 @@ export function TelegramLoginButton({ nextPath, botId }: { nextPath: string; bot
       window.Telegram.Login.auth(
         {
           client_id: clientId,
-          scope: ["profile", "write"],
+          request_access: ["write"],
           lang: "ru",
         },
         async (telegramResult) => {
