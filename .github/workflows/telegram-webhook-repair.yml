@@ -1,0 +1,30 @@
+name: Telegram webhook repair
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy to Yandex Cloud
+    types:
+      - completed
+  workflow_dispatch:
+
+concurrency:
+  group: avtocena-telegram-webhook-repair
+  cancel-in-progress: true
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repair Telegram webhook on production
+        env:
+          AUTH_ACCESS_KEY: ${{ secrets.AUTH_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          response="$(curl --retry 6 --retry-delay 8 --retry-all-errors --max-time 30 -fsS \
+            -X POST \
+            -H "x-auth-key: ${AUTH_ACCESS_KEY}" \
+            -H 'content-type: application/json' \
+            'https://avtocena.com/api/internal/telegram/repair')"
+          echo "$response" | jq -e '.ok == true' >/dev/null
+          echo "$response" | jq '{ok, webhook, pending, allowedUpdates, lastError, lastErrorAt}'
