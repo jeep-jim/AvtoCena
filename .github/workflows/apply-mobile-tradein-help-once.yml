@@ -1,0 +1,59 @@
+name: Apply mobile trade-in help once
+
+on:
+  push:
+    branches:
+      - ui/mobile-tradein-help-20260814
+    paths:
+      - .github/workflows/apply-mobile-tradein-help-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/mobile-tradein-help-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Add trade-in inline help
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('apps/web/components/home/HomePageClient.tsx')
+          s = path.read_text()
+          start = s.index('function MobileBudgetPicker(')
+          end = s.index('\nfunction ElectricFilter', start)
+          block = s[start:end]
+          replacements = [
+              ('  const [tradeIn, setTradeIn] = useState(false);\n  const active = options.find((option) => option.value === value) || options[0];', '  const [tradeIn, setTradeIn] = useState(false);\n  const [tradeInfoOpen, setTradeInfoOpen] = useState(false);\n  const active = options.find((option) => option.value === value) || options[0];'),
+              ('  const choose = (next: string) => { onChange(next); setOpen(false); };', '  const choose = (next: string) => { onChange(next); setTradeInfoOpen(false); setOpen(false); };'),
+              ('    {open ? <div className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden" style={{ border: "0", outline: "none", boxShadow: "none" }}>\n      <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">', '    {open ? <div className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden" style={{ border: "0", outline: "none", boxShadow: "none" }}>\n      {tradeInfoOpen ? <button type="button" onClick={() => setTradeInfoOpen(false)} className="flex h-full w-full items-center justify-center px-6 text-center text-[13px] font-bold leading-5 text-[var(--ac-text)]" aria-label="Вернуться к выбору бюджета"><span>Условия по трейд-ин уточняются индивидуально с менеджером дилера в вашем городе.</span></button> : <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">'),
+              ('        <label onClick={(event) => { event.preventDefault(); setTradeIn((current) => !current); }} className="ac-filter-option flex min-h-0 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight">\n          <input type="checkbox" checked={tradeIn} readOnly className="sr-only" />\n          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>\n          <span className="truncate">Трейд-ин</span>\n        </label>', '        <div className="ac-filter-option flex min-h-0 items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-[11px] font-black leading-tight">\n          <button type="button" onClick={() => setTradeIn((current) => !current)} className="flex min-w-0 flex-1 items-center gap-2 text-left" aria-pressed={tradeIn}>\n            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>\n            <span className="truncate">Трейд-ин</span>\n          </button>\n          <button type="button" onClick={() => setTradeInfoOpen(true)} className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-black text-[var(--ac-muted)]" style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)" }} aria-label="Условия трейд-ин">?</button>\n        </div>'),
+              ('      </div>\n    </div> : null}', '      </div>}\n    </div> : null}'),
+          ]
+          for old, new in replacements:
+              if old not in block:
+                  raise SystemExit(f'anchor not found: {old[:80]}')
+              block = block.replace(old, new, 1)
+          path.write_text(s[:start] + block + s[end:])
+          PY
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Commit verified UI-only change
+        shell: bash
+        run: |
+          rm .github/workflows/apply-mobile-tradein-help-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-mobile-tradein-help-once.yml
+          git commit -m "Add inline trade-in help to mobile budget picker"
+          git push origin HEAD:ui/mobile-tradein-help-20260814
