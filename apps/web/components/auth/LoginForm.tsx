@@ -14,15 +14,15 @@ const AUTH_MESSAGES: Record<string, string> = {
   telegram_deprecated: "Старый Telegram Login больше не поддерживается. Используйте новую кнопку входа.",
   telegram_oauth_error: "Telegram отклонил авторизацию до возврата к АвтоЦене. Повторите вход.",
   telegram_state_invalid: "Telegram вернулся в АвтоЦену, но защитная сессия входа не совпала или устарела. Начните вход заново.",
-  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог завершить обмен на токен. Это сетевой или неизвестный ответ token endpoint.",
-  telegram_token_invalid_client: "Telegram ответил invalid_client: Client ID или Client Secret не принят. Перепроверьте Client Secret из BotFather → Login Widget.",
-  telegram_token_invalid_grant: "Telegram ответил invalid_grant: код авторизации или PKCE verifier не принят. Client Secret здесь, скорее всего, ни при чём.",
-  telegram_token_invalid_request: "Telegram ответил invalid_request: параметры token-запроса не приняты. Исправим сам OIDC-запрос АвтоЦены.",
-  telegram_token_unauthorized_client: "Telegram ответил unauthorized_client: текущему Login Widget не разрешён этот OIDC flow.",
-  telegram_id_token_invalid: "Telegram вернул токен, но сервер не смог подтвердить его подпись или параметры. Вход остановлен безопасно.",
+  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог завершить обмен на токен. Используйте новый вход через @avtocena_bot.",
+  telegram_token_invalid_client: "Telegram OIDC не принял Client ID или Client Secret. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
+  telegram_token_invalid_grant: "Telegram OIDC не принял код авторизации или PKCE. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
+  telegram_token_invalid_request: "Telegram OIDC не принял параметры запроса. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
+  telegram_token_unauthorized_client: "Telegram OIDC не разрешил этот flow. Основной вход сотрудников теперь работает через подтверждение в @avtocena_bot.",
+  telegram_id_token_invalid: "Telegram вернул токен, но сервер не смог подтвердить его. Используйте новый вход через @avtocena_bot.",
 };
 
-export function LoginForm({ nextPath, errorCode = "", botId = "" }: { nextPath: string; errorCode?: string; botId?: string }) {
+export function LoginForm({ nextPath, errorCode = "", botUsername = "" }: { nextPath: string; errorCode?: string; botUsername?: string }) {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [accessKey, setAccessKey] = useState("");
@@ -60,7 +60,7 @@ export function LoginForm({ nextPath, errorCode = "", botId = "" }: { nextPath: 
       {error ? <div className="ac-login-error mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
 
       <div className="ac-login-telegram-shell rounded-2xl bg-white/[0.045] p-4">
-        <TelegramLoginButton nextPath={nextPath} botId={botId} />
+        <TelegramLoginButton nextPath={nextPath} botUsername={botUsername} />
       </div>
 
       <details className="ac-login-details mt-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
