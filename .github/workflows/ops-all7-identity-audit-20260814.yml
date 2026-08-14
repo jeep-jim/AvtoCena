@@ -1,0 +1,126 @@
+name: Ops · All-7 identity audit 20260814
+run-name: All-7 source/public identity audit · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/all7-identity-audit-20260814
+
+permissions:
+  contents: read
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Audit source and rendered identity for all seven live markets
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { presentCatalogOffer } = await import('./apps/web/lib/catalog/presentation.ts');
+          const { hasCredibleCatalogIdentity } = await import('./apps/web/lib/catalog/offer-quality.ts');
+
+          const markets = ['japan','korea','china','uae','europe','georgia','kyrgyzstan'];
+          const placeholder = /^(?:unknown|undefined|null|none|n\/?a|other|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
+          const internalSeries = /^(?:series|серия)\s*[-:#]?\s*\d+(?:\s|$)/iu;
+          const cjk = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af]/u;
+          const norm = (v) => String(v || '').normalize('NFKC').toLocaleLowerCase('en-US').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+          const sampleLimit = 80;
+          const report = { version: 1, checkedAt: new Date().toISOString(), markets: {}, totalSuspicious: 0 };
+
+          for (const market of markets) {
+            const rows = await readMarketOffers(market);
+            const reasons = {};
+            const samples = [];
+            const bySource = {};
+            let suspicious = 0;
+            for (const offer of rows) {
+              const presented = presentCatalogOffer(offer);
+              const make = String(offer?.make || '').trim();
+              const model = String(offer?.model || '').trim();
+              const makeLabel = String(presented?.makeLabel || '').trim();
+              const modelLabel = String(presented?.modelLabel || '').trim();
+              const title = String(presented?.title || '').trim();
+              const rowReasons = [];
+              if (!hasCredibleCatalogIdentity(offer)) rowReasons.push('invalid_source_identity');
+              if (make && model && norm(make) === norm(model)) rowReasons.push('model_equals_make');
+              if (placeholder.test(model)) rowReasons.push('source_model_placeholder');
+              if (internalSeries.test(model)) rowReasons.push('source_internal_series');
+              if (!modelLabel || placeholder.test(modelLabel)) rowReasons.push('display_model_missing');
+              if (internalSeries.test(modelLabel)) rowReasons.push('display_internal_series');
+              if (makeLabel && modelLabel && norm(makeLabel) === norm(modelLabel)) rowReasons.push('display_model_equals_make');
+              if (makeLabel && title && norm(makeLabel) === norm(title)) rowReasons.push('display_title_make_only');
+              if (market === 'china' && cjk.test(model) && (!modelLabel || internalSeries.test(modelLabel) || placeholder.test(modelLabel))) rowReasons.push('china_native_model_lost_in_display');
+              if (!rowReasons.length) continue;
+              suspicious += 1;
+              report.totalSuspicious += 1;
+              const sourceId = String(offer?.sourceId || 'unknown');
+              bySource[sourceId] = Number(bySource[sourceId] || 0) + 1;
+              for (const reason of rowReasons) reasons[reason] = Number(reasons[reason] || 0) + 1;
+              if (samples.length < sampleLimit) samples.push({
+                id: offer?.id,
+                sourceId,
+                sourceOfferId: offer?.sourceOfferId,
+                make,
+                model,
+                sourceTitle: offer?.sourceTitle || offer?.operational?.sourceTitle || '',
+                makeLabel,
+                modelLabel,
+                title,
+                reasons: rowReasons,
+                sourceUrl: offer?.operational?.sourceUrl || '',
+              });
+            }
+            report.markets[market] = {
+              count: rows.length,
+              suspicious,
+              clean: rows.length - suspicious,
+              reasons,
+              bySource,
+              samples,
+            };
+          }
+          fs.writeFileSync('all7-identity-audit.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          console.log('\n## All-7 identity audit', { totalSuspicious: report.totalSuspicious });
+          NODE
+      - name: Publish concise audit summary
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('all7-identity-audit.json','utf8'));
+          console.log('| Market | Live | Suspicious | Reasons |');
+          console.log('|---|---:|---:|---|');
+          for (const [market, row] of Object.entries(report.markets)) {
+            const reasons = Object.entries(row.reasons || {}).map(([k,v]) => `${k}:${v}`).join(', ') || '—';
+            console.log(`| ${market} | ${row.count} | ${row.suspicious} | ${reasons} |`);
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: all7-identity-audit
+          path: all7-identity-audit.json
+          if-no-files-found: error
+          retention-days: 5
