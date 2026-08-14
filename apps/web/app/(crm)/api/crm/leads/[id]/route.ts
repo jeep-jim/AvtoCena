@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { getAuthUsers, getCurrentUser, isCrmRole } from "@/lib/auth";
+import { getCurrentUser, isAdminRole, isCrmRole } from "@/lib/auth";
+import { readCrmUsers } from "@/lib/crm-users";
 import {
   appendChunkedDataJson,
   readChunkedDataJson,
@@ -42,7 +43,7 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "wrong_status" }, { status: 400 });
   }
 
-  const managers = getAuthUsers().filter((candidate) => isCrmRole(candidate.role));
+  const managers = (await readCrmUsers()).filter((candidate) => isCrmRole(candidate.role));
   const manager = requestedManagerId
     ? managers.find((candidate) => candidate.id === requestedManagerId)
     : null;
@@ -59,9 +60,22 @@ export async function PATCH(
     return NextResponse.json({ ok: false, error: "lead_not_found" }, { status: 404 });
   }
 
+  const admin = isAdminRole(user.role);
+  if (!admin) {
+    const ownsLead = existingLead.assignedManagerId === user.id || existingLead.createdByManagerId === user.id;
+    if (!ownsLead) {
+      return NextResponse.json({ ok: false, error: "lead_forbidden" }, { status: 403 });
+    }
+    if (requestedManagerId && requestedManagerId !== user.id) {
+      return NextResponse.json({ ok: false, error: "manager_assignment_forbidden" }, { status: 403 });
+    }
+  }
+
   const now = new Date().toISOString();
   const nextStatus = requestedStatus || existingLead.status || "new";
-  const nextManagerId = requestedManagerId || existingLead.assignedManagerId || null;
+  const nextManagerId = admin
+    ? (requestedManagerId || existingLead.assignedManagerId || null)
+    : (existingLead.assignedManagerId || user.id);
   const statusChanged = nextStatus !== (existingLead.status || "new");
   const managerChanged = nextManagerId !== (existingLead.assignedManagerId || null);
   const reasonRequired = statusChanged && (nextStatus === "rejected" || nextStatus === "duplicate");
