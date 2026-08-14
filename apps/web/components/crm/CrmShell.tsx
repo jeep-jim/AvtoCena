@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import { CrmThemeToggle } from "@/components/crm/CrmThemeToggle";
 import { CrmLiveAlerts } from "@/components/crm/CrmLiveAlerts";
 import { defaultManagerAvatar } from "@/lib/default-avatars";
@@ -20,14 +20,15 @@ const roleLabels: Record<string, string> = {
 
 export function CrmShell({ title, subtitle, activeHref, children }: CrmShellProps) {
   const user = getCurrentUser();
-  const links = [
+  const links: Array<readonly [string, string]> = [
     ["/crm", "Обзор"],
     ["/crm/leads", "Заявки"],
     ["/crm/clients", "Клиенты"],
     ["/crm/managers", "Команда и права"],
     ["/crm/settings", "Рынки и расчёт"],
     ["/crm/dealers", "Дилеры"],
-  ] as const;
+  ];
+  if (isAdminRole(user?.role)) links.push(["/crm/telegram", "Telegram"]);
   const avatar = user?.avatarUrl || defaultManagerAvatar(user?.id || user?.telegramUsername);
 
   return (
