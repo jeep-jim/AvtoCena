@@ -135,6 +135,7 @@ function HomeSelect({ value, options, onChange, searchable = false, searchPlaceh
 }
 function MobileBudgetPicker({ value, options, onChange }: { value: string; options: Option[]; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
+  const [tradeIn, setTradeIn] = useState(false);
   const active = options.find((option) => option.value === value) || options[0];
   const choose = (next: string) => { onChange(next); setOpen(false); };
 
@@ -142,15 +143,16 @@ function MobileBudgetPicker({ value, options, onChange }: { value: string; optio
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}>
       <span className="min-w-0 truncate">{value ? active?.label : "Бюджет"}</span><Chevron open={open} />
     </button>
-    {open ? <div className="absolute inset-0 z-[320] overflow-y-auto rounded-[1.8rem] bg-[#1b2635]/90 p-3 backdrop-blur-md lg:hidden">
-      <div className="flex items-center justify-between gap-3">
-        <div><div className="text-xs font-black uppercase tracking-[.14em] text-red-400">Бюджет</div><div className="mt-0.5 text-sm font-black text-white">Выберите стоимость автомобиля</div></div>
-        <button type="button" onClick={() => setOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-xl font-bold text-white" aria-label="Закрыть">×</button>
-      </div>
-      <div className="mt-3 grid grid-cols-2 gap-1.5">
-        {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`min-h-9 rounded-xl border px-3 py-2 text-left text-[11px] font-black leading-tight transition ${value === option.value ? "border-red-400 bg-red-500 text-white" : "border-white/10 bg-white/[0.07] text-white/85"}`}>
-          {option.label}
+    {open ? <div className="ac-filter-dropdown absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden">
+      <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
+        {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-0 items-center rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight ${value === option.value ? "is-active" : ""}`}>
+          <span className="truncate">{option.label}</span>
         </button>)}
+        <label className="ac-filter-option flex min-h-0 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight">
+          <input type="checkbox" checked={tradeIn} onChange={(event) => setTradeIn(event.target.checked)} className="sr-only" />
+          <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>
+          <span className="truncate">Трейд-ин</span>
+        </label>
       </div>
     </div> : null}
   </>;
