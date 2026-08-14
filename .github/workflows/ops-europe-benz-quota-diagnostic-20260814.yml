@@ -34,8 +34,10 @@ jobs:
           cat > /tmp/europe-benz.ts <<'TS'
           import { readMarketOffers } from "${{ github.workspace }}/apps/web/lib/catalog/storage";
           import { catalogModelYearQuotaKey } from "${{ github.workspace }}/apps/web/lib/catalog/inventory-quota";
-          const rows = await readMarketOffers("europe");
-          const target = rows.filter((o:any) => catalogModelYearQuotaKey(o, "europe") === "europe|mercedes-benz|benz|2020");
-          console.log(JSON.stringify({count:target.length, rows:target.map((o:any)=>({id:o.id,sourceId:o.sourceId,sourceOfferId:o.sourceOfferId,title:o.sourceTitle,make:o.make,model:o.model,year:o.year,sourceUrl:o.operational?.sourceUrl}))}, null, 2));
+          (async () => {
+            const rows = await readMarketOffers("europe");
+            const target = rows.filter((o:any) => catalogModelYearQuotaKey(o, "europe") === "europe|mercedes-benz|benz|2020");
+            console.log(JSON.stringify({count:target.length, rows:target.map((o:any)=>({id:o.id,sourceId:o.sourceId,sourceOfferId:o.sourceOfferId,title:o.sourceTitle,make:o.make,model:o.model,year:o.year,sourceUrl:o.operational?.sourceUrl}))}, null, 2));
+          })().catch((error) => { console.error(error); process.exit(1); });
           TS
           npx tsx /tmp/europe-benz.ts
