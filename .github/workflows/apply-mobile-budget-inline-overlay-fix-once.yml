@@ -1,0 +1,53 @@
+name: Apply mobile budget inline overlay fix once
+
+on:
+  push:
+    branches:
+      - ui/mobile-budget-inline-overlay-fix-20260814
+    paths:
+      - .github/workflows/apply-mobile-budget-inline-overlay-fix-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/mobile-budget-inline-overlay-fix-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Apply exact mobile budget fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/home/HomePageClient.tsx')
+          s = p.read_text()
+          s = s.replace('className="ac-filter-dropdown absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden"', 'className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden"', 1)
+          s = s.replace('className="ac-filter-panel relative flex min-h-0 flex-col rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px]"', 'className="ac-filter-panel relative flex min-h-0 flex-col overflow-hidden rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px] lg:overflow-visible"', 1)
+          s = s.replace('onChange={(event) => setTradeIn(event.target.checked)}', 'onChange={(event) => { setTradeIn(event.target.checked); setOpen(false); }}', 1)
+          s = s.replace('.ac-home-page .ac-budget-mobile .ac-filter-dropdown{top:auto!important;bottom:calc(100% + 7px)!important}', '')
+          marker = '@media(max-width:1023px){'
+          overlay_css = '.ac-budget-picker-overlay{background:color-mix(in srgb,var(--ac-surface) 92%,transparent);border:1px solid color-mix(in srgb,var(--ac-text) 10%,transparent)}.ac-budget-picker-overlay .ac-filter-option{background:var(--ac-surface-2)!important;border:1px solid color-mix(in srgb,var(--ac-text) 10%,transparent)!important;color:var(--ac-text)!important}.ac-budget-picker-overlay .ac-filter-option.is-active{background:#ff353d!important;border-color:#ff353d!important;color:#fff!important}'
+          if overlay_css not in s:
+              s = s.replace(marker, overlay_css + marker, 1)
+          p.write_text(s)
+          PY
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Commit verified UI-only fix
+        shell: bash
+        run: |
+          rm .github/workflows/apply-mobile-budget-inline-overlay-fix-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-mobile-budget-inline-overlay-fix-once.yml
+          git commit -m "Keep mobile budget chips inside home form"
+          git push origin HEAD:ui/mobile-budget-inline-overlay-fix-20260814
