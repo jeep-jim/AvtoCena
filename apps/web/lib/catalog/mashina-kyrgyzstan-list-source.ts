@@ -1,3 +1,5 @@
+import { CATALOG_BRANDS, canonicalCatalogBrand } from "./brands";
+import { isCatalogYearAllowed } from "./offer-quality";
 import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
@@ -13,14 +15,12 @@ const DETAIL_RE = /\/(?:en\/)?details\/[^"'?#\s<>]+/i;
 const BAD_IMAGE_RE = /logo|icon|avatar|\/users\/|qrcode|qr-code|placeholder|banner|sprite|tracking|pixel|favicon|appstore|googleplay|no[-_ ]?(?:photo|image)/i;
 const COMMERCIAL_RE = /\b(?:truck|bus|minibus|commercial|cargo|tractor|forklift|excavator|agricultural|scooter|motorcycle|quad\s*bike|sprinter|transit|crafter|ducato|boxer|jumper|canter|elf|dutro|fuso|hino)\b/i;
 const BADGE_RE = /\b(?:Urgent|DIAMOND|Premium|TOP\s+VIP\s+BOOST|SUPER\s+VIP|VIP|BOOST)\b/gi;
-const KNOWN_MAKES = [
-  "Mercedes-Benz", "Mercedes Benz", "Land Rover", "Range Rover", "Rolls-Royce", "Alfa Romeo", "Aston Martin", "Great Wall", "Li Auto",
-  "Toyota", "Lexus", "Nissan", "Infiniti", "Honda", "Acura", "Mazda", "Mitsubishi", "Subaru", "Suzuki", "Daihatsu", "Isuzu",
-  "Hyundai", "Genesis", "Kia", "KGM", "SsangYong", "BMW", "Audi", "Volkswagen", "Volvo", "Porsche", "Ford", "Chevrolet", "Cadillac",
-  "Jeep", "Dodge", "Renault", "Peugeot", "Citroen", "Skoda", "SEAT", "MINI", "Fiat", "Opel", "Tesla", "BYD", "Geely", "Changan",
-  "Chery", "GAC", "Haval", "Zeekr", "Nio", "XPeng", "Jetour", "Denza", "Hongqi", "Tank", "Voyah", "Aito", "Leapmotor", "Arcfox", "Neta",
-  "Lada", "VAZ", "UAZ", "GAZ", "Moskvich", "Ravon", "Daewoo", "JAC", "FAW", "Dongfeng", "Exeed", "Omoda", "Jaecoo", "Feifan",
-].sort((left, right) => right.length - left.length);
+const KNOWN_MAKES = [...new Set(CATALOG_BRANDS.flatMap((brand) => [
+  brand.name,
+  brand.name.replace(/-/g, " "),
+  brand.name.replace(/\s*&\s*/g, " and "),
+]).map((value) => value.replace(/\s+/g, " ").trim()).filter(Boolean))]
+  .sort((left, right) => right.length - left.length);
 
 export type MashinaListRow = {
   id: string;
@@ -40,6 +40,8 @@ export type MashinaListRow = {
   location?: string;
   images: string[];
 };
+
+type MashinaSourceIdentity = { make: string; modelHint: string };
 
 function decodeHtml(value: string) {
   return String(value || "")
@@ -128,22 +130,64 @@ function imageUrls(markup: string, base: string) {
     .filter((url) => /^https?:/i.test(url) && !BAD_IMAGE_RE.test(url)))];
   return dedupeMashinaImageUrls(sourceUrls);
 }
-function deriveMakeModel(value: string) {
+function escapedPattern(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s\\-]+");
+}
+function boundaryIndex(value: string, candidate: string) {
+  if (!candidate) return -1;
+  const match = new RegExp(`(^|[^\\p{L}\\p{N}])(${escapedPattern(candidate)})(?=$|[^\\p{L}\\p{N}])`, "iu").exec(value);
+  return match?.index === undefined ? -1 : match.index + String(match[1] || "").length;
+}
+function brandSlug(value: unknown) {
+  return String(value || "")
+    .toLocaleLowerCase("en-US")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+const SOURCE_URL_BRANDS = CATALOG_BRANDS
+  .flatMap((brand) => {
+    const slugs = [...new Set([brand.slug, brand.dromSlug, brandSlug(brand.name)].map(brandSlug).filter(Boolean))];
+    return slugs.map((slug) => ({ make: brand.name, slug }));
+  })
+  .sort((left, right) => right.slug.length - left.slug.length);
+function titleCaseSlugModel(value: string) {
+  return value.split("-").filter(Boolean).map((token) => {
+    if (/^[a-z]{1,3}\d*$/i.test(token)) return token.toUpperCase();
+    return token ? `${token[0].toUpperCase()}${token.slice(1)}` : token;
+  }).join(" ").trim();
+}
+function sourceIdentityFromDetailUrl(value: string): MashinaSourceIdentity | null {
+  try {
+    const tail = decodeURIComponent(new URL(value).pathname).split("/").filter(Boolean).at(-1) || "";
+    const slug = tail.replace(/-[a-f0-9]{18,}$/i, "").toLocaleLowerCase("en-US");
+    for (const candidate of SOURCE_URL_BRANDS) {
+      if (slug !== candidate.slug && !slug.startsWith(`${candidate.slug}-`)) continue;
+      const modelSlug = slug.slice(candidate.slug.length).replace(/^-+/, "");
+      if (!modelSlug) continue;
+      return { make: candidate.make, modelHint: titleCaseSlugModel(modelSlug) };
+    }
+  } catch { /* invalid detail URL */ }
+  return null;
+}
+function deriveMakeModel(value: string, sourceIdentity?: MashinaSourceIdentity | null) {
   const cleaned = plainText(value).replace(BADGE_RE, " ").replace(/\s+/g, " ").trim();
-  const lower = cleaned.toLocaleLowerCase("en-US");
   let best: { make: string; index: number } | null = null;
-  for (const candidate of KNOWN_MAKES) {
-    const index = lower.indexOf(candidate.toLocaleLowerCase("en-US"));
+  const candidates = sourceIdentity
+    ? KNOWN_MAKES.filter((candidate) => canonicalCatalogBrand(candidate) === sourceIdentity.make)
+    : KNOWN_MAKES;
+  for (const candidate of candidates) {
+    const index = boundaryIndex(cleaned, candidate);
     if (index >= 0 && (!best || index < best.index || (index === best.index && candidate.length > best.make.length))) best = { make: candidate, index };
   }
-  if (!best) return { make: "", model: "" };
-  const make = best.make === "Mercedes Benz" ? "Mercedes-Benz" : best.make;
+  if (!best) return sourceIdentity ? { make: sourceIdentity.make, model: sourceIdentity.modelHint } : { make: "", model: "" };
+  const make = sourceIdentity?.make || canonicalCatalogBrand(best.make);
   const after = cleaned.slice(best.index + best.make.length)
     .replace(/^[\s,\-–—|]+/, "")
     .split(/\s+(?=\$|USD\b|Som\b|KGS\b|сом\b|19\d{2}\b|20\d{2}\b)|\s*,\s*(?=19\d{2}\b|20\d{2}\b)/i)[0]
     .replace(/\s+/g, " ").trim();
   const modelSource = after.replace(/\s+[0-8](?:[.,][0-9])\s*(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b[\s\S]*$/i, "").trim();
-  const model = modelSource.split(/\s+/).slice(0, 7).join(" ");
+  const model = modelSource.split(/\s+/).slice(0, 7).join(" ") || sourceIdentity?.modelHint || "";
   return { make, model };
 }
 function parseMoney(text: string) {
@@ -191,7 +235,8 @@ export function parseMashinaListingMarkup(markup: string, pageUrl: string): Mash
     const card = markup.slice(entry.index, end);
     const text = plainText(card);
     const label = entry.labels.sort((left, right) => right.length - left.length)[0] || text;
-    const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`);
+    const sourceIdentity = sourceIdentityFromDetailUrl(entry.href);
+    const identity = deriveMakeModel(`${label} ${text.slice(0, 1_500)}`, sourceIdentity);
     const money = parseMoney(text);
     const year = Number(text.match(/\b(19\d{2}|20\d{2})\s*(?:y\.|year|г\.)?/i)?.[1] || 0);
     const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\.?\b/i)?.[1]?.replace(",", ".") || 0);
@@ -267,7 +312,7 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: MashinaListRow): VehicleOffer | null {
-    if (!raw?.id || !raw.make || !raw.model || !raw.year || !raw.price || !raw.detailUrl || !raw.images.length) return null;
+    if (!raw?.id || !raw.make || !raw.model || !isCatalogYearAllowed(raw.year, this.market) || !raw.price || !raw.detailUrl || !raw.images.length) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id,
