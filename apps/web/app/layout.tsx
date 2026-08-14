@@ -299,6 +299,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" suppressHydrationWarning>
       <head>
+        <meta name="mitgo-verification" content="e4fe0a6f-d7e2-4232-97cb-b46956026c1d" />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <style dangerouslySetInnerHTML={{ __html: publicUiCorrections }} />
       </head>
