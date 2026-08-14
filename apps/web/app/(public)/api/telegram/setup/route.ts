@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getCurrentUser, isAdminRole } from "@/lib/auth";
 import {
   deriveTelegramWebhookSecret,
   expectedTelegramBotUsername,
@@ -12,6 +13,11 @@ export const dynamic = "force-dynamic";
 
 function normalizeUsername(value: unknown) {
   return String(value || "").trim().replace(/^@+/, "").toLowerCase();
+}
+
+function adminAllowed() {
+  const user = getCurrentUser();
+  return Boolean(user && isAdminRole(user.role));
 }
 
 async function telegramRequest<T>(token: string, method: string, body?: Record<string, unknown>) {
@@ -29,6 +35,9 @@ async function telegramRequest<T>(token: string, method: string, body?: Record<s
 }
 
 export async function GET() {
+  if (!adminAllowed()) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
   const config = await getTelegramPublicConfig();
   return NextResponse.json({ ok: true, ...config }, {
     headers: { "cache-control": "no-store" },
@@ -36,6 +45,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (!adminAllowed()) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
+
   const body = await request.json().catch(() => ({})) as Record<string, unknown>;
   const token = String(body.token || "").trim();
   const requestedUsername = normalizeUsername(body.username) || expectedTelegramBotUsername();
