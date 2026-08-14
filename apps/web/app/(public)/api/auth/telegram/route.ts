@@ -9,6 +9,9 @@ export const dynamic = "force-dynamic";
 
 const TELEGRAM_ISSUER = "https://oauth.telegram.org";
 const TELEGRAM_JWKS_URL = "https://oauth.telegram.org/.well-known/jwks.json";
+const TELEGRAM_TOKEN_URL = "https://oauth.telegram.org/token";
+const OIDC_COOKIE_NAME = "avtocena_tg_oidc";
+const CALLBACK_URL = "https://avtocena.com/api/auth/telegram";
 const MAX_AUTH_AGE_SECONDS = 10 * 60;
 
 type TelegramJwtHeader = {
@@ -34,10 +37,52 @@ type TelegramJwks = {
   keys?: Array<Record<string, unknown> & { kid?: string; kty?: string; alg?: string }>;
 };
 
+type OidcState = {
+  state?: string;
+  verifier?: string;
+  nextPath?: string;
+  issuedAt?: number;
+};
+
 function safeNext(value: unknown) {
   const next = typeof value === "string" ? value : "";
   if (!next || !next.startsWith("/") || next.startsWith("//")) return "/crm";
   return next;
+}
+
+function authSecret() {
+  return process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "avtocena-dev-secret-change-me";
+}
+
+function sign(value: string) {
+  return crypto.createHmac("sha256", authSecret()).update(value).digest("base64url");
+}
+
+function equalText(left: string, right: string) {
+  const a = Buffer.from(left);
+  const b = Buffer.from(right);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+function parseCookie(request: Request, name: string) {
+  const raw = request.headers.get("cookie") || "";
+  for (const chunk of raw.split(";")) {
+    const index = chunk.indexOf("=");
+    if (index < 0) continue;
+    const key = chunk.slice(0, index).trim();
+    if (key === name) return decodeURIComponent(chunk.slice(index + 1).trim());
+  }
+  return "";
+}
+
+function decodeOidcState(raw: string): OidcState | null {
+  const [encoded, signature] = raw.split(".");
+  if (!encoded || !signature || !equalText(signature, sign(encoded))) return null;
+  try {
+    return JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")) as OidcState;
+  } catch {
+    return null;
+  }
 }
 
 function decodeJwtJson<T>(segment: string): T | null {
@@ -88,9 +133,131 @@ async function verifyTelegramIdToken(idToken: string, expectedAudience: string) 
   }
 }
 
+async function resolveCrmUser(claims: TelegramJwtClaims) {
+  const telegramId = String(claims.id ?? claims.sub ?? "").trim();
+  const username = String(claims.preferred_username || "").trim();
+  if (!telegramId) return null;
+
+  const user = await findCrmUserByTelegram({ id: telegramId, username });
+  if (!user) return null;
+
+  const displayName = String(claims.name || [claims.given_name, claims.family_name].filter(Boolean).join(" ") || user.displayName).trim();
+  const avatarUrl = String(claims.picture || user.avatarUrl || "").trim();
+  return await updateCrmUser(user.id, {
+    telegramId,
+    telegramUsername: username || user.telegramUsername,
+    displayName,
+    avatarUrl,
+    lastLoginAt: new Date().toISOString(),
+  }) || { ...user, telegramId, displayName, avatarUrl };
+}
+
+function clearOidcCookie(response: NextResponse) {
+  response.cookies.set(OIDC_COOKIE_NAME, "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 0,
+  });
+}
+
+function redirectLogin(origin: string, error: string) {
+  return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, origin));
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  return NextResponse.redirect(new URL("/login?error=telegram_deprecated", url.origin));
+  const telegramError = url.searchParams.get("error");
+  if (telegramError) return redirectLogin(url.origin, "telegram_invalid");
+
+  const code = String(url.searchParams.get("code") || "").trim();
+  const returnedState = String(url.searchParams.get("state") || "").trim();
+  const storedState = decodeOidcState(parseCookie(request, OIDC_COOKIE_NAME));
+  const now = Math.floor(Date.now() / 1000);
+
+  if (
+    !code ||
+    !returnedState ||
+    !storedState?.state ||
+    !storedState.verifier ||
+    !storedState.issuedAt ||
+    !equalText(returnedState, storedState.state) ||
+    storedState.issuedAt > now + 60 ||
+    now - storedState.issuedAt > MAX_AUTH_AGE_SECONDS
+  ) {
+    const response = redirectLogin(url.origin, "telegram_expired");
+    clearOidcCookie(response);
+    return response;
+  }
+
+  const telegramConfig = await getTelegramRuntimeConfig();
+  const botId = String(telegramConfig?.botId || "");
+  const clientSecret = String(telegramConfig?.clientSecret || "");
+  if (!telegramConfig?.token || !botId || !clientSecret) {
+    const response = redirectLogin(url.origin, "telegram_not_configured");
+    clearOidcCookie(response);
+    return response;
+  }
+
+  let idToken = "";
+  try {
+    const tokenResponse = await fetch(TELEGRAM_TOKEN_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        authorization: `Basic ${Buffer.from(`${botId}:${clientSecret}`, "utf8").toString("base64")}`,
+      },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: CALLBACK_URL,
+        client_id: botId,
+        code_verifier: storedState.verifier,
+      }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
+    });
+    const tokenPayload = await tokenResponse.json().catch(() => null) as { id_token?: string; error?: string; error_description?: string } | null;
+    if (!tokenResponse.ok || !tokenPayload?.id_token) {
+      console.error("telegram_oidc_token_exchange_failed", tokenResponse.status, String(tokenPayload?.error || tokenPayload?.error_description || "unknown").slice(0, 200));
+      const response = redirectLogin(url.origin, "telegram_invalid");
+      clearOidcCookie(response);
+      return response;
+    }
+    idToken = tokenPayload.id_token;
+  } catch (error) {
+    console.error("telegram_oidc_token_exchange_error", error instanceof Error ? error.message : "unknown");
+    const response = redirectLogin(url.origin, "telegram_invalid");
+    clearOidcCookie(response);
+    return response;
+  }
+
+  const claims = await verifyTelegramIdToken(idToken, botId);
+  if (!claims) {
+    const response = redirectLogin(url.origin, "telegram_invalid");
+    clearOidcCookie(response);
+    return response;
+  }
+
+  const user = await resolveCrmUser(claims);
+  if (!user) {
+    const response = redirectLogin(url.origin, "telegram_not_allowed");
+    clearOidcCookie(response);
+    return response;
+  }
+
+  const nextPath = safeNext(storedState.nextPath);
+  const response = NextResponse.redirect(new URL(nextPath, url.origin));
+  response.cookies.set(AUTH_COOKIE_NAME, createSessionCookie(user), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: AUTH_MAX_AGE_SECONDS,
+  });
+  clearOidcCookie(response);
+  return response;
 }
 
 export async function POST(request: Request) {
@@ -112,29 +279,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "telegram_invalid" }, { status: 401 });
   }
 
-  const telegramId = String(claims.id ?? claims.sub ?? "").trim();
-  const username = String(claims.preferred_username || "").trim();
-  if (!telegramId) {
-    return NextResponse.json({ ok: false, error: "telegram_invalid" }, { status: 401 });
-  }
-
-  const user = await findCrmUserByTelegram({ id: telegramId, username });
+  const user = await resolveCrmUser(claims);
   if (!user) {
     return NextResponse.json({ ok: false, error: "telegram_not_allowed" }, { status: 403 });
   }
 
-  const displayName = String(claims.name || [claims.given_name, claims.family_name].filter(Boolean).join(" ") || user.displayName).trim();
-  const avatarUrl = String(claims.picture || user.avatarUrl || "").trim();
-  const updated = await updateCrmUser(user.id, {
-    telegramId,
-    telegramUsername: username || user.telegramUsername,
-    displayName,
-    avatarUrl,
-    lastLoginAt: new Date().toISOString(),
-  }) || { ...user, telegramId, displayName, avatarUrl };
-
   const response = NextResponse.json({ ok: true, next: nextPath });
-  response.cookies.set(AUTH_COOKIE_NAME, createSessionCookie(updated), {
+  response.cookies.set(AUTH_COOKIE_NAME, createSessionCookie(user), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
