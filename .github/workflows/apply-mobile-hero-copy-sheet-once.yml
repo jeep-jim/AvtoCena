@@ -1,0 +1,58 @@
+name: Apply mobile hero copy sheet once
+
+on:
+  push:
+    branches:
+      - ui/mobile-hero-copy-sheet-20260814
+    paths:
+      - .github/workflows/apply-mobile-hero-copy-sheet-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/mobile-hero-copy-sheet-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Update mobile hero copy and budget info sheet
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/components/home/HomePageClient.tsx')
+          s = p.read_text()
+          replacements = [
+            ('className="ac-filter-panel flex min-h-[416px] flex-col rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px]"', 'className="ac-filter-panel flex min-h-0 flex-col rounded-[1.8rem] bg-white/[0.075] p-4 md:p-5 lg:min-h-[438px]"'),
+            ('<div className="mt-5 flex flex-1 flex-col">', '<div className="mt-3 flex flex-1 flex-col lg:mt-5">'),
+            ('<h3 className="text-lg font-black leading-tight md:text-xl">АвтоЦена — подбор автомобиля под ваш бюджет</h3>', '<h3 className="hidden text-lg font-black leading-tight md:text-xl lg:block">АвтоЦена — подбор автомобиля под ваш бюджет</h3>'),
+            ('<p className="mt-4 text-sm font-medium leading-6 text-white/75 md:text-base md:leading-6">Сервис помогает быстро понять, какой автомобиль можно привезти под ключ. Задайте параметры, система покажет варианты и актуальный расчёт.</p>', '<p className="mt-0 text-sm font-medium leading-6 text-white/75 md:text-base md:leading-6 lg:mt-4">Сервис помогает быстро понять, какой автомобиль можно привезти под ключ. Задайте параметры, система покажет варианты и актуальный расчёт.</p>'),
+            ('<p className="mt-5 text-sm font-black leading-6 text-white md:text-base md:leading-6">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p>', '<p className="mt-5 hidden text-sm font-black leading-6 text-white md:text-base md:leading-6 lg:block">Следующий шаг — менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p>'),
+            ('<div className="mt-auto grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 pt-5 lg:hidden">', '<div className="mt-4 grid grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-3 lg:hidden">'),
+            ('<p className="mt-4 text-base font-medium leading-7 text-[var(--ac-muted)]">Укажите Ваш город и бюджет — покажем, что можно привезти под ключ.</p><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" />', '<div className="mt-4 space-y-3 text-base font-medium leading-7 text-[var(--ac-muted)]"><p>АвтоЦена помогает быстро понять, какой автомобиль можно привезти под ваш бюджет. Укажите Ваш город и бюджет — система покажет подходящие варианты и актуальный расчёт.</p><p>После выбора менеджер TopAvto проверит автомобиль, подтвердит наличие и подготовит точный расчёт.</p></div><img src="/key-logo.png" alt="" className="mx-auto mt-5 max-h-44 w-full max-w-[270px] object-contain" />'),
+          ]
+          for old, new in replacements:
+            if old not in s:
+              raise SystemExit(f'anchor not found: {old[:120]}')
+            s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Commit verified UI-only change
+        shell: bash
+        run: |
+          rm .github/workflows/apply-mobile-hero-copy-sheet-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/components/home/HomePageClient.tsx .github/workflows/apply-mobile-hero-copy-sheet-once.yml
+          git commit -m "Tighten mobile hero and move copy into budget info"
+          git push origin HEAD:ui/mobile-hero-copy-sheet-20260814
