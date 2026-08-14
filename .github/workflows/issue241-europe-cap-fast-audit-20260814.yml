@@ -1,5 +1,5 @@
 name: Issue241 Europe cap fast audit 20260814
-# inspect live Benz-2020 rows against PR463 source-bound Mercedes resolver
+# read-only projection of the exact live Mercedes-Benz/Benz/2020 identity migration
 
 on:
   push:
@@ -19,7 +19,6 @@ env:
   YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
-  RECOVERY_PREFERRED_MAX_RUB: '8000000'
 
 jobs:
   audit:
@@ -34,48 +33,48 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Read-only Europe post-enrichment cap audit
+      - name: Read-only Europe Mercedes identity migration projection
         run: |
           node --import tsx --input-type=module - <<'NODE'
           import fs from 'node:fs';
           const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
-          const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import('./apps/web/lib/catalog/offer-quality.ts');
-          const { normalizeVehicleOfferSpecs } = await import('./apps/web/lib/catalog/spec-normalization.ts');
-          const { enrichOfferWithVehicleKnowledge } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
           const { canonicalSourceModelIdentity } = await import('./apps/web/lib/catalog/open-source-normalizer.ts');
           const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
-          const market='europe';
-          const preferredMaxRub=8_000_000;
-          const freshness=offer=>Date.parse(String(offer?.operational?.sourcePublishedAt||offer?.updatedAt||offer?.firstSeenAt||''))||0;
-          const quality=(a,b)=>{
-            const ap=Number(a?.totalRub||0)>0&&Number(a.totalRub)<=preferredMaxRub?0:1;
-            const bp=Number(b?.totalRub||0)>0&&Number(b.totalRub)<=preferredMaxRub?0:1;
-            return ap-bp || Number(b?.year||0)-Number(a?.year||0) || freshness(b)-freshness(a) || Number(b?.images?.length||0)-Number(a?.images?.length||0) || Number(a?.totalRub||Number.MAX_SAFE_INTEGER)-Number(b?.totalRub||Number.MAX_SAFE_INTEGER) || String(a?.id||'').localeCompare(String(b?.id||''));
-          };
-          const raw=await readMarketOffers(market);
-          const benz2020=raw.filter(r=>String(r?.make||'').toLowerCase()==='mercedes-benz'&&String(r?.model||'').toLowerCase()==='benz'&&Number(r?.year)===2020).map(r=>({
-            id:r.id,sourceId:r.sourceId,sourceOfferId:r.sourceOfferId,sourceUrl:r.sourceUrl,sourceTitle:r.sourceTitle,trim:r.trim,year:r.year,
-            resolvedModel:canonicalSourceModelIdentity(String(r?.sourceTitle||r?.trim||''),String(r?.make||''),String(r?.model||'')),images:r?.images?.length||0,totalRub:r.totalRub
-          }));
-          const normalized=await Promise.all(raw.map(async row=>normalizeVehicleOfferSpecs({...await enrichOfferWithVehicleKnowledge(row),status:'active',images:credibleCatalogImages(row?.images||[]).slice(0,30)})));
-          const rejectedQuality=[];
-          const candidates=[];
-          for(const offer of normalized){
-            const ok=offer?.id&&offer?.market===market&&offer?.make&&offer?.model&&isCatalogYearAllowed(offer?.year,market)&&isCatalogOfferBusinessLiquid(offer)&&hasCredibleOfferContent({...offer,status:'active'});
-            if(ok)candidates.push(offer); else rejectedQuality.push(offer);
+          const { isCatalogYearAllowed } = await import('./apps/web/lib/catalog/offer-quality.ts');
+
+          const expectedIds=new Set([
+            '6906d7d816052a5b2610666f','7b737a21efadae84bc00104e','8b29e7fa08328ea7a4d16ed1','8a1b9bbd4ce168a51136acd4','22548d939e36f93b2d23053e','c835149813ac708e08b77c14','f228176becb418e474e18b64','e04352f15be8d6355936a213','40c1138f805b48b80f36e801','3061cad0b39c3bae276f8808','39d626b9ee8a070564d1952c','9fdd0a08b1efc2b8a83e4ef6','beb7379dbe7bcf373627ed45','32c64c33b90badffffe9de75','a1fdbf847f3c2b26d7e864b3','88e2dd1d739bbebce517db83','0c4dbe2ffba19fd4c1bb1577','92c84da829bb66e7e82d6e98','0638f8764fc2d2e8b88952c6','794f491d05c214dc565e3e78','8408cab3872e99690c2f371a','832ae9f292172221aa6d6b70','ca61c88592911c1f4099b5a6'
+          ]);
+          const expectedDist={'A-Class':6,'B-Class':6,'C-Class':1,'E-Class':4,'Sprinter':3,'Vito':3};
+          const rows=await readMarketOffers('europe');
+          if(rows.length!==3604) throw new Error(`europe_count_drift:${rows.length}`);
+          const targets=rows.filter(r=>String(r?.make||'').toLowerCase()==='mercedes-benz'&&String(r?.model||'').toLowerCase()==='benz'&&Number(r?.year)===2020);
+          const targetIds=new Set(targets.map(r=>String(r.id)));
+          if(targetIds.size!==expectedIds.size||[...expectedIds].some(id=>!targetIds.has(id))) throw new Error(`benz2020_identity_drift:${targetIds.size}`);
+
+          const resolved=[];
+          const projected=rows.map(r=>{
+            if(!expectedIds.has(String(r.id))) return r;
+            const model=canonicalSourceModelIdentity(String(r?.sourceTitle||r?.trim||''),String(r?.make||''),String(r?.model||''));
+            if(!model||model.toLowerCase()==='benz') throw new Error(`unresolved_target:${r.id}:${r.sourceTitle||r.trim||''}`);
+            resolved.push({id:r.id,sourceId:r.sourceId,sourceOfferId:r.sourceOfferId,from:r.model,to:model,sourceTitle:r.sourceTitle,images:r.images?.length||0,totalRub:r.totalRub});
+            return {...r,model};
+          });
+          const dist=resolved.reduce((o,r)=>(o[r.to]=(o[r.to]||0)+1,o),{});
+          if(JSON.stringify(Object.fromEntries(Object.entries(dist).sort()))!==JSON.stringify(Object.fromEntries(Object.entries(expectedDist).sort()))) throw new Error(`unexpected_resolved_distribution:${JSON.stringify(dist)}`);
+          const counts=new Map();
+          for(const r of projected){
+            if(!isCatalogYearAllowed(r?.year,'europe')) throw new Error(`bad_year:${r.id}:${r.year}`);
+            const key=catalogModelYearQuotaKey(r,'europe');
+            if(!key) throw new Error(`missing_quota_key:${r.id}`);
+            counts.set(key,(counts.get(key)||0)+1);
           }
-          candidates.sort(quality);
-          const rawBuckets=new Map();
-          for(const offer of candidates){const k=catalogModelYearQuotaKey(offer,market); if(k)rawBuckets.set(k,[...(rawBuckets.get(k)||[]),offer]);}
-          const overCapBefore=[...rawBuckets.entries()].filter(([,rows])=>rows.length>CATALOG_MAX_OFFERS_PER_MODEL_YEAR).sort((a,b)=>b[1].length-a[1].length).map(([key,rows])=>({key,count:rows.length,sample:rows.slice(0,5).map(r=>({id:r.id,make:r.make,model:r.model,year:r.year,sourceId:r.sourceId,totalRub:r.totalRub,images:r.images?.length||0}))}));
-          const counts=new Map(); const selected=[]; const rejectedQuota=[];
-          for(const offer of candidates){const key=catalogModelYearQuotaKey(offer,market); if(!key){rejectedQuality.push(offer);continue;} const n=Number(counts.get(key)||0); if(n>=CATALOG_MAX_OFFERS_PER_MODEL_YEAR){rejectedQuota.push(offer);continue;} counts.set(key,n+1);selected.push(offer);}
-          const sourceDist=rows=>rows.reduce((o,r)=>{const k=String(r?.sourceId||'<missing>');o[k]=(o[k]||0)+1;return o;},{});
-          const resolvedDist=benz2020.reduce((o,r)=>{const k=String(r.resolvedModel||'<unresolved>');o[k]=(o[k]||0)+1;return o;},{});
-          const report={mode:'read_only_europe_cap_fast_audit',before:raw.length,postQuality:candidates.length,selected:selected.length,removedByQuality:rejectedQuality.length,removedByModelYearQuota:rejectedQuota.length,maxBefore:Math.max(0,...[...rawBuckets.values()].map(x=>x.length)),maxAfter:Math.max(0,...counts.values()),overCapBefore,sourceBefore:sourceDist(raw),sourceSelected:sourceDist(selected),benz2020ResolvedDist:resolvedDist,benz2020,rejectedQuota:rejectedQuota.map(r=>({id:r.id,make:r.make,model:r.model,year:r.year,sourceId:r.sourceId,totalRub:r.totalRub,images:r.images?.length||0}))};
+          const over=[...counts.entries()].filter(([,n])=>n>CATALOG_MAX_OFFERS_PER_MODEL_YEAR).sort((a,b)=>b[1]-a[1]);
+          const max=Math.max(0,...counts.values());
+          const report={mode:'read_only_europe_mercedes_identity_projection',before:rows.length,after:projected.length,targetCount:targets.length,resolvedCount:resolved.length,resolvedDistribution:dist,maxPerExactModelYearAfter:max,overCapAfter:over,resolved};
           fs.writeFileSync('issue241-europe-cap-fast-audit.json',JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
-          if(report.maxAfter>20) throw new Error(`post_cap_still_over:${report.maxAfter}`);
+          if(over.length) throw new Error(`projected_overcap:${JSON.stringify(over.slice(0,10))}`);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
