@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ops/issue241-europe-mercedes-identity-migration-20260814
       - uses: actions/setup-node@v4
         with:
           node-version: 24
