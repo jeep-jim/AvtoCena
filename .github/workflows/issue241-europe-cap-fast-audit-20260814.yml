@@ -1,5 +1,5 @@
 name: Issue241 Europe cap fast audit 20260814
-# rerun after PR463 Mercedes model identity fix
+# inspect live Benz-2020 rows against PR463 source-bound Mercedes resolver
 
 on:
   push:
@@ -42,6 +42,7 @@ jobs:
           const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import('./apps/web/lib/catalog/offer-quality.ts');
           const { normalizeVehicleOfferSpecs } = await import('./apps/web/lib/catalog/spec-normalization.ts');
           const { enrichOfferWithVehicleKnowledge } = await import('./apps/web/lib/catalog/vehicle-knowledge.ts');
+          const { canonicalSourceModelIdentity } = await import('./apps/web/lib/catalog/open-source-normalizer.ts');
           const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
           const market='europe';
           const preferredMaxRub=8_000_000;
@@ -52,6 +53,10 @@ jobs:
             return ap-bp || Number(b?.year||0)-Number(a?.year||0) || freshness(b)-freshness(a) || Number(b?.images?.length||0)-Number(a?.images?.length||0) || Number(a?.totalRub||Number.MAX_SAFE_INTEGER)-Number(b?.totalRub||Number.MAX_SAFE_INTEGER) || String(a?.id||'').localeCompare(String(b?.id||''));
           };
           const raw=await readMarketOffers(market);
+          const benz2020=raw.filter(r=>String(r?.make||'').toLowerCase()==='mercedes-benz'&&String(r?.model||'').toLowerCase()==='benz'&&Number(r?.year)===2020).map(r=>({
+            id:r.id,sourceId:r.sourceId,sourceOfferId:r.sourceOfferId,sourceUrl:r.sourceUrl,sourceTitle:r.sourceTitle,trim:r.trim,year:r.year,
+            resolvedModel:canonicalSourceModelIdentity(String(r?.sourceTitle||r?.trim||''),String(r?.make||''),String(r?.model||'')),images:r?.images?.length||0,totalRub:r.totalRub
+          }));
           const normalized=await Promise.all(raw.map(async row=>normalizeVehicleOfferSpecs({...await enrichOfferWithVehicleKnowledge(row),status:'active',images:credibleCatalogImages(row?.images||[]).slice(0,30)})));
           const rejectedQuality=[];
           const candidates=[];
@@ -66,7 +71,8 @@ jobs:
           const counts=new Map(); const selected=[]; const rejectedQuota=[];
           for(const offer of candidates){const key=catalogModelYearQuotaKey(offer,market); if(!key){rejectedQuality.push(offer);continue;} const n=Number(counts.get(key)||0); if(n>=CATALOG_MAX_OFFERS_PER_MODEL_YEAR){rejectedQuota.push(offer);continue;} counts.set(key,n+1);selected.push(offer);}
           const sourceDist=rows=>rows.reduce((o,r)=>{const k=String(r?.sourceId||'<missing>');o[k]=(o[k]||0)+1;return o;},{});
-          const report={mode:'read_only_europe_cap_fast_audit',mainSha:process.env.GITHUB_SHA,before:raw.length,postQuality:candidates.length,selected:selected.length,removedByQuality:rejectedQuality.length,removedByModelYearQuota:rejectedQuota.length,maxBefore:Math.max(0,...[...rawBuckets.values()].map(x=>x.length)),maxAfter:Math.max(0,...counts.values()),overCapBefore,sourceBefore:sourceDist(raw),sourceSelected:sourceDist(selected),rejectedQuota:rejectedQuota.map(r=>({id:r.id,make:r.make,model:r.model,year:r.year,sourceId:r.sourceId,totalRub:r.totalRub,images:r.images?.length||0}))};
+          const resolvedDist=benz2020.reduce((o,r)=>{const k=String(r.resolvedModel||'<unresolved>');o[k]=(o[k]||0)+1;return o;},{});
+          const report={mode:'read_only_europe_cap_fast_audit',before:raw.length,postQuality:candidates.length,selected:selected.length,removedByQuality:rejectedQuality.length,removedByModelYearQuota:rejectedQuota.length,maxBefore:Math.max(0,...[...rawBuckets.values()].map(x=>x.length)),maxAfter:Math.max(0,...counts.values()),overCapBefore,sourceBefore:sourceDist(raw),sourceSelected:sourceDist(selected),benz2020ResolvedDist:resolvedDist,benz2020,rejectedQuota:rejectedQuota.map(r=>({id:r.id,make:r.make,model:r.model,year:r.year,sourceId:r.sourceId,totalRub:r.totalRub,images:r.images?.length||0}))};
           fs.writeFileSync('issue241-europe-cap-fast-audit.json',JSON.stringify(report,null,2));
           console.log(JSON.stringify(report,null,2));
           if(report.maxAfter>20) throw new Error(`post_cap_still_over:${report.maxAfter}`);
