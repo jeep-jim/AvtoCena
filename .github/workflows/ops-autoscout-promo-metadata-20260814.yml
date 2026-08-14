@@ -1,0 +1,42 @@
+name: Ops · AutoScout promo metadata 20260814
+run-name: Inspect AutoScout promo listing metadata · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/gallery-source-metadata-20260814
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Inspect exact Tesla listing Next data
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          const url = 'https://www.autoscout24.com/offers/tesla-model-y-rwd-autopilot-waermepumpe-19-zoll-voll-led-navi-kamera-acc-leder-premium-sound-system-electric-white-cat_ma51520mo75320-0b23ad9c-0b4f-4c0e-9d1a-f4612c3d0fe1';
+          const r = await fetch(url,{headers:{'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36','accept-language':'en-GB,en;q=0.9,de;q=0.7'},redirect:'follow',signal:AbortSignal.timeout(30000)});
+          const html=await r.text();
+          console.log('HTTP',r.status,'BYTES',html.length);
+          for (const term of ['DEMNÄCHST','Demnächst','demnächst','RESERVIEREN','reservieren','Herbert Seidl','coming soon','available soon']) {
+            console.log('TERM',term,html.toLowerCase().includes(term.toLowerCase()));
+          }
+          const m=html.match(/<script[^>]+id=["']__NEXT_DATA__["'][^>]*>([\s\S]*?)<\/script>/i);
+          if(!m) process.exit(2);
+          const data=JSON.parse(m[1]);
+          const d=data?.props?.pageProps?.listingDetails || {};
+          console.log('DETAIL_KEYS',JSON.stringify(Object.keys(d).sort()));
+          console.log('IMAGE_VALUE_TYPES',JSON.stringify((Array.isArray(d.images)?d.images:[]).slice(0,10).map(v=>({type:typeof v,value:typeof v==='string'?v:v}))));
+          const interesting={};
+          for(const [k,v] of Object.entries(d)) if(/image|photo|media|caption|description|dealer|seller|title|text/i.test(k)) interesting[k]=v;
+          console.log('INTERESTING',JSON.stringify(interesting,null,2).slice(0,30000));
+          NODE
