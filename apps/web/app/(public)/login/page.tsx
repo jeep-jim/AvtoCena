@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: { searchParams?: Promi
   const nextPath = firstParam(params.next) || "/crm";
   const errorCode = firstParam(params.error) || "";
   const telegramConfig = await getTelegramPublicConfig();
-  const botId = telegramConfig.configured ? String(telegramConfig.botId || "") : "";
+  const botId = telegramConfig.configured && telegramConfig.oidcConfigured ? String(telegramConfig.botId || "") : "";
 
   return (
     <main className="ac-login-page ac-page-copy min-h-screen text-white">
