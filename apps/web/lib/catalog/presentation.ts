@@ -41,6 +41,8 @@ const directPhrases: Array<[RegExp, string]> = [
   [/广汽昊铂|昊铂/g, "Hyptec "],
   [/东风奕派/g, "Dongfeng eπ "],
   [/奇瑞风云/g, "Chery Fulwin "],
+  [/QQ冰淇淋/g, "QQ Ice Cream "],
+  [/奇瑞QQ/g, "Chery "],
   [/星途/g, "Exeed "],
   [/星纪元/g, "Exlantix "],
   [/猛士/g, "M-Hero "],
@@ -299,18 +301,14 @@ function objectText(value: unknown): string {
 }
 
 export function safeCatalogText(value: unknown) {
-  const text = objectText(value)
+  return objectText(value)
     .replace(/\[object Object\]/gi, "")
     .replace(/[\u0000-\u001f]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return text;
 }
 
 export function translateCatalogText(value: unknown) {
-  // Source feeds sometimes return Japanese in the half-width compatibility
-  // block (for example `ﾊｯﾁ`). Normalize it first so the script gate below
-  // treats half-width and ordinary Kana identically.
   let text = safeCatalogText(value).normalize("NFKC");
   for (const [pattern, replacement] of directPhrases) text = text.replace(pattern, replacement);
   text = text
@@ -344,16 +342,32 @@ function stripUnresolvedHan(value: string) {
     .trim();
 }
 
-function isChinaOffer(offer: any) {
-  return safeCatalogText(offer?.market).toLowerCase() === "china";
+function cleanIdentityLabel(value: string) {
+  return String(value || "")
+    .replace(/\(\s*\)/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 150)
+    .trim();
 }
 
-function chinaSourceSeriesId(offer: any) {
-  return safeCatalogText(
-    offer?.operational?.raw?.listing?.seriesId ||
-    offer?.operational?.raw?.seriesId ||
-    offer?.seriesId,
-  );
+function normalizedIdentity(value: unknown) {
+  return safeCatalogText(value).normalize("NFKC").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+}
+
+function nativeSourceIdentity(value: unknown) {
+  return cleanIdentityLabel(safeCatalogText(value).normalize("NFKC"));
+}
+
+function publicMarketIdentity(value: unknown, marketValue: unknown) {
+  const translated = cleanIdentityLabel(compactListingText(value));
+  if (translated) return translated;
+  const market = safeCatalogText(marketValue).toLowerCase();
+  return market === "korea" ? nativeSourceIdentity(value) : "";
+}
+
+function isChinaOffer(offer: any) {
+  return safeCatalogText(offer?.market).toLowerCase() === "china";
 }
 
 const catalogBrandsByLength = [...CATALOG_BRANDS]
@@ -371,38 +385,34 @@ function knownCatalogBrandInText(value: unknown) {
 }
 
 function publicChinaMake(offer: any) {
-  const translated = compactListingText(offer?.make);
+  const translated = cleanIdentityLabel(compactListingText(offer?.make));
   const cleaned = stripUnresolvedHan(translated);
   if (cleaned) return cleaned;
 
-  // AutoHome occasionally stores an empty/unmapped manufacturer field while
-  // the exact listing/model title still contains a known Latin manufacturer.
-  // Recover only a catalog-known brand from source-bound text; never guess.
   for (const candidate of [offer?.sourceTitle, offer?.model, offer?.operational?.sourceTitle]) {
     const brand = knownCatalogBrandInText(candidate);
     if (brand) return brand;
   }
 
-  // A missing public brand must not become the literal card title
-  // "Марка уточняется ...". The factual model remains visible by itself.
-  return "";
+  return nativeSourceIdentity(offer?.make);
 }
 
 function publicChinaModel(offer: any) {
-  const translated = compactListingText(offer?.model);
-  if (translated && !unresolvedHanRe.test(translated)) return translated;
+  const publicMake = publicChinaMake(offer);
+  const translated = cleanIdentityLabel(compactListingText(offer?.model));
+  const translatedIsUseful = translated
+    && normalizedIdentity(translated) !== normalizedIdentity(publicMake)
+    && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(translated);
+  if (translatedIsUseful) return translated;
 
-  const cleaned = stripUnresolvedHan(translated);
-  const seriesId = chinaSourceSeriesId(offer);
-  const usefulLatinModel = cleaned && (
-    /[A-Za-z]{2,}[- ]?\d+/u.test(cleaned) ||
-    /\d+[A-Za-z]{1,}/u.test(cleaned) ||
-    /\b(?:D-MAX|MU-X|PLUS|PRO|MAX|EV|DM-i|Hi4|PHEV|HEV|BEV)\b/i.test(cleaned)
-  );
-
-  if (usefulLatinModel && !/^(?:PLUS|PRO|MAX|EV|PHEV|HEV|BEV)$/i.test(cleaned)) return cleaned;
-  if (seriesId) return `серия ${seriesId}${cleaned ? ` ${cleaned}` : ""}`.trim();
-  return cleaned || "Модель уточняется";
+  const sourceModel = nativeSourceIdentity(offer?.model);
+  const sourceMake = nativeSourceIdentity(offer?.make);
+  if (!sourceModel) return "";
+  if (sourceMake && sourceModel.startsWith(sourceMake) && sourceModel !== sourceMake) {
+    const withoutMake = cleanIdentityLabel(sourceModel.slice(sourceMake.length));
+    if (withoutMake) return withoutMake;
+  }
+  return sourceModel;
 }
 
 function publicTitleTrim(value: unknown) {
@@ -412,8 +422,6 @@ function publicTitleTrim(value: unknown) {
     .replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
-  // Keep only a factual non-CJK remainder (for example "2024 1.6L").
-  // If the source trim contains nothing safely readable, omit it from the public title.
   return /[A-Za-zА-Яа-яЁё]/u.test(cleaned) ? cleaned : "";
 }
 
@@ -480,8 +488,6 @@ export function catalogTransmissionName(value: unknown) {
   if (/robot|dct|dsg|pdk|dual[- ]?clutch|double[- ]?clutch|双离合|робот|semi[- ]?automatic/.test(raw)) return label("робот");
   if (/manual|(?:^|\W)mt(?:$|\W)|stick[- ]?shift|手动|수동|механик/.test(raw) && !/手自一体/.test(raw)) return label("механика");
   if (/automatic|automatik|auto|(?:^|\W)at(?:$|\W)|tiptronic|steptronic|tronic|手自一体|自动挡?|오토|자동|автомат/.test(raw)) return label("автомат");
-  // Do not expose arbitrary source tokens (for example emissions/trim codes such
-  // as LEV) as a gearbox. If the value is not positively recognized, hide it.
   return "уточняется";
 }
 
@@ -512,11 +518,9 @@ function normalizedTitleToken(value: string) {
 function collapseAdjacentRepeatedPhrases(value: string) {
   const tokens = value.split(/\s+/).filter(Boolean);
   let changed = true;
-
   while (changed) {
     changed = false;
     const maxPhraseLength = Math.min(8, Math.floor(tokens.length / 2));
-
     outer: for (let phraseLength = maxPhraseLength; phraseLength >= 1; phraseLength--) {
       for (let start = 0; start + phraseLength * 2 <= tokens.length; start++) {
         const left = tokens.slice(start, start + phraseLength).map(normalizedTitleToken).join(" ");
@@ -528,22 +532,19 @@ function collapseAdjacentRepeatedPhrases(value: string) {
       }
     }
   }
-
   return tokens.join(" ").replace(/\s+/g, " ").trim();
 }
 
 export function catalogOfferTitle(offer: any) {
   const china = isChinaOffer(offer);
-  const make = china ? publicChinaMake(offer) : compactListingText(offer?.make);
-  const model = china ? publicChinaModel(offer) : compactListingText(offer?.model);
-  const rawBase = model && make && model.toLocaleLowerCase("en-US").startsWith(make.toLocaleLowerCase("en-US"))
+  const market = safeCatalogText(offer?.market).toLowerCase();
+  const make = china ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market);
+  const model = china ? publicChinaModel(offer) : publicMarketIdentity(offer?.model, market);
+  const rawBase = model && make && normalizedIdentity(model).startsWith(`${normalizedIdentity(make)} `)
     ? model
     : [make, model].filter(Boolean).join(" ").trim();
-  const base = collapseAdjacentRepeatedPhrases(stripUnresolvedHan(rawBase));
+  const base = collapseAdjacentRepeatedPhrases(china ? rawBase : stripUnresolvedHan(rawBase));
 
-  // Chinese source trim strings contain edition words, dimensions and engine codes.
-  // Keep the exact raw trim in the offer data, but never leak unresolved Han or noisy
-  // source-title fragments into the public card title.
   let trim = china ? "" : collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
@@ -569,11 +570,12 @@ export function presentCatalogOffer(offer: any) {
   const images = Array.isArray(offer?.images)
     ? offer.images.map((image: any) => safeCatalogText(image?.url)).filter(Boolean)
     : [];
+  const market = safeCatalogText(offer?.market).toLowerCase();
   return {
     ...offer,
     title: catalogOfferTitle(offer),
-    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : compactListingText(offer?.make),
-    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(compactListingText(offer?.model)),
+    makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market),
+    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(publicMarketIdentity(offer?.model, market)),
     trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),
