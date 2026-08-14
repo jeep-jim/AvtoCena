@@ -8,6 +8,7 @@ const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|per
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
+const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
@@ -31,6 +32,16 @@ export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) 
 }
 
 function clean(value: unknown) { return String(value || "").replace(/\s+/g, " ").trim(); }
+function credibleIdentityValue(value: unknown) {
+  const identity = clean(value);
+  return identity.length > 0
+    && identity.length <= 80
+    && /[\p{L}\p{N}]/u.test(identity)
+    && !INVALID_CATALOG_IDENTITY_RE.test(identity);
+}
+export function hasCredibleCatalogIdentity(offer: Pick<VehicleOffer, "make" | "model">) {
+  return credibleIdentityValue(offer.make) && credibleIdentityValue(offer.model);
+}
 function meaningfulTitle(value: unknown) {
   const text = clean(value);
   return text.length >= 2 && text.length <= 180 && /[\p{L}\p{N}]/u.test(text) && !GENERIC_LISTING_RE.test(text) && !NON_VEHICLE_RE.test(text);
@@ -177,6 +188,7 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (checkSourcePolicy && !isCatalogMarketSourceAllowed(offer)) return false;
+  if (!hasCredibleCatalogIdentity(offer)) return false;
   if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
   if (!isCatalogYearAllowed(year, offer.market)) return false;
