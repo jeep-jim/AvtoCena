@@ -1,0 +1,228 @@
+name: Ops · Korea proven-artifact atomic publish 20260814
+run-name: Korea proven artifact atomic publish · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/korea-semantic-live-refresh-v3-20260813
+    paths:
+      - ".github/workflows/ops-korea-proven-artifact-publish-20260814.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_MAX_IMAGES_PER_OFFER: "30"
+  CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+  CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Strict prepublish all-seven baseline
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-publish-preflight-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Download exact proven Korea gate artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: korea-crossrun-artifact-gate
+          path: proof
+          github-token: ${{ github.token }}
+          repository: jeep-jim/AvtoCena
+          run-id: 31807179372
+
+      - name: Revalidate proof artifact and unchanged all-seven baseline
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const semantic=JSON.parse(fs.readFileSync('proof/korea-crossrun-semantic-gate.json','utf8'));
+          const safety=JSON.parse(fs.readFileSync('proof/korea-k9-engine-safety.json','utf8'));
+          const proofPre=JSON.parse(fs.readFileSync('proof/korea-crossrun-preflight-all7.json','utf8'));
+          const proofDry=JSON.parse(fs.readFileSync('proof/korea-crossrun-publish-dry-run.json','utf8'));
+          const current=JSON.parse(fs.readFileSync('korea-publish-preflight-all7.json','utf8'));
+          const sources=semantic.sources||{};
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sources[source]||0)>0)) throw new Error(`proof_missing_source:${source}`);
+          if(Number(semantic.badYears||0)!==0||Number(semantic.foreign||0)!==0) throw new Error('proof_market_or_age_failure');
+          if(Number(semantic.encar?.suvRatio||1)>0.75) throw new Error(`proof_encar_ratio:${semantic.encar?.suvRatio}`);
+          if(Number(semantic.knownSedans?.violations||0)!==0) throw new Error(`proof_known_sedan_violation:${semantic.knownSedans?.violations}`);
+          if(!(Number(semantic.casper2022||0)>0)) throw new Error('proof_casper_2022_missing');
+          if(Number(semantic.k9_3_3_gdi?.exactEvidenceViolations||0)!==0) throw new Error('proof_k9_exact_violation');
+          if(Number(safety.exact3342Kept||0)!==11||!Array.isArray(safety.excluded)||safety.excluded.length!==5) throw new Error(`proof_k9_safety:${safety.exact3342Kept}:${safety.excluded?.length}`);
+          const k=proofDry.byMarket?.korea||{};
+          if(!proofDry.dryRun||Number(k.count||0)<=0) throw new Error('proof_dry_empty');
+          if(Number(k.maxOffersPerModelYear||0)!==20) throw new Error(`proof_dry_cap:${k.maxOffersPerModelYear}`);
+          if(Number(k.minImagesPerOffer||0)!==5||Number(k.imageStats?.belowMinimum||0)!==0||Number(k.imageStats?.min||0)<5) throw new Error('proof_dry_image_floor');
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(k.sourceCounts?.[source]||0)>0)) throw new Error(`proof_dry_missing_source:${source}`);
+          for(const market of ['korea','china','japan','uae','europe','georgia','kyrgyzstan']) {
+            const a=Number(proofPre.markets?.[market]?.count||0), b=Number(current.markets?.[market]?.count||0);
+            if(a!==b) throw new Error(`baseline_changed_since_proof:${market}:${a}->${b}`);
+          }
+          console.log(JSON.stringify({proofTotal:semantic.total,proofSources:sources,k9:{excluded:safety.excluded.length,exact3342Kept:safety.exact3342Kept},dryKorea:k,currentCounts:Object.fromEntries(Object.entries(current.markets||{}).map(([m,v])=>[m,v.count]))},null,2));
+          NODE
+
+      - name: Repeat exact dry-run immediately before publish
+        env:
+          RECOVERY_BATCH_MARKETS: korea
+          RECOVERY_BATCH_INPUT_DIR: proof
+          RECOVERY_BATCH_REPORT: korea-publish-final-dry-run.json
+          RECOVERY_BATCH_DRY_RUN: "1"
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+
+      - name: Require identical six-market preservation and green target dry-run
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const proof=JSON.parse(fs.readFileSync('proof/korea-crossrun-publish-dry-run.json','utf8'));
+          const dry=JSON.parse(fs.readFileSync('korea-publish-final-dry-run.json','utf8'));
+          const k=dry.byMarket?.korea||{};
+          if(!dry.dryRun||Number(k.count||0)<=0) throw new Error('final_dry_empty');
+          if(Number(k.maxOffersPerModelYear||0)!==20) throw new Error(`final_dry_cap:${k.maxOffersPerModelYear}`);
+          if(Number(k.minImagesPerOffer||0)!==5||Number(k.imageStats?.belowMinimum||0)!==0||Number(k.imageStats?.min||0)<5) throw new Error('final_dry_image_floor');
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(k.sourceCounts?.[source]||0)>0)) throw new Error(`final_dry_missing_source:${source}`);
+          if(Number(k.count)!==Number(proof.byMarket?.korea?.count)) throw new Error(`korea_selection_changed_since_proof:${proof.byMarket?.korea?.count}->${k.count}`);
+          for(const market of ['china','japan','uae','europe','georgia','kyrgyzstan']) {
+            const a=Number(proof.preservedByMarket?.[market]||0), b=Number(dry.preservedByMarket?.[market]||0);
+            if(a!==b) throw new Error(`preserved_count_changed:${market}:${a}->${b}`);
+            const ah=String(proof.preservedPublicHashByMarket?.[market]||''), bh=String(dry.preservedPublicHashByMarket?.[market]||'');
+            if(!ah||ah!==bh) throw new Error(`preserved_hash_changed:${market}`);
+          }
+          console.log(JSON.stringify({korea:k,preserved:dry.preservedByMarket,hashes:dry.preservedPublicHashByMarket},null,2));
+          NODE
+
+      - name: Guard against another active or queued run before write
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SELF_RUN_ID: ${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const token=process.env.GH_TOKEN, repo=process.env.REPO, self=Number(process.env.SELF_RUN_ID||0);
+          const allowedQueuedPath='.github/workflows/catalog-strict-dubicars-smoke.yml';
+          const headers={Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+          const get=async(status)=>{const r=await fetch(`https://api.github.com/repos/${repo}/actions/runs?status=${status}&per_page=100`,{headers});if(!r.ok)throw new Error(`actions_api_${status}:${r.status}`);return (await r.json()).workflow_runs||[]};
+          const active=[...(await get('in_progress')),...(await get('queued'))].filter(r=>Number(r.id)!==self&&String(r.path||'')!==allowedQueuedPath);
+          if(active.length) throw new Error(`other_active_or_queued_run:${active.map(r=>`${r.id}:${r.name}:${r.status}`).join('|')}`);
+          console.log(JSON.stringify({writerGuard:'clear',ignoredQueuedReadOnly:allowedQueuedPath},null,2));
+          NODE
+
+      - name: Guarded atomic Korea publication from proven artifact
+        env:
+          RECOVERY_BATCH_MARKETS: korea
+          RECOVERY_BATCH_INPUT_DIR: proof
+          RECOVERY_BATCH_REPORT: korea-proven-artifact-publish.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+          CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
+
+      - name: Strict postpublish all-seven audit
+        env:
+          CATALOG_AUDIT_OUTPUT: korea-postpublish-all7.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+
+      - name: Live Korea semantic audit
+        shell: bash
+        run: |
+          node --import tsx --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { catalogModelYearQuotaKey } = await import('./apps/web/lib/catalog/inventory-quota.ts');
+          const rows=await readMarketOffers('korea');
+          const dist=(field,subset=rows)=>subset.reduce((o,r)=>{const k=String(r?.[field]??'<missing>').trim()||'<missing>';o[k]=(o[k]||0)+1;return o;},{});
+          const sources=dist('sourceId');
+          const text=r=>`${r.make||''} ${r.model||''} ${r.trim||''} ${r.sourceTitle||''} ${JSON.stringify(r?.operational?.raw||{})}`;
+          const knownSedan=r=>/(?:genesis|제네시스)[\s_-]*g80|(?:hyundai|현대)[\s_-]*(?:grandeur|그랜저)|(?:hyundai|현대)[\s_-]*(?:ioniq\s*6|아이오닉\s*6)|(?:kia|기아)[\s_-]*(?:k9|k900|quoris|퀴리스)/i.test(text(r));
+          const badSedans=rows.filter(knownSedan).filter(r=>/^(?:suv|crossover|offroad)$/i.test(String(r.bodyType||'')));
+          const encar=rows.filter(r=>r.sourceId==='encar_direct');
+          const encarSuv=encar.filter(r=>/^(?:suv|crossover)$/i.test(String(r.bodyType||''))).length;
+          const encarRatio=encar.length?encarSuv/encar.length:1;
+          const casper2022=rows.filter(r=>Number(r.year)===2022&&/(?:hyundai|현대)/i.test(text(r))&&/(?:casper|캐스퍼)/i.test(text(r))).length;
+          const badYears=rows.filter(r=>Number(r.year)<2020);
+          const quota=new Map(); for(const r of rows){const k=catalogModelYearQuotaKey(r,'korea'); if(k) quota.set(k,(quota.get(k)||0)+1);}
+          const maxModelYear=Math.max(0,...quota.values());
+          const k933=rows.filter(r=>/(?:\bk9\b|k900|quoris|퀴리스)/i.test(text(r))&&/(?:\b3[.,]3\b[^\n]{0,40}\bgdi\b|\bgdi\b[^\n]{0,40}\b3[.,]3\b)/i.test(text(r)));
+          const unsafeK9=k933.filter(r=>[3000,3300].includes(Number(r.engineCc||0)));
+          const exactK9=k933.filter(r=>Number(r.engineCc||0)===3342);
+          const imageCounts=rows.map(r=>Array.isArray(r.images)?r.images.length:0);
+          const report={count:rows.length,sources,bodyType:dist('bodyType'),drive:dist('drive'),transmission:dist('transmission'),fuel:dist('fuel'),encar:{count:encar.length,suvOrCrossover:encarSuv,suvRatio:Number(encarRatio.toFixed(4))},knownSedanViolations:badSedans.length,casper2022,badYears:badYears.length,maxExactModelYear:maxModelYear,images:{min:Math.min(...imageCounts),below5:imageCounts.filter(n=>n<5).length},k9_3_3_gdi:{count:k933.length,unsafeRounded:unsafeK9.length,exact3342:exactK9.length}};
+          fs.writeFileSync('korea-live-semantic-audit.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report,null,2));
+          for(const source of ['encar_direct','kcar_korea_open','kbchachacha_korea_open']) if(!(Number(sources[source]||0)>0)) throw new Error(`live_missing_source:${source}`);
+          if(badYears.length) throw new Error(`live_bad_years:${badYears.length}`);
+          if(maxModelYear>20) throw new Error(`live_model_year_cap:${maxModelYear}`);
+          if(!casper2022) throw new Error('live_casper_2022_missing');
+          if(encarRatio>0.75) throw new Error(`live_encar_ratio:${encarRatio}`);
+          if(badSedans.length) throw new Error(`live_known_sedan_body:${badSedans.length}`);
+          if(Math.min(...imageCounts)<5||imageCounts.some(n=>n<5)) throw new Error('live_image_floor');
+          if(unsafeK9.length) throw new Error(`live_k9_rounded:${unsafeK9.length}`);
+          if(!exactK9.length) throw new Error('live_k9_exact_3342_missing');
+          NODE
+
+      - name: Verify six non-Korea counts unchanged postpublish
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const before=JSON.parse(fs.readFileSync('korea-publish-preflight-all7.json','utf8'));
+          const after=JSON.parse(fs.readFileSync('korea-postpublish-all7.json','utf8'));
+          const publish=JSON.parse(fs.readFileSync('korea-proven-artifact-publish.json','utf8'));
+          if(!publish.published||!publish.preserveUntouchedExact) throw new Error('publish_report_not_atomic_exact');
+          for(const market of ['china','japan','uae','europe','georgia','kyrgyzstan']) {
+            const a=Number(before.markets?.[market]?.count||0), b=Number(after.markets?.[market]?.count||0);
+            if(a!==b) throw new Error(`postpublish_count_changed:${market}:${a}->${b}`);
+          }
+          console.log(JSON.stringify({generationId:publish.generationId,korea:after.markets?.korea?.count,preserved:Object.fromEntries(['china','japan','uae','europe','georgia','kyrgyzstan'].map(m=>[m,after.markets?.[m]?.count]))},null,2));
+          NODE
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-proven-artifact-publication
+          path: |
+            korea-publish-preflight-all7.json
+            korea-publish-final-dry-run.json
+            korea-proven-artifact-publish.json
+            korea-postpublish-all7.json
+            korea-live-semantic-audit.json
+          if-no-files-found: warn
+          retention-days: 7
