@@ -141,7 +141,7 @@ function MobileBudgetPicker({ value, options, onChange }: { value: string; optio
 
   return <>
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}>
-      <span className="min-w-0 whitespace-nowrap">{value ? active?.label : "Бюджет"}</span>{!value ? <Chevron open={open} /> : null}
+      <span className="min-w-0 whitespace-nowrap">{value ? active?.label : "Бюджет"}</span>{!value ? <Chevron open={!open} /> : null}
     </button>
     {open ? <div className="absolute inset-0 z-[320] overflow-hidden p-2.5 backdrop-blur-md lg:hidden" style={{ background: "color-mix(in srgb, var(--ac-surface) 90%, transparent)" }}>
       <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
