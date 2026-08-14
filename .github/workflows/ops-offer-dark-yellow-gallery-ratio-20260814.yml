@@ -1,0 +1,92 @@
+name: Ops · Offer detail dark yellow and mobile ratio 20260814
+
+on:
+  push:
+    branches:
+      - ui/offer-dark-yellow-gallery-ratio-20260814
+    paths:
+      - ".github/workflows/ops-offer-dark-yellow-gallery-ratio-20260814.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/offer-dark-yellow-gallery-ratio-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply offer detail visual patch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path, old, new):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected 1 match, got {count}')
+              p.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+          preliminary = 'apps/web/components/catalog/PreliminaryPrice.tsx'
+          replace_once(
+              preliminary,
+              '''  const panelBackground = highlightElectrified\n    ? (lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)")\n    : "var(--ac-surface-2)";''',
+              '''  const electrifiedPanelBackground = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.14)";\n\n  useEffect(() => {\n    const node = rootRef.current;\n    if (!node || !panel || !highlightElectrified) return;\n    node.style.setProperty("background", electrifiedPanelBackground, "important");\n    node.style.setProperty("background-color", electrifiedPanelBackground, "important");\n    return () => {\n      node.style.removeProperty("background");\n      node.style.removeProperty("background-color");\n    };\n  }, [panel, highlightElectrified, electrifiedPanelBackground]);\n\n  const panelBackground = highlightElectrified\n    ? electrifiedPanelBackground\n    : "var(--ac-surface-2)";''',
+          )
+
+          trend = 'apps/web/components/catalog/PriceTrend.tsx'
+          replace_once(
+              trend,
+              'const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.10)";',
+              'const background = lightTheme ? "rgba(197, 138, 0, 0.10)" : "rgba(255, 210, 31, 0.14)";',
+          )
+
+          page = 'apps/web/app/(public)/cars/offer/[id]/page.tsx'
+          replace_once(
+              page,
+              'button[aria-label="Открыть фотографии автомобиля"]{height:300px!important}',
+              'button[aria-label="Открыть фотографии автомобиля"]{height:auto!important;aspect-ratio:4/3!important}',
+          )
+
+          test = 'tests/catalog-ui-neutral-preliminary-20260812.test.ts'
+          replace_once(
+              test,
+              '  assert.match(preliminaryPrice, /rgba\\(255, 210, 31, 0\\.10\\)/);',
+              '  assert.match(preliminaryPrice, /rgba\\(255, 210, 31, 0\\.14\\)/);',
+          )
+          replace_once(
+              test,
+              '  assert.match(priceTrend, /rgba\\(255, 210, 31, 0\\.10\\)/);',
+              '  assert.match(priceTrend, /rgba\\(255, 210, 31, 0\\.14\\)/);',
+          )
+          replace_once(
+              test,
+              '  assert.match(priceTrend, /\\[panel, lightTheme, direction, highlightElectrified\\]/);',
+              '  assert.match(priceTrend, /\\[panel, lightTheme, direction, highlightElectrified\\]/);\n  assert.match(preliminaryPrice, /setProperty\\("background", electrifiedPanelBackground, "important"\\)/);\n  assert.match(preliminaryPrice, /setProperty\\("background-color", electrifiedPanelBackground, "important"\\)/);\n  assert.match(offerPage, /height:auto!important;aspect-ratio:4\\/3!important/);',
+          )
+          PY
+      - name: Focused UI regression
+        run: node --import tsx --test tests/catalog-ui-neutral-preliminary-20260812.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build --workspace @avtocena/web
+      - name: Commit UI patch
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add 'apps/web/components/catalog/PreliminaryPrice.tsx' 'apps/web/components/catalog/PriceTrend.tsx' 'apps/web/app/(public)/cars/offer/[id]/page.tsx' 'tests/catalog-ui-neutral-preliminary-20260812.test.ts'
+          git commit -m "UI: tint dark electrified price panel and reduce mobile gallery crop"
+          git push origin HEAD:ui/offer-dark-yellow-gallery-ratio-20260814
