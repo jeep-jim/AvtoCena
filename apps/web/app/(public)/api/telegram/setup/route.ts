@@ -69,6 +69,21 @@ function failure(error: string, detail = "", stage = "", status = 502) {
   });
 }
 
+function deliveryWebhookUrl(publicUrl: string, webhookSecret: string) {
+  return `${publicUrl}?key=${encodeURIComponent(webhookSecret)}`;
+}
+
+function publicWebhookUrl(value: unknown) {
+  const raw = String(value || "");
+  if (!raw) return "";
+  try {
+    const url = new URL(raw);
+    return `${url.origin}${url.pathname}`;
+  } catch {
+    return raw.split("?")[0];
+  }
+}
+
 export async function GET() {
   if (!adminAllowed()) return failure("forbidden", "", "auth", 403);
   const config = await getTelegramPublicConfig();
@@ -137,11 +152,12 @@ export async function POST(request: Request) {
     return failure("telegram_storage_failed", detail, "storage", 500);
   }
 
+  const webhookDeliveryUrl = deliveryWebhookUrl(webhookUrl, webhookSecret);
   try {
     await telegramRequest<boolean>(token, "setWebhook", {
-      url: webhookUrl,
+      url: webhookDeliveryUrl,
       secret_token: webhookSecret,
-      allowed_updates: ["message", "my_chat_member", "channel_post", "edited_channel_post"],
+      allowed_updates: ["message", "callback_query", "my_chat_member", "channel_post", "edited_channel_post"],
       drop_pending_updates: false,
     });
   } catch (error) {
@@ -173,11 +189,11 @@ export async function POST(request: Request) {
     );
   }
 
-  const webhookConfiguredAt = webhook?.url === webhookUrl ? new Date().toISOString() : "";
+  const webhookConfiguredAt = webhook?.url === webhookDeliveryUrl ? new Date().toISOString() : "";
   if (!webhookConfiguredAt) {
     return failure(
       "telegram_webhook_mismatch",
-      webhook?.url ? `Telegram сохранил другой URL: ${webhook.url}` : "Telegram не сохранил URL webhook",
+      webhook?.url ? `Telegram сохранил другой URL: ${publicWebhookUrl(webhook.url)}` : "Telegram не сохранил URL webhook",
       "getWebhookInfo",
       502,
     );
