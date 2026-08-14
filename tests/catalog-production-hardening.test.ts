@@ -7,6 +7,7 @@ const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-produc
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
 const prestigeRepairWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v6-prestige-repair.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
+const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
 const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
@@ -68,6 +69,14 @@ test("vehicle knowledge audit protects count, retention ratio and unique ids", (
   assert.match(audit, /variantsWithThirtyMinutePower/);
   assert.match(audit, /certifiedPowerReferencesWithThirtyMinutePower/);
   assert.match(audit, /writeDataJson\(HEALTH_PATH, report\)/);
+});
+
+test("post-persist market audit rejects broken source identity and shallow Korea galleries", () => {
+  assert.match(postPersistAudit, /hasCredibleCatalogIdentity/);
+  assert.match(postPersistAudit, /invalidIdentityCount/);
+  assert.match(postPersistAudit, /invalid_identity/);
+  assert.match(postPersistAudit, /market === "korea"[\s\S]*belowFiveImagesCount/);
+  assert.match(postPersistAudit, /korea:below_five_images/);
 });
 
 test("publisher accumulates galleries before deduplication and protects the newest generations", () => {
