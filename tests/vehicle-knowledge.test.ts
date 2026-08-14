@@ -65,6 +65,30 @@ test("does not join adjacent trim tokens into a false model match", async () => 
   assert.notEqual(match?.model.id, "chevrolet/bolt");
 });
 
+test("does not use a make token as Mercedes-Benz model evidence", async () => {
+  const vito = await enrichOfferWithVehicleKnowledge(offer({
+    market: "europe",
+    make: "Mercedes-Benz",
+    model: "Vito",
+    trim: "114 CDI",
+    year: 2020,
+    sourceCurrency: "EUR",
+  }));
+  assert.equal(vito.model, "Vito");
+  assert.notEqual(vito.model, "Benz");
+
+  const sprinter = await enrichOfferWithVehicleKnowledge(offer({
+    market: "europe",
+    make: "Mercedes-Benz",
+    model: "Sprinter",
+    trim: "316 CDI",
+    year: 2020,
+    sourceCurrency: "EUR",
+  }));
+  assert.equal(sprinter.model, "Sprinter");
+  assert.notEqual(sprinter.model, "Benz");
+});
+
 test("model directory aggregates variants and power references into public characteristics", () => {
   assert.match(modelDirectory, /readVehicleKnowledgeVariants/);
   assert.match(modelDirectory, /readVehiclePowerKnowledge/);
