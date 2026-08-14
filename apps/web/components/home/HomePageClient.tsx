@@ -143,13 +143,13 @@ function MobileBudgetPicker({ value, options, onChange }: { value: string; optio
     <button type="button" onClick={() => setOpen((current) => !current)} className="ac-filter-control flex h-14 w-full items-center justify-between gap-2 rounded-2xl px-4 text-left text-sm font-black" aria-expanded={open}>
       <span className="min-w-0 truncate">{value ? active?.label : "Бюджет"}</span><Chevron open={open} />
     </button>
-    {open ? <div className="ac-budget-picker-overlay absolute inset-0 z-[320] overflow-hidden rounded-[1.8rem] p-2.5 backdrop-blur-md lg:hidden">
+    {open ? <div className="absolute inset-0 z-[320] overflow-hidden p-2.5 backdrop-blur-md lg:hidden" style={{ background: "color-mix(in srgb, var(--ac-surface) 90%, transparent)" }}>
       <div className="grid h-full grid-cols-2 grid-rows-5 gap-1.5">
         {options.map((option) => <button key={option.value || "any"} type="button" onClick={() => choose(option.value)} className={`ac-filter-option flex min-h-0 items-center rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight ${value === option.value ? "is-active" : ""}`}>
           <span className="truncate">{option.label}</span>
         </button>)}
-        <label className="ac-filter-option flex min-h-0 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight">
-          <input type="checkbox" checked={tradeIn} onChange={(event) => { setTradeIn(event.target.checked); setOpen(false); }} className="sr-only" />
+        <label onClick={(event) => { event.preventDefault(); setTradeIn((current) => !current); setOpen(false); }} className="ac-filter-option flex min-h-0 cursor-pointer items-center gap-2 rounded-xl px-3 py-1.5 text-left text-[11px] font-black leading-tight">
+          <input type="checkbox" checked={tradeIn} readOnly className="sr-only" />
           <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] font-black" style={{ background: tradeIn ? "#ff353d" : "var(--ac-surface-3)", border: tradeIn ? "1px solid #ff353d" : "1px solid rgba(103,113,130,.55)", color: tradeIn ? "#fff" : "transparent" }}>✓</span>
           <span className="truncate">Трейд-ин</span>
         </label>
