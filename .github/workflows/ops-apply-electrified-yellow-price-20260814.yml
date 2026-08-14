@@ -1,0 +1,99 @@
+name: Ops · apply electrified yellow price UI
+
+on:
+  push:
+    branches:
+      - ops/apply-electrified-yellow-price-20260814
+    paths:
+      - ".github/workflows/ops-apply-electrified-yellow-price-20260814.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ui/electrified-yellow-price-20260814
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Patch catalog price color semantics
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('apps/web/components/catalog/CatalogPrice.tsx')
+          s = p.read_text()
+          anchor = '  const totalRub = Number(offer?.totalRub || 0);\n'
+          insert = '''  const totalRub = Number(offer?.totalRub || 0);\n  const powertrainKind = String(offer?.powertrainKind || "").toLowerCase();\n  const fuel = String(offer?.fuel || "").toLowerCase();\n  const highlightElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)\n    || /(?:electric|battery|\\bbev\\b|\\bev\\b|hybrid|phev|hev|mhev|электро|гибрид)/i.test(fuel);\n'''
+          if 'const highlightElectrified' not in s:
+              if anchor not in s: raise SystemExit('CatalogPrice totalRub anchor missing')
+              s = s.replace(anchor, insert, 1)
+          s = s.replace('if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;', 'if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;')
+          s = s.replace('return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;', 'return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;')
+          p.write_text(s)
+
+          p = Path('apps/web/components/catalog/PreliminaryPrice.tsx')
+          s = p.read_text()
+          s = s.replace('  panel = false,\n}: {', '  panel = false,\n  highlightElectrified = false,\n}: {', 1)
+          s = s.replace('  panel?: boolean;\n}) {', '  panel?: boolean;\n  highlightElectrified?: boolean;\n}) {', 1)
+          old = '  const priceColor = "var(--ac-text)";'
+          new = '  const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : "var(--ac-text)";'
+          if old not in s and new not in s: raise SystemExit('PreliminaryPrice color anchor missing')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          p = Path('apps/web/components/catalog/PriceTrend.tsx')
+          s = p.read_text()
+          old_sig = 'export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean }) {'
+          new_sig = 'export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false, highlightElectrified = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean; highlightElectrified?: boolean }) {'
+          if old_sig in s:
+              s = s.replace(old_sig, new_sig, 1)
+          elif new_sig not in s:
+              raise SystemExit('PriceTrend signature anchor missing')
+          anchor = '  const openSheet = () => { if (sheetRate && trend) { setPopoverOpen(false); setSheetOpen(true); } };\n'
+          insert = anchor + '  const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;\n'
+          if 'const priceColor = highlightElectrified' not in s:
+              if anchor not in s: raise SystemExit('PriceTrend openSheet anchor missing')
+              s = s.replace(anchor, insert, 1)
+          old_div = '<div className={`ac-price ${priceStateClass} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`}>{hasPrice ?'
+          new_div = '<div className={`ac-price ${priceStateClass} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ?'
+          if old_div in s:
+              s = s.replace(old_div, new_div, 1)
+          elif new_div not in s:
+              raise SystemExit('PriceTrend price div anchor missing')
+          p.write_text(s)
+
+          p = Path('tests/catalog-ui-neutral-preliminary-20260812.test.ts')
+          s = p.read_text()
+          if 'const catalogPrice =' not in s:
+              s = s.replace('const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");\n', 'const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");\nconst preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");\nconst priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");\n', 1)
+          start = s.index('test("preliminary catalog pricing stays visually neutral"')
+          end = s.index('\n\ntest("catalog route loader', start)
+          replacement = '''test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {\n  assert.match(catalogPrice, /highlightElectrified/);\n  assert.match(catalogPrice, /electric.*series_hybrid.*other_hybrid/);\n  assert.match(catalogPrice, /hybrid\\|phev\\|hev\\|mhev/);\n  assert.match(catalogPrice, /PreliminaryPrice[^;]+highlightElectrified=\\{highlightElectrified\\}/s);\n  assert.match(catalogPrice, /PriceTrend[^;]+highlightElectrified=\\{highlightElectrified\\}/s);\n  assert.match(preliminaryPrice, /highlightElectrified \\? \\(lightTheme \\? "#c58a00" : "#ffd21f"\\) : "var\\(--ac-text\\)"/);\n  assert.match(priceTrend, /highlightElectrified \\? \\(lightTheme \\? "#c58a00" : "#ffd21f"\\) : undefined/);\n  assert.match(priceTrend, /style=\\{priceColor \\? \\{ color: priceColor \\} : undefined\\}/);\n  assert.match(preliminaryPrice, /Почему цена предварительная/);\n  assert.match(preliminaryPrice, /const panelBackground = "var\\(--ac-surface-2\\)"/);\n});'''
+          s = s[:start] + replacement + s[end:]
+          p.write_text(s)
+          PY
+      - name: Catalog UI price color tests
+        run: node --import tsx --test tests/catalog-ui-neutral-preliminary-20260812.test.ts
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
+      - name: Push code-only UI patch
+        shell: bash
+        run: |
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add apps/web/components/catalog/CatalogPrice.tsx apps/web/components/catalog/PreliminaryPrice.tsx apps/web/components/catalog/PriceTrend.tsx tests/catalog-ui-neutral-preliminary-20260812.test.ts
+          git diff --cached --check
+          git commit -m "Highlight electrified catalog prices in yellow"
+          git push origin HEAD:ui/electrified-yellow-price-20260814
