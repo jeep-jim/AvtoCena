@@ -14,7 +14,11 @@ const AUTH_MESSAGES: Record<string, string> = {
   telegram_deprecated: "Старый Telegram Login больше не поддерживается. Используйте новую кнопку входа.",
   telegram_oauth_error: "Telegram отклонил авторизацию до возврата к АвтоЦене. Повторите вход.",
   telegram_state_invalid: "Telegram вернулся в АвтоЦену, но защитная сессия входа не совпала или устарела. Начните вход заново.",
-  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог обменять его на токен. Настройки Client Secret или OIDC требуют проверки.",
+  telegram_token_exchange_failed: "Telegram вернул код авторизации, но сервер АвтоЦены не смог завершить обмен на токен. Это сетевой или неизвестный ответ token endpoint.",
+  telegram_token_invalid_client: "Telegram ответил invalid_client: Client ID или Client Secret не принят. Перепроверьте Client Secret из BotFather → Login Widget.",
+  telegram_token_invalid_grant: "Telegram ответил invalid_grant: код авторизации или PKCE verifier не принят. Client Secret здесь, скорее всего, ни при чём.",
+  telegram_token_invalid_request: "Telegram ответил invalid_request: параметры token-запроса не приняты. Исправим сам OIDC-запрос АвтоЦены.",
+  telegram_token_unauthorized_client: "Telegram ответил unauthorized_client: текущему Login Widget не разрешён этот OIDC flow.",
   telegram_id_token_invalid: "Telegram вернул токен, но сервер не смог подтвердить его подпись или параметры. Вход остановлен безопасно.",
 };
 
