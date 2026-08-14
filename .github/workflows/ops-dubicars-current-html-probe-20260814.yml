@@ -20,7 +20,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Inspect list and parser on a few detail responses
+      - name: Inspect current DubiCars parser and image contract
         shell: bash
         run: |
           set -euo pipefail
@@ -33,34 +33,29 @@ jobs:
             pragma: 'no-cache',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36',
           };
-          const url = 'https://www.dubicars.com/uae/used?page=1';
-          const response = await fetch(url, { headers, redirect: 'follow' });
+          const listUrl = 'https://www.dubicars.com/uae/used?page=1';
+          const response = await fetch(listUrl, { headers, redirect: 'follow' });
           const html = await response.text();
           const hrefs = [...html.matchAll(/href=["']([^"']+)["']/gi)].map((m) => m[1]);
-          const exactOld = [...new Set(hrefs.filter((v) => /-\d{5,}\.html(?:[?#]|$)/i.test(v)))];
-          console.log(JSON.stringify({ status: response.status, bytes: html.length, hrefCount: hrefs.length, exactOldCount: exactOld.length, sample: exactOld.slice(0, 5) }, null, 2));
-          for (const raw of exactOld.slice(0, 5)) {
-            const detailUrl = new URL(raw, url).toString();
-            const detail = await fetch(detailUrl, { headers: { ...headers, referer: url }, redirect: 'follow' });
+          const links = [...new Set(hrefs.filter((v) => /-\d{5,}\.html(?:[?#]|$)/i.test(v)))];
+          for (const raw of links.slice(0, 3)) {
+            const detailUrl = new URL(raw, listUrl).toString();
+            const detail = await fetch(detailUrl, { headers: { ...headers, referer: listUrl }, redirect: 'follow' });
             const markup = await detail.text();
             const parsed = parseDubicarsCurrentListing(markup, detailUrl);
+            const rawImages = [...new Set([...markup.matchAll(/https?:\\?\/\\?\/[^"'<>\s\\]+\.(?:jpe?g|webp)(?:\?[^"'<>\s\\]*)?/gi)].map((m) => m[0].replace(/\\\//g,'/')))];
+            const broad = rawImages.filter((v) => /\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+|f_?\d+x\d+)\//i.test(v));
+            const oldStrict = broad.filter((v) => /\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+|f_?\d+x\d+)\/[^/?#]+\/[a-f0-9-]+\.(?:jpe?g|webp)(?:[?#]|$)/i.test(v));
+            const plain = markup.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
             console.log(JSON.stringify({
               detailUrl,
-              status: detail.status,
-              bytes: markup.length,
               h1: markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(),
-              parsed: parsed ? {
-                id: parsed.id,
-                make: parsed.make,
-                model: parsed.model,
-                year: parsed.year,
-                price: parsed.price,
-                currency: parsed.currency,
-                imageCount: parsed.images.length,
-                firstImage: parsed.images[0],
-              } : null,
-              modelYear: markup.match(/Model year[\s\S]{0,160}?((?:19|20)\d{2})/i)?.[1],
-              currentImagePatternCount: [...markup.matchAll(/\/images\/[a-f0-9]{6}\/(?:w_?\d+x\d+|\d+x\d+|f_?\d+x\d+)\/[^"'<>\s]+/gi)].length,
+              parsed: parsed ? { make: parsed.make, model: parsed.model, year: parsed.year, images: parsed.images.length } : null,
+              parserYear: plain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || '',
+              rawImages: rawImages.length,
+              broadImages: broad.length,
+              oldStrictImages: oldStrict.length,
+              broadSample: broad.slice(0, 12),
             }, null, 2));
           }
           NODE
