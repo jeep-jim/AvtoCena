@@ -27,6 +27,5 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
     lastModified: item.updatedAt ? new Date(item.updatedAt) : new Date(),
     changeFrequency: "hourly" as const,
     priority: 0.68,
-    images: item.cardImageUrl ? [item.cardImageUrl] : undefined,
   }));
 }
