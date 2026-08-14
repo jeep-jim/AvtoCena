@@ -37,10 +37,12 @@ test("every successful current read-model refresh rebuilds the compact overview"
   assert.match(publisher, /catalog_overview_refreshed_with_current_read_models/);
 });
 
-test("overview workflow remains a guarded backstop after successful model-cap runs", () => {
+test("overview workflow remains a guarded backstop and refreshes after publisher changes", () => {
   assert.match(workflow, /Catalog quality · enforce global model cap/);
   assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(workflow, /branches:\s*\n\s*- main/);
-  assert.match(workflow, /paths:\s*\n\s*- "\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.match(workflow, /"\.github\/workflows\/catalog-overview-read-model\.yml"/);
+  assert.match(workflow, /"scripts\/catalog-build-overview-read-model\.mjs"/);
+  assert.match(workflow, /"scripts\/catalog-publish-current-read-models\.mjs"/);
   assert.match(workflow, /github\.event_name == 'push'/);
 });
