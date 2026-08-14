@@ -10,7 +10,7 @@ import type { CatalogImage, VehicleOffer } from "../apps/web/lib/catalog/types";
 const PUBLIC_MARKETS = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"] as const;
 const TARGET_MARKET = "europe";
 const TARGET_SOURCE = "autoscout_europe_open";
-const REPORT_FILE = process.env.EUROPE_HQ_REPORT_FILE || "europe-autoscout-hq-refresh-report.json";
+const REPORT_FILE = process.env.EUROPE_HQ_REPORT_FILE || process.env.CATALOG_GALLERY_REPORT_FILE || "europe-autoscout-hq-refresh-report.json";
 const MAX_TARGETS = Math.max(1, Number(process.env.EUROPE_HQ_MAX_TARGETS || 500));
 const CONCURRENCY = Math.max(1, Math.min(6, Number(process.env.EUROPE_HQ_CONCURRENCY || 3)));
 const operationId = `europe_hq_${crypto.randomUUID()}`;
