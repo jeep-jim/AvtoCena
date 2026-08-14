@@ -6,6 +6,7 @@ on:
       - ops/europe-post-hq-model-audit-20260814
     paths:
       - ".github/workflows/ops-europe-post-hq-model-audit-v2-20260814.yml"
+      - "scripts/ops-europe-post-hq-model-audit-20260814.ts"
 
 permissions:
   contents: read
