@@ -10,6 +10,10 @@ on:
       - data/catalog/imports/**
   workflow_dispatch:
 
+concurrency:
+  group: avtocena-production
+  cancel-in-progress: true
+
 env:
   IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-web:${{ github.sha }}
 
@@ -44,12 +48,7 @@ jobs:
           revision-cores: 1
           revision-memory: 2Gb
           revision-core-fraction: 100
-          # Next.js spends most of its time waiting for object storage. Limit one
-          # warm instance to four simultaneous SSR/RSC requests so a page burst
-          # has enough heap headroom instead of risking a runtime signal kill.
           revision-concurrency: 4
-          # The catalog is a public storefront: keep one initialized instance
-          # ready so the first visitor does not pay the 4-6 second cold start.
           revision-provisioned: 1
           revision-execution-timeout: 30
           revision-env: |
