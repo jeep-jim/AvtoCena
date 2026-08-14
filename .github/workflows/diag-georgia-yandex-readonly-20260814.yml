@@ -1,0 +1,30 @@
+name: Diag Georgia Yandex read-only 20260814
+
+on:
+  push:
+    branches:
+      - diag/georgia-yandex-readonly-20260814
+    paths:
+      - .github/workflows/diag-georgia-yandex-readonly-20260814.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Probe canonical Georgia through deployed Yandex runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          for source in myauto autopapa; do
+            url="https://avtocena.com/api/internal/georgia-recovery-e2f913?pages=1&startPage=1&source=${source}"
+            curl --retry 2 --retry-delay 3 --retry-all-errors --connect-timeout 20 --max-time 300 -fsS "$url" -o "${source}.json"
+            jq -e '.market == "georgia" and .partial == true and (.count | type == "number")' "${source}.json" >/dev/null
+            jq -e '[.offers[] | select((.year|tonumber) < 2020)] | length == 0' "${source}.json" >/dev/null
+            jq -e '[.offers[] | select((.images|length) < 5)] | length == 0' "${source}.json" >/dev/null
+            jq -e '[.offers[] | select(.sourceId != "myauto_georgia_list" and .sourceId != "autopapa_georgia_open")] | length == 0' "${source}.json" >/dev/null
+            jq '{source:.report.source,count,rawSourceCounts:.report.rawSourceCounts,sourceCounts:.report.sourceCounts,imageStats:.report.imageStats,calculatedCount:.report.calculatedCount,preliminaryCount:.report.preliminaryCount,rejected:.report.rejected,yearMin:([.offers[].year]|min),minImages:([.offers[]|(.images|length)]|min),maxImages:([.offers[]|(.images|length)]|max)}' "${source}.json"
+          done
