@@ -1,6 +1,7 @@
 const { readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
@@ -10,8 +11,25 @@ let minimums = {};
 try { minimums = JSON.parse(process.env.CATALOG_AUDIT_MIN_COUNTS_JSON || "{}"); } catch { minimums = {}; }
 const currentYear = new Date().getFullYear();
 const nonVehicle = /\b(?:motorcycle|motorbike|scooter|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|truck|dump|tipper|lorry)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
+const displayPlaceholder = /^(?:unknown|undefined|null|none|n\/?a|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
+const internalSeries = /^(?:series|серия)\s*[-:#]?\s*\d+(?:\s|$)/iu;
 function isElectric(offer) { return String(offer?.powertrainKind || "") === "electric" || /(?:electric|pure electric|bev|纯电|электро)/i.test(String(offer?.fuel || "")); }
 function isHybrid(offer) { return ["series_hybrid", "other_hybrid"].includes(String(offer?.powertrainKind || "")) || /(?:hybrid|phev|hev|增程|混合动力|гибрид)/i.test(String(offer?.fuel || "")); }
+function normalizedIdentity(value) { return String(value || "").normalize("NFKC").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, " ").trim(); }
+function renderedIdentityProblems(offer) {
+  const presented = presentCatalogOffer(offer);
+  const makeLabel = String(presented?.makeLabel || "").trim();
+  const modelLabel = String(presented?.modelLabel || "").trim();
+  const title = String(presented?.title || "").trim();
+  const sourceSame = normalizedIdentity(offer?.make) !== "" && normalizedIdentity(offer?.make) === normalizedIdentity(offer?.model);
+  const problems = [];
+  if (!makeLabel || displayPlaceholder.test(makeLabel)) problems.push("display_make_missing");
+  if (!modelLabel || displayPlaceholder.test(modelLabel)) problems.push("display_model_missing");
+  if (internalSeries.test(modelLabel)) problems.push("display_internal_series");
+  if (!sourceSame && makeLabel && modelLabel && normalizedIdentity(makeLabel) === normalizedIdentity(modelLabel)) problems.push("display_model_equals_make");
+  if (!sourceSame && makeLabel && title && normalizedIdentity(title) === normalizedIdentity(makeLabel)) problems.push("display_title_make_only");
+  return { problems, makeLabel, modelLabel, title };
+}
 function japanSoldIdentityOk(offer) {
   const raw = offer?.operational?.raw || {};
   return offer?.market !== "japan" || (
@@ -26,17 +44,35 @@ function japanSoldIdentityOk(offer) {
   );
 }
 
-const report = { version: 2, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
+const report = { version: 3, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
   try { rows = await readMarketOffers(market); } catch (error) { report.failures.push(`${market}:read:${String(error?.message || error)}`); continue; }
   const modelYearCounts = new Map();
   const exactModelCounts = new Map();
+  const renderedIdentityReasonCounts = {};
+  const renderedIdentitySamples = [];
+  let renderedIdentityFailureCount = 0;
   for (const offer of rows) {
     const yearKey = catalogModelYearQuotaKey(offer, market);
     const exactKey = catalogExactModelKey(offer, market);
     if (yearKey) modelYearCounts.set(yearKey, Number(modelYearCounts.get(yearKey) || 0) + 1);
     if (exactKey) exactModelCounts.set(exactKey, Number(exactModelCounts.get(exactKey) || 0) + 1);
+    const rendered = renderedIdentityProblems(offer);
+    if (rendered.problems.length) {
+      renderedIdentityFailureCount += 1;
+      for (const problem of rendered.problems) renderedIdentityReasonCounts[problem] = Number(renderedIdentityReasonCounts[problem] || 0) + 1;
+      if (renderedIdentitySamples.length < 30) renderedIdentitySamples.push({
+        id: offer?.id,
+        sourceId: offer?.sourceId,
+        make: offer?.make,
+        model: offer?.model,
+        makeLabel: rendered.makeLabel,
+        modelLabel: rendered.modelLabel,
+        title: rendered.title,
+        problems: rendered.problems,
+      });
+    }
   }
   const stats = {
     count: rows.length,
@@ -49,6 +85,9 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     marketMinYear: catalogMinYearForMarket(market),
     belowMarketMinYearCount: rows.filter((offer) => Number(offer?.year || 0) < catalogMinYearForMarket(market)).length,
     invalidIdentityCount: rows.filter((offer) => !hasCredibleCatalogIdentity(offer)).length,
+    renderedIdentityFailureCount,
+    renderedIdentityReasonCounts,
+    renderedIdentitySamples,
     distinctModels: exactModelCounts.size,
     distinctModelYears: modelYearCounts.size,
     distinctMakes: new Set(rows.map((offer) => String(offer?.make || "").trim().toLowerCase()).filter(Boolean)).size,
@@ -64,6 +103,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
   if (assertMarkets.has(market) && stats.invalidIdentityCount > 0) report.failures.push(`${market}:invalid_identity:${stats.invalidIdentityCount}`);
+  if (assertMarkets.has(market) && stats.renderedIdentityFailureCount > 0) report.failures.push(`${market}:rendered_identity:${stats.renderedIdentityFailureCount}`);
   if (assertMarkets.has(market) && stats.maxPerExactModelYear > maxOffersPerModelYear) report.failures.push(`${market}:model_year_quota:${stats.maxPerExactModelYear}>${maxOffersPerModelYear}`);
   if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
