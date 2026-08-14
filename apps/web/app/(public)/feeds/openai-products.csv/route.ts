@@ -1,3 +1,4 @@
+import { gzipSync } from "node:zlib";
 import { aiCatalogDescription, aiCatalogTitle, absoluteAvtocenaUrl, catalogOfferUrl, readAiCatalogProjection } from "@/lib/ai-discovery";
 
 export const dynamic = "force-dynamic";
@@ -42,14 +43,19 @@ export async function GET() {
     });
 
   const body = `\uFEFF${HEADER.join(",")}\n${rows.join("\n")}\n`;
-  return new Response(body, {
+  const compressed = gzipSync(Buffer.from(body, "utf8"), { level: 6 });
+
+  return new Response(compressed, {
     status: 200,
     headers: {
       "content-type": "text/csv; charset=utf-8",
+      "content-encoding": "gzip",
       "content-disposition": 'inline; filename="avtocena-openai-products.csv"',
       "cache-control": "public, max-age=300, s-maxage=300, stale-while-revalidate=600",
+      "vary": "Accept-Encoding",
       "x-avtocena-catalog-generation": projection.generationId || "unknown",
       "x-avtocena-product-count": String(rows.length),
+      "x-avtocena-feed-compression": "gzip",
     },
   });
 }
