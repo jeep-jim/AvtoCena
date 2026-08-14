@@ -84,10 +84,13 @@ jobs:
           robots="$("${CURL[@]}" 'https://avtocena.com/robots.txt')"
           grep -q 'User-Agent: OAI-SearchBot' <<<"$robots"
           grep -q 'Sitemap: https://avtocena.com/sitemap.xml' <<<"$robots"
-          grep -q 'Sitemap: https://avtocena.com/cars/sitemap/0.xml' <<<"$robots"
+          grep -q 'Sitemap: https://avtocena.com/cars/sitemap.xml' <<<"$robots"
 
           echo '4/9 sitemaps'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/sitemap.xml'
+          sitemap_index="$("${CURL[@]}" 'https://avtocena.com/cars/sitemap.xml')"
+          grep -q '<sitemapindex' <<<"$sitemap_index"
+          grep -q 'https://avtocena.com/cars/sitemap/0.xml' <<<"$sitemap_index"
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/sitemap/0.xml'
 
           echo '5/9 llms guide'
