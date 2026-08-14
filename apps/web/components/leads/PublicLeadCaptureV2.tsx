@@ -165,6 +165,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
   const [carFocused, setCarFocused] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [telegramStartUrl, setTelegramStartUrl] = useState("");
 
   const isFavorites = request.mode === "favorites";
   const isOffer = request.mode === "offer";
@@ -222,7 +223,7 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
     event.preventDefault();
     const validation = validate();
     if (validation) { setStatus("error"); setMessage(validation); return; }
-    setStatus("sending"); setMessage("");
+    setStatus("sending"); setMessage(""); setTelegramStartUrl("");
 
     const operation = operationIdFor(request, selectedIds);
     const carText = isFavorites ? selectedFavorites.map((item) => cleanText(item.title) || item.id).join("; ") : cleanText(form.car);
@@ -253,8 +254,12 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
       const json = await response.json().catch(() => ({}));
       if (!response.ok || !json?.ok) throw new Error(json?.error || "Не удалось отправить заявку");
       clearOperationId(operation.key);
+      const startUrl = typeof json?.telegramStartUrl === "string" ? json.telegramStartUrl : "";
+      setTelegramStartUrl(startUrl);
       setStatus("success");
-      setMessage(`Заявка принята. Менеджер ${contactPreference === "message" ? "напишет вам" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
+      setMessage(startUrl
+        ? "Заявка принята. Откройте Telegram и нажмите Start — бот сразу отправит сохранённые варианты и расчёты, а менеджер продолжит общение там."
+        : `Заявка принята. Менеджер ${contactPreference === "message" ? "напишет вам" : "перезвонит вам"} в рабочее время: ${MOSCOW_HOURS}.`);
     } catch (error) {
       setStatus("error");
       setMessage((error as Error)?.message || "Ошибка сети. Повторная отправка не создаст дубль заявки.");
@@ -274,11 +279,11 @@ function LeadDialog({ request, favorites, onClose }: { request: LeadRequest; fav
             <button type="button" disabled={status === "sending"} onClick={onClose} className="absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-xl font-bold disabled:opacity-40" aria-label="Закрыть">×</button>
           </header>
 
-          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p></div> : <form onSubmit={submit} className="mt-6 grid gap-4">
+          {status === "success" ? <div className="mt-6 rounded-[1.5rem] bg-emerald-500/10 p-5 md:p-6"><h3 className="text-2xl font-black">Спасибо, заявку получили</h3><p className="mt-2 text-sm font-bold leading-6 text-[var(--ac-muted)] md:text-base">{message}</p>{telegramStartUrl ? <a href={telegramStartUrl} target="_blank" rel="noreferrer" className="ac-colored-button mt-4 inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#229ED9] px-5 py-3 text-sm font-black text-white">Открыть Telegram →</a> : null}</div> : <form onSubmit={submit} className="mt-6 grid gap-4">
             {isFavorites ? <FavoriteSelector items={favorites} selectedIds={selectedIds} onToggle={toggleFavorite} /> : null}
             <div className="grid gap-3 md:grid-cols-2"><label className="block min-w-0"><FieldLabel>Ваш город</FieldLabel><input value={form.city} onChange={(event) => setField("city", event.target.value)} autoComplete="address-level2" placeholder="Например, Москва" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label><label className="block min-w-0"><FieldLabel>Имя</FieldLabel><input value={form.name} onChange={(event) => setField("name", event.target.value)} autoComplete="name" placeholder="Как к вам обращаться" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label></div>
 
-            <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); }} />
+            <ContactChoice value={contactPreference} onChange={(value) => { setContactPreference(value); setStatus("idle"); setMessage(""); setTelegramStartUrl(""); }} />
             {contactPreference === "message" ? <MessengerFields messenger={messenger} setMessenger={setMessenger} contact={messengerContact} setContact={setMessengerContact} /> : <label className="block min-w-0"><FieldLabel>Телефон</FieldLabel><input type="tel" value={form.phone} onChange={(event) => setField("phone", event.target.value)} autoComplete="tel" inputMode="tel" placeholder="+7 999 000-00-00" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" /></label>}
 
             {!isFavorites && !isOffer ? <div className="grid gap-3 md:grid-cols-2"><label className="relative block min-w-0"><FieldLabel>Интересующее авто</FieldLabel><input value={form.car} onChange={(event) => setField("car", event.target.value)} onFocus={() => setCarFocused(true)} onBlur={() => window.setTimeout(() => setCarFocused(false), 120)} placeholder="Например, Toyota RAV4" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 outline-none" autoComplete="off" />{carFocused && suggestions.length ? <div className="absolute left-0 right-0 top-[calc(100%+7px)] z-30 max-h-56 overflow-y-auto rounded-2xl bg-[var(--ac-surface-3)] p-2 shadow-2xl">{suggestions.map((item, index) => { const label = cleanText(item.label) || [item.make, item.model].map(cleanText).filter(Boolean).join(" "); return <button key={item.id || `${label}-${index}`} type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => { setField("car", label); setSuggestions([]); setCarFocused(false); }} className="block min-h-10 w-full rounded-xl px-3 py-2 text-left text-sm font-bold text-[var(--ac-text)] hover:bg-white/[.07]">{label}</button>; })}</div> : null}<span className="mt-1.5 block text-[11px] font-semibold leading-4 text-[var(--ac-muted)]">Можно выбрать подсказку или написать любую марку и модель вручную.</span></label><label className="block min-w-0"><FieldLabel>Бюджет</FieldLabel><div className="relative"><input value={formatBudgetInput(form.budget)} onChange={(event) => setField("budget", event.target.value.replace(/\D/g, ""))} inputMode="numeric" placeholder="Например, 3 000 000" className="soft-input h-[52px] w-full rounded-2xl bg-[var(--ac-surface-2)] px-4 pr-10 outline-none" /><span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-black text-[var(--ac-muted)]">₽</span></div></label></div> : null}
