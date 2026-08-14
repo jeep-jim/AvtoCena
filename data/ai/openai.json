@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "АвтоЦена",
+  "website": "https://avtocena.com",
+  "discovery": {
+    "robots": "https://avtocena.com/robots.txt",
+    "sitemap": "https://avtocena.com/sitemap.xml",
+    "llms": "https://avtocena.com/llms.txt",
+    "productFeed": "https://avtocena.com/feeds/openai-products.csv",
+    "mcp": "https://avtocena.com/mcp"
+  },
+  "plugin": {
+    "shortDescription": "Поиск автомобилей, характеристики и расчёты стоимости ввоза под ключ из АвтоЦены.",
+    "longDescription": "АвтоЦена помогает найти актуальные автомобили на поддерживаемых зарубежных рынках, получить структурированные характеристики автомобиля и сохранённый расчёт стоимости ввоза в Россию под ключ. Для EV и PHEV база АвтоЦены хранит отдельные поля 30-минутной мощности и мощности, используемой в расчётах, когда такие данные подтверждены.",
+    "starterPrompts": [
+      "Найди кроссоверы до 2 500 000 ₽ под ключ",
+      "Покажи Toyota из Японии не старше 2022 года",
+      "Сколько стоит под ключ этот автомобиль из АвтоЦены?",
+      "Какая 30-минутная мощность у этой версии автомобиля?"
+    ],
+    "submission": {
+      "privacyPolicyUrl": null,
+      "termsOfServiceUrl": null,
+      "supportUrl": null,
+      "countryAvailability": [],
+      "requiresOwnerConfirmation": true
+    }
+  },
+  "evals": {
+    "positive": [
+      {
+        "prompt": "Найди мне Toyota Corolla Cross не старше 2023 года до 2,5 млн рублей под ключ",
+        "expectedTools": ["search_cars"]
+      },
+      {
+        "prompt": "Покажи актуальные BMW X5 из Кореи и отсортируй по цене",
+        "expectedTools": ["search_cars"]
+      },
+      {
+        "prompt": "Открой данные по конкретной карточке АвтоЦены с известным offerId",
+        "expectedTools": ["get_car"]
+      },
+      {
+        "prompt": "Из чего складывается рассчитанная стоимость под ключ для этой машины АвтоЦены?",
+        "expectedTools": ["get_import_calculation"]
+      },
+      {
+        "prompt": "Какая 30-минутная мощность у Geely Galaxy M7 и какой источник у этой характеристики?",
+        "expectedTools": ["get_vehicle_specs"]
+      },
+      {
+        "prompt": "Сравни эти три предложения АвтоЦены по цене и характеристикам",
+        "expectedTools": ["compare_cars"]
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Какая сегодня погода в Москве?",
+        "expectedTools": []
+      },
+      {
+        "prompt": "Напиши поздравление с днём рождения",
+        "expectedTools": []
+      },
+      {
+        "prompt": "Расскажи историю основания BMW",
+        "expectedTools": []
+      }
+    ]
+  },
+  "dataPolicy": {
+    "readOnly": true,
+    "guessMissingVehicleData": false,
+    "preferPower30MinKwForEvPhev": true,
+    "priceMeaning": "Сохранённый расчёт АвтоЦены под ключ на момент последнего обновления публичной карточки."
+  }
+}
