@@ -1,0 +1,77 @@
+name: Ops · UAE read-only readiness 20260814
+run-name: UAE exact-source readiness · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/uae-readonly-readiness-20260814
+
+permissions:
+  contents: read
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        source:
+          - dubizzle_uae_open
+          - dubicars_uae_exact
+    env:
+      CATALOG_REBUILD_MARKET: uae
+      CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.source }}
+      CATALOG_REBUILD_OUTPUT: readiness-uae-${{ matrix.source }}.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "5"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "3"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "900000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Collect exact UAE cards without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Enforce UAE source readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const path = process.env.CATALOG_REBUILD_OUTPUT;
+          const expected = process.env.CATALOG_REBUILD_SOURCE_IDS;
+          const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const source = (data.report?.sources || []).find((row) => row.sourceId === expected);
+          const problems = [];
+          if (!offers.length) problems.push('zero_production_cards');
+          if (!source || Number(source.saved || 0) < 1) problems.push('source_saved_zero');
+          if (offers.some((offer) => offer.sourceId !== expected)) problems.push('source_identity_mismatch');
+          if (offers.some((offer) => !String(offer.make || '').trim() || !String(offer.model || '').trim())) problems.push('make_model_missing');
+          if (offers.some((offer) => Number(offer.year || 0) < 2020)) problems.push('pre_2020');
+          if (offers.some((offer) => Number(offer.sourcePrice || 0) <= 0 || !String(offer.sourceCurrency || '').trim())) problems.push('source_price_missing');
+          if (offers.some((offer) => !/^https?:\/\//i.test(String(offer.operational?.sourceUrl || '')))) problems.push('source_url_missing');
+          if (offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < 5)) problems.push('gallery_below_five');
+          console.log(JSON.stringify({ expected, count: offers.length, source, problems, errors: data.report?.errors || [], sample: offers.map((offer) => ({ id: offer.id, make: offer.make, model: offer.model, year: offer.year, price: offer.sourcePrice, currency: offer.sourceCurrency, images: offer.images?.length, sourceUrl: offer.operational?.sourceUrl })) }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-uae-${{ matrix.source }}
+          path: readiness-uae-${{ matrix.source }}.json
+          if-no-files-found: warn
+          retention-days: 5
