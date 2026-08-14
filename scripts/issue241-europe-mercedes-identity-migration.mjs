@@ -21,6 +21,7 @@ const EXPECTED_TARGET_IDS = new Set([
   "6906d7d816052a5b2610666f","7b737a21efadae84bc00104e","8b29e7fa08328ea7a4d16ed1","8a1b9bbd4ce168a51136acd4","22548d939e36f93b2d23053e","c835149813ac708e08b77c14","f228176becb418e474e18b64","e04352f15be8d6355936a213","40c1138f805b48b80f36e801","3061cad0b39c3bae276f8808","39d626b9ee8a070564d1952c","9fdd0a08b1efc2b8a83e4ef6","beb7379dbe7bcf373627ed45","32c64c33b90badffffe9de75","a1fdbf847f3c2b26d7e864b3","88e2dd1d739bbebce517db83","0c4dbe2ffba19fd4c1bb1577","92c84da829bb66e7e82d6e98","0638f8764fc2d2e8b88952c6","794f491d05c214dc565e3e78","8408cab3872e99690c2f371a","832ae9f292172221aa6d6b70","ca61c88592911c1f4099b5a6",
 ]);
 const EXPECTED_DISTRIBUTION = { "A-Class": 6, "B-Class": 6, "C-Class": 1, "E-Class": 4, Sprinter: 3, Vito: 3 };
+const GEORGIA_CANONICAL_SOURCE_IDS = new Set(["myauto_georgia_list", "autopapa_georgia_open"]);
 const REPORT_PATH = String(process.env.ISSUE241_EUROPE_MERCEDES_REPORT || "issue241-europe-mercedes-identity-migration.json");
 const DRY_RUN = String(process.env.ISSUE241_EUROPE_MERCEDES_DRY_RUN || "").toLowerCase() === "true";
 const LOCK_PATH = "catalog/import-lock.json";
@@ -91,10 +92,14 @@ function maxQuota(rows, market) {
 
 function assertGeorgiaCanonical(rows) {
   for (const row of rows) {
+    const sourceId = String(row?.sourceId || "").trim();
     let host = "";
-    try { host = new URL(String(row?.sourceUrl || "")).hostname.toLowerCase(); } catch {}
-    if (!/(^|\.)myauto\.ge$|(^|\.)autopapa\.ge$/.test(host)) {
-      throw new Error(`georgia_noncanonical_source:${row?.id || "<missing>"}:${row?.sourceId || ""}:${host || "<missing-host>"}`);
+    const sourceUrl = String(row?.operational?.sourceUrl || row?.sourceUrl || "");
+    try { host = new URL(sourceUrl).hostname.toLowerCase(); } catch {}
+    const canonicalId = GEORGIA_CANONICAL_SOURCE_IDS.has(sourceId);
+    const canonicalHost = /(^|\.)myauto\.ge$|(^|\.)autopapa\.ge$/.test(host);
+    if (!canonicalId && !canonicalHost) {
+      throw new Error(`georgia_noncanonical_source:${row?.id || "<missing>"}:${sourceId || "<missing-source-id>"}:${host || "<missing-host>"}`);
     }
   }
 }
@@ -170,7 +175,6 @@ if (DRY_RUN) {
 
 await acquireLock();
 try {
-  // Re-read under the production lock and require the exact preflight generation state.
   const lockedRows = {};
   for (const market of PUBLIC_CATALOG_MARKETS) {
     const rows = await readMarketOffers(market);
