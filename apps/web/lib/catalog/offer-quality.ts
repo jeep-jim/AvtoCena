@@ -132,6 +132,9 @@ function minimumImageCount(offer: VehicleOffer) {
   // Georgia recovery has an exact listing-bound gallery contract: publication
   // must keep at least five verified frames from the same source listing.
   if (offer.market === "georgia") return 5;
+  // Korea is customer-facing used stock: shallow galleries make the card
+  // unsuitable for publication even when the remaining source fields are valid.
+  if (offer.market === "korea") return 5;
   // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
   // keep rows whose exact spec page/gallery exposes fewer than five verified
   // source-bound photos. Never borrow another trim/series gallery to pad depth.
