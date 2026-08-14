@@ -1,0 +1,37 @@
+name: Ops · Final six-market dispatch 20260814
+run-name: Dispatch final six markets without Japan · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - ops/final-six-market-dispatch-20260814
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Dispatch Korea China Europe Georgia production daily on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-daily-working-markets.yml/dispatches" \
+            -f ref=main
+          echo "Korea/China/Europe/Georgia dispatched on main." >> "$GITHUB_STEP_SUMMARY"
+      - name: Dispatch UAE and Kyrgyzstan independent production recovery on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST \
+            "repos/$GITHUB_REPOSITORY/actions/workflows/catalog-live-recovery-uae-kyrgyzstan.yml/dispatches" \
+            -f ref=main
+          echo "UAE/Kyrgyzstan dispatched on main." >> "$GITHUB_STEP_SUMMARY"
+      - name: Confirm Japan is intentionally untouched
+        run: echo "Japan V6 was NOT dispatched. Protected live baseline remains 9759 until the six-market cycle is certified." >> "$GITHUB_STEP_SUMMARY"
