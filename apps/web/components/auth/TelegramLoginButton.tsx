@@ -26,7 +26,7 @@ export function TelegramLoginButton({ nextPath, botUsername }: { nextPath: strin
     if (authWindow) {
       try {
         authWindow.document.title = "Telegram — АвтоЦена";
-        authWindow.document.body.innerHTML = '<div style="font-family:system-ui;padding:28px">Открываю @avtocena_bot…</div>';
+        authWindow.document.body.innerHTML = '<div style="font-family:system-ui;padding:28px">Проверяю Telegram и открываю @avtocena_bot…</div>';
       } catch {}
     }
 
@@ -40,7 +40,17 @@ export function TelegramLoginButton({ nextPath, botUsername }: { nextPath: strin
       const startResult = await startResponse.json().catch(() => ({}));
       if (!startResponse.ok || !startResult?.ok || !startResult?.telegramUrl) {
         authWindow?.close();
-        throw new Error("Не удалось начать вход через Telegram.");
+        if (startResult?.error === "telegram_webhook_unavailable") {
+          const webhook = startResult?.webhook || {};
+          const parts = [
+            startResult?.detail ? String(startResult.detail) : "Telegram webhook недоступен",
+            webhook?.url ? `URL: ${String(webhook.url)}` : "",
+            Number(webhook?.pending || 0) > 0 ? `Очередь: ${Number(webhook.pending)}` : "",
+            webhook?.lastError ? `Telegram: ${String(webhook.lastError)}` : "",
+          ].filter(Boolean);
+          throw new Error(parts.join(" · "));
+        }
+        throw new Error(startResult?.detail ? String(startResult.detail) : "Не удалось начать вход через Telegram.");
       }
 
       const url = String(startResult.telegramUrl);
@@ -93,12 +103,12 @@ export function TelegramLoginButton({ nextPath, botUsername }: { nextPath: strin
         className="mx-auto inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#229ED9] px-5 py-3 text-base font-bold text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
       >
         <span aria-hidden="true">✈</span>
-        <span>{loading ? "Ожидаю кнопку в Telegram…" : "Войти через Telegram"}</span>
+        <span>{loading ? "Ожидаю подтверждение в Telegram…" : "Войти через Telegram"}</span>
       </button>
 
       {loading ? (
         <div className="max-w-sm text-center text-xs font-bold leading-5 text-white/50">
-          В @avtocena_bot нажмите Start. Бот покажет кнопку «✅ Войти в CRM». После её нажатия CRM откроется здесь автоматически.
+          В @avtocena_bot нажмите Start. Если активна одна попытка входа, CRM подтвердится сразу; кнопка в боте остаётся резервным способом.
         </div>
       ) : null}
 
