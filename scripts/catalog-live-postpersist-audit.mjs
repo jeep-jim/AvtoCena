@@ -1,6 +1,6 @@
 const { readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
-const { catalogMinYearForMarket } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
@@ -48,6 +48,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
     marketMinYear: catalogMinYearForMarket(market),
     belowMarketMinYearCount: rows.filter((offer) => Number(offer?.year || 0) < catalogMinYearForMarket(market)).length,
+    invalidIdentityCount: rows.filter((offer) => !hasCredibleCatalogIdentity(offer)).length,
     distinctModels: exactModelCounts.size,
     distinctModelYears: modelYearCounts.size,
     distinctMakes: new Set(rows.map((offer) => String(offer?.make || "").trim().toLowerCase()).filter(Boolean)).size,
@@ -62,10 +63,12 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   report.markets[market] = stats;
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
+  if (assertMarkets.has(market) && stats.invalidIdentityCount > 0) report.failures.push(`${market}:invalid_identity:${stats.invalidIdentityCount}`);
   if (assertMarkets.has(market) && stats.maxPerExactModelYear > maxOffersPerModelYear) report.failures.push(`${market}:model_year_quota:${stats.maxPerExactModelYear}>${maxOffersPerModelYear}`);
   if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
+  if (market === "korea" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`korea:below_five_images:${stats.belowFiveImagesCount}`);
   if (market === "japan" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`japan:below_five_images:${stats.belowFiveImagesCount}`);
   if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);
 }
