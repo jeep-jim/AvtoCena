@@ -1,0 +1,129 @@
+name: Read-only Georgia Yandex 20-page gallery proof
+
+on:
+  push:
+    branches:
+      - diag/georgia-yandex-20p-20260814-2330
+    paths:
+      - .github/workflows/diag-georgia-yandex-20p-20260814.yml
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Fetch bounded canonical MyAuto snapshot through Yandex runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 600 -fsS \
+            'https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=20&startPage=1' \
+            -o myauto.json
+      - name: Fetch bounded canonical AutoPapa snapshot through Yandex runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 600 -fsS \
+            'https://avtocena.com/api/internal/georgia-recovery-e2f913?source=autopapa&pages=20&startPage=1' \
+            -o autopapa.json
+      - name: Validate exact listing-bound galleries without image-cache writes
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const allowed = new Set(['myauto_georgia_list', 'autopapa_georgia_open']);
+          const docs = [
+            ['myauto', JSON.parse(fs.readFileSync('myauto.json','utf8'))],
+            ['autopapa', JSON.parse(fs.readFileSync('autopapa.json','utf8'))],
+          ];
+          const rows = [];
+          const report = {};
+          const errors = [];
+          for (const [name, doc] of docs) {
+            const offers = Array.isArray(doc.offers) ? doc.offers : [];
+            const sourceIds = [...new Set(offers.map(o => String(o.sourceId || '')))];
+            const imageCounts = offers.map(o => Array.isArray(o.images) ? o.images.length : 0);
+            const sourceOfferIds = offers.map(o => String(o.sourceOfferId || ''));
+            const duplicateIds = sourceOfferIds.filter((id, i) => id && sourceOfferIds.indexOf(id) !== i);
+            const sparse = offers.filter(o => !Array.isArray(o.images) || o.images.length < 5);
+            const old = offers.filter(o => Number(o.year || 0) < 2020);
+            const foreign = offers.filter(o => String(o.market || '') !== 'georgia' || !allowed.has(String(o.sourceId || '')));
+            const wrongSourceUrl = offers.filter(o => {
+              try {
+                const u = new URL(String(o.operational?.sourceUrl || ''));
+                return name === 'myauto' ? !/(^|\.)myauto\.ge$/i.test(u.hostname) : !/(^|\.)autopapa\.ge$/i.test(u.hostname);
+              } catch { return true; }
+            });
+            for (const o of offers) {
+              const id = String(o.sourceOfferId || '');
+              const urls = (o.images || []).map(img => String(img.url || img.objectKey || '')).filter(Boolean);
+              if (!id) errors.push(`${name}:missing_sourceOfferId`);
+              if (urls.length > 30) errors.push(`${name}:${id}:images_gt_30`);
+              if (name === 'autopapa' && urls.some(url => !/\/system\/car\/photos\/[^/?#]+\/original\.jpg(?:[?#]|$)/i.test(url))) {
+                errors.push(`${name}:${id}:non_original_gallery_url`);
+              }
+              if (o.operational?.photoIdentityVerified !== true || o.operational?.raw?.listingBoundImages !== true) {
+                errors.push(`${name}:${id}:identity_not_verified`);
+              }
+              rows.push({ source: name, id, urls });
+            }
+            report[name] = {
+              count: offers.length,
+              rawSourceCounts: doc.report?.rawSourceCounts || {},
+              sourceCounts: doc.report?.sourceCounts || {},
+              rejected: doc.report?.rejected || {},
+              imageStats: doc.report?.imageStats || {},
+              minYear: offers.length ? Math.min(...offers.map(o => Number(o.year || 0))) : null,
+              minImages: imageCounts.length ? Math.min(...imageCounts) : 0,
+              maxImages: imageCounts.length ? Math.max(...imageCounts) : 0,
+              below5: sparse.length,
+              duplicateSourceOfferIds: [...new Set(duplicateIds)],
+              sourceIds,
+              wrongSourceUrl: wrongSourceUrl.length,
+            };
+            if (!offers.length) errors.push(`${name}:empty_snapshot`);
+            if (sparse.length) errors.push(`${name}:below5=${sparse.length}`);
+            if (old.length) errors.push(`${name}:year_below_2020=${old.length}`);
+            if (foreign.length) errors.push(`${name}:foreign_or_noncanonical=${foreign.length}`);
+            if (duplicateIds.length) errors.push(`${name}:duplicate_sourceOfferId=${new Set(duplicateIds).size}`);
+            if (wrongSourceUrl.length) errors.push(`${name}:wrong_source_url=${wrongSourceUrl.length}`);
+          }
+
+          const imageOwners = new Map();
+          const crossListing = [];
+          for (const row of rows) for (const url of row.urls) {
+            const key = url.replace(/[?#].*$/, '');
+            const owner = imageOwners.get(key);
+            if (owner && owner !== `${row.source}:${row.id}`) crossListing.push({ image: key, owners: [owner, `${row.source}:${row.id}`] });
+            else imageOwners.set(key, `${row.source}:${row.id}`);
+          }
+          report.crossListingDuplicateImages = crossListing.slice(0, 20);
+          report.totalCrossListingDuplicateImages = crossListing.length;
+          if (crossListing.length) errors.push(`cross_listing_duplicate_images=${crossListing.length}`);
+
+          fs.writeFileSync('georgia-yandex-20p-report.json', JSON.stringify({ report, errors }, null, 2));
+          const summary = [
+            '# Georgia Yandex canonical gallery proof',
+            '',
+            'Read-only: no Object Storage credentials, no image-cache writes.',
+            '',
+            '```json',
+            JSON.stringify({ report, errors }, null, 2),
+            '```',
+          ].join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+          console.log(summary);
+          if (errors.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: georgia-yandex-20p-proof
+          path: |
+            myauto.json
+            autopapa.json
+            georgia-yandex-20p-report.json
+          retention-days: 3
