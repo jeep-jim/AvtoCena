@@ -1,3 +1,4 @@
+import { canonicalSourceModelIdentity } from "./open-source-normalizer";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
@@ -135,7 +136,7 @@ async function getJson(url: string) {
 function rowFromItem(item: Record<string, any>): MobileDeExactRow | null {
   const id = clean(item?.id);
   const make = clean(item?.make);
-  const model = clean(item?.model);
+  const sourceModel = clean(item?.model);
   const sourceUrl = absoluteListingUrl(item?.relativeUrl || item?.url);
   const price = positive(item?.price?.grossAmount);
   const currency = clean(item?.price?.grossCurrency || "EUR");
@@ -143,7 +144,8 @@ function rowFromItem(item: Record<string, any>): MobileDeExactRow | null {
   const power = parsePower(item?.attr?.pw);
   const mileageKm = integer(item?.attr?.ml);
   const engineCc = integer(item?.attr?.cc);
-  const title = clean(item?.title || [make, model, item?.subTitle].filter(Boolean).join(" "));
+  const title = clean(item?.title || [make, sourceModel, item?.subTitle].filter(Boolean).join(" "));
+  const model = canonicalSourceModelIdentity(title, make, sourceModel);
   const trim = clean(item?.subTitle);
   const fuel = clean(item?.attr?.ft);
   const transmission = clean(item?.attr?.tr);
@@ -249,9 +251,12 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     const attrs = attributeMap(ad);
     const power = parsePower(attrs.get("power"));
     const registration = parseRegistration(attrs.get("firstRegistration"));
-    offer.make = clean(ad?.makeKey) || offer.make;
-    offer.model = clean(ad?.modelKey) || offer.model;
-    offer.sourceTitle = clean(ad?.title) || offer.sourceTitle;
+    const detailMake = clean(ad?.makeKey) || offer.make;
+    const detailTitle = clean(ad?.title) || offer.sourceTitle;
+    const detailModel = canonicalSourceModelIdentity(detailTitle, detailMake, clean(ad?.modelKey) || offer.model);
+    offer.make = detailMake;
+    offer.model = detailModel;
+    offer.sourceTitle = detailTitle;
     offer.trim = clean(ad?.subTitle) || offer.trim;
     offer.year = registration.year || offer.year;
     offer.productionDate = registration.productionDate || offer.productionDate;
