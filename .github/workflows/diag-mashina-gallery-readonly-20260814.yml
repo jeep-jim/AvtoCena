@@ -1,0 +1,34 @@
+name: Diag · Mashina gallery read-only 20260814
+
+on:
+  push:
+    branches:
+      - diag/mashina-gallery-readonly-20260814
+    paths:
+      - scripts/catalog-mashina-gallery-readonly-diagnostic.ts
+      - .github/workflows/diag-mashina-gallery-readonly-20260814.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      CATALOG_SOURCE_TIMEOUT_MS: "15000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      MASHINA_DIAG_SAMPLE: "6"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: diag/mashina-gallery-readonly-20260814
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Probe exact Mashina listings without storage writes
+        run: npx tsx scripts/catalog-mashina-gallery-readonly-diagnostic.ts
