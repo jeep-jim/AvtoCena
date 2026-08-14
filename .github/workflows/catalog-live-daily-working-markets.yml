@@ -19,7 +19,7 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
-  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
   CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
@@ -55,7 +55,7 @@ jobs:
         shell: bash
         env:
           CATALOG_AUDIT_OUTPUT: catalog-preflight-audit.json
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -177,14 +177,14 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
 
-  publish:
+  publish-korea:
     needs: [validate, merge]
     if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
     concurrency:
       group: catalog-live-daily-working-markets
       cancel-in-progress: false
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -196,51 +196,198 @@ jobs:
         with:
           name: catalog-kceg-merged
           path: daily-input
-      - name: Publish markets serially, preserving all seven
-        shell: bash
-        run: |
-          set +e
-          published=""
-          failed=""
-          for market in korea china europe georgia; do
-            input="daily-input/catalog-rebuild-${market}.json"
-            if [ ! -s "$input" ]; then failed="$failed $market(no-artifact)"; continue; fi
-            export RECOVERY_PUBLISH_MARKET="$market"
-            export RECOVERY_PUBLISH_INPUT="$input"
-            export RECOVERY_PUBLISH_REPORT="catalog-daily-${market}-publish-report.json"
-            export RECOVERY_PUBLISH_MAX="30000"
-            if npx tsx scripts/catalog-live-recovery-publish.mjs; then published="$published $market"; else failed="$failed $market"; fi
-          done
-          echo "published=$published" >> "$GITHUB_STEP_SUMMARY"
-          echo "failed=$failed" >> "$GITHUB_STEP_SUMMARY"
-          test -n "$published"
+      - name: Publish Korea cumulative snapshot
+        env:
+          RECOVERY_PUBLISH_MARKET: korea
+          RECOVERY_PUBLISH_INPUT: daily-input/catalog-rebuild-korea.json
+          RECOVERY_PUBLISH_REPORT: catalog-daily-korea-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
       - name: Rebuild stored K Car galleries with exterior-first covers
         env:
           CATALOG_GALLERY_MARKETS: korea
           CATALOG_GALLERY_SOURCE_IDS: kcar_korea_open
           CATALOG_GALLERY_MAX_OFFERS: "500"
           CATALOG_GALLERY_MAX_PER_MARKET: "500"
-          CATALOG_GALLERY_MIN_IMAGES: "1"
+          CATALOG_GALLERY_MIN_IMAGES: "5"
           CATALOG_MAX_IMAGES_PER_OFFER: "30"
           CATALOG_GALLERY_PERSIST_EVERY: "500"
           CATALOG_GALLERY_CONCURRENCY: "8"
           CATALOG_GALLERY_REPORT_FILE: catalog-kcar-exterior-gallery-refresh.json
         run: npx tsx scripts/catalog-refresh-galleries.mjs
-      - name: Audit all seven markets after publish
+      - name: Audit Korea after publish
         if: always()
-        shell: bash
         env:
-          CATALOG_AUDIT_OUTPUT: catalog-kceg-postpersist-audit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+          CATALOG_AUDIT_OUTPUT: catalog-korea-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: catalog-kceg-publish-reports
+          name: catalog-daily-korea-reports
           path: |
-            catalog-daily-*-publish-report.json
+            catalog-daily-korea-publish-report.json
             catalog-kcar-exterior-gallery-refresh.json
-            catalog-kceg-postpersist-audit.json
+            catalog-korea-postpersist-audit.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  publish-china:
+    needs: [validate, merge, publish-korea]
+    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
+    concurrency:
+      group: catalog-live-daily-working-markets
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: catalog-kceg-merged
+          path: daily-input
+      - name: Publish China independently of Korea result
+        env:
+          RECOVERY_PUBLISH_MARKET: china
+          RECOVERY_PUBLISH_INPUT: daily-input/catalog-rebuild-china.json
+          RECOVERY_PUBLISH_REPORT: catalog-daily-china-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit China after publish
+        if: always()
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-china-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: china
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-daily-china-reports
+          path: |
+            catalog-daily-china-publish-report.json
+            catalog-china-postpersist-audit.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  publish-europe:
+    needs: [validate, merge, publish-china]
+    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
+    concurrency:
+      group: catalog-live-daily-working-markets
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: catalog-kceg-merged
+          path: daily-input
+      - name: Publish Europe independently of earlier market results
+        env:
+          RECOVERY_PUBLISH_MARKET: europe
+          RECOVERY_PUBLISH_INPUT: daily-input/catalog-rebuild-europe.json
+          RECOVERY_PUBLISH_REPORT: catalog-daily-europe-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit Europe after publish
+        if: always()
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-europe-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: europe
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-daily-europe-reports
+          path: |
+            catalog-daily-europe-publish-report.json
+            catalog-europe-postpersist-audit.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  publish-georgia:
+    needs: [validate, merge, publish-europe]
+    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
+    concurrency:
+      group: catalog-live-daily-working-markets
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: catalog-kceg-merged
+          path: daily-input
+      - name: Publish Georgia independently of earlier market results
+        env:
+          RECOVERY_PUBLISH_MARKET: georgia
+          RECOVERY_PUBLISH_INPUT: daily-input/catalog-rebuild-georgia.json
+          RECOVERY_PUBLISH_REPORT: catalog-daily-georgia-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit Georgia after publish
+        if: always()
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-georgia-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-daily-georgia-reports
+          path: |
+            catalog-daily-georgia-publish-report.json
+            catalog-georgia-postpersist-audit.json
+          if-no-files-found: warn
+          retention-days: 3
+
+  final-audit:
+    needs: [validate, merge, publish-korea, publish-china, publish-europe, publish-georgia]
+    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Audit all seven after the daily cycle
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-kceg-final-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-kceg-final-audit
+          path: catalog-kceg-final-audit.json
           if-no-files-found: warn
           retention-days: 3
