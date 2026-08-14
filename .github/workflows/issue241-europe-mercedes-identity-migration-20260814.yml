@@ -24,12 +24,12 @@ env:
   YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   ISSUE241_EUROPE_MERCEDES_REPORT: issue241-europe-mercedes-identity-migration.json
-  ISSUE241_EUROPE_MERCEDES_DRY_RUN: 'true'
+  ISSUE241_EUROPE_MERCEDES_DRY_RUN: 'false'
 
 jobs:
-  dryrun:
+  publish:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,7 +41,7 @@ jobs:
       - run: npm ci
       - name: Validate migration script
         run: node --check scripts/issue241-europe-mercedes-identity-migration.mjs
-      - name: Read-only full seven-market migration dry-run
+      - name: Guarded full seven-market publication
         run: node --import tsx scripts/issue241-europe-mercedes-identity-migration.mjs
       - uses: actions/upload-artifact@v4
         if: always()
