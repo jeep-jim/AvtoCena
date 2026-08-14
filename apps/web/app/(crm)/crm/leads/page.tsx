@@ -84,7 +84,8 @@ export default async function CrmLeadsPage({
   ]);
   const leads = [...storedLeads].sort((left, right) => Date.parse(right.createdAt || "") - Date.parse(left.createdAt || ""));
   const crmManagers = managers.filter((manager) => manager.role === "owner" || manager.role === "admin" || manager.role === "manager");
-  const roleVisible = isAdminRole(user?.role)
+  const canAssignManagers = isAdminRole(user?.role);
+  const roleVisible = canAssignManagers
     ? leads
     : leads.filter((lead) => lead.assignedManagerId === user?.id || lead.createdByManagerId === user?.id);
   const visibleLeads = view === "my"
@@ -107,7 +108,7 @@ export default async function CrmLeadsPage({
           const tgHref = telegramHref(lead.telegram);
           const telHref = phoneHref(lead.phone);
           return (
-            <article key={lead.id} className="glass overflow-hidden rounded-[2rem]">
+            <article id={lead.id} key={lead.id} className="glass scroll-mt-4 overflow-hidden rounded-[2rem]">
               <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/8 p-4 md:p-5">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
@@ -192,6 +193,7 @@ export default async function CrmLeadsPage({
                       id: manager.id,
                       displayName: manager.displayName
                     }))}
+                    canAssignManagers={canAssignManagers}
                   />
                 </div>
 
