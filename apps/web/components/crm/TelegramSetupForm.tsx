@@ -54,13 +54,21 @@ export function TelegramSetupForm({ initialStatus }: { initialStatus: TelegramSt
       if (!response.ok || !result?.ok) {
         const codes: Record<string, string> = {
           token_required: "Токен пустой.",
-          wrong_bot: "Этот токен принадлежит не @avtocena_bot.",
+          token_invalid: "Telegram отклонил сам токен: он недействителен или был отозван в BotFather.",
+          telegram_getme_failed: "Не удалось проверить токен через Telegram API.",
+          wrong_bot: "Токен рабочий, но принадлежит не @avtocena_bot.",
           wrong_bot_username: "Разрешён только @avtocena_bot.",
           different_bot_already_configured: "В АвтоЦене уже подключён другой Telegram-бот.",
+          telegram_storage_failed: "Токен Telegram принят, но АвтоЦена не смогла сохранить защищённую конфигурацию.",
+          telegram_webhook_failed: "Токен Telegram принят, но Telegram отклонил установку webhook.",
+          telegram_webhook_status_failed: "Webhook отправлен в Telegram, но не удалось проверить его состояние.",
+          telegram_webhook_mismatch: "Telegram не подтвердил ожидаемый адрес webhook.",
           forbidden: "Подключать Telegram может только владелец или администратор.",
-          telegram_setup_failed: "Telegram не принял токен или не удалось установить webhook. Проверьте токен и повторите.",
         };
-        throw new Error(codes[result?.error] || "Не удалось подключить Telegram.");
+        const base = codes[result?.error] || "Не удалось подключить Telegram.";
+        const stage = result?.stage ? ` Этап: ${result.stage}.` : "";
+        const detail = result?.detail ? ` Telegram: ${String(result.detail)}` : "";
+        throw new Error(`${base}${stage}${detail}`);
       }
 
       setToken("");
@@ -82,7 +90,7 @@ export function TelegramSetupForm({ initialStatus }: { initialStatus: TelegramSt
           <div>
             <div className="text-xs font-black uppercase tracking-[0.16em] text-red-300">Telegram Bot API</div>
             <h2 className="mt-2 text-2xl font-black text-white">Подключить @avtocena_bot</h2>
-            <p className="mt-2 max-w-2xl text-sm font-bold leading-6 text-white/50">Вставьте токен из BotFather один раз. АвтоЦена проверит, что это именно наш бот, зашифрует токен в Object Storage и автоматически установит webhook.</p>
+            <p className="mt-2 max-w-2xl text-sm font-bold leading-6 text-white/50">Вставьте токен из BotFather один раз. АвтоЦена сначала проверит токен через getMe, затем сохранит его зашифрованно и только после этого установит webhook.</p>
           </div>
           <span className={`rounded-full px-3 py-1.5 text-xs font-black ${connected ? "bg-emerald-500/15 text-emerald-200" : "bg-amber-400/15 text-amber-100"}`}>
             {connected ? "● Подключён" : "○ Не подключён"}
@@ -107,7 +115,7 @@ export function TelegramSetupForm({ initialStatus }: { initialStatus: TelegramSt
             Токен не сохраняется в браузере и не записывается в GitHub. После успешного подключения поле очистится автоматически.
           </div>
 
-          {error ? <div className="mt-4 rounded-2xl bg-red-500/12 px-4 py-3 text-sm font-bold text-red-100">{error}</div> : null}
+          {error ? <div className="mt-4 rounded-2xl bg-red-500/12 px-4 py-3 text-sm font-bold leading-6 text-red-100">{error}</div> : null}
           {message ? <div className="mt-4 rounded-2xl bg-emerald-500/12 px-4 py-3 text-sm font-bold text-emerald-100">{message}</div> : null}
 
           <button
@@ -115,7 +123,7 @@ export function TelegramSetupForm({ initialStatus }: { initialStatus: TelegramSt
             disabled={loading}
             className="mt-5 min-h-13 w-full rounded-2xl bg-[#229ED9] px-5 py-4 text-base font-black text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-55"
           >
-            {loading ? "Проверяю бота и ставлю webhook…" : connected ? "Обновить токен / переподключить" : "Подключить Telegram"}
+            {loading ? "Проверяю токен → сохраняю → ставлю webhook…" : connected ? "Обновить токен / переподключить" : "Подключить Telegram"}
           </button>
         </form>
       </section>
