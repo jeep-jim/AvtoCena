@@ -153,6 +153,10 @@ html:not([data-theme="light"]) body .ac-partner-page {
   .ac-home-page section[aria-label="Финансовые сервисы"] .ac-executor-block > img,
   .ac-home-page section[aria-label="Финансовые сервисы"] .ac-finance-card > img,
   .ac-offer-finance-cards .ac-finance-card > img {
+    width: 180px !important;
+    height: 200px !important;
+    max-width: none !important;
+    right: 8px !important;
     bottom: 0 !important;
     object-fit: contain !important;
     object-position: center bottom !important;
@@ -189,11 +193,11 @@ export default function PublicTemplate({ children }: { children: ReactNode }) {
         }
       }
 
-      document.querySelectorAll<HTMLImageElement>('img[src="/home/credit-mascot.webp"]').forEach((image) => {
-        image.setAttribute("src", "/home/credit-mascot.png");
+      document.querySelectorAll<HTMLImageElement>('img[src="/home/credit-mascot.webp"], img[src="/home/credit-mascot.png"]').forEach((image) => {
+        image.setAttribute("src", "/home/credit-mascot-card.png");
       });
-      document.querySelectorAll<HTMLImageElement>('img[src="/home/osago-mascot.webp"]').forEach((image) => {
-        image.setAttribute("src", "/home/osago-mascot.png");
+      document.querySelectorAll<HTMLImageElement>('img[src="/home/osago-mascot.webp"], img[src="/home/osago-mascot.png"]').forEach((image) => {
+        image.setAttribute("src", "/home/osago-mascot-card.png");
       });
     };
 
