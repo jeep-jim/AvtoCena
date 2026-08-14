@@ -1,13 +1,16 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "АвтоЦена",
   "website": "https://avtocena.com",
+  "lastVerifiedAgainstOpenAiDocs": "2026-08-14",
   "discovery": {
     "robots": "https://avtocena.com/robots.txt",
     "sitemap": "https://avtocena.com/sitemap.xml",
     "llms": "https://avtocena.com/llms.txt",
     "productFeed": "https://avtocena.com/feeds/openai-products.csv",
-    "mcp": "https://avtocena.com/mcp"
+    "productFeedFormat": "google_compatible_csv",
+    "mcp": "https://avtocena.com/mcp",
+    "mcpAccess": "public_read_only"
   },
   "plugin": {
     "shortDescription": "Поиск автомобилей, характеристики и расчёты стоимости ввоза под ключ из АвтоЦены.",
@@ -19,11 +22,13 @@
       "Какая 30-минутная мощность у этой версии автомобиля?"
     ],
     "submission": {
+      "technicalServerReady": true,
       "privacyPolicyUrl": null,
       "termsOfServiceUrl": null,
       "supportUrl": null,
       "countryAvailability": [],
-      "requiresOwnerConfirmation": true
+      "requiresOwnerConfirmation": true,
+      "requiresVerifiedOpenAiPublisherIdentity": true
     }
   },
   "evals": {
