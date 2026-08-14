@@ -2,7 +2,8 @@ import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import {
   appendChunkedDataJson,
-  readChunkedDataJson
+  readChunkedDataJson,
+  updateChunkedDataJson
 } from "@/lib/data";
 import { getOffer } from "@/lib/catalog/storage";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
@@ -10,6 +11,7 @@ import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { deliverCpaEvent } from "@/lib/cpa-gateway";
 import { getBusinessSettingsSnapshot } from "@/lib/business-settings";
 import { getCurrentUser, isCrmRole } from "@/lib/auth";
+import { readCrmUsers } from "@/lib/crm-users";
 
 function clean(value: unknown, maxLength = 500) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -120,6 +122,73 @@ async function buildSelectedOfferSnapshot(offerId: string) {
   };
 }
 
+function telegramBindFor(botUsername: string) {
+  const token = crypto.randomBytes(18).toString("base64url");
+  const hash = crypto.createHash("sha256").update(token).digest("hex");
+  const expiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString();
+  return {
+    token,
+    hash,
+    expiresAt,
+    startUrl: `https://t.me/${botUsername}?start=lead_${token}`,
+  };
+}
+
+function formatRub(value: unknown) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0
+    ? `${new Intl.NumberFormat("ru-RU").format(Math.round(number))} ₽`
+    : "";
+}
+
+async function telegramSend(token: string, chatId: string, text: string) {
+  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(5_000),
+  }).catch(() => null);
+  if (!response?.ok) return false;
+  const payload = await response.json().catch(() => null) as { ok?: boolean } | null;
+  return Boolean(payload?.ok);
+}
+
+async function notifyCrmStaffAboutLead(lead: any) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || "";
+  if (!botToken) return;
+  try {
+    const users = await readCrmUsers();
+    const targets = users.filter((user) => user.status !== "blocked"
+      && Boolean(user.telegramId)
+      && (user.role === "owner" || user.role === "admin" || user.id === lead.assignedManagerId));
+    if (!targets.length) return;
+
+    const offers = Array.isArray(lead.selectedOffers) ? lead.selectedOffers : [];
+    const first = offers[0];
+    const contact = lead.phone
+      ? `Телефон: ${lead.phone}`
+      : lead.telegram
+        ? `Telegram: @${String(lead.telegram).replace(/^@+/, "")}`
+        : lead.max
+          ? `MAX: ${lead.max}`
+          : "Контакт не указан";
+    const lines = [
+      "🚨 Новая заявка · АвтоЦена",
+      `Клиент: ${lead.name || "Без имени"}`,
+      contact,
+      lead.city ? `Город: ${lead.city}` : "",
+      first?.title ? `Авто: ${first.title}${offers.length > 1 ? ` + ещё ${offers.length - 1}` : ""}` : lead.car ? `Авто: ${lead.car}` : "",
+      first?.totalRub ? `Под ключ: ${formatRub(first.totalRub)}` : lead.totalRub ? `Под ключ: ${formatRub(lead.totalRub)}` : "",
+      `CRM: https://avtocena.com/crm/leads#${encodeURIComponent(lead.id)}`,
+    ].filter(Boolean).join("\n");
+
+    await Promise.allSettled(targets.map((user) => telegramSend(botToken, String(user.telegramId), lines)));
+  } catch (error) {
+    console.error("crm_lead_telegram_notify_failed", error);
+  }
+}
+
 export async function GET() {
   const user = getCurrentUser();
   if (!isCrmRole(user?.role)) return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
@@ -219,6 +288,10 @@ export async function POST(request: Request) {
   const existingLeads = await readChunkedDataJson<any>("leads/leads.json", []);
   const duplicate = operationId ? existingLeads.find((lead) => lead.operationId === operationId || lead.id === leadId) : null;
   const existingClient = operationId ? existingClients.find((client) => client.operationId === operationId || client.id === clientId || client.id === duplicate?.clientId) : null;
+  const botUsername = telegramContact(process.env.TELEGRAM_BOT_USERNAME || process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME || "");
+  const telegramBind = !crmUser && contactPreference === "message" && messenger === "telegram" && botUsername
+    ? telegramBindFor(botUsername)
+    : null;
 
   const consentSnapshot = personalDataConsentVersion || personalDataConsentText ? {
     personalDataConsent,
@@ -332,9 +405,22 @@ export async function POST(request: Request) {
     effectiveFrom: businessSettingsSnapshot?.effectiveFrom || "",
     businessSettingsSnapshot,
     calculationSnapshot,
-    breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : []
+    breakdown: calculationSnapshot && typeof calculationSnapshot === "object" && Array.isArray((calculationSnapshot as any).breakdown) ? (calculationSnapshot as any).breakdown : [],
+    telegramBindTokenHash: telegramBind?.hash || "",
+    telegramBindExpiresAt: telegramBind?.expiresAt || "",
+    telegramDeliveryStatus: telegramBind ? "awaiting_start" : "",
   };
-  const lead = duplicate || await appendChunkedDataJson("leads/leads.json", leadPayload);
+  let lead = duplicate || await appendChunkedDataJson("leads/leads.json", leadPayload);
+
+  if (duplicate && telegramBind) {
+    lead = await updateChunkedDataJson<any>("leads/leads.json", duplicate.id, (stored) => ({
+      ...stored,
+      updatedAt: createdAt,
+      telegramBindTokenHash: telegramBind.hash,
+      telegramBindExpiresAt: telegramBind.expiresAt,
+      telegramDeliveryStatus: "awaiting_start",
+    })) || duplicate;
+  }
 
   if (!duplicate) {
     await appendChunkedDataJson("activity/feed.json", {
@@ -374,6 +460,7 @@ export async function POST(request: Request) {
     if (cpaRetryStatuses.has(cpaEvent.deliveryStatus) && retryDue) {
       await deliverCpaEvent(cpaEvent);
     }
+    void notifyCrmStaffAboutLead(lead);
   }
 
   return NextResponse.json({
@@ -382,6 +469,7 @@ export async function POST(request: Request) {
     client,
     recovered: Boolean(duplicate),
     duplicate: Boolean(duplicate),
-    selectedOfferCount: selectedOfferSnapshots.length
+    selectedOfferCount: selectedOfferSnapshots.length,
+    telegramStartUrl: telegramBind?.startUrl || "",
   });
 }
