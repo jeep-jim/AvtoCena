@@ -102,6 +102,13 @@ function allowWithDocsCookie(request: NextRequest) {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/" && request.method === "GET" && request.nextUrl.searchParams.get("lead") === "1") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/request";
+    url.searchParams.delete("lead");
+    return NextResponse.redirect(url, { status: 307 });
+  }
+
   if (pathname === "/api/cpa" && request.method === "POST") return NextResponse.next();
   if (pathname === "/api/partners" && request.method === "POST") return NextResponse.next();
 

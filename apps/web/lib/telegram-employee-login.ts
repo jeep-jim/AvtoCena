@@ -177,9 +177,10 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
 
   const text = String(message.text || "").trim();
   const exactMatch = text.match(/^\/start(?:@[A-Za-z0-9_]+)?\s+login_([A-Za-z0-9_-]{16,64})$/);
-  const genericLogin = /^\/(?:start|login)(?:@[A-Za-z0-9_]+)?$/i.test(text)
+  const plainStart = /^\/start(?:@[A-Za-z0-9_]+)?$/i.test(text);
+  const explicitLogin = /^\/login(?:@[A-Za-z0-9_]+)?$/i.test(text)
     || /^(?:войти|войти в crm|🔐\s*войти в crm)$/i.test(text);
-  if (!exactMatch?.[1] && !genericLogin) return false;
+  if (!exactMatch?.[1] && !plainStart && !explicitLogin) return false;
 
   const now = Date.now();
   const stored = await readDataJson<LoginChallenge[]>(CHALLENGES_PATH, []);
@@ -190,7 +191,10 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
   const chatId = String(message.chat.id);
   const identity = await resolveTelegramUser(message.from, chatId);
 
+  // A plain /start is also the public bot entry point. Only consume it here
+  // when there is a real pending CRM login for a known employee.
   if (!identity.user || !isCrmRole(identity.user.role)) {
+    if (plainStart && !exactMatch?.[1]) return false;
     await telegramCallBestEffort(botToken, "sendMessage", {
       chat_id: chatId,
       text: "⛔ Этот Telegram не добавлен в команду АвтоЦены. Вход в CRM не разрешён.",
@@ -199,6 +203,7 @@ export async function handlePrivateEmployeeLoginStart(update: any, botToken: str
   }
 
   if (!challenge) {
+    if (plainStart && !exactMatch?.[1]) return false;
     await telegramCallBestEffort(botToken, "sendMessage", {
       chat_id: chatId,
       text: "Сейчас нет активной попытки входа. Откройте avtocena.com/login, нажмите «Войти через Telegram», затем вернитесь сюда.",
