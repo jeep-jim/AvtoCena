@@ -465,7 +465,7 @@ function TrendPopover({ offer, trend, currency, panel, light }: { offer: PriceLi
   return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>Почему изменилась цена</div><CurrencyRateDetails rate={rate} impactRub={trend.deltaRub} priceRub={Number(offer.totalRub || 0)} compact light={light} /><span className={tailClass} /></div>;
 }
 
-export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean }) {
+export function PriceTrend({ offer, label = "Ориентир", priceClassName = "text-[22px]", className = "", panel = false, dense = false, highlightElectrified = false }: { offer: PriceLike; label?: string; priceClassName?: string; className?: string; panel?: boolean; dense?: boolean; highlightElectrified?: boolean }) {
   const currency = String(offer.sourceCurrency || offer.calculationSnapshot?.currencyRate?.currency || "").toUpperCase();
   const [liveRate, setLiveRate] = useState<LiveRate | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -530,6 +530,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение относительно предыдущего сохранённого расчёта" : "Ожидается следующий снимок валютного курса";
   const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
   const openSheet = () => { if (sheetRate && trend) { setPopoverOpen(false); setSheetOpen(true); } };
+  const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
   return <div
     ref={panelRoot}
@@ -541,7 +542,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   >
     <div className="flex min-w-0 items-center justify-between gap-2"><div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>{trend ? <span className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`} title={trendTitle}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span> : null}</div>
     <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-      <div className={`ac-price ${priceStateClass} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
+      <div className={`ac-price ${priceStateClass} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
       {trend ? <span
         ref={trendRoot}
         role="button"

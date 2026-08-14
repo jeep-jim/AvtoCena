@@ -13,12 +13,16 @@ export function CatalogPrice({
   priceClassName?: string;
 }) {
   const totalRub = Number(offer?.totalRub || 0);
+  const powertrainKind = String(offer?.powertrainKind || "").toLowerCase();
+  const fuel = String(offer?.fuel || "").toLowerCase();
+  const highlightElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)
+    || /(?:electric|battery|\bbev\b|\bev\b|hybrid|phev|hev|mhev|электро|гибрид)/i.test(fuel);
 
   if (totalRub > 0) {
     const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
-    if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-    return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;
+    return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;
   }
 
   return (

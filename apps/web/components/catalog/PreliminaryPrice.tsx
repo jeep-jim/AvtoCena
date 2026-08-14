@@ -15,6 +15,7 @@ export function PreliminaryPrice({
   priceClassName = "text-[22px]",
   className = "",
   panel = false,
+  highlightElectrified = false,
 }: {
   offer: any;
   label: string;
@@ -22,6 +23,7 @@ export function PreliminaryPrice({
   priceClassName?: string;
   className?: string;
   panel?: boolean;
+  highlightElectrified?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [desktopHover, setDesktopHover] = useState(false);
@@ -64,7 +66,7 @@ export function PreliminaryPrice({
 
   const panelBackground = "var(--ac-surface-2)";
   const panelText = "var(--ac-text)";
-  const priceColor = "var(--ac-text)";
+  const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : "var(--ac-text)";
   const popoverClass = lightTheme
     ? "border-[#d8dee8] bg-[#f8f9fb] text-[#303744] shadow-[0_12px_34px_rgba(38,43,57,.14)]"
     : "border-white/10 bg-[#181b24] text-white/78 shadow-[0_20px_65px_rgba(0,0,0,.45)]";
