@@ -34,6 +34,32 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: all7-fixed-v2-audit.json
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Inspect exact invalid source identities without publishing
+        shell: bash
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const { readMarketOffers } = await import('./apps/web/lib/catalog/storage.ts');
+          const { hasCredibleCatalogIdentity } = await import('./apps/web/lib/catalog/offer-quality.ts');
+          const markets = ['japan','korea','china','uae','europe','georgia','kyrgyzstan'];
+          const result = {};
+          for (const market of markets) {
+            const rows = await readMarketOffers(market);
+            result[market] = rows
+              .filter((offer) => !hasCredibleCatalogIdentity(offer))
+              .slice(0, 100)
+              .map((offer) => ({
+                id: offer.id,
+                sourceId: offer.sourceId,
+                make: offer.make,
+                model: offer.model,
+                sourceTitle: offer.sourceTitle || offer.operational?.sourceTitle || '',
+                sourceUrl: offer.operational?.sourceUrl || '',
+              }));
+          }
+          fs.writeFileSync('all7-invalid-source-samples.json', JSON.stringify(result, null, 2));
+          console.log(JSON.stringify(result, null, 2));
+          NODE
       - name: Summarize final pre-rerun identity state
         shell: bash
         run: |
@@ -50,6 +76,8 @@ jobs:
         if: always()
         with:
           name: all7-fixed-v2-audit
-          path: all7-fixed-v2-audit.json
+          path: |
+            all7-fixed-v2-audit.json
+            all7-invalid-source-samples.json
           if-no-files-found: error
           retention-days: 5
