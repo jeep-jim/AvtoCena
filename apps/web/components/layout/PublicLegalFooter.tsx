@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 const COOKIE_NOTICE_STORAGE_KEY = "avtocena_cookie_notice_acknowledged_v1";
 const INTERNAL_ROUTE_PREFIXES = ["/crm", "/login", "/api"];
@@ -97,27 +98,27 @@ export function PublicLegalFooter() {
             <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.</p>
 
             <div className="mt-4 grid gap-2">
-              <button
-                type="button"
-                aria-disabled="true"
-                data-credit-placeholder="calculator"
-                className="ac-public-footer-credit relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white sm:px-12 sm:text-sm"
+              <a
+                href={AUTOCREDIT_AFFILIATE_URL}
+                target="_blank"
+                rel={AFFILIATE_LINK_REL}
+                className="ac-public-footer-credit relative flex h-12 w-full items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[.99] sm:px-12 sm:text-sm"
                 style={{ backgroundColor: "#0d1117", color: "#ffffff", WebkitTextFillColor: "#ffffff" }}
               >
                 <span className="absolute left-4 text-white"><CreditIcon /></span>
                 <span className="text-center">Кредитный калькулятор</span>
-              </button>
+              </a>
 
-              <button
-                type="button"
-                aria-disabled="true"
-                data-insurance-placeholder="osago"
-                className="ac-public-footer-osago relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111] sm:px-12 sm:text-sm"
+              <a
+                href={OSAGO_AFFILIATE_URL}
+                target="_blank"
+                rel={AFFILIATE_LINK_REL}
+                className="ac-public-footer-osago relative flex h-12 w-full items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111] transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD400] active:scale-[.99] sm:px-12 sm:text-sm"
                 style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}
               >
                 <span className="absolute left-4 text-[#111111]"><InsuranceIcon /></span>
                 <span className="text-center">Рассчитать полис ОСАГО</span>
-              </button>
+              </a>
             </div>
           </div>
 

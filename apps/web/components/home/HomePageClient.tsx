@@ -12,6 +12,7 @@ import { VehicleModelSearch } from "@/components/catalog/VehicleModelSearch";
 import { BuyerGallery } from "@/components/home/BuyerGallery";
 import { CitySelector } from "@/components/home/CitySelector";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
@@ -267,7 +268,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
       <div className="-mt-2 lg:mt-0"><BuyerGallery images={buyers} /></div>
       <div className="mt-4 hidden gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
         <section className="grid min-h-[206px] grid-cols-2 gap-4" aria-label="Финансовые сервисы">
-          <article className="ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6">
+          <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">
             <div className="relative z-10 h-full min-h-[158px] pr-[205px]">
               <div className="flex items-start gap-7">
                 <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#35c932]" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><rect x="7" y="5" width="34" height="38" rx="4" stroke="currentColor" strokeWidth="3.5"/><path d="M14 13h20M15 23h6M18 20v6M28 20l6 6M34 20l-6 6M15 34h6M28 34h6" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/></svg></div>
@@ -276,8 +277,8 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
               <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите<br className="hidden xl:block" /> удобные условия покупки автомобиля.</p>
             </div>
             <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-[-2px] right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
-          </article>
-          <article className="ac-executor-block relative min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6">
+          </a>
+          <a href={OSAGO_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Рассчитать полис ОСАГО на Банки.ру" className="ac-executor-block relative block min-h-[206px] overflow-hidden rounded-[1.6rem] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd21f] active:scale-[.995]">
             <div className="relative z-10 h-full min-h-[158px] pr-[215px]">
               <div className="flex items-start gap-7">
                 <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#ffd21f]" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 48 48" fill="none"><path d="M24 5 38 10v10.5c0 9-5.7 16.4-14 20.5-8.3-4.1-14-11.5-14-20.5V10l14-5Z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/><path d="m17 23 5 5 10-10" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></svg></div>
@@ -286,7 +287,7 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
               <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса<br className="hidden xl:block" /> для выбранного автомобиля.</p>
             </div>
             <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-[-3px] right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
-          </article>
+          </a>
         </section>
         <CurrencyRatesStrip rates={rates} variant="desktop" className="hidden lg:block" />
       </div>

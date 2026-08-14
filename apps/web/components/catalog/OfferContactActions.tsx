@@ -3,6 +3,7 @@
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 type Hosts = {
   desktop: HTMLElement | null;
@@ -63,7 +64,7 @@ function CreditCalculatorMockup() {
           <span className="text-xs font-black text-[var(--ac-text)]">Ежемесячный платёж</span>
           <span className="text-lg font-black text-red-500">— ₽</span>
         </div>
-        <button type="button" aria-disabled="true" className="ac-credit-partner-button min-w-[176px] cursor-default rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black !text-white">Подобрать кредит</button>
+        <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} className="ac-credit-partner-button inline-flex min-w-[176px] items-center justify-center rounded-xl bg-[#111318] px-4 py-2.5 text-xs font-black !text-white transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[.99]">Подобрать кредит</a>
       </div>
     </section>
   );
@@ -200,8 +201,10 @@ export function OfferContactActions() {
       if (breakdown) {
         mobileCreditHost = document.createElement("div");
         mobileCreditHost.dataset.offerCreditMobileHost = "true";
-        const mobileCreditButton = document.createElement("button");
-        mobileCreditButton.type = "button";
+        const mobileCreditButton = document.createElement("a");
+        mobileCreditButton.href = AUTOCREDIT_AFFILIATE_URL;
+        mobileCreditButton.target = "_blank";
+        mobileCreditButton.rel = AFFILIATE_LINK_REL;
         mobileCreditButton.className = "ac-mobile-credit-button";
         mobileCreditButton.textContent = "Кредитный калькулятор";
         mobileCreditHost.appendChild(mobileCreditButton);

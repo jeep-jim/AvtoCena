@@ -7,6 +7,7 @@ import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
@@ -176,14 +177,14 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
     </summary>
     {detailLines.length ? <div className="ac-offer-breakdown-lines border-t border-dotted border-[var(--ac-border)] px-4 pb-3 pt-2">{detailLines.map((line, index) => <div key={`${line.id || line.title}-${index}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-2 py-1.5 text-[12px] font-medium md:text-[13px]"><span className="ac-offer-breakdown-label flex min-w-0 items-baseline gap-2 text-[var(--ac-muted)]"><span className="min-w-0 truncate">{line.title}</span><span className="ac-offer-dotted-line mb-1 min-w-3 flex-1 border-b border-dotted border-[var(--ac-border)]" /></span><span className="ac-offer-breakdown-value whitespace-nowrap font-bold text-[var(--ac-text)]">{money(line.amountRub)} ₽</span></div>)}</div> : null}
     <div className="grid gap-2 px-4 pb-4 pt-1 xl:hidden" aria-label="Финансовые сервисы">
-      <button type="button" aria-disabled="true" data-credit-placeholder="calculator" className="relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white" style={{ backgroundColor: "#0d1117", color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>
+      <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} className="relative flex h-12 w-full items-center justify-center rounded-xl bg-[#0d1117] px-10 text-center text-[12px] font-black leading-tight text-white transition-[filter,transform] hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[.99]" style={{ backgroundColor: "#0d1117", color: "#ffffff", WebkitTextFillColor: "#ffffff" }}>
         <span className="absolute left-4 text-white"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.25" y="5.25" width="17.5" height="13.5" rx="2.75" stroke="currentColor" strokeWidth="1.8" /><path d="M3.8 9.4H20.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /><path d="M7 14H11" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg></span>
         <span className="text-center">Кредитный калькулятор</span>
-      </button>
-      <button type="button" aria-disabled="true" data-insurance-placeholder="osago" className="relative flex h-12 w-full cursor-default items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111]" style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}>
+      </a>
+      <a href={OSAGO_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} className="relative flex h-12 w-full items-center justify-center rounded-xl bg-[#FFD400] px-10 text-center text-[12px] font-black leading-tight text-[#111111] transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD400] active:scale-[.99]" style={{ backgroundColor: "#FFD400", color: "#111111", WebkitTextFillColor: "#111111" }}>
         <span className="absolute left-4 text-[#111111]"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3.2 19 6v5.2c0 4.4-2.7 7.6-7 9.6-4.3-2-7-5.2-7-9.6V6l7-2.8Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /><path d="m8.8 12.1 2.1 2.1 4.5-4.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
         <span className="text-center">Рассчитать полис ОСАГО</span>
-      </button>
+      </a>
     </div>
   </details>;
 }

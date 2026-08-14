@@ -3,11 +3,12 @@
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 
 function FinanceCards() {
   return (
     <section className="ac-offer-finance-cards grid gap-4 xl:grid-cols-2" aria-label="Финансовые сервисы">
-      <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
+      <a href={AUTOCREDIT_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Подобрать автокредит в ВТБ" className="ac-finance-card relative block min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35c932] active:scale-[.995]">
         <div className="relative z-10 h-full min-h-[158px] pr-[150px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#35c932]" aria-hidden="true">
@@ -18,9 +19,9 @@ function FinanceCards() {
           <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Рассчитайте платёж и подберите удобные условия покупки автомобиля.</p>
         </div>
         <img src="/home/credit-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-3 h-[194px] w-[194px] object-contain object-bottom xl:right-4 xl:h-[202px] xl:w-[202px]" aria-hidden="true" />
-      </article>
+      </a>
 
-      <article className="ac-finance-card relative min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6">
+      <a href={OSAGO_AFFILIATE_URL} target="_blank" rel={AFFILIATE_LINK_REL} aria-label="Рассчитать полис ОСАГО на Банки.ру" className="ac-finance-card relative block min-h-[206px] overflow-hidden rounded-[1.6rem] bg-[var(--ac-surface)] px-6 py-6 transition-[filter,transform] hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd21f] active:scale-[.995]">
         <div className="relative z-10 h-full min-h-[158px] pr-[150px]">
           <div className="flex items-start gap-7">
             <div className="flex h-[46px] w-[46px] shrink-0 items-center justify-center text-[#ffd21f]" aria-hidden="true">
@@ -31,7 +32,7 @@ function FinanceCards() {
           <p className="mt-8 max-w-[350px] text-[15px] font-medium leading-[1.45] text-[var(--ac-muted)]">Быстрый расчёт стоимости полиса для выбранного автомобиля.</p>
         </div>
         <img src="/home/osago-mascot.webp" alt="" className="pointer-events-none absolute bottom-0 right-1 h-[202px] w-[202px] object-contain object-bottom xl:right-2 xl:h-[210px] xl:w-[210px]" aria-hidden="true" />
-      </article>
+      </a>
     </section>
   );
 }
