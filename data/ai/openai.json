@@ -1,11 +1,12 @@
 {
-  "version": 4,
+  "version": 5,
   "name": "АвтоЦена",
   "website": "https://avtocena.com",
   "lastVerifiedAgainstOpenAiDocs": "2026-08-14",
   "discovery": {
     "robots": "https://avtocena.com/robots.txt",
     "sitemap": "https://avtocena.com/sitemap.xml",
+    "catalogSitemapIndex": "https://avtocena.com/cars/sitemap.xml",
     "llms": "https://avtocena.com/llms.txt",
     "productFeed": "https://avtocena.com/feeds/openai-products.csv",
     "productFeedFormat": "google_compatible_csv",
