@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "name": "АвтоЦена",
   "website": "https://avtocena.com",
   "lastVerifiedAgainstOpenAiDocs": "2026-08-14",
@@ -14,6 +14,7 @@
   },
   "productionVerification": {
     "enabled": true,
+    "serializedDeploys": true,
     "checks": [
       "health",
       "public_catalog",
