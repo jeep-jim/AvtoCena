@@ -75,6 +75,15 @@ test("renders source-only JSON gallery URLs directly", () => {
   assert.equal(rankedCatalogImageUrls({ images: gallery }).some((url) => url.startsWith("/api/catalog/images/")), false);
 });
 
+test("rejects website and listing URLs that have no image delivery evidence", () => {
+  const pages = [
+    { url: "https://www.otomoto.pl/", objectKey: "", mimeType: "" },
+    { url: "https://www.otomoto.pl/osobowe/oferta/toyota-corolla-ID6HRRdM.html", objectKey: "", mimeType: "" },
+  ];
+  assert.deepEqual(pages.map((image) => isLikelyVehicleImage(image)), [false, false]);
+  assert.deepEqual(rankedCatalogImageUrls({ images: pages }), []);
+});
+
 test("removes repeated images with the same checksum", () => {
   const copy = {
     ...jpegPhoto,

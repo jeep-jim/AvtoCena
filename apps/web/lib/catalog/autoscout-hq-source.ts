@@ -32,6 +32,14 @@ export function parseAutoScoutDetailGallery(markup: string, sourceOfferId: strin
   if (!details || !Array.isArray(details.images)) return [];
   const declaredId = clean(details.id || details.listingId || details.uuid);
   if (declaredId && declaredId !== sourceOfferId) return [];
+
+  // AutoScout exposes an explicit source flag when the dealer's designated cover
+  // is a placeholder/promo frame rather than a vehicle photograph. A listing can
+  // still have five same-listing JPEG URLs in this state, so listing-bound identity
+  // alone is not sufficient. Fail closed instead of showing the dealer artwork as
+  // the customer's main vehicle photo.
+  if (details.isCoverImagePlaceholder === true) return [];
+
   const prefix = `/listing-images/${sourceOfferId}_`.toLowerCase();
   const result: string[] = [];
   const seen = new Set<string>();

@@ -18,6 +18,14 @@ test("AutoScout detail gallery rejects a mismatched declared listing id", () => 
   assert.deepEqual(parseAutoScoutDetailGallery(page(images, "different-id"), id), []);
 });
 
+test("AutoScout detail gallery rejects dealer artwork flagged as a placeholder cover", () => {
+  const images = Array.from({ length: 5 }, (_, i) => `https://prod.pictures.autoscout24.net/listing-images/${id}_photo${i}.jpg/1280x960.webp`);
+  const markup = `<script id="__NEXT_DATA__" type="application/json">${JSON.stringify({
+    props: { pageProps: { listingDetails: { id, images, isCoverImagePlaceholder: true } } },
+  })}</script>`;
+  assert.deepEqual(parseAutoScoutDetailGallery(markup, id), []);
+});
+
 test("AutoScout list thumbnails are not claimed as verified exact photos before detail fetch", () => {
   const offer = autoscoutEuropeExactSource.normalizeOffer({ id, sourceUrl: `https://www.autoscout24.com/offers/example-${id}`, title: "Volvo EX90", make: "Volvo", model: "EX90", trim: "Ultra", year: 2025, mileageKm: 13909, price: 70000, currency: "EUR", images: Array.from({ length: 5 }, (_, i) => `https://prod.pictures.autoscout24.net/listing-images/${id}_${i}.jpg/250x188.webp`), raw: {} });
   assert.ok(offer);
