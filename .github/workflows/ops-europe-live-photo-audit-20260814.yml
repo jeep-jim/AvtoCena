@@ -35,7 +35,7 @@ jobs:
       - name: Audit live Europe source photo quality without writes
         shell: bash
         run: |
-          cat > /tmp/audit-europe-photos.ts <<'TS'
+          cat > audit-europe-photos.ts <<'TS'
           import fs from "node:fs";
           import { readAllOffersForMaintenance } from "./apps/web/lib/catalog/storage";
 
@@ -65,44 +65,50 @@ jobs:
             };
           };
 
-          const all = await readAllOffersForMaintenance();
-          const europe = all.filter((offer: any) => offer.market === "europe" && offer.status === "active");
-          const bySource = new Map<string, any[]>();
-          for (const offer of europe) {
-            const key = String(offer.sourceId || "unknown");
-            bySource.set(key, [...(bySource.get(key) || []), offer]);
-          }
-          const autoscout = bySource.get("autoscout_europe_open") || [];
-          const autoUrls = autoscout.flatMap(urls);
-          const autoscout250 = autoscout.filter((row) => urls(row).some((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url)));
-          const autoscoutHqUrlCards = autoscout.filter((row) => urls(row).length >= 5 && urls(row).every((url) => /\/(?:9\d\d|1\d{3,})x(?:6\d\d|7\d\d|8\d\d|9\d\d|1\d{3,})(?:\.|\/|\?|$)/i.test(url)));
-          const mobile = bySource.get("mobile_de_open") || [];
-          const otomoto = [...bySource.entries()].filter(([key]) => /otomoto/i.test(key)).flatMap(([, rows]) => rows);
+          async function main() {
+            const all = await readAllOffersForMaintenance();
+            const europe = all.filter((offer: any) => offer.market === "europe" && offer.status === "active");
+            const bySource = new Map<string, any[]>();
+            for (const offer of europe) {
+              const key = String(offer.sourceId || "unknown");
+              bySource.set(key, [...(bySource.get(key) || []), offer]);
+            }
+            const autoscout = bySource.get("autoscout_europe_open") || [];
+            const autoUrls = autoscout.flatMap(urls);
+            const autoscout250 = autoscout.filter((row) => urls(row).some((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url)));
+            const autoscoutHqUrlCards = autoscout.filter((row) => urls(row).length >= 5 && urls(row).every((url) => /\/(?:9\d\d|1\d{3,})x(?:6\d\d|7\d\d|8\d\d|9\d\d|1\d{3,})(?:\.|\/|\?|$)/i.test(url)));
+            const mobile = bySource.get("mobile_de_open") || [];
+            const otomoto = [...bySource.entries()].filter(([key]) => /otomoto/i.test(key)).flatMap(([, rows]) => rows);
 
-          const report = {
-            generatedAt: new Date().toISOString(),
-            totalEurope: europe.length,
-            sources: Object.fromEntries([...bySource.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([sourceId, rows]) => [sourceId, sourceStats(rows)])),
-            autoscout: {
-              ...sourceStats(autoscout),
-              cardsWith250x188: autoscout250.length,
-              imagesWith250x188: autoUrls.filter((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url)).length,
-              cardsWithOnlyHqUrlRenditions: autoscoutHqUrlCards.length,
-              sample250x188: autoscout250.slice(0, 20).map((row) => ({id: row.sourceOfferId, title: row.sourceTitle, first: urls(row)[0], sourceUrl: row?.operational?.sourceUrl})),
-            },
-            mobile: {
-              ...sourceStats(mobile),
-              cardsWithMo1600: mobile.filter((row) => urls(row).some((url) => /(?:rule=mo-1600|mo-1600)/i.test(url))).length,
-            },
-            otomoto: {
-              ...sourceStats(otomoto),
-              cardsWith1200x800: otomoto.filter((row) => urls(row).some((url) => /(?:1200x800|s=1200x800)/i.test(url))).length,
-            },
-          };
-          fs.writeFileSync("europe-live-photo-audit.json", JSON.stringify(report, null, 2));
-          console.log(JSON.stringify(report, null, 2));
+            const report = {
+              generatedAt: new Date().toISOString(),
+              totalEurope: europe.length,
+              sources: Object.fromEntries([...bySource.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([sourceId, rows]) => [sourceId, sourceStats(rows)])),
+              autoscout: {
+                ...sourceStats(autoscout),
+                cardsWith250x188: autoscout250.length,
+                imagesWith250x188: autoUrls.filter((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url)).length,
+                cardsWithOnlyHqUrlRenditions: autoscoutHqUrlCards.length,
+                sample250x188: autoscout250.slice(0, 20).map((row) => ({id: row.sourceOfferId, title: row.sourceTitle, first: urls(row)[0], sourceUrl: row?.operational?.sourceUrl})),
+              },
+              mobile: {
+                ...sourceStats(mobile),
+                cardsWithMo1600: mobile.filter((row) => urls(row).some((url) => /(?:rule=mo-1600|mo-1600)/i.test(url))).length,
+              },
+              otomoto: {
+                ...sourceStats(otomoto),
+                cardsWith1200x800: otomoto.filter((row) => urls(row).some((url) => /(?:1200x800|s=1200x800)/i.test(url))).length,
+              },
+            };
+            fs.writeFileSync("europe-live-photo-audit.json", JSON.stringify(report, null, 2));
+            console.log(JSON.stringify(report, null, 2));
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exitCode = 1;
+          });
           TS
-          cp /tmp/audit-europe-photos.ts ./audit-europe-photos.ts
           npx tsx audit-europe-photos.ts
           rm audit-europe-photos.ts
       - uses: actions/upload-artifact@v4
