@@ -1,4 +1,4 @@
-import { cacheImageFromUrl, stableOfferId } from "./storage";
+import { stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
@@ -61,10 +61,6 @@ function integer(value: unknown) {
 }
 export function parseMashinaExplicitEngineLiters(value: unknown) {
   const text = String(value || "").replace(/,/g, ".");
-  // Mashina.kg frequently writes exact source specs as "3.5 AT", "2.5hyb"
-  // or "2.0d" without an L unit. Accept only a decimal displacement directly
-  // bound to an explicit transmission/fuel/engine marker; bare numbers are never
-  // treated as engine volume (protects Model 3, Q5, CX-5, years, prices, etc.).
   const match = text.match(/(?:^|\s)([0-8](?:\.[0-9]))\s*(?=(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b)/i);
   const liters = Number(match?.[1] || 0);
   return Number.isFinite(liters) && liters >= 0.6 && liters <= 8 ? liters : 0;
@@ -107,6 +103,20 @@ export function dedupeMashinaImageUrls(values: string[]) {
     else if (rank > current.rank) best.set(identity, { url: value, rank, index: current.index });
   });
   return [...best.values()].sort((left, right) => left.index - right.index).map((item) => item.url);
+}
+function mashinaSourceImage(url: string): CatalogImage {
+  const extension = url.match(/\.(jpe?g|png|webp|avif)(?:[?#]|$)/i)?.[1]?.toLowerCase();
+  return {
+    id: "",
+    url,
+    objectKey: "",
+    checksum: "",
+    size: 0,
+    mimeType: extension === "png" ? "image/png" : extension === "webp" ? "image/webp" : extension === "avif" ? "image/avif" : "image/jpeg",
+  };
+}
+export function mashinaSourceGallery(values: string[], limit = 30) {
+  return dedupeMashinaImageUrls(values).slice(0, Math.max(1, Math.min(30, limit))).map(mashinaSourceImage);
 }
 function imageUrls(markup: string, base: string) {
   const values: string[] = [];
@@ -279,10 +289,13 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational.raw as { images?: string[]; parsed?: MashinaListRow } | undefined;
     const row = raw?.parsed;
-    const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
+    const limit = Math.min(30, Math.max(1, Number.isFinite(requested) ? requested : 30));
+    const requestedMinimum = Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5);
+    const minimum = Math.min(limit, Math.max(1, Number.isFinite(requestedMinimum) ? requestedMinimum : 5));
     let urls = dedupeMashinaImageUrls(raw?.images || row?.images || []);
     const detailUrl = offer.operational.sourceUrl || row?.detailUrl || "";
-    if (detailUrl && row && urls.length < limit) {
+    if (detailUrl && row && urls.length < minimum) {
       try {
         const detail = await request(detailUrl, "https://www.mashina.kg/en/search/");
         if (identityMatches(detail.markup, row)) {
@@ -296,17 +309,19 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
           (offer.operational.raw as any).detailIdentityVerified = true;
         }
       } catch {
-        // Listing-bound images remain the only accepted fallback.
+        // Listing-bound list images remain the only accepted fallback.
       }
     }
-    offer.operational.gallerySourceImageCount = urls.length;
-    const saved: CatalogImage[] = [];
-    for (const url of urls.slice(0, limit * 4)) {
-      const image = await cacheImageFromUrl(url, this.market, { headers: { ...HEADERS, referer: detailUrl || "https://www.mashina.kg/en/search/" } }).catch(() => null);
-      if (image && image.size > 8_000) saved.push(image);
-      if (saved.length >= limit) break;
-    }
-    return saved;
+    const gallery = mashinaSourceGallery(urls, limit);
+    const verified = gallery.length >= minimum;
+    offer.operational.gallerySourceImageCount = gallery.length;
+    offer.operational.galleryVerified = verified;
+    offer.operational.photoIdentityVerified = verified;
+    offer.operational.galleryImageCount = gallery.length;
+    offer.operational.galleryRefreshedAt = new Date().toISOString();
+    offer.operational.gallerySafetyMode = "mashina_listing_bound_source_urls_v2";
+    (offer.operational as any).galleryStoredAs = "json_urls";
+    return verified ? gallery : [];
   }
 
   async healthCheck() { return { ok: true, message: "Mashina.kg strict listing parser", checkedAt: new Date().toISOString() }; }
