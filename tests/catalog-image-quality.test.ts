@@ -85,12 +85,25 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("enforces five photos only for strict source contracts", () => {
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 1) } as any), true);
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: [] } as any), false);
+test("enforces five photos for Korea and preserves existing strict market contracts", () => {
+  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
+
+  const georgia = { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" };
+  assert.equal(isCrediblePublicOffer({ ...georgia, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(georgia as any), true);
+
   const autoHome = { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" };
   assert.equal(isCrediblePublicOffer({ ...autoHome, images: rawOffer.images.slice(0, 4) } as any), false);
   assert.equal(isCrediblePublicOffer(autoHome as any), true);
+
+  const europe = { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" };
+  assert.equal(isCrediblePublicOffer({ ...europe, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(europe as any), true);
+
+  const japan = { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" };
+  assert.equal(isCrediblePublicOffer({ ...japan, images: rawOffer.images.slice(0, 4) } as any), false);
+  assert.equal(isCrediblePublicOffer(japan as any), true);
 });
 
 test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
