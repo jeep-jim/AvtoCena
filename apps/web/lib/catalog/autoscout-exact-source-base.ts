@@ -1,3 +1,4 @@
+import { canonicalSourceModelIdentity } from "./open-source-normalizer";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
@@ -38,14 +39,16 @@ export function parseAutoScoutNextData(markup: string): AutoScoutExactRow[] {
   const seen = new Set<string>();
   for (const listing of listings) {
     if (!listing || typeof listing !== "object") continue;
-    const id = clean(listing.id), sourceUrl = absoluteUrl(listing.url), make = clean(listing.vehicle?.make), model = clean(listing.vehicle?.model);
+    const id = clean(listing.id), sourceUrl = absoluteUrl(listing.url), make = clean(listing.vehicle?.make), sourceModel = clean(listing.vehicle?.model);
     const trim = clean(listing.vehicle?.modelVersionInput || listing.vehicle?.variant || listing.vehicle?.motorTypeName);
+    const sourceTitle = clean([make, sourceModel, trim].filter(Boolean).join(" "));
+    const model = canonicalSourceModelIdentity(sourceTitle, make, sourceModel);
     const firstRegistration = clean(listing.tracking?.firstRegistration || detailValue(listing.vehicleDetails, /first registration/i));
     const year = parseYear(firstRegistration), price = Number(listing.price?.priceRaw || listing.tracking?.price || 0);
     const currency = clean(listing.price?.currency || listing.priceCurrency || data?.props?.pageProps?.currency || "EUR");
     const images = [...new Set<string>((Array.isArray(listing.images) ? listing.images : []).map((value: unknown) => absoluteUrl(value)).filter((url: string) => /^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\//i.test(url)))];
     const detailPower = parsePower(detailValue(listing.vehicleDetails, /power/i));
-    const title = clean([make, model, trim].filter(Boolean).join(" "));
+    const title = sourceTitle;
     const mileageKm = integer(listing.tracking?.mileage || listing.vehicle?.mileageInKm || detailValue(listing.vehicleDetails, /mileage/i));
     const engineCc = integer(listing.vehicle?.engineDisplacementInCCM);
     const sourcePureElectric = /-electric-/i.test(sourceUrl) && !/-(?:gasoline|petrol|diesel)-|hybrid|phev|hev/i.test(sourceUrl);
