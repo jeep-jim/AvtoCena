@@ -2,7 +2,7 @@ import { aiCatalogManifestCount, readAiCatalogManifest } from "@/lib/ai-discover
 
 export const dynamic = "force-dynamic";
 
-const CARS_PER_SITEMAP = 45_000;
+const CARS_PER_SITEMAP = 5_000;
 
 function xmlEscape(value: unknown) {
   return String(value ?? "")
