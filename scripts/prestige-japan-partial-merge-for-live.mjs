@@ -32,7 +32,7 @@ function validate(offer) {
   if (COMMERCIAL_RE.test(`${offer.make} ${offer.model} ${offer.trim || ""}`)) return "commercial";
   const images = Array.isArray(offer.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30 || images.some((image) => !EXACT_IMAGE.test(String(image?.url || "")))) return "gallery";
-  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v1") return "gallery_flags";
+  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v2_cover_content_verified") return "gallery_flags";
   if (offer.powerHp || offer.powerKw || offer.power30MinKw || offer.drive || offer.fuel) return "unsupported_source_fields";
   return "";
 }

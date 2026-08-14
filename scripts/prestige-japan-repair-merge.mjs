@@ -39,7 +39,7 @@ function checkOffer(offer) {
   if (offer?.auctionGrade && !gradeToken.test(String(offer.auctionGrade))) problems.push("grade");
   const images = Array.isArray(offer?.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30 || images.some((image) => !exactImage.test(String(image?.url || "")))) problems.push("gallery");
-  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v1") problems.push("galleryFlags");
+  if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== "prestige_ajes_exact_detail_v2_cover_content_verified") problems.push("galleryFlags");
   if (offer?.powerHp || offer?.powerKw || offer?.power30MinKw || offer?.drive || offer?.fuel) problems.push("unsupportedFields");
   return problems;
 }

@@ -80,7 +80,7 @@ jobs:
             if (offer.auctionGrade && !/^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i.test(String(offer.auctionGrade))) problems.push('auction_grade_not_exact_token');
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
             if ((offer.images || []).some((img) => !/^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_ajes_detail');
-            if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== 'prestige_ajes_exact_detail_v1') problems.push('gallery_identity_flags_missing');
+            if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== 'prestige_ajes_exact_detail_v2_cover_content_verified') problems.push('gallery_identity_flags_missing');
             if (offer.powerHp || offer.powerKw || offer.power30MinKw || offer.drive || offer.fuel) problems.push('unsupported_fields_filled');
           }
           console.log(JSON.stringify({ target: expected, count: offers.length, unique: ids.size, source, problems: [...new Set(problems)] }, null, 2));
