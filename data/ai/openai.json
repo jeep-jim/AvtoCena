@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "name": "АвтоЦена",
   "website": "https://avtocena.com",
   "lastVerifiedAgainstOpenAiDocs": "2026-08-14",
@@ -10,8 +10,9 @@
     "modelSitemapIndex": "https://avtocena.com/cars/models-sitemap.xml",
     "catalogSitemapIndex": "https://avtocena.com/cars/sitemap.xml",
     "llms": "https://avtocena.com/llms.txt",
-    "productFeed": "https://avtocena.com/feeds/openai-products.csv",
-    "productFeedFormat": "google_compatible_csv",
+    "productFeed": "https://avtocena.com/feeds/openai-products.csv.gz",
+    "productFeedLegacyRedirect": "https://avtocena.com/feeds/openai-products.csv",
+    "productFeedFormat": "google_compatible_csv_gzip",
     "mcp": "https://avtocena.com/mcp",
     "mcpAccess": "public_read_only"
   },
@@ -27,7 +28,7 @@
       "model_sitemap",
       "catalog_sitemap",
       "llms",
-      "product_feed",
+      "product_feed_gzip",
       "mcp_initialize",
       "mcp_tools",
       "mcp_live_search"
