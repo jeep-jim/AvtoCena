@@ -27,3 +27,13 @@ console.log(JSON.stringify({
 if (!result.generationId || !result.total || result.allProjectionCount !== result.total || result.projectionMarkets < expectedProjectionMarkets || result.offerShards < 16 || missingMarkets.length) {
   throw new Error("catalog_current_read_models_incomplete");
 }
+
+// Keep the compact unfiltered /cars overview on the exact same generation as
+// the current facets/projection aliases. The builder independently re-checks
+// the manifest before and after its read/write, so a concurrent generation
+// change fails closed instead of serving mixed-generation cards.
+await import("./catalog-build-overview-read-model.mjs");
+console.log(JSON.stringify({
+  event: "catalog_overview_refreshed_with_current_read_models",
+  generationId: result.generationId,
+}));
