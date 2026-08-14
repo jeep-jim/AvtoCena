@@ -1,0 +1,228 @@
+name: Ops · AutoScout live HQ proof 20260814
+
+on:
+  push:
+    branches:
+      - ops/autoscout-live-hq-proof-20260814
+    paths:
+      - ".github/workflows/ops-autoscout-live-hq-proof-20260814.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_SOURCE_TIMEOUT_MS: "35000"
+      CATALOG_GALLERY_TIMEOUT_MS: "35000"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Refresh exact galleries in memory and build dry-run artifact
+        shell: bash
+        run: |
+          cat > autoscout-live-hq-proof.ts <<'TS'
+          import fs from "node:fs";
+          import { autoscoutEuropeExactSource } from "./apps/web/lib/catalog/autoscout-exact-source";
+          import { readAllOffersForMaintenance } from "./apps/web/lib/catalog/storage";
+          import { readDataJson } from "./apps/web/lib/data";
+          import { hasCredibleOfferContent, isCatalogYearAllowed } from "./apps/web/lib/catalog/offer-quality";
+          import { catalogModelYearQuotaKey, CATALOG_MAX_OFFERS_PER_MODEL_YEAR } from "./apps/web/lib/catalog/inventory-quota";
+          import { PUBLIC_CATALOG_MARKETS } from "./apps/web/lib/catalog/runtime-config";
+
+          const SOURCE_ID = "autoscout_europe_open";
+          const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+          const imageUrls = (offer: any) => (Array.isArray(offer?.images) ? offer.images : []).map((image: any) => String(image?.url || "")).filter(Boolean);
+          const unique = (values: string[]) => [...new Set(values)];
+          function exactHqImage(image: any, sourceOfferId: string) {
+            const url = String(image?.url || "");
+            if (!url || /\/250x188(?:\.|\/|\?|$)/i.test(url)) return false;
+            let parsed: URL;
+            try { parsed = new URL(url); } catch { return false; }
+            if (parsed.hostname.toLowerCase() !== "prod.pictures.autoscout24.net") return false;
+            if (!parsed.pathname.toLowerCase().startsWith(`/listing-images/${sourceOfferId.toLowerCase()}_`)) return false;
+            const width = Number(image?.width || 0);
+            const height = Number(image?.height || 0);
+            return width >= 900 && height >= 600;
+          }
+          async function pool<T>(rows: T[], limit: number, worker: (row: T, index: number) => Promise<void>) {
+            let cursor = 0;
+            await Promise.all(Array.from({ length: Math.min(limit, rows.length) }, async () => {
+              while (true) {
+                const index = cursor++;
+                if (index >= rows.length) return;
+                await worker(rows[index], index);
+              }
+            }));
+          }
+          async function galleryWithRetry(offer: any) {
+            let lastError: unknown;
+            for (let attempt = 1; attempt <= 3; attempt++) {
+              try { return await autoscoutEuropeExactSource.fetchImages!(offer); }
+              catch (error) {
+                lastError = error;
+                if (attempt < 3) await sleep(500 * attempt);
+              }
+            }
+            throw lastError;
+          }
+
+          async function main() {
+            const manifest: any = await readDataJson("catalog/manifest.json", null);
+            if (!manifest?.generationId) throw new Error("autoscout_hq_proof_manifest_missing");
+            const all = await readAllOffersForMaintenance();
+            const active = all.filter((offer: any) => offer?.status === "active");
+            const baselineCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, active.filter((offer: any) => offer.market === market).length]));
+            const europe = active.filter((offer: any) => offer.market === "europe");
+            const currentAutoscout = europe.filter((offer: any) => offer.sourceId === SOURCE_ID);
+            const untouchedEurope = europe.filter((offer: any) => offer.sourceId !== SOURCE_ID);
+            const current250 = currentAutoscout.filter((offer: any) => imageUrls(offer).some((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url))).length;
+            if (!currentAutoscout.length) throw new Error("autoscout_hq_proof_no_live_rows");
+
+            const refreshed = new Map<string, any>();
+            const failures: any[] = [];
+            let completed = 0;
+            await pool(currentAutoscout, 8, async (sourceOffer: any) => {
+              const offer = structuredClone(sourceOffer);
+              try {
+                const images = await galleryWithRetry(offer);
+                const sourceOfferId = String(offer.sourceOfferId || "");
+                const dedup = new Map<string, any>();
+                for (const image of Array.isArray(images) ? images : []) {
+                  const url = String(image?.url || "");
+                  if (url && !dedup.has(url)) dedup.set(url, image);
+                }
+                const exactImages = [...dedup.values()].slice(0, 30);
+                if (exactImages.length < 5) throw new Error(`hq_gallery_below5_${exactImages.length}`);
+                if (!exactImages.every((image) => exactHqImage(image, sourceOfferId))) throw new Error("hq_gallery_identity_or_resolution_failed");
+                if (offer?.operational?.photoIdentityVerified !== true || offer?.operational?.photoResolutionVerified !== true) {
+                  throw new Error("hq_gallery_proof_flags_missing");
+                }
+                const updated = {
+                  ...offer,
+                  images: exactImages,
+                  updatedAt: sourceOffer.updatedAt,
+                  firstSeenAt: sourceOffer.firstSeenAt,
+                  operational: {
+                    ...(offer.operational || {}),
+                    raw: {
+                      ...(offer.operational?.raw || {}),
+                      autoscoutHqRefreshProofAt: new Date().toISOString(),
+                      autoscoutHqRefreshBaselineGenerationId: manifest.generationId,
+                    },
+                  },
+                };
+                if (!isCatalogYearAllowed(updated.year, "europe")) throw new Error(`year_gate_${updated.year}`);
+                if (!hasCredibleOfferContent(updated)) throw new Error("public_quality_failed");
+                refreshed.set(updated.id, updated);
+              } catch (error) {
+                if (failures.length < 500) failures.push({
+                  id: sourceOffer.id,
+                  sourceOfferId: sourceOffer.sourceOfferId,
+                  title: sourceOffer.sourceTitle,
+                  sourceUrl: sourceOffer?.operational?.sourceUrl,
+                  error: String((error as any)?.message || error),
+                });
+              }
+              completed++;
+              if (completed % 100 === 0 || completed === currentAutoscout.length) {
+                console.log(JSON.stringify({completed, total: currentAutoscout.length, success: refreshed.size, failed: completed - refreshed.size}));
+              }
+            });
+
+            const refreshedRows = [...refreshed.values()];
+            const candidateEurope = [...untouchedEurope, ...refreshedRows];
+            const countByModelYear = new Map<string, number>();
+            let maxModelYear = 0;
+            const quotaViolations: any[] = [];
+            for (const offer of candidateEurope) {
+              const key = catalogModelYearQuotaKey(offer, "europe");
+              if (!key) continue;
+              const count = Number(countByModelYear.get(key) || 0) + 1;
+              countByModelYear.set(key, count);
+              maxModelYear = Math.max(maxModelYear, count);
+              if (count > CATALOG_MAX_OFFERS_PER_MODEL_YEAR && quotaViolations.length < 100) quotaViolations.push({key, count});
+            }
+            const candidate250 = candidateEurope.filter((offer: any) => offer.sourceId === SOURCE_ID && imageUrls(offer).some((url) => /\/250x188(?:\.|\/|\?|$)/i.test(url))).length;
+            const candidateBelow5 = candidateEurope.filter((offer: any) => unique(imageUrls(offer)).length < 5).length;
+            const untouchedIdsBefore = new Set(untouchedEurope.map((offer: any) => offer.id));
+            const untouchedIdsAfter = new Set(candidateEurope.filter((offer: any) => offer.sourceId !== SOURCE_ID).map((offer: any) => offer.id));
+            const untouchedEuropeExact = untouchedIdsBefore.size === untouchedIdsAfter.size && [...untouchedIdsBefore].every((id) => untouchedIdsAfter.has(id));
+            const untouchedMarketChecks = Object.fromEntries(PUBLIC_CATALOG_MARKETS.filter((market) => market !== "europe").map((market) => {
+              const rows = active.filter((offer: any) => offer.market === market);
+              return [market, {count: rows.length, preservedCount: rows.length, idsExact: true}];
+            }));
+            const successRatio = refreshedRows.length / currentAutoscout.length;
+            const report = {
+              version: 1,
+              mode: "autoscout_live_exact_gallery_hq_readonly_proof",
+              generatedAt: new Date().toISOString(),
+              baselineGenerationId: manifest.generationId,
+              baselineCounts,
+              europe: {
+                baselineCount: europe.length,
+                baselineAutoscout: currentAutoscout.length,
+                baselineAutoscout250: current250,
+                untouchedEurope: untouchedEurope.length,
+                refreshedAutoscout: refreshedRows.length,
+                failedAutoscout: currentAutoscout.length - refreshedRows.length,
+                successRatio: Number(successRatio.toFixed(4)),
+                candidateEuropeCount: candidateEurope.length,
+                candidateAutoscout250: candidate250,
+                candidateBelow5,
+                maxModelYear,
+                quotaViolationCount: quotaViolations.length,
+                untouchedEuropeIdsExact: untouchedEuropeExact,
+              },
+              untouchedMarkets: untouchedMarketChecks,
+              failures,
+              quotaViolations,
+              gates: {
+                enoughRefreshCoverage: refreshedRows.length >= 1000 && successRatio >= 0.5,
+                noAutoscoutThumbnails: candidate250 === 0,
+                noBelowFive: candidateBelow5 === 0,
+                modelYearQuota: quotaViolations.length === 0 && maxModelYear <= CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
+                untouchedEuropeIdsExact: untouchedEuropeExact,
+                untouchedMarketsExact: Object.values(untouchedMarketChecks).every((row: any) => row.idsExact && row.count === row.preservedCount),
+              },
+            };
+            fs.writeFileSync("autoscout-hq-refreshed.json", JSON.stringify({
+              version: 1,
+              baselineGenerationId: manifest.generationId,
+              sourceId: SOURCE_ID,
+              count: refreshedRows.length,
+              offers: refreshedRows,
+            }, null, 2));
+            fs.writeFileSync("autoscout-hq-proof-report.json", JSON.stringify(report, null, 2));
+            console.log(JSON.stringify(report, null, 2));
+            if (!Object.values(report.gates).every(Boolean)) throw new Error(`autoscout_hq_proof_gate_failed:${JSON.stringify(report.gates)}`);
+          }
+          main().catch((error) => { console.error(error); process.exitCode = 1; });
+          TS
+          npx tsx autoscout-live-hq-proof.ts
+          rm autoscout-live-hq-proof.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autoscout-live-hq-proof
+          path: |
+            autoscout-hq-refreshed.json
+            autoscout-hq-proof-report.json
+          if-no-files-found: warn
+          retention-days: 3
+          compression-level: 6
