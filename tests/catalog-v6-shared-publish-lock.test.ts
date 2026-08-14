@@ -7,6 +7,10 @@ const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish
 const chunk = fs.readFileSync("scripts/prestige-japan-strict-chunk.mjs", "utf8");
 const merge = fs.readFileSync("scripts/prestige-japan-strict-merge.mjs", "utf8");
 const salvage = fs.readFileSync("scripts/prestige-japan-aggregate-salvage.mjs", "utf8");
+const partialMerge = fs.readFileSync("scripts/prestige-japan-partial-merge-for-live.mjs", "utf8");
+const repairMerge = fs.readFileSync("scripts/prestige-japan-repair-merge.mjs", "utf8");
+const readiness = fs.readFileSync(".github/workflows/catalog-v6-prestige-exact-readiness.yml", "utf8");
+const strictLadder = fs.readFileSync(".github/workflows/catalog-v6-prestige-strict-ladder.yml", "utf8");
 
 test("V6 production publish waits on the shared catalog writer and audits all seven markets", () => {
   assert.match(workflow, /publish:[\s\S]*concurrency:[\s\S]*group: catalog-live-daily-working-markets[\s\S]*cancel-in-progress: false/);
@@ -28,12 +32,14 @@ test("Prestige daily tolerates isolated shard transport failures without weakeni
 
 test("Prestige strict chunk, merge and salvage require the current content-verified gallery contract", () => {
   const contract = "prestige_ajes_exact_detail_v2_cover_content_verified";
-  for (const code of [chunk, merge, salvage]) {
+  for (const code of [chunk, merge, salvage, partialMerge, repairMerge, readiness, strictLadder]) {
     assert.ok(code.includes(contract));
+    assert.equal(code.includes("prestige_ajes_exact_detail_v1"), false);
+  }
+  for (const code of [chunk, merge, salvage]) {
     assert.match(code, /galleryVerified !== true/);
     assert.match(code, /listingBoundImages !== true/);
     assert.match(code, /coverContentVerified !== true/);
-    assert.equal(code.includes("prestige_ajes_exact_detail_v1"), false);
   }
 });
 
