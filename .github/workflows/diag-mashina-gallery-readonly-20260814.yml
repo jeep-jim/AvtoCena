@@ -15,7 +15,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     env:
       CATALOG_SOURCE_TIMEOUT_MS: "15000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
@@ -32,3 +32,33 @@ jobs:
       - run: npm ci
       - name: Probe exact Mashina listings without storage writes
         run: npx tsx scripts/catalog-mashina-gallery-readonly-diagnostic.ts
+      - name: Bounded read-only Mashina collector proof
+        env:
+          RECOVERY_MARKET: kyrgyzstan
+          RECOVERY_SOURCE_IDS: mashina_kyrgyzstan_exact
+          RECOVERY_OUTPUT: mashina-readonly-proof.json
+          RECOVERY_TARGET: "80"
+          RECOVERY_MAX_PAGES: "12"
+          RECOVERY_TIME_LIMIT_MS: "300000"
+          RECOVERY_REQUEST_TIMEOUT_MS: "20000"
+          RECOVERY_RETRY_ATTEMPTS: "1"
+          RECOVERY_PREPARE_CONCURRENCY: "6"
+        run: npx tsx scripts/catalog-live-recovery-market.mjs
+      - name: Summarize bounded collector output
+        if: always()
+        run: |
+          if [ -f mashina-readonly-proof.json ]; then
+            node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('mashina-readonly-proof.json','utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : Array.isArray(data.items) ? data.items : [];
+          const counts = offers.map((o) => Array.isArray(o.images) ? o.images.length : 0);
+          console.log(JSON.stringify({
+            offers: offers.length,
+            minImages: counts.length ? Math.min(...counts) : 0,
+            maxImages: counts.length ? Math.max(...counts) : 0,
+            belowFive: counts.filter((n) => n < 5).length,
+            stats: data.stats || data.report || null,
+          }, null, 2));
+          NODE
+          fi
