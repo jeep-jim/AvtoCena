@@ -8,7 +8,7 @@ const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|per
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
 const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
-const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
+const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
@@ -134,13 +134,8 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
   const powerHp = Number(offer.powerHp || 0);
   if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
 
-  // A model-wide representative horsepower value is not variant-bound evidence
-  // for this exact listing. It is intentionally excluded from customs too, so it
-  // must not silently evict an otherwise valid older card during re-publication.
   if (/^vehicle-model-representative:/i.test(clean(offer.powerDataSource))) return true;
 
-  // Do not apply an ICE horsepower heuristic to EV/PHEV/hybrid cards because
-  // their public horsepower field may not be the utilization-power value.
   const powertrainKind = clean(offer.powertrainKind).toLowerCase();
   if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)) return true;
   if (ALTERNATIVE_POWERTRAIN_RE.test(clean(offer.fuel))) return true;
@@ -149,24 +144,10 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 }
 
 function minimumImageCount(offer: VehicleOffer) {
-  // Compact public projections are created only from offers that already passed
-  // the server-side source/gallery quality gate. They intentionally carry one
-  // ranked cover instead of the complete listing gallery, so the browser must
-  // not reject a validated card merely because the DTO is compact.
   if (Number((offer as any).cardProjectionVersion || 0) === 1) return 1;
-  // Georgia recovery has an exact listing-bound gallery contract: publication
-  // must keep at least five verified frames from the same source listing.
   if (offer.market === "georgia") return 5;
-  // Korea is customer-facing used stock: shallow galleries make the card
-  // unsuitable for publication even when the remaining source fields are valid.
   if (offer.market === "korea") return 5;
-  // AutoHome exact-trim cards are customer-facing stock/config cards, so do not
-  // keep rows whose exact spec page/gallery exposes fewer than five verified
-  // source-bound photos. Never borrow another trim/series gallery to pad depth.
   if (["autohome_new_china_open", "mobile_de_open"].includes(String(offer.sourceId || ""))) return 5;
-  // Japan remains strict because auction-sheet/gallery identity is part of the
-  // completed-lot contract. Other live-market sources remain source-specific and
-  // are tightened separately only after their exact-gallery contracts are proven.
   if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
   return 1;
 }
@@ -181,14 +162,10 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
     || raw.detailIdentityVerified === true
     || raw.listingBoundImages === true) return true;
 
-  // Encar exact detail was verified card-by-card and its dedicated adapter only
-  // returns photos from the current source offer.
   if (offer.sourceId === "encar_direct"
     && operational.galleryVerified === true
     && ["encar_source_urls_only", "encar_detail_only_v2", "encar_source_cover_photolist_v3"].includes(String(operational.gallerySafetyMode || ""))) return true;
 
-  // JPAuc rows are keyed by the auction data-id. The Aleado image URL stored in
-  // that same row is the listing-bound auction sheet/gallery for that exact lot.
   if (offer.sourceId === "jpauc_japan_past_open"
     && operational.historicalAuction === true
     && Number(operational.minimumImages || 0) === 3
@@ -198,7 +175,6 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
 }
 
 function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
-  const currentYear = new Date().getFullYear();
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (checkSourcePolicy && !isCatalogMarketSourceAllowed(offer)) return false;
@@ -219,12 +195,6 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
     && mandatorySourcePhotoIdentityVerified(offer);
 }
 
-// Public API DTOs intentionally omit operational metadata. Server-side storage
-// has already applied hasCredibleOfferContent(), so the client only re-checks
-// the visible core fields here.
 export function isCrediblePublicOffer(offer: VehicleOffer) {
-  // Public DTOs intentionally omit sourceId after storage has already enforced
-  // the source policy. Re-check only visible fields here; otherwise every
-  // canonical Georgia card is hidden even though its count remains public.
   return offer.status === "active" && credibleCoreContent(offer, false);
 }
