@@ -163,11 +163,27 @@ jobs:
           CATALOG_AUDIT_OUTPUT: catalog-japan-scale-preflight-audit.json
           CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Enrich exact sold lots with documented chassis power
+      - name: Enrich exact sold lots with documented chassis power when available
+        shell: bash
         env:
           PRESTIGE_OFFICIAL_INPUT: prestige-live-input/prestige-japan-exact-sold-up-to-30000.json
           PRESTIGE_OFFICIAL_OUTPUT: prestige-japan-exact-sold-official-power.json
-        run: node scripts/prestige-japan-official-chassis-enrich.mjs
+        run: |
+          set +e
+          node scripts/prestige-japan-official-chassis-enrich.mjs
+          status=$?
+          set -e
+          test -s prestige-japan-exact-sold-official-power.json
+          if [ "$status" -ne 0 ]; then
+            node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const payload = JSON.parse(fs.readFileSync('prestige-japan-exact-sold-official-power.json', 'utf8'));
+          const offers = Array.isArray(payload?.offers) ? payload.offers : [];
+          const enriched = Number(payload?.report?.officialPowerEnrichment?.enriched ?? -1);
+          if (!offers.length || enriched !== 0) throw new Error(`official_power_enrichment_failed_with_invalid_passthrough: offers=${offers.length} enriched=${enriched}`);
+          console.log(`No optional official chassis power match; continuing fail-closed with ${offers.length} unchanged offers.`);
+          NODE
+          fi
       - name: Calculate up to 30k exact or explicitly preliminary Japan cards
         env:
           PRESTIGE_RECOVERY_INPUT: prestige-japan-exact-sold-official-power.json

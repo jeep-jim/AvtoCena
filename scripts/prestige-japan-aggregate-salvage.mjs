@@ -3,9 +3,11 @@ import fs from "node:fs/promises";
 const input = process.env.PRESTIGE_AGGREGATE_INPUT || "prestige-japan-exact-sold-up-to-30000.json";
 const output = process.env.PRESTIGE_AGGREGATE_OUTPUT || "prestige-japan-exact-sold-verified-salvage.json";
 const minCount = Math.max(1, Number(process.env.PRESTIGE_AGGREGATE_MIN_COUNT || 5_000));
+const minCoverage = Math.max(0.5, Math.min(1, Number(process.env.PRESTIGE_MIN_CHUNK_COVERAGE || 0.95)));
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
+const galleryContract = "prestige_ajes_exact_detail_v2_cover_content_verified";
 
 function checkOffer(offer) {
   const operational = offer?.operational || {};
@@ -22,7 +24,14 @@ function checkOffer(offer) {
   if (offer?.auctionGrade && !gradeToken.test(String(offer.auctionGrade))) problems.push("grade");
   const images = Array.isArray(offer?.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30 || images.some((image) => !exactImage.test(String(image?.url || "")))) problems.push("gallery");
-  if (operational.photoIdentityVerified !== true || operational.gallerySafetyMode !== "prestige_ajes_exact_detail_v1") problems.push("galleryFlags");
+  if (
+    operational.photoIdentityVerified !== true
+    || operational.galleryVerified !== true
+    || operational.gallerySafetyMode !== galleryContract
+    || raw.listingBoundImages !== true
+    || raw.photoIdentityVerified !== true
+    || raw.coverContentVerified !== true
+  ) problems.push("galleryFlags");
   if (offer?.powerHp || offer?.powerKw || offer?.power30MinKw || offer?.drive || offer?.fuel) problems.push("unsupportedFields");
   return problems;
 }
@@ -35,7 +44,10 @@ const warnings = [];
 
 if (sourceReport.mode !== "prestige_exact_sold_source_only_merged_certification_no_publish") fatal.push("mode");
 if (sourceReport.sourceId !== "prestige_japan_auctions_open" || sourceReport.market !== "japan") fatal.push("source");
-if (!(Number(sourceReport.expectedChunks) > 0) || Number(sourceReport.chunkFiles) !== Number(sourceReport.expectedChunks)) fatal.push("chunkCoverage");
+const expectedChunks = Number(sourceReport.expectedChunks || 0);
+const chunkFiles = Number(sourceReport.chunkFiles || 0);
+const coverage = expectedChunks > 0 ? chunkFiles / expectedChunks : 0;
+if (!(expectedChunks > 0) || coverage < minCoverage) fatal.push(`chunkCoverage_${coverage.toFixed(4)}_below_${minCoverage}`);
 if (Number(sourceReport.outputCount) !== rows.length || Number(sourceReport.uniqueAccepted) !== rows.length) fatal.push("countBinding");
 if (rows.length < minCount) fatal.push(`belowMin_${rows.length}_${minCount}`);
 
@@ -43,6 +55,7 @@ for (const issue of Array.isArray(sourceReport.errors) ? sourceReport.errors : [
   if (/^chunk_failed_[A-Za-z0-9_.-]+$/.test(String(issue))) warnings.push(String(issue).replace(/^chunk_failed_/, "chunk_incomplete_"));
   else fatal.push(`sourceReport_${issue}`);
 }
+for (const warning of Array.isArray(sourceReport.warnings) ? sourceReport.warnings : []) warnings.push(String(warning));
 
 const seen = new Map();
 for (const offer of rows) {
@@ -56,15 +69,17 @@ for (const offer of rows) {
 }
 
 const report = {
-  version: 1,
+  version: 2,
   mode: "prestige_exact_sold_verified_partial_salvage_no_publish",
   sourceId: "prestige_japan_auctions_open",
   market: "japan",
   sourceRunId: String(process.env.PRESTIGE_SOURCE_RUN_ID || ""),
-  expectedChunks: Number(sourceReport.expectedChunks || 0),
-  chunkFiles: Number(sourceReport.chunkFiles || 0),
+  expectedChunks,
+  chunkFiles,
+  inputCoverage: coverage,
+  minimumChunkCoverage: minCoverage,
   exactOfferCount: rows.length,
-  incompleteChunks: warnings,
+  incompleteChunks: [...new Set(warnings)],
   fatalProblems: fatal.slice(0, 200),
   passed: fatal.length === 0,
 };
