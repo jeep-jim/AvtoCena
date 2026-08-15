@@ -67,6 +67,256 @@
         "batteryCapacityKwh",
         "rangeKmOrInterval"
       ]
+    },
+    {
+      "entityId": "mercedes-benz/glc/2022-launch/glc-300-4matic-de",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors"
+      ]
+    },
+    {
+      "entityId": "volkswagen/golf/eighth-generation/gti-2024-de",
+      "missing": [
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "honda/civic/11th-generation/type-r-2023-us",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors"
+      ]
+    },
+    {
+      "entityId": "nissan/leaf/second-generation/eplus-2019-eu",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "hyundai/tucson/fourth-generation/hybrid-230ps-2wd-eu",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "kia/ev6/2021-launch/gt-2022-eu",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "mazda/cx-60/2022-launch/e-skyactiv-phev-uk",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "lexus/rz/2022-launch/rz-450e-eu",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "volvo/ex30/2023-launch/twin-motor-performance-global",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "porsche/taycan/2019-launch/4s-performance-battery-plus-eu",
+      "missing": [
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "ford/mustang-mach-e/2026-model-year/gt-us",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "chevrolet/blazer-ev/2024-launch/ss-us",
+      "missing": [
+        "transmission",
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "tesla/model-3/2024-series/performance-au",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "chery/tiggo-7-pro-max/saudi-2024-series/1-6tgdi-4wd-sa",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "haval/h6/2021-hybrid-launch/hybrid-suv-2wd-th",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
     }
   ]
 }

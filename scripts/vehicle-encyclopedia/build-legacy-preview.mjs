@@ -51,7 +51,10 @@ if (validation.errors.length) {
   const facelifts = byId(data.records.facelift);
   const sources = byId(data.records.source);
 
-  const modelPreview = data.records.model.map((model) => {
+  const excludedModels = data.records.model
+    .filter((model) => model.status !== "verified")
+    .map((model) => ({ entityId: model.id, reason: "entity_status_not_verified" }));
+  const modelPreview = data.records.model.filter((model) => model.status === "verified").map((model) => {
     const brand = brands.get(model.brandId);
     const evidenceSource = sources.get(model.evidence.find((item) => item.status === "verified")?.sourceId);
     return compact({
@@ -75,6 +78,10 @@ if (validation.errors.length) {
   const excludedVariants = [];
   const variantPreview = [];
   for (const variant of data.records.variant) {
+    if (variant.status !== "verified") {
+      excludedVariants.push({ entityId: variant.id, reason: "entity_status_not_verified" });
+      continue;
+    }
     if (!variant.powerHp) {
       excludedVariants.push({ entityId: variant.id, reason: "legacy_requires_exact_powerHp; conversion from powerKw is not performed" });
       continue;
@@ -133,6 +140,7 @@ if (validation.errors.length) {
       models: modelPreview.filter((row) => legacyModelIds.has(row.id)).map((row) => row.id),
       variants: variantPreview.filter((row) => legacyVariantIds.has(row.id)).map((row) => row.id),
     },
+    excludedModels,
     excludedVariants,
     gatesBeforePublication: [
       "human review of every mapped field and existing-ID merge",
@@ -147,5 +155,5 @@ if (validation.errors.length) {
   await writeJson(path.join(output, "models.json"), modelPreview);
   await writeJson(path.join(output, "variants.json"), variantPreview);
   await writeJson(path.join(output, "report.json"), report);
-  console.log(JSON.stringify({ built: true, ...report.preview, excludedVariants: excludedVariants.length, productionModified: false }, null, 2));
+  console.log(JSON.stringify({ built: true, ...report.preview, excludedModels: excludedModels.length, excludedVariants: excludedVariants.length, productionModified: false }, null, 2));
 }

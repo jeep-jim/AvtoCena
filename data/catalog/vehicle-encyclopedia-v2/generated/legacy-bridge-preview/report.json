@@ -22,6 +22,68 @@
     ],
     "variants": []
   },
+  "excludedModels": [
+    {
+      "entityId": "mercedes-benz/glc",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "volkswagen/golf",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "honda/civic",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "nissan/leaf",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "hyundai/tucson",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "kia/ev6",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "mazda/cx-60",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "lexus/rz",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "volvo/ex30",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "porsche/taycan",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "ford/mustang-mach-e",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "chevrolet/blazer-ev",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "tesla/model-3",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "chery/tiggo-7-pro-max",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "haval/h6",
+      "reason": "entity_status_not_verified"
+    }
+  ],
   "excludedVariants": [
     {
       "entityId": "audi/q6-e-tron/2024/performance-eu",
@@ -34,6 +96,66 @@
     {
       "entityId": "geely/ex5/global/160kw-global",
       "reason": "legacy_requires_exact_powerHp; conversion from powerKw is not performed"
+    },
+    {
+      "entityId": "mercedes-benz/glc/2022-launch/glc-300-4matic-de",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "volkswagen/golf/eighth-generation/gti-2024-de",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "honda/civic/11th-generation/type-r-2023-us",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "nissan/leaf/second-generation/eplus-2019-eu",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "hyundai/tucson/fourth-generation/hybrid-230ps-2wd-eu",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "kia/ev6/2021-launch/gt-2022-eu",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "mazda/cx-60/2022-launch/e-skyactiv-phev-uk",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "lexus/rz/2022-launch/rz-450e-eu",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "volvo/ex30/2023-launch/twin-motor-performance-global",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "porsche/taycan/2019-launch/4s-performance-battery-plus-eu",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "ford/mustang-mach-e/2026-model-year/gt-us",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "chevrolet/blazer-ev/2024-launch/ss-us",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "tesla/model-3/2024-series/performance-au",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "chery/tiggo-7-pro-max/saudi-2024-series/1-6tgdi-4wd-sa",
+      "reason": "entity_status_not_verified"
+    },
+    {
+      "entityId": "haval/h6/2021-hybrid-launch/hybrid-suv-2wd-th",
+      "reason": "entity_status_not_verified"
     }
   ],
   "gatesBeforePublication": [

@@ -11,17 +11,17 @@ import { validateWorkspace } from "../../scripts/vehicle-encyclopedia/validate.m
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const DATA_ROOT = path.join(REPO_ROOT, "data/catalog/vehicle-encyclopedia-v2");
 
-test("canonical pilot satisfies JSON Schema and semantic validation", async () => {
+test("canonical checkpoint satisfies JSON Schema and semantic validation", async () => {
   const result = await validateWorkspace({ root: DATA_ROOT });
   assert.deepEqual(result.errors, []);
   assert.deepEqual(result.reports.coverage.totals, {
-    source: 21,
-    brand: 5,
-    model: 5,
-    generation: 5,
-    facelift: 1,
-    variant: 5,
-    media: 5,
+    source: 74,
+    brand: 20,
+    model: 20,
+    generation: 20,
+    facelift: 2,
+    variant: 20,
+    media: 20,
   });
 });
 
@@ -75,6 +75,8 @@ test("report generation is deterministic and remains staging-only", async () => 
   const manifest = await readJson(path.join(temporaryRoot, "manifest.json"));
   assert.equal(coverage.productionConnected, false);
   assert.equal(manifest.productionConnected, false);
-  assert.equal(manifest.status, "pilot-seed");
-  assert.equal(coverage.byBrand.length, 5);
+  assert.equal(manifest.status, "checkpoint-seed");
+  assert.equal(coverage.byBrand.length, 20);
+  assert.deepEqual(manifest.completedBrands, ["Audi", "BMW", "Toyota", "BYD", "Geely"]);
+  assert.deepEqual(manifest.inProgressBrands, ["Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai", "Kia", "Mazda", "Lexus", "Volvo", "Porsche", "Ford", "Chevrolet", "Tesla", "Chery", "Haval"]);
 });

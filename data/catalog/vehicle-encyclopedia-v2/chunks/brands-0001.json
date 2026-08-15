@@ -74,6 +74,226 @@
       ],
       "researchNotes": [],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mercedes-benz",
+      "canonicalName": "Mercedes-Benz",
+      "slug": "mercedes-benz",
+      "aliases": [
+        { "value": "Mercedes-Benz AG", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-mercedes-company-provider"] }
+      ],
+      "countries": ["Germany"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mercedes-company-provider", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen",
+      "canonicalName": "Volkswagen",
+      "slug": "volkswagen",
+      "aliases": [
+        { "value": "Volkswagen AG", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-volkswagen-company-publication-data"] },
+        { "value": "VW", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-volkswagen-company-publication-data"] }
+      ],
+      "countries": ["Germany"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volkswagen-company-publication-data", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "honda",
+      "canonicalName": "Honda",
+      "slug": "honda",
+      "aliases": [
+        { "value": "Honda Motor Co., Ltd.", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-honda-company-overview"] }
+      ],
+      "countries": ["Japan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-honda-company-overview", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "nissan",
+      "canonicalName": "Nissan",
+      "slug": "nissan",
+      "aliases": [
+        { "value": "Nissan Motor Co., Ltd.", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-nissan-company-contact"] }
+      ],
+      "countries": ["Japan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-nissan-company-contact", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "hyundai",
+      "canonicalName": "Hyundai",
+      "slug": "hyundai",
+      "aliases": [
+        { "value": "Hyundai Motor Company", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-hyundai-company-global"] }
+      ],
+      "countries": ["South Korea"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-hyundai-company-global", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "The source uses Korea; the normalized country label is South Korea." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "kia",
+      "canonicalName": "Kia",
+      "slug": "kia",
+      "aliases": [
+        { "value": "Kia Corporation", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-kia-company-information"] }
+      ],
+      "countries": ["South Korea"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-kia-company-information", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mazda",
+      "canonicalName": "Mazda",
+      "slug": "mazda",
+      "aliases": [
+        { "value": "Mazda Motor Corporation", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-mazda-company-outline"] }
+      ],
+      "countries": ["Japan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mazda-company-outline", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "lexus",
+      "canonicalName": "Lexus",
+      "slug": "lexus",
+      "aliases": [],
+      "countries": ["Japan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-lexus-shimoyama-headquarters", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Lexus is represented as a Toyota Motor Corporation brand with its international headquarters at Shimoyama, Japan." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volvo",
+      "canonicalName": "Volvo",
+      "slug": "volvo",
+      "aliases": [
+        { "value": "Volvo Cars", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-volvo-company-story"] }
+      ],
+      "countries": ["Sweden"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volvo-company-story", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "porsche",
+      "canonicalName": "Porsche",
+      "slug": "porsche",
+      "aliases": [
+        { "value": "Dr. Ing. h.c. F. Porsche AG", "kind": "source_spelling", "safe": true, "language": "de", "market": "Global", "sourceIds": ["src-porsche-company-legal"] }
+      ],
+      "countries": ["Germany"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-porsche-company-legal", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "ford",
+      "canonicalName": "Ford",
+      "slug": "ford",
+      "aliases": [
+        { "value": "Ford Motor Company", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-ford-company-dearborn"] }
+      ],
+      "countries": ["United States"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-ford-company-dearborn", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Ford Motor Company identifies itself as based in Dearborn, Michigan; the country is normalized to United States." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chevrolet",
+      "canonicalName": "Chevrolet",
+      "slug": "chevrolet",
+      "aliases": [],
+      "countries": ["United States"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chevrolet-blazer-ev-2022", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "The official Chevrolet release states that the brand was founded in Detroit; the country is normalized to United States." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "tesla",
+      "canonicalName": "Tesla",
+      "slug": "tesla",
+      "aliases": [],
+      "countries": ["United States"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-tesla-company-about", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Tesla states that it is headquartered in Texas; the country is normalized to United States." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chery",
+      "canonicalName": "Chery",
+      "slug": "chery",
+      "aliases": [
+        { "value": "Chery Automobile", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-chery-company-introduction"] }
+      ],
+      "countries": ["China"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chery-company-introduction", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "haval",
+      "canonicalName": "Haval",
+      "slug": "haval",
+      "aliases": [
+        { "value": "HAVAL", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-haval-brand-gwm-2019"] }
+      ],
+      "countries": ["China"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-haval-brand-gwm-2019", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "GWM identifies HAVAL as a Chinese SUV brand." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-15"
     }
   ]
 }

@@ -17,6 +17,20 @@
       ],
       "researchNotes": [],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen/golf/eighth-generation/2024-update",
+      "generationId": "volkswagen/golf/eighth-generation",
+      "name": "2024 model update",
+      "aliases": [],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volkswagen-golf-update-production-2024", "fields": ["name", "productionFrom"], "status": "verified", "confidence": "official", "note": "Volkswagen dates the start of series production of the revamped eighth-generation Golf to 12 April 2024." }
+      ],
+      "researchNotes": ["Checkpoint seed; the full pre-/post-update variant split remains open."],
+      "updatedAt": "2026-08-15"
     }
   ]
 }

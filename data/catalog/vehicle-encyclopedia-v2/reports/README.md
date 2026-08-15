@@ -9,6 +9,8 @@ Codex should keep incremental machine-readable or Markdown reports here, for exa
 - `missing-fields.json` — important fields still not source-backed;
 - `power30min-coverage.json` — exact documented 30-minute-power coverage only;
 - `blocked-sources.json` — inaccessible sources; never bypass access controls.
+- `brand-queue.json` — all production brand names with legacy candidate counts and bounded research checkpoints;
+- `checkpoint-02-summary.md` — audited scope and limitations of the current 15-brand checkpoint;
 - `legacy-bridge-proposal.md` — reviewed mapping proposal only; it must not write to production knowledge.
 
 Reports are staging diagnostics and must not alter production catalog data.

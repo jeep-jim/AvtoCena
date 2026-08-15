@@ -84,6 +84,248 @@
       ],
       "researchNotes": [],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mercedes-benz/glc/2022-launch",
+      "modelId": "mercedes-benz/glc",
+      "name": "2022 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mercedes-glc-launch-2022", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official July 2022 sales launch; an internal series code is deliberately not inferred." }
+      ],
+      "researchNotes": ["The licensed cover identifies X254, but the platform code remains unset until confirmed by a preferred technical source."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen/golf/eighth-generation",
+      "modelId": "volkswagen/golf",
+      "name": "Eighth generation",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Compact car"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volkswagen-golf-mk8-premiere-2019", "fields": ["name", "productionFrom"], "status": "verified", "confidence": "official", "note": null },
+        { "sourceId": "src-volkswagen-golf-gti-2024", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "The tracked body classification follows Volkswagen's compact-car description for the GTI specimen." }
+      ],
+      "researchNotes": ["Mk8/Golf VIII spellings are not promoted to safe generation aliases in this checkpoint."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "honda/civic/11th-generation",
+      "modelId": "honda/civic",
+      "name": "11th generation",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-honda-civic-type-r-press-kit-2022", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "The checkpoint follows Honda's 11th-generation Civic Hatchback basis and the 2022 Type R launch material." }
+      ],
+      "researchNotes": ["FL5 is visible in the licensed cover identity but is not stored as a platform code until a preferred technical source states it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "nissan/leaf/second-generation",
+      "modelId": "nissan/leaf",
+      "name": "Second generation",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2017",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-nissan-leaf-second-gen-2017", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["ZE1 is visible in the licensed cover identity but is not stored as a platform code until a preferred technical source states it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "hyundai/tucson/fourth-generation",
+      "modelId": "hyundai/tucson",
+      "name": "Fourth generation",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-hyundai-tucson-launch-2020", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["NX4 is visible in the licensed cover identity but is not stored as a platform code until a preferred technical source states it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "kia/ev6/2021-launch",
+      "modelId": "kia/ev6",
+      "name": "2021 launch series",
+      "aliases": [],
+      "platformCodes": ["E-GMP"],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Crossover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-kia-ev6-world-premiere-2021", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official 2021 world premiere; E-GMP is explicitly named." }
+      ],
+      "researchNotes": ["The internal CV code is not stored until a preferred technical source states it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mazda/cx-60/2022-launch",
+      "modelId": "mazda/cx-60",
+      "name": "2022 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mazda-cx-60-global-2022", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official March 2022 production start." }
+      ],
+      "researchNotes": ["No platform or internal model code is promoted from secondary material."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "lexus/rz/2022-launch",
+      "modelId": "lexus/rz",
+      "name": "2022 launch series",
+      "aliases": [],
+      "platformCodes": ["e-TNGA"],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-lexus-rz-world-premiere-2022", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official 2022 world premiere; e-TNGA is explicitly named." }
+      ],
+      "researchNotes": ["The licensed prototype cover identifies an internal category code, but no internal code is stored without preferred technical evidence."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volvo/ex30/2023-launch",
+      "modelId": "volvo/ex30",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Small SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volvo-ex30-launch-2023", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official June 2023 global reveal and order opening." }
+      ],
+      "researchNotes": ["No platform code is stored from secondary material."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "porsche/taycan/2019-launch",
+      "modelId": "porsche/taycan",
+      "name": "2019 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Sports saloon"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-porsche-taycan-4s-2019", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows Porsche's original 2019 Taycan-series material." }
+      ],
+      "researchNotes": ["No internal platform code is inferred."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "ford/mustang-mach-e/2026-model-year",
+      "modelId": "ford/mustang-mach-e",
+      "name": "2026 model-year series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2026",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-ford-mustang-mach-e-2026-us", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows Ford's official US 2026 model-year page; no internal platform code is inferred." }
+      ],
+      "researchNotes": ["This checkpoint grouping is a model-year series and does not claim a new engineering generation."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chevrolet/blazer-ev/2024-launch",
+      "modelId": "chevrolet/blazer-ev",
+      "name": "2024 launch series",
+      "aliases": [],
+      "platformCodes": ["Ultium"],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Midsize crossover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chevrolet-blazer-ev-2022", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the 2024-model launch, with 2023 sales timing and explicitly named Ultium platform." }
+      ],
+      "researchNotes": ["No internal GM architecture code is inferred."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "tesla/model-3/2024-series",
+      "modelId": "tesla/model-3",
+      "name": "2024+ series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-tesla-model-3-manual-2024", "fields": ["name", "productionFrom"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows Tesla's 2024+ owner-manual series." },
+        { "sourceId": "src-tesla-model-3-performance-au", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "The Australian product page identifies Model 3 Performance as a sedan." }
+      ],
+      "researchNotes": ["The commonly used Highland label is not promoted to a safe alias because the reviewed manufacturer sources do not use it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chery/tiggo-7-pro-max/saudi-2024-series",
+      "modelId": "chery/tiggo-7-pro-max",
+      "name": "Saudi-market 2024 series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chery-tiggo-7-pro-max-saudi-2024", "fields": ["name", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the official 2024 Saudi-market specification; production start and platform code remain unset." }
+      ],
+      "researchNotes": ["This checkpoint grouping is market-bounded and does not claim a distinct global engineering generation."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "haval/h6/2021-hybrid-launch",
+      "modelId": "haval/h6",
+      "name": "2021 hybrid launch series",
+      "aliases": [],
+      "platformCodes": ["GWM LEMON"],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-haval-h6-hybrid-thailand-2021", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the Q2 2021 Thailand launch; GWM LEMON is explicitly named by the source." }
+      ],
+      "researchNotes": ["No internal platform code beyond the published GWM LEMON name is inferred."],
+      "updatedAt": "2026-08-15"
     }
   ]
 }

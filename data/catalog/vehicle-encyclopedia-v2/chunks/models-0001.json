@@ -108,6 +108,303 @@
       ],
       "researchNotes": ["No E5/EX5 safe alias is published until an official source explicitly proves cross-market equivalence."],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mercedes-benz/glc",
+      "brandId": "mercedes-benz",
+      "canonicalName": "GLC",
+      "slug": "glc",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["MHEV", "PHEV"],
+      "mediaIds": ["media-mercedes-glc-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mercedes-glc-launch-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the new GLC series launched in 2022, not the complete historical nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one current generation and one official German-market variant are represented; broader GLC coverage remains open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen/golf",
+      "brandId": "volkswagen",
+      "canonicalName": "Golf",
+      "slug": "golf",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Compact car"],
+      "powertrainKinds": ["ICE", "MHEV", "PHEV"],
+      "mediaIds": ["media-volkswagen-golf-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volkswagen-golf-mk8-premiere-2019", "fields": ["canonicalName", "productionFrom", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the eighth-generation Golf introduced in 2019." },
+        { "sourceId": "src-volkswagen-golf-gti-2024", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "Volkswagen describes the Golf GTI as a sporty compact car." }
+      ],
+      "researchNotes": ["Checkpoint seed: eighth-generation Golf coverage is incomplete beyond the 2024 GTI specimen."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "honda/civic",
+      "brandId": "honda",
+      "canonicalName": "Civic",
+      "slug": "civic",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-honda-civic-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-honda-civic-type-r-press-kit-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "This seed is scoped to the 11th-generation Civic Hatchback / Type R material, not the full Civic nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the 11th-generation US Type R specimen is represented; other Civic bodies and powertrains remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "nissan/leaf",
+      "brandId": "nissan",
+      "canonicalName": "LEAF",
+      "slug": "leaf",
+      "aliases": [
+        { "value": "Leaf", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-nissan-leaf-second-gen-2017"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2017",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-nissan-leaf-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-nissan-leaf-second-gen-2017", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the second-generation LEAF introduced in 2017." }
+      ],
+      "researchNotes": ["Checkpoint seed: the second generation is represented by the 2019 European e+ specification; other markets and versions remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "hyundai/tucson",
+      "brandId": "hyundai",
+      "canonicalName": "TUCSON",
+      "slug": "tucson",
+      "aliases": [
+        { "value": "Tucson", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-hyundai-tucson-launch-2020"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["ICE", "HEV", "PHEV"],
+      "mediaIds": ["media-hyundai-tucson-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-hyundai-tucson-launch-2020", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the fourth-generation TUCSON launched in 2020." }
+      ],
+      "researchNotes": ["Checkpoint seed: one European hybrid configuration is represented; other fourth-generation markets and powertrains remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "kia/ev6",
+      "brandId": "kia",
+      "canonicalName": "EV6",
+      "slug": "ev6",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Crossover"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-kia-ev6-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-kia-ev6-world-premiere-2021", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the official 2021 global launch and second-half sales start." }
+      ],
+      "researchNotes": ["Checkpoint seed: the original EV6 launch series is represented by one European GT configuration; other markets, batteries and the 2024 product enhancement remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mazda/cx-60",
+      "brandId": "mazda",
+      "canonicalName": "CX-60",
+      "slug": "cx-60",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "powertrainKinds": ["PHEV"],
+      "mediaIds": ["media-mazda-cx-60-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mazda-cx-60-global-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official release dates production from March 2022 and identifies the European e-Skyactiv PHEV launch configuration." }
+      ],
+      "researchNotes": ["Checkpoint seed: one UK PHEV configuration is represented; diesel, petrol, mild-hybrid and additional-market coverage remains open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "lexus/rz",
+      "brandId": "lexus",
+      "canonicalName": "RZ",
+      "slug": "rz",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-lexus-rz-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-lexus-rz-world-premiere-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the all-new RZ 450e and first European deliveries at the end of 2022." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the original European RZ 450e launch configuration is represented; later RZ derivatives and market updates remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volvo/ex30",
+      "brandId": "volvo",
+      "canonicalName": "EX30",
+      "slug": "ex30",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Small SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-volvo-ex30-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volvo-ex30-launch-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the June 2023 global reveal and order opening; a production-start month is not inferred." }
+      ],
+      "researchNotes": ["Checkpoint seed: one global Twin Motor Performance configuration is represented; other batteries, motors, markets and Cross Country coverage remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "porsche/taycan",
+      "brandId": "porsche",
+      "canonicalName": "Taycan",
+      "slug": "taycan",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Sports saloon"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-porsche-taycan-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-porsche-taycan-4s-2019", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the original Taycan series presented in 2019; the 4S specimen reached European dealers in January 2020." }
+      ],
+      "researchNotes": ["Checkpoint seed: one original-series Taycan 4S configuration is represented; the full saloon range, Cross Turismo, Sport Turismo and 2024 update remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "ford/mustang-mach-e",
+      "brandId": "ford",
+      "canonicalName": "Mustang Mach-E",
+      "slug": "mustang-mach-e",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2026",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-ford-mustang-mach-e-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-ford-mustang-mach-e-overview", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Ford describes Mustang Mach-E as an all-electric SUV." },
+        { "sourceId": "src-ford-mustang-mach-e-2026-us", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "This seed is deliberately scoped to the documented US 2026 model-year series, not the complete Mustang Mach-E nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: only one 2026 US GT configuration is represented; earlier model years, other trims and non-US markets remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chevrolet/blazer-ev",
+      "brandId": "chevrolet",
+      "canonicalName": "Blazer EV",
+      "slug": "blazer-ev",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Midsize crossover"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-chevrolet-blazer-ev-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chevrolet-blazer-ev-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official reveal calls Blazer EV an all-electric midsize crossover and dates US/Canada sales from 2023." }
+      ],
+      "researchNotes": ["Checkpoint seed: the original Ultium launch series is represented by one US SS specimen; later model years and other trims remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "tesla/model-3",
+      "brandId": "tesla",
+      "canonicalName": "Model 3",
+      "slug": "model-3",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-tesla-model-3-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-tesla-model-3-performance-au", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Tesla identifies Model 3 Performance as an electric AWD sedan." },
+        { "sourceId": "src-tesla-model-3-manual-2024", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "This seed is deliberately scoped to Tesla's 2024+ owner-manual series, not the complete historical Model 3 nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Australian-market Performance configuration from the 2024+ series is represented; other variants and markets remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chery/tiggo-7-pro-max",
+      "brandId": "chery",
+      "canonicalName": "Tiggo 7 Pro Max",
+      "slug": "tiggo-7-pro-max",
+      "aliases": [
+        { "value": "TIGGO 7 Pro Max", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-chery-tiggo-7-pro-max-2023"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-chery-tiggo-7-pro-max-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chery-tiggo-7-pro-max-2023", "fields": ["canonicalName"], "status": "verified", "confidence": "official", "note": "The official 2023 review establishes the model name but does not state its production start." },
+        { "sourceId": "src-chery-tiggo-7-pro-max-saudi-2024", "fields": ["bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The Saudi-market source identifies the vehicle as a crossover SUV powered by a 1.6TGDI combustion engine." }
+      ],
+      "researchNotes": ["Checkpoint seed: one 2024 Saudi-market 4WD configuration is represented. Production start remains unset because the reviewed official sources do not establish it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "haval/h6",
+      "brandId": "haval",
+      "canonicalName": "H6",
+      "slug": "h6",
+      "aliases": [
+        { "value": "HAVAL H6", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-haval-h6-hybrid-thailand-2021"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["HEV"],
+      "mediaIds": ["media-haval-h6-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-haval-h6-hybrid-thailand-2021", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range is scoped to the H6 Hybrid SUV launched for Thailand in Q2 2021, not the complete historical H6 nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Thailand-market Hybrid SUV configuration is represented; ICE, PHEV, later facelifts and other markets remain open."],
+      "updatedAt": "2026-08-15"
     }
   ]
 }

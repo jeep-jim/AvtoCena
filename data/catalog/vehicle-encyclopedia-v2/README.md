@@ -54,6 +54,7 @@ This separation is intentional: a research agent can work for a long time withou
 node scripts/vehicle-encyclopedia/validate.mjs --write-reports
 node scripts/vehicle-encyclopedia/ingest.mjs --input=/path/to/batch.json
 node scripts/vehicle-encyclopedia/build-search-index.mjs
+node scripts/vehicle-encyclopedia/build-brand-queue.mjs
 node scripts/vehicle-encyclopedia/build-legacy-preview.mjs
 node --test tests/vehicle-encyclopedia/*.test.mjs
 ```

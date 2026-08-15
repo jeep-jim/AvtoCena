@@ -3,6 +3,97 @@
   "entries": [
     {
       "entityType": "generation",
+      "entityId": "honda/civic/11th-generation",
+      "brandId": "honda",
+      "modelId": "honda/civic",
+      "term": "11th generation",
+      "key": "11thgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-honda-civic-type-r-press-kit-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "porsche/taycan/2019-launch",
+      "brandId": "porsche",
+      "modelId": "porsche/taycan",
+      "term": "2019 launch series",
+      "key": "2019launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-porsche-taycan-4s-2019"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "haval/h6/2021-hybrid-launch",
+      "brandId": "haval",
+      "modelId": "haval/h6",
+      "term": "2021 hybrid launch series",
+      "key": "2021hybridlaunchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-h6-hybrid-thailand-2021"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "kia/ev6/2021-launch",
+      "brandId": "kia",
+      "modelId": "kia/ev6",
+      "term": "2021 launch series",
+      "key": "2021launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-ev6-world-premiere-2021"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "lexus/rz/2022-launch",
+      "brandId": "lexus",
+      "modelId": "lexus/rz",
+      "term": "2022 launch series",
+      "key": "2022launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-lexus-rz-world-premiere-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "mazda/cx-60/2022-launch",
+      "brandId": "mazda",
+      "modelId": "mazda/cx-60",
+      "term": "2022 launch series",
+      "key": "2022launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-mazda-cx-60-global-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "mercedes-benz/glc/2022-launch",
+      "brandId": "mercedes-benz",
+      "modelId": "mercedes-benz/glc",
+      "term": "2022 launch series",
+      "key": "2022launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-mercedes-glc-launch-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "byd/seal/2023",
       "brandId": "byd",
       "modelId": "byd/seal",
@@ -12,6 +103,19 @@
       "safe": true,
       "sourceIds": [
         "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "volvo/ex30/2023-launch",
+      "brandId": "volvo",
+      "modelId": "volvo/ex30",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-volvo-ex30-launch-2023"
       ]
     },
     {
@@ -28,6 +132,19 @@
       ]
     },
     {
+      "entityType": "generation",
+      "entityId": "chevrolet/blazer-ev/2024-launch",
+      "brandId": "chevrolet",
+      "modelId": "chevrolet/blazer-ev",
+      "term": "2024 launch series",
+      "key": "2024launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-chevrolet-blazer-ev-2022"
+      ]
+    },
+    {
       "entityType": "facelift",
       "entityId": "bmw/i4/g26/2024-update",
       "brandId": "bmw",
@@ -38,6 +155,46 @@
       "safe": true,
       "sourceIds": [
         "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "facelift",
+      "entityId": "volkswagen/golf/eighth-generation/2024-update",
+      "brandId": "volkswagen",
+      "modelId": "volkswagen/golf",
+      "term": "2024 model update",
+      "key": "2024modelupdate",
+      "kind": "facelift",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-golf-update-production-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "tesla/model-3/2024-series",
+      "brandId": "tesla",
+      "modelId": "tesla/model-3",
+      "term": "2024+ series",
+      "key": "2024series",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-tesla-model-3-manual-2024",
+        "src-tesla-model-3-performance-au"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "ford/mustang-mach-e/2026-model-year",
+      "brandId": "ford",
+      "modelId": "ford/mustang-mach-e",
+      "term": "2026 model-year series",
+      "key": "2026modelyearseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-ford-mustang-mach-e-2026-us"
       ]
     },
     {
@@ -78,6 +235,19 @@
       "sourceIds": [
         "src-audi-company-legal",
         "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "chevrolet/blazer-ev",
+      "brandId": "chevrolet",
+      "modelId": "chevrolet/blazer-ev",
+      "term": "Blazer EV",
+      "key": "blazerev",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-chevrolet-blazer-ev-2022"
       ]
     },
     {
@@ -161,6 +331,139 @@
       ]
     },
     {
+      "entityType": "brand",
+      "entityId": "chery",
+      "brandId": "chery",
+      "modelId": null,
+      "term": "Chery",
+      "key": "chery",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-company-introduction"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "chery",
+      "brandId": "chery",
+      "modelId": null,
+      "term": "Chery Automobile",
+      "key": "cheryautomobile",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-company-introduction"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "chery/tiggo-7-pro-max",
+      "brandId": "chery",
+      "modelId": "chery/tiggo-7-pro-max",
+      "term": "Chery Tiggo 7 Pro Max",
+      "key": "cherytiggo7promax",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-company-introduction",
+        "src-chery-tiggo-7-pro-max-2023",
+        "src-chery-tiggo-7-pro-max-saudi-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "chevrolet",
+      "brandId": "chevrolet",
+      "modelId": null,
+      "term": "Chevrolet",
+      "key": "chevrolet",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-chevrolet-blazer-ev-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "chevrolet/blazer-ev",
+      "brandId": "chevrolet",
+      "modelId": "chevrolet/blazer-ev",
+      "term": "Chevrolet Blazer EV",
+      "key": "chevroletblazerev",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-chevrolet-blazer-ev-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "honda/civic",
+      "brandId": "honda",
+      "modelId": "honda/civic",
+      "term": "Civic",
+      "key": "civic",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-honda-civic-type-r-press-kit-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "mazda/cx-60",
+      "brandId": "mazda",
+      "modelId": "mazda/cx-60",
+      "term": "CX-60",
+      "key": "cx60",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-mazda-cx-60-global-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "porsche",
+      "brandId": "porsche",
+      "modelId": null,
+      "term": "Dr. Ing. h.c. F. Porsche AG",
+      "key": "dringhcfporscheag",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-porsche-company-legal"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "kia/ev6/2021-launch",
+      "brandId": "kia",
+      "modelId": "kia/ev6",
+      "term": "E-GMP",
+      "key": "egmp",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-ev6-world-premiere-2021"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "volkswagen/golf/eighth-generation",
+      "brandId": "volkswagen",
+      "modelId": "volkswagen/golf",
+      "term": "Eighth generation",
+      "key": "eighthgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-golf-mk8-premiere-2019",
+        "src-volkswagen-golf-gti-2024"
+      ]
+    },
+    {
       "entityType": "generation",
       "entityId": "byd/seal/2023",
       "brandId": "byd",
@@ -171,6 +474,45 @@
       "safe": true,
       "sourceIds": [
         "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "lexus/rz/2022-launch",
+      "brandId": "lexus",
+      "modelId": "lexus/rz",
+      "term": "e-TNGA",
+      "key": "etnga",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-lexus-rz-world-premiere-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "kia/ev6",
+      "brandId": "kia",
+      "modelId": "kia/ev6",
+      "term": "EV6",
+      "key": "ev6",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-ev6-world-premiere-2021"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "volvo/ex30",
+      "brandId": "volvo",
+      "modelId": "volvo/ex30",
+      "term": "EX30",
+      "key": "ex30",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-volvo-ex30-launch-2023"
       ]
     },
     {
@@ -198,6 +540,60 @@
       "safe": true,
       "sourceIds": [
         "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "ford",
+      "brandId": "ford",
+      "modelId": null,
+      "term": "Ford",
+      "key": "ford",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-ford-company-dearborn"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "ford",
+      "brandId": "ford",
+      "modelId": null,
+      "term": "Ford Motor Company",
+      "key": "fordmotorcompany",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-ford-company-dearborn"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "ford/mustang-mach-e",
+      "brandId": "ford",
+      "modelId": "ford/mustang-mach-e",
+      "term": "Ford Mustang Mach-E",
+      "key": "fordmustangmache",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-ford-company-dearborn",
+        "src-ford-mustang-mach-e-overview",
+        "src-ford-mustang-mach-e-2026-us"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "hyundai/tucson/fourth-generation",
+      "brandId": "hyundai",
+      "modelId": "hyundai/tucson",
+      "term": "Fourth generation",
+      "key": "fourthgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-tucson-launch-2020"
       ]
     },
     {
@@ -282,6 +678,19 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "mercedes-benz/glc",
+      "brandId": "mercedes-benz",
+      "modelId": "mercedes-benz/glc",
+      "term": "GLC",
+      "key": "glc",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-mercedes-glc-launch-2022"
+      ]
+    },
+    {
       "entityType": "generation",
       "entityId": "geely/ex5/global",
       "brandId": "geely",
@@ -297,6 +706,179 @@
     },
     {
       "entityType": "model",
+      "entityId": "volkswagen/golf",
+      "brandId": "volkswagen",
+      "modelId": "volkswagen/golf",
+      "term": "Golf",
+      "key": "golf",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-golf-mk8-premiere-2019",
+        "src-volkswagen-golf-gti-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "haval/h6/2021-hybrid-launch",
+      "brandId": "haval",
+      "modelId": "haval/h6",
+      "term": "GWM LEMON",
+      "key": "gwmlemon",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-h6-hybrid-thailand-2021"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "haval/h6",
+      "brandId": "haval",
+      "modelId": "haval/h6",
+      "term": "H6",
+      "key": "h6",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-h6-hybrid-thailand-2021"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "haval",
+      "brandId": "haval",
+      "modelId": null,
+      "term": "Haval",
+      "key": "haval",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-brand-gwm-2019"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "haval",
+      "brandId": "haval",
+      "modelId": null,
+      "term": "HAVAL",
+      "key": "haval",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-brand-gwm-2019"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "haval/h6",
+      "brandId": "haval",
+      "modelId": "haval/h6",
+      "term": "Haval H6",
+      "key": "havalh6",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-brand-gwm-2019",
+        "src-haval-h6-hybrid-thailand-2021"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "haval/h6",
+      "brandId": "haval",
+      "modelId": "haval/h6",
+      "term": "HAVAL H6",
+      "key": "havalh6",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-haval-h6-hybrid-thailand-2021"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "honda",
+      "brandId": "honda",
+      "modelId": null,
+      "term": "Honda",
+      "key": "honda",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-honda-company-overview"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "honda/civic",
+      "brandId": "honda",
+      "modelId": "honda/civic",
+      "term": "Honda Civic",
+      "key": "hondacivic",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-honda-company-overview",
+        "src-honda-civic-type-r-press-kit-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "honda",
+      "brandId": "honda",
+      "modelId": null,
+      "term": "Honda Motor Co., Ltd.",
+      "key": "hondamotorcoltd",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-honda-company-overview"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "hyundai",
+      "brandId": "hyundai",
+      "modelId": null,
+      "term": "Hyundai",
+      "key": "hyundai",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-company-global"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "hyundai",
+      "brandId": "hyundai",
+      "modelId": null,
+      "term": "Hyundai Motor Company",
+      "key": "hyundaimotorcompany",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-company-global"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "hyundai/tucson",
+      "brandId": "hyundai",
+      "modelId": "hyundai/tucson",
+      "term": "Hyundai TUCSON",
+      "key": "hyundaitucson",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-company-global",
+        "src-hyundai-tucson-launch-2020"
+      ]
+    },
+    {
+      "entityType": "model",
       "entityId": "bmw/i4",
       "brandId": "bmw",
       "modelId": "bmw/i4",
@@ -306,6 +888,274 @@
       "safe": true,
       "sourceIds": [
         "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "kia",
+      "brandId": "kia",
+      "modelId": null,
+      "term": "Kia",
+      "key": "kia",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-company-information"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "kia",
+      "brandId": "kia",
+      "modelId": null,
+      "term": "Kia Corporation",
+      "key": "kiacorporation",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-company-information"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "kia/ev6",
+      "brandId": "kia",
+      "modelId": "kia/ev6",
+      "term": "Kia EV6",
+      "key": "kiaev6",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-kia-company-information",
+        "src-kia-ev6-world-premiere-2021"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "nissan/leaf",
+      "brandId": "nissan",
+      "modelId": "nissan/leaf",
+      "term": "LEAF",
+      "key": "leaf",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-leaf-second-gen-2017"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "nissan/leaf",
+      "brandId": "nissan",
+      "modelId": "nissan/leaf",
+      "term": "Leaf",
+      "key": "leaf",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-leaf-second-gen-2017"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "lexus",
+      "brandId": "lexus",
+      "modelId": null,
+      "term": "Lexus",
+      "key": "lexus",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-lexus-shimoyama-headquarters"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "lexus/rz",
+      "brandId": "lexus",
+      "modelId": "lexus/rz",
+      "term": "Lexus RZ",
+      "key": "lexusrz",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-lexus-shimoyama-headquarters",
+        "src-lexus-rz-world-premiere-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "mazda",
+      "brandId": "mazda",
+      "modelId": null,
+      "term": "Mazda",
+      "key": "mazda",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-mazda-company-outline"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "mazda/cx-60",
+      "brandId": "mazda",
+      "modelId": "mazda/cx-60",
+      "term": "Mazda CX-60",
+      "key": "mazdacx60",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-mazda-company-outline",
+        "src-mazda-cx-60-global-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "mazda",
+      "brandId": "mazda",
+      "modelId": null,
+      "term": "Mazda Motor Corporation",
+      "key": "mazdamotorcorporation",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-mazda-company-outline"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "mercedes-benz",
+      "brandId": "mercedes-benz",
+      "modelId": null,
+      "term": "Mercedes-Benz",
+      "key": "mercedesbenz",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-mercedes-company-provider"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "mercedes-benz",
+      "brandId": "mercedes-benz",
+      "modelId": null,
+      "term": "Mercedes-Benz AG",
+      "key": "mercedesbenzag",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-mercedes-company-provider"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "mercedes-benz/glc",
+      "brandId": "mercedes-benz",
+      "modelId": "mercedes-benz/glc",
+      "term": "Mercedes-Benz GLC",
+      "key": "mercedesbenzglc",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-mercedes-company-provider",
+        "src-mercedes-glc-launch-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "tesla/model-3",
+      "brandId": "tesla",
+      "modelId": "tesla/model-3",
+      "term": "Model 3",
+      "key": "model3",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-tesla-model-3-performance-au",
+        "src-tesla-model-3-manual-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "ford/mustang-mach-e",
+      "brandId": "ford",
+      "modelId": "ford/mustang-mach-e",
+      "term": "Mustang Mach-E",
+      "key": "mustangmache",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-ford-mustang-mach-e-overview",
+        "src-ford-mustang-mach-e-2026-us"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "nissan",
+      "brandId": "nissan",
+      "modelId": null,
+      "term": "Nissan",
+      "key": "nissan",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-company-contact"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "nissan/leaf",
+      "brandId": "nissan",
+      "modelId": "nissan/leaf",
+      "term": "Nissan LEAF",
+      "key": "nissanleaf",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-company-contact",
+        "src-nissan-leaf-second-gen-2017"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "nissan",
+      "brandId": "nissan",
+      "modelId": null,
+      "term": "Nissan Motor Co., Ltd.",
+      "key": "nissanmotorcoltd",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-company-contact"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "porsche",
+      "brandId": "porsche",
+      "modelId": null,
+      "term": "Porsche",
+      "key": "porsche",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-porsche-company-legal"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "porsche/taycan",
+      "brandId": "porsche",
+      "modelId": "porsche/taycan",
+      "term": "Porsche Taycan",
+      "key": "porschetaycan",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-porsche-company-legal",
+        "src-porsche-taycan-4s-2019"
       ]
     },
     {
@@ -362,6 +1212,32 @@
     },
     {
       "entityType": "model",
+      "entityId": "lexus/rz",
+      "brandId": "lexus",
+      "modelId": "lexus/rz",
+      "term": "RZ",
+      "key": "rz",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-lexus-rz-world-premiere-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "chery/tiggo-7-pro-max/saudi-2024-series",
+      "brandId": "chery",
+      "modelId": "chery/tiggo-7-pro-max",
+      "term": "Saudi-market 2024 series",
+      "key": "saudimarket2024series",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-tiggo-7-pro-max-saudi-2024"
+      ]
+    },
+    {
+      "entityType": "model",
       "entityId": "byd/seal",
       "brandId": "byd",
       "modelId": "byd/seal",
@@ -371,6 +1247,87 @@
       "safe": true,
       "sourceIds": [
         "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "nissan/leaf/second-generation",
+      "brandId": "nissan",
+      "modelId": "nissan/leaf",
+      "term": "Second generation",
+      "key": "secondgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-nissan-leaf-second-gen-2017"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "porsche/taycan",
+      "brandId": "porsche",
+      "modelId": "porsche/taycan",
+      "term": "Taycan",
+      "key": "taycan",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-porsche-taycan-4s-2019"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "tesla",
+      "brandId": "tesla",
+      "modelId": null,
+      "term": "Tesla",
+      "key": "tesla",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-tesla-company-about"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "tesla/model-3",
+      "brandId": "tesla",
+      "modelId": "tesla/model-3",
+      "term": "Tesla Model 3",
+      "key": "teslamodel3",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-tesla-company-about",
+        "src-tesla-model-3-performance-au",
+        "src-tesla-model-3-manual-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "chery/tiggo-7-pro-max",
+      "brandId": "chery",
+      "modelId": "chery/tiggo-7-pro-max",
+      "term": "Tiggo 7 Pro Max",
+      "key": "tiggo7promax",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-tiggo-7-pro-max-2023",
+        "src-chery-tiggo-7-pro-max-saudi-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "chery/tiggo-7-pro-max",
+      "brandId": "chery",
+      "modelId": "chery/tiggo-7-pro-max",
+      "term": "TIGGO 7 Pro Max",
+      "key": "tiggo7promax",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-chery-tiggo-7-pro-max-2023"
       ]
     },
     {
@@ -411,6 +1368,139 @@
       "sourceIds": [
         "src-toyota-company-overview",
         "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "hyundai/tucson",
+      "brandId": "hyundai",
+      "modelId": "hyundai/tucson",
+      "term": "TUCSON",
+      "key": "tucson",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-tucson-launch-2020"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "hyundai/tucson",
+      "brandId": "hyundai",
+      "modelId": "hyundai/tucson",
+      "term": "Tucson",
+      "key": "tucson",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-hyundai-tucson-launch-2020"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "chevrolet/blazer-ev/2024-launch",
+      "brandId": "chevrolet",
+      "modelId": "chevrolet/blazer-ev",
+      "term": "Ultium",
+      "key": "ultium",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-chevrolet-blazer-ev-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "volkswagen",
+      "brandId": "volkswagen",
+      "modelId": null,
+      "term": "Volkswagen",
+      "key": "volkswagen",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-company-publication-data"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "volkswagen",
+      "brandId": "volkswagen",
+      "modelId": null,
+      "term": "Volkswagen AG",
+      "key": "volkswagenag",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-company-publication-data"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "volkswagen/golf",
+      "brandId": "volkswagen",
+      "modelId": "volkswagen/golf",
+      "term": "Volkswagen Golf",
+      "key": "volkswagengolf",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-company-publication-data",
+        "src-volkswagen-golf-mk8-premiere-2019",
+        "src-volkswagen-golf-gti-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "volvo",
+      "brandId": "volvo",
+      "modelId": null,
+      "term": "Volvo",
+      "key": "volvo",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-volvo-company-story"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "volvo",
+      "brandId": "volvo",
+      "modelId": null,
+      "term": "Volvo Cars",
+      "key": "volvocars",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-volvo-company-story"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "volvo/ex30",
+      "brandId": "volvo",
+      "modelId": "volvo/ex30",
+      "term": "Volvo EX30",
+      "key": "volvoex30",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-volvo-company-story",
+        "src-volvo-ex30-launch-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "volkswagen",
+      "brandId": "volkswagen",
+      "modelId": null,
+      "term": "VW",
+      "key": "vw",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-volkswagen-company-publication-data"
       ]
     },
     {

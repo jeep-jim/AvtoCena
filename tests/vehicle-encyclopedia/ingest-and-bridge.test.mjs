@@ -21,7 +21,7 @@ test("ingestion is a validated dry run and preserves totals for an empty batch",
   const prepared = await prepareIngestion({ inputFile: path.join(DATA_ROOT, "ingest/_template.json"), root: DATA_ROOT });
   assert.equal(prepared.valid, true);
   assert.deepEqual(prepared.changedTypes, ["source"]);
-  assert.equal(prepared.totals.source, 21);
+  assert.equal(prepared.totals.source, 74);
 });
 
 test("ingestion refuses a silent replacement of an existing ID", async () => {
@@ -32,7 +32,7 @@ test("ingestion refuses a silent replacement of an existing ID", async () => {
   assert(prepared.errors.some((error) => error.code === "ingest.existing_id"));
 });
 
-test("legacy preview is review-only and excludes kW-only variants", async () => {
+test("legacy preview is review-only and excludes seed and kW-only entities", async () => {
   const previewRoot = path.join(DATA_ROOT, "generated/legacy-bridge-preview");
   const report = await readJson(path.join(previewRoot, "report.json"));
   const variants = await readJson(path.join(previewRoot, "variants.json"));
@@ -40,6 +40,8 @@ test("legacy preview is review-only and excludes kW-only variants", async () => 
   assert.equal(report.legacyBaseline.models, 4899);
   assert.equal(report.legacyBaseline.variants, 15735);
   assert.equal(variants.length, 2);
-  assert.equal(report.excludedVariants.length, 3);
-  assert(report.excludedVariants.every((row) => row.reason.includes("powerHp")));
+  assert.equal(report.excludedModels.length, 15);
+  assert.equal(report.excludedVariants.length, 18);
+  assert.equal(report.excludedVariants.filter((row) => row.reason === "entity_status_not_verified").length, 15);
+  assert.equal(report.excludedVariants.filter((row) => row.reason.includes("powerHp")).length, 3);
 });

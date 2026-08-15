@@ -27,6 +27,22 @@ test("platform codes preserve model context", () => {
   assert.equal(result.resolved?.entry.modelId, "bmw/i4");
 });
 
+test("checkpoint seeds are searchable without being treated as verified exports", () => {
+  assert.equal(resolveSearch(index, "Golf", { make: "VW" }).resolved?.entry.entityId, "volkswagen/golf");
+  assert.equal(resolveSearch(index, "Leaf", { make: "Nissan" }).resolved?.entry.entityId, "nissan/leaf");
+  assert.equal(resolveSearch(index, "Tucson", { make: "Hyundai" }).resolved?.entry.entityId, "hyundai/tucson");
+  assert.equal(resolveSearch(index, "EV6", { make: "Kia" }).resolved?.entry.entityId, "kia/ev6");
+  assert.equal(resolveSearch(index, "CX-60", { make: "Mazda" }).resolved?.entry.entityId, "mazda/cx-60");
+  assert.equal(resolveSearch(index, "RZ", { make: "Lexus" }).resolved?.entry.entityId, "lexus/rz");
+  assert.equal(resolveSearch(index, "EX30", { make: "Volvo" }).resolved?.entry.entityId, "volvo/ex30");
+  assert.equal(resolveSearch(index, "Taycan", { make: "Porsche" }).resolved?.entry.entityId, "porsche/taycan");
+  assert.equal(resolveSearch(index, "Mustang Mach-E", { make: "Ford" }).resolved?.entry.entityId, "ford/mustang-mach-e");
+  assert.equal(resolveSearch(index, "Blazer EV", { make: "Chevrolet" }).resolved?.entry.entityId, "chevrolet/blazer-ev");
+  assert.equal(resolveSearch(index, "Model 3", { make: "Tesla" }).resolved?.entry.entityId, "tesla/model-3");
+  assert.equal(resolveSearch(index, "Tiggo 7 Pro Max", { make: "Chery" }).resolved?.entry.entityId, "chery/tiggo-7-pro-max");
+  assert.equal(resolveSearch(index, "HAVAL H6").resolved?.entry.entityId, "haval/h6");
+});
+
 test("unknown and ambiguous exact terms are not auto-resolved", () => {
   assert.equal(resolveSearch(index, "not-a-real-model").resolved, null);
   const ambiguousIndex = {

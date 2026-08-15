@@ -327,7 +327,13 @@ export async function validateWorkspace({ root = WORKSPACE_ROOT, writeReports = 
     manifest.inProgressBrands = data.records.brand.filter((row) => row.status !== "verified").map((row) => row.canonicalName);
     manifest.completedBrands = data.records.brand.filter((row) => row.status === "verified").map((row) => row.canonicalName);
     manifest.lastCheckpoint = [...allIds.keys()].length ? [...data.records.brand, ...data.records.model, ...data.records.generation, ...data.records.facelift, ...data.records.variant].map((row) => row.updatedAt).filter(Boolean).sort().at(-1) || null : null;
-    manifest.status = errors.length ? "invalid" : data.records.model.length ? "pilot-seed" : "foundation";
+    manifest.status = errors.length
+      ? "invalid"
+      : data.records.brand.some((row) => row.status !== "verified")
+        ? "checkpoint-seed"
+        : data.records.model.length
+          ? "pilot-seed"
+          : "foundation";
     await writeJson(manifestFile, manifest);
   }
 

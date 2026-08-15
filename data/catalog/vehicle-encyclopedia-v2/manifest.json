@@ -6,7 +6,7 @@
   "targetYearTo": 2026,
   "chunkSize": 250,
   "brandSource": "apps/web/lib/catalog/brands.ts",
-  "status": "pilot-seed",
+  "status": "checkpoint-seed",
   "pilotBrands": [
     "Audi",
     "BMW",
@@ -18,37 +18,37 @@
     "source": {
       "pattern": "chunks/sources-*.json",
       "chunks": 1,
-      "records": 21
+      "records": 74
     },
     "brand": {
       "pattern": "chunks/brands-*.json",
       "chunks": 1,
-      "records": 5
+      "records": 20
     },
     "model": {
       "pattern": "chunks/models-*.json",
       "chunks": 1,
-      "records": 5
+      "records": 20
     },
     "generation": {
       "pattern": "chunks/generations-*.json",
       "chunks": 1,
-      "records": 5
+      "records": 20
     },
     "facelift": {
       "pattern": "chunks/facelifts-*.json",
       "chunks": 1,
-      "records": 1
+      "records": 2
     },
     "variant": {
       "pattern": "chunks/variants-*.json",
       "chunks": 1,
-      "records": 5
+      "records": 20
     },
     "media": {
       "pattern": "chunks/media-*.json",
       "chunks": 1,
-      "records": 5
+      "records": 20
     }
   },
   "completedBrands": [
@@ -58,7 +58,23 @@
     "BYD",
     "Geely"
   ],
-  "inProgressBrands": [],
+  "inProgressBrands": [
+    "Mercedes-Benz",
+    "Volkswagen",
+    "Honda",
+    "Nissan",
+    "Hyundai",
+    "Kia",
+    "Mazda",
+    "Lexus",
+    "Volvo",
+    "Porsche",
+    "Ford",
+    "Chevrolet",
+    "Tesla",
+    "Chery",
+    "Haval"
+  ],
   "blockedBrands": [],
   "lastCheckpoint": "2026-08-15",
   "notes": [

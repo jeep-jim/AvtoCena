@@ -2,28 +2,33 @@
   "schemaVersion": 2,
   "productionConnected": false,
   "totals": {
-    "source": 21,
-    "brand": 5,
-    "model": 5,
-    "generation": 5,
-    "facelift": 1,
-    "variant": 5,
-    "media": 5
+    "source": 74,
+    "brand": 20,
+    "model": 20,
+    "generation": 20,
+    "facelift": 2,
+    "variant": 20,
+    "media": 20
   },
   "statuses": {
     "brand": {
+      "seed": 15,
       "verified": 5
     },
     "model": {
+      "seed": 15,
       "verified": 5
     },
     "generation": {
+      "seed": 15,
       "verified": 5
     },
     "facelift": {
+      "seed": 1,
       "verified": 1
     },
     "variant": {
+      "seed": 15,
       "verified": 5
     }
   },
@@ -56,8 +61,125 @@
       "media": 1
     },
     {
+      "brandId": "chery",
+      "brand": "Chery",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
       "brandId": "geely",
       "brand": "Geely",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "haval",
+      "brand": "Haval",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "honda",
+      "brand": "Honda",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "kia",
+      "brand": "Kia",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "nissan",
+      "brand": "Nissan",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "tesla",
+      "brand": "Tesla",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
@@ -72,70 +194,112 @@
       "facelifts": 0,
       "variants": 1,
       "media": 1
+    },
+    {
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 1,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
     }
   ],
   "sources": {
     "byType": {
-      "manufacturer": 8,
-      "manufacturer_technical_document": 5,
+      "manufacturer": 24,
+      "manufacturer_technical_document": 27,
       "wikidata": 3,
-      "wikimedia_commons": 5
+      "wikimedia_commons": 20
     },
     "byDomain": {
       "audi-mediacenter.com": 1,
       "audi.com": 1,
       "bmwgroup.com": 1,
       "byd.com": 2,
-      "commons.wikimedia.org": 5,
+      "cheryinternational.com": 3,
+      "commons.wikimedia.org": 20,
+      "corporate.ford.com": 1,
+      "ford.com": 1,
       "geely.com": 2,
       "global.geely.com": 2,
+      "global.honda": 1,
+      "global.nissannews.com": 3,
       "global.toyota": 1,
+      "group.mercedes-benz.com": 1,
+      "gwm-global.com": 2,
+      "hondanews.com": 1,
+      "hyundai.com": 2,
+      "hyundai.news": 1,
+      "kiapressoffice.com": 1,
+      "mazda.com": 1,
+      "media.mercedes-benz.com": 1,
       "media.toyota.co.uk": 2,
+      "mustang-mach-e.fordpresskits.com": 1,
+      "news.chevrolet.com.mx": 1,
+      "newsroom.lexus.eu": 2,
+      "newsroom.mazda.com": 1,
+      "newsroom.porsche.com": 2,
       "press.bmwgroup.com": 1,
-      "wikidata.org": 3
+      "press.kia.com": 1,
+      "tesla.com": 3,
+      "uk.mazda-press.com": 1,
+      "volkswagen-newsroom.com": 4,
+      "volvocars.com": 2,
+      "wikidata.org": 3,
+      "worldwide.kia.com": 1
     }
   },
   "chunks": [
     {
       "file": "brands-0001.json",
       "entityType": "brand",
-      "records": 5,
+      "records": 20,
       "maxRecords": 250
     },
     {
       "file": "facelifts-0001.json",
       "entityType": "facelift",
-      "records": 1,
+      "records": 2,
       "maxRecords": 250
     },
     {
       "file": "generations-0001.json",
       "entityType": "generation",
-      "records": 5,
+      "records": 20,
       "maxRecords": 250
     },
     {
       "file": "media-0001.json",
       "entityType": "media",
-      "records": 5,
+      "records": 20,
       "maxRecords": 250
     },
     {
       "file": "models-0001.json",
       "entityType": "model",
-      "records": 5,
+      "records": 20,
       "maxRecords": 250
     },
     {
       "file": "sources-0001.json",
       "entityType": "source",
-      "records": 21,
+      "records": 74,
       "maxRecords": 250
     },
     {
       "file": "variants-0001.json",
       "entityType": "variant",
-      "records": 5,
+      "records": 20,
       "maxRecords": 250
     }
   ]
