@@ -1,0 +1,114 @@
+name: Georgia Yandex v2 bounded source proof once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/georgia-yandex-v2-source-proof-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - source: myauto
+            startPage: 1
+            pages: 20
+          - source: myauto
+            startPage: 21
+            pages: 20
+          - source: autopapa
+            startPage: 1
+            pages: 5
+          - source: autopapa
+            startPage: 6
+            pages: 5
+          - source: autopapa
+            startPage: 121
+            pages: 5
+          - source: autopapa
+            startPage: 126
+            pages: 5
+    steps:
+      - name: Fetch bounded source snapshot through existing Yandex runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          source='${{ matrix.source }}'
+          start='${{ matrix.startPage }}'
+          pages='${{ matrix.pages }}'
+          out="snapshot-${source}-${start}.json"
+          curl --retry 7 --retry-delay 3 --retry-all-errors --connect-timeout 20 --max-time 180 -fsS \
+            "https://avtocena.com/api/internal/georgia-recovery-e2f913?source=${source}&pages=${pages}&startPage=${start}" \
+            -o "$out"
+          node - "$out" "$source" "$start" "$pages" <<'NODE'
+          const fs = require('node:fs');
+          const [file, source, start, pages] = process.argv.slice(2);
+          const doc = JSON.parse(fs.readFileSync(file,'utf8'));
+          if (doc.market !== 'georgia' || !Array.isArray(doc.offers)) throw new Error('bad_georgia_snapshot');
+          if (doc.report?.source !== source) throw new Error(`source_mismatch:${doc.report?.source}:${source}`);
+          const expectedSourceId = source === 'myauto' ? 'myauto_georgia_list' : 'autopapa_georgia_open';
+          const eligible = doc.offers.filter((offer) => {
+            const op = offer?.operational || {};
+            const raw = op.raw || {};
+            const images = Array.isArray(offer?.images) ? offer.images : [];
+            return offer?.market === 'georgia'
+              && offer?.sourceId === expectedSourceId
+              && Number(offer?.year || 0) >= 2020
+              && images.length >= 5 && images.length <= 30
+              && op.photoIdentityVerified === true
+              && raw.listingBoundImages === true
+              && raw.recoveryExactSourceUrl === true
+              && raw.recoveryExactPhotoIdentity === true;
+          });
+          const imageCounts = eligible.map((offer) => offer.images.length);
+          const stats = imageCounts.length ? {
+            min: Math.min(...imageCounts),
+            max: Math.max(...imageCounts),
+            average: Number((imageCounts.reduce((a,b)=>a+b,0)/imageCounts.length).toFixed(2)),
+          } : { min: 0, max: 0, average: 0 };
+          const ids = new Set(eligible.map((offer) => String(offer?.sourceOfferId || '')));
+          if (ids.size !== eligible.length) throw new Error('duplicate_source_offer_id_in_shard');
+          const result = {
+            source,
+            startPage: Number(start),
+            pages: Number(pages),
+            rawCount: doc.offers.length,
+            eligibleCount: eligible.length,
+            dropped: doc.offers.length - eligible.length,
+            imageStats: stats,
+            reportRejected: doc.report?.rejected || {},
+          };
+          fs.writeFileSync(`proof-${source}-${start}.json`, JSON.stringify(result, null, 2));
+          console.log(JSON.stringify(result));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: georgia-yandex-v2-source-proof-${{ matrix.source }}-${{ matrix.startPage }}
+          path: proof-${{ matrix.source }}-${{ matrix.startPage }}.json
+          retention-days: 3
+
+  cleanup:
+    needs: probe
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove one-shot source proof workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/georgia-yandex-v2-source-proof-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/georgia-yandex-v2-source-proof-once.yml
+          git commit -m "Remove Georgia Yandex v2 source proof workflow"
+          git push origin HEAD:main
