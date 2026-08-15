@@ -1,0 +1,47 @@
+name: Diagnose avtocena.com TLS once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/tls-avtocena-diagnostic-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect DNS, certificate SANs and redirects
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== DNS avtocena.com ==='
+          getent ahostsv4 avtocena.com || true
+          echo '=== DNS www.avtocena.com ==='
+          getent ahostsv4 www.avtocena.com || true
+          echo '=== TLS avtocena.com ==='
+          timeout 20 openssl s_client -connect avtocena.com:443 -servername avtocena.com </dev/null 2>/tmp/sclient.err | openssl x509 -noout -subject -issuer -serial -dates -ext subjectAltName || true
+          cat /tmp/sclient.err || true
+          echo '=== TLS www.avtocena.com ==='
+          timeout 20 openssl s_client -connect www.avtocena.com:443 -servername www.avtocena.com </dev/null 2>/tmp/sclient-www.err | openssl x509 -noout -subject -issuer -serial -dates -ext subjectAltName || true
+          cat /tmp/sclient-www.err || true
+          echo '=== HTTPS headers ignoring verification only for diagnosis ==='
+          curl -kIsS --max-time 20 https://avtocena.com/ | sed -n '1,20p' || true
+          curl -kIsS --max-time 20 https://www.avtocena.com/ | sed -n '1,20p' || true
+          echo '=== HTTP headers ==='
+          curl -IsS --max-time 20 http://avtocena.com/ | sed -n '1,20p' || true
+          curl -IsS --max-time 20 http://www.avtocena.com/ | sed -n '1,20p' || true
+      - name: Remove one-shot TLS diagnostic
+        shell: bash
+        run: |
+          rm .github/workflows/tls-avtocena-diagnostic-once.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/tls-avtocena-diagnostic-once.yml
+          git commit -m "Remove avtocena.com TLS diagnostic workflow"
+          git push origin HEAD:main
