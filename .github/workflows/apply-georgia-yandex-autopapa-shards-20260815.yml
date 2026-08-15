@@ -1,0 +1,80 @@
+name: Apply Georgia Yandex shard stability fix
+
+on:
+  push:
+    branches:
+      - fix/georgia-yandex-autopapa-shards-20260815
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-yandex-autopapa-shards-20260815
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply fail-closed Georgia recovery fixes
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          workflow_path = Path('.github/workflows/catalog-live-recovery-georgia-yandex.yml')
+          workflow = workflow_path.read_text()
+          workflow = workflow.replace('  GEORGIA_YANDEX_PAGES_PER_SHARD: "20"\n', '  GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD: "20"\n  GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD: "5"\n')
+          start = workflow.index('\n  collect:\n')
+          end = workflow.index('\n  merge:\n', start)
+          myauto_pages = ', '.join(str(x) for x in range(1, 301, 20))
+          autopapa_pages = ', '.join(str(x) for x in range(1, 301, 5))
+          replacement = f'''\n  collect-myauto:\n    needs: strict-preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 35\n    strategy:\n      fail-fast: false\n      max-parallel: 2\n      matrix:\n        startPage: [{myauto_pages}]\n    steps:\n      - name: Fetch a canonical MyAuto listing-bound shard through Yandex runtime\n        shell: bash\n        run: |\n          set -euo pipefail\n          output="snapshot-myauto-${{{{ matrix.startPage }}}}.json"\n          curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 600 -fsS \\\n            "${{GEORGIA_YANDEX_ROUTE}}?source=myauto&pages=${{GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD}}&startPage=${{{{ matrix.startPage }}}}" \\\n            -o "$output"\n          node - "$output" "myauto" "${{{{ matrix.startPage }}}}" "${{GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD}}" <<'NODE'\n          const fs = require('node:fs');\n          const [file, expectedSource, expectedStart, expectedSpan] = process.argv.slice(2);\n          const doc = JSON.parse(fs.readFileSync(file, 'utf8'));\n          if (doc.market !== 'georgia' || !Array.isArray(doc.offers)) throw new Error('georgia_yandex_bad_snapshot');\n          if (String(doc.report?.source || '') !== expectedSource) throw new Error(`georgia_yandex_source_mismatch:${{doc.report?.source}}:${{expectedSource}}`);\n          if (Number(doc.report?.startPage || 0) !== Number(expectedStart)) throw new Error(`georgia_yandex_start_mismatch:${{doc.report?.startPage}}:${{expectedStart}}`);\n          if (Number(doc.report?.pagesPerSource || 0) !== Number(expectedSpan)) throw new Error(`georgia_yandex_page_span_mismatch:${{doc.report?.pagesPerSource}}:${{expectedSpan}}`);\n          if (doc.offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < 5)) throw new Error('georgia_yandex_sparse_gallery_in_snapshot');\n          console.log({{ source: expectedSource, startPage: Number(expectedStart), count: doc.offers.length, imageStats: doc.report?.imageStats, rejected: doc.report?.rejected }});\n          NODE\n      - uses: actions/upload-artifact@v4\n        with:\n          name: georgia-yandex-shard-myauto-${{{{ matrix.startPage }}}}\n          path: snapshot-myauto-${{{{ matrix.startPage }}}}.json\n          retention-days: 3\n\n  collect-autopapa:\n    needs: strict-preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 25\n    strategy:\n      fail-fast: false\n      max-parallel: 2\n      matrix:\n        startPage: [{autopapa_pages}]\n    steps:\n      - name: Fetch a bounded canonical AutoPapa listing-bound shard through Yandex runtime\n        shell: bash\n        run: |\n          set -euo pipefail\n          output="snapshot-autopapa-${{{{ matrix.startPage }}}}.json"\n          curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 300 -fsS \\\n            "${{GEORGIA_YANDEX_ROUTE}}?source=autopapa&pages=${{GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD}}&startPage=${{{{ matrix.startPage }}}}" \\\n            -o "$output"\n          node - "$output" "autopapa" "${{{{ matrix.startPage }}}}" "${{GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD}}" <<'NODE'\n          const fs = require('node:fs');\n          const [file, expectedSource, expectedStart, expectedSpan] = process.argv.slice(2);\n          const doc = JSON.parse(fs.readFileSync(file, 'utf8'));\n          if (doc.market !== 'georgia' || !Array.isArray(doc.offers)) throw new Error('georgia_yandex_bad_snapshot');\n          if (String(doc.report?.source || '') !== expectedSource) throw new Error(`georgia_yandex_source_mismatch:${{doc.report?.source}}:${{expectedSource}}`);\n          if (Number(doc.report?.startPage || 0) !== Number(expectedStart)) throw new Error(`georgia_yandex_start_mismatch:${{doc.report?.startPage}}:${{expectedStart}}`);\n          if (Number(doc.report?.pagesPerSource || 0) !== Number(expectedSpan)) throw new Error(`georgia_yandex_page_span_mismatch:${{doc.report?.pagesPerSource}}:${{expectedSpan}}`);\n          if (doc.offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < 5)) throw new Error('georgia_yandex_sparse_gallery_in_snapshot');\n          console.log({{ source: expectedSource, startPage: Number(expectedStart), count: doc.offers.length, imageStats: doc.report?.imageStats, rejected: doc.report?.rejected }});\n          NODE\n      - uses: actions/upload-artifact@v4\n        with:\n          name: georgia-yandex-shard-autopapa-${{{{ matrix.startPage }}}}\n          path: snapshot-autopapa-${{{{ matrix.startPage }}}}.json\n          retention-days: 3\n'''
+          workflow = workflow[:start] + replacement + workflow[end:]
+          workflow = workflow.replace('  merge:\n    needs: collect\n', '  merge:\n    needs: [collect-myauto, collect-autopapa]\n')
+          workflow_path.write_text(workflow)
+
+          recovery_path = Path('apps/web/lib/catalog/georgia-yandex-recovery.ts')
+          recovery = recovery_path.read_text()
+          old = '''      if (!offer.images.length || !(Number(offer.sourcePrice || 0) > 0) || !String(offer.sourceCurrency || "")) {\n        reject("visible_core");\n        return null;\n      }'''
+          new = '''      if (offer.images.length < 5) {\n        reject("photos_below_5");\n        return null;\n      }\n      if (!(Number(offer.sourcePrice || 0) > 0) || !String(offer.sourceCurrency || "")) {\n        reject("visible_core");\n        return null;\n      }'''
+          if old not in recovery:
+              raise SystemExit('recovery visible-core anchor not found')
+          recovery_path.write_text(recovery.replace(old, new))
+
+          test_path = Path('tests/catalog-georgia-yandex-recovery-workflow.test.ts')
+          test = test_path.read_text()
+          test = test.replace('const merge = fs.readFileSync("scripts/catalog-georgia-yandex-merge.mjs", "utf8");\n', 'const merge = fs.readFileSync("scripts/catalog-georgia-yandex-merge.mjs", "utf8");\nconst recovery = fs.readFileSync("apps/web/lib/catalog/georgia-yandex-recovery.ts", "utf8");\n')
+          old_assertions = '''  assert.match(workflow, /GEORGIA_YANDEX_PAGES_PER_SHARD: "20"/);\n  assert.match(workflow, /startPage: \\[1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241, 261, 281\\]/);\n  assert.match(workflow, /source: \\[myauto, autopapa\\]/);\n  assert.match(workflow, /max-parallel: 4/);'''
+          new_assertions = '''  assert.match(workflow, /GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD: "20"/);\n  assert.match(workflow, /GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD: "5"/);\n  assert.match(workflow, /collect-myauto:/);\n  assert.match(workflow, /startPage: \\[1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241, 261, 281\\]/);\n  assert.match(workflow, /collect-autopapa:/);\n  assert.match(workflow, /startPage: \\[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96, 101, 106, 111, 116, 121, 126, 131, 136, 141, 146, 151, 156, 161, 166, 171, 176, 181, 186, 191, 196, 201, 206, 211, 216, 221, 226, 231, 236, 241, 246, 251, 256, 261, 266, 271, 276, 281, 286, 291, 296\\]/);\n  assert.match(workflow, /needs: \\[collect-myauto, collect-autopapa\\]/);\n  assert.match(workflow, /max-parallel: 2/);'''
+          if old_assertions not in test:
+              raise SystemExit('workflow assertion anchor not found')
+          test = test.replace(old_assertions, new_assertions)
+          old_collect_test = '''  const collectStart = workflow.indexOf("\\n  collect:\\n");\n  const mergeStart = workflow.indexOf("\\n  merge:\\n");\n  assert.ok(collectStart >= 0 && mergeStart > collectStart);\n  const collect = workflow.slice(collectStart, mergeStart);\n  assert.doesNotMatch(collect, /YC_OBJECT_STORAGE_|JSON_STORAGE_DRIVER|CATALOG_IMAGE_CDN_URL/);\n  assert.match(collect, /\\$\\{GEORGIA_YANDEX_ROUTE\\}\\?source=\\$\\{\\{ matrix\\.source \\}\\}&pages=\\$\\{GEORGIA_YANDEX_PAGES_PER_SHARD\\}&startPage=\\$\\{\\{ matrix\\.startPage \\}\\}/);'''
+          new_collect_test = '''  const collectStart = workflow.indexOf("\\n  collect-myauto:\\n");\n  const mergeStart = workflow.indexOf("\\n  merge:\\n");\n  assert.ok(collectStart >= 0 && mergeStart > collectStart);\n  const collect = workflow.slice(collectStart, mergeStart);\n  assert.doesNotMatch(collect, /YC_OBJECT_STORAGE_|JSON_STORAGE_DRIVER|CATALOG_IMAGE_CDN_URL/);\n  assert.match(collect, /source=myauto&pages=\\$\\{GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD\\}/);\n  assert.match(collect, /source=autopapa&pages=\\$\\{GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD\\}/);\n  assert.match(collect, /georgia_yandex_sparse_gallery_in_snapshot/);'''
+          if old_collect_test not in test:
+              raise SystemExit('collect test anchor not found')
+          test = test.replace(old_collect_test, new_collect_test)
+          test += '''\n\ntest("Georgia Yandex collector rejects sparse listing-bound galleries before merge", () => {\n  assert.match(recovery, /offer\\.images\\.length < 5/);\n  assert.match(recovery, /reject\\("photos_below_5"\\)/);\n});\n'''
+          test_path.write_text(test)
+          PY
+      - name: Install dependencies
+        run: npm ci
+      - name: Run targeted recovery tests
+        run: node --import tsx --test tests/catalog-georgia-yandex-recovery-workflow.test.ts tests/georgia-canonical-source-policy-20260812.test.ts tests/catalog-recovery-preservation-hardening.test.ts
+      - name: Typecheck web
+        run: npm run typecheck
+      - name: Production build
+        run: npm run build
+      - name: Commit verified fix and remove temporary workflow
+        shell: bash
+        run: |
+          rm .github/workflows/apply-georgia-yandex-autopapa-shards-20260815.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/catalog-live-recovery-georgia-yandex.yml apps/web/lib/catalog/georgia-yandex-recovery.ts tests/catalog-georgia-yandex-recovery-workflow.test.ts .github/workflows/apply-georgia-yandex-autopapa-shards-20260815.yml
+          git commit -m "Stabilize Georgia Yandex AutoPapa recovery shards"
+          git push origin HEAD:fix/georgia-yandex-autopapa-shards-20260815
