@@ -19,7 +19,8 @@ concurrency:
 
 env:
   GEORGIA_YANDEX_ROUTE: https://avtocena.com/api/internal/georgia-recovery-e2f913
-  GEORGIA_YANDEX_PAGES_PER_SHARD: "20"
+  GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD: "20"
+  GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD: "5"
   GEORGIA_YANDEX_MIN_FRESH: "1000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
@@ -79,7 +80,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
 
-  collect:
+  collect-myauto:
     needs: strict-preflight
     runs-on: ubuntu-latest
     timeout-minutes: 35
@@ -87,35 +88,68 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        source: [myauto, autopapa]
         startPage: [1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241, 261, 281]
     steps:
-      - name: Fetch a canonical listing-bound shard through Yandex runtime
+      - name: Fetch a canonical MyAuto listing-bound shard through Yandex runtime
         shell: bash
         run: |
           set -euo pipefail
-          output="snapshot-${{ matrix.source }}-${{ matrix.startPage }}.json"
+          output="snapshot-myauto-${{ matrix.startPage }}.json"
           curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 600 -fsS \
-            "${GEORGIA_YANDEX_ROUTE}?source=${{ matrix.source }}&pages=${GEORGIA_YANDEX_PAGES_PER_SHARD}&startPage=${{ matrix.startPage }}" \
+            "${GEORGIA_YANDEX_ROUTE}?source=myauto&pages=${GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD}&startPage=${{ matrix.startPage }}" \
             -o "$output"
-          node - "$output" "${{ matrix.source }}" "${{ matrix.startPage }}" <<'NODE'
+          node - "$output" "myauto" "${{ matrix.startPage }}" "${GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD}" <<'NODE'
           const fs = require('node:fs');
-          const [file, expectedSource, expectedStart] = process.argv.slice(2);
+          const [file, expectedSource, expectedStart, expectedPages] = process.argv.slice(2);
           const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
           if (doc.market !== 'georgia' || !Array.isArray(doc.offers)) throw new Error('georgia_yandex_bad_snapshot');
           if (String(doc.report?.source || '') !== expectedSource) throw new Error(`georgia_yandex_source_mismatch:${doc.report?.source}:${expectedSource}`);
           if (Number(doc.report?.startPage || 0) !== Number(expectedStart)) throw new Error(`georgia_yandex_start_mismatch:${doc.report?.startPage}:${expectedStart}`);
-          if (Number(doc.report?.pagesPerSource || 0) !== 20) throw new Error(`georgia_yandex_page_span_mismatch:${doc.report?.pagesPerSource}`);
-          console.log({ source: expectedSource, startPage: Number(expectedStart), count: doc.offers.length, imageStats: doc.report?.imageStats, rejected: doc.report?.rejected });
+          if (Number(doc.report?.pagesPerSource || 0) !== Number(expectedPages)) throw new Error(`georgia_yandex_page_span_mismatch:${doc.report?.pagesPerSource}:${expectedPages}`);
+          console.log({ source: expectedSource, startPage: Number(expectedStart), pages: Number(expectedPages), count: doc.offers.length, imageStats: doc.report?.imageStats, rejected: doc.report?.rejected });
           NODE
       - uses: actions/upload-artifact@v4
         with:
-          name: georgia-yandex-shard-${{ matrix.source }}-${{ matrix.startPage }}
-          path: snapshot-${{ matrix.source }}-${{ matrix.startPage }}.json
+          name: georgia-yandex-shard-myauto-${{ matrix.startPage }}
+          path: snapshot-myauto-${{ matrix.startPage }}.json
+          retention-days: 3
+
+  collect-autopapa:
+    needs: strict-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        startPage: [1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96, 101, 106, 111, 116, 121, 126, 131, 136, 141, 146, 151, 156, 161, 166, 171, 176, 181, 186, 191, 196, 201, 206, 211, 216, 221, 226, 231, 236, 241, 246, 251, 256, 261, 266, 271, 276, 281, 286, 291, 296]
+    steps:
+      - name: Fetch a canonical AutoPapa listing-bound shard through Yandex runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          output="snapshot-autopapa-${{ matrix.startPage }}.json"
+          curl --retry 5 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 600 -fsS \
+            "${GEORGIA_YANDEX_ROUTE}?source=autopapa&pages=${GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD}&startPage=${{ matrix.startPage }}" \
+            -o "$output"
+          node - "$output" "autopapa" "${{ matrix.startPage }}" "${GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD}" <<'NODE'
+          const fs = require('node:fs');
+          const [file, expectedSource, expectedStart, expectedPages] = process.argv.slice(2);
+          const doc = JSON.parse(fs.readFileSync(file, 'utf8'));
+          if (doc.market !== 'georgia' || !Array.isArray(doc.offers)) throw new Error('georgia_yandex_bad_snapshot');
+          if (String(doc.report?.source || '') !== expectedSource) throw new Error(`georgia_yandex_source_mismatch:${doc.report?.source}:${expectedSource}`);
+          if (Number(doc.report?.startPage || 0) !== Number(expectedStart)) throw new Error(`georgia_yandex_start_mismatch:${doc.report?.startPage}:${expectedStart}`);
+          if (Number(doc.report?.pagesPerSource || 0) !== Number(expectedPages)) throw new Error(`georgia_yandex_page_span_mismatch:${doc.report?.pagesPerSource}:${expectedPages}`);
+          console.log({ source: expectedSource, startPage: Number(expectedStart), pages: Number(expectedPages), count: doc.offers.length, imageStats: doc.report?.imageStats, rejected: doc.report?.rejected });
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: georgia-yandex-shard-autopapa-${{ matrix.startPage }}
+          path: snapshot-autopapa-${{ matrix.startPage }}.json
           retention-days: 3
 
   merge:
-    needs: collect
+    needs: [collect-myauto, collect-autopapa]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
