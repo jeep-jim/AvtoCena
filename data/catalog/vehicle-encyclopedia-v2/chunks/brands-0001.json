@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "entityType": "brand",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "audi",
+      "canonicalName": "Audi",
+      "slug": "audi",
+      "aliases": [
+        { "value": "AUDI AG", "kind": "source_spelling", "safe": true, "language": "de", "market": "Global", "sourceIds": ["src-audi-company-legal"] }
+      ],
+      "countries": ["Germany"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-audi-company-legal", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "bmw",
+      "canonicalName": "BMW",
+      "slug": "bmw",
+      "aliases": [
+        { "value": "BMW AG", "kind": "source_spelling", "safe": true, "language": "de", "market": "Global", "sourceIds": ["src-bmw-company-legal"] }
+      ],
+      "countries": ["Germany"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-bmw-company-legal", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "toyota",
+      "canonicalName": "Toyota",
+      "slug": "toyota",
+      "aliases": [
+        { "value": "Toyota Motor Corporation", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-toyota-company-overview"] }
+      ],
+      "countries": ["Japan"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-toyota-company-overview", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "byd",
+      "canonicalName": "BYD",
+      "slug": "byd",
+      "aliases": [],
+      "countries": ["China"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-byd-company-history", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "geely",
+      "canonicalName": "Geely",
+      "slug": "geely",
+      "aliases": [],
+      "countries": ["China"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-geely-company-global", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    }
+  ]
+}

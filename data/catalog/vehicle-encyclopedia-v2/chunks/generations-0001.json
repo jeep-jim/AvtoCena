@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "entityType": "generation",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "audi/q6-e-tron/2024",
+      "modelId": "audi/q6-e-tron",
+      "name": "2024 launch series",
+      "aliases": [],
+      "platformCodes": ["PPE"],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-audi-q6-technical-2024", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official 2024 launch date; PPE is explicitly named." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "bmw/i4/g26",
+      "modelId": "bmw/i4",
+      "name": "G26",
+      "aliases": [],
+      "platformCodes": ["G26"],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Gran Coupe"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-bmw-i4-update-2024", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "toyota/rav4/xa50",
+      "modelId": "toyota/rav4",
+      "name": "Fifth generation",
+      "aliases": [],
+      "platformCodes": ["XA50", "GA-K"],
+      "productionFrom": "2019",
+      "productionTo": "2026",
+      "bodyTypes": ["SUV"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-toyota-rav4-archive", "fields": ["name", "platformCodes", "productionFrom", "productionTo", "bodyTypes"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "byd/seal/2023",
+      "modelId": "byd/seal",
+      "name": "2023 European launch series",
+      "aliases": [],
+      "platformCodes": ["e-Platform 3.0"],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-byd-seal-europe-2023", "fields": ["name", "platformCodes", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the official European introduction." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "geely/ex5/global",
+      "modelId": "geely/ex5",
+      "name": "Global launch series",
+      "aliases": [],
+      "platformCodes": ["GEA"],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-geely-ex5-debut-2024", "fields": ["name", "productionFrom"], "status": "verified", "confidence": "official", "note": "Descriptive generation label follows the September 2024 global debut." },
+        { "sourceId": "src-geely-ex5-global", "fields": ["platformCodes", "bodyTypes"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    }
+  ]
+}

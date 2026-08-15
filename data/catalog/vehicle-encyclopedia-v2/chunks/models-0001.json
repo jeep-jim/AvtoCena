@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 2,
+  "entityType": "model",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "audi/q6-e-tron",
+      "brandId": "audi",
+      "canonicalName": "Q6 SUV e-tron",
+      "slug": "q6-suv-e-tron",
+      "aliases": [
+        { "value": "Q6 e-tron", "kind": "market_name", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-audi-q6-technical-2024"] },
+        { "value": "아우디 Q6 e-트론", "kind": "localized", "safe": true, "language": "ko", "market": "South Korea", "sourceIds": ["src-wikidata-audi-q6"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-audi-q6-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-audi-q6-technical-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Audi uses both Q6 SUV e-tron and Q6 e-tron in official material; the shorter form is retained as a safe alias."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "bmw/i4",
+      "brandId": "bmw",
+      "canonicalName": "i4",
+      "slug": "i4",
+      "aliases": [
+        { "value": "宝马i4", "kind": "localized", "safe": true, "language": "zh", "market": "China", "sourceIds": ["src-wikidata-bmw-i4"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Gran Coupe"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-bmw-i4-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-bmw-i4-update-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "toyota/rav4",
+      "brandId": "toyota",
+      "canonicalName": "RAV4",
+      "slug": "rav4",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": "2026",
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["HEV", "PHEV"],
+      "mediaIds": ["media-toyota-rav4-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-toyota-rav4-archive", "fields": ["canonicalName", "productionFrom", "productionTo", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Scope is the fifth-generation archive, not the full historical RAV4 nameplate." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "byd/seal",
+      "brandId": "byd",
+      "canonicalName": "SEAL",
+      "slug": "seal",
+      "aliases": [
+        { "value": "比亞迪海豹", "kind": "localized", "safe": true, "language": "zh-Hant", "market": "Taiwan", "sourceIds": ["src-wikidata-byd-seal"] },
+        { "value": "BYD・シール", "kind": "localized", "safe": true, "language": "ja", "market": "Japan", "sourceIds": ["src-wikidata-byd-seal"] },
+        { "value": "비야디 씰", "kind": "localized", "safe": true, "language": "ko", "market": "South Korea", "sourceIds": ["src-wikidata-byd-seal"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-byd-seal-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-byd-seal-europe-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Production range represents the European introduction tracked by this seed." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "geely/ex5",
+      "brandId": "geely",
+      "canonicalName": "EX5",
+      "slug": "ex5",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-geely-ex5-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-geely-ex5-debut-2024", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "Official global unveiling dated September 2024." },
+        { "sourceId": "src-geely-ex5-global", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["No E5/EX5 safe alias is published until an official source explicitly proves cross-market equivalence."],
+      "updatedAt": "2026-08-15"
+    }
+  ]
+}

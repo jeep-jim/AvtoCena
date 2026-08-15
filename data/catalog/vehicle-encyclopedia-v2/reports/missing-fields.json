@@ -1,0 +1,72 @@
+{
+  "variants": [
+    {
+      "entityId": "audi/q6-e-tron/2024/performance-eu",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "doors",
+        "acChargeKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "bmw/i4/g26/edrive40-2024-global",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "doors",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "toyota/rav4/xa50/hybrid-awd-i-uk",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "byd/seal/2023/excellence-awd-eu",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "doors",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "geely/ex5/global/160kw-global",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 2,
+  "entries": [
+    {
+      "entityType": "generation",
+      "entityId": "byd/seal/2023",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "2023 European launch series",
+      "key": "2023europeanlaunchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "audi/q6-e-tron/2024",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "2024 launch series",
+      "key": "2024launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "facelift",
+      "entityId": "bmw/i4/g26/2024-update",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "2024 model update",
+      "key": "2024modelupdate",
+      "kind": "facelift",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "audi",
+      "brandId": "audi",
+      "modelId": null,
+      "term": "Audi",
+      "key": "audi",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-company-legal"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "audi",
+      "brandId": "audi",
+      "modelId": null,
+      "term": "AUDI AG",
+      "key": "audiag",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-company-legal"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "audi/q6-e-tron",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "Audi Q6 SUV e-tron",
+      "key": "audiq6suvetron",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-company-legal",
+        "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bmw",
+      "brandId": "bmw",
+      "modelId": null,
+      "term": "BMW",
+      "key": "bmw",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-company-legal"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bmw",
+      "brandId": "bmw",
+      "modelId": null,
+      "term": "BMW AG",
+      "key": "bmwag",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-company-legal"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bmw/i4",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "BMW i4",
+      "key": "bmwi4",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-company-legal",
+        "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "byd",
+      "brandId": "byd",
+      "modelId": null,
+      "term": "BYD",
+      "key": "byd",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-byd-company-history"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "byd/seal",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "BYD SEAL",
+      "key": "bydseal",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-byd-company-history",
+        "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "byd/seal",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "BYD・シール",
+      "key": "bydシール",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-wikidata-byd-seal"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "byd/seal/2023",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "e-Platform 3.0",
+      "key": "eplatform30",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "geely/ex5",
+      "brandId": "geely",
+      "modelId": "geely/ex5",
+      "term": "EX5",
+      "key": "ex5",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-geely-ex5-debut-2024",
+        "src-geely-ex5-global"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "toyota/rav4/xa50",
+      "brandId": "toyota",
+      "modelId": "toyota/rav4",
+      "term": "Fifth generation",
+      "key": "fifthgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "bmw/i4/g26",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "G26",
+      "key": "g26",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "bmw/i4/g26",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "G26",
+      "key": "g26",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "toyota/rav4/xa50",
+      "brandId": "toyota",
+      "modelId": "toyota/rav4",
+      "term": "GA-K",
+      "key": "gak",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "geely/ex5/global",
+      "brandId": "geely",
+      "modelId": "geely/ex5",
+      "term": "GEA",
+      "key": "gea",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-geely-ex5-debut-2024",
+        "src-geely-ex5-global"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "geely",
+      "brandId": "geely",
+      "modelId": null,
+      "term": "Geely",
+      "key": "geely",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-geely-company-global"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "geely/ex5",
+      "brandId": "geely",
+      "modelId": "geely/ex5",
+      "term": "Geely EX5",
+      "key": "geelyex5",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-geely-company-global",
+        "src-geely-ex5-debut-2024",
+        "src-geely-ex5-global"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "geely/ex5/global",
+      "brandId": "geely",
+      "modelId": "geely/ex5",
+      "term": "Global launch series",
+      "key": "globallaunchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-geely-ex5-debut-2024",
+        "src-geely-ex5-global"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bmw/i4",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "i4",
+      "key": "i4",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bmw-i4-update-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "audi/q6-e-tron/2024",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "PPE",
+      "key": "ppe",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "audi/q6-e-tron",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "Q6 e-tron",
+      "key": "q6etron",
+      "kind": "market_name",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "audi/q6-e-tron",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "Q6 SUV e-tron",
+      "key": "q6suvetron",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "toyota/rav4",
+      "brandId": "toyota",
+      "modelId": "toyota/rav4",
+      "term": "RAV4",
+      "key": "rav4",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "byd/seal",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "SEAL",
+      "key": "seal",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-byd-seal-europe-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "toyota",
+      "brandId": "toyota",
+      "modelId": null,
+      "term": "Toyota",
+      "key": "toyota",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-company-overview"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "toyota",
+      "brandId": "toyota",
+      "modelId": null,
+      "term": "Toyota Motor Corporation",
+      "key": "toyotamotorcorporation",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-company-overview"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "toyota/rav4",
+      "brandId": "toyota",
+      "modelId": "toyota/rav4",
+      "term": "Toyota RAV4",
+      "key": "toyotarav4",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-company-overview",
+        "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "toyota/rav4/xa50",
+      "brandId": "toyota",
+      "modelId": "toyota/rav4",
+      "term": "XA50",
+      "key": "xa50",
+      "kind": "platform_code",
+      "safe": true,
+      "sourceIds": [
+        "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "byd/seal",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "비야디 씰",
+      "key": "비야디씰",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-wikidata-byd-seal"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "audi/q6-e-tron",
+      "brandId": "audi",
+      "modelId": "audi/q6-e-tron",
+      "term": "아우디 Q6 e-트론",
+      "key": "아우디q6e트론",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-wikidata-audi-q6"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bmw/i4",
+      "brandId": "bmw",
+      "modelId": "bmw/i4",
+      "term": "宝马i4",
+      "key": "宝马i4",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-wikidata-bmw-i4"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "byd/seal",
+      "brandId": "byd",
+      "modelId": "byd/seal",
+      "term": "比亞迪海豹",
+      "key": "比亞迪海豹",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-wikidata-byd-seal"
+      ]
+    }
+  ],
+  "collisions": []
+}

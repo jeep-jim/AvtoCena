@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "productionConnected": false,
+  "totals": {
+    "source": 21,
+    "brand": 5,
+    "model": 5,
+    "generation": 5,
+    "facelift": 1,
+    "variant": 5,
+    "media": 5
+  },
+  "statuses": {
+    "brand": {
+      "verified": 5
+    },
+    "model": {
+      "verified": 5
+    },
+    "generation": {
+      "verified": 5
+    },
+    "facelift": {
+      "verified": 1
+    },
+    "variant": {
+      "verified": 5
+    }
+  },
+  "byBrand": [
+    {
+      "brandId": "audi",
+      "brand": "Audi",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "bmw",
+      "brand": "BMW",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 1,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "byd",
+      "brand": "BYD",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "geely",
+      "brand": "Geely",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    }
+  ],
+  "sources": {
+    "byType": {
+      "manufacturer": 8,
+      "manufacturer_technical_document": 5,
+      "wikidata": 3,
+      "wikimedia_commons": 5
+    },
+    "byDomain": {
+      "audi-mediacenter.com": 1,
+      "audi.com": 1,
+      "bmwgroup.com": 1,
+      "byd.com": 2,
+      "commons.wikimedia.org": 5,
+      "geely.com": 2,
+      "global.geely.com": 2,
+      "global.toyota": 1,
+      "media.toyota.co.uk": 2,
+      "press.bmwgroup.com": 1,
+      "wikidata.org": 3
+    }
+  },
+  "chunks": [
+    {
+      "file": "brands-0001.json",
+      "entityType": "brand",
+      "records": 5,
+      "maxRecords": 250
+    },
+    {
+      "file": "facelifts-0001.json",
+      "entityType": "facelift",
+      "records": 1,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0001.json",
+      "entityType": "generation",
+      "records": 5,
+      "maxRecords": 250
+    },
+    {
+      "file": "media-0001.json",
+      "entityType": "media",
+      "records": 5,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0001.json",
+      "entityType": "model",
+      "records": 5,
+      "maxRecords": 250
+    },
+    {
+      "file": "sources-0001.json",
+      "entityType": "source",
+      "records": 21,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0001.json",
+      "entityType": "variant",
+      "records": 5,
+      "maxRecords": 250
+    }
+  ]
+}

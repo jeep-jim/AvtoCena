@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avtocena.com/schema/vehicle-encyclopedia-v2/entity-chunk.schema.json",
+  "title": "AvtoCena Vehicle Encyclopedia V2 entity chunk",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entityType", "chunk", "maxRecords", "records"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "entityType": { "enum": ["source", "brand", "model", "generation", "facelift", "variant", "media"] },
+    "chunk": { "type": "integer", "minimum": 1 },
+    "maxRecords": { "const": 250 },
+    "records": { "type": "array", "maxItems": 250 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "entityType": { "const": "source" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/source" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "brand" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/brand" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "model" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/model" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "generation" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/generation" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "facelift" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/facelift" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "variant" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/variant" } } } }
+    },
+    {
+      "if": { "properties": { "entityType": { "const": "media" } } },
+      "then": { "properties": { "records": { "items": { "$ref": "#/$defs/media" } } } }
+    }
+  ],
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._/-]*$", "minLength": 3 },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "month": { "type": ["string", "null"], "pattern": "^[0-9]{4}(-[0-9]{2})?$" },
+    "status": { "enum": ["seed", "verified", "review", "unresolved", "retired"] },
+    "confidence": { "enum": ["official", "high", "medium", "low"] },
+    "alias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "kind", "safe", "sourceIds"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["localized", "market_name", "source_spelling", "punctuation", "historical", "transliteration"] },
+        "safe": { "type": "boolean" },
+        "language": { "type": ["string", "null"] },
+        "market": { "type": ["string", "null"] },
+        "sourceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceId", "fields", "status", "confidence"],
+      "properties": {
+        "sourceId": { "$ref": "#/$defs/id" },
+        "fields": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "status": { "enum": ["verified", "conflict", "unresolved"] },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "title", "publisher", "url", "verifiedAt", "supportedFields", "confidence", "status"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["manufacturer", "manufacturer_technical_document", "government_registry", "type_approval", "homologation", "official_safety", "official_efficiency", "wikidata", "wikimedia_commons", "licensed_open_dataset", "authoritative_catalog", "secondary_reference"] },
+        "title": { "type": "string", "minLength": 1 },
+        "publisher": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "documentId": { "type": ["string", "null"] },
+        "documentDate": { "anyOf": [{ "$ref": "#/$defs/date" }, { "type": "null" }] },
+        "verifiedAt": { "$ref": "#/$defs/date" },
+        "market": { "type": ["string", "null"] },
+        "language": { "type": ["string", "null"] },
+        "supportedFields": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "status": { "enum": ["active", "blocked", "superseded"] },
+        "license": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "canonicalName", "slug", "aliases", "countries", "status", "evidence", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "canonicalName": { "type": "string", "minLength": 1 },
+        "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "countries": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 2 } },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "brandId", "canonicalName", "slug", "aliases", "productionFrom", "productionTo", "bodyTypes", "powertrainKinds", "mediaIds", "status", "evidence", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "brandId": { "$ref": "#/$defs/id" },
+        "canonicalName": { "type": "string", "minLength": 1 },
+        "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "sourceNames": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "productionFrom": { "$ref": "#/$defs/month" },
+        "productionTo": { "$ref": "#/$defs/month" },
+        "bodyTypes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "powertrainKinds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["ICE", "MHEV", "HEV", "PHEV", "EREV", "BEV", "FCEV"] } },
+        "mediaIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "modelId", "name", "aliases", "platformCodes", "productionFrom", "productionTo", "bodyTypes", "status", "evidence", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "modelId": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "platformCodes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "productionFrom": { "$ref": "#/$defs/month" },
+        "productionTo": { "$ref": "#/$defs/month" },
+        "bodyTypes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "facelift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "generationId", "name", "aliases", "productionFrom", "productionTo", "status", "evidence", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "generationId": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "productionFrom": { "$ref": "#/$defs/month" },
+        "productionTo": { "$ref": "#/$defs/month" },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "modelId", "generationId", "name", "market", "yearFrom", "yearTo", "bodyType", "powertrainKind", "status", "evidence", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "modelId": { "$ref": "#/$defs/id" },
+        "generationId": { "$ref": "#/$defs/id" },
+        "faceliftId": { "anyOf": [{ "$ref": "#/$defs/id" }, { "type": "null" }] },
+        "name": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "$ref": "#/$defs/alias" } },
+        "market": { "type": "string", "minLength": 2 },
+        "yearFrom": { "type": "integer", "minimum": 1886, "maximum": 2100 },
+        "yearTo": { "type": ["integer", "null"], "minimum": 1886, "maximum": 2100 },
+        "bodyType": { "type": "string", "minLength": 1 },
+        "powertrainKind": { "enum": ["ICE", "MHEV", "HEV", "PHEV", "EREV", "BEV", "FCEV"] },
+        "fuel": { "type": ["string", "null"] },
+        "engineCode": { "type": ["string", "null"] },
+        "engineCc": { "type": ["number", "null"], "minimum": 0, "maximum": 20000 },
+        "steeringPosition": { "type": ["string", "null"], "enum": ["LHD", "RHD", "Both", null] },
+        "transmission": { "type": ["string", "null"] },
+        "gears": { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
+        "drive": { "type": ["string", "null"] },
+        "powerHp": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "powerHpStandard": { "type": ["string", "null"], "enum": ["hp", "PS", "bhp", null] },
+        "powerKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "icePowerKw": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "motorPeakKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "power30MinKw": { "type": ["number", "null"], "minimum": 0, "maximum": 4000 },
+        "power30MinKwByMotor": { "type": "array", "minItems": 1, "items": { "type": "number", "minimum": 0, "maximum": 4000 } },
+        "batteryGrossKwh": { "type": ["number", "null"], "minimum": 0, "maximum": 500 },
+        "batteryUsableKwh": { "type": ["number", "null"], "minimum": 0, "maximum": 500 },
+        "batteryRatedKwh": { "type": ["number", "null"], "minimum": 0, "maximum": 500 },
+        "rangeKm": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "rangeKmMin": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "rangeKmMax": { "type": ["number", "null"], "minimum": 0, "maximum": 3000 },
+        "rangeStandard": { "type": ["string", "null"] },
+        "acChargeKw": { "type": ["number", "null"], "minimum": 0, "maximum": 1000 },
+        "dcChargeKw": { "type": ["number", "null"], "minimum": 0, "maximum": 1500 },
+        "lengthMm": { "type": ["number", "null"], "minimum": 500, "maximum": 30000 },
+        "widthMm": { "type": ["number", "null"], "minimum": 500, "maximum": 10000 },
+        "heightMm": { "type": ["number", "null"], "minimum": 500, "maximum": 10000 },
+        "wheelbaseMm": { "type": ["number", "null"], "minimum": 500, "maximum": 20000 },
+        "curbWeightKg": { "type": ["number", "null"], "minimum": 100, "maximum": 20000 },
+        "grossWeightKg": { "type": ["number", "null"], "minimum": 100, "maximum": 30000 },
+        "groundClearanceMm": { "type": ["number", "null"], "minimum": 20, "maximum": 2000 },
+        "tankCapacityL": { "type": ["number", "null"], "minimum": 0, "maximum": 2000 },
+        "seats": { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
+        "doors": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+        "zeroTo100Sec": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "topSpeedKmh": { "type": ["number", "null"], "minimum": 0, "maximum": 1000 },
+        "status": { "$ref": "#/$defs/status" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "researchNotes": { "type": "array", "items": { "type": "string" } },
+        "updatedAt": { "$ref": "#/$defs/date" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ownerType", "ownerId", "role", "sourceId", "originalUrl", "pageUrl", "license", "attribution", "identityStatus", "status", "verifiedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "ownerType": { "enum": ["brand", "model", "generation", "facelift"] },
+        "ownerId": { "$ref": "#/$defs/id" },
+        "role": { "enum": ["canonical_cover", "gallery", "technical"] },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "originalUrl": { "type": "string", "format": "uri" },
+        "pageUrl": { "type": "string", "format": "uri" },
+        "license": { "type": "string", "minLength": 1 },
+        "attribution": { "type": "string", "minLength": 1 },
+        "identityStatus": { "enum": ["exact_model", "exact_generation", "unresolved"] },
+        "status": { "enum": ["approved", "review", "rejected"] },
+        "verifiedAt": { "$ref": "#/$defs/date" }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "entityType": "media",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "media-audi-q6-cover",
+      "ownerType": "model",
+      "ownerId": "audi/q6-e-tron",
+      "role": "canonical_cover",
+      "sourceId": "src-commons-audi-q6-cover",
+      "originalUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Audi_Q6_e-tron_IAA_2023_1X7A0056.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Audi_Q6_e-tron_IAA_2023_1X7A0056.jpg",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Alexander Migl (Alexander-93), via Wikimedia Commons",
+      "identityStatus": "exact_model",
+      "status": "approved",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "id": "media-bmw-i4-cover",
+      "ownerType": "model",
+      "ownerId": "bmw/i4",
+      "role": "canonical_cover",
+      "sourceId": "src-commons-bmw-i4-cover",
+      "originalUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/BMW_i4_eDrive40_M_Sport_%28G26%29_front.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:BMW_i4_eDrive40_M_Sport_(G26)_front.jpg",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Tokumeigakarinoaoshima, via Wikimedia Commons",
+      "identityStatus": "exact_generation",
+      "status": "approved",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "id": "media-toyota-rav4-cover",
+      "ownerType": "model",
+      "ownerId": "toyota/rav4",
+      "role": "canonical_cover",
+      "sourceId": "src-commons-toyota-rav4-cover",
+      "originalUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Toyota_RAV4_2019_%28XA50%29_CUV_Quarter_Front.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Toyota_RAV4_2019_(XA50)_CUV_Quarter_Front.jpg",
+      "license": "CC BY-SA 3.0",
+      "attribution": "Alistair Fernandez; uploaded by MTSRider18, via Wikimedia Commons",
+      "identityStatus": "exact_generation",
+      "status": "approved",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "id": "media-byd-seal-cover",
+      "ownerType": "model",
+      "ownerId": "byd/seal",
+      "role": "canonical_cover",
+      "sourceId": "src-commons-byd-seal-cover",
+      "originalUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/2023_BYD_Seal_front.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2023_BYD_Seal_front.jpg",
+      "license": "CC BY 2.0",
+      "attribution": "Rutger van der Maar, via Wikimedia Commons",
+      "identityStatus": "exact_model",
+      "status": "approved",
+      "verifiedAt": "2026-08-15"
+    },
+    {
+      "id": "media-geely-ex5-cover",
+      "ownerType": "model",
+      "ownerId": "geely/ex5",
+      "role": "canonical_cover",
+      "sourceId": "src-commons-geely-ex5-cover",
+      "originalUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/2026_Geely_EX5_Max%2B.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:2026_Geely_EX5_Max+.jpg",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Chanokchon, via Wikimedia Commons",
+      "identityStatus": "exact_model",
+      "status": "approved",
+      "verifiedAt": "2026-08-15"
+    }
+  ]
+}

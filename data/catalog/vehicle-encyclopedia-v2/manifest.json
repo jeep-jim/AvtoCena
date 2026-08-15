@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "workspace": "vehicle-encyclopedia-v2",
+  "productionConnected": false,
+  "targetYearFrom": 2015,
+  "targetYearTo": 2026,
+  "chunkSize": 250,
+  "brandSource": "apps/web/lib/catalog/brands.ts",
+  "status": "pilot-seed",
+  "pilotBrands": [
+    "Audi",
+    "BMW",
+    "Toyota",
+    "BYD",
+    "Geely"
+  ],
+  "collections": {
+    "source": {
+      "pattern": "chunks/sources-*.json",
+      "chunks": 1,
+      "records": 21
+    },
+    "brand": {
+      "pattern": "chunks/brands-*.json",
+      "chunks": 1,
+      "records": 5
+    },
+    "model": {
+      "pattern": "chunks/models-*.json",
+      "chunks": 1,
+      "records": 5
+    },
+    "generation": {
+      "pattern": "chunks/generations-*.json",
+      "chunks": 1,
+      "records": 5
+    },
+    "facelift": {
+      "pattern": "chunks/facelifts-*.json",
+      "chunks": 1,
+      "records": 1
+    },
+    "variant": {
+      "pattern": "chunks/variants-*.json",
+      "chunks": 1,
+      "records": 5
+    },
+    "media": {
+      "pattern": "chunks/media-*.json",
+      "chunks": 1,
+      "records": 5
+    }
+  },
+  "completedBrands": [
+    "Audi",
+    "BMW",
+    "Toyota",
+    "BYD",
+    "Geely"
+  ],
+  "inProgressBrands": [],
+  "blockedBrands": [],
+  "lastCheckpoint": "2026-08-15",
+  "notes": [
+    "Research staging only. Do not publish or modify data/catalog/vehicle-knowledge during collection.",
+    "All canonical entity collections use deterministic chunks capped at 250 records.",
+    "Start with brands already present in CATALOG_BRANDS, then report globally relevant missing passenger-car brands before adding them.",
+    "Exact 30-minute power is source-only and must never be derived from peak power."
+  ]
+}
