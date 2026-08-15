@@ -14,29 +14,22 @@ permissions:
 jobs:
   dispatch:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Wait for Yandex deployment to finish cleanly
+      - name: Confirm there is no active catalog writer
         env:
           GH_TOKEN: ${{ github.token }}
-          DEPLOY_RUN: "31858091994"
         shell: bash
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 90); do
-            payload="$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${DEPLOY_RUN}")"
-            status="$(jq -r '.status' <<<"$payload")"
-            conclusion="$(jq -r '.conclusion // ""' <<<"$payload")"
-            echo "deploy status=$status conclusion=$conclusion attempt=$attempt"
-            if [[ "$status" == "completed" ]]; then
-              [[ "$conclusion" == "success" ]]
-              exit 0
-            fi
-            sleep 10
-          done
-          echo "deployment did not complete in time" >&2
-          exit 1
+          payload="$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs?status=in_progress&per_page=100")"
+          bad="$(jq -r '[.workflow_runs[] | select((.name | ascii_downcase | test("catalog|recovery|publish|writer")) and (.name | test("Georgia Yandex v2") | not))] | length' <<<"$payload")"
+          if [[ "$bad" != "0" ]]; then
+            jq -r '.workflow_runs[] | [.id,.name,.status] | @tsv' <<<"$payload"
+            echo "active catalog-capable workflow detected" >&2
+            exit 1
+          fi
       - name: Dispatch read-only Georgia recovery v2
         env:
           GH_TOKEN: ${{ github.token }}
