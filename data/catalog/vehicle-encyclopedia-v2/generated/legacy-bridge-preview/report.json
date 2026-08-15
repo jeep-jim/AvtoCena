@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "productionModified": false,
+  "rule": "Review-only preview. Never writes data/catalog/vehicle-knowledge.",
+  "legacyBaseline": {
+    "models": 4899,
+    "modelChunks": 20,
+    "variants": 15735,
+    "variantChunks": 63,
+    "maxRecordsPerChunk": 250
+  },
+  "preview": {
+    "models": 5,
+    "variants": 2
+  },
+  "existingIdReview": {
+    "models": [
+      "bmw/i4",
+      "toyota/rav4",
+      "byd/seal",
+      "geely/ex5"
+    ],
+    "variants": []
+  },
+  "excludedVariants": [
+    {
+      "entityId": "audi/q6-e-tron/2024/performance-eu",
+      "reason": "legacy_requires_exact_powerHp; conversion from powerKw is not performed"
+    },
+    {
+      "entityId": "byd/seal/2023/excellence-awd-eu",
+      "reason": "legacy_requires_exact_powerHp; conversion from powerKw is not performed"
+    },
+    {
+      "entityId": "geely/ex5/global/160kw-global",
+      "reason": "legacy_requires_exact_powerHp; conversion from powerKw is not performed"
+    }
+  ],
+  "gatesBeforePublication": [
+    "human review of every mapped field and existing-ID merge",
+    "exact powerHp required by the current legacy variant contract",
+    "real catalog spelling and ambiguity regression",
+    "production chunk rebuild capped at 250 records",
+    "separate authorization to modify production data"
+  ]
+}
