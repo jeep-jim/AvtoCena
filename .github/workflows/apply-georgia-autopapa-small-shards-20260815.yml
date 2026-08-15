@@ -1,0 +1,33 @@
+name: Apply Georgia AutoPapa small shards 20260815
+
+on:
+  push:
+    branches:
+      - fix/georgia-autopapa-small-shards-20260815
+    paths:
+      - .github/workflows/apply-georgia-autopapa-small-shards-20260815.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/georgia-autopapa-small-shards-20260815
+      - name: Apply source-specific shard sizing
+        run: python3 scripts/temp-apply-georgia-autopapa-small-shards-20260815.py
+      - name: Validate targeted recovery contract
+        run: |
+          npm ci
+          node --import tsx --test tests/catalog-georgia-yandex-recovery-workflow.test.ts
+          git diff --check
+      - name: Commit generated recovery changes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .github/workflows/catalog-live-recovery-georgia-yandex.yml tests/catalog-georgia-yandex-recovery-workflow.test.ts
+          git commit -m 'Bound AutoPapa Yandex recovery shards below runtime timeout'
+          git push origin HEAD:fix/georgia-autopapa-small-shards-20260815
