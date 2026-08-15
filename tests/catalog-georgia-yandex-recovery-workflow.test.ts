@@ -11,9 +11,11 @@ test("Georgia Yandex recovery stays manual, serialized and fail-closed before wr
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /GEORGIA_YANDEX_ROUTE: https:\/\/avtocena\.com\/api\/internal\/georgia-recovery-e2f913/);
-  assert.match(workflow, /GEORGIA_YANDEX_PAGES_PER_SHARD: "20"/);
+  assert.match(workflow, /GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD: "20"/);
+  assert.match(workflow, /GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD: "5"/);
   assert.match(workflow, /startPage: \[1, 21, 41, 61, 81, 101, 121, 141, 161, 181, 201, 221, 241, 261, 281\]/);
-  assert.match(workflow, /source: \[myauto, autopapa\]/);
+  assert.match(workflow, /startPage: \[1, 6, 11, 16/);
+  assert.match(workflow, /281, 286, 291, 296\]/);
   assert.match(workflow, /max-parallel: 4/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
@@ -27,12 +29,13 @@ test("Georgia Yandex recovery stays manual, serialized and fail-closed before wr
 });
 
 test("Georgia source collection through Yandex never receives catalog storage credentials", () => {
-  const collectStart = workflow.indexOf("\n  collect:\n");
+  const collectStart = workflow.indexOf("\n  collect-myauto:\n");
   const mergeStart = workflow.indexOf("\n  merge:\n");
   assert.ok(collectStart >= 0 && mergeStart > collectStart);
   const collect = workflow.slice(collectStart, mergeStart);
   assert.doesNotMatch(collect, /YC_OBJECT_STORAGE_|JSON_STORAGE_DRIVER|CATALOG_IMAGE_CDN_URL/);
-  assert.match(collect, /\$\{GEORGIA_YANDEX_ROUTE\}\?source=\$\{\{ matrix\.source \}\}&pages=\$\{GEORGIA_YANDEX_PAGES_PER_SHARD\}&startPage=\$\{\{ matrix\.startPage \}\}/);
+  assert.match(collect, /source=myauto&pages=\$\{GEORGIA_YANDEX_MYAUTO_PAGES_PER_SHARD\}/);
+  assert.match(collect, /source=autopapa&pages=\$\{GEORGIA_YANDEX_AUTOPAPA_PAGES_PER_SHARD\}/);
 });
 
 test("Georgia shard merge accepts only exact canonical identities and listing-bound galleries", () => {
