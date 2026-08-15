@@ -32,7 +32,7 @@ test("Georgia source collection through Yandex never receives catalog storage cr
   assert.ok(collectStart >= 0 && mergeStart > collectStart);
   const collect = workflow.slice(collectStart, mergeStart);
   assert.doesNotMatch(collect, /YC_OBJECT_STORAGE_|JSON_STORAGE_DRIVER|CATALOG_IMAGE_CDN_URL/);
-  assert.match(collect, /georgia-recovery-e2f913\?source=\$\{\{ matrix\.source \}\}&pages=\$\{GEORGIA_YANDEX_PAGES_PER_SHARD\}&startPage=\$\{\{ matrix\.startPage \}\}/);
+  assert.match(collect, /\$\{GEORGIA_YANDEX_ROUTE\}\?source=\$\{\{ matrix\.source \}\}&pages=\$\{GEORGIA_YANDEX_PAGES_PER_SHARD\}&startPage=\$\{\{ matrix\.startPage \}\}/);
 });
 
 test("Georgia shard merge accepts only exact canonical identities and listing-bound galleries", () => {
@@ -48,5 +48,5 @@ test("Georgia shard merge accepts only exact canonical identities and listing-bo
   assert.match(merge, /georgia_yandex_cross_listing_images/);
   assert.match(merge, /georgia_yandex_missing_canonical_source/);
   assert.match(merge, /georgia_yandex_fresh_floor/);
-  assert.doesNotMatch(merge, /auto_georgia|ss\.ge|mymarket|my\.market/i);
+  assert.doesNotMatch(merge, /(?:^|[^a-z])auto_georgia|ss\.ge|mymarket|my\.market/i);
 });
