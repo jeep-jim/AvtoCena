@@ -18,22 +18,22 @@
     "source": {
       "pattern": "chunks/sources-*.json",
       "chunks": 1,
-      "records": 91
+      "records": 128
     },
     "brand": {
       "pattern": "chunks/brands-*.json",
       "chunks": 1,
-      "records": 25
+      "records": 35
     },
     "model": {
       "pattern": "chunks/models-*.json",
       "chunks": 1,
-      "records": 25
+      "records": 35
     },
     "generation": {
       "pattern": "chunks/generations-*.json",
       "chunks": 1,
-      "records": 25
+      "records": 35
     },
     "facelift": {
       "pattern": "chunks/facelifts-*.json",
@@ -43,12 +43,12 @@
     "variant": {
       "pattern": "chunks/variants-*.json",
       "chunks": 1,
-      "records": 25
+      "records": 35
     },
     "media": {
       "pattern": "chunks/media-*.json",
       "chunks": 1,
-      "records": 25
+      "records": 35
     }
   },
   "completedBrands": [
@@ -78,7 +78,17 @@
     "Acura",
     "Alfa Romeo",
     "Aston Martin",
-    "Bentley"
+    "Bentley",
+    "AITO",
+    "Avatr",
+    "BAIC",
+    "Baojun",
+    "BAW",
+    "Belgee",
+    "Bestune",
+    "Buick",
+    "Cadillac",
+    "Changan"
   ],
   "blockedBrands": [],
   "lastCheckpoint": "2026-08-16",

@@ -1,7 +1,7 @@
 {
   "generatedFrom": "vehicle-encyclopedia-v2 canonical chunks",
   "rule": "Exact documented value only; never derived from peak power.",
-  "eligibleVariants": 17,
+  "eligibleVariants": 22,
   "documentedVariants": 0,
   "missingVariants": [
     "audi/q6-e-tron/2024/performance-eu",
@@ -20,7 +20,12 @@
     "abarth/500e/2022-launch/hatchback-eu",
     "acura/zdx/2024-launch/type-s-us",
     "alfa-romeo/junior/2024-launch/elettrica-ch",
-    "bentley/continental-gt/fourth-generation/speed-global"
+    "bentley/continental-gt/fourth-generation/speed-global",
+    "aito/m9/2023-launch/bev-max-six-seat-cn",
+    "avatr/12/2023-launch/bev-global",
+    "baojun/yep/2023-launch/rwd-cn",
+    "baw/ruisheng-m8/current-2026/bev-560-flagship-7-cn",
+    "cadillac/lyriq/2022-launch/standard-range-luxury-cn"
   ],
   "coveragePercent": 0
 }

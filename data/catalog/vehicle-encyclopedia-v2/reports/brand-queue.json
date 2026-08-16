@@ -10,8 +10,8 @@
   "totals": {
     "productionBrands": 185,
     "verified": 5,
-    "inProgress": 20,
-    "queued": 160,
+    "inProgress": 30,
+    "queued": 150,
     "legacyCandidateModels": 4899,
     "legacyCandidateVariants": 15735
   },
@@ -110,8 +110,8 @@
     {
       "position": 5,
       "brand": "AITO",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "aito",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -182,8 +182,8 @@
     {
       "position": 13,
       "brand": "Avatr",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "avatr",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -191,8 +191,8 @@
     {
       "position": 14,
       "brand": "BAIC",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "baic",
       "legacyCandidateModels": 7,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -200,8 +200,8 @@
     {
       "position": 15,
       "brand": "Baojun",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "baojun",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -209,8 +209,8 @@
     {
       "position": 16,
       "brand": "BAW",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "baw",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -218,8 +218,8 @@
     {
       "position": 17,
       "brand": "Belgee",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "belgee",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -236,8 +236,8 @@
     {
       "position": 19,
       "brand": "Bestune",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "bestune",
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -272,8 +272,8 @@
     {
       "position": 23,
       "brand": "Buick",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "buick",
       "legacyCandidateModels": 44,
       "legacyCandidateVariants": 128,
       "checkpoint": "checkpoint-03"
@@ -290,8 +290,8 @@
     {
       "position": 25,
       "brand": "Cadillac",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "cadillac",
       "legacyCandidateModels": 49,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"
@@ -317,8 +317,8 @@
     {
       "position": 28,
       "brand": "Changan",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "changan",
       "legacyCandidateModels": 4,
       "legacyCandidateVariants": 0,
       "checkpoint": "checkpoint-03"

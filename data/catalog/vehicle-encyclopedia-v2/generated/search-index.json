@@ -15,6 +15,19 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "avatr/12",
+      "brandId": "avatr",
+      "modelId": "avatr/12",
+      "term": "12",
+      "key": "12",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-12-premiere-2023"
+      ]
+    },
+    {
       "entityType": "generation",
       "entityId": "porsche/taycan/2019-launch",
       "brandId": "porsche",
@@ -55,6 +68,20 @@
     },
     {
       "entityType": "generation",
+      "entityId": "baic/x55/2022-global",
+      "brandId": "baic",
+      "modelId": "baic/x55",
+      "term": "2022 global series",
+      "key": "2022globalseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-x55-annual-2022",
+        "src-baic-x55-global-config"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "abarth/500e/2022-launch",
       "brandId": "abarth",
       "modelId": "abarth/500e",
@@ -64,6 +91,19 @@
       "safe": true,
       "sourceIds": [
         "src-abarth-500e-launch-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "cadillac/lyriq/2022-launch",
+      "brandId": "cadillac",
+      "modelId": "cadillac/lyriq",
+      "term": "2022 launch series",
+      "key": "2022launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-cadillac-lyriq-production-2022"
       ]
     },
     {
@@ -120,6 +160,19 @@
     },
     {
       "entityType": "generation",
+      "entityId": "aito/m9/2023-launch",
+      "brandId": "aito",
+      "modelId": "aito/m9",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-aito-m9-preorder-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "aston-martin/db12/2023-launch",
       "brandId": "aston-martin",
       "modelId": "aston-martin/db12",
@@ -130,6 +183,45 @@
       "sourceIds": [
         "src-aston-martin-db12-launch-2023",
         "src-aston-martin-db12-spec-uk"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "avatr/12/2023-launch",
+      "brandId": "avatr",
+      "modelId": "avatr/12",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-12-premiere-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "baojun/yep/2023-launch",
+      "brandId": "baojun",
+      "modelId": "baojun/yep",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-baojun-yep-launch-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "belgee/x50/2023-launch",
+      "brandId": "belgee",
+      "modelId": "belgee/x50",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-x50-production-2025"
       ]
     },
     {
@@ -186,6 +278,19 @@
     },
     {
       "entityType": "generation",
+      "entityId": "buick/envista/2024-launch",
+      "brandId": "buick",
+      "modelId": "buick/envista",
+      "term": "2024 launch series",
+      "key": "2024launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-buick-envista-launch-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "chevrolet/blazer-ev/2024-launch",
       "brandId": "chevrolet",
       "modelId": "chevrolet/blazer-ev",
@@ -225,6 +330,19 @@
     },
     {
       "entityType": "generation",
+      "entityId": "bestune/t90/2024-russia",
+      "brandId": "bestune",
+      "modelId": "bestune/t90",
+      "term": "2024 Russia launch series",
+      "key": "2024russialaunchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-t90-russia-launch-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "tesla/model-3/2024-series",
       "brandId": "tesla",
       "modelId": "tesla/model-3",
@@ -239,6 +357,19 @@
     },
     {
       "entityType": "generation",
+      "entityId": "changan/cs75-plus/2024-uae",
+      "brandId": "changan",
+      "modelId": "changan/cs75-plus",
+      "term": "2024 UAE series",
+      "key": "2024uaeseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-cs75-plus-uae-2024"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "ford/mustang-mach-e/2026-model-year",
       "brandId": "ford",
       "modelId": "ford/mustang-mach-e",
@@ -248,6 +379,19 @@
       "safe": true,
       "sourceIds": [
         "src-ford-mustang-mach-e-2026-us"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "baw/ruisheng-m8/current-2026",
+      "brandId": "baw",
+      "modelId": "baw/ruisheng-m8",
+      "term": "2026 official-site snapshot",
+      "key": "2026officialsitesnapshot",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-ruisheng-m8-current-2026"
       ]
     },
     {
@@ -343,6 +487,46 @@
         "src-acura-honda-brand-2005",
         "src-honda-company-overview",
         "src-acura-zdx-debut-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "aito",
+      "brandId": "aito",
+      "modelId": null,
+      "term": "AITO",
+      "key": "aito",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-aito-brand-seres-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "aito/m9",
+      "brandId": "aito",
+      "modelId": "aito/m9",
+      "term": "AITO M9",
+      "key": "aitom9",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-aito-brand-seres-2025",
+        "src-aito-m9-preorder-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "aito/m9",
+      "brandId": "aito",
+      "modelId": "aito/m9",
+      "term": "AITO M9",
+      "key": "aitom9",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-aito-m9-preorder-2023"
       ]
     },
     {
@@ -443,6 +627,247 @@
     },
     {
       "entityType": "brand",
+      "entityId": "avatr",
+      "brandId": "avatr",
+      "modelId": null,
+      "term": "Avatr",
+      "key": "avatr",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-brand-changan"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "avatr",
+      "brandId": "avatr",
+      "modelId": null,
+      "term": "AVATR",
+      "key": "avatr",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-brand-changan"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "avatr/12",
+      "brandId": "avatr",
+      "modelId": "avatr/12",
+      "term": "Avatr 12",
+      "key": "avatr12",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-brand-changan",
+        "src-avatr-12-premiere-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "avatr/12",
+      "brandId": "avatr",
+      "modelId": "avatr/12",
+      "term": "AVATR 12",
+      "key": "avatr12",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-avatr-12-premiere-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "baic",
+      "brandId": "baic",
+      "modelId": null,
+      "term": "BAIC",
+      "key": "baic",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-group-shanghai-2025"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "baic",
+      "brandId": "baic",
+      "modelId": null,
+      "term": "BAIC Group",
+      "key": "baicgroup",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-group-shanghai-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baic/x55",
+      "brandId": "baic",
+      "modelId": "baic/x55",
+      "term": "BAIC X55",
+      "key": "baicx55",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-group-shanghai-2025",
+        "src-baic-x55-annual-2022",
+        "src-baic-x55-global-config"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baic/x55",
+      "brandId": "baic",
+      "modelId": "baic/x55",
+      "term": "BAIC X55",
+      "key": "baicx55",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-x55-global-config"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "baojun",
+      "brandId": "baojun",
+      "modelId": null,
+      "term": "Baojun",
+      "key": "baojun",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baojun-yep-launch-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baojun/yep",
+      "brandId": "baojun",
+      "modelId": "baojun/yep",
+      "term": "Baojun Yep",
+      "key": "baojunyep",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-baojun-yep-launch-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baojun/yep",
+      "brandId": "baojun",
+      "modelId": "baojun/yep",
+      "term": "Baojun Yep",
+      "key": "baojunyep",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-baojun-yep-launch-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "baw",
+      "brandId": "baw",
+      "modelId": null,
+      "term": "BAW",
+      "key": "baw",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-company-qingdao"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baw/ruisheng-m8",
+      "brandId": "baw",
+      "modelId": "baw/ruisheng-m8",
+      "term": "BAW Ruisheng M8",
+      "key": "bawruishengm8",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-company-qingdao",
+        "src-baw-ruisheng-m8-current-2026",
+        "src-baw-ruisheng-m8-config-2026"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "baw",
+      "brandId": "baw",
+      "modelId": null,
+      "term": "Beijing Automobile Works",
+      "key": "beijingautomobileworks",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-company-qingdao"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "belgee",
+      "brandId": "belgee",
+      "modelId": null,
+      "term": "Belgee",
+      "key": "belgee",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-brand-russia-2025"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "belgee",
+      "brandId": "belgee",
+      "modelId": null,
+      "term": "BELGEE",
+      "key": "belgee",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-brand-russia-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "belgee/x50",
+      "brandId": "belgee",
+      "modelId": "belgee/x50",
+      "term": "Belgee X50",
+      "key": "belgeex50",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-brand-russia-2025",
+        "src-belgee-x50-production-2025",
+        "src-belgee-x50-two-years-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "belgee/x50",
+      "brandId": "belgee",
+      "modelId": "belgee/x50",
+      "term": "BELGEE X50",
+      "key": "belgeex50",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-x50-production-2025"
+      ]
+    },
+    {
+      "entityType": "brand",
       "entityId": "bentley",
       "brandId": "bentley",
       "modelId": null,
@@ -479,6 +904,59 @@
       "safe": true,
       "sourceIds": [
         "src-bentley-company-crewe-2025"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bestune",
+      "brandId": "bestune",
+      "modelId": null,
+      "term": "Bestune",
+      "key": "bestune",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-brand-strategy-2021"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bestune",
+      "brandId": "bestune",
+      "modelId": null,
+      "term": "BESTUNE",
+      "key": "bestune",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-brand-strategy-2021"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bestune/t90",
+      "brandId": "bestune",
+      "modelId": "bestune/t90",
+      "term": "Bestune T90",
+      "key": "bestunet90",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-brand-strategy-2021",
+        "src-bestune-t90-russia-launch-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bestune/t90",
+      "brandId": "bestune",
+      "modelId": "bestune/t90",
+      "term": "BESTUNE T90",
+      "key": "bestunet90",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-t90-russia-launch-2024"
       ]
     },
     {
@@ -536,6 +1014,46 @@
     },
     {
       "entityType": "brand",
+      "entityId": "buick",
+      "brandId": "buick",
+      "modelId": null,
+      "term": "Buick",
+      "key": "buick",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-buick-brand-history-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "buick/envista",
+      "brandId": "buick",
+      "modelId": "buick/envista",
+      "term": "Buick Envista",
+      "key": "buickenvista",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-buick-brand-history-2025",
+        "src-buick-envista-launch-2023"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "buick/envista",
+      "brandId": "buick",
+      "modelId": "buick/envista",
+      "term": "Buick Envista",
+      "key": "buickenvista",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-buick-envista-launch-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
       "entityId": "byd",
       "brandId": "byd",
       "modelId": null,
@@ -572,6 +1090,86 @@
       "safe": true,
       "sourceIds": [
         "src-wikidata-byd-seal"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "cadillac",
+      "brandId": "cadillac",
+      "modelId": null,
+      "term": "Cadillac",
+      "key": "cadillac",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-cadillac-brand-american-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "cadillac/lyriq",
+      "brandId": "cadillac",
+      "modelId": "cadillac/lyriq",
+      "term": "Cadillac LYRIQ",
+      "key": "cadillaclyriq",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-cadillac-brand-american-2022",
+        "src-cadillac-lyriq-production-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "changan",
+      "brandId": "changan",
+      "modelId": null,
+      "term": "Changan",
+      "key": "changan",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-group-established-2025"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "changan",
+      "brandId": "changan",
+      "modelId": null,
+      "term": "CHANGAN",
+      "key": "changan",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-group-established-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "changan/cs75-plus",
+      "brandId": "changan",
+      "modelId": "changan/cs75-plus",
+      "term": "Changan CS75 Plus",
+      "key": "changancs75plus",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-group-established-2025",
+        "src-changan-cs75-plus-uae-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "changan/cs75-plus",
+      "brandId": "changan",
+      "modelId": "changan/cs75-plus",
+      "term": "Changan CS75 Plus",
+      "key": "changancs75plus",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-cs75-plus-uae-2024"
       ]
     },
     {
@@ -669,6 +1267,32 @@
     },
     {
       "entityType": "model",
+      "entityId": "changan/cs75-plus",
+      "brandId": "changan",
+      "modelId": "changan/cs75-plus",
+      "term": "CS75 Plus",
+      "key": "cs75plus",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-cs75-plus-uae-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "changan/cs75-plus",
+      "brandId": "changan",
+      "modelId": "changan/cs75-plus",
+      "term": "CS75 PLUS",
+      "key": "cs75plus",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-changan-cs75-plus-uae-2024"
+      ]
+    },
+    {
+      "entityType": "model",
       "entityId": "mazda/cx-60",
       "brandId": "mazda",
       "modelId": "mazda/cx-60",
@@ -732,6 +1356,19 @@
       "sourceIds": [
         "src-volkswagen-golf-mk8-premiere-2019",
         "src-volkswagen-golf-gti-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "buick/envista",
+      "brandId": "buick",
+      "modelId": "buick/envista",
+      "term": "Envista",
+      "key": "envista",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-buick-envista-launch-2023"
       ]
     },
     {
@@ -1282,6 +1919,45 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "cadillac/lyriq",
+      "brandId": "cadillac",
+      "modelId": "cadillac/lyriq",
+      "term": "LYRIQ",
+      "key": "lyriq",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-cadillac-lyriq-production-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "cadillac/lyriq",
+      "brandId": "cadillac",
+      "modelId": "cadillac/lyriq",
+      "term": "Lyriq",
+      "key": "lyriq",
+      "kind": "punctuation",
+      "safe": true,
+      "sourceIds": [
+        "src-cadillac-lyriq-production-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "aito/m9",
+      "brandId": "aito",
+      "modelId": "aito/m9",
+      "term": "M9",
+      "key": "m9",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-aito-m9-preorder-2023"
+      ]
+    },
+    {
       "entityType": "brand",
       "entityId": "mazda",
       "brandId": "mazda",
@@ -1523,6 +2199,20 @@
     },
     {
       "entityType": "model",
+      "entityId": "baw/ruisheng-m8",
+      "brandId": "baw",
+      "modelId": "baw/ruisheng-m8",
+      "term": "Ruisheng M8",
+      "key": "ruishengm8",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-ruisheng-m8-current-2026",
+        "src-baw-ruisheng-m8-config-2026"
+      ]
+    },
+    {
+      "entityType": "model",
       "entityId": "lexus/rz",
       "brandId": "lexus",
       "modelId": "lexus/rz",
@@ -1571,6 +2261,19 @@
       "safe": true,
       "sourceIds": [
         "src-nissan-leaf-second-gen-2017"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bestune/t90",
+      "brandId": "bestune",
+      "modelId": "bestune/t90",
+      "term": "T90",
+      "key": "t90",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bestune-t90-russia-launch-2024"
       ]
     },
     {
@@ -1815,6 +2518,47 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "belgee/x50",
+      "brandId": "belgee",
+      "modelId": "belgee/x50",
+      "term": "X50",
+      "key": "x50",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-belgee-x50-production-2025",
+        "src-belgee-x50-two-years-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baic/x55",
+      "brandId": "baic",
+      "modelId": "baic/x55",
+      "term": "X55",
+      "key": "x55",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-x55-annual-2022",
+        "src-baic-x55-global-config"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baic/x55",
+      "brandId": "baic",
+      "modelId": "baic/x55",
+      "term": "X55 II",
+      "key": "x55ii",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-baic-x55-annual-2022"
+      ]
+    },
+    {
       "entityType": "generation",
       "entityId": "toyota/rav4/xa50",
       "brandId": "toyota",
@@ -1825,6 +2569,19 @@
       "safe": true,
       "sourceIds": [
         "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baojun/yep",
+      "brandId": "baojun",
+      "modelId": "baojun/yep",
+      "term": "Yep",
+      "key": "yep",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-baojun-yep-launch-2023"
       ]
     },
     {
@@ -1890,6 +2647,19 @@
       "safe": true,
       "sourceIds": [
         "src-wikidata-byd-seal"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "baw/ruisheng-m8",
+      "brandId": "baw",
+      "modelId": "baw/ruisheng-m8",
+      "term": "锐胜M8",
+      "key": "锐胜m8",
+      "kind": "localized",
+      "safe": true,
+      "sourceIds": [
+        "src-baw-ruisheng-m8-current-2026"
       ]
     }
   ],

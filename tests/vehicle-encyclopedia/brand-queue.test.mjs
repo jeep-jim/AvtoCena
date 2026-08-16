@@ -12,8 +12,8 @@ test("brand queue covers every production brand exactly once", () => {
   assert.equal(report.queue.length, 185);
   assert.equal(new Set(report.queue.map((row) => row.brand)).size, 185);
   assert.equal(report.totals.verified, 5);
-  assert.equal(report.totals.inProgress, 20);
-  assert.equal(report.totals.queued, 160);
+  assert.equal(report.totals.inProgress, 30);
+  assert.equal(report.totals.queued, 150);
 });
 
 test("legacy records remain candidates and checkpoint queues stay bounded", () => {
@@ -26,6 +26,6 @@ test("legacy records remain candidates and checkpoint queues stay bounded", () =
   assert.equal(report.checkpoints["checkpoint-03"].length, 15);
   assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-02" && row.status === "in-progress").length, 15);
   assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-02" && row.status === "queued").length, 0);
-  assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-03" && row.status === "in-progress").length, 5);
-  assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-03" && row.status === "queued").length, 10);
+  assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-03" && row.status === "in-progress").length, 15);
+  assert.equal(report.queue.filter((row) => row.checkpoint === "checkpoint-03" && row.status === "queued").length, 0);
 });

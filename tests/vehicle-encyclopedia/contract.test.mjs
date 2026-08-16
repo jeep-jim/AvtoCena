@@ -15,13 +15,13 @@ test("canonical checkpoint satisfies JSON Schema and semantic validation", async
   const result = await validateWorkspace({ root: DATA_ROOT });
   assert.deepEqual(result.errors, []);
   assert.deepEqual(result.reports.coverage.totals, {
-    source: 91,
-    brand: 25,
-    model: 25,
-    generation: 25,
+    source: 128,
+    brand: 35,
+    model: 35,
+    generation: 35,
     facelift: 2,
-    variant: 25,
-    media: 25,
+    variant: 35,
+    media: 35,
   });
 });
 
@@ -76,7 +76,7 @@ test("report generation is deterministic and remains staging-only", async () => 
   assert.equal(coverage.productionConnected, false);
   assert.equal(manifest.productionConnected, false);
   assert.equal(manifest.status, "checkpoint-seed");
-  assert.equal(coverage.byBrand.length, 25);
+  assert.equal(coverage.byBrand.length, 35);
   assert.deepEqual(manifest.completedBrands, ["Audi", "BMW", "Toyota", "BYD", "Geely"]);
-  assert.deepEqual(manifest.inProgressBrands, ["Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai", "Kia", "Mazda", "Lexus", "Volvo", "Porsche", "Ford", "Chevrolet", "Tesla", "Chery", "Haval", "Abarth", "Acura", "Alfa Romeo", "Aston Martin", "Bentley"]);
+  assert.deepEqual(manifest.inProgressBrands, ["Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai", "Kia", "Mazda", "Lexus", "Volvo", "Porsche", "Ford", "Chevrolet", "Tesla", "Chery", "Haval", "Abarth", "Acura", "Alfa Romeo", "Aston Martin", "Bentley", "AITO", "Avatr", "BAIC", "Baojun", "BAW", "Belgee", "Bestune", "Buick", "Cadillac", "Changan"]);
 });

@@ -364,6 +364,332 @@
       ],
       "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
       "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aito",
+      "canonicalName": "AITO",
+      "slug": "aito",
+      "aliases": [],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-aito-brand-seres-2025",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official AITO statement identifies its SERES provider and Chongqing address; the country is normalized to China."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "avatr",
+      "canonicalName": "Avatr",
+      "slug": "avatr",
+      "aliases": [
+        {
+          "value": "AVATR",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-avatr-brand-changan"
+          ]
+        }
+      ],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-avatr-brand-changan",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Changan identifies AVATR as an electric-vehicle brand headquartered in Chongqing; the country is normalized to China."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baic",
+      "canonicalName": "BAIC",
+      "slug": "baic",
+      "aliases": [
+        {
+          "value": "BAIC Group",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-baic-group-shanghai-2025"
+          ]
+        }
+      ],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baic-group-shanghai-2025",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release identifies BAIC Group as a Chinese automotive manufacturer."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baojun",
+      "canonicalName": "Baojun",
+      "slug": "baojun",
+      "aliases": [],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baojun-yep-launch-2023",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official SGMW China release identifies the Baojun brand and its China-market launch context."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baw",
+      "canonicalName": "BAW",
+      "slug": "baw",
+      "aliases": [
+        {
+          "value": "Beijing Automobile Works",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-baw-company-qingdao"
+          ]
+        }
+      ],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baw-company-qingdao",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official contact page identifies Beijing Automobile Works and its Qingdao address; the country is normalized to China."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "belgee",
+      "canonicalName": "Belgee",
+      "slug": "belgee",
+      "aliases": [
+        {
+          "value": "BELGEE",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-belgee-brand-russia-2025"
+          ]
+        }
+      ],
+      "countries": [
+        "Belarus"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-belgee-brand-russia-2025",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release calls Belgee a Belarusian automotive brand."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bestune",
+      "canonicalName": "Bestune",
+      "slug": "bestune",
+      "aliases": [
+        {
+          "value": "BESTUNE",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-bestune-brand-strategy-2021"
+          ]
+        }
+      ],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-bestune-brand-strategy-2021",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "FAW identifies Bestune as its Chinese automotive brand."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "buick",
+      "canonicalName": "Buick",
+      "slug": "buick",
+      "aliases": [],
+      "countries": [
+        "United States"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-buick-brand-history-2025",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "GM identifies Buick as an American automotive brand."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "cadillac",
+      "canonicalName": "Cadillac",
+      "slug": "cadillac",
+      "aliases": [],
+      "countries": [
+        "United States"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-cadillac-brand-american-2022",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "GM describes Cadillac as an American luxury marque."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "changan",
+      "canonicalName": "Changan",
+      "slug": "changan",
+      "aliases": [
+        {
+          "value": "CHANGAN",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-changan-group-established-2025"
+          ]
+        }
+      ],
+      "countries": [
+        "China"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-changan-group-established-2025",
+          "fields": [
+            "canonicalName",
+            "countries"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official announcement identifies Changan Automobile Group in Chongqing, China."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+      ],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

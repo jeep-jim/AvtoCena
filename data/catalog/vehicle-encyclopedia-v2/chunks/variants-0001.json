@@ -670,6 +670,517 @@
       ],
       "researchNotes": ["The source states 25.9 kWh battery capacity and up to 85 percent usable capacity, but does not publish an exact gross, usable or rated kWh figure; no battery field is derived.", "The 4.0-litre engine is not converted to cubic centimetres.", "power30MinKw is deliberately absent because the reviewed official source does not state an exact 30-minute value."],
       "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aito/m9/2023-launch/bev-max-six-seat-cn",
+      "modelId": "aito/m9",
+      "generationId": "aito/m9/2023-launch",
+      "faceliftId": null,
+      "name": "M9 2025 BEV Max six-seat",
+      "aliases": [],
+      "market": "China",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "BEV",
+      "fuel": "Electric",
+      "drive": "AWD",
+      "rangeKm": 630,
+      "rangeStandard": "CLTC",
+      "lengthMm": 5230,
+      "widthMm": 1999,
+      "heightMm": 1800,
+      "wheelbaseMm": 3110,
+      "seats": 6,
+      "zeroTo100Sec": 4.5,
+      "topSpeedKmh": 200,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-aito-m9-configuration-2025",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "drive",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats",
+            "zeroTo100Sec",
+            "topSpeedKmh"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Values are retained exactly as published for the 2025 BEV Max six-seat China configuration."
+        }
+      ],
+      "researchNotes": [
+        "The source lists front and rear motor values separately; they are not summed into derived system power.",
+        "The unclassified 100 kWh capacity is not relabelled as gross, usable or rated.",
+        "power30MinKw is deliberately absent because the reviewed official source does not state an exact 30-minute value."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "avatr/12/2023-launch/bev-global",
+      "modelId": "avatr/12",
+      "generationId": "avatr/12/2023-launch",
+      "faceliftId": null,
+      "name": "AVATR 12 BEV",
+      "aliases": [],
+      "market": "Global",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "bodyType": "Gran Coupe",
+      "powertrainKind": "BEV",
+      "fuel": "Electric",
+      "lengthMm": 5020,
+      "widthMm": 1999,
+      "heightMm": 1460,
+      "wheelbaseMm": 3020,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-avatr-12-premiere-2023",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official premiere establishes the original global BEV launch series."
+        },
+        {
+          "sourceId": "src-avatr-12-global-spec",
+          "fields": [
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact dimensions come from the official model page."
+        }
+      ],
+      "researchNotes": [
+        "Current generic platform power and charging claims are not tied to this launch configuration and are omitted.",
+        "Battery and range values remain unset pending an exact market-and-trim matched official document.",
+        "power30MinKw is deliberately absent because the reviewed official sources do not state an exact 30-minute value."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baic/x55/2022-global/honor-global",
+      "modelId": "baic/x55",
+      "generationId": "baic/x55/2022-global",
+      "faceliftId": null,
+      "name": "X55 Honor",
+      "aliases": [],
+      "market": "Global",
+      "yearFrom": 2026,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "engineCode": "A156T2H",
+      "transmission": "7-speed dual-clutch transmission",
+      "gears": 7,
+      "drive": "FWD",
+      "lengthMm": 4620,
+      "widthMm": 1886,
+      "heightMm": 1680,
+      "wheelbaseMm": 2735,
+      "seats": 5,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baic-x55-global-config",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCode",
+            "transmission",
+            "gears",
+            "drive",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "FF is normalized to FWD; all dimensions and transmission data are retained directly from the official table. yearFrom records the configuration as verified in 2026 and is not claimed as the Honor trim launch year."
+        }
+      ],
+      "researchNotes": [
+        "The source power entry is displayed as 138 (130) without a sufficiently clear field mapping, so no power value is stored.",
+        "The published 1498 ml displacement is not relabelled into engineCc.",
+        "The 2022 generation release does not establish when the Honor trim began; the variant year is bounded to the 2026 official-site snapshot."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baojun/yep/2023-launch/rwd-cn",
+      "modelId": "baojun/yep",
+      "generationId": "baojun/yep/2023-launch",
+      "faceliftId": null,
+      "name": "Baojun Yep EV",
+      "aliases": [],
+      "market": "China",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "BEV",
+      "fuel": "Electric",
+      "drive": "RWD",
+      "rangeKm": 303,
+      "rangeStandard": "CLTC",
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baojun-yep-launch-2023",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "drive",
+            "rangeKm",
+            "rangeStandard"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official launch values are stored for the original China-market rear-wheel-drive Yep."
+        }
+      ],
+      "researchNotes": [
+        "Battery, power and charging fields remain unset because the reviewed release does not establish them.",
+        "power30MinKw is deliberately absent because the reviewed official source does not state an exact 30-minute value."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baw/ruisheng-m8/current-2026/bev-560-flagship-7-cn",
+      "modelId": "baw/ruisheng-m8",
+      "generationId": "baw/ruisheng-m8/current-2026",
+      "faceliftId": null,
+      "name": "Ruisheng M8 BEV 560 Flagship 7-seat",
+      "aliases": [
+        {
+          "value": "纯电版560旗舰型7座",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh",
+          "market": "China",
+          "sourceIds": [
+            "src-baw-ruisheng-m8-config-2026"
+          ]
+        }
+      ],
+      "market": "China",
+      "yearFrom": 2026,
+      "yearTo": null,
+      "bodyType": "MPV",
+      "powertrainKind": "BEV",
+      "fuel": "Electric",
+      "powerKw": 170,
+      "motorPeakKw": 170,
+      "lengthMm": 5317,
+      "widthMm": 1870,
+      "heightMm": 1955,
+      "wheelbaseMm": 3200,
+      "seats": 7,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baw-ruisheng-m8-config-2026",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "powerKw",
+            "motorPeakKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official current table was reviewed in 2026; yearFrom records this verified catalog snapshot and is not claimed as the launch year."
+        }
+      ],
+      "researchNotes": [
+        "The trim-name figure 560 is not stored as range without an explicit test-standard field.",
+        "The unclassified 92 kWh battery figure is not relabelled as gross, usable or rated.",
+        "power30MinKw is deliberately absent because the reviewed official source does not state an exact 30-minute value."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "belgee/x50/2023-launch/1-5t-7dct-ru",
+      "modelId": "belgee/x50",
+      "generationId": "belgee/x50/2023-launch",
+      "faceliftId": null,
+      "name": "Belgee X50 1.5T 7DCT",
+      "aliases": [],
+      "market": "Russia",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "bodyType": "Crossover",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "transmission": "7-speed wet dual-clutch transmission",
+      "gears": 7,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-belgee-x50-two-years-2025",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "transmission",
+            "gears"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release identifies the Russian-market urban crossover powertrain and seven-speed wet DCT."
+        }
+      ],
+      "researchNotes": [
+        "The published 1.5-litre displacement is not converted into engineCc.",
+        "The 150 л.с. rating is omitted pending an exact documented horsepower standard or source-published kW pair."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bestune/t90/2024-russia/2-0t-flagship-ru",
+      "modelId": "bestune/t90",
+      "generationId": "bestune/t90/2024-russia",
+      "faceliftId": null,
+      "name": "T90 2.0T Flagship",
+      "aliases": [],
+      "market": "Russia",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "bodyType": "Crossover",
+      "powertrainKind": "ICE",
+      "fuel": "Petrol",
+      "transmission": "8-speed Aisin automatic transmission",
+      "gears": 8,
+      "zeroTo100Sec": 7.5,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-bestune-t90-russia-launch-2024",
+          "fields": [
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official January 2024 release establishes the Russian launch context."
+        },
+        {
+          "sourceId": "src-bestune-t90-trims-russia",
+          "fields": [
+            "name",
+            "transmission",
+            "gears",
+            "zeroTo100Sec"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official trim document identifies Flagship, Aisin 8AT and the metric acceleration time."
+        }
+      ],
+      "researchNotes": [
+        "The published 2.0-litre displacement is not converted into engineCc.",
+        "The 245 л.с. rating is omitted pending an exact documented horsepower standard or source-published kW pair."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "buick/envista/2024-launch/avenir-us",
+      "modelId": "buick/envista",
+      "generationId": "buick/envista/2024-launch",
+      "faceliftId": null,
+      "name": "Envista Avenir",
+      "aliases": [],
+      "market": "United States",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "ICE",
+      "transmission": "6-speed automatic transmission",
+      "gears": 6,
+      "drive": "FWD",
+      "lengthMm": 4638,
+      "widthMm": 1816,
+      "heightMm": 1556,
+      "wheelbaseMm": 2700,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-buick-envista-launch-2023",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "transmission",
+            "gears",
+            "drive",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official U.S. technical table publishes the Avenir configuration, six-speed automatic, FWD and exact dimensions."
+        }
+      ],
+      "researchNotes": [
+        "The source calls the 137 hp output expected, so it is not stored as a verified value.",
+        "The published 1.2-litre displacement is not converted into engineCc."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "cadillac/lyriq/2022-launch/standard-range-luxury-cn",
+      "modelId": "cadillac/lyriq",
+      "generationId": "cadillac/lyriq/2022-launch",
+      "faceliftId": null,
+      "name": "LYRIQ Standard Range Luxury",
+      "aliases": [],
+      "market": "China",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "BEV",
+      "fuel": "Electric",
+      "drive": "RWD",
+      "powerKw": 250,
+      "motorPeakKw": 250,
+      "rangeKm": 502,
+      "rangeStandard": "CLTC",
+      "zeroTo100Sec": 5.9,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-cadillac-lyriq-standard-range-china-2023",
+          "fields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "drive",
+            "powerKw",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "zeroTo100Sec"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Maximum motor power and CLTC range are retained exactly for the named China-market rear-wheel-drive variant."
+        }
+      ],
+      "researchNotes": [
+        "Battery and charging fields remain unset because the reviewed release does not publish an exact classification and value for this variant.",
+        "power30MinKw is deliberately absent because the reviewed official source does not state an exact 30-minute value."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "changan/cs75-plus/2024-uae/sport-uae",
+      "modelId": "changan/cs75-plus",
+      "generationId": "changan/cs75-plus/2024-uae",
+      "faceliftId": null,
+      "name": "CS75 Plus Sport",
+      "aliases": [],
+      "market": "United Arab Emirates",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "bodyType": "SUV",
+      "powertrainKind": "ICE",
+      "transmission": "8-speed Aisin automatic transmission",
+      "gears": 8,
+      "drive": "FWD",
+      "lengthMm": 4700,
+      "widthMm": 1865,
+      "heightMm": 1700,
+      "wheelbaseMm": 2710,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-changan-cs75-plus-uae-2024",
+          "fields": [
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official UAE article establishes the local 2024 SUV context."
+        },
+        {
+          "sourceId": "src-changan-cs75-plus-sport-uae",
+          "fields": [
+            "name",
+            "transmission",
+            "gears",
+            "drive",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official online configuration publishes the Sport trim drivetrain and dimensions."
+        }
+      ],
+      "researchNotes": [
+        "Conflicting official UAE power and torque values were observed, so no power or torque value is stored.",
+        "The published 2.0-litre displacement is not converted into engineCc."
+      ],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

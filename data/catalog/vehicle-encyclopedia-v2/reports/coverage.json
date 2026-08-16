@@ -2,25 +2,25 @@
   "schemaVersion": 2,
   "productionConnected": false,
   "totals": {
-    "source": 91,
-    "brand": 25,
-    "model": 25,
-    "generation": 25,
+    "source": 128,
+    "brand": 35,
+    "model": 35,
+    "generation": 35,
     "facelift": 2,
-    "variant": 25,
-    "media": 25
+    "variant": 35,
+    "media": 35
   },
   "statuses": {
     "brand": {
-      "seed": 20,
+      "seed": 30,
       "verified": 5
     },
     "model": {
-      "seed": 20,
+      "seed": 30,
       "verified": 5
     },
     "generation": {
-      "seed": 20,
+      "seed": 30,
       "verified": 5
     },
     "facelift": {
@@ -28,7 +28,7 @@
       "verified": 1
     },
     "variant": {
-      "seed": 20,
+      "seed": 30,
       "verified": 5
     }
   },
@@ -45,6 +45,15 @@
     {
       "brandId": "acura",
       "brand": "Acura",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "aito",
+      "brand": "AITO",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
@@ -79,8 +88,62 @@
       "media": 1
     },
     {
+      "brandId": "avatr",
+      "brand": "Avatr",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "baic",
+      "brand": "BAIC",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "baojun",
+      "brand": "Baojun",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "baw",
+      "brand": "BAW",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "belgee",
+      "brand": "Belgee",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
       "brandId": "bentley",
       "brand": "Bentley",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "bestune",
+      "brand": "Bestune",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
@@ -97,8 +160,35 @@
       "media": 1
     },
     {
+      "brandId": "buick",
+      "brand": "Buick",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
       "brandId": "byd",
       "brand": "BYD",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "cadillac",
+      "brand": "Cadillac",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "changan",
+      "brand": "Changan",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
@@ -261,27 +351,36 @@
   ],
   "sources": {
     "byType": {
-      "manufacturer": 29,
-      "manufacturer_technical_document": 34,
+      "manufacturer": 46,
+      "manufacturer_technical_document": 44,
       "wikidata": 3,
-      "wikimedia_commons": 25
+      "wikimedia_commons": 35
     },
     "byDomain": {
+      "aito.auto": 3,
       "astonmartin.com": 3,
       "audi-mediacenter.com": 1,
       "audi.com": 1,
+      "avatr.com": 2,
+      "baicglobal.com": 3,
+      "baw.com.cn": 3,
+      "belgee.ru": 3,
       "bentleymedia.com": 2,
+      "bestune.ru": 2,
       "bmwgroup.com": 1,
       "byd.com": 2,
+      "changan.ae": 2,
       "cheryinternational.com": 3,
-      "commons.wikimedia.org": 25,
+      "commons.wikimedia.org": 35,
       "corporate.ford.com": 1,
+      "faw.com": 1,
       "ford.com": 1,
       "geely.com": 2,
       "global.geely.com": 2,
       "global.honda": 3,
       "global.nissannews.com": 3,
       "global.toyota": 1,
+      "globalchangan.com": 2,
       "group.mercedes-benz.com": 1,
       "gwm-global.com": 2,
       "hondanews.com": 1,
@@ -289,11 +388,14 @@
       "hyundai.news": 1,
       "kiapressoffice.com": 1,
       "mazda.com": 1,
+      "media.cadillac.com": 1,
+      "media.gm.com": 1,
       "media.mercedes-benz.com": 1,
       "media.stellantis.com": 5,
       "media.toyota.co.uk": 2,
       "mustang-mach-e.fordpresskits.com": 1,
       "news.chevrolet.com.mx": 1,
+      "news.gm.com": 4,
       "newsroom.lexus.eu": 2,
       "newsroom.mazda.com": 1,
       "newsroom.porsche.com": 2,
@@ -311,7 +413,7 @@
     {
       "file": "brands-0001.json",
       "entityType": "brand",
-      "records": 25,
+      "records": 35,
       "maxRecords": 250
     },
     {
@@ -323,31 +425,31 @@
     {
       "file": "generations-0001.json",
       "entityType": "generation",
-      "records": 25,
+      "records": 35,
       "maxRecords": 250
     },
     {
       "file": "media-0001.json",
       "entityType": "media",
-      "records": 25,
+      "records": 35,
       "maxRecords": 250
     },
     {
       "file": "models-0001.json",
       "entityType": "model",
-      "records": 25,
+      "records": 35,
       "maxRecords": 250
     },
     {
       "file": "sources-0001.json",
       "entityType": "source",
-      "records": 91,
+      "records": 128,
       "maxRecords": 250
     },
     {
       "file": "variants-0001.json",
       "entityType": "variant",
-      "records": 25,
+      "records": 35,
       "maxRecords": 250
     }
   ]

@@ -407,6 +407,313 @@
       ],
       "researchNotes": ["No internal platform code is inferred."],
       "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aito/m9/2023-launch",
+      "modelId": "aito/m9",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-aito-m9-preorder-2023",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official Q4 2023 launch schedule; no internal platform code is inferred."
+        }
+      ],
+      "researchNotes": [
+        "The grouping does not claim an internal AITO generation code."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "avatr/12/2023-launch",
+      "modelId": "avatr/12",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Gran Coupe"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-avatr-12-premiere-2023",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official 2023 world premiere and delivery timing; no internal platform code is inferred."
+        }
+      ],
+      "researchNotes": [
+        "The grouping covers the original BEV launch series only."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baic/x55/2022-global",
+      "modelId": "baic/x55",
+      "name": "2022 global series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baic-x55-annual-2022",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official X55 II release and international rollout in 2022."
+        },
+        {
+          "sourceId": "src-baic-x55-global-config",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official current model configuration establishes the SUV body."
+        }
+      ],
+      "researchNotes": [
+        "No internal platform code is inferred."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baojun/yep/2023-launch",
+      "modelId": "baojun/yep",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baojun-yep-launch-2023",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official May 2023 China launch."
+        }
+      ],
+      "researchNotes": [
+        "No internal platform code is inferred."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baw/ruisheng-m8/current-2026",
+      "modelId": "baw/ruisheng-m8",
+      "name": "2026 official-site snapshot",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baw-ruisheng-m8-current-2026",
+          "fields": [
+            "name",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping represents the official BAW range observed in 2026 and does not claim a launch year."
+        }
+      ],
+      "researchNotes": [
+        "productionFrom remains null because the official pages reviewed do not establish it."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "belgee/x50/2023-launch",
+      "modelId": "belgee/x50",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023-07",
+      "productionTo": null,
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-belgee-x50-production-2025",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official July 2023 start of Belgee X50 production."
+        }
+      ],
+      "researchNotes": [
+        "No internal platform code is inferred."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bestune/t90/2024-russia",
+      "modelId": "bestune/t90",
+      "name": "2024 Russia launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-bestune-t90-russia-launch-2024",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official January 2024 Russian market launch."
+        }
+      ],
+      "researchNotes": [
+        "This market grouping does not claim the earliest global T90 production date."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "buick/envista/2024-launch",
+      "modelId": "buick/envista",
+      "name": "2024 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-buick-envista-launch-2023",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official U.S. reveal of the 2024 Envista."
+        }
+      ],
+      "researchNotes": [
+        "No internal platform code is inferred."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "cadillac/lyriq/2022-launch",
+      "modelId": "cadillac/lyriq",
+      "name": "2022 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022-03",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-cadillac-lyriq-production-2022",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official March 2022 start of retail production."
+        }
+      ],
+      "researchNotes": [
+        "No internal GM platform code is inferred from the Ultium architecture name."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "changan/cs75-plus/2024-uae",
+      "modelId": "changan/cs75-plus",
+      "name": "2024 UAE series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-changan-cs75-plus-uae-2024",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Descriptive grouping follows the official UAE 2024 model article and does not claim a global generation boundary."
+        }
+      ],
+      "researchNotes": [
+        "No internal platform or global generation code is inferred."
+      ],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

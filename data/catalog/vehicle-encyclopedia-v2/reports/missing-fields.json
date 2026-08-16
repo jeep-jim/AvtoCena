@@ -406,6 +406,150 @@
         "batteryCapacityKwh",
         "engineCc"
       ]
+    },
+    {
+      "entityId": "aito/m9/2023-launch/bev-max-six-seat-cn",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "curbWeightKg",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "avatr/12/2023-launch/bev-global",
+      "missing": [
+        "transmission",
+        "drive",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "baic/x55/2022-global/honor-global",
+      "missing": [
+        "powerKw",
+        "curbWeightKg",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "baojun/yep/2023-launch/rwd-cn",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "baw/ruisheng-m8/current-2026/bev-560-flagship-7-cn",
+      "missing": [
+        "transmission",
+        "drive",
+        "curbWeightKg",
+        "doors",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "belgee/x50/2023-launch/1-5t-7dct-ru",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "bestune/t90/2024-russia/2-0t-flagship-ru",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "buick/envista/2024-launch/avenir-us",
+      "missing": [
+        "fuel",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "cadillac/lyriq/2022-launch/standard-range-luxury-cn",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "changan/cs75-plus/2024-uae/sport-uae",
+      "missing": [
+        "fuel",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
     }
   ]
 }
