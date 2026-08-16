@@ -1,5 +1,5 @@
-name: Catalog failed-generation cleanup dry-run 2026-08-16
-run-name: Safe failed-generation cleanup dry-run · ${{ github.sha }}
+name: Catalog failed-generation cleanup apply 2026-08-16
+run-name: Safe failed-generation cleanup apply · ${{ github.sha }}
 
 on:
   push:
@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  dry-run:
-    name: Inspect unreachable generations without deleting
+  cleanup:
+    name: Remove only unreachable generations
     runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
@@ -30,8 +30,8 @@ jobs:
       YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
-      CATALOG_FAILED_GENERATION_CLEANUP_REPORT: catalog-failed-generation-cleanup-dry-run.json
-      CATALOG_FAILED_GENERATION_CLEANUP_DRY_RUN: "true"
+      CATALOG_FAILED_GENERATION_CLEANUP_REPORT: catalog-failed-generation-cleanup-apply.json
+      CATALOG_FAILED_GENERATION_CLEANUP_DRY_RUN: "false"
       CATALOG_FAILED_GENERATION_MAX_DELETES: "300000"
       CATALOG_FAILED_GENERATION_KEEP: "2"
       CATALOG_FAILED_GENERATION_PROTECT: "gen_1786426826475_e390aa80"
@@ -47,13 +47,13 @@ jobs:
         run: |
           node --check scripts/catalog-clean-failed-generations.mjs
           node --import tsx --test tests/catalog-v2-market-recovery.test.ts
-      - name: Inspect unreachable generations only
+      - name: Remove unreachable generations
         run: npx tsx scripts/catalog-clean-failed-generations.mjs
-      - name: Write dry-run summary
+      - name: Write cleanup summary
         if: always()
         shell: bash
         run: |
-          echo "### Catalog failed-generation cleanup dry-run" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Catalog failed-generation cleanup apply" >> "$GITHUB_STEP_SUMMARY"
           if [ -s "$CATALOG_FAILED_GENERATION_CLEANUP_REPORT" ]; then
             echo '```json' >> "$GITHUB_STEP_SUMMARY"
             cat "$CATALOG_FAILED_GENERATION_CLEANUP_REPORT" >> "$GITHUB_STEP_SUMMARY"
@@ -61,11 +61,11 @@ jobs:
           else
             echo "Cleanup report was not created." >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Upload cleanup dry-run report
+      - name: Upload cleanup report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: catalog-failed-generation-cleanup-dry-run
-          path: catalog-failed-generation-cleanup-dry-run.json
+          name: catalog-failed-generation-cleanup-apply
+          path: catalog-failed-generation-cleanup-apply.json
           if-no-files-found: error
           retention-days: 7
