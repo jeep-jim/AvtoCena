@@ -405,6 +405,107 @@
       ],
       "researchNotes": ["Checkpoint seed: one Thailand-market Hybrid SUV configuration is represented; ICE, PHEV, later facelifts and other markets remain open."],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "abarth/500e",
+      "brandId": "abarth",
+      "canonicalName": "500e",
+      "slug": "500e",
+      "aliases": [
+        { "value": "Abarth 500e", "kind": "source_spelling", "safe": true, "language": "en", "market": "Europe", "sourceIds": ["src-abarth-500e-launch-2022"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback", "Cabriolet"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-abarth-500e-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-abarth-500e-launch-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official European launch identifies the all-electric 500e and shows both hatchback and cabriolet forms." }
+      ],
+      "researchNotes": ["Checkpoint seed: one European launch configuration is represented; later trims, model years and non-European markets remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "acura/zdx",
+      "brandId": "acura",
+      "canonicalName": "ZDX",
+      "slug": "zdx",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-acura-zdx-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-acura-zdx-debut-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Honda's global debut release identifies ZDX as Acura's first all-electric SUV and dates first deliveries to early 2024." }
+      ],
+      "researchNotes": ["Checkpoint seed: the 2024 North American Type S is represented; A-Spec versions and final production-end evidence remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "alfa-romeo/junior",
+      "brandId": "alfa-romeo",
+      "canonicalName": "Junior",
+      "slug": "junior",
+      "aliases": [
+        { "value": "Milano", "kind": "historical", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-alfa-romeo-junior-name-2024"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Compact crossover"],
+      "powertrainKinds": ["BEV", "MHEV"],
+      "mediaIds": ["media-alfa-romeo-junior-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-alfa-romeo-junior-name-2024", "fields": ["canonicalName"], "status": "verified", "confidence": "official", "note": "Alfa Romeo officially changed the recently unveiled model name from Milano to Junior on 15 April 2024." },
+        { "sourceId": "src-alfa-romeo-junior-swiss-2024", "fields": ["productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The Swiss launch identifies the Junior as a compact crossover available in 2024 with battery-electric and mild-hybrid powertrains." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Swiss-market Elettrica configuration is represented; other electric and hybrid versions and markets remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aston-martin/db12",
+      "brandId": "aston-martin",
+      "canonicalName": "DB12",
+      "slug": "db12",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-aston-martin-db12-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-aston-martin-db12-launch-2023", "fields": ["canonicalName", "productionFrom", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official May 2023 launch identifies DB12 as the first of Aston Martin's next generation of sports cars with a V8 powertrain." },
+        { "sourceId": "src-aston-martin-db12-spec-uk", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "The official UK technical page identifies the DB12 V8 Coupe." }
+      ],
+      "researchNotes": ["Checkpoint seed: one global-launch V8 Coupe configuration is represented; Volante and later versions remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bentley/continental-gt",
+      "brandId": "bentley",
+      "canonicalName": "Continental GT",
+      "slug": "continental-gt",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "powertrainKinds": ["PHEV"],
+      "mediaIds": ["media-bentley-continental-gt-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-bentley-continental-gt-speed-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The source reveals the fourth-generation Continental GT Speed coupe in June 2024 with an Ultra Performance Hybrid plug-in powertrain." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the fourth-generation Continental GT Speed launch configuration is represented; other fourth-generation trims and the earlier nameplate history remain open."],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

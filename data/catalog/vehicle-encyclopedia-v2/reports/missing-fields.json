@@ -317,6 +317,95 @@
         "doors",
         "engineCc"
       ]
+    },
+    {
+      "entityId": "abarth/500e/2022-launch/hatchback-eu",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "acura/zdx/2024-launch/type-s-us",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "alfa-romeo/junior/2024-launch/elettrica-ch",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "aston-martin/db12/2023-launch/v8-coupe-global",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "bentley/continental-gt/fourth-generation/speed-global",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "engineCc"
+      ]
     }
   ]
 }

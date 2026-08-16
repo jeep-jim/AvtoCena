@@ -10,28 +10,65 @@
   "totals": {
     "productionBrands": 185,
     "verified": 5,
-    "inProgress": 15,
-    "queued": 165,
+    "inProgress": 20,
+    "queued": 160,
     "legacyCandidateModels": 4899,
     "legacyCandidateVariants": 15735
   },
+  "activeCheckpoint": "checkpoint-03",
   "nextCheckpoint": [
-    "Mercedes-Benz",
-    "Volkswagen",
-    "Honda",
-    "Nissan",
-    "Hyundai",
-    "Kia",
-    "Mazda",
-    "Lexus",
-    "Volvo",
-    "Porsche",
-    "Ford",
-    "Chevrolet",
-    "Tesla",
-    "Chery",
-    "Haval"
+    "Abarth",
+    "Acura",
+    "AITO",
+    "Alfa Romeo",
+    "Aston Martin",
+    "Avatr",
+    "BAIC",
+    "Baojun",
+    "BAW",
+    "Belgee",
+    "Bentley",
+    "Bestune",
+    "Buick",
+    "Cadillac",
+    "Changan"
   ],
+  "checkpoints": {
+    "checkpoint-02": [
+      "Mercedes-Benz",
+      "Volkswagen",
+      "Honda",
+      "Nissan",
+      "Hyundai",
+      "Kia",
+      "Mazda",
+      "Lexus",
+      "Volvo",
+      "Porsche",
+      "Ford",
+      "Chevrolet",
+      "Tesla",
+      "Chery",
+      "Haval"
+    ],
+    "checkpoint-03": [
+      "Abarth",
+      "Acura",
+      "AITO",
+      "Alfa Romeo",
+      "Aston Martin",
+      "Avatr",
+      "BAIC",
+      "Baojun",
+      "BAW",
+      "Belgee",
+      "Bentley",
+      "Bestune",
+      "Buick",
+      "Cadillac",
+      "Changan"
+    ]
+  },
   "rule": "Legacy counts are research-queue candidates only and are never treated as proven V2 facts.",
   "queue": [
     {
@@ -46,11 +83,11 @@
     {
       "position": 2,
       "brand": "Abarth",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "abarth",
       "legacyCandidateModels": 6,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 3,
@@ -64,11 +101,11 @@
     {
       "position": 4,
       "brand": "Acura",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "acura",
       "legacyCandidateModels": 23,
       "legacyCandidateVariants": 17,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 5,
@@ -77,16 +114,16 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 6,
       "brand": "Alfa Romeo",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "alfa-romeo",
       "legacyCandidateModels": 81,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 7,
@@ -127,11 +164,11 @@
     {
       "position": 11,
       "brand": "Aston Martin",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "aston-martin",
       "legacyCandidateModels": 27,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 12,
@@ -149,7 +186,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 14,
@@ -158,7 +195,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 7,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 15,
@@ -167,7 +204,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 16,
@@ -176,7 +213,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 17,
@@ -185,16 +222,16 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 18,
       "brand": "Bentley",
-      "status": "queued",
-      "v2BrandId": null,
+      "status": "in-progress",
+      "v2BrandId": "bentley",
       "legacyCandidateModels": 36,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 19,
@@ -203,7 +240,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 0,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 20,
@@ -239,7 +276,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 44,
       "legacyCandidateVariants": 128,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 24,
@@ -257,7 +294,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 49,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 26,
@@ -284,7 +321,7 @@
       "v2BrandId": null,
       "legacyCandidateModels": 4,
       "legacyCandidateVariants": 0,
-      "checkpoint": null
+      "checkpoint": "checkpoint-03"
     },
     {
       "position": 29,

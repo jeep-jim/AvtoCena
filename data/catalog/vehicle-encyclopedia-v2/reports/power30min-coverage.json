@@ -1,7 +1,7 @@
 {
   "generatedFrom": "vehicle-encyclopedia-v2 canonical chunks",
   "rule": "Exact documented value only; never derived from peak power.",
-  "eligibleVariants": 13,
+  "eligibleVariants": 17,
   "documentedVariants": 0,
   "missingVariants": [
     "audi/q6-e-tron/2024/performance-eu",
@@ -16,7 +16,11 @@
     "porsche/taycan/2019-launch/4s-performance-battery-plus-eu",
     "ford/mustang-mach-e/2026-model-year/gt-us",
     "chevrolet/blazer-ev/2024-launch/ss-us",
-    "tesla/model-3/2024-series/performance-au"
+    "tesla/model-3/2024-series/performance-au",
+    "abarth/500e/2022-launch/hatchback-eu",
+    "acura/zdx/2024-launch/type-s-us",
+    "alfa-romeo/junior/2024-launch/elettrica-ch",
+    "bentley/continental-gt/fourth-generation/speed-global"
   ],
   "coveragePercent": 0
 }

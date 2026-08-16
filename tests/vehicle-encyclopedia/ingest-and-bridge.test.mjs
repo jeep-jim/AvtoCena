@@ -21,7 +21,7 @@ test("ingestion is a validated dry run and preserves totals for an empty batch",
   const prepared = await prepareIngestion({ inputFile: path.join(DATA_ROOT, "ingest/_template.json"), root: DATA_ROOT });
   assert.equal(prepared.valid, true);
   assert.deepEqual(prepared.changedTypes, ["source"]);
-  assert.equal(prepared.totals.source, 74);
+  assert.equal(prepared.totals.source, 91);
 });
 
 test("ingestion refuses a silent replacement of an existing ID", async () => {
@@ -40,8 +40,8 @@ test("legacy preview is review-only and excludes seed and kW-only entities", asy
   assert.equal(report.legacyBaseline.models, 4899);
   assert.equal(report.legacyBaseline.variants, 15735);
   assert.equal(variants.length, 2);
-  assert.equal(report.excludedModels.length, 15);
-  assert.equal(report.excludedVariants.length, 18);
-  assert.equal(report.excludedVariants.filter((row) => row.reason === "entity_status_not_verified").length, 15);
+  assert.equal(report.excludedModels.length, 20);
+  assert.equal(report.excludedVariants.length, 23);
+  assert.equal(report.excludedVariants.filter((row) => row.reason === "entity_status_not_verified").length, 20);
   assert.equal(report.excludedVariants.filter((row) => row.reason.includes("powerHp")).length, 3);
 });

@@ -326,6 +326,87 @@
       ],
       "researchNotes": ["No internal platform code beyond the published GWM LEMON name is inferred."],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "abarth/500e/2022-launch",
+      "modelId": "abarth/500e",
+      "name": "2022 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback", "Cabriolet"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-abarth-500e-launch-2022", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the November 2022 European launch; no internal platform code is inferred." }
+      ],
+      "researchNotes": ["This checkpoint grouping is launch-bounded and does not claim an internal Abarth generation code."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "acura/zdx/2024-launch",
+      "modelId": "acura/zdx",
+      "name": "2024 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-acura-zdx-debut-2023", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the all-electric 2024 ZDX global debut; no internal platform code is inferred." }
+      ],
+      "researchNotes": ["The source states that ZDX uses an EV platform developed with GM but does not publish an internal platform code."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "alfa-romeo/junior/2024-launch",
+      "modelId": "alfa-romeo/junior",
+      "name": "2024 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Compact crossover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-alfa-romeo-junior-swiss-2024", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the 2024 Swiss launch of the compact crossover; no internal platform code is inferred." }
+      ],
+      "researchNotes": ["The earlier Milano launch name is retained only as a model alias backed by the official renaming notice."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aston-martin/db12/2023-launch",
+      "modelId": "aston-martin/db12",
+      "name": "2023 launch series",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-aston-martin-db12-launch-2023", "fields": ["name", "productionFrom"], "status": "verified", "confidence": "official", "note": "Descriptive grouping follows the official May 2023 reveal as the first of Aston Martin's next generation of sports cars." },
+        { "sourceId": "src-aston-martin-db12-spec-uk", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "The official UK technical page identifies the coupe body." }
+      ],
+      "researchNotes": ["No internal platform code is inferred."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bentley/continental-gt/fourth-generation",
+      "modelId": "bentley/continental-gt",
+      "name": "Fourth generation",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-bentley-continental-gt-speed-2024", "fields": ["name", "productionFrom", "bodyTypes"], "status": "verified", "confidence": "official", "note": "Bentley's official reveal explicitly identifies the fourth generation, the coupe sibling and Q3 2024 production timing." }
+      ],
+      "researchNotes": ["No internal platform code is inferred."],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

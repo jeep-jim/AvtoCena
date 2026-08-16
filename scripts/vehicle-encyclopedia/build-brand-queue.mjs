@@ -4,11 +4,23 @@ import { WORKSPACE_ROOT, loadWorkspace, readJson, writeJson } from "./lib.mjs";
 
 const REPO_ROOT = path.resolve(WORKSPACE_ROOT, "../../..");
 const LEGACY_ROOT = path.resolve(WORKSPACE_ROOT, "../vehicle-knowledge");
-const NEXT_CHECKPOINT = [
-  "Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai",
-  "Kia", "Mazda", "Lexus", "Volvo", "Porsche",
-  "Ford", "Chevrolet", "Tesla", "Chery", "Haval",
-];
+const CHECKPOINTS = {
+  "checkpoint-02": [
+    "Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai",
+    "Kia", "Mazda", "Lexus", "Volvo", "Porsche",
+    "Ford", "Chevrolet", "Tesla", "Chery", "Haval",
+  ],
+  "checkpoint-03": [
+    "Abarth", "Acura", "AITO", "Alfa Romeo", "Aston Martin",
+    "Avatr", "BAIC", "Baojun", "BAW", "Belgee",
+    "Bentley", "Bestune", "Buick", "Cadillac", "Changan",
+  ],
+};
+const ACTIVE_CHECKPOINT = "checkpoint-03";
+
+function checkpointFor(brand) {
+  return Object.entries(CHECKPOINTS).find(([, brands]) => brands.includes(brand))?.[0] || null;
+}
 
 async function readLegacyCollection(collection) {
   const index = await readJson(path.join(LEGACY_ROOT, `${collection}-index.json`));
@@ -52,7 +64,7 @@ const queue = productionBrands.map((brand, index) => {
     v2BrandId: v2Brand?.id || null,
     legacyCandidateModels: modelCounts.get(key) || 0,
     legacyCandidateVariants: variantCounts.get(key) || 0,
-    checkpoint: NEXT_CHECKPOINT.includes(brand) ? "checkpoint-02" : null,
+    checkpoint: checkpointFor(brand),
   };
 });
 
@@ -73,10 +85,12 @@ const report = {
     legacyCandidateModels: legacyModels.index.total,
     legacyCandidateVariants: legacyVariants.index.total,
   },
-  nextCheckpoint: NEXT_CHECKPOINT,
+  activeCheckpoint: ACTIVE_CHECKPOINT,
+  nextCheckpoint: CHECKPOINTS[ACTIVE_CHECKPOINT],
+  checkpoints: CHECKPOINTS,
   rule: "Legacy counts are research-queue candidates only and are never treated as proven V2 facts.",
   queue,
 };
 
 await writeJson(path.join(WORKSPACE_ROOT, "reports/brand-queue.json"), report);
-console.log(JSON.stringify({ built: true, ...report.totals, checkpointBrands: NEXT_CHECKPOINT.length }, null, 2));
+console.log(JSON.stringify({ built: true, ...report.totals, activeCheckpoint: ACTIVE_CHECKPOINT, checkpointBrands: CHECKPOINTS[ACTIVE_CHECKPOINT].length }, null, 2));

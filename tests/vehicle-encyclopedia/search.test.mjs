@@ -41,6 +41,11 @@ test("checkpoint seeds are searchable without being treated as verified exports"
   assert.equal(resolveSearch(index, "Model 3", { make: "Tesla" }).resolved?.entry.entityId, "tesla/model-3");
   assert.equal(resolveSearch(index, "Tiggo 7 Pro Max", { make: "Chery" }).resolved?.entry.entityId, "chery/tiggo-7-pro-max");
   assert.equal(resolveSearch(index, "HAVAL H6").resolved?.entry.entityId, "haval/h6");
+  assert.equal(resolveSearch(index, "Abarth 500e").resolved?.entry.entityId, "abarth/500e");
+  assert.equal(resolveSearch(index, "ZDX", { make: "Acura" }).resolved?.entry.entityId, "acura/zdx");
+  assert.equal(resolveSearch(index, "Milano", { make: "Alfa Romeo" }).resolved?.entry.entityId, "alfa-romeo/junior");
+  assert.equal(resolveSearch(index, "DB12", { make: "Aston Martin" }).resolved?.entry.entityId, "aston-martin/db12");
+  assert.equal(resolveSearch(index, "Continental GT", { make: "Bentley" }).resolved?.entry.entityId, "bentley/continental-gt");
 });
 
 test("unknown and ambiguous exact terms are not auto-resolved", () => {

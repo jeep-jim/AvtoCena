@@ -2,25 +2,25 @@
   "schemaVersion": 2,
   "productionConnected": false,
   "totals": {
-    "source": 74,
-    "brand": 20,
-    "model": 20,
-    "generation": 20,
+    "source": 91,
+    "brand": 25,
+    "model": 25,
+    "generation": 25,
     "facelift": 2,
-    "variant": 20,
-    "media": 20
+    "variant": 25,
+    "media": 25
   },
   "statuses": {
     "brand": {
-      "seed": 15,
+      "seed": 20,
       "verified": 5
     },
     "model": {
-      "seed": 15,
+      "seed": 20,
       "verified": 5
     },
     "generation": {
-      "seed": 15,
+      "seed": 20,
       "verified": 5
     },
     "facelift": {
@@ -28,14 +28,59 @@
       "verified": 1
     },
     "variant": {
-      "seed": 15,
+      "seed": 20,
       "verified": 5
     }
   },
   "byBrand": [
     {
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "acura",
+      "brand": "Acura",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
       "brandId": "audi",
       "brand": "Audi",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 1
+    },
+    {
+      "brandId": "bentley",
+      "brand": "Bentley",
       "models": 1,
       "generations": 1,
       "facelifts": 0,
@@ -216,23 +261,25 @@
   ],
   "sources": {
     "byType": {
-      "manufacturer": 24,
-      "manufacturer_technical_document": 27,
+      "manufacturer": 29,
+      "manufacturer_technical_document": 34,
       "wikidata": 3,
-      "wikimedia_commons": 20
+      "wikimedia_commons": 25
     },
     "byDomain": {
+      "astonmartin.com": 3,
       "audi-mediacenter.com": 1,
       "audi.com": 1,
+      "bentleymedia.com": 2,
       "bmwgroup.com": 1,
       "byd.com": 2,
       "cheryinternational.com": 3,
-      "commons.wikimedia.org": 20,
+      "commons.wikimedia.org": 25,
       "corporate.ford.com": 1,
       "ford.com": 1,
       "geely.com": 2,
       "global.geely.com": 2,
-      "global.honda": 1,
+      "global.honda": 3,
       "global.nissannews.com": 3,
       "global.toyota": 1,
       "group.mercedes-benz.com": 1,
@@ -243,6 +290,7 @@
       "kiapressoffice.com": 1,
       "mazda.com": 1,
       "media.mercedes-benz.com": 1,
+      "media.stellantis.com": 5,
       "media.toyota.co.uk": 2,
       "mustang-mach-e.fordpresskits.com": 1,
       "news.chevrolet.com.mx": 1,
@@ -263,7 +311,7 @@
     {
       "file": "brands-0001.json",
       "entityType": "brand",
-      "records": 20,
+      "records": 25,
       "maxRecords": 250
     },
     {
@@ -275,31 +323,31 @@
     {
       "file": "generations-0001.json",
       "entityType": "generation",
-      "records": 20,
+      "records": 25,
       "maxRecords": 250
     },
     {
       "file": "media-0001.json",
       "entityType": "media",
-      "records": 20,
+      "records": 25,
       "maxRecords": 250
     },
     {
       "file": "models-0001.json",
       "entityType": "model",
-      "records": 20,
+      "records": 25,
       "maxRecords": 250
     },
     {
       "file": "sources-0001.json",
       "entityType": "source",
-      "records": 74,
+      "records": 91,
       "maxRecords": 250
     },
     {
       "file": "variants-0001.json",
       "entityType": "variant",
-      "records": 20,
+      "records": 25,
       "maxRecords": 250
     }
   ]

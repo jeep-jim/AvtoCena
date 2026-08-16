@@ -15,13 +15,13 @@ test("canonical checkpoint satisfies JSON Schema and semantic validation", async
   const result = await validateWorkspace({ root: DATA_ROOT });
   assert.deepEqual(result.errors, []);
   assert.deepEqual(result.reports.coverage.totals, {
-    source: 74,
-    brand: 20,
-    model: 20,
-    generation: 20,
+    source: 91,
+    brand: 25,
+    model: 25,
+    generation: 25,
     facelift: 2,
-    variant: 20,
-    media: 20,
+    variant: 25,
+    media: 25,
   });
 });
 
@@ -76,7 +76,7 @@ test("report generation is deterministic and remains staging-only", async () => 
   assert.equal(coverage.productionConnected, false);
   assert.equal(manifest.productionConnected, false);
   assert.equal(manifest.status, "checkpoint-seed");
-  assert.equal(coverage.byBrand.length, 20);
+  assert.equal(coverage.byBrand.length, 25);
   assert.deepEqual(manifest.completedBrands, ["Audi", "BMW", "Toyota", "BYD", "Geely"]);
-  assert.deepEqual(manifest.inProgressBrands, ["Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai", "Kia", "Mazda", "Lexus", "Volvo", "Porsche", "Ford", "Chevrolet", "Tesla", "Chery", "Haval"]);
+  assert.deepEqual(manifest.inProgressBrands, ["Mercedes-Benz", "Volkswagen", "Honda", "Nissan", "Hyundai", "Kia", "Mazda", "Lexus", "Volvo", "Porsche", "Ford", "Chevrolet", "Tesla", "Chery", "Haval", "Abarth", "Acura", "Alfa Romeo", "Aston Martin", "Bentley"]);
 });

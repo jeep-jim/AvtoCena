@@ -55,6 +55,19 @@
     },
     {
       "entityType": "generation",
+      "entityId": "abarth/500e/2022-launch",
+      "brandId": "abarth",
+      "modelId": "abarth/500e",
+      "term": "2022 launch series",
+      "key": "2022launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-500e-launch-2022"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "lexus/rz/2022-launch",
       "brandId": "lexus",
       "modelId": "lexus/rz",
@@ -107,6 +120,20 @@
     },
     {
       "entityType": "generation",
+      "entityId": "aston-martin/db12/2023-launch",
+      "brandId": "aston-martin",
+      "modelId": "aston-martin/db12",
+      "term": "2023 launch series",
+      "key": "2023launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-aston-martin-db12-launch-2023",
+        "src-aston-martin-db12-spec-uk"
+      ]
+    },
+    {
+      "entityType": "generation",
       "entityId": "volvo/ex30/2023-launch",
       "brandId": "volvo",
       "modelId": "volvo/ex30",
@@ -116,6 +143,32 @@
       "safe": true,
       "sourceIds": [
         "src-volvo-ex30-launch-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "acura/zdx/2024-launch",
+      "brandId": "acura",
+      "modelId": "acura/zdx",
+      "term": "2024 launch series",
+      "key": "2024launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-acura-zdx-debut-2023"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "alfa-romeo/junior/2024-launch",
+      "brandId": "alfa-romeo",
+      "modelId": "alfa-romeo/junior",
+      "term": "2024 launch series",
+      "key": "2024launchseries",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-alfa-romeo-junior-swiss-2024"
       ]
     },
     {
@@ -198,6 +251,157 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "abarth/500e",
+      "brandId": "abarth",
+      "modelId": "abarth/500e",
+      "term": "500e",
+      "key": "500e",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-500e-launch-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "abarth",
+      "brandId": "abarth",
+      "modelId": null,
+      "term": "Abarth",
+      "key": "abarth",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-brand-turin-2024"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "abarth/500e",
+      "brandId": "abarth",
+      "modelId": "abarth/500e",
+      "term": "Abarth 500e",
+      "key": "abarth500e",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-brand-turin-2024",
+        "src-abarth-500e-launch-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "abarth/500e",
+      "brandId": "abarth",
+      "modelId": "abarth/500e",
+      "term": "Abarth 500e",
+      "key": "abarth500e",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-500e-launch-2022"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "abarth",
+      "brandId": "abarth",
+      "modelId": null,
+      "term": "Abarth & C.",
+      "key": "abarthandc",
+      "kind": "historical",
+      "safe": true,
+      "sourceIds": [
+        "src-abarth-brand-turin-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "acura",
+      "brandId": "acura",
+      "modelId": null,
+      "term": "Acura",
+      "key": "acura",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-acura-honda-brand-2005",
+        "src-honda-company-overview"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "acura/zdx",
+      "brandId": "acura",
+      "modelId": "acura/zdx",
+      "term": "Acura ZDX",
+      "key": "acurazdx",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-acura-honda-brand-2005",
+        "src-honda-company-overview",
+        "src-acura-zdx-debut-2023"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "alfa-romeo",
+      "brandId": "alfa-romeo",
+      "modelId": null,
+      "term": "Alfa Romeo",
+      "key": "alfaromeo",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-alfa-romeo-brand-115-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "alfa-romeo/junior",
+      "brandId": "alfa-romeo",
+      "modelId": "alfa-romeo/junior",
+      "term": "Alfa Romeo Junior",
+      "key": "alfaromeojunior",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-alfa-romeo-brand-115-2025",
+        "src-alfa-romeo-junior-name-2024",
+        "src-alfa-romeo-junior-swiss-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "aston-martin",
+      "brandId": "aston-martin",
+      "modelId": null,
+      "term": "Aston Martin",
+      "key": "astonmartin",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-aston-martin-company-uk-2018"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "aston-martin/db12",
+      "brandId": "aston-martin",
+      "modelId": "aston-martin/db12",
+      "term": "Aston Martin DB12",
+      "key": "astonmartindb12",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-aston-martin-company-uk-2018",
+        "src-aston-martin-db12-launch-2023",
+        "src-aston-martin-db12-spec-uk"
+      ]
+    },
+    {
       "entityType": "brand",
       "entityId": "audi",
       "brandId": "audi",
@@ -235,6 +439,46 @@
       "sourceIds": [
         "src-audi-company-legal",
         "src-audi-q6-technical-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bentley",
+      "brandId": "bentley",
+      "modelId": null,
+      "term": "Bentley",
+      "key": "bentley",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bentley-company-crewe-2025"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "bentley/continental-gt",
+      "brandId": "bentley",
+      "modelId": "bentley/continental-gt",
+      "term": "Bentley Continental GT",
+      "key": "bentleycontinentalgt",
+      "kind": "canonical_make_model",
+      "safe": true,
+      "sourceIds": [
+        "src-bentley-company-crewe-2025",
+        "src-bentley-continental-gt-speed-2024"
+      ]
+    },
+    {
+      "entityType": "brand",
+      "entityId": "bentley",
+      "brandId": "bentley",
+      "modelId": null,
+      "term": "Bentley Motors",
+      "key": "bentleymotors",
+      "kind": "source_spelling",
+      "safe": true,
+      "sourceIds": [
+        "src-bentley-company-crewe-2025"
       ]
     },
     {
@@ -412,6 +656,19 @@
     },
     {
       "entityType": "model",
+      "entityId": "bentley/continental-gt",
+      "brandId": "bentley",
+      "modelId": "bentley/continental-gt",
+      "term": "Continental GT",
+      "key": "continentalgt",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-bentley-continental-gt-speed-2024"
+      ]
+    },
+    {
+      "entityType": "model",
       "entityId": "mazda/cx-60",
       "brandId": "mazda",
       "modelId": "mazda/cx-60",
@@ -421,6 +678,20 @@
       "safe": true,
       "sourceIds": [
         "src-mazda-cx-60-global-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "aston-martin/db12",
+      "brandId": "aston-martin",
+      "modelId": "aston-martin/db12",
+      "term": "DB12",
+      "key": "db12",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-aston-martin-db12-launch-2023",
+        "src-aston-martin-db12-spec-uk"
       ]
     },
     {
@@ -581,6 +852,19 @@
         "src-ford-company-dearborn",
         "src-ford-mustang-mach-e-overview",
         "src-ford-mustang-mach-e-2026-us"
+      ]
+    },
+    {
+      "entityType": "generation",
+      "entityId": "bentley/continental-gt/fourth-generation",
+      "brandId": "bentley",
+      "modelId": "bentley/continental-gt",
+      "term": "Fourth generation",
+      "key": "fourthgeneration",
+      "kind": "generation",
+      "safe": true,
+      "sourceIds": [
+        "src-bentley-continental-gt-speed-2024"
       ]
     },
     {
@@ -891,6 +1175,20 @@
       ]
     },
     {
+      "entityType": "model",
+      "entityId": "alfa-romeo/junior",
+      "brandId": "alfa-romeo",
+      "modelId": "alfa-romeo/junior",
+      "term": "Junior",
+      "key": "junior",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-alfa-romeo-junior-name-2024",
+        "src-alfa-romeo-junior-swiss-2024"
+      ]
+    },
+    {
       "entityType": "brand",
       "entityId": "kia",
       "brandId": "kia",
@@ -1061,6 +1359,19 @@
       "sourceIds": [
         "src-mercedes-company-provider",
         "src-mercedes-glc-launch-2022"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "alfa-romeo/junior",
+      "brandId": "alfa-romeo",
+      "modelId": "alfa-romeo/junior",
+      "term": "Milano",
+      "key": "milano",
+      "kind": "historical",
+      "safe": true,
+      "sourceIds": [
+        "src-alfa-romeo-junior-name-2024"
       ]
     },
     {
@@ -1514,6 +1825,19 @@
       "safe": true,
       "sourceIds": [
         "src-toyota-rav4-archive"
+      ]
+    },
+    {
+      "entityType": "model",
+      "entityId": "acura/zdx",
+      "brandId": "acura",
+      "modelId": "acura/zdx",
+      "term": "ZDX",
+      "key": "zdx",
+      "kind": "canonical",
+      "safe": true,
+      "sourceIds": [
+        "src-acura-zdx-debut-2023"
       ]
     },
     {

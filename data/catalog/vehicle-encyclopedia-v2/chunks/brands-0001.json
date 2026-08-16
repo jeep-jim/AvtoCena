@@ -294,6 +294,76 @@
       ],
       "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
       "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "abarth",
+      "canonicalName": "Abarth",
+      "slug": "abarth",
+      "aliases": [
+        { "value": "Abarth & C.", "kind": "historical", "safe": true, "language": "de", "market": "Global", "sourceIds": ["src-abarth-brand-turin-2024"] }
+      ],
+      "countries": ["Italy"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-abarth-brand-turin-2024", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "The official history states that Abarth & C. was founded with its registered office in Turin; the country is normalized to Italy." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "acura",
+      "canonicalName": "Acura",
+      "slug": "acura",
+      "aliases": [],
+      "countries": ["Japan"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-acura-honda-brand-2005", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Honda identifies Acura as its luxury brand." },
+        { "sourceId": "src-honda-company-overview", "fields": ["countries"], "status": "verified", "confidence": "official", "note": "Honda Motor Co., Ltd. identifies its head office in Tokyo, Japan; the normalized brand-country value follows the parent manufacturer rather than Acura's first launch market." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "alfa-romeo",
+      "canonicalName": "Alfa Romeo",
+      "slug": "alfa-romeo",
+      "aliases": [],
+      "countries": ["Italy"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-alfa-romeo-brand-115-2025", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "The official anniversary release calls Alfa Romeo a global Italian brand founded in Milan." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aston-martin",
+      "canonicalName": "Aston Martin",
+      "slug": "aston-martin",
+      "aliases": [],
+      "countries": ["United Kingdom"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-aston-martin-company-uk-2018", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Aston Martin describes its British heritage and identifies its base in Gaydon, England; the country is normalized to United Kingdom." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bentley",
+      "canonicalName": "Bentley",
+      "slug": "bentley",
+      "aliases": [
+        { "value": "Bentley Motors", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-bentley-company-crewe-2025"] }
+      ],
+      "countries": ["United Kingdom"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-bentley-company-crewe-2025", "fields": ["canonicalName", "countries"], "status": "verified", "confidence": "official", "note": "Bentley identifies itself as a British luxury car company located in Crewe, England; the country is normalized to United Kingdom." }
+      ],
+      "researchNotes": ["Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."],
+      "updatedAt": "2026-08-16"
     }
   ]
 }

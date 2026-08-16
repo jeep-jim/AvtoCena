@@ -18,22 +18,22 @@
     "source": {
       "pattern": "chunks/sources-*.json",
       "chunks": 1,
-      "records": 74
+      "records": 91
     },
     "brand": {
       "pattern": "chunks/brands-*.json",
       "chunks": 1,
-      "records": 20
+      "records": 25
     },
     "model": {
       "pattern": "chunks/models-*.json",
       "chunks": 1,
-      "records": 20
+      "records": 25
     },
     "generation": {
       "pattern": "chunks/generations-*.json",
       "chunks": 1,
-      "records": 20
+      "records": 25
     },
     "facelift": {
       "pattern": "chunks/facelifts-*.json",
@@ -43,12 +43,12 @@
     "variant": {
       "pattern": "chunks/variants-*.json",
       "chunks": 1,
-      "records": 20
+      "records": 25
     },
     "media": {
       "pattern": "chunks/media-*.json",
       "chunks": 1,
-      "records": 20
+      "records": 25
     }
   },
   "completedBrands": [
@@ -73,10 +73,15 @@
     "Chevrolet",
     "Tesla",
     "Chery",
-    "Haval"
+    "Haval",
+    "Abarth",
+    "Acura",
+    "Alfa Romeo",
+    "Aston Martin",
+    "Bentley"
   ],
   "blockedBrands": [],
-  "lastCheckpoint": "2026-08-15",
+  "lastCheckpoint": "2026-08-16",
   "notes": [
     "Research staging only. Do not publish or modify data/catalog/vehicle-knowledge during collection.",
     "All canonical entity collections use deterministic chunks capped at 250 records.",

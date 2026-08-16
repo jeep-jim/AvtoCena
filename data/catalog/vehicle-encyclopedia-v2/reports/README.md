@@ -11,6 +11,7 @@ Codex should keep incremental machine-readable or Markdown reports here, for exa
 - `blocked-sources.json` — inaccessible sources; never bypass access controls.
 - `brand-queue.json` — all production brand names with legacy candidate counts and bounded research checkpoints;
 - `checkpoint-02-summary.md` — audited scope and limitations of the current 15-brand checkpoint;
+- `checkpoint-03-summary.md` — audited first five seeds and remaining queue for the active checkpoint;
 - `legacy-bridge-proposal.md` — reviewed mapping proposal only; it must not write to production knowledge.
 
 Reports are staging diagnostics and must not alter production catalog data.
