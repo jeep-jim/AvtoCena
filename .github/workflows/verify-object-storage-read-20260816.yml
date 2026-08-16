@@ -1,0 +1,43 @@
+name: Verify Object Storage read access after billing recovery
+
+on:
+  push:
+    branches:
+      - ops/avtocena-domain-recovery-20260816
+    paths:
+      - .github/workflows/verify-object-storage-read-20260816.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read catalog manifest without writes
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          aws --version
+          aws s3api head-bucket \
+            --bucket "$YC_OBJECT_STORAGE_BUCKET" \
+            --endpoint-url "$YC_OBJECT_STORAGE_ENDPOINT"
+          aws s3api head-object \
+            --bucket "$YC_OBJECT_STORAGE_BUCKET" \
+            --key 'catalog/internal/manifest.json' \
+            --endpoint-url "$YC_OBJECT_STORAGE_ENDPOINT"
+          aws s3api get-object \
+            --bucket "$YC_OBJECT_STORAGE_BUCKET" \
+            --key 'catalog/internal/manifest.json' \
+            --range 'bytes=0-1023' \
+            --endpoint-url "$YC_OBJECT_STORAGE_ENDPOINT" \
+            /tmp/catalog-manifest-prefix >/tmp/catalog-manifest-metadata.json
+          test -s /tmp/catalog-manifest-prefix
+          echo 'Object Storage read verification passed'
