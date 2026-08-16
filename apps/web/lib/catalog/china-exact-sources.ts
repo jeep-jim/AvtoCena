@@ -38,6 +38,16 @@ function integer(value: unknown) {
   const n = Number(String(value ?? "").replace(/[^0-9]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
+
+export function listingEngineCc(value: unknown) {
+  const identity = decodeAttribute(value).toLowerCase();
+  const decimalLiters = Number(identity.match(/(?:^|[^0-9])([0-9](?:[.,][0-9]))\s*l(?:[^a-z]|$)/i)?.[1]?.replace(",", ".") || 0);
+  if (decimalLiters >= 0.6 && decimalLiters <= 8) return Math.round(decimalLiters * 1_000);
+  const compact = identity.match(/(?:^|[-_])([0-9])([0-9])l(?:[-_.\/]|$)/i);
+  if (!compact) return undefined;
+  const liters = Number(`${compact[1]}.${compact[2]}`);
+  return liters >= 0.6 && liters <= 8 ? Math.round(liters * 1_000) : undefined;
+}
 function remoteImage(url: string): CatalogImage {
   return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: /\.png(?:[?#]|$)/i.test(url) ? "image/png" : /\.webp(?:[?#]|$)/i.test(url) ? "image/webp" : /\.avif(?:[?#]|$)/i.test(url) ? "image/avif" : "image/jpeg" };
 }
@@ -183,7 +193,7 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
     const derived = splitMakeModel(row.title);
     return { id: `${this.sourceId}:${row.id}`, sourceId: this.sourceId, sourceOfferId: row.id, market: "china", offerType: "fixed", status: "active",
       sourceTitle: row.title, make: clean(row.make) || derived.make, model: clean(row.model) || derived.model, trim: clean(row.trim) || undefined,
-      year: row.year, mileageKm: row.mileageKm, fuel: clean(row.fuel) || undefined, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
+      year: row.year, mileageKm: row.mileageKm, engineCc: listingEngineCc(`${row.title} ${row.detailUrl} ${row.listingText}`), fuel: clean(row.fuel) || undefined, sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed",
       images: [], totalRub: null, calculationStatus: "needs_knowledge", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.detailUrl, sourceVenueName: this.label, sourceTitle: row.title, raw: row, galleryStoredAs: "json_urls" } };
   }
