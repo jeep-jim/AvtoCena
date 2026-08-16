@@ -1,0 +1,35 @@
+name: Diagnose Yandex gateway to container route
+
+on:
+  push:
+    branches:
+      - ops/avtocena-domain-recovery-20260816
+    paths:
+      - .github/workflows/diagnose-yandex-route-20260816.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Compare public domain, gateway and container responses
+        shell: bash
+        run: |
+          set -u
+
+          check() {
+            local label="$1"
+            local url="$2"
+            echo "=== $label ==="
+            curl -sS --max-time 30 -D - "$url" -o /tmp/body || true
+            echo "--- body ---"
+            cat /tmp/body || true
+            echo
+          }
+
+          check 'custom domain health' 'https://avtocena.com/api/health'
+          check 'gateway service domain health' 'https://d5d4tne6a7djd0o5ip14.nkhmighe.apigw.yandexcloud.net/api/health'
+          check 'container service domain health' 'https://bbaohms2ccpm3vb4e73t.containers.yandexcloud.net/api/health'
