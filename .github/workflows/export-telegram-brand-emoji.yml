@@ -3,10 +3,6 @@ run-name: Export Telegram brand emoji · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/export-telegram-brand-emoji.yml
 
 permissions:
   contents: read
