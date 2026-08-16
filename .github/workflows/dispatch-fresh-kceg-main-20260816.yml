@@ -1,0 +1,37 @@
+name: Dispatch fresh Korea China Europe Georgia cycle
+run-name: Dispatch fresh KCEG cycle · ${{ github.sha }}
+
+on:
+  push:
+    paths:
+      - .github/workflows/dispatch-fresh-kceg-main-20260816.yml
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch current main KCEG workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload='{"ref":"main"}'
+          code="$(curl -sS -o response.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-live-daily-working-markets.yml/dispatches" \
+            -d "${payload}")"
+          if [ "${code}" != "204" ]; then
+            cat response.json
+            echo "workflow_dispatch_failed_http_${code}" >&2
+            exit 1
+          fi
+          echo "Fresh KCEG cycle dispatched on main"
