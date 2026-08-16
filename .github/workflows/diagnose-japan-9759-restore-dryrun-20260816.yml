@@ -1,4 +1,4 @@
-name: Prove Japan 9758 safe restore candidate read-only
+name: Prove Japan 9759 exact safe restore read-only
 
 on:
   push:
@@ -87,22 +87,24 @@ jobs:
           const dry = JSON.parse(fs.readFileSync('japan-9759-restore-dryrun.json', 'utf8'));
           const japan = dry.byMarket?.japan || {};
           if (dry.dryRun !== true || dry.published !== false) throw new Error('japan_restore_not_dry');
-          if (Number(japan.count || 0) !== 9758) throw new Error(`japan_restore_would_not_restore_9758:${japan.count}`);
+          if (Number(japan.count || 0) !== 9759) throw new Error(`japan_restore_would_not_restore_9759:${japan.count}`);
+          if (Number(japan.incomingCount || 0) !== 9759) throw new Error(`japan_restore_incoming_count:${japan.incomingCount}`);
+          if (Number(japan.retainedCount || 0) !== 0) throw new Error(`japan_restore_retained_count:${japan.retainedCount}`);
           if (Number(japan.maxOffersPerModelYear || 0) !== 20) throw new Error(`japan_restore_quota_contract:${japan.maxOffersPerModelYear}`);
           if (Number(japan.imageStats?.min || 0) < 5 || Number(japan.imageStats?.belowMinimum || 0) !== 0) throw new Error('japan_restore_image_gate');
-          if (Number(japan.sourceCounts?.prestige_japan_auctions_open || 0) !== 9758) throw new Error('japan_restore_source_count');
+          if (Number(japan.sourceCounts?.prestige_japan_auctions_open || 0) !== 9759) throw new Error('japan_restore_source_count');
           for (const market of ['korea','china','uae','europe','georgia','kyrgyzstan']) {
             const expected = Number(before.markets?.[market]?.count || 0);
             const planned = Number(dry.preservedByMarket?.[market] || 0);
             if (planned !== expected) throw new Error(`japan_restore_preservation_count:${market}:${planned}:${expected}`);
             if (!String(dry.preservedPublicHashByMarket?.[market] || '')) throw new Error(`japan_restore_preservation_hash:${market}`);
           }
-          console.log({ currentJapan: before.markets?.japan?.count, restoredJapan: japan.count, imageStats: japan.imageStats, sourceCounts: japan.sourceCounts });
+          console.log({ currentJapan: before.markets?.japan?.count, restoredJapan: japan.count, incoming: japan.incomingCount, retained: japan.retainedCount, imageStats: japan.imageStats, sourceCounts: japan.sourceCounts });
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-9758-restore-readonly-proof
+          name: japan-9759-restore-readonly-proof
           path: |
             japan-9759-current-before.json
             japan-9759-restore-dryrun.json
