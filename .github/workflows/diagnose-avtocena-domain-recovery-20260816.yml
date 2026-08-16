@@ -1,0 +1,44 @@
+name: Diagnose avtocena.com domain recovery
+
+on:
+  push:
+    branches:
+      - ops/avtocena-domain-recovery-20260816
+    paths:
+      - .github/workflows/diagnose-avtocena-domain-recovery-20260816.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Inspect public DNS, TLS and gateway response
+        shell: bash
+        run: |
+          set -u
+
+          echo '=== authoritative nameservers ==='
+          dig +noall +answer avtocena.com NS || true
+
+          echo '=== apex records ==='
+          dig +noall +answer avtocena.com A || true
+          dig +noall +answer avtocena.com AAAA || true
+          dig +noall +answer avtocena.com CNAME || true
+
+          echo '=== www records ==='
+          dig +noall +answer www.avtocena.com A || true
+          dig +noall +answer www.avtocena.com AAAA || true
+          dig +noall +answer www.avtocena.com CNAME || true
+
+          echo '=== live TLS certificate ==='
+          timeout 20 openssl s_client \
+            -connect avtocena.com:443 \
+            -servername avtocena.com </dev/null 2>/tmp/openssl.err \
+            | openssl x509 -noout -subject -issuer -serial -dates -ext subjectAltName \
+            || cat /tmp/openssl.err
+
+          echo '=== HTTPS response without certificate verification ==='
+          curl -kIsS --max-time 30 https://avtocena.com/ | sed -n '1,30p' || true
