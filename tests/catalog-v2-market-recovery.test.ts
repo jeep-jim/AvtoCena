@@ -31,6 +31,8 @@ test("market workflow preserves diagnostics and retries quota failures after saf
   assert.match(cleanup, /protectedInternalPaths/);
   assert.match(cleanup, /orphanInternalObjects/);
   assert.match(cleanup, /protectedGenerations/);
+  assert.match(cleanup, /CATALOG_FAILED_GENERATION_CLEANUP_DRY_RUN/);
+  assert.match(cleanup, /dryRun\s*\? \[0, 0\]/);
   assert.match(cleanup, /reclaimedBytes/);
   assert.match(cleanup, /storage\.deleteObjects/);
   assert.match(cleanup, /deleteListedObjects\(candidateObjects/);
