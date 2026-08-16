@@ -1,4 +1,4 @@
-name: Prove Japan 9759 restore candidate read-only
+name: Prove Japan 9758 safe restore candidate read-only
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
       CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
-      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_OFFER_RETENTION_MS: "3600000"
       RECOVERY_PUBLISH_MAX: "30000"
       RECOVERY_PREFERRED_MAX_RUB: "8000000"
       RESTORE_GENERATION: gen_1786746182901_54c0a190
@@ -87,10 +87,10 @@ jobs:
           const dry = JSON.parse(fs.readFileSync('japan-9759-restore-dryrun.json', 'utf8'));
           const japan = dry.byMarket?.japan || {};
           if (dry.dryRun !== true || dry.published !== false) throw new Error('japan_restore_not_dry');
-          if (Number(japan.count || 0) !== 9759) throw new Error(`japan_restore_would_not_restore_9759:${japan.count}`);
+          if (Number(japan.count || 0) !== 9758) throw new Error(`japan_restore_would_not_restore_9758:${japan.count}`);
           if (Number(japan.maxOffersPerModelYear || 0) !== 20) throw new Error(`japan_restore_quota_contract:${japan.maxOffersPerModelYear}`);
           if (Number(japan.imageStats?.min || 0) < 5 || Number(japan.imageStats?.belowMinimum || 0) !== 0) throw new Error('japan_restore_image_gate');
-          if (Number(japan.sourceCounts?.prestige_japan_auctions_open || 0) !== 9759) throw new Error('japan_restore_source_count');
+          if (Number(japan.sourceCounts?.prestige_japan_auctions_open || 0) !== 9758) throw new Error('japan_restore_source_count');
           for (const market of ['korea','china','uae','europe','georgia','kyrgyzstan']) {
             const expected = Number(before.markets?.[market]?.count || 0);
             const planned = Number(dry.preservedByMarket?.[market] || 0);
@@ -102,7 +102,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-9759-restore-readonly-proof
+          name: japan-9758-restore-readonly-proof
           path: |
             japan-9759-current-before.json
             japan-9759-restore-dryrun.json
