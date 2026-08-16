@@ -1,0 +1,57 @@
+name: Diagnose Yandex domain resources after billing recovery
+
+on:
+  push:
+    branches:
+      - ops/avtocena-domain-recovery-20260816
+    paths:
+      - .github/workflows/diagnose-yandex-domain-resources-20260816.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Install Yandex Cloud CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -i /opt/yc -n
+          echo /opt/yc/bin >> "$GITHUB_PATH"
+
+      - name: Inspect API Gateway, Certificate Manager and Cloud DNS
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          YC_FOLDER_ID: b1g9vq73onqb7dp5hgqg
+          API_GATEWAY_ID: d5d4tne6a7djd0o5ip14
+        shell: bash
+        run: |
+          set -u
+          printf '%s' "$YC_SA_JSON_CREDENTIALS" > /tmp/yc-key.json
+          chmod 600 /tmp/yc-key.json
+          yc config profile create avtocena-domain-recovery >/dev/null 2>&1 || true
+          yc config set service-account-key /tmp/yc-key.json >/dev/null
+          yc config set folder-id "$YC_FOLDER_ID" >/dev/null
+
+          echo '=== API Gateway get ==='
+          yc serverless api-gateway get "$API_GATEWAY_ID" --format json || true
+
+          echo '=== API Gateway list ==='
+          yc serverless api-gateway list --format json || true
+
+          echo '=== API Gateway commands ==='
+          yc serverless api-gateway --help || true
+
+          echo '=== Certificate Manager list ==='
+          yc certificate-manager certificate list --full --format json || true
+
+          echo '=== Certificate Manager commands ==='
+          yc certificate-manager certificate --help || true
+
+          echo '=== Cloud DNS zones ==='
+          yc dns zone list --format json || true
+
+          rm -f /tmp/yc-key.json
