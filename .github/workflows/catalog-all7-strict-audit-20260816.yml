@@ -1,0 +1,76 @@
+name: Catalog strict all-7 audit 2026-08-16
+run-name: Strict all-7 catalog audit · ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - fix/catalog-failed-generation-cleanup-dry-run-20260816
+    paths:
+      - .github/workflows/catalog-all7-strict-audit-20260816.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Verify every production market and Japan baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_AUDIT_OUTPUT: catalog-all7-strict-audit.json
+      CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+      CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":9759,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+      CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Audit all seven production markets
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - name: Enforce strict final gate
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync(process.env.CATALOG_AUDIT_OUTPUT, 'utf8'));
+          const markets = ['korea', 'china', 'japan', 'uae', 'europe', 'georgia', 'kyrgyzstan'];
+          const failures = [...(Array.isArray(report.failures) ? report.failures : [])];
+          for (const market of markets) {
+            const row = report.markets?.[market];
+            if (!row) { failures.push(`${market}:missing`); continue; }
+            for (const field of ['olderThan15Count', 'belowMarketMinYearCount', 'invalidIdentityCount', 'renderedIdentityFailureCount', 'nonVehicleCount', 'nonPositiveSourcePriceCount', 'belowFiveImagesCount']) {
+              if (Number(row[field] || 0) !== 0) failures.push(`${market}:${field}:${row[field]}`);
+            }
+            if (Number(row.maxPerExactModelYear || 0) > 20) failures.push(`${market}:quota:${row.maxPerExactModelYear}`);
+          }
+          const japan = report.markets?.japan || {};
+          if (Number(japan.count || 0) !== 9759) failures.push(`japan:count:${japan.count}`);
+          const japanSources = Object.keys(japan.sourceCounts || {});
+          if (japanSources.length !== 1 || japanSources[0] !== 'prestige_japan_auctions_open' || Number(japan.sourceCounts?.prestige_japan_auctions_open || 0) !== 9759) {
+            failures.push(`japan:sources:${JSON.stringify(japan.sourceCounts || {})}`);
+          }
+          console.log(JSON.stringify({ markets: report.markets, failures }, null, 2));
+          if (failures.length) process.exit(1);
+          NODE
+      - name: Upload strict audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-all7-strict-audit
+          path: catalog-all7-strict-audit.json
+          if-no-files-found: error
+          retention-days: 14
