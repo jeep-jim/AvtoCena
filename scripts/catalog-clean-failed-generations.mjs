@@ -6,6 +6,7 @@ const reportFile = process.env.CATALOG_FAILED_GENERATION_CLEANUP_REPORT || "cata
 const maxDeletes = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_MAX_DELETES || 100_000));
 const keepGenerations = Math.max(1, Number(process.env.CATALOG_FAILED_GENERATION_KEEP || 2));
 const deleteConcurrency = Math.max(1, Math.min(16, Number(process.env.YC_OBJECT_STORAGE_DELETE_CONCURRENCY || 8)));
+const dryRun = String(process.env.CATALOG_FAILED_GENERATION_CLEANUP_DRY_RUN || "false").toLowerCase() === "true";
 const configuredProtectedGenerations = new Set(String(process.env.CATALOG_FAILED_GENERATION_PROTECT || "")
   .split(",").map((value) => value.trim()).filter(Boolean));
 const storage = getJsonStorage();
@@ -70,15 +71,18 @@ async function deleteListedObjects(items, errorField) {
   return deletedCount;
 }
 
-const [deleted, deletedOrphanInternalObjects] = await Promise.all([
-  deleteListedObjects(candidateObjects, "generationObject"),
-  deleteListedObjects(orphanInternalObjects, "internalObject"),
-]);
+const [deleted, deletedOrphanInternalObjects] = dryRun
+  ? [0, 0]
+  : await Promise.all([
+      deleteListedObjects(candidateObjects, "generationObject"),
+      deleteListedObjects(orphanInternalObjects, "internalObject"),
+    ]);
 
 const report = {
-  version: 1,
+  version: 2,
   startedAt,
   finishedAt: new Date().toISOString(),
+  dryRun,
   liveGeneration,
   currentInternalGeneration: String(internalManifest?.generationId || "") || null,
   deleteConcurrency,
@@ -90,7 +94,7 @@ const report = {
   plannedObjects: candidateObjects.length + orphanInternalObjects.length,
   plannedBytes,
   deletedObjects: deleted + deletedOrphanInternalObjects,
-  reclaimedBytes: errors.length ? null : plannedBytes,
+  reclaimedBytes: dryRun || errors.length ? null : plannedBytes,
   removedOrphanInternalObjects: deletedOrphanInternalObjects,
   preservedImages: true,
   preservedInternalCandidatePools: true,
