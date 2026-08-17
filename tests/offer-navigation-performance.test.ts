@@ -28,6 +28,10 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.doesNotMatch(beforeReturn, /await searchOffers/);
   assert.match(page, /<Suspense fallback=\{<SimilarOffersFallback \/>\}>/);
   assert.match(page, /async function SimilarOffers/);
+  assert.match(page, /make: current\.make, model: current\.model/);
+  assert.match(page, /Ещё \{modelTitle\}/);
+  assert.match(page, /Другие автомобили — \{marketLabel\}/);
+  assert.match(page, /new URLSearchParams\(\{ market: String\(current\.market \|\| ""\), make: String\(current\.make \|\| ""\), model: String\(current\.model \|\| ""\) \}\)/);
 });
 
 test("metadata and page share one memoized offer lookup per request", () => {

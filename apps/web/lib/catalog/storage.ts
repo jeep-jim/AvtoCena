@@ -6,6 +6,7 @@ import { rankedCatalogImageUrls } from "./image-quality";
 import { catalogOfferVisibleRub } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
+import { selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
@@ -1031,27 +1032,37 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
     })),
   ]);
 
-  const selectedIds: string[] = [];
   const marketCounts: Record<string, number> = {};
-  for (const { market, shard } of marketShards) {
-    const allowed = new Set(shard.ids || []);
-    marketCounts[market] = allowed.size;
-    let selected = 0;
-    for (const id of order.ids || []) {
-      if (!allowed.has(id) || !byId.byId[id]) continue;
-      selectedIds.push(id);
-      selected += 1;
-      if (selected >= limit) break;
-    }
-  }
-
   // Homepage cards only need the compact card projection. Reading full offer chunks
   // for ~6 cards x 7 markets turned a simple initial render into dozens of object-store
   // reads. Prefer the per-market projection shards and fall back to full chunks only for
   // IDs from an older generation that cannot render a card from projection.
-  const projected = (await mapWithConcurrency(MARKETS, MARKETS.length, async (market) =>
-    (await readSearchProjection(manifest.generationId, market)).items || [])).flat();
+  const projectionShards = await mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({
+    market,
+    items: (await readSearchProjection(manifest.generationId, market)).items || [],
+  }));
+  const projected = projectionShards.flatMap(({ items }) => items);
   const projectedById = new Map(projected.filter(projectionCanRenderCard).map((row) => [row.id, row]));
+  const orderRank = new Map((order.ids || []).map((id, index) => [id, index]));
+  const selectedIds: string[] = [];
+  for (const { market, shard } of marketShards) {
+    const allowed = new Set(shard.ids || []);
+    marketCounts[market] = allowed.size;
+    const projection = projectionShards.find((entry) => entry.market === market)?.items || [];
+    const candidates = projection
+      .filter((row) => allowed.has(row.id) && byId.byId[row.id] && projectionCanRenderCard(row))
+      .sort((a, b) => Number(orderRank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - Number(orderRank.get(b.id) ?? Number.MAX_SAFE_INTEGER));
+    const diverse = selectCatalogShowcaseDiversity(candidates, limit);
+    selectedIds.push(...diverse.map((row) => row.id));
+    if (diverse.length >= limit) continue;
+    const alreadySelected = new Set(diverse.map((row) => row.id));
+    for (const id of order.ids || []) {
+      if (!allowed.has(id) || !byId.byId[id] || alreadySelected.has(id)) continue;
+      selectedIds.push(id);
+      alreadySelected.add(id);
+      if (alreadySelected.size >= limit) break;
+    }
+  }
   const missingIds = selectedIds.filter((id) => !projectedById.has(id));
 
   const fallbackById = new Map<string, VehicleOffer>();
