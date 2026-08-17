@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarImageUrl, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
-import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl } from "../apps/web/lib/catalog/storage";
+import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl, resetImageSourceCacheForTests } from "../apps/web/lib/catalog/storage";
 import { convertToRub } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
 
@@ -105,6 +108,44 @@ test("image cache rejects HTML instead of image", async () => {
   (global as any).fetch = async () => new Response("<html>challenge</html>", { status: 200, headers: { "content-type": "text/html" } });
   try { assert.equal(await cacheImageFromUrl("https://example.test/not-image", "japan"), null); }
   finally { (global as any).fetch = original; }
+});
+
+test("image source cache reuses the stored Object Storage image without downloading the origin twice", async () => {
+  const cwd = process.cwd();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-source-cache-"));
+  const originalFetch = global.fetch;
+  let sourceDownloads = 0;
+  fs.mkdirSync(path.join(dir, "data"));
+  process.chdir(dir);
+  resetJsonStorageForTests();
+  resetImageSourceCacheForTests();
+  (global as any).fetch = async () => {
+    sourceDownloads++;
+    return new Response(Buffer.from(`catalog-photo-${sourceDownloads}`), { status: 200, headers: { "content-type": "image/jpeg" } });
+  };
+  try {
+    const first = await cacheImageFromUrl("https://ci.encar.com/carpicture/cache-test.jpg", "korea");
+    resetImageSourceCacheForTests();
+    const second = await cacheImageFromUrl("https://ci.encar.com/carpicture/cache-test.jpg", "korea");
+    assert.ok(first?.objectKey);
+    assert.equal(second?.objectKey, first?.objectKey);
+    assert.equal(sourceDownloads, 1);
+    assert.equal(fs.readdirSync(path.join(dir, "data/catalog/image-source-cache/v1")).length, 1);
+    await getJsonStorage().deleteBinary?.(String(first?.objectKey));
+    resetImageSourceCacheForTests();
+    const replaced = await cacheImageFromUrl("https://ci.encar.com/carpicture/cache-test.jpg", "korea");
+    resetImageSourceCacheForTests();
+    const reusedReplacement = await cacheImageFromUrl("https://ci.encar.com/carpicture/cache-test.jpg", "korea");
+    assert.notEqual(replaced?.objectKey, first?.objectKey);
+    assert.equal(reusedReplacement?.objectKey, replaced?.objectKey);
+    assert.equal(sourceDownloads, 2);
+  } finally {
+    (global as any).fetch = originalFetch;
+    process.chdir(cwd);
+    resetJsonStorageForTests();
+    resetImageSourceCacheForTests();
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 
