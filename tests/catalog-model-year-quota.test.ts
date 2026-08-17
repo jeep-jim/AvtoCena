@@ -132,9 +132,12 @@ test("daily and legacy recovery workflows expose only model-year quota and canon
   }
 
   const daily = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
-  assert.match(daily, /myauto_georgia_list/);
-  assert.match(daily, /autopapa_georgia_open/);
-  assert.doesNotMatch(daily, /auto_georgia_open|www\.auto\.ge/i);
+  assert.doesNotMatch(daily, /myauto_georgia_list|autopapa_georgia_open/);
+
+  const georgiaV2 = fs.readFileSync(".github/workflows/catalog-live-recovery-georgia-yandex-v2.yml", "utf8");
+  assert.match(georgiaV2, /myauto_georgia_list/);
+  assert.match(georgiaV2, /autopapa_georgia_open/);
+  assert.doesNotMatch(georgiaV2, /auto_georgia_open|www\.auto\.ge/i);
 
   const legacy = fs.readFileSync(".github/workflows/catalog-live-recovery-6-markets.yml", "utf8");
   assert.match(legacy, /sources: "myauto_georgia_list,autopapa_georgia_open"/);

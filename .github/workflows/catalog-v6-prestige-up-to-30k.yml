@@ -8,6 +8,7 @@ on:
     branches:
       - main
     paths:
+      - ".github/workflows/catalog-v6-prestige-up-to-30k.yml"
       - "scripts/prestige-japan-strict-partition-plan.mjs"
       - "scripts/prestige-japan-strict-chunk.mjs"
       - "scripts/prestige-japan-strict-merge.mjs"
@@ -17,7 +18,7 @@ permissions:
 
 concurrency:
   group: catalog-v6-prestige-exact-sold-up-to-30k
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   plan:
@@ -30,11 +31,10 @@ jobs:
       complete: ${{ steps.plan.outputs.complete }}
     env:
       PRESTIGE_PLAN_CHUNK_PAGES: "60"
-      PRESTIGE_PLAN_RAW_BUDGET: "100000"
-      PRESTIGE_PLAN_MAX_PARTITIONS: "220"
+      PRESTIGE_PLAN_RAW_BUDGET: "18000"
+      PRESTIGE_PLAN_MAX_PARTITIONS: "90"
       PRESTIGE_PLAN_MAX_MAKES: "30"
       PRESTIGE_PLAN_RAW_PER_MODEL: "200"
-      PRESTIGE_PLAN_START_MODEL_INDEX: "91"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
@@ -45,6 +45,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Rotate the bounded daily model band
+        shell: bash
+        run: |
+          set -euo pipefail
+          day_of_year=$(date -u +%j)
+          start_model_index=$(( (10#$day_of_year % 40) * 3 ))
+          echo "PRESTIGE_PLAN_START_MODEL_INDEX=$start_model_index" >> "$GITHUB_ENV"
+          echo "Daily Japan model band starts at index $start_model_index" >> "$GITHUB_STEP_SUMMARY"
       - id: plan
         name: Build round-robin partitions across all available models
         run: npx tsx scripts/prestige-japan-strict-partition-plan.mjs
