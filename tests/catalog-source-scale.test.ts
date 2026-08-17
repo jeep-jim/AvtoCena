@@ -153,7 +153,8 @@ test("Japan Transit sold-auction statistics participates in the production regis
   assert.equal(japanTransitAuctionStatisticsSource.sourceId, "japantransit_japan_stat_open");
   assert.equal(japanTransitAuctionStatisticsSource.market, "japan");
   assert.equal(ids.has("japantransit_japan_stat_open"), true);
-  assert.match(carsPage, /Аукционная статистика Японии/);
+  assert.match(carsPage, /Аукционная статистика/);
+  assert.doesNotMatch(carsPage, /Аукционная статистика Японии/);
   assert.match(carsPage, /isJapanAuctionResult/);
 });
 

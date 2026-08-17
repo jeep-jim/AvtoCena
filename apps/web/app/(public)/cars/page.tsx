@@ -246,7 +246,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
             {index === breadcrumbItems.length - 1 ? <span aria-current="page">{item.label}</span> : <Link href={item.href} className="transition hover:text-red-500">{item.label}</Link>}
           </span>)}
         </nav>
-        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика Японии" : "Каталог автомобилей"}</h1>
+        <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : "Каталог автомобилей"}</h1>
         <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">Найдено: {total}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>
       </div>

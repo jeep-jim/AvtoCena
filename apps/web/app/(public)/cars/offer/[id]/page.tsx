@@ -91,12 +91,13 @@ function similarModelKey(offer: any) {
   return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
 }
 
-function diverseSimilarOffers(rows: any[], current: any, limit = 12) {
+function diverseSimilarOffers(rows: any[], current: any, limit = 4, excludedIds = new Set<string>()) {
   const currentKey = similarModelKey(current);
   const seen = new Set<string>(currentKey ? [currentKey] : []);
   const differentModels: any[] = [];
   const repeats: any[] = [];
   for (const row of rows) {
+    if (excludedIds.has(String(row?.id || ""))) continue;
     const key = similarModelKey(row);
     if (key && !seen.has(key)) {
       seen.add(key);
@@ -108,26 +109,39 @@ function diverseSimilarOffers(rows: any[], current: any, limit = 12) {
   return [...differentModels, ...repeats].slice(0, limit);
 }
 
-async function SimilarOffers({ current, visibleRub }: { current: any; visibleRub: number }) {
-  let similar: any[] = [];
+async function SimilarOffers({ current }: { current: any }) {
+  let sameModel: any[] = [];
+  let otherMarketModels: any[] = [];
   try {
-    const result = await searchOffers({
-      market: current.market,
-      budgetFrom: visibleRub ? Math.round(visibleRub * 0.75) : undefined,
-      budgetTo: visibleRub ? Math.round(visibleRub * 1.25) : undefined,
-      pageSize: 48,
-      sort: "updatedAt",
-    });
-    similar = diverseSimilarOffers(
-      result.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item)),
-      current,
-      12,
-    );
+    const [modelResult, marketResult] = await Promise.all([
+      searchOffers({ market: current.market, make: current.make, model: current.model, pageSize: 48, sort: "updatedAt" }),
+      searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
+    ]);
+    const modelRows = modelResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
+    const marketRows = marketResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
+    sameModel = modelRows.slice(0, 4);
+    if (sameModel.length < 4) {
+      const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
+      const fillers = diverseSimilarOffers(marketRows, current, 4 - sameModel.length, selectedIds);
+      sameModel = [...sameModel, ...fillers];
+    }
+    const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
+    otherMarketModels = diverseSimilarOffers(marketRows, current, 4, selectedIds);
   } catch (error) {
     console.error("offer_similar_search_failed", error);
   }
 
-  return <section className="mt-10 md:mt-14"><div className="flex items-end justify-between gap-3"><h2 className="text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё варианты</h2><Link href={`/cars?market=${encodeURIComponent(current.market)}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{similar.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{similar.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Похожие предложения появятся здесь после обновления каталога.</div>}</section>;
+  const presented = presentCatalogOffer(current);
+  const modelTitle = [presented.makeLabel, presented.modelLabel].filter(Boolean).join(" ");
+  const modelParams = new URLSearchParams({ market: String(current.market || ""), make: String(current.make || ""), model: String(current.model || "") });
+  const marketParams = new URLSearchParams({ market: String(current.market || "") });
+  const marketLabel = String(presented.marketLabel || current.market || "рынка");
+  const rail = (rows: any[]) => rows.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Подходящие предложения появятся здесь после обновления каталога.</div>;
+
+  return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14">
+    <section><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle}</h2><Link href={`/cars?${modelParams}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{rail(sameModel)}</section>
+    <section><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Другие автомобили — {marketLabel}</h2><Link href={`/cars?${marketParams}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{rail(otherMarketModels)}</section>
+  </div>;
 }
 
 function SimilarOffersFallback() {
@@ -296,7 +310,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} visibleRub={visibleRub} /></Suspense>
+      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}

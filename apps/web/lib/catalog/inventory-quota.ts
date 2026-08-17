@@ -34,6 +34,51 @@ export function catalogExactModelKey(
 }
 
 /**
+ * Keep a small public showcase representative: prefer a new make first, then
+ * a new exact model, and only use duplicate models when the market has no
+ * other renderable candidates. Input order remains the freshness ranking.
+ */
+export function selectCatalogShowcaseDiversity<T extends { market?: unknown; make?: unknown; model?: unknown }>(
+  rows: readonly T[],
+  limit: number,
+) {
+  const boundedLimit = Math.max(0, Math.floor(Number(limit) || 0));
+  if (!boundedLimit || !rows.length) return [] as T[];
+
+  const selected: T[] = [];
+  const selectedRows = new Set<T>();
+  const makes = new Set<string>();
+  const models = new Set<string>();
+  const append = (row: T) => {
+    selected.push(row);
+    selectedRows.add(row);
+    makes.add(clean(row.make));
+    const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
+    if (modelKey) models.add(modelKey);
+  };
+
+  for (const row of rows) {
+    const make = clean(row.make);
+    const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
+    if (!make || !modelKey || makes.has(make) || models.has(modelKey)) continue;
+    append(row);
+    if (selected.length >= boundedLimit) return selected;
+  }
+  for (const row of rows) {
+    const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
+    if (!modelKey || selectedRows.has(row) || models.has(modelKey)) continue;
+    append(row);
+    if (selected.length >= boundedLimit) return selected;
+  }
+  for (const row of rows) {
+    if (selectedRows.has(row)) continue;
+    append(row);
+    if (selected.length >= boundedLimit) break;
+  }
+  return selected;
+}
+
+/**
  * Select a bounded result without letting a dense/new model-year bucket consume
  * the output before other discovered years get represented. Every discovered
  * model-year receives one turn before any bucket receives a second turn, then

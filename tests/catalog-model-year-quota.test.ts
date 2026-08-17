@@ -5,6 +5,7 @@ import {
   CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
   catalogExactModelKey,
   catalogModelYearQuotaKey,
+  selectCatalogShowcaseDiversity,
   selectCatalogModelYearCoverageFirst,
 } from "../apps/web/lib/catalog/inventory-quota";
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
@@ -26,6 +27,30 @@ test("inventory quota is twenty per market + exact model + year", () => {
     catalogModelYearQuotaKey(offer("europe", "Hyundai", "Casper", 2022)),
   );
   assert.equal(catalogExactModelKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper");
+});
+
+test("homepage showcase prefers different makes and exact models without losing freshness order", () => {
+  const rows = [
+    { ...offer("japan", "Honda", "WR-V", 2026), id: "wrv-new" },
+    { ...offer("japan", "Honda", "WR-V", 2025), id: "wrv-old" },
+    { ...offer("japan", "Honda", "Accord", 2025), id: "accord" },
+    { ...offer("japan", "Toyota", "Sienta", 2025), id: "sienta" },
+    { ...offer("japan", "Nissan", "Serena", 2024), id: "serena" },
+    { ...offer("japan", "Mazda", "CX-5", 2024), id: "cx5" },
+  ];
+  const selected = selectCatalogShowcaseDiversity(rows, 4);
+  assert.deepEqual(selected.map((row: any) => row.id), ["wrv-new", "sienta", "serena", "cx5"]);
+  assert.equal(new Set(selected.map((row: any) => catalogExactModelKey(row))).size, 4);
+});
+
+test("homepage showcase uses different models of the same make before duplicate models", () => {
+  const rows = [
+    { ...offer("japan", "Honda", "WR-V", 2026), id: "wrv-new" },
+    { ...offer("japan", "Honda", "WR-V", 2025), id: "wrv-old" },
+    { ...offer("japan", "Honda", "Accord", 2025), id: "accord" },
+    { ...offer("japan", "Honda", "Stepwgn", 2023), id: "stepwgn" },
+  ];
+  assert.deepEqual(selectCatalogShowcaseDiversity(rows, 3).map((row: any) => row.id), ["wrv-new", "accord", "stepwgn"]);
 });
 
 test("different years can each retain twenty cards for the same model", () => {
