@@ -61,11 +61,6 @@ jobs:
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Start fresh UAE and Georgia growth after the daily writer
-        if: github.event_name == 'workflow_run' && github.event.workflow_run.name == 'Catalog live daily · working markets'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run catalog-live-recovery-uae-georgia-direct.yml --ref main
       - uses: actions/upload-artifact@v4
         if: always()
         with:

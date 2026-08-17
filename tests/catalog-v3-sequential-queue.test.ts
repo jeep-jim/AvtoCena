@@ -6,32 +6,25 @@ const queue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequentia
 const dailyWorkingMarkets = fs.readFileSync(new URL("../.github/workflows/catalog-live-daily-working-markets.yml", import.meta.url), "utf8");
 const uaeKyrgyzstan = fs.readFileSync(new URL("../.github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", import.meta.url), "utf8");
 
-const order = ["Korea", "Japan", "China", "UAE", "Europe", "Georgia", "Kyrgyzstan"];
-
-test("Catalog V3 dispatches all markets strictly in sequence after success", () => {
-  for (const market of order) assert.match(queue, new RegExp(`Catalog V3 · ${market} · 10k`));
-  assert.match(queue, /conclusion == 'success'/);
-  assert.match(queue, /head_branch == 'main'/);
-  assert.match(queue, /actions: write/);
-  assert.match(queue, /catalog-v2-japan\.yml/);
-  assert.match(queue, /catalog-v2-china\.yml/);
-  assert.match(queue, /catalog-v2-uae\.yml/);
-  assert.match(queue, /catalog-v2-europe\.yml/);
-  assert.match(queue, /catalog-v2-georgia\.yml/);
-  assert.match(queue, /catalog-v2-kyrgyzstan\.yml/);
+test("obsolete Catalog V3 automatic chain remains disabled", () => {
+  assert.match(queue, /Sequential queue \(manual only\)/);
+  assert.match(queue, /Automatic catalog chaining is disabled/);
+  assert.doesNotMatch(queue, /workflow_run:/);
+  assert.doesNotMatch(queue, /gh workflow run/);
 });
 
-test("daily working markets cannot lose Europe behind one shared publish timeout", () => {
+test("daily working markets own Korea, China and Europe while Georgia stays on Yandex v2", () => {
   assert.match(dailyWorkingMarkets, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
   assert.match(dailyWorkingMarkets, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  for (const market of ["korea", "china", "europe", "georgia"]) {
+  for (const market of ["korea", "china", "europe"]) {
     assert.match(dailyWorkingMarkets, new RegExp(`\\n  publish-${market}:`));
     assert.match(dailyWorkingMarkets, new RegExp(`RECOVERY_PUBLISH_MARKET: ${market}`));
     assert.match(dailyWorkingMarkets, new RegExp(`CATALOG_AUDIT_ASSERT_MARKETS: ${market}`));
   }
   assert.match(dailyWorkingMarkets, /publish-china:[\s\S]*needs: \[validate, merge, publish-korea\]/);
   assert.match(dailyWorkingMarkets, /publish-europe:[\s\S]*needs: \[validate, merge, publish-china\]/);
-  assert.match(dailyWorkingMarkets, /publish-georgia:[\s\S]*needs: \[validate, merge, publish-europe\]/);
+  assert.doesNotMatch(dailyWorkingMarkets, /\n  publish-georgia:/);
+  assert.doesNotMatch(dailyWorkingMarkets, /myauto_georgia_list|autopapa_georgia_open/);
   assert.match(dailyWorkingMarkets, /publish-korea:[\s\S]*timeout-minutes: 120/);
   assert.match(dailyWorkingMarkets, /publish-europe:[\s\S]*timeout-minutes: 120/);
   assert.match(dailyWorkingMarkets, /CATALOG_GALLERY_MIN_IMAGES: "5"/);

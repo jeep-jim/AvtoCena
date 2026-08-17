@@ -44,8 +44,7 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.doesNotMatch(workflow, /workflow_run\.conclusion != 'cancelled'/);
   assert.match(workflow, /actions: write/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
-  assert.match(workflow, /gh workflow run catalog-live-recovery-uae-georgia-direct\.yml --ref main/);
-  assert.match(workflow, /github\.event\.workflow_run\.name == 'Catalog live daily · working markets'/);
+  assert.doesNotMatch(workflow, /gh workflow run catalog-live-recovery-uae-georgia-direct\.yml/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
 });

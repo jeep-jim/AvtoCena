@@ -1,5 +1,5 @@
 name: Catalog live daily · working markets
-run-name: Source-sharded cumulative catalog · Korea China Europe Georgia · ${{ github.sha }}
+run-name: Source-sharded cumulative catalog · Korea China Europe · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
           node --check scripts/catalog-live-recovery-merge-shards.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
           npm run typecheck
-          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','kbchachacha_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact','myauto_georgia_list','autopapa_georgia_open']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
+          npx tsx -e "import { catalogImportSources } from './apps/web/lib/catalog/importer.ts'; const ids=new Set(catalogImportSources.map(s=>s.sourceId)); const required=['encar_direct','kcar_korea_open','kbchachacha_korea_open','autohome_used_china_open','dongchedi_china_open','guazi_china_open','autohome_new_china_open','mobile_de_open','autoscout_europe_open','otomoto_europe_exact']; const missing=required.filter(x=>!ids.has(x)); console.log({registered:required.filter(x=>ids.has(x)),missing}); if(missing.length) process.exit(1);"
       - name: Verify current seven-market baseline before any write
         shell: bash
         env:
@@ -85,8 +85,6 @@ jobs:
           - { market: china, source: autohome_new_china_open, target: 5000, max_pages: 300 }
           - { market: europe, source: mobile_de_open, target: 5000, max_pages: 300 }
           - { market: europe, source: autoscout_europe_open, target: 5000, max_pages: 300 }
-          - { market: georgia, source: myauto_georgia_list, target: 5000, max_pages: 300 }
-          - { market: georgia, source: autopapa_georgia_open, target: 5000, max_pages: 300 }
     env:
       RECOVERY_MARKET: ${{ matrix.market }}
       RECOVERY_SOURCE_IDS: ${{ matrix.source }}
@@ -161,7 +159,7 @@ jobs:
         run: |
           set -euo pipefail
           merged=""
-          for market in korea china europe georgia; do
+          for market in korea china europe; do
             export RECOVERY_MERGE_MARKET="$market"
             export RECOVERY_MERGE_INPUT_DIR="shard-input"
             export RECOVERY_MERGE_OUTPUT="catalog-rebuild-${market}.json"
@@ -322,52 +320,8 @@ jobs:
           if-no-files-found: warn
           retention-days: 3
 
-  publish-georgia:
-    needs: [validate, merge, publish-europe]
-    if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
-    concurrency:
-      group: catalog-live-daily-working-markets
-      cancel-in-progress: false
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - uses: actions/download-artifact@v4
-        with:
-          name: catalog-kceg-merged
-          path: daily-input
-      - name: Publish Georgia independently of earlier market results
-        env:
-          RECOVERY_PUBLISH_MARKET: georgia
-          RECOVERY_PUBLISH_INPUT: daily-input/catalog-rebuild-georgia.json
-          RECOVERY_PUBLISH_REPORT: catalog-daily-georgia-publish-report.json
-          RECOVERY_PUBLISH_MAX: "30000"
-          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
-        run: npx tsx scripts/catalog-live-recovery-publish.mjs
-      - name: Audit Georgia after publish
-        if: always()
-        env:
-          CATALOG_AUDIT_OUTPUT: catalog-georgia-postpersist-audit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: georgia
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
-        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: catalog-daily-georgia-reports
-          path: |
-            catalog-daily-georgia-publish-report.json
-            catalog-georgia-postpersist-audit.json
-          if-no-files-found: warn
-          retention-days: 3
-
   final-audit:
-    needs: [validate, merge, publish-korea, publish-china, publish-europe, publish-georgia]
+    needs: [validate, merge, publish-korea, publish-china, publish-europe]
     if: always() && needs.validate.result == 'success' && needs.merge.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -381,7 +335,7 @@ jobs:
       - name: Audit all seven after the daily cycle
         env:
           CATALOG_AUDIT_OUTPUT: catalog-kceg-final-audit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,europe,georgia
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
           CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
