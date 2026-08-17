@@ -2,6 +2,7 @@ import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
@@ -112,6 +113,7 @@ function diverseSimilarOffers(rows: any[], current: any, limit = 4, excludedIds 
 async function SimilarOffers({ current }: { current: any }) {
   let sameModel: any[] = [];
   let otherMarketModels: any[] = [];
+  let marketTotal = 0;
   try {
     const [modelResult, marketResult] = await Promise.all([
       searchOffers({ market: current.market, make: current.make, model: current.model, pageSize: 48, sort: "updatedAt" }),
@@ -119,6 +121,7 @@ async function SimilarOffers({ current }: { current: any }) {
     ]);
     const modelRows = modelResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
     const marketRows = marketResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
+    marketTotal = Math.max(0, Number(marketResult.total || 0));
     sameModel = modelRows.slice(0, 4);
     if (sameModel.length < 4) {
       const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
@@ -140,7 +143,7 @@ async function SimilarOffers({ current }: { current: any }) {
 
   return <div className="mt-10 space-y-10 md:mt-14 md:space-y-14">
     <section><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Ещё {modelTitle}</h2><Link href={`/cars?${modelParams}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{rail(sameModel)}</section>
-    <section><div className="flex items-end justify-between gap-3"><h2 className="min-w-0 text-[26px] font-black leading-none tracking-[-0.035em] md:text-4xl">Другие автомобили — {marketLabel}</h2><Link href={`/cars?${marketParams}`} className="shrink-0 text-sm font-black md:text-base">Все →</Link></div>{rail(otherMarketModels)}</section>
+    <section><div className="mb-4 flex items-end justify-between gap-4"><h2 className="flex min-w-0 items-center gap-2 text-[26px] font-black tracking-[-0.04em] md:text-4xl"><CatalogMarketFlag market={String(current.market || "")} className="h-5 w-7 md:h-6 md:w-9" /><span>{marketLabel}</span><span className="text-sm text-[var(--ac-muted)] md:text-base">· {marketTotal}</span></h2><Link href={`/cars?${marketParams}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link></div>{rail(otherMarketModels)}</section>
   </div>;
 }
 

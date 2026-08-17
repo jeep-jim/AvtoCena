@@ -30,7 +30,8 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.match(page, /async function SimilarOffers/);
   assert.match(page, /make: current\.make, model: current\.model/);
   assert.match(page, /Ещё \{modelTitle\}/);
-  assert.match(page, /Другие автомобили — \{marketLabel\}/);
+  assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
+  assert.match(page, /· \{marketTotal\}/);
   assert.match(page, /new URLSearchParams\(\{ market: String\(current\.market \|\| ""\), make: String\(current\.make \|\| ""\), model: String\(current\.model \|\| ""\) \}\)/);
 });
 
