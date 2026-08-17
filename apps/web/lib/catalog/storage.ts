@@ -11,6 +11,10 @@ import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./veh
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
+const IMAGE_SOURCE_CACHE_VERSION = 1;
+const IMAGE_SOURCE_CACHE_SHARD_LIMIT = Math.max(100, Math.min(500, Number(process.env.CATALOG_IMAGE_SOURCE_CACHE_SHARD_LIMIT || 450)));
+const IMAGE_SOURCE_HOST_CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.CATALOG_IMAGE_HOST_CONCURRENCY || 3)));
+const IMAGE_SOURCE_HOST_RPM = Math.max(30, Math.min(600, Number(process.env.CATALOG_IMAGE_HOST_RPM || 180)));
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
 const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?encar\.com$/i,
@@ -133,6 +137,94 @@ export type CatalogSearchProjection = {
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
+
+type ImageSourceCacheRecord = { objectKey: string; imageId: string; checksum: string; mimeType: string; size: number; createdAt: string };
+type ImageSourceCacheShard = { version: 1; records: Record<string, ImageSourceCacheRecord> };
+const imageSourceCacheMemory = new Map<string, ImageSourceCacheShard>();
+const imageSourceCacheLocks = new Map<string, Promise<unknown>>();
+const imageHostStates = new Map<string, { active: number; nextStartAt: number; blockedUntil: number; failures: number; waiters: Array<() => void> }>();
+
+function normalizedImageSourceUrl(rawUrl: string) {
+  const url = new URL(rawUrl);
+  url.hash = "";
+  const transient = /^(x-amz-(algorithm|credential|date|expires|signedheaders|signature|security-token)|key-pair-id|signature|expires)$/i;
+  for (const key of [...url.searchParams.keys()]) if (transient.test(key)) url.searchParams.delete(key);
+  url.searchParams.sort();
+  return url.toString();
+}
+
+function imageSourceCacheIdentity(rawUrl: string) {
+  const hash = crypto.createHash("sha256").update(normalizedImageSourceUrl(rawUrl)).digest("hex");
+  return { hash, shardPath: `catalog/image-source-cache/v${IMAGE_SOURCE_CACHE_VERSION}/${hash.slice(0, 3)}.json` };
+}
+
+async function withImageSourceCacheLock<T>(key: string, fn: () => Promise<T>) {
+  const previous = imageSourceCacheLocks.get(key) || Promise.resolve();
+  let release!: () => void;
+  const current = new Promise<void>((resolve) => { release = resolve; });
+  imageSourceCacheLocks.set(key, previous.then(() => current, () => current));
+  await previous.catch(() => undefined);
+  try { return await fn(); }
+  finally { release(); }
+}
+
+async function readImageSourceCacheShard(shardPath: string) {
+  const cached = imageSourceCacheMemory.get(shardPath);
+  if (cached) return cached;
+  const stored = await getJsonStorage().readJson<ImageSourceCacheShard>(shardPath, { version: 1, records: {} }).catch(() => ({ version: 1 as const, records: {} }));
+  const valid = stored?.version === 1 && stored.records && typeof stored.records === "object" ? stored : { version: 1 as const, records: {} };
+  imageSourceCacheMemory.set(shardPath, valid);
+  return valid;
+}
+
+async function rememberImageSource(rawUrl: string, image: CatalogImage) {
+  const { hash, shardPath } = imageSourceCacheIdentity(rawUrl);
+  await withImageSourceCacheLock(shardPath, async () => {
+    const storage = getJsonStorage();
+    for (let attempt = 0; attempt < 6; attempt++) {
+      const meta = await storage.readJsonWithMeta<ImageSourceCacheShard>(shardPath, { version: 1, records: {} });
+      const current = meta.value?.version === 1 && meta.value.records && typeof meta.value.records === "object" ? meta.value : { version: 1 as const, records: {} };
+      const existing = current.records[hash];
+      if (existing?.objectKey === image.objectKey && existing?.checksum === image.checksum) { imageSourceCacheMemory.set(shardPath, current); return; }
+      const entries = Object.entries(current.records).filter(([key]) => key !== hash);
+      const retained = entries.length >= IMAGE_SOURCE_CACHE_SHARD_LIMIT ? entries.slice(entries.length - IMAGE_SOURCE_CACHE_SHARD_LIMIT + 1) : entries;
+      const next: ImageSourceCacheShard = { version: 1, records: Object.fromEntries([...retained, [hash, { objectKey: image.objectKey, imageId: image.id, checksum: image.checksum, mimeType: image.mimeType, size: image.size, createdAt: new Date().toISOString() }]]) };
+      try {
+        await storage.writeJson(shardPath, next, meta.found && meta.etag ? { ifMatch: meta.etag } : { ifNoneMatch: "*" });
+        imageSourceCacheMemory.set(shardPath, next);
+        return;
+      } catch (error) {
+        if (!(error instanceof StorageConflictError)) throw error;
+      }
+    }
+  });
+}
+
+async function cachedImageForSource(rawUrl: string) {
+  const { hash, shardPath } = imageSourceCacheIdentity(rawUrl);
+  const record = (await readImageSourceCacheShard(shardPath)).records[hash];
+  if (!record?.objectKey || !(await getJsonStorage().binaryExists?.(record.objectKey).catch(() => false))) return null;
+  return { id: record.imageId, url: publicImageUrl(record.imageId, record.objectKey), objectKey: record.objectKey, checksum: record.checksum, mimeType: record.mimeType, size: record.size } satisfies CatalogImage;
+}
+
+async function withImageHostLimit<T>(hostname: string, fn: () => Promise<T>) {
+  const state = imageHostStates.get(hostname) || { active: 0, nextStartAt: 0, blockedUntil: 0, failures: 0, waiters: [] };
+  imageHostStates.set(hostname, state);
+  while (state.active >= IMAGE_SOURCE_HOST_CONCURRENCY) await new Promise<void>((resolve) => state.waiters.push(resolve));
+  const waitMs = Math.max(0, state.nextStartAt - Date.now(), state.blockedUntil - Date.now());
+  if (waitMs) await new Promise((resolve) => setTimeout(resolve, waitMs));
+  state.active++;
+  state.nextStartAt = Date.now() + Math.ceil(60_000 / IMAGE_SOURCE_HOST_RPM);
+  try { const result = await fn(); state.failures = 0; return result; }
+  catch (error) {
+    state.failures++;
+    if (String(error instanceof Error ? error.message : error).includes("image_source_rate_limited")) state.blockedUntil = Date.now() + Math.min(5 * 60_000, 30_000 * 2 ** Math.min(3, state.failures - 1));
+    throw error;
+  }
+  finally { state.active--; state.waiters.shift()?.(); }
+}
+
+export function resetImageSourceCacheForTests() { imageSourceCacheMemory.clear(); imageSourceCacheLocks.clear(); imageHostStates.clear(); }
 const MAX_INDEX_SHARD_BYTES = 180;
 export function catalogIndexShardKey(value?: string | number) {
   const normalized = String(value || "unknown")
@@ -1097,10 +1189,34 @@ function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if 
 export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
   let safeUrl: string; try { safeUrl = assertSafeImageUrl(url); } catch { return null; }
-  const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 12000));
   try {
-    let currentUrl = safeUrl; let res: Response | null = null; for (let redirects = 0; redirects <= 3; redirects++) { res = await fetch(currentUrl, { ...init, signal: controller.signal, redirect: "manual" }); if ([301,302,303,307,308].includes(res.status)) { const location = res.headers.get("location"); if (!location || redirects === 3) return null; currentUrl = assertSafeImageUrl(new URL(location, currentUrl).toString()); continue; } break; } if (!res || !res.ok) return null; const mimeType = res.headers.get("content-type") || ""; if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
-    const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null; const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
-    const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage(); if (!(await storage.binaryExists?.(objectKey))) await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); return { id: imageId, url: publicImageUrl(imageId, objectKey), objectKey, checksum, mimeType, size: buf.length };
-  } catch { return null; } finally { clearTimeout(timeout); }
+    const existing = await cachedImageForSource(safeUrl);
+    if (existing) return existing;
+    return await withImageHostLimit(new URL(safeUrl).hostname.toLowerCase(), async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 12000));
+      try {
+        let currentUrl = safeUrl; let res: Response | null = null;
+        for (let redirects = 0; redirects <= 3; redirects++) {
+          res = await fetch(currentUrl, { ...init, signal: controller.signal, redirect: "manual" });
+          if (res.status === 403 || res.status === 429) throw new Error(`image_source_rate_limited_${res.status}`);
+          if ([301,302,303,307,308].includes(res.status)) { const location = res.headers.get("location"); if (!location || redirects === 3) return null; currentUrl = assertSafeImageUrl(new URL(location, currentUrl).toString()); continue; }
+          break;
+        }
+        if (!res || !res.ok) return null;
+        const mimeType = (res.headers.get("content-type") || "").split(";", 1)[0].trim().toLowerCase();
+        if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
+        const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null;
+        const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
+        const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage();
+        if (!(await storage.binaryExists?.(objectKey))) {
+          try { await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); }
+          catch (error) { if (!(error instanceof StorageConflictError) || !(await storage.binaryExists?.(objectKey))) throw error; }
+        }
+        const image = { id: imageId, url: publicImageUrl(imageId, objectKey), objectKey, checksum, mimeType, size: buf.length } satisfies CatalogImage;
+        await rememberImageSource(safeUrl, image).catch(() => undefined);
+        return image;
+      } finally { clearTimeout(timeout); }
+    });
+  } catch { return null; }
 }
