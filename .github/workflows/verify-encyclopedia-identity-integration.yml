@@ -1,0 +1,39 @@
+name: Verify Encyclopedia Identity Integration
+
+on:
+  push:
+    branches:
+      - recovery/encyclopedia-v2-staging-20260818
+    paths:
+      - .github/workflows/verify-encyclopedia-identity-integration.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-encyclopedia-identity-resolver-20260818
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Encyclopedia V2 validator and tests
+        run: |
+          node scripts/vehicle-encyclopedia/validate.mjs
+          node --test tests/vehicle-encyclopedia/*.test.mjs
+      - name: Catalog identity tests
+        run: node --import tsx --test tests/catalog-encyclopedia-identity-*.test.ts
+      - name: Shadow audit syntax
+        run: node --check scripts/catalog-audit-encyclopedia-identity.mjs
+      - name: Web typecheck
+        run: npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Engine typecheck
+        run: npm --workspace=@avtocena/engine exec tsc -- --noEmit
+      - name: Production build
+        run: npm run build
