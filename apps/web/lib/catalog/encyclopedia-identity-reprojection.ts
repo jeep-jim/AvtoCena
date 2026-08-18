@@ -30,8 +30,9 @@ function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
-function identityFreeSnapshot(row: IdentityRow) {
-  const { make: _make, model: _model, operational: _operational, ...rest } = row;
+function identityFreeSnapshot(row: object) {
+  const value = row as Record<string, unknown>;
+  const { make: _make, model: _model, operational: _operational, ...rest } = value;
   return JSON.stringify(rest);
 }
 
@@ -70,7 +71,7 @@ export function planEncyclopediaIdentityReprojection<T extends IdentityRow>(
     const resolution = resolver.resolve({ make: beforeMake, model: beforeModel });
     const next = applyEncyclopediaIdentity(resolver, row);
     if (next.id !== row.id) throw new Error(`encyclopedia_reprojection_offer_id_changed:${row.id}`);
-    if (identityFreeSnapshot(next as T) !== identityFreeSnapshot(row)) {
+    if (identityFreeSnapshot(next) !== identityFreeSnapshot(row)) {
       throw new Error(`encyclopedia_reprojection_non_identity_mutation:${row.id}`);
     }
 
