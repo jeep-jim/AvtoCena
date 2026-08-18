@@ -38,18 +38,21 @@ jobs:
         run: npm --workspace=@avtocena/engine exec tsc -- --noEmit
       - name: Production build
         run: npm run build
-      - name: Persist success marker
+      - name: Persist verification result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
         shell: bash
         run: |
           set -euo pipefail
-          VERIFIED_SHA="$(git rev-parse HEAD)"
+          VERIFIED_SHA="$(git rev-parse HEAD 2>/dev/null || echo unknown)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin recovery/encyclopedia-v2-staging-20260818
           git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
           cd /tmp/recovery
           mkdir -p recovery-assets/encyclopedia-v2-20260818
-          printf 'verified_feature_sha=%s\nverified_at=%s\nstatus=success\n' "$VERIFIED_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_SUCCESS.txt
-          git add recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_SUCCESS.txt
-          git commit -m 'chore(recovery): record identity integration verification success'
+          printf 'verified_feature_sha=%s\nverified_at=%s\nstatus=%s\n' "$VERIFIED_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$JOB_STATUS" > recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_RESULT.txt
+          git add recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_RESULT.txt
+          git commit -m 'chore(recovery): record identity integration verification result' || true
           git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
