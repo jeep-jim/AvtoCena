@@ -25,12 +25,17 @@ function offer(overrides: Record<string, unknown> = {}) {
     mileageKm: 12000,
     totalRub: 3900000,
     images: [{ id: "img-1", url: "/x" }],
-    operational: { sourceUrl: "https://example.test/1", raw: { make: "AITO Wenjie" } },
+    operational: {
+      sourceUrl: "https://example.test/1",
+      vin: "TESTVIN1234567890",
+      frameNumber: "FRAME-1",
+      raw: { make: "AITO Wenjie", nested: { sourceId: 7 } },
+    },
     ...overrides,
   };
 }
 
-test("reprojection collapses safe duplicate identity without changing commercial fields", () => {
+test("reprojection collapses safe duplicate identity without changing commercial or source fields", () => {
   const input = offer();
   const { rows, report } = planEncyclopediaIdentityReprojection(resolver, [input]);
   assert.equal(rows[0].make, "AITO");
@@ -40,6 +45,12 @@ test("reprojection collapses safe duplicate identity without changing commercial
   assert.equal(rows[0].totalRub, input.totalRub);
   assert.equal(rows[0].mileageKm, input.mileageKm);
   assert.deepEqual(rows[0].images, input.images);
+  assert.equal(rows[0].operational.sourceUrl, input.operational.sourceUrl);
+  assert.equal(rows[0].operational.vin, input.operational.vin);
+  assert.equal(rows[0].operational.frameNumber, input.operational.frameNumber);
+  assert.deepEqual(rows[0].operational.raw, input.operational.raw);
+  assert.equal(rows[0].operational.encyclopediaIdentity.canonicalBrandId, "aito");
+  assert.equal(rows[0].operational.encyclopediaIdentity.canonicalModelId, "aito/m9");
   assert.equal(report.total, 1);
   assert.equal(report.changed, 1);
   assert.equal(report.brandChanged, 1);
