@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 
 const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 const { readEncyclopediaIdentityResolver, readEncyclopediaIdentityDataset } = await import("../apps/web/lib/catalog/encyclopedia-identity-data.ts");
+const { buildEncyclopediaIdentityReviewQueue } = await import("../apps/web/lib/catalog/encyclopedia-identity-review-queue.ts");
 
 const OUTPUT = process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_AUDIT_OUTPUT || "catalog-encyclopedia-identity-audit.json";
 const SAMPLE_LIMIT = Math.max(10, Math.min(500, Number(process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_SAMPLE_LIMIT || 100)));
@@ -26,6 +27,7 @@ const resolver = await readEncyclopediaIdentityResolver();
 if (!dataset || !resolver) throw new Error("encyclopedia_identity_dataset_unavailable");
 
 const offers = await readAllOffersForMaintenance();
+const reviewQueue = buildEncyclopediaIdentityReviewQueue(resolver, offers, SAMPLE_LIMIT);
 const rawMakes = new Set();
 const canonicalMakes = new Set();
 const rawModels = new Set();
@@ -116,7 +118,7 @@ const duplicateMakeClusters = [...duplicateMakeTransitions.entries()]
   .sort((left, right) => right.offers - left.offers || left.canonicalMake.localeCompare(right.canonicalMake, "ru"));
 
 const report = {
-  version: 1,
+  version: 2,
   mode: "shadow_read_only",
   auditedAt: new Date().toISOString(),
   encyclopedia: {
@@ -145,6 +147,7 @@ const report = {
   unresolvedMakes: sortedCounts(unresolvedMakes),
   unresolvedModels: sortedCounts(unresolvedModels),
   ambiguous: sortedCounts(ambiguous),
+  reviewQueue,
   topMakeTransitions: sortedCounts(makeTransitions),
   topModelTransitions: sortedCounts(modelTransitions),
   byMarket: withRatios(marketResolution),
