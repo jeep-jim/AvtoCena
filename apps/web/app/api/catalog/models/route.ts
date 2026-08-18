@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { readCatalogFacets } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
-import { catalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
+import { effectiveCatalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
 import { resolveConfiguredCatalogSearchParams } from "@/lib/catalog/encyclopedia-identity-query";
 import { encyclopediaIdentityFacets, searchEncyclopediaIdentityModels } from "@/lib/catalog/encyclopedia-identity-directory";
 
@@ -73,7 +73,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const rawQuery = clean(url.searchParams.get("q"));
   const rawMake = clean(url.searchParams.get("make"));
-  const mode = catalogEncyclopediaIdentityMode();
+  const mode = await effectiveCatalogEncyclopediaIdentityMode();
   const identitySearch = await resolveConfiguredCatalogSearchParams({ make: rawMake || undefined, model: rawQuery || undefined });
   const query = clean(identitySearch.model || rawQuery);
   const make = clean(identitySearch.make || rawMake);
