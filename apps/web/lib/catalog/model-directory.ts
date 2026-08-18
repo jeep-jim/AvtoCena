@@ -1,10 +1,9 @@
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
-import { readEncyclopediaKnowledgeVariants } from "./encyclopedia";
+import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
 import { readCatalogBrandModelCounts } from "./storage";
 import {
-  readVehicleKnowledgeModels,
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
 } from "./vehicle-knowledge";
@@ -76,7 +75,7 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
 
 const readKnowledge = cache(async () => {
   const [models, variants, references] = await Promise.all([
-    readVehicleKnowledgeModels(),
+    readEncyclopediaKnowledgeModels(),
     readEncyclopediaKnowledgeVariants(),
     readVehiclePowerKnowledge(),
   ]);
@@ -162,7 +161,7 @@ export const findBrandModelBySlug = cache(async (rawMake: string, rawSlug: strin
 });
 
 export const readAllModelSeoLinks = cache(async () => {
-  const models = (await readVehicleKnowledgeModels()).filter((model) => model.active !== false);
+  const models = (await readEncyclopediaKnowledgeModels()).filter((model) => model.active !== false);
   return models.map((model) => ({
     make: canonicalCatalogBrand(model.make),
     brandSlug: catalogBrandSlug(model.make),
