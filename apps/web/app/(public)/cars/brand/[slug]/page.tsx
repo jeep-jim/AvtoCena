@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const brand = catalogBrandBySlug(slug);
   if (!brand) return {};
-  const title = `${brand.name} под заказ — модели, цены и расчёт под ключ`;
-  const description = `Все модели ${brand.name} под заказ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Актуальные предложения, ориентировочная цена с таможней и доставка в Россию.`;
+  const title = `${brand.name} — модели, характеристики и цены | Энциклопедия АвтоЦена`;
+  const description = `Энциклопедия ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Расчёт под ключ в АвтоЦене.`;
   return {
     title,
     description,
@@ -67,6 +67,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const fallbackResult = offers.length ? null : await searchOffers({ pageSize: 16, sort: "updatedAt" });
   const similar = (fallbackResult?.items || []).filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const availableMarkets = grouped.map((group) => group.market);
+  const knowledgeRecords = models.reduce((sum, model) => sum + Number(model.knowledge.records || 0), 0);
 
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -80,17 +81,22 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Автомобили под заказ</div>
-          <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} под ключ</h1>
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · {models.length} моделей</div>
+          <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Выберите модель {brand.name}, посмотрите актуальные предложения и узнайте ориентировочную стоимость автомобиля с доставкой и оформлением. Если подходящего варианта сейчас нет, оставьте запрос — менеджер выполнит поиск и подтвердит итоговую цену.
+            Модели, характеристики и проверенные модификации {brand.name} в единой базе АвтоЦены. Выберите модель, изучите доступные данные и сразу перейдите к актуальным предложениям или расчёту автомобиля под ключ.
           </p>
+          <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{models.length} моделей</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{knowledgeRecords} записей характеристик</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} рынков</span>
+          </div>
         </div>
       </header>
 
       <section className="mt-7 rounded-[1.6rem] bg-[var(--ac-surface)] p-5 md:p-6">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="mr-auto text-xl font-black md:text-2xl">Где можно подобрать {brand.name}</h2>
+          <h2 className="mr-auto text-xl font-black md:text-2xl">Актуальные рынки {brand.name}</h2>
           {availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}
         </div>
       </section>

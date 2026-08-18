@@ -89,8 +89,8 @@ test("does not use a make token as Mercedes-Benz model evidence", async () => {
   assert.notEqual(sprinter.model, "Benz");
 });
 
-test("model directory aggregates variants and power references into public characteristics", () => {
-  assert.match(modelDirectory, /readVehicleKnowledgeVariants/);
+test("model directory aggregates verified encyclopedia variants and power references into public characteristics", () => {
+  assert.match(modelDirectory, /readEncyclopediaKnowledgeVariants/);
   assert.match(modelDirectory, /readVehiclePowerKnowledge/);
   assert.match(modelDirectory, /power30MinKw/);
   assert.match(modelDirectory, /utilizationPowerKw/);
@@ -98,7 +98,7 @@ test("model directory aggregates variants and power references into public chara
   assert.match(modelDirectory, /knowledge: summarizeModel/);
 });
 
-test("public brand and model pages render knowledge power, kW and 30-minute fields", () => {
+test("public brand and model pages render encyclopedia power, kW and 30-minute fields", () => {
   assert.match(brandDirectoryUi, /Нажмите на модель, чтобы раскрыть характеристики/);
   assert.match(brandDirectoryUi, /aria-controls/);
   assert.match(brandDirectoryUi, /Все характеристики и предложения/);
@@ -106,11 +106,11 @@ test("public brand and model pages render knowledge power, kW and 30-minute fiel
   assert.match(brandDirectoryUi, /power30MinKw/);
   assert.match(brandDirectoryUi, /fuels/);
   assert.match(brandDirectoryUi, /powertrains/);
-  assert.match(modelPage, /База знаний АвтоЦена/);
+  assert.match(modelPage, /Энциклопедия АвтоЦена/);
   assert.match(modelPage, /Автосопоставление включено/);
   assert.match(modelPage, /30-минутную мощность/);
   assert.match(modelPage, /utilizationPowerKw/);
-  assert.match(modelPage, /readVehicleKnowledgeVariants/);
+  assert.match(modelPage, /readEncyclopediaKnowledgeVariants/);
   assert.match(modelPage, /readVehiclePowerKnowledge/);
 });
 
