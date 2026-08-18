@@ -1,7 +1,7 @@
 import type { CatalogSearchParams } from "./types";
 import type { EncyclopediaIdentityResolver } from "./encyclopedia-identity";
 import { readEncyclopediaIdentityResolver } from "./encyclopedia-identity-data";
-import { catalogEncyclopediaIdentityMode } from "./encyclopedia-identity-runtime";
+import { catalogEncyclopediaIdentityMode, requireEncyclopediaIdentityApplyEnabled } from "./encyclopedia-identity-runtime";
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -43,11 +43,12 @@ export function resolveCatalogSearchParamsWithEncyclopedia(
 
 /**
  * Public-query feature gate. Shadow mode intentionally leaves URLs/search
- * behavior unchanged; only apply mode rewrites safe historical aliases to the
- * canonical V2 names used by the public projection.
+ * behavior unchanged; apply mode requires both env opt-in and
+ * manifest.productionConnected=true before aliases are rewritten.
  */
 export async function resolveConfiguredCatalogSearchParams(params: CatalogSearchParams) {
   if (catalogEncyclopediaIdentityMode() !== "apply") return params;
+  await requireEncyclopediaIdentityApplyEnabled();
   const resolver = await readEncyclopediaIdentityResolver();
   if (!resolver) throw new Error("catalog_encyclopedia_identity_query_dataset_unavailable");
   return resolveCatalogSearchParamsWithEncyclopedia(resolver, params);
