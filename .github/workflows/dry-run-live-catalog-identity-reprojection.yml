@@ -33,31 +33,32 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Read live offers and dry-run canonical identity
+        id: reprojection
+        continue-on-error: true
         shell: bash
         run: |
-          set -euo pipefail
-          node --import tsx <<'NODE'
-          const { readAllOffersForMaintenance } = await import('./apps/web/lib/catalog/storage.ts');
-          const { readEncyclopediaIdentityResolver } = await import('./apps/web/lib/catalog/encyclopedia-identity-data.ts');
-          const { planEncyclopediaIdentityReprojection } = await import('./apps/web/lib/catalog/encyclopedia-identity-reprojection.ts');
-          const offers = await readAllOffersForMaintenance();
-          const resolver = await readEncyclopediaIdentityResolver();
-          if (!resolver) throw new Error('identity_resolver_unavailable');
-          const { rows, report } = planEncyclopediaIdentityReprojection(resolver, offers);
-          if (rows.length !== offers.length) throw new Error(`offer_count_changed:${offers.length}:${rows.length}`);
-          const result = {
-            featureSha: process.env.GITHUB_SHA || null,
-            resolverCollisions: resolver.collisions,
-            report,
-          };
-          require('fs').writeFileSync('/tmp/live-identity-reprojection-dry-run.json', JSON.stringify(result,null,2)+'\n');
-          console.log(JSON.stringify(result,null,2));
-          NODE
-          test -s /tmp/live-identity-reprojection-dry-run.json
-      - name: Persist dry-run result
+          set -o pipefail
+          {
+            node --import tsx <<'NODE'
+            const { readAllOffersForMaintenance } = await import('./apps/web/lib/catalog/storage.ts');
+            const { readEncyclopediaIdentityResolver } = await import('./apps/web/lib/catalog/encyclopedia-identity-data.ts');
+            const { planEncyclopediaIdentityReprojection } = await import('./apps/web/lib/catalog/encyclopedia-identity-reprojection.ts');
+            const offers = await readAllOffersForMaintenance();
+            const resolver = await readEncyclopediaIdentityResolver();
+            if (!resolver) throw new Error('identity_resolver_unavailable');
+            const { rows, report } = planEncyclopediaIdentityReprojection(resolver, offers);
+            if (rows.length !== offers.length) throw new Error(`offer_count_changed:${offers.length}:${rows.length}`);
+            const result = { verifiedFeatureSha: process.env.GITHUB_SHA || null, resolverCollisions: resolver.collisions, report };
+            require('fs').writeFileSync('/tmp/live-identity-reprojection-dry-run.json', JSON.stringify(result,null,2)+'\n');
+            console.log(JSON.stringify(result,null,2));
+            NODE
+            test -s /tmp/live-identity-reprojection-dry-run.json
+          } 2>&1 | tee /tmp/live-identity-reprojection-dry-run.log
+      - name: Persist dry-run diagnostics
         if: always()
         env:
           JOB_STATUS: ${{ job.status }}
+          STEP_OUTCOME: ${{ steps.reprojection.outcome }}
         shell: bash
         run: |
           set -euo pipefail
@@ -68,11 +69,14 @@ jobs:
           git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
           cd /tmp/recovery
           mkdir -p recovery-assets/encyclopedia-v2-20260818/audits
-          if [ -s /tmp/live-identity-reprojection-dry-run.json ]; then
-            cp /tmp/live-identity-reprojection-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json
-          fi
-          printf 'verified_feature_sha=%s\nstatus=%s\nverified_at=%s\n' "$VERIFIED_SHA" "$JOB_STATUS" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.meta.txt
+          if [ -s /tmp/live-identity-reprojection-dry-run.json ]; then cp /tmp/live-identity-reprojection-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json; fi
+          if [ -s /tmp/live-identity-reprojection-dry-run.log ]; then cp /tmp/live-identity-reprojection-dry-run.log recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.log; fi
+          printf 'verified_feature_sha=%s\njob_status=%s\nstep_outcome=%s\nverified_at=%s\n' "$VERIFIED_SHA" "$JOB_STATUS" "$STEP_OUTCOME" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.meta.txt
           git add recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.meta.txt
-          if [ -f recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json ]; then git add recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json; fi
-          git commit -m 'chore(recovery): record live identity reprojection dry-run' || true
+          [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json ] || git add recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.json
+          [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.log ] || git add recovery-assets/encyclopedia-v2-20260818/audits/live-identity-reprojection-dry-run.log
+          git commit -m 'chore(recovery): record live identity reprojection dry-run diagnostics' || true
           git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
+      - name: Fail if dry-run failed
+        if: steps.reprojection.outcome != 'success'
+        run: exit 1
