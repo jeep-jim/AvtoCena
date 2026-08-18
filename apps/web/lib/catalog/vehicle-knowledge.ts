@@ -1,4 +1,4 @@
-import { readBundledChunkedDataJson } from "../bundled-data";
+import { readBundledChunkedDataJson, readBundledDataJson } from "../bundled-data";
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 
 export type VehicleKnowledgeModel = {
@@ -61,6 +61,8 @@ export type VehicleModelMatch = {
 
 const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
 const VARIANTS_PATH = "catalog/vehicle-knowledge/variants.json";
+const V2_BRIDGE_MODELS_PATH = "catalog/vehicle-knowledge/v2-bridge-models.json";
+const V2_BRIDGE_VARIANTS_PATH = "catalog/vehicle-knowledge/v2-bridge-variants.json";
 let modelCache: Promise<VehicleKnowledgeModel[]> | null = null;
 let variantCache: Promise<VehicleKnowledgeVariant[]> | null = null;
 
@@ -170,29 +172,43 @@ function scoreModel(model: VehicleKnowledgeModel, offer: Partial<VehicleOffer>) 
   return { model, score: best, matchedBy } satisfies VehicleModelMatch;
 }
 
+function appendNewIds<T extends { id: string }>(legacy: T[], additions: T[]) {
+  const existing = new Set(legacy.map((row) => row.id));
+  return [...legacy, ...additions.filter((row) => row?.id && !existing.has(row.id))];
+}
+
+function normalizeKnowledgeModels(rows: VehicleKnowledgeModel[]) {
+  return rows
+    .filter((row) => row && row.id && validName(row.make) && validName(row.model, 1))
+    .map((row) => ({
+      ...row,
+      make: text(row.make),
+      model: text(row.model),
+      aliases: splitAliases(row.aliases),
+      makeAliases: splitAliases(row.makeAliases),
+      bodyTypes: splitAliases(row.bodyTypes),
+      countries: splitAliases(row.countries),
+      regions: splitAliases(row.regions),
+    }));
+}
+
 export async function readVehicleKnowledgeModels() {
   if (!modelCache) {
-    modelCache = readBundledChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, [])
-      .then((rows) => rows
-        .filter((row) => row && row.id && validName(row.make) && validName(row.model, 1))
-        .map((row) => ({
-          ...row,
-          make: text(row.make),
-          model: text(row.model),
-          aliases: splitAliases(row.aliases),
-          makeAliases: splitAliases(row.makeAliases),
-          bodyTypes: splitAliases(row.bodyTypes),
-          countries: splitAliases(row.countries),
-          regions: splitAliases(row.regions),
-        })));
+    modelCache = Promise.all([
+      readBundledChunkedDataJson<VehicleKnowledgeModel>(MODELS_PATH, []),
+      readBundledDataJson<VehicleKnowledgeModel[]>(V2_BRIDGE_MODELS_PATH, []),
+    ]).then(([legacy, bridge]) => normalizeKnowledgeModels(appendNewIds(legacy, bridge)));
   }
   return modelCache;
 }
 
 export async function readVehicleKnowledgeVariants() {
   if (!variantCache) {
-    variantCache = readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, [])
-      .then((rows) => rows.filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));
+    variantCache = Promise.all([
+      readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, []),
+      readBundledChunkedDataJson<VehicleKnowledgeVariant>(V2_BRIDGE_VARIANTS_PATH, []),
+    ]).then(([legacy, bridge]) => appendNewIds(legacy, bridge)
+      .filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));
   }
   return variantCache;
 }
