@@ -14,6 +14,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      VERIFY_GENERATION: "20260818-2"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,7 +54,7 @@ jobs:
           git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
           cd /tmp/recovery
           mkdir -p recovery-assets/encyclopedia-v2-20260818
-          printf 'verified_feature_sha=%s\nverified_at=%s\nstatus=%s\n' "$VERIFIED_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$JOB_STATUS" > recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_RESULT.txt
+          printf 'verified_feature_sha=%s\nverified_at=%s\nstatus=%s\ngeneration=%s\n' "$VERIFIED_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$JOB_STATUS" "$VERIFY_GENERATION" > recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_RESULT.txt
           git add recovery-assets/encyclopedia-v2-20260818/IDENTITY_INTEGRATION_VERIFY_RESULT.txt
           git commit -m 'chore(recovery): record identity integration verification result' || true
           git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
