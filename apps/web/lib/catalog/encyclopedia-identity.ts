@@ -77,8 +77,13 @@ function aliasValue(alias: EncyclopediaAlias) {
   return typeof alias === "string" ? alias : alias?.value;
 }
 
+/**
+ * Fail closed. V2's canonical identity contract uses structured aliases with an
+ * explicit safe flag. Raw string aliases and sourceNames are discovery/audit
+ * material only and must not silently become merge authority.
+ */
 function aliasSafe(alias: EncyclopediaAlias) {
-  return typeof alias === "string" ? true : alias?.safe !== false;
+  return typeof alias !== "string" && alias?.safe === true;
 }
 
 function addCandidate(map: Map<string, Candidate[]>, rawKey: string, candidate: Candidate) {
@@ -125,7 +130,7 @@ export class EncyclopediaIdentityResolver {
       this.models.set(model.id, model);
       const map = this.modelMap(model.brandId);
       addCandidate(map, model.canonicalName, { entityId: model.id, source: "canonical" });
-      for (const alias of [...(model.aliases || []), ...(model.sourceNames || [])]) {
+      for (const alias of model.aliases || []) {
         if (aliasSafe(alias)) addCandidate(map, aliasValue(alias), { entityId: model.id, source: "safe_alias" });
       }
     }
