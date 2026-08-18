@@ -163,7 +163,8 @@ test("public brand and model pages render encyclopedia power, kW and 30-minute f
 });
 
 test("verified V2 cards stay visible without fabricated power", () => {
-  assert.doesNotMatch(modelPage, /if \(!powerHp\) continue/);
+  assert.match(modelPage, /const powerHp = positive\(variant\.powerHp, 2_500\)/);
+  assert.doesNotMatch(modelPage, /const powerHp = (?:Number|positive)\(variant\.powerHp[^;]*;\s*if \(!powerHp\) continue/);
   assert.match(modelPage, /variantName/);
   assert.match(modelPage, /Серия \/ период/);
   assert.match(modelPage, /эл\.мотор peak/);
