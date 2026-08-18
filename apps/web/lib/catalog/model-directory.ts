@@ -1,10 +1,10 @@
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
+import { readEncyclopediaKnowledgeVariants } from "./encyclopedia";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
 import { readCatalogBrandModelCounts } from "./storage";
 import {
   readVehicleKnowledgeModels,
-  readVehicleKnowledgeVariants,
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
 } from "./vehicle-knowledge";
@@ -77,7 +77,7 @@ export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "mode
 const readKnowledge = cache(async () => {
   const [models, variants, references] = await Promise.all([
     readVehicleKnowledgeModels(),
-    readVehicleKnowledgeVariants(),
+    readEncyclopediaKnowledgeVariants(),
     readVehiclePowerKnowledge(),
   ]);
   return { models, variants, references };
