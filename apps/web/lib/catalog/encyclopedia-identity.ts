@@ -62,7 +62,8 @@ function clean(value: unknown) {
 
 /**
  * Must stay Unicode-aware: Chinese, Korean and Japanese aliases are first-class
- * identity evidence in Encyclopedia V2.
+ * identity evidence in Encyclopedia V2. Semantic symbols that distinguish
+ * real model names must be expanded before generic punctuation is removed.
  */
 export function encyclopediaIdentityKey(value: unknown) {
   return clean(value)
@@ -70,6 +71,7 @@ export function encyclopediaIdentityKey(value: unknown) {
     .toLocaleLowerCase("en-US")
     .replace(/ё/g, "е")
     .replace(/&/g, "and")
+    .replace(/\+/g, "plus")
     .replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
