@@ -135,31 +135,34 @@ function validateSearchEntries(
   }
 }
 
+export function assertEncyclopediaIdentityDataset(dataset: EncyclopediaIdentityDataset) {
+  if (dataset.manifest.schemaVersion !== 2 || dataset.manifest.workspace !== "vehicle-encyclopedia-v2") {
+    throw new Error("encyclopedia_identity_invalid_manifest");
+  }
+  const expectedBrands = expectedCount(dataset.manifest, "brand");
+  const expectedModels = expectedCount(dataset.manifest, "model");
+  if (expectedBrands !== null && dataset.brands.length !== expectedBrands) {
+    throw new Error(`encyclopedia_identity_brand_count_mismatch:${dataset.brands.length}:${expectedBrands}`);
+  }
+  if (expectedModels !== null && dataset.models.length !== expectedModels) {
+    throw new Error(`encyclopedia_identity_model_count_mismatch:${dataset.models.length}:${expectedModels}`);
+  }
+  const identities = validateIdentityRecords(dataset.brands, dataset.models);
+  validateSearchEntries(dataset.searchEntries, identities.brandIds, identities.modelIds);
+  return dataset;
+}
+
 export async function readEncyclopediaIdentityDataset(): Promise<EncyclopediaIdentityDataset | null> {
   const root = safeRoot();
   try {
     const manifest = await readJson<EncyclopediaManifest>(path.join(root, "manifest.json"));
-    if (manifest.schemaVersion !== 2 || manifest.workspace !== "vehicle-encyclopedia-v2") return null;
-
     const [brands, models, search] = await Promise.all([
       readEntityChunks<EncyclopediaBrandIdentity>(root, "brand"),
       readEntityChunks<EncyclopediaModelIdentity>(root, "model"),
       readJson<SearchIndex>(path.join(root, "generated", "search-index.json")),
     ]);
     if (search.schemaVersion !== 2 || !Array.isArray(search.entries)) throw new Error("encyclopedia_identity_invalid_search_index");
-
-    const expectedBrands = expectedCount(manifest, "brand");
-    const expectedModels = expectedCount(manifest, "model");
-    if (expectedBrands !== null && brands.length !== expectedBrands) {
-      throw new Error(`encyclopedia_identity_brand_count_mismatch:${brands.length}:${expectedBrands}`);
-    }
-    if (expectedModels !== null && models.length !== expectedModels) {
-      throw new Error(`encyclopedia_identity_model_count_mismatch:${models.length}:${expectedModels}`);
-    }
-
-    const identities = validateIdentityRecords(brands, models);
-    validateSearchEntries(search.entries, identities.brandIds, identities.modelIds);
-    return { manifest, brands, models, searchEntries: search.entries };
+    return assertEncyclopediaIdentityDataset({ manifest, brands, models, searchEntries: search.entries });
   } catch (error: any) {
     if (error?.code === "ENOENT") return null;
     throw error;
