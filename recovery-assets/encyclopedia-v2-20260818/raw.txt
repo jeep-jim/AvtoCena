@@ -1,0 +1,994 @@
+AvtoCena Encyclopedia V2 Git state evacuation — 2026-08-18
+
+PWD
+/workspace/scratch/a4b62bf5597e/AvtoCena-encyclopedia
+
+HEAD SHA
+0329674550c31e5c54bf3faa48ccb8838629f371
+
+HEAD DESCRIPTION
+0329674550c31e5c54bf3faa48ccb8838629f371
+0085a872123bd65d7726e06d93b9d4ec43694c7c
+Codex <codex@openai.com>
+2026-08-18T06:32:27+03:00
+feat(encyclopedia): expand Baojun mass-model coverage
+
+GIT STATUS
+On branch encyclopedia-remote-sync
+Your branch is ahead of 'origin/feat/encyclopedia-knowledge-base' by 63 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+GIT STATUS --SHORT --BRANCH
+## encyclopedia-remote-sync...origin/feat/encyclopedia-knowledge-base [ahead 63]
+
+GIT BRANCH -AVV
+* encyclopedia-remote-sync                                                   03296745 [origin/feat/encyclopedia-knowledge-base: ahead 63] feat(encyclopedia): expand Baojun mass-model coverage
++ feat/encyclopedia-knowledge-base                                           8aa4fb03 (/workspace/scratch/a4b62bf5597e/AvtoCena) [origin/main: ahead 9] Knowledge: add safe ingestion and legacy preview
+  main                                                                       afe138d0 [origin/main] Remove Yandex domain diagnostic workflow
+  remotes/origin/6qpl99-codex/-draft-pr-crm                                  4535c11d Polish CRM core idempotency and UI scope
+  remotes/origin/HEAD                                                        -> origin/main
+  remotes/origin/add-buyer-mercedes-photo                                    7d9c0eeb Replace EV hybrid patch with safe classification fix
+  remotes/origin/add-buyer-mercedes-photo-2                                  7d9c0eeb Replace EV hybrid patch with safe classification fix
+  remotes/origin/agent/calculation-admin-defaults-v23                        9452136f Применять настройки CRM и к отфильтрованному каталогу
+  remotes/origin/agent/catalog-auto-retry-v1                                 1f5a7bc7 Test automatic catalog retry
+  remotes/origin/agent/catalog-calculation-production-v18                    20dc6914 Принимать 30-минутную мощность только из доверенного документа
+  remotes/origin/agent/catalog-certified-power-chain-20260811                739b7534 Keep the catalog manifest warm after deployment
+  remotes/origin/agent/catalog-data-integrity-fix                            ea2d407a Не отбрасывать объявления только из-за отсутствующего пробега
+  remotes/origin/agent/catalog-followup-hardening                            55d3d65c Validate source policy synchronization script in CI
+  remotes/origin/agent/catalog-japan-projection-fast-path-20260811           dc4d726e Prevent full Japan offer rescans in catalog render
+  remotes/origin/agent/catalog-live-sources-v19                              e1daf51f Проверять положительный порог Японии без привязки к контрольному числу
+  remotes/origin/agent/catalog-model-seo-and-recovery                        4aa5928f Serve model sitemap dynamically from object storage
+  remotes/origin/agent/catalog-power-customs-markets                         f8557c70 Restore storage implementation and only parallelize chunk reads
+  remotes/origin/agent/catalog-power-q4-leaf-20260811                        771358ee Add certified Q4 and Leaf power references
+  remotes/origin/agent/catalog-probe-fastpath-v20                            d542476e Убрать ошибочный временный файл
+  remotes/origin/agent/catalog-recovery-ui-power                             8034b198 Каталог: параллельное восстановление семи рынков
+  remotes/origin/agent/catalog-refresh-triggers-20260811                     e478bd5d Trigger queued market refreshes on workflow updates
+  remotes/origin/agent/catalog-reliability-20260811                          b2cf637b Align catalog CI with verified power and projection contracts
+  remotes/origin/agent/catalog-resilient-recovery                            48c5457a Каталог: гарантировать публикацию частичных результатов за час
+  remotes/origin/agent/catalog-resilient-v21                                 eb8da777 Обновить publication gate тесты под per-market resilient publish
+  remotes/origin/agent/catalog-retry-accumulate-v2                           6235dd4a Закрепить накопительный автоповтор в тестах
+  remotes/origin/agent/catalog-source-scale-v17                              b31f88ee Каталог v17: восстановить чтение сохранённых изображений
+  remotes/origin/agent/catalog-ui-data-hardening                             fc1d5029 Simplify resolved offer spec typing
+  remotes/origin/agent/catalog-visible-offer-prefetch-20260811               a2757923 Cover bounded visible-row prefetch
+  remotes/origin/agent/catalog-volume-photo-v16                              711c51fc Тесты: синхронизировать подпись мощности без слова Расчёт
+  remotes/origin/agent/catalog-volume-v22                                    9b6d327e Тесты публикации v22: аудит 1000 машин и безопасный manifest
+  remotes/origin/agent/crm-workspace-v2                                      177630bb fix(crm): await Telegram staff delivery for active users
+  remotes/origin/agent/dealer-platform-v1                                    b99f678a Сайт: добавить вход на платформу для дилеров
+  remotes/origin/agent/dealer-platform-v2                                    f4311d2b Build: убрать недопустимый экспорт страницы дилеров
+  remotes/origin/agent/demo-code-fixes-v4                                    81170940 CI: уточнить типы изображений каталога в демо CRM
+  remotes/origin/agent/demo-crm-polish-v3                                    c71d7d61 Демо CRM: подключить синюю аватарку
+  remotes/origin/agent/demo-ui-polish-v3                                     4649e2f5 Темы: усилить статусы, кнопки и карточку верификации
+  remotes/origin/agent/fix-desktop-budget-help-final                         2a269146 Hide budget help only on desktop from homepage markup
+  remotes/origin/agent/full-market-pricing-and-power-chip                    00efefee Use a complete customer price breakdown in EV publication fixtures
+  remotes/origin/agent/kcar-exact-readiness                                  e6a9d054 Fix exact K Car gallery quote trimming
+  remotes/origin/agent/kcar-exterior-repair-run-20260811                     92786a9f Cover dedicated K Car repair workflow
+  remotes/origin/agent/kcar-gallery-concurrency-20260811                     8c677874 Cover bounded gallery refresh concurrency
+  remotes/origin/agent/korea-five-photo-quality-gate                         cdee0798 Cover Korea five-photo quality gate
+  remotes/origin/agent/mobile-budget-help                                    29194a86 Restore the budget help only on mobile
+  remotes/origin/agent/model-list-and-ev-card-polish                         7e21ff3c Test buyer-facing estimated electric power label
+  remotes/origin/agent/parser-volume-recovery                                21eb61b3 Каталог: сохранить безопасный расчёт мощности EV
+  remotes/origin/agent/public-ux-and-market-recovery                         cf4cff36 Dismiss public tooltips on outside click and Escape
+  remotes/origin/agent/recovery-cancel-stale-runs                            23f53b3e Recovery: отменять устаревший запуск каталога
+  remotes/origin/agent/restore-stable-seven-market-250                       ab1481fb Test atomic seven-market publication gate
+  remotes/origin/agent/restore-stable-seven-market-250-ci                    ab1481fb Test atomic seven-market publication gate
+  remotes/origin/agent/revert-unrequested-ui-outlines                        a5d4557c Вернуть демо CRM к прежнему стилю без новых обводок
+  remotes/origin/agent/show-30-minute-power                                  db06c22e Generate certified power queue before catalog repricing
+  remotes/origin/agent/telegram-bot-login                                    c0b8aefa Telegram auth: enable bot login without OIDC secret
+  remotes/origin/agent/telegram-crm-connect                                  580e32a2 Add Telegram integration to CRM admin navigation
+  remotes/origin/agent/telegram-deploy-repair                                45386203 Telegram: repair webhook after production deploy
+  remotes/origin/agent/telegram-login-autoapprove                            1b5fd891 Remove accidental noop file
+  remotes/origin/agent/telegram-login-button                                 cde43aea Telegram login: explain confirmation button flow
+  remotes/origin/agent/telegram-login-code                                   8460a305 noop
+  remotes/origin/agent/telegram-login-existing-webhook                       20dafd79 Remove accidental placeholder
+  remotes/origin/agent/telegram-oidc-code-flow                               8e041e3f Telegram OIDC: expose login only when client secret is ready
+  remotes/origin/agent/telegram-oidc-exact-error                             19fa6309 Telegram OIDC: explain exact token errors
+  remotes/origin/agent/telegram-oidc-login                                   bfee55f2 fix: verify Telegram OIDC id tokens
+  remotes/origin/agent/telegram-oidc-production-origin                       18b83b0b Show precise Telegram OIDC callback errors
+  remotes/origin/agent/telegram-popup-handshake                              e814269c fix: use current Telegram write access option
+  remotes/origin/agent/telegram-popup-handshake-v2                           4d3b9691 fix: use current Telegram write access option
+  remotes/origin/agent/telegram-public-bot-menu                              f40f50e2 Telegram: chunk public users and subscriptions
+  remotes/origin/agent/telegram-token-diagnostics                            8fa8692a fix: show Telegram setup stage and API detail
+  remotes/origin/agent/telegram-token-endpoint-debug                         366bd433 Merge PR #500: Telegram OIDC exact error diagnostics
+  remotes/origin/agent/telegram-webhook-auto-setup                           b55edd57 Use encrypted Telegram config for leads and alerts
+  remotes/origin/agent/telegram-webhook-live-repair                          0710071a Telegram login: surface live webhook diagnostics
+  remotes/origin/agent/telegram-webhook-url-secret                           a94d0dbb Telegram setup: persist URL-secret webhook mode
+  remotes/origin/agent/ui-readability-polish                                 99285988 Причесать светлую тему, кнопки, заявки и знаки верификации
+  remotes/origin/agent/verification-logo-fix-v5                              6f9634de Дилеры: вернуть логотип TopAvto и унифицировать верификацию
+  remotes/origin/audit/all7-post-georgia-20260812-1117                       aa2dd671 audit: verify all seven live markets after Georgia publish
+  remotes/origin/audit/autohome-known-gallery-depth-20260811                 c440dea0 Audit known AutoHome exact gallery depths
+  remotes/origin/audit/autopapa-current-routes-20260812                      f58c7ea8 audit(autopapa): probe official marketplace routes
+  remotes/origin/audit/autoscout-fullres-schema-20260813                     2f6b72b2 Run read-only AutoScout full-resolution schema audit
+  remotes/origin/audit/autoscout-hq-gallery-20260813                         6844b34d Inspect AutoScout exact-page image schema paths
+  remotes/origin/audit/brand-route-prod-latency-20260812                     51fe4e1e Re-audit production after brand summary read model
+  remotes/origin/audit/brand-summary-prod-20260812                           bd0b50df Add read-only production brand-summary timing audit
+  remotes/origin/audit/catalog-capacity-20260813                             02c93e67 Run guarded unreachable generation cleanup
+  remotes/origin/audit/catalog-capacity-readonly-20260813                    b1a4e664 Add read-only Europe photo resolution audit
+  remotes/origin/audit/catalog-filter-brand-prod-20260812                    6b680be4 Audit production catalog brand filter contract
+  remotes/origin/audit/catalog-integrity-after-failed-writers-20260813       f9df3b12 Retrigger canonical repair dry-run
+  remotes/origin/audit/catalog-nuance-scan-20260812                          caed0a2e audit: verify all five NO FOTO source frames
+  remotes/origin/audit/china-autohome-fresh-gallery-depth-20260811           6dfeee15 Run read-only fresh AutoHome gallery depth audit
+  remotes/origin/audit/china-autohome-gallery-by-year-20260811               a144d163 Run read-only AutoHome gallery year audit
+  remotes/origin/audit/china-autohome-gallery-depth-20260811                 0ec35550 Run read-only AutoHome gallery depth audit
+  remotes/origin/audit/china-photo-gate-impact-20260811                      dfa341e3 Run read-only China photo gate impact audit
+  remotes/origin/audit/encar-casper-years-20260813                           8ef8fc48 Measure Casper years in the actual Encar global stream
+  remotes/origin/audit/encar-price-contract-20260812                         5b34f513 audit: run read-only Encar low-price contract scan
+  remotes/origin/audit/encar-rental-price-42435312-20260812                  0d5412fb audit(encar): inspect rental price fields for 42435312
+  remotes/origin/audit/europe-gallery-depth-20260811                         c77f797c Run read-only Europe sparse gallery audit
+  remotes/origin/audit/europe-sparse-gallery-20260811                        ba31475d Run read-only Europe sparse gallery audit
+  remotes/origin/audit/filter-latency-all7-20260812                          1efca74f audit: align checks with compact projection semantics
+  remotes/origin/audit/filter-latency-post-georgia-20260812                  c87f7971 audit: separate cold and warm catalog latency
+  remotes/origin/audit/georgia-adapters-yandex-result-20260812               d21dd9bd audit: verify dedicated AutoPapa adapter on Yandex
+  remotes/origin/audit/georgia-canonical-collection-20260812-v2              56267e72 Preserve existing six markets irrespective of source timestamp
+  remotes/origin/audit/georgia-canonical-exact-routes-20260812               94977504 ci: narrow PR360 repair to remaining assertion
+  remotes/origin/audit/georgia-canonical-source-smoke-20260812-r2            9b472b7a audit(georgia): smoke MyAuto and AutoPapa only
+  remotes/origin/audit/georgia-exact-repair-artifact-20260811                3453e8be Bind Georgia galleries to exact listing IDs [skip deploy]
+  remotes/origin/audit/georgia-gallery-identity-20260811                     61b834f3 Run no-publish Georgia gallery identity audit
+  remotes/origin/audit/georgia-gallery-live-read-20260812b                   6030f73f audit: print compact MyAuto E0 helper proof
+  remotes/origin/audit/georgia-gallery-proof-20260812                        c4c412d2 audit: verify exact MyAuto large gallery URLs
+  remotes/origin/audit/georgia-link-shape-result-20260812                    bfe3b7d3 audit: capture Georgia current listing link shapes
+  remotes/origin/audit/georgia-link-shapes-live-20260812                     b490fb6a audit: capture live Georgia listing link shapes
+  remotes/origin/audit/georgia-postgallery-readonly-20260812                 bf65616e audit(georgia): summarize deployed canonical gallery/spec diagnostic
+  remotes/origin/audit/georgia-power-batch-coverage-20260812                 b7f39992 audit: inspect AutoPapa exact detail configuration facts
+  remotes/origin/audit/georgia-power-coverage-20260812                       7f930ac6 Audit deployed exact AutoPapa horsepower parser
+  remotes/origin/audit/georgia-recovery-live-20260812                        6b340bfe audit(georgia): expand canonical recovery to four pages
+  remotes/origin/audit/georgia-recovery-power-sample-20260812                45ca71ad Audit live Georgia recovery power coverage
+  remotes/origin/audit/georgia-vehicle-knowledge-coverage-20260813           fb55d529 Audit all7 representative model power usage
+  remotes/origin/audit/georgia-yandex-dryrun-after-pr368-20260812            f8ea0365 audit: read deployed AutoPapa card context after PR371
+  remotes/origin/audit/issue241-europe-current-final-20260814                d81111c8 Rerun Europe final audit with narrow Mercedes gate
+  remotes/origin/audit/korea-image-gate-current-main-20260814                fb0ff824 Enforce recovery target image floor
+  remotes/origin/audit/korea-kyrgyz-photo-depth-20260812                     d648054e audit(photos): break down sparse Korea and Kyrgyz galleries
+  remotes/origin/audit/korea-semantic-combine-retry1-20260813                d48e0a6c Run combined Korea retry1 read-only gate
+  remotes/origin/audit/kyrgyzstan-low-photo-20260812                         d9ff9f08 Audit current Kyrgyzstan low-photo rows read-only
+  remotes/origin/audit/kyrgyzstan-mashina-gallery-depth-20260811             98e3013e Run read-only Mashina gallery depth audit
+  remotes/origin/audit/live-catalog-latency-20260812                         d2836de9 audit(catalog): live post-overview latency and filter smoke
+  remotes/origin/audit/live-page-ssr-smoke-20260811                          aff1e960 Audit live homepage SSR and page latency
+  remotes/origin/audit/mashina-gallery-schema-20260812                       c24bf80a Audit Mashina listing-bound gallery schema read-only
+  remotes/origin/audit/myauto-api2-current-20260812                          22cd037d audit(myauto): probe current public API2 routes
+  remotes/origin/audit/offer-route-latency-20260812                          a0e2ea10 audit(perf): measure offer route latency
+  remotes/origin/audit/offer-route-latency-20260812-r2                       4af22f80 audit: benchmark temporary small overview object
+  remotes/origin/audit/palisade-42435312-live-20260812                       d0aa99b1 audit: run live Palisade price diagnosis
+  remotes/origin/audit/photo-depth-korea-kg-20260812                         c750f59e Fix read-only photo audit execution wrapper
+  remotes/origin/audit/projection-filter-latency-20260811                    0a3dfe5d Align projection smoke with public visible price
+  remotes/origin/audit/runtime-signal-smoke-20260812                         ad7ce4db audit: stress public runtime after memory headroom
+  remotes/origin/audit/stale-palisade-projection-20260812                    f4eefbde audit(catalog): fix async projection harness
+  remotes/origin/audit/stale-quota-georgia-workflows-20260813                68f6c02c Audit stale quota and Georgia workflow references
+  remotes/origin/audit/yandex-georgia-egress-result-20260812                 751bf873 audit: capture MyAuto exact detail gallery binding
+  remotes/origin/automation/catalog-failure-diagnosis                        36ddb0d9 CI: убрать временные live-smoke задачи
+  remotes/origin/automation/catalog-listing-first-v29                        eff94949 Тесты: не делать бизнес-цель 10К ложным CI-гейтом
+  remotes/origin/automation/catalog-market-recovery-v2                       cfc7c2b1 Тесты: публикация успешна только при наличии всех рынков
+  remotes/origin/automation/catalog-production-pr-trigger                    0296879a Запустить production-каталог через PR trigger
+  remotes/origin/automation/catalog-production-trigger-20260727-3            70aa456f Запустить production-каталог 7 × 250 через PR-триггер
+  remotes/origin/automation/catalog-run91-recovery                           fe343e31 Тесты: зафиксировать устойчивый production recovery
+  remotes/origin/automation/catalog-source-scale-ci                          2e530ad1 Исправить шаблон Bazar.kg в реестре источников
+  remotes/origin/automation/catalog-source-scale-daily                       bf08ce09 Обновить gate-тест под безопасную source-scale публикацию
+  remotes/origin/automation/catalog-source-scale-daily-check                 2e530ad1 Исправить шаблон Bazar.kg в реестре источников
+  remotes/origin/automation/catalog-source-scale-daily-pr                    2e530ad1 Исправить шаблон Bazar.kg в реестре источников
+  remotes/origin/automation/catalog-source-scale-final                       2e530ad1 Исправить шаблон Bazar.kg в реестре источников
+  remotes/origin/automation/catalog-source-scale-review                      2e530ad1 Исправить шаблон Bazar.kg в реестре источников
+  remotes/origin/automation/catalog-volume-bootstrap-v28                     b084766b Тесты: зафиксировать публикацию 3000 машин на рынок
+  remotes/origin/automation/japan-auction-currency-v31                       c4f47e76 Япония: не захватывать аукционную оценку в цену лота
+  remotes/origin/automation/japan-auction-statistics-v30                     ec39ba3f Каталог Японии: подключить все статистические адаптеры
+  remotes/origin/automation/verify-live-market-counts                        3c35600a Тест: демо использует опубликованные счётчики рынков
+  remotes/origin/automation/verify-live-market-counts-v2                     df5d44a3 Тест: реальные счётчики рынков в демо CRM
+  remotes/origin/backup/stable-catalog-2026-07-20                            79053d91 Restore compile-safe Guazi adapter after completed China rebuild
+  remotes/origin/buyer-gallery-upload-24                                     de23e5ba Stage buyer gallery archive part 00
+  remotes/origin/buyer-gallery-upload-24b                                    c0aee34f Remove accidental placeholder buyer photo
+  remotes/origin/buyer-gallery-upload-24c                                    c0aee34f Remove accidental placeholder buyer photo
+  remotes/origin/buyer-gallery-upload-zip                                    39f7b9b7 Stage buyer gallery ZIP correct chunk 04
+  remotes/origin/buyer-photo-final                                           7d9c0eeb Replace EV hybrid patch with safe classification fix
+  remotes/origin/buyer-photo-final-2                                         7d9c0eeb Replace EV hybrid patch with safe classification fix
+  remotes/origin/buyer-photo-final-3                                         7d9c0eeb Replace EV hybrid patch with safe classification fix
+  remotes/origin/buyers-fullres-9-20260809                                   4105bedf Prepare gallery q40 staging
+  remotes/origin/buyers-gallery-final-pixels                                 d5bb4bc7 Verify buyer gallery originals after upload
+  remotes/origin/buyers-gallery-q40-final                                    570e4ddb Stage buyer photo 18 chunk 1
+  remotes/origin/catalog-electrified-recovery-20260809                       27ec3e05 Parse exact AUTO.GE engine and fuel detail labels
+  remotes/origin/catalog-integrity-clean                                     5d200b86 Catalog integrity fixes
+  remotes/origin/catalog-market-v15-clean                                    f559995b Remove temporary catalog safeguard trigger
+  remotes/origin/catalog-read-model-refresh-20260811                         47e0ab2a Refresh one-hop catalog read models independently
+  remotes/origin/catalog-recovery-report-v2                                  a352c3ac Record five-market recovery report
+  remotes/origin/catalog-recovery-v2                                         a4536093 Keep lightweight Encar smoke mode alongside production pool
+  remotes/origin/catalog-trigger-1931                                        1109effc Trigger Catalog stable 7 × 250
+  remotes/origin/chore-production-telemetry                                  19545649 Каталог: телеметрия только production-run
+  remotes/origin/chore/diagnose-mass-market-patch                            33ac4729 Каталог: диагностировать подготовку массового патча
+  remotes/origin/chore/manual-catalog-restart-2026-07-29                     22a0e50f Каталог: ручной перезапуск production после исправления knowledge sync
+  remotes/origin/chore/redeploy-runtime-headroom-20260812                    c48051f2 chore: redeploy public runtime with increased headroom
+  remotes/origin/chore/remove-georgia-purge-trigger-20260812                 e308efa5 chore(catalog): remove one-shot Georgia purge trigger
+  remotes/origin/chore/remove-one-shot-model-cap-trigger-20260812            89558243 Remove one-shot model-cap repair trigger
+  remotes/origin/chore/run-catalog-recovery-once                             035dbbc0 Run protected multi-market catalog recovery
+  remotes/origin/chore/start-korea-catalog-rollout                           7f8016d1 Catalog V2: trigger initial Korea market run
+  remotes/origin/chore/trigger-market-import-on-catalog-change               7fef0b50 Run production import after catalog pipeline changes
+  remotes/origin/chore/trigger-mass-market-patch                             038a4b89 Каталог: запустить проверенный массовый патч через PR
+  remotes/origin/cleanup/remove-georgia-diagnostic-routes-20260812           bbd7502a test: assert Georgia diagnostic routes stay removed
+  remotes/origin/cleanup/remove-georgia-diagnostics-20260812                 4f38f2fb Remove temporary Georgia adapter dry-run route
+  remotes/origin/cleanup/remove-georgia-power-recovery-routes-20260812       9c6998a1 Assert temporary Georgia power routes are removed
+  remotes/origin/codex                                                       2f0c020b Serve catalog cards from one-hop current snapshots
+  remotes/origin/codex-batch-delete-catalog-orphans-20260811                 e0578564 Cover batch orphan cleanup
+  remotes/origin/codex-catalog-chain-recovery                                39e465e7 fix(catalog): require all five market shards
+  remotes/origin/codex-catalog-sort-directions-20260811                      d19c15e7 Honor catalog sort direction (tests/catalog-filter-search.test.ts)
+  remotes/origin/codex-chain-catalog-postpublish-20260811                    73883c79 Document EV6 GT Line sustained power (tests/catalog-certified-power-reference.test.ts)
+  remotes/origin/codex-clean-255k-orphans-20260811                           13f7609f Cover cleanup capacity and byte reporting
+  remotes/origin/codex-durable-catalog-publish-lock-20260811                 72e09743 Avoid duplicate scale collection on queue-only changes (.github/workflows/catalog-v6-prestige-up-to-30k.yml)
+  remotes/origin/codex-encar-exact-identity-v2                               5fbad117 Run exact Encar identity smoke
+  remotes/origin/codex-encar-one-card-smoke                                  e69f4155 test: verify mandatory parser adapters and probe coverage [skip ci]
+  remotes/origin/codex-encar-pagination-recovery                             ea9535b8 Remove one time Encar pagination smoke script
+  remotes/origin/codex-fast-global-catalog-20260811                          c3958240 Use current all-market projection (tests/offer-navigation-performance.test.ts)
+  remotes/origin/codex-guard-preliminary-power-1786465000                    5b66aea7 Guard preliminary prices: tests/catalog-public-safety.test.ts
+  remotes/origin/codex-japan-power-scale-1786463000                          c63d02a5 Test safe preliminary power recovery
+  remotes/origin/codex-japan-required-source-smoke                           809f793e Register dedicated JPAuc past adapter
+  remotes/origin/codex-kcar-credential-hotfix-20260811                       6e104d4b Exclude K Car credential scans (tests/kcar-gallery-order.test.ts)
+  remotes/origin/codex-kcar-final-pass-20260811                              881b4f62 Finish all remaining K Car v3 gallery repairs
+  remotes/origin/codex-kcar-force-clean-20260811                             bda0ff03 Force-remove K Car credential scans (tests/kcar-gallery-order.test.ts)
+  remotes/origin/codex-kcar-gallery-v3-20260811                              94b01e95 Repair K Car exterior gallery lifecycle (tests/kcar-gallery-order.test.ts)
+  remotes/origin/codex-kcar-no-exterior-20260811                             8b6c00a0 Remove K Car listings without exterior covers (tests/kcar-gallery-order.test.ts)
+  remotes/origin/codex-live-catalog-model-suggestions-20260811               1e7404d9 Suggest models from the live catalog
+  remotes/origin/codex-parallel-catalog-capacity-cleanup-20260811            5d1c8143 Delete orphan internal chunks concurrently
+  remotes/origin/codex-power-auto-apply-20260811                             9c15065c Apply certified power references after merge
+  remotes/origin/codex-power-hyundai-20260811-2                              8c7cf5dc Let catalog sources collect in parallel
+  remotes/origin/codex-public-accuracy-hotfix                                be877044 Remove temporary hotfix workflow
+  remotes/origin/codex-public-dark-bg-scroll-fix                             96144e57 Match catalog dark canvas to public background
+  remotes/origin/codex-publish-full-verified-japan-20260811                  077440df Prevent lost cleanup counter updates
+  remotes/origin/codex-reclaim-catalog-capacity-20260811                     c93345b8 Add guarded emergency catalog capacity cleanup
+  remotes/origin/codex-reuse-catalog-cleanup-listing-20260811                7e62364b Verify cleanup avoids per-generation relisting
+  remotes/origin/codex-run-capacity-cleanup-now-20260811                     07b2ec0a Verify emergency cleanup preempts blocked writers
+  remotes/origin/codex-strict-catalog-source-only                            1864a2e8 Archive passed K Car target-10 stage as manual-only
+  remotes/origin/codex-trigger-japan-scale-1786464500                        192213e1 Trigger verified Japan publish with stable config snapshot
+  remotes/origin/codex-ui-polish-20260807                                    fa190708 Remove one-time UI validation workflow
+  remotes/origin/diag/autopapa-card-context-20260812                         c971ae4e diag: inspect AutoPapa listing card context
+  remotes/origin/diag/blocked-sources-20260810                               e3f096ac Probe indexed Dongchedi used-car routes
+  remotes/origin/diag/catalog-image-quality-20260810                         295ba17a Probe reported AutoHome exact gallery
+  remotes/origin/diag/china-nonvehicle-20260810-2216                         c9d95afe Diagnose China nonvehicle rows
+  remotes/origin/diag/dead-markets-20260810                                  fedb8cd1 Probe missing Georgia and UAE sources without publishing
+  remotes/origin/diag/electrified-eu-uae-20260810                            53aba124 Retry DubiCars electrified diagnostic as ESM
+  remotes/origin/diag/encar-adapter-smoke-20260809                           808bf2ce Run paced Encar detail transport diagnostic
+  remotes/origin/diag/encar-pagination-20260809                              cb86e966 Diagnose Encar offset pagination transport
+  remotes/origin/diag/encar-power-fields-20260810                            74a6e453 Probe exact Encar power field names
+  remotes/origin/diag/georgia-adapters-yandex-20260812                       0a67de0c diag: dry-run canonical Georgia adapters on Yandex
+  remotes/origin/diag/georgia-blocked-routes-20260810                        db3f3e80 Diagnose AUTO.GE exact power fields
+  remotes/origin/diag/georgia-current-link-shape-20260812                    861ff4aa diag: expose canonical Georgia listing link shapes
+  remotes/origin/diag/georgia-gallery-depth-20260811                         2999e228 Probe Georgia exact image delivery
+  remotes/origin/diag/georgia-gallery-formula-proof-20260812                 94c4a37d diag(georgia): prove gallery formula from first-party assets
+  remotes/origin/diag/georgia-gallery-schema-yandex-20260812                 30733892 diag: inspect canonical Georgia gallery schemas
+  remotes/origin/diag/georgia-myauto-product-specs-20260812                  0d940071 Expose only safe MyAuto vehicle spec fields in read-only audit
+  remotes/origin/diag/georgia-power-batch-yandex-20260812                    3a1581ef Diag: batch exact AutoPapa power reads through Yandex
+  remotes/origin/diag/georgia-power-detail-yandex-20260812                   20bdbdb2 fix(diag): correct catalog storage import
+  remotes/origin/diag/georgia-vin-power-20260813                             184026e7 Diag: inspect exact AutoPapa VIN power via NHTSA vPIC
+  remotes/origin/diag/georgia-yandex-20p-20260814-2330                       3c3ae898 Fix AutoPapa nested original gallery validation
+  remotes/origin/diag/georgia-yandex-readonly-20260814                       2004c225 Diag: verify canonical Georgia through Yandex egress
+  remotes/origin/diag/kg-gallery-depth-20260811                              83df6dec Run Mashina gallery depth diagnostic
+  remotes/origin/diag/mashina-gallery-readonly-20260814                      cbf36c08 Add bounded read-only Mashina collector proof
+  remotes/origin/diag/myauto-current-gallery-yandex-20260812                 2e74c85c diag: inspect current MyAuto list-bound gallery
+  remotes/origin/diag/myauto-dynamic-gallery-20260812                        c81861b9 diag(georgia): bind MyAuto gallery probe to same live page
+  remotes/origin/diag/myauto-e0-helper-proof-20260812                        e2547438 diag: extract exact MyAuto E0 gallery helper body
+  remotes/origin/diag/myauto-gallery-detail-yandex-20260812                  cf223525 diag: inspect MyAuto exact detail gallery binding
+  remotes/origin/diag/myauto-gallery-url-source-20260812                     eb1a6782 Merge PR #383: prove Georgia gallery paths from first-party assets
+  remotes/origin/diag/source-blocks-20260810-1529                            b35aad53 Inspect Dongchedi and mobile.de API record shapes
+  remotes/origin/diag/yandex-georgia-egress-20260812                         29137317 diag: add fixed Georgia source egress probe
+  remotes/origin/docs/catalog-roadmap-2026-07-29                             25d72d23 Roadmap: закрепить рубли, региональные источники и критерии готовности каталога
+  remotes/origin/docs/fixed-market-sources                                   0178ff3b docs: lock canonical catalog market sources
+  remotes/origin/dongchedi-contract-probe-20260811-1328                      9b619b1f Probe current Dongchedi listing contract
+  remotes/origin/feat/catalog-ui-polish-and-markets                          c30e6f51 Load final catalog polish styles
+  remotes/origin/feat/catalog-v2-core                                        17dbf373 Catalog V2: проверить реальные адаптеры всех source slots
+  remotes/origin/feat/catalog-v2-encyclopedia                                5ab5851d Catalog V2: повторно запустить применение энциклопедии на актуальной ветке
+  remotes/origin/feat/catalog-v2-foundation                                  7349d0f4 Тесты: проверять production-контур Catalog V2
+  remotes/origin/feat/catalog-v2-independent-markets                         b03ad0ce Catalog V2: test independent market publication and preservation
+  remotes/origin/feat/catalog-v2-japan-sold-results-rollout                  fcaa9050 Catalog V2 Japan: test sold-result source plan and rollout trigger
+  remotes/origin/feat/catalog-v3-10k-independent                             20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k                             20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k-actual                      1a2c4df7 feat: launch Korea on independent 10k pipeline
+  remotes/origin/feat/catalog-v3-independent-10k-final                       20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k-live                        20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k-prod                        20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k-run                         20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/catalog-v3-independent-10k-start                       20432854 Fix checkpointed knowledge workflow contract test (#217)
+  remotes/origin/feat/city-catalog-rate-polish-20260721                      a8ede8da Keep selected city in homepage SEO URL
+  remotes/origin/feat/complete-vehicle-knowledge                             ba8fc06c Test: обновить лимит detail-карточек до 100000
+  remotes/origin/feat/connect-public-catalog-markets                         4e64f75a Keep Encar-only sample mode alongside all-market import
+  remotes/origin/feat/currency-rate-visuals-v1                               e5a9d9b5 Make homepage currency strip interactive
+  remotes/origin/feat/electric-filter-20260724                               be749111 Add electric filter to homepage
+  remotes/origin/feat/encyclopedia-knowledge-base                            d63e67c2 Knowledge: add safe ingestion and legacy preview
+  remotes/origin/feat/georgia-autopapa-batch-growth-20260812                 142feee9 Lock AutoPapa 2020+ current-search contract
+  remotes/origin/feat/live-fx-all-markets                                    6ab5ef1c Make price trend safe for client bundles
+  remotes/origin/feat/local-drom-brand-logos-20260723                        4f93808f Sync normalized Drom brand logos [skip logo sync]
+  remotes/origin/feat/mobile-brand-drom-polish-20260721                      25199785 Remove temporary build verification workflow
+  remotes/origin/feat/offer-tablet-composition                               f26795d9 Recompose offer details for tablet and desktop
+  remotes/origin/feat/price-trends-and-mobile-result-actions                 280a0680 Keep generation lock refresh atomic in source guard
+  remotes/origin/feat/public-vehicle-knowledge-catalog                       4f661119 Test GitHub-backed vehicle knowledge storage
+  remotes/origin/feat/scale-uae-georgia-direct-recovery                      cc25f894 Validate safe preliminary direct recovery
+  remotes/origin/feat/sequential-market-10k                                  33295623 test: cover sequential 10k market queue
+  remotes/origin/feat/vehicle-knowledge-2011-window                          7085a9d0 Test the 2011+ knowledge window
+  remotes/origin/feat/vehicle-knowledge-model-images                         a63e41de test: cover sourced model gallery knowledge
+  remotes/origin/feat/vehicle-knowledge-model-seo                            cfa1242d Тесты: проверить SEO-галерею страницы модели
+  remotes/origin/feature/multi-market-import-search                          0e0084a6 Restore Encar image URL format
+  remotes/origin/fix-che168-dealer-pages                                     9576d177 Trigger recovery v4 with exact Che168 dealer source
+  remotes/origin/fix-goonet-model-pages                                      88591d28 Parse DubiCars detail price and specs exactly
+  remotes/origin/fix/all7-source-identity-presentation-20260814              1b8d7ff1 Cover final China identity edge cases
+  remotes/origin/fix/auto-georgia-fallback-quality-20260812                  229c6956 chore: remove AUTO.GE one-shot validator
+  remotes/origin/fix/autohome-new-deferred-identity-20260810                 e91423fe Validate deferred Autohome identity without publishing
+  remotes/origin/fix/autohome-public-gallery-refresh-20260810                588c88fe Validate exact AutoHome public gallery refresh
+  remotes/origin/fix/autopapa-detail-power-importer-20260812                 1fe46498 Prefer exact AutoPapa originals during detail refresh
+  remotes/origin/fix/autopapa-exact-gallery-20260812                         8aa7c479 test(georgia): lock AutoPapa full-size detail gallery
+  remotes/origin/fix/autopapa-source-bound-gallery-20260812                  4dc68f9e fix(georgia): bind AutoPapa gallery to exact listing family
+  remotes/origin/fix/autopapa-source-urls-only-20260812                      0f0aee66 Audit AutoPapa exact detail facts without catalog writes
+  remotes/origin/fix/autopapa-vpic-power-fallback-20260813                   4df80d0d CI: cover strict Georgia vPIC recovery
+  remotes/origin/fix/autoscout-2020-hard-gate-20260813                       b2f297bc Restore readiness trigger to main
+  remotes/origin/fix/autoscout-electric-classification-20260810              5a4c1251 Validate hardened AutoScout pure-EV classification
+  remotes/origin/fix/autoscout-exact-hq-gallery-20260813                     a29d3683 Fix AutoScout exact HQ gallery
+  remotes/origin/fix/batch-publisher-public-gate-20260811                    723434b4 Align batch publisher with canonical public gate [skip actions]
+  remotes/origin/fix/body-picker-gallery-budget-accent                       9b13a82c Strengthen public accent colors and photo captions
+  remotes/origin/fix/candy-route-loader-20260812                             ceab6b16 chore: remove candy loader validator
+  remotes/origin/fix/canonical-single-publisher-quality-20260811             91b2dba2 Align single-market publisher with canonical public quality [skip actions]
+  remotes/origin/fix/card-surfaces-gallery-dates-20260721                    6faf9ffd Show five consecutive rate dates and blur modal backdrop
+  remotes/origin/fix/catalog-250-images-10-timeouts                          dabab2ae Refresh lock immediately before catalog generation
+  remotes/origin/fix/catalog-allow-explicit-empty-georgia-20260812           7cde1261 ci(georgia): dry-run canonical purge with explicit empty market
+  remotes/origin/fix/catalog-audit-source-identity-20260814                  0275794d Protect daily catalog identity audit
+  remotes/origin/fix/catalog-brand-filter-and-pinned-actions-20260811        418375c4 Keep live filter updater layout-neutral
+  remotes/origin/fix/catalog-brand-projection-grouping-20260812              490795ee Fix normalized grouping for brand projections
+  remotes/origin/fix/catalog-brand-read-model-keys-20260812                  a32f2a45 Fix collision-safe brand read-model keys
+  remotes/origin/fix/catalog-bulk-storage-cleanup                            fc7452ad Запустить применение пакетной очистки
+  remotes/origin/fix/catalog-card-projection-20260811                        c6f395d9 Use compact card projection for catalog lists [skip actions]
+  remotes/origin/fix/catalog-current-read-generation-guard-20260812          676bafb2 fix(georgia): permanently allow only MyAuto and AutoPapa
+  remotes/origin/fix/catalog-current-read-generation-guard-clean-20260812    0ce0f259 fix(catalog): reject stale mutable read aliases
+  remotes/origin/fix/catalog-current-read-generation-guard-r2-20260812       2f7dc743 chore(catalog): remove temporary generation guard patcher
+  remotes/origin/fix/catalog-emergency-clean-partials                        cff7db18 Каталог: удалять незавершённые generation при аварийной очистке
+  remotes/origin/fix/catalog-emergency-cleanup-headroom                      c628835d Каталог: освободить запас Object Storage в аварийной очистке
+  remotes/origin/fix/catalog-emergency-free-storage-v2                       21150bb3 test(catalog): require emergency cleanup to retain only public generation
+  remotes/origin/fix/catalog-emergency-storage-cleanup                       1ff16043 Тесты: закрепить аварийную очистку без ослабления ежедневной
+  remotes/origin/fix/catalog-favorites-offer-details-and-import-volume       30ee562f Keep focused Encar smoke fixture stable
+  remotes/origin/fix/catalog-filter-layout-latest-main-20260812              c1e7ec05 test(catalog): lock filter layout and sort directions
+  remotes/origin/fix/catalog-filter-layout-stale-grid                        8a3955fc Restore redesigned catalog filter layout and sort directions
+  remotes/origin/fix/catalog-filter-redesign-20260811                        b818af0f Lock mobile filter to bottom-sheet behavior
+  remotes/origin/fix/catalog-filter-ux-uae-georgia-20260811                  4527ac84 Cover direct-input catalog range filters
+  remotes/origin/fix/catalog-full-market-pricing-priority-test-20260812      8c361644 test(catalog): follow priority rub helper rename
+  remotes/origin/fix/catalog-gallery-real-photos-20260814                    0d875130 Merge current main and add gallery safety regressions
+  remotes/origin/fix/catalog-generation-repair-20260811                      0eb03a0c Scope canonical repair one-shot to Japan
+  remotes/origin/fix/catalog-global-cap-cancelled-writers                    a3707de6 Cover bootstrap cleanup and sparse-market growth
+  remotes/origin/fix/catalog-global-model-cap-preservation                   129729bc Redesign catalog filters for direct input
+  remotes/origin/fix/catalog-global-model-cap-preservation-v2                8ad7c234 Enforce the 20-per-model catalog invariant globally
+  remotes/origin/fix/catalog-health-report-v34                               2c32a7eb Тесты: source-scale использует health-report
+  remotes/origin/fix/catalog-integrity-full-calculation-regions-v4           a08ff096 Каталог: восстановить Mashina.kg без смешения соседних карточек
+  remotes/origin/fix/catalog-knowledge-sync-fallback                         15b4bc8d Тесты: защищать production от недоступности VehiclesDB
+  remotes/origin/fix/catalog-loading-shell-theme-20260815                    c169815f Cover catalog loading shell theme contract
+  remotes/origin/fix/catalog-market-grids-and-500-target                     1de254ce Scale rolling production imports toward 500 cars per market
+  remotes/origin/fix/catalog-market-integrity-62                             0e39a78a Protect market data and expose live catalog facets [skip ci]
+  remotes/origin/fix/catalog-mass-market-final                               c1a9bd1f Каталог: проверить итоговый массовый патч после PR 170
+  remotes/origin/fix/catalog-min-year-2015-20260811                          0d668e40 Audit market-specific year floors [skip actions]
+  remotes/origin/fix/catalog-model-year-coverage-20260813                    2fd20773 Remove temporary coverage patch workflow
+  remotes/origin/fix/catalog-never-red-v33                                   8bd76a69 Тесты: безопасная публикация с retention после shard-сбоя
+  remotes/origin/fix/catalog-object-storage-put-400                          c8f6ba0c Документация: зафиксировать падение публикации каталога
+  remotes/origin/fix/catalog-overview-inline-refresh-20260813                2dbc6332 Use supplied credit and OSAGO mascots on desktop
+  remotes/origin/fix/catalog-page-fastpath-20260811                          af151d9b Use indexed catalog page fastpath [skip actions]
+  remotes/origin/fix/catalog-prefer-30-images                                3ff92fcb Тесты галерей: production предпочитает 30 фото
+  remotes/origin/fix/catalog-preservation-representative-power-20260813      652da95c Keep liquidity regression in existing CI suite
+  remotes/origin/fix/catalog-preview-truth-power-titles-20260812             35c4b9ad chore: remove preview patch helper
+  remotes/origin/fix/catalog-production-hardening-v37                        7324ed78 Тесты: синхронизировать формулировку безопасной очистки
+  remotes/origin/fix/catalog-publication-integrity-20260813                  5b57bb05 Merge PR #414: fix DubiCars authoritative model year
+  remotes/origin/fix/catalog-publish-manifest-telemetry                      e1b4760b Каталог: добавить точную диагностику последнего падения
+  remotes/origin/fix/catalog-publish-source-fields                           15be2ed2 test: cover source-input priority and smoke fallback
+  remotes/origin/fix/catalog-quality-flat-home-auth                          6bb98eaa Update results contract markers
+  remotes/origin/fix/catalog-readmodel-validation-20260812                   f8a342ee test(perf): align navigation expectations with deployed headroom
+  remotes/origin/fix/catalog-recovery-safe-import                            5b910c8b Use detail-scoped market adapters in production
+  remotes/origin/fix/catalog-regional-volume-price-identity                  889606c9 Каталог: подготовить исправления регионов, цены и идентичности
+  remotes/origin/fix/catalog-render-and-accumulation-v35                     9c4ec82b Каталог: отделить цену от пробега и года
+  remotes/origin/fix/catalog-required-make-20260814                          e498efc7 Prevent unknown identity labels from returning
+  remotes/origin/fix/catalog-rubles-regional-completion                      8ecc14b9 Тесты регионов: актуальный Mashina и приоритет точных адаптеров
+  remotes/origin/fix/catalog-run-past-knowledge-audit                        95e7ec63 Тесты: синхронизировать финальный gate новой generation
+  remotes/origin/fix/catalog-run97-progressive-gallery                       4eb57305 Тесты: учитывать прогрессивный detail-бюджет
+  remotes/origin/fix/catalog-runtime-object-storage                          d77f2909 Keep honest estimate label while hiding synthetic cards
+  remotes/origin/fix/catalog-russia-mass-market-priority                     11c4b857 Каталог: подготовить безопасное применение массового приоритета
+  remotes/origin/fix/catalog-russia-mass-market-priority-applied-v2          821b0423 Тесты: синхронизировать массовый приоритет каталога
+  remotes/origin/fix/catalog-search-projection-20260811                      6edb8bfb Use compact projections for catalog filters [skip actions]
+  remotes/origin/fix/catalog-semantic-provenance-all-markets-20260813        9f285469 Preserve raw regex escapes in power parser
+  remotes/origin/fix/catalog-serious-scale-20260810                          a9fe451b Stabilize Encar deep pagination
+  remotes/origin/fix/catalog-shards-preliminary-20260810                     7d3dfabc Finalize source-sharded seven-market recovery
+  remotes/origin/fix/catalog-simple-2011-plus                                5d53fa31 feat: queue seven simple 30k markets sequentially
+  remotes/origin/fix/catalog-single-autoapply-20260814                       ebc2b52e Run duplicate filter navigation guard in CI
+  remotes/origin/fix/catalog-star-markets-light-theme-key                    4df5c53d Keep catalog loading copy for UI guard
+  remotes/origin/fix/catalog-strict-sequential-10k                           c7b1a699 fix(catalog): enforce strict 10k validation before publication
+  remotes/origin/fix/catalog-trends-and-market-media                         d3f28902 Prioritize all markets and sanitize imported photos and titles
+  remotes/origin/fix/catalog-truthful-production-v36                         05785ca1 Тесты: новая generation обязательна для зелёного production
+  remotes/origin/fix/catalog-ui-data-seo-safe                                93463296 Wire resilient China dealer source
+  remotes/origin/fix/catalog-unblock-knowledge-gate                          9b102998 Тесты: учитывать диагностический audit и очередь production-сборок
+  remotes/origin/fix/catalog-v2-canonical-anchor-sources                     62b5551d Тесты: обновить атомарную публикацию для 100 тысяч
+  remotes/origin/fix/catalog-v2-empty-markets                                396ee91c Catalog V2: продолжать обход с сохранённых курсоров
+  remotes/origin/fix/catalog-v2-fast-source-recovery                         83765ef6 Catalog V2: test probe-driven collection and Japan remote auction galleries
+  remotes/origin/fix/catalog-v2-market-priority-and-japan-results            bdaf2488 Vehicle knowledge: align validation with current canonical source and 15-year enrichment
+  remotes/origin/fix/catalog-v2-remove-two-hour-knowledge-gate               bc8a3a8c Catalog V2: decouple Drom enrichment tests from the production critical path
+  remotes/origin/fix/catalog-v3-contract                                     c19226fd test: accept independent V3 market workflow
+  remotes/origin/fix/catalog-workflow-safety-20260813                        941fe4f7 Extend model-year regression to production workflows
+  remotes/origin/fix/certified-power-review-variants-20260812                afe46f7a Make certified power review queue variant-safe and include KBA
+  remotes/origin/fix/china-autohome-min5-exact-20260811                      6795d34b Require five exact photos for AutoHome new cards [skip actions]
+  remotes/origin/fix/china-public-names-20260810                             cee5cc02 Expand China public labels [skip actions]
+  remotes/origin/fix/china-quality-scale-20260810                            70a0425c Fix China exact galleries and Russian transmission labels
+  remotes/origin/fix/ci-current-catalog-contract-20260811                    cd7abe2d Align image quality CI with source-specific gallery policy
+  remotes/origin/fix/ci-preliminary-power-order-assertion                    655f6e0e Restore pricing test and match preliminary-power guard
+  remotes/origin/fix/cleanup-model-year-workflows-20260813                   26b82d62 Guard active workflows against model-only quota and banned Georgia fallback
+  remotes/origin/fix/compact-filter-grid-glass-help-20260724                 492ce6bc Fix compact filter layout and glass help controls
+  remotes/origin/fix/currency-ui-20260721                                    9c7cbd5b Keep chart segments stable after rerenders
+  remotes/origin/fix/current-read-model-tests-20260812                       5aa070c8 test(perf): align checks with deployed prefetch and runtime limits
+  remotes/origin/fix/customs-reject-model-representative-power-20260813      d68ffac3 Cleanup representative power one-shot workflow
+  remotes/origin/fix/daily-catalog-import-fallbacks                          489fc494 Test SBT fallback parser and market coverage
+  remotes/origin/fix/dark-favorite-and-desktop-tiles                         848cbb6d Show desktop alternatives as a full tile grid
+  remotes/origin/fix/direct-recovery-shared-writer-georgia-identity-20260811 0b8db875 Fix Georgia safety validation smoke variable
+  remotes/origin/fix/drom-vehicle-knowledge-parser-v2                        494d7ad6 test: cover current Drom specification layout
+  remotes/origin/fix/dubicars-current-year-brand-20260814                    fbb0a90c Cover current DubiCars exact year and shared brands
+  remotes/origin/fix/dubizzle-label-bound-semantics-20260813                 e1c20470 Test Dubizzle label-bound semantics
+  remotes/origin/fix/eager-offer-prefetch-20260812                           d1b3f151 perf(catalog): prefetch first visible offers sooner
+  remotes/origin/fix/electric-checkbox-alignment-20260724                    b2cb21a6 Align electric controls and simplify help UI
+  remotes/origin/fix/electric-ui-results-20260724                            badffe75 Avoid duplicate result searches for default body filter
+  remotes/origin/fix/encar-body-exact-current-20260814                       944d900d Fail closed on Encar exact body shape
+  remotes/origin/fix/encar-complete-detail-rate-limit                        0f35331d Validate paced Encar exact detail recovery
+  remotes/origin/fix/encar-detail-pacing-20260810                            4728162f Validate Encar detail pacing without publish
+  remotes/origin/fix/encar-exact-body-gate-20260814                          16e4aa58 Make Korea publisher gate regression assertions robust
+  remotes/origin/fix/encar-graceful-shard-time-limit-20260811                c63e3bc0 Validate Encar graceful shard time limit
+  remotes/origin/fix/encar-noncash-price-contract-20260812                   348224fe chore: remove Encar one-shot validator
+  remotes/origin/fix/europe-autoscout-hq-existing-20260814                   fb0ff824 Enforce recovery target image floor
+  remotes/origin/fix/europe-mercedes-allrad-sprinter-20260814                df8ed38f Test ALLRAD-prefixed Mercedes Sprinter identity
+  remotes/origin/fix/europe-mercedes-edge-identity-20260814                  1c9eef4f Handle Mercedes compact diesel and AWD title prefixes
+  remotes/origin/fix/europe-mercedes-model-identity-20260814                 45c263d0 Fix Mercedes model identity across Europe sources
+  remotes/origin/fix/europe-mercedes-model-identity-clean-20260814           52cb25a2 Fix Mercedes model identity across Europe sources
+  remotes/origin/fix/ev-enginecc-source-truth-20260813                       a0911128 Prevent EV engine displacement leakage into customs
+  remotes/origin/fix/ev-enginecc-source-truth-v2-20260813                    dc0963aa Reject impossible engine displacement on pure EVs
+  remotes/origin/fix/exact-30min-tile-only-20260811                          5805c96c Hide undocumented 30-minute power tile [skip actions]
+  remotes/origin/fix/explicit-electro-classification                         bda09808 Classify explicit Electro listings as electric
+  remotes/origin/fix/export-telegram-brand-emoji-yaml                        649160c9 fix: make Telegram emoji export workflow valid YAML
+  remotes/origin/fix/filter-trends-theme-chrome                              abfa623d Use neutral PWA chrome colors
+  remotes/origin/fix/finance-original-pngs-20260813                          05a7ace1 Add original quality finance mascot PNGs
+  remotes/origin/fix/finance-originals-offer-mobile-20260813                 216a8f3f Fix finance card clipping and mobile budget duplicate
+  remotes/origin/fix/finance-png-budget-final-20260813                       fe7a54f8 Merge pull request #439 from jeep-jim/fix/korea-semantic-v4-ready-20260813
+  remotes/origin/fix/finance-png-budget-final2-20260813                      e1dbeb66 Force mobile budget dedupe and original finance PNGs
+  remotes/origin/fix/finance-ui-direct-20260813                              462d9c89 Mount finance cards on offer details
+  remotes/origin/fix/finance-ui-final-20260813                               a2f4b88d Clip finance mascots and remove mobile budget duplicate
+  remotes/origin/fix/footer-login-actions-20260811                           43fcae83 Fix login light-theme contrast
+  remotes/origin/fix/gallery-buttons-borders-import-catchup                  80eb8e55 Keep focused Encar smoke limits stable
+  remotes/origin/fix/gallery-provenance-20260813                             0566987f Merge pull request #431 from jeep-jim/fix/catalog-semantic-provenance-all-markets-20260813
+  remotes/origin/fix/gallery-provenance-v3-20260813                          4d413852 Remove temporary write-probe file
+  remotes/origin/fix/gallery-row-price-typography                            eae09ea1 Refine price hierarchy and currency typography
+  remotes/origin/fix/gallery-source-order-autohome-20260811                  f32d038c Preserve source gallery order and hide AutoHome thumbnails [skip actions]
+  remotes/origin/fix/georgia-always-detail-specs-20260810                    b7eeb650 Extend non-publishing source probe to Encar power fields
+  remotes/origin/fix/georgia-auto-ge-engine-label                            c3d32af3 Parse exact AUTO.GE Engine labels for customs
+  remotes/origin/fix/georgia-autopapa-dedicated-20260812                     3003dc9d test: lock AutoPapa exact listing parsing
+  remotes/origin/fix/georgia-autopapa-exact-power-20260812                   9eb7978a Diag: report parsed exact AutoPapa horsepower
+  remotes/origin/fix/georgia-autopapa-power-sanity-20260812                  9723a58f chore: remove one-shot power sanity workflow
+  remotes/origin/fix/georgia-autopapa-small-shards-20260815                  7bd9eca3 Cover source-specific Georgia recovery shard sizing
+  remotes/origin/fix/georgia-canonical-only-production-20260812              ca066795 test(georgia): lock catalog to MyAuto and AutoPapa
+  remotes/origin/fix/georgia-canonical-only-production-r2-20260812           8a1f3c78 test(georgia): drop obsolete AUTO.GE replacement assertion
+  remotes/origin/fix/georgia-canonical-source-first-20260812                 b83ae7cb Require fallback only after both Georgia anchors fail
+  remotes/origin/fix/georgia-combustion-preliminary-publisher-20260812       d08f8a04 Test combustion preliminary publication gate
+  remotes/origin/fix/georgia-dedicated-autopapa-and-age-20260812             a0e22833 test(georgia): enforce MyAuto age and AutoPapa card-bound parsing
+  remotes/origin/fix/georgia-detail-gallery-identity-20260810                b8a75f76 Add Georgia exact detail gallery identity patch helper [skip actions]
+  remotes/origin/fix/georgia-exact-detail-fields                             ecf25bcf Stage one-shot AUTO.GE exact field fix
+  remotes/origin/fix/georgia-exact-detail-gallery-20260811                   fef0f7a6 Use AUTO.GE exact detail galleries [skip actions]
+  remotes/origin/fix/georgia-exact-gallery-ad-id-20260811                    e39ed8e2 Bind Georgia galleries to exact listing IDs [skip actions]
+  remotes/origin/fix/georgia-gallery-source-id-scope-20260811                08e973bb Validate Georgia source-bound gallery filter
+  remotes/origin/fix/georgia-min5-public-20260811                            d5b68b65 Validate generic Georgia exact-detail route
+  remotes/origin/fix/georgia-myauto-apionly-gallery-20260812                 b72bd233 Test exact MyAuto product-bound gallery fallback
+  remotes/origin/fix/georgia-myauto-large-gallery-20260812                   ca9be8fe test(georgia): lock MyAuto exact gallery identity
+  remotes/origin/fix/georgia-myauto-request-and-diag-20260812                e58c1380 fix(georgia): keep generic detail href support while rejecting rentals/commercials
+  remotes/origin/fix/georgia-only-myauto-autopapa-20260812                   a89e5c64 chore: validate removal of residual AUTO.GE code
+  remotes/origin/fix/georgia-postassert-20260812                             453bd749 fix(catalog): assert direct recovery against atomic publish manifest
+  remotes/origin/fix/georgia-power-integrity-20260812                        181d082e test(georgia): reject AutoPapa personal watercraft
+  remotes/origin/fix/georgia-power-recovery-bridge-20260812                  5347e5e5 Guard full-seven-market Georgia publisher preservation contract
+  remotes/origin/fix/georgia-public-card-visibility-20260812                 48d1c4a3 Update public offer visibility source-policy contract
+  remotes/origin/fix/georgia-public-quality-gates-20260812                   ad76d4a8 test(georgia): enforce vehicle and five-photo public quality
+  remotes/origin/fix/georgia-recovery-myauto-apionly-20260812                aa1b7276 Test MyAuto recovery without list thumbnail identity
+  remotes/origin/fix/georgia-yandex-adapter-routes-20260812                  a330cf11 Fix Georgia canonical routes for Yandex runtime
+  remotes/origin/fix/georgia-yandex-autopapa-shards-20260815                 0822f718 Fix Georgia shard patch workflow syntax
+  remotes/origin/fix/georgia-yandex-canonical-adapters-20260812              66cb580b chore: remove one-shot Georgia adapter patch workflow
+  remotes/origin/fix/georgia-yandex-canonical-v2-20260812                    efee88c8 fix(georgia): route AutoPapa through dedicated adapter
+  remotes/origin/fix/georgia-yandex-recovery-snapshot-20260812               93d74e66 Keep recovery preparation typed as VehicleOffer
+  remotes/origin/fix/georgia-yandex-recovery-workflow-20260815               dce6639e Test guarded Georgia Yandex recovery contract
+  remotes/origin/fix/georgia-yandex-v2-20260815                              241e6f48 Test bounded Georgia Yandex recovery v2
+  remotes/origin/fix/georgia-yandex-validation-regressions-20260815          d2d15f84 Remove one-shot Georgia dry-run dispatcher
+  remotes/origin/fix/global-cap-shared-after-all-writers-20260812            b2f1d98b test(workflows): require cleanup after cancelled and V6 writers
+  remotes/origin/fix/guazi-source-bound-engine-20260810                      74e12890 Use Guazi listing identity for exact engine displacement
+  remotes/origin/fix/hard-public-model-cap-20-20260811                       ddff42f9 Validate hard public model cap without publishing
+  remotes/origin/fix/hard-public-model-cap-20-20260811-v2                    78272922 Fix preliminary-power pricing CI guard
+  remotes/origin/fix/hard-public-model-cap-20-20260812-validation            288aa4b4 Validate hard public model cap without publishing
+  remotes/origin/fix/hard-public-model-cap-20-latest-20260811                8de75e54 Reclaim unreachable catalog objects safely
+  remotes/origin/fix/hard-public-model-cap-20-prod-20260811                  94bcaf47 Chain certified power after the market refresh queue (#263)
+  remotes/origin/fix/hard-public-model-cap-20-prod-20260812                  00a268cc Hard-cap public exact model inventory at 20
+  remotes/origin/fix/hold-georgia-live-until-gallery-verified-20260811       1d2cbb03 Validate landed Georgia live-write safety hold
+  remotes/origin/fix/home-currency-strip-date-no-ruble-20260811              6c969938 Limit currency strip date and no-ruble style to desktop
+  remotes/origin/fix/home-snapshot-projection-20260811                       382d19ae Use compact projections for homepage snapshot [skip actions]
+  remotes/origin/fix/home-ssr-catalog-snapshot-20260811                      d0bc9f02 Validate homepage server catalog snapshot
+  remotes/origin/fix/independent-kceg-daily-publish-20260814                 12b1a665 Align catalog scale test with current SEO sitemap route
+  remotes/origin/fix/independent-kceg-daily-publish-v2-20260814              5c31f4d4 chore(ai): trigger labeled production verification
+  remotes/origin/fix/independent-uae-kyrgyzstan-daily-20260814               ebe02ef1 Protect independent UAE and Kyrgyzstan recovery
+  remotes/origin/fix/issue241-invalid-identity-migration-20260815            20378822 Remove temporary read-only validation workflow
+  remotes/origin/fix/japan-candidate-cap-after-calculation-20260811          78e4c3b1 Broaden Japan recovery candidates before final model cap [skip actions]
+  remotes/origin/fix/japan-chassis-power-knowledge-20260810                  dc0edf81 Use chassis-bound official power for Japan
+  remotes/origin/fix/japan-commercial-filter-20260810                        2ffb5b8a Reject proven commercial Japan auction models [skip actions]
+  remotes/origin/fix/japan-electrified-no-engine-cc                          4bb00f37 Allow strictly identified engine-less EV auction lots
+  remotes/origin/fix/japan-first-catalog                                     c2a90e75 Тесты: перенести publication gate на Catalog V2
+  remotes/origin/fix/japan-home-projection-cards                             7e349bc5 Cover compact Japan homepage cards
+  remotes/origin/fix/japan-official-ice-power-20260810                       dd4dc882 Fix Japan official power validator
+  remotes/origin/fix/japan-official-variant-only-20260810                    7611d450 Restrict Japan fallback variants to official sources [skip actions]
+  remotes/origin/fix/japan-optional-power-publish-20260814                   9afda979 Protect Japan aggregate reuse and optional power fallback
+  remotes/origin/fix/japan-strict-postwrite-safety-20260812                  8e3b0138 test(workflows): lock Japan strict publish safety
+  remotes/origin/fix/japan-strict-preserve-all-markets-20260811              a3e826cf Align Japan strict rows with canonical public gate
+  remotes/origin/fix/japan-strict-preserve-all-markets-20260812-validation   acaf67a5 Validate Japan strict fix without publishing
+  remotes/origin/fix/japan-strict-preserve-all-markets-prod-20260812         512f2592 Fix Japan strict publisher preservation and hard cap
+  remotes/origin/fix/kb-malibu-source-identity-20260813                      f03ad874 Preserve KB Malibu source identity
+  remotes/origin/fix/kbchachacha-detail-backoff-20260812                     fa901a2d ci: remove temporary KB source-only validation
+  remotes/origin/fix/kcar-korean-ev-classification-20260810                  65dbbcb1 Remove temporary KCar EV patch helper
+  remotes/origin/fix/kcar-postwrite-audit-20260812                           d5feae85 test(workflows): guard K Car post-write audit
+  remotes/origin/fix/knowledge-backfill-checkpoint-batches                   c82ffe5d fix: checkpoint vehicle knowledge backfill per run
+  remotes/origin/fix/knowledge-checkpoint-contract-test                      1cf6cedd chore: retrigger checkpointed knowledge backfill
+  remotes/origin/fix/knowledge-github-storage                                c33c51f5 Test GitHub-backed 2011+ knowledge storage
+  remotes/origin/fix/korea-10k-throughput                                    526adeaf test: lock fast verified gallery policy for 10k runs
+  remotes/origin/fix/korea-catalog-self-retry                                bb361414 fix: make market collection self-retry and keep knowledge audit non-blocking
+  remotes/origin/fix/korea-primary-gallery-order-20260810                    a0786e24 Fix Encar primary gallery ordering [skip actions]
+  remotes/origin/fix/korea-retained-sedan-semantic-gate-20260814             299a1751 Remove temporary Korea semantic apply workflow
+  remotes/origin/fix/korea-semantic-v4-20260813                              3ac1d80a Prevent EV engine displacement leakage into customs
+  remotes/origin/fix/korea-semantic-v4-ready-20260813                        602e52c5 Fail closed on unknown semantic source categories
+  remotes/origin/fix/korea-source-input-validation                           9b3ce8e7 fix: collect one real image before optional gallery expansion
+  remotes/origin/fix/kyrgyzstan-amt-engine-token                             10fb72bc Smoke Kyrgyzstan AMT parser without publish
+  remotes/origin/fix/kyrgyzstan-explicit-engine-tokens                       4c7d8988 Smoke Kyrgyzstan explicit engine tokens
+  remotes/origin/fix/lead-banner-request-copy-20260811                       5d0a8655 Rename public request banner CTA
+  remotes/origin/fix/light-preliminary-price-white-20260814                  1e148358 Use white preliminary price panel in light theme
+  remotes/origin/fix/light-theme-cosmetics-star-layout                       922e7930 Remove market delivery kicker from catalog sections
+  remotes/origin/fix/live-fx-price-panels-form                               4dfd3f33 Place offer contact fields side by side on desktop
+  remotes/origin/fix/live-home-filter-mobile-market-scroll                   ef7d1597 Preserve public catalog integrity checks
+  remotes/origin/fix/loader-shell-v2-20260812                                9e31a5b9 chore: remove temporary loader patch script
+  remotes/origin/fix/loader-skeleton-runtime-20260812                        eed8107e fix(runtime): add serverless memory headroom
+  remotes/origin/fix/loader-straight-stripes-20260812                        dcfa7283 chore: remove temporary loader validator
+  remotes/origin/fix/login-back-dealer-top-20260811                          adfa4e69 Restore shared back control and move dealer CTA above login
+  remotes/origin/fix/mashina-gallery-identity-20260810                       cf8eff7d Deduplicate Mashina source photo renditions
+  remotes/origin/fix/mashina-profile-image-guard-20260811                    567fe65b Reject Mashina seller profile images from galleries [skip actions]
+  remotes/origin/fix/mashina-shared-brand-year-policy-20260814               b06c3792 Cover Mashina dealer text not overriding source make
+  remotes/origin/fix/mashina-source-url-gallery-20260814                     22a55a52 Cover Mashina listing-bound source URL galleries
+  remotes/origin/fix/mass-market-final-test-sync                             6bd44943 Каталог: обновить последнюю устаревшую проверку цены
+  remotes/origin/fix/mass-market-generator-v2                                c69019e6 Каталог: надёжно применить массовый приоритет без хрупких замен
+  remotes/origin/fix/mass-market-patch-test-sync                             afc02470 Каталог: синхронизировать тесты массового патча
+  remotes/origin/fix/mass-market-push-without-workflow                       c6285428 Каталог: публиковать массовый патч без изменения workflows
+  remotes/origin/fix/mobile-brand-grid-topavto-copy                          7fbcd959 Remove accidental temporary file
+  remotes/origin/fix/mobile-brand-grid-topavto-copy-2                        5523f3e5 Remove accidental temporary file
+  remotes/origin/fix/mobile-brand-grid-topavto-copy-3                        5523f3e5 Remove accidental temporary file
+  remotes/origin/fix/mobile-consumer-bff-20260810                            798e40ae Fix mobile.de smoke registry import
+  remotes/origin/fix/mobile-de-min-five-photos-20260811                      7ff75650 Require five source photos for Mobile.de cards [skip actions]
+  remotes/origin/fix/mobile-de-placeholder-identity-20260815                 cbb0ff2b Cover Mobile.de identity and age collector gates
+  remotes/origin/fix/mobile-preliminary-tooltip-and-spec-packing-20260811    c0273f90 Pack offer specs into real pairs without mileage gaps
+  remotes/origin/fix/mobile-theme-and-controls-round2                        5a1081d9 Keep homepage live catalog request at tested page size
+  remotes/origin/fix/mobile-topavto-bottom-wrap-and-city-heading-20260724    e22c4988 Remove preposition from city heading
+  remotes/origin/fix/mobile-topavto-float-exact-20260724                     5b44a9d8 Fix mobile TopAvto logo as floated paragraph element
+  remotes/origin/fix/mobile-topavto-float-logo-20260724                      3d106ad5 Make mobile TopAvto heading wrap around logo
+  remotes/origin/fix/mobile-topavto-fullwidth-parent-20260724                bbd86294 Reset mobile TopAvto copy parent to full width
+  remotes/origin/fix/mobile-topavto-heading-wrap-20260724                    6a8ed464 Fix mobile TopAvto heading wrap beside logo
+  remotes/origin/fix/mobile-topavto-logo-bottom-20260724                     8bfcf8da Move mobile TopAvto logo to card bottom
+  remotes/origin/fix/mobile-topavto-logo-own-row-20260724                    e3b6e44e Place mobile TopAvto logo below full-width text
+  remotes/origin/fix/mobile-topavto-text-flow-20260724                       2e745f50 Let mobile TopAvto text flow around the bottom logo
+  remotes/origin/fix/mobile-topavto-wrap-theme-20260724                      a11e30c3 Fix mobile TopAvto wrap and light theme logo
+  remotes/origin/fix/model-pages-light-layout                                6c05c4e2 fix: compact empty brand request block
+  remotes/origin/fix/model-year-quota-20260813                               02ff0ffb Remove temporary quota admission workflow
+  remotes/origin/fix/model-year-quota-admission-20260813                     67be7686 Remove temporary quota admission workflow
+  remotes/origin/fix/myauto-hard-2020-boundary-20260812                      ed59e54e test(georgia): lock MyAuto hard 2020+ boundary
+  remotes/origin/fix/myauto-public-route-fallback-20260812                   ea0a14a5 Cover MyAuto canonical public route fallbacks
+  remotes/origin/fix/nonblocking-route-loader-20260811                       a54f6ef8 Make route loading delayed and nonblocking [skip actions]
+  remotes/origin/fix/object-storage-import-retries                           05931e3d Limit catalog index write concurrency
+  remotes/origin/fix/object-storage-put-400-v37                              0e155aa1 Каталог: добавить автоматическую диагностику последнего падения (#156)
+  remotes/origin/fix/offer-layout-and-catalog-depth                          d461cae8 Keep importer lock assertions compatible with deeper catalog flow
+  remotes/origin/fix/offer-light-contrast-body-heading                       912e7ee7 Make offer blocks visible in light theme
+  remotes/origin/fix/offer-mobile-readability-cjk-20260810                   c05c7ed6 Fix offer readability and public localization [skip actions]
+  remotes/origin/fix/offer-spec-explicit-full-width-20260811                 7772d8ba Force odd final offer spec to span full row
+  remotes/origin/fix/offer-spec-explicit-full-width-20260811-pr              7772d8ba Force odd final offer spec to span full row
+  remotes/origin/fix/offer-spec-explicit-full-width-20260811-verify          7772d8ba Force odd final offer spec to span full row
+  remotes/origin/fix/offer-spec-last-full-width-20260811                     66e8c5d8 Merge pull request #251 from jeep-jim/fix/revert-broken-offer-spec-grid-20260811
+  remotes/origin/fix/offer-spec-smart-chip-packing-20260811                  cd872aac Pack offer spec chips by actual text width
+  remotes/origin/fix/offer-spec-two-column-hard-lock-20260811                7e6b2160 Enforce two-column offer specs before and after hydration
+  remotes/origin/fix/otomoto-listing-bound-detail-gallery-20260814           0ced6912 Remove temporary OTOMOTO regression workflow
+  remotes/origin/fix/preliminary-card-height-align-20260811                  eea912c6 Align preliminary catalog price rows with regular cards
+  remotes/origin/fix/preliminary-card-use-exact-trend-spacing-20260811       d388a7db Match preliminary cards to exact trend spacing
+  remotes/origin/fix/preliminary-electrified-20260810                        ab045daa Prepare production-only preliminary electrified patch [skip actions]
+  remotes/origin/fix/preliminary-price-polish-20260811                       824eefcb Polish preliminary price cards and center offer help
+  remotes/origin/fix/preliminary-price-question-ui-20260811                  ab969740 Tighten preliminary price interaction types
+  remotes/origin/fix/preliminary-spec-no-gap-stable-grid-20260811            02fa9990 Stabilize offer spec grid and fill preliminary power gaps
+  remotes/origin/fix/preserve-dedicated-gallery-identity-20260813            0566987f Merge pull request #431 from jeep-jim/fix/catalog-semantic-provenance-all-markets-20260813
+  remotes/origin/fix/prestige-gallery-contract-v2-20260815                   da3d7964 Align Prestige gallery safety contract
+  remotes/origin/fix/prestige-japan-next-model-segment-20260811              654a4615 Validate deeper Prestige Japan model traversal
+  remotes/origin/fix/prestige-no-foto-20260812                               4ec6589f chore: remove Prestige patch helper
+  remotes/origin/fix/prestige-repair-artifact-download-20260812              0722d69a test(workflows): keep Prestige repair source-only
+  remotes/origin/fix/prestige-repair-cancelled-source-20260811               b5621dd2 Validate cancelled Prestige repair guard
+  remotes/origin/fix/prestige-v2-gallery-daily-20260814                      38d09ebb Protect resilient Prestige v2 daily contract
+  remotes/origin/fix/price-popover-light-desktop-layout                      7ec7cfd2 Keep price popover readable and in viewport
+  remotes/origin/fix/projection-first-search-20260811                        98dc1941 Use cached compact projection as primary catalog search path [skip actions]
+  remotes/origin/fix/public-catalog-cards-v31                                88081bb6 Тест: публичные карточки проходят клиентскую проверку
+  remotes/origin/fix/public-legal-footer-cookie                              f291facb Mount legal footer and cookie notice on public pages
+  remotes/origin/fix/public-navigation-login-mobile-rates                    1a5e618d Style login, exchange rates and executor surfaces
+  remotes/origin/fix/public-offer-validation                                 6611b250 fix: validate stripped public catalog offers
+  remotes/origin/fix/public-spec-safe-labels-20260811                        8701a569 Hide invalid public transmission and drive tokens [skip actions]
+  remotes/origin/fix/public-theme-responsive-polish                          c98fc6e0 Use live catalog counts and searchable home catalog suggestions
+  remotes/origin/fix/purge-invalid-market-offers                             d793b4ce Purge broken legacy catalog offers before production import
+  remotes/origin/fix/quarantine-mismatched-market-images                     1080b246 Quarantine mismatched Japan images and purge shared media
+  remotes/origin/fix/read-model-empty-georgia-pipefail-20260812              4dbdb008 Test read-model empty-market and pipefail policy
+  remotes/origin/fix/recovery-combustion-preliminary-20260813                28304673 Remove accidental temporary file
+  remotes/origin/fix/recovery-exact-preserve-k9-20260814                     02e25f90 Preserve untouched markets exactly in recovery publish
+  remotes/origin/fix/recovery-exact-preserve-k9-current-20260814             ef035323 Harden Korea recovery preservation and K9 displacement
+  remotes/origin/fix/recovery-exact-public-preservation-20260815             3af245c1 Remove temporary patch helper
+  remotes/origin/fix/recovery-full-internal-preservation-20260814            91b3c289 Remove recovery CI helper
+  remotes/origin/fix/recovery-full-internal-preservation-clean-20260814      ae7f3058 Make recovery publishers preserve full internal state
+  remotes/origin/fix/recovery-photo-gate-object-images-20260813              d66d9360 Validate recovery photo gate fix
+  remotes/origin/fix/recovery-photo-gate-object-images-clean-20260813        19277e5b Cover object-shaped catalog images in recovery gate
+  remotes/origin/fix/recovery-preservation-prewrite-20260814                 3dd895f6 Fail recovery preservation before catalog writes
+  remotes/origin/fix/recovery-preserve-public-order-20260814                 b03af440 Protect untouched market order during recovery publish
+  remotes/origin/fix/recovery-target-min-images-20260813                     e209cb81 Run read-only KB gallery diagnostic
+  remotes/origin/fix/recovery-target-min-images-20260814                     faeab5d1 Remove temporary recovery image CI
+  remotes/origin/fix/regional-scale-and-photo-identity                       43cab3b1 Тесты: закрепить строгие региональные адаптеры
+  remotes/origin/fix/reject-nonpassenger-bodytypes-20260810                  1e7f5661 Rerun non-passenger and Encar validation with smoke helper
+  remotes/origin/fix/reject-price-on-request                                 4c907d62 test: reject request prices and conflicting body defaults
+  remotes/origin/fix/remove-banned-georgia-scale-sources-20260812            ac8a46fa test: allow canonical two-source Georgia registry
+  remotes/origin/fix/remove-duplicate-offer-total                            5ea5c45b Use star favorites and keep badge count white
+  remotes/origin/fix/remove-partner-card-outlines                            846e8c55 Remove remaining partner card outlines
+  remotes/origin/fix/restore-catalog-card-ui                                 8f8cb6e8 Тесты: сохранить конвертацию цены без раздувания карточки
+  remotes/origin/fix/restore-filter-colors-usd-20260724                      2f0f578a Show USD before AED in homepage rates
+  remotes/origin/fix/restore-home-filter-styles                              3ee1e7f9 Restore catalog-style filters and homepage copy
+  remotes/origin/fix/restore-ui-and-mobile-catalog                           97e157d1 Finalize mobile rail and light-theme contrast rules
+  remotes/origin/fix/restore-ui-regressions-gallery                          c2784908 Keep simple homepage dropdown lists visible
+  remotes/origin/fix/restore-ui-regressions-gallery-2                        c3ebfee9 Add offer breadcrumbs and tighten price structure panel
+  remotes/origin/fix/restore-ui-regressions-gallery-check                    c3ebfee9 Add offer breadcrumbs and tighten price structure panel
+  remotes/origin/fix/restore-ui-regressions-gallery-final                    c3ebfee9 Add offer breadcrumbs and tighten price structure panel
+  remotes/origin/fix/restore-ui-regressions-gallery-pr                       c3ebfee9 Add offer breadcrumbs and tighten price structure panel
+  remotes/origin/fix/restore-ui-regressions-gallery-ready                    c3ebfee9 Add offer breadcrumbs and tighten price structure panel
+  remotes/origin/fix/results-modal-partner-theme                             3bbdceec Restore catalog honesty guards
+  remotes/origin/fix/retire-stale-catalog-repair-20260813                    ca357662 Retire stale China Georgia catalog repair writer
+  remotes/origin/fix/retire-stale-china-georgia-repair-20260813              0566987f Merge pull request #431 from jeep-jim/fix/catalog-semantic-provenance-all-markets-20260813
+  remotes/origin/fix/revert-broken-offer-spec-grid-20260811                  d49074d1 Restore stable two-column offer specs grid
+  remotes/origin/fix/route-preloader-contrast-delay-20260811                 6a36fa31 Improve route preloader contrast and reduce flashing [skip actions]
+  remotes/origin/fix/ruble-prices-japan-priority-v33                         b82ef7d8 Сохранить согласованный текст pending-расчёта
+  remotes/origin/fix/run-global-model-cap-once-20260812                      b2a4a5d3 Run canonical model-cap cleanup once on main
+  remotes/origin/fix/runtime-bundled-vehicle-knowledge-20260813              2cd53ff9 Cleanup one-shot runtime fix workflow
+  remotes/origin/fix/runtime-headroom-20260812                               9f68e2e0 fix(runtime): add serverless memory headroom
+  remotes/origin/fix/shared-live-catalog-writer-20260812                     15e6e807 test(workflows): require one shared live catalog writer slot
+  remotes/origin/fix/source-specific-market-parsers                          004b5905 Stop price matches before following model years
+  remotes/origin/fix/spec-engine-liters-consumption-20260811                 ca79aa10 Validate engine liters parsing against WLTP and dealer text
+  remotes/origin/fix/sticky-footer-market-fallbacks                          1cbfc2a2 Cover public fallback parsing and all four market adapters
+  remotes/origin/fix/strict-electrified-model-classification                 6f311eaa Recognize strict HEV and known BEV model tokens
+  remotes/origin/fix/strict-market-lot-matching                              33202310 Validate strict importer syntax in CI
+  remotes/origin/fix/strict-source-detail-fail-closed-20260813               c0b0f80a Cover fail-closed source wrapper in production CI
+  remotes/origin/fix/topavto-block-layout-20260723                           354d4c03 Fix TopAvto block spacing on mobile and desktop
+  remotes/origin/fix/topavto-desktop-air-20260723                            47a64bea Remove desktop TopAvto backdrop and reserved column
+  remotes/origin/fix/topavto-desktop-flow-20260723                           76c15ac5 Fix desktop TopAvto text flow
+  remotes/origin/fix/uae-dubicars-authoritative-year-20260813                3a3dcb2b Test DubiCars marketing-year spoof regression
+  remotes/origin/fix/uae-dubicars-exact-model-identity                       c1116cfe Ignore DubiCars monthly payment teasers when parsing price
+  remotes/origin/fix/uae-dubicars-exact-model-identity-v2                    78272922 Fix preliminary-power pricing CI guard
+  remotes/origin/fix/uae-finance-price-hard-gate-20260811                    a8772ea7 Reject UAE installment teaser prices from catalog
+  remotes/origin/fix/uae-financing-price-guard-20260811                      bcc1a866 test: validate UAE financing-only price guard
+  remotes/origin/fix/uae-georgia-preaudit-age-20260811                       f539ddd7 Validate UAE Georgia age purge publish order
+  remotes/origin/fix/uae-transient-page-retry                                fe3e0e52 Retry transient UAE source pages
+  remotes/origin/fix/unified-login-header-footer-buttons-20260811            c4108edc Align footer placeholder buttons
+  remotes/origin/fix/v6-safe-progression-20260811                            9996f97c Fix V6 no-publish validation schema
+  remotes/origin/fix/v6-shared-publish-lock-20260812                         959254d4 test(workflows): lock V6 shared publish serialization
+  remotes/origin/fix/v6-source-only-guard-20260812                           6dc3e6c8 test(workflows): lock Prestige V6 source-only
+  remotes/origin/fix/vehicle-knowledge-boundary-match-20260813               7d7842ae Require token boundaries for vehicle text matching
+  remotes/origin/fix/vehicle-knowledge-hydrate-production-catalog            4643070a fix: hydrate production offers before knowledge backfill
+  remotes/origin/fix/vehicle-knowledge-model-make-leak-20260814              0bb14b3e Remove temporary PR472 patch workflow
+  remotes/origin/fix/vehicle-knowledge-truthful-readiness                    58cbdde3 ci: reject empty vehicle knowledge backfills
+  remotes/origin/fix/wire-autopapa-dedicated-20260812                        62515add test(georgia): require dedicated AutoPapa production adapter
+  remotes/origin/gallery-final-payload-20260809                              bbb7f996 probe gallery final branch
+  remotes/origin/gallery-payload-20260809                                    32ff6188 Stage buyer gallery payload 011-014
+  remotes/origin/gallery-payload-smallchunks                                 4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/gallery-zip-trigger-final                                   2bcaffac Complete staging metadata
+  remotes/origin/issue241-global-cap-enrich-20260814                         fb0ff824 Enforce recovery target image floor
+  remotes/origin/issue241-global-cap-enrich-v2-20260814                      353c0b90 Apply model quota after knowledge enrichment
+  remotes/origin/issue241-integrity-20260814                                 fb0ff824 Enforce recovery target image floor
+  remotes/origin/issue241-integrity-run-20260814                             8b967823 Run post-enrichment public quota guard
+  remotes/origin/japan-publish-verified-aggregate-20260811                   fabf3944 Publish verified Japan aggregate
+  remotes/origin/knowledge/vehicle-encyclopedia-v2-20260812                  b1a6ace6 Knowledge: add master Codex encyclopedia task
+  remotes/origin/korea-grow-only-v16                                         9495b875 Add grow-only Encar fill v16
+  remotes/origin/main                                                        afe138d0 Remove Yandex domain diagnostic workflow
+  remotes/origin/noop                                                        d3c6bc2f Polish offer page and star favorites
+  remotes/origin/noop-check                                                  f28225ce Показывать цены в рублях и поднять приоритет японских лотов
+  remotes/origin/noop-unused-placeholder                                     eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/noop-unused-placeholder-2                                   eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/noop-unused-placeholder-3                                   eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/noop-unused-placeholder-4                                   eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/noop-unused-placeholder-5                                   eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/noop2                                                       f28225ce Показывать цены в рублях и поднять приоритет японских лотов
+  remotes/origin/noop3                                                       f28225ce Показывать цены в рублях и поднять приоритет японских лотов
+  remotes/origin/noop4                                                       f28225ce Показывать цены в рублях и поднять приоритет японских лотов
+  remotes/origin/ops-issue241-global-cap-dryrun-20260814                     8ab21842 Run issue241 global cap dry-run
+  remotes/origin/ops/all7-identity-audit-20260814                            dbf1c592 Audit all seven market identities read-only
+  remotes/origin/ops/all7-identity-audit-fixed-20260814                      7b57b97e Run all-7 identity audit on fixed presentation
+  remotes/origin/ops/all7-identity-audit-fixed-v2-20260814                   3f717318 Expose invalid source identity samples in final proof
+  remotes/origin/ops/all7-invalid-identity-migration-20260814                26ea7f37 Merge PR #497: fail recovery preservation before writes
+  remotes/origin/ops/apply-electrified-yellow-price-20260814                 9c4d9167 Apply electrified yellow price UI
+  remotes/origin/ops/apply-kb-malibu-source-identity-20260813                ad5d2189 Simplify KB Malibu code patch workflow
+  remotes/origin/ops/apply-korea-semantic-v4-20260813                        3ac1d80a Prevent EV engine displacement leakage into customs
+  remotes/origin/ops/apply-vehicle-knowledge-boundary-20260813               83e7f42a Apply vehicle knowledge boundary matcher fix
+  remotes/origin/ops/audit-japan-pricing-status-20260814                     98edc229 Audit Japan pricing status read-only
+  remotes/origin/ops/autoscout-europe-hq-live-refresh-20260813               39228602 Run safe AutoScout Europe HQ live refresh
+  remotes/origin/ops/autoscout-europe-hq-live-refresh-v2-20260813            c8ddbc7f Finalize mobile budget card layout
+  remotes/origin/ops/autoscout-hq-v4-gate-fix-20260814                       1a2719c0 Run corrected AutoScout v4 gates without refetch
+  remotes/origin/ops/autoscout-live-hq-proof-20260814                        abe1681d Prove live AutoScout HQ gallery refresh
+  remotes/origin/ops/autoscout-live-hq-proof-v2-20260814                     786e4959 Fix AutoScout HQ proof v2 checkout ref
+  remotes/origin/ops/autoscout-live-hq-proof-v3-20260814                     a8d1896a Run AutoScout HQ proof v3
+  remotes/origin/ops/autoscout-live-hq-proof-v4-20260814                     5c46cb19 Run current-generation AutoScout HQ proof v4
+  remotes/origin/ops/autoscout-live-hq-proof-v5-20260814                     f5a108f9 Merge pull request #469 from jeep-jim/agent/korea-five-photo-quality-gate
+  remotes/origin/ops/catalog-v2-root-cause-fix                               2d4dddf7 test: restore Japan sold-results workflow contract wording
+  remotes/origin/ops/catalog-v2-smoke9                                       9ac3f562 test: enforce exact nine-card sequential smoke rollout
+  remotes/origin/ops/china-nonpassenger-cleanup-20260810                     d0c00472 Fix China cleanup no-publish smoke wrapper
+  remotes/origin/ops/diagnose-gmc-savana-price-20260814                      3f2e796a Diagnose GMC Savana pricing status read-only
+  remotes/origin/ops/diagnose-honda-wrv-price-20260814                       7f862638 Diagnose Honda WR-V pricing status read-only
+  remotes/origin/ops/dispatch-georgia-current-main-20260812                  cde308e9 chore: remove one-shot Georgia dispatcher
+  remotes/origin/ops/dubicars-current-html-probe-20260814                    43f8ab83 Expose exact DubiCars parser gate fields
+  remotes/origin/ops/dubicars-fixed-readiness-20260814                       e0aeb3fc Run live DubiCars readiness after parser diagnosis
+  remotes/origin/ops/europe-autoscout-hq-20260814                            9467631c Trigger safe Europe AutoScout HQ gallery refresh
+  remotes/origin/ops/europe-autoscout-hq-refresh-20260813                    e516da08 Run guarded Europe AutoScout HQ gallery refresh
+  remotes/origin/ops/europe-autoscout-hq-refresh-20260814                    48dfc338 Rerun read-only Europe HQ baseline verification
+  remotes/origin/ops/europe-autoscout-hq-safe-final-20260813                 2b4f4eab Run final guarded Europe AutoScout HQ refresh
+  remotes/origin/ops/europe-autoscout-hq-safe-refresh-20260813               0566987f Merge pull request #431 from jeep-jim/fix/catalog-semantic-provenance-all-markets-20260813
+  remotes/origin/ops/europe-benz-quota-diagnostic-20260814                   3f14d2d0 Fix Europe Benz diagnostic async wrapper
+  remotes/origin/ops/europe-hq-safe-20260814                                 5754ca2a Run one-shot safe Europe AutoScout HQ refresh
+  remotes/origin/ops/europe-hq-safety-20260814                               64f36133 Tighten Europe HQ publish safety preflight
+  remotes/origin/ops/europe-live-photo-audit-20260814                        212dd826 Fix Europe photo audit async entrypoint
+  remotes/origin/ops/europe-model-quota-publish-20260814                     2bc93491 Run guarded publisher through tsx
+  remotes/origin/ops/europe-post-hq-current-proof-20260814                   64d3aceb Merge pull request #471 from jeep-jim/ui/offer-finance-copy-mobile-actions-20260814
+  remotes/origin/ops/europe-post-hq-model-audit-20260814                     30ffea52 Trigger post-HQ audit after async fix
+  remotes/origin/ops/europe-sharded-recovery-20260810                        bc708a44 Validate Europe source-sharded recovery without publish
+  remotes/origin/ops/final-six-market-dispatch-20260814                      2b99330a Dispatch final six-market production cycle
+  remotes/origin/ops/final-six-markets-20260814                              44e42560 temp
+  remotes/origin/ops/gallery-source-metadata-20260814                        71ec331b Inspect AutoScout promo listing metadata
+  remotes/origin/ops/georgia-autopapa-bulk-fill-20260812                     aaafb135 Expand AutoPapa fill to 700 pages
+  remotes/origin/ops/georgia-autopapa-canary-20260812                        fa1cc0a0 Probe AutoPapa inventory depth around page 700
+  remotes/origin/ops/georgia-autopapa-power-inspect-20260812                 f7090d25 Temporarily inspect exact AutoPapa power fields through Yandex egress
+  remotes/origin/ops/georgia-exact-power-maintenance-20260812                131fb785 Ops: add safe Georgia exact-power maintenance
+  remotes/origin/ops/georgia-power-audit-readonly-20260813                   fc02d93f Ops: sample scattered Georgia VIN power ranges
+  remotes/origin/ops/georgia-power-inspect-audit-20260813                    2badc00c Ops: audit exact AutoPapa VIN power through vPIC
+  remotes/origin/ops/georgia-power-refresh-20260812                          b0a9679e Run Georgia exact-power refresh through full seven-market publisher
+  remotes/origin/ops/georgia-variant-power-reprice-20260813                  87ed4d4f Run safe Georgia same-card variant power reprice
+  remotes/origin/ops/georgia-yandex-audit-20260812                           bfd565e3 Retry transient Yandex recovery failures and audit publish-eligible galleries
+  remotes/origin/ops/georgia-yandex-recovery-temp-20260812b                  3efce205 Temporarily expose read-only canonical Georgia recovery snapshot
+  remotes/origin/ops/independent-daily-markets                               7d38d004 test: allow isolated Japan workflow trigger
+  remotes/origin/ops/issue241-europe-cap-fast-audit-20260814                 7665e229 Project Europe Mercedes identity migration read-only
+  remotes/origin/ops/issue241-europe-mercedes-identity-migration-20260814    58cba674 Publish guarded Europe Mercedes identity migration
+  remotes/origin/ops/issue241-global-cap-publish-20260814                    d622d372 Run guarded issue241 global cap publication
+  remotes/origin/ops/issue241-invalid-identity-audit-20260815                c2a69275 Validate issue241 identity migration plan read-only
+  remotes/origin/ops/japan-dispatch-only                                     5d836ec0 test: require Japan workflow dispatch-only sequencing
+  remotes/origin/ops/korea-artifact-proof-v4-20260813                        3ac1d80a Prevent EV engine displacement leakage into customs
+  remotes/origin/ops/korea-current-cleanup-20260814                          a682ceaf Run isolated current Korea cleanup
+  remotes/origin/ops/korea-encar-casper-probe-20260813                       bc66a851 Run read-only Encar Casper 2022 probe
+  remotes/origin/ops/korea-kb-only-retry-20260813                            4478d9c8 Run parallel read-only KB Korea retries
+  remotes/origin/ops/korea-model-year-live-refresh-20260813                  67aa526b Resume Korea refresh from clean all-seven baseline
+  remotes/origin/ops/korea-model-year-live-refresh-v2-20260813               612204ee Run Korea model-year proof on fixed recovery collector
+  remotes/origin/ops/korea-restart                                           1a393f5e chore: restart Korea Catalog V2 rollout
+  remotes/origin/ops/korea-semantic-live-refresh-v3-20260813                 dacecd7e Run current-main Korea proven-artifact read-only gate
+  remotes/origin/ops/mashina-readonly-readiness-20260814                     4b76c848 Run Mashina read-only readiness
+  remotes/origin/ops/mashina-readonly-readiness-v2-20260814                  5689a293 Run Mashina shared-policy readiness
+  remotes/origin/ops/mashina-readonly-readiness-v3-20260814                  78fad4c2 Run Mashina source-identity readiness
+  remotes/origin/ops/model-year-quota-dryrun-20260814                        b5e864b0 Run guarded model-year quota dry-run
+  remotes/origin/ops/object-storage-read-diagnostic-20260815                 93e424f7 Add one-shot read-only Object Storage diagnostic
+  remotes/origin/ops/restore-market-scale                                    1b990ad1 test: protect full-scale market collection settings
+  remotes/origin/ops/retry-japan-0257                                        7e04c5db Catalog V2 Japan: trigger monitored retry at 02:57
+  remotes/origin/ops/retry-japan-current-main                                49592e7e ops: retry Japan on current main
+  remotes/origin/ops/retry-korea-0948                                        91c554d6 Catalog V2 Korea: trigger monitored recovery run
+  remotes/origin/ops/smoke9-unlock-fallback                                  6dae5b83 test: prevent smoke9 fallback deadlock
+  remotes/origin/ops/smoke9-zero-priority-target                             31f74f70 test: cover Smoke9 priority clamp bypass
+  remotes/origin/ops/uae-dubicars-year-purge-20260813                        01ee278f Run safe UAE DubiCars source-year purge
+  remotes/origin/ops/uae-readonly-readiness-20260814                         fe8ac713 Run UAE read-only source readiness
+  remotes/origin/ops/vehicle-knowledge-backfill-trigger                      d21233a2 ci: trigger vehicle knowledge backfill
+  remotes/origin/ops/vehicle-knowledge-backfill-trigger-v2                   d1036b7d chore: trigger Drom parser v2 backfill
+  remotes/origin/ops/vehicle-knowledge-git-storage                           1d5166e9 test: keep vehicle knowledge out of Object Storage
+  remotes/origin/ops/verify-georgia-card-visibility-20260812                 3061d4a0 Verify Georgia cards render after public DTO fix
+  remotes/origin/perf/brand-model-directory-read-model-20260812              8a0d4226 Georgia: remove banned fallback source configs entirely
+  remotes/origin/perf/brand-summary-read-model-20260812                      b031c487 Perf: add compact brand summary read model
+  remotes/origin/perf/cars-overview-single-pricing-batch-20260812            4a1cf904 test: guard catalog pricing in-flight dedupe
+  remotes/origin/perf/catalog-brand-projections-20260812                     017464c9 Perf: add per-brand current catalog projections
+  remotes/origin/perf/catalog-overview-read-model-20260812                   96c75b8a test(catalog): lock overview generation guard and landing-page scope [skip catalog]
+  remotes/origin/perf/catalog-overview-read-model-r2-20260812                9b317cde test(catalog): rerun overview validation on latest main [skip catalog]
+  remotes/origin/perf/overview-refresh-with-read-models-20260814             c0b25701 Guard overview bootstrap paths
+  remotes/origin/power-casper-korean-trim-20260811                           70bd9c67 Document Casper Electric power and fix Korean trim translation
+  remotes/origin/prioritize-one-source-per-market-v5                         2eaca776 Trigger balanced five-market recovery v5
+  remotes/origin/prod/china-quality-20260810                                 70a0425c Fix China exact galleries and Russian transmission labels
+  remotes/origin/prod/encar-pacing-20260810                                  46a3b784 Pace Encar exact detail requests and retry list pages
+  remotes/origin/prod/exact-30min-tile-only-20260811                         9298e2d2 Remove exact-power validation workflow from production branch [skip actions]
+  remotes/origin/prod/guazi-source-bound-engine-20260810                     e0b17df8 Use Guazi listing identity for exact engine displacement
+  remotes/origin/prod/mashina-profile-image-guard-20260811                   16fdbe29 Remove Mashina validation workflow from production branch [skip actions]
+  remotes/origin/prod/projection-first-search-20260811                       d25f901f Remove validation workflow from production branch [skip actions]
+  remotes/origin/prod/purge-georgia-canonical-20260812                       3bdd5ef7 prod(catalog): run one-shot canonical Georgia purge
+  remotes/origin/prod/restore-georgia-canonical-yandex-20260812              c6944e5e Restore canonical Georgia from Yandex snapshot once
+  remotes/origin/restore/catalog-quality-v32                                 20c29b77 Roadmap: зафиксировать восстановление цен, галерей и SEO
+  remotes/origin/rjwe8o-codex/-pr                                            f3931512 Fix live offer filtering and sample page size
+  remotes/origin/run-catalog-recovery-once-v2                                cae88f9f Run five-market catalog recovery once
+  remotes/origin/run-latest-catalog-recovery-v6                              dd9e1a0f Balance five-market import order (#59)
+  remotes/origin/test/autoscout-hq-pr416                                     a29d3683 Fix AutoScout exact HQ gallery
+  remotes/origin/test/kia-k9-3342-customs-20260813                           b9e963a4 Run one-shot finance UI fix on main
+  remotes/origin/tmp-gallery-payload-source                                  4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/tmp-noop                                                    fe42e4a9 Merge PR #496: Telegram OIDC code flow
+  remotes/origin/tmp-noop-2                                                  fe42e4a9 Merge PR #496: Telegram OIDC code flow
+  remotes/origin/tmp-path-upload-test                                        4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/tmp-upload-path-probe                                       4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/tmp-upload-probe-3                                          4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/tmp-upload-probe-final                                      4d0f1776 Prepare one-shot full-resolution buyer gallery import
+  remotes/origin/tools/export-telegram-brand-emoji                           3aecf38c tools: add Telegram brand emoji export
+  remotes/origin/trigger-catalog-recovery-v3                                 409269c9 Trigger catalog recovery v3 on latest parsers
+  remotes/origin/uer7j7-codex/-draft-pr                                      a27842e3 fix(catalog): separate incomplete landing offers
+  remotes/origin/ui-fix-61                                                   49889bf3 Restore smooth buyer gallery and mobile homepage layout
+  remotes/origin/ui/brand-directory-counts-wheel-20260812                    c9edd636 API: expose filtered live counts per brand
+  remotes/origin/ui/brand-rail-transparent-both-themes-home-20260812         9f4b12cc ui: flatten brand rail in both themes and on home [skip catalog]
+  remotes/origin/ui/brand-rail-wheel-drag-live-20260812                      759e2c69 UI: make brand rails live, exclusive-wheel and mouse-draggable
+  remotes/origin/ui/catalog-brand-rail-flat-sort-height-20260812             bb2dab50 ui: flatten catalog brand rail and normalize sort height
+  remotes/origin/ui/catalog-breadcrumbs-20260814                             223363a3 Add responsive catalog breadcrumbs
+  remotes/origin/ui/catalog-filter-alignment-dependent-facets-20260812       610c03e6 ui: finalize mobile clear spacing and facet refresh [skip catalog]
+  remotes/origin/ui/catalog-filter-brand-polish-20260812                     e7c0ced3 Finalize catalog filter polish regression guard
+  remotes/origin/ui/catalog-filter-colors-reset-presets-20260812             4dbe5572 ui: style clear actions chips presets pulse and range icons [skip catalog]
+  remotes/origin/ui/catalog-filter-field-arrows-anchored-mobile-20260812     656d6f26 ui: simplify range fields and soften inactive filter states [skip catalog]
+  remotes/origin/ui/catalog-filter-followup-20260812                         70461c26 Sync catalog filter follow-up with latest main
+  remotes/origin/ui/catalog-multibrand-fast-brand-pages-20260812             7bb31ca3 Fix multibrand model directory source
+  remotes/origin/ui/catalog-multibrand-fast-brand-pages-latest-20260812      eb226e20 Perf: use compact generation-guarded overview for unfiltered /cars
+  remotes/origin/ui/catalog-route-loading-20260812                           d3d00960 ui: add immediate catalog route loading state
+  remotes/origin/ui/compact-adaptive-catalog-filters-20260812                fdd27317 ui: wire compact adaptive catalog filters [skip catalog]
+  remotes/origin/ui/electrified-yellow-price-20260814                        bdd48e49 Highlight electrified catalog prices in yellow
+  remotes/origin/ui/finance-card-assets-20260814                             f820af87 Use cropped finance mascot assets
+  remotes/origin/ui/footer-osago-copy-20260814                               96b0bb9e Shorten footer OSAGO button copy
+  remotes/origin/ui/home-credit-osago-cards-20260813                         3de0db7b Redesign home hero around budget only
+  remotes/origin/ui/home-exact-assets-20260813                               51c80c2c Fix finance card alignment and mobile budget
+  remotes/origin/ui/home-finance-desktop-avatars-20260813                    27db41d4 Remove temporary home finance patch helper
+  remotes/origin/ui/home-finance-desktop-cleanup-20260813                    c9661dd7 temp
+  remotes/origin/ui/home-finance-final-exact-20260813                        43379f78 Fix homepage finance layout and mobile budget
+  remotes/origin/ui/home-finance-final-exact-20260813-clean                  43379f78 Fix homepage finance layout and mobile budget
+  remotes/origin/ui/home-finance-layout-exact-20260813b                      cf9a1cfb Stage exact credit asset chunk aa
+  remotes/origin/ui/home-finance-pixel-match-20260813                        c6139af2 Remove accidental empty check file
+  remotes/origin/ui/home-mobile-budget-final-20260813                        a624bb0f Remove temporary desktop finance patch workflow
+  remotes/origin/ui/home-service-cards-mobile-fix-20260813                   903a8a96 Remove temporary mobile UI patch helper
+  remotes/origin/ui/mobile-budget-chips-20260814                             d6bb1fb4 Refine mobile budget picker and spacing
+  remotes/origin/ui/mobile-budget-inline-overlay-fix-20260814                b2161d88 Keep mobile budget chips inside home form
+  remotes/origin/ui/mobile-budget-overlay-cleanup-20260814                   b961d05c Point initial mobile budget chevron upward
+  remotes/origin/ui/mobile-budget-picker-tradein-theme-20260814              81834f74 Polish mobile budget picker theme and trade-in
+  remotes/origin/ui/mobile-budget-restore-chips-20260814                     db27148f Restore rounded mobile budget chips
+  remotes/origin/ui/mobile-hero-copy-sheet-20260814                          3225b6d6 Tighten mobile hero and move copy into budget info
+  remotes/origin/ui/mobile-tradein-help-20260814                             c274b431 Add inline trade-in help to mobile budget picker
+  remotes/origin/ui/mobile-tradein-help-back-20260814                        8e7f64b7 Restore generated build metadata
+  remotes/origin/ui/offer-dark-yellow-gallery-ratio-20260814                 39d7834f Remove temporary offer detail patch workflow
+  remotes/origin/ui/offer-electrified-price-panel-20260814                   80d4b0a5 Style electrified offer price panels
+  remotes/origin/ui/offer-electrified-price-panel-clean-20260814             539ee5f2 Style electrified offer price panels
+  remotes/origin/ui/offer-finance-copy-mobile-actions-20260814               18d4583e Polish offer finance cards and mobile price actions
+  remotes/origin/ui/preliminary-price-neutral-20260812                       f21ba92d CI: run catalog UI state contract
+  remotes/origin/ui/remove-home-catalog-shortcuts-20260813                   73d671b7 Remove temporary home UI patch helper
+  remotes/origin/ux/catalog-polish-round-1                                   0a39a577 Keep catalog navigation contract on redesigned home
+
+GIT REMOTE -V
+origin	https://github.com/jeep-jim/AvtoCena.git (fetch)
+origin	https://github.com/jeep-jim/AvtoCena.git (push)
+
+GIT WORKTREE LIST
+/workspace/scratch/a4b62bf5597e/AvtoCena               8aa4fb03 [feat/encyclopedia-knowledge-base]
+/workspace/scratch/a4b62bf5597e/AvtoCena-encyclopedia  03296745 [encyclopedia-remote-sync]
+
+GIT LOG --ALL --DECORATE --ONELINE -30
+03296745 (HEAD -> encyclopedia-remote-sync) feat(encyclopedia): expand Baojun mass-model coverage
+0085a872 feat(encyclopedia): add Baojun mass-model batch
+85557b5b feat(encyclopedia): add Wuling mass-model batch
+cd847801 feat(encyclopedia): normalize Wuling Xing Chi
+7942acf1 feat(encyclopedia): add Wuling Air EV lineup
+c0e8457e feat(encyclopedia): normalize Wuling Victory lineup
+f1bf6988 feat(encyclopedia): add Wuling Zhengcheng lineup
+92b5c9dd feat(encyclopedia): add Wuling Asta ICE lineup
+7d4454c2 feat(encyclopedia): normalize Wuling Asta hybrid
+428a6cf3 feat(encyclopedia): add Starlight 2025 lineup
+ba497ac2 feat(encyclopedia): normalize Wuling Star lineup
+6b30b89e feat(encyclopedia): add Starlight 560 launch lineup
+ac2dfe20 feat(encyclopedia): add Starlight 730 lineup
+0f3c13c7 feat(encyclopedia): expand current Wuling specifications
+2b4b0019 feat(encyclopedia): add Hongguang electric lineup
+ff618a30 feat(encyclopedia): add Hongguang MINI EV generations
+a1abd866 feat(encyclopedia): add current Baojun identities
+baf9389c feat(encyclopedia): add Wuling Bingo specifications
+0e7d44c2 feat(encyclopedia): add Hyundai and Wuling current range
+03051e81 feat(encyclopedia): add current China identity gaps
+335c565d fix(encyclopedia): keep compatibility years observational
+ceb28954 feat(encyclopedia): add current HIMA model families
+fff7088e feat(encyclopedia): add Audi China E7X specifications
+c9813155 feat(encyclopedia): add emerging official brand range
+6c4c5a5d feat(encyclopedia): complete reviewed legacy gap batch
+6bcc8452 feat(encyclopedia): add Kuayue and CIIMO identities
+9ff428bf feat(encyclopedia): add official active brand identities
+9a226c92 feat(encyclopedia): stage bulk EEA modification observations
+704e0752 feat(encyclopedia): stage reviewed legacy generations and variants
+e1ccca7e feat(encyclopedia): stage reviewed EEA variants
+
+GIT REFLOG --ALL -30
+03296745 refs/heads/encyclopedia-remote-sync@{0}: commit: feat(encyclopedia): expand Baojun mass-model coverage
+03296745 HEAD@{0}: commit: feat(encyclopedia): expand Baojun mass-model coverage
+0085a872 refs/heads/encyclopedia-remote-sync@{1}: commit: feat(encyclopedia): add Baojun mass-model batch
+0085a872 HEAD@{1}: commit: feat(encyclopedia): add Baojun mass-model batch
+85557b5b refs/heads/encyclopedia-remote-sync@{2}: commit: feat(encyclopedia): add Wuling mass-model batch
+85557b5b HEAD@{2}: commit: feat(encyclopedia): add Wuling mass-model batch
+cd847801 refs/heads/encyclopedia-remote-sync@{3}: commit: feat(encyclopedia): normalize Wuling Xing Chi
+cd847801 HEAD@{3}: commit: feat(encyclopedia): normalize Wuling Xing Chi
+7942acf1 refs/heads/encyclopedia-remote-sync@{4}: commit: feat(encyclopedia): add Wuling Air EV lineup
+7942acf1 HEAD@{4}: commit: feat(encyclopedia): add Wuling Air EV lineup
+c0e8457e refs/heads/encyclopedia-remote-sync@{5}: commit: feat(encyclopedia): normalize Wuling Victory lineup
+c0e8457e HEAD@{5}: commit: feat(encyclopedia): normalize Wuling Victory lineup
+f1bf6988 refs/heads/encyclopedia-remote-sync@{6}: commit: feat(encyclopedia): add Wuling Zhengcheng lineup
+f1bf6988 HEAD@{6}: commit: feat(encyclopedia): add Wuling Zhengcheng lineup
+92b5c9dd refs/heads/encyclopedia-remote-sync@{7}: commit: feat(encyclopedia): add Wuling Asta ICE lineup
+92b5c9dd HEAD@{7}: commit: feat(encyclopedia): add Wuling Asta ICE lineup
+7d4454c2 refs/heads/encyclopedia-remote-sync@{8}: commit: feat(encyclopedia): normalize Wuling Asta hybrid
+7d4454c2 HEAD@{8}: commit: feat(encyclopedia): normalize Wuling Asta hybrid
+428a6cf3 refs/heads/encyclopedia-remote-sync@{9}: commit: feat(encyclopedia): add Starlight 2025 lineup
+428a6cf3 HEAD@{9}: commit: feat(encyclopedia): add Starlight 2025 lineup
+ba497ac2 refs/heads/encyclopedia-remote-sync@{10}: commit: feat(encyclopedia): normalize Wuling Star lineup
+ba497ac2 HEAD@{10}: commit: feat(encyclopedia): normalize Wuling Star lineup
+6b30b89e refs/heads/encyclopedia-remote-sync@{11}: commit: feat(encyclopedia): add Starlight 560 launch lineup
+6b30b89e HEAD@{11}: commit: feat(encyclopedia): add Starlight 560 launch lineup
+ac2dfe20 refs/heads/encyclopedia-remote-sync@{12}: commit: feat(encyclopedia): add Starlight 730 lineup
+ac2dfe20 HEAD@{12}: commit: feat(encyclopedia): add Starlight 730 lineup
+0f3c13c7 refs/heads/encyclopedia-remote-sync@{13}: commit: feat(encyclopedia): expand current Wuling specifications
+0f3c13c7 HEAD@{13}: commit: feat(encyclopedia): expand current Wuling specifications
+2b4b0019 refs/heads/encyclopedia-remote-sync@{14}: commit: feat(encyclopedia): add Hongguang electric lineup
+2b4b0019 HEAD@{14}: commit: feat(encyclopedia): add Hongguang electric lineup
+
+REQUESTED COMMITS
+7942acf1771c6fabcdf8a8e71f0ef8e49b8e0bd6
+7942acf1771c6fabcdf8a8e71f0ef8e49b8e0bd6 c0e8457ebaed0081a3410ea44a577669de56789b 2026-08-18T05:19:07+03:00 feat(encyclopedia): add Wuling Air EV lineup
+contains refs/heads/encyclopedia-remote-sync 0329674550c31e5c54bf3faa48ccb8838629f371
+7942acf1771c6fabcdf8a8e71f0ef8e49b8e0bd6 refs/heads/encyclopedia-remote-sync@{4} commit: feat(encyclopedia): add Wuling Air EV lineup
+7942acf1771c6fabcdf8a8e71f0ef8e49b8e0bd6 HEAD@{4} commit: feat(encyclopedia): add Wuling Air EV lineup
+object database: commit object exists
+cd847801339e6afc34d2c84c1e0b0593a5283f2f
+cd847801339e6afc34d2c84c1e0b0593a5283f2f 7942acf1771c6fabcdf8a8e71f0ef8e49b8e0bd6 2026-08-18T05:23:43+03:00 feat(encyclopedia): normalize Wuling Xing Chi
+contains refs/heads/encyclopedia-remote-sync 0329674550c31e5c54bf3faa48ccb8838629f371
+cd847801339e6afc34d2c84c1e0b0593a5283f2f refs/heads/encyclopedia-remote-sync@{3} commit: feat(encyclopedia): normalize Wuling Xing Chi
+cd847801339e6afc34d2c84c1e0b0593a5283f2f HEAD@{3} commit: feat(encyclopedia): normalize Wuling Xing Chi
+object database: commit object exists
+e1509c04f208f8ce9c2df9473d246e81d63912ff
+e1509c04f208f8ce9c2df9473d246e81d63912ff 5f90b9a57c5081e32b5d14d70a7df826ac59902d 2026-08-16T17:44:03+02:00 feat(encyclopedia): add Honda N-ONE current ranges
+contains refs/heads/encyclopedia-remote-sync 0329674550c31e5c54bf3faa48ccb8838629f371
+e1509c04f208f8ce9c2df9473d246e81d63912ff refs/heads/encyclopedia-remote-sync@{51} commit: feat(encyclopedia): add Honda N-ONE current ranges
+e1509c04f208f8ce9c2df9473d246e81d63912ff HEAD@{51} commit: feat(encyclopedia): add Honda N-ONE current ranges
+object database: commit object exists
+de8777235958f053a34dd9bf2e9510ba31c5526a
+de8777235958f053a34dd9bf2e9510ba31c5526a e1509c04f208f8ce9c2df9473d246e81d63912ff 2026-08-16T17:54:39+02:00 feat(encyclopedia): add current Honda Vezel range
+contains refs/heads/encyclopedia-remote-sync 0329674550c31e5c54bf3faa48ccb8838629f371
+de8777235958f053a34dd9bf2e9510ba31c5526a refs/heads/encyclopedia-remote-sync@{50} commit: feat(encyclopedia): add current Honda Vezel range
+de8777235958f053a34dd9bf2e9510ba31c5526a HEAD@{50} commit: feat(encyclopedia): add current Honda Vezel range
+object database: commit object exists
+
+OBJECT DATABASE FSCK MATCHES
+
+FINAL RECOVERY STATE
+Clean branch: recovery/encyclopedia-v2-clean-20260818
+Clean checkpoint: cd847801339e6afc34d2c84c1e0b0593a5283f2f
+WIP branch: recovery/encyclopedia-v2-wip-20260818
+WIP existing HEAD (no new recovery commit required because worktree was clean): 0329674550c31e5c54bf3faa48ccb8838629f371
+
+FINAL RECOVERY BRANCH REFS
+refs/heads/recovery/encyclopedia-v2-clean-20260818 cd847801339e6afc34d2c84c1e0b0593a5283f2f feat(encyclopedia): normalize Wuling Xing Chi
+refs/heads/recovery/encyclopedia-v2-wip-20260818 0329674550c31e5c54bf3faa48ccb8838629f371 feat(encyclopedia): expand Baojun mass-model coverage
+
+FINAL GIT STATUS
+On branch encyclopedia-remote-sync
+Your branch is ahead of 'origin/feat/encyclopedia-knowledge-base' by 63 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+EXACT CLEAN COUNTS AT cd847801339e6afc34d2c84c1e0b0593a5283f2f
+sources=905
+brands=255
+models=1617
+generations=1282
+facelifts=105
+variants=19196
+media=449
+search_index_records=105392
+collisions=35
+
+EXACT CURRENT/WIP COUNTS AT 0329674550c31e5c54bf3faa48ccb8838629f371
+sources=928
+brands=255
+models=1619
+generations=1293
+facelifts=105
+variants=19240
+media=449
+search_index_records=105620
+collisions=35
+
+COUNT SCOPE
+Current worktree is clean, so current worktree counts are identical to HEAD/WIP commit counts.
+The zero-byte binary patch correctly records that there were no tracked uncommitted changes relative to HEAD.
+
+PUSH RESULT
+FAILED: fatal: could not read Username for 'https://github.com': No such device or address
