@@ -18,6 +18,10 @@ const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
 const retentionCutoff = Date.now() - retentionMs;
+const configuredMinPreviousRatio = Number(process.env.RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO || 0);
+const minPreviousRatio = Number.isFinite(configuredMinPreviousRatio)
+  ? Math.max(0, Math.min(1, configuredMinPreviousRatio))
+  : 0;
 const minYear = catalogMinYearForMarket(market);
 const publishLockPath = "catalog/import-lock.json";
 const publishOperationId = `catalog_recovery_publish_${market}_${crypto.randomUUID()}`;
@@ -217,6 +221,12 @@ if (!marketRows.length) {
 if (marketRows.some((offer) => offer.images.length < minImagesPerOffer)) {
   throw new Error(`recovery_target_image_gate_failed:${market}:${minImagesPerOffer}`);
 }
+const minPreviousCount = minPreviousRatio > 0 && previousMarket.length > 0
+  ? Math.ceil(previousMarket.length * minPreviousRatio)
+  : 0;
+if (marketRows.length < minPreviousCount) {
+  throw new Error(`recovery_previous_count_gate_failed:${market}:${marketRows.length}:${minPreviousCount}:${previousMarket.length}`);
+}
 
 // Recovery replaces only the requested market inside the complete internal state.
 // Untouched markets are never reconstructed from filtered public projections.
@@ -316,6 +326,9 @@ const report = {
   preliminaryCount: marketRows.filter(isPreliminaryPowerPendingCalculation).length,
   minYear,
   retentionMs,
+  minPreviousRatio,
+  minPreviousCount,
+  previousCount: previousMarket.length,
   preferredMaxRub,
   maxOffersPerModelYear,
   minImagesPerOffer,

@@ -4,6 +4,7 @@ import test from "node:test";
 
 const batchSource = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
 const singleSource = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish.mjs", import.meta.url), "utf8");
+const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v6-prestige-up-to-30k.yml", import.meta.url), "utf8");
 
 test("batch recovery publisher enforces configured minimum images on target incoming and retained rows", () => {
   assert.match(batchSource, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER\s*\|\|\s*5/);
@@ -34,4 +35,16 @@ test("single recovery publisher hashes untouched public projections before and a
   assert.match(singleSource, /preservationFailures/);
   assert.match(singleSource, /recovery_preserved_internal_gate_failed/);
   assert.match(singleSource, /recovery_duplicate_id_in_full_state/);
+});
+
+test("Japan keeps sold lots for 30 days and rejects a pre-write drop below 90 percent", () => {
+  assert.match(japanWorkflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
+  assert.match(japanWorkflow, /RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO: "0\.90"/);
+  assert.match(singleSource, /const minPreviousCount = minPreviousRatio > 0 && previousMarket\.length > 0/);
+  assert.match(singleSource, /recovery_previous_count_gate_failed/);
+  assert.ok(
+    singleSource.indexOf("recovery_previous_count_gate_failed") <
+      singleSource.indexOf("const currentInternal = await readAllOffersForMaintenance()"),
+    "the relative count gate must run before any catalog persistence",
+  );
 });
