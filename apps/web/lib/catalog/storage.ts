@@ -9,8 +9,6 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
-import { applyConfiguredEncyclopediaIdentity } from "./encyclopedia-identity-runtime";
-import { resolveConfiguredCatalogSearchParams } from "./encyclopedia-identity-query";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -668,8 +666,7 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
     bodyTypes: values((offer) => offer.bodyType), fuels: values((offer) => offer.fuel), transmissions: values((offer) => offer.transmission), drives: values((offer) => offer.drive),
   };
 }
-export async function readCatalogFacets(inputParams: CatalogSearchParams = {}): Promise<CatalogFacets> {
-  const params = await resolveConfiguredCatalogSearchParams(inputParams);
+export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
   const hasFilters = Boolean(params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
@@ -744,9 +741,6 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
 }
 export type PersistCatalogOptions = {
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
-  // One-shot canonical migration: skip legacy/spec enrichment and grow-only recovery.
-  // Only the fail-closed Encyclopedia identity layer may alter the supplied rows.
-  identityOnlyReprojection?: boolean;
   // Recovery writers may preserve already-published markets byte-for-byte while
   // rebuilding only their target market. Those rows are trusted only because
   // the caller has already read and hash-validated the current public market.
@@ -761,14 +755,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     if (!MARKETS.includes(market as CatalogMarket)) throw new Error(`catalog_preserved_public_market_unknown:${market}`);
   }
   const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);
-  const identityOnlyReprojection = options.identityOnlyReprojection === true;
-  const normalized = await Promise.all(nextOffers.map(async (offer) => {
-    if (exactPreserveMarkets.has(offer.market)) return offer;
-    if (identityOnlyReprojection) return (await applyConfiguredEncyclopediaIdentity(offer)) as VehicleOffer;
-    const enriched = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
-    return (await applyConfiguredEncyclopediaIdentity(enriched)) as VehicleOffer;
-  }));
-  if (growOnlyMarkets.size && !identityOnlyReprojection) {
+  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market)
+    ? offer
+    : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
+  if (growOnlyMarkets.size) {
     const current = await readAllOffersForMaintenance();
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
     for (const offer of current) {
@@ -777,7 +767,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       const incoming = merged.get(offer.id);
       if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
         const restored = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge({ ...offer, status: "active" }));
-        merged.set(offer.id, (await applyConfiguredEncyclopediaIdentity(restored)) as VehicleOffer);
+        merged.set(offer.id, restored);
       }
     }
     nextOffers = [...merged.values()];
@@ -995,8 +985,7 @@ export async function getOffer(id: string) {
   const chunk = await chunkPromise;
   return chunk.find((offer) => offer.id === id && isPublicOffer(offer)) || null;
 }
-export async function searchOffers(inputParams: CatalogSearchParams) {
-  const params = await resolveConfiguredCatalogSearchParams(inputParams);
+export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));
   const pageSize = Math.min(48, Math.max(1, Number(params.pageSize || 24)));
   const needsProjection = Boolean((params.market && params.market !== "any") || params.make || params.model || params.hasPrice
