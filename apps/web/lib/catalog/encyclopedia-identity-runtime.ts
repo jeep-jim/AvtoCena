@@ -6,7 +6,8 @@ import {
   readEncyclopediaIdentityResolver,
 } from "./encyclopedia-identity-data";
 
-export type CatalogEncyclopediaIdentityMode = "off" | "shadow" | "apply";
+export type CatalogEncyclopediaIdentityMode = "auto" | "off" | "shadow" | "apply";
+export type EffectiveCatalogEncyclopediaIdentityMode = Exclude<CatalogEncyclopediaIdentityMode, "auto">;
 
 type IdentityCarrier = {
   make: string;
@@ -14,23 +15,51 @@ type IdentityCarrier = {
   operational?: Record<string, unknown>;
 };
 
+/**
+ * Default `auto` keeps activation reproducible in Git through
+ * manifest.identityProductionConnected. An explicit environment value remains
+ * an operational override; unknown non-empty values fail safe to `off`.
+ */
 export function catalogEncyclopediaIdentityMode(raw = process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_MODE): CatalogEncyclopediaIdentityMode {
-  const mode = String(raw || "off").trim().toLowerCase();
-  if (mode === "shadow" || mode === "apply") return mode;
+  const mode = String(raw ?? "").trim().toLowerCase();
+  if (!mode) return "auto";
+  if (mode === "off" || mode === "shadow" || mode === "apply") return mode;
   return "off";
+}
+
+export async function requireEncyclopediaIdentityApplyEnabled() {
+  const dataset = await readEncyclopediaIdentityDataset();
+  if (!dataset) throw new Error("catalog_encyclopedia_identity_dataset_unavailable:apply");
+  assertEncyclopediaIdentityProductionConnected(dataset);
+  return dataset;
+}
+
+export async function effectiveCatalogEncyclopediaIdentityMode(
+  raw = process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_MODE,
+): Promise<EffectiveCatalogEncyclopediaIdentityMode> {
+  const configured = catalogEncyclopediaIdentityMode(raw);
+  if (configured === "off" || configured === "shadow") return configured;
+  if (configured === "apply") {
+    await requireEncyclopediaIdentityApplyEnabled();
+    return "apply";
+  }
+  const dataset = await readEncyclopediaIdentityDataset();
+  if (!dataset) return "off";
+  return dataset.manifest.identityProductionConnected === true ? "apply" : "off";
 }
 
 /**
  * Mode semantics:
- * - off: zero behavior/data change and no V2 read.
- * - shadow: keep public make/model untouched, but require a valid V2 resolver
- *   and attach resolution metadata for coverage/unresolved audits.
- * - apply: requires BOTH env mode=apply and manifest.productionConnected=true.
+ * - off: zero behavior/data change.
+ * - shadow: keep public make/model untouched and attach audit metadata.
+ * - apply: canonicalize only proven brand/model identity.
+ *
+ * This pure function never accepts `auto`; callers resolve it first.
  */
 export function applyEncyclopediaIdentityForMode<T extends IdentityCarrier>(
   resolver: EncyclopediaIdentityResolver,
   input: T,
-  mode: CatalogEncyclopediaIdentityMode,
+  mode: EffectiveCatalogEncyclopediaIdentityMode,
 ): T | IdentityApplied<T> {
   if (mode === "off") return input;
   const applied = applyEncyclopediaIdentity(resolver, input);
@@ -41,17 +70,9 @@ export function applyEncyclopediaIdentityForMode<T extends IdentityCarrier>(
   } as T;
 }
 
-export async function requireEncyclopediaIdentityApplyEnabled() {
-  const dataset = await readEncyclopediaIdentityDataset();
-  if (!dataset) throw new Error("catalog_encyclopedia_identity_dataset_unavailable:apply");
-  assertEncyclopediaIdentityProductionConnected(dataset);
-  return dataset;
-}
-
 export async function applyConfiguredEncyclopediaIdentity<T extends IdentityCarrier>(input: T): Promise<T | IdentityApplied<T>> {
-  const mode = catalogEncyclopediaIdentityMode();
+  const mode = await effectiveCatalogEncyclopediaIdentityMode();
   if (mode === "off") return input;
-  if (mode === "apply") await requireEncyclopediaIdentityApplyEnabled();
   const resolver = await readEncyclopediaIdentityResolver();
   if (!resolver) throw new Error(`catalog_encyclopedia_identity_dataset_unavailable:${mode}`);
   return applyEncyclopediaIdentityForMode(resolver, input, mode);
