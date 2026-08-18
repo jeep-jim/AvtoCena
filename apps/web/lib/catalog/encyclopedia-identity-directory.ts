@@ -1,5 +1,9 @@
 import { encyclopediaIdentityKey, type EncyclopediaAlias } from "./encyclopedia-identity";
-import { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } from "./encyclopedia-identity-data";
+import {
+  assertEncyclopediaIdentityProductionConnected,
+  readEncyclopediaIdentityDataset,
+  readEncyclopediaIdentityResolver,
+} from "./encyclopedia-identity-data";
 
 function safeAliasValues(aliases: EncyclopediaAlias[] | undefined) {
   return (aliases || [])
@@ -28,6 +32,7 @@ async function requiredIdentityData() {
     readEncyclopediaIdentityResolver(),
   ]);
   if (!dataset || !resolver) throw new Error("catalog_encyclopedia_identity_directory_unavailable");
+  assertEncyclopediaIdentityProductionConnected(dataset);
   return { dataset, resolver };
 }
 
