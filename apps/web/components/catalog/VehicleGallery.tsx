@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+function dominantWheelDelta(event: WheelEvent) {
+  return Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+}
+
 export function VehicleGallery({ images, title }: { images: string[]; title: string }) {
   const cleanImages = [...new Set(images.filter(Boolean))];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -11,7 +15,10 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
   const didSwipe = useRef(false);
   const activeSideThumb = useRef<HTMLButtonElement | null>(null);
   const mainImageButton = useRef<HTMLButtonElement | null>(null);
+  const desktopThumbnailRail = useRef<HTMLDivElement | null>(null);
+  const fullscreenRoot = useRef<HTMLDivElement | null>(null);
   const lastWheelAt = useRef(0);
+  const lastFullscreenWheelAt = useRef(0);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -27,7 +34,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     if (!node || cleanImages.length < 2) return;
     const handleWheel = (event: WheelEvent) => {
       if (window.innerWidth < 1280) return;
-      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      const delta = dominantWheelDelta(event);
       if (Math.abs(delta) < 1) return;
       event.preventDefault();
       const now = performance.now();
@@ -39,6 +46,38 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
     node.addEventListener("wheel", handleWheel, { passive: false });
     return () => node.removeEventListener("wheel", handleWheel);
   }, [cleanImages.length]);
+
+  useEffect(() => {
+    const node = desktopThumbnailRail.current;
+    if (!node || cleanImages.length < 2) return;
+    const handleWheel = (event: WheelEvent) => {
+      const delta = dominantWheelDelta(event);
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      node.scrollLeft += delta;
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [cleanImages.length]);
+
+  useEffect(() => {
+    const node = fullscreenRoot.current;
+    if (!fullscreen || !node || cleanImages.length < 2) return;
+    lastFullscreenWheelAt.current = 0;
+    const handleWheel = (event: WheelEvent) => {
+      if (!window.matchMedia("(pointer: fine)").matches) return;
+      const delta = dominantWheelDelta(event);
+      if (Math.abs(delta) < 1) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - lastFullscreenWheelAt.current < 160) return;
+      lastFullscreenWheelAt.current = now;
+      if (delta > 0) next();
+      else previous();
+    };
+    node.addEventListener("wheel", handleWheel, { passive: false });
+    return () => node.removeEventListener("wheel", handleWheel);
+  }, [fullscreen, cleanImages.length]);
 
   useEffect(() => {
     if (!fullscreen) return;
@@ -127,6 +166,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
 
   const fullscreenGallery = fullscreen ? (
     <div
+      ref={fullscreenRoot}
       className="fixed inset-0 z-[2147483647] flex items-center justify-center bg-black/95 p-3 sm:p-6"
       role="dialog"
       aria-modal="true"
@@ -237,7 +277,7 @@ export function VehicleGallery({ images, title }: { images: string[]; title: str
             {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "mobile"))}
           </div>
           <div className="relative mt-3 hidden xl:block">
-            <div className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
+            <div ref={desktopThumbnailRail} className="ac-vehicle-desktop-thumbnails ac-hide-scrollbar grid grid-flow-col auto-cols-[78px] gap-3 overflow-x-auto px-1 pb-1">
               {cleanImages.map((thumbnail, index) => thumbButton(thumbnail, index, "desktop"))}
             </div>
           </div>
