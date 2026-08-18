@@ -1,0 +1,138 @@
+name: Recover Encyclopedia V2 Snapshot
+
+on:
+  push:
+    branches:
+      - recovery/encyclopedia-v2-staging-20260818
+    paths:
+      - .github/workflows/recover-encyclopedia-v2-snapshot.yml
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Fetch recovery assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin recovery/encyclopedia-v2-staging-20260818
+          git show origin/recovery/encyclopedia-v2-staging-20260818:recovery-assets/encyclopedia-v2-20260818/avtocena-encyclopedia-current-worktree-20260818.tar.gz > /tmp/encyclopedia-v2.tar.gz
+          test -s /tmp/encyclopedia-v2.tar.gz
+          gzip -t /tmp/encyclopedia-v2.tar.gz
+          echo '--- archive top entries ---'
+          tar -tzf /tmp/encyclopedia-v2.tar.gz | sed -n '1,80p'
+
+      - name: Extract only approved Encyclopedia paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/encyclopedia-v2-extracted
+          mkdir -p /tmp/encyclopedia-v2-extracted
+          tar -xzf /tmp/encyclopedia-v2.tar.gz -C /tmp/encyclopedia-v2-extracted
+
+          find_source_dir() {
+            local suffix="$1"
+            find /tmp/encyclopedia-v2-extracted -type d -path "*/${suffix}" -print -quit
+          }
+
+          DATA_SRC="$(find_source_dir 'data/catalog/vehicle-encyclopedia-v2')"
+          SCRIPTS_SRC="$(find_source_dir 'scripts/vehicle-encyclopedia')"
+          TESTS_SRC="$(find_source_dir 'tests/vehicle-encyclopedia')"
+
+          test -n "$DATA_SRC" && test -d "$DATA_SRC"
+          test -n "$SCRIPTS_SRC" && test -d "$SCRIPTS_SRC"
+          test -n "$TESTS_SRC" && test -d "$TESTS_SRC"
+
+          rm -rf data/catalog/vehicle-encyclopedia-v2 scripts/vehicle-encyclopedia tests/vehicle-encyclopedia
+          mkdir -p data/catalog scripts tests
+          cp -a "$DATA_SRC" data/catalog/vehicle-encyclopedia-v2
+          cp -a "$SCRIPTS_SRC" scripts/vehicle-encyclopedia
+          cp -a "$TESTS_SRC" tests/vehicle-encyclopedia
+
+          echo '--- restored paths ---'
+          du -sh data/catalog/vehicle-encyclopedia-v2 scripts/vehicle-encyclopedia tests/vehicle-encyclopedia
+
+      - name: Validate restored checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/vehicle-encyclopedia/validate.mjs --write-reports
+          node scripts/vehicle-encyclopedia/build-search-index.mjs
+          node scripts/vehicle-encyclopedia/build-brand-queue.mjs
+          node scripts/vehicle-encyclopedia/build-legacy-preview.mjs
+          node --test tests/vehicle-encyclopedia/*.test.mjs
+
+      - name: Assert recovered counts
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const p = 'data/catalog/vehicle-encyclopedia-v2';
+          const manifest = JSON.parse(fs.readFileSync(`${p}/manifest.json`, 'utf8'));
+          const expected = {
+            source: 928,
+            brand: 255,
+            model: 1619,
+            generation: 1293,
+            facelift: 105,
+            variant: 19240,
+            media: 449,
+          };
+          const actual = {};
+          for (const [key, value] of Object.entries(expected)) {
+            const got = Number(manifest.collections?.[key]?.records);
+            actual[key] = got;
+            if (got !== value) throw new Error(`count_mismatch:${key}:${got}:${value}`);
+          }
+          const index = JSON.parse(fs.readFileSync(`${p}/generated/search-index.json`, 'utf8'));
+          const search = Array.isArray(index.entries) ? index.entries.length : Number(index.records || index.total || 0);
+          if (search !== 105620) throw new Error(`search_index_count_mismatch:${search}:105620`);
+          console.log(JSON.stringify({ ...actual, searchIndex: search }, null, 2));
+          NODE
+
+      - name: Ensure production remains disconnected
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('data/catalog/vehicle-encyclopedia-v2/manifest.json','utf8'));
+          if (m.productionConnected !== false) throw new Error(`productionConnected_must_be_false:${m.productionConnected}`);
+          console.log('productionConnected=false');
+          NODE
+
+      - name: Commit restored snapshot to a new branch
+        shell: bash
+        env:
+          TARGET_BRANCH: recovery/encyclopedia-v2-restored-20260818
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -C "$TARGET_BRANCH"
+          git add data/catalog/vehicle-encyclopedia-v2 scripts/vehicle-encyclopedia tests/vehicle-encyclopedia
+          if git diff --cached --quiet; then
+            echo 'No restored snapshot changes to commit.'
+          else
+            git commit -m 'feat(encyclopedia): restore recovered V2 checkpoint on current main'
+          fi
+          git push --force-with-lease origin "$TARGET_BRANCH"
+
+      - name: Recovery summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'Recovered branch: recovery/encyclopedia-v2-restored-20260818'
+          git rev-parse HEAD
+          git status --short --branch
