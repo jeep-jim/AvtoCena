@@ -5,7 +5,6 @@ on:
     branches:
       - main
     paths-ignore:
-      - .github/workflows/**
       - scripts/**
       - data/catalog/imports/**
   workflow_dispatch:
@@ -28,6 +27,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Node for production audit
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install production audit dependencies
+        run: npm ci
 
       - name: Login to Yandex Container Registry
         uses: yc-actions/yc-cr-login@v3
@@ -161,6 +169,28 @@ jobs:
           jq -e '.result.structuredContent.items | length >= 1' <<<"$mcp_search" >/dev/null
           jq -e '.result.structuredContent.items[0].url | startswith("https://avtocena.com/cars/offer/")' <<<"$mcp_search" >/dev/null
 
+      - name: Audit every visible catalog calculation
+        id: visible_calculation_audit
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT: catalog-visible-calculation-coverage.json
+        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+
+      - name: Upload visible calculation coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visible-calculation-coverage-${{ github.sha }}
+          path: catalog-visible-calculation-coverage.json
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Mark Yandex deploy success
         if: success()
         env:
@@ -171,7 +201,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
-            -d '{"state":"success","context":"deploy/yandex","description":"Yandex deploy and live smoke passed"}' >/dev/null
+            -d '{"state":"success","context":"deploy/yandex","description":"Yandex deploy, live smoke and calculation coverage passed"}' >/dev/null
 
       - name: Mark Yandex deploy failure
         if: failure()
@@ -183,4 +213,4 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
-            -d '{"state":"failure","context":"deploy/yandex","description":"Yandex deploy or live smoke failed"}' >/dev/null
+            -d '{"state":"failure","context":"deploy/yandex","description":"Yandex deploy, live smoke or calculation coverage failed"}' >/dev/null
