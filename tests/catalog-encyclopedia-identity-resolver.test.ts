@@ -12,6 +12,7 @@ function resolver() {
           { value: "AITO Wenjie", safe: true },
           { value: "AITO 问界", safe: true },
           { value: "Huawei AITO", safe: false },
+          "Unreviewed AITO String",
         ],
       },
       {
@@ -24,7 +25,13 @@ function resolver() {
       { id: "other-2", canonicalName: "Other 2", aliases: [{ value: "Collision", safe: true }] },
     ],
     models: [
-      { id: "aito/m9", brandId: "aito", canonicalName: "M9", aliases: [{ value: "问界 M9", safe: true }] },
+      {
+        id: "aito/m9",
+        brandId: "aito",
+        canonicalName: "M9",
+        aliases: [{ value: "问界 M9", safe: true }],
+        sourceNames: ["Seller M9 Name", { value: "Raw M9 Source", safe: true }],
+      },
       { id: "changan/cs75-plus", brandId: "changan", canonicalName: "CS75 Plus", aliases: [{ value: "CS75 PLUS", safe: true }] },
       { id: "baw/m7", brandId: "baw", canonicalName: "M7" },
     ],
@@ -63,6 +70,23 @@ test("unsafe aliases never auto-merge", () => {
   assert.equal(result.brandId, null);
   assert.equal(result.canonicalMake, "Huawei AITO");
   assert.equal(result.resolved, false);
+});
+
+test("raw string aliases are discovery input, not automatic merge authority", () => {
+  const result = resolver().resolve({ make: "Unreviewed AITO String", model: "M9" });
+  assert.equal(result.brandId, null);
+  assert.equal(result.resolved, false);
+});
+
+test("sourceNames stay audit-only even when a source record carries a safe-looking flag", () => {
+  const identity = resolver();
+  for (const model of ["Seller M9 Name", "Raw M9 Source"]) {
+    const result = identity.resolve({ make: "AITO", model });
+    assert.equal(result.brandId, "aito");
+    assert.equal(result.modelId, null);
+    assert.equal(result.canonicalModel, model);
+    assert.equal(result.resolved, false);
+  }
 });
 
 test("ambiguous aliases fail closed instead of selecting an arbitrary entity", () => {
