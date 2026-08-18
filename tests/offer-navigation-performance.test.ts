@@ -15,6 +15,7 @@ const effectiveMarkets = fs.readFileSync("apps/web/lib/effective-market-settings
 const readModelsWorkflow = fs.readFileSync(".github/workflows/catalog-current-read-models.yml", "utf8");
 const readModelsScript = fs.readFileSync("scripts/catalog-publish-current-read-models.mjs", "utf8");
 const catalogPage = fs.readFileSync("apps/web/app/(public)/cars/page.tsx", "utf8");
+const vehicleGallery = fs.readFileSync("apps/web/components/catalog/VehicleGallery.tsx", "utf8");
 
 test("offer navigation swaps the catalog for an immediate route skeleton", () => {
   assert.match(loading, /main className="ac-offer-page/);
@@ -98,4 +99,15 @@ test("catalog overview does not rescan every stored Japan offer", () => {
   assert.doesNotMatch(catalogPage, /readMarketOffers/);
   assert.match(catalogPage, /offer\?\.auctionDate \|\| offer\?\.auctionGrade/);
   assert.match(catalogPage, /searchOffers\(\{ market: market\.id/);
+});
+
+test("desktop offer galleries support mouse-wheel navigation", () => {
+  assert.match(vehicleGallery, /const desktopThumbnailRail = useRef<HTMLDivElement \| null>\(null\)/);
+  assert.match(vehicleGallery, /node\.scrollLeft \+= delta/);
+  assert.match(vehicleGallery, /ref=\{desktopThumbnailRail\}/);
+  assert.match(vehicleGallery, /const fullscreenRoot = useRef<HTMLDivElement \| null>\(null\)/);
+  assert.match(vehicleGallery, /ref=\{fullscreenRoot\}/);
+  assert.match(vehicleGallery, /lastFullscreenWheelAt/);
+  assert.match(vehicleGallery, /window\.matchMedia\("\(pointer: fine\)"\)\.matches/);
+  assert.match(vehicleGallery, /node\.addEventListener\("wheel", handleWheel, \{ passive: false \}\)/);
 });
