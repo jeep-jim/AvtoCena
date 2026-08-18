@@ -35,23 +35,38 @@ jobs:
       - name: Validate V2 checkpoint
         run: node scripts/vehicle-encyclopedia/validate.mjs
       - name: Dry-run live current-generation identity projection
+        id: dryrun
+        continue-on-error: true
+        shell: bash
         run: |
-          node scripts/catalog-publish-encyclopedia-identity-read-models.mjs
-          test -s /tmp/identity-read-model-dry-run.json
-          cat /tmp/identity-read-model-dry-run.json
-      - name: Persist report to recovery branch
+          set -o pipefail
+          {
+            node scripts/catalog-publish-encyclopedia-identity-read-models.mjs
+            test -s /tmp/identity-read-model-dry-run.json
+            cat /tmp/identity-read-model-dry-run.json
+          } 2>&1 | tee /tmp/identity-read-model-dry-run.log
+      - name: Persist report and diagnostics to recovery branch
+        if: always()
+        env:
+          STEP_OUTCOME: ${{ steps.dryrun.outcome }}
         shell: bash
         run: |
           set -euo pipefail
-          FEATURE_SHA="$(git rev-parse HEAD)"
+          FEATURE_SHA="$(git rev-parse HEAD 2>/dev/null || echo unknown)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin recovery/encyclopedia-v2-staging-20260818
           git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
           cd /tmp/recovery
           mkdir -p recovery-assets/encyclopedia-v2-20260818/audits
-          cp /tmp/identity-read-model-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json
-          printf 'feature_sha=%s\nstatus=success\nverified_at=%s\n' "$FEATURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
-          git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
-          git commit -m 'chore(recovery): record live identity read-model dry-run' || true
+          if [ -s /tmp/identity-read-model-dry-run.json ]; then cp /tmp/identity-read-model-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json; fi
+          if [ -s /tmp/identity-read-model-dry-run.log ]; then cp /tmp/identity-read-model-dry-run.log recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.log; fi
+          printf 'feature_sha=%s\nstatus=%s\nverified_at=%s\n' "$FEATURE_SHA" "$STEP_OUTCOME" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
+          git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
+          [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json ] || git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json
+          [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.log ] || git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.log
+          git commit -m 'chore(recovery): record live identity read-model dry-run diagnostics' || true
           git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
+      - name: Fail if dry-run failed
+        if: steps.dryrun.outcome != 'success'
+        run: exit 1
