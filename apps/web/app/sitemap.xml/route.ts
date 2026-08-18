@@ -27,6 +27,7 @@ export function GET() {
   const entries = [
     urlEntry(baseUrl, "daily", 1),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
+    urlEntry(`${baseUrl}/cars/encyclopedia`, "daily", 0.9),
     ...CATALOG_BRANDS.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),
   ];
 
