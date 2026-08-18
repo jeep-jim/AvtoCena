@@ -22,6 +22,7 @@ test("fully resolved identity canonicalizes public strings and preserves raw sou
     makeSource: "safe_alias",
     modelSource: "safe_alias",
     fullyResolved: true,
+    ambiguous: false,
   });
   assert.equal(output.operational.sourceUrl, "https://example.test/1");
   assert.deepEqual(output.operational.raw, { maker: "AITO 问界" });
@@ -36,10 +37,24 @@ test("safe brand resolution can collapse a brand duplicate without inventing mod
   assert.equal(output.operational.encyclopediaIdentity.canonicalBrandId, "aito");
   assert.equal(output.operational.encyclopediaIdentity.canonicalModelId, null);
   assert.equal(output.operational.encyclopediaIdentity.fullyResolved, false);
+  assert.equal(output.operational.encyclopediaIdentity.ambiguous, false);
 });
 
-test("unresolved make stays byte-for-byte untouched at the identity application boundary", () => {
+test("unresolved make remains ingestible and is explicitly recorded for later alias work", () => {
   const input = { make: "Brand Never Seen", model: "X", operational: { raw: { a: 1 } } };
   const output = applyEncyclopediaIdentity(resolver, input);
-  assert.equal(output, input);
+  assert.equal(output.make, "Brand Never Seen");
+  assert.equal(output.model, "X");
+  assert.deepEqual(output.operational.raw, { a: 1 });
+  assert.deepEqual(output.operational.encyclopediaIdentity, {
+    version: 2,
+    rawMake: "Brand Never Seen",
+    rawModel: "X",
+    canonicalBrandId: null,
+    canonicalModelId: null,
+    makeSource: "unresolved",
+    modelSource: "unresolved",
+    fullyResolved: false,
+    ambiguous: false,
+  });
 });
