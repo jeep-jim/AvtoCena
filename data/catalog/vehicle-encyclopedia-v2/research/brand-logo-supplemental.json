@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "sourceRoot": "apps/web/public/brand-logos/drom-source",
+  "notes": "Authentic supplied archive assets absent from the generated site theme manifest. Each source spelling is preserved; trademark/publication rights remain review_required.",
+  "brands": {
+    "amberauto": {
+      "themes": {
+        "dark": {
+          "file": "amberauto-dark.3781bf030ae0de24.png",
+          "source": "local://amberauto-dark.3781bf030ae0de24.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "amberauto-light.d1181ae9d712de71.png",
+          "source": "local://amberauto-light.d1181ae9d712de71.png",
+          "fallback": false
+        }
+      }
+    },
+    "ambertruck": {
+      "themes": {
+        "dark": {
+          "file": "ambertruck.49deda2bb01e90d2.png",
+          "source": "local://ambertruck.49deda2bb01e90d2.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "ambertruck.49deda2bb01e90d2.png",
+          "source": "local://ambertruck.49deda2bb01e90d2.png",
+          "fallback": false
+        }
+      }
+    },
+    "evolute": {
+      "themes": {
+        "dark": {
+          "file": "evolute-dark.9cc87ad7cad76d45.png",
+          "source": "local://evolute-dark.9cc87ad7cad76d45.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "evolute-light.9cb64a1d2aec37a9.png",
+          "source": "local://evolute-light.9cb64a1d2aec37a9.png",
+          "fallback": false
+        }
+      }
+    },
+    "eonyx": {
+      "themes": {
+        "dark": {
+          "file": "eonyx-dark.6083241f1a0df9af.png",
+          "source": "local://eonyx-dark.6083241f1a0df9af.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "eonyx-light.d6440a1b58fa0b94.png",
+          "source": "local://eonyx-light.d6440a1b58fa0b94.png",
+          "fallback": false
+        }
+      }
+    },
+    "nordcross": {
+      "themes": {
+        "dark": {
+          "file": "nordcross-dark.1ab8a41ca4d54be6.png",
+          "source": "local://nordcross-dark.1ab8a41ca4d54be6.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "nordcross-light.d4511feba77acf1a.png",
+          "source": "local://nordcross-light.d4511feba77acf1a.png",
+          "fallback": false
+        }
+      }
+    },
+    "solaris": {
+      "themes": {
+        "dark": {
+          "file": "solaris-dark.0a006faf96a444f2.png",
+          "source": "local://solaris-dark.0a006faf96a444f2.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "solaris-light.07ff5397281414cb.png",
+          "source": "local://solaris-light.07ff5397281414cb.png",
+          "fallback": false
+        }
+      }
+    },
+    "sollers": {
+      "themes": {
+        "dark": {
+          "file": "sollers.e0607649cfb5c448.png",
+          "source": "local://sollers.e0607649cfb5c448.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "sollers.e0607649cfb5c448.png",
+          "source": "local://sollers.e0607649cfb5c448.png",
+          "fallback": false
+        }
+      }
+    },
+    "tenet": {
+      "themes": {
+        "dark": {
+          "file": "tenet-dark.940002e88bae27fb.png",
+          "source": "local://tenet-dark.940002e88bae27fb.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "tenet-light.ccc1ba181967f30a.png",
+          "source": "local://tenet-light.ccc1ba181967f30a.png",
+          "fallback": false
+        }
+      }
+    },
+    "xcite": {
+      "themes": {
+        "dark": {
+          "file": "xcite-dark.6bd243f6168fed9f.png",
+          "source": "local://xcite-dark.6bd243f6168fed9f.png",
+          "fallback": false
+        },
+        "light": {
+          "file": "xcite-light.9324b427c2d4e4dd.png",
+          "source": "local://xcite-light.9324b427c2d4e4dd.png",
+          "fallback": false
+        }
+      }
+    }
+  }
+}

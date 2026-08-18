@@ -1,0 +1,1025 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-audi-china-e5-sportback-2025",
+          "title": "New AUDI brand presents first model, the AUDI E5 Sportback",
+          "publisher": "AUDI AG",
+          "url": "https://www.audi.com/de/pressemitteilungen/neue-marke-audi-stellt-erstes-modell-vor-den-audi-e5-sportback-16607",
+          "market": "China",
+          "language": "de",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "platformCodes"
+          ],
+          "notes": "Official AUDI release establishing the China-specific sister brand, its first E5 Sportback model and the ADP platform. Ambiguous all-cap AUDI input is not made a safe global alias for Audi or AUDI China.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-chery-lepas-launch-2025",
+          "title": "A new global brand redefining future mobility with elegant designing",
+          "publisher": "Chery Corporate Malaysia",
+          "url": "https://www.chery.my/2025/04/28/a-new-global-brand-redefining-future-mobility-with-elegant-designing/",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "notes": "Official Chery regional release corroborating LEPAS as a distinct global brand and the L8, L6 and L4 product sequence. Only explicit identity and launch timing are retained.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-icaur-global-range-2026",
+          "title": "iCAUR official global model range",
+          "publisher": "iCAUR",
+          "url": "https://www.icaurglobal.com/global/",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "notes": "Official global site used for the iCAUR brand and current V23/V27 model identities. iCAUR is kept separate from iCAR until an official identity mapping is staged.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-icaur-v23-spec-2026",
+          "title": "iCAUR V23 official global specifications",
+          "publisher": "iCAUR",
+          "url": "https://www.icaurglobal.com/global/iCAURV23/",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "name",
+            "market",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "batteryRatedKwh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "notes": "Official global V23 table. The two published battery/motor columns are retained without guessing grade names, drive layout, range or 30-minute power.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-icaur-v27-spec-2026",
+          "title": "iCAUR V27 official global specifications",
+          "publisher": "iCAUR",
+          "url": "https://www.icaurglobal.com/global/iCAURV27/",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "notes": "Official global V27 page used only for model identity, SUV category and REEV powertrain. The mixed promotional configuration table is not promoted into exact variants.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-jac-yiwei-3-spec-2026",
+          "title": "2026 JAC Yiwei 3 official specifications",
+          "publisher": "JAC Yiwei",
+          "url": "https://yiwei.jac.com.cn/yw3/",
+          "market": "China",
+          "language": "zh",
+          "supportedFields": [
+            "canonicalName",
+            "name",
+            "market",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "batteryRatedKwh",
+            "rangeKm",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "notes": "Official current Yiwei 3 specification page. The 505 km figure is retained without inventing a test standard; peak motor power is not converted into 30-minute power.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-jac-yiwei-brand-launch-2023",
+          "title": "JAC Yiwei new energy passenger-car brand launch",
+          "publisher": "JAC Yiwei",
+          "url": "https://yiwei.jac.com.cn/news/20230413/5601.html",
+          "market": "China",
+          "language": "zh",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "productionFrom",
+            "powertrainKinds"
+          ],
+          "notes": "Official Chinese JAC Yiwei launch release used for the distinct brand identity and Yiwei 3 product identity. The Latin canonical label remains review-only.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-jac-yiwei-e30x-uae-2024",
+          "title": "JAC Yiwei 3 enters the UAE as E30X",
+          "publisher": "JAC Yiwei",
+          "url": "https://yiwei.jac.com.cn/news/20240710/5638.html",
+          "market": "United Arab Emirates",
+          "language": "zh",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "notes": "Official manufacturer release establishing E30X as the UAE market name of Yiwei 3.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-lepas-global-range-2026",
+          "title": "LEPAS official global brand and current model range",
+          "publisher": "LEPAS",
+          "url": "https://www.lepasinternational.com/",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "notes": "Official global site used only for the LEPAS identity and the currently published L8, L6 and L4 lines. Placeholder or promotional technical values are not retained.",
+          "type": "manufacturer",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "confidence": "official",
+          "status": "active",
+          "license": null
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china",
+          "canonicalName": "AUDI China",
+          "slug": "audi-china",
+          "aliases": [
+            {
+              "value": "AUDI",
+              "kind": "market_name",
+              "safe": false,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-audi-china-e5-sportback-2025"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e5-sportback-2025",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "AUDI AG explicitly establishes the all-cap AUDI sister brand for China; the qualified canonical label prevents collision with four-ring Audi."
+            }
+          ],
+          "researchNotes": [
+            "No source-traced 90x60 dark/light logo pair is staged; logo identity and publication rights remain blocking gates.",
+            "The identity is isolated from production naming, pricing and public encyclopedia routes until review and media approval are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icaur",
+          "canonicalName": "iCAUR",
+          "slug": "icaur",
+          "aliases": [
+            {
+              "value": "ICAUR",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-icaur-global-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official global site establishes iCAUR as the public brand identity. No iCAR equivalence is inferred."
+            }
+          ],
+          "researchNotes": [
+            "No source-traced 90x60 dark/light logo pair is staged; logo identity and publication rights remain blocking gates.",
+            "The identity is isolated from production naming, pricing and public encyclopedia routes until review and media approval are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac-yiwei",
+          "canonicalName": "JAC Yiwei",
+          "slug": "jac-yiwei",
+          "aliases": [
+            {
+              "value": "Yiwei",
+              "kind": "transliteration",
+              "safe": false,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-jac-yiwei-brand-launch-2023"
+              ]
+            },
+            {
+              "value": "江淮钇为",
+              "kind": "localized",
+              "safe": false,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-jac-yiwei-brand-launch-2023"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jac-yiwei-brand-launch-2023",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official Chinese JAC site establishes the identity; Latin normalization stays review-only so it cannot silently rename production listings."
+            }
+          ],
+          "researchNotes": [
+            "No source-traced 90x60 dark/light logo pair is staged; logo identity and publication rights remain blocking gates.",
+            "The identity is isolated from production naming, pricing and public encyclopedia routes until review and media approval are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lepas",
+          "canonicalName": "LEPAS",
+          "slug": "lepas",
+          "aliases": [
+            {
+              "value": "Lepas",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-lepas-global-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-lepas-global-range-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official LEPAS and Chery sources establish a distinct current global vehicle brand and its Chinese manufacturer origin."
+            },
+            {
+              "sourceId": "src-chery-lepas-launch-2025",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official LEPAS and Chery sources establish a distinct current global vehicle brand and its Chinese manufacturer origin."
+            }
+          ],
+          "researchNotes": [
+            "No source-traced 90x60 dark/light logo pair is staged; logo identity and publication rights remain blocking gates.",
+            "The identity is isolated from production naming, pricing and public encyclopedia routes until review and media approval are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china/e5-sportback",
+          "brandId": "audi-china",
+          "canonicalName": "E5 Sportback",
+          "slug": "e5-sportback",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sportback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e5-sportback-2025",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icaur/v23",
+          "brandId": "icaur",
+          "canonicalName": "V23",
+          "slug": "v23",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-icaur-v23-spec-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete.",
+            "Kept under iCAUR; no automatic merge with the separate iCAR staging identity is allowed without official equivalence evidence."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icaur/v27",
+          "brandId": "icaur",
+          "canonicalName": "V27",
+          "slug": "v27",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-icaur-v27-spec-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete.",
+            "Kept under iCAUR; no automatic merge with the separate iCAR staging identity is allowed without official equivalence evidence."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac-yiwei/3",
+          "brandId": "jac-yiwei",
+          "canonicalName": "3",
+          "slug": "3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "钇为3",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-jac-yiwei-brand-launch-2023",
+                "src-jac-yiwei-3-spec-2026"
+              ]
+            },
+            {
+              "value": "E30X",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "United Arab Emirates",
+              "sourceIds": [
+                "src-jac-yiwei-e30x-uae-2024"
+              ]
+            }
+          ],
+          "productionFrom": "2023",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jac-yiwei-brand-launch-2023",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-jac-yiwei-3-spec-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-jac-yiwei-e30x-uae-2024",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lepas/l4",
+          "brandId": "lepas",
+          "canonicalName": "L4",
+          "slug": "l4",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "ICE",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-lepas-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-chery-lepas-launch-2025",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lepas/l6",
+          "brandId": "lepas",
+          "canonicalName": "L6",
+          "slug": "l6",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "PHEV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-lepas-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-chery-lepas-launch-2025",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lepas/l8",
+          "brandId": "lepas",
+          "canonicalName": "L8",
+          "slug": "l8",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "PHEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-lepas-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            },
+            {
+              "sourceId": "src-chery-lepas-launch-2025",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official current brand/model material explicitly supports the retained identity and category; no unlisted generation, trim or technical value is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; review-only until logo, generation and configuration gates are complete."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi-china/e5-sportback/adp",
+          "modelId": "audi-china/e5-sportback",
+          "name": "ADP",
+          "aliases": [],
+          "platformCodes": [
+            "ADP"
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sportback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-audi-china-e5-sportback-2025",
+              "fields": [
+                "name",
+                "platformCodes",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official manufacturer release explicitly names the platform and launch period."
+            }
+          ],
+          "researchNotes": [
+            "Review-only; production generation boundaries beyond the cited current specification are not inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icaur/v23/current-global-2026",
+          "modelId": "icaur/v23",
+          "name": "Current global specification",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-v23-spec-2026",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "A review-only container for the exact current official specification table; it is not asserted to be a manufacturer-defined generation name."
+            }
+          ],
+          "researchNotes": [
+            "Review-only; production generation boundaries beyond the cited current specification are not inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac-yiwei/3/current-china-2026",
+          "modelId": "jac-yiwei/3",
+          "name": "Current China specification",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jac-yiwei-3-spec-2026",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "A review-only container for the exact current official specification table; it is not asserted to be a manufacturer-defined generation name."
+            }
+          ],
+          "researchNotes": [
+            "Review-only; production generation boundaries beyond the cited current specification are not inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "icaur/v23/current-global-2026/59-93-kwh",
+          "modelId": "icaur/v23",
+          "generationId": "icaur/v23/current-global-2026",
+          "name": "Current Global Specification — 59.93 kWh",
+          "market": "Global",
+          "yearFrom": 2026,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "batteryRatedKwh": 59.93,
+          "lengthMm": 4220,
+          "widthMm": 1915,
+          "heightMm": 1845,
+          "wheelbaseMm": 2735,
+          "faceliftId": null,
+          "aliases": [],
+          "yearTo": null,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-v23-spec-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "batteryRatedKwh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values copied from the official manufacturer table. Missing drive, grade, charging, range-standard and 30-minute-power fields are intentionally not guessed or derived."
+            }
+          ],
+          "researchNotes": [
+            "Review-only exact official specification; it cannot feed production pricing until identity and generation matching are approved.",
+            "Peak motor power is kept as motorPeakKw and is never copied or converted into power30MinKw."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icaur/v23/current-global-2026/81-76-kwh",
+          "modelId": "icaur/v23",
+          "generationId": "icaur/v23/current-global-2026",
+          "name": "Current Global Specification — 81.76 kWh",
+          "market": "Global",
+          "yearFrom": 2026,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 155,
+          "batteryRatedKwh": 81.76,
+          "lengthMm": 4220,
+          "widthMm": 1915,
+          "heightMm": 1845,
+          "wheelbaseMm": 2735,
+          "faceliftId": null,
+          "aliases": [],
+          "yearTo": null,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-icaur-v23-spec-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "batteryRatedKwh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values copied from the official manufacturer table. Missing drive, grade, charging, range-standard and 30-minute-power fields are intentionally not guessed or derived."
+            }
+          ],
+          "researchNotes": [
+            "Review-only exact official specification; it cannot feed production pricing until identity and generation matching are approved.",
+            "Peak motor power is kept as motorPeakKw and is never copied or converted into power30MinKw."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac-yiwei/3/current-china-2026/505-km",
+          "modelId": "jac-yiwei/3",
+          "generationId": "jac-yiwei/3/current-china-2026",
+          "name": "2026 505 km",
+          "market": "China",
+          "yearFrom": 2026,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 100,
+          "batteryRatedKwh": 51.5,
+          "rangeKm": 505,
+          "lengthMm": 4025,
+          "widthMm": 1770,
+          "heightMm": 1560,
+          "wheelbaseMm": 2620,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 150,
+          "faceliftId": null,
+          "aliases": [],
+          "yearTo": null,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jac-yiwei-3-spec-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "batteryRatedKwh",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values copied from the official manufacturer table. Missing drive, grade, charging, range-standard and 30-minute-power fields are intentionally not guessed or derived."
+            }
+          ],
+          "researchNotes": [
+            "Review-only exact official specification; it cannot feed production pricing until identity and generation matching are approved.",
+            "Peak motor power is kept as motorPeakKw and is never copied or converted into power30MinKw."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

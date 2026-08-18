@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 6
+  },
+  "modelId": "wuling/starlight",
+  "generationIds": [
+    "wuling/starlight/2025-model-year"
+  ],
+  "variantIds": [
+    "wuling/starlight/2025-model-year/phev-70-km-smart-standard",
+    "wuling/starlight/2025-model-year/phev-150-km-smart-advanced",
+    "wuling/starlight/2025-model-year/phev-150-km-smart-pilot",
+    "wuling/starlight/2025-model-year/bev-510-km-smart-advanced",
+    "wuling/starlight/2025-model-year/bev-610-km-smart-advanced",
+    "wuling/starlight/2025-model-year/bev-610-km-smart-flagship"
+  ],
+  "policy": {
+    "officialSourcesOnly": true,
+    "EnglishCanonicalLocalizedAliases": true,
+    "complete2025GradeList": true,
+    "unstatedSpecificationsRejected": true,
+    "rangeCycleNotInferred": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "automaticPublicationReady": false
+  }
+}

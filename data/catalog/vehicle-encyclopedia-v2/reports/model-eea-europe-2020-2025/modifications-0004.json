@@ -1,0 +1,7410 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 4,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-6d0675a734bb7f304db1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 55 TFSI E",
+        "A6 AVANT",
+        "A6 AVANT 50 TFSI E",
+        "A6 AVANT 55 TFSI E",
+        "A6 AVANT 220KW TFSI E",
+        "A6 AVANT 270KW TFSI E",
+        "A6 LIM 220KW TFSI E",
+        "A6 LIM 270KW TFSI E",
+        "A6 LIMOUSINE",
+        "A6 S LINE 45 TFSI MHEV QUAT SA",
+        "A6 S LINE 45 TFSI QUATTRO S-A",
+        "A6 S LN BLK ED 45 TFSI QUAT SA",
+        "A6 S LN BLK ED45TFSI MHEV Q SA",
+        "A6 SLN VOR 45TFSI MHEV QUAT SA",
+        "A6 SPORT 45 TFSI MHEV QUAT SA",
+        "A6 SPORT 45 TFSI QUATTRO S-A",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 2107,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1464695f050d28a18cdb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "A6 AVANT",
+        "A6 AVANT 2.0 TFSI AUT.",
+        "A6 Limousine",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 2262,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a7d1dfad2582dcfd8d2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 165,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffd46e3cbc97389cf21f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "A6",
+        "A6 AVANT",
+        "A6 LIMOUSINE",
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 3853,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee57b663a0267d2f7c50",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "A6",
+        "A6 50 TFSI E",
+        "A6 50 TFSI e",
+        "A6 55 TFSI E",
+        "A6 55 TFSI e",
+        "A6 AVANT 55 TFSI E",
+        "A6 LIM 220KW TFSI E",
+        "A6 LIM 270KW TFSI E",
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 127,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fcd61be3532bb55fc25",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "A6",
+        "A6 / 2.0 / TFSI AUT.",
+        "A6 / 2.0 / TFSI Q AUT.",
+        "A6 / 20 / TFSI Q AUT",
+        "A6 / AVANT 2.0 / TFSI Q AUT.",
+        "A6 2.0 TFSI Q AUT.",
+        "A6 50 TFSI E",
+        "A6 55 TFSI e",
+        "A6 55 TFSI E",
+        "A6 AVANT",
+        "A6 Avant 50 TFSI e",
+        "A6 AVANT 50 TFSI E",
+        "A6 Avant 55 TFSI e",
+        "A6 AVANT 55 TFSI E",
+        "A6 AVANT 55TFSI E",
+        "A6 Limousine",
+        "A6 LIMOUSINE",
+        "A6 LIOMOUSINE",
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 20691,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-064be94f89e97a2d6305",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 331,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21fad8964c0d210d3046",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 3.0 T QUATTRO",
+        "A6 ALLROAD QUATTRO",
+        "A6 AROAD SPORT 55TFSI MHEV Q A",
+        "A6 AROAD SPT 50TDI MHEV QUAT A",
+        "A6 AROAD VOR 55TFSI MHEV QTO A",
+        "A6 AVANT",
+        "A6 LIMOUSINE",
+        "A6 S LINE 55 TFSI QUATTRO S-A",
+        "A6 S LN BLK ED 55 TFSI QUAT SA",
+        "A6 S LN VOR 55TFSI MHEV QTO SA",
+        "A6 SLN VOR 45TFSI MHEV QUAT SA",
+        "A6 SPORT 55 TFSI QUATTRO S-A",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 334,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f68fdddd3325f5cc52b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A6",
+        "A6 / 3.0 / TFSI Q AUT.",
+        "A6 / 30 / TFSI Q AUT",
+        "A6 / ALLROAD 30 / TFSI Q AUT",
+        "A6 / AVANT 3.0 / TFSI Q AUT.",
+        "A6 / AVANT 30 / TFSI Q AUT",
+        "A6 50 TFSI E",
+        "A6 ALLORAD QUATTRO",
+        "A6 ALLROAD",
+        "A6 ALLROAD 30 TFSI Q AUT",
+        "A6 ALLROAD QUATTRO",
+        "A6 allroad quattro",
+        "A6 AVANT",
+        "A6 Avant",
+        "A6 Limousine",
+        "A6 LIMOUSINE",
+        "A6 LIOMOUSINE",
+        "AUDI A6",
+        "AUDI A6 ALLROAD"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 37,
+      "registrations": 6593,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77ec8427a82315216174",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 441,
+      "commercialNames": [
+        "A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2e7dd202104f71e4a45",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 55 TFSI E",
+        "A6 AVANT",
+        "A6 LIM 270KW TFSI E",
+        "A6 LIMOUSINE",
+        "A6 S LINE 50 TFSI E QUATTRO SA",
+        "A6 SLN BLK ED 50TFSI E QUAT SA",
+        "A6 SPORT 50 TFSI E QUATTRO S-A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 736,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba86d5dc8335c53ec5f3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 55,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 55 TFSI E",
+        "A6 AVANT 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c38a27e0e86f8c7cb45",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "A6",
+        "A6 50 TFSI e",
+        "A6 55 E AVANT 20 TFSI Q AUT",
+        "A6 55 TFSI E",
+        "A6 220 KW E 2.0 TFSI Q AUT.",
+        "A6 270 KW E AVANT 2.0 TFSI Q AUT.",
+        "A6 ALLROAD",
+        "A6 AVANT",
+        "A6 AVANT 55 TFSI E",
+        "A6 Avant 55 TFSI e",
+        "A6 AVANT 220 KW TFSI E",
+        "A6 AVANT 220KW TFSI E",
+        "A6 AVANT 270KW TFSI E",
+        "A6 AVANT TFSI E",
+        "A6 LIM 220KW TFSI E",
+        "A6 LIM 270KW TFSI E",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 ALLROAD",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 25120,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae054bb79102378892cd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "A6",
+        "A6 50 E / 2.0 / TFSI Q AUT.",
+        "A6 50 E / AVANT 2.0 / TFSI Q AUT.",
+        "A6 50 E / AVANT 20 / TFSI Q AUT",
+        "A6 50 E 2.0 TFSI Q AUT.",
+        "A6 50 TFSI E",
+        "A6 50 TFSI e",
+        "A6 50TFSI",
+        "A6 50TFSI E",
+        "A6 55 E / 2.0 / TFSI Q AUT.",
+        "A6 55 E / 20 / TFSI Q AUT",
+        "A6 55 TFSI E",
+        "A6 55 TFSI e",
+        "A6 60 TFSI E",
+        "A6 AV 50TFSI E",
+        "A6 AV 55TFSI E",
+        "A6 AVANT",
+        "A6 AVANT 50 TFSI E",
+        "A6 Avant 50 TFSI e",
+        "A6 AVANT 50TFSI E",
+        "A6 AVANT 55",
+        "A6 Avant 55 TFSI e",
+        "A6 AVANT 55 TFSI E",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 49,
+      "registrations": 41573,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb6d99467cb3cb089a70",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 96,
+      "commercialNames": [
+        "A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-501f59bbc2c4ff892e19",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 160,
+      "commercialNames": [
+        "A6 Avant"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ebfddfa5081054e3668",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 200,
+      "commercialNames": [
+        "A6 LIMUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc72c95a63b79c713583",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 260,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-783c1e847ab35b648695",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 265,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-423ef5386399fdf385b9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 405,
+      "commercialNames": [
+        "AUDI A6 E-TRON S"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4c5d531027e44d53191",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4e41d3743913cbde7b9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "A6",
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82a90a3e6c140cf9da83",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a86aea699c7e758ed5f5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46111eb915058e7b57d0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 165,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc382402a9c34f303d09",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "A6",
+        "A6 AVANT",
+        "A6 AVANT 3.0 TFSI Q AUT.",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 ALLROAD",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 1528,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9206c20df4e4d5c39a23",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2698,
+      "powerKw": 140,
+      "commercialNames": [
+        "A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78ba8a4a826c49425dc7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 165,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85d4186e080ec620d83d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 220,
+      "commercialNames": [
+        "A6 ALLROAD",
+        "A6 AVANT",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 ALLROAD",
+        "AUDI A6 ALLROAD QUATTRO",
+        "AUDI A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 49,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ada52ebf1a6a90eece4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "A6 55 TFSI e",
+        "A6 AVANT 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a2b8702f90f425ee0f6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "A6 AV E-TRON",
+        "A6 E-TRON",
+        "A6 SB E TRON",
+        "A6 SB E-TRON",
+        "AUDI A6 E-TRON",
+        "AUDI A6 E-TRON S"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 241,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ed951936a30ef4771df",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 240,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d1aadf2ecc20bc5276a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 280,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 65,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd275b24ef3064fe6e2e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 340,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9a04688f2e2b66459a5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "A6 AVANT",
+        "A6 LIMOUSINE",
+        "AUDI A6",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76ee6e5c18d4e94db75a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dfe056ff0b4a4471bfb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 360,
+      "commercialNames": [
+        "AUDI A6",
+        "AUDI A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19fcf3b7822eb298a44a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 105,
+      "commercialNames": [
+        "A6 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a77daac0894b0ee9b6f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2894,
+      "powerKw": 360,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b47c27d680a96883efc",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A6",
+        "AUDI A6 AVANT",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f62029e3986d9e9ffad",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1643d20b7d9281925bf7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 62,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfc3d139403f15a8a3be",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "A6 AVANT",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cff4ccad272ce7aac5fa",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 74,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7846b378498049bae533",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 80,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b54cd3541054088409aa",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95f10f9b138d1aa946e2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-424cbd760c31df8bbc32",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-641c24b8b159ffe2d4d3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d4c33892eb424ceb849",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e551cae4a3f4ad944c0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-476db8a5fb7352af7470",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0de61032f3deca818b9e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 118,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e93915095dcca976dd1f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81c14cb373190911c87f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 135,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0503c5ab0064dccfc092",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a9b41eb6d6bbb01fe1b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 148,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3950e895a4e780802b8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 170,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e055a1e57ee83334fbb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 173,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f80559c75a63a511187",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 180,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44fc258d6f04e720ad9c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 210,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1221f31b54046a39cfc0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 225,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cec3ed0fe0a26eeedb0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00075033ee9534bf833f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38d2353a679642596eaa",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 49,
+      "commercialNames": [
+        "A6 ALLROAD QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09b4a156c1d43059d537",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 67,
+      "commercialNames": [
+        "A6 ALLROAD QUATTRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9208deede28317aedc71",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 110,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO",
+        "A6 ALLROAD QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76a87b39e33c91c5e702",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 120,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b1a1bd3ef49c7573151",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 132,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bd2e59c7b8fffd9f2fb5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 137,
+      "commercialNames": [
+        "A6 ALLROAD QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6186ecd4e46f5bcbf02",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 140,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd70c69029a8728adbe4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO",
+        "A6 ALLROAD QUATTRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b04e560665c27ef3ae8f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 320,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-189084724b96dbaa2338",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "A6",
+        "A6 AV E-TRON",
+        "A6 AV E-TRON PERFORMANCE",
+        "A6 AV E-TRON QUATTRO",
+        "A6 AVANT E-TRON",
+        "A6 E-TRON",
+        "A6 SB E TRON",
+        "A6 SB E-TRON",
+        "A6 SB E-TRON PERFORMANCE",
+        "A6 SB E-TRON QUATTRO",
+        "A6 SPORTBACK E-TRON",
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 8751,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf36618185cacb452143",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 270,
+      "commercialNames": [
+        "A6 AV E TRON PERFORMANCE",
+        "A6 AV E-TRON",
+        "A6 AV E-TRON PERFORMANCE",
+        "A6 AV E-TRON QUATTRO",
+        "A6 AVANT E-TRON",
+        "A6 E-TRON",
+        "A6 E-TRON PERFORMANCE",
+        "A6 SB E TRON PERFORMANCE",
+        "A6 SB E-TRON",
+        "A6 SB E-TRON PERFORMANCE",
+        "A6 SB E-TRON QUATTRO",
+        "A6 SPORTBACK E-TRON",
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 9261,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e711cc4763d89113b8e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 315,
+      "commercialNames": [
+        "A6 AV E TRON QUATRO",
+        "A6 AV E TRON QUATTRO",
+        "A6 AV E-TRON QUATTRO",
+        "A6 AVANT E-TRON",
+        "A6 AVANT E-TRON QUATTRO",
+        "A6 E-TRON",
+        "A6 E-TRON QUATTRO",
+        "A6 SB E TRON QUATTRO",
+        "A6 SB E-TRON QUATTRO",
+        "A6 SPORTBACK E-TRON",
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 5698,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88f19de22b5bc95af1a6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 370,
+      "commercialNames": [
+        "AUDI A6 E-TRON",
+        "AUDI A6 E-TRON S"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68a11c73761b6c08f5bd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 425,
+      "commercialNames": [
+        "AUDI A6 RS E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b40d84d735594a83e66",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1994,
+      "powerKw": 195,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbaf9035261054380db9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1996,
+      "powerKw": 155,
+      "commercialNames": [
+        "A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b3ebdb99d986d6d41a4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 61,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb0174f6409e1616f50d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 AVANT",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e6e8b792e1b3c319501",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 68,
+      "commercialNames": [
+        "A6 55 TFSI E",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c8e4579e2fec7546c04",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 69,
+      "commercialNames": [
+        "A6 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e5bb4c6053be1115138",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 70,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98a0384be94c16a1e26c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 72,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b90ead1a24d1cfde9023",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 80,
+      "commercialNames": [
+        "A6 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c1468678663ba9ff030",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 81,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 55 TFSI E",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcaa9c1a85f0d7ee8712",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 84,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 AVANT 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96ed66a4972f1db182c0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 96,
+      "commercialNames": [
+        "A6 AVANT",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85b44a5f4f92e75ccc10",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "A6 50 TFSI E",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd3d4b4f2dc2bec2e633",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 112,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65297594476b3a441a60",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 114,
+      "commercialNames": [
+        "A6 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-444f7af06f0aece18352",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 116,
+      "commercialNames": [
+        "A6 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a2e0bc8eae3faa6e564",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 120,
+      "commercialNames": [
+        "A6 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-517dd7a34de0a814accf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 132,
+      "commercialNames": [
+        "A6 AVANT 50 TFSI E",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f1398e9ed2604f0ad6a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 148,
+      "commercialNames": [
+        "A6 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6763ee5b88a7e7188a3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 228,
+      "commercialNames": [
+        "A6 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eca4d4028bcd298f33d4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 320,
+      "commercialNames": [
+        "A6 AVANT 50 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a065ef26e03aa5f8db5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 ALLROAD QUATRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-238d1923c033e091b9e1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 51,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eefd78428d0739dc1c35",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-405251fa816c0644b016",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 88,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-beec138967e5ae61e928",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc780df689fd5d3b8a65",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9648e7a697c252b7d9f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5fbf6f76e95155ab3585",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 240,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c1e508d3f89a3490446",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9107c3ee32b34310db8d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "A6 AV E-TRON PERFORMANCE",
+        "A6 AVANT E-TRON PERFORMANCE",
+        "A6 SB E-TRON PERFORMANCE",
+        "AUDI A6 AV E-TRON",
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 231,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6aed966d08583744fc93",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 310,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12d8e8e33ad1591af51e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6600b033364d6275816e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 241,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccfb0c3cfd5a557a1696",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2994,
+      "powerKw": 220,
+      "commercialNames": [
+        "A6 LIMOUSINE",
+        "AUDI A6 ALLROAD",
+        "AUDI A6 ALLROAD QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0a9b96f741a957a2586",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-236ab204d8ed39ef63d1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02035a223b5c17c97e2c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 253,
+      "commercialNames": [
+        "A6 ALLROAD QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-245c4fc31657dd756e2e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "A6 AV E TRON QUATTRO",
+        "A6 AV E-TRON",
+        "A6 AV E-TRON PERFORMANCE",
+        "A6 AV E-TRON QUATTRO",
+        "A6 SB E TRON",
+        "A6 SB E TRON QUATTRO",
+        "A6 SB E-TRON",
+        "A6 SB E-TRON PERFORMANCE",
+        "A6 SB E-TRON QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 750,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8db5d225ff040a033e1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 138,
+      "commercialNames": [
+        "A6 AV E TRON QUATTRO",
+        "A6 AV E-TRON QUATTRO",
+        "A6 SB E TRON QUATTRO",
+        "A6 SB E-TRON QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 748,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6354b59657287ce7886",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "A6 AV E-TRON",
+        "A6 AV E-TRON PERFORMANCE",
+        "A6 AV E-TRON QUATTRO",
+        "A6 SB E-TRON",
+        "A6 SB E-TRON PERFORMANCE",
+        "A6 SB E-TRON QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49cfa175a90e40d2062c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 215,
+      "commercialNames": [
+        "A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7966ca39c0e79629327",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "A6 AV E-TRON PERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6a90eea07bef982f05a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 275,
+      "commercialNames": [
+        "AUDI A6 E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7412390deb671caebd1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1994,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17bc7828cea70cdba867",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI A6"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-893e3a733bb1dfaf6d97",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2994,
+      "powerKw": 270,
+      "commercialNames": [
+        "A6 AVANT",
+        "A6 LIMOUSINE",
+        "AUDI A6 ALLROAD",
+        "AUDI A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-427654346455d4dfe9c9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1994,
+      "powerKw": 185,
+      "commercialNames": [
+        "A6 AVANT",
+        "AUDI A6 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61986b5ac36befcc5da3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A6",
+      "modelId": "audi/a6",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A6 ALLROAD QUATTRO",
+        "A6 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f05984890434a293ddc",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "A7 S LINE 40 TDI QUATTRO S-A",
+        "A7 S LINE 40 TDI S-A",
+        "A7 S LINE BLACK ED 40 TDI S-A",
+        "A7 S LINE EXC 40 TDI MHEV SA",
+        "A7 S-LN BLK ED 40 TDI QUAT S-A",
+        "A7 SPORT 40 TDI QUATTRO S-A",
+        "A7 SPORT 40 TDI S-A",
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c77b2cb68a48d7a62a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "A7",
+        "A7 / 2.0 / TDI Q AUT.",
+        "A7 2.0 TDI AUT.",
+        "A7 20 TDI AUT",
+        "A7 20 TDI Q AUT",
+        "A7 AVANT",
+        "A7 LIMO",
+        "A7 LIMO QTDI2.0 R4150 A7S",
+        "A7 LIMO TDI2.0 R4150 A7",
+        "A7 LIMOUSINE",
+        "A7 SPORTBACK",
+        "AUDI A7",
+        "AUDI A7 AVANT",
+        "AUDI A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 2944,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08fa149147151680ec4f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "A7 S LINE 45 TDI QUATTRO AUTO",
+        "A7 S LINE 50 TDI QUATTRO S-A",
+        "A7 S LINE BLK ED 45 TDI QUAT A",
+        "A7 S-LN BLK ED 50 TDI QUAT S-A",
+        "A7 S-LN VORSPRUNG45 TDI QUAT A",
+        "A7 S-LN VORSPRUNG50 TDI QUAT A",
+        "A7 SPORT 45 TDI QUATTRO AUTO",
+        "A7 SPORT 50 TDI QUATTRO S-A",
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 315,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb732c8cfb3f37798a33",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 155,
+      "commercialNames": [
+        "A7 Sportback"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1dde48f6bbbec8af329",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "A7",
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 351,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ebdd9dc385d4d2e9926",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "A7",
+        "A7 / 3.0 / TDI Q AUT.",
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 812,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9921b4559b43c0312b7c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "A7",
+        "A7 / 3.0 / TDI Q AUT.",
+        "A7 30 TDI Q AUT",
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 3106,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d051dc7580ee679dc5ce",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 253,
+      "commercialNames": [
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18e44612a5a3e1d0df91",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 257,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14910227d60f7c0aeef3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "A7 50 TFSI E",
+        "A7 55 TFSI E",
+        "A7 S LINE 45 TFSI QUATTRO S-A",
+        "A7 S-LN BLK ED45 TFSI QUAT S-A",
+        "A7 SPORT 45 TFSI QUATTRO S-A",
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 240,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-776c870bf2a798228b81",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 LIMOUSINE",
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7",
+        "AUDI A7 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 69,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa81665ef2a5d7ffb2cb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "A7",
+        "A7 SPORTBACK",
+        "A7 Sportback",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 548,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b724e0b4ae870d8fb5c9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "A7",
+        "A7 50 TFSI E",
+        "A7 55 TFSI E",
+        "A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e4cb93284e15d406fe3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "A7",
+        "A7 / 20 / TFSI Q AUT",
+        "A7 50 TFSI E",
+        "A7 55 TFSI e",
+        "A7 55 TFSI E",
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 3091,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db43e9531484025ad902",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2894,
+      "powerKw": 331,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5beb300a77fefcfeb019",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2984,
+      "powerKw": 195,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4646d9fcc4d9a6e034a8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "A7 S LINE 55 TFSI QUATTRO S-A",
+        "A7 S-LN VRSPRNG55 TFSI QUAT SA",
+        "A7 SLN BLK ED 55TFSI MHEV Q SA",
+        "A7 SPORT 55 TFSI QUATTRO S-A",
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8220ca4c123e5df5dc2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A7",
+        "A7 / 3.0 / TFSI Q AUT.",
+        "A7 / 30 / TFSI Q AUT",
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7",
+        "AUDI A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1279,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-857fbd47b54ad5eef8e5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "A7 BLACK ED 50 TFSI E QUAT S-A",
+        "A7 COMPETITION 55TFSI E QTO SA",
+        "A7 S LINE 50 TFSI E QUATTRO SA",
+        "A7 SPORT 50 TFSI E QUATTRO S-A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 322,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce2a4e5422838b85a0f8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 55,
+      "commercialNames": [
+        "A7 50 TFSI E",
+        "A7 55 TFSI E"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a96ce7e259b8c57e00dc",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "A7",
+        "A7 50 TFSI e",
+        "A7 55 TFSI e",
+        "A7 55 TFSI E",
+        "A7 AVANT",
+        "A7 LIMO PHEV2.0 R4270 A7S",
+        "A7 LIMOUSINE",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 4141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a577c99f4825e3d43afd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "A7",
+        "A7 50 TFSI E",
+        "A7 55 TFSI E",
+        "A7 55 TFSI e",
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 3659,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86d472146914b45cbb3f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "A7 Sportback",
+        "A7 SPORTBACK",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fdf659cce25817519f0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8eb4518cb79ed17ca0cf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 19,
+      "commercialNames": [
+        "A7 SPORBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-831fe1364381f27831e6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2af6191588538d54d569",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f82a8bc7d97f4dbd088",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 253,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54ea7c68a89860c2d95d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08ca4b183fbbec3149fb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 183,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-257cb020b31cbd6e9dbf",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 220,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 AVANT QTDI3.0",
+        "A7 AVANT QTDI3.0 V6220",
+        "A7 LIMO QTDI3.0 V6220 A7S",
+        "A7 LIMOUSINE",
+        "AUDI A7",
+        "AUDI A7 AVANT"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e04a86dae595690ea25",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 LIMO QU 2.0",
+        "A7 LIMOUSINE",
+        "AUDI A7",
+        "AUDI A7 AVANT",
+        "AUDI A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab3a88f657136eedbb6b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "A7 LIMOUSINE",
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8386a3047f90a9d17969",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2894,
+      "powerKw": 360,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46294da2734876fd1e45",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 245,
+      "commercialNames": [
+        "A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39d433907072f128668f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 LIMOUSINE",
+        "AUDI A7",
+        "AUDI A7 AVANT",
+        "AUDI A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60a95860cb717b2a771f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 256,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b89854374bc1d8fc577d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 85,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e4467d5e88f718a0441",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 96,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-551a02a5864e95705acb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1984,
+      "powerKw": 210,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60d6c298f943835481ef",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2894,
+      "powerKw": 360,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b20be675b8187cc0e4c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e0b33a63726a0f8427a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e78234f2a705912bc0a3",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70100cfdbff0f7d93a19",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2121ed56a4f6a4b3dc51",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 190,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dd2be234800b24e1c19",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cff794632a99778277a4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2994,
+      "powerKw": 220,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52fceccd110ef677e59a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7de09c9d3b04fc8d9064",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2994,
+      "powerKw": 270,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 AVANT QU.3.0 V6270 A7S",
+        "A7 LIMO QU 3.0 V6270 A7S",
+        "A7 LIMO QU.3.0 V6270 A7S",
+        "A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef562acf230c0f28842f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1994,
+      "powerKw": 185,
+      "commercialNames": [
+        "A7 AVANT",
+        "A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6abd0c751986ba94749",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "AUDI A7"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-711cd75a938789835f2f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI A7",
+        "AUDI A7 LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8309dccdab9668d81379",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A7",
+      "modelId": "audi/a7",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A7 SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-579bea23d0cb9923eead",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "A8",
+        "A8 50 TDI QUATTRO AUTO",
+        "A8 BLACK ED 50 TDI MHEV QUAT A",
+        "A8 L 50 TDI QUATTRO AUTO",
+        "A8 L S LINE 50 TDI QUATTRO A",
+        "A8 L S LN VSPRUNG 50TDI QUAT A",
+        "A8 S LINE 50 TDI QUATTRO AUTO",
+        "A8 S LINE BLK ED 50 TDI QUAT A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 680,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db02aa06916d65fa7ae7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 183,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c56492862acf10a1bcb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "A 8",
+        "A8",
+        "A8 / 3.0 / TDI Q AUT.",
+        "A8 / 30 / TDI Q AUT",
+        "A8 3.0 TDI Q AUT.",
+        "A8 30 TDI Q AUT",
+        "A8 L",
+        "A8 L / 3.0 / TDI Q AUT.",
+        "A8 L / 30 / TDI Q AUT",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 8891,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad21cc18d57a33cd6369",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d61cc066e77a3a225509",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3956,
+      "powerKw": 320,
+      "commercialNames": [
+        "A8",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 922,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84485017df00d831761b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3996,
+      "powerKw": 338,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-014321c53a188d11c34f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36ab71e82a92bcb27262",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2480,
+      "powerKw": 294,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87fb1e273a7bf4a77cf6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "A8 L 30T"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c53e6cab9213fbf0e72",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "A8",
+        "A8 55 TFSI QUATTRO AUTO",
+        "A8 L 55 TFSI QUATTRO AUTO",
+        "A8 L S LINE 55 TFSI QUATTRO A",
+        "A8 L S LN BLK ED 55TFSI QUAT A",
+        "A8 L S LNE 55 TFSI MHEV QUAT A",
+        "A8 S LINE 55 TFSI QUATTRO AUTO",
+        "A8 S LN BLACK ED 55TFSI QUAT A"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 152,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc974407be145beb79b8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A8",
+        "A8 / 3.0 / TFSI Q AUT.",
+        "A8 L",
+        "A8 LIMOUSINE",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 1663,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-522731e10753e8908359",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 338,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-064b1022263b38b37d77",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 420,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84b5e76c0e51a072ce3a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 338,
+      "commercialNames": [
+        "A8",
+        "A8 / 4.0 / TFSI Q AUT.",
+        "A8 L / 4.0 / TFSI Q AUT.",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 650,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-392d0c48fd9ea817817f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3996,
+      "powerKw": 420,
+      "commercialNames": [
+        "A8",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 66,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7046a9ce7d2adec44a69",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "A8",
+        "A8 60 TFSI E QUATTRO AUTO",
+        "A8 L 60 TFSI E QUATTRO AUTO"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b5523960747e3e09e12",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 60,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3141e184bfe48c38814d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A8",
+        "A8 60 TFSI e",
+        "A8 60 TFSI E",
+        "A8 LANG",
+        "AUDI A8",
+        "AUDI A8 L"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi",
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 6035,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f393fa80aace9119d0d8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "A8 L",
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dd38bd837621d9b387a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcf2ed258f292d70ef54",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db4896c44c62a1d8753f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3993,
+      "powerKw": 320,
+      "commercialNames": [
+        "A8 L"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40bf4fa00e278db21a5e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 3996,
+      "powerKw": 338,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-616d5d728e083b5098ca",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-016b6ce1fcb64107a242",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 67,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c38e20ac60a5fad3e69",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 81,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-859256f7860d7ce6d232",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 110,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f6aa13fce821ffa6942",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 120,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f86c618c70d201abcc1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 147,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6dc2d76517ba0039df30",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5656737d6ea54ddc4f7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66903bac993a0674d2eb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 80,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bff7fb41cd896a734e31",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34e50abdf0229caba2da",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 90,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ca36df671ca19c3840c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-050eb4f5b56bd6003418",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f3d6413197a918ec18d",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 132,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05e25ada5d24e57dac3f",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8333687893c9216a17a4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-984ff0133494beac8a7e",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8bd7b148eb9c99a6271",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb7024e92bf81b61d3bd",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3996,
+      "powerKw": 117,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-986a3472d243a821a8e8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-622229183191742f0d24",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "AUDI A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a4940cc36527676630b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2994,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI A8 PHEV"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c66e35145006a816d1c7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6914b0dae2fd22734d23",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "A8",
+      "modelId": "audi/a8",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3996,
+      "powerKw": null,
+      "commercialNames": [
+        "A8"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be3f5e9b506de1636ba7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "Allroad",
+      "modelId": "audi/allroad",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2994,
+      "powerKw": 270,
+      "commercialNames": [
+        "AUDI ALLROAD"
+      ],
+      "sourceMakeNames": [
+        "AUDI AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c484b9622480046547e0",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "Audi e-tron",
+        "E-TRON",
+        "e-tron 50",
+        "E-TRON 50",
+        "E-TRON 55",
+        "e-tron 55",
+        "E-TRON 55 QUATTRO",
+        "E-TRON BLACK EDITION 50 QUAT",
+        "E-TRON BLACK EDITION 55 QUAT",
+        "E-TRON EDITION 1 55 QUATTRO",
+        "E-TRON LAUNCH ED 55 QUAT",
+        "E-TRON LAUNCH EDITION 50 QUAT",
+        "E-TRON S",
+        "E-TRON S LINE 50 QUATTRO",
+        "E-TRON S LINE 55 QUATTRO",
+        "E-TRON S QUATTRO",
+        "E-TRON S SPORTBACK",
+        "E-TRON SPORT 50 QUATTRO",
+        "E-TRON SPORT 55 QUATTRO",
+        "e-tron Sportback 50",
+        "E-TRON SPORTBACK 50",
+        "e-tron Sportback 55",
+        "E-TRON SPORTBACK 55",
+        "E-TRON TECHNIK 50 QUATTRO",
+        "E-TRON TECHNIK 55 QUATTRO",
+        "E-TRON VORSPRUNG 50 QUATTRO",
+        "E-TRON VORSPRUNG 55 QUATTRO"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 39,
+      "registrations": 13155,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce46a4176ba2a47191c5",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 1,
+      "commercialNames": [
+        "E-TRON",
+        "E-TRON 55"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3368902a51b4847cf7eb",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 40,
+      "commercialNames": [
+        "E-TRON",
+        "E-TRON 50",
+        "E-TRON 55",
+        "E-TRON SPORTBACK 50",
+        "E-TRON SPORTBACK 55"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 13,
+      "registrations": 693,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb96b453d7598936b9e7",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "E-TRON S SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53b6b15aefcf2bb14ea8",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "E-TRON 50",
+        "E-TRON 55",
+        "E-TRON SPORTBACK 55"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ed08ac5673545049ee6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6811a12ea0323d2dec6a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68e143f6465577fc6075",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "E TRON 50",
+        "E TRON SPORTBACK 50",
+        "e-tron 50",
+        "e-tron Sportback 50"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 8767,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a9c37f1030631a9ece2",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c487ce7117fcfb0b3a4",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 138,
+      "commercialNames": [
+        "e-tron S",
+        "e-tron S Sportback"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a459f2758e07097659b9",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bee6c8b61a5a7f0ab628",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "Audi e-tron",
+        "E TRON 55",
+        "E TRON SPORTBACK 55",
+        "e-tron",
+        "e-tron 55",
+        "E-TRON 55",
+        "e-tron Sportback 55",
+        "E-TRON SPORTBACK 55"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 11496,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7d3679fd0c49b482dae",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5ccbc0e21c8df0857c6",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 157,
+      "commercialNames": [
+        "E TRON S",
+        "E TRON S SPORTBACK",
+        "e-tron S",
+        "e-tron S Sportback"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 648,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-913853abdfaad9631c2b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 158,
+      "commercialNames": [
+        "AUDI E-TRON",
+        "E-TRON",
+        "E-TRON 50",
+        "E-TRON 50 / /",
+        "E-TRON 55",
+        "E-TRON 55 / /",
+        "E-TRON SPORTBACK 50",
+        "E-TRON SPORTBACK 50 / /",
+        "E-TRON SPORTBACK 55",
+        "E-TRON SPORTBACK 55 / /",
+        "E-TRON SPORTBAKC"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 34,
+      "registrations": 47173,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af3c4802d723209d3f75",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 169,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b55d5aa5b0e3b26089c",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 172,
+      "commercialNames": [
+        "Audi e-tron",
+        "E TRON 50",
+        "E TRON 55",
+        "E TRON SPORTBACK 50",
+        "E TRON SPORTBACK 55",
+        "E-TRON",
+        "e-tron 50",
+        "e-tron 55",
+        "e-tron Sportback 50",
+        "e-tron Sportback 55"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 17,
+      "registrations": 14762,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f18913a1a46e55a0fbd1",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7ff187d2b49c211b06a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 226,
+      "commercialNames": [
+        "AUDI E-TRON",
+        "AUDI E-TRON S",
+        "AUDI E-TRON S SPORTBACK",
+        "E-TRON",
+        "E-TRON 55",
+        "E-TRON S",
+        "E-TRON S / /",
+        "E-TRON S SPORTBACK"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 3353,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82edc98bf3b22bb9121b",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "AUDI E-TRON",
+        "E-TRON",
+        "e-tron 50",
+        "E-TRON 50",
+        "E-TRON S",
+        "E-TRON S SPORTBACK",
+        "e-tron Sportback 50",
+        "E-TRON SPORTBACK 50"
+      ],
+      "sourceMakeNames": [
+        "AUDI",
+        "Audi"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 10384,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ab2de5b25ac29699b7a",
+      "brandId": "audi",
+      "brand": "Audi",
+      "canonicalModel": "e-tron",
+      "modelId": "audi/e-tron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "AUDI E-TRON"
+      ],
+      "sourceMakeNames": [
+        "AUDI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

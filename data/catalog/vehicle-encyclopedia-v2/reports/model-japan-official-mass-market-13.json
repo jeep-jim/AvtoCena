@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerOrGovernmentIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 8,
+    "newModels": 8,
+    "officialManufacturerSources": 8,
+    "officialGovernmentSources": 2,
+    "newMlitWorkbookSources": 2,
+    "totalNewSources": 10,
+    "modelsWithMlitIntersection": 8
+  },
+  "reviewed": [
+    {
+      "id": "audi/tt-rs",
+      "canonicalName": "TT RS",
+      "officialSourceId": "src-audi-tt-rs-japan-archive-2026",
+      "exactSourceNames": [
+        "TTRS Coupe",
+        "TTRS Coupé (S-tronic)",
+        "TTRS Roadster"
+      ],
+      "mlitCandidateIdentities": 3,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2022
+      ]
+    },
+    {
+      "id": "bmw/6-series",
+      "canonicalName": "6 Series",
+      "officialSourceId": "src-bmw-6-series-japan-archive-2026",
+      "exactSourceNames": [
+        "BMW 630i グラン ツーリスモ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2018,
+        2019,
+        2020
+      ]
+    },
+    {
+      "id": "bmw/7-series",
+      "canonicalName": "7 Series",
+      "officialSourceId": "src-bmw-7-series-japan-archive-2026",
+      "exactSourceNames": [
+        "BMW 740i"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    },
+    {
+      "id": "bmw/8-series",
+      "canonicalName": "8 Series",
+      "officialSourceId": "src-bmw-8-series-japan-archive-2026",
+      "exactSourceNames": [
+        "BMW 840i クーペ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2022
+      ]
+    },
+    {
+      "id": "mini/paceman",
+      "canonicalName": "Paceman",
+      "officialSourceId": "src-mini-paceman-japan-archive-2026",
+      "exactSourceNames": [
+        "MINI Cooper ペースマン"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017
+      ]
+    },
+    {
+      "id": "mercedes-benz/g-class",
+      "canonicalName": "G-Class",
+      "officialSourceId": "src-mercedes-benz-g-class-japan-current-2026",
+      "exactSourceNames": [
+        "G350d"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "mercedes-benz/r-class",
+      "canonicalName": "R-Class",
+      "officialSourceId": "src-mercedes-benz-r-class-japan-archive-2026",
+      "exactSourceNames": [
+        "R350 4MATIC"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "mercedes-benz/s-class",
+      "canonicalName": "S-Class",
+      "officialSourceId": "src-mercedes-benz-s-class-japan-current-2026",
+      "exactSourceNames": [
+        "S450"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ]
+    }
+  ]
+}

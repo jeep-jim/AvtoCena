@@ -1,0 +1,7130 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 47,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-2939b0a07dfa36ab515f",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LC",
+      "modelId": "lexus/lc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4969,
+      "powerKw": 341,
+      "commercialNames": [
+        "LC",
+        "LC 500 CONVERTIBLE"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25576f9fa7598de5b56c",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LM",
+      "modelId": "lexus/lm",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "LM",
+        "LM 350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 111,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2491069cb15a40fb617",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LM",
+      "modelId": "lexus/lm",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "LM 350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19d389459a36d1235a54",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LM",
+      "modelId": "lexus/lm",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 108,
+      "commercialNames": [
+        "LM"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5266ffded01620b9059",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LS",
+      "modelId": "lexus/ls",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": null,
+      "commercialNames": [
+        "LS 500H F SPORT AUTO",
+        "LS 500H PREMIUM 4X4 AUTO",
+        "LS 500H PREMIUM AUTO",
+        "LS 500H TAKUMI 4X4 AUTO"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49d38db928dc61c2c41f",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LS",
+      "modelId": "lexus/ls",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 220,
+      "commercialNames": [
+        "LEXUS LS 500H",
+        "LS",
+        "LS 500H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d555aa75c3a3fad8b48b",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LS",
+      "modelId": "lexus/ls",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4293,
+      "powerKw": 207,
+      "commercialNames": [
+        "LS 430"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5023768e53151928f38",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LX",
+      "modelId": "lexus/lx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5663,
+      "powerKw": 270,
+      "commercialNames": [
+        "LX 570"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-587da0df637a32849960",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LX",
+      "modelId": "lexus/lx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4664,
+      "powerKw": 173,
+      "commercialNames": [
+        "LX 470"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db88b76bad0f1cb5e4e2",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LX",
+      "modelId": "lexus/lx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3346,
+      "powerKw": 226,
+      "commercialNames": [
+        "LX"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4098279fa69a41b27ba7",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "LX",
+      "modelId": "lexus/lx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3445,
+      "powerKw": 305,
+      "commercialNames": [
+        "LX 600"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1b3e574ae7cf4333715",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": null,
+      "commercialNames": [
+        "NX 300H 4X2 CVT",
+        "NX 300H CVT",
+        "NX 300H F SPORT CVT",
+        "NX 300H PREMIUM CVT",
+        "NX 300H TAKUMI CVT"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 4345,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdda120b60e54da5bccb",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": 114,
+      "commercialNames": [
+        "LEXUS NX300H",
+        "NX",
+        "NX 300H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 27967,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21348da29e64678a0889",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": 155,
+      "commercialNames": [
+        "LEXUS NX300H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1012,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7be2774f8827fb52fd2",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "LEXUS NX",
+        "LEXUS NX350H",
+        "NX",
+        "NX 350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 26568,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0e3574840f3ba64b01b",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 131,
+      "commercialNames": [
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5028646cb86b28a5d79e",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2494,
+      "powerKw": 114,
+      "commercialNames": [
+        "LEXUS NX300H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd1a948017f16c03328d",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de56fc11e3b04e34efa3",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 174,
+      "commercialNames": [
+        "LEXUS NX350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 707,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b300cbe06d9b1ca65d68",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "LEXUS NX450H PLUS",
+        "LEXUS NX450H+",
+        "NX"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 23348,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7c1da6832ead696472c",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 174,
+      "commercialNames": [
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1609,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3efba3fbe9007059ef48",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 134,
+      "commercialNames": [
+        "LEXUS NX350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-755c42f9586d7d0f4d87",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 141,
+      "commercialNames": [
+        "LEXUS NX350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d494b8bf4ab39a1d5f35",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "LEXUS NX350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87562e71f5b1f66ffea7",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "LEXUS NX350H",
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2199,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dfa93d8d1c69949624c",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 108,
+      "commercialNames": [
+        "LEXUS NX350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 527,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d17a72bae648a67a2469",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "LEXUS NX350H",
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 255,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f84c9f08994ed8b3ddb",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "NX",
+      "modelId": "lexus/nx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": 108,
+      "commercialNames": [
+        "LEXUS NX350H",
+        "LEXUS NX450H PLUS",
+        "LEXUS NX450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1083,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7f29eaa4aea6dace55c",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RC",
+      "modelId": "lexus/rc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": null,
+      "commercialNames": [
+        "RC 300H CVT",
+        "RC 300H F SPORT CVT",
+        "RC 300H TAKUMI CVT"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84c01789897d39d01b29",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RC",
+      "modelId": "lexus/rc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2494,
+      "powerKw": 133,
+      "commercialNames": [
+        "LEXUS RC300H",
+        "RC 300H",
+        "RC300H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd5fee3a6003cb6aeb3a",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RC F",
+      "modelId": "lexus/rc-f",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4969,
+      "powerKw": null,
+      "commercialNames": [
+        "RC F AUTO",
+        "RC F TRACK EDITION AUTO"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70ba9ec8f2b9d3dab48d",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RC F",
+      "modelId": "lexus/rc-f",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4969,
+      "powerKw": 341,
+      "commercialNames": [
+        "LEXUS RC F",
+        "RC F"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 215,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32e8063d05853278c7cb",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 175,
+      "commercialNames": [
+        "RX 300"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3fe5611a44f57eda11b",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": null,
+      "commercialNames": [
+        "RX 450H CVT",
+        "RX 450H F SPORT CVT",
+        "RX 450H TAKUMI CVT"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1751,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70f7443e0c690a9bdc8a",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 193,
+      "commercialNames": [
+        "RX",
+        "RX 450H",
+        "RX 450HL"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 107,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f39b25c4e280fa253111",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "RX"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8992b6ab8458a103f3f0",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "RX",
+        "RX 450H+"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e9663933f664b90127d",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2487,
+      "powerKw": 140,
+      "commercialNames": [
+        "RX",
+        "RX 350H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f4f50da3e6b577476f2",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RX",
+      "modelId": "lexus/rx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3456,
+      "powerKw": 216,
+      "commercialNames": [
+        "RX 350L"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d430d309080f62b36224",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RZ",
+      "modelId": "lexus/rz",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "LEXUS RZ 450",
+        "LEXUS RZ 450E"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d158226f2621c13bf3d9",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RZ",
+      "modelId": "lexus/rz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "RZ",
+        "RZ 300E",
+        "RZ 450E"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed7446e103c4bb2fc8a2",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "RZ",
+      "modelId": "lexus/rz",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "RZ 450E"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 65,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b0221e182238e791434",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "UX 300E"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c19f743f9ff4ccb1977c",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": null,
+      "commercialNames": [
+        "UX 250H + CVT",
+        "UX 250H 4X2 CVT",
+        "UX 250H F SPORT 4X2 CVT",
+        "UX 250H F SPORT CVT",
+        "UX 250H TAKUMI 4X2 CVT",
+        "UX 250H TAKUMI CVT"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5094,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b03fd55d60cafc2a15f",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "LEXUS UX250H",
+        "UX",
+        "UX 250H",
+        "UX 300H",
+        "UX250H",
+        "UX250H / 2.0 / E-CVT",
+        "UX250H / 2.0 / E-CVT AWD",
+        "UX250H 20 E-CVT",
+        "UX250H 20 E-CVT AWD",
+        "UX250H AWD"
+      ],
+      "sourceMakeNames": [
+        "Lexus",
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 75062,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b23a81a398c41a676b72",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1987,
+      "powerKw": 127,
+      "commercialNames": [
+        "UX250H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-769235dff4748dc3f88e",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1987,
+      "powerKw": 112,
+      "commercialNames": [
+        "LEXUS UX250H"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43c6389fec7fe5a0b704",
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "canonicalModel": "UX",
+      "modelId": "lexus/ux",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 57,
+      "commercialNames": [
+        "UX"
+      ],
+      "sourceMakeNames": [
+        "LEXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-131efe63689a509ea20c",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Aviator",
+      "modelId": "lincoln/aviator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2956,
+      "powerKw": 261,
+      "commercialNames": [
+        "AVIATOR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6821e6f6b8fc42686128",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Aviator",
+      "modelId": "lincoln/aviator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2956,
+      "powerKw": 298,
+      "commercialNames": [
+        "LINCOLN AVIATOR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01cd886446898d358762",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Aviator",
+      "modelId": "lincoln/aviator",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 294,
+      "commercialNames": [
+        "LINCOLN AVIATOR GT"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ce33c00e05a207e75bc",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Aviator",
+      "modelId": "lincoln/aviator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2967,
+      "powerKw": 298,
+      "commercialNames": [
+        "LINCOLN AVIATOR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f04ca7de1987767a8f13",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Aviator",
+      "modelId": "lincoln/aviator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2956,
+      "powerKw": 368,
+      "commercialNames": [
+        "LINCOLN AVIATOR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-231f113887fc435120a4",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Continental",
+      "modelId": "lincoln/continental",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 227,
+      "commercialNames": [
+        "CONTINENTAL LIMOUSINE"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b59a08d8229bc3ac67c4",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Continental",
+      "modelId": "lincoln/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 177,
+      "commercialNames": [
+        "LINCOLN CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d05909d8be30aee66bf5",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Continental",
+      "modelId": "lincoln/continental",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4942,
+      "powerKw": 167,
+      "commercialNames": [
+        "CONTINENTAL"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cd2d1234fd50a8fe4ee",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Corsair",
+      "modelId": "lincoln/corsair",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 186,
+      "commercialNames": [
+        "LINCOLN CORSAIR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13b98e12686b01c5e422",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Mkc",
+      "modelId": "lincoln/mkc",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 149,
+      "commercialNames": [
+        "LINCOLN MKC"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f32d13d682399211c2b",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Mkx",
+      "modelId": "lincoln/mkx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2688,
+      "powerKw": 256,
+      "commercialNames": [
+        "LINCOLN MKX RES."
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a43766638c2f70f4213d",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Mkz",
+      "modelId": "lincoln/mkz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 140,
+      "commercialNames": [
+        "LINCOLN MKZ"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0864895cba14387a65ab",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Mkz",
+      "modelId": "lincoln/mkz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 149,
+      "commercialNames": [
+        "LINCOLN MKZ"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-feab7ba645d1847731a8",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Mkz",
+      "modelId": "lincoln/mkz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 172,
+      "commercialNames": [
+        "LINCOLN MKZ"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b626013d632fb719088a",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Nautilus",
+      "modelId": "lincoln/nautilus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 165,
+      "commercialNames": [
+        "LINCOLN NAUTILUS"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0882c53aafd0198614a6",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Nautilus",
+      "modelId": "lincoln/nautilus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 186,
+      "commercialNames": [
+        "NAUTILUS"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2460843222833472e719",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Nautilus",
+      "modelId": "lincoln/nautilus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2694,
+      "powerKw": 237,
+      "commercialNames": [
+        "NAUTILUS"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-674d15aa0e58fa839b5d",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Nautilus",
+      "modelId": "lincoln/nautilus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2694,
+      "powerKw": 242,
+      "commercialNames": [
+        "LINCOLN NAUTILUS"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91df5abfe013094d8e18",
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "canonicalModel": "Navigator",
+      "modelId": "lincoln/navigator",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 5403,
+      "powerKw": 224,
+      "commercialNames": [
+        "LINCOLN NAVIGATOR"
+      ],
+      "sourceMakeNames": [
+        "LINCOLN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8506ed031cf6f743b212",
+      "brandId": "livan",
+      "brand": "Livan",
+      "canonicalModel": "X3 Pro",
+      "modelId": "livan/x3-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 76,
+      "commercialNames": [
+        "X3 PRO"
+      ],
+      "sourceMakeNames": [
+        "LIVAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60dd82f39a11c593273c",
+      "brandId": "livan",
+      "brand": "Livan",
+      "canonicalModel": "X3 Pro",
+      "modelId": "livan/x3-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 76,
+      "commercialNames": [
+        "LIVAN X3 PRO",
+        "X3 PRO"
+      ],
+      "sourceMakeNames": [
+        "LIVAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 334,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-797594dbce13f9e7a2ce",
+      "brandId": "livan",
+      "brand": "Livan",
+      "canonicalModel": "X3 Pro",
+      "modelId": "livan/x3-pro",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 76,
+      "commercialNames": [
+        "X3 PRO"
+      ],
+      "sourceMakeNames": [
+        "LIVAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-790a74d60e20d8fe21de",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d0862e511b533e7c5b0",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e91e589e033ef89b0792",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 118,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aaf989b8e11b224961ec",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b707a33795004604c27",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 450,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1548,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45b95c59a6873872f7d8",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 675,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 298,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6697d22ec465b64531c",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Eletre",
+      "modelId": "lotus/eletre",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ELETRE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-428462c6edf19d20dfb5",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise",
+      "modelId": "lotus/elise",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1796,
+      "powerKw": 90,
+      "commercialNames": [
+        "ELISE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c96e530fec22f00d23db",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise",
+      "modelId": "lotus/elise",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 162,
+      "commercialNames": [
+        "ELISE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b70292360ff623db8d7",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise",
+      "modelId": "lotus/elise",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 161,
+      "commercialNames": [
+        "ELISE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09bf5741e9bb06c631ab",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise",
+      "modelId": "lotus/elise",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 178,
+      "commercialNames": [
+        "ELISE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f46d0a9915110530dc2",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Cup 250",
+      "modelId": "lotus/elise-cup-250",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "ELISE CUP 250",
+        "Elise Cup 250"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-378af85e28b4eda0e278",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Cup 250",
+      "modelId": "lotus/elise-cup-250",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 182,
+      "commercialNames": [
+        "Elise Cup 250",
+        "ELISE CUP 250"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 109,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf54d13f8e2634c379f0",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Cup 250",
+      "modelId": "lotus/elise-cup-250",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 183,
+      "commercialNames": [
+        "ELISE CUP 250"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 175,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ea4f21b817f2d19b6bb",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Cup 250",
+      "modelId": "lotus/elise-cup-250",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1789,
+      "powerKw": 182,
+      "commercialNames": [
+        "ELISE CUP 250"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5cd3e0f650fbf6b9e58",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Cup 250",
+      "modelId": "lotus/elise-cup-250",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 179,
+      "commercialNames": [
+        "ELISE CUP 250"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2aabff774839b83e10eb",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 220",
+      "modelId": "lotus/elise-sport-220",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1356,
+      "powerKw": 162,
+      "commercialNames": [
+        "ELISE SPORT 220"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-740a9ed903a132b83a99",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 220",
+      "modelId": "lotus/elise-sport-220",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "ELISE SPORT 220"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 56,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-081be9d0c8e0ddae6401",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 220",
+      "modelId": "lotus/elise-sport-220",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 161,
+      "commercialNames": [
+        "ELISE SPORT 220"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 167,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ff49adada352a197db7",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 220",
+      "modelId": "lotus/elise-sport-220",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 162,
+      "commercialNames": [
+        "ELISE SPORT 220"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 348,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b1df983801e640ff91f",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 240",
+      "modelId": "lotus/elise-sport-240",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "ELISE SPORT 240"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0c88c2e159d29502746",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 240",
+      "modelId": "lotus/elise-sport-240",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 178,
+      "commercialNames": [
+        "ELISE SPORT 240"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27f818c90e6cd4e8f83e",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Elise Sport 240",
+      "modelId": "lotus/elise-sport-240",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 179,
+      "commercialNames": [
+        "ELISE SPORT 240"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca157d10d27f66717d02",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya",
+      "modelId": "lotus/emeya",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "EMEYA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9716cf7a2cd292025943",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya",
+      "modelId": "lotus/emeya",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "EMEYA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e82b251b268a94a79169",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya",
+      "modelId": "lotus/emeya",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 450,
+      "commercialNames": [
+        "EMEYA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 230,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23f91ea60a534b196b0b",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya",
+      "modelId": "lotus/emeya",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 675,
+      "commercialNames": [
+        "EMEYA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00e92ef7528d742bb039",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya",
+      "modelId": "lotus/emeya",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 225,
+      "commercialNames": [
+        "EMEYA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2572072bb5193c15c132",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emeya S",
+      "modelId": "lotus/emeya-s",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 450,
+      "commercialNames": [
+        "EMEYA S"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d08e051e46aacd346ceb",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA",
+        "EMIRA CLARK EDITION",
+        "EMIRA V6 400HP AUTO SPORT CHASSIS",
+        "EMIRA V6 400HP AUTO TOUR CHASSIS",
+        "EMIRA V6 400HP MANUAL SPORT CHASSIS",
+        "EMIRA V6 400HP MANUAL TOUR CHASSIS",
+        "EMIRA V6 MANUAL SPORT CHASSIS",
+        "EMIRA V6 MANUAL TOUR CHASSIS",
+        "EMIRA V6 SE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 704,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35f68b256c6650d85dca",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 3456,
+      "powerKw": 296,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ede557c46c223181525",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "hydrogen",
+      "engineCc": 3456,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2dc6b8e4987c0762d4e",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3456,
+      "powerKw": 90,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cdbc25f50c26f5f7ec0",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3456,
+      "powerKw": 95,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-293cc35d3367fc0422da",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3456,
+      "powerKw": 296,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61afc9421a20bbd30c8f",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": null,
+      "powerKw": 268,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba0f68867d6e3351f9bb",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1991,
+      "powerKw": 268,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 538,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc27311a37d57e3adf98",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 3495,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0104f327e750570a11a4",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 3456,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8aa235d2913ab5018ef0",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira",
+      "modelId": "lotus/emira",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1991,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 35,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d40382983260b173980b",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Emira Turbo Se",
+      "modelId": "lotus/emira-turbo-se",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1991,
+      "powerKw": 298,
+      "commercialNames": [
+        "EMIRA TURBO SE"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0682358828eea7701442",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Esprit",
+      "modelId": "lotus/esprit",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2170,
+      "powerKw": 161,
+      "commercialNames": [
+        "ESPRIT"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f517095ea116669e626a",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Evora",
+      "modelId": "lotus/evora",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": null,
+      "commercialNames": [
+        "EVORA GT410 SPORT",
+        "EVORA SPORT 410 AUTO"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b50665e307060f3a48ca",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Evora",
+      "modelId": "lotus/evora",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 306,
+      "commercialNames": [
+        "EVORA 410",
+        "EVORA GT 410 4 SEAT AUTOMATIC GEARBOX",
+        "EVORA GT 410 4 SEAT MANUAL GEARBOX",
+        "EVORA SPORT 410"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a79ef02cdb5755bb5c8d",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": null,
+      "commercialNames": [
+        "EXIGE CUP 430",
+        "EXIGE SPORT 350",
+        "EXIGE SPORT 410"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 82,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b54e1a9b8b9331eb35d7",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 257,
+      "commercialNames": [
+        "EXIGE",
+        "EXIGE SPORT 350"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-767889ec238dbca01248",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 258,
+      "commercialNames": [
+        "EXIGE",
+        "EXIGE SPORT 350"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1533bd2ced2b0054b8c7",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 306,
+      "commercialNames": [
+        "EXIGE SPORT 390",
+        "EXIGE SPORT 410"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 242,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfe238b698ca7235d669",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 321,
+      "commercialNames": [
+        "EXIGE",
+        "EXIGE CUP 420",
+        "EXIGE CUP 430"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 121,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d0e6b2b0efe3f6a21c2c",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2456,
+      "powerKw": 296,
+      "commercialNames": [
+        "EXIGE SPORT 390"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8388081a47c7569bc60f",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 296,
+      "commercialNames": [
+        "EXIGE SPORT 390",
+        "EXIGE SPORT 390 / /"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 87,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9685c7a2cb2dbc993573",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3456,
+      "powerKw": 313,
+      "commercialNames": [
+        "EXIGE CUP 430",
+        "EXIGE SPORT 420"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 90,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d513c01c96d0451216c6",
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "canonicalModel": "Exige",
+      "modelId": "lotus/exige",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3458,
+      "powerKw": 313,
+      "commercialNames": [
+        "EXIGE SPORT 420"
+      ],
+      "sourceMakeNames": [
+        "LOTUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bdc520da8c4ea7855f0",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 208,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS",
+        "LUCID USA INC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6beec1648cb8a0c8673c",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 271,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7db2ebfad9dad27f60e3",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 464,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS",
+        "LUCID USA INC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81a327f909c78168075e",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 597,
+      "commercialNames": [
+        "AIR GRAND TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa9d0565e26ae451de99",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 829,
+      "commercialNames": [
+        "AIR DREAM EDITION PERFORM",
+        "AIR DREAM PERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6302f9d77523dbf9235f",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 156,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS",
+        "LUCID USA INC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52b9a4a911435bbb19f1",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 164,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS",
+        "LUCID USA INC"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1f22b661e48339abebd",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 202,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f8e662835800806054c",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 234,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-975f836d77753c5d90cc",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 255,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 183,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1927295d5ac91f11eec1",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 375,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 150,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd51d85cf90e9616d0b7",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 466,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 106,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a345d1520b2eb58eb5b3",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 500,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 57,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ff2a058d3070bc21a44",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 674,
+      "commercialNames": [
+        "AIR",
+        "LUCID AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31634773e2365a5e6dee",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 539,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cc4be6839a9af823723",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-55570b4a3c9b81507e21",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 276,
+      "commercialNames": [
+        "AIR GRAND TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61f8f29ddbea8d66d99e",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 325,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 59,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cc6f15a23fcc382d197",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 328,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f682e41531321caf3722",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 411,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-467c20748be80f5612ca",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 734,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-247974378ff0a51e9a6e",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 953,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f272d19e7399448726b2",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air",
+      "modelId": "lucid/air",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 964,
+      "commercialNames": [
+        "AIR"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f6df55531a3b99a9943",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air Pure",
+      "modelId": "lucid/air-pure",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "AIR PURE"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-884fdcf4e199229d9fca",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air Sapphire",
+      "modelId": "lucid/air-sapphire",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 301,
+      "commercialNames": [
+        "AIR SAPPHIRE"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-208eeb64c93358ff71cb",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air Sapphire",
+      "modelId": "lucid/air-sapphire",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 473,
+      "commercialNames": [
+        "AIR SAPPHIRE"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cc9fc4c9ff84ce5394b",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Air Touring",
+      "modelId": "lucid/air-touring",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 202,
+      "commercialNames": [
+        "AIR TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f08f14ba79d45424e450",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 194,
+      "commercialNames": [
+        "LUCID GRAVITY"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5fd3d8ff345ef4dae29",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 204,
+      "commercialNames": [
+        "GRAVITY TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f08fc8b12c33601c23a2",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 271,
+      "commercialNames": [
+        "GRAVITY GRAND TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10cc77612445778e7152",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 330,
+      "commercialNames": [
+        "GRAVITY GRAND TOURING"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcdd939fd1732d2ce7c8",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 444,
+      "commercialNames": [
+        "LUCID GRAVITY"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ec07a1cdfd666d2543b",
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "canonicalModel": "Gravity",
+      "modelId": "lucid/gravity",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 638,
+      "commercialNames": [
+        "LUCID GRAVITY"
+      ],
+      "sourceMakeNames": [
+        "LUCID MOTORS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5e45bc5c0b3f02a05f1",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 105,
+      "commercialNames": [
+        "Lynk & Co 01",
+        "LYNK & CO 01"
+      ],
+      "sourceMakeNames": [
+        "LYNK & CO",
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2300,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5081f4afd4e0857f3c9c",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "01",
+        "Lynk & Co 01",
+        "LYNK & CO 01",
+        "LYNK AND CO 01",
+        "LYNK AND CO 01 / 1.5 / T-GDI LOUDER PHEV 6.6 KW",
+        "LYNK AND CO 01 1.5 T-GDI LOUDER PHEV 6.6 KW",
+        "LYNK AND CO 01 1.5 T-GDI PHEV AUT.",
+        "LYNK&CO 01"
+      ],
+      "sourceMakeNames": [
+        "LYNK & CO",
+        "LYNK AND CO",
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 67694,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-560454389d3fa7aecc7d",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1477,
+      "powerKw": 9,
+      "commercialNames": [
+        "LYNK & CO 01"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1725218122e0a48a071",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 102,
+      "commercialNames": [
+        "LYNK & CO 01"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88d9e278777faa0a5001",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 102,
+      "commercialNames": [
+        "01",
+        "LYNK & CO 01",
+        "LYNK AND CO 01 PHEV AUT."
+      ],
+      "sourceMakeNames": [
+        "LYNK AND CO",
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f296e240fc0c97855b4c",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "01",
+      "modelId": "lynk-and-co/01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 107,
+      "commercialNames": [
+        "LYNK AND CO 01"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 896,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d3c131007a970b5c9f2",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "02",
+      "modelId": "lynk-and-co/02",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "LYNK & CO 02"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f26fb170df9dd41ba67f",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "02",
+      "modelId": "lynk-and-co/02",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "02",
+        "LYNK AND CO 02",
+        "LYNK AND CO 02 BEV AUT."
+      ],
+      "sourceMakeNames": [
+        "LYNK AND CO",
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 443,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bba1c5705bd22bc2063",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "08",
+      "modelId": "lynk-and-co/08",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 102,
+      "commercialNames": [
+        "08"
+      ],
+      "sourceMakeNames": [
+        "LYNK AND CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9ee8b1296b27437d3c0",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "GX6",
+      "modelId": "lynk-and-co/gx6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "GX6"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94e05525c20a15a8cea4",
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "canonicalModel": "GX6",
+      "modelId": "lynk-and-co/gx6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1477,
+      "powerKw": 132,
+      "commercialNames": [
+        "GX6"
+      ],
+      "sourceMakeNames": [
+        "LYNK&CO"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee9ce28ff262b42bbd8b",
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "canonicalModel": "KUV100 NXT",
+      "modelId": "mahindra/kuv100-nxt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1198,
+      "powerKw": 61,
+      "commercialNames": [
+        "KUV 100 NXT LPG"
+      ],
+      "sourceMakeNames": [
+        "MAHINDRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d581d9aac453055c084",
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "canonicalModel": "KUV100 NXT",
+      "modelId": "mahindra/kuv100-nxt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1198,
+      "powerKw": 64,
+      "commercialNames": [
+        "KUV 100",
+        "KUV100",
+        "MAHINDRA KUV 100 NXT LPG"
+      ],
+      "sourceMakeNames": [
+        "MAHINDRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 914,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b479c0e392ffdd778604",
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "canonicalModel": "KUV100 NXT",
+      "modelId": "mahindra/kuv100-nxt",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1198,
+      "powerKw": 64,
+      "commercialNames": [
+        "KUV 100",
+        "KUV 100 NXT",
+        "KUV100",
+        "MAHINDRA KUV 100 NXT"
+      ],
+      "sourceMakeNames": [
+        "MAHINDRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 5657,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35768b5100b63563ba26",
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "canonicalModel": "XUV500",
+      "modelId": "mahindra/xuv500",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2179,
+      "powerKw": 103,
+      "commercialNames": [
+        "MAHINDRA XUV 500"
+      ],
+      "sourceMakeNames": [
+        "MAHINDRA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 176,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9de8fa1f90fc25c11f6",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 75,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b86b08d79d161d92121",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 103,
+      "commercialNames": [
+        "TGE",
+        "TGE 3.140"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 146,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e181b0016dd806101e2e",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 130,
+      "commercialNames": [
+        "MAN TGE L2H2",
+        "TGE",
+        "TGE 3.180 4X4 SB",
+        "TGE PMR"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 436,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fad5f47ff593b86f6ae7",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1986,
+      "powerKw": 130,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fda3e43f3dac55d79591",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7827b932113a0c3568f3",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d42cc6b58f2cd469f128",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 13,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fb81e790b6a2e4bff3e",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "TGE"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63b2f930732258244d56",
+      "brandId": "man",
+      "brand": "MAN",
+      "canonicalModel": "TGE",
+      "modelId": "man/tge",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TGE",
+        "TGE 3.140"
+      ],
+      "sourceMakeNames": [
+        "MAN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15167e29928fc9e19d60",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": null,
+      "commercialNames": [
+        "GHIBLI DV6 AUTO",
+        "GHIBLI GRANLUSSO V6 D AUTO",
+        "GHIBLI GRANSPORT V6 D AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 80,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-304d4344a44f629e67d1",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 184,
+      "commercialNames": [
+        "GHIBLI DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 470,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ea042af5b873a3de2c9",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 202,
+      "commercialNames": [
+        "GHIBLI",
+        "GHIBLI / DIESEL /",
+        "GHIBLI DIESEL",
+        "MASERATI GHIBLI",
+        "MASERATI GHIBLI DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 495,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9af5f6a273a276a65faf",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1955,
+      "powerKw": 243,
+      "commercialNames": [
+        "Ghibli Hybrid",
+        "GHIBLI HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb94c0adf21a1f6cfeb1",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "GHIBLI GRANLUSSO L4 MHEV AUTO",
+        "GHIBLI GRANSPORT L4 MHEV AUTO",
+        "GHIBLI L4 MHEVAUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51cc35972e6c1b50d33a",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "GHIBLI",
+        "GHIBLI GT HYBRID",
+        "GHIBLI HYBRID",
+        "GHIBLI MHEV",
+        "MASERATI GHIBLI HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 2009,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-052454f43a16618c54f8",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": null,
+      "commercialNames": [
+        "GHIBLI GRANLUSSO V6 AUTO",
+        "GHIBLI GRANSPORT V6 AUTO",
+        "GHIBLI S",
+        "GHIBLI S GRANSPORT V6 AUTO",
+        "GHIBLI V6 AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9576e8a070d0a6852d46",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 257,
+      "commercialNames": [
+        "GHIBLI",
+        "GHIBLI MODENA",
+        "GHIBLI S"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-454b1cd8dcf1b385dc86",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 301,
+      "commercialNames": [
+        "GHIBLI"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f30bcfc259db8334dce",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 316,
+      "commercialNames": [
+        "GHIBLI",
+        "GHIBLI HYBRID",
+        "GHIBLI MODENA S",
+        "GHIBLI MODENA S Q4",
+        "GHIBLI S",
+        "GHIBLI S / / Q4",
+        "GHIBLI S Q4",
+        "Ghibli SQ4"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 23,
+      "registrations": 1002,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19289efba73bfb29cbe7",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": null,
+      "commercialNames": [
+        "GHIBLI TROFEO V8 AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f657d39175dbc37e387",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": 427,
+      "commercialNames": [
+        "GHIBLI TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 347,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65c063e012601c228d4d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 27,
+      "commercialNames": [
+        "MASERATI GHIBLI"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e6b4bebece27c6acc6e",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1955,
+      "powerKw": 243,
+      "commercialNames": [
+        "Ghibli GT Hybrid",
+        "Ghibli Hybrid"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46c1272bb10bb528e86d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "GHIBLI GT HYBRID",
+        "Ghibli Hybrid"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad77939b9c64a96a9d30",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Ghibli",
+      "modelId": "maserati/ghibli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2979,
+      "powerKw": 302,
+      "commercialNames": [
+        "GHIBLI"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-657d483320a43f121f21",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4691,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANTURISMO MC STRADALE AUTO",
+        "GRANTURISMO MC STRADALE S-A",
+        "GRANTURISMO SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-862e39e976f511fe2922",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4691,
+      "powerKw": 338,
+      "commercialNames": [
+        "GRAN TURISMO MC",
+        "Gran Turismo MC",
+        "GRAN TURISMO SPORT",
+        "GRANTURISMO",
+        "GRANTURISMO MC",
+        "GRANTURISMO SPORT",
+        "MASERATI GRANTURISMO MC"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 94,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f54f2883af0b27acfcad",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANTURISMO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f25b3a29d86b819284f",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 361,
+      "commercialNames": [
+        "GRANTURISMO",
+        "GRANTURISMO MODENA",
+        "MASERATI GRANTURISMO MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 270,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-822fc3478cf812572ce5",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 404,
+      "commercialNames": [
+        "GRAN TURISMO TROFEO",
+        "GRANTURISMO",
+        "GRANTURISMO MODENA",
+        "GRANTURISMO TROFEO",
+        "MASERATI GRANTURISMO",
+        "MASERATI GRANTURISMO TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 235,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48ff9ce0a6bb359aeca3",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4244,
+      "powerKw": 298,
+      "commercialNames": [
+        "GRAN TURISMO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8664f3e99f63131b7fff",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "GRANTURISMO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-086dfcb28606966f5890",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "GRAN TURISMO FOLGORE",
+        "GRANTURISMO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ca828c61f583ccc18e3",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 527,
+      "commercialNames": [
+        "GRANTURISMO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdad0289adeec1a64a9f",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 572,
+      "commercialNames": [
+        "GRAN TURISMO",
+        "GRAN TURISMO FOLGARE",
+        "GRAN TURISMO FOLGORE",
+        "GRANTURISMO FOLGORE",
+        "GRANTURISMO MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 143,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52f96b8fb28a5a3693f9",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Gran Turismo",
+      "modelId": "maserati/gran-turismo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANTURISMO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95788b54e791badd8138",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4691,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANCABRIO MC AUTO",
+        "GRANCABRIO SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89558a7581809200a362",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 4691,
+      "powerKw": 338,
+      "commercialNames": [
+        "GRANCABRIO MC",
+        "GRANCABRIO SPORT"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6830b5d29097cd70b62a",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "GRANCABRIO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e50d42d5c44204b8614d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 141,
+      "commercialNames": [
+        "GRANCABRIO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-332ef1e06683c328c32a",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 572,
+      "commercialNames": [
+        "GRANCABRIO",
+        "GRANCABRIO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b2d14c9709ac2e7160b",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 404,
+      "commercialNames": [
+        "GRANCABRIO",
+        "GRANCABRIO TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 81,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fe17f4eb61953556503",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 592,
+      "commercialNames": [
+        "GRANCABRIO FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-530dd86773fbb757d518",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grancabrio",
+      "modelId": "maserati/grancabrio",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 361,
+      "commercialNames": [
+        "GRANCABRIO MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b91b8ffba6447476a7f",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 221,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE GT",
+        "GRECALE GT/ MODENA / TROFEO",
+        "GRECALE MODENA",
+        "GRECALE MODENA GRECALE TROFEO",
+        "GRECALE MODENA- GRECALE TROFEO",
+        "MASERATI GRECALE GT"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 4630,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c2027a4294516e89e9f",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE GT",
+        "GRECALE GT MODENA TROFEO",
+        "GRECALE GT/ MODENA / TROFEO",
+        "GRECALE MODENA",
+        "GRECALE MODENA GRECALE TROFEO",
+        "GRECALE MODENA- GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 4018,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9585661b48b696646c2e",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 390,
+      "commercialNames": [
+        "Grecale Trofeo"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-544088fc3e3bca2d0330",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2992,
+      "powerKw": 390,
+      "commercialNames": [
+        "GRECALE GT",
+        "GRECALE MODENA",
+        "GRECALE MODENA GRECALE TROFEO",
+        "GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1538,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79e399416b0e4003e0d7",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "GRECALE FOLGORE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b0631b0716608c59cb6",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 184,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE GT",
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2228,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c79e14df99eb9515a96",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "GRECALE FOLGORE",
+        "GRECALE MODENA TROFEO GT FOLGO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5895ab1d83ff8ce05d3b",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 410,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE FOLGORE",
+        "GRECALE MODENA",
+        "GRECALE MODENA GRECALE TROFEO",
+        "GRECALE MODENA- GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 481,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaf2b47aae796a1435aa",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE GT",
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60e457deda775171a425",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 10,
+      "commercialNames": [
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-503d53bed8a0dccb0311",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 13,
+      "commercialNames": [
+        "GRECALE GT"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ba0b5ae837a92f03ca2",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": 221,
+      "commercialNames": [
+        "GRECALE",
+        "GRECALE GT"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc3b6bb88a09c6006962",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "GRECALE GT",
+        "GRECALE MODENA",
+        "GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0d2eee897771c8ead75",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 205,
+      "commercialNames": [
+        "GRECALE MODENA- GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa1ddaa0be43b72f842e",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2979,
+      "powerKw": 316,
+      "commercialNames": [
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c0af9aab661f855d80c",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": null,
+      "commercialNames": [
+        "GRECALE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-890989da3906cd519626",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 404,
+      "commercialNames": [
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af8a84a8b9cd4d658c04",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Grecale",
+      "modelId": "maserati/grecale",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 463,
+      "commercialNames": [
+        "GRECALE MODENA"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-46d8c9b9ee67d9af52b5",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "GT2 Stradale",
+      "modelId": "maserati/gt2-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 470,
+      "commercialNames": [
+        "GT2 STRADALE",
+        "GT2STRADALE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-492a5954c91cd523c8ff",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "GT2 Stradale",
+      "modelId": "maserati/gt2-stradale",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 471,
+      "commercialNames": [
+        "GT2 STRADALE",
+        "GT2STRADALE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1b6d433bbded0000215",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": null,
+      "commercialNames": [
+        "LEVANTE D V6 AUTO",
+        "LEVANTE GRANLUSSO V6 D AUTO",
+        "LEVANTE GRANSPORT V6 D AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 92,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63b288f52274cdf7e790",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 184,
+      "commercialNames": [
+        "LEVANTE DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1282,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fce70cadfe780303b19",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 202,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ea585ec879d01387de4",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3798,
+      "powerKw": 427,
+      "commercialNames": [
+        "LEVANTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-589fab6c5b9ccd1a5b50",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": null,
+      "commercialNames": [
+        "LEVANTE D V6 AUTO",
+        "LEVANTE GRANLUSSO V6 AUTO",
+        "LEVANTE GRANSPORT V6 AUTO",
+        "LEVANTE S GRANLUSSO V6 AUTO",
+        "LEVANTE S GRANSPORT V6 AUTO",
+        "LEVANTE V6 AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 706,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa61b7ece1b969d530e8",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 27,
+      "commercialNames": [
+        "LEVANTE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e1a759cd79962786a57",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 257,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE MODENA",
+        "Levante S"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2099,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9490a6ba47d2694a9376",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 316,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE MODENA",
+        "LEVANTE MODENA S",
+        "LEVANTE MODENA ULTIMA",
+        "LEVANTE S",
+        "MASERATI LEVANTE S"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 1496,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53b13bbb46d59058f443",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": null,
+      "commercialNames": [
+        "LEVANTE V8 GTS AUTO",
+        "LEVANTE V8 TROFEO AUTO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6862f9d59de9d11ad357",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": 390,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE GTS"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 154,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97f6188574a6376109ff",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": 427,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE MODENA S",
+        "LEVANTE TROFEO",
+        "LEVANTE TROFEO - MODIFICATO ESIOR",
+        "MASERATI LEVANTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 929,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f74a848bc6442365dea7",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": 434,
+      "commercialNames": [
+        "LEVANTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba13dcad9e3d6e8e3384",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3799,
+      "powerKw": 390,
+      "commercialNames": [
+        "LEVANTE GTS"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fd76b332f57b1e7d91d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3799,
+      "powerKw": 427,
+      "commercialNames": [
+        "LEVANTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ea330a2a1d40ebb47d4",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "LEVANTE",
+        "LEVANTE GT",
+        "LEVANTE GT HYBRID",
+        "Levante GT Hybrid",
+        "LEVANTE HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 2076,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

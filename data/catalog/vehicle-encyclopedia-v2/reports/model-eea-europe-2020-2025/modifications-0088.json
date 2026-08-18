@@ -1,0 +1,7114 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 88,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-599b14b572560ffb7515",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90d63ffe39c8af77a9cb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c47d5ac17defe36dc78",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 645,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9fdeddb23371a372afd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6c36e345b1409c7c8e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 840,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6651902b2b199184547d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 190,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ec415308ac7ff6ae22e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tayron",
+      "modelId": "volkswagen/tayron",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TAYRON"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-523e670f7a4d43abc202",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a1694afbea560b219d5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e6a4241794289d017de",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN S TDI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad9e292bac79f1dbe63f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2408,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edf2ab92860cecd542de",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN ASPACE MATCH TDI 4M SA",
+        "TIGUAN ASPACE R-LINE TDI 4M SA",
+        "TIGUAN ASPACE RLINE TEC TDI SA",
+        "TIGUAN ASPACE RLN TEC TDI4M SA",
+        "TIGUAN ASPACE SE NAV TDI 4M SA",
+        "TIGUAN ELEGANCE TDI 4MOTION SA",
+        "TIGUAN ELEGANCE TDI S-A",
+        "TIGUAN LIFE TDI S-A",
+        "TIGUAN MATCH TDI",
+        "TIGUAN MATCH TDI 4MOTION",
+        "TIGUAN MATCH TDI 4MOTION S-A",
+        "TIGUAN MATCH TDI S-A",
+        "TIGUAN R-LINE TDI",
+        "TIGUAN R-LINE TDI 4MOTION",
+        "TIGUAN R-LINE TDI 4MOTION S-A",
+        "TIGUAN R-LINE TDI S-A",
+        "TIGUAN R-LINE TECH TDI",
+        "TIGUAN R-LINE TECH TDI 4M SA",
+        "TIGUAN R-LINE TECH TDI 4MOTION",
+        "TIGUAN R-LINE TECH TDI S-A",
+        "TIGUAN R-LINE TECH TSI 4M SA",
+        "TIGUAN S TDI",
+        "TIGUAN S TDI 4MOTION",
+        "TIGUAN S TDI 4MOTION S-A",
+        "TIGUAN SE NAVIGATION TDI S-A",
+        "TIGUAN SE TDI 4MOTION",
+        "TIGUAN SEL TDI",
+        "TIGUAN SEL TDI 4MOTION",
+        "TIGUAN SEL TDI 4MOTION S-A",
+        "TIGUAN SEL TDI S-A",
+        "TIGUAN SEL TSI 4MOTION S-A",
+        "TIGUAN SEL TSI EVO S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 36,
+      "registrations": 22980,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ca677ba77f941368129",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN V W",
+        "VOLKSWAGEN VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 14557,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bdb488ed7bae2bcad84",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TDI",
+        "TIGUAN / 20 / TDI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 15361,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61d8f22bf05818bac24e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95962542dab66cdc53d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 103,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05efc31d4236661d8fbd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TDI",
+        "TIGUAN / 2.0 / TDI 4M",
+        "TIGUAN / 2.0 / TDI 4M AUT.",
+        "TIGUAN / 2.0 / TDI AUT.",
+        "TIGUAN / 20 / TDI",
+        "TIGUAN / 20 / TDI 4M AUT",
+        "TIGUAN / 20 / TDI AUT",
+        "TIGUAN 2.0 TDI AUT.",
+        "TIGUAN 20 TDI",
+        "TIGUAN 20 TDI 4M",
+        "TIGUAN 20 TDI 4M AUT",
+        "TIGUAN 20 TDI AUT",
+        "TIGUAN ELEGANCE 2.0 TDI",
+        "VOLKSWAGEN TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "Volkswagen",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGEN`",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 48,
+      "registrations": 339472,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-147e38cb5749f45453e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TDI 4M AUT.",
+        "TIGUAN 20 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN`",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 5856,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72cb7595cd0925a8e0e7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TDI 4M AUT.",
+        "TIGUAN / 20 / TDI 4M AUT",
+        "TIGUAN 20 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 80658,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3ba31ca545bf33c043f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 176,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 20 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1211,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1db756ee55bead0f5c7f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ad52f526a30612bfba9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "Tiguan",
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c682b701aab7cf84ae4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18dffa2c7bd07dbd7167",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN ASPACE MATCH TSI EVO SA",
+        "TIGUAN ASPCE RLN TCH TSIEVO SA",
+        "TIGUAN ELEGANCE TSI S-A",
+        "TIGUAN LIFE TSI",
+        "TIGUAN LIFE TSI S-A",
+        "TIGUAN MATCH TSI EVO",
+        "TIGUAN MATCH TSI EVO S-A",
+        "TIGUAN R-LINE TECH TSI EVO S-A",
+        "TIGUAN R-LINE TSI EVO S-A",
+        "TIGUAN R-LINE TSI S-A",
+        "TIGUAN S TSI EVO",
+        "TIGUAN SEL TDI 4MOTION S-A",
+        "TIGUAN SEL TSI 4MOTION S-A",
+        "TIGUAN SEL TSI EVO S-A",
+        "TIGUAN TSI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 29284,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58ae1de8cc72566c2271",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8523,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc081f2d5eabd0b8dcef",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIGUAN",
+        "Tiguan",
+        "TIGUAN / 1.5 / TSI",
+        "TIGUAN / 1.5 / TSI AUT.",
+        "TIGUAN 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGEN`",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 51575,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3020b5a262cbdeecd103",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN",
+        "Tiguan",
+        "TIGUAN / 1.5 / TSI",
+        "TIGUAN / 1.5 / TSI AUT.",
+        "TIGUAN / 15 / TSI",
+        "TIGUAN / 15 / TSI AUT",
+        "TIGUAN 1.5 TSI AUT.",
+        "TIGUAN 15 TSI",
+        "TIGUAN 15 TSI AUT",
+        "TIGUAN ELEGANCE",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGEN`",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 41,
+      "registrations": 244157,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-632f8dc7dfb413b09916",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "Volkswagen"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb6b863f545e3af8f2ca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN ASPACE RLN TEC TSI4M SA",
+        "TIGUAN R-LINE TECH TDI 4M SA",
+        "TIGUAN R-LINE TECH TSI 4M SA",
+        "TIGUAN SEL TSI 4MOTION S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2699,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b222f08b9af4aa4e68d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN V W"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 248,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a2d08de9477c6a29c44",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TSI 4M AUT.",
+        "TIGUAN / 20 / TSI 4M AUT",
+        "TIGUAN 2.0 TSI 4M AUT.",
+        "TIGUAN 20 TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGEN`",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 32,
+      "registrations": 30717,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54a48ae0cca3b43c76b0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 162,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 20 TSI 4M AUT",
+        "TIGUAN L",
+        "TIGUAN L PRO",
+        "TIGUAN X",
+        "VW TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 407,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2e80702cfd4f21b926d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 169,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 20 TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 293,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce34c0a0f2c424838b85",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 235,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TSI 4M AUT.",
+        "TIGUAN / 20 / TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "Volkswagen",
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 8668,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7e12bcffd316ec02df0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 100,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efa04872647de08ad001",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 130,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbde3503cde09d32aa15",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8449c6b61e1441b011a2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0d6ae7d381494e2b5ec",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05fe2ebf664fd36c8378",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3509fbebe57521771c50",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 235,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8d85e91e28fd6c68669",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7b92dae9c1edc112de8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 1.4",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 455,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c49d9d52b787a684a28",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN L",
+        "TIGUAN L PRO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ddb24408294a584afb9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 132,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2beac0c4f50e47733258",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 136,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30aac84908debedb83ec",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 137,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN L",
+        "TIGUAN R-LINE",
+        "TIGUAN SE",
+        "TIGUAN X",
+        "VW TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 87,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2372c3c16e174beb8d27",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2728,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9ed93b552c773415bda",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TSI 4M AUT.",
+        "TIGUAN / 20 / TSI 4M AUT",
+        "TIGUAN 2.0 TSI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 8692,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bd118f096a371379bdd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 2.0 TSI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 2880,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1edb5447d543983fface",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a894719cfc32f770302",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 1.4 / TSI AUT.",
+        "TIGUAN / 14 / TSI AUT",
+        "TIGUAN EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "Volkswagen",
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 56840,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22af2391c196ac157011",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 1.5 / TSI AUT.",
+        "TIGUAN 1.5 TSI AUT.",
+        "TIGUAN EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 44792,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7245041d5107dde6467e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN 1.5 TSI AUT.",
+        "TIGUAN EHYBRID",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 17209,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8dfbc7c34817989e8ea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 137,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d68709e734ec9db0ed15",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 142,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN / 2.0 / TDI 4M AUT.",
+        "TIGUAN 2.0 TDI 4M AUT."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 35669,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8981f38d24990bbd369d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff1f51313c2740892d2f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 205,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d76299bbad66c43e0686",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63a63aaf903d1f8316c3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-306a0b9f880a8764887e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 90,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-411ae33ad0ba23de368a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-073eb067ddfa08f84478",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 52,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc5d7a968d82ecb46416",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8fc2b8334be3eda3a8b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN V W"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5468737d5bab8b8585d4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1849,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef707213e46b5e8d6ecb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 49,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-351f35bfb6773aa5269f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 51,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53929cfc14d726648129",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 53,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-710802d57a09d6f7e58a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 59,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efec65c00a29af394628",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 61,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-545a7f5170c670145c43",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dedc1d19df53da3d571",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 68,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbf573eab78ce137d12d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 69,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f455b24d916160373aba",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaf265d7fe47a57cca20",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 72,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a3d8e9169770646d456",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 73,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9618c7b7d0db00ef38b4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 74,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93e96d3c1ff5ba284606",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 77,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9241f8eb27e8848eb04d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 80,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57f6f0ddc1bf732efe73",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56505bf672fad495b5f2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15bfc3faf673cf16b549",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 88,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d1c85118c26f92c16e4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 91,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3b500db92b1ec29830f1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a323fc719f340fab0f22",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b088b4620abee2fc151c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 112,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91f6f23c8f956f1c1204",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 115,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f54b6ce05a4cca53bec1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8329d07a42dfc73a5b4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 117,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49f71c0cddea2aad55c4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e14ddf61c9c8e6eade4c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 121,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac355e9642120bfee3eb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ce1c0146a41d096dd0f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 132,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f65ca14459f310d9d34",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 133,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7db03a91a03de3373d36",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 136,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38c44f4209a0a166732a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 143,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78103d624ac3238316de",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 145,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c144d4fde48731303ea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 148,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de706b7f225aa9bd89de",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bbfeb46db2a9a87b890",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 165,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aca7c4168770d45b8953",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 174,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d577453233f34e20138",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 184,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0b7010b222289b26640",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 186,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cca61a5209dae5b5e53",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 190,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09803c3a5f9292262020",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 195,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc93b2e0341860131be8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 200,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f882e6cef4e3ac021a5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 210,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19b7c96219cae4e65b10",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 221,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d73096f829daa8e648a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 228,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2baad69beafd430cf882",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 230,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75aa54c217ef464bd7c4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6042fc0643d00b7f38b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 250,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7667b8ce179674dab584",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 258,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cb5749c98b4539897bb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 260,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06d8fa2fa0d2c519b94d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 270,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2afde40a38e11a7f862f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 280,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85f94f935f390d0995ca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 294,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-091e4b034021e4eb47cf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 320,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6325ddc108847f488e1a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 390,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-faab948531e7aa670df5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1390,
+      "powerKw": 118,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e593b46189c8b84d0ba3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8b923a7f80970ce1a27",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 49,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0897db04b71d7638d894",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 51,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e00f83fcdb0651f563c7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 52,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4905d75bd1e68b7de4af",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 53,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f7f02873a73168ba718",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2484745918e579b2f0e7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26df306abd97e14aa983",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 66,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24cb737e03695cfaf174",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbe634a1d5f9cc6d35ad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cf7a2ee833ae8bcc8ae",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e0eb462ef8058520f2a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50da4c28b15d711797d7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76ff02a299e51eb5f1f2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 73,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86aa4dcbfbddc8b5bd2d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 74,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12b125c8e505e19dfe49",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 75,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-052c1748a49fe9ad2b54",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 77,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56ca97fa51b16e77d90d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 80,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d83b88304a822214654b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce2aa86be99664fc5e41",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1ccd95fc1415f0ab54a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 88,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5c80445ffd76a9a2800",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fae185102e636896405c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c35dbd17fd0d54898b39",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ede8feee18a26562a9bc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbc1b3d6c7b8abe4d71a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6b2668483aa7ee04d8f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea75be5750530d35b084",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c69bf3fceba4a1efcdf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 117,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-908d204f0c6a82d01e3b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a2069f874506bdc89f2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 121,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b766ab399e0e1c779ee3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 131,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17da78348f3ca8ed4798",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76b2a01b1a10756e486d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 136,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85e8d89477a67e50472f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 137,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd49657defbd69d30dc6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38ab696dd3bc62340798",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 141,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30a9073bf2a773e9dc05",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 145,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a78586fa8769e10a51b4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 147,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a67ccb60eaacfcadd46",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 148,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f39ec81b0c582afa4183",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 165,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7150af5d29093d971bd6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 180,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d492d26231dcea062b3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 190,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-405f39981664b0ee8a65",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 195,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-578eb9bdea4022aa3040",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 200,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d44cfeab1fe0361a3fd9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 206,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8706480b99c3efc02163",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37fc2bba304b86ff2601",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 228,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a12ca5f80f16bfe13120",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 243,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93d3dc806e327fc866ad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 245,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cedcb090fb49d09aadc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 250,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edcf5cd03277c2ed6a93",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 270,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e10e6e10afb0dcbfdf18",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 310,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb87e66f8063a00bf5ef",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 320,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cf66268ff8cf7fa4ca8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 386,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82a1b217d18a2a0ef70f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 390,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-982d9e16f3d41df04fdc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 460,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33b7c48fa3da68845b78",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 61,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b11fa0221aa3dea340e2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 62,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d874868d093ecfe02d4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12bb9f515892ed54e934",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 68,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b8c9edc80a5db2e4365",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 70,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8fd2b4fc70e1fce932c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 72,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0048cd1930cf0c10f5e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 74,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ba763914ed98ddca533",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 77,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1219ae0fea00dde6128",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9149e12a5a5c73aaeca9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 84,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34cea794e97631d38392",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b33d049f36f73051085",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 95,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5dde5ad6fd9c3dce274a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f88d10bea49b10230269",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c57a0de1305d998866",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 112,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddc952abb386e110959c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 114,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4abc598ccdc422fb654",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 117,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d04918c5caeb07b953c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 120,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27a477c66e6fcd1f2a1a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 143,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b6d10c2b68d44c618d6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 147,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7095f92878cbdd237b42",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 173,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94f93eca4e41a0b7693c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 186,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06d8cd0199d04362c7ab",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 190,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-455b4a7c9329288beeeb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 243,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3397d389a54646eb71e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1390,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad1d8a7be48551a5a0c3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c873d40ffe1d7cf568d8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 49,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-170efb2def3de90424bc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 61,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb724bc879aea1f9f32a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 66,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b910b04622b71a70740",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 67,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24fd1c529f9d45727625",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 68,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b554b22eaa8fd5a83f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 69,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1af3861f642f13eafd6e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 70,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6514e74a5825d3e588c9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 72,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c305a37ac25bcd5406ac",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 74,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2a485cd7158bcc2b61d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 80,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e6461d27e49ad4f3702",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 81,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef4fa12d619843cb2218",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 84,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-636b7ed781ba5e421e49",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 85,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9937b586f88791a645d7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 90,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1d95e3e0f72e4d32cd6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 91,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77aec7052d85ad4aff7d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebaaad7079e44ee18ae6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2724438ed5f3a1eb2597",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 112,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f6e07befd09b3337d39",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 120,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8825c2be352d774e844d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 121,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b94f04245a43bf16dad8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 129,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-002b55c2a77330ad4ad7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 131,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1da73f81eca620c0ac3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 132,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-feae5d24c7143850eafd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 137,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a048467d6cc793ea85e8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 147,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-769df874e17423947a5d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbc64f15e3add70a0341",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 165,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9d17b66d86578d8c847",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 173,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e6f920f7d541148b4d7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 190,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b33aca1a0565a4b1cc2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 210,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ab1103d4d1e281a2224",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 250,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff7c1c50e169eb93d903",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 120,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65bfb562b399b802c440",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1942,
+      "powerKw": 72,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e40ff6dac2c65b455497",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1970,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e8216b35b94439598b0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 13,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14d73034b867f9617605",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1948,
+      "powerKw": 140,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-82dcdb2725d65664fd6f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": 142,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d037baaba1ca7b955bc7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 98,
+      "commercialNames": [
+        "TIGUAN",
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02ff47fab1363c1b662a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 58,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ae328743c9c136b3da0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 125,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f67bad0b930fb67ced7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1495,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21779a4de30d4ed6a07a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 14,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcf92305ec6a303e038e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 130,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3ba4044adde0d9cbfd6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 150,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-266e3b1f5468b3df1bba",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 245,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00604611952495c21065",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 450,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

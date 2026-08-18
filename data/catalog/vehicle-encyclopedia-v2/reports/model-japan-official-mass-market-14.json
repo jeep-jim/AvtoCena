@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "officialManufacturerOrGovernmentIdentityRequired": true,
+    "exactJapaneseAliasesSeparatedBySource": true,
+    "mlitObservationYearsNotProductionYears": true,
+    "generationsAndTrimsNotInferred": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedDefinitions": 1,
+    "newModels": 1,
+    "officialManufacturerSources": 1,
+    "officialGovernmentSources": 2,
+    "newMlitWorkbookSources": 2,
+    "totalNewSources": 3,
+    "modelsWithMlitIntersection": 1
+  },
+  "reviewed": [
+    {
+      "id": "fiat/doblo",
+      "canonicalName": "Doblò",
+      "officialSourceId": "src-fiat-doblo-japan-archive-2026",
+      "exactSourceNames": [
+        "ドブロ"
+      ],
+      "mlitCandidateIdentities": 1,
+      "mlitObservationYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ]
+    }
+  ]
+}

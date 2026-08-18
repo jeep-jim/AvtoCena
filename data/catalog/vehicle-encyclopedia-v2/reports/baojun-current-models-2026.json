@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "candidateModels": 3,
+    "newSources": 3,
+    "newModels": 3
+  },
+  "modelIds": [
+    "baojun/yunhai",
+    "baojun/yep-plus",
+    "baojun/e6"
+  ],
+  "policy": {
+    "currentOfficialPortfolioOnly": true,
+    "englishPublicIdentityRequired": true,
+    "salesEditionsNotDuplicatedAsModels": true,
+    "unspecifiedTechnicalFactsRejected": true,
+    "automaticPublicationReady": false
+  }
+}

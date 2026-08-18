@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱缤果PLUS五座版参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=257",
+          "documentId": "SGMW carDetail 257",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "acChargeKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact three-column five-seat table. SGMW explicitly identifies a five-door hatchback. Battery capacity is not mapped because gross, usable or rated basis is not stated; maximum motor power is never reused as legal 30-minute power."
+        },
+        {
+          "id": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+          "type": "manufacturer",
+          "title": "售价7.58万元起！五菱缤果SUV五座版缤纷上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=47796",
+          "documentId": "SGMW portal 47796",
+          "documentDate": "2024-09-21",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "name",
+            "yearFrom"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release states that the five-seat model launched on 2024-09-20 with 330 km, 401 km and 510 km configurations."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo-plus",
+          "brandId": "wuling",
+          "canonicalName": "Bingo Plus",
+          "slug": "bingo-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 缤果PLUS",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-en-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official English current-range page supplies the public Latin identity and portfolio powertrain grouping."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW dates the five-seat launch to 2024-09-20."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Every official row is a battery-electric five-door hatchback."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Three exact 2024 five-seat configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo-plus/five-seat-2024",
+          "modelId": "wuling/bingo-plus",
+          "name": "Five-seat (2024)",
+          "aliases": [
+            {
+              "value": "SUV五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-suv-five-seat-launch-2024"
+              ]
+            },
+            {
+              "value": "五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-plus-five-seat-spec"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2024-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW launched the named five-seat edition on 2024-09-20."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The manufacturer table explicitly identifies a five-door hatchback."
+            }
+          ],
+          "researchNotes": [
+            "Edition container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/bingo-plus/five-seat-2024/330-km-five-seat",
+          "modelId": "wuling/bingo-plus",
+          "generationId": "wuling/bingo-plus/five-seat-2024",
+          "faceliftId": null,
+          "name": "330 km Five-seat",
+          "aliases": [
+            {
+              "value": "330km五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-plus-five-seat-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 75,
+          "rangeKm": 330,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4090,
+          "widthMm": 1720,
+          "heightMm": 1575,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1190,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 140,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the 2024 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column five-seat table; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No drivetrain layout is inferred. Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo-plus/five-seat-2024/401-km-five-seat",
+          "modelId": "wuling/bingo-plus",
+          "generationId": "wuling/bingo-plus/five-seat-2024",
+          "faceliftId": null,
+          "name": "401 km Five-seat",
+          "aliases": [
+            {
+              "value": "401km五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-plus-five-seat-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 75,
+          "rangeKm": 401,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "lengthMm": 4090,
+          "widthMm": 1720,
+          "heightMm": 1575,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1235,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 140,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the 2024 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column five-seat table; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No drivetrain layout is inferred. Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/bingo-plus/five-seat-2024/510-km-five-seat",
+          "modelId": "wuling/bingo-plus",
+          "generationId": "wuling/bingo-plus/five-seat-2024",
+          "faceliftId": null,
+          "name": "510 km Five-seat",
+          "aliases": [
+            {
+              "value": "510km五座版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-bingo-plus-five-seat-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 75,
+          "rangeKm": 510,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 6.6,
+          "lengthMm": 4090,
+          "widthMm": 1720,
+          "heightMm": 1575,
+          "wheelbaseMm": 2610,
+          "curbWeightKg": 1335,
+          "seats": 5,
+          "doors": 5,
+          "topSpeedKmh": 140,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+              "fields": [
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the 2024 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column five-seat table; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "No drivetrain layout is inferred. Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

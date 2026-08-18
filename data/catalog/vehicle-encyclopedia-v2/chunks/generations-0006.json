@@ -1,0 +1,1901 @@
+{
+  "schemaVersion": 2,
+  "entityType": "generation",
+  "chunk": 6,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "volvo/v40/drom-generation-2",
+      "modelId": "volvo/v40",
+      "name": "Second generation",
+      "aliases": [
+        {
+          "value": "2 поколение",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-362da72c0db9d902"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2016-07",
+      "productionTo": "2020-12",
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-362da72c0db9d902",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
+        }
+      ],
+      "researchNotes": [
+        "Review-only Drom/legacy generation group for an exact V2 model identity.",
+        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v50/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v50",
+      "name": "2022-2023 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v60-cross-country/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v60-cross-country",
+      "name": "2020-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v60/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v60",
+      "name": "2020-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v70/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v70",
+      "name": "2022-2022 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v90-cross-country/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v90-cross-country",
+      "name": "2020-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v90/eea-registration-observations-2020-2025",
+      "modelId": "volvo/v90",
+      "name": "2020-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/xc40/drom-generation-1",
+      "modelId": "volvo/xc40",
+      "name": "First generation",
+      "aliases": [
+        {
+          "value": "1 поколение",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-9a30d477acb57b3b"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2017-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-9a30d477acb57b3b",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
+        }
+      ],
+      "researchNotes": [
+        "Review-only Drom/legacy generation group for an exact V2 model identity.",
+        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/xc60/drom-generation-2",
+      "modelId": "volvo/xc60",
+      "name": "Second generation",
+      "aliases": [
+        {
+          "value": "2 поколение",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-bb04c6b11d021fe9"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2017-03",
+      "productionTo": "2022-04",
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-bb04c6b11d021fe9",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Generation grouping, production boundary and body classification are retained from exact legacy source records; the English ordinal is a direct normalization of the source label."
+        }
+      ],
+      "researchNotes": [
+        "Review-only Drom/legacy generation group for an exact V2 model identity.",
+        "The batch is isolated from models that already had a reviewed V2 generation, so it cannot overwrite stronger official research."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/xc90/eea-registration-observations-2020-2025",
+      "modelId": "volvo/xc90",
+      "name": "2020-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "voyah/courage/eea-registration-observations-2020-2025",
+      "modelId": "voyah/courage",
+      "name": "2025-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "voyah/free/eea-registration-observations-2020-2025",
+      "modelId": "voyah/free",
+      "name": "2022-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "willys/cj-3b/eea-registration-observations-2020-2025",
+      "modelId": "willys/cj-3b",
+      "name": "2021-2021 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/air-ev/china-launch-2022",
+      "modelId": "wuling/air-ev",
+      "name": "China launch lineup (2022)",
+      "aliases": [
+        {
+          "value": "Air ev晴空",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-gm-wuling-air-ev-china-launch-zh-2022"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2022-12",
+      "productionTo": null,
+      "bodyTypes": [
+        "City car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-air-ev-china-launch-en-2022",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official China release dates the four-variant launch to 2022-12-12."
+        },
+        {
+          "sourceId": "src-wuling-indonesia-new-air-ev-launch-en-2025",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Wuling's public English classification is compact city car."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-18"
+    },
+    {
+      "id": "wuling/bingo-plus/five-seat-2024",
+      "modelId": "wuling/bingo-plus",
+      "name": "Five-seat (2024)",
+      "aliases": [
+        {
+          "value": "SUV五座版",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-bingo-suv-five-seat-launch-2024"
+          ]
+        },
+        {
+          "value": "五座版",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-bingo-plus-five-seat-spec"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2024-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-bingo-suv-five-seat-launch-2024",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW launched the named five-seat edition on 2024-09-20."
+        },
+        {
+          "sourceId": "src-sgmw-wuling-bingo-plus-five-seat-spec",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The manufacturer table explicitly identifies a five-door hatchback."
+        }
+      ],
+      "researchNotes": [
+        "Edition container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/bingo-pro/launch-2026",
+      "modelId": "wuling/bingo-pro",
+      "name": "Launch generation (2026)",
+      "aliases": [
+        {
+          "value": "全新五菱缤果Pro",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-bingo-pro-launch-2026"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2026-05",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-bingo-pro-launch-2026",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+        }
+      ],
+      "researchNotes": [
+        "Public launch-family container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-18"
+    },
+    {
+      "id": "wuling/bingo-s/launch-2025",
+      "modelId": "wuling/bingo-s",
+      "name": "Launch generation (2025)",
+      "aliases": [
+        {
+          "value": "五菱缤果S",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-bingo-s-launch-2025"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2025-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-bingo-s-launch-2025",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+        }
+      ],
+      "researchNotes": [
+        "Public launch-family container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-18"
+    },
+    {
+      "id": "wuling/bingo/2024-model-year",
+      "modelId": "wuling/bingo",
+      "name": "2024 model year",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-bingo-2024-spec",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "All four rows are explicitly marked 2024 and share a five-door body."
+        }
+      ],
+      "researchNotes": [
+        "Model-year container only; no platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/hongguang-mini-ev/fifth-generation",
+      "modelId": "wuling/hongguang-mini-ev",
+      "name": "Fifth generation",
+      "aliases": [
+        {
+          "value": "第五代",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+          ]
+        }
+      ],
+      "platformCodes": [
+        "S"
+      ],
+      "productionFrom": "2026-03",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW identifies the vehicle as the fifth generation and dates its launch to 2026-03-27."
+        },
+        {
+          "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+          "fields": [
+            "platformCodes",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW identifies the S platform and four-door/four-seat passenger-car body; Hatchback is the normalized public body classification."
+        }
+      ],
+      "researchNotes": [
+        "No unverified internal generation code, battery basis or drivetrain layout is assigned."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/hongguang-mini-ev/four-door-2025",
+      "modelId": "wuling/hongguang-mini-ev",
+      "name": "Four-door (2025)",
+      "aliases": [
+        {
+          "value": "四门版",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-hongguang-mini-ev-four-door-launch-2025"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2025-02",
+      "productionTo": null,
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW launched the named four-door edition on 2025-02-22."
+        },
+        {
+          "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Hatchback is the normalized body classification for the official four-door passenger-car specification."
+        }
+      ],
+      "researchNotes": [
+        "Edition container used to keep the exact 2025 four-door configuration table together; no internal platform code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/hongguang/bev-2024",
+      "modelId": "wuling/hongguang",
+      "name": "BEV (2024)",
+      "aliases": [
+        {
+          "value": "纯电版",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-hongguang-bev-spec"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2024-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-hongguang-bev-launch-history-2025",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW states that the Hongguang BEV launched in September 2024."
+        },
+        {
+          "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW's family history identifies the Hongguang body as a compact MPV and names the 2024 BEV transformation."
+        }
+      ],
+      "researchNotes": [
+        "Powertrain-edition container; no unverified platform code or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/hongguang/erev-2025",
+      "modelId": "wuling/hongguang",
+      "name": "EREV (2025)",
+      "aliases": [
+        {
+          "value": "增程版",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-hongguang-erev-launch-2025"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2025-04",
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-hongguang-erev-launch-2025",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW launched the named rear-wheel-drive EREV MPV on 2025-04-09."
+        }
+      ],
+      "researchNotes": [
+        "Powertrain-edition container; no unverified platform code or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/kaijie/280t-2022",
+      "modelId": "wuling/kaijie",
+      "name": "280T (2022)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022-02",
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-victory-280t-launch-en-2022",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official English release records two Victory 280T MPV variants launched on 2022-02-22."
+        }
+      ],
+      "researchNotes": [
+        "Powertrain-edition container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/starlight-560/launch-lineup-2026",
+      "modelId": "wuling/starlight-560",
+      "name": "Launch lineup (2026)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2026-01",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-starlight-560-launch-2026",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Manufacturer launch record confirms the January 2026 SUV lineup."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/starlight-730/launch-lineup-2025",
+      "modelId": "wuling/starlight-730",
+      "name": "Launch lineup (2025)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025-11",
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW records the launch on 2025-11-12."
+        },
+        {
+          "sourceId": "src-sgmw-wuling-starlight-730-spec",
+          "fields": [
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Every manufacturer column explicitly identifies a five-door, seven-seat MPV."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/starlight-s/2025-model-year",
+      "modelId": "wuling/starlight-s",
+      "name": "2025 model year",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-starlight-s-2025-spec",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official model-specific specification is explicitly titled 2025 model year and lists a five-door SUV body for all configurations."
+        }
+      ],
+      "researchNotes": [
+        "Model-year container only; no unverified platform or internal generation code is assigned."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/starlight/2025-model-year",
+      "modelId": "wuling/starlight",
+      "name": "2025 model year",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025-05",
+      "productionTo": null,
+      "bodyTypes": [
+        "Sedan"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release confirms the six-grade 2025 model year launched on 2025-05-28."
+        }
+      ],
+      "researchNotes": [
+        "Model-year container only; it does not assert a new platform generation or facelift code."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/xingchen/hybrid-2022",
+      "modelId": "wuling/xingchen",
+      "name": "Hybrid (2022)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2022-08",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-asta-hybrid-launch-en-2022",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release records the Asta HEV launch on 2022-08-25."
+        }
+      ],
+      "researchNotes": [
+        "Powertrain-edition container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/xingchen/ice-launch-2021",
+      "modelId": "wuling/xingchen",
+      "name": "ICE launch lineup (2021)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2021-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-asta-launch-en-2021",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official English release records the Asta SUV launch on 2021-09-17."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/xingchi/launch-2022",
+      "modelId": "wuling/xingchi",
+      "name": "Launch generation (2022)",
+      "aliases": [
+        {
+          "value": "五菱星驰",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-silver-current-zh-2026"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2022-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-xing-chi-launch-en-2022",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release dates the all-new small-SUV launch to 2022-09-28."
+        }
+      ],
+      "researchNotes": [
+        "Launch-generation container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-18"
+    },
+    {
+      "id": "wuling/xingyun/launch-lineup-2023",
+      "modelId": "wuling/xingyun",
+      "name": "Launch lineup (2023)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023-09",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-star-launch-en-2023",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official launch confirms the all-new compact SUV on 2023-09-20."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/yangguang/current-family-2025",
+      "modelId": "wuling/yangguang",
+      "name": "Current family (2025)",
+      "aliases": [
+        {
+          "value": "五菱扬光家族",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-yangguang-family-launch-2025"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2025-07",
+      "productionTo": null,
+      "bodyTypes": [
+        "Van"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-yangguang-family-launch-2025",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official manufacturer release establishes the launch-family identity, month and normalized body class."
+        }
+      ],
+      "researchNotes": [
+        "Public launch-family container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-18"
+    },
+    {
+      "id": "wuling/zhengcheng/launch-2021",
+      "modelId": "wuling/zhengcheng",
+      "name": "Launch lineup (2021)",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2021-08",
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV",
+        "Van"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-gm-wuling-zhengcheng-launch-en-2021",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release records the Zhengcheng MPV launch and its cargo-oriented commercial version on 2021-08-30."
+        }
+      ],
+      "researchNotes": [
+        "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "wuling/zhiguang/ev-2025",
+      "modelId": "wuling/zhiguang",
+      "name": "EV (2025)",
+      "aliases": [
+        {
+          "value": "之光EV",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-sgmw-wuling-zhiguang-ev-launch-history-2025"
+          ]
+        }
+      ],
+      "platformCodes": [],
+      "productionFrom": "2025-02",
+      "productionTo": null,
+      "bodyTypes": [
+        "Van"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "SGMW records a February 2025 launch and describes the vehicle as a new-energy microvan, normalized to Van."
+        }
+      ],
+      "researchNotes": [
+        "Powertrain-edition container only; no unverified platform or internal generation code is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "xiaomi/su7-max/eea-registration-observations-2020-2025",
+      "modelId": "xiaomi/su7-max",
+      "name": "2025-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "xpeng/g6/eea-registration-observations-2020-2025",
+      "modelId": "xpeng/g6",
+      "name": "2024-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "xpeng/g9/eea-registration-observations-2020-2025",
+      "modelId": "xpeng/g9",
+      "name": "2023-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "xpeng/p7/eea-registration-observations-2020-2025",
+      "modelId": "xpeng/p7",
+      "name": "2021-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "xpeng/p7i/eea-registration-observations-2020-2025",
+      "modelId": "xpeng/p7i",
+      "name": "2023-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "yudo/3/eea-registration-observations-2020-2025",
+      "modelId": "yudo/3",
+      "name": "2023-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zeekr/001/eea-registration-observations-2020-2025",
+      "modelId": "zeekr/001",
+      "name": "2023-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zeekr/7x/eea-registration-observations-2020-2025",
+      "modelId": "zeekr/7x",
+      "name": "2025-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2025",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zeekr/x/eea-registration-observations-2020-2025",
+      "modelId": "zeekr/x",
+      "name": "2023-2025 EEA registration observations",
+      "aliases": [],
+      "platformCodes": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Passenger car"
+      ],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "name",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "This is an explicitly labelled EEA registration-observation container for passenger-car records, not a manufacturer generation claim. The productionFrom field is only the first observed registration year."
+        }
+      ],
+      "researchNotes": [
+        "Temporary review-only container required by the V2 relation schema for exact EEA modification observations when no source-backed manufacturer generation exists yet.",
+        "Never publish this record as a real vehicle generation; replace it with official generation evidence before the public encyclopedia gate."
+      ],
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}

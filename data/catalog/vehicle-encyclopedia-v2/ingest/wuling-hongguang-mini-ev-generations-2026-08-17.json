@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-hongguang-mini-ev-four-door-spec",
+          "type": "manufacturer_technical_document",
+          "title": "宏光MINIEV 四门版参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=273",
+          "documentId": "SGMW carDetail 273",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "bodyTypes",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact three-column four-door manufacturer table. The 16.2 kWh battery value is not mapped because the table does not identify gross, usable or rated basis. Maximum motor power is not reused as legal 30-minute power."
+        },
+        {
+          "id": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+          "type": "manufacturer",
+          "title": "宏光MINIEV四门版正式上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=49721",
+          "documentId": "SGMW portal 49721",
+          "documentDate": "2025-02-24",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "yearFrom"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official launch record states that the four-door edition launched on 2025-02-22 in Advanced, Premium and Premium+ configurations."
+        },
+        {
+          "id": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+          "type": "manufacturer",
+          "title": "第五代宏光MINIEV正式上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=55608",
+          "documentId": "SGMW portal 55608",
+          "documentDate": "2026-03-30",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "yearFrom",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "seats",
+            "doors"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official launch record states a 2026-03-27 launch and names four 205 km and 301 km configurations."
+        },
+        {
+          "id": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+          "type": "manufacturer_technical_document",
+          "title": "第五代宏光MINIEV开启预售",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=55218",
+          "documentId": "SGMW portal 55218",
+          "documentDate": "2026-03-06",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "platformCodes",
+            "bodyTypes",
+            "powertrainKinds",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "seats",
+            "doors"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official technical release identifies the S platform, four-door/four-seat layout, 30 kW electric drive, dimensions and 205/301 km CLTC ranges. No legal 30-minute power is stated."
+        },
+        {
+          "id": "src-sgmw-hongguang-mini-ev-five-generation-evolution-2026",
+          "type": "manufacturer",
+          "title": "宏光MINIEV五代进化",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=55922",
+          "documentId": "SGMW portal 55922",
+          "documentDate": "2026-04-21",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official five-generation history explicitly dates the first Hongguang MINIEV generation to 2020 and the fifth generation to 2026."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang-mini-ev",
+          "brandId": "wuling",
+          "canonicalName": "Hongguang MINI EV",
+          "slug": "hongguang-mini-ev",
+          "aliases": [
+            {
+              "value": "Hongguang MINIEV",
+              "kind": "punctuation",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-en-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "五菱 宏光MINIEV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2020",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-en-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official English current-range page supplies the public Latin identity and portfolio powertrain grouping."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-five-generation-evolution-2026",
+              "fields": [
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official five-generation history dates the original model to 2020."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Hatchback is the normalized public body classification for the official compact four-door passenger-car body."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Two source-backed China containers and seven exact configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang-mini-ev/four-door-2025",
+          "modelId": "wuling/hongguang-mini-ev",
+          "name": "Four-door (2025)",
+          "aliases": [
+            {
+              "value": "四门版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-four-door-launch-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-02",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW launched the named four-door edition on 2025-02-22."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Hatchback is the normalized body classification for the official four-door passenger-car specification."
+            }
+          ],
+          "researchNotes": [
+            "Edition container used to keep the exact 2025 four-door configuration table together; no internal platform code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/fifth-generation",
+          "modelId": "wuling/hongguang-mini-ev",
+          "name": "Fifth generation",
+          "aliases": [
+            {
+              "value": "第五代",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+              ]
+            }
+          ],
+          "platformCodes": [
+            "S"
+          ],
+          "productionFrom": "2026-03",
+          "productionTo": null,
+          "bodyTypes": [
+            "Hatchback"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW identifies the vehicle as the fifth generation and dates its launch to 2026-03-27."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+              "fields": [
+                "platformCodes",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW identifies the S platform and four-door/four-seat passenger-car body; Hatchback is the normalized public body classification."
+            }
+          ],
+          "researchNotes": [
+            "No unverified internal generation code, battery basis or drivetrain layout is assigned."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/hongguang-mini-ev/four-door-2025/advanced-205-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/four-door-2025",
+          "faceliftId": null,
+          "name": "Advanced 205 km",
+          "aliases": [
+            {
+              "value": "进阶款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-four-door-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 205,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3256,
+          "widthMm": 1510,
+          "heightMm": 1578,
+          "wheelbaseMm": 2190,
+          "curbWeightKg": 780,
+          "seats": 4,
+          "doors": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's three-column four-door table. Rear-mounted rear drive is normalized to RWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "The source's 16.2 kWh value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/four-door-2025/premium-205-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/four-door-2025",
+          "faceliftId": null,
+          "name": "Premium 205 km",
+          "aliases": [
+            {
+              "value": "臻享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-four-door-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 205,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3256,
+          "widthMm": 1510,
+          "heightMm": 1578,
+          "wheelbaseMm": 2190,
+          "curbWeightKg": 780,
+          "seats": 4,
+          "doors": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's three-column four-door table. Rear-mounted rear drive is normalized to RWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "The source's 16.2 kWh value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/four-door-2025/premium-plus-205-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/four-door-2025",
+          "faceliftId": null,
+          "name": "Premium+ 205 km",
+          "aliases": [
+            {
+              "value": "臻享+款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-four-door-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 205,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3256,
+          "widthMm": 1510,
+          "heightMm": 1578,
+          "wheelbaseMm": 2190,
+          "curbWeightKg": 780,
+          "seats": 4,
+          "doors": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-four-door-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's three-column four-door table. Rear-mounted rear drive is normalized to RWD; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "The source's 16.2 kWh value is intentionally not assigned to gross, usable or rated battery capacity because its basis is unspecified.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/fifth-generation/advanced-205-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/fifth-generation",
+          "faceliftId": null,
+          "name": "Advanced 205 km",
+          "aliases": [
+            {
+              "value": "205km进阶款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 205,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3268,
+          "widthMm": 1520,
+          "heightMm": 1575,
+          "seats": 4,
+          "doors": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2026 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats",
+                "doors"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's fifth-generation technical release; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "No battery capacity, wheelbase, curb weight or drivetrain layout is inferred where the cited release does not state an exact value.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/fifth-generation/premium-205-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/fifth-generation",
+          "faceliftId": null,
+          "name": "Premium 205 km",
+          "aliases": [
+            {
+              "value": "205km臻享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 205,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3268,
+          "widthMm": 1520,
+          "heightMm": 1575,
+          "seats": 4,
+          "doors": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2026 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats",
+                "doors"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's fifth-generation technical release; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "No battery capacity, wheelbase, curb weight or drivetrain layout is inferred where the cited release does not state an exact value.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/fifth-generation/advanced-301-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/fifth-generation",
+          "faceliftId": null,
+          "name": "Advanced 301 km",
+          "aliases": [
+            {
+              "value": "301km进阶款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 301,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3268,
+          "widthMm": 1520,
+          "heightMm": 1575,
+          "seats": 4,
+          "doors": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2026 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats",
+                "doors"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's fifth-generation technical release; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "No battery capacity, wheelbase, curb weight or drivetrain layout is inferred where the cited release does not state an exact value.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/hongguang-mini-ev/fifth-generation/premium-301-km",
+          "modelId": "wuling/hongguang-mini-ev",
+          "generationId": "wuling/hongguang-mini-ev/fifth-generation",
+          "faceliftId": null,
+          "name": "Premium 301 km",
+          "aliases": [
+            {
+              "value": "301km臻享款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "BEV",
+          "motorPeakKw": 30,
+          "rangeKm": 301,
+          "rangeStandard": "CLTC",
+          "lengthMm": 3268,
+          "widthMm": 1520,
+          "heightMm": 1575,
+          "seats": 4,
+          "doors": 4,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-launch-2026",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade name and 2026 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-hongguang-mini-ev-fifth-generation-technical-2026",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "seats",
+                "doors"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed from SGMW's fifth-generation technical release; range is explicitly CLTC."
+            }
+          ],
+          "researchNotes": [
+            "No battery capacity, wheelbase, curb weight or drivetrain layout is inferred where the cited release does not state an exact value.",
+            "Maximum motor power is stored only as motorPeakKw, never as legal 30-minute power. Pricing production remains disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}
