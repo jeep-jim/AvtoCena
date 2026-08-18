@@ -1,0 +1,89 @@
+name: Patch Encyclopedia Identity Publish Branch
+
+on:
+  push:
+    branches:
+      - recovery/encyclopedia-v2-staging-20260818
+    paths:
+      - .github/workflows/patch-encyclopedia-identity-publish-branch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-encyclopedia-identity-publish-20260818
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply exact guarded storage patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          p = Path('apps/web/lib/catalog/storage.ts')
+          s = p.read_text()
+
+          replacements = [
+            (
+              'import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";\n',
+              'import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";\nimport { applyConfiguredEncyclopediaIdentity } from "./encyclopedia-identity-runtime";\nimport { resolveConfiguredCatalogSearchParams } from "./encyclopedia-identity-query";\n'
+            ),
+            (
+              'export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {\n  const hasFilters = Boolean(params.make || params.model || params.hasPrice',
+              'export async function readCatalogFacets(inputParams: CatalogSearchParams = {}): Promise<CatalogFacets> {\n  const params = await resolveConfiguredCatalogSearchParams(inputParams);\n  const hasFilters = Boolean(params.make || params.model || params.hasPrice'
+            ),
+            (
+              'export async function searchOffers(params: CatalogSearchParams) {\n  const page = Math.max(1, Number(params.page || 1));',
+              'export async function searchOffers(inputParams: CatalogSearchParams) {\n  const params = await resolveConfiguredCatalogSearchParams(inputParams);\n  const page = Math.max(1, Number(params.page || 1));'
+            ),
+            (
+              'export type PersistCatalogOptions = {\n  beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;\n',
+              'export type PersistCatalogOptions = {\n  beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;\n  // One-shot canonical migration: do not re-run legacy/spec enrichment or grow-only recovery.\n  // Only the fail-closed Encyclopedia identity application may change the supplied rows.\n  identityOnlyReprojection?: boolean;\n'
+            ),
+            (
+              '  const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);\n  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market)\n    ? offer\n    : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));\n  if (growOnlyMarkets.size) {',
+              '  const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);\n  const identityOnlyReprojection = options.identityOnlyReprojection === true;\n  const normalized = await Promise.all(nextOffers.map(async (offer) => {\n    if (exactPreserveMarkets.has(offer.market)) return offer;\n    if (identityOnlyReprojection) return (await applyConfiguredEncyclopediaIdentity(offer)) as VehicleOffer;\n    const enriched = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));\n    return (await applyConfiguredEncyclopediaIdentity(enriched)) as VehicleOffer;\n  }));\n  if (growOnlyMarkets.size && !identityOnlyReprojection) {'
+            ),
+            (
+              '        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge({ ...offer, status: "active" }));\n        merged.set(offer.id, restored);',
+              '        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge({ ...offer, status: "active" }));\n        merged.set(offer.id, (await applyConfiguredEncyclopediaIdentity(restored)) as VehicleOffer);'
+            ),
+          ]
+
+          for old, new in replacements:
+            count = s.count(old)
+            if count != 1:
+              raise SystemExit(f'expected exactly one storage patch match, got {count}: {old[:120]!r}')
+            s = s.replace(old, new, 1)
+
+          p.write_text(s)
+          PY
+
+          git diff --check
+          git diff -- apps/web/lib/catalog/storage.ts
+
+      - run: npm ci
+      - name: Identity tests
+        run: node --import tsx --test tests/catalog-encyclopedia-identity-*.test.ts
+      - name: Web typecheck
+        run: npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Production build
+        run: npm run build
+      - name: Commit patch to publish branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/storage.ts
+          git commit -m 'feat(catalog): connect guarded Encyclopedia V2 identity writer'
+          git push origin HEAD:feat/catalog-encyclopedia-identity-publish-20260818
